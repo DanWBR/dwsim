@@ -908,9 +908,9 @@ namespace DWSIM.UI.Forms
 
             var flowsheetcontrolcontainer = new TableLayout { Padding = new Padding(5), Spacing = new Size(5, 5) };
 
-            var btnmZoomIn = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Zoom In", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-zoom_in_filled.png")) };
-            var btnmZoomOut = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Zoom Out", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-zoom_out_filled.png")) };
-            var btnmZoomFit = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Zoom to Fit", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-zoom_to_extents.png")) };
+            var btnmZoomIn = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Zoom In", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-zoom_in_filled.png")).WithSize(16, 16) };
+            var btnmZoomOut = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Zoom Out", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-zoom_out_filled.png")).WithSize(16, 16) };
+            var btnmZoomFit = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Zoom to Fit", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-zoom_to_extents.png")).WithSize(16, 16) };
 
             btnmDrawGrid = new Eto.Forms.CheckBox { Text = "Draw Grid" };
             btnmSnapToGrid = new Eto.Forms.CheckBox { Text = "Snap to Grid" };
@@ -921,15 +921,15 @@ namespace DWSIM.UI.Forms
             btnmSnapToGrid.CheckedChanged += (sender, e) => ActSnapToGrid.Invoke();
             btnmMultiSelect.CheckedChanged += (sender, e) => ActMultiSelect.Invoke();
 
-            var btnmZoomDefault = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Default Zoom", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-zoom_to_actual_size_filled.png")) };
-            var btnmAlignLefts = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Align Lefts", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_left.png")) };
-            var btnmAlignCenters = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Align Centers", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_center.png")) };
-            var btnmAlignRights = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Align Rights", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_right.png")) };
-            var btnmAlignTops = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Align Tops", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_top.png")) };
-            var btnmAlignMiddles = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Align Middles", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_middle.png")) };
-            var btnmAlignBottoms = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Align Bottoms", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_bottom.png")) };
-            var btnmEqHoriz = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Equalize Horizontally", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_middle1.png")) };
-            var btnmEqVert = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Equalize Vertically", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_center1.png")) };
+            var btnmZoomDefault = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Default Zoom", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-zoom_to_actual_size_filled.png")).WithSize(16, 16) };
+            var btnmAlignLefts = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Align Lefts", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_left.png")).WithSize(16, 16) };
+            var btnmAlignCenters = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Align Centers", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_center.png")).WithSize(16, 16) };
+            var btnmAlignRights = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Align Rights", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_right.png")).WithSize(16, 16) };
+            var btnmAlignTops = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Align Tops", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_top.png")).WithSize(16, 16) };
+            var btnmAlignMiddles = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Align Middles", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_middle.png")).WithSize(16, 16) };
+            var btnmAlignBottoms = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Align Bottoms", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_bottom.png")).WithSize(16, 16) };
+            var btnmEqHoriz = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Equalize Horizontally", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_middle1.png")).WithSize(16, 16) };
+            var btnmEqVert = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Equalize Vertically", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_center1.png")).WithSize(16, 16) };
 
             ActAlignLefts = () => { AlignObjects(btnmAlignLefts); };
             ActAlignCenters = () => { AlignObjects(btnmAlignCenters); };
@@ -973,9 +973,9 @@ namespace DWSIM.UI.Forms
             var chkControlPanelMode = new Eto.Forms.CheckBox { Text = "CP Mode", ToolTip = "Enable/Disable Control Panel Mode" };
 
             ddstates = new DropDown { Width = 100 };
-            var btnSaveState = new Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Save State", Image = new Bitmap(Bitmap.FromResource(imgprefix + "icons8-scroll_up.png")) };
-            var btnLoadState = new Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Load State", Image = new Bitmap(Bitmap.FromResource(imgprefix + "icons8-scroll_down.png")) };
-            var btnDeleteState = new Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Delete Selected State", Image = new Bitmap(Bitmap.FromResource(imgprefix + "icons8-cancel.png")) };
+            var btnSaveState = new Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Save State", Image = new Bitmap(Bitmap.FromResource(imgprefix + "icons8-scroll_up.png")).WithSize(16, 16) };
+            var btnLoadState = new Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Load State", Image = new Bitmap(Bitmap.FromResource(imgprefix + "icons8-scroll_down.png")).WithSize(16, 16) };
+            var btnDeleteState = new Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Delete Selected State", Image = new Bitmap(Bitmap.FromResource(imgprefix + "icons8-cancel.png")).WithSize(16, 16) };
 
             btnDeleteState.Click += (s, e) => {
                 if (ddstates.SelectedValue != null)
@@ -989,12 +989,12 @@ namespace DWSIM.UI.Forms
                                 FlowsheetObject.StoredSolutions.Remove(ddstates.SelectedValue.ToString());
                                 ddstates.Items.RemoveAt(ddstates.SelectedIndex);
                                 DynManagerControl.UpdateSelectedSchedule();
-                                MessageBox.Show("State Deleted successfully.", MessageBoxButtons.OK, MessageBoxType.Information);
+                                MessageBox.Show("State Deleted successfully.", "DWSIM", MessageBoxButtons.OK, MessageBoxType.Information);
                             }
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Error: " + ex.Message, MessageBoxButtons.OK, MessageBoxType.Error);
+                            MessageBox.Show("Error: " + ex.Message, "DWSIM", MessageBoxButtons.OK, MessageBoxType.Error);
                         }
                     }
                 }
@@ -1012,10 +1012,10 @@ namespace DWSIM.UI.Forms
                     FlowsheetObject.StoredSolutions.Add(sname, FlowsheetObject.GetProcessData());
                     ddstates.Items.Add(sname);
                     DynManagerControl.UpdateSelectedSchedule();
-                    MessageBox.Show("State Saved successfully.", MessageBoxButtons.OK, MessageBoxType.Information);
+                    MessageBox.Show("State Saved successfully.", "DWSIM", MessageBoxButtons.OK, MessageBoxType.Information);
                 }
                 else {
-                    MessageBox.Show("Invalid name.", MessageBoxButtons.OK, MessageBoxType.Error);
+                    MessageBox.Show("Invalid name.", "DWSIM", MessageBoxButtons.OK, MessageBoxType.Error);
                 }
             };
 
@@ -1029,33 +1029,64 @@ namespace DWSIM.UI.Forms
                             FlowsheetObject.LoadProcessData(FlowsheetObject.StoredSolutions[ddstates.SelectedValue.ToString()]);
                             FlowsheetObject.UpdateInterface();
                             FlowsheetObject.UpdateEditorPanels?.Invoke();
-                            MessageBox.Show("State Restored successfully.", MessageBoxButtons.OK, MessageBoxType.Information);
+                            MessageBox.Show("State Restored successfully.", "DWSIM", MessageBoxButtons.OK, MessageBoxType.Information);
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Error: " + ex.Message, MessageBoxButtons.OK, MessageBoxType.Error);
+                            MessageBox.Show("Error: " + ex.Message, "DWSIM", MessageBoxButtons.OK, MessageBoxType.Error);
                         }
                     }
                 }
             };
 
-            var menu1 = new StackLayout
+            if (!Application.Instance.Platform.IsGtk)
             {
-                Items = { chkControlPanelMode,  new Label {Text =" " },
+                var menu1 = new StackLayout
+                {
+                    Items = { chkControlPanelMode,  new Label {Text =" " },
                 new Label{Text = "States"}, ddstates, btnSaveState, btnLoadState, btnDeleteState,new Label {Text =" " },
                 btnmZoomOut, btnmZoomIn, btnmZoomFit, btnmZoomDefault, new Label {Text =" " },
                 btnmDrawGrid, btnmSnapToGrid, btnmMultiSelect, new Label {Text =" " },
                 btnmAlignBottoms, btnmAlignCenters, btnmAlignTops, btnmAlignLefts, btnmAlignMiddles, btnmAlignRights, new Label {Text =" " },
                 btnmEqHoriz, btnmEqVert},
-                Orientation = Orientation.Horizontal,
-                Spacing = 4,
-                HorizontalContentAlignment = HorizontalAlignment.Stretch,
-                VerticalContentAlignment = VerticalAlignment.Center,
-                Padding = 5,
-                Height = 34
-            };
+                    Orientation = Orientation.Horizontal,
+                    Spacing = 4,
+                    HorizontalContentAlignment = HorizontalAlignment.Stretch,
+                    VerticalContentAlignment = VerticalAlignment.Center,
+                    Padding = 5,
+                    Height = 34
+                };
+                flowsheetcontrolcontainer.Rows.Add(new TableRow(menu1));
+            }
+            else {
+                var menu1 = new StackLayout
+                {
+                    Items = { chkControlPanelMode,  new Label {Text =" " },
+                new Label{Text = "States"}, ddstates, btnSaveState, btnLoadState, btnDeleteState,new Label {Text =" " },
+                btnmZoomOut, btnmZoomIn, btnmZoomFit, btnmZoomDefault, new Label {Text =" " }},
+                    Orientation = Orientation.Horizontal,
+                    Spacing = 4,
+                    HorizontalContentAlignment = HorizontalAlignment.Stretch,
+                    VerticalContentAlignment = VerticalAlignment.Center,
+                    Padding = 5,
+                    Height = 40
+                };
+                var menu2 = new StackLayout
+                {
+                    Items = { btnmDrawGrid, btnmSnapToGrid, btnmMultiSelect, new Label {Text =" " },
+                btnmAlignBottoms, btnmAlignCenters, btnmAlignTops, btnmAlignLefts, btnmAlignMiddles, btnmAlignRights, new Label {Text =" " },
+                btnmEqHoriz, btnmEqVert},
+                    Orientation = Orientation.Horizontal,
+                    Spacing = 4,
+                    HorizontalContentAlignment = HorizontalAlignment.Stretch,
+                    VerticalContentAlignment = VerticalAlignment.Center,
+                    Padding = 5,
+                    Height = 40
+                };
+                flowsheetcontrolcontainer.Rows.Add(new TableRow(menu1));
+                flowsheetcontrolcontainer.Rows.Add(new TableRow(menu2));
+            }
 
-            flowsheetcontrolcontainer.Rows.Add(new TableRow(menu1));
 
             Button btnUp, btnLeft, btnRight, btnDown;
 
@@ -1332,6 +1363,10 @@ namespace DWSIM.UI.Forms
 
             FlowsheetObject.HighLevelSolve = () => SolveFlowsheet(false);
 
+            DynIntegratorControl.Init();
+
+            DynManagerControl.Init();
+
         }
 
         public void SolveFlowsheet(bool changecalcorder)
@@ -1377,14 +1412,14 @@ namespace DWSIM.UI.Forms
 
             ScriptListControl.UpdateList();
 
-            DynIntegratorControl.Init();
+            DynIntegratorControl.Populate();
+
+            DynManagerControl.Populate();
 
             DynIntegratorControl.btnViewResults.Click += (s2, e2) =>
             {
                 DocumentContainer.SelectedIndex = 2;
             };
-
-            DynManagerControl.Init();
 
             DynManagerControl.chkDynamics.CheckedChanged += (s2, e2) =>
             {

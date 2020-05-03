@@ -634,12 +634,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             DocumentContainer.Pages[4].Content = splites2s;
 
             // populate lists
-
-            foreach (var es in Flowsheet.DynamicsManager.EventSetList)
-            {
-                lbEventSets.Items.Add(new ListItem { Key = es.Key, Text = es.Value.Description });
-            }
-
+            
             lbEventSets.SelectedIndexChanged += (s, e) =>
             {
                 if (lbEventSets.SelectedIndex < 0) return;
@@ -662,11 +657,6 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                 });
             };
 
-            foreach (var es in Flowsheet.DynamicsManager.CauseAndEffectMatrixList)
-            {
-                lbCEM.Items.Add(new ListItem { Key = es.Key, Text = es.Value.Description });
-            }
-
             lbCEM.SelectedIndexChanged += (s, e) =>
             {
                 if (lbCEM.SelectedIndex < 0) return;
@@ -688,11 +678,6 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                     PopulateCEIContainer(ev);
                 });
             };
-
-            foreach (var es in Flowsheet.DynamicsManager.IntegratorList)
-            {
-                lbIntegrators.Items.Add(new ListItem { Key = es.Key, Text = es.Value.Description });
-            }
 
             lbIntegrators.SelectedIndexChanged += (s, e) =>
             {
@@ -720,11 +705,6 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                 });
             };
 
-            foreach (var es in Flowsheet.DynamicsManager.ScheduleList)
-            {
-                lbSchedules.Items.Add(new ListItem { Key = es.Key, Text = es.Value.Description });
-            }
-
             lbSchedules.SelectedIndexChanged += (s, e) =>
             {
                 if (lbSchedules.SelectedIndex < 0) return;
@@ -735,6 +715,30 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                 });
             };
 
+        }
+
+        public void Populate()
+        {
+
+            foreach (var es in Flowsheet.DynamicsManager.EventSetList)
+            {
+                lbEventSets.Items.Add(new ListItem { Key = es.Key, Text = es.Value.Description });
+            }
+
+            foreach (var es in Flowsheet.DynamicsManager.CauseAndEffectMatrixList)
+            {
+                lbCEM.Items.Add(new ListItem { Key = es.Key, Text = es.Value.Description });
+            }
+
+            foreach (var es in Flowsheet.DynamicsManager.ScheduleList)
+            {
+                lbSchedules.Items.Add(new ListItem { Key = es.Key, Text = es.Value.Description });
+            }
+
+            foreach (var es in Flowsheet.DynamicsManager.IntegratorList)
+            {
+                lbIntegrators.Items.Add(new ListItem { Key = es.Key, Text = es.Value.Description });
+            }
         }
 
         public void UpdateSelectedSchedule()

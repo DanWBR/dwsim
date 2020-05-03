@@ -33,10 +33,10 @@ namespace DWSIM.UI.Forms
 
             if (Application.Instance.Platform.IsGtk)
             {
-                w = (int)(sf * 916);
-                h = (int)(sf * 426);
-                dx = 83;
-                dy = 32;
+                w = (int)(sf * 1088);
+                h = (int)(sf * 509);
+                dx = 20;
+                dy = 0;
             }
             else
             {
@@ -85,9 +85,19 @@ namespace DWSIM.UI.Forms
 
             var layout = new PixelLayout();
 
-            var img = new ImageView { Image = Bitmap.FromResource(imgprefix + "DWSIM_splash.png").WithSize(1088, 509) };
-            
-            layout.Add(img, (int)(sf *( 0 - dx)), (int)(sf * (0 - dy)));
+            ImageView img;
+
+            if (Application.Instance.Platform.IsGtk)
+            {
+                img = new ImageView { Image = Bitmap.FromResource(imgprefix + "DWSIM_splash_gtk.png").WithSize(w, h) };
+                layout.Add(img, 0, 0);
+            }
+            else
+            {
+                img = new ImageView { Image = Bitmap.FromResource(imgprefix + "DWSIM_splash.png").WithSize(w, h) };
+                layout.Add(img, (int)(sf * (0 - dx)), (int)(sf * (0 - dy)));
+            }
+
             layout.Add(lbl1a, (int)(sf * (385 - dx)), (int)(sf * (114 - dy)));
             layout.Add(lbl5, (int)(sf * (385 - dx)), (int)(sf * (139 - dy)));
             layout.Add(lbl3, (int)(sf * (385 - dx)), (int)(sf * (381 - dy)));

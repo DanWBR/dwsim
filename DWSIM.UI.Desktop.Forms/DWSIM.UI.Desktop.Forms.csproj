@@ -356,6 +356,9 @@
     <EmbeddedResource Include="Resources\Icons\icons8-scroll_down.png" />
     <EmbeddedResource Include="Resources\Icons\icons8-scroll_up.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Icons\DWSIM_splash_gtk.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

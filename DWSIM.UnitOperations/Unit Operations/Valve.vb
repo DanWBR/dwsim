@@ -128,7 +128,7 @@ Namespace UnitOperations
 
         Public Overrides Sub CreateDynamicProperties()
 
-            AddDynamicProperty("Actuator Delay", "Actuator Delay Description", 0, UnitOfMeasure.time)
+            'AddDynamicProperty("Actuator Delay", "Actuator Delay Description", 0, UnitOfMeasure.time)
 
         End Sub
 

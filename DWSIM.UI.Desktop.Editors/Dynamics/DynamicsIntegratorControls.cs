@@ -46,11 +46,6 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             cbsc = new DropDown { Width = 300 };
 
-            foreach (var sch in Flowsheet.DynamicsManager.ScheduleList.Values)
-            {
-                cbsc.Items.Add(sch.Description);
-            }
-
             if (cbsc.Items.Count > 0) cbsc.SelectedIndex = 0;
 
             cbsc.SelectedIndexChanged += (s, e) =>
@@ -75,9 +70,9 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             var tr2 = new TableRow();
 
-            btnPlay = new Button { ImagePosition = ButtonImagePosition.Overlay, Text = "", Width = 40, Height = 40, Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png"), 40, 40, ImageInterpolation.Default) };
-            btnRT = new Button { ImagePosition = ButtonImagePosition.Overlay, Text = "", Width = 40, Height = 40, Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-realtime.png"), 40, 40, ImageInterpolation.Default) };
-            btnStop = new Button { ImagePosition = ButtonImagePosition.Overlay, Text = "", Width = 40, Height = 40, Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-stop.png"), 40, 40, ImageInterpolation.Default) };
+            btnPlay = new Button { ImagePosition = ButtonImagePosition.Overlay, Text = "", Width = 40, Height = 40, Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")).WithSize(30, 30) };
+            btnRT = new Button { ImagePosition = ButtonImagePosition.Overlay, Text = "", Width = 40, Height = 40, Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-realtime.png")).WithSize(30, 30) };
+            btnStop = new Button { ImagePosition = ButtonImagePosition.Overlay, Text = "", Width = 40, Height = 40, Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-stop.png")).WithSize(30, 30) };
 
             pbProgress = new ProgressBar { MinValue = 0, MaxValue = 100 };
 
@@ -121,6 +116,16 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             };
 
             btnViewResults.Click += btnViewResults_Click;
+
+        }
+
+        public void Populate()
+        {
+
+            foreach (var sch in Flowsheet.DynamicsManager.ScheduleList.Values)
+            {
+                cbsc.Items.Add(sch.Description);
+            }
 
         }
 

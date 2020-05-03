@@ -60,6 +60,11 @@ namespace DWSIM.UI
 
             Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico");
 
+            if (Application.Instance.Platform.IsGtk)
+            {
+                BackgroundColor = Colors.White;
+            }
+
             var abslayout = new PixelLayout();
 
             var background = new ImageView { Size = ClientSize, Image = new Bitmap(Bitmap.FromResource("DWSIM.UI.Forms.Resources.Bitmaps.background_welcome.png")) };
@@ -423,7 +428,15 @@ namespace DWSIM.UI
             tabview.Pages.Add(tab2);
             tabview.Pages.Add(tab2a);
             tabview.Pages.Add(tab3);
-            tabview.Size = new Size((int)(480 * sf), (int)(ClientSize.Height - dy * 4 - bfh));
+
+            if (Application.Instance.Platform.IsGtk)
+            {
+                tabview.Size = new Size((int)(480 * sf), (int)(636 - dy * 4 - bfh));
+            }
+            else
+            {
+                tabview.Size = new Size((int)(480 * sf), (int)(ClientSize.Height - dy * 4 - bfh));
+            }
 
             abslayout.Add(tabview, dx * 2 + (int)(500 * sf), dy * 2 + bfh);
 
