@@ -1913,7 +1913,16 @@ Namespace BaseClasses
 
         Public Property Tag As String = "" Implements ICompoundConstantProperties.Tag
 
-        Public Property ExtraProperties As New ExpandoObject Implements ICompoundConstantProperties.ExtraProperties
+        <NonSerialized> Private _ep As New ExpandoObject
+
+        Public Property ExtraProperties As ExpandoObject Implements ICompoundConstantProperties.ExtraProperties
+            Get
+                Return _ep
+            End Get
+            Set(value As ExpandoObject)
+                _ep = value
+            End Set
+        End Property
 
     End Class
 
