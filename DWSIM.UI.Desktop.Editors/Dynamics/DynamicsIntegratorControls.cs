@@ -341,7 +341,6 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                     {
                         Flowsheet.UpdateInterface();
                         Flowsheet.FlowsheetControl.Invalidate();
-                        Flowsheet.UpdateEditorPanels.Invoke();
                     });
 
                     integrator.CurrentTime = integrator.CurrentTime.AddSeconds(interval);
@@ -380,6 +379,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                     btnRT.Enabled = true;
                     pbProgress.Value = 0;
                     Flowsheet.SupressMessages = false;
+                    Flowsheet.UpdateEditorPanels.Invoke();
                 });
             });
 

@@ -257,7 +257,6 @@ Public Class FormDynamicsIntegratorControl
                                                                         Flowsheet.FormDynamics.UpdateControllerList()
                                                                         Flowsheet.FormDynamics.UpdateIndicatorList()
                                                                         Flowsheet.FormSurface.Invalidate()
-                                                                        Flowsheet.UpdateOpenEditForms()
                                                                         Application.DoEvents()
                                                                     End Sub)
 
@@ -301,6 +300,7 @@ Public Class FormDynamicsIntegratorControl
                                                                   ProgressBar1.Value = 0
                                                                   ProgressBar1.Style = ProgressBarStyle.Continuous
                                                                   Flowsheet.SupressMessages = False
+                                                                  Flowsheet.UpdateOpenEditForms()
                                                               End Sub)
                               End Sub)
 

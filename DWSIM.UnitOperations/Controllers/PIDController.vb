@@ -20,6 +20,7 @@ Imports DWSIM.SharedClasses
 Imports DWSIM.UnitOperations.SpecialOps.Helpers
 Imports OxyPlot
 Imports OxyPlot.Axes
+Imports OxyPlot.Series
 
 Namespace SpecialOps
 
@@ -696,7 +697,17 @@ Namespace SpecialOps
                 .MinorGridlineStyle = LineStyle.Dot,
                 .Position = AxisPosition.Left,
                 .FontSize = 12,
-                .Title = "Relative Value"
+                .Title = "SP/PV",
+                .Key = "0"
+            })
+
+            model.Axes.Add(New LinearAxis() With {
+                .MajorGridlineStyle = LineStyle.Dash,
+                .MinorGridlineStyle = LineStyle.Dot,
+                .Position = AxisPosition.Right,
+                .FontSize = 12,
+                .Title = "MV",
+                .Key = "1"
             })
 
             model.LegendFontSize = 13
@@ -708,6 +719,8 @@ Namespace SpecialOps
             model.AddLineSeries(xavals, PVHistory, "PV")
             model.AddLineSeries(xavals, SPHistory, "SP")
             model.AddLineSeries(xavals, MVHistory, "MV")
+
+            DirectCast(model.Series.Item(2), LineSeries).YAxisKey = "1"
 
             Return model
 
