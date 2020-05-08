@@ -59,7 +59,7 @@ namespace DWSIM.UI.Desktop.Editors
             {
                 if (col2.ContainsKey(p.Key) && col3.ContainsKey(p.Key))
                 {
-                    var utype = int.Parse(col3[p.Key].ToString());
+                    var utype = (int)((Interfaces.Enums.UnitOfMeasure)col3[p.Key]);
                     var unitsstring = su.GetCurrentUnits(utype.ToEnum<Interfaces.Enums.UnitOfMeasure>());
                     container.CreateAndAddTextBoxRow("G", unitsstring != "" ? p.Key + " (" + unitsstring + ")" : p.Key, 
                         p.Value.ToString().ToDoubleFromCurrent(), 
