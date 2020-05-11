@@ -21,6 +21,7 @@ using DWSIM.UI.Desktop.Editors.Charts;
 using DWSIM.UI.Desktop.Editors.Dynamics;
 using SkiaSharp;
 using DWSIM.UI.Controls;
+using DWSIM.ExtensionMethods;
 
 namespace DWSIM.UI.Forms
 {
@@ -635,25 +636,25 @@ namespace DWSIM.UI.Forms
             var hitem1 = new ButtonMenuItem { Text = "Online Help", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png")) };
             hitem1.Click += (sender, e) =>
             {
-                Process.Start("http://dwsim.inforside.com.br/docs/crossplatform/help/");
+                "http://dwsim.inforside.com.br/docs/crossplatform/help/".OpenURL();
             };
 
             var hitem2 = new ButtonMenuItem { Text = "Support".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png")) };
             hitem2.Click += (sender, e) =>
             {
-                Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Support");
+                "http://dwsim.inforside.com.br/wiki/index.php?title=Support".OpenURL();
             };
 
             var hitem3 = new ButtonMenuItem { Text = "Report a Bug".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png")) };
             hitem3.Click += (sender, e) =>
             {
-                Process.Start("https://sourceforge.net/p/dwsim/tickets/");
+                "https://sourceforge.net/p/dwsim/tickets/".OpenURL();
             };
 
             var hitem4 = new ButtonMenuItem { Text = "Go to DWSIM's Website".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png")) };
             hitem4.Click += (sender, e) =>
             {
-                Process.Start("http://dwsim.inforside.com.br");
+                "http://dwsim.inforside.com.br".OpenURL();
             };
 
             Menu.HelpItems.Add(hitem1);

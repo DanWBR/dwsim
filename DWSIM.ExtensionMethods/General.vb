@@ -6,6 +6,20 @@ Imports System.Linq
 Public Module General
 
     <System.Runtime.CompilerServices.Extension()>
+    Public Sub OpenURL(url As String)
+
+        Select Case GlobalSettings.Settings.RunningPlatform
+            Case GlobalSettings.Settings.Platform.Windows
+                Process.Start(url)
+            Case GlobalSettings.Settings.Platform.Linux
+                Process.Start("xdg-open", url)
+            Case GlobalSettings.Settings.Platform.Mac
+                Process.Start("open", url)
+        End Select
+
+    End Sub
+
+    <System.Runtime.CompilerServices.Extension()>
     Public Function GetEnumNames(obj As Object) As List(Of String)
 
         If obj.GetType.BaseType Is GetType([Enum]) Then

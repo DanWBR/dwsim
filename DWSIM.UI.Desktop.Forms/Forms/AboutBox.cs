@@ -251,9 +251,8 @@ namespace DWSIM.UI.Forms.Forms
             components.Add(new ComponentInfo("Yeppp!", "1.0.0.1", "2014", "Marat Dukhan", "http://www.yeppp.info", "Yeppp! License", "http://www.yeppp.info/resources/yeppp-license.txt"));
             components.Add(new ComponentInfo("SwarmOps", "3.1", "2011", "Magnus Erik Hvass Pedersen", "http://www.hvass-labs.org/projects/swarmops/cs/", "MIT-style License", "http://www.hvass-labs.org/projects/swarmops/cs/files/license.txt"));
             components.Add(new ComponentInfo("RandomOps", "2.1", "2010", "Magnus Erik Hvass Pedersen", "http://www.hvass-labs.org/projects/randomops/cs/", "MIT-style License", "http://www.hvass-labs.org/projects/randomops/cs/files/license.txt" ));
-            components.Add(new ComponentInfo("Eto.Forms", "2.4.1", "2018", "Curtis Wensley", "https://github.com/picoe/Eto", "BSD-3 License", "http://opensource.org/licenses/BSD-3-Clause"));
             components.Add(new ComponentInfo("OxyPlot", "2.0", "2017", "OxyPlot team", "http://www.oxyplot.org", "MIT License", "http://www.opensource.org/licenses/mit-license.html"));
-            components.Add(new ComponentInfo("SkiaSharp", "1.56.0", "2018", "Xamarin team", "https://github.com/mono/SkiaSharp/", "MIT License", "https://github.com/mono/SkiaSharp/blob/master/LICENSE.md"));
+            components.Add(new ComponentInfo("SkiaSharp", "1.68.0", "2020", "Xamarin team", "https://github.com/mono/SkiaSharp/", "MIT License", "https://github.com/mono/SkiaSharp/blob/master/LICENSE.md"));
             components.Add(new ComponentInfo("Eto.Forms", "custom version", "2019", "", "https://github.com/DanWBR/Eto", "BSD-style License", "https://github.com/DanWBR/Eto/blob/develop/LICENSE.txt"));
             components.Add(new ComponentInfo("Eto.Platform.Gtk2", "custom version", "2019", "", "https://github.com/DanWBR/Eto", "BSD-style License", "https://github.com/DanWBR/Eto/blob/develop/LICENSE.txt"));
             components.Add(new ComponentInfo("Eto.Platform.Windows", "custom version", "2019", "", "https://github.com/DanWBR/Eto", "BSD-style License", "https://github.com/DanWBR/Eto/blob/develop/LICENSE.txt"));
@@ -284,8 +283,8 @@ namespace DWSIM.UI.Forms.Forms
             componentsn.Add(new ComponentInfo("SharpDX.DXGI", "4.0.1", "http://sharpdx.org/License.txt"));
             componentsn.Add(new ComponentInfo("SharpDX.Mathematics", "4.0.1", "http://sharpdx.org/License.txt"));
             componentsn.Add(new ComponentInfo("SharpZipLib", "1.1.0", "https://github.com/icsharpcode/SharpZipLib/blob/master/LICENSE.txt"));
-            componentsn.Add(new ComponentInfo("SkiaSharp", "1.6.", "https://github.com/mono/SkiaSharp/blob/master/LICENSE.md"));
-            componentsn.Add(new ComponentInfo("SkiaSharp.Extended", "1.6.", "https://github.com/mono/SkiaSharp.Extended/blob/master/LICENSE"));
+            componentsn.Add(new ComponentInfo("SkiaSharp", "1.68.x", "https://github.com/mono/SkiaSharp/blob/master/LICENSE.md"));
+            componentsn.Add(new ComponentInfo("SkiaSharp.Extended", "1.68.x", "https://github.com/mono/SkiaSharp.Extended/blob/master/LICENSE"));
             componentsn.Add(new ComponentInfo("System.ComponentModel", "4.3.0", "http://go.microsoft.com/fwlink/?LinkId=329770"));
             componentsn.Add(new ComponentInfo("System.Runtime.Serialization.Primitives", "4.3.0", "http://go.microsoft.com/fwlink/?LinkId=329770"));
             componentsn.Add(new ComponentInfo("Eto.OxyPlot", "1.2.0-beta", ""));

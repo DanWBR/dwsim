@@ -16,6 +16,7 @@ using System.Reflection;
 using System.Text;
 using s = DWSIM.GlobalSettings.Settings;
 using c = DWSIM.UI.Shared.Common;
+using DWSIM.ExtensionMethods;
 
 namespace DWSIM.UI
 {
@@ -159,7 +160,7 @@ namespace DWSIM.UI
             var link4 = new LinkButton { Text = "Go to Patreon.com/DWSIM", Width = (int)(250 * sf), Font = boldfont2 };
             ppatreon.Add(link4, dx2, (int)(100 * sf - rfh - dy));
 
-            link4.Click += (sender, e) => Process.Start("https://patreon.com/dwsim");
+            link4.Click += (sender, e) => "https://patreon.com/dwsim".OpenURL();
 
             abslayout.Add(ppatreon, dx, dy * 4 + bfh + 2 * (int)(100 * sf));
 
@@ -173,7 +174,7 @@ namespace DWSIM.UI
             var link6 = new LinkButton { Text = "Online Help", Width = (int)(140 * sf), Font = boldfont2 };
             pdocs.Add(link6, dx2 + (int)(150 * sf), (int)(100 * sf - rfh - dy));
 
-            link6.Click += (sender, e) => Process.Start("http://dwsim.inforside.com.br");
+            link6.Click += (sender, e) => "http://dwsim.inforside.com.br".OpenURL();
 
             link5.Click += (sender, e) =>
             {
@@ -478,19 +479,19 @@ namespace DWSIM.UI
             var hitem2 = new ButtonMenuItem { Text = "Support".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png")) };
             hitem2.Click += (sender, e) =>
             {
-                Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Support");
+                "http://dwsim.inforside.com.br/wiki/index.php?title=Support".OpenURL();
             };
 
             var hitem3 = new ButtonMenuItem { Text = "Report a Bug".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png")) };
             hitem3.Click += (sender, e) =>
             {
-                Process.Start("https://sourceforge.net/p/dwsim/tickets/");
+                "https://sourceforge.net/p/dwsim/tickets/".OpenURL();
             };
 
             var hitem4 = new ButtonMenuItem { Text = "Go to DWSIM's Website".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png")) };
             hitem4.Click += (sender, e) =>
             {
-                Process.Start("http://dwsim.inforside.com.br");
+               "http://dwsim.inforside.com.br".OpenURL();
             };
 
             // create menu
