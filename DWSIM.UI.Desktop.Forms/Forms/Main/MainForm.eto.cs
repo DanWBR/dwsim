@@ -150,6 +150,11 @@ namespace DWSIM.UI
             var link3 = new LinkButton { Text = "Create New", Width = (int)(140 * sf), Font = boldfont2 };
             pccreator.Add(link3, dx2, (int)(100 * sf - rfh - dy));
 
+            link3.Click += (sender, e) => {
+                var form = new Desktop.Editors.CompoundCreatorWizard(null);
+                form.SetupAndDisplayPage(1);
+            };
+
             abslayout.Add(pccreator, dx, dy * 3 + bfh + (int)(100 * sf));
 
             ppatreon = new PixelLayout { BackgroundColor = Colors.White, Width = (int)(500 * sf), Height = (int)(100 * sf) };

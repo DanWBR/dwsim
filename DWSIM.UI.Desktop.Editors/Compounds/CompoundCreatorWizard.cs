@@ -31,7 +31,7 @@ namespace DWSIM.UI.Desktop.Editors
 
         private static double sf = GlobalSettings.Settings.UIScalingFactor;
 
-        private int Width = (int)(800*sf);
+        private int Width = (int)(800 * sf);
         private int Height = (int)(500 * sf);
 
         private int comptype = 0;
@@ -50,7 +50,7 @@ namespace DWSIM.UI.Desktop.Editors
             : base()
         {
 
-            flowsheet = fs;
+            if (flowsheet != null) flowsheet = fs;
             Init();
 
         }
@@ -64,8 +64,16 @@ namespace DWSIM.UI.Desktop.Editors
             comp.CurrentDB = "User";
             comp.Name = "MyCompound";
 
-            nf = flowsheet.FlowsheetOptions.NumberFormat;
-            su = flowsheet.FlowsheetOptions.SelectedUnitSystem;
+            if (flowsheet == null)
+            {
+                nf = "G";
+                su = new SharedClasses.SystemsOfUnits.SI();
+            }
+            else
+            {
+                nf = flowsheet.FlowsheetOptions.NumberFormat;
+                su = flowsheet.FlowsheetOptions.SelectedUnitSystem;
+            }
 
         }
 
@@ -140,7 +148,9 @@ namespace DWSIM.UI.Desktop.Editors
                 }
             });
 
+            page1.SuspendLayout();
             page1.ContentContainer.Add(dl);
+            page1.ResumeLayout();
             page1.Show();
 
         }
@@ -190,7 +200,8 @@ namespace DWSIM.UI.Desktop.Editors
                         });
                     });
                 }
-                else {
+                else
+                {
                     page2.Close();
                     switch (comptype)
                     {
@@ -854,11 +865,25 @@ namespace DWSIM.UI.Desktop.Editors
                     try
                     {
                         File.WriteAllText(dialog.FileName, Newtonsoft.Json.JsonConvert.SerializeObject(comp, Newtonsoft.Json.Formatting.Indented));
-                        flowsheet.ShowMessage("Compound '" + comp.Name + "' successfully saved to JSON file.", IFlowsheet.MessageType.Information);
+                        if (flowsheet == null)
+                        {
+                            MessageBox.Show("Compound '" + comp.Name + "' successfully saved to JSON file.");
+                        }
+                        else
+                        {
+                            flowsheet.ShowMessage("Compound '" + comp.Name + "' successfully saved to JSON file.", IFlowsheet.MessageType.Information);
+                        }
                     }
                     catch (Exception ex)
                     {
-                        flowsheet.ShowMessage("Error saving compound to JSON file: " + ex.ToString(), IFlowsheet.MessageType.GeneralError);
+                        if (flowsheet == null)
+                        {
+                            MessageBox.Show("Error saving compound to JSON file: " + ex.ToString());
+                        }
+                        else
+                        {
+                            flowsheet.ShowMessage("Error saving compound to JSON file: " + ex.ToString(), IFlowsheet.MessageType.GeneralError);
+                        }
                     }
                 }
             });
@@ -876,11 +901,25 @@ namespace DWSIM.UI.Desktop.Editors
                     {
                         if (!File.Exists(dialog.FileName)) File.WriteAllText(dialog.FileName, "");
                         DWSIM.Thermodynamics.Databases.UserDB.AddCompounds(new[] { comp }, dialog.FileName, true);
-                        flowsheet.ShowMessage("Compound '" + comp.Name + "' successfully added to XML database.", IFlowsheet.MessageType.Information);
+                        if (flowsheet == null)
+                        {
+                            MessageBox.Show("Compound '" + comp.Name + "' successfully added to XML database.");
+                        }
+                        else
+                        {
+                            flowsheet.ShowMessage("Compound '" + comp.Name + "' successfully added to XML database.", IFlowsheet.MessageType.Information);
+                        }
                     }
                     catch (Exception ex)
                     {
-                        flowsheet.ShowMessage("Error saving compound to XML database: " + ex.ToString(), IFlowsheet.MessageType.GeneralError);
+                        if (flowsheet == null)
+                        {
+                            MessageBox.Show("Error saving compound to XML database: " + ex.ToString());
+                        }
+                        else
+                        {
+                            flowsheet.ShowMessage("Error saving compound to XML database: " + ex.ToString(), IFlowsheet.MessageType.GeneralError);
+                        }
                     }
                 }
             });
@@ -888,32 +927,35 @@ namespace DWSIM.UI.Desktop.Editors
 
             dl.CreateAndAddLabelRow("Add to Simulation");
 
-            dl.CreateAndAddLabelAndButtonRow("Add Compound to Simulation", "Add", null, (arg1, arg2) =>
+            if (flowsheet != null)
             {
-                if (flowsheet.AvailableCompounds.ContainsKey(comp.Name))
+                dl.CreateAndAddLabelAndButtonRow("Add Compound to Simulation", "Add", null, (arg1, arg2) =>
                 {
-                    flowsheet.ShowMessage("Compound '" + comp.Name + "' already exists.", IFlowsheet.MessageType.GeneralError);
-                }
-                else
-                {
-                    flowsheet.AvailableCompounds.Add(comp.Name, comp);
-                    flowsheet.SelectedCompounds.Add(comp.Name, comp);
-                    foreach (MaterialStream obj in flowsheet.SimulationObjects.Values.Where((x) => x.GraphicObject.ObjectType == ObjectType.MaterialStream))
+                    if (flowsheet.AvailableCompounds.ContainsKey(comp.Name))
                     {
-                        foreach (var phase in obj.Phases.Values)
+                        flowsheet.ShowMessage("Compound '" + comp.Name + "' already exists.", IFlowsheet.MessageType.GeneralError);
+                    }
+                    else
+                    {
+                        flowsheet.AvailableCompounds.Add(comp.Name, comp);
+                        flowsheet.SelectedCompounds.Add(comp.Name, comp);
+                        foreach (MaterialStream obj in flowsheet.SimulationObjects.Values.Where((x) => x.GraphicObject.ObjectType == ObjectType.MaterialStream))
                         {
-                            phase.Compounds.Add(comp.Name, new DWSIM.Thermodynamics.BaseClasses.Compound(comp.Name, ""));
-                            phase.Compounds[comp.Name].ConstantProperties = flowsheet.SelectedCompounds[comp.Name];
+                            foreach (var phase in obj.Phases.Values)
+                            {
+                                phase.Compounds.Add(comp.Name, new DWSIM.Thermodynamics.BaseClasses.Compound(comp.Name, ""));
+                                phase.Compounds[comp.Name].ConstantProperties = flowsheet.SelectedCompounds[comp.Name];
+                            }
+                        }
+                        flowsheet.ShowMessage("Compound '" + comp.Name + "' added to the simulation.", IFlowsheet.MessageType.Information);
+                        if (flowsheet is Flowsheet)
+                        {
+                            ((Flowsheet)flowsheet).UpdateEditorPanels.Invoke();
                         }
                     }
-                    flowsheet.ShowMessage("Compound '" + comp.Name + "' added to the simulation.", IFlowsheet.MessageType.Information);
-                    if (flowsheet is Flowsheet)
-                    {
-                        ((Flowsheet)flowsheet).UpdateEditorPanels.Invoke();
-                    }
-                }
-            });
-            dl.CreateAndAddLabelRow2("Adds the compound to the current simulation.");
+                });
+                dl.CreateAndAddLabelRow2("Adds the compound to the current simulation.");
+            }
 
             page.ContentContainer.Add(dl);
             page.Show();

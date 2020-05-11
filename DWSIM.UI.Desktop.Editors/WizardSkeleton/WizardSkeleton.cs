@@ -50,9 +50,6 @@ namespace DWSIM.UI.Desktop.Editors
         public void Init(int width, int height)
         {
 
-            //Width = (int)(s.UIScalingFactor * width);
-            //Height = (int)(s.UIScalingFactor * height);
-
             string imgprefix = "DWSIM.UI.Desktop.Editors.Resources.Icons.";
 
             Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico");
