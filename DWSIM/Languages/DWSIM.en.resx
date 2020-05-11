@@ -5696,4 +5696,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="RunScript" xml:space="preserve">
     <value>Run Script</value>
   </data>
+  <data name="DynamicsDisabled" xml:space="preserve">
+    <value>Dynamic Mode is inactive.</value>
+  </data>
 </root>

@@ -9,6 +9,7 @@ using DWSIM.ExtensionMethods;
 using DWSIM.Interfaces.Enums;
 using DWSIM.UnitOperations.SpecialOps;
 using DWSIM.CrossPlatform.UI.Controls.ReoGrid;
+using System.Diagnostics;
 
 namespace DWSIM.UI.Desktop.Editors.Dynamics
 {
@@ -107,12 +108,12 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             btnPlay.Click += (s, e) =>
             {
-                if (Flowsheet.DynamicMode) RunIntegrator(false, false);
+                if (Flowsheet.DynamicMode) { RunIntegrator(false, false); } else { Flowsheet.ShowMessage("Dynamic Mode is inactive.", Interfaces.IFlowsheet.MessageType.Warning); }
             };
 
             btnRT.Click += (s, e) =>
             {
-                if (Flowsheet.DynamicMode) RunIntegrator(true, false);
+                if (Flowsheet.DynamicMode) { RunIntegrator(true, false); } else { Flowsheet.ShowMessage("Dynamic Mode is inactive.", Interfaces.IFlowsheet.MessageType.Warning); }
             };
 
             btnViewResults.Click += btnViewResults_Click;
@@ -297,6 +298,10 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                 {
                     int i0 = i;
 
+                    var sw = new Stopwatch();
+
+                    sw.Start();
+
                     Flowsheet.RunCodeOnUIThread(() =>
                     {
                         pbProgress.Value = i0;
@@ -359,6 +364,15 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                         }
                     }
 
+                    var waittime = 1000 - sw.ElapsedMilliseconds;
+
+                    if (waittime > 0 && realtime)
+                    {
+                        Task.Delay((int)waittime).Wait();
+                    }
+
+                    sw.Stop();
+
                     if (Abort)
                         break;
 
@@ -372,6 +386,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                     }
 
                     j += 1;
+
                 }
             });
 

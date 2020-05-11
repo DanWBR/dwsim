@@ -41,7 +41,11 @@ Public Class FormDynamicsIntegratorControl
 
     Private Sub btnRun_Click(sender As Object, e As EventArgs) Handles btnRun.Click
 
-        If Flowsheet.DynamicMode Then RunIntegrator(False, False)
+        If Flowsheet.DynamicMode Then
+            RunIntegrator(False, False)
+        Else
+            Flowsheet.ShowMessage(DWSIM.App.GetLocalString("DynamicsDisabled"), Interfaces.IFlowsheet.MessageType.Warning)
+        End If
 
     End Sub
 
@@ -123,7 +127,11 @@ Public Class FormDynamicsIntegratorControl
 
     Private Sub btnRealtime_Click(sender As Object, e As EventArgs) Handles btnRealtime.Click
 
-        If Flowsheet.DynamicMode Then RunIntegrator(True, False)
+        If Flowsheet.DynamicMode Then
+            RunIntegrator(True, False)
+        Else
+            Flowsheet.ShowMessage(DWSIM.App.GetLocalString("DynamicsDisabled"), Interfaces.IFlowsheet.MessageType.Warning)
+        End If
 
     End Sub
 
@@ -191,6 +199,8 @@ Public Class FormDynamicsIntegratorControl
 
         Dim interval = integrator.IntegrationStep.TotalSeconds
 
+        If realtime Then interval = 1.0
+
         Dim final = ProgressBar1.Maximum
 
         For Each controller As PIDController In Controllers
@@ -212,6 +222,10 @@ Public Class FormDynamicsIntegratorControl
                                     Dim j As Integer = 0
 
                                     For i = 0 To final Step interval
+
+                                        Dim sw As New Stopwatch
+
+                                        sw.Start()
 
                                         Dim i0 As Integer = i
 
@@ -267,6 +281,16 @@ Public Class FormDynamicsIntegratorControl
                                                 If controller.Active Then controller.Calculate()
                                             Next
                                         End If
+
+                                        Dim waittime = 1000 - sw.ElapsedMilliseconds
+
+                                        If waittime > 0 And realtime Then
+
+                                            Task.Delay(waittime).Wait()
+
+                                        End If
+
+                                        sw.Stop()
 
                                         If Abort Then Exit For
 
