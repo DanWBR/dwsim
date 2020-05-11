@@ -228,6 +228,9 @@ namespace DWSIM.UI.Desktop.Editors
             });
             btnrc.Enabled = false;
 
+            s.CreateAndAddEmptySpace(this);
+            s.CreateAndAddEmptySpace(this);
+
             btnRun.Click += (sender2, e2) =>
             {
 

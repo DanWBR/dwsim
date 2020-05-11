@@ -53,7 +53,7 @@ namespace DWSIM.UI.Forms
             var updfile = AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "version.info";
 
 #if PREVIEW
-            lbl1a.Text += " Preview 1";
+            lbl1a.Text += " (Preview)";
 #else
             if (File.Exists(updfile))
             {
@@ -91,6 +91,9 @@ namespace DWSIM.UI.Forms
             {
                 img = new ImageView { Image = Bitmap.FromResource(imgprefix + "DWSIM_splash_gtk.png").WithSize(w, h) };
                 layout.Add(img, 0, 0);
+                lbl1a.BackgroundColor = Colors.White;
+                lbl5.BackgroundColor = Colors.White;
+                lbl3.BackgroundColor = Colors.White;
             }
             else
             {

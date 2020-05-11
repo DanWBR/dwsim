@@ -95,7 +95,10 @@ namespace DWSIM.UI.Desktop.Editors.Utilities
             var spinnerpp = p1.CreateAndAddDropDownRow("Property Package", pplist, 0, null);
 
             var button = p1.CreateAndAddButtonRow("Build Envelope", null, null);
-            
+
+            p1.CreateAndAddEmptySpace();
+            p1.CreateAndAddEmptySpace();
+
             chart = new Eto.OxyPlot.Plot { BackgroundColor = Colors.White };
 
             var txtResults = new TextArea() { ReadOnly = true, Font = Fonts.Monospace(GlobalSettings.Settings.ResultsReportFontSize) };

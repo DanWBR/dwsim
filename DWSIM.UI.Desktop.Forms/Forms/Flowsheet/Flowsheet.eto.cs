@@ -383,21 +383,21 @@ namespace DWSIM.UI.Forms
             btnUtilities_TrueCriticalPoint.Click += (sender, e) =>
             {
                 var tcp = new Desktop.Editors.Utilities.TrueCriticalPointView(FlowsheetObject);
-                var form = DWSIM.UI.Shared.Common.GetDefaultEditorForm("True Critical Point", (int)(sf * 500), (int)(sf * 250), tcp);
+                var form = DWSIM.UI.Shared.Common.GetDefaultEditorForm("True Critical Point", (int)(sf * 500), (int)(sf * 500), tcp);
                 form.Show();
             };
 
             btnUtilities_BinaryEnvelope.Click += (sender, e) =>
             {
                 var bpe = new Desktop.Editors.Utilities.BinaryEnvelopeView(FlowsheetObject);
-                var form = DWSIM.UI.Shared.Common.GetDefaultEditorForm("Binary Phase Envelope", (int)(sf * 1024), (int)(sf * 600), bpe, false);
+                var form = DWSIM.UI.Shared.Common.GetDefaultEditorForm("Binary Phase Envelope", (int)(sf * 1024), (int)(sf * 768), bpe, false);
                 form.Show();
             };
 
             btnUtilities_PhaseEnvelope.Click += (sender, e) =>
             {
                 var pe = new Desktop.Editors.Utilities.PhaseEnvelopeView(FlowsheetObject);
-                var form = DWSIM.UI.Shared.Common.GetDefaultEditorForm("Phase Envelope", (int)(sf * 1024), (int)(sf * 500), pe, false);
+                var form = DWSIM.UI.Shared.Common.GetDefaultEditorForm("Phase Envelope", (int)(sf * 1024), (int)(sf * 768), pe, false);
                 form.Show();
             };
 
@@ -425,14 +425,14 @@ namespace DWSIM.UI.Forms
             btnSensAnalysis.Click += (sender, e) =>
             {
                 var saeditor = new Desktop.Editors.SensAnalysisView(FlowsheetObject);
-                var form = DWSIM.UI.Shared.Common.GetDefaultEditorForm("Sensitivity Analysis", (int)(sf * 750), (int)(sf * 520), saeditor);
+                var form = DWSIM.UI.Shared.Common.GetDefaultEditorForm("Sensitivity Analysis", (int)(sf * 860), (int)(sf * 600), saeditor);
                 form.Show();
             };
 
             btnOptimization.Click += (sender, e) =>
             {
                 var foeditor = new Desktop.Editors.OptimizerView(FlowsheetObject);
-                var form = DWSIM.UI.Shared.Common.GetDefaultEditorForm("Flowsheet Optimizer", (int)(sf * 800), (int)(sf * 600), foeditor);
+                var form = DWSIM.UI.Shared.Common.GetDefaultEditorForm("Flowsheet Optimizer", (int)(sf * 800), (int)(sf * 650), foeditor);
                 form.Show();
             };
 
@@ -1039,54 +1039,45 @@ namespace DWSIM.UI.Forms
                 }
             };
 
-            if (!Application.Instance.Platform.IsGtk)
+            if (Application.Instance.Platform.IsGtk)
             {
-                var menu1 = new StackLayout
-                {
-                    Items = { chkControlPanelMode,  new Label {Text =" " },
+
+                ddstates.Height = 26;
+
+                btnSaveState.Size = new Size(30, 30);
+                btnLoadState.Size = new Size(30, 30);
+                btnDeleteState.Size = new Size(30, 30);
+                btnmZoomOut.Size = new Size(30, 30);
+                btnmZoomIn.Size = new Size(30, 30);
+                btnmZoomFit.Size = new Size(30, 30);
+                btnmZoomDefault.Size = new Size(30, 30);
+
+                btnmAlignBottoms.Size = new Size(30, 30);
+                btnmAlignCenters.Size = new Size(30, 30);
+                btnmAlignTops.Size = new Size(30, 30);
+                btnmAlignLefts.Size = new Size(30, 30);
+                btnmAlignMiddles.Size = new Size(30, 30);
+                btnmAlignRights.Size = new Size(30, 30);
+                btnmEqHoriz.Size = new Size(30, 30);
+                btnmEqVert.Size = new Size(30, 30);
+
+            }
+
+            var menu1 = new StackLayout
+            {
+                Items = { chkControlPanelMode,  new Label {Text =" " },
                 new Label{Text = "States"}, ddstates, btnSaveState, btnLoadState, btnDeleteState,new Label {Text =" " },
                 btnmZoomOut, btnmZoomIn, btnmZoomFit, btnmZoomDefault, new Label {Text =" " },
                 btnmDrawGrid, btnmSnapToGrid, btnmMultiSelect, new Label {Text =" " },
                 btnmAlignBottoms, btnmAlignCenters, btnmAlignTops, btnmAlignLefts, btnmAlignMiddles, btnmAlignRights, new Label {Text =" " },
                 btnmEqHoriz, btnmEqVert},
-                    Orientation = Orientation.Horizontal,
-                    Spacing = 4,
-                    HorizontalContentAlignment = HorizontalAlignment.Stretch,
-                    VerticalContentAlignment = VerticalAlignment.Center,
-                    Padding = 5,
-                    Height = 34
-                };
-                flowsheetcontrolcontainer.Rows.Add(new TableRow(menu1));
-            }
-            else {
-                var menu1 = new StackLayout
-                {
-                    Items = { chkControlPanelMode,  new Label {Text =" " },
-                new Label{Text = "States"}, ddstates, btnSaveState, btnLoadState, btnDeleteState,new Label {Text =" " },
-                btnmZoomOut, btnmZoomIn, btnmZoomFit, btnmZoomDefault, new Label {Text =" " }},
-                    Orientation = Orientation.Horizontal,
-                    Spacing = 4,
-                    HorizontalContentAlignment = HorizontalAlignment.Stretch,
-                    VerticalContentAlignment = VerticalAlignment.Center,
-                    Padding = 5,
-                    Height = 40
-                };
-                var menu2 = new StackLayout
-                {
-                    Items = { btnmDrawGrid, btnmSnapToGrid, btnmMultiSelect, new Label {Text =" " },
-                btnmAlignBottoms, btnmAlignCenters, btnmAlignTops, btnmAlignLefts, btnmAlignMiddles, btnmAlignRights, new Label {Text =" " },
-                btnmEqHoriz, btnmEqVert},
-                    Orientation = Orientation.Horizontal,
-                    Spacing = 4,
-                    HorizontalContentAlignment = HorizontalAlignment.Stretch,
-                    VerticalContentAlignment = VerticalAlignment.Center,
-                    Padding = 5,
-                    Height = 40
-                };
-                flowsheetcontrolcontainer.Rows.Add(new TableRow(menu1));
-                flowsheetcontrolcontainer.Rows.Add(new TableRow(menu2));
-            }
-
+                Orientation = Orientation.Horizontal,
+                Spacing = 4,
+                HorizontalContentAlignment = HorizontalAlignment.Stretch,
+                VerticalContentAlignment = VerticalAlignment.Center,
+                Padding = new Padding(5)
+            };
+            flowsheetcontrolcontainer.Rows.Add(new TableRow(menu1));
 
             Button btnUp, btnLeft, btnRight, btnDown;
 

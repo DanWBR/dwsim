@@ -74,45 +74,24 @@ namespace DWSIM.UI.Desktop.Editors
 
             leftcontainer.Rows.Add(new Label { Text = "Script List", Font = new Font(SystemFont.Bold, UI.Shared.Common.GetEditorFontSize()), Height = 30, VerticalAlignment = VerticalAlignment.Center });
 
-            if (!Application.Instance.Platform.IsGtk)
+            if (Application.Instance.Platform.IsGtk)
             {
-                var menu1 = new StackLayout
-                {
-                    Items = { ti1, ti2, ti3, ti3a },
-                    Orientation = Orientation.Horizontal,
-                    Spacing = 4,
-                    HorizontalContentAlignment = HorizontalAlignment.Stretch,
-                    VerticalContentAlignment = VerticalAlignment.Bottom,
-                    Padding = 5,
-                    Height = 34
-                };
-                leftcontainer.Rows.Add(new TableRow(menu1));
+                ti1.Size = new Size(30, 30);
+                ti2.Size = new Size(30, 30);
+                ti3.Size = new Size(30, 30);
+                ti3a.Size = new Size(30, 30);
             }
-            else
+
+            var menu1 = new StackLayout
             {
-                var menu1 = new StackLayout
-                {
-                    Items = { ti1, ti2 },
-                    Orientation = Orientation.Horizontal,
-                    Spacing = 4,
-                    HorizontalContentAlignment = HorizontalAlignment.Stretch,
-                    VerticalContentAlignment = VerticalAlignment.Bottom,
-                    Padding = 5,
-                    Height = 34
-                };
-                var menu1a = new StackLayout
-                {
-                    Items = { ti3, ti3a },
-                    Orientation = Orientation.Horizontal,
-                    Spacing = 4,
-                    HorizontalContentAlignment = HorizontalAlignment.Stretch,
-                    VerticalContentAlignment = VerticalAlignment.Bottom,
-                    Padding = 5,
-                    Height = 34
-                };
-                leftcontainer.Rows.Add(new TableRow(menu1));
-                leftcontainer.Rows.Add(new TableRow(menu1a));
-            }
+                Items = { ti1, ti2, ti3, ti3a },
+                Orientation = Orientation.Horizontal,
+                Spacing = 4,
+                HorizontalContentAlignment = HorizontalAlignment.Stretch,
+                VerticalContentAlignment = VerticalAlignment.Center,
+                Padding = 5
+            };
+            leftcontainer.Rows.Add(new TableRow(menu1));
 
             leftcontainer.Rows.Add(new TableRow(lbScripts));
             leftcontainer.Padding = new Padding(5, 5, 5, 5);
@@ -121,68 +100,40 @@ namespace DWSIM.UI.Desktop.Editors
 
             rightcontainer.Rows.Add(new Label { Text = "Selected Script", Font = new Font(SystemFont.Bold, UI.Shared.Common.GetEditorFontSize()), Height = 30, VerticalAlignment = VerticalAlignment.Center });
 
-            if (!Application.Instance.Platform.IsGtk)
+            if (Application.Instance.Platform.IsGtk)
             {
-                var menu2 = new StackLayout
-                {
-                    Items = { ti15, ti16, new Label {Text =" " },
+                ti4.Size = new Size(30, 30);
+                ti5.Size = new Size(30, 30);
+                ti6.Size = new Size(30, 30);
+                ti7.Size = new Size(30, 30);
+                ti8.Size = new Size(30, 30);
+                ti9.Size = new Size(30, 30);
+                ti10.Size = new Size(30, 30);
+                ti11.Size = new Size(30, 30);
+                ti12.Size = new Size(30, 30);
+                ti13.Size = new Size(30, 30);
+                ti14.Size = new Size(30, 30);
+                ti15.Size = new Size(30, 30);
+                ti16.Size = new Size(30, 30);
+                ti17.Size = new Size(30, 30);
+            }
+
+            var menu2 = new StackLayout
+            {
+                Items = { ti15, ti16, new Label {Text =" " },
                     ti4, ti5, ti6, new Label {Text =" " },
                     ti7, ti8, new Label {Text =" " },
                     ti9, ti10, ti11, new Label {Text =" " },
                     ti12, ti13, new Label {Text =" " },
                     ti14, new Label {Text =" " },
                     ti17, l1, t1 },
-                    Orientation = Orientation.Horizontal,
-                    Spacing = 4,
-                    HorizontalContentAlignment = HorizontalAlignment.Stretch,
-                    VerticalContentAlignment = VerticalAlignment.Bottom,
-                    Padding = 5,
-                    Height = 34
-                };
-                rightcontainer.Rows.Add(new TableRow(menu2));
-            }
-            else
-            {
-                var menu2 = new StackLayout
-                {
-                    Items = { ti15, ti16, new Label {Text =" " },
-                    ti4, ti5, ti6, new Label {Text =" " },
-                    ti7, ti8, new Label {Text =" " }},
-                    Orientation = Orientation.Horizontal,
-                    Spacing = 4,
-                    HorizontalContentAlignment = HorizontalAlignment.Stretch,
-                    VerticalContentAlignment = VerticalAlignment.Bottom,
-                    Padding = 5,
-                    Height = 34
-                };
-                var menu2a = new StackLayout
-                {
-                    Items = {ti9, ti10, ti11, new Label {Text =" " },
-                    ti12, ti13, new Label {Text =" " },
-                    ti14, new Label {Text =" " },
-                    ti17, l1, t1 },
-                    Orientation = Orientation.Horizontal,
-                    Spacing = 4,
-                    HorizontalContentAlignment = HorizontalAlignment.Stretch,
-                    VerticalContentAlignment = VerticalAlignment.Bottom,
-                    Padding = 5,
-                    Height = 34
-                };
-                var menu2b = new StackLayout
-                {
-                    Items = {ti14, new Label {Text =" " },
-                    ti17, l1, t1 },
-                    Orientation = Orientation.Horizontal,
-                    Spacing = 4,
-                    HorizontalContentAlignment = HorizontalAlignment.Stretch,
-                    VerticalContentAlignment = VerticalAlignment.Bottom,
-                    Padding = 5,
-                    Height = 34
-                };
-                rightcontainer.Rows.Add(new TableRow(menu2));
-                rightcontainer.Rows.Add(new TableRow(menu2a));
-                rightcontainer.Rows.Add(new TableRow(menu2b));
-            }
+                Orientation = Orientation.Horizontal,
+                Spacing = 4,
+                HorizontalContentAlignment = HorizontalAlignment.Stretch,
+                VerticalContentAlignment = VerticalAlignment.Center,
+                Padding = 5
+            };
+            rightcontainer.Rows.Add(new TableRow(menu2));
 
             rightcontainer.Rows.Add(new TableRow(ScriptEditor));
             rightcontainer.Padding = new Padding(5, 5, 5, 5);

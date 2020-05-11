@@ -56,6 +56,8 @@ namespace DWSIM.UI.Desktop.Editors
             p1.Width = 380;
             p2.Width = 380;
 
+            p1.Height = 540;
+
             t1 = new StackLayout();
             t1.Items.Add(new StackLayoutItem(p1));
             t1.Items.Add(new StackLayoutItem(p2));
@@ -115,21 +117,21 @@ namespace DWSIM.UI.Desktop.Editors
 
             s.CreateAndAddControlRow(p2, sc);
 
-            t1.SizeChanged += (sender, e) =>
-            {
-                if (p1.ParentWindow != null)
-                {
-                    p1.Width = (int)(p1.ParentWindow.Width / 2 - 10);
-                    p2.Width = (int)(p2.ParentWindow.Width / 2 - 10);
-                    p1.Height = p1.ParentWindow.Height - 170;
-                    p2.Height = p1.Height;
-                    sc.Height = p2.Height - btnAddVar.Height - 35 - desclbl.Height;
-                    foreach (var item in varcontainer.Items)
-                    {
-                        item.Control.Width = sc.Width - 25;
-                    }
-                }
-            };
+            //t1.SizeChanged += (sender, e) =>
+            //{
+            //    if (p1.ParentWindow != null)
+            //    {
+            //        p1.Width = (int)(p1.ParentWindow.Width / 2 - 10);
+            //        p2.Width = (int)(p2.ParentWindow.Width / 2 - 10);
+            //        p1.Height = p1.ParentWindow.Height - 140;
+            //        p2.Height = p1.Height;
+            //        sc.Height = p2.Height - btnAddVar.Height - 35 - desclbl.Height;
+            //        foreach (var item in varcontainer.Items)
+            //        {
+            //            item.Control.Width = sc.Width - 25;
+            //        }
+            //    }
+            //};
 
             foreach (var item in mycase.variables.Values)
             {
@@ -147,12 +149,16 @@ namespace DWSIM.UI.Desktop.Editors
             s.CreateAndAddTextBoxRow(p1, "R", "Numerical derivative step", mycase.epsilon, (arg3, arg2) => { mycase.epsilon = arg3.Text.ToDoubleFromCurrent(); });
             s.CreateAndAddTextBoxRow(p1, "R", "Barrier multiplier", mycase.barriermultiplier, (arg3, arg2) => { mycase.barriermultiplier = arg3.Text.ToDoubleFromCurrent(); });
 
-            s.CreateAndAddControlRow(p1, new Panel { Height = 100 });
+            s.CreateAndAddEmptySpace(this);
 
             s.CreateAndAddButtonRow(this, "Run Optimization", null, (arg3, arg2) =>
             {
                 StartTask();
             });
+
+            s.CreateAndAddEmptySpace(this);
+
+            s.CreateAndAddEmptySpace(this);
 
         }
 

@@ -112,6 +112,9 @@ namespace DWSIM.UI.Desktop.Editors.Utilities
 
             var button = p1.CreateAndAddButtonRow("Build Envelope", null, null);
 
+            p1.CreateAndAddEmptySpace();
+            p1.CreateAndAddEmptySpace();
+
             var tabcontainer = new TabControl() { Height = 400 };
 
             var chart = new Eto.OxyPlot.Plot { BackgroundColor = Colors.White };

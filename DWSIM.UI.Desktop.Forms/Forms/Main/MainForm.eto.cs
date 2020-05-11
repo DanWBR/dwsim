@@ -188,7 +188,7 @@ namespace DWSIM.UI
             pabout.Add(new Label { Size = lsize, Font = regularfont, Wrap = WrapMode.Word, Text = "Adjust Global Settings and view DWSIM licensing and version information." }, dx2, dy2 * 2 + bfh);
             var img6 = new ImageView { Size = psize, Image = new Bitmap(Bitmap.FromResource(imgprefix + "DWSIM_ico.png")) };
             pabout.Add(img6, (int)(400 * sf), 0);
-            var link7 = new LinkButton { Text = "Adjust Global Settings", Width = (int)(140 * sf), Font = boldfont2 };
+            var link7 = new LinkButton { Text = "Global Settings", Width = (int)(140 * sf), Font = boldfont2 };
             pabout.Add(link7, dx2, (int)(100 * sf - rfh - dy));
             var link8 = new LinkButton { Text = "About DWSIM", Width = (int)(140 * sf), Font = boldfont2 };
             pabout.Add(link8, dx2 + (int)(150 * sf), (int)(100 * sf - rfh - dy));

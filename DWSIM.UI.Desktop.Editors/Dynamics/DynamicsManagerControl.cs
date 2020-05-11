@@ -50,7 +50,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             tr1.Cells.Add(null);
 
             tl1.Rows.Add(tr1);
-             
+
             Rows.Add(new TableRow(tl1));
 
             var DocumentContainer = new DocumentControl() { AllowReordering = false, DisplayArrows = false };
@@ -60,7 +60,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             DocumentContainer.Pages.Add(new DocumentPage { Text = "Cause-and-Effect Matrices", Closable = false });
             DocumentContainer.Pages.Add(new DocumentPage { Text = "Integrators", Closable = false });
             DocumentContainer.Pages.Add(new DocumentPage { Text = "Schedules", Closable = false });
-            
+
             var tl2 = new TableLayout { Padding = new Padding(5), Spacing = new Size(10, 10) };
 
             var tr2 = new TableRow();
@@ -93,7 +93,8 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             DocumentContainer.Pages[0].Content = l1;
 
-            DocumentContainer.Pages[0].MouseEnter += (s, e) => {
+            DocumentContainer.Pages[0].MouseEnter += (s, e) =>
+            {
                 CheckModelStatus();
             };
 
@@ -146,6 +147,12 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             lce.Rows.Add(new Label { Text = "Event Sets", Font = new Font(SystemFont.Bold, UI.Shared.Common.GetEditorFontSize()), Height = 30, VerticalAlignment = VerticalAlignment.Center });
 
+            if (Application.Instance.Platform.IsGtk)
+            {
+                btnAddEventSet.Size = new Size(30, 30);
+                btnRemoveEventSet.Size = new Size(30, 30);
+            }
+
             var menu1 = new StackLayout
             {
                 Items = { btnAddEventSet, btnRemoveEventSet },
@@ -167,6 +174,12 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             var btnAddEvent = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Event", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png")).WithSize(16, 16) };
             var btnRemoveEvent = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Event", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png")).WithSize(16, 16) };
+
+            if (Application.Instance.Platform.IsGtk)
+            {
+                btnAddEvent.Size = new Size(30, 30);
+                btnRemoveEvent.Size = new Size(30, 30);
+            }
 
             btnAddEvent.Click += (s, e) =>
             {
@@ -251,6 +264,12 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             var btnAddCEM = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Set", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png")).WithSize(16, 16) };
             var btnRemoveCEM = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Set", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png")).WithSize(16, 16) };
 
+            if (Application.Instance.Platform.IsGtk)
+            {
+                btnAddCEM.Size = new Size(30, 30);
+                btnRemoveCEM.Size = new Size(30, 30);
+            }
+
             btnAddCEM.Click += (s, e) =>
             {
                 try
@@ -312,6 +331,12 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             var btnAddCEI = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Event", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png")).WithSize(16, 16) };
             var btnRemoveCEI = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Event", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png")).WithSize(16, 16) };
+            
+            if (Application.Instance.Platform.IsGtk)
+            {
+                btnAddCEI.Size = new Size(30, 30);
+                btnRemoveCEI.Size = new Size(30, 30);
+            }
 
             btnAddCEI.Click += (s, e) =>
             {
@@ -394,6 +419,12 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             var btnAddI = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Set", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png")).WithSize(16, 16) };
             var btnRemoveI = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Set", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png")).WithSize(16, 16) };
+            
+            if (Application.Instance.Platform.IsGtk)
+            {
+                btnAddI.Size = new Size(30, 30);
+                btnRemoveI.Size = new Size(30, 30);
+            }
 
             btnAddI.Click += (s, e) =>
             {
@@ -468,6 +499,12 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             var btnAddVar = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Variable", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png")).WithSize(16, 16) };
             var btnRemoveVar = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Variable", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png")).WithSize(16, 16) };
 
+            if (Application.Instance.Platform.IsGtk)
+            {
+                btnAddVar.Size = new Size(30, 30);
+                btnRemoveVar.Size = new Size(30, 30);
+            }
+
             btnAddVar.Click += (s, e) =>
             {
                 try
@@ -479,7 +516,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                     form.Location = new Point(Mouse.Position);
                     form.ShowModal(this);
                     lbVariables.Items.Add(new ListItem { Key = es.ID, Text = es.Description });
-                    Flowsheet.DynamicsManager.IntegratorList[lbIntegrators.SelectedKey].MonitoredVariables.Add(es);               
+                    Flowsheet.DynamicsManager.IntegratorList[lbIntegrators.SelectedKey].MonitoredVariables.Add(es);
                 }
                 catch (Exception ex)
                 {
@@ -560,6 +597,12 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             var btnAddS = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Schedule", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png")).WithSize(16, 16) };
             var btnRemoveS = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Schedule", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png")).WithSize(16, 16) };
+           
+            if (Application.Instance.Platform.IsGtk)
+            {
+                btnAddS.Size = new Size(30, 30);
+                btnRemoveS.Size = new Size(30, 30);
+            }
 
             btnAddS.Click += (s, e) =>
             {
@@ -634,7 +677,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             DocumentContainer.Pages[4].Content = splites2s;
 
             // populate lists
-            
+
             lbEventSets.SelectedIndexChanged += (s, e) =>
             {
                 if (lbEventSets.SelectedIndex < 0) return;
@@ -762,14 +805,16 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             integratorIDs.Insert(0, "");
             integratorNames.Insert(0, "");
 
-            layout.CreateAndAddDropDownRow("Selected Integrator", integratorNames, integratorIDs.IndexOf(sch.CurrentIntegrator), (dd, e) => {
+            layout.CreateAndAddDropDownRow("Selected Integrator", integratorNames, integratorIDs.IndexOf(sch.CurrentIntegrator), (dd, e) =>
+            {
                 sch.CurrentIntegrator = integratorIDs[dd.SelectedIndex];
             });
 
             layout.CreateAndAddEmptySpace();
             layout.CreateAndAddEmptySpace();
 
-            layout.CreateAndAddCheckBoxRow("Uses Event Set", sch.UsesEventList, (chk, e) => {
+            layout.CreateAndAddCheckBoxRow("Uses Event Set", sch.UsesEventList, (chk, e) =>
+            {
                 sch.UsesEventList = chk.Checked.GetValueOrDefault();
             });
 
@@ -779,14 +824,16 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             eventIDs.Insert(0, "");
             eventNames.Insert(0, "");
 
-            layout.CreateAndAddDropDownRow("Selected Event Set", eventNames, eventIDs.IndexOf(sch.CurrentEventList), (dd, e) => {
+            layout.CreateAndAddDropDownRow("Selected Event Set", eventNames, eventIDs.IndexOf(sch.CurrentEventList), (dd, e) =>
+            {
                 sch.CurrentEventList = eventIDs[dd.SelectedIndex];
             });
 
             layout.CreateAndAddEmptySpace();
             layout.CreateAndAddEmptySpace();
 
-            layout.CreateAndAddCheckBoxRow("Uses Cause-and-Effect Matrix", sch.UsesCauseAndEffectMatrix, (chk, e) => {
+            layout.CreateAndAddCheckBoxRow("Uses Cause-and-Effect Matrix", sch.UsesCauseAndEffectMatrix, (chk, e) =>
+            {
                 sch.UsesCauseAndEffectMatrix = chk.Checked.GetValueOrDefault();
             });
 
@@ -796,7 +843,8 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             cemIDs.Insert(0, "");
             cemNames.Insert(0, "");
 
-            layout.CreateAndAddDropDownRow("Selected Cause-and-Effect Matrix", cemNames, cemIDs.IndexOf(sch.CurrentCauseAndEffectMatrix), (dd, e) => {
+            layout.CreateAndAddDropDownRow("Selected Cause-and-Effect Matrix", cemNames, cemIDs.IndexOf(sch.CurrentCauseAndEffectMatrix), (dd, e) =>
+            {
                 sch.CurrentCauseAndEffectMatrix = cemIDs[dd.SelectedIndex];
             });
 
@@ -807,11 +855,13 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             layout.CreateAndAddEmptySpace();
             layout.CreateAndAddEmptySpace();
 
-            layout.CreateAndAddDropDownRow("Initial Flowsheet State", fstateIDs, fstateIDs.IndexOf(sch.InitialFlowsheetStateID), (dd, e) => {
+            layout.CreateAndAddDropDownRow("Initial Flowsheet State", fstateIDs, fstateIDs.IndexOf(sch.InitialFlowsheetStateID), (dd, e) =>
+            {
                 sch.InitialFlowsheetStateID = fstateIDs[dd.SelectedIndex];
             });
 
-            layout.CreateAndAddCheckBoxRow("Use Current State as Initial", sch.UseCurrentStateAsInitial, (chk, e) => {
+            layout.CreateAndAddCheckBoxRow("Use Current State as Initial", sch.UseCurrentStateAsInitial, (chk, e) =>
+            {
                 sch.UseCurrentStateAsInitial = chk.Checked.GetValueOrDefault();
             });
 
@@ -921,19 +971,22 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             layout.CreateAndAddLabelRow("Calculation Rates");
 
-            layout.CreateAndAddNumericEditorRow("Equilibrium Flash", integ.CalculationRateEquilibrium, 1, 100, 0, (s, e) => {
+            layout.CreateAndAddNumericEditorRow("Equilibrium Flash", integ.CalculationRateEquilibrium, 1, 100, 0, (s, e) =>
+            {
                 integ.CalculationRateEquilibrium = (int)s.Value;
             });
 
-            layout.CreateAndAddNumericEditorRow("Pressure-Flow Relations", integ.CalculationRatePressureFlow, 1, 100, 0, (s, e) => {
+            layout.CreateAndAddNumericEditorRow("Pressure-Flow Relations", integ.CalculationRatePressureFlow, 1, 100, 0, (s, e) =>
+            {
                 integ.CalculationRatePressureFlow = (int)s.Value;
             });
 
-            layout.CreateAndAddNumericEditorRow("Controller Updates", integ.CalculationRateControl, 1, 100, 0, (s, e) => {
+            layout.CreateAndAddNumericEditorRow("Controller Updates", integ.CalculationRateControl, 1, 100, 0, (s, e) =>
+            {
                 integ.CalculationRateControl = (int)s.Value;
             });
 
-            layout.Padding = new Padding(10, 10, page.Width/2, 10);
+            layout.Padding = new Padding(10, 10, page.Width / 2, 10);
 
             layout.Invalidate();
 
@@ -1062,7 +1115,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             {
                 if (Flowsheet.SimulationObjects.ContainsKey(ev.AssociatedIndicator))
                 {
-                    idxi = indicators.IndexOf(Flowsheet.SimulationObjects[ev.AssociatedIndicator].GraphicObject.Tag);                    
+                    idxi = indicators.IndexOf(Flowsheet.SimulationObjects[ev.AssociatedIndicator].GraphicObject.Tag);
                 }
             }
 

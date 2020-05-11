@@ -269,6 +269,11 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             var interval = integrator.IntegrationStep.TotalSeconds;
 
+            if (realtime)
+            {
+                interval = 1.0;
+            }
+
             var final = pbProgress.MaxValue;
 
             foreach (PIDController controller in Controllers)
