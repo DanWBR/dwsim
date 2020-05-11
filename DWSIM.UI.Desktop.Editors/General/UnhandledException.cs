@@ -42,16 +42,14 @@ namespace DWSIM.UI.Desktop.Editors
 
             Title = "Error";
 
-            var mystring = SharedClasses.EncryptString.StringCipher.Decrypt("YEZeCozmw0l3XjOYI0EpOXHh1LK9as6Bi5Gwqr7pYZyXtcNYQyzayHXts6NjAJlpfixoim98NAwVHli/+h1fYk6g4W82ewXDxkLwzg5SFCCSS2W0K3TvGMgC0wQWuKfrut0QdnByVKZ4x+/svdQwwXsUkZdELOUtnWiOdeV6WIQ=", "dwsim000000");
-            var mystring2 = SharedClasses.EncryptString.StringCipher.Decrypt("T+h/AQaXoM7xMDrov6dkD/82uHShQ6gX7MD+yyPG1ALdchPnpYsxHZWU8YcwP3jTPCZWRL9mmAWnQnWtp4ETyYh17Cgjt1EDYbEJJvh/PacWXami/6btnnbE0D5HBpnYrKamsf6qjjx9JbhQOZIvXJv6dIlJ7lMm5vWkhmLpNuc=", "dwsim000000");
-
+            var mystring = SharedClasses.EncryptString.StringCipher.Decrypt("U4wpVD+ZjOp7lqhS02yctoZHpl/2sWfENp4lFnCXeyV8odS0qKsLpwUc1FXRaFO4fnLyS7+D12LMSV92VbsyuEvMBeHpbWhw/Ophn6zkI7Q6MIUkxIyyjgN9190xeArp/cEzSeSVyGPEbEq6MG5uqCCowGfyNxQP2Mm1d9GJkEQ=", "dwsim000000");
+            
             try
             {
-                string baseaddress = "https://github.com/DanWBR/dwsim5/blob/windows/";
+                string baseaddress = "https://github.com/DanWBR/dwsim6/blob/windows/";
                 StackTrace st = new StackTrace(exc, true);
                 StackFrame frame = st.GetFrame(0);
                 string path = frame.GetFileName().Replace(mystring, baseaddress);
-                path = path.Replace(mystring2, baseaddress);
                 int line = frame.GetFileLineNumber();
                 if (path.Contains(baseaddress))
                 {
