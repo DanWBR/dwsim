@@ -67,7 +67,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Property ObjectiveFunctionHistory As New List(Of Double)
 
-        Public Property CalculateChemicalEquilibria As Boolean = True
+        Public Property CalculateChemicalEquilibria As Boolean = False
 
         Public Property OptimizeInitialEstimates As Boolean = True
 

@@ -500,7 +500,7 @@ Public Module General
 
         Dim ci As CultureInfo = CultureInfo.CurrentCulture
 
-        If Double.TryParse(s, NumberStyles.Any, ci, New Double) Then
+        If Double.TryParse(s, NumberStyles.Any - NumberStyles.AllowThousands, ci, New Double) Then
             Return Double.Parse(s, NumberStyles.Any - NumberStyles.AllowThousands, ci)
         Else
             Return 0.0

@@ -6,6 +6,7 @@ using DWSIM.ExtensionMethods;
 using System.IO;
 using VerticalAlignment = Eto.Forms.VerticalAlignment;
 using DWSIM.ExtensionMethods.Eto;
+using System.Globalization;
 
 namespace DWSIM.UI.Shared
 {
@@ -28,7 +29,7 @@ namespace DWSIM.UI.Shared
         public static bool IsValidDouble(string s)
         {
             double d = 0;
-            return double.TryParse(s, out d);
+            return double.TryParse(s, NumberStyles.Any & ~NumberStyles.AllowThousands, CultureInfo.InvariantCulture, out d);
         }
 
         public static int GetEditorFontSize()

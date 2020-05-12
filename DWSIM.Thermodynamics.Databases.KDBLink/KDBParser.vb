@@ -36,9 +36,15 @@ Public Class KDBParser
 
         htmlpage.LoadHtml(source)
 
-        Dim rows = htmlpage.DocumentNode.Descendants("tbody").FirstOrDefault.Descendants("tr").ToList
-
         Dim results As New List(Of String())
+
+        If htmlpage.DocumentNode.InnerHtml.ToLower.Contains("no data found") Then
+            Return results
+        ElseIf Not htmlpage.DocumentNode.InnerHtml.ToLower.Contains("tbody") Then
+            Return results
+        End If
+
+        Dim rows = htmlpage.DocumentNode.Descendants("tbody").FirstOrDefault.Descendants("tr").ToList
 
         For Each r In rows
             Dim id As String = ""
@@ -64,7 +70,7 @@ Public Class KDBParser
                 Return results
             End If
         Else
-            Throw New Exception("No matching compounds found.")
+            Return results
         End If
 
     End Function

@@ -50,6 +50,12 @@ Public Class ChemeoParser
             results.Add(New String() {id, name})
         End If
 
+        If htmlpage.DocumentNode.InnerHtml.ToLower.Contains("your search did not match any chemical components") Then
+            Return results
+        ElseIf Not htmlpage.DocumentNode.InnerHtml.ToLower.Contains("table") Then
+            Return results
+        End If
+
         Dim rows = htmlpage.DocumentNode.Descendants("table")(1).Descendants("tr").ToList
 
         For Each r In rows
@@ -79,7 +85,7 @@ Public Class ChemeoParser
                 Return results
             End If
         Else
-            Throw New Exception("No matching compounds found.")
+            Return results
         End If
 
     End Function

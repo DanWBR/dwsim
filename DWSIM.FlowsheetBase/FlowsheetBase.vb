@@ -2277,13 +2277,13 @@ Label_00CC:
         LKPPP.ComponentName = "Lee-Kesler-Plöcker"
         AvailablePropertyPackages.Add(LKPPP.ComponentName.ToString, LKPPP)
 
-        'Dim EUQPP As ExUNIQUACPropertyPackage = New ExUNIQUACPropertyPackage()
-        'EUQPP.ComponentName = "Extended UNIQUAC (Aqueous Electrolytes)"
-        'AvailablePropertyPackages.Add(EUQPP.ComponentName.ToString, EUQPP)
+        Dim EUQPP As ExUNIQUACPropertyPackage = New ExUNIQUACPropertyPackage()
+        EUQPP.ComponentName = "Extended UNIQUAC (Aqueous Electrolytes)"
+        AvailablePropertyPackages.Add(EUQPP.ComponentName.ToString, EUQPP)
 
-        'Dim ENQPP As New ElectrolyteNRTLPropertyPackage()
-        'ENQPP.ComponentName = "Electrolyte NRTL (Aqueous Electrolytes)"
-        'AvailablePropertyPackages.Add(ENQPP.ComponentName.ToString, ENQPP)
+        Dim ENQPP As New ElectrolyteNRTLPropertyPackage()
+        ENQPP.ComponentName = "Electrolyte NRTL (Aqueous Electrolytes)"
+        AvailablePropertyPackages.Add(ENQPP.ComponentName.ToString, ENQPP)
 
         Dim BOPP As BlackOilPropertyPackage = New BlackOilPropertyPackage()
         BOPP.ComponentName = "Black Oil"
