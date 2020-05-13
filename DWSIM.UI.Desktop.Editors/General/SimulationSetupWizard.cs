@@ -40,6 +40,7 @@ namespace DWSIM.UI.Desktop.Editors
         private bool hasSingleCompoundWater = false;
         private bool hasElectrolytes = false;
 
+        DropDown ddpp = null;
         public SimulationSetupWizard(IFlowsheet fs)
             : base()
         {
@@ -134,19 +135,115 @@ namespace DWSIM.UI.Desktop.Editors
             var dl = c.GetDefaultContainer();
             
             dl.CreateAndAddLabelRow("Process Details");
-            dl.CreateAndAddLabelRow2("Check/uncheck boxes according to your process charateristics and DWSIM will choose the best thermodynamic model setup for your simulation.");
-            dl.CreateAndAddLabelRow2("Please check the minimum amount of boxes as possible, avoiding redundancy and/or incompatible items.");
-            dl.CreateAndAddLabelRow2("If you prefer to setup the Property Packages manually, close this wizard and go to 'Setup' > 'Basis'.");
+            dl.CreateAndAddLabelRow2("Select an item according to your process charateristics and DWSIM will choose the best thermodynamic model setup for your simulation.");
+            dl.CreateAndAddLabelRow2("If you prefer to add multiple Property Packages, close this wizard and go to 'Setup' > 'Basis'.");
 
             dl.CreateAndAddLabelRow("General Information");
 
-            dl.CreateAndAddCheckBoxRow("My process can be modeled using the Ideal Gas law for vapor phase and Ideal Solution Theory for liquid phase", hasLowPressure, (sender, e) => hasLowPressure = sender.Checked.GetValueOrDefault());
-            dl.CreateAndAddCheckBoxRow("My process deals with hydrocarbons only", hasHC, (sender, e) => hasHC = sender.Checked.GetValueOrDefault());
-            dl.CreateAndAddCheckBoxRow("My process has hydrocarbons and Water at higher pressures", hasHCW, (sender, e) => hasHCW = sender.Checked.GetValueOrDefault());
-            dl.CreateAndAddCheckBoxRow("My process has polar chemicals", hasPolarChemicals, (sender, e) => hasPolarChemicals = sender.Checked.GetValueOrDefault());
-            dl.CreateAndAddCheckBoxRow("My process deals with a refrigeration cycle", hasRefrigeration, (sender, e) => hasRefrigeration = sender.Checked.GetValueOrDefault());
-            dl.CreateAndAddCheckBoxRow("This is a single Water/Steam simulation", hasSingleCompoundWater, (sender, e) => hasSingleCompoundWater = sender.Checked.GetValueOrDefault());
-            dl.CreateAndAddCheckBoxRow("I'm simulating a process which involves aqueous electrolytes", hasElectrolytes, (sender, e) => hasElectrolytes = sender.Checked.GetValueOrDefault());
+            var rl = new RadioButtonList { Orientation = Orientation.Vertical };
+
+            rl.Spacing = new Size(5, 5);
+
+            rl.Items.Add("My process can be modeled using the Ideal Gas law for vapor phase and Ideal Solution Theory for liquid phase");
+            rl.Items.Add("My process deals with hydrocarbons only");
+            rl.Items.Add("My process has hydrocarbons and Water at higher pressures");
+            rl.Items.Add("My process has polar chemicals");
+            rl.Items.Add("My process deals with a refrigeration cycle");
+            rl.Items.Add("This is a single Water/Steam simulation");
+            rl.Items.Add("I'm simulating a process which involves aqueous electrolytes");
+            rl.Items.Add("I want to select/use a specific Property Package");
+
+            rl.SelectedIndexChanged += (s, e) => {
+                switch (rl.SelectedIndex)
+                {
+                    case 0:
+                        hasLowPressure = true;
+                        hasHC = false;
+                        hasHCW = false;
+                        hasPolarChemicals = false;
+                        hasRefrigeration = false;
+                        hasSingleCompoundWater = false;
+                        hasElectrolytes = false;
+                        ddpp.Enabled = false;
+                        break;
+                    case 1:
+                        hasLowPressure = false;
+                        hasHC = true;
+                        hasHCW = false;
+                        hasPolarChemicals = false;
+                        hasRefrigeration = false;
+                        hasSingleCompoundWater = false;
+                        hasElectrolytes = false;
+                        ddpp.Enabled = false;
+                        break;
+                    case 2:
+                        hasLowPressure = false;
+                        hasHC = false;
+                        hasHCW = true;
+                        hasPolarChemicals = false;
+                        hasRefrigeration = false;
+                        hasSingleCompoundWater = false;
+                        hasElectrolytes = false;
+                        ddpp.Enabled = false;
+                        break;
+                    case 3:
+                        hasLowPressure = false;
+                        hasHC = false;
+                        hasHCW = false;
+                        hasPolarChemicals = true;
+                        hasRefrigeration = false;
+                        hasSingleCompoundWater = false;
+                        hasElectrolytes = false;
+                        ddpp.Enabled = false;
+                        break;
+                    case 4:
+                        hasLowPressure = false;
+                        hasHC = false;
+                        hasHCW = false;
+                        hasPolarChemicals = false;
+                        hasRefrigeration = true;
+                        hasSingleCompoundWater = false;
+                        hasElectrolytes = false;
+                        ddpp.Enabled = false;
+                        break;
+                    case 5:
+                        hasLowPressure = false;
+                        hasHC = false;
+                        hasHCW = false;
+                        hasPolarChemicals = false;
+                        hasRefrigeration = false;
+                        hasSingleCompoundWater = true;
+                        hasElectrolytes = false;
+                        ddpp.Enabled = false;
+                        break;
+                    case 6:
+                        hasLowPressure = false;
+                        hasHC = false;
+                        hasHCW = false;
+                        hasPolarChemicals = false;
+                        hasRefrigeration = false;
+                        hasSingleCompoundWater = false;
+                        hasElectrolytes = true;
+                        ddpp.Enabled = false;
+                        break;
+                    case 7:
+                        hasLowPressure = false;
+                        hasHC = false;
+                        hasHCW = false;
+                        hasPolarChemicals = false;
+                        hasRefrigeration = false;
+                        hasSingleCompoundWater = false;
+                        hasElectrolytes = false;
+                        ddpp.Enabled = true;
+                        break;
+                }
+            };
+
+            dl.CreateAndAddControlRow(rl);
+
+            ddpp = dl.CreateAndAddDropDownRow("Property Package", flowsheet.AvailablePropertyPackages.Keys.ToList(), 0, (dd, e) => { });
+            ddpp.Width = 350;
+            ddpp.Enabled = false;
 
             if (Application.Instance.Platform.IsGtk)
             {
@@ -282,6 +379,15 @@ namespace DWSIM.UI.Desktop.Editors
                 pp.UniqueID = Guid.NewGuid().ToString();
                 pp.Tag = pp.ComponentName + " (" + (flowsheet.PropertyPackages.Count + 1).ToString() + ")";
                 flowsheet.AddPropertyPackage(pp);
+                return;
+            }
+
+            if (ddpp.Enabled)
+            {
+                var ppx = (PropertyPackage)flowsheet.AvailablePropertyPackages[ddpp.SelectedValue.ToString()].Clone();
+                ppx.UniqueID = Guid.NewGuid().ToString();
+                ppx.Tag = ppx.ComponentName + " (" + (flowsheet.PropertyPackages.Count + 1).ToString() + ")";
+                flowsheet.AddPropertyPackage(ppx);
                 return;
             }
 
