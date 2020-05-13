@@ -91,9 +91,9 @@ namespace DWSIM.UI.Forms
             {
                 img = new ImageView { Image = Bitmap.FromResource(imgprefix + "DWSIM_splash_gtk.png").WithSize(w, h) };
                 layout.Add(img, 0, 0);
-                lbl1a.BackgroundColor = Colors.White;
-                lbl5.BackgroundColor = Colors.White;
-                lbl3.BackgroundColor = Colors.White;
+                lbl1a.BackgroundColor = Colors.WhiteSmoke;
+                lbl5.BackgroundColor = Colors.WhiteSmoke;
+                lbl3.BackgroundColor = Colors.WhiteSmoke;
             }
             else
             {

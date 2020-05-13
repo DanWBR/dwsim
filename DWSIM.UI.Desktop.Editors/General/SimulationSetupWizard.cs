@@ -242,8 +242,9 @@ namespace DWSIM.UI.Desktop.Editors
             dl.CreateAndAddControlRow(rl);
 
             ddpp = dl.CreateAndAddDropDownRow("Property Package", flowsheet.AvailablePropertyPackages.Keys.ToList(), 0, (dd, e) => { });
-            ddpp.Width = 350;
             ddpp.Enabled = false;
+            
+            if (!Application.Instance.Platform.IsGtk) ddpp.Width = 350;
 
             if (Application.Instance.Platform.IsGtk)
             {
