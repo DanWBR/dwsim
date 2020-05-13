@@ -189,7 +189,7 @@ namespace DWSIM.UI.Forms
             var btnSolve = new ButtonMenuItem { Text = "Solve Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")), Shortcut = Keys.F5 };
             var btnSolveC = new ButtonMenuItem { Text = "Solve Flowsheet (Custom Calculation Order)", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")), Shortcut = Keys.F5 | Application.Instance.CommonModifier | Application.Instance.AlternateModifier };
 
-            var dd = 
+            var dd =
 
             // actions
 
@@ -531,7 +531,8 @@ namespace DWSIM.UI.Forms
             var btnDynIntegrator = new ButtonMenuItem { Text = "Integrator Controls", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-ecg.png")) };
             var btnDynPIDTuning = new ButtonMenuItem { Text = "PID Controller Tuning", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-adjust.png")) };
 
-            btnDynPIDTuning.Click += (s, e) => {
+            btnDynPIDTuning.Click += (s, e) =>
+            {
                 var editor = new PIDTuningTool(FlowsheetObject, DynIntegratorControl);
                 var form = UI.Shared.Common.GetDefaultEditorForm("PID Tuning Tool", 800, 600, editor, false);
                 form.Show();
@@ -978,7 +979,8 @@ namespace DWSIM.UI.Forms
             var btnLoadState = new Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Load State", Image = new Bitmap(Bitmap.FromResource(imgprefix + "icons8-scroll_down.png")).WithSize(16, 16) };
             var btnDeleteState = new Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Delete Selected State", Image = new Bitmap(Bitmap.FromResource(imgprefix + "icons8-cancel.png")).WithSize(16, 16) };
 
-            btnDeleteState.Click += (s, e) => {
+            btnDeleteState.Click += (s, e) =>
+            {
                 if (ddstates.SelectedValue != null)
                 {
                     if (FlowsheetObject.StoredSolutions.ContainsKey(ddstates.SelectedValue.ToString()))
@@ -1001,7 +1003,8 @@ namespace DWSIM.UI.Forms
                 }
             };
 
-            btnSaveState.Click += (s, e) => {
+            btnSaveState.Click += (s, e) =>
+            {
                 string sname = "";
                 Dialog formName = null;
                 var tb = new TextBox { Text = "NewState" };
@@ -1015,12 +1018,14 @@ namespace DWSIM.UI.Forms
                     DynManagerControl.UpdateSelectedSchedule();
                     MessageBox.Show("State Saved successfully.", "DWSIM", MessageBoxButtons.OK, MessageBoxType.Information);
                 }
-                else {
+                else
+                {
                     MessageBox.Show("Invalid name.", "DWSIM", MessageBoxButtons.OK, MessageBoxType.Error);
                 }
             };
 
-            btnLoadState.Click += (s, e) => {
+            btnLoadState.Click += (s, e) =>
+            {
                 if (ddstates.SelectedValue != null)
                 {
                     if (FlowsheetObject.StoredSolutions.ContainsKey(ddstates.SelectedValue.ToString()))
@@ -1104,7 +1109,8 @@ namespace DWSIM.UI.Forms
 
             SplitterFlowsheet = Split2;
 
-            btnLeft.Click += (s, e) => {
+            btnLeft.Click += (s, e) =>
+            {
                 Size sz = SplitterFlowsheet.Panel1.Size;
                 var z = this.FlowsheetControl.FlowsheetSurface.Zoom;
                 var offs = (double)sz.Width / (double)z * sf;
@@ -1112,7 +1118,8 @@ namespace DWSIM.UI.Forms
                 this.FlowsheetControl.Invalidate();
             };
 
-            btnRight.Click += (s, e) => {
+            btnRight.Click += (s, e) =>
+            {
                 Size sz = SplitterFlowsheet.Panel1.Size;
                 var z = this.FlowsheetControl.FlowsheetSurface.Zoom;
                 var offs = -(double)sz.Width / (double)z * sf;
@@ -1120,7 +1127,8 @@ namespace DWSIM.UI.Forms
                 this.FlowsheetControl.Invalidate();
             };
 
-            btnUp.Click += (s, e) => {
+            btnUp.Click += (s, e) =>
+            {
                 Size sz = SplitterFlowsheet.Panel1.Size;
                 var z = this.FlowsheetControl.FlowsheetSurface.Zoom;
                 var offs = (double)sz.Height / (double)z * sf;
@@ -1128,7 +1136,8 @@ namespace DWSIM.UI.Forms
                 this.FlowsheetControl.Invalidate();
             };
 
-            btnDown.Click += (s, e) => {
+            btnDown.Click += (s, e) =>
+            {
                 Size sz = SplitterFlowsheet.Panel1.Size;
                 var z = this.FlowsheetControl.FlowsheetSurface.Zoom;
                 var offs = (double)sz.Height / (double)z * sf;
@@ -1363,25 +1372,32 @@ namespace DWSIM.UI.Forms
 
         public void SolveFlowsheet(bool changecalcorder)
         {
-            FlowsheetObject.UpdateSpreadsheet(() =>
+            if (!FlowsheetObject.DynamicMode)
             {
-                Spreadsheet.EvaluateAll();
-                Spreadsheet.WriteAll();
-            });
-            FlowsheetObject.FinishedSolving = (() =>
-            {
-                Application.Instance.AsyncInvoke(() =>
+                FlowsheetObject.UpdateSpreadsheet(() =>
                 {
-                    ResultsControl.UpdateList();
-                    MaterialStreamListControl.UpdateList();
-                    UpdateEditorPanels();
+                    Spreadsheet.EvaluateAll();
+                    Spreadsheet.WriteAll();
                 });
-            });
-            FlowsheetObject.SolveFlowsheet(false, null, changecalcorder);
-            FlowsheetObject.UpdateSpreadsheet(() =>
+                FlowsheetObject.FinishedSolving = (() =>
+                {
+                    Application.Instance.AsyncInvoke(() =>
+                    {
+                        ResultsControl.UpdateList();
+                        MaterialStreamListControl.UpdateList();
+                        UpdateEditorPanels();
+                    });
+                });
+                FlowsheetObject.SolveFlowsheet(false, null, changecalcorder);
+                FlowsheetObject.UpdateSpreadsheet(() =>
+                {
+                    Spreadsheet.EvaluateAll();
+                });
+            }
+            else
             {
-                Spreadsheet.EvaluateAll();
-            });
+                FlowsheetObject.ShowMessage("Dynamic Mode is enabled.", Interfaces.IFlowsheet.MessageType.Warning);
+            }
         }
 
         void Flowsheet_Shown(object sender, EventArgs e)
@@ -1681,7 +1697,14 @@ namespace DWSIM.UI.Forms
                             if (outtxt.Text.Length > 500 * 50) outtxt.Text = "";
                         }
                         outtxt.Append(item, true);
-                        outtxt.Selection = new Range<int>(outtxt.Text.Length - item.Length, outtxt.Text.Length - 1);
+                        if (s.RunningPlatform() == s.Platform.Windows)
+                        {
+                            outtxt.Selection = new Range<int>(outtxt.Text.Length - item.Length - 1, outtxt.Text.Length - 1);
+                        }
+                        else
+                        {
+                            outtxt.Selection = new Range<int>(outtxt.Text.Length - item.Length, outtxt.Text.Length - 1);
+                        }
                         switch (mtype)
                         {
                             case Interfaces.IFlowsheet.MessageType.Information:
