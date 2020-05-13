@@ -187,7 +187,7 @@ Public Class FlowsheetSurfaceControl
         If e.KeyCode = Keys.E And e.Control Then
 
         ElseIf e.KeyCode = Keys.F5 Then
-            FlowsheetObject.tsbCalc_Click(sender, e)
+            FlowsheetObject.tsbCalc.PerformClick()
         ElseIf e.KeyCode = Keys.F6 Then
             FlowsheetObject.tsbAtivar.Checked = Not FlowsheetObject.tsbAtivar.Checked
             FlowsheetObject.tsbAtivar_CheckedChanged(sender, e)

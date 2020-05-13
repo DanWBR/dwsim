@@ -754,10 +754,11 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub tsbCalcF_Click(sender As Object, e As EventArgs) Handles tsbCalcF.Click
-        GlobalSettings.Settings.TaskCancellationTokenSource = Nothing
-        GlobalSettings.Settings.CalculatorBusy = False
-        My.Application.ActiveSimulation = Me
-        FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, Nothing, False, False, Nothing, Nothing,
+        If Not DynamicMode Then
+            GlobalSettings.Settings.TaskCancellationTokenSource = Nothing
+            GlobalSettings.Settings.CalculatorBusy = False
+            My.Application.ActiveSimulation = Me
+            FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, Nothing, False, False, Nothing, Nothing,
                                                         Sub()
                                                             If My.Settings.ObjectEditor = 1 Then
                                                                 Me.UIThread(Sub()
@@ -766,6 +767,9 @@ Public Class FormFlowsheet
                                                                             End Sub)
                                                             End If
                                                         End Sub, My.Computer.Keyboard.ShiftKeyDown And My.Computer.Keyboard.AltKeyDown)
+        Else
+            ShowMessage(DWSIM.App.GetLocalString("DynEnabled"), IFlowsheet.MessageType.Warning)
+        End If
     End Sub
 
     Public Sub RectangleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RectangleToolStripMenuItem.Click
@@ -858,10 +862,11 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles tsbCalc.Click
-        GlobalSettings.Settings.TaskCancellationTokenSource = Nothing
-        My.Application.ActiveSimulation = Me
-        If My.Computer.Keyboard.ShiftKeyDown Then GlobalSettings.Settings.CalculatorBusy = False
-        FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, Nothing, False, False, Nothing, Nothing,
+        If Not DynamicMode Then
+            GlobalSettings.Settings.TaskCancellationTokenSource = Nothing
+            My.Application.ActiveSimulation = Me
+            If My.Computer.Keyboard.ShiftKeyDown Then GlobalSettings.Settings.CalculatorBusy = False
+            FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, Nothing, False, False, Nothing, Nothing,
                                                         Sub()
                                                             If My.Settings.ObjectEditor = 1 Then
                                                                 Me.UIThread(Sub()
@@ -870,6 +875,9 @@ Public Class FormFlowsheet
                                                                             End Sub)
                                                             End If
                                                         End Sub, My.Computer.Keyboard.CtrlKeyDown And My.Computer.Keyboard.AltKeyDown)
+        Else
+            ShowMessage(DWSIM.App.GetLocalString("DynEnabled"), IFlowsheet.MessageType.Warning)
+        End If
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
@@ -1149,16 +1157,6 @@ Public Class FormFlowsheet
         GlobalSettings.Settings.CalculatorStopRequested = True
         If GlobalSettings.Settings.TaskCancellationTokenSource IsNot Nothing Then
             GlobalSettings.Settings.TaskCancellationTokenSource.Cancel()
-        End If
-    End Sub
-
-    Public Sub tsbCalc_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        GlobalSettings.Settings.TaskCancellationTokenSource = Nothing
-        If My.Computer.Keyboard.ShiftKeyDown Then GlobalSettings.Settings.CalculatorBusy = False
-        If My.Computer.Keyboard.CtrlKeyDown And My.Computer.Keyboard.AltKeyDown Then
-            FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, ChangeCalcOrder:=True)
-        Else
-            FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode)
         End If
     End Sub
 

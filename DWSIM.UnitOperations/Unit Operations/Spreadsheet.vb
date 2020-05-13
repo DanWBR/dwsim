@@ -119,6 +119,12 @@ Namespace UnitOperations
             Return Mid(S, P1, P2 - P1)
         End Function
 
+        Public Overrides Sub RunDynamicModel()
+
+            Calculate()
+
+        End Sub
+
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
@@ -128,6 +134,8 @@ Namespace UnitOperations
             IObj?.SetCurrent()
 
             Dim k, ci, co As Integer
+
+            Dim su = FlowSheet.FlowsheetOptions.SelectedUnitSystem
 
             Dim excelType As Type = Nothing
 
@@ -222,10 +230,10 @@ Namespace UnitOperations
                         If Me.GraphicObject.InputConnectors(k).IsAttached Then
                             S = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(k).AttachedConnector.AttachedFrom.Name)
                             Me.PropertyPackage.CurrentMaterialStream = S
-                            Ti = S.Phases(0).Properties.temperature.GetValueOrDefault.ToString
-                            Pi = S.Phases(0).Properties.pressure.GetValueOrDefault.ToString
-                            Hi = S.Phases(0).Properties.enthalpy.GetValueOrDefault.ToString
-                            Wi = S.Phases(0).Properties.massflow.GetValueOrDefault.ToString
+                            Ti = S.Phases(0).Properties.temperature.GetValueOrDefault
+                            Pi = S.Phases(0).Properties.pressure.GetValueOrDefault
+                            Hi = S.Phases(0).Properties.enthalpy.GetValueOrDefault
+                            Wi = S.Phases(0).Properties.massflow.GetValueOrDefault
                             Hin += Hi * Wi
                             Win += Wi
 
@@ -487,14 +495,25 @@ Namespace UnitOperations
                 xcl.Save(Filename)
 
                 If Calculator.IsRunningOnMono Then
-                    Dim p As New Process()
-                    With p
-                        .StartInfo.FileName = "xdg-open"
-                        .StartInfo.Arguments = Filename
-                        .StartInfo.UseShellExecute = False
-                        .Start()
-                        MessageBox.Show("Click 'OK' once the spreadsheet formula updating process is finished.")
-                    End With
+                    If GlobalSettings.Settings.RunningPlatform = Settings.Platform.Linux Then
+                        Dim p As New Process()
+                        With p
+                            .StartInfo.FileName = "xdg-open"
+                            .StartInfo.Arguments = Filename
+                            .StartInfo.UseShellExecute = False
+                            .Start()
+                            MessageBox.Show("Click 'OK' once the spreadsheet formula updating process is finished.")
+                        End With
+                    Else 'macOS
+                        Dim p As New Process()
+                        With p
+                            .StartInfo.FileName = "open"
+                            .StartInfo.Arguments = Filename
+                            .StartInfo.UseShellExecute = False
+                            .Start()
+                            MessageBox.Show("Click 'OK' once the spreadsheet formula updating process is finished.")
+                        End With
+                    End If
                 Else
                     Process.Start(Filename)
                     MessageBox.Show("Click 'OK' once the spreadsheet formula updating process is finished.")
@@ -785,6 +804,7 @@ Namespace UnitOperations
 
         End Sub
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
+
             Dim val0 As Object = MyBase.GetPropertyValue(prop, su)
 
             If Not val0 Is Nothing Then
@@ -888,9 +908,9 @@ Namespace UnitOperations
                     Case "Calc"
                         value = su.heatflow
                     Case "In"
-                        If InputParams.ContainsKey(propID) Then value = InputParams(propID).Unit
+                        Return "" 'If InputParams.ContainsKey(propID) Then value = InputParams(propID).Unit
                     Case "Out"
-                        If OutputParams.ContainsKey(propID) Then value = OutputParams(propID).Unit
+                        Return "" 'If OutputParams.ContainsKey(propID) Then value = OutputParams(propID).Unit
                 End Select
 
                 Return value

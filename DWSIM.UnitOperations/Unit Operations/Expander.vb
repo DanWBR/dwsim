@@ -800,6 +800,7 @@ Curves:             If CalcMode = CalculationMode.Head Then
                     For i = 0 To 1
                         proplist.Add("PROP_TU_" + CStr(i))
                     Next
+                    proplist.Add("PROP_TU_3")
                     proplist.Add("PROP_TU_4")
                     proplist.Add("AdiabaticHead")
                     proplist.Add("PolytropicHead")
@@ -837,6 +838,8 @@ Curves:             If CalcMode = CalculationMode.Head Then
                     Case 1
                         'PROP_CO_1(Efficiency)
                         Me.AdiabaticEfficiency = propval
+                    Case 3
+                        DeltaQ = SystemsOfUnits.Converter.ConvertToSI(su.heatflow, propval)
                     Case 4
                         'PROP_CO_4(Pressure Out)
                         Me.POut = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)

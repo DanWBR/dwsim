@@ -141,26 +141,30 @@ Public Class EditingForm_FlowsheetUO
 
             'variables
 
-            dgvinputvars.Rows.Clear()
-            For Each item In .InputParams
-                If .Fsheet.SimulationObjects.ContainsKey(item.Value.ObjectID) Then
-                    dgvinputvars.Rows.Add(New Object() {item.Key,
+            If .Fsheet IsNot Nothing Then
+
+                dgvinputvars.Rows.Clear()
+                For Each item In .InputParams
+                    If .Fsheet.SimulationObjects.ContainsKey(item.Value.ObjectID) Then
+                        dgvinputvars.Rows.Add(New Object() {item.Key,
                                                         .Fsheet.SimulationObjects(item.Value.ObjectID).GraphicObject.Tag & ", " &
                                                         .FlowSheet.GetTranslatedString(item.Value.ObjectProperty),
                                                         .Fsheet.SimulationObjects(item.Value.ObjectID).GetPropertyValue(item.Value.ObjectProperty, .FlowSheet.FlowsheetOptions.SelectedUnitSystem),
                                                         .Fsheet.SimulationObjects(item.Value.ObjectID).GetPropertyUnit(item.Value.ObjectProperty, .FlowSheet.FlowsheetOptions.SelectedUnitSystem)})
-                End If
-            Next
+                    End If
+                Next
 
-            dgvoutputvars.Rows.Clear()
-            For Each item In .OutputParams
-                If .Fsheet.SimulationObjects.ContainsKey(item.Value.ObjectID) Then
-                    dgvoutputvars.Rows.Add(New Object() {.Fsheet.SimulationObjects(item.Value.ObjectID).GraphicObject.Tag & ", " &
+                dgvoutputvars.Rows.Clear()
+                For Each item In .OutputParams
+                    If .Fsheet.SimulationObjects.ContainsKey(item.Value.ObjectID) Then
+                        dgvoutputvars.Rows.Add(New Object() { .Fsheet.SimulationObjects(item.Value.ObjectID).GraphicObject.Tag & ", " &
                                                         .FlowSheet.GetTranslatedString(item.Value.ObjectProperty),
                                                         .Fsheet.SimulationObjects(item.Value.ObjectID).GetPropertyValue(item.Value.ObjectProperty, .FlowSheet.FlowsheetOptions.SelectedUnitSystem),
                                                         .Fsheet.SimulationObjects(item.Value.ObjectID).GetPropertyUnit(item.Value.ObjectProperty, .FlowSheet.FlowsheetOptions.SelectedUnitSystem)})
-                End If
-            Next
+                    End If
+                Next
+
+            End If
 
         End With
 

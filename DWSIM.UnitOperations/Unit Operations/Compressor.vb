@@ -972,6 +972,7 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                     For i = 0 To 1
                         proplist.Add("PROP_CO_" + CStr(i))
                     Next
+                    proplist.Add("PROP_CO_3")
                     proplist.Add("PROP_CO_4")
                     proplist.Add("AdiabaticHead")
                     proplist.Add("PolytropicHead")
@@ -1009,6 +1010,8 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                     Case 1
                         'PROP_CO_1(Efficiency)
                         Me.AdiabaticEfficiency = propval
+                    Case 3
+                        DeltaQ = SystemsOfUnits.Converter.ConvertToSI(su.heatflow, propval)
                     Case 4
                         'PROP_CO_4(Pressure Out)
                         Me.POut = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
