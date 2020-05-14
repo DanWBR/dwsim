@@ -253,8 +253,6 @@ Namespace UnitOperations
 
             If Not Me.GraphicObject.EnergyConnector.IsAttached Then
                 Throw New Exception(FlowSheet.GetTranslatedString("NohcorrentedeEnergyFlow5"))
-            ElseIf qli > 0 And Not Me.IgnorePhase Then
-                Throw New Exception(FlowSheet.GetTranslatedString("ExisteumaPhaselquidan2"))
             ElseIf Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
                 Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
             ElseIf Not Me.GraphicObject.InputConnectors(0).IsAttached Then
@@ -571,6 +569,7 @@ Curves:             If CalcMode = CalculationMode.Head Then
             PropertyPackage.CurrentMaterialStream = tms
             tms.Phases(0).Properties.temperature = T2s
             tms.Phases(0).Properties.pressure = P2
+            tms.Phases(0).Properties.enthalpy = H2s
             tms.Calculate()
 
             rho2i = tms.GetPhase("Mixture").Properties.density.GetValueOrDefault
@@ -579,6 +578,7 @@ Curves:             If CalcMode = CalculationMode.Head Then
             PropertyPackage.CurrentMaterialStream = tms
             tms.Phases(0).Properties.temperature = T2
             tms.Phases(0).Properties.pressure = P2
+            tms.Phases(0).Properties.enthalpy = H2
             tms.Calculate()
 
             rho2 = tms.GetPhase("Mixture").Properties.density.GetValueOrDefault

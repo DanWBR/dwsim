@@ -280,10 +280,6 @@ Namespace UnitOperations
 
             IObj?.Paragraphs.Add("Calculation Mode: " & CalcMode.ToString)
 
-            If Not IgnorePhase And DebugMode Then AppendDebugLine("Checking if there is a liquid phase in the inlet stream...")
-
-            If qli > 0 And Not Me.IgnorePhase Then Throw New Exception(FlowSheet.GetTranslatedString("ExisteumaPhaselquidan"))
-
             Select Case CalcMode
 
                 Case CalculationMode.EnergyStream, CalculationMode.Head, CalculationMode.PowerRequired
@@ -450,6 +446,7 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                     PropertyPackage.CurrentMaterialStream = tms
                     tms.Phases(0).Properties.temperature = T2s
                     tms.Phases(0).Properties.pressure = P2
+                    tms.Phases(0).Properties.enthalpy = H2s
                     tms.Calculate()
 
                     rho2i = tms.GetPhase("Mixture").Properties.density.GetValueOrDefault
@@ -458,6 +455,7 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                     PropertyPackage.CurrentMaterialStream = tms
                     tms.Phases(0).Properties.temperature = T2
                     tms.Phases(0).Properties.pressure = P2
+                    tms.Phases(0).Properties.enthalpy = H2
                     tms.Calculate()
 
                     rho2 = tms.GetPhase("Mixture").Properties.density.GetValueOrDefault
@@ -637,6 +635,7 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                     PropertyPackage.CurrentMaterialStream = tms
                     tms.Phases(0).Properties.temperature = T2s
                     tms.Phases(0).Properties.pressure = P2
+                    tms.Phases(0).Properties.enthalpy = H2s
                     tms.Calculate()
 
                     rho2i = tms.GetPhase("Mixture").Properties.density.GetValueOrDefault
@@ -645,6 +644,7 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                     PropertyPackage.CurrentMaterialStream = tms
                     tms.Phases(0).Properties.temperature = T2
                     tms.Phases(0).Properties.pressure = P2
+                    tms.Phases(0).Properties.enthalpy = H2
                     tms.Calculate()
 
                     rho2 = tms.GetPhase("Mixture").Properties.density.GetValueOrDefault
