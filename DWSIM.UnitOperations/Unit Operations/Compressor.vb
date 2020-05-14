@@ -488,9 +488,9 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
 
                     Dim Wic, Wpc As Double
 
-                    Wic = DeltaQ * (AdiabaticEfficiency / 100)
+                    Wic = Wi * n_isent / (n_isent - 1) * fce * (Pi / rho1) * ((P2 / Pi) ^ ((n_isent - 1) / n_isent) - 1) / 1000
 
-                    Wpc = DeltaQ * (PolytropicEfficiency / 100)
+                    Wpc = Wi * n_poly / (n_poly - 1) * fce * (Pi / rho1) * ((P2 / Pi) ^ ((n_poly - 1) / n_poly) - 1) / 1000
 
                     If CalcMode = CalculationMode.Head And ProcessPath = ProcessPathType.Adiabatic Then
 
@@ -593,11 +593,11 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
 
                     If ProcessPath = ProcessPathType.Adiabatic Then
 
-                        Me.DeltaQ = Wi * (H2s - Hi) / (Me.AdiabaticEfficiency / 100)
+                        Me.DeltaQ = Wi * (H2s - Hi) / (AdiabaticEfficiency / 100)
 
                     Else
 
-                        Me.DeltaQ = Wi * (H2s - Hi) / (Me.PolytropicEfficiency / 100)
+                        Me.DeltaQ = Wi * (H2s - Hi) / (PolytropicEfficiency / 100)
 
                     End If
 
@@ -671,9 +671,9 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
 
                     End If
 
-                    Wic = DeltaQ * (AdiabaticEfficiency / 100) 'kW
+                    Wic = Wi * n_isent / (n_isent - 1) * fce * (Pi / rho1) * ((P2 / Pi) ^ ((n_isent - 1) / n_isent) - 1) / 1000
 
-                    Wpc = DeltaQ * (PolytropicEfficiency / 100) 'kW
+                    Wpc = Wi * n_poly / (n_poly - 1) * fce * (Pi / rho1) * ((P2 / Pi) ^ ((n_poly - 1) / n_poly) - 1) / 1000
 
                     ' heads
 

@@ -605,9 +605,9 @@ Curves:             If CalcMode = CalculationMode.Head Then
 
             End If
 
-            Wic = DeltaQ * (AdiabaticEfficiency / 100)
+            Wic = -Wi * n_isent / (n_isent - 1) * fce * (Pi / rho1) * ((P2 / Pi) ^ ((n_isent - 1) / n_isent) - 1) / 1000
 
-            Wpc = DeltaQ * (PolytropicEfficiency / 100)
+            Wpc = -Wi * n_poly / (n_poly - 1) * fce * (Pi / rho1) * ((P2 / Pi) ^ ((n_poly - 1) / n_poly) - 1) / 1000
 
             ' heads
 

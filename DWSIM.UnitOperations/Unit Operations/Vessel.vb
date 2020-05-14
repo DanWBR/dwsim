@@ -167,7 +167,6 @@ Namespace UnitOperations
 
             Dim timestep = integrator.IntegrationStep.TotalSeconds
 
-            Dim ims As MaterialStream = Me.GetInletMaterialStream(0)
             Dim oms1 As MaterialStream = Me.GetOutletMaterialStream(0)
             Dim oms2 As MaterialStream = Me.GetOutletMaterialStream(1)
 
@@ -177,9 +176,18 @@ Namespace UnitOperations
                 Throw New Exception("The Gas-Liquid Separator currently supports only a single liquid phase in Dynamic Mode.")
             End If
 
-            Dim s1, s2, s3 As Enums.Dynamics.DynamicsSpecType
+            Dim imsmix As MaterialStream = Nothing
 
-            s1 = ims.DynamicsSpec
+            For i = 0 To 5
+                If Me.GraphicObject.InputConnectors(i).IsAttached Then
+                    Dim imsx = GetInletMaterialStream(i)
+                    If imsmix Is Nothing Then imsmix = imsx.CloneXML
+                    imsmix = imsmix.Add(imsx)
+                End If
+            Next
+
+            Dim s2, s3 As Enums.Dynamics.DynamicsSpecType
+
             s2 = oms1.DynamicsSpec
             s3 = oms2.DynamicsSpec
 
@@ -202,11 +210,11 @@ Namespace UnitOperations
 
                     If InitializeFromInlet Then
 
-                        AccumulationStream = ims.CloneXML
+                        AccumulationStream = imsmix.CloneXML
 
                     Else
 
-                        AccumulationStream = ims.Subtract(oms1, timestep)
+                        AccumulationStream = imsmix.Subtract(oms1, timestep)
                         AccumulationStream = AccumulationStream.Subtract(oms2, timestep)
 
                     End If
@@ -222,7 +230,7 @@ Namespace UnitOperations
                 Else
 
                     AccumulationStream.SetFlowsheet(FlowSheet)
-                    AccumulationStream = AccumulationStream.Add(ims, timestep)
+                    AccumulationStream = AccumulationStream.Add(imsmix, timestep)
                     AccumulationStream = AccumulationStream.Subtract(oms1, timestep)
                     AccumulationStream = AccumulationStream.Subtract(oms2, timestep)
                     If AccumulationStream.GetMassFlow <= 0.0 Then AccumulationStream.SetMassFlow(0.0)
@@ -326,8 +334,11 @@ Namespace UnitOperations
 
                 SetDynamicProperty("Operating Pressure", Pressure)
 
-                ims.SetPressure(Pressure)
-
+                For i = 0 To 5
+                    If Me.GraphicObject.InputConnectors(i).IsAttached Then
+                        GetInletMaterialStream(i).SetPressure(Pressure)
+                    End If
+                Next
                 oms1.SetPressure(Pressure)
 
                 Dim liqdens = AccumulationStream.Phases(3).Properties.density.GetValueOrDefault
