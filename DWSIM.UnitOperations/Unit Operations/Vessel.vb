@@ -245,7 +245,9 @@ Namespace UnitOperations
                 Ha = AccumulationStream.GetMassEnthalpy
                 Wa = AccumulationStream.GetMassFlow
 
-                Qval = GetInletEnergyStream(6)?.EnergyFlow
+                Dim es = GetInletEnergyStream(6)
+
+                If es IsNot Nothing Then Qval = es.EnergyFlow.GetValueOrDefault
 
                 If Qval <> 0.0 Then
 
