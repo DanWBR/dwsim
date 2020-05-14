@@ -52,9 +52,9 @@ Namespace UnitOperations
         Protected m_P As Double = 101325.0#
 
         Public Enum PressureBehavior
-            Average
-            Maximum
-            Minimum
+            Average = 0
+            Maximum = 1
+            Minimum = 2
         End Enum
 
         Public Property DimensionRatio As Double = 3

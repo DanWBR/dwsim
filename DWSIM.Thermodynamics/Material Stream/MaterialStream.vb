@@ -6179,6 +6179,8 @@ Namespace Streams
             Dim overallprops As String() = PropertyPackage.GetOverallPropList()
             Dim comps As String() = PropertyPackage.RET_VNAMES2(GetFlowsheet().FlowsheetOptions.CompoundOrderingMode)
 
+            Dim comps0 = PropertyPackage.RET_VNAMES2(CompoundOrdering.AsAdded).ToList
+
             Dim units As IUnitsOfMeasure = GetFlowsheet().FlowsheetOptions.SelectedUnitSystem
 
             Dim results As New CalculationResults
@@ -6209,7 +6211,6 @@ Namespace Streams
             results.Data.Add("Solid Phase Molar Fraction", New List(Of Double) From {Me.Phases(7).Properties.molarfraction.GetValueOrDefault})
             results.DataUnits.Add("Solid Phase Molar Fraction", "")
 
-
             If (ny > 0.0000000001# And ny < 0.9999999999#) OrElse nl2 > 0.000000001# OrElse ns > 0.0# Then
 
                 results.Data.Add("SPACE00000000", Nothing)
@@ -6228,28 +6229,28 @@ Namespace Streams
                 results.Data.Add("SPACE1", Nothing)
                 i = 0
                 For Each comp As String In comps
-                    results.Data.Add("[Overall] " + comp + " Mole Frac", New List(Of Double)({vz(i)}))
+                    results.Data.Add("[Overall] " + comp + " Mole Frac", New List(Of Double)({vz(comps0.IndexOf(comp))}))
                     results.DataUnits.Add("[Overall] " + comp + " Mole Frac", "")
                     i += 1
                 Next
                 results.Data.Add("SPACE2", Nothing)
                 i = 0
                 For Each comp As String In comps
-                    results.Data.Add("[Overall] " + comp + " Mass Frac", New List(Of Double)({wz(i)}))
+                    results.Data.Add("[Overall] " + comp + " Mass Frac", New List(Of Double)({wz(comps0.IndexOf(comp))}))
                     results.DataUnits.Add("[Overall] " + comp + " Mass Frac", "")
                     i += 1
                 Next
                 results.Data.Add("SPACE3", Nothing)
                 i = 0
                 For Each comp As String In comps
-                    results.Data.Add("[Overall] " + comp + " Mole Flow", New List(Of Double)({vnz(i)}))
+                    results.Data.Add("[Overall] " + comp + " Mole Flow", New List(Of Double)({vnz(comps0.IndexOf(comp))}))
                     results.DataUnits.Add("[Overall] " + comp + " Mole Flow", units.molarflow)
                     i += 1
                 Next
                 results.Data.Add("SPACE4", Nothing)
                 i = 0
                 For Each comp As String In comps
-                    results.Data.Add("[Overall] " + comp + " Mass Flow", New List(Of Double)({wnz(i)}))
+                    results.Data.Add("[Overall] " + comp + " Mass Flow", New List(Of Double)({wnz(comps0.IndexOf(comp))}))
                     results.DataUnits.Add("[Overall] " + comp + " Mass Flow", units.massflow)
                     i += 1
                 Next
@@ -6282,28 +6283,28 @@ Namespace Streams
                 results.Data.Add("SPACE11", Nothing)
                 i = 0
                 For Each comp As String In comps
-                    results.Data.Add("[Vapor Phase] " + comp + " Mole Frac", New List(Of Double)({vz(i)}))
+                    results.Data.Add("[Vapor Phase] " + comp + " Mole Frac", New List(Of Double)({vz(comps0.IndexOf(comp))}))
                     results.DataUnits.Add("[Vapor Phase] " + comp + " Mole Frac", "")
                     i += 1
                 Next
                 results.Data.Add("SPACE21", Nothing)
                 i = 0
                 For Each comp As String In comps
-                    results.Data.Add("[Vapor Phase] " + comp + " Mass Frac", New List(Of Double)({wz(i)}))
+                    results.Data.Add("[Vapor Phase] " + comp + " Mass Frac", New List(Of Double)({wz(comps0.IndexOf(comp))}))
                     results.DataUnits.Add("[Vapor Phase] " + comp + " Mass Frac", "")
                     i += 1
                 Next
                 results.Data.Add("SPACE31", Nothing)
                 i = 0
                 For Each comp As String In comps
-                    results.Data.Add("[Vapor Phase] " + comp + " Mole Flow", New List(Of Double)({vnz(i)}))
+                    results.Data.Add("[Vapor Phase] " + comp + " Mole Flow", New List(Of Double)({vnz(comps0.IndexOf(comp))}))
                     results.DataUnits.Add("[Vapor Phase] " + comp + " Mole Flow", units.molarflow)
                     i += 1
                 Next
                 results.Data.Add("SPACE41", Nothing)
                 i = 0
                 For Each comp As String In comps
-                    results.Data.Add("[Vapor Phase] " + comp + " Mass Flow", New List(Of Double)({wnz(i)}))
+                    results.Data.Add("[Vapor Phase] " + comp + " Mass Flow", New List(Of Double)({wnz(comps0.IndexOf(comp))}))
                     results.DataUnits.Add("[Vapor Phase] " + comp + " Mass Flow", units.massflow)
                     i += 1
                 Next
@@ -6336,28 +6337,28 @@ Namespace Streams
                 results.Data.Add("SPACE12", Nothing)
                 i = 0
                 For Each comp As String In comps
-                    results.Data.Add("[Liquid Phase] " + comp + " Mole Frac", New List(Of Double)({vz(i)}))
+                    results.Data.Add("[Liquid Phase] " + comp + " Mole Frac", New List(Of Double)({vz(comps0.IndexOf(comp))}))
                     results.DataUnits.Add("[Liquid Phase] " + comp + " Mole Frac", "")
                     i += 1
                 Next
                 results.Data.Add("SPACE22", Nothing)
                 i = 0
                 For Each comp As String In comps
-                    results.Data.Add("[Liquid Phase] " + comp + " Mass Frac", New List(Of Double)({wz(i)}))
+                    results.Data.Add("[Liquid Phase] " + comp + " Mass Frac", New List(Of Double)({wz(comps0.IndexOf(comp))}))
                     results.DataUnits.Add("[Liquid Phase] " + comp + " Mass Frac", "")
                     i += 1
                 Next
                 results.Data.Add("SPACE32", Nothing)
                 i = 0
                 For Each comp As String In comps
-                    results.Data.Add("[Liquid Phase] " + comp + " Mole Flow", New List(Of Double)({vnz(i)}))
+                    results.Data.Add("[Liquid Phase] " + comp + " Mole Flow", New List(Of Double)({vnz(comps0.IndexOf(comp))}))
                     results.DataUnits.Add("[Liquid Phase] " + comp + " Mole Flow", units.molarflow)
                     i += 1
                 Next
                 results.Data.Add("SPACE42", Nothing)
                 i = 0
                 For Each comp As String In comps
-                    results.Data.Add("[Liquid Phase] " + comp + " Mass Flow", New List(Of Double)({wnz(i)}))
+                    results.Data.Add("[Liquid Phase] " + comp + " Mass Flow", New List(Of Double)({wnz(comps0.IndexOf(comp))}))
                     results.DataUnits.Add("[Liquid Phase] " + comp + " Mass Flow", units.massflow)
                     i += 1
                 Next
@@ -6391,28 +6392,28 @@ Namespace Streams
                 results.Data.Add("SPACE13", Nothing)
                 i = 0
                 For Each comp As String In comps
-                    results.Data.Add("[Liquid Phase 2] " + comp + " Mole Frac", New List(Of Double)({vz(i)}))
+                    results.Data.Add("[Liquid Phase 2] " + comp + " Mole Frac", New List(Of Double)({vz(comps0.IndexOf(comp))}))
                     results.DataUnits.Add("[Liquid Phase 2] " + comp + " Mole Frac", "")
                     i += 1
                 Next
                 results.Data.Add("SPACE23", Nothing)
                 i = 0
                 For Each comp As String In comps
-                    results.Data.Add("[Liquid Phase 2] " + comp + " Mass Frac", New List(Of Double)({wz(i)}))
+                    results.Data.Add("[Liquid Phase 2] " + comp + " Mass Frac", New List(Of Double)({wz(comps0.IndexOf(comp))}))
                     results.DataUnits.Add("[Liquid Phase 2] " + comp + " Mass Frac", "")
                     i += 1
                 Next
                 results.Data.Add("SPACE33", Nothing)
                 i = 0
                 For Each comp As String In comps
-                    results.Data.Add("[Liquid Phase 2] " + comp + " Mole Flow", New List(Of Double)({vnz(i)}))
+                    results.Data.Add("[Liquid Phase 2] " + comp + " Mole Flow", New List(Of Double)({vnz(comps0.IndexOf(comp))}))
                     results.DataUnits.Add("[Liquid Phase 2] " + comp + " Mole Flow", units.molarflow)
                     i += 1
                 Next
                 results.Data.Add("SPACE43", Nothing)
                 i = 0
                 For Each comp As String In comps
-                    results.Data.Add("[Liquid Phase 2] " + comp + " Mass Flow", New List(Of Double)({wnz(i)}))
+                    results.Data.Add("[Liquid Phase 2] " + comp + " Mass Flow", New List(Of Double)({wnz(comps0.IndexOf(comp))}))
                     results.DataUnits.Add("[Liquid Phase 2] " + comp + " Mass Flow", units.massflow)
                     i += 1
                 Next
@@ -6445,28 +6446,28 @@ Namespace Streams
                 results.Data.Add("SPACE12S", Nothing)
                 i = 0
                 For Each comp As String In comps
-                    results.Data.Add("[Solid Phase] " + comp + " Mole Frac", New List(Of Double)({vz(i)}))
+                    results.Data.Add("[Solid Phase] " + comp + " Mole Frac", New List(Of Double)({vz(comps0.IndexOf(comp))}))
                     results.DataUnits.Add("[Solid Phase] " + comp + " Mole Frac", "")
                     i += 1
                 Next
                 results.Data.Add("SPACE22S", Nothing)
                 i = 0
                 For Each comp As String In comps
-                    results.Data.Add("[Solid Phase] " + comp + " Mass Frac", New List(Of Double)({wz(i)}))
+                    results.Data.Add("[Solid Phase] " + comp + " Mass Frac", New List(Of Double)({wz(comps0.IndexOf(comp))}))
                     results.DataUnits.Add("[Solid Phase] " + comp + " Mass Frac", "")
                     i += 1
                 Next
                 results.Data.Add("SPACE32S", Nothing)
                 i = 0
                 For Each comp As String In comps
-                    results.Data.Add("[Solid Phase] " + comp + " Mole Flow", New List(Of Double)({vnz(i)}))
+                    results.Data.Add("[Solid Phase] " + comp + " Mole Flow", New List(Of Double)({vnz(comps0.IndexOf(comp))}))
                     results.DataUnits.Add("[Solid Phase] " + comp + " Mole Flow", units.molarflow)
                     i += 1
                 Next
                 results.Data.Add("SPACE42S", Nothing)
                 i = 0
                 For Each comp As String In comps
-                    results.Data.Add("[Solid Phase] " + comp + " Mass Flow", New List(Of Double)({wnz(i)}))
+                    results.Data.Add("[Solid Phase] " + comp + " Mass Flow", New List(Of Double)({wnz(comps0.IndexOf(comp))}))
                     results.DataUnits.Add("[Solid Phase] " + comp + " Mass Flow", units.massflow)
                     i += 1
                 Next
@@ -6533,6 +6534,7 @@ Namespace Streams
             Dim props As String() = PropertyPackage.GetSinglePhasePropList()
             Dim overallprops As String() = PropertyPackage.GetOverallPropList()
             Dim comps As String() = PropertyPackage.RET_VNAMES2(GetFlowsheet().FlowsheetOptions.CompoundOrderingMode)
+            Dim comps0 = PropertyPackage.RET_VNAMES2(CompoundOrdering.AsAdded).ToList
 
             Dim units As IUnitsOfMeasure = GetFlowsheet().FlowsheetOptions.SelectedUnitSystem
             Dim nf = GetFlowsheet().FlowsheetOptions.NumberFormat
@@ -6630,7 +6632,7 @@ Namespace Streams
                 For Each comp As String In comps
                     list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
                     New String() {comp,
-                    vz(i).ToString(nff)}))
+                    vz(comps0.IndexOf(comp)).ToString(nff)}))
                     i += 1
                 Next
 
@@ -6640,7 +6642,7 @@ Namespace Streams
                 For Each comp As String In comps
                     list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
                     New String() {comp,
-                    wz(i).ToString(nff)}))
+                    wz(comps0.IndexOf(comp)).ToString(nff)}))
                     i += 1
                 Next
 
@@ -6650,7 +6652,7 @@ Namespace Streams
                 For Each comp As String In comps
                     list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
                     New String() {comp,
-                    vnz(i).ToString(nff)}))
+                    vnz(comps0.IndexOf(comp)).ToString(nff)}))
                     i += 1
                 Next
 
@@ -6660,7 +6662,7 @@ Namespace Streams
                 For Each comp As String In comps
                     list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
                     New String() {comp,
-                    wnz(i).ToString(nff)}))
+                    wnz(comps0.IndexOf(comp)).ToString(nff)}))
                     i += 1
                 Next
 
@@ -6709,7 +6711,7 @@ Namespace Streams
                 For Each comp As String In comps
                     list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
                     New String() {comp,
-                    vz(i).ToString(nff)}))
+                    vz(comps0.IndexOf(comp)).ToString(nff)}))
                     i += 1
                 Next
 
@@ -6719,7 +6721,7 @@ Namespace Streams
                 For Each comp As String In comps
                     list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
                     New String() {comp,
-                    wz(i).ToString(nff)}))
+                    wz(comps0.IndexOf(comp)).ToString(nff)}))
                     i += 1
                 Next
 
@@ -6729,7 +6731,7 @@ Namespace Streams
                 For Each comp As String In comps
                     list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
                     New String() {comp,
-                    vnz(i).ToString(nff)}))
+                    vnz(comps0.IndexOf(comp)).ToString(nff)}))
                     i += 1
                 Next
 
@@ -6739,7 +6741,7 @@ Namespace Streams
                 For Each comp As String In comps
                     list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
                     New String() {comp,
-                    wnz(i).ToString(nff)}))
+                    wnz(comps0.IndexOf(comp)).ToString(nff)}))
                     i += 1
                 Next
 
@@ -6806,7 +6808,7 @@ Namespace Streams
                 For Each comp As String In comps
                     list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
                     New String() {comp,
-                    vz(i).ToString(nff)}))
+                    vz(comps0.IndexOf(comp)).ToString(nff)}))
                     i += 1
                 Next
 
@@ -6816,7 +6818,7 @@ Namespace Streams
                 For Each comp As String In comps
                     list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
                     New String() {comp,
-                    wz(i).ToString(nff)}))
+                    wz(comps0.IndexOf(comp)).ToString(nff)}))
                     i += 1
                 Next
 
@@ -6826,7 +6828,7 @@ Namespace Streams
                 For Each comp As String In comps
                     list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
                     New String() {comp,
-                    vnz(i).ToString(nff)}))
+                    vnz(comps0.IndexOf(comp)).ToString(nff)}))
                     i += 1
                 Next
 
@@ -6836,7 +6838,7 @@ Namespace Streams
                 For Each comp As String In comps
                     list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
                     New String() {comp,
-                    wnz(i).ToString(nff)}))
+                    wnz(comps0.IndexOf(comp)).ToString(nff)}))
                     i += 1
                 Next
 
@@ -6903,7 +6905,7 @@ Namespace Streams
                 For Each comp As String In comps
                     list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
                     New String() {comp,
-                    vz(i).ToString(nff)}))
+                    vz(comps0.IndexOf(comp)).ToString(nff)}))
                     i += 1
                 Next
 
@@ -6913,7 +6915,7 @@ Namespace Streams
                 For Each comp As String In comps
                     list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
                     New String() {comp,
-                    wz(i).ToString(nff)}))
+                    wz(comps0.IndexOf(comp)).ToString(nff)}))
                     i += 1
                 Next
 
@@ -6923,7 +6925,7 @@ Namespace Streams
                 For Each comp As String In comps
                     list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
                     New String() {comp,
-                    vnz(i).ToString(nff)}))
+                    vnz(comps0.IndexOf(comp)).ToString(nff)}))
                     i += 1
                 Next
 
@@ -6933,7 +6935,7 @@ Namespace Streams
                 For Each comp As String In comps
                     list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
                     New String() {comp,
-                    wnz(i).ToString(nff)}))
+                    wnz(comps0.IndexOf(comp)).ToString(nff)}))
                     i += 1
                 Next
 
@@ -6999,7 +7001,7 @@ Namespace Streams
                 For Each comp As String In comps
                     list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
                     New String() {comp,
-                    vz(i).ToString(nff)}))
+                    vz(comps0.IndexOf(comp)).ToString(nff)}))
                     i += 1
                 Next
 
@@ -7009,7 +7011,7 @@ Namespace Streams
                 For Each comp As String In comps
                     list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
                     New String() {comp,
-                    wz(i).ToString(nff)}))
+                    wz(comps0.IndexOf(comp)).ToString(nff)}))
                     i += 1
                 Next
 
@@ -7019,7 +7021,7 @@ Namespace Streams
                 For Each comp As String In comps
                     list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
                     New String() {comp,
-                    vnz(i).ToString(nff)}))
+                    vnz(comps0.IndexOf(comp)).ToString(nff)}))
                     i += 1
                 Next
 
@@ -7029,7 +7031,7 @@ Namespace Streams
                 For Each comp As String In comps
                     list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.DoubleColumn,
                     New String() {comp,
-                    wnz(i).ToString(nff)}))
+                    wnz(comps0.IndexOf(comp)).ToString(nff)}))
                     i += 1
                 Next
 
