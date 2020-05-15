@@ -21,6 +21,8 @@ del ..\DistPackages\Windows\plugins\*Skia*
 del ..\DistPackages\Windows\plugins\*Eto*
 rmdir /s /q ..\DistPackages\Windows\plugins\x86
 rmdir /s /q ..\DistPackages\Windows\plugins\x64
+rmdir /s /q ..\DistPackages\Windows\x86
+rmdir /s /q ..\DistPackages\Windows\x64
 
 del ..\DistPackages\Windows_32\plugins\*Skia*
 del ..\DistPackages\Windows_32\plugins\*Eto*
@@ -48,5 +50,8 @@ xcopy "..\DWSIM\Lib\*" "..\DistPackages\Linux\Lib\*" /E /Y /F /D
 xcopy "..\DWSIM\Lib\*" "..\DistPackages\Raspberry\Lib\*" /E /Y /F /D
 
 xcopy "..\DistPackages\Windows\*" "..\DistPackages\Windows_Plus\*" /E /Y /F /D
+
+rmdir /s /q ..\DistPackages\Windows_Plus\x86
+rmdir /s /q ..\DistPackages\Windows_Plus\x64
 
 pause
