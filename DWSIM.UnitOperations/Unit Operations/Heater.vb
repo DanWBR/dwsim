@@ -42,6 +42,7 @@ Namespace UnitOperations
             EnergyStream = 2
             OutletVaporFraction = 3
             TemperatureChange = 4
+            HeatAddedRemoved = 5 'for mobile compatibility
         End Enum
 
         Protected m_dp As Nullable(Of Double)
@@ -379,7 +380,7 @@ Namespace UnitOperations
 
             Select Case Me.CalcMode
 
-                Case CalculationMode.HeatAdded
+                Case CalculationMode.HeatAdded, CalculationMode.HeatAddedRemoved
 
                     IObj?.Paragraphs.Add("Calculation Mode: Heat Added")
 

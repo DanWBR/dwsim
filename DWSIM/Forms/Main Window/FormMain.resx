@@ -156,9 +156,6 @@
   <data name="CloseAllToolstripMenuItem.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="ButtonClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>347, 2</value>
-  </data>
   <data name="&gt;&gt;PictureBox1.Parent" xml:space="preserve">
     <value>ErrorBox_Panel</value>
   </data>
@@ -2484,6 +2481,9 @@
   <data name="&gt;&gt;MenuStrip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="TileHorizontalToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 22</value>
+  </data>
   <data name="&gt;&gt;ForumToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -2505,8 +2505,8 @@
   <data name="RastreamentoDeBugsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>174, 22</value>
   </data>
-  <data name="&gt;&gt;WindowsMenu.Name" xml:space="preserve">
-    <value>WindowsMenu</value>
+  <data name="OpenToolStripButton.Text" xml:space="preserve">
+    <value>&amp;Abrir Simulação</value>
   </data>
   <data name="&gt;&gt;GuiaDoUsuarioToolStripMenuItem.Name" xml:space="preserve">
     <value>GuiaDoUsuarioToolStripMenuItem</value>
@@ -2574,6 +2574,9 @@
   <data name="tsbRegCO.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
+  <data name="&gt;&gt;WindowsMenu.Name" xml:space="preserve">
+    <value>WindowsMenu</value>
+  </data>
   <data name="DWSIMNaInternetToolStripMenuItem.Text" xml:space="preserve">
     <value>DWSIM na Internet</value>
   </data>
@@ -2582,9 +2585,6 @@
   </data>
   <data name="NovoRegressaoUNIFACIPs.Text" xml:space="preserve">
     <value>Nova Regressão de Parâmetros UNIFAC</value>
-  </data>
-  <data name="SaveUnifacIPRegrDlg.Filter" xml:space="preserve">
-    <value>Estudo de Regressão de UNIFAC IPs |*.dwruf</value>
   </data>
   <data name="&gt;&gt;ErrorBox_Panel.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -2634,8 +2634,8 @@
   <data name="PainelDeBoasvindasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>229, 22</value>
   </data>
-  <data name="TileHorizontalToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 22</value>
+  <data name="&gt;&gt;ToolStripButton3.Name" xml:space="preserve">
+    <value>ToolStripButton3</value>
   </data>
   <data name="&gt;&gt;RegistroCAPEOPENToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2658,8 +2658,8 @@
   <data name="&gt;&gt;SaveAllToolStripButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="OpenToolStripButton.Text" xml:space="preserve">
-    <value>&amp;Abrir Simulação</value>
+  <data name="SaveUnifacIPRegrDlg.Filter" xml:space="preserve">
+    <value>Estudo de Regressão de UNIFAC IPs |*.dwruf</value>
   </data>
   <data name="&gt;&gt;OpenToolStripMenuItem.Name" xml:space="preserve">
     <value>OpenToolStripMenuItem</value>
@@ -2901,11 +2901,11 @@
   <data name="ToolStripButton4.Text" xml:space="preserve">
     <value>Agrupar Verticalmente</value>
   </data>
+  <data name="ButtonClose.Location" type="System.Drawing.Point, System.Drawing">
+    <value>347, 2</value>
+  </data>
   <data name="&gt;&gt;NewToolStripMenuItem.Name" xml:space="preserve">
     <value>NewToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;ToolStripButton3.Name" xml:space="preserve">
-    <value>ToolStripButton3</value>
   </data>
   <data name="ToolStripButton5.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>

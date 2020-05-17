@@ -880,7 +880,7 @@ Public Class FormFlowsheet
         End If
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(sender As Object, e As EventArgs)
         Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Mobile_Compatibility_Mode")
     End Sub
 
@@ -1792,49 +1792,6 @@ Public Class FormFlowsheet
 
     Private Sub TimerScripts60_Tick(sender As Object, e As EventArgs) Handles TimerScripts60.Tick
         Me.ProcessScripts(Enums.Scripts.EventType.SimulationTimer60, Enums.Scripts.ObjectType.Simulation, "")
-    End Sub
-
-#End Region
-
-#Region "    Question Box"
-
-    Private Sub QuestionBox_Button1_Click(sender As Object, e As EventArgs) Handles QuestionBox_Button1.Click
-        Me.QuestionBox_Panel.Visible = False
-        Select Case QuestionID
-            Case 0 'question about adding or not a new user-defined unit from the simulation file
-                AddUnitSystem(Me.Options.SelectedUnitSystem)
-        End Select
-    End Sub
-
-    Private Sub QuestionBox_Button2_Click(sender As Object, e As EventArgs) Handles QuestionBox_Button2.Click
-        Me.QuestionBox_Panel.Visible = False
-    End Sub
-
-    Sub ShowQuestionPanel(ByVal icon As MessageBoxIcon, ByVal question As String, ByVal button1visible As Boolean, ByVal button1text As String, ByVal button2visible As Boolean, ByVal button2text As String)
-
-        Me.QuestionBox_Panel.Visible = True
-
-        Select Case icon
-            Case MessageBoxIcon.Information
-                QuestionBox_PictureBox1.Image = My.Resources.information
-            Case MessageBoxIcon.Error
-                QuestionBox_PictureBox1.Image = My.Resources.cross
-            Case MessageBoxIcon.Exclamation
-                QuestionBox_PictureBox1.Image = My.Resources.exclamation
-            Case MessageBoxIcon.Question
-                QuestionBox_PictureBox1.Image = My.Resources.help
-            Case MessageBoxIcon.Warning
-                QuestionBox_PictureBox1.Image = My.Resources._error
-        End Select
-
-        QuestionBox_Label1.Text = question
-
-        QuestionBox_Button1.Visible = button1visible
-        QuestionBox_Button2.Visible = button2visible
-
-        QuestionBox_Button1.Text = button1text
-        QuestionBox_Button2.Text = button2text
-
     End Sub
 
 #End Region

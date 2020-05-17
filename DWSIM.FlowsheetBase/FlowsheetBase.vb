@@ -1534,7 +1534,10 @@ Imports DWSIM.Interfaces.Enums
         Dim xdoc = SaveToXML()
 
         Parallel.ForEach(xdoc.Descendants, Sub(xel1)
-                                               SharedClasses.Utility.UpdateElementForMobileXMLSaving_CrossPlatformUI(xel1)
+                                               Try
+                                                   SharedClasses.Utility.UpdateElementForMobileXMLSaving_CrossPlatformUI(xel1)
+                                               Catch ex As Exception
+                                               End Try
                                            End Sub)
 
         Return xdoc
