@@ -804,18 +804,13 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         IObj?.Paragraphs.Add(String.Format("Converged Value for Liquid Phase 1 Molar Composition: {0}", Vx1.ToMathArrayString))
                         IObj?.Paragraphs.Add(String.Format("Converged Value for Liquid Phase 2 Molar Composition: {0}", Vx2.ToMathArrayString))
 
-                        'order liquid phases by mixture NBP
+                        'order liquid phases by density
 
-                        Dim VNBP = PP.RET_VTB()
-                        Dim nbp1 As Double = 0
-                        Dim nbp2 As Double = 0
+                        Dim dens1, dens2 As Double
+                        dens1 = PP.AUX_LIQDENS(T, Vx1, P)
+                        dens2 = PP.AUX_LIQDENS(T, Vx2, P)
 
-                        For i = 0 To n
-                            nbp1 += Vx1(i) * VNBP(i)
-                            nbp2 += Vx2(i) * VNBP(i)
-                        Next
-
-                        If nbp1 >= nbp2 Then
+                        If dens1 <= dens2 Then
                             result = New Object() {L1 / F, V / F, Vx1, Vy, ecount, L2 / F, Vx2, 0.0#, PP.RET_NullVector}
                         Else
                             result = New Object() {L2 / F, V / F, Vx2, Vy, ecount, L1 / F, Vx1, 0.0#, PP.RET_NullVector}

@@ -1668,16 +1668,11 @@ out:
                 Vx2 = PP.RET_NullVector
                 Return New Object() {L1, V, Vx1, Vy, ecount, L2, Vx2, 0.0#, PP.RET_NullVector}
             Else
-                'order liquid phases by mixture NBP
-
-                Dim VNBP = PP.RET_VTB()
-                Dim nbp1 As Double = 0
-                Dim nbp2 As Double = 0
-                For i = 0 To n
-                    nbp1 += Vx1(i) * VNBP(i)
-                    nbp2 += Vx2(i) * VNBP(i)
-                Next
-                If nbp1 >= nbp2 Then
+                'order liquid phases by density
+                Dim dens1, dens2 As Double
+                dens1 = PP.AUX_LIQDENS(T, Vx1, P)
+                dens2 = PP.AUX_LIQDENS(T, Vx2, P)
+                If dens1 <= dens2 Then
                     Return New Object() {L1, V, Vx1, Vy, ecount, L2, Vx2, 0.0#, PP.RET_NullVector}
                 Else
                     Return New Object() {L2, V, Vx2, Vy, ecount, L1, Vx1, 0.0#, PP.RET_NullVector}

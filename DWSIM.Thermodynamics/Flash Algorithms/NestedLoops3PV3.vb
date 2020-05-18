@@ -1008,16 +1008,12 @@ out2:       d2 = Date.Now
 
 out:
 
-            'order liquid phases by mixture NBP
+            'order liquid phases by density
 
-            Dim VNBP = PP.RET_VTB()
-            Dim nbp1 As Double = 0.0#
-            Dim nbp2 As Double = 0.0#
+            Dim dens1, dens2 As Double
 
-            For i = 0 To n
-                nbp1 += Vx1(i) * VNBP(i)
-                nbp2 += Vx2(i) * VNBP(i)
-            Next
+            dens1 = PP.AUX_LIQDENS(T, Vx1, P)
+            dens2 = PP.AUX_LIQDENS(T, Vx2, P)
 
             Dim g3 = Gibbs(PP, T, P, L1, L2, Vy, Vx1, Vx2)
 
@@ -1035,8 +1031,7 @@ out:
 
             IObj?.Close()
 
-
-            If nbp1 >= nbp2 Then
+            If dens1 <= dens2 Then
                 prevres = New PreviousResults With {.L1 = L1, .L2 = L2, .V = V, .Vy = Vy, .Vx1 = Vx1, .Vx2 = Vx2}
                 Return New Object() {L1, V, Vx1, Vy, ecount, L2, Vx2, 0.0#, PP.RET_NullVector}
             Else
