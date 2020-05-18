@@ -2120,16 +2120,40 @@ namespace DWSIM.UI.Forms
 
         private void DeleteObject()
         {
-            var obj = FlowsheetObject.GetSelectedFlowsheetSimulationObject(null);
-            if (obj == null) return;
-            if (MessageBox.Show(this, "Confirm object removal?", "Delete Object", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes)
+            var n = FlowsheetControl.FlowsheetSurface.SelectedObjects.Count;
+            if (n > 1)
             {
-                var editor = EditorHolder.Pages.Where(x => (string)x.Content.Tag == obj.Name).FirstOrDefault();
-                if (editor != null)
+                if (MessageBox.Show("Delete " + n.ToString() + " objects?", "Mass Delete", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    EditorHolder.Pages.Remove(editor);
+                    var indexes = new List<string>();
+                    foreach (GraphicObject gobj in FlowsheetControl.FlowsheetSurface.SelectedObjects.Values)
+                    {
+                        indexes.Add(gobj.Tag);
+                    }
+                    foreach (string s in indexes)
+                    {
+                        Interfaces.IGraphicObject gobj;
+                        gobj = FlowsheetObject.GetFlowsheetSimulationObject(s).GraphicObject;
+                        if (gobj != null)
+                        {
+                            FlowsheetObject.DeleteSelectedObject(this, new EventArgs(), gobj, false, false);
+                        }
+                    }
                 }
-                FlowsheetObject.DeleteSelectedObject(this, new EventArgs(), obj.GraphicObject, false, false);
+            }
+            else if (n == 1)
+            {
+                var obj = FlowsheetObject.GetSelectedFlowsheetSimulationObject(null);
+                if (obj == null) return;
+                if (MessageBox.Show(this, "Confirm object removal?", "Delete Object", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes)
+                {
+                    var editor = EditorHolder.Pages.Where(x => (string)x.Content.Tag == obj.Name).FirstOrDefault();
+                    if (editor != null)
+                    {
+                        EditorHolder.Pages.Remove(editor);
+                    }
+                    FlowsheetObject.DeleteSelectedObject(this, new EventArgs(), obj.GraphicObject, false, false);
+                }
             }
         }
 
