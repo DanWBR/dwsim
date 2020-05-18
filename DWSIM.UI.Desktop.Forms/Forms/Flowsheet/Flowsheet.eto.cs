@@ -2133,7 +2133,7 @@ namespace DWSIM.UI.Forms
                     foreach (string s in indexes)
                     {
                         Interfaces.IGraphicObject gobj;
-                        gobj = FlowsheetObject.GetFlowsheetSimulationObject(s).GraphicObject;
+                        gobj = FlowsheetObject.GetFlowsheetSimulationObject(s)?.GraphicObject;
                         if (gobj != null)
                         {
                             FlowsheetObject.DeleteSelectedObject(this, new EventArgs(), gobj, false, false);
