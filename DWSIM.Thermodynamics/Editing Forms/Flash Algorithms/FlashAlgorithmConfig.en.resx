@@ -268,6 +268,15 @@
   <data name="TabPageConvPars.Text" xml:space="preserve">
     <value>Convergence</value>
   </data>
+  <data name="tbPH_MaxDT.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 20</value>
+  </data>
+  <data name="Label29.Size" type="System.Drawing.Size, System.Drawing">
+    <value>321, 13</value>
+  </data>
+  <data name="Label29.Text" xml:space="preserve">
+    <value>PH/PS Flash - Maximum Temperature Update Delta (K) (1.0 - 50.0)</value>
+  </data>
   <data name="tbPV_DampingFactor.Size" type="System.Drawing.Size, System.Drawing">
     <value>147, 20</value>
   </data>

@@ -274,6 +274,8 @@ Namespace Enums
 
         CheckIncipientLiquidForStability = 22
 
+        PHFlash_MaximumTemperatureChange = 23
+
     End Enum
 
     Public Enum FlashCalculationType

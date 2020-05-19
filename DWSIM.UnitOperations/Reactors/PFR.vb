@@ -751,7 +751,7 @@ Namespace Reactors
 
                                 Hp = Hr - DHr
 
-                                IObj?.SetCurrent()
+                                IObj2?.SetCurrent()
 
                                 tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P, Hp / W, T)
                                 Dim Tout As Double = tmp.CalculatedTemperature.GetValueOrDefault
@@ -782,7 +782,7 @@ Namespace Reactors
 
                         End Select
 
-                        IObj?.SetCurrent()
+                        IObj2?.SetCurrent()
                         ims.PropertyPackage.CurrentMaterialStream = ims
                         ims.Calculate(True, True)
 

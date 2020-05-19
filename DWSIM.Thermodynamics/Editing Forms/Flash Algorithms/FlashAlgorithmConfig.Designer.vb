@@ -53,6 +53,8 @@ Partial Class FlashAlgorithmConfig
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TabPageNL = New System.Windows.Forms.TabPage()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.tbPH_MaxDT = New System.Windows.Forms.TextBox()
+        Me.Label29 = New System.Windows.Forms.Label()
         Me.tbPV_DampingFactor = New System.Windows.Forms.TextBox()
         Me.tbPV_MaxDT = New System.Windows.Forms.TextBox()
         Me.Label24 = New System.Windows.Forms.Label()
@@ -334,6 +336,8 @@ Partial Class FlashAlgorithmConfig
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.tbPH_MaxDT)
+        Me.GroupBox2.Controls.Add(Me.Label29)
         Me.GroupBox2.Controls.Add(Me.tbPV_DampingFactor)
         Me.GroupBox2.Controls.Add(Me.tbPV_MaxDT)
         Me.GroupBox2.Controls.Add(Me.Label24)
@@ -343,6 +347,16 @@ Partial Class FlashAlgorithmConfig
         Me.GroupBox2.Controls.Add(Me.chkFastModeNL)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
+        '
+        'tbPH_MaxDT
+        '
+        resources.ApplyResources(Me.tbPH_MaxDT, "tbPH_MaxDT")
+        Me.tbPH_MaxDT.Name = "tbPH_MaxDT"
+        '
+        'Label29
+        '
+        resources.ApplyResources(Me.Label29, "Label29")
+        Me.Label29.Name = "Label29"
         '
         'tbPV_DampingFactor
         '
@@ -899,4 +913,6 @@ Partial Class FlashAlgorithmConfig
     Friend WithEvents GroupBox9 As GroupBox
     Friend WithEvents chkForcePT3P As CheckBox
     Friend WithEvents Label28 As Label
+    Friend WithEvents tbPH_MaxDT As TextBox
+    Friend WithEvents Label29 As Label
 End Class

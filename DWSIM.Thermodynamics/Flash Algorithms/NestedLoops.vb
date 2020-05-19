@@ -492,7 +492,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             Tmax = 10000.0#
             Tmin = 20.0#
-            maxDT = 30.0#
+            maxDT = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_MaximumTemperatureChange).ToDoubleFromInvariant
 
             epsilon(0) = 1
             epsilon(1) = 0.1
@@ -547,10 +547,12 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                             Task.WaitAll(task1, task2)
 
                         Else
+
                             IObj2?.SetCurrent()
                             fx = Herror("PT", x1, P, Vz, PP)(0)
                             IObj2?.SetCurrent()
                             fx2 = Herror("PT", x1 + epsilon(j), P, Vz, PP)(0)
+
                         End If
 
                         IObj2?.Paragraphs.Add(String.Format("Current Enthalpy error: {0}", fx2))
@@ -759,6 +761,13 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 For i = 0 To n
                     Ki(i) = Vy(i) / Vx(i)
                 Next
+
+                If T <= Tmin Or T >= Tmax Or ecount > maxitEXT Then
+                    Dim ex As New Exception("PH Flash [NL]: Invalid result: Temperature did not converge." & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))
+                    ex.Data.Add("DetailedDescription", "The Flash Algorithm was unable to converge to a solution.")
+                    ex.Data.Add("UserAction", "Try another Property Package and/or Flash Algorithm.")
+                    Throw ex
+                End If
 
             ElseIf Hd > 0 Then
 

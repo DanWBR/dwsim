@@ -166,6 +166,8 @@ Public Class FlashAlgorithmConfig
             tbPV_EpsilonT.Text = Double.Parse(Settings(Interfaces.Enums.FlashSetting.PVFlash_TemperatureDerivativeEpsilon), ci).ToString
             tbPV_MaxDT.Text = Double.Parse(Settings(Interfaces.Enums.FlashSetting.PVFlash_MaximumTemperatureChange), ci).ToString
 
+            tbPH_MaxDT.Text = Double.Parse(Settings(Interfaces.Enums.FlashSetting.PHFlash_MaximumTemperatureChange), ci).ToString
+
             chkFastModeNL.Checked = Settings(Interfaces.Enums.FlashSetting.NL_FastMode)
 
             chkUseBroydenIO.Checked = Settings(Interfaces.Enums.FlashSetting.IO_FastMode)
@@ -274,6 +276,8 @@ Public Class FlashAlgorithmConfig
             If tbPV_MaxDT.Text <> "" Then Settings(Interfaces.Enums.FlashSetting.PVFlash_MaximumTemperatureChange) = tbPV_MaxDT.Text.ToDoubleFromCurrent().ToString(ci)
             If tbPV_DampingFactor.Text <> "" Then Settings(Interfaces.Enums.FlashSetting.PVFlash_FixedDampingFactor) = tbPV_DampingFactor.Text.ToDoubleFromCurrent().ToString(ci)
             If tbPV_EpsilonT.Text <> "" Then Settings(Interfaces.Enums.FlashSetting.PVFlash_TemperatureDerivativeEpsilon) = tbPV_EpsilonT.Text.ToDoubleFromCurrent().ToString(ci)
+
+            If tbPH_MaxDT.Text <> "" Then Settings(Interfaces.Enums.FlashSetting.PHFlash_MaximumTemperatureChange) = tbPH_MaxDT.Text.ToDoubleFromCurrent().ToString(ci)
 
             Settings(Interfaces.Enums.FlashSetting.NL_FastMode) = chkFastModeNL.Checked
 
