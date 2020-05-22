@@ -355,6 +355,28 @@ namespace DWSIM.UI.Forms
 
             }
 
+            // dynamics
+
+            if (PageDynamics != null)
+            {
+
+                PageDynamics.Content = null;
+
+                if (obj.ExtraPropertiesDescriptions.Count() > 0 || obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream)
+                {
+
+                    var contd = UI.Shared.Common.GetDefaultContainer();
+
+                    contd.Width = this.Width - 30;
+
+                    new DynamicPropertiesEditor(obj, contd);
+
+                    PageDynamics.Content = new Scrollable() { Content = contd, Width = this.Width - 30 };
+
+                }
+
+            }
+
             PageResults.Content = null;
 
             var container = new TableLayout();

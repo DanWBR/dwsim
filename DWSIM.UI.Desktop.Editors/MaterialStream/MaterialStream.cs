@@ -587,7 +587,7 @@ namespace DWSIM.UI.Desktop.Editors
                     if (ms.GraphicObject.InputConnectors[0].IsAttached &&
                         ms.GraphicObject.InputConnectors[0].AttachedConnector.AttachedFrom.ObjectType != ObjectType.OT_Recycle)
                     {
-                        container2.Enabled = false;
+                       if (!ms.GetFlowsheet().DynamicMode) container2.Enabled = false;
                     }
 
                     break;

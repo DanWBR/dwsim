@@ -63,7 +63,8 @@ namespace DWSIM.UI.Desktop.Editors
                     try
                     {
                         var utype = col3[p.Key];
-                        unitsstring = su.GetCurrentUnits(int.Parse(utype.ToString()).ToEnum<Interfaces.Enums.UnitOfMeasure>());
+                        Interfaces.Enums.UnitOfMeasure eval = (Interfaces.Enums.UnitOfMeasure)System.Enum.ToObject(typeof(Interfaces.Enums.UnitOfMeasure), utype);
+                        unitsstring = su.GetCurrentUnits(eval);
                     }
                     catch { }
                     container.CreateAndAddTextBoxRow("G", unitsstring != "" ? p.Key + " (" + unitsstring + ")" : p.Key, 

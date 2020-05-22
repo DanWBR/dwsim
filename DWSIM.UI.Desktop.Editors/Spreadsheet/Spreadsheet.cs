@@ -49,7 +49,7 @@ namespace DWSIM.UI.Desktop.Editors
         public Spreadsheet(Flowsheet fs)
         {
 
-            Columns.AddRange(new []{ "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"});
+            Columns.AddRange(new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" });
 
             flowsheet = fs;
             scontrol = new ReoGridFullControl();
@@ -133,82 +133,86 @@ namespace DWSIM.UI.Desktop.Editors
 
         private void CreateChartFromRange(object sender, EventArgs e)
         {
-            DocumentPage tabpage = new DocumentPage();
-            var chart = new Chart();
-            object data = Sheet.CurrentWorksheet.GetRangeData(Sheet.CurrentWorksheet.SelectionRange);
-            int firstcol;
-            int lastcol;
-            int firstrow;
-            int lastrow;
-            firstcol = Sheet.CurrentWorksheet.SelectionRange.Col;
-            lastcol = Sheet.CurrentWorksheet.SelectionRange.EndCol;
-            firstrow = (Sheet.CurrentWorksheet.SelectionRange.Row + 1);
-            lastrow = (Sheet.CurrentWorksheet.SelectionRange.EndRow + 1);
-            double d;
-            bool hasheaders = !double.TryParse(Sheet.CurrentWorksheet.Cells[(firstrow - 1), firstcol].Data.ToString(), out d);
-            object name = Sheet.CurrentWorksheet.Name;
-            string xcol = Sheet.CurrentWorksheet.SelectionRange.StartPos.ToAddress().Trim(new char[] {
+            Application.Instance.Invoke(() =>
+            {
+                DocumentPage tabpage = new DocumentPage();
+                var chart = new Chart();
+                object data = Sheet.CurrentWorksheet.GetRangeData(Sheet.CurrentWorksheet.SelectionRange);
+                int firstcol;
+                int lastcol;
+                int firstrow;
+                int lastrow;
+                firstcol = Sheet.CurrentWorksheet.SelectionRange.Col;
+                lastcol = Sheet.CurrentWorksheet.SelectionRange.EndCol;
+                firstrow = (Sheet.CurrentWorksheet.SelectionRange.Row + 1);
+                lastrow = (Sheet.CurrentWorksheet.SelectionRange.EndRow + 1);
+                double d;
+                bool hasheaders = !double.TryParse(Sheet.CurrentWorksheet.Cells[(firstrow - 1), firstcol].Data.ToString(), out d);
+                object name = Sheet.CurrentWorksheet.Name;
+                string xcol = Sheet.CurrentWorksheet.SelectionRange.StartPos.ToAddress().Trim(new char[] {
                     '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'});
-            List<string> ycols = new List<string>();
-            for (int i = (firstcol + 1); (i <= lastcol); i++)
-            {
-                ycols.Add(Sheet.CurrentWorksheet.Cells[0, i].Address.Trim(new char[] {
-                    '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'}));
-            }
-
-            if (hasheaders)
-            {
-                firstrow++;
-            }
-
-            foreach (var item in ycols)
-            {
-                chart.SpreadsheetDataSourcesX.Add((name + ("!"
-                                + (xcol
-                                + (firstrow + (":"
-                                + (xcol + lastrow)))))));
-                chart.SpreadsheetDataSourcesY.Add((name + ("!"
-                                + (item
-                                + (firstrow + (":"
-                                + (item + lastrow)))))));
-            }
-
-            var chartcontrol = new Charts.ChartControl();
-
-            chartcontrol.Flowsheet = this.flowsheet;
-            chartcontrol.Chart = chart;
-            chartcontrol.Spreadsheet = this.Sheet;
-
-            tabpage.Content = chartcontrol;
-
-            if (hasheaders)
-            {
-                chartcontrol.UpdatePlotModelData();
-                var j = 0;
+                List<string> ycols = new List<string>();
                 for (int i = (firstcol + 1); (i <= lastcol); i++)
                 {
-                    ((OxyPlot.PlotModel)chart.PlotModel).Series[j].Title =
-                                        Sheet.CurrentWorksheet.Cells[firstrow - 2, i].Data.ToString();
-                    j += 1;
+                    ycols.Add(Sheet.CurrentWorksheet.Cells[0, i].Address.Trim(new char[] {
+                    '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'}));
                 }
-                ((OxyPlot.PlotModel)chart.PlotModel).Axes[0].Title =
-                    Sheet.CurrentWorksheet.Cells[firstrow - 2, firstcol].Data.ToString();
-                ((OxyPlot.PlotModel)chart.PlotModel).Axes[1].Title = "";
-                if (((OxyPlot.PlotModel)chart.PlotModel).Series.Count == 1)
+
+                if (hasheaders)
                 {
-                    ((OxyPlot.PlotModel)chart.PlotModel).Axes[1].Title =
-                        Sheet.CurrentWorksheet.Cells[firstrow - 2, firstcol + 1].Data.ToString();
+                    firstrow++;
                 }
-            }
 
-            tabpage.Shown += (s1, e1) => {
-                chartcontrol.UpdatePlotModelData();
-                chartcontrol.UpdatePropertiesLayout();
-            };
+                foreach (var item in ycols)
+                {
+                    chart.SpreadsheetDataSourcesX.Add((name + ("!"
+                                    + (xcol
+                                    + (firstrow + (":"
+                                    + (xcol + lastrow)))))));
+                    chart.SpreadsheetDataSourcesY.Add((name + ("!"
+                                    + (item
+                                    + (firstrow + (":"
+                                    + (item + lastrow)))))));
+                }
 
-            tabpage.Text = chart.DisplayName;
-            flowsheet.Charts.Add(chart.ID, chart);
-            flowsheet.AddChart.Invoke(tabpage);
+                var chartcontrol = new Charts.ChartControl();
+
+                chartcontrol.Flowsheet = this.flowsheet;
+                chartcontrol.Chart = chart;
+                chartcontrol.Spreadsheet = this.Sheet;
+
+                tabpage.Content = chartcontrol;
+
+                if (hasheaders)
+                {
+                    chartcontrol.UpdatePlotModelData();
+                    var j = 0;
+                    for (int i = (firstcol + 1); (i <= lastcol); i++)
+                    {
+                        ((OxyPlot.PlotModel)chart.PlotModel).Series[j].Title =
+                                            Sheet.CurrentWorksheet.Cells[firstrow - 2, i].Data.ToString();
+                        j += 1;
+                    }
+                    ((OxyPlot.PlotModel)chart.PlotModel).Axes[0].Title =
+                        Sheet.CurrentWorksheet.Cells[firstrow - 2, firstcol].Data.ToString();
+                    ((OxyPlot.PlotModel)chart.PlotModel).Axes[1].Title = "";
+                    if (((OxyPlot.PlotModel)chart.PlotModel).Series.Count == 1)
+                    {
+                        ((OxyPlot.PlotModel)chart.PlotModel).Axes[1].Title =
+                            Sheet.CurrentWorksheet.Cells[firstrow - 2, firstcol + 1].Data.ToString();
+                    }
+                }
+
+                tabpage.Shown += (s1, e1) =>
+                {
+                    chartcontrol.UpdatePlotModelData();
+                    chartcontrol.UpdatePropertiesLayout();
+                };
+
+                tabpage.Text = chart.DisplayName;
+                flowsheet.Charts.Add(chart.ID, chart);
+                flowsheet.AddChart.Invoke(tabpage);
+            });
         }
 
         public PixelLayout GetSpreadsheet(IFlowsheet obj)

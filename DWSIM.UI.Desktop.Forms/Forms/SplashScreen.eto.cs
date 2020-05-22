@@ -65,10 +65,10 @@ namespace DWSIM.UI.Forms
 
             if (Environment.Is64BitProcess)
             {
-                lbl1a.Text +=  " (" + Assembly.GetExecutingAssembly().GetName().Version.ToString() + ", Cross-Platform UI, (64-bit)";
+                lbl1a.Text +=  " (" + Assembly.GetExecutingAssembly().GetName().Version.ToString() + ", Cross-Platform UI, 64-bit)";
             }
             else {
-                lbl1a.Text += " (" + Assembly.GetExecutingAssembly().GetName().Version.ToString() + ", Cross-Platform UI, (32-bit)";
+                lbl1a.Text += " (" + Assembly.GetExecutingAssembly().GetName().Version.ToString() + ", Cross-Platform UI, 32-bit)";
             }
 
             var lbl3 = new Label { Style = "fixedwidth", Text = "GPLNotice".Localize() };
