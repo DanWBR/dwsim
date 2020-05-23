@@ -62,7 +62,8 @@ namespace DWSIM.UI.Desktop.Editors
                 var ctn = new DynamicLayout();
                 ctn.BackgroundColor = Colors.LightGrey;
                 s.CreateAndAddLabelRow(ctn, "Inspector Reports");
-                s.CreateAndAddLabelAndButtonRow(ctn, "An Inspector Report is ready for viewing.", "View Report", null, (btn, e) => {
+                s.CreateAndAddLabelAndButtonRow(ctn, "An Inspector Report is ready for viewing.", "View Report", null, (btn, e) =>
+                {
                     var f = s.GetDefaultEditorForm("Inspector Report for '" + MatStream.GraphicObject.Tag + "'", 1024, 768, Window2_Eto.GetInspectorWindow(MatStream), false);
                     f.Show();
                 });
@@ -184,7 +185,7 @@ namespace DWSIM.UI.Desktop.Editors
                                                }
                                            }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)MatStream.GetFlowsheet()).HighLevelSolve.Invoke(); });
                     s.CreateAndAddDescriptionRow(container2, ms.GetPropertyDescription("Temperature"));
-                    s.CreateAndAddTextBoxRow(container2, nf, "Pressure (" + su.pressure + ")", cv.ConvertFromSI(su.pressure, ms.Phases[0].Properties.pressure.GetValueOrDefault()),
+                    var txtP = s.CreateAndAddTextBoxRow(container2, nf, "Pressure (" + su.pressure + ")", cv.ConvertFromSI(su.pressure, ms.Phases[0].Properties.pressure.GetValueOrDefault()),
                                            (TextBox arg3, EventArgs ev) =>
                                            {
                                                if (arg3.Text.IsValidDoubleExpression())
@@ -277,7 +278,7 @@ namespace DWSIM.UI.Desktop.Editors
                                                }
                                            }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)MatStream.GetFlowsheet()).HighLevelSolve.Invoke(); });
                     s.CreateAndAddDescriptionRow(container2, ms.GetPropertyDescription("Molar Flow"));
-                    s.CreateAndAddTextBoxRow(container2, nf, "Volumetric Flow (" + su.volumetricFlow + ")", cv.ConvertFromSI(su.volumetricFlow, ms.Phases[0].Properties.volumetric_flow.GetValueOrDefault()),
+                    var txtV = s.CreateAndAddTextBoxRow(container2, nf, "Volumetric Flow (" + su.volumetricFlow + ")", cv.ConvertFromSI(su.volumetricFlow, ms.Phases[0].Properties.volumetric_flow.GetValueOrDefault()),
                                            (TextBox arg3, EventArgs ev) =>
                                            {
                                                if (arg3.Text.IsValidDoubleExpression())
@@ -362,8 +363,8 @@ namespace DWSIM.UI.Desktop.Editors
                             else
                             {
                                 etext.TextColor = (Colors.Red);
-                                    //Toast.MakeText(this.Context, "Error parsing '" + etext.Text + "' for " + (String)etext.Tag + ", not a valid number. Please input a valid number and try again.", ToastLength.Short).Show();
-                                }
+                                //Toast.MakeText(this.Context, "Error parsing '" + etext.Text + "' for " + (String)etext.Tag + ", not a valid number. Please input a valid number and try again.", ToastLength.Short).Show();
+                            }
                         }
                         foreach (var etext in tblist)
                         {
@@ -420,8 +421,8 @@ namespace DWSIM.UI.Desktop.Editors
                                     }
                                     else
                                     {
-                                            //Toast.MakeText(this.Context, "Error parsing '" + etext.Text + "' for " + (String)etext.Tag + ", not a valid number. Please input a valid number and try again.", ToastLength.Short).Show();
-                                        }
+                                        //Toast.MakeText(this.Context, "Error parsing '" + etext.Text + "' for " + (String)etext.Tag + ", not a valid number. Please input a valid number and try again.", ToastLength.Short).Show();
+                                    }
                                 }
 
                                 foreach (var comp in MatStream.Phases[0].Compounds.Values)
@@ -447,8 +448,8 @@ namespace DWSIM.UI.Desktop.Editors
                                     }
                                     else
                                     {
-                                            //Toast.MakeText(this.Context, "Error parsing '" + etext.Text + "' for " + (String)etext.Tag + ", not a valid number. Please input a valid number and try again.", ToastLength.Short).Show();
-                                        }
+                                        //Toast.MakeText(this.Context, "Error parsing '" + etext.Text + "' for " + (String)etext.Tag + ", not a valid number. Please input a valid number and try again.", ToastLength.Short).Show();
+                                    }
                                 }
 
                                 foreach (var comp in MatStream.Phases[0].Compounds.Values)
@@ -474,8 +475,8 @@ namespace DWSIM.UI.Desktop.Editors
                                     }
                                     else
                                     {
-                                            //Toast.MakeText(this.Context, "Error parsing '" + etext.Text + "' for " + (String)etext.Tag + ", not a valid number. Please input a valid number and try again.", ToastLength.Short).Show();
-                                        }
+                                        //Toast.MakeText(this.Context, "Error parsing '" + etext.Text + "' for " + (String)etext.Tag + ", not a valid number. Please input a valid number and try again.", ToastLength.Short).Show();
+                                    }
                                 }
 
                                 Q = cv.ConvertToSI(su.molarflow, total);
@@ -514,8 +515,8 @@ namespace DWSIM.UI.Desktop.Editors
                                     }
                                     else
                                     {
-                                            //Toast.MakeText(this.Context, "Error parsing '" + etext.Text + "' for " + (String)etext.Tag + ", not a valid number. Please input a valid number and try again.", ToastLength.Short).Show();
-                                        }
+                                        //Toast.MakeText(this.Context, "Error parsing '" + etext.Text + "' for " + (String)etext.Tag + ", not a valid number. Please input a valid number and try again.", ToastLength.Short).Show();
+                                    }
                                 }
 
                                 W = cv.ConvertToSI(su.massflow, total);
@@ -548,8 +549,9 @@ namespace DWSIM.UI.Desktop.Editors
 
                     };
 
-                    s.CreateAndAddLabelAndTwoButtonsRow(container2,"Copy/Paste", "Copy Data", null, "Paste Data", null,
-                        (btn1, e1) => {
+                    s.CreateAndAddLabelAndTwoButtonsRow(container2, "Copy/Paste", "Copy Data", null, "Paste Data", null,
+                        (btn1, e1) =>
+                        {
                             string data = "";
                             foreach (var tb in tblist)
                             {
@@ -557,7 +559,8 @@ namespace DWSIM.UI.Desktop.Editors
                             }
                             Clipboard.Instance.Text = data;
                         },
-                        (btn2, e2) => {
+                        (btn2, e2) =>
+                        {
                             if (Clipboard.Instance.ContainsText)
                             {
                                 var textdata = Clipboard.Instance.Text;
@@ -587,9 +590,8 @@ namespace DWSIM.UI.Desktop.Editors
                     if (ms.GraphicObject.InputConnectors[0].IsAttached &&
                         ms.GraphicObject.InputConnectors[0].AttachedConnector.AttachedFrom.ObjectType != ObjectType.OT_Recycle)
                     {
-                       if (!ms.GetFlowsheet().DynamicMode) container2.Enabled = false;
+                        if (!ms.GetFlowsheet().DynamicMode) container2.Enabled = false;
                     }
-
                     break;
             }
         }
