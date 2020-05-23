@@ -61,6 +61,10 @@ Namespace UnitOperations
 
         Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.CAPEOPEN
 
+        Public Property EmbeddedImageData As String = ""
+
+        Public Property UseEmbeddedImage As Boolean = False
+
         Public Overrides ReadOnly Property SupportsDynamicMode As Boolean = True
 
         Public Sub New()

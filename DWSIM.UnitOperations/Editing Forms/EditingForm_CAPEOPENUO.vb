@@ -56,6 +56,8 @@ Public Class EditingForm_CAPEOPENUO
 
             'first block
 
+            chkUseEmbeddedImage.Checked = .UseEmbeddedImage
+
             chkActive.Checked = .GraphicObject.Active
 
             Me.Text = .GraphicObject.Tag & " (" & .GetDisplayName() & ")"
@@ -216,11 +218,6 @@ Public Class EditingForm_CAPEOPENUO
                         End If
                 End Select
             Next
-
-            Dim shapes As String() = [Enum].GetNames(.GraphicObject.ShapeOverride.GetType)
-            cbOverrideShape.Items.Clear()
-            cbOverrideShape.Items.AddRange(shapes)
-            cbOverrideShape.SelectedItem = .GraphicObject.ShapeOverride.ToString
 
             'property package
 
@@ -531,19 +528,6 @@ Public Class EditingForm_CAPEOPENUO
 
     End Sub
 
-    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles chkRecalc.CheckedChanged
-        If Loaded Then
-            SimObject.RecalcOutputStreams = chkRecalc.Checked
-            RequestCalc()
-        End If
-    End Sub
-
-    Private Sub cbOverrideShape_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbOverrideShape.SelectedIndexChanged
-        If Loaded Then
-            SimObject.GraphicObject.ShapeOverride = cbOverrideShape.SelectedIndex
-        End If
-    End Sub
-
     Private Sub lblTag_KeyPress(sender As Object, e As KeyEventArgs) Handles lblTag.KeyUp
 
         If e.KeyCode = Keys.Enter Then
@@ -555,6 +539,34 @@ Public Class EditingForm_CAPEOPENUO
 
         End If
 
+    End Sub
+    Private Sub chkUseEmbeddedImage_CheckedChanged(sender As Object, e As EventArgs) Handles chkUseEmbeddedImage.CheckedChanged
+        SimObject.UseEmbeddedImage = chkUseEmbeddedImage.Checked
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        With Me.OpenFileName
+            .CheckFileExists = True
+            .CheckPathExists = True
+            .Title = SimObject.FlowSheet.GetTranslatedString("Import")
+            .Filter = "Images|*.bmp;*.jpg;*.png;*.gif"
+            .AddExtension = True
+            .Multiselect = False
+            .RestoreDirectory = True
+            Dim res As DialogResult = .ShowDialog
+            If res = Windows.Forms.DialogResult.OK Then
+                Try
+                    Using bmp = CType(System.Drawing.Bitmap.FromFile(OpenFileName.FileName), System.Drawing.Bitmap)
+                        Using img = SkiaSharp.Views.Desktop.Extensions.ToSKImage(bmp)
+                            SimObject.EmbeddedImageData = DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes.EmbeddedImageGraphic.ImageToBase64(img, SkiaSharp.SKEncodedImageFormat.Png)
+                            MessageBox.Show("Image data read successfully.", "DWSIM", MessageBoxButtons.OK)
+                        End Using
+                    End Using
+                Catch ex As Exception
+                    MessageBox.Show("Error reading image data.", "DWSIM", MessageBoxButtons.OK)
+                End Try
+            End If
+        End With
     End Sub
 
 End Class

@@ -127,10 +127,10 @@ Partial Class EditingForm_CustomUO
         Me.cbExecEngine = New System.Windows.Forms.ComboBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.chkUseEmbeddedImage = New System.Windows.Forms.CheckBox()
+        Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.OpenFileName = New System.Windows.Forms.OpenFileDialog()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -1169,11 +1169,6 @@ Partial Class EditingForm_CustomUO
         Me.ToolTipValues.SetToolTip(Me.Button1, resources.GetString("Button1.ToolTip2"))
         Me.Button1.UseVisualStyleBackColor = True
         '
-        'ToolTipChangeTag
-        '
-        Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
-        Me.ToolTipChangeTag.ToolTipTitle = "Info"
-        '
         'GroupBox4
         '
         resources.ApplyResources(Me.GroupBox4, "GroupBox4")
@@ -1202,6 +1197,11 @@ Partial Class EditingForm_CustomUO
         Me.ToolTipChangeTag.SetToolTip(Me.chkUseEmbeddedImage, resources.GetString("chkUseEmbeddedImage.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.chkUseEmbeddedImage, resources.GetString("chkUseEmbeddedImage.ToolTip2"))
         Me.chkUseEmbeddedImage.UseVisualStyleBackColor = True
+        '
+        'ToolTipChangeTag
+        '
+        Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
+        Me.ToolTipChangeTag.ToolTipTitle = "Info"
         '
         'OpenFileName
         '

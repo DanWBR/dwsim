@@ -81,10 +81,6 @@ Partial Class EditingForm_CAPEOPENUO
         Me.DataGridViewButtonColumn4 = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.chkRecalc = New System.Windows.Forms.CheckBox()
-        Me.cbOverrideShape = New System.Windows.Forms.ComboBox()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
         Me.lblCOName = New System.Windows.Forms.Label()
         Me.lblCOVer = New System.Windows.Forms.Label()
@@ -92,7 +88,11 @@ Partial Class EditingForm_CAPEOPENUO
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.chkUseEmbeddedImage = New System.Windows.Forms.CheckBox()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
+        Me.OpenFileName = New System.Windows.Forms.OpenFileDialog()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
@@ -110,8 +110,8 @@ Partial Class EditingForm_CAPEOPENUO
         Me.TabPage5.SuspendLayout()
         CType(Me.dgenergy, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
-        Me.GroupBox4.SuspendLayout()
         Me.GroupBox7.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox5
@@ -285,8 +285,8 @@ Partial Class EditingForm_CAPEOPENUO
         resources.ApplyResources(Me.TabPage1, "TabPage1")
         Me.TabPage1.Controls.Add(Me.dgvinputvars)
         Me.TabPage1.Name = "TabPage1"
-        Me.ToolTipValues.SetToolTip(Me.TabPage1, resources.GetString("TabPage1.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.TabPage1, resources.GetString("TabPage1.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.TabPage1, resources.GetString("TabPage1.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.TabPage1, resources.GetString("TabPage1.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.TabPage1, resources.GetString("TabPage1.ToolTip2"))
         Me.TabPage1.UseVisualStyleBackColor = True
         '
@@ -340,8 +340,8 @@ Partial Class EditingForm_CAPEOPENUO
         resources.ApplyResources(Me.TabPage2, "TabPage2")
         Me.TabPage2.Controls.Add(Me.dgvoutputvars)
         Me.TabPage2.Name = "TabPage2"
-        Me.ToolTipValues.SetToolTip(Me.TabPage2, resources.GetString("TabPage2.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.TabPage2, resources.GetString("TabPage2.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.TabPage2, resources.GetString("TabPage2.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.TabPage2, resources.GetString("TabPage2.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.TabPage2, resources.GetString("TabPage2.ToolTip2"))
         Me.TabPage2.UseVisualStyleBackColor = True
         '
@@ -422,8 +422,8 @@ Partial Class EditingForm_CAPEOPENUO
         resources.ApplyResources(Me.TabPage3, "TabPage3")
         Me.TabPage3.Controls.Add(Me.dginlets)
         Me.TabPage3.Name = "TabPage3"
-        Me.ToolTipValues.SetToolTip(Me.TabPage3, resources.GetString("TabPage3.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.TabPage3, resources.GetString("TabPage3.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.TabPage3, resources.GetString("TabPage3.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.TabPage3, resources.GetString("TabPage3.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.TabPage3, resources.GetString("TabPage3.ToolTip2"))
         Me.TabPage3.UseVisualStyleBackColor = True
         '
@@ -494,8 +494,8 @@ Partial Class EditingForm_CAPEOPENUO
         resources.ApplyResources(Me.TabPage4, "TabPage4")
         Me.TabPage4.Controls.Add(Me.dgoutlets)
         Me.TabPage4.Name = "TabPage4"
-        Me.ToolTipValues.SetToolTip(Me.TabPage4, resources.GetString("TabPage4.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.TabPage4, resources.GetString("TabPage4.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.TabPage4, resources.GetString("TabPage4.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.TabPage4, resources.GetString("TabPage4.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.TabPage4, resources.GetString("TabPage4.ToolTip2"))
         Me.TabPage4.UseVisualStyleBackColor = True
         '
@@ -566,8 +566,8 @@ Partial Class EditingForm_CAPEOPENUO
         resources.ApplyResources(Me.TabPage5, "TabPage5")
         Me.TabPage5.Controls.Add(Me.dgenergy)
         Me.TabPage5.Name = "TabPage5"
-        Me.ToolTipValues.SetToolTip(Me.TabPage5, resources.GetString("TabPage5.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.TabPage5, resources.GetString("TabPage5.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.TabPage5, resources.GetString("TabPage5.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.TabPage5, resources.GetString("TabPage5.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.TabPage5, resources.GetString("TabPage5.ToolTip2"))
         Me.TabPage5.UseVisualStyleBackColor = True
         '
@@ -652,45 +652,6 @@ Partial Class EditingForm_CAPEOPENUO
         Me.ToolTipValues.SetToolTip(Me.Button1, resources.GetString("Button1.ToolTip2"))
         Me.Button1.UseVisualStyleBackColor = True
         '
-        'GroupBox4
-        '
-        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
-        Me.GroupBox4.Controls.Add(Me.chkRecalc)
-        Me.GroupBox4.Controls.Add(Me.cbOverrideShape)
-        Me.GroupBox4.Controls.Add(Me.Label2)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.TabStop = False
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox4, resources.GetString("GroupBox4.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.GroupBox4, resources.GetString("GroupBox4.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me.GroupBox4, resources.GetString("GroupBox4.ToolTip2"))
-        '
-        'chkRecalc
-        '
-        resources.ApplyResources(Me.chkRecalc, "chkRecalc")
-        Me.chkRecalc.Name = "chkRecalc"
-        Me.ToolTip1.SetToolTip(Me.chkRecalc, resources.GetString("chkRecalc.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.chkRecalc, resources.GetString("chkRecalc.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.chkRecalc, resources.GetString("chkRecalc.ToolTip2"))
-        Me.chkRecalc.UseVisualStyleBackColor = True
-        '
-        'cbOverrideShape
-        '
-        resources.ApplyResources(Me.cbOverrideShape, "cbOverrideShape")
-        Me.cbOverrideShape.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbOverrideShape.FormattingEnabled = True
-        Me.cbOverrideShape.Name = "cbOverrideShape"
-        Me.ToolTip1.SetToolTip(Me.cbOverrideShape, resources.GetString("cbOverrideShape.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.cbOverrideShape, resources.GetString("cbOverrideShape.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.cbOverrideShape, resources.GetString("cbOverrideShape.ToolTip2"))
-        '
-        'Label2
-        '
-        resources.ApplyResources(Me.Label2, "Label2")
-        Me.Label2.Name = "Label2"
-        Me.ToolTip1.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip2"))
-        '
         'GroupBox7
         '
         resources.ApplyResources(Me.GroupBox7, "GroupBox7")
@@ -754,17 +715,50 @@ Partial Class EditingForm_CAPEOPENUO
         Me.ToolTipChangeTag.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip2"))
         '
+        'GroupBox4
+        '
+        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
+        Me.GroupBox4.Controls.Add(Me.Button2)
+        Me.GroupBox4.Controls.Add(Me.chkUseEmbeddedImage)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.TabStop = False
+        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox4, resources.GetString("GroupBox4.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.GroupBox4, resources.GetString("GroupBox4.ToolTip1"))
+        Me.ToolTip1.SetToolTip(Me.GroupBox4, resources.GetString("GroupBox4.ToolTip2"))
+        '
+        'Button2
+        '
+        resources.ApplyResources(Me.Button2, "Button2")
+        Me.Button2.Name = "Button2"
+        Me.ToolTip1.SetToolTip(Me.Button2, resources.GetString("Button2.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Button2, resources.GetString("Button2.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Button2, resources.GetString("Button2.ToolTip2"))
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'chkUseEmbeddedImage
+        '
+        resources.ApplyResources(Me.chkUseEmbeddedImage, "chkUseEmbeddedImage")
+        Me.chkUseEmbeddedImage.Name = "chkUseEmbeddedImage"
+        Me.ToolTip1.SetToolTip(Me.chkUseEmbeddedImage, resources.GetString("chkUseEmbeddedImage.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.chkUseEmbeddedImage, resources.GetString("chkUseEmbeddedImage.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.chkUseEmbeddedImage, resources.GetString("chkUseEmbeddedImage.ToolTip2"))
+        Me.chkUseEmbeddedImage.UseVisualStyleBackColor = True
+        '
         'ToolTipChangeTag
         '
         Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         Me.ToolTipChangeTag.ToolTipTitle = "Info"
         '
+        'OpenFileName
+        '
+        resources.ApplyResources(Me.OpenFileName, "OpenFileName")
+        '
         'EditingForm_CAPEOPENUO
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.GroupBox7)
         Me.Controls.Add(Me.GroupBox4)
+        Me.Controls.Add(Me.GroupBox7)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox1)
@@ -793,10 +787,10 @@ Partial Class EditingForm_CAPEOPENUO
         Me.TabPage5.ResumeLayout(False)
         CType(Me.dgenergy, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox4.PerformLayout()
         Me.GroupBox7.ResumeLayout(False)
         Me.GroupBox7.PerformLayout()
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -832,10 +826,6 @@ Partial Class EditingForm_CAPEOPENUO
     Public WithEvents TabPage5 As System.Windows.Forms.TabPage
     Public WithEvents dgoutlets As System.Windows.Forms.DataGridView
     Public WithEvents dgenergy As System.Windows.Forms.DataGridView
-    Public WithEvents GroupBox4 As System.Windows.Forms.GroupBox
-    Public WithEvents chkRecalc As System.Windows.Forms.CheckBox
-    Public WithEvents cbOverrideShape As System.Windows.Forms.ComboBox
-    Public WithEvents Label2 As System.Windows.Forms.Label
     Public WithEvents GroupBox7 As System.Windows.Forms.GroupBox
     Public WithEvents lblCOName As System.Windows.Forms.Label
     Public WithEvents lblCOVer As System.Windows.Forms.Label
@@ -860,4 +850,8 @@ Partial Class EditingForm_CAPEOPENUO
     Public WithEvents DataGridViewButtonColumn3 As DataGridViewButtonColumn
     Public WithEvents DataGridViewButtonColumn4 As DataGridViewButtonColumn
     Friend WithEvents ToolTipChangeTag As ToolTip
+    Public WithEvents GroupBox4 As GroupBox
+    Public WithEvents Button2 As Button
+    Public WithEvents chkUseEmbeddedImage As CheckBox
+    Public WithEvents OpenFileName As OpenFileDialog
 End Class
