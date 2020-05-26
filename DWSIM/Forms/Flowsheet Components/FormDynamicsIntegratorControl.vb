@@ -137,11 +137,19 @@ Public Class FormDynamicsIntegratorControl
 
     Public Sub RestoreState(stateID As String)
 
-        Dim initialstate = Flowsheet.StoredSolutions(stateID)
+        Try
 
-        Flowsheet.LoadProcessData(initialstate)
+            Dim initialstate = Flowsheet.StoredSolutions(stateID)
 
-        Flowsheet.UpdateInterface()
+            Flowsheet.LoadProcessData(initialstate)
+
+            Flowsheet.UpdateInterface()
+
+        Catch ex As Exception
+
+            MessageBox.Show(String.Format("Error Restoring State {0}: {1}", stateID, ex.Message), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+        End Try
 
     End Sub
 

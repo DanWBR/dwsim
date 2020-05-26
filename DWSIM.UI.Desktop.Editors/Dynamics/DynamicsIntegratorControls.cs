@@ -221,9 +221,16 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
         public void RestoreState(string stateID)
         {
-            var initialstate = Flowsheet.StoredSolutions[stateID];
-            Flowsheet.LoadProcessData(initialstate);
-            Flowsheet.UpdateInterface();
+            try
+            {
+                var initialstate = Flowsheet.StoredSolutions[stateID];
+                Flowsheet.LoadProcessData(initialstate);
+                Flowsheet.UpdateInterface();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(String.Format("Error Restoring State {0}: {1}", stateID, ex.Message), "Error", MessageBoxType.Error); 
+            }
         }
 
         public Task RunIntegrator(bool realtime, bool waittofinish)
