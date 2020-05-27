@@ -128,10 +128,16 @@
   <data name="Label5.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
+  <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
+    <value>TabPage5</value>
+  </data>
   <data name="&gt;&gt;GroupBox5.Parent" xml:space="preserve">
     <value>TabPage2</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="cbScheduleInitialState.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 21</value>
+  </data>
   <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
     <value>565, 327</value>
   </data>
@@ -303,6 +309,9 @@
   <data name="&gt;&gt;cbSelectedCauseAndEffectMatrix.Name" xml:space="preserve">
     <value>cbSelectedCauseAndEffectMatrix</value>
   </data>
+  <data name="&gt;&gt;Label13.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;cbSelectedCauseAndEffectMatrix.Parent" xml:space="preserve">
     <value>panelSelSchedule</value>
   </data>
@@ -438,9 +447,6 @@
   <data name="&gt;&gt;GroupBox7.Parent" xml:space="preserve">
     <value>TabPage7</value>
   </data>
-  <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
   <data name="&gt;&gt;dtpIntegratorDuration.Name" xml:space="preserve">
     <value>dtpIntegratorDuration</value>
   </data>
@@ -462,8 +468,8 @@
   <data name="TabPage4.Text" xml:space="preserve">
     <value>Controladores</value>
   </data>
-  <data name="&gt;&gt;chkIntegratorUseEventSet.Parent" xml:space="preserve">
-    <value>panelSelSchedule</value>
+  <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
+    <value>TabPage5</value>
   </data>
   <data name="&gt;&gt;associatedproperty.Name" xml:space="preserve">
     <value>associatedproperty</value>
@@ -505,10 +511,10 @@
     <value>0</value>
   </data>
   <data name="&gt;&gt;Button1.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn14.Name" xml:space="preserve">
-    <value>DataGridViewTextBoxColumn14</value>
+  <data name="TabPage6.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
   <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
     <value>198, 327</value>
@@ -518,9 +524,6 @@
   </data>
   <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>677, 32</value>
-  </data>
-  <data name="TabPage6.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
   </data>
   <data name="GroupBox6.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 7</value>
@@ -651,6 +654,9 @@
   <data name="&gt;&gt;nupCalcBalFreq.Name" xml:space="preserve">
     <value>nupCalcBalFreq</value>
   </data>
+  <data name="grdiselmatrix.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
   <data name="&gt;&gt;ToolStrip4.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
@@ -692,6 +698,9 @@
   </data>
   <data name="&gt;&gt;colname.Name" xml:space="preserve">
     <value>colname</value>
+  </data>
+  <data name="Label13.Text" xml:space="preserve">
+    <value>ATENÇÃO: O Modo Dinâmico não foi validado com dados reais e deve ser utilizado apenas para fins educacionais!</value>
   </data>
   <data name="&gt;&gt;coleventstamp.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -796,7 +805,7 @@
     <value>23, 22</value>
   </data>
   <data name="&gt;&gt;chkDynamics.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;btnCopyIntegrator.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -912,11 +921,8 @@
   <data name="&gt;&gt;dtpIntegratorDuration.Parent" xml:space="preserve">
     <value>TabPage5</value>
   </data>
-  <data name="&gt;&gt;btnAddMatrix.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
-    <value>TabPage5</value>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 13</value>
   </data>
   <data name="&gt;&gt;Column9.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1006,7 +1012,7 @@
     <value>pbStreamValves</value>
   </data>
   <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>782, 345</value>
+    <value>782, 324</value>
   </data>
   <data name="&gt;&gt;nupCalcControlFreq.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1177,7 +1183,7 @@
     <value>dgvIndicators</value>
   </data>
   <data name="&gt;&gt;lblStatus.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn8.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn8</value>
@@ -1434,17 +1440,14 @@
   <data name="GroupBox5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="unit.Width" type="System.Int32, mscorlib">
-    <value>72</value>
+  <data name="cbSelectedCauseAndEffectMatrix.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 21</value>
   </data>
   <data name="&gt;&gt;Label5.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;chkIntegratorUseEventSet.Name" xml:space="preserve">
     <value>chkIntegratorUseEventSet</value>
-  </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 13</value>
   </data>
   <data name="btnRemoveSchedule.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
@@ -1454,6 +1457,12 @@
   </data>
   <data name="pbStreamValves.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 32</value>
+  </data>
+  <data name="Label13.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 43</value>
+  </data>
+  <data name="gridMonitoredVariables.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;cbAssociatedIntegrator.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -1695,6 +1704,9 @@
   <data name="&gt;&gt;colalarm.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;Label13.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
   <data name="&gt;&gt;btnAddEventSet.Name" xml:space="preserve">
     <value>btnAddEventSet</value>
   </data>
@@ -1818,8 +1830,8 @@
   <data name="&gt;&gt;Column5.Name" xml:space="preserve">
     <value>Column5</value>
   </data>
-  <data name="cbSelectedCauseAndEffectMatrix.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 21</value>
+  <data name="&gt;&gt;chkIntegratorUseEventSet.Parent" xml:space="preserve">
+    <value>panelSelSchedule</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn17.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1908,6 +1920,9 @@
   <data name="gridMonitoredVariables.Size" type="System.Drawing.Size, System.Drawing">
     <value>545, 251</value>
   </data>
+  <data name="&gt;&gt;gridselectedset.Name" xml:space="preserve">
+    <value>gridselectedset</value>
+  </data>
   <data name="&gt;&gt;gridselectedset.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -1986,8 +2001,8 @@
   <data name="cbSelectedEventSet.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="cbScheduleInitialState.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 21</value>
+  <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>551, 13</value>
   </data>
   <data name="&gt;&gt;coleventtype.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2006,9 +2021,6 @@
   </data>
   <data name="&gt;&gt;TabPage2.Parent" xml:space="preserve">
     <value>TabControl1</value>
-  </data>
-  <data name="Label11.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
   </data>
   <data name="TabPage9.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2067,8 +2079,11 @@
   <data name="&gt;&gt;DataGridViewTextBoxColumn13.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="grdiselmatrix.RowHeadersWidth" type="System.Int32, mscorlib">
-    <value>25</value>
+  <data name="Label11.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn14.Name" xml:space="preserve">
+    <value>DataGridViewTextBoxColumn14</value>
   </data>
   <data name="&gt;&gt;panelSelIntegrator.Parent" xml:space="preserve">
     <value>GroupBox5</value>
@@ -3062,7 +3077,7 @@
     <value>10</value>
   </data>
   <data name="TabControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 47</value>
+    <value>6, 66</value>
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Conjuntos de Eventos</value>
@@ -3075,6 +3090,9 @@
   </data>
   <data name="ToolStrip7.Size" type="System.Drawing.Size, System.Drawing">
     <value>545, 25</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn9.Name" xml:space="preserve">
+    <value>DataGridViewTextBoxColumn9</value>
   </data>
   <data name="GroupBox7.Text" xml:space="preserve">
     <value>Programação Selecionada</value>
@@ -3100,8 +3118,8 @@
   <data name="&gt;&gt;colalarm.Name" xml:space="preserve">
     <value>colalarm</value>
   </data>
-  <data name="&gt;&gt;gridselectedset.Name" xml:space="preserve">
-    <value>gridselectedset</value>
+  <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
+    <value>8</value>
   </data>
   <data name="&gt;&gt;TabPage5.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3199,8 +3217,8 @@
   <data name="TabControl2.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
-    <value>TabPage5</value>
+  <data name="&gt;&gt;Label13.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;TabPage8.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3262,8 +3280,8 @@
   <data name="chkSchUseCurrentState.Location" type="System.Drawing.Point, System.Drawing">
     <value>198, 182</value>
   </data>
-  <data name="gridMonitoredVariables.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="unit.Width" type="System.Int32, mscorlib">
+    <value>72</value>
   </data>
   <data name="&gt;&gt;btnCopyMatrix.Name" xml:space="preserve">
     <value>btnCopyMatrix</value>
@@ -3294,6 +3312,9 @@
   </data>
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>ID</value>
+  </data>
+  <data name="Label13.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="chkIntegratorUseEventSet.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -3377,10 +3398,10 @@
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TabControl1.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn9.Name" xml:space="preserve">
-    <value>DataGridViewTextBoxColumn9</value>
+  <data name="&gt;&gt;btnAddMatrix.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnRemoveSchedule.Name" xml:space="preserve">
     <value>btnRemoveSchedule</value>
@@ -3538,6 +3559,9 @@
   <data name="&gt;&gt;DataGridViewTextBoxColumn11.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn11</value>
   </data>
+  <data name="Label13.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
   <data name="&gt;&gt;Label10.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
@@ -3549,6 +3573,9 @@
   </data>
   <data name="&gt;&gt;dtpIntegrationStep.Name" xml:space="preserve">
     <value>dtpIntegrationStep</value>
+  </data>
+  <data name="&gt;&gt;Label13.Name" xml:space="preserve">
+    <value>Label13</value>
   </data>
   <data name="&gt;&gt;DataGridViewComboBoxColumn3.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3599,7 +3626,7 @@
     <value>216, 21</value>
   </data>
   <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>790, 371</value>
+    <value>790, 350</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn7.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3663,6 +3690,9 @@
   </metadata>
   <metadata name="DataGridViewComboBoxColumn3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>en</value>
   </metadata>
   <metadata name="Column6.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

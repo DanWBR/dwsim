@@ -5023,6 +5023,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to .
+        '''</summary>
+        Friend Shared ReadOnly Property DynWarning() As String
+            Get
+                Return ResourceManager.GetString("DynWarning", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Editando anotações para o objeto .
         '''</summary>
         Friend Shared ReadOnly Property Editandoanotaesparao() As String

@@ -174,17 +174,23 @@ namespace DWSIM.UI
             pdocs.Add(new Label { Size = lsize, Font = regularfont, Wrap = WrapMode.Word, Text = "View DWSIM's User Guide in PDF format." }, dx2, dy2 * 2 + bfh);
             var img5 = new ImageView { Size = psize, Image = new Bitmap(Bitmap.FromResource(imgprefix + "icons8-books.png")) };
             pdocs.Add(img5, (int)(400 * sf), 0);
-            var link5 = new LinkButton { Text = "View the User Guide", Width = (int)(140 * sf), Font = boldfont2 };
+            var link5 = new LinkButton { Text = "User Guide", Width = (int)(140 * sf), Font = boldfont2 };
             pdocs.Add(link5, dx2, (int)(100 * sf - rfh - dy));
-            var link6 = new LinkButton { Text = "Online Help", Width = (int)(140 * sf), Font = boldfont2 };
+            var link6 = new LinkButton { Text = "Learning Resources", Width = (int)(140 * sf), Font = boldfont2 };
             pdocs.Add(link6, dx2 + (int)(150 * sf), (int)(100 * sf - rfh - dy));
 
-            link6.Click += (sender, e) => "http://dwsim.inforside.com.br".OpenURL();
+            link6.Click += (sender, e) => "http://dwsim.inforside.com.br/wiki/index.php?title=Tutorials".OpenURL();
 
             link5.Click += (sender, e) =>
             {
                 var basepath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                Process.Start(basepath + Path.DirectorySeparatorChar + "docs" + Path.DirectorySeparatorChar + "user_guide.pdf");
+                try
+                {
+                    Process.Start(basepath + Path.DirectorySeparatorChar + "docs" + Path.DirectorySeparatorChar + "user_guide.pdf");
+                }
+                catch (Exception ex) {
+                    MessageBox.Show(ex.Message, "Error opening User Guide", MessageBoxButtons.OK, MessageBoxType.Error, MessageBoxDefaultButton.OK);
+                }
             };
 
             abslayout.Add(pdocs, dx, dy * 5 + bfh + 3 * (int)(100 * sf));

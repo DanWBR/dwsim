@@ -122,7 +122,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAD0
-        DwAAAk1TRnQBSQFMAgEBBQEAAUABBQFAAQUBEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        DwAAAk1TRnQBSQFMAgEBBQEAAVABBQFQAQUBEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABIAMAAQEBAAEQBgABEP8AFQABeQF3ARMBcwFJAW4BJwFuAScBbgEnAW4BJwFuAScBbgEnAW4BJwFu
         AScBbgEnAW4BSAFuATUBc2QAAWoBbgG7AXsBdQF7AXMBewFyAXsBcQF7AVABewFPAXsBTwF7AU4BewFN
         AXsBLQF7AbgBfwFoAW5kAAFoAW4B/QF/AbQBfwGSAX8BkAF7AW4BewFsAXsBSgF7AUgBewFHAXsBJQF7
@@ -198,7 +198,10 @@
     <value>481, 725</value>
   </data>
   <data name="lvlatestfolders.Size" type="System.Drawing.Size, System.Drawing">
-    <value>493, 725</value>
+    <value>481, 725</value>
+  </data>
+  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>495, 760</value>
   </data>
   <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
     <value>487, 731</value>
@@ -206,35 +209,32 @@
   <data name="TabPage1.Text" xml:space="preserve">
     <value>Recent Files</value>
   </data>
-  <data name="lvsamples.Size" type="System.Drawing.Size, System.Drawing">
-    <value>493, 725</value>
-  </data>
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>499, 731</value>
+    <value>487, 731</value>
   </data>
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Samples</value>
   </data>
-  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>499, 68</value>
-  </data>
-  <data name="Label5.Text" xml:space="preserve">
-    <value>FOSSEE, IIT Bombay, invites chemical engineering students, faculty and practitioners to the flowsheeting project using DWSIM. We want you to convert existing flowsheets into DWSIM and get honoraria and certificates.</value>
+  <data name="lvsamples.Size" type="System.Drawing.Size, System.Drawing">
+    <value>481, 725</value>
   </data>
   <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>499, 731</value>
+    <value>487, 731</value>
   </data>
   <data name="TabPage5.Text" xml:space="preserve">
     <value>FOSSEE Flowsheets</value>
   </data>
+  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>487, 68</value>
+  </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>FOSSEE, IIT Bombay, invites chemical engineering students, faculty and practitioners to the flowsheeting project using DWSIM. We want you to convert existing flowsheets into DWSIM and get honoraria and certificates.</value>
+  </data>
   <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>499, 731</value>
+    <value>487, 731</value>
   </data>
   <data name="TabPage3.Text" xml:space="preserve">
     <value>Recent Folders</value>
-  </data>
-  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>495, 760</value>
   </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>21, 15</value>
@@ -309,10 +309,10 @@
     <value>Data Regression</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 74</value>
+    <value>424, 74</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
-    <value>Become a Patron and get access to exclusive Unit Operations, Property Packages and Plugins/Add-Ins!</value>
+    <value>Become a Patron and get direct support and access to exclusive Unit Operations, Property Packages and Plugins/Add-Ins!</value>
   </data>
   <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 19</value>
@@ -331,7 +331,7 @@
     <value>NoControl</value>
   </data>
   <data name="PictureBox6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>192, 0</value>
+    <value>453, 0</value>
   </data>
   <data name="PictureBox6.Size" type="System.Drawing.Size, System.Drawing">
     <value>144, 138</value>
@@ -343,16 +343,16 @@
     <value>Quick Access</value>
   </data>
   <data name="LinkLabel10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 16</value>
+    <value>134, 16</value>
   </data>
   <data name="LinkLabel10.Text" xml:space="preserve">
-    <value>Online Help</value>
+    <value>Learning Resources</value>
   </data>
   <data name="LinkLabel8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 16</value>
+    <value>78, 16</value>
   </data>
   <data name="LinkLabel8.Text" xml:space="preserve">
-    <value>View User Guide</value>
+    <value>User Guide</value>
   </data>
   <data name="Label14.Text" xml:space="preserve">
     <value>View DWSIM's User Guide in PDF format.</value>

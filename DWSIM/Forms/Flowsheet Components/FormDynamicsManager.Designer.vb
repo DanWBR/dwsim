@@ -168,6 +168,7 @@ Partial Class FormDynamicsManager
         Me.Button1 = New System.Windows.Forms.Button()
         Me.lblStatus = New System.Windows.Forms.Label()
         Me.chkDynamics = New System.Windows.Forms.CheckBox()
+        Me.Label13 = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.pbUnitOps, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1220,12 +1221,19 @@ Partial Class FormDynamicsManager
         Me.chkDynamics.Name = "chkDynamics"
         Me.chkDynamics.UseVisualStyleBackColor = False
         '
+        'Label13
+        '
+        resources.ApplyResources(Me.Label13, "Label13")
+        Me.Label13.ForeColor = System.Drawing.Color.DarkRed
+        Me.Label13.Name = "Label13"
+        '
         'FormDynamicsManager
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.CloseButton = False
         Me.CloseButtonVisible = False
+        Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.chkDynamics)
         Me.Controls.Add(Me.lblStatus)
@@ -1430,4 +1438,5 @@ Partial Class FormDynamicsManager
     Friend WithEvents DataGridViewComboBoxColumn1 As DataGridViewComboBoxColumn
     Friend WithEvents DataGridViewComboBoxColumn5 As DataGridViewComboBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn18 As DataGridViewTextBoxColumn
+    Friend WithEvents Label13 As Label
 End Class

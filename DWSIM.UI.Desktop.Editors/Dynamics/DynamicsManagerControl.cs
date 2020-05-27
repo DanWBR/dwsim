@@ -53,6 +53,16 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             Rows.Add(new TableRow(tl1));
 
+            var tl1w = new TableLayout { Padding = new Padding(5), Spacing = new Size(10, 10) };
+
+            var tr1w = new TableRow();
+
+            tr1w.Cells.Add(new Label {Text = "WARNING: Dynamic Modeling has not been validated yet and must be used only for educational purposes!", Font = SystemFonts.Bold(), TextColor = Colors.DarkRed });
+
+            tl1w.Rows.Add(tr1w);
+
+            Rows.Add(new TableRow(tl1w));
+
             var DocumentContainer = new DocumentControl() { AllowReordering = false, DisplayArrows = false };
 
             DocumentContainer.Pages.Add(new DocumentPage { Text = "Model Status", Closable = false });

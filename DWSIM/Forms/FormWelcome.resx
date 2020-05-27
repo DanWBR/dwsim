@@ -136,7 +136,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>480, 138</value>
+    <value>741, 138</value>
   </data>
   <data name="lvlatestfolders.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -157,7 +157,7 @@
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Panel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>480, 138</value>
+    <value>741, 138</value>
   </data>
   <data name="&gt;&gt;TabControl1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -193,7 +193,7 @@
     <value>Acesso Rápido</value>
   </data>
   <data name="PictureBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>336, 0</value>
+    <value>597, 0</value>
   </data>
   <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -239,7 +239,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAD2
-        DwAAAk1TRnQBSQFMAgEBBQEAAWABBQFoAQUBEAEAARABAAT/AREBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        DwAAAk1TRnQBSQFMAgEBBQEAAXQBBQF8AQUBEAEAARABAAT/AREBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABIAMAAQEBAAEQBgABEP8AFQABeQF3ARMBcwFJAW4BJwFuAScBbgEnAW4BJwFuAScBbgEnAW4BJwFu
         AScBbgEnAW4BSAFuATUBc2QAAWoBbgG7AXsBdQF7AXMBewFyAXsBcQF7AVABewFPAXsBTwF7AU4BewFN
         AXsBLQF7AbgBfwFoAW5kAAFoAW4B/QF/AbQBfwGSAX8BkAF7AW4BewFsAXsBSgF7AUgBewFHAXsBJQF7
@@ -347,7 +347,7 @@
     <value>Panel1</value>
   </data>
   <data name="PictureBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>348, 9</value>
+    <value>609, 9</value>
   </data>
   <data name="LinkLabel6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -362,7 +362,7 @@
     <value>3</value>
   </data>
   <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>512, 15</value>
+    <value>773, 15</value>
   </data>
   <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
     <value>Panel2</value>
@@ -386,13 +386,13 @@
     <value>Ir para Patreon.com/DWSIM</value>
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>297, 53</value>
+    <value>558, 53</value>
   </data>
   <data name="&gt;&gt;Label13.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lvlatestfolders.Size" type="System.Drawing.Size, System.Drawing">
-    <value>400, 725</value>
+    <value>493, 725</value>
   </data>
   <data name="Label15.Location" type="System.Drawing.Point, System.Drawing">
     <value>23, 12</value>
@@ -413,7 +413,7 @@
     <value>4, 25</value>
   </data>
   <data name="Panel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>480, 138</value>
+    <value>741, 138</value>
   </data>
   <data name="TabPage1.Text" xml:space="preserve">
     <value>Recentes</value>
@@ -512,7 +512,7 @@
     <value>Top, Right</value>
   </data>
   <data name="PictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>336, 0</value>
+    <value>597, 0</value>
   </data>
   <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 24</value>
@@ -548,7 +548,7 @@
     <value>Arial, 12pt, style=Bold</value>
   </data>
   <data name="PictureBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>336, 0</value>
+    <value>597, 0</value>
   </data>
   <data name="ColumnHeader4.Text" xml:space="preserve">
     <value>File</value>
@@ -830,7 +830,7 @@
     <value>NoControl</value>
   </data>
   <data name="LinkLabel10.Text" xml:space="preserve">
-    <value>Ajuda Online</value>
+    <value>Recursos de Aprendizagem</value>
   </data>
   <data name="&gt;&gt;TabPage3.Parent" xml:space="preserve">
     <value>TabControl1</value>
@@ -920,7 +920,7 @@
     <value>98</value>
   </data>
   <data name="LinkLabel10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 16</value>
+    <value>182, 16</value>
   </data>
   <data name="LinkLabel8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -935,7 +935,7 @@
     <value>True</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 74</value>
+    <value>467, 74</value>
   </data>
   <data name="Label2.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9.75pt</value>
@@ -962,16 +962,16 @@
     <value>TabControl1</value>
   </data>
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>406, 731</value>
+    <value>499, 731</value>
   </data>
   <data name="Label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>480, 138</value>
+    <value>741, 138</value>
   </data>
   <data name="PictureBox6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 0</value>
+    <value>464, 0</value>
   </data>
   <data name="&gt;&gt;TabPage3.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -986,7 +986,7 @@
     <value>97</value>
   </data>
   <data name="Panel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>480, 138</value>
+    <value>741, 138</value>
   </data>
   <data name="&gt;&gt;LinkLabel5.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1013,7 +1013,7 @@
     <value>$this</value>
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>297, 63</value>
+    <value>558, 63</value>
   </data>
   <data name="PictureBox6.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
@@ -1067,7 +1067,7 @@
     <value>23, 110</value>
   </data>
   <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>297, 49</value>
+    <value>558, 49</value>
   </data>
   <data name="&gt;&gt;LinkLabel2.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -1079,7 +1079,7 @@
     <value>41</value>
   </data>
   <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>406, 731</value>
+    <value>499, 731</value>
   </data>
   <data name="PictureBox2.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
@@ -1091,7 +1091,7 @@
     <value>23, 337</value>
   </data>
   <data name="TabControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>509, 49</value>
+    <value>770, 49</value>
   </data>
   <data name="PictureBox3.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
@@ -1109,7 +1109,7 @@
     <value>Submit a Flowsheet</value>
   </data>
   <data name="lvsamples.Size" type="System.Drawing.Size, System.Drawing">
-    <value>400, 725</value>
+    <value>493, 725</value>
   </data>
   <data name="Label11.Text" xml:space="preserve">
     <value>Torne-se um Patrocinador</value>
@@ -1139,7 +1139,7 @@
     <value>207, 19</value>
   </data>
   <data name="PictureBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>336, 0</value>
+    <value>597, 0</value>
   </data>
   <data name="&gt;&gt;Label9.Name" xml:space="preserve">
     <value>Label9</value>
@@ -1253,7 +1253,7 @@
     <value>NoControl</value>
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>297, 63</value>
+    <value>558, 63</value>
   </data>
   <data name="lvsamples.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
@@ -1319,7 +1319,7 @@
     <value>Zoom</value>
   </data>
   <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>406, 731</value>
+    <value>499, 731</value>
   </data>
   <data name="Panel3.TabIndex" type="System.Int32, mscorlib">
     <value>99</value>
@@ -1388,7 +1388,7 @@
     <value>PictureBox2</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1019, 825</value>
+    <value>1280, 825</value>
   </data>
   <data name="PictureBox3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Right</value>
@@ -1514,7 +1514,7 @@
     <value>File</value>
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>406, 68</value>
+    <value>499, 68</value>
   </data>
   <data name="Button4.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 96</value>

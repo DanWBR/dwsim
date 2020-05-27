@@ -447,6 +447,6 @@ Public Class FormWelcome
     End Sub
 
     Private Sub LinkLabel10_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel10.LinkClicked
-        System.Diagnostics.Process.Start("http://dwsim.inforside.com.br")
+        System.Diagnostics.Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Tutorials")
     End Sub
 End Class
