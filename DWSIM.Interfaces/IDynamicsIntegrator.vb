@@ -35,6 +35,8 @@
 
     Property Duration As TimeSpan
 
+    Property RealTimeStepMs As Integer
+
     Property CurrentTime As DateTime
 
     Property CalculationRateEquilibrium As Integer

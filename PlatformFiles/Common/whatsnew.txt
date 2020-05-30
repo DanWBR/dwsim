@@ -1,3 +1,10 @@
+Version 6.0 Update 1
+
+- [NEW] Added a Real-Time Step Duration property to Dynamic Integrator
+- [FIX] Fixed PID Controller Manual Mode
+- [FIX] Fixed Material Stream editor issues when in Dynamic Mode
+- [FIX] Other fixes
+
 Version 6.0
 
 - [NEW] Dynamic Simulation Mode

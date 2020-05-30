@@ -23,8 +23,13 @@ Public Class FormDynamicsIntegratorControl
 
             cbScenario.Items.Clear()
 
-            For Each item In Flowsheet.DynamicsManager.IntegratorList
-                cbScenario.Items.Add(item.Value.Description)
+            For Each item In Flowsheet.DynamicsManager.ScheduleList
+                If item.Value.CurrentIntegrator <> "" Then
+                    Dim integ = Flowsheet.DynamicsManager.IntegratorList(item.Value.CurrentIntegrator).Description
+                    cbScenario.Items.Add(item.Value.Description & " (" & integ & ")")
+                Else
+                    cbScenario.Items.Add(item.Value.Description)
+                End If
             Next
 
             If cbScenario.Items.Count > 0 Then
@@ -167,6 +172,8 @@ Public Class FormDynamicsIntegratorControl
 
         Dim integrator = Flowsheet.DynamicsManager.IntegratorList(schedule.CurrentIntegrator)
 
+        integrator.RealTime = realtime
+
         Dim Controllers = Flowsheet.SimulationObjects.Values.Where(Function(x) x.ObjectClass = SimulationObjectClass.Controllers).ToList
 
         If Not waittofinish Then
@@ -207,7 +214,7 @@ Public Class FormDynamicsIntegratorControl
 
         Dim interval = integrator.IntegrationStep.TotalSeconds
 
-        If realtime Then interval = 1.0
+        If realtime Then interval = Convert.ToDouble(integrator.RealTimeStepMs) / 1000.0
 
         Dim final = ProgressBar1.Maximum
 
@@ -229,7 +236,9 @@ Public Class FormDynamicsIntegratorControl
 
                                     Dim j As Integer = 0
 
-                                    For i = 0 To final Step interval
+                                    Dim i As Double = 0
+
+                                    While i <= final
 
                                         Dim sw As New Stopwatch
 
@@ -273,12 +282,12 @@ Public Class FormDynamicsIntegratorControl
                                             Task.Delay(200).Wait()
                                         End While
 
-                                        If Not realtime Then StoreVariableValues(integrator, i, integrator.CurrentTime)
+                                        StoreVariableValues(integrator, j, integrator.CurrentTime)
 
                                         Flowsheet.RunCodeOnUIThread(Sub()
                                                                         Flowsheet.FormDynamics.UpdateControllerList()
                                                                         Flowsheet.FormDynamics.UpdateIndicatorList()
-                                                                        Flowsheet.FormSurface.Invalidate()
+                                                                        Flowsheet.FormSurface.FControl.Invalidate()
                                                                         Application.DoEvents()
                                                                     End Sub)
 
@@ -290,7 +299,7 @@ Public Class FormDynamicsIntegratorControl
                                             Next
                                         End If
 
-                                        Dim waittime = 1000 - sw.ElapsedMilliseconds
+                                        Dim waittime = integrator.RealTimeStepMs - sw.ElapsedMilliseconds
 
                                         If waittime > 0 And realtime Then
 
@@ -300,7 +309,7 @@ Public Class FormDynamicsIntegratorControl
 
                                         sw.Stop()
 
-                                        If Abort Then Exit For
+                                        If Abort Then Exit While
 
                                         If Not realtime Then
 
@@ -320,7 +329,9 @@ Public Class FormDynamicsIntegratorControl
 
                                         j += 1
 
-                                    Next
+                                        i += interval
+
+                                    End While
 
                                 End Sub)
 
@@ -356,7 +367,7 @@ Public Class FormDynamicsIntegratorControl
 
         sheet.RowCount = integrator.MonitoredVariableValues.Count + 1
 
-        sheet.Cells(0, 0).Data = "Time (s)"
+        sheet.Cells(0, 0).Data = "Time (ms)"
 
         Dim i, j As Integer
 
@@ -368,7 +379,11 @@ Public Class FormDynamicsIntegratorControl
 
         i = 1
         For Each item In integrator.MonitoredVariableValues
-            sheet.Cells(i, 0).Data = item.Key.ToString
+            If integrator.RealTime Then
+                sheet.Cells(i, 0).Data = item.Key * integrator.RealTimeStepMs
+            Else
+                sheet.Cells(i, 0).Data = item.Key * integrator.IntegrationStep.TotalMilliseconds
+            End If
             j = 1
             For Each var In item.Value
                 sheet.Cells(i, j).Data = var.PropertyValue

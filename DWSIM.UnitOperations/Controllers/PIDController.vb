@@ -652,21 +652,31 @@ Namespace SpecialOps
 
                 Output = PTerm + Ki * ITerm + Kd * DTerm + Offset / BaseSP
 
+                If Not ReverseActing Then
+                    OutputAbs = (1.0 - Output) * BaseSP
+                Else
+                    OutputAbs = (1.0 + Output) * BaseSP
+                End If
+
+                If OutputAbs > OutputMax Then OutputAbs = OutputMax
+
+                If OutputAbs < OutputMin Then OutputAbs = OutputMin
+
+                MVValue = SystemsOfUnits.Converter.ConvertToSI(ManipulatedObjectData.Units, OutputAbs)
+
+            Else
+
+                OutputAbs = SystemsOfUnits.Converter.ConvertFromSI(ManipulatedObjectData.Units, MVValue)
+
+                If Not ReverseActing Then
+                    Output = 1.0 - OutputAbs / BaseSP
+                Else
+                    Output = OutputAbs / BaseSP - 1.0
+                End If
+
             End If
 
             MVHistory.Add(Output)
-
-            If Not ReverseActing Then
-                OutputAbs = (1.0 - Output) * BaseSP
-            Else
-                OutputAbs = (1.0 + Output) * BaseSP
-            End If
-
-            If OutputAbs > OutputMax Then OutputAbs = OutputMax
-
-            If OutputAbs < OutputMin Then OutputAbs = OutputMin
-
-            MVValue = SharedClasses.SystemsOfUnits.Converter.ConvertToSI(ManipulatedObjectData.Units, OutputAbs)
 
             ManipulatedObject.SetPropertyValue(ManipulatedObjectData.PropertyName, MVValue)
 

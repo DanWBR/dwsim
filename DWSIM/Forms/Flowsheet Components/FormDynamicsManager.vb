@@ -577,6 +577,8 @@ Public Class FormDynamicsManager
 
         dtpIntegratorDuration.Value = dtpIntegratorDuration.MinDate.Add(i1.Duration)
 
+        nupRTStep.Value = i1.RealTimeStepMs
+
         nupCalcBalFreq.Value = i1.CalculationRatePressureFlow
 
         nupCalcControlFreq.Value = i1.CalculationRateControl
@@ -1089,6 +1091,22 @@ Public Class FormDynamicsManager
     Private Sub FormDynamicsManager_Activated(sender As Object, e As EventArgs) Handles Me.Activated
 
         CheckModelStatus()
+
+    End Sub
+
+    Private Sub TabPage1_MouseHover(sender As Object, e As EventArgs) Handles TabPage1.MouseHover
+
+        CheckModelStatus()
+
+    End Sub
+
+    Private Sub nupRTStep_ValueChanged(sender As Object, e As EventArgs) Handles nupRTStep.ValueChanged
+
+        Try
+            Dim i1 = Manager.IntegratorList(gridintegrators.Rows(gridintegrators.SelectedCells(0).RowIndex).Cells(0).Value)
+            i1.RealTimeStepMs = nupRTStep.Value
+        Catch ex As Exception
+        End Try
 
     End Sub
 

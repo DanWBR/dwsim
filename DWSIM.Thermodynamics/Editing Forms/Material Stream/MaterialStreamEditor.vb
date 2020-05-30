@@ -346,40 +346,37 @@ Public Class MaterialStreamEditor
 
             End If
 
-            If .GraphicObject.InputConnectors(0).IsAttached Then
-                If .GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.ObjectType = ObjectType.OT_Recycle Then
+            If Not .FlowSheet.DynamicMode Then
+                If .GraphicObject.InputConnectors(0).IsAttached Then
+                    If .GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.ObjectType = ObjectType.OT_Recycle Then
+                        UpdateEditableStatus()
+                        tbMassFlow.Enabled = True
+                        tbMoleFlow.Enabled = True
+                        tbVolFlow.Enabled = True
+                        TabPageInputComposition.Enabled = True
+                    Else
+                        DisableEditableStatus()
+                        tbMassFlow.Enabled = False
+                        tbMoleFlow.Enabled = False
+                        tbVolFlow.Enabled = False
+                        TabPageInputComposition.Enabled = False
+                    End If
+                Else
                     UpdateEditableStatus()
                     tbMassFlow.Enabled = True
                     tbMoleFlow.Enabled = True
                     tbVolFlow.Enabled = True
                     TabPageInputComposition.Enabled = True
-                Else
-                    DisableEditableStatus()
-                    tbMassFlow.Enabled = False
-                    tbMoleFlow.Enabled = False
-                    tbVolFlow.Enabled = False
-                    TabPageInputComposition.Enabled = False
                 End If
             Else
-                UpdateEditableStatus()
+                tbTemp.Enabled = True
+                tbPressure.Enabled = True
+                tbEnth.Enabled = True
+                tbEntr.Enabled = True
                 tbMassFlow.Enabled = True
                 tbMoleFlow.Enabled = True
                 tbVolFlow.Enabled = True
                 TabPageInputComposition.Enabled = True
-            End If
-
-            If MatStream.FlowSheet.DynamicMode Then
-                If MatStream.DynamicsSpec = Interfaces.Enums.Dynamics.DynamicsSpecType.Flow Then
-                    tbMassFlow.Enabled = True
-                    tbMoleFlow.Enabled = True
-                    tbVolFlow.Enabled = True
-                    tbPressure.Enabled = False
-                Else
-                    tbMassFlow.Enabled = False
-                    tbMoleFlow.Enabled = False
-                    tbVolFlow.Enabled = False
-                    tbPressure.Enabled = True
-                End If
             End If
 
         End With

@@ -121,6 +121,9 @@
   <data name="lblCurrent.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Controles do Integrador</value>
+  </data>
   <data name="lblCurrent.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
@@ -128,8 +131,8 @@
   <data name="btnViewResults.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 23</value>
   </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;btnRealtime.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Cenário</value>
@@ -140,14 +143,11 @@
   <data name="btnViewResults.Text" xml:space="preserve">
     <value>Ver Resultados</value>
   </data>
-  <data name="&gt;&gt;lblFinish.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
   <data name="lblStart.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="$this.TabText" xml:space="preserve">
-    <value>Controles do Integrador</value>
+  <data name="&gt;&gt;btnRun.Name" xml:space="preserve">
+    <value>btnRun</value>
   </data>
   <data name="btnRun.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 53</value>
@@ -161,12 +161,6 @@
   <data name="&gt;&gt;cbScenario.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>WeifenLuo.WinFormsUI.Docking.DockContent, WeifenLuo.WinFormsUI.Docking, Version=2.9.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblCurrent.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="btnRealtime.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
   </data>
@@ -178,6 +172,9 @@
   </data>
   <data name="&gt;&gt;ToolTip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnRun.ZOrder" xml:space="preserve">
+    <value>9</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblCurrent.TabIndex" type="System.Int32, mscorlib">
@@ -249,8 +246,11 @@
   <data name="lblFinish.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;btnRun.ZOrder" xml:space="preserve">
-    <value>9</value>
+  <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="btnViewResults.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="lblCurrent.Size" type="System.Drawing.Size, System.Drawing">
     <value>569, 13</value>
@@ -312,8 +312,8 @@
   <data name="lblStart.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 13</value>
   </data>
-  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="ProgressBar1.Size" type="System.Drawing.Size, System.Drawing">
     <value>664, 23</value>
@@ -330,8 +330,8 @@
   <data name="&gt;&gt;ProgressBar1.Name" xml:space="preserve">
     <value>ProgressBar1</value>
   </data>
-  <data name="btnRealtime.ToolTip" xml:space="preserve">
-    <value>Executar em Tempo Real</value>
+  <data name="&gt;&gt;lblFinish.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="&gt;&gt;cbScenario.Parent" xml:space="preserve">
     <value>$this</value>
@@ -348,12 +348,6 @@
   <data name="&gt;&gt;Label3.Name" xml:space="preserve">
     <value>Label3</value>
   </data>
-  <data name="btnViewResults.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 13</value>
-  </data>
   <data name="lblStart.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -366,8 +360,8 @@
   <data name="&gt;&gt;btnRealtime.Name" xml:space="preserve">
     <value>btnRealtime</value>
   </data>
-  <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
-    <value>8</value>
+  <data name="$this.TabText" xml:space="preserve">
+    <value>Controles do Integrador</value>
   </data>
   <data name="btnRun.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
@@ -393,8 +387,11 @@
   <data name="lblCurrent.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;btnRun.Name" xml:space="preserve">
-    <value>btnRun</value>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>WeifenLuo.WinFormsUI.Docking.DockContent, WeifenLuo.WinFormsUI.Docking, Version=2.9.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="ProgressBar1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>198, 53</value>
   </data>
   <data name="btnRun.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 50</value>
@@ -408,8 +405,8 @@
   <data name="lblCurrent.Location" type="System.Drawing.Point, System.Drawing">
     <value>244, 90</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Controles do Integrador</value>
+  <data name="btnRealtime.ToolTip" xml:space="preserve">
+    <value>Executar em Tempo Real</value>
   </data>
   <data name="&gt;&gt;lblFinish.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -444,8 +441,8 @@
   <data name="&gt;&gt;lblStart.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnRealtime.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;lblCurrent.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnViewResults.Parent" xml:space="preserve">
     <value>$this</value>
@@ -461,6 +458,9 @@
   </data>
   <data name="lblStart.Text" xml:space="preserve">
     <value>00:00:00</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="btnRun.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -483,8 +483,8 @@
   <data name="&gt;&gt;ToolTip1.Name" xml:space="preserve">
     <value>ToolTip1</value>
   </data>
-  <data name="ProgressBar1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>198, 53</value>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 13</value>
   </data>
   <data name="btnStop.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>

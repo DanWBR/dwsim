@@ -979,6 +979,11 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             layout.CreateAndAddLabelAndControlRow("Integration Step", dtp2);
 
+            layout.CreateAndAddNumericEditorRow("Real-Time Step (ms)", integ.RealTimeStepMs, 1, 10000, 0, (s, e) =>
+            {
+                integ.RealTimeStepMs = (int)s.Value;
+            });
+
             layout.CreateAndAddLabelRow("Calculation Rates");
 
             layout.CreateAndAddNumericEditorRow("Equilibrium Flash", integ.CalculationRateEquilibrium, 1, 100, 0, (s, e) =>

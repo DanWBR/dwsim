@@ -168,6 +168,8 @@ Namespace UnitOperations
 
             Dim timestep = integrator.IntegrationStep.TotalSeconds
 
+            If integrator.RealTime Then timestep = Convert.ToDouble(integrator.RealTimeStepMs) / 1000.0
+
             Dim ims As MaterialStream = Me.GetInletMaterialStream(0)
             Dim oms As MaterialStream = Me.GetOutletMaterialStream(0)
 

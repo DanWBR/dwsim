@@ -50,6 +50,8 @@ Public Class Integrator
 
     Public Property MonitoredVariables As List(Of IDynamicsMonitoredVariable) = New List(Of IDynamicsMonitoredVariable) Implements IDynamicsIntegrator.MonitoredVariables
 
+    Public Property RealTimeStepMs As Integer = 1000 Implements IDynamicsIntegrator.RealTimeStepMs
+
     Public Function SaveData() As List(Of XElement) Implements ICustomXMLSerialization.SaveData
         Dim data = XMLSerializer.XMLSerializer.Serialize(Me)
         'Dim e1 = New XElement("MonitoredVariableValues")

@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 6.0
+Version 6.0 Update 1
 Copyright (c) 2017-2020 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,13 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/windows
+
+Version 6.0 Update 1
+
+- [NEW] Added a Real-Time Step Duration property to Dynamic Integrator
+- [FIX] Fixed PID Controller Manual Mode
+- [FIX] Fixed Material Stream editor issues when in Dynamic Mode
+- [FIX] Other fixes
 
 Version 6.0
 
