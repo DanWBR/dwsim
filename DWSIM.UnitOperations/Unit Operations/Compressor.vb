@@ -372,7 +372,7 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                         If icnt <= 2 Then
                             P2i *= 1.01
                         Else
-                            P2i = P2i - fx / ((fx - fx00) / (P2i - P2i00))
+                            P2i = P2i - 0.3 * fx / ((fx - fx00) / (P2i - P2i00))
                         End If
 
                         If DebugMode Then AppendDebugLine(String.Format("P2i: {0}", P2i))
