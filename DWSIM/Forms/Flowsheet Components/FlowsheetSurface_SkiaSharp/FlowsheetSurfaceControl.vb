@@ -113,7 +113,7 @@ Public Class FlowsheetSurfaceControl
                         End If
                         If Not FlowsheetSurface.ControlPanelMode Then
                             FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayEditForm()
-                            If FlowsheetObject.DynamicMode Then
+                            If FlowsheetObject.DynamicMode And FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).HasPropertiesForDynamicMode Then
                                 FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayDynamicsEditForm()
                             End If
                             EditorTooltips.Update(FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name), FlowsheetObject)

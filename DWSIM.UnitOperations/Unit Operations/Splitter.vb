@@ -33,6 +33,8 @@ Namespace UnitOperations
 
         Public Overrides ReadOnly Property SupportsDynamicMode As Boolean = True
 
+        Public Overrides ReadOnly Property HasPropertiesForDynamicMode As Boolean = False
+
         Public Enum OpMode
             SplitRatios = 0
             StreamMassFlowSpec = 1

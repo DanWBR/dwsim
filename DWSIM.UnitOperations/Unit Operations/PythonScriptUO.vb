@@ -45,6 +45,8 @@ Namespace UnitOperations
 
         Public Overrides ReadOnly Property SupportsDynamicMode As Boolean = True
 
+        Public Overrides ReadOnly Property HasPropertiesForDynamicMode As Boolean = False
+
         Public Enum PythonExecutionEngine
             IronPython = 0
             PythonNET = 1

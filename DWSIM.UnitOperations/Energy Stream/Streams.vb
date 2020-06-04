@@ -51,6 +51,8 @@ Namespace Streams
 
         Public Overrides ReadOnly Property SupportsDynamicMode As Boolean = True
 
+        Public Overrides ReadOnly Property HasPropertiesForDynamicMode As Boolean = False
+
 #Region "   CAPE-OPEN ICapeIdentification"
 
         Public Overrides Property ComponentDescription() As String = "" Implements CapeOpen.ICapeIdentification.ComponentDescription

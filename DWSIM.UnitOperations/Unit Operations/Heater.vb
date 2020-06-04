@@ -34,6 +34,8 @@ Namespace UnitOperations
 
         Public Overrides ReadOnly Property SupportsDynamicMode As Boolean = True
 
+        Public Overrides ReadOnly Property HasPropertiesForDynamicMode As Boolean = True
+
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_HeaterCooler
 
         Public Enum CalculationMode
@@ -154,6 +156,7 @@ Namespace UnitOperations
 
             AddDynamicProperty("Flow Conductance", "Flow Conductance (inverse of Resistance) of this Unit Operation.", 1, UnitOfMeasure.conductance)
             AddDynamicProperty("Volume", "Heater Volume", 1, UnitOfMeasure.volume)
+            AddDynamicProperty("Minimum Pressure", "Minimum Dynamic Pressure for this Unit Operation.", 101325, UnitOfMeasure.pressure)
             AddDynamicProperty("Initialize using Inlet Stream", "Initializes the volume content with information from the inlet stream, if the content is null.", 1, UnitOfMeasure.none)
             AddDynamicProperty("Reset Content", "Empties the volume content on the next run.", 0, UnitOfMeasure.none)
 
@@ -181,6 +184,8 @@ Namespace UnitOperations
             Dim Kr As Double = GetDynamicProperty("Flow Conductance")
             Dim Vol As Double = GetDynamicProperty("Volume")
             Dim InitializeFromInlet As Boolean = GetDynamicProperty("Initialize using Inlet Stream")
+
+            Dim Pmin = GetDynamicProperty("Minimum Pressure")
 
             Dim Reset As Boolean = GetDynamicProperty("Reset Content")
 
@@ -297,13 +302,13 @@ Namespace UnitOperations
 
                 Else
 
-                    Pressure = 0.01
+                    Pressure = Pmin
 
                 End If
 
             Else
 
-                Pressure = 0.01
+                Pressure = Pmin
 
             End If
 

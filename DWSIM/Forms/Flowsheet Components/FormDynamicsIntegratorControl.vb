@@ -398,4 +398,25 @@ Public Class FormDynamicsIntegratorControl
 
     End Sub
 
+    Private Sub FormDynamicsIntegratorControl_MouseEnter(sender As Object, e As EventArgs) Handles Me.MouseEnter
+
+        If cbScenario.Items.Count <> Flowsheet.DynamicsManager.ScheduleList.Count Then
+
+            cbScenario.Items.Clear()
+
+            For Each item In Flowsheet.DynamicsManager.ScheduleList
+                If item.Value.CurrentIntegrator <> "" Then
+                    Dim integ = Flowsheet.DynamicsManager.IntegratorList(item.Value.CurrentIntegrator).Description
+                    cbScenario.Items.Add(item.Value.Description & " (" & integ & ")")
+                Else
+                    cbScenario.Items.Add(item.Value.Description)
+                End If
+            Next
+
+            cbScenario.SelectedIndex = 0
+
+        End If
+
+    End Sub
+
 End Class

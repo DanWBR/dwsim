@@ -29,6 +29,8 @@ Imports DWSIM.Interfaces.Enums
 
     ReadOnly Property SupportsDynamicMode As Boolean
 
+    ReadOnly Property HasPropertiesForDynamicMode As Boolean
+
     Property ExtraProperties As Dynamic.ExpandoObject
 
     Property ExtraPropertiesDescriptions As ExpandoObject

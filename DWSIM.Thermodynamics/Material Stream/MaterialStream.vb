@@ -63,6 +63,8 @@ Namespace Streams
 
         Public Overrides ReadOnly Property SupportsDynamicMode As Boolean = True
 
+        Public Overrides ReadOnly Property HasPropertiesForDynamicMode As Boolean = True
+
 #Region "    XML serialization"
 
         Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean
@@ -7484,8 +7486,8 @@ Namespace Streams
         ''' <param name="value">Flow in kg/s</param>
         Public Sub SetMassFlow(value As Double)
             Phases(0).Properties.massflow = value
-            Phases(0).Properties.molarflow = Nothing
-            Phases(0).Properties.volumetric_flow = Nothing
+            Phases(0).Properties.molarflow = value / Phases(0).Properties.molecularWeight * 1000
+            Phases(0).Properties.volumetric_flow = value / Phases(0).Properties.density.GetValueOrDefault
         End Sub
 
         Public Function GetMassEnthalpy() As Double
@@ -7517,9 +7519,9 @@ Namespace Streams
         ''' </summary>
         ''' <param name="value">Flow in mol/s</param>
         Public Sub SetMolarFlow(value As Double)
-            Phases(0).Properties.massflow = Nothing
+            Phases(0).Properties.massflow = value * Phases(0).Properties.molecularWeight / 1000
             Phases(0).Properties.molarflow = value
-            Phases(0).Properties.volumetric_flow = Nothing
+            Phases(0).Properties.volumetric_flow = value * Phases(0).Properties.molecularWeight / 1000 / Phases(0).Properties.density.GetValueOrDefault
         End Sub
 
         ''' <summary>

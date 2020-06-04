@@ -35,6 +35,8 @@ Namespace UnitOperations
 
         Public Overrides ReadOnly Property SupportsDynamicMode As Boolean = True
 
+        Public Overrides ReadOnly Property HasPropertiesForDynamicMode As Boolean = False
+
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_ComprExpndr
 
         Public Enum CalculationMode

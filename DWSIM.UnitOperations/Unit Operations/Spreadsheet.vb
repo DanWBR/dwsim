@@ -46,6 +46,10 @@ Namespace UnitOperations
         Inherits UnitOpBaseClass
         Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.UserModels
 
+        Public Overrides ReadOnly Property HasPropertiesForDynamicMode As Boolean = False
+
+        Public Overrides ReadOnly Property SupportsDynamicMode As Boolean = True
+
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_SpreadsheetUO
 
         Protected m_DQ As Nullable(Of Double)

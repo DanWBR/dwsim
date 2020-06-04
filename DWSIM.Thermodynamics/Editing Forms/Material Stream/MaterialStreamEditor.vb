@@ -77,6 +77,14 @@ Public Class MaterialStreamEditor
 
         With MatStream
 
+            'dynamics
+
+            If .DynamicsSpec = Interfaces.Enums.Dynamics.DynamicsSpecType.Flow Then
+                cbDynSpec.SelectedIndex = 1
+            Else
+                cbDynSpec.SelectedIndex = 0
+            End If
+
             'first block
 
             chkActive.Checked = MatStream.GraphicObject.Active
@@ -1565,6 +1573,13 @@ Public Class MaterialStreamEditor
 
         MatStream.EditorState = Newtonsoft.Json.JsonConvert.SerializeObject(vs)
 
+    End Sub
+
+    Private Sub cbDynSpec_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDynSpec.SelectedIndexChanged
+        If Loaded Then
+            MatStream.DynamicsSpec = cbDynSpec.SelectedIndex
+            MatStream.FlowSheet.UpdateInterface()
+        End If
     End Sub
 
     Private Sub lblTag_KeyPress(sender As Object, e As KeyEventArgs) Handles lblTag.KeyUp

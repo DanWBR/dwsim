@@ -35,6 +35,8 @@ Namespace UnitOperations
 
         Public Overrides ReadOnly Property SupportsDynamicMode As Boolean = True
 
+        Public Overrides ReadOnly Property HasPropertiesForDynamicMode As Boolean = True
+
         Dim rhol, rhov, ql, qv, qe, rhoe, wl, wv As Double
         Dim C, VGI, VMAX, K As Double
         Dim BeH, BSGH, BSLH, AH, DH As Double
@@ -153,7 +155,8 @@ Namespace UnitOperations
             AddDynamicProperty("Liquid Level", "Current Liquid Level", 0, UnitOfMeasure.distance)
             AddDynamicProperty("Volume", "Vessel Volume", 1, UnitOfMeasure.volume)
             AddDynamicProperty("Height", "Available Height for Liquid", 2, UnitOfMeasure.distance)
-            AddDynamicProperty("Initialize using Inlet Stream", "Initializes the vessel content with information from the inlet stream, if the vessel content is null.", 1, UnitOfMeasure.none)
+            AddDynamicProperty("Minimum Pressure", "Minimum Dynamic Pressure for this Unit Operation.", 101325, UnitOfMeasure.pressure)
+            AddDynamicProperty("Initialize using Inlet Stream", "Initializes the vessel content with information from the inlet stream, if the vessel content is null.", 0, UnitOfMeasure.none)
             AddDynamicProperty("Reset Content", "Empties the vessel's content on the next run.", 0, UnitOfMeasure.none)
 
         End Sub
@@ -196,6 +199,7 @@ Namespace UnitOperations
             Dim Vol As Double = GetDynamicProperty("Volume")
             Dim Height As Double = GetDynamicProperty("Height")
             Dim Pressure As Double
+            Dim Pmin = GetDynamicProperty("Minimum Pressure")
             Dim Orientation As Integer = GetDynamicProperty("Vessel Orientation")
             Dim InitializeFromInlet As Boolean = GetDynamicProperty("Initialize using Inlet Stream")
 
@@ -290,7 +294,7 @@ Namespace UnitOperations
 
                 Dim LiquidVolume, RelativeLevel As Double
 
-                If AccumulationStream.GetPressure > 0 Then
+                If AccumulationStream.GetPressure > Pmin Then
 
                     If prevM = 0.0 Or integrator.ShouldCalculateEquilibrium Then
 
@@ -314,7 +318,7 @@ Namespace UnitOperations
 
                 Else
 
-                    Pressure = 0.0
+                    Pressure = Pmin
 
                     LiquidVolume = 0.0
 

@@ -1020,6 +1020,8 @@ Namespace UnitOperations
 
         Public Overridable ReadOnly Property SupportsDynamicMode As Boolean = False Implements ISimulationObject.SupportsDynamicMode
 
+        Public Overridable ReadOnly Property HasPropertiesForDynamicMode As Boolean = False Implements ISimulationObject.HasPropertiesForDynamicMode
+
 #End Region
 
 

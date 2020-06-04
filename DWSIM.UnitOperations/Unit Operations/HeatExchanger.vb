@@ -74,6 +74,11 @@ Namespace UnitOperations
         Inherits UnitOperations.UnitOpBaseClass
         Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.Exchangers
 
+        Public Overrides ReadOnly Property SupportsDynamicMode As Boolean = True
+
+        Public Overrides ReadOnly Property HasPropertiesForDynamicMode As Boolean = True
+
+
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_HeatExchanger
 
         Protected m_Q As Nullable(Of Double) = 0
@@ -309,7 +314,10 @@ Namespace UnitOperations
             AddDynamicProperty("Hot Fluid Flow Conductance", "Flow Conductance (inverse of Resistance) for the Hot Fluid.", 1, UnitOfMeasure.conductance)
             AddDynamicProperty("Volume for Cold Fluid", "Available Volume for Cold Fluid", 1, UnitOfMeasure.volume)
             AddDynamicProperty("Volume for Hot Fluid", "Available Volume for Cold Fluid", 1, UnitOfMeasure.volume)
-            AddDynamicProperty("Initialize using Inlet Streams", "Initializes the volume contents with information from the inlet streams, if the content is null.", 1, UnitOfMeasure.none)
+            AddDynamicProperty("Cold Side Pressure", "Dynamic Pressure for the Cold Fluid side.", 101325, UnitOfMeasure.pressure)
+            AddDynamicProperty("Hot Side Pressure", "Dynamic Pressure for the Hot Fluid side.", 101325, UnitOfMeasure.pressure)
+            AddDynamicProperty("Minimum Pressure", "Minimum Dynamic Pressure for this Unit Operation.", 101325, UnitOfMeasure.pressure)
+            AddDynamicProperty("Initialize using Inlet Streams", "Initializes the volume contents with information from the inlet streams, if the content is null.", 0, UnitOfMeasure.none)
             AddDynamicProperty("Reset Contents", "Empties the volume contents on the next run.", 0, UnitOfMeasure.none)
 
         End Sub
@@ -331,18 +339,19 @@ Namespace UnitOperations
 
             Dim InitializeFromInlet As Boolean = GetDynamicProperty("Initialize using Inlet Streams")
 
+            Dim Pmin = GetDynamicProperty("Minimum Pressure")
+
             Dim Reset As Boolean = GetDynamicProperty("Reset Contents")
 
             If Reset Then
                 AccumulationStreamCold = Nothing
                 AccumulationStreamHot = Nothing
-                SetDynamicProperty("Reset Content", 0)
+                SetDynamicProperty("Reset Contents", 0)
             End If
 
-            Dim Ti1, Ti2, w1, w2, A, Tc1, Th1, Wc, Wh, P1, P2, Th2, Tc2, U As Double
-            Dim Pc1, Ph1, Pc2, Ph2, DeltaHc, DeltaHh, H1, H2, Hc1, Hh1, Hc2, Hh2, CPC, CPH As Double
+            Dim Ti1, Ti2, A, Tc1, Th1, Wc, Wh, P1, P2, Th2, Tc2, U As Double
+            Dim Pc1, Ph1, Pc2, Ph2, DeltaHc, DeltaHh, H1, H2, Hc1, Hh1, Hc2, Hh2 As Double
             Dim StIn0, StIn1, StOut0, StOut1, StInCold, StInHot, StOutHot, StOutCold As MaterialStream
-            Dim coldidx As Integer = 0
 
             'Validate unitop status.
             Me.Validate()
@@ -355,13 +364,11 @@ Namespace UnitOperations
 
             'First input stream.
             Ti1 = StIn0.Phases(0).Properties.temperature.GetValueOrDefault
-            w1 = StIn0.Phases(0).Properties.massflow.GetValueOrDefault
             P1 = StIn0.Phases(0).Properties.pressure.GetValueOrDefault
             H1 = StIn0.Phases(0).Properties.enthalpy.GetValueOrDefault
 
             'Second input stream.
             Ti2 = StIn1.Phases(0).Properties.temperature.GetValueOrDefault
-            w2 = StIn1.Phases(0).Properties.massflow.GetValueOrDefault
             P2 = StIn1.Phases(0).Properties.pressure.GetValueOrDefault
             H2 = StIn1.Phases(0).Properties.enthalpy.GetValueOrDefault
 
@@ -369,12 +376,6 @@ Namespace UnitOperations
 
             If Ti1 < Ti2 Then
                 'Input1 is the cold stream.
-                Tc1 = Ti1
-                Th1 = Ti2
-                Wc = w1
-                Wh = w2
-                Hc1 = H1
-                Hh1 = H2
                 'Identify cold and hot streams.
                 StInCold = StIn0
                 StInHot = StIn1
@@ -382,18 +383,14 @@ Namespace UnitOperations
                 StOutHot = StOut1
             Else
                 'Input2 is the cold stream.
-                Tc1 = Ti2
-                Th1 = Ti1
-                Wc = w2
-                Wh = w1
-                Hc1 = H2
-                Hh1 = H1
                 'Identify cold and hot streams.
                 StInCold = StIn1
                 StInHot = StIn0
                 StOutCold = StOut1
                 StOutHot = StOut0
             End If
+
+            Dim liquidcase As Boolean = False
 
             ' hot accumulation stream
 
@@ -420,6 +417,7 @@ Namespace UnitOperations
 
             Else
 
+                AccumulationStreamHot.PropertyPackage = StInHot.PropertyPackage
                 AccumulationStreamHot.SetFlowsheet(FlowSheet)
                 AccumulationStreamHot = AccumulationStreamHot.Add(StInHot, timestep)
                 AccumulationStreamHot = AccumulationStreamHot.Subtract(StOutHot, timestep)
@@ -435,12 +433,12 @@ Namespace UnitOperations
 
                 If InitializeFromInlet Then
 
-                    AccumulationStreamCold = StInHot.CloneXML
+                    AccumulationStreamCold = StInCold.CloneXML
 
                 Else
 
-                    AccumulationStreamCold = StInHot.Subtract(StOutHot, timestep)
-                    AccumulationStreamCold = AccumulationStreamCold.Subtract(StOutHot, timestep)
+                    AccumulationStreamCold = StInCold.Subtract(StOutCold, timestep)
+                    AccumulationStreamCold = AccumulationStreamCold.Subtract(StOutCold, timestep)
 
                 End If
 
@@ -454,9 +452,10 @@ Namespace UnitOperations
 
             Else
 
+                AccumulationStreamCold.PropertyPackage = StInCold.PropertyPackage
                 AccumulationStreamCold.SetFlowsheet(FlowSheet)
-                AccumulationStreamCold = AccumulationStreamCold.Add(StInHot, timestep)
-                AccumulationStreamCold = AccumulationStreamCold.Subtract(StOutHot, timestep)
+                AccumulationStreamCold = AccumulationStreamCold.Add(StInCold, timestep)
+                AccumulationStreamCold = AccumulationStreamCold.Subtract(StOutCold, timestep)
                 If AccumulationStreamCold.GetMassFlow <= 0.0 Then AccumulationStreamCold.SetMassFlow(0.0)
 
             End If
@@ -467,9 +466,9 @@ Namespace UnitOperations
 
             Dim MHot = AccumulationStreamHot.GetMolarFlow()
 
-            Dim TemperatureHot = AccumulationStream.GetTemperature
+            Dim TemperatureHot = AccumulationStreamHot.GetTemperature
 
-            Dim PressureHot = AccumulationStream.GetPressure
+            Dim PressureHot = AccumulationStreamHot.GetPressure
 
             'm3/mol
 
@@ -479,11 +478,15 @@ Namespace UnitOperations
 
                 currentMHot = VolumeHot / MHot
 
+                If Math.Abs(currentMHot - prevMHot) < 0.0001 And AccumulationStreamHot.Phases(1).Properties.molarfraction.GetValueOrDefault > 0.99999 Then
+                    liquidcase = True
+                End If
+
                 PropertyPackage.CurrentMaterialStream = AccumulationStreamHot
 
                 If AccumulationStreamHot.GetPressure > 0 Then
 
-                    If prevMHot = 0.0 Or integrator.ShouldCalculateEquilibrium Then
+                    If (prevMHot = 0.0 Or integrator.ShouldCalculateEquilibrium) And Not liquidcase Then
 
                         Dim result As IFlashCalculationResult
 
@@ -493,19 +496,19 @@ Namespace UnitOperations
 
                     Else
 
-                        PressureHot = currentMHot / prevMHot * PressureHot
+                        If prevMHot > 0.0 Then PressureHot = currentMHot / prevMHot * PressureHot
 
                     End If
 
                 Else
 
-                    PressureHot = 0.01
+                    PressureHot = Pmin
 
                 End If
 
             Else
 
-                PressureHot = 0.01
+                PressureHot = Pmin
 
             End If
 
@@ -517,9 +520,9 @@ Namespace UnitOperations
 
             Dim MCold = AccumulationStreamCold.GetMolarFlow()
 
-            Dim TemperatureCold = AccumulationStream.GetTemperature
+            Dim TemperatureCold = AccumulationStreamCold.GetTemperature
 
-            Dim PressureCold = AccumulationStream.GetPressure
+            Dim PressureCold = AccumulationStreamCold.GetPressure
 
             'm3/mol
 
@@ -529,11 +532,15 @@ Namespace UnitOperations
 
                 currentMCold = VolumeCold / MCold
 
-                PropertyPackage.CurrentMaterialStream = AccumulationStreamCold
+                If Math.Abs(currentMCold - prevMCold) < 0.0001 And AccumulationStreamCold.Phases(1).Properties.molarfraction.GetValueOrDefault > 0.99999 Then
+                    liquidcase = True
+                End If
+
+                AccumulationStreamCold.PropertyPackage.CurrentMaterialStream = AccumulationStreamCold
 
                 If AccumulationStreamCold.GetPressure > 0 Then
 
-                    If prevMCold = 0.0 Or integrator.ShouldCalculateEquilibrium Then
+                    If (prevMCold = 0.0 Or integrator.ShouldCalculateEquilibrium) And Not liquidcase Then
 
                         Dim result As IFlashCalculationResult
 
@@ -543,19 +550,19 @@ Namespace UnitOperations
 
                     Else
 
-                        PressureCold = currentMCold / prevMCold * PressureCold
+                        If prevMCold > 0.0 Then PressureCold = currentMCold / prevMCold * PressureCold
 
                     End If
 
                 Else
 
-                    PressureCold = 0.01
+                    PressureCold = Pmin
 
                 End If
 
             Else
 
-                PressureCold = 0.01
+                PressureCold = Pmin
 
             End If
 
@@ -575,15 +582,20 @@ Namespace UnitOperations
 
             Th1 = TemperatureHot
 
+            ' flow rates (mass)
+
+            Wc = AccumulationStreamCold.GetMassFlow()
+
+            Wh = AccumulationStreamHot.GetMassFlow()
+
             'calculate maximum theoretical heat exchange
 
             Dim HHx As Double
             Dim tmpstr As MaterialStream = AccumulationStreamHot.Clone
-            tmpstr.PropertyPackage = StInHot.PropertyPackage
+            tmpstr.PropertyPackage = AccumulationStreamHot.PropertyPackage
             tmpstr.SetFlowsheet(AccumulationStreamHot.FlowSheet)
             tmpstr.PropertyPackage.CurrentMaterialStream = tmpstr
-            tmpstr.Phases("0").Properties.temperature = Tc1
-            tmpstr.Phases("0").Properties.pressure = Ph2
+            tmpstr.SetTemperature(Tc1)
             tmpstr.PropertyPackage.DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
             tmpstr.Calculate(False, True)
             HHx = tmpstr.Phases(0).Properties.enthalpy.GetValueOrDefault
@@ -593,8 +605,7 @@ Namespace UnitOperations
             tmpstr.PropertyPackage = AccumulationStreamCold.PropertyPackage
             tmpstr.SetFlowsheet(StInHot.FlowSheet)
             tmpstr.PropertyPackage.CurrentMaterialStream = tmpstr
-            tmpstr.Phases("0").Properties.temperature = Th1
-            tmpstr.Phases("0").Properties.pressure = Pc2
+            tmpstr.SetTemperature(Th1)
             tmpstr.PropertyPackage.DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
             tmpstr.Calculate(False, True)
             HHx = tmpstr.Phases(0).Properties.enthalpy.GetValueOrDefault
@@ -624,6 +635,12 @@ Namespace UnitOperations
                     Qi = MaxHeatExchange
                     Q_old = 10000000000.0
 
+                    Tc2 = Tc1
+                    Th2 = Th1
+
+                    Pc2 = Pc1 - (StInCold.GetMassFlow() / KrCold) ^ 2
+                    Ph2 = Ph1 - (StInHot.GetMassFlow() / KrHot) ^ 2
+
                     Do
 
                         Hc2 = Qi / Wc + Hc1
@@ -640,7 +657,7 @@ Namespace UnitOperations
                         PIh2 = (1 + tmp.GetLiquidPhase1MoleFraction) * (1 + tmp.GetVaporPhaseMoleFraction * (1 + tmp.GetSolidPhaseMoleFraction)) 'phase indicator hot stream
                         If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate hot stream outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]  ===> Th2 = {2} K", Ph2, Hh2, Th2))
 
-                        If Abs((Qi - Q_old) / Q_old) < 0.001 Or count > 100 Then Exit Do
+                        If Abs((Qi - Q_old) / Q_old) < 0.001 Or Abs(Qi) < 0.01 Or count > 500 Then Exit Do
 
                         WWc = Wc * (Hc2 - Hc1) / (Tc2 - Tc1) * 1000 'Heat Capacity Rate cold side
                         WWh = Wh * (Hh2 - Hh1) / (Th2 - Th1) * 1000 'Heat Capacity Rate hot side
@@ -696,11 +713,9 @@ Namespace UnitOperations
 
                     Loop
 
-                    ColdSideOutletTemperature = Tc2
-
                     Q = Qi
 
-                    If count > 100 Then Throw New Exception("Reached maximum number of iterations! Final Q change: " & Qi - Q_old & " kW ; " & Abs((Qi - Q_old) / Q_old * 100) & " % ")
+                    If count > 500 Then Throw New Exception("Reached maximum number of iterations! Final Q change: " & Qi - Q_old & " kW ; " & Abs((Qi - Q_old) / Q_old * 100) & " % ")
 
                     PIc1 = (1 + AccumulationStreamCold.Phases(1).Properties.molarfraction.GetValueOrDefault) * (1 + AccumulationStreamCold.Phases(2).Properties.molarfraction.GetValueOrDefault) * (1 + AccumulationStreamCold.Phases(7).Properties.molarfraction.GetValueOrDefault)
                     PIh1 = (1 + AccumulationStreamHot.Phases(1).Properties.molarfraction.GetValueOrDefault) * (1 + AccumulationStreamHot.Phases(2).Properties.molarfraction.GetValueOrDefault) * (1 + AccumulationStreamHot.Phases(7).Properties.molarfraction.GetValueOrDefault)
@@ -710,15 +725,11 @@ Namespace UnitOperations
 
                 Case HeatExchangerCalcMode.ShellandTube_Rating
 
-
             End Select
 
             ThermalEfficiency = (Q - HeatLoss) / MaxHeatExchange * 100
 
             If HeatLoss > Math.Abs(Q.GetValueOrDefault) Then Throw New Exception("Invalid Heat Loss.")
-
-            Pc2 = Pc1 - (StInCold.GetMassFlow() / KrCold) ^ 2
-            Ph2 = Ph1 - (StInHot.GetMassFlow() / KrHot) ^ 2
 
             Me.ColdSideOutletTemperature = Tc2
             Me.HotSideOutletTemperature = Th2
@@ -727,13 +738,23 @@ Namespace UnitOperations
             Me.OverallCoefficient = U
             Me.Area = A
 
+            SetDynamicProperty("Cold Side Pressure", (Pc1 + Pc2) / 2)
+            SetDynamicProperty("Hot Side Pressure", (Ph1 + Ph2) / 2)
+
             'Define new calculated properties.
-            StOutHot.Phases(0).Properties.temperature = Th2
-            StOutCold.Phases(0).Properties.temperature = Tc2
-            StOutHot.Phases(0).Properties.pressure = Ph2
-            StOutCold.Phases(0).Properties.pressure = Pc2
-            StOutHot.Phases(0).Properties.enthalpy = Hh2
-            StOutCold.Phases(0).Properties.enthalpy = Hc2
+
+            AccumulationStreamHot.Phases(0).Properties.temperature = Th2
+            AccumulationStreamCold.Phases(0).Properties.temperature = Tc2
+            AccumulationStreamHot.Phases(0).Properties.pressure = (Ph1 + Ph2) / 2
+            AccumulationStreamCold.Phases(0).Properties.pressure = (Pc1 + Pc2) / 2
+            AccumulationStreamHot.Phases(0).Properties.enthalpy = Hh2
+            AccumulationStreamCold.Phases(0).Properties.enthalpy = Hc2
+
+            StOutHot.AssignFromPhase(PhaseLabel.Mixture, AccumulationStreamHot, False)
+            StOutCold.AssignFromPhase(PhaseLabel.Mixture, AccumulationStreamCold, False)
+
+            StInHot.SetPressure(Ph1)
+            StInCold.SetPressure(Pc1)
 
             If Th2 < Tc1 Or Tc2 > Th1 Then
                 FlowSheet.ShowMessage(Me.GraphicObject.Tag & ": Temperature Cross", IFlowsheet.MessageType.Warning)
