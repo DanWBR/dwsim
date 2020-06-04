@@ -709,6 +709,8 @@ Namespace UnitOperations
                             LMTD = Qi / U / A * 1000
                         End If
 
+                        If Qi > MaxHeatExchange Then Qi = MaxHeatExchange
+
                         count += 1
 
                     Loop

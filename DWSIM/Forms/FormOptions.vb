@@ -375,7 +375,7 @@ Public Class FormOptions
         '=======================================
         '=== Interaction parameter databases ===
         '=======================================
-     
+
         'user databases
         If Not My.Settings.UserInteractionsDatabases Is Nothing Then
             For Each str As String In My.Settings.UserInteractionsDatabases
@@ -444,9 +444,6 @@ Public Class FormOptions
         My.Settings.EnableParallelProcessing = Me.chkEnableParallelCalcs.Checked
         Me.cbParallelism.Enabled = Me.chkEnableParallelCalcs.Checked
         Settings.EnableParallelProcessing = My.Settings.EnableParallelProcessing
-        chkEnableInspector.Checked = Not Me.chkEnableParallelCalcs.Checked
-        My.Settings.InspectorEnabled = chkEnableInspector.Checked
-        Settings.InspectorEnabled = My.Settings.InspectorEnabled
     End Sub
 
     Private Sub cbParallelism_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cbParallelism.SelectedIndexChanged
@@ -669,10 +666,6 @@ Public Class FormOptions
         My.Settings.InspectorEnabled = chkEnableInspector.Checked
         Settings.InspectorEnabled = My.Settings.InspectorEnabled
         FormMain.tsbInspector.Checked = chkEnableInspector.Checked
-        Me.chkEnableParallelCalcs.Checked = Not chkEnableInspector.Checked
-        My.Settings.EnableParallelProcessing = Me.chkEnableParallelCalcs.Checked
-        Me.cbParallelism.Enabled = Me.chkEnableParallelCalcs.Checked
-        Settings.EnableParallelProcessing = My.Settings.EnableParallelProcessing
     End Sub
 
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbEditorStyle.SelectedIndexChanged
