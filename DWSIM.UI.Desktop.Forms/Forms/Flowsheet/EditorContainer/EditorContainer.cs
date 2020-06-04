@@ -212,7 +212,7 @@ namespace DWSIM.UI.Forms
 
             // dynamics
 
-            if (obj.SupportsDynamicMode)
+            if (obj.SupportsDynamicMode && obj.HasPropertiesForDynamicMode)
             {
                 if (obj.ExtraPropertiesDescriptions.Count() > 0 || 
                     obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream)

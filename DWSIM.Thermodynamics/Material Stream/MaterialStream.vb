@@ -63,7 +63,7 @@ Namespace Streams
 
         Public Overrides ReadOnly Property SupportsDynamicMode As Boolean = True
 
-        Public Overrides ReadOnly Property HasPropertiesForDynamicMode As Boolean = True
+        Public Overrides ReadOnly Property HasPropertiesForDynamicMode As Boolean = False
 
 #Region "    XML serialization"
 

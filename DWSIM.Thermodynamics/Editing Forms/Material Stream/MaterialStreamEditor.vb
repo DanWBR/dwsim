@@ -1475,7 +1475,6 @@ Public Class MaterialStreamEditor
 
     Sub UpdateCompPropBasis(cb As ComboBox, grid As DataGridView, phase As Interfaces.IPhase)
 
-
         Dim W, Q As Double, suffix As String = ""
         W = phase.Properties.massflow.GetValueOrDefault
         Q = phase.Properties.molarflow.GetValueOrDefault

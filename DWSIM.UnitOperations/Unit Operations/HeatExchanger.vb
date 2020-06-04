@@ -701,7 +701,9 @@ Namespace UnitOperations
                                     LMTD = ((Th1 - Tc2) - (Th2 - Tc1)) / Math.Log((Th1 - Tc2) / (Th2 - Tc1))
                                 End If
                         End Select
+
                         Q_old = Qi
+
                         If LMTD > 0 Then
                             Qi = U * A * LMTD / 1000
                         Else

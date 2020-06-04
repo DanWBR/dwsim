@@ -132,11 +132,14 @@
   <data name="PropertiesLayout.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 16</value>
   </data>
+  <data name="PropertiesLayout.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
   <data name="PropertiesLayout.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="PropertiesLayout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>386, 390</value>
+    <value>376, 380</value>
   </data>
   <data name="PropertiesLayout.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -154,16 +157,16 @@
     <value>0</value>
   </data>
   <data name="PropertiesLayout.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls /&gt;&lt;Columns Styles="Percent,50" /&gt;&lt;Rows Styles="Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls /&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="GroupBox2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+    <value>5, 5</value>
   </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>392, 409</value>
+    <value>382, 399</value>
   </data>
   <data name="GroupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -194,6 +197,9 @@
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="$this.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>DynamicsPropertyEditor</value>
