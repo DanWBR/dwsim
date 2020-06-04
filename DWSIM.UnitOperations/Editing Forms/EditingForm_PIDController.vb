@@ -107,6 +107,8 @@ Public Class EditingForm_PIDController
 
             tbOutputMax.Text = SimObject.OutputMax
 
+            tbWG.Text = SimObject.WindupGuard
+
             'annotation
 
             Try
@@ -365,7 +367,7 @@ Public Class EditingForm_PIDController
 
     End Sub
 
-    Private Sub tbSetPoint_TextChanged(sender As Object, e As EventArgs) Handles tbSetPoint.TextChanged, tbKd.TextChanged, tbKi.TextChanged, tbKp.TextChanged, tbOffset.TextChanged, tbOutputMin.TextChanged, tbOutputMax.TextChanged
+    Private Sub tbSetPoint_TextChanged(sender As Object, e As EventArgs) Handles tbSetPoint.TextChanged, tbKd.TextChanged, tbKi.TextChanged, tbKp.TextChanged, tbOffset.TextChanged, tbOutputMin.TextChanged, tbOutputMax.TextChanged, tbWG.TextChanged
 
         Dim tbox = DirectCast(sender, TextBox)
 
@@ -377,7 +379,7 @@ Public Class EditingForm_PIDController
 
     End Sub
 
-    Private Sub tbSetPoint_KeyDown(sender As Object, e As KeyEventArgs) Handles tbSetPoint.KeyDown, tbKd.KeyDown, tbKi.KeyDown, tbKp.KeyDown, tbOffset.KeyDown, tbOutputMin.KeyDown, tbOutputMax.KeyDown
+    Private Sub tbSetPoint_KeyDown(sender As Object, e As KeyEventArgs) Handles tbSetPoint.KeyDown, tbKd.KeyDown, tbKi.KeyDown, tbKp.KeyDown, tbOffset.KeyDown, tbOutputMin.KeyDown, tbOutputMax.KeyDown, tbWG.KeyDown
 
         If e.KeyCode = Keys.Enter And Loaded Then
 
@@ -396,6 +398,8 @@ Public Class EditingForm_PIDController
                     SimObject.Ki = Double.Parse(tbKi.Text.ParseExpressionToDouble)
                 Case "tbKd"
                     SimObject.Kd = Double.Parse(tbKd.Text.ParseExpressionToDouble)
+                Case "tbWG"
+                    SimObject.WindupGuard = Double.Parse(tbWG.Text.ParseExpressionToDouble)
             End Select
 
             UpdateInfo()

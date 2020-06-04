@@ -51,6 +51,8 @@ Partial Class EditingForm_PIDController
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.rtbAnnotations = New Extended.Windows.Forms.RichTextBoxExtended()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.tbWG = New System.Windows.Forms.TextBox()
+        Me.Label18 = New System.Windows.Forms.Label()
         Me.chkReverse = New System.Windows.Forms.CheckBox()
         Me.tbOutputMax = New System.Windows.Forms.TextBox()
         Me.Label17 = New System.Windows.Forms.Label()
@@ -316,6 +318,8 @@ Partial Class EditingForm_PIDController
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.tbWG)
+        Me.GroupBox2.Controls.Add(Me.Label18)
         Me.GroupBox2.Controls.Add(Me.chkReverse)
         Me.GroupBox2.Controls.Add(Me.tbOutputMax)
         Me.GroupBox2.Controls.Add(Me.Label17)
@@ -336,6 +340,20 @@ Partial Class EditingForm_PIDController
         Me.GroupBox2.TabStop = False
         Me.ToolTipValues.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
         Me.ToolTipChangeTag.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip1"))
+        '
+        'tbWG
+        '
+        resources.ApplyResources(Me.tbWG, "tbWG")
+        Me.tbWG.Name = "tbWG"
+        Me.ToolTipChangeTag.SetToolTip(Me.tbWG, resources.GetString("tbWG.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.tbWG, resources.GetString("tbWG.ToolTip1"))
+        '
+        'Label18
+        '
+        resources.ApplyResources(Me.Label18, "Label18")
+        Me.Label18.Name = "Label18"
+        Me.ToolTipValues.SetToolTip(Me.Label18, resources.GetString("Label18.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label18, resources.GetString("Label18.ToolTip1"))
         '
         'chkReverse
         '
@@ -523,4 +541,6 @@ Partial Class EditingForm_PIDController
     Public WithEvents tbOutputMin As TextBox
     Public WithEvents Label16 As Label
     Friend WithEvents chkReverse As CheckBox
+    Public WithEvents tbWG As TextBox
+    Public WithEvents Label18 As Label
 End Class

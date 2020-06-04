@@ -742,6 +742,14 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
                 }
             });
 
+            s.CreateAndAddTextBoxRow(container, nf, "Wind-Up Guard", pid.WindupGuard, (sender, e) =>
+            {
+                if (s.IsValidDouble(sender.Text))
+                {
+                    pid.WindupGuard = Double.Parse(sender.Text);
+                }
+            });
+
             if (pid.ManipulatedObjectData.ID != "" && pid.GetFlowsheet().SimulationObjects.ContainsKey(pid.ManipulatedObjectData.ID))
             {
                 spin1.SelectedIndex = (objlist.IndexOf(pid.GetFlowsheet().SimulationObjects[pid.ManipulatedObjectData.ID].GraphicObject.Tag));

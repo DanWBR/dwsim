@@ -66,9 +66,14 @@ Namespace SpecialOps
         Protected m_initialEstimate As Nullable(Of Double) = Nothing
 
         Public Property Offset As Double = 0.0
-        Public Property Kp As Double = 1.0
-        Public Property Kd As Double = 0.0
-        Public Property Ki As Double = 0.0
+
+        Public Property Kp As Double = 10.0
+
+        Public Property Kd As Double = 2.0
+
+        Public Property Ki As Double = 2.0
+
+        Public Property WindupGuard As Double = 20.0
 
         Public Property CurrentError As Double = 0.0
 
@@ -643,6 +648,12 @@ Namespace SpecialOps
             PTerm = Kp * CurrentError
 
             ITerm += CurrentError * timestep
+
+            If ITerm < -WindupGuard Then
+                ITerm = -WindupGuard
+            ElseIf ITerm > WindupGuard Then
+                ITerm = WindupGuard
+            End If
 
             DTerm = 0.0
 
