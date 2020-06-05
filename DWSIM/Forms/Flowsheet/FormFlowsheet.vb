@@ -3128,7 +3128,9 @@ Public Class FormFlowsheet
 
     Private Sub ModoDinamicoAtivoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ModoDinamicoAtivoToolStripMenuItem.Click
         Me.DynamicMode = ModoDinamicoAtivoToolStripMenuItem.Checked
-        Me.FormDynamics.chkDynamics.Checked = ModoDinamicoAtivoToolStripMenuItem.Checked
+        Me.FormDynamics.chkDynamics.Checked = Me.DynamicMode
+        Me.tsbDynamics.Checked = Me.DynamicMode
+        FormSurface.FControl.Invalidate()
     End Sub
 
     Public Sub LoadProcessData(data As List(Of XElement)) Implements IFlowsheet.LoadProcessData
@@ -3153,6 +3155,7 @@ Public Class FormFlowsheet
         Me.DynamicMode = tsbDynamics.Checked
         Me.FormDynamics.chkDynamics.Checked = Me.DynamicMode
         Me.ModoDinamicoAtivoToolStripMenuItem.Checked = Me.DynamicMode
+        FormSurface.FControl.Invalidate()
     End Sub
 
     Private Sub tsbDynManager_Click(sender As Object, e As EventArgs) Handles tsbDynManager.Click
@@ -3175,6 +3178,7 @@ Public Class FormFlowsheet
         Me.DynamicMode = ModoDinamicoAtivoToolStripMenuItem.Checked
         Me.FormDynamics.chkDynamics.Checked = Me.DynamicMode
         Me.tsbDynamics.Checked = Me.DynamicMode
+        FormSurface.FControl.Invalidate()
     End Sub
 
 #End Region

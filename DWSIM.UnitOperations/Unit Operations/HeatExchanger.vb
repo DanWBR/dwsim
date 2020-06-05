@@ -420,6 +420,8 @@ Namespace UnitOperations
                 AccumulationStreamHot.PropertyPackage = StInHot.PropertyPackage
                 AccumulationStreamHot.SetFlowsheet(FlowSheet)
                 AccumulationStreamHot = AccumulationStreamHot.Add(StInHot, timestep)
+                AccumulationStreamHot.PropertyPackage.CurrentMaterialStream = AccumulationStreamHot
+                AccumulationStreamHot.Calculate()
                 AccumulationStreamHot = AccumulationStreamHot.Subtract(StOutHot, timestep)
                 If AccumulationStreamHot.GetMassFlow <= 0.0 Then AccumulationStreamHot.SetMassFlow(0.0)
 
@@ -455,6 +457,8 @@ Namespace UnitOperations
                 AccumulationStreamCold.PropertyPackage = StInCold.PropertyPackage
                 AccumulationStreamCold.SetFlowsheet(FlowSheet)
                 AccumulationStreamCold = AccumulationStreamCold.Add(StInCold, timestep)
+                AccumulationStreamCold.PropertyPackage.CurrentMaterialStream = AccumulationStreamCold
+                AccumulationStreamCold.Calculate()
                 AccumulationStreamCold = AccumulationStreamCold.Subtract(StOutCold, timestep)
                 If AccumulationStreamCold.GetMassFlow <= 0.0 Then AccumulationStreamCold.SetMassFlow(0.0)
 
@@ -572,9 +576,9 @@ Namespace UnitOperations
 
             'enthalpies
 
-            Hh1 = AccumulationStreamHot.GetMassEnthalpy()
-
             Hc1 = AccumulationStreamCold.GetMassEnthalpy()
+
+            Hh1 = AccumulationStreamHot.GetMassEnthalpy()
 
             'temperatures
 
@@ -588,7 +592,7 @@ Namespace UnitOperations
 
             Wh = AccumulationStreamHot.GetMassFlow()
 
-            'calculate maximum theoretical heat exchange
+            'calculate maximum theoretical heat exchange 
 
             Dim HHx As Double
             Dim tmpstr As MaterialStream = AccumulationStreamHot.Clone
@@ -603,7 +607,7 @@ Namespace UnitOperations
 
             tmpstr = AccumulationStreamCold.Clone
             tmpstr.PropertyPackage = AccumulationStreamCold.PropertyPackage
-            tmpstr.SetFlowsheet(StInHot.FlowSheet)
+            tmpstr.SetFlowsheet(AccumulationStreamCold.FlowSheet)
             tmpstr.PropertyPackage.CurrentMaterialStream = tmpstr
             tmpstr.SetTemperature(Th1)
             tmpstr.PropertyPackage.DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
@@ -617,6 +621,7 @@ Namespace UnitOperations
             tmpstr.Dispose()
 
             Select Case CalcMode
+
                 Case HeatExchangerCalcMode.CalcArea, HeatExchangerCalcMode.CalcTempColdOut,
                      HeatExchangerCalcMode.CalcBothTemp, HeatExchangerCalcMode.CalcTempHotOut,
                      HeatExchangerCalcMode.PinchPoint, HeatExchangerCalcMode.ThermalEfficiency,
@@ -626,106 +631,46 @@ Namespace UnitOperations
 
                 Case HeatExchangerCalcMode.CalcBothTemp_UA
 
-                    Dim Qi, Q_old, PIc1, PIc2, PIh1, PIh2 As Double
-                    Dim NTUh, NTUc, WWh, WWc, RRh, RRc, PPh, PPc As Double
                     Dim tmp As IFlashCalculationResult
-                    Dim count As Integer
                     A = Area
                     U = OverallCoefficient
-                    Qi = MaxHeatExchange
-                    Q_old = 10000000000.0
 
-                    Tc2 = Tc1
-                    Th2 = Th1
+                    Dim Tcm, Thm As Double
 
-                    Pc2 = Pc1 - (StInCold.GetMassFlow() / KrCold) ^ 2
+                    Tcm = AccumulationStreamCold.GetTemperature
+                    Thm = AccumulationStreamHot.GetTemperature
+
+                    Q = U / 1000 * A * (Thm - Tcm) * timestep
+
+                    If Q > MaxHeatExchange Then Q = MaxHeatExchange
+
                     Ph2 = Ph1 - (StInHot.GetMassFlow() / KrHot) ^ 2
+                    Pc2 = Pc1 - (StInCold.GetMassFlow() / KrCold) ^ 2
 
-                    Do
+                    Hc2 = (Q - HeatLoss) / Wc + Hc1
+                    Hh2 = Hh1 - Q / Wh
+                    AccumulationStreamCold.PropertyPackage.CurrentMaterialStream = AccumulationStreamCold
+                    tmp = AccumulationStreamCold.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Pc2, Hc2, Tc2)
+                    Tc2 = tmp.CalculatedTemperature
 
-                        Hc2 = Qi / Wc + Hc1
-                        Hh2 = Hh1 - Qi / Wh - HeatLoss / Wh
-                        AccumulationStreamCold.PropertyPackage.CurrentMaterialStream = AccumulationStreamCold
-                        tmp = AccumulationStreamCold.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Pc2, Hc2, Tc2)
-                        Tc2 = tmp.CalculatedTemperature
-                        PIc2 = (1 + tmp.GetLiquidPhase1MoleFraction) * (1 + tmp.GetVaporPhaseMoleFraction * (1 + tmp.GetSolidPhaseMoleFraction)) 'phase indicator cold stream
-                        If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate cold stream outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]  ===> Tc2 = {2} K", Pc2, Hc2, Tc2))
+                    AccumulationStreamHot.PropertyPackage.CurrentMaterialStream = StInHot
+                    tmp = AccumulationStreamHot.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Ph2, Hh2, Th2)
+                    Th2 = tmp.CalculatedTemperature
 
-                        AccumulationStreamHot.PropertyPackage.CurrentMaterialStream = StInHot
-                        tmp = AccumulationStreamHot.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Ph2, Hh2, Th2)
-                        Th2 = tmp.CalculatedTemperature
-                        PIh2 = (1 + tmp.GetLiquidPhase1MoleFraction) * (1 + tmp.GetVaporPhaseMoleFraction * (1 + tmp.GetSolidPhaseMoleFraction)) 'phase indicator hot stream
-                        If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate hot stream outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]  ===> Th2 = {2} K", Ph2, Hh2, Th2))
-
-                        If Abs((Qi - Q_old) / Q_old) < 0.001 Or Abs(Qi) < 0.01 Or count > 500 Then Exit Do
-
-                        WWc = Wc * (Hc2 - Hc1) / (Tc2 - Tc1) * 1000 'Heat Capacity Rate cold side
-                        WWh = Wh * (Hh2 - Hh1) / (Th2 - Th1) * 1000 'Heat Capacity Rate hot side
-                        NTUc = U * A / WWc 'Numbers of transfer units - cold side
-                        NTUh = U * A / WWh 'Numbers of transfer units - hot side
-                        RRc = WWc / WWh 'Heat capacity ratio cold side
-                        RRh = WWh / WWc 'Heat capacity ratio hot side
-
-                        If DebugMode Then AppendDebugLine(String.Format("Calculating heat exchanger"))
-                        If DebugMode Then AppendDebugLine(String.Format("Number of Transfer Units - NTU_cold :{0}  NTU_hot: {1}", NTUc, NTUh))
-                        If DebugMode Then AppendDebugLine(String.Format("Heat Capacity Rates - W_cold :{0}  W_hot: {1}", WWc, WWh))
-                        If DebugMode Then AppendDebugLine(String.Format("Heat Capacity Ratios - R_cold :{0}  R_hot: {1}", RRc, RRh))
-
-                        Select Case Me.FlowDir
-                            Case FlowDirection.CoCurrent
-                                PPc = (1 - Exp(-NTUc * (1 + RRc))) / (1 + RRc)
-                                PPh = (1 - Exp(-NTUh * (1 + RRh))) / (1 + RRh)
-                            Case FlowDirection.CounterCurrent
-                                PPc = (1 - Exp((RRc - 1) * NTUc)) / (1 - RRc * Exp((RRc - 1) * NTUc))
-                                PPh = (1 - Exp((RRh - 1) * NTUh)) / (1 - RRh * Exp((RRh - 1) * NTUh))
-                        End Select
-                        If DebugMode Then AppendDebugLine(String.Format("Dimensionless Temp Change - P_cold :{0}  P_hot: {1}", PPc, PPh))
-
-                        If Double.IsNaN(PPc) Then PPc = 0
-                        If Double.IsNaN(PPh) Then PPh = 0
-                        Tc2 = Tc1 + PPc * (Th1 - Tc1)
-                        Th2 = Th1 - PPh * (Th1 - Tc1)
-                        If DebugMode Then AppendDebugLine(String.Format("Outlet Temperatures - Tc2 :{0} K  Th2: {1} K", Tc2, Th2))
-
-                        Select Case Me.FlowDir
-                            Case FlowDirection.CoCurrent
-                                If (Th1 - Tc1) / (Th2 - Tc2) = 1 Then
-                                    LMTD = ((Th1 - Tc1) + (Th2 - Tc2)) / 2
-                                Else
-                                    LMTD = ((Th1 - Tc1) - (Th2 - Tc2)) / Math.Log((Th1 - Tc1) / (Th2 - Tc2))
-                                End If
-                            Case FlowDirection.CounterCurrent
-                                If (Th1 - Tc2) / (Th2 - Tc1) = 1 Then
-                                    LMTD = ((Th1 - Tc2) + (Th2 - Tc1)) / 2
-                                Else
-                                    LMTD = ((Th1 - Tc2) - (Th2 - Tc1)) / Math.Log((Th1 - Tc2) / (Th2 - Tc1))
-                                End If
-                        End Select
-
-                        Q_old = Qi
-
-                        If LMTD > 0 Then
-                            Qi = U * A * LMTD / 1000
-                        Else
-                            Qi = Wh * (Hh1 - Hh2)
-                            LMTD = Qi / U / A * 1000
-                        End If
-
-                        If Qi > MaxHeatExchange Then Qi = MaxHeatExchange
-
-                        count += 1
-
-                    Loop
-
-                    Q = Qi
-
-                    If count > 500 Then Throw New Exception("Reached maximum number of iterations! Final Q change: " & Qi - Q_old & " kW ; " & Abs((Qi - Q_old) / Q_old * 100) & " % ")
-
-                    PIc1 = (1 + AccumulationStreamCold.Phases(1).Properties.molarfraction.GetValueOrDefault) * (1 + AccumulationStreamCold.Phases(2).Properties.molarfraction.GetValueOrDefault) * (1 + AccumulationStreamCold.Phases(7).Properties.molarfraction.GetValueOrDefault)
-                    PIh1 = (1 + AccumulationStreamHot.Phases(1).Properties.molarfraction.GetValueOrDefault) * (1 + AccumulationStreamHot.Phases(2).Properties.molarfraction.GetValueOrDefault) * (1 + AccumulationStreamHot.Phases(7).Properties.molarfraction.GetValueOrDefault)
-
-                    If (PIc1 = 2 And PIc2 > 2) Or (PIc1 > 2 And PIc2 = 2) Then FlowSheet.ShowMessage(Me.GraphicObject.Tag & ": Phase change in cold stream detected! Heat exchange result is an aproximation.", IFlowsheet.MessageType.Warning)
-                    If (PIh1 = 2 And PIh2 > 2) Or (PIh1 > 2 And PIh2 = 2) Then FlowSheet.ShowMessage(Me.GraphicObject.Tag & ": Phase change in hot stream detected! Heat exchange result is an aproximation.", IFlowsheet.MessageType.Warning)
+                    Select Case Me.FlowDir
+                        Case FlowDirection.CoCurrent
+                            If (Th1 - Tc1) / (Th2 - Tc2) = 1 Then
+                                LMTD = ((Th1 - Tc1) + (Th2 - Tc2)) / 2
+                            Else
+                                LMTD = ((Th1 - Tc1) - (Th2 - Tc2)) / Math.Log((Th1 - Tc1) / (Th2 - Tc2))
+                            End If
+                        Case FlowDirection.CounterCurrent
+                            If (Th1 - Tc2) / (Th2 - Tc1) = 1 Then
+                                LMTD = ((Th1 - Tc2) + (Th2 - Tc1)) / 2
+                            Else
+                                LMTD = ((Th1 - Tc2) - (Th2 - Tc1)) / Math.Log((Th1 - Tc2) / (Th2 - Tc1))
+                            End If
+                    End Select
 
                 Case HeatExchangerCalcMode.ShellandTube_Rating
 
@@ -747,8 +692,8 @@ Namespace UnitOperations
 
             'Define new calculated properties.
 
-            AccumulationStreamHot.Phases(0).Properties.temperature = Th2
-            AccumulationStreamCold.Phases(0).Properties.temperature = Tc2
+            AccumulationStreamHot.Phases(0).Properties.temperature = (Th1 + Th2) / 2
+            AccumulationStreamCold.Phases(0).Properties.temperature = (Tc1 + Tc2) / 2
             AccumulationStreamHot.Phases(0).Properties.pressure = (Ph1 + Ph2) / 2
             AccumulationStreamCold.Phases(0).Properties.pressure = (Pc1 + Pc2) / 2
             AccumulationStreamHot.Phases(0).Properties.enthalpy = Hh2

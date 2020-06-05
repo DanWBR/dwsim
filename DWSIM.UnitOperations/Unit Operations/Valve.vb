@@ -305,7 +305,7 @@ Namespace UnitOperations
                             comp.MolarFlow = comp.MassFlow / comp.ConstantProperties.Molar_Weight * 1000
                             i += 1
                         Next
-                        .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
+                        If .GraphicObject.InputConnectors(0).IsAttached Then .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
                     End With
 
             End Select

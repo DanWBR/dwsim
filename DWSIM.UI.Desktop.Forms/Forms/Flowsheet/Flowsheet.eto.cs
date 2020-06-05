@@ -1226,6 +1226,7 @@ namespace DWSIM.UI.Forms
                 chkDynamics.Checked = FlowsheetObject.DynamicMode;
                 DynManagerControl.chkDynamics.Checked = FlowsheetObject.DynamicMode;
                 UpdateEditorPanels();
+                FlowsheetObject.UpdateInterface();
             };
 
             chkDynamics.CheckedChanged += (s, e) =>
@@ -1234,6 +1235,7 @@ namespace DWSIM.UI.Forms
                 chkmDynamics.Checked = FlowsheetObject.DynamicMode;
                 DynManagerControl.chkDynamics.Checked = FlowsheetObject.DynamicMode;
                 UpdateEditorPanels();
+                FlowsheetObject.UpdateInterface();
             };
 
             // main container
@@ -1437,6 +1439,7 @@ namespace DWSIM.UI.Forms
                 chkmDynamics.Checked = FlowsheetObject.DynamicMode;
                 chkDynamics.Checked = FlowsheetObject.DynamicMode;
                 UpdateEditorPanels();
+                FlowsheetObject.UpdateInterface();
             };
 
             DocumentContainer.SelectedIndexChanged += (sender2, e2) =>

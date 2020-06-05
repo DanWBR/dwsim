@@ -162,10 +162,13 @@ namespace DWSIM.UI
             ppatreon.Add(new Label { Size = lsize, Font = regularfont, Wrap = WrapMode.Word, Text = "Become a Patron and get access to exclusive Unit Operations, Property Packages and Plugins/Add-Ins!" }, dx2, dy2 * 2 + bfh);
             var img4 = new ImageView { Size = psize, Image = new Bitmap(Bitmap.FromResource(imgprefix + "Patreon_Navy.jpg")) };
             ppatreon.Add(img4, (int)(400 * sf), 0);
-            var link4 = new LinkButton { Text = "Go to Patreon.com/DWSIM", Width = (int)(250 * sf), Font = boldfont2 };
+            var link4 = new LinkButton { Text = "Support the Project", Width = (int)(250 * sf), Font = boldfont2 };
             ppatreon.Add(link4, dx2, (int)(100 * sf - rfh - dy));
+            var link4a = new LinkButton { Text = "Get Benefits", Width = (int)(250 * sf), Font = boldfont2 };
+            ppatreon.Add(link4a, dx2 + (int)(150 * sf), (int)(100 * sf - rfh - dy));
 
             link4.Click += (sender, e) => "https://patreon.com/dwsim".OpenURL();
+            link4a.Click += (sender, e) => "https://www.patreon.com/join/dwsim?".OpenURL();
 
             abslayout.Add(ppatreon, dx, dy * 4 + bfh + 2 * (int)(100 * sf));
 
@@ -298,7 +301,7 @@ namespace DWSIM.UI
             catch
             { }
 
-            foreach (var item in samplist)
+            foreach (var item in samplist.OrderBy((x) => Path.GetFileNameWithoutExtension(x)))
             {
                 if (File.Exists(item)) SampleList.Items.Add(new ListItem { Text = Path.GetFileNameWithoutExtension(item), Key = item });
             }

@@ -64,6 +64,7 @@ Partial Class FormWelcome
         Me.Label10 = New System.Windows.Forms.Label()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.LinkLabel7 = New System.Windows.Forms.LinkLabel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.LinkLabel9 = New System.Windows.Forms.LinkLabel()
@@ -428,12 +429,21 @@ Partial Class FormWelcome
         'Panel4
         '
         resources.ApplyResources(Me.Panel4, "Panel4")
+        Me.Panel4.Controls.Add(Me.LinkLabel7)
         Me.Panel4.Controls.Add(Me.Label2)
         Me.Panel4.Controls.Add(Me.Label11)
         Me.Panel4.Controls.Add(Me.LinkLabel9)
         Me.Panel4.Controls.Add(Me.PictureBox6)
         Me.Panel4.Controls.Add(Me.PictureBox4)
         Me.Panel4.Name = "Panel4"
+        '
+        'LinkLabel7
+        '
+        resources.ApplyResources(Me.LinkLabel7, "LinkLabel7")
+        Me.LinkLabel7.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
+        Me.LinkLabel7.LinkColor = System.Drawing.Color.DodgerBlue
+        Me.LinkLabel7.Name = "LinkLabel7"
+        Me.LinkLabel7.TabStop = True
         '
         'Label2
         '
@@ -618,4 +628,5 @@ Partial Class FormWelcome
     Friend WithEvents Label15 As Label
     Friend WithEvents PictureBox5 As PictureBox
     Friend WithEvents PictureBox6 As PictureBox
+    Friend WithEvents LinkLabel7 As LinkLabel
 End Class
