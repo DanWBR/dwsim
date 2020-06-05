@@ -484,7 +484,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                 j = 1;
                 foreach (var var in item.Value)
                 {
-                    sheet.Cells[i, j].Data = var.PropertyValue;
+                    sheet.Cells[i, j].Data = var.PropertyValue.ToDoubleFromInvariant();
                     j += 1;
                 }
                 i += 1;

@@ -28,4 +28,7 @@ Public Interface IDynamicsManager
 
     Property CurrentSchedule As String
     Property IntegratorList As Dictionary(Of String, IDynamicsIntegrator)
+
+    Function GetChartModel(IntegratorID As String) As Object
+
 End Interface

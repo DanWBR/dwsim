@@ -115,21 +115,46 @@ namespace DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
 
             if (Flowsheet != null)
             {
-                if (OwnerID != null && Flowsheet.SimulationObjects.ContainsKey(OwnerID))
+
+                IPlotModel model = null;
+
+                if (OwnerID != null)
                 {
-
-                    var obj = Flowsheet.SimulationObjects[OwnerID];
-
-                    IPlotModel model = null;
-
-                    try
+                    if (Flowsheet.SimulationObjects.ContainsKey(OwnerID))
                     {
-                        model = (IPlotModel)(obj.GetChartModel(ModelName));
+
+                        var obj = Flowsheet.SimulationObjects[OwnerID];
+
+                        try
+                        {
+                            model = (IPlotModel)(obj.GetChartModel(ModelName));
+                        }
+                        catch
+                        {
+                            PaintInstructions(canvas, "Chart model not found.");
+                            return;
+                        }
+
                     }
-                    catch
+                    else if (OwnerID == "Dynamic Mode Integrators")
                     {
-                        PaintInstructions(canvas, "Chart model not found.");
-                        return;
+
+                        var obj = Flowsheet.DynamicsManager.IntegratorList.Where(x => x.Value.Description == ModelName).FirstOrDefault();
+
+                        try
+                        {
+                            model = (IPlotModel)(Flowsheet.DynamicsManager.GetChartModel(obj.Key));
+                        }
+                        catch
+                        {
+                            PaintInstructions(canvas, "Chart model not found.");
+                            return;
+                        }
+
+                    }
+                    else
+                    {
+                        PaintInstructions(canvas, "Referenced object not found.");
                     }
 
                     if (model != null)
@@ -166,11 +191,6 @@ namespace DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
                     }
 
                 }
-                else
-                {
-                    PaintInstructions(canvas, "Referenced flowsheet object not found.");
-                }
-
             }
             else
             {

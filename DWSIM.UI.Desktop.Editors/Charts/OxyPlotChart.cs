@@ -54,30 +54,57 @@ namespace DWSIM.UI.Desktop.Editors.Charts
             {
                 objselector.Items.Add(new ListItem { Text = obj.GraphicObject.Tag, Key = obj.Name });
             }
+            objselector.Items.Add("Dynamic Mode Integrators");
 
-            objselector.SelectedIndexChanged += (sender, e) => {
-                Chart.OwnerID = objselector.SelectedKey;
-                chartselector.Items.Clear();
+            objselector.SelectedIndexChanged += (sender, e) =>
+            {
+                if (objselector.SelectedIndex < objselector.Items.Count - 1)
+                {
+                    Chart.OwnerID = objselector.SelectedKey;
+                    chartselector.Items.Clear();
+                    if (Chart.Flowsheet.SimulationObjects.ContainsKey(Chart.OwnerID))
+                    {
+                        var charts = Chart.Flowsheet.SimulationObjects[Chart.OwnerID].GetChartModelNames();
+                        foreach (var str in charts)
+                        {
+                            chartselector.Items.Add(new ListItem { Key = str, Text = str });
+                        }
+                    }
+                }
+                else
+                {
+                    Chart.OwnerID = objselector.SelectedValue.ToString();
+                    chartselector.Items.Clear();
+                    foreach (var item in Chart.Flowsheet.DynamicsManager.IntegratorList)
+                    {
+                        chartselector.Items.Add(new ListItem { Text = item.Value.Description, Key = item.Value.ID });
+                    }
+                }
+            };
+
+            if (Chart.OwnerID != null)
+            {
                 if (Chart.Flowsheet.SimulationObjects.ContainsKey(Chart.OwnerID))
                 {
+                    objselector.SelectedKey = Chart.OwnerID;
+                    chartselector.Items.Clear();
                     var charts = Chart.Flowsheet.SimulationObjects[Chart.OwnerID].GetChartModelNames();
                     foreach (var str in charts)
                     {
                         chartselector.Items.Add(new ListItem { Key = str, Text = str });
                     }
+                    chartselector.SelectedKey = Chart.ModelName;
                 }
-            };
-
-            if (Chart.OwnerID != null && Chart.Flowsheet.SimulationObjects.ContainsKey(Chart.OwnerID))
-            {
-                objselector.SelectedKey = Chart.OwnerID;
-                chartselector.Items.Clear();
-                var charts = Chart.Flowsheet.SimulationObjects[Chart.OwnerID].GetChartModelNames();
-                foreach (var str in charts)
+                else if (Chart.OwnerID == "Dynamic Mode Integrators")
                 {
-                    chartselector.Items.Add(new ListItem { Key = str, Text = str });
+                    objselector.SelectedKey = Chart.OwnerID;
+                    chartselector.Items.Clear();
+                    foreach (var item in Chart.Flowsheet.DynamicsManager.IntegratorList)
+                    {
+                        chartselector.Items.Add(new ListItem { Text = item.Value.Description, Key = item.Value.Description });
+                    }
+                    chartselector.SelectedKey = Chart.ModelName;
                 }
-                chartselector.SelectedKey = Chart.ModelName;
             }
 
             chartselector.SelectedIndexChanged += (sender, e) =>
@@ -88,7 +115,8 @@ namespace DWSIM.UI.Desktop.Editors.Charts
                 }
             };
 
-            container.CreateAndAddTextBoxRow("N0", "Chart Width", Chart.Width, (sender, e) => {
+            container.CreateAndAddTextBoxRow("N0", "Chart Width", Chart.Width, (sender, e) =>
+            {
                 if (sender.Text.IsValidDouble()) Chart.Width = (int)sender.Text.ToDoubleFromCurrent();
             });
 

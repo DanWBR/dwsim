@@ -1,4 +1,5 @@
-﻿Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
+﻿Imports System.Linq
+Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
 Imports DWSIM.ExtensionMethods
 
 Public Class FormConfigureChartObject
@@ -13,22 +14,35 @@ Public Class FormConfigureChartObject
         For Each obj In Chart.Flowsheet.SimulationObjects.Values
             cbFlowsheetObject.Items.Add(obj.GraphicObject.Tag)
         Next
+        cbFlowsheetObject.Items.Add("Dynamic Mode Integrators")
 
-        If Chart.OwnerID <> "" AndAlso Chart.Flowsheet.SimulationObjects.ContainsKey(Chart.OwnerID) Then
+        If Chart.OwnerID <> "" Then
 
-            Dim obj = Chart.Flowsheet.SimulationObjects(Chart.OwnerID)
-            cbFlowsheetObject.SelectedItem = obj.GraphicObject.Tag
+            If Chart.Flowsheet.SimulationObjects.ContainsKey(Chart.OwnerID) Then
 
-            cbChartSelector.Items.Clear()
+                Dim obj = Chart.Flowsheet.SimulationObjects(Chart.OwnerID)
+                cbFlowsheetObject.SelectedItem = obj.GraphicObject.Tag
 
-            Dim models = obj.GetChartModelNames()
+                cbChartSelector.Items.Clear()
 
-            For Each m In models
-                cbChartSelector.Items.Add(m)
-            Next
+                Dim models = obj.GetChartModelNames()
 
-            If models.Contains(Chart.ModelName) Then
-                cbChartSelector.SelectedItem = Chart.ModelName
+                For Each m In models
+                    cbChartSelector.Items.Add(m)
+                Next
+
+                If models.Contains(Chart.ModelName) Then
+                    cbChartSelector.SelectedItem = Chart.ModelName
+                End If
+
+            ElseIf cbFlowsheetObject.SelectedIndex = cbFlowsheetObject.Items.Count - 1 Then
+
+                cbChartSelector.Items.Clear()
+
+                For Each item In Chart.Flowsheet.DynamicsManager.IntegratorList
+                    cbChartSelector.Items.Add(item.Value.Description)
+                Next
+
             End If
 
         End If
@@ -41,15 +55,27 @@ Public Class FormConfigureChartObject
     End Sub
 
     Private Sub cbFlowsheetObject_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbFlowsheetObject.SelectedIndexChanged
+
         If Loaded Then
-            Dim obj = Chart.Flowsheet.GetFlowsheetSimulationObject(cbFlowsheetObject.SelectedItem.ToString())
-            Chart.OwnerID = obj.Name
-            cbChartSelector.Items.Clear()
-            Dim models = obj.GetChartModelNames()
-            For Each m In models
-                cbChartSelector.Items.Add(m)
-            Next
+
+            If cbFlowsheetObject.SelectedIndex < cbFlowsheetObject.Items.Count - 1 Then
+                Dim obj = Chart.Flowsheet.GetFlowsheetSimulationObject(cbFlowsheetObject.SelectedItem.ToString())
+                Chart.OwnerID = obj.Name
+                cbChartSelector.Items.Clear()
+                Dim models = obj.GetChartModelNames()
+                For Each m In models
+                    cbChartSelector.Items.Add(m)
+                Next
+            Else
+                Chart.OwnerID = cbFlowsheetObject.SelectedItem.ToString
+                cbChartSelector.Items.Clear()
+                For Each item In Chart.Flowsheet.DynamicsManager.IntegratorList
+                    cbChartSelector.Items.Add(item.Value.Description)
+                Next
+            End If
+
         End If
+
     End Sub
 
     Private Sub cbChartSelector_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbChartSelector.SelectedIndexChanged

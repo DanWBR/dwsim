@@ -16,7 +16,10 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports DWSIM.ExtensionMethods
 Imports DWSIM.Interfaces
+Imports OxyPlot
+Imports OxyPlot.Axes
 
 Public Class Manager
 
@@ -87,6 +90,83 @@ Public Class Manager
             Next
         End If
         Return True
+    End Function
+
+    Public Function GetChartModel(IntegratorID As String) As Object Implements IDynamicsManager.GetChartModel
+
+        Dim integrator = IntegratorList(IntegratorID)
+
+        Dim model = New PlotModel() With {.Title = integrator.Description}
+
+        Dim i, j As Integer
+
+        Dim xavals = New List(Of Double)
+        i = 1
+        For Each item In integrator.MonitoredVariableValues
+            If integrator.RealTime Then
+                xavals.Add(item.Key * integrator.RealTimeStepMs / 1000)
+            Else
+                xavals.Add(item.Key * integrator.IntegrationStep.TotalMilliseconds / 1000)
+            End If
+            i += 1
+        Next
+
+        model.TitleFontSize = 12
+
+        model.Axes.Add(New LinearAxis() With {
+            .MajorGridlineStyle = LineStyle.Dash,
+            .MinorGridlineStyle = LineStyle.Dot,
+            .Position = AxisPosition.Bottom,
+            .FontSize = 10,
+            .Title = "Time (s)"
+        })
+
+        model.Axes.Add(New LinearAxis() With {
+            .MajorGridlineStyle = LineStyle.Dash,
+            .MinorGridlineStyle = LineStyle.Dot,
+            .Position = AxisPosition.Left,
+            .FontSize = 10,
+            .Title = "",
+            .Key = "0"
+        })
+
+        model.LegendFontSize = 10
+        model.LegendPlacement = LegendPlacement.Outside
+        model.LegendOrientation = LegendOrientation.Horizontal
+        model.LegendPosition = LegendPosition.BottomCenter
+        model.TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView
+
+        If integrator.MonitoredVariableValues.Count = 0 Then
+            Return model
+        End If
+
+        Dim values As New List(Of List(Of Double))
+        Dim names As New List(Of String)
+        For Each var In integrator.MonitoredVariables
+            values.Add(New List(Of Double))
+            If var.PropertyUnits <> "" Then
+                names.Add(var.Description & " (" & var.PropertyUnits & ")")
+            Else
+                names.Add(var.Description)
+            End If
+        Next
+
+        For Each item In integrator.MonitoredVariableValues
+            i = 0
+            For Each var In item.Value
+                values(i).Add(var.PropertyValue.ToDoubleFromInvariant)
+                i += 1
+            Next
+        Next
+
+        i = 0
+        For Each l In values
+            model.AddLineSeries(xavals, l, names(i))
+            i += 1
+        Next
+
+        Return model
+
     End Function
 
 End Class

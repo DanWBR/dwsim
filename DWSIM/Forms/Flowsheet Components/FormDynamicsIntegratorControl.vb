@@ -67,7 +67,7 @@ Public Class FormDynamicsIntegratorControl
         For Each v As DynamicsManager.MonitoredVariable In integrator.MonitoredVariables
             Dim vnew = DirectCast(v.Clone, DynamicsManager.MonitoredVariable)
             Dim sobj = Flowsheet.SimulationObjects(vnew.ObjectID)
-            vnew.PropertyValue = SystemsOfUnits.Converter.ConvertFromSI(vnew.PropertyUnits, sobj.GetPropertyValue(vnew.PropertyID))
+            vnew.PropertyValue = SystemsOfUnits.Converter.ConvertFromSI(vnew.PropertyUnits, sobj.GetPropertyValue(vnew.PropertyID)).ToString(Globalization.CultureInfo.InvariantCulture)
             vnew.TimeStamp = tstamp
             list.Add(vnew)
         Next
@@ -386,7 +386,7 @@ Public Class FormDynamicsIntegratorControl
             End If
             j = 1
             For Each var In item.Value
-                sheet.Cells(i, j).Data = var.PropertyValue
+                sheet.Cells(i, j).Data = var.PropertyValue.ToDoubleFromInvariant
                 j += 1
             Next
             i += 1
