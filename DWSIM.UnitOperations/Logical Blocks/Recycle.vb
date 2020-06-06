@@ -50,6 +50,8 @@ Namespace SpecialOps
 
         Public Overrides ReadOnly Property SupportsDynamicMode As Boolean = True
 
+        Public Overrides ReadOnly Property HasPropertiesForDynamicMode As Boolean = False
+
         Public Property Converged As Boolean = False Implements Interfaces.IRecycle.Converged
 
         Public Property CopyOnStreamDataError As Boolean = False

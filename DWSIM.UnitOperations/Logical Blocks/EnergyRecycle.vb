@@ -46,6 +46,8 @@ Namespace SpecialOps
 
         Public Overrides ReadOnly Property SupportsDynamicMode As Boolean = True
 
+        Public Overrides ReadOnly Property HasPropertiesForDynamicMode As Boolean = False
+
         Public Overrides Function CloneXML() As Object
             Dim obj As ICustomXMLSerialization = New EnergyRecycle()
             obj.LoadData(Me.SaveData)

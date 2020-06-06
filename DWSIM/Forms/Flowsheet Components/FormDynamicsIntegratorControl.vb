@@ -2,6 +2,7 @@
 Imports System.Threading.Tasks
 Imports DWSIM.DynamicsManager
 Imports Eto.Threading
+Imports Python.Runtime
 
 Public Class FormDynamicsIntegratorControl
 
@@ -232,6 +233,8 @@ Public Class FormDynamicsIntegratorControl
 
         Flowsheet.SupressMessages = True
 
+        Dim exceptions As List(Of Exception)
+
         Dim maintask = New Task(Sub()
 
                                     Dim j As Integer = 0
@@ -276,11 +279,13 @@ Public Class FormDynamicsIntegratorControl
                                             integrator.ShouldCalculatePressureFlow = False
                                         End If
 
-                                        FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Flowsheet, GlobalSettings.Settings.SolverMode)
+                                        exceptions = FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Flowsheet, GlobalSettings.Settings.SolverMode)
 
                                         While GlobalSettings.Settings.CalculatorBusy
                                             Task.Delay(200).Wait()
                                         End While
+
+                                        If exceptions.Count > 0 Then Throw exceptions(0)
 
                                         StoreVariableValues(integrator, j, integrator.CurrentTime)
 
@@ -344,6 +349,7 @@ Public Class FormDynamicsIntegratorControl
                                                                   ProgressBar1.Style = ProgressBarStyle.Continuous
                                                                   Flowsheet.SupressMessages = False
                                                                   Flowsheet.UpdateOpenEditForms()
+                                                                  If t.Exception IsNot Nothing Then Throw t.Exception
                                                               End Sub)
                               End Sub)
 

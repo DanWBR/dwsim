@@ -320,6 +320,8 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             Flowsheet.SupressMessages = true;
 
+            List<Exception> exceptions;
+
             var maintask = new Task(() =>
             {
                 int j = 0;
@@ -371,10 +373,12 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                     GlobalSettings.Settings.CalculatorActivated = true;
                     GlobalSettings.Settings.CalculatorBusy = false;
 
-                    FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Flowsheet, GlobalSettings.Settings.SolverMode);
+                    exceptions = FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Flowsheet, GlobalSettings.Settings.SolverMode);
 
                     while (GlobalSettings.Settings.CalculatorBusy)
                         Task.Delay(200).Wait();
+
+                    if (exceptions.Count > 0) throw exceptions[0];
 
                     StoreVariableValues((DynamicsManager.Integrator)integrator, j, integrator.CurrentTime);
 
@@ -433,6 +437,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                     pbProgress.Value = 0;
                     Flowsheet.SupressMessages = false;
                     Flowsheet.UpdateEditorPanels.Invoke();
+                    if (t.Exception != null) throw t.Exception;
                 });
             });
 

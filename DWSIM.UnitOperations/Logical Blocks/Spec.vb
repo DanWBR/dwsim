@@ -66,6 +66,10 @@ Namespace SpecialOps
         Protected cv As New SystemsOfUnits.Converter
         Protected nf As String = ""
 
+        Public Overrides ReadOnly Property SupportsDynamicMode As Boolean = True
+
+        Public Overrides ReadOnly Property HasPropertiesForDynamicMode As Boolean = False
+
         Public Overrides Function CloneXML() As Object
             Dim obj As ICustomXMLSerialization = New Spec()
             obj.LoadData(Me.SaveData)
