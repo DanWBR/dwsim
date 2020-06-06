@@ -640,6 +640,10 @@ Namespace UnitOperations
             tmpstr.PropertyPackage = Nothing
             tmpstr.Dispose()
 
+            Th2 = StOutHot.GetTemperature()
+
+            Tc2 = StOutCold.GetTemperature()
+
             Dim tmp As IFlashCalculationResult
 
             Select Case CalcMode
@@ -656,12 +660,24 @@ Namespace UnitOperations
                     A = Area
                     U = OverallCoefficient
 
-                    Dim Tcm, Thm As Double
+                    Select Case Me.FlowDir
+                        Case FlowDirection.CoCurrent
+                            If (Th1 - Tc1) / (Th2 - Tc2) = 1 Then
+                                LMTD = ((Th1 - Tc1) + (Th2 - Tc2)) / 2
+                            Else
+                                LMTD = ((Th1 - Tc1) - (Th2 - Tc2)) / Math.Log((Th1 - Tc1) / (Th2 - Tc2))
+                            End If
+                        Case FlowDirection.CounterCurrent
+                            If (Th1 - Tc2) / (Th2 - Tc1) = 1 Then
+                                LMTD = ((Th1 - Tc2) + (Th2 - Tc1)) / 2
+                            Else
+                                LMTD = ((Th1 - Tc2) - (Th2 - Tc1)) / Math.Log((Th1 - Tc2) / (Th2 - Tc1))
+                            End If
+                    End Select
 
-                    Tcm = AccumulationStreamCold.GetTemperature
-                    Thm = AccumulationStreamHot.GetTemperature
+                    If Double.IsNaN(LMTD) Or Double.IsInfinity(LMTD) Then LMTD = 0.0
 
-                    Q = U / 1000 * A * (Thm - Tcm) * timestep
+                    Q = U / 1000 * A * LMTD * timestep
 
                     If Q > MaxHeatExchange Then Q = MaxHeatExchange
 
@@ -1007,7 +1023,24 @@ Namespace UnitOperations
 
                     U = 1 / U
 
-                    Q = U * A * (Thm - Tcm) / 1000 * timestep
+                    Select Case Me.FlowDir
+                        Case FlowDirection.CoCurrent
+                            If (Th1 - Tc1) / (Th2 - Tc2) = 1 Then
+                                LMTD = ((Th1 - Tc1) + (Th2 - Tc2)) / 2
+                            Else
+                                LMTD = ((Th1 - Tc1) - (Th2 - Tc2)) / Math.Log((Th1 - Tc1) / (Th2 - Tc2))
+                            End If
+                        Case FlowDirection.CounterCurrent
+                            If (Th1 - Tc2) / (Th2 - Tc1) = 1 Then
+                                LMTD = ((Th1 - Tc2) + (Th2 - Tc1)) / 2
+                            Else
+                                LMTD = ((Th1 - Tc2) - (Th2 - Tc1)) / Math.Log((Th1 - Tc2) / (Th2 - Tc1))
+                            End If
+                    End Select
+
+                    If Double.IsNaN(LMTD) Or Double.IsInfinity(LMTD) Then LMTD = 0.0
+
+                    Q = U / 1000 * A * LMTD / 1000 * timestep
 
                     If Q > MaxHeatExchange Then Q = MaxHeatExchange
 
@@ -1048,21 +1081,6 @@ Namespace UnitOperations
             AccumulationStreamHot.PropertyPackage.CurrentMaterialStream = StInHot
             tmp = AccumulationStreamHot.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Ph2, Hh2, Th2)
             Th2 = tmp.CalculatedTemperature
-
-            Select Case Me.FlowDir
-                Case FlowDirection.CoCurrent
-                    If (Th1 - Tc1) / (Th2 - Tc2) = 1 Then
-                        LMTD = ((Th1 - Tc1) + (Th2 - Tc2)) / 2
-                    Else
-                        LMTD = ((Th1 - Tc1) - (Th2 - Tc2)) / Math.Log((Th1 - Tc1) / (Th2 - Tc2))
-                    End If
-                Case FlowDirection.CounterCurrent
-                    If (Th1 - Tc2) / (Th2 - Tc1) = 1 Then
-                        LMTD = ((Th1 - Tc2) + (Th2 - Tc1)) / 2
-                    Else
-                        LMTD = ((Th1 - Tc2) - (Th2 - Tc1)) / Math.Log((Th1 - Tc2) / (Th2 - Tc1))
-                    End If
-            End Select
 
             ThermalEfficiency = (Q - HeatLoss) / MaxHeatExchange * 100
 
