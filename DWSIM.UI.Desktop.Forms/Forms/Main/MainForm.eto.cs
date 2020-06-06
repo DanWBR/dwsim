@@ -164,7 +164,7 @@ namespace DWSIM.UI
             ppatreon.Add(img4, (int)(400 * sf), 0);
             var link4 = new LinkButton { Text = "Support the Project", Width = (int)(250 * sf), Font = boldfont2 };
             ppatreon.Add(link4, dx2, (int)(100 * sf - rfh - dy));
-            var link4a = new LinkButton { Text = "Get Benefits", Width = (int)(250 * sf), Font = boldfont2 };
+            var link4a = new LinkButton { Text = "Get Benefits", Font = boldfont2, BackgroundColor = Colors.DodgerBlue, TextColor = Colors.White };
             ppatreon.Add(link4a, dx2 + (int)(150 * sf), (int)(100 * sf - rfh - dy));
 
             link4.Click += (sender, e) => "https://patreon.com/dwsim".OpenURL();
