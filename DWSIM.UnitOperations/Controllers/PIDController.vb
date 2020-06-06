@@ -702,14 +702,14 @@ Namespace SpecialOps
                 xavals.Add(i)
             Next
 
-            model.TitleFontSize = 13
-            model.SubtitleFontSize = 12
+            model.TitleFontSize = 12
+            model.SubtitleFontSize = 10
 
             model.Axes.Add(New LinearAxis() With {
                 .MajorGridlineStyle = LineStyle.Dash,
                 .MinorGridlineStyle = LineStyle.Dot,
                 .Position = AxisPosition.Bottom,
-                .FontSize = 12,
+                .FontSize = 10,
                 .Title = "Step"
             })
 
@@ -717,7 +717,7 @@ Namespace SpecialOps
                 .MajorGridlineStyle = LineStyle.Dash,
                 .MinorGridlineStyle = LineStyle.Dot,
                 .Position = AxisPosition.Left,
-                .FontSize = 12,
+                .FontSize = 10,
                 .Title = "SP/PV",
                 .Key = "0"
             })
@@ -726,12 +726,12 @@ Namespace SpecialOps
                 .MajorGridlineStyle = LineStyle.Dash,
                 .MinorGridlineStyle = LineStyle.Dot,
                 .Position = AxisPosition.Right,
-                .FontSize = 12,
+                .FontSize = 10,
                 .Title = "MV",
                 .Key = "1"
             })
 
-            model.LegendFontSize = 13
+            model.LegendFontSize = 10
             model.LegendPlacement = LegendPlacement.Outside
             model.LegendOrientation = LegendOrientation.Horizontal
             model.LegendPosition = LegendPosition.BottomCenter

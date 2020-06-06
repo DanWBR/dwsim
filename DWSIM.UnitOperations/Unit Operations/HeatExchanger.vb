@@ -337,6 +337,26 @@ Namespace UnitOperations
             Dim VolumeCold As Double = GetDynamicProperty("Volume for Cold Fluid")
             Dim VolumeHot As Double = GetDynamicProperty("Volume for Hot Fluid")
 
+            If CalcMode = HeatExchangerCalcMode.ShellandTube_Rating Then
+
+                Dim Vshell, Vtubes As Double
+
+                Vshell = Math.PI * (STProperties.Shell_Di / 1000) ^ 2 / 4 * STProperties.Tube_Length
+
+                Vtubes = Math.PI * (STProperties.Tube_Di / 1000) ^ 2 / 4 * STProperties.Tube_Length * STProperties.Tube_NumberPerShell
+
+                If STProperties.Tube_Fluid = 0 Then
+                    'cold
+                    VolumeCold = Vtubes
+                    VolumeHot = Vshell - Vtubes
+                Else
+                    'hot
+                    VolumeHot = Vtubes
+                    VolumeCold = Vshell - Vtubes
+                End If
+
+            End If
+
             Dim InitializeFromInlet As Boolean = GetDynamicProperty("Initialize using Inlet Streams")
 
             Dim Pmin = GetDynamicProperty("Minimum Pressure")
@@ -474,26 +494,6 @@ Namespace UnitOperations
 
             Dim PressureHot = StInHot.GetPressure
 
-            If CalcMode = HeatExchangerCalcMode.ShellandTube_Rating Then
-
-                Dim Vshell, Vtubes As Double
-
-                Vshell = Math.PI * (STProperties.Shell_Di / 1000) ^ 2 / 4 * STProperties.Tube_Length
-
-                Vtubes = Math.PI * (STProperties.Tube_Di / 1000) ^ 2 / 4 * STProperties.Tube_Length * STProperties.Tube_NumberPerShell
-
-                If STProperties.Tube_Fluid = 0 Then
-                    'cold
-                    VolumeCold = Vtubes
-                    VolumeHot = Vshell - Vtubes
-                Else
-                    'hot
-                    VolumeHot = Vtubes
-                    VolumeCold = Vshell - Vtubes
-                End If
-
-            End If
-
             'm3/mol
 
             If MHot > 0 Then
@@ -623,7 +623,7 @@ Namespace UnitOperations
             tmpstr.PropertyPackage.DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
             tmpstr.Calculate(False, True)
             HHx = tmpstr.Phases(0).Properties.enthalpy.GetValueOrDefault
-            DeltaHh = Wh * (Hh1 - HHx) 'kW
+            DeltaHh = StInHot.GetMassFlow() * (Hh1 - HHx) 'kW
 
             tmpstr = AccumulationStreamCold.Clone
             tmpstr.PropertyPackage = AccumulationStreamCold.PropertyPackage
@@ -633,7 +633,7 @@ Namespace UnitOperations
             tmpstr.PropertyPackage.DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
             tmpstr.Calculate(False, True)
             HHx = tmpstr.Phases(0).Properties.enthalpy.GetValueOrDefault
-            DeltaHc = Wc * (HHx - Hc1) 'kW
+            DeltaHc = StInCold.GetMassFlow() * (HHx - Hc1) 'kW
 
             MaxHeatExchange = Min(DeltaHc, DeltaHh) 'kW
 

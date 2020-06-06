@@ -437,7 +437,12 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                     pbProgress.Value = 0;
                     Flowsheet.SupressMessages = false;
                     Flowsheet.UpdateEditorPanels.Invoke();
-                    if (t.Exception != null) throw t.Exception;
+                    if (t.Exception != null)
+                    {
+                        var euid = Guid.NewGuid().ToString();
+                        SharedClasses.ExceptionProcessing.ExceptionList.Exceptions.Add(euid, t.Exception);
+                        Flowsheet.ShowMessage(t.Exception.Message, Interfaces.IFlowsheet.MessageType.GeneralError, euid);                                                                
+                    }
                 });
             });
 

@@ -349,7 +349,11 @@ Public Class FormDynamicsIntegratorControl
                                                                   ProgressBar1.Style = ProgressBarStyle.Continuous
                                                                   Flowsheet.SupressMessages = False
                                                                   Flowsheet.UpdateOpenEditForms()
-                                                                  If t.Exception IsNot Nothing Then Throw t.Exception
+                                                                  If t.Exception IsNot Nothing Then
+                                                                      Dim euid As String = Guid.NewGuid().ToString()
+                                                                      ExceptionProcessing.ExceptionList.Exceptions.Add(euid, t.Exception)
+                                                                      Flowsheet.ShowMessage(t.Exception.Message, Interfaces.IFlowsheet.MessageType.GeneralError, euid)
+                                                                  End If
                                                               End Sub)
                               End Sub)
 
