@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 6.0 Update 1
+Version 6.0 Update 2
 Copyright (c) 2017-2020 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,13 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/windows
+
+Version 6.0 Update 2
+
+- [NEW] Dynamic Model for Heat Exchanger
+- [NEW] PID Controller Wind-Up Guard
+- [NEW] Dynamic Integrator flowsheet charts for Monitored Variables
+- [FIX] Bug fixes and enhancements
 
 Version 6.0 Update 1
 

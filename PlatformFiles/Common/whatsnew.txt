@@ -1,14 +1,6 @@
-Version 6.0 Update 1
+Version 6.0 Update 2
 
-- [NEW] Added a Real-Time Step Duration property to Dynamic Integrator
-- [FIX] Fixed PID Controller Manual Mode
-- [FIX] Fixed Material Stream editor issues when in Dynamic Mode
-- [FIX] Other fixes
-
-Version 6.0
-
-- [NEW] Dynamic Simulation Mode
-- [NEW] New Object Types: PID Controller, Analog/Digital/Level Gauges, Input Box, Switch
-- [NEW] New PID Controller Tuning tool
-- [NEW] Store/Restore Flowsheet Solutions
-- [FIX] Various bug fixes and enhancements
+- [NEW] Dynamic Model for Heat Exchanger
+- [NEW] PID Controller Wind-Up Guard
+- [NEW] Dynamic Integrator flowsheet charts for Monitored Variables
+- [FIX] Bug fixes and enhancements
