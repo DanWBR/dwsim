@@ -44,6 +44,8 @@ Namespace UnitOperations
 
         Public Property IsOn As Boolean = False Implements ISwitch.IsOn
 
+        Public Overrides ReadOnly Property SupportsDynamicMode As Boolean = True
+
         Public Sub New(ByVal name As String, ByVal description As String)
 
             MyBase.CreateNew()

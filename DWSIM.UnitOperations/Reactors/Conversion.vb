@@ -35,6 +35,11 @@ Namespace Reactors
 
         Inherits Reactor
 
+        Public Overrides ReadOnly Property SupportsDynamicMode As Boolean = True
+
+        Public Overrides ReadOnly Property HasPropertiesForDynamicMode As Boolean = False
+
+
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_ReactorConvEqGibbs
 
         Public Sub New()
@@ -110,6 +115,12 @@ Namespace Reactors
                 If arr.Count > 0 Then Me.ReactionsSequence.Add(arr)
                 i = i + 1
             Loop Until i = maxrank + 1
+
+        End Sub
+
+        Public Overrides Sub RunDynamicModel()
+
+            Calculate()
 
         End Sub
 

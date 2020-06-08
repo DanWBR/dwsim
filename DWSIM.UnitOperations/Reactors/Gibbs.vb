@@ -36,6 +36,11 @@ Namespace Reactors
 
         Inherits Reactor
 
+        Public Overrides ReadOnly Property SupportsDynamicMode As Boolean = True
+
+        Public Overrides ReadOnly Property HasPropertiesForDynamicMode As Boolean = False
+
+
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_ReactorConvEqGibbs
 
         Public Enum SolvingMethod
@@ -912,6 +917,12 @@ Namespace Reactors
             ElseIf Not Me.GraphicObject.InputConnectors(0).IsAttached Then
                 Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
             End If
+
+        End Sub
+
+        Public Overrides Sub RunDynamicModel()
+
+            Calculate()
 
         End Sub
 
