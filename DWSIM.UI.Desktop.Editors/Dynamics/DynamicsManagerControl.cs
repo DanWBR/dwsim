@@ -909,7 +909,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                 if (Flowsheet.SimulationObjects.ContainsKey(mv.ObjectID))
                 {
                     idx = objects.IndexOf(Flowsheet.SimulationObjects[mv.ObjectID].GraphicObject.Tag);
-                    propids.AddRange(Flowsheet.SimulationObjects[mv.ObjectID].GetProperties(Interfaces.Enums.PropertyType.WR));
+                    propids.AddRange(Flowsheet.SimulationObjects[mv.ObjectID].GetProperties(Interfaces.Enums.PropertyType.ALL));
                     props.AddRange(propids.Select((x) => Flowsheet.GetTranslatedString(x)).ToArray());
                 }
             }
@@ -921,7 +921,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                     mv.ObjectID = Flowsheet.GetFlowsheetSimulationObject(s.SelectedValue.ToString()).Name;
                     propids.Clear();
                     propids.Add("");
-                    propids.AddRange(Flowsheet.SimulationObjects[mv.ObjectID].GetProperties(Interfaces.Enums.PropertyType.WR));
+                    propids.AddRange(Flowsheet.SimulationObjects[mv.ObjectID].GetProperties(Interfaces.Enums.PropertyType.ALL));
                     props.Clear();
                     props.AddRange(propids.Select((x) => Flowsheet.GetTranslatedString(x)).ToArray());
                     propselector.Items.Clear();

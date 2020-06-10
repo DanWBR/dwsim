@@ -39,7 +39,7 @@ Namespace Reactors
             TwoOutlets
         End Enum
 
-        Protected m_vol As Double
+        Protected m_vol As Double = 1.0
         Protected m_headspace As Double
         Protected m_isotemp As Double
 
@@ -328,8 +328,7 @@ Namespace Reactors
 
             AddDynamicProperty("Operating Pressure", "Current Operating Pressure", 0, UnitOfMeasure.pressure)
             AddDynamicProperty("Liquid Level", "Current Liquid Level", 0, UnitOfMeasure.distance)
-            AddDynamicProperty("Volume", "Vessel Volume", 1, UnitOfMeasure.volume)
-            AddDynamicProperty("Height", "Available Height for Liquid", 2, UnitOfMeasure.distance)
+            AddDynamicProperty("Height", "Available Height for Liquid", 1, UnitOfMeasure.distance)
             AddDynamicProperty("Minimum Pressure", "Minimum Dynamic Pressure for this Reactor.", 101325, UnitOfMeasure.pressure)
             AddDynamicProperty("Initialize using Inlet Stream", "Initializes the tank contents with information from the inlet stream.", 0, UnitOfMeasure.none)
             AddDynamicProperty("Reset Contents", "Empties the tank's content on the next run.", 0, UnitOfMeasure.none)
@@ -1027,11 +1026,11 @@ Namespace Reactors
 
                 T = ims.Phases(0).Properties.temperature 'read temperature -> PH-Flash
 
-                If NIter > 100 Then Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
-
                 IObj2?.Close()
 
                 If dynamics Then Exit Do
+
+                If NIter > 100 Then Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
 
             Loop Until IErr < 0.000001 Or MaxChange < 0.0001 'repeat until composition is constant
 
@@ -1796,7 +1795,7 @@ out:        Dim ms1, ms2 As MaterialStream
                     For i = 0 To 5
                         proplist.Add("PROP_CS_" + CStr(i))
                     Next
-                Case PropertyType.ALL
+                Case PropertyType.ALL, PropertyType.RO
                     For i = 0 To 5
                         proplist.Add("PROP_CS_" + CStr(i))
                     Next
