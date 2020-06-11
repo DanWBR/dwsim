@@ -28,6 +28,8 @@ Imports DWSIM.Thermodynamics
 Imports DWSIM.ExtensionMethods
 Imports OxyPlot
 Imports OxyPlot.Axes
+Imports DWSIM.UnitOperations.Streams
+Imports System.Xml.Serialization
 
 Namespace Reactors
 
@@ -59,6 +61,11 @@ Namespace Reactors
         Dim activeAL As Integer = 0
 
         <System.NonSerialized()> Dim ims As MaterialStream
+
+        Public Overrides ReadOnly Property SupportsDynamicMode As Boolean = True
+
+        Public Overrides ReadOnly Property HasPropertiesForDynamicMode As Boolean = True
+
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_ReactorPFR
 
@@ -126,6 +133,38 @@ Namespace Reactors
         Public Overrides Function CloneJSON() As Object
             Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of Reactor_PFR)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
         End Function
+
+        Public Overrides Function LoadData(data As List(Of XElement)) As Boolean
+
+            AccumulationStreams = New List(Of MaterialStream)
+            Dim ael = (From xel As XElement In data Select xel Where xel.Name = "AccumulationStreams").FirstOrDefault
+            If Not ael Is Nothing Then
+                For Each xel In ael.Elements
+                    Dim as1 As New MaterialStream()
+                    as1.LoadData(xel.Elements.ToList)
+                    AccumulationStreams.Add(as1)
+                Next
+            End If
+            Return MyBase.LoadData(data)
+
+        End Function
+
+        Public Overrides Function SaveData() As List(Of XElement)
+
+            Dim elements As List(Of XElement) = MyBase.SaveData()
+
+            If AccumulationStreams IsNot Nothing Then
+                Dim astr As New XElement("AccumulationStreams")
+                elements.Add(astr)
+                For Each mstream In AccumulationStreams
+                    elements.Add(New XElement("AccumulationStream", mstream.SaveData()))
+                Next
+            End If
+
+            Return elements
+
+        End Function
+
 
         Public Function ODEFunc(ByVal x As Double, ByVal y As Double()) As Double()
 
@@ -378,7 +417,152 @@ Namespace Reactors
 
         End Function
 
+        Public Overrides Sub CreateDynamicProperties()
+
+            AddDynamicProperty("Reset Contents", "Empties the tank's content on the next run.", 0, UnitOfMeasure.none)
+
+        End Sub
+
+        Public Property AccumulationStreams As New List(Of MaterialStream)
+
+        Public Overrides Sub RunDynamicModel()
+
+            Select Case Me.ReactorOperationMode
+
+                Case OperationMode.OutletTemperature, OperationMode.Isothermic
+
+                    Throw New Exception("This calculation mode is not supported while in Dynamic Mode.")
+
+            End Select
+
+            Dim integratorID = FlowSheet.DynamicsManager.ScheduleList(FlowSheet.DynamicsManager.CurrentSchedule).CurrentIntegrator
+
+            Dim integrator = FlowSheet.DynamicsManager.IntegratorList(integratorID)
+
+            Dim timestep = integrator.IntegrationStep.TotalSeconds
+
+            If integrator.RealTime Then timestep = Convert.ToDouble(integrator.RealTimeStepMs) / 1000.0
+
+            Dim ims1 As MaterialStream = GetInletMaterialStream(0)
+
+            Dim oms1 As MaterialStream = GetOutletMaterialStream(0)
+
+            Dim es As EnergyStream = GetInletEnergyStream(1)
+
+            ResidenceTime = Volume / ims1.GetVolumetricFlow()
+
+            If ResidenceTime < timestep Then
+
+                Throw New Exception("The residence time of the fluid in the PFR is lower than the current Integrator Step. Please correct this issue and try again.")
+
+            End If
+
+            Dim NumberOfSections As Integer = ResidenceTime / timestep
+
+            Dim Reset As Boolean = GetDynamicProperty("Reset Contents")
+
+            Dim MustReset As Boolean = CDbl(NumberOfSections) / CDbl(AccumulationStreams.Count) - 1.0 > 0.001
+
+            If Reset Or MustReset Then
+                AccumulationStreams = New List(Of MaterialStream)
+                SetDynamicProperty("Reset Contents", 0)
+                FlowSheet.ShowMessage(GraphicObject.Tag + ": Resetting contents...", IFlowsheet.MessageType.Warning)
+            End If
+
+            If AccumulationStreams.Count = 0 Then
+
+                For i As Integer = 0 To NumberOfSections - 1
+
+                    AccumulationStreams.Add(ims1.CloneXML)
+
+                Next
+
+            Else
+
+                AccumulationStreams.Insert(0, ims1.CloneXML)
+
+                AccumulationStreams.Remove(AccumulationStreams.Last)
+
+                For Each astr In AccumulationStreams
+
+                    astr.SetFlowsheet(FlowSheet)
+                    astr.PropertyPackage.CurrentMaterialStream = astr
+                    astr.Calculate()
+                    If astr.GetMassFlow <= 0.0 Then astr.SetMassFlow(0.0)
+
+                Next
+
+            End If
+
+            ' Calculate Temperature
+
+            Dim Qval, Ha, Wa As Double
+
+            If es IsNot Nothing Then Qval = es.EnergyFlow.GetValueOrDefault / NumberOfSections
+
+            For i As Integer = 0 To NumberOfSections - 1
+
+                Dim astr = AccumulationStreams(i)
+
+                astr.SetFlowsheet(FlowSheet)
+
+                Ha = astr.GetMassEnthalpy
+                Wa = astr.GetMassFlow
+
+                If Qval <> 0.0 Then
+
+                    If Wa > 0 Then
+
+                        astr.SetMassEnthalpy(Ha + Qval * timestep / Wa)
+
+                        astr.SpecType = StreamSpec.Pressure_and_Enthalpy
+
+                        astr.PropertyPackage = PropertyPackage
+                        astr.PropertyPackage.CurrentMaterialStream = astr
+
+                        If integrator.ShouldCalculateEquilibrium Then
+
+                            astr.Calculate(True, True)
+
+                        End If
+
+                    End If
+
+                End If
+
+            Next
+
+            For Each astr In AccumulationStreams
+
+                Calculate(astr)
+
+            Next
+
+            For i As Integer = 0 To NumberOfSections - 2
+
+                AccumulationStreams(i + 1).AssignFromPhase(PhaseLabel.Mixture, AccumulationStreams(i), True)
+
+            Next
+
+            oms1.AssignFromPhase(PhaseLabel.Mixture, AccumulationStreams.Last, False)
+
+            AccumulationStream = Nothing
+
+        End Sub
+
+
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
+
+            Dim dynamics As Boolean = False
+
+            If args IsNot Nothing Then
+                dynamics = True
+                AccumulationStream = args
+            End If
+
+            Dim deltaV As Double
+
+            If dynamics Then deltaV = 1.0 Else deltaV = dV
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -429,12 +613,15 @@ Namespace Reactors
             End If
 
             ims = DirectCast(FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name), MaterialStream).Clone
+
+            If dynamics Then ims = AccumulationStream
+
             ims.SetPropertyPackage(PropertyPackage)
             PropertyPackage.CurrentMaterialStream = ims
             ims.SetFlowsheet(Me.FlowSheet)
             ims.PreferredFlashAlgorithmTag = Me.PreferredFlashAlgorithmTag
 
-            ResidenceTime = Volume / ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault
+            If Not dynamics Then ResidenceTime = Volume / ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault
 
             Me.Reactions.Clear()
             Me.ReactionsSequence.Clear()
@@ -511,11 +698,11 @@ Namespace Reactors
             DHRi.Clear()
             DHRT.Clear()
 
-            'do the calculations on each dV
+            'do the calculations on each deltaV
             Dim currvol As Double = 0.0#
             Dim prevvol As Double = 0.0#
 
-            Dim nloops As Integer = 1.0 / dV
+            Dim nloops As Integer = 1.0 / deltaV
 
             Dim counter As Integer = 0
 
@@ -638,7 +825,11 @@ Namespace Reactors
                         Dim odesolver = New DotNumerics.ODE.OdeImplicitRungeKutta5()
                         odesolver.InitializeODEs(AddressOf ODEFunc, N.Count, 0.0, vc0)
                         IObj2?.SetCurrent
-                        odesolver.Solve(vc0, 0.0#, 0.01 * dV * Volume, dV * Volume, Sub(x As Double, y As Double()) vc = y)
+                        If dynamics Then
+                            odesolver.Solve(vc0, 0.0#, 0.1 * deltaV * Volume, deltaV * Volume, Sub(x As Double, y As Double()) vc = y)
+                        Else
+                            odesolver.Solve(vc0, 0.0#, 0.01 * deltaV * Volume, deltaV * Volume, Sub(x As Double, y As Double()) vc = y)
+                        End If
 
                         ODEFunc(0, vc)
 
@@ -692,9 +883,9 @@ Namespace Reactors
 
                             'DHr += rxn.ReactionHeat * (N(rxn.BaseReactant) - N0(rxn.BaseReactant)) / 1000
                             If rxn.ReactionType = ReactionType.Kinetic Then
-                                DHr += rxn.ReactionHeat * (Rxi(rxn.ID)) / 1000 * dV * Volume
+                                DHr += rxn.ReactionHeat * (Rxi(rxn.ID)) / 1000 * deltaV * Volume
                             ElseIf rxn.ReactionType = ReactionType.Heterogeneous_Catalytic Then
-                                DHr += rxn.ReactionHeat * (Rxi(rxn.ID)) / 1000 * CatalystLoading * dV * Volume
+                                DHr += rxn.ReactionHeat * (Rxi(rxn.ID)) / 1000 * CatalystLoading * deltaV * Volume
                             End If
 
                             i += 1
@@ -773,7 +964,7 @@ Namespace Reactors
 
                                 DeltaT = OutletTemperature - T0
 
-                                ims.Phases(0).Properties.temperature += DeltaT * dV
+                                ims.Phases(0).Properties.temperature += DeltaT * deltaV
 
                                 T = ims.Phases(0).Properties.temperature.GetValueOrDefault
                                 Tant = T
@@ -792,18 +983,22 @@ Namespace Reactors
 
                 Next
 
-                'add data to array
-                Dim tmparr(C.Count + 2) As Double
-                tmparr(0) = currvol / Volume * Length
-                i = 1
-                For Each d As Double In Me.C.Values
-                    tmparr(i) = d
-                    i = i + 1
-                Next
-                tmparr(i) = T
-                tmparr(i + 1) = P
+                If Not dynamics Then
 
-                Me.points.Add(tmparr)
+                    'add data to array
+                    Dim tmparr(C.Count + 2) As Double
+                    tmparr(0) = currvol / Volume * Length
+                    i = 1
+                    For Each d As Double In Me.C.Values
+                        tmparr(i) = d
+                        i = i + 1
+                    Next
+                    tmparr(i) = T
+                    tmparr(i + 1) = P
+
+                    Me.points.Add(tmparr)
+
+                End If
 
                 Dim Qvin, Qlin, eta_v, eta_l, rho_v, rho_l, tens, rho, eta, xv, xl As Double
 
@@ -825,13 +1020,17 @@ Namespace Reactors
 
                 Dim diameter As Double = (4 * Me.Volume / PI / Me.Length) ^ 0.5
 
+                Dim L As Double = deltaV * Length
+
+                If dynamics Then L = Length / AccumulationStreams.Count
+
                 If Me.CatalystLoading = 0.0# Then
 
                     Dim resv As Object
                     Dim fpp As New FlowPackages.BeggsBrill
                     Dim tipofluxo As String, holdup, dpf, dph, dpt As Double
 
-                    resv = fpp.CalculateDeltaP(diameter * 0.0254, Me.dV * Me.Length, 0.0#, 0.000045, Qvin * 24 * 3600, Qlin * 24 * 3600, eta_v * 1000, eta_l * 1000, rho_v, rho_l, tens)
+                    resv = fpp.CalculateDeltaP(diameter * 0.0254, L, 0.0#, 0.000045, Qvin * 24 * 3600, Qlin * 24 * 3600, eta_v * 1000, eta_l * 1000, rho_v, rho_l, tens)
 
                     tipofluxo = resv(0)
                     holdup = resv(1)
@@ -846,7 +1045,6 @@ Namespace Reactors
                     'has catalyst, use Ergun equation for pressure drop in reactor beds
 
                     Dim vel As Double = (Qlin + Qvin) / (PI * diameter ^ 2 / 4)
-                    Dim L As Double = Me.dV * Me.Length
                     Dim dp As Double = Me.CatalystParticleDiameter / 1000.0
                     Dim ev As Double = Me.CatalystVoidFraction
 
@@ -860,8 +1058,10 @@ Namespace Reactors
 
                 ims.Phases(0).Properties.pressure = P
 
+                If dynamics Then Exit Do
+
                 prevvol = currvol
-                currvol += dV * Volume
+                currvol += deltaV * Volume
 
                 counter += 1
 
@@ -871,122 +1071,126 @@ Namespace Reactors
 
             Loop Until counter > nloops
 
-            If ReactorOperationMode = OperationMode.OutletTemperature Then
+            If Not dynamics Then
 
-                ims.Phases(0).Properties.temperature -= DeltaT * dV
-                IObj?.SetCurrent()
-                ims.PropertyPackage.CurrentMaterialStream = ims
-                ims.Calculate(True, True)
+                If ReactorOperationMode = OperationMode.OutletTemperature Then
 
-            End If
+                    ims.Phases(0).Properties.temperature -= DeltaT * deltaV
+                    IObj?.SetCurrent()
+                    ims.PropertyPackage.CurrentMaterialStream = ims
+                    ims.Calculate(True, True)
 
-            Me.DeltaP = P0 - P
-
-            RxiT.Clear()
-            DHRi.Clear()
-            DHr = 0.0#
-
-            For Each ar In Me.ReactionsSequence
-
-                i = 0
-                Do
-
-                    'process reaction i
-
-                    rxn = FlowSheet.Reactions(ar(i))
-
-                    'reactions with the same base compound
-
-                    Dim rset = FlowSheet.Reactions.Values.Where(Function(x) x.BaseReactant = rxn.BaseReactant).Select(Function(x2) x2.ID).ToList
-
-                    Dim totalrxi = Rxi.Where(Function(x) rset.Contains(x.Key)).Select(Function(x2) x2.Value).ToArray.AbsSumY
-
-                    Dim f = Abs(Rxi(rxn.ID)) / totalrxi
-                    If Double.IsNaN(f) Or Double.IsInfinity(f) Then f = 1.0#
-
-                    RxiT.Add(rxn.ID, (N(rxn.BaseReactant) - N00(rxn.BaseReactant)) / rxn.Components(rxn.BaseReactant).StoichCoeff / 1000 * f)
-                    DHRi.Add(rxn.ID, rxn.ReactionHeat * RxiT(rxn.ID))
-
-                    i += 1
-
-                Loop Until i = ar.Count
-
-            Next
-
-            If Me.ReactorOperationMode = OperationMode.Isothermic Then
-
-                'Products Enthalpy (kJ/kg * kg/s = kW)
-                Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
-
-                'Me.DeltaQ = DHRT.Sum + Hp - Hr0
-                Me.DeltaQ = DHRi.Values.Sum + Hp - Hr0
-
-                Me.DeltaT = 0.0#
-
-                OutletTemperature = T0
-
-            ElseIf Me.ReactorOperationMode = OperationMode.OutletTemperature Then
-
-                'Products Enthalpy (kJ/kg * kg/s = kW)
-                Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
-
-                'Heat (kW)
-                'Me.DeltaQ = DHRT.Sum + Hp - Hr0
-                Me.DeltaQ = DHRi.Values.Sum + Hp - Hr0
-
-                Me.DeltaT = OutletTemperature - T0
-
-            Else
-
-                OutletTemperature = T
-
-                Me.DeltaT = OutletTemperature - T0
-
-            End If
-
-            ' comp. conversions
-            For Each sb As Compound In ims.Phases(0).Compounds.Values
-                If Me.ComponentConversions.ContainsKey(sb.Name) AndAlso N00(sb.Name) > 0 Then
-                    Me.ComponentConversions(sb.Name) = Abs(N00(sb.Name) - N(sb.Name)) / N00(sb.Name)
                 End If
-            Next
 
-            Dim ms As MaterialStream
-            Dim cp As IConnectionPoint
-            Dim mtotal, wtotal As Double
+                Me.DeltaP = P0 - P
 
-            cp = Me.GraphicObject.OutputConnectors(0)
-            If cp.IsAttached Then
-                ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
-                With ms
-                    .SpecType = ims.SpecType
-                    .Phases(0).Properties.massflow = ims.Phases(0).Properties.massflow.GetValueOrDefault
-                    .Phases(0).Properties.massfraction = 1
-                    .Phases(0).Properties.temperature = ims.Phases(0).Properties.temperature.GetValueOrDefault
-                    .Phases(0).Properties.pressure = ims.Phases(0).Properties.pressure.GetValueOrDefault
-                    .Phases(0).Properties.enthalpy = ims.Phases(0).Properties.enthalpy.GetValueOrDefault
-                    Dim comp As BaseClasses.Compound
-                    mtotal = 0
-                    wtotal = 0
-                    For Each comp In .Phases(0).Compounds.Values
-                        mtotal += ims.Phases(0).Compounds(comp.Name).MoleFraction.GetValueOrDefault
-                        wtotal += ims.Phases(0).Compounds(comp.Name).MassFraction.GetValueOrDefault
-                    Next
-                    For Each comp In .Phases(0).Compounds.Values
-                        comp.MoleFraction = ims.Phases(0).Compounds(comp.Name).MoleFraction.GetValueOrDefault / mtotal
-                        comp.MassFraction = ims.Phases(0).Compounds(comp.Name).MassFraction.GetValueOrDefault / wtotal
-                        comp.MassFlow = comp.MassFraction.GetValueOrDefault * .Phases(0).Properties.massflow.GetValueOrDefault
-                        comp.MolarFlow = comp.MoleFraction.GetValueOrDefault * .Phases(0).Properties.molarflow.GetValueOrDefault
-                    Next
+                RxiT.Clear()
+                DHRi.Clear()
+                DHr = 0.0#
+
+                For Each ar In Me.ReactionsSequence
+
+                    i = 0
+                    Do
+
+                        'process reaction i
+
+                        rxn = FlowSheet.Reactions(ar(i))
+
+                        'reactions with the same base compound
+
+                        Dim rset = FlowSheet.Reactions.Values.Where(Function(x) x.BaseReactant = rxn.BaseReactant).Select(Function(x2) x2.ID).ToList
+
+                        Dim totalrxi = Rxi.Where(Function(x) rset.Contains(x.Key)).Select(Function(x2) x2.Value).ToArray.AbsSumY
+
+                        Dim f = Abs(Rxi(rxn.ID)) / totalrxi
+                        If Double.IsNaN(f) Or Double.IsInfinity(f) Then f = 1.0#
+
+                        RxiT.Add(rxn.ID, (N(rxn.BaseReactant) - N00(rxn.BaseReactant)) / rxn.Components(rxn.BaseReactant).StoichCoeff / 1000 * f)
+                        DHRi.Add(rxn.ID, rxn.ReactionHeat * RxiT(rxn.ID))
+
+                        i += 1
+
+                    Loop Until i = ar.Count
+
+                Next
+
+                If Me.ReactorOperationMode = OperationMode.Isothermic Then
+
+                    'Products Enthalpy (kJ/kg * kg/s = kW)
+                    Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
+
+                    'Me.DeltaQ = DHRT.Sum + Hp - Hr0
+                    Me.DeltaQ = DHRi.Values.Sum + Hp - Hr0
+
+                    Me.DeltaT = 0.0#
+
+                    OutletTemperature = T0
+
+                ElseIf Me.ReactorOperationMode = OperationMode.OutletTemperature Then
+
+                    'Products Enthalpy (kJ/kg * kg/s = kW)
+                    Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
+
+                    'Heat (kW)
+                    'Me.DeltaQ = DHRT.Sum + Hp - Hr0
+                    Me.DeltaQ = DHRi.Values.Sum + Hp - Hr0
+
+                    Me.DeltaT = OutletTemperature - T0
+
+                Else
+
+                    OutletTemperature = T
+
+                    Me.DeltaT = OutletTemperature - T0
+
+                End If
+
+                ' comp. conversions
+                For Each sb As Compound In ims.Phases(0).Compounds.Values
+                    If Me.ComponentConversions.ContainsKey(sb.Name) AndAlso N00(sb.Name) > 0 Then
+                        Me.ComponentConversions(sb.Name) = Abs(N00(sb.Name) - N(sb.Name)) / N00(sb.Name)
+                    End If
+                Next
+
+                Dim ms As MaterialStream
+                Dim cp As IConnectionPoint
+                Dim mtotal, wtotal As Double
+
+                cp = Me.GraphicObject.OutputConnectors(0)
+                If cp.IsAttached Then
+                    ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
+                    With ms
+                        .SpecType = ims.SpecType
+                        .Phases(0).Properties.massflow = ims.Phases(0).Properties.massflow.GetValueOrDefault
+                        .Phases(0).Properties.massfraction = 1
+                        .Phases(0).Properties.temperature = ims.Phases(0).Properties.temperature.GetValueOrDefault
+                        .Phases(0).Properties.pressure = ims.Phases(0).Properties.pressure.GetValueOrDefault
+                        .Phases(0).Properties.enthalpy = ims.Phases(0).Properties.enthalpy.GetValueOrDefault
+                        Dim comp As BaseClasses.Compound
+                        mtotal = 0
+                        wtotal = 0
+                        For Each comp In .Phases(0).Compounds.Values
+                            mtotal += ims.Phases(0).Compounds(comp.Name).MoleFraction.GetValueOrDefault
+                            wtotal += ims.Phases(0).Compounds(comp.Name).MassFraction.GetValueOrDefault
+                        Next
+                        For Each comp In .Phases(0).Compounds.Values
+                            comp.MoleFraction = ims.Phases(0).Compounds(comp.Name).MoleFraction.GetValueOrDefault / mtotal
+                            comp.MassFraction = ims.Phases(0).Compounds(comp.Name).MassFraction.GetValueOrDefault / wtotal
+                            comp.MassFlow = comp.MassFraction.GetValueOrDefault * .Phases(0).Properties.massflow.GetValueOrDefault
+                            comp.MolarFlow = comp.MoleFraction.GetValueOrDefault * .Phases(0).Properties.molarflow.GetValueOrDefault
+                        Next
+                    End With
+                End If
+
+                'energy stream - update energy flow value (kW)
+                Dim estr As Streams.EnergyStream = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
+                With estr
+                    .EnergyFlow = Me.DeltaQ.GetValueOrDefault
+                    .GraphicObject.Calculated = True
                 End With
-            End If
 
-            'energy stream - update energy flow value (kW)
-            Dim estr As Streams.EnergyStream = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
-            With estr
-                .EnergyFlow = Me.DeltaQ.GetValueOrDefault
-                .GraphicObject.Calculated = True
-            End With
+            End If
 
             IObj?.Close()
 
@@ -1458,12 +1662,12 @@ Namespace Reactors
             model.TitleFontSize = 11
             model.SubtitleFontSize = 10
 
-            model.Axes.Add(New LinearAxis() With { _
-                .MajorGridlineStyle = LineStyle.Dash, _
-                .MinorGridlineStyle = LineStyle.Dot, _
-                .Position = AxisPosition.Bottom, _
-                .FontSize = 10, _
-                .Title = "Length (" + su.distance + ")" _
+            model.Axes.Add(New LinearAxis() With {
+                .MajorGridlineStyle = LineStyle.Dash,
+                .MinorGridlineStyle = LineStyle.Dot,
+                .Position = AxisPosition.Bottom,
+                .FontSize = 10,
+                .Title = "Length (" + su.distance + ")"
             })
 
             model.LegendFontSize = 9
@@ -1497,12 +1701,12 @@ Namespace Reactors
 
                 Case "Temperature Profile"
 
-                    model.Axes.Add(New LinearAxis() With { _
-                        .MajorGridlineStyle = LineStyle.Dash, _
-                        .MinorGridlineStyle = LineStyle.Dot, _
-                        .Position = AxisPosition.Left, _
-                        .FontSize = 10, _
-                        .Title = "Temperature (" + su.temperature + ")", _
+                    model.Axes.Add(New LinearAxis() With {
+                        .MajorGridlineStyle = LineStyle.Dash,
+                        .MinorGridlineStyle = LineStyle.Dot,
+                        .Position = AxisPosition.Left,
+                        .FontSize = 10,
+                        .Title = "Temperature (" + su.temperature + ")",
                         .Key = "temp"
                     })
 
@@ -1513,12 +1717,12 @@ Namespace Reactors
 
                 Case "Pressure Profile"
 
-                    model.Axes.Add(New LinearAxis() With { _
-                        .MajorGridlineStyle = LineStyle.Dash, _
-                        .MinorGridlineStyle = LineStyle.Dot, _
-                        .Position = AxisPosition.Left, _
-                        .FontSize = 10, _
-                        .Title = "Pressure (" + su.pressure + ")", _
+                    model.Axes.Add(New LinearAxis() With {
+                        .MajorGridlineStyle = LineStyle.Dash,
+                        .MinorGridlineStyle = LineStyle.Dot,
+                        .Position = AxisPosition.Left,
+                        .FontSize = 10,
+                        .Title = "Pressure (" + su.pressure + ")",
                         .Key = "press"
                     })
 
@@ -1529,12 +1733,12 @@ Namespace Reactors
 
                 Case "Concentration Profile"
 
-                    model.Axes.Add(New LinearAxis() With { _
-                        .MajorGridlineStyle = LineStyle.Dash, _
-                        .MinorGridlineStyle = LineStyle.Dot, _
-                        .Position = AxisPosition.Left, _
-                        .FontSize = 10, _
-                        .Title = "Concentration (" + su.molar_conc + ")", _
+                    model.Axes.Add(New LinearAxis() With {
+                        .MajorGridlineStyle = LineStyle.Dash,
+                        .MinorGridlineStyle = LineStyle.Dot,
+                        .Position = AxisPosition.Left,
+                        .FontSize = 10,
+                        .Title = "Concentration (" + su.molar_conc + ")",
                         .Key = "conc"
                     })
 

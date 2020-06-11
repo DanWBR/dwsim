@@ -317,23 +317,23 @@ Namespace UnitOperations
             PerformPostCalcValidation()
         End Sub
 
-        <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As DynamicsPropertyEditor
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public fd As DynamicsPropertyEditor
 
         Public Sub DisplayDynamicsEditForm() Implements ISimulationObject.DisplayDynamicsEditForm
 
-            If f Is Nothing Then
-                f = New DynamicsPropertyEditor With {.SimObject = Me}
-                f.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockRight
-                f.Tag = "ObjectEditor"
-                Me.FlowSheet.DisplayForm(f)
+            If fd Is Nothing Then
+                fd = New DynamicsPropertyEditor With {.SimObject = Me}
+                fd.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockRight
+                fd.Tag = "ObjectEditor"
+                Me.FlowSheet.DisplayForm(fd)
             Else
-                If f.IsDisposed Then
-                    f = New DynamicsPropertyEditor With {.SimObject = Me}
-                    f.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockRight
-                    f.Tag = "ObjectEditor"
-                    Me.FlowSheet.DisplayForm(f)
+                If fd.IsDisposed Then
+                    fd = New DynamicsPropertyEditor With {.SimObject = Me}
+                    fd.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockRight
+                    fd.Tag = "ObjectEditor"
+                    Me.FlowSheet.DisplayForm(fd)
                 Else
-                    f.Activate()
+                    fd.Activate()
                 End If
             End If
 
@@ -341,9 +341,9 @@ Namespace UnitOperations
 
         Public Sub UpdateDynamicsEditForm() Implements ISimulationObject.UpdateDynamicsEditForm
 
-            If f IsNot Nothing Then
-                If Not f.IsDisposed Then
-                    f.UIThread(Sub() f.UpdateInfo())
+            If fd IsNot Nothing Then
+                If Not fd.IsDisposed Then
+                    fd.UIThread(Sub() fd.UpdateInfo())
                 End If
             End If
 
@@ -351,10 +351,10 @@ Namespace UnitOperations
 
         Public Sub CloseDynamicsEditForm() Implements ISimulationObject.CloseDynamicsEditForm
 
-            If f IsNot Nothing Then
-                If Not f.IsDisposed Then
-                    f.Close()
-                    f = Nothing
+            If fd IsNot Nothing Then
+                If Not fd.IsDisposed Then
+                    fd.Close()
+                    fd = Nothing
                 End If
             End If
 
