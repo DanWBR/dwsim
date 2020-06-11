@@ -419,7 +419,7 @@ Namespace Reactors
 
         Public Overrides Sub CreateDynamicProperties()
 
-            AddDynamicProperty("Reset Contents", "Empties the tank's content on the next run.", 0, UnitOfMeasure.none)
+            AddDynamicProperty("Reset Contents", "Empties the PFR's content on the next run.", 0, UnitOfMeasure.none)
 
         End Sub
 
