@@ -27,6 +27,7 @@ Partial Class Form1
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.pg = New Controls.PropertyGridEx.PropertyGridEx()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.lblVapOnly = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -36,7 +37,6 @@ Partial Class Form1
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.lblStream = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.pg = New Controls.PropertyGridEx.PropertyGridEx()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -62,6 +62,54 @@ Partial Class Form1
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(320, 382)
         Me.TableLayoutPanel1.TabIndex = 1
+        '
+        'pg
+        '
+        '
+        '
+        '
+        Me.pg.DocCommentDescription.AutoEllipsis = True
+        Me.pg.DocCommentDescription.Cursor = System.Windows.Forms.Cursors.Default
+        Me.pg.DocCommentDescription.Location = New System.Drawing.Point(3, 18)
+        Me.pg.DocCommentDescription.Name = ""
+        Me.pg.DocCommentDescription.Size = New System.Drawing.Size(306, 37)
+        Me.pg.DocCommentDescription.TabIndex = 1
+        Me.pg.DocCommentImage = Nothing
+        '
+        '
+        '
+        Me.pg.DocCommentTitle.Cursor = System.Windows.Forms.Cursors.Default
+        Me.pg.DocCommentTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.pg.DocCommentTitle.Location = New System.Drawing.Point(3, 3)
+        Me.pg.DocCommentTitle.Name = ""
+        Me.pg.DocCommentTitle.Size = New System.Drawing.Size(306, 15)
+        Me.pg.DocCommentTitle.TabIndex = 0
+        Me.pg.DocCommentTitle.UseMnemonic = False
+        Me.pg.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pg.DrawFlatToolbar = True
+        Me.pg.Location = New System.Drawing.Point(4, 67)
+        Me.pg.Name = "pg"
+        Me.pg.Size = New System.Drawing.Size(312, 311)
+        Me.pg.TabIndex = 4
+        Me.pg.ToolbarVisible = False
+        '
+        '
+        '
+        Me.pg.ToolStrip.AccessibleName = "ToolBar"
+        Me.pg.ToolStrip.AccessibleRole = System.Windows.Forms.AccessibleRole.ToolBar
+        Me.pg.ToolStrip.AllowMerge = False
+        Me.pg.ToolStrip.AutoSize = False
+        Me.pg.ToolStrip.CanOverflow = False
+        Me.pg.ToolStrip.Dock = System.Windows.Forms.DockStyle.None
+        Me.pg.ToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+        Me.pg.ToolStrip.Location = New System.Drawing.Point(0, 1)
+        Me.pg.ToolStrip.Name = ""
+        Me.pg.ToolStrip.Padding = New System.Windows.Forms.Padding(2, 0, 1, 0)
+        Me.pg.ToolStrip.Size = New System.Drawing.Size(312, 25)
+        Me.pg.ToolStrip.TabIndex = 1
+        Me.pg.ToolStrip.TabStop = True
+        Me.pg.ToolStrip.Text = "PropertyGridToolBar"
+        Me.pg.ToolStrip.Visible = False
         '
         'Panel3
         '
@@ -160,60 +208,13 @@ Partial Class Form1
         Me.Label1.Text = "Material Stream"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'pg
-        '
-        '
-        '
-        '
-        Me.pg.DocCommentDescription.AutoEllipsis = True
-        Me.pg.DocCommentDescription.Cursor = System.Windows.Forms.Cursors.Default
-        Me.pg.DocCommentDescription.Location = New System.Drawing.Point(3, 18)
-        Me.pg.DocCommentDescription.Name = ""
-        Me.pg.DocCommentDescription.Size = New System.Drawing.Size(306, 37)
-        Me.pg.DocCommentDescription.TabIndex = 1
-        Me.pg.DocCommentImage = Nothing
-        '
-        '
-        '
-        Me.pg.DocCommentTitle.Cursor = System.Windows.Forms.Cursors.Default
-        Me.pg.DocCommentTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
-        Me.pg.DocCommentTitle.Location = New System.Drawing.Point(3, 3)
-        Me.pg.DocCommentTitle.Name = ""
-        Me.pg.DocCommentTitle.Size = New System.Drawing.Size(306, 15)
-        Me.pg.DocCommentTitle.TabIndex = 0
-        Me.pg.DocCommentTitle.UseMnemonic = False
-        Me.pg.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pg.DrawFlatToolbar = True
-        Me.pg.Location = New System.Drawing.Point(4, 67)
-        Me.pg.Name = "pg"
-        Me.pg.Size = New System.Drawing.Size(312, 311)
-        Me.pg.TabIndex = 4
-        Me.pg.ToolbarVisible = False
-        '
-        '
-        '
-        Me.pg.ToolStrip.AccessibleName = "ToolBar"
-        Me.pg.ToolStrip.AccessibleRole = System.Windows.Forms.AccessibleRole.ToolBar
-        Me.pg.ToolStrip.AllowMerge = False
-        Me.pg.ToolStrip.AutoSize = False
-        Me.pg.ToolStrip.CanOverflow = False
-        Me.pg.ToolStrip.Dock = System.Windows.Forms.DockStyle.None
-        Me.pg.ToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.pg.ToolStrip.Location = New System.Drawing.Point(0, 1)
-        Me.pg.ToolStrip.Name = ""
-        Me.pg.ToolStrip.Padding = New System.Windows.Forms.Padding(2, 0, 1, 0)
-        Me.pg.ToolStrip.Size = New System.Drawing.Size(312, 25)
-        Me.pg.ToolStrip.TabIndex = 1
-        Me.pg.ToolStrip.TabStop = True
-        Me.pg.ToolStrip.Text = "PropertyGridToolBar"
-        Me.pg.ToolStrip.Visible = False
-        '
         'Form1
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.ClientSize = New System.Drawing.Size(320, 382)
         Me.Controls.Add(Me.TableLayoutPanel1)
+        Me.DoubleBuffered = True
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form1"

@@ -233,7 +233,7 @@ Public Class FormDynamicsIntegratorControl
 
         Flowsheet.SupressMessages = True
 
-        Dim exceptions As List(Of Exception)
+        Dim exceptions As New List(Of Exception)
 
         Dim maintask = New Task(Sub()
 
@@ -285,7 +285,7 @@ Public Class FormDynamicsIntegratorControl
                                             Task.Delay(200).Wait()
                                         End While
 
-                                        If exceptions.Count > 0 Then Throw exceptions(0)
+                                        If exceptions.Count > 0 Then Exit While
 
                                         StoreVariableValues(integrator, j, integrator.CurrentTime)
 
@@ -337,6 +337,8 @@ Public Class FormDynamicsIntegratorControl
                                         i += interval
 
                                     End While
+
+                                    If exceptions.Count > 0 Then Throw exceptions(0)
 
                                 End Sub)
 

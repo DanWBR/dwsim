@@ -320,7 +320,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             Flowsheet.SupressMessages = true;
 
-            List<Exception> exceptions;
+            var exceptions = new List<Exception>();
 
             var maintask = new Task(() =>
             {
@@ -378,7 +378,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                     while (GlobalSettings.Settings.CalculatorBusy)
                         Task.Delay(200).Wait();
 
-                    if (exceptions.Count > 0) throw exceptions[0];
+                    if (exceptions.Count > 0) break;
 
                     StoreVariableValues((DynamicsManager.Integrator)integrator, j, integrator.CurrentTime);
 
@@ -425,6 +425,9 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                     i += interval;
 
                 }
+
+                if (exceptions.Count > 0) throw exceptions[0];
+
             });
 
             maintask.ContinueWith(t =>

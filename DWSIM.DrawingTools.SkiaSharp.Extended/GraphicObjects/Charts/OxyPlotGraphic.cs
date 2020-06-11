@@ -155,6 +155,7 @@ namespace DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
                     else
                     {
                         PaintInstructions(canvas, "Referenced object not found.");
+                        return;
                     }
 
                     if (model != null)
@@ -188,6 +189,7 @@ namespace DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
                     else
                     {
                         PaintInstructions(canvas, "Chart model not found.");
+                        return;
                     }
 
                 }
@@ -195,6 +197,7 @@ namespace DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
             else
             {
                 PaintInstructions(canvas, "Flowsheet not defined.");
+                return;
             }
         }
 

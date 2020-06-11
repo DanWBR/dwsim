@@ -419,6 +419,7 @@ Namespace Reactors
 
         Public Overrides Sub CreateDynamicProperties()
 
+            AddDynamicProperty("Max Sections", "Maximum number of sections to divide the PFR length in during dynamic calculations.", 20, UnitOfMeasure.none)
             AddDynamicProperty("Reset Contents", "Empties the PFR's content on the next run.", 0, UnitOfMeasure.none)
 
         End Sub
@@ -457,7 +458,11 @@ Namespace Reactors
 
             End If
 
+            Dim MaxSections = GetDynamicProperty("Max Sections")
+
             Dim NumberOfSections As Integer = ResidenceTime / timestep
+
+            If NumberOfSections > MaxSections Then NumberOfSections = MaxSections
 
             Dim Reset As Boolean = GetDynamicProperty("Reset Contents")
 
@@ -532,15 +537,18 @@ Namespace Reactors
 
             Next
 
-            For Each astr In AccumulationStreams
+            For i As Integer = 0 To NumberOfSections - 1
 
-                Calculate(astr)
+                Calculate(AccumulationStreams(i))
 
             Next
 
-            For i As Integer = 0 To NumberOfSections - 2
+            For i As Integer = NumberOfSections - 1 To 1 Step -1
 
-                AccumulationStreams(i + 1).AssignFromPhase(PhaseLabel.Mixture, AccumulationStreams(i), True)
+                AccumulationStreams(i).AssignFromPhase(PhaseLabel.Mixture, AccumulationStreams(i - 1), True)
+                AccumulationStreams(i).SetFlowsheet(FlowSheet)
+                AccumulationStreams(i).PropertyPackage.CurrentMaterialStream = AccumulationStreams(i)
+                AccumulationStreams(i).Calculate()
 
             Next
 
@@ -577,10 +585,23 @@ Namespace Reactors
 
             Next
 
+            OutletTemperature = AccumulationStreams.Last.GetTemperature()
 
+            DeltaT = OutletTemperature - ims1.GetTemperature()
 
+            DeltaP = AccumulationStreams.Last.GetPressure() - ims1.GetPressure()
 
+            DeltaQ = (AccumulationStreams.Last.GetMassEnthalpy() - ims1.GetMassEnthalpy()) * ims1.GetMassFlow()
 
+            ' comp. conversions
+
+            For Each sb As Compound In ims1.Phases(0).Compounds.Values
+                If ComponentConversions.ContainsKey(sb.Name) AndAlso N00(sb.Name) > 0 Then
+                    Dim n0 = ims1.Phases(0).Compounds(sb.Name).MolarFlow.GetValueOrDefault()
+                    Dim nf = AccumulationStreams.Last.Phases(0).Compounds(sb.Name).MolarFlow.GetValueOrDefault()
+                    ComponentConversions(sb.Name) = Abs(n0 - nf) / nf
+                End If
+            Next
 
         End Sub
 
@@ -596,7 +617,11 @@ Namespace Reactors
 
             Dim deltaV As Double
 
-            If dynamics Then deltaV = 1.0 Else deltaV = dV
+            If dynamics Then
+                deltaV = 1.0 / AccumulationStreams.Count
+            Else
+                deltaV = dV
+            End If
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -636,7 +661,7 @@ Namespace Reactors
             m_conversions = New Dictionary(Of String, Double)
             m_componentconversions = New Dictionary(Of String, Double)
 
-            points = New ArrayList
+            If Not dynamics Then points = New ArrayList
 
             If Not Me.GraphicObject.InputConnectors(0).IsAttached Then
                 Throw New Exception(FlowSheet.GetTranslatedString("Nohcorrentedematriac16"))
@@ -860,7 +885,7 @@ Namespace Reactors
                         odesolver.InitializeODEs(AddressOf ODEFunc, N.Count, 0.0, vc0)
                         IObj2?.SetCurrent
                         If dynamics Then
-                            odesolver.Solve(vc0, 0.0#, 0.1 * deltaV * Volume, deltaV * Volume, Sub(x As Double, y As Double()) vc = y)
+                            odesolver.Solve(vc0, 0.0#, 0.01 * deltaV * Volume, deltaV * Volume, Sub(x As Double, y As Double()) vc = y)
                         Else
                             odesolver.Solve(vc0, 0.0#, 0.01 * deltaV * Volume, deltaV * Volume, Sub(x As Double, y As Double()) vc = y)
                         End If
@@ -1052,11 +1077,9 @@ Namespace Reactors
 
                 eta = eta_l * xl + eta_v * xv
 
-                Dim diameter As Double = (4 * Me.Volume / PI / Me.Length) ^ 0.5
+                Dim diameter As Double = (4 * Volume / PI / Length) ^ 0.5
 
                 Dim L As Double = deltaV * Length
-
-                If dynamics Then L = Length / AccumulationStreams.Count
 
                 If Me.CatalystLoading = 0.0# Then
 
@@ -1092,6 +1115,8 @@ Namespace Reactors
 
                 ims.Phases(0).Properties.pressure = P
 
+                FlowSheet.CheckStatus()
+
                 If dynamics Then Exit Do
 
                 prevvol = currvol
@@ -1100,8 +1125,6 @@ Namespace Reactors
                 counter += 1
 
                 CalcStep = Convert.ToInt32(counter / nloops * 100)
-
-                FlowSheet.CheckStatus()
 
             Loop Until counter > nloops
 
