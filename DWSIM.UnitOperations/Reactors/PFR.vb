@@ -548,6 +548,40 @@ Namespace Reactors
 
             AccumulationStream = Nothing
 
+            'update profile
+
+            points = New ArrayList
+
+            Dim j As Integer = 1
+
+            For Each astr In AccumulationStreams
+
+                'add data to array
+
+                Dim tmparr(C.Count + 2) As Double
+
+                tmparr(0) = j / AccumulationStreams.Count * Length
+
+                Dim i As Integer = 1
+                For Each kvp In C
+                    tmparr(i) = astr.Phases(0).Compounds(kvp.Key).MolarFlow.GetValueOrDefault() / astr.GetVolumetricFlow()
+                    i = i + 1
+                Next
+
+                tmparr(i) = astr.GetTemperature
+                tmparr(i + 1) = astr.GetPressure
+
+                Me.points.Add(tmparr)
+
+                j += 1
+
+            Next
+
+
+
+
+
+
         End Sub
 
 
