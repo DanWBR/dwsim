@@ -18,7 +18,7 @@ DWSIM is licensed under the GNU General Public License (GPL) Version 3.
 ### Supported Operating Systems
 
 - Windows (32/64-bit x86) with .NET Framework 4.6.1 or newer
-- Linux (32-bit armhf / 64-bit x86) with Mono 5.8 or newer
+- Linux (32-bit armhf / 64-bit x86) with Mono 6.10 or newer
 - macOS (formerly OS X) 10.7 or newer
 
 ### Project Details
@@ -77,4 +77,4 @@ DWSIM.UI.Desktop.WPF|Cross-Platform UI Windows Presentation Foundation (WPF) Pla
 ### Compiling
 
 - DWSIM can be compiled using Visual Studio 2017 or newer on Windows.
-- To compile everything and run, select 'DWSIM' or 'DWSIM.UI.Desktop' as the startup project, change the Build target to 'Debug'or 'Release' and 'x64' or 'x32'.
+- To compile everything and run, select 'DWSIM' or 'DWSIM.UI.Desktop' as the startup project, change the Build target to 'Debug/x64', 'ReleaseLinux/x64', 'ReleaseWinMac/x64' or 'ReleaseWinMac/x86'.

@@ -506,6 +506,24 @@ Namespace Reactors
 
             NewCalculate(True)
 
+            OutletTemperature = AccumulationStream.GetTemperature()
+
+            DeltaT = OutletTemperature - ims1.GetTemperature()
+
+            DeltaP = AccumulationStream.GetPressure() - ims1.GetPressure()
+
+            DeltaQ = (AccumulationStream.GetMassEnthalpy() - ims1.GetMassEnthalpy()) * ims1.GetMassFlow()
+
+            ' comp. conversions
+
+            For Each sb As Compound In ims1.Phases(0).Compounds.Values
+                If ComponentConversions.ContainsKey(sb.Name) > 0 Then
+                    Dim n0 = ims1.Phases(0).Compounds(sb.Name).MolarFlow.GetValueOrDefault()
+                    Dim nf = AccumulationStream.Phases(0).Compounds(sb.Name).MolarFlow.GetValueOrDefault()
+                    ComponentConversions(sb.Name) = Abs(n0 - nf) / nf
+                End If
+            Next
+
         End Sub
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)

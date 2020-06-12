@@ -1111,7 +1111,7 @@ namespace DWSIM.UI.Forms
                 VerticalContentAlignment = VerticalAlignment.Center,
                 Padding = new Padding(5)
             };
-            flowsheetcontrolcontainer.Rows.Add(new TableRow(menu1));
+            flowsheetcontrolcontainer.Rows.Add(new TableRow(new Scrollable {Content = menu1 }));
 
             Button btnUp, btnLeft, btnRight, btnDown;
 

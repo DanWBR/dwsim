@@ -124,7 +124,6 @@ namespace DWSIM.UI
                 {
                     LoadSimulation(dialog.FileName);
                 }
-
             };
 
             link1.Click += (sender, e) =>
@@ -162,9 +161,11 @@ namespace DWSIM.UI
             ppatreon.Add(new Label { Size = lsize, Font = regularfont, Wrap = WrapMode.Word, Text = "Become a Patron and get access to exclusive Unit Operations, Property Packages and Plugins/Add-Ins!" }, dx2, dy2 * 2 + bfh);
             var img4 = new ImageView { Size = psize, Image = new Bitmap(Bitmap.FromResource(imgprefix + "Patreon_Navy.jpg")) };
             ppatreon.Add(img4, (int)(400 * sf), 0);
-            var link4 = new LinkButton { Text = "Support the Project", Width = (int)(250 * sf), Font = boldfont2 };
+            var link4 = new LinkButton { Text = "Support the Project", Width = (int)(140 * sf), Font = boldfont2 };
             ppatreon.Add(link4, dx2, (int)(100 * sf - rfh - dy));
-            var link4a = new LinkButton { Text = "Get Benefits", Width = 70, Font = boldfont2, BackgroundColor = Colors.DodgerBlue, TextColor = Colors.White };
+            var bwidth = 70;
+            if (Application.Instance.Platform.IsGtk) bwidth = 140;
+            var link4a = new LinkButton { Text = "Get Benefits", Width = bwidth, Font = boldfont2, BackgroundColor = Colors.DodgerBlue, TextColor = Colors.White };
             ppatreon.Add(link4a, dx2 + (int)(150 * sf), (int)(100 * sf - rfh - dy));
 
             link4.Click += (sender, e) => "https://patreon.com/dwsim".OpenURL();
