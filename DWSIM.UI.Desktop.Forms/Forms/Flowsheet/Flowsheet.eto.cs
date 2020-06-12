@@ -972,7 +972,7 @@ namespace DWSIM.UI.Forms
             btnmEqHoriz.Click += (sender, e) => ActHorizAlign.Invoke();
             btnmEqVert.Click += (sender, e) => ActVertAlign.Invoke();
 
-            var chkControlPanelMode = new Eto.Forms.CheckBox { Text = "CP Mode", ToolTip = "Enable/Disable Control Panel Mode" };
+            var chkControlPanelMode = new Eto.Forms.CheckBox { Text = "Control Panel Mode", ToolTip = "Enable/Disable Control Panel Mode" };
 
             ddstates = new DropDown { Width = 100 };
             var btnSaveState = new Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Save State", Image = new Bitmap(Bitmap.FromResource(imgprefix + "icons8-scroll_up.png")).WithSize(16, 16) };
@@ -1069,9 +1069,37 @@ namespace DWSIM.UI.Forms
 
             }
 
+            var lbl1 = new Label { Text = "Search" };
+
+            var tbSearch = new TextBox { Width = 100 };
+
+            tbSearch.TextChanged += (s, e) => {
+
+                if (tbSearch.Text == "") return;
+
+                var obj = FlowsheetObject.GetFlowsheetSimulationObject(tbSearch.Text);
+                if (obj != null)
+                {
+                    try
+                    {
+                        Point center = new Point((FlowsheetControl.Width / 2), (FlowsheetControl.Height / 2));
+                        FlowsheetControl.FlowsheetSurface.OffsetAll(((int)((float)center.X / FlowsheetControl.FlowsheetSurface.Zoom)
+                                        - obj.GraphicObject.X), ((int)((float)center.Y / FlowsheetControl.FlowsheetSurface.Zoom)
+                                        - obj.GraphicObject.Y));
+                        FlowsheetControl.Invalidate();
+                        FlowsheetControl.Invalidate();
+                    }
+                    catch
+                    {
+                    }
+
+                }
+
+            };
+
             var menu1 = new StackLayout
             {
-                Items = { chkControlPanelMode,  new Label {Text =" " },
+                Items = { lbl1, tbSearch,  new Label {Text =" " }, chkControlPanelMode,  new Label {Text =" " },
                 new Label{Text = "States"}, ddstates, btnSaveState, btnLoadState, btnDeleteState,new Label {Text =" " },
                 btnmZoomOut, btnmZoomIn, btnmZoomFit, btnmZoomDefault, new Label {Text =" " },
                 btnmDrawGrid, btnmSnapToGrid, btnmMultiSelect, new Label {Text =" " },

@@ -1,3 +1,9 @@
+Version 6.0 Update 3
+
+- [NEW] Dynamic Models for CSTR and PFR
+- [NEW] Added Search Box to Cross-Platform UI PFD
+- [FIX] Bug fixes and enhancements
+
 Version 6.0 Update 2
 
 - [NEW] Dynamic Model for Heat Exchanger
