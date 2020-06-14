@@ -4651,9 +4651,16 @@ Namespace Streams
                     units = "m/s"
                 Case "heatofvaporization"
                     units = "kJ/mol"
-                Case "heatcapacity", "heatcapacitycp", "heatcapacitycv", "idealgasheatcapacity", "idealgasenthalpy",
-                     "excessenthalpy", "excessentropy", "enthalpy", "enthalpynf", "entropy", "entropynf", "enthalpyf",
-                     "entropyf", "internalenergy", "gibbsenergy", "helmholtzenergy"
+                Case "heatcapacity", "heatcapacitycp", "heatcapacitycv", "idealgasheatcapacity",
+                     "excessentropy", "entropy", "entropyf", "entropynf"
+                    Select Case basis
+                        Case "Molar", "molar", "mole", "Mole"
+                            units = "J/[mol.K]"
+                        Case "Mass", "mass"
+                            units = "J/[kg.K]"
+                    End Select
+                Case "idealgasenthalpy", "excessenthalpy", "enthalpy", "enthalpynf", "enthalpyf",
+                          "internalenergy", "gibbsenergy", "helmholtzenergy"
                     Select Case basis
                         Case "Molar", "molar", "mole", "Mole"
                             units = "J/mol"
@@ -7746,7 +7753,7 @@ Namespace Streams
                 Dim sub1 As BaseClasses.Compound
                 Dim p = .Phases(0)
                 Dim mass_div_mm As Double = 0
-                    Dim total As Double = 0
+                Dim total As Double = 0
                 For Each sub1 In p.Compounds.Values
                     total += sub1.MassFlow.GetValueOrDefault
                 Next
@@ -7755,11 +7762,11 @@ Namespace Streams
                     totalm += sub1.MolarFlow.GetValueOrDefault
                 Next
                 For Each sub1 In p.Compounds.Values
-                        sub1.MassFraction = sub1.MassFlow.GetValueOrDefault / total
-                    Next
-                    For Each sub1 In p.Compounds.Values
-                        mass_div_mm += sub1.MassFraction.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight
-                    Next
+                    sub1.MassFraction = sub1.MassFlow.GetValueOrDefault / total
+                Next
+                For Each sub1 In p.Compounds.Values
+                    mass_div_mm += sub1.MassFraction.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight
+                Next
                 For Each sub1 In p.Compounds.Values
                     sub1.MoleFraction = sub1.MassFraction.GetValueOrDefault / sub1.ConstantProperties.Molar_Weight / mass_div_mm
                 Next
