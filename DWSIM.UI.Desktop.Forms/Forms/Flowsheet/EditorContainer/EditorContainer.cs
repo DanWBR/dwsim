@@ -212,10 +212,9 @@ namespace DWSIM.UI.Forms
 
             // dynamics
 
-            if (obj.SupportsDynamicMode && obj.HasPropertiesForDynamicMode)
+            if ((obj.SupportsDynamicMode && obj.HasPropertiesForDynamicMode) || obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream)
             {
-                if (obj.ExtraPropertiesDescriptions.Count() > 0 || 
-                    obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream)
+                if (obj.ExtraPropertiesDescriptions.Count() > 0 || obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream)
                 {
 
                     var tabd = new DocumentPage { Closable = false };
