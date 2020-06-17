@@ -1,5 +1,5 @@
 '    Separator Vessel Calculation Routines 
-'    Copyright 2008-2014 Daniel Wagner O. de Medeiros
+'    Copyright 2008-2020 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -20,11 +20,7 @@
 Imports DWSIM.Thermodynamics
 Imports DWSIM.Thermodynamics.Streams
 Imports DWSIM.SharedClasses
-Imports System.Windows.Forms
-Imports DWSIM.UnitOperations.UnitOperations.Auxiliary
-Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Interfaces.Enums
-Imports System.Linq
 
 Namespace UnitOperations
 
@@ -229,11 +225,11 @@ Namespace UnitOperations
             Else
 
                 AccumulationStream.SetFlowsheet(FlowSheet)
-                AccumulationStream = AccumulationStream.Add(imsmix, timestep)
+                If imsmix.GetMassFlow() > 0 Then AccumulationStream = AccumulationStream.Add(imsmix, timestep)
                 AccumulationStream.PropertyPackage.CurrentMaterialStream = AccumulationStream
                 AccumulationStream.Calculate()
-                AccumulationStream = AccumulationStream.Subtract(oms1, timestep)
-                AccumulationStream = AccumulationStream.Subtract(oms2, timestep)
+                If oms1.GetMassFlow() > 0 Then AccumulationStream = AccumulationStream.Subtract(oms1, timestep)
+                If oms2.GetMassFlow() > 0 Then AccumulationStream = AccumulationStream.Subtract(oms2, timestep)
                 If AccumulationStream.GetMassFlow <= 0.0 Then AccumulationStream.SetMassFlow(0.0)
             End If
 
