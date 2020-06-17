@@ -169,10 +169,10 @@ Namespace UnitOperations
                 Else
 
                     AccumulationStream.SetFlowsheet(FlowSheet)
-                    AccumulationStream = AccumulationStream.Add(ims, timestep)
+                    If ims.GetMassFlow() > 0 Then AccumulationStream = AccumulationStream.Add(ims, timestep)
                     AccumulationStream.PropertyPackage.CurrentMaterialStream = AccumulationStream
                     AccumulationStream.Calculate()
-                    AccumulationStream = AccumulationStream.Subtract(oms1, timestep)
+                    If oms1.GetMassFlow() > 0 Then AccumulationStream = AccumulationStream.Subtract(oms1, timestep)
                     If AccumulationStream.GetMassFlow <= 0.0 Then AccumulationStream.SetMassFlow(0.0)
 
                 End If

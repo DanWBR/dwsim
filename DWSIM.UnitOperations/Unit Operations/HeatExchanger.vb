@@ -439,10 +439,10 @@ Namespace UnitOperations
 
                 AccumulationStreamHot.PropertyPackage = StInHot.PropertyPackage
                 AccumulationStreamHot.SetFlowsheet(FlowSheet)
-                AccumulationStreamHot = AccumulationStreamHot.Add(StInHot, timestep)
+                If StInHot.GetMassFlow() > 0 Then AccumulationStreamHot = AccumulationStreamHot.Add(StInHot, timestep)
                 AccumulationStreamHot.PropertyPackage.CurrentMaterialStream = AccumulationStreamHot
                 AccumulationStreamHot.Calculate()
-                AccumulationStreamHot = AccumulationStreamHot.Subtract(StOutHot, timestep)
+                If StOutHot.GetMassFlow() > 0 Then AccumulationStreamHot = AccumulationStreamHot.Subtract(StOutHot, timestep)
                 If AccumulationStreamHot.GetMassFlow <= 0.0 Then AccumulationStreamHot.SetMassFlow(0.0)
 
             End If
@@ -476,10 +476,10 @@ Namespace UnitOperations
 
                 AccumulationStreamCold.PropertyPackage = StInCold.PropertyPackage
                 AccumulationStreamCold.SetFlowsheet(FlowSheet)
-                AccumulationStreamCold = AccumulationStreamCold.Add(StInCold, timestep)
+                If StInCold.GetMassFlow() > 0 Then AccumulationStreamCold = AccumulationStreamCold.Add(StInCold, timestep)
                 AccumulationStreamCold.PropertyPackage.CurrentMaterialStream = AccumulationStreamCold
                 AccumulationStreamCold.Calculate()
-                AccumulationStreamCold = AccumulationStreamCold.Subtract(StOutCold, timestep)
+                If StOutCold.GetMassFlow() > 0 Then AccumulationStreamCold = AccumulationStreamCold.Subtract(StOutCold, timestep)
                 If AccumulationStreamCold.GetMassFlow <= 0.0 Then AccumulationStreamCold.SetMassFlow(0.0)
 
             End If
