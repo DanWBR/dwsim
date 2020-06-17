@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 6.0 Update 3
+Version 6.0 Update 4
 Copyright (c) 2017-2020 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,12 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/windows
+
+Version 6.0 Update 4
+
+- [FIX] Fixed default units for Cp, Cv and entropy (Excel Add-In)
+- [FIX] Fixed Material Stream editor not showing the Dynamic Spec tab (CPUI)
+- [FIX] Fixed/Updated some dynamic models
 
 Version 6.0 Update 3
 

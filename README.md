@@ -9,7 +9,7 @@ Copyright 2017-2020 Daniel Medeiros
 
 Copyright 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo León
 
-DWSIM is a software for modeling, simulation and optimization of steady-state chemical processes.
+DWSIM is a software for modeling, simulation and optimization of steady-state and dynamic chemical processes.
 
 ### License
 
@@ -18,7 +18,7 @@ DWSIM is licensed under the GNU General Public License (GPL) Version 3.
 ### Supported Operating Systems
 
 - Windows (32/64-bit x86) with .NET Framework 4.6.1 or newer
-- Linux (32-bit armhf / 64-bit x86) with Mono 6.10 or newer
+- Linux (32-bit armhf / 64-bit x86) with Mono 6.8 or newer
 - macOS (formerly OS X) 10.7 or newer
 
 ### Project Details
@@ -78,3 +78,4 @@ DWSIM.UI.Desktop.WPF|Cross-Platform UI Windows Presentation Foundation (WPF) Pla
 
 - DWSIM can be compiled using Visual Studio 2017 or newer on Windows.
 - To compile everything and run, select 'DWSIM' or 'DWSIM.UI.Desktop' as the startup project, change the Build target to 'Debug/x64', 'ReleaseLinux/x64', 'ReleaseWinMac/x64' or 'ReleaseWinMac/x86'.
+- On Windows, before running the compiled project, copy the contents of 'PlatformFiles/Common' and 'PlatformFiles/Windows' or 'PlatformFiles/Windows32' to the build output directory ('DWSIM/bin/x64/Debug', 'DWSIM/bin/x64/Release', 'DWSIM.UI.Desktop/bin/x64/Debug' or 'DWSIM.UI.Desktop/bin/x64/Release')

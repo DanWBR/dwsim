@@ -1,12 +1,11 @@
+Version 6.0 Update 4
+
+- [FIX] Fixed default units for Cp, Cv and entropy (Excel Add-In)
+- [FIX] Fixed Material Stream editor not showing the Dynamic Spec tab (CPUI)
+- [FIX] Fixed/Updated some dynamic models
+
 Version 6.0 Update 3
 
 - [NEW] Dynamic Models for CSTR and PFR
 - [NEW] Added Search Box to Cross-Platform UI PFD
-- [FIX] Bug fixes and enhancements
-
-Version 6.0 Update 2
-
-- [NEW] Dynamic Model for Heat Exchanger
-- [NEW] PID Controller Wind-Up Guard
-- [NEW] Dynamic Integrator flowsheet charts for Monitored Variables
 - [FIX] Bug fixes and enhancements
