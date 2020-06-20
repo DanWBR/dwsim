@@ -64,11 +64,11 @@ Public Class GraphicsSurface
     Public Sub New()
         Select Case GlobalSettings.Settings.RunningPlatform
             Case GlobalSettings.Settings.Platform.Windows
-                Me.DefaultTypeFace = SKTypeface.FromFamilyName("Segoe UI", SKTypefaceStyle.Bold)
+                Me.DefaultTypeFace = SKTypeface.FromFamilyName("Segoe UI", SKFontStyleWeight.Bold, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright)
             Case GlobalSettings.Settings.Platform.Linux
-                Me.DefaultTypeFace = SKTypeface.FromFamilyName("Ubuntu", SKTypefaceStyle.Bold)
+                Me.DefaultTypeFace = SKTypeface.FromFamilyName("Ubuntu", SKFontStyleWeight.Bold, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright)
             Case GlobalSettings.Settings.Platform.Mac
-                Me.DefaultTypeFace = SKTypeface.FromFamilyName("Helvetica Neue", SKTypefaceStyle.Bold)
+                Me.DefaultTypeFace = SKTypeface.FromFamilyName("Helvetica Neue", SKFontStyleWeight.Bold, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright)
         End Select
     End Sub
 
