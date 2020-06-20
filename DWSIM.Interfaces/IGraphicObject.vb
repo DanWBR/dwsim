@@ -137,6 +137,8 @@ End Interface
 
     Property AttachedFromInput() As Boolean
 
+    Property Straight As Boolean
+
 End Interface
 
 <InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IGraphicObjectExtension

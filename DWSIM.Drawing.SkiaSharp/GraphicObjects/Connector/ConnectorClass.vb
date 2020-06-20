@@ -3,6 +3,7 @@ Imports DWSIM.Interfaces
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.DrawingTools.Point
 Imports s = DWSIM.GlobalSettings.Settings
+Imports System.Windows.Forms
 
 Namespace GraphicObjects
 
@@ -53,6 +54,8 @@ Namespace GraphicObjects
         Implements Interfaces.IConnectorGraphicObject
 
         <Xml.Serialization.XmlIgnore> Public Property PointList As New List(Of Point)
+
+        Public Property Straight As Boolean = False Implements IConnectorGraphicObject.Straight
 
 
 #Region "Constructors"
@@ -741,8 +744,6 @@ Namespace GraphicObjects
 
         Public Overrides Sub Draw(ByVal g As Object)
 
-            SetupPositioning()
-
             Dim canvas As SKCanvas = DirectCast(g, SKCanvas)
 
             Dim myPen As New SKPaint
@@ -773,17 +774,28 @@ Namespace GraphicObjects
                 .Color = SKColors.White.WithAlpha(200)
             End With
 
-            Dim path As New SKPath()
+            SetupPositioning()
 
             Dim points() As SKPoint = PointList.Select(Function(x) New SKPoint(x.X, x.Y)).ToArray
 
-            path.MoveTo(points(0).X, points(0).Y)
-            For i As Integer = 1 To points.Length - 1
-                path.LineTo(points(i).X, points(i).Y)
-            Next
+            If Not Straight Then
 
-            If Not GlobalSettings.Settings.DarkMode Then canvas.DrawPath(path, myPen2)
-            canvas.DrawPath(path, myPen)
+                Dim path As New SKPath()
+
+
+                path.MoveTo(points(0).X, points(0).Y)
+                For i As Integer = 1 To points.Length - 1
+                    path.LineTo(points(i).X, points(i).Y)
+                Next
+
+                If Not GlobalSettings.Settings.DarkMode Then canvas.DrawPath(path, myPen2)
+                canvas.DrawPath(path, myPen)
+
+            Else
+
+                canvas.DrawLine(points.First, points.Last, myPen)
+
+            End If
 
         End Sub
 

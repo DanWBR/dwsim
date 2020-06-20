@@ -59,8 +59,6 @@ Public Class GraphicsSurface
 
     Public ControlPanelMode As Boolean = False
 
-    Public NetworkMode As Boolean = False
-
     Public Property DefaultTypeFace As SKTypeface
 
     Public Sub New()
