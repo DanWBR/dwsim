@@ -92,7 +92,7 @@ Public Class EditingForm_EnergyStream
             cbEnergyFlow.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.heatflow).ToArray)
             cbEnergyFlow.SelectedItem = units.heatflow
 
-            tbEnergyFlow.Text = su.Converter.ConvertFromSI(units.volume, SimObject.EnergyFlow.GetValueOrDefault).ToString(nf)
+            tbEnergyFlow.Text = su.Converter.ConvertFromSI(units.heatflow, SimObject.EnergyFlow.GetValueOrDefault).ToString(nf)
 
         End With
 
