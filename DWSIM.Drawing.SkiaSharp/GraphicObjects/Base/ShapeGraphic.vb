@@ -63,7 +63,7 @@ Namespace GraphicObjects
 
             MyBase.Draw(g)
 
-            If Not Owner?.SupportsDynamicMode And Owner?.GetFlowsheet.DynamicMode Then
+            If Not Owner?.SupportsDynamicMode And Owner?.GetFlowsheet?.DynamicMode Then
 
                 DrawNotDynamicsCompatible(g)
 

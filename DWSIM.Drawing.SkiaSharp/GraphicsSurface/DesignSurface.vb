@@ -59,6 +59,8 @@ Public Class GraphicsSurface
 
     Public ControlPanelMode As Boolean = False
 
+    Public NetworkMode As Boolean = False
+
     Public Property DefaultTypeFace As SKTypeface
 
     Public Sub New()
@@ -685,24 +687,28 @@ Public Class GraphicsSurface
                                 gobj.ObjectType = ObjectType.GO_Chart And Not _
                                 gobj.ObjectType = ObjectType.Nenhum Then
 
-                            Dim flowsheet = gobj.Owner.GetFlowsheet()
+                            Dim flowsheet = gobj.Owner?.GetFlowsheet()
 
-                            If gobj.Calculated Or gobj.ObjectType = ObjectType.OT_Adjust Or
+                            If flowsheet IsNot Nothing Then
+
+                                If gobj.Calculated Or gobj.ObjectType = ObjectType.OT_Adjust Or
                                 gobj.ObjectType = ObjectType.OT_Spec Or gobj.ObjectType = ObjectType.OT_Recycle Or
                                 gobj.ObjectType = ObjectType.OT_EnergyRecycle Then
 
-                                If flowsheet.SimulationObjects.ContainsKey(gobj.Name) Then
+                                    If flowsheet.SimulationObjects.ContainsKey(gobj.Name) Then
 
-                                    Dim obj = flowsheet.SimulationObjects(gobj.Name)
+                                        Dim obj = flowsheet.SimulationObjects(gobj.Name)
 
-                                    Dim tabela As New Tables.FloatingTableGraphic(obj, (x + 25) / Zoom, (y + 25) / Zoom)
-                                    tabela.Owner = obj
-                                    tabela.Tag = obj.Name
-                                    tabela.Name = "QTAB-" & Guid.NewGuid.ToString
-                                    tabela.HeaderText = gobj.Tag
-                                    tabela.AdditionalInfo = Zoom
-                                    _FloatingTable = tabela
-                                    DrawingObjects.Add(tabela)
+                                        Dim tabela As New Tables.FloatingTableGraphic(obj, (x + 25) / Zoom, (y + 25) / Zoom)
+                                        tabela.Owner = obj
+                                        tabela.Tag = obj.Name
+                                        tabela.Name = "QTAB-" & Guid.NewGuid.ToString
+                                        tabela.HeaderText = gobj.Tag
+                                        tabela.AdditionalInfo = Zoom
+                                        _FloatingTable = tabela
+                                        DrawingObjects.Add(tabela)
+
+                                    End If
 
                                 End If
 
