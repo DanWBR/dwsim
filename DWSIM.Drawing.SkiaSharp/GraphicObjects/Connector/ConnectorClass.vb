@@ -782,7 +782,6 @@ Namespace GraphicObjects
 
                 Dim path As New SKPath()
 
-
                 path.MoveTo(points(0).X, points(0).Y)
                 For i As Integer = 1 To points.Length - 1
                     path.LineTo(points(i).X, points(i).Y)
