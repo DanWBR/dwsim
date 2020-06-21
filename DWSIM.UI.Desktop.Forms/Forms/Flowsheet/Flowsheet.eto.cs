@@ -889,14 +889,14 @@ namespace DWSIM.UI.Forms
                 if (e.Data.GetString("ObjectName") != null)
                 {
                     var objname = e.Data.GetString("ObjectName");
-                    var euo = FlowsheetObject.ExternalUnitOperations.Values.Where((x) => x.Name == objname).FirstOrDefault();
+                    var euo = FlowsheetObject.ExternalUnitOperations.Values.Where((x) => x.Name == objname).FirstOrDefault();                    
                     if (euo != null)
                     {
                         var item = ((Interfaces.ISimulationObject)euo);
                         var isobj = (Interfaces.ISimulationObject)item.CloneXML();
                         FlowsheetObject.AddObjectToSurface(Interfaces.Enums.GraphicObjects.ObjectType.External,
-                            (int)(e.Location.X * GlobalSettings.Settings.DpiScale / FlowsheetControl.FlowsheetSurface.Zoom),
-                            (int)(e.Location.Y * GlobalSettings.Settings.DpiScale / FlowsheetControl.FlowsheetSurface.Zoom),
+                            (int)(e.Location.X * s.DpiScale / FlowsheetControl.FlowsheetSurface.Zoom),
+                            (int)(e.Location.Y * s.DpiScale / FlowsheetControl.FlowsheetSurface.Zoom),
                             "", "",
                             (Interfaces.IExternalUnitOperation)isobj);
                     }

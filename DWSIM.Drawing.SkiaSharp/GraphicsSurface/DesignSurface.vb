@@ -59,6 +59,8 @@ Public Class GraphicsSurface
 
     Public ControlPanelMode As Boolean = False
 
+    Public NetworkMode As Boolean = False
+
     Public Property DefaultTypeFace As SKTypeface
 
     Public Sub New()
@@ -202,7 +204,9 @@ Public Class GraphicsSurface
 
         Dim objects = DrawingObjects.ToArray
 
-        If objects.Count = 0 AndAlso Not GlobalSettings.Settings.OldUI Then DrawInstructions(DrawingCanvas)
+        If objects.Count = 0 AndAlso Not GlobalSettings.Settings.OldUI Then
+            If Not NetworkMode Then DrawInstructions(DrawingCanvas)
+        End If
 
         If DrawAddedAnimation Then
             Dim tstep = (Date.Now - AnimationStart).TotalMilliseconds
