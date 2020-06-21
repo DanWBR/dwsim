@@ -104,7 +104,7 @@ namespace DWSIM.UI.Shared
 
         public static Form GetDefaultTabbedForm(string title, int width, int height, Control[] contents)
         {
-            List<TabPage> tabs = new List<TabPage>();
+            List<DocumentPage> tabs = new List<DocumentPage>();
 
             foreach (var content in contents)
             {
@@ -115,7 +115,7 @@ namespace DWSIM.UI.Shared
                     dyncontent.EndVertical();
                     dyncontent.Width = width - dyncontent.Padding.Value.Left * 2 - dyncontent.Padding.Value.Right * 2;
                 }
-                tabs.Add(new TabPage(new Scrollable { Content = content, Border = BorderType.None }) { Text = (string)content.Tag });
+                tabs.Add(new DocumentPage(new Scrollable { Content = content, Border = BorderType.None }) { Text = (string)content.Tag, Closable = false });
             }
 
             var form = new Form()
@@ -130,7 +130,7 @@ namespace DWSIM.UI.Shared
                 //Resizable = true
             };
 
-            var tabctrl = new TabControl();
+            var tabctrl = new DocumentControl { DisplayArrows = false, AllowReordering = true };
             foreach (var tab in tabs)
             {
                 tabctrl.Pages.Add(tab);
