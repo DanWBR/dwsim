@@ -592,7 +592,7 @@ Public Class Utility
             Console.WriteLine("Error loading types from assembly '" + assmbly.FullName + "': " + ex.ToString)
         End Try
 
-        Dim ppList As List(Of Type) = availableTypes.FindAll(Function(t) t.GetInterfaces().Contains(GetType(Interfaces.IExternalUnitOperation)) And Not t.IsAbstract)
+        Dim ppList As List(Of Type) = availableTypes.FindAll(Function(t) t.GetInterfaces().Contains(GetType(Interfaces.IExternalUnitOperation)) And Not t.IsAbstract And Not Attribute.IsDefined(t, Type.GetType("System.ObsoleteAttribute")))
 
         Dim list As New List(Of IExternalUnitOperation)
 
