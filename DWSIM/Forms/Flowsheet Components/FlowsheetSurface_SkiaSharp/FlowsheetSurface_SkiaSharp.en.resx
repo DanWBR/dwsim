@@ -395,7 +395,7 @@
     <value>Merge Streams</value>
   </data>
   <data name="CMS_Sel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 420</value>
+    <value>242, 442</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="PreviewDialog.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
@@ -567,17 +567,32 @@
   <data name="tsbPrint.Text" xml:space="preserve">
     <value>View and Print Flowsheet</value>
   </data>
+  <data name="tsbMultiSelectMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
   <data name="tsbMultiSelectMode.Text" xml:space="preserve">
     <value>Enable MultiSelect Mode</value>
+  </data>
+  <data name="tsbAlignLefts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
   </data>
   <data name="tsbAlignLefts.Text" xml:space="preserve">
     <value>Align lefts</value>
   </data>
+  <data name="tsbAlignCenters.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
   <data name="tsbAlignCenters.Text" xml:space="preserve">
     <value>Align centers</value>
   </data>
+  <data name="tsbAlignRights.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
   <data name="tsbAlignRights.Text" xml:space="preserve">
     <value>Align rights</value>
+  </data>
+  <data name="tsbAlignTops.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
   </data>
   <data name="tsbAlignTops.Text" xml:space="preserve">
     <value>Align tops</value>
