@@ -814,6 +814,25 @@ Namespace GraphicObjects
 
         Public Property AttachedFromInput As Boolean = False Implements Interfaces.IConnectorGraphicObject.AttachedFromInput
 
+        Public Property FromProxyStreamData As String = "" Implements IConnectorGraphicObject.FromProxyStreamData
+
+        Public Property ToProxyStreamData As String = "" Implements IConnectorGraphicObject.ToProxyStreamData
+
+        Public Overrides Function LoadData(data As List(Of XElement)) As Boolean
+            Dim fms = (From xel As XElement In data Select xel Where xel.Name = "FromProxyStreamData").FirstOrDefault()
+            If Not fms Is Nothing Then FromProxyStreamData = fms.Value
+            Dim tms = (From xel As XElement In data Select xel Where xel.Name = "ToProxyStreamData").FirstOrDefault()
+            If Not tms Is Nothing Then ToProxyStreamData = tms.Value
+            Return MyBase.LoadData(data)
+        End Function
+
+        Public Overrides Function SaveData() As List(Of XElement)
+            Dim elements = MyBase.SaveData()
+            If FromProxyStreamData <> "" Then elements.Add(New XElement("FromProxyStreamData", FromProxyStreamData))
+            If ToProxyStreamData <> "" Then elements.Add(New XElement("ToProxyStreamData", ToProxyStreamData))
+            Return elements
+        End Function
+
     End Class
 
 End Namespace
