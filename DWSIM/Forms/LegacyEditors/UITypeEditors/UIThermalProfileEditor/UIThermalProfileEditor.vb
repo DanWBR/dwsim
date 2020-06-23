@@ -49,7 +49,7 @@ Namespace DWSIM.Editors.PipeEditor
 
                 Dim selectionControl As New Global.DWSIM.UnitOperations.PipeThermalProfileEditor
 
-                selectionControl.PipeOp = value
+                selectionControl.Profile = value
                 selectionControl.Dock = DockStyle.Fill
 
                 Dim f As New Form With {.Width = 300, .Height = 500}
