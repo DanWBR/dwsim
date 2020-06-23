@@ -1027,6 +1027,33 @@ namespace DWSIM.UI.Shared
 
         }
 
+        public static TextBox CreateAndAddLabelAndTextBoxAndButtonRow2(this DynamicLayout container, String label, String textboxvalue, String buttonlabel, String imageResID, Action<TextBox, EventArgs> txteditcommand, Action<Button, EventArgs> command)
+        {
+
+            var txt = new Label { Text = label, VerticalAlignment = VerticalAlignment.Center };
+            txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            var tbox = new TextBox { Width = 120, Text = textboxvalue };
+            tbox.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            var btn = new Button { Width = 80, Text = buttonlabel };
+
+            if (imageResID != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID), 22, 22, ImageInterpolation.Default);
+
+            if (txteditcommand != null) tbox.TextChanged += (sender, e) => txteditcommand.Invoke((TextBox)sender, e);
+            if (command != null) btn.Click += (sender, e) => command.Invoke((Button)sender, e);
+
+            var tr = new TableRow(txt, GetPlaceHolderLabel(), null, tbox, GetPlaceHolderLabel(), btn);
+
+            tr.Cells[2].ScaleWidth = true;
+
+            container.AddRow(tr);
+            container.CreateAndAddEmptySpace();
+
+            return tbox;
+
+
+        }
+
+
         public static TableRow CreateAndAddTextBoxAndTwoButtonsRow(this DynamicLayout container, String label, String buttonlabel, String imageResID, String buttonlabel2, String imageResID2, Action<TextBox, EventArgs> command0, Action<Button, EventArgs> command, Action<Button, EventArgs> command2)
         {
 
