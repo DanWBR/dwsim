@@ -808,7 +808,7 @@ namespace DWSIM.UI.Shared
         {
 
             var txt = new Label { Text = text1, VerticalAlignment = VerticalAlignment.Center };
-            txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            txt.Font = new Font(SystemFont.Bold, GetEditorFontSize());
             var txt2 = new Label { Text = text2, Width = (int)(sf * 140), VerticalAlignment = VerticalAlignment.Center };
             txt2.Font = new Font(SystemFont.Default, GetEditorFontSize());
 
@@ -843,8 +843,8 @@ namespace DWSIM.UI.Shared
         public static Label CreateAndAddTwoLabelsRow2(this DynamicLayout container, String text1, String text2)
         {
 
-            var txt = new Label { Text = text1, VerticalAlignment = VerticalAlignment.Center, Font = SystemFonts.Bold(null, FontDecoration.None) };
-            txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            var txt = new Label { Text = text1, VerticalAlignment = VerticalAlignment.Center  };
+            txt.Font = new Font(SystemFont.Bold, GetEditorFontSize());
             var txt2 = new Label { Text = text2, Width = (int)(sf * 350), VerticalAlignment = VerticalAlignment.Center };
             txt2.Font = new Font(SystemFont.Default, GetEditorFontSize());
 
