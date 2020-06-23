@@ -1031,7 +1031,7 @@ namespace DWSIM.UI.Shared
         {
 
             var txt = new Label { Text = label, VerticalAlignment = VerticalAlignment.Center };
-            txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            txt.Font = new Font(SystemFont.Bold, GetEditorFontSize());
             var tbox = new TextBox { Width = 120, Text = textboxvalue };
             tbox.Font = new Font(SystemFont.Default, GetEditorFontSize());
             var btn = new Button { Width = 80, Text = buttonlabel };
