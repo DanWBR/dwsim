@@ -142,7 +142,7 @@ Public Class EditingForm_Pipe
             TabPage5.Controls.Add(heditor)
 
             TabPage6.Controls.Clear()
-            Dim teditor As New PipeThermalProfileEditor With {.PipeOp = Me.SimObject}
+            Dim teditor As New PipeThermalProfileEditor With {.Profile = Me.SimObject.ThermalProfile, .form = SimObject.FlowSheet}
             teditor.Dock = DockStyle.Fill
             TabPage6.Controls.Add(teditor)
 

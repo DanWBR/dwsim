@@ -8,16 +8,16 @@ Public Class PipeThermalProfileEditor
 
     Dim su As DWSIM.SharedClasses.SystemsOfUnits.Units
 
-    Dim form As IFlowsheet
+    Public form As IFlowsheet
 
-    Public PipeOp As UnitOperations.Pipe
+    Public Profile As ThermalEditorDefinitions
 
     Dim loaded As Boolean = False
 
     Private Sub RadioButton9_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton9.CheckedChanged
         If RadioButton9.Checked = True Then
 
-            PipeOp.ThermalProfile.TipoPerfil = UnitOperations.Auxiliary.Pipe.ThermalEditorDefinitions.ThermalProfileType.Definir_CGTC
+            Profile.TipoPerfil = UnitOperations.Auxiliary.Pipe.ThermalEditorDefinitions.ThermalProfileType.Definir_CGTC
             TextBoxCGTC.Enabled = True
             TextBoxTA.Enabled = True
             TextBoxTAG.Enabled = True
@@ -34,7 +34,7 @@ Public Class PipeThermalProfileEditor
     Private Sub RadioButton8_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton8.CheckedChanged
         If RadioButton8.Checked = True Then
 
-            PipeOp.ThermalProfile.TipoPerfil = UnitOperations.Auxiliary.Pipe.ThermalEditorDefinitions.ThermalProfileType.Definir_Q
+            Profile.TipoPerfil = UnitOperations.Auxiliary.Pipe.ThermalEditorDefinitions.ThermalProfileType.Definir_Q
             TextBoxCT.Enabled = True
 
         Else
@@ -47,7 +47,7 @@ Public Class PipeThermalProfileEditor
     Private Sub RadioButton7_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton7.CheckedChanged
 
         If RadioButton7.Checked = True Then
-            PipeOp.ThermalProfile.TipoPerfil = UnitOperations.Auxiliary.Pipe.ThermalEditorDefinitions.ThermalProfileType.Estimar_CGTC
+            Profile.TipoPerfil = UnitOperations.Auxiliary.Pipe.ThermalEditorDefinitions.ThermalProfileType.Estimar_CGTC
             TextBoxTA2.Enabled = True
             TextBoxTAG2.Enabled = True
             CheckBoxIPT.Enabled = True
@@ -86,7 +86,7 @@ Public Class PipeThermalProfileEditor
             Dim fi As New Globalization.CultureInfo("en-US")
 
             Try
-                PipeOp.ThermalProfile.Material = Me.ComboBoxMAT.SelectedIndex
+                Profile.Material = Me.ComboBoxMAT.SelectedIndex
             Catch ex As Exception
 
             End Try
@@ -139,7 +139,6 @@ Public Class PipeThermalProfileEditor
 
     Private Sub ThermalProfileEditorForm_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        form = PipeOp.FlowSheet
         su = form.FlowsheetOptions.SelectedUnitSystem
 
         Me.Label52.Text = su.heat_transf_coeff
@@ -151,15 +150,15 @@ Public Class PipeThermalProfileEditor
         Me.lblTAGUnits.Text = su.deltaT & "/" & su.distance
         Me.lblTAGUnits2.Text = su.deltaT & "/" & su.distance
 
-        If PipeOp.ThermalProfile Is Nothing Then
-            PipeOp.ThermalProfile = New ThermalEditorDefinitions
+        If Profile Is Nothing Then
+            Profile = New ThermalEditorDefinitions
             Me.ComboBoxMAMB.SelectedIndex = 0
             Me.ComboBoxMAT.SelectedIndex = 0
         Else
-            With PipeOp.ThermalProfile
-                If PipeOp.ThermalProfile.TipoPerfil = UnitOperations.Auxiliary.Pipe.ThermalEditorDefinitions.ThermalProfileType.Definir_CGTC Then Me.RadioButton9.Checked = True
-                If PipeOp.ThermalProfile.TipoPerfil = UnitOperations.Auxiliary.Pipe.ThermalEditorDefinitions.ThermalProfileType.Definir_Q Then Me.RadioButton8.Checked = True
-                If PipeOp.ThermalProfile.TipoPerfil = UnitOperations.Auxiliary.Pipe.ThermalEditorDefinitions.ThermalProfileType.Estimar_CGTC Then Me.RadioButton7.Checked = True
+            With Profile
+                If Profile.TipoPerfil = UnitOperations.Auxiliary.Pipe.ThermalEditorDefinitions.ThermalProfileType.Definir_CGTC Then Me.RadioButton9.Checked = True
+                If Profile.TipoPerfil = UnitOperations.Auxiliary.Pipe.ThermalEditorDefinitions.ThermalProfileType.Definir_Q Then Me.RadioButton8.Checked = True
+                If Profile.TipoPerfil = UnitOperations.Auxiliary.Pipe.ThermalEditorDefinitions.ThermalProfileType.Estimar_CGTC Then Me.RadioButton7.Checked = True
                 Me.ComboBoxMAMB.SelectedIndex = .Meio
                 Me.ComboBoxMAT.SelectedIndex = .Material
                 Me.TextBoxCGTC.Text = cv.ConvertFromSI(su.heat_transf_coeff, .CGTC_Definido).ToString()
@@ -183,7 +182,7 @@ Public Class PipeThermalProfileEditor
     Private Sub TextBoxCGTC_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBoxCGTC.TextChanged
         If loaded Then
             Try
-                PipeOp.ThermalProfile.CGTC_Definido = cv.ConvertToSI(su.heat_transf_coeff, Double.Parse(Me.TextBoxCGTC.Text))
+                Profile.CGTC_Definido = cv.ConvertToSI(su.heat_transf_coeff, Double.Parse(Me.TextBoxCGTC.Text))
                 Me.TextBoxCGTC.ForeColor = Color.Blue
             Catch ex As Exception
                 Me.TextBoxCGTC.ForeColor = Color.Red
@@ -194,7 +193,7 @@ Public Class PipeThermalProfileEditor
     Private Sub TextBoxTA_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBoxTA.TextChanged
         If loaded Then
             Try
-                PipeOp.ThermalProfile.Temp_amb_definir = cv.ConvertToSI(su.temperature, Double.Parse(Me.TextBoxTA.Text))
+                Profile.Temp_amb_definir = cv.ConvertToSI(su.temperature, Double.Parse(Me.TextBoxTA.Text))
                 Me.TextBoxTA.ForeColor = Color.Blue
             Catch ex As Exception
                 Me.TextBoxTA.ForeColor = Color.Red
@@ -205,7 +204,7 @@ Public Class PipeThermalProfileEditor
     Private Sub TextBoxCT_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBoxCT.TextChanged
         If loaded Then
             Try
-                PipeOp.ThermalProfile.Calor_trocado = cv.ConvertToSI(su.heatflow, Double.Parse(Me.TextBoxCT.Text))
+                Profile.Calor_trocado = cv.ConvertToSI(su.heatflow, Double.Parse(Me.TextBoxCT.Text))
                 Me.TextBoxCT.ForeColor = Color.Blue
             Catch ex As Exception
                 Me.TextBoxCT.ForeColor = Color.Red
@@ -216,7 +215,7 @@ Public Class PipeThermalProfileEditor
     Private Sub TextBoxTA2_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBoxTA2.TextChanged
         If loaded Then
             Try
-                PipeOp.ThermalProfile.Temp_amb_estimar = cv.ConvertToSI(su.temperature, Double.Parse(Me.TextBoxTA2.Text))
+                Profile.Temp_amb_estimar = cv.ConvertToSI(su.temperature, Double.Parse(Me.TextBoxTA2.Text))
                 Me.TextBoxTA2.ForeColor = Color.Blue
             Catch ex As Exception
                 Me.TextBoxTA2.ForeColor = Color.Red
@@ -227,7 +226,7 @@ Public Class PipeThermalProfileEditor
     Private Sub TextBoxCTERM_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBoxCTERM.TextChanged
         If loaded Then
             Try
-                PipeOp.ThermalProfile.Condtermica = cv.ConvertToSI(su.thermalConductivity, Double.Parse(Me.TextBoxCTERM.Text))
+                Profile.Condtermica = cv.ConvertToSI(su.thermalConductivity, Double.Parse(Me.TextBoxCTERM.Text))
                 Me.TextBoxCTERM.ForeColor = Color.Blue
             Catch ex As Exception
                 Me.TextBoxCTERM.ForeColor = Color.Red
@@ -238,7 +237,7 @@ Public Class PipeThermalProfileEditor
     Private Sub TextBoxESP_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBoxESP.TextChanged
         If loaded Then
             Try
-                PipeOp.ThermalProfile.Espessura = cv.ConvertToSI(su.thickness, Double.Parse(Me.TextBoxESP.Text))
+                Profile.Espessura = cv.ConvertToSI(su.thickness, Double.Parse(Me.TextBoxESP.Text))
                 Me.TextBoxESP.ForeColor = Color.Blue
             Catch ex As Exception
                 Me.TextBoxESP.ForeColor = Color.Red
@@ -249,7 +248,7 @@ Public Class PipeThermalProfileEditor
     Private Sub TextBoxVEL_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBoxVEL.TextChanged
         If loaded Then
             Try
-                PipeOp.ThermalProfile.Velocidade = Double.Parse(Me.TextBoxVEL.Text)
+                Profile.Velocidade = Double.Parse(Me.TextBoxVEL.Text)
                 Me.TextBoxVEL.ForeColor = Color.Blue
             Catch ex As Exception
                 Me.TextBoxVEL.ForeColor = Color.Red
@@ -258,15 +257,15 @@ Public Class PipeThermalProfileEditor
     End Sub
 
     Private Sub CheckBoxIPT_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBoxIPT.CheckedChanged
-        PipeOp.ThermalProfile.Incluir_paredes = Me.CheckBoxIPT.Checked
+        Profile.Incluir_paredes = Me.CheckBoxIPT.Checked
     End Sub
 
     Private Sub CheckBoxICTI_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBoxICTI.CheckedChanged
-        PipeOp.ThermalProfile.Incluir_cti = Me.CheckBoxICTI.Checked
+        Profile.Incluir_cti = Me.CheckBoxICTI.Checked
     End Sub
 
     Private Sub CheckBoxII_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBoxII.CheckedChanged
-        PipeOp.ThermalProfile.Incluir_isolamento = Me.CheckBoxII.Checked
+        Profile.Incluir_isolamento = Me.CheckBoxII.Checked
         If Me.CheckBoxII.Checked = False Then
             Me.ComboBoxMAT.Enabled = False
             Me.TextBoxCTERM.Enabled = False
@@ -280,7 +279,7 @@ Public Class PipeThermalProfileEditor
     End Sub
 
     Private Sub CheckBoxICTE_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBoxICTE.CheckedChanged
-        PipeOp.ThermalProfile.Incluir_cte = Me.CheckBoxICTE.Checked
+        Profile.Incluir_cte = Me.CheckBoxICTE.Checked
         If Me.CheckBoxICTE.Checked = False Then
             Me.ComboBoxMAMB.Enabled = False
             Me.TextBoxVEL.Enabled = False
@@ -301,7 +300,7 @@ Public Class PipeThermalProfileEditor
         If loaded Then
 
             Try
-                PipeOp.ThermalProfile.Meio = Me.ComboBoxMAMB.SelectedIndex
+                Profile.Meio = Me.ComboBoxMAMB.SelectedIndex
             Catch ex As Exception
 
             End Try
@@ -313,7 +312,7 @@ Public Class PipeThermalProfileEditor
     Private Sub TextBoxTAG_TextChanged(sender As Object, e As EventArgs) Handles TextBoxTAG.TextChanged
         If loaded Then
             Try
-                PipeOp.ThermalProfile.AmbientTemperatureGradient = cv.ConvertToSI(su.deltaT, Double.Parse(Me.TextBoxTAG.Text)) / cv.ConvertToSI(su.distance, 1)
+                Profile.AmbientTemperatureGradient = cv.ConvertToSI(su.deltaT, Double.Parse(Me.TextBoxTAG.Text)) / cv.ConvertToSI(su.distance, 1)
                 Me.TextBoxTAG.ForeColor = Color.Blue
             Catch ex As Exception
                 Me.TextBoxTAG.ForeColor = Color.Red
@@ -324,7 +323,7 @@ Public Class PipeThermalProfileEditor
     Private Sub TextBoxTAG2_TextChanged(sender As Object, e As EventArgs) Handles TextBoxTAG2.TextChanged
         If loaded Then
             Try
-                PipeOp.ThermalProfile.AmbientTemperatureGradient_EstimateHTC = cv.ConvertToSI(su.deltaT, Double.Parse(Me.TextBoxTAG2.Text)) / cv.ConvertToSI(su.distance, 1)
+                Profile.AmbientTemperatureGradient_EstimateHTC = cv.ConvertToSI(su.deltaT, Double.Parse(Me.TextBoxTAG2.Text)) / cv.ConvertToSI(su.distance, 1)
                 Me.TextBoxTAG2.ForeColor = Color.Blue
             Catch ex As Exception
                 Me.TextBoxTAG2.ForeColor = Color.Red
