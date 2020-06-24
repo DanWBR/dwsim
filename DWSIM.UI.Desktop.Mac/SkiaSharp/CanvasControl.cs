@@ -45,8 +45,9 @@ namespace DWSIM.UI.Desktop.Mac
                         catch { }
                     }
                 }
-                nativecontrol._lastTouchX = e.Location.X;
-                nativecontrol._lastTouchY = e.Location.Y;
+                var scale = (float)GlobalSettings.Settings.DpiScale;
+                nativecontrol._lastTouchX = e.Location.X * scale;
+                nativecontrol._lastTouchY = e.Location.Y * scale;
                 nativecontrol.fsurface.InputPress((int)(nativecontrol._lastTouchX), (int)(nativecontrol._lastTouchY));
                 nativecontrol.NeedsDisplay = true;
                 nativecontrol.BecomeFirstResponder();
@@ -123,7 +124,8 @@ namespace DWSIM.UI.Desktop.Mac
         public FlowsheetSurface_Mac()
         {
             drawable = new SKDrawable();
-            GlobalSettings.Settings.DpiScale = 1.0f; // (float)AppKit.NSScreen.MainScreen.BackingScaleFactor;
+            //GlobalSettings.Settings.DpiScale = 1.0f;
+            GlobalSettings.Settings.DpiScale = (float)AppKit.NSScreen.MainScreen.BackingScaleFactor;
             BecomeFirstResponder();
             RegisterForDraggedTypes(new string[] {"ObjectName" });
         }
@@ -187,7 +189,7 @@ namespace DWSIM.UI.Desktop.Mac
             // create the skia context
             SKImageInfo info;
 
-            var surface = drawable.CreateSurface(Bounds, 1.0f, out info);
+            var surface = drawable.CreateSurface(Bounds, (float)GlobalSettings.Settings.DpiScale, out info);
 
             fsurface.UpdateSurface(surface);
 
@@ -201,8 +203,11 @@ namespace DWSIM.UI.Desktop.Mac
             try
             {
                 base.MouseMoved(theEvent);
+                var scale = (float)GlobalSettings.Settings.DpiScale;
                 _lastTouchX = this.ConvertPointFromView(theEvent.LocationInWindow, null).X;
                 _lastTouchY = Bounds.Height - this.ConvertPointFromView(theEvent.LocationInWindow, null).Y;
+                _lastTouchX *= scale;
+                _lastTouchY *= scale;
                 fsurface.InputMove((int)_lastTouchX, (int)_lastTouchY);
                 this.NeedsDisplay = true;
             }
@@ -212,8 +217,11 @@ namespace DWSIM.UI.Desktop.Mac
         public override void MouseDragged(NSEvent theEvent)
         {
             base.MouseDragged(theEvent);
+            var scale = (float)GlobalSettings.Settings.DpiScale;
             _lastTouchX = this.ConvertPointFromView(theEvent.LocationInWindow, null).X;
             _lastTouchY = Bounds.Height - this.ConvertPointFromView(theEvent.LocationInWindow, null).Y;
+            _lastTouchX *= scale;
+            _lastTouchY *= scale;
             fsurface.InputMove((int)_lastTouchX, (int)_lastTouchY);
             this.NeedsDisplay = true;
         }

@@ -776,11 +776,11 @@ Imports DWSIM.Interfaces.Enums
 
             Case ObjectType.MaterialStream
 
-                Dim myMStr As New MaterialStreamGraphic(mpx, mpy, 30, 30)
-                myMStr.Tag = "MS-" & SimulationObjects.Count.ToString("00#")
+                Dim myMStr As New MaterialStreamGraphic(mpx, mpy, 20, 20)
+                myMStr.Tag = "MSTR-" & SimulationObjects.Count.ToString("00#")
                 If tag <> "" Then myMStr.Tag = tag
                 gObj = myMStr
-                gObj.Name = "MS-" & Guid.NewGuid.ToString
+                gObj.Name = "MSTR-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myMStr)
                 'OBJETO DWSIM
@@ -791,11 +791,11 @@ Imports DWSIM.Interfaces.Enums
 
             Case ObjectType.EnergyStream
 
-                Dim myMStr As New EnergyStreamGraphic(mpx, mpy, 30, 30)
-                myMStr.Tag = "ES-" & SimulationObjects.Count.ToString("00#")
+                Dim myMStr As New EnergyStreamGraphic(mpx, mpy, 20, 20)
+                myMStr.Tag = "ESTR-" & SimulationObjects.Count.ToString("00#")
                 If tag <> "" Then myMStr.Tag = tag
                 gObj = myMStr
-                gObj.Name = "ES-" & Guid.NewGuid.ToString
+                gObj.Name = "ESTR-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myMStr)
                 'OBJETO DWSIM
