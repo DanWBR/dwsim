@@ -272,9 +272,15 @@ Namespace UnitOperations
 
             Dim msin, msout As MaterialStream, esin As Streams.EnergyStream
 
-            msin = GetInletMaterialStream(0)
-            msout = GetOutletMaterialStream(0)
-            esin = GetInletEnergyStream(1)
+            If args Is Nothing Then
+                msin = GetInletMaterialStream(0)
+                msout = GetOutletMaterialStream(0)
+                esin = GetInletEnergyStream(1)
+            Else
+                msin = args(0)
+                msout = args(1)
+                esin = args(2)
+            End If
 
             qli = msin.Phases(1).Properties.volumetric_flow.ToString
 

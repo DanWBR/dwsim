@@ -372,7 +372,13 @@ Namespace UnitOperations
             Dim Ti, Pi, Hi, Wi, ei, ein, T2, P2, H2, H2c, rho, volf, rhog20, P2ant, v2, Kvc As Double
             Dim icount As Integer
 
-            Dim ims As MaterialStream = Me.GetInletMaterialStream(0)
+            Dim ims As MaterialStream
+
+            If args IsNot Nothing Then
+                ims = args(0)
+            Else
+                ims = Me.GetInletMaterialStream(0)
+            End If
 
             Me.PropertyPackage.CurrentMaterialStream = ims
             Me.PropertyPackage.CurrentMaterialStream.Validate()
@@ -501,9 +507,17 @@ Namespace UnitOperations
 
             OutletTemperature = T2
 
+            Dim oms As IMaterialStream
+
+            If args IsNot Nothing Then
+                oms = args(1)
+            Else
+                oms = Me.GetOutletMaterialStream(0)
+            End If
+
             If Not DebugMode Then
 
-                With Me.GetOutletMaterialStream(0)
+                With oms
                     .Phases(0).Properties.temperature = T2
                     .Phases(0).Properties.pressure = P2
                     .Phases(0).Properties.enthalpy = H2
@@ -527,7 +541,6 @@ Namespace UnitOperations
             IObj?.Close()
 
         End Sub
-
 
         Public Overrides Sub DeCalculate()
 

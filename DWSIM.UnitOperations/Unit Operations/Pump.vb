@@ -524,9 +524,15 @@ Namespace UnitOperations
 
             Dim msin, msout As MaterialStream, esin As Streams.EnergyStream
 
-            msin = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
-            msout = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
-            esin = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
+            If args Is Nothing Then
+                msin = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
+                msout = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+                esin = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
+            Else
+                msin = args(0)
+                msout = args(1)
+                esin = args(2)
+            End If
 
             Me.PropertyPackage.CurrentMaterialStream = msin
 
@@ -912,8 +918,7 @@ Namespace UnitOperations
             If Not DebugMode Then
 
                 'Atribuir valores a corrente de materia conectada a jusante
-                Dim omstr As MaterialStream = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
-                With omstr
+                With msout
                     .Phases(0).Properties.temperature = T2
                     .Phases(0).Properties.pressure = P2
                     .Phases(0).Properties.enthalpy = H2

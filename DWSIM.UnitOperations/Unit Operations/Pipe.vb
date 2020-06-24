@@ -306,7 +306,17 @@ Namespace UnitOperations
                     fpp = New FlowPackages.BeggsBrill
             End Select
 
-            Dim oms As MaterialStream
+            Dim ims, oms As MaterialStream, es As Streams.EnergyStream
+
+            If args Is Nothing Then
+                ims = GetInletMaterialStream(0)
+                oms = GetOutletMaterialStream(0)
+                es = GetEnergyStream
+            Else
+                ims = args(0)
+                oms = args(1)
+                es = args(2)
+            End If
 
             Dim Tin, Pin, Tout, Pout, Tout_ant, Pout_ant, Pout_ant2, Toutj, Text, Win, Qin, Qvin, Qlin, TinP, PinP,
                 rho_l, rho_v, Cp_l, Cp_v, Cp_m, K_l, K_v, eta_l, eta_v, tens, Hin, Hout, HinP,
@@ -353,7 +363,7 @@ Namespace UnitOperations
 
                 IObj2?.Paragraphs.Add("This is the external loop to converge pressure when outlet temperature is specified or vice-versa.")
 
-                oms = Me.GetInletMaterialStream(0).Clone()
+                oms = ims.Clone()
                 oms.SetFlowsheet(Me.FlowSheet)
                 oms.PreferredFlashAlgorithmTag = Me.PreferredFlashAlgorithmTag
                 Me.PropertyPackage.CurrentMaterialStream = oms
@@ -962,7 +972,7 @@ Namespace UnitOperations
             End With
 
             'energy stream - update energy flow value (kW)
-            With Me.GetEnergyStream
+            With es
                 .EnergyFlow = -Me.DeltaQ.Value
                 .GraphicObject.Calculated = True
             End With
