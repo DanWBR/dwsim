@@ -1410,7 +1410,7 @@ Public Class FormCompoundCreator
                 n_scp = obj(3)
             Case 6, 7
                 'regressão dos dados - liquid heat capacity
-                obj = lmfit.GetCoeffs(CopyToVector(mycase.DataLTC, 0), CopyToVector(mycase.DataLTC, 1), c_cpl, Utilities.PetroleumCharacterization.LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
+                obj = lmfit.GetCoeffs(CopyToVector(mycase.DataCPLiquid, 0), CopyToVector(mycase.DataCPLiquid, 1), c_cpl, Utilities.PetroleumCharacterization.LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
                 c_cpl = obj(0)
                 r_cpl = obj(2)
                 n_cpl = obj(3)
@@ -2889,7 +2889,7 @@ Public Class FormCompoundCreator
                 y1 = SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, d(1))
                 py1.Add(y1)
                 T = d(0)
-                y2 = SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, pp.CalcCSTDepProp(cbEqCPLiquid.SelectedItem.Split(":")(0), tbCPLiquid_A.Text, tbCPLiquid_B.Text, tbCPLiquid_C.Text, tbCPLiquid_D.Text, tbCPLiquid_E.Text, T, 0) / 1000) / TextBoxMW.Text
+                y2 = SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, pp.CalcCSTDepProp(cbEqCPLiquid.SelectedItem.Split(":")(0), tbCPLiquid_A.Text, tbCPLiquid_B.Text, tbCPLiquid_C.Text, tbCPLiquid_D.Text, tbCPLiquid_E.Text, T, 0) / 1000) / TextBoxMW.Text.ToDoubleFromCurrent()
                 py2.Add(y2)
                 mytext.AppendLine(FormatNumber(x, 2) & vbTab & FormatNumber(y1, 2) & vbTab & vbTab & FormatNumber(y2, 2))
             Next
@@ -2944,7 +2944,7 @@ Public Class FormCompoundCreator
         Else
             mytext.AppendLine("T" & vbTab & "yEXP" & vbTab & vbTab & "yCALC")
             mytext.AppendLine("[" & su.temperature & "]" & vbTab & "[" & su.thermalConductivity & "]" & vbTab & "[" & su.thermalConductivity & "]")
-            For Each d As Double() In mycase.DataCPLiquid
+            For Each d As Double() In mycase.DataLTC
                 x = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, d(0))
                 px.Add(x)
                 y1 = SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, d(1))
@@ -2982,7 +2982,9 @@ Public Class FormCompoundCreator
         Dim MW As Double = Me.TextBoxMW.Text
         For Each row As DataGridViewRow In Me.GridExpDataCPLiquid.Rows
             Try
-                If row.Index < Me.GridExpDataCPLiquid.Rows.Count - 1 Then mycase.DataCPLiquid.Add(New Double() {SystemsOfUnits.Converter.ConvertToSI(su.temperature, row.Cells(0).Value), SystemsOfUnits.Converter.ConvertToSI(su.heatCapacityCp, row.Cells(1).Value) * MW})
+                If row.Index < Me.GridExpDataCPLiquid.Rows.Count - 1 Then
+                    mycase.DataCPLiquid.Add(New Double() {SystemsOfUnits.Converter.ConvertToSI(su.temperature, row.Cells(0).Value), SystemsOfUnits.Converter.ConvertToSI(su.heatCapacityCp, row.Cells(1).Value)})
+                End If
             Catch ex As Exception
             End Try
         Next
@@ -3009,11 +3011,11 @@ Public Class FormCompoundCreator
                 End If
             Next
 
-            .Liquid_Heat_Capacity_Const_A = result(0)(0) * 1000
-            .Liquid_Heat_Capacity_Const_B = result(0)(1) * 1000
-            .Liquid_Heat_Capacity_Const_C = result(0)(2) * 1000
-            .Liquid_Heat_Capacity_Const_D = result(0)(3) * 1000
-            .Liquid_Heat_Capacity_Const_E = result(0)(4) * 1000
+            .Liquid_Heat_Capacity_Const_A = result(0)(0) * 1000 * TextBoxMW.Text.ToDoubleFromCurrent
+            .Liquid_Heat_Capacity_Const_B = result(0)(1) * 1000 * TextBoxMW.Text.ToDoubleFromCurrent
+            .Liquid_Heat_Capacity_Const_C = result(0)(2) * 1000 * TextBoxMW.Text.ToDoubleFromCurrent
+            .Liquid_Heat_Capacity_Const_D = result(0)(3) * 1000 * TextBoxMW.Text.ToDoubleFromCurrent
+            .Liquid_Heat_Capacity_Const_E = result(0)(4) * 1000 * TextBoxMW.Text.ToDoubleFromCurrent
 
             tbCPLiquid_A.Text = .Liquid_Heat_Capacity_Const_A
             tbCPLiquid_B.Text = .Liquid_Heat_Capacity_Const_B

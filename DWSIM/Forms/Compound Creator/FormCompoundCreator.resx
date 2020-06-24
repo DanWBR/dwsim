@@ -333,6 +333,9 @@
   <data name="btnViewCPIG.Text" xml:space="preserve">
     <value>Visualizar</value>
   </data>
+  <data name="Label42.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="&gt;&gt;GridExpDataCPIG.Parent" xml:space="preserve">
     <value>GroupBox4</value>
   </data>
@@ -357,8 +360,8 @@
   <data name="TextBoxDHF.Location" type="System.Drawing.Point, System.Drawing">
     <value>283, 29</value>
   </data>
-  <data name="cbEqSolidDENS.Items20" xml:space="preserve">
-    <value>103: A + B * Exp(-C / (T ^ D))</value>
+  <data name="Label98.TabIndex" type="System.Int32, mscorlib">
+    <value>77</value>
   </data>
   <data name="cbEqSolidDENS.Items21" xml:space="preserve">
     <value>104: A + B / T + C / T ^ 2 + D / T ^ 8 + E / T ^ 9</value>
@@ -387,8 +390,8 @@
   <data name="cbEqSolidDENS.Items29" xml:space="preserve">
     <value>119: Exp(A / T + B + C * T + D * T ^ 2 + E * Log(T))</value>
   </data>
-  <data name="&gt;&gt;tbLIQVISC_A.Name" xml:space="preserve">
-    <value>tbLIQVISC_A</value>
+  <data name="tbCPIG_B.TabIndex" type="System.Int32, mscorlib">
+    <value>55</value>
   </data>
   <data name="CheckBoxMeltingTemp.TabIndex" type="System.Int32, mscorlib">
     <value>110</value>
@@ -440,9 +443,6 @@
   </data>
   <data name="&gt;&gt;tbLIQDENS_D.Parent" xml:space="preserve">
     <value>GroupBox2</value>
-  </data>
-  <data name="cbEqTCLiquid.Items34" xml:space="preserve">
-    <value>211: A * ((B - T) / (B - C)) ^ D</value>
   </data>
   <data name="TextBoxTc.Size" type="System.Drawing.Size, System.Drawing">
     <value>94, 20</value>
@@ -513,9 +513,6 @@
   <data name="tbPVAP_A.Text" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="Label61.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="Label38.Location" type="System.Drawing.Point, System.Drawing">
     <value>257, 181</value>
   </data>
@@ -558,8 +555,8 @@
   <data name="Label88.Location" type="System.Drawing.Point, System.Drawing">
     <value>255, 110</value>
   </data>
-  <data name="cbEqCPLiquid.Items8" xml:space="preserve">
-    <value>11: Exp(A)</value>
+  <data name="GroupBox3.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;btnViewLIQVISC.ZOrder" xml:space="preserve">
     <value>19</value>
@@ -572,9 +569,6 @@
   </data>
   <data name="&gt;&gt;Label32.Name" xml:space="preserve">
     <value>Label32</value>
-  </data>
-  <data name="&gt;&gt;TextBox2.Parent" xml:space="preserve">
-    <value>$this</value>
   </data>
   <data name="btnRegressSolidCp.Text" xml:space="preserve">
     <value>Fazer Regressão</value>
@@ -590,9 +584,6 @@
   </data>
   <data name="&gt;&gt;TabPageConstantProperties.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnViewLIQDENS.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
   </data>
   <data name="&gt;&gt;CheckBoxMW.Parent" xml:space="preserve">
     <value>TabPageID</value>
@@ -867,6 +858,9 @@
   <data name="rbCoeffCPIG.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="&gt;&gt;tbCPIG_A.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="cbEqTCLiquid.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 21</value>
   </data>
@@ -902,9 +896,6 @@
   </data>
   <data name="Label14.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="btnRegressPVAP.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
   </data>
   <data name="TextBoxCSLV.Text" xml:space="preserve">
     <value>0</value>
@@ -1022,9 +1013,6 @@
   </data>
   <data name="TextBoxEnthOfFusion2.TabIndex" type="System.Int32, mscorlib">
     <value>107</value>
-  </data>
-  <data name="cbEqSolidDENS.Items6" xml:space="preserve">
-    <value>6: A + B * T + C * T ^ 2 + D * T ^ 3 + E / T ^ 2</value>
   </data>
   <data name="&gt;&gt;btnViewLIQDENS.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1176,6 +1164,9 @@
   <data name="&gt;&gt;GridUNIFAC.Parent" xml:space="preserve">
     <value>TabPage1</value>
   </data>
+  <data name="cbEqCPLiquid.Items8" xml:space="preserve">
+    <value>11: Exp(A)</value>
+  </data>
   <data name="&gt;&gt;tbLIQVISC_C.ZOrder" xml:space="preserve">
     <value>21</value>
   </data>
@@ -1196,6 +1187,9 @@
   </data>
   <data name="TextBox2.ToolTip" xml:space="preserve">
     <value />
+  </data>
+  <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>495, 166</value>
   </data>
   <data name="Label59.Text" xml:space="preserve">
     <value>Qtde de Átomos (UNIFAC)</value>
@@ -1356,8 +1350,8 @@
   <data name="Label59.Location" type="System.Drawing.Point, System.Drawing">
     <value>509, 47</value>
   </data>
-  <data name="Label30.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 47</value>
+  <data name="cbEqLIQVISC.Items28" xml:space="preserve">
+    <value>117: A * T + B * (C / T) / Tanh(C / T) - D * (E / T) / Tanh(E / T)</value>
   </data>
   <data name="Label90.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3115,8 +3109,8 @@
   <data name="rbEstimateLIQVISC.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
-  <data name="&gt;&gt;btnViewPVAP.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="SaveFileDialog2.Filter" xml:space="preserve">
+    <value>Arquivos XML|*.xml</value>
   </data>
   <data name="&gt;&gt;TabPage1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3142,8 +3136,8 @@
   <data name="Label55.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="GroupBox3.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;GroupBox6.Name" xml:space="preserve">
+    <value>GroupBox6</value>
   </data>
   <data name="btnViewLIQDENS.Text" xml:space="preserve">
     <value>Visualizar</value>
@@ -3178,14 +3172,14 @@
   <data name="&gt;&gt;rbEstimateLiquidTC.Name" xml:space="preserve">
     <value>rbEstimateLiquidTC</value>
   </data>
-  <data name="&gt;&gt;btnViewSolidCp.Parent" xml:space="preserve">
-    <value>gbCPs</value>
+  <data name="cbEqSolidDENS.Items20" xml:space="preserve">
+    <value>103: A + B * Exp(-C / (T ^ D))</value>
   </data>
   <data name="Label24.Size" type="System.Drawing.Size, System.Drawing">
     <value>14, 13</value>
   </data>
-  <data name="Label98.TabIndex" type="System.Int32, mscorlib">
-    <value>77</value>
+  <data name="GridExpDataCpS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 132</value>
   </data>
   <data name="DataGridViewTextBoxColumn7.HeaderText" xml:space="preserve">
     <value>T</value>
@@ -3448,8 +3442,8 @@
   <data name="&gt;&gt;SalvarNoBancoDeDadosToolStripMenuItem.Name" xml:space="preserve">
     <value>SalvarNoBancoDeDadosToolStripMenuItem</value>
   </data>
-  <data name="tbCPLiquid_E.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 20</value>
+  <data name="&gt;&gt;TabPageTDepProperties.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;Label27.Parent" xml:space="preserve">
     <value>GroupBox6</value>
@@ -3492,9 +3486,6 @@
   </data>
   <data name="&gt;&gt;tbLIQDENS_C.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;GroupBox6.Name" xml:space="preserve">
-    <value>GroupBox6</value>
   </data>
   <data name="cbEqSolidDENS.Items34" xml:space="preserve">
     <value>211: A * ((B - T) / (B - C)) ^ D</value>
@@ -3640,8 +3631,8 @@
   <data name="cbEqCPLiquid.Items26" xml:space="preserve">
     <value>115: Exp(A + B / T + C * Log(T) + D * T ^ 2 + E / T ^ 2)</value>
   </data>
-  <data name="&gt;&gt;TableLayoutPanel1.Name" xml:space="preserve">
-    <value>TableLayoutPanel1</value>
+  <data name="btnViewCPIG.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label47.Size" type="System.Drawing.Size, System.Drawing">
     <value>83, 13</value>
@@ -3850,9 +3841,6 @@
   <data name="&gt;&gt;Label6.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;lblMW.Parent" xml:space="preserve">
-    <value>TabPageID</value>
-  </data>
   <data name="&gt;&gt;tbPVAP_C.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -3969,9 +3957,6 @@
   </data>
   <data name="pbRender.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="&gt;&gt;TabPageTDepProperties.ZOrder" xml:space="preserve">
-    <value>3</value>
   </data>
   <data name="&gt;&gt;TBUnifac.Parent" xml:space="preserve">
     <value>TabPage1</value>
@@ -4564,6 +4549,9 @@
   <data name="rbCoeffLIQVISC.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="Label30.Location" type="System.Drawing.Point, System.Drawing">
+    <value>257, 47</value>
+  </data>
   <data name="rbCoeffSolidDens.TabIndex" type="System.Int32, mscorlib">
     <value>169</value>
   </data>
@@ -4837,9 +4825,6 @@
   <data name="tbPVAP_E.TabIndex" type="System.Int32, mscorlib">
     <value>41</value>
   </data>
-  <data name="&gt;&gt;BancoDeDadosChemeoToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="Label78.TabIndex" type="System.Int32, mscorlib">
     <value>166</value>
   </data>
@@ -4908,6 +4893,9 @@
   </data>
   <data name="btnRegressSolidDens.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 23</value>
+  </data>
+  <data name="&gt;&gt;btnRegressCPIG.Parent" xml:space="preserve">
+    <value>GroupBox4</value>
   </data>
   <data name="Label29.Text" xml:space="preserve">
     <value>A</value>
@@ -5005,14 +4993,8 @@
   <data name="&gt;&gt;Label64.Parent" xml:space="preserve">
     <value>TabPageConstantProperties</value>
   </data>
-  <data name="GridExpDataCpS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 132</value>
-  </data>
   <data name="cbEqTCLiquid.Items2" xml:space="preserve">
     <value>2: A + B * T</value>
-  </data>
-  <data name="&gt;&gt;Label83.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;rbCoeffSolidCp.Name" xml:space="preserve">
     <value>rbCoeffSolidCp</value>
@@ -5386,6 +5368,9 @@
   <data name="&gt;&gt;UNIFACImageColumn.Name" xml:space="preserve">
     <value>UNIFACImageColumn</value>
   </data>
+  <data name="cbEqCPLiquid.Items20" xml:space="preserve">
+    <value>103: A + B * Exp(-C / (T ^ D))</value>
+  </data>
   <data name="&gt;&gt;lblMeltingTemp.Name" xml:space="preserve">
     <value>lblMeltingTemp</value>
   </data>
@@ -5409,6 +5394,9 @@
   </data>
   <data name="Label46.Size" type="System.Drawing.Size, System.Drawing">
     <value>115, 13</value>
+  </data>
+  <data name="rbCoeffSolidDens.Location" type="System.Drawing.Point, System.Drawing">
+    <value>210, 51</value>
   </data>
   <data name="Label78.Text" xml:space="preserve">
     <value>E</value>
@@ -5707,14 +5695,14 @@
   <data name="tbCPIG_A.TabIndex" type="System.Int32, mscorlib">
     <value>53</value>
   </data>
-  <data name="Label43.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 236</value>
-  </data>
   <data name="TextBoxDGF.Text" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="&gt;&gt;lblEnthOfFusion.ZOrder" xml:space="preserve">
     <value>7</value>
+  </data>
+  <data name="rbEstimateLIQDENS.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
   </data>
   <data name="cbEqPVAP.Items30" xml:space="preserve">
     <value>207: Exp(A - B / (T + C))</value>
@@ -5817,9 +5805,6 @@
   </data>
   <data name="&gt;&gt;LabelWithDivider7.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="&gt;&gt;Label35.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="TextBoxVTCPR.TabIndex" type="System.Int32, mscorlib">
     <value>91</value>
@@ -5956,6 +5941,9 @@
   <data name="tbCPIG_E.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="cbEqCPIG.Items22" xml:space="preserve">
+    <value>105: A / (B ^ (1 + (1 - T / C) ^ D))</value>
+  </data>
   <data name="TextBoxCSAF.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 20</value>
   </data>
@@ -6018,6 +6006,9 @@
   </data>
   <data name="&gt;&gt;TbNISTMODFAC.Parent" xml:space="preserve">
     <value>TabPage3</value>
+  </data>
+  <data name="&gt;&gt;PicNISTMODFAC.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="Label64.ToolTip" xml:space="preserve">
     <value />
@@ -6331,8 +6322,8 @@
   <data name="cbEqCPLiquid.IntegralHeight" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="rbCoeffSolidDens.Location" type="System.Drawing.Point, System.Drawing">
-    <value>210, 51</value>
+  <data name="&gt;&gt;tbStatusLIQDENS.Name" xml:space="preserve">
+    <value>tbStatusLIQDENS</value>
   </data>
   <data name="&gt;&gt;Label61.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -6586,9 +6577,6 @@
   <data name="tbCpS_C.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;GridUNIFAC.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <data name="&gt;&gt;cbEqLIQVISC.Name" xml:space="preserve">
     <value>cbEqLIQVISC</value>
   </data>
@@ -6609,6 +6597,9 @@
   </data>
   <data name="tbLIQVISC_A.TabIndex" type="System.Int32, mscorlib">
     <value>48</value>
+  </data>
+  <data name="CheckBoxMeltingTemp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>439, 314</value>
   </data>
   <data name="&gt;&gt;btnRegressCPLiquid.Name" xml:space="preserve">
     <value>btnRegressCPLiquid</value>
@@ -6820,9 +6811,6 @@
   <data name="TextBoxCSSP.Text" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="btnViewCPLiquid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 23</value>
-  </data>
   <data name="rbRegressCPIG.TabIndex" type="System.Int32, mscorlib">
     <value>43</value>
   </data>
@@ -6945,9 +6933,6 @@
   </data>
   <data name="&gt;&gt;TextBox2.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="LabelWithDivider1.TabIndex" type="System.Int32, mscorlib">
-    <value>98</value>
   </data>
   <data name="&gt;&gt;tbPVAP_A.Parent" xml:space="preserve">
     <value>GroupBox1</value>
@@ -7108,8 +7093,8 @@
   <data name="Label18.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="Label72.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="btnRegressPVAP.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
   </data>
   <data name="Label26.Text" xml:space="preserve">
     <value>A</value>
@@ -7122,6 +7107,9 @@
   </data>
   <data name="cbEqPVAP.Items3" xml:space="preserve">
     <value>3: A + B * T + C * T ^ 2</value>
+  </data>
+  <data name="Label85.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 11</value>
   </data>
   <data name="rbEstimateLIQDENS.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 17</value>
@@ -7432,6 +7420,9 @@
   <data name="&gt;&gt;tbStatusLIQDENS.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
+  <data name="CheckBoxDGF.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="btnRegressSolidDens.Text" xml:space="preserve">
     <value>Fazer Regressão</value>
   </data>
@@ -7678,8 +7669,8 @@
   <data name="&gt;&gt;Label25.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="rbEstimateLIQDENS.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+  <data name="LabelWithDivider1.TabIndex" type="System.Int32, mscorlib">
+    <value>98</value>
   </data>
   <data name="&gt;&gt;Label76.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -7825,8 +7816,8 @@
   <data name="&gt;&gt;tbPVAP_E.Name" xml:space="preserve">
     <value>tbPVAP_E</value>
   </data>
-  <data name="CheckBoxMeltingTemp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>439, 314</value>
+  <data name="&gt;&gt;SalvarNoBancoDeDadosToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label28.ToolTip" xml:space="preserve">
     <value />
@@ -8167,6 +8158,9 @@
   <data name="btnViewCPLiquid.Location" type="System.Drawing.Point, System.Drawing">
     <value>115, 246</value>
   </data>
+  <data name="cbEqLIQDENS.Items36" xml:space="preserve">
+    <value>213: (E / T) * (A * (1 - T / E) + B * (1 - T / E) ^ 1.5 + C * (1 - T / E) ^ 3 + D * (1 - T / E) ^ 6)</value>
+  </data>
   <data name="&gt;&gt;tbRoS_D.Parent" xml:space="preserve">
     <value>gbSolidDens</value>
   </data>
@@ -8185,14 +8179,17 @@
   <data name="btnViewLIQDENS.Location" type="System.Drawing.Point, System.Drawing">
     <value>110, 246</value>
   </data>
+  <data name="&gt;&gt;tbCpS_A.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="$this.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="&gt;&gt;Label10.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="cbEqCPLiquid.Items20" xml:space="preserve">
-    <value>103: A + B * Exp(-C / (T ^ D))</value>
+  <data name="tbCPIG_C.Text" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;btnRegressLIQDENS.Parent" xml:space="preserve">
     <value>GroupBox2</value>
@@ -8382,6 +8379,9 @@
   </data>
   <data name="tbUserDefDensLiqEq.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
+  </data>
+  <data name="Label72.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="TextBoxVTCPR.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 20</value>
@@ -8712,8 +8712,8 @@
   <data name="Label31.Text" xml:space="preserve">
     <value>E</value>
   </data>
-  <data name="&gt;&gt;tbStatusLIQDENS.Name" xml:space="preserve">
-    <value>tbStatusLIQDENS</value>
+  <data name="Label92.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="cbEqCPIG.Items19" xml:space="preserve">
     <value>102: A * T ^ B / (1 + C / T + D / T ^ 2)</value>
@@ -8985,6 +8985,9 @@
   <data name="Label55.Text" xml:space="preserve">
     <value>Entalpia de Fusão</value>
   </data>
+  <data name="&gt;&gt;tbLIQVISC_A.Name" xml:space="preserve">
+    <value>tbLIQVISC_A</value>
+  </data>
   <data name="TBUnifac.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -9105,8 +9108,8 @@
   <data name="&gt;&gt;GroupBox6.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>495, 166</value>
+  <data name="TabControl2.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="TextBoxName.TabIndex" type="System.Int32, mscorlib">
     <value>35</value>
@@ -9117,8 +9120,8 @@
   <data name="TextBoxMeltingTemp.Text" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="Label93.Size" type="System.Drawing.Size, System.Drawing">
-    <value>14, 13</value>
+  <data name="&gt;&gt;ColumnCountUNIFAC.Name" xml:space="preserve">
+    <value>ColumnCountUNIFAC</value>
   </data>
   <data name="CheckBoxDHF.ToolTip" xml:space="preserve">
     <value>Joback Calculation</value>
@@ -9282,8 +9285,8 @@
   <data name="gbSolidDens.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="lblDHF.TabIndex" type="System.Int32, mscorlib">
-    <value>74</value>
+  <data name="Label56.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="tbStatusCPLiquid.TabIndex" type="System.Int32, mscorlib">
     <value>69</value>
@@ -9426,9 +9429,6 @@
   <data name="cbEqCpS.Items1" xml:space="preserve">
     <value>1: A</value>
   </data>
-  <data name="tbCPIG_B.TabIndex" type="System.Int32, mscorlib">
-    <value>55</value>
-  </data>
   <data name="&gt;&gt;rbRegressCPIG.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -9441,11 +9441,11 @@
   <data name="tbStatusCPIG.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="tbPVAP_E.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
-  </data>
   <data name="cbEqTCLiquid.Items10" xml:space="preserve">
     <value>13: Exp(A + B * T + C * T ^ 2)</value>
+  </data>
+  <data name="lblDHF.TabIndex" type="System.Int32, mscorlib">
+    <value>74</value>
   </data>
   <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
     <value>GroupBox1</value>
@@ -9633,6 +9633,9 @@
   <data name="tbLIQDENS_A.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
+  <data name="tbCPLiquid_E.Size" type="System.Drawing.Size, System.Drawing">
+    <value>187, 20</value>
+  </data>
   <data name="DataGridViewTextBoxColumn4.HeaderText" xml:space="preserve">
     <value>Cp ig</value>
   </data>
@@ -9677,9 +9680,6 @@
   </data>
   <data name="Label11.Text" xml:space="preserve">
     <value>Zc</value>
-  </data>
-  <data name="&gt;&gt;Label36.Name" xml:space="preserve">
-    <value>Label36</value>
   </data>
   <data name="TabPageStructure.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
@@ -9798,8 +9798,8 @@
   <data name="&gt;&gt;tbCpS_B.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
-  <data name="Label85.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 11</value>
+  <data name="&gt;&gt;TableLayoutPanel1.Name" xml:space="preserve">
+    <value>TableLayoutPanel1</value>
   </data>
   <data name="LabelWithDivider12.TabIndex" type="System.Int32, mscorlib">
     <value>71</value>
@@ -9816,8 +9816,8 @@
   <data name="CheckBoxCSLV.TabIndex" type="System.Int32, mscorlib">
     <value>102</value>
   </data>
-  <data name="Label42.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;Label72.Name" xml:space="preserve">
+    <value>Label72</value>
   </data>
   <data name="lblPc.TabIndex" type="System.Int32, mscorlib">
     <value>81</value>
@@ -10011,6 +10011,9 @@
   <data name="&gt;&gt;Label9.Name" xml:space="preserve">
     <value>Label9</value>
   </data>
+  <data name="&gt;&gt;btnViewPVAP.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;TabPage1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
@@ -10086,8 +10089,8 @@
   <data name="btnRegressCPLiquid.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="btnViewCPIG.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="btnViewCPLiquid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 23</value>
   </data>
   <data name="&gt;&gt;Count.Name" xml:space="preserve">
     <value>Count</value>
@@ -10290,9 +10293,6 @@
   <data name="&gt;&gt;tbUserDefCPLEq.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="cbEqCpS.Items25" xml:space="preserve">
-    <value>114: A * T + B * T ^ 2 / 2 + C * T ^ 3 / 3 + D * T ^ 4 / 4</value>
-  </data>
   <data name="TabPage2.ToolTip" xml:space="preserve">
     <value />
   </data>
@@ -10308,8 +10308,8 @@
   <data name="TextBoxZRa.Location" type="System.Drawing.Point, System.Drawing">
     <value>572, 163</value>
   </data>
-  <data name="&gt;&gt;PicNISTMODFAC.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="cbEqTCLiquid.Items34" xml:space="preserve">
+    <value>211: A * ((B - T) / (B - C)) ^ D</value>
   </data>
   <data name="&gt;&gt;tbRoS_A.Name" xml:space="preserve">
     <value>tbRoS_A</value>
@@ -10386,8 +10386,8 @@
   <data name="MenuStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>42</value>
   </data>
-  <data name="cbEqCPIG.Items22" xml:space="preserve">
-    <value>105: A / (B ^ (1 + (1 - T / C) ^ D))</value>
+  <data name="Label61.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="TextBoxComments.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
@@ -10929,9 +10929,6 @@
   <data name="cbEqLIQVISC.Items2" xml:space="preserve">
     <value>2: A + B * T</value>
   </data>
-  <data name="cbEqLIQVISC.Items28" xml:space="preserve">
-    <value>117: A * T + B * (C / T) / Tanh(C / T) - D * (E / T) / Tanh(E / T)</value>
-  </data>
   <data name="&gt;&gt;cbEqCPIG.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -11133,8 +11130,8 @@
   <data name="cbEqLIQDENS.Location" type="System.Drawing.Point, System.Drawing">
     <value>307, 49</value>
   </data>
-  <data name="&gt;&gt;tbCPIG_A.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="cbEqSolidDENS.Items6" xml:space="preserve">
+    <value>6: A + B * T + C * T ^ 2 + D * T ^ 3 + E / T ^ 2</value>
   </data>
   <data name="CheckBoxMeltingTemp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -11409,11 +11406,14 @@
   <data name="&gt;&gt;Label81.Parent" xml:space="preserve">
     <value>gbSolidDens</value>
   </data>
+  <data name="LinkLabel4.Text" xml:space="preserve">
+    <value>DortmundDatabase</value>
+  </data>
   <data name="&gt;&gt;tbCpS_C.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColumnCountUNIFAC.Name" xml:space="preserve">
-    <value>ColumnCountUNIFAC</value>
+  <data name="&gt;&gt;BancoDeDadosChemeoToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label60.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -11589,14 +11589,14 @@
   <data name="&gt;&gt;tbTCLiquid_A.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="tbCPIG_C.Text" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;Label83.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="LabelWithDivider6.Text" xml:space="preserve">
     <value>Fator Acêntrico</value>
   </data>
-  <data name="&gt;&gt;Label72.Name" xml:space="preserve">
-    <value>Label72</value>
+  <data name="&gt;&gt;btnViewLIQDENS.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
   </data>
   <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
     <value>257, 133</value>
@@ -11691,14 +11691,14 @@
   <data name="cbEqPVAP.Items5" xml:space="preserve">
     <value>5: A + B * T + C * T ^ 2 + D * T ^ 3 + E * T ^ 4</value>
   </data>
-  <data name="Label56.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="cbEqCpS.Items25" xml:space="preserve">
+    <value>114: A * T + B * T ^ 2 / 2 + C * T ^ 3 / 3 + D * T ^ 4 / 4</value>
   </data>
   <data name="PicNISTMODFAC.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
   </data>
-  <data name="&gt;&gt;tbCpS_A.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Label36.Name" xml:space="preserve">
+    <value>Label36</value>
   </data>
   <data name="&gt;&gt;Label89.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -11868,8 +11868,8 @@
   <data name="&gt;&gt;GridJoback.Parent" xml:space="preserve">
     <value>TabPage4</value>
   </data>
-  <data name="&gt;&gt;btnRegressCPIG.Parent" xml:space="preserve">
-    <value>GroupBox4</value>
+  <data name="Label93.Size" type="System.Drawing.Size, System.Drawing">
+    <value>14, 13</value>
   </data>
   <data name="rbRegressCPLiquid.Text" xml:space="preserve">
     <value>Regressão de Dados Experimentais</value>
@@ -11961,8 +11961,8 @@
   <data name="&gt;&gt;lblDGF.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="SaveFileDialog2.Filter" xml:space="preserve">
-    <value>Arquivos XML|*.xml</value>
+  <data name="&gt;&gt;Label35.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label80.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 165</value>
@@ -12129,8 +12129,8 @@
   <data name="cbEqCPLiquid.Items36" xml:space="preserve">
     <value>213: (E / T) * (A * (1 - T / E) + B * (1 - T / E) ^ 1.5 + C * (1 - T / E) ^ 3 + D * (1 - T / E) ^ 6)</value>
   </data>
-  <data name="&gt;&gt;SalvarNoBancoDeDadosToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="tbPVAP_E.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="&gt;&gt;ColumnCountUNIFAC.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -12210,8 +12210,8 @@
   <data name="cbEqCPIG.Items33" xml:space="preserve">
     <value>210: 10 ^ (A + B / T + C * T + D * T ^ 2)</value>
   </data>
-  <data name="cbEqLIQDENS.Items36" xml:space="preserve">
-    <value>213: (E / T) * (A * (1 - T / E) + B * (1 - T / E) ^ 1.5 + C * (1 - T / E) ^ 3 + D * (1 - T / E) ^ 6)</value>
+  <data name="&gt;&gt;TextBox2.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="Label87.ToolTip" xml:space="preserve">
     <value />
@@ -12276,8 +12276,8 @@
   <data name="cbEqPVAP.Items4" xml:space="preserve">
     <value>4: A + B * T + C * T ^ 2 + D * T ^ 3</value>
   </data>
-  <data name="Label92.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;lblMW.Parent" xml:space="preserve">
+    <value>TabPageID</value>
   </data>
   <data name="&gt;&gt;lblNBP.Name" xml:space="preserve">
     <value>lblNBP</value>
@@ -12417,8 +12417,8 @@
   <data name="GridMODFAC.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="TabControl2.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;GridUNIFAC.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;btnRenderSMILES.ZOrder" xml:space="preserve">
     <value>5</value>
@@ -12510,8 +12510,8 @@
   <data name="GridExpDataLIQVISC.Size" type="System.Drawing.Size, System.Drawing">
     <value>208, 170</value>
   </data>
-  <data name="LinkLabel4.Text" xml:space="preserve">
-    <value>DortmundDatabase</value>
+  <data name="Label43.Location" type="System.Drawing.Point, System.Drawing">
+    <value>257, 236</value>
   </data>
   <data name="&gt;&gt;tbStatusSolidCp.Name" xml:space="preserve">
     <value>tbStatusSolidCp</value>
@@ -12552,8 +12552,8 @@
   <data name="&gt;&gt;Label12.Name" xml:space="preserve">
     <value>Label12</value>
   </data>
-  <data name="CheckBoxDGF.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;btnViewSolidCp.Parent" xml:space="preserve">
+    <value>gbCPs</value>
   </data>
   <metadata name="ColAtom.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
