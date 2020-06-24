@@ -2567,7 +2567,7 @@ Namespace PropertyPackages
                             If Not T.IsValid Or Not H.IsValid Then Throw New ArgumentException("PH Flash: " & Calculator.GetLocalString("ErrorInvalidFlashSpecValue"))
                             'If Not T.IsPositive Then Throw New ArgumentException("PH Flash: " & Calculator.GetLocalString("ErrorInvalidFlashSpecValue"))
 
-                            If Me.AUX_IS_SINGLECOMP(Phase.Mixture) And Not Me.ComponentName.Contains("Incompressible") Then
+                            If Me.AUX_IS_SINGLECOMP(Phase.Mixture) And Not Me.ComponentName.Contains("Incompressible") And Not Me.ComponentName.Contains("Black Oil") Then
 
                                 Dim brentsolverT As New BrentOpt.Brent
                                 brentsolverT.DefineFuncDelegate(AddressOf EnthalpyTx)
@@ -2841,7 +2841,7 @@ redirect:                       IObj?.SetCurrent()
                             If Not T.IsValid Or Not S.IsValid Then Throw New ArgumentException("PS Flash: " & Calculator.GetLocalString("ErrorInvalidFlashSpecValue"))
                             'If Not T.IsPositive Then Throw New ArgumentException("PS Flash: " & Calculator.GetLocalString("ErrorInvalidFlashSpecValue"))
 
-                            If Me.AUX_IS_SINGLECOMP(Phase.Mixture) And Me.ComponentName <> "FPROPS" And Me.ComponentName <> "CoolProp" Then
+                            If Me.AUX_IS_SINGLECOMP(Phase.Mixture) And Not Me.ComponentName.Contains("Incompressible") And Not Me.ComponentName.Contains("Black Oil") Then
 
                                 Dim brentsolverT As New BrentOpt.Brent
                                 brentsolverT.DefineFuncDelegate(AddressOf EntropyTx)
