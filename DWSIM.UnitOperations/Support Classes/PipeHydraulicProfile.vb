@@ -49,6 +49,12 @@ Namespace UnitOperations.Auxiliary.Pipe
             End Set
         End Property
 
+        Public Function CloneXML() As PipeProfile
+            Dim obj As ICustomXMLSerialization = New PipeProfile()
+            obj.LoadData(Me.SaveData)
+            Return obj
+        End Function
+
         Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
 
             XMLSerializer.XMLSerializer.Deserialize(Me, data)
