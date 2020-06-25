@@ -139,10 +139,6 @@ End Interface
 
     Property Straight As Boolean
 
-    Property FromProxyStreamData As String
-
-    Property ToProxyStreamData As String
-
 End Interface
 
 <InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IGraphicObjectExtension
