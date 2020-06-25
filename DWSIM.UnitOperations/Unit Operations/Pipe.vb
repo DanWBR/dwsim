@@ -624,7 +624,8 @@ Namespace UnitOperations
                                     Tout_ant = Tout
                                     IObj5?.SetCurrent()
                                     Tout = oms.PropertyPackage.FlashBase.CalculateEquilibrium(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.H, Pout, Hout, oms.PropertyPackage, oms.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Mixture), Nothing, Tout).CalculatedTemperature
-                                    Tout = 0.7 * Tout_ant + 0.3 * Tout
+                                    'Tout = 0.7 * Tout_ant + 0.3 * Tout
+                                    Tout = (Tout + Tout_ant) / 2
 
                                     IObj5?.Paragraphs.Add(String.Format("Calculated Outlet Temperature: {0} K", Tout))
 
