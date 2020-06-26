@@ -260,12 +260,14 @@ Namespace UnitOperations
 
             IObj?.Paragraphs.Add("<mi>\rho_{2i}</mi> Outlet Gas Density calculated with Inlet Gas Entropy")
 
-            If Not Me.GraphicObject.InputConnectors(1).IsAttached Then
-                Throw New Exception(FlowSheet.GetTranslatedString("NohcorrentedeEnergyFlow"))
-            ElseIf Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
-                Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
-            ElseIf Not Me.GraphicObject.InputConnectors(0).IsAttached Then
-                Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
+            If args Is Nothing Then
+                If Not Me.GraphicObject.InputConnectors(1).IsAttached Then
+                    Throw New Exception(FlowSheet.GetTranslatedString("NohcorrentedeEnergyFlow"))
+                ElseIf Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
+                    Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
+                ElseIf Not Me.GraphicObject.InputConnectors(0).IsAttached Then
+                    Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
+                End If
             End If
 
             Dim Ti, Pi, Hi, Si, Wi, rho_vi, qvi, qli, ei, ein, T2, T2s, P2, P2i, Qloop, Qi, H2, H2s, cpig, cp, cv, mw, fx, fx0, fx00, P2i0, P2i00 As Double
@@ -320,11 +322,9 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                     If DebugMode Then AppendDebugLine(String.Format("Property Package: {0}", Me.PropertyPackage.Name))
                     If DebugMode Then AppendDebugLine(String.Format("Input variables: T = {0} K, P = {1} Pa, H = {2} kJ/kg, S = {3} kJ/[kg.K], W = {4} kg/s, cp = {5} kJ/[kg.K]", Ti, Pi, Hi, Si, Wi, cp))
 
-                    Dim energystream As Streams.EnergyStream = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
-
                     Select Case Me.CalcMode
                         Case CalculationMode.EnergyStream
-                            Me.DeltaQ = energystream.EnergyFlow
+                            Me.DeltaQ = esin.EnergyFlow
                             If DebugMode Then AppendDebugLine(String.Format("Power from energy stream: {0} kW", DeltaQ))
                         Case CalculationMode.PowerRequired
                             If DebugMode Then AppendDebugLine(String.Format("Power from definition: {0} kW", DeltaQ))
@@ -340,7 +340,7 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
 
                     With esin
                         .EnergyFlow = Me.DeltaQ
-                        .GraphicObject.Calculated = True
+                        If args Is Nothing Then .GraphicObject.Calculated = True
                     End With
 
                     Dim k As Double = cp / cv
@@ -721,7 +721,7 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                         'energy stream - update energy flow value (kW)
                         With esin
                             .EnergyFlow = Me.DeltaQ
-                            .GraphicObject.Calculated = True
+                            If args Is Nothing Then .GraphicObject.Calculated = True
                         End With
 
                     End If

@@ -363,10 +363,12 @@ Namespace UnitOperations
                                 doing a PH Flash. This way, in the majority of cases, the outlet 
                                 temperature will be less than or equal to the inlet one.")
 
-            If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
-                Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
-            ElseIf Not Me.GraphicObject.InputConnectors(0).IsAttached Then
-                Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
+            If args Is Nothing Then
+                If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
+                    Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
+                ElseIf Not Me.GraphicObject.InputConnectors(0).IsAttached Then
+                    Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
+                End If
             End If
 
             Dim Ti, Pi, Hi, Wi, ei, ein, T2, P2, H2, H2c, rho, volf, rhog20, P2ant, v2, Kvc As Double

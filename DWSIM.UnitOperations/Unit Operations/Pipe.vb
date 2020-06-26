@@ -272,14 +272,16 @@ Namespace UnitOperations
             IObj?.Paragraphs.Add("7. When both pressure and temperature converges, the results are 
                             passed to the next increment, where calculation restarts.")
 
-            If Not Me.GraphicObject.EnergyConnector.IsAttached Then
-                Throw New Exception(FlowSheet.GetTranslatedString("NohcorrentedeEnergyFlow3"))
-            ElseIf Not Me.Profile.Status = PipeEditorStatus.OK Then
-                Throw New Exception(FlowSheet.GetTranslatedString("Operfilhidrulicodatu"))
-            ElseIf Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
-                Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
-            ElseIf Not Me.GraphicObject.InputConnectors(0).IsAttached Then
-                Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
+            If args Is Nothing Then
+                If Not Me.GraphicObject.EnergyConnector.IsAttached Then
+                    Throw New Exception(FlowSheet.GetTranslatedString("NohcorrentedeEnergyFlow3"))
+                ElseIf Not Me.Profile.Status = PipeEditorStatus.OK Then
+                    Throw New Exception(FlowSheet.GetTranslatedString("Operfilhidrulicodatu"))
+                ElseIf Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
+                    Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
+                ElseIf Not Me.GraphicObject.InputConnectors(0).IsAttached Then
+                    Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
+                End If
             End If
 
             If Me.Specification = Specmode.OutletPressure Then
@@ -960,22 +962,28 @@ Namespace UnitOperations
             Me.DeltaQ = -(HinP - Hout) * Win
 
             'Atribuir valores a corrente de materia conectada a jusante
-            With Me.GetOutletMaterialStream(0)
+            Dim msout As MaterialStream
+            If args Is Nothing Then
+                msout = Me.GetOutletMaterialStream(0)
+            Else
+                msout = args(1)
+            End If
+            With msout
                 .Phases(0).Properties.temperature = Tout
                 .Phases(0).Properties.pressure = Pout
                 .Phases(0).Properties.enthalpy = Hout
-                Dim comp As BaseClasses.Compound
-                For Each comp In .Phases(0).Compounds.Values
-                    comp.MoleFraction = Me.GetInletMaterialStream(0).Phases(0).Compounds(comp.Name).MoleFraction
-                    comp.MassFraction = Me.GetInletMaterialStream(0).Phases(0).Compounds(comp.Name).MassFraction
-                Next
-                .Phases(0).Properties.massflow = Me.GetInletMaterialStream(0).Phases(0).Properties.massflow.GetValueOrDefault
+                'Dim comp As BaseClasses.Compound
+                'For Each comp In .Phases(0).Compounds.Values
+                '    comp.MoleFraction = Me.GetInletMaterialStream(0).Phases(0).Compounds(comp.Name).MoleFraction
+                '    comp.MassFraction = Me.GetInletMaterialStream(0).Phases(0).Compounds(comp.Name).MassFraction
+                'Next
+                '.Phases(0).Properties.massflow = Me.GetInletMaterialStream(0).Phases(0).Properties.massflow.GetValueOrDefault
             End With
 
             'energy stream - update energy flow value (kW)
             With es
                 .EnergyFlow = -Me.DeltaQ.Value
-                .GraphicObject.Calculated = True
+                If args Is Nothing Then .GraphicObject.Calculated = True
             End With
 
             segmento = Nothing

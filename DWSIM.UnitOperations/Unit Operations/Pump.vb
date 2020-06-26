@@ -511,15 +511,17 @@ Namespace UnitOperations
 
             IObj?.Paragraphs.Add("• Outlet temperature: PH Flash.")
 
-            If Not Me.GraphicObject.InputConnectors(1).IsAttached Then
-                'Call function to calculate flowsheet
-                Throw New Exception(FlowSheet.GetTranslatedString("NohcorrentedeEnergyFlow4"))
-            ElseIf Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
-                'Call function to calculate flowsheet
-                Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
-            ElseIf Not Me.GraphicObject.InputConnectors(0).IsAttached Then
-                'Call function to calculate flowsheet
-                Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
+            If args Is Nothing Then
+                If Not Me.GraphicObject.InputConnectors(1).IsAttached Then
+                    'Call function to calculate flowsheet
+                    Throw New Exception(FlowSheet.GetTranslatedString("NohcorrentedeEnergyFlow4"))
+                ElseIf Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
+                    'Call function to calculate flowsheet
+                    Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
+                ElseIf Not Me.GraphicObject.InputConnectors(0).IsAttached Then
+                    'Call function to calculate flowsheet
+                    Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
+                End If
             End If
 
             Dim msin, msout As MaterialStream, esin As Streams.EnergyStream
@@ -736,7 +738,7 @@ Namespace UnitOperations
                     'energy stream - update energy flow value (kW)
                     With esin
                         .EnergyFlow = Me.DeltaQ.GetValueOrDefault
-                        .GraphicObject.Calculated = True
+                        If args Is Nothing Then .GraphicObject.Calculated = True
                     End With
 
                 Case CalculationMode.EnergyStream
@@ -860,7 +862,7 @@ Namespace UnitOperations
                     'energy stream - update energy flow value (kW)
                     With esin
                         .EnergyFlow = Me.DeltaQ.GetValueOrDefault
-                        .GraphicObject.Calculated = True
+                        If args Is Nothing Then .GraphicObject.Calculated = True
                     End With
 
                 Case CalculationMode.OutletPressure
@@ -902,7 +904,7 @@ Namespace UnitOperations
                     'energy stream - update energy flow value (kW)
                     With esin
                         .EnergyFlow = Me.DeltaQ.GetValueOrDefault
-                        .GraphicObject.Calculated = True
+                        If args Is Nothing Then .GraphicObject.Calculated = True
                     End With
 
             End Select
