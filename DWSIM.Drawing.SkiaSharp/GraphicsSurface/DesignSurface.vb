@@ -697,9 +697,9 @@ Public Class GraphicsSurface
                                 gobj.ObjectType = ObjectType.OT_Spec Or gobj.ObjectType = ObjectType.OT_Recycle Or
                                 gobj.ObjectType = ObjectType.OT_EnergyRecycle Then
 
-                                    If flowsheet.SimulationObjects.ContainsKey(gobj.Name) Then
+                                    If gobj.Owner IsNot Nothing Then
 
-                                        Dim obj = flowsheet.SimulationObjects(gobj.Name)
+                                        Dim obj = gobj.Owner
 
                                         Dim tabela As New Tables.FloatingTableGraphic(obj, (x + 25) / Zoom, (y + 25) / Zoom)
                                         tabela.Owner = obj

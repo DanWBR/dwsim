@@ -282,7 +282,6 @@ namespace DWSIM.UI.Desktop.Shared
                 GlobalSettings.Settings.TaskCancellationTokenSource = new System.Threading.CancellationTokenSource();
 
                 if (FinishedSolving != null) FinishedSolving.Invoke();
-
             });
 
             try
