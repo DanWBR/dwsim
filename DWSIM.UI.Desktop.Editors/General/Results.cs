@@ -27,6 +27,7 @@ using OxyPlot.Axes;
 using DWSIM.ExtensionMethods;
 using System.IO;
 using DWSIM.UI.Shared;
+using System.Net;
 
 namespace DWSIM.UI.Desktop.Editors
 {
@@ -78,7 +79,14 @@ namespace DWSIM.UI.Desktop.Editors
 
                     var txtres = s.CreateAndAddMultilineMonoSpaceTextBoxRow(plotcontainer, "", 400, true, null);
 
-                    s.CreateAndAddLabelRow(plotcontainer, "Pipe Segment Profiles: " + SimObject.GraphicObject.Tag);
+                    if (SimObject.GraphicObject != null)
+                    {
+                        s.CreateAndAddLabelRow(plotcontainer, "Pipe Segment Profiles: " + SimObject.GraphicObject.Tag);
+                    }
+                    else
+                    {
+                        s.CreateAndAddLabelRow(plotcontainer, "Pipe Segment Profiles");
+                    }
                     var xsp = s.CreateAndAddDropDownRow(plotcontainer, "X Axis Data", datatype.ToList(), 0, null);
                     var ysp = s.CreateAndAddDropDownRow(plotcontainer, "Y Axis Data", datatype.ToList(), 2, null);
                     s.CreateAndAddButtonRow(plotcontainer, "Update Chart/Table", null, (sender2, e2) =>
@@ -106,9 +114,19 @@ namespace DWSIM.UI.Desktop.Editors
                     s.CreateAndAddEmptySpace(plotcontainer);
                     s.CreateAndAddLabelRow(plotcontainer, "Results Table");
                     s.CreateAndAddControlRow(plotcontainer, txtres);
-                    var form = s.GetDefaultEditorForm("Pipe Properties Profile: " + SimObject.GraphicObject.Tag, 400, 500, plotcontainer);
-                    form.Topmost = true;
-                    form.Show();
+
+                    if (SimObject.GraphicObject != null)
+                    {
+                        var form = s.GetDefaultEditorForm("Pipe Properties Profile: " + SimObject.GraphicObject.Tag, 400, 500, plotcontainer);
+                        form.Topmost = true;
+                        form.Show();
+                    }
+                    else
+                    {
+                        var form = s.GetDefaultEditorForm("Pipe Properties Profile", 400, 500, plotcontainer);
+                        form.Topmost = true;
+                        form.Show();
+                    }
                 };
             }
             else if (SimObject is Column)
@@ -309,7 +327,8 @@ namespace DWSIM.UI.Desktop.Editors
 
                 }
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 var txtcontrol = new TextArea { ReadOnly = true };
                 txtcontrol.Font = GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac ? new Font("Menlo", GlobalSettings.Settings.ResultsReportFontSize) : Fonts.Monospace(GlobalSettings.Settings.ResultsReportFontSize);
                 container.Rows.Add(new TableRow(txtcontrol));
@@ -502,7 +521,16 @@ namespace DWSIM.UI.Desktop.Editors
 
         OxyPlot.PlotModel CreatePipeResultsModel(double[] x, double[] y, string xtitle, string ytitle)
         {
-            var model = new global::OxyPlot.PlotModel() { Subtitle = "Properties Profile", Title = SimObject.GraphicObject.Tag };
+            var title = "";
+            if (SimObject.GraphicObject != null)
+            {
+                title = SimObject.GraphicObject.Tag;
+            }
+            else
+            {
+                title = "Pipe Segment";
+            }
+            var model = new global::OxyPlot.PlotModel() { Subtitle = "Properties Profile", Title = title };
             model.TitleFontSize = 14;
             model.SubtitleFontSize = 11;
             model.Axes.Add(new LinearAxis()

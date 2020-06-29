@@ -4,7 +4,7 @@ using OxyPlot;
 using OxyPlot.Wpf;
 using ContextMenu = Eto.Forms.ContextMenu;
 
-namespace Eto.OxyPlot.WPF
+namespace Eto.OxyPlot.WPF2
 {
     public class PlotHandler : Eto.OxyPlot.Wpf.PlotHandler
     {

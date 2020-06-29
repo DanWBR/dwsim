@@ -87,7 +87,7 @@ namespace DWSIM.UI.Desktop
                             platform = new Eto.Wpf.Platform();
                             platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new WPF.FlowsheetSurfaceControlHandler());
                             platform.Add<FlowsheetSurfaceControl_OpenGL.IFlowsheetSurface_OpenGL>(() => new WPF.FlowsheetSurfaceControlHandler_OpenGL());
-                            platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Eto.OxyPlot.WPF.PlotHandler());
+                            platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Eto.OxyPlot.WPF2.PlotHandler());
                             platform.Add<Eto.Forms.Controls.Scintilla.Shared.ScintillaControl.IScintillaControl>(() => new Eto.Forms.Controls.Scintilla.WPF.ScintillaControlHandler());
                             break;
                         case Settings.WindowsPlatformRenderer.Gtk2:
