@@ -2630,6 +2630,8 @@ Namespace UnitOperations
                 Case ColType.AbsorptionColumn
                     T1 = FT.First
                     T2 = FT.Last
+                    If (T1 = 0.0) Then Throw New Exception("The absorber needs a feed stream connected to the first stage.")
+                    If (T2 = 0.0) Then Throw New Exception("The absorber needs a feed stream connected to the last stage.")
                 Case ColType.ReboiledAbsorber
                     T1 = MathEx.Common.WgtAvg(F, FT)
                     T2 = T1
