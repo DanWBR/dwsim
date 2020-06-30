@@ -19,12 +19,17 @@ namespace DWSIM.UI.Desktop.Editors
     public class PipeThermalProfile
     {
 
-        public ISimulationObject SimObject;
+        public ThermalEditorDefinitions thermalprops;
 
         public DynamicLayout container;
-        public PipeThermalProfile(ISimulationObject selectedobject, DynamicLayout layout)
+
+        public ISimulationObject SimObject;
+
+        public PipeThermalProfile(ISimulationObject obj, ThermalEditorDefinitions definitions, DynamicLayout layout)
         {
-            SimObject = selectedobject;
+
+            SimObject = obj;
+            thermalprops = definitions;
             container = layout;
 
             Initialize();
@@ -34,7 +39,7 @@ namespace DWSIM.UI.Desktop.Editors
         void Initialize()
         {
 
-            ThermalEditorDefinitions profile = ((Pipe)SimObject).ThermalProfile;
+            ThermalEditorDefinitions profile = thermalprops;
 
             var flowsheet = SimObject.GetFlowsheet();
 

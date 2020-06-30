@@ -156,7 +156,7 @@ namespace DWSIM.UI.Forms
                 var cont3 = UI.Shared.Common.GetDefaultContainer();
                 cont3.Tag = "Thermal Profile";
                 cont3.Width = this.Width - 30;
-                new PipeThermalProfile(obj, cont3);
+                new PipeThermalProfile(obj, ((Pipe)obj).ThermalProfile, cont3);
                 Pages.Add(new DocumentPage(new Scrollable() { Content = cont3, Width = this.Width - 30 }) { Text = "Thermal Profile", Closable = false });
             }
             else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.CustomUO)

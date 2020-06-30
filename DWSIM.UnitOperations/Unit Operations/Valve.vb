@@ -863,9 +863,9 @@ Namespace UnitOperations
                             New String() {"Outlet Pressure",
                             Me.OutletPressure.GetValueOrDefault.ConvertFromSI(su.pressure).ToString(nf),
                             su.pressure}))
-                Case CalculationMode.OutletPressure
+                Case Else
                     list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
-                            New String() {"Pressure Increase",
+                            New String() {"Pressure Drop",
                             Me.DeltaP.GetValueOrDefault.ConvertFromSI(su.deltaP).ToString(nf),
                             su.deltaP}))
             End Select
