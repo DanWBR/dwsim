@@ -416,7 +416,8 @@ Namespace UnitOperations
 
                         IObj3?.Paragraphs.Add(String.Format("Calculating segment {0} ({1}/{2})...", segmento.Indice, iq, segmento.Quantidade))
 
-                        If segmento.TipoSegmento = "Tubulaosimples" Or segmento.TipoSegmento = "" Or segmento.TipoSegmento = "Straight Tube Section" Or segmento.TipoSegmento = "Straight Tube" Then
+                        If segmento.TipoSegmento = "Tubulaosimples" Or segmento.TipoSegmento = "" Or segmento.TipoSegmento = "Straight Tube Section" Or
+                            segmento.TipoSegmento = "Straight Tube" Or segmento.TipoSegmento = "Tubulação Simples" Then
 
                             IObj3?.Paragraphs.Add(String.Format("Segment type: {0}", segmento.TipoSegmento))
                             IObj3?.Paragraphs.Add(String.Format("Segment increments: {0}", segmento.Incrementos))
@@ -972,12 +973,12 @@ Namespace UnitOperations
                 .Phases(0).Properties.temperature = Tout
                 .Phases(0).Properties.pressure = Pout
                 .Phases(0).Properties.enthalpy = Hout
-                'Dim comp As BaseClasses.Compound
-                'For Each comp In .Phases(0).Compounds.Values
-                '    comp.MoleFraction = Me.GetInletMaterialStream(0).Phases(0).Compounds(comp.Name).MoleFraction
-                '    comp.MassFraction = Me.GetInletMaterialStream(0).Phases(0).Compounds(comp.Name).MassFraction
-                'Next
-                '.Phases(0).Properties.massflow = Me.GetInletMaterialStream(0).Phases(0).Properties.massflow.GetValueOrDefault
+                Dim comp As BaseClasses.Compound
+                For Each comp In .Phases(0).Compounds.Values
+                    comp.MoleFraction = ims.Phases(0).Compounds(comp.Name).MoleFraction
+                    comp.MassFraction = ims.Phases(0).Compounds(comp.Name).MassFraction
+                Next
+                .Phases(0).Properties.massflow = ims.Phases(0).Properties.massflow.GetValueOrDefault
             End With
 
             'energy stream - update energy flow value (kW)

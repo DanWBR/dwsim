@@ -152,7 +152,8 @@ Namespace GraphicObjects.Tables
 
                     props.AddRange(DirectCast(Owner.ExtraProperties, IDictionary(Of String, Object)).Keys.ToArray)
 
-                    If Owner.GraphicObject.ObjectType = Enums.GraphicObjects.ObjectType.CapeOpenUO Or props.Count = 0 Then
+                    If Owner.GraphicObject.ObjectType = Enums.GraphicObjects.ObjectType.CapeOpenUO Or
+                        Owner.GraphicObject.ObjectType = Enums.GraphicObjects.ObjectType.External Then
                         props = Owner.GetProperties(PropertyType.ALL).ToList()
                     End If
 

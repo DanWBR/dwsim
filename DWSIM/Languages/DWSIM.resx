@@ -3026,7 +3026,7 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
     <value>Tubulação</value>
   </data>
   <data name="Tubulaosimples" xml:space="preserve">
-    <value>Tubulação simples</value>
+    <value>Tubulação Simples</value>
   </data>
   <data name="Expansor" xml:space="preserve">
     <value>Expansor</value>
