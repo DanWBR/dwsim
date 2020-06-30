@@ -350,10 +350,10 @@ Public Class GraphicsSurface
             If TypeOf dobj Is Tables.FloatingTableGraphic Then
                 Dim deltaX, deltaY As Integer
                 If (dobj.X + dobj.Width) / Zoom > Me.Size.Width Then
-                    deltaX = -50 + dobj.Width / Zoom
+                    deltaX = -10 / Zoom - dobj.Width / Zoom
                 End If
                 If (dobj.Y + dobj.Height) / Zoom > Me.Size.Height Then
-                    deltaY = -50 + dobj.Height / Zoom
+                    deltaY = -10 / Zoom - dobj.Height / Zoom
                 End If
                 dobj.SetPosition(dobj.X + deltaX, dobj.Y + deltaY)
                 dobj.Draw(DrawingCanvas)
