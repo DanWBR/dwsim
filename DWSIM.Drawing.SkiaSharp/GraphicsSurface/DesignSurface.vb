@@ -347,7 +347,17 @@ Public Class GraphicsSurface
         End If
 
         For Each dobj As GraphicObject In Me.DrawingObjects
-            If TypeOf dobj Is Tables.FloatingTableGraphic Then dobj.Draw(DrawingCanvas)
+            If TypeOf dobj Is Tables.FloatingTableGraphic Then
+                Dim deltaX, deltaY As Integer
+                If (dobj.X + dobj.Width) / Zoom > Me.Size.Width Then
+                    deltaX = -50 + dobj.Width / Zoom
+                End If
+                If (dobj.Y + dobj.Height) / Zoom > Me.Size.Height Then
+                    deltaY = -50 + dobj.Height / Zoom
+                End If
+                dobj.SetPosition(dobj.X + deltaX, dobj.Y + deltaY)
+                dobj.Draw(DrawingCanvas)
+            End If
         Next
 
         'draw selection rectangle (click and drag to select interface)
