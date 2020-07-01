@@ -10,6 +10,14 @@ Namespace GraphicObjects
 
         Implements IGraphicObject, ICustomXMLSerialization
 
+        Public Overrides Function ToString() As String
+            If Tag <> "" Then
+                Return Tag
+            Else
+                Return MyBase.ToString()
+            End If
+        End Function
+
         Public Function GetPaint(color As SKColor) As SKPaint
 
             Dim p As New SKPaint
