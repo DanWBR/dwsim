@@ -523,6 +523,7 @@ Namespace UnitOperations
                     .Phases(0).Properties.temperature = T2
                     .Phases(0).Properties.pressure = P2
                     .Phases(0).Properties.enthalpy = H2
+                    .Phases(0).Properties.massflow = ims.Phases(0).Properties.massflow.GetValueOrDefault
                     Dim comp As BaseClasses.Compound
                     Dim i As Integer = 0
                     For Each comp In .Phases(0).Compounds.Values
@@ -530,8 +531,7 @@ Namespace UnitOperations
                         comp.MassFraction = ims.Phases(0).Compounds(comp.Name).MassFraction
                         i += 1
                     Next
-                    .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
-                    .Phases(0).Properties.massflow = ims.Phases(0).Properties.massflow.GetValueOrDefault
+                    .SpecType = StreamSpec.Pressure_and_Enthalpy
                 End With
 
             Else
