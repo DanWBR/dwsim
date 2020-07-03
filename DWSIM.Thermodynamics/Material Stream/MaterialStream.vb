@@ -6549,7 +6549,7 @@ Namespace Streams
             Dim nf = GetFlowsheet().FlowsheetOptions.NumberFormat
             Dim nff = GetFlowsheet().FlowsheetOptions.FractionNumberFormat
 
-            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Results Report for Material Stream '" & Me.GraphicObject.Tag + "'"}))
+            list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Results Report for Material Stream '" & Me.GraphicObject?.Tag + "'"}))
 
             list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.SingleColumn, New String() {"Calculated successfully on " & LastUpdated.ToString}))
 
