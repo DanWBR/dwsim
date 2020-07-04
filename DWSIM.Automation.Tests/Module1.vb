@@ -3,7 +3,7 @@
     Sub Main()
 
         'create automation manager
-        Dim interf As New DWSIM.Automation.Automation
+        Dim interf As New DWSIM.Automation.Automation2
 
         Dim sim As Interfaces.IFlowsheet
 
@@ -18,9 +18,9 @@
         'use CAPE-OPEN interfaces to manipulate objects
         Dim feed, vap_out, liq_out As CapeOpen.ICapeThermoMaterialObject
 
-        feed = sim.GetFlowsheetSimulationObject1("2")
-        vap_out = sim.GetFlowsheetSimulationObject1("8")
-        liq_out = sim.GetFlowsheetSimulationObject1("18")
+        feed = sim.GetFlowsheetSimulationObject("2")
+        vap_out = sim.GetFlowsheetSimulationObject("8")
+        liq_out = sim.GetFlowsheetSimulationObject("18")
 
         'mass flow rate values in kg/s
         Dim flows(3) As Double

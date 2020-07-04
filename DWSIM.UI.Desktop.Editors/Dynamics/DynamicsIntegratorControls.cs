@@ -71,9 +71,9 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             var tr2 = new TableRow();
 
-            btnPlay = new Button { ImagePosition = ButtonImagePosition.Overlay, Text = "", Width = 40, Height = 40, Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")).WithSize(30, 30) };
-            btnRT = new Button { ImagePosition = ButtonImagePosition.Overlay, Text = "", Width = 40, Height = 40, Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-realtime.png")).WithSize(30, 30) };
-            btnStop = new Button { ImagePosition = ButtonImagePosition.Overlay, Text = "", Width = 40, Height = 40, Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-stop.png")).WithSize(30, 30) };
+            btnPlay = new Button { ImagePosition = ButtonImagePosition.Overlay, Text = "", Width = 40, Height = 40, Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png", this.GetType().Assembly)).WithSize(30, 30) };
+            btnRT = new Button { ImagePosition = ButtonImagePosition.Overlay, Text = "", Width = 40, Height = 40, Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-realtime.png", this.GetType().Assembly)).WithSize(30, 30) };
+            btnStop = new Button { ImagePosition = ButtonImagePosition.Overlay, Text = "", Width = 40, Height = 40, Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-stop.png", this.GetType().Assembly)).WithSize(30, 30) };
 
             pbProgress = new ProgressBar { MinValue = 0, MaxValue = 100 };
 

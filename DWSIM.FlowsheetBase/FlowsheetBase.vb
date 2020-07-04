@@ -24,6 +24,7 @@ Imports System.Text
 Imports DWSIM.SharedClasses.Flowsheet
 Imports System.Dynamic
 Imports DWSIM.Interfaces.Enums
+Imports DWSIM.GlobalSettings
 
 <System.Runtime.InteropServices.ComVisible(True)> Public MustInherit Class FlowsheetBase
 
@@ -1516,7 +1517,9 @@ Imports DWSIM.Interfaces.Enums
 
         End If
 
-        If LoadSpreadsheetData IsNot Nothing Then LoadSpreadsheetData.Invoke(xdoc)
+        If Not Settings.AutomationMode Then
+            If LoadSpreadsheetData IsNot Nothing Then LoadSpreadsheetData.Invoke(xdoc)
+        End If
 
         If excs.Count > 0 Then
             ShowMessage("Some errors where found while parsing the XML file. The simulation might not work as expected. Please read the subsequent messages for more details.", IFlowsheet.MessageType.GeneralError)

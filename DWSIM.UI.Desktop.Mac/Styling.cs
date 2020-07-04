@@ -33,18 +33,22 @@ namespace DWSIM.UI.Desktop.Mac
 
         public static void FinishedLaunching()
         {
-            if (GlobalSettings.Settings.EnableCustomTouchBar)
+            try
             {
-                if (NSProcessInfo.ProcessInfo.IsOperatingSystemAtLeastVersion(new NSOperatingSystemVersion(10, 12, 2)))
+                if (GlobalSettings.Settings.EnableCustomTouchBar)
                 {
-                    try
+                    if (NSProcessInfo.ProcessInfo.IsOperatingSystemAtLeastVersion(new NSOperatingSystemVersion(10, 12, 2)))
                     {
-                        NSApplication.SharedApplication.SetAutomaticCustomizeTouchBarMenuItemEnabled(true);
+                        try
+                        {
+                            NSApplication.SharedApplication.SetAutomaticCustomizeTouchBarMenuItemEnabled(true);
+                        }
+                        catch
+                        { }
                     }
-                    catch
-                    { }
                 }
             }
+            catch { }
         }
 
         public static void BeginLaunching()

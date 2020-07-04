@@ -85,9 +85,9 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             var l1 = new PixelLayout();
 
-            pb1 = new ImageView { Height = 40, Width = 40, Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-ok.png"), 40, 40, ImageInterpolation.High) };
-            pb2 = new ImageView { Height = 40, Width = 40, Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-ok.png"), 40, 40, ImageInterpolation.High) };
-            pb3 = new ImageView { Height = 40, Width = 40, Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-ok.png"), 40, 40, ImageInterpolation.High) };
+            pb1 = new ImageView { Height = 40, Width = 40, Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-ok.png", this.GetType().Assembly), 40, 40, ImageInterpolation.High) };
+            pb2 = new ImageView { Height = 40, Width = 40, Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-ok.png", this.GetType().Assembly), 40, 40, ImageInterpolation.High) };
+            pb3 = new ImageView { Height = 40, Width = 40, Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-ok.png", this.GetType().Assembly), 40, 40, ImageInterpolation.High) };
 
             var label1 = new Label { Height = 40, Text = "All Endpoint Material Streams are connected to Control Valves", Font = new Font(SystemFont.Default, UI.Shared.Common.GetEditorFontSize()), VerticalAlignment = VerticalAlignment.Center };
             var label2 = new Label { Height = 40, Text = "All Control Valves are configured with Kv Calculation Modes", Font = new Font(SystemFont.Default, UI.Shared.Common.GetEditorFontSize()), VerticalAlignment = VerticalAlignment.Center };
@@ -114,8 +114,8 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             var rce = new TableLayout();
             var rce2 = new TableLayout();
 
-            var btnAddEventSet = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Set", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png")).WithSize(16, 16) };
-            var btnRemoveEventSet = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Set", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png")).WithSize(16, 16) };
+            var btnAddEventSet = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Set", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var btnRemoveEventSet = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Set", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png", this.GetType().Assembly)).WithSize(16, 16) };
 
             btnAddEventSet.Click += (s, e) =>
             {
@@ -182,8 +182,8 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             rce.Rows.Add(new Label { Text = "Selected Event Set", Font = new Font(SystemFont.Bold, UI.Shared.Common.GetEditorFontSize()), Height = 30, VerticalAlignment = VerticalAlignment.Center });
 
-            var btnAddEvent = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Event", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png")).WithSize(16, 16) };
-            var btnRemoveEvent = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Event", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png")).WithSize(16, 16) };
+            var btnAddEvent = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Event", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var btnRemoveEvent = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Event", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png", this.GetType().Assembly)).WithSize(16, 16) };
 
             if (Application.Instance.Platform.IsGtk)
             {
@@ -271,8 +271,8 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             var rcce = new TableLayout();
             var rcce2 = new TableLayout();
 
-            var btnAddCEM = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Set", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png")).WithSize(16, 16) };
-            var btnRemoveCEM = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Set", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png")).WithSize(16, 16) };
+            var btnAddCEM = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Set", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var btnRemoveCEM = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Set", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png", this.GetType().Assembly)).WithSize(16, 16) };
 
             if (Application.Instance.Platform.IsGtk)
             {
@@ -339,8 +339,8 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             rcce.Rows.Add(new Label { Text = "Selected Cause-and-Effect Matrix", Font = new Font(SystemFont.Bold, UI.Shared.Common.GetEditorFontSize()), Height = 30, VerticalAlignment = VerticalAlignment.Center });
 
-            var btnAddCEI = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Event", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png")).WithSize(16, 16) };
-            var btnRemoveCEI = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Event", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png")).WithSize(16, 16) };
+            var btnAddCEI = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Event", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var btnRemoveCEI = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Event", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png", this.GetType().Assembly)).WithSize(16, 16) };
             
             if (Application.Instance.Platform.IsGtk)
             {
@@ -427,8 +427,8 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             var lcci = new TableLayout();
             var rcci = new TableLayout();
 
-            var btnAddI = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Set", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png")).WithSize(16, 16) };
-            var btnRemoveI = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Set", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png")).WithSize(16, 16) };
+            var btnAddI = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Set", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var btnRemoveI = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Set", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png", this.GetType().Assembly)).WithSize(16, 16) };
             
             if (Application.Instance.Platform.IsGtk)
             {
@@ -506,8 +506,8 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             var lcv = new TableLayout();
             var rcv = new TableLayout();
 
-            var btnAddVar = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Variable", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png")).WithSize(16, 16) };
-            var btnRemoveVar = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Variable", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png")).WithSize(16, 16) };
+            var btnAddVar = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Variable", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var btnRemoveVar = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Variable", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png", this.GetType().Assembly)).WithSize(16, 16) };
 
             if (Application.Instance.Platform.IsGtk)
             {
@@ -605,8 +605,8 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             var lcs = new TableLayout();
             var rcs = new TableLayout();
 
-            var btnAddS = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Schedule", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png")).WithSize(16, 16) };
-            var btnRemoveS = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Schedule", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png")).WithSize(16, 16) };
+            var btnAddS = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Add New Schedule", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-plus_math.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var btnRemoveS = new Button() { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Remove Selected Schedule", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-delete.png", this.GetType().Assembly)).WithSize(16, 16) };
            
             if (Application.Instance.Platform.IsGtk)
             {

@@ -52,7 +52,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
-    <OutputPath>..\DWSIM\bin\x64\Debug\</OutputPath>
+    <OutputPath>..\DWSIM.UI.Desktop\bin\x64\Debug\</OutputPath>
     <DocumentationFile>DWSIM.Automation.Tests.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <DebugType>full</DebugType>
@@ -139,7 +139,7 @@
     <ProjectReference Include="..\DWSIM.Automation\DWSIM.Automation.csproj">
       <Project>{4bb36089-89f6-4bbf-a39c-1d0a3f232f07}</Project>
       <Name>DWSIM.Automation</Name>
-      <Private>False</Private>
+      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
       <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>

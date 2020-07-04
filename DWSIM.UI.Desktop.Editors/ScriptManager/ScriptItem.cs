@@ -2,6 +2,7 @@
 using System.Linq;
 using Eto.Forms;
 using Eto.Drawing;
+using DWSIM.GlobalSettings;
 
 namespace DWSIM.UI.Desktop.Editors
 {
@@ -91,12 +92,15 @@ namespace DWSIM.UI.Desktop.Editors
 
             Rows.Add(new TableRow(tb1));
 
-            txtScript = new Eto.Forms.Controls.Scintilla.Shared.ScintillaControl();
-            txtScript.SetKeywords(1, flowsheet.ScriptKeywordsF);
-            var tr3 = new TableRow((Eto.Forms.Controls.Scintilla.Shared.ScintillaControl)txtScript);
-            var tb3 = new TableLayout { Spacing = new Size(5, 5) };
-            tb3.Rows.Add(tr3);
-            Rows.Add(new TableRow(tb3));
+            if (!(Application.Instance.Platform.IsGtk && Settings.RunningPlatform() == Settings.Platform.Mac))
+            {
+                txtScript = new Eto.Forms.Controls.Scintilla.Shared.ScintillaControl();
+                txtScript.SetKeywords(1, flowsheet.ScriptKeywordsF);
+                var tr3 = new TableRow((Eto.Forms.Controls.Scintilla.Shared.ScintillaControl)txtScript);
+                var tb3 = new TableLayout { Spacing = new Size(5, 5) };
+                tb3.Rows.Add(tr3);
+                Rows.Add(new TableRow(tb3));
+            }
 
         }
 

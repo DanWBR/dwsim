@@ -58,6 +58,10 @@
       <HintPath>..\DWSIM\References\CapeOpen.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Eto">
+      <HintPath>..\DWSIM\References\Eto.Forms\Release\net45\Eto.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Forms" />
@@ -75,6 +79,11 @@
     <ProjectReference Include="..\DWSIM.Controls.PropertyGridEx\DWSIM.Controls.PropertyGridEx.vbproj">
       <Project>{b0bb47f2-21c4-41fc-b6e6-40757adfc4a1}</Project>
       <Name>DWSIM.Controls.PropertyGridEx</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.FlowsheetBase\DWSIM.FlowsheetBase.vbproj">
+      <Project>{aea79e29-5dff-4aa8-b431-087a67a1467b}</Project>
+      <Name>DWSIM.FlowsheetBase</Name>
       <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Serializers.XML\DWSIM.XMLSerializer.vbproj">
@@ -112,6 +121,21 @@
       <Name>DWSIM.Thermodynamics</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.UI.Desktop.Forms\DWSIM.UI.Desktop.Forms.csproj">
+      <Project>{766c669b-91bd-4c62-a2af-d3fb9c939715}</Project>
+      <Name>DWSIM.UI.Desktop.Forms</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.UI.Desktop.Shared\DWSIM.UI.Desktop.Shared.csproj">
+      <Project>{2ffd2514-e4f9-4c19-b38e-b77560585d61}</Project>
+      <Name>DWSIM.UI.Desktop.Shared</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.UI.Desktop\DWSIM.UI.Desktop.csproj">
+      <Project>{7e6fb1e7-1450-42fc-ada4-a724fe43047b}</Project>
+      <Name>DWSIM.UI.Desktop</Name>
+      <Private>False</Private>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.UnitOperations\DWSIM.UnitOperations.vbproj">
       <Project>{9d7733e4-9b6f-437f-aaec-ca3106aca688}</Project>
       <Name>DWSIM.UnitOperations</Name>
@@ -131,7 +155,8 @@
     <PostBuildEvent>if "$(ConfigurationName)"=="Release" (
 
 xcopy "$(SolutionDir)DWSIM.Automation\bin\x64\Release\*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F /D 2&gt;nul 1&gt;nul 4&gt;nul
-xcopy "$(SolutionDir)DWSIM.Automation\bin\x86\Release\*" "$(SolutionDir)DistPackages\Windows_32\" /E /Y /F /D 2&gt;nul 1&gt;nul 4&gt;nul
+xcopy "$(SolutionDir)DWSIM.Automation\bin\x64\Release\*" "$(SolutionDir)DistPackages\Windows_32\" /E /Y /F /D 2&gt;nul 1&gt;nul 4&gt;nul
+xcopy "$(SolutionDir)DWSIM.Automation\bin\x86\Release\*" "$(SolutionDir)DistPackages\macOS\" /E /Y /F /D 2&gt;nul 1&gt;nul 4&gt;nul
 xcopy "$(SolutionDir)DWSIM.Automation\bin\x64\Release\*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F /D 2&gt;nul 1&gt;nul 4&gt;nul
 
 )</PostBuildEvent>

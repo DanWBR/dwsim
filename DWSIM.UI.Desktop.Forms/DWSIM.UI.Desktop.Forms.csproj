@@ -84,7 +84,12 @@
     <Reference Include="DWSIM.CrossPlatform.UI.Controls.ReoGrid">
       <HintPath>..\DWSIM\References\ReoGrid.Eto\DWSIM.CrossPlatform.UI.Controls.ReoGrid.dll</HintPath>
     </Reference>
-    <Reference Include="Eto, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="DWSIM.FlowsheetBase, Version=6.0.7489.32293, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DistPackages\Windows\DWSIM.FlowsheetBase.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Eto, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DWSIM\References\Eto.Forms\Release\net45\Eto.dll</HintPath>
     </Reference>
@@ -207,25 +212,25 @@
       <Project>{1e12c010-2661-4896-9c00-90f8b41ed10a}</Project>
       <Name>DWSIM.ExtensionMethods</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DWSIM.FlowsheetBase\DWSIM.FlowsheetBase.vbproj">
-      <Project>{aea79e29-5dff-4aa8-b431-087a67a1467b}</Project>
-      <Name>DWSIM.FlowsheetBase</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DWSIM.GlobalSettings\DWSIM.GlobalSettings.vbproj">
       <Project>{725c8134-9fe3-43aa-9b33-d9046657fb2a}</Project>
       <Name>DWSIM.GlobalSettings</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Inspector\DWSIM.Inspector.vbproj">
       <Project>{e4e37bfa-063f-4dba-a1bf-294d392c2ca4}</Project>
       <Name>DWSIM.Inspector</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
       <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
       <Name>DWSIM.Interfaces</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Math\DWSIM.MathOps.vbproj">
       <Project>{fdfb92de-d189-49dc-91cc-60ee78d1356c}</Project>
       <Name>DWSIM.MathOps</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.SharedClasses\DWSIM.SharedClasses.vbproj">
       <Project>{30e167d2-5b5a-453a-a92c-18ff3bbb6691}</Project>

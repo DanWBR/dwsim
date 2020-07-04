@@ -14,6 +14,12 @@ namespace DWSIM.UI.Desktop
         [STAThread]
         public static void Main(string[] args)
         {
+            MainApp(args);
+        }
+
+        [STAThread]
+        public static Application MainApp(string[] args)
+        {
 
             //initialize OpenTK
 
@@ -99,7 +105,14 @@ namespace DWSIM.UI.Desktop
                             platform.Add<Eto.Forms.Controls.Scintilla.Shared.ScintillaControl.IScintillaControl>(() => new Eto.Forms.Controls.Scintilla.GTK.ScintillaControlHandler());
                             break;
                     }
-                    new Application(platform).Run(new MainForm());
+                    if (!GlobalSettings.Settings.AutomationMode)
+                    {
+                        new Application(platform).Run(new MainForm());
+                    }
+                    else
+                    {
+                        return new Application(platform);
+                    }
                 }
                 else if (Settings.RunningPlatform() == Settings.Platform.Linux)
                 {
@@ -122,54 +135,83 @@ namespace DWSIM.UI.Desktop
                             platform.Add<Eto.Forms.Controls.Scintilla.Shared.ScintillaControl.IScintillaControl>(() => new Eto.Forms.Controls.Scintilla.WinForms.ScintillaControlHandler());
                             break;
                     }
-                    new Application(platform).Run(new MainForm());
+                    if (!GlobalSettings.Settings.AutomationMode)
+                    {
+                        new Application(platform).Run(new MainForm());
+                    }
+                    else
+                    {
+                        return new Application(platform);
+                    }
                 }
                 else if (Settings.RunningPlatform() == Settings.Platform.Mac)
                 {
-                    switch (GlobalSettings.Settings.MacOSRenderer)
+                    if (GlobalSettings.Settings.AutomationMode)
                     {
-                        case Settings.MacOSPlatformRenderer.MonoMac:
-                            DWSIM.UI.Desktop.Mac.StyleSetter.SetStyles();
-                            platform = new Eto.Mac.Platform();
-                            DWSIM.UI.Desktop.Mac.StyleSetter.BeginLaunching();
-                            platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new Mac.FlowsheetSurfaceControlHandler());
-                            platform.Add<FlowsheetSurfaceControl_OpenGL.IFlowsheetSurface_OpenGL>(() => new Mac.FlowsheetSurfaceControlHandler_OpenGL());
-                            platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Mac.PlotHandler());
-                            platform.Add<Eto.Forms.Controls.Scintilla.Shared.ScintillaControl.IScintillaControl>(() => new Eto.Forms.Controls.Scintilla.Mac.ScintillaControlHandler());
-                            break;
-                        case Settings.MacOSPlatformRenderer.Gtk2:
-                            DWSIM.UI.Desktop.GTK.StyleSetter.SetStyles();
-                            platform = new Eto.GtkSharp.Platform();
-                            platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new GTK.FlowsheetSurfaceControlHandler());
-                            platform.Add<FlowsheetSurfaceControl_OpenGL.IFlowsheetSurface_OpenGL>(() => new GTK.FlowsheetSurfaceControlHandler_OpenGL());
-                            platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Eto.OxyPlot.Gtk.PlotHandler());
-                            platform.Add<Eto.Forms.Controls.Scintilla.Shared.ScintillaControl.IScintillaControl>(() => new Eto.Forms.Controls.Scintilla.GTK.ScintillaControlHandler());
-                            break;
-                        case Settings.MacOSPlatformRenderer.WinForms:
-                            DWSIM.UI.Desktop.WinForms.StyleSetter.SetStyles();
-                            platform = new Eto.WinForms.Platform();
-                            platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new WinForms.FlowsheetSurfaceControlHandler());
-                            platform.Add<FlowsheetSurfaceControl_OpenGL.IFlowsheetSurface_OpenGL>(() => new WinForms.FlowsheetSurfaceControlHandler_OpenGL());
-                            platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Eto.OxyPlot.WinForms.PlotHandler());
-                            platform.Add<Eto.Forms.Controls.Scintilla.Shared.ScintillaControl.IScintillaControl>(() => new Eto.Forms.Controls.Scintilla.WinForms.ScintillaControlHandler());
-                            break;
+                        DWSIM.UI.Desktop.GTK.StyleSetter.SetStyles();
+                        platform = new Eto.GtkSharp.Platform();
+                        platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new GTK.FlowsheetSurfaceControlHandler());
+                        platform.Add<FlowsheetSurfaceControl_OpenGL.IFlowsheetSurface_OpenGL>(() => new GTK.FlowsheetSurfaceControlHandler_OpenGL());
+                        platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Eto.OxyPlot.Gtk.PlotHandler());
+                        platform.Add<Eto.Forms.Controls.Scintilla.Shared.ScintillaControl.IScintillaControl>(() => new Eto.Forms.Controls.Scintilla.GTK.ScintillaControlHandler());
+                    }
+                    else
+                    {
+                        switch (GlobalSettings.Settings.MacOSRenderer)
+                        {
+                            case Settings.MacOSPlatformRenderer.MonoMac:
+                                DWSIM.UI.Desktop.Mac.StyleSetter.SetStyles();
+                                platform = new Eto.Mac.Platform();
+                                DWSIM.UI.Desktop.Mac.StyleSetter.BeginLaunching();
+                                platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new Mac.FlowsheetSurfaceControlHandler());
+                                platform.Add<FlowsheetSurfaceControl_OpenGL.IFlowsheetSurface_OpenGL>(() => new Mac.FlowsheetSurfaceControlHandler_OpenGL());
+                                platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Mac.PlotHandler());
+                                platform.Add<Eto.Forms.Controls.Scintilla.Shared.ScintillaControl.IScintillaControl>(() => new Eto.Forms.Controls.Scintilla.Mac.ScintillaControlHandler());
+                                break;
+                            case Settings.MacOSPlatformRenderer.Gtk2:
+                                DWSIM.UI.Desktop.GTK.StyleSetter.SetStyles();
+                                platform = new Eto.GtkSharp.Platform();
+                                platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new GTK.FlowsheetSurfaceControlHandler());
+                                platform.Add<FlowsheetSurfaceControl_OpenGL.IFlowsheetSurface_OpenGL>(() => new GTK.FlowsheetSurfaceControlHandler_OpenGL());
+                                platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Eto.OxyPlot.Gtk.PlotHandler());
+                                platform.Add<Eto.Forms.Controls.Scintilla.Shared.ScintillaControl.IScintillaControl>(() => new Eto.Forms.Controls.Scintilla.GTK.ScintillaControlHandler());
+                                break;
+                            case Settings.MacOSPlatformRenderer.WinForms:
+                                DWSIM.UI.Desktop.WinForms.StyleSetter.SetStyles();
+                                platform = new Eto.WinForms.Platform();
+                                platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new WinForms.FlowsheetSurfaceControlHandler());
+                                platform.Add<FlowsheetSurfaceControl_OpenGL.IFlowsheetSurface_OpenGL>(() => new WinForms.FlowsheetSurfaceControlHandler_OpenGL());
+                                platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Eto.OxyPlot.WinForms.PlotHandler());
+                                platform.Add<Eto.Forms.Controls.Scintilla.Shared.ScintillaControl.IScintillaControl>(() => new Eto.Forms.Controls.Scintilla.WinForms.ScintillaControlHandler());
+                                break;
+                        }
                     }
                     var app = new Application(platform);
                     app.Initialized += (sender, e) =>
                     {
-                        if (GlobalSettings.Settings.RunningPlatform() == Settings.Platform.Mac)
+                        if (!GlobalSettings.Settings.AutomationMode)
                         {
-                            if (GlobalSettings.Settings.MacOSRenderer == Settings.MacOSPlatformRenderer.MonoMac)
+                            if (GlobalSettings.Settings.RunningPlatform() == Settings.Platform.Mac)
                             {
-                                DWSIM.UI.Desktop.Mac.StyleSetter.FinishedLaunching();
+                                if (GlobalSettings.Settings.MacOSRenderer == Settings.MacOSPlatformRenderer.MonoMac)
+                                {
+                                    DWSIM.UI.Desktop.Mac.StyleSetter.FinishedLaunching();
+                                }
+                            }
+                            if (loadsetex != null)
+                            {
+                                MessageBox.Show("Error loading settings from file: " + loadsetex.Message + "\nPlease fix or remove the 'dwsim_newui.ini' from the 'Documents/DWSIM Application Data' folder and try again.", "Error", MessageBoxType.Error);
                             }
                         }
-                        if (loadsetex != null)
-                        {
-                            MessageBox.Show("Error loading settings from file: " + loadsetex.Message + "\nPlease fix or remove the 'dwsim_newui.ini' from the 'Documents/DWSIM Application Data' folder and try again.", "Error", MessageBoxType.Error);
-                        }
                     };
-                    app.Run(new MainForm());
+                    if (!GlobalSettings.Settings.AutomationMode)
+                    {
+                        app.Run(new MainForm());
+                    }
+                    else
+                    {
+                        return app;
+                    }
                 }
             }
             catch (Exception ex)
@@ -191,6 +233,7 @@ namespace DWSIM.UI.Desktop
                 if (!Directory.Exists(configfiledir)) Directory.CreateDirectory(configfiledir);
                 File.WriteAllText(System.IO.Path.Combine(configfiledir, "lasterror.txt"), "Output from last app crash:\n\n" + ex.ToString());
             }
+            return null;
         }
 
     }

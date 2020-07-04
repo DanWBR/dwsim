@@ -1,11 +1,8 @@
-Version 6.0 Update 4
+Version 6.0 Update 5
 
-- [FIX] Fixed default units for Cp, Cv and entropy (Excel Add-In)
-- [FIX] Fixed Material Stream editor not showing the Dynamic Spec tab (CPUI)
-- [FIX] Fixed/Updated some dynamic models
-
-Version 6.0 Update 3
-
-- [NEW] Dynamic Models for CSTR and PFR
-- [NEW] Added Search Box to Cross-Platform UI PFD
-- [FIX] Bug fixes and enhancements
+- [NEW] Added new Automation interface (Automation2), works on Linux and macOS
+- [FIX] Fixed Energy Stream editor (Classic UI)
+- [FIX] Fixed a bug with Black Oil Property Package
+- [FIX] Fixed Compound Creator's Liquid Cp regression (Classic UI)
+- [FIX] Fixed PFD definition on macOS when using CPU Renderer
+- [FIX] Other fixes and enhancements
