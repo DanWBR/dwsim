@@ -395,6 +395,15 @@ namespace DWSIM.UI.Desktop.Editors
 
             ScriptEditor.cbLinkedEvent.SelectedIndexChanged += cbLinkedObject_SelectedIndexChanged;
 
+            ScriptEditor.cbPythonInt.SelectedIndexChanged += (s, e) => {
+                if (!Loaded) return;
+                if (lbScripts.SelectedIndex < 0) return;
+                if (!Flowsheet.Scripts.ContainsKey(lbScripts.SelectedKey)) return;
+                var scr = Flowsheet.Scripts[lbScripts.SelectedKey];
+                scr.PythonInterpreter = (Scripts.Interpreter)ScriptEditor.cbPythonInt.SelectedIndex;
+            };
+
+
             t1.TextChanged += (sender, e) =>
             {
                 if (lbScripts.SelectedIndex < 0) return;

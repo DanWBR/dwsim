@@ -2499,74 +2499,133 @@ Label_00CC:
 
     Private Sub RunScript_PythonNET(scripttext As String)
 
-        If Not GlobalSettings.Settings.PythonInitialized Then
+        If GlobalSettings.Settings.RunningPlatform = Settings.Platform.Mac Then
 
-            Dim t As Task = Task.Factory.StartNew(Sub()
-                                                      RunCodeOnUIThread(Sub()
-                                                                            If Not GlobalSettings.Settings.IsRunningOnMono() Then
-                                                                                PythonEngine.PythonHome = GlobalSettings.Settings.PythonPath
-                                                                            End If
-                                                                            PythonEngine.Initialize()
-                                                                            GlobalSettings.Settings.PythonInitialized = True
-                                                                        End Sub)
-                                                  End Sub)
-            t.Wait()
+            Dim t1 = Task.Factory.StartNew(Sub()
 
-            Dim t2 As Task = Task.Factory.StartNew(Sub()
+                                               If Not GlobalSettings.Settings.PythonInitialized Then
+
+                                                   PythonEngine.Initialize()
+                                                   GlobalSettings.Settings.PythonInitialized = True
+
+                                                   PythonEngine.BeginAllowThreads()
+
+                                               End If
+
+                                               Using Py.GIL
+
+                                                   Try
+
+                                                       Dim sys As Object = PythonEngine.ImportModule("sys")
+
+                                                       Dim codeToRedirectOutput As String = "import sys" & vbCrLf + "from io import BytesIO as StringIO" & vbCrLf + "sys.stdout = mystdout = StringIO()" & vbCrLf + "sys.stdout.flush()" & vbCrLf + "sys.stderr = mystderr = StringIO()" & vbCrLf + "sys.stderr.flush()"
+                                                       PythonEngine.RunSimpleString(codeToRedirectOutput)
+
+                                                       Dim locals As New PyDict()
+
+                                                       locals.SetItem("Plugins", UtilityPlugins.ToPython)
+                                                       locals.SetItem("Flowsheet", Me.ToPython)
+                                                       Try
+                                                           locals.SetItem("Spreadsheet", (GetSpreadsheetObject.Invoke()).ToPython)
+                                                       Catch ex As Exception
+                                                       End Try
+                                                       Dim Solver As New FlowsheetSolver.FlowsheetSolver
+                                                       locals.SetItem("Solver", Solver.ToPython)
+
+                                                       If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                                                           locals.SetItem("Application", GetApplicationObject.ToPython)
+                                                       End If
+
+                                                       PythonEngine.Exec(scripttext, Nothing, locals.Handle)
+
+                                                       ShowMessage(sys.stdout.getvalue().ToString, IFlowsheet.MessageType.Information)
+
+                                                   Catch ex As Exception
+
+                                                       ShowMessage("Error running script: " & ex.Message.ToString, IFlowsheet.MessageType.GeneralError)
+
+                                                   Finally
+
+                                                   End Try
+
+                                               End Using
+
+                                           End Sub)
+
+            t1.Wait()
+
+        Else
+
+            If Not GlobalSettings.Settings.PythonInitialized Then
+
+                Dim t As Task = Task.Factory.StartNew(Sub()
+                                                          RunCodeOnUIThread(Sub()
+                                                                                If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                                                                                    PythonEngine.PythonHome = GlobalSettings.Settings.PythonPath
+                                                                                End If
+                                                                                PythonEngine.Initialize()
+                                                                                GlobalSettings.Settings.PythonInitialized = True
+                                                                            End Sub)
+                                                      End Sub)
+                t.Wait()
+
+                Dim t2 As Task = Task.Factory.StartNew(Sub()
+                                                           RunCodeOnUIThread(Sub()
+                                                                                 PythonEngine.BeginAllowThreads()
+                                                                             End Sub)
+                                                       End Sub)
+                t2.Wait()
+
+            End If
+
+            Dim t3 As Task = Task.Factory.StartNew(Sub()
                                                        RunCodeOnUIThread(Sub()
-                                                                             PythonEngine.BeginAllowThreads()
-                                                                         End Sub)
-                                                   End Sub)
-            t2.Wait()
+                                                                             Using Py.GIL
 
-        End If
+                                                                                 Try
 
-        Dim t3 As Task = Task.Factory.StartNew(Sub()
-                                                   RunCodeOnUIThread(Sub()
-                                                                         Using Py.GIL
+                                                                                     Dim sys As Object = PythonEngine.ImportModule("sys")
 
-                                                                             Try
-
-                                                                                 Dim sys As Object = PythonEngine.ImportModule("sys")
-
-                                                                                 If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                                                                                     'If Not GlobalSettings.Settings.IsRunningOnMono() Then
                                                                                      Dim codeToRedirectOutput As String = "import sys" & vbCrLf + "from io import BytesIO as StringIO" & vbCrLf + "sys.stdout = mystdout = StringIO()" & vbCrLf + "sys.stdout.flush()" & vbCrLf + "sys.stderr = mystderr = StringIO()" & vbCrLf + "sys.stderr.flush()"
                                                                                      PythonEngine.RunSimpleString(codeToRedirectOutput)
-                                                                                 End If
+                                                                                     'End If
 
-                                                                                 Dim locals As New PyDict()
+                                                                                     Dim locals As New PyDict()
 
-                                                                                 locals.SetItem("Plugins", UtilityPlugins.ToPython)
-                                                                                 locals.SetItem("Flowsheet", Me.ToPython)
-                                                                                 Try
-                                                                                     locals.SetItem("Spreadsheet", (GetSpreadsheetObject.Invoke()).ToPython)
-                                                                                 Catch ex As Exception
-                                                                                 End Try
-                                                                                 Dim Solver As New FlowsheetSolver.FlowsheetSolver
-                                                                                 locals.SetItem("Solver", Solver.ToPython)
+                                                                                     locals.SetItem("Plugins", UtilityPlugins.ToPython)
+                                                                                     locals.SetItem("Flowsheet", Me.ToPython)
+                                                                                     Try
+                                                                                         locals.SetItem("Spreadsheet", (GetSpreadsheetObject.Invoke()).ToPython)
+                                                                                     Catch ex As Exception
+                                                                                     End Try
+                                                                                     Dim Solver As New FlowsheetSolver.FlowsheetSolver
+                                                                                     locals.SetItem("Solver", Solver.ToPython)
 
-                                                                                 If Not GlobalSettings.Settings.IsRunningOnMono() Then
-                                                                                     locals.SetItem("Application", GetApplicationObject.ToPython)
-                                                                                 End If
+                                                                                     If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                                                                                         locals.SetItem("Application", GetApplicationObject.ToPython)
+                                                                                     End If
 
-                                                                                 PythonEngine.Exec(scripttext, Nothing, locals.Handle)
+                                                                                     PythonEngine.Exec(scripttext, Nothing, locals.Handle)
 
-                                                                                 If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                                                                                     'If Not GlobalSettings.Settings.IsRunningOnMono() Then
                                                                                      ShowMessage(sys.stdout.getvalue().ToString, IFlowsheet.MessageType.Information)
-                                                                                 End If
+                                                                                     'End If
 
-                                                                             Catch ex As Exception
+                                                                                 Catch ex As Exception
 
-                                                                                 ShowMessage("Error running script: " & ex.Message.ToString, IFlowsheet.MessageType.GeneralError)
+                                                                                     ShowMessage("Error running script: " & ex.Message.ToString, IFlowsheet.MessageType.GeneralError)
 
-                                                                             Finally
+                                                                                 Finally
 
-                                                                             End Try
+                                                                                 End Try
 
-                                                                         End Using
-                                                                     End Sub)
-                                               End Sub)
-        t3.Wait()
+                                                                             End Using
+                                                                         End Sub)
+                                                   End Sub)
+            t3.Wait()
+
+        End If
 
     End Sub
 

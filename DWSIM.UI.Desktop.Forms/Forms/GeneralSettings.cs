@@ -357,7 +357,7 @@ namespace DWSIM.UI.Forms.Forms
                 (sender, e) => GlobalSettings.Settings.OctavePath = sender.Text,
                 (sender, e) =>
                 {
-                    var searchdialog = new SelectFolderDialog() { Title = "Search", Directory = GlobalSettings.Settings.OctavePath };
+                    var searchdialog = new SelectFolderDialog() { Title = "Search" };
                     if (searchdialog.ShowDialog(tab5) == DialogResult.Ok)
                     {
                         tbox.Text = searchdialog.Directory;
@@ -375,7 +375,7 @@ namespace DWSIM.UI.Forms.Forms
                 (sender, e) => GlobalSettings.Settings.PythonPath = sender.Text,
                 (sender, e) =>
                 {
-                    var searchdialog = new SelectFolderDialog() { Title = "Search", Directory = GlobalSettings.Settings.PythonPath };
+                    var searchdialog = new SelectFolderDialog() { Title = "Search" };
                     if (searchdialog.ShowDialog(tab5) == DialogResult.Ok)
                     {
                         tbox2.Text = searchdialog.Directory;
@@ -386,7 +386,19 @@ namespace DWSIM.UI.Forms.Forms
                 if (sender.Text.IsValidDouble()) GlobalSettings.Settings.PythonTimeoutInMinutes = sender.Text.ToDouble();
             });
 
-            return DWSIM.UI.Shared.Common.GetDefaultTabbedForm("Title".Localize(prefix), 700, 550, new[] { tab1, tab2, tab2a, tab3, tab4, tab5 });
+            var form =  DWSIM.UI.Shared.Common.GetDefaultTabbedForm("Title".Localize(prefix), 700, 550, new[] { tab1, tab2, tab2a, tab3, tab4, tab5 });
+
+            form.Closed += (s, e) => {
+                try
+                {
+                    DWSIM.GlobalSettings.Settings.SaveSettings("dwsim_newui.ini");
+                }
+                catch
+                {
+                }
+            };
+
+            return form;
 
         }
 
