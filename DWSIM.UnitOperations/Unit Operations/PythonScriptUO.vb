@@ -296,7 +296,7 @@ Namespace UnitOperations
 
             Else
 
-                If GlobalSettings.Settings.RunningPlatform = Settings.Platform.Mac Then
+                If GlobalSettings.Settings.RunningPlatform <> Settings.Platform.Windows Then
 
                     Dim t1 = Task.Factory.StartNew(Sub()
 

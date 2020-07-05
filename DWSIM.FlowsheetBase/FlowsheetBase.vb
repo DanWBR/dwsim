@@ -2499,7 +2499,7 @@ Label_00CC:
 
     Private Sub RunScript_PythonNET(scripttext As String)
 
-        If GlobalSettings.Settings.RunningPlatform = Settings.Platform.Mac Then
+        If GlobalSettings.Settings.RunningPlatform <> Settings.Platform.Windows Then
 
             Dim t1 = Task.Factory.StartNew(Sub()
 
