@@ -1650,16 +1650,20 @@ Imports DWSIM.GlobalSettings
 
         Dim flsconfig As New System.Text.StringBuilder()
 
-        With flsconfig
-            .Append(FlowsheetSurface.Zoom.ToString(ci) & ";")
-            .Append("0;")
-            .Append("0")
-        End With
+        If Not GlobalSettings.Settings.AutomationMode Then
 
-        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("FlowsheetView"))
-        xel = xdoc.Element("DWSIM_Simulation_Data").Element("FlowsheetView")
+            With flsconfig
+                .Append(FlowsheetSurface.Zoom.ToString(ci) & ";")
+                .Append("0;")
+                .Append("0")
+            End With
 
-        xel.Add(flsconfig.ToString)
+            xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("FlowsheetView"))
+            xel = xdoc.Element("DWSIM_Simulation_Data").Element("FlowsheetView")
+
+            xel.Add(flsconfig.ToString)
+
+        End If
 
         xel = xdoc.Element("DWSIM_Simulation_Data")
 
@@ -1691,7 +1695,10 @@ Imports DWSIM.GlobalSettings
             xel.Add(New XElement("ChartItem", ch.SaveData().ToArray()))
         Next
 
-        If SaveSpreadsheetData IsNot Nothing Then SaveSpreadsheetData.Invoke(xdoc)
+        If Not GlobalSettings.Settings.AutomationMode Then
+            If SaveSpreadsheetData IsNot Nothing Then SaveSpreadsheetData.Invoke(xdoc)
+        End If
+
 
         Return xdoc
 

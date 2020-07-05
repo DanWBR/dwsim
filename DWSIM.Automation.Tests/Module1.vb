@@ -51,6 +51,8 @@
             Console.WriteLine("Simulation run #" & (i + 1) & " results:" & vbCrLf & "Feed: " & flows(i) & ", Vapor: " & vflow & ", Liquid: " & lflow & " kg/s" & vbCrLf & "Mass balance error: " & (flows(i) - vflow - lflow) & " kg/s")
         Next
 
+        interf.SaveFlowsheet2(sim, "/Users/Daniel/Desktop/savefile.dwxmz")
+
         Console.WriteLine("Finished OK! Press any key to close.")
         Console.ReadKey()
 

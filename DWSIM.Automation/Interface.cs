@@ -51,6 +51,7 @@ namespace DWSIM.Automation
 
         public void SaveFlowsheet(IFlowsheet flowsheet, string filepath, bool compressed)
         {
+            Console.WriteLine("Saving the Flowsheet, please wait...");
             if (compressed)
             {
                 fm.SaveXMLZIP(filepath, (FormFlowsheet)flowsheet);
@@ -68,6 +69,7 @@ namespace DWSIM.Automation
             GlobalSettings.Settings.SolverTimeoutSeconds = 120;
             GlobalSettings.Settings.EnableGPUProcessing = false;
             GlobalSettings.Settings.EnableParallelProcessing = true;
+            Console.WriteLine("Solving Flowsheet, please wait...");
             if ((sender != null))
             {
                 FlowsheetSolver.FlowsheetSolver.CalculateObject(flowsheet, sender.Name);
@@ -111,6 +113,7 @@ namespace DWSIM.Automation
 
         public void SaveFlowsheet(IFlowsheet flowsheet, string filepath, bool compressed)
         {
+            Console.WriteLine("Saving the Flowsheet, please wait...");
             fm.FlowsheetObject = (Flowsheet)flowsheet;
             fm.SaveSimulation(filepath);
         }
@@ -120,6 +123,7 @@ namespace DWSIM.Automation
             GlobalSettings.Settings.SolverBreakOnException = true;
             GlobalSettings.Settings.EnableGPUProcessing = false;
             GlobalSettings.Settings.EnableParallelProcessing = true;
+            Console.WriteLine("Solving Flowsheet, please wait...");
             fm.FlowsheetObject.SolveFlowsheet2();
         }
 

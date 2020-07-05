@@ -1527,7 +1527,7 @@ namespace DWSIM.UI.Forms
 
             if (System.IO.Path.GetExtension(path).ToLower() == ".dwxmz")
             {
-                Application.Instance.Invoke(() => ScriptListControl.UpdateScripts());
+                if (!s.AutomationMode) Application.Instance.Invoke(() => ScriptListControl.UpdateScripts());
 
                 path = Path.ChangeExtension(path, ".dwxmz");
 
@@ -1583,7 +1583,7 @@ namespace DWSIM.UI.Forms
                 }
             }
 
-            if (!GlobalSettings.Settings.AutomationMode)
+            if (!s.AutomationMode)
             {
                 if (!backup)
                 {
