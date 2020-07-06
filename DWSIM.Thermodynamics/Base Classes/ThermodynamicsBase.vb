@@ -1396,7 +1396,11 @@ Namespace BaseClasses
 
         Public Function Clone() As Object Implements System.ICloneable.Clone
 
-            Return ObjectCopy(Me)
+            Dim comp = ObjectCopy(Me)
+
+            comp.ExtraProperties = New ExpandoObject()
+
+            Return comp
 
         End Function
 
