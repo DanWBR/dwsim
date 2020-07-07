@@ -139,11 +139,11 @@ Public Class ScriptEditorControl
 
                         If node.HasElements Then
 
-                            url = "http://dwsim.inforside.com.br/api_help57/" & node.Elements.First.Attribute("Url").Value
+                            url = "http://dwsim.inforside.com.br/api_help60/" & node.Elements.First.Attribute("Url").Value
 
                         Else
 
-                            url = "http://dwsim.inforside.com.br/api_help57/" & node.Attribute("Url").Value
+                            url = "http://dwsim.inforside.com.br/api_help60/" & node.Attribute("Url").Value
 
                         End If
 
