@@ -250,7 +250,7 @@ namespace DWSIM.UI.Desktop.Editors
                 slist = new List<string>();
                 for (var j = 0; j < rdata.GetLength(1); j++)
                 {
-                    slist.Add(rdata[i, j].ToString());
+                    slist.Add(rdata[i, j] != null ? rdata[i, j].ToString() : "");
                 }
                 list.Add(slist.ToArray());
             }

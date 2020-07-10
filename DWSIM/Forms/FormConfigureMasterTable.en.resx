@@ -251,6 +251,9 @@
   <data name="Button6.Text" xml:space="preserve">
     <value>Process Flowsheet</value>
   </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>96, 96</value>
+  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>617, 425</value>
   </data>

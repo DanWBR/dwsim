@@ -188,7 +188,7 @@ Partial Class FormConfigureMasterTable
         'FormConfigureMasterTable
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.nupLines)
         Me.Controls.Add(Me.Label5)

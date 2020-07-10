@@ -250,4 +250,11 @@ Public Class FormConfigureMasterTable
 
     End Sub
 
+    Private Sub FormConfigureMasterTable_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+
+        ColumnHeader1.Width = lvObjects.Width - 15
+        ColumnHeader2.Width = lvProps.Width - 15
+
+    End Sub
+
 End Class

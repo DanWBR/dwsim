@@ -87,4 +87,12 @@ Public Class FormConfigurePropertyTable
             If props.Contains(lvi.Tag) Then lvi.Checked = True
         Next
     End Sub
+
+    Private Sub FormConfigurePropertyTable_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+
+        ColumnHeader1.Width = lvObjects.Width - 15
+        ColumnHeader2.Width = lvProps.Width - 15
+
+    End Sub
+
 End Class
