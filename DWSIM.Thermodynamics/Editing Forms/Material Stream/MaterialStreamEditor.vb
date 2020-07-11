@@ -1588,7 +1588,7 @@ Public Class MaterialStreamEditor
             If Loaded Then MatStream.GraphicObject.Tag = lblTag.Text
             If Loaded Then MatStream.FlowSheet.UpdateOpenEditForms()
             Me.Text = MatStream.GraphicObject.Tag & " (" & MatStream.GetDisplayName() & ")"
-            DirectCast(MatStream.FlowSheet, Interfaces.IFlowsheetGUI).UpdateInterface()
+            MatStream.FlowSheet.UpdateInterface()
 
         End If
 

@@ -2836,13 +2836,13 @@ Public Class FormFlowsheet
 
     Public Sub UpdateOpenEditForms() Implements IFlowsheet.UpdateOpenEditForms
 
-        Me.UIThreadInvoke(Sub()
-                              For Each obj In SimulationObjects.Values
-                                  obj.UpdateEditForm()
-                                  EditorTooltips.Update(obj, Me)
-                                  obj.AttachedUtilities.ForEach(Sub(x) x.Populate())
-                              Next
-                          End Sub)
+        Me.UIThread(Sub()
+                        For Each obj In SimulationObjects.Values
+                            obj.UpdateEditForm()
+                            EditorTooltips.Update(obj, Me)
+                            obj.AttachedUtilities.ForEach(Sub(x) x.Populate())
+                        Next
+                    End Sub)
 
     End Sub
 
@@ -2872,9 +2872,8 @@ Public Class FormFlowsheet
 
     Public Sub UpdateInterface() Implements IFlowsheetGUI.UpdateInterface, IFlowsheet.UpdateInterface
 
-        Me.UIThread(Sub()
-                        Me.FormSurface.Refresh()
-                    End Sub)
+        Me.UIThread(Sub() Me.FormSurface.Refresh())
+
     End Sub
 
     Public ReadOnly Property UtilityPlugins As Dictionary(Of String, IUtilityPlugin) Implements IFlowsheet.UtilityPlugins

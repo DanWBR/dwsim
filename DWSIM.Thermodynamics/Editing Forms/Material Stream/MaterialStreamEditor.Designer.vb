@@ -302,7 +302,7 @@ Partial Class MaterialStreamEditor
         'btnUtils
         '
         resources.ApplyResources(Me.btnUtils, "btnUtils")
-        Me.btnUtils.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.bullet_sparkle
+        Me.btnUtils.BackgroundImage = Global.DWSIM.Thermodynamics.My.Resources.Resources.bullet_sparkle
         Me.btnUtils.Name = "btnUtils"
         Me.ToolTipValues.SetToolTip(Me.btnUtils, resources.GetString("btnUtils.ToolTip"))
         Me.ToolTipChangeTag.SetToolTip(Me.btnUtils, resources.GetString("btnUtils.ToolTip1"))
