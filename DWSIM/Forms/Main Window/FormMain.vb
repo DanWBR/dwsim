@@ -176,6 +176,13 @@ Public Class FormMain
                 My.Settings.Save()
             End If
 
+            Try
+                If Eto.Forms.Application.Instance.Platform.IsWpf Then
+                    System.Windows.Threading.Dispatcher.CurrentDispatcher.InvokeShutdown()
+                End If
+            Catch ex As Exception
+            End Try
+
             'release yeppp! resources
             Try
                 If My.Settings.UseSIMDExtensions Then Yeppp.Library.Release()

@@ -70,14 +70,6 @@ Namespace My
                 My.Settings.Save()
             End If
 
-            If (Eto.Forms.Application.Instance.Platform.IsWpf) Then
-
-                If Not GlobalSettings.Settings.IsRunningOnMono Then
-                    System.Windows.Threading.Dispatcher.CurrentDispatcher.InvokeShutdown()
-                End If
-
-            End If
-
         End Sub
 
         Private Sub MyApplication_Startup(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.StartupEventArgs) Handles Me.Startup
