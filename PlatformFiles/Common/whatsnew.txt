@@ -1,3 +1,8 @@
+Version 6.0 Update 6
+
+- [FIX] Fixed a bug in Dynamic Mode
+- [FIX] Other fixes and enhancements
+
 Version 6.0 Update 5
 
 - [NEW] Added new Automation interface (Automation2), works on Linux and macOS
