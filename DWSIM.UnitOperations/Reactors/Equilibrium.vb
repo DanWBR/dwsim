@@ -1071,6 +1071,8 @@ Namespace Reactors
                 Next
             End If
 
+            OutletTemperature = T
+
             cp = Me.GraphicObject.OutputConnectors(0)
             If cp.IsAttached Then
                 ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
@@ -1535,12 +1537,12 @@ Namespace Reactors
 
             list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
                     New String() {"Initial Gibbs Free Energy",
-                    InitialGibbsEnergy.ConvertFromSI(su.enthalpy).ToString(nf),
+                    InitialGibbsEnergy.ConvertFromSI(su.heatflow).ToString(nf),
                     su.enthalpy}))
 
             list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
                     New String() {"Final Gibbs Free Energy",
-                    FinalGibbsEnergy.ConvertFromSI(su.enthalpy).ToString(nf),
+                    FinalGibbsEnergy.ConvertFromSI(su.heatflow).ToString(nf),
                     su.enthalpy}))
 
             list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.Label, New String() {"Reaction Extents"}))

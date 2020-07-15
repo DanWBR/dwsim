@@ -47,9 +47,8 @@
       <SpecificVersion>False</SpecificVersion>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Eto.XamMac2, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DWSIM\References\Eto.Forms\Release\modern\Eto.XamMac2.dll</HintPath>
+    <Reference Include="Eto.XamMac2">
+      <HintPath>..\DWSIM\References\Eto.Forms\Release\net45\Eto.XamMac2.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="OpenTK, Version=3.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">

@@ -389,7 +389,7 @@ Namespace BaseClasses
 
         Public Property Name As String = "" Implements Interfaces.IReaction.Name
 
-        Public Property ReactionBasis As Interfaces.Enums.ReactionBasis Implements Interfaces.IReaction.ReactionBasis
+        Public Property ReactionBasis As Interfaces.Enums.ReactionBasis = ReactionBasis.Fugacity Implements Interfaces.IReaction.ReactionBasis
 
         Public Property ReactionHeat As Double Implements Interfaces.IReaction.ReactionHeat
 

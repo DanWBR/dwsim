@@ -141,6 +141,64 @@ namespace DWSIM.UI.Desktop.Editors
             container.CreateAndAddTextBoxRow(nf, "Minimum Temperature (" + su.temperature + ")", rx.Tmin.ConvertFromSI(su.temperature), (sender, e) => { if (sender.Text.IsValidDouble()) rx.Tmin = sender.Text.ToDoubleFromCurrent().ConvertToSI(su.temperature); });
             container.CreateAndAddTextBoxRow(nf, "Maximum Temperature (" + su.temperature + ")", rx.Tmax.ConvertFromSI(su.temperature), (sender, e) => { if (sender.Text.IsValidDouble()) rx.Tmax = sender.Text.ToDoubleFromCurrent().ConvertToSI(su.temperature); });
 
+
+            container.CreateAndAddLabelRow("Reaction Basis");
+
+            var rxbasisselector = container.CreateAndAddDropDownRow("Reaction Basis", Shared.StringArrays.reactionbasis().ToList(), 0, null);
+
+            switch (rx.ReactionBasis)
+            {
+                case Interfaces.Enums.ReactionBasis.Activity:
+                    rxbasisselector.SelectedIndex = (0);
+                    break;
+                case Interfaces.Enums.ReactionBasis.Fugacity:
+                    rxbasisselector.SelectedIndex = (1);
+                    break;
+                case Interfaces.Enums.ReactionBasis.MassConc:
+                    rxbasisselector.SelectedIndex = (2);
+                    break;
+                case Interfaces.Enums.ReactionBasis.MassFrac:
+                    rxbasisselector.SelectedIndex = (3);
+                    break;
+                case Interfaces.Enums.ReactionBasis.MolarConc:
+                    rxbasisselector.SelectedIndex = (4);
+                    break;
+                case Interfaces.Enums.ReactionBasis.MolarFrac:
+                    rxbasisselector.SelectedIndex = (5);
+                    break;
+                case Interfaces.Enums.ReactionBasis.PartialPress:
+                    rxbasisselector.SelectedIndex = (6);
+                    break;
+            }
+
+            rxbasisselector.SelectedIndexChanged += (sender, e) =>
+            {
+                switch (rxbasisselector.SelectedIndex)
+                {
+                    case 0:
+                        rx.ReactionBasis = Interfaces.Enums.ReactionBasis.Activity;
+                        break;
+                    case 1:
+                        rx.ReactionBasis = Interfaces.Enums.ReactionBasis.Fugacity;
+                        break;
+                    case 2:
+                        rx.ReactionBasis = Interfaces.Enums.ReactionBasis.MassConc;
+                        break;
+                    case 3:
+                        rx.ReactionBasis = Interfaces.Enums.ReactionBasis.MassFrac;
+                        break;
+                    case 4:
+                        rx.ReactionBasis = Interfaces.Enums.ReactionBasis.MolarConc;
+                        break;
+                    case 5:
+                        rx.ReactionBasis = Interfaces.Enums.ReactionBasis.MolarFrac;
+                        break;
+                    case 6:
+                        rx.ReactionBasis = Interfaces.Enums.ReactionBasis.PartialPress;
+                        break;
+                }
+            };
+
             container.CreateAndAddLabelRow("Reaction Phase");
 
             var rxphaseselector = container.CreateAndAddDropDownRow("Reaction Phase", Shared.StringArrays.reactionphase().ToList(), 0, null);
