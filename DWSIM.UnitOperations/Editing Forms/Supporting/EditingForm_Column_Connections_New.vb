@@ -265,7 +265,7 @@ Public Class EditingForm_Column_Connections_New
 
         For Each si In rc.MaterialStreams.Values
             Dim sp As String = "Liquid"
-            Select Case (si.StreamPhase)
+            Select Case si.StreamPhase
                 Case StreamInformation.Phase.L
                     sp = "Liquid"
                 Case StreamInformation.Phase.V

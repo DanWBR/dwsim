@@ -399,6 +399,10 @@ namespace DWSIM.UI.Desktop.Editors
                     case StreamInformation.Phase.V:
                         sp = "V";
                         break;
+                    case StreamInformation.Phase.B:
+                    case StreamInformation.Phase.None:
+                        sp = "L";
+                        break;
                 }
                 if (si.StreamBehavior == StreamInformation.Behavior.Sidedraw)
                 {

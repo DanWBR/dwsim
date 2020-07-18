@@ -96,7 +96,7 @@ Namespace GraphicObjects.Shapes
                 .Item(0).ConnectorName = "Distillate"
                 .Item(1).ConnectorName = "Bottoms"
                 For i As Integer = 2 To OutputConnectors.Count - 3
-                    .Item(i).Position = New Point(X, Y + (i + 1) / OutCount * Height)
+                    .Item(i).Position = New Point(X + Width, Y + (i + 1) / OutCount * Height)
                     .Item(i).ConnectorName = "Side Draw #" & (i - 1)
                 Next
                 .Item(9).Position = New Point(X + Width, Y + 0.02 * Height)
