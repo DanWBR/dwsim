@@ -52,7 +52,7 @@ namespace DWSIM.UI.Desktop.Editors
                 var _rx = new Reaction("NewConvReac", Guid.NewGuid().ToString(), "") { ReactionType = Interfaces.Enums.ReactionType.Conversion };
                 var myview = s.GetDefaultContainer();
                 var cre = new ConversionReaction(flowsheet, _rx, myview);
-                var alert = s.GetDefaultEditorForm("Add Conversion Reaction", 500, 400, myview);
+                Form alert = null;
                 myview.CreateAndAddTwoButtonsRow("Cancel", null, "Add", null, (sender2, e2) => alert.Close(),
                 (sender2, e2) =>
                 {
@@ -62,9 +62,12 @@ namespace DWSIM.UI.Desktop.Editors
                     CreateReactionsList();
                     alert.Close();
                 });
-                myview.CreateAndAddEmptySpace();
-                myview.CreateAndAddEmptySpace();
-                alert.Shown += (s1,e1) => alert.Height = myview.Height;
+                alert = s.GetDefaultEditorForm("Add Conversion Reaction", 500, 400, myview);
+                alert.Shown += (s1, e1) =>
+                {
+                    myview.Invalidate();
+                    alert.Height = myview.Height + 40;
+                };
                 alert.Topmost = true;
                 alert.Show();
             });
@@ -74,7 +77,7 @@ namespace DWSIM.UI.Desktop.Editors
                 var _rx = new Reaction("NewEqReac", Guid.NewGuid().ToString(), "") { ReactionType = Interfaces.Enums.ReactionType.Equilibrium };
                 var myview = s.GetDefaultContainer();
                 var cre = new EquilibriumReaction(flowsheet, _rx, myview);
-                var alert = s.GetDefaultEditorForm("Add Equilibrium Reaction", 500, 400, myview);
+                Form alert = null;
                 myview.CreateAndAddTwoButtonsRow("Cancel", null, "Add", null, (sender2, e2) => alert.Close(),
                 (sender2, e2) =>
                 {
@@ -84,9 +87,12 @@ namespace DWSIM.UI.Desktop.Editors
                     CreateReactionsList();
                     alert.Close();
                 });
-                myview.CreateAndAddEmptySpace();
-                myview.CreateAndAddEmptySpace();
-                alert.Shown += (s1, e1) => alert.Height = myview.Height;
+                alert = s.GetDefaultEditorForm("Add Equilibrium Reaction", 500, 400, myview);
+                alert.Shown += (s1, e1) =>
+                {
+                    myview.Invalidate();
+                    alert.Height = myview.Height + 40;
+                };
                 alert.Topmost = true;
                 alert.Show();
             });
@@ -96,7 +102,7 @@ namespace DWSIM.UI.Desktop.Editors
                 var _rx = new Reaction("NewKinReac", Guid.NewGuid().ToString(), "") { ReactionType = Interfaces.Enums.ReactionType.Kinetic };
                 var myview = s.GetDefaultContainer();
                 var cre = new KineticReaction(flowsheet, _rx, myview);
-                var alert = s.GetDefaultEditorForm("Add Kinetic Reaction", 850, 700, myview);
+                Form alert = null;
                 myview.CreateAndAddTwoButtonsRow("Cancel", null, "Add", null, (sender2, e2) => alert.Close(),
                 (sender2, e2) =>
                 {
@@ -106,7 +112,12 @@ namespace DWSIM.UI.Desktop.Editors
                     CreateReactionsList();
                     alert.Close();
                 });
-                alert.Shown += (s1, e1) => alert.Height = myview.Height;
+                alert = s.GetDefaultEditorForm("Add Kinetic Reaction", 850, 700, myview);
+                alert.Shown += (s1, e1) =>
+                {
+                    myview.Invalidate();
+                    alert.Height = myview.Height + 40;
+                };
                 alert.Topmost = true;
                 alert.Show();
             });
@@ -116,7 +127,7 @@ namespace DWSIM.UI.Desktop.Editors
                 var _rx = new Reaction("NewHetCatReac", Guid.NewGuid().ToString(), "") { ReactionType = Interfaces.Enums.ReactionType.Heterogeneous_Catalytic };
                 var myview = s.GetDefaultContainer();
                 var cre = new HetCatReaction(flowsheet, _rx, myview);
-                var alert = s.GetDefaultEditorForm("Add Heterogeneous Catalytic Reaction", 850, 650, myview);
+                Form alert = null; 
                 myview.CreateAndAddTwoButtonsRow("Cancel", null, "Add", null, (sender2, e2) => alert.Close(),
                 (sender2, e2) =>
                 {
@@ -126,9 +137,12 @@ namespace DWSIM.UI.Desktop.Editors
                     CreateReactionsList();
                     alert.Close();
                 });
-                myview.CreateAndAddEmptySpace();
-                myview.CreateAndAddEmptySpace();
-                alert.Shown += (s1, e1) => alert.Height = myview.Height;
+                alert = s.GetDefaultEditorForm("Add Heterogeneous Catalytic Reaction", 850, 650, myview);
+                alert.Shown += (s1, e1) =>
+                {
+                    myview.Invalidate();
+                    alert.Height = myview.Height + 40;
+                };
                 alert.Topmost = true;
                 alert.Show();
             });
@@ -187,7 +201,7 @@ namespace DWSIM.UI.Desktop.Editors
                             case Interfaces.Enums.ReactionType.Conversion:
                                 var myview = s.GetDefaultContainer();
                                 var cre = new ConversionReaction(flowsheet, rx, myview);
-                                var alert = s.GetDefaultEditorForm("Edit Conversion Reaction", 500, 400, myview);
+                                Form alert = null;
                                 myview.CreateAndAddTwoButtonsRow("Cancel", null, "Update", null, (sender2, e2) => alert.Close(),
                                 (sender2, e2) =>
                                 {
@@ -195,16 +209,19 @@ namespace DWSIM.UI.Desktop.Editors
                                     CreateReactionsList();
                                     alert.Close();
                                 });
-                                myview.CreateAndAddEmptySpace();
-                                myview.CreateAndAddEmptySpace();
-                                alert.Shown += (s1, e1) => alert.Height = myview.Height;
+                                alert = s.GetDefaultEditorForm("Edit Conversion Reaction", 500, 400, myview);
+                                alert.Shown += (s1, e1) =>
+                                {
+                                    myview.Invalidate();
+                                    alert.Height = myview.Height + 40;
+                                };
                                 alert.Topmost = true;
                                 alert.Show();
                                 break;
                             case Interfaces.Enums.ReactionType.Equilibrium:
                                 var myview2 = s.GetDefaultContainer();
                                 var cre2 = new EquilibriumReaction(flowsheet, rx, myview2);
-                                var alert2 = s.GetDefaultEditorForm("Edit Equilibrium Reaction", 500, 400, myview2);
+                                Form alert2 = null;
                                 myview2.CreateAndAddTwoButtonsRow("Cancel", null, "Update", null, (sender2, e2) => alert2.Close(),
                                 (sender2, e2) =>
                                 {
@@ -212,16 +229,19 @@ namespace DWSIM.UI.Desktop.Editors
                                     CreateReactionsList();
                                     alert2.Close();
                                 });
-                                myview2.CreateAndAddEmptySpace();
-                                myview2.CreateAndAddEmptySpace();
-                                alert2.Shown += (s1, e1) => alert2.Height = myview2.Height;
+                                alert2 = s.GetDefaultEditorForm("Edit Equilibrium Reaction", 500, 400, myview2);
+                                alert2.Shown += (s1, e1) =>
+                                {
+                                    myview2.Invalidate();
+                                    alert2.Height = myview2.Height + 40;
+                                };
                                 alert2.Topmost = true;
                                 alert2.Show();
                                 break;
                             case Interfaces.Enums.ReactionType.Kinetic:
                                 var myview3 = s.GetDefaultContainer();
                                 var cre3 = new KineticReaction(flowsheet, rx, myview3);
-                                var alert3 = s.GetDefaultEditorForm("Edit Kinetic Reaction", 850, 700, myview3);
+                                Form alert3 = null;
                                 myview3.CreateAndAddTwoButtonsRow("Cancel", null, "Update", null, (sender2, e2) => alert3.Close(),
                                 (sender2, e2) =>
                                 {
@@ -229,16 +249,19 @@ namespace DWSIM.UI.Desktop.Editors
                                     CreateReactionsList();
                                     alert3.Close();
                                 });
-                                //myview3.CreateAndAddEmptySpace();
-                                //myview3.CreateAndAddEmptySpace();
-                                alert3.Shown += (s1, e1) => alert3.Height = myview3.Height;
+                                alert3 = s.GetDefaultEditorForm("Edit Kinetic Reaction", 850, 700, myview3);
+                                alert3.Shown += (s1, e1) =>
+                                {
+                                    myview3.Invalidate();
+                                    alert3.Height = myview3.Height + 40;
+                                };
                                 alert3.Topmost = true;
                                 alert3.Show();
                                 break;
                             case Interfaces.Enums.ReactionType.Heterogeneous_Catalytic:
                                 var myview4 = s.GetDefaultContainer();
                                 var cre4 = new HetCatReaction(flowsheet, rx, myview4);
-                                var alert4 = s.GetDefaultEditorForm("Edit Heterogeneous Reaction", 850, 650, myview4);
+                                Form alert4 = null;
                                 myview4.CreateAndAddTwoButtonsRow("Cancel", null, "Update", null, (sender2, e2) => alert4.Close(),
                                 (sender2, e2) =>
                                 {
@@ -246,14 +269,16 @@ namespace DWSIM.UI.Desktop.Editors
                                     CreateReactionsList();
                                     alert4.Close();
                                 });
-                                myview4.CreateAndAddEmptySpace();
-                                myview4.CreateAndAddEmptySpace();
-                                alert4.Shown += (s1, e1) => alert4.Height = myview4.Height;
+                                alert4 = s.GetDefaultEditorForm("Edit Heterogeneous Reaction", 850, 650, myview4);
+                                alert4.Shown += (s1, e1) =>
+                                {
+                                    myview4.Invalidate();
+                                    alert4.Height = myview4.Height + 40;
+                                };
                                 alert4.Topmost = true;
                                 alert4.Show();
                                 break;
                         }
-
                     },
                     (sender, e) =>
                     {

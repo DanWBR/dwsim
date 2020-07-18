@@ -126,6 +126,7 @@ namespace DWSIM.UI.Desktop.Editors
                     }
                     rx.Components[comps[basecompselector.SelectedIndex]].IsBaseReactant = true;
                     rx.BaseReactant = comps[basecompselector.SelectedIndex];
+                    UpdateEquation();
                 }
             };
 

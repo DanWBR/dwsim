@@ -64,8 +64,8 @@ namespace DWSIM.UI.Desktop.Editors
                 {
                     p1.Width = (int)(p1.ParentWindow.Width / 2 - 15);
                     p2.Width = (int)(p2.ParentWindow.Width / 2 - 15);
-                    p1.Height = p1.ParentWindow.Height - 170;
-                    p2.Height = p1.ParentWindow.Height - 170;
+                    //p1.Height = p1.Parent.Height  - 170;
+                    //p2.Height = p1.Parent.Height - 170;
                 }
             };
 
@@ -154,6 +154,7 @@ namespace DWSIM.UI.Desktop.Editors
                     }
                     rx.Components[comps[basecompselector.SelectedIndex]].IsBaseReactant = true;
                     rx.BaseReactant = comps[basecompselector.SelectedIndex];
+                    UpdateEquation();
                 }
             };
 

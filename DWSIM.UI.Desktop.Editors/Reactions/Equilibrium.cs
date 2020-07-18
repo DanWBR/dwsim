@@ -126,6 +126,7 @@ namespace DWSIM.UI.Desktop.Editors
                     }
                     rx.Components[comps[basecompselector.SelectedIndex]].IsBaseReactant = true;
                     rx.BaseReactant = comps[basecompselector.SelectedIndex];
+                    UpdateEquation();
                 }
             };
 
@@ -267,7 +268,7 @@ namespace DWSIM.UI.Desktop.Editors
             }
             if (eq.Length >= 2)
                 eq = eq.Remove(eq.Length - 2, 2);
-            eq += "--> ";
+            eq += "<-> ";
             //scan for products
             foreach (var rxc in rx.Components.Values)
             {

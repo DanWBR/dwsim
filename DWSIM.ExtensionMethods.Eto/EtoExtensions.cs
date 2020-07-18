@@ -910,7 +910,7 @@ namespace DWSIM.UI.Shared
             txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
             var btn = new Button { Text = buttonlabel };
             btn.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
-            if (GlobalSettings.Settings.EditorTextBoxFixedSize) btn.Width = (int)(sf * 140);
+            if (GlobalSettings.Settings.EditorTextBoxFixedSize) btn.Width = (int)(sf * 240);
             if (Eto.Forms.Application.Instance.Platform.IsGtk)
             {
                 btn.Height = (int)(sf * 28);
@@ -937,7 +937,7 @@ namespace DWSIM.UI.Shared
             txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
             var btn = new Button { Text = buttonlabel };
             btn.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
-            if (GlobalSettings.Settings.EditorTextBoxFixedSize) btn.Width = (int)(sf * 140);
+            if (GlobalSettings.Settings.EditorTextBoxFixedSize) btn.Width = (int)(sf * 240);
             if (Eto.Forms.Application.Instance.Platform.IsGtk)
             {
                 btn.Height = (int)(sf * 28);
@@ -1135,10 +1135,10 @@ namespace DWSIM.UI.Shared
             var btn2 = new Button { Text = buttonlabel2 };
 
             btn.Font = new Font(SystemFont.Default, GetEditorFontSize());
-            if (GlobalSettings.Settings.EditorTextBoxFixedSize) btn.Width = (int)(sf * 100);
+            if (GlobalSettings.Settings.EditorTextBoxFixedSize) btn.Width = (int)(sf * 120);
 
             btn2.Font = new Font(SystemFont.Default, GetEditorFontSize());
-            if (GlobalSettings.Settings.EditorTextBoxFixedSize) btn2.Width = (int)(sf * 100);
+            if (GlobalSettings.Settings.EditorTextBoxFixedSize) btn2.Width = (int)(sf * 120);
 
             if (imageResID != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID), (int)(sf * 22), (int)(sf * 22), ImageInterpolation.Default);
             if (imageResID2 != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID2), (int)(sf * 22), (int)(sf * 22), ImageInterpolation.Default);

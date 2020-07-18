@@ -208,10 +208,12 @@ Namespace Reactors
             Next
 
             Dim pen_val As Double = If(NoPenVal, 0.0, ReturnPenaltyValue())
+            Dim kr As Double
 
             For i = 0 To Me.Reactions.Count - 1
                 With FlowSheet.Reactions(Me.Reactions(i))
-                    f(i) = prod(i) - .EvaluateK(T, pp) + pen_val
+                    kr = .EvaluateK(T, pp)
+                    f(i) = prod(i) - kr + pen_val
                     If Double.IsNaN(f(i)) Or Double.IsInfinity(f(i)) Then
                         f(i) = pen_val
                     End If
