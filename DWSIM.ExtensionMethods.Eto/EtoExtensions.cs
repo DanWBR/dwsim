@@ -910,7 +910,7 @@ namespace DWSIM.UI.Shared
             txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
             var btn = new Button { Text = buttonlabel };
             btn.Font = new Font(SystemFont.Default, DWSIM.UI.Shared.Common.GetEditorFontSize());
-            if (GlobalSettings.Settings.EditorTextBoxFixedSize) btn.Width = (int)(sf * 240);
+            if (GlobalSettings.Settings.EditorTextBoxFixedSize) btn.Width = (int)(sf * 300);
             if (Eto.Forms.Application.Instance.Platform.IsGtk)
             {
                 btn.Height = (int)(sf * 28);
@@ -1112,6 +1112,11 @@ namespace DWSIM.UI.Shared
             var btn2 = new Button { Width = (int)(sf * 100), Text = buttonlabel2 };
             btn.Font = new Font(SystemFont.Default, GetEditorFontSize());
             btn2.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            if (Eto.Forms.Application.Instance.Platform.IsGtk)
+            {
+                btn.Height = (int)(sf * 28);
+                btn2.Height = (int)(sf * 28);
+            }
 
             if (imageResID != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID), (int)(sf * 22), (int)(sf * 22), ImageInterpolation.Default);
             if (imageResID2 != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID2), (int)(sf * 22), (int)(sf * 22), ImageInterpolation.Default);
