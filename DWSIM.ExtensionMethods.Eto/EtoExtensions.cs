@@ -1095,10 +1095,10 @@ namespace DWSIM.UI.Shared
             if (command3 != null) btn3.Click += (sender, e) => command3.Invoke((Button)sender, e);
 
             var tr = new TableRow(txt, GetPlaceHolderLabel(), null, btn, GetPlaceHolderLabel(), btn2, GetPlaceHolderLabel(), btn3);
-            if (Application.Instance.Platform.IsMac)
-            {
-                txt.Height = (int)(sf * 28);
-            }
+            //if (Application.Instance.Platform.IsMac)
+            //{
+            //    txt.Height = (int)(sf * 28);
+            //}
             container.AddRow(tr);
             container.CreateAndAddEmptySpace();
             return tr;

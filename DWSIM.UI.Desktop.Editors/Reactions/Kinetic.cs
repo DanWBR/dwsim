@@ -46,31 +46,15 @@ namespace DWSIM.UI.Desktop.Editors
 
             DynamicLayout p1, p2;
 
-            StackLayout t1;
+            TableLayout t1;
 
             p1 = UI.Shared.Common.GetDefaultContainer();
             p2 = UI.Shared.Common.GetDefaultContainer();
 
-            p1.Width = 390;
-            p2.Width = 440;
+            p1.Width = 420;
 
-            t1 = new StackLayout();
-            t1.Items.Add(new StackLayoutItem(p1));
-            t1.Items.Add(new StackLayoutItem(p2));
-            t1.Orientation = Orientation.Horizontal;
-
-            container.SizeChanged += (sender, e) =>
-            {
-                if (p1.ParentWindow != null)
-                {
-                    p1.Width = (int)(p1.ParentWindow.Width / 2 - 15);
-                    p2.Width = (int)(p2.ParentWindow.Width / 2 - 15);
-                    //p1.Height = p1.ParentWindow.Height - 170;
-                    //p2.Height = p1.ParentWindow.Height - 170;
-                }
-            };
-
-            container.Add(t1);
+            t1 = new TableLayout();
+            t1.Rows.Add(new TableRow(p1, p2));
 
             p1.CreateAndAddLabelRow("Compounds and Stoichiometry (Include / Name / Heat of Formation (kJ/kg) / Stoich. Coeff. / Direct Order Exponent / Reverse Order Exponent)");
 
@@ -409,7 +393,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             UpdateEquation();
 
-            UpdateEquation();
+            container.Add(t1);
 
         }
 
