@@ -433,7 +433,7 @@ Public Class EditingForm_SpreadsheetUO
 
     Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
         OpenFileDialog1.FileName = TbFileName.Text
-        OpenFileDialog1.Filter = "Spreadsheet files|*.xlsx; *.xls; *.ods"
+        OpenFileDialog1.Filter = "Spreadsheet files|*.xlsx; *.xlsm; *.xls; *.ods"
 
         OpenFileDialog1.ValidateNames = True
         OpenFileDialog1.CheckFileExists = True
@@ -466,7 +466,7 @@ Public Class EditingForm_SpreadsheetUO
         Dim FileName As String = SimObject.GraphicObject.Name
 
         OpenFileDialog1.Title = "New Filename"
-        OpenFileDialog1.Filter = "Spreadsheet files|*.xlsx; *.xls; *.ods"
+        OpenFileDialog1.Filter = "Spreadsheet files|*.xlsx; *.xlsm; *.xls; *.ods"
         OpenFileDialog1.ValidateNames = False
         OpenFileDialog1.CheckFileExists = False
         OpenFileDialog1.CheckPathExists = True

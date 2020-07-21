@@ -177,13 +177,13 @@ Namespace UnitOperations
                     Dim mysheetOut As Excel.Worksheet = mybook.Sheets("Output")
                     '=====================================================================================================
 
-                    If Not Me.GraphicObject.InputConnectors(4).IsAttached Then 'Check if Energy stream existing
-                        mybook.Close(saveChanges:=False)
-                        xcl.Quit()
-                        'xcl.Dispose()
-                        'CalculateFlowsheet(FlowSheet, objargs, Nothing)
-                        Throw New Exception(FlowSheet.GetTranslatedString("NohcorrentedeEnergyFlow1"))
-                    End If
+                    'If Not Me.GraphicObject.InputConnectors(4).IsAttached Then 'Check if Energy stream existing
+                    '    mybook.Close(saveChanges:=False)
+                    '    xcl.Quit()
+                    '    'xcl.Dispose()
+                    '    'CalculateFlowsheet(FlowSheet, objargs, Nothing)
+                    '    Throw New Exception(FlowSheet.GetTranslatedString("NohcorrentedeEnergyFlow1"))
+                    'End If
 
                     'check if at least one input and output connection is available
                     For k = 0 To 3
@@ -199,7 +199,13 @@ Namespace UnitOperations
                     End If
 
                     Dim Ti, Pi, Hi, Wi, T2, P2, H2, Hin, Hout, Win, Wout, MassBal As Double
-                    Dim es As Streams.EnergyStream = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(4).AttachedConnector.AttachedFrom.Name)
+
+                    Dim es As Streams.EnergyStream = Nothing
+
+                    If GetInletEnergyStream(4) IsNot Nothing Then
+                        es = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(4).AttachedConnector.AttachedFrom.Name)
+                    End If
+
                     Dim ParName As String
                     Dim i As Integer
 
@@ -328,10 +334,12 @@ Namespace UnitOperations
                     Me.DeltaQ = Hout - Hin
 
                     'energy stream - update energy flow value (kW)
-                    With es
-                        .EnergyFlow = Me.DeltaQ.GetValueOrDefault
-                        .GraphicObject.Calculated = True
-                    End With
+                    If es IsNot Nothing Then
+                        With es
+                            .EnergyFlow = Me.DeltaQ.GetValueOrDefault
+                            .GraphicObject.Calculated = True
+                        End With
+                    End If
 
                     '======== read input/output parameters from Excel table =========================================
                     k = 0
@@ -585,10 +593,12 @@ Namespace UnitOperations
                 Me.DeltaQ = Hout - Hin
 
                 'energy stream - update energy flow value (kW)
-                With es
-                    .EnergyFlow = Me.DeltaQ.GetValueOrDefault
-                    .GraphicObject.Calculated = True
-                End With
+                If es IsNot Nothing Then
+                    With es
+                        .EnergyFlow = Me.DeltaQ.GetValueOrDefault
+                        .GraphicObject.Calculated = True
+                    End With
+                End If
 
                 '======== read output parameters from Excel table =========================================
                 k = 0
