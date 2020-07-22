@@ -2050,7 +2050,15 @@ namespace DWSIM.UI.Forms
             item5.Click += (sender, e) => CopyAsImage(2);
             item6.Click += (sender, e) => CopyAsImage(3);
 
-            deselctxmenu.Items.AddRange(new MenuItem[] { item0, item1, item2, item4, item5, item6 });
+            var item7 = new ButtonMenuItem { Text = "Perform Auto-Layout", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-parallel_workflow.png")) };
+
+            item7.Click += (sender, e) =>
+            {
+                FlowsheetControl.FlowsheetSurface.AutoArrange();                
+                ActZoomFit.Invoke();
+            };
+
+            deselctxmenu.Items.AddRange(new MenuItem[] { item0, new SeparatorMenuItem(), item1, item2, new SeparatorMenuItem(), item4, item5, item6, new SeparatorMenuItem(), item7 });
 
             return;
 

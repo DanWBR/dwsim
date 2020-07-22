@@ -3117,6 +3117,15 @@ Public Class FlowsheetSurface_SkiaSharp
 
     End Sub
 
+    Private Sub LayoutAutomaticoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LayoutAutomaticoToolStripMenuItem.Click
+
+        FlowsheetSurface.AutoArrange()
+        FlowsheetSurface.ZoomAll(SplitContainer1.Panel1.Width, SplitContainer1.Panel1.Height)
+        FlowsheetSurface.ZoomAll(SplitContainer1.Panel1.Width, SplitContainer1.Panel1.Height)
+        FControl.Invalidate()
+
+    End Sub
+
     Private Sub tsbControlPanelMode_CheckedChanged(sender As Object, e As EventArgs) Handles tsbControlPanelMode.CheckedChanged
 
         If tsbControlPanelMode.Checked Then
