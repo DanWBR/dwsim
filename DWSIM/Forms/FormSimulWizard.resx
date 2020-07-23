@@ -206,8 +206,8 @@
   <data name="&gt;&gt;LinkLabelPropertyMethods.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="Column12.MinimumWidth" type="System.Int32, mscorlib">
+    <value>20</value>
   </data>
   <data name="btnInfoLeft.Text" xml:space="preserve">
     <value>Ver Componente Selecionado</value>
@@ -293,9 +293,6 @@
   </data>
   <data name="WizardPage1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
-  </data>
-  <data name="&gt;&gt;Label8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="btnCreateNewUnits.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -389,6 +386,9 @@
   </data>
   <data name="&gt;&gt;ToolStripMenuItem3.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label8.Parent" xml:space="preserve">
+    <value>WizardPage5</value>
   </data>
   <data name="&gt;&gt;DataGridView1.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -565,8 +565,8 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="&gt;&gt;Label8.Name" xml:space="preserve">
     <value>Label8</value>
   </data>
-  <data name="Column12.MinimumWidth" type="System.Int32, mscorlib">
-    <value>20</value>
+  <data name="&gt;&gt;Label8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;casno.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -787,9 +787,6 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="WizardPage2.Size" type="System.Drawing.Size, System.Drawing">
     <value>715, 404</value>
   </data>
-  <data name="&gt;&gt;ComboBox2.Parent" xml:space="preserve">
-    <value>WizardPage5</value>
-  </data>
   <data name="&gt;&gt;StepWizardControl1.Type" xml:space="preserve">
     <value>AeroWizard.StepWizardControl, AeroWizard, Version=2.0.2.27955, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
   </data>
@@ -947,11 +944,11 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="ToolStripMenuItem4.Text" xml:space="preserve">
     <value>Criar a Partir de Curvas de Destilação de Petróleo</value>
   </data>
+  <data name="Label1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="LinkLabel2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="&gt;&gt;Column18.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Column7.Name" xml:space="preserve">
     <value>Column7</value>
@@ -980,14 +977,11 @@ Clique em "Finalizar" para sair e iniciar a simulação.</value>
   <data name="&gt;&gt;Button8.Name" xml:space="preserve">
     <value>Button8</value>
   </data>
-  <data name="&gt;&gt;StepWizardControl1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
   <data name="Column5.ToolTipText" xml:space="preserve">
     <value>Supported by CoolProp Property Package</value>
   </data>
-  <data name="Label4.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;Column18.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Bem-vindo ao assistente de configuração da simulação. 
@@ -1084,6 +1078,9 @@ Clique em "Próximo" para continuar.</value>
   <data name="&gt;&gt;colAdd.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Label4.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="Button8.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
@@ -1168,8 +1165,8 @@ Clique em "Próximo" para continuar.</value>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>913, 559</value>
   </data>
-  <data name="Button8.Text" xml:space="preserve">
-    <value>Adicionar</value>
+  <data name="&gt;&gt;ComboBox2.Parent" xml:space="preserve">
+    <value>WizardPage5</value>
   </data>
   <data name="&gt;&gt;TextBox1.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -1177,8 +1174,8 @@ Clique em "Próximo" para continuar.</value>
   <data name="LinkLabel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>540, 15</value>
   </data>
-  <data name="&gt;&gt;Label8.Parent" xml:space="preserve">
-    <value>WizardPage5</value>
+  <data name="&gt;&gt;StepWizardControl1.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;WizardPage5.Type" xml:space="preserve">
     <value>AeroWizard.WizardPage, AeroWizard, Version=2.0.2.27955, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
@@ -1279,6 +1276,9 @@ Clique em "Próximo" para continuar.</value>
   <data name="&gt;&gt;Column3.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Button8.Text" xml:space="preserve">
+    <value>Adicionar</value>
+  </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 368</value>
   </data>
@@ -1291,9 +1291,6 @@ Clique em "Próximo" para continuar.</value>
   <data name="CriarAPartirDeEstruturaUNIFACToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>305, 22</value>
   </data>
-  <metadata name="Column3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <metadata name="Column8.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1307,6 +1304,9 @@ Clique em "Próximo" para continuar.</value>
     <value>258, 17</value>
   </metadata>
   <metadata name="Column7.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -1339,7 +1339,7 @@ Clique em "Próximo" para continuar.</value>
   <metadata name="Column18.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="Column16.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="OpenFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -1354,7 +1354,7 @@ Clique em "Próximo" para continuar.</value>
   <metadata name="Column11.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="Column16.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="Column3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
 </root>

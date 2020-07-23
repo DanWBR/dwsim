@@ -1474,8 +1474,7 @@ Public Class FormSimulSettings
                         Next
                         ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.Tag, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
                         ogc1.ClearSelection()
-                        ogc1.Rows(ogc1.Rows.Count - 1).Selected = True
-                        ogc1.FirstDisplayedScrollingRowIndex = ogc1.Rows.Count - 1
+                        ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
                     Else
                         'compound exists.
                         If MessageBox.Show(DWSIM.App.GetLocalString("UpdateFromJSON"), "DWSIM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
@@ -1513,6 +1512,8 @@ Public Class FormSimulSettings
                         Next
                     Next
                     ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.Tag, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
+                    ogc1.ClearSelection()
+                    ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
                 Else
                     MessageBox.Show(DWSIM.App.GetLocalString("CompoundExists"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
@@ -1653,7 +1654,12 @@ Public Class FormSimulSettings
 
     Private Sub FormSimulSettings_Shown(sender As Object, e As EventArgs) Handles Me.Shown
 
-        ogc1.Sort(ogc1.Columns(1), System.ComponentModel.ListSortDirection.Descending)
+        For Each r As DataGridViewRow In ogc1.Rows
+            r.Selected = False
+            r.Visible = True
+        Next
+        ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
+
 
     End Sub
 
