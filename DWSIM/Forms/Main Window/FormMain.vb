@@ -3394,6 +3394,8 @@ Label_00CC:
 
     Public Sub NewToolStripButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles NewToolStripButton.Click, NewToolStripMenuItem.Click
 
+        Me.WelcomePanel.Visible = False
+
         Dim newform As New FormFlowsheet()
 
         With newform
@@ -3403,7 +3405,9 @@ Label_00CC:
             .MdiParent = Me
             Application.DoEvents()
         End With
+
         Me.ActivateMdiChild(newform)
+
         m_childcount += 1
 
     End Sub
