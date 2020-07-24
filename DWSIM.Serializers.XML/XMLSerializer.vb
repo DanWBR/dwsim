@@ -192,6 +192,18 @@ Public Class XMLSerializer
                                     End If
                                 Catch ex As Exception
                                 End Try
+                            ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is List(Of Single) Then
+                                Try
+                                    Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
+                                    If Not xel Is Nothing Then
+                                        Dim list As New List(Of Single)
+                                        For Each el In xel.Elements
+                                            list.Add(Single.Parse(el.Value, ci))
+                                        Next
+                                        obj.GetType.GetProperty(prop.Name).SetValue(obj, list, Nothing)
+                                    End If
+                                Catch ex As Exception
+                                End Try
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Dictionary(Of String, String) Then
                                 Try
                                     Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
@@ -423,6 +435,15 @@ Public Class XMLSerializer
                                 Try
                                     Dim inner_elements As New List(Of XElement)
                                     For Each item In DirectCast(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing), List(Of Double))
+                                        inner_elements.Add(New XElement("Item", item.ToString(ci)))
+                                    Next
+                                    .Add(New XElement(prop.Name, inner_elements))
+                                Catch ex As Exception
+                                End Try
+                            ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is List(Of Single) Then
+                                Try
+                                    Dim inner_elements As New List(Of XElement)
+                                    For Each item In DirectCast(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing), List(Of Single))
                                         inner_elements.Add(New XElement("Item", item.ToString(ci)))
                                     Next
                                     .Add(New XElement(prop.Name, inner_elements))
