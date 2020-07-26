@@ -26,7 +26,7 @@ Imports System.Drawing
 ''' scintillaNET Editor extender for code intellisense display
 ''' </summary>
 ''' <remarks>(c) 2015 Daniel Medeiros</remarks>
-Module scintillaExtender
+Public Module scintillaExtender
 
     ''' <summary>
     ''' Sets the editor style for Python language.
@@ -36,7 +36,7 @@ Module scintillaExtender
     ''' <param name="fontsize">Size of the font to be used.</param>
     ''' <param name="viewspaces">Enables or disables whitspace highlighting.</param>
     ''' <remarks></remarks>
-    <System.Runtime.CompilerServices.Extension()> Sub SetEditorStyle(scintilla As ScintillaNET.Scintilla, fontname As String, fontsize As Integer, viewspaces As Boolean, capeopen As Boolean)
+    <System.Runtime.CompilerServices.Extension()> Public Sub SetEditorStyle(scintilla As ScintillaNET.Scintilla, fontname As String, fontsize As Integer, viewspaces As Boolean, capeopen As Boolean)
 
         scintilla.StyleResetDefault()
         scintilla.Styles(Style.[Default]).Font = fontname
@@ -355,7 +355,7 @@ Module scintillaExtender
             Else
 
                 Dim capeopenassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("CapeOpen,")).FirstOrDefault
-               
+
                 Select Case lastkeyword
                     Case "ims1", "ims2", "ims3", "ims4", "ims5", "ims6", "oms1", "oms2", "oms3", "oms4", "oms5",
                          "ims6", "ims7", "ims8", "ims9", "ims10", "oms6", "oms7", "oms8", "oms9", "oms10"
@@ -490,7 +490,7 @@ Module scintillaExtender
             Else
 
                 Dim capeopenassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("CapeOpen,")).FirstOrDefault
-          
+
                 Select Case lastobj
                     Case "ims1", "ims2", "ims3", "ims4", "ims5", "ims6", "oms1", "oms2", "oms3", "oms4", "oms5",
                         "ims6", "ims7", "ims8", "ims9", "ims10", "oms6", "oms7", "oms8", "oms9", "oms10"
