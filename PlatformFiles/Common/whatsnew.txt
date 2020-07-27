@@ -1,17 +1,5 @@
-Version 6.0 Update 7
+Version 6.1
 
-- [FIX] Bug fixes and adjustments
-
-Version 6.0 Update 6
-
-- [FIX] Fixed a bug in Dynamic Mode
-- [FIX] Other fixes and enhancements
-
-Version 6.0 Update 5
-
-- [NEW] Added new Automation interface (Automation2), works on Linux and macOS
-- [FIX] Fixed Energy Stream editor (Classic UI)
-- [FIX] Fixed a bug with Black Oil Property Package
-- [FIX] Fixed Compound Creator's Liquid Cp regression (Classic UI)
-- [FIX] Fixed PFD definition on macOS when using CPU Renderer
-- [FIX] Other fixes and enhancements
+- [NEW] Added support for the new Neural Network Unit Operation
+- [NEW] Flowsheet Auto-Layout function
+- [FIX] Bug fixes and enhancements

@@ -21,6 +21,11 @@ namespace DWSIM.UI.Desktop
         public static Application MainApp(string[] args)
         {
 
+            // sets the assembly resolver to find remaining DWSIM libraries on demand
+
+            AppDomain currentDomain = AppDomain.CurrentDomain;
+            currentDomain.AssemblyResolve += new ResolveEventHandler(LoadFromNestedFolder);
+
             //initialize OpenTK
 
             OpenTK.Toolkit.Init();
@@ -235,6 +240,30 @@ namespace DWSIM.UI.Desktop
             }
             return null;
         }
+
+        static Assembly LoadFromNestedFolder(object sender, ResolveEventArgs args)
+        {
+            string assemblyPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "unitops", "libraries", new AssemblyName(args.Name).Name + ".dll");
+            if (!File.Exists(assemblyPath))
+            {
+                string assemblyPath2 = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "ppacks", "libraries", new AssemblyName(args.Name).Name + ".dll");
+                if (!File.Exists(assemblyPath2))
+                {
+                    return null;
+                }
+                else
+                {
+                    Assembly assembly = Assembly.LoadFrom(assemblyPath2);
+                    return assembly;
+                }
+            }
+            else
+            {
+                Assembly assembly = Assembly.LoadFrom(assemblyPath);
+                return assembly;
+            }
+        }
+
 
     }
 
