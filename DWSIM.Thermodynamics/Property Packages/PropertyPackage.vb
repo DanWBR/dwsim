@@ -2197,7 +2197,7 @@ Namespace PropertyPackages
 
                                     dge = fge - ige
 
-                                    Dim dgtol As Double = Me.FlashBase.FlashSettings(Enums.FlashSetting.ValidationGibbsTolerance)
+                                    Dim dgtol As Double = Me.FlashBase.FlashSettings(Enums.FlashSetting.ValidationGibbsTolerance).ToDoubleFromInvariant()
 
                                     If dge > 0.0# And Math.Abs(dge / ige * 100) > Math.Abs(dgtol) Then
                                         Dim ex As New Exception(Calculator.GetLocalString("InvalidFlashResult") & "(DGE = " & dge & " kJ/kg, " & Format(dge / ige * 100, "0.00") & "%)")

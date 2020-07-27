@@ -512,16 +512,17 @@ Public Class Utility
 
         Dim ppath As String = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location), "unitops")
         If Directory.Exists(ppath) Then
-            Try
-                Dim otheruos As String() = Directory.GetFiles(ppath, "*.dll", SearchOption.TopDirectoryOnly)
-                For Each fpath In otheruos
+            Dim otheruos As String() = Directory.GetFiles(ppath, "*.dll", SearchOption.TopDirectoryOnly)
+            For Each fpath In otheruos
+                Try
                     Dim pplist As List(Of Interfaces.IExternalUnitOperation) = GetUnitOperations(Assembly.LoadFile(fpath))
                     For Each pp In pplist
                         euos.Add(pp)
                     Next
-                Next
-            Catch ex As Exception
-            End Try
+                Catch ex As Exception
+                    Console.WriteLine("Error loading External Unit Operation: " + ex.ToString())
+                End Try
+            Next
         End If
 
         Return euos
