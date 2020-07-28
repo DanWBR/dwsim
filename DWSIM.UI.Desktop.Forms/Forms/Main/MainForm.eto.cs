@@ -34,6 +34,7 @@ namespace DWSIM.UI
         TreeGridView MostRecentList;
 
         string imgprefix = "DWSIM.UI.Forms.Resources.Icons.";
+        string bmpprefix = "DWSIM.UI.Forms.Resources.Bitmaps.";
 
         private int width = 1024;
 
@@ -95,6 +96,7 @@ namespace DWSIM.UI
 
             var psize = new Size((int)(100 * sf), (int)(100 * sf));
             var psize2 = new Size((int)(80 * sf), (int)(80 * sf));
+            var psize3 = new Size((int)(134 * sf), (int)(100 * sf));
             var lsize = new Size((int)(350 * sf), (int)(50 * sf));
 
             abslayout.Add(new Label { Text = "Welcome to DWSIM!", Width = (int)(200 * sf), Font = boldfont }, dx, dy);
@@ -158,9 +160,9 @@ namespace DWSIM.UI
 
             ppatreon = new PixelLayout { BackgroundColor = Colors.White, Width = (int)(500 * sf), Height = (int)(100 * sf) };
             ppatreon.Add(new Label { Text = "Become a Patron", Width = (int)(200 * sf), Font = boldfont }, dx2, dy2);
-            ppatreon.Add(new Label { Size = lsize, Font = regularfont, Wrap = WrapMode.Word, Text = "Become a Patron and get access to exclusive Unit Operations, Property Packages and Plugins/Add-Ins!" }, dx2, dy2 * 2 + bfh);
-            var img4 = new ImageView { Size = psize, Image = new Bitmap(Bitmap.FromResource(imgprefix + "Patreon_Navy.jpg")) };
-            ppatreon.Add(img4, (int)(400 * sf), 0);
+            ppatreon.Add(new Label { Size = lsize, Font = regularfont, Wrap = WrapMode.Word, Text = "Become a Patron and get access to exclusive Unit Operations, Property Packages, Plugins/Add-Ins, Mugs and T-Shirts!" }, dx2, dy2 * 2 + bfh);
+            var img4 = new ImageView { Size = psize3, Image = new Bitmap(Bitmap.FromResource(bmpprefix + "tshirt_mockup.jpg")) };
+            ppatreon.Add(img4, (int)(367 * sf), 0);
             var link4 = new LinkButton { Text = "Support the Project", Width = (int)(140 * sf), Font = boldfont2 };
             ppatreon.Add(link4, dx2, (int)(100 * sf - rfh - dy));
             var bwidth = 70;

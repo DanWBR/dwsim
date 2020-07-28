@@ -64,12 +64,12 @@ Partial Class FormWelcome
         Me.Label10 = New System.Windows.Forms.Label()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.LinkLabel7 = New System.Windows.Forms.LinkLabel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.LinkLabel9 = New System.Windows.Forms.LinkLabel()
         Me.PictureBox6 = New System.Windows.Forms.PictureBox()
-        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.LinkLabel10 = New System.Windows.Forms.LinkLabel()
@@ -89,19 +89,19 @@ Partial Class FormWelcome
         Me.Panel3.SuspendLayout()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel4.SuspendLayout()
-        CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
         CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lvlatest
         '
+        resources.ApplyResources(Me.lvlatest, "lvlatest")
         Me.lvlatest.Activation = System.Windows.Forms.ItemActivation.OneClick
         Me.lvlatest.AutoArrange = False
         Me.lvlatest.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.lvlatest.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1})
-        resources.ApplyResources(Me.lvlatest, "lvlatest")
         Me.lvlatest.FullRowSelect = True
         Me.lvlatest.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.lvlatest.HideSelection = False
@@ -131,11 +131,11 @@ Partial Class FormWelcome
         '
         'lvlatestfolders
         '
+        resources.ApplyResources(Me.lvlatestfolders, "lvlatestfolders")
         Me.lvlatestfolders.Activation = System.Windows.Forms.ItemActivation.OneClick
         Me.lvlatestfolders.AutoArrange = False
         Me.lvlatestfolders.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.lvlatestfolders.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader3})
-        resources.ApplyResources(Me.lvlatestfolders, "lvlatestfolders")
         Me.lvlatestfolders.FullRowSelect = True
         Me.lvlatestfolders.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.lvlatestfolders.HideSelection = False
@@ -165,25 +165,25 @@ Partial Class FormWelcome
         '
         'TabPage1
         '
-        Me.TabPage1.Controls.Add(Me.lvlatest)
         resources.ApplyResources(Me.TabPage1, "TabPage1")
+        Me.TabPage1.Controls.Add(Me.lvlatest)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
         'TabPage2
         '
-        Me.TabPage2.Controls.Add(Me.lvsamples)
         resources.ApplyResources(Me.TabPage2, "TabPage2")
+        Me.TabPage2.Controls.Add(Me.lvsamples)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
         'lvsamples
         '
+        resources.ApplyResources(Me.lvsamples, "lvsamples")
         Me.lvsamples.Activation = System.Windows.Forms.ItemActivation.OneClick
         Me.lvsamples.AutoArrange = False
         Me.lvsamples.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.lvsamples.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader2})
-        resources.ApplyResources(Me.lvsamples, "lvsamples")
         Me.lvsamples.FullRowSelect = True
         Me.lvsamples.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.lvsamples.HideSelection = False
@@ -203,6 +203,7 @@ Partial Class FormWelcome
         '
         'TabPage5
         '
+        resources.ApplyResources(Me.TabPage5, "TabPage5")
         Me.TabPage5.BackColor = System.Drawing.Color.White
         Me.TabPage5.Controls.Add(Me.Label8)
         Me.TabPage5.Controls.Add(Me.Label5)
@@ -210,7 +211,6 @@ Partial Class FormWelcome
         Me.TabPage5.Controls.Add(Me.Button6)
         Me.TabPage5.Controls.Add(Me.Button4)
         Me.TabPage5.Controls.Add(Me.FOSSEEList)
-        resources.ApplyResources(Me.TabPage5, "TabPage5")
         Me.TabPage5.Name = "TabPage5"
         '
         'Label8
@@ -222,8 +222,8 @@ Partial Class FormWelcome
         '
         'Label5
         '
-        Me.Label5.BackColor = System.Drawing.Color.Transparent
         resources.ApplyResources(Me.Label5, "Label5")
+        Me.Label5.BackColor = System.Drawing.Color.Transparent
         Me.Label5.ForeColor = System.Drawing.Color.Black
         Me.Label5.Name = "Label5"
         '
@@ -243,15 +243,15 @@ Partial Class FormWelcome
         '
         'Button4
         '
-        Me.Button4.Image = Global.DWSIM.My.Resources.Resources.arrow_up1
         resources.ApplyResources(Me.Button4, "Button4")
+        Me.Button4.Image = Global.DWSIM.My.Resources.Resources.arrow_up1
         Me.Button4.Name = "Button4"
         Me.Button4.UseVisualStyleBackColor = True
         '
         'FOSSEEList
         '
-        Me.FOSSEEList.Activation = System.Windows.Forms.ItemActivation.OneClick
         resources.ApplyResources(Me.FOSSEEList, "FOSSEEList")
+        Me.FOSSEEList.Activation = System.Windows.Forms.ItemActivation.OneClick
         Me.FOSSEEList.AutoArrange = False
         Me.FOSSEEList.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader4})
         Me.FOSSEEList.FullRowSelect = True
@@ -273,8 +273,8 @@ Partial Class FormWelcome
         '
         'TabPage3
         '
-        Me.TabPage3.Controls.Add(Me.lvlatestfolders)
         resources.ApplyResources(Me.TabPage3, "TabPage3")
+        Me.TabPage3.Controls.Add(Me.lvlatestfolders)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.UseVisualStyleBackColor = True
         '
@@ -287,8 +287,8 @@ Partial Class FormWelcome
         '
         'PictureBox1
         '
-        Me.PictureBox1.BackgroundImage = Global.DWSIM.My.Resources.Resources.icons8_chemical_plant
         resources.ApplyResources(Me.PictureBox1, "PictureBox1")
+        Me.PictureBox1.BackgroundImage = Global.DWSIM.My.Resources.Resources.icons8_chemical_plant
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.TabStop = False
         '
@@ -421,26 +421,33 @@ Partial Class FormWelcome
         '
         'PictureBox3
         '
-        Me.PictureBox3.BackgroundImage = Global.DWSIM.My.Resources.Resources.icons8_line_chart
         resources.ApplyResources(Me.PictureBox3, "PictureBox3")
+        Me.PictureBox3.BackgroundImage = Global.DWSIM.My.Resources.Resources.icons8_line_chart
         Me.PictureBox3.Name = "PictureBox3"
         Me.PictureBox3.TabStop = False
         '
         'Panel4
         '
         resources.ApplyResources(Me.Panel4, "Panel4")
+        Me.Panel4.Controls.Add(Me.PictureBox4)
         Me.Panel4.Controls.Add(Me.LinkLabel7)
         Me.Panel4.Controls.Add(Me.Label2)
         Me.Panel4.Controls.Add(Me.Label11)
         Me.Panel4.Controls.Add(Me.LinkLabel9)
         Me.Panel4.Controls.Add(Me.PictureBox6)
-        Me.Panel4.Controls.Add(Me.PictureBox4)
         Me.Panel4.Name = "Panel4"
+        '
+        'PictureBox4
+        '
+        resources.ApplyResources(Me.PictureBox4, "PictureBox4")
+        Me.PictureBox4.BackgroundImage = Global.DWSIM.My.Resources.Resources.tshirt_mockup
+        Me.PictureBox4.Name = "PictureBox4"
+        Me.PictureBox4.TabStop = False
         '
         'LinkLabel7
         '
-        Me.LinkLabel7.ActiveLinkColor = System.Drawing.Color.White
         resources.ApplyResources(Me.LinkLabel7, "LinkLabel7")
+        Me.LinkLabel7.ActiveLinkColor = System.Drawing.Color.White
         Me.LinkLabel7.BackColor = System.Drawing.Color.DodgerBlue
         Me.LinkLabel7.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
         Me.LinkLabel7.LinkColor = System.Drawing.Color.White
@@ -471,17 +478,10 @@ Partial Class FormWelcome
         '
         'PictureBox6
         '
-        Me.PictureBox6.BackgroundImage = Global.DWSIM.My.Resources.Resources.Patreon_Navy
         resources.ApplyResources(Me.PictureBox6, "PictureBox6")
+        Me.PictureBox6.BackgroundImage = Global.DWSIM.My.Resources.Resources.Patreon_Navy
         Me.PictureBox6.Name = "PictureBox6"
         Me.PictureBox6.TabStop = False
-        '
-        'PictureBox4
-        '
-        Me.PictureBox4.BackgroundImage = Global.DWSIM.My.Resources.Resources.DWSIM_ico
-        resources.ApplyResources(Me.PictureBox4, "PictureBox4")
-        Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.TabStop = False
         '
         'Label12
         '
@@ -532,8 +532,8 @@ Partial Class FormWelcome
         '
         'PictureBox5
         '
-        Me.PictureBox5.BackgroundImage = Global.DWSIM.My.Resources.Resources.icons8_books
         resources.ApplyResources(Me.PictureBox5, "PictureBox5")
+        Me.PictureBox5.BackgroundImage = Global.DWSIM.My.Resources.Resources.icons8_books
         Me.PictureBox5.Name = "PictureBox5"
         Me.PictureBox5.TabStop = False
         '
@@ -570,8 +570,8 @@ Partial Class FormWelcome
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
-        CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel5.ResumeLayout(False)
         Me.Panel5.PerformLayout()
         CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).EndInit()
@@ -621,7 +621,6 @@ Partial Class FormWelcome
     Friend WithEvents LinkLabel9 As LinkLabel
     Friend WithEvents Label2 As Label
     Friend WithEvents Label11 As Label
-    Friend WithEvents PictureBox4 As PictureBox
     Friend WithEvents Label12 As Label
     Friend WithEvents Panel5 As Panel
     Friend WithEvents LinkLabel10 As LinkLabel
@@ -631,4 +630,5 @@ Partial Class FormWelcome
     Friend WithEvents PictureBox5 As PictureBox
     Friend WithEvents PictureBox6 As PictureBox
     Friend WithEvents LinkLabel7 As LinkLabel
+    Friend WithEvents PictureBox4 As PictureBox
 End Class

@@ -2294,6 +2294,7 @@
     <None Include="Resources\disk1.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\tshirt_mockup.jpg" />
     <None Include="Resources\stop1.png" />
     <None Include="Resources\tag.png" />
     <None Include="Resources\texteditor.png" />
