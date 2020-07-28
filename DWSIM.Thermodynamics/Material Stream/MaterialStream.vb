@@ -65,6 +65,12 @@ Namespace Streams
 
         Public Overrides ReadOnly Property HasPropertiesForDynamicMode As Boolean = False
 
+        ''' <summary>
+        ''' Use this property to disable automatic PH-Flash for single-compound streams connected to unit operations. Default is 'False'.
+        ''' </summary>
+        ''' <returns></returns>
+        Public Property OverrideSingleCompoundFlashBehavior As Boolean = False
+
 #Region "    XML serialization"
 
         Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean
@@ -471,7 +477,8 @@ Namespace Streams
                     If .AUX_IS_SINGLECOMP(PropertyPackages.Phase.Mixture) Then
 
                         If Not Me.GraphicObject Is Nothing AndAlso Me.GraphicObject.InputConnectors(0).IsAttached AndAlso
-                            Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.ObjectType <> ObjectType.OT_Recycle Then
+                            Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.ObjectType <> ObjectType.OT_Recycle AndAlso
+                            Not OverrideSingleCompoundFlashBehavior Then
                             If DebugMode Then AppendDebugLine(String.Format("Stream is single-compound and attached to the outlet of an unit operation. PH flash equilibrium calculation forced."))
                             IObj?.Paragraphs.Add("<b>WARNING: Stream is single-compound and attached to the outlet of an unit operation. PH flash equilibrium calculation forced.</b>")
                             IObj?.Paragraphs.Add(String.Format("<b>Current State Variables: P = {0} Pa, H = {1} kJ/kg</b>", P, H))

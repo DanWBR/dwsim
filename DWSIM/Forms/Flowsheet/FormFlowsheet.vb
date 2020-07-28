@@ -2736,11 +2736,11 @@ Public Class FormFlowsheet
         Dim cnt = TryCast(form, DockContent)
         If Not cnt Is Nothing Then
             If cnt.ShowHint = DockState.DockLeft Or cnt.ShowHint = DockState.DockLeftAutoHide Then
-                dckPanel.DockLeftPortion = cnt.Width
+                dckPanel.DockLeftPortion = 400
             ElseIf cnt.ShowHint = DockState.DockRight Or cnt.ShowHint = DockState.DockRightAutoHide Then
-                dckPanel.DockRightPortion = cnt.Width
+                dckPanel.DockRightPortion = 400
             ElseIf cnt.ShowHint = DockState.Float Then
-                dckPanel.DefaultFloatWindowSize = New Size(cnt.Width, cnt.Height)
+                dckPanel.DefaultFloatWindowSize = New Size(500, 500)
             End If
             cnt.Show(Me.dckPanel)
             Try

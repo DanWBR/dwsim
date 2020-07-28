@@ -88,4 +88,10 @@ Public Class ObjectEditorForm
         End If
     End Sub
 
+    Private Sub ObjectEditorForm_Load(sender As Object, e As EventArgs) Handles Me.Load
+
+        Width = 400
+
+    End Sub
+
 End Class

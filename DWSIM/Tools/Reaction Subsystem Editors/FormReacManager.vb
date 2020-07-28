@@ -296,13 +296,12 @@ Public Class FormReacManager
                     frk.ShowDialog()
                     frk.Dispose()
             End Select
-            With Me.GridRxns.Rows
-                .Clear()
-                For Each rxn1 As Reaction In frmchild.Options.Reactions.Values
-                    .Add(New Object() {rxn1.Name, rxn1.ReactionType, rxn1.Equation, rxn1.ID})
-                Next
-            End With
-
+            For Each row As DataGridViewRow In GridRxns.Rows
+                Dim rxn1 = frmchild.Options.Reactions(row.Cells(3).Value)
+                row.Cells(0).Value = rxn1.Name
+                row.Cells(1).Value = rxn1.ReactionType
+                row.Cells(2).Value = rxn1.Equation
+            Next
         End If
     End Sub
 
@@ -342,12 +341,11 @@ Public Class FormReacManager
             End With
             rse.ShowDialog()
             rse.Dispose()
-            With Me.GridRSets.Rows
-                .Clear()
-                For Each rs1 As ReactionSet In frmchild.Options.ReactionSets.Values
-                    .Add(New Object() {rs1.Name, rs1.Description, rs1.ID})
-                Next
-            End With
+            For Each row As DataGridViewRow In GridRSets.Rows
+                Dim rset1 = frmchild.Options.ReactionSets(row.Cells(2).Value)
+                row.Cells(0).Value = rset1.Name
+                row.Cells(1).Value = rset1.Description
+            Next
         End If
     End Sub
 

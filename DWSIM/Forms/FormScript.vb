@@ -578,7 +578,7 @@ Imports IronPython.Hosting
 
                 Me.Invalidate()
 
-                If scriptdata.LinkedObjectName <> "" Then
+                If scriptdata.LinkedObjectName <> "" And fc.SimulationObjects.ContainsKey(scriptdata.LinkedObjectName) Then
                     .cbLinkedObject.SelectedItem = fc.Collections.FlowsheetObjectCollection(scriptdata.LinkedObjectName).GraphicObject.Tag
                 Else
                     Select Case scriptdata.LinkedObjectType
