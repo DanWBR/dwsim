@@ -171,7 +171,7 @@ namespace DWSIM.UI
             ppatreon.Add(link4a, dx2 + (int)(150 * sf), (int)(100 * sf - rfh - dy));
 
             link4.Click += (sender, e) => "https://patreon.com/dwsim".OpenURL();
-            link4a.Click += (sender, e) => "https://www.patreon.com/join/dwsim?".OpenURL();
+            link4a.Click += (sender, e) => "https://www.patreon.com/dwsim/merch".OpenURL();
 
             abslayout.Add(ppatreon, dx, dy * 4 + bfh + 2 * (int)(100 * sf));
 

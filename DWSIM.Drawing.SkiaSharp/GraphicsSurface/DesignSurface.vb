@@ -65,6 +65,8 @@ Public Class GraphicsSurface
 
     Public NetworkMode As Boolean = False
 
+    Private PrevPositions As New Dictionary(Of String, Tuple(Of Point, Boolean))
+
     Public Property DefaultTypeFace As SKTypeface
 
     Public Sub New()
@@ -1461,6 +1463,8 @@ Public Class GraphicsSurface
         Dim graph As New GeometryGraph
         Dim rec1 As ICurve
 
+        PrevPositions = New Dictionary(Of String, Tuple(Of Point, Boolean))
+
         For Each obj In DrawingObjects
             If Not obj.IsConnector Then
                 Select Case obj.ObjectType
@@ -1470,6 +1474,7 @@ Public Class GraphicsSurface
                         rec1 = Microsoft.Msagl.Core.Geometry.Curves.CurveFactory.CreateRectangle(obj.Width, obj.Height, New Microsoft.Msagl.Core.Geometry.Point(obj.X + obj.Width / 2, obj.Y + obj.Height / 2))
                         Dim n1 = New Node(rec1, obj.Name)
                         graph.Nodes.Add(n1)
+                        PrevPositions.Add(obj.Name, New Tuple(Of Point, Boolean)(New Point(obj.X, obj.Y), obj.FlippedH))
                 End Select
             End If
         Next
@@ -1544,7 +1549,7 @@ Public Class GraphicsSurface
             End If
         Next
 
-        Dim settings = New Microsoft.Msagl.Layout.Incremental.FastIncrementalLayoutSettings()
+        Dim settings = New FastIncrementalLayoutSettings()
         settings.AvoidOverlaps = True
         settings.PackingMethod = PackingMethod.Compact
         settings.NodeSeparation = 50 * DistanceFactor
@@ -1585,11 +1590,43 @@ Public Class GraphicsSurface
                         Else
                             obj.FlippedH = False
                         End If
+                    ElseIf obj.ObjectType = ObjectType.EnergyStream Then
+                        If obj.OutputConnectors(0).IsAttached Then
+                            Dim dest = obj.OutputConnectors(0).AttachedConnector.AttachedTo
+                            If dest.FlippedH Then
+                                obj.X += dest.Width * 1.3
+                            Else
+                                obj.X -= dest.Width * 1.3
+                            End If
+                            If dest.X < obj.X Then
+                                obj.FlippedH = True
+                            Else
+                                obj.FlippedH = False
+                            End If
+                        End If
                     End If
                 End If
             End If
         Next
 
     End Sub
+
+    Public Sub RestoreLayout()
+
+        If PrevPositions.Count > 0 Then
+
+            For Each item In PrevPositions
+                Dim obj = DrawingObjects.Where(Function(x) x.Name = item.Key).FirstOrDefault()
+                If obj IsNot Nothing Then
+                    obj.X = item.Value.Item1.X
+                    obj.Y = item.Value.Item1.Y
+                    obj.FlippedH = item.Value.Item2
+                End If
+            Next
+
+        End If
+
+    End Sub
+
 
 End Class

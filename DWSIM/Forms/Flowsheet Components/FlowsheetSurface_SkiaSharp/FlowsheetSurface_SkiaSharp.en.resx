@@ -134,58 +134,67 @@
     <value>860, 351</value>
   </data>
   <data name="ToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 22</value>
+    <value>200, 22</value>
   </data>
   <data name="ToolStripMenuItem3.Text" xml:space="preserve">
     <value>Flowsheet</value>
   </data>
   <data name="ToolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 6</value>
+    <value>197, 6</value>
   </data>
   <data name="ExibirTudoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 22</value>
+    <value>200, 22</value>
   </data>
   <data name="ExibirTudoToolStripMenuItem.Text" xml:space="preserve">
     <value>Zoom All</value>
   </data>
   <data name="ZoomPadrao100ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 22</value>
+    <value>200, 22</value>
   </data>
   <data name="ZoomPadrao100ToolStripMenuItem.Text" xml:space="preserve">
     <value>Default Zoom</value>
   </data>
   <data name="CentralizarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 22</value>
+    <value>200, 22</value>
   </data>
   <data name="CentralizarToolStripMenuItem.Text" xml:space="preserve">
     <value>Center</value>
   </data>
   <data name="CopyAsImageToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 22</value>
+    <value>200, 22</value>
   </data>
   <data name="CopyAsImageToolStripMenuItem.Text" xml:space="preserve">
     <value>Copy As Image</value>
   </data>
   <data name="CopiarComoImagem200ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 22</value>
+    <value>200, 22</value>
   </data>
   <data name="CopiarComoImagem200ToolStripMenuItem.Text" xml:space="preserve">
     <value>Copy as Image (200%)</value>
   </data>
   <data name="CopiarComoImagem300ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 22</value>
+    <value>200, 22</value>
   </data>
   <data name="CopiarComoImagem300ToolStripMenuItem.Text" xml:space="preserve">
     <value>Copy as Image (300%)</value>
   </data>
   <data name="ToolStripSeparator18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 6</value>
+    <value>197, 6</value>
+  </data>
+  <data name="LayoutAutomaticoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 22</value>
   </data>
   <data name="LayoutAutomaticoToolStripMenuItem.Text" xml:space="preserve">
     <value>Perform Auto-Layout</value>
   </data>
+  <data name="RestaurarLayoutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 22</value>
+  </data>
+  <data name="RestaurarLayoutToolStripMenuItem.Text" xml:space="preserve">
+    <value>Restore Previous Layout</value>
+  </data>
   <data name="CMS_NoSel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 192</value>
+    <value>201, 236</value>
   </data>
   <data name="TSMI_Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>241, 22</value>

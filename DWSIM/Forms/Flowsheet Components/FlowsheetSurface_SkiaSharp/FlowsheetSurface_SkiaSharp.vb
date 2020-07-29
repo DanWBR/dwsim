@@ -3123,6 +3123,17 @@ Public Class FlowsheetSurface_SkiaSharp
         FlowsheetSurface.ZoomAll(SplitContainer1.Panel1.Width, SplitContainer1.Panel1.Height)
         FlowsheetSurface.ZoomAll(SplitContainer1.Panel1.Width, SplitContainer1.Panel1.Height)
         FControl.Invalidate()
+        RestaurarLayoutToolStripMenuItem.Enabled = True
+
+    End Sub
+
+    Private Sub RestaurarLayoutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RestaurarLayoutToolStripMenuItem.Click
+
+        FlowsheetSurface.RestoreLayout()
+        FlowsheetSurface.ZoomAll(SplitContainer1.Panel1.Width, SplitContainer1.Panel1.Height)
+        FlowsheetSurface.ZoomAll(SplitContainer1.Panel1.Width, SplitContainer1.Panel1.Height)
+        FControl.Invalidate()
+        RestaurarLayoutToolStripMenuItem.Enabled = False
 
     End Sub
 
