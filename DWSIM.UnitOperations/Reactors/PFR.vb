@@ -185,10 +185,10 @@ Namespace Reactors
 
             Dim conv As New SystemsOfUnits.Converter
 
-            Dim i As Integer = 0
-            Dim j As Integer = 0
-            Dim scBC As Double = 0
-            Dim BC As String = ""
+            Dim i As Integer
+            Dim j As Integer
+            Dim scBC As Double
+            Dim BC As String
 
             Dim Qf As Double
 
@@ -604,7 +604,6 @@ Namespace Reactors
             Next
 
         End Sub
-
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
@@ -1205,7 +1204,7 @@ Namespace Reactors
 
                 ' comp. conversions
                 For Each sb As Compound In ims.Phases(0).Compounds.Values
-                    If Me.ComponentConversions.ContainsKey(sb.Name) AndAlso N00(sb.Name) > 0 Then
+                    If Me.ComponentConversions.ContainsKey(sb.Name) AndAlso N00(sb.Name) > 0.0000000001 Then
                         Me.ComponentConversions(sb.Name) = Abs(N00(sb.Name) - N(sb.Name)) / N00(sb.Name)
                     End If
                 Next
