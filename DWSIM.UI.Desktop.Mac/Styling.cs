@@ -54,6 +54,8 @@ namespace DWSIM.UI.Desktop.Mac
         public static void BeginLaunching()
         {
 
+            NSApplication.CheckForEventAndDelegateMismatches = false;
+
             var dmset = NSUserDefaults.StandardUserDefaults["AppleInterfaceStyle"];
             if (dmset != null)
             {
