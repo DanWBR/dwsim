@@ -4093,7 +4093,7 @@
             <param name="flag">Specified style item to be get</param>
             <returns>Style item value</returns>
         </member>
-        <member name="M:DWSIM.CrossPlatform.UI.Controls.ReoGrid.Worksheet.UpdateCellTextBounds(DWSIM.CrossPlatform.UI.Controls.ReoGrid.Cell)">
+        <member name="M:DWSIM.CrossPlatform.UI.Controls.ReoGrid.Worksheet.UpdateCellTextBounds(DWSIM.CrossPlatform.UI.Controls.ReoGrid.Rendering.IRenderer,DWSIM.CrossPlatform.UI.Controls.ReoGrid.Cell)">
             <summary>
             Update Cell Text Bounds for View/Edit mode
             </summary>
