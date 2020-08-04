@@ -56,11 +56,11 @@ Public Class FormSimulSettings
                 End If
             End If
 
-            Try
-                Init()
-            Catch ex As Exception
+            'Try
+            '    Init()
+            'Catch ex As Exception
 
-            End Try
+            'End Try
 
         End If
     End Sub
@@ -79,6 +79,18 @@ Public Class FormSimulSettings
         Dim rm As New FormReacManager
         rm.Dock = DockStyle.Fill
         TabPageReactions.Controls.Add(rm)
+
+        ogc1.RowTemplate.Height = 23 * Settings.DpiScale
+        DataGridViewPP.RowTemplate.Height = 23 * Settings.DpiScale
+        dgvpp.RowTemplate.Height = 23 * Settings.DpiScale
+        dgvAddedFlashAlgos.RowTemplate.Height = 23 * Settings.DpiScale
+        dgvAvailableFlashAlgos.RowTemplate.Height = 23 * Settings.DpiScale
+
+        ogc1.ColumnHeadersHeight *= Settings.DpiScale
+        DataGridViewPP.ColumnHeadersHeight *= Settings.DpiScale
+        dgvpp.ColumnHeadersHeight *= Settings.DpiScale
+        dgvAddedFlashAlgos.ColumnHeadersHeight *= Settings.DpiScale
+        dgvAvailableFlashAlgos.ColumnHeadersHeight *= Settings.DpiScale
 
         Init()
 

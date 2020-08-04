@@ -2886,6 +2886,11 @@ Public Class FormFlowsheet
         Return dckPanel
     End Function
 
+    Public Sub UpdateSettingsPanel()
+
+        FrmStSim1.Init(True)
+
+    End Sub
 
     Private Sub AdicionarUtilitárioToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TSMIAddUtility.Click
 

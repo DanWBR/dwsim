@@ -40,6 +40,9 @@ Public Class FormSimulWizard
         Me.StepWizardControl1.CancelButtonText = DWSIM.App.GetLocalString("CancelText")
         Me.StepWizardControl1.NextButtonText = DWSIM.App.GetLocalString("NextText") & " >"
 
+        ogc1.RowTemplate.Height = 23 * Settings.DpiScale
+        ogc1.ColumnHeadersHeight *= Settings.DpiScale
+
         Init()
 
     End Sub
