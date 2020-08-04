@@ -44,8 +44,9 @@ Namespace Charts
 
             Dim elements = XMLSerializer.XMLSerializer.Serialize(Me)
 
-            Dim el_model = XMLSerializer.XMLSerializer.Serialize(PlotModel)
+            If PlotModel Is Nothing Then Return elements
 
+            Dim el_model = XMLSerializer.XMLSerializer.Serialize(PlotModel)
             elements.Add(New XElement("PlotModel", el_model))
 
             Dim series As New List(Of XElement)
@@ -74,25 +75,29 @@ Namespace Charts
 
             XMLSerializer.XMLSerializer.Deserialize(Me, data)
 
-            XMLSerializer.XMLSerializer.Deserialize(PlotModel, data.Where(Function(e) e.Name = "PlotModel").Elements.ToList())
+            Try
+                XMLSerializer.XMLSerializer.Deserialize(PlotModel, data.Where(Function(e) e.Name = "PlotModel").Elements.ToList())
 
-            DirectCast(PlotModel, PlotModel).Series.Clear()
+                DirectCast(PlotModel, PlotModel).Series.Clear()
 
-            For Each el In data.Where(Function(e) e.Name = "Series").Elements.ToList
-                Dim ls As New OxyPlot.Series.LineSeries()
-                ls.Title = ""
-                XMLSerializer.XMLSerializer.Deserialize(ls, el.Elements.ToList)
-                DirectCast(PlotModel, PlotModel).Series.Add(ls)
-            Next
+                For Each el In data.Where(Function(e) e.Name = "Series").Elements.ToList
+                    Dim ls As New OxyPlot.Series.LineSeries()
+                    ls.Title = ""
+                    XMLSerializer.XMLSerializer.Deserialize(ls, el.Elements.ToList)
+                    DirectCast(PlotModel, PlotModel).Series.Add(ls)
+                Next
 
-            DirectCast(PlotModel, PlotModel).Axes.Clear()
+                DirectCast(PlotModel, PlotModel).Axes.Clear()
 
-            For Each el In data.Where(Function(e) e.Name = "Axes").Elements.ToList
-                Dim a As New OxyPlot.Axes.LinearAxis()
-                a.Title = ""
-                XMLSerializer.XMLSerializer.Deserialize(a, el.Elements.ToList)
-                DirectCast(PlotModel, PlotModel).Axes.Add(a)
-            Next
+                For Each el In data.Where(Function(e) e.Name = "Axes").Elements.ToList
+                    Dim a As New OxyPlot.Axes.LinearAxis()
+                    a.Title = ""
+                    XMLSerializer.XMLSerializer.Deserialize(a, el.Elements.ToList)
+                    DirectCast(PlotModel, PlotModel).Axes.Add(a)
+                Next
+            Catch ex As Exception
+
+            End Try
 
             Return True
 
