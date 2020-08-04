@@ -1846,7 +1846,7 @@
     <value>3, 3</value>
   </data>
   <data name="gridReactions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>290, 155</value>
+    <value>337, 155</value>
   </data>
   <data name="gridReactions.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -1870,7 +1870,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>296, 161</value>
+    <value>343, 161</value>
   </data>
   <data name="TabPage2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1909,7 +1909,7 @@
     <value>0, 0</value>
   </data>
   <data name="gridConversions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>296, 161</value>
+    <value>343, 161</value>
   </data>
   <data name="gridConversions.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1930,7 +1930,7 @@
     <value>4, 22</value>
   </data>
   <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>296, 161</value>
+    <value>343, 161</value>
   </data>
   <data name="TabPage3.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2008,7 +2008,7 @@
     <value>25</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>96, 96</value>
   </data>
   <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2098,6 +2098,6 @@
     <value>EditingForm_ReactorCSTR</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=5.8.7202.32026, Culture=neutral, PublicKeyToken=null</value>
+    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=6.1.7521.19214, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

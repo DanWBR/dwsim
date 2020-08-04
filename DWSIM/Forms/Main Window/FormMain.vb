@@ -3131,6 +3131,7 @@ Label_00CC:
     Sub LoadFile(fpath As String)
 
         Me.WelcomePanel.Visible = False
+        PainelDeBoasvindasToolStripMenuItem.Checked = False
 
         Dim floading As New FormLoadingSimulation
 
@@ -3395,6 +3396,7 @@ Label_00CC:
     Public Sub NewToolStripButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles NewToolStripButton.Click, NewToolStripMenuItem.Click
 
         Me.WelcomePanel.Visible = False
+        PainelDeBoasvindasToolStripMenuItem.Checked = False
 
         Dim newform As New FormFlowsheet()
 
@@ -3464,6 +3466,7 @@ Label_00CC:
             If File.Exists(myLink.Tag.ToString) Then
 
                 Me.WelcomePanel.Visible = False
+                PainelDeBoasvindasToolStripMenuItem.Checked = False
 
                 Dim floading As New FormLoadingSimulation
 

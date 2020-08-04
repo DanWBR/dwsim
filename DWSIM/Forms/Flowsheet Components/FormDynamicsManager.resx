@@ -1461,6 +1461,9 @@
   <data name="Column9.HeaderText" xml:space="preserve">
     <value>Nome</value>
   </data>
+  <data name="Column9.Width" type="System.Int32, mscorlib">
+    <value>60</value>
+  </data>
   <metadata name="DataGridViewComboBoxColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>

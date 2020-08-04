@@ -666,6 +666,10 @@ Public Class FormNewSpreadsheet
 
         Spreadsheet.RemoveWorksheet(sheet)
 
+        For Each sheet In Spreadsheet.Worksheets
+            If sheet.ScaleFactor < Settings.DpiScale Then sheet.ScaleFactor = Settings.DpiScale
+        Next
+
     End Sub
 
 #If Not LINUX Then

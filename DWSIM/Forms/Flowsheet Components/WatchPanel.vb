@@ -12,6 +12,9 @@
 
         If items Is Nothing Then items = New Dictionary(Of Integer, Extras.WatchItem)
 
+        Dim dpi = Settings.DpiScale
+        dgv.ColumnHeadersHeight *= dpi
+
     End Sub
 
     Private Sub frmWatch_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown

@@ -83,9 +83,11 @@ namespace WeifenLuo.WinFormsUI.Docking
 
                 imageAttributes.SetRemapTable(colorMap);
 
+                var scaling = e.Graphics.DpiX / 96.0f;
+
                 e.Graphics.DrawImage(
                    Image,
-                   new Rectangle(0, 0, Image.Width, Image.Height),
+                   new Rectangle(0, 0, (int)(Image.Width * scaling), (int)(Image.Height * scaling)),
                    0, 0,
                    Image.Width,
                    Image.Height,

@@ -453,4 +453,11 @@ Public Class FormWelcome
     Private Sub LinkLabel7_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel7.LinkClicked
         Process.Start("https://www.patreon.com/dwsim/merch")
     End Sub
+
+    Private Sub FormWelcome_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
+
+        FormMain.PainelDeBoasvindasToolStripMenuItem.Checked = Visible
+
+    End Sub
+
 End Class

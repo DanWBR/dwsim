@@ -690,7 +690,7 @@ Partial Class EditingForm_ReactorCSTR
         'EditingForm_ReactorCSTR
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox6)
         Me.Controls.Add(Me.GroupBox3)

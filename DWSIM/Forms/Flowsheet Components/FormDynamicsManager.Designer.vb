@@ -782,7 +782,7 @@ Partial Class FormDynamicsManager
         Me.gridMonitoredVariables.AllowUserToAddRows = False
         Me.gridMonitoredVariables.AllowUserToDeleteRows = False
         Me.gridMonitoredVariables.AllowUserToResizeRows = False
-        Me.gridMonitoredVariables.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.gridMonitoredVariables.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
         Me.gridMonitoredVariables.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells
         Me.gridMonitoredVariables.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
         Me.gridMonitoredVariables.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
@@ -793,7 +793,6 @@ Partial Class FormDynamicsManager
         DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         Me.gridMonitoredVariables.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
-        Me.gridMonitoredVariables.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridMonitoredVariables.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn13, Me.Column9, Me.DataGridViewComboBoxColumn1, Me.DataGridViewComboBoxColumn5, Me.DataGridViewTextBoxColumn18})
         resources.ApplyResources(Me.gridMonitoredVariables, "gridMonitoredVariables")
         Me.gridMonitoredVariables.Name = "gridMonitoredVariables"
@@ -1088,7 +1087,6 @@ Partial Class FormDynamicsManager
         DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvControllers.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
-        Me.dgvControllers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvControllers.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column8, Me.Column3, Me.Column4, Me.Column5, Me.Column7, Me.Column6})
         resources.ApplyResources(Me.dgvControllers, "dgvControllers")
         Me.dgvControllers.Name = "dgvControllers"
@@ -1166,7 +1164,6 @@ Partial Class FormDynamicsManager
         DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvIndicators.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle11
-        Me.dgvIndicators.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvIndicators.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn9, Me.DataGridViewTextBoxColumn10, Me.DataGridViewTextBoxColumn14, Me.DataGridViewTextBoxColumn15, Me.DataGridViewTextBoxColumn16, Me.DataGridViewTextBoxColumn17})
         DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window

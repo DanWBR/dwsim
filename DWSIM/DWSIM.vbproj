@@ -394,8 +394,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Python.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="RichTextBoxExtended, Version=2.0.2954.894, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="RichTextBoxExtended">
       <HintPath>References\RichTextBoxExtended.dll</HintPath>
     </Reference>
     <Reference Include="Scintilla.Eto.Shared, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">

@@ -33,6 +33,8 @@ Partial Class ScriptEditorControl
         Me.tc2 = New Aga.Controls.Tree.TreeColumn()
         Me.tc3 = New Aga.Controls.Tree.TreeColumn()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ItemToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ViewAPIHelpTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewSourceCodeTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.NodeIcon1 = New Aga.Controls.Tree.NodeControls.NodeIcon()
@@ -48,8 +50,6 @@ Partial Class ScriptEditorControl
         Me.Label1 = New System.Windows.Forms.Label()
         Me.chkLink = New System.Windows.Forms.CheckBox()
         Me.treeViewItems = New System.Windows.Forms.TreeView()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ItemToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -143,6 +143,16 @@ Partial Class ScriptEditorControl
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ItemToolStripMenuItem, Me.ToolStripSeparator1, Me.ViewAPIHelpTSMI, Me.ViewSourceCodeTSMI})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
         resources.ApplyResources(Me.ContextMenuStrip1, "ContextMenuStrip1")
+        '
+        'ItemToolStripMenuItem
+        '
+        resources.ApplyResources(Me.ItemToolStripMenuItem, "ItemToolStripMenuItem")
+        Me.ItemToolStripMenuItem.Name = "ItemToolStripMenuItem"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        resources.ApplyResources(Me.ToolStripSeparator1, "ToolStripSeparator1")
         '
         'ViewAPIHelpTSMI
         '
@@ -244,25 +254,14 @@ Partial Class ScriptEditorControl
         '
         'treeViewItems
         '
-        Me.treeViewItems.LineColor = System.Drawing.Color.Empty
         resources.ApplyResources(Me.treeViewItems, "treeViewItems")
         Me.treeViewItems.Name = "treeViewItems"
         Me.treeViewItems.PathSeparator = "."
         '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        resources.ApplyResources(Me.ToolStripSeparator1, "ToolStripSeparator1")
-        '
-        'ItemToolStripMenuItem
-        '
-        resources.ApplyResources(Me.ItemToolStripMenuItem, "ItemToolStripMenuItem")
-        Me.ItemToolStripMenuItem.Name = "ItemToolStripMenuItem"
-        '
         'ScriptEditorControl
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "ScriptEditorControl"

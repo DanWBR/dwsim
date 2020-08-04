@@ -18,6 +18,14 @@ Public Class FormDynamicsManager
 
         Manager = Flowsheet.DynamicsManager
 
+        Dim dpi = Settings.DpiScale
+
+        gridselectedset.ColumnHeadersHeight *= dpi
+        grdiselmatrix.ColumnHeadersHeight *= dpi
+        gridMonitoredVariables.ColumnHeadersHeight *= dpi
+        dgvControllers.ColumnHeadersHeight *= dpi
+        dgvIndicators.ColumnHeadersHeight *= dpi
+
         UpdateSelectables()
 
         UpdateAllPanels()

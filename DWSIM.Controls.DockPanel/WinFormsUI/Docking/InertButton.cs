@@ -463,7 +463,9 @@ namespace WeifenLuo.WinFormsUI.Docking
                 imageAttr.SetRemapTable(colorMap);
             }
 
-            Rectangle rect = new Rectangle(0, 0, image.Width, image.Height);
+            var scaling = g.DpiX / 96.0f;
+
+            Rectangle rect = new Rectangle(0, 0, (int)(image.Width * scaling), (int)(image.Height * scaling));
 
             if ((!Enabled) && (null == ImageDisabled))
             {

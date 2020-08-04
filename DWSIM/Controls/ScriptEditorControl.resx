@@ -232,28 +232,28 @@
     <value>False</value>
   </data>
   <data name="ItemToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>167, 22</value>
   </data>
   <data name="ItemToolStripMenuItem.Text" xml:space="preserve">
     <value>item</value>
   </data>
   <data name="ToolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>164, 6</value>
   </data>
   <data name="ViewAPIHelpTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>167, 22</value>
   </data>
   <data name="ViewAPIHelpTSMI.Text" xml:space="preserve">
     <value>Ver Ajuda da API</value>
   </data>
   <data name="ViewSourceCodeTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>167, 22</value>
   </data>
   <data name="ViewSourceCodeTSMI.Text" xml:space="preserve">
     <value>Ver Código-Fonte</value>
   </data>
   <data name="ContextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 98</value>
+    <value>168, 76</value>
   </data>
   <data name="&gt;&gt;ContextMenuStrip1.Name" xml:space="preserve">
     <value>ContextMenuStrip1</value>
@@ -601,7 +601,7 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>96, 96</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>1019, 592</value>
@@ -623,6 +623,18 @@
   </data>
   <data name="&gt;&gt;tc3.Type" xml:space="preserve">
     <value>Aga.Controls.Tree.TreeColumn, Aga.Controls, Version=1.7.0.0, Culture=neutral, PublicKeyToken=fcc90fbf924463a3</value>
+  </data>
+  <data name="&gt;&gt;ItemToolStripMenuItem.Name" xml:space="preserve">
+    <value>ItemToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;ItemToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator1.Name" xml:space="preserve">
+    <value>ToolStripSeparator1</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ViewAPIHelpTSMI.Name" xml:space="preserve">
     <value>ViewAPIHelpTSMI</value>
@@ -659,18 +671,6 @@
   </data>
   <data name="&gt;&gt;NodeTextBox3.Type" xml:space="preserve">
     <value>Aga.Controls.Tree.NodeControls.NodeTextBox, Aga.Controls, Version=1.7.0.0, Culture=neutral, PublicKeyToken=fcc90fbf924463a3</value>
-  </data>
-  <data name="&gt;&gt;ToolStripSeparator1.Name" xml:space="preserve">
-    <value>ToolStripSeparator1</value>
-  </data>
-  <data name="&gt;&gt;ToolStripSeparator1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ItemToolStripMenuItem.Name" xml:space="preserve">
-    <value>ItemToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;ItemToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ScriptEditorControl</value>

@@ -19,6 +19,8 @@ Public Class LogPanel
     Private Sub frmLog_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         Grid1.Sort(Grid1.Columns(1), System.ComponentModel.ListSortDirection.Descending)
+        Dim dpi = Settings.DpiScale
+        Grid1.ColumnHeadersHeight *= dpi
 
     End Sub
 
