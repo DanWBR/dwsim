@@ -42,6 +42,8 @@ Public Class FormSimulSettings
 
     Dim vdPP, vdSR As MessageBox()
 
+    Dim SetHeights As Boolean = False
+
     Private Sub FormSimulSettings_DockStateChanged(sender As Object, e As EventArgs) Handles Me.DockStateChanged
 
         If Not Me.DockHandler Is Nothing OrElse Not Me.DockHandler.FloatPane Is Nothing Then
@@ -56,16 +58,16 @@ Public Class FormSimulSettings
                 End If
             End If
 
-            'Try
-            '    Init()
-            'Catch ex As Exception
+            Try
+                Init()
+            Catch ex As Exception
 
-            'End Try
+            End Try
 
         End If
     End Sub
 
-    Private Sub FormStSim_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub FormStSim_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Me.Load
 
         Me.TabText = Me.Text
 
@@ -79,18 +81,6 @@ Public Class FormSimulSettings
         Dim rm As New FormReacManager
         rm.Dock = DockStyle.Fill
         TabPageReactions.Controls.Add(rm)
-
-        ogc1.RowTemplate.Height = 23 * Settings.DpiScale
-        DataGridViewPP.RowTemplate.Height = 23 * Settings.DpiScale
-        dgvpp.RowTemplate.Height = 23 * Settings.DpiScale
-        dgvAddedFlashAlgos.RowTemplate.Height = 23 * Settings.DpiScale
-        dgvAvailableFlashAlgos.RowTemplate.Height = 23 * Settings.DpiScale
-
-        ogc1.ColumnHeadersHeight *= Settings.DpiScale
-        DataGridViewPP.ColumnHeadersHeight *= Settings.DpiScale
-        dgvpp.ColumnHeadersHeight *= Settings.DpiScale
-        dgvAddedFlashAlgos.ColumnHeadersHeight *= Settings.DpiScale
-        dgvAvailableFlashAlgos.ColumnHeadersHeight *= Settings.DpiScale
 
         Init()
 
@@ -115,6 +105,24 @@ Public Class FormSimulSettings
     End Sub
 
     Sub Init(Optional ByVal reset As Boolean = False)
+
+        If Not SetHeights Then
+
+            ogc1.RowTemplate.Height = 23 * Settings.DpiScale
+            DataGridViewPP.RowTemplate.Height = 23 * Settings.DpiScale
+            dgvpp.RowTemplate.Height = 23 * Settings.DpiScale
+            dgvAddedFlashAlgos.RowTemplate.Height = 23 * Settings.DpiScale
+            dgvAvailableFlashAlgos.RowTemplate.Height = 23 * Settings.DpiScale
+
+            ogc1.ColumnHeadersHeight *= Settings.DpiScale
+            DataGridViewPP.ColumnHeadersHeight *= Settings.DpiScale
+            dgvpp.ColumnHeadersHeight *= Settings.DpiScale
+            dgvAddedFlashAlgos.ColumnHeadersHeight *= Settings.DpiScale
+            dgvAvailableFlashAlgos.ColumnHeadersHeight *= Settings.DpiScale
+
+            SetHeights = True
+
+        End If
 
         Dim pathsep As Char = Path.DirectorySeparatorChar
 

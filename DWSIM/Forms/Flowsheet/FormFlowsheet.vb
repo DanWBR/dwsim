@@ -1197,8 +1197,6 @@ Public Class FormFlowsheet
         Me.Options.FlowsheetShowWatchWindow = varpaneltsmi.Checked
     End Sub
 
-
-
     Private Sub SimulationConfig_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsmiConfigSimulation.Click
         If DWSIM.App.IsRunningOnMono Then
             Me.FrmStSim1 = New FormSimulSettings()
