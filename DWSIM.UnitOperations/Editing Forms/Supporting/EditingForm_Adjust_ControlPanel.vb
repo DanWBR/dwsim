@@ -4,8 +4,6 @@ Imports System.Drawing
 
 Public Class EditingForm_Adjust_ControlPanel
 
-    Inherits SharedClasses.ObjectEditorForm
-
     Private formC As IFlowsheet
     Public status As String = ""
     Public cancelar As Boolean = False
@@ -52,7 +50,6 @@ Public Class EditingForm_Adjust_ControlPanel
         px = New List(Of Double)
 
         Me.Text = myADJ.GraphicObject.Tag & " - " & formC.GetTranslatedString("PaineldeControle")
-        Me.TabText = Me.Text
 
         loaded = True
 
@@ -714,34 +711,6 @@ Final3:
                 myADJ.MaxVal = Double.Parse(tbMax.Text)
             End If
         End If
-    End Sub
-
-    Public Sub DockingHandler(sender As Object, e As EventArgs) Handles tsbDockingLeft.Click, tsbDockingBottom.Click, tsbDockingDocument.Click,
-                                                                    tsbDockingFloat.Click, tsbDockingLeftAutoHide.Click, tsbDockingRight.Click,
-                                                                    tsbDockingRightAutoHide.Click, tsbDockingTop.Click
-
-        If sender Is tsbDockingLeft Then
-            Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockLeft
-        ElseIf sender Is tsbDockingLeftAutoHide Then
-            Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockLeftAutoHide
-        ElseIf sender Is tsbDockingRight Then
-            Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockRight
-        ElseIf sender Is tsbDockingRightAutoHide Then
-            Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockRightAutoHide
-        ElseIf sender Is tsbDockingTop Then
-            Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockTop
-        ElseIf sender Is tsbDockingBottom Then
-            Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockBottom
-        ElseIf sender Is tsbDockingDocument Then
-            Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.Document
-        ElseIf sender Is tsbDockingFloat Then
-            Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.Float
-        End If
-
-    End Sub
-
-    Private Sub tsbClose_Click(sender As Object, e As EventArgs) Handles tsbClose.Click
-        Me.Close()
     End Sub
 
     Private Sub rbSecante_CheckedChanged(sender As Object, e As EventArgs) Handles rbSecante.CheckedChanged

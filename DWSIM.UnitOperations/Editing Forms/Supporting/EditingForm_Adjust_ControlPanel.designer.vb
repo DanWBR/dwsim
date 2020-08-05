@@ -1,9 +1,9 @@
-<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class EditingForm_Adjust_ControlPanel
-    Inherits SharedClasses.ObjectEditorForm
+    Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,11 +20,11 @@ Partial Class EditingForm_Adjust_ControlPanel
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_Adjust_ControlPanel))
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.btnParar = New System.Windows.Forms.Button()
         Me.btnIniciar = New System.Windows.Forms.Button()
         Me.rbBrent = New System.Windows.Forms.RadioButton()
@@ -52,17 +52,6 @@ Partial Class EditingForm_Adjust_ControlPanel
         Me.lblStatus = New System.Windows.Forms.Label()
         Me.lblItXdeY = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
-        Me.tsbDockingLeft = New System.Windows.Forms.ToolStripButton()
-        Me.tsbDockingLeftAutoHide = New System.Windows.Forms.ToolStripButton()
-        Me.tsbDockingRightAutoHide = New System.Windows.Forms.ToolStripButton()
-        Me.tsbDockingRight = New System.Windows.Forms.ToolStripButton()
-        Me.tsbDockingTop = New System.Windows.Forms.ToolStripButton()
-        Me.tsbDockingBottom = New System.Windows.Forms.ToolStripButton()
-        Me.tsbDockingDocument = New System.Windows.Forms.ToolStripButton()
-        Me.tsbDockingFloat = New System.Windows.Forms.ToolStripButton()
-        Me.tsbClose = New System.Windows.Forms.ToolStripButton()
         Me.GroupBox2.SuspendLayout()
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStrip1.SuspendLayout()
@@ -70,7 +59,6 @@ Partial Class EditingForm_Adjust_ControlPanel
         Me.FaTabStripItem2.SuspendLayout()
         CType(Me.Grid1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox3.SuspendLayout()
-        Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnParar
@@ -205,7 +193,6 @@ Partial Class EditingForm_Adjust_ControlPanel
         Me.FaTabStripItem2.Controls.Add(Me.Grid1)
         Me.FaTabStripItem2.IsDrawn = True
         Me.FaTabStripItem2.Name = "FaTabStripItem2"
-        Me.FaTabStripItem2.Selected = True
         resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         '
         'Grid1
@@ -214,8 +201,8 @@ Partial Class EditingForm_Adjust_ControlPanel
         Me.Grid1.AllowUserToDeleteRows = False
         Me.Grid1.AllowUserToOrderColumns = True
         Me.Grid1.AllowUserToResizeRows = False
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.Grid1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.Grid1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.Grid1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.Grid1.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
         Me.Grid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -270,95 +257,14 @@ Partial Class EditingForm_Adjust_ControlPanel
         resources.ApplyResources(Me.Label2, "Label2")
         Me.Label2.Name = "Label2"
         '
-        'ToolStrip1
-        '
-        resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
-        Me.ToolStrip1.BackColor = System.Drawing.Color.SteelBlue
-        Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.tsbDockingLeft, Me.tsbDockingLeftAutoHide, Me.tsbDockingRightAutoHide, Me.tsbDockingRight, Me.tsbDockingTop, Me.tsbDockingBottom, Me.tsbDockingDocument, Me.tsbDockingFloat, Me.tsbClose})
-        Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
-        '
-        'ToolStripLabel1
-        '
-        Me.ToolStripLabel1.ForeColor = System.Drawing.Color.White
-        Me.ToolStripLabel1.Name = "ToolStripLabel1"
-        resources.ApplyResources(Me.ToolStripLabel1, "ToolStripLabel1")
-        '
-        'tsbDockingLeft
-        '
-        Me.tsbDockingLeft.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbDockingLeft.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.arrow_left
-        resources.ApplyResources(Me.tsbDockingLeft, "tsbDockingLeft")
-        Me.tsbDockingLeft.Name = "tsbDockingLeft"
-        '
-        'tsbDockingLeftAutoHide
-        '
-        Me.tsbDockingLeftAutoHide.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbDockingLeftAutoHide.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.rewind
-        resources.ApplyResources(Me.tsbDockingLeftAutoHide, "tsbDockingLeftAutoHide")
-        Me.tsbDockingLeftAutoHide.Name = "tsbDockingLeftAutoHide"
-        '
-        'tsbDockingRightAutoHide
-        '
-        Me.tsbDockingRightAutoHide.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbDockingRightAutoHide.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.fast_forward
-        resources.ApplyResources(Me.tsbDockingRightAutoHide, "tsbDockingRightAutoHide")
-        Me.tsbDockingRightAutoHide.Name = "tsbDockingRightAutoHide"
-        '
-        'tsbDockingRight
-        '
-        Me.tsbDockingRight.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbDockingRight.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.arrow_right
-        resources.ApplyResources(Me.tsbDockingRight, "tsbDockingRight")
-        Me.tsbDockingRight.Name = "tsbDockingRight"
-        '
-        'tsbDockingTop
-        '
-        Me.tsbDockingTop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbDockingTop.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.arrow_up
-        resources.ApplyResources(Me.tsbDockingTop, "tsbDockingTop")
-        Me.tsbDockingTop.Name = "tsbDockingTop"
-        '
-        'tsbDockingBottom
-        '
-        Me.tsbDockingBottom.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbDockingBottom.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.arrow_down
-        resources.ApplyResources(Me.tsbDockingBottom, "tsbDockingBottom")
-        Me.tsbDockingBottom.Name = "tsbDockingBottom"
-        '
-        'tsbDockingDocument
-        '
-        Me.tsbDockingDocument.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbDockingDocument.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.arrows_4_way
-        resources.ApplyResources(Me.tsbDockingDocument, "tsbDockingDocument")
-        Me.tsbDockingDocument.Name = "tsbDockingDocument"
-        '
-        'tsbDockingFloat
-        '
-        Me.tsbDockingFloat.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbDockingFloat.Image = Global.DWSIM.UnitOperations.My.Resources.Resources._new
-        resources.ApplyResources(Me.tsbDockingFloat, "tsbDockingFloat")
-        Me.tsbDockingFloat.Name = "tsbDockingFloat"
-        '
-        'tsbClose
-        '
-        Me.tsbClose.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.tsbClose.ForeColor = System.Drawing.Color.White
-        Me.tsbClose.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.cross
-        resources.ApplyResources(Me.tsbClose, "tsbClose")
-        Me.tsbClose.Name = "tsbClose"
-        '
         'EditingForm_Adjust_ControlPanel
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
         Me.Name = "EditingForm_Adjust_ControlPanel"
-        Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Float
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.GroupBox2.ResumeLayout(False)
@@ -370,8 +276,6 @@ Partial Class EditingForm_Adjust_ControlPanel
         CType(Me.Grid1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
-        Me.ToolStrip1.ResumeLayout(False)
-        Me.ToolStrip1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -402,15 +306,4 @@ Partial Class EditingForm_Adjust_ControlPanel
     Public WithEvents tbMin As System.Windows.Forms.TextBox
     Public WithEvents Label1 As System.Windows.Forms.Label
     Public WithEvents KryptonLabel1 As System.Windows.Forms.Label
-    Public WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
-    Public WithEvents ToolStripLabel1 As System.Windows.Forms.ToolStripLabel
-    Public WithEvents tsbDockingLeft As System.Windows.Forms.ToolStripButton
-    Public WithEvents tsbDockingLeftAutoHide As System.Windows.Forms.ToolStripButton
-    Public WithEvents tsbDockingRightAutoHide As System.Windows.Forms.ToolStripButton
-    Public WithEvents tsbDockingRight As System.Windows.Forms.ToolStripButton
-    Public WithEvents tsbDockingTop As System.Windows.Forms.ToolStripButton
-    Public WithEvents tsbDockingBottom As System.Windows.Forms.ToolStripButton
-    Public WithEvents tsbDockingDocument As System.Windows.Forms.ToolStripButton
-    Public WithEvents tsbDockingFloat As System.Windows.Forms.ToolStripButton
-    Public WithEvents tsbClose As System.Windows.Forms.ToolStripButton
 End Class

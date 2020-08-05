@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 6.1
+Version 6.1 Update 1
 Copyright (c) 2017-2020 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,14 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/windows
+
+Version 6.1 Update 1
+
+- [CHG] Enhanced spreadsheet performance (Cross-Platform UI)
+- [FIX] Fixed a bug with the calculation of henry's constant
+- [FIX] Fixes for High-DPI displays (Classic UI)
+- [FIX] Fixed an issue on saving simulations with Master Property Tables
+- [FIX] Other bug fixes
 
 Version 6.1
 

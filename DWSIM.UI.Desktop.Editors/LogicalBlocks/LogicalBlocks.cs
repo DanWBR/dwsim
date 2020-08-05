@@ -369,6 +369,12 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
 
             s.CreateAndAddCheckBoxRow(container, "Run with the Simultaneous Adjust Solver", adjust.SimultaneousAdjust, (sender, e) => adjust.SimultaneousAdjust = sender.Checked.GetValueOrDefault());
 
+            s.CreateAndAddButtonRow(container, "Open Control Panel", null, (btn, e) =>{
+                var fcp = new UnitOperations.EditingForm_Adjust_ControlPanel();
+                fcp.myADJ = adjust;
+                fcp.Show();
+            });
+
         }
 
     }
