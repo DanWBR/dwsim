@@ -552,7 +552,7 @@ Namespace PropertyPackages
 
             Dim constprop = Me.DW_GetConstantProperties
 
-            Dim Tc As Object = Me.RET_VTC()
+            Dim Tc As Double() = Me.RET_VTC()
             Dim Tr As Double
             If st = State.Liquid Then
 

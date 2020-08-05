@@ -527,7 +527,7 @@ Namespace PropertyPackages
             Dim fugcoeff(n) As Double
             Dim i As Integer
 
-            Dim Tc As Object = Me.RET_VTC()
+            Dim Tc As Double() = Me.RET_VTC()
 
             Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
             For Each s As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values

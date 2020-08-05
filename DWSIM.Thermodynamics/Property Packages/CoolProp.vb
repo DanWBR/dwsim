@@ -1519,7 +1519,7 @@ Namespace PropertyPackages
             Dim fugcoeff(n) As Double
 
             If st = State.Liquid Then
-                Dim Tc As Object = Me.RET_VTC()
+                Dim Tc As Double() = Me.RET_VTC()
                 For i = 0 To n
                     If T / Tc(i) >= 1 Then
                         IObj?.SetCurrent()

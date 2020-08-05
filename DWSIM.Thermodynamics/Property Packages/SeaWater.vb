@@ -599,7 +599,7 @@ Namespace PropertyPackages
 
             If st = State.Liquid Then
 
-                Dim Tc As Object = Me.RET_VTC()
+                Dim Tc As Double() = Me.RET_VTC()
 
                 For i = 0 To n
 

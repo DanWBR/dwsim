@@ -5484,6 +5484,15 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
         Public Function AUX_KHenry(ByVal CompName As String, ByVal T As Double) As Double
 
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "AUX_KHenry", "Henry's Constant Calculation", "Liquid Phase Fugacity Calculation Routine")
+
+            IObj?.SetCurrent()
+
+            IObj?.Paragraphs.Add(String.Format("Compound: {0}", CompName))
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+
             Dim KHx As Double
             Dim MW As Double = 18 'mol weight of water [g/mol]
             Dim DW As Double = 996 'density of water at 298.15 K [Kg/m3]
@@ -5493,11 +5502,21 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
             CAS = Me.CurrentMaterialStream.Phases(0).Compounds(CompName).ConstantProperties.CAS_Number
 
+            IObj?.Paragraphs.Add(String.Format("CAS Number: {0}", CAS))
+
             If m_Henry.ContainsKey(CAS) Then
                 KHCP = m_Henry(CAS).KHcp
                 C = m_Henry(CAS).C
             End If
+
+            IObj?.Paragraphs.Add(String.Format("KHCP: {0}", KHCP))
+            IObj?.Paragraphs.Add(String.Format("C: {0}", C))
+
             KHx = 1 / (KHCP * MW / DW / 1000 * Exp(C * (1 / T - 1 / 298.15)))
+
+            IObj?.Paragraphs.Add(String.Format("Henry's Constant: {0} Pa", KHx))
+
+            IObj?.Close()
 
             Return KHx '[Pa]
 
@@ -10631,8 +10650,8 @@ Final3:
                 Dim HP As New HenryParam
                 HP.Component = HenryLines(i).Split(";")(1)
                 HP.CAS = HenryLines(i).Split(";")(2)
-                HP.KHcp = Val(HenryLines(i).Split(";")(3))
-                HP.C = Val(HenryLines(i).Split(";")(4))
+                HP.KHcp = HenryLines(i).Split(";")(3).ToDoubleFromInvariant()
+                HP.C = HenryLines(i).Split(";")(4).ToDoubleFromInvariant()
                 If Not m_Henry.ContainsKey(HP.CAS) Then m_Henry.Add(HP.CAS, HP)
             Next
 
