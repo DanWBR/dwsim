@@ -165,11 +165,14 @@
   <data name="&gt;&gt;TabControl1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="LinkLabel10.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 9.75pt, style=Bold</value>
+  </data>
+  <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="&gt;&gt;Button6.ZOrder" xml:space="preserve">
     <value>3</value>
-  </data>
-  <data name="ColumnHeader3.Width" type="System.Int32, mscorlib">
-    <value>984</value>
   </data>
   <data name="&gt;&gt;PictureBox1.Parent" xml:space="preserve">
     <value>Panel1</value>
@@ -185,6 +188,12 @@
   </data>
   <data name="Label13.TabIndex" type="System.Int32, mscorlib">
     <value>44</value>
+  </data>
+  <data name="&gt;&gt;TabPage5.Name" xml:space="preserve">
+    <value>TabPage5</value>
+  </data>
+  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 37</value>
   </data>
   <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 130</value>
@@ -209,6 +218,9 @@
   </data>
   <data name="Label6.Text" xml:space="preserve">
     <value>Utilize esta ferramenta para criar novas substâncias e utilizá-las nos seus modelos de processo.</value>
+  </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>FOSSEE, IIT Bombay, invites chemical engineering students, faculty and practitioners to the flowsheeting project using DWSIM.  We want you to convert existing flowsheets into DWSIM through the following steps and get honoraria and certificates.</value>
   </data>
   <data name="ColumnHeader1.Text" xml:space="preserve">
     <value>File</value>
@@ -237,82 +249,6 @@
   <data name="Button6.Text" xml:space="preserve">
     <value>About FOSSEE</value>
   </data>
-  <data name="ImageList1.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
-        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAD2
-        DwAAAk1TRnQBSQFMAgEBBQEAAbQBBQG8AQUBEAEAARABAAT/AREBEAj/AUIBTQE2BwABNgMAASgDAAFA
-        AwABIAMAAQEBAAEQBgABEP8AFQABeQF3ARMBcwFJAW4BJwFuAScBbgEnAW4BJwFuAScBbgEnAW4BJwFu
-        AScBbgEnAW4BSAFuATUBc2QAAWoBbgG7AXsBdQF7AXMBewFyAXsBcQF7AVABewFPAXsBTwF7AU4BewFN
-        AXsBLQF7AbgBfwFoAW5kAAFoAW4B/QF/AbQBfwGSAX8BkAF7AW4BewFsAXsBSgF7AUgBewFHAXsBJQF7
-        ASQBewHZAX8BaAFuZAABaAFuAf4BfwG2AX8BtAF/AZIBfwGQAXsBbgF7AWwBewFKAXsBSQF7AUcBewEm
-        AXsB2QF/AWgBbmQAAYcBbgH+AX8B2QF/AbcBfwG1AX8BswF/AZEBewGPAXsBbQF7AWsBewFJAXsBSAF7
-        AdoBfwGIAW5kAAGnAW4B/wF/Af8BfwH+AX8B/gF/Af4BfwHbAX8BkgF/AZABewFuAXsBbQF7AWsBewHa
-        AX8BqAFuZAABpwFuAd0BfwFSAXcBMQF3AQ4BdwG5AXsB/gF/Af4BfwH+AX8B/gF/Af0BfwH9AX8B/wF/
-        AcgBbmQAAckBbgH+AX8BcgF7AXIBewFQAXsBLQF3AS0BdwFQAXcBUAF3AU8BdwEuAXcBLgF3Ad0BfwHI
-        AW5kAAHJAW4B/gF/AZEBfwFyAXsBkwF7AZUBewH9AX8B/gF/Af4BfwH+AX8B/QF/Af0BfwH/AX8BDQFv
-        ZAAByAFuAf8BfwH/AX8B/wF/Af8BfwH/AX8B3QF/AS4BcwEuAXMBLgFzAS4BcwFQAXMBUQFzAbsBe2QA
-        AQ4BbwEMAXMBDAFzAQwBcwEMAXMBDAFzAQwBbwH/AX8B/wF/Af8BfwH/AX8B/wF/Af8BfwH/AX//AOcA
-        AZ0BZwGYAR4BmAEeAZgBHgGYAR4BmAEeAZgBHgGYAR4BmAEeAZgBHgGYAR4BmQEmCAABnQFnAZgBHgGY
-        AR4BmAEeAZgBHgGYAR4BmAEeAZgBHgGYAR4BmAEeAZgBHgGZASYIAAGdAWcBmAEeAZgBHgGYAR4BmAEe
-        AZgBHgGYAR4BmAEeAZgBHgGYAR4BmAEeAZkBJggAAZ0BZwGYAR4BmAEeAZgBHgGYAR4BmAEeAZgBHgGY
-        AR4BmAEeAZgBHgGYAR4BmQEmCAABfAFnAVgBDgFYAQ4BkQEFAbEBBQEVAQoBNgEOAfQBBQHzAQkB9AEJ
-        AVgBDgF5ARYIAAF8AWcBWAEOATcBDgH1AQkBsgEFAfQBBQE3AQ4BFQEKAdMBBQGRAQUBkgEFAVcBFggA
-        AXwBZwFYAQ4BNwEOAZABBQH0AQkBsgEFAZABBQEVAQoBkQEFAZEBBQFYAQ4BeQEWCAABfAFnAVgBDgHU
-        AQkBNgEKAbIBBQH0AQUBkQEFAfQBBQGRAQUBkQEFATYBCgF5ARYIAAF8AWcBWAEOAVgBDgHTAQUBsgEF
-        AfUBCQEWAQ4B0wEFAXABBQHUAQkBWAEOAZkBFggAAXwBZwFYAQ4BWAEOAZABBQGyAQUB9AEFAZEBBQGy
-        AQUBswEFAZEBBQFYAQ4BmQEWCAABfAFnAVgBDgFwAQUBNwEKAfQBBQEWAQoB9AEFAdQBCQGzAQUBFQEK
-        ARUBCgGZARYIAAF8AWcBWAEOAdMBCQHUAQUBsgEFARYBCgEWAQoBsQEFAZIBBQE3AQoBTgEFAZkBFggA
-        AXwBZwFYAQ4BWAEOAZEBBQFwAQUBFgEKARYBDgFPAQUBkQEFAdQBCQFYAQ4BmQEWCAABfAFnAVgBDgFY
-        AQ4BkQEFAdQBCQH0AQUBTgEFAZEBBQGzAQUBkQEFAVgBDgGZARYIAAF8AWcBWAEOAU4BBQE3AQoBWAEO
-        AXABBQGxAQkBNwEOAbMBBQEWAQoB0wEJAZkBFggAAXwBZwFYAQ4B0wEJAfQBCQFwAQUB0wEFAW8BBQFY
-        AQoBkgEFAVgBCgFOAQUBmQEWCAABfQFnAVkBDgFZAQ4BkAEFAXABBQEWAQoBNgEOAU8BBQEWAQoB1QEJ
-        AVkBDgGaARoIAAF9AWcBWQEOAVkBDgGyAQUBsgEFAfMBCQFwAQUBsgEFAbMBBQGRAQUBWQEOAZoBGggA
-        AX0BZwFZAQ4BNwEKAXEBBQHTAQUBkQEFAXABBQE3AQoBcAEFAXABBQFZAQ4BmgEaCAABfQFnAVkBDgHT
-        AQkBkQEFAZEBBQH0AQkBsQEFAfUBBQGRAQUBcQEFARUBCgGaARoIAAGdAWcBmQESAZkBEgFXAQ4BeQEO
-        AXkBEgF5ARIBWAEOAXkBDgFZAQoBWQEOAZoBGggAAZ0BZwGZARIBmQESAXgBEgF4AQ4BWAEOAVgBDgFY
-        AQ4BWAEKAVgBCgFZAQ4BmgEaCAABnQFnAZkBEgGZARIBWAEOAZkBEgF5ARIBWAEOAXkBDgE3AQoBWQEK
-        AVkBDgGaARoIAAGdAWcBmQESAXgBEgFXAQ4BeQEOAXkBEgFXAQ4BeQESAVgBCgFYAQoBWQEOAZoBGggA
-        AZ0BZwGZARYBmQEWAZkBFgGZARIBmQESAXkBEgF6AQ4BegEOAXoBDgFZAQ4BmgEaCAABnQFnAZkBFgGZ
-        ARYBmQEWAZkBEgGZARIBeQESAXoBDgF6AQ4BegEOAVkBDgGaARoIAAGdAWcBmQEWAZkBFgGZARYBmQES
-        AZkBEgF5ARIBegEOAXoBDgF6AQ4BWQEOAZoBGggAAZ0BZwGZARYBmQEWAZkBFgGZARIBmQESAXkBEgF6
-        AQ4BegEOAXoBDgFZAQ4BmgEaCAABnQFnAZoBEgGaARYBmgEWAZoBFgGaARIBmgESAZoBEgGaARIBmgEO
-        AXoBDgGbARoIAAGdAWcBmgESAZoBFgGaARYBmgEWAZoBEgGaARIBmgESAZoBEgGaAQ4BegEOAZsBGggA
-        AZ0BZwGaARIBmgEWAZoBFgGaARYBmgESAZoBEgGaARIBmgESAZoBDgF6AQ4BmwEaCAABnQFnAZoBEgGa
-        ARYBmgEWAZoBFgGaARIBmgESAZoBEgGaARIBmgEOAXoBDgGbARoIAAGdAWcBmgESAZoBEgGaARIBmgES
-        AZoBFgGaARYBmgESAZoBEgGaARIBmgEOAbsBGggAAZ0BZwGaARIBmgESAZoBEgGaARIBmgEWAZoBFgGa
-        ARIBmgESAZoBEgGaAQ4BuwEaCAABnQFnAZoBEgGaARIBmgESAZoBEgGaARYBmgEWAZoBEgGaARIBmgES
-        AZoBDgG7ARoIAAGdAWcBmgESAZoBEgGaARIBmgESAZoBFgGaARYBmgESAZoBEgGaARIBmgEOAbsBGggA
-        AZ0BZwGbARIBmwESAXsBDgF7AQ4BuwEWAZsBFgGbARIBmwESAZsBEgGbARIBuwEaCAABnQFnAZsBEgGb
-        ARIBewEOAXsBDgG7ARYBmwEWAZsBEgGbARIBmwESAZsBEgG7ARoIAAGdAWcBmwESAZsBEgF7AQ4BewEO
-        AbsBFgGbARYBmwESAZsBEgGbARIBmwESAbsBGggAAZ0BZwGbARIBmwESAXsBDgF7AQ4BuwEWAZsBFgGb
-        ARIBmwESAZsBEgGbARIBuwEaCAABnQFnAZsBEgGbARIBmwEOAZsBDgGbARIBuwEWAZsBFgGbARYBmwEW
-        AZsBEgG8ARoIAAGdAWcBmwESAZsBEgGbAQ4BmwEOAZsBEgG7ARYBmwEWAZsBFgGbARYBmwESAbwBGggA
-        AZ0BZwGbARIBmwESAZsBDgGbAQ4BmwESAbsBFgGbARYBmwEWAZsBFgGbARIBvAEaCAABnQFnAZsBEgGb
-        ARIBmwEOAZsBDgGbARIBuwEWAZsBFgGbARYBmwEWAZsBEgG8ARoIAAGdAWcB3AEiAX4BVwGcARIBHQEz
-        AT4BPwEdATcBHQEvAT4BPwE+ATcBfgFTAdwBIggAAZ0BZwHcASIBfgFXAZwBEgEdATMBPgE/AR0BNwEd
-        AS8BPgE/AT4BNwF+AVMB3AEiCAABnQFnAdwBIgF+AVcBnAESAR0BMwE+AT8BHQE3AR0BLwE+AT8BPgE3
-        AX4BUwHcASIIAAGdAWcB3AEiAX4BVwGcARIBHQEzAT4BPwEdATcBHQEvAT4BPwE+ATcBfgFTAdwBIggA
-        AZ0BZwH9ASYB3AEWAV4BQwG/AV8BvwFnAX8BSwF/AVMBfgFLAb8BZwG+AWcB3QEiCAABnQFnAf0BJgHc
-        ARYBXgFDAb8BXwG/AWcBfwFLAX8BUwF+AUsBvwFnAb4BZwHdASIIAAGdAWcB/QEmAdwBFgFeAUMBvwFf
-        Ab8BZwF/AUsBfwFTAX4BSwG/AWcBvgFnAd0BIggAAZ0BZwH9ASYB3AEWAV4BQwG/AV8BvwFnAX8BSwF/
-        AVMBfgFLAb8BZwG+AWcB3QEiCAABngFnAf0BJgF+AUcBfgFLAZ8BWwFeAUMB3wFvAT4BMwF/AUsBvwFn
-        Af8BfwHdASIIAAGeAWcB/QEmAX4BRwF+AUsBnwFbAV4BQwHfAW8BPgEzAX8BSwG/AWcB/wF/Ad0BIggA
-        AZ4BZwH9ASYBfgFHAX4BSwGfAVsBXgFDAd8BbwE+ATMBfwFLAb8BZwH/AX8B3QEiCAABngFnAf0BJgF+
-        AUcBfgFLAZ8BWwFeAUMB3wFvAT4BMwF/AUsBvwFnAf8BfwHdASIIAAGeAWcB3QEWAd0BFgHdARYB3QEW
-        Ad0BFgHdARYB3QEaAd0BGgHdARoB3QEaAd0BIggAAZ4BZwHdARYB3QEWAd0BFgHdARYB3QEWAd0BFgHd
-        ARoB3QEaAd0BGgHdARoB3QEiCAABngFnAd0BFgHdARYB3QEWAd0BFgHdARYB3QEWAd0BGgHdARoB3QEa
-        Ad0BGgHdASIIAAGeAWcB3QEWAd0BFgHdARYB3QEWAd0BFgHdARYB3QEaAd0BGgHdARoB3QEaAd0BIoQA
-        AUIBTQE+BwABPgMAASgDAAFAAwABIAMAAQEBAAEBBgABARYAA/8BAAL/BgAC/wYAAYABAQYAAYABAQYA
-        AYABAQYAAYABAQYAAYABAQYAAYABAQYAAYABAQYAAYABAQYAAYABAQYAAYABAQYAAYABAQYAAv8GAAL/
-        BgAC/wYAAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHA
-        AQMBwAEDAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHA
-        AQMBwAEDAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHA
-        AQMBwAEDAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHA
-        AQMBwAEDCP8WAAs=
-</value>
-  </data>
   <data name="Label15.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -337,11 +273,17 @@
   <data name="PictureBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="PictureBox4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Right</value>
+  </data>
   <data name="Label13.Text" xml:space="preserve">
     <value>About the Project</value>
   </data>
   <data name="&gt;&gt;Label12.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 36</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Modelagem de Processos</value>
@@ -364,23 +306,20 @@
   <data name="&gt;&gt;Label7.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>773, 15</value>
-  </data>
   <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
     <value>Panel2</value>
   </data>
   <data name="LinkLabel5.Location" type="System.Drawing.Point, System.Drawing">
     <value>202, 110</value>
   </data>
-  <data name="&gt;&gt;ColumnHeader2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="LinkLabel8.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9.75pt, style=Bold</value>
   </data>
   <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
     <value>TabPage5</value>
+  </data>
+  <data name="&gt;&gt;PictureBox2.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="&gt;&gt;Button6.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -397,9 +336,6 @@
   <data name="lvlatestfolders.Size" type="System.Drawing.Size, System.Drawing">
     <value>493, 725</value>
   </data>
-  <data name="Label15.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 12</value>
-  </data>
   <data name="Label9.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -411,6 +347,9 @@
   </data>
   <data name="Label5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
+  </data>
+  <data name="LinkLabel4.TabIndex" type="System.Int32, mscorlib">
+    <value>99</value>
   </data>
   <data name="TabPage2.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 25</value>
@@ -430,9 +369,6 @@
   <data name="&gt;&gt;TabPage3.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="TabPage3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 25</value>
-  </data>
   <data name="&gt;&gt;Button6.Parent" xml:space="preserve">
     <value>TabPage5</value>
   </data>
@@ -442,8 +378,8 @@
   <data name="&gt;&gt;Panel4.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label10.Name" xml:space="preserve">
-    <value>Label10</value>
+  <data name="Label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;TabPage1.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -459,6 +395,9 @@
   </data>
   <data name="Panel5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="TabPage1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 25</value>
   </data>
   <data name="&gt;&gt;Panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -477,6 +416,9 @@
   </data>
   <data name="Button4.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;PictureBox5.Name" xml:space="preserve">
+    <value>PictureBox5</value>
   </data>
   <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -499,20 +441,11 @@
   <data name="Label10.Text" xml:space="preserve">
     <value>Regressão de Dados</value>
   </data>
-  <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>741, 138</value>
-  </data>
   <data name="LinkLabel2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="TabPage2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
-  </data>
-  <data name="lvlatest.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="&gt;&gt;Label7.Parent" xml:space="preserve">
-    <value>Panel2</value>
   </data>
   <data name="LinkLabel3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -534,12 +467,6 @@
   </data>
   <data name="LinkLabel3.Text" xml:space="preserve">
     <value>Carregar Existente</value>
-  </data>
-  <data name="&gt;&gt;LinkLabel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 19</value>
   </data>
   <data name="TabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
@@ -622,6 +549,9 @@
   <data name="&gt;&gt;ImageList1.Name" xml:space="preserve">
     <value>ImageList1</value>
   </data>
+  <data name="&gt;&gt;LinkLabel9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="Label7.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 12pt, style=Bold</value>
   </data>
@@ -637,14 +567,8 @@
   <data name="TabPage5.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 25</value>
   </data>
-  <data name="&gt;&gt;LinkLabel10.Parent" xml:space="preserve">
-    <value>Panel5</value>
-  </data>
-  <data name="ColumnHeader3.Text" xml:space="preserve">
-    <value>File</value>
-  </data>
-  <data name="&gt;&gt;LinkLabel3.Name" xml:space="preserve">
-    <value>LinkLabel3</value>
+  <data name="ColumnHeader4.Width" type="System.Int32, mscorlib">
+    <value>800</value>
   </data>
   <data name="Label4.TabIndex" type="System.Int32, mscorlib">
     <value>98</value>
@@ -652,26 +576,17 @@
   <data name="LinkLabel2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="LinkLabel6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 110</value>
-  </data>
   <data name="&gt;&gt;Label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="LinkLabel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 16</value>
   </data>
   <data name="PictureBox3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="LinkLabel3.TabIndex" type="System.Int32, mscorlib">
-    <value>100</value>
-  </data>
   <data name="&gt;&gt;lvlatest.Parent" xml:space="preserve">
     <value>TabPage1</value>
   </data>
-  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 36</value>
+  <data name="Label15.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 12</value>
   </data>
   <data name="&gt;&gt;LinkLabel6.Parent" xml:space="preserve">
     <value>Panel3</value>
@@ -736,9 +651,6 @@
   <data name="LinkLabel5.Text" xml:space="preserve">
     <value>Carregar Existente</value>
   </data>
-  <data name="Label13.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
   <data name="&gt;&gt;lvlatest.Type" xml:space="preserve">
     <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -747,6 +659,9 @@
   </data>
   <data name="&gt;&gt;Label6.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="LinkLabel7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label5.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
@@ -763,8 +678,14 @@
   <data name="TabPage5.Text" xml:space="preserve">
     <value>Flowsheets FOSSEE</value>
   </data>
+  <data name="Panel5.TabIndex" type="System.Int32, mscorlib">
+    <value>102</value>
+  </data>
   <data name="Button4.Size" type="System.Drawing.Size, System.Drawing">
     <value>200, 26</value>
+  </data>
+  <data name="&gt;&gt;Panel1.Name" xml:space="preserve">
+    <value>Panel1</value>
   </data>
   <data name="lvsamples.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -784,8 +705,8 @@
   <data name="Label13.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 37</value>
+  <data name="Label2.TabIndex" type="System.Int32, mscorlib">
+    <value>98</value>
   </data>
   <data name="&gt;&gt;LinkLabel10.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -793,11 +714,11 @@
   <data name="&gt;&gt;PictureBox2.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="FOSSEEList.TabIndex" type="System.Int32, mscorlib">
+    <value>37</value>
+  </data>
   <data name="Label12.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 12pt, style=Bold</value>
-  </data>
-  <data name="&gt;&gt;PictureBox1.Name" xml:space="preserve">
-    <value>PictureBox1</value>
   </data>
   <data name="&gt;&gt;LinkLabel9.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -811,11 +732,17 @@
   <data name="&gt;&gt;Label8.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="LinkLabel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 16</value>
+  </data>
   <data name="&gt;&gt;ColumnHeader4.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Exemplos</value>
+  </data>
+  <data name="&gt;&gt;LinkLabel3.Name" xml:space="preserve">
+    <value>LinkLabel3</value>
   </data>
   <data name="LinkLabel10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -832,8 +759,8 @@
   <data name="Label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="ColumnHeader4.Width" type="System.Int32, mscorlib">
-    <value>800</value>
+  <data name="&gt;&gt;TabPage5.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="TabPage1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -856,11 +783,11 @@
   <data name="&gt;&gt;Button4.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
   <data name="&gt;&gt;Panel2.Name" xml:space="preserve">
     <value>Panel2</value>
+  </data>
+  <data name="&gt;&gt;Label15.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label13.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -889,8 +816,8 @@
   <data name="&gt;&gt;Panel3.Name" xml:space="preserve">
     <value>Panel3</value>
   </data>
-  <data name="&gt;&gt;TabPage5.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>169, 19</value>
   </data>
   <data name="LinkLabel2.TabIndex" type="System.Int32, mscorlib">
     <value>100</value>
@@ -901,8 +828,8 @@
   <data name="LinkLabel9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="TabControl1.TabIndex" type="System.Int32, mscorlib">
-    <value>89</value>
+  <data name="PictureBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 138</value>
   </data>
   <data name="PictureBox5.Size" type="System.Drawing.Size, System.Drawing">
     <value>144, 138</value>
@@ -934,8 +861,8 @@
   <data name="Label6.TabIndex" type="System.Int32, mscorlib">
     <value>98</value>
   </data>
-  <data name="LinkLabel10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 16</value>
+  <data name="LinkLabel7.Text" xml:space="preserve">
+    <value>Obtenha Benefícios</value>
   </data>
   <data name="LinkLabel8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -955,11 +882,11 @@
   <data name="Label2.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9.75pt</value>
   </data>
-  <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>499, 731</value>
-  </data>
   <data name="Label14.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="lvlatestfolders.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
   </data>
   <data name="LinkLabel9.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 16</value>
@@ -982,11 +909,8 @@
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
     <value>499, 731</value>
   </data>
-  <data name="Label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 24</value>
+  <data name="&gt;&gt;Label4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="PictureBox6.Location" type="System.Drawing.Point, System.Drawing">
     <value>597, 0</value>
@@ -997,8 +921,8 @@
   <data name="PictureBox4.TabIndex" type="System.Int32, mscorlib">
     <value>102</value>
   </data>
-  <data name="&gt;&gt;lvlatestfolders.Parent" xml:space="preserve">
-    <value>TabPage3</value>
+  <data name="LinkLabel8.TabIndex" type="System.Int32, mscorlib">
+    <value>99</value>
   </data>
   <data name="Label11.TabIndex" type="System.Int32, mscorlib">
     <value>97</value>
@@ -1027,9 +951,6 @@
   <data name="LinkLabel7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="Label2.TabIndex" type="System.Int32, mscorlib">
-    <value>98</value>
-  </data>
   <data name="&gt;&gt;Panel3.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
@@ -1042,17 +963,14 @@
   <data name="PictureBox6.Size" type="System.Drawing.Size, System.Drawing">
     <value>144, 138</value>
   </data>
-  <data name="&gt;&gt;Label8.Parent" xml:space="preserve">
-    <value>TabPage5</value>
-  </data>
-  <data name="Label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>499, 68</value>
   </data>
   <data name="Label5.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
+  </data>
+  <data name="Label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="LinkLabel8.Size" type="System.Drawing.Size, System.Drawing">
     <value>147, 16</value>
@@ -1060,14 +978,84 @@
   <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
     <value>23, 38</value>
   </data>
-  <data name="Button6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>215, 96</value>
+  <data name="ImageList1.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAD2
+        DwAAAk1TRnQBSQFMAgEBBQEAAbQBBQHAAQUBEAEAARABAAT/AREBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        AwABIAMAAQEBAAEQBgABEP8AFQABeQF3ARMBcwFJAW4BJwFuAScBbgEnAW4BJwFuAScBbgEnAW4BJwFu
+        AScBbgEnAW4BSAFuATUBc2QAAWoBbgG7AXsBdQF7AXMBewFyAXsBcQF7AVABewFPAXsBTwF7AU4BewFN
+        AXsBLQF7AbgBfwFoAW5kAAFoAW4B/QF/AbQBfwGSAX8BkAF7AW4BewFsAXsBSgF7AUgBewFHAXsBJQF7
+        ASQBewHZAX8BaAFuZAABaAFuAf4BfwG2AX8BtAF/AZIBfwGQAXsBbgF7AWwBewFKAXsBSQF7AUcBewEm
+        AXsB2QF/AWgBbmQAAYcBbgH+AX8B2QF/AbcBfwG1AX8BswF/AZEBewGPAXsBbQF7AWsBewFJAXsBSAF7
+        AdoBfwGIAW5kAAGnAW4B/wF/Af8BfwH+AX8B/gF/Af4BfwHbAX8BkgF/AZABewFuAXsBbQF7AWsBewHa
+        AX8BqAFuZAABpwFuAd0BfwFSAXcBMQF3AQ4BdwG5AXsB/gF/Af4BfwH+AX8B/gF/Af0BfwH9AX8B/wF/
+        AcgBbmQAAckBbgH+AX8BcgF7AXIBewFQAXsBLQF3AS0BdwFQAXcBUAF3AU8BdwEuAXcBLgF3Ad0BfwHI
+        AW5kAAHJAW4B/gF/AZEBfwFyAXsBkwF7AZUBewH9AX8B/gF/Af4BfwH+AX8B/QF/Af0BfwH/AX8BDQFv
+        ZAAByAFuAf8BfwH/AX8B/wF/Af8BfwH/AX8B3QF/AS4BcwEuAXMBLgFzAS4BcwFQAXMBUQFzAbsBe2QA
+        AQ4BbwEMAXMBDAFzAQwBcwEMAXMBDAFzAQwBbwH/AX8B/wF/Af8BfwH/AX8B/wF/Af8BfwH/AX//AOcA
+        AZ0BZwGYAR4BmAEeAZgBHgGYAR4BmAEeAZgBHgGYAR4BmAEeAZgBHgGYAR4BmQEmCAABnQFnAZgBHgGY
+        AR4BmAEeAZgBHgGYAR4BmAEeAZgBHgGYAR4BmAEeAZgBHgGZASYIAAGdAWcBmAEeAZgBHgGYAR4BmAEe
+        AZgBHgGYAR4BmAEeAZgBHgGYAR4BmAEeAZkBJggAAZ0BZwGYAR4BmAEeAZgBHgGYAR4BmAEeAZgBHgGY
+        AR4BmAEeAZgBHgGYAR4BmQEmCAABfAFnAVgBDgFYAQ4BkQEFAbEBBQEVAQoBNgEOAfQBBQHzAQkB9AEJ
+        AVgBDgF5ARYIAAF8AWcBWAEOATcBDgH1AQkBsgEFAfQBBQE3AQ4BFQEKAdMBBQGRAQUBkgEFAVcBFggA
+        AXwBZwFYAQ4BNwEOAZABBQH0AQkBsgEFAZABBQEVAQoBkQEFAZEBBQFYAQ4BeQEWCAABfAFnAVgBDgHU
+        AQkBNgEKAbIBBQH0AQUBkQEFAfQBBQGRAQUBkQEFATYBCgF5ARYIAAF8AWcBWAEOAVgBDgHTAQUBsgEF
+        AfUBCQEWAQ4B0wEFAXABBQHUAQkBWAEOAZkBFggAAXwBZwFYAQ4BWAEOAZABBQGyAQUB9AEFAZEBBQGy
+        AQUBswEFAZEBBQFYAQ4BmQEWCAABfAFnAVgBDgFwAQUBNwEKAfQBBQEWAQoB9AEFAdQBCQGzAQUBFQEK
+        ARUBCgGZARYIAAF8AWcBWAEOAdMBCQHUAQUBsgEFARYBCgEWAQoBsQEFAZIBBQE3AQoBTgEFAZkBFggA
+        AXwBZwFYAQ4BWAEOAZEBBQFwAQUBFgEKARYBDgFPAQUBkQEFAdQBCQFYAQ4BmQEWCAABfAFnAVgBDgFY
+        AQ4BkQEFAdQBCQH0AQUBTgEFAZEBBQGzAQUBkQEFAVgBDgGZARYIAAF8AWcBWAEOAU4BBQE3AQoBWAEO
+        AXABBQGxAQkBNwEOAbMBBQEWAQoB0wEJAZkBFggAAXwBZwFYAQ4B0wEJAfQBCQFwAQUB0wEFAW8BBQFY
+        AQoBkgEFAVgBCgFOAQUBmQEWCAABfQFnAVkBDgFZAQ4BkAEFAXABBQEWAQoBNgEOAU8BBQEWAQoB1QEJ
+        AVkBDgGaARoIAAF9AWcBWQEOAVkBDgGyAQUBsgEFAfMBCQFwAQUBsgEFAbMBBQGRAQUBWQEOAZoBGggA
+        AX0BZwFZAQ4BNwEKAXEBBQHTAQUBkQEFAXABBQE3AQoBcAEFAXABBQFZAQ4BmgEaCAABfQFnAVkBDgHT
+        AQkBkQEFAZEBBQH0AQkBsQEFAfUBBQGRAQUBcQEFARUBCgGaARoIAAGdAWcBmQESAZkBEgFXAQ4BeQEO
+        AXkBEgF5ARIBWAEOAXkBDgFZAQoBWQEOAZoBGggAAZ0BZwGZARIBmQESAXgBEgF4AQ4BWAEOAVgBDgFY
+        AQ4BWAEKAVgBCgFZAQ4BmgEaCAABnQFnAZkBEgGZARIBWAEOAZkBEgF5ARIBWAEOAXkBDgE3AQoBWQEK
+        AVkBDgGaARoIAAGdAWcBmQESAXgBEgFXAQ4BeQEOAXkBEgFXAQ4BeQESAVgBCgFYAQoBWQEOAZoBGggA
+        AZ0BZwGZARYBmQEWAZkBFgGZARIBmQESAXkBEgF6AQ4BegEOAXoBDgFZAQ4BmgEaCAABnQFnAZkBFgGZ
+        ARYBmQEWAZkBEgGZARIBeQESAXoBDgF6AQ4BegEOAVkBDgGaARoIAAGdAWcBmQEWAZkBFgGZARYBmQES
+        AZkBEgF5ARIBegEOAXoBDgF6AQ4BWQEOAZoBGggAAZ0BZwGZARYBmQEWAZkBFgGZARIBmQESAXkBEgF6
+        AQ4BegEOAXoBDgFZAQ4BmgEaCAABnQFnAZoBEgGaARYBmgEWAZoBFgGaARIBmgESAZoBEgGaARIBmgEO
+        AXoBDgGbARoIAAGdAWcBmgESAZoBFgGaARYBmgEWAZoBEgGaARIBmgESAZoBEgGaAQ4BegEOAZsBGggA
+        AZ0BZwGaARIBmgEWAZoBFgGaARYBmgESAZoBEgGaARIBmgESAZoBDgF6AQ4BmwEaCAABnQFnAZoBEgGa
+        ARYBmgEWAZoBFgGaARIBmgESAZoBEgGaARIBmgEOAXoBDgGbARoIAAGdAWcBmgESAZoBEgGaARIBmgES
+        AZoBFgGaARYBmgESAZoBEgGaARIBmgEOAbsBGggAAZ0BZwGaARIBmgESAZoBEgGaARIBmgEWAZoBFgGa
+        ARIBmgESAZoBEgGaAQ4BuwEaCAABnQFnAZoBEgGaARIBmgESAZoBEgGaARYBmgEWAZoBEgGaARIBmgES
+        AZoBDgG7ARoIAAGdAWcBmgESAZoBEgGaARIBmgESAZoBFgGaARYBmgESAZoBEgGaARIBmgEOAbsBGggA
+        AZ0BZwGbARIBmwESAXsBDgF7AQ4BuwEWAZsBFgGbARIBmwESAZsBEgGbARIBuwEaCAABnQFnAZsBEgGb
+        ARIBewEOAXsBDgG7ARYBmwEWAZsBEgGbARIBmwESAZsBEgG7ARoIAAGdAWcBmwESAZsBEgF7AQ4BewEO
+        AbsBFgGbARYBmwESAZsBEgGbARIBmwESAbsBGggAAZ0BZwGbARIBmwESAXsBDgF7AQ4BuwEWAZsBFgGb
+        ARIBmwESAZsBEgGbARIBuwEaCAABnQFnAZsBEgGbARIBmwEOAZsBDgGbARIBuwEWAZsBFgGbARYBmwEW
+        AZsBEgG8ARoIAAGdAWcBmwESAZsBEgGbAQ4BmwEOAZsBEgG7ARYBmwEWAZsBFgGbARYBmwESAbwBGggA
+        AZ0BZwGbARIBmwESAZsBDgGbAQ4BmwESAbsBFgGbARYBmwEWAZsBFgGbARIBvAEaCAABnQFnAZsBEgGb
+        ARIBmwEOAZsBDgGbARIBuwEWAZsBFgGbARYBmwEWAZsBEgG8ARoIAAGdAWcB3AEiAX4BVwGcARIBHQEz
+        AT4BPwEdATcBHQEvAT4BPwE+ATcBfgFTAdwBIggAAZ0BZwHcASIBfgFXAZwBEgEdATMBPgE/AR0BNwEd
+        AS8BPgE/AT4BNwF+AVMB3AEiCAABnQFnAdwBIgF+AVcBnAESAR0BMwE+AT8BHQE3AR0BLwE+AT8BPgE3
+        AX4BUwHcASIIAAGdAWcB3AEiAX4BVwGcARIBHQEzAT4BPwEdATcBHQEvAT4BPwE+ATcBfgFTAdwBIggA
+        AZ0BZwH9ASYB3AEWAV4BQwG/AV8BvwFnAX8BSwF/AVMBfgFLAb8BZwG+AWcB3QEiCAABnQFnAf0BJgHc
+        ARYBXgFDAb8BXwG/AWcBfwFLAX8BUwF+AUsBvwFnAb4BZwHdASIIAAGdAWcB/QEmAdwBFgFeAUMBvwFf
+        Ab8BZwF/AUsBfwFTAX4BSwG/AWcBvgFnAd0BIggAAZ0BZwH9ASYB3AEWAV4BQwG/AV8BvwFnAX8BSwF/
+        AVMBfgFLAb8BZwG+AWcB3QEiCAABngFnAf0BJgF+AUcBfgFLAZ8BWwFeAUMB3wFvAT4BMwF/AUsBvwFn
+        Af8BfwHdASIIAAGeAWcB/QEmAX4BRwF+AUsBnwFbAV4BQwHfAW8BPgEzAX8BSwG/AWcB/wF/Ad0BIggA
+        AZ4BZwH9ASYBfgFHAX4BSwGfAVsBXgFDAd8BbwE+ATMBfwFLAb8BZwH/AX8B3QEiCAABngFnAf0BJgF+
+        AUcBfgFLAZ8BWwFeAUMB3wFvAT4BMwF/AUsBvwFnAf8BfwHdASIIAAGeAWcB3QEWAd0BFgHdARYB3QEW
+        Ad0BFgHdARYB3QEaAd0BGgHdARoB3QEaAd0BIggAAZ4BZwHdARYB3QEWAd0BFgHdARYB3QEWAd0BFgHd
+        ARoB3QEaAd0BGgHdARoB3QEiCAABngFnAd0BFgHdARYB3QEWAd0BFgHdARYB3QEWAd0BGgHdARoB3QEa
+        Ad0BGgHdASIIAAGeAWcB3QEWAd0BFgHdARYB3QEWAd0BFgHdARYB3QEaAd0BGgHdARoB3QEaAd0BIoQA
+        AUIBTQE+BwABPgMAASgDAAFAAwABIAMAAQEBAAEBBgABARYAA/8BAAL/BgAC/wYAAYABAQYAAYABAQYA
+        AYABAQYAAYABAQYAAYABAQYAAYABAQYAAYABAQYAAYABAQYAAYABAQYAAYABAQYAAYABAQYAAv8GAAL/
+        BgAC/wYAAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHA
+        AQMBwAEDAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHA
+        AQMBwAEDAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHA
+        AQMBwAEDAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHA
+        AQMBwAEDCP8WAAs=
+</value>
   </data>
   <data name="&gt;&gt;FOSSEEList.Type" xml:space="preserve">
     <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Label15.Text" xml:space="preserve">
-    <value>Documentação</value>
   </data>
   <data name="&gt;&gt;LinkLabel7.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -1087,11 +1075,11 @@
   <data name="&gt;&gt;Panel5.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;TabPage5.Parent" xml:space="preserve">
-    <value>TabControl1</value>
-  </data>
   <data name="LinkLabel4.Location" type="System.Drawing.Point, System.Drawing">
     <value>23, 110</value>
+  </data>
+  <data name="Panel4.TabIndex" type="System.Int32, mscorlib">
+    <value>100</value>
   </data>
   <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
     <value>558, 49</value>
@@ -1101,9 +1089,6 @@
   </data>
   <data name="Label9.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9.75pt</value>
-  </data>
-  <data name="Label8.TabIndex" type="System.Int32, mscorlib">
-    <value>41</value>
   </data>
   <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
     <value>499, 731</value>
@@ -1126,8 +1111,8 @@
   <data name="TabControl1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Right</value>
   </data>
-  <data name="&gt;&gt;lvlatestfolders.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;ColumnHeader1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label14.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1171,8 +1156,8 @@
   <data name="&gt;&gt;Label9.Name" xml:space="preserve">
     <value>Label9</value>
   </data>
-  <data name="LinkLabel4.TabIndex" type="System.Int32, mscorlib">
-    <value>99</value>
+  <data name="Button6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>215, 96</value>
   </data>
   <data name="&gt;&gt;Panel4.Name" xml:space="preserve">
     <value>Panel4</value>
@@ -1180,23 +1165,17 @@
   <data name="&gt;&gt;LinkLabel6.Name" xml:space="preserve">
     <value>LinkLabel6</value>
   </data>
-  <data name="PictureBox5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;lvlatestfolders.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lvlatestfolders.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;Label12.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;Panel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="LinkLabel10.TabIndex" type="System.Int32, mscorlib">
     <value>100</value>
-  </data>
-  <data name="Button6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 26</value>
-  </data>
-  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 15</value>
   </data>
   <data name="&gt;&gt;Panel4.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1213,14 +1192,17 @@
   <data name="&gt;&gt;Label6.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label14.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="Label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;Label11.Name" xml:space="preserve">
+    <value>Label11</value>
   </data>
   <data name="&gt;&gt;Label14.Name" xml:space="preserve">
     <value>Label14</value>
   </data>
-  <data name="&gt;&gt;Label15.Name" xml:space="preserve">
-    <value>Label15</value>
+  <data name="&gt;&gt;LinkLabel10.Parent" xml:space="preserve">
+    <value>Panel5</value>
   </data>
   <data name="Panel5.Location" type="System.Drawing.Point, System.Drawing">
     <value>23, 625</value>
@@ -1237,14 +1219,11 @@
   <data name="&gt;&gt;Panel1.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>499, 731</value>
   </data>
   <data name="ColumnHeader1.Width" type="System.Int32, mscorlib">
     <value>800</value>
-  </data>
-  <data name="&gt;&gt;LinkLabel3.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="&gt;&gt;LinkLabel9.Name" xml:space="preserve">
     <value>LinkLabel9</value>
@@ -1276,6 +1255,9 @@
   <data name="&gt;&gt;Label14.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;Panel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
   <data name="PictureBox2.Size" type="System.Drawing.Size, System.Drawing">
     <value>122, 117</value>
   </data>
@@ -1288,8 +1270,8 @@
   <data name="lvsamples.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
-  <data name="LinkLabel7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 24</value>
   </data>
   <data name="LinkLabel8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1306,11 +1288,8 @@
   <data name="LinkLabel5.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 16</value>
   </data>
-  <data name="&gt;&gt;Label1.Name" xml:space="preserve">
-    <value>Label1</value>
-  </data>
-  <data name="&gt;&gt;LinkLabel4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;TabPage3.Name" xml:space="preserve">
     <value>TabPage3</value>
@@ -1321,17 +1300,20 @@
   <data name="&gt;&gt;Label7.Name" xml:space="preserve">
     <value>Label7</value>
   </data>
-  <data name="&gt;&gt;PictureBox5.Name" xml:space="preserve">
-    <value>PictureBox5</value>
+  <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>773, 15</value>
   </data>
   <data name="Label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="&gt;&gt;Label9.Parent" xml:space="preserve">
+    <value>Panel3</value>
+  </data>
   <data name="LinkLabel5.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9.75pt, style=Bold</value>
   </data>
-  <data name="&gt;&gt;Label15.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
     <value>23, 12</value>
@@ -1342,6 +1324,9 @@
   <data name="&gt;&gt;FOSSEEList.Parent" xml:space="preserve">
     <value>TabPage5</value>
   </data>
+  <data name="PictureBox6.TabIndex" type="System.Int32, mscorlib">
+    <value>100</value>
+  </data>
   <data name="Label4.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9.75pt</value>
   </data>
@@ -1351,11 +1336,11 @@
   <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
     <value>499, 731</value>
   </data>
-  <data name="Panel3.TabIndex" type="System.Int32, mscorlib">
-    <value>99</value>
-  </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>206, 19</value>
+  </data>
+  <data name="LinkLabel3.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 9.75pt, style=Bold</value>
   </data>
   <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
     <value>Panel1</value>
@@ -1387,11 +1372,11 @@
   <data name="Panel4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="LinkLabel10.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 9.75pt, style=Bold</value>
+  <data name="&gt;&gt;Label10.Name" xml:space="preserve">
+    <value>Label10</value>
   </data>
-  <data name="LinkLabel8.TabIndex" type="System.Int32, mscorlib">
-    <value>99</value>
+  <data name="LinkLabel10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>182, 16</value>
   </data>
   <data name="&gt;&gt;PictureBox6.ZOrder" xml:space="preserve">
     <value>5</value>
@@ -1405,14 +1390,20 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>96, 96</value>
   </data>
-  <data name="&gt;&gt;PictureBox4.Parent" xml:space="preserve">
-    <value>Panel4</value>
+  <data name="Label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
-  <data name="&gt;&gt;Label8.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 15</value>
   </data>
-  <data name="&gt;&gt;TabPage2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Panel3.TabIndex" type="System.Int32, mscorlib">
+    <value>99</value>
+  </data>
+  <data name="LinkLabel4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 16</value>
   </data>
   <data name="&gt;&gt;PictureBox2.Name" xml:space="preserve">
     <value>PictureBox2</value>
@@ -1429,8 +1420,8 @@
   <data name="&gt;&gt;lvlatestfolders.Name" xml:space="preserve">
     <value>lvlatestfolders</value>
   </data>
-  <data name="&gt;&gt;Panel1.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="LinkLabel3.TabIndex" type="System.Int32, mscorlib">
+    <value>100</value>
   </data>
   <data name="&gt;&gt;Label2.Name" xml:space="preserve">
     <value>Label2</value>
@@ -1441,8 +1432,8 @@
   <data name="&gt;&gt;LinkLabel8.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label11.Name" xml:space="preserve">
-    <value>Label11</value>
+  <data name="Label8.TabIndex" type="System.Int32, mscorlib">
+    <value>41</value>
   </data>
   <data name="&gt;&gt;ColumnHeader3.Name" xml:space="preserve">
     <value>ColumnHeader3</value>
@@ -1462,26 +1453,29 @@
   <data name="Label9.TabIndex" type="System.Int32, mscorlib">
     <value>98</value>
   </data>
+  <data name="&gt;&gt;Label8.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;LinkLabel1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="Panel2.Location" type="System.Drawing.Point, System.Drawing">
     <value>23, 193</value>
   </data>
-  <data name="lvlatestfolders.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+  <data name="Label4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
-  <data name="Panel4.TabIndex" type="System.Int32, mscorlib">
-    <value>100</value>
+  <data name="&gt;&gt;Label7.Parent" xml:space="preserve">
+    <value>Panel2</value>
   </data>
   <data name="LinkLabel7.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 24</value>
   </data>
-  <data name="&gt;&gt;TabPage5.Name" xml:space="preserve">
-    <value>TabPage5</value>
+  <data name="&gt;&gt;PictureBox1.Name" xml:space="preserve">
+    <value>PictureBox1</value>
   </data>
-  <data name="&gt;&gt;Label4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="ColumnHeader3.Text" xml:space="preserve">
+    <value>File</value>
   </data>
   <data name="Label8.Text" xml:space="preserve">
     <value>Completed Flowsheets</value>
@@ -1498,8 +1492,8 @@
   <data name="Label10.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="PictureBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 138</value>
+  <data name="LinkLabel6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 110</value>
   </data>
   <data name="Label13.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1507,11 +1501,11 @@
   <data name="&gt;&gt;PictureBox4.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="PictureBox6.TabIndex" type="System.Int32, mscorlib">
-    <value>100</value>
+  <data name="&gt;&gt;lvlatestfolders.Parent" xml:space="preserve">
+    <value>TabPage3</value>
   </data>
-  <data name="&gt;&gt;ColumnHeader1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Label1.Name" xml:space="preserve">
+    <value>Label1</value>
   </data>
   <data name="&gt;&gt;Label10.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1519,26 +1513,29 @@
   <data name="&gt;&gt;Label11.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;LinkLabel9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label15.Text" xml:space="preserve">
+    <value>Documentação</value>
   </data>
   <data name="PictureBox5.TabIndex" type="System.Int32, mscorlib">
     <value>96</value>
   </data>
-  <data name="LinkLabel3.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 9.75pt, style=Bold</value>
+  <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 19</value>
+  </data>
+  <data name="&gt;&gt;Panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="LinkLabel5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;Panel1.Name" xml:space="preserve">
-    <value>Panel1</value>
+  <data name="&gt;&gt;Label8.Parent" xml:space="preserve">
+    <value>TabPage5</value>
   </data>
   <data name="&gt;&gt;PictureBox6.Parent" xml:space="preserve">
     <value>Panel4</value>
   </data>
-  <data name="FOSSEEList.TabIndex" type="System.Int32, mscorlib">
-    <value>37</value>
+  <data name="ColumnHeader3.Width" type="System.Int32, mscorlib">
+    <value>984</value>
   </data>
   <data name="&gt;&gt;lvlatest.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -1546,17 +1543,17 @@
   <data name="ColumnHeader2.Text" xml:space="preserve">
     <value>File</value>
   </data>
-  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>499, 68</value>
+  <data name="TabPage3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 25</value>
   </data>
   <data name="Button4.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 96</value>
   </data>
-  <data name="&gt;&gt;Label9.Parent" xml:space="preserve">
-    <value>Panel3</value>
+  <data name="&gt;&gt;Label14.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
-  <data name="LinkLabel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>126, 16</value>
+  <data name="&gt;&gt;TabPage5.Parent" xml:space="preserve">
+    <value>TabControl1</value>
   </data>
   <data name="LinkLabel2.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9.75pt, style=Bold</value>
@@ -1567,8 +1564,8 @@
   <data name="LinkLabel1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="Panel5.TabIndex" type="System.Int32, mscorlib">
-    <value>102</value>
+  <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>741, 138</value>
   </data>
   <data name="&gt;&gt;LinkLabel10.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1579,8 +1576,8 @@
   <data name="&gt;&gt;Label11.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="Button6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 26</value>
   </data>
   <data name="LinkLabel5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1588,8 +1585,8 @@
   <data name="PictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>96</value>
   </data>
-  <data name="&gt;&gt;PictureBox2.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="TabControl1.TabIndex" type="System.Int32, mscorlib">
+    <value>89</value>
   </data>
   <data name="&gt;&gt;TabPage2.Parent" xml:space="preserve">
     <value>TabControl1</value>
@@ -1597,8 +1594,8 @@
   <data name="&gt;&gt;PictureBox5.Parent" xml:space="preserve">
     <value>Panel5</value>
   </data>
-  <data name="TabPage1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 25</value>
+  <data name="&gt;&gt;Label15.Name" xml:space="preserve">
+    <value>Label15</value>
   </data>
   <data name="&gt;&gt;LinkLabel1.Name" xml:space="preserve">
     <value>LinkLabel1</value>
@@ -1615,8 +1612,8 @@
   <data name="&gt;&gt;Label5.Name" xml:space="preserve">
     <value>Label5</value>
   </data>
-  <data name="&gt;&gt;lvsamples.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;TabPage2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1639,17 +1636,17 @@
   <data name="PictureBox5.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
   </data>
-  <data name="&gt;&gt;lvsamples.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;lvsamples.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;TabPage5.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 19</value>
+  <data name="&gt;&gt;lvsamples.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="&gt;&gt;PictureBox4.Parent" xml:space="preserve">
+    <value>Panel4</value>
   </data>
   <data name="TabPage3.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1657,8 +1654,8 @@
   <data name="&gt;&gt;ImageList1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label5.Text" xml:space="preserve">
-    <value>FOSSEE, IIT Bombay, invites chemical engineering students, faculty and practitioners to the flowsheeting project using DWSIM.  We want you to convert existing flowsheets into DWSIM through the following steps and get honoraria and certificates.</value>
+  <data name="&gt;&gt;LinkLabel3.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;PictureBox1.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -1669,11 +1666,14 @@
   <data name="&gt;&gt;ColumnHeader1.Name" xml:space="preserve">
     <value>ColumnHeader1</value>
   </data>
-  <data name="PictureBox4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Right</value>
+  <data name="PictureBox5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;lvlatestfolders.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="lvlatest.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="&gt;&gt;LinkLabel4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="$this.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -1684,17 +1684,17 @@
   <data name="LinkLabel9.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="Label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="Label13.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="Label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;ColumnHeader2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="LinkLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>173, 16</value>
   </data>
-  <data name="LinkLabel7.Text" xml:space="preserve">
-    <value>Obtenha Benefícios</value>
+  <data name="&gt;&gt;LinkLabel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Button4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>

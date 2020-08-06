@@ -133,6 +133,7 @@ Public Class FormWelcome
     Private Sub lvlatest_ItemActivate(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvlatest.ItemActivate, lvsamples.ItemActivate
 
         Me.Parent.Visible = False
+        FormMain.PainelDeBoasvindasToolStripMenuItem.Checked = False
 
         Dim lview = DirectCast(sender, ListView)
 
@@ -338,6 +339,7 @@ Public Class FormWelcome
                                                                              Dim xdoc = SharedClasses.FOSSEEFlowsheets.LoadFlowsheet(tk.Result)
                                                                              Me.UIThread(Sub()
                                                                                              Me.Parent.Visible = False
+                                                                                             FormMain.PainelDeBoasvindasToolStripMenuItem.Checked = False
                                                                                              floading.Label1.Text = DWSIM.App.GetLocalString("LoadingFile") & vbCrLf & "(" & item.Title & ")"
                                                                                              floading.Show()
                                                                                              Application.DoEvents()

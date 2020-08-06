@@ -73,7 +73,7 @@ Partial Class LogPanel
         Me.Grid1.RowHeadersVisible = False
         DataGridViewCellStyle3.Padding = New System.Windows.Forms.Padding(3)
         Me.Grid1.RowsDefaultCellStyle = DataGridViewCellStyle3
-        Me.Grid1.RowTemplate.DefaultCellStyle.Padding = New System.Windows.Forms.Padding(4)
+        Me.Grid1.RowTemplate.DefaultCellStyle.Padding = New System.Windows.Forms.Padding(2)
         Me.Grid1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Grid1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         '
