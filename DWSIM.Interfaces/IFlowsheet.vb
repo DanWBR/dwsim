@@ -166,6 +166,8 @@
 
     Sub LoadProcessData(data As List(Of XElement))
 
+    Function GetSpreadsheetObject() As Object
+
 End Interface
 
 ''' <summary>

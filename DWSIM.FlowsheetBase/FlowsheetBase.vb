@@ -2674,5 +2674,9 @@ Label_00CC:
 
     End Function
 
+    Private Function IFlowsheet_GetSpreadsheetObject() As Object Implements IFlowsheet.GetSpreadsheetObject
+        Return GetSpreadsheetObject?.Invoke()
+    End Function
+
 End Class
 

@@ -2584,6 +2584,10 @@ Public Class FormFlowsheet
 
     End Function
 
+    Public Function GetSpreadsheetObject() As Object Implements IFlowsheet.GetSpreadsheetObject
+        Return FormSpreadsheet.Spreadsheet
+    End Function
+
     Public Function GetApplicationObject() As Object Implements IFlowsheet.GetApplicationObject
         Return My.Application
     End Function
