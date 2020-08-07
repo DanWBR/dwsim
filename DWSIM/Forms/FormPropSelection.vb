@@ -1,4 +1,5 @@
 ﻿Imports System.Linq
+Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes
 Imports DWSIM.Interfaces.Enums.GraphicObjects.ObjectType
 
 Public Class FormPropSelection
@@ -17,264 +18,117 @@ Public Class FormPropSelection
     Private Sub UICVSelectorForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         formC = My.Application.ActiveSimulation
+        Dim obj As New MaterialStreamGraphic()
+        Dim etype = obj.ObjectType.GetType()
+        lvType.Items.AddRange([Enum].GetNames(etype).
+                              Where(Function(x) Not x.Contains("GO_")).
+                              Select(Function(x) New ListViewItem(x)).ToArray())
 
-        With TreeView1.Nodes
-            .Clear()
-            .Add(DWSIM.App.GetLocalString("CorrentedeMatria"), DWSIM.App.GetLocalString("CorrentedeMatria"))
-            .Add(DWSIM.App.GetLocalString("CorrentedeEnergia"), DWSIM.App.GetLocalString("CorrentedeEnergia"))
-            .Add(DWSIM.App.GetLocalString("Misturador"), DWSIM.App.GetLocalString("Misturador"))
-            .Add(DWSIM.App.GetLocalString("Divisor"), DWSIM.App.GetLocalString("Divisor"))
-            .Add(DWSIM.App.GetLocalString("Tubulao"), DWSIM.App.GetLocalString("Tubulao"))
-            .Add(DWSIM.App.GetLocalString("Vlvula"), DWSIM.App.GetLocalString("Vlvulas"))
-            .Add(DWSIM.App.GetLocalString("Bomba"), DWSIM.App.GetLocalString("Bombas"))
-            .Add(DWSIM.App.GetLocalString("Tanque"), DWSIM.App.GetLocalString("Tanque"))
-            .Add(DWSIM.App.GetLocalString("VasoSeparadorGL"), DWSIM.App.GetLocalString("VasoSeparadorGL"))
-            .Add(DWSIM.App.GetLocalString("CompressorAdiabtico"), DWSIM.App.GetLocalString("CompressorAdiabtico"))
-            .Add(DWSIM.App.GetLocalString("TurbinaAdiabtica"), DWSIM.App.GetLocalString("TurbinaAdiabtica"))
-            .Add(DWSIM.App.GetLocalString("Aquecedor"), DWSIM.App.GetLocalString("Aquecedor"))
-            .Add(DWSIM.App.GetLocalString("Resfriador"), DWSIM.App.GetLocalString("Resfriador"))
-            .Add(DWSIM.App.GetLocalString("ReatorConversao"), DWSIM.App.GetLocalString("ReatorConversao"))
-            .Add(DWSIM.App.GetLocalString("ReatorEquilibrio"), DWSIM.App.GetLocalString("ReatorEquilibrio"))
-            .Add(DWSIM.App.GetLocalString("ReatorGibbs"), DWSIM.App.GetLocalString("ReatorGibbs"))
-            .Add(DWSIM.App.GetLocalString("ReatorCSTR"), DWSIM.App.GetLocalString("ReatorCSTR"))
-            .Add(DWSIM.App.GetLocalString("ReatorPFR"), DWSIM.App.GetLocalString("ReatorPFR"))
-            .Add(DWSIM.App.GetLocalString("HeatExchanger"), DWSIM.App.GetLocalString("HeatExchanger"))
-            .Add(DWSIM.App.GetLocalString("ShortcutColumn"), DWSIM.App.GetLocalString("ShortcutColumn"))
-            .Add(DWSIM.App.GetLocalString("DistillationColumn"), DWSIM.App.GetLocalString("DistillationColumn"))
-            .Add(DWSIM.App.GetLocalString("AbsorptionColumn"), DWSIM.App.GetLocalString("AbsorptionColumn"))
-            .Add(DWSIM.App.GetLocalString("ReboiledAbsorber"), DWSIM.App.GetLocalString("ReboiledAbsorber"))
-            .Add(DWSIM.App.GetLocalString("RefluxedAbsorber"), DWSIM.App.GetLocalString("RefluxedAbsorber"))
-            .Add(DWSIM.App.GetLocalString("Reciclo"), DWSIM.App.GetLocalString("Reciclo"))
-            .Add(DWSIM.App.GetLocalString("EnergyRecycle"), DWSIM.App.GetLocalString("EnergyRecycle"))
-            .Add(DWSIM.App.GetLocalString("Especificao"), DWSIM.App.GetLocalString("Especificao"))
-            .Add(DWSIM.App.GetLocalString("Ajuste"), DWSIM.App.GetLocalString("Ajuste"))
-            .Add(DWSIM.App.GetLocalString("ComponentSeparator"), DWSIM.App.GetLocalString("ComponentSeparator"))
-            .Add(DWSIM.App.GetLocalString("OrificePlate"), DWSIM.App.GetLocalString("OrificePlate"))
-            .Add(DWSIM.App.GetLocalString("CapeOpenUnitOperation1"), DWSIM.App.GetLocalString("CapeOpenUnitOperation1"))
-            .Add(DWSIM.App.GetLocalString("CustomUnitOp"), DWSIM.App.GetLocalString("CustomUnitOp"))
-            .Add(DWSIM.App.GetLocalString("ExcelUnitOp"), DWSIM.App.GetLocalString("ExcelUnitOp"))
-            .Add(DWSIM.App.GetLocalString("FlowsheetUnitOp"), DWSIM.App.GetLocalString("FlowsheetUnitOp"))
-            .Add(DWSIM.App.GetLocalString("SolidsSeparator"), DWSIM.App.GetLocalString("SolidsSeparator"))
-            .Add(DWSIM.App.GetLocalString("Filter"), DWSIM.App.GetLocalString("Filter"))
-        End With
-   
-    End Sub
-
-    Private Sub ListBox1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.TreeViewEventArgs) Handles TreeView1.AfterSelect
-
-        Dim obj As Drawing.SkiaSharp.GraphicObjects.GraphicObject
-
-        TreeView2.Nodes.Clear()
-        TreeView3.Nodes.Clear()
-
-        With TreeView2.Nodes
-            Select Case TreeView1.SelectedNode.Index
-                Case 0
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = MaterialStream Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 1
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = EnergyStream Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 2
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = NodeIn Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 3
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = NodeOut Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 4
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = Pipe Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 5
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = Valve Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 6
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = Pump Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 7
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = Tank Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 8
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = Vessel Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 9
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = Compressor Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 10
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = Expander Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 11
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = Heater Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 12
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = Cooler Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 13
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = RCT_Conversion Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 14
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = RCT_Equilibrium Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 15
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = RCT_Gibbs Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 16
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = RCT_CSTR Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 17
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = RCT_PFR Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 18
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = HeatExchanger Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 19
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = ShortcutColumn Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 20
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = DistillationColumn Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 21
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = AbsorptionColumn Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 22
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = ReboiledAbsorber Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 23
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = RefluxedAbsorber Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 24
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = OT_Recycle Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 25
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = OT_EnergyRecycle Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 26
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = OT_Spec Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 27
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = OT_Adjust Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 28
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = ComponentSeparator Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 29
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = OrificePlate Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 30
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = CapeOpenUO Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 31
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = CustomUO Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 32
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = ExcelUO Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 33
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = FlowsheetUO Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 34
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = SolidSeparator Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-                Case 35
-                    For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = Filter Then .Add(obj.Name, obj.Tag).Tag = obj.Name
-                    Next
-            End Select
-        End With
+        lvUnits.Enabled = ssmode
+        If ssmode Then btnOK.Enabled = False
 
     End Sub
 
-    Private Sub ListBox2_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.TreeViewEventArgs) Handles TreeView2.AfterSelect
-
-        TreeView3.Nodes.Clear()
-
-        With TreeView3.Nodes
-            Dim key As String = e.Node.Tag
-
-
-            Dim properties As String()
-            If mode = 0 Then
-                properties = formC.Collections.FlowsheetObjectCollection(key).GetProperties(Interfaces.Enums.PropertyType.ALL)
-            Else
-                properties = formC.Collections.FlowsheetObjectCollection(key).GetProperties(Interfaces.Enums.PropertyType.WR)
-            End If
-
-            For Each prop As String In properties
-                .Add(prop, DWSIM.App.GetPropertyName(prop)).Tag = prop
-            Next
-
-        End With
-
-    End Sub
-
-    Private Sub KryptonButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonButton2.Click
+    Private Sub KryptonButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         Me.Close()
     End Sub
 
-    Private Sub KryptonButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonButton1.Click
-        If Not Me.TreeView3.SelectedNode Is Nothing Then
-            Dim separator = ";"
-            If ssmode Then
-                Dim scell = ssheet.CurrentWorksheet.GetCell(ssheet.CurrentWorksheet.SelectionRange.StartPos)
-                If scell Is Nothing Then scell = ssheet.CurrentWorksheet.CreateAndGetCell(ssheet.CurrentWorksheet.SelectionRange.StartPos)
-                If mode = 0 Then
-                    scell.Formula = String.Format("GETPROPVAL({3}{1}{3}{0}{3}{2}{3})",
-                                                  separator,
-                                                  Me.TreeView2.SelectedNode.Tag,
-                                                  Me.TreeView3.SelectedNode.Tag,
-                                                  Chr(34))
-                Else
-                    scell.Formula = String.Format("SETPROPVAL({3}{1}{3}{0}{3}{2}{3}{0}{3}{4}{3})",
-                                                  separator,
-                                                  Me.TreeView2.SelectedNode.Tag,
-                                                  Me.TreeView3.SelectedNode.Tag,
-                                                  Chr(34),
-                                                  If(scell.Formula = "", scell.Data, scell.Formula))
-                End If
+    Private Sub KryptonButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOK.Click
+        Dim separator = ";"
+        If ssmode Then
+            Dim scell = ssheet.CurrentWorksheet.GetCell(ssheet.CurrentWorksheet.SelectionRange.StartPos)
+            If scell Is Nothing Then scell = ssheet.CurrentWorksheet.CreateAndGetCell(ssheet.CurrentWorksheet.SelectionRange.StartPos)
+            Dim units As String = ""
+            If lvUnits.SelectedItems.Count > 0 Then
+                units = lvUnits.SelectedItems(0).Text
+            End If
+            If mode = 0 Then
+                scell.Formula = String.Format("GETPROPVAL({3}{1}{3}{0}{3}{2}{3}{0}{3}{4}{3})",
+                                              separator,
+                                              lvObject.SelectedItems(0).Tag,
+                                              lvProp.SelectedItems(0).Tag,
+                                              Chr(34),
+                                              units)
             Else
-                Dim obj As SharedClasses.UnitOperations.BaseClass = formC.GetFlowsheetSimulationObject(Me.TreeView2.SelectedNode.Text)
-                If obj.GetProperties(Interfaces.Enums.PropertyType.RO).Contains(Me.TreeView3.SelectedNode.Tag) Then
-                    Me.wi = New Extras.WatchItem(Me.TreeView2.SelectedNode.Tag, Me.TreeView3.SelectedNode.Tag, True)
-                Else
-                    Me.wi = New Extras.WatchItem(Me.TreeView2.SelectedNode.Tag, Me.TreeView3.SelectedNode.Tag, False)
-                End If
+                scell.Formula = String.Format("SETPROPVAL({3}{1}{3}{0}{3}{2}{3}{0}{3}{4}{3}{0}{3}{5}{3})",
+                                              separator,
+                                              lvObject.SelectedItems(0).Tag,
+                                              lvProp.SelectedItems(0).Tag,
+                                              Chr(34),
+                                              If(scell.Formula = "", scell.Data, scell.Formula),
+                                              units)
+            End If
+        Else
+            Dim obj As SharedClasses.UnitOperations.BaseClass = formC.GetFlowsheetSimulationObject(lvObject.SelectedItems(0).Text)
+            If obj.GetProperties(Interfaces.Enums.PropertyType.RO).Contains(lvProp.SelectedItems(0).Tag) Then
+                Me.wi = New Extras.WatchItem(lvObject.SelectedItems(0).Tag, lvProp.SelectedItems(0).Tag, True)
+            Else
+                Me.wi = New Extras.WatchItem(lvObject.SelectedItems(0).Tag, lvProp.SelectedItems(0).Tag, False)
             End If
         End If
         Me.Close()
+    End Sub
+
+    Private Sub lvType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lvType.SelectedIndexChanged
+
+        If lvType.SelectedItems.Count > 0 Then
+            Dim obj0 As New MaterialStreamGraphic()
+            Dim etype = obj0.ObjectType.GetType()
+            Dim otype = [Enum].Parse(etype, lvType.SelectedItems(0).Text)
+            lvObject.Items.Clear()
+            For Each obj In formC.SimulationObjects.Values.Where(Function(x) x.GraphicObject.ObjectType = otype)
+                lvObject.Items.Add(New ListViewItem(obj.GraphicObject.Tag) With {.Tag = obj.Name})
+            Next
+        End If
+
+    End Sub
+
+    Private Sub lvObject_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lvObject.SelectedIndexChanged
+
+        If lvObject.SelectedItems.Count > 0 Then
+            lvProp.Items.Clear()
+            With lvProp.Items
+                Dim key As String = lvObject.SelectedItems(0).Tag
+                Dim properties As String()
+                If mode = 0 Then
+                    properties = formC.Collections.FlowsheetObjectCollection(key).GetProperties(Interfaces.Enums.PropertyType.ALL)
+                Else
+                    properties = formC.Collections.FlowsheetObjectCollection(key).GetProperties(Interfaces.Enums.PropertyType.WR)
+                End If
+                For Each prop As String In properties
+                    .Add(DWSIM.App.GetPropertyName(prop)).Tag = prop
+                Next
+            End With
+        End If
+
+    End Sub
+
+    Private Sub lvProp_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lvProp.SelectedIndexChanged
+
+        If lvProp.SelectedItems.Count > 0 Then
+
+            lvUnits.Items.Clear()
+
+            Dim key As String = lvProp.SelectedItems(0).Tag
+            Dim obj = formC.GetFlowsheetSimulationObject(lvObject.SelectedItems(0).Text)
+            Dim unit = obj.GetPropertyUnit(key)
+            Dim su = formC.FlowsheetOptions.SelectedUnitSystem
+            Dim units = su.GetUnitSet(su.GetUnitType(unit))
+
+            For Each item In units
+                lvUnits.Items.Add(item)
+            Next
+
+            If ssmode Then
+                If lvProp.SelectedItems.Count > 0 Then btnOK.Enabled = True
+            End If
+
+        End If
+
+    End Sub
+
+    Private Sub lvUnits_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lvUnits.SelectedIndexChanged
+
     End Sub
 
 End Class

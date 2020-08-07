@@ -23,117 +23,128 @@ Partial Class FormPropSelection
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormPropSelection))
-        Me.KryptonButton2 = New System.Windows.Forms.Button()
-        Me.KryptonButton1 = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnOK = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.TreeView3 = New System.Windows.Forms.TreeView()
-        Me.TreeView2 = New System.Windows.Forms.TreeView()
-        Me.TreeView1 = New System.Windows.Forms.TreeView()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
+        Me.lvUnits = New System.Windows.Forms.ListView()
+        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.lvProp = New System.Windows.Forms.ListView()
+        Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.lvObject = New System.Windows.Forms.ListView()
+        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.lvType = New System.Windows.Forms.ListView()
+        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'KryptonButton2
+        'btnCancel
         '
-        resources.ApplyResources(Me.KryptonButton2, "KryptonButton2")
-        Me.KryptonButton2.Name = "KryptonButton2"
+        resources.ApplyResources(Me.btnCancel, "btnCancel")
+        Me.btnCancel.Name = "btnCancel"
         '
-        'KryptonButton1
+        'btnOK
         '
-        resources.ApplyResources(Me.KryptonButton1, "KryptonButton1")
-        Me.KryptonButton1.Name = "KryptonButton1"
+        resources.ApplyResources(Me.btnOK, "btnOK")
+        Me.btnOK.Name = "btnOK"
         '
         'GroupBox1
         '
         resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.Controls.Add(Me.TreeView3)
-        Me.GroupBox1.Controls.Add(Me.TreeView2)
-        Me.GroupBox1.Controls.Add(Me.TreeView1)
-        Me.GroupBox1.Controls.Add(Me.Label3)
-        Me.GroupBox1.Controls.Add(Me.Label2)
-        Me.GroupBox1.Controls.Add(Me.Label1)
+        Me.GroupBox1.Controls.Add(Me.lvUnits)
+        Me.GroupBox1.Controls.Add(Me.lvProp)
+        Me.GroupBox1.Controls.Add(Me.lvObject)
+        Me.GroupBox1.Controls.Add(Me.lvType)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
         '
-        'TreeView3
+        'lvUnits
         '
-        resources.ApplyResources(Me.TreeView3, "TreeView3")
-        Me.TreeView3.FullRowSelect = True
-        Me.TreeView3.HideSelection = False
-        Me.TreeView3.Name = "TreeView3"
-        Me.TreeView3.ShowLines = False
-        Me.TreeView3.ShowPlusMinus = False
-        Me.TreeView3.ShowRootLines = False
+        resources.ApplyResources(Me.lvUnits, "lvUnits")
+        Me.lvUnits.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader4})
+        Me.lvUnits.FullRowSelect = True
+        Me.lvUnits.HideSelection = False
+        Me.lvUnits.MultiSelect = False
+        Me.lvUnits.Name = "lvUnits"
+        Me.lvUnits.ShowGroups = False
+        Me.lvUnits.UseCompatibleStateImageBehavior = False
+        Me.lvUnits.View = System.Windows.Forms.View.Details
         '
-        'TreeView2
+        'ColumnHeader4
         '
-        resources.ApplyResources(Me.TreeView2, "TreeView2")
-        Me.TreeView2.FullRowSelect = True
-        Me.TreeView2.HideSelection = False
-        Me.TreeView2.Name = "TreeView2"
-        Me.TreeView2.ShowLines = False
-        Me.TreeView2.ShowPlusMinus = False
-        Me.TreeView2.ShowRootLines = False
+        resources.ApplyResources(Me.ColumnHeader4, "ColumnHeader4")
         '
-        'TreeView1
+        'lvProp
         '
-        resources.ApplyResources(Me.TreeView1, "TreeView1")
-        Me.TreeView1.FullRowSelect = True
-        Me.TreeView1.HideSelection = False
-        Me.TreeView1.Name = "TreeView1"
-        Me.TreeView1.ShowLines = False
-        Me.TreeView1.ShowPlusMinus = False
-        Me.TreeView1.ShowRootLines = False
+        resources.ApplyResources(Me.lvProp, "lvProp")
+        Me.lvProp.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader3})
+        Me.lvProp.FullRowSelect = True
+        Me.lvProp.HideSelection = False
+        Me.lvProp.MultiSelect = False
+        Me.lvProp.Name = "lvProp"
+        Me.lvProp.ShowGroups = False
+        Me.lvProp.UseCompatibleStateImageBehavior = False
+        Me.lvProp.View = System.Windows.Forms.View.Details
         '
-        'Label3
+        'ColumnHeader3
         '
-        resources.ApplyResources(Me.Label3, "Label3")
-        Me.Label3.Name = "Label3"
+        resources.ApplyResources(Me.ColumnHeader3, "ColumnHeader3")
         '
-        'Label2
+        'lvObject
         '
-        resources.ApplyResources(Me.Label2, "Label2")
-        Me.Label2.Name = "Label2"
+        resources.ApplyResources(Me.lvObject, "lvObject")
+        Me.lvObject.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader2})
+        Me.lvObject.FullRowSelect = True
+        Me.lvObject.HideSelection = False
+        Me.lvObject.MultiSelect = False
+        Me.lvObject.Name = "lvObject"
+        Me.lvObject.ShowGroups = False
+        Me.lvObject.UseCompatibleStateImageBehavior = False
+        Me.lvObject.View = System.Windows.Forms.View.Details
         '
-        'Label1
+        'ColumnHeader2
         '
-        resources.ApplyResources(Me.Label1, "Label1")
-        Me.Label1.Name = "Label1"
+        resources.ApplyResources(Me.ColumnHeader2, "ColumnHeader2")
         '
-        'Label4
+        'lvType
         '
-        resources.ApplyResources(Me.Label4, "Label4")
-        Me.Label4.Name = "Label4"
+        resources.ApplyResources(Me.lvType, "lvType")
+        Me.lvType.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1})
+        Me.lvType.FullRowSelect = True
+        Me.lvType.HideSelection = False
+        Me.lvType.MultiSelect = False
+        Me.lvType.Name = "lvType"
+        Me.lvType.ShowGroups = False
+        Me.lvType.UseCompatibleStateImageBehavior = False
+        Me.lvType.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader1
+        '
+        resources.ApplyResources(Me.ColumnHeader1, "ColumnHeader1")
         '
         'FormPropSelection
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.KryptonButton2)
-        Me.Controls.Add(Me.KryptonButton1)
+        Me.Controls.Add(Me.btnCancel)
+        Me.Controls.Add(Me.btnOK)
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "FormPropSelection"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
-    Public WithEvents KryptonButton2 As System.Windows.Forms.Button
-    Public WithEvents KryptonButton1 As System.Windows.Forms.Button
+    Public WithEvents btnCancel As System.Windows.Forms.Button
+    Public WithEvents btnOK As System.Windows.Forms.Button
     Public WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Public WithEvents Label3 As System.Windows.Forms.Label
-    Public WithEvents Label2 As System.Windows.Forms.Label
-    Public WithEvents Label1 As System.Windows.Forms.Label
-    Public WithEvents TreeView3 As System.Windows.Forms.TreeView
-    Public WithEvents TreeView2 As System.Windows.Forms.TreeView
-    Public WithEvents TreeView1 As System.Windows.Forms.TreeView
-    Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents lvUnits As ListView
+    Friend WithEvents lvProp As ListView
+    Friend WithEvents lvObject As ListView
+    Friend WithEvents lvType As ListView
+    Friend WithEvents ColumnHeader4 As ColumnHeader
+    Friend WithEvents ColumnHeader3 As ColumnHeader
+    Friend WithEvents ColumnHeader2 As ColumnHeader
+    Friend WithEvents ColumnHeader1 As ColumnHeader
 End Class

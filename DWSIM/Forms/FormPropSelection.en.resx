@@ -118,38 +118,54 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="KryptonButton2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>461, 312</value>
+  <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>660, 384</value>
   </data>
-  <data name="KryptonButton2.Text" xml:space="preserve">
+  <data name="btnCancel.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="KryptonButton1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>557, 312</value>
+  <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>755, 384</value>
   </data>
-  <data name="Label3.Text" xml:space="preserve">
-    <value>Variable:</value>
+  <data name="ColumnHeader4.Text" xml:space="preserve">
+    <value>Units</value>
   </data>
-  <data name="Label2.Text" xml:space="preserve">
-    <value>Object:</value>
+  <data name="lvUnits.Location" type="System.Drawing.Point, System.Drawing">
+    <value>700, 19</value>
   </data>
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 13</value>
+  <data name="lvUnits.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 350</value>
   </data>
-  <data name="Label1.Text" xml:space="preserve">
-    <value>Type:</value>
+  <data name="ColumnHeader3.Text" xml:space="preserve">
+    <value>Property</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ColumnHeader3.Width" type="System.Int32, mscorlib">
+    <value>350</value>
+  </data>
+  <data name="lvProp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>356, 350</value>
+  </data>
+  <data name="ColumnHeader2.Text" xml:space="preserve">
+    <value>Object</value>
+  </data>
+  <data name="lvObject.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 350</value>
+  </data>
+  <data name="ColumnHeader1.Text" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="lvType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 350</value>
+  </data>
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>840, 375</value>
   </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Select Object</value>
   </data>
-  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>530, 13</value>
-  </data>
-  <data name="Label4.Text" xml:space="preserve">
-    <value>When running DWSIM through Mono, press 'ESC' after returning to the Spreadsheet to leave cell editing mode.</value>
-  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>655, 344</value>
+    <value>858, 418</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Select Object/Property</value>
