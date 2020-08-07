@@ -146,6 +146,7 @@ namespace DWSIM.UI.Desktop.Editors
                                 flowsheet.ShowMessage(ex.Message.ToString(), IFlowsheet.MessageType.GeneralError);
                             }
                             fgui.UpdateInterface();
+                            fgui.UpdateOpenEditForms();
                             return;
                         }
                         else if (connector.Type == ConType.ConOut | connector.Type == ConType.ConEn)
@@ -154,13 +155,14 @@ namespace DWSIM.UI.Desktop.Editors
                             {
                                 var objto = connector.AttachedConnector.AttachedTo;
                                 flowsheet.DisconnectObjects(gobj, objto);
-                                flowsheet.ShowMessage(String.Format("Disconnected {0} from {1}", gobj.Tag, objto.Tag), IFlowsheet.MessageType.Information);
+                                flowsheet.ShowMessage(String.Format("Disconnected {0} from {1}.", gobj.Tag, objto.Tag), IFlowsheet.MessageType.Information);
                             }
                             catch (Exception ex)
                             {
                                 flowsheet.ShowMessage(ex.Message.ToString(), IFlowsheet.MessageType.GeneralError); ;
                             }
                             fgui.UpdateInterface();
+                            fgui.UpdateOpenEditForms();
                             return;
                         }
                     }
@@ -236,7 +238,7 @@ namespace DWSIM.UI.Desktop.Editors
                                 {
                                     var objto = connector.AttachedConnector.AttachedTo;
                                     flowsheet.DisconnectObjects(gobj, objto);
-                                    flowsheet.ShowMessage(String.Format("Disconnected {0} from {1}", gobj.Tag, objto.Tag), IFlowsheet.MessageType.Information);
+                                    flowsheet.ShowMessage(String.Format("Disconnected {0} from {1}.", gobj.Tag, objto.Tag), IFlowsheet.MessageType.Information);
                                 }
                                 flowsheet.ConnectObjects(gobj, gobj2, gobj.OutputConnectors.IndexOf(connector), 0);
                                 flowsheet.ShowMessage(String.Format("Connected {0} to {1}.", gobj.Tag, gobj2.Tag), IFlowsheet.MessageType.Information);
@@ -248,6 +250,7 @@ namespace DWSIM.UI.Desktop.Editors
                         }
 
                         fgui.UpdateInterface();
+                        fgui.UpdateOpenEditForms();
 
                     }
                 }

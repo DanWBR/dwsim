@@ -911,6 +911,7 @@ namespace DWSIM.UI.Forms
                         FlowsheetObject.AddObject(e.Data.GetString("ObjectName"), (int)(e.Location.X * GlobalSettings.Settings.DpiScale / FlowsheetControl.FlowsheetSurface.Zoom), (int)(e.Location.Y * GlobalSettings.Settings.DpiScale / FlowsheetControl.FlowsheetSurface.Zoom));
                     }
                     UpdateEditorConnectionsPanel();
+                    FlowsheetObject.UpdateInterface();
                 }
             };
 

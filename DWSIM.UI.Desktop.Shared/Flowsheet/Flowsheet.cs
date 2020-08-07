@@ -91,7 +91,7 @@ namespace DWSIM.UI.Desktop.Shared
 
         public override void UpdateOpenEditForms()
         {
-            throw new NotImplementedException();
+            UpdateEditorPanels?.Invoke();
         }
 
         public override object GetApplicationObject()
