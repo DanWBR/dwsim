@@ -121,7 +121,12 @@ Public Class FormPropSelection
 
     End Sub
 
-    Private Sub lvUnits_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lvUnits.SelectedIndexChanged
+    Private Sub FormPropSelection_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+
+        ColumnHeader1.Width = lvType.Width - 5
+        ColumnHeader2.Width = lvObject.Width - 5
+        ColumnHeader3.Width = lvProp.Width - 5
+        ColumnHeader4.Width = lvUnits.Width - 5
 
     End Sub
 

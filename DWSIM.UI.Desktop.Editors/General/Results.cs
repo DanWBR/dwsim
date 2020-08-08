@@ -290,6 +290,7 @@ namespace DWSIM.UI.Desktop.Editors
                                 break;
                         }
                     }
+                    containerd.EndVertical();
                 }
                 else
                 {

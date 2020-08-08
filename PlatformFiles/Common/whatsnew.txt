@@ -1,3 +1,8 @@
+Version 6.1 Update 2
+
+- [CHG] Updated Spreadsheet property importing/exporting to include units
+- [FIX] Bug fixes
+
 Version 6.1 Update 1
 
 - [CHG] Enhanced spreadsheet performance (Cross-Platform UI)
@@ -5,9 +10,3 @@ Version 6.1 Update 1
 - [FIX] Fixes for High-DPI displays (Classic UI)
 - [FIX] Fixed an issue on saving simulations with Master Property Tables
 - [FIX] Other bug fixes
-
-Version 6.1
-
-- [NEW] Added support for the new Neural Network Unit Operation
-- [NEW] Flowsheet Auto-Layout function
-- [FIX] Bug fixes and enhancements

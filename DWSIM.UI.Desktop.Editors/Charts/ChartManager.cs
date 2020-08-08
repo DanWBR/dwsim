@@ -56,7 +56,7 @@ namespace DWSIM.UI.Desktop.Editors.Charts
                         foreach (var item in Flowsheet.Charts)
                         {
                             DocumentPage tabpage = new DocumentPage();
-                            var ccontrol = new ChartControl { Chart = (Chart)item.Value, Flowsheet = Flowsheet, Spreadsheet = (ReoGridControl)Flowsheet.GetSpreadsheetObject() };
+                            var ccontrol = new ChartControl { Chart = (Chart)item.Value, Flowsheet = Flowsheet, Spreadsheet = (ReoGridControl)Flowsheet.GetSpreadsheetObjectFunc?.Invoke() };
                             tabpage.Content = ccontrol;
                             TabControl.Pages.Add(tabpage);
                             tabpage.Text = item.Value.DisplayName;
@@ -82,7 +82,7 @@ namespace DWSIM.UI.Desktop.Editors.Charts
                     DocumentPage tabpage = new DocumentPage();
                     var chart = new Chart();
                     tabpage.Text = chart.DisplayName;
-                    var ccontrol = new ChartControl { Chart = chart, Flowsheet = Flowsheet, Spreadsheet = (ReoGridControl)Flowsheet.GetSpreadsheetObject() };
+                    var ccontrol = new ChartControl { Chart = chart, Flowsheet = Flowsheet, Spreadsheet = (ReoGridControl)Flowsheet.GetSpreadsheetObjectFunc?.Invoke() };
                     tabpage.Content = ccontrol;
                     ccontrol.UpdatePlotModelData();
                     ccontrol.UpdatePropertiesLayout();

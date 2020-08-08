@@ -627,7 +627,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="DWSIM.Thermodynamics-AddIn.dna" />
     <None Include="Properties\ExcelDna.Build.props" />
     <None Include="Resources\cross.png" />
     <None Include="Resources\copy.gif" />

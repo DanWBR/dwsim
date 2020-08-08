@@ -883,7 +883,7 @@ namespace DWSIM.UI.Shared
 
             var h = height * GetEditorFontSize() / (int)(new Eto.Drawing.Font(Eto.Drawing.SystemFont.Label).Size);
 
-            container.AddRow(new TableRow(new Label { Text = "", Height = (int)(sf * h) }));
+            container.AddRow(new Label { Text = "", Height = (int)(sf * h) });
         }
 
         public static TextBox CreateAndAddFullTextBoxRow(this DynamicLayout container, String text, Action<TextBox, EventArgs> command)

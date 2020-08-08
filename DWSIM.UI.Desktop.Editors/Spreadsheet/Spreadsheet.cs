@@ -55,7 +55,7 @@ namespace DWSIM.UI.Desktop.Editors
             scontrol = new ReoGridFullControl();
             Sheet = scontrol.GridControl;
             SetCustomFunctions();
-            flowsheet.GetSpreadsheetObject = () => { return Sheet; };
+            flowsheet.GetSpreadsheetObjectFunc = () => { return Sheet; };
             Sheet.CurrentWorksheet.Name = "MAIN";
 
             scontrol.ImportDataMenuItem.Click += (sender, e) =>

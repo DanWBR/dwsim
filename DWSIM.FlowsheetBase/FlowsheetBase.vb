@@ -58,7 +58,7 @@ Imports DWSIM.GlobalSettings
 
     Public LoadSpreadsheetData, SaveSpreadsheetData As Action(Of XDocument)
 
-    Public GetSpreadsheetObject As Func(Of Object)
+    Public GetSpreadsheetObjectFunc As Func(Of Object)
 
     Public RetrieveSpreadsheetData As Func(Of String, List(Of String()))
 
@@ -2475,7 +2475,7 @@ Label_00CC:
         scope.SetVariable("Plugins", UtilityPlugins)
         scope.SetVariable("Flowsheet", Me)
         scope.SetVariable("Application", GetApplicationObject)
-        scope.SetVariable("Spreadsheet", GetSpreadsheetObject.Invoke())
+        scope.SetVariable("Spreadsheet", GetSpreadsheetObjectFunc.Invoke())
         Dim Solver As New FlowsheetSolver.FlowsheetSolver
         scope.SetVariable("Solver", Solver)
         For Each obj As ISimulationObject In SimulationObjects.Values
@@ -2526,7 +2526,7 @@ Label_00CC:
                                                        locals.SetItem("Plugins", UtilityPlugins.ToPython)
                                                        locals.SetItem("Flowsheet", Me.ToPython)
                                                        Try
-                                                           locals.SetItem("Spreadsheet", (GetSpreadsheetObject.Invoke()).ToPython)
+                                                           locals.SetItem("Spreadsheet", (GetSpreadsheetObjectFunc.Invoke()).ToPython)
                                                        Catch ex As Exception
                                                        End Try
                                                        Dim Solver As New FlowsheetSolver.FlowsheetSolver
@@ -2596,7 +2596,7 @@ Label_00CC:
                                                                                      locals.SetItem("Plugins", UtilityPlugins.ToPython)
                                                                                      locals.SetItem("Flowsheet", Me.ToPython)
                                                                                      Try
-                                                                                         locals.SetItem("Spreadsheet", (GetSpreadsheetObject.Invoke()).ToPython)
+                                                                                         locals.SetItem("Spreadsheet", (GetSpreadsheetObjectFunc.Invoke()).ToPython)
                                                                                      Catch ex As Exception
                                                                                      End Try
                                                                                      Dim Solver As New FlowsheetSolver.FlowsheetSolver
@@ -2674,8 +2674,10 @@ Label_00CC:
 
     End Function
 
-    Private Function IFlowsheet_GetSpreadsheetObject() As Object Implements IFlowsheet.GetSpreadsheetObject
-        Return GetSpreadsheetObject?.Invoke()
+    Public Function GetSpreadsheetObject() As Object Implements IFlowsheet.GetSpreadsheetObject
+
+        Return GetSpreadsheetObjectFunc?.Invoke()
+
     End Function
 
 End Class
