@@ -1,6 +1,4 @@
 ﻿Imports System.Linq
-Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes
-Imports DWSIM.Interfaces.Enums.GraphicObjects.ObjectType
 
 Public Class FormPropSelection
 
@@ -18,11 +16,8 @@ Public Class FormPropSelection
     Private Sub UICVSelectorForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         formC = My.Application.ActiveSimulation
-        Dim obj As New MaterialStreamGraphic()
-        Dim etype = obj.ObjectType.GetType()
-        lvType.Items.AddRange([Enum].GetNames(etype).
-                              Where(Function(x) Not x.Contains("GO_")).
-                              Select(Function(x) New ListViewItem(x)).ToArray())
+
+        lvType.Items.AddRange(FormMain.ObjectList.Keys.Select(Function(x) New ListViewItem(x)).ToArray())
 
         lvUnits.Enabled = ssmode
         If ssmode Then btnOK.Enabled = False
@@ -72,11 +67,10 @@ Public Class FormPropSelection
     Private Sub lvType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lvType.SelectedIndexChanged
 
         If lvType.SelectedItems.Count > 0 Then
-            Dim obj0 As New MaterialStreamGraphic()
-            Dim etype = obj0.ObjectType.GetType()
-            Dim otype = [Enum].Parse(etype, lvType.SelectedItems(0).Text)
+            Dim obj = FormMain.ObjectList(lvType.SelectedItems(0).Text)
+            Dim objs = formC.SimulationObjects.Values.Where(Function(x) x.GetType().Equals(obj.GetType())).ToList()
             lvObject.Items.Clear()
-            For Each obj In formC.SimulationObjects.Values.Where(Function(x) x.GraphicObject.ObjectType = otype)
+            For Each obj In objs
                 lvObject.Items.Add(New ListViewItem(obj.GraphicObject.Tag) With {.Tag = obj.Name})
             Next
         End If

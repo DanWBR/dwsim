@@ -68,13 +68,14 @@ namespace DWSIM.UI.Desktop.Editors
 
                     selector.btnOK.Click += (sender2, e2) =>
                     {
-
+                        var units = "";
+                        if (selector.list4.SelectedValue != null) units = selector.list4.SelectedValue.ToString();
                         Sheet.CurrentWorksheet.Cells[Sheet.CurrentWorksheet.SelectionRange.StartPos].Formula =
-                        String.Format("GETPROPVAL({3}{1}{3}{0}{3}{2}{3})",
+                        String.Format("GETPROPVAL({3}{1}{3}{0}{3}{2}{3}{0}{3}{4}{3})",
                                                   ';',
                                                   selector.list2.SelectedKey,
                                                   selector.list3.SelectedKey,
-                                                  '"');
+                                                  '"', units);
 
                         selector.Close();
 
@@ -98,15 +99,16 @@ namespace DWSIM.UI.Desktop.Editors
 
                     selector.btnOK.Click += (sender2, e2) =>
                     {
-
+                        var units = "";
+                        if (selector.list4.SelectedValue != null) units = selector.list4.SelectedValue.ToString();
                         var scell = Sheet.CurrentWorksheet.Cells[Sheet.CurrentWorksheet.SelectionRange.StartPos];
                         var currdata = scell.Formula == null ? scell.Data : scell.Formula;
-                        scell.Formula = String.Format("SETPROPVAL({3}{1}{3}{0}{3}{2}{3}{0}{3}{4}{3})",
+                        scell.Formula = String.Format("SETPROPVAL({3}{1}{3}{0}{3}{2}{3}{0}{3}{4}{3}{0}{3}{5}{3})",
                                                    ';',
                                                    selector.list2.SelectedKey,
                                                    selector.list3.SelectedKey,
                                                    '"',
-                                                   currdata);
+                                                   currdata, units);
 
                         selector.Close();
 

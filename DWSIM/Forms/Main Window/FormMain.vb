@@ -77,22 +77,9 @@ Public Class FormMain
     Public SampleList As New List(Of String)
     Public FOSSEEList As New List(Of FOSSEEFlowsheet)
 
-#Region "    Form Events"
+    Public ObjectList As New Dictionary(Of String, Interfaces.ISimulationObject)
 
-    'Public Sub InitializeChromium()
-    '    If Not DWSIM.App.IsRunningOnMono Then
-    '        Try
-    '            Dim settings As CefSettings = New CefSettings
-    '            settings.IgnoreCertificateErrors = True
-    '            settings.PersistUserPreferences = True
-    '            settings.PersistSessionCookies = True
-    '            settings.CachePath = Path.Combine(My.Computer.FileSystem.SpecialDirectories.CurrentUserApplicationData, "BrowserDataCache")
-    '            CefSharp.CefSharpSettings.SubprocessExitIfParentProcessClosed = True
-    '            CefSharp.Cef.Initialize(settings)
-    '        Catch ex As Exception
-    '        End Try
-    '    End If
-    'End Sub
+#Region "    Form Events"
 
     Private Sub FormMain_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles Me.DragDrop
         If e.Data.GetDataPresent(DataFormats.FileDrop) Then
@@ -229,6 +216,17 @@ Public Class FormMain
 
             aTypeList.AddRange(calculatorassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
             aTypeList.AddRange(unitopassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
+
+            For Each item In aTypeList.OrderBy(Function(x) x.Name)
+                If Not item.IsAbstract Then
+                    Dim obj = DirectCast(Activator.CreateInstance(item), Interfaces.ISimulationObject)
+                    ObjectList.Add(obj.GetDisplayName(), obj)
+                End If
+            Next
+
+            For Each item In ExternalUnitOperations.Values.OrderBy(Function(x) x.Name)
+                ObjectList.Add(item.Name, item)
+            Next
 
             My.Application.MainThreadId = Threading.Thread.CurrentThread.ManagedThreadId
 
