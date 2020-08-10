@@ -678,6 +678,7 @@ namespace DWSIM.UI.Forms
                         Application.Instance.Invoke(() =>
                         {
                             string rgfdata = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData").Value;
+                            rgfdata = rgfdata.Replace("Calibri", "Arial").Replace("10.25", "10");
                             Dictionary<string, string> sdict = new Dictionary<string, string>();
                             sdict = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(rgfdata);
                             Spreadsheet.Sheet.RemoveWorksheet(0);

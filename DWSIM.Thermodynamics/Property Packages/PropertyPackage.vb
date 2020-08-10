@@ -11075,108 +11075,54 @@ Final3:
             Catch ex As Exception
             End Try
 
-            Try
-                Me.ParametersXMLString = (From el As XElement In data Select el Where el.Name = "Parameters").FirstOrDefault.ToString()
-            Catch ex As Exception
-            End Try
+            Dim e1 = (From el As XElement In data Select el Where el.Name = "Parameters").FirstOrDefault
+            Me.ParametersXMLString = e1?.ToString()
 
-            Try
-                OverrideKvalFugCoeff = (From el As XElement In data Select el Where el.Name = "OverrideKvalFugCoeff").FirstOrDefault.Value
-            Catch ex As Exception
-            End Try
+            e1 = (From el As XElement In data Select el Where el.Name = "OverrideKvalFugCoeff").FirstOrDefault
+            OverrideKvalFugCoeff = e1?.Value
 
-            Try
-                OverrideEnthalpyCalculation = (From el As XElement In data Select el Where el.Name = "OverrideEnthalpyCalculation").FirstOrDefault.Value
-            Catch ex As Exception
-            End Try
+            e1 = (From el As XElement In data Select el Where el.Name = "OverrideEnthalpyCalculation").FirstOrDefault
+            OverrideEnthalpyCalculation = e1?.Value
 
-            Try
-                OverrideEntropyCalculation = (From el As XElement In data Select el Where el.Name = "OverrideEntropyCalculation").FirstOrDefault.Value
-            Catch ex As Exception
-            End Try
+            e1 = (From el As XElement In data Select el Where el.Name = "OverrideEntropyCalculation").FirstOrDefault
+            OverrideEntropyCalculation = e1?.Value
+
+            e1 = (From el As XElement In data Select el Where el.Name = "LiquidDensity_CorrectExpDataForPressure").FirstOrDefault
+            LiquidDensity_CorrectExpDataForPressure = e1?.Value
+
+            e1 = (From el As XElement In data Select el Where el.Name = "LiquidDensity_UsePenelouxVolumeTranslation").FirstOrDefault
+            LiquidDensity_UsePenelouxVolumeTranslation = e1?.Value
+
+            e1 = (From el As XElement In data Select el Where el.Name = "LiquidDensity_UsePenelouxVolumeTranslation").FirstOrDefault
+            LiquidViscosity_CorrectExpDataForPressure = e1?.Value
+
+            e1 = (From el As XElement In data Select el Where el.Name = "LiquidFugacity_UsePoyntingCorrectionFactor").FirstOrDefault
+            LiquidFugacity_UsePoyntingCorrectionFactor = e1?.Value
+
+            e1 = (From el As XElement In data Select el Where el.Name = "SolidPhaseFugacity_UseIdealLiquidPhaseFugacity").FirstOrDefault
+            SolidPhaseFugacity_UseIdealLiquidPhaseFugacity = e1?.Value
+
+            e1 = (From el As XElement In data Select el Where el.Name = "SolidPhaseEnthalpy_UsesCp").FirstOrDefault
+            SolidPhaseEnthalpy_UsesCp = e1?.Value
+
+            e1 = (From el As XElement In data Select el Where el.Name = "ActivityCoefficientModels_IgnoreMissingInteractionParameters").FirstOrDefault
+            ActivityCoefficientModels_IgnoreMissingInteractionParameters = e1?.Value
+
+            e1 = (From el As XElement In data Select el Where el.Name = "IgnoreVaporFractionLimit").FirstOrDefault
+            IgnoreVaporFractionLimit = e1?.Value
+
+            e1 = (From el As XElement In data Select el Where el.Name = "IgnoreSalinityLimit").FirstOrDefault
+            IgnoreSalinityLimit = e1?.Value
 
             Try
                 LiquidDensityCalculationMode_Subcritical = [Enum].Parse(LiquidDensityCalculationMode_Subcritical.GetType, (From el As XElement In data Select el Where el.Name = "LiquidDensityCalculationMode_Supercritical").FirstOrDefault.Value)
-            Catch ex As Exception
-            End Try
-
-            Try
                 LiquidDensityCalculationMode_Supercritical = [Enum].Parse(LiquidDensityCalculationMode_Supercritical.GetType, (From el As XElement In data Select el Where el.Name = "LiquidDensityCalculationMode_Supercritical").FirstOrDefault.Value)
-            Catch ex As Exception
-            End Try
-
-            Try
-                LiquidDensity_CorrectExpDataForPressure = (From el As XElement In data Select el Where el.Name = "LiquidDensity_CorrectExpDataForPressure").FirstOrDefault.Value
-            Catch ex As Exception
-            End Try
-
-            Try
-                LiquidDensity_UsePenelouxVolumeTranslation = (From el As XElement In data Select el Where el.Name = "LiquidDensity_UsePenelouxVolumeTranslation").FirstOrDefault.Value
-            Catch ex As Exception
-            End Try
-
-            Try
                 LiquidViscosityCalculationMode_Subcritical = [Enum].Parse(LiquidViscosityCalculationMode_Subcritical.GetType, (From el As XElement In data Select el Where el.Name = "LiquidViscosityCalculationMode_Subcritical").FirstOrDefault.Value)
-            Catch ex As Exception
-            End Try
-
-            Try
                 LiquidViscosityCalculationMode_Supercritical = [Enum].Parse(LiquidViscosityCalculationMode_Supercritical.GetType, (From el As XElement In data Select el Where el.Name = "LiquidViscosityCalculationMode_Supercritical").FirstOrDefault.Value)
-            Catch ex As Exception
-            End Try
-
-            Try
-                LiquidViscosity_CorrectExpDataForPressure = (From el As XElement In data Select el Where el.Name = "LiquidViscosity_CorrectExpDataForPressure").FirstOrDefault.Value
-            Catch ex As Exception
-            End Try
-
-            Try
                 LiquidViscosity_MixingRule = [Enum].Parse(LiquidViscosity_MixingRule.GetType, (From el As XElement In data Select el Where el.Name = "LiquidViscosity_MixingRule").FirstOrDefault.Value)
-            Catch ex As Exception
-            End Try
-
-            Try
                 VaporPhaseFugacityCalculationMode = [Enum].Parse(VaporPhaseFugacityCalculationMode.GetType, (From el As XElement In data Select el Where el.Name = "VaporPhaseFugacityCalculationMode").FirstOrDefault.Value)
-            Catch ex As Exception
-            End Try
-
-            Try
                 SolidPhaseFugacityCalculationMethod = [Enum].Parse(SolidPhaseFugacityCalculationMethod.GetType, (From el As XElement In data Select el Where el.Name = "SolidPhaseFugacityCalculationMethod").FirstOrDefault.Value)
-            Catch ex As Exception
-            End Try
-
-            Try
-                SolidPhaseFugacity_UseIdealLiquidPhaseFugacity = (From el As XElement In data Select el Where el.Name = "SolidPhaseFugacity_UseIdealLiquidPhaseFugacity").FirstOrDefault.Value
-            Catch ex As Exception
-            End Try
-
-            Try
-                SolidPhaseEnthalpy_UsesCp = (From el As XElement In data Select el Where el.Name = "SolidPhaseEnthalpy_UsesCp").FirstOrDefault.Value
-            Catch ex As Exception
-            End Try
-
-            Try
                 EnthalpyEntropyCpCvCalculationMode = [Enum].Parse(EnthalpyEntropyCpCvCalculationMode.GetType, (From el As XElement In data Select el Where el.Name = "EnthalpyEntropyCpCvCalculationMode").FirstOrDefault.Value)
-            Catch ex As Exception
-            End Try
-
-            Try
-                LiquidFugacity_UsePoyntingCorrectionFactor = (From el As XElement In data Select el Where el.Name = "LiquidFugacity_UsePoyntingCorrectionFactor").FirstOrDefault.Value
-            Catch ex As Exception
-            End Try
-
-            Try
-                ActivityCoefficientModels_IgnoreMissingInteractionParameters = (From el As XElement In data Select el Where el.Name = "ActivityCoefficientModels_IgnoreMissingInteractionParameters").FirstOrDefault.Value
-            Catch ex As Exception
-            End Try
-
-            Try
-                IgnoreVaporFractionLimit = (From el As XElement In data Select el Where el.Name = "IgnoreVaporFractionLimit").FirstOrDefault.Value
-            Catch ex As Exception
-            End Try
-
-            Try
-                IgnoreSalinityLimit = (From el As XElement In data Select el Where el.Name = "IgnoreSalinityLimit").FirstOrDefault.Value
             Catch ex As Exception
             End Try
 
@@ -11191,13 +11137,6 @@ Final3:
                 PropertyOverrides = JsonConvert.DeserializeObject(Of Dictionary(Of String, String))((From el As XElement In data Select el Where el.Name = "PropertyOverrides").FirstOrDefault.Value)
             Catch ex As Exception
             End Try
-
-            'Try
-            '    For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "Parameters").FirstOrDefault.Elements.ToList
-            '        If m_par.ContainsKey(xel.@ID) Then m_par(xel.@ID) = Double.Parse(xel.@Value, ci) Else m_par.Add(xel.@ID, Double.Parse(xel.@Value, ci))
-            '    Next
-            'Catch ex As Exception
-            'End Try
 
             Select Case Me.ComponentName
 

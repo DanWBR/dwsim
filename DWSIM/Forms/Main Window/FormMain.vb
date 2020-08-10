@@ -1937,6 +1937,7 @@ Public Class FormMain
                 Dim rgfdataelement = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData")
                 If Not (rgfdataelement) Is Nothing Then
                     Dim rgfdata As String = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData").Value
+                    rgfdata = rgfdata.Replace("Calibri", "Arial").Replace("10.25", "10")
                     Dim sdict As New Dictionary(Of String, String)
                     sdict = Newtonsoft.Json.JsonConvert.DeserializeObject(Of Dictionary(Of String, String))(rgfdata)
                     form.FormSpreadsheet.Spreadsheet.RemoveWorksheet(0)
@@ -2493,6 +2494,7 @@ Public Class FormMain
                 Dim rgfdataelement = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData")
                 If (Not (rgfdataelement) Is Nothing) Then
                     Dim rgfdata As String = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData").Value
+                    rgfdata = rgfdata.Replace("Calibri", "Arial").Replace("10.25", "10")
                     Dim sdict As New Dictionary(Of String, String)
                     sdict = Newtonsoft.Json.JsonConvert.DeserializeObject(Of Dictionary(Of String, String))(rgfdata)
                     form.FormSpreadsheet.Spreadsheet.RemoveWorksheet(0)

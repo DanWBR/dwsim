@@ -90,6 +90,18 @@
 
     Function GetSelectedFlowsheetSimulationObject(tag As String) As ISimulationObject
 
+    Function GetObject(name As String) As ISimulationObject
+
+    Function GetCompound(name As String) As ICompoundConstantProperties
+
+    Function GetPropertyPackage(name As String) As IPropertyPackage
+
+    Function GetReaction(name As String) As IReaction
+
+    Function GetReactionSet(name As String) As IReactionSet
+
+    Sub AutoLayout()
+
     Sub DisplayForm(form As Object)
 
     Sub UpdateOpenEditForms()

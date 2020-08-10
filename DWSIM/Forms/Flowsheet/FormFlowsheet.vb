@@ -3187,6 +3187,31 @@ Public Class FormFlowsheet
         FormSurface.FControl.Invalidate()
     End Sub
 
+    Public Function GetObject(name As String) As ISimulationObject Implements IFlowsheet.GetObject
+        Return GetFlowsheetSimulationObject(name)
+    End Function
+
+    Public Function GetCompound(name As String) As ICompoundConstantProperties Implements IFlowsheet.GetCompound
+        Return AvailableCompounds(name)
+    End Function
+
+    Public Function GetPropertyPackage(name As String) As IPropertyPackage Implements IFlowsheet.GetPropertyPackage
+        Return PropertyPackages.Values.Where(Function(x) x.Tag = name).FirstOrDefault
+    End Function
+
+    Public Function GetReaction(name As String) As IReaction Implements IFlowsheet.GetReaction
+        Return Reactions.Values.Where(Function(x) x.Name = name).FirstOrDefault
+    End Function
+
+    Public Function GetReactionSet(name As String) As IReactionSet Implements IFlowsheet.GetReactionSet
+        Return ReactionSets.Values.Where(Function(x) x.Name = name).FirstOrDefault
+    End Function
+
+    Public Sub AutoLayout() Implements IFlowsheet.AutoLayout
+        FormSurface.FlowsheetSurface.AutoArrange()
+        FormSurface.Invalidate()
+    End Sub
+
 #End Region
 
 End Class
