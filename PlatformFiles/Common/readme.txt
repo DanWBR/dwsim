@@ -64,6 +64,7 @@ The full changelog, including code changes and their authors can be viewed at ht
 
 Version 6.1 Update 2
 
+- [NEW] Added Helper Functions to Flowsheet (Scripting)
 - [CHG] Updated Spreadsheet property importing/exporting to include units
 - [FIX] Bug fixes
 
