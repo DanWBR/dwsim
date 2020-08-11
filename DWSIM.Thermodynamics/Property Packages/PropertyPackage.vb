@@ -11076,43 +11076,43 @@ Final3:
             End Try
 
             Dim e1 = (From el As XElement In data Select el Where el.Name = "Parameters").FirstOrDefault
-            Me.ParametersXMLString = e1?.ToString()
+            If e1 IsNot Nothing Then Me.ParametersXMLString = e1.ToString()
 
             e1 = (From el As XElement In data Select el Where el.Name = "OverrideKvalFugCoeff").FirstOrDefault
-            OverrideKvalFugCoeff = e1?.Value
+            If e1 IsNot Nothing Then OverrideKvalFugCoeff = e1.Value
 
             e1 = (From el As XElement In data Select el Where el.Name = "OverrideEnthalpyCalculation").FirstOrDefault
-            OverrideEnthalpyCalculation = e1?.Value
+            If e1 IsNot Nothing Then OverrideEnthalpyCalculation = e1.Value
 
             e1 = (From el As XElement In data Select el Where el.Name = "OverrideEntropyCalculation").FirstOrDefault
-            OverrideEntropyCalculation = e1?.Value
+            If e1 IsNot Nothing Then OverrideEntropyCalculation = e1.Value
 
             e1 = (From el As XElement In data Select el Where el.Name = "LiquidDensity_CorrectExpDataForPressure").FirstOrDefault
-            LiquidDensity_CorrectExpDataForPressure = e1?.Value
+            If e1 IsNot Nothing Then LiquidDensity_CorrectExpDataForPressure = e1.Value
 
             e1 = (From el As XElement In data Select el Where el.Name = "LiquidDensity_UsePenelouxVolumeTranslation").FirstOrDefault
-            LiquidDensity_UsePenelouxVolumeTranslation = e1?.Value
+            If e1 IsNot Nothing Then LiquidDensity_UsePenelouxVolumeTranslation = e1.Value
 
             e1 = (From el As XElement In data Select el Where el.Name = "LiquidDensity_UsePenelouxVolumeTranslation").FirstOrDefault
-            LiquidViscosity_CorrectExpDataForPressure = e1?.Value
+            If e1 IsNot Nothing Then LiquidViscosity_CorrectExpDataForPressure = e1.Value
 
             e1 = (From el As XElement In data Select el Where el.Name = "LiquidFugacity_UsePoyntingCorrectionFactor").FirstOrDefault
-            LiquidFugacity_UsePoyntingCorrectionFactor = e1?.Value
+            If e1 IsNot Nothing Then LiquidFugacity_UsePoyntingCorrectionFactor = e1.Value
 
             e1 = (From el As XElement In data Select el Where el.Name = "SolidPhaseFugacity_UseIdealLiquidPhaseFugacity").FirstOrDefault
-            SolidPhaseFugacity_UseIdealLiquidPhaseFugacity = e1?.Value
+            If e1 IsNot Nothing Then SolidPhaseFugacity_UseIdealLiquidPhaseFugacity = e1.Value
 
             e1 = (From el As XElement In data Select el Where el.Name = "SolidPhaseEnthalpy_UsesCp").FirstOrDefault
-            SolidPhaseEnthalpy_UsesCp = e1?.Value
+            If e1 IsNot Nothing Then SolidPhaseEnthalpy_UsesCp = e1.Value
 
             e1 = (From el As XElement In data Select el Where el.Name = "ActivityCoefficientModels_IgnoreMissingInteractionParameters").FirstOrDefault
-            ActivityCoefficientModels_IgnoreMissingInteractionParameters = e1?.Value
+            If e1 IsNot Nothing Then ActivityCoefficientModels_IgnoreMissingInteractionParameters = e1.Value
 
             e1 = (From el As XElement In data Select el Where el.Name = "IgnoreVaporFractionLimit").FirstOrDefault
-            IgnoreVaporFractionLimit = e1?.Value
+            If e1 IsNot Nothing Then IgnoreVaporFractionLimit = e1.Value
 
             e1 = (From el As XElement In data Select el Where el.Name = "IgnoreSalinityLimit").FirstOrDefault
-            IgnoreSalinityLimit = e1?.Value
+            If e1 IsNot Nothing Then IgnoreSalinityLimit = e1.Value
 
             Try
                 LiquidDensityCalculationMode_Subcritical = [Enum].Parse(LiquidDensityCalculationMode_Subcritical.GetType, (From el As XElement In data Select el Where el.Name = "LiquidDensityCalculationMode_Supercritical").FirstOrDefault.Value)

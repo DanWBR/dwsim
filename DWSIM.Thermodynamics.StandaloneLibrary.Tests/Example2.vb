@@ -15,6 +15,8 @@ Module Example2
 
         dtlc.Initialize()
 
+        Console.WriteLine(dtlc.AvailableCompounds.Count)
+
         dtlc.SetDebugLevel(0)
 
         Dim proppacks As String() = dtlc.GetPropPackList()

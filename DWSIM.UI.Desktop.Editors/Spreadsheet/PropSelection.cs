@@ -94,7 +94,11 @@ namespace DWSIM.UI.Desktop.Editors
                 }
 
                 list3.SelectedIndexChanged += (sender2, e2) => {
-                    
+
+                    if (list3.SelectedIndex < 0) return;
+
+                    if (!initialized) return;
+
                     btnOK.Enabled = list3.SelectedKey != null;
 
                     list4.Items.Clear();
@@ -113,6 +117,10 @@ namespace DWSIM.UI.Desktop.Editors
                 };
 
                 list2.SelectedIndexChanged += (sender2, e2) => {
+
+                    if (list2.SelectedIndex < 0) return;
+
+                    if (!initialized) return;
 
                     list3.Items.Clear();
 
@@ -138,6 +146,8 @@ namespace DWSIM.UI.Desktop.Editors
                 list1.SelectedIndexChanged += (sender2, e2) =>
                 {
 
+                    if (list1.SelectedIndex < 0) return;
+
                     if (!initialized) return;
 
                     var obj = ObjList[list1.SelectedValue.ToString()];
@@ -150,6 +160,7 @@ namespace DWSIM.UI.Desktop.Editors
                 };
 
                 list1.SelectedIndex = 0;
+
             };
 
             initialized = true;

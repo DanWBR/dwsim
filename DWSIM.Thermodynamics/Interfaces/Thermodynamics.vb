@@ -47,11 +47,11 @@ Namespace CalculatorInterface
             'load databases
             _availablecomps = New Dictionary(Of String, BaseClasses.ConstantProperties)
 
-            ''ChemSep
-            Me.LoadCSDB()
-
-            ''load DWSIM XML database
-            'Me.LoadDWSIMDB()
+            LoadCSDB()
+            LoadDWSIMDB()
+            LoadBDDB()
+            LoadEDB()
+            LoadCheDLDB()
 
             GlobalSettings.Settings.InspectorEnabled = False
 
@@ -77,6 +77,12 @@ Namespace CalculatorInterface
             pp._availablecomps = _availablecomps
 
         End Sub
+
+        Public ReadOnly Property AvailableCompounds As Dictionary(Of String, BaseClasses.ConstantProperties)
+            Get
+                Return _availablecomps
+            End Get
+        End Property
 
         ''' <summary>
         ''' Enables CPU parallel processing for some tasks.
@@ -152,6 +158,59 @@ Namespace CalculatorInterface
             For Each cp As ConstantProperties In cpa
                 If Not _availablecomps.ContainsKey(cp.Name) Then _availablecomps.Add(cp.Name, cp)
             Next
+        End Sub
+
+        Public Sub LoadCheDLDB()
+
+            Dim chedl As New Databases.ChEDL_Thermo
+            Dim cpa() As BaseClasses.ConstantProperties
+            chedl.Load()
+            cpa = chedl.Transfer().ToArray()
+            Dim addedcomps = _availablecomps.Keys.Select(Function(x) x.ToLower).ToList()
+            For Each cp As BaseClasses.ConstantProperties In cpa
+                If Not addedcomps.Contains(cp.Name.ToLower) AndAlso Not _availablecomps.ContainsKey(cp.Name) Then
+                    If _availablecomps.Values.Where(Function(x) x.CAS_Number = cp.CAS_Number).Count = 0 Then
+                        _availablecomps.Add(cp.Name, cp)
+                    End If
+                End If
+            Next
+
+        End Sub
+
+        Private Sub LoadBDDB()
+            Dim bddb As New Databases.Biodiesel
+            Dim cpa() As BaseClasses.ConstantProperties
+            bddb.Load()
+            cpa = bddb.Transfer()
+            For Each cp As BaseClasses.ConstantProperties In cpa
+                If Not _availablecomps.ContainsKey(cp.Name) Then _availablecomps.Add(cp.Name, cp)
+            Next
+        End Sub
+
+        Private Sub LoadEDB()
+            Dim edb As New Databases.Electrolyte
+            Dim cpa() As BaseClasses.ConstantProperties
+            edb.Load()
+            cpa = edb.Transfer()
+            For Each cp As BaseClasses.ConstantProperties In cpa
+                If Not _availablecomps.ContainsKey(cp.Name) Then _availablecomps.Add(cp.Name, cp)
+            Next
+        End Sub
+
+        Private Sub LoadCPDB()
+            Dim cpdb As New Databases.CoolProp
+            Dim cpa() As BaseClasses.ConstantProperties
+            cpdb.Load()
+            Try
+                cpa = cpdb.Transfer()
+                For Each cp As BaseClasses.ConstantProperties In cpa
+                    If _availablecomps.Values.Where(Function(x) x.CAS_Number = cp.CAS_Number).Count = 0 Then
+                        _availablecomps.Add(cp.Name, cp)
+                        _availablecomps(cp.Name).IsCOOLPROPSupported = True
+                    End If
+                Next
+            Catch ex As Exception
+            End Try
         End Sub
 
         Friend Sub SetIP(ByVal proppack As String, ByRef pp As PropertyPackage, ByVal compounds As Object, ByVal ip1 As Object, ByVal ip2 As Object, ByVal ip3 As Object, ByVal ip4 As Object)

@@ -855,5 +855,4 @@
     </ItemGroup>
     <Message Importance="normal" Text="Adding back DesignTimeFacades from ReferencePath now that SGen has run." />
   </Target>
-  <Import Project="..\packages\ExcelDna.AddIn.1.1.1\build\ExcelDna.AddIn.targets" Condition="Exists('..\packages\ExcelDna.AddIn.1.1.1\build\ExcelDna.AddIn.targets')" />
 </Project>
