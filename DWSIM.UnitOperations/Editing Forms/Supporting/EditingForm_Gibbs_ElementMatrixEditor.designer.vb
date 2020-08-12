@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class EditingForm_Gibbs_ElementMatrixEditor
     Inherits System.Windows.Forms.UserControl
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class EditingForm_Gibbs_ElementMatrixEditor
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_Gibbs_ElementMatrixEditor))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -30,11 +30,9 @@ Partial Class EditingForm_Gibbs_ElementMatrixEditor
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.GroupBox1.SuspendLayout()
         CType(Me.grid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
-        Me.FlowLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -54,42 +52,40 @@ Partial Class EditingForm_Gibbs_ElementMatrixEditor
         'Button1
         '
         resources.ApplyResources(Me.Button1, "Button1")
+        Me.Button1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.add
         Me.Button1.Name = "Button1"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Button2
         '
         resources.ApplyResources(Me.Button2, "Button2")
+        Me.Button2.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.delete
         Me.Button2.Name = "Button2"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Button3
         '
         resources.ApplyResources(Me.Button3, "Button3")
+        Me.Button3.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
         Me.Button3.Name = "Button3"
         Me.Button3.UseVisualStyleBackColor = True
         '
         'Button4
         '
         resources.ApplyResources(Me.Button4, "Button4")
+        Me.Button4.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disk
         Me.Button4.Name = "Button4"
         Me.Button4.UseVisualStyleBackColor = True
         '
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Controls.Add(Me.FlowLayoutPanel1)
+        Me.GroupBox2.Controls.Add(Me.Button3)
+        Me.GroupBox2.Controls.Add(Me.Button4)
+        Me.GroupBox2.Controls.Add(Me.Button2)
+        Me.GroupBox2.Controls.Add(Me.Button1)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
-        '
-        'FlowLayoutPanel1
-        '
-        resources.ApplyResources(Me.FlowLayoutPanel1, "FlowLayoutPanel1")
-        Me.FlowLayoutPanel1.Controls.Add(Me.Button1)
-        Me.FlowLayoutPanel1.Controls.Add(Me.Button2)
-        Me.FlowLayoutPanel1.Controls.Add(Me.Button4)
-        Me.FlowLayoutPanel1.Controls.Add(Me.Button3)
-        Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
         '
         'EditingForm_Gibbs_ElementMatrixEditor
         '
@@ -101,8 +97,6 @@ Partial Class EditingForm_Gibbs_ElementMatrixEditor
         Me.GroupBox1.ResumeLayout(False)
         CType(Me.grid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox2.ResumeLayout(False)
-        Me.FlowLayoutPanel1.ResumeLayout(False)
-        Me.FlowLayoutPanel1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -113,5 +107,4 @@ Partial Class EditingForm_Gibbs_ElementMatrixEditor
     Public WithEvents Button3 As System.Windows.Forms.Button
     Public WithEvents Button4 As System.Windows.Forms.Button
     Public WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Public WithEvents FlowLayoutPanel1 As System.Windows.Forms.FlowLayoutPanel
 End Class

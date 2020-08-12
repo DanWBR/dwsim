@@ -1568,8 +1568,8 @@ namespace DWSIM.UI.Desktop.Editors
                     s.CreateAndAddDescriptionRow(container, "Useful for a first estimate when a previous solution is not available and/or 'Initialize with Previous Values' is disabled. Enter a value between 0.0 and 1.0.");
                     s.CreateAndAddTextBoxRow(container, nf, "Maximum Internal Iterations", reactor2.InternalLoopMaximumIterations, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2.InternalLoopMaximumIterations = int.Parse(sender.Text); }, () => CallSolverIfNeeded());
                     s.CreateAndAddTextBoxRow(container, nf, "Maximum External Iterations", reactor2.ExternalLoopMaximumIterations, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2.ExternalLoopMaximumIterations = int.Parse(sender.Text); }, () => CallSolverIfNeeded());
-                    s.CreateAndAddTextBoxRow(container, nf, "Maximum Error for Internal Convergence Loop", reactor2.InternalLoopTolerance, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2.InternalLoopTolerance = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
-                    s.CreateAndAddTextBoxRow(container, nf, "Maximum Error for External Convergence Loop", reactor2.ExternalLoopTolerance, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2.ExternalLoopTolerance = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
+                    s.CreateAndAddTextBoxRow(container, nf, "Minimum Internal Error", reactor2.InternalLoopTolerance, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2.InternalLoopTolerance = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
+                    s.CreateAndAddTextBoxRow(container, nf, "Minimum External Error", reactor2.ExternalLoopTolerance, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2.ExternalLoopTolerance = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
                     s.CreateAndAddTextBoxRow(container, nf, "Numerical Derivative Perturbation", reactor2.DerivativePerturbation, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2.DerivativePerturbation = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
                     break;
                 case ObjectType.RCT_Gibbs:
@@ -1693,81 +1693,34 @@ namespace DWSIM.UI.Desktop.Editors
                                                            reactor2g.ComponentIDs.Add(comp);
                                                        }
                                                    });
-                    s.CreateAndAddLabelRow(container, "Elements");
-                    s.CreateAndAddDescriptionRow(container, "Enter the list of elements, separated by spaces");
-                    var txtel = s.CreateAndAddFullTextBoxRow(container, elements,
-                                   (TextBox arg3, EventArgs ev) =>
-                                   {
-                                       try
-                                       {
-                                           var els = arg3.Text.Trim().Split(' ');
-                                           reactor2g.Elements = els;
-                                       }
-                                       catch (Exception ex)
-                                       {
-                                           SimObject.GetFlowsheet().ShowMessage("Error parsing element list: " + ex.Message, IFlowsheet.MessageType.GeneralError);
-                                       }
-                                   });
-                    txtel.PlaceholderText = "Enter the list of elements, separated by spaces";
                     s.CreateAndAddLabelRow(container, "Element Matrix");
-                    s.CreateAndAddDescriptionRow(container, "Element Matrix for compounds in the following order: " + comptext);
-                    var txtelm = s.CreateAndAddMultilineTextBoxRow(container, elmatrix, false, true, (TextArea arg3, EventArgs ev) =>
+                    s.CreateAndAddButtonRow(container, "Setup Element Matrix", null, (btn, e) =>
                     {
-                        try
-                        {
-                            reactor2g.ElementMatrix = new Double[reactor2g.Elements.Count(), reactor2g.ComponentIDs.Count];
-                            var ell = arg3.Text.Split('\n');
-                            int i2, j2;
-                            i2 = 0;
-                            foreach (string line in ell)
-                            {
-                                j2 = 0;
-                                var els = line.Split(' ');
-                                foreach (string el in els)
-                                {
-                                    if (s.IsValidDouble(el)) { reactor2g.ElementMatrix[j2, i2] = Double.Parse(el); j2 += 1; }
-                                }
-                                i2 += 1;
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            SimObject.GetFlowsheet().ShowMessage("Error parsing element matrix: " + ex.Message, IFlowsheet.MessageType.GeneralError);
-                        }
+                        var f = new System.Windows.Forms.Form { Width = 500, Height = 300, Text = "Element Matrix Editor" };
+                        var control = new UnitOperations.EditingForm_Gibbs_ElementMatrixEditor();
+                        control.gr = reactor2g;
+                        control.Dock = System.Windows.Forms.DockStyle.Fill;
+                        f.Controls.Add(control);
+                        f.ShowDialog();
                     });
-                    s.CreateAndAddDescriptionRow(container, "Enter the matrix of element amounts, separated by spaces, one line for each compound");
                     s.CreateAndAddLabelRow(container, "Initial Estimates");
-                    s.CreateAndAddDescriptionRow(container, String.Format("Initial estimates for the final compound amounts (in {0}) in the following order: ", su.molarflow) + comptext);
-                    var txtie = s.CreateAndAddMultilineTextBoxRow(container, ie, false, true, (TextArea arg3, EventArgs ev) =>
+                    s.CreateAndAddDescriptionRow(container, String.Format("Initial estimates for the final compound amounts (in {0}).", su.molarflow));
+                    s.CreateAndAddButtonRow(container, "Edit Initial Estimates", null, (btn, e) =>
                     {
-                        try
-                        {
-                            reactor2g.InitialEstimates = new List<double>();
-                            var ell = arg3.Text.Split('\n');
-                            foreach (string line in ell)
-                            {
-                                if (s.IsValidDouble(line)) { reactor2g.InitialEstimates.Add(cv.ConvertToSI(su.molarflow, line.ToDoubleFromCurrent())); }
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            SimObject.GetFlowsheet().ShowMessage("Error parsing initial estimates: " + ex.Message, IFlowsheet.MessageType.GeneralError);
-                        }
+                        var f = new System.Windows.Forms.Form { Width = 500, Height = 500, Text = "Initial Estimates Editor" };
+                        var control = new UnitOperations.EditingForm_Gibbs_InitialEstimatesEditor();
+                        control.gr = reactor2g;
+                        control.Dock = System.Windows.Forms.DockStyle.Fill;
+                        f.Controls.Add(control);
+                        f.ShowDialog();
                     });
-                    s.CreateAndAddDescriptionRow(container, "Enter the initial estimate for the final amount of compound mole flows, one line for each compound");
-                    s.CreateAndAddLabelRow(container, "Damping Factor");
-                    s.CreateAndAddDescriptionRow(container, "Tune the following parameters if you're having convergence issues.");
-                    s.CreateAndAddDescriptionRow(container, "Parameters which have the highest impact on convergence: Damping Factor (Enable, Minimum Value = 1E-20),  Internal Convergence Loop Tolerance and Numerical Derivative Perturbation.");
-                    s.CreateAndAddCheckBoxRow(container, "Use Damping Factor", reactor2g.EnableDamping, (sender, e) => reactor2g.EnableDamping = sender.Checked.GetValueOrDefault(), () => CallSolverIfNeeded());
-                    s.CreateAndAddTextBoxRow(container, nf, "Damping Factor Minimum Value", reactor2g.DampingLowerLimit, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.DampingLowerLimit = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
-                    s.CreateAndAddTextBoxRow(container, nf, "Damping Factor Maximum Value", reactor2g.DampingUpperLimit, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.DampingUpperLimit = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
                     s.CreateAndAddLabelRow(container, "Convergence Parameters");
-                    s.CreateAndAddDescriptionRow(container, "Tune the following parameters if you're having convergence issues.");
+                    //s.CreateAndAddDescriptionRow(container, "Tune the following parameters if you're having convergence issues.");
                     s.CreateAndAddTextBoxRow(container, nf, "Maximum Internal Iterations", reactor2g.MaximumInternalIterations, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.MaximumInternalIterations = int.Parse(sender.Text); }, () => CallSolverIfNeeded());
                     s.CreateAndAddTextBoxRow(container, nf, "Maximum External Iterations", reactor2g.MaximumExternalIterations, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.MaximumExternalIterations = int.Parse(sender.Text); }, () => CallSolverIfNeeded());
-                    s.CreateAndAddTextBoxRow(container, nf, "Maximum Error for Internal Convergence Loop", reactor2g.InternalTolerance, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.InternalTolerance = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
-                    s.CreateAndAddTextBoxRow(container, nf, "Maximum Error for External Convergence Loop", reactor2g.ExternalTolerance, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.ExternalTolerance = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
-                    s.CreateAndAddTextBoxRow(container, nf, "Numerical Derivative Perturbation", reactor2g.DerivativePerturbation, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.DerivativePerturbation = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
+                    s.CreateAndAddTextBoxRow(container, nf, "Minimum Internal Error", reactor2g.InternalTolerance, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.InternalTolerance = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
+                    s.CreateAndAddTextBoxRow(container, nf, "Minimum External Error", reactor2g.ExternalTolerance, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.ExternalTolerance = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
+                    //s.CreateAndAddTextBoxRow(container, nf, "Numerical Derivative Perturbation", reactor2g.DerivativePerturbation, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.DerivativePerturbation = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
                     break;
                 case ObjectType.RCT_CSTR:
                     var reactor3 = (Reactor_CSTR)SimObject;
@@ -2372,7 +2325,8 @@ namespace DWSIM.UI.Desktop.Editors
                 case ObjectType.CustomUO:
                     var scriptuo = (CustomUO)SimObject;
                     s.CreateAndAddLabelRow(container, "Python Script Repositories");
-                    s.CreateAndAddButtonRow(container, "FOSSEE's Custom Modeling Repository", null, (btn, e) => {
+                    s.CreateAndAddButtonRow(container, "FOSSEE's Custom Modeling Repository", null, (btn, e) =>
+                    {
                         Process.Start("https://dwsim.fossee.in/custom-model");
                     });
                     s.CreateAndAddLabelRow(container, "Flowsheet Object");
@@ -2386,7 +2340,7 @@ namespace DWSIM.UI.Desktop.Editors
                             {
                                 using (var bmp = (System.Drawing.Bitmap)System.Drawing.Bitmap.FromFile(searchdialog.FileName))
                                 {
-                                    using (var img =SkiaSharp.Views.Desktop.Extensions.ToSKImage(bmp))
+                                    using (var img = SkiaSharp.Views.Desktop.Extensions.ToSKImage(bmp))
                                     {
                                         scriptuo.EmbeddedImageData = DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes.EmbeddedImageGraphic.ImageToBase64(img, SkiaSharp.SKEncodedImageFormat.Png);
                                         MessageBox.Show("Image data read successfully.", MessageBoxButtons.OK);
@@ -2399,7 +2353,8 @@ namespace DWSIM.UI.Desktop.Editors
                             }
                         }
                     });
-                    s.CreateAndAddCheckBoxRow(container, "Use Embedded Image Icon", scriptuo.UseEmbeddedImage, (c, e) => {
+                    s.CreateAndAddCheckBoxRow(container, "Use Embedded Image Icon", scriptuo.UseEmbeddedImage, (c, e) =>
+                    {
                         scriptuo.UseEmbeddedImage = c.Checked.GetValueOrDefault();
                     });
                     s.CreateAndAddLabelRow(container, "Python Script");

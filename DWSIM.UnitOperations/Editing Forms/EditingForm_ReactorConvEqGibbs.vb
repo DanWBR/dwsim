@@ -137,17 +137,17 @@ Public Class EditingForm_ReactorConvEqGibbs
                 cbGibbsMinMode.Enabled = True
                 cbGibbsMinMode.SelectedIndex = DirectCast(SimObject, Reactors.Reactor_Gibbs).SolvMethod
 
-                chkEnableDamping.Checked = DirectCast(SimObject, Reactors.Reactor_Gibbs).EnableDamping
+                'chkEnableDamping.Checked = DirectCast(SimObject, Reactors.Reactor_Gibbs).EnableDamping
 
-                txtDampingLowerLimit.Text = DirectCast(SimObject, Reactors.Reactor_Gibbs).DampingLowerLimit.ToString("G")
-                txtDampingUpperLimit.Text = DirectCast(SimObject, Reactors.Reactor_Gibbs).DampingUpperLimit.ToString("G")
+                'txtDampingLowerLimit.Text = DirectCast(SimObject, Reactors.Reactor_Gibbs).DampingLowerLimit.ToString("G")
+                'txtDampingUpperLimit.Text = DirectCast(SimObject, Reactors.Reactor_Gibbs).DampingUpperLimit.ToString("G")
 
                 tbExtLoopMaxIts.Text = DirectCast(SimObject, Reactors.Reactor_Gibbs).MaximumExternalIterations
                 tbIntLoopMaxIts.Text = DirectCast(SimObject, Reactors.Reactor_Gibbs).MaximumInternalIterations
                 tbExtLoopTol.Text = DirectCast(SimObject, Reactors.Reactor_Gibbs).ExternalTolerance
                 tbIntLoopTol.Text = DirectCast(SimObject, Reactors.Reactor_Gibbs).InternalTolerance
 
-                tbNumDeriv.Text = DirectCast(SimObject, Reactors.Reactor_Gibbs).DerivativePerturbation
+                'tbNumDeriv.Text = DirectCast(SimObject, Reactors.Reactor_Gibbs).DerivativePerturbation
 
                 'key compounds
 
@@ -514,10 +514,9 @@ Public Class EditingForm_ReactorConvEqGibbs
     End Sub
 
 
-    Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbOutletTemperature.TextChanged, tbPDrop.TextChanged,
-        txtDampingLowerLimit.TextChanged, txtDampingUpperLimit.TextChanged, tbExtLoopMaxIts.TextChanged, tbIntLoopMaxIts.TextChanged,
+    Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbOutletTemperature.TextChanged, tbPDrop.TextChanged, tbExtLoopMaxIts.TextChanged, tbIntLoopMaxIts.TextChanged,
         tbExtLoopTol.TextChanged, tbIntLoopTol.TextChanged, tbExtLoopMaxItsEq.TextChanged, tbIntLoopMaxItsEq.TextChanged,
-        tbExtLoopTolEq.TextChanged, tbIntLoopTolEq.TextChanged, tbExtentsInitializer.TextChanged, tbNumDeriv.TextChanged, tbNumDeriv2.TextChanged
+        tbExtLoopTolEq.TextChanged, tbIntLoopTolEq.TextChanged, tbExtentsInitializer.TextChanged, tbNumDeriv2.TextChanged
 
         Dim tbox = DirectCast(sender, TextBox)
 
@@ -529,10 +528,9 @@ Public Class EditingForm_ReactorConvEqGibbs
 
     End Sub
 
-    Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbOutletTemperature.KeyDown, tbPDrop.KeyDown,
-        txtDampingLowerLimit.KeyDown, txtDampingUpperLimit.KeyDown, tbExtLoopMaxIts.KeyDown, tbIntLoopMaxIts.KeyDown,
+    Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbOutletTemperature.KeyDown, tbPDrop.KeyDown, tbExtLoopMaxIts.KeyDown, tbIntLoopMaxIts.KeyDown,
         tbExtLoopTol.KeyDown, tbIntLoopTol.KeyDown, tbExtLoopMaxItsEq.KeyDown, tbIntLoopMaxItsEq.KeyDown,
-        tbExtLoopTolEq.KeyDown, tbIntLoopTolEq.KeyDown, tbExtentsInitializer.KeyDown, tbNumDeriv.KeyDown, tbNumDeriv2.KeyDown
+        tbExtLoopTolEq.KeyDown, tbIntLoopTolEq.KeyDown, tbExtentsInitializer.KeyDown, tbNumDeriv2.KeyDown
 
 
         If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = System.Drawing.Color.Blue Then
@@ -549,8 +547,6 @@ Public Class EditingForm_ReactorConvEqGibbs
 
         If sender Is tbOutletTemperature Then SimObject.OutletTemperature = su.Converter.ConvertToSI(cbTemp.SelectedItem.ToString, tbOutletTemperature.Text.ParseExpressionToDouble)
         If sender Is tbPDrop Then SimObject.DeltaP = su.Converter.ConvertToSI(cbPDrop.SelectedItem.ToString, tbPDrop.Text.ParseExpressionToDouble)
-        If sender Is txtDampingLowerLimit Then DirectCast(SimObject, Reactors.Reactor_Gibbs).DampingLowerLimit = txtDampingLowerLimit.Text.ParseExpressionToDouble
-        If sender Is txtDampingUpperLimit Then DirectCast(SimObject, Reactors.Reactor_Gibbs).DampingUpperLimit = txtDampingUpperLimit.Text.ParseExpressionToDouble
         If sender Is tbExtLoopMaxIts Then DirectCast(SimObject, Reactors.Reactor_Gibbs).MaximumExternalIterations = tbExtLoopMaxIts.Text.ParseExpressionToDouble
         If sender Is tbIntLoopMaxIts Then DirectCast(SimObject, Reactors.Reactor_Gibbs).MaximumInternalIterations = tbIntLoopMaxIts.Text.ParseExpressionToDouble
         If sender Is tbExtLoopTol Then DirectCast(SimObject, Reactors.Reactor_Gibbs).ExternalTolerance = tbExtLoopTol.Text.ParseExpressionToDouble
@@ -560,7 +556,6 @@ Public Class EditingForm_ReactorConvEqGibbs
         If sender Is tbExtLoopTolEq Then DirectCast(SimObject, Reactors.Reactor_Equilibrium).ExternalLoopTolerance = tbExtLoopTolEq.Text.ParseExpressionToDouble
         If sender Is tbIntLoopTolEq Then DirectCast(SimObject, Reactors.Reactor_Equilibrium).InternalLoopTolerance = tbIntLoopTolEq.Text.ParseExpressionToDouble
         If sender Is tbExtentsInitializer Then DirectCast(SimObject, Reactors.Reactor_Equilibrium).ReactionExtentsInitializer = tbExtentsInitializer.Text.ParseExpressionToDouble
-        If sender Is tbNumDeriv Then DirectCast(SimObject, Reactors.Reactor_Gibbs).DerivativePerturbation = tbNumDeriv.Text.ParseExpressionToDouble
         If sender Is tbNumDeriv2 Then DirectCast(SimObject, Reactors.Reactor_Equilibrium).DerivativePerturbation = tbNumDeriv2.Text.ParseExpressionToDouble
 
         RequestCalc()
@@ -644,12 +639,6 @@ Public Class EditingForm_ReactorConvEqGibbs
         UpdateInfo()
         RequestCalc()
 
-    End Sub
-
-    Private Sub chkEnableDamping_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableDamping.CheckedChanged
-        If TypeOf SimObject Is Reactors.Reactor_Gibbs Then
-            DirectCast(SimObject, Reactors.Reactor_Gibbs).EnableDamping = chkEnableDamping.Checked
-        End If
     End Sub
 
     Private Sub chkInitializeExtents_CheckedChanged(sender As Object, e As EventArgs) Handles chkInitializeExtents.CheckedChanged
