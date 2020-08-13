@@ -642,7 +642,7 @@ Public Class EditingForm_ReactorConvEqGibbs
     End Sub
 
     Private Sub chkInitializeExtents_CheckedChanged(sender As Object, e As EventArgs) Handles chkInitializeExtents.CheckedChanged
-        If TypeOf SimObject Is Reactors.Reactor_Equilibrium Then
+        If TypeOf SimObject Is Reactors.Reactor_Equilibrium And Loaded Then
             DirectCast(SimObject, Reactors.Reactor_Equilibrium).UsePreviousReactionExtents = chkInitializeExtents.Checked
             tbExtentsInitializer.Enabled = Not chkInitializeExtents.Checked
             RequestCalc()
@@ -650,7 +650,7 @@ Public Class EditingForm_ReactorConvEqGibbs
     End Sub
 
     Private Sub chkAlternateInit_CheckedChanged(sender As Object, e As EventArgs) Handles chkAlternateInit.CheckedChanged
-        If TypeOf SimObject Is Reactors.Reactor_Equilibrium Then
+        If TypeOf SimObject Is Reactors.Reactor_Equilibrium And Loaded Then
             DirectCast(SimObject, Reactors.Reactor_Equilibrium).AlternateBoundsInitializer = chkAlternateInit.Checked
             RequestCalc()
         End If
