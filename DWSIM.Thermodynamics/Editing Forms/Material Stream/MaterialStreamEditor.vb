@@ -579,12 +579,12 @@ Public Class MaterialStreamEditor
             refval = p.Properties.bubbleTemperature
             If refval.HasValue Then
                 val = Converter.ConvertFromSI(units.temperature, refval)
-                .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("BubbleTemp"), val, units.pressure})
+                .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("BubbleTemp"), val, units.temperature})
             End If
             refval = p.Properties.dewTemperature
             If refval.HasValue Then
                 val = Converter.ConvertFromSI(units.temperature, refval)
-                .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("DewTemp"), val, units.pressure})
+                .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("DewTemp"), val, units.temperature})
             End If
 
             If p.Name.Contains("Overall") Then
