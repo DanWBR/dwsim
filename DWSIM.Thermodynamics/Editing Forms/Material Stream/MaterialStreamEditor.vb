@@ -59,18 +59,20 @@ Public Class MaterialStreamEditor
         If Host.Items.Where(Function(x) x.Name.Contains(MatStream.GraphicObject.Tag)).Count > 0 Then
             If InspReportBar Is Nothing Then
                 InspReportBar = New SharedClasses.InspectorReportBar
-                InspReportBar.Dock = DockStyle.Bottom
+                InspReportBar.Dock = DockStyle.Fill
                 AddHandler InspReportBar.Button1.Click, Sub()
                                                             Dim iwindow As New Inspector.Window2
                                                             iwindow.SelectedObject = MatStream
                                                             iwindow.Show(DockPanel)
                                                         End Sub
-                Me.Controls.Add(InspReportBar)
+                Me.SplitContainer1.Panel2.Controls.Add(InspReportBar)
+                Me.SplitContainer1.Panel2Collapsed = False
                 InspReportBar.BringToFront()
             End If
         Else
             If InspReportBar IsNot Nothing Then
-                Me.Controls.Remove(InspReportBar)
+                Me.SplitContainer1.Panel2.Controls.Remove(InspReportBar)
+                Me.SplitContainer1.Panel2Collapsed = True
                 InspReportBar = Nothing
             End If
         End If
