@@ -453,7 +453,7 @@ Public Class FormWelcome
     End Sub
 
     Private Sub LinkLabel7_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel7.LinkClicked
-        Process.Start("https://www.patreon.com/dwsim/merch")
+        Process.Start("https://www.patreon.com/join/dwsim?")
     End Sub
 
     Private Sub FormWelcome_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
