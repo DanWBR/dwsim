@@ -1069,6 +1069,15 @@ Public Class MaterialStreamEditor
 
         If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = Drawing.Color.Blue Then
 
+            If sender Is tbFracSpec Then
+                If tbFracSpec.Text.ToDoubleFromCurrent > 1.0 Or tbFracSpec.Text.ToDoubleFromCurrent < 0.0 Then
+                    MessageBox.Show(MatStream.FlowSheet.GetTranslatedString("Ovalorinformadonovli"),
+                                    MatStream.FlowSheet.GetTranslatedString("Erro"),
+                                    MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Exit Sub
+                End If
+            End If
+
             UpdateProps(sender)
 
             DirectCast(sender, TextBox).SelectAll()
