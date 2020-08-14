@@ -134,9 +134,6 @@ Public Class EditingForm_ReactorConvEqGibbs
 
             If TypeOf SimObject Is Reactors.Reactor_Gibbs Then
 
-                cbGibbsMinMode.Enabled = True
-                cbGibbsMinMode.SelectedIndex = DirectCast(SimObject, Reactors.Reactor_Gibbs).SolvMethod
-
                 'chkEnableDamping.Checked = DirectCast(SimObject, Reactors.Reactor_Gibbs).EnableDamping
 
                 'txtDampingLowerLimit.Text = DirectCast(SimObject, Reactors.Reactor_Gibbs).DampingLowerLimit.ToString("G")
@@ -587,18 +584,6 @@ Public Class EditingForm_ReactorConvEqGibbs
         End Select
         If Loaded Then RequestCalc()
 
-    End Sub
-
-    Private Sub cbGibbsMinMode_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbGibbsMinMode.SelectedIndexChanged
-        If Loaded Then
-            Select Case cbGibbsMinMode.SelectedIndex
-                Case 1
-                    DirectCast(SimObject, Reactors.Reactor_Gibbs).SolvMethod = Reactors.Reactor_Gibbs.SolvingMethod.DirectMinimization
-                Case 0
-                    DirectCast(SimObject, Reactors.Reactor_Gibbs).SolvMethod = Reactors.Reactor_Gibbs.SolvingMethod.ReactionExtents
-            End Select
-            RequestCalc()
-        End If
     End Sub
 
     Private Sub btnCreateAndConnectInlet1_Click(sender As Object, e As EventArgs) Handles btnCreateAndConnectInlet1.Click, btnCreateAndConnectOutlet1.Click, btnCreateAndConnectOutlet2.Click, btnCreateAndConnectEnergy.Click

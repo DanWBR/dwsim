@@ -28,6 +28,7 @@ Imports DWSIM.Thermodynamics
 Imports DWSIM.MathOps.MathEx
 Imports DWSIM.MathOps.MathEx.Common
 Imports DotNumerics.Optimization
+Imports DotNumerics.Scaling
 
 Namespace Reactors
 
@@ -72,10 +73,10 @@ Namespace Reactors
         Public Property UsePreviousReactionExtents As Boolean = False
         Public Property ReactionExtentsInitializer As Double = 0.2
 
-        Public Property InternalLoopTolerance As Double = 0.00000001
+        Public Property InternalLoopTolerance As Double = 0.001
         Public Property ExternalLoopTolerance As Double = 0.5
 
-        Public Property InternalLoopMaximumIterations As Integer = 250
+        Public Property InternalLoopMaximumIterations As Integer = 10000
 
         Public Property ExternalLoopMaximumIterations As Integer = 50
 
@@ -84,6 +85,8 @@ Namespace Reactors
         Public Property AlternateBoundsInitializer As Boolean = False
 
         Private NoPenVal As Boolean = False
+
+        Private MinVal, MaxVal As Double
 
 #End Region
 
@@ -101,7 +104,7 @@ Namespace Reactors
             For Each s As String In N.Keys
                 DN(s) = 0
                 For j = 0 To r
-                    DN(s) += E(i, j) * x(j)
+                    DN(s) += E(i, j) * Scaler.UnScale(x(j), MinVal, MaxVal, 0, 100)
                 Next
                 i += 1
             Next
@@ -213,10 +216,7 @@ Namespace Reactors
             For i = 0 To Me.Reactions.Count - 1
                 With FlowSheet.Reactions(Me.Reactions(i))
                     kr = .EvaluateK(T, pp)
-                    f(i) = prod(i) - kr + pen_val
-                    If Double.IsNaN(f(i)) Or Double.IsInfinity(f(i)) Then
-                        f(i) = pen_val
-                    End If
+                    f(i) = prod(i) - kr '+ pen_val
                 End With
             Next
 
@@ -283,51 +283,6 @@ Namespace Reactors
             pp.CurrentMaterialStream = tms
 
             Return tms.Phases(0).Properties.gibbs_free_energy.GetValueOrDefault * tms.Phases(0).Properties.molecularWeight.GetValueOrDefault * tms.Phases(0).Properties.molarflow.GetValueOrDefault / 1000
-
-        End Function
-
-        Private Function FunctionGradient2N(ByVal x() As Double) As Double(,)
-
-            Dim epsilon As Double = DerivativePerturbation
-
-            Dim f1(), f2() As Double
-            Dim g(x.Length - 1, x.Length - 1), x2(x.Length - 1) As Double
-            Dim i, j, k As Integer
-
-            f1 = FunctionValue2N(x)
-            For i = 0 To x.Length - 1
-                For j = 0 To x.Length - 1
-                    If i <> j Then
-                        x2(j) = x(j)
-                    Else
-                        x2(j) = x(j) * (1 + epsilon)
-                    End If
-                Next
-                f2 = FunctionValue2N(x2)
-                For k = 0 To x.Length - 1
-                    g(k, i) = (f2(k) - f1(k)) / (x2(i) - x(i))
-                Next
-            Next
-
-            Return g
-
-        End Function
-
-        Public Function MinimizeError(ByVal t As Double) As Double
-
-            Dim tmpx0 As Double() = tmpx.Clone
-
-            For i = 0 To comps + els
-                tmpx0(i) -= tmpdx(i) * t
-            Next
-
-            Dim abssum0 As Double
-            Try
-                abssum0 = AbsSum(FunctionValue2N(tmpx0))
-            Catch ex As Exception
-                abssum0 = New Random().Next * 1.0E+20
-            End Try
-            Return abssum0
 
         End Function
 
@@ -421,9 +376,9 @@ Namespace Reactors
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
-            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            Dim IObj As InspectorItem = Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, "", "Calculate", If(GraphicObject IsNot Nothing, GraphicObject.Tag, "Temporary Object") & " (" & GetDisplayName() & ")", GetDisplayName() & " Calculation Routine", True)
+            Host.CheckAndAdd(IObj, "", "Calculate", If(GraphicObject IsNot Nothing, GraphicObject.Tag, "Temporary Object") & " (" & GetDisplayName() & ")", GetDisplayName() & " Calculation Routine", True)
 
             IObj?.SetCurrent
 
@@ -559,12 +514,14 @@ Namespace Reactors
             Next
 
             'Reactants Enthalpy (kJ/kg * kg/s = kW) (ISOTHERMIC)
+
             Dim Hr0 As Double
             Hr0 = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
 
             Dim tmp As IFlashCalculationResult
 
             'Copy results to upstream MS
+
             Dim xl, xv, H, S, wtotalx, wtotaly As Double
             pp.CurrentMaterialStream = ims
 
@@ -583,6 +540,7 @@ Namespace Reactors
             End Select
 
             'check active reactions (equilibrium only) in the reaction set
+
             For Each rxnsb As ReactionSetBase In FlowSheet.ReactionSets(Me.ReactionSetID).Reactions.Values
                 If FlowSheet.Reactions(rxnsb.ReactionID).ReactionType = ReactionType.Equilibrium And rxnsb.IsActive Then
                     Me.Reactions.Add(rxnsb.ReactionID)
@@ -628,6 +586,7 @@ Namespace Reactors
             ReDim E(c, r)
 
             'E: matrix of stoichometric coefficients
+
             i = 0
             For Each rxid As String In Me.Reactions
                 rx = FlowSheet.Reactions(rxid)
@@ -713,13 +672,9 @@ Namespace Reactors
 
             Dim REx(r) As Double
 
-            If UsePreviousReactionExtents And PreviousReactionExtents.Count > 0 Then
-                REx = PreviousReactionExtents.Values.ToArray()
-            Else
-                For i = 0 To r
-                    REx(i) = lbound(i) + ReactionExtentsInitializer * (ubound(i) - lbound(i))
-                Next
-            End If
+            'If UsePreviousReactionExtents And PreviousReactionExtents.Count > 0 Then
+            '    REx = PreviousReactionExtents.Values.ToArray()
+            'End If
 
             IObj?.Paragraphs.Add(String.Format("Initial Estimates for Reaction Extents: {0}", REx.ToMathArrayString))
 
@@ -742,6 +697,13 @@ Namespace Reactors
             Dim TLast As Double = T0 'remember T for iteration loops
             Dim cnt As Integer = 0
 
+            Dim solver2 As New Simplex
+            solver2.MaxFunEvaluations = InternalLoopMaximumIterations
+            solver2.Tolerance = InternalLoopTolerance
+
+            MinVal = lbound.Sum
+            MaxVal = ubound.Sum
+
             Do
 
                 Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
@@ -752,18 +714,19 @@ Namespace Reactors
 
                 'solve using newton's method
 
-                Dim fx(r), dfdx(r, r), dx(r), x(r) As Double
+                Dim x(r), newx(r), errval, sumerr As Double
 
                 Dim niter As Integer
 
                 x = REx
                 niter = 0
                 NoPenVal = False
+
                 Do
 
                     IObj2?.SetCurrent
 
-                    Dim IObj3 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+                    Dim IObj3 As InspectorItem = Host.GetNewInspectorItem()
 
                     _IObj = IObj3
 
@@ -773,98 +736,50 @@ Namespace Reactors
 
                     IObj3?.Paragraphs.Add(String.Format("Tentative Reaction Extents: {0}", x.ToMathArrayString))
 
-                    fx = Me.FunctionValue2N(x)
+                    Dim xs As Double
 
-                    IObj3?.SetCurrent
+                    Dim variables As New List(Of OptBoundVariable)
+                    For i = 0 To r
+                        xs = Scaler.Scale(x(i), MinVal, MaxVal, 0, 100)
+                        variables.Add(New OptBoundVariable(xs, 0, 100))
+                    Next
 
-                    IObj3?.Paragraphs.Add(String.Format("Error Function Values: {0}", fx.ToMathArrayString))
+                    newx = solver2.ComputeMin(Function(x1)
+                                                  FlowSheet.CheckStatus()
+                                                  Return FunctionValue2N(x1).AbsSqrSumY
+                                              End Function, variables.ToArray)
 
-                    If AbsSum(fx) < InternalLoopTolerance Then Exit Do
+                    FlowSheet.CheckStatus()
 
-                    IObj3?.SetCurrent
+                    errval = FunctionValue2N(newx).AbsSqrSumY
 
-                    dfdx = Me.FunctionGradient2N(x)
+                    newx = newx.Select(Function(xi) Scaler.UnScale(xi, MinVal, MaxVal, 0, 100)).ToArray
 
-                    IObj3?.Paragraphs.Add(String.Format("Reaction Extents Jacobian Matrix: {0}", dfdx.ToMathArrayString))
+                    sumerr = x.SubtractY(newx).AbsSqrSumY
 
-                    IObj3?.SetCurrent
+                    x = newx
 
-                    Dim success As Boolean
-                    success = SysLin.rsolve.rmatrixsolve(dfdx, fx, r + 1, dx)
-
-                    If success Then
-                        If niter = 0 Then
-                            For i = 0 To r
-                                x(i) *= 0.999
-                            Next
-                        ElseIf niter = 1 Then
-                            For i = 0 To r
-                                x(i) -= dx(i) * 0.01
-                            Next
-                        ElseIf niter = 2 Then
-                            For i = 0 To r
-                                x(i) -= dx(i) * 0.3
-                            Next
-                        ElseIf niter >= 3 Then
-                            For i = 0 To r
-                                x(i) -= dx(i)
-                            Next
-                        End If
-                    Else
-                        For i = 0 To r
-                            x(i) *= 0.999
-                        Next
-                    End If
-
-                    IObj3?.Paragraphs.Add(String.Format("Reaction Extents Update: {0}", dx.ToMathArrayString))
-
-                    IObj3?.Paragraphs.Add(String.Format("Updated Reaction Extents: {0}", x.ToMathArrayString))
+                    IObj3?.Paragraphs.Add(String.Format("Updated Reaction Extents: {0}", newx.ToMathArrayString))
 
                     niter += 1
 
                     IObj3?.Close()
 
-                Loop Until niter >= InternalLoopMaximumIterations
+                Loop Until errval < InternalLoopTolerance Or sumerr < InternalLoopTolerance Or niter >= InternalLoopMaximumIterations
 
                 If niter >= InternalLoopMaximumIterations Then Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
+
+                REx = x
 
                 IObj2?.SetCurrent
 
                 _IObj = IObj2
 
-                If ReturnPenaltyValue() > 0 Then
+                Dim penval = ReturnPenaltyValue()
 
-                    'recalculate extents to fix mass balance
+                If penval > 0 Then
 
-                    Dim ref(r), dni(r) As Double
-                    Dim vars As New List(Of OptSimplexBoundVariable)
-
-                    i = 0
-                    Do
-                        vars.Add(New OptSimplexBoundVariable(REx(i), -N0.Values.Sum, N0.Values.Sum))
-                        i += 1
-                    Loop Until i = r + 1
-
-                    Dim splex As New Simplex()
-
-                    splex.MaxFunEvaluations = 100000
-                    splex.Tolerance = 1.0E-20
-
-                    NoPenVal = True
-
-                    ref = splex.ComputeMin(Function(xi)
-
-                                               Return FunctionValue2N(xi).AbsSqrSumY
-
-                                           End Function, vars.ToArray)
-
-                    REx = ref
-
-                    If ReturnPenaltyValue() > 0 Then
-
-                        Throw New Exception("Invalid solution: mass balance residue > 0.")
-
-                    End If
+                    Throw New Exception("Invalid solution: mass balance residue > 0. Are all possible reactions defined?")
 
                 End If
 
