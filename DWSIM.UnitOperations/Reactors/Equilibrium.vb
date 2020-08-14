@@ -672,9 +672,9 @@ Namespace Reactors
 
             Dim REx(r) As Double
 
-            'If UsePreviousReactionExtents And PreviousReactionExtents.Count > 0 Then
-            '    REx = PreviousReactionExtents.Values.ToArray()
-            'End If
+            If UsePreviousReactionExtents And PreviousReactionExtents.Count > 0 Then
+                REx = PreviousReactionExtents.Values.ToArray()
+            End If
 
             IObj?.Paragraphs.Add(String.Format("Initial Estimates for Reaction Extents: {0}", REx.ToMathArrayString))
 

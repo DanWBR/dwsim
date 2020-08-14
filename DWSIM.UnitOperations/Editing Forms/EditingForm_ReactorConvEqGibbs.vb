@@ -187,16 +187,10 @@ Public Class EditingForm_ReactorConvEqGibbs
 
                 chkInitializeExtents.Checked = DirectCast(SimObject, Reactors.Reactor_Equilibrium).UsePreviousReactionExtents
 
-                chkAlternateInit.Checked = DirectCast(SimObject, Reactors.Reactor_Equilibrium).AlternateBoundsInitializer
-
-                tbExtentsInitializer.Text = DirectCast(SimObject, Reactors.Reactor_Equilibrium).ReactionExtentsInitializer
-
                 tbExtLoopMaxItsEq.Text = DirectCast(SimObject, Reactors.Reactor_Equilibrium).ExternalLoopMaximumIterations
                 tbIntLoopMaxItsEq.Text = DirectCast(SimObject, Reactors.Reactor_Equilibrium).InternalLoopMaximumIterations
                 tbExtLoopTolEq.Text = DirectCast(SimObject, Reactors.Reactor_Equilibrium).ExternalLoopTolerance
                 tbIntLoopTolEq.Text = DirectCast(SimObject, Reactors.Reactor_Equilibrium).InternalLoopTolerance
-
-                tbNumDeriv2.Text = DirectCast(SimObject, Reactors.Reactor_Equilibrium).DerivativePerturbation
 
             Else
 
@@ -513,7 +507,7 @@ Public Class EditingForm_ReactorConvEqGibbs
 
     Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbOutletTemperature.TextChanged, tbPDrop.TextChanged, tbExtLoopMaxIts.TextChanged, tbIntLoopMaxIts.TextChanged,
         tbExtLoopTol.TextChanged, tbIntLoopTol.TextChanged, tbExtLoopMaxItsEq.TextChanged, tbIntLoopMaxItsEq.TextChanged,
-        tbExtLoopTolEq.TextChanged, tbIntLoopTolEq.TextChanged, tbExtentsInitializer.TextChanged, tbNumDeriv2.TextChanged
+        tbExtLoopTolEq.TextChanged, tbIntLoopTolEq.TextChanged
 
         Dim tbox = DirectCast(sender, TextBox)
 
@@ -527,7 +521,7 @@ Public Class EditingForm_ReactorConvEqGibbs
 
     Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbOutletTemperature.KeyDown, tbPDrop.KeyDown, tbExtLoopMaxIts.KeyDown, tbIntLoopMaxIts.KeyDown,
         tbExtLoopTol.KeyDown, tbIntLoopTol.KeyDown, tbExtLoopMaxItsEq.KeyDown, tbIntLoopMaxItsEq.KeyDown,
-        tbExtLoopTolEq.KeyDown, tbIntLoopTolEq.KeyDown, tbExtentsInitializer.KeyDown, tbNumDeriv2.KeyDown
+        tbExtLoopTolEq.KeyDown, tbIntLoopTolEq.KeyDown
 
 
         If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = System.Drawing.Color.Blue Then
@@ -552,8 +546,6 @@ Public Class EditingForm_ReactorConvEqGibbs
         If sender Is tbIntLoopMaxItsEq Then DirectCast(SimObject, Reactors.Reactor_Equilibrium).InternalLoopMaximumIterations = tbIntLoopMaxItsEq.Text.ParseExpressionToDouble
         If sender Is tbExtLoopTolEq Then DirectCast(SimObject, Reactors.Reactor_Equilibrium).ExternalLoopTolerance = tbExtLoopTolEq.Text.ParseExpressionToDouble
         If sender Is tbIntLoopTolEq Then DirectCast(SimObject, Reactors.Reactor_Equilibrium).InternalLoopTolerance = tbIntLoopTolEq.Text.ParseExpressionToDouble
-        If sender Is tbExtentsInitializer Then DirectCast(SimObject, Reactors.Reactor_Equilibrium).ReactionExtentsInitializer = tbExtentsInitializer.Text.ParseExpressionToDouble
-        If sender Is tbNumDeriv2 Then DirectCast(SimObject, Reactors.Reactor_Equilibrium).DerivativePerturbation = tbNumDeriv2.Text.ParseExpressionToDouble
 
         RequestCalc()
 
@@ -629,15 +621,6 @@ Public Class EditingForm_ReactorConvEqGibbs
     Private Sub chkInitializeExtents_CheckedChanged(sender As Object, e As EventArgs) Handles chkInitializeExtents.CheckedChanged
         If TypeOf SimObject Is Reactors.Reactor_Equilibrium And Loaded Then
             DirectCast(SimObject, Reactors.Reactor_Equilibrium).UsePreviousReactionExtents = chkInitializeExtents.Checked
-            tbExtentsInitializer.Enabled = Not chkInitializeExtents.Checked
-            RequestCalc()
-        End If
-    End Sub
-
-    Private Sub chkAlternateInit_CheckedChanged(sender As Object, e As EventArgs) Handles chkAlternateInit.CheckedChanged
-        If TypeOf SimObject Is Reactors.Reactor_Equilibrium And Loaded Then
-            DirectCast(SimObject, Reactors.Reactor_Equilibrium).AlternateBoundsInitializer = chkAlternateInit.Checked
-            RequestCalc()
         End If
     End Sub
 

@@ -1035,16 +1035,16 @@ Namespace Reactors
 
                 'optimization of initial values for the lagrange multipliers
 
-                Dim variables As New List(Of DotNumerics.Optimization.OptBoundVariable)
+                Dim variables As New List(Of OptBoundVariable)
                 For i = 0 To e
-                    variables.Add(New DotNumerics.Optimization.OptBoundVariable(0.0#, -100.0#, 100.0#))
+                    variables.Add(New OptBoundVariable(0.0#, -100.0#, 100.0#))
                 Next
-                variables.Add(New DotNumerics.Optimization.OptBoundVariable(nv, True))
-                variables.Add(New DotNumerics.Optimization.OptBoundVariable(nl1, True))
-                variables.Add(New DotNumerics.Optimization.OptBoundVariable(nl2, True))
-                variables.Add(New DotNumerics.Optimization.OptBoundVariable(ns, True))
+                variables.Add(New OptBoundVariable(nv, True))
+                variables.Add(New OptBoundVariable(nl1, True))
+                variables.Add(New OptBoundVariable(nl2, True))
+                variables.Add(New OptBoundVariable(ns, True))
 
-                Dim solver As New DotNumerics.Optimization.Simplex, smplres As Double()
+                Dim solver As New Simplex, smplres As Double()
                 solver.MaxFunEvaluations = 50000
                 solver.Tolerance = 0.0000000001
                 smplres = solver.ComputeMin(Function(x1)
@@ -1059,7 +1059,7 @@ Namespace Reactors
                 'external loop: fugacity coefficient calculation/update
                 'internal loop: material balance convergence
 
-                Dim solver2 As New DotNumerics.Optimization.Simplex, finalx As Double()
+                Dim solver2 As New Simplex, finalx As Double()
                 solver2.MaxFunEvaluations = MaximumInternalIterations
                 solver2.Tolerance = InternalTolerance
 

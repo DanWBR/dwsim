@@ -1559,18 +1559,12 @@ namespace DWSIM.UI.Desktop.Editors
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Pressure Drop"));
                     s.CreateAndAddLabelRow(container, "Convergence Parameters");
-                    s.CreateAndAddDescriptionRow(container, "Tune the following parameters if you're having convergence issues.");
-                    s.CreateAndAddDescriptionRow(container, "Parameters which have the highest impact on convergence: Reaction Extents initializer, Alternate Initialization and Numerical Derivative Perturbation.");
                     s.CreateAndAddCheckBoxRow(container, "Initialize Reaction Extents with Previous Values", reactor2.UsePreviousReactionExtents, (sender, e) => reactor2.UsePreviousReactionExtents = sender.Checked.GetValueOrDefault(), () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container, "This will use the reaction extents from a previous solution to initialize the next calculation.");
-                    s.CreateAndAddCheckBoxRow(container, "Alternate Initialization", reactor2.AlternateBoundsInitializer, (sender, e) => reactor2.AlternateBoundsInitializer = sender.Checked.GetValueOrDefault(), () => CallSolverIfNeeded());
-                    s.CreateAndAddTextBoxRow(container, nf, "Reaction Extents Initializer", reactor2.ReactionExtentsInitializer, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2.ReactionExtentsInitializer = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
-                    s.CreateAndAddDescriptionRow(container, "Useful for a first estimate when a previous solution is not available and/or 'Initialize with Previous Values' is disabled. Enter a value between 0.0 and 1.0.");
                     s.CreateAndAddTextBoxRow(container, nf, "Maximum Internal Iterations", reactor2.InternalLoopMaximumIterations, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2.InternalLoopMaximumIterations = int.Parse(sender.Text); }, () => CallSolverIfNeeded());
                     s.CreateAndAddTextBoxRow(container, nf, "Maximum External Iterations", reactor2.ExternalLoopMaximumIterations, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2.ExternalLoopMaximumIterations = int.Parse(sender.Text); }, () => CallSolverIfNeeded());
                     s.CreateAndAddTextBoxRow(container, nf, "Minimum Internal Error", reactor2.InternalLoopTolerance, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2.InternalLoopTolerance = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
                     s.CreateAndAddTextBoxRow(container, nf, "Minimum External Error", reactor2.ExternalLoopTolerance, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2.ExternalLoopTolerance = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
-                    s.CreateAndAddTextBoxRow(container, nf, "Numerical Derivative Perturbation", reactor2.DerivativePerturbation, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2.DerivativePerturbation = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
                     break;
                 case ObjectType.RCT_Gibbs:
                     var reactor2g = (Reactor_Gibbs)SimObject;
