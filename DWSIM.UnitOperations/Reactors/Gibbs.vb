@@ -356,11 +356,11 @@ Namespace Reactors
 
             'penval += (W0 - Wx) ^ 2
 
-            If penval > 0.0# Then
-                For i = 0 To x.Length - 1
-                    f(i) += penval * (i + 1) ^ 2
-                Next
-            End If
+            'If penval > 0.0# Then
+            '    For i = 0 To x.Length - 1
+            '        f(i) += penval * (i + 1) ^ 2
+            '    Next
+            'End If
 
             Return f
 
@@ -1131,14 +1131,18 @@ Namespace Reactors
 
                 Loop Until sumerr < ExternalTolerance Or ni_ext > MaximumExternalIterations
 
+                If ni_ext > MaximumExternalIterations Then
+
+                    Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
+
+                End If
+
                 Dim errfunc = FunctionValue2N(finalx).AbsSqrSumY
 
                 If errfunc > ExternalTolerance Then
-                    Throw New Exception(FlowSheet.GetTranslatedString("ConvergenceError"))
-                End If
 
-                If ni_ext > MaximumExternalIterations Then
-                    Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
+                    Throw New Exception(FlowSheet.GetTranslatedString("ConvergenceError"))
+
                 End If
 
                 For Each id In ComponentIDs

@@ -1525,7 +1525,9 @@ Namespace BaseClasses
             Next
 
             For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "Elements").Elements
-                Me.Elements.Add(xel2.@Name, xel2.@Value)
+                If Not Me.Elements.ContainsKey(xel2.@Name) Then
+                    Me.Elements.Add(xel2.@Name, xel2.@Value)
+                End If
             Next
 
             unif = Nothing

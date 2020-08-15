@@ -29,6 +29,7 @@ Imports DWSIM.MathOps.MathEx
 Imports DWSIM.MathOps.MathEx.Common
 Imports DotNumerics.Optimization
 Imports DotNumerics.Scaling
+Imports DWSIM.MathOps.MathEx.AP
 
 Namespace Reactors
 
@@ -216,7 +217,7 @@ Namespace Reactors
             For i = 0 To Me.Reactions.Count - 1
                 With FlowSheet.Reactions(Me.Reactions(i))
                     kr = .EvaluateK(T, pp)
-                    f(i) = prod(i) - kr '+ pen_val
+                    f(i) = prod(i) - kr + pen_val
                 End With
             Next
 
@@ -769,19 +770,19 @@ Namespace Reactors
 
                 If niter >= InternalLoopMaximumIterations Then Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
 
-                REx = x
-
-                IObj2?.SetCurrent
-
-                _IObj = IObj2
-
-                Dim penval = ReturnPenaltyValue()
+                Dim penval = Math.Abs(ReturnPenaltyValue())
 
                 If penval > 0 Then
 
                     Throw New Exception("Invalid solution: mass balance residue > 0. Are all possible reactions defined?")
 
                 End If
+
+                REx = x
+
+                IObj2?.SetCurrent
+
+                _IObj = IObj2
 
                 'reevaluate function
 

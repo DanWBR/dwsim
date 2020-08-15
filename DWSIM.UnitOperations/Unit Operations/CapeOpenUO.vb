@@ -693,8 +693,11 @@ Namespace UnitOperations
                                     .Position = New Point.Point(Me.GraphicObject.X, Me.GraphicObject.Y + (Me.GraphicObject.InputConnectors.Count) / (nip) * Me.GraphicObject.Height / 2)
                                     .ConnectorName = id.ComponentName
                                 End With
-                                Dim gobj As IGraphicObject = Me.GraphicObject.InputConnectors(ic).AttachedConnector.AttachedFrom
-                                myport.Connect(FlowSheet.GetFlowsheetSimulationObject(gobj.Tag))
+                                Try
+                                    Dim gobj As IGraphicObject = Me.GraphicObject.InputConnectors(ic).AttachedConnector.AttachedFrom
+                                    myport.Connect(FlowSheet.GetFlowsheetSimulationObject(gobj.Tag))
+                                Catch ex As Exception
+                                End Try
                                 ic += 1
                             Case CapePortDirection.CAPE_OUTLET
                                 With Me.GraphicObject.OutputConnectors(oc)
@@ -707,8 +710,11 @@ Namespace UnitOperations
                                     .Position = New Point.Point(Me.GraphicObject.X + Me.GraphicObject.Width, Me.GraphicObject.Y + (Me.GraphicObject.OutputConnectors.Count) / (nop) * Me.GraphicObject.Height / 2)
                                     .ConnectorName = id.ComponentName
                                 End With
-                                Dim gobj As IGraphicObject = Me.GraphicObject.OutputConnectors(oc).AttachedConnector.AttachedTo
-                                myport.Connect(Me.FlowSheet.GetFlowsheetSimulationObject(gobj.Tag))
+                                Try
+                                    Dim gobj As IGraphicObject = Me.GraphicObject.OutputConnectors(oc).AttachedConnector.AttachedTo
+                                    myport.Connect(Me.FlowSheet.GetFlowsheetSimulationObject(gobj.Tag))
+                                Catch ex As Exception
+                                End Try
                                 oc += 1
                         End Select
                     Next
