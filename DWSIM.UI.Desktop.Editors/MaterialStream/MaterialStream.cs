@@ -77,7 +77,10 @@ namespace DWSIM.UI.Desktop.Editors
             s.CreateAndAddStringEditorRow(container, "Name", MatStream.GraphicObject.Tag, (TextBox arg3, EventArgs ev) =>
             {
                 MatStream.GraphicObject.Tag = arg3.Text;
-            }, () => CallSolverIfNeeded());
+                MatStream.GetFlowsheet().UpdateInterface();
+            }, () => {
+                MatStream.GetFlowsheet().UpdateOpenEditForms();
+            });
 
             s.CreateAndAddDropDownRow(container, "Compound Amount Basis",
             new List<string>() { "Molar Fractions", "Mass Fractions", "Volumetric Fractions", "Molar Flows", "Mass Flows", "Volumetric Flows", "Default" },

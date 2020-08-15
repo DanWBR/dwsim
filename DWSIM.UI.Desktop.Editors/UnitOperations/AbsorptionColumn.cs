@@ -77,7 +77,10 @@ namespace DWSIM.UI.Desktop.Editors
             s.CreateAndAddStringEditorRow(container, "Name", column.GraphicObject.Tag, (TextBox arg3, EventArgs ev) =>
             {
                 column.GraphicObject.Tag = arg3.Text;
-            }, () => { column.GetFlowsheet().UpdateOpenEditForms(); });
+                column.GetFlowsheet().UpdateInterface();
+            }, () => {
+                column.GetFlowsheet().UpdateOpenEditForms();
+            });
 
             s.CreateAndAddLabelRow(container, "Property Package");
 

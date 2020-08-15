@@ -234,12 +234,7 @@ Imports DWSIM.GlobalSettings
 
     Public Function GetFlowsheetSimulationObject(tag As String) As ISimulationObject Implements IFlowsheet.GetFlowsheetSimulationObject
 
-        For Each obj As ISimulationObject In SimulationObjects.Values
-            If obj.GraphicObject.Tag = tag Then
-                Return obj
-            End If
-        Next
-        Return Nothing
+        Return SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = tag).FirstOrDefault
 
     End Function
 

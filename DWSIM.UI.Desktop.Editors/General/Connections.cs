@@ -170,7 +170,9 @@ namespace DWSIM.UI.Desktop.Editors
                     if (sel != "")
                     {
 
-                        var gobj2 = flowsheet.GetFlowsheetSimulationObject(sel).GraphicObject;
+                        var gobj2 = flowsheet.GetFlowsheetSimulationObject(sel)?.GraphicObject;
+
+                        if (gobj2 == null) return;
 
                         if (direction == "In" && (connector.Type == ConType.ConIn | connector.Type == ConType.ConEn))
                         {

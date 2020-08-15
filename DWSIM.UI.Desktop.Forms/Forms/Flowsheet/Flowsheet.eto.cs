@@ -2337,6 +2337,7 @@ namespace DWSIM.UI.Forms
             foreach (DocumentPage item in EditorHolder.Pages)
             {
                 ((ObjectEditorContainer)item.Content).Update();
+                ((ObjectEditorContainer)item.Content).UpdateConnections();
             }
         }
 
