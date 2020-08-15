@@ -875,7 +875,15 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                 sch.UseCurrentStateAsInitial = chk.Checked.GetValueOrDefault();
             });
 
-            layout.Padding = new Padding(10, 10, schEditor.Width / 2, 10);
+            layout.CreateAndAddEmptySpace();
+            layout.CreateAndAddEmptySpace();
+
+            layout.CreateAndAddCheckBoxRow("Reset/Clear Contents of All Volume-Defined Objects Before Running", sch.ResetContentsOfAllObjects, (chk, e) =>
+            {
+                sch.ResetContentsOfAllObjects = chk.Checked.GetValueOrDefault();
+            });
+
+            layout.Padding = new Padding(10, 10, schEditor.Width / 3, 10);
 
             layout.Invalidate();
 

@@ -525,6 +525,12 @@
   <data name="panelSelSchedule.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="chkResetAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>353, 17</value>
+  </data>
+  <data name="chkResetAll.Text" xml:space="preserve">
+    <value>Reset/Empty Contents of All Volume-Defined Objects Before Running</value>
+  </data>
   <data name="chkSchUseCurrentState.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 17</value>
   </data>

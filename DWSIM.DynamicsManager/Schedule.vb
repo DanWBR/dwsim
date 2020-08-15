@@ -40,6 +40,8 @@ Public Class Schedule
 
     Public Property UseCurrentStateAsInitial As Boolean = True Implements IDynamicsSchedule.UseCurrentStateAsInitial
 
+    Public Property ResetContentsOfAllObjects As Boolean = False Implements IDynamicsSchedule.ResetContentsOfAllObjects
+
     Public Function SaveData() As List(Of XElement) Implements ICustomXMLSerialization.SaveData
         Return XMLSerializer.XMLSerializer.Serialize(Me)
     End Function

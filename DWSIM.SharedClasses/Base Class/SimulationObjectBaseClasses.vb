@@ -113,7 +113,7 @@ Namespace UnitOperations
 
             Dim col1 = DirectCast(ExtraProperties, IDictionary(Of String, Object))
 
-            Return col1(id)
+            If col1.ContainsKey(id) Then Return col1(id) Else Return Nothing
 
         End Function
 
@@ -121,7 +121,7 @@ Namespace UnitOperations
 
             Dim col1 = DirectCast(ExtraPropertiesUnitTypes, IDictionary(Of String, Object))
 
-            Return col1(id)
+            If col1.ContainsKey(id) Then Return col1(id) Else Return Nothing
 
         End Function
 

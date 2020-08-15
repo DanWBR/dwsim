@@ -36,4 +36,6 @@ Public Interface IDynamicsSchedule
 
     Property UseCurrentStateAsInitial As Boolean
 
+    Property ResetContentsOfAllObjects As Boolean
+
 End Interface

@@ -310,6 +310,28 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             foreach (PIDController controller in Controllers)
                 controller.Reset();
 
+            if (schedule.ResetContentsOfAllObjects)
+            {
+                foreach (var obj in Flowsheet.SimulationObjects.Values)
+                {
+                    if (obj.HasPropertiesForDynamicMode)
+                    {
+                        if (obj is DWSIM.SharedClasses.UnitOperations.BaseClass)
+                        {
+                            var bobj = (DWSIM.SharedClasses.UnitOperations.BaseClass)obj;
+                            if (bobj.GetDynamicProperty("Reset Content") != null)
+                                bobj.SetDynamicProperty("Reset Content", 1);
+                            if (bobj.GetDynamicProperty("Reset Contents") != null)
+                                bobj.SetDynamicProperty("Reset Contents", 1);
+                            if (bobj.GetDynamicProperty("Initialize using Inlet Stream") != null)
+                                bobj.SetDynamicProperty("Initialize using Inlet Stream", 1);
+                            if (bobj.GetDynamicProperty("Initialize using Inlet Streams") != null)
+                                bobj.SetDynamicProperty("Initialize using Inlet Streams", 1);
+                        }
+                    }
+                }
+            }
+
             integrator.CurrentTime = new DateTime();
 
             integrator.MonitoredVariableValues.Clear();
@@ -395,7 +417,19 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                         foreach (PIDController controller in Controllers)
                         {
                             if (controller.Active)
-                                controller.Calculate();
+                            {
+                                Flowsheet.ProcessScripts(Scripts.EventType.ObjectCalculationStarted, Scripts.ObjectType.FlowsheetObject, controller.Name);
+                                try
+                                {
+                                    controller.Solve();
+                                    Flowsheet.ProcessScripts(Scripts.EventType.ObjectCalculationFinished, Scripts.ObjectType.FlowsheetObject, controller.Name);
+                                }
+                                catch (Exception ex)
+                                {
+                                    Flowsheet.ProcessScripts(Scripts.EventType.ObjectCalculationError, Scripts.ObjectType.FlowsheetObject, controller.Name);
+                                    throw ex;
+                                }
+                            }
                         }
                     }
 
@@ -444,7 +478,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                     {
                         var euid = Guid.NewGuid().ToString();
                         SharedClasses.ExceptionProcessing.ExceptionList.Exceptions.Add(euid, t.Exception);
-                        Flowsheet.ShowMessage(t.Exception.Message, Interfaces.IFlowsheet.MessageType.GeneralError, euid);                                                                
+                        Flowsheet.ShowMessage(t.Exception.Message, Interfaces.IFlowsheet.MessageType.GeneralError, euid);
                     }
                 });
             });

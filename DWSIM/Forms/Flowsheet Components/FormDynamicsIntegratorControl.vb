@@ -223,6 +223,28 @@ Public Class FormDynamicsIntegratorControl
             controller.Reset()
         Next
 
+        If schedule.ResetContentsOfAllObjects Then
+            For Each obj In Flowsheet.SimulationObjects.Values
+                If obj.HasPropertiesForDynamicMode Then
+                    If TypeOf obj Is BaseClass Then
+                        Dim bobj = DirectCast(obj, BaseClass)
+                        If bobj.GetDynamicProperty("Reset Content") IsNot Nothing Then
+                            bobj.SetDynamicProperty("Reset Content", 1)
+                        End If
+                        If bobj.GetDynamicProperty("Reset Contents") IsNot Nothing Then
+                            bobj.SetDynamicProperty("Reset Contents", 1)
+                        End If
+                        If bobj.GetDynamicProperty("Initialize using Inlet Stream") IsNot Nothing Then
+                            bobj.SetDynamicProperty("Initialize using Inlet Stream", 1)
+                        End If
+                        If bobj.GetDynamicProperty("Initialize using Inlet Streams") IsNot Nothing Then
+                            bobj.SetDynamicProperty("Initialize using Inlet Streams", 1)
+                        End If
+                    End If
+                End If
+            Next
+        End If
+
         integrator.CurrentTime = New Date
 
         integrator.MonitoredVariableValues.Clear()
@@ -300,7 +322,16 @@ Public Class FormDynamicsIntegratorControl
 
                                         If integrator.ShouldCalculateControl Then
                                             For Each controller As PIDController In Controllers
-                                                If controller.Active Then controller.Calculate()
+                                                If controller.Active Then
+                                                    Flowsheet.ProcessScripts(Scripts.EventType.ObjectCalculationStarted, Scripts.ObjectType.FlowsheetObject, controller.Name)
+                                                    Try
+                                                        controller.Solve()
+                                                        Flowsheet.ProcessScripts(Scripts.EventType.ObjectCalculationFinished, Scripts.ObjectType.FlowsheetObject, controller.Name)
+                                                    Catch ex As Exception
+                                                        Flowsheet.ProcessScripts(Scripts.EventType.ObjectCalculationError, Scripts.ObjectType.FlowsheetObject, controller.Name)
+                                                        Throw ex
+                                                    End Try
+                                                End If
                                             Next
                                         End If
 

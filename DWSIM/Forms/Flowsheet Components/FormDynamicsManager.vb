@@ -767,6 +767,8 @@ Public Class FormDynamicsManager
 
         chkSchUseCurrentState.Checked = s1.UseCurrentStateAsInitial
 
+        chkResetAll.Checked = s1.ResetContentsOfAllObjects
+
         panelSelSchedule.Enabled = True
 
     End Sub
@@ -1153,4 +1155,13 @@ Public Class FormDynamicsManager
 
     End Sub
 
+    Private Sub chkResetAll_CheckedChanged(sender As Object, e As EventArgs) Handles chkResetAll.CheckedChanged
+        If Manager IsNot Nothing Then
+            Dim s1 = Manager.ScheduleList(gridschedules.Rows(gridschedules.SelectedCells(0).RowIndex).Cells(0).Value)
+            Try
+                s1.ResetContentsOfAllObjects = chkResetAll.Checked
+            Catch ex As Exception
+            End Try
+        End If
+    End Sub
 End Class
