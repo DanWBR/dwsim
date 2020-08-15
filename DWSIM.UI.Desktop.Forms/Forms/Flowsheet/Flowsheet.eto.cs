@@ -560,6 +560,8 @@ namespace DWSIM.UI.Forms
 
             var btnShowHideObjectEditorPanel = new ButtonMenuItem { Text = "Show/Hide Object Editor Panel" };
 
+            var btnCloseAllEditors = new ButtonMenuItem { Text = "Close All Opened Object Editors" };
+
             //process plugin list
 
             var pluginbuttons = new List<ButtonMenuItem>();
@@ -610,7 +612,7 @@ namespace DWSIM.UI.Forms
                         Menu.Items.Insert(7, new ButtonMenuItem { Text = "Tools", Items = { btnSensAnalysis, btnOptimization, btnInspector } });
                         Menu.Items.Insert(8, new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities_TrueCriticalPoint, btnUtilities_PhaseEnvelope, btnUtilities_BinaryEnvelope } });
                         Menu.Items.Insert(9, pluginsmenu);
-                        Menu.Items.Insert(10, new ButtonMenuItem { Text = "View", Items = { btnShowHideObjectPalette, btnShowHideObjectEditorPanel } });
+                        Menu.Items.Insert(10, new ButtonMenuItem { Text = "View", Items = { btnShowHideObjectPalette, btnShowHideObjectEditorPanel, btnCloseAllEditors } });
                     }
                     else
                     {
@@ -621,7 +623,7 @@ namespace DWSIM.UI.Forms
                         Menu.Items.Add(new ButtonMenuItem { Text = "Tools", Items = { btnSensAnalysis, btnOptimization, btnInspector } });
                         Menu.Items.Add(new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities_TrueCriticalPoint, btnUtilities_PhaseEnvelope, btnUtilities_BinaryEnvelope } });
                         Menu.Items.Add(pluginsmenu);
-                        Menu.Items.Add(new ButtonMenuItem { Text = "View", Items = { btnShowHideObjectPalette, btnShowHideObjectEditorPanel } });
+                        Menu.Items.Add(new ButtonMenuItem { Text = "View", Items = { btnShowHideObjectPalette, btnShowHideObjectEditorPanel, btnCloseAllEditors } });
                     }
                     break;
                 case GlobalSettings.Settings.Platform.Linux:
@@ -633,7 +635,7 @@ namespace DWSIM.UI.Forms
                     Menu.Items.Add(new ButtonMenuItem { Text = "Tools", Items = { btnSensAnalysis, btnOptimization, btnInspector } });
                     Menu.Items.Add(new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities_TrueCriticalPoint, btnUtilities_PhaseEnvelope, btnUtilities_BinaryEnvelope } });
                     Menu.Items.Add(pluginsmenu);
-                    Menu.Items.Add(new ButtonMenuItem { Text = "View", Items = { btnShowHideObjectPalette, btnShowHideObjectEditorPanel } });
+                    Menu.Items.Add(new ButtonMenuItem { Text = "View", Items = { btnShowHideObjectPalette, btnShowHideObjectEditorPanel, btnCloseAllEditors } });
                     break;
             }
 
@@ -780,6 +782,10 @@ namespace DWSIM.UI.Forms
             btnShowHideObjectEditorPanel.Click += (sender, e) =>
             {
                 Split1.Panel1.Visible = !Split1.Panel1.Visible;
+            };
+
+            btnCloseAllEditors.Click += (sender, e) => {
+                EditorHolder.Pages.Clear();
             };
 
             // obj containers
