@@ -1,13 +1,7 @@
-Version 6.1 Update 2
+Version 6.1 Update 3
 
-- [NEW] Added Helper Functions to Flowsheet (Scripting)
-- [CHG] Updated Spreadsheet property importing/exporting to include units
-- [FIX] Bug fixes
-
-Version 6.1 Update 1
-
-- [CHG] Enhanced spreadsheet performance (Cross-Platform UI)
-- [FIX] Fixed a bug with the calculation of henry's constant
-- [FIX] Fixes for High-DPI displays (Classic UI)
-- [FIX] Fixed an issue on saving simulations with Master Property Tables
+- [NEW] Added an option to force reset of all objects before running a Schedule (Dynamics)
+- [NEW] Added an option to close all editors (Cross-Platform UI)
+- [CHG] Updated Gibbs/Equilibrium Reactor solvers
+- [FIX] Fixed PID Controller not associating with Linked scripts
 - [FIX] Other bug fixes

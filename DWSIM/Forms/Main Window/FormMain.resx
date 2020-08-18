@@ -678,9 +678,6 @@
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>en</value>
-  </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>104</value>
   </metadata>
@@ -694,13 +691,13 @@
     <value>Fill</value>
   </data>
   <data name="WelcomePanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>300, 50</value>
+    <value>371, 50</value>
   </data>
   <data name="WelcomePanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>48, 22, 48, 22</value>
   </data>
   <data name="WelcomePanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>422, 338</value>
+    <value>351, 338</value>
   </data>
   <data name="WelcomePanel.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
@@ -733,7 +730,7 @@
     <value>NoControl</value>
   </data>
   <data name="ButtonClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>284, 0</value>
+    <value>355, 0</value>
   </data>
   <data name="ButtonClose.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -769,7 +766,7 @@
     <value>48, 22, 48, 22</value>
   </data>
   <data name="SettingsPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 338</value>
+    <value>371, 338</value>
   </data>
   <data name="SettingsPanel.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>

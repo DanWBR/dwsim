@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 6.1 Update 2
+Version 6.1 Update 3
 Copyright (c) 2017-2020 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,14 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/windows
+
+Version 6.1 Update 3
+
+- [NEW] Added an option to force reset of all objects before running a Schedule (Dynamics)
+- [NEW] Added an option to close all editors (Cross-Platform UI)
+- [CHG] Updated Gibbs/Equilibrium Reactor solvers
+- [FIX] Fixed PID Controller not associating with Linked scripts
+- [FIX] Other bug fixes
 
 Version 6.1 Update 2
 
