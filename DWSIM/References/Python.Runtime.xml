@@ -4,6 +4,127 @@
         <name>Python.Runtime</name>
     </assembly>
     <members>
+        <member name="T:Python.Runtime.Codecs.EncoderGroup">
+            <summary>
+            Represents a group of <see cref="T:Python.Runtime.IPyObjectDecoder"/>s. Useful to group them by priority.
+            </summary>
+        </member>
+        <member name="M:Python.Runtime.Codecs.EncoderGroup.Add(Python.Runtime.IPyObjectEncoder)">
+            <summary>
+            Add specified encoder to the group
+            </summary>
+        </member>
+        <member name="M:Python.Runtime.Codecs.EncoderGroup.Clear">
+            <summary>
+            Remove all encoders from the group
+            </summary>
+        </member>
+        <member name="M:Python.Runtime.Codecs.EncoderGroup.CanEncode(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Python.Runtime.Codecs.EncoderGroup.TryEncode(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Python.Runtime.Codecs.EncoderGroup.GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:Python.Runtime.Codecs.EncoderGroupExtensions.GetEncoders(Python.Runtime.IPyObjectEncoder,System.Type)">
+            <summary>
+            Gets specific instances of <see cref="T:Python.Runtime.IPyObjectEncoder"/>
+            (potentially selecting one from a collection),
+            that can encode the specified <paramref name="type"/>.
+            </summary>
+        </member>
+        <member name="T:Python.Runtime.Codecs.DecoderGroup">
+            <summary>
+            Represents a group of <see cref="T:Python.Runtime.IPyObjectDecoder"/>s. Useful to group them by priority.
+            </summary>
+        </member>
+        <member name="M:Python.Runtime.Codecs.DecoderGroup.Add(Python.Runtime.IPyObjectDecoder)">
+            <summary>
+            Add specified decoder to the group
+            </summary>
+        </member>
+        <member name="M:Python.Runtime.Codecs.DecoderGroup.Clear">
+            <summary>
+            Remove all decoders from the group
+            </summary>
+        </member>
+        <member name="M:Python.Runtime.Codecs.DecoderGroup.CanDecode(Python.Runtime.PyObject,System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:Python.Runtime.Codecs.DecoderGroup.TryDecode``1(Python.Runtime.PyObject,``0@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Python.Runtime.Codecs.DecoderGroup.GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:Python.Runtime.Codecs.DecoderGroupExtensions.GetDecoder(Python.Runtime.IPyObjectDecoder,Python.Runtime.PyObject,System.Type)">
+            <summary>
+            Gets a concrete instance of <see cref="T:Python.Runtime.IPyObjectDecoder"/>
+            (potentially selecting one from a collection),
+            that can decode from <paramref name="objectType"/> to <paramref name="targetType"/>,
+            or <c>null</c> if a matching decoder can not be found.
+            </summary>
+        </member>
+        <member name="T:Python.Runtime.Codecs.RawProxyEncoder">
+            <summary>
+            A .NET object encoder, that returns raw proxies (e.g. no conversion to Python types).
+            <para>You must inherit from this class and override <see cref="M:Python.Runtime.Codecs.RawProxyEncoder.CanEncode(System.Type)"/>.</para>
+            </summary>
+        </member>
+        <member name="T:Python.Runtime.IPyObjectDecoder">
+            <summary>
+            Defines <see cref="T:Python.Runtime.PyObject"/> conversion to CLR types (unmarshalling)
+            </summary>
+        </member>
+        <member name="M:Python.Runtime.IPyObjectDecoder.CanDecode(Python.Runtime.PyObject,System.Type)">
+            <summary>
+            Checks if this decoder can decode from <paramref name="objectType"/> to <paramref name="targetType"/>
+            </summary>
+        </member>
+        <member name="M:Python.Runtime.IPyObjectDecoder.TryDecode``1(Python.Runtime.PyObject,``0@)">
+            <summary>
+            Attempts do decode <paramref name="pyObj"/> into a variable of specified type
+            </summary>
+            <typeparam name="T">CLR type to decode into</typeparam>
+            <param name="pyObj">Object to decode</param>
+            <param name="value">The variable, that will receive decoding result</param>
+            <returns></returns>
+        </member>
+        <member name="T:Python.Runtime.IPyObjectEncoder">
+            <summary>
+            Defines conversion from CLR objects into Python objects (e.g. <see cref="T:Python.Runtime.PyObject"/>) (marshalling)
+            </summary>
+        </member>
+        <member name="M:Python.Runtime.IPyObjectEncoder.CanEncode(System.Type)">
+            <summary>
+            Checks if encoder can encode CLR objects of specified type
+            </summary>
+        </member>
+        <member name="M:Python.Runtime.IPyObjectEncoder.TryEncode(System.Object)">
+            <summary>
+            Attempts to encode CLR object <paramref name="value"/> into Python object
+            </summary>
+        </member>
+        <member name="T:Python.Runtime.PyObjectConversions">
+            <summary>
+            This class allows to register additional marshalling codecs.
+            <para>Python.NET will pick suitable encoder/decoder registered first</para>
+            </summary>
+        </member>
+        <member name="M:Python.Runtime.PyObjectConversions.RegisterEncoder(Python.Runtime.IPyObjectEncoder)">
+            <summary>
+            Registers specified encoder (marshaller)
+            <para>Python.NET will pick suitable encoder/decoder registered first</para>
+            </summary>
+        </member>
+        <member name="M:Python.Runtime.PyObjectConversions.RegisterDecoder(Python.Runtime.IPyObjectDecoder)">
+            <summary>
+            Registers specified decoder (unmarshaller)
+            <para>Python.NET will pick suitable encoder/decoder registered first</para>
+            </summary>
+        </member>
         <member name="T:Python.Runtime.ArrayObject">
             <summary>
             Implements a Python type for managed arrays. This type is essentially
@@ -24,11 +145,6 @@
         <member name="M:Python.Runtime.ArrayObject.sq_contains(System.IntPtr,System.IntPtr)">
             <summary>
             Implements __contains__ for array types.
-            </summary>
-        </member>
-        <member name="M:Python.Runtime.ArrayObject.mp_length(System.IntPtr)">
-            <summary>
-            Implements __len__ for array types.
             </summary>
         </member>
         <member name="T:Python.Runtime.AssemblyManager">
@@ -154,6 +270,27 @@
             Returns the System.Type object for a given qualified name,
             looking in the currently loaded assemblies for the named
             type. Returns null if the named type cannot be found.
+            </summary>
+        </member>
+        <member name="M:Python.Runtime.AssemblyManager.LookupTypes(System.String)">
+            <summary>
+            Returns the <see cref="T:System.Type"/> objects for the given qualified name,
+            looking in the currently loaded assemblies for the named
+            type.
+            </summary>
+        </member>
+        <member name="T:Python.Runtime.BorrowedReference">
+            <summary>
+            Represents a reference to a Python object, that is being lent, and
+            can only be safely used until execution returns to the caller.
+            </summary>
+        </member>
+        <member name="M:Python.Runtime.BorrowedReference.DangerousGetAddress">
+            <summary>Gets a raw pointer to the Python object</summary>
+        </member>
+        <member name="M:Python.Runtime.BorrowedReference.#ctor(System.IntPtr)">
+            <summary>
+            Creates new instance of <see cref="T:Python.Runtime.BorrowedReference"/> from raw pointer. Unsafe.
             </summary>
         </member>
         <member name="T:Python.Runtime.IPythonDerivedType">
@@ -283,11 +420,6 @@
         <member name="M:Python.Runtime.ClassBase.tp_str(System.IntPtr)">
             <summary>
             Standard __str__ implementation for instances of reflected types.
-            </summary>
-        </member>
-        <member name="M:Python.Runtime.ClassBase.tp_traverse(System.IntPtr,System.IntPtr,System.IntPtr)">
-            <summary>
-            Default implementations for required Python GC support.
             </summary>
         </member>
         <member name="M:Python.Runtime.ClassBase.tp_dealloc(System.IntPtr)">
@@ -547,7 +679,7 @@
         <member name="M:Python.Runtime.Converter.ToArray(System.IntPtr,System.Type,System.Object@,System.Boolean)">
             <summary>
             Convert a Python value to a correctly typed managed array instance.
-            The Python value must support the Python sequence protocol and the
+            The Python value must support the Python iterator protocol or and the
             items in the sequence must be convertible to the target array type.
             </summary>
         </member>
@@ -767,6 +899,11 @@
             Python's exception.Exception class as base class for System.Exception.
             </remarks>
         </member>
+        <member name="M:Python.Runtime.ExceptionClassObject.tp_repr(System.IntPtr)">
+            <summary>
+            Exception __repr__ implementation
+            </summary>
+        </member>
         <member name="M:Python.Runtime.ExceptionClassObject.tp_str(System.IntPtr)">
             <summary>
             Exception __str__ implementation
@@ -902,11 +1039,6 @@
             being silently replaced in a type __dict__ by default __setattr__.
             </summary>
         </member>
-        <member name="M:Python.Runtime.ExtensionType.tp_traverse(System.IntPtr,System.IntPtr,System.IntPtr)">
-            <summary>
-            Required Python GC support.
-            </summary>
-        </member>
         <member name="M:Python.Runtime.ExtensionType.tp_dealloc(System.IntPtr)">
             <summary>
             Default dealloc implementation.
@@ -983,6 +1115,16 @@
         <member name="T:Python.Runtime.ImportHook">
             <summary>
             Implements the "import hook" used to integrate Python with the CLR.
+            </summary>
+        </member>
+        <member name="M:Python.Runtime.ImportHook.InitImport">
+            <summary>
+            Initialize just the __import__ hook itself.
+            </summary>
+        </member>
+        <member name="M:Python.Runtime.ImportHook.RestoreImport">
+            <summary>
+            Restore the __import__ hook.
             </summary>
         </member>
         <member name="M:Python.Runtime.ImportHook.Initialize">
@@ -1175,6 +1317,21 @@
             overload and return a structure that contains the converted Python
             instance, converted arguments and the correct method to call.
             </summary>
+        </member>
+        <member name="M:Python.Runtime.MethodBinder.TryConvertArguments(System.Reflection.ParameterInfo[],System.Boolean,System.IntPtr,System.Int32,System.Collections.Generic.Dictionary{System.String,System.IntPtr},System.Collections.ArrayList,System.Boolean,System.Int32@)">
+            <summary>
+            Attempts to convert Python positional argument tuple and keyword argument table
+            into an array of managed objects, that can be passed to a method.
+            </summary>
+            <param name="pi">Information about expected parameters</param>
+            <param name="paramsArray"><c>true</c>, if the last parameter is a params array.</param>
+            <param name="args">A pointer to the Python argument tuple</param>
+            <param name="pyArgCount">Number of arguments, passed by Python</param>
+            <param name="kwargDict">Dictionary of keyword argument name to python object pointer</param>
+            <param name="defaultArgList">A list of default values for omitted parameters</param>
+            <param name="needsResolution"><c>true</c>, if overloading resolution is required</param>
+            <param name="outs">Returns number of output parameters</param>
+            <returns>An array of .NET arguments, that can be passed to a method.</returns>
         </member>
         <member name="T:Python.Runtime.MethodSorter">
             <summary>
@@ -1394,6 +1551,37 @@
             Defines native call signatures to be generated by NativeCall.
             </summary>
         </member>
+        <member name="T:Python.Runtime.NewReference">
+            <summary>
+            Represents a reference to a Python object, that is tracked by Python's reference counting.
+            </summary>
+        </member>
+        <member name="M:Python.Runtime.NewReference.MoveToPyObject">
+            <summary>
+            Returns <see cref="T:Python.Runtime.PyObject"/> wrapper around this reference, which now owns
+            the pointer. Sets the original reference to <c>null</c>, as it no longer owns it.
+            </summary>
+        </member>
+        <member name="M:Python.Runtime.NewReference.Dispose">
+            <summary>
+            Removes this reference to a Python object, and sets it to <c>null</c>.
+            </summary>
+        </member>
+        <member name="M:Python.Runtime.NewReference.DangerousFromPointer(System.IntPtr)">
+            <summary>
+            Creates <see cref="T:Python.Runtime.NewReference"/> from a raw pointer
+            </summary>
+        </member>
+        <member name="T:Python.Runtime.NewReferenceExtensions">
+            <summary>
+            These members can not be directly in <see cref="T:Python.Runtime.NewReference"/> type,
+            because <c>this</c> is always passed by value, which we need to avoid.
+            (note <code>this in NewReference</code> vs the usual <code>this NewReference</code>)
+            </summary>
+        </member>
+        <member name="M:Python.Runtime.NewReferenceExtensions.DangerousGetAddress(Python.Runtime.NewReference@)">
+            <summary>Gets a raw pointer to the Python object</summary>
+        </member>
         <member name="T:Python.Runtime.OverloadMapper">
             <summary>
             Implements the __overloads__ attribute of method objects. This object
@@ -1582,6 +1770,11 @@
             <remarks>
             Clears the dictionary.
             </remarks>
+        </member>
+        <member name="T:Python.Runtime.PyExportAttribute">
+            <summary>
+            Controls visibility to Python for public .NET type or an entire assembly
+            </summary>
         </member>
         <member name="T:Python.Runtime.PyFloat">
             <summary>
@@ -2097,6 +2290,13 @@
             collected or explicitly disposed.
             </remarks>
         </member>
+        <member name="M:Python.Runtime.PyObject.#ctor(Python.Runtime.BorrowedReference)">
+            <summary>
+            Creates new <see cref="T:Python.Runtime.PyObject"/> pointing to the same object as
+            the <paramref name="reference"/>. Increments refcount, allowing <see cref="T:Python.Runtime.PyObject"/>
+            to have ownership over its own reference.
+            </summary>
+        </member>
         <member name="P:Python.Runtime.PyObject.Handle">
             <summary>
             Handle Property
@@ -2108,7 +2308,8 @@
         </member>
         <member name="M:Python.Runtime.PyObject.FromManagedObject(System.Object)">
             <summary>
-            FromManagedObject Method
+            Gets raw Python proxy for this object (bypasses all conversions,
+            except <c>null</c> &lt;==&gt; <c>None</c>)
             </summary>
             <remarks>
             Given an arbitrary managed object, return a Python instance that
@@ -2192,7 +2393,7 @@
         </member>
         <member name="M:Python.Runtime.PyObject.GetAttr(System.String,Python.Runtime.PyObject)">
             <summary>
-            GetAttr Method
+            GetAttr Method. Returns fallback value if getting attribute fails for any reason.
             </summary>
             <remarks>
             Returns the named attribute of the Python object, or the given
@@ -2409,7 +2610,7 @@
             </summary>
             <remarks>
             Invoke the callable object with the given arguments, passed as a
-            PyObject[]. A PythonException is raised if the invokation fails.
+            PyObject[]. A PythonException is raised if the invocation fails.
             </remarks>
         </member>
         <member name="M:Python.Runtime.PyObject.Invoke(Python.Runtime.PyTuple)">
@@ -2418,7 +2619,7 @@
             </summary>
             <remarks>
             Invoke the callable object with the given arguments, passed as a
-            Python tuple. A PythonException is raised if the invokation fails.
+            Python tuple. A PythonException is raised if the invocation fails.
             </remarks>
         </member>
         <member name="M:Python.Runtime.PyObject.Invoke(Python.Runtime.PyObject[],Python.Runtime.PyDict)">
@@ -2427,7 +2628,7 @@
             </summary>
             <remarks>
             Invoke the callable object with the given positional and keyword
-            arguments. A PythonException is raised if the invokation fails.
+            arguments. A PythonException is raised if the invocation fails.
             </remarks>
         </member>
         <member name="M:Python.Runtime.PyObject.Invoke(Python.Runtime.PyTuple,Python.Runtime.PyDict)">
@@ -2436,7 +2637,7 @@
             </summary>
             <remarks>
             Invoke the callable object with the given positional and keyword
-            arguments. A PythonException is raised if the invokation fails.
+            arguments. A PythonException is raised if the invocation fails.
             </remarks>
         </member>
         <member name="M:Python.Runtime.PyObject.InvokeMethod(System.String,Python.Runtime.PyObject[])">
@@ -2445,7 +2646,7 @@
             </summary>
             <remarks>
             Invoke the named method of the object with the given arguments.
-            A PythonException is raised if the invokation is unsuccessful.
+            A PythonException is raised if the invocation is unsuccessful.
             </remarks>
         </member>
         <member name="M:Python.Runtime.PyObject.InvokeMethod(System.String,Python.Runtime.PyTuple)">
@@ -2454,7 +2655,25 @@
             </summary>
             <remarks>
             Invoke the named method of the object with the given arguments.
-            A PythonException is raised if the invokation is unsuccessful.
+            A PythonException is raised if the invocation is unsuccessful.
+            </remarks>
+        </member>
+        <member name="M:Python.Runtime.PyObject.InvokeMethod(Python.Runtime.PyObject,Python.Runtime.PyObject[])">
+            <summary>
+            InvokeMethod Method
+            </summary>
+            <remarks>
+            Invoke the named method of the object with the given arguments.
+            A PythonException is raised if the invocation is unsuccessful.
+            </remarks>
+        </member>
+        <member name="M:Python.Runtime.PyObject.InvokeMethod(Python.Runtime.PyObject,Python.Runtime.PyTuple)">
+            <summary>
+            InvokeMethod Method
+            </summary>
+            <remarks>
+            Invoke the named method of the object with the given arguments.
+            A PythonException is raised if the invocation is unsuccessful.
             </remarks>
         </member>
         <member name="M:Python.Runtime.PyObject.InvokeMethod(System.String,Python.Runtime.PyObject[],Python.Runtime.PyDict)">
@@ -2464,7 +2683,7 @@
             <remarks>
             Invoke the named method of the object with the given arguments
             and keyword arguments. Keyword args are passed as a PyDict object.
-            A PythonException is raised if the invokation is unsuccessful.
+            A PythonException is raised if the invocation is unsuccessful.
             </remarks>
         </member>
         <member name="M:Python.Runtime.PyObject.InvokeMethod(System.String,Python.Runtime.PyTuple,Python.Runtime.PyDict)">
@@ -2474,7 +2693,7 @@
             <remarks>
             Invoke the named method of the object with the given arguments
             and keyword arguments. Keyword args are passed as a PyDict object.
-            A PythonException is raised if the invokation is unsuccessful.
+            A PythonException is raised if the invocation is unsuccessful.
             </remarks>
         </member>
         <member name="M:Python.Runtime.PyObject.IsInstance(Python.Runtime.PyObject)">
@@ -2522,6 +2741,11 @@
             This method always succeeds.
             </remarks>
         </member>
+        <member name="M:Python.Runtime.PyObject.IsNone">
+            <summary>
+            Return true if the object is None
+            </summary>
+        </member>
         <member name="M:Python.Runtime.PyObject.Dir">
             <summary>
             Dir Method
@@ -2567,6 +2791,15 @@
             hash as computed by Python, equivalent to the Python expression
             "hash(obj)".
             </remarks>
+        </member>
+        <member name="M:Python.Runtime.PyObject.GetDynamicMemberNames">
+            <summary>
+            Returns the enumeration of all dynamic member names.
+            </summary>
+            <remarks>
+            This method exists for debugging purposes only.
+            </remarks>
+            <returns>A sequence that contains dynamic member names.</returns>
         </member>
         <member name="T:Python.Runtime.PyGILAttribute">
             <summary>
@@ -2959,7 +3192,14 @@
             This class provides the public interface of the Python runtime.
             </summary>
         </member>
-        <member name="M:Python.Runtime.PythonEngine.Initialize(System.Collections.Generic.IEnumerable{System.String},System.Boolean)">
+        <member name="M:Python.Runtime.PythonEngine.SetNoSiteFlag">
+            <summary>
+            Set the NoSiteFlag to disable loading the site module.
+            Must be called before Initialize.
+            https://docs.python.org/3/c-api/init.html#c.Py_NoSiteFlag
+            </summary>
+        </member>
+        <member name="M:Python.Runtime.PythonEngine.Initialize(System.Collections.Generic.IEnumerable{System.String},System.Boolean,System.Boolean)">
             <summary>
             Initialize Method
             </summary>
@@ -2968,6 +3208,7 @@
             more than once, though initialization will only happen on the
             first call. It is *not* necessary to hold the Python global
             interpreter lock (GIL) to call this method.
+            initSigs can be set to 1 to do default python signal configuration. This will override the way signals are handled by the application.
             </remarks>
         </member>
         <member name="M:Python.Runtime.PythonEngine.InitExt">
@@ -2986,6 +3227,47 @@
             Python runtime can no longer be used in the current process
             after calling the Shutdown method.
             </remarks>
+        </member>
+        <member name="T:Python.Runtime.PythonEngine.ShutdownHandler">
+             <summary>
+             Called when the engine is shut down.
+            
+             Shutdown handlers are run in reverse order they were added, so that
+             resources available when running a shutdown handler are the same as
+             what was available when it was added.
+             </summary>
+        </member>
+        <member name="M:Python.Runtime.PythonEngine.AddShutdownHandler(Python.Runtime.PythonEngine.ShutdownHandler)">
+             <summary>
+             Add a function to be called when the engine is shut down.
+            
+             Shutdown handlers are executed in the opposite order they were
+             added, so that you can be sure that everything that was initialized
+             when you added the handler is still initialized when you need to shut
+             down.
+            
+             If the same shutdown handler is added several times, it will be run
+             several times.
+            
+             Don't add shutdown handlers while running a shutdown handler.
+             </summary>
+        </member>
+        <member name="M:Python.Runtime.PythonEngine.RemoveShutdownHandler(Python.Runtime.PythonEngine.ShutdownHandler)">
+             <summary>
+             Remove a shutdown handler.
+            
+             If the same shutdown handler is added several times, only the last
+             one is removed.
+            
+             Don't remove shutdown handlers while running a shutdown handler.
+             </summary>
+        </member>
+        <member name="M:Python.Runtime.PythonEngine.ExecuteShutdownHandlers">
+             <summary>
+             Run all the shutdown handlers.
+            
+             They're run in opposite order they were added.
+             </summary>
         </member>
         <member name="M:Python.Runtime.PythonEngine.AcquireLock">
             <summary>
@@ -3156,6 +3438,12 @@
             Python error type name.
             </summary>
         </member>
+        <member name="M:Python.Runtime.PythonException.Format">
+            <summary>
+            Formats this PythonException object into a message as would be printed
+            out via the Python console. See traceback.format_exception
+            </summary>
+        </member>
         <member name="M:Python.Runtime.PythonException.Dispose">
             <summary>
             Dispose Method
@@ -3241,6 +3529,16 @@
             equivalent to the Python expression "tuple(object)".
             </remarks>
         </member>
+        <member name="M:Python.Runtime.ReferenceExtensions.IsNone(Python.Runtime.NewReference@)">
+            <summary>
+            Checks if the reference points to Python object <c>None</c>.
+            </summary>
+        </member>
+        <member name="M:Python.Runtime.ReferenceExtensions.IsNone(Python.Runtime.BorrowedReference)">
+            <summary>
+            Checks if the reference points to Python object <c>None</c>.
+            </summary>
+        </member>
         <member name="T:Python.Runtime.Runtime">
             <summary>
             Encapsulates the low-level Python C API. Note that it is
@@ -3254,15 +3552,43 @@
             methods prior to PEP393. Only used for PY27.
             </summary>
         </member>
+        <member name="P:Python.Runtime.Runtime.OperatingSystem">
+            <summary>
+            Gets the operating system as reported by python's platform.system().
+            </summary>
+        </member>
+        <member name="F:Python.Runtime.Runtime.MachineTypeMapping">
+            <summary>
+            Map lower-case version of the python machine name to the processor
+            type. There are aliases, e.g. x86_64 and amd64 are two names for
+            the same thing. Make sure to lower-case the search string, because
+            capitalization can differ.
+            </summary>
+        </member>
+        <member name="P:Python.Runtime.Runtime.Machine">
+            <summary>
+            Gets the machine architecture as reported by python's platform.machine().
+            </summary>
+        </member>
         <member name="F:Python.Runtime.Runtime.PyEncoding">
             <summary>
             Encoding to use to convert Unicode to/from Managed to Native
             </summary>
         </member>
-        <member name="M:Python.Runtime.Runtime.Initialize">
+        <member name="M:Python.Runtime.Runtime.Initialize(System.Boolean)">
             <summary>
             Initialize the runtime...
             </summary>
+        </member>
+        <member name="M:Python.Runtime.Runtime.InitializePlatformData">
+             <summary>
+             Initializes the data about platforms.
+            
+             This must be the last step when initializing the runtime:
+             GetManagedString needs to have the cached values for types.
+             But it must run before initializing anything outside the runtime
+             because those rely on the platform data.
+             </summary>
         </member>
         <member name="M:Python.Runtime.Runtime.CheckExceptionOccurred">
             <summary>
@@ -3280,6 +3606,11 @@
             (mostly for heavily used methods).
             </summary>
         </member>
+        <member name="M:Python.Runtime.Runtime.SelfIncRef(System.IntPtr)">
+            <summary>
+            Increase Python's ref counter for the given object, and get the object back.
+            </summary>
+        </member>
         <member name="M:Python.Runtime.Runtime.Py_IncRef(System.IntPtr)">
             <summary>
             Export of Macro Py_XIncRef. Use XIncref instead.
@@ -3293,6 +3624,25 @@
             Limit this function usage for Testing and Py_Debug builds
             </summary>
             <param name="ob">PyObject Ptr</param>
+        </member>
+        <member name="M:Python.Runtime.Runtime.Py_CompileString(System.String,System.String,System.Int32)">
+            <summary>
+            Return value: New reference.
+            This is a simplified interface to Py_CompileStringFlags() below, leaving flags set to NULL.
+            </summary>
+        </member>
+        <member name="M:Python.Runtime.Runtime.Py_CompileStringFlags(System.String,System.String,System.Int32,System.IntPtr)">
+            <summary>
+            Return value: New reference.
+            This is a simplified interface to Py_CompileStringExFlags() below, with optimize set to -1.
+            </summary>
+        </member>
+        <member name="M:Python.Runtime.Runtime.Py_CompileStringExFlags(System.String,System.String,System.Int32,System.IntPtr,System.Int32)">
+            <summary>
+            Return value: New reference.
+            Like Py_CompileStringObject(), but filename is a byte string decoded from the filesystem encoding(os.fsdecode()).
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:Python.Runtime.Runtime.PyObject_TYPE(System.IntPtr)">
             <summary>
@@ -3327,6 +3677,22 @@
             </remarks>
             <param name="op">PyStringType or PyUnicodeType object to convert</param>
             <returns>Managed String</returns>
+        </member>
+        <member name="M:Python.Runtime.Runtime.PyImport_ImportModule(System.String)">
+            <summary>
+            Return value: New reference.
+            </summary>
+        </member>
+        <member name="M:Python.Runtime.Runtime.GetBuiltins">
+            <summary>
+            Return value: New reference.
+            </summary>
+        </member>
+        <member name="M:Python.Runtime.PyReferenceCollection.Add(System.IntPtr,System.Action)">
+            <summary>
+            Record obj's address to release the obj in the future,
+            obj must alive before calling Release.
+            </summary>
         </member>
         <member name="T:Python.Runtime.TypeManager">
             <summary>
@@ -3364,12 +3730,108 @@
             Utility method to allocate a type object &amp; do basic initialization.
             </summary>
         </member>
+        <member name="F:Python.Runtime.TypeManager.NativeCodePage">
+             <summary>
+             Initialized by InitializeNativeCodePage.
+            
+             This points to a page of memory allocated using mmap or VirtualAlloc
+             (depending on the system), and marked read and execute (not write).
+             Very much on purpose, the page is *not* released on a shutdown and
+             is instead leaked. See the TestDomainReload test case.
+            
+             The contents of the page are two native functions: one that returns 0,
+             one that returns 1.
+            
+             If python didn't keep its gc list through a Py_Finalize we could remove
+             this entire section.
+             </summary>
+        </member>
+        <member name="T:Python.Runtime.TypeManager.NativeCode">
+             <summary>
+             Structure to describe native code.
+            
+             Use NativeCode.Active to get the native code for the current platform.
+            
+             Generate the code by creating the following C code:
+             <code>
+             int Return0() { return 0; }
+             int Return1() { return 1; }
+             </code>
+             Then compiling on the target platform, e.g. with gcc or clang:
+             <code>cc -c -fomit-frame-pointer -O2 foo.c</code>
+             And then analyzing the resulting functions with a hex editor, e.g.:
+             <code>objdump -disassemble foo.o</code>
+             </summary>
+        </member>
+        <member name="P:Python.Runtime.TypeManager.NativeCode.Code">
+            <summary>
+            The code, as a string of bytes.
+            </summary>
+        </member>
+        <member name="P:Python.Runtime.TypeManager.NativeCode.Return0">
+            <summary>
+            Where does the "return 0" function start?
+            </summary>
+        </member>
+        <member name="P:Python.Runtime.TypeManager.NativeCode.Return1">
+            <summary>
+            Where does the "return 1" function start?
+            </summary>
+        </member>
+        <member name="F:Python.Runtime.TypeManager.NativeCode.X86_64">
+            <summary>
+            Code for x86_64. See the class comment for how it was generated.
+            </summary>
+        </member>
+        <member name="F:Python.Runtime.TypeManager.NativeCode.I386">
+             <summary>
+             Code for X86.
+            
+             It's bitwise identical to X86_64, so we just point to it.
+             <see cref="F:Python.Runtime.TypeManager.NativeCode.X86_64"/>
+             </summary>
+        </member>
+        <member name="T:Python.Runtime.TypeManager.IMemoryMapper">
+            <summary>
+            Platform-dependent mmap and mprotect.
+            </summary>
+        </member>
+        <member name="M:Python.Runtime.TypeManager.IMemoryMapper.MapWriteable(System.Int32)">
+            <summary>
+            Map at least numBytes of memory. Mark the page read-write (but not exec).
+            </summary>
+        </member>
+        <member name="M:Python.Runtime.TypeManager.IMemoryMapper.SetReadExec(System.IntPtr,System.Int32)">
+            <summary>
+            Sets the mapped memory to be read-exec (but not write).
+            </summary>
+        </member>
+        <member name="M:Python.Runtime.TypeManager.InitializeNativeCodePage">
+             <summary>
+             Initializes the native code page.
+            
+             Safe to call if we already initialized (this function is idempotent).
+             <see cref="F:Python.Runtime.TypeManager.NativeCodePage"/>
+             </summary>
+        </member>
         <member name="M:Python.Runtime.TypeManager.InitializeSlots(System.IntPtr,System.Type)">
             <summary>
             Given a newly allocated Python type object and a managed Type that
             provides the implementation for the type, connect the type slots of
             the Python object to the managed methods of the implementing Type.
             </summary>
+        </member>
+        <member name="M:Python.Runtime.TypeManager.InitializeSlot(System.IntPtr,System.IntPtr,System.String)">
+             <summary>
+             Helper for InitializeSlots.
+            
+             Initializes one slot to point to a function pointer.
+             The function pointer might be a thunk for C#, or it may be
+             an address in the NativeCodePage.
+             </summary>
+             <param name="type">Type being initialized.</param>
+             <param name="slot">Function pointer.</param>
+             <param name="name">Name of the method.</param>
         </member>
         <member name="M:Python.Runtime.TypeManager.InitMethods(System.IntPtr,System.Type)">
             <summary>
@@ -3386,6 +3848,23 @@
         <member name="T:Python.Runtime.TypeMethod">
             <summary>
             Implements a Python type that provides access to CLR object methods.
+            </summary>
+        </member>
+        <member name="M:Python.Runtime.Util.Coalesce(System.IntPtr,System.IntPtr)">
+            <summary>
+            Null-coalesce: if <paramref name="primary"/> parameter is not
+            <see cref="F:System.IntPtr.Zero"/>, return it. Otherwise return <paramref name="fallback"/>.
+            </summary>
+        </member>
+        <member name="T:Python.Runtime.Platform.OperatingSystemType">
+            <summary>
+            Operating system type as reported by Python.
+            </summary>
+        </member>
+        <member name="M:Python.Runtime.Slots.mp_length_slot.mp_length(System.IntPtr)">
+            <summary>
+            Implements __len__ for classes that implement ICollection
+            (this includes any IList implementer or Array subclass)
             </summary>
         </member>
     </members>

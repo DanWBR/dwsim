@@ -268,68 +268,68 @@ Imports IronPython.Hosting
         If Not Settings.PythonInitialized Then
 
             Dim t As Task = Task.Factory.StartNew(Sub()
-                                                      fsheet.RunCodeOnUIThread(Sub()
-                                                                                   If Not GlobalSettings.Settings.IsRunningOnMono() Then
-                                                                                       PythonEngine.PythonHome = GlobalSettings.Settings.PythonPath
-                                                                                   End If
-                                                                                   PythonEngine.Initialize()
-                                                                                   Settings.PythonInitialized = True
-                                                                               End Sub)
+                                                      fsheet.UIThread(Sub()
+                                                                          If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                                                                              PythonEngine.PythonHome = GlobalSettings.Settings.PythonPath
+                                                                          End If
+                                                                          PythonEngine.Initialize()
+                                                                          Settings.PythonInitialized = True
+                                                                      End Sub)
                                                   End Sub)
             t.Wait()
 
             Dim t2 As Task = Task.Factory.StartNew(Sub()
-                                                       fsheet.RunCodeOnUIThread(Sub()
-                                                                                    PythonEngine.BeginAllowThreads()
-                                                                                End Sub)
+                                                       fsheet.UIThread(Sub()
+                                                                           PythonEngine.BeginAllowThreads()
+                                                                       End Sub)
                                                    End Sub)
             t2.Wait()
 
         End If
 
         Dim t3 As Task = Task.Factory.StartNew(Sub()
-                                                   fsheet.RunCodeOnUIThread(Sub()
-                                                                                Using Py.GIL
+                                                   fsheet.UIThread(Sub()
+                                                                       Using Py.GIL
 
-                                                                                    Try
+                                                                           Try
 
-                                                                                        Dim sys As Object = PythonEngine.ImportModule("sys")
+                                                                               Dim sys As Object = PythonEngine.ImportModule("sys")
 
-                                                                                        If Not GlobalSettings.Settings.IsRunningOnMono() Then
-                                                                                            Dim codeToRedirectOutput As String = "import sys" & vbCrLf + "from io import BytesIO as StringIO" & vbCrLf + "sys.stdout = mystdout = StringIO()" & vbCrLf + "sys.stdout.flush()" & vbCrLf + "sys.stderr = mystderr = StringIO()" & vbCrLf + "sys.stderr.flush()"
-                                                                                            PythonEngine.RunSimpleString(codeToRedirectOutput)
-                                                                                        End If
+                                                                               If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                                                                                   Dim codeToRedirectOutput As String = "import sys" & vbCrLf + "from io import BytesIO as StringIO" & vbCrLf + "sys.stdout = mystdout = StringIO()" & vbCrLf + "sys.stdout.flush()" & vbCrLf + "sys.stderr = mystderr = StringIO()" & vbCrLf + "sys.stderr.flush()"
+                                                                                   PythonEngine.RunSimpleString(codeToRedirectOutput)
+                                                                               End If
 
-                                                                                        Dim locals As New PyDict()
+                                                                               Dim locals As New PyDict()
 
-                                                                                        locals.SetItem("Plugins", My.Application.UtilityPlugins.ToPython)
-                                                                                        locals.SetItem("Flowsheet", fsheet.ToPython)
-                                                                                        locals.SetItem("Spreadsheet", fsheet.FormSpreadsheet.Spreadsheet.ToPython)
-                                                                                        Dim Solver As New FlowsheetSolver.FlowsheetSolver
-                                                                                        locals.SetItem("Solver", Solver.ToPython)
+                                                                               locals.SetItem("Plugins", My.Application.UtilityPlugins.ToPython)
+                                                                               locals.SetItem("Flowsheet", fsheet.ToPython)
+                                                                               locals.SetItem("Spreadsheet", fsheet.FormSpreadsheet.Spreadsheet.ToPython)
+                                                                               Dim Solver As New FlowsheetSolver.FlowsheetSolver
+                                                                               locals.SetItem("Solver", Solver.ToPython)
 
-                                                                                        PythonEngine.Exec(scripttext, Nothing, locals.Handle)
+                                                                               PythonEngine.Exec(scripttext, Nothing, locals.Handle)
 
-                                                                                        If Not GlobalSettings.Settings.IsRunningOnMono() Then
-                                                                                            fsheet.WriteToLog(sys.stdout.getvalue().ToString, Color.Blue, MessageType.Information)
-                                                                                        End If
+                                                                               If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                                                                                   fsheet.WriteToLog(sys.stdout.getvalue().ToString, Color.Blue, MessageType.Information)
+                                                                               End If
 
-                                                                                    Catch ex As Exception
+                                                                           Catch ex As Exception
 
-                                                                                        If My.Application.CommandLineMode Then
-                                                                                            Console.WriteLine()
-                                                                                            Console.WriteLine("Error running script: " & ex.ToString)
-                                                                                            Console.WriteLine()
-                                                                                        Else
-                                                                                            fsheet.WriteToLog("Error running script: " & ex.Message.ToString, Color.Red, MessageType.GeneralError)
-                                                                                        End If
+                                                                               If My.Application.CommandLineMode Then
+                                                                                   Console.WriteLine()
+                                                                                   Console.WriteLine("Error running script: " & ex.ToString)
+                                                                                   Console.WriteLine()
+                                                                               Else
+                                                                                   fsheet.WriteToLog("Error running script: " & ex.Message.ToString, Color.Red, MessageType.GeneralError)
+                                                                               End If
 
-                                                                                    Finally
+                                                                           Finally
 
-                                                                                    End Try
+                                                                           End Try
 
-                                                                                End Using
-                                                                            End Sub)
+                                                                       End Using
+                                                                   End Sub)
                                                End Sub)
         t3.Wait()
 
