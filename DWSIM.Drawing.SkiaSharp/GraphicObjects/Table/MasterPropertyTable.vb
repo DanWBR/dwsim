@@ -264,7 +264,8 @@ Namespace GraphicObjects.Tables
                                     mypropid = p
                                     Dim value As Object = myobj.GetPropertyValue(mypropid, su)
                                     If Double.TryParse(value, New Double) Then
-                                        m_items(kvp.Key).Add(New NodeItem(Flowsheet.GetTranslatedString(kvp2.Key), Format(Double.Parse(value), nf), myobj.GetPropertyUnit(mypropid, su), 0, 0, ""))
+                                        Dim val = Convert.ToDouble(value)
+                                        m_items(kvp.Key).Add(New NodeItem(Flowsheet.GetTranslatedString(kvp2.Key), val.ToString(nf), myobj.GetPropertyUnit(mypropid, su), 0, 0, ""))
                                     Else
                                         m_items(kvp.Key).Add(New NodeItem(Flowsheet.GetTranslatedString(kvp2.Key), value, myobj.GetPropertyUnit(mypropid, su), 0, 0, ""))
                                     End If
