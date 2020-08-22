@@ -302,10 +302,11 @@ Namespace UnitOperations
 
                                                        If Not Settings.PythonInitialized Then
 
-                                                           PythonEngine.Initialize()
-                                                           Settings.PythonInitialized = True
-
-                                                           PythonEngine.BeginAllowThreads()
+                                                           FlowSheet.RunCodeOnUIThread(Sub()
+                                                                                           PythonEngine.Initialize()
+                                                                                           Settings.PythonInitialized = True
+                                                                                           PythonEngine.BeginAllowThreads()
+                                                                                       End Sub)
 
                                                        End If
 

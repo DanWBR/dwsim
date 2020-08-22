@@ -2500,10 +2500,11 @@ Label_00CC:
 
                                                If Not GlobalSettings.Settings.PythonInitialized Then
 
-                                                   PythonEngine.Initialize()
-                                                   GlobalSettings.Settings.PythonInitialized = True
-
-                                                   PythonEngine.BeginAllowThreads()
+                                                   RunCodeOnUIThread(Sub()
+                                                                         PythonEngine.Initialize()
+                                                                         GlobalSettings.Settings.PythonInitialized = True
+                                                                         PythonEngine.BeginAllowThreads()
+                                                                     End Sub)
 
                                                End If
 

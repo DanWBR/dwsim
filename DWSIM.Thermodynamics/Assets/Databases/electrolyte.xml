@@ -1688,4 +1688,13 @@
     <HydratedSalt>False</HydratedSalt>
     <Charge>-1</Charge>
   </compound>
+  <compound>
+    <Name>Hydrogen sulfate (ion)</Name>
+    <Formula>HSO4-</Formula>
+    <MW>97.07</MW>
+    <Ion>True</Ion>
+    <Salt>False</Salt>
+    <HydratedSalt>False</HydratedSalt>
+    <Charge>-1</Charge>
+  </compound>
 </compounds>
