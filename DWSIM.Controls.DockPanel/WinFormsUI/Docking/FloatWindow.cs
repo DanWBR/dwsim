@@ -33,9 +33,9 @@ namespace WeifenLuo.WinFormsUI.Docking
             FormBorderStyle = FormBorderStyle.Sizable;
             MaximizeBox = false;
             MinimizeBox = false;
-            ShowInTaskbar = false;
+            ShowInTaskbar = true;
             ShowIcon = false;
-            TopMost = true;
+            TopMost = false;
             if (dockPanel.RightToLeft != RightToLeft)
                 RightToLeft = dockPanel.RightToLeft;
             if (RightToLeftLayout != dockPanel.RightToLeftLayout)
