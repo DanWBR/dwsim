@@ -3068,6 +3068,11 @@
     <None Include="Resources\icons8-ok.png" />
     <None Include="Resources\icons8-realtime.png" />
     <None Include="Resources\icons8-slider.png" />
+    <None Include="Resources\icons8-save.png" />
+    <None Include="Resources\icons8-save_as.png" />
+    <None Include="Resources\icons8-save_all.png" />
+    <None Include="Resources\icons8-live_folder.png" />
+    <None Include="Resources\icons8-new_file.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />
