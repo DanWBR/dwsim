@@ -902,6 +902,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Ativo/Inativo.
+        '''</summary>
+        Friend Shared ReadOnly Property AtivoInativo() As String
+            Get
+                Return ResourceManager.GetString("AtivoInativo", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Atraso na aceleração.
         '''</summary>
         Friend Shared ReadOnly Property Atrasonaacelerao() As String

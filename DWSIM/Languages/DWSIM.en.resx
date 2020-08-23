@@ -5699,4 +5699,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="DynamicsDisabled" xml:space="preserve">
     <value>Dynamic Mode is inactive.</value>
   </data>
+  <data name="AtivoInativo" xml:space="preserve">
+    <value>Active/Inactive</value>
+  </data>
 </root>
