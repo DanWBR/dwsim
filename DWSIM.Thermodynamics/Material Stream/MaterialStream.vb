@@ -2082,6 +2082,8 @@ Namespace Streams
                     proplist.Add("PROP_MS_153")
                     proplist.Add("PROP_MS_246")
                     proplist.Add("PROP_MS_247")
+                    proplist.Add("PROP_MS_248")
+                    proplist.Add("PROP_MS_249")
                     For i = 155 To 231
                         proplist.Add("PROP_MS_" + CStr(i))
                     Next

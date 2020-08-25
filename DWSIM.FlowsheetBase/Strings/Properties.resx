@@ -411,7 +411,7 @@
     <comment>1</comment>
   </data>
   <data name="PROP_MS_10" xml:space="preserve">
-    <value>Mixture Molar Entropy</value>
+    <value>Molar Entropy (Mixture)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_100" xml:space="preserve">
@@ -455,7 +455,7 @@
     <comment>0</comment>
   </data>
   <data name="PROP_MS_11" xml:space="preserve">
-    <value>Mixture Thermal Conductivity</value>
+    <value>Thermal Conductivity (Mixture)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_110" xml:space="preserve">
@@ -1057,7 +1057,7 @@
     <comment>0</comment>
   </data>
   <data name="PROP_MS_5" xml:space="preserve">
-    <value>Mixture Density (Liquid 1)</value>
+    <value>Density (Mixture)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_50" xml:space="preserve">

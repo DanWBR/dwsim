@@ -26,33 +26,34 @@ Namespace PropertyPackages.Auxiliary
 
     <System.Serializable()> Public Class Electrolyte
 
-        Function MIAC(Vx As Double(), T As Double, cprops As List(Of Interfaces.ICompoundConstantProperties)) As Double
+        Function MIAC(Vxl As Double(), Vxs As Double(), T As Double, cprops As List(Of Interfaces.ICompoundConstantProperties)) As Double
 
-            Dim n As Integer = Vx.Length - 1
+            Dim n As Integer = Vxl.Length - 1
             Dim i As Integer
             Dim Im As Double
 
             Im = 0.0#
             For i = 0 To n
-                Im += 0.5 * cprops(i).Charge ^ 2 * Vx(i)
+                Im += 0.5 * cprops(i).Charge ^ 2 * Vxl(i)
             Next
 
-            Dim DCsolv, result As Double
+            Dim DCsolv, result1, result2 As Double
 
             DCsolv = 289.82 - 1.148 * T + 0.0017843 * T ^ 2 + -0.000001053 * T ^ 3
 
-            result = -1824000.0 * Im ^ 0.5 / ((DCsolv * T) ^ (3 / 2))
+            result1 = -1824000.0 * Im ^ 0.5 / ((DCsolv * T) ^ (3 / 2))
 
             i = 0
             Dim sums As Double = 0
             Do
                 If cprops(i).IsSalt Then
-                    result += Vx(i) * Math.Abs(cprops(i).PositiveIonStoichCoeff * cprops(i).NegativeIonStoichCoeff)
-                    sums += Vx(i)
+                    result2 += Vxs(i) * Math.Abs(cprops(i).PositiveIonStoichCoeff * cprops(i).NegativeIonStoichCoeff)
+                    sums += Vxs(i)
                 End If
-            Loop
+                i += 1
+            Loop Until i = n + 1
 
-            Return Math.Exp(result / sums)
+            Return Math.Exp(result1 * result2 / sums)
 
         End Function
 
