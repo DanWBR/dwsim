@@ -5646,4 +5646,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="AtivoInativo" xml:space="preserve">
     <value>Ativo/Inativo</value>
   </data>
+  <data name="MIAC" xml:space="preserve">
+    <value>Coeficiente de Atividade Iônico Médio</value>
+  </data>
 </root>

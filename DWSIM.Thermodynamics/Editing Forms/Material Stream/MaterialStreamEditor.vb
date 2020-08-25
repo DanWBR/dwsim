@@ -622,6 +622,9 @@ Public Class MaterialStreamEditor
                     refval = MatStream.Phases(3).Properties.osmoticCoefficient.GetValueOrDefault
                     .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("OsmoticCoefficient"), refval, ""})
 
+                    refval = MatStream.Phases(3).Properties.mean_ionic_acitivty_coefficient.GetValueOrDefault
+                    .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("MIAC"), refval, ""})
+
                     refval = MatStream.Phases(3).Properties.freezingPoint.GetValueOrDefault
                     val = Converter.ConvertFromSI(units.temperature, refval)
                     .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("FreezingPoint"), val, units.temperature})

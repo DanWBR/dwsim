@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 6.1 Update 3
+Version 6.1 Update 4
 Copyright (c) 2017-2020 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,13 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/windows
+
+Version 6.1 Update 4
+
+- [CHG] Updated Python.NET library on Windows to match Python 3.7 runtime
+- [FIX] Fixed a bug with master property table
+- [FIX] Fixed Excel Add-In
+- [FIX] Fixed issues 15, 16, 17 and 19 (https://github.com/DanWBR/dwsim6/issues)
 
 Version 6.1 Update 3
 

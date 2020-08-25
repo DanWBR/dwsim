@@ -16,11 +16,8 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports System.Collections.Generic
 Imports FileHelpers
 Imports System.Math
-Imports System.Linq
-
 
 Namespace PropertyPackages.Auxiliary
 
@@ -153,16 +150,6 @@ Namespace PropertyPackages.Auxiliary
             For Each exuniquacdc In exuniquacdcc
                 Me.DielectricConstants.Add(exuniquacdc.Name, exuniquacdc.Clone)
             Next
-
-            exuniquac = Nothing
-            exuniquacc = Nothing
-            exuniquacrq = Nothing
-            exuniquacrqc = Nothing
-            exuniquacdc = Nothing
-            exuniquacdcc = Nothing
-            fh2 = Nothing
-            fh3 = Nothing
-            fh4 = Nothing
 
         End Sub
 

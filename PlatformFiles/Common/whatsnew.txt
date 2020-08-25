@@ -1,7 +1,6 @@
-Version 6.1 Update 3
+Version 6.1 Update 4
 
-- [NEW] Added an option to force reset of all objects before running a Schedule (Dynamics)
-- [NEW] Added an option to close all editors (Cross-Platform UI)
-- [CHG] Updated Gibbs/Equilibrium Reactor solvers
-- [FIX] Fixed PID Controller not associating with Linked scripts
-- [FIX] Other bug fixes
+- [CHG] Updated Python.NET library on Windows to match Python 3.7 runtime
+- [FIX] Fixed a bug with master property table
+- [FIX] Fixed Excel Add-In
+- [FIX] Fixed issues 15, 16, 17 and 19 (https://github.com/DanWBR/dwsim6/issues)

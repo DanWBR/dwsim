@@ -415,11 +415,11 @@
     <comment>0</comment>
   </data>
   <data name="PROP_MS_100" xml:space="preserve">
-    <value>Aqueous Phase Mass Fraction</value>
+    <value>Aqueous Mass Fraction</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_101" xml:space="preserve">
-    <value>Aqueous Phase Volumetric Fraction</value>
+    <value>Aqueous Volumetric Fraction</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_102" xml:space="preserve">
@@ -439,19 +439,19 @@
     <comment>1</comment>
   </data>
   <data name="PROP_MS_106" xml:space="preserve">
-    <value>Molar Fraction (Vapor Phase)</value>
+    <value>Molar Fraction (Vapor)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_107" xml:space="preserve">
-    <value>Molar Fraction (Overall Liquid Phase)</value>
+    <value>Molar Fraction (Overall Liquid)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_108" xml:space="preserve">
-    <value>Molar Fraction (Liquid Phase 1)</value>
+    <value>Molar Fraction (Liquid 1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_109" xml:space="preserve">
-    <value>Molar Fraction (Liquid Phase 2)</value>
+    <value>Molar Fraction (Liquid 2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_11" xml:space="preserve">
@@ -459,71 +459,71 @@
     <comment>0</comment>
   </data>
   <data name="PROP_MS_110" xml:space="preserve">
-    <value>Molar Fraction (Aqueous Phase)</value>
+    <value>Molar Fraction (Aqueous)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_111" xml:space="preserve">
-    <value>Mass Fraction (Vapor Phase)</value>
+    <value>Mass Fraction (Vapor)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_112" xml:space="preserve">
-    <value>Mass Fraction (Overall Liquid Phase)</value>
+    <value>Mass Fraction (Overall Liquid)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_113" xml:space="preserve">
-    <value>Mass Fraction (Liquid Phase 1)</value>
+    <value>Mass Fraction (Liquid 1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_114" xml:space="preserve">
-    <value>Mass Fraction (Liquid Phase 2)</value>
+    <value>Mass Fraction (Liquid 2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_115" xml:space="preserve">
-    <value>Mass Fraction (Aqueous Phase)</value>
+    <value>Mass Fraction (Aqueous)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_116" xml:space="preserve">
-    <value>Molar Flow (Vapor Phase)</value>
+    <value>Molar Flow (Vapor)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_117" xml:space="preserve">
-    <value>Molar Flow (Overall Liquid Phase)</value>
+    <value>Molar Flow (Overall Liquid)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_118" xml:space="preserve">
-    <value>Molar Flow (Liquid Phase 1)</value>
+    <value>Molar Flow (Liquid 1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_119" xml:space="preserve">
-    <value>Molar Flow (Liquid Phase 2)</value>
+    <value>Molar Flow (Liquid 2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_12" xml:space="preserve">
-    <value>Vapor Phase Density</value>
+    <value>Density (Vapor)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_120" xml:space="preserve">
-    <value>Molar Flow (Aqueous Phase)</value>
+    <value>Molar Flow (Aqueous)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_121" xml:space="preserve">
-    <value>Mass Flow (Vapor Phase)</value>
+    <value>Mass Flow (Vapor)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_122" xml:space="preserve">
-    <value>Mass Flow (Overall Liquid Phase)</value>
+    <value>Mass Flow (Overall Liquid)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_123" xml:space="preserve">
-    <value>Mass Flow (Liquid Phase 1)</value>
+    <value>Mass Flow (Liquid 1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_124" xml:space="preserve">
-    <value>Mass Flow (Liquid Phase 2)</value>
+    <value>Mass Flow (Liquid 2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_125" xml:space="preserve">
-    <value>Mass Flow (Aqueous Phase)</value>
+    <value>Mass Flow (Aqueous)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_126" xml:space="preserve">
@@ -539,88 +539,88 @@
     <value>Dew Temperature at Stream Pressure</value>
   </data>
   <data name="PROP_MS_13" xml:space="preserve">
-    <value>Vapor Phase Molar Weight</value>
+    <value>Molecular Weight (Vapor)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_130" xml:space="preserve">
     <value>Phases</value>
   </data>
   <data name="PROP_MS_131" xml:space="preserve">
-    <value>Solid Phase Density</value>
+    <value>Density (Solid)</value>
   </data>
   <data name="PROP_MS_132" xml:space="preserve">
-    <value>Solid Phase Molar Weight</value>
+    <value>Molecular Weight (Solid)</value>
   </data>
   <data name="PROP_MS_133" xml:space="preserve">
-    <value>Solid Phase Specific Enthalpy</value>
+    <value>Specific Enthalpy (Solid)</value>
   </data>
   <data name="PROP_MS_134" xml:space="preserve">
-    <value>Solid Phase Specific Entropy</value>
+    <value>Specific Entropy (Solid)</value>
   </data>
   <data name="PROP_MS_135" xml:space="preserve">
-    <value>Solid Phase Molar Enthalpy</value>
+    <value>Molar Enthalpy (Solid)</value>
   </data>
   <data name="PROP_MS_136" xml:space="preserve">
-    <value>Solid Phase Molar Entropy</value>
+    <value>Molar Entropy (Solid)</value>
   </data>
   <data name="PROP_MS_137" xml:space="preserve">
-    <value>Solid Phase Thermal Conductivity</value>
+    <value>Thermal Conductivity (Solid)</value>
   </data>
   <data name="PROP_MS_138" xml:space="preserve">
-    <value>Solid Phase Kinematic Viscosity</value>
+    <value>Kinematic Viscosity (Solid)</value>
   </data>
   <data name="PROP_MS_139" xml:space="preserve">
-    <value>Solid Phase Dynamic Viscosity</value>
+    <value>Dynamic Viscosity (Solid)</value>
   </data>
   <data name="PROP_MS_14" xml:space="preserve">
-    <value>Vapor Phase Specific Enthalpy</value>
+    <value>Specific Enthalpy (Vapor)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_140" xml:space="preserve">
-    <value>Solid Phase Heat Capacity (Cp)</value>
+    <value>Solid Heat Capacity (Cp)</value>
   </data>
   <data name="PROP_MS_141" xml:space="preserve">
-    <value>Solid Phase Heat Capacity Ratio (Cp/Cv)</value>
+    <value>Solid Heat Capacity Ratio (Cp/Cv)</value>
   </data>
   <data name="PROP_MS_142" xml:space="preserve">
-    <value>Solid Phase Mass Flow</value>
+    <value>Mass Flow (Solid)</value>
   </data>
   <data name="PROP_MS_143" xml:space="preserve">
-    <value>Solid Phase Molar Flow</value>
+    <value>Molar Flow (Solid)</value>
   </data>
   <data name="PROP_MS_144" xml:space="preserve">
-    <value>Solid Phase Volumetric Flow</value>
+    <value>Volumetric Flow (Solid)</value>
   </data>
   <data name="PROP_MS_145" xml:space="preserve">
-    <value>Solid Phase Compressibility Factor</value>
+    <value>Compressibility Factor (Solid)</value>
   </data>
   <data name="PROP_MS_146" xml:space="preserve">
-    <value>Molar Fraction (Solid Phase)</value>
+    <value>Molar Fraction (Solid)</value>
   </data>
   <data name="PROP_MS_147" xml:space="preserve">
-    <value>Mass Fraction (Solid Phase)</value>
+    <value>Mass Fraction (Solid)</value>
   </data>
   <data name="PROP_MS_148" xml:space="preserve">
-    <value>Solid Phase Volumetric Fraction</value>
+    <value>Volumetric Fraction (Solid)</value>
   </data>
   <data name="PROP_MS_149" xml:space="preserve">
-    <value>Mole Fraction (Solid Phase)</value>
+    <value>Mole Fraction (Solid)</value>
   </data>
   <data name="PROP_MS_15" xml:space="preserve">
-    <value>Vapor Phase Specific Entropy</value>
+    <value>Specific Entropy (Vapor)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_150" xml:space="preserve">
-    <value>Mass Fraction (Solid Phase)</value>
+    <value>Mass Fraction (Solid)</value>
   </data>
   <data name="PROP_MS_151" xml:space="preserve">
-    <value>Mole Flow (Solid Phase)</value>
+    <value>Mole Flow (Solid)</value>
   </data>
   <data name="PROP_MS_152" xml:space="preserve">
-    <value>Mass Flow (Solid Phase)</value>
+    <value>Mass Flow (Solid)</value>
   </data>
   <data name="PROP_MS_153" xml:space="preserve">
-    <value>Liquid Phase 1 pH</value>
+    <value>pH (Liquid 1)</value>
   </data>
   <data name="PROP_MS_154" xml:space="preserve">
     <value>Energy Flow</value>
@@ -641,7 +641,7 @@
     <value>Internal Energy (Vapor)</value>
   </data>
   <data name="PROP_MS_16" xml:space="preserve">
-    <value>Vapor Phase Molar Enthalpy</value>
+    <value>Molar Enthalpy (Vapor)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_160" xml:space="preserve">
@@ -675,7 +675,7 @@
     <value>Bulk Modulus (Liquid 1)</value>
   </data>
   <data name="PROP_MS_17" xml:space="preserve">
-    <value>Vapor Phase Molar Entropy</value>
+    <value>Molar Entropy (Vapor)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_170" xml:space="preserve">
@@ -709,7 +709,7 @@
     <value>Internal Energy (Liquid 2)</value>
   </data>
   <data name="PROP_MS_18" xml:space="preserve">
-    <value>Vapor Phase Thermal Conductivity</value>
+    <value>Thermal Conductivity (Vapor)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_180" xml:space="preserve">
@@ -743,29 +743,29 @@
     <value>Isothermal Compressibility (Liquid 3)</value>
   </data>
   <data name="PROP_MS_19" xml:space="preserve">
-    <value>Vapor Phase Kinematic Viscosity</value>
+    <value>Kinematic Viscosity (Vapor)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_190" xml:space="preserve">
-    <value>Bulk Modulus (Aqueous Phase)</value>
+    <value>Bulk Modulus (Aqueous)</value>
   </data>
   <data name="PROP_MS_191" xml:space="preserve">
-    <value>Speed of Sound (Aqueous Phase)</value>
+    <value>Speed of Sound (Aqueous)</value>
   </data>
   <data name="PROP_MS_192" xml:space="preserve">
-    <value>Joule-Thomson Coefficient (Aqueous Phase)</value>
+    <value>Joule-Thomson Coefficient (Aqueous)</value>
   </data>
   <data name="PROP_MS_193" xml:space="preserve">
-    <value>Internal Energy (Aqueous Phase)</value>
+    <value>Internal Energy (Aqueous)</value>
   </data>
   <data name="PROP_MS_194" xml:space="preserve">
-    <value>Gibbs Free Energy (Aqueous Phase)</value>
+    <value>Gibbs Free Energy (Aqueous)</value>
   </data>
   <data name="PROP_MS_195" xml:space="preserve">
-    <value>Helmholtz Free Energy (Aqueous Phase)</value>
+    <value>Helmholtz Free Energy (Aqueous)</value>
   </data>
   <data name="PROP_MS_196" xml:space="preserve">
-    <value>Isothermal Compressibility (Aqueous Phase)</value>
+    <value>Isothermal Compressibility (Aqueous)</value>
   </data>
   <data name="PROP_MS_198" xml:space="preserve">
     <value>Bulk Modulus (Solid)</value>
@@ -778,7 +778,7 @@
     <comment>1</comment>
   </data>
   <data name="PROP_MS_20" xml:space="preserve">
-    <value>Vapor Phase Dynamic Viscosity</value>
+    <value>Dynamic Viscosity (Vapor)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_200" xml:space="preserve">
@@ -812,7 +812,7 @@
     <value>Molar Gibbs Free Energy (Mixture)</value>
   </data>
   <data name="PROP_MS_21" xml:space="preserve">
-    <value>Vapor Phase Heat Capacity (Cp)</value>
+    <value>Heat Capacity (Vapor)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_210" xml:space="preserve">
@@ -846,7 +846,7 @@
     <value>Molar Helmholtz Free Energy (Liquid 1)</value>
   </data>
   <data name="PROP_MS_22" xml:space="preserve">
-    <value>Vapor Phase Heat Capacity Ratio (Cp/Cv)</value>
+    <value>Heat Capacity Ratio (Vapor)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_220" xml:space="preserve">
@@ -880,7 +880,7 @@
     <value>Molar Internal Energy (Solid)</value>
   </data>
   <data name="PROP_MS_23" xml:space="preserve">
-    <value>Vapor Phase Mass Flow</value>
+    <value>Mass Flow (Vapor)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_230" xml:space="preserve">
@@ -914,7 +914,7 @@
     <value>Molarity (Mixture)</value>
   </data>
   <data name="PROP_MS_24" xml:space="preserve">
-    <value>Vapor Phase Molar Flow</value>
+    <value>Molar Flow (Vapor)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_240" xml:space="preserve">
@@ -936,24 +936,36 @@
   <data name="PROP_MS_245" xml:space="preserve">
     <value>Molarity (Solid Phase)</value>
   </data>
+  <data name="PROP_MS_246" xml:space="preserve">
+    <value>Osmotic Coefficient (Liquid 1)</value>
+  </data>
+  <data name="PROP_MS_247" xml:space="preserve">
+    <value>Mean Ionic Activity Coefficient (Liquid 1)</value>
+  </data>
+  <data name="PROP_MS_248" xml:space="preserve">
+    <value>Freezing Point (Liquid 1)</value>
+  </data>
+  <data name="PROP_MS_249" xml:space="preserve">
+    <value>Freezing Point Depression (Liquid 1)</value>
+  </data>
   <data name="PROP_MS_25" xml:space="preserve">
-    <value>Vapor Phase Volumetric Flow</value>
+    <value>Volumetric Flow (Vapor)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_26" xml:space="preserve">
-    <value>Vapor Phase Compressibility Factor</value>
+    <value>Compressibility Factor (Vapor)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_27" xml:space="preserve">
-    <value>Vapor Phase Molar Fraction</value>
+    <value>Molar Fraction (Vapor)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_28" xml:space="preserve">
-    <value>Vapor Phase Mass Fraction</value>
+    <value>Mass Fraction (Vapor)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_29" xml:space="preserve">
-    <value>Vapor Phase Volumetric Fraction</value>
+    <value>Volumetric Fraction (Vapor)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_3" xml:space="preserve">
@@ -961,43 +973,43 @@
     <comment>1</comment>
   </data>
   <data name="PROP_MS_30" xml:space="preserve">
-    <value>Liquid Phase (Mixture) Density</value>
+    <value>Density (Overall Liquid)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_31" xml:space="preserve">
-    <value>Liquid Phase (Mixture) Molar Weight</value>
+    <value>Molecular Weight (Overall Liquid)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_32" xml:space="preserve">
-    <value>Liquid Phase (Mixture) Specific Enthalpy</value>
+    <value>Specific Enthalpy (Overall Liquid)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_33" xml:space="preserve">
-    <value>Liquid Phase (Mixture) Specific Entropy</value>
+    <value>Specific Entropy (Overall Liquid)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_34" xml:space="preserve">
-    <value>Liquid Phase (Mixture) Molar Enthalpy</value>
+    <value>Molar Enthalpy (Overall Liquid)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_35" xml:space="preserve">
-    <value>Liquid Phase (Mixture) Molar Entropy</value>
+    <value>Molar Entropy (Overall Liquid)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_36" xml:space="preserve">
-    <value>Liquid Phase (Mixture) Thermal Conductivity</value>
+    <value>Thermal Conductivity (Overall Liquid)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_37" xml:space="preserve">
-    <value>Liquid Phase (Mixture) Kinematic Viscosity</value>
+    <value>Kinematic Viscosity (Overall Liquid)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_38" xml:space="preserve">
-    <value>Liquid Phase (Mixture) Dynamic Viscosity</value>
+    <value>Dynamic Viscosity (Overall Liquid)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_39" xml:space="preserve">
-    <value>Liquid Phase (Mixture) Heat Capacity (Cp)</value>
+    <value>Heat Capacity (Overall Liquid)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_4" xml:space="preserve">
@@ -1005,263 +1017,263 @@
     <comment>1</comment>
   </data>
   <data name="PROP_MS_40" xml:space="preserve">
-    <value>Liquid Phase (Mixture) Heat Capacity Ratio (Cp/Cv)</value>
+    <value>Heat Capacity Ratio (Overall Liquid)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_41" xml:space="preserve">
-    <value>Liquid Phase (Mixture) Mass Flow</value>
+    <value>Mass Flow (Overall Liquid)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_42" xml:space="preserve">
-    <value>Liquid Phase (Mixture) Molar Flow</value>
+    <value>Molar Flow (Overall Liquid)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_43" xml:space="preserve">
-    <value>Liquid Phase (Mixture) Volumetric Flow</value>
+    <value>Volumetric Flow (Overall Liquid)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_44" xml:space="preserve">
-    <value>Liquid Phase (Mixture) Compressibility Factor</value>
+    <value>Compressibility Factor (Overall Liquid)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_45" xml:space="preserve">
-    <value>Liquid Phase (Mixture) Molar Fraction</value>
+    <value>Molar Fraction (Overall Liquid)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_46" xml:space="preserve">
-    <value>Liquid Phase (Mixture) Mass Fraction</value>
+    <value>Mass Fraction (Overall Liquid)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_47" xml:space="preserve">
-    <value>Liquid Phase (Mixture) Volumetric Fraction</value>
+    <value>Volumetric Fraction (Overall Liquid)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_48" xml:space="preserve">
-    <value>Liquid Phase (1) Density</value>
+    <value>Density (Liquid 1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_49" xml:space="preserve">
-    <value>Liquid Phase (1) Molar Weight</value>
+    <value>Molar Weight (Liquid 1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_5" xml:space="preserve">
-    <value>Mixture Density</value>
+    <value>Mixture Density (Liquid 1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_50" xml:space="preserve">
-    <value>Liquid Phase (1) Specific Enthalpy</value>
+    <value>Specific Enthalpy (Liquid 1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_51" xml:space="preserve">
-    <value>Liquid Phase (1) Specific Entropy</value>
+    <value>Specific Entropy (Liquid 1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_52" xml:space="preserve">
-    <value>Liquid Phase (1) Molar Enthalpy</value>
+    <value>Molar Enthalpy (Liquid 1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_53" xml:space="preserve">
-    <value>Liquid Phase (1) Molar Entropy</value>
+    <value>Molar Entropy (Liquid 1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_54" xml:space="preserve">
-    <value>Liquid Phase (1) Thermal Conductivity</value>
+    <value>Thermal Conductivity (Liquid 1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_55" xml:space="preserve">
-    <value>Liquid Phase (1) Kinematic Viscosity</value>
+    <value>Kinematic Viscosity (Liquid 1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_56" xml:space="preserve">
-    <value>Liquid Phase (1) Dynamic Viscosity</value>
+    <value>Dynamic Viscosity (Liquid 1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_57" xml:space="preserve">
-    <value>Liquid Phase (1) Heat Capacity (Cp)</value>
+    <value>Heat Capacity (Liquid 1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_58" xml:space="preserve">
-    <value>Liquid Phase (1) Heat Capacity Ratio (Cp/Cv)</value>
+    <value>Heat Capacity Ratio (Liquid 1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_59" xml:space="preserve">
-    <value>Liquid Phase (1) Mass Flow</value>
+    <value>Mass Flow (Liquid 1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_6" xml:space="preserve">
-    <value>Mixture Molar Weight</value>
+    <value>Molecular Weight (Mixture)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_60" xml:space="preserve">
-    <value>Liquid Phase (1) Molar Flow</value>
+    <value>Molar Flow (Liquid 1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_61" xml:space="preserve">
-    <value>Liquid Phase (1) Volumetric Flow</value>
+    <value>Volumetric Flow (Liquid 1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_62" xml:space="preserve">
-    <value>Liquid Phase (1) Compressibility Factor</value>
+    <value>Compressibility Factor (Liquid 1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_63" xml:space="preserve">
-    <value>Liquid Phase (1) Molar Fraction</value>
+    <value>Molar Fraction (Liquid 1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_64" xml:space="preserve">
-    <value>Liquid Phase (1) Mass Fraction</value>
+    <value>Mass Fraction (Liquid 1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_65" xml:space="preserve">
-    <value>Liquid Phase (1) Volumetric Fraction</value>
+    <value>Volumetric Fraction (Liquid 1)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_66" xml:space="preserve">
-    <value>Liquid Phase (2) Density</value>
+    <value>Density (Liquid 2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_67" xml:space="preserve">
-    <value>Liquid Phase (2) Molar Weight</value>
+    <value>Molar Weight (Liquid 2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_68" xml:space="preserve">
-    <value>Liquid Phase (2) Specific Enthalpy</value>
+    <value>Specific Enthalpy (Liquid 2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_69" xml:space="preserve">
-    <value>Liquid Phase (2) Specific Entropy</value>
+    <value>Specific Entropy (Liquid 2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_7" xml:space="preserve">
-    <value>Mixture Specific Enthalpy</value>
+    <value>Specific Enthalpy (Mixture)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_70" xml:space="preserve">
-    <value>Liquid Phase (2) Molar Enthalpy</value>
+    <value>Molar Enthalpy (Liquid 2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_71" xml:space="preserve">
-    <value>Liquid Phase (2) Molar Entropy</value>
+    <value>Molar Entropy (Liquid 2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_72" xml:space="preserve">
-    <value>Liquid Phase (2) Thermal Conductivity</value>
+    <value>Thermal Conductivity (Liquid 2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_73" xml:space="preserve">
-    <value>Liquid Phase (2) Kinematic Viscosity</value>
+    <value>Kinematic Viscosity (Liquid 2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_74" xml:space="preserve">
-    <value>Liquid Phase (2) Dynamic Viscosity</value>
+    <value>Dynamic Viscosity (Liquid 2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_75" xml:space="preserve">
-    <value>Liquid Phase (2) Heat Capacity (Cp)</value>
+    <value>Heat Capacity (Liquid 2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_76" xml:space="preserve">
-    <value>Liquid Phase (2) Heat Capacity Ratio (Cp/Cv)</value>
+    <value>Heat Capacity Ratio (Liquid 2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_77" xml:space="preserve">
-    <value>Liquid Phase (2) Mass Flow</value>
+    <value>Mass Flow (Liquid 2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_78" xml:space="preserve">
-    <value>Liquid Phase (2) Molar Flow</value>
+    <value>Molar Flow (Liquid 2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_79" xml:space="preserve">
-    <value>Liquid Phase (2) Volumetric Flow</value>
+    <value>Volumetric Flow (Liquid 2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_8" xml:space="preserve">
-    <value>Mixture Specific Entropy</value>
+    <value>Specific Entropy (Mixture)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_80" xml:space="preserve">
-    <value>Liquid Phase (2) Compressibility Factor</value>
+    <value>Compressibility Factor (Liquid 2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_81" xml:space="preserve">
-    <value>Liquid Phase (2) Molar Fraction</value>
+    <value>Molar Fraction (Liquid 2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_82" xml:space="preserve">
-    <value>Liquid Phase (2) Mass Fraction</value>
+    <value>Mass Fraction (Liquid 2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_83" xml:space="preserve">
-    <value>Liquid Phase (2) Volumetric Fraction</value>
+    <value>Volumetric Fraction (Liquid 2)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_84" xml:space="preserve">
-    <value>Aqueous Phase Density</value>
+    <value>Density (Aqueous)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_85" xml:space="preserve">
-    <value>Aqueous Phase Molar Weight</value>
+    <value>Molecular Weight (Aqueous)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_86" xml:space="preserve">
-    <value>Aqueous Phase Specific Enthalpy</value>
+    <value>Specific Enthalpy (Aqueous)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_87" xml:space="preserve">
-    <value>Aqueous Phase Specific Entropy</value>
+    <value>Specific Entropy (Aqueous)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_88" xml:space="preserve">
-    <value>Aqueous Phase Molar Enthalpy</value>
+    <value>Molar Enthalpy (Aqueous)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_89" xml:space="preserve">
-    <value>Aqueous Phase Molar Entropy</value>
+    <value>Molar Entropy (Aqueous)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_9" xml:space="preserve">
-    <value>Mixture Molar Enthalpy</value>
+    <value>Molar Enthalpy (Mixture)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_90" xml:space="preserve">
-    <value>Aqueous Phase Thermal Conductivity</value>
+    <value>Thermal Conductivity (Aqueous)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_91" xml:space="preserve">
-    <value>Aqueous Phase Kinematic Viscosity</value>
+    <value>Kinematic Viscosity (Aqueous)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_92" xml:space="preserve">
-    <value>Aqueous Phase Dynamic Viscosity</value>
+    <value>Dynamic Viscosity (Aqueous)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_93" xml:space="preserve">
-    <value>Aqueous Phase Heat Capacity (Cp)</value>
+    <value>Heat Capacity (Aqueous)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_94" xml:space="preserve">
-    <value>Aqueous Phase Heat Capacity Ratio (Cp/Cv)</value>
+    <value>Heat Capacity Ratio (Aqueous)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_95" xml:space="preserve">
-    <value>Aqueous Phase Mass Flow</value>
+    <value>Mass Flow (Aqueous)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_96" xml:space="preserve">
-    <value>Aqueous Phase Molar Flow</value>
+    <value>Molar Flow (Aqueous)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_97" xml:space="preserve">
-    <value>Aqueous Phase Volumetric Flow</value>
+    <value>Volumetric Flow (Aqueous)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_98" xml:space="preserve">
-    <value>Aqueous Phase Compressibility Factor</value>
+    <value>Compressibility Factor (Aqueous)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_99" xml:space="preserve">
-    <value>Aqueous Phase Molar Fraction</value>
+    <value>Molar Fraction (Aqueous)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_OP_0" xml:space="preserve">

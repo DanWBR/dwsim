@@ -560,6 +560,7 @@ Public Class Utility
                     Next
                 Next
             Catch ex As Exception
+                MessageBox.Show(ex.ToString)
             End Try
         End If
 

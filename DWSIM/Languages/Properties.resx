@@ -1239,7 +1239,7 @@
     <value>Valor máximo de troca térmica</value>
   </data>
   <data name="PROP_MS_153" xml:space="preserve">
-    <value>pH da Fase Líquida 1</value>
+    <value>Líquido 1 pH</value>
   </data>
   <data name="PROP_MS_154" xml:space="preserve">
     <value>Fluxo de Energia</value>
@@ -1583,5 +1583,11 @@
   </data>
   <data name="PROP_SC_14" xml:space="preserve">
     <value>Número de Estágios</value>
+  </data>
+  <data name="PROP_MS_248" xml:space="preserve">
+    <value>Ponto de Fusão (Líquido 1)</value>
+  </data>
+  <data name="PROP_MS_249" xml:space="preserve">
+    <value>Depressão no Ponto de Fusão (Liquido 1)</value>
   </data>
 </root>

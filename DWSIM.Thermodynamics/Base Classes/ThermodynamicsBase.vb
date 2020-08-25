@@ -1274,6 +1274,8 @@ Namespace BaseClasses
 
         Public Property logKvalue As Double? Implements Interfaces.IPhaseProperties.logKvalue
 
+        Public Property mean_ionic_acitivty_coefficient As Double? Implements Interfaces.IPhaseProperties.mean_ionic_acitivty_coefficient
+
         Public Property massflow As Double? Implements Interfaces.IPhaseProperties.massflow
 
         Public Property massfraction As Double? Implements Interfaces.IPhaseProperties.massfraction

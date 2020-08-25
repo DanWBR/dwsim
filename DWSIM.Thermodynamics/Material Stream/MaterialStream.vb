@@ -1918,6 +1918,14 @@ Namespace Streams
                             Else
                                 value = Double.MinValue
                             End If
+                        Case 246
+                            value = Phases(3).Properties.osmoticCoefficient.GetValueOrDefault
+                        Case 247
+                            value = Phases(3).Properties.mean_ionic_acitivty_coefficient.GetValueOrDefault
+                        Case 248
+                            value = Phases(3).Properties.freezingPoint.GetValueOrDefault
+                        Case 249
+                            value = Phases(3).Properties.freezingPointDepression.GetValueOrDefault
                     End Select
 
                     Return value
@@ -1996,7 +2004,10 @@ Namespace Streams
                         proplist.Add("PROP_MS_" + CStr(i))
                     Next
                     proplist.Add("PROP_MS_153")
-                    proplist.Add("PROP_MS_154")
+                    proplist.Add("PROP_MS_246")
+                    proplist.Add("PROP_MS_247")
+                    proplist.Add("PROP_MS_248")
+                    proplist.Add("PROP_MS_249")
                     For i = 155 To 231
                         proplist.Add("PROP_MS_" + CStr(i))
                     Next
@@ -2015,6 +2026,7 @@ Namespace Streams
                         proplist.Add("PROP_MS_244" + "/" + subst.Name)
                         proplist.Add("PROP_MS_245" + "/" + subst.Name)
                     Next
+                    proplist.Add("PROP_MS_154")
                 Case PropertyType.WR
                     For i = 0 To 4
                         proplist.Add("PROP_MS_" + CStr(i))
@@ -2068,7 +2080,8 @@ Namespace Streams
                         proplist.Add("PROP_MS_" + CStr(i))
                     Next
                     proplist.Add("PROP_MS_153")
-                    proplist.Add("PROP_MS_154")
+                    proplist.Add("PROP_MS_246")
+                    proplist.Add("PROP_MS_247")
                     For i = 155 To 231
                         proplist.Add("PROP_MS_" + CStr(i))
                     Next
@@ -2087,6 +2100,7 @@ Namespace Streams
                         proplist.Add("PROP_MS_244" + "/" + subst.Name)
                         proplist.Add("PROP_MS_245" + "/" + subst.Name)
                     Next
+                    proplist.Add("PROP_MS_154")
             End Select
 
             proplist.AddRange(MyBase.GetProperties(proptype))
@@ -2809,6 +2823,16 @@ Namespace Streams
                         Case 239, 240, 241, 242, 243, 244, 245
                             'Molality
                             value = su.molar_conc
+                        Case 246
+                            'osmotic coefficient
+                            value = ""
+                        Case 247
+                            'miac
+                            value = ""
+                        Case 248
+                            value = su.temperature
+                        Case 249
+                            value = su.deltaT
                         Case Else
                             value = ""
                     End Select

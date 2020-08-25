@@ -71,5 +71,5 @@
     Property molar_helmholtz_energy As Nullable(Of Double)
     Property bulk_modulus As Nullable(Of Double)
     Property isothermal_compressibility As Nullable(Of Double)
-
+    Property mean_ionic_acitivty_coefficient As Double?
 End Interface

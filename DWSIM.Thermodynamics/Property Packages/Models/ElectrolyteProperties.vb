@@ -20,11 +20,41 @@ Imports System.Collections.Generic
 Imports FileHelpers
 Imports System.Math
 Imports System.Linq
-
+Imports System.Runtime.CompilerServices
 
 Namespace PropertyPackages.Auxiliary
 
     <System.Serializable()> Public Class Electrolyte
+
+        Function MIAC(Vx As Double(), T As Double, cprops As List(Of Interfaces.ICompoundConstantProperties)) As Double
+
+            Dim n As Integer = Vx.Length - 1
+            Dim i As Integer
+            Dim Im As Double
+
+            Im = 0.0#
+            For i = 0 To n
+                Im += 0.5 * cprops(i).Charge ^ 2 * Vx(i)
+            Next
+
+            Dim DCsolv, result As Double
+
+            DCsolv = 289.82 - 1.148 * T + 0.0017843 * T ^ 2 + -0.000001053 * T ^ 3
+
+            result = -1824000.0 * Im ^ 0.5 / ((DCsolv * T) ^ (3 / 2))
+
+            i = 0
+            Dim sums As Double = 0
+            Do
+                If cprops(i).IsSalt Then
+                    result += Vx(i) * Math.Abs(cprops(i).PositiveIonStoichCoeff * cprops(i).NegativeIonStoichCoeff)
+                    sums += Vx(i)
+                End If
+            Loop
+
+            Return Math.Exp(result / sums)
+
+        End Function
 
         Function FreezingPointDepression(ByVal Vx As Double(), activcoeff As Double(), cprops As List(Of Interfaces.ICompoundConstantProperties)) As Double()
 

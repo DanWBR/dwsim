@@ -9136,6 +9136,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Coeficiente de Atividade Iônico Médio.
+        '''</summary>
+        Friend Shared ReadOnly Property MIAC() As String
+            Get
+                Return ResourceManager.GetString("MIAC", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to 1 minuto.
         '''</summary>
         Friend Shared ReadOnly Property minuto1() As String
