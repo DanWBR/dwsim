@@ -1590,4 +1590,7 @@
   <data name="PROP_MS_249" xml:space="preserve">
     <value>Depressão no Ponto de Fusão (Liquido 1)</value>
   </data>
+  <data name="PROP_PU_5" xml:space="preserve">
+    <value>Pressão de Descarga</value>
+  </data>
 </root>

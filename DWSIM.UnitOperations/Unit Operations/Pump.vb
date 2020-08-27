@@ -1010,7 +1010,8 @@ Namespace UnitOperations
                         value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault)
                     Case 4
                         value = SystemsOfUnits.Converter.ConvertFromSI(su.distance, Me.NPSH.GetValueOrDefault)
-
+                    Case 5
+                        value = Pout.ConvertFromSI(su.pressure)
                 End Select
 
                 Return value
@@ -1024,24 +1025,9 @@ Namespace UnitOperations
             Dim proplist As New ArrayList
             Dim basecol = MyBase.GetProperties(proptype)
             If basecol.Length > 0 Then proplist.AddRange(basecol)
-            Select Case proptype
-                Case PropertyType.RO
-                    For i = 2 To 2
-                        proplist.Add("PROP_PU_" + CStr(i))
-                    Next
-                Case PropertyType.RW
-                    For i = 0 To 4
-                        proplist.Add("PROP_PU_" + CStr(i))
-                    Next
-                Case PropertyType.WR
-                    For i = 0 To 4
-                        proplist.Add("PROP_PU_" + CStr(i))
-                    Next
-                Case PropertyType.ALL
-                    For i = 0 To 4
-                        proplist.Add("PROP_PU_" + CStr(i))
-                    Next
-            End Select
+            For i = 0 To 5
+                proplist.Add("PROP_PU_" + CStr(i))
+            Next
             Return proplist.ToArray(GetType(System.String))
             proplist = Nothing
         End Function
@@ -1063,6 +1049,8 @@ Namespace UnitOperations
                     Me.Eficiencia = propval
                 Case 3
                     Me.DeltaQ = SystemsOfUnits.Converter.ConvertToSI(su.heatflow, propval)
+                Case 5
+                    Me.Pout = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
             End Select
             Return 1
         End Function
@@ -1094,7 +1082,8 @@ Namespace UnitOperations
                         value = su.heatflow
                     Case 4
                         value = su.distance
-
+                    Case 5
+                        value = su.pressure
                 End Select
 
                 Return value
