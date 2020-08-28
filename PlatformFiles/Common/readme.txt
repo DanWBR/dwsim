@@ -60,7 +60,7 @@ Disk space:
 VERSION HISTORY / CHANGELOG
 ==================================================
 
-The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/windows
+The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim6/commits/windows
 
 Version 6.1 Update 4
 
