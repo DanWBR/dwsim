@@ -326,6 +326,12 @@ Namespace Enums
         Volume_and_Entropy = 8
     End Enum
 
+    Public Enum FlowSpec
+        Mass = 0
+        Mole = 1
+        Volumetric = 2
+    End Enum
+
     Public Enum CompositionBasis
         Molar_Fractions
         Mass_Fractions

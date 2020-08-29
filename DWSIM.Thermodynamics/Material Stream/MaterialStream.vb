@@ -6213,6 +6213,8 @@ Namespace Streams
 
         Public Property FloatingTableAmountBasis As CompositionBasis = CompositionBasis.DefaultBasis Implements IMaterialStream.FloatingTableAmountBasis
 
+        Public Property DefinedFlow As FlowSpec = FlowSpec.Mass Implements IMaterialStream.DefinedFlow
+
         Public Overrides Function GetReport(su As IUnitsOfMeasure, ci As Globalization.CultureInfo, numberformat As String) As String
 
             PropertyPackage.CurrentMaterialStream = Me
@@ -7528,6 +7530,7 @@ Namespace Streams
             Phases(0).Properties.massflow = value
             Phases(0).Properties.molarflow = value / Phases(0).Properties.molecularWeight * 1000
             Phases(0).Properties.volumetric_flow = value / Phases(0).Properties.density.GetValueOrDefault
+            DefinedFlow = FlowSpec.Mass
         End Sub
 
         Public Function GetMassEnthalpy() As Double
@@ -7562,6 +7565,7 @@ Namespace Streams
             Phases(0).Properties.massflow = value * Phases(0).Properties.molecularWeight / 1000
             Phases(0).Properties.molarflow = value
             Phases(0).Properties.volumetric_flow = value * Phases(0).Properties.molecularWeight / 1000 / Phases(0).Properties.density.GetValueOrDefault
+            DefinedFlow = FlowSpec.Mole
         End Sub
 
         ''' <summary>
@@ -7572,6 +7576,7 @@ Namespace Streams
             Phases(0).Properties.massflow = Nothing
             Phases(0).Properties.molarflow = Nothing
             Phases(0).Properties.volumetric_flow = value
+            DefinedFlow = FlowSpec.Volumetric
         End Sub
 
         ''' <summary>

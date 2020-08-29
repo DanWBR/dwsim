@@ -2,6 +2,7 @@
 Imports Converter = DWSIM.SharedClasses.SystemsOfUnits.Converter
 Imports WeifenLuo.WinFormsUI.Docking
 Imports su = DWSIM.SharedClasses.SystemsOfUnits
+Imports Eto.Drawing
 
 Public Class MaterialStreamEditor
 
@@ -173,6 +174,23 @@ Public Class MaterialStreamEditor
             tbEntr.Text = su.Converter.ConvertFromSI(units.entropy, .Phases(0).Properties.entropy.GetValueOrDefault).ToString(nf)
 
             tbFracSpec.Text = .Phases(2).Properties.molarfraction.GetValueOrDefault.ToString(nf)
+
+            'flow definition
+
+            Select Case .DefinedFlow
+                Case Interfaces.Enums.FlowSpec.Mass
+                    tbMassFlow.BackColor = System.Drawing.Color.LightBlue
+                    tbMoleFlow.BackColor = tbTemp.BackColor
+                    tbVolFlow.BackColor = tbTemp.BackColor
+                Case Interfaces.Enums.FlowSpec.Mole
+                    tbMassFlow.BackColor = tbTemp.BackColor
+                    tbMoleFlow.BackColor = System.Drawing.Color.LightBlue
+                    tbVolFlow.BackColor = tbTemp.BackColor
+                Case Interfaces.Enums.FlowSpec.Volumetric
+                    tbMassFlow.BackColor = tbTemp.BackColor
+                    tbMoleFlow.BackColor = tbTemp.BackColor
+                    tbVolFlow.BackColor = System.Drawing.Color.LightBlue
+            End Select
 
             'reference solvent
 
@@ -1098,12 +1116,15 @@ Public Class MaterialStreamEditor
         If sender Is tbMassFlow Then
             MatStream.Phases(0).Properties.molarflow = Nothing
             MatStream.Phases(0).Properties.volumetric_flow = Nothing
+            MatStream.DefinedFlow = Interfaces.Enums.FlowSpec.Mass
         ElseIf sender Is tbMoleFlow Then
             MatStream.Phases(0).Properties.massflow = Nothing
             MatStream.Phases(0).Properties.volumetric_flow = Nothing
+            MatStream.DefinedFlow = Interfaces.Enums.FlowSpec.Mole
         ElseIf sender Is tbVolFlow Then
             MatStream.Phases(0).Properties.massflow = Nothing
             MatStream.Phases(0).Properties.molarflow = Nothing
+            MatStream.DefinedFlow = Interfaces.Enums.FlowSpec.Volumetric
         End If
 
         With MatStream.Phases(0).Properties

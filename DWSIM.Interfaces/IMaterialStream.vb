@@ -23,6 +23,8 @@
 
     Property SpecType As Enums.StreamSpec
 
+    Property DefinedFlow As Enums.FlowSpec
+
     Property IsElectrolyteStream As Boolean
 
     Property ReferenceSolvent As String
