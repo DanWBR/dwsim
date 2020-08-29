@@ -71,7 +71,7 @@ Partial Class EditingForm_ComprExpndr
         Me.Label4 = New System.Windows.Forms.Label()
         Me.cbPower = New System.Windows.Forms.ComboBox()
         Me.tbPower = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
+        Me.lblPower = New System.Windows.Forms.Label()
         Me.cbPress = New System.Windows.Forms.ComboBox()
         Me.tbOutletPressure = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -79,7 +79,7 @@ Partial Class EditingForm_ComprExpndr
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cbPressureDropU = New System.Windows.Forms.ComboBox()
         Me.tbPressureDrop = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
+        Me.lblDP = New System.Windows.Forms.Label()
         Me.cbCalcMode = New System.Windows.Forms.ComboBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -302,7 +302,7 @@ Partial Class EditingForm_ComprExpndr
         Me.GroupBox2.Controls.Add(Me.Label4)
         Me.GroupBox2.Controls.Add(Me.cbPower)
         Me.GroupBox2.Controls.Add(Me.tbPower)
-        Me.GroupBox2.Controls.Add(Me.Label6)
+        Me.GroupBox2.Controls.Add(Me.lblPower)
         Me.GroupBox2.Controls.Add(Me.cbPress)
         Me.GroupBox2.Controls.Add(Me.tbOutletPressure)
         Me.GroupBox2.Controls.Add(Me.Label2)
@@ -310,7 +310,7 @@ Partial Class EditingForm_ComprExpndr
         Me.GroupBox2.Controls.Add(Me.Label1)
         Me.GroupBox2.Controls.Add(Me.cbPressureDropU)
         Me.GroupBox2.Controls.Add(Me.tbPressureDrop)
-        Me.GroupBox2.Controls.Add(Me.Label3)
+        Me.GroupBox2.Controls.Add(Me.lblDP)
         Me.GroupBox2.Controls.Add(Me.cbCalcMode)
         Me.GroupBox2.Controls.Add(Me.Label8)
         Me.GroupBox2.Name = "GroupBox2"
@@ -570,13 +570,13 @@ Partial Class EditingForm_ComprExpndr
         Me.ToolTip1.SetToolTip(Me.tbPower, resources.GetString("tbPower.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.tbPower, resources.GetString("tbPower.ToolTip2"))
         '
-        'Label6
+        'lblPower
         '
-        resources.ApplyResources(Me.Label6, "Label6")
-        Me.Label6.Name = "Label6"
-        Me.ToolTip1.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip2"))
+        resources.ApplyResources(Me.lblPower, "lblPower")
+        Me.lblPower.Name = "lblPower"
+        Me.ToolTip1.SetToolTip(Me.lblPower, resources.GetString("lblPower.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.lblPower, resources.GetString("lblPower.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.lblPower, resources.GetString("lblPower.ToolTip2"))
         '
         'cbPress
         '
@@ -640,13 +640,13 @@ Partial Class EditingForm_ComprExpndr
         Me.ToolTip1.SetToolTip(Me.tbPressureDrop, resources.GetString("tbPressureDrop.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.tbPressureDrop, resources.GetString("tbPressureDrop.ToolTip2"))
         '
-        'Label3
+        'lblDP
         '
-        resources.ApplyResources(Me.Label3, "Label3")
-        Me.Label3.Name = "Label3"
-        Me.ToolTip1.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip2"))
+        resources.ApplyResources(Me.lblDP, "lblDP")
+        Me.lblDP.Name = "lblDP"
+        Me.ToolTip1.SetToolTip(Me.lblDP, resources.GetString("lblDP.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.lblDP, resources.GetString("lblDP.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.lblDP, resources.GetString("lblDP.ToolTip2"))
         '
         'cbCalcMode
         '
@@ -851,12 +851,12 @@ Partial Class EditingForm_ComprExpndr
     Public WithEvents Label8 As System.Windows.Forms.Label
     Public WithEvents cbPressureDropU As System.Windows.Forms.ComboBox
     Public WithEvents tbPressureDrop As System.Windows.Forms.TextBox
-    Public WithEvents Label3 As System.Windows.Forms.Label
+    Public WithEvents lblDP As System.Windows.Forms.Label
     Public WithEvents btnConfigureFlashAlg As System.Windows.Forms.Button
     Public WithEvents btnConfigurePP As System.Windows.Forms.Button
     Public WithEvents cbPower As System.Windows.Forms.ComboBox
     Public WithEvents tbPower As System.Windows.Forms.TextBox
-    Public WithEvents Label6 As System.Windows.Forms.Label
+    Public WithEvents lblPower As System.Windows.Forms.Label
     Public WithEvents cbPress As System.Windows.Forms.ComboBox
     Public WithEvents tbOutletPressure As System.Windows.Forms.TextBox
     Public WithEvents Label2 As System.Windows.Forms.Label

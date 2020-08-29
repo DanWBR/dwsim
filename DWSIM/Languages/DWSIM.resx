@@ -5649,4 +5649,19 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="MIAC" xml:space="preserve">
     <value>Coeficiente de Atividade Iônico Médio</value>
   </data>
+  <data name="CalcModeNotSupported" xml:space="preserve">
+    <value>Este modo de cálculo nao é suportado por este objeto.</value>
+  </data>
+  <data name="PowerGenerated" xml:space="preserve">
+    <value>Potência Gerada</value>
+  </data>
+  <data name="PowerRequired" xml:space="preserve">
+    <value>Potência Requerida</value>
+  </data>
+  <data name="PressureDecrease" xml:space="preserve">
+    <value>Decremento de Pressão</value>
+  </data>
+  <data name="PressureIncrease" xml:space="preserve">
+    <value>Incremento de Pressão</value>
+  </data>
 </root>

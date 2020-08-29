@@ -1307,6 +1307,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Este modo de cálculo nao é suportado por este objeto..
+        '''</summary>
+        Friend Shared ReadOnly Property CalcModeNotSupported() As String
+            Get
+                Return ResourceManager.GetString("CalcModeNotSupported", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Calculado.
         '''</summary>
         Friend Shared ReadOnly Property Calculado() As String
@@ -11449,6 +11458,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Potência Gerada.
+        '''</summary>
+        Friend Shared ReadOnly Property PowerGenerated() As String
+            Get
+                Return ResourceManager.GetString("PowerGenerated", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Potência Requerida.
+        '''</summary>
+        Friend Shared ReadOnly Property PowerRequired() As String
+            Get
+                Return ResourceManager.GetString("PowerRequired", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Método de Cálculo Entalpia/Entropia/Cp/Cv (0 = Lee-Kesler, 1 = Ideal, 2 = Excesso).
         '''</summary>
         Friend Shared ReadOnly Property PP_ENTH_CP_CALC_METHOD() As String
@@ -11814,6 +11841,24 @@ Namespace My.Resources
         Friend Shared ReadOnly Property PressureCalculation() As String
             Get
                 Return ResourceManager.GetString("PressureCalculation", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Decremento de Pressão.
+        '''</summary>
+        Friend Shared ReadOnly Property PressureDecrease() As String
+            Get
+                Return ResourceManager.GetString("PressureDecrease", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Incremento de Pressão.
+        '''</summary>
+        Friend Shared ReadOnly Property PressureIncrease() As String
+            Get
+                Return ResourceManager.GetString("PressureIncrease", resourceCulture)
             End Get
         End Property
         

@@ -48,6 +48,18 @@ Public Class EditingForm_ComprExpndr
             End If
         End If
 
+        If TypeOf SimObject Is UnitOperations.Compressor Then
+            cbCalcMode.Items(1) = SimObject.FlowSheet.GetTranslatedString("PressureIncrease")
+            cbCalcMode.Items(2) = SimObject.FlowSheet.GetTranslatedString("PowerRequired")
+            lblDP.Text = SimObject.FlowSheet.GetTranslatedString("PressureIncrease")
+            lblPower.Text = SimObject.FlowSheet.GetTranslatedString("PowerRequired")
+        Else
+            cbCalcMode.Items(1) = SimObject.FlowSheet.GetTranslatedString("PressureDecrease")
+            cbCalcMode.Items(2) = SimObject.FlowSheet.GetTranslatedString("PowerGenerated")
+            lblDP.Text = SimObject.FlowSheet.GetTranslatedString("PressureDecrease")
+            lblPower.Text = SimObject.FlowSheet.GetTranslatedString("PowerGenerated")
+        End If
+
         With SimObject
 
             'first block
@@ -338,6 +350,13 @@ Public Class EditingForm_ComprExpndr
                 tbPower.Enabled = False
                 tbAdiabaticHead.Enabled = False
                 tbPolytropicHead.Enabled = False
+                If TypeOf SimObject Is UnitOperations.Compressor Then
+                    DirectCast(SimObject, UnitOperations.Compressor).CalcMode = UnitOperations.Compressor.CalculationMode.EnergyStream
+                Else
+                    SimObject.FlowSheet.ShowMessage(SimObject.GraphicObject.Tag + ": " + SimObject.FlowSheet.GetTranslatedString("CalcModeNotSupported"), IFlowsheet.MessageType.GeneralError)
+                    DirectCast(SimObject, UnitOperations.Expander).CalcMode = UnitOperations.Expander.CalculationMode.OutletPressure
+                    UpdateInfo()
+                End If
             Case 4
                 tbRotSpeed.Enabled = False
                 btnCurves.Enabled = False
