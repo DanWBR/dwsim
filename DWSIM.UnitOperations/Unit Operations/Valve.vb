@@ -21,6 +21,8 @@ Imports DWSIM.Thermodynamics
 Imports DWSIM.Thermodynamics.Streams
 Imports DWSIM.SharedClasses
 Imports DWSIM.Interfaces.Enums
+Imports DotNumerics.Optimization.TN
+Imports NetOffice.ExcelApi
 
 Namespace UnitOperations
 
@@ -254,14 +256,15 @@ Namespace UnitOperations
                         ElseIf CalcMode = CalculationMode.Kv_Gas Then
                             ims.PropertyPackage.CurrentMaterialStream = ims
                             rhog20 = ims.PropertyPackage.AUX_VAPDENS(273.15, 101325)
-                            P2 = P1 * 0.7 / 100000.0
-                            icount = 0
-                            Do
-                                P2ant = P2
-                                P2 = P1 / 100000.0 - Ti / rhog20 / P2ant * (519 * Kvc / (Wi * 3600)) ^ -2
-                                icount += 1
-                                If icount > 1000 Then Throw New Exception("P2 did not converge in 1000 iterations.")
-                            Loop Until Math.Abs(P2 - P2ant) < 0.0001
+                            P2 = MathOps.Quadratic.quadForm(-rhog20, rhog20 * P1 / 100000, -Ti * (519 * Kvc / (Wi * 3600)) ^ -2, False)
+                            'P2 = P1 * 0.7 / 100000.0
+                            'icount = 0
+                            'Do
+                            '    P2ant = P2
+                            '    P2 = P1 / 100000.0 - Ti / rhog20 / P2ant * (519 * Kvc / (Wi * 3600)) ^ -2
+                            '    icount += 1
+                            '    If icount > 1000 Then Throw New Exception("P2 did not converge in 1000 iterations.")
+                            'Loop Until Math.Abs(P2 - P2ant) < 0.0001
                             P2 = P2 * 100000.0
                         ElseIf CalcMode = CalculationMode.Kv_Steam Then
                             P2 = P1 * 0.7 / 100000.0
@@ -271,7 +274,7 @@ Namespace UnitOperations
                                 P2ant = P2
                                 P2 = P1 / 100000.0 - v2 * (31.62 * Kvc / (Wi * 3600)) ^ -2
                                 icount += 1
-                                If icount > 1000 Then Throw New Exception("P2 did not converge in 1000 iterations.")
+                                If icount > 10000 Then Throw New Exception("P2 did not converge in 10000 iterations.")
                             Loop Until Math.Abs(P2 - P2ant) < 0.0001
                             P2 = P2 * 100000.0
                         End If
@@ -442,14 +445,15 @@ Namespace UnitOperations
             ElseIf CalcMode = CalculationMode.Kv_Gas Then
                 ims.PropertyPackage.CurrentMaterialStream = ims
                 rhog20 = ims.PropertyPackage.AUX_VAPDENS(273.15, 101325)
-                P2 = Pi * 0.7 / 100000.0
-                icount = 0
-                Do
-                    P2ant = P2
-                    P2 = Pi / 100000.0 - Ti / rhog20 / P2ant * (519 * Kvc / (Wi * 3600)) ^ -2
-                    icount += 1
-                    If icount > 1000 Then Throw New Exception("P2 did not converge in 1000 iterations.")
-                Loop Until Math.Abs(P2 - P2ant) < 0.0001
+                P2 = MathOps.Quadratic.quadForm(-rhog20, rhog20 * Pi / 100000, -Ti * (519 * Kvc / (Wi * 3600)) ^ -2, False)
+                'P2 = Pi * 0.7 / 100000.0
+                'icount = 0
+                'Do
+                '    P2ant = P2
+                '    P2 = Pi / 100000.0 - Ti / rhog20 / P2ant * (519 * Kvc / (Wi * 3600)) ^ -2
+                '    icount += 1
+                '    If icount > 1000 Then Throw New Exception("P2 did not converge in 1000 iterations.")
+                'Loop Until Math.Abs(P2 - P2ant) < 0.0001
                 P2 = P2 * 100000.0
                 IObj?.Paragraphs.Add(String.Format("Calculated Outlet Pressure P2 = {0} Pa", P2))
             ElseIf CalcMode = CalculationMode.Kv_Steam Then
@@ -460,7 +464,7 @@ Namespace UnitOperations
                     P2ant = P2
                     P2 = Pi / 100000.0 - v2 * (31.62 * Kvc / (Wi * 3600)) ^ -2
                     icount += 1
-                    If icount > 1000 Then Throw New Exception("P2 did not converge in 1000 iterations.")
+                    If icount > 10000 Then Throw New Exception("P2 did not converge in 10000 iterations.")
                 Loop Until Math.Abs(P2 - P2ant) < 0.0001
                 P2 = P2 * 100000.0
                 IObj?.Paragraphs.Add(String.Format("Calculated Outlet Pressure P2 = {0} Pa", P2))

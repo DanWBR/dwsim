@@ -128,6 +128,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="NetwonSolver.vb" />
+    <Compile Include="Quadratic.vb" />
     <Compile Include="SysLin.vb" />
   </ItemGroup>
   <ItemGroup>
