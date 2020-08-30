@@ -205,10 +205,19 @@ Namespace UnitOperations
                         ElseIf CalcMode = CalculationMode.Kv_Gas Then
                             ims.PropertyPackage.CurrentMaterialStream = ims
                             rhog20 = ims.PropertyPackage.AUX_VAPDENS(273.15, 101325)
-                            Wi = 519 * Kvc / (Ti / (rhog20 * (P1 - P2) / 100000.0 * P1 / 100000.0)) ^ 0.5 / 3600
+                            If P2 > P1 / 2 Then
+                                Wi = 519 * Kvc / (Ti / (rhog20 * (P1 - P2) / 100000.0 * P1 / 100000.0)) ^ 0.5 / 3600
+                            Else
+                                Wi = 259.5 * Kvc * P1 / 100000.0 / (Ti / rhog20) ^ 0.5 / 3600
+                            End If
                         ElseIf CalcMode = CalculationMode.Kv_Steam Then
-                            v2 = 1 / ims.PropertyPackage.AUX_VAPDENS(Ti, P2)
-                            Wi = Kvc * 31.62 * (v2 / ((P1 - P2) / 100000.0)) ^ 0.5 / 3600
+                            If P2 > P1 / 2 Then
+                                v2 = 1 / ims.PropertyPackage.AUX_VAPDENS(Ti, P2)
+                                Wi = Kvc * 31.62 / (v2 / ((P1 - P2) / 100000.0)) ^ 0.5 / 3600
+                            Else
+                                v2 = 1 / ims.PropertyPackage.AUX_VAPDENS(Ti, P1 / 2)
+                                Wi = Kvc * 31.62 / (2 * v2 / (P1 / 100000.0)) ^ 0.5 / 3600
+                            End If
                         End If
 
                         If Double.IsNaN(Wi) Then Wi = 0.0
@@ -341,10 +350,19 @@ Namespace UnitOperations
             ElseIf CalcMode = CalculationMode.Kv_Gas Then
                 ims.PropertyPackage.CurrentMaterialStream = ims
                 rhog20 = ims.PropertyPackage.AUX_VAPDENS(273.15, 101325)
-                Kv = Wi * 3600 / 519 * (Ti / (rhog20 * (P1 - P2) / 100000.0 * P2 / 100000.0)) ^ 0.5
+                If P2 > P1 / 2 Then
+                    Kv = Wi * 3600 / 519 * (Ti / (rhog20 * (P1 - P2) / 100000.0 * P2 / 100000.0)) ^ 0.5
+                Else
+                    Kv = Wi * 3600 / 259.5 / P1 * (Ti / rhog20) ^ 0.5
+                End If
             ElseIf CalcMode = CalculationMode.Kv_Steam Then
-                v2 = 1 / ims.PropertyPackage.AUX_VAPDENS(Ti, P2)
-                Kv = Wi * 3600 / 31.62 * (v2 / ((P1 - P2) / 100000.0)) ^ 0.5
+                If P2 > P1 / 2 Then
+                    v2 = 1 / ims.PropertyPackage.AUX_VAPDENS(Ti, P2)
+                    Kv = Wi * 3600 / 31.62 * (v2 / ((P1 - P2) / 100000.0)) ^ 0.5
+                Else
+                    v2 = 1 / ims.PropertyPackage.AUX_VAPDENS(Ti, P1 / 2)
+                    Kv = Wi * 3600 / 31.62 * (2 * v2 / (P1 / 100000.0)) ^ 0.5
+                End If
             End If
 
         End Sub
