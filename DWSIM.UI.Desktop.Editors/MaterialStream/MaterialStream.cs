@@ -258,6 +258,7 @@ namespace DWSIM.UI.Desktop.Editors
                                ms.Phases[0].Properties.volumetric_flow = null;
                                ms.Phases[0].Properties.molarflow = null;
                                ms.Phases[0].Properties.massflow = cv.ConvertToSI(su.massflow, arg3.Text.ToString().ParseExpressionToDouble());
+                               ms.DefinedFlow = FlowSpec.Mass;
                            }
                            else
                            {
@@ -274,6 +275,7 @@ namespace DWSIM.UI.Desktop.Editors
                                                    ms.Phases[0].Properties.massflow = null;
                                                    ms.Phases[0].Properties.volumetric_flow = null;
                                                    ms.Phases[0].Properties.molarflow = cv.ConvertToSI(su.molarflow, arg3.Text.ToString().ParseExpressionToDouble());
+                                                   ms.DefinedFlow = FlowSpec.Mole;
                                                }
                                                else
                                                {
@@ -290,6 +292,7 @@ namespace DWSIM.UI.Desktop.Editors
                                                    ms.Phases[0].Properties.massflow = null;
                                                    ms.Phases[0].Properties.molarflow = null;
                                                    ms.Phases[0].Properties.volumetric_flow = cv.ConvertToSI(su.volumetricFlow, arg3.Text.ToString().ParseExpressionToDouble());
+                                                   ms.DefinedFlow = FlowSpec.Volumetric;
                                                }
                                                else
                                                {
@@ -297,6 +300,28 @@ namespace DWSIM.UI.Desktop.Editors
                                                }
                                            }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)MatStream.GetFlowsheet()).HighLevelSolve.Invoke(); });
                     s.CreateAndAddDescriptionRow(container2, ms.GetPropertyDescription("Volumetric Flow"));
+
+                    switch (MatStream.DefinedFlow)
+                    {
+                        case FlowSpec.Mass:
+                            txtW.BackgroundColor = Colors.LightBlue;
+                            txtW.ToolTip = "Defined by the user";
+                            txtQ.ToolTip = "Calculated";
+                            txtV.ToolTip = "Calculated";
+                            break;
+                        case FlowSpec.Mole:
+                            txtQ.BackgroundColor = Colors.LightBlue;
+                            txtW.ToolTip = "Calculated";
+                            txtQ.ToolTip = "Defined by the user";
+                            txtV.ToolTip = "Calculated";
+                            break;
+                        case FlowSpec.Volumetric:
+                            txtV.BackgroundColor = Colors.LightBlue;
+                            txtW.ToolTip = "Calculated";
+                            txtQ.ToolTip = "Calculated";
+                            txtV.ToolTip = "Defined by the user";
+                            break;
+                    }
 
                     s.CreateAndAddLabelRow(container2, "Mixture Composition");
 
