@@ -183,7 +183,7 @@ Namespace UnitOperations
 
         <Xml.Serialization.XmlIgnore> Public Property DebugText As String = "" Implements Interfaces.ISimulationObject.DebugText
 
-        <Xml.Serialization.XmlIgnore> Public Property LastUpdated As New Date Implements Interfaces.ISimulationObject.LastUpdated
+        Public Property LastUpdated As New Date Implements Interfaces.ISimulationObject.LastUpdated
 
         ''' <summary>
         ''' Calculates the object.
