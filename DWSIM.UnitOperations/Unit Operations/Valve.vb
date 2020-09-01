@@ -16,7 +16,6 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-
 Imports DWSIM.Thermodynamics
 Imports DWSIM.Thermodynamics.Streams
 Imports DWSIM.SharedClasses
@@ -265,16 +264,14 @@ Namespace UnitOperations
                         ElseIf CalcMode = CalculationMode.Kv_Gas Then
                             ims.PropertyPackage.CurrentMaterialStream = ims
                             rhog20 = ims.PropertyPackage.AUX_VAPDENS(273.15, 101325)
-                            P2 = MathOps.Quadratic.quadForm(-rhog20, rhog20 * P1 / 100000, -Ti * (519 * Kvc / (Wi * 3600)) ^ -2, False)
-                            'P2 = P1 * 0.7 / 100000.0
-                            'icount = 0
-                            'Do
-                            '    P2ant = P2
-                            '    P2 = P1 / 100000.0 - Ti / rhog20 / P2ant * (519 * Kvc / (Wi * 3600)) ^ -2
-                            '    icount += 1
-                            '    If icount > 1000 Then Throw New Exception("P2 did not converge in 1000 iterations.")
-                            'Loop Until Math.Abs(P2 - P2ant) < 0.0001
-                            P2 = P2 * 100000.0
+                            Dim roots = MathOps.Quadratic.quadForm(-rhog20, rhog20 * P1 / 100000, -Ti * (519 * Kvc / (Wi * 3600)) ^ -2)
+                            If roots.Item1 > 0 And roots.Item1 > P1 / 100000 / 2 Then
+                                P2 = roots.Item1 * 100000.0
+                            ElseIf roots.Item2 > 0 And roots.Item2 > P1 / 100000 / 2 Then
+                                P2 = roots.Item2 * 100000.0
+                            Else
+                                Throw New Exception("Unable to calculate the outlet pressure.")
+                            End If
                         ElseIf CalcMode = CalculationMode.Kv_Steam Then
                             P2 = P1 * 0.7 / 100000.0
                             icount = 0
@@ -463,16 +460,14 @@ Namespace UnitOperations
             ElseIf CalcMode = CalculationMode.Kv_Gas Then
                 ims.PropertyPackage.CurrentMaterialStream = ims
                 rhog20 = ims.PropertyPackage.AUX_VAPDENS(273.15, 101325)
-                P2 = MathOps.Quadratic.quadForm(-rhog20, rhog20 * Pi / 100000, -Ti * (519 * Kvc / (Wi * 3600)) ^ -2, False)
-                'P2 = Pi * 0.7 / 100000.0
-                'icount = 0
-                'Do
-                '    P2ant = P2
-                '    P2 = Pi / 100000.0 - Ti / rhog20 / P2ant * (519 * Kvc / (Wi * 3600)) ^ -2
-                '    icount += 1
-                '    If icount > 1000 Then Throw New Exception("P2 did not converge in 1000 iterations.")
-                'Loop Until Math.Abs(P2 - P2ant) < 0.0001
-                P2 = P2 * 100000.0
+                Dim roots = MathOps.Quadratic.quadForm(-rhog20, rhog20 * Pi / 100000, -Ti * (519 * Kvc / (Wi * 3600)) ^ -2)
+                If roots.Item1 > 0 And roots.Item1 > Pi / 100000 / 2 Then
+                    P2 = roots.Item1 * 100000.0
+                ElseIf roots.Item2 > 0 And roots.Item2 > Pi / 100000 / 2 Then
+                    P2 = roots.Item2 * 100000.0
+                Else
+                    Throw New Exception("Unable to calculate the outlet pressure.")
+                End If
                 IObj?.Paragraphs.Add(String.Format("Calculated Outlet Pressure P2 = {0} Pa", P2))
             ElseIf CalcMode = CalculationMode.Kv_Steam Then
                 P2 = Pi * 0.7 / 100000.0
