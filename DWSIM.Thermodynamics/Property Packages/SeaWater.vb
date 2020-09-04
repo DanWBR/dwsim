@@ -667,7 +667,7 @@ Namespace PropertyPackages
 
         Public Function VaporPressure(Vx As Double(), T As Double) As Double
 
-            If Vx.Sum > 0.0# Then
+            If Vx.Sum > 0.0000000002 Then
                 Return Me.SIA.sea_vaporpressure(CalcSalinity(Vx), T)
             Else
                 Return Me.m_iapws97.pSatW(T) * 100000

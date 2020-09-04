@@ -201,6 +201,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 L_ant = L
                 If hassolids Then L = 1 - S - V Else L = 1 - V
+                If L < 0.0000000001 Then
+                    L = 0.0
+                    S = S / (S + V)
+                    V = 1 - S
+                End If
 
                 For i = 0 To n
                     Vns(i) = Vnf(i) - Vxl(i) * L - Vnv(i)
