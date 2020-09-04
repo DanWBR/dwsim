@@ -29,6 +29,7 @@ Imports DWSIM.SharedClasses
 Imports DWSIM.Thermodynamics.Streams
 Imports DWSIM.Thermodynamics
 Imports scaler = DotNumerics.Scaling.Scaler
+Imports DWSIM.MathOps
 
 Namespace Reactors
 
@@ -305,8 +306,6 @@ Namespace Reactors
 
             Dim sum As Double
 
-            Dim RT As Double = 8.314 * T
-
             lagm = x.Take(n + 1).ToArray
             nv = x(n + 1)
             nl1 = x(n + 2)
@@ -350,11 +349,6 @@ Namespace Reactors
             If nl1 < 0.0# Then penval += nl1 ^ 2
             If nl2 < 0.0# Then penval += nl2 ^ 2
             If ns < 0.0# Then penval += ns ^ 2
-
-            Dim pp = tms.PropertyPackage
-            Dim Wx = nv * pp.AUX_MMM(xv_0) + nl1 * pp.AUX_MMM(xl1_0) + nl2 * pp.AUX_MMM(xl2_0) + ns * pp.AUX_MMM(xs_0)
-
-            'penval += (W0 - Wx) ^ 2
 
             'If penval > 0.0# Then
             '    For i = 0 To x.Length - 1
@@ -799,11 +793,11 @@ Namespace Reactors
 
             'Dim lp As Integer
 
-            Dim re(c) As Double
+            Dim re(c + 1) As Double
 
             'calculate ideal gas gibbs energy values
 
-            Dim igge(c) As Double
+            Dim igge(c), igge_lp(c + 1) As Double
 
             pp.CurrentMaterialStream = ims
 
@@ -816,53 +810,49 @@ Namespace Reactors
 
             IObj?.Paragraphs.Add(String.Format("Ideal Gas Gibbs Energy values: {0}", igge.ToMathArrayString))
 
-            Dim resc(c), resc2(c), inval(c), topvals(e) As Double
+            'estimate initial values by solving linear problem using lp_solve
 
-            For i = 0 To c
-                inval(i) = N0(Me.ComponentIDs(i)) / N0.Values.Sum
-            Next
+            'DWSIM.Thermodynamics.Calculator.CheckParallelPInvoke()
 
-            Dim ovars As New List(Of DotNumerics.Optimization.OptSimplexBoundVariable)
-            For j = 0 To c
-                ovars.Add(New DotNumerics.Optimization.OptSimplexBoundVariable(inval(j), 0.0#, 10000000000.0))
-            Next
+            Dim lp As IntPtr
 
-            Dim opt As New DotNumerics.Optimization.Simplex()
-            opt.MaxFunEvaluations = 100000
-            opt.Tolerance = 1.0E-30
-            Dim vars = opt.ComputeMin(Function(myv() As Double)
-                                          Dim objf, objfs As Double
-                                          e = Me.Elements.Length - 1
-                                          c = Me.ComponentIDs.Count - 1
-                                          objf = 0.0#
-                                          For i = 0 To e
-                                              objfs = 0.0#
-                                              For j = 0 To c
-                                                  objfs += Me.ElementMatrix(i, j) * myv(j)
-                                              Next
-                                              objfs -= Me.TotalElements(i) / N0.Values.Sum
-                                              objf += objfs ^ 2
-                                          Next
-                                          For j = 0 To c
-                                              objf += igge(j) * myv(j)
-                                          Next
-                                          Return objf
-                                      End Function, ovars.ToArray)
-
-            'normalize and get the first e molar amounts
-
-            vars = vars.Select(Function(d) If(d > 0, d, 0.0#)).ToArray
-
-            topvals = vars.OrderByDescending(Function(d) d).Take(e + 1).ToArray
-
-            Dim idx As Integer
+            lpsolve55.Init(".")
+            lp = lpsolve55.make_lp(0, c + 1)
+            lpsolve55.default_basis(lp)
 
             For i = 0 To e
-                idx = vars.ToList.IndexOf(topvals(i))
-                resc2(idx) = vars(idx)
+                For j = 1 To c + 1
+                    re(j) = Me.ElementMatrix(i, j - 1)
+                Next
+                lpsolve55.add_constraint(lp, re, lpsolve55.lpsolve_constr_types.EQ, Me.TotalElements(i))
             Next
 
-            IObj?.Paragraphs.Add(String.Format("Initial Mole Amounts {0}", N0.Values.ToArray.ToMathArrayString))
+            'calculate ideal gas gibbs energy values
+
+            pp.CurrentMaterialStream = ims
+
+            For i = 1 To c + 1
+                igge_lp(i) = pp.AUX_DELGF_T(298.15, T, Me.ComponentIDs(i - 1)) * FlowSheet.Options.SelectedComponents(Me.ComponentIDs(i - 1)).Molar_Weight + Log(P / P0)
+                lpsolve55.set_lowbo(lp, i, 0)
+            Next
+
+            lpsolve55.set_obj_fn(lp, igge_lp)
+            lpsolve55.set_minim(lp)
+            lpsolve55.solve(lp)
+
+            lpsolve55.print_lp(lp)
+
+            lpsolve55.print_solution(lp, c + 1)
+
+            'the linear problem solution consists of only 'e' molar flows higher than zero.
+
+            Dim resc(c) As Double
+
+            lpsolve55.get_variables(lp, resc)
+
+            lpsolve55.delete_lp(lp)
+
+            IObj?.Paragraphs.Add(String.Format("Initial Mole Amounts {0}", resc.ToArray.ToMathArrayString))
 
             'estimate lagrange multipliers
 
@@ -877,7 +867,7 @@ Namespace Reactors
             For i = 0 To e
                 k = 0
                 For j = 0 To c
-                    If resc2(j) > 0.0# Then
+                    If resc(j) > 0.0# Then
                         mymat(i, k) = Me.ElementMatrix(i, j)
                         mypot(k, 0) = igge(j)
                         k += 1
@@ -892,7 +882,7 @@ Namespace Reactors
                 Next
             Catch ex As Exception
                 For i = 0 To e
-                    lagrm(i) = igge(i) + 0.01
+                    lagrm(i) = 0.0
                 Next
             End Try
 
@@ -951,19 +941,11 @@ Namespace Reactors
 
                 If cnt = 0 Then
 
-                    If Me.InitialEstimates.Sum > 0 Then
-                        i = 0
-                        For Each id In ComponentIDs
-                            xm0(ids.IndexOf(id)) = InitialEstimates(i) / InitialEstimates.Sum
-                            i += 1
-                        Next
-                    Else
-                        i = 0
-                        For Each id In ComponentIDs
-                            xm0(ids.IndexOf(id)) = vars(i)
-                            i += 1
-                        Next
-                    End If
+                    i = 0
+                    For Each id In ComponentIDs
+                        xm0(ids.IndexOf(id)) = resc(i) / resc.Sum
+                        i += 1
+                    Next
 
                 Else
 
@@ -1033,25 +1015,39 @@ Namespace Reactors
 
                 ni_ext = 0
 
-                'optimization of initial values for the lagrange multipliers
+                If lagrm.Sum = 0.0 Then
 
-                Dim variables As New List(Of OptBoundVariable)
-                For i = 0 To e
-                    variables.Add(New OptBoundVariable(0.0#, -100.0#, 100.0#))
-                Next
-                variables.Add(New OptBoundVariable(nv, True))
-                variables.Add(New OptBoundVariable(nl1, True))
-                variables.Add(New OptBoundVariable(nl2, True))
-                variables.Add(New OptBoundVariable(ns, True))
+                    'initial values for the lagrange multipliers
 
-                Dim solver As New Simplex, smplres As Double()
-                solver.MaxFunEvaluations = 50000
-                solver.Tolerance = 0.0000000001
-                smplres = solver.ComputeMin(Function(x1)
-                                                Return FunctionValue2N(x1).AbsSqrSumY
-                                            End Function, variables.ToArray)
+                    For i = 0 To c
+                        IObj2?.SetCurrent
+                        igcp(i) = pp.AUX_DELGF_T(298.15, 1000, Me.ComponentIDs(i), False) * FlowSheet.SelectedCompounds(Me.ComponentIDs(i)).Molar_Weight + Log(P / P0) / (8.314 * 1000)
+                    Next
 
-                lagrm = smplres.Take(e + 1).ToArray
+                    Dim variables As New List(Of OptBoundVariable)
+                    For i = 0 To e
+                        variables.Add(New OptBoundVariable(0.0#, -1000.0#, 1000.0#))
+                    Next
+                    variables.Add(New OptBoundVariable(nv, True))
+                    variables.Add(New OptBoundVariable(nl1, True))
+                    variables.Add(New OptBoundVariable(nl2, True))
+                    variables.Add(New OptBoundVariable(ns, True))
+
+                    Dim solver As New Simplex, smplres As Double()
+                    solver.MaxFunEvaluations = 50000
+                    solver.Tolerance = 0.0000000001
+                    smplres = solver.ComputeMin(Function(x1)
+                                                    Return FunctionValue2N(x1).AbsSqrSumY
+                                                End Function, variables.ToArray)
+
+                    lagrm = smplres.Take(e + 1).ToArray
+
+                    For i = 0 To c
+                        IObj2?.SetCurrent
+                        igcp(i) = pp.AUX_DELGF_T(298.15, T, Me.ComponentIDs(i), False) * FlowSheet.SelectedCompounds(Me.ComponentIDs(i)).Molar_Weight + Log(P / P0) / (8.314 * T)
+                    Next
+
+                End If
 
                 IObj2?.Paragraphs.Add(String.Format("Lagrange Multipliers: {0}", lagrm.ToMathArrayString))
 
@@ -1059,9 +1055,11 @@ Namespace Reactors
                 'external loop: fugacity coefficient calculation/update
                 'internal loop: material balance convergence
 
-                Dim solver2 As New Simplex, finalx As Double()
-                solver2.MaxFunEvaluations = MaximumInternalIterations
-                solver2.Tolerance = InternalTolerance
+                Dim finalx As Double()
+
+                Dim nsolv As New MathOps.MathEx.Newton.NewtonSolver
+                nsolv.MaxIterations = MaximumInternalIterations
+                nsolv.Tolerance = InternalTolerance
 
                 Do
 
@@ -1073,20 +1071,18 @@ Namespace Reactors
 
                     Inspector.Host.CheckAndAdd(IObj3, "", "Calculate", "Gibbs Reactor External Loop Iteration #" & ni_ext, "Converge Fugacity Coefficients", True)
 
-                    Dim variables2 As New List(Of OptBoundVariable)
-                    For i = 0 To e
-                        variables2.Add(New OptBoundVariable(lagrm(i), -1000.0#, 1000.0#))
-                    Next
-                    variables2.Add(New OptBoundVariable(nv, 0.0#, nt * 10))
-                    variables2.Add(New OptBoundVariable(nl1, 0.0#, nt * 10))
-                    variables2.Add(New OptBoundVariable(nl2, 0.0#, nt * 10))
-                    variables2.Add(New OptBoundVariable(ns, 0.0#, nt * 10))
-
                     x = lagrm.Concat({nv, nl1, nl2, ns}).ToArray
 
-                    finalx = solver2.ComputeMin(Function(x1)
-                                                    Return FunctionValue2N(x1).AbsSqrSumY
-                                                End Function, variables2.ToArray)
+                    finalx = nsolv.Solve(Function(x1)
+                                             Return FunctionValue2N(x1)
+                                         End Function, x)
+
+                    lagrm = finalx.Take(e + 1).ToArray
+
+                    nv = finalx(e + 1)
+                    nl1 = finalx(e + 2)
+                    nl2 = finalx(e + 3)
+                    ns = finalx(e + 4)
 
                     lagrm = finalx.Take(e + 1).ToArray
 
@@ -1141,7 +1137,13 @@ Namespace Reactors
 
                 If errfunc > ExternalTolerance Then
 
-                    Throw New Exception(FlowSheet.GetTranslatedString("ConvergenceError"))
+                    errfunc = FunctionValue2N(finalx).AbsSqrSumY
+
+                    If errfunc > ExternalTolerance Then
+
+                        Throw New Exception(FlowSheet.GetTranslatedString("ConvergenceError"))
+
+                    End If
 
                 End If
 

@@ -73,7 +73,7 @@ Namespace MathEx.BrentOpt
             Dim xm As Double = 0
             Dim cgold As Double = 0
 
-            cgold = 0.381966R
+            cgold = 0.381966
             bx = 0.5 * (a + b)
             If a < b Then
                 ia = a

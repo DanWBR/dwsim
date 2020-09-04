@@ -23,15 +23,17 @@ Namespace MathEx.Newton
 
         Public Property MaxIterations As Integer = 1000
 
-        Public Property MaxPercentChange As Double = 10
-
-        Public Property DampingFactor As Double = 1.0
-
-        Public Property DerivativePerturbation = 0.01
+        Public Property EnableDamping As Boolean = True
 
         Private _Iterations As Integer = 0
 
         Private fxb As Func(Of Double(), Double())
+
+        Private brentsolver As New BrentOpt.BrentMinimize
+
+        Private tmpx As Double(), tmpdx As Double()
+
+        Private _error As Double
 
         Public ReadOnly Property Iterations
             Get
@@ -40,6 +42,8 @@ Namespace MathEx.Newton
         End Property
 
         Sub New()
+
+            brentsolver.DefineFuncDelegate(AddressOf minimizeerror)
 
         End Sub
 
@@ -51,12 +55,51 @@ Namespace MathEx.Newton
         ''' <returns>vector of variables which solve the equations according to the minimum allowable error value (tolerance).</returns>
         Function Solve(functionbody As Func(Of Double(), Double()), vars As Double()) As Double()
 
+            Dim minimaldampings As Double() = New Double() {1.0E-20, 0.000000000000001, 0.0000000001, 0.00001, 0.0001, 0.001, 0.01, 0.1}
+            Dim epsilons As Double() = New Double() {0.0000000001, 0.000000001, 0.00000001, 0.0000001, 0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1}
+
+            Dim leave As Boolean = False
+            Dim finalx As Double() = vars
+
+            If EnableDamping Then
+                For Each mindamp In minimaldampings
+                    If leave Then Exit For
+                    For Each eps In epsilons
+                        If leave Then Exit For
+                        Try
+                            finalx = solve_internal(mindamp, eps, functionbody, vars)
+                            leave = True
+                        Catch ex As ArgumentException
+                            'try next parameters
+                        End Try
+                    Next
+                Next
+            Else
+                For Each eps In epsilons
+                    If leave Then Exit For
+                    Try
+                        finalx = solve_internal(1.0, eps, functionbody, vars)
+                        leave = True
+                    Catch ex As ArgumentException
+                        'try next parameters
+                    End Try
+                Next
+            End If
+
+            If Not leave Then Throw New Exception("newton convergence error")
+
+            Return finalx
+
+        End Function
+
+        Private Function solve_internal(mindamp As Double, epsilon As Double, functionbody As Func(Of Double(), Double()), vars As Double()) As Double()
+
             fxb = functionbody
 
-            Dim fx(), x(), dx(), dfdx(,) As Double
+            Dim fx(), x(), dx(), dfdx(,), df, fxsum, fxsum0 As Double
             Dim success As Boolean = False
 
-            x = vars
+            x = vars.Clone
 
             dx = x.Clone
 
@@ -64,34 +107,42 @@ Namespace MathEx.Newton
 
             Do
 
+                If _Iterations = 0 Then
+                    fxsum0 = 1.0E+20
+                Else
+                    fxsum0 = MathEx.Common.SumSqr(fx)
+                End If
+
                 fx = fxb.Invoke(x)
+
+                _error = MathEx.Common.SumSqr(fx)
+                fxsum = _error
 
                 If Common.SumSqr(fx) < Tolerance Then Exit Do
 
-                dfdx = gradient(x)
+                dfdx = gradient(epsilon, x)
 
                 success = SysLin.rsolve.rmatrixsolve(dfdx, fx, x.Length, dx)
 
                 If success Then
 
-                    Dim dontupdate As Boolean = False
+                    'this call to the brent solver calculates the damping factor which minimizes the error (fval).
+
+                    If EnableDamping Then
+
+                        tmpx = x.Clone
+                        tmpdx = dx.Clone
+                        brentsolver.brentoptimize(mindamp, 1.0, mindamp / 10.0#, df)
+
+                    Else
+
+                        df = 1.0#
+
+                    End If
 
                     For i = 0 To x.Length - 1
-                        If Math.Abs(dx(i) / x(i) * 100) > MaxPercentChange And x(i) <> 0.0 Then
-                            dontupdate = True
-                            Exit For
-                        End If
+                        x(i) -= dx(i) * df
                     Next
-
-                    If dontupdate Then
-                        For i = 0 To x.Length - 1
-                            x(i) -= Math.Sign(dx(i)) * x(i) * MaxPercentChange / 100
-                        Next
-                    Else
-                        For i = 0 To x.Length - 1
-                            x(i) -= dx(i) * DampingFactor
-                        Next
-                    End If
 
                 Else
 
@@ -103,15 +154,25 @@ Namespace MathEx.Newton
 
                 _Iterations += 1
 
+                If _Iterations > 50 And fxsum > fxsum0 Then
+                    Throw New ArgumentException("not converging")
+                End If
+
+                If Double.IsNaN(fxsum) Then
+                    Throw New ArgumentException("not converging")
+                End If
+
             Loop Until _Iterations > MaxIterations
+
+            If _Iterations > MaxIterations Then
+                Throw New ArgumentException("not converged")
+            End If
 
             Return x
 
         End Function
 
-        Private Function gradient(ByVal x() As Double) As Double(,)
-
-            Dim epsilon As Double = DerivativePerturbation
+        Private Function gradient(epsilon As Double, ByVal x() As Double) As Double(,)
 
             Dim f1(), f2() As Double
             Dim g(x.Length - 1, x.Length - 1), x2(x.Length - 1) As Double
@@ -137,6 +198,20 @@ Namespace MathEx.Newton
             Next
 
             Return g
+
+        End Function
+
+        Public Function minimizeerror(ByVal t As Double) As Double
+
+            Dim tmpx0 As Double() = tmpx.Clone
+
+            For i = 0 To tmpx.Length - 1
+                tmpx0(i) -= tmpdx(i) * t
+            Next
+
+            Dim abssum0 = MathEx.Common.SumSqr(fxb.Invoke(tmpx0))
+            If Double.IsNaN(abssum0) Then abssum0 = 1.0E+20
+            Return abssum0
 
         End Function
 
