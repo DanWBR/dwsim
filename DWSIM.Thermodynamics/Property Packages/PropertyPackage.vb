@@ -2621,10 +2621,6 @@ Namespace PropertyPackages
                                     xv = (H - hl) / (hv - hl)
                                 End If
                                 IObj?.SetCurrent()
-                                'If Tsat > Me.AUX_TCM(Phase.Mixture) Then
-                                '    xv = 1.0#
-                                '    LoopVarState = State.Vapor
-                                'End If
                                 xl = 1 - xv - xs
 
                                 If xv <> 0.0# And xv <> 1.0# And xs = 0.0# Then
@@ -2644,13 +2640,7 @@ Namespace PropertyPackages
                                 End If
 
                                 IObj?.SetCurrent()
-                                If T <= Me.AUX_TFM(Phase.Mixture) Then
-
-                                    'solid only.
-
-                                    xv = 0.0#
-                                    xl = 0.0#
-                                    xs = 1.0#
+                                If xs > 0.0 Then
 
                                     Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
                                     For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
@@ -2658,7 +2648,7 @@ Namespace PropertyPackages
                                     Next
 
                                     IObj?.SetCurrent()
-                                    S = Me.DW_CalcSolidEnthalpy(T, vz, constprops) / (T - 298.15)
+                                    S = Me.DW_CalcEntropy(vz, T, P, State.Solid)
 
                                     Me.CurrentMaterialStream.Phases(3).Properties.molarfraction = xl
                                     Me.CurrentMaterialStream.Phases(2).Properties.molarfraction = xv
@@ -2680,35 +2670,34 @@ Namespace PropertyPackages
                                         i += 1
                                     Next
 
-                                Else
-
-                                    Me.CurrentMaterialStream.Phases(3).Properties.molarfraction = xl
-                                    Me.CurrentMaterialStream.Phases(2).Properties.molarfraction = xv
-                                    Me.CurrentMaterialStream.Phases(3).Properties.massfraction = xl
-                                    Me.CurrentMaterialStream.Phases(2).Properties.massfraction = xv
-
-                                    i = 0
-                                    For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
-                                        subst.MoleFraction = vz(i)
-                                        subst.FugacityCoeff = 1
-                                        subst.ActivityCoeff = 1
-                                        subst.PartialVolume = 0
-                                        subst.PartialPressure = P
-                                        subst.MassFraction = vz(i)
-                                        i += 1
-                                    Next
-                                    i = 0
-                                    For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                                        subst.MoleFraction = vz(i)
-                                        subst.FugacityCoeff = 1
-                                        subst.ActivityCoeff = 1
-                                        subst.PartialVolume = 0
-                                        subst.PartialPressure = P
-                                        subst.MassFraction = vz(i)
-                                        i += 1
-                                    Next
-
                                 End If
+
+
+                                Me.CurrentMaterialStream.Phases(3).Properties.molarfraction = xl
+                                Me.CurrentMaterialStream.Phases(2).Properties.molarfraction = xv
+                                Me.CurrentMaterialStream.Phases(3).Properties.massfraction = xl
+                                Me.CurrentMaterialStream.Phases(2).Properties.massfraction = xv
+
+                                i = 0
+                                For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
+                                    subst.MoleFraction = vz(i)
+                                    subst.FugacityCoeff = 1
+                                    subst.ActivityCoeff = 1
+                                    subst.PartialVolume = 0
+                                    subst.PartialPressure = P
+                                    subst.MassFraction = vz(i)
+                                    i += 1
+                                Next
+                                i = 0
+                                For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
+                                    subst.MoleFraction = vz(i)
+                                    subst.FugacityCoeff = 1
+                                    subst.ActivityCoeff = 1
+                                    subst.PartialVolume = 0
+                                    subst.PartialPressure = P
+                                    subst.MassFraction = vz(i)
+                                    i += 1
+                                Next
 
                             Else
 
