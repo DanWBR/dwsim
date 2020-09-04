@@ -183,7 +183,11 @@ Namespace GraphicObjects.Tables
                         If TypeOf pval0 Is Double Then
                             propval = Convert.ToDouble(pval0).ToString(Me.Flowsheet.FlowsheetOptions.NumberFormat)
                         Else
-                            propval = pval0.ToString
+                            If pval0 IsNot Nothing Then
+                                propval = pval0.ToString
+                            Else
+                                propval = ""
+                            End If
                         End If
                         propunit = Me.Flowsheet.SimulationObjects(item.Key).GetPropertyUnit(value, Me.Flowsheet.FlowsheetOptions.SelectedUnitSystem)
 
@@ -240,7 +244,11 @@ Namespace GraphicObjects.Tables
                         If TypeOf pval0 Is Double Then
                             propval = Convert.ToDouble(pval0).ToString(Me.Flowsheet.FlowsheetOptions.NumberFormat)
                         Else
-                            propval = pval0.ToString
+                            If pval0 IsNot Nothing Then
+                                propval = pval0.ToString
+                            Else
+                                propval = ""
+                            End If
                         End If
                         propunit = Me.Flowsheet.SimulationObjects(item.Key).GetPropertyUnit(value, Me.Flowsheet.FlowsheetOptions.SelectedUnitSystem)
 

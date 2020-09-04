@@ -267,6 +267,7 @@ Namespace GraphicObjects.Tables
                                         Dim val = Convert.ToDouble(value)
                                         m_items(kvp.Key).Add(New NodeItem(Flowsheet.GetTranslatedString(kvp2.Key), val.ToString(nf), myobj.GetPropertyUnit(mypropid, su), 0, 0, ""))
                                     Else
+                                        If value Is Nothing Then value = ""
                                         m_items(kvp.Key).Add(New NodeItem(Flowsheet.GetTranslatedString(kvp2.Key), value, myobj.GetPropertyUnit(mypropid, su), 0, 0, ""))
                                     End If
                                     Exit For
