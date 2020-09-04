@@ -556,7 +556,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.External
 
                 Dim myNode As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
-                myNode.Tag = uoobj.Prefix & SimulationObjects.Count.ToString("00#")
+                myNode.Tag = uoobj.Prefix & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
                 gObj.Name = Guid.NewGuid.ToString
@@ -570,7 +570,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.Switch
 
                 Dim myGobj As New SwitchGraphic(mpx, mpy, 50, 40)
-                myGobj.Tag = "SW-" & SimulationObjects.Count.ToString("00#")
+                myGobj.Tag = "SW-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
                 gObj.Name = "SW-" & Guid.NewGuid.ToString
@@ -583,7 +583,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.Input
 
                 Dim myGobj As New InputGraphic(mpx, mpy, 50, 25)
-                myGobj.Tag = "IN-" & SimulationObjects.Count.ToString("00#")
+                myGobj.Tag = "IN-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
                 gObj.Name = "IN-" & Guid.NewGuid.ToString
@@ -598,7 +598,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.Controller_PID
 
                 Dim myGobj As New PIDControllerGraphic(mpx, mpy, 50, 50)
-                myGobj.Tag = "PID-" & SimulationObjects.Count.ToString("00#")
+                myGobj.Tag = "PID-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
                 gObj.Name = "PID-" & Guid.NewGuid.ToString
@@ -613,7 +613,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.LevelGauge
 
                 Dim myGobj As New LevelGaugeGraphic(mpx, mpy, 40, 70)
-                myGobj.Tag = "LG-" & SimulationObjects.Count.ToString("00#")
+                myGobj.Tag = "LG-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
                 gObj.Name = "LG-" & Guid.NewGuid.ToString
@@ -626,7 +626,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.DigitalGauge
 
                 Dim myGobj As New DigitalGaugeGraphic(mpx, mpy, 40, 20)
-                myGobj.Tag = "DG-" & SimulationObjects.Count.ToString("00#")
+                myGobj.Tag = "DG-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
                 gObj.Name = "DG-" & Guid.NewGuid.ToString
@@ -639,7 +639,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.AnalogGauge
 
                 Dim myGobj As New AnalogGaugeGraphic(mpx, mpy, 50, 50)
-                myGobj.Tag = "AG-" & SimulationObjects.Count.ToString("00#")
+                myGobj.Tag = "AG-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
                 gObj.Name = "AG-" & Guid.NewGuid.ToString
@@ -652,7 +652,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.OT_Adjust
 
                 Dim myNode As New AdjustGraphic(mpx, mpy, 40, 40)
-                myNode.Tag = "ADJ-" & SimulationObjects.Count.ToString("00#")
+                myNode.Tag = "ADJ-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
                 gObj.Name = Guid.NewGuid.ToString
@@ -665,7 +665,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.OT_Spec
 
                 Dim myNode As New SpecGraphic(mpx, mpy, 40, 40)
-                myNode.Tag = "SPEC-" & SimulationObjects.Count.ToString("00#")
+                myNode.Tag = "SPEC-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
                 gObj.Name = "SPEC-" & Guid.NewGuid.ToString
@@ -678,7 +678,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.OT_Recycle
 
                 Dim myNode As New RecycleGraphic(mpx, mpy, 40, 40)
-                myNode.Tag = "REC-" & SimulationObjects.Count.ToString("00#")
+                myNode.Tag = "REC-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
                 gObj.Name = "REC-" & Guid.NewGuid.ToString
@@ -691,7 +691,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.OT_EnergyRecycle
 
                 Dim myNode As New EnergyRecycleGraphic(mpx, mpy, 40, 40)
-                myNode.Tag = "EREC-" & SimulationObjects.Count.ToString("00#")
+                myNode.Tag = "EREC-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
                 gObj.Name = "EREC-" & Guid.NewGuid.ToString
@@ -704,7 +704,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.NodeIn
 
                 Dim myNode As New MixerGraphic(mpx, mpy, 40, 40)
-                myNode.Tag = "MIX-" & SimulationObjects.Count.ToString("00#")
+                myNode.Tag = "MIX-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
                 gObj.Name = "MIX-" & Guid.NewGuid.ToString
@@ -717,7 +717,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.NodeOut
 
                 Dim myNodeo As New SplitterGraphic(mpx, mpy, 40, 40)
-                myNodeo.Tag = "SPLT-" & SimulationObjects.Count.ToString("00#")
+                myNodeo.Tag = "SPLT-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myNodeo.Tag = tag
                 gObj = myNodeo
                 gObj.Name = "DIV-" & Guid.NewGuid.ToString
@@ -731,7 +731,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.Pump
 
                 Dim myPump As New PumpGraphic(mpx, mpy, 40, 40)
-                myPump.Tag = "PUMP-" & SimulationObjects.Count.ToString("00#")
+                myPump.Tag = "PUMP-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myPump.Tag = tag
                 gObj = myPump
                 gObj.Name = "PUMP-" & Guid.NewGuid.ToString
@@ -745,7 +745,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.Tank
 
                 Dim myTank As New TankGraphic(mpx, mpy, 50, 50)
-                myTank.Tag = "TANK-" & SimulationObjects.Count.ToString("00#")
+                myTank.Tag = "TANK-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myTank.Tag = tag
                 gObj = myTank
                 gObj.Name = "TANK-" & Guid.NewGuid.ToString
@@ -759,7 +759,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.Vessel
 
                 Dim myVessel As New VesselGraphic(mpx, mpy, 50, 70)
-                myVessel.Tag = "V-" & SimulationObjects.Count.ToString("00#")
+                myVessel.Tag = "V-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myVessel.Tag = tag
                 gObj = myVessel
                 gObj.Name = "V-" & Guid.NewGuid.ToString
@@ -773,7 +773,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.MaterialStream
 
                 Dim myMStr As New MaterialStreamGraphic(mpx, mpy, 20, 20)
-                myMStr.Tag = "MSTR-" & SimulationObjects.Count.ToString("00#")
+                myMStr.Tag = "MSTR-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myMStr.Tag = tag
                 gObj = myMStr
                 gObj.Name = "MSTR-" & Guid.NewGuid.ToString
@@ -788,7 +788,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.EnergyStream
 
                 Dim myMStr As New EnergyStreamGraphic(mpx, mpy, 20, 20)
-                myMStr.Tag = "ESTR-" & SimulationObjects.Count.ToString("00#")
+                myMStr.Tag = "ESTR-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myMStr.Tag = tag
                 gObj = myMStr
                 gObj.Name = "ESTR-" & Guid.NewGuid.ToString
@@ -802,7 +802,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.CompressorExpander
 
                 Dim myComp As New CompressorExpanderGraphic(mpx, mpy, 50, 50)
-                myComp.Tag = "CX-" & SimulationObjects.Count.ToString("00#")
+                myComp.Tag = "CX-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myComp.Tag = tag
                 gObj = myComp
                 gObj.Name = "CX-" & Guid.NewGuid.ToString
@@ -816,7 +816,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.Compressor
 
                 Dim myComp As New CompressorGraphic(mpx, mpy, 50, 50)
-                myComp.Tag = "C-" & SimulationObjects.Count.ToString("00#")
+                myComp.Tag = "C-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myComp.Tag = tag
                 gObj = myComp
                 gObj.Name = "C-" & Guid.NewGuid.ToString
@@ -830,7 +830,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.Expander
 
                 Dim myComp As New TurbineGraphic(mpx, mpy, 50, 50)
-                myComp.Tag = "X-" & SimulationObjects.Count.ToString("00#")
+                myComp.Tag = "X-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myComp.Tag = tag
                 gObj = myComp
                 gObj.Name = "X-" & Guid.NewGuid.ToString
@@ -844,7 +844,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.HeaterCooler
 
                 Dim myCool As New HeaterCoolerGraphic(mpx, mpy, 40, 40)
-                myCool.Tag = "HC-" & SimulationObjects.Count.ToString("00#")
+                myCool.Tag = "HC-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myCool.Tag = tag
                 gObj = myCool
                 gObj.Name = "HC-" & Guid.NewGuid.ToString
@@ -858,7 +858,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.Heater
 
                 Dim myCool As New HeaterGraphic(mpx, mpy, 40, 40)
-                myCool.Tag = "HT-" & SimulationObjects.Count.ToString("00#")
+                myCool.Tag = "HT-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myCool.Tag = tag
                 gObj = myCool
                 gObj.Name = "HT-" & Guid.NewGuid.ToString
@@ -872,7 +872,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.Cooler
 
                 Dim myCool As New CoolerGraphic(mpx, mpy, 40, 40)
-                myCool.Tag = "CL-" & SimulationObjects.Count.ToString("00#")
+                myCool.Tag = "CL-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myCool.Tag = tag
                 gObj = myCool
                 gObj.Name = "CL-" & Guid.NewGuid.ToString
@@ -886,7 +886,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.Pipe
 
                 Dim myPipe As New PipeSegmentGraphic(mpx, mpy, 80, 20)
-                myPipe.Tag = "PIPE-" & SimulationObjects.Count.ToString("00#")
+                myPipe.Tag = "PIPE-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myPipe.Tag = tag
                 gObj = myPipe
                 gObj.Name = "PIPE-" & Guid.NewGuid.ToString
@@ -900,7 +900,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.Valve
 
                 Dim myValve As New ValveGraphic(mpx, mpy, 40, 40)
-                myValve.Tag = "VALVE-" & SimulationObjects.Count.ToString("00#")
+                myValve.Tag = "VALVE-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myValve.Tag = tag
                 gObj = myValve
                 gObj.Name = "VALVE-" & Guid.NewGuid.ToString
@@ -914,7 +914,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.RCT_Conversion
 
                 Dim myRconv As New ConversionReactorGraphic(mpx, mpy, 50, 50)
-                myRconv.Tag = "CR-" & SimulationObjects.Count.ToString("00#")
+                myRconv.Tag = "CR-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myRconv.Tag = tag
                 gObj = myRconv
                 gObj.Name = "CR-" & Guid.NewGuid.ToString
@@ -928,7 +928,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.RCT_Equilibrium
 
                 Dim myReq As New EquilibriumReactorGraphic(mpx, mpy, 50, 50)
-                myReq.Tag = "ER-" & SimulationObjects.Count.ToString("00#")
+                myReq.Tag = "ER-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myReq.Tag = tag
                 gObj = myReq
                 gObj.Name = "ER-" & Guid.NewGuid.ToString
@@ -942,7 +942,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.RCT_Gibbs
 
                 Dim myRgibbs As New GibbsReactorGraphic(mpx, mpy, 50, 50)
-                myRgibbs.Tag = "GR-" & SimulationObjects.Count.ToString("00#")
+                myRgibbs.Tag = "GR-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myRgibbs.Tag = tag
                 gObj = myRgibbs
                 gObj.Name = "GR-" & Guid.NewGuid.ToString
@@ -956,7 +956,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.RCT_CSTR
 
                 Dim myRcstr As New CSTRGraphic(mpx, mpy, 50, 50)
-                myRcstr.Tag = "CSTR-" & SimulationObjects.Count.ToString("00#")
+                myRcstr.Tag = "CSTR-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myRcstr.Tag = tag
                 gObj = myRcstr
                 gObj.Name = "CSTR-" & Guid.NewGuid.ToString
@@ -970,7 +970,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.RCT_PFR
 
                 Dim myRpfr As New PFRGraphic(mpx, mpy, 70, 20)
-                myRpfr.Tag = "PFR-" & SimulationObjects.Count.ToString("00#")
+                myRpfr.Tag = "PFR-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myRpfr.Tag = tag
                 gObj = myRpfr
                 gObj.Name = "PFR-" & Guid.NewGuid.ToString
@@ -984,7 +984,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.HeatExchanger
 
                 Dim myHeatExchanger As New HeatExchangerGraphic(mpx, mpy, 50, 50)
-                myHeatExchanger.Tag = "HX-" & SimulationObjects.Count.ToString("00#")
+                myHeatExchanger.Tag = "HX-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myHeatExchanger.Tag = tag
                 gObj = myHeatExchanger
                 gObj.Name = "HX-" & Guid.NewGuid.ToString
@@ -998,7 +998,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.ShortcutColumn
 
                 Dim mySC As New ShortcutColumnGraphic(mpx, mpy, 144, 180)
-                mySC.Tag = "SC-" & SimulationObjects.Count.ToString("00#")
+                mySC.Tag = "SC-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then mySC.Tag = tag
                 gObj = mySC
                 gObj.Name = "SC-" & Guid.NewGuid.ToString
@@ -1012,7 +1012,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.DistillationColumn
 
                 Dim myDC As New RigorousColumnGraphic(mpx, mpy, 144, 180)
-                myDC.Tag = "DC-" & SimulationObjects.Count.ToString("00#")
+                myDC.Tag = "DC-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myDC.Tag = tag
                 gObj = myDC
                 gObj.Name = "DC-" & Guid.NewGuid.ToString
@@ -1026,7 +1026,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.AbsorptionColumn
 
                 Dim myAC As New AbsorptionColumnGraphic(mpx, mpy, 144, 180)
-                myAC.Tag = "ABS-" & SimulationObjects.Count.ToString("00#")
+                myAC.Tag = "ABS-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myAC.Tag = tag
                 gObj = myAC
                 gObj.Name = "ABS-" & Guid.NewGuid.ToString
@@ -1040,7 +1040,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.ComponentSeparator
 
                 Dim myCSep As New ComponentSeparatorGraphic(mpx, mpy, 50, 50)
-                myCSep.Tag = "CS-" & SimulationObjects.Count.ToString("00#")
+                myCSep.Tag = "CS-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myCSep.Tag = tag
                 gObj = myCSep
                 gObj.Name = "CS-" & Guid.NewGuid.ToString
@@ -1054,7 +1054,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.SolidSeparator
 
                 Dim myCSep As New SolidsSeparatorGraphic(mpx, mpy, 50, 50)
-                myCSep.Tag = "SS-" & SimulationObjects.Count.ToString("00#")
+                myCSep.Tag = "SS-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myCSep.Tag = tag
                 gObj = myCSep
                 gObj.Name = "SS-" & Guid.NewGuid.ToString
@@ -1068,7 +1068,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.Filter
 
                 Dim myCSep As New FilterGraphic(mpx, mpy, 50, 50)
-                myCSep.Tag = "FT-" & SimulationObjects.Count.ToString("00#")
+                myCSep.Tag = "FT-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myCSep.Tag = tag
                 gObj = myCSep
                 gObj.Name = "FT-" & Guid.NewGuid.ToString
@@ -1082,7 +1082,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.OrificePlate
 
                 Dim myOPL As New OrificePlateGraphic(mpx, mpy, 25, 25)
-                myOPL.Tag = "OP-" & SimulationObjects.Count.ToString("00#")
+                myOPL.Tag = "OP-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myOPL.Tag = tag
                 gObj = myOPL
                 gObj.Name = "OP-" & Guid.NewGuid.ToString
@@ -1096,7 +1096,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.CustomUO
 
                 Dim myCUO As New ScriptGraphic(mpx, mpy, 25, 25)
-                myCUO.Tag = "UO-" & SimulationObjects.Count.ToString("00#")
+                myCUO.Tag = "UO-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myCUO.Tag = tag
                 gObj = myCUO
                 gObj.Name = "UO-" & Guid.NewGuid.ToString
@@ -1110,7 +1110,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.ExcelUO
 
                 Dim myEUO As New SpreadsheetGraphic(mpx, mpy, 25, 25)
-                myEUO.Tag = "EXL-" & SimulationObjects.Count.ToString("00#")
+                myEUO.Tag = "EXL-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myEUO.Tag = tag
                 gObj = myEUO
                 gObj.Name = "EXL-" & Guid.NewGuid.ToString
@@ -1124,7 +1124,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.FlowsheetUO
 
                 Dim myEUO As New FlowsheetGraphic(mpx, mpy, 25, 25)
-                myEUO.Tag = "FS-" & SimulationObjects.Count.ToString("00#")
+                myEUO.Tag = "FS-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myEUO.Tag = tag
                 gObj = myEUO
                 gObj.Name = "FS-" & Guid.NewGuid.ToString
@@ -1138,7 +1138,7 @@ Imports DWSIM.GlobalSettings
             Case ObjectType.CapeOpenUO
 
                 Dim myCUO As New CAPEOPENGraphic(mpx, mpy, 40, 40)
-                myCUO.Tag = "COUO-" & SimulationObjects.Count.ToString("00#")
+                myCUO.Tag = "COUO-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myCUO.Tag = tag
                 gObj = myCUO
                 gObj.Name = "COUO-" & Guid.NewGuid.ToString

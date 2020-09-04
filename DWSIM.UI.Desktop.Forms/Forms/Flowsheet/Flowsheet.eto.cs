@@ -1098,9 +1098,9 @@ namespace DWSIM.UI.Forms
                     try
                     {
                         Point center = new Point((FlowsheetControl.Width / 2), (FlowsheetControl.Height / 2));
-                        FlowsheetControl.FlowsheetSurface.OffsetAll(((int)((float)center.X / FlowsheetControl.FlowsheetSurface.Zoom)
-                                        - obj.GraphicObject.X), ((int)((float)center.Y / FlowsheetControl.FlowsheetSurface.Zoom)
-                                        - obj.GraphicObject.Y));
+                        FlowsheetControl.FlowsheetSurface.OffsetAll((center.X / FlowsheetControl.FlowsheetSurface.Zoom)
+                                        - obj.GraphicObject.X, (center.Y / FlowsheetControl.FlowsheetSurface.Zoom)
+                                        - obj.GraphicObject.Y);
                         FlowsheetControl.Invalidate();
                         FlowsheetControl.Invalidate();
                     }
@@ -1864,14 +1864,14 @@ namespace DWSIM.UI.Forms
                 {
                     isobj = (Interfaces.ISimulationObject)obj.CloneXML();
                     FlowsheetObject.AddObjectToSurface(obj.GraphicObject.ObjectType,
-                        obj.GraphicObject.X + 50,
-                        obj.GraphicObject.Y + 50,
+                        (int)obj.GraphicObject.X + 50,
+                        (int)obj.GraphicObject.Y + 50,
                         obj.GraphicObject.Tag + "_CLONE", "",
                         (Interfaces.IExternalUnitOperation)isobj);
                 }
                 else
                 {
-                    isobj = FlowsheetObject.AddObject(obj.GraphicObject.ObjectType, obj.GraphicObject.X + 50, obj.GraphicObject.Y + 50, obj.GraphicObject.Tag + "_CLONE");
+                    isobj = FlowsheetObject.AddObject(obj.GraphicObject.ObjectType, (int)obj.GraphicObject.X + 50, (int)obj.GraphicObject.Y + 50, obj.GraphicObject.Tag + "_CLONE");
                 }
                 var id = isobj.Name;
                 ((Interfaces.ICustomXMLSerialization)isobj).LoadData(((Interfaces.ICustomXMLSerialization)obj).SaveData());
@@ -1958,7 +1958,7 @@ namespace DWSIM.UI.Forms
                     {
 
                         var stream = FlowsheetControl.FlowsheetSurface.SelectedObject;
-                        var isobj = FlowsheetObject.AddObject(obj.GraphicObject.ObjectType, obj.GraphicObject.X + 20, obj.GraphicObject.Y, obj.GraphicObject.Tag + "_CLONE");
+                        var isobj = FlowsheetObject.AddObject(obj.GraphicObject.ObjectType, (int)obj.GraphicObject.X + 20, (int)obj.GraphicObject.Y, obj.GraphicObject.Tag + "_CLONE");
                         var id = isobj.Name;
                         ((Interfaces.ICustomXMLSerialization)isobj).LoadData(((Interfaces.ICustomXMLSerialization)obj).SaveData());
                         isobj.Name = id;

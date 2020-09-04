@@ -508,7 +508,7 @@ Public Class GraphicsSurface
 
     End Sub
 
-    Public Sub OffsetAll(deltax As Integer, deltay As Integer)
+    Public Sub OffsetAll(deltax As Single, deltay As Single)
 
         If deltax > 10000000000.0 Or deltay > 10000000000.0 Then Exit Sub
 
@@ -644,8 +644,8 @@ Public Class GraphicsSurface
 
                             For Each gr As IGraphicObject In Me.SelectedObjects.Values
                                 Dim p As SKPoint = New SKPoint(gr.X, gr.Y)
-                                p.X += (x - dragStart.X) / Me.Zoom
-                                p.Y += (y - dragStart.Y) / Me.Zoom
+                                p.X += (x - dragStart.X) / Zoom
+                                p.Y += (y - dragStart.Y) / Zoom
                                 gr.X = p.X
                                 gr.Y = p.Y
                             Next

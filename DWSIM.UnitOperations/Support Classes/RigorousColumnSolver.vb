@@ -557,13 +557,13 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Select Case _specs("C").SType
                 Case ColumnSpec.SpecType.Component_Fraction
                     If _condtype <> Column.condtype.Full_Reflux Then
-                        If _specs("C").SpecUnit = "M" Then
+                        If _specs("C").SpecUnit = "M" Or _specs("C").SpecUnit = "Molar" Then
                             spfval1 = _xc(0)(spci1) - spval1
                         Else 'W
                             spfval1 = _pp.AUX_CONVERT_MOL_TO_MASS(_xc(0))(spci1) - spval1
                         End If
                     Else
-                        If _specs("C").SpecUnit = "M" Then
+                        If _specs("C").SpecUnit = "M" Or _specs("C").SpecUnit = "Molar" Then
                             spfval1 = _yc(0)(spci1) - spval1
                         Else 'W
                             spfval1 = _pp.AUX_CONVERT_MOL_TO_MASS(_yc(0))(spci1) - spval1
@@ -630,7 +630,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             'Reboiler Specs
             Select Case _specs("R").SType
                 Case ColumnSpec.SpecType.Component_Fraction
-                    If _specs("R").SpecUnit = "M" Then
+                    If _specs("R").SpecUnit = "M" Or _specs("R").SpecUnit = "Molar" Then
                         spfval2 = _xc(_ns)(spci2) - spval2
                     Else 'W
                         spfval2 = _pp.AUX_CONVERT_MOL_TO_MASS(_xc(_ns))(spci2) - spval2
@@ -3612,7 +3612,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             Select Case _specs("C").SType
                 Case ColumnSpec.SpecType.Component_Fraction
-                    If _specs("C").SpecUnit = "M" Then
+                    If _specs("C").SpecUnit = "M" Or _specs("C").SpecUnit = "Molar" Then
                         spfval1 = xc(0)(spci1) - spval1
                     Else 'W
                         spfval1 = _pp.AUX_CONVERT_MOL_TO_MASS(xc(0))(spci1) - spval1
@@ -3647,7 +3647,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             Select Case _specs("R").SType
                 Case ColumnSpec.SpecType.Component_Fraction
-                    If _specs("R").SpecUnit = "M" Then
+                    If _specs("R").SpecUnit = "M" Or _specs("R").SpecUnit = "Molar" Then
                         spfval2 = xc(ns)(spci2) - spval2
                     Else 'W
                         spfval2 = _pp.AUX_CONVERT_MOL_TO_MASS(xc(ns))(spci2) - spval2

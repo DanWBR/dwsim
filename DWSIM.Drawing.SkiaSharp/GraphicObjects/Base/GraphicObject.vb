@@ -364,9 +364,9 @@ Namespace GraphicObjects
 
         Public Property Width As Integer = 20 Implements IGraphicObject.Width
 
-        Public Property X As Integer = 0 Implements IGraphicObject.X
+        Public Property X As Single = 0.0 Implements IGraphicObject.X
 
-        Public Property Y As Integer = 0 Implements IGraphicObject.Y
+        Public Property Y As Single = 0.0 Implements IGraphicObject.Y
 
         Public Property EnergyConnector As IConnectionPoint = New ConnectionPoint() With {.IsEnergyConnector = True} Implements IGraphicObject.EnergyConnector
 

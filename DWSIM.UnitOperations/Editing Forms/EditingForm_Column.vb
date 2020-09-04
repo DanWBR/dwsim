@@ -179,7 +179,7 @@ Public Class EditingForm_Column
             Dim cunits As String() = {}
             Select Case .Specs("C").SType
                 Case ColumnSpec.SpecType.Component_Fraction
-                    cunits = New String() {"M", "We"}
+                    cunits = New String() {"Molar", "Mass"}
                     cbCondComp.Enabled = True
                 Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
                     cunits = New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s"}
@@ -220,7 +220,7 @@ Public Class EditingForm_Column
             Dim runits As String() = {}
             Select Case .Specs("R").SType
                 Case ColumnSpec.SpecType.Component_Fraction
-                    runits = New String() {"M", "We"}
+                    runits = New String() {"Molar", "Mass"}
                     cbRebComp.Enabled = True
                 Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
                     runits = New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s"}
@@ -553,8 +553,8 @@ Public Class EditingForm_Column
             Dim cunits As String() = {}
             Select Case SimObject.Specs("C").SType
                 Case ColumnSpec.SpecType.Component_Fraction
-                    cunits = New String() {"M", "We"}
-                    cbCondComp.Enabled = True
+                cunits = New String() {"Molar", "Mass"}
+                cbCondComp.Enabled = True
                 Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
                     cunits = New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s"}
                     cbCondComp.Enabled = True
@@ -681,8 +681,8 @@ Public Class EditingForm_Column
             Dim cunits As String() = {}
             Select Case SimObject.Specs("R").SType
                 Case ColumnSpec.SpecType.Component_Fraction
-                    cunits = New String() {"M", "We"}
-                    cbRebComp.Enabled = True
+                cunits = New String() {"Molar", "Mass"}
+                cbRebComp.Enabled = True
                 Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
                     cunits = New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s"}
                     cbRebComp.Enabled = True

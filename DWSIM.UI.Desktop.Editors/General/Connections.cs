@@ -268,7 +268,7 @@ namespace DWSIM.UI.Desktop.Editors
                     {
                         var gobj = SimObject.GraphicObject;
                         var flowsheet = SimObject.GetFlowsheet();
-                        int posx, posy;
+                        float posx, posy;
                         if (direction == "In")
                         {
                             posx = gobj.X - 100;
@@ -284,11 +284,11 @@ namespace DWSIM.UI.Desktop.Editors
                         {
                             if (connector.Type == ConType.ConEn)
                             {
-                                stream = flowsheet.AddObject(ObjectType.EnergyStream, posx, posy, cbConnection.Text);
+                                stream = flowsheet.AddObject(ObjectType.EnergyStream, (int)posx, (int)posy, cbConnection.Text);
                             }
                             else
                             {
-                                stream = flowsheet.AddObject(ObjectType.MaterialStream, posx, posy, cbConnection.Text);
+                                stream = flowsheet.AddObject(ObjectType.MaterialStream, (int)posx, (int)posy, cbConnection.Text);
                             }
                         }
                         ((Drawing.SkiaSharp.GraphicObjects.GraphicObject)stream.GraphicObject).CreateConnectors(0, 0);
