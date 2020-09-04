@@ -67,7 +67,6 @@ Partial Class EditingForm_ReactorConvEqGibbs
         Me.TabPageCompounds = New System.Windows.Forms.TabPage()
         Me.ListViewCompounds = New System.Windows.Forms.ListView()
         Me.TabPageElements = New System.Windows.Forms.TabPage()
-        Me.TabPageInitialEstimates = New System.Windows.Forms.TabPage()
         Me.TabPageGibbsParams = New System.Windows.Forms.TabPage()
         Me.tbExtLoopTol = New System.Windows.Forms.TextBox()
         Me.Label20 = New System.Windows.Forms.Label()
@@ -281,7 +280,6 @@ Partial Class EditingForm_ReactorConvEqGibbs
         Me.TabControlParameters.Controls.Add(Me.TabPageParams)
         Me.TabControlParameters.Controls.Add(Me.TabPageCompounds)
         Me.TabControlParameters.Controls.Add(Me.TabPageElements)
-        Me.TabControlParameters.Controls.Add(Me.TabPageInitialEstimates)
         Me.TabControlParameters.Controls.Add(Me.TabPageGibbsParams)
         Me.TabControlParameters.Controls.Add(Me.TabPageEqParams)
         resources.ApplyResources(Me.TabControlParameters, "TabControlParameters")
@@ -388,12 +386,6 @@ Partial Class EditingForm_ReactorConvEqGibbs
         resources.ApplyResources(Me.TabPageElements, "TabPageElements")
         Me.TabPageElements.Name = "TabPageElements"
         Me.TabPageElements.UseVisualStyleBackColor = True
-        '
-        'TabPageInitialEstimates
-        '
-        resources.ApplyResources(Me.TabPageInitialEstimates, "TabPageInitialEstimates")
-        Me.TabPageInitialEstimates.Name = "TabPageInitialEstimates"
-        Me.TabPageInitialEstimates.UseVisualStyleBackColor = True
         '
         'TabPageGibbsParams
         '
@@ -911,7 +903,6 @@ Partial Class EditingForm_ReactorConvEqGibbs
     Public WithEvents TabPageParams As System.Windows.Forms.TabPage
     Public WithEvents TabPageCompounds As System.Windows.Forms.TabPage
     Public WithEvents TabPageElements As System.Windows.Forms.TabPage
-    Public WithEvents TabPageInitialEstimates As System.Windows.Forms.TabPage
     Public WithEvents ListViewCompounds As System.Windows.Forms.ListView
     Public WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn

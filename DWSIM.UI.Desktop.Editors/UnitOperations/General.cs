@@ -1700,17 +1700,6 @@ namespace DWSIM.UI.Desktop.Editors
                         f.Controls.Add(control);
                         f.ShowDialog();
                     });
-                    s.CreateAndAddLabelRow(container, "Initial Estimates");
-                    s.CreateAndAddDescriptionRow(container, String.Format("Initial estimates for the final compound amounts (in {0}).", su.molarflow));
-                    s.CreateAndAddButtonRow(container, "Edit Initial Estimates", null, (btn, e) =>
-                    {
-                        var f = new System.Windows.Forms.Form { Width = 500, Height = 500, Text = "Initial Estimates Editor" };
-                        var control = new UnitOperations.EditingForm_Gibbs_InitialEstimatesEditor();
-                        control.gr = reactor2g;
-                        control.Dock = System.Windows.Forms.DockStyle.Fill;
-                        f.Controls.Add(control);
-                        f.ShowDialog();
-                    });
                     s.CreateAndAddLabelRow(container, "Convergence Parameters");
                     //s.CreateAndAddDescriptionRow(container, "Tune the following parameters if you're having convergence issues.");
                     s.CreateAndAddTextBoxRow(container, nf, "Maximum Internal Iterations", reactor2g.MaximumInternalIterations, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.MaximumInternalIterations = int.Parse(sender.Text); }, () => CallSolverIfNeeded());

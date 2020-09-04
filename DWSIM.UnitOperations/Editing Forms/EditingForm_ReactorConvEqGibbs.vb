@@ -169,18 +169,12 @@ Public Class EditingForm_ReactorConvEqGibbs
                 eeditor.Dock = DockStyle.Fill
                 TabPageElements.Controls.Add(eeditor)
 
-                TabPageInitialEstimates.Controls.Clear()
-                ieditor = New EditingForm_Gibbs_InitialEstimatesEditor With {.gr = Me.SimObject}
-                ieditor.Dock = DockStyle.Fill
-                TabPageInitialEstimates.Controls.Add(ieditor)
-
                 TabControlParameters.TabPages.Remove(TabPageEqParams)
 
             ElseIf TypeOf SimObject Is Reactors.Reactor_Equilibrium Then
 
                 TabControlParameters.TabPages.Remove(TabPageCompounds)
                 TabControlParameters.TabPages.Remove(TabPageElements)
-                TabControlParameters.TabPages.Remove(TabPageInitialEstimates)
                 TabControlParameters.TabPages.Remove(TabPageGibbsParams)
 
                 chkInitializeExtents.Checked = DirectCast(SimObject, Reactors.Reactor_Equilibrium).UsePreviousReactionExtents
@@ -194,7 +188,6 @@ Public Class EditingForm_ReactorConvEqGibbs
 
                 TabControlParameters.TabPages.Remove(TabPageCompounds)
                 TabControlParameters.TabPages.Remove(TabPageElements)
-                TabControlParameters.TabPages.Remove(TabPageInitialEstimates)
                 TabControlParameters.TabPages.Remove(TabPageGibbsParams)
                 TabControlParameters.TabPages.Remove(TabPageEqParams)
 

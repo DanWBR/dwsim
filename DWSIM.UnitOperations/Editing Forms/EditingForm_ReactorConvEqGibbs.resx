@@ -1050,33 +1050,6 @@
   <data name="&gt;&gt;TabPageElements.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="TabPageInitialEstimates.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="TabPageInitialEstimates.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="TabPageInitialEstimates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>370, 242</value>
-  </data>
-  <data name="TabPageInitialEstimates.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="TabPageInitialEstimates.Text" xml:space="preserve">
-    <value>Estim. Iniciais</value>
-  </data>
-  <data name="&gt;&gt;TabPageInitialEstimates.Name" xml:space="preserve">
-    <value>TabPageInitialEstimates</value>
-  </data>
-  <data name="&gt;&gt;TabPageInitialEstimates.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TabPageInitialEstimates.Parent" xml:space="preserve">
-    <value>TabControlParameters</value>
-  </data>
-  <data name="&gt;&gt;TabPageInitialEstimates.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <data name="tbExtLoopTol.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -1330,7 +1303,7 @@
     <value>TabControlParameters</value>
   </data>
   <data name="&gt;&gt;TabPageGibbsParams.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="tbExtLoopTolEq.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1615,7 +1588,7 @@
     <value>TabControlParameters</value>
   </data>
   <data name="&gt;&gt;TabPageEqParams.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="TabControlParameters.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -2563,6 +2536,6 @@
     <value>EditingForm_ReactorConvEqGibbs</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=6.1.7530.27921, Culture=neutral, PublicKeyToken=null</value>
+    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=6.1.7549.16580, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
