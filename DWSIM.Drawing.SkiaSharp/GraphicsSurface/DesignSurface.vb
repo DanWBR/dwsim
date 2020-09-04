@@ -967,22 +967,22 @@ Public Class GraphicsSurface
             Dim OutConSlot As IConnectionPoint = Nothing
             If Not gObjFrom Is Nothing Then
                 If Not gObjTo Is Nothing Then
-                    If gObjFrom.ObjectType = ObjectType.MaterialStream And gObjFrom.InputConnectors(0).IsAttached Then
+                    If gObjFrom.ObjectType = ObjectType.MaterialStream AndAlso gObjFrom.InputConnectors(0).IsAttached Then
                         If gObjTo.Name = gObjFrom.InputConnectors(0).AttachedConnector.AttachedFrom.Name Then
                             Throw New Exception("This connection is not allowed.")
                         End If
                     End If
-                    If gObjFrom.ObjectType = ObjectType.EnergyStream And gObjFrom.InputConnectors(0).IsAttached Then
+                    If gObjFrom.ObjectType = ObjectType.EnergyStream AndAlso gObjFrom.InputConnectors(0).IsAttached Then
                         If gObjTo.Name = gObjFrom.InputConnectors(0).AttachedConnector.AttachedFrom.Name Then
                             Throw New Exception("This connection is not allowed.")
                         End If
                     End If
-                    If gObjTo.ObjectType = ObjectType.MaterialStream And gObjTo.OutputConnectors(0).IsAttached Then
+                    If gObjTo.ObjectType = ObjectType.MaterialStream AndAlso gObjTo.OutputConnectors(0).IsAttached Then
                         If gObjFrom.Name = gObjTo.OutputConnectors(0).AttachedConnector.AttachedTo.Name Then
                             Throw New Exception("This connection is not allowed.")
                         End If
                     End If
-                    If gObjTo.ObjectType = ObjectType.EnergyStream And gObjTo.OutputConnectors(0).IsAttached Then
+                    If gObjTo.ObjectType = ObjectType.EnergyStream AndAlso gObjTo.OutputConnectors(0).IsAttached Then
                         If gObjFrom.Name = gObjTo.OutputConnectors(0).AttachedConnector.AttachedTo.Name Then
                             Throw New Exception("This connection is not allowed.")
                         End If
