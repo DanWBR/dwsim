@@ -572,7 +572,12 @@ Namespace UnitOperations
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PVF flash to calculate outlet temperature... P = {0} Pa, VF = {1}", P2, V2))
 
                     IObj?.SetCurrent()
-                    Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureVaporFraction, P2, m_VFout.GetValueOrDefault, Ti)
+                    Dim tmp As IFlashCalculationResult
+                    If OutletTemperature > Ti Then
+                        tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureVaporFraction, P2, m_VFout.GetValueOrDefault, OutletTemperature)
+                    Else
+                        tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureVaporFraction, P2, m_VFout.GetValueOrDefault, Ti * 1.2)
+                    End If
                     H2 = tmp.CalculatedEnthalpy
                     CheckSpec(H2, False, "outlet enthalpy")
                     T2 = tmp.CalculatedTemperature
