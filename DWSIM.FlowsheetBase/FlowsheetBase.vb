@@ -401,7 +401,7 @@ Imports DWSIM.GlobalSettings
 
                 Return Me.SimulationObjects(AddObjectToSurface(ObjectType.NodeOut, x, y, tag))
 
-            Case "Centrifugal Pump"
+            Case "Pump"
 
                 Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Pump, x, y, tag))
 

@@ -659,7 +659,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Modelo de bomba centrífuga.
+        '''  Looks up a localized string similar to Modelo de bomba.
         '''</summary>
         Friend Shared ReadOnly Property PUMP_Desc() As String
             Get
@@ -722,7 +722,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Bomba Centrífuga.
+        '''  Looks up a localized string similar to Bomba.
         '''</summary>
         Friend Shared ReadOnly Property PUMP_Name() As String
             Get

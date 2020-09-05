@@ -316,7 +316,7 @@
     <value>Piping Segment</value>
   </data>
   <data name="PUMP_Desc" xml:space="preserve">
-    <value>Centrifugal Pump model</value>
+    <value>Pump model</value>
   </data>
   <data name="PUMP_Err1" xml:space="preserve">
     <value>No type defined!</value>
@@ -337,7 +337,7 @@
     <value>Overwrite?</value>
   </data>
   <data name="PUMP_Name" xml:space="preserve">
-    <value>Centrifugal Pump</value>
+    <value>Pump</value>
   </data>
   <data name="PUMP_Saved" xml:space="preserve">
     <value>Saved</value>
