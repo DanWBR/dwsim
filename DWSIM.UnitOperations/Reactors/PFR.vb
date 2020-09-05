@@ -165,7 +165,6 @@ Namespace Reactors
 
         End Function
 
-
         Public Function ODEFunc(ByVal x As Double, ByVal y As Double()) As Double()
 
             _IObj?.SetCurrent
@@ -207,7 +206,7 @@ Namespace Reactors
             j = 0
             For Each s As String In N00.Keys
                 If y(j) < 0 Then
-                    C(s) = 0.0#
+                    C(s) = 0.0
                 Else
                     C(s) = y(j) / Qf
                 End If
@@ -217,7 +216,7 @@ Namespace Reactors
             IObj2?.Paragraphs.Add(String.Format("Compound Concentrations: {0} mol/m3", C.Values.ToArray.ToMathArrayString))
 
             'conversion factors for different basis other than molar concentrations
-            Dim convfactors As New Dictionary(Of String, Double)
+            Dim convfactors As Dictionary(Of String, Double)
 
             'loop through reactions
             Dim rxn As Reaction
@@ -228,7 +227,7 @@ Namespace Reactors
                 'process reaction i
                 rxn = FlowSheet.Reactions(ar(i))
                 For Each sb As ReactionStoichBase In rxn.Components.Values
-                    Ri(sb.CompName) = 0
+                    Ri(sb.CompName) = 0.0
                 Next
                 i += 1
             Loop Until i = ar.Count
@@ -247,7 +246,7 @@ Namespace Reactors
 
                 IObj2?.Paragraphs.Add(String.Format("T: {0} K", T))
 
-                Dim rx As Double = 0.0#
+                Dim rx As Double
 
                 convfactors = Me.GetConvFactors(rxn, ims)
 
@@ -607,6 +606,22 @@ Namespace Reactors
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
+            'this reduces the volume step once a negative moalr amount is found by the ODE solver
+            If Calculate_Internal(1.0, args) Then
+                'reduce the volume step by a factor of 10
+                If Calculate_Internal(0.1, args) Then
+                    'at this stage, if we still keep getting negative molar amounts, 
+                    'we stop solving the ODE and accept the solution since the error will be very small (hopefully)
+                    Calculate_Internal(0.05, args)
+                End If
+            End If
+
+        End Sub
+
+        Public Function Calculate_Internal(dVF As Double, Optional ByVal args As Object = Nothing) As Boolean
+
+            Dim negative As Boolean = False
+
             Dim dynamics As Boolean = False
 
             If args IsNot Nothing Then
@@ -619,7 +634,7 @@ Namespace Reactors
             If dynamics Then
                 deltaV = 1.0 / AccumulationStreams.Count
             Else
-                deltaV = dV
+                deltaV = dV * dVF
             End If
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
@@ -884,14 +899,32 @@ Namespace Reactors
                         odesolver.InitializeODEs(AddressOf ODEFunc, N.Count, 0.0, vc0)
                         IObj2?.SetCurrent
                         If dynamics Then
-                            odesolver.Solve(vc0, 0.0#, 0.01 * deltaV * Volume, deltaV * Volume, Sub(x As Double, y As Double()) vc = y)
+                            odesolver.Solve(vc0, 0.0#, 0.01 * deltaV * Volume, deltaV * Volume, Sub(x As Double, y As Double())
+                                                                                                    vc = y
+                                                                                                End Sub)
                         Else
-                            odesolver.Solve(vc0, 0.0#, 0.01 * deltaV * Volume, deltaV * Volume, Sub(x As Double, y As Double()) vc = y)
+                            odesolver.Solve(vc0, 0.0#, 0.01 * deltaV * Volume, deltaV * Volume, Sub(x As Double, y As Double())
+                                                                                                    vc = y
+                                                                                                End Sub)
                         End If
 
                         ODEFunc(0, vc)
 
                         If Double.IsNaN(vc.Sum) Then Throw New Exception(FlowSheet.GetTranslatedString("PFRMassBalanceError"))
+
+                        negative = False
+                        For i = 0 To vc.Count - 1
+                            If vc(i) < 0 Then
+                                ' negative flow detected. raise the flag.
+                                negative = True
+                            End If
+                        Next
+
+                        If negative Then
+                            'use the previous molar amounts.
+                            vc = vc0.Clone
+                            ODEFunc(0, vc)
+                        End If
 
                         C.Clear()
                         i = 0
@@ -1250,7 +1283,9 @@ Namespace Reactors
 
             IObj?.Close()
 
-        End Sub
+            Return negative
+
+        End Function
 
         Public Overrides Sub DeCalculate()
 

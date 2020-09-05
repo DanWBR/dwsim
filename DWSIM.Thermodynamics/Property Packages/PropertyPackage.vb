@@ -2672,7 +2672,6 @@ Namespace PropertyPackages
 
                                 End If
 
-
                                 Me.CurrentMaterialStream.Phases(3).Properties.molarfraction = xl
                                 Me.CurrentMaterialStream.Phases(2).Properties.molarfraction = xv
                                 Me.CurrentMaterialStream.Phases(3).Properties.massfraction = xl
