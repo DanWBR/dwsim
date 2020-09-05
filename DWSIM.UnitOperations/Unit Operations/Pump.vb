@@ -542,8 +542,8 @@ Namespace UnitOperations
 
             Dim Ti, Pi, Hi, Wi, rho_li, qli, qvi, ei, ein, T2, P2, H2 As Double
 
-            qvi = msin.Phases(2).Properties.volumetric_flow.GetValueOrDefault
-            If qvi > 0 And Not Me.IgnorePhase Then Throw New Exception(FlowSheet.GetTranslatedString("ExisteumaPhasevaporna"))
+            qvi = msin.Phases(2).Properties.massflow.GetValueOrDefault
+            If qvi > 0 Then Throw New Exception(FlowSheet.GetTranslatedString("ExisteumaPhasevaporna"))
 
             Ti = msin.Phases(0).Properties.temperature.GetValueOrDefault
             Pi = msin.Phases(0).Properties.pressure.GetValueOrDefault
