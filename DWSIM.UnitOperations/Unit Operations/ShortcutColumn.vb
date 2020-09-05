@@ -314,39 +314,41 @@ restart:    B = F - D
                         End If
                     End If
                     i = i + 1
-                Loop Until i = count + 1
+                Loop Until i > count
 
-                Dim MA As New Mapack.Matrix(count, count)
-                Dim MB As New Mapack.Matrix(count, 1)
-                Dim MX As New Mapack.Matrix(count, count)
+                Dim MA As New Mapack.Matrix(count + 1, count + 1)
+                Dim MB As New Mapack.Matrix(count + 1, 1)
+                Dim MX As New Mapack.Matrix(1, count + 1)
 
-                Dim j As Integer = 0
+                Dim j, j2 As Integer
                 i = 0
                 Do
-                    MB(i, 0) = 0.0
-                    j = 0
-                    Do
-                        If j = 0 Then
-                            MA(i, j) = 1.0 'L/D min
-                        Else
-                            MA(i, j) = -alpha(indexes(j)) / (alpha(indexes(j)) - teta(i))
-                        End If
-                        j = j + 1
-                    Loop Until j = count
-                    j = 0
-                    Do
-                        If j <> indexes(j) Then
+                    MB(i, 0) = -1.0
+                    MA(i, 0) = 1.0 'L/D min
+                    j2 = 0
+                    For j = 0 To alpha.Count - 1
+                        If Not indexes.Contains(j) Then
                             MB(i, 0) += alpha(j) * xd(j) / (alpha(j) - teta(i))
+                        Else
+                            MA(i, j2 + 1) = -alpha(j) / (alpha(j) - teta(i))
+                            j2 += 1
                         End If
-                        j = j + 1
-                    Loop Until j >= count
-                    MB(i, 0) -= 1
+                    Next
                     i = i + 1
-                Loop Until i >= count
+                Loop Until i > count
 
                 MX = MA.Solve(MB)
 
                 m_Rmin = MX(0, 0)
+
+                Dim sum As Double = 0.0
+                For j = 0 To teta.Count - 1
+                    For i = 0 To n
+                        If z(i) > 0.0 Then sum += alpha(i) * xd(i) / (alpha(i) - teta(j))
+                    Next
+                Next
+
+                m_Rmin = sum / teta.Count - 1
 
             End If
 
