@@ -28,6 +28,7 @@ Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Interfaces.Enums
 Imports System.Math
 Imports DWSIM.MathOps.MathEx
+Imports IronPython.Zlib
 
 Namespace UnitOperations
 
@@ -232,8 +233,7 @@ restart:    B = F - D
 
             'calculate minimum reflux by Underwood's method
 
-            Dim brentsolver As New BrentOpt.Brent
-            brentsolver.DefineFuncDelegate(AddressOf rminfunc)
+            Dim brentsolver As New BrentOpt.BrentMinimize
 
             Dim mode2 As Boolean = False
             Dim count As Integer = 0
@@ -254,7 +254,10 @@ restart:    B = F - D
 
                 Dim teta, L_Dmin, sum As Double
 
-                teta = brentsolver.BrentOpt(alpha(hki) * 1.01, alpha(lki), 10, 0.0000001, 100, New Object() {alpha, z, q, n})
+                teta = brentsolver.brentoptimize2(alpha(hki) * 1.01, alpha(lki), 0.0000001,
+                                                Function(x)
+                                                    Return rminfunc(x, alpha, z, q, n)
+                                                End Function)
 
                 sum = 0
                 i = 0
@@ -274,11 +277,41 @@ restart:    B = F - D
                 i = 0
                 Do
                     If i = 0 Then
-                        teta(i) = brentsolver.BrentOpt(alpha(lki), alpha(indexes(i)), 10, 1.0E-20, 100, New Object() {alpha, z, q, n})
+                        If alpha(lki) < alpha(indexes(i)) Then
+                            teta(i) = brentsolver.brentoptimize2(alpha(lki) * 1.01, alpha(indexes(i)) * 0.99, 0.0000001,
+                                                Function(x)
+                                                    Return rminfunc(x, alpha, z, q, n)
+                                                End Function)
+                        Else
+                            teta(i) = brentsolver.brentoptimize2(alpha(indexes(i)) * 1.01, alpha(lki) * 0.99, 0.0000001,
+                                                Function(x)
+                                                    Return rminfunc(x, alpha, z, q, n)
+                                                End Function)
+                        End If
                     ElseIf i = count Then
-                        teta(i) = brentsolver.BrentOpt(alpha(indexes(i - 1)), alpha(hki), 10, 1.0E-20, 100, New Object() {alpha, z, q, n})
+                        If alpha(indexes(i - 1)) < alpha(hki) Then
+                            teta(i) = brentsolver.brentoptimize2(alpha(indexes(i - 1)) * 1.01, alpha(hki) * 0.99, 0.0000001,
+                                                Function(x)
+                                                    Return rminfunc(x, alpha, z, q, n)
+                                                End Function)
+                        Else
+                            teta(i) = brentsolver.brentoptimize2(alpha(hki) * 1.01, alpha(indexes(i - 1)) * 0.99, 0.0000001,
+                                                Function(x)
+                                                    Return rminfunc(x, alpha, z, q, n)
+                                                End Function)
+                        End If
                     Else
-                        teta(i) = brentsolver.BrentOpt(alpha(indexes(i - 1)), alpha(indexes(i)), 10, 1.0E-20, 100, New Object() {alpha, z, q, n})
+                        If alpha(indexes(i - 1)) < alpha(indexes(i)) Then
+                            teta(i) = brentsolver.brentoptimize2(alpha(indexes(i - 1)) * 1.01, alpha(indexes(i)) * 0.99, 0.0000001,
+                                                Function(x)
+                                                    Return rminfunc(x, alpha, z, q, n)
+                                                End Function)
+                        Else
+                            teta(i) = brentsolver.brentoptimize2(alpha(indexes(i - 1)) * 1.01, alpha(indexes(i)) * 0.99, 0.0000001,
+                                                Function(x)
+                                                    Return rminfunc(x, alpha, z, q, n)
+                                                End Function)
+                        End If
                     End If
                     i = i + 1
                 Loop Until i = count + 1
@@ -290,11 +323,11 @@ restart:    B = F - D
                 Dim j As Integer = 0
                 i = 0
                 Do
-                    MB(i, 0) = 0
+                    MB(i, 0) = 0.0
                     j = 0
                     Do
                         If j = 0 Then
-                            MA(i, j) = 1 'L/D min
+                            MA(i, j) = 1.0 'L/D min
                         Else
                             MA(i, j) = -alpha(indexes(j)) / (alpha(indexes(j)) - teta(i))
                         End If
@@ -443,23 +476,18 @@ restart:    B = F - D
 
         End Sub
 
-        Function rminfunc(ByVal x As Double, ByVal otherargs As Object) As Double
+        Function rminfunc(ByVal x As Double, alpha As Object, z As Object, q As Double, n As Integer) As Double
 
-            If Double.IsNaN(x) Then Return Nothing
-
-            Dim alpha As Object = otherargs(0)
-            Dim z As Object = otherargs(1)
-            Dim q As Double = otherargs(2)
-            Dim n As Integer = otherargs(3)
-
-            Dim value As Double
+            Dim value As Double = 0.0
             Dim j As Integer = 0
             Do
-                If z(j) <> 0 Then value += (alpha(j) * z(j)) / (alpha(j) - x)
+                If z(j) <> 0.0 Then
+                    value += alpha(j) * z(j) / (alpha(j) - x)
+                End If
                 j = j + 1
             Loop Until j = n + 1
 
-            Return value - 1 + q
+            Return (value - 1 + q) ^ 2
 
         End Function
 

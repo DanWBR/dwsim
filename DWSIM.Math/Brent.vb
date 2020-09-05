@@ -39,8 +39,13 @@ Namespace MathEx.BrentOpt
 
             Dim x_inf, x_sup, y_inf, y, delta_x As Double
 
-            x_inf = minval
-            x_sup = maxval
+            If minval < maxval Then
+                x_inf = minval
+                x_sup = maxval
+            Else
+                x_inf = maxval
+                x_sup = minval
+            End If
 
             delta_x = (x_sup - x_inf) / n
 
