@@ -544,11 +544,11 @@ Public Class EditingForm_ShortcutColumn
         If Loaded Then
             Try
                 If sender Is cbCondPressureUnits Then
-                    tbCondPressure.Text = su.Converter.Convert(cbCondPressureUnits.SelectedItem.ToString, units.temperature, Double.Parse(tbCondPressure.Text)).ToString(nf)
+                    tbCondPressure.Text = su.Converter.Convert(cbCondPressureUnits.SelectedItem.ToString, units.pressure, Double.Parse(tbCondPressure.Text)).ToString(nf)
                     cbCondPressureUnits.SelectedItem = units.pressure
                     UpdateProps(tbCondPressure)
                 ElseIf sender Is cbRebPressureUnits Then
-                    tbRebPressure.Text = su.Converter.Convert(cbRebPressureUnits.SelectedItem.ToString, units.deltaT, Double.Parse(tbRebPressure.Text)).ToString(nf)
+                    tbRebPressure.Text = su.Converter.Convert(cbRebPressureUnits.SelectedItem.ToString, units.pressure, Double.Parse(tbRebPressure.Text)).ToString(nf)
                     cbRebPressureUnits.SelectedItem = units.pressure
                     UpdateProps(tbRebPressure)
                 End If

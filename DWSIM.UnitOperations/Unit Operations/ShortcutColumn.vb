@@ -341,14 +341,14 @@ restart:    B = F - D
 
                 m_Rmin = MX(0, 0)
 
-                Dim sum As Double = 0.0
-                For j = 0 To teta.Count - 1
-                    For i = 0 To n
-                        If z(i) > 0.0 Then sum += alpha(i) * xd(i) / (alpha(i) - teta(j))
-                    Next
-                Next
+                'Dim sum As Double = 0.0
+                'For j = 0 To teta.Count - 1
+                '    For i = 0 To n
+                '        If z(i) > 0.0 Then sum += alpha(i) * xd(i) / (alpha(i) - teta(j))
+                '    Next
+                'Next
 
-                m_Rmin = sum / teta.Count - 1
+                'm_Rmin = sum / teta.Count - 1
 
             End If
 
