@@ -176,6 +176,10 @@ Namespace Reactors
 
 #Region "Properties"
 
+        Public Property InitializeFromPreviousSolution As Boolean = True
+
+        Public Property PreviousSolution As New List(Of Double)
+
         Public Property EnableDamping As Boolean = True
 
         Public Property DampingLowerLimit As Double = 0.001
@@ -810,81 +814,90 @@ Namespace Reactors
 
             IObj?.Paragraphs.Add(String.Format("Ideal Gas Gibbs Energy values: {0}", igge.ToMathArrayString))
 
-            'estimate initial values by solving linear problem using lp_solve
-
-            'DWSIM.Thermodynamics.Calculator.CheckParallelPInvoke()
-
-            Dim lp As IntPtr
-
-            lpsolve55.Init(".")
-            lp = lpsolve55.make_lp(0, c + 1)
-            lpsolve55.default_basis(lp)
-
-            For i = 0 To e
-                For j = 1 To c + 1
-                    re(j) = Me.ElementMatrix(i, j - 1)
-                Next
-                lpsolve55.add_constraint(lp, re, lpsolve55.lpsolve_constr_types.EQ, Me.TotalElements(i))
-            Next
-
-            'calculate ideal gas gibbs energy values
-
-            pp.CurrentMaterialStream = ims
-
-            For i = 1 To c + 1
-                igge_lp(i) = pp.AUX_DELGF_T(298.15, T, Me.ComponentIDs(i - 1)) * FlowSheet.Options.SelectedComponents(Me.ComponentIDs(i - 1)).Molar_Weight + Log(P / P0)
-                lpsolve55.set_lowbo(lp, i, 0)
-            Next
-
-            lpsolve55.set_obj_fn(lp, igge_lp)
-            lpsolve55.set_minim(lp)
-            lpsolve55.solve(lp)
-
-            lpsolve55.print_lp(lp)
-
-            lpsolve55.print_solution(lp, c + 1)
-
-            'the linear problem solution consists of only 'e' molar flows higher than zero.
-
+            Dim lagrm(e) As Double
+            Dim nv, nl1, nl2, ns, nt As Double
             Dim resc(c) As Double
 
-            lpsolve55.get_variables(lp, resc)
+            If InitializeFromPreviousSolution And PreviousSolution.Count > 0 Then
 
-            lpsolve55.delete_lp(lp)
+                lagrm = PreviousSolution.Take(e + 1).ToArray()
+                resc = PreviousSolution.GetRange(e + 1, c + 1).ToArray()
 
-            IObj?.Paragraphs.Add(String.Format("Initial Mole Amounts {0}", resc.ToArray.ToMathArrayString))
+            Else
 
-            'estimate lagrange multipliers
+                'estimate initial values by solving linear problem using lp_solve
 
-            Dim lagrm(e) As Double
+                'DWSIM.Thermodynamics.Calculator.CheckParallelPInvoke()
 
-            Dim mymat As New Mapack.Matrix(e + 1, e + 1)
-            Dim mypot As New Mapack.Matrix(e + 1, 1)
-            Dim mylags As New Mapack.Matrix(e + 1, 1)
+                Dim lp As IntPtr
 
-            Dim k As Integer = 0
+                lpsolve55.Init(".")
+                lp = lpsolve55.make_lp(0, c + 1)
+                lpsolve55.default_basis(lp)
 
-            For i = 0 To e
-                k = 0
-                For j = 0 To c
-                    If resc(j) > 0.0# Then
-                        mymat(i, k) = Me.ElementMatrix(i, j)
-                        mypot(k, 0) = igge(j)
-                        k += 1
-                    End If
-                Next
-            Next
-
-            Try
-                mylags = mymat.Solve(mypot.Multiply(-1))
                 For i = 0 To e
-                    lagrm(i) = mylags(i, 0)
+                    For j = 1 To c + 1
+                        re(j) = Me.ElementMatrix(i, j - 1)
+                    Next
+                    lpsolve55.add_constraint(lp, re, lpsolve55.lpsolve_constr_types.EQ, Me.TotalElements(i))
                 Next
-            Catch ex As Exception
+
+                'calculate ideal gas gibbs energy values
+
+                pp.CurrentMaterialStream = ims
+
+                For i = 1 To c + 1
+                    igge_lp(i) = pp.AUX_DELGF_T(298.15, T, Me.ComponentIDs(i - 1)) * FlowSheet.SelectedCompounds(Me.ComponentIDs(i - 1)).Molar_Weight + Log(P / P0)
+                    lpsolve55.set_lowbo(lp, i, 0)
+                Next
+
+                lpsolve55.set_obj_fn(lp, igge_lp)
+                lpsolve55.set_minim(lp)
+                lpsolve55.solve(lp)
+
+                lpsolve55.print_lp(lp)
+
+                lpsolve55.print_solution(lp, c + 1)
+
+                'the linear problem solution consists of only 'e' molar flows higher than zero.
+
+                lpsolve55.get_variables(lp, resc)
+
+                lpsolve55.delete_lp(lp)
+
+                IObj?.Paragraphs.Add(String.Format("Initial Mole Amounts {0}", resc.ToArray.ToMathArrayString))
+
+                'estimate lagrange multipliers
+
+                Dim mymat As New Mapack.Matrix(e + 1, e + 1)
+                Dim mypot As New Mapack.Matrix(e + 1, 1)
+                Dim mylags As New Mapack.Matrix(e + 1, 1)
+
+                Dim k As Integer = 0
+
                 For i = 0 To e
-                    lagrm(i) = 0.0
+                    k = 0
+                    For j = 0 To c
+                        If resc(j) > 0.0# Then
+                            mymat(i, k) = Me.ElementMatrix(i, j)
+                            mypot(k, 0) = igge(j)
+                            k += 1
+                        End If
+                    Next
                 Next
-            End Try
+
+                Try
+                    mylags = mymat.Solve(mypot.Multiply(-1))
+                    For i = 0 To e
+                        lagrm(i) = mylags(i, 0)
+                    Next
+                Catch ex As Exception
+                    For i = 0 To e
+                        lagrm(i) = 0.0
+                    Next
+                End Try
+
+            End If
 
             Dim g0, g1, result(c + e + 1) As Double
 
@@ -958,8 +971,6 @@ Namespace Reactors
                 End If
 
                 IObj2?.Paragraphs.Add(String.Format("Initial Estimate for Mixture Molar Composition: {0}", xm0.ToMathArrayString))
-
-                Dim nv, nl1, nl2, ns, nt As Double
 
                 IObj2?.SetCurrent
                 Dim flashresults = pp.FlashBase.CalculateEquilibrium(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.T, P, T, pp, xm0, Nothing, 0)
@@ -1084,14 +1095,7 @@ Namespace Reactors
                     nl2 = finalx(e + 3)
                     ns = finalx(e + 4)
 
-                    lagrm = finalx.Take(e + 1).ToArray
-
                     IObj3?.Paragraphs.Add(String.Format("Updated Lagrange Multipliers: {0}", lagrm.ToMathArrayString))
-
-                    nv = finalx(e + 1)
-                    nl1 = finalx(e + 2)
-                    nl2 = finalx(e + 3)
-                    ns = finalx(e + 4)
 
                     IObj3?.SetCurrent
                     fv_0 = pp.DW_CalcFugCoeff(xv_0, T, P, PropertyPackages.State.Vapor).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
@@ -1293,6 +1297,15 @@ Namespace Reactors
                 IObj2?.Close()
 
             Loop Until CalcFinished
+
+            PreviousSolution.Clear()
+
+            For i = 0 To lagrm.Count - 1
+                PreviousSolution.Add(lagrm(i))
+            Next
+            For i = 0 To N.Count - 1
+                PreviousSolution.Add(N.Values.ToArray(i))
+            Next
 
             IObj?.SetCurrent
 

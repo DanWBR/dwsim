@@ -16,7 +16,6 @@ Public Class EditingForm_ReactorConvEqGibbs
     Dim nf As String
 
     Dim eeditor As EditingForm_Gibbs_ElementMatrixEditor
-    Dim ieditor As EditingForm_Gibbs_InitialEstimatesEditor
 
     Private Sub EditingForm_HeaterCooler_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -136,6 +135,8 @@ Public Class EditingForm_ReactorConvEqGibbs
 
                 'txtDampingLowerLimit.Text = DirectCast(SimObject, Reactors.Reactor_Gibbs).DampingLowerLimit.ToString("G")
                 'txtDampingUpperLimit.Text = DirectCast(SimObject, Reactors.Reactor_Gibbs).DampingUpperLimit.ToString("G")
+
+                chkGibbsUsePreviousSolution.Checked = DirectCast(SimObject, Reactors.Reactor_Gibbs).InitializeFromPreviousSolution
 
                 tbExtLoopMaxIts.Text = DirectCast(SimObject, Reactors.Reactor_Gibbs).MaximumExternalIterations
                 tbIntLoopMaxIts.Text = DirectCast(SimObject, Reactors.Reactor_Gibbs).MaximumInternalIterations
@@ -321,7 +322,6 @@ Public Class EditingForm_ReactorConvEqGibbs
                     End If
                 End If
             Next
-            ieditor.GibbsInitialEstimatesEditorForm_Load(sender, e)
         End If
     End Sub
 
@@ -643,4 +643,9 @@ Public Class EditingForm_ReactorConvEqGibbs
 
     End Sub
 
+    Private Sub chkGibbsUsePreviousSolution_CheckedChanged(sender As Object, e As EventArgs) Handles chkGibbsUsePreviousSolution.CheckedChanged
+        If TypeOf SimObject Is Reactors.Reactor_Gibbs And Loaded Then
+            DirectCast(SimObject, Reactors.Reactor_Gibbs).InitializeFromPreviousSolution = chkGibbsUsePreviousSolution.Checked
+        End If
+    End Sub
 End Class

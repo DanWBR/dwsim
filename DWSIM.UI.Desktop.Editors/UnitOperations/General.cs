@@ -1701,7 +1701,7 @@ namespace DWSIM.UI.Desktop.Editors
                         f.ShowDialog();
                     });
                     s.CreateAndAddLabelRow(container, "Convergence Parameters");
-                    //s.CreateAndAddDescriptionRow(container, "Tune the following parameters if you're having convergence issues.");
+                    s.CreateAndAddCheckBoxRow(container, "Initialize from Previous Solution", reactor2g.InitializeFromPreviousSolution, (sender, e) => reactor2g.InitializeFromPreviousSolution = sender.Checked.GetValueOrDefault(), () => CallSolverIfNeeded());
                     s.CreateAndAddTextBoxRow(container, nf, "Maximum Internal Iterations", reactor2g.MaximumInternalIterations, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.MaximumInternalIterations = int.Parse(sender.Text); }, () => CallSolverIfNeeded());
                     s.CreateAndAddTextBoxRow(container, nf, "Maximum External Iterations", reactor2g.MaximumExternalIterations, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.MaximumExternalIterations = int.Parse(sender.Text); }, () => CallSolverIfNeeded());
                     s.CreateAndAddTextBoxRow(container, nf, "Minimum Internal Error", reactor2g.InternalTolerance, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2g.InternalTolerance = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());

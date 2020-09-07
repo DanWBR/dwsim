@@ -193,20 +193,107 @@
   <data name="Label9.Text" xml:space="preserve">
     <value>Property Package</value>
   </data>
-  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>382, 287</value>
-  </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Calculation Parameters</value>
-  </data>
-  <data name="TabControlParameters.Size" type="System.Drawing.Size, System.Drawing">
-    <value>376, 268</value>
-  </data>
   <data name="TabPageParams.Size" type="System.Drawing.Size, System.Drawing">
     <value>368, 242</value>
   </data>
   <data name="TabPageParams.Text" xml:space="preserve">
     <value>Parameters</value>
+  </data>
+  <data name="TabPageCompounds.Size" type="System.Drawing.Size, System.Drawing">
+    <value>368, 242</value>
+  </data>
+  <data name="TabPageCompounds.Text" xml:space="preserve">
+    <value>Compounds</value>
+  </data>
+  <data name="TabPageElements.Size" type="System.Drawing.Size, System.Drawing">
+    <value>368, 242</value>
+  </data>
+  <data name="TabPageElements.Text" xml:space="preserve">
+    <value>Elements</value>
+  </data>
+  <data name="chkGibbsUsePreviousSolution.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 20</value>
+  </data>
+  <data name="chkGibbsUsePreviousSolution.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 17</value>
+  </data>
+  <data name="chkGibbsUsePreviousSolution.Text" xml:space="preserve">
+    <value>Initialize from Previous Solution</value>
+  </data>
+  <data name="tbExtLoopTol.Location" type="System.Drawing.Point, System.Drawing">
+    <value>196, 129</value>
+  </data>
+  <data name="tbExtLoopTol.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 20</value>
+  </data>
+  <data name="Label20.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 133</value>
+  </data>
+  <data name="Label20.Text" xml:space="preserve">
+    <value>External Loop Tolerance</value>
+  </data>
+  <data name="tbIntLoopTol.Location" type="System.Drawing.Point, System.Drawing">
+    <value>196, 102</value>
+  </data>
+  <data name="tbIntLoopTol.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 20</value>
+  </data>
+  <data name="Label18.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 106</value>
+  </data>
+  <data name="Label18.Text" xml:space="preserve">
+    <value>Internal Loop Tolerance</value>
+  </data>
+  <data name="tbExtLoopMaxIts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>196, 75</value>
+  </data>
+  <data name="tbExtLoopMaxIts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 20</value>
+  </data>
+  <data name="Label17.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 79</value>
+  </data>
+  <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 13</value>
+  </data>
+  <data name="Label17.Text" xml:space="preserve">
+    <value>Max. External Loop Iterations</value>
+  </data>
+  <data name="tbIntLoopMaxIts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>196, 48</value>
+  </data>
+  <data name="tbIntLoopMaxIts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 20</value>
+  </data>
+  <data name="Label16.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 52</value>
+  </data>
+  <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 13</value>
+  </data>
+  <data name="Label16.Text" xml:space="preserve">
+    <value>Max. Internal Loop Iterations</value>
+  </data>
+  <data name="TabPageGibbsParams.Size" type="System.Drawing.Size, System.Drawing">
+    <value>368, 242</value>
+  </data>
+  <data name="TabPageGibbsParams.Text" xml:space="preserve">
+    <value>Convergence</value>
+  </data>
+  <data name="TabPageEqParams.Size" type="System.Drawing.Size, System.Drawing">
+    <value>368, 242</value>
+  </data>
+  <data name="TabPageEqParams.Text" xml:space="preserve">
+    <value>Convergence</value>
+  </data>
+  <data name="TabControlParameters.Size" type="System.Drawing.Size, System.Drawing">
+    <value>376, 268</value>
+  </data>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>382, 287</value>
+  </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Calculation Parameters</value>
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 13</value>
@@ -265,92 +352,8 @@
   <data name="cbTemp.Size" type="System.Drawing.Size, System.Drawing">
     <value>92, 21</value>
   </data>
-  <data name="TabPageCompounds.Size" type="System.Drawing.Size, System.Drawing">
-    <value>368, 242</value>
-  </data>
-  <data name="TabPageCompounds.Text" xml:space="preserve">
-    <value>Compounds</value>
-  </data>
   <data name="ListViewCompounds.Size" type="System.Drawing.Size, System.Drawing">
     <value>368, 242</value>
-  </data>
-  <data name="TabPageElements.Size" type="System.Drawing.Size, System.Drawing">
-    <value>368, 242</value>
-  </data>
-  <data name="TabPageElements.Text" xml:space="preserve">
-    <value>Elements</value>
-  </data>
-  <data name="TabPageInitialEstimates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>368, 242</value>
-  </data>
-  <data name="TabPageInitialEstimates.Text" xml:space="preserve">
-    <value>Initial Estimates</value>
-  </data>
-  <data name="TabPageGibbsParams.Size" type="System.Drawing.Size, System.Drawing">
-    <value>368, 242</value>
-  </data>
-  <data name="TabPageGibbsParams.Text" xml:space="preserve">
-    <value>Convergence</value>
-  </data>
-  <data name="tbExtLoopTol.Location" type="System.Drawing.Point, System.Drawing">
-    <value>196, 102</value>
-  </data>
-  <data name="tbExtLoopTol.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 20</value>
-  </data>
-  <data name="Label20.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 106</value>
-  </data>
-  <data name="Label20.Text" xml:space="preserve">
-    <value>External Loop Tolerance</value>
-  </data>
-  <data name="tbIntLoopTol.Location" type="System.Drawing.Point, System.Drawing">
-    <value>196, 75</value>
-  </data>
-  <data name="tbIntLoopTol.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 20</value>
-  </data>
-  <data name="Label18.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 79</value>
-  </data>
-  <data name="Label18.Text" xml:space="preserve">
-    <value>Internal Loop Tolerance</value>
-  </data>
-  <data name="tbExtLoopMaxIts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>196, 48</value>
-  </data>
-  <data name="tbExtLoopMaxIts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 20</value>
-  </data>
-  <data name="Label17.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 52</value>
-  </data>
-  <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 13</value>
-  </data>
-  <data name="Label17.Text" xml:space="preserve">
-    <value>Max. External Loop Iterations</value>
-  </data>
-  <data name="tbIntLoopMaxIts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>196, 21</value>
-  </data>
-  <data name="tbIntLoopMaxIts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 20</value>
-  </data>
-  <data name="Label16.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 25</value>
-  </data>
-  <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 13</value>
-  </data>
-  <data name="Label16.Text" xml:space="preserve">
-    <value>Max. Internal Loop Iterations</value>
-  </data>
-  <data name="TabPageEqParams.Size" type="System.Drawing.Size, System.Drawing">
-    <value>368, 242</value>
-  </data>
-  <data name="TabPageEqParams.Text" xml:space="preserve">
-    <value>Convergence</value>
   </data>
   <data name="tbExtLoopTolEq.Location" type="System.Drawing.Point, System.Drawing">
     <value>223, 124</value>

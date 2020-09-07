@@ -1434,6 +1434,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                 baseexception = iex.InnerException
                             End While
                             fgui.ShowMessage(baseexception.Message.ToString, IFlowsheet.MessageType.GeneralError, euid)
+                            Console.WriteLine(baseexception.ToString)
                             IObj?.Paragraphs.Add(baseexception.Message)
                         Next
                     Else
@@ -1446,6 +1447,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                             End While
                         End If
                         fgui.ShowMessage(baseexception.Message.ToString, IFlowsheet.MessageType.GeneralError, euid)
+                        Console.WriteLine(baseexception.ToString)
                         IObj?.Paragraphs.Add(baseexception.Message)
                     End If
                 Next

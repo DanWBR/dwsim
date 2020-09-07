@@ -5,9 +5,6 @@ Public Class lpsolve55
 
     'lpsolve version 5 routines
 
-    Private Declare Function SetEnvironmentVariableA Lib "kernel32" (ByVal lpname As String, ByVal lpValue As String) As Integer
-    Private Declare Function GetEnvironmentVariableA Lib "kernel32" (ByVal lpname As String, ByVal lpBuffer As String, ByVal nSize As Integer) As Integer
-
     '-----------------------------------------------------------------------------------------------------------------------------
 
     Public Declare Function add_column Lib "lpsolve55" Alias "add_column" (ByVal lp As IntPtr, ByVal column() As Double) As Boolean
@@ -402,24 +399,12 @@ Public Class lpsolve55
     End Enum
 
     Private Shared Function SetEnvironmentVariable(ByRef name As String, ByRef value As String) As Boolean
-
-        SetEnvironmentVariable = SetEnvironmentVariableA(name, value)
-
+        Environment.SetEnvironmentVariable(name, value, EnvironmentVariableTarget.Process)
+        Return True
     End Function
 
     Private Shared Function GetEnvironmentVariable(ByRef name As String) As String
-        Dim l As Integer
-        Dim buf As String
-
-        l = GetEnvironmentVariableA(name, vbNullString, 0)
-        If l > 0 Then
-            buf = Space(l)
-            l = GetEnvironmentVariableA(name, buf, Len(buf))
-            GetEnvironmentVariable = Mid(buf, 1, l)
-        Else
-            GetEnvironmentVariable = ""
-        End If
-
+        Return Environment.GetEnvironmentVariable(name, EnvironmentVariableTarget.Process)
     End Function
 
     Shared Function Init(Optional ByVal dllPath As String = "") As Boolean

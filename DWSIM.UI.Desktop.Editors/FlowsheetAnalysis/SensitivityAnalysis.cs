@@ -50,7 +50,7 @@ namespace DWSIM.UI.Desktop.Editors
             p2 = UI.Shared.Common.GetDefaultContainer();
 
             p1.Width = 380;
-            p2.Width = 380;
+            p2.Width = 470;
 
             t1 = new StackLayout();
             t1.Items.Add(new StackLayoutItem(p1));
@@ -182,10 +182,10 @@ namespace DWSIM.UI.Desktop.Editors
                     p1.Height = p1.ParentWindow.Height - 170;
                     p2.Height = p1.Height;
                     sc.Height = p2.Height - btnAddDepVar.Height - 30;
-                    foreach (var item in ll.Items)
-                    {
-                        item.Control.Width = sc.Width - 25;
-                    }
+                    //foreach (var item in ll.Items)
+                    //{
+                    //    item.Control.Width = sc.Width - 25;
+                    //}
                 }
             };
 
@@ -417,7 +417,7 @@ namespace DWSIM.UI.Desktop.Editors
             var su = flowsheet.FlowsheetOptions.SelectedUnitSystem;
 
             List<string> proplist2 = new List<string>();
-            var myview = new DynamicLayout { Padding = new Padding(5), Width = container.Width - 25};
+            var myview = new DynamicLayout { Padding = new Padding(5), Width = 400};
             var slcontainer = new StackLayoutItem(myview);
             s.CreateAndAddLabelRow(myview, "Dependent Variable #" + (container.Items.Count + 1).ToString());
             var spinobj = s.CreateAndAddDropDownRow(myview, "Object", objlist, 0, null);
