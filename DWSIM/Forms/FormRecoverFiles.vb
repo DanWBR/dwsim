@@ -41,6 +41,9 @@ Public Class FormRecoverFiles
 
     Private Sub KryptonButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonButton1.Click
 
+        FormMain.WelcomePanel.Visible = False
+        FormMain.PainelDeBoasvindasToolStripMenuItem.Checked = False
+
         For Each row As DataGridViewRow In Me.Grid1.SelectedRows
             Try
                 If row.Cells(0).Value = 1 Then
