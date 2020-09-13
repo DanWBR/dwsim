@@ -17,12 +17,7 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Math
-
 Imports DWSIM.MathOps.MathEx
-Imports DWSIM.MathOps.MathEx.Common
-
-Imports System.Threading.Tasks
-Imports System.Linq
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
@@ -348,8 +343,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 End If
 
                 If LimitVaporFraction Then
-                    If V < 0.0# Then V = 0.0#
-                    If V > 1.0# Then V = 1.0#
+                    If V < 0.0# Then V = 0.0
+                    If V > 1.0# Then V = 1.0
                 End If
 
                 L = 1 - V

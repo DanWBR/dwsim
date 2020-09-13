@@ -1003,10 +1003,12 @@ Namespace Reactors
                     'Accelerate calculations by increasing time step up to residence time as maximum
 
                     MaxChange = -TR.Min
-                    If MaxChange < 0.3 Then
-                        dT *= 1.2
+                    'If MaxChange < 0.3 Then
+                    '    dT *= 1.2
+                    'End If
+                    If dT > 0.2 * ResidenceTimeL Then
+                        dT = 0.2 * ResidenceTimeL
                     End If
-                    If dT > 0.2 * ResidenceTimeL Then dT = 0.2 * ResidenceTimeL
 
                 End If
 
@@ -1164,7 +1166,7 @@ out:        Dim ms1, ms2 As MaterialStream
 
             'Calculate component conversions
             For i = 0 To NC - 1
-                If Nin(i) > 0 Then
+                If Nin(i) - Nout(0) > 0 Then
                     ComponentConversions(CompNames(i)) = Abs(Nin(i) - Nout(i)) / Nin(i)
                 End If
             Next
