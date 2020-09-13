@@ -322,6 +322,8 @@ Public Class EditingForm_ReactorConvEqGibbs
                     End If
                 End If
             Next
+            eeditor.CreateMatrix()
+            eeditor.SaveMatrix()
         End If
     End Sub
 

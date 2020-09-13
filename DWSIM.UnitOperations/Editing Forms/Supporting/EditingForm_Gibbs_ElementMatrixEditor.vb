@@ -86,7 +86,7 @@ Public Class EditingForm_Gibbs_ElementMatrixEditor
         End If
     End Sub
 
-    Private Sub ToolStripButton4_Click(sender As Object, e As EventArgs) Handles ToolStripButton4.Click
+    Public Sub CreateMatrix()
         gr.CreateElementMatrix()
 
         Dim i, j, e_, c As Integer
@@ -113,7 +113,11 @@ Public Class EditingForm_Gibbs_ElementMatrixEditor
         End With
     End Sub
 
-    Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles ToolStripButton3.Click
+    Private Sub ToolStripButton4_Click(sender As Object, e As EventArgs) Handles ToolStripButton4.Click
+        CreateMatrix()
+    End Sub
+
+    Public Sub SaveMatrix()
         ReDim elmat(Me.grid.Rows.Count - 1, Me.grid.Columns.Count - 2)
         ReDim gr.TotalElements(Me.grid.Rows.Count - 1)
         Dim sum_e As Double
@@ -130,4 +134,9 @@ Public Class EditingForm_Gibbs_ElementMatrixEditor
         gr.Elements = elements.ToArray(Type.GetType("System.String"))
         gr.ElementMatrix = elmat
     End Sub
+
+    Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles ToolStripButton3.Click
+        SaveMatrix()
+    End Sub
+
 End Class
