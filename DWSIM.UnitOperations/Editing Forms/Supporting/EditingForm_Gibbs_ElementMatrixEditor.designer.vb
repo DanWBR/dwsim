@@ -25,14 +25,14 @@ Partial Class EditingForm_Gibbs_ElementMatrixEditor
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_Gibbs_ElementMatrixEditor))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.grid = New System.Windows.Forms.DataGridView()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton()
         Me.GroupBox1.SuspendLayout()
         CType(Me.grid, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox2.SuspendLayout()
+        Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -49,62 +49,56 @@ Partial Class EditingForm_Gibbs_ElementMatrixEditor
         Me.grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grid.Name = "grid"
         '
-        'Button1
+        'ToolStrip1
         '
-        resources.ApplyResources(Me.Button1, "Button1")
-        Me.Button1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.add
-        Me.Button1.Name = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripButton2, Me.ToolStripButton3, Me.ToolStripButton4})
+        Me.ToolStrip1.Name = "ToolStrip1"
         '
-        'Button2
+        'ToolStripButton1
         '
-        resources.ApplyResources(Me.Button2, "Button2")
-        Me.Button2.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.delete
-        Me.Button2.Name = "Button2"
-        Me.Button2.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.ToolStripButton1, "ToolStripButton1")
+        Me.ToolStripButton1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.add
+        Me.ToolStripButton1.Name = "ToolStripButton1"
         '
-        'Button3
+        'ToolStripButton2
         '
-        resources.ApplyResources(Me.Button3, "Button3")
-        Me.Button3.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
-        Me.Button3.Name = "Button3"
-        Me.Button3.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.ToolStripButton2, "ToolStripButton2")
+        Me.ToolStripButton2.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.delete
+        Me.ToolStripButton2.Name = "ToolStripButton2"
         '
-        'Button4
+        'ToolStripButton3
         '
-        resources.ApplyResources(Me.Button4, "Button4")
-        Me.Button4.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disk
-        Me.Button4.Name = "Button4"
-        Me.Button4.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.ToolStripButton3, "ToolStripButton3")
+        Me.ToolStripButton3.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disk
+        Me.ToolStripButton3.Name = "ToolStripButton3"
         '
-        'GroupBox2
+        'ToolStripButton4
         '
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Controls.Add(Me.Button3)
-        Me.GroupBox2.Controls.Add(Me.Button4)
-        Me.GroupBox2.Controls.Add(Me.Button2)
-        Me.GroupBox2.Controls.Add(Me.Button1)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.TabStop = False
+        resources.ApplyResources(Me.ToolStripButton4, "ToolStripButton4")
+        Me.ToolStripButton4.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
+        Me.ToolStripButton4.Name = "ToolStripButton4"
         '
         'EditingForm_Gibbs_ElementMatrixEditor
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.ToolStrip1)
         Me.Name = "EditingForm_Gibbs_ElementMatrixEditor"
         Me.GroupBox1.ResumeLayout(False)
         CType(Me.grid, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox2.ResumeLayout(False)
+        Me.ToolStrip1.ResumeLayout(False)
+        Me.ToolStrip1.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Public WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Public WithEvents grid As System.Windows.Forms.DataGridView
-    Public WithEvents Button1 As System.Windows.Forms.Button
-    Public WithEvents Button2 As System.Windows.Forms.Button
-    Public WithEvents Button3 As System.Windows.Forms.Button
-    Public WithEvents Button4 As System.Windows.Forms.Button
-    Public WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Friend WithEvents ToolStrip1 As ToolStrip
+    Friend WithEvents ToolStripButton1 As ToolStripButton
+    Friend WithEvents ToolStripButton2 As ToolStripButton
+    Friend WithEvents ToolStripButton3 As ToolStripButton
+    Friend WithEvents ToolStripButton4 As ToolStripButton
 End Class
