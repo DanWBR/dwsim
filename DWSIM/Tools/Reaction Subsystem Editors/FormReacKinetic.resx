@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;Column8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
@@ -149,6 +146,9 @@
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
+  </data>
+  <data name="&gt;&gt;cbReverseEUnits.Parent" xml:space="preserve">
+    <value>GroupBox3</value>
   </data>
   <data name="Column7.ToolTipText" xml:space="preserve">
     <value>Ordem Direta</value>
@@ -183,14 +183,8 @@
   <data name="&gt;&gt;tbFwdUE.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;KryptonLabel3.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="&gt;&gt;KryptonLabel15.Parent" xml:space="preserve">
     <value>GroupBox3</value>
-  </data>
-  <data name="Column6.HeaderText" xml:space="preserve">
-    <value>Coef. Esteq.</value>
   </data>
   <data name="Column1.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -210,20 +204,8 @@
   <data name="tbRevA.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
-  <data name="&gt;&gt;Column7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="tbEquation.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="Column4.HeaderText" xml:space="preserve">
-    <value>Incluir</value>
-  </data>
   <data name="KryptonLabel7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="&gt;&gt;tbReacHeat.ZOrder" xml:space="preserve">
-    <value>3</value>
   </data>
   <data name="&gt;&gt;tbPhase.ZOrder" xml:space="preserve">
     <value>10</value>
@@ -243,8 +225,11 @@
   <data name="&gt;&gt;KryptonLabel5.Parent" xml:space="preserve">
     <value>GroupBox3</value>
   </data>
-  <data name="&gt;&gt;cbBase.ZOrder" xml:space="preserve">
-    <value>8</value>
+  <data name="KryptonLabel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 13</value>
+  </data>
+  <data name="&gt;&gt;rdFwdArr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="GroupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -282,6 +267,9 @@
   <data name="&gt;&gt;KryptonLabel5.Name" xml:space="preserve">
     <value>KryptonLabel5</value>
   </data>
+  <data name="KryptonLabel12.Text" xml:space="preserve">
+    <value>Unidade de Velocidade</value>
+  </data>
   <data name="&gt;&gt;tbRevE.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
@@ -300,8 +288,8 @@
   <data name="&gt;&gt;KryptonLabel16.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;KryptonLabel4.ZOrder" xml:space="preserve">
-    <value>7</value>
+  <data name="tbStoich.Location" type="System.Drawing.Point, System.Drawing">
+    <value>91, 161</value>
   </data>
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>CompID</value>
@@ -309,8 +297,11 @@
   <data name="KryptonLabel12.Location" type="System.Drawing.Point, System.Drawing">
     <value>343, 130</value>
   </data>
-  <data name="KryptonLabel8.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+  <data name="&gt;&gt;KryptonLabel4.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="rdRevArr.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;tbPhase.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -324,8 +315,8 @@
   <data name="$this.Text" xml:space="preserve">
     <value>FormReacKinetic</value>
   </data>
-  <data name="&gt;&gt;KryptonLabel7.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="Column4.HeaderText" xml:space="preserve">
+    <value>Incluir</value>
   </data>
   <data name="&gt;&gt;cbVelUnit.Parent" xml:space="preserve">
     <value>GroupBox3</value>
@@ -336,14 +327,14 @@
   <data name="tbStoich.Size" type="System.Drawing.Size, System.Drawing">
     <value>94, 20</value>
   </data>
-  <data name="KryptonLabel5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 22</value>
+  <data name="KryptonLabel20.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 19</value>
   </data>
   <data name="rdFwdUD.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;tbReacHeat.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tbDesc.Parent" xml:space="preserve">
+    <value>GroupBox4</value>
   </data>
   <data name="&gt;&gt;GroupBox2.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -378,8 +369,11 @@
   <data name="&gt;&gt;cbVelUnit.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
-  <data name="tbTmin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 20</value>
+  <data name="KryptonButton3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 25</value>
+  </data>
+  <data name="&gt;&gt;KryptonLabel8.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
   </data>
   <data name="KryptonLabel15.Text" xml:space="preserve">
     <value>E'</value>
@@ -387,11 +381,11 @@
   <data name="KryptonButton4.Location" type="System.Drawing.Point, System.Drawing">
     <value>588, 559</value>
   </data>
-  <data name="KryptonLabel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 13</value>
-  </data>
   <data name="KryptonLabel6.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
+  </data>
+  <data name="&gt;&gt;KryptonLabel4.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
   </data>
   <data name="KryptonLabel6.Location" type="System.Drawing.Point, System.Drawing">
     <value>284, 45</value>
@@ -408,20 +402,20 @@
   <data name="&gt;&gt;cbForwardEUnits.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="KryptonLabel5.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+  <data name="&gt;&gt;KryptonDataGridView1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;KryptonLabel9.Name" xml:space="preserve">
-    <value>KryptonLabel9</value>
+  <data name="Column3.HeaderText" xml:space="preserve">
+    <value>Massa Molar</value>
   </data>
   <data name="cbBase.Items2" xml:space="preserve">
     <value>Concentração Molar</value>
   </data>
+  <data name="&gt;&gt;tbReacHeat.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;KryptonLabel1.Parent" xml:space="preserve">
     <value>GroupBox1</value>
-  </data>
-  <data name="&gt;&gt;KryptonLabel11.Parent" xml:space="preserve">
-    <value>GroupBox3</value>
   </data>
   <data name="tbTmax.Location" type="System.Drawing.Point, System.Drawing">
     <value>572, 42</value>
@@ -443,9 +437,6 @@
   </data>
   <data name="&gt;&gt;tbRevE.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbDesc.Parent" xml:space="preserve">
-    <value>GroupBox4</value>
   </data>
   <data name="&gt;&gt;KryptonLabel14.ZOrder" xml:space="preserve">
     <value>11</value>
@@ -480,26 +471,14 @@
   <data name="&gt;&gt;FlowLayoutPanel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Column3.Name" xml:space="preserve">
-    <value>Column3</value>
-  </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;KryptonLabel4.Name" xml:space="preserve">
     <value>KryptonLabel4</value>
   </data>
-  <data name="tbReacHeat.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
   <data name="&gt;&gt;cbForwardEUnits.Parent" xml:space="preserve">
     <value>GroupBox3</value>
-  </data>
-  <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 103</value>
-  </data>
-  <data name="KryptonDataGridView1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>665, 137</value>
   </data>
   <data name="&gt;&gt;GroupBox1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -545,6 +524,9 @@
   </data>
   <data name="KryptonLabel13.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="&gt;&gt;FlowLayoutPanel1.Parent" xml:space="preserve">
+    <value>GroupBox3</value>
   </data>
   <data name="KryptonButton3.Text" xml:space="preserve">
     <value>Cancelar</value>
@@ -612,9 +594,6 @@
   <data name="cbBase.Items1" xml:space="preserve">
     <value>Fugacidade</value>
   </data>
-  <data name="KryptonLabel7.Text" xml:space="preserve">
-    <value>Tmin (K)</value>
-  </data>
   <data name="&gt;&gt;KryptonLabel19.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
@@ -627,17 +606,14 @@
   <data name="KryptonLabel19.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 19</value>
   </data>
-  <data name="rdRevArr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
   <data name="KryptonLabel1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="tbDesc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>597, 50</value>
+  <data name="&gt;&gt;KryptonLabel5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Column9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;GroupBox3.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
   </data>
   <data name="tbRevUE.Size" type="System.Drawing.Size, System.Drawing">
     <value>363, 20</value>
@@ -663,9 +639,6 @@
   <data name="&gt;&gt;tbName.Parent" xml:space="preserve">
     <value>GroupBox4</value>
   </data>
-  <data name="tbDesc.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
   <data name="&gt;&gt;tbDesc.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
@@ -675,8 +648,8 @@
   <data name="&gt;&gt;KryptonDataGridView1.Name" xml:space="preserve">
     <value>KryptonDataGridView1</value>
   </data>
-  <data name="tbDesc.Location" type="System.Drawing.Point, System.Drawing">
-    <value>68, 44</value>
+  <data name="&gt;&gt;KryptonLabel8.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="&gt;&gt;tbFwdUE.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -711,26 +684,17 @@
   <data name="GroupBox3.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 72</value>
   </data>
-  <data name="&gt;&gt;GroupBox1.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
   <data name="&gt;&gt;GroupBox2.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;KryptonLabel13.Name" xml:space="preserve">
     <value>KryptonLabel13</value>
   </data>
-  <data name="&gt;&gt;KryptonLabel16.Name" xml:space="preserve">
-    <value>KryptonLabel16</value>
+  <data name="&gt;&gt;KryptonLabel6.ZOrder" xml:space="preserve">
+    <value>9</value>
   </data>
   <data name="KryptonLabel1.Text" xml:space="preserve">
     <value>Estequiometria</value>
-  </data>
-  <data name="&gt;&gt;KryptonDataGridView1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="KryptonLabel20.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 19</value>
   </data>
   <data name="KryptonLabel10.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 13</value>
@@ -738,14 +702,17 @@
   <data name="&gt;&gt;KryptonLabel11.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
+  <data name="KryptonLabel8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 13</value>
+  </data>
   <data name="KryptonLabel14.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="FlowLayoutPanel2.FlowDirection" type="System.Windows.Forms.FlowDirection, System.Windows.Forms">
     <value>TopDown</value>
   </data>
-  <data name="tbPhase.Items" xml:space="preserve">
-    <value>Vapor</value>
+  <data name="KryptonLabel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 164</value>
   </data>
   <data name="&gt;&gt;KryptonLabel9.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -762,11 +729,17 @@
   <data name="KryptonLabel14.Text" xml:space="preserve">
     <value>E</value>
   </data>
+  <data name="tbReacHeat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 20</value>
+  </data>
   <data name="&gt;&gt;GroupBox2.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;KryptonLabel13.ZOrder" xml:space="preserve">
     <value>13</value>
+  </data>
+  <data name="&gt;&gt;tbEquation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;KryptonLabel1.Name" xml:space="preserve">
     <value>KryptonLabel1</value>
@@ -783,17 +756,14 @@
   <data name="cbReverseEUnits.Location" type="System.Drawing.Point, System.Drawing">
     <value>566, 69</value>
   </data>
-  <data name="KryptonLabel20.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 19</value>
+  <data name="KryptonButton4.Text" xml:space="preserve">
+    <value>OK</value>
   </data>
   <data name="&gt;&gt;cbConcUnit.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
   <data name="rdRevArr.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="cbBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>333, 16</value>
   </data>
   <data name="&gt;&gt;KryptonLabel6.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -819,8 +789,8 @@
   <data name="&gt;&gt;GroupBox3.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="tbFwdE.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+  <data name="Column6.HeaderText" xml:space="preserve">
+    <value>Coef. Esteq.</value>
   </data>
   <data name="KryptonLabel20.Text" xml:space="preserve">
     <value>Nome</value>
@@ -831,14 +801,17 @@
   <data name="&gt;&gt;KryptonLabel1.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="cbVelUnit.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+  <data name="tbTmin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 20</value>
   </data>
   <data name="&gt;&gt;tbCompBase.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tbPhase.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 21</value>
+  </data>
+  <data name="KryptonLabel6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 13</value>
   </data>
   <data name="&gt;&gt;KryptonLabel19.Name" xml:space="preserve">
     <value>KryptonLabel19</value>
@@ -855,11 +828,11 @@
   <data name="&gt;&gt;cbConcUnit.Parent" xml:space="preserve">
     <value>GroupBox3</value>
   </data>
-  <data name="KryptonLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 13</value>
-  </data>
   <data name="KryptonLabel1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
+  </data>
+  <data name="&gt;&gt;tbRevUE.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="KryptonLabel10.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -882,8 +855,11 @@
   <data name="&gt;&gt;cbForwardEUnits.Name" xml:space="preserve">
     <value>cbForwardEUnits</value>
   </data>
-  <data name="&gt;&gt;GroupBox1.Name" xml:space="preserve">
-    <value>GroupBox1</value>
+  <data name="&gt;&gt;rdRevUD.Name" xml:space="preserve">
+    <value>rdRevUD</value>
+  </data>
+  <data name="&gt;&gt;KryptonLabel11.Parent" xml:space="preserve">
+    <value>GroupBox3</value>
   </data>
   <data name="KryptonLabel13.Text" xml:space="preserve">
     <value>A</value>
@@ -933,6 +909,12 @@
   <data name="FlowLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>165, 46</value>
   </data>
+  <data name="KryptonLabel11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 130</value>
+  </data>
+  <data name="&gt;&gt;cbConcUnit.Name" xml:space="preserve">
+    <value>cbConcUnit</value>
+  </data>
   <data name="&gt;&gt;tbReacHeat.Name" xml:space="preserve">
     <value>tbReacHeat</value>
   </data>
@@ -951,8 +933,14 @@
   <data name="KryptonLabel9.Size" type="System.Drawing.Size, System.Drawing">
     <value>103, 19</value>
   </data>
-  <data name="rdRevArr.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;Column8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="KryptonLabel8.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="Column9.HeaderText" xml:space="preserve">
+    <value>ΔHf (kJ/kg)</value>
   </data>
   <data name="rdFwdArr.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -961,6 +949,9 @@
     <value>136, 20</value>
   </data>
   <data name="rdRevArr.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdRevUD.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="KryptonLabel14.Location" type="System.Drawing.Point, System.Drawing">
@@ -981,11 +972,8 @@
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Parâmetros da Reação Cinética</value>
   </data>
-  <data name="&gt;&gt;KryptonLabel8.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
-  </data>
-  <data name="&gt;&gt;Column2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="KryptonLabel20.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 19</value>
   </data>
   <data name="&gt;&gt;KryptonButton2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -993,20 +981,20 @@
   <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>671, 215</value>
   </data>
-  <data name="&gt;&gt;cbConcUnit.Name" xml:space="preserve">
-    <value>cbConcUnit</value>
+  <data name="tbReacHeat.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
-  <data name="tbReacHeat.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 20</value>
+  <data name="KryptonDataGridView1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>665, 137</value>
   </data>
   <data name="KryptonLabel4.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
-  <data name="KryptonButton2.Text" xml:space="preserve">
-    <value>Balancear</value>
+  <data name="&gt;&gt;Column9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;KryptonLabel8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="KryptonLabel5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 22</value>
   </data>
   <data name="&gt;&gt;Column5.Name" xml:space="preserve">
     <value>Column5</value>
@@ -1014,8 +1002,8 @@
   <data name="Column8.ToolTipText" xml:space="preserve">
     <value>Ordem Reversa</value>
   </data>
-  <data name="KryptonLabel15.Location" type="System.Drawing.Point, System.Drawing">
-    <value>452, 74</value>
+  <data name="&gt;&gt;tbReacHeat.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="cbBase.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1023,8 +1011,11 @@
   <data name="cbConcUnit.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
-  <data name="KryptonLabel6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 13</value>
+  <data name="tbDesc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>68, 44</value>
+  </data>
+  <data name="cbVelUnit.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
   </data>
   <data name="KryptonLabel14.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
@@ -1038,11 +1029,11 @@
   <data name="tbFwdA.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="Column3.HeaderText" xml:space="preserve">
-    <value>Massa Molar</value>
-  </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
     <value>671, 234</value>
+  </data>
+  <data name="&gt;&gt;KryptonLabel7.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FormReacKinetic</value>
@@ -1086,6 +1077,9 @@
   <data name="KryptonLabel20.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
+  <data name="&gt;&gt;tbFwdE.Name" xml:space="preserve">
+    <value>tbFwdE</value>
+  </data>
   <data name="&gt;&gt;tbPhase.Name" xml:space="preserve">
     <value>tbPhase</value>
   </data>
@@ -1094,9 +1088,6 @@
   </data>
   <data name="cbVelUnit.Size" type="System.Drawing.Size, System.Drawing">
     <value>186, 21</value>
-  </data>
-  <data name="&gt;&gt;tbName.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="&gt;&gt;rdRevUD.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1122,23 +1113,20 @@
   <data name="&gt;&gt;KryptonButton3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;KryptonLabel9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;tbRevE.Parent" xml:space="preserve">
     <value>GroupBox3</value>
   </data>
   <data name="&gt;&gt;tbDesc.Name" xml:space="preserve">
     <value>tbDesc</value>
   </data>
-  <data name="KryptonLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 164</value>
-  </data>
   <data name="&gt;&gt;tbTmin.Parent" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
   <data name="&gt;&gt;KryptonLabel14.Parent" xml:space="preserve">
     <value>GroupBox3</value>
-  </data>
-  <data name="&gt;&gt;Column4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cbBase.Name" xml:space="preserve">
     <value>cbBase</value>
@@ -1170,8 +1158,8 @@
   <data name="rdFwdArr.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;KryptonLabel10.Parent" xml:space="preserve">
-    <value>GroupBox3</value>
+  <data name="&gt;&gt;Column4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="KryptonLabel6.Text" xml:space="preserve">
     <value>Fase</value>
@@ -1188,8 +1176,14 @@
   <data name="KryptonLabel15.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
   </data>
+  <data name="KryptonButton2.Text" xml:space="preserve">
+    <value>Balancear</value>
+  </data>
   <data name="tbRevUE.TabIndex" type="System.Int32, mscorlib">
     <value>35</value>
+  </data>
+  <data name="&gt;&gt;KryptonLabel8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="KryptonLabel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>154, 13</value>
@@ -1197,8 +1191,11 @@
   <data name="&gt;&gt;tbTmax.Parent" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
-  <data name="rdRevUD.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;KryptonLabel2.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
+  </data>
+  <data name="tbEquation.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="KryptonDataGridView1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1221,17 +1218,17 @@
   <data name="&gt;&gt;Column5.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="KryptonLabel11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 130</value>
+  <data name="KryptonLabel7.Text" xml:space="preserve">
+    <value>Tmin (K)</value>
   </data>
-  <data name="KryptonLabel5.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;tbStoich.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Identificação</value>
   </data>
-  <data name="&gt;&gt;KryptonLabel5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;cbBase.ZOrder" xml:space="preserve">
+    <value>8</value>
   </data>
   <data name="cbBase.Items6" xml:space="preserve">
     <value>Pressão Parcial</value>
@@ -1242,9 +1239,6 @@
   <data name="cbReverseEUnits.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 21</value>
   </data>
-  <data name="&gt;&gt;KryptonLabel3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="KryptonLabel2.Location" type="System.Drawing.Point, System.Drawing">
     <value>288, 165</value>
   </data>
@@ -1254,44 +1248,38 @@
   <data name="&gt;&gt;tbFwdA.Parent" xml:space="preserve">
     <value>GroupBox3</value>
   </data>
-  <data name="rdFwdUD.Text" xml:space="preserve">
-    <value>Definido pelo usuário: f(T[K])</value>
+  <data name="cbBase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>333, 16</value>
   </data>
   <data name="&gt;&gt;tbPhase.Parent" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
-  <data name="rdRevUD.Text" xml:space="preserve">
-    <value>Definido pelo usuário: f(T[K])</value>
+  <data name="&gt;&gt;KryptonLabel9.Name" xml:space="preserve">
+    <value>KryptonLabel9</value>
   </data>
   <data name="&gt;&gt;Column6.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tbStoich.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;KryptonLabel2.Name" xml:space="preserve">
     <value>KryptonLabel2</value>
   </data>
-  <data name="KryptonButton4.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
+  <data name="&gt;&gt;KryptonLabel16.Name" xml:space="preserve">
+    <value>KryptonLabel16</value>
   </data>
   <data name="&gt;&gt;tbRevA.Name" xml:space="preserve">
     <value>tbRevA</value>
   </data>
-  <data name="&gt;&gt;KryptonLabel2.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
+  <data name="rdFwdUD.Text" xml:space="preserve">
+    <value>Definido pelo usuário: f(T[K])</value>
   </data>
   <data name="&gt;&gt;KryptonLabel16.Parent" xml:space="preserve">
     <value>GroupBox3</value>
   </data>
-  <data name="KryptonLabel16.Location" type="System.Drawing.Point, System.Drawing">
-    <value>290, 74</value>
-  </data>
   <data name="KryptonLabel4.Text" xml:space="preserve">
     <value>Base</value>
   </data>
-  <data name="&gt;&gt;GroupBox3.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
+  <data name="&gt;&gt;KryptonLabel3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cbBase.Parent" xml:space="preserve">
     <value>GroupBox2</value>
@@ -1308,17 +1296,17 @@
   <data name="&gt;&gt;KryptonLabel19.Parent" xml:space="preserve">
     <value>GroupBox4</value>
   </data>
-  <data name="&gt;&gt;tbRevUE.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;Column3.Name" xml:space="preserve">
+    <value>Column3</value>
   </data>
-  <data name="KryptonLabel8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 13</value>
+  <data name="rdRevArr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
   </data>
-  <data name="&gt;&gt;cbReverseEUnits.Parent" xml:space="preserve">
-    <value>GroupBox3</value>
+  <data name="&gt;&gt;Column7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;KryptonLabel4.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
+  <data name="KryptonLabel5.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="Column5.HeaderText" xml:space="preserve">
     <value>CB</value>
@@ -1338,8 +1326,11 @@
   <data name="KryptonLabel3.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="tbStoich.Location" type="System.Drawing.Point, System.Drawing">
-    <value>91, 161</value>
+  <data name="tbDesc.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="KryptonLabel5.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
   </data>
   <data name="rdFwdUD.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 26</value>
@@ -1347,14 +1338,14 @@
   <data name="&gt;&gt;Column2.Name" xml:space="preserve">
     <value>Column2</value>
   </data>
-  <data name="&gt;&gt;tbEquation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tbName.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;tbRevUE.Parent" xml:space="preserve">
     <value>GroupBox3</value>
   </data>
-  <data name="&gt;&gt;KryptonLabel9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="KryptonLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 13</value>
   </data>
   <data name="GroupBox3.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -1371,8 +1362,11 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>685, 593</value>
   </data>
-  <data name="KryptonLabel12.Text" xml:space="preserve">
-    <value>Unidade de Velocidade</value>
+  <data name="KryptonButton4.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="&gt;&gt;KryptonLabel3.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;tbReacHeat.Parent" xml:space="preserve">
     <value>GroupBox1</value>
@@ -1392,8 +1386,8 @@
   <data name="&gt;&gt;tbTmax.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="KryptonButton3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 25</value>
+  <data name="&gt;&gt;GroupBox1.Name" xml:space="preserve">
+    <value>GroupBox1</value>
   </data>
   <data name="rdRevArr.Text" xml:space="preserve">
     <value>Arrhenius</value>
@@ -1407,11 +1401,14 @@
   <data name="rdFwdArr.Text" xml:space="preserve">
     <value>Arrhenius</value>
   </data>
-  <data name="&gt;&gt;KryptonLabel8.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 103</value>
   </data>
   <data name="&gt;&gt;KryptonLabel14.Name" xml:space="preserve">
     <value>KryptonLabel14</value>
+  </data>
+  <data name="rdRevUD.Text" xml:space="preserve">
+    <value>Definido pelo usuário: f(T[K])</value>
   </data>
   <data name="tbPhase.Items2" xml:space="preserve">
     <value>Mistura</value>
@@ -1446,7 +1443,7 @@
   <data name="KryptonLabel13.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
   </data>
-  <data name="&gt;&gt;FlowLayoutPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;KryptonLabel10.Parent" xml:space="preserve">
     <value>GroupBox3</value>
   </data>
   <data name="tbPhase.TabIndex" type="System.Int32, mscorlib">
@@ -1470,14 +1467,14 @@
   <data name="GroupBox4.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
   </data>
-  <data name="&gt;&gt;tbFwdE.Name" xml:space="preserve">
-    <value>tbFwdE</value>
+  <data name="&gt;&gt;Column2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tbPhase.Location" type="System.Drawing.Point, System.Drawing">
     <value>333, 41</value>
   </data>
-  <data name="&gt;&gt;rdRevUD.Name" xml:space="preserve">
-    <value>rdRevUD</value>
+  <data name="tbDesc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>597, 50</value>
   </data>
   <data name="KryptonLabel6.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1485,8 +1482,11 @@
   <data name="&gt;&gt;FlowLayoutPanel1.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;KryptonLabel6.ZOrder" xml:space="preserve">
-    <value>9</value>
+  <data name="tbFwdE.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="tbPhase.Items" xml:space="preserve">
+    <value>Vapor</value>
   </data>
   <data name="KryptonLabel2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1509,8 +1509,8 @@
   <data name="KryptonLabel11.Text" xml:space="preserve">
     <value>Unidade de Quantidade (Base)</value>
   </data>
-  <data name="&gt;&gt;rdFwdArr.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;GroupBox1.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="FlowLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>33</value>
@@ -1524,11 +1524,11 @@
   <data name="KryptonLabel9.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 32</value>
   </data>
-  <data name="KryptonButton4.Text" xml:space="preserve">
-    <value>OK</value>
+  <data name="KryptonLabel16.Location" type="System.Drawing.Point, System.Drawing">
+    <value>290, 74</value>
   </data>
-  <data name="Column9.HeaderText" xml:space="preserve">
-    <value>ΔHf (kJ/kg)</value>
+  <data name="KryptonLabel15.Location" type="System.Drawing.Point, System.Drawing">
+    <value>452, 74</value>
   </data>
   <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>en</value>

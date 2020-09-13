@@ -53,13 +53,6 @@ Partial Class FormReacEq
         Me.KryptonLabel2 = New System.Windows.Forms.Label()
         Me.tbStoich = New System.Windows.Forms.TextBox()
         Me.KryptonDataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.KryptonLabel1 = New System.Windows.Forms.Label()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.KryptonLabel10 = New System.Windows.Forms.Label()
-        Me.KryptonLabel11 = New System.Windows.Forms.Label()
-        Me.tbName = New System.Windows.Forms.TextBox()
-        Me.tbDesc = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -67,6 +60,13 @@ Partial Class FormReacEq
         Me.Column5 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.KryptonLabel1 = New System.Windows.Forms.Label()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.KryptonLabel10 = New System.Windows.Forms.Label()
+        Me.KryptonLabel11 = New System.Windows.Forms.Label()
+        Me.tbName = New System.Windows.Forms.TextBox()
+        Me.tbDesc = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -275,46 +275,6 @@ Partial Class FormReacEq
         Me.KryptonDataGridView1.RowHeadersVisible = False
         Me.KryptonDataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         '
-        'KryptonLabel1
-        '
-        resources.ApplyResources(Me.KryptonLabel1, "KryptonLabel1")
-        Me.KryptonLabel1.Name = "KryptonLabel1"
-        '
-        'GroupBox4
-        '
-        Me.GroupBox4.Controls.Add(Me.KryptonLabel10)
-        Me.GroupBox4.Controls.Add(Me.KryptonLabel11)
-        Me.GroupBox4.Controls.Add(Me.tbName)
-        Me.GroupBox4.Controls.Add(Me.tbDesc)
-        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.TabStop = False
-        '
-        'KryptonLabel10
-        '
-        resources.ApplyResources(Me.KryptonLabel10, "KryptonLabel10")
-        Me.KryptonLabel10.Name = "KryptonLabel10"
-        '
-        'KryptonLabel11
-        '
-        resources.ApplyResources(Me.KryptonLabel11, "KryptonLabel11")
-        Me.KryptonLabel11.Name = "KryptonLabel11"
-        '
-        'tbName
-        '
-        resources.ApplyResources(Me.tbName, "tbName")
-        Me.tbName.Name = "tbName"
-        '
-        'tbDesc
-        '
-        resources.ApplyResources(Me.tbDesc, "tbDesc")
-        Me.tbDesc.Name = "tbDesc"
-        '
-        'Label1
-        '
-        resources.ApplyResources(Me.Label1, "Label1")
-        Me.Label1.Name = "Label1"
-        '
         'Column2
         '
         Me.Column2.FillWeight = 40.0!
@@ -360,6 +320,46 @@ Partial Class FormReacEq
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
         '
+        'KryptonLabel1
+        '
+        resources.ApplyResources(Me.KryptonLabel1, "KryptonLabel1")
+        Me.KryptonLabel1.Name = "KryptonLabel1"
+        '
+        'GroupBox4
+        '
+        Me.GroupBox4.Controls.Add(Me.KryptonLabel10)
+        Me.GroupBox4.Controls.Add(Me.KryptonLabel11)
+        Me.GroupBox4.Controls.Add(Me.tbName)
+        Me.GroupBox4.Controls.Add(Me.tbDesc)
+        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.TabStop = False
+        '
+        'KryptonLabel10
+        '
+        resources.ApplyResources(Me.KryptonLabel10, "KryptonLabel10")
+        Me.KryptonLabel10.Name = "KryptonLabel10"
+        '
+        'KryptonLabel11
+        '
+        resources.ApplyResources(Me.KryptonLabel11, "KryptonLabel11")
+        Me.KryptonLabel11.Name = "KryptonLabel11"
+        '
+        'tbName
+        '
+        resources.ApplyResources(Me.tbName, "tbName")
+        Me.tbName.Name = "tbName"
+        '
+        'tbDesc
+        '
+        resources.ApplyResources(Me.tbDesc, "tbDesc")
+        Me.tbDesc.Name = "tbDesc"
+        '
+        'Label1
+        '
+        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.Name = "Label1"
+        '
         'FormReacEq
         '
         resources.ApplyResources(Me, "$this")
@@ -373,8 +373,6 @@ Partial Class FormReacEq
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "FormReacEq"
-        Me.ShowInTaskbar = False
-        Me.TopMost = True
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
