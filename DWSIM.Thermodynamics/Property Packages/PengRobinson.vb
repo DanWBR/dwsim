@@ -51,8 +51,8 @@ Namespace PropertyPackages
 
             MyBase.New()
 
-            Me.IsConfigurable = True
-            Me._packagetype = PropertyPackages.PackageType.EOS
+            IsConfigurable = True
+            _packagetype = PropertyPackages.PackageType.EOS
 
         End Sub
 

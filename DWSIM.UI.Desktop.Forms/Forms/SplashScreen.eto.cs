@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.IO;
 using DWSIM.Thermodynamics.BaseClasses;
 using System.Diagnostics;
+using DWSIM.SharedClasses;
 
 namespace DWSIM.UI.Forms
 {
@@ -101,9 +102,17 @@ namespace DWSIM.UI.Forms
                 layout.Add(img, (int)(sf * (0 - dx)), (int)(sf * (0 - dy)));
             }
 
-            layout.Add(lbl1a, (int)(sf * (385 - dx)), (int)(sf * (114 - dy)));
-            layout.Add(lbl5, (int)(sf * (385 - dx)), (int)(sf * (139 - dy)));
-            layout.Add(lbl3, (int)(sf * (385 - dx)), (int)(sf * (381 - dy)));
+            layout.Add(lbl1a, (int)(sf * (334 - dx)), (int)(sf * (114 - dy)));
+            layout.Add(lbl5, (int)(sf * (334 - dx)), (int)(sf * (430 - dy)));
+            layout.Add(lbl3, (int)(sf * (334 - dx)), (int)(sf * (139 - dy)));
+
+            var lblpatrons = new Label { Style = "splashlabels1", Text = "Special thanks to: " + Patrons.GetList() };
+
+            lblpatrons.TextColor = new Color(0.051f, 0.447f, 0.651f);
+            lblpatrons.Width = (int)(sf * 650);
+            lblpatrons.Height = (int)(sf * 227);
+
+            layout.Add(lblpatrons, (int)(sf * (334 - dx)), (int)(sf * (190 - dy)));
 
             Content = layout;
 

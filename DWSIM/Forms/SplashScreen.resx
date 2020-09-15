@@ -130,7 +130,7 @@
     <value>Arial, 9pt</value>
   </data>
   <data name="lblVersion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>384, 117</value>
+    <value>331, 111</value>
   </data>
   <data name="lblVersion.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 15</value>
@@ -154,7 +154,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblVersion.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="LabelLicense.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>None</value>
@@ -166,7 +166,7 @@
     <value>Arial, 9pt</value>
   </data>
   <data name="LabelLicense.Location" type="System.Drawing.Point, System.Drawing">
-    <value>384, 392</value>
+    <value>331, 135</value>
   </data>
   <data name="LabelLicense.Size" type="System.Drawing.Size, System.Drawing">
     <value>521, 15</value>
@@ -187,7 +187,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;LabelLicense.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="lblCopyright.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>None</value>
@@ -202,7 +202,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblCopyright.Location" type="System.Drawing.Point, System.Drawing">
-    <value>384, 143</value>
+    <value>331, 428</value>
   </data>
   <data name="lblCopyright.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 15</value>
@@ -226,7 +226,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblCopyright.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="Label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>None</value>
@@ -241,16 +241,16 @@
     <value>NoControl</value>
   </data>
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>384, 416</value>
+    <value>331, 159</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>359, 15</value>
+    <value>355, 15</value>
   </data>
   <data name="Label2.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
-    <value>See specific licenses for external components on the 'About' box.</value>
+    <value>See specific licenses for external components in the 'About' box.</value>
   </data>
   <data name="&gt;&gt;Label2.Name" xml:space="preserve">
     <value>Label2</value>
@@ -262,6 +262,39 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblPatrons.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="lblPatrons.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 8pt</value>
+  </data>
+  <data name="lblPatrons.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblPatrons.Location" type="System.Drawing.Point, System.Drawing">
+    <value>331, 202</value>
+  </data>
+  <data name="lblPatrons.Size" type="System.Drawing.Size, System.Drawing">
+    <value>647, 205</value>
+  </data>
+  <data name="lblPatrons.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="lblPatrons.Text" xml:space="preserve">
+    <value>Special thanks to: </value>
+  </data>
+  <data name="&gt;&gt;lblPatrons.Name" xml:space="preserve">
+    <value>lblPatrons</value>
+  </data>
+  <data name="&gt;&gt;lblPatrons.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblPatrons.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblPatrons.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

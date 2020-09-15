@@ -1297,6 +1297,52 @@ Namespace PropertyPackages
         End Function
 
         ''' <summary>
+        ''' Calculates Ideal K-values using Critical Properties.
+        ''' </summary>
+        ''' <param name="T"></param>
+        ''' <param name="P"></param>
+        ''' <returns></returns>
+        Public Function DW_CalcKvalue_Ideal_Wilson(ByVal T As Double, ByVal P As Double) As Double()
+
+            Dim n As Integer = CurrentMaterialStream.Phases(0).Compounds.Count - 1
+            Dim i As Integer
+            Dim K(n) As Double
+
+            Dim cprops = DW_GetConstantProperties()
+
+            Dim Pc, Tc, w As Double
+            For i = 0 To n
+                Pc = cprops(i).Critical_Pressure
+                Tc = cprops(i).Critical_Temperature
+                w = cprops(i).Acentric_Factor
+                K(i) = Pc / P * Math.Exp(5.373 * (1 + w) * (1 - Tc / T))
+            Next
+
+            Return K
+
+        End Function
+
+        ''' <summary>
+        ''' Calculates Ideal K-values using Vapor Pressures.
+        ''' </summary>
+        ''' <param name="T"></param>
+        ''' <param name="P"></param>
+        ''' <returns></returns>
+        Public Function DW_CalcKvalue_Ideal_VP(ByVal T As Double, ByVal P As Double) As Double()
+
+            Dim n As Integer = CurrentMaterialStream.Phases(0).Compounds.Count - 1
+            Dim i As Integer
+            Dim K(n) As Double
+
+            For i = 0 To n
+                K(i) = AUX_PVAPi(i, T) / P
+            Next
+
+            Return K
+
+        End Function
+
+        ''' <summary>
         ''' Does a Bubble Pressure calculation for the specified liquid composition at the specified temperature.
         ''' </summary>
         ''' <param name="Vx">Vector of doubles containing liquid phase molar composition for each component in the mixture.</param>
@@ -8156,14 +8202,14 @@ Final3:
 
         End Function
 
-        Public Function AUX_CheckTrivial(ByVal KI As Double()) As Boolean
+        Public Function AUX_CheckTrivial(ByVal Ki As Double(), Optional ByVal tolerance As Double = 0.01) As Boolean
 
             Dim isTrivial As Boolean = True
             Dim n, i As Integer
-            n = KI.Length - 1
+            n = Ki.Length - 1
 
             For i = 0 To n
-                If Abs(KI(i) - 1) > 0.01 Then isTrivial = False
+                If Abs(Ki(i) - 1) > tolerance Then isTrivial = False
             Next
 
             Return isTrivial

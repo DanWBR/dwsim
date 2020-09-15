@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 6.1 Update 6
+Version 6.1 Update 7
 Copyright (c) 2017-2020 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,13 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim6/commits/windows
+
+Version 6.1 Update 7
+
+- [CHG] Enhanced reliability of Gibbs Reactor solver
+- [FIX] Fixed CSTR convergence in some cases
+- [FIX] Fixed an issue with the Element Matrix editor on Gibbs Reactor
+- [FIX] Fixed reaction editors windows being modal (Classic UI)
 
 Version 6.1 Update 6
 

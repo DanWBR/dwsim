@@ -490,6 +490,10 @@ Namespace PropertyPackages.ThermoPlugs
 
             Dim Pcorr As Double = P
 
+            'Dim ZP As Double() = CheckRoot(Z, aml, bml, P, T, forcephase)
+            'Z = ZP(0)
+            'Pcorr = ZP(1)
+
             If Settings.EnableParallelProcessing Then
                 Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism, .TaskScheduler = Settings.AppTaskScheduler}
                 Parallel.For(0, n + 1, poptions, Sub(ii)

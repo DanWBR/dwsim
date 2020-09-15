@@ -185,6 +185,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Patrons\Patrons.vb" />
     <Compile Include="SimulationCharts\Charts.vb" />
     <Compile Include="UnitsOfMeasure\SystemsOfUnits.vb" />
     <Compile Include="UpdateCheck\UpdateCheck.vb" />
@@ -257,6 +258,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8-spy_male.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Patrons\activepatrons.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

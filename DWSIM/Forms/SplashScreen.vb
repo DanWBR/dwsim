@@ -45,6 +45,8 @@ Public NotInheritable Class SplashScreen
 
         lblCopyright.Text = My.Application.Info.Copyright
 
+        lblPatrons.Text += SharedClasses.Patrons.GetList()
+
     End Sub
 
     Protected Overrides Sub OnPaint(ByVal e As System.Windows.Forms.PaintEventArgs)
