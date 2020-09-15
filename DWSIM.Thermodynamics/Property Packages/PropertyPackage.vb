@@ -793,7 +793,7 @@ Namespace PropertyPackages
                     Return 0.0#
             End Select
 
-            Dim K As Double = 1 / P0 - 1 / Z * (Z1 - Z) / 0.0001
+            Dim K As Double = 1 / P0 - 1 / Z * (Z1 - Z) / (P1 - P0)
 
             If Double.IsNaN(K) Or Double.IsInfinity(K) Then K = 0.0#
 
@@ -802,6 +802,32 @@ Namespace PropertyPackages
             Return K
 
         End Function
+
+        Public Overridable Function CalcIsothermalCompressibility(Vz As Double(), T As Double, P As Double, state As PhaseName) As Double
+
+            Dim Z, P0, P1, Z1 As Double
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            P0 = P
+            Z = AUX_Z(Vz, T, P, state)
+
+            IObj?.SetCurrent
+
+            P1 = P0 + 100
+
+            Z1 = AUX_Z(Vz, T, P1, state)
+
+            Dim K As Double = 1 / P0 - 1 / Z * (Z1 - Z) / (P1 - P0)
+
+            If Double.IsNaN(K) Or Double.IsInfinity(K) Then K = 0.0#
+
+            IObj?.Close()
+
+            Return K
+
+        End Function
+
 
         Public Overridable Function CalcSpeedOfSound(p As IPhase) As Double
 

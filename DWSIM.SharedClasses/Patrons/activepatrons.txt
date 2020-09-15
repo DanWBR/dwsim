@@ -9,7 +9,7 @@ Amir Mehrkesh
 Andrew Dickson
 Apro Ingenieurburo Gmbh
 Bo Tjernberg
-Bruce 
+Bruce
 Bruce Logue
 Carlos G. C. Reetz
 Casey Houston
@@ -24,9 +24,10 @@ Dorivaldo Junior
 Doug Palfreyman
 Dr. Richard Zweiler
 Emanuel Cardoso Santos
+Evan Lowry
 F An
 Filippo Borroni
-Gcandan 
+Gokhan Candan 
 Guenther Holzer
 Henk Fikkert
 Hep Ingham

@@ -268,8 +268,12 @@ Namespace PropertyPackages
                         Return 0
                     End If
                 End If
-            Else
-                Return 0
+            ElseIf Me.m_pr.InteractionParameters.ContainsKey(id2) Then
+                If Me.m_pr.InteractionParameters(id2).ContainsKey(id1) Then
+                    Return m_pr.InteractionParameters(id2)(id1).kij
+                Else
+                    Return 0
+                End If
             End If
         End Function
 

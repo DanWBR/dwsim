@@ -18,6 +18,7 @@
 
 Imports System.Math
 Imports DWSIM.MathOps.MathEx
+Imports Eto.Forms
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
@@ -107,7 +108,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim i, n, ecount As Integer
             Dim Pb, Pd, Pmin, Pmax, Px As Double
             Dim d1, d2 As Date, dt As TimeSpan
-            Dim L, V, Vant As Double
+            Dim L, V, F As Double
 
             d1 = Date.Now
 
@@ -191,7 +192,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Vp(i) = PP.AUX_PVAPi(i, T)
                 Next
                 Px = Vp.MultiplyY(Vz).Sum
-                'Px = PP.AUX_PVAPM(T)
                 If Px <= P Then
                     L = 1
                     V = 0
@@ -207,30 +207,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 End If
             End If
 
-            Dim Vmin, Vmax, g As Double
-            Vmin = 1.0#
-            Vmax = 0.0#
-            For i = 0 To n
-                If (Ki(i) * Vz(i) - 1) / (Ki(i) - 1) < Vmin Then Vmin = (Ki(i) * Vz(i) - 1) / (Ki(i) - 1)
-                If (1 - Vz(i)) / (1 - Ki(i)) > Vmax Then Vmax = (1 - Vz(i)) / (1 - Ki(i))
-            Next
-
-            If Vmin < 0.0# Then Vmin = 0.0#
-            If Vmin = 1.0# Then Vmin = 0.0#
-            If Vmax = 0.0# Then Vmax = 1.0#
-            If Vmax > 1.0# Then Vmax = 1.0#
-
-            V = (Vmin + Vmax) / 2
-
-            g = 0.0#
-            For i = 0 To n
-                g += Vz(i) * (Ki(i) - 1) / (V + (1 - V) * Ki(i))
-            Next
-
-            If g > 0 Then Vmin = V Else Vmax = V
-
-            V = Vmin + (Vmax - Vmin) / 2
-            'V = (P - Pd) / (Pb - Pd)
+            V = (P - Pd) / (Pb - Pd)
 
             L = 1 - V
 
@@ -264,9 +241,59 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Vy = Vz.MultiplyY(Ki).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1)).NormalizeY
             Vx = Vy.DivideY(Ki).NormalizeY
 
-            ecount = 0
+            Dim r1 = ConvergeVF(IObj, V, Vz, Vx, Vy, Ki, P, T, PP)
+            'Return New Object() {V, Vx, Vy, Ki, F, ecount}
+            V = r1(0)
+            Vx = r1(1)
+            Vy = r1(2)
+            Ki = r1(3)
+            F = r1(4)
+            ecount = r1(5)
+
+            If LimitVaporFraction Then
+                If V < 0.0 Then V = 0.0
+                If V > 1.0 Then V = 1.0
+            End If
+
+            If V <= 0.0# Then
+                V = 0.0#
+                L = 1.0#
+                Vx = Vz
+                Vy = Ki.MultiplyY(Vx).NormalizeY
+            End If
+            If V >= 1.0# Then
+                V = 1.0#
+                L = 0.0#
+                Vy = Vz
+                Vx = Vy.DivideY(Ki).NormalizeY
+            End If
+
+            d2 = Date.Now
+
+            dt = d2 - d1
+
+out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms. Error function value: " & F)
+
+            IObj?.Paragraphs.Add("The algorithm converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms. Error function value: " & F)
+
+            IObj?.Paragraphs.Add(String.Format("Final converged values for K: {0}", Ki.ToMathArrayString))
+
+            IObj?.Close()
+
+            Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
+
+        End Function
+
+        Private Function ConvergeVF(IObj As InspectorItem, V As Double, Vz As Double(), Vx As Double(), Vy As Double(), Ki As Double(), P As Double, T As Double, PP As PropertyPackage) As Object()
+
+            Dim n As Integer = Vz.Length - 1
+
+            Dim Vn(n) As String, Vx_ant(n), Vy_ant(n), Vp(n), Ki_ant(n), fi(n) As Double
+            Dim b1_V, b2_V, dbdT_V, b1_L, b2_L, dbdT_L As Double
+
+            Dim ecount As Integer = 0
             Dim converged As Integer = 0
-            Dim F, dF, e1, e2, e3 As Double
+            Dim F, Vant, dF, e1, e2, e3 As Double
 
             IObj?.Paragraphs.Add(String.Format("Initial estimates for y: {0}", Vy.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Initial estimates for x: {0}", Vx.ToMathArrayString))
@@ -336,18 +363,19 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     If Abs(F) < etol / 100 Then Exit Do
 
+                    b1_L = PP.CalcIsothermalCompressibility(Vx, T, P, Interfaces.Enums.PhaseName.Liquid)
+                    b2_L = PP.CalcIsothermalCompressibility(Vx, T + 0.1, P, Interfaces.Enums.PhaseName.Liquid)
+                    dbdT_L = (b2_L - b1_L) / 0.1
+
+                    b1_V = PP.CalcIsothermalCompressibility(Vy, T, P, Interfaces.Enums.PhaseName.Vapor)
+                    b2_V = PP.CalcIsothermalCompressibility(Vy, T + 0.1, P, Interfaces.Enums.PhaseName.Vapor)
+                    dbdT_V = (b2_V - b1_V) / 0.1
+
                     V = -F / dF + Vant
 
                     IObj2?.Paragraphs.Add(String.Format("Updated Vapor Fraction (<math_inline>\beta</math_inline>) value: {0}", V))
 
                 End If
-
-                If LimitVaporFraction Then
-                    If V < 0.0# Then V = 0.0
-                    If V > 1.0# Then V = 1.0
-                End If
-
-                L = 1 - V
 
                 ecount += 1
 
@@ -372,32 +400,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Loop Until converged = 1
 
-            If V <= 0.0# Then
-                V = 0.0#
-                L = 1.0#
-                Vx = Vz
-                Vy = Ki.MultiplyY(Vx).NormalizeY
-            End If
-            If V >= 1.0# Then
-                V = 1.0#
-                L = 0.0#
-                Vy = Vz
-                Vx = Vy.DivideY(Ki).NormalizeY
-            End If
-
-            d2 = Date.Now
-
-            dt = d2 - d1
-
-out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms. Error function value: " & F)
-
-            IObj?.Paragraphs.Add("The algorithm converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms. Error function value: " & F)
-
-            IObj?.Paragraphs.Add(String.Format("Final converged values for K: {0}", Ki.ToMathArrayString))
-
-            IObj?.Close()
-
-            Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
+            Return New Object() {V, Vx, Vy, Ki, F, ecount}
 
         End Function
 
