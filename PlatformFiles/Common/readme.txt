@@ -65,9 +65,11 @@ The full changelog including souce code changes can be viewed at https://github.
 Version 6.1 Update 7
 
 - [CHG] Enhanced reliability of Gibbs Reactor solver
+- [FIX] Fixed PR/SRK Interaction Parameters missing on first run
 - [FIX] Fixed CSTR convergence in some cases
 - [FIX] Fixed an issue with the Element Matrix editor on Gibbs Reactor
 - [FIX] Fixed reaction editors windows being modal (Classic UI)
+- [FIX] Other minor bug fixes
 
 Version 6.1 Update 6
 

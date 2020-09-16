@@ -106,7 +106,7 @@ namespace DWSIM.UI.Forms
             layout.Add(lbl5, (int)(sf * (334 - dx)), (int)(sf * (430 - dy)));
             layout.Add(lbl3, (int)(sf * (334 - dx)), (int)(sf * (139 - dy)));
 
-            var lblpatrons = new Label { Style = "splashlabels1", Text = "Special thanks to: " + Patrons.GetList() };
+            var lblpatrons = new Label { Style = "splashlabels1", Text = "Special thanks to the following Patrons: " + Patrons.GetList() };
 
             lblpatrons.TextColor = new Color(0.051f, 0.447f, 0.651f);
             lblpatrons.Width = (int)(sf * 650);
