@@ -63,7 +63,7 @@ Public Class FormPhEnv
 
     Public Sub Initialize() Implements Interfaces.IAttachedUtility.Initialize
 
-        Me.ComboBox1.SelectedIndex = 0
+        Me.ComboBox1.SelectedIndex = 4
         Me.cbhydmodel.SelectedIndex = 0
 
         Me.Frm = My.Application.ActiveSimulation

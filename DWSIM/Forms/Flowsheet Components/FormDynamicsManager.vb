@@ -1164,4 +1164,30 @@ Public Class FormDynamicsManager
             End Try
         End If
     End Sub
+
+    Private Sub btnRemoveIntegrator_Click(sender As Object, e As EventArgs) Handles btnRemoveIntegrator.Click
+        If MessageBox.Show(DWSIM.App.GetLocalString("ConfirmOperation"),
+                                           DWSIM.App.GetLocalString("Ateno2"),
+                                           MessageBoxButtons.YesNo,
+                                           MessageBoxIcon.Question) = DialogResult.Yes Then
+
+            Manager.IntegratorList.Remove(gridintegrators.SelectedCells(0).OwningRow.Cells(0).Value)
+
+            gridintegrators.Rows.RemoveAt(gridintegrators.SelectedCells(0).RowIndex)
+            UpdateSelectables()
+        End If
+    End Sub
+
+    Private Sub btnRemoveSchedule_Click(sender As Object, e As EventArgs) Handles btnRemoveSchedule.Click
+        If MessageBox.Show(DWSIM.App.GetLocalString("ConfirmOperation"),
+                                   DWSIM.App.GetLocalString("Ateno2"),
+                                   MessageBoxButtons.YesNo,
+                                   MessageBoxIcon.Question) = DialogResult.Yes Then
+
+            Manager.ScheduleList.Remove(gridschedules.SelectedCells(0).OwningRow.Cells(0).Value)
+
+            gridschedules.Rows.RemoveAt(gridschedules.SelectedCells(0).RowIndex)
+            UpdateSelectables()
+        End If
+    End Sub
 End Class
