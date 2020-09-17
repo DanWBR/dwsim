@@ -1,3 +1,7 @@
+Version 6.1 Update 8
+
+- [FIX] Fixed a regression with Nested Loops VLE Flash Algorithm
+
 Version 6.1 Update 7
 
 - [CHG] Enhanced reliability of Gibbs Reactor solver
