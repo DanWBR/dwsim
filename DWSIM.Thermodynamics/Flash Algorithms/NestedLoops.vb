@@ -266,6 +266,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim r1 = ConvergeVF(IObj, V, Vz, Vx, Vy, Ki, P, T, PP)
             'Return New Object() {V, Vx, Vy, Ki, F, ecount}
             V = r1(0)
+            L = 1 - V
             Vx = r1(1)
             Vy = r1(2)
             Ki = r1(3)
