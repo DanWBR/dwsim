@@ -1536,8 +1536,10 @@ Namespace UnitOperations
                     Dim count As Integer
                     A = Area
                     U = OverallCoefficient
-                    Qi = MaxHeatExchange
+                    Qi = MaxHeatExchange * 0.7
                     Q_old = 10000000000.0
+                    Tc2 = Tc1 + (Tc1 + Th1) / 2 * 0.7
+                    Th2 = Th1 - (Tc1 + Th1) / 2 * 0.7
 
                     If DebugMode Then AppendDebugLine(String.Format("Start with Max Heat Exchange Q = {0} KW", Qi))
 

@@ -273,11 +273,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             F = r1(4)
             ecount = r1(5)
 
-            If LimitVaporFraction Then
-                If V < 0.0 Then V = 0.0
-                If V > 1.0 Then V = 1.0
-            End If
-
             If V <= 0.0# Then
                 V = 0.0#
                 L = 1.0#
@@ -312,7 +307,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             Dim n As Integer = Vz.Length - 1
 
             Dim Vn(n) As String, Vx_ant(n), Vy_ant(n), Vp(n), Ki_ant(n), fi(n) As Double
-            Dim b1_V, b2_V, dbdT_V, b1_L, b2_L, dbdT_L As Double
+            'Dim b1_V, b2_V, dbdT_V, b1_L, b2_L, dbdT_L As Double
 
             Dim ecount As Integer = 0
             Dim converged As Integer = 0
@@ -386,15 +381,20 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     If Abs(F) < etol / 100 Then Exit Do
 
-                    b1_L = PP.CalcIsothermalCompressibility(Vx, T, P, Interfaces.Enums.PhaseName.Liquid)
-                    b2_L = PP.CalcIsothermalCompressibility(Vx, T + 0.1, P, Interfaces.Enums.PhaseName.Liquid)
-                    dbdT_L = (b2_L - b1_L) / 0.1
+                    'b1_L = PP.CalcIsothermalCompressibility(Vx, T, P, Interfaces.Enums.PhaseName.Liquid)
+                    'b2_L = PP.CalcIsothermalCompressibility(Vx, T + 0.1, P, Interfaces.Enums.PhaseName.Liquid)
+                    'dbdT_L = (b2_L - b1_L) / 0.1
 
-                    b1_V = PP.CalcIsothermalCompressibility(Vy, T, P, Interfaces.Enums.PhaseName.Vapor)
-                    b2_V = PP.CalcIsothermalCompressibility(Vy, T + 0.1, P, Interfaces.Enums.PhaseName.Vapor)
-                    dbdT_V = (b2_V - b1_V) / 0.1
+                    'b1_V = PP.CalcIsothermalCompressibility(Vy, T, P, Interfaces.Enums.PhaseName.Vapor)
+                    'b2_V = PP.CalcIsothermalCompressibility(Vy, T + 0.1, P, Interfaces.Enums.PhaseName.Vapor)
+                    'dbdT_V = (b2_V - b1_V) / 0.1
 
                     V = -F / dF + Vant
+
+                    If LimitVaporFraction Then
+                        If V < 0.0 Then V = 0.0
+                        If V > 1.0 Then V = 1.0
+                    End If
 
                     IObj2?.Paragraphs.Add(String.Format("Updated Vapor Fraction (<math_inline>\beta</math_inline>) value: {0}", V))
 
