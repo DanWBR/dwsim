@@ -46,8 +46,6 @@ Public Class FormOptions
             Me.cbParallelism.SelectedIndex = Me.cbParallelism.Items.Count - 1
         End If
 
-        cbEditorStyle.SelectedIndex = My.Settings.ObjectEditor
-
         Me.chkEnableParallelCalcs.Checked = My.Settings.EnableParallelProcessing
         Me.chkEnableGPUProcessing.Checked = My.Settings.EnableGPUProcessing
         Me.cbGPU.Enabled = Me.chkEnableGPUProcessing.Checked
@@ -100,6 +98,7 @@ Public Class FormOptions
 
         chkCloseFormsOnDeselect.Checked = My.Settings.CloseFormsOnDeselecting
         chkEnableMultipleEditors.Checked = My.Settings.EnableMultipleObjectEditors
+        chkEditorDoubleClick.Checked = My.Settings.DoubleClickToEdit
 
         'databases
 
@@ -668,12 +667,6 @@ Public Class FormOptions
         FormMain.tsbInspector.Checked = chkEnableInspector.Checked
     End Sub
 
-    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbEditorStyle.SelectedIndexChanged
-        My.Settings.ObjectEditor = cbEditorStyle.SelectedIndex
-        GlobalSettings.Settings.ObjectEditor = My.Settings.ObjectEditor
-        GroupBox1.Enabled = If(cbEditorStyle.SelectedIndex = 0, True, False)
-    End Sub
-
     Private Sub cbRenderer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbRenderer.SelectedIndexChanged
         My.Settings.FlowsheetRenderer = cbRenderer.SelectedIndex
         GlobalSettings.Settings.FlowsheetRenderer = Settings.SkiaCanvasRenderer.CPU
@@ -698,4 +691,8 @@ Public Class FormOptions
         End If
     End Sub
 
+    Private Sub chkEditorDoubleClick_CheckedChanged(sender As Object, e As EventArgs) Handles chkEditorDoubleClick.CheckedChanged
+        My.Settings.DoubleClickToEdit = chkEditorDoubleClick.Checked
+        GlobalSettings.Settings.EditOnSelect = Not chkEditorDoubleClick.Checked
+    End Sub
 End Class

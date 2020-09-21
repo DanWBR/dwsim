@@ -116,6 +116,8 @@ Namespace DWSIM
             GlobalSettings.Settings.FlowsheetRenderer = My.Settings.FlowsheetRenderer
             GlobalSettings.Settings.DrawingAntiAlias = My.Settings.FlowsheetAntiAliasing
 
+            GlobalSettings.Settings.EditOnSelect = Not My.Settings.DoubleClickToEdit
+
         End Sub
 
         Public Shared Sub WriteToConsole(text As String, minlevel As Integer)
