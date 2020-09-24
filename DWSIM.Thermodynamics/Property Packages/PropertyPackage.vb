@@ -7594,6 +7594,12 @@ Final3:
 
         End Function
 
+        Public Function RET_VDHF() As Double()
+
+            Return CurrentMaterialStream.Phases(0).Compounds.Values.Select(Function(x) x.ConstantProperties.IG_Enthalpy_of_Formation_25C).ToArray
+
+        End Function
+
         Public Function RET_VTB() As Double()
 
             Return CurrentMaterialStream.Phases(0).Compounds.Values.Select(Function(x) x.ConstantProperties.Normal_Boiling_Point).ToArray

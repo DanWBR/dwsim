@@ -67,4 +67,6 @@
 
     Property FloatingTableAmountBasis As Enums.CompositionBasis
 
+    Function GetOverallHeatOfFormation() As Double
+
 End Interface

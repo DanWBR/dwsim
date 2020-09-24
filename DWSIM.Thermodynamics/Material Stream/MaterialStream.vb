@@ -7937,6 +7937,19 @@ Namespace Streams
 
         End Sub
 
+        ''' <summary>
+        ''' Returns the overall heat of formation term for energy balance check, in kJ/s
+        ''' </summary>
+        ''' <returns></returns>
+        Public Function GetOverallHeatOfFormation() As Double Implements IMaterialStream.GetOverallHeatOfFormation
+
+            PropertyPackage.CurrentMaterialStream = Me
+
+            Return GetMassFlow() * PropertyPackage.RET_VMAS(PropertyPackages.Phase.Mixture).MultiplyY(PropertyPackage.RET_VDHF).SumY()
+
+        End Function
+
+
         Public Overrides Function ToString() As String
 
             If GraphicObject IsNot Nothing Then

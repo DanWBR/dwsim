@@ -218,7 +218,7 @@ Namespace UnitOperations
                 Dim ebe As Double = 0.0#
                 Dim mbt As Double = 0.0#
                 Dim ebt As Double = 0.0#
-                Dim mi, hi As Double
+                Dim mi, hi, hf As Double
 
                 Dim imsc As List(Of ISimulationObject) = GraphicObject.InputConnectors.Where(Function(x) x.IsAttached And Not (x.IsEnergyConnector Or x.Type = ConType.ConEn)).Select(Function(x) FlowSheet.SimulationObjects(x.AttachedConnector.AttachedFrom.Name)).ToList
                 Dim omsc As List(Of ISimulationObject) = GraphicObject.OutputConnectors.Where(Function(x) x.IsAttached And Not (x.IsEnergyConnector Or x.Type = ConType.ConEn)).Select(Function(x) FlowSheet.SimulationObjects(x.AttachedConnector.AttachedTo.Name)).ToList
@@ -231,6 +231,10 @@ Namespace UnitOperations
                         hi = Convert.ToDouble(ims.GetPropertyValue("PROP_MS_7"))
                         eb -= mi * hi 'kg/s * kJ/kg = kJ/s = kW
                         ebt += Math.Abs(mi * hi)
+                        'heats of formation
+                        hf = DirectCast(ims, IMaterialStream).GetOverallHeatOfFormation()
+                        eb -= hf
+                        ebt += Math.Abs(hf)
                     End If
                 Next
 
@@ -242,6 +246,10 @@ Namespace UnitOperations
                         hi = Convert.ToDouble(oms.GetPropertyValue("PROP_MS_7"))
                         eb += mi * hi 'kg/s * kJ/kg = kJ/s = kW
                         ebt += Math.Abs(mi * hi)
+                        'heats of formation
+                        hf = DirectCast(oms, IMaterialStream).GetOverallHeatOfFormation()
+                        eb += hf
+                        ebt += Math.Abs(hf)
                     End If
                 Next
 
@@ -289,17 +297,12 @@ Namespace UnitOperations
                     End If
                 End If
 
-                If GraphicObject.ObjectType <> ObjectType.RCT_Conversion And GraphicObject.ObjectType <> ObjectType.RCT_CSTR And
-                GraphicObject.ObjectType <> ObjectType.RCT_Equilibrium And GraphicObject.ObjectType <> ObjectType.RCT_Gibbs And
-                GraphicObject.ObjectType <> ObjectType.RCT_PFR Then
-                    If ebe > FlowSheet.FlowsheetOptions.EnergyBalanceRelativeTolerance Then
-                        If FlowSheet.FlowsheetOptions.EnergyBalanceCheck = WarningType.RaiseError Then
-                            Throw New Exception(GraphicObject.Tag + ": " + FlowSheet.GetTranslatedString("EnergyBalanceMessage") + " (" + ebe.ToString() + " > " + FlowSheet.FlowsheetOptions.EnergyBalanceRelativeTolerance.ToString + ")")
-                        ElseIf FlowSheet.FlowsheetOptions.EnergyBalanceCheck = WarningType.ShowWarning Then
-                            FlowSheet.ShowMessage(GraphicObject.Tag + ": " + FlowSheet.GetTranslatedString("EnergyBalanceMessage") + " (" + ebe.ToString() + " > " + FlowSheet.FlowsheetOptions.EnergyBalanceRelativeTolerance.ToString + ")", IFlowsheet.MessageType.Warning)
-                        End If
+                If ebe > FlowSheet.FlowsheetOptions.EnergyBalanceRelativeTolerance Then
+                    If FlowSheet.FlowsheetOptions.EnergyBalanceCheck = WarningType.RaiseError Then
+                        Throw New Exception(GraphicObject.Tag + ": " + FlowSheet.GetTranslatedString("EnergyBalanceMessage") + " (" + ebe.ToString() + " > " + FlowSheet.FlowsheetOptions.EnergyBalanceRelativeTolerance.ToString + ")")
+                    ElseIf FlowSheet.FlowsheetOptions.EnergyBalanceCheck = WarningType.ShowWarning Then
+                        FlowSheet.ShowMessage(GraphicObject.Tag + ": " + FlowSheet.GetTranslatedString("EnergyBalanceMessage") + " (" + ebe.ToString() + " > " + FlowSheet.FlowsheetOptions.EnergyBalanceRelativeTolerance.ToString + ")", IFlowsheet.MessageType.Warning)
                     End If
-
                 End If
 
             End If

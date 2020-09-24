@@ -1204,13 +1204,22 @@ Namespace Reactors
 
                 Next
 
+                'overall reaction heat
+
+                Dim DHrT As Double = 0
+
+                For Each sb As Compound In ims.Phases(0).Compounds.Values
+                    If N0.ContainsKey(sb.Name) Then
+                        DHrT += sb.ConstantProperties.IG_Enthalpy_of_Formation_25C * sb.ConstantProperties.Molar_Weight * (N(sb.Name) - N00(sb.Name)) / 1000
+                    End If
+                Next
+
                 If Me.ReactorOperationMode = OperationMode.Isothermic Then
 
                     'Products Enthalpy (kJ/kg * kg/s = kW)
                     Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
 
-                    'Me.DeltaQ = DHRT.Sum + Hp - Hr0
-                    Me.DeltaQ = DHRi.Values.Sum + Hp - Hr0
+                    Me.DeltaQ = DHrT + Hp - Hr0
 
                     Me.DeltaT = 0.0#
 
@@ -1222,8 +1231,7 @@ Namespace Reactors
                     Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
 
                     'Heat (kW)
-                    'Me.DeltaQ = DHRT.Sum + Hp - Hr0
-                    Me.DeltaQ = DHRi.Values.Sum + Hp - Hr0
+                    Me.DeltaQ = DHrT + Hp - Hr0
 
                     Me.DeltaT = OutletTemperature - T0
 
@@ -1745,6 +1753,10 @@ Namespace Reactors
         End Function
 
         Public Overrides Function GetChartModel(name As String) As Object
+
+            If points Is Nothing Then Return Nothing
+
+            If points.Count = 0 Then Return Nothing
 
             Dim su = FlowSheet.FlowsheetOptions.SelectedUnitSystem
 
