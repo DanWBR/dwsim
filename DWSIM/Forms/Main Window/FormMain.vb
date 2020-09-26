@@ -358,7 +358,7 @@ Public Class FormMain
 
         For Each currentAssembly As Assembly In alist
             Try
-                availableTypes.AddRange(currentAssembly.GetTypes())
+                availableTypes.AddRange(currentAssembly.GetExportedTypes())
             Catch ex As ReflectionTypeLoadException
                 Dim errstr As New StringBuilder()
                 For Each lex As Exception In ex.LoaderExceptions

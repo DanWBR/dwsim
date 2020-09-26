@@ -1409,8 +1409,8 @@ Namespace BaseClasses
             ' Get all elements
 
             If useParenthesis Then
-                Dim endNumber As Double = Double.Parse(If(Regex.Match(_molecule, "\)\d+").Value.Remove(0, 1),
-                Regex.IsMatch(_molecule, "\)\d+"), "1"))
+                Dim strval = If(Regex.IsMatch(_molecule, "\)\d+"), Regex.Match(_molecule, "\)\d+").Value.Remove(0, 1), "1")
+                Dim endNumber As Double = Double.Parse(strval, NumberStyles.AllowDecimalPoint, System.Globalization.CultureInfo.InvariantCulture)
                 ' Finds the number after the ')'
                 For Each i As Match In findMatches
                     Dim element As String = Regex.Match(i.Value, "[A-Z][a-z]?").Value
@@ -1426,7 +1426,7 @@ Namespace BaseClasses
                     Else
                         amountOfElement = Double.Parse(If(String.IsNullOrWhiteSpace(i.Value.Replace(element, "")), "1", i.Value.Replace(element, "")))
                     End If
-                    If el.ContainsKey(Name) Then
+                    If el.ContainsKey(element) Then
                         el(element) += amountOfElement
                     Else
                         el.Add(element, amountOfElement)
