@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 6.1 Update 9
+Version 6.1 Update 10
 Copyright (c) 2017-2020 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -27,7 +27,7 @@ SYSTEM REQUIREMENTS
 
 OS:             
 
-Windows: 32/64-bit Vista/7/8/10
+Windows: 32/64-bit 7/8/10
 Linux: 64-bit x86 Ubuntu 12.04 or newer / 32-bit armhf Raspbian/Ubuntu MATE
 macOS: 10.7 (OS X Lion) or newer
 
@@ -61,6 +61,13 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim6/commits/windows
+
+Version 6.1 Update 10
+
+- [CHG] Changed minimum required .NET Framework version to v4.6.2 on Windows
+- [FIX] Fixed Unit Operations energy balance check
+- [FIX] Fixed PFR energy balance
+- [NEW] Added an option to open editors with a double-click (Classic UI)
 
 Version 6.1 Update 8/9
 

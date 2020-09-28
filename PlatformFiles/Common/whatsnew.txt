@@ -1,12 +1,6 @@
-Version 6.1 Update 8/9
+Version 6.1 Update 10
 
-- [FIX] Fixed a regression with Nested Loops VLE Flash Algorithm
-
-Version 6.1 Update 7
-
-- [CHG] Enhanced reliability of Gibbs Reactor solver
-- [FIX] Fixed PR/SRK Interaction Parameters missing on first run
-- [FIX] Fixed CSTR convergence in some cases
-- [FIX] Fixed an issue with the Element Matrix editor on Gibbs Reactor
-- [FIX] Fixed reaction editors windows being modal (Classic UI)
-- [FIX] Other minor bug fixes
+- [CHG] Changed minimum required .NET Framework version to v4.6.2 on Windows
+- [FIX] Fixed Unit Operations energy balance check
+- [FIX] Fixed PFR energy balance
+- [NEW] Added an option to open editors with a double-click (Classic UI)
