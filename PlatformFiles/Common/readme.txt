@@ -67,6 +67,7 @@ Version 6.1 Update 10
 - [CHG] Changed minimum required .NET Framework version to v4.6.2 on Windows
 - [FIX] Fixed Unit Operations energy balance check
 - [FIX] Fixed PFR energy balance
+- [FIX] Fixed a regression in Nested Loops VLLE Flash
 - [NEW] Added an option to open editors with a double-click (Classic UI)
 
 Version 6.1 Update 8/9
