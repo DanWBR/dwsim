@@ -960,7 +960,7 @@ out2:       d2 = Date.Now
                         dfmin = 0.5
                     End If
 
-                    df = MinimizeGibbs(dfmin, PP, T, P, L1, L2, dL1, dL2, Vy, Vx1, Vx2)
+                    df = 1.0 'MinimizeGibbs(dfmin, PP, T, P, L1, L2, dL1, dL2, Vy, Vx1, Vx2)
 
                     L1 += -dL1 * df
                     L2 += -dL2 * df
