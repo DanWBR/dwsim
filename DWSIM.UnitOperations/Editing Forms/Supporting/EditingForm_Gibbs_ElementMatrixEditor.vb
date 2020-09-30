@@ -95,7 +95,7 @@ Public Class EditingForm_Gibbs_ElementMatrixEditor
             .AllowUserToAddRows = False
             .Rows.Clear()
             .Columns.Clear()
-            .Columns.Add("el", "Elements")
+            .Columns.Add("el", "Element")
             For Each s As String In gr.ComponentIDs
                 .Columns.Add(s, s)
             Next

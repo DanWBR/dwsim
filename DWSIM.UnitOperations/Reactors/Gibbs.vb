@@ -473,9 +473,23 @@ Namespace Reactors
 
 #Region "Auxiliary Subs"
 
+        Public Sub CheckCompoundIDs()
+
+            Dim ids = ComponentIDs.ToList
+
+            For Each id In ids
+                If Not FlowSheet.SelectedCompounds.ContainsKey(id) Then
+                    ComponentIDs.Remove(id)
+                End If
+            Next
+
+        End Sub
+
         Public Sub CreateElementMatrix()
 
             Dim ims As MaterialStream = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
+
+            CheckCompoundIDs()
 
             N0.Clear()
 
