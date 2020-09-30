@@ -1774,6 +1774,14 @@
       <Project>{f4e6f3e7-532c-4091-a82f-1dd7d191a13b}</Project>
       <Name>DWSIM.SkiaSharp.Views.Desktop</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Thermodynamics.AdvancedEOS.GERG2008\DWSIM.Thermodynamics.AdvancedEOS.GERG2008.vbproj">
+      <Project>{adc9fe07-d255-4512-8a64-2aebb3f5068c}</Project>
+      <Name>DWSIM.Thermodynamics.AdvancedEOS.GERG2008</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Thermodynamics.AdvancedEOS.PCSAFT\DWSIM.Thermodynamics.AdvancedEOS.PCSAFT2.vbproj">
+      <Project>{b749cabb-63e9-4d0b-b775-58d86e55d41b}</Project>
+      <Name>DWSIM.Thermodynamics.AdvancedEOS.PCSAFT2</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Thermodynamics.Databases.ChemeoLink\DWSIM.Thermodynamics.Databases.ChemeoLink.vbproj">
       <Project>{edb0b095-ff87-4b07-a06f-e314c45d73d4}</Project>
       <Name>DWSIM.Thermodynamics.Databases.ChemeoLink</Name>

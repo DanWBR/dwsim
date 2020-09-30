@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 6.1 Update 10
+Version 6.2
 Copyright (c) 2017-2020 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,14 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim6/commits/windows
+
+Version 6.2
+
+- [NEW] GERG-2008 Property Package
+- [NEW] PC-SAFT (with Association Support) Property Package
+- [NEW] Peng-Robinson (1978) Property Package
+- [FIX] Fixed Dynamic Mode error messages
+- [FIX] Fixed an issue with Gibbs Reactor's element matrix editor
 
 Version 6.1 Update 10
 

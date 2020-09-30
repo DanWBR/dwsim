@@ -17,6 +17,8 @@ FileHelpers.dll
 Cudafy.NET.dll
 Newtonsoft.Json.dll
 DWSIM.Thermodynamics.CoolPropInterface.dll
+DWSIM.Thermodynamics.AdvancedEOS.PCSAFT2.dll
+DWSIM.Thermodynamics.AdvancedEOS.GERG2008.dll
 Yeppp.CLR.Bundle.dll
 ExcelDna.Integration.dll
 DWSIM.ExtensionMethods.dll
@@ -25,5 +27,4 @@ DWSIM.XMLSerializer.dll
 DWSIM.MathOps.RandomOps.dll
 DWSIM.MathOps.SimpsonIntegrator.dll
 Nini.dll
-DWSIM.Thermodynamics.StandaloneLibrary.dll
 Mono.Posix.dll

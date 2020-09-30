@@ -8,17 +8,17 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("DWSIM.DynamicsManager")>
-<Assembly: AssemblyDescription("DWSIM Dynamics Manager")>
+<Assembly: AssemblyTitle("PC-SAFT Property Package")>
+<Assembly: AssemblyDescription("PC-SAFT (with Association Support) Property Package for DWSIM Simulator")>
 <Assembly: AssemblyCompany("")>
-<Assembly: AssemblyProduct("DWSIM.DynamicsManager")>
-<Assembly: AssemblyCopyright("Copyright 2020 Daniel Medeiros")>
+<Assembly: AssemblyProduct("DWSIM.Thermodynamics.SpecialEOS.PCSAFT")>
+<Assembly: AssemblyCopyright("Copyright ©  2019 Daniel Medeiros")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("969df946-4eaf-4b70-95c1-ee3e2bbebfe2")>
+<Assembly: Guid("a62cae61-bf71-4fe0-9649-3a2453c11318")>
 
 ' Version information for an assembly consists of the following four values:
 '
@@ -31,4 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("6.2.*")>
+<Assembly: AssemblyVersion("1.1.0.0")>
+<Assembly: AssemblyFileVersion("1.1.0.0")>

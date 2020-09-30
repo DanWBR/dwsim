@@ -40,6 +40,9 @@ Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
 
 Imports CefSharp.WinForms
 Imports DWSIM.Interfaces
+Imports DWSIM.Thermodynamics.SpecialEOS
+Imports DWSIM.Thermodynamics.SpecialEOS.PCSAFT
+Imports DWSIM.Thermodynamics.AdvancedEOS
 
 Public Class FormMain
 
@@ -621,28 +624,24 @@ Public Class FormMain
 
         PropertyPackages.Add(LKPPP.ComponentName.ToString, LKPPP)
 
-        'Dim EUQPP As ExUNIQUACPropertyPackage = New ExUNIQUACPropertyPackage()
-        'EUQPP.ComponentName = "Extended UNIQUAC (Aqueous Electrolytes)"
-        'EUQPP.ComponentDescription = DWSIM.App.GetLocalString("DescEUPP")
-
-        'PropertyPackages.Add(EUQPP.ComponentName.ToString, EUQPP)
-
-        'Dim ENQPP As New ElectrolyteNRTLPropertyPackage()
-        'ENQPP.ComponentName = "Electrolyte NRTL (Aqueous Electrolytes)"
-        'ENQPP.ComponentDescription = DWSIM.App.GetLocalString("DescENPP")
-
-        'PropertyPackages.Add(ENQPP.ComponentName.ToString, ENQPP)
-
         Dim BOPP As BlackOilPropertyPackage = New BlackOilPropertyPackage()
         BOPP.ComponentName = "Black Oil"
         BOPP.ComponentDescription = DWSIM.App.GetLocalString("DescBOPP")
 
-        PropertyPackages.Add(BOPP.ComponentName.ToString, BOPP)
+        Dim GERGPP As GERG2008PropertyPackage = New GERG2008PropertyPackage()
+
+        PropertyPackages.Add(GERGPP.ComponentName.ToString, GERGPP)
+
+        Dim PCSAFTPP As PCSAFT2PropertyPackage = New PCSAFT2PropertyPackage()
+
+        PropertyPackages.Add(PCSAFTPP.ComponentName.ToString, PCSAFTPP)
 
         Dim otherpps = SharedClasses.Utility.LoadAdditionalPropertyPackages()
 
         For Each pp In otherpps
-            PropertyPackages.Add(DirectCast(pp, CapeOpen.ICapeIdentification).ComponentName, pp)
+            If Not PropertyPackages.ContainsKey(DirectCast(pp, CapeOpen.ICapeIdentification).ComponentName) Then
+                PropertyPackages.Add(DirectCast(pp, CapeOpen.ICapeIdentification).ComponentName, pp)
+            End If
         Next
 
         'Check if DWSIM is running in Portable/Mono mode, if not then load the CAPE-OPEN Wrapper Property Package.

@@ -1,7 +1,7 @@
-Version 6.1 Update 10
+Version 6.2
 
-- [CHG] Changed minimum required .NET Framework version to v4.6.2 on Windows
-- [FIX] Fixed Unit Operations energy balance check
-- [FIX] Fixed PFR energy balance
-- [FIX] Fixed a regression in Nested Loops VLLE Flash
-- [NEW] Added an option to open editors with a double-click (Classic UI)
+- [NEW] GERG-2008 Property Package
+- [NEW] PC-SAFT (with Association Support) Property Package
+- [NEW] Peng-Robinson (1978) Property Package
+- [FIX] Fixed Dynamic Mode error messages
+- [FIX] Fixed an issue with Gibbs Reactor's element matrix editor
