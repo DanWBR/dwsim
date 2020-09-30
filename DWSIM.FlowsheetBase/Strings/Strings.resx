@@ -5363,4 +5363,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="RotationSpeed" xml:space="preserve">
     <value>Rotation Speed</value>
   </data>
+  <data name="DescPengRobinson78PP" xml:space="preserve">
+    <value>Based on the Peng–Robinson EOS as published by Peng and Robinson in 1978.</value>
+  </data>
 </root>

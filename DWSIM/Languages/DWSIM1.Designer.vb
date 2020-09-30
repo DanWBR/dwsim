@@ -4452,6 +4452,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Based on the Peng–Robinson EOS as published by Peng and Robinson in 1978..
+        '''</summary>
+        Friend Shared ReadOnly Property DescPengRobinson78PP() As String
+            Get
+                Return ResourceManager.GetString("DescPengRobinson78PP", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Pacote de Propriedades que utiliza a EDE Peng-Robinson e considera água totalmente imiscível com hidrocarbonetos, separando-se em uma Fase isolada. Também utiliza translação no cálculo do volume molar para uma melhor predição da densidade de líquidos..
         '''</summary>
         Friend Shared ReadOnly Property DescPengRobinsonIWVTPP() As String

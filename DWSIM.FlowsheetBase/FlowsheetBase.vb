@@ -2016,6 +2016,10 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                                   For Each cp As ConstantProperties In cpa
                                       If Not addedcomps.Contains(cp.Name.ToLower) AndAlso Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
                                   Next
+                                  Dim comps = Databases.UserDB.LoadAdditionalCompounds()
+                                  For Each cp As BaseClasses.ConstantProperties In comps
+                                      If Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
+                                  Next
                                   AddSystemsOfUnits()
                                   AddDefaultProperties()
                               End Sub)
@@ -2297,6 +2301,11 @@ Label_00CC:
         Dim PCSAFTPP As PCSAFT2PropertyPackage = New PCSAFT2PropertyPackage()
 
         PropertyPackages.Add(PCSAFTPP.ComponentName.ToString, PCSAFTPP)
+
+        Dim PR78PP As PengRobinsonPropertyPackage = New PengRobinsonPropertyPackage()
+        PR78PP.ComponentName = "Peng-Robinson 1978 (PR78)"
+
+        PropertyPackages.Add(PR78PP.ComponentName.ToString, PR78PP)
 
         Dim otherpps = SharedClasses.Utility.LoadAdditionalPropertyPackages()
 

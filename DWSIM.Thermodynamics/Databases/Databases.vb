@@ -24,10 +24,11 @@ Imports CProp = CoolProp
 Imports System.Linq
 Imports DWSIM.Thermodynamics
 Imports System.Reflection
+Imports DWSIM.Interfaces
 
 Namespace Databases
 
-    <DelimitedRecord(";")> <IgnoreFirst()> <System.Serializable()> _
+    <DelimitedRecord(";")> <IgnoreFirst()> <System.Serializable()>
     Public Class ChemSepNameIDPair
 
         Implements ICloneable
@@ -827,6 +828,20 @@ Namespace Databases
     End Class
 
     <System.Serializable()> Public Class UserDB
+
+        Public Shared Function LoadAdditionalCompounds() As List(Of ICompoundConstantProperties)
+
+            Dim comps As New List(Of ICompoundConstantProperties)
+            Dim cfiles = Directory.GetFiles(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "addcomps"))
+            For Each cpath In cfiles
+                Dim comp = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BaseClasses.ConstantProperties)(File.ReadAllText(cpath))
+                comp.CurrentDB = "User"
+                comp.OriginalDB = "User"
+                comps.Add(comp)
+            Next
+            Return comps
+
+        End Function
 
         Public Shared Sub CreateNew(ByVal path As String, ByVal TopNode As String)
 

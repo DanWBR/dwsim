@@ -43,6 +43,7 @@ Imports DWSIM.Interfaces
 Imports DWSIM.Thermodynamics.SpecialEOS
 Imports DWSIM.Thermodynamics.SpecialEOS.PCSAFT
 Imports DWSIM.Thermodynamics.AdvancedEOS
+Imports DWSIM.Thermodynamics.Databases
 
 Public Class FormMain
 
@@ -636,6 +637,12 @@ Public Class FormMain
 
         PropertyPackages.Add(PCSAFTPP.ComponentName.ToString, PCSAFTPP)
 
+        Dim PR78PP As PengRobinsonPropertyPackage = New PengRobinsonPropertyPackage()
+        PR78PP.ComponentName = "Peng-Robinson 1978 (PR78)"
+        PR78PP.ComponentDescription = DWSIM.App.GetLocalString("DescPengRobinson78PP")
+
+        PropertyPackages.Add(PR78PP.ComponentName.ToString, PR78PP)
+
         Dim otherpps = SharedClasses.Utility.LoadAdditionalPropertyPackages()
 
         For Each pp In otherpps
@@ -889,22 +896,25 @@ Public Class FormMain
     Private Function GetComponents()
 
         'try to find chemsep xml database
-        Me.LoadCSDB()
+        LoadCSDB()
 
         'load DWSIM XML database
-        Me.LoadDWSIMDB()
+        LoadDWSIMDB()
 
         'load CoolProp database
-        Me.LoadCPDB()
+        LoadCPDB()
 
         'load ChEDL database
-        Me.LoadCheDLDB()
+        LoadCheDLDB()
 
         'load Electrolyte XML database
-        Me.LoadEDB()
+        LoadEDB()
 
         'load Biodiesel XML database
-        Me.LoadBDDB()
+        LoadBDDB()
+
+        'additional compounds
+        LoadAdditionalCompounds()
 
         If GlobalSettings.Settings.OldUI Then
 
@@ -975,6 +985,13 @@ Public Class FormMain
         dwdb.Load()
         cpa = dwdb.Transfer()
         For Each cp As BaseClasses.ConstantProperties In cpa
+            If Not Me.AvailableComponents.ContainsKey(cp.Name) Then Me.AvailableComponents.Add(cp.Name, cp)
+        Next
+    End Sub
+
+    Public Sub LoadAdditionalCompounds()
+        Dim comps = UserDB.LoadAdditionalCompounds()
+        For Each cp As BaseClasses.ConstantProperties In comps
             If Not Me.AvailableComponents.ContainsKey(cp.Name) Then Me.AvailableComponents.Add(cp.Name, cp)
         Next
     End Sub
