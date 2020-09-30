@@ -337,6 +337,7 @@
     </Compile>
     <Compile Include="Material Stream\MaterialStream.vb" />
     <Compile Include="Property Packages\Models\ElectrolyteNRTL.vb" />
+    <Compile Include="Property Packages\Models\PengRobinson78.vb" />
     <Compile Include="Property Packages\Models\TrueCriticalPoint.vb" />
     <Compile Include="Base Classes\PropertyMethods.vb" />
     <Compile Include="Main\Calculator.vb" />
@@ -346,6 +347,7 @@
     <Compile Include="Property Packages\ElectrolyteBase.vb" />
     <Compile Include="Property Packages\Models\Hypotheticals.vb" />
     <Compile Include="Base Classes\MichelsenBase.vb" />
+    <Compile Include="Property Packages\PengRobinson78.vb" />
     <Compile Include="Property Packages\PropertyPackage.vb" />
     <Compile Include="Property Packages\Models\FluidProperties.vb" />
     <Compile Include="Base Classes\FlashAlgorithmBase.vb" />

@@ -105,48 +105,6 @@ Namespace PropertyPackages
 
         End Function
 
-        Public Overrides Function CalcJouleThomsonCoefficient(p As Interfaces.IPhase) As Double
-
-            Dim T, P0 As Double
-            T = CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
-            P0 = CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
-
-            Select Case p.Name
-                Case "Mixture"
-                    Return 0.0#
-                Case "Vapor"
-                    If p.Properties.compressibilityFactor Is Nothing Then DW_CalcProp("compressibilityfactor", Phase.Vapor)
-                    If p.Properties.heatCapacityCp Is Nothing Then DW_CalcProp("heatCapacityCp", Phase.Vapor)
-                    Return m_pr.JT_PR(p.Properties.compressibilityFactor.GetValueOrDefault, T, P0, RET_VMOL(Phase.Vapor), RET_VMM, RET_VZC, RET_VTC, RET_VPC,
-                                      p.Properties.heatCapacityCp.GetValueOrDefault, RET_VW)
-                Case "OverallLiquid"
-                    Return 0.0#
-                Case "Liquid1"
-                    If p.Properties.compressibilityFactor Is Nothing Then DW_CalcProp("compressibilityfactor", Phase.Liquid1)
-                    If p.Properties.heatCapacityCp Is Nothing Then DW_CalcProp("heatCapacityCp", Phase.Liquid1)
-                    Return m_pr.JT_PR(p.Properties.compressibilityFactor.GetValueOrDefault, T, P0, RET_VMOL(Phase.Liquid1), RET_VMM, RET_VZC, RET_VTC, RET_VPC,
-                                      p.Properties.heatCapacityCp.GetValueOrDefault, RET_VW)
-                Case "Liquid2"
-                    If p.Properties.compressibilityFactor Is Nothing Then DW_CalcProp("compressibilityfactor", Phase.Liquid2)
-                    If p.Properties.heatCapacityCp Is Nothing Then DW_CalcProp("heatCapacityCp", Phase.Liquid2)
-                    Return m_pr.JT_PR(p.Properties.compressibilityFactor.GetValueOrDefault, T, P0, RET_VMOL(Phase.Liquid2), RET_VMM, RET_VZC, RET_VTC, RET_VPC,
-                                      p.Properties.heatCapacityCp.GetValueOrDefault, RET_VW)
-                Case "Liquid3"
-                    If p.Properties.compressibilityFactor Is Nothing Then DW_CalcProp("compressibilityfactor", Phase.Liquid3)
-                    If p.Properties.heatCapacityCp Is Nothing Then DW_CalcProp("heatCapacityCp", Phase.Liquid3)
-                    Return m_pr.JT_PR(p.Properties.compressibilityFactor.GetValueOrDefault, T, P0, RET_VMOL(Phase.Liquid3), RET_VMM, RET_VZC, RET_VTC, RET_VPC,
-                            p.Properties.heatCapacityCp.GetValueOrDefault, RET_VW)
-                Case "Aqueous"
-                    If p.Properties.compressibilityFactor Is Nothing Then DW_CalcProp("compressibilityfactor", Phase.Aqueous)
-                    If p.Properties.heatCapacityCp Is Nothing Then DW_CalcProp("heatCapacityCp", Phase.Aqueous)
-                    Return m_pr.JT_PR(p.Properties.compressibilityFactor.GetValueOrDefault, T, P0, RET_VMOL(Phase.Aqueous), RET_VMM, RET_VZC, RET_VTC, RET_VPC,
-                  p.Properties.heatCapacityCp.GetValueOrDefault, RET_VW)
-                Case "Solid"
-                    Return 0.0#
-            End Select
-
-        End Function
-
         Public Overrides Function DW_CalcCp_ISOL(ByVal Phase1 As PropertyPackages.Phase, ByVal T As Double, ByVal P As Double) As Double
             Select Case Phase1
                 Case Phase.Liquid
