@@ -476,9 +476,44 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                     Flowsheet.UpdateEditorPanels.Invoke();
                     if (t.Exception != null)
                     {
-                        var euid = Guid.NewGuid().ToString();
-                        SharedClasses.ExceptionProcessing.ExceptionList.Exceptions.Add(euid, t.Exception);
-                        Flowsheet.ShowMessage(t.Exception.Message, Interfaces.IFlowsheet.MessageType.GeneralError, euid);
+                        Exception baseexception;
+                        foreach (var ex in t.Exception.Flatten().InnerExceptions)
+                            {
+                                string euid = Guid.NewGuid().ToString();
+                                SharedClasses.ExceptionProcessing.ExceptionList.Exceptions.Add(euid, ex);
+                                if (ex is AggregateException)
+                                {
+                                    baseexception = ex.InnerException;
+                                    foreach (var iex in ((AggregateException)ex).Flatten().InnerExceptions)
+                                    {
+                                        while (iex.InnerException != null)
+                                        {
+                                            baseexception = iex.InnerException;
+                                        }
+                                        Flowsheet.ShowMessage(baseexception.Message.ToString(), Interfaces.IFlowsheet.MessageType.GeneralError, euid);
+                                    }
+                                }
+                                else
+                                {
+                                    baseexception = ex;
+                                    if (baseexception.InnerException != null)
+                                    {
+                                        while (baseexception.InnerException.InnerException != null)
+                                        {
+                                            baseexception = baseexception.InnerException;
+                                            if ((baseexception == null))
+                                            {
+                                                break;
+                                            }
+                                            if ((baseexception.InnerException == null))
+                                            {
+                                                break;
+                                            }
+                                        }
+                                        Flowsheet.ShowMessage(baseexception.Message.ToString(), Interfaces.IFlowsheet.MessageType.GeneralError, euid);
+                                    }
+                                }
+                        }
                     }
                 });
             });
