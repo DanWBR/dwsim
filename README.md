@@ -17,7 +17,7 @@ DWSIM is licensed under the GNU General Public License (GPL) Version 3.
 
 ### Supported Operating Systems
 
-- Windows (32/64-bit x86) with .NET Framework 4.6.1 or newer
+- Windows (32/64-bit x86) with .NET Framework 4.6.2 or newer
 - Linux (32-bit armhf / 64-bit x86) with Mono 6.8 or newer
 - macOS (formerly OS X) 10.7 or newer
 
@@ -45,6 +45,9 @@ DWSIM.MathOps.RandomOps|Random number generator library
 DWSIM.MathOps.SwarmOps|Optimization library
 DWSIM.SharedClasses|Shared/Base class definitions
 DWSIM.Thermodynamics|Thermo library
+DWSIM.Thermodynamics.AdvancedEOS.GERG2008|GERG2008 Property Package
+DWSIM.Thermodynamics.AdvancedEOS.PCSAFT|PC-SAFT Property Package
+DWSIM.Thermodynamics.AdvancedEOS.PRSRKAdv|PR78/SRK with T-dep IPs Property Package
 DWSIM.Thermodynamics.Databases.ChEDLThermoLink|ChEDL Thermo Python Library Database Linker/Parser
 DWSIM.Thermodynamics.Databases.ChemeoLink|Cheméo Database Linker/Parser
 DWSIM.Thermodynamics.Databases.DDBStructureLink|DDB UNIFAC/MODFAC Structure Database Linker/Parser
