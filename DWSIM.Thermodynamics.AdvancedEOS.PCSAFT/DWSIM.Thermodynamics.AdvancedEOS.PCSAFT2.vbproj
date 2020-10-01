@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>
     </RootNamespace>
-    <AssemblyName>DWSIM.Thermodynamics.SpecialEOS.PCSAFT2</AssemblyName>
+    <AssemblyName>DWSIM.Thermodynamics.AdvancedEOS.PCSAFT2</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
@@ -21,7 +21,7 @@
     <DefineDebug>false</DefineDebug>
     <DefineTrace>false</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>DWSIM.Thermodynamics.SpecialEOS.PCSAFT2.xml</DocumentationFile>
+    <DocumentationFile>DWSIM.Thermodynamics.AdvancedEOS.PCSAFT2.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <RemoveIntegerChecks>false</RemoveIntegerChecks>
     <Optimize>false</Optimize>
@@ -32,7 +32,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>DWSIM.Thermodynamics.SpecialEOS.PCSAFT2.xml</DocumentationFile>
+    <DocumentationFile>DWSIM.Thermodynamics.AdvancedEOS.PCSAFT2.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
