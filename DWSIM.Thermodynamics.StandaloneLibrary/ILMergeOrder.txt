@@ -17,8 +17,8 @@ FileHelpers.dll
 Cudafy.NET.dll
 Newtonsoft.Json.dll
 DWSIM.Thermodynamics.CoolPropInterface.dll
-DWSIM.Thermodynamics.AdvancedEOS.PCSAFT2.dll
-DWSIM.Thermodynamics.AdvancedEOS.GERG2008.dll
+DWSIM.Thermodynamics.SpecialEOS.PCSAFT2.dll
+DWSIM.Thermodynamics.SpecialEOS.GERG2008.dll
 DWSIM.Thermodynamics.AdvancedEOS.PRSRKTDep.dll
 Yeppp.CLR.Bundle.dll
 ExcelDna.Integration.dll

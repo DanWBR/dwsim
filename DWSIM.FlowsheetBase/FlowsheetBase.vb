@@ -2296,30 +2296,30 @@ Label_00CC:
 
         Dim GERGPP As GERG2008PropertyPackage = New GERG2008PropertyPackage()
 
-        PropertyPackages.Add(GERGPP.ComponentName.ToString, GERGPP)
+        AvailablePropertyPackages.Add(GERGPP.ComponentName.ToString, GERGPP)
 
         Dim PCSAFTPP As PCSAFT2PropertyPackage = New PCSAFT2PropertyPackage()
 
-        PropertyPackages.Add(PCSAFTPP.ComponentName.ToString, PCSAFTPP)
+        AvailablePropertyPackages.Add(PCSAFTPP.ComponentName.ToString, PCSAFTPP)
 
         Dim PR78PP As PengRobinsonPropertyPackage = New PengRobinsonPropertyPackage()
         PR78PP.ComponentName = "Peng-Robinson 1978 (PR78)"
 
-        PropertyPackages.Add(PR78PP.ComponentName.ToString, PR78PP)
+        AvailablePropertyPackages.Add(PR78PP.ComponentName.ToString, PR78PP)
 
         Dim PR78Adv As PengRobinson1978AdvancedPropertyPackage = New PengRobinson1978AdvancedPropertyPackage()
 
-        PropertyPackages.Add(PR78Adv.ComponentName.ToString, PR78Adv)
+        AvailablePropertyPackages.Add(PR78Adv.ComponentName.ToString, PR78Adv)
 
         Dim SRKAdv As SoaveRedlichKwongAdvancedPropertyPackage = New SoaveRedlichKwongAdvancedPropertyPackage()
 
-        PropertyPackages.Add(SRKAdv.ComponentName.ToString, SRKAdv)
+        AvailablePropertyPackages.Add(SRKAdv.ComponentName.ToString, SRKAdv)
 
         Dim otherpps = SharedClasses.Utility.LoadAdditionalPropertyPackages()
 
         For Each pp In otherpps
-            If Not PropertyPackages.ContainsKey(DirectCast(pp, CapeOpen.ICapeIdentification).ComponentName) Then
-                PropertyPackages.Add(DirectCast(pp, CapeOpen.ICapeIdentification).ComponentName, pp)
+            If Not AvailablePropertyPackages.ContainsKey(DirectCast(pp, CapeOpen.ICapeIdentification).ComponentName) Then
+                AvailablePropertyPackages.Add(DirectCast(pp, CapeOpen.ICapeIdentification).ComponentName, pp)
             End If
         Next
 
