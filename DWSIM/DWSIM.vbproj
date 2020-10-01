@@ -1782,6 +1782,10 @@
       <Project>{b749cabb-63e9-4d0b-b775-58d86e55d41b}</Project>
       <Name>DWSIM.Thermodynamics.AdvancedEOS.PCSAFT2</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Thermodynamics.AdvancedEOS.PRSRKTDep\DWSIM.Thermodynamics.AdvancedEOS.PRSRKTDep.vbproj">
+      <Project>{46fd1720-09ce-4edb-b2c5-378be32859fb}</Project>
+      <Name>DWSIM.Thermodynamics.AdvancedEOS.PRSRKTDep</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Thermodynamics.Databases.ChemeoLink\DWSIM.Thermodynamics.Databases.ChemeoLink.vbproj">
       <Project>{edb0b095-ff87-4b07-a06f-e314c45d73d4}</Project>
       <Name>DWSIM.Thermodynamics.Databases.ChemeoLink</Name>

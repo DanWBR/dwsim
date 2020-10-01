@@ -643,6 +643,14 @@ Public Class FormMain
 
         PropertyPackages.Add(PR78PP.ComponentName.ToString, PR78PP)
 
+        Dim PR78Adv As PengRobinson1978AdvancedPropertyPackage = New PengRobinson1978AdvancedPropertyPackage()
+
+        PropertyPackages.Add(PR78Adv.ComponentName.ToString, PR78Adv)
+
+        Dim SRKAdv As SoaveRedlichKwongAdvancedPropertyPackage = New SoaveRedlichKwongAdvancedPropertyPackage()
+
+        PropertyPackages.Add(SRKAdv.ComponentName.ToString, SRKAdv)
+
         Dim otherpps = SharedClasses.Utility.LoadAdditionalPropertyPackages()
 
         For Each pp In otherpps

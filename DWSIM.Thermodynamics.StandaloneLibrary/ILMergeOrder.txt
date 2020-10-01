@@ -19,6 +19,7 @@ Newtonsoft.Json.dll
 DWSIM.Thermodynamics.CoolPropInterface.dll
 DWSIM.Thermodynamics.AdvancedEOS.PCSAFT2.dll
 DWSIM.Thermodynamics.AdvancedEOS.GERG2008.dll
+DWSIM.Thermodynamics.AdvancedEOS.PRSRKTDep
 Yeppp.CLR.Bundle.dll
 ExcelDna.Integration.dll
 DWSIM.ExtensionMethods.dll

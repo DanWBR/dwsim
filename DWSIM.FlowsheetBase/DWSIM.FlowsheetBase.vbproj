@@ -263,6 +263,10 @@
       <Project>{b749cabb-63e9-4d0b-b775-58d86e55d41b}</Project>
       <Name>DWSIM.Thermodynamics.AdvancedEOS.PCSAFT2</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Thermodynamics.AdvancedEOS.PRSRKTDep\DWSIM.Thermodynamics.AdvancedEOS.PRSRKTDep.vbproj">
+      <Project>{46fd1720-09ce-4edb-b2c5-378be32859fb}</Project>
+      <Name>DWSIM.Thermodynamics.AdvancedEOS.PRSRKTDep</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Thermodynamics\DWSIM.Thermodynamics.vbproj">
       <Project>{369bc7af-836b-4de1-93e3-b051bc148b23}</Project>
       <Name>DWSIM.Thermodynamics</Name>

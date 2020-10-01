@@ -67,6 +67,7 @@ Version 6.2
 - [NEW] GERG-2008 Property Package
 - [NEW] PC-SAFT (with Association Support) Property Package
 - [NEW] Peng-Robinson (1978) Property Package
+- [NEW] Temperature-dependent Interaction Parameter PR78/SRK Property Packages
 - [FIX] Fixed Dynamic Mode error messages
 - [FIX] Fixed an issue with Gibbs Reactor's element matrix editor
 
