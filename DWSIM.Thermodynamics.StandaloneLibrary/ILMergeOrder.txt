@@ -2,7 +2,6 @@
 # you can fill it from the obj\CONFIG\PROJECT.ilmerge generated on every build
 # and finetune merge order to your satisfaction
 
-DWSIM.Thermodynamics.dll
 DWSIM.SharedClasses.dll
 DWSIM.Interfaces.dll
 CapeOpen.dll
@@ -17,9 +16,6 @@ FileHelpers.dll
 Cudafy.NET.dll
 Newtonsoft.Json.dll
 DWSIM.Thermodynamics.CoolPropInterface.dll
-DWSIM.Thermodynamics.AdvancedEOS.PCSAFT2.dll
-DWSIM.Thermodynamics.AdvancedEOS.GERG2008.dll
-DWSIM.Thermodynamics.AdvancedEOS.PRSRKTDep.dll
 Yeppp.CLR.Bundle.dll
 ExcelDna.Integration.dll
 DWSIM.ExtensionMethods.dll
@@ -27,6 +23,9 @@ DWSIM.GlobalSettings.dll
 DWSIM.XMLSerializer.dll
 DWSIM.MathOps.RandomOps.dll
 DWSIM.MathOps.SimpsonIntegrator.dll
-DWSIM.Thermodynamics.StandaloneLibrary.dll
 Nini.dll
-Mono.Posix.dll
+DWSIM.Thermodynamics.AdvancedEOS.PCSAFT2.dll
+DWSIM.Thermodynamics.AdvancedEOS.GERG2008.dll
+DWSIM.Thermodynamics.AdvancedEOS.PRSRKTDep.dll
+DWSIM.Thermodynamics.StandaloneLibrary.dll
+DWSIM.Thermodynamics.dll

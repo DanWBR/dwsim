@@ -64,6 +64,8 @@ The full changelog including souce code changes can be viewed at https://github.
 
 Version 6.2
 
+- [NEW] New compounds: Sulfuric Acid, Solid Carbon, Mercury, Casein, Lactose, 
+        Methyl Oleate, Myristic Acid, Triolein
 - [NEW] GERG-2008 Property Package
 - [NEW] PC-SAFT (with Association Support) Property Package
 - [NEW] Peng-Robinson (1978) Property Package
