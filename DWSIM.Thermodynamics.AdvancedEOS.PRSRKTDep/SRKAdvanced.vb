@@ -13,11 +13,11 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
         Private ec As New Ciloci.Flee.ExpressionContext
 
-        Public KijExpressions As New Dictionary(Of Tuple(Of String, String), String)
+        Public KijExpressions As New Dictionary(Of String, String)
 
         Public Sub New()
 
-            ComponentName = "Soave-Redlich-Kwong Advanced"
+            ComponentName = "Soave-Redlich-Kwong (SRK) Advanced"
             ComponentDescription = "Soave-Redlich-Kwong EOS with T/P-dependent Interaction Parameters"
 
             IsConfigurable = True
@@ -77,8 +77,8 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
             Dim result As Double = 0.0
 
-            Dim pair As New Tuple(Of String, String)(id1, id2)
-            Dim pair2 As New Tuple(Of String, String)(id2, id1)
+            Dim pair = id1 + "/" + id2
+            Dim pair2 = id2 + "/" + id1
 
             Try
                 If KijExpressions.ContainsKey(pair) Then
@@ -214,7 +214,7 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
             elements.Add(New XElement("NewInteractionParameters"))
             For Each kvp In KijExpressions
-                elements((elements.Count - 1)).Add(New XElement("NewInteractionParameter", New XAttribute("Compound1", kvp.Key.Item1), New XAttribute("Compound2", kvp.Key.Item2), New XAttribute("Value", kvp.Value)))
+                elements((elements.Count - 1)).Add(New XElement("NewInteractionParameter", New XAttribute("Pair", kvp.Key), New XAttribute("Value", kvp.Value)))
             Next
 
             Return elements
@@ -223,10 +223,10 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
         Public Overrides Function LoadData(data As List(Of XElement)) As Boolean
 
-            KijExpressions = New Dictionary(Of Tuple(Of String, String), String)
+            KijExpressions = New Dictionary(Of String, String)
 
             For Each xel As XElement In (From xel2 In data Where xel2.Name = "NewInteractionParameters" Select xel2).SingleOrDefault().Elements().ToList()
-                KijExpressions.Add(New Tuple(Of String, String)(xel.Attribute("Compound1").Value, xel.Attribute("Compound2").Value), xel.Attribute("Value").Value)
+                KijExpressions.Add(xel.Attribute("Pair").Value, xel.Attribute("Value").Value)
             Next
 
             Return MyBase.LoadData(data)

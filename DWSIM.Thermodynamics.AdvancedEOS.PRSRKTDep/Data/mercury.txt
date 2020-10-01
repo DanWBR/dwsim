@@ -1,0 +1,13 @@
+﻿Mercury	Nitrogen	0.390
+Mercury	Carbon dioxide	0.000
+Mercury	Methane	0.400
+Mercury	Ethane	0.350
+Mercury	Propane	0.220
+Mercury	Isobutane	0.100
+Mercury	N-butane	0.100
+Mercury	Isopentane	1.0036E-04*T^2-5.5429E-02*T+7.5340
+Mercury	N-pentane	1.0036E-04*T^2-5.5429E-02*T+7.5340
+Mercury	N-hexane	9.1720E-05*T^2-4.9756E-02*T+6.5981
+Mercury	N-heptane	-1.5167E-05*T^2+9.9217E-03*T-1.6765
+Mercury	N-octane	3.9972E-06*T^3-3.5439E-03*T^2+1.0478*T-1.0335E+02
+Mercury	N-decane	-1.4149E-05*T^2+9.8034E-03*T-1.7292

@@ -21,7 +21,7 @@ Imports System.IO
 Imports DWSIM.Thermodynamics
 Imports System.Windows.Forms
 Imports DWSIM
-Imports DWSIM.Thermodynamics.SpecialEOS
+Imports DWSIM.Thermodynamics.AdvancedEOS
 
 Public Class FormConfig
 
@@ -57,7 +57,7 @@ Public Class FormConfig
             For Each cp As ConstantProperties In _comps.Values
                 For Each cp2 As ConstantProperties In _comps.Values
                     If cp.Name <> cp2.Name Then
-                        Dim pair1 = New Tuple(Of String, String)(cp.Name, cp2.Name)
+                        Dim pair1 = cp.Name + "/" + cp2.Name
                         'Dim pair2 = New Tuple(Of String, String)(cp2.Name, cp.Name)
                         If ppu.KijExpressions.ContainsKey(pair1) Then
                             Dim exp As String = ppu.KijExpressions(pair1)
@@ -112,7 +112,7 @@ Public Class FormConfig
             For Each cp As ConstantProperties In _comps.Values
                 For Each cp2 As ConstantProperties In _comps.Values
                     If cp.Name <> cp2.Name Then
-                        Dim pair1 = New Tuple(Of String, String)(cp.Name, cp2.Name)
+                        Dim pair1 = cp.Name + "/" + cp2.Name
                         'Dim pair2 = New Tuple(Of String, String)(cp2.Name, cp.Name)
                         If ppu.KijExpressions.ContainsKey(pair1) Then
                             Dim exp As String = ppu.KijExpressions(pair1)
@@ -182,8 +182,8 @@ Public Class FormConfig
                 Select Case e.ColumnIndex
                     Case 2
                         newvalue = value
-                        Dim pair1 = New Tuple(Of String, String)(id1, id2)
-                        Dim pair2 = New Tuple(Of String, String)(id2, id1)
+                        Dim pair1 = id1 + "/" + id2
+                        Dim pair2 = id2 + "/" + id1
                         If ppu.KijExpressions.ContainsKey(pair1) Then
                             oldvalue = ppu.KijExpressions(pair1)
                             ppu.KijExpressions(pair1) = newvalue
@@ -192,7 +192,7 @@ Public Class FormConfig
                             ppu.KijExpressions(pair2) = newvalue
                         Else
                             oldvalue = 0.0
-                            ppu.KijExpressions.Add(New Tuple(Of String, String)(id1, id2), newvalue)
+                            ppu.KijExpressions.Add(pair1, newvalue)
                         End If
                 End Select
                 If Not _form Is Nothing Then
@@ -210,14 +210,14 @@ Public Class FormConfig
                     Case 2
                         oldvalue = ppu.m_pr.InteractionParameters(id1)(id2).kij
                         newvalue = value
-                        Dim pair1 = New Tuple(Of String, String)(id1, id2)
-                        Dim pair2 = New Tuple(Of String, String)(id2, id1)
+                        Dim pair1 = id1 + "/" + id2
+                        Dim pair2 = id2 + "/" + id1
                         If ppu.KijExpressions.ContainsKey(pair1) Then
                             ppu.KijExpressions(pair1) = newvalue
                         ElseIf ppu.KijExpressions.ContainsKey(pair2) Then
                             ppu.KijExpressions(pair2) = newvalue
                         Else
-                            ppu.KijExpressions.Add(New Tuple(Of String, String)(id1, id2), newvalue)
+                            ppu.KijExpressions.Add(pair1, newvalue)
                         End If
                 End Select
                 If Not _form Is Nothing Then

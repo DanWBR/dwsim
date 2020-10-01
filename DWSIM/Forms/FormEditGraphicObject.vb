@@ -260,18 +260,15 @@ Public Class FormEditGraphicObject
 
                     .Item.Clear()
 
+                    Dim sobj As ShapeGraphic = gobj
+
                     .Item.Add(DWSIM.App.GetLocalString("Nome"), gobj, "Tag", False, "", DWSIM.App.GetLocalString("Nomedoobjeto"), True)
                     .Item(.Item.Count - 1).Tag2 = "Tag"
-                    .Item.Add(DWSIM.App.GetLocalString("Gradiente2"), gobj, "GradientMode", False, "", DWSIM.App.GetLocalString("SelecioLiquidrueparaapl"), True)
-                    .Item(.Item.Count - 1).Tag2 = "GradientMode"
-                    .Item.Add(DWSIM.App.GetLocalString("Gradiente_Cor1"), gobj, "GradientColor1", False, "", DWSIM.App.GetLocalString("Cor1dogradienteseapl"), True)
-                    .Item(.Item.Count - 1).Tag2 = "GradientColor1"
+                    .Item.Add(DWSIM.App.GetLocalString("Override Color"), gobj, "OverrideColors", False, "", DWSIM.App.GetLocalString("Cor1dogradienteseapl"), True)
+                    .Item(.Item.Count - 1).Tag2 = "OverrideColors"
+                    .Item.Add(DWSIM.App.GetLocalString("Cor"), gobj, "LineColor", False, "", "", True)
                     .Item(.Item.Count - 1).CustomEditor = New DWSIM.Editors.SKColorEditor.UISKColorEditor
-                    .Item.Add(DWSIM.App.GetLocalString("Gradiente_Cor2"), gobj, "GradientColor2", False, "", DWSIM.App.GetLocalString("Cor2dogradienteseapl"), True)
-                    .Item(.Item.Count - 1).Tag2 = "GradientColor2"
-                    .Item(.Item.Count - 1).CustomEditor = New DWSIM.Editors.SKColorEditor.UISKColorEditor
-                    .Item.Add(DWSIM.App.GetLocalString("Cor"), gobj, "FillColor", False, "", "Cor de fundo, caso o modo de gradiente não esteja ativado", True)
-                    .Item(.Item.Count - 1).Tag2 = "FillColor"
+                    .Item(.Item.Count - 1).Tag2 = "LineColor"
                     .Item(.Item.Count - 1).CustomEditor = New DWSIM.Editors.SKColorEditor.UISKColorEditor
                     .Item.Add(DWSIM.App.GetLocalString("EspessuradaBorda"), gobj, "LineWidth", False, "", DWSIM.App.GetLocalString("Espessuradabordadoob"), True)
                     .Item(.Item.Count - 1).Tag2 = "LineWidth"
@@ -321,6 +318,7 @@ Public Class FormEditGraphicObject
             End With
 
         End If
+
     End Sub
 
     Private Sub PGEx2_PropertyValueChanged(s As Object, e As PropertyValueChangedEventArgs) Handles PGEx2.PropertyValueChanged
@@ -332,6 +330,7 @@ Public Class FormEditGraphicObject
             flowsheet.UpdateOpenEditForms()
             Me.PGEx2.Focus()
         End If
+        flowsheet.UpdateInterface()
     End Sub
 
 End Class
