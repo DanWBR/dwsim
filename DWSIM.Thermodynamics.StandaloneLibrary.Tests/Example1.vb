@@ -1,4 +1,5 @@
-﻿Imports DWSIM.Thermodynamics.BaseClasses
+﻿Imports System.Reflection
+Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Thermodynamics.PropertyPackages
 
 Module Example1
@@ -6,9 +7,11 @@ Module Example1
     Sub Main()
 
         Console.WriteLine("DTL Property and Equilibrium calculation example with Water and Ethanol")
-        Console.WriteLine(vbCrLf)
 
         Dim dtlc As New DWSIM.Thermodynamics.CalculatorInterface.Calculator
+
+        Console.WriteLine(String.Format("DTL version: {0}", Assembly.GetAssembly(dtlc.GetType()).GetName.Version))
+        Console.WriteLine(vbCrLf)
 
         dtlc.Initialize()
 

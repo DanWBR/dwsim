@@ -6,3 +6,5 @@ Version 6.2
 - [NEW] Temperature-dependent Interaction Parameter PR78/SRK Property Packages
 - [FIX] Fixed Dynamic Mode error messages
 - [FIX] Fixed an issue with Gibbs Reactor's element matrix editor
+- [FIX] Fixed flowsheet object appearance editor (Classic UI)
+- [FIX] Minor bug fixes

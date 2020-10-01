@@ -27,5 +27,6 @@ DWSIM.GlobalSettings.dll
 DWSIM.XMLSerializer.dll
 DWSIM.MathOps.RandomOps.dll
 DWSIM.MathOps.SimpsonIntegrator.dll
+DWSIM.Thermodynamics.StandaloneLibrary.dll
 Nini.dll
 Mono.Posix.dll
