@@ -1478,7 +1478,7 @@ Namespace PropertyPackages.ThermoPlugs
                                                      Else
                                                          ci(ii) = 0.379642 + 1.48503 * W(ii) - 0.164423 * W(ii) ^ 2 + 0.016666 * W(ii) ^ 3
                                                      End If
-                                                     alpha(ii) = (1 + ci(i) * (1 - (T / Tc(ii)) ^ 0.5)) ^ 2
+                                                     alpha(ii) = (1 + ci(ii) * (1 - (T / Tc(ii)) ^ 0.5)) ^ 2
                                                      ai(ii) = 0.45724 * alpha(ii) * R ^ 2 * Tc(ii) ^ 2 / Pc(ii)
                                                      bi(ii) = 0.0778 * R * Tc(ii) / Pc(ii)
                                                  End Sub)
