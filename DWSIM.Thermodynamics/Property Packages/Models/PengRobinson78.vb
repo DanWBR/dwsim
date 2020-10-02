@@ -650,7 +650,14 @@ Namespace PropertyPackages.Auxiliary
 
         End Function
 
-        Function CalcPartialVolume(ByVal T, ByVal P, ByVal Vx, ByVal VKij, ByVal VTc, ByVal VPc, ByVal Vw, ByVal VTb, ByVal TIPO, ByVal deltaP)
+        Function CalcPartialVolume(ByVal T As Double, ByVal P As Double, ByVal Vx As Double(), ByVal VKij As Double(,), ByVal VTc As Double(), ByVal VPc As Double(), ByVal Vw As Double(), ByVal VTb As Double(), ByVal TIPO As String, ByVal deltaP As Double)
+
+            Dim n As Integer = UBound(Vx)
+            Dim partvol(n) As Double
+
+            If Double.IsNaN(Vx.Sum) Then
+                Return partvol
+            End If
 
             Dim lnfug1, lnfug2 As Double()
             Dim P1, P2 As Double
@@ -663,9 +670,7 @@ Namespace PropertyPackages.Auxiliary
             lnfug2 = pr2.CalcLnFug(T, P2, Vx, VKij, VTc, VPc, Vw, TIPO)
 
             Dim i As Integer
-            Dim n As Integer = UBound(lnfug1)
 
-            Dim partvol(n) As Double
 
             'V/RT = d(log f)/dP, const T
 
