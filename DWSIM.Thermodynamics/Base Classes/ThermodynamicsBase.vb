@@ -1418,11 +1418,12 @@ Namespace BaseClasses
                     Dim amountOfElement As Double = 0
                     If Regex.IsMatch(i.Value, "[\(\)]") Then
                         If Not Double.TryParse(Regex.Replace(i.Value, "(\(|\)|[A-Z]|[a-z])", ""), amountOfElement) Then
+                            ' If the element has either '(' or ')' and doesn't specify an amount, then set it equal to the endnumber
                             amountOfElement = endNumber
+                        Else
+                            ' If the element has either '(' or ')' and specifies an amount, then multiply it by the end number
+                            amountOfElement = amountOfElement * endNumber
                         End If
-                        ' If the element has either '(' or ')' and doesn't specify an amount, then set it equal to the endnumber
-                        amountOfElement = (amountOfElement * endNumber)
-                        ' If the element has either '(' or ')' and specifies an amount, then multiply it by the end number
                     Else
                         amountOfElement = Double.Parse(If(String.IsNullOrWhiteSpace(i.Value.Replace(element, "")), "1", i.Value.Replace(element, "")))
                     End If
