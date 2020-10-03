@@ -2906,6 +2906,15 @@ Namespace CalculatorInterface
 
         End Function
 
+        ''' <summary>
+        ''' Links/Associates a Material Stream with a Property Package and vice-versa.
+        ''' </summary>
+        ''' <param name="stream">Material Stream instance</param>
+        ''' <param name="pp">Property Package instance</param>
+        Public Sub Link(stream As MaterialStream, pp As PropertyPackage)
+            stream.PropertyPackage = pp
+            pp.CurrentMaterialStream = stream
+        End Sub
 
     End Class
 

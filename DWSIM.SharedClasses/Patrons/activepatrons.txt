@@ -31,13 +31,12 @@ Gokhan Candan
 Guenther Holzer
 Henk Fikkert
 Hep Ingham
-Hermilo Tamez
-Hugo Bizzo
 Hugo Gonzalez
 Hurudza 
 James Lauer
 Jan Boshoff
 Jasper Paauwe
+Javier Fontalvo Alzate
 Jens Greimeier
 John Gorke
 John Herring
@@ -58,7 +57,6 @@ Marcos A F Silva
 Martin Heiser
 Michael Papantoniou
 Nikita Petrosyan
-Oliver Roy Prayon
 Ozmeister
 Parthib Rao
 Petroconsulting Llc
@@ -70,8 +68,6 @@ Sukin Oh
 Tayeong Lee
 Tibor Lányi
 Todd Harvey
-Tom Grusendorf
-Tram Nguyen
 Will Flores
 Yoshihide Watabe
 Zos Team
