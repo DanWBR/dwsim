@@ -1,12 +1,5 @@
-Version 6.2
+Version 6.2 Update 1
 
-- [NEW] New compounds: Sulfuric Acid, Solid Carbon, Mercury, Casein, Lactose, 
-        Methyl Oleate, Myristic Acid, Triolein
-- [NEW] GERG-2008 Property Package
-- [NEW] PC-SAFT (with Association Support) Property Package
-- [NEW] Peng-Robinson (1978) Property Package
-- [NEW] Temperature-dependent Interaction Parameter PR78/SRK Property Packages
-- [FIX] Fixed Dynamic Mode error messages
-- [FIX] Fixed an issue with Gibbs Reactor's element matrix editor
-- [FIX] Fixed flowsheet object appearance editor (Classic UI)
+- [NEW] Added more units for mass, standard condition volumetric and power/heat flow
+- [NEW] Added a new plugin for Heat of Combustion calculation
 - [FIX] Minor bug fixes

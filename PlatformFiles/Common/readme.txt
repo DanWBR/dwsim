@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 6.2
+Version 6.2 Update 1
 Copyright (c) 2017-2020 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,12 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim6/commits/windows
+
+Version 6.2 Update 1
+
+- [NEW] Added more units for mass, standard condition volumetric and power/heat flow
+- [NEW] Added a new plugin for Heat of Combustion calculation
+- [FIX] Minor bug fixes
 
 Version 6.2
 

@@ -285,24 +285,24 @@ Public Class FormSimulWizard
 
         With Me.DataGridView1.Rows
             .Clear()
-            .Add(New Object() {DWSIM.App.GetLocalString("Temperatura"), su.temperature, DWSIM.App.GetLocalString("Presso"), su.pressure})
-            .Add(New Object() {DWSIM.App.GetLocalString("Vazomssica"), su.massflow, DWSIM.App.GetLocalString("Vazomolar"), su.molarflow})
-            .Add(New Object() {DWSIM.App.GetLocalString("Vazovolumtrica"), su.volumetricFlow, DWSIM.App.GetLocalString("EntalpiaEspecfica"), su.enthalpy})
-            .Add(New Object() {DWSIM.App.GetLocalString("EntropiaEspecfica"), su.entropy, DWSIM.App.GetLocalString("Massamolar"), su.molecularWeight})
-            .Add(New Object() {DWSIM.App.GetLocalString("Massaespecfica"), su.density, DWSIM.App.GetLocalString("Tensosuperficial"), su.surfaceTension})
-            .Add(New Object() {DWSIM.App.GetLocalString("CapacidadeCalorfica"), su.heatCapacityCp, DWSIM.App.GetLocalString("Condutividadetrmica"), su.thermalConductivity})
-            .Add(New Object() {DWSIM.App.GetLocalString("Viscosidadecinemtica"), su.cinematic_viscosity, DWSIM.App.GetLocalString("Viscosidadedinmica"), su.viscosity})
-            .Add(New Object() {DWSIM.App.GetLocalString("DeltaT2"), su.deltaT, DWSIM.App.GetLocalString("DeltaP"), su.deltaP})
-            .Add(New Object() {DWSIM.App.GetLocalString("ComprimentoHead"), su.head, DWSIM.App.GetLocalString("FluxodeEnergyFlow"), su.heatflow})
-            .Add(New Object() {DWSIM.App.GetLocalString("Tempo"), su.time, DWSIM.App.GetLocalString("Volume"), su.volume})
-            .Add(New Object() {DWSIM.App.GetLocalString("VolumeMolar"), su.molar_volume, DWSIM.App.GetLocalString("rea"), su.area})
-            .Add(New Object() {DWSIM.App.GetLocalString("DimetroEspessura"), su.diameter, DWSIM.App.GetLocalString("Fora"), su.force})
-            .Add(New Object() {DWSIM.App.GetLocalString("Aceleracao"), su.accel, DWSIM.App.GetLocalString("CoefdeTransfdeCalor"), su.heat_transf_coeff})
-            .Add(New Object() {DWSIM.App.GetLocalString("ConcMolar"), su.molar_conc, DWSIM.App.GetLocalString("ConcMssica"), su.mass_conc})
-            .Add(New Object() {DWSIM.App.GetLocalString("TaxadeReao"), su.reac_rate, DWSIM.App.GetLocalString("VolEspecfico"), su.spec_vol})
-            .Add(New Object() {DWSIM.App.GetLocalString("MolarEnthalpy"), su.molar_enthalpy, DWSIM.App.GetLocalString("MolarEntropy"), su.molar_entropy})
-            .Add(New Object() {DWSIM.App.GetLocalString("Velocity"), su.velocity, DWSIM.App.GetLocalString("HXFoulingFactor"), su.foulingfactor})
-            .Add(New Object() {DWSIM.App.GetLocalString("FilterSpecificCakeResistance"), su.cakeresistance, DWSIM.App.GetLocalString("FilterMediumResistance"), su.mediumresistance})
+            .Add(New String() {DWSIM.App.GetLocalString("Temperatura"), su.temperature, DWSIM.App.GetLocalString("Presso"), su.pressure})
+            .Add(New String() {DWSIM.App.GetLocalString("Vazomssica"), su.massflow, DWSIM.App.GetLocalString("Vazomolar"), su.molarflow})
+            .Add(New String() {DWSIM.App.GetLocalString("Vazovolumtrica"), su.volumetricFlow, DWSIM.App.GetLocalString("EntalpiaEspecfica"), su.enthalpy})
+            .Add(New String() {DWSIM.App.GetLocalString("EntropiaEspecfica"), su.entropy, DWSIM.App.GetLocalString("Massamolar"), su.molecularWeight})
+            .Add(New String() {DWSIM.App.GetLocalString("Massaespecfica"), su.density, DWSIM.App.GetLocalString("Tensosuperficial"), su.surfaceTension})
+            .Add(New String() {DWSIM.App.GetLocalString("CapacidadeCalorfica"), su.heatCapacityCp, DWSIM.App.GetLocalString("Condutividadetrmica"), su.thermalConductivity})
+            .Add(New String() {DWSIM.App.GetLocalString("Viscosidadecinemtica"), su.cinematic_viscosity, DWSIM.App.GetLocalString("Viscosidadedinmica"), su.viscosity})
+            .Add(New String() {DWSIM.App.GetLocalString("DeltaT2"), su.deltaT, DWSIM.App.GetLocalString("DeltaP"), su.deltaP})
+            .Add(New String() {DWSIM.App.GetLocalString("ComprimentoHead"), su.head, DWSIM.App.GetLocalString("FluxodeEnergyFlow"), su.heatflow})
+            .Add(New String() {DWSIM.App.GetLocalString("Tempo"), su.time, DWSIM.App.GetLocalString("Volume"), su.volume})
+            .Add(New String() {DWSIM.App.GetLocalString("VolumeMolar"), su.molar_volume, DWSIM.App.GetLocalString("rea"), su.area})
+            .Add(New String() {DWSIM.App.GetLocalString("DimetroEspessura"), su.diameter, DWSIM.App.GetLocalString("Fora"), su.force})
+            .Add(New String() {DWSIM.App.GetLocalString("Aceleracao"), su.accel, DWSIM.App.GetLocalString("CoefdeTransfdeCalor"), su.heat_transf_coeff})
+            .Add(New String() {DWSIM.App.GetLocalString("ConcMolar"), su.molar_conc, DWSIM.App.GetLocalString("ConcMssica"), su.mass_conc})
+            .Add(New String() {DWSIM.App.GetLocalString("TaxadeReao"), su.reac_rate, DWSIM.App.GetLocalString("VolEspecfico"), su.spec_vol})
+            .Add(New String() {DWSIM.App.GetLocalString("MolarEnthalpy"), su.molar_enthalpy, DWSIM.App.GetLocalString("MolarEntropy"), su.molar_entropy})
+            .Add(New String() {DWSIM.App.GetLocalString("Velocity"), su.velocity, DWSIM.App.GetLocalString("HXFoulingFactor"), su.foulingfactor})
+            .Add(New String() {DWSIM.App.GetLocalString("FilterSpecificCakeResistance"), su.cakeresistance, DWSIM.App.GetLocalString("FilterMediumResistance"), su.mediumresistance})
             .Add(New String() {DWSIM.App.GetLocalString("IsothermalCompressibility"), su.compressibility, DWSIM.App.GetLocalString("JouleThomsonCoefficient"), su.jouleThomsonCoefficient})
             .Add(New String() {DWSIM.App.GetLocalString("Conductance"), su.conductance, "", ""})
         End With
@@ -318,7 +318,7 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("Temperatura")})
         With DirectCast(Me.DataGridView1.Rows.Item(0).Cells(1), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {"K", "R", "C", "F"})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.temperature).ToArray())
             .Style.Tag = 1
             .Value = su.temperature
         End With
@@ -326,7 +326,7 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("Presso")})
         With DirectCast(Me.DataGridView1.Rows.Item(0).Cells(3), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {"Pa", "atm", "kgf/cm2", "kgf/cm2g", "lbf/ft2", "kPa", "kPag", "bar", "barg", "ftH2O", "inH2O", "inHg", "mbar", "mH2O", "mmH2O", "mmHg", "MPa", "psi", "psig"})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.pressure).ToArray())
             .Style.Tag = 2
             .Value = su.pressure
         End With
@@ -334,7 +334,7 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("Vazomssica")})
         With DirectCast(Me.DataGridView1.Rows.Item(1).Cells(1), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s"})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.massflow).ToArray())
             .Style.Tag = 3
             .Value = su.massflow
         End With
@@ -342,7 +342,7 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("Vazomolar")})
         With DirectCast(Me.DataGridView1.Rows.Item(1).Cells(3), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.molarflow).ToArray())
             .Value = su.molarflow
             .Style.Tag = 4
         End With
@@ -350,7 +350,7 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("Vazovolumtrica")})
         With DirectCast(Me.DataGridView1.Rows.Item(2).Cells(1), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {"m3/s", "ft3/s", "cm3/s", "m3/h", "m3/d", "bbl/h", "bbl/d", "ft3/min", "ft3/d", "gal[UK]/h", "gal[UK]/s", "gal[US]/h", "gal[US]/min", "L/h", "L/min", "L/s"})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.volumetricFlow).ToArray())
             .Value = su.volumetricFlow
             .Style.Tag = 5
         End With
@@ -358,7 +358,7 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("EntalpiaEspecfica")})
         With DirectCast(Me.DataGridView1.Rows.Item(2).Cells(3), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {"kJ/kg", "cal/g", "BTU/lbm", "kcal/kg"})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.enthalpy).ToArray())
             .Value = su.enthalpy
             .Style.Tag = 6
         End With
@@ -366,7 +366,7 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("EntropiaEspecfica")})
         With DirectCast(Me.DataGridView1.Rows.Item(3).Cells(1), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {"kJ/[kg.K]", "cal/[g.C]", "BTU/[lbm.R]"})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.entropy).ToArray())
             .Value = su.entropy
             .Style.Tag = 7
         End With
@@ -374,7 +374,7 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("Massamolar")})
         With DirectCast(Me.DataGridView1.Rows.Item(3).Cells(3), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {"kg/kmol", "g/mol", "lbm/lbmol"})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.molecularWeight).ToArray())
             .Value = su.molecularWeight
             .Style.Tag = 8
         End With
@@ -382,7 +382,7 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("Massaespecfica")})
         With DirectCast(Me.DataGridView1.Rows.Item(4).Cells(1), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {"kg/m3", "g/cm3", "lbm/ft3"})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.density).ToArray())
             .Value = su.density
             .Style.Tag = 10
         End With
@@ -390,7 +390,7 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("Tensosuperficial")})
         With DirectCast(Me.DataGridView1.Rows.Item(4).Cells(3), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {"N/m", "dyn/cm", "lbf/in"})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.surfaceTension).ToArray())
             .Value = su.surfaceTension
             .Style.Tag = 9
         End With
@@ -398,7 +398,7 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("CapacidadeCalorfica")})
         With DirectCast(Me.DataGridView1.Rows.Item(5).Cells(1), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {"kJ/[kg.K]", "cal/[g.C]", "BTU/[lbm.R]"})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.heatCapacityCp).ToArray())
             .Value = su.heatCapacityCp
             .Style.Tag = 11
         End With
@@ -406,7 +406,7 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("Condutividadetrmica")})
         With DirectCast(Me.DataGridView1.Rows.Item(5).Cells(3), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {"W/[m.K]", "cal/[cm.s.C]", "BTU/[ft.h.R]"})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.thermalConductivity).ToArray())
             .Value = su.thermalConductivity
             .Style.Tag = 12
         End With
@@ -414,7 +414,7 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("Viscosidadecinemtica")})
         With DirectCast(Me.DataGridView1.Rows.Item(6).Cells(1), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {"m2/s", "cSt", "ft2/s", "mm2/s"})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.cinematic_viscosity).ToArray())
             .Value = su.cinematic_viscosity
             .Style.Tag = 13
         End With
@@ -422,7 +422,7 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("ViscosidadeDinmica1")})
         With DirectCast(Me.DataGridView1.Rows.Item(6).Cells(3), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {"kg/[m.s]", "Pa.s", "cP", "lbm/[ft.h]"})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.viscosity).ToArray())
             .Value = su.viscosity
             .Style.Tag = 14
         End With
@@ -430,7 +430,7 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("DeltaP")})
         With DirectCast(Me.DataGridView1.Rows.Item(7).Cells(3), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {"Pa", "atm", "lbf/ft2", "kgf/cm2", "kPa", "bar", "ftH2O", "inH2O", "inHg", "mbar", "mH2O", "mmH2O", "mmHg", "MPa", "psi"})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.deltaP).ToArray())
             .Value = su.deltaP
             .Style.Tag = 15
         End With
@@ -438,7 +438,7 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("DeltaT2")})
         With DirectCast(Me.DataGridView1.Rows.Item(7).Cells(1), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {"C.", "K.", "F.", "R."})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.deltaT).ToArray())
             .Value = su.deltaT
             .Style.Tag = 16
         End With
@@ -446,7 +446,7 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("ComprimentoHead")})
         With DirectCast(Me.DataGridView1.Rows.Item(8).Cells(1), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {"m", "ft", "cm"})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.head).ToArray())
             .Value = su.head
             .Style.Tag = 17
         End With
@@ -454,7 +454,7 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("FluxodeEnergyFlow")})
         With DirectCast(Me.DataGridView1.Rows.Item(8).Cells(3), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {"kW", "kcal/h", "BTU/h", "BTU/s", "cal/s", "HP", "kJ/h", "kJ/d", "MW", "W"})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.heatflow).ToArray())
             .Value = su.heatflow
             .Style.Tag = 18
         End With
@@ -462,7 +462,7 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("Tempo")})
         With DirectCast(Me.DataGridView1.Rows.Item(9).Cells(1), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {"s", "min.", "h"})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.time).ToArray())
             .Value = su.time
             .Style.Tag = 19
         End With
@@ -470,7 +470,7 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("Volume")})
         With DirectCast(Me.DataGridView1.Rows.Item(9).Cells(3), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {"m3", "cm3", "L", "ft3"})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.volume).ToArray())
             .Value = su.volume
             .Style.Tag = 20
         End With
@@ -478,7 +478,7 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("VolumeMolar")})
         With DirectCast(Me.DataGridView1.Rows.Item(10).Cells(1), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {DWSIM.App.GetLocalString("m3kmol"), "cm3/mmol", "ft3/lbmol"})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.molar_volume).ToArray())
             .Value = su.molar_volume
             .Style.Tag = 21
         End With
@@ -486,7 +486,7 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("rea")})
         With DirectCast(Me.DataGridView1.Rows.Item(10).Cells(3), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {"m2", "cm2", "ft2"})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.area).ToArray())
             .Value = su.area
             .Style.Tag = 22
         End With
@@ -494,7 +494,7 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("DimetroEspessura")})
         With DirectCast(Me.DataGridView1.Rows.Item(11).Cells(1), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {"m", "mm", "cm", "in", "ft"})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.diameter).ToArray())
             .Value = su.diameter
             .Style.Tag = 23
         End With
@@ -502,7 +502,7 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("Fora")})
         With DirectCast(Me.DataGridView1.Rows.Item(11).Cells(3), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {DWSIM.App.GetLocalString("N"), "dyn", "kgf", "lbf"})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.force).ToArray())
             .Value = su.force
             .Style.Tag = 24
         End With
@@ -510,7 +510,7 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("CoefdeTransfdeCalor")})
         With DirectCast(Me.DataGridView1.Rows.Item(12).Cells(3), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {"W/[m2.K]", "cal/[cm2.s.C]", "BTU/[ft2.h.R]"})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.heat_transf_coeff).ToArray())
             .Value = su.heat_transf_coeff
             .Style.Tag = 25
         End With
@@ -518,14 +518,15 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("Aceleracao")})
         With DirectCast(Me.DataGridView1.Rows.Item(12).Cells(1), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {"m/s2", "cm/s2", "ft/s2"})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.accel).ToArray())
             .Value = su.accel
             .Style.Tag = 26
         End With
 
         '.Add(New Object() {DWSIM.App.GetLocalString("ConcentraoMolar")})
         With DirectCast(Me.DataGridView1.Rows.Item(13).Cells(1), DataGridViewComboBoxCell)
-            .Items.AddRange(New String() {"kmol/m3", "mol/m3", "mol/L", "mol/cm3", "mol/mL", "lbmol/ft3"})
+            .Items.Clear()
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.molar_conc).ToArray())
             .Value = su.molar_conc
             .Style.Tag = 28
         End With
@@ -533,7 +534,7 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("ConcentraoMssica")})
         With DirectCast(Me.DataGridView1.Rows.Item(13).Cells(3), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {"kg/m3", "g/L", "g/cm3", "g/mL", "lbm/ft3"})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.mass_conc).ToArray())
             .Value = su.mass_conc
             .Style.Tag = 29
         End With
@@ -541,7 +542,7 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("TaxadeReao")})
         With DirectCast(Me.DataGridView1.Rows.Item(14).Cells(1), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {"kmol/[m3.s]", "kmol/[m3.min.]", "kmol/[m3.h]", "mol/[m3.s]", "mol/[m3.min.]", "mol/[m3.h]", "mol/[L.s]", "mol/[L.min.]", "mol/[L.h]", "mol/[cm3.s]", "mol/[cm3.min.]", "mol/[cm3.h]", "lbmol.[ft3.h]"})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.reac_rate).ToArray())
             .Value = su.reac_rate
             .Style.Tag = 30
         End With
@@ -549,7 +550,7 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("VolumeEspecfico")})
         With DirectCast(Me.DataGridView1.Rows.Item(14).Cells(3), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {"m3/kg", "cm3/g", "ft3/lbm"})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.spec_vol).ToArray())
             .Value = su.spec_vol
             .Style.Tag = 27
         End With
@@ -557,7 +558,7 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("MolarEnthalpy")})
         With DirectCast(Me.DataGridView1.Rows.Item(15).Cells(1), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {"kJ/kmol", "cal/mol", "BTU/lbmol"})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.molar_enthalpy).ToArray())
             .Value = su.molar_enthalpy
             .Style.Tag = 31
         End With
@@ -565,7 +566,7 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("MolarEntropy")})
         With DirectCast(Me.DataGridView1.Rows.Item(15).Cells(3), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {"kJ/[kmol.K]", "cal/[mol.C]", "BTU/[lbmol.R]"})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.molar_entropy).ToArray())
             .Value = su.molar_entropy
             .Style.Tag = 32
         End With
@@ -573,7 +574,7 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("Velocity")})
         With DirectCast(Me.DataGridView1.Rows.Item(16).Cells(1), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {"m/s", "cm/s", "mm/s", "km/h", "ft/h", "ft/min", "ft/s", "in/s"})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.velocity).ToArray())
             .Value = su.velocity
             .Style.Tag = 33
         End With
@@ -581,7 +582,7 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("HXFoulingFactor")})
         With DirectCast(Me.DataGridView1.Rows.Item(16).Cells(3), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {"K.m2/W", "C.cm2.s/cal", "ft2.h.F/BTU"})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.foulingfactor).ToArray())
             .Value = su.foulingfactor
             .Style.Tag = 34
         End With
@@ -589,7 +590,7 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("FilterSpecificCakeResistance")})
         With DirectCast(Me.DataGridView1.Rows.Item(17).Cells(1), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {"m/kg", "ft/lbm", "cm/g"})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.cakeresistance).ToArray())
             .Value = su.cakeresistance
             .Style.Tag = 35
         End With
@@ -597,21 +598,21 @@ Public Class FormSimulWizard
         '.Add(New Object() {DWSIM.App.GetLocalString("FilterMediumResistance")})
         With DirectCast(Me.DataGridView1.Rows.Item(17).Cells(3), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(New String() {"m-1", "cm-1", "ft-1"})
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.mediumresistance).ToArray())
             .Value = su.mediumresistance
             .Style.Tag = 36
         End With
 
         With DirectCast(Me.DataGridView1.Rows.Item(18).Cells(1), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.compressibility).ToArray)
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.compressibility).ToArray())
             .Value = su.compressibility
             .Style.Tag = 37
         End With
 
         With DirectCast(Me.DataGridView1.Rows.Item(18).Cells(3), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.jouleThomsonCoefficient).ToArray)
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.jouleThomsonCoefficient).ToArray())
             .Value = su.jouleThomsonCoefficient
             .Style.Tag = 38
         End With
@@ -622,6 +623,7 @@ Public Class FormSimulWizard
             .Value = su.conductance
             .Style.Tag = 39
         End With
+
     End Sub
 
     Private Sub DataGridView1_CellValueChanged1(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellValueChanged
