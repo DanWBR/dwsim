@@ -855,7 +855,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     IObj?.Paragraphs.Add(String.Format("Enthalpy Error (Spec - Calculated): {0}", H1))
                 Loop Until Abs(H1) < itol Or ecount > maxitEXT
 
-                V = 0
+                V = resultFlash(2)
                 L = resultFlash(3)
                 Vy = resultFlash(4)
                 Vx = resultFlash(5)
