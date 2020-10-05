@@ -43,7 +43,7 @@ Public Class FormWelcome
             Next
         End If
 
-        existingfiles = existingfiles.Where(Function(x) File.Exists(x)).OrderBy(Function(x) File.GetLastWriteTime(x)).ToList
+        existingfiles = existingfiles.Where(Function(x) File.Exists(x)).OrderByDescending(Function(x) File.GetLastWriteTime(x)).ToList
 
         For Each f As String In existingfiles
             If Path.GetExtension(f).ToLower <> ".dwbcs" Then

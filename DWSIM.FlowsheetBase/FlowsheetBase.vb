@@ -2294,6 +2294,8 @@ Label_00CC:
         BOPP.ComponentName = "Black Oil"
         AvailablePropertyPackages.Add(BOPP.ComponentName.ToString, BOPP)
 
+        PropertyPackages.Add(BOPP.ComponentName.ToString, BOPP)
+
         Dim GERGPP As GERG2008PropertyPackage = New GERG2008PropertyPackage()
 
         AvailablePropertyPackages.Add(GERGPP.ComponentName.ToString, GERGPP)

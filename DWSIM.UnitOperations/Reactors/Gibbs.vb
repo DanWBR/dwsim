@@ -196,6 +196,8 @@ Namespace Reactors
 
         Public ExternalTolerance As Double = 0.001
 
+        Public Property LagrangeCoeffsEstimationTemperature As Double = 1000.0
+
         Public Property InitialGibbsEnergy() As Double
             Get
                 Return _ige
@@ -1046,7 +1048,7 @@ Namespace Reactors
 
                     For i = 0 To c
                         IObj2?.SetCurrent
-                        igcp(i) = pp.AUX_DELGF_T(298.15, 1000, Me.ComponentIDs(i), False) * FlowSheet.SelectedCompounds(Me.ComponentIDs(i)).Molar_Weight + Log(P / P0) / (8.314 * 1000)
+                        igcp(i) = pp.AUX_DELGF_T(298.15, LagrangeCoeffsEstimationTemperature, Me.ComponentIDs(i), False) * FlowSheet.SelectedCompounds(Me.ComponentIDs(i)).Molar_Weight + Log(P / P0) / (8.314 * 1000)
                     Next
 
                     Dim variables As New List(Of OptBoundVariable)
@@ -1086,6 +1088,10 @@ Namespace Reactors
                 nsolv.MaxIterations = MaximumInternalIterations
                 nsolv.Tolerance = InternalTolerance
 
+                Dim s2 As New Simplex
+                s2.MaxFunEvaluations = 50000
+                s2.Tolerance = 0.00001
+
                 Do
 
                     IObj2?.SetCurrent
@@ -1098,9 +1104,22 @@ Namespace Reactors
 
                     x = lagrm.Concat({nv, nl1, nl2, ns}).ToArray
 
-                    finalx = nsolv.Solve(Function(x1)
-                                             Return FunctionValue2N(x1)
-                                         End Function, x)
+                    Dim fail As Boolean = False
+
+                    Try
+                        finalx = nsolv.Solve(Function(x1)
+                                                 Return FunctionValue2N(x1)
+                                             End Function, x)
+                    Catch ex As Exception
+                        fail = True
+                    End Try
+
+                    If fail Then
+                        'try simplex.
+                        finalx = s2.ComputeMin(Function(x1)
+                                                   Return FunctionValue2N(x1).AbsSqrSumY
+                                               End Function, x)
+                    End If
 
                     lagrm = finalx.Take(e + 1).ToArray
 

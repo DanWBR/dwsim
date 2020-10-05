@@ -735,9 +735,11 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles tsbAbortCalc.Click
-        GlobalSettings.Settings.CalculatorStopRequested = True
-        If GlobalSettings.Settings.TaskCancellationTokenSource IsNot Nothing Then
-            GlobalSettings.Settings.TaskCancellationTokenSource.Cancel()
+        If Settings.CalculatorBusy Then
+            Settings.CalculatorStopRequested = True
+            If Settings.TaskCancellationTokenSource IsNot Nothing Then
+                Settings.TaskCancellationTokenSource.Cancel()
+            End If
         End If
     End Sub
 

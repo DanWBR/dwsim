@@ -629,6 +629,8 @@ Public Class FormMain
         BOPP.ComponentName = "Black Oil"
         BOPP.ComponentDescription = DWSIM.App.GetLocalString("DescBOPP")
 
+        PropertyPackages.Add(BOPP.ComponentName.ToString, BOPP)
+
         Dim GERGPP As GERG2008PropertyPackage = New GERG2008PropertyPackage()
 
         PropertyPackages.Add(GERGPP.ComponentName.ToString, GERGPP)
