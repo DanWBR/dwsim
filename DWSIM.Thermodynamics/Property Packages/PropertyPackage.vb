@@ -214,7 +214,7 @@ Namespace PropertyPackages
 
         Public Property VaporPhaseFugacityCalculationMode As VaporPhaseFugacityCalcMode = VaporPhaseFugacityCalcMode.Ideal
 
-        Public Property SolidPhaseFugacityCalculationMethod As SolidPhaseFugacityCalcMode = SolidPhaseFugacityCalcMode.Ideal
+        Public Property SolidPhaseFugacityCalculationMethod As SolidPhaseFugacityCalcMode = SolidPhaseFugacityCalcMode.FromLiquidFugacity
 
         Public Property SolidPhaseFugacity_UseIdealLiquidPhaseFugacity As Boolean = False
 
@@ -7468,7 +7468,7 @@ Final3:
 
         End Function
 
-        Public Function DW_CalcSolidFugCoeff(phil() As Double, T As Double, P As Double) As Double()
+        Public Function DW_CalcSolidFugCoeff(Vx() As Double, Vs() As Double, phil() As Double, T As Double, P As Double) As Double()
 
             Dim Tf = RET_VTF()
             Dim Hf = RET_VHF()
@@ -7481,17 +7481,18 @@ Final3:
 
             If SolidPhaseFugacityCalculationMethod = SolidPhaseFugacityCalcMode.Ideal Then
                 For i = 0 To n
-                    phis(i) = 1.0
+                    phis(i) = Vx(i) * Math.Exp(Hf(i) * 1000 / (8.314 * Tf(i)) * (Tf(i) / T - 1)) * Me.AUX_PVAPi(i, T)
+                    If Double.IsNaN(phis(i)) Or Double.IsInfinity(phis(i)) Then phis(i) = Double.MaxValue
                 Next
             Else
                 If SolidPhaseFugacity_UseIdealLiquidPhaseFugacity Then
                     For i = 0 To n
-                        phis(i) = Math.Exp(Hf(i) * 1000 / (8.314 * Tf(i)) * (Tf(i) / T - 1)) - 1
+                        phis(i) = Vx(i) / Vs(i) * Math.Exp(Hf(i) * 1000 / (8.314 * Tf(i)) * (Tf(i) / T - 1)) * Me.AUX_PVAPi(i, T)
                         If Double.IsNaN(phis(i)) Or Double.IsInfinity(phis(i)) Then phis(i) = Double.MaxValue
                     Next
                 Else
                     For i = 0 To n
-                        phis(i) = phil(i) * Math.Exp(Hf(i) * 1000 / (8.314 * Tf(i)) * (Tf(i) / T - 1)) - 1
+                        phis(i) = Vx(i) / Vs(i) * phil(i) * Math.Exp(Hf(i) * 1000 / (8.314 * Tf(i)) * (Tf(i) / T - 1)) * Me.AUX_PVAPi(i, T)
                         If Double.IsNaN(phis(i)) Or Double.IsInfinity(phis(i)) Then phis(i) = Double.MaxValue
                     Next
                 End If

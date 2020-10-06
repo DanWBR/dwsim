@@ -111,7 +111,11 @@ Public Class PropertyPackageSettingsEditingControl
                                                   End Sub
 
         AddHandler chkSolidFugIdeal.CheckedChanged, Sub()
-                                                        PropPack.SolidPhaseFugacityCalculationMethod = chkSolidFugIdeal.Checked
+                                                        If chkSolidFugIdeal.Checked Then
+                                                            PropPack.SolidPhaseFugacityCalculationMethod = PropertyPackage.SolidPhaseFugacityCalcMode.Ideal
+                                                        Else
+                                                            PropPack.SolidPhaseFugacityCalculationMethod = PropertyPackage.SolidPhaseFugacityCalcMode.FromLiquidFugacity
+                                                        End If
                                                     End Sub
 
         AddHandler chkUseSolidCp.CheckedChanged, Sub()

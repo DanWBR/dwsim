@@ -1003,7 +1003,7 @@ Namespace Reactors
                     IObj2?.SetCurrent
                     fl2_0 = pp.DW_CalcFugCoeff(xl2_0, T, P, PropertyPackages.State.Liquid).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
                     IObj2?.SetCurrent
-                    fs_0 = pp.DW_CalcSolidFugCoeff(fl1_0, T, P).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
+                    fs_0 = pp.DW_CalcSolidFugCoeff(xl1_0, xs_0, fl1_0, T, P).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
                     nv = .GetVaporPhaseMoleFraction
                     nl1 = .GetLiquidPhase1MoleFraction
                     nl2 = .GetLiquidPhase2MoleFraction
@@ -1137,7 +1137,7 @@ Namespace Reactors
                     IObj3?.SetCurrent
                     fl2_0 = pp.DW_CalcFugCoeff(xl2_0, T, P, PropertyPackages.State.Liquid).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
                     IObj3?.SetCurrent
-                    fs_0 = pp.DW_CalcSolidFugCoeff(fl1_0, T, P).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
+                    fs_0 = pp.DW_CalcSolidFugCoeff(xl1_0, xs_0, fl1_0, T, P).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
 
                     fv_0 = FixFugCoeff(fv_0, T, PropertyPackages.State.Vapor)
                     fl1_0 = FixFugCoeff(fl1_0, T, PropertyPackages.State.Liquid)

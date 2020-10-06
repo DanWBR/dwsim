@@ -122,6 +122,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             settings(Interfaces.Enums.FlashSetting.PHFlash_MaximumTemperatureChange) = 30.0.ToString(ci)
 
+            settings(Interfaces.Enums.FlashSetting.PTFlash_DampingFactor) = 1.0.ToString(ci)
+
+            settings(Interfaces.Enums.FlashSetting.GMM_Number_of_Random_Trials) = 10
+
             Return settings
 
         End Function

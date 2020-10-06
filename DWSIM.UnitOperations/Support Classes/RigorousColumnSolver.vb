@@ -223,29 +223,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
         Private ik, ih As Boolean
 
-        Private Function GetSolver(solver As OptimizationMethod) As SwarmOps.Optimizer
-
-            Select Case solver
-                Case OptimizationMethod.DifferentialEvolution
-                    Return New SwarmOps.Optimizers.DE()
-                Case OptimizationMethod.GradientDescent
-                    Return New SwarmOps.Optimizers.GD()
-                Case OptimizationMethod.LocalUnimodalSampling
-                    Return New SwarmOps.Optimizers.LUS()
-                Case OptimizationMethod.ManyOptimizingLiaisons
-                    Return New SwarmOps.Optimizers.MOL()
-                Case OptimizationMethod.Mesh
-                    Return New SwarmOps.Optimizers.MESH()
-                Case OptimizationMethod.ParticleSwarm
-                    Return New SwarmOps.Optimizers.PS()
-                Case OptimizationMethod.ParticleSwarmOptimization
-                    Return New SwarmOps.Optimizers.PSO()
-                Case Else
-                    Return Nothing
-            End Select
-
-        End Function
-
         Public Function FunctionValue(ByVal x() As Double) As Double
 
             _IObj?.SetCurrent
@@ -1506,7 +1483,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         _solver.MaxFunEvaluations = maxits
                         initval = _solver.ComputeMin(AddressOf FunctionValue, variables)
                         _solver = Nothing
-                    Case OptimizationMethod.IPOPT
+                    Case Else
                         Calculator.CheckParallelPInvoke()
                         Using problem As New Ipopt(xvar.Length, lconstr, uconstr, 0, Nothing, Nothing,
                         0, 0, AddressOf eval_f, AddressOf eval_g,
@@ -1518,22 +1495,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                             problem.SetIntermediateCallback(AddressOf intermediate)
                             status = problem.SolveProblem(initval, obj, Nothing, Nothing, Nothing, Nothing)
                         End Using
-                    Case OptimizationMethod.DifferentialEvolution, OptimizationMethod.GradientDescent, OptimizationMethod.LocalUnimodalSampling,
-                        OptimizationMethod.ManyOptimizingLiaisons, OptimizationMethod.Mesh, OptimizationMethod.ParticleSwarm, OptimizationMethod.ParticleSwarmOptimization
-
-                        SwarmOps.Globals.Random = New RandomOps.MersenneTwister()
-
-                        Dim sproblem As New Russell_ColumnProblem(Me) With {._Dim = initval.Length, ._LB = lconstr, ._UB = uconstr, ._INIT = initval, ._Name = "IO"}
-                        sproblem.MaxIterations = maxits
-                        sproblem.MinIterations = maxits / 2
-                        sproblem.Tolerance = tol(1)
-                        sproblem.RequireFeasible = True
-                        Dim opt As SwarmOps.Optimizer = GetSolver(Solver)
-                        opt.Problem = sproblem
-                        Dim sresult = opt.Optimize(opt.DefaultParameters)
-
-                        initval = sresult.Parameters
-
                 End Select
 
                 xvar = initval
@@ -3289,29 +3250,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
         Private ik, ih As Boolean
 
-        Private Function GetSolver(solver As OptimizationMethod) As SwarmOps.Optimizer
-
-            Select Case solver
-                Case OptimizationMethod.DifferentialEvolution
-                    Return New SwarmOps.Optimizers.DE()
-                Case OptimizationMethod.GradientDescent
-                    Return New SwarmOps.Optimizers.GD()
-                Case OptimizationMethod.LocalUnimodalSampling
-                    Return New SwarmOps.Optimizers.LUS()
-                Case OptimizationMethod.ManyOptimizingLiaisons
-                    Return New SwarmOps.Optimizers.MOL()
-                Case OptimizationMethod.Mesh
-                    Return New SwarmOps.Optimizers.MESH()
-                Case OptimizationMethod.ParticleSwarm
-                    Return New SwarmOps.Optimizers.PS()
-                Case OptimizationMethod.ParticleSwarmOptimization
-                    Return New SwarmOps.Optimizers.PSO()
-                Case Else
-                    Return Nothing
-            End Select
-
-        End Function
-
         Public Function FunctionValue(ByVal xl() As Double) As Double
 
             _IObj?.SetCurrent
@@ -4150,7 +4088,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     _solver.MaxFunEvaluations = maxits
                     initval = _solver.ComputeMin(AddressOf FunctionValue, variables)
                     _solver = Nothing
-                Case OptimizationMethod.IPOPT
+                Case Else
                     Calculator.CheckParallelPInvoke()
                     Using problem As New Ipopt(xvar.Length, lconstr, uconstr, 0, Nothing, Nothing,
                     0, 0, AddressOf eval_f, AddressOf eval_g,
@@ -4162,21 +4100,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         problem.SetIntermediateCallback(AddressOf intermediate)
                         status = problem.SolveProblem(initval, obj, Nothing, Nothing, Nothing, Nothing)
                     End Using
-                Case OptimizationMethod.DifferentialEvolution, OptimizationMethod.GradientDescent, OptimizationMethod.LocalUnimodalSampling,
-                    OptimizationMethod.ManyOptimizingLiaisons, OptimizationMethod.Mesh, OptimizationMethod.ParticleSwarm, OptimizationMethod.ParticleSwarmOptimization
-
-                    SwarmOps.Globals.Random = New RandomOps.MersenneTwister()
-
-                    Dim sproblem As New NaphtaliSandholm_ColumnProblem(Me) With {._Dim = initval.Length, ._LB = lconstr, ._UB = uconstr, ._INIT = initval, ._Name = "NS"}
-                    sproblem.MaxIterations = maxits
-                    sproblem.MinIterations = maxits / 2
-                    sproblem.Tolerance = tol(1)
-                    Dim opt As SwarmOps.Optimizer = GetSolver(Solver)
-                    opt.Problem = sproblem
-                    opt.RequireFeasible = True
-                    Dim sresult = opt.Optimize(opt.DefaultParameters)
-
-                    initval = sresult.Parameters
 
             End Select
 
