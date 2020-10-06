@@ -53,6 +53,8 @@ Partial Class FlashAlgorithmConfig
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TabPageNL = New System.Windows.Forms.TabPage()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.tbPT_DampingFactor = New System.Windows.Forms.TextBox()
+        Me.Label30 = New System.Windows.Forms.Label()
         Me.tbPH_MaxDT = New System.Windows.Forms.TextBox()
         Me.Label29 = New System.Windows.Forms.Label()
         Me.tbPV_DampingFactor = New System.Windows.Forms.TextBox()
@@ -336,6 +338,8 @@ Partial Class FlashAlgorithmConfig
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.tbPT_DampingFactor)
+        Me.GroupBox2.Controls.Add(Me.Label30)
         Me.GroupBox2.Controls.Add(Me.tbPH_MaxDT)
         Me.GroupBox2.Controls.Add(Me.Label29)
         Me.GroupBox2.Controls.Add(Me.tbPV_DampingFactor)
@@ -347,6 +351,16 @@ Partial Class FlashAlgorithmConfig
         Me.GroupBox2.Controls.Add(Me.chkFastModeNL)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
+        '
+        'tbPT_DampingFactor
+        '
+        resources.ApplyResources(Me.tbPT_DampingFactor, "tbPT_DampingFactor")
+        Me.tbPT_DampingFactor.Name = "tbPT_DampingFactor"
+        '
+        'Label30
+        '
+        resources.ApplyResources(Me.Label30, "Label30")
+        Me.Label30.Name = "Label30"
         '
         'tbPH_MaxDT
         '
@@ -434,7 +448,7 @@ Partial Class FlashAlgorithmConfig
         resources.ApplyResources(Me.cbMinMethodGM, "cbMinMethodGM")
         Me.cbMinMethodGM.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbMinMethodGM.FormattingEnabled = True
-        Me.cbMinMethodGM.Items.AddRange(New Object() {resources.GetString("cbMinMethodGM.Items"), resources.GetString("cbMinMethodGM.Items1"), resources.GetString("cbMinMethodGM.Items2"), resources.GetString("cbMinMethodGM.Items3"), resources.GetString("cbMinMethodGM.Items4"), resources.GetString("cbMinMethodGM.Items5"), resources.GetString("cbMinMethodGM.Items6"), resources.GetString("cbMinMethodGM.Items7"), resources.GetString("cbMinMethodGM.Items8"), resources.GetString("cbMinMethodGM.Items9"), resources.GetString("cbMinMethodGM.Items10")})
+        Me.cbMinMethodGM.Items.AddRange(New Object() {resources.GetString("cbMinMethodGM.Items"), resources.GetString("cbMinMethodGM.Items1"), resources.GetString("cbMinMethodGM.Items2"), resources.GetString("cbMinMethodGM.Items3")})
         Me.cbMinMethodGM.Name = "cbMinMethodGM"
         '
         'Label9
@@ -915,4 +929,6 @@ Partial Class FlashAlgorithmConfig
     Friend WithEvents Label28 As Label
     Friend WithEvents tbPH_MaxDT As TextBox
     Friend WithEvents Label29 As Label
+    Friend WithEvents tbPT_DampingFactor As TextBox
+    Friend WithEvents Label30 As Label
 End Class

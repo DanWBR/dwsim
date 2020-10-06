@@ -196,13 +196,6 @@ Namespace Enums
         Truncated_Newton = 1
         Simplex = 2
         IPOPT = 3
-        ParticleSwarm = 4
-        LocalUnimodalSampling = 5
-        GradientDescent = 6
-        DifferentialEvolution = 7
-        ParticleSwarmOptimization = 8
-        ManyOptimizingLiaisons = 9
-        Mesh = 10
     End Enum
 
     Public Enum AccelMethod
@@ -275,6 +268,8 @@ Namespace Enums
         CheckIncipientLiquidForStability = 22
 
         PHFlash_MaximumTemperatureChange = 23
+
+        PTFlash_DampingFactor = 24
 
     End Enum
 

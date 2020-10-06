@@ -168,6 +168,8 @@ Public Class FlashAlgorithmConfig
 
             tbPH_MaxDT.Text = Double.Parse(Settings(Interfaces.Enums.FlashSetting.PHFlash_MaximumTemperatureChange), ci).ToString
 
+            tbPT_DampingFactor.Text = Double.Parse(Settings(Interfaces.Enums.FlashSetting.PTFlash_DampingFactor), ci).ToString
+
             chkFastModeNL.Checked = Settings(Interfaces.Enums.FlashSetting.NL_FastMode)
 
             chkUseBroydenIO.Checked = Settings(Interfaces.Enums.FlashSetting.IO_FastMode)
@@ -176,7 +178,11 @@ Public Class FlashAlgorithmConfig
             cbMinMethodGM.Items.Clear()
             cbMinMethodGM.Items.AddRange(minmethods)
 
-            cbMinMethodGM.SelectedItem = Settings(Interfaces.Enums.FlashSetting.GM_OptimizationMethod)
+            Try
+                cbMinMethodGM.SelectedItem = Settings(Interfaces.Enums.FlashSetting.GM_OptimizationMethod)
+            Catch ex As Exception
+                cbMinMethodGM.SelectedIndex = 0
+            End Try
 
             NumericUpDown1.Value = Settings(Interfaces.Enums.FlashSetting.ST_Number_of_Random_Tries)
             chkForcePT3P.Checked = Settings(Interfaces.Enums.FlashSetting.CheckIncipientLiquidForStability)
@@ -278,6 +284,8 @@ Public Class FlashAlgorithmConfig
             If tbPV_EpsilonT.Text <> "" Then Settings(Interfaces.Enums.FlashSetting.PVFlash_TemperatureDerivativeEpsilon) = tbPV_EpsilonT.Text.ToDoubleFromCurrent().ToString(ci)
 
             If tbPH_MaxDT.Text <> "" Then Settings(Interfaces.Enums.FlashSetting.PHFlash_MaximumTemperatureChange) = tbPH_MaxDT.Text.ToDoubleFromCurrent().ToString(ci)
+
+            If tbPT_DampingFactor.Text <> "" Then Settings(Interfaces.Enums.FlashSetting.PTFlash_DampingFactor) = tbPT_DampingFactor.Text.ToDoubleFromCurrent().ToString(ci)
 
             Settings(Interfaces.Enums.FlashSetting.NL_FastMode) = chkFastModeNL.Checked
 

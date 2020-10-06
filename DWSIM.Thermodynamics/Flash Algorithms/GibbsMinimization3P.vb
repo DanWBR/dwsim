@@ -61,6 +61,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Dim Vx1_ant(n), Vx2_ant(n), Ki2(n), Ki2_ant(n) As Double
         Dim Vant, T, Tant, P As Double
         Dim Ki1(n) As Double
+
         Sub New()
             MyBase.New()
             Order = 5
@@ -126,29 +127,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             End If
 
             Return True
-
-        End Function
-
-        Private Function GetSolver(solver As OptimizationMethod) As SwarmOps.Optimizer
-
-            Select Case solver
-                Case OptimizationMethod.DifferentialEvolution
-                    Return New SwarmOps.Optimizers.DE()
-                Case OptimizationMethod.GradientDescent
-                    Return New SwarmOps.Optimizers.GD()
-                Case OptimizationMethod.LocalUnimodalSampling
-                    Return New SwarmOps.Optimizers.LUS()
-                Case OptimizationMethod.ManyOptimizingLiaisons
-                    Return New SwarmOps.Optimizers.MOL()
-                Case OptimizationMethod.Mesh
-                    Return New SwarmOps.Optimizers.MESH()
-                Case OptimizationMethod.ParticleSwarm
-                    Return New SwarmOps.Optimizers.PS()
-                Case OptimizationMethod.ParticleSwarmOptimization
-                    Return New SwarmOps.Optimizers.PSO()
-                Case Else
-                    Return Nothing
-            End Select
 
         End Function
 
@@ -425,7 +403,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     solver.MaxFunEvaluations = maxit_e
                     initval = solver.ComputeMin(AddressOf FunctionValue, variables)
                     solver = Nothing
-                Case OptimizationMethod.IPOPT
+                Case Else
                     Using problem As New Ipopt(initval.Length, lconstr, uconstr, 0, Nothing, Nothing,
                            0, 0, AddressOf eval_f, AddressOf eval_g,
                            AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
@@ -435,29 +413,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         problem.AddOption("hessian_approximation", "limited-memory")
                         status = problem.SolveProblem(initval, obj, Nothing, Nothing, Nothing, Nothing)
                     End Using
-                Case OptimizationMethod.DifferentialEvolution, OptimizationMethod.GradientDescent, OptimizationMethod.LocalUnimodalSampling,
-                    OptimizationMethod.ManyOptimizingLiaisons, OptimizationMethod.Mesh, OptimizationMethod.ParticleSwarm, OptimizationMethod.ParticleSwarmOptimization
-
-                    SwarmOps.Globals.Random = New RandomOps.MersenneTwister()
-
-                    Dim sproblem As New GibbsProblem(Me) With {._Dim = initval.Length, ._LB = lconstr, ._UB = uconstr, ._INIT = initval, ._Name = "Gibbs"}
-                    sproblem.MaxIterations = maxit_e * initval.Length * 10
-                    sproblem.MinIterations = maxit_e * 10
-                    sproblem.Tolerance = 0.0000000000000001
-                    Dim opt As SwarmOps.Optimizer = GetSolver(Solver)
-                    opt.Problem = sproblem
-                    opt.RequireFeasible = True
-                    Dim sresult = opt.Optimize(opt.DefaultParameters)
-
-                    If Not sresult.Feasible Or Not CheckSolution() Then
-                        Dim ex As New Exception("PT Flash [GM]: Feasible solution not found after " & sresult.Iterations & " iterations.")
-                        ex.Data.Add("DetailedDescription", "The Flash Algorithm was unable to converge to a solution.")
-                        ex.Data.Add("UserAction", "Try another Property Package and/or Flash Algorithm.")
-                        Throw ex
-                    End If
-
-                    initval = sresult.Parameters
-
             End Select
 
             IObj?.SetCurrent
@@ -740,7 +695,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                 solver.MaxFunEvaluations = maxit_e
                                 initval2 = solver.ComputeMin(AddressOf FunctionValue, variables)
                                 solver = Nothing
-                            Case OptimizationMethod.IPOPT
+                            Case Else
                                 Using problem As New Ipopt(initval2.Length, lconstr2, uconstr2, n + 1, glow, gup, (n + 1) * 2, 0,
                                         AddressOf eval_f, AddressOf eval_g,
                                         AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
@@ -753,29 +708,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                     'solve the problem 
                                     status = problem.SolveProblem(initval2, obj, g, Nothing, Nothing, Nothing)
                                 End Using
-                            Case OptimizationMethod.DifferentialEvolution, OptimizationMethod.GradientDescent, OptimizationMethod.LocalUnimodalSampling,
-                                    OptimizationMethod.ManyOptimizingLiaisons, OptimizationMethod.Mesh, OptimizationMethod.ParticleSwarm, OptimizationMethod.ParticleSwarmOptimization
-
-                                SwarmOps.Globals.Random = New RandomOps.MersenneTwister()
-
-                                Dim sproblem As New GibbsProblem(Me) With {._Dim = initval2.Length, ._LB = lconstr2, ._UB = uconstr2, ._INIT = initval2, ._Name = "Gibbs3P"}
-                                sproblem.MaxIterations = maxit_e * initval2.Length * 10
-                                sproblem.MinIterations = maxit_e * 10
-                                sproblem.Tolerance = 1.0E-20
-                                Dim opt As SwarmOps.Optimizer = GetSolver(Solver)
-                                opt.Problem = sproblem
-                                opt.RequireFeasible = True
-                                Dim sresult = opt.Optimize(opt.DefaultParameters)
-
-                                If Not sresult.Feasible Or Not CheckSolution() Then
-                                    Dim ex As New Exception("PT Flash [GM]: Feasible solution not found after " & sresult.Iterations & " iterations.")
-                                    ex.Data.Add("DetailedDescription", "The Flash Algorithm was unable to converge to a solution.")
-                                    ex.Data.Add("UserAction", "Try another Property Package and/or Flash Algorithm.")
-                                    Throw ex
-                                End If
-
-                                initval2 = sresult.Parameters
-
                         End Select
 
                         For i = 0 To initval2.Length - 1

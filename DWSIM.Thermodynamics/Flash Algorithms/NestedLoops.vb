@@ -34,6 +34,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Dim itol As Double = 0.000001
         Dim maxit_i As Integer = 100
         Dim maxit_e As Integer = 100
+        Dim dampingfactor As Double = 1.0
         Dim Hv0, Hvid, Hlid, Hf, Hv, Hl As Double
         Dim Sv0, Svid, Slid, Sf, Sv, Sl As Double
 
@@ -116,6 +117,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_External_Iterations)
             itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance).ToDoubleFromInvariant
             maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
+            dampingfactor = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_DampingFactor)
 
             n = Vz.Length - 1
 
@@ -238,10 +240,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             If n = 0 Then
                 If Vp(0) <= P Then
-                    L = 1.0#
                     V = 0.0#
                 Else
-                    L = 0.0#
                     V = 1.0#
                 End If
             End If
@@ -364,7 +364,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     ex.Data.Add("UserAction", "Try another Property Package and/or Flash Algorithm.")
                     Throw ex
 
-                ElseIf Math.Abs(e3) < 0.0000000001 And ecount > 0 Then
+                ElseIf Math.Abs(e3) < etol / 100 And ecount > 0 Then
 
                     converged = 1
 
@@ -381,15 +381,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     If Abs(F) < etol / 100 Then Exit Do
 
-                    'b1_L = PP.CalcIsothermalCompressibility(Vx, T, P, Interfaces.Enums.PhaseName.Liquid)
-                    'b2_L = PP.CalcIsothermalCompressibility(Vx, T + 0.1, P, Interfaces.Enums.PhaseName.Liquid)
-                    'dbdT_L = (b2_L - b1_L) / 0.1
-
-                    'b1_V = PP.CalcIsothermalCompressibility(Vy, T, P, Interfaces.Enums.PhaseName.Vapor)
-                    'b2_V = PP.CalcIsothermalCompressibility(Vy, T + 0.1, P, Interfaces.Enums.PhaseName.Vapor)
-                    'dbdT_V = (b2_V - b1_V) / 0.1
-
-                    V = -F / dF + Vant
+                    V = -F / dF * dampingfactor + Vant
 
                     If LimitVaporFraction Then
                         If V < 0.0 Then V = 0.0

@@ -238,7 +238,11 @@ Public Class FormDataRegression
             Me.chkTS.Checked = .useTSdata
             Me.chkIdealVaporPhase.Checked = .idealvapormodel
             Me.cbDataType.SelectedIndex = .datatype
-            Me.cbRegMethod.SelectedItem = .method
+            Try
+                Me.cbRegMethod.SelectedItem = .method
+            Catch ex As Exception
+                Me.cbRegMethod.SelectedIndex = 0
+            End Try
             Me.cbObjFunc.SelectedItem = .objfunction
             Me.cbTunit.SelectedItem = .tunit
             Me.cbPunit.SelectedItem = .punit

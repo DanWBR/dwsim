@@ -268,6 +268,15 @@
   <data name="TabPageConvPars.Text" xml:space="preserve">
     <value>Convergence</value>
   </data>
+  <data name="tbPT_DampingFactor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 20</value>
+  </data>
+  <data name="Label30.Size" type="System.Drawing.Size, System.Drawing">
+    <value>239, 13</value>
+  </data>
+  <data name="Label30.Text" xml:space="preserve">
+    <value>PT Flash - Fixed Damping Factor Value (0.0 - 2.0)</value>
+  </data>
   <data name="tbPH_MaxDT.Size" type="System.Drawing.Size, System.Drawing">
     <value>146, 20</value>
   </data>
@@ -344,10 +353,10 @@
     <value>417, 21</value>
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 13</value>
+    <value>97, 13</value>
   </data>
   <data name="Label9.Text" xml:space="preserve">
-    <value>Gibbs minimization method</value>
+    <value>Minimization Solver</value>
   </data>
   <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
     <value>617, 64</value>

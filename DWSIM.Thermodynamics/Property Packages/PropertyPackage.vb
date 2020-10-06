@@ -214,7 +214,7 @@ Namespace PropertyPackages
 
         Public Property VaporPhaseFugacityCalculationMode As VaporPhaseFugacityCalcMode = VaporPhaseFugacityCalcMode.Ideal
 
-        Public Property SolidPhaseFugacityCalculationMethod As SolidPhaseFugacityCalcMode = SolidPhaseFugacityCalcMode.FromLiquidFugacity
+        Public Property SolidPhaseFugacityCalculationMethod As SolidPhaseFugacityCalcMode = SolidPhaseFugacityCalcMode.Ideal
 
         Public Property SolidPhaseFugacity_UseIdealLiquidPhaseFugacity As Boolean = False
 
