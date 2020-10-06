@@ -75,12 +75,6 @@
     <Compile Include="Auxiliary\PHSC_IP.cs" />
     <Compile Include="Auxiliary\PHSC_Param.cs" />
     <Compile Include="Auxiliary\VPT_IP.cs" />
-    <Compile Include="EditingForms\PCSAFT_Editor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EditingForms\PCSAFT_Editor.Designer.cs">
-      <DependentUpon>PCSAFT_Editor.cs</DependentUpon>
-    </Compile>
     <Compile Include="EditingForms\PHSC_Editor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,11 +95,8 @@
     </Compile>
     <Compile Include="PropertyPackages\BasePropertyPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PropertyPackages\BaseSAFT.cs" />
-    <Compile Include="PropertyPackages\PCSAFT.cs" />
     <Compile Include="PropertyPackages\PHSC.cs" />
     <Compile Include="PropertyPackages\PRWS.cs" />
-    <Compile Include="PropertyPackages\SAFT.cs" />
     <Compile Include="PropertyPackages\VPT.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -285,8 +276,6 @@
     <None Include="Assets\ECE\Seminar\mandelic_ESG.m" />
     <None Include="Assets\ECE\Seminar\mandelic_ESG_2param.m" />
     <EmbeddedResource Include="Data\nrtl.dat" />
-    <EmbeddedResource Include="Data\pcsaft.dat" />
-    <EmbeddedResource Include="Data\pcsaft_ip.dat" />
     <EmbeddedResource Include="Data\pr_ip.dat" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -318,9 +307,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="EditingForms\PCSAFT_Editor.resx">
-      <DependentUpon>PCSAFT_Editor.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\PHSC_Editor.resx">
       <DependentUpon>PHSC_Editor.cs</DependentUpon>
     </EmbeddedResource>
