@@ -388,8 +388,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Next
                     Dim solver As New L_BFGS_B
                     solver.Tolerance = etol
-                    solver.MaxFunEvaluations = maxit_e
+                    solver.MaxFunEvaluations = maxit_e * 10
                     initval = solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
+                    If solver.FunEvaluations = solver.MaxFunEvaluations Then
+                        Throw New Exception("PT Flash: Maximum iterations exceeded.")
+                    End If
                     solver = Nothing
                 Case OptimizationMethod.Truncated_Newton
                     Dim variables(3 * n + 2) As OptBoundVariable
@@ -398,8 +401,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Next
                     Dim solver As New TruncatedNewton
                     solver.Tolerance = etol
-                    solver.MaxFunEvaluations = maxit_e
+                    solver.MaxFunEvaluations = maxit_e * 10
                     initval = solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
+                    If solver.FunEvaluations = solver.MaxFunEvaluations Then
+                        Throw New Exception("PT Flash: Maximum iterations exceeded.")
+                    End If
                     solver = Nothing
                 Case OptimizationMethod.Simplex
                     Dim variables(3 * n + 2) As OptBoundVariable
@@ -408,36 +414,38 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Next
                     Dim solver As New Simplex
                     solver.Tolerance = etol
-                    solver.MaxFunEvaluations = maxit_e
+                    solver.MaxFunEvaluations = maxit_e * 10
                     initval = solver.ComputeMin(AddressOf FunctionValue, variables)
+                    If solver.FunEvaluations = solver.MaxFunEvaluations Then
+                        Throw New Exception("PT Flash: Maximum iterations exceeded.")
+                    End If
                     solver = Nothing
                 Case Else
                     Using problem As New Ipopt(initval.Length, lconstr, uconstr, n + 1, glow, gup, (n + 1) * 3, 0,
                             AddressOf eval_f, AddressOf eval_g,
                             AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
-                        'problem.AddOption("tol", etol)
-                        'problem.AddOption("max_iter", maxit_e * 10)
+                        problem.AddOption("tol", etol)
+                        problem.AddOption("max_iter", maxit_e * 10)
                         problem.AddOption("mu_strategy", "adaptive")
                         'problem.AddOption("mehrotra_algorithm", "yes")
                         problem.AddOption("hessian_approximation", "limited-memory")
                         'problem.SetIntermediateCallback(AddressOf intermediate)
                         'solve the problem 
                         status = problem.SolveProblem(initval, obj, g, Nothing, Nothing, Nothing)
+                        Select Case status
+                            Case IpoptReturnCode.Diverging_Iterates,
+                                  IpoptReturnCode.Error_In_Step_Computation,
+                                   IpoptReturnCode.Infeasible_Problem_Detected
+                                Throw New Exception("PT Flash: IPOPT failed to converge.")
+                            Case IpoptReturnCode.Maximum_Iterations_Exceeded
+                                Throw New Exception("PT Flash: Maximum iterations exceeded.")
+                        End Select
                     End Using
             End Select
 
             For i = 0 To initval.Length - 1
                 If Double.IsNaN(initval(i)) Then initval(i) = 0.0#
             Next
-
-            Select Case status
-                Case IpoptReturnCode.Diverging_Iterates,
-                      IpoptReturnCode.Error_In_Step_Computation,
-                       IpoptReturnCode.Infeasible_Problem_Detected
-                    Throw New Exception("PT Flash: IPOPT failed to converge.")
-                Case IpoptReturnCode.Maximum_Iterations_Exceeded
-                    Throw New Exception("PT Flash: Maximum iterations exceeded.")
-            End Select
 
             FunctionValue(initval)
 
