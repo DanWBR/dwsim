@@ -60,10 +60,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Sub New()
             MyBase.New()
+            FlashSettings(FlashSetting.GM_OptimizationMethod) = "Simplex"
             Order = 5
         End Sub
 
-        Public Property Solver As OptimizationMethod = OptimizationMethod.IPOPT
+        Public Property Solver As OptimizationMethod = OptimizationMethod.Simplex
 
         Public Enum ObjFuncType As Integer
             MinGibbs = 0
@@ -186,6 +187,18 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Pf = P
 
             fi = Vz.Clone
+
+            Dim Gz0, Gz, Gzv, Gzl, Gzs, fczv(n), fczl(n), fczs(n) As Double
+
+            fczv = PP.DW_CalcFugCoeff(Vz, T, P, State.Vapor)
+            fczl = PP.DW_CalcFugCoeff(Vz, T, P, State.Liquid)
+            fczs = PP.DW_CalcSolidFugCoeff(T, P)
+
+            Gzv = Vz.MultiplyY(fczv.MultiplyY(Vz).LogY).SumY
+            Gzl = Vz.MultiplyY(fczl.MultiplyY(Vz).LogY).SumY
+            Gzs = Vz.MultiplyY(fczs.MultiplyY(Vz).LogY).SumY
+
+            Gz0 = {Gzv, Gzl, Gzs}.Min * 1000
 
             'Calculate Ki`s
 
@@ -416,9 +429,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     solver.Tolerance = etol
                     solver.MaxFunEvaluations = maxit_e * 10
                     initval = solver.ComputeMin(AddressOf FunctionValue, variables)
-                    If solver.FunEvaluations = solver.MaxFunEvaluations Then
-                        Throw New Exception("PT Flash: Maximum iterations exceeded.")
-                    End If
                     solver = Nothing
                 Case Else
                     Using problem As New Ipopt(initval.Length, lconstr, uconstr, n + 1, glow, gup, (n + 1) * 3, 0,
@@ -447,7 +457,13 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 If Double.IsNaN(initval(i)) Then initval(i) = 0.0#
             Next
 
-            FunctionValue(initval)
+            Gz = FunctionValue(initval)
+
+            Dim mbr As Double = MassBalanceResidual()
+
+            If Gz > Gz0 Or mbr > 0.01 * n Then
+                Throw New Exception("PT Flash: Invalid solution.")
+            End If
 
             If Sx < 0.01 Then Sx = 0.0
             If L2 < 0.01 Then L2 = 0.0
@@ -489,6 +505,20 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             IObj?.Close()
 
 out:        Return result
+
+        End Function
+
+        Public Function MassBalanceResidual() As Double
+
+            Dim n = fi.Length - 1
+
+            Dim mbr As Double = 0
+
+            For i As Integer = 0 To n
+                mbr += F * fi(i) - V * Vy(i) - L1 * Vx1(i) - L2 * Vx2(i) - Sx * Vs(i)
+            Next
+
+            Return Math.Abs(mbr)
 
         End Function
 

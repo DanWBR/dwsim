@@ -64,6 +64,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Sub New()
             MyBase.New()
+            FlashSettings(FlashSetting.GM_OptimizationMethod) = "Simplex"
             Order = 5
         End Sub
 
@@ -202,6 +203,18 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             proppack = PP
 
             ReDim Vn(n), Vx1(n), Vx2(n), Vy(n), Vp(n), Ki(n), fi(n)
+
+            Dim Gz0, Gz, Gzv, Gzl, Gzs, fczv(n), fczl(n), fczs(n) As Double
+
+            fczv = PP.DW_CalcFugCoeff(Vz, T, P, State.Vapor)
+            fczl = PP.DW_CalcFugCoeff(Vz, T, P, State.Liquid)
+            fczs = PP.DW_CalcSolidFugCoeff(T, P)
+
+            Gzv = Vz.MultiplyY(fczv.MultiplyY(Vz).LogY).SumY
+            Gzl = Vz.MultiplyY(fczl.MultiplyY(Vz).LogY).SumY
+            Gzs = Vz.MultiplyY(fczs.MultiplyY(Vz).LogY).SumY
+
+            Gz0 = {Gzv, Gzl, Gzs}.Min * 1000
 
             Dim result As Object = Nothing
 
@@ -413,6 +426,14 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         problem.AddOption("hessian_approximation", "limited-memory")
                         status = problem.SolveProblem(initval, obj, Nothing, Nothing, Nothing, Nothing)
                     End Using
+                    Select Case status
+                        Case IpoptReturnCode.Diverging_Iterates,
+                                  IpoptReturnCode.Error_In_Step_Computation,
+                                   IpoptReturnCode.Infeasible_Problem_Detected
+                            Throw New Exception("PT Flash: IPOPT failed to converge.")
+                        Case IpoptReturnCode.Maximum_Iterations_Exceeded
+                            Throw New Exception("PT Flash: Maximum iterations exceeded.")
+                    End Select
             End Select
 
             IObj?.SetCurrent
@@ -432,19 +453,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             IObj?.Paragraphs.Add(String.Format("Converged Vapor Phase composition: {0}", Vy.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Converged Liquid Phase composition: {0}", Vx1.ToMathArrayString))
 
-            'check if the algorithm converged to the trivial solution.
-            If PP.AUX_CheckTrivial(Ki) Then
-                'rollback to NL PT flash.
-                WriteDebugInfo("PT Flash [GM]: Converged to the trivial solution at specified conditions. Rolling back to Nested-Loops PT-Flash...")
-                result = _nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-            ElseIf status = IpoptReturnCode.Maximum_Iterations_Exceeded Then
-                'retry with NL PT flash.
-                WriteDebugInfo("PT Flash [GM]: Maximum iterations exceeded. Recalculating with Nested-Loops PT-Flash...")
-                result = _nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-            Else
-                FunctionValue(initval)
-                result = New Object() {L, V, Vx1, Vy, ecount, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
-            End If
+            FunctionValue(initval)
+            result = New Object() {L, V, Vx1, Vy, ecount, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
 
             IObj?.Paragraphs.Add("The two-phase algorithm converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms. Error function value: " & F)
 
@@ -674,6 +684,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                 solver.Tolerance = etol
                                 solver.MaxFunEvaluations = maxit_e
                                 initval2 = solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
+                                If solver.FunEvaluations = solver.MaxFunEvaluations Then
+                                    Throw New Exception("PT Flash: Maximum iterations exceeded.")
+                                End If
                                 solver = Nothing
                             Case OptimizationMethod.Truncated_Newton
                                 Dim variables(2 * n + 1) As OptBoundVariable
@@ -684,6 +697,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                 solver.Tolerance = etol
                                 solver.MaxFunEvaluations = maxit_e
                                 initval2 = solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
+                                If solver.FunEvaluations = solver.MaxFunEvaluations Then
+                                    Throw New Exception("PT Flash: Maximum iterations exceeded.")
+                                End If
                                 solver = Nothing
                             Case OptimizationMethod.Simplex
                                 Dim variables(2 * n + 1) As OptBoundVariable
@@ -708,21 +724,27 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                     'solve the problem 
                                     status = problem.SolveProblem(initval2, obj, g, Nothing, Nothing, Nothing)
                                 End Using
+                                Select Case status
+                                    Case IpoptReturnCode.Diverging_Iterates,
+                                              IpoptReturnCode.Error_In_Step_Computation,
+                                               IpoptReturnCode.Infeasible_Problem_Detected
+                                        Throw New Exception("PT Flash: IPOPT failed to converge.")
+                                    Case IpoptReturnCode.Maximum_Iterations_Exceeded
+                                        Throw New Exception("PT Flash: Maximum iterations exceeded.")
+                                End Select
                         End Select
 
                         For i = 0 To initval2.Length - 1
                             If Double.IsNaN(initval2(i)) Then initval2(i) = 0.0#
                         Next
 
-                        'check if maximum iterations exceeded.
-                        If status = IpoptReturnCode.Maximum_Iterations_Exceeded Then
-                            'retry with NL PT flash.
-                            WriteDebugInfo("PT Flash [GM]: Maximum iterations exceeded. Recalculating with Nested-Loops PT-Flash...")
-                            result = _nl3p.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-                            Return result
-                        End If
+                        Gz = FunctionValue(initval2)
 
-                        FunctionValue(initval2)
+                        Dim mbr As Double = MassBalanceResidual()
+
+                        If Gz > Gz0 Or mbr > 0.01 * n Then
+                            Throw New Exception("PT Flash: Invalid solution.")
+                        End If
 
                         IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
 
@@ -765,6 +787,20 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             IObj?.Close()
 
 out:        Return result
+
+        End Function
+
+        Public Function MassBalanceResidual() As Double
+
+            Dim n = fi.Length - 1
+
+            Dim mbr As Double = 0
+
+            For i As Integer = 0 To n
+                mbr += F * fi(i) - V * Vy(i) - L1 * Vx1(i) - L2 * Vx2(i)
+            Next
+
+            Return Math.Abs(mbr)
 
         End Function
 
