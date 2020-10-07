@@ -161,7 +161,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             If Me.Solver = OptimizationMethod.IPOPT Then Calculator.CheckParallelPInvoke()
 
-            Dim i, j, k As Integer
+            Dim i, j As Integer
 
             Dim d1, d2 As Date, dt As TimeSpan
 
@@ -275,23 +275,22 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim obj As Double
             status = IpoptReturnCode.Invalid_Problem_Definition
 
-            Dim ntrials = Me.FlashSettings(Interfaces.Enums.FlashSetting.GMM_Number_of_Random_Trials)
-
-            Dim rnds(4) As Double
-            Dim generator = New Random()
-
-            rnds(0) = generator.NextDouble()
-            rnds(1) = generator.NextDouble()
-            rnds(2) = generator.NextDouble()
-            rnds(3) = generator.NextDouble()
-
             F = 1000.0
 
-            V = rnds(0) / rnds.SumY
-            L1 = rnds(1) / rnds.SumY
-            'L2 = rnds(2) / rnds.SumY
-            L2 = 0.0
-            Sx = 0.0
+            Dim rnl = _nl.Flash_PT(Vz, P, T, PP)
+
+            L1 = rnl(0)
+            V = rnl(1)
+            Vx1 = rnl(2)
+            Vy = rnl(3)
+
+            If L1 = 0.0 Then
+                L1 = 0.01
+                V = 0.99
+            End If
+
+            L2 = 0.01
+            Sx = 0.01
 
             Dim sum = V + L1 + L2 + Sx
 
@@ -304,23 +303,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             L1 *= 1000.0
             L2 *= 1000.0
             Sx *= 1000.0
-
-            i = 0
-            Do
-                If Vz(i) <> 0 Then
-                    Vy(i) = Vz(i) * Ki(i) / ((Ki(i) - 1) * V / F + 1)
-                    If Ki(i) <> 0 Then Vx1(i) = Vy(i) / Ki(i) Else Vx1(i) = Vz(i)
-                    If Vy(i) < 0 Then Vy(i) = 0
-                    If Vx1(i) < 0 Then Vx1(i) = 0
-                Else
-                    Vy(i) = 0
-                    Vx1(i) = 0
-                End If
-                i += 1
-            Loop Until i = n + 1
-
-            Vy = Vz.MultiplyY(Ki).DivideY(Ki.AddConstY(-1).MultiplyConstY(V / F).AddConstY(1)).NormalizeY
-            Vx1 = Vy.DivideY(Ki).NormalizeY
 
             Dim VTfus As Double() = PP.RET_VTF
 
@@ -335,7 +317,38 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Sx = Vs.SumY
 
-            Vx2 = (Enumerable.Repeat(0, n + 1).Select(Function(d) generator.NextDouble()).ToArray.MultiplyY(Vz)).NormalizeY()
+            Dim stresult = StabTest2(T, P, Vx1, PP.RET_VTC, PP)
+
+            If stresult.Count > 0 Then
+
+                Dim validsolutions = stresult.Where(Function(s) s.Max > 0.5).ToList()
+
+                If validsolutions.Count > 0 Then
+                    Vx2 = validsolutions(0)
+                Else
+                    Vx2 = stresult(0)
+                End If
+
+                Dim maxl As Double = MathEx.Common.Max(Vx2)
+                Dim imaxl As Integer = Array.IndexOf(Vx2, maxl)
+
+                If F * Vz(imaxl) < F * Vx1(imaxl) Then L2 = F * Vz(imaxl) Else L2 = F * Vx1(imaxl)
+
+                L1 = F - L2 - V - Sx
+
+                Vx1(imaxl) = 1.0E-20
+
+                If L1 < 0.0# Then
+                    L1 = Abs(L1)
+                    L2 = F - L1 - V - Sx
+                End If
+
+                If L2 < 0.0# Then
+                    V += L2
+                    L2 = Abs(L2)
+                End If
+
+            End If
 
             Vy = Vy.NormalizeY()
             Vx1 = Vx1.NormalizeY()
@@ -344,26 +357,26 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             j = 0
             For i = 0 To n
-                initval(j) = Vy(i) * V
-                lconstr(j) = 0.0#
-                uconstr(j) = Vz(i) * F
-                glow(i) = 0.0#
-                gup(i) = 1.0#
-                If initval(j) > uconstr(j) Then initval(j) = uconstr(j) / 5
-                j += 1
-            Next
-            For i = 0 To n
                 initval(j) = Vx1(i) * L1
                 lconstr(j) = 0.0#
                 uconstr(j) = Vz(i) * F
-                If initval(j) > uconstr(j) Then initval(j) = uconstr(j) / 5
+                glow(i) = 0.0#
+                gup(i) = F
+                If initval(j) > uconstr(j) Then initval(j) = uconstr(j) * L1 / F
                 j += 1
             Next
             For i = 0 To n
                 initval(j) = Vx2(i) * L2
                 lconstr(j) = 0.0#
                 uconstr(j) = Vz(i) * F
-                If initval(j) > uconstr(j) Then initval(j) = uconstr(j) / 5
+                If initval(j) > uconstr(j) Then initval(j) = uconstr(j) * L2 / F
+                j += 1
+            Next
+            For i = 0 To n
+                initval(j) = Vs(i) * Sx
+                lconstr(j) = 0.0#
+                uconstr(j) = Vz(i) * F
+                If initval(j) > uconstr(j) Then initval(j) = uconstr(j) * Sx / F
                 j += 1
             Next
 
@@ -402,8 +415,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Using problem As New Ipopt(initval.Length, lconstr, uconstr, n + 1, glow, gup, (n + 1) * 3, 0,
                             AddressOf eval_f, AddressOf eval_g,
                             AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
-                        problem.AddOption("tol", etol)
-                        problem.AddOption("max_iter", 1000)
+                        'problem.AddOption("tol", etol)
+                        'problem.AddOption("max_iter", maxit_e * 10)
                         problem.AddOption("mu_strategy", "adaptive")
                         'problem.AddOption("mehrotra_algorithm", "yes")
                         problem.AddOption("hessian_approximation", "limited-memory")
@@ -417,19 +430,23 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 If Double.IsNaN(initval(i)) Then initval(i) = 0.0#
             Next
 
-            'check if maximum iterations exceeded.
-            If status = IpoptReturnCode.Maximum_Iterations_Exceeded Then
-                'retry with NL PT flash.
-                WriteDebugInfo("PT Flash: Maximum iterations exceeded. Recalculating with Nested-Loops PT-Flash...")
-                result = _nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-                Return result
-            End If
+            Select Case status
+                Case IpoptReturnCode.Diverging_Iterates,
+                      IpoptReturnCode.Error_In_Step_Computation,
+                       IpoptReturnCode.Infeasible_Problem_Detected
+                    Throw New Exception("PT Flash: IPOPT failed to converge.")
+                Case IpoptReturnCode.Maximum_Iterations_Exceeded
+                    Throw New Exception("PT Flash: Maximum iterations exceeded.")
+            End Select
 
             FunctionValue(initval)
 
+            If Sx < 0.01 Then Sx = 0.0
+            If L2 < 0.01 Then L2 = 0.0
+
             IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
 
-            IObj?.Paragraphs.Add("The three-phase algorithm converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms. Error function value: " & F)
+            IObj?.Paragraphs.Add("The four-phase algorithm converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms. Error function value: " & F)
 
             IObj?.Paragraphs.Add(String.Format("Converged Value for Vapor Phase Molar Fraction (V): {0}", V / F))
             IObj?.Paragraphs.Add(String.Format("Converged Value for Liquid Phase 1 Molar Fraction (L1): {0}", L1 / F))
@@ -486,43 +503,42 @@ out:        Return result
             Dim pval As Double = 0.0#
             Dim fcv(n), fcl(n), fcl2(n), fcs(n) As Double
 
-            soma_y = 0
-            For i = 0 To n
-                soma_y += x(i)
-            Next
             soma_x1 = 0
             For i = 0 To n
-                soma_x1 += x(i + n + 1)
+                soma_x1 += x(i)
             Next
             soma_x2 = 0
             For i = 0 To n
-                soma_x2 += x(i + 2 * n + 2)
+                soma_x2 += x(i + n + 1)
             Next
-            V = soma_y
+            soma_s = 0
+            For i = 0 To n
+                soma_s += x(i + 2 * n + 2)
+            Next
+
+            Sx = soma_s
             L = soma_x1 + soma_x2
             L1 = soma_x1
             L2 = soma_x2
-            Sx = F - V - L1 - L2
-
-            If Sx < 0.0 Then pval = (Sx * 100) ^ 2
+            V = F - Sx - L1 - L2
 
             For i = 0 To n
-                If V <> 0.0# Then Vy(i) = (x(i) / V) Else Vy(i) = 0.0#
-                If L1 <> 0.0# Then Vx1(i) = (x(i + n + 1) / L1) Else Vx1(i) = 0.0#
-                If L2 <> 0.0# Then Vx2(i) = (x(i + 2 * n + 2) / L2) Else Vx2(i) = 0.0#
-                If Sx <> 0.0# Then Vs(i) = ((fi(i) - Vy(i) * V - Vx1(i) * L1 - Vx2(i) * L2) / Sx) Else Vs(i) = 0.0#
-                If Vy(i) < 0.0# Then Vy(i) = 1.0E-20
-                If Vx1(i) < 0.0# Then Vx1(i) = 1.0E-20
-                If Vx2(i) < 0.0# Then Vx2(i) = 1.0E-20
-                If Vs(i) < 0.0# Then Vs(i) = 1.0E-20
+                If L1 <> 0.0# Then Vx1(i) = x(i) / L1 Else Vx1(i) = 0.0#
+                If L2 <> 0.0# Then Vx2(i) = x(i + n + 1) / L2 Else Vx2(i) = 0.0#
+                If Sx <> 0.0# Then Vs(i) = x(i + 2 * n + 2) / Sx Else Vs(i) = 0.0#
+                If V <> 0.0# Then Vy(i) = (fi(i) * F - Vx1(i) * L1 - Vx2(i) * L2 - Sx * Vs(i)) / V Else Vs(i) = 0.0#
+                If Vy(i) <= 0.0# Then Vy(i) = 1.0E-20
+                If Vx1(i) <= 0.0# Then Vx1(i) = 1.0E-20
+                If Vx2(i) <= 0.0# Then Vx2(i) = 1.0E-20
+                If Vs(i) <= 0.0# Then Vs(i) = 1.0E-20
             Next
 
-            soma_s = 0
+            soma_y = 0
             For i = 0 To n
-                soma_s += Vs(i)
+                soma_y += Vy(i)
             Next
             For i = 0 To n
-                If soma_s <> 0.0# Then Vs(i) /= soma_s
+                If soma_y <> 0.0# Then Vy(i) /= soma_y
             Next
 
             If Settings.EnableParallelProcessing Then
@@ -532,15 +548,18 @@ out:        Return result
                                              End Sub)
                 Dim task2 As Task = New Task(Sub()
                                                  fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
-                                                 fcs = proppack.DW_CalcSolidFugCoeff(Vx1, Vs, fcl, Tf, Pf)
                                              End Sub)
                 Dim task3 As Task = New Task(Sub()
                                                  fcl2 = proppack.DW_CalcFugCoeff(Vx2, Tf, Pf, State.Liquid)
                                              End Sub)
+                Dim task4 As Task = New Task(Sub()
+                                                 fcs = proppack.DW_CalcSolidFugCoeff(Tf, Pf)
+                                             End Sub)
                 task1.Start()
                 task2.Start()
                 task3.Start()
-                Task.WaitAll(task1, task2, task3)
+                task4.Start()
+                Task.WaitAll(task1, task2, task3, task4)
 
             Else
 
@@ -551,7 +570,7 @@ out:        Return result
                 IObj?.SetCurrent()
                 fcl2 = proppack.DW_CalcFugCoeff(Vx2, Tf, Pf, State.Liquid)
                 IObj?.SetCurrent()
-                fcs = proppack.DW_CalcSolidFugCoeff(Vx1, Vs, fcl, Tf, Pf)
+                fcs = proppack.DW_CalcSolidFugCoeff(Tf, Pf)
 
             End If
 
@@ -596,45 +615,44 @@ out:        Return result
         Public Function FunctionGradient(ByVal x() As Double) As Double()
 
             Dim g(x.Length - 1) As Double
-            Dim epsilon As Double = 0.000001
             Dim fcv(n), fcl(n), fcl2(n), fcs(n) As Double
 
-            soma_y = 0
-            For i = 0 To n
-                soma_y += x(i)
-            Next
             soma_x1 = 0
             For i = 0 To n
-                soma_x1 += x(i + n + 1)
+                soma_x1 += x(i)
             Next
             soma_x2 = 0
             For i = 0 To n
-                soma_x2 += x(i + 2 * n + 2)
+                soma_x2 += x(i + n + 1)
+            Next
+            soma_s = 0
+            For i = 0 To n
+                soma_s += x(i + 2 * n + 2)
             Next
 
-            V = soma_y
+            Sx = soma_s
             L = soma_x1 + soma_x2
             L1 = soma_x1
             L2 = soma_x2
-            Sx = F - V - L1 - L2
+            V = F - Sx - L1 - L2
 
             For i = 0 To n
-                If V <> 0.0# Then Vy(i) = (x(i) / V) Else Vy(i) = 0.0#
-                If L1 <> 0.0# Then Vx1(i) = (x(i + n + 1) / L1) Else Vx1(i) = 0.0#
-                If L2 <> 0.0# Then Vx2(i) = (x(i + 2 * n + 2) / L2) Else Vx2(i) = 0.0#
-                If Sx <> 0.0# Then Vs(i) = ((fi(i) - Vy(i) * V - Vx1(i) * L1 - Vx2(i) * L2) / Sx) Else Vs(i) = 0.0#
-                If Vy(i) < 0.0# Then Vy(i) = 1.0E-20
-                If Vx1(i) < 0.0# Then Vx1(i) = 1.0E-20
-                If Vx2(i) < 0.0# Then Vx2(i) = 1.0E-20
-                If Vs(i) < 0.0# Then Vs(i) = 1.0E-20
+                If L1 <> 0.0# Then Vx1(i) = x(i) / L1 Else Vx1(i) = 0.0#
+                If L2 <> 0.0# Then Vx2(i) = x(i + n + 1) / L2 Else Vx2(i) = 0.0#
+                If Sx <> 0.0# Then Vs(i) = x(i + 2 * n + 2) / Sx Else Vs(i) = 0.0#
+                If V <> 0.0# Then Vy(i) = (fi(i) * F - Vx1(i) * L1 - Vx2(i) * L2 - Sx * Vs(i)) / V Else Vs(i) = 0.0#
+                If Vy(i) <= 0.0# Then Vy(i) = 1.0E-20
+                If Vx1(i) <= 0.0# Then Vx1(i) = 1.0E-20
+                If Vx2(i) <= 0.0# Then Vx2(i) = 1.0E-20
+                If Vs(i) <= 0.0# Then Vs(i) = 1.0E-20
             Next
 
-            soma_s = 0
+            soma_y = 0
             For i = 0 To n
-                soma_s += Vs(i)
+                soma_y += Vy(i)
             Next
             For i = 0 To n
-                If soma_s <> 0.0# Then Vs(i) /= soma_s
+                If soma_y <> 0.0# Then Vy(i) /= soma_y
             Next
 
             If Settings.EnableParallelProcessing Then
@@ -644,42 +662,74 @@ out:        Return result
                                              End Sub)
                 Dim task2 As Task = New Task(Sub()
                                                  fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
-                                                 fcs = proppack.DW_CalcSolidFugCoeff(Vx1, Vs, fcl, Tf, Pf)
                                              End Sub)
                 Dim task3 As Task = New Task(Sub()
                                                  fcl2 = proppack.DW_CalcFugCoeff(Vx2, Tf, Pf, State.Liquid)
                                              End Sub)
+                Dim task4 As Task = New Task(Sub()
+                                                 fcs = proppack.DW_CalcSolidFugCoeff(Tf, Pf)
+                                             End Sub)
                 task1.Start()
                 task2.Start()
                 task3.Start()
-                Task.WaitAll(task1, task2, task3)
+                task4.Start()
+                Task.WaitAll(task1, task2, task3, task4)
 
             Else
 
                 fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
                 fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
                 fcl2 = proppack.DW_CalcFugCoeff(Vx2, Tf, Pf, State.Liquid)
-                fcs = proppack.DW_CalcSolidFugCoeff(Vx1, Vs, fcl, Tf, Pf)
+                fcs = proppack.DW_CalcSolidFugCoeff(Tf, Pf)
 
             End If
 
             Dim j As Integer = 0
             For i = 0 To n
-                If Vy(i) <> 0 And Vs(i) <> 0 Then g(j) = Log(fcv(i) * Vy(i)) - Log(fcs(i) * Vs(i))
+                If Vx1(i) <> 0 And Vy(i) <> 0 Then g(j) = Log(fcl(i) * Vx1(i)) - Log(fcv(i) * Vy(i))
                 j += 1
             Next
             For i = 0 To n
-                If Vx1(i) <> 0 And Vs(i) <> 0 Then g(j) = Log(fcl(i) * Vx1(i)) - Log(fcs(i) * Vs(i))
+                If Vx2(i) <> 0 And Vy(i) <> 0 Then g(j) = Log(fcl2(i) * Vx2(i)) - Log(fcv(i) * Vy(i))
                 j += 1
             Next
             For i = 0 To n
-                If Vx2(i) <> 0 And Vs(i) <> 0 Then g(j) = Log(fcl2(i) * Vx2(i)) - Log(fcs(i) * Vs(i))
+                If Vs(i) <> 0 And Vy(i) <> 0 Then g(j) = Log(fcs(i) * Vs(i)) - Log(fcv(i) * Vy(i))
                 j += 1
             Next
 
             Return g
 
         End Function
+
+        'Public Function FunctionGradient(ByVal x() As Double) As Double()
+
+        '    Dim epsilon As Double = 0.001
+
+        '    Dim f1, f2 As Double
+        '    Dim g(x.Length - 1), x1(x.Length - 1), x2(x.Length - 1) As Double
+        '    Dim j, k As Integer
+
+        '    For j = 0 To x.Length - 1
+        '        For k = 0 To x.Length - 1
+        '            x1(k) = x(k)
+        '            x2(k) = x(k)
+        '        Next
+        '        If x(j) <> 0.0# Then
+        '            x1(j) = x(j) * (1.0# + epsilon)
+        '            x2(j) = x(j) * (1.0# - epsilon)
+        '        Else
+        '            x1(j) = x(j) + epsilon
+        '            x2(j) = x(j) - epsilon
+        '        End If
+        '        f1 = FunctionValue(x1)
+        '        f2 = FunctionValue(x2)
+        '        g(j) = (f2 - f1) / (x2(j) - x1(j))
+        '    Next
+
+        '    Return g
+
+        'End Function
 
         Private Function FunctionHessian(ByVal x() As Double) As Double()
 
@@ -744,7 +794,7 @@ out:        Return result
 
         Public Function eval_g(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal m As Integer, ByRef g As Double()) As Boolean
             For i = 0 To m - 1
-                g(i) = fi(i) - x(i) - x(i + m) - x(i + 2 * m)
+                g(i) = fi(i) * F - x(i) - x(i + m) - x(i + 2 * m)
             Next
             Return True
         End Function

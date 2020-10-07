@@ -42,13 +42,9 @@ Public Class PropertyPackageSettingsEditingControl
 
         chkLiqFugPoynt.Checked = PropPack.LiquidFugacity_UsePoyntingCorrectionFactor
 
-        chkSolidIdealLiqFug.Checked = PropPack.SolidPhaseFugacity_UseIdealLiquidPhaseFugacity
-
         chkUseSolidCp.Checked = PropPack.SolidPhaseEnthalpy_UsesCp
 
         chkVapFugIdeal.Checked = Not PropPack.VaporPhaseFugacityCalculationMode
-
-        chkSolidFugIdeal.Checked = PropPack.SolidPhaseFugacityCalculationMethod
 
         chkIgnoreIPs.Checked = PropPack.ActivityCoefficientModels_IgnoreMissingInteractionParameters
 
@@ -102,21 +98,9 @@ Public Class PropertyPackageSettingsEditingControl
                                                        PropPack.LiquidViscosity_CorrectExpDataForPressure = chkLiqViscPCorr.Checked
                                                    End Sub
 
-        AddHandler chkSolidIdealLiqFug.CheckedChanged, Sub()
-                                                           PropPack.SolidPhaseFugacity_UseIdealLiquidPhaseFugacity = chkSolidIdealLiqFug.Checked
-                                                       End Sub
-
         AddHandler chkVapFugIdeal.CheckedChanged, Sub()
                                                       PropPack.VaporPhaseFugacityCalculationMode = Not chkVapFugIdeal.Checked
                                                   End Sub
-
-        AddHandler chkSolidFugIdeal.CheckedChanged, Sub()
-                                                        If chkSolidFugIdeal.Checked Then
-                                                            PropPack.SolidPhaseFugacityCalculationMethod = PropertyPackage.SolidPhaseFugacityCalcMode.Ideal
-                                                        Else
-                                                            PropPack.SolidPhaseFugacityCalculationMethod = PropertyPackage.SolidPhaseFugacityCalcMode.FromLiquidFugacity
-                                                        End If
-                                                    End Sub
 
         AddHandler chkUseSolidCp.CheckedChanged, Sub()
                                                      PropPack.SolidPhaseEnthalpy_UsesCp = chkUseSolidCp.Checked

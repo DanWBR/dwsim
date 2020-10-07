@@ -63,7 +63,8 @@ Public Class FlashAlgorithmConfig
                     TabControl1.TabPages.Remove(TabPageIM)
                     TabControl1.TabPages.Remove(TabPageUD)
                     TabControl1.TabPages.Remove(TabPageST)
-                Case Interfaces.Enums.FlashMethod.Gibbs_Minimization_VLLE
+                Case Interfaces.Enums.FlashMethod.Gibbs_Minimization_VLLE,
+                     Interfaces.Enums.FlashMethod.Gibbs_Minimization_Multiphase
                     TabControl1.TabPages.Remove(TabPageNL)
                     TabControl1.TabPages.Remove(TabPageIO)
                     TabControl1.TabPages.Remove(TabPageCOES)
@@ -82,7 +83,8 @@ Public Class FlashAlgorithmConfig
                     TabControl1.TabPages.Remove(TabPageCOES)
                     TabControl1.TabPages.Remove(TabPageIM)
                     TabControl1.TabPages.Remove(TabPageUD)
-                Case Interfaces.Enums.FlashMethod.Nested_Loops_SLE_Eutectic, Interfaces.Enums.FlashMethod.Nested_Loops_SLE_SolidSolution, Interfaces.Enums.FlashMethod.Simple_LLE
+                Case Interfaces.Enums.FlashMethod.Nested_Loops_SLE_Eutectic,
+                     Interfaces.Enums.FlashMethod.Nested_Loops_SLE_SolidSolution, Interfaces.Enums.FlashMethod.Simple_LLE
                     TabControl1.TabPages.Remove(TabPageGM)
                     TabControl1.TabPages.Remove(TabPageNL)
                     TabControl1.TabPages.Remove(TabPageIO)

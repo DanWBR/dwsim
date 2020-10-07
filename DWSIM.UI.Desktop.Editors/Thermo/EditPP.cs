@@ -462,15 +462,6 @@ namespace DWSIM.UI.Desktop.Editors
 
             c3.Enabled = pp is ActivityCoefficientPropertyPackage;
 
-            this.CreateAndAddDropDownRow("Solid Phase Fugacity", pp.SolidPhaseFugacityCalculationMethod.GetEnumNames(),
-                (int)pp.SolidPhaseFugacityCalculationMethod, (dd, e) => {
-                    pp.SolidPhaseFugacityCalculationMethod = dd.SelectedIndex.ToEnum<PropertyPackage.SolidPhaseFugacityCalcMode>();
-                }, null);
-
-            this.CreateAndAddCheckBoxRow("Solid Phase: Use Ideal Liquid Phase Fugacities", pp.LiquidViscosity_CorrectExpDataForPressure, (chk, e) => {
-                pp.LiquidViscosity_CorrectExpDataForPressure = chk.Checked.GetValueOrDefault();
-            }, null);
-
             var c2 = this.CreateAndAddCheckBoxRow("Liquid Phase: Use Poynting Correction Factor", pp.LiquidFugacity_UsePoyntingCorrectionFactor, (chk, e) => {
                 pp.LiquidFugacity_UsePoyntingCorrectionFactor = chk.Checked.GetValueOrDefault();
             }, null);

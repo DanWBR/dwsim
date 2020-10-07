@@ -7468,35 +7468,31 @@ Final3:
 
         End Function
 
-        Public Function DW_CalcSolidFugCoeff(Vx() As Double, Vs() As Double, phil() As Double, T As Double, P As Double) As Double()
+        Public Function DW_CalcSolidFugCoeff(T As Double, P As Double) As Double()
 
             Dim Tf = RET_VTF()
             Dim Hf = RET_VHF()
 
             Dim i, n As Integer
 
-            n = phil.Length - 1
+            n = Tf.Length - 1
 
-            Dim phis(n) As Double
+            Dim phis(n), cterm(n), Pvaps(n), Pvapl(n) As Double
 
-            If SolidPhaseFugacityCalculationMethod = SolidPhaseFugacityCalcMode.Ideal Then
-                For i = 0 To n
-                    phis(i) = Vx(i) * Math.Exp(Hf(i) * 1000 / (8.314 * Tf(i)) * (Tf(i) / T - 1)) * Me.AUX_PVAPi(i, T)
-                    If Double.IsNaN(phis(i)) Or Double.IsInfinity(phis(i)) Then phis(i) = Double.MaxValue
-                Next
-            Else
-                If SolidPhaseFugacity_UseIdealLiquidPhaseFugacity Then
-                    For i = 0 To n
-                        phis(i) = Vx(i) / Vs(i) * Math.Exp(Hf(i) * 1000 / (8.314 * Tf(i)) * (Tf(i) / T - 1)) * Me.AUX_PVAPi(i, T)
-                        If Double.IsNaN(phis(i)) Or Double.IsInfinity(phis(i)) Then phis(i) = Double.MaxValue
-                    Next
+            For i = 0 To n
+                cterm(i) = Math.Exp(Hf(i) * 1000 / (8.314 * Tf(i)) * (Tf(i) / T - 1))
+                Pvapl(i) = AUX_PVAPi(i, T)
+                Pvaps(i) = Math.Exp(Math.Log(Pvapl(i)) - Hf(i) * 1000 / 8.314 * (1 / T - 1 / Tf(i)))
+            Next
+
+            For i = 0 To n
+                If (T > Tf(i)) Then
+                    phis(i) = 10000000000.0 * Pvaps(i) / P
                 Else
-                    For i = 0 To n
-                        phis(i) = Vx(i) / Vs(i) * phil(i) * Math.Exp(Hf(i) * 1000 / (8.314 * Tf(i)) * (Tf(i) / T - 1)) * Me.AUX_PVAPi(i, T)
-                        If Double.IsNaN(phis(i)) Or Double.IsInfinity(phis(i)) Then phis(i) = Double.MaxValue
-                    Next
+                    phis(i) = Pvaps(i) / P
                 End If
-            End If
+                If Double.IsNaN(phis(i)) Or Double.IsInfinity(phis(i)) Then phis(i) = Double.MaxValue
+            Next
 
             Return phis
 
