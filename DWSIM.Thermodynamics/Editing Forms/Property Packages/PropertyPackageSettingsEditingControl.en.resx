@@ -148,6 +148,9 @@
   <data name="Label4.Text" xml:space="preserve">
     <value>Fugacity Calculation</value>
   </data>
+  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 359</value>
+  </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>174, 13</value>
   </data>
@@ -165,6 +168,9 @@
   </data>
   <data name="Label7.Text" xml:space="preserve">
     <value>Calculation Method</value>
+  </data>
+  <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 388</value>
   </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 13</value>
@@ -192,6 +198,9 @@
   </data>
   <data name="cbHSCpCalcMode.Items3" xml:space="preserve">
     <value>Experimental Data</value>
+  </data>
+  <data name="cbHSCpCalcMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>200, 384</value>
   </data>
   <data name="cbLiqVIscMixRule.Items" xml:space="preserve">
     <value>Molar Average</value>
@@ -223,14 +232,8 @@
   <data name="chkVapFugIdeal.Text" xml:space="preserve">
     <value>Ideal Vapor Phase</value>
   </data>
-  <data name="chkSolidIdealLiqFug.Size" type="System.Drawing.Size, System.Drawing">
-    <value>248, 17</value>
-  </data>
-  <data name="chkSolidIdealLiqFug.Text" xml:space="preserve">
-    <value>Solid Phase: Use Ideal Liquid Phase Fugacities</value>
-  </data>
   <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 516</value>
+    <value>12, 452</value>
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 13</value>
@@ -239,7 +242,7 @@
     <value>Other</value>
   </data>
   <data name="chkIgnoreSalLim.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 578</value>
+    <value>12, 514</value>
   </data>
   <data name="chkIgnoreSalLim.Size" type="System.Drawing.Size, System.Drawing">
     <value>271, 17</value>
@@ -248,7 +251,7 @@
     <value>Ignore Maximum Salinity Limit (Seawater Model only)</value>
   </data>
   <data name="chkIgnoreVapFracLim.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 611</value>
+    <value>12, 547</value>
   </data>
   <data name="chkIgnoreVapFracLim.Size" type="System.Drawing.Size, System.Drawing">
     <value>284, 17</value>
@@ -257,19 +260,13 @@
     <value>Ignore Vapor Fraction Bounds (Sour Water Model only)</value>
   </data>
   <data name="chkIgnoreIPs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 545</value>
+    <value>12, 481</value>
   </data>
   <data name="chkIgnoreIPs.Size" type="System.Drawing.Size, System.Drawing">
     <value>289, 17</value>
   </data>
   <data name="chkIgnoreIPs.Text" xml:space="preserve">
     <value>Ignore Missing UNIQUAC/NRTL Interaction Parameters</value>
-  </data>
-  <data name="chkSolidFugIdeal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 17</value>
-  </data>
-  <data name="chkSolidFugIdeal.Text" xml:space="preserve">
-    <value>Ideal Solid Phase</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="chkUseSolidCp.AutoSize" type="System.Boolean, mscorlib">
@@ -278,6 +275,9 @@
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="chkUseSolidCp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="chkUseSolidCp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 421</value>
   </data>
   <data name="chkUseSolidCp.Size" type="System.Drawing.Size, System.Drawing">
     <value>332, 17</value>
@@ -294,10 +294,13 @@
   <data name="Label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 580</value>
+  </data>
   <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>0, 13</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>502, 669</value>
+    <value>502, 602</value>
   </data>
 </root>

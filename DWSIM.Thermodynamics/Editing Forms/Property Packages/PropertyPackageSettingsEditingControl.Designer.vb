@@ -40,12 +40,10 @@ Partial Class PropertyPackageSettingsEditingControl
         Me.Label1 = New System.Windows.Forms.Label()
         Me.chkLiqFugPoynt = New System.Windows.Forms.CheckBox()
         Me.chkVapFugIdeal = New System.Windows.Forms.CheckBox()
-        Me.chkSolidIdealLiqFug = New System.Windows.Forms.CheckBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.chkIgnoreSalLim = New System.Windows.Forms.CheckBox()
         Me.chkIgnoreVapFracLim = New System.Windows.Forms.CheckBox()
         Me.chkIgnoreIPs = New System.Windows.Forms.CheckBox()
-        Me.chkSolidFugIdeal = New System.Windows.Forms.CheckBox()
         Me.chkUseSolidCp = New System.Windows.Forms.CheckBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
@@ -152,12 +150,6 @@ Partial Class PropertyPackageSettingsEditingControl
         Me.chkVapFugIdeal.Name = "chkVapFugIdeal"
         Me.chkVapFugIdeal.UseVisualStyleBackColor = True
         '
-        'chkSolidIdealLiqFug
-        '
-        resources.ApplyResources(Me.chkSolidIdealLiqFug, "chkSolidIdealLiqFug")
-        Me.chkSolidIdealLiqFug.Name = "chkSolidIdealLiqFug"
-        Me.chkSolidIdealLiqFug.UseVisualStyleBackColor = True
-        '
         'Label9
         '
         resources.ApplyResources(Me.Label9, "Label9")
@@ -181,12 +173,6 @@ Partial Class PropertyPackageSettingsEditingControl
         Me.chkIgnoreIPs.Name = "chkIgnoreIPs"
         Me.chkIgnoreIPs.UseVisualStyleBackColor = True
         '
-        'chkSolidFugIdeal
-        '
-        resources.ApplyResources(Me.chkSolidFugIdeal, "chkSolidFugIdeal")
-        Me.chkSolidFugIdeal.Name = "chkSolidFugIdeal"
-        Me.chkSolidFugIdeal.UseVisualStyleBackColor = True
-        '
         'chkUseSolidCp
         '
         resources.ApplyResources(Me.chkUseSolidCp, "chkUseSolidCp")
@@ -204,12 +190,10 @@ Partial Class PropertyPackageSettingsEditingControl
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.chkUseSolidCp)
-        Me.Controls.Add(Me.chkSolidFugIdeal)
         Me.Controls.Add(Me.chkIgnoreIPs)
         Me.Controls.Add(Me.chkIgnoreVapFracLim)
         Me.Controls.Add(Me.chkIgnoreSalLim)
         Me.Controls.Add(Me.Label9)
-        Me.Controls.Add(Me.chkSolidIdealLiqFug)
         Me.Controls.Add(Me.chkVapFugIdeal)
         Me.Controls.Add(Me.chkLiqFugPoynt)
         Me.Controls.Add(Me.cbLiqVIscMixRule)
@@ -249,12 +233,10 @@ Partial Class PropertyPackageSettingsEditingControl
     Friend WithEvents Label1 As Label
     Friend WithEvents chkLiqFugPoynt As CheckBox
     Friend WithEvents chkVapFugIdeal As CheckBox
-    Friend WithEvents chkSolidIdealLiqFug As CheckBox
     Friend WithEvents Label9 As Label
     Friend WithEvents chkIgnoreSalLim As CheckBox
     Friend WithEvents chkIgnoreVapFracLim As CheckBox
     Friend WithEvents chkIgnoreIPs As CheckBox
-    Friend WithEvents chkSolidFugIdeal As CheckBox
     Friend WithEvents chkUseSolidCp As CheckBox
     Friend WithEvents Label10 As Label
 End Class

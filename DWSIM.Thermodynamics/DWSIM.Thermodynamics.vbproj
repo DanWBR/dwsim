@@ -322,6 +322,7 @@
     <Compile Include="Flash Algorithms\CAPEOPEN_Equilibrium_Server.vb" />
     <Compile Include="Flash Algorithms\CoolPropIncompressibleMixture.vb" />
     <Compile Include="Flash Algorithms\CoolPropIncompressiblePure.vb" />
+    <Compile Include="Flash Algorithms\GibbsMinimizationMulti.vb" />
     <Compile Include="Flash Algorithms\NestedLoopsSVLLE.vb" />
     <Compile Include="Flash Algorithms\SteamTables.vb" />
     <Compile Include="Flash Algorithms\UserDefined.vb" />

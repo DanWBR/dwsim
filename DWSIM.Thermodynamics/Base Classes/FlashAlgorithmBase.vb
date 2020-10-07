@@ -122,6 +122,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             settings(Interfaces.Enums.FlashSetting.PHFlash_MaximumTemperatureChange) = 30.0.ToString(ci)
 
+            settings(Interfaces.Enums.FlashSetting.PTFlash_DampingFactor) = 1.0.ToString(ci)
+
+            settings(Interfaces.Enums.FlashSetting.GMM_Number_of_Random_Trials) = 10
+
             Return settings
 
         End Function
@@ -1116,6 +1120,30 @@ will converge to this solution.")
                 Return New Object() {isStable, Nothing}
 
             End If
+
+        End Function
+
+        Function StabTest2(ByVal T As Double, ByVal P As Double, ByVal Vz As Double(), ByVal VTc As Double(), ByVal pp As PropertyPackage) As List(Of Double())
+
+            Dim stresult = StabTest(T, P, Vz, VTc, pp)
+
+            Dim results As New List(Of Double())
+
+            If stresult(0) = False Then
+
+                Dim m As Double = UBound(stresult(1), 1)
+
+                For i As Integer = 0 To m
+                    Dim Vx As Double() = pp.RET_NullVector()
+                    For j As Integer = 0 To Vz.Length - 1
+                        Vx(j) = stresult(1)(i, j)
+                    Next
+                    results.Add(Vx)
+                Next
+
+            End If
+
+            Return results
 
         End Function
 
