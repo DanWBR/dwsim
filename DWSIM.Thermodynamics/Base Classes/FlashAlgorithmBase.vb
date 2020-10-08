@@ -124,8 +124,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             settings(Interfaces.Enums.FlashSetting.PTFlash_DampingFactor) = 1.0.ToString(ci)
 
-            settings(Interfaces.Enums.FlashSetting.GMM_Number_of_Random_Trials) = 10
-
             Return settings
 
         End Function
@@ -1336,7 +1334,9 @@ will converge to this solution.")
                 If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.PHFlash_MaximumTemperatureChange) Then
                     FlashSettings.Add(Interfaces.Enums.FlashSetting.PHFlash_MaximumTemperatureChange, 30.0.ToString(Globalization.CultureInfo.InvariantCulture))
                 End If
-
+                If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.PTFlash_DampingFactor) Then
+                    FlashSettings.Add(Interfaces.Enums.FlashSetting.PTFlash_DampingFactor, 1.0.ToString(Globalization.CultureInfo.InvariantCulture))
+                End If
             End If
 
             Return XMLSerializer.XMLSerializer.Deserialize(Me, data)

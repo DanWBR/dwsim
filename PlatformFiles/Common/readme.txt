@@ -64,9 +64,10 @@ The full changelog including souce code changes can be viewed at https://github.
 
 Version 6.2 Update 1
 
+- [NEW] Multiphase (SVLLE) Gibbs Minimization Flash Algorithm
 - [NEW] Added more units for mass, standard condition volumetric and power/heat flow
 - [NEW] Added a new plugin for Heat of Combustion calculation
-- [FIX] Minor bug fixes
+- [FIX] Bug fixes
 
 Version 6.2
 

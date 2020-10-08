@@ -262,22 +262,22 @@ namespace DWSIM.UI.Forms.Forms
             components.Add(new ComponentInfo("Eto.Platform.Windows", "custom version", "2019", "", "https://github.com/DanWBR/Eto", "BSD-style License", "https://github.com/DanWBR/Eto/blob/develop/LICENSE.txt"));
             components.Add(new ComponentInfo("Eto.Platform.Wpf", "custom version", "2019", "", "https://github.com/DanWBR/Eto", "BSD-style License", "https://github.com/DanWBR/Eto/blob/develop/LICENSE.txt"));
             components.Add(new ComponentInfo("Eto.Platform.XamMac2", "custom version", "2019", "", "https://github.com/DanWBR/Eto", "BSD-style License", "https://github.com/DanWBR/Eto/blob/develop/LICENSE.txt"));
-            components.Add(new ComponentInfo("ReoGrid", "custom version", "2019", "", "https://github.com/DanWBR/ReoGrid", "MIT-style License", "https://github.com/DanWBR/ReoGrid/blob/master/LICENSE"));
+            components.Add(new ComponentInfo("ReoGrid", "custom version", "2020", "", "https://github.com/DanWBR/ReoGrid", "MIT-style License", "https://github.com/DanWBR/ReoGrid/blob/master/LICENSE"));
         }
 
         private void AddComponentInfoN()
         {
            
-            componentsn.Add(new ComponentInfo("cef.redist.x64", "3.3497.1841", "https://raw.github.com/cefsharp/cef-binary/master/LICENSE.txt"));
-            componentsn.Add(new ComponentInfo("cef.redist.x86", "3.3497.1841", "https://raw.github.com/cefsharp/cef-binary/master/LICENSE.txt"));
-            componentsn.Add(new ComponentInfo("CefSharp.Common", "69.0.0", "https://raw.github.com/cefsharp/CefSharp/master/LICENSE"));
-            componentsn.Add(new ComponentInfo("CefSharp.WinForms", "69.0.0", "https://raw.github.com/cefsharp/CefSharp/master/LICENSE"));
-            componentsn.Add(new ComponentInfo("DynamicLanguageRuntime", "1.2.2", "https://github.com/IronLanguages/dlr/blob/master/LICENSE"));
-            componentsn.Add(new ComponentInfo("IronPython", "2.7.9", "https://github.com/IronLanguages/ironpython2/blob/master/LICENSE"));
-            componentsn.Add(new ComponentInfo("IronPython.StdLib", "2.7.9", "http://docs.python.org/license.html"));
+            componentsn.Add(new ComponentInfo("cef.redist.x64", "75.1.14", "https://raw.github.com/cefsharp/cef-binary/master/LICENSE.txt"));
+            componentsn.Add(new ComponentInfo("cef.redist.x86", "75.1.14", "https://raw.github.com/cefsharp/cef-binary/master/LICENSE.txt"));
+            componentsn.Add(new ComponentInfo("CefSharp.Common", "75.1.14", "https://raw.github.com/cefsharp/CefSharp/master/LICENSE"));
+            componentsn.Add(new ComponentInfo("CefSharp.WinForms", "75.1.14", "https://raw.github.com/cefsharp/CefSharp/master/LICENSE"));
+            componentsn.Add(new ComponentInfo("DynamicLanguageRuntime", "1.2.3", "https://github.com/IronLanguages/dlr/blob/master/LICENSE"));
+            componentsn.Add(new ComponentInfo("IronPython", "2.7.10", "https://github.com/IronLanguages/ironpython2/blob/master/LICENSE"));
+            componentsn.Add(new ComponentInfo("IronPython.StdLib", "2.7.10", "http://docs.python.org/license.html"));
             componentsn.Add(new ComponentInfo("jacobslusser.ScintillaNET", "3.6.3", ""));
             componentsn.Add(new ComponentInfo("MathNet.Numerics", "4.7.0", "https://numerics.mathdotnet.com/License.html"));
-            componentsn.Add(new ComponentInfo("Newtonsoft.Json", "8.0.3", "https://raw.github.com/JamesNK/Newtonsoft.Json/master/LICENSE.md"));
+            componentsn.Add(new ComponentInfo("Newtonsoft.Json", "12.0.3", "https://raw.github.com/JamesNK/Newtonsoft.Json/master/LICENSE.md"));
             componentsn.Add(new ComponentInfo("OpenTK", "3.0.", "http://github.com/opentk/opentk/blob/master/License.txt"));
             componentsn.Add(new ComponentInfo("OpenTK.GLControl", "3.0.1", "http://github.com/opentk/opentk/blob/master/License.txt"));
             componentsn.Add(new ComponentInfo("OxyPlot.Core", "2.0.0-unstable0956", "https://raw.githubusercontent.com/oxyplot/oxyplot/master/LICENSE"));
@@ -287,8 +287,8 @@ namespace DWSIM.UI.Forms.Forms
             componentsn.Add(new ComponentInfo("SharpDX.DXGI", "4.0.1", "http://sharpdx.org/License.txt"));
             componentsn.Add(new ComponentInfo("SharpDX.Mathematics", "4.0.1", "http://sharpdx.org/License.txt"));
             componentsn.Add(new ComponentInfo("SharpZipLib", "1.1.0", "https://github.com/icsharpcode/SharpZipLib/blob/master/LICENSE.txt"));
-            componentsn.Add(new ComponentInfo("SkiaSharp", "1.68.x", "https://github.com/mono/SkiaSharp/blob/master/LICENSE.md"));
-            componentsn.Add(new ComponentInfo("SkiaSharp.Extended", "1.68.x", "https://github.com/mono/SkiaSharp.Extended/blob/master/LICENSE"));
+            componentsn.Add(new ComponentInfo("SkiaSharp", "1.68.2.1", "https://github.com/mono/SkiaSharp/blob/master/LICENSE.md"));
+            componentsn.Add(new ComponentInfo("SkiaSharp.Extended", "1.68.2.1", "https://github.com/mono/SkiaSharp.Extended/blob/master/LICENSE"));
             componentsn.Add(new ComponentInfo("System.ComponentModel", "4.3.0", "http://go.microsoft.com/fwlink/?LinkId=329770"));
             componentsn.Add(new ComponentInfo("System.Runtime.Serialization.Primitives", "4.3.0", "http://go.microsoft.com/fwlink/?LinkId=329770"));
             componentsn.Add(new ComponentInfo("Eto.OxyPlot", "1.2.0-beta", ""));

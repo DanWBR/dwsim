@@ -685,7 +685,7 @@ Public Class FormMain
             If Not item.IsAbstract Then
                 Dim obj = DirectCast(Activator.CreateInstance(item), Interfaces.IFlashAlgorithm)
                 If Not obj.InternalUseOnly Then FlashAlgorithms.Add(obj.Name, obj)
-                If obj.Name.Contains("Gibbs") And obj.Name.Contains("LE") Then
+                If obj.Name.Contains("Gibbs") And Not obj.Name.Contains("SVLLE") Then
                     Dim obj2 = obj.Clone
                     DirectCast(obj2, Auxiliary.FlashAlgorithms.GibbsMinimization3P).ForceTwoPhaseOnly = True
                     FlashAlgorithms.Add(obj2.Name, obj2)

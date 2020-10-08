@@ -53,7 +53,7 @@ Namespace GraphicObjects.Tables
 
 #End Region
 
-        Property Padding As Integer = 6
+        Property Padding As Double = 6
 
         Public Property TextColor As SKColor = SKColors.Black
 
@@ -125,8 +125,8 @@ Namespace GraphicObjects.Tables
 
                 If Me.Owner.GetFlowsheet IsNot Nothing Then
 
-                    Dim maxL1, maxL2, maxL3, count As Integer
-                    Dim maxH As Integer
+                    Dim maxL1, maxL2, maxL3, count As Double
+                    Dim maxH As Double
 
                     'determinar comprimento das colunas e altura das linhas
 
@@ -216,7 +216,7 @@ Namespace GraphicObjects.Tables
                             End If
                         End If
 
-                        Me.Width += 10 / zoom
+                        Me.Width += 10.0 / zoom
 
                         maxL1 = maxL1 + 2 * Padding
                         maxL2 = maxL2 + 2 * Padding
@@ -274,8 +274,8 @@ Namespace GraphicObjects.Tables
 
                         If ABasis = CompositionBasis.DefaultBasis Then ABasis = MSObj.Flowsheet.FlowsheetOptions.DefaultFloatingTableCompoundAmountBasis
 
-                        Dim maxL4, maxL5, maxL6, maxL7, maxL8, maxL9, count2 As Integer
-                        Dim maxH2 As Integer
+                        Dim maxL4, maxL5, maxL6, maxL7, maxL8, maxL9, count2 As Double
+                        Dim maxH2 As Double
 
                         count2 = 2
 

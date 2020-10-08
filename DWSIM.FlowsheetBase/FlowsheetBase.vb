@@ -2371,7 +2371,7 @@ Label_00CC:
             If Not item.IsAbstract Then
                 Dim obj = DirectCast(Activator.CreateInstance(item), Interfaces.IFlashAlgorithm)
                 If Not obj.InternalUseOnly Then AvailableFlashAlgorithms.Add(obj.Name, obj)
-                If obj.Name.Contains("Gibbs") Then
+                If obj.Name.Contains("Gibbs") And Not obj.Name.Contains("SVLLE") Then
                     Dim obj2 = obj.Clone
                     DirectCast(obj2, Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.GibbsMinimization3P).ForceTwoPhaseOnly = True
                     AvailableFlashAlgorithms.Add(obj2.Name, obj2)

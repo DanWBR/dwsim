@@ -62,6 +62,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Dim Vant, T, Tant, P As Double
         Dim Ki1(n) As Double
 
+        Dim Solutions As List(Of Double())
+        Dim GibbsEnergyValues As List(Of Double)
+
         Sub New()
             MyBase.New()
             Order = 5
@@ -132,6 +135,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_PT(ByVal Vz() As Double, ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi() As Double = Nothing) As Object
 
+            Solutions = New List(Of Double())
+            GibbsEnergyValues = New List(Of Double)
+
             _nl.FlashSettings = FlashSettings
             _nl3p.FlashSettings = FlashSettings
 
@@ -184,7 +190,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Me.Solver = [Enum].Parse(Me.Solver.GetType, Me.FlashSettings(FlashSetting.GM_OptimizationMethod))
 
-            If Me.Solver = OptimizationMethod.IPOPT Then Calculator.CheckParallelPInvoke()
+            'If Me.Solver = OptimizationMethod.IPOPT Then Calculator.CheckParallelPInvoke()
 
             Dim i, j, k As Integer
 
@@ -213,7 +219,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Gzl = Vz.MultiplyY(fczl.MultiplyY(Vz).LogY).SumY
             Gzs = Vz.MultiplyY(fczs.MultiplyY(Vz).LogY).SumY
 
-            Gz0 = {Gzv, Gzl, Gzs}.Min * 1000
+            Gz0 = {Gzv, Gzl, Gzs}.Min
 
             Dim result As Object = Nothing
 
@@ -683,7 +689,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                 solver.MaxFunEvaluations = maxit_e
                                 initval2 = solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
                                 If solver.FunEvaluations = solver.MaxFunEvaluations Then
-                                    Throw New Exception("PT Flash: Maximum iterations exceeded.")
+                                    'get solution with lowest gibbs energy
+                                    initval = Solutions(GibbsEnergyValues.IndexOf(GibbsEnergyValues.Min))
                                 End If
                                 solver = Nothing
                             Case OptimizationMethod.Truncated_Newton
@@ -696,7 +703,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                 solver.MaxFunEvaluations = maxit_e
                                 initval2 = solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
                                 If solver.FunEvaluations = solver.MaxFunEvaluations Then
-                                    Throw New Exception("PT Flash: Maximum iterations exceeded.")
+                                    'get solution with lowest gibbs energy
+                                    initval = Solutions(GibbsEnergyValues.IndexOf(GibbsEnergyValues.Min))
                                 End If
                                 solver = Nothing
                             Case OptimizationMethod.Simplex
@@ -709,7 +717,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                 solver.MaxFunEvaluations = maxit_e
                                 initval2 = solver.ComputeMin(AddressOf FunctionValue, variables)
                                 If solver.FunEvaluations = solver.MaxFunEvaluations Then
-                                    Throw New Exception("PT Flash: Maximum iterations exceeded.")
+                                    'get solution with lowest gibbs energy
+                                    initval = Solutions(GibbsEnergyValues.IndexOf(GibbsEnergyValues.Min))
                                 End If
                                 solver = Nothing
                             Case Else
@@ -726,11 +735,18 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                     status = problem.SolveProblem(initval2, obj, g, Nothing, Nothing, Nothing)
                                 End Using
                                 Select Case status
+                                    Case IpoptReturnCode.Infeasible_Problem_Detected,
+                                 IpoptReturnCode.Maximum_Iterations_Exceeded
+                                        'get solution with lowest gibbs energy
+                                        initval = Solutions(GibbsEnergyValues.IndexOf(GibbsEnergyValues.Min))
                                     Case IpoptReturnCode.Diverging_Iterates,
-                                              IpoptReturnCode.Error_In_Step_Computation
+                                  IpoptReturnCode.Error_In_Step_Computation,
+                                  IpoptReturnCode.Internal_Error,
+                                  IpoptReturnCode.Invalid_Number_Detected,
+                                  IpoptReturnCode.Invalid_Option,
+                                  IpoptReturnCode.NonIpopt_Exception_Thrown,
+                                  IpoptReturnCode.Unrecoverable_Exception
                                         Throw New Exception("PT Flash: IPOPT failed to converge.")
-                                    Case IpoptReturnCode.Maximum_Iterations_Exceeded
-                                        Throw New Exception("PT Flash: Maximum iterations exceeded.")
                                 End Select
                         End Select
 
@@ -742,7 +758,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                         Dim mbr As Double = MassBalanceResidual()
 
-                        If Gz > Gz0 Or mbr > 0.01 * n Then
+                        If Gz - Gz0 > 0.01 Or mbr > 0.01 * n Then
                             Throw New Exception("PT Flash: Invalid solution.")
                         End If
 
@@ -982,6 +998,9 @@ out:        Return result
                     End If
 
                     ecount += 1
+
+                    Solutions.Add(x)
+                    GibbsEnergyValues.Add(Gm)
 
                     Return Gm
 

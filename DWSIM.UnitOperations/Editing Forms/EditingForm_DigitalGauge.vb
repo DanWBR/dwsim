@@ -145,7 +145,7 @@
 
         If Not SelectedObject Is Nothing Then
 
-            Dim props = SelectedObject.GetProperties(Enums.PropertyType.WR)
+            Dim props = SelectedObject.GetProperties(Enums.PropertyType.ALL)
 
             For Each p In props
                 If SimObject.FlowSheet.GetTranslatedString(p) = cbSourceProp.SelectedItem.ToString Then

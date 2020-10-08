@@ -98,7 +98,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides ReadOnly Property Name As String
             Get
-                Return "Gibbs Minimization (SVLLE)"
+                Return "Gibbs Minimization SVLLE"
             End Get
         End Property
 
@@ -512,7 +512,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim mbr As Double = MassBalanceResidual()
 
-            If Gz > Gz0 Or mbr > 0.01 * n Then
+            If Gz - Gz0 > 0.01 Or mbr > 0.01 * n Then
                 Throw New Exception("PT Flash: Invalid solution.")
             End If
 

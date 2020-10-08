@@ -272,8 +272,6 @@ Namespace Enums
 
         PTFlash_DampingFactor = 24
 
-        GMM_Number_of_Random_Trials = 25
-
     End Enum
 
     Public Enum FlashCalculationType
