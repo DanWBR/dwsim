@@ -270,7 +270,7 @@ Namespace UnitOperations
                 End If
             End If
 
-            Dim Ti, Pi, Hi, Si, Wi, rho_vi, qvi, qli, ei, ein, T2, T2s, P2, P2i, Qloop, Qi, H2, H2s, cpig, cp, cv, mw, fx, fx0, fx00, P2i0, P2i00 As Double
+            Dim Ti, Pi, Hi, Si, Wi, rho_vi, qvi, ei, ein, T2, T2s, P2, P2i, Qloop, Qi, H2, H2s, cpig, cp, cv, mw, fx, fx0, fx00, P2i0, P2i00 As Double
 
             Dim msin, msout As MaterialStream, esin As Streams.EnergyStream
 
@@ -283,8 +283,6 @@ Namespace UnitOperations
                 msout = args(1)
                 esin = args(2)
             End If
-
-            qli = msin.Phases(1).Properties.volumetric_flow.ToString
 
             If DebugMode Then AppendDebugLine("Calculation mode: " & CalcMode.ToString)
 
@@ -687,7 +685,7 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
 
                     ' 1 W = 1 kg*m2/s3 
 
-                    AdiabaticHead = Wic * 1000 / Wi / 9.8 'm
+                    AdiabaticHead = Wic * 1000 / Wi / 9.8 ' m
 
                     PolytropicHead = Wpc * 1000 / Wi / 9.8 ' m
 

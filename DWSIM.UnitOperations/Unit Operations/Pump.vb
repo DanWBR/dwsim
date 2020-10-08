@@ -540,10 +540,7 @@ Namespace UnitOperations
 
             Me.PropertyPackage.CurrentMaterialStream.Validate()
 
-            Dim Ti, Pi, Hi, Wi, rho_li, qli, qvi, ei, ein, T2, P2, H2 As Double
-
-            qvi = msin.Phases(2).Properties.massflow.GetValueOrDefault
-            If qvi > 0 Then Throw New Exception(FlowSheet.GetTranslatedString("ExisteumaPhasevaporna"))
+            Dim Ti, Pi, Hi, Wi, rho_li, qli, ei, ein, T2, P2, H2 As Double
 
             Ti = msin.Phases(0).Properties.temperature.GetValueOrDefault
             Pi = msin.Phases(0).Properties.pressure.GetValueOrDefault
@@ -822,10 +819,6 @@ Namespace UnitOperations
                     End Try
 
                 Case CalculationMode.Delta_P
-
-                    qvi = msin.Phases(2).Properties.volumetric_flow.GetValueOrDefault.ToString
-
-                    If qvi > 0 And Not Me.IgnorePhase Then Throw New Exception(FlowSheet.GetTranslatedString("ExisteumaPhasevaporna"))
 
                     Me.PropertyPackage.CurrentMaterialStream = msin
                     P2 = Pi + Me.DeltaP.GetValueOrDefault
