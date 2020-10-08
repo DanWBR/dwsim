@@ -98,7 +98,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides ReadOnly Property Name As String
             Get
-                Return "Gibbs Minimization (Multiphase)"
+                Return "Gibbs Minimization (SVLLE)"
             End Get
         End Property
 
@@ -166,7 +166,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Me.Solver = [Enum].Parse(Me.Solver.GetType, Me.FlashSettings(FlashSetting.GM_OptimizationMethod))
 
-            If Me.Solver = OptimizationMethod.IPOPT Then Calculator.CheckParallelPInvoke()
+            'If Me.Solver = OptimizationMethod.IPOPT Then Calculator.CheckParallelPInvoke()
 
             Dim i, j As Integer
 
@@ -328,10 +328,23 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Else
 
-                Dim rnl = _nl.Flash_PT(Vz, P, T, PP)
+                Dim Vz2 = Vz.Clone
 
-                L1 = rnl(0)
-                V = rnl(1)
+                Dim VTfus As Double() = PP.RET_VTF
+
+                For i = 0 To n
+                    If Vz(i) > 0.0 And T < VTfus(i) Then
+                        Vs(i) = Vz(i)
+                        Vz2(i) = 0.0
+                    End If
+                Next
+
+                Sx = Vs.Sum
+
+                Dim rnl = _nl.Flash_PT(Vz2, P, T, PP)
+
+                L1 = rnl(0) * (1 - Sx)
+                V = rnl(1) * (1 - Sx)
                 Vx1 = rnl(2)
                 Vy = rnl(3)
 
@@ -341,7 +354,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 End If
 
                 L2 = 0.01
-                Sx = 0.01
 
                 Dim sum = V + L1 + L2 + Sx
 
@@ -354,14 +366,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 L1 *= 1000.0
                 L2 *= 1000.0
                 Sx *= 1000.0
-
-                Dim VTfus As Double() = PP.RET_VTF
-
-                For i = 0 To n
-                    If Vz(i) > 0.0 And T < VTfus(i) Then
-                        Vs(i) = Vz(i)
-                    End If
-                Next
 
                 Dim stresult = StabTest2(T, P, Vx1, PP.RET_VTC, PP)
 
@@ -439,7 +443,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     solver.MaxFunEvaluations = maxit_e * 10
                     initval = solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
                     If solver.FunEvaluations = solver.MaxFunEvaluations Then
-                        Throw New Exception("PT Flash: Maximum iterations exceeded.")
+                        'get solution with lowest gibbs energy
+                        initval = Solutions(GibbsEnergyValues.IndexOf(GibbsEnergyValues.Min))
                     End If
                     solver = Nothing
                 Case OptimizationMethod.Truncated_Newton
@@ -452,7 +457,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     solver.MaxFunEvaluations = maxit_e * 10
                     initval = solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
                     If solver.FunEvaluations = solver.MaxFunEvaluations Then
-                        Throw New Exception("PT Flash: Maximum iterations exceeded.")
+                        'get solution with lowest gibbs energy
+                        initval = Solutions(GibbsEnergyValues.IndexOf(GibbsEnergyValues.Min))
                     End If
                     solver = Nothing
                 Case OptimizationMethod.Simplex
@@ -465,7 +471,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     solver.MaxFunEvaluations = maxit_e * 10
                     initval = solver.ComputeMin(AddressOf FunctionValue, variables)
                     If solver.FunEvaluations = solver.MaxFunEvaluations Then
-                        Throw New Exception("PT Flash: Maximum iterations exceeded.")
+                        'get solution with lowest gibbs energy
+                        initval = Solutions(GibbsEnergyValues.IndexOf(GibbsEnergyValues.Min))
                     End If
                     solver = Nothing
                 Case Else
@@ -481,14 +488,18 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         'solve the problem 
                         status = problem.SolveProblem(initval, obj, g, Nothing, Nothing, Nothing)
                         Select Case status
-                            Case IpoptReturnCode.Infeasible_Problem_Detected
+                            Case IpoptReturnCode.Infeasible_Problem_Detected,
+                                 IpoptReturnCode.Maximum_Iterations_Exceeded
                                 'get solution with lowest gibbs energy
                                 initval = Solutions(GibbsEnergyValues.IndexOf(GibbsEnergyValues.Min))
                             Case IpoptReturnCode.Diverging_Iterates,
-                                  IpoptReturnCode.Error_In_Step_Computation
+                                  IpoptReturnCode.Error_In_Step_Computation,
+                                  IpoptReturnCode.Internal_Error,
+                                  IpoptReturnCode.Invalid_Number_Detected,
+                                  IpoptReturnCode.Invalid_Option,
+                                  IpoptReturnCode.NonIpopt_Exception_Thrown,
+                                  IpoptReturnCode.Unrecoverable_Exception
                                 Throw New Exception("PT Flash: IPOPT failed to converge.")
-                            Case IpoptReturnCode.Maximum_Iterations_Exceeded
-                                Throw New Exception("PT Flash: Maximum iterations exceeded.")
                         End Select
                     End Using
             End Select
@@ -508,7 +519,20 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             prevsol = initval
 
             If Sx < 0.01 Then Sx = 0.0
-            If L2 < 0.01 Then L2 = 0.0
+            If L2 < 0.01 Then
+                L2 = 0.0
+            Else
+                'check if liquid phases are the same
+                Dim diffv As Double() = Vx1.Clone
+                For i = 0 To n
+                    diffv(i) = Math.Abs(Vx1(i) - Vx2(i))
+                Next
+                If diffv.SumY() < 0.01 * n Then
+                    'the liquid phases are the same.
+                    L1 = L1 + L2
+                    L2 = 0.0
+                End If
+            End If
 
             IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
 
@@ -1023,7 +1047,7 @@ out:        Return result
                     IObj2?.SetCurrent()
                     fx = Herror(x1, {P, Vz, PP})
 
-                    If Abs(fx) < tolEXT Then Exit Do
+                    If Abs(fx) < 0.01 Then Exit Do
 
                     IObj2?.SetCurrent()
                     fx2 = Herror(x1 + epsilon(j), {P, Vz, PP})
@@ -1181,7 +1205,7 @@ alt:
                     IObj2?.SetCurrent()
                     fx = Serror(x1, {P, Vz, PP})
 
-                    If Abs(fx) < tolEXT Then Exit Do
+                    If Abs(fx) < 0.01 Then Exit Do
 
                     IObj2?.SetCurrent()
                     fx2 = Serror(x1 + epsilon(j), {P, Vz, PP})

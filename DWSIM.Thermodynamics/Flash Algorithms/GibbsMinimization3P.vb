@@ -746,6 +746,21 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                             Throw New Exception("PT Flash: Invalid solution.")
                         End If
 
+                        If L2 < 0.01 Then
+                            L2 = 0.0
+                        Else
+                            'check if liquid phases are the same
+                            Dim diffv As Double() = Vx1.Clone
+                            For i = 0 To n
+                                diffv(i) = Math.Abs(Vx1(i) - Vx2(i))
+                            Next
+                            If diffv.SumY() < 0.01 * n Then
+                                'the liquid phases are the same.
+                                L1 = L1 + L2
+                                L2 = 0.0
+                            End If
+                        End If
+
                         IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
 
                         IObj?.Paragraphs.Add("The three-phase algorithm converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms. Error function value: " & F)

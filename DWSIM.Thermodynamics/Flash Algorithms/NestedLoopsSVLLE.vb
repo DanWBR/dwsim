@@ -86,6 +86,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim names = PP.RET_VNAMES
 
+            Dim n = Vz.Length - 1
+
             If PP.ForcedSolids.Count > 0 Then
 
                 'we have forced solids
@@ -114,16 +116,30 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Else
 
+                Dim Vz2 = Vz.Clone
+                Vs = PP.RET_NullVector
+
+                Dim VTfus As Double() = PP.RET_VTF
+
+                For i = 0 To n
+                    If Vz(i) > 0.0 And T < VTfus(i) Then
+                        Vs(i) = Vz(i)
+                        Vz2(i) = 0.0
+                    End If
+                Next
+
+                S = Vs.Sum
+
                 IObj?.SetCurrent
 
-                result = nl1.Flash_PT(Vz, P, T, PP)
+                result = nl1.Flash_PT(Vz2, P, T, PP)
 
-                L1 = result(0)
-                V = result(1)
+                L1 = result(0) * (1 - S)
+                V = result(1) * (1 - S)
                 Vx1 = result(2)
                 Vy = result(3)
-                Vx2 = PP.RET_NullVector
-                Vs = PP.RET_NullVector
+                L2 = result(5) * (1 - S)
+                Vx2 = result(6)
 
             End If
 
@@ -131,11 +147,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             If L1 = 0 And S = 0.0 And (FlashSettings(Interfaces.Enums.FlashSetting.CheckIncipientLiquidForStability)) Then
 
-                Dim stresult As Object = StabTest(T, P, result(2), PP.RET_VTC, PP)
+                Dim stresult As Object = StabTest(T, P, Vx1, PP.RET_VTC, PP)
 
                 If stresult(0) = False Then
-
-                    Dim n = Vz.Length - 1
 
                     Dim nlflash As New NestedLoops()
 
@@ -191,7 +205,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     ' liquid phase NOT stable. proceed to three-phase flash.
 
-                    Dim n As Integer = Vz.Length - 1
                     Dim k As Integer = 0
 
                     Dim vx2est(n), fcl(n), fcv(n) As Double
