@@ -64,11 +64,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Sub New()
             MyBase.New()
-            FlashSettings(FlashSetting.GM_OptimizationMethod) = "Simplex"
             Order = 5
         End Sub
 
-        Public Property Solver As OptimizationMethod = OptimizationMethod.Simplex
+        Public Property Solver As OptimizationMethod = OptimizationMethod.IPOPT
 
         Public Enum ObjFuncType As Integer
             MinGibbs = 0
@@ -464,6 +463,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     solver.Tolerance = etol
                     solver.MaxFunEvaluations = maxit_e * 10
                     initval = solver.ComputeMin(AddressOf FunctionValue, variables)
+                    If solver.FunEvaluations = solver.MaxFunEvaluations Then
+                        Throw New Exception("PT Flash: Maximum iterations exceeded.")
+                    End If
                     solver = Nothing
                 Case Else
                     Using problem As New Ipopt(initval.Length, lconstr, uconstr, n + 1, glow, gup, (n + 1) * 3, 0,
@@ -1014,12 +1016,13 @@ out:        Return result
 
                     IObj2?.SetCurrent()
                     fx = Herror(x1, {P, Vz, PP})
+
+                    If Abs(fx) < tolEXT Then Exit Do
+
                     IObj2?.SetCurrent()
                     fx2 = Herror(x1 + epsilon(j), {P, Vz, PP})
 
                     IObj2?.Paragraphs.Add(String.Format("Current Enthalpy error: {0}", fx))
-
-                    If Abs(fx) < tolEXT Then Exit Do
 
                     dfdx = (fx2 - fx) / epsilon(j)
                     dx = fx / dfdx
@@ -1172,12 +1175,12 @@ alt:
                     IObj2?.SetCurrent()
                     fx = Serror(x1, {P, Vz, PP})
 
+                    If Abs(fx) < tolEXT Then Exit Do
+
                     IObj2?.SetCurrent()
                     fx2 = Serror(x1 + epsilon(j), {P, Vz, PP})
 
                     IObj2?.Paragraphs.Add(String.Format("Current Entropy error: {0}", fx))
-
-                    If Abs(fx) < tolEXT Then Exit Do
 
                     dfdx = (fx2 - fx) / epsilon(j)
                     dx = fx / dfdx

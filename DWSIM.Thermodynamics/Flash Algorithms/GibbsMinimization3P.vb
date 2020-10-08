@@ -64,7 +64,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Sub New()
             MyBase.New()
-            FlashSettings(FlashSetting.GM_OptimizationMethod) = "Simplex"
             Order = 5
         End Sub
 
@@ -710,6 +709,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                 solver.Tolerance = etol
                                 solver.MaxFunEvaluations = maxit_e
                                 initval2 = solver.ComputeMin(AddressOf FunctionValue, variables)
+                                If solver.FunEvaluations = solver.MaxFunEvaluations Then
+                                    Throw New Exception("PT Flash: Maximum iterations exceeded.")
+                                End If
                                 solver = Nothing
                             Case Else
                                 Using problem As New Ipopt(initval2.Length, lconstr2, uconstr2, n + 1, glow, gup, (n + 1) * 2, 0,
