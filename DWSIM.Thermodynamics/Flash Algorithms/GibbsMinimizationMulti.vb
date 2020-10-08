@@ -58,6 +58,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Dim Vant, T, Tant, P As Double
         Dim Ki1(n) As Double
 
+        Dim prevsol As Double()
+
+        Dim UsePreviousSolution As Boolean = False
+
         Sub New()
             MyBase.New()
             FlashSettings(FlashSetting.GM_OptimizationMethod) = "Simplex"
@@ -290,108 +294,139 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             F = 1000.0
 
-            Dim rnl = _nl.Flash_PT(Vz, P, T, PP)
+            If UsePreviousSolution AndAlso prevsol IsNot Nothing Then
 
-            L1 = rnl(0)
-            V = rnl(1)
-            Vx1 = rnl(2)
-            Vy = rnl(3)
+                j = 0
+                For i = 0 To n
+                    initval(j) = prevsol(j)
+                    lconstr(j) = 0.0#
+                    uconstr(j) = Vz(i) * F
+                    glow(i) = 0.0#
+                    gup(i) = F
+                    If initval(j) > uconstr(j) Then initval(j) = uconstr(j) * L1 / F
+                    j += 1
+                Next
+                For i = 0 To n
+                    initval(j) = prevsol(j)
+                    lconstr(j) = 0.0#
+                    uconstr(j) = Vz(i) * F
+                    If initval(j) > uconstr(j) Then initval(j) = uconstr(j) * L2 / F
+                    j += 1
+                Next
+                For i = 0 To n
+                    initval(j) = prevsol(j)
+                    lconstr(j) = 0.0#
+                    uconstr(j) = Vz(i) * F
+                    If initval(j) > uconstr(j) Then initval(j) = uconstr(j) * Sx / F
+                    j += 1
+                Next
 
-            If L1 = 0.0 Then
-                L1 = 0.01
-                V = 0.99
+            Else
+
+                Dim rnl = _nl.Flash_PT(Vz, P, T, PP)
+
+                L1 = rnl(0)
+                V = rnl(1)
+                Vx1 = rnl(2)
+                Vy = rnl(3)
+
+                If L1 = 0.0 Then
+                    L1 = 0.01
+                    V = 0.99
+                End If
+
+                L2 = 0.01
+                Sx = 0.01
+
+                Dim sum = V + L1 + L2 + Sx
+
+                V = V / sum
+                L1 = L1 / sum
+                L2 = L2 / sum
+                Sx = Sx / sum
+
+                V *= 1000.0
+                L1 *= 1000.0
+                L2 *= 1000.0
+                Sx *= 1000.0
+
+                Dim VTfus As Double() = PP.RET_VTF
+
+                For i = 0 To n
+                    If Vz(i) > 0.0 And T < VTfus(i) Then
+                        Vs(i) = Vz(i)
+                        Vy(i) = 0.0
+                        Vx1(i) = 0.0
+                        Vx2(i) = 0.0
+                    End If
+                Next
+
+                Sx = Vs.SumY
+
+                Dim stresult = StabTest2(T, P, Vx1, PP.RET_VTC, PP)
+
+                If stresult.Count > 0 Then
+
+                    Dim validsolutions = stresult.Where(Function(s) s.Max > 0.5).ToList()
+
+                    If validsolutions.Count > 0 Then
+                        Vx2 = validsolutions(0)
+                    Else
+                        Vx2 = stresult(0)
+                    End If
+
+                    Dim maxl As Double = MathEx.Common.Max(Vx2)
+                    Dim imaxl As Integer = Array.IndexOf(Vx2, maxl)
+
+                    If F * Vz(imaxl) < F * Vx1(imaxl) Then L2 = F * Vz(imaxl) Else L2 = F * Vx1(imaxl)
+
+                    L1 = F - L2 - V - Sx
+
+                    Vx1(imaxl) = 1.0E-20
+
+                    If L1 < 0.0# Then
+                        L1 = Abs(L1)
+                        L2 = F - L1 - V - Sx
+                    End If
+
+                    If L2 < 0.0# Then
+                        V += L2
+                        L2 = Abs(L2)
+                    End If
+
+                End If
+
+                Vy = Vy.NormalizeY()
+                Vx1 = Vx1.NormalizeY()
+                Vx2 = Vx2.NormalizeY()
+                Vs = Vs.NormalizeY()
+
+                j = 0
+                For i = 0 To n
+                    initval(j) = Vx1(i) * L1
+                    lconstr(j) = 0.0#
+                    uconstr(j) = Vz(i) * F
+                    glow(i) = 0.0#
+                    gup(i) = F
+                    If initval(j) > uconstr(j) Then initval(j) = uconstr(j) * L1 / F
+                    j += 1
+                Next
+                For i = 0 To n
+                    initval(j) = Vx2(i) * L2
+                    lconstr(j) = 0.0#
+                    uconstr(j) = Vz(i) * F
+                    If initval(j) > uconstr(j) Then initval(j) = uconstr(j) * L2 / F
+                    j += 1
+                Next
+                For i = 0 To n
+                    initval(j) = Vs(i) * Sx
+                    lconstr(j) = 0.0#
+                    uconstr(j) = Vz(i) * F
+                    If initval(j) > uconstr(j) Then initval(j) = uconstr(j) * Sx / F
+                    j += 1
+                Next
+
             End If
-
-            L2 = 0.01
-            Sx = 0.01
-
-            Dim sum = V + L1 + L2 + Sx
-
-            V = V / sum
-            L1 = L1 / sum
-            L2 = L2 / sum
-            Sx = Sx / sum
-
-            V *= 1000.0
-            L1 *= 1000.0
-            L2 *= 1000.0
-            Sx *= 1000.0
-
-            Dim VTfus As Double() = PP.RET_VTF
-
-            For i = 0 To n
-                If Vz(i) > 0.0 And T < VTfus(i) Then
-                    Vs(i) = Vz(i)
-                    Vy(i) = 0.0
-                    Vx1(i) = 0.0
-                    Vx2(i) = 0.0
-                End If
-            Next
-
-            Sx = Vs.SumY
-
-            Dim stresult = StabTest2(T, P, Vx1, PP.RET_VTC, PP)
-
-            If stresult.Count > 0 Then
-
-                Dim validsolutions = stresult.Where(Function(s) s.Max > 0.5).ToList()
-
-                If validsolutions.Count > 0 Then
-                    Vx2 = validsolutions(0)
-                Else
-                    Vx2 = stresult(0)
-                End If
-
-                Dim maxl As Double = MathEx.Common.Max(Vx2)
-                Dim imaxl As Integer = Array.IndexOf(Vx2, maxl)
-
-                If F * Vz(imaxl) < F * Vx1(imaxl) Then L2 = F * Vz(imaxl) Else L2 = F * Vx1(imaxl)
-
-                L1 = F - L2 - V - Sx
-
-                Vx1(imaxl) = 1.0E-20
-
-                If L1 < 0.0# Then
-                    L1 = Abs(L1)
-                    L2 = F - L1 - V - Sx
-                End If
-
-                If L2 < 0.0# Then
-                    V += L2
-                    L2 = Abs(L2)
-                End If
-
-            End If
-
-            Vy = Vy.NormalizeY()
-            Vx1 = Vx1.NormalizeY()
-            Vx2 = Vx2.NormalizeY()
-            Vs = Vs.NormalizeY()
-
-            j = 0
-            For i = 0 To n
-                initval(j) = Vx1(i) * L1
-                lconstr(j) = 0.0#
-                uconstr(j) = Vz(i) * F
-                glow(i) = 0.0#
-                gup(i) = F
-                If initval(j) > uconstr(j) Then initval(j) = uconstr(j) * L1 / F
-                j += 1
-            Next
-            For i = 0 To n
-                initval(j) = Vx2(i) * L2
-                lconstr(j) = 0.0#
-                uconstr(j) = Vz(i) * F
-                If initval(j) > uconstr(j) Then initval(j) = uconstr(j) * L2 / F
-                j += 1
-            Next
-            For i = 0 To n
-                initval(j) = Vs(i) * Sx
-                lconstr(j) = 0.0#
-                uconstr(j) = Vz(i) * F
-                If initval(j) > uconstr(j) Then initval(j) = uconstr(j) * Sx / F
-                j += 1
-            Next
 
             Select Case Me.Solver
                 Case OptimizationMethod.Limited_Memory_BGFS
@@ -464,6 +499,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             If Gz > Gz0 Or mbr > 0.01 * n Then
                 Throw New Exception("PT Flash: Invalid solution.")
             End If
+
+            prevsol = initval
 
             If Sx < 0.01 Then Sx = 0.0
             If L2 < 0.01 Then L2 = 0.0
@@ -902,6 +939,8 @@ out:        Return result
 
         Public Overrides Function Flash_PH(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
+            UsePreviousSolution = True
+
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
             Inspector.Host.CheckAndAdd(IObj, "", "Flash_PH", Name & " (PH Flash)", "Pressure-Enthalpy Flash Algorithm Routine")
@@ -973,28 +1012,10 @@ out:        Return result
 
                     IObj2?.Paragraphs.Add(String.Format("This is the Newton convergence loop iteration #{0}. DWSIM will use the current value of T to calculate the phase distribution by calling the Flash_PT routine.", cnt))
 
-                    If Settings.EnableParallelProcessing Then
-
-                        Try
-                            Dim task1 As Task = New Task(Sub()
-                                                             fx = Herror(x1, {P, Vz, PP})
-                                                         End Sub)
-                            Dim task2 As Task = New Task(Sub()
-                                                             fx2 = Herror(x1 + epsilon(j), {P, Vz, PP})
-                                                         End Sub)
-                            task1.Start()
-                            task2.Start()
-                            Task.WaitAll(task1, task2)
-                        Catch ae As AggregateException
-                            Throw ae.Flatten().InnerException
-                        End Try
-
-                    Else
-                        IObj2?.SetCurrent()
-                        fx = Herror(x1, {P, Vz, PP})
-                        IObj2?.SetCurrent()
-                        fx2 = Herror(x1 + epsilon(j), {P, Vz, PP})
-                    End If
+                    IObj2?.SetCurrent()
+                    fx = Herror(x1, {P, Vz, PP})
+                    IObj2?.SetCurrent()
+                    fx2 = Herror(x1 + epsilon(j), {P, Vz, PP})
 
                     IObj2?.Paragraphs.Add(String.Format("Current Enthalpy error: {0}", fx))
 
@@ -1075,6 +1096,8 @@ alt:
 
         Public Overrides Function Flash_PS(ByVal Vz As Double(), ByVal P As Double, ByVal S As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
+            UsePreviousSolution = True
+
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
             Inspector.Host.CheckAndAdd(IObj, "", "Flash_PS", Name & " (PS Flash)", "Pressure-Entropy Flash Algorithm Routine")
@@ -1146,28 +1169,11 @@ alt:
 
                     IObj2?.Paragraphs.Add(String.Format("This is the Newton convergence loop iteration #{0}. DWSIM will use the current value of T to calculate the phase distribution by calling the Flash_PT routine.", cnt))
 
-                    If Settings.EnableParallelProcessing Then
+                    IObj2?.SetCurrent()
+                    fx = Serror(x1, {P, Vz, PP})
 
-                        Try
-                            Dim task1 As Task = New Task(Sub()
-                                                             fx = Serror(x1, {P, Vz, PP})
-                                                         End Sub)
-                            Dim task2 As Task = New Task(Sub()
-                                                             fx2 = Serror(x1 + epsilon(j), {P, Vz, PP})
-                                                         End Sub)
-                            task1.Start()
-                            task2.Start()
-                            Task.WaitAll(task1, task2)
-                        Catch ae As AggregateException
-                            Throw ae.Flatten().InnerException
-                        End Try
-
-                    Else
-                        IObj2?.SetCurrent()
-                        fx = Serror(x1, {P, Vz, PP})
-                        IObj2?.SetCurrent()
-                        fx2 = Serror(x1 + epsilon(j), {P, Vz, PP})
-                    End If
+                    IObj2?.SetCurrent()
+                    fx2 = Serror(x1 + epsilon(j), {P, Vz, PP})
 
                     IObj2?.Paragraphs.Add(String.Format("Current Entropy error: {0}", fx))
 
@@ -1258,6 +1264,8 @@ alt:
 
             Dim tmp = Me.Flash_PT(Vz, Pf, T, proppack)
 
+            _lastsolution = tmp
+
             Dim n = Vz.Length - 1
 
             Dim L1, L2, V, Sx, Vx1(), Vx2(), Vy(), Vs() As Double
@@ -1281,7 +1289,7 @@ alt:
             If V > 0 Then _Hv = proppack.DW_CalcEnthalpy(Vy, T, Pf, State.Vapor)
             If L1 > 0 Then _Hl1 = proppack.DW_CalcEnthalpy(Vx1, T, Pf, State.Liquid)
             If L2 > 0 Then _Hl2 = proppack.DW_CalcEnthalpy(Vx2, T, Pf, State.Liquid)
-            If Sx > 0 Then _Hs = proppack.DW_CalcEnthalpy(Vs, T, Pf, State.Solid)
+            If Sx > 0 Then _Hs = proppack.DW_CalcSolidEnthalpy(T, Vs, proppack.DW_GetConstantProperties())
 
             Dim mmg, mml, mml2, mms As Double
             mmg = proppack.AUX_MMM(Vy)
@@ -1318,6 +1326,8 @@ alt:
 
             Dim tmp = Me.Flash_PT(Vz, Pf, T, proppack)
 
+            _lastsolution = tmp
+
             Dim n = Vz.Length - 1
 
             Dim L1, L2, V, Sx, Vx1(), Vx2(), Vy(), Vs() As Double
@@ -1341,7 +1351,7 @@ alt:
             If V > 0 Then _Sv = proppack.DW_CalcEntropy(Vy, T, Pf, State.Vapor)
             If L1 > 0 Then _Sl1 = proppack.DW_CalcEntropy(Vx1, T, Pf, State.Liquid)
             If L2 > 0 Then _Sl2 = proppack.DW_CalcEntropy(Vx2, T, Pf, State.Liquid)
-            If Sx > 0 Then _Ss = proppack.DW_CalcEntropy(Vs, T, Pf, State.Solid)
+            If Sx > 0 Then _Ss = proppack.DW_CalcSolidEnthalpy(T, Vs, proppack.DW_GetConstantProperties()) / T
 
             Dim mmg, mml, mml2, mms As Double
             mmg = proppack.AUX_MMM(Vy)
