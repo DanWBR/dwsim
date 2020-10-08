@@ -62,6 +62,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Dim UsePreviousSolution As Boolean = False
 
+        Dim Solutions As List(Of Double())
+        Dim GibbsEnergyValues As List(Of Double)
+
         Sub New()
             MyBase.New()
             Order = 5
@@ -275,6 +278,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim status As IpoptReturnCode = IpoptReturnCode.Feasible_Point_Found
 
+            Solutions = New List(Of Double())
+            GibbsEnergyValues = New List(Of Double)
+
             Dim initval(3 * n + 2) As Double
             Dim lconstr(3 * n + 2) As Double
             Dim uconstr(3 * n + 2) As Double
@@ -354,13 +360,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 For i = 0 To n
                     If Vz(i) > 0.0 And T < VTfus(i) Then
                         Vs(i) = Vz(i)
-                        Vy(i) = 0.0
-                        Vx1(i) = 0.0
-                        Vx2(i) = 0.0
                     End If
                 Next
-
-                Sx = Vs.SumY
 
                 Dim stresult = StabTest2(T, P, Vx1, PP.RET_VTC, PP)
 
@@ -480,9 +481,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         'solve the problem 
                         status = problem.SolveProblem(initval, obj, g, Nothing, Nothing, Nothing)
                         Select Case status
+                            Case IpoptReturnCode.Infeasible_Problem_Detected
+                                'get solution with lowest gibbs energy
+                                initval = Solutions(GibbsEnergyValues.IndexOf(GibbsEnergyValues.Min))
                             Case IpoptReturnCode.Diverging_Iterates,
-                                  IpoptReturnCode.Error_In_Step_Computation,
-                                   IpoptReturnCode.Infeasible_Problem_Detected
+                                  IpoptReturnCode.Error_In_Step_Computation
                                 Throw New Exception("PT Flash: IPOPT failed to converge.")
                             Case IpoptReturnCode.Maximum_Iterations_Exceeded
                                 Throw New Exception("PT Flash: Maximum iterations exceeded.")
@@ -684,6 +687,9 @@ out:        Return result
             WriteDebugInfo("[GM] V = " & Format(V, "N4") & ", L1 = " & Format(L1, "N4") & ", L2 = " & Format(L2, "N4") & ", S = " & Format(Sx, "N4") & " / GE = " & Format(Gm * 8.314 * Tf / 1000, "N2") & " kJ/kmol")
 
             ecount += 1
+
+            Solutions.Add(x)
+            GibbsEnergyValues.Add(Gm)
 
             Return Gm
 

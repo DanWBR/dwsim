@@ -427,8 +427,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     End Using
                     Select Case status
                         Case IpoptReturnCode.Diverging_Iterates,
-                                  IpoptReturnCode.Error_In_Step_Computation,
-                                   IpoptReturnCode.Infeasible_Problem_Detected
+                                  IpoptReturnCode.Error_In_Step_Computation
                             Throw New Exception("PT Flash: IPOPT failed to converge.")
                         Case IpoptReturnCode.Maximum_Iterations_Exceeded
                             Throw New Exception("PT Flash: Maximum iterations exceeded.")
@@ -728,8 +727,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                 End Using
                                 Select Case status
                                     Case IpoptReturnCode.Diverging_Iterates,
-                                              IpoptReturnCode.Error_In_Step_Computation,
-                                               IpoptReturnCode.Infeasible_Problem_Detected
+                                              IpoptReturnCode.Error_In_Step_Computation
                                         Throw New Exception("PT Flash: IPOPT failed to converge.")
                                     Case IpoptReturnCode.Maximum_Iterations_Exceeded
                                         Throw New Exception("PT Flash: Maximum iterations exceeded.")
