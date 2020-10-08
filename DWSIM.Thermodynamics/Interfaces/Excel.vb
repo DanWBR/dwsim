@@ -1169,7 +1169,7 @@ Namespace ExcelAddIn
         <ExcelFunction(Description:="Calculates a Pressure / Temperature Flash using the selected Property Package.", HelpTopic:="ExcelAddInHelp.chm!12")>
         Public Shared Function PTFlash(
         <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String,
-        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE)")> ByVal flashalg As Integer,
+        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE, 10 = Nested Loops SVLLE, 11 = Gibbs Minimization SVLLE)")> ByVal flashalg As Integer,
         <ExcelArgument("Pressure in Pa.")> ByVal P As Double,
         <ExcelArgument("Temperature in K.")> ByVal T As Double,
         <ExcelArgument("Compound names.")> ByVal compounds As Object(),
@@ -1245,6 +1245,10 @@ Namespace ExcelAddIn
                         pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsImmiscible
                     Case 9
                         pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.SimpleLLE
+                    Case 10
+                        pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSVLLE
+                    Case 11
+                        pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimizationMulti
                 End Select
 
                 If GlobalSettings.Settings.ExcelFlashSettings <> "" Then
@@ -1338,8 +1342,8 @@ Namespace ExcelAddIn
         <ExcelFunction(Description:="Calculates a Pressure / Enthalpy Flash using the selected Property Package.", HelpTopic:="ExcelAddInHelp.chm!13")>
         Public Shared Function PHFlash(
         <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String,
-        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE)")> ByVal flashalg As Integer,
-        <ExcelArgument("Pressure in Pa.")> ByVal P As Double,
+        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE, 10 = Nested Loops SVLLE, 11 = Gibbs Minimization SVLLE)")> ByVal flashalg As Integer,
+         <ExcelArgument("Pressure in Pa.")> ByVal P As Double,
         <ExcelArgument("Mixture Mass Enthalpy in kJ/kg.")> ByVal H As Double,
         <ExcelArgument("Compound names.")> ByVal compounds As Object(),
         <ExcelArgument("Compound mole fractions.")> ByVal molefractions As Double(),
@@ -1359,7 +1363,7 @@ Namespace ExcelAddIn
         <ExcelFunction(Description:="Calculates a Pressure / Entropy Flash using the selected Property Package.", HelpTopic:="ExcelAddInHelp.chm!14")>
         Public Shared Function PSFlash(
         <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String,
-        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE)")> ByVal flashalg As Integer,
+        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE, 10 = Nested Loops SVLLE, 11 = Gibbs Minimization SVLLE)")> ByVal flashalg As Integer,
         <ExcelArgument("Pressure in Pa.")> ByVal P As Double,
         <ExcelArgument("Mixture Mass Entropy in kJ/[kg.K].")> ByVal S As Double,
         <ExcelArgument("Compound names.")> ByVal compounds As Object(),
@@ -1380,7 +1384,7 @@ Namespace ExcelAddIn
         <ExcelFunction(Description:="Calculates a Pressure / Vapor Fraction Flash using the selected Property Package.", HelpTopic:="ExcelAddInHelp.chm!15")>
         Public Shared Function PVFFlash(
         <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String,
-        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE)")> ByVal flashalg As Integer,
+        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE, 10 = Nested Loops SVLLE, 11 = Gibbs Minimization SVLLE)")> ByVal flashalg As Integer,
         <ExcelArgument("Pressure in Pa.")> ByVal P As Double,
         <ExcelArgument("Mixture Mole Vapor Fraction.")> ByVal VF As Double,
         <ExcelArgument("Compound names.")> ByVal compounds As Object(),
@@ -1401,7 +1405,7 @@ Namespace ExcelAddIn
         <ExcelFunction(Description:="Calculates a Temperature / Vapor Fraction Flash using the selected Property Package.", HelpTopic:="ExcelAddInHelp.chm!16")>
         Public Shared Function TVFFlash(
         <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String,
-        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE)")> ByVal flashalg As Integer,
+        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE, 10 = Nested Loops SVLLE, 11 = Gibbs Minimization SVLLE)")> ByVal flashalg As Integer,
         <ExcelArgument("Temperature in K.")> ByVal T As Double,
         <ExcelArgument("Mixture Mole Vapor Fraction.")> ByVal VF As Double,
         <ExcelArgument("Compound names.")> ByVal compounds As Object(),
@@ -1426,7 +1430,7 @@ Namespace ExcelAddIn
         <ExcelFunction(Description:="Calculates a Pressure / Enthalpy Flash using the selected Property Package. Accepts an initial estimate for the temperature search.", HelpTopic:="ExcelAddInHelp.chm!17")>
         Public Shared Function PHFlash2(
         <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String,
-        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE)")> ByVal flashalg As Integer,
+        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE, 10 = Nested Loops SVLLE, 11 = Gibbs Minimization SVLLE)")> ByVal flashalg As Integer,
         <ExcelArgument("Pressure in Pa.")> ByVal P As Double,
         <ExcelArgument("Mixture Mass Enthalpy in kJ/kg.")> ByVal H As Double,
         <ExcelArgument("Compound names.")> ByVal compounds As Object(),
@@ -1503,6 +1507,10 @@ Namespace ExcelAddIn
                         pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsImmiscible
                     Case 9
                         pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.SimpleLLE
+                    Case 10
+                        pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSVLLE
+                    Case 11
+                        pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimizationMulti
                 End Select
 
                 If GlobalSettings.Settings.ExcelFlashSettings <> "" Then
@@ -1600,7 +1608,7 @@ Namespace ExcelAddIn
         <ExcelFunction(Description:="Calculates a Pressure / Entropy Flash using the selected Property Package. Accepts an initial estimate for the temperature search.", HelpTopic:="ExcelAddInHelp.chm!18")>
         Public Shared Function PSFlash2(
         <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String,
-        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE)")> ByVal flashalg As Integer,
+        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE, 10 = Nested Loops SVLLE, 11 = Gibbs Minimization SVLLE)")> ByVal flashalg As Integer,
         <ExcelArgument("Pressure in Pa.")> ByVal P As Double,
         <ExcelArgument("Mixture Mass Entropy in kJ/[kg.K].")> ByVal S As Double,
         <ExcelArgument("Compound names.")> ByVal compounds As Object(),
@@ -1677,6 +1685,10 @@ Namespace ExcelAddIn
                         pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsImmiscible
                     Case 9
                         pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.SimpleLLE
+                    Case 10
+                        pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSVLLE
+                    Case 11
+                        pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimizationMulti
                 End Select
 
                 If GlobalSettings.Settings.ExcelFlashSettings <> "" Then
@@ -1774,7 +1786,7 @@ Namespace ExcelAddIn
         <ExcelFunction(Description:="Calculates a Pressure / Vapor Fraction Flash using the selected Property Package. Accepts an initial estimate for the temperature search.", HelpTopic:="ExcelAddInHelp.chm!19")>
         Public Shared Function PVFFlash2(
         <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String,
-        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE)")> ByVal flashalg As Integer,
+        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE, 10 = Nested Loops SVLLE, 11 = Gibbs Minimization SVLLE)")> ByVal flashalg As Integer,
         <ExcelArgument("Pressure in Pa.")> ByVal P As Double,
         <ExcelArgument("Mixture Mole Vapor Fraction.")> ByVal VF As Double,
         <ExcelArgument("Compound names.")> ByVal compounds As Object(),
@@ -1851,6 +1863,10 @@ Namespace ExcelAddIn
                         pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsImmiscible
                     Case 9
                         pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.SimpleLLE
+                    Case 10
+                        pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSVLLE
+                    Case 11
+                        pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimizationMulti
                 End Select
 
                 If GlobalSettings.Settings.ExcelFlashSettings <> "" Then
@@ -1948,7 +1964,7 @@ Namespace ExcelAddIn
         <ExcelFunction(Description:="Calculates a Temperature / Vapor Fraction Flash using the selected Property Package. Accepts an initial estimate for the pressure search.", HelpTopic:="ExcelAddInHelp.chm!20")>
         Public Shared Function TVFFlash2(
         <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String,
-        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE)")> ByVal flashalg As Integer,
+        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE, 10 = Nested Loops SVLLE, 11 = Gibbs Minimization SVLLE)")> ByVal flashalg As Integer,
         <ExcelArgument("Temperature in K.")> ByVal T As Double,
         <ExcelArgument("Mixture Mole Vapor Fraction.")> ByVal VF As Double,
         <ExcelArgument("Compound names.")> ByVal compounds As Object(),
@@ -2025,6 +2041,10 @@ Namespace ExcelAddIn
                         pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsImmiscible
                     Case 9
                         pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.SimpleLLE
+                    Case 10
+                        pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSVLLE
+                    Case 11
+                        pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimizationMulti
                 End Select
 
                 If GlobalSettings.Settings.ExcelFlashSettings <> "" Then
