@@ -25,6 +25,7 @@ Imports System.Linq
 Imports DWSIM.Thermodynamics
 Imports System.Reflection
 Imports DWSIM.Interfaces
+Imports DWSIM.Thermodynamics.BaseClasses
 
 Namespace Databases
 
@@ -135,6 +136,19 @@ Namespace Databases
             mytxt = Nothing
 
         End Sub
+
+        Public Function ReadChemSepXMLFile(path As String) As List(Of ConstantProperties)
+
+            Dim xmld = New XmlDocument
+            xmld.Load(path)
+
+            Dim cpa As New List(Of ConstantProperties)
+            cpa = GetComps(xmld)
+            cpa.AddRange(GetComps(xmldoc2))
+
+            Return cpa
+
+        End Function
 
         Public Function Transfer(Optional ByVal CompName As String = "") As Thermodynamics.BaseClasses.ConstantProperties()
 
