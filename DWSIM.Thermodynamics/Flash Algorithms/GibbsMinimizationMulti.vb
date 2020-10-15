@@ -65,6 +65,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Dim Solutions As List(Of Double())
         Dim GibbsEnergyValues As List(Of Double)
 
+        Dim G0 As Double
+
         Sub New()
             MyBase.New()
             Order = 5
@@ -205,6 +207,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Gzs = Vz.MultiplyY(fczs.MultiplyY(Vz).LogY).SumY
 
             Gz0 = {Gzv, Gzl, Gzs}.Min * 1000
+
+            G0 = Gz0
 
             'Calculate Ki`s
 
@@ -479,17 +483,19 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Using problem As New Ipopt(initval.Length, lconstr, uconstr, n + 1, glow, gup, (n + 1) * 3, 0,
                             AddressOf eval_f, AddressOf eval_g,
                             AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
+                        'problem.AddOption("print_level", 7)
                         problem.AddOption("tol", etol)
                         problem.AddOption("max_iter", maxit_e * 10)
                         problem.AddOption("mu_strategy", "adaptive")
                         'problem.AddOption("mehrotra_algorithm", "yes")
                         problem.AddOption("hessian_approximation", "limited-memory")
-                        'problem.SetIntermediateCallback(AddressOf intermediate)
+                        problem.SetIntermediateCallback(AddressOf intermediate)
                         'solve the problem 
                         status = problem.SolveProblem(initval, obj, g, Nothing, Nothing, Nothing)
                         Select Case status
                             Case IpoptReturnCode.Infeasible_Problem_Detected,
-                                 IpoptReturnCode.Maximum_Iterations_Exceeded
+                                 IpoptReturnCode.Maximum_Iterations_Exceeded,
+                                 IpoptReturnCode.User_Requested_Stop
                                 'get solution with lowest gibbs energy
                                 initval = Solutions(GibbsEnergyValues.IndexOf(GibbsEnergyValues.Min))
                             Case IpoptReturnCode.Diverging_Iterates,
@@ -966,7 +972,11 @@ out:        Return result
                                      ByVal alpha_pr As Double, ByVal ls_trials As Integer) As Boolean
             objval0 = objval
             objval = obj_value
-            Return True
+            If Math.Abs(objval - objval0) <= etol Then
+                Return False
+            Else
+                Return True
+            End If
         End Function
 
         Public Overrides Function Flash_PH(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object

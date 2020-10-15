@@ -2352,21 +2352,23 @@ Namespace UnitOperations
 
             For Each strinfo As StreamInformation In Me.EnergyStreams.Values
                 Try
-                    idx = FlowSheet.GraphicObjects(strinfo.StreamID).InputConnectors(0).AttachedConnector.AttachedFromConnectorIndex
                     Select Case strinfo.StreamBehavior
                         Case StreamInformation.Behavior.Distillate
+                            idx = FlowSheet.GraphicObjects(strinfo.StreamID).InputConnectors(0).AttachedConnector.AttachedFromConnectorIndex
                             If Me.GraphicObject.FlippedH Then
                                 Me.GraphicObject.OutputConnectors(idx).Position = New Point.Point(Me.GraphicObject.X, Me.GraphicObject.Y + 0.08 * Me.GraphicObject.Height)
                             Else
                                 Me.GraphicObject.OutputConnectors(idx).Position = New Point.Point(Me.GraphicObject.X + Me.GraphicObject.Width, Me.GraphicObject.Y + 0.08 * Me.GraphicObject.Height)
                             End If
                         Case StreamInformation.Behavior.BottomsLiquid
+                            idx = FlowSheet.GraphicObjects(strinfo.StreamID).OutputConnectors(0).AttachedConnector.AttachedToConnectorIndex
                             If Me.GraphicObject.FlippedH Then
                                 Me.GraphicObject.OutputConnectors(idx).Position = New Point.Point(Me.GraphicObject.X, Me.GraphicObject.Y + 0.825 * Me.GraphicObject.Height)
                             Else
                                 Me.GraphicObject.OutputConnectors(idx).Position = New Point.Point(Me.GraphicObject.X + Me.GraphicObject.Width, Me.GraphicObject.Y + 0.825 * Me.GraphicObject.Height)
                             End If
                         Case StreamInformation.Behavior.InterExchanger
+                            idx = FlowSheet.GraphicObjects(strinfo.StreamID).InputConnectors(0).AttachedConnector.AttachedFromConnectorIndex
                             If Me.GraphicObject.FlippedH Then
                                 Me.GraphicObject.OutputConnectors(idx).Position = New Point.Point(Me.GraphicObject.X, Me.GraphicObject.Y + Me.StageIndex(strinfo.AssociatedStage) / Me.NumberOfStages * Me.GraphicObject.Height)
                             Else
@@ -3075,6 +3077,7 @@ Namespace UnitOperations
                     Case StreamInformation.Behavior.Distillate
                         msm = FlowSheet.SimulationObjects(sinf.StreamID)
                         With msm
+                            .Clear()
                             .SpecType = StreamSpec.Pressure_and_Enthalpy
                             .Phases(0).Properties.massflow = LSSf(0) * pp.AUX_MMM(xf(0)) / 1000
                             .Phases(0).Properties.molarflow = LSSf(0)
@@ -3092,10 +3095,14 @@ Namespace UnitOperations
                                 subst.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(xf(0))(i)
                                 i += 1
                             Next
+                            .Phases(3).Properties.molarfraction = 1.0
+                            .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Liquid1)
+                            .AtEquilibrium = True
                         End With
                     Case StreamInformation.Behavior.OverheadVapor
                         msm = FlowSheet.SimulationObjects(sinf.StreamID)
                         With msm
+                            .Clear()
                             .SpecType = StreamSpec.Pressure_and_Enthalpy
                             .Phases(0).Properties.massflow = Vf(0) * pp.AUX_MMM(yf(0)) / 1000
                             .Phases(0).Properties.temperature = Tf(0)
@@ -3116,10 +3123,14 @@ Namespace UnitOperations
                                 subst.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(yf(0))(i)
                                 i += 1
                             Next
+                            .Phases(2).Properties.molarfraction = 1.0
+                            .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Vapor)
+                            .AtEquilibrium = True
                         End With
                     Case StreamInformation.Behavior.BottomsLiquid
                         msm = FlowSheet.SimulationObjects(sinf.StreamID)
                         With msm
+                            .Clear()
                             .SpecType = StreamSpec.Pressure_and_Enthalpy
                             .Phases(0).Properties.massflow = Lf(ns) * pp.AUX_MMM(xf(ns)) / 1000
                             .Phases(0).Properties.temperature = Tf(ns)
@@ -3136,12 +3147,16 @@ Namespace UnitOperations
                                 subst.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(xf(ns))(i)
                                 i += 1
                             Next
+                            .Phases(3).Properties.molarfraction = 1.0
+                            .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Liquid1)
+                            .AtEquilibrium = True
                         End With
                     Case StreamInformation.Behavior.Sidedraw
                         Dim sidx As Integer = StageIndex(sinf.AssociatedStage)
                         msm = FlowSheet.SimulationObjects(sinf.StreamID)
                         If sinf.StreamPhase = StreamInformation.Phase.L Or sinf.StreamPhase = StreamInformation.Phase.B Then
                             With msm
+                                .Clear()
                                 .SpecType = StreamSpec.Pressure_and_Enthalpy
                                 .Phases(0).Properties.massflow = LSSf(sidx) * pp.AUX_MMM(xf(sidx)) / 1000
                                 .Phases(0).Properties.temperature = Tf(sidx)
@@ -3158,9 +3173,13 @@ Namespace UnitOperations
                                     subst.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(xf(sidx))(i)
                                     i += 1
                                 Next
+                                .Phases(3).Properties.molarfraction = 1.0
+                                .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Liquid1)
+                                .AtEquilibrium = True
                             End With
                         ElseIf sinf.StreamPhase = StreamInformation.Phase.V Then
                             With msm
+                                .Clear()
                                 .SpecType = StreamSpec.Pressure_and_Enthalpy
                                 .Phases(0).Properties.massflow = VSSf(sidx) * pp.AUX_MMM(yf(sidx)) / 1000
                                 .Phases(0).Properties.temperature = Tf(sidx)
@@ -3177,6 +3196,9 @@ Namespace UnitOperations
                                     subst.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(yf(sidx))(i)
                                     i += 1
                                 Next
+                                .Phases(2).Properties.molarfraction = 1.0
+                                .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Vapor)
+                                .AtEquilibrium = True
                             End With
                         End If
                 End Select

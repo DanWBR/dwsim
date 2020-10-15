@@ -263,8 +263,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Vy = Vz.MultiplyY(Ki).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1)).NormalizeY
             Vx = Vy.DivideY(Ki).NormalizeY
 
+
             Dim r1 = ConvergeVF(IObj, V, Vz, Vx, Vy, Ki, P, T, PP)
+
             'Return New Object() {V, Vx, Vy, Ki, F, ecount}
+
             V = r1(0)
             L = 1 - V
             Vx = r1(1)
@@ -305,9 +308,9 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
         Private Function ConvergeVF(IObj As InspectorItem, V As Double, Vz As Double(), Vx As Double(), Vy As Double(), Ki As Double(), P As Double, T As Double, PP As PropertyPackage) As Object()
 
             Dim n As Integer = Vz.Length - 1
+            Dim i As Integer
 
             Dim Vn(n) As String, Vx_ant(n), Vy_ant(n), Vp(n), Ki_ant(n), fi(n) As Double
-            'Dim b1_V, b2_V, dbdT_V, b1_L, b2_L, dbdT_L As Double
 
             Dim ecount As Integer = 0
             Dim converged As Integer = 0
@@ -364,7 +367,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     ex.Data.Add("UserAction", "Try another Property Package and/or Flash Algorithm.")
                     Throw ex
 
-                ElseIf Math.Abs(e3) < etol / 100 And ecount > 0 Then
+                ElseIf Math.Abs(e3) < etol And ecount > 0 Then
 
                     converged = 1
 
@@ -379,7 +382,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     IObj2?.Paragraphs.Add(String.Format("Current value of the Rachford-Rice error function: {0}", F))
 
-                    If Abs(F) < etol / 100 Then Exit Do
+                    If Abs(F) < etol Then Exit Do
 
                     V = -F / dF * dampingfactor + Vant
 
@@ -1831,7 +1834,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             Lf = 1 - Vf
             Tf = T
 
-            Dim Vn(n) As String, Vx(n), Vy(n), Vx_ant(n), Vy_ant(n), Vp(n), Ki(n), fi(n) As Double
+            Dim Vn(n) As String, Vx(n), Vy(n), Vx_ant(n), Vy_ant(n), Vp(n), Ki(n), fi(n), dVxy(n) As Double
             Dim Vt(n), VTc(n), Tmin, Tmax, dFdT, Tsat(n) As Double
 
             Vn = PP.RET_VNAMES()
@@ -2052,7 +2055,11 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     If Abs(deltaT) < etol / 1000 And ecount > 5 Then Exit Do
 
-                    If Sign(fval) <> Sign(fval_ant) And ecount > 20 And Vx.Length = 2 And Not CalculatingAzeotrope Then
+                    For i = 0 To n
+                        dVxy(i) = Math.Abs(Vx(i) - Vy(i))
+                    Next
+
+                    If dVxy.Sum < 0.01 * (n + 1) And ecount > 20 And Vx.Length = 2 And Not CalculatingAzeotrope Then
                         'azeotrope
                         T = Flash_PV_Azeotrope_Temperature(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
                         If V = 0 Then
@@ -2244,7 +2251,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             For Each item In dx
                 Try
-                    T.Add(Flash_PV(New Double() {item, 1 - item}, P, V, T0, PP, True, PrevKi)(4))
+                    T.Add(Flash_PV(New Double() {item, 1 - item}, P, V, T0, PP, ReuseKI, PrevKi)(4))
                     T0 = T.Last
                     validdx.Add(item)
                 Catch ex As Exception

@@ -361,7 +361,11 @@ Namespace Streams
         End Sub
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
-            Calculate(True, True)
+            If AtEquilibrium Then
+                Calculate(False, True)
+            Else
+                Calculate(True, True)
+            End If
         End Sub
 
         ''' <summary>
@@ -892,6 +896,7 @@ Namespace Streams
             Me.PropertyPackage.DW_ZerarComposicoes(PropertyPackages.Phase.Liquid3)
             Me.PropertyPackage.DW_ZerarComposicoes(PropertyPackages.Phase.Aqueous)
             Me.PropertyPackage.DW_ZerarComposicoes(PropertyPackages.Phase.Solid)
+            AtEquilibrium = False
         End Sub
 
 
@@ -4137,6 +4142,7 @@ Namespace Streams
             Me.PropertyPackage.DW_ZerarComposicoes(PropertyPackages.Phase.Solid)
             Me.PropertyPackage.DW_ZerarComposicoes(PropertyPackages.Phase.Mixture)
             Me.PropertyPackage.CurrentMaterialStream = Nothing
+            AtEquilibrium = False
         End Sub
 
         ''' <summary>
@@ -6569,7 +6575,7 @@ Namespace Streams
 
         End Function
 
-        Public Overrides Function GetStructuredReport() As List(Of Tuple(Of ReportItemType, String()))
+        Public Overrides Function GetStructuredReport() As List(Of System.Tuple(Of ReportItemType, String()))
 
             Dim list As New List(Of Tuple(Of ReportItemType, String()))
 
@@ -7496,6 +7502,7 @@ Namespace Streams
         ''' <param name="value">Temperature in K</param>
         Public Sub SetTemperature(value As Double)
             Phases(0).Properties.temperature = value
+            AtEquilibrium = False
         End Sub
 
         ''' <summary>
@@ -7504,6 +7511,7 @@ Namespace Streams
         ''' <param name="value">Pressure in Pa</param>
         Public Sub SetPressure(value As Double)
             Phases(0).Properties.pressure = value
+            AtEquilibrium = False
         End Sub
 
         ''' <summary>
@@ -7512,6 +7520,7 @@ Namespace Streams
         ''' <param name="value">Enthalpy in kJ/kg</param>
         Public Sub SetMassEnthalpy(value As Double)
             Phases(0).Properties.enthalpy = value
+            AtEquilibrium = False
         End Sub
 
         ''' <summary>
@@ -7520,6 +7529,7 @@ Namespace Streams
         ''' <param name="value">Entropy in kJ/[kg.K]</param>
         Public Sub SetMassEntropy(value As Double)
             Phases(0).Properties.entropy = value
+            AtEquilibrium = False
         End Sub
 
         ''' <summary>
@@ -7531,6 +7541,7 @@ Namespace Streams
             Phases(0).Properties.molarflow = value / Phases(0).Properties.molecularWeight * 1000
             Phases(0).Properties.volumetric_flow = value / Phases(0).Properties.density.GetValueOrDefault
             DefinedFlow = FlowSpec.Mass
+            AtEquilibrium = False
         End Sub
 
         Public Function GetMassEnthalpy() As Double
@@ -7566,6 +7577,7 @@ Namespace Streams
             Phases(0).Properties.molarflow = value
             Phases(0).Properties.volumetric_flow = value * Phases(0).Properties.molecularWeight / 1000 / Phases(0).Properties.density.GetValueOrDefault
             DefinedFlow = FlowSpec.Mole
+            AtEquilibrium = False
         End Sub
 
         ''' <summary>
@@ -7577,6 +7589,7 @@ Namespace Streams
             Phases(0).Properties.molarflow = Nothing
             Phases(0).Properties.volumetric_flow = value
             DefinedFlow = FlowSpec.Volumetric
+            AtEquilibrium = False
         End Sub
 
         ''' <summary>
@@ -7604,6 +7617,7 @@ Namespace Streams
                 Case "vs"
                     SpecType = StreamSpec.Volume_and_Entropy
             End Select
+            AtEquilibrium = False
         End Sub
 
         Public Sub Mix(withstream As MaterialStream)
@@ -7949,7 +7963,6 @@ Namespace Streams
 
         End Function
 
-
         Public Overrides Function ToString() As String
 
             If GraphicObject IsNot Nothing Then
@@ -7959,6 +7972,51 @@ Namespace Streams
             End If
 
         End Function
+
+        Public Sub CopyCompositions(fromphase As PhaseLabel, tophase As PhaseLabel)
+
+            Dim fromp, top As Integer
+
+            Select Case fromphase
+                Case PhaseLabel.Mixture
+                    fromp = 0
+                Case PhaseLabel.LiquidMixture
+                    fromp = 1
+                Case PhaseLabel.Liquid1
+                    fromp = 3
+                Case PhaseLabel.Liquid2
+                    fromp = 4
+                Case PhaseLabel.Liquid3
+                    fromp = 5
+                Case PhaseLabel.Vapor
+                    fromp = 2
+                Case PhaseLabel.Solid
+                    fromp = 7
+            End Select
+
+            Select Case tophase
+                Case PhaseLabel.Mixture
+                    top = 0
+                Case PhaseLabel.LiquidMixture
+                    top = 1
+                Case PhaseLabel.Liquid1
+                    top = 3
+                Case PhaseLabel.Liquid2
+                    top = 4
+                Case PhaseLabel.Liquid3
+                    top = 5
+                Case PhaseLabel.Vapor
+                    top = 2
+                Case PhaseLabel.Solid
+                    top = 7
+            End Select
+
+            For Each c In Phases(fromp).Compounds.Values
+                Phases(top).Compounds(c.Name).MassFraction = c.MassFraction.GetValueOrDefault
+                Phases(top).Compounds(c.Name).MoleFraction = c.MoleFraction.GetValueOrDefault
+            Next
+
+        End Sub
 
     End Class
 

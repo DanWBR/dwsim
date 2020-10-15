@@ -53,6 +53,8 @@ Partial Class EditingForm_Column_InitialEstimates
         Me.ToolStripButton28 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton27 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton26 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripButton29 = New System.Windows.Forms.ToolStripButton()
         Me.dgvv = New System.Windows.Forms.DataGridView()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -205,7 +207,7 @@ Partial Class EditingForm_Column_InitialEstimates
         'ToolStrip1
         '
         resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripButton2, Me.ToolStripButton5, Me.ToolStripButton6, Me.ToolStripButton7, Me.ToolStripSeparator1, Me.ToolStripButton28, Me.ToolStripButton27, Me.ToolStripButton26})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripButton2, Me.ToolStripButton5, Me.ToolStripButton6, Me.ToolStripButton7, Me.ToolStripSeparator1, Me.ToolStripButton28, Me.ToolStripButton27, Me.ToolStripButton26, Me.ToolStripSeparator2, Me.ToolStripButton29})
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolTip1.SetToolTip(Me.ToolStrip1, resources.GetString("ToolStrip1.ToolTip"))
         '
@@ -269,6 +271,19 @@ Partial Class EditingForm_Column_InitialEstimates
         Me.ToolStripButton26.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton26.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.chart_line
         Me.ToolStripButton26.Name = "ToolStripButton26"
+        '
+        'ToolStripSeparator2
+        '
+        resources.ApplyResources(Me.ToolStripSeparator2, "ToolStripSeparator2")
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        '
+        'ToolStripButton29
+        '
+        resources.ApplyResources(Me.ToolStripButton29, "ToolStripButton29")
+        Me.ToolStripButton29.CheckOnClick = True
+        Me.ToolStripButton29.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton29.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.lightning
+        Me.ToolStripButton29.Name = "ToolStripButton29"
         '
         'dgvv
         '
@@ -802,4 +817,6 @@ Partial Class EditingForm_Column_InitialEstimates
     Public WithEvents ToolStripButton27 As System.Windows.Forms.ToolStripButton
     Public WithEvents ToolStripButton26 As System.Windows.Forms.ToolStripButton
     Public WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
+    Friend WithEvents ToolStripButton29 As ToolStripButton
 End Class

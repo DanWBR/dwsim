@@ -102,6 +102,8 @@ Public Class EditingForm_Column_InitialEstimates
             i += 1
         Next
 
+        ToolStripButton29.Checked = dc.AutoUpdateInitialEstimates
+
         loaded = True
 
     End Sub
@@ -415,6 +417,12 @@ Public Class EditingForm_Column_InitialEstimates
             If c.Value Is Nothing And c.ColumnIndex = 2 Then c.Value = DWSIM.MathOps.MathEx.Interpolation.polinterpolation.nevilleinterpolation(px.ToArray(Type.GetType("System.Double")), py.ToArray(Type.GetType("System.Double")), px.Count, c.RowIndex)
         Next
 
+    End Sub
+
+    Private Sub ToolStripButton29_CheckedChanged(sender As Object, e As EventArgs) Handles ToolStripButton29.CheckedChanged
+        If loaded Then
+            dc.AutoUpdateInitialEstimates = ToolStripButton29.Checked
+        End If
     End Sub
 
     Private Sub ToolStripButton26_Click(sender As Object, e As EventArgs) Handles ToolStripButton26.Click

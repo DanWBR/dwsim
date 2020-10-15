@@ -625,6 +625,9 @@ Namespace UnitOperations
                         comp.MoleFraction = MixedStream.Phases(2).Compounds(comp.Name).MoleFraction.GetValueOrDefault
                         comp.MassFraction = MixedStream.Phases(2).Compounds(comp.Name).MassFraction.GetValueOrDefault
                     Next
+                    .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Vapor)
+                    .Phases(2).Properties.molarfraction = 1.0
+                    .AtEquilibrium = True
                 End With
             End If
 
@@ -646,6 +649,9 @@ Namespace UnitOperations
                         comp.MassFraction = VmL1(i)
                         i += 1
                     Next
+                    .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Liquid1)
+                    .Phases(3).Properties.molarfraction = 1.0
+                    .AtEquilibrium = True
                 End With
             End If
 
@@ -667,6 +673,9 @@ Namespace UnitOperations
                         comp.MassFraction = VmL2(i)
                         i += 1
                     Next
+                    .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Liquid1)
+                    .Phases(3).Properties.molarfraction = 1.0
+                    .AtEquilibrium = True
                 End With
             Else
                 If MixedStream.Phases(4).Properties.massflow.GetValueOrDefault > 0.0# Then Throw New Exception(FlowSheet.GetTranslatedString("SeparatorVessel_SecondLiquidPhaseFound"))

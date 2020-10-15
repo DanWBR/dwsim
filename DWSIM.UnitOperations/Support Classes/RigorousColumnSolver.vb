@@ -2159,7 +2159,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
                     B = spval2
                 Case ColumnSpec.SpecType.Stream_Ratio
-                    B = Vj(ns) / spval2
+                    B = sumF - LSSj(0) - sumLSS - sumVSS - Vj(0)
+                    Vj(ns) = B * spval2
                 Case ColumnSpec.SpecType.Heat_Duty
                     Q(ns) = spval2
                     Dim sum3, sum4, val1 As Double
@@ -2371,6 +2372,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 For i = 0 To ns
                     dTj(i) = Tj(i) - Tj_ant(i)
                     If Abs(dTj(i)) > MaxTChange Then Tj(i) = Math.Sign(dTj(i)) * MaxTChange + Tj_ant(i)
+                    Tj(i) = (Tj(i) + Tj_ant(i)) / 2
                     If Double.IsNaN(Tj(i)) Or Double.IsInfinity(Tj(i)) Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
                 Next
 
@@ -2607,7 +2609,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 IObj2?.Close()
 
-            Loop Until t_error < tol(1)
+            Loop Until t_error < tol(1) * ns
 
             IObj?.Paragraphs.Add("The algorithm converged in " & ic & " iterations.")
 
@@ -4089,7 +4091,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     initval = _solver.ComputeMin(AddressOf FunctionValue, variables)
                     _solver = Nothing
                 Case Else
-                    Calculator.CheckParallelPInvoke()
                     Using problem As New Ipopt(xvar.Length, lconstr, uconstr, 0, Nothing, Nothing,
                     0, 0, AddressOf eval_f, AddressOf eval_g,
                     AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)

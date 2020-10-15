@@ -36,6 +36,8 @@ namespace DWSIM.UI.Desktop.Editors
             dl.CreateAndAddDescriptionRow("Current Molar Flow Units: " + su.molarflow);
             dl.CreateAndAddDescriptionRow("Phase Composition (Liquid/Vapor/Liquid2) in Molar Fractions.");
 
+            dl.CreateAndAddCheckBoxRow("Update Automatically", column.AutoUpdateInitialEstimates, (sender, e) => column.AutoUpdateInitialEstimates = sender.Checked.GetValueOrDefault());
+
             dl.CreateAndAddCheckBoxRow("Override Temperature Estimates", column.UseTemperatureEstimates, (sender, e) => column.UseTemperatureEstimates = sender.Checked.GetValueOrDefault());
             dl.CreateAndAddCheckBoxRow("Override Liquid Flow Estimates", column.UseLiquidFlowEstimates, (sender, e) => column.UseLiquidFlowEstimates = sender.Checked.GetValueOrDefault());
             dl.CreateAndAddCheckBoxRow("Override Vapor/Liquid2 Estimates", column.UseVaporFlowEstimates, (sender, e) => column.UseVaporFlowEstimates = sender.Checked.GetValueOrDefault());

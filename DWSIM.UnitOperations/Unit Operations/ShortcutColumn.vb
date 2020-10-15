@@ -415,6 +415,7 @@ restart:    B = F - D
             End With
             IObj?.SetCurrent()
             distillate.Calculate(True, True)
+            distillate.AtEquilibrium = True
 
             HD = distillate.Phases(0).Properties.enthalpy.GetValueOrDefault * distillate.Phases(0).Properties.molecularWeight.GetValueOrDefault
 
@@ -432,6 +433,7 @@ restart:    B = F - D
             End With
             IObj?.SetCurrent()
             bottoms.Calculate(True, True)
+            bottoms.AtEquilibrium = True
 
             HB = bottoms.Phases(0).Properties.enthalpy.GetValueOrDefault * bottoms.Phases(0).Properties.molecularWeight.GetValueOrDefault
 
