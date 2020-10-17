@@ -94,7 +94,7 @@ Imports System.Drawing
 
         tscb2.Items.AddRange(New Object() {6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16})
 
-        btnHighlightSpaces.Checked = ScriptUO.HighlightSpaces
+        If Not CAPEOPEN Then btnHighlightSpaces.Checked = ScriptUO.HighlightSpaces
 
         If CAPEOPEN Then
             tscb1.SelectedItem = FontName
