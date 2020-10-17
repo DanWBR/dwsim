@@ -621,8 +621,10 @@ Namespace UnitOperations
                     Next
                     .Phases(0).Properties.massflow = msin.Phases(0).Properties.massflow.GetValueOrDefault
                     Select Case CalcMode
-                        Case CalculationMode.EnergyStream, CalculationMode.HeatAdded, CalculationMode.OutletVaporFraction
+                        Case CalculationMode.EnergyStream, CalculationMode.HeatAdded
                             .SpecType = StreamSpec.Pressure_and_Enthalpy
+                        Case CalculationMode.OutletVaporFraction
+                            .SpecType = StreamSpec.Pressure_and_VaporFraction
                         Case CalculationMode.TemperatureChange, CalculationMode.OutletTemperature
                             .SpecType = StreamSpec.Temperature_and_Pressure
                     End Select

@@ -361,8 +361,12 @@ Namespace Streams
         End Sub
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
-            If AtEquilibrium Then
-                Calculate(False, True)
+            If FlowSheet IsNot Nothing Then
+                If AtEquilibrium And Not FlowSheet.DynamicMode Then
+                    Calculate(False, True)
+                Else
+                    Calculate(True, True)
+                End If
             Else
                 Calculate(True, True)
             End If
@@ -691,7 +695,10 @@ Namespace Streams
 
                     IObj?.SetCurrent()
 
-                    If Me.Phases(2).Properties.molarfraction.GetValueOrDefault >= 0 And Me.Phases(2).Properties.molarfraction.GetValueOrDefault <= 1 Then
+                    Dim liqsum As Double = Me.Phases(1).Compounds.Values.Select(Function(x) x.MoleFraction.GetValueOrDefault).Sum
+
+                    If Me.Phases(2).Properties.molarfraction.GetValueOrDefault >= 0 And
+                        Me.Phases(2).Properties.molarfraction.GetValueOrDefault <= 1 And liqsum > 0 Then
                         .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid)
                         .DW_CalcLiqMixtureProps()
                     Else

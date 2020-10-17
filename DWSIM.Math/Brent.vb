@@ -136,6 +136,106 @@ Final3:
 
         End Function
 
+        Function BrentOpt2(ByVal minval As Double, ByVal maxval As Double, ByVal n As Integer, ByVal tol As Double, ByVal itmax As Integer, ByVal fx As Func(Of Double, Double)) As Double
+
+            Dim x_inf, x_sup, y_inf, y, delta_x As Double
+
+            If minval < maxval Then
+                x_inf = minval
+                x_sup = maxval
+            Else
+                x_inf = maxval
+                x_sup = minval
+            End If
+
+            delta_x = (x_sup - x_inf) / n
+
+            Do
+                y = fx(x_inf)
+                x_inf = x_inf + delta_x
+                y_inf = fx(x_inf)
+            Loop Until y * y_inf < 0 Or x_inf > x_sup
+            x_sup = x_inf - delta_x
+
+            Dim aaa, bbb, ccc, ddd, eee, min11, min22, faa, fbb, fcc, ppp, qqq, rrr, sss, tol11, xmm As Double
+            Dim ITMAX2 As Integer = itmax
+            Dim iter2 As Integer
+
+            aaa = x_inf
+            bbb = x_sup
+            ccc = x_sup
+
+            faa = fx(x_inf)
+            fbb = fx(x_sup)
+            fcc = fx(x_sup)
+
+            iter2 = 0
+            Do
+                If (fbb > 0 And fcc > 0) Or (fbb < 0 And fcc < 0) Then
+                    ccc = aaa
+                    fcc = faa
+                    ddd = bbb - aaa
+                    eee = ddd
+                End If
+                If Math.Abs(fcc) < Math.Abs(fbb) Then
+                    aaa = bbb
+                    bbb = ccc
+                    ccc = aaa
+                    faa = fbb
+                    fbb = fcc
+                    fcc = faa
+                End If
+                tol11 = tol
+                xmm = 0.5 * (ccc - bbb)
+                If (Math.Abs(xmm) <= tol11) Or (fbb = 0) Then GoTo Final3
+                If Math.Abs(fbb) < tol11 Then GoTo Final3
+                If (Math.Abs(eee) >= tol11) And (Math.Abs(faa) > Math.Abs(fbb)) Then
+                    sss = fbb / faa
+                    If aaa = ccc Then
+                        ppp = 2 * xmm * sss
+                        qqq = 1 - sss
+                    Else
+                        qqq = faa / fcc
+                        rrr = fbb / fcc
+                        ppp = sss * (2 * xmm * qqq * (qqq - rrr) - (bbb - aaa) * (rrr - 1))
+                        qqq = (qqq - 1) * (rrr - 1) * (sss - 1)
+                    End If
+                    If ppp > 0 Then qqq = -qqq
+                    ppp = Math.Abs(ppp)
+                    min11 = 3 * xmm * qqq - Math.Abs(tol11 * qqq)
+                    min22 = Math.Abs(eee * qqq)
+                    Dim tvar2 As Double
+                    If min11 < min22 Then tvar2 = min11
+                    If min11 > min22 Then tvar2 = min22
+                    If 2 * ppp < tvar2 Then
+                        eee = ddd
+                        ddd = ppp / qqq
+                    Else
+                        ddd = xmm
+                        eee = ddd
+                    End If
+                Else
+                    ddd = xmm
+                    eee = ddd
+                End If
+                aaa = bbb
+                faa = fbb
+                If (Math.Abs(ddd) > tol11) Then
+                    bbb += ddd
+                Else
+                    bbb += Math.Sign(xmm) * tol11
+                End If
+                fbb = fx(bbb)
+                iter2 += 1
+            Loop Until iter2 = ITMAX2
+
+            Return bbb
+
+Final3:
+
+            Return bbb
+
+        End Function
 
     End Class
 

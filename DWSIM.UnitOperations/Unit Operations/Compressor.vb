@@ -284,6 +284,9 @@ Namespace UnitOperations
                 esin = args(2)
             End If
 
+            Dim Pout0 As Double = msout.GetPressure()
+            Dim Tout0 As Double = msout.GetTemperature()
+
             If DebugMode Then AppendDebugLine("Calculation mode: " & CalcMode.ToString)
 
             IObj?.Paragraphs.Add("Calculation Mode: " & CalcMode.ToString)
@@ -334,7 +337,7 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                             End If
                     End Select
 
-                    CheckSpec(Me.DeltaQ, True, "power")
+                    'CheckSpec(Me.DeltaQ, True, "power")
 
                     With esin
                         .EnergyFlow = Me.DeltaQ
@@ -358,7 +361,9 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                     Do
 
                         IObj?.SetCurrent()
-                        tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2i, Si, 0)
+                        tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2i, Si, Tout0)
+
+                        Tout0 = tmp.CalculatedTemperature
 
                         If ProcessPath = ProcessPathType.Adiabatic Then
                             Qloop = Wi * (tmp.CalculatedEnthalpy - Hi) / (Me.AdiabaticEfficiency / 100)
@@ -401,7 +406,7 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PS flash to calculate ideal outlet enthalpy... P = {0} Pa, S = {1} kJ/[kg.K]", P2, Si))
 
                     IObj?.SetCurrent()
-                    tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2, Si, 0)
+                    tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2, Si, Tout0)
                     T2s = tmp.CalculatedTemperature
                     H2s = tmp.CalculatedEnthalpy
 
@@ -426,7 +431,7 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", P2, H2))
 
                     IObj?.SetCurrent()
-                    tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, Ti)
+                    tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, T2s)
 
                     T2 = tmp.CalculatedTemperature
 
@@ -580,7 +585,7 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PS flash to calculate ideal outlet enthalpy... P = {0} Pa, S = {1} kJ/[kg.K]", P2, Si))
 
                     IObj?.SetCurrent()
-                    Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2, Si, 0)
+                    Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2, Si, Tout0)
                     T2 = tmp.CalculatedTemperature
                     T2s = T2
                     H2 = tmp.CalculatedEnthalpy
@@ -609,7 +614,7 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
 
                     If DebugMode Then AppendDebugLine(String.Format("Calculated real compressor power = {0} kW", DeltaQ))
 
-                    CheckSpec(DeltaQ, True, "power")
+                    'CheckSpec(DeltaQ, True, "power")
 
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", P2, Hi + Me.DeltaQ / Wi))
 

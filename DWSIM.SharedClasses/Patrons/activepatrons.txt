@@ -29,13 +29,14 @@ Fernando Bórquez
 Filippo Borroni
 Gokhan Candan 
 Guenther Holzer
+Henar
 Henk Fikkert
 Hep Ingham
 Hugo Gonzalez
-Hurudza 
+Hurudza
+Ivagner Ferreira
 James Lauer
 Jan Boshoff
-Jasper Paauwe
 Javier Fontalvo Alzate
 Jens Greimeier
 John Gorke

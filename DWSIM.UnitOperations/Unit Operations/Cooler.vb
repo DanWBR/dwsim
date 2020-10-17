@@ -556,6 +556,7 @@ Namespace UnitOperations
 
                 'Atribuir valores a corrente de materia conectada a jusante
                 With DirectCast(FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name), MaterialStream)
+                    .Clear()
                     .Phases(0).Properties.temperature = T2
                     .Phases(0).Properties.pressure = P2
                     .Phases(0).Properties.enthalpy = H2
@@ -567,8 +568,10 @@ Namespace UnitOperations
                     Next
                     .Phases(0).Properties.massflow = msin.Phases(0).Properties.massflow.GetValueOrDefault
                     Select Case CalcMode
-                        Case CalculationMode.HeatRemoved, CalculationMode.OutletVaporFraction
+                        Case CalculationMode.HeatRemoved
                             .SpecType = StreamSpec.Pressure_and_Enthalpy
+                        Case CalculationMode.OutletVaporFraction
+                            .SpecType = StreamSpec.Pressure_and_VaporFraction
                         Case CalculationMode.TemperatureChange, CalculationMode.OutletTemperature
                             .SpecType = StreamSpec.Temperature_and_Pressure
                     End Select

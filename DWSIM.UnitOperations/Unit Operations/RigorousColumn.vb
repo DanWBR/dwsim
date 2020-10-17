@@ -3123,8 +3123,8 @@ Namespace UnitOperations
                                 subst.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(yf(0))(i)
                                 i += 1
                             Next
-                            .Phases(2).Properties.molarfraction = 1.0
                             .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Vapor)
+                            .Phases(2).Properties.molarfraction = 1.0
                             .AtEquilibrium = True
                         End With
                     Case StreamInformation.Behavior.BottomsLiquid
@@ -3196,8 +3196,8 @@ Namespace UnitOperations
                                     subst.MassFraction = pp.AUX_CONVERT_MOL_TO_MASS(yf(sidx))(i)
                                     i += 1
                                 Next
-                                .Phases(2).Properties.molarfraction = 1.0
                                 .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Vapor)
+                                .Phases(2).Properties.molarfraction = 1.0
                                 .AtEquilibrium = True
                             End With
                         End If

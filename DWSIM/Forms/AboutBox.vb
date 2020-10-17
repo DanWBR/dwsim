@@ -340,11 +340,11 @@ Public Class AboutBox
                 Case "System.Diagnostics.DebuggableAttribute"
                     Value = CType(attrib, Diagnostics.DebuggableAttribute).IsJITTrackingEnabled.ToString
                 Case "System.Reflection.AssemblyCompanyAttribute"
-                    Value = CType(attrib, AssemblyCompanyAttribute).Company.ToString
+                    Value = CType(attrib, AssemblyCompanyAttribute).Company
                 Case "System.Reflection.AssemblyConfigurationAttribute"
                     Value = CType(attrib, AssemblyConfigurationAttribute).Configuration.ToString
                 Case "System.Reflection.AssemblyCopyrightAttribute"
-                    Value = CType(attrib, AssemblyCopyrightAttribute).Copyright.ToString
+                    Value = CType(attrib, AssemblyCopyrightAttribute).Copyright
                 Case "System.Reflection.AssemblyDefaultAliasAttribute"
                     Value = CType(attrib, AssemblyDefaultAliasAttribute).DefaultAlias.ToString
                 Case "System.Reflection.AssemblyDelaySignAttribute"

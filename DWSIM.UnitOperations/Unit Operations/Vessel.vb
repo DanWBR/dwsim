@@ -614,6 +614,7 @@ Namespace UnitOperations
             If cp.IsAttached Then
                 ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
                 With ms
+                    .Clear()
                     .ClearAllProps()
                     .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
                     .Phases(0).Properties.temperature = T
@@ -635,6 +636,7 @@ Namespace UnitOperations
             If cp.IsAttached Then
                 ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
                 With ms
+                    .Clear()
                     .ClearAllProps()
                     .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
                     .Phases(0).Properties.temperature = T
@@ -659,6 +661,7 @@ Namespace UnitOperations
             If cp.IsAttached Then
                 ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
                 With ms
+                    .Clear()
                     .ClearAllProps()
                     .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
                     .Phases(0).Properties.temperature = T

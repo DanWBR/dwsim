@@ -2399,6 +2399,8 @@ Namespace UnitOperations
                 StOutCold.Phases(0).Properties.pressure = Pc2
                 StOutHot.Phases(0).Properties.enthalpy = Hh2
                 StOutCold.Phases(0).Properties.enthalpy = Hc2
+                StOutHot.SetFlashSpec("PH")
+                StOutCold.SetFlashSpec("PH")
 
                 If Th2 < Tc1 Or Tc2 > Th1 Then
                     FlowSheet.ShowMessage(Me.GraphicObject.Tag & ": Temperature Cross", IFlowsheet.MessageType.Warning)

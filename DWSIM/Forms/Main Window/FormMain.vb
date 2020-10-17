@@ -439,7 +439,7 @@ Public Class FormMain
         Dim j As Integer = 0
         For Each k As String In Me.dropdownlist
             Dim tsmi As ToolStripItem = Me.FileToolStripMenuItem.DropDownItems(Convert.ToInt32(k - j))
-            If tsmi.DisplayStyle = ToolStripItemDisplayStyle.Text Or TypeOf tsmi Is ToolStripSeparator Then
+            If tsmi.DisplayStyle = ToolStripItemDisplayStyle.Text Then
                 Me.FileToolStripMenuItem.DropDownItems.Remove(tsmi)
                 j = j + 1
             End If
@@ -448,6 +448,8 @@ Public Class FormMain
         Me.dropdownlist.Clear()
 
         Dim toremove As New ArrayList
+
+        Dim tsindex = FileToolStripMenuItem.DropDownItems.IndexOf(tsFileSeparator)
 
         If Not My.Settings.MostRecentFiles Is Nothing Then
             For Each str As String In My.Settings.MostRecentFiles
@@ -458,7 +460,7 @@ Public Class FormMain
                         .Tag = str
                         .DisplayStyle = ToolStripItemDisplayStyle.Text
                     End With
-                    Me.FileToolStripMenuItem.DropDownItems.Insert(Me.FileToolStripMenuItem.DropDownItems.Count - 1, tsmi)
+                    Me.FileToolStripMenuItem.DropDownItems.Insert(tsindex, tsmi)
                     Me.dropdownlist.Add(Me.FileToolStripMenuItem.DropDownItems.Count - 2)
                     AddHandler tsmi.Click, AddressOf Me.OpenRecent_click
                 Else
@@ -469,7 +471,6 @@ Public Class FormMain
                 My.Settings.MostRecentFiles.Remove(s)
             Next
             If My.Settings.MostRecentFiles.Count > 0 Then
-                Me.FileToolStripMenuItem.DropDownItems.Insert(Me.FileToolStripMenuItem.DropDownItems.Count - 1, New ToolStripSeparator())
                 Me.dropdownlist.Add(Me.FileToolStripMenuItem.DropDownItems.Count - 2)
             End If
         Else
@@ -484,16 +485,19 @@ Public Class FormMain
             End If
         Next
 
-        For Each s In latestfolders
-            Dim tsmi As New ToolStripMenuItem With {.Text = s, .Tag = s, .DisplayStyle = ToolStripItemDisplayStyle.Text}
-            Me.FileToolStripMenuItem.DropDownItems.Insert(Me.FileToolStripMenuItem.DropDownItems.Count - 1, tsmi)
-            Me.dropdownlist.Add(Me.FileToolStripMenuItem.DropDownItems.Count - 2)
-            AddHandler tsmi.Click, AddressOf Me.OpenRecentFolder_click
-        Next
-
         If latestfolders.Count > 0 Then
-            Me.FileToolStripMenuItem.DropDownItems.Insert(Me.FileToolStripMenuItem.DropDownItems.Count - 1, New ToolStripSeparator())
+            tsFolderSeparator.Visible = True
+            Dim tfindex = FileToolStripMenuItem.DropDownItems.IndexOf(tsFolderSeparator)
+            For Each s In latestfolders
+                Dim tsmi As New ToolStripMenuItem With {.Text = s, .Tag = s, .DisplayStyle = ToolStripItemDisplayStyle.Text}
+                Me.FileToolStripMenuItem.DropDownItems.Insert(tfindex, tsmi)
+                Me.dropdownlist.Add(Me.FileToolStripMenuItem.DropDownItems.Count - 2)
+                AddHandler tsmi.Click, AddressOf Me.OpenRecentFolder_click
+            Next
+        Else
+            tsFolderSeparator.Visible = False
         End If
+
 
     End Sub
 

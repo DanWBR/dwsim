@@ -252,6 +252,9 @@ Namespace UnitOperations
 
             Dim Ti, Pi, Hi, Si, Wi, rho_vi, qvi, qli, ei, ein, T2, T2s, P2, H2, H2s, cp, cv, mw, Qi, Qloop, P2i, fx, fx0, fx00, P2i0, P2i00 As Double
 
+            Dim Pout0 As Double = oms.GetPressure()
+            Dim Tout0 As Double = oms.GetTemperature()
+
             qli = ims.Phases(1).Properties.volumetric_flow.ToString
 
             If Not Me.GraphicObject.EnergyConnector.IsAttached Then
@@ -267,19 +270,19 @@ Namespace UnitOperations
             IObj?.Paragraphs.Add("Calculation Mode: " & CalcMode.ToString)
 
             Me.PropertyPackage.CurrentMaterialStream = ims
-            Ti = ims.Phases(0).Properties.temperature
-            Pi = ims.Phases(0).Properties.pressure
-            rho_vi = ims.Phases(2).Properties.density
-            qvi = ims.Phases(2).Properties.volumetric_flow
-            Hi = ims.Phases(0).Properties.enthalpy
-            Si = ims.Phases(0).Properties.entropy
-            Wi = ims.Phases(0).Properties.massflow
-            Qi = ims.Phases(0).Properties.molarflow
+            Ti = ims.Phases(0).Properties.temperature.GetValueOrDefault
+            Pi = ims.Phases(0).Properties.pressure.GetValueOrDefault
+            rho_vi = ims.Phases(2).Properties.density.GetValueOrDefault
+            qvi = ims.Phases(2).Properties.volumetric_flow.GetValueOrDefault
+            Hi = ims.Phases(0).Properties.enthalpy.GetValueOrDefault
+            Si = ims.Phases(0).Properties.entropy.GetValueOrDefault
+            Wi = ims.Phases(0).Properties.massflow.GetValueOrDefault
+            Qi = ims.Phases(0).Properties.molarflow.GetValueOrDefault
             ei = Hi * Wi
             ein = ei
-            cp = ims.Phases(0).Properties.heatCapacityCp
-            cv = ims.Phases(0).Properties.heatCapacityCv
-            mw = ims.Phases(0).Properties.molecularWeight
+            cp = ims.Phases(0).Properties.heatCapacityCp.GetValueOrDefault
+            cv = ims.Phases(0).Properties.heatCapacityCv.GetValueOrDefault
+            mw = ims.Phases(0).Properties.molecularWeight.GetValueOrDefault
 
             IObj?.Paragraphs.Add("<h3>Input Variables</h3>")
 
@@ -311,7 +314,7 @@ Namespace UnitOperations
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PS flash to calculate ideal outlet enthalpy... P = {0} Pa, S = {1} kJ/[kg.K]", P2, Si))
 
                     IObj?.SetCurrent()
-                    tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2, Si, Ti)
+                    tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2, Si, Tout0)
                     T2 = tmp.CalculatedTemperature
                     T2s = T2
                     CheckSpec(T2, True, "outlet temperature")
@@ -355,7 +358,7 @@ Curves:             If CalcMode = CalculationMode.Head Then
                         End If
                     End If
 
-                    CheckSpec(Me.DeltaQ, True, "power")
+                    'CheckSpec(Me.DeltaQ, True, "power")
 
                     Dim k As Double = cp / cv
 
@@ -372,7 +375,9 @@ Curves:             If CalcMode = CalculationMode.Head Then
                     Do
 
                         IObj?.SetCurrent()
-                        tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2i, Si, 0)
+                        tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2i, Si, Tout0)
+
+                        Tout0 = tmp.CalculatedTemperature
 
                         T2s = tmp.CalculatedTemperature
                         H2s = tmp.CalculatedEnthalpy

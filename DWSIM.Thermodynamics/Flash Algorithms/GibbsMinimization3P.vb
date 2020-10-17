@@ -219,7 +219,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Gzl = Vz.MultiplyY(fczl.MultiplyY(Vz).LogY).SumY
             Gzs = Vz.MultiplyY(fczs.MultiplyY(Vz).LogY).SumY
 
-            Gz0 = {Gzv, Gzl, Gzs}.Min
+            Gz0 = {Gzv, Gzl, Gzs}.Min * 1000
 
             Dim result As Object = Nothing
 
@@ -428,7 +428,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         problem.AddOption("tol", etol)
                         problem.AddOption("max_iter", maxit_e)
                         problem.AddOption("mu_strategy", "adaptive")
+                        problem.AddOption("expect_infeasible_problem", "yes")
                         problem.AddOption("hessian_approximation", "limited-memory")
+                        problem.SetIntermediateCallback(AddressOf intermediate)
                         status = problem.SolveProblem(initval, obj, Nothing, Nothing, Nothing, Nothing)
                     End Using
                     Select Case status
@@ -470,145 +472,34 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 IObj?.Paragraphs.Add("The algorithm will now move to the VLLE part. First it checks if there is a liquid phase. If yes, then it calls the liquid phase stability test algorithm to see if a second liquid phase can form at the current conditions.")
 
-                Dim GoneThrough As Boolean = False
-
-                If result(0) = 0 And (FlashSettings(Interfaces.Enums.FlashSetting.CheckIncipientLiquidForStability)) Then
-
-                    Dim stresult As Object = StabTest(T, P, result(2), PP.RET_VTC, PP)
-
-                    If stresult(0) = False Then
-
-                        Dim gmflash As New GibbsMinimization3P() With {.ForceTwoPhaseOnly = True, .FlashSettings = FlashSettings}
-
-                        Dim m As Double = UBound(stresult(1), 1)
-
-                        Dim trialcomps As New List(Of Double())
-                        Dim results As New List(Of Object)
-
-                        For j = 0 To m
-                            Dim vxtrial(n) As Double
-                            For i = 0 To n
-                                vxtrial(i) = stresult(1)(j, i)
-                            Next
-                            trialcomps.Add(vxtrial)
-                        Next
-
-                        For Each tcomp In trialcomps
-                            Try
-                                Dim r2 = gmflash.Flash_PT(Vz, P, T, PP, True, Vy.DivideY(tcomp))
-                                results.Add(r2)
-                            Catch ex As Exception
-                            End Try
-                        Next
-
-                        If results.Where(Function(r) r(0) > 0.0).Count > 0 Then
-
-                            Dim validresult = results.Where(Function(r) r(0) > 0.0).First
-
-                            L = validresult(0)
-                            V = validresult(1)
-                            Vx = validresult(2)
-                            Vy = validresult(3)
-                            ecount = validresult(4)
-
-                            result = New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
-
-                            GoneThrough = True
-
-                        End If
-
-                    End If
-
-                End If
-
                 ' check if there is a liquid phase
 
-                If result(0) > 0 And Not GoneThrough Then ' we have a liquid phase
+                If result(0) > 0 Then ' we have a liquid phase
 
                     IObj?.Paragraphs.Add("We have a liquid phase. Checking its stability according to user specifications...")
 
-                    'If result(1) > 0.01 And n = 1 Then
-                    '    'the liquid phase cannot be unstable when there's also vapor and only two compounds in the system.
-                    '    Return result
-                    'End If
-
-                    Dim nt As Integer = Me.StabSearchCompIDs.Length - 1
-                    Dim nc As Integer = Vz.Length - 1
-
-                    If nt = -1 Then nt = nc
-
-                    Dim Vtrials(nt, nc) As Double
-                    Dim idx(nt) As Integer
-
-                    For i = 0 To nt
-                        If Me.StabSearchCompIDs.Length = 0 Then
-                            idx(i) = i
-                        Else
-                            j = 0
-                            For Each subst As Interfaces.ICompound In PP.CurrentMaterialStream.Phases(0).Compounds.Values
-                                If subst.Name = Me.StabSearchCompIDs(i) Then
-                                    idx(i) = j
-                                    Exit For
-                                End If
-                                j += 1
-                            Next
-                        End If
-                    Next
-
-                    For i = 0 To nt
-                        For j = 0 To nc
-                            Vtrials(i, j) = 0.00001
-                        Next
-                    Next
-                    For j = 0 To nt
-                        Vtrials(j, idx(j)) = 1
-                    Next
-
                     IObj?.Paragraphs.Add("Calling Liquid Phase Stability Test algorithm...")
-
-                    IObj?.Paragraphs.Add(String.Format("Tentative compositions for the second (incipient) liquid phase: {0}", Vtrials.ToMathArrayString))
 
                     ' do a stability test in the liquid phase
 
                     IObj?.SetCurrent
 
-                    Dim stresult As Object = StabTest(T, P, result(2), PP.RET_VTC, PP)
+                    Dim stresult = StabTest2(T, P, result(2), PP.RET_VTC, PP)
 
-                    If stresult(0) = False Then
+                    If stresult.Count > 0 Then
 
                         IObj?.Paragraphs.Add("The liquid phase is not stable. Proceed to three-phase flash.")
 
-                        ' liquid phase NOT stable. proceed to three-phase flash.
+                        Dim validsolutions = stresult.Where(Function(s) s.Max > 0.5).ToList()
 
-                        Dim vx2est(n), fcl(n), fcv(n) As Double
-                        Dim m As Double = LBound(stresult(1), 1)
-                        Dim gl, gli As Double
-
-                        If StabSearchSeverity = 2 Then
-                            gli = 0
-                            For j = 0 To m
-                                For i = 0 To nc
-                                    vx2est(i) = stresult(1)(j, i)
-                                Next
-                                IObj?.SetCurrent
-                                fcl = PP.DW_CalcFugCoeff(vx2est, T, P, State.Liquid)
-                                gl = 0.0#
-                                For i = 0 To nc
-                                    If vx2est(i) <> 0.0# Then gl += vx2est(i) * Log(fcl(i) * vx2est(i))
-                                Next
-                                If gl <= gli Then
-                                    gli = gl
-                                    k = j
-                                End If
-                            Next
-                            For i = 0 To Vz.Length - 1
-                                vx2est(i) = stresult(1)(k, i)
-                            Next
+                        If validsolutions.Count > 0 Then
+                            Vx2 = validsolutions(0)
                         Else
-                            For i = 0 To Vz.Length - 1
-                                vx2est(i) = stresult(1)(m, i)
-                            Next
+                            Vx2 = stresult(0)
                         End If
+
+                        Dim maxl As Double = MathEx.Common.Max(Vx2)
+                        Dim imaxl As Integer = Array.IndexOf(Vx2, maxl)
 
 
                         Dim initval2(2 * n + 1) As Double
@@ -617,13 +508,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         Dim finalval2(2 * n + 1) As Double
                         Dim glow(n), gup(n), g(n) As Double
 
-                        Dim maxl As Double = MathEx.Common.Max(vx2est)
-                        Dim imaxl As Integer = Array.IndexOf(vx2est, maxl)
-
                         F = 1000.0#
                         V = result(1)
                         L2 = F * result(3)(imaxl)
                         L1 = F - L2 - V
+
+                        If F * Vz(imaxl) < F * Vx1(imaxl) Then L2 = F * Vz(imaxl) Else L2 = F * Vx1(imaxl)
 
                         If L1 < 0.0# Then
                             L1 = Abs(L1)
@@ -637,7 +527,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                         For i = 0 To n
                             If Vz(i) <> 0 Then
-                                initval2(i) = Vy(i) * V - vx2est(i) * L2
+                                initval2(i) = Vy(i) * V - Vx2(i) * L2
                                 If initval2(i) < 0.0# Then initval2(i) = 0.0#
                             Else
                                 initval2(i) = 0.0#
@@ -650,7 +540,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         Next
                         For i = n + 1 To 2 * n + 1
                             If Vz(i - n - 1) <> 0 Then
-                                initval2(i) = (vx2est(i - n - 1) * L2)
+                                initval2(i) = (Vx2(i - n - 1) * L2)
                                 If initval2(i) < 0 Then initval2(i) = 0
                             Else
                                 initval2(i) = 0.0#
@@ -665,7 +555,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         IObj?.Paragraphs.Add(String.Format("Initial Estimate for Liquid Phase 2 Molar Fraction (L2): {0}", L2))
 
                         IObj?.Paragraphs.Add(String.Format("Initial Estimate for Vapor Phase Molar Composition: {0}", Vy.ToMathArrayString))
-                        IObj?.Paragraphs.Add(String.Format("Initial Estimate for Liquid Phase 2 Molar Composition: {0}", vx2est.ToMathArrayString))
+                        IObj?.Paragraphs.Add(String.Format("Initial Estimate for Liquid Phase 2 Molar Composition: {0}", Vx2.ToMathArrayString))
 
                         IObj?.SetCurrent
 
@@ -728,7 +618,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                     problem.AddOption("tol", etol)
                                     problem.AddOption("max_iter", maxit_e * 10)
                                     problem.AddOption("mu_strategy", "adaptive")
-                                    'problem.AddOption("mehrotra_algorithm", "yes")
+                                    problem.AddOption("expect_infeasible_problem", "yes")
                                     problem.AddOption("hessian_approximation", "limited-memory")
                                     problem.SetIntermediateCallback(AddressOf intermediate)
                                     'solve the problem 
@@ -759,7 +649,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                         Dim mbr As Double = MassBalanceResidual()
 
-                        If Gz - Gz0 > 0.01 Or mbr > 0.01 * n Then
+                        If Gz - Gz0 > 1 Or mbr > 0.01 * n Then
                             Throw New Exception("PT Flash: Invalid solution.")
                         End If
 
@@ -767,13 +657,23 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                             L2 = 0.0
                         Else
                             'check if liquid phases are the same
-                            Dim diffv As Double() = Vx1.Clone
+                            Dim diffv As Double() = Vx2.Clone
                             For i = 0 To n
                                 diffv(i) = Math.Abs(Vx1(i) - Vx2(i))
                             Next
                             If diffv.SumY() < 0.01 * n Then
                                 'the liquid phases are the same.
                                 L1 = L1 + L2
+                                L2 = 0.0
+                            End If
+                            'check if liquid2/vapor phases are the same
+                            Dim diffv2 As Double() = Vx2.Clone
+                            For i = 0 To n
+                                diffv2(i) = Math.Abs(Vx2(i) - Vy(i))
+                            Next
+                            If diffv2.SumY() < 0.01 * n Then
+                                'the liquid2/vapor phases are the same.
+                                V = V + L2
                                 L2 = 0.0
                             End If
                         End If
@@ -1430,452 +1330,22 @@ out:        Return result
 
         Public Overrides Function Flash_PH(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            Dim nl = New NestedLoops With {.DisableParallelCalcs = True}
+            nl.FlashSettings = FlashSettings
+            nl.PTFlashFunction = AddressOf Flash_PT
 
-            Inspector.Host.CheckAndAdd(IObj, "", "Flash_PH", Name & " (PH Flash)", "Pressure-Enthalpy Flash Algorithm Routine")
-
-            IObj?.Paragraphs.Add("The PH Flash uses two nested loops (hence the name) to calculate temperature and phase distribution. 
-                                    The external one converges the temperature, while the internal one finds the phase distribution for the current temperature estimate in the external loop.
-                                    The algorithm converges when the calculated overall enthalpy for the tentative phase distribution and temperature matches the specified one.")
-
-            IObj?.SetCurrent()
-
-            Dim d1, d2 As Date, dt As TimeSpan
-            Dim i, j, n, ecount As Integer
-
-            d1 = Date.Now
-
-            n = Vz.Length - 1
-
-            proppack = PP
-            Hf = H
-            Pf = P
-
-            ReDim Vn(n), Vx1(n), Vx2(n), Vy(n), Vp(n), Ki(n), fi(n)
-
-            Vn = PP.RET_VNAMES()
-            fi = Vz.Clone
-
-            Dim maxitINT As Integer = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_Internal_Iterations)
-            Dim maxitEXT As Integer = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_External_Iterations)
-            Dim tolINT As Double = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Internal_Loop_Tolerance).ToDoubleFromInvariant
-            Dim tolEXT As Double = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_External_Loop_Tolerance).ToDoubleFromInvariant
-
-            Dim Tmin, Tmax, epsilon(4) As Double
-
-            Tmax = 10000.0#
-            Tmin = 20.0#
-
-            epsilon(0) = 0.001
-            epsilon(1) = 0.01
-            epsilon(2) = 0.1
-            epsilon(3) = 1
-            epsilon(4) = 10
-
-            Dim fx, fx2, dfdx, x1, dx As Double
-
-            Dim cnt As Integer
-
-            If Tref = 0 Then Tref = 298.15
-
-            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
-
-            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
-            IObj?.Paragraphs.Add(String.Format("Enthalpy: {0} kJ/kg", H))
-            IObj?.Paragraphs.Add(String.Format("Compounds: {0}", PP.RET_VNAMES.ToMathArrayString))
-            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
-            IObj?.Paragraphs.Add(String.Format("Initial estimate for T: {0} K", T))
-
-            For j = 0 To 4
-
-                cnt = 0
-                x1 = Tref
-
-                Do
-
-                    IObj?.SetCurrent()
-
-                    Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
-
-                    Inspector.Host.CheckAndAdd(IObj2, "", "Flash_PH", "PH Flash Newton Iteration", "Pressure-Enthalpy Flash Algorithm Convergence Iteration Step")
-
-                    IObj2?.Paragraphs.Add(String.Format("This is the Newton convergence loop iteration #{0}. DWSIM will use the current value of T to calculate the phase distribution by calling the Flash_PT routine.", cnt))
-
-                    If Settings.EnableParallelProcessing Then
-
-                        Try
-                            Dim task1 As Task = New Task(Sub()
-                                                             fx = Herror(x1, {P, Vz, PP})
-                                                         End Sub)
-                            Dim task2 As Task = New Task(Sub()
-                                                             fx2 = Herror(x1 + epsilon(j), {P, Vz, PP})
-                                                         End Sub)
-                            task1.Start()
-                            task2.Start()
-                            Task.WaitAll(task1, task2)
-                        Catch ae As AggregateException
-                            Throw ae.Flatten().InnerException
-                        End Try
-
-                    Else
-                        IObj2?.SetCurrent()
-                        fx = Herror(x1, {P, Vz, PP})
-                        IObj2?.SetCurrent()
-                        fx2 = Herror(x1 + epsilon(j), {P, Vz, PP})
-                    End If
-
-                    IObj2?.Paragraphs.Add(String.Format("Current Enthalpy error: {0}", fx))
-
-                    If Abs(fx) < tolEXT Then Exit Do
-
-                    dfdx = (fx2 - fx) / epsilon(j)
-                    dx = fx / dfdx
-
-                    x1 = x1 - dx
-
-                    IObj2?.Paragraphs.Add(String.Format("Updated Temperature estimate: {0} K", x1))
-
-                    IObj2?.Close()
-
-                    cnt += 1
-
-                Loop Until cnt > maxitEXT Or Double.IsNaN(x1)
-
-                IObj?.Paragraphs.Add(String.Format("The PH Flash algorithm converged in {0} iterations. Final Temperature value: {1} K", cnt, x1))
-
-                T = x1
-
-                If Not Double.IsNaN(T) And Not Double.IsInfinity(T) And Not cnt > maxitEXT Then
-                    If T > Tmin And T < Tmax Then Exit For
-                End If
-
-            Next
-
-            If Double.IsNaN(T) Or cnt > maxitEXT Then
-
-alt:
-                Dim bo As New BrentOpt.Brent
-                bo.DefineFuncDelegate(AddressOf Herror)
-                WriteDebugInfo("PH Flash [NL3PV2]: Newton's method failed. Starting fallback Brent's method calculation for " & Tmin & " <= T <= " & Tmax)
-
-                T = bo.BrentOpt(Tmin, Tmax, 25, tolEXT, maxitEXT, {P, Vz, PP})
-
-            End If
-
-            If T <= Tmin Or T >= Tmax Then
-                Dim ex As New Exception("PH Flash [NL3PV2]: Invalid result: Temperature did not converge.")
-                ex.Data.Add("DetailedDescription", "The Flash Algorithm was unable to converge to a solution.")
-                ex.Data.Add("UserAction", "Try another Property Package and/or Flash Algorithm.")
-                Throw ex
-            End If
-
-            IObj?.SetCurrent()
-            Dim tmp As Object = Flash_PT(Vz, P, T, PP)
-
-            L1 = tmp(0)
-            V = tmp(1)
-            Vx1 = tmp(2)
-            Vy = tmp(3)
-            ecount = tmp(4)
-            L2 = tmp(5)
-            Vx2 = tmp(6)
-
-            For i = 0 To n
-                Ki(i) = Vy(i) / Vx1(i)
-            Next
-
-            d2 = Date.Now
-
-            dt = d2 - d1
-
-            WriteDebugInfo("PH Flash [NL3P]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms")
-
-            IObj?.Paragraphs.Add("The algorithm converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
-
-            IObj?.Close()
-
-            Return New Object() {L1, V, Vx1, Vy, T, ecount, Ki, L2, Vx2, 0.0#, PP.RET_NullVector}
+            Return nl.Flash_PH(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
 
         End Function
 
         Public Overrides Function Flash_PS(ByVal Vz As Double(), ByVal P As Double, ByVal S As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            Dim nl = New NestedLoops With {.DisableParallelCalcs = True}
+            nl.FlashSettings = FlashSettings
+            nl.PTFlashFunction = AddressOf Flash_PT
 
-            Inspector.Host.CheckAndAdd(IObj, "", "Flash_PS", Name & " (PS Flash)", "Pressure-Entropy Flash Algorithm Routine")
+            Return nl.Flash_PS(Vz, P, S, Tref, PP, ReuseKI, PrevKi)
 
-            IObj?.Paragraphs.Add("The PS Flash in fast mode uses two nested loops (hence the name) to calculate temperature and phase distribution. 
-                                    The external one converges the temperature, while the internal one finds the phase distribution for the current temperature estimate in the external loop.
-                                    The algorithm converges when the calculated overall entropy for the tentative phase distribution and temperature matches the specified one.")
-
-            IObj?.SetCurrent()
-
-            Dim d1, d2 As Date, dt As TimeSpan
-            Dim i, j, n, ecount As Integer
-
-            d1 = Date.Now
-
-            n = Vz.Length - 1
-
-            proppack = PP
-            Sf = S
-            Pf = P
-
-            ReDim Vn(n), Vx1(n), Vx2(n), Vy(n), Vp(n), Ki(n), fi(n)
-
-            Vn = PP.RET_VNAMES()
-            fi = Vz.Clone
-
-            Dim maxitINT As Integer = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_Internal_Iterations)
-            Dim maxitEXT As Integer = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_External_Iterations)
-            Dim tolINT As Double = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Internal_Loop_Tolerance).ToDoubleFromInvariant
-            Dim tolEXT As Double = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_External_Loop_Tolerance).ToDoubleFromInvariant
-
-            Dim Tmin, Tmax, epsilon(4) As Double
-
-            Tmax = 10000.0#
-            Tmin = 20.0#
-
-            epsilon(0) = 0.001
-            epsilon(1) = 0.01
-            epsilon(2) = 0.1
-            epsilon(3) = 1
-            epsilon(4) = 10
-
-            Dim fx, fx2, dfdx, x1, dx As Double
-
-            Dim cnt As Integer
-
-            If Tref = 0 Then Tref = 298.15
-
-            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
-
-            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
-            IObj?.Paragraphs.Add(String.Format("Entropy: {0} kJ/kg", S))
-            IObj?.Paragraphs.Add(String.Format("Compounds: {0}", PP.RET_VNAMES.ToMathArrayString))
-            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
-            IObj?.Paragraphs.Add(String.Format("Initial estimate for T: {0} K", Tref))
-
-            For j = 0 To 4
-
-                cnt = 0
-                x1 = Tref
-
-                Do
-
-                    IObj?.SetCurrent()
-
-                    Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
-
-                    Inspector.Host.CheckAndAdd(IObj2, "", "Flash_PS", "PS Flash Newton Iteration", "Pressure-Entropy Flash Algorithm Convergence Iteration Step")
-
-                    IObj2?.Paragraphs.Add(String.Format("This is the Newton convergence loop iteration #{0}. DWSIM will use the current value of T to calculate the phase distribution by calling the Flash_PT routine.", cnt))
-
-                    If Settings.EnableParallelProcessing Then
-
-                        Try
-                            Dim task1 As Task = New Task(Sub()
-                                                             fx = Serror(x1, {P, Vz, PP})
-                                                         End Sub)
-                            Dim task2 As Task = New Task(Sub()
-                                                             fx2 = Serror(x1 + epsilon(j), {P, Vz, PP})
-                                                         End Sub)
-                            task1.Start()
-                            task2.Start()
-                            Task.WaitAll(task1, task2)
-                        Catch ae As AggregateException
-                            Throw ae.Flatten().InnerException
-                        End Try
-
-                    Else
-                        IObj2?.SetCurrent()
-                        fx = Serror(x1, {P, Vz, PP})
-                        IObj2?.SetCurrent()
-                        fx2 = Serror(x1 + epsilon(j), {P, Vz, PP})
-                    End If
-
-                    IObj2?.Paragraphs.Add(String.Format("Current Entropy error: {0}", fx))
-
-                    If Abs(fx) < tolEXT Then Exit Do
-
-                    dfdx = (fx2 - fx) / epsilon(j)
-                    dx = fx / dfdx
-
-                    x1 = x1 - dx
-
-                    IObj2?.Paragraphs.Add(String.Format("Updated Temperature estimate: {0} K", x1))
-
-                    IObj2?.Close()
-
-                    cnt += 1
-
-                Loop Until cnt > maxitEXT Or Double.IsNaN(x1)
-
-                IObj?.Paragraphs.Add(String.Format("The PS Flash algorithm converged in {0} iterations. Final Temperature value: {1} K", cnt, x1))
-
-                T = x1
-
-                If Not Double.IsNaN(T) And Not Double.IsInfinity(T) And Not cnt > maxitEXT Then
-                    If T > Tmin And T < Tmax Then Exit For
-                End If
-
-            Next
-
-            If Double.IsNaN(T) Or cnt > maxitEXT Then
-
-alt:
-                Dim bo As New BrentOpt.Brent
-                bo.DefineFuncDelegate(AddressOf Serror)
-                WriteDebugInfo("PS Flash [NL3PV2]: Newton's method failed. Starting fallback Brent's method calculation for " & Tmin & " <= T <= " & Tmax)
-
-                T = bo.BrentOpt(Tmin, Tmax, 25, tolEXT, maxitEXT, {P, Vz, PP})
-
-            End If
-
-            If T <= Tmin Or T >= Tmax Then
-                Dim ex As New Exception("PS Flash [NL3PV2]: Invalid result: Temperature did not converge.")
-                ex.Data.Add("DetailedDescription", "The Flash Algorithm was unable to converge to a solution.")
-                ex.Data.Add("UserAction", "Try another Property Package and/or Flash Algorithm.")
-                Throw ex
-            End If
-
-
-            Dim tmp As Object = Flash_PT(Vz, P, T, PP)
-
-            L1 = tmp(0)
-            V = tmp(1)
-            Vx1 = tmp(2)
-            Vy = tmp(3)
-            ecount = tmp(4)
-            L2 = tmp(5)
-            Vx2 = tmp(6)
-
-            For i = 0 To n
-                Ki(i) = Vy(i) / Vx1(i)
-            Next
-
-            d2 = Date.Now
-
-            dt = d2 - d1
-
-            WriteDebugInfo("PS Flash [NL3PV2]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms")
-
-            IObj?.Paragraphs.Add("The algorithm converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
-
-            IObj?.Close()
-
-            Return New Object() {L1, V, Vx1, Vy, T, ecount, Ki, L2, Vx2, 0.0#, PP.RET_NullVector}
-
-        End Function
-
-        Function OBJ_FUNC_PH_FLASH(ByVal T As Double, ByVal H As Double, ByVal P As Double, ByVal Vz As Object) As Object
-
-            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
-
-            Inspector.Host.CheckAndAdd(IObj, "", "Flash_PH", "PH Flash Objective Function (Error)", "Pressure-Enthalpy Flash Algorithm Objective Function (Error) Calculation")
-
-            IObj?.Paragraphs.Add("This routine calculates the current error between calculated and specified enthalpies.")
-
-            IObj?.SetCurrent()
-
-            Dim tmp = Me.Flash_PT(Vz, Pf, T, proppack)
-
-            Dim n = Vz.Length - 1
-
-            Dim L1, L2, V, Vx1(), Vx2(), Vy() As Double
-
-            L1 = tmp(0)
-            V = tmp(1)
-            Vx1 = tmp(2)
-            Vy = tmp(3)
-            L2 = tmp(5)
-            Vx2 = tmp(6)
-
-            Dim _Hv, _Hl1, _Hl2 As Double
-
-            _Hv = 0.0#
-            _Hl1 = 0.0#
-            _Hl2 = 0.0#
-
-            If V > 0 Then _Hv = proppack.DW_CalcEnthalpy(Vy, T, Pf, State.Vapor)
-            If L1 > 0 Then _Hl1 = proppack.DW_CalcEnthalpy(Vx1, T, Pf, State.Liquid)
-            If L2 > 0 Then _Hl2 = proppack.DW_CalcEnthalpy(Vx2, T, Pf, State.Liquid)
-
-            Dim mmg, mml, mml2 As Double
-            mmg = proppack.AUX_MMM(Vy)
-            mml = proppack.AUX_MMM(Vx1)
-            mml2 = proppack.AUX_MMM(Vx2)
-
-            Dim herr As Double = Hf - (mmg * V / (mmg * V + mml * L1 + mml2 * L2)) * _Hv - (mml * L1 / (mmg * V + mml * L1 + mml2 * L2)) * _Hl1 - (mml2 * L2 / (mmg * V + mml * L1 + mml2 * L2)) * _Hl2
-            OBJ_FUNC_PH_FLASH = herr
-
-            IObj?.Paragraphs.Add(String.Format("Specified Enthalpy: {0} kJ/kg", Hf))
-
-            IObj?.Paragraphs.Add(String.Format("Current Error: {0} kJ/kg", herr))
-
-            IObj?.Close()
-
-            WriteDebugInfo("PH Flash [NL3P]: Current T = " & T & ", Current H Error = " & herr)
-
-        End Function
-
-        Function OBJ_FUNC_PS_FLASH(ByVal T As Double, ByVal S As Double, ByVal P As Double, ByVal Vz As Object) As Object
-
-            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
-
-            Inspector.Host.CheckAndAdd(IObj, "", "Flash_PS", "PS Flash Objective Function (Error)", "Pressure-Entropy Flash Algorithm Objective Function (Error) Calculation")
-
-            IObj?.Paragraphs.Add("This routine calculates the current error between calculated and specified entropies.")
-
-            IObj?.SetCurrent()
-
-            Dim tmp = Me.Flash_PT(Vz, Pf, T, proppack)
-
-            Dim n = Vz.Length - 1
-
-            Dim L1, L2, V, Vx1(), Vx2(), Vy() As Double
-
-            L1 = tmp(0)
-            V = tmp(1)
-            Vx1 = tmp(2)
-            Vy = tmp(3)
-            L2 = tmp(5)
-            Vx2 = tmp(6)
-
-            Dim _Sv, _Sl1, _Sl2 As Double
-
-            _Sv = 0.0#
-            _Sl1 = 0.0#
-            _Sl2 = 0.0#
-
-            If V > 0 Then _Sv = proppack.DW_CalcEntropy(Vy, T, Pf, State.Vapor)
-            If L1 > 0 Then _Sl1 = proppack.DW_CalcEntropy(Vx1, T, Pf, State.Liquid)
-            If L2 > 0 Then _Sl2 = proppack.DW_CalcEntropy(Vx2, T, Pf, State.Liquid)
-
-            Dim mmg, mml, mml2
-            mmg = proppack.AUX_MMM(Vy)
-            mml = proppack.AUX_MMM(Vx1)
-            mml2 = proppack.AUX_MMM(Vx2)
-
-            Dim serr As Double = Sf - (mmg * V / (mmg * V + mml * L1 + mml2 * L2)) * _Sv - (mml * L1 / (mmg * V + mml * L1 + mml2 * L2)) * _Sl1 - (mml2 * L2 / (mmg * V + mml * L1 + mml2 * L2)) * _Sl2
-            OBJ_FUNC_PS_FLASH = serr
-
-            IObj?.Paragraphs.Add(String.Format("Specified Entropy: {0} kJ/[kg.K]", Sf))
-
-            IObj?.Paragraphs.Add(String.Format("Current Error: {0} kJ/[kg.K]", serr))
-
-            IObj?.Close()
-
-            WriteDebugInfo("PS Flash [NL3P]: Current T = " & T & ", Current S Error = " & serr)
-
-        End Function
-
-        Function Herror(ByVal Tt As Double, ByVal otherargs As Object) As Double
-            Return OBJ_FUNC_PH_FLASH(Tt, Sf, Pf, fi)
-        End Function
-
-        Function Serror(ByVal Tt As Double, ByVal otherargs As Object) As Double
-            Return OBJ_FUNC_PS_FLASH(Tt, Sf, Pf, fi)
         End Function
 
         Public Overrides Function Flash_PV(Vz() As Double, P As Double, Vspec As Double, Tref As Double, PP As PropertyPackage, Optional ReuseKI As Boolean = False, Optional PrevKi() As Double = Nothing) As Object

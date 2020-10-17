@@ -389,15 +389,17 @@ Namespace UnitOperations
                 End If
             End If
 
-            Dim Ti, Pi, Hi, Wi, ei, ein, T2, P2, H2, H2c, rho, volf, rhog20, P2ant, v2, Kvc As Double
+            Dim Ti, Pi, Hi, Wi, ei, ein, T2, P2, H2, H2c, rho, volf, rhog20, P2ant, v2, Kvc, T2est As Double
             Dim icount As Integer
 
-            Dim ims As MaterialStream
+            Dim ims, oms As MaterialStream
 
             If args IsNot Nothing Then
                 ims = args(0)
+                oms = args(1)
             Else
                 ims = Me.GetInletMaterialStream(0)
+                oms = Me.GetOutletMaterialStream(0)
             End If
 
             Me.PropertyPackage.CurrentMaterialStream = ims
@@ -410,6 +412,12 @@ Namespace UnitOperations
             ein = ei
             rho = ims.Phases(0).Properties.density.GetValueOrDefault
             volf = ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault
+
+            If oms.GetTemperature() < ims.GetTemperature() Then
+                T2est = oms.GetTemperature()
+            Else
+                T2est = ims.GetTemperature()
+            End If
 
             H2 = Hi '- Me.DeltaP.GetValueOrDefault / (rho_li * 1000)
 
@@ -502,7 +510,7 @@ Namespace UnitOperations
             IObj?.Paragraphs.Add(String.Format("Inlet Stream Enthalpy = {0} kJ/kg", Hi))
 
             IObj?.SetCurrent()
-            Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, Ti)
+            Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, T2est)
             T2 = tmp.CalculatedTemperature
             CheckSpec(T2, True, "outlet temperature")
             H2c = tmp.CalculatedEnthalpy
@@ -525,14 +533,6 @@ Namespace UnitOperations
             Me.DeltaQ = 0
 
             OutletTemperature = T2
-
-            Dim oms As IMaterialStream
-
-            If args IsNot Nothing Then
-                oms = args(1)
-            Else
-                oms = Me.GetOutletMaterialStream(0)
-            End If
 
             If Not DebugMode Then
 

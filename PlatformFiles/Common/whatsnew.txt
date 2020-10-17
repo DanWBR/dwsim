@@ -1,6 +1,5 @@
-Version 6.2 Update 1
+Version 6.2 Update 2
 
-- [NEW] Multiphase (SVLLE) Gibbs Minimization Flash Algorithm
-- [NEW] Added more units for mass, standard condition volumetric and power/heat flow
-- [NEW] Added a new plugin for Heat of Combustion calculation
-- [FIX] Minor bug fixes
+- [CHG] Enhanced reliability of the Flash Algorithms
+- [CHG] Optimized calculation speeds by removing unnecessary Material Stream calculations
+- [FIX] General bug fixes and enhancements
