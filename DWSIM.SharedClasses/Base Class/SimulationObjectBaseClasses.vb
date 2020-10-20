@@ -108,6 +108,30 @@ Namespace UnitOperations
 
         End Sub
 
+        Public Sub SetExtraPropertyValue(pname As String, pvalue As Object) Implements ISimulationObject.SetExtraPropertyValue
+
+            Dim col1 = DirectCast(ExtraProperties, IDictionary(Of String, Object))
+
+            If col1.ContainsKey(pname) Then
+                col1(pname) = pvalue
+            Else
+                Throw New Exception("Property doesn't exist.")
+            End If
+
+        End Sub
+
+        Public Function GetExtraPropertyValue(pname As String) As Object Implements ISimulationObject.GetExtraPropertyValue
+
+            Dim col1 = DirectCast(ExtraProperties, IDictionary(Of String, Object))
+
+            If col1.ContainsKey(pname) Then
+                Return col1(pname)
+            Else
+                Throw New Exception("Property doesn't exist.")
+            End If
+
+        End Function
+
         Public Sub ClearExtraProperties() Implements ISimulationObject.ClearExtraProperties
 
             Dim col1 = DirectCast(ExtraProperties, IDictionary(Of String, Object))

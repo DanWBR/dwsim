@@ -108,7 +108,9 @@ Imports DWSIM.Interfaces.Enums
     ''' <returns>Property units.</returns>
     ''' <remarks>More details at http://dwsim.inforside.com.br/wiki/index.php?title=Object_Property_Codes </remarks>
     Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As IUnitsOfMeasure = Nothing) As String
+    Sub SetExtraPropertyValue(pname As String, pvalue As Object)
     Sub RemoveDynamicProperty(pname As String)
+    Function GetExtraPropertyValue(pname As String) As Object
 
     ''' <summary>
     ''' Sets the value of a property.
