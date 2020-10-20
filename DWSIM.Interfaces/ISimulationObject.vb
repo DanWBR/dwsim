@@ -86,6 +86,7 @@ Imports DWSIM.Interfaces.Enums
     ''' <returns>A list of property identifiers.</returns>
     ''' <remarks>More details at http://dwsim.inforside.com.br/wiki/index.php?title=Object_Property_Codes </remarks>
     Function GetProperties(ByVal proptype As Enums.PropertyType) As String()
+    Sub AddExtraProperty(pname As String, pvalue As Object)
 
     ''' <summary>
     ''' Gets the value of a property.
@@ -95,7 +96,8 @@ Imports DWSIM.Interfaces.Enums
     ''' <returns>Property value.</returns>
     ''' <remarks>More details at http://dwsim.inforside.com.br/wiki/index.php?title=Object_Property_Codes </remarks>
     Function GetPropertyValue(ByVal prop As String, Optional ByVal su As IUnitsOfMeasure = Nothing) As Object
-
+    Sub RemoveExtraProperty(pname As String)
+    Sub ClearExtraProperties()
     Sub AddDynamicProperty(pname As String, pdesc As String, pvalue As Double, punittype As UnitOfMeasure)
 
     ''' <summary>

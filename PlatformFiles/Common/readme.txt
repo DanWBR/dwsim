@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 6.2 Update 2
+Version 6.2 Update 3
 Copyright (c) 2017-2020 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -54,13 +54,17 @@ Display:
 
 Disk space:		
 
-500 MB for program files
+750 MB for program files
 
 ==================================================
 VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim6/commits/windows
+
+Version 6.2 Update 3
+
+- [NEW] Added an editor for custom properties (Classic UI)
 
 Version 6.2 Update 2
 

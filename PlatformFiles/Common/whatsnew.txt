@@ -1,5 +1,3 @@
-Version 6.2 Update 2
+Version 6.2 Update 3
 
-- [CHG] Enhanced reliability of the Flash Algorithms
-- [CHG] Optimized calculation speeds by removing unnecessary Material Stream calculations
-- [FIX] General bug fixes and enhancements
+- [NEW] Added an editor for custom properties (Classic UI)

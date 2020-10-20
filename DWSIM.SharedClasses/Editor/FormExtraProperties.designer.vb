@@ -35,13 +35,14 @@ Partial Class FormExtraProperties
         Me.grid1.AllowUserToAddRows = False
         Me.grid1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.grid1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        Me.grid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grid1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colname, Me.colvalue})
         Me.grid1.Name = "grid1"
         Me.grid1.RowHeadersVisible = False
+        Me.grid1.RowTemplate.Height = 24
         '
         'colname
         '
+        Me.colname.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
         Me.colname.FillWeight = 50.0!
         resources.ApplyResources(Me.colname, "colname")
         Me.colname.Name = "colname"
@@ -49,9 +50,9 @@ Partial Class FormExtraProperties
         '
         'colvalue
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.colvalue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         Me.colvalue.DefaultCellStyle = DataGridViewCellStyle1
-        Me.colvalue.FillWeight = 50.0!
         resources.ApplyResources(Me.colvalue, "colvalue")
         Me.colvalue.Name = "colvalue"
         '
