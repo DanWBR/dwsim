@@ -45,9 +45,13 @@ Imports DWSIM.Interfaces.Enums
 
     Sub DisplayDynamicsEditForm()
 
+    Sub DisplayExtraPropertiesEditForm()
+
     Sub UpdateEditForm()
 
     Sub UpdateDynamicsEditForm()
+
+    Sub UpdateExtraPropertiesEditForm()
 
     Property PreferredFlashAlgorithmTag As String
 

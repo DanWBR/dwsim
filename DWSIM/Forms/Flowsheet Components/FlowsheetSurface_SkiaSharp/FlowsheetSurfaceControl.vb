@@ -74,6 +74,64 @@ Public Class FlowsheetSurfaceControl
             Invalidate()
             Invalidate()
         Else
+
+            Select Case Me.FlowsheetSurface.SelectedObject.ObjectType
+                Case ObjectType.GO_Table
+                    Dim f As New FormConfigurePropertyTable() With {.Table = FlowsheetSurface.SelectedObject}
+                    f.ShowDialog(Me)
+                Case ObjectType.GO_SpreadsheetTable
+                    Dim f As New FormConfigureSpreadsheetTable() With {.Table = FlowsheetSurface.SelectedObject}
+                    f.ShowDialog(Me)
+                Case ObjectType.GO_MasterTable
+                    Dim f As New FormConfigureMasterTable() With {.Table = FlowsheetSurface.SelectedObject}
+                    f.ShowDialog(Me)
+                Case ObjectType.GO_Chart
+                    Dim f As New FormConfigureChartObject() With {.Chart = FlowsheetSurface.SelectedObject}
+                    f.ShowDialog(Me)
+                Case ObjectType.FlowsheetUO
+                    Dim myobj As UnitOperations.UnitOperations.Flowsheet = FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name)
+                    If My.Computer.Keyboard.ShiftKeyDown Then
+                        Dim viewform As New UnitOperations.EditingForm_Flowsheet_Viewer
+                        With viewform
+                            .Text = FlowsheetSurface.SelectedObject.Tag
+                            .fsuo = myobj
+                            .ShowDialog()
+                            .Dispose()
+                        End With
+                        viewform = Nothing
+                    Else
+                        If myobj.Initialized Then
+                            Dim viewform As New UnitOperations.EditingForm_Flowsheet_Viewer
+                            With viewform
+                                .Text = FlowsheetSurface.SelectedObject.Tag
+                                .fsuo = myobj
+                                .Show(FlowsheetObject.dckPanel)
+                            End With
+                        Else
+                            Dim viewform As New UnitOperations.EditingForm_Flowsheet_Editor
+                            With viewform
+                                .Text = FlowsheetSurface.SelectedObject.Tag
+                                .fsuo = myobj
+                                .ShowDialog()
+                                .Dispose()
+                            End With
+                            viewform = Nothing
+                        End If
+                    End If
+                Case ObjectType.CapeOpenUO
+                    Dim myobj As CapeOpenUO = FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name)
+                    myobj.Edit()
+                Case ObjectType.CustomUO
+                    Dim myobj As CustomUO = FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name)
+                    If Not DWSIM.App.IsRunningOnMono Then
+                        Dim f As New EditingForm_CustomUO_ScriptEditor With {.ScriptUO = myobj}
+                        myobj.FlowSheet.DisplayForm(f)
+                    Else
+                        Dim f As New EditingForm_CustomUO_ScriptEditor_Mono With {.ScriptUO = myobj}
+                        myobj.FlowSheet.DisplayForm(f)
+                    End If
+            End Select
+
             If My.Settings.DoubleClickToEdit Then
                 If Not My.Settings.EnableMultipleObjectEditors Then
                     For Each obj In FlowsheetObject.SimulationObjects.Values
@@ -86,6 +144,7 @@ Public Class FlowsheetSurfaceControl
                     FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayDynamicsEditForm()
                 End If
                 EditorTooltips.Update(FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name), FlowsheetObject)
+                FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayExtraPropertiesEditForm()
             End If
         End If
 
@@ -131,14 +190,11 @@ Public Class FlowsheetSurfaceControl
                                 FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayDynamicsEditForm()
                             End If
                             EditorTooltips.Update(FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name), FlowsheetObject)
+                            FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayExtraPropertiesEditForm()
                         End If
                     End If
 
                     Focus()
-
-                Else
-
-                    'Me.FlowsheetDesignSurface.SelectedObject = Nothing
 
                 End If
 

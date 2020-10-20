@@ -46,7 +46,9 @@ Namespace UnitOperations
 
         Public Overridable Property Visible As Boolean = True
 
-        <System.NonSerialized()> <Xml.Serialization.XmlIgnore> Public LaunchExternalPropertyEditor() As Action(Of ISimulationObject)
+        <NonSerialized()> <Xml.Serialization.XmlIgnore> Public LaunchExternalPropertyEditor() As Action(Of ISimulationObject)
+
+        <NonSerialized()> <Xml.Serialization.XmlIgnore> Public ExtraPropertiesEditor As Form
 
         Public Property OverrideCalculationRoutine As Boolean = False
 
@@ -1000,6 +1002,44 @@ Namespace UnitOperations
         End Function
 
         Public Overridable Sub CreateDynamicProperties() Implements ISimulationObject.CreateDynamicProperties
+
+        End Sub
+
+        Public Sub DisplayExtraPropertiesEditForm() Implements ISimulationObject.DisplayExtraPropertiesEditForm
+
+            Dim col1 = DirectCast(ExtraProperties, IDictionary(Of String, Object))
+            Dim col2 = DirectCast(ExtraPropertiesDescriptions, IDictionary(Of String, Object))
+            Dim count As Integer = 0
+            For Each prop In col1
+                If Not col2.ContainsKey(prop.Key) Then
+                    count += 1
+                End If
+            Next
+
+            If count > 0 Then
+                If ExtraPropertiesEditor Is Nothing Then
+                    ExtraPropertiesEditor = New FormExtraProperties With {.SimObject = Me}
+                    Me.FlowSheet.DisplayForm(ExtraPropertiesEditor)
+                Else
+                    If ExtraPropertiesEditor.IsDisposed Then
+                        ExtraPropertiesEditor = New FormExtraProperties With {.SimObject = Me}
+                        ExtraPropertiesEditor.Tag = "ObjectEditor"
+                        Me.FlowSheet.DisplayForm(ExtraPropertiesEditor)
+                    Else
+                        ExtraPropertiesEditor.Activate()
+                    End If
+                End If
+            End If
+
+        End Sub
+
+        Public Sub UpdateExtraPropertiesEditForm() Implements ISimulationObject.UpdateExtraPropertiesEditForm
+
+            If ExtraPropertiesEditor IsNot Nothing Then
+                If Not ExtraPropertiesEditor.IsDisposed Then
+                    ExtraPropertiesEditor.UIThread(Sub() DirectCast(ExtraPropertiesEditor, FormExtraProperties).UpdateValues())
+                End If
+            End If
 
         End Sub
 

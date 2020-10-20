@@ -5366,4 +5366,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="DescPengRobinson78PP" xml:space="preserve">
     <value>Based on the Peng–Robinson EOS as published by Peng and Robinson in 1978.</value>
   </data>
+  <data name="AdditionalProperties" xml:space="preserve">
+    <value>Additional Properties</value>
+  </data>
 </root>

@@ -137,6 +137,12 @@
     <Compile Include="Editor\FormCustomCalcOrder.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Editor\FormExtraProperties.designer.vb">
+      <DependentUpon>FormExtraProperties.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editor\FormExtraProperties.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editor\InspectorReportBar.Designer.vb">
       <DependentUpon>InspectorReportBar.vb</DependentUpon>
     </Compile>
@@ -199,6 +205,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editor\FormCustomCalcOrder.resx">
       <DependentUpon>FormCustomCalcOrder.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor\FormExtraProperties.en.resx">
+      <DependentUpon>FormExtraProperties.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editor\FormExtraProperties.resx">
+      <DependentUpon>FormExtraProperties.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editor\InspectorReportBar.en.resx">
       <DependentUpon>InspectorReportBar.vb</DependentUpon>

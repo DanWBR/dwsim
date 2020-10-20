@@ -497,6 +497,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Propriedades Adicionais.
+        '''</summary>
+        Friend Shared ReadOnly Property AdditionalProperties() As String
+            Get
+                Return ResourceManager.GetString("AdditionalProperties", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Adicionar Sistema de Unidades da Simulação.
         '''</summary>
         Friend Shared ReadOnly Property AddUnitSystemFromSimulation() As String
