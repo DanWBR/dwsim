@@ -117,10 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="grid1.ColumnHeadersHeight" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
   <data name="colname.HeaderText" xml:space="preserve">
     <value>Property</value>
   </data>

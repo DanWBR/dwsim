@@ -117,6 +117,7 @@
     <Compile Include="Dynamics\PropertiesEditor.cs" />
     <Compile Include="FlowsheetAnalysis\Optimization.cs" />
     <Compile Include="FlowsheetAnalysis\SensitivityAnalysis.cs" />
+    <Compile Include="General\CustomProperties.cs" />
     <Compile Include="General\FloatingTables.cs" />
     <Compile Include="General\ObjectAppearance.cs" />
     <Compile Include="General\SimulationSetupWizard.cs" />

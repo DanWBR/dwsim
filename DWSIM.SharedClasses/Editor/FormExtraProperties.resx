@@ -140,16 +140,16 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>355, 450</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="colname.Width" type="System.Int32, mscorlib">
-    <value>71</value>
+  <data name="&gt;&gt;colname.Name" xml:space="preserve">
+    <value>colname</value>
   </data>
-  <data name="grid1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="grid1.Size" type="System.Drawing.Size, System.Drawing">
     <value>355, 450</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="grid1.ColumnHeadersHeight" type="System.Int32, mscorlib">
     <value>22</value>
   </data>
@@ -162,8 +162,8 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>96, 96</value>
   </data>
-  <data name="&gt;&gt;colname.Name" xml:space="preserve">
-    <value>colname</value>
+  <data name="grid1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
   <data name="colvalue.HeaderText" xml:space="preserve">
     <value>Valor</value>
@@ -177,8 +177,8 @@
   <data name="&gt;&gt;grid1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
+  <data name="colname.Width" type="System.Int32, mscorlib">
+    <value>71</value>
   </data>
   <data name="colname.HeaderText" xml:space="preserve">
     <value>Propriedade</value>

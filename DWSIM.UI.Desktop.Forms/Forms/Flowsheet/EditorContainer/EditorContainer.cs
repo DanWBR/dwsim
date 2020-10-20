@@ -21,7 +21,7 @@ namespace DWSIM.UI.Forms
 
         private bool loaded = false;
 
-        private DocumentPage PageResults, PageEditor, PageDynamics, PageConnections;
+        private DocumentPage PageResults, PageEditor, PageDynamics, PageConnections, PageCustomProperties;
 
         public ObjectEditorContainer(ISimulationObject sobj) : base()
         {
@@ -210,6 +210,26 @@ namespace DWSIM.UI.Forms
 
             PageEditor = tab2;
 
+            // custom properties
+
+            if (obj.ExtraProperties.Count() > 0 && (obj.ExtraProperties.Count() != obj.ExtraPropertiesDescriptions.Count()))
+            {
+                var tabcustom = new DocumentPage { Closable = false };
+                tabcustom.Text = "Custom";
+
+                var contd = UI.Shared.Common.GetDefaultContainer();
+
+                contd.Width = this.Width - 30;
+
+                new CustomPropertiesEditor(obj, contd);
+
+                tabcustom.Content = new Scrollable() { Content = contd, Width = this.Width - 30 };
+
+                PageDynamics = tabcustom;
+
+                Pages.Add(tabcustom);
+            }
+
             // dynamics
 
             if ((obj.SupportsDynamicMode && obj.HasPropertiesForDynamicMode) || obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream)
@@ -382,6 +402,28 @@ namespace DWSIM.UI.Forms
                 }
 
                 PageEditor.Content = new Scrollable() { Content = cont, Width = this.Width - 30 };
+
+            }
+
+            // custom
+
+            if (PageCustomProperties != null)
+            {
+
+                PageCustomProperties.Content = null;
+
+                if (obj.ExtraProperties.Count() > 0 && (obj.ExtraProperties.Count() != obj.ExtraPropertiesDescriptions.Count()))
+                {
+
+                    var contd = UI.Shared.Common.GetDefaultContainer();
+
+                    contd.Width = this.Width - 30;
+
+                    new CustomPropertiesEditor(obj, contd);
+
+                    PageCustomProperties.Content = new Scrollable() { Content = contd, Width = this.Width - 30 };
+
+                }
 
             }
 

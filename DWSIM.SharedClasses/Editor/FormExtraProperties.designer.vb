@@ -23,6 +23,7 @@ Partial Class FormExtraProperties
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormExtraProperties))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.grid1 = New System.Windows.Forms.DataGridView()
         Me.colname = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colvalue = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -43,6 +44,8 @@ Partial Class FormExtraProperties
         'colname
         '
         Me.colname.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        Me.colname.DefaultCellStyle = DataGridViewCellStyle1
         Me.colname.FillWeight = 50.0!
         resources.ApplyResources(Me.colname, "colname")
         Me.colname.Name = "colname"
@@ -51,8 +54,8 @@ Partial Class FormExtraProperties
         'colvalue
         '
         Me.colvalue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.colvalue.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.colvalue.DefaultCellStyle = DataGridViewCellStyle2
         resources.ApplyResources(Me.colvalue, "colvalue")
         Me.colvalue.Name = "colvalue"
         '
