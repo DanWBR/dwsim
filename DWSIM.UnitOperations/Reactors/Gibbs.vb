@@ -1084,7 +1084,7 @@ Namespace Reactors
 
                 Dim finalx As Double()
 
-                Dim nsolv As New MathOps.MathEx.Newton.NewtonSolver
+                Dim nsolv As New MathOps.MathEx.Optimization.NewtonSolver
                 nsolv.MaxIterations = MaximumInternalIterations
                 nsolv.Tolerance = InternalTolerance
 

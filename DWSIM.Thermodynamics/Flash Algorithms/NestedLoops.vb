@@ -377,7 +377,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     ex.Data.Add("UserAction", "Try another Property Package and/or Flash Algorithm.")
                     Throw ex
 
-                ElseIf Math.Abs(e3) < 1.0E-20 And ecount > 0 Then
+                ElseIf Math.Abs(e3) < 0.000001 And ecount > 0 Then
 
                     converged = 1
 
@@ -617,6 +617,13 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     End If
 
+                    If Double.IsNaN(fx) Then
+                        Dim ex As New Exception("PH Flash [NL]: Invalid result: Temperature did not converge." & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))
+                        ex.Data.Add("DetailedDescription", "The Flash Algorithm was unable to converge to a solution.")
+                        ex.Data.Add("UserAction", "Try another Property Package and/or Flash Algorithm.")
+                        Throw ex
+                    End If
+
                     If cnt > 20 Then fxvals.Add(fx)
 
                     If Abs(fx) <= tolEXT Then Exit Do
@@ -626,6 +633,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     If Abs(dx) > maxDT Then dx = maxDT * Sign(dx)
 
                     x0 = x1
+
 
                     If cnt > 30 And Math.Sign(fx) <> Math.Sign(fx_ant) Then
 
@@ -1114,6 +1122,13 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                         dfdx = (fx - fx2) / (x1 - x0)
 
+                    End If
+
+                    If Double.IsNaN(fx) Then
+                        Dim ex As New Exception("PS Flash [NL]: Invalid result: Temperature did not converge." & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))
+                        ex.Data.Add("DetailedDescription", "The Flash Algorithm was unable to converge to a solution.")
+                        ex.Data.Add("UserAction", "Try another Property Package and/or Flash Algorithm.")
+                        Throw ex
                     End If
 
                     If Abs(fx) < tolEXT Then Exit Do

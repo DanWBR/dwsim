@@ -648,4 +648,10 @@ Public Class EditingForm_CustomUO
         End With
     End Sub
 
+    Private Sub EditingForm_CustomUO_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+
+        Me.AutoScrollPosition = New System.Drawing.Point(0, 0)
+
+    End Sub
+
 End Class

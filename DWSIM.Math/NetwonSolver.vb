@@ -15,7 +15,7 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Namespace MathEx.Newton
+Namespace MathEx.Optimization
 
     Public Class NewtonSolver
 

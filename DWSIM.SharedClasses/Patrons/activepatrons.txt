@@ -22,14 +22,13 @@ Domenico Marchese
 Don Harrold
 Dorivaldo Junior
 Doug Palfreyman
-Dr. Richard Zweiler
 Emanuel Cardoso Santos
 F An
 Fernando Bórquez
 Filippo Borroni
 Gokhan Candan 
 Guenther Holzer
-Henar
+Henar González
 Henk Fikkert
 Hep Ingham
 Hugo Gonzalez
@@ -62,6 +61,8 @@ Ozmeister
 Parthib Rao
 Petroconsulting Llc
 Rajesh S Kempegowda
+Richard Zweiler
+Roland Berger
 Ryszard 
 Sowande Boksteen
 Steven Baltakatei Sandoval

@@ -653,7 +653,6 @@ Partial Class EditingForm_CustomUO
         'ToolStrip2
         '
         resources.ApplyResources(Me.ToolStrip2, "ToolStrip2")
-        Me.ToolStrip2.ImageScalingSize = New System.Drawing.Size(32, 32)
         Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnAddVar, Me.btnRemoveVar})
         Me.ToolStrip2.Name = "ToolStrip2"
         Me.ToolTipValues.SetToolTip(Me.ToolStrip2, resources.GetString("ToolStrip2.ToolTip"))
@@ -731,7 +730,6 @@ Partial Class EditingForm_CustomUO
         'ToolStrip1
         '
         resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
-        Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(32, 32)
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnAddInputStringVar, Me.btnRemoveInputStringVar})
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolTipValues.SetToolTip(Me.ToolStrip1, resources.GetString("ToolStrip1.ToolTip"))
@@ -1210,7 +1208,7 @@ Partial Class EditingForm_CustomUO
         'EditingForm_CustomUO
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox5)

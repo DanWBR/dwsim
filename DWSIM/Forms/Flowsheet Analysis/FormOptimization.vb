@@ -493,7 +493,7 @@ Public Class FormOptimization
 
         If objID <> "SpreadsheetCell" And objID <> "ReactionProperty" Then
             form.Collections.FlowsheetObjectCollection(objID).SetPropertyValue(objProp, t)
-            FlowsheetSolver.FlowsheetSolver.CalculateObject(form, objID)
+            FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, My.Settings.SolverMode)
         ElseIf objID = "ReactionProperty" Then
             Dim rx = form.Reactions.Values.Where(Function(x) x.Name = objProp.Split("|")(0)).FirstOrDefault
             rx.SetPropertyValue(objProp.Split("|")(1), t)
@@ -948,7 +948,7 @@ Public Class FormOptimization
         For i = 0 To Me.keysind.Count - 1
             If objID(i) <> "SpreadsheetCell" And objID(i) <> "ReactionProperty" Then
                 form.Collections.FlowsheetObjectCollection(objID(i)).SetPropertyValue(objProp(i), x(i))
-                exceptions = FlowsheetSolver.FlowsheetSolver.CalculateObject(form, objID(i))
+                exceptions = FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, My.Settings.SolverMode)
             ElseIf objID(i) = "ReactionProperty" Then
                 Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = objProp(i).Split("|")(0)).FirstOrDefault
                 rx.SetPropertyValue(objProp(i).Split("|")(1), x(i))
@@ -1064,7 +1064,7 @@ Public Class FormOptimization
                 If Me.selectedoptcase.numdevscheme = 2 Then
                     If objID(i) <> "SpreadsheetCell" And objID(i) <> "ReactionProperty" Then
                         form.Collections.FlowsheetObjectCollection(objID(i)).SetPropertyValue(objProp(i), x0)
-                        FlowsheetSolver.FlowsheetSolver.CalculateObject(form, objID(i))
+                        FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, My.Settings.SolverMode)
                     ElseIf objID(i) = "ReactionProperty" Then
                         Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = objProp(i).Split("|")(0)).FirstOrDefault
                         rx.SetPropertyValue(objProp(i).Split("|")(1), x0)
@@ -1106,7 +1106,7 @@ Public Class FormOptimization
                 If Me.selectedoptcase.numdevscheme = 4 Then
                     If objID(i) <> "SpreadsheetCell" And objID(i) <> "ReactionProperty" Then
                         form.Collections.FlowsheetObjectCollection(objID(i)).SetPropertyValue(objProp(i), x1)
-                        FlowsheetSolver.FlowsheetSolver.CalculateObject(form, objID(i))
+                        FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, My.Settings.SolverMode)
                     ElseIf objID(i) = "ReactionProperty" Then
                         Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = objProp(i).Split("|")(0)).FirstOrDefault
                         rx.SetPropertyValue(objProp(i).Split("|")(1), x1)
@@ -1711,7 +1711,24 @@ Public Class FormOptimization
         Return False
     End Function
 
-    Public Function eval_h(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal obj_factor As Double, ByVal m As Integer, ByVal lambda As Double(), _
+    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
+
+        Dim var As OPTVariable
+        For Each row As DataGridViewRow In Me.dgVariables.Rows
+            var = Me.selectedoptcase.variables(row.Cells(0).Value)
+            If var.objectID <> "SpreadsheetCell" And var.objectID <> "ReactionProperty" Then
+                row.Cells(8).Value = Format(SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(row.Cells(0).Value).unit, form.Collections.FlowsheetObjectCollection(var.objectID).GetPropertyValue(var.propID)), nf)
+            ElseIf var.objectID = "ReactionProperty" Then
+                Dim rx = form.Reactions.Values.Where(Function(x) x.Name = var.propID.Split("|")(0)).FirstOrDefault
+                row.Cells(8).Value = Format(rx.GetPropertyValue(var.propID.Split("|")(1)), nf)
+            Else
+                row.Cells(8).Value = form.FormSpreadsheet.GetCellValue(var.propID).Data
+            End If
+        Next
+
+    End Sub
+
+    Public Function eval_h(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal obj_factor As Double, ByVal m As Integer, ByVal lambda As Double(),
      ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer(), ByRef jCol As Integer(), ByRef values As Double()) As Boolean
         Return False
     End Function

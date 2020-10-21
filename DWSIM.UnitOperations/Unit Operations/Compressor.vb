@@ -296,19 +296,19 @@ Namespace UnitOperations
                 Case CalculationMode.EnergyStream, CalculationMode.Head, CalculationMode.PowerRequired
 
 Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
-                    Ti = msin.Phases(0).Properties.temperature
-                    Pi = msin.Phases(0).Properties.pressure
-                    rho_vi = msin.Phases(2).Properties.density
+                    Ti = msin.Phases(0).Properties.temperature.GetValueOrDefault
+                    Pi = msin.Phases(0).Properties.pressure.GetValueOrDefault
+                    rho_vi = msin.Phases(2).Properties.density.GetValueOrDefault
                     IObj?.SetCurrent()
                     cpig = Me.PropertyPackage.AUX_CPm(PhaseName.Vapor, Ti)
-                    cp = msin.Phases(0).Properties.heatCapacityCp
-                    cv = msin.Phases(0).Properties.heatCapacityCv
-                    mw = msin.Phases(0).Properties.molecularWeight
-                    qvi = msin.Phases(2).Properties.volumetric_flow
-                    Hi = msin.Phases(0).Properties.enthalpy
-                    Si = msin.Phases(0).Properties.entropy
-                    Wi = msin.Phases(0).Properties.massflow
-                    Qi = msin.Phases(0).Properties.molarflow
+                    cp = msin.Phases(0).Properties.heatCapacityCp.GetValueOrDefault
+                    cv = msin.Phases(0).Properties.heatCapacityCv.GetValueOrDefault
+                    mw = msin.Phases(0).Properties.molecularWeight.GetValueOrDefault
+                    qvi = msin.Phases(2).Properties.volumetric_flow.GetValueOrDefault
+                    Hi = msin.Phases(0).Properties.enthalpy.GetValueOrDefault
+                    Si = msin.Phases(0).Properties.entropy.GetValueOrDefault
+                    Wi = msin.Phases(0).Properties.massflow.GetValueOrDefault
+                    Qi = msin.Phases(0).Properties.molarflow.GetValueOrDefault
                     ei = Hi * Wi
                     ein = ei
 
@@ -546,15 +546,15 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                 Case CalculationMode.Delta_P, CalculationMode.OutletPressure
 
                     Me.PropertyPackage.CurrentMaterialStream = msin
-                    Ti = msin.Phases(0).Properties.temperature
-                    Pi = msin.Phases(0).Properties.pressure
-                    rho_vi = msin.Phases(2).Properties.density
-                    qvi = msin.Phases(2).Properties.volumetric_flow
-                    Hi = msin.Phases(0).Properties.enthalpy
-                    Si = msin.Phases(0).Properties.entropy
-                    Wi = msin.Phases(0).Properties.massflow
-                    Qi = msin.Phases(0).Properties.molarflow
-                    mw = msin.Phases(0).Properties.molecularWeight
+                    Ti = msin.Phases(0).Properties.temperature.GetValueOrDefault
+                    Pi = msin.Phases(0).Properties.pressure.GetValueOrDefault
+                    rho_vi = msin.Phases(2).Properties.density.GetValueOrDefault
+                    qvi = msin.Phases(2).Properties.volumetric_flow.GetValueOrDefault
+                    Hi = msin.Phases(0).Properties.enthalpy.GetValueOrDefault
+                    Si = msin.Phases(0).Properties.entropy.GetValueOrDefault
+                    Wi = msin.Phases(0).Properties.massflow.GetValueOrDefault
+                    Qi = msin.Phases(0).Properties.molarflow.GetValueOrDefault
+                    mw = msin.Phases(0).Properties.molecularWeight.GetValueOrDefault
                     ei = Hi * Wi
                     ein = ei
 
@@ -715,8 +715,8 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                             .Phases(0).Properties.enthalpy = H2
                             Dim comp As BaseClasses.Compound
                             For Each comp In .Phases(0).Compounds.Values
-                                comp.MoleFraction = msin.Phases(0).Compounds(comp.Name).MoleFraction
-                                comp.MassFraction = msin.Phases(0).Compounds(comp.Name).MassFraction
+                                comp.MoleFraction = msin.Phases(0).Compounds(comp.Name).MoleFraction.GetValueOrDefault
+                                comp.MassFraction = msin.Phases(0).Compounds(comp.Name).MassFraction.GetValueOrDefault
                             Next
                             .Phases(0).Properties.massflow = msin.Phases(0).Properties.massflow
                         End With
@@ -751,10 +751,10 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
 
                         If chead.xunit.Contains("@ P,T") Then
                             'actual flow
-                            qint = msin.Phases(0).Properties.volumetric_flow
+                            qint = msin.Phases(0).Properties.volumetric_flow.GetValueOrDefault
                         Else
                             ' molar flow
-                            qint = msin.Phases(0).Properties.molarflow
+                            qint = msin.Phases(0).Properties.molarflow.GetValueOrDefault
                         End If
 
                         Dim i As Integer

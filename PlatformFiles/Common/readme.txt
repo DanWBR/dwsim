@@ -65,6 +65,8 @@ The full changelog including souce code changes can be viewed at https://github.
 Version 6.2 Update 3
 
 - [NEW] Added an editor for custom properties (Classic UI)
+- [CHG] Updated Equilibrium Reactor Solver
+- [FIX] General bug fixes and enhancements
 
 Version 6.2 Update 2
 

@@ -211,13 +211,12 @@ Namespace Reactors
                 Next
             Next
 
-            Dim pen_val As Double = If(NoPenVal, 0.0, ReturnPenaltyValue())
             Dim kr As Double
 
             For i = 0 To Me.Reactions.Count - 1
                 With FlowSheet.Reactions(Me.Reactions(i))
                     kr = .EvaluateK(T, pp)
-                    f(i) = prod(i) - kr + pen_val
+                    f(i) = prod(i) - kr
                 End With
             Next
 
@@ -311,9 +310,9 @@ Namespace Reactors
                 delta1 = con_val(i) - con_lc(i)
                 delta2 = con_val(i) - con_uc(i)
                 If delta1 < 0 Then
-                    pen_val += -delta1 * 1000000.0# * (i + 1) ^ 2
+                    pen_val += delta1 ^ 2
                 ElseIf delta2 > 1 Then
-                    pen_val += -delta2 * 1000000.0# * (i + 1) ^ 2
+                    pen_val += delta2 ^ 2
                 Else
                     pen_val += 0.0#
                 End If
@@ -693,17 +692,17 @@ Namespace Reactors
 
             Me.InitialGibbsEnergy = g0
 
+            MinVal = Math.Min(lbound.Min, REx.Min) * 10
+            MaxVal = Math.Max(ubound.Max, REx.Max) * 10
+
             Dim CalcFinished As Boolean = False
 
             Dim TLast As Double = T0 'remember T for iteration loops
             Dim cnt As Integer = 0
 
-            Dim solver2 As New Simplex
-            solver2.MaxFunEvaluations = InternalLoopMaximumIterations
+            Dim solver2 As New Optimization.IPOPTSolver
+            solver2.MaxIterations = InternalLoopMaximumIterations
             solver2.Tolerance = InternalLoopTolerance
-
-            MinVal = lbound.Sum
-            MaxVal = ubound.Sum
 
             Do
 
@@ -739,18 +738,34 @@ Namespace Reactors
 
                     Dim xs As Double
 
-                    Dim variables As New List(Of OptBoundVariable)
+                    Dim variables As New List(Of Double)
+                    Dim lbounds As New List(Of Double)
+                    Dim ubounds As New List(Of Double)
                     For i = 0 To r
                         xs = Scaler.Scale(x(i), MinVal, MaxVal, 0, 100)
-                        variables.Add(New OptBoundVariable(xs, 0, 100))
+                        variables.Add(xs)
+                        lbounds.Add(0)
+                        ubounds.Add(100)
                     Next
 
-                    newx = solver2.ComputeMin(Function(x1)
-                                                  FlowSheet.CheckStatus()
-                                                  Return FunctionValue2N(x1).AbsSqrSumY
-                                              End Function, variables.ToArray)
+                    newx = solver2.Solve(Function(x1)
+                                             FlowSheet.CheckStatus()
+                                             Return FunctionValue2N(x1).AbsSqrSumY
+                                         End Function, Nothing,
+                                                       variables.ToArray, lbounds.ToArray, ubounds.ToArray)
 
                     FlowSheet.CheckStatus()
+
+                    If ReturnPenaltyValue() > 0.0 Then
+
+                        newx = solver2.Solve(Function(x1)
+                                                 FlowSheet.CheckStatus()
+                                                 FunctionValue2N(x1)
+                                                 Return ReturnPenaltyValue()
+                                             End Function, Nothing,
+                                                       variables.ToArray, lbounds.ToArray, ubounds.ToArray)
+
+                    End If
 
                     errval = FunctionValue2N(newx).AbsSqrSumY
 
@@ -772,7 +787,7 @@ Namespace Reactors
 
                 Dim penval = Math.Abs(ReturnPenaltyValue())
 
-                If penval > 0 Then
+                If penval > 0.1 Then
 
                     Throw New Exception("Invalid solution: mass balance residue > 0. Are all possible reactions defined?")
 

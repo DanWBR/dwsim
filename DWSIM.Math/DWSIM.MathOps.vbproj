@@ -71,6 +71,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Cureos.Numerics">
+      <HintPath>..\DWSIM\References\Cureos.Numerics.dll</HintPath>
+    </Reference>
     <Reference Include="Mapack">
       <HintPath>..\DWSIM\References\Mapack.dll</HintPath>
     </Reference>
@@ -105,6 +108,7 @@
     <Compile Include="General.vb" />
     <Compile Include="Interpolation.vb" />
     <Compile Include="Intersection.vb" />
+    <Compile Include="IPOPTSolver.vb" />
     <Compile Include="LBFGS.vb" />
     <Compile Include="LBFGSB.vb" />
     <Compile Include="LM.vb" />
