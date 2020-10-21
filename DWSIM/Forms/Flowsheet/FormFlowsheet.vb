@@ -2850,6 +2850,8 @@ Public Class FormFlowsheet
         Me.UIThread(Sub()
                         For Each obj In SimulationObjects.Values
                             obj.UpdateEditForm()
+                            obj.UpdateDynamicsEditForm()
+                            obj.UpdateExtraPropertiesEditForm()
                             EditorTooltips.Update(obj, Me)
                             obj.AttachedUtilities.ForEach(Sub(x) x.Populate())
                         Next
