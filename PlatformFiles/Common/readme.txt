@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 6.2 Update 3
+Version 6.2 Update 4
 Copyright (c) 2017-2020 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,13 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim6/commits/windows
+
+Version 6.2 Update 4
+
+- [NEW] Added an option to disable skipping of equilibrium calculation on some 
+		Material Streams (feature introduced in Update 2)
+- [CHG] Usage of IPOPT solver in Equilibrium Reactor is optional
+- [FIX] Minor bug fixes
 
 Version 6.2 Update 3
 

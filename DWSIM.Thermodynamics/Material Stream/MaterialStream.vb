@@ -4521,13 +4521,23 @@ Namespace Streams
                         res.Add(Math.Log(Me.Phases(f).Compounds(c).FugacityCoeff.GetValueOrDefault))
                     Next
                 Case "volume"
-                    If Not GlobalSettings.Settings.CAPEOPENMode Then
-                        res.Add(Me.Phases(f).Properties.molecularWeight / Me.Phases(f).Properties.density)
-                    Else
-                        res.Add(Me.Phases(f).Properties.molecularWeight / Me.Phases(f).Properties.density / 1000)
-                    End If
+                    Select Case basis
+                        Case "Molar", "molar", "mole", "Mole"
+                            If Not GlobalSettings.Settings.CAPEOPENMode Then
+                                res.Add(Me.Phases(f).Properties.molecularWeight / Me.Phases(f).Properties.density)
+                            Else
+                                res.Add(Me.Phases(f).Properties.molecularWeight / Me.Phases(f).Properties.density / 1000)
+                            End If
+                        Case "Mass", "mass"
+                            res.Add(1 / Me.Phases(f).Properties.density)
+                    End Select
                 Case "density"
-                    res.Add(Me.Phases(f).Properties.density.GetValueOrDefault)
+                    Select Case basis
+                        Case "Molar", "molar", "mole", "Mole"
+                            res.Add(Me.Phases(f).Properties.density.GetValueOrDefault / Me.PropertyPackage.AUX_MMM(phs) * 1000)
+                        Case "Mass", "mass"
+                            res.Add(Me.Phases(f).Properties.density.GetValueOrDefault)
+                    End Select
                 Case "enthalpy", "enthalpynf"
                     Select Case basis
                         Case "Molar", "molar", "mole", "Mole"

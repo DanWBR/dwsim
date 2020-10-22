@@ -1,3 +1,10 @@
+Version 6.2 Update 4
+
+- [NEW] Added an option to disable skipping of equilibrium calculation on some 
+		Material Streams (feature introduced in Update 2)
+- [CHG] Usage of IPOPT solver in Equilibrium Reactor is optional
+- [FIX] Minor bug fixes
+
 Version 6.2 Update 3
 
 - [NEW] Added an editor for custom properties (Classic UI)
