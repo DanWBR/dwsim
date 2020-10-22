@@ -362,7 +362,8 @@ Namespace Streams
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
             If FlowSheet IsNot Nothing Then
-                If AtEquilibrium And Not FlowSheet.DynamicMode Then
+                If AtEquilibrium And Not FlowSheet.DynamicMode And
+                    FlowSheet.FlowsheetOptions.SkipEquilibriumCalculationOnDefinedStreams Then
                     Calculate(False, True)
                 Else
                     Calculate(True, True)

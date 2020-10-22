@@ -1024,11 +1024,13 @@ Namespace UnitOperations
                 Loop Until Math.Abs(dv - dl) < 0.0001 Or x >= 0.5
                 vl1 = (ql) * tr / (1 / 60)
                 vl2 = (1 - y) * Math.PI * dl ^ 3 / 4 * l_d
+                Dim cnt As Integer = 0
                 If vl2 < vl1 Then
                     Do
                         vl2 = (1 - y) * Math.PI * dl ^ 3 / 4 * l_d
                         dl = dl * 1.001
-                    Loop Until Math.Abs(vl2 - vl1) < 0.001
+                        cnt += 1
+                    Loop Until Math.Abs(vl2 - vl1) < 0.001 Or cnt > 100
                 End If
 
                 Dim diam As Double

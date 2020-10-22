@@ -18,9 +18,6 @@
 
 
 Imports DWSIM.Thermodynamics.BaseClasses
-Imports Ciloci.Flee
-Imports System.Math
-Imports System.Linq
 Imports DWSIM.Interfaces.Enums
 Imports DWSIM.SharedClasses
 Imports DWSIM.Thermodynamics.Streams
@@ -29,7 +26,6 @@ Imports DWSIM.MathOps.MathEx
 Imports DWSIM.MathOps.MathEx.Common
 Imports DotNumerics.Optimization
 Imports DotNumerics.Scaling
-Imports DWSIM.MathOps.MathEx.AP
 
 Namespace Reactors
 
@@ -72,20 +68,20 @@ Namespace Reactors
         Public Property ComponentIDs As New List(Of String)
 
         Public Property UsePreviousReactionExtents As Boolean = False
-        Public Property ReactionExtentsInitializer As Double = 0.2
 
         Public Property InternalLoopTolerance As Double = 0.001
+
         Public Property ExternalLoopTolerance As Double = 0.5
 
         Public Property InternalLoopMaximumIterations As Integer = 10000
 
         Public Property ExternalLoopMaximumIterations As Integer = 50
 
-        Public Property DerivativePerturbation As Double = 0.0001
+        Public Property UseIPOPTSolver As Boolean = False
 
-        Public Property AlternateBoundsInitializer As Boolean = False
 
         Private NoPenVal As Boolean = False
+
 
         Private MinVal, MaxVal As Double
 
@@ -213,10 +209,12 @@ Namespace Reactors
 
             Dim kr As Double
 
+            Dim penval As Double = If(NoPenVal, 0, ReturnPenaltyValue())
+
             For i = 0 To Me.Reactions.Count - 1
                 With FlowSheet.Reactions(Me.Reactions(i))
                     kr = .EvaluateK(T, pp)
-                    f(i) = prod(i) - kr
+                    f(i) = prod(i) - kr + penval
                 End With
             Next
 
@@ -310,9 +308,9 @@ Namespace Reactors
                 delta1 = con_val(i) - con_lc(i)
                 delta2 = con_val(i) - con_uc(i)
                 If delta1 < 0 Then
-                    pen_val += delta1 ^ 2
+                    pen_val += delta1 * 1000000.0# * (i + 1) ^ 2
                 ElseIf delta2 > 1 Then
-                    pen_val += delta2 ^ 2
+                    pen_val += delta2 * 1000000.0# * (i + 1) ^ 2
                 Else
                     pen_val += 0.0#
                 End If
@@ -625,48 +623,23 @@ Namespace Reactors
 
             Dim lbound(Me.ReactionExtents.Count - 1) As Double
             Dim ubound(Me.ReactionExtents.Count - 1) As Double
-            Dim var1 As Double
 
-            If Not AlternateBoundsInitializer Then
-
-                i = 0
-                For Each rxid As String In Me.Reactions
-                    rx = FlowSheet.Reactions(rxid)
-                    j = 0
-                    For Each comp As ReactionStoichBase In rx.Components.Values
-                        var1 = -N0(comp.CompName) / comp.StoichCoeff
-                        If j = 0 Then
-                            lbound(i) = var1
-                            ubound(i) = var1
-                        Else
-                            If var1 < lbound(i) Then lbound(i) = var1
-                            If var1 > ubound(i) Then ubound(i) = var1
-                        End If
-                        j += 1
-                    Next
-                    i += 1
-                Next
-
-            Else
-
-                Dim nvars As New List(Of Double)
+            Dim nvars As New List(Of Double)
                 Dim pvars As New List(Of Double)
 
                 i = 0
-                For Each rxid As String In Me.Reactions
-                    nvars.Clear()
-                    pvars.Clear()
-                    rx = FlowSheet.Reactions(rxid)
-                    For Each comp As ReactionStoichBase In rx.Components.Values
-                        If comp.StoichCoeff < 0 Then pvars.Add(-N0(comp.CompName) / comp.StoichCoeff)
-                        If comp.StoichCoeff > 0 Then nvars.Add(-N0(comp.CompName) / comp.StoichCoeff)
-                    Next
-                    lbound(i) = nvars.Max
-                    ubound(i) = pvars.Min
-                    i += 1
+            For Each rxid As String In Me.Reactions
+                nvars.Clear()
+                pvars.Clear()
+                rx = FlowSheet.Reactions(rxid)
+                For Each comp As ReactionStoichBase In rx.Components.Values
+                    If comp.StoichCoeff < 0 Then pvars.Add(-N0(comp.CompName) / comp.StoichCoeff)
+                    If comp.StoichCoeff > 0 Then nvars.Add(-N0(comp.CompName) / comp.StoichCoeff)
                 Next
-
-            End If
+                lbound(i) = nvars.Max
+                ubound(i) = pvars.Min
+                i += 1
+            Next
 
             Dim m As Integer = 0
 
@@ -704,6 +677,10 @@ Namespace Reactors
             solver2.MaxIterations = InternalLoopMaximumIterations
             solver2.Tolerance = InternalLoopTolerance
 
+            Dim solver3 As New Simplex
+            solver3.MaxFunEvaluations = InternalLoopMaximumIterations
+            solver3.Tolerance = InternalLoopTolerance
+
             Do
 
                 Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
@@ -738,32 +715,36 @@ Namespace Reactors
 
                     Dim xs As Double
 
+                    Dim variables2 As New List(Of OptBoundVariable)
                     Dim variables As New List(Of Double)
                     Dim lbounds As New List(Of Double)
                     Dim ubounds As New List(Of Double)
                     For i = 0 To r
                         xs = Scaler.Scale(x(i), MinVal, MaxVal, 0, 100)
                         variables.Add(xs)
+                        variables2.Add(New OptBoundVariable(xs, 0, 100))
                         lbounds.Add(0)
                         ubounds.Add(100)
                     Next
 
-                    newx = solver2.Solve(Function(x1)
-                                             FlowSheet.CheckStatus()
-                                             Return FunctionValue2N(x1).AbsSqrSumY
-                                         End Function, Nothing,
-                                                       variables.ToArray, lbounds.ToArray, ubounds.ToArray)
-
-                    FlowSheet.CheckStatus()
-
-                    If ReturnPenaltyValue() > 0.0 Then
+                    If UseIPOPTSolver Then
 
                         newx = solver2.Solve(Function(x1)
                                                  FlowSheet.CheckStatus()
-                                                 FunctionValue2N(x1)
-                                                 Return ReturnPenaltyValue()
+                                                 Return FunctionValue2N(x1).AbsSqrSumY
                                              End Function, Nothing,
                                                        variables.ToArray, lbounds.ToArray, ubounds.ToArray)
+
+                        FlowSheet.CheckStatus()
+
+                    Else
+
+                        newx = solver3.ComputeMin(Function(x1)
+                                                      FlowSheet.CheckStatus()
+                                                      Return FunctionValue2N(x1).AbsSqrSumY
+                                                  End Function, variables2.ToArray)
+
+                        FlowSheet.CheckStatus()
 
                     End If
 

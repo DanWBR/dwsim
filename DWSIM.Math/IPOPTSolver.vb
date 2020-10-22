@@ -80,10 +80,15 @@ Namespace MathEx.Optimization
                 problem.SetIntermediateCallback(AddressOf intermediate)
                 status = problem.SolveProblem(vars, obj, Nothing, Nothing, Nothing, Nothing)
                 Select Case status
-                    Case IpoptReturnCode.Infeasible_Problem_Detected,
-                         IpoptReturnCode.Maximum_Iterations_Exceeded,
-                         IpoptReturnCode.User_Requested_Stop
-                        'get solution with lowest gibbs energy
+                    Case IpoptReturnCode.Solve_Succeeded,
+                            IpoptReturnCode.Solved_To_Acceptable_Level,
+                            IpoptReturnCode.Restoration_Failed,
+                            IpoptReturnCode.Feasible_Point_Found,
+                            IpoptReturnCode.Search_Direction_Becomes_Too_Small,
+                            IpoptReturnCode.Infeasible_Problem_Detected,
+                            IpoptReturnCode.Maximum_Iterations_Exceeded,
+                            IpoptReturnCode.User_Requested_Stop
+                        'get solution with lowest function value
                         Return Solutions(FunctionValues.IndexOf(FunctionValues.Min))
                     Case Else
                         Throw New Exception("IPOPT failed to converge.")

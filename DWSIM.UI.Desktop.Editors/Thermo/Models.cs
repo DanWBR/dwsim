@@ -76,6 +76,12 @@ namespace DWSIM.UI.Desktop.Editors
                 AddPropPackItem(pp);
             }
 
+            s.CreateAndAddCheckBoxRow(container, "Skip equilibrium calculations on well-defined Material Streams",
+                flowsheet.Options.SkipEquilibriumCalculationOnDefinedStreams,
+                (chk, e) => flowsheet.Options.SkipEquilibriumCalculationOnDefinedStreams = chk.Checked.GetValueOrDefault());
+
+            s.CreateAndAddDescriptionRow(container, "Prevents DWSIM from recalculating the equilibrium phase distribution in some well-defined material streams, i.e. separator vessel outlets, distillation column products, etc.");
+
             var flashalgos = flowsheet.AvailableFlashAlgorithms.Values.Where((x) => !x.InternalUseOnly).Select((x) => x.Name).ToList();
 
             flashalgos.Insert(0, "Select an item...");

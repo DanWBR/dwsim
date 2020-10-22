@@ -274,6 +274,8 @@ Public Class FormSimulSettings
 
         cbOrderCompoundsBy.SelectedIndex = FrmChild.Options.CompoundOrderingMode
 
+        chkSkipEqCalcs.Checked = FrmChild.Options.SkipEquilibriumCalculationOnDefinedStreams
+
         Me.loaded = True
 
     End Sub
@@ -1671,6 +1673,10 @@ Public Class FormSimulSettings
 
         ComboBox2.SelectedIndex = ComboBox2.Items.Count - 1
 
+    End Sub
+
+    Private Sub chkSkipEqCalcs_CheckedChanged(sender As Object, e As EventArgs) Handles chkSkipEqCalcs.CheckedChanged
+        FrmChild.Options.SkipEquilibriumCalculationOnDefinedStreams = chkSkipEqCalcs.Checked
     End Sub
 
     Private Sub FormSimulSettings_Shown(sender As Object, e As EventArgs) Handles Me.Shown

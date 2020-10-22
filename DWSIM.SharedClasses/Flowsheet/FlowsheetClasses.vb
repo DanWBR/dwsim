@@ -239,6 +239,8 @@ Namespace DWSIM.Flowsheet
 
         Public Property FlowsheetControlPanelMode As Boolean = False Implements IFlowsheetOptions.FlowsheetControlPanelMode
 
+        Public Property SkipEquilibriumCalculationOnDefinedStreams As Boolean = True Implements IFlowsheetOptions.SkipEquilibriumCalculationOnDefinedStreams
+
     End Class
 
 End Namespace

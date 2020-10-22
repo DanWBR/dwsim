@@ -86,6 +86,11 @@
     Property DefaultFloatingTableCompoundAmountBasis As Enums.CompositionBasis
 
     Property DisplayFloatingTableCompoundAmounts As Boolean
+
     Property FlowsheetMultiSelectMode As Boolean
+
     Property CompoundOrderingMode As CompoundOrdering
+
+    Property SkipEquilibriumCalculationOnDefinedStreams As Boolean
+
 End Interface

@@ -193,11 +193,77 @@
   <data name="Label9.Text" xml:space="preserve">
     <value>Property Package</value>
   </data>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>382, 287</value>
+  </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Calculation Parameters</value>
+  </data>
+  <data name="TabControlParameters.Size" type="System.Drawing.Size, System.Drawing">
+    <value>376, 268</value>
+  </data>
   <data name="TabPageParams.Size" type="System.Drawing.Size, System.Drawing">
     <value>368, 242</value>
   </data>
   <data name="TabPageParams.Text" xml:space="preserve">
     <value>Parameters</value>
+  </data>
+  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 13</value>
+  </data>
+  <data name="Label4.Text" xml:space="preserve">
+    <value>Reaction Set</value>
+  </data>
+  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 13</value>
+  </data>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Calculation Mode</value>
+  </data>
+  <data name="cbPDrop.Location" type="System.Drawing.Point, System.Drawing">
+    <value>260, 92</value>
+  </data>
+  <data name="cbPDrop.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 21</value>
+  </data>
+  <data name="cbCalcMode.Items" xml:space="preserve">
+    <value>Isothermic</value>
+  </data>
+  <data name="cbCalcMode.Items1" xml:space="preserve">
+    <value>Adiabatic</value>
+  </data>
+  <data name="cbCalcMode.Items2" xml:space="preserve">
+    <value>Define Outlet Temperature</value>
+  </data>
+  <data name="cbCalcMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>201, 21</value>
+  </data>
+  <data name="tbPDrop.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 20</value>
+  </data>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 13</value>
+  </data>
+  <data name="Label3.Text" xml:space="preserve">
+    <value>Outlet Temperature</value>
+  </data>
+  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 13</value>
+  </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Pressure Drop</value>
+  </data>
+  <data name="tbOutletTemperature.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 20</value>
+  </data>
+  <data name="cbReacSet.Size" type="System.Drawing.Size, System.Drawing">
+    <value>201, 21</value>
+  </data>
+  <data name="cbTemp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>260, 66</value>
+  </data>
+  <data name="cbTemp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 21</value>
   </data>
   <data name="TabPageCompounds.Size" type="System.Drawing.Size, System.Drawing">
     <value>368, 242</value>
@@ -205,11 +271,20 @@
   <data name="TabPageCompounds.Text" xml:space="preserve">
     <value>Compounds</value>
   </data>
+  <data name="ListViewCompounds.Size" type="System.Drawing.Size, System.Drawing">
+    <value>368, 242</value>
+  </data>
   <data name="TabPageElements.Size" type="System.Drawing.Size, System.Drawing">
     <value>368, 242</value>
   </data>
   <data name="TabPageElements.Text" xml:space="preserve">
     <value>Elements</value>
+  </data>
+  <data name="TabPageGibbsParams.Size" type="System.Drawing.Size, System.Drawing">
+    <value>368, 242</value>
+  </data>
+  <data name="TabPageGibbsParams.Text" xml:space="preserve">
+    <value>Convergence</value>
   </data>
   <data name="chkGibbsUsePreviousSolution.Location" type="System.Drawing.Point, System.Drawing">
     <value>17, 20</value>
@@ -274,86 +349,11 @@
   <data name="Label16.Text" xml:space="preserve">
     <value>Max. Internal Loop Iterations</value>
   </data>
-  <data name="TabPageGibbsParams.Size" type="System.Drawing.Size, System.Drawing">
-    <value>368, 242</value>
-  </data>
-  <data name="TabPageGibbsParams.Text" xml:space="preserve">
-    <value>Convergence</value>
-  </data>
   <data name="TabPageEqParams.Size" type="System.Drawing.Size, System.Drawing">
     <value>368, 242</value>
   </data>
   <data name="TabPageEqParams.Text" xml:space="preserve">
     <value>Convergence</value>
-  </data>
-  <data name="TabControlParameters.Size" type="System.Drawing.Size, System.Drawing">
-    <value>376, 268</value>
-  </data>
-  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>382, 287</value>
-  </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Calculation Parameters</value>
-  </data>
-  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 13</value>
-  </data>
-  <data name="Label4.Text" xml:space="preserve">
-    <value>Reaction Set</value>
-  </data>
-  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 13</value>
-  </data>
-  <data name="Label2.Text" xml:space="preserve">
-    <value>Calculation Mode</value>
-  </data>
-  <data name="cbPDrop.Location" type="System.Drawing.Point, System.Drawing">
-    <value>260, 92</value>
-  </data>
-  <data name="cbPDrop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 21</value>
-  </data>
-  <data name="cbCalcMode.Items" xml:space="preserve">
-    <value>Isothermic</value>
-  </data>
-  <data name="cbCalcMode.Items1" xml:space="preserve">
-    <value>Adiabatic</value>
-  </data>
-  <data name="cbCalcMode.Items2" xml:space="preserve">
-    <value>Define Outlet Temperature</value>
-  </data>
-  <data name="cbCalcMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 21</value>
-  </data>
-  <data name="tbPDrop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 20</value>
-  </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 13</value>
-  </data>
-  <data name="Label3.Text" xml:space="preserve">
-    <value>Outlet Temperature</value>
-  </data>
-  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 13</value>
-  </data>
-  <data name="Label5.Text" xml:space="preserve">
-    <value>Pressure Drop</value>
-  </data>
-  <data name="tbOutletTemperature.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 20</value>
-  </data>
-  <data name="cbReacSet.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 21</value>
-  </data>
-  <data name="cbTemp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>260, 66</value>
-  </data>
-  <data name="cbTemp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 21</value>
-  </data>
-  <data name="ListViewCompounds.Size" type="System.Drawing.Size, System.Drawing">
-    <value>368, 242</value>
   </data>
   <data name="tbExtLoopTolEq.Location" type="System.Drawing.Point, System.Drawing">
     <value>223, 124</value>
@@ -594,6 +594,20 @@
   </data>
   <data name="DataGridViewTextBoxColumn7.HeaderText" xml:space="preserve">
     <value>Conversion (%)</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="chkUseIPOPT.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="chkUseIPOPT.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkUseIPOPT.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 17</value>
+  </data>
+  <data name="chkUseIPOPT.Text" xml:space="preserve">
+    <value>Use IPOPT Solver</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>396, 881</value>
