@@ -54,4 +54,7 @@ xcopy "..\DistPackages\Windows\*" "..\DistPackages\Windows_Plus\*" /E /Y /F /D
 rmdir /s /q ..\DistPackages\Windows_Plus\x86
 rmdir /s /q ..\DistPackages\Windows_Plus\x64
 
+rmdir /s /q ..\DistPackages\Windows_32\x86
+rmdir /s /q ..\DistPackages\Windows_32\x64
+
 pause
