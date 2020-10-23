@@ -564,12 +564,14 @@ Namespace UnitOperations
             Else
                 SR = 1
             End If
+            Dim Vids As New List(Of String)
             i = 0
             For Each comp In MixedStream.Phases(0).Compounds.Values
                 VnL1(i) = MixedStream.Phases(3).Compounds(comp.Name).MolarFlow.GetValueOrDefault + SR * MixedStream.Phases(7).Compounds(comp.Name).MolarFlow.GetValueOrDefault
                 VmL1(i) = MixedStream.Phases(3).Compounds(comp.Name).MassFlow.GetValueOrDefault + SR * MixedStream.Phases(7).Compounds(comp.Name).MassFlow.GetValueOrDefault
                 VnL2(i) = MixedStream.Phases(4).Compounds(comp.Name).MolarFlow.GetValueOrDefault + (1 - SR) * MixedStream.Phases(7).Compounds(comp.Name).MolarFlow.GetValueOrDefault
                 VmL2(i) = MixedStream.Phases(4).Compounds(comp.Name).MassFlow.GetValueOrDefault + (1 - SR) * MixedStream.Phases(7).Compounds(comp.Name).MassFlow.GetValueOrDefault
+                Vids.Add(comp.Name)
                 i += 1
             Next
             Dim sum1, sum2, sum3, sum4 As Double
@@ -647,13 +649,15 @@ Namespace UnitOperations
                     Dim comp As BaseClasses.Compound
                     i = 0
                     For Each comp In .Phases(0).Compounds.Values
-                        comp.MoleFraction = VnL1(i)
-                        comp.MassFraction = VmL1(i)
+                        comp.MoleFraction = VnL1(Vids.IndexOf(comp.Name))
+                        comp.MassFraction = VmL1(Vids.IndexOf(comp.Name))
                         i += 1
                     Next
-                    .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Liquid1)
-                    .Phases(3).Properties.molarfraction = 1.0
-                    .AtEquilibrium = True
+                    If WS = 0.0 Then
+                        .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Liquid1)
+                        .Phases(3).Properties.molarfraction = 1.0
+                        .AtEquilibrium = True
+                    End If
                 End With
             End If
 
@@ -672,13 +676,15 @@ Namespace UnitOperations
                     Dim comp As BaseClasses.Compound
                     i = 0
                     For Each comp In .Phases(0).Compounds.Values
-                        comp.MoleFraction = VnL2(i)
-                        comp.MassFraction = VmL2(i)
+                        comp.MoleFraction = VnL2(Vids.IndexOf(comp.Name))
+                        comp.MassFraction = VmL2(Vids.IndexOf(comp.Name))
                         i += 1
                     Next
-                    .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Liquid1)
-                    .Phases(3).Properties.molarfraction = 1.0
-                    .AtEquilibrium = True
+                    If WS = 0.0 Then
+                        .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Liquid1)
+                        .Phases(3).Properties.molarfraction = 1.0
+                        .AtEquilibrium = True
+                    End If
                 End With
             Else
                 If MixedStream.Phases(4).Properties.massflow.GetValueOrDefault > 0.0# Then Throw New Exception(FlowSheet.GetTranslatedString("SeparatorVessel_SecondLiquidPhaseFound"))

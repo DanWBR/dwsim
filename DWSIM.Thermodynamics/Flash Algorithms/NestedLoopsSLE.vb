@@ -449,7 +449,9 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
                 MaxLiquPhase = Vz.DivideY(MaxX)
                 SF = 0
                 For i = 0 To n
-                    If MaxLiquPhase(i) > 0.0001 Then SF += MaxX(i)
+                    If MaxLiquPhase(i) > 0.0001 Then
+                        SF += MaxX(i)
+                    End If
                 Next
                 If SF < 1 Then
                     'only solid remaining
@@ -1086,7 +1088,7 @@ out:        Return New Object() {L, V, Vxl, Vxv, ecount, 0.0#, PP.RET_NullVector
             Dim nl = New NestedLoops
             nl.FlashSettings = FlashSettings
             nl.PTFlashFunction = AddressOf Flash_PT
-
+            nl.DisableParallelCalcs = True
             Return nl.Flash_PH(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
 
         End Function
@@ -1096,7 +1098,7 @@ out:        Return New Object() {L, V, Vxl, Vxv, ecount, 0.0#, PP.RET_NullVector
             Dim nl = New NestedLoops
             nl.FlashSettings = FlashSettings
             nl.PTFlashFunction = AddressOf Flash_PT
-
+            nl.DisableParallelCalcs = True
             Return nl.Flash_PS(Vz, P, S, Tref, PP, ReuseKI, PrevKi)
 
         End Function

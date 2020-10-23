@@ -190,7 +190,7 @@ out:        Return New Object() {xl1, V, Vx1, Vy, ecount, xl2, Vx2, 0.0#, PP.RET
             Dim nl = New NestedLoops
             nl.FlashSettings = FlashSettings
             nl.PTFlashFunction = AddressOf Flash_PT
-
+            nl.DisableParallelCalcs = True
             Return nl.Flash_PH(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
 
         End Function
@@ -200,7 +200,7 @@ out:        Return New Object() {xl1, V, Vx1, Vy, ecount, xl2, Vx2, 0.0#, PP.RET
             Dim nl = New NestedLoops
             nl.FlashSettings = FlashSettings
             nl.PTFlashFunction = AddressOf Flash_PT
-
+            nl.DisableParallelCalcs = True
             Return nl.Flash_PS(Vz, P, S, Tref, PP, ReuseKI, PrevKi)
 
         End Function
