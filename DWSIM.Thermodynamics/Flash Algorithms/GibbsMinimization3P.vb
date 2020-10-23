@@ -221,6 +221,16 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Gz0 = {Gzv, Gzl, Gzs}.Min * 1000
 
+            Dim mixphase As PhaseName
+
+            If Gz0 = Gzv * 1000 Then
+                mixphase = PhaseName.Vapor
+            ElseIf Gz0 = Gzl * 1000 Then
+                mixphase = PhaseName.Liquid
+            Else
+                mixphase = PhaseName.Solid
+            End If
+
             Dim result As Object = Nothing
 
             Vn = PP.RET_VNAMES()
@@ -649,8 +659,24 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                         Dim mbr As Double = MassBalanceResidual()
 
-                        If Gz - Gz0 > 1 Or mbr > 0.01 * n Then
+                        If mbr > 0.01 * n Then
                             Throw New Exception("PT Flash: Invalid solution.")
+                        End If
+
+                        If Gz > Gz0 Then
+                            'mixture is stable. no phase split.
+                            Select Case mixphase
+                                Case PhaseName.Vapor
+                                    V = F
+                                    L1 = 0
+                                    L2 = 0
+                                    Vy = Vz
+                                Case Else
+                                    L1 = F
+                                    L2 = 0
+                                    V = 0
+                                    Vx1 = Vz
+                            End Select
                         End If
 
                         If L2 < 0.01 Then
@@ -1321,7 +1347,7 @@ out:        Return result
                                      ByVal alpha_pr As Double, ByVal ls_trials As Integer) As Boolean
             objval0 = objval
             objval = obj_value
-            If Math.Abs(objval - objval0) <= etol Then
+            If alg_mod = IpoptAlgorithmMode.RegularMode And Math.Abs(objval - objval0) <= 0.0000000001 Then
                 Return False
             Else
                 Return True

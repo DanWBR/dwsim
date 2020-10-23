@@ -208,6 +208,16 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Gz0 = {Gzv, Gzl, Gzs}.Min * 1000
 
+            Dim mixphase As PhaseName
+
+            If Gz0 = Gzv * 1000 Then
+                mixphase = PhaseName.Vapor
+            ElseIf Gz0 = Gzl * 1000 Then
+                mixphase = PhaseName.Liquid
+            Else
+                mixphase = PhaseName.Solid
+            End If
+
             G0 = Gz0
 
             'Calculate Ki`s
@@ -415,7 +425,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     lconstr(j) = 0.0#
                     uconstr(j) = Vz(i) * F
                     glow(i) = 0.0#
-                    gup(i) = F
+                    gup(i) = Vz(i) * F
                     If initval(j) > uconstr(j) Then initval(j) = uconstr(j) * L1 / F
                     j += 1
                 Next
@@ -480,9 +490,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     End If
                     solver = Nothing
                 Case Else
-                    Using problem As New Ipopt(initval.Length, lconstr, uconstr, n + 1, glow, gup, (n + 1) * 3, 0,
+                    Using problem As New Ipopt(initval.Length, lconstr, uconstr, 0, Nothing, Nothing, 0, 0,
                             AddressOf eval_f, AddressOf eval_g,
-                            AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
+                           AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
+                        'Using problem As New Ipopt(initval.Length, lconstr, uconstr, n + 1, glow, gup, (n + 1) * 3, 0,
+                        '    AddressOf eval_f, AddressOf eval_g,
+                        '    AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
                         'problem.AddOption("print_level", 7)
                         problem.AddOption("tol", etol)
                         problem.AddOption("max_iter", maxit_e * 10)
@@ -492,7 +505,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         problem.AddOption("hessian_approximation", "limited-memory")
                         problem.SetIntermediateCallback(AddressOf intermediate)
                         'solve the problem 
-                        status = problem.SolveProblem(initval, obj, g, Nothing, Nothing, Nothing)
+                        status = problem.SolveProblem(initval, obj, Nothing, Nothing, Nothing, Nothing)
                         Select Case status
                             Case IpoptReturnCode.Infeasible_Problem_Detected,
                                  IpoptReturnCode.Maximum_Iterations_Exceeded,
@@ -519,8 +532,32 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim mbr As Double = MassBalanceResidual()
 
-            If Gz - Gz0 > 1 Or mbr > 0.01 * n Then
+            If mbr > 0.01 * n Then
                 Throw New Exception("PT Flash: Invalid solution.")
+            End If
+
+            If Gz > Gz0 Then
+                'mixture is stable. no phase split.
+                Select Case mixphase
+                    Case PhaseName.Vapor
+                        V = F
+                        L1 = 0
+                        L2 = 0
+                        Sx = 0
+                        Vy = Vz
+                    Case PhaseName.Liquid
+                        L1 = F
+                        L2 = 0
+                        V = 0
+                        Sx = 0
+                        Vx1 = Vz
+                    Case PhaseName.Solid
+                        Sx = 1
+                        V = 0
+                        L1 = 0
+                        L2 = 0
+                        Vs = Vz
+                End Select
             End If
 
             prevsol = initval
@@ -642,6 +679,7 @@ out:        Return result
             L1 = soma_x1
             L2 = soma_x2
             V = F - Sx - L1 - L2
+            If V < 0.0 Then V = -V
 
             For i = 0 To n
                 If L1 <> 0.0# Then Vx1(i) = x(i) / L1 Else Vx1(i) = 0.0#
@@ -721,6 +759,8 @@ out:        Return result
             IObj?.Paragraphs.Add(String.Format("Calculated Liquid Phase 2 composition: {0}", Vx2.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Calculated Solid Phase composition: {0}", Vs.ToMathArrayString))
 
+            pval = (F - L1 - L2 - Sx - V) ^ 2
+
             Gm = Gv + Gl1 + Gl2 + Gs + pval
 
             IObj?.Paragraphs.Add(String.Format("Calculated Gibbs Energy Value: {0}", Gm))
@@ -759,6 +799,7 @@ out:        Return result
             L1 = soma_x1
             L2 = soma_x2
             V = F - Sx - L1 - L2
+            If V < 0.0 Then V = -V
 
             For i = 0 To n
                 If L1 <> 0.0# Then Vx1(i) = x(i) / L1 Else Vx1(i) = 0.0#
@@ -857,7 +898,7 @@ out:        Return result
 
         Private Function FunctionHessian(ByVal x() As Double) As Double()
 
-            Dim epsilon As Double = 0.001
+            Dim epsilon As Double = 0.1
 
             Dim f2() As Double = Nothing
             Dim f3() As Double = Nothing
@@ -917,43 +958,40 @@ out:        Return result
         End Function
 
         Public Function eval_g(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal m As Integer, ByRef g As Double()) As Boolean
-            For i = 0 To m - 1
-                g(i) = fi(i) * F - x(i) - x(i + m) - x(i + 2 * m)
-            Next
+            'For i = 0 To m - 1
+            '    g(i) = -x(i) - x(i + m) - x(i + 2 * m) + fi(i) * F
+            'Next
             Return True
         End Function
 
         Public Function eval_jac_g(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal m As Integer, ByVal nele_jac As Integer, ByRef iRow As Integer(),
          ByRef jCol As Integer(), ByRef values As Double()) As Boolean
 
-            Dim k As Integer
+            'If values Is Nothing Then
 
-            If values Is Nothing Then
+            '    Dim row(nele_jac - 1), col(nele_jac - 1) As Integer
 
-                Dim row(nele_jac - 1), col(nele_jac - 1) As Integer
+            '    For i = 0 To m - 1
+            '        row(i) = i
+            '        row(i + m) = i
+            '        col(i) = i
+            '        col(i + m) = i + m
+            '    Next
 
-                k = 0
-                For i = 0 To m - 1
-                    row(i) = i
-                    row(i + m) = i
-                    col(i) = i
-                    col(i + m) = i + m
-                Next
+            '    iRow = row
+            '    jCol = col
 
-                iRow = row
-                jCol = col
+            'Else
 
-            Else
+            '    Dim res(nele_jac - 1) As Double
 
-                Dim res(nele_jac - 1) As Double
+            '    For i = 0 To nele_jac - 1
+            '        res(i) = -1
+            '    Next
 
-                For i = 0 To nele_jac - 1
-                    res(i) = -1
-                Next
+            '    values = res
 
-                values = res
-
-            End If
+            'End If
             Return True
         End Function
 
@@ -983,11 +1021,12 @@ out:        Return result
                                      ByVal alpha_pr As Double, ByVal ls_trials As Integer) As Boolean
             objval0 = objval
             objval = obj_value
-            If Math.Abs(objval - objval0) <= etol Then
+            If alg_mod = IpoptAlgorithmMode.RegularMode And Math.Abs(objval - objval0) <= 0.0000000001 Then
                 Return False
             Else
                 Return True
             End If
+            Return True
         End Function
 
         Public Overrides Function Flash_PH(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
