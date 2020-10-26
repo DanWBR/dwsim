@@ -26,6 +26,8 @@ Partial Class FlashAlgorithmConfig
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPageGeneral = New System.Windows.Forms.TabPage()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.cbFlashType = New System.Windows.Forms.ComboBox()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.tbPT_DampingFactor = New System.Windows.Forms.TextBox()
         Me.chkReplaceFlashPT = New System.Windows.Forms.CheckBox()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -82,23 +84,25 @@ Partial Class FlashAlgorithmConfig
         '
         'TabControl1
         '
+        resources.ApplyResources(Me.TabControl1, "TabControl1")
         Me.TabControl1.Controls.Add(Me.TabPageGeneral)
         Me.TabControl1.Controls.Add(Me.TabPageConvPars)
         Me.TabControl1.Controls.Add(Me.TabPageST)
-        resources.ApplyResources(Me.TabControl1, "TabControl1")
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         '
         'TabPageGeneral
         '
-        Me.TabPageGeneral.Controls.Add(Me.GroupBox4)
         resources.ApplyResources(Me.TabPageGeneral, "TabPageGeneral")
+        Me.TabPageGeneral.Controls.Add(Me.GroupBox4)
         Me.TabPageGeneral.Name = "TabPageGeneral"
         Me.TabPageGeneral.UseVisualStyleBackColor = True
         '
         'GroupBox4
         '
         resources.ApplyResources(Me.GroupBox4, "GroupBox4")
+        Me.GroupBox4.Controls.Add(Me.cbFlashType)
+        Me.GroupBox4.Controls.Add(Me.Label9)
         Me.GroupBox4.Controls.Add(Me.tbPT_DampingFactor)
         Me.GroupBox4.Controls.Add(Me.chkReplaceFlashPT)
         Me.GroupBox4.Controls.Add(Me.Label13)
@@ -119,6 +123,19 @@ Partial Class FlashAlgorithmConfig
         Me.GroupBox4.Controls.Add(Me.Label24)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.TabStop = False
+        '
+        'cbFlashType
+        '
+        resources.ApplyResources(Me.cbFlashType, "cbFlashType")
+        Me.cbFlashType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbFlashType.FormattingEnabled = True
+        Me.cbFlashType.Items.AddRange(New Object() {resources.GetString("cbFlashType.Items"), resources.GetString("cbFlashType.Items1"), resources.GetString("cbFlashType.Items2"), resources.GetString("cbFlashType.Items3"), resources.GetString("cbFlashType.Items4")})
+        Me.cbFlashType.Name = "cbFlashType"
+        '
+        'Label9
+        '
+        resources.ApplyResources(Me.Label9, "Label9")
+        Me.Label9.Name = "Label9"
         '
         'tbPT_DampingFactor
         '
@@ -213,8 +230,8 @@ Partial Class FlashAlgorithmConfig
         '
         'TabPageConvPars
         '
-        Me.TabPageConvPars.Controls.Add(Me.GroupBox1)
         resources.ApplyResources(Me.TabPageConvPars, "TabPageConvPars")
+        Me.TabPageConvPars.Controls.Add(Me.GroupBox1)
         Me.TabPageConvPars.Name = "TabPageConvPars"
         Me.TabPageConvPars.UseVisualStyleBackColor = True
         '
@@ -322,9 +339,9 @@ Partial Class FlashAlgorithmConfig
         '
         'TabPageST
         '
+        resources.ApplyResources(Me.TabPageST, "TabPageST")
         Me.TabPageST.Controls.Add(Me.GroupBox10)
         Me.TabPageST.Controls.Add(Me.GroupBox9)
-        resources.ApplyResources(Me.TabPageST, "TabPageST")
         Me.TabPageST.Name = "TabPageST"
         Me.TabPageST.UseVisualStyleBackColor = True
         '
@@ -437,4 +454,6 @@ Partial Class FlashAlgorithmConfig
     Friend WithEvents Label29 As Label
     Friend WithEvents tbPT_DampingFactor As TextBox
     Friend WithEvents Label30 As Label
+    Friend WithEvents cbFlashType As ComboBox
+    Friend WithEvents Label9 As Label
 End Class

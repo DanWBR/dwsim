@@ -55,6 +55,19 @@ Public Class FlashAlgorithmConfig
         NumericUpDown1.Value = Settings(Interfaces.Enums.FlashSetting.ST_Number_of_Random_Tries)
         chkForcePT3P.Checked = Settings(Interfaces.Enums.FlashSetting.CheckIncipientLiquidForStability)
 
+        Select Case Settings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType)
+            Case "Default"
+                cbFlashType.SelectedIndex = 0
+            Case "VLE"
+                cbFlashType.SelectedIndex = 1
+            Case "VLLE"
+                cbFlashType.SelectedIndex = 2
+            Case "SVLE"
+                cbFlashType.SelectedIndex = 3
+            Case "SVLLE"
+                cbFlashType.SelectedIndex = 4
+        End Select
+
         _loaded = True
 
     End Sub
@@ -93,6 +106,19 @@ Public Class FlashAlgorithmConfig
 
             Settings(Interfaces.Enums.FlashSetting.NL_FastMode) = chkFastModeNL.Checked
 
+            Select Case cbFlashType.SelectedIndex
+                Case 0
+                    Settings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType) = "Default"
+                Case 1
+                    Settings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType) = "VLE"
+                Case 2
+                    Settings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType) = "VLLE"
+                Case 3
+                    Settings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType) = "SVLE"
+                Case 4
+                    Settings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType) = "SVLLE"
+            End Select
+
         Catch ex As Exception
 
             MessageBox.Show("Error parsing input. Some settings may not have been updated.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -109,10 +135,6 @@ Public Class FlashAlgorithmConfig
 
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles chkForcePT3P.CheckedChanged
         Settings(Interfaces.Enums.FlashSetting.CheckIncipientLiquidForStability) = chkForcePT3P.Checked
-    End Sub
-
-    Private Sub Label28_Click(sender As Object, e As EventArgs) Handles Label28.Click
-
     End Sub
 
 End Class

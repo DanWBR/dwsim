@@ -17,6 +17,7 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Math
+Imports DWSIM.Interfaces.Enums
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
@@ -63,54 +64,89 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim result As Object = Nothing
 
-            Dim hres = PerformHeuristicsTest(Vz, T, P, PP)
-
-            If hres.LiquidPhaseSplit And hres.SolidPhase Then
-                'SVLLE
-                Try
-                    Dim nl As New NestedLoopsSVLLE With {.FlashSettings = FlashSettings}
-                    result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-                Catch ex As Exception
-                    errflag = True
-                End Try
-            ElseIf hres.LiquidPhaseSplit And Not hres.SolidPhase Then
-                'VLLE
-                Try
-                    Dim nl As New NestedLoops3PV3 With {.FlashSettings = FlashSettings}
-                    result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-                Catch ex As Exception
-                    errflag = True
-                End Try
-            ElseIf Not hres.LiquidPhaseSplit And hres.SolidPhase Then
-                'SVLE
-                Try
-                    Dim nl As New NestedLoopsSLE With {.FlashSettings = FlashSettings, .SolidSolution = False}
-                    result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-                Catch ex As Exception
-                    errflag = True
-                End Try
-            Else
-                'VLE
-                Try
-                    Dim nl As New NestedLoops With {.FlashSettings = FlashSettings}
-                    result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-                Catch ex As Exception
-                    errflag = True
-                End Try
-            End If
+            Select Case FlashSettings(FlashSetting.ForceEquilibriumCalculationType)
+                Case "VLE"
+                    'VLE
+                    Try
+                        Dim nl As New NestedLoops With {.FlashSettings = FlashSettings}
+                        result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                    Catch ex As Exception
+                        errflag = True
+                    End Try
+                Case "VLLE"
+                    'VLLE
+                    Try
+                        Dim nl As New NestedLoops3PV3 With {.FlashSettings = FlashSettings}
+                        result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                    Catch ex As Exception
+                        errflag = True
+                    End Try
+                Case "SVLE"
+                    'SVLE
+                    Try
+                        Dim nl As New NestedLoopsSLE With {.FlashSettings = FlashSettings, .SolidSolution = False}
+                        result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                    Catch ex As Exception
+                        errflag = True
+                    End Try
+                Case "SVLLE"
+                    'SVLLE
+                    Try
+                        Dim nl As New NestedLoopsSVLLE With {.FlashSettings = FlashSettings}
+                        result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                    Catch ex As Exception
+                        errflag = True
+                    End Try
+                Case Else
+                    Dim hres = PerformHeuristicsTest(Vz, T, P, PP)
+                    If hres.LiquidPhaseSplit And hres.SolidPhase Then
+                        'SVLLE
+                        Try
+                            Dim nl As New NestedLoopsSVLLE With {.FlashSettings = FlashSettings}
+                            result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                        Catch ex As Exception
+                            errflag = True
+                        End Try
+                    ElseIf hres.LiquidPhaseSplit And Not hres.SolidPhase Then
+                        'VLLE
+                        Try
+                            Dim nl As New NestedLoops3PV3 With {.FlashSettings = FlashSettings}
+                            result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                        Catch ex As Exception
+                            errflag = True
+                        End Try
+                    ElseIf Not hres.LiquidPhaseSplit And hres.SolidPhase Then
+                        'SVLE
+                        Try
+                            Dim nl As New NestedLoopsSLE With {.FlashSettings = FlashSettings, .SolidSolution = False}
+                            result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                        Catch ex As Exception
+                            errflag = True
+                        End Try
+                    Else
+                        'VLE
+                        Try
+                            Dim nl As New NestedLoops With {.FlashSettings = FlashSettings}
+                            result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                        Catch ex As Exception
+                            errflag = True
+                        End Try
+                    End If
+            End Select
 
             If errflag Then
                 errflag = False
                 Dim gmin As New GibbsMinimizationMulti With {.FlashSettings = FlashSettings}
                 Try
                     result = gmin.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-                    Return result
                 Catch ex As Exception
                     errflag = True
                 End Try
                 If errflag Then
                     Dim nl As New NestedLoops With {.FlashSettings = FlashSettings}
                     result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                    Return result
+                Else
                     Return result
                 End If
             Else
