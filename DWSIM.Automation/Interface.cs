@@ -21,6 +21,7 @@ namespace DWSIM.Automation
         void SaveFlowsheet(IFlowsheet flowsheet, string filepath, bool compressed);
         void SaveFlowsheet2(IFlowsheet flowsheet, string filepath);
         void CalculateFlowsheet(IFlowsheet flowsheet, ISimulationObject sender);
+        IFlowsheet CreateFlowsheet();
     }
 
     [Guid("37437090-e541-4f2c-9856-d1e27df32ecb"), ClassInterface(ClassInterfaceType.None)]
@@ -83,6 +84,11 @@ namespace DWSIM.Automation
         public void SaveFlowsheet2(IFlowsheet flowsheet, string filepath)
         {
             SaveFlowsheet(flowsheet, filepath, true);
+        }
+
+        public IFlowsheet CreateFlowsheet()
+        {
+            return new FormFlowsheet();
         }
     }
 
@@ -148,6 +154,14 @@ namespace DWSIM.Automation
         public void SaveFlowsheet2(IFlowsheet flowsheet, string filepath)
         {
             SaveFlowsheet(flowsheet, filepath, true);
+        }
+
+        public IFlowsheet CreateFlowsheet()
+        {
+            GlobalSettings.Settings.AutomationMode = true;
+            Console.WriteLine("Initializing the Flowsheet, please wait...");
+            fm = new UI.Forms.Flowsheet();
+            return fm.FlowsheetObject;
         }
     }
 

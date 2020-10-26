@@ -1076,6 +1076,44 @@ namespace DWSIM.UI.Shared
 
         }
 
+        public static TableRow CreateAndAddTextBoxAndFourButtonsRow(this DynamicLayout container, String label, 
+            String buttonlabel, String imageResID, 
+            String buttonlabel2, String imageResID2, 
+            String buttonlabel3, String imageResID3,
+            String buttonlabel4, String imageResID4,
+            Action<TextBox, EventArgs> command0, Action<Button, EventArgs> command, 
+            Action<Button, EventArgs> command2, Action<Button, EventArgs> command3, Action<Button, EventArgs> command4)
+        {
+
+            var txt = new TextBox { Width = (int)(sf * 300), Text = label };
+            txt.Font = new Font(SystemFont.Default, GetEditorFontSize());
+            var btn = new Button { Width = (int)(sf * 100), Text = buttonlabel };
+            var btn2 = new Button { Width = (int)(sf * 100), Text = buttonlabel2 };
+            var btn3 = new Button { Width = (int)(sf * 100), Text = buttonlabel3 };
+            var btn4 = new Button { Width = (int)(sf * 100), Text = buttonlabel4 };
+
+            if (imageResID != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID), (int)(sf * 22), (int)(sf * 22), ImageInterpolation.Default);
+            if (imageResID2 != null) btn2.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID2), (int)(sf * 22), (int)(sf * 22), ImageInterpolation.Default);
+            if (imageResID3 != null) btn3.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID3), (int)(sf * 22), (int)(sf * 22), ImageInterpolation.Default);
+            if (imageResID4 != null) btn4.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID4), (int)(sf * 22), (int)(sf * 22), ImageInterpolation.Default);
+
+            if (command0 != null) txt.TextChanged += (sender, e) => command0.Invoke((TextBox)sender, e);
+            if (command != null) btn.Click += (sender, e) => command.Invoke((Button)sender, e);
+            if (command2 != null) btn2.Click += (sender, e) => command2.Invoke((Button)sender, e);
+            if (command3 != null) btn3.Click += (sender, e) => command3.Invoke((Button)sender, e);
+            if (command4 != null) btn4.Click += (sender, e) => command4.Invoke((Button)sender, e);
+
+            var tr = new TableRow(txt, GetPlaceHolderLabel(), null, btn, GetPlaceHolderLabel(), btn2, GetPlaceHolderLabel(), btn3, GetPlaceHolderLabel(), btn4);
+            //if (Application.Instance.Platform.IsMac)
+            //{
+            //    txt.Height = (int)(sf * 28);
+            //}
+            container.AddRow(tr);
+            container.CreateAndAddEmptySpace();
+            return tr;
+
+        }
+
         public static TableRow CreateAndAddTextBoxAndThreeButtonsRow(this DynamicLayout container, String label, String buttonlabel, String imageResID, String buttonlabel2, String imageResID2, String buttonlabel3, String imageResID3, Action<TextBox, EventArgs> command0, Action<Button, EventArgs> command, Action<Button, EventArgs> command2, Action<Button, EventArgs> command3)
         {
 

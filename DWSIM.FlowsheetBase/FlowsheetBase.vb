@@ -47,8 +47,6 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
     Public Property AvailablePropertyPackages As New Dictionary(Of String, IPropertyPackage) Implements IFlowsheet.AvailablePropertyPackages
 
-    Public Property AvailableFlashAlgorithms As New Dictionary(Of String, IFlashAlgorithm) Implements IFlowsheet.AvailableFlashAlgorithms
-
     Public Property AvailableSystemsOfUnits As New List(Of IUnitsOfMeasure) Implements IFlowsheet.AvailableSystemsOfUnits
 
     Public Property ExternalUnitOperations As New Dictionary(Of String, IExternalUnitOperation)
@@ -1217,22 +1215,8 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             FlowsheetSurface.DrawFloatingTable = Options.DisplayFloatingPropertyTables
             FlowsheetSurface.DrawPropertyList = Options.DisplayCornerPropertyList
 
-            Options.FlashAlgorithms.Clear()
-
             If Not AvailableSystemsOfUnits.Contains(Options.SelectedUnitSystem1) Then
                 AvailableSystemsOfUnits.Add(Options.SelectedUnitSystem1)
-            End If
-
-            Dim el As XElement = (From xel As XElement In data Select xel Where xel.Name = "FlashAlgorithms").SingleOrDefault
-
-            If Not el Is Nothing Then
-                For Each xel As XElement In el.Elements
-                    Dim obj As PropertyPackages.Auxiliary.FlashAlgorithms.FlashAlgorithm = CType(New PropertyPackages.RaoultPropertyPackage().ReturnInstance(xel.Element("Type").Value), Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.FlashAlgorithm)
-                    obj.LoadData(xel.Elements.ToList)
-                    Options.FlashAlgorithms.Add(obj)
-                Next
-            Else
-                Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoops() With {.Tag = .Name})
             End If
 
         Catch ex As Exception
@@ -1967,12 +1951,6 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
         AddPropPacks()
         AddExternalUOs()
-        AddFlashAlgorithms()
-
-        Dim fa As New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoops()
-        fa.Tag = fa.Name & " (1)"
-
-        Options.FlashAlgorithms.Add(fa)
 
         Dim addedcomps As New List(Of String)
 
@@ -2357,32 +2335,6 @@ Label_00CC:
         Return ppList.ConvertAll(Of Interfaces.IPropertyPackage)(Function(t As Type) TryCast(Activator.CreateInstance(t), Interfaces.IPropertyPackage))
 
     End Function
-
-    Sub AddFlashAlgorithms()
-
-        Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
-        Dim availableTypes As New List(Of Type)()
-
-        availableTypes.AddRange(calculatorassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.IFlashAlgorithm") IsNot Nothing, True, False)))
-
-        For Each item In availableTypes.OrderBy(Function(x) x.Name)
-            If Not item.IsAbstract Then
-                Dim obj = DirectCast(Activator.CreateInstance(item), Interfaces.IFlashAlgorithm)
-                If Not obj.InternalUseOnly Then AvailableFlashAlgorithms.Add(obj.Name, obj)
-                If obj.Name.Contains("Gibbs") And Not obj.Name.Contains("SVLLE") Then
-                    Dim obj2 = obj.Clone
-                    DirectCast(obj2, Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.GibbsMinimization3P).ForceTwoPhaseOnly = True
-                    AvailableFlashAlgorithms.Add(obj2.Name, obj2)
-                End If
-                If TypeOf obj Is Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoopsSLE Then
-                    Dim obj2 = obj.Clone
-                    DirectCast(obj2, Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoopsSLE).SolidSolution = True
-                    AvailableFlashAlgorithms.Add(obj2.Name, obj2)
-                End If
-            End If
-        Next
-
-    End Sub
 
     Private Sub AddSystemsOfUnits()
 

@@ -190,7 +190,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base Classes\IActivityCoefficientBase.vb" />
+    <Compile Include="Interfaces\IActivityCoefficientBase.vb" />
     <Compile Include="Base Classes\ThermodynamicsBase.vb" />
     <Compile Include="Databases\Databases.vb" />
     <Compile Include="Editing Forms\Excel Interface\AboutForm.Designer.vb">
@@ -325,6 +325,7 @@
     <Compile Include="Flash Algorithms\GibbsMinimizationMulti.vb" />
     <Compile Include="Flash Algorithms\NestedLoopsSVLLE.vb" />
     <Compile Include="Flash Algorithms\SteamTables.vb" />
+    <Compile Include="Flash Algorithms\UniversalFlash.vb" />
     <Compile Include="Flash Algorithms\UserDefined.vb" />
     <Compile Include="Helper Classes\ConsoleRedirection.vb" />
     <Compile Include="Helper Classes\PhaseEnvelopeSettings.vb" />
@@ -351,7 +352,7 @@
     <Compile Include="Property Packages\PengRobinson78.vb" />
     <Compile Include="Property Packages\PropertyPackage.vb" />
     <Compile Include="Property Packages\Models\FluidProperties.vb" />
-    <Compile Include="Base Classes\FlashAlgorithmBase.vb" />
+    <Compile Include="Flash Algorithms\BaseFlashAlgorithm.vb" />
     <Compile Include="Flash Algorithms\BlackOil.vb" />
     <Compile Include="Flash Algorithms\BostonBrittInsideOut.vb" />
     <Compile Include="Flash Algorithms\BostonFournierInsideOut3P.vb" />

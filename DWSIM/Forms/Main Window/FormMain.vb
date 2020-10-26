@@ -1620,24 +1620,6 @@ Public Class FormMain
             excs.Add(New Exception("Error Loading Flowsheet Settings", ex))
         End Try
 
-        Try
-            form.Options.FlashAlgorithms.Clear()
-
-            Dim el As XElement = (From xel As XElement In data Select xel Where xel.Name = "FlashAlgorithms").SingleOrDefault
-
-            If Not el Is Nothing Then
-                For Each xel As XElement In el.Elements
-                    Dim obj As PropertyPackages.Auxiliary.FlashAlgorithms.FlashAlgorithm = CType(New PropertyPackages.RaoultPropertyPackage().ReturnInstance(xel.Element("Type").Value), Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.FlashAlgorithm)
-                    obj.LoadData(xel.Elements.ToList)
-                    form.Options.FlashAlgorithms.Add(obj)
-                Next
-            Else
-                form.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoops() With {.Tag = .Name})
-            End If
-        Catch ex As Exception
-            excs.Add(New Exception("Error Loading Flowsheet Settings", ex))
-        End Try
-
         If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(15)
 
         If simulationfilename <> "" Then Me.filename = simulationfilename Else Me.filename = path
@@ -2175,24 +2157,6 @@ Public Class FormMain
 
         Try
             form.Options.LoadData(data)
-        Catch ex As Exception
-            excs.Add(New Exception("Error Loading Flowsheet Settings", ex))
-        End Try
-
-        Try
-            form.Options.FlashAlgorithms.Clear()
-
-            Dim el As XElement = (From xel As XElement In data Select xel Where xel.Name = "FlashAlgorithms").SingleOrDefault
-
-            If Not el Is Nothing Then
-                For Each xel As XElement In el.Elements
-                    Dim obj As PropertyPackages.Auxiliary.FlashAlgorithms.FlashAlgorithm = CType(New PropertyPackages.RaoultPropertyPackage().ReturnInstance(xel.Element("Type").Value), Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.FlashAlgorithm)
-                    obj.LoadData(xel.Elements.ToList)
-                    form.Options.FlashAlgorithms.Add(obj)
-                Next
-            Else
-                form.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoops() With {.Tag = .Name})
-            End If
         Catch ex As Exception
             excs.Add(New Exception("Error Loading Flowsheet Settings", ex))
         End Try

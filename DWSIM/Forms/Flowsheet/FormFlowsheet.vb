@@ -139,11 +139,6 @@ Public Class FormFlowsheet
 
         Options.ReactionSets.Add("DefaultSet", New ReactionSet("DefaultSet", DWSIM.App.GetLocalString("Rxn_DefaultSetName"), DWSIM.App.GetLocalString("Rxn_DefaultSetDesc")))
 
-        Dim fa As New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoops()
-        fa.Tag = fa.Name & " (1)"
-
-        Options.FlashAlgorithms.Add(fa)
-
     End Sub
 
     Public Sub SetActive()
@@ -2513,15 +2508,6 @@ Public Class FormFlowsheet
         Return frm.NewItemList
 
     End Function
-
-    Public Property AvailableFlashAlgorithms As Dictionary(Of String, IFlashAlgorithm) Implements IFlowsheet.AvailableFlashAlgorithms
-        Get
-            Throw New NotImplementedException()
-        End Get
-        Set(value As Dictionary(Of String, IFlashAlgorithm))
-            Throw New NotImplementedException()
-        End Set
-    End Property
 
     Public Property AvailablePropertyPackages As Dictionary(Of String, IPropertyPackage) Implements IFlowsheet.AvailablePropertyPackages
         Get

@@ -111,14 +111,10 @@ Public Class FormSimulSettings
             ogc1.RowTemplate.Height = 23 * Settings.DpiScale
             DataGridViewPP.RowTemplate.Height = 23 * Settings.DpiScale
             dgvpp.RowTemplate.Height = 23 * Settings.DpiScale
-            dgvAddedFlashAlgos.RowTemplate.Height = 23 * Settings.DpiScale
-            dgvAvailableFlashAlgos.RowTemplate.Height = 23 * Settings.DpiScale
 
             ogc1.ColumnHeadersHeight *= Settings.DpiScale
             DataGridViewPP.ColumnHeadersHeight *= Settings.DpiScale
             dgvpp.ColumnHeadersHeight *= Settings.DpiScale
-            dgvAddedFlashAlgos.ColumnHeadersHeight *= Settings.DpiScale
-            dgvAvailableFlashAlgos.ColumnHeadersHeight *= Settings.DpiScale
 
             SetHeights = True
 
@@ -156,18 +152,6 @@ Public Class FormSimulSettings
                 End If
                 If addobj Then Me.DataGridViewPP.Rows.Add(New String() {pp2.ComponentName, pp2.ComponentName, pp2.ComponentDescription})
             Next
-
-            'flash algorithms
-            Me.dgvAvailableFlashAlgos.Rows.Clear()
-            For Each fa In FormMain.FlashAlgorithms.Values.OrderBy(Function(x) x.Order)
-                If Not FrmChild.MobileCompatibilityMode Then
-                    addobj = True
-                Else
-                    addobj = fa.MobileCompatible
-                End If
-                If addobj Then Me.dgvAvailableFlashAlgos.Rows.Add(New String() {fa.Name, fa.Description})
-            Next
-
 
             Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
             Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations")).FirstOrDefault
@@ -214,13 +198,6 @@ Public Class FormSimulSettings
                 Next
             End With
 
-            With Me.dgvAddedFlashAlgos.Rows
-                .Clear()
-                For Each fa In FrmChild.Options.FlashAlgorithms
-                    .Add(New Object() {fa.Tag, fa.Name})
-                Next
-            End With
-
             Me.ComboBox2.Items.Clear()
             Me.ComboBox2.Items.AddRange(FormMain.AvailableUnitSystems.Keys.ToArray)
 
@@ -240,8 +217,8 @@ Public Class FormSimulSettings
 
         End If
 
-        ComboBox1.SelectedItem = Me.FrmChild.Options.NumberFormat
-        ComboBox3.SelectedItem = Me.FrmChild.Options.FractionNumberFormat
+        ComboBox1.SelectedItem = Me.FrmChild?.Options.NumberFormat
+        ComboBox3.SelectedItem = Me.FrmChild?.Options.FractionNumberFormat
 
         If Me.FrmChild.Options.SelectedUnitSystem.Name <> "" Then
             ComboBox2.SelectedItem = Me.FrmChild.Options.SelectedUnitSystem.Name
@@ -1095,7 +1072,13 @@ Public Class FormSimulSettings
                         btnDeletePP.Enabled = True
                         If FrmChild.Options.PropertyPackages.ContainsKey(dgvpp.Rows(dgvpp.SelectedCells(0).RowIndex).Cells(0).Value) Then
                             btnConfigPPAdv.Enabled = True
-                            If FrmChild.Options.PropertyPackages(dgvpp.Rows(dgvpp.SelectedCells(0).RowIndex).Cells(0).Value).IsConfigurable Then btnConfigPP.Enabled = True Else btnConfigPP.Enabled = False
+                            If FrmChild.Options.PropertyPackages(dgvpp.Rows(dgvpp.SelectedCells(0).RowIndex).Cells(0).Value).IsConfigurable Then
+                                btnConfigPP.Enabled = True
+                                btnConfigFlash.Enabled = True
+                            Else
+                                btnConfigPP.Enabled = False
+                                btnConfigFlash.Enabled = False
+                            End If
                             btnCopyPP.Enabled = True
                         End If
                     End If
@@ -1106,7 +1089,13 @@ Public Class FormSimulSettings
                 btnDeletePP.Enabled = True
                 If FrmChild.Options.PropertyPackages.ContainsKey(dgvpp.SelectedRows(0).Cells(0).Value) Then
                     btnConfigPPAdv.Enabled = True
-                    If FrmChild.Options.PropertyPackages(dgvpp.SelectedRows(0).Cells(0).Value).IsConfigurable Then btnConfigPP.Enabled = True Else btnConfigPP.Enabled = False
+                    If FrmChild.Options.PropertyPackages(dgvpp.SelectedRows(0).Cells(0).Value).IsConfigurable Then
+                        btnConfigPP.Enabled = True
+                        btnConfigFlash.Enabled = True
+                    Else
+                        btnConfigPP.Enabled = False
+                        btnConfigFlash.Enabled = False
+                    End If
                     btnCopyPP.Enabled = True
                 End If
             End If
@@ -1321,129 +1310,6 @@ Public Class FormSimulSettings
             Me.Close()
         Else
             Me.Hide()
-        End If
-    End Sub
-
-
-    Private Sub btnAddFA_Click(sender As Object, e As EventArgs) Handles btnAddFA.Click
-
-        Dim fa As Auxiliary.FlashAlgorithms.FlashAlgorithm
-
-        fa = FormMain.FlashAlgorithms.Values.Where(Function(x) x.Name = dgvAvailableFlashAlgos.SelectedRows(0).Cells(0).Value).FirstOrDefault
-
-        fa.Tag = fa.Name & " (" & CStr(Me.dgvAddedFlashAlgos.Rows.Count + 1) & ")"
-
-        FrmChild.Options.FlashAlgorithms.Add(fa)
-        Me.dgvAddedFlashAlgos.Rows.Add(New Object() {fa.Tag, fa.Name})
-
-        FrmChild.UpdateOpenEditForms()
-
-    End Sub
-
-    Private Sub btnConfigFA_Click(sender As Object, e As EventArgs) Handles btnConfigFA.Click
-
-        Dim faid As String = ""
-        If DWSIM.App.IsRunningOnMono Then
-            faid = dgvAddedFlashAlgos.Rows(dgvAddedFlashAlgos.SelectedCells(0).RowIndex).Cells(0).Value
-        Else
-            faid = dgvAddedFlashAlgos.SelectedRows(0).Cells(0).Value
-        End If
-        Dim fa As Auxiliary.FlashAlgorithms.FlashAlgorithm = FrmChild.Options.FlashAlgorithms.Where(Function(x) x.Tag = faid).FirstOrDefault
-        Dim f As New Thermodynamics.FlashAlgorithmConfig() With {.Settings = fa.FlashSettings,
-                                                                .AvailableCompounds = Me.FrmChild.Options.SelectedComponents.Values.Select(Function(x) x.Name).ToList,
-                                                                 .FlashAlgo = fa}
-
-        If TypeOf fa Is Auxiliary.FlashAlgorithms.CAPEOPEN_Equilibrium_Server Then
-
-            Dim coflash = DirectCast(fa, Auxiliary.FlashAlgorithms.CAPEOPEN_Equilibrium_Server)
-
-            f._coes = coflash._coes
-            f._coppm = coflash._coppm
-            f._selppm = coflash._selppm
-            f._esname = coflash._esname
-            f._mappings = coflash._mappings
-            f._phasemappings = coflash._phasemappings
-
-            f.ShowDialog(Me)
-
-            coflash._coes = f._coes
-            coflash._coppm = f._coppm
-            coflash._selppm = f._selppm
-            coflash._esname = f._esname
-            coflash._mappings = f._mappings
-            coflash._phasemappings = f._phasemappings
-
-            fa.FlashSettings = f.Settings
-
-            f.Dispose()
-            f = Nothing
-
-        Else
-
-            f.ShowDialog(Me)
-            fa.FlashSettings = f.Settings
-            f.Dispose()
-            f = Nothing
-
-        End If
-
-
-    End Sub
-
-    Private Sub btnCopyFA_Click(sender As Object, e As EventArgs) Handles btnCopyFA.Click
-
-        Dim fa As Auxiliary.FlashAlgorithms.FlashAlgorithm
-
-        Try
-            Dim faid As String = ""
-            If DWSIM.App.IsRunningOnMono Then
-                faid = dgvAddedFlashAlgos.Rows(dgvAddedFlashAlgos.SelectedCells(0).RowIndex).Cells(0).Value
-            Else
-                faid = dgvAddedFlashAlgos.SelectedRows(0).Cells(0).Value
-            End If
-            fa = FrmChild.Options.FlashAlgorithms.Where(Function(x) x.Tag = faid).FirstOrDefault.Clone
-            fa.Tag = fa.Tag & "_Clone"
-
-            FrmChild.Options.FlashAlgorithms.Add(fa)
-            Me.dgvAddedFlashAlgos.Rows.Add(New Object() {fa.Tag, fa.Name})
-
-            FrmChild.UpdateOpenEditForms()
-
-        Catch ex As Exception
-
-        End Try
-
-    End Sub
-
-    Private Sub btnDeleteFA_Click(sender As Object, e As EventArgs) Handles btnDeleteFA.Click
-
-        If DWSIM.App.IsRunningOnMono Then
-            If dgvAddedFlashAlgos.SelectedCells.Count > 0 Then
-                Dim fa As Auxiliary.FlashAlgorithms.FlashAlgorithm = FrmChild.Options.FlashAlgorithms.Where(Function(x) x.Tag = dgvAddedFlashAlgos.Rows(dgvAddedFlashAlgos.SelectedCells(0).RowIndex).Cells(0).Value).FirstOrDefault
-                FrmChild.Options.FlashAlgorithms.Remove(fa)
-                dgvAddedFlashAlgos.Rows.RemoveAt(dgvAddedFlashAlgos.SelectedCells(0).RowIndex)
-            End If
-        Else
-            If Not dgvpp.SelectedRows.Count = 0 Then
-                Dim fa As Auxiliary.FlashAlgorithms.FlashAlgorithm = FrmChild.Options.FlashAlgorithms.Where(Function(x) x.Tag = dgvAddedFlashAlgos.SelectedRows(0).Cells(0).Value).FirstOrDefault
-                FrmChild.Options.FlashAlgorithms.Remove(fa)
-                dgvAddedFlashAlgos.Rows.Remove(dgvAddedFlashAlgos.SelectedRows(0))
-            End If
-        End If
-
-        FrmChild.UpdateOpenEditForms()
-
-    End Sub
-
-    Private Sub dgvAvailableFlashAlgos_DoubleClick(sender As Object, e As EventArgs) Handles dgvAvailableFlashAlgos.DoubleClick
-        If Me.DataGridViewPP.SelectedRows.Count = 1 Then
-            btnAddFA.PerformClick()
-        End If
-    End Sub
-
-    Private Sub dgvAddedFlashAlgos_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgvAddedFlashAlgos.CellValueChanged
-        If loaded Then
-            FrmChild.Options.FlashAlgorithms(e.RowIndex).Tag = dgvAddedFlashAlgos.Rows(e.RowIndex).Cells(0).Value
         End If
     End Sub
 
@@ -1677,6 +1543,17 @@ Public Class FormSimulSettings
 
     Private Sub chkSkipEqCalcs_CheckedChanged(sender As Object, e As EventArgs) Handles chkSkipEqCalcs.CheckedChanged
         FrmChild.Options.SkipEquilibriumCalculationOnDefinedStreams = chkSkipEqCalcs.Checked
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles btnConfigFlash.Click
+        Dim ppid As String = ""
+        If DWSIM.App.IsRunningOnMono Then
+            ppid = dgvpp.Rows(dgvpp.SelectedCells(0).RowIndex).Cells(0).Value
+        Else
+            ppid = dgvpp.SelectedRows(0).Cells(0).Value
+        End If
+        Dim pp As PropertyPackage = FrmChild.PropertyPackages(ppid)
+        pp.DisplayFlashConfigForm()
     End Sub
 
     Private Sub FormSimulSettings_Shown(sender As Object, e As EventArgs) Handles Me.Shown

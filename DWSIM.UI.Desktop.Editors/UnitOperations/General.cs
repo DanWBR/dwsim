@@ -102,22 +102,6 @@ namespace DWSIM.UI.Desktop.Editors
                 }, () => CallSolverIfNeeded());
             }
 
-            var flashalgos = SimObject.GetFlowsheet().FlowsheetOptions.FlashAlgorithms.Select(x => x.Tag).ToList();
-            flashalgos.Insert(0, "Default");
-
-            var cbFlashAlg = s.CreateAndAddDropDownRow(container, "Flash Algorithm", flashalgos, 0, null);
-
-            if (!string.IsNullOrEmpty(SimObject.PreferredFlashAlgorithmTag))
-                cbFlashAlg.SelectedIndex = Array.IndexOf(flashalgos.ToArray(), SimObject.PreferredFlashAlgorithmTag);
-            else
-                cbFlashAlg.SelectedIndex = 0;
-
-            cbFlashAlg.SelectedIndexChanged += (sender, e) =>
-            {
-                SimObject.PreferredFlashAlgorithmTag = cbFlashAlg.SelectedValue.ToString();
-                CallSolverIfNeeded();
-            };
-
             s.CreateAndAddLabelRow(container, "Object Properties");
 
             switch (SimObject.GraphicObject.ObjectType)

@@ -482,35 +482,10 @@ Namespace PropertyPackages
         ''' <value></value>
         ''' <returns>A FlashAlgorithm object to be used in flash calculations.</returns>
         ''' <remarks></remarks>
-        Public Overridable ReadOnly Property FlashBase() As Auxiliary.FlashAlgorithms.FlashAlgorithm
+        <XmlIgnore> Public Overridable ReadOnly Property FlashBase() As Auxiliary.FlashAlgorithms.FlashAlgorithm
 
             Get
-
-                If Me.CurrentMaterialStream IsNot Nothing AndAlso
-                    Me.CurrentMaterialStream.Flowsheet IsNot Nothing AndAlso
-                    DirectCast(Me.CurrentMaterialStream, ISimulationObject).PreferredFlashAlgorithmTag <> "" Then
-
-                    Dim fa = Flowsheet.FlowsheetOptions.FlashAlgorithms.Where(Function(x) x.Tag = DirectCast(Me.CurrentMaterialStream, ISimulationObject).PreferredFlashAlgorithmTag).FirstOrDefault
-                    If Not fa Is Nothing Then Return fa.Clone Else Return Flowsheet.FlowsheetOptions.FlashAlgorithms(0).Clone
-
-                Else
-
-                    If Not FlashAlgorithm Is Nothing Then
-                        Return FlashAlgorithm.Clone()
-                    Else
-                        If Not Flowsheet Is Nothing Then
-                            If Flowsheet.FlowsheetOptions.FlashAlgorithms.Count > 0 Then
-                                Return Flowsheet.FlowsheetOptions.FlashAlgorithms(0).Clone
-                            Else
-                                Return New NestedLoops()
-                            End If
-                        Else
-                            Return New NestedLoops()
-                        End If
-                    End If
-
-                End If
-
+                Return New UniversalFlash() With {.FlashSettings = FlashSettings}
             End Get
 
         End Property
@@ -11485,6 +11460,46 @@ Final3:
 
             End Select
 
+            Dim elf = (From xel As XElement In data Select xel Where xel.Name = "FlashSettings").SingleOrDefault
+
+            If Not elf Is Nothing Then
+
+                FlashSettings.Clear()
+
+                For Each xel3 In elf.Elements
+                    Try
+                        Dim esname = [Enum].Parse(Interfaces.Enums.Helpers.GetEnumType("DWSIM.Interfaces.Enums.FlashSetting"), xel3.@Name)
+                        FlashSettings.Add(esname, xel3.@Value)
+                    Catch ex As Exception
+                    End Try
+                Next
+
+                If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.PVFlash_FixedDampingFactor) Then
+                    FlashSettings.Add(Interfaces.Enums.FlashSetting.PVFlash_FixedDampingFactor, 1.0.ToString(Globalization.CultureInfo.InvariantCulture))
+                End If
+                If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.PVFlash_MaximumTemperatureChange) Then
+                    FlashSettings.Add(Interfaces.Enums.FlashSetting.PVFlash_MaximumTemperatureChange, 10.0.ToString(Globalization.CultureInfo.InvariantCulture))
+                End If
+                If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.PVFlash_TemperatureDerivativeEpsilon) Then
+                    FlashSettings.Add(Interfaces.Enums.FlashSetting.PVFlash_TemperatureDerivativeEpsilon, 0.1.ToString(Globalization.CultureInfo.InvariantCulture))
+                End If
+                If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.ST_Number_of_Random_Tries) Then
+                    FlashSettings.Add(Interfaces.Enums.FlashSetting.ST_Number_of_Random_Tries, 20)
+                End If
+                If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.CheckIncipientLiquidForStability) Then
+                    FlashSettings.Add(Interfaces.Enums.FlashSetting.CheckIncipientLiquidForStability, False)
+                End If
+                If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.PHFlash_MaximumTemperatureChange) Then
+                    FlashSettings.Add(Interfaces.Enums.FlashSetting.PHFlash_MaximumTemperatureChange, 30.0.ToString(Globalization.CultureInfo.InvariantCulture))
+                End If
+                If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.PTFlash_DampingFactor) Then
+                    FlashSettings.Add(Interfaces.Enums.FlashSetting.PTFlash_DampingFactor, 1.0.ToString(Globalization.CultureInfo.InvariantCulture))
+                End If
+                If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType) Then
+                    FlashSettings.Add(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType, "Default")
+                End If
+            End If
+
         End Function
 
         Public Overridable Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements Interfaces.ICustomXMLSerialization.SaveData
@@ -11789,6 +11804,12 @@ Final3:
 
             End With
 
+            elements.Add(New XElement("FlashSettings"))
+
+            For Each item In FlashSettings
+                elements(elements.Count - 1).Add(New XElement("Setting", New XAttribute("Name", item.Key), New XAttribute("Value", item.Value)))
+            Next
+
             Return elements
 
         End Function
@@ -11834,10 +11855,16 @@ Final3:
             Return Clone()
         End Function
 
-        Public Property FlashAlgorithm As Interfaces.IFlashAlgorithm Implements IPropertyPackage.FlashAlgorithm
+        <XmlIgnore> Public Property FlashAlgorithm As Interfaces.IFlashAlgorithm Implements IPropertyPackage.FlashAlgorithm
 
         Public Overridable Sub DisplayEditingForm() Implements IPropertyPackage.DisplayEditingForm
 
+        End Sub
+
+        Public Sub DisplayFlashConfigForm()
+            Dim fset As New FlashAlgorithmConfig
+            fset.Settings = FlashSettings
+            fset.Show()
         End Sub
 
         Public Sub DisplayAdvancedEditingForm() Implements IPropertyPackage.DisplayAdvancedEditingForm

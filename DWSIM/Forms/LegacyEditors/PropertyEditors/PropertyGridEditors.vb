@@ -32,10 +32,6 @@ Public Class PropertyGridEditors
                 .CustomEditor = New DWSIM.Editors.PropertyPackages.UIPPSelector
             End With
             If uo.PreferredFlashAlgorithmTag = "" Then uo.PreferredFlashAlgorithmTag = "Default"
-            .Item.Add("Flash Algorithm", uo, "PreferredFlashAlgorithmTag", False, "Property Package", "", True)
-            With .Item(.Item.Count - 1)
-                .CustomEditor = New DWSIM.Editors.PropertyPackages.UIFASelector
-            End With
 
             If Not uo.GraphicObject Is Nothing Then
                 .Item.Add(DWSIM.App.GetLocalString("Ativo"), uo.GraphicObject, "Active", False, DWSIM.App.GetLocalString("Miscelnea4"), "", True)

@@ -36,8 +36,6 @@ Partial Class EditingForm_Pipe
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.cbFlashAlg = New System.Windows.Forms.ComboBox()
-        Me.Label10 = New System.Windows.Forms.Label()
         Me.cbPropPack = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -50,7 +48,6 @@ Partial Class EditingForm_Pipe
         Me.cbPtol = New System.Windows.Forms.ComboBox()
         Me.tbPtol = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.btnConfigureFlashAlg = New System.Windows.Forms.Button()
         Me.chkIncludeJT = New System.Windows.Forms.CheckBox()
         Me.btnConfigurePP = New System.Windows.Forms.Button()
         Me.cbPDropModel = New System.Windows.Forms.ComboBox()
@@ -174,24 +171,6 @@ Partial Class EditingForm_Pipe
         Me.ToolTipChangeTag.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip2"))
         '
-        'cbFlashAlg
-        '
-        resources.ApplyResources(Me.cbFlashAlg, "cbFlashAlg")
-        Me.cbFlashAlg.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbFlashAlg.FormattingEnabled = True
-        Me.cbFlashAlg.Name = "cbFlashAlg"
-        Me.ToolTip1.SetToolTip(Me.cbFlashAlg, resources.GetString("cbFlashAlg.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.cbFlashAlg, resources.GetString("cbFlashAlg.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.cbFlashAlg, resources.GetString("cbFlashAlg.ToolTip2"))
-        '
-        'Label10
-        '
-        resources.ApplyResources(Me.Label10, "Label10")
-        Me.Label10.Name = "Label10"
-        Me.ToolTip1.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip2"))
-        '
         'cbPropPack
         '
         resources.ApplyResources(Me.cbPropPack, "cbPropPack")
@@ -242,13 +221,10 @@ Partial Class EditingForm_Pipe
         Me.TabPage4.Controls.Add(Me.cbPtol)
         Me.TabPage4.Controls.Add(Me.tbPtol)
         Me.TabPage4.Controls.Add(Me.Button1)
-        Me.TabPage4.Controls.Add(Me.btnConfigureFlashAlg)
         Me.TabPage4.Controls.Add(Me.chkIncludeJT)
         Me.TabPage4.Controls.Add(Me.btnConfigurePP)
         Me.TabPage4.Controls.Add(Me.cbPDropModel)
-        Me.TabPage4.Controls.Add(Me.cbFlashAlg)
         Me.TabPage4.Controls.Add(Me.Label2)
-        Me.TabPage4.Controls.Add(Me.Label10)
         Me.TabPage4.Controls.Add(Me.cbCalcMode)
         Me.TabPage4.Controls.Add(Me.cbPropPack)
         Me.TabPage4.Controls.Add(Me.Label9)
@@ -328,16 +304,6 @@ Partial Class EditingForm_Pipe
         Me.ToolTipChangeTag.SetToolTip(Me.Button1, resources.GetString("Button1.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.Button1, resources.GetString("Button1.ToolTip2"))
         Me.Button1.UseVisualStyleBackColor = True
-        '
-        'btnConfigureFlashAlg
-        '
-        resources.ApplyResources(Me.btnConfigureFlashAlg, "btnConfigureFlashAlg")
-        Me.btnConfigureFlashAlg.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
-        Me.btnConfigureFlashAlg.Name = "btnConfigureFlashAlg"
-        Me.ToolTip1.SetToolTip(Me.btnConfigureFlashAlg, resources.GetString("btnConfigureFlashAlg.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.btnConfigureFlashAlg, resources.GetString("btnConfigureFlashAlg.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.btnConfigureFlashAlg, resources.GetString("btnConfigureFlashAlg.ToolTip2"))
-        Me.btnConfigureFlashAlg.UseVisualStyleBackColor = True
         '
         'chkIncludeJT
         '
@@ -734,12 +700,9 @@ Partial Class EditingForm_Pipe
     Public WithEvents Label13 As System.Windows.Forms.Label
     Public WithEvents Label12 As System.Windows.Forms.Label
     Public WithEvents Label11 As System.Windows.Forms.Label
-    Public WithEvents cbFlashAlg As System.Windows.Forms.ComboBox
-    Public WithEvents Label10 As System.Windows.Forms.Label
     Public WithEvents cbPropPack As System.Windows.Forms.ComboBox
     Public WithEvents Label9 As System.Windows.Forms.Label
     Public WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Public WithEvents btnConfigureFlashAlg As System.Windows.Forms.Button
     Public WithEvents btnConfigurePP As System.Windows.Forms.Button
     Public WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Public WithEvents btnDisconnectEnergy As System.Windows.Forms.Button

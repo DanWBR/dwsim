@@ -232,15 +232,6 @@ Public Class MaterialStreamEditor
             Catch ex As Exception
             End Try
 
-            Try
-                Dim flashalgos As String() = .FlowSheet.FlowsheetOptions.FlashAlgorithms.Select(Function(x) x.Tag).ToArray
-                cbFlashAlg.Items.Clear()
-                cbFlashAlg.Items.Add("Default")
-                cbFlashAlg.Items.AddRange(flashalgos)
-                If .PreferredFlashAlgorithmTag <> "" Then cbFlashAlg.SelectedItem = .PreferredFlashAlgorithmTag Else cbFlashAlg.SelectedIndex = 0
-            Catch ex As Exception
-            End Try
-
             'compound amounts floating table
 
             cbFloatingTableCompoundAmountBasis.SelectedIndex = MatStream.FloatingTableAmountBasis
@@ -1200,13 +1191,6 @@ Public Class MaterialStreamEditor
         End If
     End Sub
 
-    Private Sub cbFlashAlg_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbFlashAlg.SelectedIndexChanged
-        If Loaded Then
-            MatStream.PreferredFlashAlgorithmTag = cbFlashAlg.SelectedItem
-            RequestCalc()
-        End If
-    End Sub
-
     Sub RequestCalc()
 
         SaveViewState()
@@ -1467,12 +1451,6 @@ Public Class MaterialStreamEditor
 
     Private Sub btnConfigurePP_Click(sender As Object, e As EventArgs) Handles btnConfigurePP.Click
         MatStream.FlowSheet.PropertyPackages.Values.Where(Function(x) x.Tag = cbPropPack.SelectedItem.ToString).FirstOrDefault.DisplayEditingForm()
-    End Sub
-
-    Private Sub btnConfigureFlashAlg_Click(sender As Object, e As EventArgs) Handles btnConfigureFlashAlg.Click
-
-        Thermodynamics.Calculator.ConfigureFlashInstance(MatStream, cbFlashAlg.SelectedItem.ToString)
-
     End Sub
 
     Private Sub rtbAnnotations_RtfChanged(sender As Object, e As EventArgs) Handles rtbAnnotations.RtfChanged

@@ -1,12 +1,4 @@
-Version 6.2 Update 4
+Version 6.3
 
-- [NEW] Added an option to disable skipping of equilibrium calculation on some 
-		Material Streams (feature introduced in Update 2)
-- [CHG] Usage of IPOPT solver in Equilibrium Reactor is optional
-- [FIX] Minor bug fixes
-
-Version 6.2 Update 3
-
-- [NEW] Added an editor for custom properties (Classic UI)
-- [CHG] Updated Equilibrium Reactor Solver
-- [FIX] General bug fixes and enhancements
+- [NEW] New Thermodynamics subsystem with Univeral Flash Algorithm used by default
+- [FIX] Bug fixes and enhancements

@@ -228,6 +228,7 @@ Namespace Enums
         CoolProp_IncompressibleMixtures = 19
         UserDefined = 20
         Gibbs_Minimization_Multiphase = 21
+        Universal = 22
     End Enum
 
     Public Enum FlashSetting
@@ -271,6 +272,8 @@ Namespace Enums
         PHFlash_MaximumTemperatureChange = 23
 
         PTFlash_DampingFactor = 24
+
+        ForceEquilibriumCalculationType = 25
 
     End Enum
 

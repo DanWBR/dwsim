@@ -124,12 +124,6 @@
     <value>Start Bulk C7+ Petroleum Characterization Utility</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>896, 88</value>
-  </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Misc</value>
-  </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>242, 13</value>
   </data>
@@ -142,20 +136,26 @@
   <data name="Label5.Text" xml:space="preserve">
     <value>Apply the following formatting to numerical values:</value>
   </data>
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>807, 88</value>
+  </data>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Misc</value>
+  </data>
   <data name="TBdesc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>803, 125</value>
+    <value>726, 165</value>
   </data>
   <data name="TBdesc.Text" xml:space="preserve">
     <value>description</value>
   </data>
   <data name="TBaut.Size" type="System.Drawing.Size, System.Drawing">
-    <value>806, 20</value>
+    <value>726, 20</value>
   </data>
   <data name="TBaut.Text" xml:space="preserve">
     <value>author</value>
   </data>
   <data name="TBtit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>806, 20</value>
+    <value>726, 20</value>
   </data>
   <data name="TBtit.Text" xml:space="preserve">
     <value>title</value>
@@ -178,21 +178,6 @@
   <data name="Label27.Text" xml:space="preserve">
     <value>Title:</value>
   </data>
-  <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>881, 520</value>
-  </data>
-  <data name="GroupBox5.Text" xml:space="preserve">
-    <value>Units</value>
-  </data>
-  <data name="GroupBox18.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 463</value>
-  </data>
-  <data name="GroupBox18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>869, 47</value>
-  </data>
-  <data name="GroupBox18.Text" xml:space="preserve">
-    <value>Tasks</value>
-  </data>
   <data name="btnCloneSI.Text" xml:space="preserve">
     <value>Clone Selected</value>
   </data>
@@ -208,8 +193,14 @@
   <data name="KryptonButton15.Text" xml:space="preserve">
     <value>Create New...</value>
   </data>
-  <data name="DataGridView1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>869, 411</value>
+  <data name="GroupBox18.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 367</value>
+  </data>
+  <data name="GroupBox18.Size" type="System.Drawing.Size, System.Drawing">
+    <value>793, 47</value>
+  </data>
+  <data name="GroupBox18.Text" xml:space="preserve">
+    <value>Tasks</value>
   </data>
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Property</value>
@@ -223,18 +214,27 @@
   <data name="Column4.HeaderText" xml:space="preserve">
     <value>Unit</value>
   </data>
+  <data name="DataGridView1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>793, 315</value>
+  </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 13</value>
   </data>
   <data name="Label7.Text" xml:space="preserve">
     <value>System of Units</value>
   </data>
+  <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>805, 424</value>
+  </data>
+  <data name="GroupBox5.Text" xml:space="preserve">
+    <value>Units</value>
+  </data>
   <data name="ImageList1.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABo
-        MQAAAk1TRnQBSQFMAgEBCgEAATQBDAE0AQwBEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        MQAAAk1TRnQBSQFMAgEBCgEAAVQBDAFUAQwBEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABMAMAAQEBAAEgBgABMDEAAQEDOwFkAWUCUgH0AbICgQH/Aa8CgQH/AWICSAH2AUICQQFzIAADLQFG
         AVkCVgG+AVsCWQHEATECMAFNAWACWQHrAQABgQEAAf8DAwEEpAADKAE9AWQCXAHnAbICgQH/AcsBqwGJ
         Af8B0QG0AZUB/wG7AY4BgQH/AbUBhwGBAf8BqwKBAf8BYAJZAesDLQFGEAADHgErAVECTwGlA38B/gGP
@@ -448,16 +448,10 @@
 </value>
   </data>
   <data name="Button3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>461, 52</value>
+    <value>383, 50</value>
   </data>
   <data name="Button3.Text" xml:space="preserve">
     <value>Open Assay Manager</value>
-  </data>
-  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>887, 436</value>
-  </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Components / Compounds</value>
   </data>
   <data name="cbOrderCompoundsBy.Items" xml:space="preserve">
     <value>Default (As Added)</value>
@@ -493,13 +487,13 @@
     <value>Tag (Descending)</value>
   </data>
   <data name="cbOrderCompoundsBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>634, 405</value>
+    <value>634, 310</value>
   </data>
   <data name="cbOrderCompoundsBy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>247, 21</value>
+    <value>169, 21</value>
   </data>
   <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>521, 409</value>
+    <value>521, 314</value>
   </data>
   <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
     <value>107, 13</value>
@@ -508,7 +502,7 @@
     <value>Order Compounds By</value>
   </data>
   <data name="btnInfoLeft.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 402</value>
+    <value>6, 307</value>
   </data>
   <data name="btnInfoLeft.Size" type="System.Drawing.Size, System.Drawing">
     <value>158, 26</value>
@@ -523,7 +517,7 @@
     <value>Click to view information about the compound selected on the left-hand list.</value>
   </data>
   <data name="Button13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>170, 402</value>
+    <value>170, 307</value>
   </data>
   <data name="Button13.Size" type="System.Drawing.Size, System.Drawing">
     <value>183, 26</value>
@@ -532,13 +526,13 @@
     <value>Import from Online Sources</value>
   </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>359, 402</value>
+    <value>359, 307</value>
   </data>
   <data name="Button1.Text" xml:space="preserve">
     <value>Import from JSON File</value>
   </data>
   <data name="TextBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>822, 20</value>
+    <value>744, 20</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 13</value>
@@ -571,7 +565,13 @@
     <value>6, 42</value>
   </data>
   <data name="ogc1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>875, 354</value>
+    <value>797, 259</value>
+  </data>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>809, 341</value>
+  </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Components / Compounds</value>
   </data>
   <data name="Label8.Text" xml:space="preserve">
     <value>Press ENTER to add.</value>
@@ -581,9 +581,6 @@
   </data>
   <data name="GroupBox7.Text" xml:space="preserve">
     <value>Components Selected</value>
-  </data>
-  <data name="GroupBox8.Text" xml:space="preserve">
-    <value>Options</value>
   </data>
   <data name="KryptonButton2.Text" xml:space="preserve">
     <value>Sort list&gt;</value>
@@ -600,6 +597,9 @@
   <data name="KryptonButton6.Text" xml:space="preserve">
     <value>Add&gt;</value>
   </data>
+  <data name="GroupBox8.Text" xml:space="preserve">
+    <value>Options</value>
+  </data>
   <data name="GroupBox9.Text" xml:space="preserve">
     <value>Components</value>
   </data>
@@ -607,13 +607,13 @@
     <value>Select the components you want to add to the simulation.</value>
   </data>
   <data name="tbPassword.Location" type="System.Drawing.Point, System.Drawing">
-    <value>140, 400</value>
+    <value>148, 296</value>
   </data>
   <data name="tbPassword.Size" type="System.Drawing.Size, System.Drawing">
-    <value>740, 20</value>
+    <value>652, 20</value>
   </data>
   <data name="chkUsePassword.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 402</value>
+    <value>11, 298</value>
   </data>
   <data name="chkUsePassword.Size" type="System.Drawing.Size, System.Drawing">
     <value>131, 17</value>
@@ -621,102 +621,76 @@
   <data name="chkUsePassword.Text" xml:space="preserve">
     <value>Protect with Password</value>
   </data>
-  <data name="btnDeleteFA.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 175</value>
-  </data>
-  <data name="btnDeleteFA.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 27</value>
-  </data>
-  <data name="btnDeleteFA.Text" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="btnConfigFA.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 175</value>
-  </data>
-  <data name="btnConfigFA.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 27</value>
-  </data>
-  <data name="btnConfigFA.Text" xml:space="preserve">
-    <value>Configure</value>
-  </data>
-  <data name="btnCopyFA.Location" type="System.Drawing.Point, System.Drawing">
-    <value>87, 175</value>
-  </data>
-  <data name="btnCopyFA.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 27</value>
-  </data>
-  <data name="btnCopyFA.Text" xml:space="preserve">
-    <value>Copy</value>
-  </data>
-  <data name="GroupBox13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>396, 240</value>
-  </data>
-  <data name="GroupBox13.Text" xml:space="preserve">
-    <value>Added Flash Algorithms</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn5.HeaderText" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn6.HeaderText" xml:space="preserve">
-    <value>Description</value>
-  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="DataGridViewTextBoxColumn6.Width" type="System.Int32, mscorlib">
-    <value>85</value>
+  <data name="btnConfigFlash.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="dgvAvailableFlashAlgos.Size" type="System.Drawing.Size, System.Drawing">
-    <value>376, 157</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="btnConfigFlash.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
-  <data name="btnAddFA.Size" type="System.Drawing.Size, System.Drawing">
-    <value>379, 23</value>
+  <data name="btnConfigFlash.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="btnAddFA.Text" xml:space="preserve">
-    <value>Add</value>
+  <data name="btnConfigFlash.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="GroupBox11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 240</value>
+  <data name="btnConfigFlash.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 23</value>
   </data>
-  <data name="GroupBox11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>385, 208</value>
+  <data name="btnConfigFlash.Text" xml:space="preserve">
+    <value>Flash</value>
   </data>
-  <data name="GroupBox11.Text" xml:space="preserve">
-    <value>Available Flash Algorithms</value>
+  <data name="btnConfigFlash.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
   </data>
-  <data name="btnConfigPPAdv.Location" type="System.Drawing.Point, System.Drawing">
-    <value>87, 200</value>
+  <data name="btnConfigPP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>77, 23</value>
   </data>
-  <data name="btnConfigPPAdv.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 27</value>
+  <data name="btnConfigPP.Text" xml:space="preserve">
+    <value>Model</value>
   </data>
-  <data name="btnConfigPPAdv.Text" xml:space="preserve">
-    <value>Advanced</value>
+  <data name="btnConfigPP.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
   </data>
   <data name="btnDeletePP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>250, 200</value>
+    <value>333, 3</value>
   </data>
   <data name="btnDeletePP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 27</value>
+    <value>79, 23</value>
   </data>
   <data name="btnDeletePP.Text" xml:space="preserve">
     <value>Delete</value>
   </data>
-  <data name="btnConfigPP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 200</value>
-  </data>
-  <data name="btnConfigPP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 27</value>
-  </data>
-  <data name="btnConfigPP.Text" xml:space="preserve">
-    <value>Configure</value>
-  </data>
-  <data name="btnCopyPP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>169, 200</value>
+  <data name="btnDeletePP.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
   </data>
   <data name="btnCopyPP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 27</value>
+    <value>72, 23</value>
   </data>
   <data name="btnCopyPP.Text" xml:space="preserve">
     <value>Copy</value>
+  </data>
+  <data name="btnCopyPP.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="btnConfigPPAdv.Location" type="System.Drawing.Point, System.Drawing">
+    <value>160, 3</value>
+  </data>
+  <data name="btnConfigPPAdv.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 23</value>
+  </data>
+  <data name="btnConfigPPAdv.Text" xml:space="preserve">
+    <value>Advanced</value>
+  </data>
+  <data name="btnConfigPPAdv.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="TableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 342</value>
+  </data>
+  <data name="TableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>415, 29</value>
   </data>
   <data name="Column16.HeaderText" xml:space="preserve">
     <value>Name (click to edit)</value>
@@ -725,13 +699,13 @@
     <value>Type</value>
   </data>
   <data name="dgvpp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>325, 182</value>
+    <value>415, 323</value>
   </data>
   <data name="GroupBox12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>396, 5</value>
+    <value>388, 5</value>
   </data>
   <data name="GroupBox12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 233</value>
+    <value>421, 374</value>
   </data>
   <data name="GroupBox12.Text" xml:space="preserve">
     <value>Added Property Packages</value>
@@ -746,34 +720,34 @@
     <value>85</value>
   </data>
   <data name="DataGridViewPP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>376, 182</value>
+    <value>365, 323</value>
   </data>
   <data name="Button8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 204</value>
+    <value>3, 345</value>
   </data>
   <data name="Button8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>379, 23</value>
+    <value>368, 23</value>
   </data>
   <data name="Button8.Text" xml:space="preserve">
     <value>Add</value>
   </data>
+  <data name="Button8.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="Button8.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
   <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>385, 233</value>
+    <value>374, 374</value>
   </data>
   <data name="GroupBox6.Text" xml:space="preserve">
     <value>Available Property Packages</value>
   </data>
   <data name="PanelPP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>735, 453</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn8.HeaderText" xml:space="preserve">
-    <value>Name (click to edit)</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn9.HeaderText" xml:space="preserve">
-    <value>Type</value>
+    <value>817, 382</value>
   </data>
   <data name="PanelUnits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>893, 534</value>
+    <value>817, 438</value>
   </data>
   <data name="OpenFileDialog1.Filter" xml:space="preserve">
     <value>XML File|*.xml|All files|*.*</value>
@@ -799,11 +773,23 @@
   <data name="ofdcs.Title" xml:space="preserve">
     <value>Load Database ChemSep (XML)</value>
   </data>
+  <data name="GroupBox10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 353</value>
+  </data>
+  <data name="GroupBox10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>809, 83</value>
+  </data>
+  <data name="GroupBox10.Text" xml:space="preserve">
+    <value>Petroleum Fractions</value>
+  </data>
   <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>899, 540</value>
+    <value>823, 444</value>
   </data>
   <data name="TabPage1.Text" xml:space="preserve">
     <value>Compounds</value>
+  </data>
+  <data name="chkSkipEqCalcs.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="chkSkipEqCalcs.Size" type="System.Drawing.Size, System.Drawing">
     <value>309, 17</value>
@@ -812,67 +798,28 @@
     <value>Skip equilibrium calculations in well-defined Material Streams</value>
   </data>
   <data name="GroupBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 462</value>
+    <value>11, 388</value>
+  </data>
+  <data name="GroupBox4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
   </data>
   <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>719, 50</value>
+    <value>801, 50</value>
   </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Options</value>
   </data>
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>741, 518</value>
+    <value>823, 444</value>
   </data>
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Thermodynamics</value>
   </data>
   <data name="TabPageReactions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>899, 540</value>
+    <value>823, 444</value>
   </data>
   <data name="TabPageReactions.Text" xml:space="preserve">
     <value>Reactions</value>
-  </data>
-  <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>899, 540</value>
-  </data>
-  <data name="TabPage3.Text" xml:space="preserve">
-    <value>Mass and Energy Balances</value>
-  </data>
-  <data name="TabPage4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>899, 540</value>
-  </data>
-  <data name="TabPage4.Text" xml:space="preserve">
-    <value>System of Units</value>
-  </data>
-  <data name="TabPage6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>899, 540</value>
-  </data>
-  <data name="TabPage6.Text" xml:space="preserve">
-    <value>Floating Tables and Property Lists</value>
-  </data>
-  <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>899, 540</value>
-  </data>
-  <data name="TabPage5.Text" xml:space="preserve">
-    <value>Miscelaneous</value>
-  </data>
-  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>749, 544</value>
-  </data>
-  <data name="GroupBox10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 448</value>
-  </data>
-  <data name="GroupBox10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>887, 85</value>
-  </data>
-  <data name="GroupBox10.Text" xml:space="preserve">
-    <value>Petroleum Fractions</value>
-  </data>
-  <data name="GroupBox16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>883, 111</value>
-  </data>
-  <data name="GroupBox16.Text" xml:space="preserve">
-    <value>Energy Balance</value>
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>165, 13</value>
@@ -895,11 +842,11 @@
   <data name="Label10.Text" xml:space="preserve">
     <value>Flowsheet object energy balance check</value>
   </data>
-  <data name="GroupBox15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>883, 111</value>
+  <data name="GroupBox16.Size" type="System.Drawing.Size, System.Drawing">
+    <value>805, 111</value>
   </data>
-  <data name="GroupBox15.Text" xml:space="preserve">
-    <value>Mass Balance</value>
+  <data name="GroupBox16.Text" xml:space="preserve">
+    <value>Energy Balance</value>
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>157, 13</value>
@@ -922,14 +869,26 @@
   <data name="Label2.Text" xml:space="preserve">
     <value>Flowsheet object mass balance check</value>
   </data>
-  <data name="GroupBox14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>881, 527</value>
+  <data name="GroupBox15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>805, 111</value>
   </data>
-  <data name="GroupBox14.Text" xml:space="preserve">
-    <value>Floating Property Tables and Property Lists</value>
+  <data name="GroupBox15.Text" xml:space="preserve">
+    <value>Mass Balance</value>
+  </data>
+  <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>823, 444</value>
+  </data>
+  <data name="TabPage3.Text" xml:space="preserve">
+    <value>Mass and Energy Balances</value>
+  </data>
+  <data name="TabPage4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>823, 444</value>
+  </data>
+  <data name="TabPage4.Text" xml:space="preserve">
+    <value>System of Units</value>
   </data>
   <data name="lblsla.Location" type="System.Drawing.Point, System.Drawing">
-    <value>427, 498</value>
+    <value>427, 400</value>
   </data>
   <data name="lblsla.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 13</value>
@@ -956,10 +915,13 @@
     <value>Volumetric Flows</value>
   </data>
   <data name="cbDefaultFloatingTableCompoundAmountBasis.Location" type="System.Drawing.Point, System.Drawing">
-    <value>585, 493</value>
+    <value>585, 395</value>
+  </data>
+  <data name="cbDefaultFloatingTableCompoundAmountBasis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 21</value>
   </data>
   <data name="chkDisplayFloatingTableCompoundAmounts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 497</value>
+    <value>11, 399</value>
   </data>
   <data name="chkDisplayFloatingTableCompoundAmounts.Size" type="System.Drawing.Size, System.Drawing">
     <value>396, 17</value>
@@ -989,7 +951,7 @@
     <value>Select All</value>
   </data>
   <data name="PropertyListView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>869, 341</value>
+    <value>793, 243</value>
   </data>
   <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 13</value>
@@ -1003,11 +965,32 @@
   <data name="Label14.Text" xml:space="preserve">
     <value>Select the properties to show on Floating Property Tables according to object type.</value>
   </data>
+  <data name="GroupBox14.Size" type="System.Drawing.Size, System.Drawing">
+    <value>805, 429</value>
+  </data>
+  <data name="GroupBox14.Text" xml:space="preserve">
+    <value>Floating Property Tables and Property Lists</value>
+  </data>
+  <data name="TabPage6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>823, 444</value>
+  </data>
+  <data name="TabPage6.Text" xml:space="preserve">
+    <value>Floating Tables and Property Lists</value>
+  </data>
   <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>886, 439</value>
+    <value>809, 335</value>
   </data>
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Description</value>
+  </data>
+  <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>823, 444</value>
+  </data>
+  <data name="TabPage5.Text" xml:space="preserve">
+    <value>Miscelaneous</value>
+  </data>
+  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>831, 470</value>
   </data>
   <data name="OpenFileDialog3.Filter" xml:space="preserve">
     <value>JSON Files|*.json</value>
@@ -1016,7 +999,7 @@
     <value>Import Compound from JSON File</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>749, 544</value>
+    <value>831, 470</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

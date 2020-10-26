@@ -340,43 +340,12 @@ Public Class FormConfigCAPEOPENPPackage
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles btnConfigFlashAlg.Click
 
         Dim fa As Auxiliary.FlashAlgorithms.FlashAlgorithm = _pp.FlashBase
-        Dim f As New Thermodynamics.FlashAlgorithmConfig() With {.Settings = fa.FlashSettings,
-                                                                .AvailableCompounds = _pp._selectedcomps.Values.Select(Function(x) x.Name).ToList,
-                                                                 .FlashAlgo = fa}
+        Dim f As New Thermodynamics.FlashAlgorithmConfig() With {.Settings = fa.FlashSettings}
 
-        If TypeOf fa Is Auxiliary.FlashAlgorithms.CAPEOPEN_Equilibrium_Server Then
-
-            Dim coflash = DirectCast(fa, Auxiliary.FlashAlgorithms.CAPEOPEN_Equilibrium_Server)
-
-            f._coes = coflash._coes
-            f._coppm = coflash._coppm
-            f._selppm = coflash._selppm
-            f._esname = coflash._esname
-            f._mappings = coflash._mappings
-            f._phasemappings = coflash._phasemappings
-
-            f.ShowDialog(Me)
-
-            coflash._coes = f._coes
-            coflash._coppm = f._coppm
-            coflash._selppm = f._selppm
-            coflash._esname = f._esname
-            coflash._mappings = f._mappings
-            coflash._phasemappings = f._phasemappings
-
-            fa.FlashSettings = f.Settings
-
-            f.Dispose()
-            f = Nothing
-
-        Else
-
-            f.ShowDialog(Me)
-            fa.FlashSettings = f.Settings
-            f.Dispose()
-            f = Nothing
-
-        End If
+        f.ShowDialog(Me)
+        fa.FlashSettings = f.Settings
+        f.Dispose()
+        f = Nothing
 
     End Sub
 

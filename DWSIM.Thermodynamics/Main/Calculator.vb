@@ -117,7 +117,7 @@ Public Class Calculator
                 If Settings.gpumod Is Nothing Then
                     Select Case Settings.CudafyTarget
                         Case 0
-                            Settings.gpumod = CudafyTranslator.Cudafy(GetType(PropertyPackages.Auxiliary.LeeKeslerPlocker), _
+                            Settings.gpumod = CudafyTranslator.Cudafy(GetType(PropertyPackages.Auxiliary.LeeKeslerPlocker),
                                         GetType(PropertyPackages.ThermoPlugs.PR),
                                         GetType(PropertyPackages.ThermoPlugs.SRK))
                             Settings.gpumod.Serialize("emulator.cdfy")
@@ -132,7 +132,7 @@ Public Class Calculator
                                 .CompilerPath = "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\bin\nvcc.exe"
                                 .IncludeDirectoryPath = "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\include"
                             End With
-                            Settings.gpumod = CudafyTranslator.Cudafy(cp, GetType(PropertyPackages.Auxiliary.LeeKeslerPlocker), _
+                            Settings.gpumod = CudafyTranslator.Cudafy(cp, GetType(PropertyPackages.Auxiliary.LeeKeslerPlocker),
                                         GetType(PropertyPackages.ThermoPlugs.PR),
                                         GetType(PropertyPackages.ThermoPlugs.SRK))
                             Settings.gpumod.Serialize("cudacode.cdfy")
@@ -159,43 +159,12 @@ Public Class Calculator
         Dim fa As Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.FlashAlgorithm = simobj.GetFlowsheet.FlowsheetOptions.FlashAlgorithms.Where(Function(x) x.Tag = fname).FirstOrDefault
         If fa Is Nothing Then fa = simobj.GetFlowsheet.FlowsheetOptions.FlashAlgorithms(0)
 
-        Dim f As New Thermodynamics.FlashAlgorithmConfig() With {.Settings = fa.FlashSettings,
-                                                                .AvailableCompounds = simobj.GetFlowsheet.SelectedCompounds.Values.Select(Function(x) x.Name).ToList,
-                                                                 .FlashAlgo = fa}
+        Dim f As New Thermodynamics.FlashAlgorithmConfig() With {.Settings = fa.FlashSettings}
 
-        If TypeOf fa Is Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.CAPEOPEN_Equilibrium_Server Then
-
-            Dim coflash = DirectCast(fa, Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.CAPEOPEN_Equilibrium_Server)
-
-            f._coes = coflash._coes
-            f._coppm = coflash._coppm
-            f._selppm = coflash._selppm
-            f._esname = coflash._esname
-            f._mappings = coflash._mappings
-            f._phasemappings = coflash._phasemappings
-
-            f.ShowDialog()
-
-            coflash._coes = f._coes
-            coflash._coppm = f._coppm
-            coflash._selppm = f._selppm
-            coflash._esname = f._esname
-            coflash._mappings = f._mappings
-            coflash._phasemappings = f._phasemappings
-
-            fa.FlashSettings = f.Settings
-
-            f.Dispose()
-            f = Nothing
-
-        Else
-
-            f.ShowDialog()
-            fa.FlashSettings = f.Settings
-            f.Dispose()
-            f = Nothing
-
-        End If
+        f.ShowDialog()
+        fa.FlashSettings = f.Settings
+        f.Dispose()
+        f = Nothing
 
     End Sub
 

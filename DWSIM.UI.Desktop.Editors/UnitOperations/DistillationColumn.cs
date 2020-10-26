@@ -102,22 +102,6 @@ namespace DWSIM.UI.Desktop.Editors
                 }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)column.GetFlowsheet()).HighLevelSolve.Invoke(); });
             }
             
-            var flashalgos = column.GetFlowsheet().FlowsheetOptions.FlashAlgorithms.Select(x => x.Tag).ToList();
-            flashalgos.Insert(0, "Default");
-
-            var cbFlashAlg = s.CreateAndAddDropDownRow(container, "Flash Algorithm", flashalgos, 0, null);
-
-            if (!string.IsNullOrEmpty(column.PreferredFlashAlgorithmTag))
-                cbFlashAlg.SelectedIndex = Array.IndexOf(flashalgos.ToArray(), column.PreferredFlashAlgorithmTag);
-            else
-                cbFlashAlg.SelectedIndex = 0;
-
-            cbFlashAlg.SelectedIndexChanged += (sender, e) =>
-            {
-                column.PreferredFlashAlgorithmTag = cbFlashAlg.SelectedValue.ToString();
-                if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)column.GetFlowsheet()).HighLevelSolve.Invoke();
-            };
-
             s.CreateAndAddLabelRow(container, "Object Properties");
 
             s.CreateAndAddButtonRow(container, "Define Number of Stages", null, (arg1, e) =>

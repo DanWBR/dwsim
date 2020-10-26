@@ -815,7 +815,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\LegacyEditors\UITypeEditors\UIExcelUOEditor\UIExcelUOEditor.vb" />
-    <Compile Include="Forms\LegacyEditors\UITypeEditors\UIFASelector\UIFASelector.vb" />
     <Compile Include="Forms\LegacyEditors\UITypeEditors\UIFlowsheetUOEditor\UIFlowsheetEditor.vb" />
     <Compile Include="Forms\LegacyEditors\UITypeEditors\UIFlowsheetUOViewer\UIFlowsheetUOViewer.vb" />
     <Compile Include="Forms\LegacyEditors\UITypeEditors\UIGibbsComponentSelector\UIGibbsComponentSelector.vb" />

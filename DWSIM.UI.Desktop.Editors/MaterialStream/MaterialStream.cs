@@ -107,22 +107,6 @@ namespace DWSIM.UI.Desktop.Editors
                 }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)MatStream.GetFlowsheet()).HighLevelSolve.Invoke(); });
             }
 
-            var flashalgos = MatStream.GetFlowsheet().FlowsheetOptions.FlashAlgorithms.Select(x => x.Tag).ToList();
-            flashalgos.Insert(0, "Default");
-
-            var cbFlashAlg = s.CreateAndAddDropDownRow(container, "Flash Algorithm", flashalgos, 0, null);
-
-            if (!string.IsNullOrEmpty(MatStream.PreferredFlashAlgorithmTag))
-                cbFlashAlg.SelectedIndex = Array.IndexOf(flashalgos.ToArray(), MatStream.PreferredFlashAlgorithmTag);
-            else
-                cbFlashAlg.SelectedIndex = 0;
-
-            cbFlashAlg.SelectedIndexChanged += (sender, e) =>
-            {
-                MatStream.PreferredFlashAlgorithmTag = cbFlashAlg.SelectedValue.ToString();
-                if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)MatStream.GetFlowsheet()).HighLevelSolve.Invoke();
-            };
-
             container.Add(container2);
 
             s.CreateAndAddLabelRow(container2, "State Specification");
