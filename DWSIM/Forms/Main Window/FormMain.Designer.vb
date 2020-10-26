@@ -46,6 +46,7 @@ Partial Class FormMain
         Me.CloseAllToolstripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsFileSeparator = New System.Windows.Forms.ToolStripSeparator()
+        Me.tsFolderSeparator = New System.Windows.Forms.ToolStripSeparator()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.VerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PreferenciasDoDWSIMToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -70,6 +71,13 @@ Partial Class FormMain
         Me.RastreamentoDeBugsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PatronToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DownloadSupplementarySoftwareToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReaktoroToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NNUOToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PNUOToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CapitalCostToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OPCPluginToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DTLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.NewToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.OpenToolStripButton = New System.Windows.Forms.ToolStripButton()
@@ -105,7 +113,6 @@ Partial Class FormMain
         Me.SettingsPanel = New System.Windows.Forms.Panel()
         Me.ButtonClose = New System.Windows.Forms.Button()
         Me.WelcomePanel = New System.Windows.Forms.Panel()
-        Me.tsFolderSeparator = New System.Windows.Forms.ToolStripSeparator()
         Me.MenuStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.SettingsPanel.SuspendLayout()
@@ -115,7 +122,7 @@ Partial Class FormMain
         '
         resources.ApplyResources(Me.MenuStrip1, "MenuStrip1")
         Me.MenuStrip1.AllowItemReorder = True
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.VerToolStripMenuItem, Me.FerramentasToolStripMenuItem, Me.WindowsMenu, Me.VerToolStripMenuItem1, Me.HelpToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.VerToolStripMenuItem, Me.FerramentasToolStripMenuItem, Me.WindowsMenu, Me.VerToolStripMenuItem1, Me.HelpToolStripMenuItem, Me.DownloadSupplementarySoftwareToolStripMenuItem})
         Me.MenuStrip1.MdiWindowListItem = Me.WindowsMenu
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.ShowItemToolTips = True
@@ -212,6 +219,11 @@ Partial Class FormMain
         '
         resources.ApplyResources(Me.tsFileSeparator, "tsFileSeparator")
         Me.tsFileSeparator.Name = "tsFileSeparator"
+        '
+        'tsFolderSeparator
+        '
+        resources.ApplyResources(Me.tsFolderSeparator, "tsFolderSeparator")
+        Me.tsFolderSeparator.Name = "tsFolderSeparator"
         '
         'ExitToolStripMenuItem
         '
@@ -368,6 +380,43 @@ Partial Class FormMain
         resources.ApplyResources(Me.AboutToolStripMenuItem, "AboutToolStripMenuItem")
         Me.AboutToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.information
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
+        '
+        'DownloadSupplementarySoftwareToolStripMenuItem
+        '
+        resources.ApplyResources(Me.DownloadSupplementarySoftwareToolStripMenuItem, "DownloadSupplementarySoftwareToolStripMenuItem")
+        Me.DownloadSupplementarySoftwareToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.DownloadSupplementarySoftwareToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReaktoroToolStripMenuItem, Me.NNUOToolStripMenuItem, Me.PNUOToolStripMenuItem, Me.CapitalCostToolStripMenuItem, Me.OPCPluginToolStripMenuItem, Me.DTLToolStripMenuItem})
+        Me.DownloadSupplementarySoftwareToolStripMenuItem.Name = "DownloadSupplementarySoftwareToolStripMenuItem"
+        '
+        'ReaktoroToolStripMenuItem
+        '
+        resources.ApplyResources(Me.ReaktoroToolStripMenuItem, "ReaktoroToolStripMenuItem")
+        Me.ReaktoroToolStripMenuItem.Name = "ReaktoroToolStripMenuItem"
+        '
+        'NNUOToolStripMenuItem
+        '
+        resources.ApplyResources(Me.NNUOToolStripMenuItem, "NNUOToolStripMenuItem")
+        Me.NNUOToolStripMenuItem.Name = "NNUOToolStripMenuItem"
+        '
+        'PNUOToolStripMenuItem
+        '
+        resources.ApplyResources(Me.PNUOToolStripMenuItem, "PNUOToolStripMenuItem")
+        Me.PNUOToolStripMenuItem.Name = "PNUOToolStripMenuItem"
+        '
+        'CapitalCostToolStripMenuItem
+        '
+        resources.ApplyResources(Me.CapitalCostToolStripMenuItem, "CapitalCostToolStripMenuItem")
+        Me.CapitalCostToolStripMenuItem.Name = "CapitalCostToolStripMenuItem"
+        '
+        'OPCPluginToolStripMenuItem
+        '
+        resources.ApplyResources(Me.OPCPluginToolStripMenuItem, "OPCPluginToolStripMenuItem")
+        Me.OPCPluginToolStripMenuItem.Name = "OPCPluginToolStripMenuItem"
+        '
+        'DTLToolStripMenuItem
+        '
+        resources.ApplyResources(Me.DTLToolStripMenuItem, "DTLToolStripMenuItem")
+        Me.DTLToolStripMenuItem.Name = "DTLToolStripMenuItem"
         '
         'ToolStrip1
         '
@@ -569,11 +618,6 @@ Partial Class FormMain
         resources.ApplyResources(Me.WelcomePanel, "WelcomePanel")
         Me.WelcomePanel.Name = "WelcomePanel"
         '
-        'tsFolderSeparator
-        '
-        resources.ApplyResources(Me.tsFolderSeparator, "tsFolderSeparator")
-        Me.tsFolderSeparator.Name = "tsFolderSeparator"
-        '
         'FormMain
         '
         resources.ApplyResources(Me, "$this")
@@ -766,7 +810,6 @@ Partial Class FormMain
         If Not Settings.CAPEOPENMode Then
             AddPropPacks()
             AddExternalUOs()
-            AddFlashAlgorithms()
             GetComponents()
         End If
 
@@ -850,4 +893,11 @@ Partial Class FormMain
     Friend WithEvents tsbInspector As ToolStripButton
     Friend WithEvents tsFileSeparator As ToolStripSeparator
     Friend WithEvents tsFolderSeparator As ToolStripSeparator
+    Friend WithEvents DownloadSupplementarySoftwareToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ReaktoroToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents NNUOToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PNUOToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CapitalCostToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents OPCPluginToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DTLToolStripMenuItem As ToolStripMenuItem
 End Class

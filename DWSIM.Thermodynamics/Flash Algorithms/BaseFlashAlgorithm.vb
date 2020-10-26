@@ -1343,24 +1343,52 @@ will converge to this solution.")
 
             'liquid phase split check
 
-            If names.Contains("water") And names.Where(Function(x) x.Contains("ane") Or x.Contains("ene") Or x.Contains("ine")).Count > 0 Then
+            If names.Contains("water") And names.Where(Function(x) x.EndsWith("ane") Or x.EndsWith("ene") Or x.EndsWith("ine")).Count > 0 Then
                 'Water + Hydrocarbons
-                If Vz(names.IndexOf("water")) > 0.0 And Vz(names.IndexOf("water")) < 1.0 Then
-                    hres.LiquidPhaseSplit = True
+                If Vz(names.IndexOf("water")) > 0.01 And Vz(names.IndexOf("water")) < 1.0 Then
+                    Dim hcs = names.Where(Function(x) x.EndsWith("ane") Or x.EndsWith("ene") Or x.EndsWith("ine")).ToList()
+                    For Each hc In hcs
+                        If Vz(names.IndexOf(hc)) > 0.01 And props(names.IndexOf(hc)).Critical_Temperature > T Then
+                            hres.LiquidPhaseSplit = True
+                            Exit For
+                        End If
+                    Next
                 End If
             ElseIf names.Where(Function(x) x.EndsWith("al")).Count > 0 And names.Where(Function(x) x.Contains("ane") Or x.Contains("ene") Or x.Contains("ine")).Count > 0 Then
                 'Aldehydes + Hydrocarbons
-                hres.LiquidPhaseSplit = True
-            ElseIf names.Where(Function(x) x.EndsWith("ol")).Count > 0 And names.Where(Function(x) x.Contains("ane") Or x.Contains("ene") Or x.Contains("ine")).Count > 0 Then
+                Dim alds = names.Where(Function(x) x.EndsWith("al")).ToList()
+                For Each ald In alds
+                    If Vz(names.IndexOf(ald)) > 0.01 And Vz(names.IndexOf(ald)) < 1.0 Then
+                        Dim hcs = names.Where(Function(x) x.EndsWith("ane") Or x.EndsWith("ene") Or x.EndsWith("ine")).ToList()
+                        For Each hc In hcs
+                            If Vz(names.IndexOf(hc)) > 0.01 And props(names.IndexOf(hc)).Critical_Temperature > T Then
+                                hres.LiquidPhaseSplit = True
+                                Exit For
+                            End If
+                        Next
+                    End If
+                Next
+            ElseIf names.Where(Function(x) x.EndsWith("ol")).Count > 0 And names.Where(Function(x) x.EndsWith("ane") Or x.EndsWith("ene") Or x.EndsWith("ine")).Count > 0 Then
                 'Alcohols + Hydrocarbons
-                hres.LiquidPhaseSplit = True
-            ElseIf names.Contains("water") And names.Where(Function(x) x.endswith("ol")).Count > 0 Then
+                Dim alcs = names.Where(Function(x) x.EndsWith("ol")).ToList()
+                For Each alc In alcs
+                    If Vz(names.IndexOf(alc)) > 0.01 And Vz(names.IndexOf(alc)) < 1.0 Then
+                        Dim hcs = names.Where(Function(x) x.EndsWith("ane") Or x.EndsWith("ene") Or x.EndsWith("ine")).ToList()
+                        For Each hc In hcs
+                            If Vz(names.IndexOf(hc)) > 0.01 And props(names.IndexOf(hc)).Critical_Temperature > T Then
+                                hres.LiquidPhaseSplit = True
+                                Exit For
+                            End If
+                        Next
+                    End If
+                Next
+            ElseIf names.Contains("water") And names.Where(Function(x) x.EndsWith("ol")).Count > 0 Then
                 'Water + C4+ Alcohols
-                If Vz(names.IndexOf("water")) > 0.0 And Vz(names.IndexOf("water")) < 1.0 Then
+                If Vz(names.IndexOf("water")) > 0.01 And Vz(names.IndexOf("water")) < 1.0 Then
                     'get alcohols
                     Dim alcohols = names.Where(Function(x) x.EndsWith("ol")).ToList()
                     For Each alcohol In alcohols
-                        If Vz(names.IndexOf(alcohol)) > 0.0 And Vz(names.IndexOf(alcohol)) < 1.0 And props(names.IndexOf(alcohol)).Molar_Weight > 70 Then
+                        If Vz(names.IndexOf(alcohol)) > 0.01 And Vz(names.IndexOf(alcohol)) < 1.0 And props(names.IndexOf(alcohol)).Molar_Weight > 70 Then
                             hres.LiquidPhaseSplit = True
                             Exit For
                         End If

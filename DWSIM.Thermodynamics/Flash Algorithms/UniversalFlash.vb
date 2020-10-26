@@ -73,11 +73,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Catch ex As Exception
                         errflag = True
                     End Try
-                Case "VLLE"
-                    'VLLE
+                Case "VLLE", "SVLLE"
+                    'SVLLE/VLLE
+                    Dim gmin As New GibbsMinimizationMulti With {.FlashSettings = FlashSettings}
                     Try
-                        Dim nl As New NestedLoops3PV3 With {.FlashSettings = FlashSettings}
-                        result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                        result = gmin.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
                     Catch ex As Exception
                         errflag = True
                     End Try
@@ -89,29 +89,13 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Catch ex As Exception
                         errflag = True
                     End Try
-                Case "SVLLE"
-                    'SVLLE
-                    Try
-                        Dim nl As New NestedLoopsSVLLE With {.FlashSettings = FlashSettings}
-                        result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-                    Catch ex As Exception
-                        errflag = True
-                    End Try
                 Case Else
                     Dim hres = PerformHeuristicsTest(Vz, T, P, PP)
-                    If hres.LiquidPhaseSplit And hres.SolidPhase Then
-                        'SVLLE
+                    If hres.LiquidPhaseSplit Then
+                        'SVLLE/VLLE
+                        Dim gmin As New GibbsMinimizationMulti With {.FlashSettings = FlashSettings}
                         Try
-                            Dim nl As New NestedLoopsSVLLE With {.FlashSettings = FlashSettings}
-                            result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-                        Catch ex As Exception
-                            errflag = True
-                        End Try
-                    ElseIf hres.LiquidPhaseSplit And Not hres.SolidPhase Then
-                        'VLLE
-                        Try
-                            Dim nl As New NestedLoops3PV3 With {.FlashSettings = FlashSettings}
-                            result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                            result = gmin.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
                         Catch ex As Exception
                             errflag = True
                         End Try
@@ -135,20 +119,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             End Select
 
             If errflag Then
-                errflag = False
-                Dim gmin As New GibbsMinimizationMulti With {.FlashSettings = FlashSettings}
-                Try
-                    result = gmin.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-                Catch ex As Exception
-                    errflag = True
-                End Try
-                If errflag Then
-                    Dim nl As New NestedLoops With {.FlashSettings = FlashSettings}
-                    result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-                    Return result
-                Else
-                    Return result
-                End If
+                Dim nl As New NestedLoops With {.FlashSettings = FlashSettings}
+                result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                Return result
             Else
                 Return result
             End If

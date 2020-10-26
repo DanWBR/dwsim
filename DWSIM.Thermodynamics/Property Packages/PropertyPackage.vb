@@ -11169,12 +11169,22 @@ Final3:
             Dim jsonoptions As New JsonSerializerSettings With {.StringEscapeHandling = StringEscapeHandling.EscapeHtml, .Formatting = Formatting.Indented}
 
             Try
-                ForcedSolids = JsonConvert.DeserializeObject(Of List(Of String))((From el As XElement In data Select el Where el.Name = "ForcedSolids").FirstOrDefault.Value)
+                Dim fselement = (From el As XElement In data Select el Where el.Name = "ForcedSolids").FirstOrDefault
+                If fselement IsNot Nothing AndAlso fselement.Value <> "" Then
+                    ForcedSolids = JsonConvert.DeserializeObject(Of List(Of String))(fselement.Value)
+                Else
+                    ForcedSolids = New List(Of String)
+                End If
             Catch ex As Exception
             End Try
 
             Try
-                PropertyOverrides = JsonConvert.DeserializeObject(Of Dictionary(Of String, String))((From el As XElement In data Select el Where el.Name = "PropertyOverrides").FirstOrDefault.Value)
+                Dim porrelement = (From el As XElement In data Select el Where el.Name = "PropertyOverrides").FirstOrDefault
+                If porrelement IsNot Nothing AndAlso porrelement.Value <> "" Then
+                    PropertyOverrides = JsonConvert.DeserializeObject(Of Dictionary(Of String, String))(porrelement.Value)
+                Else
+                    PropertyOverrides = New Dictionary(Of String, String)
+                End If
             Catch ex As Exception
             End Try
 

@@ -869,22 +869,24 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                     lists.Add(listidx, New List(Of String))
                     maxidx = listidx
                     For Each o As String In lists(listidx - 1)
-                        obj = fbag.SimulationObjects(o)
-                        If Not onqueue Is Nothing Then
-                            If onqueue.Name = obj.Name Then Exit Do
-                        End If
-                        For Each c As IConnectionPoint In obj.GraphicObject.InputConnectors
-                            If c.IsAttached Then
-                                If c.AttachedConnector.AttachedFrom.ObjectType <> ObjectType.OT_Recycle And
-                                    c.AttachedConnector.AttachedFrom.ObjectType <> ObjectType.OT_EnergyRecycle Then
-                                    lists(listidx).Add(c.AttachedConnector.AttachedFrom.Name)
-                                    totalobjs += 1
-                                    If totalobjs > 10000 Then
-                                        Throw New Exception("Infinite loop detected while obtaining flowsheet object calculation order. Please insert recycle blocks where needed.")
+                        If fbag.SimulationObjects.ContainsKey(o) Then
+                            obj = fbag.SimulationObjects(o)
+                            If Not onqueue Is Nothing Then
+                                If onqueue.Name = obj.Name Then Exit Do
+                            End If
+                            For Each c As IConnectionPoint In obj.GraphicObject.InputConnectors
+                                If c.IsAttached Then
+                                    If c.AttachedConnector.AttachedFrom.ObjectType <> ObjectType.OT_Recycle And
+                                        c.AttachedConnector.AttachedFrom.ObjectType <> ObjectType.OT_EnergyRecycle Then
+                                        lists(listidx).Add(c.AttachedConnector.AttachedFrom.Name)
+                                        totalobjs += 1
+                                        If totalobjs > 10000 Then
+                                            Throw New Exception("Infinite loop detected while obtaining flowsheet object calculation order. Please insert recycle blocks where needed.")
+                                        End If
                                     End If
                                 End If
-                            End If
-                        Next
+                            Next
+                        End If
                     Next
                 Else
                     Exit Do
@@ -1080,18 +1082,20 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
             Dim totalr As Integer = 0
 
             For Each r In objstack
-                Dim robj = fbag.SimulationObjects(r)
-                If robj.GraphicObject.ObjectType = ObjectType.MaterialStream Then
-                    Dim ms As IMaterialStream = fbag.SimulationObjects(robj.Name)
-                    ms.AtEquilibrium = False
-                ElseIf robj.GraphicObject.ObjectType = ObjectType.OT_Recycle Then
-                    recycles.Add(robj.Name)
-                    Dim rec As IRecycle = fbag.SimulationObjects(robj.Name)
-                    If rec.AccelerationMethod = AccelMethod.GlobalBroyden Then
-                        If rec.Values.Count = 0 Then fbag.SimulationObjects(robj.Name).Solve()
-                        totalv += rec.Values.Count
+                If fbag.SimulationObjects.ContainsKey(r) Then
+                    Dim robj = fbag.SimulationObjects(r)
+                    If robj.GraphicObject.ObjectType = ObjectType.MaterialStream Then
+                        Dim ms As IMaterialStream = fbag.SimulationObjects(robj.Name)
+                        ms.AtEquilibrium = False
+                    ElseIf robj.GraphicObject.ObjectType = ObjectType.OT_Recycle Then
+                        recycles.Add(robj.Name)
+                        Dim rec As IRecycle = fbag.SimulationObjects(robj.Name)
+                        If rec.AccelerationMethod = AccelMethod.GlobalBroyden Then
+                            If rec.Values.Count = 0 Then fbag.SimulationObjects(robj.Name).Solve()
+                            totalv += rec.Values.Count
+                        End If
+                        totalr += 1
                     End If
-                    totalr += 1
                 End If
             Next
 
@@ -1140,16 +1144,18 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                                      'add the objects to the calculation queue.
 
                                                      For Each o As String In objstack
-                                                         obj = fbag.SimulationObjects(o)
-                                                         objargs = New CalculationArgs
-                                                         With objargs
-                                                             .Sender = "FlowsheetSolver"
-                                                             .Calculated = True
-                                                             .Name = obj.Name
-                                                             .ObjectType = obj.GraphicObject.ObjectType
-                                                             .Tag = obj.GraphicObject.Tag
-                                                             fqueue.CalculationQueue.Enqueue(objargs)
-                                                         End With
+                                                         If fbag.SimulationObjects.ContainsKey(o) Then
+                                                             obj = fbag.SimulationObjects(o)
+                                                             objargs = New CalculationArgs
+                                                             With objargs
+                                                                 .Sender = "FlowsheetSolver"
+                                                                 .Calculated = True
+                                                                 .Name = obj.Name
+                                                                 .ObjectType = obj.GraphicObject.ObjectType
+                                                                 .Tag = obj.GraphicObject.Tag
+                                                                 fqueue.CalculationQueue.Enqueue(objargs)
+                                                             End With
+                                                         End If
                                                      Next
 
                                                      'set the flowsheet instance for all objects, this is required for the async threads
@@ -1437,7 +1443,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                 baseexception = iex.InnerException
                             End While
                             fgui.ShowMessage(baseexception.Message.ToString, IFlowsheet.MessageType.GeneralError, euid)
-                            Console.WriteLine(baseexception.ToString)
+                            'Console.WriteLine(baseexception.ToString)
                             IObj?.Paragraphs.Add(baseexception.Message)
                         Next
                     Else
@@ -1450,7 +1456,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                             End While
                         End If
                         fgui.ShowMessage(baseexception.Message.ToString, IFlowsheet.MessageType.GeneralError, euid)
-                        Console.WriteLine(baseexception.ToString)
+                        'Console.WriteLine(baseexception.ToString)
                         IObj?.Paragraphs.Add(baseexception.Message)
                     End If
                 Next

@@ -250,21 +250,6 @@ Label_00CC:
 
             Dim pp As New Thermodynamics.PropertyPackages.RaoultPropertyPackage()
 
-            Try
-                Dim el = xdoc.Element("DWSIM_Simulation_Data").Element("Settings").Element("FlashAlgorithms")
-                If Not el Is Nothing Then
-                    For Each xel As XElement In el.Elements
-                        Dim obj As PropertyPackages.Auxiliary.FlashAlgorithms.FlashAlgorithm = pp.ReturnInstance(xel.Element("Type").Value)
-                        obj.LoadData(xel.Elements.ToList)
-                        fs.FlowsheetOptions.FlashAlgorithms.Add(obj)
-                    Next
-                Else
-                    fs.FlowsheetOptions.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoops() With {.Tag = .Name})
-                End If
-            Catch ex As Exception
-                excs.Add(New Exception("Error Loading Flowsheet Settings", ex))
-            End Try
-
             Dim data As List(Of XElement) = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects").Elements.ToList
 
             AddGraphicObjects(fs, data, excs)

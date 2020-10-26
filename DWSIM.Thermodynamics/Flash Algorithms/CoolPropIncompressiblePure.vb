@@ -102,11 +102,15 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_TV(ByVal Vz As Double(), ByVal T As Double, ByVal V As Double, ByVal Pref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
+            spp = PP
+
             Return New Object() {1.0, 0.0, Vz.Clone, Vz.Clone, CoolProp.Props1SI(spp.FluidName, "PMAX"), 0, Vz.Clone, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
 
         End Function
 
         Public Overrides Function Flash_PV(ByVal Vz As Double(), ByVal P As Double, ByVal V As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
+
+            spp = PP
 
             Return New Object() {1.0, 0.0, Vz.Clone, Vz.Clone, CoolProp.Props1SI(spp.FluidName, "PMAX"), 0, Vz.Clone, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
 

@@ -648,6 +648,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                                                 Return interp.Interpolate(tval)
                                             End Function)
 
+                        Exit Do
+
                     Else
 
                         x1 = x1 - dx
@@ -674,7 +676,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             IObj?.Close()
 
-            If Double.IsNaN(T) Or T <= Tmin Or T >= Tmax Or cnt > maxitEXT Or Abs(fx) > tolEXT Then
+            If Double.IsNaN(T) Or T <= Tmin Or T >= Tmax Or cnt > maxitEXT Then
                 'switch to mode 2 if it doesn't converge using fast mode.
                 WriteDebugInfo("PH Flash [NL]: Didn't converge in fast mode. Switching to rigorous...")
                 Return Flash_PH_2(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
@@ -1153,6 +1155,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                                             Function(tval)
                                                 Return interp.Interpolate(tval)
                                             End Function)
+
+                        Exit Do
 
                     Else
 

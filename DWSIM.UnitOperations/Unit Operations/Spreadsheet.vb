@@ -25,8 +25,8 @@ Imports DWSIM.Thermodynamics.Streams
 Imports DWSIM.SharedClasses
 Imports System.Windows.Forms
 Imports DWSIM.UnitOperations.UnitOperations.Auxiliary
-Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Interfaces.Enums
+Imports System.IO
 
 Namespace UnitOperations.Auxiliary
 
@@ -143,6 +143,19 @@ Namespace UnitOperations
 
             Dim excelType As Type = Nothing
 
+            If Not File.Exists(Filename) Then
+                'try to find the file in the current directory.
+                Dim fname = Path.GetFileName(Filename)
+                Dim newpath = Path.Combine(Path.GetDirectoryName(FlowSheet.FilePath), fname)
+                If File.Exists(newpath) Then
+                    Filename = Path.GetFullPath(newpath)
+                End If
+            End If
+
+            If Not File.Exists(Filename) Then
+                Throw New Exception("Definition file '" & Filename & "' :" & FlowSheet.GetTranslatedString("Oarquivonoexisteoufo"))
+            End If
+
             If Not Calculator.IsRunningOnMono Then excelType = Type.GetTypeFromProgID("Excel.Application")
 
             If Not Calculator.IsRunningOnMono And Not excelType Is Nothing Then
@@ -162,13 +175,7 @@ Namespace UnitOperations
                     Dim AppPath = Application.StartupPath
 
                     'Load Excel definition file
-                    If My.Computer.FileSystem.FileExists(Filename) Then
-                        mybook = xcl.Workbooks.Open(Filename)
-                    Else
-                        xcl.Quit()
-                        'xcl.Dispose()
-                        Throw New Exception("Definition file '" & Filename & "' :" & FlowSheet.GetTranslatedString("Oarquivonoexisteoufo"))
-                    End If
+                    mybook = xcl.Workbooks.Open(Filename)
 
                     'xcl.Visible = True 'uncomment for debugging
                     xcl.Calculation = XlCalculation.xlCalculationManual
@@ -176,14 +183,6 @@ Namespace UnitOperations
                     Dim mysheetIn As Excel.Worksheet = mybook.Sheets("Input")
                     Dim mysheetOut As Excel.Worksheet = mybook.Sheets("Output")
                     '=====================================================================================================
-
-                    'If Not Me.GraphicObject.InputConnectors(4).IsAttached Then 'Check if Energy stream existing
-                    '    mybook.Close(saveChanges:=False)
-                    '    xcl.Quit()
-                    '    'xcl.Dispose()
-                    '    'CalculateFlowsheet(FlowSheet, objargs, Nothing)
-                    '    Throw New Exception(FlowSheet.GetTranslatedString("NohcorrentedeEnergyFlow1"))
-                    'End If
 
                     'check if at least one input and output connection is available
                     For k = 0 To 3

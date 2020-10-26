@@ -119,6 +119,8 @@ Partial Class FormSimulSettings
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.GroupBox10 = New System.Windows.Forms.GroupBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.chkSkipEqCalcs = New System.Windows.Forms.CheckBox()
         Me.TabPageReactions = New System.Windows.Forms.TabPage()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.GroupBox16 = New System.Windows.Forms.GroupBox()
@@ -151,8 +153,6 @@ Partial Class FormSimulSettings
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.OpenFileDialog3 = New System.Windows.Forms.OpenFileDialog()
         Me.FontDialog1 = New System.Windows.Forms.FontDialog()
-        Me.chkSkipEqCalcs = New System.Windows.Forms.CheckBox()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox18.SuspendLayout()
@@ -173,6 +173,7 @@ Partial Class FormSimulSettings
         Me.TabPage1.SuspendLayout()
         Me.GroupBox10.SuspendLayout()
         Me.TabPage2.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.GroupBox16.SuspendLayout()
         Me.GroupBox15.SuspendLayout()
@@ -181,7 +182,6 @@ Partial Class FormSimulSettings
         Me.GroupBox14.SuspendLayout()
         Me.TabPage5.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
-        Me.GroupBox4.SuspendLayout()
         Me.SuspendLayout()
         '
         'Button9
@@ -898,6 +898,21 @@ Partial Class FormSimulSettings
         Me.ToolTip1.SetToolTip(Me.TabPage2, resources.GetString("TabPage2.ToolTip"))
         Me.TabPage2.UseVisualStyleBackColor = True
         '
+        'GroupBox4
+        '
+        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
+        Me.GroupBox4.Controls.Add(Me.chkSkipEqCalcs)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox4, resources.GetString("GroupBox4.ToolTip"))
+        '
+        'chkSkipEqCalcs
+        '
+        resources.ApplyResources(Me.chkSkipEqCalcs, "chkSkipEqCalcs")
+        Me.chkSkipEqCalcs.Name = "chkSkipEqCalcs"
+        Me.ToolTip1.SetToolTip(Me.chkSkipEqCalcs, resources.GetString("chkSkipEqCalcs.ToolTip"))
+        Me.chkSkipEqCalcs.UseVisualStyleBackColor = True
+        '
         'TabPageReactions
         '
         resources.ApplyResources(Me.TabPageReactions, "TabPageReactions")
@@ -1152,21 +1167,6 @@ Partial Class FormSimulSettings
         '
         Me.FontDialog1.ShowColor = True
         '
-        'chkSkipEqCalcs
-        '
-        resources.ApplyResources(Me.chkSkipEqCalcs, "chkSkipEqCalcs")
-        Me.chkSkipEqCalcs.Name = "chkSkipEqCalcs"
-        Me.ToolTip1.SetToolTip(Me.chkSkipEqCalcs, resources.GetString("chkSkipEqCalcs.ToolTip"))
-        Me.chkSkipEqCalcs.UseVisualStyleBackColor = True
-        '
-        'GroupBox4
-        '
-        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
-        Me.GroupBox4.Controls.Add(Me.chkSkipEqCalcs)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.GroupBox4, resources.GetString("GroupBox4.ToolTip"))
-        '
         'FormSimulSettings
         '
         resources.ApplyResources(Me, "$this")
@@ -1202,6 +1202,8 @@ Partial Class FormSimulSettings
         Me.TabPage1.ResumeLayout(False)
         Me.GroupBox10.ResumeLayout(False)
         Me.TabPage2.ResumeLayout(False)
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
         Me.TabPage3.ResumeLayout(False)
         Me.GroupBox16.ResumeLayout(False)
         Me.GroupBox16.PerformLayout()
@@ -1214,8 +1216,6 @@ Partial Class FormSimulSettings
         Me.TabPage5.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
-        Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox4.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub

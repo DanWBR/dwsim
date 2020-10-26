@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="cbFlashType.Items" xml:space="preserve">
-    <value>Default</value>
+    <value>Default (SVLLE)</value>
   </data>
   <data name="cbFlashType.Items1" xml:space="preserve">
     <value>VLE</value>
@@ -284,46 +284,49 @@
     <value>General</value>
   </data>
   <data name="tbPHExtMaxIt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>489, 205</value>
+    <value>489, 219</value>
   </data>
   <data name="tbPHExtMaxIt.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 20</value>
   </data>
   <data name="tbPHIntMaxIt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>489, 179</value>
+    <value>489, 193</value>
   </data>
   <data name="tbPHIntMaxIt.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 20</value>
   </data>
   <data name="tbPHExtMaxTol.Location" type="System.Drawing.Point, System.Drawing">
-    <value>489, 153</value>
+    <value>489, 167</value>
   </data>
   <data name="tbPHExtMaxTol.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 20</value>
   </data>
   <data name="tbPHintMaxTol.Location" type="System.Drawing.Point, System.Drawing">
-    <value>489, 127</value>
+    <value>489, 141</value>
   </data>
   <data name="tbPHintMaxTol.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 20</value>
   </data>
   <data name="tbPTExtMaxIt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>489, 101</value>
+    <value>489, 115</value>
   </data>
   <data name="tbPTExtMaxIt.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 20</value>
   </data>
   <data name="tbPTintMaxIt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>489, 75</value>
+    <value>489, 89</value>
   </data>
   <data name="tbPTintMaxIt.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 20</value>
   </data>
   <data name="tbPTExtTol.Location" type="System.Drawing.Point, System.Drawing">
-    <value>489, 49</value>
+    <value>489, 63</value>
   </data>
   <data name="tbPTExtTol.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 20</value>
+  </data>
+  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 196</value>
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>309, 13</value>
@@ -331,11 +334,17 @@
   <data name="Label5.Text" xml:space="preserve">
     <value>Flash PH/PS - maximum number of iterations on the internal loop</value>
   </data>
+  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 222</value>
+  </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>312, 13</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
     <value>Flash PH/PS - maximum number of iterations on the external loop</value>
+  </data>
+  <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 170</value>
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>300, 13</value>
@@ -343,11 +352,17 @@
   <data name="Label7.Text" xml:space="preserve">
     <value>Flash PH/PS - external loop convergence tolerance (absolute)</value>
   </data>
+  <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 144</value>
+  </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>297, 13</value>
   </data>
   <data name="Label8.Text" xml:space="preserve">
     <value>Flash PH/PS - internal loop convergence tolerance (absolute)</value>
+  </data>
+  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 92</value>
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>308, 13</value>
@@ -355,11 +370,17 @@
   <data name="Label4.Text" xml:space="preserve">
     <value>Flash PT/PV - maximum number of iterations on the internal loop</value>
   </data>
+  <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 118</value>
+  </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>311, 13</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Flash PT/PV - maximum number of iterations on the external loop</value>
+  </data>
+  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 66</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>299, 13</value>
@@ -368,10 +389,13 @@
     <value>Flash PT/PV - external loop convergence tolerance (absolute)</value>
   </data>
   <data name="tbPTIntTol.Location" type="System.Drawing.Point, System.Drawing">
-    <value>489, 23</value>
+    <value>489, 37</value>
   </data>
   <data name="tbPTIntTol.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 20</value>
+  </data>
+  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 40</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>296, 13</value>

@@ -522,6 +522,10 @@ Namespace PropertyPackages.Auxiliary
             IObj?.SetCurrent()
             Dim _zarray As List(Of Double) = CalcZ2(AG1, BG1)
 
+            If _zarray.Count = 0 Then
+                Throw New Exception("PR EOS: unable to calculate a valid compressibility factor.")
+            End If
+
             If TIPO = "L" Then
                 Z = _zarray.Min
             ElseIf TIPO = "V" Then

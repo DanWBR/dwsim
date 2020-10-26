@@ -678,32 +678,6 @@ Public Class FormMain
 
     End Sub
 
-    Sub AddFlashAlgorithms()
-
-        Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
-        Dim availableTypes As New List(Of Type)()
-
-        availableTypes.AddRange(calculatorassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.IFlashAlgorithm") IsNot Nothing, True, False)))
-
-        For Each item In availableTypes.OrderBy(Function(x) x.Name)
-            If Not item.IsAbstract Then
-                Dim obj = DirectCast(Activator.CreateInstance(item), Interfaces.IFlashAlgorithm)
-                If Not obj.InternalUseOnly Then FlashAlgorithms.Add(obj.Name, obj)
-                If obj.Name.Contains("Gibbs") And Not obj.Name.Contains("SVLLE") Then
-                    Dim obj2 = obj.Clone
-                    DirectCast(obj2, Auxiliary.FlashAlgorithms.GibbsMinimization3P).ForceTwoPhaseOnly = True
-                    FlashAlgorithms.Add(obj2.Name, obj2)
-                End If
-                If TypeOf obj Is Auxiliary.FlashAlgorithms.NestedLoopsSLE Then
-                    Dim obj2 = obj.Clone
-                    DirectCast(obj2, Auxiliary.FlashAlgorithms.NestedLoopsSLE).SolidSolution = True
-                    FlashAlgorithms.Add(obj2.Name, obj2)
-                End If
-            End If
-        Next
-
-    End Sub
-
     Private Sub FormParent_MdiChildActivate(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.MdiChildActivate
 
         If Me.MdiChildren.Length >= 1 Then
@@ -847,6 +821,7 @@ Public Class FormMain
     Sub UpdateFOSSEEList()
 
         For Each item In FOSSEEList
+
             Dim tsmi As New ToolStripMenuItem
             With tsmi
                 .Text = item.DisplayName
@@ -1598,7 +1573,9 @@ Public Class FormMain
         Dim savedfromclui As Boolean = True
 
         Try
-            savedfromclui = Boolean.Parse(xdoc.Element("DWSIM_Simulation_Data").Element("GeneralInfo").Element("SavedFromClassicUI").Value)
+            If xdoc.Element("DWSIM_Simulation_Data").Element("GeneralInfo").Element("SavedFromClassicUI") IsNot Nothing Then
+                savedfromclui = Boolean.Parse(xdoc.Element("DWSIM_Simulation_Data").Element("GeneralInfo").Element("SavedFromClassicUI").Value)
+            End If
         Catch ex As Exception
         End Try
 
@@ -3966,6 +3943,30 @@ Label_00CC:
             ' There was an error during the operation.
             Console.WriteLine("Error saving backup file: " & e.Error.Message)
         End If
+    End Sub
+
+    Private Sub ReaktoroToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReaktoroToolStripMenuItem.Click
+        Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Aqueous_Electrolytes_Property_Package")
+    End Sub
+
+    Private Sub NNUOToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NNUOToolStripMenuItem.Click
+        Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Neural_Network_Unit_Operation")
+    End Sub
+
+    Private Sub PNUOToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PNUOToolStripMenuItem.Click
+        Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Pipe_Network_Unit_Operation")
+    End Sub
+
+    Private Sub CapitalCostToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CapitalCostToolStripMenuItem.Click
+        Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Capital_Cost_Estimator")
+    End Sub
+
+    Private Sub OPCPluginToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OPCPluginToolStripMenuItem.Click
+        Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=OPC_Client_Plugin")
+    End Sub
+
+    Private Sub DTLToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DTLToolStripMenuItem.Click
+        Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=DTL")
     End Sub
 
     Private Sub tsbInspector_CheckedChanged(sender As Object, e As EventArgs) Handles tsbInspector.CheckedChanged
