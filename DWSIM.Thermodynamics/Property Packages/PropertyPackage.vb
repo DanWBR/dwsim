@@ -12005,6 +12005,16 @@ Final3:
             Return arr2
         End Function
 
+        ''' <summary>
+        ''' Sets the Phase Equilibria Calculation mode for this instance. Default behavior is SVLLE. 
+        ''' </summary>
+        ''' <param name="mode">Recognized values: 'Default', 'VLE', 'VLLE', 'SVLE' and 'SVLLE'.</param>
+        Public Sub SetPhaseEquilibriaCalculationMode(mode As String)
+
+            FlashSettings(FlashSetting.ForceEquilibriumCalculationType) = mode
+
+        End Sub
+
 #End Region
 
     End Class

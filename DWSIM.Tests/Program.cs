@@ -95,6 +95,7 @@ namespace DWSIM.Tests
                 }
                 catch
                 {
+                    status = "FAILED";
                     failed.Add(Path.GetFileNameWithoutExtension(s));
                 }
                 finally {

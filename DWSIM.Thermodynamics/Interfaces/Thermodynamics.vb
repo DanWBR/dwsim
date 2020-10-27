@@ -1979,7 +1979,7 @@ Namespace CalculatorInterface
         ''' Calculates a PT Flash using the referenced Property Package.
         ''' </summary>
         ''' <param name="proppack">A reference to the Property Package object to use.</param>
-        ''' <param name="flashalg">Flash Algorithm (2 = Global Def., 0 = NL VLE, 1 = IO VLE, 3 = IO VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = NL VLLE, 7 = NL SLE, 8 = NL Immisc., 9 = Simple LLE, 10 = Nested Loops SVLLE, 11 = Gibbs Minimization SVLLE)</param>
+        ''' <param name="flashalg">[DEPRECATED] Flash Algorithm (2 = Global Def., 0 = NL VLE, 1 = IO VLE, 3 = IO VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = NL VLLE, 7 = NL SLE, 8 = NL Immisc., 9 = Simple LLE, 10 = Nested Loops SVLLE, 11 = Gibbs Minimization SVLLE)</param>
         ''' <param name="T">Temperature in K.</param>
         ''' <param name="P">Pressure in Pa.</param>
         ''' <param name="compounds">Compound names.</param>
@@ -2035,33 +2035,6 @@ Namespace CalculatorInterface
             ms._pp = pp
             pp.SetMaterial(ms)
 
-            'Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 
-            '5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE
-            Select Case flashalg
-                Case 0, 2
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops
-                Case 1
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.BostonBrittInsideOut
-                Case 3
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P
-                Case 4
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = True}
-                Case 5
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = False}
-                Case 6
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops3PV3
-                Case 7
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSLE
-                Case 8
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsImmiscible
-                Case 9
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.SimpleLLE
-                Case 10
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSVLLE
-                Case 11
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimizationMulti
-            End Select
-
             pp.CalcEquilibrium(ms, "TP", "UNDEFINED")
 
             Dim labels As String() = Nothing
@@ -2098,7 +2071,7 @@ Namespace CalculatorInterface
         ''' Calculates a PH Flash using the referenced Property Package.
         ''' </summary>
         ''' <param name="proppack">A reference to the Property Package object to use.</param>
-        ''' <param name="flashalg">Flash Algorithm (2 = Global Def., 0 = NL VLE, 1 = IO VLE, 3 = IO VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = NL VLLE, 7 = NL SLE, 8 = NL Immisc., 9 = Simple LLE, 10 = Nested Loops SVLLE, 11 = Gibbs Minimization SVLLE)</param>
+        ''' <param name="flashalg">[DEPRECATED] Flash Algorithm (2 = Global Def., 0 = NL VLE, 1 = IO VLE, 3 = IO VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = NL VLLE, 7 = NL SLE, 8 = NL Immisc., 9 = Simple LLE, 10 = Nested Loops SVLLE, 11 = Gibbs Minimization SVLLE)</param>
         ''' <param name="P">Pressure in Pa.</param>
         ''' <param name="H">Mixture Mass Enthalpy in kJ/kg.</param>
         ''' <param name="compounds">Compound names.</param>
@@ -2156,33 +2129,6 @@ Namespace CalculatorInterface
             ms._pp = pp
             pp.SetMaterial(ms)
 
-            'Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 
-            '5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE
-            Select Case flashalg
-                Case 0, 2
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops
-                Case 1
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.BostonBrittInsideOut
-                Case 3
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P
-                Case 4
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = True}
-                Case 5
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = False}
-                Case 6
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops3PV3
-                Case 7
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSLE
-                Case 8
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsImmiscible
-                Case 9
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.SimpleLLE
-                Case 10
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSVLLE
-                Case 11
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimizationMulti
-            End Select
-
             ms.Phases(0).Properties.temperature = InitialTemperatureEstimate
 
             pp.CalcEquilibrium(ms, "PH", "UNDEFINED")
@@ -2223,7 +2169,7 @@ Namespace CalculatorInterface
         ''' Calculates a PS Flash using the referenced Property Package.
         ''' </summary>
         ''' <param name="proppack">A reference to the Property Package object to use.</param>
-        ''' <param name="flashalg">Flash Algorithm (2 = Global Def., 0 = NL VLE, 1 = IO VLE, 3 = IO VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = NL VLLE, 7 = NL SLE, 8 = NL Immisc., 9 = Simple LLE, 10 = Nested Loops SVLLE, 11 = Gibbs Minimization SVLLE)</param>
+        ''' <param name="flashalg">[DEPRECATED] Flash Algorithm (2 = Global Def., 0 = NL VLE, 1 = IO VLE, 3 = IO VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = NL VLLE, 7 = NL SLE, 8 = NL Immisc., 9 = Simple LLE, 10 = Nested Loops SVLLE, 11 = Gibbs Minimization SVLLE)</param>
         ''' <param name="P">Pressure in Pa.</param>
         ''' <param name="S">Mixture Mass Entropyin kJ/[kg.K].</param>
         ''' <param name="compounds">Compound names.</param>
@@ -2281,33 +2227,6 @@ Namespace CalculatorInterface
             ms._pp = pp
             pp.SetMaterial(ms)
 
-            'Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 
-            '5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE
-            Select Case flashalg
-                Case 0, 2
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops
-                Case 1
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.BostonBrittInsideOut
-                Case 3
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P
-                Case 4
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = True}
-                Case 5
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = False}
-                Case 6
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops3PV3
-                Case 7
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSLE
-                Case 8
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsImmiscible
-                Case 9
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.SimpleLLE
-                Case 10
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSVLLE
-                Case 11
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimizationMulti
-            End Select
-
             ms.Phases(0).Properties.temperature = InitialTemperatureEstimate
 
             pp.CalcEquilibrium(ms, "PS", "UNDEFINED")
@@ -2348,7 +2267,7 @@ Namespace CalculatorInterface
         ''' Calculates a PVF Flash using the referenced Property Package.
         ''' </summary>
         ''' <param name="proppack">A reference to the Property Package object to use.</param>
-        ''' <param name="flashalg">Flash Algorithm (2 = Global Def., 0 = NL VLE, 1 = IO VLE, 3 = IO VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = NL VLLE, 7 = NL SLE, 8 = NL Immisc., 9 = Simple LLE, 10 = Nested Loops SVLLE, 11 = Gibbs Minimization SVLLE)</param>
+        ''' <param name="flashalg">[DEPRECATED] Flash Algorithm (2 = Global Def., 0 = NL VLE, 1 = IO VLE, 3 = IO VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = NL VLLE, 7 = NL SLE, 8 = NL Immisc., 9 = Simple LLE, 10 = Nested Loops SVLLE, 11 = Gibbs Minimization SVLLE)</param>
         ''' <param name="P">Pressure in Pa.</param>
         ''' <param name="VF">Mixture Mole Vapor Fraction.</param>
         ''' <param name="compounds">Compound names.</param>
@@ -2406,33 +2325,6 @@ Namespace CalculatorInterface
             ms._pp = pp
             pp.SetMaterial(ms)
 
-            'Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 
-            '5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE
-            Select Case flashalg
-                Case 0, 2
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops
-                Case 1
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.BostonBrittInsideOut
-                Case 3
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P
-                Case 4
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = True}
-                Case 5
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = False}
-                Case 6
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops3PV3
-                Case 7
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSLE
-                Case 8
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsImmiscible
-                Case 9
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.SimpleLLE
-                Case 10
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSVLLE
-                Case 11
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimizationMulti
-            End Select
-
             ms.Phases(0).Properties.temperature = InitialTemperatureEstimate
 
             pp.CalcEquilibrium(ms, "PVF", "UNDEFINED")
@@ -2473,7 +2365,7 @@ Namespace CalculatorInterface
         ''' Calculates a TVF Flash using the referenced Property Package.
         ''' </summary>
         ''' <param name="proppack">A reference to the Property Package object to use.</param>
-        ''' <param name="flashalg">Flash Algorithm (2 = Global Def., 0 = NL VLE, 1 = IO VLE, 3 = IO VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = NL VLLE, 7 = NL SLE, 8 = NL Immisc., 9 = Simple LLE, 10 = Nested Loops SVLLE, 11 = Gibbs Minimization SVLLE)</param>
+        ''' <param name="flashalg">[DEPRECATED] Flash Algorithm (2 = Global Def., 0 = NL VLE, 1 = IO VLE, 3 = IO VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = NL VLLE, 7 = NL SLE, 8 = NL Immisc., 9 = Simple LLE, 10 = Nested Loops SVLLE, 11 = Gibbs Minimization SVLLE)</param>
         ''' <param name="T">Temperature in K.</param>
         ''' <param name="VF">Mixture Mole Vapor Fraction.</param>
         ''' <param name="compounds">Compound names.</param>
@@ -2530,33 +2422,6 @@ Namespace CalculatorInterface
 
             ms._pp = pp
             pp.SetMaterial(ms)
-
-            'Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 
-            '5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE
-            Select Case flashalg
-                Case 0, 2
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops
-                Case 1
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.BostonBrittInsideOut
-                Case 3
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P
-                Case 4
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = True}
-                Case 5
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = False}
-                Case 6
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops3PV3
-                Case 7
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSLE
-                Case 8
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsImmiscible
-                Case 9
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.SimpleLLE
-                Case 10
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSVLLE
-                Case 11
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimizationMulti
-            End Select
 
             ms.Phases(0).Properties.pressure = InitialPressureEstimate
 
@@ -2819,7 +2684,7 @@ Namespace CalculatorInterface
         ''' Calculates Phase Equilibria for a given mixture at specified conditions.
         ''' </summary>
         ''' <param name="flashtype">The type of the flash algorithm to calculate</param>
-        ''' <param name="flashalg">The flash algorithm to use (set to -1 to use the current instance)</param>
+        ''' <param name="flashalg">[DEPRECATED] The flash algorithm to use (set to -1 to use the current instance)</param>
         ''' <param name="val1">Value of the first flash state specification (P in Pa, T in K, H in kJ/kg, S in kJ/[kg.K], VAP/SF in mole fraction from 0 to 1)</param>
         ''' <param name="val2">Value of the second flash state specification (P in Pa, T in K, H in kJ/kg, S in kJ/[kg.K], VAP/SF in mole fraction from 0 to 1)</param>
         ''' <param name="pp">Property Package instance</param>
@@ -2869,33 +2734,6 @@ Namespace CalculatorInterface
 
             ms._pp = pp
             pp.SetMaterial(ms)
-
-            'Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 
-            '5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE
-            Select Case flashalg
-                Case 0, 2
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops
-                Case 1
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.BostonBrittInsideOut
-                Case 3
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P
-                Case 4
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = True}
-                Case 5
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = False}
-                Case 6
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops3PV3
-                Case 7
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSLE
-                Case 8
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsImmiscible
-                Case 9
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.SimpleLLE
-                Case 10
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSVLLE
-                Case 11
-                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimizationMulti
-            End Select
 
             Dim results As New FlashCalculationResult
 
