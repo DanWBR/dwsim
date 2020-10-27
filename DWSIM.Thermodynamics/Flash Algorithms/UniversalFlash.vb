@@ -1,5 +1,5 @@
 ﻿'    DWSIM Universal Flash Algorithm
-'    Copyright 2018 Daniel Wagner O. de Medeiros
+'    Copyright 2020 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -75,12 +75,21 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     End Try
                 Case "VLLE", "SVLLE"
                     'SVLLE/VLLE
-                    Dim gmin As New GibbsMinimizationMulti With {.FlashSettings = FlashSettings}
-                    Try
-                        result = gmin.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-                    Catch ex As Exception
-                        errflag = True
-                    End Try
+                    If Settings.ExcelMode Then
+                        Try
+                            Dim nl As New NestedLoopsSVLLE With {.FlashSettings = FlashSettings}
+                            result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                        Catch ex As Exception
+                            errflag = True
+                        End Try
+                    Else
+                        Dim gmin As New GibbsMinimizationMulti With {.FlashSettings = FlashSettings}
+                        Try
+                            result = gmin.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                        Catch ex As Exception
+                            errflag = True
+                        End Try
+                    End If
                 Case "SVLE"
                     'SVLE
                     Try
@@ -93,12 +102,21 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Dim hres = PerformHeuristicsTest(Vz, T, P, PP)
                     If hres.LiquidPhaseSplit Then
                         'SVLLE/VLLE
-                        Dim gmin As New GibbsMinimizationMulti With {.FlashSettings = FlashSettings}
-                        Try
-                            result = gmin.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-                        Catch ex As Exception
-                            errflag = True
-                        End Try
+                        If Settings.ExcelMode Then
+                            Try
+                                Dim nl As New NestedLoopsSVLLE With {.FlashSettings = FlashSettings}
+                                result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                            Catch ex As Exception
+                                errflag = True
+                            End Try
+                        Else
+                            Dim gmin As New GibbsMinimizationMulti With {.FlashSettings = FlashSettings}
+                            Try
+                                result = gmin.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                            Catch ex As Exception
+                                errflag = True
+                            End Try
+                        End If
                     ElseIf Not hres.LiquidPhaseSplit And hres.SolidPhase Then
                         'SVLE
                         Try
