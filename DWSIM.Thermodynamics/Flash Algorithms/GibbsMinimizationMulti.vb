@@ -347,7 +347,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Dim VTfus As Double() = PP.RET_VTF
 
                 For i = 0 To n
-                    If Vz(i) > 0.0 And T < VTfus(i) Then
+                    If Vz(i) > 0.0 And T < VTfus(i) Or PP.ForcedSolids.Contains(Vn(i)) Then
                         Vs(i) = Vz(i)
                         Vz2(i) = 0.0
                     End If

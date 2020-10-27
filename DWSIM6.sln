@@ -1943,10 +1943,10 @@ Global
 		{ED30CDE1-AE47-42E0-A9A1-C9D3D9DB1242}.Release WinMac|Any CPU.Build.0 = Release|Any CPU
 		{ED30CDE1-AE47-42E0-A9A1-C9D3D9DB1242}.Release WinMac|wine32.ActiveCfg = Release|Any CPU
 		{ED30CDE1-AE47-42E0-A9A1-C9D3D9DB1242}.Release WinMac|wine32.Build.0 = Release|Any CPU
-		{ED30CDE1-AE47-42E0-A9A1-C9D3D9DB1242}.Release WinMac|x64.ActiveCfg = Release|Any CPU
-		{ED30CDE1-AE47-42E0-A9A1-C9D3D9DB1242}.Release WinMac|x64.Build.0 = Release|Any CPU
-		{ED30CDE1-AE47-42E0-A9A1-C9D3D9DB1242}.Release WinMac|x86.ActiveCfg = Release|Any CPU
-		{ED30CDE1-AE47-42E0-A9A1-C9D3D9DB1242}.Release WinMac|x86.Build.0 = Release|Any CPU
+		{ED30CDE1-AE47-42E0-A9A1-C9D3D9DB1242}.Release WinMac|x64.ActiveCfg = Release|x64
+		{ED30CDE1-AE47-42E0-A9A1-C9D3D9DB1242}.Release WinMac|x64.Build.0 = Release|x64
+		{ED30CDE1-AE47-42E0-A9A1-C9D3D9DB1242}.Release WinMac|x86.ActiveCfg = Release|x86
+		{ED30CDE1-AE47-42E0-A9A1-C9D3D9DB1242}.Release WinMac|x86.Build.0 = Release|x86
 		{ED30CDE1-AE47-42E0-A9A1-C9D3D9DB1242}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED30CDE1-AE47-42E0-A9A1-C9D3D9DB1242}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ED30CDE1-AE47-42E0-A9A1-C9D3D9DB1242}.Release|wine32.ActiveCfg = Release|Any CPU

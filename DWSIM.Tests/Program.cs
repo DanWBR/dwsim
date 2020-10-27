@@ -72,24 +72,36 @@ namespace DWSIM.Tests
                 Console.WriteLine("[" + i + "/" + totaltests + "] " + "Loading '" + Path.GetFileNameWithoutExtension(s) + "'...");
                 Console.WriteLine();
 
-                sim = interf.LoadFlowsheet(s);
-
-                Console.WriteLine();
-                Console.WriteLine("[" + i + "/" + totaltests + "] " + "Running '" + Path.GetFileNameWithoutExtension(s) + "'...");
-                Console.WriteLine();
-
-                errors = interf.CalculateFlowsheet2(sim);
-
-                dpf = DateTime.Now;
-
                 string status = "PASSED";
 
-                if (errors.Count > 0)
+                try
                 {
-                    status = "FAILED";
+
+                    sim = interf.LoadFlowsheet(s);
+
+                    Console.WriteLine();
+                    Console.WriteLine("[" + i + "/" + totaltests + "] " + "Running '" + Path.GetFileNameWithoutExtension(s) + "'...");
+                    Console.WriteLine();
+
+                    errors = interf.CalculateFlowsheet2(sim);
+
+                    if (errors.Count > 0)
+                    {
+                        status = "FAILED";
+                        failed.Add(Path.GetFileNameWithoutExtension(s));
+                    }
+                    else { passedtests += 1; }
+
+                }
+                catch
+                {
                     failed.Add(Path.GetFileNameWithoutExtension(s));
                 }
-                else { passedtests += 1; }
+                finally {
+
+                    dpf = DateTime.Now;
+
+                }
 
                 partials.Add(dpf - dp0);
 
@@ -119,8 +131,8 @@ namespace DWSIM.Tests
                 Console.WriteLine();
             }
 
-            Console.WriteLine("Press Any Key to Continue...");
-            Console.ReadKey();
+            //Console.WriteLine("Press Any Key to Continue...");
+            //Console.ReadKey();
 
         }
 

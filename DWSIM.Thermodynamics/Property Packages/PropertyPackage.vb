@@ -7448,6 +7448,10 @@ Final3:
             Dim Tf = RET_VTF()
             Dim Hf = RET_VHF()
 
+            Dim names = RET_VNAMES()
+
+            If ForcedSolids Is Nothing Then ForcedSolids = New List(Of String)
+
             Dim i, n As Integer
 
             n = Tf.Length - 1
@@ -7461,10 +7465,14 @@ Final3:
             Next
 
             For i = 0 To n
-                If (T > Tf(i)) Then
-                    phis(i) = 10000000000.0 * Pvaps(i) / P
+                If ForcedSolids.Contains(names(i)) Then
+                    phis(i) = 0.000000000000001
                 Else
-                    phis(i) = Pvaps(i) / P
+                    If T > Tf(i) Then
+                        phis(i) = 10000000000.0 * Pvaps(i) / P
+                    Else
+                        phis(i) = Pvaps(i) / P
+                    End If
                 End If
                 If Double.IsNaN(phis(i)) Or Double.IsInfinity(phis(i)) Then phis(i) = Double.MaxValue
             Next

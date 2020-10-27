@@ -141,14 +141,18 @@ Namespace My
 
         Private Sub MyApplication_UnhandledException(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.UnhandledExceptionEventArgs) Handles Me.UnhandledException
             If Not CommandLineMode Then
-                Dim frmEx As New FormUnhandledException
-                frmEx.TextBox1.Text = e.Exception.ToString
-                frmEx.ex = e.Exception
-                frmEx.ShowDialog()
-                e.ExitApplication = False
+                If Not GlobalSettings.Settings.AutomationMode Then
+                    Dim frmEx As New FormUnhandledException
+                    frmEx.TextBox1.Text = e.Exception.ToString
+                    frmEx.ex = e.Exception
+                    frmEx.ShowDialog()
+                    e.ExitApplication = False
+                End If
             Else
-                Console.Write(e.Exception.ToString)
-                e.ExitApplication = True
+                If Not GlobalSettings.Settings.AutomationMode Then
+                    Console.Write(e.Exception.ToString)
+                    e.ExitApplication = True
+                End If
             End If
         End Sub
 
