@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{C0261CF7-B22C-4E27-9373-B0878F3FC298}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <StartupObject>DWSIM.Thermodynamics.StandaloneLibrary.Tests.Example1</StartupObject>
+    <StartupObject>DWSIM.Thermodynamics.StandaloneLibrary.Tests.Example2</StartupObject>
     <RootNamespace>DWSIM.Thermodynamics.StandaloneLibrary.Tests</RootNamespace>
     <AssemblyName>DWSIM.Thermodynamics.StandaloneLibrary.Tests</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -50,8 +50,8 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DWSIM.Thermodynamics.StandaloneLibrary">
-      <HintPath>..\DWSIM.Thermodynamics.StandaloneLibrary\bin\Release\DWSIM.Thermodynamics.StandaloneLibrary.dll</HintPath>
+    <Reference Include="CapeOpen">
+      <HintPath>..\DWSIM\References\CapeOpen.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -111,6 +111,16 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
+      <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
+      <Name>DWSIM.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Thermodynamics\DWSIM.Thermodynamics.vbproj">
+      <Project>{369bc7af-836b-4de1-93e3-b051bc148b23}</Project>
+      <Name>DWSIM.Thermodynamics</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

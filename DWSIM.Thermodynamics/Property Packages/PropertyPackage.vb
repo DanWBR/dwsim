@@ -712,7 +712,15 @@ Namespace PropertyPackages
 
             Dim p = Me.CurrentMaterialStream.Phases(phaseID)
 
-            If p.Name <> "Mixture" And p.Name <> "OverallLiquid" And p.Properties.molarfraction.HasValue Then
+            Dim check As Boolean = False
+
+            If p.Properties.molarfraction.HasValue Then
+                check = True
+            Else
+                If Settings.CAPEOPENMode Then check = True
+            End If
+
+            If p.Name <> "Mixture" And p.Name <> "OverallLiquid" And check Then
 
                 With p.Properties
                     .isothermal_compressibility = CalcIsothermalCompressibility(p)
@@ -735,7 +743,15 @@ Namespace PropertyPackages
 
             Dim Z, P0, P1, T, Z1 As Double
 
-            If Not p.Properties.molarfraction.HasValue Then Return 0.0
+            Dim check As Boolean = False
+
+            If p.Properties.molarfraction.HasValue Then
+                check = True
+            Else
+                If Settings.CAPEOPENMode Then check = True
+            End If
+
+            If Not check Then Return 0.0
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -823,7 +839,15 @@ Namespace PropertyPackages
 
         Public Overridable Function CalcJouleThomsonCoefficient(p As IPhase) As Double
 
-            If Not p.Properties.molarfraction.HasValue Then Return 0.0
+            Dim check As Boolean = False
+
+            If p.Properties.molarfraction.HasValue Then
+                check = True
+            Else
+                If Settings.CAPEOPENMode Then check = True
+            End If
+
+            If Not check Then Return 0.0
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -9477,6 +9501,21 @@ Final3:
                     Me.CurrentMaterialStream.Phases(0).Properties.pressure = P
                     Me.CurrentMaterialStream.SetPhaseComposition(Vx, phs)
 
+                    Select Case [property].ToLower
+                        Case "isothermalcompressibility",
+                             "bulkmodulus",
+                             "joulethomsoncoefficient",
+                             "speedofsound",
+                             "internalenergy",
+                             "helmholtzenergy",
+                             "gibbsenergy"
+                            Me.DW_CalcProp("enthalpy", phs)
+                            Me.DW_CalcProp("entropy", phs)
+                            Me.DW_CalcProp("compressibilityfactor", phs)
+                            Me.DW_CalcProp("density", phs)
+                            CalcAdditionalPhaseProperties(f)
+                    End Select
+
                     If phs = Phase.Solid Then
                         Me.DW_CalcSolidPhaseProps()
                     Else
@@ -9484,6 +9523,7 @@ Final3:
                     End If
 
                     basis = "Mole"
+
                     Select Case [property].ToLower
                         Case "compressibilityfactor"
                             res.Add(Me.CurrentMaterialStream.Phases(f).Properties.compressibilityFactor.GetValueOrDefault)

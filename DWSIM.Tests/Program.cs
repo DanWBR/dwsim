@@ -93,10 +93,11 @@ namespace DWSIM.Tests
                     else { passedtests += 1; }
 
                 }
-                catch
+                catch(Exception ex)
                 {
                     status = "FAILED";
                     failed.Add(Path.GetFileNameWithoutExtension(s));
+                    Console.WriteLine("[" + i + "/" + totaltests + "] ERROR: " + ex.Message);
                 }
                 finally {
 

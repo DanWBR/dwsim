@@ -5182,7 +5182,7 @@ Namespace Streams
                             Me.Phases(f).Properties.internal_energy = values(0) / 1000
                             Me.Phases(f).Properties.molar_internal_energy = values(0) * Me.PropertyPackage.AUX_MMM(phs)
                     End Select
-                Case "gibbslenergy"
+                Case "gibbsenergy"
                     Select Case basis
                         Case "Molar", "molar", "mole", "Mole"
                             Me.Phases(f).Properties.molar_gibbs_free_energy = values(0)
