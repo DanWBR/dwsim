@@ -1,4 +1,4 @@
-Version 6.3
+Version 6.3 Update 1
 
-- [NEW] New Thermodynamics subsystem with Univeral Flash Algorithm used by default
+- [NEW] Rigorous Column BP Solver now supports all Condenser/Reboiler specifications
 - [FIX] Bug fixes and enhancements

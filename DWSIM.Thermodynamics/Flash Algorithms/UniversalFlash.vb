@@ -73,8 +73,25 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Catch ex As Exception
                         errflag = True
                     End Try
-                Case "VLLE", "SVLLE"
-                    'SVLLE/VLLE
+                Case "VLLE"
+                    'VLLE
+                    If Settings.ExcelMode Then
+                        Try
+                            Dim nl As New NestedLoops3PV3 With {.FlashSettings = FlashSettings}
+                            result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                        Catch ex As Exception
+                            errflag = True
+                        End Try
+                    Else
+                        Dim gmin As New GibbsMinimization3P With {.FlashSettings = FlashSettings}
+                        Try
+                            result = gmin.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                        Catch ex As Exception
+                            errflag = True
+                        End Try
+                    End If
+                Case "SVLLE"
+                    'SVLLE
                     If Settings.ExcelMode Then
                         Try
                             Dim nl As New NestedLoopsSVLLE With {.FlashSettings = FlashSettings}
@@ -100,8 +117,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     End Try
                 Case Else
                     Dim hres = PerformHeuristicsTest(Vz, T, P, PP)
-                    If hres.LiquidPhaseSplit Then
-                        'SVLLE/VLLE
+                    If hres.LiquidPhaseSplit And hres.SolidPhase Then
+                        'SVLLE
                         If Settings.ExcelMode Then
                             Try
                                 Dim nl As New NestedLoopsSVLLE With {.FlashSettings = FlashSettings}
@@ -111,6 +128,23 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                             End Try
                         Else
                             Dim gmin As New GibbsMinimizationMulti With {.FlashSettings = FlashSettings}
+                            Try
+                                result = gmin.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                            Catch ex As Exception
+                                errflag = True
+                            End Try
+                        End If
+                    ElseIf hres.LiquidPhaseSplit And Not hres.SolidPhase Then
+                        'VLLE
+                        If Settings.ExcelMode Then
+                            Try
+                                Dim nl As New NestedLoops3PV3 With {.FlashSettings = FlashSettings}
+                                result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                            Catch ex As Exception
+                                errflag = True
+                            End Try
+                        Else
+                            Dim gmin As New GibbsMinimization3P With {.FlashSettings = FlashSettings}
                             Try
                                 result = gmin.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
                             Catch ex As Exception

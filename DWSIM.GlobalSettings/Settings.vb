@@ -69,7 +69,7 @@ Public Class Settings
     Public Shared Property DebugLevel As Integer = 0
     Public Shared Property MaxThreadMultiplier As Integer = 8
     Public Shared Property TaskScheduler As Integer = 0
-    Public Shared Property SolverTimeoutSeconds As Integer = 300
+    Public Shared Property SolverTimeoutSeconds As Integer = 15 * 60
     Public Shared Property SolverMode As Integer = 0
     Public Shared Property ServiceBusConnectionString As String = ""
     Public Shared Property CalculatorStopRequested As Boolean
