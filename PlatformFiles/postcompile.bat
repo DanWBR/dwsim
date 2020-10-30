@@ -1,6 +1,7 @@
 del ..\DistPackages\Windows\DWSIM.vshost.*
 del ..\DistPackages\Windows\*.tmp
 del ..\DistPackages\Windows\*.dylib
+del ..\DistPackages\Windows\*.so
 
 del ..\DistPackages\macOS\DWSIM.vshost.*
 del ..\DistPackages\macOS\*.tmp
@@ -16,6 +17,7 @@ del ..\DistPackages\Linux\*.dat
 del ..\DistPackages\Windows_32\DWSIM.vshost.*
 del ..\DistPackages\Windows_32\*.tmp
 del ..\DistPackages\Windows_32\*.dylib
+del ..\DistPackages\Windows_32\*.so
 
 del ..\DistPackages\Windows\plugins\*Skia*
 del ..\DistPackages\Windows\plugins\*Eto*
