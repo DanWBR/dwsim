@@ -215,7 +215,7 @@ namespace DWSIM.UI.Desktop.Editors
                                            }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)MatStream.GetFlowsheet()).HighLevelSolve.Invoke(); });
                     s.CreateAndAddDescriptionRow(container2, ms.GetPropertyDescription("Specific Entropy"));
 
-                    s.CreateAndAddTextBoxRow(container2, nf, "Vapor Phase Mole Fraction (spec)", ms.Phases[2].Properties.molarfraction.GetValueOrDefault(),
+                    s.CreateAndAddTextBoxRow(container2, nf, "Vapor Mole Frac (spec)", ms.Phases[2].Properties.molarfraction.GetValueOrDefault(),
                        (TextBox arg3, EventArgs ev) =>
                        {
                            if (arg3.Text.IsValidDoubleExpression())

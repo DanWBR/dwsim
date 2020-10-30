@@ -44,4 +44,6 @@
 
     Property ShowAlarms As Boolean
 
+    Property DisplayInPercent As Boolean
+
 End Interface

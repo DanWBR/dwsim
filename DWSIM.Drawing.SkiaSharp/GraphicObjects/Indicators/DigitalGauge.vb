@@ -76,6 +76,8 @@ Namespace GraphicObjects
                 End Using
             End If
 
+            Dim multiplier As Integer = IIf(owneri.DisplayInPercent, 100, 1)
+
             If Not SelectedObject Is Nothing Then
                 Try
                     currentvalue = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(owneri.SelectedPropertyUnits, SelectedObject.GetPropertyValue(owneri.SelectedProperty))
@@ -84,7 +86,7 @@ Namespace GraphicObjects
                 End Try
             End If
 
-            Dim valtext = currentvalue.ToString(formatstring)
+            Dim valtext = (currentvalue * multiplier).ToString(formatstring)
 
             Using paint As New SKPaint With {.TextSize = 29.0 * f, .Color = SKColors.LightGreen, .IsAntialias = True}
                 Dim assm = Me.GetType.Assembly

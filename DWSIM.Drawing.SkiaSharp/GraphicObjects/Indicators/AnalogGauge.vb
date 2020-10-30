@@ -94,8 +94,10 @@ Namespace GraphicObjects
 
             Dim owneri = DirectCast(Owner, IIndicator)
 
-            Dim minvalue = owneri.MinimumValue
-            Dim maxvalue = owneri.MaximumValue
+            Dim multiplier As Integer = IIf(owneri.DisplayInPercent, 100, 1)
+
+            Dim minvalue = owneri.MinimumValue * multiplier
+            Dim maxvalue = owneri.MaximumValue * multiplier
             Dim currentvalue As Double
 
             Dim SelectedObject = Owner?.GetFlowsheet.SimulationObjects.Values.Where(Function(x) x.Name = owneri.SelectedObjectID).FirstOrDefault
@@ -121,8 +123,8 @@ Namespace GraphicObjects
 
             If Not SelectedObject Is Nothing Then
                 Try
-                    currentvalue = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(owneri.SelectedPropertyUnits, SelectedObject.GetPropertyValue(owneri.SelectedProperty))
-                    owneri.CurrentValue = currentvalue
+                    currentvalue = multiplier * SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(owneri.SelectedPropertyUnits, SelectedObject.GetPropertyValue(owneri.SelectedProperty))
+                    owneri.CurrentValue = currentvalue / multiplier
                 Catch ex As Exception
                 End Try
             End If
@@ -135,7 +137,7 @@ Namespace GraphicObjects
                 canvas.DrawPath(needle, paint)
             End Using
 
-            Dim valtext = currentvalue.ToString("G4")
+            Dim valtext = currentvalue.ToString("N0")
 
             Using paint As New SKPaint With {.TextSize = 15.0 * f, .Color = GetForeColor(), .IsAntialias = True}
                 Select Case GlobalSettings.Settings.RunningPlatform

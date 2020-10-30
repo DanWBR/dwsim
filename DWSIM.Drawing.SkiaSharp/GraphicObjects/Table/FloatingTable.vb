@@ -458,6 +458,8 @@ Namespace GraphicObjects.Tables
 
                         Dim DeltaY As Integer = -Height2 - (n + 3) * Padding + size.Height
 
+                        'If MSObj.Flowsheet.FlowsheetOptions.DisplayFloatingTableCompoundAmounts And (Y + DeltaY) > 0 Then
+
                         If MSObj.Flowsheet.FlowsheetOptions.DisplayFloatingTableCompoundAmounts And (Y + DeltaY) > 0 Then
 
                             If Width2 > Owner.GetFlowsheet().GetFlowsheetSurfaceWidth * 2 / 3 Then Exit Sub

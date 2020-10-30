@@ -24,6 +24,7 @@ Partial Class EditingForm_DigitalGauge
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_DigitalGauge))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.chkDisplayPercent = New System.Windows.Forms.CheckBox()
         Me.NumericUpDown2 = New System.Windows.Forms.NumericUpDown()
         Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -63,6 +64,7 @@ Partial Class EditingForm_DigitalGauge
         'GroupBox1
         '
         resources.ApplyResources(Me.GroupBox1, "GroupBox1")
+        Me.GroupBox1.Controls.Add(Me.chkDisplayPercent)
         Me.GroupBox1.Controls.Add(Me.NumericUpDown2)
         Me.GroupBox1.Controls.Add(Me.NumericUpDown1)
         Me.GroupBox1.Controls.Add(Me.Label8)
@@ -81,6 +83,14 @@ Partial Class EditingForm_DigitalGauge
         Me.GroupBox1.TabStop = False
         Me.ToolTipValues.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
         Me.ToolTipChangeTag.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip1"))
+        '
+        'chkDisplayPercent
+        '
+        resources.ApplyResources(Me.chkDisplayPercent, "chkDisplayPercent")
+        Me.chkDisplayPercent.Name = "chkDisplayPercent"
+        Me.ToolTipValues.SetToolTip(Me.chkDisplayPercent, resources.GetString("chkDisplayPercent.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.chkDisplayPercent, resources.GetString("chkDisplayPercent.ToolTip1"))
+        Me.chkDisplayPercent.UseVisualStyleBackColor = True
         '
         'NumericUpDown2
         '
@@ -370,4 +380,5 @@ Partial Class EditingForm_DigitalGauge
     Public WithEvents tbVeryLow As TextBox
     Friend WithEvents chkVeryLow As CheckBox
     Friend WithEvents chkShowAlarms As CheckBox
+    Friend WithEvents chkDisplayPercent As CheckBox
 End Class

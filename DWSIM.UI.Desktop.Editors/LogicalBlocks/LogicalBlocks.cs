@@ -862,6 +862,11 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
                   spec.MaximumValue = tb.Text.ToDoubleFromCurrent();
               });
 
+            s.CreateAndAddCheckBoxRow(container, "Display in Percentage", spec.DisplayInPercent, (chk, e) =>
+            {
+                spec.DisplayInPercent = chk.Checked.GetValueOrDefault();
+            });
+
             s.CreateAndAddLabelRow(container, "Alarm Parameters");
 
             s.CreateAndAddCheckBoxRow(container, "Show Alarm Indicators", spec.ShowAlarms, (chk, e) =>
@@ -1006,6 +1011,11 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
                 spec.DecimalDigits, 1, 10, 0, (ns, e) => {
                     spec.DecimalDigits = (int)ns.Value;
                 });
+
+            s.CreateAndAddCheckBoxRow(container, "Display in Percentage", spec.DisplayInPercent, (chk, e) =>
+            {
+                spec.DisplayInPercent = chk.Checked.GetValueOrDefault();
+            });
 
             s.CreateAndAddLabelRow(container, "Alarm Parameters");
 
@@ -1153,6 +1163,11 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
               {
                   spec.MaximumValue = tb.Text.ToDoubleFromCurrent();
               });
+
+            s.CreateAndAddCheckBoxRow(container, "Display in Percentage", spec.DisplayInPercent, (chk, e) =>
+            {
+                spec.DisplayInPercent = chk.Checked.GetValueOrDefault();
+            });
 
             s.CreateAndAddLabelRow(container, "Alarm Parameters");
 

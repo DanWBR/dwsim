@@ -79,6 +79,8 @@ Namespace GraphicObjects
                 End Using
             End If
 
+            Dim multiplier As Integer = IIf(owneri.DisplayInPercent, 100, 1)
+
             If Not SelectedObject Is Nothing Then
                 Try
                     currentvalue = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(owneri.SelectedPropertyUnits, SelectedObject.GetPropertyValue(owneri.SelectedProperty))
@@ -89,9 +91,9 @@ Namespace GraphicObjects
 
             Dim nf = Owner.GetFlowsheet.FlowsheetOptions.NumberFormat
 
-            Dim minvaltext = owneri.MinimumValue.ToString("G2")
-            Dim maxvaltext = owneri.MaximumValue.ToString("G2")
-            Dim valtext = currentvalue.ToString("G2")
+            Dim minvaltext = (owneri.MinimumValue * multiplier).ToString("N0")
+            Dim maxvaltext = (owneri.MaximumValue * multiplier).ToString("N0")
+            Dim valtext = (currentvalue * multiplier).ToString("N0")
 
             Dim origin = X + w * 0.3
 

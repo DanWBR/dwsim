@@ -24,6 +24,7 @@ Partial Class EditingForm_LevelGauge
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_LevelGauge))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.chkDisplayPercent = New System.Windows.Forms.CheckBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.cbSourceUnits = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -61,6 +62,7 @@ Partial Class EditingForm_LevelGauge
         'GroupBox1
         '
         resources.ApplyResources(Me.GroupBox1, "GroupBox1")
+        Me.GroupBox1.Controls.Add(Me.chkDisplayPercent)
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.cbSourceUnits)
         Me.GroupBox1.Controls.Add(Me.Label3)
@@ -79,6 +81,14 @@ Partial Class EditingForm_LevelGauge
         Me.GroupBox1.TabStop = False
         Me.ToolTipValues.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
         Me.ToolTipChangeTag.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip1"))
+        '
+        'chkDisplayPercent
+        '
+        resources.ApplyResources(Me.chkDisplayPercent, "chkDisplayPercent")
+        Me.chkDisplayPercent.Name = "chkDisplayPercent"
+        Me.ToolTipValues.SetToolTip(Me.chkDisplayPercent, resources.GetString("chkDisplayPercent.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.chkDisplayPercent, resources.GetString("chkDisplayPercent.ToolTip1"))
+        Me.chkDisplayPercent.UseVisualStyleBackColor = True
         '
         'Label4
         '
@@ -360,4 +370,5 @@ Partial Class EditingForm_LevelGauge
     Public WithEvents tbVeryLow As TextBox
     Friend WithEvents chkVeryLow As CheckBox
     Friend WithEvents chkShowAlarms As CheckBox
+    Friend WithEvents chkDisplayPercent As CheckBox
 End Class

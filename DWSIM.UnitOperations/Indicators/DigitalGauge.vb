@@ -76,6 +76,8 @@ Namespace UnitOperations
 
         Public Overrides ReadOnly Property SupportsDynamicMode As Boolean = True
 
+        Public Property DisplayInPercent As Boolean = False Implements IIndicator.DisplayInPercent
+
         Public Sub New(ByVal name As String, ByVal description As String)
 
             MyBase.CreateNew()
@@ -100,24 +102,27 @@ Namespace UnitOperations
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
+            If GetFlowsheet.SimulationObjects.ContainsKey(SelectedObjectID) Then
 
-            Try
+                Try
 
-                Dim SelectedObject = GetFlowsheet.SimulationObjects.Values.Where(Function(x) x.Name = SelectedObjectID).FirstOrDefault
+                    Dim SelectedObject = GetFlowsheet.SimulationObjects.Values.Where(Function(x) x.Name = SelectedObjectID).FirstOrDefault
 
-                Dim currentvalue = SystemsOfUnits.Converter.ConvertFromSI(SelectedPropertyUnits, SelectedObject.GetPropertyValue(SelectedProperty))
+                    Dim currentvalue = SystemsOfUnits.Converter.ConvertFromSI(SelectedPropertyUnits, SelectedObject.GetPropertyValue(SelectedProperty))
 
-                VeryLowAlarmActive = currentvalue <= VeryLowAlarmValue And VeryLowAlarmEnabled
+                    VeryLowAlarmActive = currentvalue <= VeryLowAlarmValue And VeryLowAlarmEnabled
 
-                LowAlarmActive = currentvalue <= LowAlarmValue And LowAlarmEnabled
+                    LowAlarmActive = currentvalue <= LowAlarmValue And LowAlarmEnabled
 
-                HighAlarmActive = currentvalue >= HighAlarmValue And HighAlarmEnabled
+                    HighAlarmActive = currentvalue >= HighAlarmValue And HighAlarmEnabled
 
-                VeryHighAlarmActive = currentvalue >= VeryHighAlarmValue And VeryHighAlarmEnabled
+                    VeryHighAlarmActive = currentvalue >= VeryHighAlarmValue And VeryHighAlarmEnabled
 
-            Catch ex As Exception
+                Catch ex As Exception
 
-            End Try
+                End Try
+
+            End If
 
         End Sub
 
