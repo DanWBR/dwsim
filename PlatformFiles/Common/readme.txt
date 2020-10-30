@@ -28,13 +28,13 @@ SYSTEM REQUIREMENTS
 OS:             
 
 Windows: 32/64-bit 7/8/10
-Linux: 64-bit x86 Ubuntu 12.04 or newer / 32-bit armhf Raspbian/Ubuntu MATE
+Linux: 32/64-bit Wine-supported (https://www.winehq.org)
 macOS: 10.7 (OS X Lion) or newer
 
 Software:
 
 Microsoft .NET Framework 4.6.2 or newer (Windows) 
-Mono Framework 6.8.0 or newer (Linux)
+Wine 3.0.3 or newer (Linux)
 
 CPU:			
 
@@ -54,7 +54,7 @@ Display:
 
 Disk space:		
 
-750 MB for program files
+750-2000 MB for program files
 
 ==================================================
 VERSION HISTORY / CHANGELOG

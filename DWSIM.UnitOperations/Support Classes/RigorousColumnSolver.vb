@@ -28,6 +28,7 @@ Imports DWSIM.SharedClasses
 Imports Cureos.Numerics
 Imports DWSIM.Interfaces.Enums
 Imports DotNumerics.Optimization
+Imports DWSIM.MathOps.MathEx.Optimization
 
 Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
@@ -566,17 +567,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Next
                     sumc *= rec
                     If _condtype <> Column.condtype.Full_Reflux Then
-                        If _specs("C").SpecUnit = "% M/M" Then
-                            spfval1 = _xc(0)(spci1) * _LSSj(0) - sumc
-                        Else '% W/W
-                            spfval1 = _pp.RET_VMM()(spci1) * 1000 * (_xc(0)(spci1) * _LSSj(0) - sumc)
-                        End If
+                        spfval1 = (_LSSj(0) * _xc(0)(spci1) / sumc - rec) * 100
                     Else
-                        If _specs("C").SpecUnit = "% M/M" Then
-                            spfval1 = _yc(0)(spci1) * _Vj(0) - sumc
-                        Else '% W/W
-                            spfval1 = _pp.RET_VMM()(spci1) * 1000 * (_yc(0)(spci1) * _Vj(0) - sumc)
-                        End If
+                        spfval1 = (_Vj(0) * _yc(0)(spci1) / sumc - rec) * 100
                     End If
                 Case ColumnSpec.SpecType.Heat_Duty
                     _Q(0) = spval1 / _maxF
@@ -623,10 +616,10 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         sumc += _fc(j)(spci2)
                     Next
                     sumc *= rec
-                    If _specs("R").SpecUnit = "% M/M" Then
-                        spfval2 = _lc(_ns)(spci2) - sumc
-                    Else '% W/W
-                        spfval2 = _pp.RET_VMM()(spci2) * 1000 * (_lc(_ns)(spci2) - sumc)
+                    If _condtype <> Column.condtype.Full_Reflux Then
+                        spfval2 = (_Lj(_ns) * _xc(_ns)(spci2) / sumc - rec) * 100
+                    Else
+                        spfval2 = (_Vj(_ns) * _yc(_ns)(spci2) / sumc - rec) * 100
                     End If
                 Case ColumnSpec.SpecType.Heat_Duty
                     _Q(_ns) = spval2 / _maxF
@@ -1057,6 +1050,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 End If
                 For j = 0 To nc - 1
                     If Not llextr Then K(i, j) = tmp0(j) Else K(i, j) = Kval(i)(j)
+                    'K(i, j) = Kval(i)(j)
                     If Double.IsNaN(K(i, j)) Or Double.IsInfinity(K(i, j)) Or K(i, j) = 0 Then K(i, j) = pp.AUX_PVAPi(j, T(i)) / P(i)
                 Next
                 pp.CurrentMaterialStream.Flowsheet.CheckStatus()
@@ -1944,6 +1938,289 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                 ByVal specs As Dictionary(Of String, SepOps.ColumnSpec),
                                 ByVal IdealK As Boolean, ByVal IdealH As Boolean, ByVal MaxTChange As Double) As Object
 
+
+            Dim spval1, spval2 As Double
+            Dim spci1, spci2 As Integer
+
+            spval1 = SystemsOfUnits.Converter.ConvertToSI(specs("C").SpecUnit, specs("C").SpecValue)
+            spci1 = specs("C").ComponentIndex
+            spval2 = SystemsOfUnits.Converter.ConvertToSI(specs("R").SpecUnit, specs("R").SpecValue)
+            spci2 = specs("R").ComponentIndex
+
+            Dim specC_OK, specR_OK As Boolean
+
+            Select Case specs("C").SType
+                Case ColumnSpec.SpecType.Component_Fraction,
+                ColumnSpec.SpecType.Component_Mass_Flow_Rate,
+                ColumnSpec.SpecType.Component_Molar_Flow_Rate,
+                ColumnSpec.SpecType.Component_Recovery,
+                ColumnSpec.SpecType.Temperature
+                    specC_OK = False
+                Case Else
+                    specC_OK = True
+            End Select
+
+            Select Case specs("R").SType
+                Case ColumnSpec.SpecType.Component_Fraction,
+                ColumnSpec.SpecType.Component_Mass_Flow_Rate,
+                ColumnSpec.SpecType.Component_Molar_Flow_Rate,
+                ColumnSpec.SpecType.Component_Recovery,
+                ColumnSpec.SpecType.Temperature
+                    specR_OK = False
+                Case Else
+                    specR_OK = True
+            End Select
+
+            If Not specC_OK And Not specR_OK Then
+
+                Dim refluxratio As Double = (L(0) + LSS(0)) / LSS(0)
+                Dim bottomsrate As Double = L.Last
+
+                Dim newspecs As New Dictionary(Of String, ColumnSpec)
+                Dim cspec As New ColumnSpec()
+                cspec.SpecValue = refluxratio
+                cspec.SType = ColumnSpec.SpecType.Stream_Ratio
+                Dim rspec As New ColumnSpec()
+                rspec.SpecValue = bottomsrate
+                rspec.SType = ColumnSpec.SpecType.Product_Molar_Flow_Rate
+                newspecs.Add("C", cspec)
+                newspecs.Add("R", rspec)
+
+                Dim result As Object = Nothing
+
+                Dim simplex As New Simplex()
+
+                Dim svar1 As New OptSimplexBoundVariable(refluxratio, 1.0, 50.0)
+                Dim svar2 As New OptSimplexBoundVariable(bottomsrate, F.Sum * 0.05, F.Sum)
+
+                simplex.MaxFunEvaluations = maxits
+                simplex.Tolerance = 0.001
+                simplex.ComputeMin(Function(xvars)
+                                       cspec.SpecValue = xvars(0)
+                                       rspec.SpecValue = xvars(1)
+                                       result = Solve_Internal(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval,
+                                           x, y, z, fc, HF, T, P, condt, stopatitnumber, eff,
+                                           coltype, pp, newspecs, IdealK, IdealH, MaxTChange)
+                                       'Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ic, t_error}
+                                       T = result(0)
+                                       V = result(1)
+                                       L = result(2)
+                                       VSS = result(3)
+                                       LSS = result(4)
+                                       y = result(5)
+                                       x = result(6)
+                                       Kval = result(7)
+                                       Q = result(8)
+
+                                       Dim errfunc As Double = 0.0
+
+                                       Select Case specs("C").SType
+                                           Case ColumnSpec.SpecType.Component_Fraction
+                                               If specs("C").SpecUnit = "M" Or specs("C").SpecUnit = "Molar" Then
+                                                   errfunc += (x(0)(spci1) - spval1) ^ 2
+                                               Else 'W
+                                                   errfunc += (pp.AUX_CONVERT_MOL_TO_MASS(x(0))(spci1) - spval1) ^ 2
+                                               End If
+                                           Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
+                                               errfunc += (LSS(0) * x(0)(spci1) - spval1 / pp.RET_VMM()(spci1) * 1000) ^ 2
+                                           Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
+                                               errfunc += (LSS(0) * x(0)(spci1) - spval1) ^ 2
+                                           Case ColumnSpec.SpecType.Component_Recovery
+                                               Dim rec As Double = spval1 / 100
+                                               Dim sumc As Double = 0
+                                               For j = 0 To ns
+                                                   sumc += z(j)(spci1) * F(j)
+                                               Next
+                                               sumc *= rec
+                                               errfunc += ((LSS(0) * x(0)(spci1) / sumc - rec)) ^ 2
+                                           Case ColumnSpec.SpecType.Temperature
+                                               errfunc += (T(0) - spval1) ^ 2
+                                       End Select
+
+                                       Select Case specs("R").SType
+                                           Case ColumnSpec.SpecType.Component_Fraction
+                                               If specs("R").SpecUnit = "M" Or specs("R").SpecUnit = "Molar" Then
+                                                   errfunc += (x(ns)(spci2) - spval2) ^ 2
+                                               Else 'W
+                                                   errfunc += (pp.AUX_CONVERT_MOL_TO_MASS(x(ns))(spci2) - spval2) ^ 2
+                                               End If
+                                           Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
+                                               errfunc += (L(ns) * x(ns)(spci2) - spval2 / pp.RET_VMM()(spci2) * 1000) ^ 2
+                                           Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
+                                               errfunc += (L(ns) * x(ns)(spci2) - spval2) ^ 2
+                                           Case ColumnSpec.SpecType.Component_Recovery
+                                               Dim rec As Double = spval2 / 100
+                                               Dim sumc As Double = 0
+                                               For j = 0 To ns
+                                                   sumc += z(j)(spci2) * F(j)
+                                               Next
+                                               sumc *= rec
+                                               errfunc += ((L(ns) * x(ns)(spci2) / sumc - rec)) ^ 2
+                                           Case ColumnSpec.SpecType.Temperature
+                                               errfunc += (T(ns) - spval2) ^ 2
+                                       End Select
+                                       pp.Flowsheet?.ShowMessage("BP solver: current objective function (error) value = " & errfunc, IFlowsheet.MessageType.Information)
+                                       Return errfunc
+                                   End Function, {svar1, svar2})
+                Return result
+
+            ElseIf Not specC_OK Then
+
+                Dim refluxratio As Double = (L(0) + LSS(0)) / LSS(0)
+
+                Dim newspecs As New Dictionary(Of String, ColumnSpec)
+                Dim cspec As New ColumnSpec()
+                cspec.SpecValue = refluxratio
+                cspec.SType = ColumnSpec.SpecType.Stream_Ratio
+
+                newspecs.Add("C", cspec)
+                newspecs.Add("R", specs("R"))
+
+                Dim result As Object = Nothing
+
+                Dim simplex As New Simplex()
+
+                Dim svar1 As New OptSimplexBoundVariable(refluxratio, 1.0, 50.0)
+
+                simplex.MaxFunEvaluations = maxits
+                simplex.Tolerance = 0.001
+                simplex.ComputeMin(Function(xvars)
+                                       cspec.SpecValue = xvars(0)
+                                       result = Solve_Internal(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval,
+                                           x, y, z, fc, HF, T, P, condt, stopatitnumber, eff,
+                                           coltype, pp, newspecs, IdealK, IdealH, MaxTChange)
+                                       'Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ic, t_error}
+                                       T = result(0)
+                                       V = result(1)
+                                       L = result(2)
+                                       VSS = result(3)
+                                       LSS = result(4)
+                                       y = result(5)
+                                       x = result(6)
+                                       Kval = result(7)
+                                       Q = result(8)
+
+                                       Dim errfunc As Double = 0.0
+
+                                       Select Case specs("C").SType
+                                           Case ColumnSpec.SpecType.Component_Fraction
+                                               If specs("C").SpecUnit = "M" Or specs("C").SpecUnit = "Molar" Then
+                                                   errfunc += (x(0)(spci1) - spval1) ^ 2
+                                               Else 'W
+                                                   errfunc += (pp.AUX_CONVERT_MOL_TO_MASS(x(0))(spci1) - spval1) ^ 2
+                                               End If
+                                           Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
+                                               errfunc += (LSS(0) * x(0)(spci1) - spval1 / pp.RET_VMM()(spci1) * 1000) ^ 2
+                                           Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
+                                               errfunc += (LSS(0) * x(0)(spci1) - spval1) ^ 2
+                                           Case ColumnSpec.SpecType.Component_Recovery
+                                               Dim rec As Double = spval1 / 100
+                                               Dim sumc As Double = 0
+                                               For j = 0 To ns
+                                                   sumc += z(j)(spci1) * F(j)
+                                               Next
+                                               sumc *= rec
+                                               errfunc += ((LSS(0) * x(0)(spci1) / sumc - rec)) ^ 2
+                                           Case ColumnSpec.SpecType.Temperature
+                                               errfunc += (T(0) - spval1) ^ 2
+                                       End Select
+
+                                       pp.Flowsheet?.ShowMessage("BP solver: current objective function (error) value = " & errfunc, IFlowsheet.MessageType.Information)
+
+                                       Return errfunc
+
+                                   End Function, {svar1})
+                Return result
+
+            ElseIf Not specR_OK Then
+
+                Dim bottomsrate As Double = L.Last
+
+                Dim newspecs As New Dictionary(Of String, ColumnSpec)
+                Dim rspec As New ColumnSpec()
+                rspec.SpecValue = bottomsrate
+                rspec.SType = ColumnSpec.SpecType.Product_Molar_Flow_Rate
+                newspecs.Add("C", specs("C"))
+                newspecs.Add("R", rspec)
+
+                Dim result As Object = Nothing
+
+                Dim simplex As New Simplex()
+
+                Dim svar2 As New OptSimplexBoundVariable(bottomsrate, F.Sum * 0.05, F.Sum)
+
+                simplex.MaxFunEvaluations = maxits
+                simplex.Tolerance = 0.001
+                simplex.ComputeMin(Function(xvars)
+                                       rspec.SpecValue = xvars(0)
+                                       result = Solve_Internal(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval,
+                                           x, y, z, fc, HF, T, P, condt, stopatitnumber, eff,
+                                           coltype, pp, newspecs, IdealK, IdealH, MaxTChange)
+                                       'Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ic, t_error}
+                                       T = result(0)
+                                       V = result(1)
+                                       L = result(2)
+                                       VSS = result(3)
+                                       LSS = result(4)
+                                       y = result(5)
+                                       x = result(6)
+                                       Kval = result(7)
+                                       Q = result(8)
+
+                                       Dim errfunc As Double = 0.0
+
+                                       Select Case specs("R").SType
+                                           Case ColumnSpec.SpecType.Component_Fraction
+                                               If specs("R").SpecUnit = "M" Or specs("R").SpecUnit = "Molar" Then
+                                                   errfunc += (x(ns)(spci2) - spval2) ^ 2
+                                               Else 'W
+                                                   errfunc += (pp.AUX_CONVERT_MOL_TO_MASS(x(ns))(spci2) - spval2) ^ 2
+                                               End If
+                                           Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
+                                               errfunc += (L(ns) * x(ns)(spci2) - spval2 / pp.RET_VMM()(spci2) * 1000) ^ 2
+                                           Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
+                                               errfunc += (L(ns) * x(ns)(spci2) - spval2) ^ 2
+                                           Case ColumnSpec.SpecType.Component_Recovery
+                                               Dim rec As Double = spval2 / 100
+                                               Dim sumc As Double = 0
+                                               For j = 0 To ns
+                                                   sumc += z(j)(spci2) * F(j)
+                                               Next
+                                               sumc *= rec
+                                               errfunc += ((L(ns) * x(ns)(spci2) / sumc - rec)) ^ 2
+                                           Case ColumnSpec.SpecType.Temperature
+                                               errfunc += (T(ns) - spval2) ^ 2
+                                       End Select
+                                       pp.Flowsheet?.ShowMessage("BP solver: current objective function (error) value = " & errfunc, IFlowsheet.MessageType.Information)
+                                       Return errfunc
+                                   End Function, {svar2})
+
+                Return result
+
+            Else
+
+                Return Solve_Internal(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, condt, stopatitnumber, eff, coltype, pp, specs, IdealK, IdealH, MaxTChange)
+
+            End If
+
+        End Function
+
+
+        Public Shared Function Solve_Internal(ByVal nc As Integer, ByVal ns As Integer, ByVal maxits As Integer,
+                                ByVal tol As Double(), ByVal F As Double(), ByVal V As Double(),
+                                ByVal Q As Double(), ByVal L As Double(),
+                                ByVal VSS As Double(), ByVal LSS As Double(), ByVal Kval()() As Double,
+                                ByVal x()() As Double, ByVal y()() As Double, ByVal z()() As Double,
+                                ByVal fc()() As Double,
+                                ByVal HF As Double(), ByVal T As Double(), ByVal P As Double(),
+                                ByVal condt As DistillationColumn.condtype,
+                                ByVal stopatitnumber As Integer,
+                                ByVal eff() As Double,
+                                ByVal coltype As Column.ColType,
+                                ByVal pp As PropertyPackages.PropertyPackage,
+                                ByVal specs As Dictionary(Of String, SepOps.ColumnSpec),
+                                ByVal IdealK As Boolean, ByVal IdealH As Boolean, ByVal MaxTChange As Double) As Object
+
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
             Inspector.Host.CheckAndAdd(IObj, "", "Solve", "Bubble-Point (BP) Method", "Wang-Henke Bubble-Point (BP) Method for Distillation Columns", True)
@@ -2039,23 +2316,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             spval1 = SystemsOfUnits.Converter.ConvertToSI(specs("C").SpecUnit, specs("C").SpecValue)
             spval2 = SystemsOfUnits.Converter.ConvertToSI(specs("R").SpecUnit, specs("R").SpecValue)
-
-            Select Case specs("C").SType
-                Case ColumnSpec.SpecType.Component_Fraction,
-                ColumnSpec.SpecType.Component_Mass_Flow_Rate,
-                ColumnSpec.SpecType.Component_Molar_Flow_Rate,
-                ColumnSpec.SpecType.Component_Recovery,
-                ColumnSpec.SpecType.Temperature
-                    Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCUnsupportedError1"))
-            End Select
-            Select Case specs("R").SType
-                Case ColumnSpec.SpecType.Component_Fraction,
-                ColumnSpec.SpecType.Component_Mass_Flow_Rate,
-                ColumnSpec.SpecType.Component_Molar_Flow_Rate,
-                ColumnSpec.SpecType.Component_Recovery,
-                ColumnSpec.SpecType.Temperature
-                    Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCUnsupportedError1"))
-            End Select
 
             'step1
 
@@ -3262,7 +3522,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             IObj?.SetCurrent()
 
-            Dim x As Double() = xl.ExpY
+            Dim x As Double() = xl
 
             IObj?.Paragraphs.Add(String.Format("Input Variables: {0}", xl.ToMathArrayString))
 
@@ -3568,11 +3828,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         sumc += fc(j)(spci1)
                     Next
                     sumc *= rec
-                    If _specs("C").SpecUnit = "% M/M" Then
-                        spfval1 = xc(0)(spci1) * LSSj(0) - sumc
-                    Else '% W/W
-                        spfval1 = _pp.RET_VMM()(spci1) * 1000 * (xc(0)(spci1) * LSSj(0) - sumc)
-                    End If
+                    spfval1 = (LSSj(0) * xc(0)(spci1) / sumc - rec) * 100
                 Case ColumnSpec.SpecType.Heat_Duty
                     Q(0) = spval1 / maxF
                 Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
@@ -3603,11 +3859,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         sumc += fc(j)(spci2)
                     Next
                     sumc *= rec
-                    If _specs("R").SpecUnit = "% M/M" Then
-                        spfval2 = lc(ns)(spci2) - sumc
-                    Else '% W/W
-                        spfval2 = _pp.RET_VMM()(spci2) * 1000 * (xc(0)(spci1) * Lj(ns) - sumc)
-                    End If
+                    spfval2 = (Lj(ns) * xc(ns)(spci2) / sumc - rec) * 100
                 Case ColumnSpec.SpecType.Heat_Duty
                     Q(ns) = spval2 / maxF
                 Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
@@ -4000,7 +4252,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             For i = 0 To ns
                 xvar(i * (2 * nc + 1)) = Tj(i) / _maxT
-                lb(i * (2 * nc + 1)) = 0.3
+                lb(i * (2 * nc + 1)) = 0.1
                 ub(i * (2 * nc + 1)) = 2.0
                 For j = 0 To nc - 1
                     xvar(i * (2 * nc + 1) + j + 1) = vc(i)(j) / _maxvc
@@ -4030,7 +4282,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 Dim bvars As New List(Of DotNumerics.Optimization.OptBoundVariable)
                 For i = 0 To xvar.Length - 1
-                    bvars.Add(New DotNumerics.Optimization.OptBoundVariable(Log(xvar(i)), Log(lb(i)), Log(ub(i))))
+                    bvars.Add(New DotNumerics.Optimization.OptBoundVariable((xvar(i)), (lb(i)), (ub(i))))
                 Next
 
                 splx.Tolerance = tol(1)
@@ -4049,9 +4301,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Dim uconstr(xvar.Length - 1) As Double
 
             For i = 0 To xvar.Length - 1
-                initval(i) = Log(xvar(i))
-                lconstr(i) = Log(lb(i))
-                uconstr(i) = Log(ub(i))
+                initval(i) = (xvar(i))
+                lconstr(i) = (lb(i))
+                uconstr(i) = (ub(i))
             Next
 
             Dim n As Integer = xvar.Length - 1
@@ -4108,7 +4360,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             IObj?.Paragraphs.Add(String.Format("Final Variable Values: {0}", xvar.ToMathArrayString))
 
-            il_err = FunctionValue(xvar.LogY)
+            il_err = FunctionValue(xvar)
 
             pp.CurrentMaterialStream.Flowsheet.ShowMessage("Naphtali-Sandholm solver: final objective function (error) value = " & il_err, IFlowsheet.MessageType.Information)
 

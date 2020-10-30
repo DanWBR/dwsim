@@ -2507,7 +2507,7 @@ Namespace UnitOperations
                 Array.Resize(Pvap(i), nc)
             Next
 
-            Dim sumcf(nc - 1), sumF, zm(nc - 1) As Double
+            Dim sumcf(nc - 1), sumF, zm(nc - 1), alpha(nc - 1), distVx(nc - 1), rebVx(nc - 1), distVy(nc - 1), rebVy(nc - 1) As Double
 
             IObj?.Paragraphs.Add("Collecting data from connected streams...")
 
@@ -2567,44 +2567,6 @@ Namespace UnitOperations
                 sum0_ += LSS(i) + VSS(i)
             Next
 
-            If Me.Specs("C").SType = ColumnSpec.SpecType.Stream_Ratio Then
-                rr = Me.Specs("C").SpecValue
-            Else
-                rr = 2.5
-            End If
-            If Me.Specs("R").SType = ColumnSpec.SpecType.Product_Molar_Flow_Rate Then
-                If Me.CondenserType = condtype.Full_Reflux Then
-                    vaprate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) - sum0_
-                    distrate = 0.0
-                ElseIf Me.CondenserType = condtype.Partial_Condenser Then
-                    If Me.Specs("C").SType = ColumnSpec.SpecType.Product_Molar_Flow_Rate Then
-                        distrate = SystemsOfUnits.Converter.ConvertToSI(Me.Specs("C").SpecUnit, Me.Specs("C").SpecValue)
-                    Else
-                        distrate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) - sum0_ - vaprate
-                    End If
-
-                Else
-                    distrate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) - sum0_
-                    vaprate = 0.0
-                End If
-            Else
-                If Me.CondenserType = condtype.Full_Reflux Then
-                    vaprate = sumF / 2 - sum0_
-                Else
-                    distrate = sumF / 2 - sum0_ - vaprate
-                End If
-            End If
-
-            IObj?.Paragraphs.Add(String.Format("Estimated/Specified Distillate Rate: {0} mol/s", distrate))
-            IObj?.Paragraphs.Add(String.Format("Estimated/Specified Vapor Overflow Rate: {0} mol/s", vaprate))
-            IObj?.Paragraphs.Add(String.Format("Estimated/Specified Reflux Ratio: {0}", rr))
-
-            compids = New ArrayList
-            compids.Clear()
-            For Each comp As Thermodynamics.BaseClasses.Compound In stream.Phases(0).Compounds.Values
-                compids.Add(comp.Name)
-            Next
-
             For i = ns To 0 Step -1
                 If F(i) <> 0 Then
                     lastF = i
@@ -2614,6 +2576,197 @@ Namespace UnitOperations
 
             For i = 0 To nc - 1
                 zm(i) = sumcf(i) / sumF
+            Next
+
+            Dim mwf = pp.AUX_MMM(zm)
+
+            If Me.Specs("C").SType = ColumnSpec.SpecType.Stream_Ratio Then
+                rr = Me.Specs("C").SpecValue
+            Else
+                rr = 2.5
+            End If
+
+            Dim Tref = FT.Average
+            Dim Pref = Stages.Select(Function(s) s.P).Average
+
+            Dim Kref = pp.DW_CalcKvalue(zm, Tref, Pref)
+
+            Dim Vn = pp.RET_VNAMES.ToList()
+            Dim Vprops = pp.DW_GetConstantProperties()
+
+            Dim feedflash = pp.CalculateEquilibrium(FlashCalculationType.PressureTemperature, Pref, Tref, zm, Nothing, Nothing)
+
+            Dim hamount As Double = 0.0
+
+            Select Case Specs("R").SType
+                Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
+                    Dim cname = Specs("R").ComponentID
+                    Dim cvalue = Specs("R").SpecValue
+                    Dim cunits = Specs("R").SpecUnit
+                    Dim cindex = Vn.IndexOf(cname)
+                    Dim camount = cvalue.ConvertToSI(cunits) / Vprops(cindex).Molar_Weight * 1000
+                    hamount = camount
+                    rebVx(cindex) = camount
+                    For i = 0 To nc - 1
+                        If Kref(i) < Kref(cindex) Then
+                            hamount += sumF * zm(i)
+                            rebVx(i) = sumF * zm(i)
+                        ElseIf i <> cindex Then
+                            rebVx(i) = 0.0
+                        End If
+                    Next
+                    rebVx = rebVx.NormalizeY()
+                Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
+                    Dim cname = Specs("R").ComponentID
+                    Dim cvalue = Specs("R").SpecValue
+                    Dim cunits = Specs("R").SpecUnit
+                    Dim cindex = Vn.IndexOf(cname)
+                    Dim camount = cvalue.ConvertToSI(cunits) / Vprops(cindex).Molar_Weight * 1000
+                    hamount = camount
+                    rebVx(cindex) = camount
+                    For i = 0 To nc - 1
+                        If Kref(i) < Kref(cindex) Then
+                            hamount += sumF * zm(i)
+                            rebVx(i) = sumF * zm(i)
+                        ElseIf i <> cindex Then
+                            rebVx(i) = 0.0
+                        End If
+                    Next
+                    rebVx = rebVx.NormalizeY()
+                Case ColumnSpec.SpecType.Component_Recovery
+                    Dim cname = Specs("R").ComponentID
+                    Dim cvalue = Specs("R").SpecValue
+                    Dim cindex = Vn.IndexOf(cname)
+                    Dim camount = sumF * zm(cindex) * cvalue / 100
+                    hamount = camount
+                    rebVx(cindex) = camount
+                    For i = 0 To nc - 1
+                        If Kref(i) < Kref(cindex) Then
+                            hamount += sumF * zm(i)
+                            rebVx(i) = sumF * zm(i)
+                        ElseIf i <> cindex Then
+                            rebVx(i) = 0.0
+                        End If
+                    Next
+                    rebVx = rebVx.NormalizeY()
+                Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
+                    If Me.CondenserType = condtype.Full_Reflux Then
+                        vaprate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) / mwf * 1000 - sum0_
+                        distrate = 0.0
+                    ElseIf Me.CondenserType = condtype.Partial_Condenser Then
+                        If Me.Specs("C").SType = ColumnSpec.SpecType.Product_Molar_Flow_Rate Then
+                            distrate = SystemsOfUnits.Converter.ConvertToSI(Me.Specs("C").SpecUnit, Me.Specs("C").SpecValue) / mwf * 1000
+                        Else
+                            distrate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) / mwf * 1000 - sum0_ - vaprate
+                        End If
+                    Else
+                        distrate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) / mwf * 1000 - sum0_
+                        vaprate = 0.0
+                    End If
+                Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
+                    If Me.CondenserType = condtype.Full_Reflux Then
+                        vaprate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) - sum0_
+                        distrate = 0.0
+                    ElseIf Me.CondenserType = condtype.Partial_Condenser Then
+                        If Me.Specs("C").SType = ColumnSpec.SpecType.Product_Molar_Flow_Rate Then
+                            distrate = SystemsOfUnits.Converter.ConvertToSI(Me.Specs("C").SpecUnit, Me.Specs("C").SpecValue)
+                        Else
+                            distrate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) - sum0_ - vaprate
+                        End If
+                    Else
+                        distrate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) - sum0_
+                        vaprate = 0.0
+                    End If
+                Case Else
+                    If Me.CondenserType = condtype.Full_Reflux Then
+                        vaprate = sumF / 2 - sum0_
+                    Else
+                        distrate = sumF / 2 - sum0_ - vaprate
+                    End If
+            End Select
+
+            Select Case Specs("R").SType
+                Case ColumnSpec.SpecType.Component_Mass_Flow_Rate,
+                      ColumnSpec.SpecType.Component_Molar_Flow_Rate,
+                      ColumnSpec.SpecType.Component_Recovery
+                    If Me.CondenserType = condtype.Full_Reflux Then
+                        vaprate = sumF - hamount - sum0_
+                        distrate = 0.0
+                    ElseIf Me.CondenserType = condtype.Partial_Condenser Then
+                        If Me.Specs("C").SType = ColumnSpec.SpecType.Product_Molar_Flow_Rate Then
+                            distrate = SystemsOfUnits.Converter.ConvertToSI(Me.Specs("C").SpecUnit, Me.Specs("C").SpecValue) / mwf * 1000
+                        Else
+                            distrate = sumF - hamount - sum0_ - vaprate
+                        End If
+                    Else
+                        distrate = sumF - hamount - sum0_
+                        vaprate = 0.0
+                    End If
+            End Select
+
+            Dim lamount As Double = 0.0
+
+            Select Case Specs("C").SType
+                Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
+                    Dim cname = Specs("C").ComponentID
+                    Dim cvalue = Specs("C").SpecValue
+                    Dim cunits = Specs("C").SpecUnit
+                    Dim cindex = Vn.IndexOf(cname)
+                    Dim camount = cvalue.ConvertToSI(cunits) / Vprops(cindex).Molar_Weight * 1000
+                    lamount = camount
+                    distVx(cindex) = camount
+                    For i = 0 To nc - 1
+                        If Kref(i) > Kref(cindex) Then
+                            lamount += sumF * zm(i)
+                            distVx(i) = sumF * zm(i)
+                        ElseIf i <> cindex Then
+                            distVx(i) = 0.0
+                        End If
+                    Next
+                    distVx = distVx.NormalizeY()
+                Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
+                    Dim cname = Specs("C").ComponentID
+                    Dim cvalue = Specs("C").SpecValue
+                    Dim cunits = Specs("C").SpecUnit
+                    Dim cindex = Vn.IndexOf(cname)
+                    Dim camount = cvalue.ConvertToSI(cunits) / Vprops(cindex).Molar_Weight * 1000
+                    lamount = camount
+                    distVx(cindex) = camount
+                    For i = 0 To nc - 1
+                        If Kref(i) > Kref(cindex) Then
+                            lamount += sumF * zm(i)
+                            distVx(i) = sumF * zm(i)
+                        ElseIf i <> cindex Then
+                            distVx(i) = 0.0
+                        End If
+                    Next
+                    distVx = distVx.NormalizeY()
+                Case ColumnSpec.SpecType.Component_Recovery
+                    Dim cname = Specs("C").ComponentID
+                    Dim cvalue = Specs("C").SpecValue
+                    Dim cindex = Vn.IndexOf(cname)
+                    Dim camount = sumF * zm(cindex) * cvalue / 100
+                    lamount = camount
+                    distVx(cindex) = camount
+                    For i = 0 To nc - 1
+                        If Kref(i) > Kref(cindex) Then
+                            lamount += sumF * zm(i)
+                            distVx(i) = sumF * zm(i)
+                        ElseIf i <> cindex Then
+                            distVx(i) = 0.0
+                        End If
+                    Next
+                    distVx = distVx.NormalizeY()
+            End Select
+
+            IObj?.Paragraphs.Add(String.Format("Estimated/Specified Distillate Rate: {0} mol/s", distrate))
+            IObj?.Paragraphs.Add(String.Format("Estimated/Specified Vapor Overflow Rate: {0} mol/s", vaprate))
+            IObj?.Paragraphs.Add(String.Format("Estimated/Specified Reflux Ratio: {0}", rr))
+
+            compids = New ArrayList
+            compids.Clear()
+            For Each comp As Thermodynamics.BaseClasses.Compound In stream.Phases(0).Compounds.Values
+                compids.Add(comp.Name)
             Next
 
             Dim T1, T2 As Double
@@ -2643,13 +2796,25 @@ Namespace UnitOperations
                 Case ColType.DistillationColumn
                     Try
                         IObj?.SetCurrent()
-                        T1 = pp.DW_CalcBubT(zm, P(0), MathEx.Common.Min(FT))(4) '* 1.01
+                        If distVx.Sum > 0 Then
+                            Dim fcalc = pp.CalculateEquilibrium(FlashCalculationType.PressureVaporFraction, P(0), 0, distVx, Nothing, FT.Max)
+                            T1 = fcalc.CalculatedTemperature
+                            distVy = distVx.MultiplyY(fcalc.Kvalues.Select(Function(k) Convert.ToDouble(IIf(Double.IsNaN(k), 0.0, k))).ToArray()).NormalizeY()
+                        Else
+                            T1 = pp.DW_CalcBubT(zm, P(0), MathEx.Common.Min(FT))(4) '* 1.01
+                        End If
                     Catch ex As Exception
                         T1 = MathEx.Common.Min(FT)
                     End Try
                     Try
                         IObj?.SetCurrent()
-                        T2 = pp.DW_CalcDewT(zm, P(ns), MathEx.Common.Max(FT))(4) '* 0.99
+                        If rebVx.Sum > 0 Then
+                            Dim fcalc = pp.CalculateEquilibrium(FlashCalculationType.PressureVaporFraction, P(ns), 0, rebVx, Nothing, FT.Max)
+                            T2 = fcalc.CalculatedTemperature
+                            rebVy = rebVx.MultiplyY(fcalc.Kvalues.Select(Function(k) Convert.ToDouble(IIf(Double.IsNaN(k), 0.0, k))).ToArray()).NormalizeY()
+                        Else
+                            T2 = pp.DW_CalcDewT(zm, P(ns), MathEx.Common.Max(FT))(4) '* 0.99
+                        End If
                     Catch ex As Exception
                         T2 = MathEx.Common.Max(FT)
                     End Try
@@ -2686,13 +2851,13 @@ Namespace UnitOperations
                         Select Case Me.ColumnType
                             Case ColType.DistillationColumn
                                 If Me.CondenserType = condtype.Total_Condenser Then
-                                    V(0) = 0.0005
+                                    V(0) = 0.0000000001
                                 Else
                                     V(0) = vaprate
                                 End If
                             Case ColType.RefluxedAbsorber
                                 If Me.CondenserType = condtype.Total_Condenser Then
-                                    V(0) = 0.0005
+                                    V(0) = 0.0000000001
                                 Else
                                     V(0) = vaprate
                                 End If
@@ -2823,13 +2988,26 @@ Namespace UnitOperations
                             L(i) = F.Sum * L1
                         End If
                     Else
-                        flashresult = pp.FlashBase.Flash_PT(zm, P(i), T(i), pp)
-                        x(i) = flashresult(2)
-                        y(i) = flashresult(3)
+                        If rebVx.Sum > 0 And distVx.Sum > 0 Then
+                            For j = 0 To nc - 1
+                                x(i)(j) = distVx(j) + Convert.ToDouble(i) / Convert.ToDouble(ns) * (rebVx(j) - distVx(j))
+                                y(i)(j) = distVy(j) + Convert.ToDouble(i) / Convert.ToDouble(ns) * (rebVy(j) - distVy(j))
+                            Next
+                            x(i) = x(i).NormalizeY
+                            y(i) = y(i).NormalizeY
+                        Else
+                            flashresult = pp.FlashBase.Flash_PT(zm, P(i), T(i), pp)
+                            x(i) = flashresult(2)
+                            y(i) = flashresult(3)
+                        End If
                     End If
                     z(i) = zm
                     For j = 0 To nc - 1
-                        Kval(i)(j) = (y(i)(j) / x(i)(j))
+                        If x(i)(j) = 0.0 Then
+                            Kval(i)(j) = 1.0E+20
+                        Else
+                            Kval(i)(j) = (y(i)(j) / x(i)(j))
+                        End If
                     Next
                     If llextractor And pp.AUX_CheckTrivial(Kval(i)) Then
                         Throw New Exception("Your column is configured as a Liquid-Liquid Extractor, but the Property Package / Flash Algorithm set associated with the column is unable to generate an initial estimate for two liquid phases. Please select a different set or change the Flash Algorithm's Stability Analysis parameters and try again.")
