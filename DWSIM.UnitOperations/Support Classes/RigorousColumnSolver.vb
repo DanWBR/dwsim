@@ -226,6 +226,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
         Public Function FunctionValue(ByVal x() As Double) As Double
 
+            _pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+
             _IObj?.SetCurrent
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
@@ -2233,6 +2235,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                 ByVal specs As Dictionary(Of String, SepOps.ColumnSpec),
                                 ByVal IdealK As Boolean, ByVal IdealH As Boolean, ByVal MaxTChange As Double) As Object
 
+            pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
             Inspector.Host.CheckAndAdd(IObj, "", "Solve", "Bubble-Point (BP) Method", "Wang-Henke Bubble-Point (BP) Method for Distillation Columns", True)
@@ -3526,6 +3530,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
         Public Function FunctionValue(ByVal xl() As Double) As Double
 
+            _pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+
             _IObj?.SetCurrent
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
@@ -4511,192 +4517,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             '_pp.CurrentMaterialStream.Flowsheet.ShowMessage("Naphtali-Sandholm solver iteration #" & iter_count & ": current objective function (error) value = " & obj_value, IFlowsheet.MessageType.Information)
             Return True
         End Function
-
-    End Class
-
-    Public Class Russell_ColumnProblem
-
-        Inherits SwarmOps.Problem
-
-        Public _Dim As Integer, _LB(), _UB(), _INIT() As Double, _Name As String
-
-        Private _gf As RussellMethod
-        Private _fit As Double
-
-        Sub New(gf As RussellMethod)
-            _gf = gf
-        End Sub
-
-        Public Overrides ReadOnly Property Dimensionality As Integer
-            Get
-                Return _Dim
-            End Get
-        End Property
-
-        Public Overrides ReadOnly Property LowerBound As Double()
-            Get
-                Return _LB
-            End Get
-        End Property
-
-        Public Overrides ReadOnly Property LowerInit As Double()
-            Get
-                Return _INIT
-            End Get
-        End Property
-        Public Overrides ReadOnly Property UpperInit As Double()
-            Get
-                Return _INIT
-            End Get
-        End Property
-
-        Public Overrides ReadOnly Property MinFitness As Double
-            Get
-                Return 0.0#
-            End Get
-        End Property
-
-        Public Overrides ReadOnly Property Name As String
-            Get
-                Return _Name
-            End Get
-        End Property
-
-        Public Overrides ReadOnly Property UpperBound As Double()
-            Get
-                Return _UB
-            End Get
-        End Property
-
-        Public Overrides ReadOnly Property HasGradient As Boolean
-            Get
-                Return True
-            End Get
-        End Property
-
-        Public Overrides Function Gradient(x() As Double, ByRef v() As Double) As Integer
-
-            v = _gf.FunctionGradient(x)
-
-            Return 0
-
-        End Function
-
-        Public Overrides Function Fitness(parameters() As Double) As Double
-
-            Return _gf.FunctionValue(parameters)
-
-        End Function
-
-        Public Overrides Function [Continue](iterations As Integer, fitness As Double, feasible As Boolean) As Boolean
-            '_gf._pp.CurrentMaterialStream.Flowsheet.ShowMessage("Russell Inside-Out solver iteration #" & iterations & ": current objective function (error) value = " & fitness, IFlowsheet.MessageType.Information)
-            Return MyBase.[Continue](iterations, fitness, feasible)
-        End Function
-
-        Public Overrides ReadOnly Property AcceptableFitness As Double
-            Get
-                Return 0.01
-            End Get
-        End Property
-
-        Public Overrides ReadOnly Property MaxFitness As Double
-            Get
-                Return 10000
-            End Get
-        End Property
-
-    End Class
-
-    Public Class NaphtaliSandholm_ColumnProblem
-
-        Inherits SwarmOps.Problem
-
-        Public _Dim As Integer, _LB(), _UB(), _INIT() As Double, _Name As String
-
-        Private _gf As NaphtaliSandholmMethod
-        Private _fit As Double
-
-        Sub New(gf As NaphtaliSandholmMethod)
-            _gf = gf
-        End Sub
-
-        Public Overrides ReadOnly Property Dimensionality As Integer
-            Get
-                Return _Dim
-            End Get
-        End Property
-
-        Public Overrides ReadOnly Property LowerBound As Double()
-            Get
-                Return _LB
-            End Get
-        End Property
-
-        Public Overrides ReadOnly Property LowerInit As Double()
-            Get
-                Return _INIT
-            End Get
-        End Property
-        Public Overrides ReadOnly Property UpperInit As Double()
-            Get
-                Return _INIT
-            End Get
-        End Property
-
-        Public Overrides ReadOnly Property MinFitness As Double
-            Get
-                Return 0.0#
-            End Get
-        End Property
-
-        Public Overrides ReadOnly Property Name As String
-            Get
-                Return _Name
-            End Get
-        End Property
-
-        Public Overrides ReadOnly Property UpperBound As Double()
-            Get
-                Return _UB
-            End Get
-        End Property
-
-        Public Overrides ReadOnly Property HasGradient As Boolean
-            Get
-                Return True
-            End Get
-        End Property
-
-        Public Overrides Function Gradient(x() As Double, ByRef v() As Double) As Integer
-
-            v = _gf.FunctionGradient(x)
-
-            Return 0
-
-        End Function
-
-        Public Overrides Function Fitness(parameters() As Double) As Double
-
-            Return _gf.FunctionValue(parameters)
-
-        End Function
-
-        Public Overrides Function [Continue](iterations As Integer, fitness As Double, feasible As Boolean) As Boolean
-            '_gf._pp.CurrentMaterialStream.Flowsheet.ShowMessage("Naphtali-Sandholm solver iteration #" & iterations & ": current objective function (error) value = " & fitness, IFlowsheet.MessageType.Information)
-            Return MyBase.[Continue](iterations, fitness, feasible)
-        End Function
-
-        Public Overrides ReadOnly Property AcceptableFitness As Double
-            Get
-                Return 0.01
-            End Get
-        End Property
-
-        Public Overrides ReadOnly Property MaxFitness As Double
-            Get
-                Return 10000
-            End Get
-        End Property
 
     End Class
 

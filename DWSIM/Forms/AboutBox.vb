@@ -336,43 +336,43 @@ Public Class AboutBox
             Value = ""
             Select Case TypeName
                 Case "System.CLSCompliantAttribute"
-                    Value = CType(attrib, CLSCompliantAttribute).IsCompliant.ToString
+                    Value = CType(attrib, CLSCompliantAttribute).IsCompliant
                 Case "System.Diagnostics.DebuggableAttribute"
-                    Value = CType(attrib, Diagnostics.DebuggableAttribute).IsJITTrackingEnabled.ToString
+                    Value = CType(attrib, Diagnostics.DebuggableAttribute).IsJITTrackingEnabled
                 Case "System.Reflection.AssemblyCompanyAttribute"
                     Value = CType(attrib, AssemblyCompanyAttribute).Company
                 Case "System.Reflection.AssemblyConfigurationAttribute"
-                    Value = CType(attrib, AssemblyConfigurationAttribute).Configuration.ToString
+                    Value = CType(attrib, AssemblyConfigurationAttribute).Configuration
                 Case "System.Reflection.AssemblyCopyrightAttribute"
                     Value = CType(attrib, AssemblyCopyrightAttribute).Copyright
                 Case "System.Reflection.AssemblyDefaultAliasAttribute"
-                    Value = CType(attrib, AssemblyDefaultAliasAttribute).DefaultAlias.ToString
+                    Value = CType(attrib, AssemblyDefaultAliasAttribute).DefaultAlias
                 Case "System.Reflection.AssemblyDelaySignAttribute"
-                    Value = CType(attrib, AssemblyDelaySignAttribute).DelaySign.ToString
+                    Value = CType(attrib, AssemblyDelaySignAttribute).DelaySign
                 Case "System.Reflection.AssemblyDescriptionAttribute"
-                    Value = CType(attrib, AssemblyDescriptionAttribute).Description.ToString
+                    Value = CType(attrib, AssemblyDescriptionAttribute).Description
                 Case "System.Reflection.AssemblyInformationalVersionAttribute"
-                    Value = CType(attrib, AssemblyInformationalVersionAttribute).InformationalVersion.ToString
+                    Value = CType(attrib, AssemblyInformationalVersionAttribute).InformationalVersion
                 Case "System.Reflection.AssemblyKeyFileAttribute"
-                    Value = CType(attrib, AssemblyKeyFileAttribute).KeyFile.ToString
+                    Value = CType(attrib, AssemblyKeyFileAttribute).KeyFile
                 Case "System.Reflection.AssemblyProductAttribute"
-                    Value = CType(attrib, AssemblyProductAttribute).Product.ToString
+                    Value = CType(attrib, AssemblyProductAttribute).Product
                 Case "System.Reflection.AssemblyTrademarkAttribute"
-                    Value = CType(attrib, AssemblyTrademarkAttribute).Trademark.ToString
+                    Value = CType(attrib, AssemblyTrademarkAttribute).Trademark
                 Case "System.Reflection.AssemblyTitleAttribute"
-                    Value = CType(attrib, AssemblyTitleAttribute).Title.ToString
+                    Value = CType(attrib, AssemblyTitleAttribute).Title
                 Case "System.Resources.NeutralResourcesLanguageAttribute"
-                    Value = CType(attrib, Resources.NeutralResourcesLanguageAttribute).CultureName.ToString
+                    Value = CType(attrib, Resources.NeutralResourcesLanguageAttribute).CultureName
                 Case "System.Resources.SatelliteContractVersionAttribute"
-                    Value = CType(attrib, Resources.SatelliteContractVersionAttribute).Version.ToString
+                    Value = CType(attrib, Resources.SatelliteContractVersionAttribute).Version
                 Case "System.Runtime.InteropServices.ComCompatibleVersionAttribute"
                     Dim x As Runtime.InteropServices.ComCompatibleVersionAttribute
                     x = CType(attrib, Runtime.InteropServices.ComCompatibleVersionAttribute)
                     Value = x.MajorVersion & "." & x.MinorVersion & "." & x.RevisionNumber & "." & x.BuildNumber
                 Case "System.Runtime.InteropServices.ComVisibleAttribute"
-                    Value = CType(attrib, Runtime.InteropServices.ComVisibleAttribute).Value.ToString
+                    Value = CType(attrib, Runtime.InteropServices.ComVisibleAttribute).Value
                 Case "System.Runtime.InteropServices.GuidAttribute"
-                    Value = CType(attrib, Runtime.InteropServices.GuidAttribute).Value.ToString
+                    Value = CType(attrib, Runtime.InteropServices.GuidAttribute).Value
                 Case "System.Runtime.InteropServices.TypeLibVersionAttribute"
                     Dim x As Runtime.InteropServices.TypeLibVersionAttribute
                     x = CType(attrib, Runtime.InteropServices.TypeLibVersionAttribute)

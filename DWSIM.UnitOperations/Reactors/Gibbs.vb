@@ -98,9 +98,10 @@ Namespace Reactors
 
             _components = New List(Of String)
             For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "Compounds").LastOrDefault.Elements
-                _components.Add(xel2.@ID)
+                If Not _components.Contains(xel2.@ID) Then _components.Add(xel2.@ID)
             Next
 
+            _initialestimates = New List(Of Double)
             For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "InitialEstimates").LastOrDefault.Elements
                 _initialestimates.Add(Double.Parse(xel2.@Value, ci))
             Next

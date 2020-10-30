@@ -321,7 +321,16 @@ Public Class GraphicsSurface
 
                     Else
 
-                        dobj.Draw(DrawingCanvas)
+                        Try
+                            dobj.Draw(DrawingCanvas)
+                        Catch ex As Exception
+                            Using p As New SKPaint
+                                p.Color = SKColors.Black
+                                p.StrokeWidth = 1
+                                p.IsStroke = True
+                                DrawingCanvas.DrawText(String.Format("Error drawing {0}: {1}", dobj.Tag, ex.Message), dobj.X, dobj.Y, p)
+                            End Using
+                        End Try
 
                     End If
 
@@ -1572,11 +1581,11 @@ Public Class GraphicsSurface
         Dim settings = New FastIncrementalLayoutSettings()
         settings.AvoidOverlaps = True
         settings.PackingMethod = PackingMethod.Compact
-        settings.NodeSeparation = 50 * DistanceFactor
+        settings.NodeSeparation = 100 * DistanceFactor
         settings.RouteEdges = True
         settings.RespectEdgePorts = True
         Dim eset = New Microsoft.Msagl.Core.Routing.EdgeRoutingSettings()
-        eset.EdgeRoutingMode = Microsoft.Msagl.Core.Routing.EdgeRoutingMode.Rectilinear
+        eset.EdgeRoutingMode = Microsoft.Msagl.Core.Routing.EdgeRoutingMode.SplineBundling
         settings.EdgeRoutingSettings = eset
 
         Dim layout = New InitialLayout(graph, settings)

@@ -1219,6 +1219,10 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 AvailableSystemsOfUnits.Add(Options.SelectedUnitSystem1)
             End If
 
+            If sver < New Version("6.3.0.0") Then
+                Options.SkipEquilibriumCalculationOnDefinedStreams = False
+            End If
+
         Catch ex As Exception
             excs.Add(New Exception("Error Loading Flowsheet Settings", ex))
         End Try

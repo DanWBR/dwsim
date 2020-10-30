@@ -137,8 +137,8 @@ Public Class XMLSerializer
                                             val = New SkiaSharp.SKColor(val2.R, val2.G, val2.B, val2.A)
                                         Catch ex As Exception
                                         End Try
-                                        obj.GetType.GetProperty(prop.Name).SetValue(obj, val, Nothing)
                                     End If
+                                    obj.GetType.GetProperty(prop.Name).SetValue(obj, val, Nothing)
                                 End If
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is ArrayList Then
                                 Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
@@ -322,8 +322,8 @@ Public Class XMLSerializer
                                         val = New SkiaSharp.SKColor(val2.R, val2.G, val2.B, val2.A)
                                     Catch ex As Exception
                                     End Try
-                                    obj.GetType.GetField(prop.Name).SetValue(obj, val)
                                 End If
+                                obj.GetType.GetField(prop.Name).SetValue(obj, val)
                             End If
                         ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is ArrayList Then
                             Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault

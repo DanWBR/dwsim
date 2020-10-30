@@ -1593,6 +1593,9 @@ Public Class FormMain
 
         Try
             form.Options.LoadData(data)
+            If sver < New Version("6.3.0.0") Then
+                form.Options.SkipEquilibriumCalculationOnDefinedStreams = False
+            End If
         Catch ex As Exception
             excs.Add(New Exception("Error Loading Flowsheet Settings", ex))
         End Try
@@ -2134,6 +2137,9 @@ Public Class FormMain
 
         Try
             form.Options.LoadData(data)
+            If sver < New Version("6.3.0.0") Then
+                form.Options.SkipEquilibriumCalculationOnDefinedStreams = False
+            End If
         Catch ex As Exception
             excs.Add(New Exception("Error Loading Flowsheet Settings", ex))
         End Try
