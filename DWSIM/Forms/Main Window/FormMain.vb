@@ -528,11 +528,6 @@ Public Class FormMain
         CPIMPP.ComponentDescription = "CoolProp (Incompressible Mixtures)"
         PropertyPackages.Add(CPIMPP.ComponentName.ToString, CPIMPP)
 
-        Dim SWPP As New SourWaterPropertyPackage()
-        SWPP.ComponentName = DWSIM.App.GetLocalString("SourWaterPP")
-        SWPP.ComponentDescription = DWSIM.App.GetLocalString("DescSourWaterPP")
-        PropertyPackages.Add(SWPP.ComponentName.ToString, SWPP)
-
         Dim STPP As SteamTablesPropertyPackage = New SteamTablesPropertyPackage()
         STPP.ComponentName = DWSIM.App.GetLocalString("TabelasdeVaporSteamT")
         STPP.ComponentDescription = DWSIM.App.GetLocalString("DescSteamTablesPP")

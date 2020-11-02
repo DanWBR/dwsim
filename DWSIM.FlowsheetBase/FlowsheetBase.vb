@@ -2200,10 +2200,6 @@ Label_00CC:
         CPIMPP.ComponentDescription = "CoolProp (Incompressible Mixtures)"
         AvailablePropertyPackages.Add(CPIMPP.ComponentName.ToString, CPIMPP)
 
-        Dim SWPP As New SourWaterPropertyPackage()
-        SWPP.ComponentName = "Sour Water"
-        AvailablePropertyPackages.Add(SWPP.ComponentName.ToString, SWPP)
-
         Dim STPP As SteamTablesPropertyPackage = New SteamTablesPropertyPackage()
         STPP.ComponentName = "Steam Tables (IAPWS-IF97)"
         AvailablePropertyPackages.Add(STPP.ComponentName.ToString, STPP)

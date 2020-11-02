@@ -1,4 +1,4 @@
-Version 6.3 Update 1
+Version 6.3 Update 2
 
-- [NEW] Rigorous Column BP Solver now supports all Condenser/Reboiler specifications
-- [FIX] Bug fixes and enhancements
+- [CHG] Rigorous Column solver reliability and speed enhancements
+- [FIX] Bug fixes

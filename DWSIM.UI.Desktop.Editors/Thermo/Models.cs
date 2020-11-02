@@ -29,7 +29,7 @@ namespace DWSIM.UI.Desktop.Editors
             ppcontainer = new DynamicLayout();
             facontainer = new DynamicLayout();
 
-            var proppacks = flowsheet.AvailablePropertyPackages.Keys.ToList();
+            var proppacks = flowsheet.AvailablePropertyPackages.Keys.OrderBy(x => x).ToList();
 
             proppacks.Insert(0, "Select an item...");
 
