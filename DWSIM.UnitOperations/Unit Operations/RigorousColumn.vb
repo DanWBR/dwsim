@@ -3570,7 +3570,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             If Not specC_OK And Not specR_OK Then
 
-                Dim refluxratio As Double = 5.0
+                Dim refluxratio As Double = 8.0
                 If condt <> Column.condtype.Full_Reflux Then refluxratio = (L(0) + LSS(0)) / LSS(0)
 
                 Dim bottomsrate As Double = L.Last
@@ -3702,9 +3702,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                         errfunc += ((T2(ns) - spval2) / spval2) ^ 2
                                 End Select
 
-                                pp.Flowsheet?.ShowMessage("BP solver: current objective function (error) value = " & errfunc, IFlowsheet.MessageType.Information)
-
                                 counter += 1
+
+                                pp.Flowsheet?.ShowMessage(String.Format("BP solver: external iteration #{0}, current objective function (error) value = {1}", counter, errfunc), IFlowsheet.MessageType.Information)
 
                                 ResultsVector.Add(result)
                                 ObjFunctionValues.Add(errfunc)
@@ -3806,9 +3806,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                                                    errfunc += ((T2(0) - spval1) / spval1) ^ 2
                                                            End Select
 
-                                                           pp.Flowsheet?.ShowMessage("BP solver: current objective function (error) value = " & errfunc, IFlowsheet.MessageType.Information)
-
                                                            counter += 1
+
+                                                           pp.Flowsheet?.ShowMessage(String.Format("BP solver: external iteration #{0}, current objective function (error) value = {1}", counter, errfunc), IFlowsheet.MessageType.Information)
 
                                                            ResultsVector.Add(result)
                                                            ObjFunctionValues.Add(errfunc)
@@ -3886,9 +3886,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                                                              errfunc += ((T2(ns) - spval2) / spval2) ^ 2
                                                                      End Select
 
-                                                                     pp.Flowsheet?.ShowMessage("BP solver: current objective function (error) value = " & errfunc, IFlowsheet.MessageType.Information)
-
                                                                      counter += 1
+
+                                                                     pp.Flowsheet?.ShowMessage(String.Format("BP solver: external iteration #{0}, current objective function (error) value = {1}", counter, errfunc), IFlowsheet.MessageType.Information)
 
                                                                      ResultsVector.Add(result)
                                                                      ObjFunctionValues.Add(errfunc)
