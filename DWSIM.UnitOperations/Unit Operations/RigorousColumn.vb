@@ -32,6 +32,7 @@ Imports DWSIM.MathOps
 Imports DWSIM.DrawingTools
 Imports OxyPlot
 Imports OxyPlot.Axes
+Imports DotNumerics.Optimization
 
 Namespace UnitOperations.Auxiliary.SepOps
 
@@ -674,22 +675,9 @@ Namespace UnitOperations
 
         Inherits Column
 
-        'solving method (default = IO)
-
-        Public _sm As SolvingMethods.ColSolvingMethod = SolvingMethods.ColSolvingMethod.WangHenke_BubblePoint
-
         Public Sub New()
             MyBase.New()
         End Sub
-
-        Public Overrides Property SolvingMethod() As Integer
-            Get
-                Return _sm
-            End Get
-            Set(ByVal value As Integer)
-                _sm = value
-            End Set
-        End Property
 
         Public Sub New(ByVal name As String, ByVal description As String, fs As IFlowsheet)
             MyBase.New(name, description, fs)
@@ -1005,8 +993,6 @@ Namespace UnitOperations
 
         Inherits Column
 
-        Public _sm As SolvingMethods.ColSolvingMethod
-
         Public _opmode As OpMode = OpMode.Absorber
 
         Public Sub New()
@@ -1024,15 +1010,6 @@ Namespace UnitOperations
             End Get
             Set(ByVal value As OpMode)
                 _opmode = value
-            End Set
-        End Property
-
-        Public Overrides Property SolvingMethod() As Integer
-            Get
-                Return _sm
-            End Get
-            Set(ByVal value As Integer)
-                _sm = value
             End Set
         End Property
 
@@ -1229,24 +1206,11 @@ Namespace UnitOperations
 
         Inherits Column
 
-        'solving method (default = IO)
-
-        Public _sm As SolvingMethods.ColSolvingMethod
-
         Public Overrides Property Visible As Boolean = False
 
         Public Sub New()
             MyBase.New()
         End Sub
-
-        Public Overrides Property SolvingMethod() As Integer
-            Get
-                Return _sm
-            End Get
-            Set(ByVal value As Integer)
-                _sm = value
-            End Set
-        End Property
 
         Public Sub New(ByVal name As String, ByVal description As String, fs As IFlowsheet)
             MyBase.New(name, description, fs)
@@ -1388,22 +1352,11 @@ Namespace UnitOperations
 
         'solving method (default = IO)
 
-        Public _sm As SolvingMethods.ColSolvingMethod
-
         Public Overrides Property Visible As Boolean = False
 
         Public Sub New()
             MyBase.New()
         End Sub
-
-        Public Overrides Property SolvingMethod() As Integer
-            Get
-                Return _sm
-            End Get
-            Set(ByVal value As Integer)
-                _sm = value
-            End Set
-        End Property
 
         Public Sub New(ByVal name As String, ByVal description As String, fs As IFlowsheet)
             MyBase.New(name, description, fs)
@@ -1600,36 +1553,8 @@ Namespace UnitOperations
         'iteration variables
 
         Private _maxiterations As Integer = 100
-        Private _ilooptolerance As Double = 0.000001
+        Private _ilooptolerance As Double = 0.00001
         Private _elooptolerance As Double = 0.00001
-        Private _adjSb As Boolean = False
-        Private _kbjWA As Boolean = False
-        Private _uijac As Boolean = False
-        Private _udf As Boolean = True
-        Private _unu As Boolean = False
-        Private _stopatiter As Integer = -1
-        Private _scdf As Double = 0.5
-        Private _scmaxtc As Double = 10.0#
-        Private _scnderivstep As Double = 0.0000000001
-        Private _ionderivstep As Double = 0.0000000001
-        Private _iomaxvarchgfac As Integer = 10
-        Private _scmaxvarchgfac As Integer = 10
-        Private _iodfmin As Double = 0.1#
-        Private _iodfmax As Double = 2.0#
-        Private _iodeltat_el As Double = 0.01#
-
-        'new solver parameters
-
-        Public Property NS_Solver As OptimizationMethod = OptimizationMethod.Truncated_Newton
-        Public Property NS_SimplexPreconditioning As Boolean = False
-        Public Property NS_LowerBound As Double = 0.0#
-        Public Property NS_UpperBound As Double = 2.0#
-
-        Public Property IO_Solver As OptimizationMethod = OptimizationMethod.Simplex
-        Public Property IO_LowerBound As Double = Log(1.0E-40)
-        Public Property IO_UpperBound As Double = Log(5.0#)
-
-        Public Property MaximumTemperatureStep As Double = 10
 
         Public Property SolverScheme As SolvingScheme = SolvingScheme.Direct
 
@@ -1654,7 +1579,6 @@ Namespace UnitOperations
         Private _use_ie3 As Boolean = False
         Private _ie As New InitialEstimates
         Private _autoupdie As Boolean = False
-        Private _storejac As Boolean = True
 
         Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean
 
@@ -1923,8 +1847,6 @@ Namespace UnitOperations
             Full_Reflux = 2
         End Enum
 
-        Public MustOverride Property SolvingMethod() As Integer
-
         Public ReadOnly Property MaterialStreams() As System.Collections.Generic.Dictionary(Of String, StreamInformation)
             Get
                 Return _conn_ms
@@ -1935,141 +1857,6 @@ Namespace UnitOperations
             Get
                 Return _conn_es
             End Get
-        End Property
-
-        Public Property IO_ExtLoop_DeltaT() As Double
-            Get
-                Return _iodeltat_el
-            End Get
-            Set(ByVal value As Double)
-                _iodeltat_el = value
-            End Set
-        End Property
-
-        Public Property IO_DampingFactorMax() As Double
-            Get
-                Return _iodfmax
-            End Get
-            Set(ByVal value As Double)
-                _iodfmax = value
-            End Set
-        End Property
-
-        Public Property IO_DampingFactorMin() As Double
-            Get
-                Return _iodfmin
-            End Get
-            Set(ByVal value As Double)
-                _iodfmin = value
-            End Set
-        End Property
-
-        Public Property SC_MaxVarChgFac() As Integer
-            Get
-                Return _scmaxvarchgfac
-            End Get
-            Set(ByVal value As Integer)
-                _scmaxvarchgfac = value
-            End Set
-        End Property
-
-        Public Property IO_MaxVarChgFac() As Integer
-            Get
-                Return _iomaxvarchgfac
-            End Get
-            Set(ByVal value As Integer)
-                _iomaxvarchgfac = value
-            End Set
-        End Property
-
-        Public Property IO_NumericalDerivativeStep() As Double
-            Get
-                Return _ionderivstep
-            End Get
-            Set(ByVal value As Double)
-                _ionderivstep = value
-            End Set
-        End Property
-
-        Public Property SC_DampingFactor() As Double
-            Get
-                Return _scdf
-            End Get
-            Set(ByVal value As Double)
-                _scdf = value
-            End Set
-        End Property
-
-        Public Property SC_MaximumTemperatureChange() As Double
-            Get
-                Return _scmaxtc
-            End Get
-            Set(ByVal value As Double)
-                _scmaxtc = value
-            End Set
-        End Property
-
-        Public Property SC_NumericalDerivativeStep() As Double
-            Get
-                Return _scnderivstep
-            End Get
-            Set(ByVal value As Double)
-                _scnderivstep = value
-            End Set
-        End Property
-
-        Public Property UseNewtonUpdate() As Boolean
-            Get
-                Return _unu
-            End Get
-            Set(ByVal value As Boolean)
-                _unu = value
-            End Set
-        End Property
-
-        Public Property UseDampingFactor() As Boolean
-            Get
-                Return _udf
-            End Get
-            Set(ByVal value As Boolean)
-                _udf = value
-            End Set
-        End Property
-
-        Public Property UseIdentityAsJacobianInverse() As Boolean
-            Get
-                Return _uijac
-            End Get
-            Set(ByVal value As Boolean)
-                _uijac = value
-            End Set
-        End Property
-
-        Public Property StopAtIterationNumber() As Integer
-            Get
-                Return _stopatiter
-            End Get
-            Set(ByVal value As Integer)
-                _stopatiter = value
-            End Set
-        End Property
-
-        Public Property KbjWeightedAverage() As Boolean
-            Get
-                Return _kbjWA
-            End Get
-            Set(ByVal value As Boolean)
-                _kbjWA = value
-            End Set
-        End Property
-
-        Public Property AdjustSb() As Boolean
-            Get
-                Return _adjSb
-            End Get
-            Set(ByVal value As Boolean)
-                _adjSb = value
-            End Set
         End Property
 
         Public Property MaxIterations() As Integer
@@ -2241,15 +2028,6 @@ Namespace UnitOperations
             Next
             Return i
         End Function
-
-        Public Property StoreAndReuseJacobian() As Boolean
-            Get
-                Return _storejac
-            End Get
-            Set(ByVal value As Boolean)
-                _storejac = value
-            End Set
-        End Property
 
         Public Property AutoUpdateInitialEstimates() As Boolean
             Get
@@ -3101,51 +2879,24 @@ Namespace UnitOperations
                     idealh0 = True
             End Select
 
-
-            IObj?.Paragraphs.Add("<h2>Rigorous Solver</h2>")
-
-            Select Case Me.SolvingMethod
-                Case 0 'BP
-                    IObj?.Paragraphs.Add("Selected Solver: Wang-Henke Bubble-Point (BP)")
-                Case 1 'SC
-                    IObj?.Paragraphs.Add("Selected Solver: Naphtali-Sandholm Simultaneous Correction (SC)")
-                Case 2 'IO 
-                    IObj?.Paragraphs.Add("Selected Solver: Russell Inside-Out (IO)")
-                Case 3 'SR
-                    IObj?.Paragraphs.Add("Selected Solver: Burningham-Otto Sum-Rates (SR)")
-            End Select
-
             IObj?.Paragraphs.Add(String.Format("Solving Scheme: {0}", [Enum].GetName(SolverScheme.GetType, SolverScheme)))
 
             If idealk0 Or idealh0 Then
                 IObj?.Paragraphs.Add("Calling the rigorous solver to calculate solution using Ideal K-values and/or Enthalpy values.")
             End If
 
-            Dim result As Object
+            Dim result As Object = Nothing
 
             IObj?.SetCurrent()
 
-            Select Case Me.SolvingMethod
-                Case 0 'BP
-                    If Not TypeOf Me Is DistillationColumn Then Throw New Exception(FlowSheet.GetTranslatedString("UnsupportedSolver"))
-                    result = SolvingMethods.WangHenkeMethod.Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, Me.StopAtIterationNumber, eff, Me.ColumnType, pp, Me.Specs, idealk0, idealh0, MaximumTemperatureStep)
-                    ic = result(9)
-                Case 1 'SC
-                    Dim scm As New SolvingMethods.NaphtaliSandholmMethod
-                    result = scm.Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, eff, Me.ColumnType, pp, Me.Specs, Me.SC_NumericalDerivativeStep, NS_Solver, NS_LowerBound, NS_UpperBound, NS_SimplexPreconditioning, idealk0, idealh0, MaximumTemperatureStep, llextractor)
-                    ec = result(11)
-                Case 2 'IO 
-                    Dim rm As New SolvingMethods.RussellMethod
-                    result = rm.Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, eff, Me.AdjustSb, Me.ColumnType, Me.KbjWeightedAverage, pp, Me.Specs, IO_NumericalDerivativeStep, IO_Solver, IO_LowerBound, IO_UpperBound, idealk0, idealh0, MaximumTemperatureStep, llextractor)
-                    ic = result(9)
-                    ec = result(11)
-                Case 3 'SR
-                    If Not TypeOf Me Is AbsorptionColumn Then Throw New Exception(FlowSheet.GetTranslatedString("UnsupportedSolver"))
-                    result = SolvingMethods.BurninghamOttoMethod.Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.StopAtIterationNumber, eff, pp, Me.Specs, idealk0, idealh0, MaximumTemperatureStep, llextractor)
-                    ic = result(9)
-                Case Else
-                    result = Nothing
-            End Select
+            If TypeOf Me Is DistillationColumn Then
+                Dim bp As New SolvingMethods.WangHenkeMethod
+                result = bp.Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, -1, eff, Me.ColumnType, pp, Me.Specs, idealk0, idealh0)
+                ic = result(9)
+            ElseIf TypeOf Me Is AbsorptionColumn Then
+                result = SolvingMethods.BurninghamOttoMethod.Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, -1, eff, pp, Me.Specs, idealk0, idealh0, llextractor)
+                ic = result(9)
+            End If
 
             '{Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ic, t_error}
 
@@ -3161,19 +2912,8 @@ Namespace UnitOperations
                 xf.Add(result(6)(i))
                 x(i) = result(5)(i)
                 y(i) = result(6)(i)
-                If Me.SolvingMethod = SolvingMethods.ColSolvingMethod.Russell_InsideOut Or
-                   Me.SolvingMethod = SolvingMethods.ColSolvingMethod.NaphtaliSandholm_SimultaneousCorrection Then
-                    Dim obj(nc - 1) As Double
-                    For j = 0 To nc - 1
-                        obj(j) = result(7)(i, j)
-                    Next
-                    Kval(i) = obj
-                    Kf.Add(obj)
-                    Me.JacobianMatrix = result(13)
-                Else
-                    Kf.Add(result(7)(i))
-                    Kval(i) = result(7)(i)
-                End If
+                Kf.Add(result(7)(i))
+                Kval(i) = result(7)(i)
             Next
             Tf = result(0)
             Vf = result(1)
@@ -3184,28 +2924,17 @@ Namespace UnitOperations
 
             IObj?.SetCurrent()
 
+
             If SolverScheme <> SolvingScheme.Direct Then
                 're-run solver using refined initial estimates from last run with ideal properties
-                IObj?.Paragraphs.Add("Re-running solver using refined initial estimates from last run with ideal properties.")
-                Select Case Me.SolvingMethod
-                    Case 2 'IO 
-                        Dim rm As New SolvingMethods.RussellMethod
-                        result = rm.Solve(nc, ns, maxits, tol, F, Vf, Q, Lf, VSSf, LSSf, Kval, x, y, z, fc, HF, Tf, P, Me.CondenserType, eff, Me.AdjustSb, Me.ColumnType, Me.KbjWeightedAverage, pp, Me.Specs, IO_NumericalDerivativeStep, IO_Solver, IO_LowerBound, IO_UpperBound, False, False, MaximumTemperatureStep, llextractor)
-                        ic = result(9)
-                        ec = result(11)
-                    Case 0 'BP
-                        result = SolvingMethods.WangHenkeMethod.Solve(nc, ns, maxits, tol, F, Vf, Q, Lf, VSSf, LSSf, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, Me.StopAtIterationNumber, eff, Me.ColumnType, pp, Me.Specs, False, False, MaximumTemperatureStep)
-                        ic = result(9)
-                    Case 3 'SR
-                        result = SolvingMethods.BurninghamOttoMethod.Solve(nc, ns, maxits, tol, F, Vf, Q, Lf, VSSf, LSSf, Kval, x, y, z, fc, HF, T, P, Me.StopAtIterationNumber, eff, pp, Me.Specs, False, False, MaximumTemperatureStep, llextractor)
-                        ic = result(9)
-                    Case 1 'SC
-                        Dim scm As New SolvingMethods.NaphtaliSandholmMethod
-                        result = scm.Solve(nc, ns, maxits, tol, F, Vf, Q, Lf, VSSf, LSSf, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, eff, Me.ColumnType, pp, Me.Specs, Me.SC_NumericalDerivativeStep, NS_Solver, NS_LowerBound, NS_UpperBound, NS_SimplexPreconditioning, False, False, MaximumTemperatureStep, llextractor)
-                        ec = result(11)
-                    Case Else
-                        result = Nothing
-                End Select
+                If TypeOf Me Is DistillationColumn Then
+                    Dim bp As New SolvingMethods.WangHenkeMethod
+                    result = bp.Solve(nc, ns, maxits, tol, F, Vf, Q, Lf, VSSf, LSSf, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, -1, eff, Me.ColumnType, pp, Me.Specs, False, False)
+                    ic = result(9)
+                ElseIf TypeOf Me Is AbsorptionColumn Then
+                    result = SolvingMethods.BurninghamOttoMethod.Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, -1, eff, pp, Me.Specs, idealk0, idealh0, llextractor)
+                    ic = result(9)
+                End If
             End If
 
             IObj?.Paragraphs.Add("Column is solved.")
@@ -3777,6 +3506,1862 @@ Namespace UnitOperations
                     Exit Select
             End Select
             Return vec
+        End Function
+
+    End Class
+
+End Namespace
+
+Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
+
+    <System.Serializable()> Public Class WangHenkeMethod
+
+        Public Function Solve(ByVal nc As Integer, ByVal ns As Integer, ByVal maxits As Integer,
+                                ByVal tol As Double(), ByVal F As Double(), ByVal V As Double(),
+                                ByVal Q As Double(), ByVal L As Double(),
+                                ByVal VSS As Double(), ByVal LSS As Double(), ByVal Kval()() As Double,
+                                ByVal x()() As Double, ByVal y()() As Double, ByVal z()() As Double,
+                                ByVal fc()() As Double,
+                                ByVal HF As Double(), ByVal T As Double(), ByVal P As Double(),
+                                ByVal condt As DistillationColumn.condtype,
+                                ByVal stopatitnumber As Integer,
+                                ByVal eff() As Double,
+                                ByVal coltype As Column.ColType,
+                                ByVal pp As PropertyPackages.PropertyPackage,
+                                ByVal specs As Dictionary(Of String, SepOps.ColumnSpec),
+                                ByVal IdealK As Boolean, ByVal IdealH As Boolean) As Object
+
+            Dim spval1, spval2 As Double
+            Dim spci1, spci2 As Integer
+
+            spval1 = SystemsOfUnits.Converter.ConvertToSI(specs("C").SpecUnit, specs("C").SpecValue)
+            spci1 = specs("C").ComponentIndex
+            spval2 = SystemsOfUnits.Converter.ConvertToSI(specs("R").SpecUnit, specs("R").SpecValue)
+            spci2 = specs("R").ComponentIndex
+
+            Dim specC_OK, specR_OK As Boolean
+
+            Select Case specs("C").SType
+                Case ColumnSpec.SpecType.Component_Fraction,
+                ColumnSpec.SpecType.Component_Mass_Flow_Rate,
+                ColumnSpec.SpecType.Component_Molar_Flow_Rate,
+                ColumnSpec.SpecType.Component_Recovery,
+                ColumnSpec.SpecType.Temperature
+                    specC_OK = False
+                Case Else
+                    specC_OK = True
+            End Select
+
+            Select Case specs("R").SType
+                Case ColumnSpec.SpecType.Component_Fraction,
+                ColumnSpec.SpecType.Component_Mass_Flow_Rate,
+                ColumnSpec.SpecType.Component_Molar_Flow_Rate,
+                ColumnSpec.SpecType.Component_Recovery,
+                ColumnSpec.SpecType.Temperature
+                    specR_OK = False
+                Case Else
+                    specR_OK = True
+            End Select
+
+            Dim ObjFunctionValues As New List(Of Double)
+            Dim ResultsVector As New List(Of Object)
+
+            If Not specC_OK And Not specR_OK Then
+
+                Dim refluxratio As Double = (L(0) + LSS(0)) / LSS(0)
+                Dim bottomsrate As Double = L.Last
+
+                Dim newspecs As New Dictionary(Of String, ColumnSpec)
+                Dim cspec As New ColumnSpec()
+                cspec.SpecValue = refluxratio
+                cspec.SType = ColumnSpec.SpecType.Stream_Ratio
+                Dim rspec As New ColumnSpec()
+                rspec.SpecValue = bottomsrate
+                rspec.SType = ColumnSpec.SpecType.Product_Molar_Flow_Rate
+                newspecs.Add("C", cspec)
+                newspecs.Add("R", rspec)
+
+                Dim result As Object = Nothing
+
+                Dim counter As Integer = 0
+
+                Dim simplex As New Simplex()
+
+                Dim svar1 As New OptSimplexBoundVariable(refluxratio, 1.0, 100.0)
+                Dim svar2 As New OptSimplexBoundVariable(bottomsrate, F.Sum * 0.05, F.Sum)
+
+                Dim errfunc As Double = 1.0E+20
+
+                simplex.MaxFunEvaluations = maxits
+                simplex.Tolerance = tol(1)
+                simplex.ComputeMin(Function(xvars)
+
+                                       If errfunc < tol(1) / 1000 Then Return errfunc * 1.0001
+
+                                       cspec.SpecValue = xvars(0)
+                                       rspec.SpecValue = xvars(1)
+
+                                       If cspec.SpecValue < 0 Then Return 1.0E+20
+
+                                       result = Solve_Internal(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval,
+                                           x, y, z, fc, HF, T, P, condt, stopatitnumber, eff,
+                                           coltype, pp, newspecs, IdealK, IdealH)
+
+                                       'Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ic, t_error}
+
+                                       errfunc = 0.0
+
+                                       If counter < 30 Then
+
+                                           T = result(0)
+                                           V = result(1)
+                                           L = result(2)
+                                           VSS = result(3)
+                                           LSS = result(4)
+                                           y = result(5)
+                                           x = result(6)
+                                           Kval = result(7)
+                                           Q = result(8)
+
+                                           Select Case specs("C").SType
+                                               Case ColumnSpec.SpecType.Component_Fraction
+                                                   If specs("C").SpecUnit = "M" Or specs("C").SpecUnit = "Molar" Then
+                                                       errfunc += ((x(0)(spci1) - spval1) / spval1) ^ 2
+                                                   Else 'W
+                                                       errfunc += ((pp.AUX_CONVERT_MOL_TO_MASS(x(0))(spci1) - spval1) / spval1) ^ 2
+                                                   End If
+                                               Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
+                                                   errfunc += ((LSS(0) * x(0)(spci1) - spval1 / pp.RET_VMM()(spci1) * 1000) / spval1) ^ 2
+                                               Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
+                                                   errfunc += ((LSS(0) * x(0)(spci1) - spval1) / spval1) ^ 2
+                                               Case ColumnSpec.SpecType.Component_Recovery
+                                                   Dim rec As Double = spval1 / 100
+                                                   Dim sumc As Double = 0
+                                                   For j = 0 To ns
+                                                       sumc += z(j)(spci1) * F(j)
+                                                   Next
+                                                   sumc *= rec
+                                                   errfunc += (LSS(0) * x(0)(spci1) / sumc - rec) ^ 2
+                                               Case ColumnSpec.SpecType.Temperature
+                                                   errfunc += ((T(0) - spval1) / spval1) ^ 2
+                                           End Select
+
+                                           Select Case specs("R").SType
+                                               Case ColumnSpec.SpecType.Component_Fraction
+                                                   If specs("R").SpecUnit = "M" Or specs("R").SpecUnit = "Molar" Then
+                                                       errfunc += ((x(ns)(spci2) - spval2) / spval2) ^ 2
+                                                   Else 'W
+                                                       errfunc += ((pp.AUX_CONVERT_MOL_TO_MASS(x(ns))(spci2) - spval2) / spval2) ^ 2
+                                                   End If
+                                               Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
+                                                   errfunc += ((L(ns) * x(ns)(spci2) - spval2 / pp.RET_VMM()(spci2) * 1000) / spval2) ^ 2
+                                               Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
+                                                   errfunc += ((L(ns) * x(ns)(spci2) - spval2) / spval2) ^ 2
+                                               Case ColumnSpec.SpecType.Component_Recovery
+                                                   Dim rec As Double = spval2 / 100
+                                                   Dim sumc As Double = 0
+                                                   For j = 0 To ns
+                                                       sumc += z(j)(spci2) * F(j)
+                                                   Next
+                                                   sumc *= rec
+                                                   errfunc += (L(ns) * x(ns)(spci2) / sumc - rec) ^ 2
+                                               Case ColumnSpec.SpecType.Temperature
+                                                   errfunc += ((T(ns) - spval2) / spval2) ^ 2
+                                           End Select
+
+                                       Else
+
+                                           Dim T2 = result(0)
+                                           Dim V2 = result(1)
+                                           Dim L2 = result(2)
+                                           Dim VSS2 = result(3)
+                                           Dim LSS2 = result(4)
+                                           Dim y2 = result(5)
+                                           Dim x2 = result(6)
+                                           Dim Kval2 = result(7)
+                                           Dim Q2 = result(8)
+
+                                           Select Case specs("C").SType
+                                               Case ColumnSpec.SpecType.Component_Fraction
+                                                   If specs("C").SpecUnit = "M" Or specs("C").SpecUnit = "Molar" Then
+                                                       errfunc += ((x2(0)(spci1) - spval1) / spval1) ^ 2
+                                                   Else 'W
+                                                       errfunc += ((pp.AUX_CONVERT_MOL_TO_MASS(x2(0))(spci1) - spval1) / spval1) ^ 2
+                                                   End If
+                                               Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
+                                                   errfunc += ((LSS2(0) * x2(0)(spci1) - spval1 / pp.RET_VMM()(spci1) * 1000) / spval1) ^ 2
+                                               Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
+                                                   errfunc += ((LSS2(0) * x2(0)(spci1) - spval1) / spval1) ^ 2
+                                               Case ColumnSpec.SpecType.Component_Recovery
+                                                   Dim rec As Double = spval1 / 100
+                                                   Dim sumc As Double = 0
+                                                   For j = 0 To ns
+                                                       sumc += z(j)(spci1) * F(j)
+                                                   Next
+                                                   sumc *= rec
+                                                   errfunc += (LSS2(0) * x2(0)(spci1) / sumc - rec) ^ 2
+                                               Case ColumnSpec.SpecType.Temperature
+                                                   errfunc += ((T2(0) - spval1) / spval1) ^ 2
+                                           End Select
+
+                                           Select Case specs("R").SType
+                                               Case ColumnSpec.SpecType.Component_Fraction
+                                                   If specs("R").SpecUnit = "M" Or specs("R").SpecUnit = "Molar" Then
+                                                       errfunc += ((x2(ns)(spci2) - spval2) / spval2) ^ 2
+                                                   Else 'W
+                                                       errfunc += ((pp.AUX_CONVERT_MOL_TO_MASS(x2(ns))(spci2) - spval2) / spval2) ^ 2
+                                                   End If
+                                               Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
+                                                   errfunc += ((L2(ns) * x2(ns)(spci2) - spval2 / pp.RET_VMM()(spci2) * 1000) / spval2) ^ 2
+                                               Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
+                                                   errfunc += ((L2(ns) * x2(ns)(spci2) - spval2) / spval2) ^ 2
+                                               Case ColumnSpec.SpecType.Component_Recovery
+                                                   Dim rec As Double = spval2 / 100
+                                                   Dim sumc As Double = 0
+                                                   For j = 0 To ns
+                                                       sumc += z(j)(spci2) * F(j)
+                                                   Next
+                                                   sumc *= rec
+                                                   errfunc += (L2(ns) * x2(ns)(spci2) / sumc - rec) ^ 2
+                                               Case ColumnSpec.SpecType.Temperature
+                                                   errfunc += ((T2(ns) - spval2) / spval2) ^ 2
+                                           End Select
+
+                                       End If
+
+                                       pp.Flowsheet?.ShowMessage("BP solver: current objective function (error) value = " & errfunc, IFlowsheet.MessageType.Information)
+
+                                       counter += 1
+
+                                       ResultsVector.Add(result)
+                                       ObjFunctionValues.Add(errfunc)
+
+                                       Return errfunc
+
+                                   End Function, {svar1, svar2})
+
+                result = ResultsVector(ObjFunctionValues.IndexOf(ObjFunctionValues.Min))
+
+                Return result
+
+            ElseIf Not specC_OK Then
+
+                Dim refluxratio As Double = (L(0) + LSS(0)) / LSS(0)
+
+                Dim newspecs As New Dictionary(Of String, ColumnSpec)
+                Dim cspec As New ColumnSpec()
+                cspec.SpecValue = refluxratio
+                cspec.SType = ColumnSpec.SpecType.Stream_Ratio
+
+                newspecs.Add("C", cspec)
+                newspecs.Add("R", specs("R"))
+
+                Dim result As Object = Nothing
+
+                Dim counter As Integer = 0
+
+                Dim simplex As New Simplex()
+
+                Dim svar1 As New OptSimplexBoundVariable(refluxratio, 1.0, 100.0)
+
+                Dim errfunc As Double = 1.0E+20
+
+                simplex.MaxFunEvaluations = maxits
+                simplex.Tolerance = tol(1)
+                simplex.ComputeMin(Function(xvars)
+
+                                       If errfunc < tol(1) / 1000 Then Return errfunc * 1.0001
+
+                                       cspec.SpecValue = xvars(0)
+
+                                       If cspec.SpecValue < 0 Then Return 1.0E+20
+
+                                       result = Solve_Internal(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval,
+                                           x, y, z, fc, HF, T, P, condt, stopatitnumber, eff,
+                                           coltype, pp, newspecs, IdealK, IdealH)
+
+                                       'Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ic, t_error}
+
+                                       errfunc = 0.0
+
+                                       If counter < 30 Then
+
+                                           T = result(0)
+                                           V = result(1)
+                                           L = result(2)
+                                           VSS = result(3)
+                                           LSS = result(4)
+                                           y = result(5)
+                                           x = result(6)
+                                           Kval = result(7)
+                                           Q = result(8)
+
+                                           Select Case specs("C").SType
+                                               Case ColumnSpec.SpecType.Component_Fraction
+                                                   If specs("C").SpecUnit = "M" Or specs("C").SpecUnit = "Molar" Then
+                                                       errfunc += ((x(0)(spci1) - spval1) / spval1) ^ 2
+                                                   Else 'W
+                                                       errfunc += ((pp.AUX_CONVERT_MOL_TO_MASS(x(0))(spci1) - spval1) / spval1) ^ 2
+                                                   End If
+                                               Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
+                                                   errfunc += ((LSS(0) * x(0)(spci1) - spval1 / pp.RET_VMM()(spci1) * 1000) / spval1) ^ 2
+                                               Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
+                                                   errfunc += ((LSS(0) * x(0)(spci1) - spval1) / spval1) ^ 2
+                                               Case ColumnSpec.SpecType.Component_Recovery
+                                                   Dim rec As Double = spval1 / 100
+                                                   Dim sumc As Double = 0
+                                                   For j = 0 To ns
+                                                       sumc += z(j)(spci1) * F(j)
+                                                   Next
+                                                   sumc *= rec
+                                                   errfunc += (LSS(0) * x(0)(spci1) / sumc - rec) ^ 2
+                                               Case ColumnSpec.SpecType.Temperature
+                                                   errfunc += ((T(0) - spval1) / spval1) ^ 2
+                                           End Select
+
+                                       Else
+
+                                           Dim T2 = result(0)
+                                           Dim V2 = result(1)
+                                           Dim L2 = result(2)
+                                           Dim VSS2 = result(3)
+                                           Dim LSS2 = result(4)
+                                           Dim y2 = result(5)
+                                           Dim x2 = result(6)
+                                           Dim Kval2 = result(7)
+                                           Dim Q2 = result(8)
+
+                                           Select Case specs("C").SType
+                                               Case ColumnSpec.SpecType.Component_Fraction
+                                                   If specs("C").SpecUnit = "M" Or specs("C").SpecUnit = "Molar" Then
+                                                       errfunc += ((x2(0)(spci1) - spval1) / spval1) ^ 2
+                                                   Else 'W
+                                                       errfunc += ((pp.AUX_CONVERT_MOL_TO_MASS(x2(0))(spci1) - spval1) / spval1) ^ 2
+                                                   End If
+                                               Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
+                                                   errfunc += ((LSS2(0) * x2(0)(spci1) - spval1 / pp.RET_VMM()(spci1) * 1000) / spval1) ^ 2
+                                               Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
+                                                   errfunc += ((LSS2(0) * x2(0)(spci1) - spval1) / spval1) ^ 2
+                                               Case ColumnSpec.SpecType.Component_Recovery
+                                                   Dim rec As Double = spval1 / 100
+                                                   Dim sumc As Double = 0
+                                                   For j = 0 To ns
+                                                       sumc += z(j)(spci1) * F(j)
+                                                   Next
+                                                   sumc *= rec
+                                                   errfunc += (LSS2(0) * x2(0)(spci1) / sumc - rec) ^ 2
+                                               Case ColumnSpec.SpecType.Temperature
+                                                   errfunc += ((T2(0) - spval1) / spval1) ^ 2
+                                           End Select
+
+                                       End If
+
+                                       pp.Flowsheet?.ShowMessage("BP solver: current objective function (error) value = " & errfunc, IFlowsheet.MessageType.Information)
+
+                                       counter += 1
+
+                                       ResultsVector.Add(result)
+                                       ObjFunctionValues.Add(errfunc)
+
+                                       Return errfunc
+
+                                   End Function, {svar1})
+
+                result = ResultsVector(ObjFunctionValues.IndexOf(ObjFunctionValues.Min))
+
+                Return result
+
+            ElseIf Not specR_OK Then
+
+                Dim bottomsrate As Double = L.Last
+
+                Dim newspecs As New Dictionary(Of String, ColumnSpec)
+                Dim rspec As New ColumnSpec()
+                rspec.SpecValue = bottomsrate
+                rspec.SType = ColumnSpec.SpecType.Product_Molar_Flow_Rate
+                newspecs.Add("C", specs("C"))
+                newspecs.Add("R", rspec)
+
+                Dim result As Object = Nothing
+
+                Dim counter As Integer = 0
+
+                Dim simplex As New Simplex()
+
+                Dim svar2 As New OptSimplexBoundVariable(bottomsrate, F.Sum * 0.05, F.Sum)
+
+                Dim errfunc As Double = 1.0E+20
+
+                simplex.MaxFunEvaluations = maxits
+                simplex.Tolerance = tol(1)
+                simplex.ComputeMin(Function(xvars)
+
+                                       If errfunc < tol(1) / 1000 Then Return errfunc * 1.0001
+
+                                       rspec.SpecValue = xvars(1)
+
+                                       result = Solve_Internal(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval,
+                                           x, y, z, fc, HF, T, P, condt, stopatitnumber, eff,
+                                           coltype, pp, newspecs, IdealK, IdealH)
+
+                                       'Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ic, t_error}
+
+                                       errfunc = 0.0
+
+                                       If counter < 30 Then
+
+                                           T = result(0)
+                                           V = result(1)
+                                           L = result(2)
+                                           VSS = result(3)
+                                           LSS = result(4)
+                                           y = result(5)
+                                           x = result(6)
+                                           Kval = result(7)
+                                           Q = result(8)
+
+                                           Select Case specs("R").SType
+                                               Case ColumnSpec.SpecType.Component_Fraction
+                                                   If specs("R").SpecUnit = "M" Or specs("R").SpecUnit = "Molar" Then
+                                                       errfunc += ((x(ns)(spci2) - spval2) / spval2) ^ 2
+                                                   Else 'W
+                                                       errfunc += ((pp.AUX_CONVERT_MOL_TO_MASS(x(ns))(spci2) - spval2) / spval2) ^ 2
+                                                   End If
+                                               Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
+                                                   errfunc += ((L(ns) * x(ns)(spci2) - spval2 / pp.RET_VMM()(spci2) * 1000) / spval2) ^ 2
+                                               Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
+                                                   errfunc += ((L(ns) * x(ns)(spci2) - spval2) / spval2) ^ 2
+                                               Case ColumnSpec.SpecType.Component_Recovery
+                                                   Dim rec As Double = spval2 / 100
+                                                   Dim sumc As Double = 0
+                                                   For j = 0 To ns
+                                                       sumc += z(j)(spci2) * F(j)
+                                                   Next
+                                                   sumc *= rec
+                                                   errfunc += (L(ns) * x(ns)(spci2) / sumc - rec) ^ 2
+                                               Case ColumnSpec.SpecType.Temperature
+                                                   errfunc += ((T(ns) - spval2) / spval2) ^ 2
+                                           End Select
+
+                                       Else
+
+                                           Dim T2 = result(0)
+                                           Dim V2 = result(1)
+                                           Dim L2 = result(2)
+                                           Dim VSS2 = result(3)
+                                           Dim LSS2 = result(4)
+                                           Dim y2 = result(5)
+                                           Dim x2 = result(6)
+                                           Dim Kval2 = result(7)
+                                           Dim Q2 = result(8)
+
+                                           Select Case specs("R").SType
+                                               Case ColumnSpec.SpecType.Component_Fraction
+                                                   If specs("R").SpecUnit = "M" Or specs("R").SpecUnit = "Molar" Then
+                                                       errfunc += ((x2(ns)(spci2) - spval2) / spval2) ^ 2
+                                                   Else 'W
+                                                       errfunc += ((pp.AUX_CONVERT_MOL_TO_MASS(x2(ns))(spci2) - spval2) / spval2) ^ 2
+                                                   End If
+                                               Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
+                                                   errfunc += ((L2(ns) * x2(ns)(spci2) - spval2 / pp.RET_VMM()(spci2) * 1000) / spval2) ^ 2
+                                               Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
+                                                   errfunc += ((L2(ns) * x2(ns)(spci2) - spval2) / spval2) ^ 2
+                                               Case ColumnSpec.SpecType.Component_Recovery
+                                                   Dim rec As Double = spval2 / 100
+                                                   Dim sumc As Double = 0
+                                                   For j = 0 To ns
+                                                       sumc += z(j)(spci2) * F(j)
+                                                   Next
+                                                   sumc *= rec
+                                                   errfunc += (L2(ns) * x2(ns)(spci2) / sumc - rec) ^ 2
+                                               Case ColumnSpec.SpecType.Temperature
+                                                   errfunc += ((T2(ns) - spval2) / spval2) ^ 2
+                                           End Select
+
+                                       End If
+
+                                       pp.Flowsheet?.ShowMessage("BP solver: current objective function (error) value = " & errfunc, IFlowsheet.MessageType.Information)
+
+                                       counter += 1
+
+                                       ResultsVector.Add(result)
+                                       ObjFunctionValues.Add(errfunc)
+
+                                       Return errfunc
+
+                                   End Function, {svar2})
+
+                result = ResultsVector(ObjFunctionValues.IndexOf(ObjFunctionValues.Min))
+
+                Return result
+
+            Else
+
+                Return Solve_Internal(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, condt, stopatitnumber, eff, coltype, pp, specs, IdealK, IdealH)
+
+            End If
+
+        End Function
+
+        Public Function Solve_Internal(ByVal nc As Integer, ByVal ns As Integer, ByVal maxits As Integer,
+                                ByVal tol As Double(), ByVal F As Double(), ByVal V As Double(),
+                                ByVal Q As Double(), ByVal L As Double(),
+                                ByVal VSS As Double(), ByVal LSS As Double(), ByVal Kval()() As Double,
+                                ByVal x()() As Double, ByVal y()() As Double, ByVal z()() As Double,
+                                ByVal fc()() As Double,
+                                ByVal HF As Double(), ByVal T As Double(), ByVal P As Double(),
+                                ByVal condt As DistillationColumn.condtype,
+                                ByVal stopatitnumber As Integer,
+                                ByVal eff() As Double,
+                                ByVal coltype As Column.ColType,
+                                ByVal pp As PropertyPackages.PropertyPackage,
+                                ByVal specs As Dictionary(Of String, SepOps.ColumnSpec),
+                                ByVal IdealK As Boolean, ByVal IdealH As Boolean) As Object
+
+            pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "Solve", "Bubble-Point (BP) Method", "Wang-Henke Bubble-Point (BP) Method for Distillation Columns", True)
+
+            IObj?.SetCurrent()
+
+            IObj?.Paragraphs.Add("Frequently, distillation involves species that cover a relatively narrow range of K-values. A particularly effective procedure for this case was suggested by Friday and Smith and developed in detail by Wang and Henke. It is referred to as the bubble-point (BP) method because a new set of stage temperatures is computed during each iteration from the bubble-point equations. All equations are partitioned and solved sequentially except for the M equations, which are solved separately for each component by the tridiagonal-matrix technique.")
+
+            IObj?.Paragraphs.Add("Specifications are conditions and stage location of feeds, stage pressures, flow rates of sidestreams (note that liquid distillate flow rate, if any, is designated as U1), heat-transfer rates for all stages except stage 1 (condenser) and stage N (reboiler), total stages, bubble-point reflux flow rate, and vapor distillate flow rate.")
+
+            IObj?.Paragraphs.Add("To initiate the calculations, values of tear variables, Vj and Tj, are assumed. Generally, it is sufficient to establish an initial set of Vj values based on constant-molar interstage flows using the specified reflux, distillate, feed, and sidestream flows. Initial Tj values can be provided by computing the bubble-point temperature of an estimated bottoms product and the dew-point temperature of an assumed distillate product (or computing a bubble-point temperature if distillate is liquid, or a temperature in between the dew point and bubble point if distillate is both vapor and liquid), and then using linear interpolation for the other stage temperatures.")
+
+            IObj?.Paragraphs.Add("To solve the Tridiagonal Matrix for <mi>x_{i}</mi> by the Thomas method, <mi>K_{i,j}</mi> values are required. When they are composition-dependent, initial assumptions for all <mi>x_{i,j}</mi> and <mi>y_{i,j}</mi> values are also needed, unless ideal K-values are employed initially. For each iteration, the computed set of <mi>x_{i,j}</mi> values for each stage are not likely to satisfy the summation constraint. Although not mentioned by Wang and Henke, it is advisable to normalize the set of computed <mi>x_{i,j}</mi> values by the relation")
+
+            IObj?.Paragraphs.Add("<m>(x_{i,j})_{normalized}=\frac{x_{i,j}}{\sum\limits_{i=1}^{C}{x_{i,j}} }</m>")
+
+            IObj?.Paragraphs.Add("New temperatures for the stages are obtained by bubble point calculations using normalized <mi>x_{i,j}</mi> values.")
+
+            IObj?.Paragraphs.Add("Values of <mi>y_{i,j}</mi> are determined along with the calculation of stage temperatures using the E equations. With a consistent set of values for <mi>x_{i,j}</mi>, Tj, and <mi>y_{i,j}</mi>, molar enthalpies are computed for each liquid and vapor stream leaving a stage. Since F1, V1, U1, W1, and L1 are specified, V2 and the condenser duty are readily obtained. Reboiler duty is determined by")
+
+            IObj?.Paragraphs.Add("<m>Q_N=\sum\limits_{j=1}^{N}{(F_jh_{F_j}-U_jh_{L_j}-W_jh_{V_j})}-\sum\limits_{j=1}^{N-1}{(Q_j-V_1h_{V_1}-L_Nh_{L_N})}</m>")
+
+            IObj?.Paragraphs.Add("A new set of Vj tear variables is computed by applying a modified energy balance obtained by")
+
+            IObj?.Paragraphs.Add("<m>\alpha _jV_j+\beta _jV_{j+1}=\gamma _j</m>")
+
+            IObj?.Paragraphs.Add("where")
+
+            IObj?.Paragraphs.Add("<m>\alpha _j = h_{L_{j-1}}-h_{V_j}</m>")
+
+            IObj?.Paragraphs.Add("<m>\beta _j=h_{V_{j+1}}-h_{L_j}</m>")
+
+            IObj?.Paragraphs.Add("<m>\gamma _j =\left[\sum\limits_{m=1}^{j-1}{(F_m-W_m-U_m)-V_1}\right](h_{L_j}-h_{L_{j=1}})+F_j(h_{L_j}-h_{F_j})+W_j(h_{V_j}-h_{L_j})+Q_j</m>")
+
+            IObj?.Paragraphs.Add("and enthalpies are evaluated at the stage temperatures last computed rather than at those used to initiate the iteration.")
+
+            IObj?.Paragraphs.Add("<m>V_j=\frac{\gamma _{j-1}-\alpha _{j-1}V_{j-1}}{\beta _{j-1}} </m>")
+
+            IObj?.Paragraphs.Add("Corresponding liquid flow rates are obtained from")
+
+            IObj?.Paragraphs.Add("<m>L_j=V_{j+1}+\sum\limits_{m=1}^{j}{(F_m-U_m-W_m)-V_1} </m>")
+
+            IObj?.Paragraphs.Add("One convergence criterion is")
+
+            IObj?.Paragraphs.Add("<m>\sum\limits_{j=1}^{N}{\left[\frac{T_j^{(k)}-T_j^{(k-1)}}{T_j^{(k)}}\right]^2+\sum\limits_{j=1}^{N}{\left[\frac{V_j^{(k)}-V_j^{(k-1)}}{V_j^{(k)}} \right]^2 }}\leq \in</m>")
+
+            IObj?.Paragraphs.Add("where T is an absolute temperature and <mi>\in</mi> is some prescribed tolerance. However, Wang and Henke suggest that the following simpler criterion, which is based on successive sets of Tj values only, is adequate.")
+
+            IObj?.Paragraphs.Add("Successive substitution is often employed for iterating the tear variables; that is, values of Tj and Vj are used directly to initiate the next iteration. It is desirable to inspect, and, if necessary, adjust the generated tear variables prior to beginning the next iteration.")
+
+            IObj?.Paragraphs.Add("The BP convergence rate is unpredictable, and can depend on the assumed initial set of Tj values. Cases with high reflux ratios can be more difficult to converge than those with low ratios. Orbach and Crowe describe an extrapolation method for accelerating convergence based on periodic adjustment of the tear variables when their values form geometric progressions during at least four successive iterations.")
+
+            IObj?.Paragraphs.Add("<h2>Input Parameters / Initial Estimates</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("Stage Temperatures: {0}", T.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Stage Pressures: {0}", P.ToMathArrayString))
+
+            IObj?.Paragraphs.Add(String.Format("Feeds: {0}", F.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Vapor Flows: {0}", V.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Liquid Flows: {0}", L.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Vapor Side Draws: {0}", VSS.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Liquid Side Draws: {0}", LSS.ToMathArrayString))
+
+            IObj?.Paragraphs.Add(String.Format("Mixture Compositions: {0}", z.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Liquid Phase Compositions: {0}", x.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Vapor/Liquid2 Phase Compositions: {0}", y.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("K-values: {0}", Kval.ToMathArrayString))
+
+            IObj?.Paragraphs.Add("<h2>Calculated Parameters</h2>")
+
+            Dim ppr As PropertyPackages.RaoultPropertyPackage = Nothing
+
+            If IdealK Or IdealH Then
+                ppr = New PropertyPackages.RaoultPropertyPackage
+                ppr.Flowsheet = pp.Flowsheet
+                ppr.CurrentMaterialStream = pp.CurrentMaterialStream
+            End If
+
+            Dim doparallel As Boolean = Settings.EnableParallelProcessing
+            Dim poptions As New ParallelOptions() With {.TaskScheduler = Settings.AppTaskScheduler}
+
+            Dim ic As Integer
+            Dim t_error, t_error_ant As Double
+            Dim Tj(ns), Tj_ant(ns), dTj(ns) As Double
+            Dim Fj(ns), Lj(ns), Vj(ns), Vj_ant(ns), dVj(ns), xc(ns)(), fcj(ns)(), yc(ns)(), lc(ns)(), vc(ns)(), zc(ns)(), K(ns)() As Double
+            Dim Hfj(ns), Hv(ns), Hl(ns) As Double
+            Dim VSSj(ns), LSSj(ns) As Double
+
+            'step0
+
+            Dim cv As New SystemsOfUnits.Converter
+            Dim spval1, spval2 As Double
+
+            spval1 = SystemsOfUnits.Converter.ConvertToSI(specs("C").SpecUnit, specs("C").SpecValue)
+            spval2 = SystemsOfUnits.Converter.ConvertToSI(specs("R").SpecUnit, specs("R").SpecValue)
+
+            'step1
+
+            Dim rr, B, D2 As Double
+
+            'step2
+
+            Dim i, j As Integer
+
+            For i = 0 To ns
+                Array.Resize(fcj(i), nc)
+                Array.Resize(xc(i), nc)
+                Array.Resize(yc(i), nc)
+                Array.Resize(lc(i), nc)
+                Array.Resize(vc(i), nc)
+                Array.Resize(zc(i), nc)
+                Array.Resize(zc(i), nc)
+                Array.Resize(K(i), nc)
+            Next
+
+            For i = 0 To ns
+                VSSj(i) = VSS(i)
+                LSSj(i) = LSS(i)
+                Lj(i) = L(i)
+                Vj(i) = V(i)
+                Tj(i) = T(i)
+                K(i) = Kval(i)
+                Fj(i) = F(i)
+                Hfj(i) = HF(i) / 1000
+                fcj(i) = fc(i)
+            Next
+
+            Dim sumFHF As Double = 0
+            Dim sumF As Double = 0
+            Dim sumLSSHl As Double = 0
+            Dim sumLSS As Double = 0
+            Dim sumVSSHv As Double = 0
+            Dim sumVSS As Double = 0
+            For i = 0 To ns
+                sumF += F(i)
+                If i > 0 Then sumLSS += LSS(i)
+                sumVSS += VSS(i)
+                sumFHF += Fj(i) * Hfj(i)
+            Next
+
+            If doparallel Then
+
+                Dim task1 As Task = Task.Factory.StartNew(Sub() Parallel.For(0, ns + 1, poptions,
+                                                         Sub(ipar)
+                                                             If IdealH Then
+                                                                 Hl(ipar) = ppr.DW_CalcEnthalpy(x(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * ppr.AUX_MMM(x(ipar)) / 1000
+                                                                 Hv(ipar) = ppr.DW_CalcEnthalpy(y(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Vapor) * ppr.AUX_MMM(y(ipar)) / 1000
+                                                             Else
+                                                                 Hl(ipar) = pp.DW_CalcEnthalpy(x(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(x(ipar)) / 1000
+                                                                 Hv(ipar) = pp.DW_CalcEnthalpy(y(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Vapor) * pp.AUX_MMM(y(ipar)) / 1000
+                                                             End If
+                                                         End Sub),
+                                                      Settings.TaskCancellationTokenSource.Token,
+                                                      TaskCreationOptions.None,
+                                                      Settings.AppTaskScheduler)
+                task1.Wait()
+
+            Else
+                For i = 0 To ns
+                    IObj?.SetCurrent
+                    If IdealH Then
+                        ppr.CurrentMaterialStream.Flowsheet.CheckStatus()
+                        Hl(i) = ppr.DW_CalcEnthalpy(x(i), Tj(i), P(i), PropertyPackages.State.Liquid) * ppr.AUX_MMM(x(i)) / 1000
+                        IObj?.SetCurrent
+                        Hv(i) = ppr.DW_CalcEnthalpy(y(i), Tj(i), P(i), PropertyPackages.State.Vapor) * ppr.AUX_MMM(y(i)) / 1000
+                    Else
+                        pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+                        Hl(i) = pp.DW_CalcEnthalpy(x(i), Tj(i), P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(x(i)) / 1000
+                        IObj?.SetCurrent
+                        Hv(i) = pp.DW_CalcEnthalpy(y(i), Tj(i), P(i), PropertyPackages.State.Vapor) * pp.AUX_MMM(y(i)) / 1000
+                    End If
+                Next
+            End If
+
+            IObj?.Paragraphs.Add(String.Format("Vapor Enthalpies: {0}", Hv.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Liquid Enthalpies: {0}", Hl.ToMathArrayString))
+
+            Select Case specs("C").SType
+                Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
+                    LSSj(0) = spval1 / pp.AUX_MMM(x(0)) * 1000
+                    rr = (Lj(0) + LSSj(0)) / LSSj(0)
+                Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
+                    LSSj(0) = spval1
+                    rr = (Lj(0) + LSSj(0)) / LSSj(0)
+                Case ColumnSpec.SpecType.Stream_Ratio
+                    rr = spval1
+                Case ColumnSpec.SpecType.Heat_Duty
+                    Q(0) = spval1
+                    LSSj(0) = -Lj(0) - (Q(0) - Vj(1) * Hv(1) - F(0) * Hfj(0) + (Vj(0) + VSSj(0)) * Hv(0)) / Hl(0)
+                    rr = (Lj(0) + LSSj(0)) / LSSj(0)
+            End Select
+
+            Select Case specs("R").SType
+                Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
+                    B = spval2 / pp.AUX_MMM(x(ns)) * 1000
+                Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
+                    B = spval2
+                Case ColumnSpec.SpecType.Stream_Ratio
+                    B = sumF - LSSj(0) - sumLSS - sumVSS - Vj(0)
+                    Vj(ns) = B * spval2
+                Case ColumnSpec.SpecType.Heat_Duty
+                    Q(ns) = spval2
+                    Dim sum3, sum4, val1 As Double
+                    sum3 = 0
+                    sum4 = 0
+                    For i = 0 To ns
+                        sum3 += F(i) * Hfj(i) - LSSj(i) * Hl(i) - VSSj(i) * Hv(i)
+                    Next
+                    val1 = sum3 - Q(ns)
+                    sum4 = 0
+                    For i = 0 To ns - 1
+                        sum4 += Q(i) '- Lj(ns) * Hl(ns)
+                    Next
+                    B = -(val1 - (sum4 - Vj(0) * Hv(0))) / Hl(ns)
+            End Select
+
+            If condt = Column.condtype.Full_Reflux Then
+                Vj(0) = sumF - B - sumLSS - sumVSS
+                LSSj(0) = 0.0#
+            Else
+                D2 = sumF - B - sumLSS - sumVSS - Vj(0)
+                LSSj(0) = D2
+            End If
+
+            'step3
+
+            'internal loop
+
+            ic = 0
+            Do
+
+                IObj?.SetCurrent()
+
+                Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+                Inspector.Host.CheckAndAdd(IObj2, "", "Solve", "Bubble-Point (BP) Internal Loop #" & ic, "Wang-Henke Bubble-Point (BP) Method for Distillation", True)
+
+                Dim il_err As Double = 0.0#
+                Dim il_err_ant As Double = 0.0#
+                Dim num, denom, x0, fx0 As New ArrayList
+
+                'step4
+
+                'find component liquid flows by the tridiagonal matrix method
+
+                IObj2?.Paragraphs.Add(String.Format("Find component liquid flows by the tridiagonal matrix method"))
+                IObj2?.Paragraphs.Add(String.Format("Calculating TDM A, B, C, D"))
+
+                Dim at(nc - 1)(), bt(nc - 1)(), ct(nc - 1)(), dt(nc - 1)(), xt(nc - 1)() As Double
+
+                For i = 0 To nc - 1
+                    Array.Resize(at(i), ns + 1)
+                    Array.Resize(bt(i), ns + 1)
+                    Array.Resize(ct(i), ns + 1)
+                    Array.Resize(dt(i), ns + 1)
+                    Array.Resize(xt(i), ns + 1)
+                Next
+
+                For i = 0 To ns
+                    For j = 1 To nc
+                        If Double.IsNaN(K(i)(j - 1)) Or Double.IsInfinity(K(i)(j - 1)) Then K(i)(j - 1) = pp.AUX_PVAPi(j - 1, Tj(i)) / P(i)
+                    Next
+                Next
+
+                Dim sum1(ns), sum2(ns) As Double
+
+                For i = 0 To ns
+                    sum1(i) = 0
+                    sum2(i) = 0
+                    For j = 0 To i
+                        sum1(i) += Fj(j) - LSSj(j) - VSSj(j)
+                    Next
+                    If i > 0 Then
+                        For j = 0 To i - 1
+                            sum2(i) += Fj(j) - LSSj(j) - VSSj(j)
+                        Next
+                    End If
+                Next
+
+                For i = 0 To nc - 1
+                    For j = 0 To ns
+                        dt(i)(j) = -Fj(j) * fcj(j)(i)
+                        If j < ns Then
+                            bt(i)(j) = -(Vj(j + 1) + sum1(j) - Vj(0) + LSSj(j) + (Vj(j) + VSSj(j)) * K(j)(i))
+                        Else
+                            bt(i)(j) = -(sum1(j) - Vj(0) + LSSj(j) + (Vj(j) + VSSj(j)) * K(j)(i))
+                        End If
+                        'tdma solve
+                        If j < ns Then ct(i)(j) = Vj(j + 1) * K(j + 1)(i)
+                        If j > 0 Then at(i)(j) = Vj(j) + sum2(j) - Vj(0)
+                    Next
+                Next
+
+                'solve matrices
+
+                IObj2?.Paragraphs.Add(String.Format("Calling TDM Solver to calculate liquid phase compositions"))
+
+                IObj2?.SetCurrent()
+
+                IObj2?.Paragraphs.Add(String.Format("A: {0}", at.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("B: {0}", bt.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("C: {0}", ct.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("D: {0}", dt.ToMathArrayString))
+
+                'tomich
+
+                If doparallel Then
+
+                    Dim t1 As Task = Task.Factory.StartNew(Sub() Parallel.For(0, nc, poptions,
+                                                                 Sub(ipar)
+                                                                     xt(ipar) = Tomich.TDMASolve(at(ipar), bt(ipar), ct(ipar), dt(ipar))
+                                                                 End Sub),
+                                                      Settings.TaskCancellationTokenSource.Token,
+                                                      TaskCreationOptions.None,
+                                                      Settings.AppTaskScheduler)
+                    t1.Wait()
+
+                Else
+                    For i = 0 To nc - 1
+                        IObj2?.SetCurrent()
+                        IObj2?.Paragraphs.Add(String.Format("Calling TDM Solver for Stage #{0}...", i + 1))
+                        xt(i) = Tomich.TDMASolve(at(i), bt(i), ct(i), dt(i))
+                    Next
+                End If
+
+                IObj2?.SetCurrent()
+
+                IObj2?.Paragraphs.Add(String.Format("TDM solved successfully."))
+
+                Dim sumx(ns), sumy(ns) As Double
+
+                For i = 0 To ns
+                    sumx(i) = 0
+                    For j = 0 To nc - 1
+                        lc(i)(j) = xt(j)(i)
+                        If lc(i)(j) < 0.0# Then lc(i)(j) = 0.0000001
+                        sumx(i) += lc(i)(j)
+                    Next
+                Next
+
+                For i = 0 To ns
+                    For j = 0 To nc - 1
+                        If sumx(i) > 0.0# Then xc(i)(j) = lc(i)(j) / sumx(i) Else xc(i)(j) = yc(i)(j) / K(i)(j)
+                    Next
+                Next
+
+                For i = 0 To ns
+                    Lj(i) = 0
+                    For j = 0 To nc - 1
+                        lc(i)(j) = xt(j)(i)
+                        Lj(i) += lc(i)(j)
+                    Next
+                    If Lj(i) < 0.0# Then Lj(i) = 0.001
+                Next
+
+                IObj2?.Paragraphs.Add(String.Format("l: {0}", lc.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("L: {0}", Lj.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("x: {0}", xc.ToMathArrayString))
+
+                Dim tmp As Object
+
+                'calculate new temperatures
+
+                For i = 0 To ns
+                    Tj_ant(i) = Tj(i)
+                Next
+
+                IObj2?.Paragraphs.Add("Calculating new temperatures...")
+
+                If doparallel Then
+                    Dim t1 As Task = Task.Factory.StartNew(Sub() Parallel.For(0, ns + 1, poptions,
+                                                                 Sub(ipar)
+                                                                     If IdealK Then
+                                                                         Dim tmpvar As Object = ppr.DW_CalcBubT(xc(ipar), P(ipar), Tj(ipar), K(ipar), True)
+                                                                         Tj(ipar) = tmpvar(4)
+                                                                         K(ipar) = tmpvar(6)
+                                                                     Else
+                                                                         Dim tmpvar As Object = pp.DW_CalcBubT(xc(ipar), P(ipar), Tj(ipar), K(ipar), True)
+                                                                         Tj(ipar) = tmpvar(4)
+                                                                         K(ipar) = tmpvar(6)
+                                                                     End If
+                                                                     If Tj(ipar) < 0 Or Double.IsNaN(Tj(ipar)) Then Tj(ipar) = Tj_ant(ipar)
+                                                                 End Sub),
+                                                      Settings.TaskCancellationTokenSource.Token,
+                                                      TaskCreationOptions.None,
+                                                      Settings.AppTaskScheduler)
+                    t1.Wait()
+                Else
+                    For i = 0 To ns
+                        IObj2?.SetCurrent
+                        If IdealK Then
+                            ppr.CurrentMaterialStream.Flowsheet.CheckStatus()
+                            tmp = ppr.DW_CalcBubT(xc(i), P(i), Tj(i), K(i), True)
+                        Else
+                            pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+                            tmp = pp.DW_CalcBubT(xc(i), P(i), Tj(i), K(i), True)
+                        End If
+                        Tj(i) = tmp(4)
+                        K(i) = tmp(6)
+                        If Tj(i) < 0 Or Double.IsNaN(Tj(i)) Then Tj(i) = Tj_ant(i)
+                    Next
+                End If
+
+                For i = 0 To ns
+                    dTj(i) = Tj(i) - Tj_ant(i)
+                    Tj(i) = (Tj(i) + Tj_ant(i)) / 2
+                    If Double.IsNaN(Tj(i)) Or Double.IsInfinity(Tj(i)) Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
+                Next
+
+                For i = 0 To ns
+                    For j = 0 To nc - 1
+                        If Double.IsNaN(K(i)(j)) Then K(i)(j) = pp.AUX_PVAPi(j, Tj(i)) / P(i)
+                    Next
+                    If Double.IsNaN(Tj(i)) Or Double.IsInfinity(Tj(i)) Then Tj(i) = Tj_ant(i)
+                Next
+
+                IObj2?.Paragraphs.Add(String.Format("Updated Temperatures: {0}", Tj.ToMathArrayString))
+
+                t_error_ant = t_error
+                t_error = 0.0#
+                For i = 0 To ns
+                    t_error += (Tj(i) - Tj_ant(i)) ^ 2
+                Next
+
+                IObj2?.Paragraphs.Add(String.Format("Temperature error: {0}", t_error))
+
+                For i = ns To 0 Step -1
+                    sumy(i) = 0
+                    For j = 0 To nc - 1
+                        If i = ns Then
+                            yc(i)(j) = K(i)(j) * xc(i)(j)
+                        Else
+                            yc(i)(j) = eff(i) * K(i)(j) * xc(i)(j) + (1 - eff(i)) * yc(i + 1)(j)
+                        End If
+                        sumy(i) += yc(i)(j)
+                    Next
+                Next
+
+                For i = 0 To ns
+                    For j = 0 To nc - 1
+                        yc(i)(j) = yc(i)(j) / sumy(i)
+                    Next
+                Next
+
+                IObj2?.Paragraphs.Add(String.Format("y: {0}", yc.ToMathArrayString))
+
+                If doparallel Then
+
+                    Dim t1 As Task = Task.Factory.StartNew(Sub() Parallel.For(0, ns + 1, poptions,
+                                                                                     Sub(ipar)
+                                                                                         If IdealH Then
+                                                                                             Hl(ipar) = ppr.DW_CalcEnthalpy(xc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * ppr.AUX_MMM(xc(ipar)) / 1000
+                                                                                         Else
+                                                                                             Hl(ipar) = pp.DW_CalcEnthalpy(xc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(ipar)) / 1000
+                                                                                         End If
+                                                                                     End Sub),
+                                                      Settings.TaskCancellationTokenSource.Token,
+                                                      TaskCreationOptions.None,
+                                                      Settings.AppTaskScheduler)
+
+                    Dim t2 As Task = Task.Factory.StartNew(Sub() Parallel.For(0, ns + 1, poptions,
+                                                                                     Sub(ipar)
+                                                                                         If IdealH Then
+                                                                                             Hv(ipar) = ppr.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Vapor) * ppr.AUX_MMM(yc(ipar)) / 1000
+                                                                                         Else
+                                                                                             Hv(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(ipar)) / 1000
+                                                                                         End If
+                                                                                     End Sub),
+                                                      Settings.TaskCancellationTokenSource.Token,
+                                                      TaskCreationOptions.None,
+                                                      Settings.AppTaskScheduler)
+                    Task.WaitAll(t1, t2)
+
+                Else
+                    For i = 0 To ns
+                        IObj2?.SetCurrent
+                        If IdealH Then
+                            ppr.CurrentMaterialStream.Flowsheet.CheckStatus()
+                            Hl(i) = ppr.DW_CalcEnthalpy(xc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * ppr.AUX_MMM(xc(i)) / 1000
+                            IObj2?.SetCurrent
+                            Hv(i) = ppr.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Vapor) * ppr.AUX_MMM(yc(i)) / 1000
+                        Else
+                            pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+                            Hl(i) = pp.DW_CalcEnthalpy(xc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(i)) / 1000
+                            IObj2?.SetCurrent
+                            Hv(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(i)) / 1000
+                        End If
+                    Next
+                End If
+
+                'handle specs
+
+                Select Case specs("C").SType
+                    Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
+                        LSSj(0) = spval1 / pp.AUX_MMM(xc(0)) * 1000
+                        rr = (Lj(0) + LSSj(0)) / LSSj(0)
+                    Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
+                        LSSj(0) = spval1
+                        rr = (Lj(0) + LSSj(0)) / LSSj(0)
+                    Case ColumnSpec.SpecType.Stream_Ratio
+                        rr = spval1
+                    Case ColumnSpec.SpecType.Heat_Duty
+                        Q(0) = spval1
+                        LSSj(0) = -Lj(0) - (Q(0) - Vj(1) * Hv(1) - F(0) * Hfj(0) + (Vj(0) + VSSj(0)) * Hv(0)) / Hl(0)
+                        rr = (Lj(0) + LSSj(0)) / LSSj(0)
+                End Select
+
+                Select Case specs("R").SType
+                    Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
+                        B = spval2 / pp.AUX_MMM(xc(ns)) * 1000
+                    Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
+                        B = spval2
+                    Case ColumnSpec.SpecType.Stream_Ratio
+                        B = Vj(ns) / spval2
+                    Case ColumnSpec.SpecType.Heat_Duty
+                        Q(ns) = spval2
+                        Dim sum3, sum4, val1 As Double
+                        sum3 = 0
+                        sum4 = 0
+                        For i = 0 To ns
+                            sum3 += F(i) * Hfj(i) - LSSj(i) * Hl(i) - VSSj(i) * Hv(i)
+                        Next
+                        val1 = sum3 - Q(ns)
+                        sum4 = 0
+                        For i = 0 To ns - 1
+                            sum4 += Q(i)
+                        Next
+                        B = -(val1 - (sum4 - Vj(0) * Hv(0))) / Hl(ns)
+                End Select
+
+                sumF = 0
+                sumLSS = 0
+                sumVSS = 0
+                For i = 0 To ns
+                    sumF += F(i)
+                    If i > 0 Then sumLSS += LSS(i)
+                    sumVSS += VSS(i)
+                Next
+
+                If condt = Column.condtype.Full_Reflux Then
+                    Vj(0) = sumF - B - sumLSS - sumVSS
+                Else
+                    LSSj(0) = sumF - B - sumLSS - sumVSS - Vj(0)
+                End If
+
+                'reboiler and condenser heat duties
+
+                Dim alpha(ns), beta(ns), gamma(ns) As Double
+
+                For i = 0 To ns
+                    sum1(i) = 0
+                    sum2(i) = 0
+                    For j = 0 To i
+                        sum1(i) += Fj(j) - LSSj(j) - VSSj(j)
+                    Next
+                    If i > 0 Then
+                        For j = 0 To i - 1
+                            sum2(i) += Fj(j) - LSSj(j) - VSSj(j)
+                        Next
+                    End If
+                Next
+
+                For j = 1 To ns
+                    gamma(j) = (sum2(j) - Vj(0)) * (Hl(j) - Hl(j - 1)) + Fj(j) * (Hl(j) - Hfj(j)) + VSSj(j) * (Hv(j) - Hl(j)) + Q(j)
+                    alpha(j) = Hl(j - 1) - Hv(j)
+                    If j < ns Then beta(j) = Hv(j + 1) - Hl(j)
+                Next
+
+                'solve matrices
+
+                For i = 0 To ns
+                    Vj_ant(i) = Vj(i)
+                Next
+
+                If Not condt = Column.condtype.Full_Reflux Then Vj(0) = V(0)
+                Vj(1) = (rr + 1) * LSSj(0) - Fj(0) + Vj(0)
+                For i = 2 To ns
+                    Vj(i) = (gamma(i - 1) - alpha(i - 1) * Vj(i - 1)) / beta(i - 1)
+                    If Vj(i) < 0 Then Vj(i) = 0.000001
+                Next
+
+                For i = 0 To ns
+                    dVj(i) = Vj(i) - Vj_ant(i)
+                    If Abs(dVj(i)) > 0.1 * Vj_ant(i) Then Vj(i) = Vj_ant(i) * (1 + Math.Sign(dVj(i)) * 0.1)
+                Next
+
+                'Ljs
+                For i = 0 To ns
+                    If i < ns Then Lj(i) = Vj(i + 1) + sum1(i) - Vj(0) Else Lj(i) = sum1(i) - Vj(0)
+                    If Lj(i) < 0.0# Then Lj(i) = 0.0001 * Fj.Sum
+                Next
+
+                IObj2?.Paragraphs.Add(String.Format("alpha: {0}", alpha.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("beta: {0}", beta.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("gamma: {0}", gamma.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("Updated L: {0}", Lj.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("Updated V: {0}", Vj.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("Updated LSS: {0}", LSSj.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("Updated VSS: {0}", VSSj.ToMathArrayString))
+
+                'reboiler and condenser heat duties
+                Select Case coltype
+                    Case Column.ColType.DistillationColumn
+                        If Not specs("C").SType = ColumnSpec.SpecType.Heat_Duty Then
+                            Q(0) = (Vj(1) * Hv(1) + F(0) * Hfj(0) - (Lj(0) + LSSj(0)) * Hl(0) - (Vj(0) + VSSj(0)) * Hv(0))
+                        End If
+                        If Not specs("R").SType = ColumnSpec.SpecType.Heat_Duty Then
+                            Dim sum3, sum4 As Double
+                            sum3 = 0
+                            sum4 = 0
+                            For i = 0 To ns
+                                sum3 += F(i) * Hfj(i) - LSSj(i) * Hl(i) - VSSj(i) * Hv(i)
+                            Next
+                            For i = 0 To ns - 1
+                                sum4 += Q(i)
+                            Next
+                            Q(ns) = sum3 - sum4 - Vj(0) * Hv(0) - Lj(ns) * Hl(ns)
+                        End If
+                    Case Column.ColType.AbsorptionColumn
+                        'use provided values
+                    Case Column.ColType.RefluxedAbsorber
+                        If Not specs("C").SType = ColumnSpec.SpecType.Heat_Duty Then
+                            Q(0) = (Vj(1) * Hv(1) + F(0) * Hfj(0) - (Lj(0) + LSSj(0)) * Hl(0) - (Vj(0) + VSSj(0)) * Hv(0))
+                        End If
+                    Case Column.ColType.ReboiledAbsorber
+                        If Not specs("R").SType = ColumnSpec.SpecType.Heat_Duty Then
+                            Q(ns) = (Lj(ns - 1) * Hl(ns - 1) + F(ns) * Hfj(ns) - (Lj(ns) + LSSj(ns)) * Hl(ns) - (Vj(ns) + VSSj(ns)) * Hv(ns))
+                        End If
+                End Select
+
+                IObj2?.Paragraphs.Add(String.Format("Updated Q: {0}", Q.ToMathArrayString))
+
+                ic = ic + 1
+
+                If Not IdealH And Not IdealK Then
+                    If ic >= maxits Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCMaxIterationsReached"))
+                End If
+                If Double.IsNaN(t_error) Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
+                If ic = stopatitnumber - 1 Then Exit Do
+
+                pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+
+                Calculator.WriteToConsole("Bubble Point solver T error = " & t_error, 1)
+
+                IObj2?.Close()
+
+            Loop Until t_error < tol(1) * ns
+
+            IObj?.Paragraphs.Add("The algorithm converged in " & ic & " iterations.")
+
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("Final converged values for T: {0}", Tj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for V: {0}", Vj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for L: {0}", Lj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for VSS: {0}", VSSj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for LSS: {0}", LSSj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for y: {0}", yc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for x: {0}", xc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for K: {0}", K.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for Q: {0}", Q.ToMathArrayString))
+
+            IObj?.Close()
+
+            'finished, return arrays
+
+            Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ic, t_error}
+
+        End Function
+
+    End Class
+
+    <System.Serializable()> Public Class BurninghamOttoMethod
+
+        Public Shared Function Solve(ByVal nc As Integer, ByVal ns As Integer, ByVal maxits As Integer,
+                                ByVal tol As Double(), ByVal F As Double(), ByVal V As Double(),
+                                ByVal Q As Double(), ByVal L As Double(),
+                                ByVal VSS As Double(), ByVal LSS As Double(), ByVal Kval()() As Double,
+                                ByVal x()() As Double, ByVal y()() As Double, ByVal z()() As Double,
+                                ByVal fc()() As Double,
+                                ByVal HF As Double(), ByVal T As Double(), ByVal P As Double(),
+                                ByVal stopatitnumber As Integer,
+                                ByVal eff() As Double,
+                                ByVal pp As PropertyPackages.PropertyPackage,
+                                ByVal specs As Dictionary(Of String, SepOps.ColumnSpec),
+                                ByVal IdealK As Boolean, ByVal IdealH As Boolean,
+                                Optional ByVal llextr As Boolean = False) As Object
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "Solve", "Sum-Rates (SR) Method", "Burningham–Otto Sum-Rates (SR) Method for Absorption and Stripping", True)
+
+            IObj?.SetCurrent()
+
+            IObj?.Paragraphs.Add("The species in most absorbers and strippers cover a wide range of volatility. Hence, the BP method of 
+                                    solving the MESH equations fails because bubble-point temperature calculations are too sensitive to 
+                                    liquid-phase composition, and the stage energy balance is much more sensitive to stage temperatures 
+                                    than to interstage flow rates. In this case, Friday and Smith showed that an alternative procedure 
+                                    devised by Sujata could be used. This sum-rates (SR) method was further developed in conjunction with 
+                                    the tridiagonal-matrix formulation for the modified M equations by Burningham and Otto.")
+
+            IObj?.Paragraphs.Add("Problem specifications consist of conditions and stage locations for feeds, stage pressure, sidestream 
+                                    flow rates, stage heat-transfer rates, and number of stages. Tear variables Tj and Vj are assumed to 
+                                    initiate the calculations. It is sufficient to assume a set of Vj values based on the assumption of 
+                                    constant-molar flows, working up from the absorber bottom using specified vapor feeds and vapor sidestream 
+                                    flows, if any. An initial set of Tj values can be obtained from assumed top-stage and bottom-stage values 
+                                    and a linear variation with stages in between. Values of xi,j are established by solving the tridiagonal 
+                                    matrix by the Thomas algorithm. These values are not normalized but utilized directly to produce new values 
+                                    of Lj through the sum-rates equation:")
+
+            IObj?.Paragraphs.Add("<math>L^{(k+1)}_{j}=L^{(k)}_j\sum\limits_{i=1}^{C}{x_{i,j}}</math>")
+
+            IObj?.Paragraphs.Add("where <math_inline>L^{(k)}_j</math_inline> values are obtained from <math_inline>V^{(k)}_j</math_inline> 
+                                    values by")
+
+            IObj?.Paragraphs.Add("<math>L_{j}=V_{j+1}+\sum\limits_{m=1}^{j}{(F_{m}-U_{m}-W_{m})-V_{1}}</math>")
+
+            IObj?.Paragraphs.Add("Corresponding values of <math_inline>V^{(k+1)}_j</math_inline> are obtained from a total material balance:")
+
+            IObj?.Paragraphs.Add("<math>V_{j}=L_{j-1}-L_{N}+\sum\limits_{m=j}^{N}{(F_{m}-U_{m}-W_{m})}</math>")
+
+            IObj?.Paragraphs.Add("Normalized <math_inline>x_{i,j}</math_inline> values are calculated and Corresponding values of 
+                                    <math_inline>y_{i,j}</math_inline> are computed from")
+
+            IObj?.Paragraphs.Add("<math>y_{i,j}=K_{i,j}x_{i,j}</math>")
+
+            IObj?.Paragraphs.Add("A new set of Tj is obtained by solving the simultaneous energy-balance relations for the N stages. The 
+                                    temperatures are embedded in the specific enthalpies for the unspecified vapor and liquid flow rates. 
+                                    Typically, these enthalpies are nonlinear in temperature. Therefore, an iterative procedure such as the 
+                                    Newton–Raphson method is required.")
+
+            IObj?.Paragraphs.Add("To obtain a new set of Tj from the energy equation, the Newton–Raphson recursion equation is")
+
+            IObj?.Paragraphs.Add("<math>\left(\frac{\partial H_j}{\partial T_{j-1}} \right)^{(r)}\Delta T^{(r)}_{j-1} +\left(\frac{\partial H_j}{\partial T_{j}} \right)^{(r)}\Delta T^{(r)}_{j}+ \left(\frac{\partial H_j}{\partial T_{j+1}} \right)^{(r)}\Delta T^{(r)}_{j+1}=-H^{(r)}_j</math>")
+
+            IObj?.Paragraphs.Add("where")
+
+            IObj?.Paragraphs.Add("<math>\Delta T^{(r)}_{j}=T^{(r+1)}_j-T^{(r)}_j</math>")
+
+            IObj?.Paragraphs.Add("<math>\frac{\partial H_j}{\partial T_{j-1}}=L_{j-1}\frac{\partial h_{L_{j-1}}}{\partial T_{j-1}}</math>")
+
+            IObj?.Paragraphs.Add("<math>\frac{\partial H_j}{\partial T_{j}}=-(L_{j}+U_{j})\frac{\partial h_{L_{j}}}{\partial T_{j}}-(V_j+W_j)\frac{\partial h_{V_{j}}}{\partial T_{j}}</math>")
+
+            IObj?.Paragraphs.Add("<math>\frac{\partial H_j}{\partial T_{j+1}}=V_{j+1}\frac{\partial h_{V_{j+1}}}{\partial T_{j+1}}</math>")
+
+            IObj?.Paragraphs.Add("The partial derivatives are calculated numerically using the values provided by the Property Package.")
+
+            IObj?.Paragraphs.Add("The N relations form a tridiagonal matrix equation that is linear in <math_inline>\Delta T^{(r)}_{j}</math_inline>.")
+
+            IObj?.Paragraphs.Add("The matrix of partial derivatives is called the Jacobian correction matrix. The Thomas algorithm can be employed 
+                                    to solve for the set of corrections <math_inline>\Delta T^{(r)}_{j}</math_inline>. New guesses of Tj are then determined from")
+
+            IObj?.Paragraphs.Add("<math>T_j^{(r+1)}=T_j^{(r)}+\Delta T_j^{(r)}</math>")
+
+            IObj?.Paragraphs.Add("When corrections <math_inline>\Delta T^{(r)}_{j}</math_inline> approach zero, the resulting values of Tj are 
+                                    used with criteria to determine if convergence has been achieved. If not, before beginning a new k iteration, 
+                                    values of Vj and Tj are adjusted. Convergence is rapid for the sum-rates method.")
+
+            Dim ppr As PropertyPackages.RaoultPropertyPackage = Nothing
+
+            If IdealK Or IdealH Then
+                ppr = New PropertyPackages.RaoultPropertyPackage
+                ppr.Flowsheet = pp.Flowsheet
+                ppr.CurrentMaterialStream = pp.CurrentMaterialStream
+            End If
+
+            Dim doparallel As Boolean = Settings.EnableParallelProcessing
+            Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism}
+
+            Dim ic As Integer
+            Dim t_error, comperror As Double
+            Dim Tj(ns), Tj_ant(ns) As Double
+            Dim Fj(ns), Lj(ns), Vj(ns), Vj_ant(ns), xc(ns)(), fcj(ns)(), yc(ns)(), yc_ant(ns)(), lc(ns)(), vc(ns)(), zc(ns)(), K(ns)() As Double
+            Dim Hfj(ns), Hv(ns), Hl(ns) As Double
+            Dim VSSj(ns), LSSj(ns) As Double
+            Dim sum1(ns), sum2(ns), sum3(ns) As Double
+
+            'step1
+
+            'step2
+
+            Dim i, j As Integer
+
+            For i = 0 To ns
+                Array.Resize(fcj(i), nc)
+                Array.Resize(xc(i), nc)
+                Array.Resize(yc(i), nc)
+                Array.Resize(yc_ant(i), nc)
+                Array.Resize(lc(i), nc)
+                Array.Resize(vc(i), nc)
+                Array.Resize(zc(i), nc)
+                Array.Resize(zc(i), nc)
+                Array.Resize(K(i), nc)
+            Next
+
+            For i = 0 To ns
+                VSSj(i) = VSS(i)
+                LSSj(i) = LSS(i)
+                Lj(i) = L(i)
+                Vj(i) = V(i)
+                Tj(i) = T(i)
+                Fj(i) = F(i)
+                Hfj(i) = HF(i) / 1000
+                fcj(i) = fc(i)
+            Next
+
+            IObj?.Paragraphs.Add("<h2>Input Parameters / Initial Estimates</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("Stage Temperatures: {0}", T.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Stage Pressures: {0}", P.ToMathArrayString))
+
+            IObj?.Paragraphs.Add(String.Format("Feeds: {0}", F.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Vapor Flows: {0}", V.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Liquid Flows: {0}", L.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Vapor Side Draws: {0}", VSS.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Liquid Side Draws: {0}", LSS.ToMathArrayString))
+
+            IObj?.Paragraphs.Add(String.Format("Mixture Compositions: {0}", z.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Liquid Phase Compositions: {0}", x.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Vapor/Liquid2 Phase Compositions: {0}", y.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("K-values: {0}", K.ToMathArrayString))
+
+            IObj?.Paragraphs.Add("<h2>Calculated Parameters</h2>")
+
+            For i = 0 To ns
+                For j = 0 To nc - 1
+                    K(i)(j) = Kval(i)(j)
+                    IObj?.SetCurrent()
+                    If Double.IsNaN(K(i)(j)) Or Double.IsInfinity(K(i)(j)) Or K(i)(j) = 0# Then
+                        If llextr Then
+                            If i > 0 Then
+                                If K(i - 1).Sum > 0.0 Then
+                                    K(i) = K(i - 1).Clone
+                                End If
+                            End If
+                        Else
+                            K(i)(j) = pp.AUX_PVAPi(j, T(i)) / P(i)
+                        End If
+                    End If
+                Next
+            Next
+
+            'step3
+
+            'internal loop
+            ic = 0
+            Do
+
+                IObj?.SetCurrent()
+
+                Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+                Inspector.Host.CheckAndAdd(IObj2, "", "Solve", "Sum-Rates (SR) Internal Loop #" & ic, "Burningham–Otto Sum-Rates (SR) Method for Absorption and Stripping", True)
+
+                Dim il_err As Double = 0.0#
+                Dim il_err_ant As Double = 0.0#
+                Dim num, denom, x0, fx0 As New ArrayList
+
+                'step4
+
+                'find component liquid flows by the tridiagonal matrix method
+
+                IObj2?.Paragraphs.Add(String.Format("Find component liquid flows by the tridiagonal matrix method"))
+                IObj2?.Paragraphs.Add(String.Format("Calculating TDM A, B, C, D"))
+
+                Dim at(nc - 1)(), bt(nc - 1)(), ct(nc - 1)(), dt(nc - 1)(), xt(nc - 1)() As Double
+
+                For i = 0 To nc - 1
+                    Array.Resize(at(i), ns + 1)
+                    Array.Resize(bt(i), ns + 1)
+                    Array.Resize(ct(i), ns + 1)
+                    Array.Resize(dt(i), ns + 1)
+                    Array.Resize(xt(i), ns + 1)
+                Next
+
+                For i = 0 To ns
+                    sum1(i) = 0
+                    sum2(i) = 0
+                    For j = 0 To i
+                        sum1(i) += Fj(j) - LSSj(j) - VSSj(j)
+                    Next
+                    If i > 0 Then
+                        For j = 0 To i - 1
+                            sum2(i) += Fj(j) - LSSj(j) - VSSj(j)
+                        Next
+                    End If
+                Next
+
+                For i = 0 To nc - 1
+                    For j = 0 To ns
+                        dt(i)(j) = -Fj(j) * fcj(j)(i)
+                        If j < ns Then
+                            bt(i)(j) = -(Vj(j + 1) + sum1(j) - Vj(0) + LSSj(j) + (Vj(j) + VSSj(j)) * K(j)(i))
+                        Else
+                            bt(i)(j) = -(sum1(j) - Vj(0) + LSSj(j) + (Vj(j) + VSSj(j)) * K(j)(i))
+                        End If
+                        'tdma solve
+                        If j < ns Then ct(i)(j) = Vj(j + 1) * K(j + 1)(i)
+                        If j > 0 Then at(i)(j) = Vj(j) + sum2(j) - Vj(0)
+                    Next
+                Next
+
+                'solve matrices
+
+                IObj2?.Paragraphs.Add(String.Format("Calling TDM Solver to calculate liquid phase compositions"))
+
+                IObj2?.SetCurrent()
+
+                IObj2?.Paragraphs.Add(String.Format("A: {0}", at.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("B: {0}", bt.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("C: {0}", ct.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("D: {0}", dt.ToMathArrayString))
+
+                'tomich
+
+                For i = 0 To nc - 1
+                    IObj2?.SetCurrent()
+                    IObj2?.Paragraphs.Add(String.Format("Calling TDM Solver for Stage #{0}...", i + 1))
+                    xt(i) = Tomich.TDMASolve(at(i), bt(i), ct(i), dt(i))
+                Next
+
+                IObj2?.SetCurrent()
+
+                IObj2?.Paragraphs.Add(String.Format("TDM solved successfully."))
+
+                Dim sumx(ns), sumy(ns), sumz(ns) As Double
+
+                For i = 0 To ns
+                    sumx(i) = 0
+                    For j = 0 To nc - 1
+                        lc(i)(j) = xt(j)(i)
+                        If lc(i)(j) < 0 Then lc(i)(j) = 0.0000001
+                        sumx(i) += lc(i)(j)
+                    Next
+                Next
+
+                'Ljs
+                For i = 0 To ns
+                    Lj(i) = Lj(i) * sumx(i)
+                Next
+
+                IObj2?.Paragraphs.Add(String.Format("l: {0}", lc.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("L: {0}", Lj.ToMathArrayString))
+
+                For i = 0 To ns
+                    For j = 0 To nc - 1
+                        xc(i)(j) = lc(i)(j) / sumx(i)
+                        yc(i)(j) = xc(i)(j) * K(i)(j)
+                        sumy(i) += yc(i)(j)
+                    Next
+                Next
+
+                IObj2?.Paragraphs.Add(String.Format("x: {0}", xc.ToMathArrayString))
+
+                For i = 0 To ns
+                    For j = 0 To nc - 1
+                        yc(i)(j) = yc(i)(j) / sumy(i)
+                    Next
+                Next
+
+                IObj2?.Paragraphs.Add(String.Format("y: {0}", yc.ToMathArrayString))
+
+                For i = 0 To ns
+                    sum3(i) = 0
+                    For j = i To ns
+                        sum3(i) += Fj(j) - LSSj(j) - VSSj(j)
+                    Next
+                Next
+
+                'solve matrices
+
+                For i = 0 To ns
+                    Vj_ant(i) = Vj(i)
+                Next
+
+                For i = 0 To ns
+                    If i > 0 Then
+                        Vj(i) = Lj(i - 1) - Lj(ns) + sum3(i)
+                    Else
+                        Vj(i) = -Lj(ns) + sum3(i)
+                    End If
+                    If Vj(i) < 0 Then Vj(i) = -Vj(i)
+                Next
+
+                For i = 0 To ns
+                    sumz(i) = 0
+                    For j = 0 To nc - 1
+                        vc(i)(j) = xc(i)(j) * Vj(i) * K(i)(j)
+                        zc(i)(j) = (lc(i)(j) + vc(i)(j)) / (Lj(i) + Vj(i))
+                        sumz(i) += zc(i)(j)
+                    Next
+                Next
+
+                IObj2?.Paragraphs.Add(String.Format("v: {0}", vc.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("V: {0}", Vj.ToMathArrayString))
+
+                For i = 0 To ns
+                    For j = 0 To nc - 1
+                        zc(i)(j) = zc(i)(j) / sumz(i)
+                    Next
+                Next
+
+                'Dim tmp As Object
+
+                'calculate new temperatures
+
+                IObj2?.Paragraphs.Add("Calculating new temperatures...")
+
+                ''''''''''''''''''''
+                Dim H(ns), dHldT(ns), dHvdT(ns), dHdTa(ns), dHdTb(ns), dHdTc(ns), dHl(ns), dHv(ns) As Double
+
+                Dim epsilon As Double = 0.1
+
+                If doparallel Then
+
+                    Dim task1 As Task = Task.Factory.StartNew(Sub() Parallel.For(0, ns + 1, poptions,
+                                                             Sub(ipar)
+                                                                 If IdealH Then
+                                                                     Hl(ipar) = ppr.DW_CalcEnthalpy(xc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * ppr.AUX_MMM(xc(ipar)) / 1000
+                                                                     dHl(ipar) = ppr.DW_CalcEnthalpy(xc(ipar), Tj(ipar) - epsilon, P(ipar), PropertyPackages.State.Liquid) * ppr.AUX_MMM(xc(ipar)) / 1000
+                                                                     If llextr Then
+                                                                         Hv(ipar) = ppr.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * ppr.AUX_MMM(yc(ipar)) / 1000
+                                                                         dHv(ipar) = ppr.DW_CalcEnthalpy(yc(ipar), Tj(ipar) - epsilon, P(ipar), PropertyPackages.State.Liquid) * ppr.AUX_MMM(yc(ipar)) / 1000
+                                                                     Else
+                                                                         Hv(ipar) = ppr.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Vapor) * ppr.AUX_MMM(yc(ipar)) / 1000
+                                                                         dHv(ipar) = ppr.DW_CalcEnthalpy(yc(ipar), Tj(ipar) - epsilon, P(ipar), PropertyPackages.State.Vapor) * ppr.AUX_MMM(yc(ipar)) / 1000
+                                                                     End If
+                                                                 Else
+                                                                     Hl(ipar) = pp.DW_CalcEnthalpy(xc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(ipar)) / 1000
+                                                                     dHl(ipar) = pp.DW_CalcEnthalpy(xc(ipar), Tj(ipar) - epsilon, P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(ipar)) / 1000
+                                                                     If llextr Then
+                                                                         Hv(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(yc(ipar)) / 1000
+                                                                         dHv(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar) - epsilon, P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(yc(ipar)) / 1000
+                                                                     Else
+                                                                         Hv(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(ipar)) / 1000
+                                                                         dHv(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar) - epsilon, P(ipar), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(ipar)) / 1000
+                                                                     End If
+                                                                 End If
+                                                             End Sub),
+                                                      Settings.TaskCancellationTokenSource.Token,
+                                                      TaskCreationOptions.None,
+                                                      Settings.AppTaskScheduler)
+
+                    task1.Wait(30000)
+                Else
+                    If IdealH Then
+                        For i = 0 To ns
+                            IObj2?.SetCurrent()
+                            Hl(i) = ppr.DW_CalcEnthalpy(xc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * ppr.AUX_MMM(xc(i)) / 1000
+                            IObj2?.SetCurrent()
+                            dHl(i) = ppr.DW_CalcEnthalpy(xc(i), Tj(i) - epsilon, P(i), PropertyPackages.State.Liquid) * ppr.AUX_MMM(xc(i)) / 1000
+                            IObj2?.SetCurrent()
+                            If llextr Then
+                                Hv(i) = ppr.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * ppr.AUX_MMM(yc(i)) / 1000
+                                IObj2?.SetCurrent()
+                                dHv(i) = ppr.DW_CalcEnthalpy(yc(i), Tj(i) - epsilon, P(i), PropertyPackages.State.Liquid) * ppr.AUX_MMM(yc(i)) / 1000
+                            Else
+                                Hv(i) = ppr.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Vapor) * ppr.AUX_MMM(yc(i)) / 1000
+                                IObj2?.SetCurrent()
+                                dHv(i) = ppr.DW_CalcEnthalpy(yc(i), Tj(i) - epsilon, P(i), PropertyPackages.State.Vapor) * ppr.AUX_MMM(yc(i)) / 1000
+                            End If
+                            ppr.CurrentMaterialStream.Flowsheet.CheckStatus()
+                        Next
+                    Else
+                        For i = 0 To ns
+                            IObj2?.SetCurrent()
+                            Hl(i) = pp.DW_CalcEnthalpy(xc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(i)) / 1000
+                            IObj2?.SetCurrent()
+                            dHl(i) = pp.DW_CalcEnthalpy(xc(i), Tj(i) - epsilon, P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(i)) / 1000
+                            IObj2?.SetCurrent()
+                            If llextr Then
+                                Hv(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(yc(i)) / 1000
+                                IObj2?.SetCurrent()
+                                dHv(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i) - epsilon, P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(yc(i)) / 1000
+                            Else
+                                Hv(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(i)) / 1000
+                                IObj2?.SetCurrent()
+                                dHv(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i) - epsilon, P(i), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(i)) / 1000
+                            End If
+                            pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+                        Next
+                    End If
+                End If
+
+                IObj2?.Paragraphs.Add(String.Format("HL: {0}", Hl.ToMathArrayString))
+                IObj2?.Paragraphs.Add(String.Format("HV: {0}", Hl.ToMathArrayString))
+
+                For i = 0 To ns
+                    If i = 0 Then
+                        H(i) = Vj(i + 1) * Hv(i + 1) + Fj(i) * Hfj(i) - (Lj(i) + LSSj(i)) * Hl(i) - (Vj(i) + VSSj(i)) * Hv(i) - Q(i)
+                    ElseIf i = ns Then
+                        H(i) = Lj(i - 1) * Hl(i - 1) + Fj(i) * Hfj(i) - (Lj(i) + LSSj(i)) * Hl(i) - (Vj(i) + VSSj(i)) * Hv(i) - Q(i)
+                    Else
+                        H(i) = Lj(i - 1) * Hl(i - 1) + Vj(i + 1) * Hv(i + 1) + Fj(i) * Hfj(i) - (Lj(i) + LSSj(i)) * Hl(i) - (Vj(i) + VSSj(i)) * Hv(i) - Q(i)
+                    End If
+                    dHldT(i) = (Hl(i) - dHl(i)) / epsilon
+                    dHvdT(i) = (Hv(i) - dHv(i)) / epsilon
+                Next
+
+                IObj2?.Paragraphs.Add(("<mi>\frac{\partial h_L}{\partial T}</mi>: " & dHldT.ToMathArrayString))
+                IObj2?.Paragraphs.Add(("<mi>\frac{\partial h_V}{\partial T}</mi>: " & dHvdT.ToMathArrayString))
+
+                For i = 0 To ns
+                    If i > 0 Then dHdTa(i) = Lj(i - 1) * dHldT(i - 1)
+                    dHdTb(i) = -(Lj(i) + LSSj(i)) * dHldT(i) - (Vj(i) + VSSj(i)) * dHvdT(i)
+                    If i < ns Then dHdTc(i) = Vj(i + 1) * dHvdT(i + 1)
+                Next
+
+                IObj2?.Paragraphs.Add(String.Format("H: {0}", H.ToMathArrayString))
+
+                Dim ath(ns), bth(ns), cth(ns), dth(ns), xth(ns) As Double
+
+                For i = 0 To ns
+                    dth(i) = -H(i)
+                    bth(i) = dHdTb(i)
+                    If i < ns Then cth(i) = dHdTc(i)
+                    If i > 0 Then ath(i) = dHdTa(i)
+                Next
+
+                'solve matrices
+                'tomich
+
+                IObj2?.Paragraphs.Add("Calling TDM Solver to solve for enthalpies/temperatures")
+
+                IObj2?.SetCurrent()
+
+                xth = Tomich.TDMASolve(ath, bth, cth, dth)
+
+                Dim tmp As Object
+
+                IObj2?.Paragraphs.Add(String.Format("Calculated Temperature perturbations: {0}", xth.ToMathArrayString))
+
+                Dim deltat As Double()
+                Dim maxdt As Double = xth.Select(Function(tp) Abs(tp)).Max
+
+                deltat = xth
+
+                t_error = 0.0#
+                comperror = 0.0#
+                For i = 0 To ns
+                    Tj_ant(i) = Tj(i)
+                    Tj(i) = Tj(i) + deltat(i)
+                    If Double.IsNaN(Tj(i)) Or Double.IsInfinity(Tj(i)) Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
+                    If IdealK Then
+                        IObj2?.SetCurrent()
+                        If llextr Then
+                            tmp = ppr.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i), "LL")
+                        Else
+                            tmp = ppr.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
+                        End If
+                    Else
+                        IObj2?.SetCurrent()
+                        If llextr Then
+                            tmp = pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i), "LL")
+                        Else
+                            tmp = pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
+                        End If
+                    End If
+                    sumy(i) = 0
+                    For j = 0 To nc - 1
+                        K(i)(j) = tmp(j)
+                        If Double.IsNaN(K(i)(j)) Or Double.IsInfinity(K(i)(j)) Then
+                            If llextr Then
+                                K(i)(j) = 1.0#
+                            Else
+                                IObj2?.SetCurrent()
+                                K(i)(j) = pp.AUX_PVAPi(j, Tj(i)) / P(i)
+                            End If
+                        End If
+                        yc_ant(i)(j) = yc(i)(j)
+                        yc(i)(j) = K(i)(j) * xc(i)(j)
+                        sumy(i) += yc(i)(j)
+                        comperror += Abs(yc(i)(j) - yc_ant(i)(j)) ^ 2
+                    Next
+                    t_error += Abs(Tj(i) - Tj_ant(i)) ^ 2
+                    pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+                Next
+
+                IObj2?.Paragraphs.Add(String.Format("Updated Temperatures: {0}", Tj.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("Updated K-values: {0}", K.ToMathArrayString))
+
+                For i = 0 To ns
+                    For j = 0 To nc - 1
+                        yc(i)(j) = yc(i)(j) / sumy(i)
+                    Next
+                Next
+
+                IObj2?.Paragraphs.Add(String.Format("Updated y: {0}", yc.ToMathArrayString))
+
+                IObj2?.Paragraphs.Add(String.Format("Temperature error: {0}", t_error))
+
+                IObj2?.Paragraphs.Add(String.Format("Composition error: {0}", comperror))
+
+                IObj2?.Paragraphs.Add(String.Format("Combined Temperature/Composition error: {0}", t_error + comperror))
+
+                ic = ic + 1
+
+                If Not IdealH And Not IdealK Then
+                    If ic >= maxits Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCMaxIterationsReached"))
+                End If
+
+                If Double.IsNaN(t_error) Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
+                If Double.IsNaN(comperror) Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
+
+                pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+
+                Calculator.WriteToConsole("Sum Rates solver T error = " & t_error, 1)
+                Calculator.WriteToConsole("Sum Rates solver composition error = " & comperror, 1)
+
+                IObj2?.Close()
+
+                pp.CurrentMaterialStream.Flowsheet.ShowMessage("Sum-Rates solver: iteration #" & ic.ToString & ", Temperature error = " & t_error.ToString, IFlowsheet.MessageType.Information)
+                pp.CurrentMaterialStream.Flowsheet.ShowMessage("Sum-Rates solver: iteration #" & ic.ToString & ", Composition error = " & comperror.ToString, IFlowsheet.MessageType.Information)
+                pp.CurrentMaterialStream.Flowsheet.ShowMessage("Sum-Rates solver: iteration #" & ic.ToString & ", combined Temperature/Composition error = " & (t_error + comperror).ToString, IFlowsheet.MessageType.Information)
+
+            Loop Until t_error <= tol(1) And comperror <= tol(1)
+
+            IObj?.Paragraphs.Add("The algorithm converged in " & ic & " iterations.")
+
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("Final converged values for T: {0}", Tj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for V: {0}", Vj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for L: {0}", Lj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for VSS: {0}", VSSj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for LSS: {0}", LSSj.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for y: {0}", yc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for x: {0}", xc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for K: {0}", K.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Final converged values for Q: {0}", Q.ToMathArrayString))
+
+            IObj?.Close()
+
+            For Each Ki In K
+                If pp.AUX_CheckTrivial(Ki) Then
+                    IObj?.Paragraphs.Add("Invalid result - converged to the trivial solution.")
+                    Throw New Exception("Invalid result - converged to the trivial solution.")
+                End If
+            Next
+
+            ' finished, return arrays
+
+            Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ic, t_error}
+
+        End Function
+
+    End Class
+
+    <System.Serializable()> Public Class Tomich
+
+        Public Shared Function TDMASolve(ByVal a As Double(), ByVal b As Double(), ByVal c As Double(), ByVal d As Double()) As Double()
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "TDMASolve", "Tridiagonal Matrix Algorithm", "Tomich TDM Solver", True)
+
+            IObj?.Paragraphs.Add("The key to the BP and SR tearing procedures is the tridiagonal matrix, which results from a modified form of the M equations, when they are torn from the other equations by selecting Tj and Vj as the tear variables, leaving the modified M equations linear in the unknown liquid mole fractions.")
+
+            IObj?.Paragraphs.Add("This set of equations, one for each component, is solved by a modified Gaussian–elimination algorithm due to Thomas as applied by Wang and Henke. Equations for calculating y and L are partitioned from the other equations. The result for each component, i, and each stage, j, is as follows, where the i subscripts have been dropped from the B, C, and D terms.")
+
+            IObj?.Paragraphs.Add("<math>A_jx_{i,j-1}+B_jx_{i,j}+C_jx_{i,j+1}=D_j</math>")
+
+            IObj?.Paragraphs.Add("where")
+
+            IObj?.Paragraphs.Add("<math>A_j = V_j+\sum\limits_{m=1}^{j-1} (F_m-W_m-U_m)-V_1</math>")
+
+            IObj?.Paragraphs.Add("<math>B_j=-[V_{j+1}+\sum\limits_{m+1}^j(F_m-W_m-U_m)-V_1+U_j+(V_j+W_j)K_{i,j}], 1\leq j\leq N</math>")
+
+            IObj?.Paragraphs.Add("<math>C_j=V_{j+1}K_{i,j+1}, 1 \leq j \leq N-1</math>")
+
+            IObj?.Paragraphs.Add("<math>D_j=-F_jz_{i,j}, 1 \leq j \leq N</math>")
+
+            IObj?.Paragraphs.Add("with <mi>x_{i,0}=0</mi>; <mi>V_{N+1}=0</mi>; <mi>W_1 = 0</mi>, and <mi>U_N=0</mi>, as indicated in Figure 10.3. If the modified M equations are grouped by component, they can be partitioned by writing them as a series of separate tridiagonal-matrix equations, one for each component, where the output variable for each matrix equation is xi over the entire N-stage cascade.")
+
+            IObj?.Paragraphs.Add("Constants Bj and Cj for each component depend only on tear variables T and V if K-values are composition-independent. If not, previous iteration compositions may be used to estimate K-values.")
+
+            IObj?.Paragraphs.Add("The Thomas algorithm for solving the linearized equation set is a Gaussian–elimination procedure involving forward elimination starting from stage 1 and working toward stage N to finally isolate <mi>x_{i,N}</mi>. Other values of <mi>x_{i,j}</mi> are then obtained, starting with <mi>x_{i,N-1}</mi> by backward substitution.")
+
+            IObj?.Paragraphs.Add("The Thomas algorithm avoids buildup of computer truncation errors because none of the steps involves subtraction of nearly equal quantities. Furthermore, computed values of xi,j are almost always positive. The algorithmis superior to alternative matrix-inversion routines. A modified Thomas algorithm for difficult cases is given by Boston and Sullivan [9]. Such cases can occur for columns with large numbers of equilibrium stages and components whose absorption factors, <mi>A=L/KV</mi>, are less than unity in one section and greater than unity in another.")
+
+            IObj?.Paragraphs.Add("<h2>Input Parameters</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("A: {0}", a.ToMathArrayString))
+
+            IObj?.Paragraphs.Add(String.Format("B: {0}", b.ToMathArrayString))
+
+            IObj?.Paragraphs.Add(String.Format("C: {0}", c.ToMathArrayString))
+
+            IObj?.Paragraphs.Add(String.Format("D: {0}", d.ToMathArrayString))
+
+            ' Warning: will modify c and d!
+
+            Dim n As Integer = d.Length
+            ' All arrays should be the same length
+            Dim x As Double() = New Double(n - 1) {}
+            Dim id As Double
+
+            ' Modify the coefficients.
+
+            c(0) /= b(0)
+            ' Division by zero risk.
+            d(0) /= b(0)
+            ' Division by zero would imply a singular matrix.
+            For i As Integer = 1 To n - 1
+                id = b(i) - c(i - 1) * a(i)
+                c(i) /= id
+                ' This calculation during the last iteration is redundant.
+                d(i) = (d(i) - d(i - 1) * a(i)) / id
+            Next
+
+            ' Now back substitute.
+
+            x(n - 1) = d(n - 1)
+            For i As Integer = n - 2 To 0 Step -1
+                x(i) = d(i) - c(i) * x(i + 1)
+            Next
+
+            IObj?.Paragraphs.Add("<h2>Results</h2>")
+
+            IObj?.Paragraphs.Add(String.Format("x: {0}", x.ToMathArrayString))
+
+            IObj?.Close()
+
+            Return x
+
         End Function
 
     End Class

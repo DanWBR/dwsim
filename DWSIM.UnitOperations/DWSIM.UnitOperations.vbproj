@@ -606,7 +606,6 @@
     <Compile Include="Reactors\PFR.vb" />
     <Compile Include="Resource Manager\ResMan.vb" />
     <Compile Include="Support Classes\PipeThermalProfile.vb" />
-    <Compile Include="Support Classes\RigorousColumnSolver.vb" />
     <Compile Include="Support Classes\ComboBoxColumnTemplates.vb" />
     <Compile Include="Type Resolver\Resolver.vb" />
     <Compile Include="CAPE-OPEN\CustomUO_CO.vb" />

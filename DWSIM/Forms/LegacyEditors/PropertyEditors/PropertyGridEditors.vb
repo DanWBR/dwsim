@@ -4314,58 +4314,22 @@ Public Class PropertyGridEditors
             End With
             .Item.Add(DWSIM.App.GetLocalString("DCAutoUpdInitEst"), uo, "AutoUpdateInitialEstimates", False, DWSIM.App.GetLocalString("DCInitialEstimates"), "", True)
 
-            If uo.SolvingMethod = 2 Then
-                .Item.Add(DWSIM.App.GetLocalString("DCILTol"), uo, "InternalLoopTolerance", False, DWSIM.App.GetLocalString("DCTolerances"), "", True)
-            End If
             .Item.Add(DWSIM.App.GetLocalString("DCELTol"), uo, "ExternalLoopTolerance", False, DWSIM.App.GetLocalString("DCTolerances"), "", True)
             .Item.Add(DWSIM.App.GetLocalString("DCMaxIt"), uo, "MaxIterations", False, DWSIM.App.GetLocalString("DCTolerances"), "", True)
 
-            Dim methods = New String() {"Wang-Henke (Bubble Point)", "Naphtali-Sandholm (Newton)", "Russell (Inside-Out)", "Burningham-Otto (Sum Rates) (Absorber Only)"}
             Dim strategies = New String() {"Ideal K first, then Rigorous", "Ideal H first, then Rigorous", "Ideal K+H first, then Rigorous", "Direct Rigorous"}
-
-            .Item.Add(DWSIM.App.GetLocalString("DCSolvingMethod"), methods(uo.SolvingMethod), False, DWSIM.App.GetLocalString("DCSolvingMethod1"), "", True)
-            With .Item(.Item.Count - 1)
-                .Choices = New PropertyGridEx.CustomChoices(methods)
-            End With
 
             .Item.Add("Solving Strategy", strategies(uo.SolverScheme), False, DWSIM.App.GetLocalString("DCSolvingMethod1"), "", True)
             With .Item(.Item.Count - 1)
                 .Choices = New PropertyGridEx.CustomChoices(strategies)
             End With
 
-            .Item.Add(FT("Maximum Temperature Change", su.deltaT), uo.MaximumTemperatureStep.ConvertFromSI(su.deltaT).ToString(nf), False, DWSIM.App.GetLocalString("DCSolvingMethod1"), "", True)
-
             .Item.Add("Convergence Tolerance (External Loop)", uo, "ExternalLoopTolerance", False, DWSIM.App.GetLocalString("DCSolvingMethod1"), "", True)
             .Item.Add("Convergence Tolerance (Internal Loop)", uo, "InternalLoopTolerance", False, DWSIM.App.GetLocalString("DCSolvingMethod1"), "", True)
 
-            If uo.SolvingMethod = 0 Then
-                .Item.Add("Stop at iteration number", uo, "StopAtIterationNumber", False, DWSIM.App.GetLocalString("DCSolvingMethod1"), "", True)
-            ElseIf uo.SolvingMethod = 1 Then
-                .Item.Add("Non-Linear Solver", uo.NS_Solver, False, DWSIM.App.GetLocalString("DCSolvingMethod1"), "", True)
-                .Item.Add("Iteration Variables: Lower Bound", uo, "NS_LowerBound", False, DWSIM.App.GetLocalString("DCSolvingMethod1"), "", True)
-                .Item.Add("Iteration Variables: Upper Bound", uo, "NS_UpperBound", False, DWSIM.App.GetLocalString("DCSolvingMethod1"), "", True)
-                .Item.Add("Iteration Variables: Derivative Perturbation", uo, "SC_NumericalDerivativeStep", False, DWSIM.App.GetLocalString("DCSolvingMethod1"), "", True)
-                .Item.Add("Iteration Variables: Simplex Preconditioning", uo, "NS_SimplexPreconditioning", False, DWSIM.App.GetLocalString("DCSolvingMethod1"), "", True)
-            ElseIf uo.SolvingMethod = 2 Then
-                .Item.Add("Non-Linear Solver", uo.IO_Solver, False, DWSIM.App.GetLocalString("DCSolvingMethod1"), "", True)
-                .Item.Add("Iteration Variables: Lower Bound", uo, "IO_LowerBound", False, DWSIM.App.GetLocalString("DCSolvingMethod1"), "", True)
-                .Item.Add("Iteration Variables: Upper Bound", uo, "IO_UpperBound", False, DWSIM.App.GetLocalString("DCSolvingMethod1"), "", True)
-                .Item.Add("Iteration Variables: Derivative Perturbation", uo, "IO_NumericalDerivativeStep", False, DWSIM.App.GetLocalString("DCSolvingMethod1"), "", True)
-                .Item.Add("Adjust Sb Scaling Factor", uo, "AdjustSb", False, DWSIM.App.GetLocalString("DCSolvingMethod1"), "", True)
-                .Item.Add("Calculate Kb by Weighted Average", uo, "KbjWeightedAverage", False, DWSIM.App.GetLocalString("DCSolvingMethod1"), "", True)
-            ElseIf uo.SolvingMethod = 3 Then
-
-            End If
-
             If uo.GraphicObject.Calculated Then
-                If uo.SolvingMethod = 2 Then
-                    .Item.Add(DWSIM.App.GetLocalString("DCILIts"), uo, "ic", True, DWSIM.App.GetLocalString("DCResults"), "", True)
-                    .Item.Add(DWSIM.App.GetLocalString("DCELIts"), uo, "ec", True, DWSIM.App.GetLocalString("DCResults"), "", True)
-                ElseIf uo.SolvingMethod = 1 Then
-                    .Item.Add(DWSIM.App.GetLocalString("DCELIts"), uo, "ec", True, DWSIM.App.GetLocalString("DCResults"), "", True)
-                Else
-                    .Item.Add(DWSIM.App.GetLocalString("DCELIts"), uo, "ic", True, DWSIM.App.GetLocalString("DCResults"), "", True)
-                End If
+                .Item.Add(DWSIM.App.GetLocalString("DCILIts"), uo, "ic", True, DWSIM.App.GetLocalString("DCResults"), "", True)
+                .Item.Add(DWSIM.App.GetLocalString("DCELIts"), uo, "ec", True, DWSIM.App.GetLocalString("DCResults"), "", True)
                 Select Case uo.ColumnType
                     Case ColType.DistillationColumn
                         val = Format(Converter.ConvertFromSI(su.heatflow, uo.CondenserDuty), nf)

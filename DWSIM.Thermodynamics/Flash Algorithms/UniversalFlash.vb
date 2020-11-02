@@ -202,7 +202,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_PV(Vz() As Double, P As Double, V As Double, Tref As Double, PP As PropertyPackage, Optional ReuseKI As Boolean = False, Optional PrevKi() As Double = Nothing) As Object
 
-            Dim nl = New NestedLoopsSVLLE
+            Dim nl = New NestedLoops
             nl.FlashSettings = FlashSettings
 
             Return nl.Flash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
@@ -211,7 +211,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_TV(Vz() As Double, T As Double, V As Double, Pref As Double, PP As PropertyPackage, Optional ReuseKI As Boolean = False, Optional PrevKi() As Double = Nothing) As Object
 
-            Dim nl = New NestedLoopsSVLLE
+            Dim nl = New NestedLoops
             nl.FlashSettings = FlashSettings
 
             Return nl.Flash_TV(Vz, T, V, Pref, PP, ReuseKI, PrevKi)

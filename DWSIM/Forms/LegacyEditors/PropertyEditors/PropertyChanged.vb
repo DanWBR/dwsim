@@ -3322,11 +3322,6 @@ Public Class PropertyChanged
                     col.Specs("C").ComponentID = e.ChangedItem.Value
                 ElseIf e.ChangedItem.Label = DWSIM.App.GetLocalString("DCReboilerSpecComp") And e.ChangedItem.Parent.Label = DWSIM.App.GetLocalString("DCReboilerSpecs") Then
                     col.Specs("R").ComponentID = e.ChangedItem.Value
-                ElseIf e.ChangedItem.Label.Equals("Maximum Temperature Change") Then
-                    col.SC_MaximumTemperatureChange = Converter.ConvertToSI(su.spmp_deltaT, e.ChangedItem.Value)
-                ElseIf e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("DCSolvingMethod")) Then
-                    Dim methods = New String() {"Wang-Henke (Bubble Point)", "Naphtali-Sandholm (Newton)", "Russell (Inside-Out)", "Burningham-Otto (Sum Rates) (Absorber Only)"}
-                    col.SolvingMethod = methods.ToList.IndexOf(e.ChangedItem.Value)
                 ElseIf e.ChangedItem.Label.Contains("Solving Strategy") Then
                     Dim strategies = New String() {"Ideal K first, then Rigorous", "Ideal H first, then Rigorous", "Ideal K+H first, then Rigorous", "Direct Rigorous"}
                     col.SolverScheme = strategies.ToList.IndexOf(e.ChangedItem.Value)

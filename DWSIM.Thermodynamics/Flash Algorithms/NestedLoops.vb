@@ -2087,7 +2087,6 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 If Not PP.AUX_CheckTrivial(PrevKi) And Not Double.IsNaN(PrevKi(0)) Then
                     For i = 0 To n
                         IObj?.SetCurrent
-                        Vp(i) = PP.AUX_PVAPi(i, T)
                         Ki(i) = PrevKi(i)
                     Next
                 Else
@@ -2233,7 +2232,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     Dim K1(n), K2(n), dKdT(n) As Double
 
                     IObj?.SetCurrent
-                    K1 = PP.DW_CalcKvalue(Vx, Vy, T, P)
+                    K1 = Ki 'PP.DW_CalcKvalue(Vx, Vy, T, P)
+
                     IObj?.SetCurrent
                     K2 = PP.DW_CalcKvalue(Vx, Vy, T + epsilon, P)
 
@@ -2265,7 +2265,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     IObj2?.Paragraphs.Add(String.Format("Temperature error: {0} K", deltaT))
 
-                    If Abs(deltaT) < etol / 1000 And ecount > 5 Then Exit Do
+                    If Abs(deltaT) < etol And ecount > 5 Then Exit Do
 
                     For i = 0 To n
                         dVxy(i) = Math.Abs(Vx(i) - Vy(i))
@@ -2358,7 +2358,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                         IObj2?.SetCurrent
 
-                        K1 = PP.DW_CalcKvalue(Vx, Vy, T, P)
+                        K1 = Ki 'PP.DW_CalcKvalue(Vx, Vy, T, P)
 
                         IObj2?.SetCurrent
 
@@ -2378,7 +2378,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                         IObj2?.SetCurrent
 
-                        K1 = PP.DW_CalcKvalue(Vx, Vy, T, P)
+                        K1 = Ki 'PP.DW_CalcKvalue(Vx, Vy, T, P)
 
                         IObj2?.SetCurrent
 

@@ -41,13 +41,8 @@ Partial Class EditingForm_Column
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabGeneral = New System.Windows.Forms.TabPage()
-        Me.lblTemperatureUnit = New System.Windows.Forms.Label()
-        Me.Label30 = New System.Windows.Forms.Label()
-        Me.tbMaxTChange = New System.Windows.Forms.TextBox()
         Me.cbSolverScheme = New System.Windows.Forms.ComboBox()
         Me.Label27 = New System.Windows.Forms.Label()
-        Me.cbSolvingMethod = New System.Windows.Forms.ComboBox()
-        Me.Label18 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.tbConvTol = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -93,30 +88,6 @@ Partial Class EditingForm_Column
         Me.chkUseIE_VF = New System.Windows.Forms.CheckBox()
         Me.chkUseIE_LF = New System.Windows.Forms.CheckBox()
         Me.chkUseIE_T = New System.Windows.Forms.CheckBox()
-        Me.TabSolverBP = New System.Windows.Forms.TabPage()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.tbBPStopAtIter = New System.Windows.Forms.TextBox()
-        Me.TabSolverNS = New System.Windows.Forms.TabPage()
-        Me.tb_NS_NumDeriv = New System.Windows.Forms.TextBox()
-        Me.Label28 = New System.Windows.Forms.Label()
-        Me.cbMinMethodNS = New System.Windows.Forms.ComboBox()
-        Me.Label25 = New System.Windows.Forms.Label()
-        Me.tb_NS_UpperBound = New System.Windows.Forms.TextBox()
-        Me.tb_NS_LowerBound = New System.Windows.Forms.TextBox()
-        Me.cbNSPreconditioning = New System.Windows.Forms.CheckBox()
-        Me.Label21 = New System.Windows.Forms.Label()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.TabSolverIO = New System.Windows.Forms.TabPage()
-        Me.tb_IO_NumDeriv = New System.Windows.Forms.TextBox()
-        Me.Label29 = New System.Windows.Forms.Label()
-        Me.cbMinMethodIO = New System.Windows.Forms.ComboBox()
-        Me.Label26 = New System.Windows.Forms.Label()
-        Me.tb_IO_UpperBound = New System.Windows.Forms.TextBox()
-        Me.tb_IO_LowerBound = New System.Windows.Forms.TextBox()
-        Me.Label22 = New System.Windows.Forms.Label()
-        Me.Label23 = New System.Windows.Forms.Label()
-        Me.chkIOAverageKb = New System.Windows.Forms.CheckBox()
-        Me.chkIOAdjustSb = New System.Windows.Forms.CheckBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.tabstrip1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
@@ -137,9 +108,6 @@ Partial Class EditingForm_Column
         Me.TabReboiler.SuspendLayout()
         Me.TabControl2.SuspendLayout()
         Me.TabInitialEstimates.SuspendLayout()
-        Me.TabSolverBP.SuspendLayout()
-        Me.TabSolverNS.SuspendLayout()
-        Me.TabSolverIO.SuspendLayout()
         Me.tabstrip1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.gridResults, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -266,13 +234,8 @@ Partial Class EditingForm_Column
         'TabGeneral
         '
         resources.ApplyResources(Me.TabGeneral, "TabGeneral")
-        Me.TabGeneral.Controls.Add(Me.lblTemperatureUnit)
-        Me.TabGeneral.Controls.Add(Me.Label30)
-        Me.TabGeneral.Controls.Add(Me.tbMaxTChange)
         Me.TabGeneral.Controls.Add(Me.cbSolverScheme)
         Me.TabGeneral.Controls.Add(Me.Label27)
-        Me.TabGeneral.Controls.Add(Me.cbSolvingMethod)
-        Me.TabGeneral.Controls.Add(Me.Label18)
         Me.TabGeneral.Controls.Add(Me.Label16)
         Me.TabGeneral.Controls.Add(Me.tbConvTol)
         Me.TabGeneral.Controls.Add(Me.btnConfigurePP)
@@ -289,30 +252,6 @@ Partial Class EditingForm_Column
         Me.ToolTipValues.SetToolTip(Me.TabGeneral, resources.GetString("TabGeneral.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.TabGeneral, resources.GetString("TabGeneral.ToolTip2"))
         Me.TabGeneral.UseVisualStyleBackColor = True
-        '
-        'lblTemperatureUnit
-        '
-        resources.ApplyResources(Me.lblTemperatureUnit, "lblTemperatureUnit")
-        Me.lblTemperatureUnit.Name = "lblTemperatureUnit"
-        Me.ToolTip1.SetToolTip(Me.lblTemperatureUnit, resources.GetString("lblTemperatureUnit.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.lblTemperatureUnit, resources.GetString("lblTemperatureUnit.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.lblTemperatureUnit, resources.GetString("lblTemperatureUnit.ToolTip2"))
-        '
-        'Label30
-        '
-        resources.ApplyResources(Me.Label30, "Label30")
-        Me.Label30.Name = "Label30"
-        Me.ToolTip1.SetToolTip(Me.Label30, resources.GetString("Label30.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label30, resources.GetString("Label30.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label30, resources.GetString("Label30.ToolTip2"))
-        '
-        'tbMaxTChange
-        '
-        resources.ApplyResources(Me.tbMaxTChange, "tbMaxTChange")
-        Me.tbMaxTChange.Name = "tbMaxTChange"
-        Me.ToolTipValues.SetToolTip(Me.tbMaxTChange, resources.GetString("tbMaxTChange.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.tbMaxTChange, resources.GetString("tbMaxTChange.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.tbMaxTChange, resources.GetString("tbMaxTChange.ToolTip2"))
         '
         'cbSolverScheme
         '
@@ -332,26 +271,6 @@ Partial Class EditingForm_Column
         Me.ToolTip1.SetToolTip(Me.Label27, resources.GetString("Label27.ToolTip"))
         Me.ToolTipChangeTag.SetToolTip(Me.Label27, resources.GetString("Label27.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.Label27, resources.GetString("Label27.ToolTip2"))
-        '
-        'cbSolvingMethod
-        '
-        resources.ApplyResources(Me.cbSolvingMethod, "cbSolvingMethod")
-        Me.cbSolvingMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbSolvingMethod.DropDownWidth = 250
-        Me.cbSolvingMethod.FormattingEnabled = True
-        Me.cbSolvingMethod.Items.AddRange(New Object() {resources.GetString("cbSolvingMethod.Items"), resources.GetString("cbSolvingMethod.Items1"), resources.GetString("cbSolvingMethod.Items2"), resources.GetString("cbSolvingMethod.Items3")})
-        Me.cbSolvingMethod.Name = "cbSolvingMethod"
-        Me.ToolTip1.SetToolTip(Me.cbSolvingMethod, resources.GetString("cbSolvingMethod.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.cbSolvingMethod, resources.GetString("cbSolvingMethod.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.cbSolvingMethod, resources.GetString("cbSolvingMethod.ToolTip2"))
-        '
-        'Label18
-        '
-        resources.ApplyResources(Me.Label18, "Label18")
-        Me.Label18.Name = "Label18"
-        Me.ToolTip1.SetToolTip(Me.Label18, resources.GetString("Label18.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label18, resources.GetString("Label18.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label18, resources.GetString("Label18.ToolTip2"))
         '
         'Label16
         '
@@ -715,9 +634,6 @@ Partial Class EditingForm_Column
         Me.TabControl2.Controls.Add(Me.TabConnections)
         Me.TabControl2.Controls.Add(Me.TabStages)
         Me.TabControl2.Controls.Add(Me.TabInitialEstimates)
-        Me.TabControl2.Controls.Add(Me.TabSolverBP)
-        Me.TabControl2.Controls.Add(Me.TabSolverNS)
-        Me.TabControl2.Controls.Add(Me.TabSolverIO)
         Me.TabControl2.Name = "TabControl2"
         Me.TabControl2.SelectedIndex = 0
         Me.ToolTipChangeTag.SetToolTip(Me.TabControl2, resources.GetString("TabControl2.ToolTip"))
@@ -799,231 +715,6 @@ Partial Class EditingForm_Column
         Me.ToolTipChangeTag.SetToolTip(Me.chkUseIE_T, resources.GetString("chkUseIE_T.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.chkUseIE_T, resources.GetString("chkUseIE_T.ToolTip2"))
         Me.chkUseIE_T.UseVisualStyleBackColor = True
-        '
-        'TabSolverBP
-        '
-        resources.ApplyResources(Me.TabSolverBP, "TabSolverBP")
-        Me.TabSolverBP.Controls.Add(Me.Label3)
-        Me.TabSolverBP.Controls.Add(Me.tbBPStopAtIter)
-        Me.TabSolverBP.Name = "TabSolverBP"
-        Me.ToolTip1.SetToolTip(Me.TabSolverBP, resources.GetString("TabSolverBP.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.TabSolverBP, resources.GetString("TabSolverBP.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.TabSolverBP, resources.GetString("TabSolverBP.ToolTip2"))
-        Me.TabSolverBP.UseVisualStyleBackColor = True
-        '
-        'Label3
-        '
-        resources.ApplyResources(Me.Label3, "Label3")
-        Me.Label3.Name = "Label3"
-        Me.ToolTip1.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip2"))
-        '
-        'tbBPStopAtIter
-        '
-        resources.ApplyResources(Me.tbBPStopAtIter, "tbBPStopAtIter")
-        Me.tbBPStopAtIter.Name = "tbBPStopAtIter"
-        Me.ToolTipValues.SetToolTip(Me.tbBPStopAtIter, resources.GetString("tbBPStopAtIter.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.tbBPStopAtIter, resources.GetString("tbBPStopAtIter.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.tbBPStopAtIter, resources.GetString("tbBPStopAtIter.ToolTip2"))
-        '
-        'TabSolverNS
-        '
-        resources.ApplyResources(Me.TabSolverNS, "TabSolverNS")
-        Me.TabSolverNS.Controls.Add(Me.tb_NS_NumDeriv)
-        Me.TabSolverNS.Controls.Add(Me.Label28)
-        Me.TabSolverNS.Controls.Add(Me.cbMinMethodNS)
-        Me.TabSolverNS.Controls.Add(Me.Label25)
-        Me.TabSolverNS.Controls.Add(Me.tb_NS_UpperBound)
-        Me.TabSolverNS.Controls.Add(Me.tb_NS_LowerBound)
-        Me.TabSolverNS.Controls.Add(Me.cbNSPreconditioning)
-        Me.TabSolverNS.Controls.Add(Me.Label21)
-        Me.TabSolverNS.Controls.Add(Me.Label20)
-        Me.TabSolverNS.Name = "TabSolverNS"
-        Me.ToolTip1.SetToolTip(Me.TabSolverNS, resources.GetString("TabSolverNS.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.TabSolverNS, resources.GetString("TabSolverNS.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.TabSolverNS, resources.GetString("TabSolverNS.ToolTip2"))
-        Me.TabSolverNS.UseVisualStyleBackColor = True
-        '
-        'tb_NS_NumDeriv
-        '
-        resources.ApplyResources(Me.tb_NS_NumDeriv, "tb_NS_NumDeriv")
-        Me.tb_NS_NumDeriv.Name = "tb_NS_NumDeriv"
-        Me.ToolTipValues.SetToolTip(Me.tb_NS_NumDeriv, resources.GetString("tb_NS_NumDeriv.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.tb_NS_NumDeriv, resources.GetString("tb_NS_NumDeriv.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.tb_NS_NumDeriv, resources.GetString("tb_NS_NumDeriv.ToolTip2"))
-        '
-        'Label28
-        '
-        resources.ApplyResources(Me.Label28, "Label28")
-        Me.Label28.Name = "Label28"
-        Me.ToolTip1.SetToolTip(Me.Label28, resources.GetString("Label28.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label28, resources.GetString("Label28.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label28, resources.GetString("Label28.ToolTip2"))
-        '
-        'cbMinMethodNS
-        '
-        resources.ApplyResources(Me.cbMinMethodNS, "cbMinMethodNS")
-        Me.cbMinMethodNS.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbMinMethodNS.FormattingEnabled = True
-        Me.cbMinMethodNS.Items.AddRange(New Object() {resources.GetString("cbMinMethodNS.Items"), resources.GetString("cbMinMethodNS.Items1"), resources.GetString("cbMinMethodNS.Items2"), resources.GetString("cbMinMethodNS.Items3"), resources.GetString("cbMinMethodNS.Items4"), resources.GetString("cbMinMethodNS.Items5"), resources.GetString("cbMinMethodNS.Items6"), resources.GetString("cbMinMethodNS.Items7"), resources.GetString("cbMinMethodNS.Items8"), resources.GetString("cbMinMethodNS.Items9"), resources.GetString("cbMinMethodNS.Items10")})
-        Me.cbMinMethodNS.Name = "cbMinMethodNS"
-        Me.ToolTip1.SetToolTip(Me.cbMinMethodNS, resources.GetString("cbMinMethodNS.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.cbMinMethodNS, resources.GetString("cbMinMethodNS.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.cbMinMethodNS, resources.GetString("cbMinMethodNS.ToolTip2"))
-        '
-        'Label25
-        '
-        resources.ApplyResources(Me.Label25, "Label25")
-        Me.Label25.Name = "Label25"
-        Me.ToolTip1.SetToolTip(Me.Label25, resources.GetString("Label25.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label25, resources.GetString("Label25.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label25, resources.GetString("Label25.ToolTip2"))
-        '
-        'tb_NS_UpperBound
-        '
-        resources.ApplyResources(Me.tb_NS_UpperBound, "tb_NS_UpperBound")
-        Me.tb_NS_UpperBound.Name = "tb_NS_UpperBound"
-        Me.ToolTipValues.SetToolTip(Me.tb_NS_UpperBound, resources.GetString("tb_NS_UpperBound.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.tb_NS_UpperBound, resources.GetString("tb_NS_UpperBound.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.tb_NS_UpperBound, resources.GetString("tb_NS_UpperBound.ToolTip2"))
-        '
-        'tb_NS_LowerBound
-        '
-        resources.ApplyResources(Me.tb_NS_LowerBound, "tb_NS_LowerBound")
-        Me.tb_NS_LowerBound.Name = "tb_NS_LowerBound"
-        Me.ToolTipValues.SetToolTip(Me.tb_NS_LowerBound, resources.GetString("tb_NS_LowerBound.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.tb_NS_LowerBound, resources.GetString("tb_NS_LowerBound.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.tb_NS_LowerBound, resources.GetString("tb_NS_LowerBound.ToolTip2"))
-        '
-        'cbNSPreconditioning
-        '
-        resources.ApplyResources(Me.cbNSPreconditioning, "cbNSPreconditioning")
-        Me.cbNSPreconditioning.Name = "cbNSPreconditioning"
-        Me.ToolTip1.SetToolTip(Me.cbNSPreconditioning, resources.GetString("cbNSPreconditioning.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.cbNSPreconditioning, resources.GetString("cbNSPreconditioning.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.cbNSPreconditioning, resources.GetString("cbNSPreconditioning.ToolTip2"))
-        Me.cbNSPreconditioning.UseVisualStyleBackColor = True
-        '
-        'Label21
-        '
-        resources.ApplyResources(Me.Label21, "Label21")
-        Me.Label21.Name = "Label21"
-        Me.ToolTip1.SetToolTip(Me.Label21, resources.GetString("Label21.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label21, resources.GetString("Label21.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label21, resources.GetString("Label21.ToolTip2"))
-        '
-        'Label20
-        '
-        resources.ApplyResources(Me.Label20, "Label20")
-        Me.Label20.Name = "Label20"
-        Me.ToolTip1.SetToolTip(Me.Label20, resources.GetString("Label20.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label20, resources.GetString("Label20.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label20, resources.GetString("Label20.ToolTip2"))
-        '
-        'TabSolverIO
-        '
-        resources.ApplyResources(Me.TabSolverIO, "TabSolverIO")
-        Me.TabSolverIO.Controls.Add(Me.tb_IO_NumDeriv)
-        Me.TabSolverIO.Controls.Add(Me.Label29)
-        Me.TabSolverIO.Controls.Add(Me.cbMinMethodIO)
-        Me.TabSolverIO.Controls.Add(Me.Label26)
-        Me.TabSolverIO.Controls.Add(Me.tb_IO_UpperBound)
-        Me.TabSolverIO.Controls.Add(Me.tb_IO_LowerBound)
-        Me.TabSolverIO.Controls.Add(Me.Label22)
-        Me.TabSolverIO.Controls.Add(Me.Label23)
-        Me.TabSolverIO.Controls.Add(Me.chkIOAverageKb)
-        Me.TabSolverIO.Controls.Add(Me.chkIOAdjustSb)
-        Me.TabSolverIO.Name = "TabSolverIO"
-        Me.ToolTip1.SetToolTip(Me.TabSolverIO, resources.GetString("TabSolverIO.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.TabSolverIO, resources.GetString("TabSolverIO.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.TabSolverIO, resources.GetString("TabSolverIO.ToolTip2"))
-        Me.TabSolverIO.UseVisualStyleBackColor = True
-        '
-        'tb_IO_NumDeriv
-        '
-        resources.ApplyResources(Me.tb_IO_NumDeriv, "tb_IO_NumDeriv")
-        Me.tb_IO_NumDeriv.Name = "tb_IO_NumDeriv"
-        Me.ToolTipValues.SetToolTip(Me.tb_IO_NumDeriv, resources.GetString("tb_IO_NumDeriv.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.tb_IO_NumDeriv, resources.GetString("tb_IO_NumDeriv.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.tb_IO_NumDeriv, resources.GetString("tb_IO_NumDeriv.ToolTip2"))
-        '
-        'Label29
-        '
-        resources.ApplyResources(Me.Label29, "Label29")
-        Me.Label29.Name = "Label29"
-        Me.ToolTip1.SetToolTip(Me.Label29, resources.GetString("Label29.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label29, resources.GetString("Label29.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label29, resources.GetString("Label29.ToolTip2"))
-        '
-        'cbMinMethodIO
-        '
-        resources.ApplyResources(Me.cbMinMethodIO, "cbMinMethodIO")
-        Me.cbMinMethodIO.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbMinMethodIO.FormattingEnabled = True
-        Me.cbMinMethodIO.Items.AddRange(New Object() {resources.GetString("cbMinMethodIO.Items"), resources.GetString("cbMinMethodIO.Items1"), resources.GetString("cbMinMethodIO.Items2"), resources.GetString("cbMinMethodIO.Items3"), resources.GetString("cbMinMethodIO.Items4"), resources.GetString("cbMinMethodIO.Items5"), resources.GetString("cbMinMethodIO.Items6"), resources.GetString("cbMinMethodIO.Items7"), resources.GetString("cbMinMethodIO.Items8"), resources.GetString("cbMinMethodIO.Items9"), resources.GetString("cbMinMethodIO.Items10")})
-        Me.cbMinMethodIO.Name = "cbMinMethodIO"
-        Me.ToolTip1.SetToolTip(Me.cbMinMethodIO, resources.GetString("cbMinMethodIO.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.cbMinMethodIO, resources.GetString("cbMinMethodIO.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.cbMinMethodIO, resources.GetString("cbMinMethodIO.ToolTip2"))
-        '
-        'Label26
-        '
-        resources.ApplyResources(Me.Label26, "Label26")
-        Me.Label26.Name = "Label26"
-        Me.ToolTip1.SetToolTip(Me.Label26, resources.GetString("Label26.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label26, resources.GetString("Label26.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label26, resources.GetString("Label26.ToolTip2"))
-        '
-        'tb_IO_UpperBound
-        '
-        resources.ApplyResources(Me.tb_IO_UpperBound, "tb_IO_UpperBound")
-        Me.tb_IO_UpperBound.Name = "tb_IO_UpperBound"
-        Me.ToolTipValues.SetToolTip(Me.tb_IO_UpperBound, resources.GetString("tb_IO_UpperBound.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.tb_IO_UpperBound, resources.GetString("tb_IO_UpperBound.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.tb_IO_UpperBound, resources.GetString("tb_IO_UpperBound.ToolTip2"))
-        '
-        'tb_IO_LowerBound
-        '
-        resources.ApplyResources(Me.tb_IO_LowerBound, "tb_IO_LowerBound")
-        Me.tb_IO_LowerBound.Name = "tb_IO_LowerBound"
-        Me.ToolTipValues.SetToolTip(Me.tb_IO_LowerBound, resources.GetString("tb_IO_LowerBound.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.tb_IO_LowerBound, resources.GetString("tb_IO_LowerBound.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.tb_IO_LowerBound, resources.GetString("tb_IO_LowerBound.ToolTip2"))
-        '
-        'Label22
-        '
-        resources.ApplyResources(Me.Label22, "Label22")
-        Me.Label22.Name = "Label22"
-        Me.ToolTip1.SetToolTip(Me.Label22, resources.GetString("Label22.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label22, resources.GetString("Label22.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label22, resources.GetString("Label22.ToolTip2"))
-        '
-        'Label23
-        '
-        resources.ApplyResources(Me.Label23, "Label23")
-        Me.Label23.Name = "Label23"
-        Me.ToolTip1.SetToolTip(Me.Label23, resources.GetString("Label23.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label23, resources.GetString("Label23.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label23, resources.GetString("Label23.ToolTip2"))
-        '
-        'chkIOAverageKb
-        '
-        resources.ApplyResources(Me.chkIOAverageKb, "chkIOAverageKb")
-        Me.chkIOAverageKb.Name = "chkIOAverageKb"
-        Me.ToolTip1.SetToolTip(Me.chkIOAverageKb, resources.GetString("chkIOAverageKb.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.chkIOAverageKb, resources.GetString("chkIOAverageKb.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.chkIOAverageKb, resources.GetString("chkIOAverageKb.ToolTip2"))
-        Me.chkIOAverageKb.UseVisualStyleBackColor = True
-        '
-        'chkIOAdjustSb
-        '
-        resources.ApplyResources(Me.chkIOAdjustSb, "chkIOAdjustSb")
-        Me.chkIOAdjustSb.Name = "chkIOAdjustSb"
-        Me.ToolTip1.SetToolTip(Me.chkIOAdjustSb, resources.GetString("chkIOAdjustSb.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.chkIOAdjustSb, resources.GetString("chkIOAdjustSb.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.chkIOAdjustSb, resources.GetString("chkIOAdjustSb.ToolTip2"))
-        Me.chkIOAdjustSb.UseVisualStyleBackColor = True
         '
         'tabstrip1
         '
@@ -1166,12 +857,6 @@ Partial Class EditingForm_Column
         Me.TabControl2.ResumeLayout(False)
         Me.TabInitialEstimates.ResumeLayout(False)
         Me.TabInitialEstimates.PerformLayout()
-        Me.TabSolverBP.ResumeLayout(False)
-        Me.TabSolverBP.PerformLayout()
-        Me.TabSolverNS.ResumeLayout(False)
-        Me.TabSolverNS.PerformLayout()
-        Me.TabSolverIO.ResumeLayout(False)
-        Me.TabSolverIO.PerformLayout()
         Me.tabstrip1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         CType(Me.gridResults, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1208,10 +893,7 @@ Partial Class EditingForm_Column
     Public WithEvents TabControl2 As System.Windows.Forms.TabControl
     Public WithEvents TabConnections As System.Windows.Forms.TabPage
     Public WithEvents TabStages As System.Windows.Forms.TabPage
-    Public WithEvents TabSolverBP As System.Windows.Forms.TabPage
     Public WithEvents TabInitialEstimates As System.Windows.Forms.TabPage
-    Public WithEvents TabSolverNS As System.Windows.Forms.TabPage
-    Public WithEvents TabSolverIO As System.Windows.Forms.TabPage
     Public WithEvents cbCondType As System.Windows.Forms.ComboBox
     Public WithEvents Label2 As System.Windows.Forms.Label
     Public WithEvents Label8 As System.Windows.Forms.Label
@@ -1238,47 +920,21 @@ Partial Class EditingForm_Column
     Public WithEvents tbConvTol As System.Windows.Forms.TextBox
     Public WithEvents Label14 As System.Windows.Forms.Label
     Public WithEvents tbMaxIt As System.Windows.Forms.TextBox
-    Public WithEvents Label3 As System.Windows.Forms.Label
-    Public WithEvents tbBPStopAtIter As System.Windows.Forms.TextBox
-    Public WithEvents Label21 As System.Windows.Forms.Label
-    Public WithEvents Label20 As System.Windows.Forms.Label
-    Public WithEvents chkIOAverageKb As System.Windows.Forms.CheckBox
-    Public WithEvents chkIOAdjustSb As System.Windows.Forms.CheckBox
     Public WithEvents InitialEstimatesPanel As System.Windows.Forms.Panel
     Public WithEvents chkUseIE_C As System.Windows.Forms.CheckBox
     Public WithEvents chkUseIE_VF As System.Windows.Forms.CheckBox
     Public WithEvents chkUseIE_LF As System.Windows.Forms.CheckBox
     Public WithEvents chkUseIE_T As System.Windows.Forms.CheckBox
-    Public WithEvents cbSolvingMethod As System.Windows.Forms.ComboBox
-    Public WithEvents Label18 As System.Windows.Forms.Label
     Public WithEvents btnResults As System.Windows.Forms.Button
     Public WithEvents Label19 As System.Windows.Forms.Label
     Public WithEvents cbCondComp As System.Windows.Forms.ComboBox
     Public WithEvents Label24 As System.Windows.Forms.Label
     Public WithEvents cbRebComp As System.Windows.Forms.ComboBox
-    Public WithEvents tb_NS_UpperBound As System.Windows.Forms.TextBox
-    Public WithEvents tb_NS_LowerBound As System.Windows.Forms.TextBox
-    Public WithEvents cbNSPreconditioning As System.Windows.Forms.CheckBox
-    Public WithEvents tb_IO_UpperBound As System.Windows.Forms.TextBox
-    Public WithEvents tb_IO_LowerBound As System.Windows.Forms.TextBox
-    Public WithEvents Label22 As System.Windows.Forms.Label
-    Public WithEvents Label23 As System.Windows.Forms.Label
-    Public WithEvents cbMinMethodNS As System.Windows.Forms.ComboBox
-    Public WithEvents Label25 As System.Windows.Forms.Label
-    Public WithEvents cbMinMethodIO As System.Windows.Forms.ComboBox
-    Public WithEvents Label26 As System.Windows.Forms.Label
     Public WithEvents cbSolverScheme As System.Windows.Forms.ComboBox
     Public WithEvents Label27 As System.Windows.Forms.Label
-    Public WithEvents tb_NS_NumDeriv As System.Windows.Forms.TextBox
-    Public WithEvents Label28 As System.Windows.Forms.Label
-    Public WithEvents tb_IO_NumDeriv As System.Windows.Forms.TextBox
-    Public WithEvents Label29 As System.Windows.Forms.Label
     Public WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Public WithEvents lblTemperatureUnit As Label
-    Public WithEvents Label30 As Label
-    Public WithEvents tbMaxTChange As TextBox
     Friend WithEvents ToolTipChangeTag As ToolTip
     Friend WithEvents TabControl3 As TabControl
     Friend WithEvents TabPage2 As TabPage
