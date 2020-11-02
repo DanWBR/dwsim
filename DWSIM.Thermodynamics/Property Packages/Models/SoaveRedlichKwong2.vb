@@ -329,10 +329,10 @@ Namespace PropertyPackages.ThermoPlugs
             Dim results As Double()
 
             If Settings.EnableGPUProcessing Then
-                IObj?.Paragraphs.Add("DWSIM will calculate PR EOS Fugacity Coefficient using the GPU.")
+                IObj?.Paragraphs.Add("DWSIM will calculate SRK EOS Fugacity Coefficient using the GPU.")
                 results = CalcLnFugGPU(T, P, Vx, VKij, VTc, VPc, Vw, otherargs, forcephase)
             Else
-                IObj?.Paragraphs.Add("DWSIM will calculate PR EOS Fugacity Coefficient using the CPU.")
+                IObj?.Paragraphs.Add("DWSIM will calculate SRK EOS Fugacity Coefficient using the CPU.")
                 results = CalcLnFugCPU(T, P, Vx, VKij, VTc, VPc, Vw, otherargs, forcephase)
             End If
 
@@ -466,9 +466,9 @@ Namespace PropertyPackages.ThermoPlugs
             End If
 
             Dim Pcorr As Double = P
-            Dim ZP As Double() = CheckRoot(Z, aml, bml, P, T, forcephase)
-            Z = ZP(0)
-            Pcorr = ZP(1)
+            'Dim ZP As Double() = CheckRoot(Z, aml, bml, P, T, forcephase)
+            'Z = ZP(0)
+            'Pcorr = ZP(1)
 
             IObj?.Paragraphs.Add(String.Format("<math_inline>Z</math_inline>: {0}", Z))
 
