@@ -2140,7 +2140,6 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             Dim marcador3, marcador2, marcador As Integer
             Dim stmp4_ant, stmp4, Tant, fval, fval_ant As Double
-            Dim chk As Boolean = False
 
             If V = 1.0# Or V = 0.0# Then
 
