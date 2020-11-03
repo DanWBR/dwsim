@@ -426,7 +426,7 @@ restart:    B = F - D
             Next
 
             IObj?.SetCurrent()
-            result = pp.CalculateEquilibrium2(FlashCalculationType.PressureVaporFraction, m_boilerpressure, 0.001, 0)
+            result = pp.CalculateEquilibrium2(FlashCalculationType.PressureVaporFraction, m_boilerpressure, 0.0, 0)
             TB = result.CalculatedTemperature
             With bottoms.Phases(0)
                 .Properties.temperature = TB

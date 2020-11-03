@@ -115,7 +115,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             settings(Interfaces.Enums.FlashSetting.PVFlash_FixedDampingFactor) = 1.0.ToString(ci)
             settings(Interfaces.Enums.FlashSetting.PVFlash_MaximumTemperatureChange) = 10.0.ToString(ci)
-            settings(Interfaces.Enums.FlashSetting.PVFlash_TemperatureDerivativeEpsilon) = 0.01.ToString(ci)
+            settings(Interfaces.Enums.FlashSetting.PVFlash_TemperatureDerivativeEpsilon) = 0.1.ToString(ci)
 
             settings(Interfaces.Enums.FlashSetting.ST_Number_of_Random_Tries) = 20
 
