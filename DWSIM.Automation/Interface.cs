@@ -23,6 +23,8 @@ namespace DWSIM.Automation
         void CalculateFlowsheet(IFlowsheet flowsheet, ISimulationObject sender);
         List<Exception> CalculateFlowsheet2(IFlowsheet flowsheet);
         IFlowsheet CreateFlowsheet();
+
+
     }
 
     [Guid("37437090-e541-4f2c-9856-d1e27df32ecb"), ClassInterface(ClassInterfaceType.None)]
@@ -66,6 +68,7 @@ namespace DWSIM.Automation
 
         public void CalculateFlowsheet(IFlowsheet flowsheet, ISimulationObject sender)
         {
+            GlobalSettings.Settings.CalculatorActivated = true;
             GlobalSettings.Settings.SolverBreakOnException = true;
             GlobalSettings.Settings.SolverMode = 0;
             GlobalSettings.Settings.SolverTimeoutSeconds = 120;
@@ -84,6 +87,7 @@ namespace DWSIM.Automation
 
         public List<Exception> CalculateFlowsheet2(IFlowsheet flowsheet)
         {
+            GlobalSettings.Settings.CalculatorActivated = true;
             GlobalSettings.Settings.SolverBreakOnException = true;
             GlobalSettings.Settings.SolverMode = 0;
             GlobalSettings.Settings.SolverTimeoutSeconds = 120;
@@ -137,6 +141,7 @@ namespace DWSIM.Automation
 
         public void CalculateFlowsheet(IFlowsheet flowsheet, ISimulationObject sender)
         {
+            GlobalSettings.Settings.CalculatorActivated = true;
             GlobalSettings.Settings.SolverBreakOnException = true;
             GlobalSettings.Settings.EnableGPUProcessing = false;
             GlobalSettings.Settings.EnableParallelProcessing = true;
@@ -146,6 +151,7 @@ namespace DWSIM.Automation
 
         public List<Exception> CalculateFlowsheet2(IFlowsheet flowsheet)
         {
+            GlobalSettings.Settings.CalculatorActivated = true;
             GlobalSettings.Settings.SolverBreakOnException = true;
             GlobalSettings.Settings.SolverMode = 0;
             GlobalSettings.Settings.SolverTimeoutSeconds = 120;

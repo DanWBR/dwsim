@@ -1151,6 +1151,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
         End Select
 
         If Not gObj Is Nothing Then
+            gObj.PositionConnectors()
             gObj.Owner = SimulationObjects(gObj.Name)
             SimulationObjects(gObj.Name).SetFlowsheet(Me)
             FlowsheetSurface.AddObject(gObj)

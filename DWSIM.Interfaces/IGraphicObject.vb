@@ -25,6 +25,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Property DrawOverride As Action(Of Object)
 
+    Sub PositionConnectors()
+
     Sub Draw(surface As Object)
 
     Property Editor As Object

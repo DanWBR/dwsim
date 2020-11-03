@@ -2304,6 +2304,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 gObj.CreateConnectors(1, 1)
                 If Flowsheet.Visible Then FlowsheetSolver.FlowsheetSolver.CalculateObject(Me.Flowsheet, gObj.Name)
             End If
+            gObj.PositionConnectors()
             Application.DoEvents()
             If My.Application.PushUndoRedoAction Then Flowsheet.AddUndoRedoAction(New SharedClasses.UndoRedoAction() With {.AType = UndoRedoActionType.ObjectAdded,
                                      .ObjID = gObj.Name,
@@ -2312,6 +2313,7 @@ Public Class FlowsheetSurface_SkiaSharp
         End If
 
         SplitContainer1.Panel1.Cursor = Cursors.Arrow
+
 
         Return gObj.Name
 

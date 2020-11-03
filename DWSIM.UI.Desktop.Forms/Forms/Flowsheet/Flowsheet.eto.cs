@@ -1583,6 +1583,13 @@ namespace DWSIM.UI.Forms
 
                 File.Delete(xmlfile);
             }
+            else if (System.IO.Path.GetExtension(path).ToLower() == ".dwxml")
+            {
+                using (var fstream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                {
+                    FlowsheetObject.SaveToXML().Save(fstream);
+                }
+            }
             else if (System.IO.Path.GetExtension(path).ToLower() == ".xml")
             {
                 using (var fstream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite))

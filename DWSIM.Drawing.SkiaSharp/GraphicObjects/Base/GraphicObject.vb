@@ -304,7 +304,7 @@ Namespace GraphicObjects
 
         End Sub
 
-        Public Overridable Sub PositionConnectors()
+        Public Overridable Sub PositionConnectors() Implements IGraphicObject.PositionConnectors
 
             'To be implemented in derived classes.
 
