@@ -1341,6 +1341,9 @@ will converge to this solution.")
 
             End If
 
+            'check activity coefficients
+            'Dim act = pp.DW_CalcFugCoeff(Vz, T, P, State.Liquid).MultiplyConstY(P).DivideY(pp.RET_VPVAP(T))
+
             'liquid phase split check
 
             If names.Contains("water") And names.Where(Function(x) x.EndsWith("ane") Or x.EndsWith("ene") Or x.EndsWith("ine")).Count > 0 Then
@@ -1369,6 +1372,7 @@ will converge to this solution.")
                     End If
                 Next
             ElseIf names.Where(Function(x) x.EndsWith("ol")).Count > 0 And names.Where(Function(x) x.EndsWith("ane") Or x.EndsWith("ene") Or x.EndsWith("ine")).Count > 0 Then
+
                 'Alcohols + Hydrocarbons
                 Dim alcs = names.Where(Function(x) x.EndsWith("ol")).ToList()
                 For Each alc In alcs

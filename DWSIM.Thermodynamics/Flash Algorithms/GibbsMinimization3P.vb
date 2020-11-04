@@ -469,7 +469,34 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             IObj?.Paragraphs.Add(String.Format("Converged Vapor Phase composition: {0}", Vy.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Converged Liquid Phase composition: {0}", Vx1.ToMathArrayString))
 
-            FunctionValue(initval)
+            Gz = FunctionValue(initval) * 1000
+
+            If Gz > Gz0 Then
+                'mixture is stable. no phase split.
+                Select Case mixphase
+                    Case PhaseName.Vapor
+                        V = 1.0
+                        L = 0.0
+                        Vy = Vz
+                    Case Else
+                        L = 1.0
+                        V = 0.0
+                        Vx1 = Vz
+                End Select
+            Else
+                'check if phases are the same
+                Dim diff As Double() = Vx1.Clone
+                For i = 0 To n
+                    diff(i) = Math.Abs(Vx1(i) - Vy(i))
+                Next
+                If diff.SumY() < 0.01 * n Then
+                    'the phases are the same.
+                    L = L + V
+                    V = 0.0
+                    Vy = Ki.MultiplyY(Vx1).NormalizeY()
+                End If
+            End If
+
             result = New Object() {L, V, Vx1, Vy, ecount, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
 
             IObj?.Paragraphs.Add("The two-phase algorithm converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms. Error function value: " & F)
@@ -484,7 +511,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 ' check if there is a liquid phase
 
-                If result(0) > 0 Then ' we have a liquid phase
+                If L > 0 Then ' we have a liquid phase
 
                     IObj?.Paragraphs.Add("We have a liquid phase. Checking its stability according to user specifications...")
 
