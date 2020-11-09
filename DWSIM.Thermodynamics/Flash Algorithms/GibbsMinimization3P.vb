@@ -400,56 +400,23 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             objval = 0.0#
             objval0 = 0.0#
 
-            Select Case Me.Solver
-                Case OptimizationMethod.Limited_Memory_BGFS
-                    Dim variables(n) As OptBoundVariable
-                    For i = 0 To n
-                        variables(i) = New OptBoundVariable("x" & CStr(i + 1), initval(i), False, lconstr(i), uconstr(i))
-                    Next
-                    Dim solver As New L_BFGS_B
-                    solver.Tolerance = etol
-                    solver.MaxFunEvaluations = maxit_e
-                    initval = solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
-                    solver = Nothing
-                Case OptimizationMethod.Truncated_Newton
-                    Dim variables(n) As OptBoundVariable
-                    For i = 0 To n
-                        variables(i) = New OptBoundVariable("x" & CStr(i + 1), initval(i), False, lconstr(i), uconstr(i))
-                    Next
-                    Dim solver As New TruncatedNewton
-                    solver.Tolerance = etol
-                    solver.MaxFunEvaluations = maxit_e
-                    initval = solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
-                    solver = Nothing
-                Case OptimizationMethod.Simplex
-                    Dim variables(n) As OptBoundVariable
-                    For i = 0 To n
-                        variables(i) = New OptBoundVariable("x" & CStr(i + 1), initval(i), False, lconstr(i), uconstr(i))
-                    Next
-                    Dim solver As New Simplex
-                    solver.Tolerance = etol
-                    solver.MaxFunEvaluations = maxit_e
-                    initval = solver.ComputeMin(AddressOf FunctionValue, variables)
-                    solver = Nothing
-                Case Else
-                    Using problem As New Ipopt(initval.Length, lconstr, uconstr, 0, Nothing, Nothing,
-                           0, 0, AddressOf eval_f, AddressOf eval_g,
-                           AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
-                        problem.AddOption("tol", etol)
-                        problem.AddOption("max_iter", maxit_e)
-                        problem.AddOption("mu_strategy", "adaptive")
-                        problem.AddOption("expect_infeasible_problem", "yes")
-                        problem.AddOption("hessian_approximation", "limited-memory")
-                        problem.SetIntermediateCallback(AddressOf intermediate)
-                        status = problem.SolveProblem(initval, obj, Nothing, Nothing, Nothing, Nothing)
-                    End Using
-                    Select Case status
-                        Case IpoptReturnCode.Diverging_Iterates,
-                                  IpoptReturnCode.Error_In_Step_Computation
-                            Throw New Exception("PT Flash: IPOPT failed to converge.")
-                        Case IpoptReturnCode.Maximum_Iterations_Exceeded
-                            Throw New Exception("PT Flash: Maximum iterations exceeded.")
-                    End Select
+            Using problem As New Ipopt(initval.Length, lconstr, uconstr, 0, Nothing, Nothing,
+                   0, 0, AddressOf eval_f, AddressOf eval_g,
+                   AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
+                problem.AddOption("tol", etol)
+                problem.AddOption("max_iter", maxit_e)
+                problem.AddOption("mu_strategy", "adaptive")
+                problem.AddOption("expect_infeasible_problem", "yes")
+                problem.AddOption("hessian_approximation", "limited-memory")
+                problem.SetIntermediateCallback(AddressOf intermediate)
+                status = problem.SolveProblem(initval, obj, Nothing, Nothing, Nothing, Nothing)
+            End Using
+            Select Case status
+                Case IpoptReturnCode.Diverging_Iterates,
+                          IpoptReturnCode.Error_In_Step_Computation
+                    Throw New Exception("PT Flash: IPOPT failed to converge.")
+                Case IpoptReturnCode.Maximum_Iterations_Exceeded
+                    Throw New Exception("PT Flash: Maximum iterations exceeded.")
             End Select
 
             IObj?.SetCurrent
@@ -511,7 +478,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 ' check if there is a liquid phase
 
-                If L > 0 Then ' we have a liquid phase
+                If L >= 0 Then ' we have a liquid phase
 
                     IObj?.Paragraphs.Add("We have a liquid phase. Checking its stability according to user specifications...")
 
@@ -605,77 +572,32 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                         status = IpoptReturnCode.Invalid_Problem_Definition
 
-                        Select Case Me.Solver
-                            Case OptimizationMethod.Limited_Memory_BGFS
-                                Dim variables(2 * n + 1) As OptBoundVariable
-                                For i = 0 To 2 * n + 1
-                                    variables(i) = New OptBoundVariable("x" & CStr(i + 1), initval2(i), False, lconstr2(i), uconstr2(i))
-                                Next
-                                Dim solver As New L_BFGS_B
-                                solver.Tolerance = etol
-                                solver.MaxFunEvaluations = maxit_e
-                                initval2 = solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
-                                If solver.FunEvaluations = solver.MaxFunEvaluations Then
-                                    'get solution with lowest gibbs energy
-                                    initval = Solutions(GibbsEnergyValues.IndexOf(GibbsEnergyValues.Min))
-                                End If
-                                solver = Nothing
-                            Case OptimizationMethod.Truncated_Newton
-                                Dim variables(2 * n + 1) As OptBoundVariable
-                                For i = 0 To 2 * n + 1
-                                    variables(i) = New OptBoundVariable("x" & CStr(i + 1), initval2(i), False, lconstr2(i), uconstr2(i))
-                                Next
-                                Dim solver As New TruncatedNewton
-                                solver.Tolerance = etol
-                                solver.MaxFunEvaluations = maxit_e
-                                initval2 = solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
-                                If solver.FunEvaluations = solver.MaxFunEvaluations Then
-                                    'get solution with lowest gibbs energy
-                                    initval = Solutions(GibbsEnergyValues.IndexOf(GibbsEnergyValues.Min))
-                                End If
-                                solver = Nothing
-                            Case OptimizationMethod.Simplex
-                                Dim variables(2 * n + 1) As OptBoundVariable
-                                For i = 0 To 2 * n + 1
-                                    variables(i) = New OptBoundVariable("x" & CStr(i + 1), initval2(i), False, lconstr2(i), uconstr2(i))
-                                Next
-                                Dim solver As New Simplex
-                                solver.Tolerance = etol
-                                solver.MaxFunEvaluations = maxit_e
-                                initval2 = solver.ComputeMin(AddressOf FunctionValue, variables)
-                                If solver.FunEvaluations = solver.MaxFunEvaluations Then
-                                    'get solution with lowest gibbs energy
-                                    initval = Solutions(GibbsEnergyValues.IndexOf(GibbsEnergyValues.Min))
-                                End If
-                                solver = Nothing
-                            Case Else
-                                Using problem As New Ipopt(initval2.Length, lconstr2, uconstr2, n + 1, glow, gup, (n + 1) * 2, 0,
-                                        AddressOf eval_f, AddressOf eval_g,
-                                        AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
-                                    problem.AddOption("tol", etol)
-                                    problem.AddOption("max_iter", maxit_e * 10)
-                                    problem.AddOption("mu_strategy", "adaptive")
-                                    problem.AddOption("expect_infeasible_problem", "yes")
-                                    problem.AddOption("hessian_approximation", "limited-memory")
-                                    problem.SetIntermediateCallback(AddressOf intermediate)
-                                    'solve the problem 
-                                    status = problem.SolveProblem(initval2, obj, g, Nothing, Nothing, Nothing)
-                                End Using
-                                Select Case status
-                                    Case IpoptReturnCode.Infeasible_Problem_Detected,
-                                         IpoptReturnCode.Maximum_Iterations_Exceeded,
-                                         IpoptReturnCode.User_Requested_Stop
-                                        'get solution with lowest gibbs energy
-                                        initval = Solutions(GibbsEnergyValues.IndexOf(GibbsEnergyValues.Min))
-                                    Case IpoptReturnCode.Diverging_Iterates,
-                                        IpoptReturnCode.Error_In_Step_Computation,
-                                        IpoptReturnCode.Internal_Error,
-                                        IpoptReturnCode.Invalid_Number_Detected,
-                                        IpoptReturnCode.Invalid_Option,
-                                        IpoptReturnCode.NonIpopt_Exception_Thrown,
-                                        IpoptReturnCode.Unrecoverable_Exception
-                                        Throw New Exception("PT Flash: IPOPT failed to converge.")
-                                End Select
+                        Using problem As New Ipopt(initval2.Length, lconstr2, uconstr2, n + 1, glow, gup, (n + 1) * 2, 0,
+                                AddressOf eval_f, AddressOf eval_g,
+                                AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
+                            problem.AddOption("tol", etol)
+                            problem.AddOption("max_iter", maxit_e * 10)
+                            problem.AddOption("mu_strategy", "adaptive")
+                            problem.AddOption("expect_infeasible_problem", "yes")
+                            problem.AddOption("hessian_approximation", "limited-memory")
+                            problem.SetIntermediateCallback(AddressOf intermediate)
+                            'solve the problem 
+                            status = problem.SolveProblem(initval2, obj, g, Nothing, Nothing, Nothing)
+                        End Using
+                        Select Case status
+                            Case IpoptReturnCode.Infeasible_Problem_Detected,
+                                 IpoptReturnCode.Maximum_Iterations_Exceeded,
+                                 IpoptReturnCode.User_Requested_Stop
+                                'get solution with lowest gibbs energy
+                                initval = Solutions(GibbsEnergyValues.IndexOf(GibbsEnergyValues.Min))
+                            Case IpoptReturnCode.Diverging_Iterates,
+                                IpoptReturnCode.Error_In_Step_Computation,
+                                IpoptReturnCode.Internal_Error,
+                                IpoptReturnCode.Invalid_Number_Detected,
+                                IpoptReturnCode.Invalid_Option,
+                                IpoptReturnCode.NonIpopt_Exception_Thrown,
+                                IpoptReturnCode.Unrecoverable_Exception
+                                Throw New Exception("PT Flash: IPOPT failed to converge.")
                         End Select
 
                         For i = 0 To initval2.Length - 1
