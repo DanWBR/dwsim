@@ -36,16 +36,6 @@ Module Example2
 
         Dim molefractions As Double() = New Double() {0.2, 0.2, 0.1, 0.1, 0.1, 0.3}
 
-        Dim MS = dtlc.CreateMaterialStream(compounds, molefractions)
-
-        MS.SetPropertyPackage(prpp)
-        MS.SetPressure(P * 101325)
-        MS.SetTemperature(T + 273.15)
-        MS.SetMolarFlow(1.0)
-
-        MS.SetFlashSpec("PT")
-        MS.Calculate()
-
         'do a three-phase flash calculation using the new generic function
 
         Dim result As Auxiliary.FlashAlgorithms.FlashCalculationResult = dtlc.CalcEquilibrium(CalculatorInterface.Calculator.FlashCalculationType.PressureTemperature,
