@@ -17,14 +17,7 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Math
-
-Imports DWSIM.MathOps.MathEx
-Imports DWSIM.MathOps.MathEx.Common
-
 Imports Cureos.Numerics
-Imports DotNumerics.Optimization
-Imports System.Threading.Tasks
-Imports DotNumerics
 Imports DWSIM.Interfaces.Enums
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
@@ -402,7 +395,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim IPOPT_Failure As Boolean = True
 
-            Using problem As New Ipopt(initval.Length, lconstr, uconstr, 0, Nothing, Nothing,
+            Dim problem As Ipopt = Nothing
+            Dim ex0 As New Exception
+
+            Try
+                problem = New Ipopt(initval.Length, lconstr, uconstr, 0, Nothing, Nothing,
                    0, 0, AddressOf eval_f, AddressOf eval_g,
                    AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
                 problem.AddOption("tol", etol)
@@ -413,9 +410,14 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 problem.SetIntermediateCallback(AddressOf intermediate)
                 status = problem.SolveProblem(initval, obj, Nothing, Nothing, Nothing, Nothing)
                 IPOPT_Failure = False
-            End Using
+            Catch ex As Exception
+                ex0 = ex
+            Finally
+                problem?.Dispose()
+                problem = Nothing
+            End Try
 
-            If IPOPT_Failure Then Throw New Exception("Failed to load IPOPT library.")
+            If IPOPT_Failure Then Throw New Exception("Failed to load IPOPT library: " + ex0.Message)
 
             Select Case status
                 Case IpoptReturnCode.Diverging_Iterates,
@@ -580,7 +582,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                         IPOPT_Failure = True
 
-                        Using problem As New Ipopt(initval2.Length, lconstr2, uconstr2, n + 1, glow, gup, (n + 1) * 2, 0,
+                        ex0 = New Exception
+
+                        Try
+                            problem = New Ipopt(initval2.Length, lconstr2, uconstr2, n + 1, glow, gup, (n + 1) * 2, 0,
                                 AddressOf eval_f, AddressOf eval_g,
                                 AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
                             problem.AddOption("tol", etol)
@@ -592,9 +597,14 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                             'solve the problem 
                             status = problem.SolveProblem(initval2, obj, g, Nothing, Nothing, Nothing)
                             IPOPT_Failure = False
-                        End Using
+                        Catch ex As Exception
+                            ex0 = ex
+                        Finally
+                            problem?.Dispose()
+                            problem = Nothing
+                        End Try
 
-                        If IPOPT_Failure Then Throw New Exception("Failed to load IPOPT library.")
+                        If IPOPT_Failure Then Throw New Exception("Failed to load IPOPT library: " + ex0.Message)
 
                         Select Case status
                             Case IpoptReturnCode.Infeasible_Problem_Detected,

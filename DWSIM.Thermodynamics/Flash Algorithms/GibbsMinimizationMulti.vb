@@ -17,11 +17,7 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Math
-
-Imports DWSIM.MathOps.MathEx
-
 Imports Cureos.Numerics
-Imports DotNumerics.Optimization
 Imports DWSIM.Interfaces.Enums
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
@@ -448,8 +444,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim IPOPT_Failure As Boolean = True
 
-            Using problem As New Ipopt(initval.Length, lconstr, uconstr, 0, Nothing, Nothing, 0, 0,
-                            AddressOf eval_f, AddressOf eval_g,
+            Dim problem As Ipopt = Nothing
+            Dim ex0 As New Exception
+
+            Try
+                problem = New Ipopt(initval.Length, lconstr, uconstr, 0, Nothing, Nothing, 0, 0,
+                           AddressOf eval_f, AddressOf eval_g,
                            AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
                 problem.AddOption("tol", etol)
                 problem.AddOption("max_iter", maxit_e * 10)
@@ -460,9 +460,14 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 'solve the problem 
                 status = problem.SolveProblem(initval, obj, Nothing, Nothing, Nothing, Nothing)
                 IPOPT_Failure = False
-            End Using
+            Catch ex As Exception
+                ex0 = ex
+            Finally
+                problem?.Dispose()
+                problem = Nothing
+            End Try
 
-            If IPOPT_Failure Then Throw New Exception("Failed to load IPOPT library.")
+            If IPOPT_Failure Then Throw New Exception("Failed to load IPOPT library: " + ex0.Message)
 
             Select Case status
                 Case IpoptReturnCode.Infeasible_Problem_Detected,
