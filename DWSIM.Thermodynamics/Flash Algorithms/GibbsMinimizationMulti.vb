@@ -446,6 +446,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             End If
 
+            Dim IPOPT_Failure As Boolean = True
+
             Using problem As New Ipopt(initval.Length, lconstr, uconstr, 0, Nothing, Nothing, 0, 0,
                             AddressOf eval_f, AddressOf eval_g,
                            AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
@@ -457,22 +459,26 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 problem.SetIntermediateCallback(AddressOf intermediate)
                 'solve the problem 
                 status = problem.SolveProblem(initval, obj, Nothing, Nothing, Nothing, Nothing)
-                Select Case status
-                    Case IpoptReturnCode.Infeasible_Problem_Detected,
+                IPOPT_Failure = False
+            End Using
+
+            If IPOPT_Failure Then Throw New Exception("Failed to load IPOPT library.")
+
+            Select Case status
+                Case IpoptReturnCode.Infeasible_Problem_Detected,
                          IpoptReturnCode.Maximum_Iterations_Exceeded,
                          IpoptReturnCode.User_Requested_Stop
-                        'get solution with lowest gibbs energy
-                        initval = Solutions(GibbsEnergyValues.IndexOf(GibbsEnergyValues.Min))
-                    Case IpoptReturnCode.Diverging_Iterates,
+                    'get solution with lowest gibbs energy
+                    initval = Solutions(GibbsEnergyValues.IndexOf(GibbsEnergyValues.Min))
+                Case IpoptReturnCode.Diverging_Iterates,
                           IpoptReturnCode.Error_In_Step_Computation,
                           IpoptReturnCode.Internal_Error,
                           IpoptReturnCode.Invalid_Number_Detected,
                           IpoptReturnCode.Invalid_Option,
                           IpoptReturnCode.NonIpopt_Exception_Thrown,
                           IpoptReturnCode.Unrecoverable_Exception
-                        Throw New Exception("PT Flash: IPOPT failed to converge.")
-                End Select
-            End Using
+                    Throw New Exception("PT Flash: IPOPT failed to converge.")
+            End Select
 
             For i = 0 To initval.Length - 1
                 If Double.IsNaN(initval(i)) Then initval(i) = 0.0#

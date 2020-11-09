@@ -400,6 +400,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             objval = 0.0#
             objval0 = 0.0#
 
+            Dim IPOPT_Failure As Boolean = True
+
             Using problem As New Ipopt(initval.Length, lconstr, uconstr, 0, Nothing, Nothing,
                    0, 0, AddressOf eval_f, AddressOf eval_g,
                    AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
@@ -410,7 +412,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 problem.AddOption("hessian_approximation", "limited-memory")
                 problem.SetIntermediateCallback(AddressOf intermediate)
                 status = problem.SolveProblem(initval, obj, Nothing, Nothing, Nothing, Nothing)
+                IPOPT_Failure = False
             End Using
+
+            If IPOPT_Failure Then Throw New Exception("Failed to load IPOPT library.")
+
             Select Case status
                 Case IpoptReturnCode.Diverging_Iterates,
                           IpoptReturnCode.Error_In_Step_Computation
@@ -572,6 +578,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                         status = IpoptReturnCode.Invalid_Problem_Definition
 
+                        IPOPT_Failure = True
+
                         Using problem As New Ipopt(initval2.Length, lconstr2, uconstr2, n + 1, glow, gup, (n + 1) * 2, 0,
                                 AddressOf eval_f, AddressOf eval_g,
                                 AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
@@ -583,7 +591,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                             problem.SetIntermediateCallback(AddressOf intermediate)
                             'solve the problem 
                             status = problem.SolveProblem(initval2, obj, g, Nothing, Nothing, Nothing)
+                            IPOPT_Failure = False
                         End Using
+
+                        If IPOPT_Failure Then Throw New Exception("Failed to load IPOPT library.")
+
                         Select Case status
                             Case IpoptReturnCode.Infeasible_Problem_Detected,
                                  IpoptReturnCode.Maximum_Iterations_Exceeded,
