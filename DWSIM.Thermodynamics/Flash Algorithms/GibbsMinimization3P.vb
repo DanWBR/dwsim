@@ -640,6 +640,62 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                             End Select
                         End If
 
+                        'check if vapor and liquid1 phases are inverted
+
+                        If TypeOf PP Is PengRobinsonPropertyPackage Or TypeOf PP Is PengRobinson1978PropertyPackage Then
+
+                            Dim fugvv, fugvl As Double()
+
+                            fugvv = PP.DW_CalcFugCoeff(Vy, T, P, State.Vapor)
+                            fugvl = PP.DW_CalcFugCoeff(Vy, T, P, State.Liquid)
+
+                            If fugvv.SubtractY(fugvl).AbsSqrSumY < 0.000001 Then
+
+                                Dim phase = IdentifyPhase(Vy, P, T, PP, "PR")
+
+                                If phase = "L" Then
+
+                                    Dim Vhold, Vyhold() As Double
+                                    Vhold = V
+                                    V = L1
+                                    L1 = Vhold
+
+                                    Vyhold = Vy.Clone
+                                    Vy = Vx1.Clone
+                                    Vx1 = Vyhold
+
+                                End If
+
+                            End If
+
+                        ElseIf TypeOf PP Is SRKPropertyPackage Then
+
+                            Dim fugvv, fugvl As Double()
+
+                            fugvv = PP.DW_CalcFugCoeff(Vy, T, P, State.Vapor)
+                            fugvl = PP.DW_CalcFugCoeff(Vy, T, P, State.Liquid)
+
+                            If fugvv.SubtractY(fugvl).AbsSqrSumY < 0.000001 Then
+
+                                Dim phase = IdentifyPhase(Vy, P, T, PP, "SRK")
+
+                                If phase = "L" Then
+
+                                    Dim Vhold, Vyhold() As Double
+                                    Vhold = V
+                                    V = L1
+                                    L1 = Vhold
+
+                                    Vyhold = Vy.Clone
+                                    Vy = Vx1.Clone
+                                    Vx1 = Vyhold
+
+                                End If
+
+                            End If
+
+                        End If
+
                         If L2 < 0.01 Then
                             L2 = 0.0
                         Else
