@@ -402,6 +402,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 problem = New Ipopt(initval.Length, lconstr, uconstr, 0, Nothing, Nothing,
                    0, 0, AddressOf eval_f, AddressOf eval_g,
                    AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
+                problem.AddOption("print_level", 1)
                 problem.AddOption("tol", etol)
                 problem.AddOption("max_iter", maxit_e)
                 problem.AddOption("mu_strategy", "adaptive")
@@ -588,6 +589,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                             problem = New Ipopt(initval2.Length, lconstr2, uconstr2, n + 1, glow, gup, (n + 1) * 2, 0,
                                 AddressOf eval_f, AddressOf eval_g,
                                 AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
+                            problem.AddOption("print_level", 1)
                             problem.AddOption("tol", etol)
                             problem.AddOption("max_iter", maxit_e * 10)
                             problem.AddOption("mu_strategy", "adaptive")
@@ -659,7 +661,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                             fugvv = PP.DW_CalcFugCoeff(Vy, T, P, State.Vapor)
                             fugvl = PP.DW_CalcFugCoeff(Vy, T, P, State.Liquid)
 
-                            If fugvv.SubtractY(fugvl).AbsSqrSumY < 0.000001 Then
+                            If fugvv.SubtractY(fugvl).AbsSqrSumY < 0.0001 Then
 
                                 Dim phase = IdentifyPhase(Vy, P, T, PP, "PR")
 
@@ -685,7 +687,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                             fugvv = PP.DW_CalcFugCoeff(Vy, T, P, State.Vapor)
                             fugvl = PP.DW_CalcFugCoeff(Vy, T, P, State.Liquid)
 
-                            If fugvv.SubtractY(fugvl).AbsSqrSumY < 0.000001 Then
+                            If fugvv.SubtractY(fugvl).AbsSqrSumY < 0.0001 Then
 
                                 Dim phase = IdentifyPhase(Vy, P, T, PP, "SRK")
 

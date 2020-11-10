@@ -60,6 +60,13 @@ Namespace CalculatorInterface
 
             GlobalSettings.Settings.InspectorEnabled = False
 
+            'preload IPOPT libraries
+            If GlobalSettings.Settings.RunningPlatform = Settings.Platform.Windows Then
+
+                IPOPTLoader.Load()
+
+            End If
+
         End Sub
 
         ''' <summary>

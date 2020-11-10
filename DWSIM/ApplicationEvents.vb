@@ -118,13 +118,16 @@ Namespace My
 
             DWSIM.App.InitializeSettings()
 
-            If My.Settings.PythonPath <> "" Then
-                SetDllDirectory(My.Settings.PythonPath)
-            Else
-                My.Settings.PythonPath = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "python\python-3.6.8.amd64\")
-                If Directory.Exists(My.Settings.PythonPath) Then
-                    GlobalSettings.Settings.PythonPath = My.Settings.PythonPath
+            Dim rpath = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "ppacks", "reaktoro_python")
+            If Not Directory.Exists(rpath) Then
+                If My.Settings.PythonPath <> "" Then
                     SetDllDirectory(My.Settings.PythonPath)
+                Else
+                    My.Settings.PythonPath = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "python\python-3.6.8.amd64\")
+                    If Directory.Exists(My.Settings.PythonPath) Then
+                        GlobalSettings.Settings.PythonPath = My.Settings.PythonPath
+                        SetDllDirectory(My.Settings.PythonPath)
+                    End If
                 End If
             End If
 

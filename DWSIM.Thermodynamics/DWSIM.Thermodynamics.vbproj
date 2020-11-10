@@ -329,6 +329,7 @@
     <Compile Include="Flash Algorithms\UserDefined.vb" />
     <Compile Include="Helper Classes\ConsoleRedirection.vb" />
     <Compile Include="Helper Classes\PhaseEnvelopeSettings.vb" />
+    <Compile Include="Interfaces\IPOPTLoader.vb" />
     <Compile Include="Interfaces\ShortcutUtilities.vb" />
     <Compile Include="Interfaces\Excel.vb" />
     <Compile Include="Interfaces\Thermodynamics.vb" />

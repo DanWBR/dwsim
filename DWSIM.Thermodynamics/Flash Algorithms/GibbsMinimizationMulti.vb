@@ -451,6 +451,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 problem = New Ipopt(initval.Length, lconstr, uconstr, 0, Nothing, Nothing, 0, 0,
                            AddressOf eval_f, AddressOf eval_g,
                            AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
+                problem.AddOption("print_level", 1)
                 problem.AddOption("tol", etol)
                 problem.AddOption("max_iter", maxit_e * 10)
                 problem.AddOption("mu_strategy", "adaptive")
