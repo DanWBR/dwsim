@@ -211,7 +211,7 @@ Namespace SystemsOfUnits
                 Case Enums.UnitOfMeasure.viscosity
                     units.AddRange(New String() {"kg/[m.s]", "Pa.s", "cP", "lbm/[ft.h]"})
                 Case Enums.UnitOfMeasure.deltaP
-                    units.AddRange(New String() {"Pa", "atm", "lbf/ft2", "kgf/cm2", "kPa", "bar", "ftH2O", "inH2O", "inHg", "mbar", "mH2O", "mmH2O", "mmHg", "MPa", "psi"})
+                    units.AddRange(New String() {"Pa", "atm", "lbf/ft2", "kgf/cm2", "kgf/cm2_g", "kPa", "bar", "barg", "ftH2O", "inH2O", "inHg", "mbar", "mH2O", "mmH2O", "mmHg", "MPa", "psi", "psig"})
                 Case Enums.UnitOfMeasure.deltaT
                     units.AddRange(New String() {"C.", "K.", "F.", "R."})
                 Case Enums.UnitOfMeasure.distance
@@ -278,7 +278,7 @@ Namespace SystemsOfUnits
             Select Case unit
                 Case "K", "R", "C", "F"
                     Return Enums.UnitOfMeasure.temperature
-                Case "Pa", "atm", "kgf/cm2", "kgf/cm2g", "lbf/ft2", "kPa", "kPag", "bar", "barg", "ftH2O", "inH2O", "inHg", "mbar", "mH2O", "mmH2O", "mmHg", "MPa", "psi", "psig"
+                Case "Pa", "atm", "kgf/cm2", "kgf/cm2g", "lbf/ft2", "kPa", "kPag", "bar", "barg", "ftH2O", "inH2O", "inHg", "mbar", "mH2O", "mmH2O", "mmHg", "MPa", "psi", "psig", "psia"
                     Return Enums.UnitOfMeasure.pressure
                 Case "g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s", "lb/h", "lb/d", "Mg/s", "Mg/h", "Mg/d"
                     Return Enums.UnitOfMeasure.massflow
@@ -1248,7 +1248,7 @@ Namespace SystemsOfUnits
                     Return value / 0.00750064
                 Case "MPa"
                     Return value / 0.000001
-                Case "psi"
+                Case "psi", "psia"
                     Return value / 0.000145038
                 Case "bar"
                     Return value * 100000
@@ -1731,7 +1731,7 @@ Namespace SystemsOfUnits
                     Return value * 0.00750064
                 Case "MPa"
                     Return value * 0.000001
-                Case "psi"
+                Case "psi", "psia"
                     Return value * 0.000145038
                 Case "bar"
                     Return value / 100000
