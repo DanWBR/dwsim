@@ -1182,11 +1182,44 @@ out:        Dim ms1, ms2 As MaterialStream
                 '====================================================
                 '==== Transfer information to energy stream =========
                 '====================================================
-                'Energy stream (KW = KJ/s)
 
-                'Products Enthalpy (kJ/kg * kg/s = kW)
-                Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * W
-                DeltaQ = DHr + Hp - Hr0 'Energy stream to reactor
+                'overall reaction heat
+
+                Dim DHrT As Double = 0
+                i = 0
+                For Each sb As Compound In ims.Phases(0).Compounds.Values
+                    DHrT += sb.ConstantProperties.IG_Enthalpy_of_Formation_25C * sb.ConstantProperties.Molar_Weight * (Nout(i) - Nin(i)) / 1000
+                    i += 1
+                Next
+
+                If Me.ReactorOperationMode = OperationMode.Isothermic Then
+
+                    'Products Enthalpy (kJ/kg * kg/s = kW)
+                    Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
+
+                    Me.DeltaQ = DHrT + Hp - Hr0
+
+                    Me.DeltaT = 0.0#
+
+                    OutletTemperature = T0
+
+                ElseIf Me.ReactorOperationMode = OperationMode.OutletTemperature Then
+
+                    'Products Enthalpy (kJ/kg * kg/s = kW)
+                    Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
+
+                    'Heat (kW)
+                    Me.DeltaQ = DHrT + Hp - Hr0
+
+                    Me.DeltaT = OutletTemperature - T0
+
+                Else
+
+                    OutletTemperature = T
+
+                    Me.DeltaT = OutletTemperature - T0
+
+                End If
 
                 Dim estr As Streams.EnergyStream = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
                 With estr
