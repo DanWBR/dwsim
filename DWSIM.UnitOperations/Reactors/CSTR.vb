@@ -67,6 +67,10 @@ Namespace Reactors
 
         Public Property ResidenceTimeV As Double = 0.0# 'Vapour residence time
 
+        Public Property Tolerance As Double = 0.00001
+
+        Public Property MaxIterations As Integer = 1000
+
         Public Property IsothermalTemperature() As Double
             Get
                 Return m_isotemp
@@ -1050,9 +1054,9 @@ Namespace Reactors
 
                 If dynamics Then Exit Do
 
-                If NIter > 100 Then Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
+                If NIter > MaxIterations Then Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
 
-            Loop Until IErr < 0.000001 Or MaxChange < 0.0001 'repeat until composition is constant
+            Loop Until IErr < Tolerance Or MaxChange < Tolerance * 10 'repeat until composition is constant
 
             '====================================================
             '==== Transfer information to output stream =========

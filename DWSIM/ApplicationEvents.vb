@@ -16,7 +16,7 @@ Namespace My
     ' NetworkAvailabilityChanged: Raised when the network connection is connected or disconnected.
     Partial Friend Class MyApplication
 
-        <DllImport("kernel32.dll", SetLastError:=True)> Private Shared Function SetDllDirectory(lpPathName As String) As Boolean
+        <DllImport("kernel32.dll", SetLastError:=True)> Private Shared Function AddDllDirectory(lpPathName As String) As Boolean
 
         End Function
 
@@ -118,16 +118,13 @@ Namespace My
 
             DWSIM.App.InitializeSettings()
 
-            Dim rpath = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "ppacks", "reaktoro_python")
-            If Not Directory.Exists(rpath) Then
-                If My.Settings.PythonPath <> "" Then
-                    SetDllDirectory(My.Settings.PythonPath)
-                Else
-                    My.Settings.PythonPath = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "python\python-3.6.8.amd64\")
-                    If Directory.Exists(My.Settings.PythonPath) Then
-                        GlobalSettings.Settings.PythonPath = My.Settings.PythonPath
-                        SetDllDirectory(My.Settings.PythonPath)
-                    End If
+            If My.Settings.PythonPath <> "" Then
+                AddDllDirectory(My.Settings.PythonPath)
+            Else
+                My.Settings.PythonPath = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "python\python-3.6.8.amd64\")
+                If Directory.Exists(My.Settings.PythonPath) Then
+                    GlobalSettings.Settings.PythonPath = My.Settings.PythonPath
+                    AddDllDirectory(My.Settings.PythonPath)
                 End If
             End If
 
@@ -159,12 +156,12 @@ Namespace My
             End If
         End Sub
 
-        <System.Runtime.InteropServices.DllImport("kernel32.dll")> _
+        <System.Runtime.InteropServices.DllImport("kernel32.dll")>
         Private Shared Function AttachConsole(dwProcessId As Integer) As Boolean
         End Function
         Private Const ATTACH_PARENT_PROCESS As Integer = -1
 
-        <System.Runtime.InteropServices.DllImport("kernel32.dll", SetLastError:=True)> _
+        <System.Runtime.InteropServices.DllImport("kernel32.dll", SetLastError:=True)>
         Friend Shared Function FreeConsole() As Integer
         End Function
 

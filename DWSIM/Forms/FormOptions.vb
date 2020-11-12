@@ -113,9 +113,6 @@ Public Class FormOptions
         ComboBoxPropPackCopyMode.SelectedIndex = My.Settings.ClipboardCopyMode_PropertyPackages
         CheckBoxUndoRedoRecalc.Checked = My.Settings.UndoRedo_RecalculateFlowsheet
 
-        tbOctavePath.Text = My.Settings.OctavePath
-        tbOctaveTimeout.Text = My.Settings.OctaveProcessTimeout
-
         tbPythonPath.Text = My.Settings.PythonPath
         tbPythonTimeout.Text = My.Settings.PythonProcessTimeout
 
@@ -627,23 +624,6 @@ Public Class FormOptions
         My.Settings.IgnoreCompoundPropertiesOnLoad = Me.chkIgnoreCompConstData.Checked
     End Sub
 
-    Private Sub btnSelectOctavePath_Click(sender As Object, e As EventArgs) Handles btnSelectOctavePath.Click
-        FolderBrowserDialog1.SelectedPath = tbOctavePath.Text
-        If FolderBrowserDialog1.ShowDialog() = DialogResult.OK Then
-            tbOctavePath.Text = FolderBrowserDialog1.SelectedPath
-            My.Settings.OctavePath = tbOctavePath.Text
-            GlobalSettings.Settings.OctavePath = tbOctavePath.Text
-        End If
-    End Sub
-
-    Private Sub tbOctaveTimeout_TextChanged(sender As Object, e As EventArgs) Handles tbOctaveTimeout.TextChanged
-        Try
-            GlobalSettings.Settings.OctaveTimeoutInMinutes = tbOctaveTimeout.Text
-            My.Settings.OctaveProcessTimeout = tbOctaveTimeout.Text
-        Catch ex As Exception
-        End Try
-    End Sub
-
     Private Sub btnSelectPythonPath_Click(sender As Object, e As EventArgs) Handles btnSelectPythonPath.Click
         FolderBrowserDialog1.SelectedPath = tbPythonPath.Text
         If FolderBrowserDialog1.ShowDialog() = DialogResult.OK Then
@@ -694,5 +674,10 @@ Public Class FormOptions
     Private Sub chkEditorDoubleClick_CheckedChanged(sender As Object, e As EventArgs) Handles chkEditorDoubleClick.CheckedChanged
         My.Settings.DoubleClickToEdit = chkEditorDoubleClick.Checked
         GlobalSettings.Settings.EditOnSelect = Not chkEditorDoubleClick.Checked
+    End Sub
+
+    Private Sub tbPythonPath_TextChanged(sender As Object, e As EventArgs) Handles tbPythonPath.TextChanged
+        My.Settings.PythonPath = tbPythonPath.Text
+        GlobalSettings.Settings.PythonPath = tbPythonPath.Text
     End Sub
 End Class

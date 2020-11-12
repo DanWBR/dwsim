@@ -24,9 +24,9 @@ Partial Class FormOptions
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormOptions))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.FaTabStrip1 = New System.Windows.Forms.TabControl()
         Me.FaTabStripItem1 = New System.Windows.Forms.TabPage()
         Me.GroupBox18 = New System.Windows.Forms.GroupBox()
@@ -117,12 +117,6 @@ Partial Class FormOptions
         Me.btnSelectPythonPath = New System.Windows.Forms.Button()
         Me.tbPythonPath = New System.Windows.Forms.TextBox()
         Me.Label18 = New System.Windows.Forms.Label()
-        Me.GroupBox16 = New System.Windows.Forms.GroupBox()
-        Me.tbOctaveTimeout = New System.Windows.Forms.TextBox()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.btnSelectOctavePath = New System.Windows.Forms.Button()
-        Me.tbOctavePath = New System.Windows.Forms.TextBox()
-        Me.Label19 = New System.Windows.Forms.Label()
         Me.GroupBox15 = New System.Windows.Forms.GroupBox()
         Me.chkIgnoreCompConstData = New System.Windows.Forms.CheckBox()
         Me.GroupBox14 = New System.Windows.Forms.GroupBox()
@@ -162,7 +156,6 @@ Partial Class FormOptions
         CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStripItem7.SuspendLayout()
         Me.GroupBox17.SuspendLayout()
-        Me.GroupBox16.SuspendLayout()
         Me.GroupBox15.SuspendLayout()
         Me.GroupBox14.SuspendLayout()
         Me.GroupBox9.SuspendLayout()
@@ -614,10 +607,10 @@ Partial Class FormOptions
         'Column13
         '
         Me.Column13.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        DataGridViewCellStyle1.NullValue = CType(resources.GetObject("DataGridViewCellStyle1.NullValue"), Object)
-        Me.Column13.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        DataGridViewCellStyle4.NullValue = CType(resources.GetObject("DataGridViewCellStyle4.NullValue"), Object)
+        Me.Column13.DefaultCellStyle = DataGridViewCellStyle4
         Me.Column13.FillWeight = 10.0!
         resources.ApplyResources(Me.Column13, "Column13")
         Me.Column13.Name = "Column13"
@@ -627,10 +620,10 @@ Partial Class FormOptions
         'BtnEdit
         '
         Me.BtnEdit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        DataGridViewCellStyle2.NullValue = CType(resources.GetObject("DataGridViewCellStyle2.NullValue"), Object)
-        Me.BtnEdit.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        DataGridViewCellStyle5.NullValue = CType(resources.GetObject("DataGridViewCellStyle5.NullValue"), Object)
+        Me.BtnEdit.DefaultCellStyle = DataGridViewCellStyle5
         Me.BtnEdit.FillWeight = 10.0!
         resources.ApplyResources(Me.BtnEdit, "BtnEdit")
         Me.BtnEdit.Name = "BtnEdit"
@@ -710,10 +703,10 @@ Partial Class FormOptions
         'DataGridViewImageColumn1
         '
         Me.DataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        DataGridViewCellStyle3.NullValue = CType(resources.GetObject("DataGridViewCellStyle3.NullValue"), Object)
-        Me.DataGridViewImageColumn1.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        DataGridViewCellStyle6.NullValue = CType(resources.GetObject("DataGridViewCellStyle6.NullValue"), Object)
+        Me.DataGridViewImageColumn1.DefaultCellStyle = DataGridViewCellStyle6
         Me.DataGridViewImageColumn1.FillWeight = 10.0!
         resources.ApplyResources(Me.DataGridViewImageColumn1, "DataGridViewImageColumn1")
         Me.DataGridViewImageColumn1.Name = "DataGridViewImageColumn1"
@@ -797,7 +790,6 @@ Partial Class FormOptions
         '
         Me.FaTabStripItem7.BackColor = System.Drawing.SystemColors.Window
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox17)
-        Me.FaTabStripItem7.Controls.Add(Me.GroupBox16)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox15)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox14)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox9)
@@ -836,50 +828,11 @@ Partial Class FormOptions
         '
         resources.ApplyResources(Me.tbPythonPath, "tbPythonPath")
         Me.tbPythonPath.Name = "tbPythonPath"
-        Me.tbPythonPath.ReadOnly = True
         '
         'Label18
         '
         resources.ApplyResources(Me.Label18, "Label18")
         Me.Label18.Name = "Label18"
-        '
-        'GroupBox16
-        '
-        resources.ApplyResources(Me.GroupBox16, "GroupBox16")
-        Me.GroupBox16.Controls.Add(Me.tbOctaveTimeout)
-        Me.GroupBox16.Controls.Add(Me.Label20)
-        Me.GroupBox16.Controls.Add(Me.btnSelectOctavePath)
-        Me.GroupBox16.Controls.Add(Me.tbOctavePath)
-        Me.GroupBox16.Controls.Add(Me.Label19)
-        Me.GroupBox16.Name = "GroupBox16"
-        Me.GroupBox16.TabStop = False
-        '
-        'tbOctaveTimeout
-        '
-        resources.ApplyResources(Me.tbOctaveTimeout, "tbOctaveTimeout")
-        Me.tbOctaveTimeout.Name = "tbOctaveTimeout"
-        '
-        'Label20
-        '
-        resources.ApplyResources(Me.Label20, "Label20")
-        Me.Label20.Name = "Label20"
-        '
-        'btnSelectOctavePath
-        '
-        resources.ApplyResources(Me.btnSelectOctavePath, "btnSelectOctavePath")
-        Me.btnSelectOctavePath.Name = "btnSelectOctavePath"
-        Me.btnSelectOctavePath.UseVisualStyleBackColor = True
-        '
-        'tbOctavePath
-        '
-        resources.ApplyResources(Me.tbOctavePath, "tbOctavePath")
-        Me.tbOctavePath.Name = "tbOctavePath"
-        Me.tbOctavePath.ReadOnly = True
-        '
-        'Label19
-        '
-        resources.ApplyResources(Me.Label19, "Label19")
-        Me.Label19.Name = "Label19"
         '
         'GroupBox15
         '
@@ -1029,8 +982,6 @@ Partial Class FormOptions
         Me.FaTabStripItem7.ResumeLayout(False)
         Me.GroupBox17.ResumeLayout(False)
         Me.GroupBox17.PerformLayout()
-        Me.GroupBox16.ResumeLayout(False)
-        Me.GroupBox16.PerformLayout()
         Me.GroupBox15.ResumeLayout(False)
         Me.GroupBox14.ResumeLayout(False)
         Me.GroupBox9.ResumeLayout(False)
@@ -1129,12 +1080,6 @@ Partial Class FormOptions
     Public WithEvents chkHideSolidPhaseCO As System.Windows.Forms.CheckBox
     Public WithEvents GroupBox15 As System.Windows.Forms.GroupBox
     Public WithEvents chkIgnoreCompConstData As System.Windows.Forms.CheckBox
-    Public WithEvents GroupBox16 As System.Windows.Forms.GroupBox
-    Public WithEvents btnSelectOctavePath As System.Windows.Forms.Button
-    Public WithEvents tbOctavePath As System.Windows.Forms.TextBox
-    Public WithEvents Label19 As System.Windows.Forms.Label
-    Friend WithEvents tbOctaveTimeout As System.Windows.Forms.TextBox
-    Friend WithEvents Label20 As System.Windows.Forms.Label
     Public WithEvents GroupBox17 As System.Windows.Forms.GroupBox
     Friend WithEvents tbPythonTimeout As System.Windows.Forms.TextBox
     Friend WithEvents Label17 As System.Windows.Forms.Label
