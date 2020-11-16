@@ -1,6 +1,3 @@
-Version 6.3 Update 2/3
+Version 6.3 Update 4
 
-- [CHG] Enhanced Automation functionality
-- [CHG] Rigorous Column solver reliability and speed enhancements
-- [FIX] Fixed issues with phase equilibria calculation in some specific cases
-- [FIX] Other fixes and enhancements
+- [FIX] Bug fixes and minor enhancements

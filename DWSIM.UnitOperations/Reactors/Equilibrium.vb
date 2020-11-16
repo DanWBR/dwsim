@@ -79,9 +79,9 @@ Namespace Reactors
 
         Public Property UseIPOPTSolver As Boolean = False
 
+        Private LogErrorFunction As Boolean = False
 
         Private NoPenVal As Boolean = False
-
 
         Private MinVal, MaxVal As Double
 
@@ -151,10 +151,21 @@ Namespace Reactors
 
             Dim fugv(tms.Phases(0).Compounds.Count - 1), fugl(tms.Phases(0).Compounds.Count - 1), prod(x.Length - 1) As Double
 
-            _IObj?.SetCurrent
-            fugv = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Vapor)
-            _IObj?.SetCurrent
-            fugl = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Liquid)
+            If GlobalSettings.Settings.EnableParallelProcessing Then
+                Dim t1 = Task.Factory.StartNew(Sub()
+                                                   fugv = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Vapor)
+                                               End Sub)
+                Dim t2 = Task.Factory.StartNew(Sub()
+                                                   fugl = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Liquid)
+                                               End Sub)
+                Task.WaitAll(t1, t2)
+            Else
+                _IObj?.SetCurrent
+                fugv = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Vapor)
+                _IObj?.SetCurrent
+                fugl = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Liquid)
+            End If
+
 
             i = 0
             For Each s As Compound In tms.Phases(0).Compounds.Values
@@ -214,7 +225,11 @@ Namespace Reactors
             For i = 0 To Me.Reactions.Count - 1
                 With FlowSheet.Reactions(Me.Reactions(i))
                     kr = .EvaluateK(T, pp)
-                    f(i) = prod(i) - kr + penval
+                    If LogErrorFunction Then
+                        f(i) = Math.Log(prod(i) / kr) + penval
+                    Else
+                        f(i) = prod(i) - kr + penval
+                    End If
                 End With
             Next
 
@@ -681,6 +696,16 @@ Namespace Reactors
             solver3.MaxFunEvaluations = InternalLoopMaximumIterations
             solver3.Tolerance = InternalLoopTolerance
 
+            ' check equilibrium constants to define objective function form
+
+            Dim Keq As New List(Of Double)
+
+            For i = 0 To Me.Reactions.Count - 1
+                Keq.Add(Math.Abs(FlowSheet.Reactions(Me.Reactions(i)).EvaluateK(T, pp)))
+            Next
+
+            If Keq.Max > 1000000.0 Or Keq.Min < 0.000001 Then LogErrorFunction = True Else LogErrorFunction = False
+
             Do
 
                 Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
@@ -727,11 +752,18 @@ Namespace Reactors
                         ubounds.Add(100)
                     Next
 
+                    Dim VariableValues As New List(Of Double())
+                    Dim FunctionValues As New List(Of Double)
+                    Dim result As Double
+
                     If UseIPOPTSolver Then
 
                         newx = solver2.Solve(Function(x1)
                                                  FlowSheet.CheckStatus()
-                                                 Return FunctionValue2N(x1).AbsSqrSumY
+                                                 VariableValues.Add(x1.Clone)
+                                                 result = FunctionValue2N(x1).AbsSqrSumY
+                                                 FunctionValues.Add(result)
+                                                 Return result
                                              End Function, Nothing,
                                                        variables.ToArray, lbounds.ToArray, ubounds.ToArray)
 
@@ -741,12 +773,17 @@ Namespace Reactors
 
                         newx = solver3.ComputeMin(Function(x1)
                                                       FlowSheet.CheckStatus()
-                                                      Return FunctionValue2N(x1).AbsSqrSumY
+                                                      VariableValues.Add(x1.Clone)
+                                                      result = FunctionValue2N(x1).AbsSqrSumY
+                                                      FunctionValues.Add(result)
+                                                      Return result
                                                   End Function, variables2.ToArray)
 
                         FlowSheet.CheckStatus()
 
                     End If
+
+                    newx = VariableValues(FunctionValues.IndexOf(FunctionValues.Min))
 
                     errval = FunctionValue2N(newx).AbsSqrSumY
 
@@ -762,7 +799,7 @@ Namespace Reactors
 
                     IObj3?.Close()
 
-                Loop Until errval < InternalLoopTolerance Or sumerr < InternalLoopTolerance Or niter >= InternalLoopMaximumIterations
+                Loop Until errval < InternalLoopTolerance Or (sumerr < InternalLoopTolerance And niter > 20) Or niter >= InternalLoopMaximumIterations
 
                 If niter >= InternalLoopMaximumIterations Then Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
 

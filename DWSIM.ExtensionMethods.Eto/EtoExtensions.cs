@@ -231,7 +231,7 @@ namespace DWSIM.UI.Shared
                 drop.Items.Add(new ListItem() { Key = item, Text = item });
             }
 
-            drop.SelectedIndex = position;
+            if (drop.Items.Count > 0) drop.SelectedIndex = position;
 
             if (command != null) drop.SelectedIndexChanged += (sender, e) => command.Invoke((DropDown)sender, e);
             if (keypress != null) drop.SelectedIndexChanged += (sender, e) => keypress.Invoke();
@@ -843,7 +843,7 @@ namespace DWSIM.UI.Shared
         public static Label CreateAndAddTwoLabelsRow2(this DynamicLayout container, String text1, String text2)
         {
 
-            var txt = new Label { Text = text1, VerticalAlignment = VerticalAlignment.Center  };
+            var txt = new Label { Text = text1, VerticalAlignment = VerticalAlignment.Center };
             txt.Font = new Font(SystemFont.Bold, GetEditorFontSize());
             var txt2 = new Label { Text = text2, Width = (int)(sf * 350), VerticalAlignment = VerticalAlignment.Center };
             txt2.Font = new Font(SystemFont.Default, GetEditorFontSize());
@@ -1076,12 +1076,12 @@ namespace DWSIM.UI.Shared
 
         }
 
-        public static TableRow CreateAndAddTextBoxAndFourButtonsRow(this DynamicLayout container, String label, 
-            String buttonlabel, String imageResID, 
-            String buttonlabel2, String imageResID2, 
+        public static TableRow CreateAndAddTextBoxAndFourButtonsRow(this DynamicLayout container, String label,
+            String buttonlabel, String imageResID,
+            String buttonlabel2, String imageResID2,
             String buttonlabel3, String imageResID3,
             String buttonlabel4, String imageResID4,
-            Action<TextBox, EventArgs> command0, Action<Button, EventArgs> command, 
+            Action<TextBox, EventArgs> command0, Action<Button, EventArgs> command,
             Action<Button, EventArgs> command2, Action<Button, EventArgs> command3, Action<Button, EventArgs> command4)
         {
 

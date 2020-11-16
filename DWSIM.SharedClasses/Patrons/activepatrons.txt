@@ -28,6 +28,7 @@ F An
 Filippo Borroni
 Gokhan Candan 
 Guenther Holzer
+Guha Industries
 Henar González
 Henk Fikkert
 Hep Ingham
@@ -62,7 +63,8 @@ Petroconsulting Llc
 Rajesh S Kempegowda
 Richard Zweiler
 Roland Berger
-Ryszard 
+Ryszard
+Samuel Levinson
 Sowande Boksteen
 Steven Baltakatei Sandoval
 Sukin Oh 
