@@ -212,15 +212,15 @@ Public Class EditingForm_Column_Connections_New
         Dim stage As String = ""
 
         For Each si In rc.MaterialStreams.Values
-            If Integer.TryParse(si.AssociatedStage, New Integer) Then
-                stage = stageNames(CInt(si.AssociatedStage) + 1)
+            'If Integer.TryParse(si.AssociatedStage, New Integer) Then
+            '    stage = stageNames(CInt(si.AssociatedStage) + 1)
+            'Else
+            If stageNames.Contains(si.AssociatedStage) Then
+                stage = si.AssociatedStage
             Else
-                If stageNames.Contains(si.AssociatedStage) Then
-                    stage = si.AssociatedStage
-                Else
-                    stage = stageNames(stageIDs.IndexOf(si.AssociatedStage))
-                End If
+                stage = stageNames(stageIDs.IndexOf(si.AssociatedStage))
             End If
+            'End If
             If (si.StreamBehavior = StreamInformation.Behavior.Feed) Then
                 gridAssociations.Rows.Add(New Object() {si.ID, "Feed", rc.GetFlowsheet().SimulationObjects(si.StreamID).GraphicObject.Tag, stage})
             ElseIf (si.StreamBehavior = StreamInformation.Behavior.Sidedraw) Then
@@ -241,15 +241,15 @@ Public Class EditingForm_Column_Connections_New
 
         Next
         For Each si In rc.EnergyStreams.Values
-            If Integer.TryParse(si.AssociatedStage, New Integer) Then
-                stage = stageNames(CInt(si.AssociatedStage) + 1)
+            'If Integer.TryParse(si.AssociatedStage, New Integer) Then
+            '    stage = stageNames(CInt(si.AssociatedStage) + 1)
+            'Else
+            If stageNames.Contains(si.AssociatedStage) Then
+                stage = si.AssociatedStage
             Else
-                If stageNames.Contains(si.AssociatedStage) Then
-                    stage = si.AssociatedStage
-                Else
-                    stage = stageNames(stageIDs.IndexOf(si.AssociatedStage))
-                End If
+                stage = stageNames(stageIDs.IndexOf(si.AssociatedStage))
             End If
+            'End If
             If (si.StreamBehavior = StreamInformation.Behavior.Distillate) Then
                 gridAssociations.Rows.Add(New Object() {si.ID, "Condenser Duty", rc.GetFlowsheet().SimulationObjects(si.StreamID).GraphicObject.Tag, stage})
             ElseIf (si.StreamBehavior = StreamInformation.Behavior.BottomsLiquid) Then
