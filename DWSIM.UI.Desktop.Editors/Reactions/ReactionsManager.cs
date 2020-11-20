@@ -112,7 +112,7 @@ namespace DWSIM.UI.Desktop.Editors
                     CreateReactionsList();
                     alert.Close();
                 });
-                alert = s.GetDefaultEditorForm("Add Kinetic Reaction", 850, 700, myview);
+                alert = s.GetDefaultEditorForm("Add Kinetic Reaction", 850, 760, myview);
                 alert.Shown += (s1, e1) =>
                 {
                     myview.Invalidate();
@@ -137,7 +137,7 @@ namespace DWSIM.UI.Desktop.Editors
                     CreateReactionsList();
                     alert.Close();
                 });
-                alert = s.GetDefaultEditorForm("Add Heterogeneous Catalytic Reaction", 850, 650, myview);
+                alert = s.GetDefaultEditorForm("Add Heterogeneous Catalytic Reaction", 850, 690, myview);
                 alert.Shown += (s1, e1) =>
                 {
                     myview.Invalidate();
@@ -249,7 +249,7 @@ namespace DWSIM.UI.Desktop.Editors
                                     CreateReactionsList();
                                     alert3.Close();
                                 });
-                                alert3 = s.GetDefaultEditorForm("Edit Kinetic Reaction", 850, 700, myview3);
+                                alert3 = s.GetDefaultEditorForm("Edit Kinetic Reaction", 850, 760, myview3);
                                 alert3.Shown += (s1, e1) =>
                                 {
                                     myview3.Invalidate();
@@ -269,7 +269,7 @@ namespace DWSIM.UI.Desktop.Editors
                                     CreateReactionsList();
                                     alert4.Close();
                                 });
-                                alert4 = s.GetDefaultEditorForm("Edit Heterogeneous Reaction", 850, 650, myview4);
+                                alert4 = s.GetDefaultEditorForm("Edit Heterogeneous Reaction", 850, 680, myview4);
                                 alert4.Shown += (s1, e1) =>
                                 {
                                     myview4.Invalidate();

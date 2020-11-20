@@ -26,19 +26,26 @@ Partial Class FormReacHeterog
         Me.KryptonButton4 = New System.Windows.Forms.Button()
         Me.KryptonButton3 = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.btnScriptHelp = New System.Windows.Forms.Button()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.cbScripts = New System.Windows.Forms.ComboBox()
+        Me.rbAdvKin = New System.Windows.Forms.RadioButton()
+        Me.rbBasicKin = New System.Windows.Forms.RadioButton()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.gbExpression = New System.Windows.Forms.GroupBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tbDenominator = New System.Windows.Forms.TextBox()
         Me.tbNumerator = New System.Windows.Forms.TextBox()
-        Me.KryptonLabel11 = New System.Windows.Forms.Label()
-        Me.cbConcUnit = New System.Windows.Forms.ComboBox()
-        Me.KryptonLabel12 = New System.Windows.Forms.Label()
-        Me.cbVelUnit = New System.Windows.Forms.ComboBox()
         Me.KryptonLabel10 = New System.Windows.Forms.Label()
         Me.KryptonLabel5 = New System.Windows.Forms.Label()
         Me.tbTmax = New System.Windows.Forms.TextBox()
+        Me.KryptonLabel11 = New System.Windows.Forms.Label()
+        Me.cbConcUnit = New System.Windows.Forms.ComboBox()
         Me.tbTmin = New System.Windows.Forms.TextBox()
+        Me.KryptonLabel12 = New System.Windows.Forms.Label()
         Me.KryptonLabel8 = New System.Windows.Forms.Label()
+        Me.cbVelUnit = New System.Windows.Forms.ComboBox()
         Me.KryptonLabel7 = New System.Windows.Forms.Label()
         Me.KryptonLabel4 = New System.Windows.Forms.Label()
         Me.cbBase = New System.Windows.Forms.ComboBox()
@@ -69,7 +76,8 @@ Partial Class FormReacHeterog
         Me.tbDesc = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.GroupBox2.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
+        Me.Panel1.SuspendLayout()
+        Me.gbExpression.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.KryptonDataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox4.SuspendLayout()
@@ -77,45 +85,98 @@ Partial Class FormReacHeterog
         '
         'KryptonButton4
         '
-        Me.KryptonButton4.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
         resources.ApplyResources(Me.KryptonButton4, "KryptonButton4")
+        Me.KryptonButton4.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
         Me.KryptonButton4.Name = "KryptonButton4"
         '
         'KryptonButton3
         '
-        Me.KryptonButton3.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
         resources.ApplyResources(Me.KryptonButton3, "KryptonButton3")
+        Me.KryptonButton3.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
         Me.KryptonButton3.Name = "KryptonButton3"
         '
         'GroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.GroupBox3)
+        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.Panel1)
+        Me.GroupBox2.Controls.Add(Me.gbExpression)
         Me.GroupBox2.Controls.Add(Me.tbTmax)
+        Me.GroupBox2.Controls.Add(Me.KryptonLabel11)
+        Me.GroupBox2.Controls.Add(Me.cbConcUnit)
         Me.GroupBox2.Controls.Add(Me.tbTmin)
+        Me.GroupBox2.Controls.Add(Me.KryptonLabel12)
         Me.GroupBox2.Controls.Add(Me.KryptonLabel8)
+        Me.GroupBox2.Controls.Add(Me.cbVelUnit)
         Me.GroupBox2.Controls.Add(Me.KryptonLabel7)
         Me.GroupBox2.Controls.Add(Me.KryptonLabel4)
         Me.GroupBox2.Controls.Add(Me.cbBase)
         Me.GroupBox2.Controls.Add(Me.KryptonLabel6)
         Me.GroupBox2.Controls.Add(Me.tbPhase)
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
         '
-        'GroupBox3
+        'Panel1
         '
-        Me.GroupBox3.Controls.Add(Me.Label1)
-        Me.GroupBox3.Controls.Add(Me.tbDenominator)
-        Me.GroupBox3.Controls.Add(Me.tbNumerator)
-        Me.GroupBox3.Controls.Add(Me.KryptonLabel11)
-        Me.GroupBox3.Controls.Add(Me.cbConcUnit)
-        Me.GroupBox3.Controls.Add(Me.KryptonLabel12)
-        Me.GroupBox3.Controls.Add(Me.cbVelUnit)
-        Me.GroupBox3.Controls.Add(Me.KryptonLabel10)
-        Me.GroupBox3.Controls.Add(Me.KryptonLabel5)
-        resources.ApplyResources(Me.GroupBox3, "GroupBox3")
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.TabStop = False
+        resources.ApplyResources(Me.Panel1, "Panel1")
+        Me.Panel1.BackColor = System.Drawing.Color.White
+        Me.Panel1.Controls.Add(Me.btnScriptHelp)
+        Me.Panel1.Controls.Add(Me.Label3)
+        Me.Panel1.Controls.Add(Me.cbScripts)
+        Me.Panel1.Controls.Add(Me.rbAdvKin)
+        Me.Panel1.Controls.Add(Me.rbBasicKin)
+        Me.Panel1.Controls.Add(Me.Label4)
+        Me.Panel1.Name = "Panel1"
+        '
+        'btnScriptHelp
+        '
+        resources.ApplyResources(Me.btnScriptHelp, "btnScriptHelp")
+        Me.btnScriptHelp.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.btnScriptHelp.Image = Global.DWSIM.My.Resources.Resources.help
+        Me.btnScriptHelp.Name = "btnScriptHelp"
+        Me.btnScriptHelp.UseVisualStyleBackColor = False
+        '
+        'Label3
+        '
+        resources.ApplyResources(Me.Label3, "Label3")
+        Me.Label3.Name = "Label3"
+        '
+        'cbScripts
+        '
+        resources.ApplyResources(Me.cbScripts, "cbScripts")
+        Me.cbScripts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbScripts.DropDownWidth = 121
+        Me.cbScripts.Items.AddRange(New Object() {resources.GetString("cbScripts.Items"), resources.GetString("cbScripts.Items1"), resources.GetString("cbScripts.Items2")})
+        Me.cbScripts.Name = "cbScripts"
+        '
+        'rbAdvKin
+        '
+        resources.ApplyResources(Me.rbAdvKin, "rbAdvKin")
+        Me.rbAdvKin.Name = "rbAdvKin"
+        Me.rbAdvKin.TabStop = True
+        Me.rbAdvKin.UseVisualStyleBackColor = True
+        '
+        'rbBasicKin
+        '
+        resources.ApplyResources(Me.rbBasicKin, "rbBasicKin")
+        Me.rbBasicKin.Name = "rbBasicKin"
+        Me.rbBasicKin.TabStop = True
+        Me.rbBasicKin.UseVisualStyleBackColor = True
+        '
+        'Label4
+        '
+        resources.ApplyResources(Me.Label4, "Label4")
+        Me.Label4.Name = "Label4"
+        '
+        'gbExpression
+        '
+        resources.ApplyResources(Me.gbExpression, "gbExpression")
+        Me.gbExpression.Controls.Add(Me.Label1)
+        Me.gbExpression.Controls.Add(Me.tbDenominator)
+        Me.gbExpression.Controls.Add(Me.tbNumerator)
+        Me.gbExpression.Controls.Add(Me.KryptonLabel10)
+        Me.gbExpression.Controls.Add(Me.KryptonLabel5)
+        Me.gbExpression.Name = "gbExpression"
+        Me.gbExpression.TabStop = False
         '
         'Label1
         '
@@ -131,32 +192,6 @@ Partial Class FormReacHeterog
         '
         resources.ApplyResources(Me.tbNumerator, "tbNumerator")
         Me.tbNumerator.Name = "tbNumerator"
-        '
-        'KryptonLabel11
-        '
-        resources.ApplyResources(Me.KryptonLabel11, "KryptonLabel11")
-        Me.KryptonLabel11.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
-        Me.KryptonLabel11.Name = "KryptonLabel11"
-        '
-        'cbConcUnit
-        '
-        Me.cbConcUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbConcUnit.DropDownWidth = 121
-        resources.ApplyResources(Me.cbConcUnit, "cbConcUnit")
-        Me.cbConcUnit.Name = "cbConcUnit"
-        '
-        'KryptonLabel12
-        '
-        resources.ApplyResources(Me.KryptonLabel12, "KryptonLabel12")
-        Me.KryptonLabel12.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
-        Me.KryptonLabel12.Name = "KryptonLabel12"
-        '
-        'cbVelUnit
-        '
-        Me.cbVelUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbVelUnit.DropDownWidth = 121
-        resources.ApplyResources(Me.cbVelUnit, "cbVelUnit")
-        Me.cbVelUnit.Name = "cbVelUnit"
         '
         'KryptonLabel10
         '
@@ -175,16 +210,42 @@ Partial Class FormReacHeterog
         resources.ApplyResources(Me.tbTmax, "tbTmax")
         Me.tbTmax.Name = "tbTmax"
         '
+        'KryptonLabel11
+        '
+        resources.ApplyResources(Me.KryptonLabel11, "KryptonLabel11")
+        Me.KryptonLabel11.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
+        Me.KryptonLabel11.Name = "KryptonLabel11"
+        '
+        'cbConcUnit
+        '
+        resources.ApplyResources(Me.cbConcUnit, "cbConcUnit")
+        Me.cbConcUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbConcUnit.DropDownWidth = 121
+        Me.cbConcUnit.Name = "cbConcUnit"
+        '
         'tbTmin
         '
         resources.ApplyResources(Me.tbTmin, "tbTmin")
         Me.tbTmin.Name = "tbTmin"
+        '
+        'KryptonLabel12
+        '
+        resources.ApplyResources(Me.KryptonLabel12, "KryptonLabel12")
+        Me.KryptonLabel12.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
+        Me.KryptonLabel12.Name = "KryptonLabel12"
         '
         'KryptonLabel8
         '
         resources.ApplyResources(Me.KryptonLabel8, "KryptonLabel8")
         Me.KryptonLabel8.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
         Me.KryptonLabel8.Name = "KryptonLabel8"
+        '
+        'cbVelUnit
+        '
+        resources.ApplyResources(Me.cbVelUnit, "cbVelUnit")
+        Me.cbVelUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbVelUnit.DropDownWidth = 121
+        Me.cbVelUnit.Name = "cbVelUnit"
         '
         'KryptonLabel7
         '
@@ -200,9 +261,9 @@ Partial Class FormReacHeterog
         '
         'cbBase
         '
+        resources.ApplyResources(Me.cbBase, "cbBase")
         Me.cbBase.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbBase.DropDownWidth = 121
-        resources.ApplyResources(Me.cbBase, "cbBase")
         Me.cbBase.Items.AddRange(New Object() {resources.GetString("cbBase.Items"), resources.GetString("cbBase.Items1"), resources.GetString("cbBase.Items2"), resources.GetString("cbBase.Items3"), resources.GetString("cbBase.Items4"), resources.GetString("cbBase.Items5"), resources.GetString("cbBase.Items6")})
         Me.cbBase.Name = "cbBase"
         '
@@ -214,10 +275,10 @@ Partial Class FormReacHeterog
         '
         'tbPhase
         '
+        resources.ApplyResources(Me.tbPhase, "tbPhase")
         Me.tbPhase.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.tbPhase.DropDownWidth = 121
         Me.tbPhase.Items.AddRange(New Object() {resources.GetString("tbPhase.Items"), resources.GetString("tbPhase.Items1"), resources.GetString("tbPhase.Items2"), resources.GetString("tbPhase.Items3")})
-        resources.ApplyResources(Me.tbPhase, "tbPhase")
         Me.tbPhase.Name = "tbPhase"
         '
         'tbCompBase
@@ -228,6 +289,7 @@ Partial Class FormReacHeterog
         '
         'GroupBox1
         '
+        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Controls.Add(Me.tbEquation)
         Me.GroupBox1.Controls.Add(Me.tbCompBase)
         Me.GroupBox1.Controls.Add(Me.KryptonLabel3)
@@ -238,7 +300,6 @@ Partial Class FormReacHeterog
         Me.GroupBox1.Controls.Add(Me.tbStoich)
         Me.GroupBox1.Controls.Add(Me.KryptonDataGridView1)
         Me.GroupBox1.Controls.Add(Me.KryptonLabel1)
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
         '
@@ -262,8 +323,8 @@ Partial Class FormReacHeterog
         '
         'KryptonButton2
         '
-        Me.KryptonButton2.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
         resources.ApplyResources(Me.KryptonButton2, "KryptonButton2")
+        Me.KryptonButton2.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
         Me.KryptonButton2.Name = "KryptonButton2"
         '
         'tbReacHeat
@@ -286,13 +347,13 @@ Partial Class FormReacHeterog
         '
         'KryptonDataGridView1
         '
+        resources.ApplyResources(Me.KryptonDataGridView1, "KryptonDataGridView1")
         Me.KryptonDataGridView1.AllowUserToAddRows = False
         Me.KryptonDataGridView1.AllowUserToDeleteRows = False
         Me.KryptonDataGridView1.AllowUserToResizeRows = False
         Me.KryptonDataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.KryptonDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.KryptonDataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column2, Me.Column3, Me.Column7, Me.Column4, Me.Column5, Me.Column6, Me.Column1})
-        resources.ApplyResources(Me.KryptonDataGridView1, "KryptonDataGridView1")
         Me.KryptonDataGridView1.MultiSelect = False
         Me.KryptonDataGridView1.Name = "KryptonDataGridView1"
         Me.KryptonDataGridView1.RowHeadersVisible = False
@@ -352,24 +413,24 @@ Partial Class FormReacHeterog
         '
         'GroupBox4
         '
+        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
         Me.GroupBox4.Controls.Add(Me.KryptonLabel19)
         Me.GroupBox4.Controls.Add(Me.KryptonLabel20)
         Me.GroupBox4.Controls.Add(Me.tbName)
         Me.GroupBox4.Controls.Add(Me.tbDesc)
-        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.TabStop = False
         '
         'KryptonLabel19
         '
-        Me.KryptonLabel19.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
         resources.ApplyResources(Me.KryptonLabel19, "KryptonLabel19")
+        Me.KryptonLabel19.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
         Me.KryptonLabel19.Name = "KryptonLabel19"
         '
         'KryptonLabel20
         '
-        Me.KryptonLabel20.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
         resources.ApplyResources(Me.KryptonLabel20, "KryptonLabel20")
+        Me.KryptonLabel20.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
         Me.KryptonLabel20.Name = "KryptonLabel20"
         '
         'tbName
@@ -402,8 +463,10 @@ Partial Class FormReacHeterog
         Me.Name = "FormReacHeterog"
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
+        Me.gbExpression.ResumeLayout(False)
+        Me.gbExpression.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         CType(Me.KryptonDataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -416,7 +479,7 @@ Partial Class FormReacHeterog
     Public WithEvents KryptonButton4 As System.Windows.Forms.Button
     Public WithEvents KryptonButton3 As System.Windows.Forms.Button
     Public WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Public WithEvents GroupBox3 As System.Windows.Forms.GroupBox
+    Public WithEvents gbExpression As System.Windows.Forms.GroupBox
     Public WithEvents tbCompBase As System.Windows.Forms.TextBox
     Public WithEvents tbTmax As System.Windows.Forms.TextBox
     Public WithEvents tbTmin As System.Windows.Forms.TextBox
@@ -458,4 +521,11 @@ Partial Class FormReacHeterog
     Friend WithEvents Column5 As DataGridViewCheckBoxColumn
     Friend WithEvents Column6 As DataGridViewTextBoxColumn
     Friend WithEvents Column1 As DataGridViewTextBoxColumn
+    Friend WithEvents Panel1 As Panel
+    Public WithEvents btnScriptHelp As Button
+    Public WithEvents Label3 As Label
+    Public WithEvents cbScripts As ComboBox
+    Friend WithEvents rbAdvKin As RadioButton
+    Friend WithEvents rbBasicKin As RadioButton
+    Public WithEvents Label4 As Label
 End Class

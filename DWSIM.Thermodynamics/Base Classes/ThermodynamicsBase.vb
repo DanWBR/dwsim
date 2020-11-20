@@ -448,6 +448,10 @@ Namespace BaseClasses
 
         Public Property E_Reverse_Unit As String = "J/mol" Implements IReaction.E_Reverse_Unit
 
+        Public Property ReactionKinetics As ReactionKinetics = ReactionKinetics.Expression Implements IReaction.ReactionKinetics
+
+        Public Property ScriptTitle As String = "" Implements IReaction.ScriptTitle
+
         Public Function EvaluateK1(T As Double, PP As Interfaces.IPropertyPackage) As Double Implements Interfaces.IReaction.EvaluateK
             Return EvaluateK(T, PP)
         End Function

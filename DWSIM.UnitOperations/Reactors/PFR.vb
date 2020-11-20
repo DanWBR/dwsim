@@ -243,6 +243,7 @@ Namespace Reactors
                 IObj2?.Paragraphs.Add(String.Format("Reaction ID: {0}", rxn.Name))
 
                 Dim T As Double = ims.Phases(0).Properties.temperature.GetValueOrDefault
+                Dim P As Double = ims.Phases(0).Properties.pressure.GetValueOrDefault
 
                 IObj2?.Paragraphs.Add(String.Format("T: {0} K", T))
 
@@ -252,133 +253,168 @@ Namespace Reactors
 
                 Dim cvar As Double
 
-                If rxn.ReactionType = ReactionType.Kinetic Then
+                If rxn.ReactionKinetics = ReactionKinetics.Expression Then
 
-                    'calculate reaction constants
+                    If rxn.ReactionType = ReactionType.Kinetic Then
 
-                    Dim kxf, kxr As Double
+                        'calculate reaction constants
 
-                    If rxn.ReactionKinFwdType = ReactionKineticType.Arrhenius Then
+                        Dim kxf, kxr As Double
 
-                        kxf = rxn.A_Forward * Exp(-SystemsOfUnits.Converter.Convert(rxn.E_Forward_Unit, "J/mol", rxn.E_Forward) / (8.314 * T))
+                        If rxn.ReactionKinFwdType = ReactionKineticType.Arrhenius Then
 
-                    Else
+                            kxf = rxn.A_Forward * Exp(-SystemsOfUnits.Converter.Convert(rxn.E_Forward_Unit, "J/mol", rxn.E_Forward) / (8.314 * T))
 
-                        rxn.ExpContext = New Ciloci.Flee.ExpressionContext
-                        rxn.ExpContext.Imports.AddType(GetType(System.Math))
+                        Else
 
-                        rxn.ExpContext.Variables.Clear()
-                        rxn.ExpContext.Variables.Add("T", ims.Phases(0).Properties.temperature.GetValueOrDefault)
-                        rxn.ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
+                            rxn.ExpContext = New Ciloci.Flee.ExpressionContext
+                            rxn.ExpContext.Imports.AddType(GetType(System.Math))
 
-                        rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.ReactionKinFwdExpression)
+                            rxn.ExpContext.Variables.Clear()
+                            rxn.ExpContext.Variables.Add("T", ims.Phases(0).Properties.temperature.GetValueOrDefault)
+                            rxn.ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
 
-                        kxf = rxn.Expr.Evaluate
+                            rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.ReactionKinFwdExpression)
 
-                    End If
+                            kxf = rxn.Expr.Evaluate
 
-                    If rxn.ReactionKinRevType = ReactionKineticType.Arrhenius Then
+                        End If
 
-                        kxr = rxn.A_Reverse * Exp(-SystemsOfUnits.Converter.Convert(rxn.E_Reverse_Unit, "J/mol", rxn.E_Reverse) / (8.314 * T))
+                        If rxn.ReactionKinRevType = ReactionKineticType.Arrhenius Then
 
-                    Else
+                            kxr = rxn.A_Reverse * Exp(-SystemsOfUnits.Converter.Convert(rxn.E_Reverse_Unit, "J/mol", rxn.E_Reverse) / (8.314 * T))
 
-                        rxn.ExpContext = New Ciloci.Flee.ExpressionContext
-                        rxn.ExpContext.Imports.AddType(GetType(System.Math))
+                        Else
 
-                        rxn.ExpContext.Variables.Clear()
-                        rxn.ExpContext.Variables.Add("T", ims.Phases(0).Properties.temperature.GetValueOrDefault)
-                        rxn.ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
+                            rxn.ExpContext = New Ciloci.Flee.ExpressionContext
+                            rxn.ExpContext.Imports.AddType(GetType(System.Math))
 
-                        rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.ReactionKinRevExpression)
+                            rxn.ExpContext.Variables.Clear()
+                            rxn.ExpContext.Variables.Add("T", ims.Phases(0).Properties.temperature.GetValueOrDefault)
+                            rxn.ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
 
-                        kxr = rxn.Expr.Evaluate
+                            rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.ReactionKinRevExpression)
 
-                    End If
+                            kxr = rxn.Expr.Evaluate
 
-                    If T < rxn.Tmin Or T > rxn.Tmax Then
-                        kxf = 0.0#
-                        kxr = 0.0#
-                    End If
+                        End If
 
-                    Dim rxf As Double = 1.0#
-                    Dim rxr As Double = 1.0#
+                        If T < rxn.Tmin Or T > rxn.Tmax Then
+                            kxf = 0.0#
+                            kxr = 0.0#
+                        End If
 
-                    'kinetic expression
+                        Dim rxf As Double = 1.0#
+                        Dim rxr As Double = 1.0#
 
-                    For Each sb As ReactionStoichBase In rxn.Components.Values
-                        cvar = C(sb.CompName) * convfactors(sb.CompName)
-                        rxf *= cvar ^ sb.DirectOrder
-                        rxr *= cvar ^ sb.ReverseOrder
-                    Next
-
-                    rx = kxf * rxf - kxr * rxr
-
-                    IObj2?.Paragraphs.Add(String.Format("Reaction Rate: {0} {1}", rx, rxn.VelUnit))
-
-                    Rxi(rxn.ID) = SystemsOfUnits.Converter.ConvertToSI(rxn.VelUnit, rx)
-
-                    Kf(i) = kxf
-                    Kr(i) = kxr
-
-                ElseIf rxn.ReactionType = ReactionType.Heterogeneous_Catalytic Then
-
-                    If T < rxn.Tmin Or T > rxn.Tmax Then
-
-                        rx = 0.0
-
-                    Else
-
-                        Dim numval, denmval As Double
-
-                        rxn.ExpContext = New Ciloci.Flee.ExpressionContext
-                        rxn.ExpContext.Imports.AddType(GetType(System.Math))
-                        rxn.ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
-
-                        rxn.ExpContext.Variables.Clear()
-                        rxn.ExpContext.Variables.Add("T", T)
-
-                        Dim ir As Integer = 1
-                        Dim ip As Integer = 1
-                        Dim ine As Integer = 1
+                        'kinetic expression
 
                         For Each sb As ReactionStoichBase In rxn.Components.Values
                             cvar = C(sb.CompName) * convfactors(sb.CompName)
-                            If sb.StoichCoeff < 0 Then
-                                IObj2?.Paragraphs.Add(String.Format("R{0} ({1}): {2} {3}", ir.ToString, sb.CompName, cvar, rxn.ConcUnit))
-                                rxn.ExpContext.Variables.Add("R" & ir.ToString, cvar)
-                                ir += 1
-                            ElseIf sb.StoichCoeff > 0 Then
-                                IObj2?.Paragraphs.Add(String.Format("P{0} ({1}): {2} {3}", ip.ToString, sb.CompName, cvar, rxn.ConcUnit))
-                                rxn.ExpContext.Variables.Add("P" & ip.ToString, cvar)
-                                ip += 1
-                            Else
-                                IObj2?.Paragraphs.Add(String.Format("N{0} ({1}): {2} {3}", ine.ToString, sb.CompName, cvar, rxn.ConcUnit))
-                                rxn.ExpContext.Variables.Add("N" & ine.ToString, cvar)
-                                ine += 1
-                            End If
+                            rxf *= cvar ^ sb.DirectOrder
+                            rxr *= cvar ^ sb.ReverseOrder
                         Next
 
-                        rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.RateEquationNumerator)
+                        rx = kxf * rxf - kxr * rxr
 
-                        numval = rxn.Expr.Evaluate
+                        IObj2?.Paragraphs.Add(String.Format("Reaction Rate: {0} {1}", rx, rxn.VelUnit))
 
-                        rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.RateEquationDenominator)
+                        Rxi(rxn.ID) = SystemsOfUnits.Converter.ConvertToSI(rxn.VelUnit, rx)
 
-                        denmval = rxn.Expr.Evaluate
+                        Kf(i) = kxf
+                        Kr(i) = kxr
 
-                        IObj2?.Paragraphs.Add(String.Format("Numerator Expression: {0}", rxn.RateEquationNumerator))
-                        IObj2?.Paragraphs.Add(String.Format("Numerator Value: {0}", numval))
-                        IObj2?.Paragraphs.Add(String.Format("Denominator Expression: {0}", rxn.RateEquationDenominator))
-                        IObj2?.Paragraphs.Add(String.Format("Denominator Value: {0}", denmval))
+                    ElseIf rxn.ReactionType = ReactionType.Heterogeneous_Catalytic Then
 
-                        rx = numval / denmval
+                        If T < rxn.Tmin Or T > rxn.Tmax Then
+
+                            rx = 0.0
+
+                        Else
+
+                            Dim numval, denmval As Double
+
+                            rxn.ExpContext = New Ciloci.Flee.ExpressionContext
+                            rxn.ExpContext.Imports.AddType(GetType(System.Math))
+                            rxn.ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
+
+                            rxn.ExpContext.Variables.Clear()
+                            rxn.ExpContext.Variables.Add("T", T)
+
+                            Dim ir As Integer = 1
+                            Dim ip As Integer = 1
+                            Dim ine As Integer = 1
+
+                            For Each sb As ReactionStoichBase In rxn.Components.Values
+                                cvar = C(sb.CompName) * convfactors(sb.CompName)
+                                If sb.StoichCoeff < 0 Then
+                                    IObj2?.Paragraphs.Add(String.Format("R{0} ({1}): {2} {3}", ir.ToString, sb.CompName, cvar, rxn.ConcUnit))
+                                    rxn.ExpContext.Variables.Add("R" & ir.ToString, cvar)
+                                    ir += 1
+                                ElseIf sb.StoichCoeff > 0 Then
+                                    IObj2?.Paragraphs.Add(String.Format("P{0} ({1}): {2} {3}", ip.ToString, sb.CompName, cvar, rxn.ConcUnit))
+                                    rxn.ExpContext.Variables.Add("P" & ip.ToString, cvar)
+                                    ip += 1
+                                Else
+                                    IObj2?.Paragraphs.Add(String.Format("N{0} ({1}): {2} {3}", ine.ToString, sb.CompName, cvar, rxn.ConcUnit))
+                                    rxn.ExpContext.Variables.Add("N" & ine.ToString, cvar)
+                                    ine += 1
+                                End If
+                            Next
+
+                            rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.RateEquationNumerator)
+
+                            numval = rxn.Expr.Evaluate
+
+                            rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.RateEquationDenominator)
+
+                            denmval = rxn.Expr.Evaluate
+
+                            IObj2?.Paragraphs.Add(String.Format("Numerator Expression: {0}", rxn.RateEquationNumerator))
+                            IObj2?.Paragraphs.Add(String.Format("Numerator Value: {0}", numval))
+                            IObj2?.Paragraphs.Add(String.Format("Denominator Expression: {0}", rxn.RateEquationDenominator))
+                            IObj2?.Paragraphs.Add(String.Format("Denominator Value: {0}", denmval))
+
+                            rx = numval / denmval
+
+                        End If
+
+                        IObj2?.Paragraphs.Add(String.Format("Reaction Rate: {0} {1}", rx, rxn.VelUnit))
+
+                        Rxi(rxn.ID) = SystemsOfUnits.Converter.ConvertToSI(rxn.VelUnit, rx)
 
                     End If
 
-                    IObj2?.Paragraphs.Add(String.Format("Reaction Rate: {0} {1}", rx, rxn.VelUnit))
+                Else
 
-                    Rxi(rxn.ID) = SystemsOfUnits.Converter.ConvertToSI(rxn.VelUnit, rx)
+                    ' python script
+                    Dim ir As Integer = 1
+                    Dim ip As Integer = 1
+                    Dim ine As Integer = 1
+
+                    Dim vars As New Dictionary(Of String, Double)
+                    Dim amounts As New Dictionary(Of String, Double)
+
+                    For Each sb As ReactionStoichBase In rxn.Components.Values
+                        If sb.StoichCoeff < 0 Then
+                            vars.Add("R" & ir.ToString, C(sb.CompName) * convfactors(sb.CompName))
+                            ir += 1
+                        ElseIf sb.StoichCoeff > 0 Then
+                            vars.Add("P" & ip.ToString, C(sb.CompName) * convfactors(sb.CompName))
+                            ip += 1
+                        ElseIf sb.StoichCoeff = 0 Then
+                            vars.Add("N" & ine.ToString, C(sb.CompName) * convfactors(sb.CompName))
+                            ine += 1
+                        End If
+                        amounts.Add(sb.CompName, C(sb.CompName) * convfactors(sb.CompName))
+                    Next
+
+                    Dim r = ProcessAdvancedKineticReactionRate(rxn.ScriptTitle, Me, rxn, T, P, vars, amounts)
+
+                    'calculate reaction rate & convert to internal SI units
+                    rx = SystemsOfUnits.Converter.ConvertToSI(rxn.VelUnit, r)
+
+                    Rxi(rxn.ID) = rx
 
                 End If
 

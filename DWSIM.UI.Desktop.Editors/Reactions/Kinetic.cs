@@ -289,6 +289,22 @@ namespace DWSIM.UI.Desktop.Editors
             p1.CreateAndAddTextBoxRow(nf, "Minimum Temperature (" + su.temperature + ")", rx.Tmin.ConvertFromSI(su.temperature), (sender, e) => { if (sender.Text.IsValidDouble()) rx.Tmin = sender.Text.ToDoubleFromCurrent().ConvertToSI(su.temperature); });
             p1.CreateAndAddTextBoxRow(nf, "Maximum Temperature (" + su.temperature + ")", rx.Tmax.ConvertFromSI(su.temperature), (sender, e) => { if (sender.Text.IsValidDouble()) rx.Tmax = sender.Text.ToDoubleFromCurrent().ConvertToSI(su.temperature); });
 
+            p2.CreateAndAddLabelRow("Reaction Kinetics");
+
+            p2.CreateAndAddCheckBoxRow("Advanced Kinetics", rx.ReactionKinetics == Interfaces.Enums.ReactionKinetics.PythonScript,
+                (chk, e) => { if (chk.Checked.GetValueOrDefault()) rx.ReactionKinetics = Interfaces.Enums.ReactionKinetics.PythonScript; else rx.ReactionKinetics = Interfaces.Enums.ReactionKinetics.Expression; });
+
+            var scripts = new List<string>();
+            scripts.Add("");
+            scripts.AddRange(flowsheet.Scripts.Values.Select(x => x.Title).ToArray());
+
+            p2.CreateAndAddDropDownRow("Python Script (for Advanced Kinetics)", scripts, scripts.Contains(rx.ScriptTitle) ? scripts.IndexOf(rx.ScriptTitle) : 0,
+                (cb, e) => rx.ScriptTitle = cb.SelectedValue.ToString());
+
+            p2.CreateAndAddDescriptionRow("Create a Python Script using the Script Manager which returns the reaction rate 'r' in the currently selected units. " +
+                                            "You can get the compound amounts through the R1, R2, ..., Rn, P1, P2, ..., Pn and N1, N2, ... Nn variables or use the 'Amounts' dictionary to get the amount by the compound's name. " +
+                                            "You can also use the current temperature 'T' in Kelvin and pressure 'P' in Pa.");
+
             p2.CreateAndAddLabelRow("Velocity Constant for Forward Reactions");
 
             p2.CreateAndAddDropDownRow("Equation Type for Forward Reactions", new List<string>() { "Arrhenius (k = A*exp(-E/RT))", "User-Defined Expression" }, (int)rx.ReactionKinFwdType, (sender, e) =>

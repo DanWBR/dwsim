@@ -381,6 +381,11 @@ Namespace Enums
         UserDefined = 1
     End Enum
 
+    Public Enum ReactionKinetics
+        Expression = 0
+        PythonScript = 1
+    End Enum
+
     Public Enum KOpt
         Gibbs
         Expression

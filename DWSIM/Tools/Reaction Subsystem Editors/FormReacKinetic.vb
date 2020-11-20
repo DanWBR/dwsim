@@ -126,6 +126,25 @@ Public Class FormReacKinetic
                 Me.cbBase.SelectedIndex = 6
         End Select
 
+        cbScripts.Items.Clear()
+        cbScripts.Items.Add("")
+        For Each script In fc.Scripts
+            cbScripts.Items.Add(script.Value.Title)
+        Next
+
+        If cbScripts.Items.Contains(rc.ScriptTitle) Then cbScripts.SelectedItem = rc.ScriptTitle Else cbScripts.SelectedIndex = 0
+
+        If rc.ReactionKinetics = ReactionKinetics.Expression Then
+            rbBasicKin.Checked = True
+        Else
+            rbAdvKin.Checked = True
+        End If
+
+        gbKinetics.Enabled = rbBasicKin.Checked
+        Label2.Enabled = rbAdvKin.Checked
+        cbScripts.Enabled = rbAdvKin.Checked
+        btnScriptHelp.Enabled = rbAdvKin.Checked
+
         Me.cbConcUnit.Items.AddRange(New String() {"kmol/m3", "mol/m3", "mol/L", "mol/cm3", "mol/mL", "lbmol/ft3", "kg/m3", "g/L", "g/cm3", "g/mL", "lbm/ft3"})
         If rc.ConcUnit = "" Then
             Me.cbConcUnit.SelectedIndex = 0
@@ -337,6 +356,14 @@ Public Class FormReacKinetic
                 End If
             Next
 
+            If rbAdvKin.Checked Then
+                rc.ReactionKinetics = ReactionKinetics.PythonScript
+            Else
+                rc.ReactionKinetics = ReactionKinetics.Expression
+            End If
+
+            rc.ScriptTitle = cbScripts.SelectedItem.ToString()
+
             'add or edit reaction
             Select Case mode
                 Case "Add"
@@ -409,6 +436,23 @@ Public Class FormReacKinetic
         tbRevA.Enabled = rdRevArr.Checked
         tbRevE.Enabled = rdRevArr.Checked
         tbRevUE.Enabled = Not rdRevArr.Checked
+
+    End Sub
+
+    Private Sub rbBasicKin_CheckedChanged(sender As Object, e As EventArgs) Handles rbBasicKin.CheckedChanged
+
+        gbKinetics.Enabled = rbBasicKin.Checked
+        Label2.Enabled = rbAdvKin.Checked
+        cbScripts.Enabled = rbAdvKin.Checked
+        btnScriptHelp.Enabled = rbAdvKin.Checked
+
+    End Sub
+
+    Private Sub btnScriptHelp_Click(sender As Object, e As EventArgs) Handles btnScriptHelp.Click
+
+        MessageBox.Show("Create a Python Script using the Script Manager which returns the reaction rate 'r' in the currently selected units. " + vbCrLf +
+"You can get the compound amounts through the R1, R2, ..., Rn, P1, P2, ..., Pn and N1, N2, ... Nn variables or use the 'Amounts' dictionary to get the amount by the compound's name." + vbCrLf +
+"You can also use the current temperature 'T' in Kelvin and pressure 'P' in Pa.", "Advanced Kinetics", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
     End Sub
 

@@ -26,7 +26,14 @@ Partial Class FormReacKinetic
         Me.KryptonButton4 = New System.Windows.Forms.Button()
         Me.KryptonButton3 = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.btnScriptHelp = New System.Windows.Forms.Button()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.cbScripts = New System.Windows.Forms.ComboBox()
+        Me.rbAdvKin = New System.Windows.Forms.RadioButton()
+        Me.rbBasicKin = New System.Windows.Forms.RadioButton()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.gbKinetics = New System.Windows.Forms.GroupBox()
         Me.cbReverseEUnits = New System.Windows.Forms.ComboBox()
         Me.cbForwardEUnits = New System.Windows.Forms.ComboBox()
         Me.tbRevUE = New System.Windows.Forms.TextBox()
@@ -45,18 +52,18 @@ Partial Class FormReacKinetic
         Me.KryptonLabel14 = New System.Windows.Forms.Label()
         Me.tbFwdA = New System.Windows.Forms.TextBox()
         Me.KryptonLabel13 = New System.Windows.Forms.Label()
-        Me.KryptonLabel11 = New System.Windows.Forms.Label()
-        Me.cbConcUnit = New System.Windows.Forms.ComboBox()
-        Me.KryptonLabel12 = New System.Windows.Forms.Label()
-        Me.cbVelUnit = New System.Windows.Forms.ComboBox()
         Me.KryptonLabel10 = New System.Windows.Forms.Label()
         Me.KryptonLabel5 = New System.Windows.Forms.Label()
         Me.tbCompBase = New System.Windows.Forms.TextBox()
         Me.KryptonLabel9 = New System.Windows.Forms.Label()
         Me.tbTmax = New System.Windows.Forms.TextBox()
+        Me.KryptonLabel11 = New System.Windows.Forms.Label()
         Me.tbTmin = New System.Windows.Forms.TextBox()
+        Me.cbVelUnit = New System.Windows.Forms.ComboBox()
         Me.KryptonLabel8 = New System.Windows.Forms.Label()
+        Me.KryptonLabel12 = New System.Windows.Forms.Label()
         Me.KryptonLabel7 = New System.Windows.Forms.Label()
+        Me.cbConcUnit = New System.Windows.Forms.ComboBox()
         Me.KryptonLabel4 = New System.Windows.Forms.Label()
         Me.cbBase = New System.Windows.Forms.ComboBox()
         Me.KryptonLabel6 = New System.Windows.Forms.Label()
@@ -85,7 +92,8 @@ Partial Class FormReacKinetic
         Me.tbName = New System.Windows.Forms.TextBox()
         Me.tbDesc = New System.Windows.Forms.TextBox()
         Me.GroupBox2.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
+        Me.Panel1.SuspendLayout()
+        Me.gbKinetics.SuspendLayout()
         Me.FlowLayoutPanel2.SuspendLayout()
         Me.FlowLayoutPanel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -106,13 +114,18 @@ Partial Class FormReacKinetic
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Controls.Add(Me.GroupBox3)
+        Me.GroupBox2.Controls.Add(Me.Panel1)
+        Me.GroupBox2.Controls.Add(Me.gbKinetics)
         Me.GroupBox2.Controls.Add(Me.tbCompBase)
         Me.GroupBox2.Controls.Add(Me.KryptonLabel9)
         Me.GroupBox2.Controls.Add(Me.tbTmax)
+        Me.GroupBox2.Controls.Add(Me.KryptonLabel11)
         Me.GroupBox2.Controls.Add(Me.tbTmin)
+        Me.GroupBox2.Controls.Add(Me.cbVelUnit)
         Me.GroupBox2.Controls.Add(Me.KryptonLabel8)
+        Me.GroupBox2.Controls.Add(Me.KryptonLabel12)
         Me.GroupBox2.Controls.Add(Me.KryptonLabel7)
+        Me.GroupBox2.Controls.Add(Me.cbConcUnit)
         Me.GroupBox2.Controls.Add(Me.KryptonLabel4)
         Me.GroupBox2.Controls.Add(Me.cbBase)
         Me.GroupBox2.Controls.Add(Me.KryptonLabel6)
@@ -120,31 +133,79 @@ Partial Class FormReacKinetic
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
         '
-        'GroupBox3
+        'Panel1
         '
-        resources.ApplyResources(Me.GroupBox3, "GroupBox3")
-        Me.GroupBox3.Controls.Add(Me.cbReverseEUnits)
-        Me.GroupBox3.Controls.Add(Me.cbForwardEUnits)
-        Me.GroupBox3.Controls.Add(Me.tbRevUE)
-        Me.GroupBox3.Controls.Add(Me.tbFwdUE)
-        Me.GroupBox3.Controls.Add(Me.FlowLayoutPanel2)
-        Me.GroupBox3.Controls.Add(Me.FlowLayoutPanel1)
-        Me.GroupBox3.Controls.Add(Me.tbRevE)
-        Me.GroupBox3.Controls.Add(Me.KryptonLabel15)
-        Me.GroupBox3.Controls.Add(Me.tbRevA)
-        Me.GroupBox3.Controls.Add(Me.KryptonLabel16)
-        Me.GroupBox3.Controls.Add(Me.tbFwdE)
-        Me.GroupBox3.Controls.Add(Me.KryptonLabel14)
-        Me.GroupBox3.Controls.Add(Me.tbFwdA)
-        Me.GroupBox3.Controls.Add(Me.KryptonLabel13)
-        Me.GroupBox3.Controls.Add(Me.KryptonLabel11)
-        Me.GroupBox3.Controls.Add(Me.cbConcUnit)
-        Me.GroupBox3.Controls.Add(Me.KryptonLabel12)
-        Me.GroupBox3.Controls.Add(Me.cbVelUnit)
-        Me.GroupBox3.Controls.Add(Me.KryptonLabel10)
-        Me.GroupBox3.Controls.Add(Me.KryptonLabel5)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.TabStop = False
+        resources.ApplyResources(Me.Panel1, "Panel1")
+        Me.Panel1.BackColor = System.Drawing.Color.White
+        Me.Panel1.Controls.Add(Me.btnScriptHelp)
+        Me.Panel1.Controls.Add(Me.Label2)
+        Me.Panel1.Controls.Add(Me.cbScripts)
+        Me.Panel1.Controls.Add(Me.rbAdvKin)
+        Me.Panel1.Controls.Add(Me.rbBasicKin)
+        Me.Panel1.Controls.Add(Me.Label1)
+        Me.Panel1.Name = "Panel1"
+        '
+        'btnScriptHelp
+        '
+        resources.ApplyResources(Me.btnScriptHelp, "btnScriptHelp")
+        Me.btnScriptHelp.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.btnScriptHelp.Image = Global.DWSIM.My.Resources.Resources.help
+        Me.btnScriptHelp.Name = "btnScriptHelp"
+        Me.btnScriptHelp.UseVisualStyleBackColor = False
+        '
+        'Label2
+        '
+        resources.ApplyResources(Me.Label2, "Label2")
+        Me.Label2.Name = "Label2"
+        '
+        'cbScripts
+        '
+        resources.ApplyResources(Me.cbScripts, "cbScripts")
+        Me.cbScripts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbScripts.DropDownWidth = 121
+        Me.cbScripts.Items.AddRange(New Object() {resources.GetString("cbScripts.Items"), resources.GetString("cbScripts.Items1"), resources.GetString("cbScripts.Items2")})
+        Me.cbScripts.Name = "cbScripts"
+        '
+        'rbAdvKin
+        '
+        resources.ApplyResources(Me.rbAdvKin, "rbAdvKin")
+        Me.rbAdvKin.Name = "rbAdvKin"
+        Me.rbAdvKin.TabStop = True
+        Me.rbAdvKin.UseVisualStyleBackColor = True
+        '
+        'rbBasicKin
+        '
+        resources.ApplyResources(Me.rbBasicKin, "rbBasicKin")
+        Me.rbBasicKin.Name = "rbBasicKin"
+        Me.rbBasicKin.TabStop = True
+        Me.rbBasicKin.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.Name = "Label1"
+        '
+        'gbKinetics
+        '
+        resources.ApplyResources(Me.gbKinetics, "gbKinetics")
+        Me.gbKinetics.Controls.Add(Me.cbReverseEUnits)
+        Me.gbKinetics.Controls.Add(Me.cbForwardEUnits)
+        Me.gbKinetics.Controls.Add(Me.tbRevUE)
+        Me.gbKinetics.Controls.Add(Me.tbFwdUE)
+        Me.gbKinetics.Controls.Add(Me.FlowLayoutPanel2)
+        Me.gbKinetics.Controls.Add(Me.FlowLayoutPanel1)
+        Me.gbKinetics.Controls.Add(Me.tbRevE)
+        Me.gbKinetics.Controls.Add(Me.KryptonLabel15)
+        Me.gbKinetics.Controls.Add(Me.tbRevA)
+        Me.gbKinetics.Controls.Add(Me.KryptonLabel16)
+        Me.gbKinetics.Controls.Add(Me.tbFwdE)
+        Me.gbKinetics.Controls.Add(Me.KryptonLabel14)
+        Me.gbKinetics.Controls.Add(Me.tbFwdA)
+        Me.gbKinetics.Controls.Add(Me.KryptonLabel13)
+        Me.gbKinetics.Controls.Add(Me.KryptonLabel10)
+        Me.gbKinetics.Controls.Add(Me.KryptonLabel5)
+        Me.gbKinetics.Name = "gbKinetics"
+        Me.gbKinetics.TabStop = False
         '
         'cbReverseEUnits
         '
@@ -252,30 +313,6 @@ Partial Class FormReacKinetic
         resources.ApplyResources(Me.KryptonLabel13, "KryptonLabel13")
         Me.KryptonLabel13.Name = "KryptonLabel13"
         '
-        'KryptonLabel11
-        '
-        resources.ApplyResources(Me.KryptonLabel11, "KryptonLabel11")
-        Me.KryptonLabel11.Name = "KryptonLabel11"
-        '
-        'cbConcUnit
-        '
-        resources.ApplyResources(Me.cbConcUnit, "cbConcUnit")
-        Me.cbConcUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbConcUnit.DropDownWidth = 121
-        Me.cbConcUnit.Name = "cbConcUnit"
-        '
-        'KryptonLabel12
-        '
-        resources.ApplyResources(Me.KryptonLabel12, "KryptonLabel12")
-        Me.KryptonLabel12.Name = "KryptonLabel12"
-        '
-        'cbVelUnit
-        '
-        resources.ApplyResources(Me.cbVelUnit, "cbVelUnit")
-        Me.cbVelUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbVelUnit.DropDownWidth = 121
-        Me.cbVelUnit.Name = "cbVelUnit"
-        '
         'KryptonLabel10
         '
         resources.ApplyResources(Me.KryptonLabel10, "KryptonLabel10")
@@ -302,20 +339,44 @@ Partial Class FormReacKinetic
         resources.ApplyResources(Me.tbTmax, "tbTmax")
         Me.tbTmax.Name = "tbTmax"
         '
+        'KryptonLabel11
+        '
+        resources.ApplyResources(Me.KryptonLabel11, "KryptonLabel11")
+        Me.KryptonLabel11.Name = "KryptonLabel11"
+        '
         'tbTmin
         '
         resources.ApplyResources(Me.tbTmin, "tbTmin")
         Me.tbTmin.Name = "tbTmin"
+        '
+        'cbVelUnit
+        '
+        resources.ApplyResources(Me.cbVelUnit, "cbVelUnit")
+        Me.cbVelUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbVelUnit.DropDownWidth = 121
+        Me.cbVelUnit.Name = "cbVelUnit"
         '
         'KryptonLabel8
         '
         resources.ApplyResources(Me.KryptonLabel8, "KryptonLabel8")
         Me.KryptonLabel8.Name = "KryptonLabel8"
         '
+        'KryptonLabel12
+        '
+        resources.ApplyResources(Me.KryptonLabel12, "KryptonLabel12")
+        Me.KryptonLabel12.Name = "KryptonLabel12"
+        '
         'KryptonLabel7
         '
         resources.ApplyResources(Me.KryptonLabel7, "KryptonLabel7")
         Me.KryptonLabel7.Name = "KryptonLabel7"
+        '
+        'cbConcUnit
+        '
+        resources.ApplyResources(Me.cbConcUnit, "cbConcUnit")
+        Me.cbConcUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbConcUnit.DropDownWidth = 121
+        Me.cbConcUnit.Name = "cbConcUnit"
         '
         'KryptonLabel4
         '
@@ -510,8 +571,10 @@ Partial Class FormReacKinetic
         Me.Name = "FormReacKinetic"
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
+        Me.gbKinetics.ResumeLayout(False)
+        Me.gbKinetics.PerformLayout()
         Me.FlowLayoutPanel2.ResumeLayout(False)
         Me.FlowLayoutPanel2.PerformLayout()
         Me.FlowLayoutPanel1.ResumeLayout(False)
@@ -527,7 +590,7 @@ Partial Class FormReacKinetic
     Public WithEvents KryptonButton4 As System.Windows.Forms.Button
     Public WithEvents KryptonButton3 As System.Windows.Forms.Button
     Public WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Public WithEvents GroupBox3 As System.Windows.Forms.GroupBox
+    Public WithEvents gbKinetics As System.Windows.Forms.GroupBox
     Public WithEvents tbCompBase As System.Windows.Forms.TextBox
     Public WithEvents KryptonLabel9 As System.Windows.Forms.Label
     Public WithEvents tbTmax As System.Windows.Forms.TextBox
@@ -585,4 +648,11 @@ Partial Class FormReacKinetic
     Public WithEvents tbFwdUE As TextBox
     Public WithEvents cbReverseEUnits As ComboBox
     Public WithEvents cbForwardEUnits As ComboBox
+    Friend WithEvents Panel1 As Panel
+    Public WithEvents btnScriptHelp As Button
+    Public WithEvents Label2 As Label
+    Public WithEvents cbScripts As ComboBox
+    Friend WithEvents rbAdvKin As RadioButton
+    Friend WithEvents rbBasicKin As RadioButton
+    Public WithEvents Label1 As Label
 End Class

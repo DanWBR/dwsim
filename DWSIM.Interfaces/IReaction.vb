@@ -88,6 +88,10 @@
 
     Property ReactionKinRevExpression As String
 
+    Property ReactionKinetics() As Enums.ReactionKinetics
+
+    Property ScriptTitle As String
+
     'Heterogeneous
     Property RateEquationNumerator As String
 
