@@ -2024,7 +2024,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             Dim i, n, ecount As Integer
             Dim d1, d2 As Date, dt As TimeSpan
-            Dim L, Lf, Vf, T, Tf, deltaT, deltaT_ant, epsilon, df, maxdT As Double
+            Dim L, Lf, Vf, T, deltaT, deltaT_ant, epsilon, df, maxdT As Double
             Dim e1 As Double
 
             d1 = Date.Now
@@ -2044,12 +2044,10 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             Vf = V
             L = 1 - V
             Lf = 1 - Vf
-            Tf = T
 
-            Dim Vn(n) As String, Vx(n), Vy(n), Vx_ant(n), Vy_ant(n), Vp(n), Ki(n), fi(n), dVxy(n) As Double
+            Dim Vx(n), Vy(n), Vx_ant(n), Vy_ant(n), Vp(n), Ki(n), fi(n), dVxy(n) As Double
             Dim Vt(n), VTc(n), Tmin, Tmax, dFdT, Tsat(n) As Double
 
-            Vn = PP.RET_VNAMES()
             VTc = PP.RET_VTC()
             fi = Vz.Clone
 
@@ -2206,11 +2204,11 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                         marcador2 = 0
                         If marcador = 1 Then
                             If V = 0 Then
-                                If Math.Abs(Vy(0) - Vy_ant(0)) < itol Then
+                                If Math.Abs(Vy(0) - Vy_ant(0)) < 0.001 Then
                                     marcador2 = 1
                                 End If
                             Else
-                                If Math.Abs(Vx(0) - Vx_ant(0)) < itol Then
+                                If Math.Abs(Vx(0) - Vx_ant(0)) < 0.001 Then
                                     marcador2 = 1
                                 End If
                             End If

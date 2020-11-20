@@ -34,7 +34,7 @@ Namespace PropertyPackages.ThermoPlugs
             Dim n As Integer = Vz.Length - 1
 
             Dim aux1, aux2, auxtmp(n) As Double
-            aux1 = -8.314 / 2 * (0.45724 / T) ^ 0.5
+            aux1 = -8.314 / 2 * (0.42748 / T) ^ 0.5
 
             If Settings.EnableParallelProcessing Then
                 Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism, .TaskScheduler = Settings.AppTaskScheduler}
@@ -61,7 +61,7 @@ Namespace PropertyPackages.ThermoPlugs
 
         End Function
 
-        Shared Function Calc_SUM1(n As Integer, ai As Double(), vkij As Double(,))
+        Public Shared Function Calc_SUM1(n As Integer, ai As Double(), vkij As Double(,)) As Double(,)
 
             Dim a(n, n) As Double
 
@@ -89,7 +89,7 @@ Namespace PropertyPackages.ThermoPlugs
 
         End Function
 
-        Shared Function Calc_SUM2(n As Integer, Vx As Double(), a As Double(,)) As Object
+        Shared Function Calc_SUM2(n As Integer, Vx As Double(), a As Double(,)) As Double()()
 
             Dim saml, aml(n), aml2(n) As Double
 
@@ -116,7 +116,7 @@ Namespace PropertyPackages.ThermoPlugs
                 Loop Until i = n + 1
             End If
 
-            Return {aml2, saml}
+            Return {aml2, New Double() {saml}}
 
         End Function
 
@@ -192,7 +192,7 @@ Namespace PropertyPackages.ThermoPlugs
             AG = aml * P / (R * T) ^ 2
             BG = bml * P / (R * T)
 
-            Dim _zarray As ArrayList, _mingz As Object, Z As Double
+            Dim _zarray As List(Of Double), _mingz As Double(), Z As Double
             _zarray = CalcZ(T, P, Vx, VKij, VTc, VPc, Vw)
             _mingz = ZtoMinG(_zarray.ToArray, T, P, Vx, VKij, VTc, VPc, Vw)
             Z = _zarray(_mingz(0))
@@ -215,13 +215,13 @@ Namespace PropertyPackages.ThermoPlugs
 
         End Function
 
-        Shared Function ZtoMinG(ByVal Z_ As Array, ByVal T As Double, ByVal P As Double, ByVal Vz As Array, ByVal VKij As Object, ByVal VTc As Array, ByVal VPc As Array, ByVal Vw As Array) As Object
+        Shared Function ZtoMinG(ByVal Z_ As Double(), ByVal T As Double, ByVal P As Double, ByVal Vz As Double(), ByVal VKij As Double(,), ByVal VTc As Double(), ByVal VPc As Double(), ByVal Vw As Double()) As Double()
 
-            Calculator.WriteToConsole("SRK min-G root finder (Z) for T = " & T & " K, P = " & P & " Pa and Z = " & DirectCast(Z_, Object()).ToArrayString, 3)
+            Calculator.WriteToConsole("SRK min-G root finder (Z) for T = " & T & " K, P = " & P & " Pa and Z = " & Z_.ToArrayString, 3)
 
             Dim S, H, Z As Double
 
-            Dim n, R, dadT As Double
+            Dim n As Integer, R, dadT As Double
             Dim i, j, k, l As Integer
 
             n = Vz.Length - 1
@@ -233,43 +233,37 @@ Namespace PropertyPackages.ThermoPlugs
 
             R = 8.314
 
-            i = 0
-            Do
-                Tc(i) = VTc(i)
-                Tr(i) = T / Tc(i)
-                Pc(i) = VPc(i)
-                w(i) = Vw(i)
-                i = i + 1
-            Loop Until i = n + 1
+            Tc = VTc
+            Tr = Tc.DivideY(Tc).DivideY(Tc).MultiplyConstY(T)
+            Pc = VPc
+            w = Vw
 
-            i = 0
-            Do
-                alpha(i) = (1 + (0.48 + 1.574 * w(i) - 0.176 * w(i) ^ 2) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
-                ai(i) = 0.42748 * alpha(i) * R ^ 2 * Tc(i) ^ 2 / Pc(i)
-                bi(i) = 0.08664 * R * Tc(i) / Pc(i)
-                ci(i) = 0.48 + 1.574 * w(i) - 0.176 * w(i) ^ 2
-                i = i + 1
-            Loop Until i = n + 1
+            If Settings.EnableParallelProcessing Then
+                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism, .TaskScheduler = Settings.AppTaskScheduler}
+                Parallel.For(0, n + 1, poptions, Sub(ii)
+                                                     alpha(ii) = (1 + (0.48 + 1.574 * w(ii) - 0.176 * w(ii) ^ 2) * (1 - (T / Tc(ii)) ^ 0.5)) ^ 2
+                                                     ai(ii) = 0.42748 * alpha(ii) * R ^ 2 * Tc(ii) ^ 2 / Pc(ii)
+                                                     bi(ii) = 0.08664 * R * Tc(ii) / Pc(ii)
+                                                     ci(ii) = 0.48 + 1.574 * w(ii) - 0.176 * w(ii) ^ 2
+                                                 End Sub)
+            Else
+                i = 0
+                Do
+                    alpha(i) = (1 + (0.48 + 1.574 * w(i) - 0.176 * w(i) ^ 2) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
+                    ai(i) = 0.42748 * alpha(i) * R ^ 2 * Tc(i) ^ 2 / Pc(i)
+                    bi(i) = 0.08664 * R * Tc(i) / Pc(i)
+                    ci(i) = 0.48 + 1.574 * w(i) - 0.176 * w(i) ^ 2
+                    i = i + 1
+                Loop Until i = n + 1
+            End If
 
             a = Calc_SUM1(n, ai, VKij)
 
-            i = 0
-            Dim am = 0.0#
-            Do
-                j = 0
-                Do
-                    am = am + Vz(i) * Vz(j) * a(i, j)
-                    j = j + 1
-                Loop Until j = n + 1
-                i = i + 1
-            Loop Until i = n + 1
+            Dim tmpa As Double()() = Calc_SUM2(n, Vz, a)
 
-            i = 0
-            Dim bm = 0.0#
-            Do
-                bm = bm + Vz(i) * bi(i)
-                i = i + 1
-            Loop Until i = n + 1
+            Dim am As Double = tmpa(1)(0)
+
+            Dim bm As Double = Vz.MultiplyY(bi).SumY
 
             Dim AG1 = am * P / (R * T) ^ 2
             Dim BG1 = bm * P / (R * T)
@@ -314,7 +308,7 @@ Namespace PropertyPackages.ThermoPlugs
 
             Calculator.WriteToConsole("Result: Min-G Z Index = " & k, 3)
 
-            Return New Object() {k, G(k)}
+            Return New Double() {k, G(k)}
 
         End Function
 
@@ -426,13 +420,13 @@ Namespace PropertyPackages.ThermoPlugs
 
             a = Calc_SUM1(n, ai, VKij)
 
-            Dim tmpa As Object = Calc_SUM2(n, Vx, a)
+            Dim tmpa As Double()() = Calc_SUM2(n, Vx, a)
 
             IObj?.Paragraphs.Add("<math_inline>a_{i}</math_inline>: " & ai.ToMathArrayString)
             IObj?.Paragraphs.Add("<math_inline>b_{i}</math_inline>: " & bi.ToMathArrayString)
 
             aml2 = tmpa(0)
-            aml = tmpa(1)
+            aml = tmpa(1)(0)
 
             i = 0
             bml = 0
@@ -450,7 +444,7 @@ Namespace PropertyPackages.ThermoPlugs
             IObj?.Paragraphs.Add(String.Format("<math_inline>A</math_inline>: {0}", AG))
             IObj?.Paragraphs.Add(String.Format("<math_inline>B</math_inline>: {0}", BG))
 
-            Dim _zarray As ArrayList, _mingz As Object, Z As Double
+            Dim _zarray As List(Of Double), _mingz As Double(), Z As Double
 
             _zarray = CalcZ(T, P, Vx, VKij, Tc, Pc, w)
             If _zarray.Count = 0 Then Throw New Exception(String.Format("SRK EOS: unable to find a root with provided parameters [T = {0} K, P = {1} Pa, MoleFracs={2}]", T.ToString, P.ToString, Vx.ToArrayString))
@@ -530,7 +524,7 @@ Namespace PropertyPackages.ThermoPlugs
             AG = aml * P / (R * T) ^ 2
             BG = bml * P / (R * T)
 
-            Dim _zarray As List(Of Double), _mingz As Object, Z As Double
+            Dim _zarray As List(Of Double), _mingz As Double(), Z As Double
 
             _zarray = CalcZ2(AG, BG)
             If forcephase <> "" Then
@@ -748,17 +742,13 @@ Namespace PropertyPackages.ThermoPlugs
 
         End Function
 
-        Shared Function CalcZ(ByVal T, ByVal P, ByVal Vx, ByVal VKij, ByVal VTc, ByVal VPc, ByVal Vw) As ArrayList
+        Shared Function CalcZ(ByVal T As Double, ByVal P As Double, ByVal Vx As Double(), ByVal VKij As Double(,), ByVal VTc As Double(), ByVal VPc As Double(), ByVal Vw As Double()) As List(Of Double)
 
-            Dim ai(), bi(), aml2(), amv2() As Double
-            Dim n, R, coeff(3), tmp() As Double
-            Dim Tc(), Pc(), W(), alpha(), Vant(0, 4), m(), a(,), b(,), Tr() As Double
+            Dim n As Integer = Vx.Length - 1
 
-            n = Vx.Length - 1
-
-            ReDim ai(n), bi(n), tmp(n + 1), a(n, n), b(n, n)
-            ReDim aml2(n), amv2(n)
-            ReDim Tc(n), Pc(n), W(n), alpha(n), m(n), Tr(n)
+            Dim ai(n), bi(n), aml2(n), amv2(n) As Double
+            Dim R, coeff(3), tmp(n + 1) As Double
+            Dim Tc(n), Pc(n), W(n), alpha(n), Vant(0, 4), m(n), a(n, n), b(n, n), Tr(n) As Double
 
             R = 8.314
 
@@ -782,10 +772,10 @@ Namespace PropertyPackages.ThermoPlugs
 
             a = Calc_SUM1(n, ai, VKij)
 
-            Dim tmpa As Object = Calc_SUM2(n, Vx, a)
+            Dim tmpa As Double()() = Calc_SUM2(n, Vx, a)
 
             aml2 = tmpa(0)
-            Dim aml As Double = tmpa(1)
+            Dim aml As Double = tmpa(1)(0)
 
             i = 0
             Dim bml = 0.0#
@@ -803,67 +793,38 @@ Namespace PropertyPackages.ThermoPlugs
             coeff(3) = 1
 
             Dim temp1 = Poly_Roots(coeff)
-            Dim tv = 0.0#
-            Dim ZV, tv2
+            Dim tv, tv2 As Double
 
-            Dim result As New ArrayList
+            Dim result As New List(Of Double)
 
-            If Not IsNumeric(temp1) Then
-
-                If temp1(0, 0) > temp1(1, 0) Then
-                    tv = temp1(1, 0)
-                    temp1(1, 0) = temp1(0, 0)
-                    temp1(0, 0) = tv
-                    tv2 = temp1(1, 1)
-                    temp1(1, 1) = temp1(0, 1)
-                    temp1(0, 1) = tv2
-                End If
-                If temp1(0, 0) > temp1(2, 0) Then
-                    tv = temp1(2, 0)
-                    temp1(2, 0) = temp1(0, 0)
-                    temp1(0, 0) = tv
-                    tv2 = temp1(2, 1)
-                    temp1(2, 1) = temp1(0, 1)
-                    temp1(0, 1) = tv2
-                End If
-                If temp1(1, 0) > temp1(2, 0) Then
-                    tv = temp1(2, 0)
-                    temp1(2, 0) = temp1(1, 0)
-                    temp1(1, 0) = tv
-                    tv2 = temp1(2, 1)
-                    temp1(2, 1) = temp1(1, 1)
-                    temp1(1, 1) = tv2
-                End If
-
-                ZV = temp1(2, 0)
-                If temp1(2, 1) <> 0 Then
-                    ZV = temp1(1, 0)
-                    If temp1(1, 1) <> 0 Then
-                        ZV = temp1(0, 0)
-                    End If
-                End If
-
-                If temp1(0, 1) = 0.0# And temp1(0, 0) > 0.0# Then result.Add(temp1(0, 0))
-                If temp1(1, 1) = 0.0# And temp1(1, 0) > 0.0# Then result.Add(temp1(1, 0))
-                If temp1(2, 1) = 0.0# And temp1(2, 0) > 0.0# Then result.Add(temp1(2, 0))
-
-            Else
-
-                Dim findZV
-                Dim lc As Integer = 0
-                ZV = 1
-                Do
-                    findZV = coeff(3) * ZV ^ 3 + coeff(2) * ZV ^ 2 + coeff(1) * ZV + coeff(0)
-                    ZV -= 0.00001
-                    If ZV < 0 Then ZV = 1
-                    lc += 1
-                Loop Until Math.Abs(findZV) < 0.0001 Or lc > 10000
-
-                result.Add(ZV)
-
-                Return result
-
+            If temp1(0, 0) > temp1(1, 0) Then
+                tv = temp1(1, 0)
+                temp1(1, 0) = temp1(0, 0)
+                temp1(0, 0) = tv
+                tv2 = temp1(1, 1)
+                temp1(1, 1) = temp1(0, 1)
+                temp1(0, 1) = tv2
             End If
+            If temp1(0, 0) > temp1(2, 0) Then
+                tv = temp1(2, 0)
+                temp1(2, 0) = temp1(0, 0)
+                temp1(0, 0) = tv
+                tv2 = temp1(2, 1)
+                temp1(2, 1) = temp1(0, 1)
+                temp1(0, 1) = tv2
+            End If
+            If temp1(1, 0) > temp1(2, 0) Then
+                tv = temp1(2, 0)
+                temp1(2, 0) = temp1(1, 0)
+                temp1(1, 0) = tv
+                tv2 = temp1(2, 1)
+                temp1(2, 1) = temp1(1, 1)
+                temp1(1, 1) = tv2
+            End If
+
+            If temp1(0, 1) = 0.0# And temp1(0, 0) > 0.0# Then result.Add(temp1(0, 0))
+            If temp1(1, 1) = 0.0# And temp1(1, 0) > 0.0# Then result.Add(temp1(1, 0))
+            If temp1(2, 1) = 0.0# And temp1(2, 0) > 0.0# Then result.Add(temp1(2, 0))
 
             Return result
 
@@ -941,7 +902,7 @@ Namespace PropertyPackages.ThermoPlugs
             AG = aml * P / (R * T) ^ 2
             BG = bml * P / (R * T)
 
-            Dim _zarray As ArrayList, _mingz As Object, Z As Double
+            Dim _zarray As List(Of Double), _mingz As Double(), Z As Double
 
             _zarray = CalcZ(T, P, Vx, VKij, VTc, VPc, Vw)
             _mingz = ZtoMinG(_zarray.ToArray, T, P, Vx, VKij, VTc, VPc, Vw)

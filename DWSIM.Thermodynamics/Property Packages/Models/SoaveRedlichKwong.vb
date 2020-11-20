@@ -291,7 +291,7 @@ Namespace PropertyPackages.Auxiliary
             IObj?.Paragraphs.Add(String.Format("<h2>Calculated Intermediate Parameters</h2>"))
 
             Dim ai(), bi(), ci() As Double
-            Dim n, R As Double
+            Dim n As Integer, R As Double
             Dim Tc(), Pc(), Vc(), w(), Zc(), alpha(), m(), a(,), b(,), Z, Tr() As Double
             Dim i, j, dadT
 
@@ -447,17 +447,27 @@ Namespace PropertyPackages.Auxiliary
 
             Dim tmp1 = MMm / V / 1000
 
-            Dim aux1 = -R / 2 * (0.42748 / T) ^ 0.5
-            i = 0
-            Dim aux2 = 0.0#
-            Do
-                j = 0
+            Dim aux1, aux2, auxtmp(n) As Double
+            aux1 = -R / 2 * (0.42748 / T) ^ 0.5
+
+            If Settings.EnableParallelProcessing Then
+                Parallel.For(0, n + 1, Sub(k)
+                                           For l As Integer = 0 To n
+                                               auxtmp(k) += Vz(k) * Vz(l) * (1 - VKij(k, l)) * (ci(l) * (ai(k) * Tc(l) / Pc(l)) ^ 0.5 + ci(k) * (ai(l) * Tc(k) / Pc(k)) ^ 0.5)
+                                           Next
+                                       End Sub)
+                aux2 = auxtmp.SumY
+            Else
+                i = 0
                 Do
-                    aux2 += Vz(i) * Vz(j) * (1 - VKij(i, j)) * (ci(j) * (ai(i) * Tc(j) / Pc(j)) ^ 0.5 + ci(i) * (ai(j) * Tc(i) / Pc(i)) ^ 0.5)
-                    j = j + 1
-                Loop Until j = n + 1
-                i = i + 1
-            Loop Until i = n + 1
+                    j = 0
+                    Do
+                        aux2 += Vz(i) * Vz(j) * (1 - VKij(i, j)) * (ci(j) * (ai(i) * Tc(j) / Pc(j)) ^ 0.5 + ci(i) * (ai(j) * Tc(i) / Pc(i)) ^ 0.5)
+                        j = j + 1
+                    Loop Until j = n + 1
+                    i = i + 1
+                Loop Until i = n + 1
+            End If
 
             dadT = aux1 * aux2
 

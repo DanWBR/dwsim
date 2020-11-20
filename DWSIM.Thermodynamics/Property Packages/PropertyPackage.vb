@@ -1249,15 +1249,12 @@ Namespace PropertyPackages
                 Dim Pc, Tc, w As Double
 
                 Dim cprops = DW_GetConstantProperties()
+
                 For i = 0 To n
                     Pc = cprops(i).Critical_Pressure
                     Tc = cprops(i).Critical_Temperature
                     w = cprops(i).Acentric_Factor
-                    If type = "LV" Then
-                        K(i) = Pc / P * Math.Exp(5.373 * (1 + w) * (1 - Tc / T))
-                    Else
-                        K(i) = 1.0#
-                    End If
+                    K(i) = Pc / P * Math.Exp(5.373 * (1 + w) * (1 - Tc / T))
                 Next
 
             End If
@@ -5678,6 +5675,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
         Public Overridable Function AUX_CPi(ByVal sub1 As String, ByVal T As Double) As Double
 
+            Dim db As String = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB
+
             If Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.IsPF = 1 Then
 
                 With Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties
@@ -5686,8 +5685,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
             Else
 
-                If Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "DWSIM" Or
-                Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "" Then
+                If db = "DWSIM" Or db = "" Then
                     Dim A, B, C, D, E, result As Double
                     A = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Ideal_Gas_Heat_Capacity_Const_A
                     B = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Ideal_Gas_Heat_Capacity_Const_B
@@ -5697,7 +5695,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     'Cp = A + B*T + C*T^2 + D*T^3 + E*T^4 where Cp in kJ/kg-mol , T in K 
                     result = A + B * T + C * T ^ 2 + D * T ^ 3 + E * T ^ 4
                     Return result / Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Molar_Weight 'kJ/kg.K
-                ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "CheResources" Then
+                ElseIf db = "CheResources" Then
                     Dim A, B, C, D, E, result As Double
                     A = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Ideal_Gas_Heat_Capacity_Const_A
                     B = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Ideal_Gas_Heat_Capacity_Const_B
@@ -5707,9 +5705,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     'CAL/MOL.K [CP=A+(B*T)+(C*T^2)+(D*T^3)], T in K
                     result = A + B * T + C * T ^ 2 + D * T ^ 3
                     Return result / Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Molar_Weight * 4.1868 'kJ/kg.K
-                ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChemSep" Or
-                Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChEDL Thermo" Or
-                Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "User" Then
+                ElseIf db = "ChemSep" Or db = "ChEDL Thermo" Or db = "User" Then
                     Dim A, B, C, D, E, result As Double
                     Dim eqno As String = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.IdealgasCpEquation
                     Dim mw As Double = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Molar_Weight
@@ -5724,7 +5720,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         result = Me.ParseEquation(eqno, A, B, C, D, E, T) / mw
                     End If
                     If result = 0.0 Then Return 3.5 * 8.314 / mw Else Return result
-                ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChEDL Thermo" Then
+                ElseIf db = "ChEDL Thermo" Then
                     Dim A, B, C, D, E, result As Double
                     Dim eqno As String = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.IdealgasCpEquation
                     A = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Ideal_Gas_Heat_Capacity_Const_A
@@ -5734,7 +5730,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     E = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Ideal_Gas_Heat_Capacity_Const_E
                     result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kJ/kg.K
                     Return result
-                ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "CoolProp" Then
+                ElseIf db = "CoolProp" Then
                     Dim A, B, C, D, E, result As Double
                     Dim eqno As String = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.IdealgasCpEquation
                     Dim mw As Double = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Molar_Weight
@@ -5745,7 +5741,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     E = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Ideal_Gas_Heat_Capacity_Const_E
                     result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kJ/kg.K
                     Return result
-                ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "Biodiesel" Then
+                ElseIf db = "Biodiesel" Then
                     Dim A, B, C, D, E, result As Double
                     Dim eqno As String = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.IdealgasCpEquation
                     A = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Ideal_Gas_Heat_Capacity_Const_A
@@ -5755,7 +5751,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     E = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Ideal_Gas_Heat_Capacity_Const_E
                     result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kJ/kg.K
                     Return result
-                ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "KDB" Then
+                ElseIf db = "KDB" Then
                     Dim A, B, C, D, E As Double
                     Dim eqno As String = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.IdealgasCpEquation
                     A = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Ideal_Gas_Heat_Capacity_Const_A
@@ -7079,9 +7075,19 @@ Final3:
 
             If Settings.EnableParallelProcessing Then
 
-                Dim nsteps As Integer = Math.Abs(T2 - T1) / 20
+                Dim nsteps As Integer = Math.Abs(T2 - T1) / 10
 
-                If nsteps < 20 Then nsteps = 20
+                If nsteps < 10 Then
+                    If Math.Abs(T2 - T1) < 1 Then
+                        nsteps = 2
+                    ElseIf Math.Abs(T2 - T1) < 3 Then
+                        nsteps = 4
+                    ElseIf Math.Abs(T2 - T1) < 5 Then
+                        nsteps = 6
+                    Else
+                        nsteps = 10
+                    End If
+                End If
 
                 Dim deltaT As Double = (T2 - T1) / nsteps
 
@@ -8114,7 +8120,7 @@ Final3:
 
         End Function
 
-        Public Function AUX_IS_SINGLECOMP(ByVal Vx As Object) As Boolean
+        Public Function AUX_IS_SINGLECOMP(ByVal Vx As Double()) As Boolean
 
             Dim i, c, n As Integer, bo As Boolean
 
@@ -8123,7 +8129,7 @@ Final3:
             bo = False
             c = 0
             For i = 0 To n
-                If Vx(i) <> 0.0# Then c += 1
+                If Vx(i) > 0.0# Then c += 1
                 If Me.DW_GetConstantProperties(i).IsBlackOil Then bo = True
             Next
 

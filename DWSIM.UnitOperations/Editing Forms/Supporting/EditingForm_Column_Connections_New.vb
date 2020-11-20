@@ -212,15 +212,23 @@ Public Class EditingForm_Column_Connections_New
         Dim stage As String = ""
 
         For Each si In rc.MaterialStreams.Values
-            'If Integer.TryParse(si.AssociatedStage, New Integer) Then
-            '    stage = stageNames(CInt(si.AssociatedStage) + 1)
-            'Else
-            If stageNames.Contains(si.AssociatedStage) Then
-                stage = si.AssociatedStage
+            If Integer.TryParse(si.AssociatedStage, New Integer) Then
+                Try
+                    stage = stageNames(CInt(si.AssociatedStage) + 1)
+                Catch ex As Exception
+                    If stageNames.Contains(si.AssociatedStage) Then
+                        stage = si.AssociatedStage
+                    Else
+                        stage = stageNames(stageIDs.IndexOf(si.AssociatedStage))
+                    End If
+                End Try
             Else
-                stage = stageNames(stageIDs.IndexOf(si.AssociatedStage))
+                If stageNames.Contains(si.AssociatedStage) Then
+                    stage = si.AssociatedStage
+                Else
+                    stage = stageNames(stageIDs.IndexOf(si.AssociatedStage))
+                End If
             End If
-            'End If
             If (si.StreamBehavior = StreamInformation.Behavior.Feed) Then
                 gridAssociations.Rows.Add(New Object() {si.ID, "Feed", rc.GetFlowsheet().SimulationObjects(si.StreamID).GraphicObject.Tag, stage})
             ElseIf (si.StreamBehavior = StreamInformation.Behavior.Sidedraw) Then

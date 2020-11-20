@@ -1402,6 +1402,10 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
             End Select
 
+            'restore GUI updates if disabled
+
+            Settings.SkipGUIUpdate = False
+
             'Frees GPU memory if enabled.
 
             If Settings.EnableGPUProcessing Then

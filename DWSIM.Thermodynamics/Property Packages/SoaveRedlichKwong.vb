@@ -976,10 +976,6 @@ Namespace PropertyPackages
 
         Public Overrides Function DW_CalcFugCoeff(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double()
 
-            Calculator.WriteToConsole(Me.ComponentName & " fugacity coefficient calculation for phase '" & st.ToString & "' requested at T = " & T & " K and P = " & P & " Pa.", 2)
-            Calculator.WriteToConsole("Compounds: " & Me.RET_VNAMES.ToArrayString, 2)
-            Calculator.WriteToConsole("Mole fractions: " & Vx.ToArrayString(), 2)
-
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
             Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcFugCoeff", "SRK EOS Fugacity Coefficient", "Property Package Fugacity Coefficient Calculation Routine")
@@ -996,16 +992,9 @@ Namespace PropertyPackages
                 lnfug = srkn.CalcLnFug(T, P, Vx, Me.RET_VKij, Me.RET_VTC, Me.RET_VPC, Me.RET_VW, Nothing, "V")
             End If
 
-            Dim n As Integer = UBound(lnfug)
-            Dim fugcoeff(n) As Double
-
-            fugcoeff = lnfug.ExpY
-
-            Calculator.WriteToConsole("Result: " & fugcoeff.ToArrayString(), 2)
-
             IObj?.Close()
 
-            Return fugcoeff
+            Return lnfug.ExpY
 
         End Function
 

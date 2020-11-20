@@ -3546,6 +3546,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                 ByVal specs As Dictionary(Of String, SepOps.ColumnSpec),
                                 ByVal IdealK As Boolean, ByVal IdealH As Boolean) As Object
 
+            Settings.SkipGUIUpdate = True
+
             Dim spval1, spval2 As Double
             Dim spci1, spci2 As Integer
 
@@ -3637,6 +3639,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 simplex.ComputeMin(Function(xvars)
 
                                        If errfunc < simplex.Tolerance Then Return errfunc
+
+                                       If Settings.CalculatorStopRequested Then Return errfunc
 
                                        cspec.SpecValue = xvars(0)
                                        rspec.SpecValue = xvars(1)
@@ -3745,6 +3749,12 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                        End Select
 
                                        counter += 1
+
+                                       If Math.IEEERemainder(counter, 10) = 0.0 Then
+                                           Settings.SkipGUIUpdate = False
+                                       Else
+                                           Settings.SkipGUIUpdate = True
+                                       End If
 
                                        pp.Flowsheet?.ShowMessage(String.Format("BP solver: external iteration #{0}, current objective function (error) value = {1}", counter, errfunc), IFlowsheet.MessageType.Information)
 
@@ -4146,6 +4156,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 task1.Wait()
 
             Else
+
                 For i = 0 To ns
                     IObj?.SetCurrent
                     If IdealH Then
@@ -4160,6 +4171,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         Hv(i) = pp.DW_CalcEnthalpy(y(i), Tj(i), P(i), PropertyPackages.State.Vapor) * pp.AUX_MMM(y(i)) / 1000
                     End If
                 Next
+
             End If
 
             IObj?.Paragraphs.Add(String.Format("Vapor Enthalpies: {0}", Hv.ToMathArrayString))

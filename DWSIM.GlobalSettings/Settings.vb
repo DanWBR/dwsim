@@ -60,7 +60,16 @@ Public Class Settings
     End Property
     Public Shared Property CAPEOPENMode As Boolean = False
     Public Shared Property ExcelMode As Boolean = False
-    Public Shared Property MaxDegreeOfParallelism As Integer = -1
+
+    Public Shared Property MaxDegreeOfParallelism As Integer
+        Get
+            Return -1
+        End Get
+        Set(value As Integer)
+            'do nothing
+        End Set
+    End Property
+
     Public Shared Property UseSIMDExtensions As Boolean = False
     Public Shared Property EnableParallelProcessing As Boolean = True
     Public Shared Property EnableGPUProcessing As Boolean = False
@@ -159,6 +168,8 @@ Public Class Settings
     Public Shared Property CrossPlatformUIItemSpacing As Integer = 5
 
     Public Shared Property EnableCustomTouchBar As Boolean = True
+
+    Public Shared Property SkipGUIUpdate As Boolean = False
 
     Shared Sub LoadExcelSettings(Optional ByVal configfile As String = "")
 

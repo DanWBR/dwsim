@@ -247,10 +247,10 @@ Namespace PropertyPackages.Auxiliary
 
             a = Calc_SUM1(n, ai, VKij)
 
-            Dim tmpa As Object = Calc_SUM2(n, Vx, a)
+            Dim tmpa As Double()() = Calc_SUM2(n, Vx, a)
 
             aml2 = tmpa(0)
-            Dim aml As Double = tmpa(1)
+            Dim aml As Double = tmpa(1)(0)
 
             i = 0
             Dim bml = 0.0#
@@ -501,9 +501,9 @@ Namespace PropertyPackages.Auxiliary
 
             a = Calc_SUM1(n, ai, VKij)
 
-            Dim tmpa As Object = Calc_SUM2(n, Vz, a)
+            Dim tmpa As Double()() = Calc_SUM2(n, Vz, a)
 
-            Dim am As Double = tmpa(1)
+            Dim am As Double = tmpa(1)(0)
 
             Dim bm As Double = Vz.MultiplyY(bi).SumY
 
@@ -921,7 +921,7 @@ Namespace PropertyPackages.ThermoPlugs
 
         End Function
 
-        Shared Function Calc_SUM2(n As Integer, Vx As Double(), a As Double(,)) As Object
+        Shared Function Calc_SUM2(n As Integer, Vx As Double(), a As Double(,)) As Double()()
 
             Dim saml, aml(n), aml2(n) As Double
 
@@ -948,7 +948,7 @@ Namespace PropertyPackages.ThermoPlugs
                 Loop Until i = n + 1
             End If
 
-            Return {aml2, saml}
+            Return {aml2, New Double() {saml}}
 
         End Function
 
@@ -1024,7 +1024,7 @@ Namespace PropertyPackages.ThermoPlugs
             AG = aml * P / (R * T) ^ 2
             BG = bml * P / (R * T)
 
-            Dim _zarray As List(Of Double), _mingz As Object, Z As Double
+            Dim _zarray As List(Of Double), _mingz As Double(), Z As Double
             _zarray = CalcZ(T, P, Vx, VKij, VTc, VPc, Vw)
             _mingz = ZtoMinG(_zarray.ToArray(), T, P, Vx, VKij, VTc, VPc, Vw)
             Z = _zarray(_mingz(0))
@@ -1047,7 +1047,7 @@ Namespace PropertyPackages.ThermoPlugs
 
         End Function
 
-        Shared Function ZtoMinG(ByVal Z_ As Double(), ByVal T As Double, ByVal P As Double, ByVal Vz As Double(), ByVal VKij As Object, ByVal VTc As Double(), ByVal VPc As Double(), ByVal Vw As Double()) As Object
+        Shared Function ZtoMinG(ByVal Z_ As Double(), ByVal T As Double, ByVal P As Double, ByVal Vz As Double(), ByVal VKij As Object, ByVal VTc As Double(), ByVal VPc As Double(), ByVal Vw As Double()) As Double()
 
             Calculator.WriteToConsole("PR min-G root finder (Z) for T = " & T & " K, P = " & P & " Pa and Z = " & DirectCast(Z_, Double()).ToMathArrayString, 3)
 
@@ -1095,9 +1095,9 @@ Namespace PropertyPackages.ThermoPlugs
 
             a = Calc_SUM1(n, ai, VKij)
 
-            Dim tmpa As Object = Calc_SUM2(n, Vz, a)
+            Dim tmpa As Double()() = Calc_SUM2(n, Vz, a)
 
-            Dim am As Double = tmpa(1)
+            Dim am As Double = tmpa(1)(0)
 
             Dim bm As Double = Vz.MultiplyY(bi).SumY
 
@@ -1151,7 +1151,7 @@ Namespace PropertyPackages.ThermoPlugs
 
             Calculator.WriteToConsole("Result: Min-G Z Index = " & k, 3)
 
-            Return New Object() {k, G(k)}
+            Return New Double() {k, G(k)}
 
         End Function
 
@@ -1277,10 +1277,10 @@ Namespace PropertyPackages.ThermoPlugs
             IObj?.Paragraphs.Add("<math_inline>a_{i}</math_inline>: " & ai.ToMathArrayString)
             IObj?.Paragraphs.Add("<math_inline>b_{i}</math_inline>: " & bi.ToMathArrayString)
 
-            Dim tmpa As Object = Calc_SUM2(n, Vx, a)
+            Dim tmpa As Double()() = Calc_SUM2(n, Vx, a)
 
             aml2 = tmpa(0)
-            aml = tmpa(1)
+            aml = tmpa(1)(0)
 
             bml = Vx.MultiplyY(bi).SumY
 
@@ -1293,7 +1293,7 @@ Namespace PropertyPackages.ThermoPlugs
             IObj?.Paragraphs.Add(String.Format("<math_inline>A</math_inline>: {0}", AG))
             IObj?.Paragraphs.Add(String.Format("<math_inline>B</math_inline>: {0}", BG))
 
-            Dim _zarray As List(Of Double), _mingz As Object, Z As Double
+            Dim _zarray As List(Of Double), _mingz As Double(), Z As Double
 
             IObj?.SetCurrent()
 
@@ -1398,7 +1398,7 @@ Namespace PropertyPackages.ThermoPlugs
             AG = aml * P / (R * T) ^ 2
             BG = bml * P / (R * T)
 
-            Dim _zarray As List(Of Double), _mingz As Object, Z As Double
+            Dim _zarray As List(Of Double), _mingz As Double(), Z As Double
 
             _zarray = CalcZ2(AG, BG)
             If forcephase <> "" Then
@@ -1623,10 +1623,10 @@ Namespace PropertyPackages.ThermoPlugs
 
             a = Calc_SUM1(n, ai, VKij)
 
-            Dim tmpa As Object = Calc_SUM2(n, Vx, a)
+            Dim tmpa As Double()() = Calc_SUM2(n, Vx, a)
 
             aml2 = tmpa(0)
-            aml = tmpa(1)
+            aml = tmpa(1)(0)
 
             Dim bml As Double = Vx.MultiplyY(bi).SumY
 
@@ -1649,7 +1649,7 @@ Namespace PropertyPackages.ThermoPlugs
 
             Dim temp1 = Poly_Roots(coeff)
             Dim tv = 0.0#
-            Dim ZV, tv2 As Double
+            Dim tv2 As Double
 
             Dim result As New List(Of Double)
 
@@ -1676,14 +1676,6 @@ Namespace PropertyPackages.ThermoPlugs
                 tv2 = temp1(2, 1)
                 temp1(2, 1) = temp1(1, 1)
                 temp1(1, 1) = tv2
-            End If
-
-            ZV = temp1(2, 0)
-            If temp1(2, 1) <> 0 Then
-                ZV = temp1(1, 0)
-                If temp1(1, 1) <> 0 Then
-                    ZV = temp1(0, 0)
-                End If
             End If
 
             If temp1(0, 1) = 0.0# And temp1(0, 0) > 0.0# Then result.Add(temp1(0, 0))
@@ -1830,7 +1822,7 @@ Namespace PropertyPackages.ThermoPlugs
             AG = aml * P / (R * T) ^ 2
             BG = bml * P / (R * T)
 
-            Dim _zarray As List(Of Double), _mingz As Object, Z As Double
+            Dim _zarray As List(Of Double), _mingz As Double(), Z As Double
 
             _zarray = CalcZ(T, P, Vx, VKij, VTc, VPc, Vw)
             _mingz = ZtoMinG(_zarray.ToArray(), T, P, Vx, VKij, VTc, VPc, Vw)

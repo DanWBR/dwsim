@@ -16,13 +16,36 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.Numerics
+Imports MathNet.Numerics
+
 Namespace MathEx
 
     Public Class PolySolve
 
         Shared Function Poly_Roots(ByVal Coeff) As Double(,)
 
-            Poly_Roots = CalcRoots(Coeff(3), Coeff(2), Coeff(1), Coeff(0))
+            Poly_Roots = CalcRoots2(Coeff(3), Coeff(2), Coeff(1), Coeff(0))
+
+        End Function
+
+        Shared Function CalcRoots2(ByVal a As Double, ByVal b As Double, ByVal c As Double, ByVal d As Double) As Double(,)
+
+            Dim roots0 = FindRoots.Cubic(d, c, b, a)
+            Dim root1 = roots0.Item1
+            Dim root2 = roots0.Item2
+            Dim root3 = roots0.Item3
+
+            Dim roots(2, 1) As Double
+
+            roots(0, 0) = root1.Real
+            roots(0, 1) = IIf(Math.Abs(root1.Imaginary) > 0.0000000001, root1.Imaginary, 0.0)
+            roots(1, 0) = root2.Real
+            roots(1, 1) = IIf(Math.Abs(root2.Imaginary) > 0.0000000001, root2.Imaginary, 0.0)
+            roots(2, 0) = root3.Real
+            roots(2, 1) = IIf(Math.Abs(root3.Imaginary) > 0.0000000001, root3.Imaginary, 0.0)
+
+            Return roots
 
         End Function
 

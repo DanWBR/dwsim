@@ -2633,7 +2633,9 @@ Public Class FormFlowsheet
     End Sub
 
     Public Sub CheckStatus() Implements Interfaces.IFlowsheet.CheckStatus, IFlowsheetGUI.CheckStatus
-        Application.DoEvents()
+        If Not Settings.SkipGUIUpdate Then
+            Application.DoEvents()
+        End If
         FlowsheetSolver.FlowsheetSolver.CheckCalculatorStatus()
     End Sub
 
