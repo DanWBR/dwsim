@@ -64,7 +64,11 @@ The full changelog including souce code changes can be viewed at https://github.
 
 Version 6.3 Update 4
 
-- [FIX] Bug fixes and minor enhancements
+- [NEW] Advanced Python Script Kinetics
+- [CHG] PR/SRK calculation speed improvements
+- [CHG] Rigorous Column solver improvements
+- [FIX] Thermo subsystem fixes
+- [FIX] Bug fixes
 
 Version 6.3 Update 3
 
