@@ -1254,7 +1254,11 @@ Namespace PropertyPackages
                     Pc = cprops(i).Critical_Pressure
                     Tc = cprops(i).Critical_Temperature
                     w = cprops(i).Acentric_Factor
-                    K(i) = Pc / P * Math.Exp(5.373 * (1 + w) * (1 - Tc / T))
+                    If type = "LV" Then
+                        K(i) = Pc / P * Math.Exp(5.373 * (1 + w) * (1 - Tc / T))
+                    Else
+                        K(i) = 1.0
+                    End If
                 Next
 
             End If

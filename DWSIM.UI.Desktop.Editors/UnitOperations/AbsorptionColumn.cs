@@ -346,16 +346,6 @@ namespace DWSIM.UI.Desktop.Editors
                 }
             }
 
-
-            s.CreateAndAddLabelRow(container, "Column Solver Strategy");
-
-            var strategies = new string[] { "Ideal K first, then Rigorous", "Ideal H first, then Rigorous", "Ideal K+H first, then Rigorous", "Direct Rigorous" };
-
-            s.CreateAndAddDropDownRow(container, "Solving Scheme", strategies.ToList(), (int)column.SolverScheme, (sender, e) =>
-            {
-                column.SolverScheme = (UnitOperations.UnitOperations.Column.SolvingScheme)sender.SelectedIndex;
-            });
-
             s.CreateAndAddTextBoxRow(container, "N0", "Maximum Iterations", column.MaxIterations,
             (sender, e) =>
             {

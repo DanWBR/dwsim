@@ -117,17 +117,6 @@ Public Class EditingForm_Column
             tbMaxIt.Text = .MaxIterations
             tbConvTol.Text = .ExternalLoopTolerance.ToString("R")
 
-            Select Case SimObject.SolverScheme
-                Case SolvingScheme.Ideal_K_Init
-                    cbSolverScheme.SelectedIndex = 1
-                Case SolvingScheme.Ideal_Enthalpy_Init
-                    cbSolverScheme.SelectedIndex = 2
-                Case SolvingScheme.Ideal_K_and_Enthalpy_Init
-                    cbSolverScheme.SelectedIndex = 3
-                Case SolvingScheme.Direct
-                    cbSolverScheme.SelectedIndex = 0
-            End Select
-
             cbCondType.SelectedIndex = .CondenserType
             tbCondPressure.Text = su.Converter.ConvertFromSI(units.pressure, .CondenserPressure).ToString(nf)
             tbCondPDrop.Text = su.Converter.ConvertFromSI(units.deltaP, .CondenserDeltaP).ToString(nf)
@@ -658,20 +647,6 @@ Public Class EditingForm_Column
         End If
 
     End Sub
-
-    Private Sub cbSolverScheme_SelectedIndexChanged_1(sender As Object, e As EventArgs) Handles cbSolverScheme.SelectedIndexChanged
-        Select Case cbSolverScheme.SelectedIndex
-            Case 0
-                SimObject.SolverScheme = SolvingScheme.Direct
-            Case 1
-                SimObject.SolverScheme = SolvingScheme.Ideal_K_Init
-            Case 2
-                SimObject.SolverScheme = SolvingScheme.Ideal_Enthalpy_Init
-            Case 3
-                SimObject.SolverScheme = SolvingScheme.Ideal_K_and_Enthalpy_Init
-        End Select
-    End Sub
-
 
     Private Sub lblTag_KeyPress(sender As Object, e As KeyEventArgs) Handles lblTag.KeyUp
 

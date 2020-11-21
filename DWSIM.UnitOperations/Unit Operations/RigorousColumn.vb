@@ -2733,67 +2733,17 @@ Namespace UnitOperations
                 Else
                     IObj?.SetCurrent()
                     Dim flashresult As Object = Nothing
-                    If llextractor Then
-                        Dim L1, L2, Vx1(), Vx2() As Double
-                        Dim trialcomp As Double() = zm.Clone
-                        For counter As Integer = 0 To 100
-                            flashresult = pp.FlashBase.Flash_PT(trialcomp, P(i), T(i), pp)
-                            L1 = flashresult(0)
-                            L2 = flashresult(5)
-                            If L2 > 0.0 Then
-                                Exit For
-                            Else
-                                Dim rnd As New Random(counter)
-                                trialcomp = Enumerable.Repeat(0, nc).Select(Function(d) rnd.NextDouble()).ToArray
-                                trialcomp = trialcomp.NormalizeY
-                            End If
+                    If rebVx.Sum > 0 And distVx.Sum > 0 Then
+                        For j = 0 To nc - 1
+                            x(i)(j) = distVx(j) + Convert.ToDouble(i) / Convert.ToDouble(ns) * (rebVx(j) - distVx(j))
+                            y(i)(j) = distVy(j) + Convert.ToDouble(i) / Convert.ToDouble(ns) * (rebVy(j) - distVy(j))
                         Next
-                        If L2 = 0.0 Then
-                            'try simple lle
-                            trialcomp = zm.Clone
-                            Dim slle As New PropertyPackages.Auxiliary.FlashAlgorithms.SimpleLLE()
-                            For counter As Integer = 0 To 100
-                                flashresult = slle.Flash_PT(trialcomp, P(i), T(i), pp)
-                                L1 = flashresult(0)
-                                L2 = flashresult(5)
-                                If L2 > 0.0 Then
-                                    Exit For
-                                Else
-                                    Dim rnd As New Random(counter)
-                                    trialcomp = Enumerable.Repeat(0, nc).Select(Function(d) rnd.NextDouble()).ToArray
-                                    trialcomp = trialcomp.NormalizeY
-                                End If
-                            Next
-                            If L2 = 0.0 Then
-                                Throw New Exception("Your column is configured as a Liquid-Liquid Extractor, but the Property Package / Flash Algorithm set associated with the column is unable to generate an initial estimate for two liquid phases. Please select a different set or change the Flash Algorithm's Stability Analysis parameters and try again.")
-                            End If
-                        End If
-                        Vx1 = flashresult(2)
-                        Vx2 = flashresult(6)
-                        x(i) = Vx1
-                        y(i) = Vx2
-                        If y(i).SumY = 0.0# Then
-                            y(i) = x(i).Clone
-                        End If
-                        If Not Me.UseVaporFlowEstimates Then
-                            V(i) = F.Sum * L2
-                        End If
-                        If Not Me.UseLiquidFlowEstimates Then
-                            L(i) = F.Sum * L1
-                        End If
+                        x(i) = x(i).NormalizeY
+                        y(i) = y(i).NormalizeY
                     Else
-                        If rebVx.Sum > 0 And distVx.Sum > 0 Then
-                            For j = 0 To nc - 1
-                                x(i)(j) = distVx(j) + Convert.ToDouble(i) / Convert.ToDouble(ns) * (rebVx(j) - distVx(j))
-                                y(i)(j) = distVy(j) + Convert.ToDouble(i) / Convert.ToDouble(ns) * (rebVy(j) - distVy(j))
-                            Next
-                            x(i) = x(i).NormalizeY
-                            y(i) = y(i).NormalizeY
-                        Else
-                            flashresult = pp.FlashBase.Flash_PT(zm, P(i), T(i), pp)
-                            x(i) = flashresult(2)
-                            y(i) = flashresult(3)
-                        End If
+                        flashresult = pp.FlashBase.Flash_PT(zm, P(i), T(i), pp)
+                        x(i) = flashresult(2)
+                        y(i) = flashresult(3)
                     End If
                     z(i) = zm
                     For j = 0 To nc - 1
@@ -2825,6 +2775,113 @@ Namespace UnitOperations
             IObj?.Paragraphs.Add(String.Format("Estimated/Specified Liquid Side Draw Rate: {0} mol/s", LSS.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Estimated/Specified Vapor/Liquid2 Side Draw Rate: {0} mol/s", VSS.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Estimated/Specified Heat Added/Removed Profile: {0} kW", Q.ToMathArrayString))
+
+            Dim L1trials, L2trials As New List(Of Double())
+            Dim x1trials, x2trials As New List(Of Double()())
+
+            If llextractor Then
+
+                If Not UseCompositionEstimates Or Not UseLiquidFlowEstimates Or Not UseVaporFlowEstimates Then
+
+                    'll extractor
+                    Dim L1, L2, Vx1(), Vx2() As Double
+                    Dim trialcomp As Double() = zm.Clone
+                    For counter As Integer = 0 To 30
+                        Dim flashresult = pp.FlashBase.Flash_PT(trialcomp, P.Average, T.Average, pp)
+                        L1 = flashresult(0)
+                        L2 = flashresult(5)
+                        Vx1 = flashresult(2)
+                        Vx2 = flashresult(6)
+                        If L2 > 0.0 Then
+                            Dim L1t, L2t As New List(Of Double)
+                            Dim xt1, xt2 As New List(Of Double())
+                            For i = 0 To Stages.Count - 1
+                                If UseLiquidFlowEstimates Then
+                                    L1t.Add(L.Clone)
+                                Else
+                                    L1t.Add(F.Sum * L1)
+                                End If
+                                If UseVaporFlowEstimates Then
+                                    L2t.Add(V.Clone)
+                                Else
+                                    L2t.Add(F.Sum * L2)
+                                End If
+                                If UseCompositionEstimates Then
+                                    xt1.Add(x(i).Clone)
+                                    xt2.Add(y(i).Clone)
+                                Else
+                                    xt1.Add(Vx1)
+                                    xt2.Add(Vx2)
+                                End If
+                            Next
+                            L1trials.Add(L1t.ToArray())
+                            L2trials.Add(L2t.ToArray())
+                            x1trials.Add(xt1.ToArray())
+                            x2trials.Add(xt2.ToArray())
+                        End If
+                        Dim rnd As New Random(counter)
+                        trialcomp = Enumerable.Repeat(0, nc).Select(Function(d) rnd.NextDouble()).ToArray
+                        trialcomp = trialcomp.NormalizeY
+                    Next
+
+                    trialcomp = zm.Clone
+                    Dim lle As New PropertyPackages.Auxiliary.FlashAlgorithms.SimpleLLE()
+                    For counter As Integer = 0 To 20
+                        Dim flashresult = lle.Flash_PT(trialcomp, P.Average, T.Average, pp)
+                        L1 = flashresult(0)
+                        L2 = flashresult(5)
+                        Vx1 = flashresult(2)
+                        Vx2 = flashresult(6)
+                        If L2 > 0.0 Then
+                            Dim L1t, L2t As New List(Of Double)
+                            Dim xt1, xt2 As New List(Of Double())
+                            For i = 0 To Stages.Count - 1
+                                If UseLiquidFlowEstimates Then
+                                    L1t.Add(L.Clone)
+                                Else
+                                    L1t.Add(F.Sum * L1)
+                                End If
+                                If UseVaporFlowEstimates Then
+                                    L2t.Add(V.Clone)
+                                Else
+                                    L2t.Add(F.Sum * L2)
+                                End If
+                                If UseCompositionEstimates Then
+                                    xt1.Add(x(i).Clone)
+                                    xt2.Add(y(i).Clone)
+                                Else
+                                    xt1.Add(Vx1)
+                                    xt2.Add(Vx2)
+                                End If
+                            Next
+                            L1trials.Add(L1t.ToArray())
+                            L2trials.Add(L2t.ToArray())
+                            x1trials.Add(xt1.ToArray())
+                            x2trials.Add(xt2.ToArray())
+                        End If
+                        Dim rnd As New Random(counter)
+                        trialcomp = Enumerable.Repeat(0, nc).Select(Function(d) rnd.NextDouble()).ToArray
+                        trialcomp = trialcomp.NormalizeY
+                    Next
+
+                Else
+
+                    Dim L1t, L2t As New List(Of Double)
+                    Dim xt1, xt2 As New List(Of Double())
+                    For i = 0 To Stages.Count
+                        L1t.Add(L.Clone)
+                        L2t.Add(V.Clone)
+                        xt1.Add(x(i).Clone)
+                        xt2.Add(y(i).Clone)
+                    Next
+                    L1trials.Add(L1t.ToArray())
+                    L2trials.Add(L2t.ToArray())
+                    x1trials.Add(xt1.ToArray())
+                    x2trials.Add(xt2.ToArray())
+
+                End If
+
+            End If
 
             'store initial values
 
@@ -2878,40 +2935,41 @@ Namespace UnitOperations
                 IObj?.Paragraphs.Add(String.Format("Compound (if applicable): {0}", sp.ComponentID))
             Next
 
-            Dim idealk0, idealh0 As Boolean
-
-            Select Case SolverScheme
-                Case SolvingScheme.Direct
-                    idealk0 = False
-                    idealh0 = False
-                Case SolvingScheme.Ideal_K_Init
-                    idealk0 = True
-                    idealh0 = False
-                Case SolvingScheme.Ideal_Enthalpy_Init
-                    idealk0 = False
-                    idealh0 = True
-                Case SolvingScheme.Ideal_K_and_Enthalpy_Init
-                    idealk0 = True
-                    idealh0 = True
-            End Select
-
-            IObj?.Paragraphs.Add(String.Format("Solving Scheme: {0}", [Enum].GetName(SolverScheme.GetType, SolverScheme)))
-
-            If idealk0 Or idealh0 Then
-                IObj?.Paragraphs.Add("Calling the rigorous solver to calculate solution using Ideal K-values and/or Enthalpy values.")
-            End If
-
             Dim result As Object = Nothing
 
             IObj?.SetCurrent()
 
             If TypeOf Me Is DistillationColumn Then
-                result = SolvingMethods.WangHenkeMethod.Solve(Me, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, -1, eff, Me.ColumnType, pp, Me.Specs, idealk0, idealh0)
+                result = SolvingMethods.WangHenkeMethod.Solve(Me, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, -1, eff, Me.ColumnType, pp, Me.Specs, False, False)
                 ic = result(9)
             ElseIf TypeOf Me Is AbsorptionColumn Then
-                result = SolvingMethods.BurninghamOttoMethod.Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, -1, eff, pp, Me.Specs, idealk0, idealh0, llextractor)
-                ic = result(9)
+                'run all trial compositions until it solves
+                Dim ntrials = L1trials.Count
+                Dim ex0 As Exception = Nothing
+                For i = 0 To ntrials - 1
+                    Try
+                        For j = 0 To Stages.Count - 1
+                            For k = 0 To nc - 1
+                                If x1trials(i)(j)(k) = 0.0 Then
+                                    Kval(j)(k) = 1.0E+20
+                                Else
+                                    Kval(j)(k) = (x2trials(i)(j)(k) / x1trials(i)(j)(k))
+                                End If
+                            Next
+                        Next
+                        result = SolvingMethods.BurninghamOttoMethod.Solve(nc, ns, maxits, tol, F, L2trials(i), Q, L1trials(i), VSS, LSS, Kval, x1trials(i), x2trials(i), z, fc, HF, T, P, -1, eff, pp, Me.Specs, False, False, llextractor)
+                        ic = result(9)
+                        ex0 = Nothing
+                        Exit For
+                    Catch ex As Exception
+                        'do nothing, try next set
+                        ex0 = ex
+                    End Try
+                Next
+                If ex0 IsNot Nothing Then Throw ex0
             End If
+
+            IObj?.Paragraphs.Add("Column is solved.")
 
             '{Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ic, t_error}
 
@@ -2936,23 +2994,6 @@ Namespace UnitOperations
             VSSf = result(3)
             LSSf = result(4)
             Q = result(8)
-
-            IObj?.SetCurrent()
-
-
-            If SolverScheme <> SolvingScheme.Direct Then
-                're-run solver using refined initial estimates from last run with ideal properties
-                If TypeOf Me Is DistillationColumn Then
-                    Dim bp As New SolvingMethods.WangHenkeMethod
-                    result = SolvingMethods.WangHenkeMethod.Solve(Me, nc, ns, maxits, tol, F, Vf, Q, Lf, VSSf, LSSf, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, -1, eff, Me.ColumnType, pp, Me.Specs, False, False)
-                    ic = result(9)
-                ElseIf TypeOf Me Is AbsorptionColumn Then
-                    result = SolvingMethods.BurninghamOttoMethod.Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, -1, eff, pp, Me.Specs, idealk0, idealh0, llextractor)
-                    ic = result(9)
-                End If
-            End If
-
-            IObj?.Paragraphs.Add("Column is solved.")
 
             'if enabled, auto update initial estimates
 
@@ -5181,7 +5222,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         K(i)(j) = tmp(j)
                         If Double.IsNaN(K(i)(j)) Or Double.IsInfinity(K(i)(j)) Then
                             If llextr Then
-                                K(i)(j) = 1.0#
+                                IObj2?.SetCurrent()
+                                K(i)(j) = pp.AUX_PVAPi(j, Tj(i)) / P(i)
                             Else
                                 IObj2?.SetCurrent()
                                 K(i)(j) = pp.AUX_PVAPi(j, Tj(i)) / P(i)
@@ -5225,14 +5267,11 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
-                Calculator.WriteToConsole("Sum Rates solver T error = " & t_error, 1)
-                Calculator.WriteToConsole("Sum Rates solver composition error = " & comperror, 1)
-
                 IObj2?.Close()
 
-                pp.CurrentMaterialStream.Flowsheet.ShowMessage("Sum-Rates solver: iteration #" & ic.ToString & ", Temperature error = " & t_error.ToString, IFlowsheet.MessageType.Information)
-                pp.CurrentMaterialStream.Flowsheet.ShowMessage("Sum-Rates solver: iteration #" & ic.ToString & ", Composition error = " & comperror.ToString, IFlowsheet.MessageType.Information)
-                pp.CurrentMaterialStream.Flowsheet.ShowMessage("Sum-Rates solver: iteration #" & ic.ToString & ", combined Temperature/Composition error = " & (t_error + comperror).ToString, IFlowsheet.MessageType.Information)
+                'pp.CurrentMaterialStream.Flowsheet.ShowMessage("Sum-Rates solver: iteration #" & ic.ToString & ", Temperature error = " & t_error.ToString, IFlowsheet.MessageType.Information)
+                'pp.CurrentMaterialStream.Flowsheet.ShowMessage("Sum-Rates solver: iteration #" & ic.ToString & ", Composition error = " & comperror.ToString, IFlowsheet.MessageType.Information)
+                'pp.CurrentMaterialStream.Flowsheet.ShowMessage("Sum-Rates solver: iteration #" & ic.ToString & ", combined Temperature/Composition error = " & (t_error + comperror).ToString, IFlowsheet.MessageType.Information)
 
             Loop Until t_error <= tol(1) And comperror <= tol(1)
 

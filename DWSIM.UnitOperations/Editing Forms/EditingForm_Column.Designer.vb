@@ -25,9 +25,9 @@ Partial Class EditingForm_Column
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_Column))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.lblTag = New System.Windows.Forms.TextBox()
         Me.chkActive = New System.Windows.Forms.CheckBox()
@@ -41,8 +41,6 @@ Partial Class EditingForm_Column
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabGeneral = New System.Windows.Forms.TabPage()
-        Me.cbSolverScheme = New System.Windows.Forms.ComboBox()
-        Me.Label27 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.tbConvTol = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -234,8 +232,6 @@ Partial Class EditingForm_Column
         'TabGeneral
         '
         resources.ApplyResources(Me.TabGeneral, "TabGeneral")
-        Me.TabGeneral.Controls.Add(Me.cbSolverScheme)
-        Me.TabGeneral.Controls.Add(Me.Label27)
         Me.TabGeneral.Controls.Add(Me.Label16)
         Me.TabGeneral.Controls.Add(Me.tbConvTol)
         Me.TabGeneral.Controls.Add(Me.btnConfigurePP)
@@ -252,25 +248,6 @@ Partial Class EditingForm_Column
         Me.ToolTipValues.SetToolTip(Me.TabGeneral, resources.GetString("TabGeneral.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.TabGeneral, resources.GetString("TabGeneral.ToolTip2"))
         Me.TabGeneral.UseVisualStyleBackColor = True
-        '
-        'cbSolverScheme
-        '
-        resources.ApplyResources(Me.cbSolverScheme, "cbSolverScheme")
-        Me.cbSolverScheme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbSolverScheme.FormattingEnabled = True
-        Me.cbSolverScheme.Items.AddRange(New Object() {resources.GetString("cbSolverScheme.Items"), resources.GetString("cbSolverScheme.Items1"), resources.GetString("cbSolverScheme.Items2"), resources.GetString("cbSolverScheme.Items3")})
-        Me.cbSolverScheme.Name = "cbSolverScheme"
-        Me.ToolTip1.SetToolTip(Me.cbSolverScheme, resources.GetString("cbSolverScheme.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.cbSolverScheme, resources.GetString("cbSolverScheme.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.cbSolverScheme, resources.GetString("cbSolverScheme.ToolTip2"))
-        '
-        'Label27
-        '
-        resources.ApplyResources(Me.Label27, "Label27")
-        Me.Label27.Name = "Label27"
-        Me.ToolTip1.SetToolTip(Me.Label27, resources.GetString("Label27.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label27, resources.GetString("Label27.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label27, resources.GetString("Label27.ToolTip2"))
         '
         'Label16
         '
@@ -763,8 +740,8 @@ Partial Class EditingForm_Column
         '
         'DataGridViewTextBoxColumn1
         '
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle4
         Me.DataGridViewTextBoxColumn1.FillWeight = 60.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn1, "DataGridViewTextBoxColumn1")
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
@@ -772,8 +749,8 @@ Partial Class EditingForm_Column
         '
         'DataGridViewTextBoxColumn2
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle5
         Me.DataGridViewTextBoxColumn2.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
@@ -781,8 +758,8 @@ Partial Class EditingForm_Column
         '
         'Column1
         '
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle6
         Me.Column1.FillWeight = 30.0!
         resources.ApplyResources(Me.Column1, "Column1")
         Me.Column1.Name = "Column1"
@@ -930,8 +907,6 @@ Partial Class EditingForm_Column
     Public WithEvents cbCondComp As System.Windows.Forms.ComboBox
     Public WithEvents Label24 As System.Windows.Forms.Label
     Public WithEvents cbRebComp As System.Windows.Forms.ComboBox
-    Public WithEvents cbSolverScheme As System.Windows.Forms.ComboBox
-    Public WithEvents Label27 As System.Windows.Forms.Label
     Public WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
