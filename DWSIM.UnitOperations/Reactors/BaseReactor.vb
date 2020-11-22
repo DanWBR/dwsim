@@ -178,10 +178,10 @@ Namespace Reactors
 
         End Function
 
-        Function ProcessAdvancedKineticReactionRate(scriptTItle As String, rc As Reactor, rxn As Reaction, T As Double, P As Double, amounts As Dictionary(Of String, Double), amounts2 As Dictionary(Of String, Double)) As Double
+        Private scope As ScriptScope
+        Private engine As ScriptEngine
 
-            Dim scope As Microsoft.Scripting.Hosting.ScriptScope
-            Dim engine As Microsoft.Scripting.Hosting.ScriptEngine
+        Function ProcessAdvancedKineticReactionRate(scriptTItle As String, rc As Reactor, rxn As Reaction, T As Double, P As Double, amounts As Dictionary(Of String, Double), amounts2 As Dictionary(Of String, Double)) As Double
 
             Dim script = FlowSheet.Scripts.Values.Where(Function(x) x.Title = scriptTItle).FirstOrDefault()
 
@@ -189,12 +189,6 @@ Namespace Reactors
 
             Dim scripttext = script.ScriptText
 
-            Dim opts As New Dictionary(Of String, Object)()
-            opts("Frames") = Microsoft.Scripting.Runtime.ScriptingRuntimeHelpers.True
-            engine = IronPython.Hosting.Python.CreateEngine(opts)
-            engine.Runtime.LoadAssembly(GetType(System.String).Assembly)
-            engine.Runtime.LoadAssembly(GetType(Thermodynamics.BaseClasses.ConstantProperties).Assembly)
-            engine.Runtime.LoadAssembly(GetType(Drawing.SkiaSharp.GraphicsSurface).Assembly)
             scope = engine.CreateScope()
             scope.SetVariable("Flowsheet", Me)
             scope.SetVariable("reaction", rxn)
@@ -205,31 +199,40 @@ Namespace Reactors
             For Each item In amounts
                 scope.SetVariable(item.Key, item.Value)
             Next
+
             Dim txtcode As String = scripttext
             Dim r As Double = Double.MinValue
-            Dim source As Microsoft.Scripting.Hosting.ScriptSource = engine.CreateScriptSourceFromString(txtcode, Microsoft.Scripting.SourceCodeKind.Statements)
+            Dim source As ScriptSource = engine.CreateScriptSourceFromString(txtcode, Microsoft.Scripting.SourceCodeKind.Statements)
+
             Try
                 source.Execute(scope)
                 r = scope.GetVariable("r")
             Catch ex As Exception
                 Dim ops As ExceptionOperations = engine.GetService(Of ExceptionOperations)()
                 FlowSheet.ShowMessage("Error running script: " & ops.FormatException(ex).ToString, IFlowsheet.MessageType.GeneralError)
-            Finally
-                engine.Runtime.Shutdown()
-                engine = Nothing
-                scope = Nothing
-                source = Nothing
             End Try
+
             Return r
 
         End Function
 
         Sub New()
+
             MyBase.CreateNew()
+
             Me.m_reactionSequence = New List(Of List(Of String))
             Me.m_reactions = New List(Of String)
             Me.m_conversions = New Dictionary(Of String, Double)
             Me.m_componentconversions = New Dictionary(Of String, Double)
+
+            Dim opts As New Dictionary(Of String, Object)()
+            opts("Frames") = Microsoft.Scripting.Runtime.ScriptingRuntimeHelpers.True
+            engine = IronPython.Hosting.Python.CreateEngine(opts)
+            engine.Runtime.LoadAssembly(GetType(System.String).Assembly)
+            engine.Runtime.LoadAssembly(GetType(Thermodynamics.BaseClasses.ConstantProperties).Assembly)
+            engine.Runtime.LoadAssembly(GetType(Drawing.SkiaSharp.GraphicsSurface).Assembly)
+            scope = engine.CreateScope()
+
         End Sub
 
         Public Property OutletTemperature As Double = 298.15#

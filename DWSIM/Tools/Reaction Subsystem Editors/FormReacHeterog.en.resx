@@ -146,10 +146,10 @@
     <value>123, 7</value>
   </data>
   <data name="rbBasicKin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 17</value>
+    <value>56, 17</value>
   </data>
   <data name="rbBasicKin.Text" xml:space="preserve">
-    <value>Basic</value>
+    <value>Simple</value>
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>108, 13</value>
