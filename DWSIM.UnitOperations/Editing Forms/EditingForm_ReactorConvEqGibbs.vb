@@ -131,6 +131,8 @@ Public Class EditingForm_ReactorConvEqGibbs
 
             If TypeOf SimObject Is Reactors.Reactor_Gibbs Then
 
+                cbReacSet.Enabled = False
+
                 'chkEnableDamping.Checked = DirectCast(SimObject, Reactors.Reactor_Gibbs).EnableDamping
 
                 'txtDampingLowerLimit.Text = DirectCast(SimObject, Reactors.Reactor_Gibbs).DampingLowerLimit.ToString("G")
