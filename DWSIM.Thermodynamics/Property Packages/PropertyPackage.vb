@@ -7102,9 +7102,13 @@ Final3:
                 Ti = T1 + deltaT / 2
 
                 Dim integrals(nsteps - 1) As Double
-                Parallel.For(0, nsteps, Sub(ii)
-                                            integrals(ii) = AUX_CPi(subst, Ti + ii * deltaT)
-                                        End Sub)
+                'Parallel.For(0, nsteps, Sub(ii)
+                '                            integrals(ii) = AUX_CPi(subst, Ti + ii * deltaT)
+                '                        End Sub)
+
+                For i = 0 To nsteps - 1
+                    integrals(i) = AUX_CPi(subst, Ti + i * deltaT)
+                Next
 
                 Dim outval = integrals.SumY * deltaT
 

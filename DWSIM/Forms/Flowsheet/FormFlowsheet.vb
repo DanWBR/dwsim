@@ -31,6 +31,7 @@ Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
 Imports DWSIM.DWSIM.Editors.PropertyPackages
+Imports System.Threading.Tasks
 
 <ComSourceInterfaces(GetType(Interfaces.IFlowsheetNewMessageSentEvent)), ClassInterface(ClassInterfaceType.AutoDual)>
 <System.Serializable()>
@@ -864,7 +865,8 @@ Public Class FormFlowsheet
             GlobalSettings.Settings.TaskCancellationTokenSource = Nothing
             My.Application.ActiveSimulation = Me
             If My.Computer.Keyboard.ShiftKeyDown Then GlobalSettings.Settings.CalculatorBusy = False
-            FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, Nothing, False, False, Nothing, Nothing,
+            Task.Factory.StartNew(Sub()
+                                      FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, Nothing, False, False, Nothing, Nothing,
                                                         Sub()
                                                             If My.Settings.ObjectEditor = 1 Then
                                                                 Me.UIThread(Sub()
@@ -873,6 +875,7 @@ Public Class FormFlowsheet
                                                                             End Sub)
                                                             End If
                                                         End Sub, My.Computer.Keyboard.CtrlKeyDown And My.Computer.Keyboard.AltKeyDown)
+                                  End Sub)
         Else
             ShowMessage(DWSIM.App.GetLocalString("DynEnabled"), IFlowsheet.MessageType.Warning)
         End If
@@ -2633,9 +2636,6 @@ Public Class FormFlowsheet
     End Sub
 
     Public Sub CheckStatus() Implements Interfaces.IFlowsheet.CheckStatus, IFlowsheetGUI.CheckStatus
-        If Not Settings.SkipGUIUpdate Then
-            Application.DoEvents()
-        End If
         FlowsheetSolver.FlowsheetSolver.CheckCalculatorStatus()
     End Sub
 
@@ -2871,9 +2871,17 @@ Public Class FormFlowsheet
         Me.Options.PropertyPackages.Add(obj.UniqueID, obj)
     End Sub
 
+    Private Invalidating As Boolean = False
+
     Public Sub UpdateInterface() Implements IFlowsheetGUI.UpdateInterface, IFlowsheet.UpdateInterface
 
-        Me.UIThread(Sub() Me.FormSurface.Refresh())
+        If Not Invalidating Then
+            Me.UIThread(Sub()
+                            Invalidating = True
+                            Me.FormSurface.Invalidate()
+                            Invalidating = False
+                        End Sub)
+        End If
 
     End Sub
 

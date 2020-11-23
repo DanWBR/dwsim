@@ -26,6 +26,8 @@ Namespace PropertyPackages.Auxiliary
         Dim m_pr As New PROPS
         Private _ip As Dictionary(Of String, Dictionary(Of String, PR_IPData))
 
+        Public Property BIPChanged As Boolean = False
+
         Public ReadOnly Property InteractionParameters() As Dictionary(Of String, Dictionary(Of String, PR_IPData))
             Get
                 Return _ip
@@ -49,6 +51,7 @@ Namespace PropertyPackages.Auxiliary
 
             Dim csdb As New ChemSepHelper.ChemSepIDConverter
             For Each srkip In srkipc
+                srkip.Owner = Me
                 If Me.InteractionParameters.ContainsKey(csdb.GetDWSIMName(srkip.ID1)) Then
                     If Me.InteractionParameters(csdb.GetDWSIMName(srkip.ID1)).ContainsKey(csdb.GetDWSIMName(srkip.ID2)) Then
                     Else
@@ -60,6 +63,7 @@ Namespace PropertyPackages.Auxiliary
                 End If
             Next
             For Each srkip In srkipc
+                srkip.Owner = Me
                 If Me.InteractionParameters.ContainsKey(csdb.GetCSName(srkip.ID1)) Then
                     If Me.InteractionParameters(csdb.GetCSName(srkip.ID1)).ContainsKey(csdb.GetCSName(srkip.ID2)) Then
                     Else

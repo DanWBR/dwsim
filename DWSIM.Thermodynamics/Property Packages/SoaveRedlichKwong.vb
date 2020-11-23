@@ -36,7 +36,8 @@ Namespace PropertyPackages
         Public MAT_KIJ(38, 38)
 
         Public m_pr As New PropertyPackages.Auxiliary.SRK
-        '<System.NonSerialized()> Private m_xn As DLLXnumbers.Xnumbers
+
+        Public ip(,) As Double
 
         Public Sub New(ByVal comode As Boolean)
             MyBase.New(comode)
@@ -279,20 +280,31 @@ Namespace PropertyPackages
 
         Public Overrides Function RET_VKij() As Double(,)
 
-            Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1, Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-            Dim i As Integer = 0
-            Dim l As Integer = 0
+            If m_pr.BIPChanged Or ip Is Nothing Then
 
-            Dim vn As String() = RET_VNAMES()
-            Dim n As Integer = vn.Length - 1
+                Dim vn As String() = RET_VNAMES()
+                Dim n As Integer = vn.Length - 1
 
-            For i = 0 To n
-                For l = 0 To n
-                    val(i, l) = Me.RET_KIJ(vn(i), vn(l))
+                Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1, Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
+                Dim i As Integer = 0
+                Dim l As Integer = 0
+
+                For i = 0 To n
+                    For l = 0 To n
+                        val(i, l) = Me.RET_KIJ(vn(i), vn(l))
+                    Next
                 Next
-            Next
 
-            Return val
+                ip = val
+                m_pr.BIPChanged = False
+
+                Return val
+
+            Else
+
+                Return ip
+
+            End If
 
         End Function
 

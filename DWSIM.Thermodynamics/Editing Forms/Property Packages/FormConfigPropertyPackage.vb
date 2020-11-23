@@ -516,7 +516,6 @@ gt2:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                 End Select
             ElseIf TypeOf _pp Is PengRobinsonPropertyPackage Then
                 Dim ppu As PropertyPackages.PengRobinsonPropertyPackage = _pp
-                ppu.ip_changed = True
                 Dim value As Object = KryptonDataGridView2.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
                 id1 = KryptonDataGridView2.Rows(e.RowIndex).Cells(0).Tag.ToString
                 id2 = KryptonDataGridView2.Rows(e.RowIndex).Cells(1).Tag.ToString

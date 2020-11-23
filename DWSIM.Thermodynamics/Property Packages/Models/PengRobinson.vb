@@ -30,8 +30,22 @@ Namespace PropertyPackages.Auxiliary
 
         Public ID1 As Integer = -1
         Public ID2 As Integer = -1
-        Public kij As Double = 0.0#
+
+        Private _kij As Double = 0.0
+
         Public comment As String = ""
+
+        <FieldHidden> Public Owner As Object
+
+        Public Property kij As Double
+            Get
+                Return _kij
+            End Get
+            Set(value As Double)
+                _kij = value
+                If Owner IsNot Nothing Then Owner.BIPChanged = True
+            End Set
+        End Property
 
         Public Function Clone() As Object Implements System.ICloneable.Clone
 
@@ -51,6 +65,8 @@ Namespace PropertyPackages.Auxiliary
 
         Dim m_pr As New PropertyPackages.Auxiliary.PROPS
         Private _ip As Dictionary(Of String, Dictionary(Of String, PR_IPData))
+
+        Public Property BIPChanged As Boolean = False
 
         Public ReadOnly Property InteractionParameters() As Dictionary(Of String, Dictionary(Of String, PR_IPData))
             Get
@@ -75,6 +91,7 @@ Namespace PropertyPackages.Auxiliary
 
             Dim csdb As New ChemSepHelper.ChemSepIDConverter
             For Each prip In pripc
+                prip.Owner = Me
                 If Me.InteractionParameters.ContainsKey(csdb.GetCSName(prip.ID1)) Then
                     If Me.InteractionParameters(csdb.GetCSName(prip.ID1)).ContainsKey(csdb.GetCSName(prip.ID2)) Then
                     Else
@@ -86,6 +103,7 @@ Namespace PropertyPackages.Auxiliary
                 End If
             Next
             For Each prip In pripc
+                prip.Owner = Me
                 If Me.InteractionParameters.ContainsKey(csdb.GetDWSIMName(prip.ID1)) Then
                     If Me.InteractionParameters(csdb.GetDWSIMName(prip.ID1)).ContainsKey(csdb.GetDWSIMName(prip.ID2)) Then
                     Else
@@ -897,25 +915,16 @@ Namespace PropertyPackages.ThermoPlugs
 
             Dim a(n, n) As Double
 
-            If Settings.EnableParallelProcessing Then
-                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism, .TaskScheduler = Settings.AppTaskScheduler}
-                Parallel.For(0, n + 1, poptions, Sub(k)
-                                                     For j As Integer = 0 To n
-                                                         a(k, j) = (ai(k) * ai(j)) ^ 0.5 * (1 - vkij(k, j))
-                                                     Next
-                                                 End Sub)
-            Else
-                Dim i, j As Integer
+            Dim i, j As Integer
                 i = 0
+            Do
+                j = 0
                 Do
-                    j = 0
-                    Do
-                        a(i, j) = (ai(i) * ai(j)) ^ 0.5 * (1 - vkij(i, j))
-                        j = j + 1
-                    Loop Until j = n + 1
-                    i = i + 1
-                Loop Until i = n + 1
-            End If
+                    a(i, j) = (ai(i) * ai(j)) ^ 0.5 * (1 - vkij(i, j))
+                    j = j + 1
+                Loop Until j = n + 1
+                i = i + 1
+            Loop Until i = n + 1
 
             Return a
 
@@ -925,28 +934,17 @@ Namespace PropertyPackages.ThermoPlugs
 
             Dim saml, aml(n), aml2(n) As Double
 
-            If Settings.EnableParallelProcessing Then
-                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism, .TaskScheduler = Settings.AppTaskScheduler}
-                Parallel.For(0, n + 1, poptions, Sub(k)
-                                                     For j As Integer = 0 To n
-                                                         aml(k) += Vx(k) * Vx(j) * a(k, j)
-                                                         aml2(k) += Vx(j) * a(j, k)
-                                                     Next
-                                                 End Sub)
-                saml = aml.SumY
-            Else
-                Dim i, j As Integer
+            Dim i, j As Integer
                 i = 0
+            Do
+                j = 0
                 Do
-                    j = 0
-                    Do
-                        saml = saml + Vx(i) * Vx(j) * a(i, j)
-                        aml2(i) = aml2(i) + Vx(j) * a(j, i)
-                        j = j + 1
-                    Loop Until j = n + 1
-                    i = i + 1
-                Loop Until i = n + 1
-            End If
+                    saml = saml + Vx(i) * Vx(j) * a(i, j)
+                    aml2(i) = aml2(i) + Vx(j) * a(j, i)
+                    j = j + 1
+                Loop Until j = n + 1
+                i = i + 1
+            Loop Until i = n + 1
 
             Return {aml2, New Double() {saml}}
 
@@ -1254,23 +1252,13 @@ Namespace PropertyPackages.ThermoPlugs
                 i = i + 1
             Loop Until i = n + 1
 
-
-            If Settings.EnableParallelProcessing Then
-                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism, .TaskScheduler = Settings.AppTaskScheduler}
-                Parallel.For(0, n + 1, poptions, Sub(ii)
-                                                     alpha(ii) = (1 + (0.37464 + 1.54226 * w(ii) - 0.26992 * w(ii) ^ 2) * (1 - (T / Tc(ii)) ^ 0.5)) ^ 2
-                                                     ai(ii) = 0.45724 * alpha(ii) * R ^ 2 * Tc(ii) ^ 2 / Pc(ii)
-                                                     bi(ii) = 0.0778 * R * Tc(ii) / Pc(ii)
-                                                 End Sub)
-            Else
-                i = 0
-                Do
-                    alpha(i) = (1 + (0.37464 + 1.54226 * w(i) - 0.26992 * w(i) ^ 2) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
-                    ai(i) = 0.45724 * alpha(i) * R ^ 2 * Tc(i) ^ 2 / Pc(i)
-                    bi(i) = 0.0778 * R * Tc(i) / Pc(i)
-                    i = i + 1
-                Loop Until i = n + 1
-            End If
+            i = 0
+            Do
+                alpha(i) = (1 + (0.37464 + 1.54226 * w(i) - 0.26992 * w(i) ^ 2) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
+                ai(i) = 0.45724 * alpha(i) * R ^ 2 * Tc(i) ^ 2 / Pc(i)
+                bi(i) = 0.0778 * R * Tc(i) / Pc(i)
+                i = i + 1
+            Loop Until i = n + 1
 
             a = Calc_SUM1(n, ai, VKij)
 
@@ -1324,20 +1312,7 @@ Namespace PropertyPackages.ThermoPlugs
             'Z = ZP(0)
             'Pcorr = ZP(1)
 
-            If Settings.EnableParallelProcessing Then
-                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism, .TaskScheduler = Settings.AppTaskScheduler}
-                Parallel.For(0, n + 1, poptions, Sub(ii)
-                                                     Dim t1, t2, t3, t4, t5 As Double
-                                                     t1 = bi(ii) * (Z - 1) / bml
-                                                     t2 = -Math.Log(Z - BG)
-                                                     t3 = AG * (2 * aml2(ii) / aml - bi(ii) / bml)
-                                                     t4 = Math.Log((Z + (1 + 2 ^ 0.5) * BG) / (Z + (1 - 2 ^ 0.5) * BG))
-                                                     t5 = 2 * 2 ^ 0.5 * BG
-                                                     LN_CF(ii) = t1 + t2 - (t3 * t4 / t5)
-                                                     LN_CF(ii) = LN_CF(ii) + Math.Log(Pcorr / P)
-                                                 End Sub)
-            Else
-                Dim t1, t2, t3, t4, t5 As Double
+            Dim t1, t2, t3, t4, t5 As Double
                 i = 0
                 Do
                     t1 = bi(i) * (Z - 1) / bml
@@ -1349,7 +1324,6 @@ Namespace PropertyPackages.ThermoPlugs
                     LN_CF(i) = LN_CF(i) + Math.Log(Pcorr / P)
                     i = i + 1
                 Loop Until i = n + 1
-            End If
 
             IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
 

@@ -3792,12 +3792,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                        counter += 1
 
                                        If Math.IEEERemainder(counter, 10) = 0.0 Then
-                                           Settings.SkipGUIUpdate = False
-                                       Else
-                                           Settings.SkipGUIUpdate = True
+                                           pp.Flowsheet?.ShowMessage(String.Format("BP solver: external iteration #{0}, current objective function (error) value = {1}", counter, errfunc), IFlowsheet.MessageType.Information)
                                        End If
-
-                                       pp.Flowsheet?.ShowMessage(String.Format("BP solver: external iteration #{0}, current objective function (error) value = {1}", counter, errfunc), IFlowsheet.MessageType.Information)
 
                                        ResultsVector.Add(result)
                                        ObjFunctionValues.Add(errfunc)

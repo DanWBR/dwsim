@@ -39,7 +39,6 @@ Namespace PropertyPackages
         Public m_pr As New PropertyPackages.Auxiliary.PengRobinson
         Public prn As New PropertyPackages.ThermoPlugs.PR
         Public ip(,) As Double
-        <Xml.Serialization.XmlIgnore> Public ip_changed As Boolean = True
 
         Public Sub New(ByVal comode As Boolean)
 
@@ -519,33 +518,31 @@ Namespace PropertyPackages
 
         Public Overrides Function RET_VKij() As Double(,)
 
-            Dim hash As Integer = m_pr.InteractionParameters.GetHashCode()
+            If m_pr.BIPChanged Or ip Is Nothing Then
 
-            Dim vn As String() = RET_VNAMES()
-            Dim n As Integer = vn.Length - 1
+                Dim vn As String() = RET_VNAMES()
+                Dim n As Integer = vn.Length - 1
 
-            'If ip_changed Then
+                Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1, Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
+                Dim i As Integer = 0
+                Dim l As Integer = 0
 
-            Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1, Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-            Dim i As Integer = 0
-            Dim l As Integer = 0
-
-            For i = 0 To n
-                For l = 0 To n
-                    val(i, l) = Me.RET_KIJ(vn(i), vn(l))
+                For i = 0 To n
+                    For l = 0 To n
+                        val(i, l) = Me.RET_KIJ(vn(i), vn(l))
+                    Next
                 Next
-            Next
 
-            ip = val
-            ip_changed = False
+                ip = val
+                m_pr.BIPChanged = False
 
-            Return val
+                Return val
 
-            'Else
+            Else
 
-            '    Return ip
+                Return ip
 
-            'End If
+            End If
 
         End Function
 

@@ -3550,7 +3550,6 @@ Namespace ExcelAddIn
             Select Case proppack
                 Case "Peng-Robinson (PR)"
                     With CType(pp, PengRobinsonPropertyPackage).m_pr.InteractionParameters
-                        CType(pp, PengRobinsonPropertyPackage).ip_changed = True
                         If Not TypeOf ip1 Is ExcelMissing And Not ip1 Is Nothing Then
                             .Clear()
                             i = 0

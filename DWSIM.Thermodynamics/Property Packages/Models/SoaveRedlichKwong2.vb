@@ -65,25 +65,16 @@ Namespace PropertyPackages.ThermoPlugs
 
             Dim a(n, n) As Double
 
-            If Settings.EnableParallelProcessing Then
-                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism, .TaskScheduler = Settings.AppTaskScheduler}
-                Parallel.For(0, n + 1, poptions, Sub(k)
-                                                     For j As Integer = 0 To n
-                                                         a(k, j) = (ai(k) * ai(j)) ^ 0.5 * (1 - vkij(k, j))
-                                                     Next
-                                                 End Sub)
-            Else
-                Dim i, j As Integer
-                i = 0
+            Dim i, j As Integer
+            i = 0
+            Do
+                j = 0
                 Do
-                    j = 0
-                    Do
-                        a(i, j) = (ai(i) * ai(j)) ^ 0.5 * (1 - vkij(i, j))
-                        j = j + 1
-                    Loop Until j = n + 1
-                    i = i + 1
-                Loop Until i = n + 1
-            End If
+                    a(i, j) = (ai(i) * ai(j)) ^ 0.5 * (1 - vkij(i, j))
+                    j = j + 1
+                Loop Until j = n + 1
+                i = i + 1
+            Loop Until i = n + 1
 
             Return a
 
@@ -93,28 +84,17 @@ Namespace PropertyPackages.ThermoPlugs
 
             Dim saml, aml(n), aml2(n) As Double
 
-            If Settings.EnableParallelProcessing Then
-                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism, .TaskScheduler = Settings.AppTaskScheduler}
-                Parallel.For(0, n + 1, poptions, Sub(k)
-                                                     For j As Integer = 0 To n
-                                                         aml(k) += Vx(k) * Vx(j) * a(k, j)
-                                                         aml2(k) += Vx(j) * a(j, k)
-                                                     Next
-                                                 End Sub)
-                saml = aml.SumY
-            Else
-                Dim i, j As Integer
+            Dim i, j As Integer
                 i = 0
+            Do
+                j = 0
                 Do
-                    j = 0
-                    Do
-                        saml = saml + Vx(i) * Vx(j) * a(i, j)
-                        aml2(i) = aml2(i) + Vx(j) * a(j, i)
-                        j = j + 1
-                    Loop Until j = n + 1
-                    i = i + 1
-                Loop Until i = n + 1
-            End If
+                    saml = saml + Vx(i) * Vx(j) * a(i, j)
+                    aml2(i) = aml2(i) + Vx(j) * a(j, i)
+                    j = j + 1
+                Loop Until j = n + 1
+                i = i + 1
+            Loop Until i = n + 1
 
             Return {aml2, New Double() {saml}}
 
