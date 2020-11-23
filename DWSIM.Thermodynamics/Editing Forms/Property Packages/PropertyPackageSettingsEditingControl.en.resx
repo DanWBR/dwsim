@@ -149,7 +149,7 @@
     <value>Fugacity Calculation</value>
   </data>
   <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 359</value>
+    <value>12, 465</value>
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>174, 13</value>
@@ -170,7 +170,7 @@
     <value>Calculation Method</value>
   </data>
   <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 388</value>
+    <value>12, 496</value>
   </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 13</value>
@@ -200,7 +200,7 @@
     <value>Experimental Data</value>
   </data>
   <data name="cbHSCpCalcMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>200, 384</value>
+    <value>200, 491</value>
   </data>
   <data name="cbLiqVIscMixRule.Items" xml:space="preserve">
     <value>Molar Average</value>
@@ -233,7 +233,7 @@
     <value>Ideal Vapor Phase</value>
   </data>
   <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 452</value>
+    <value>12, 562</value>
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 13</value>
@@ -242,7 +242,7 @@
     <value>Other</value>
   </data>
   <data name="chkIgnoreSalLim.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 514</value>
+    <value>12, 624</value>
   </data>
   <data name="chkIgnoreSalLim.Size" type="System.Drawing.Size, System.Drawing">
     <value>271, 17</value>
@@ -251,7 +251,7 @@
     <value>Ignore Maximum Salinity Limit (Seawater Model only)</value>
   </data>
   <data name="chkIgnoreVapFracLim.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 547</value>
+    <value>12, 657</value>
   </data>
   <data name="chkIgnoreVapFracLim.Size" type="System.Drawing.Size, System.Drawing">
     <value>284, 17</value>
@@ -260,7 +260,7 @@
     <value>Ignore Vapor Fraction Bounds (Sour Water Model only)</value>
   </data>
   <data name="chkIgnoreIPs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 481</value>
+    <value>12, 591</value>
   </data>
   <data name="chkIgnoreIPs.Size" type="System.Drawing.Size, System.Drawing">
     <value>289, 17</value>
@@ -268,16 +268,12 @@
   <data name="chkIgnoreIPs.Text" xml:space="preserve">
     <value>Ignore Missing UNIQUAC/NRTL Interaction Parameters</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="chkUseSolidCp.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="chkUseSolidCp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="chkUseSolidCp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 421</value>
+    <value>12, 529</value>
   </data>
   <data name="chkUseSolidCp.Size" type="System.Drawing.Size, System.Drawing">
     <value>332, 17</value>
@@ -285,6 +281,7 @@
   <data name="chkUseSolidCp.Text" xml:space="preserve">
     <value>Solid Phase: Use Heat Capacity for Enthalpy/Entropy Calculation</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Label10.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -295,12 +292,36 @@
     <value>NoControl</value>
   </data>
   <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 580</value>
+    <value>12, 707</value>
   </data>
   <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>0, 13</value>
   </data>
+  <data name="chkCalcAdditionalProps.Size" type="System.Drawing.Size, System.Drawing">
+    <value>437, 17</value>
+  </data>
+  <data name="chkCalcAdditionalProps.Text" xml:space="preserve">
+    <value>Calculate Additional Properties (Isothermal Compressibility, Bulk Modulus, JT Coeff, etc.)</value>
+  </data>
+  <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 13</value>
+  </data>
+  <data name="Label11.Text" xml:space="preserve">
+    <value>Material Streams</value>
+  </data>
+  <data name="chkDoPhaseId.Size" type="System.Drawing.Size, System.Drawing">
+    <value>235, 17</value>
+  </data>
+  <data name="chkDoPhaseId.Text" xml:space="preserve">
+    <value>Identify Phases after Equilibrium Calculations</value>
+  </data>
+  <data name="chkCalcBubbleDew.Size" type="System.Drawing.Size, System.Drawing">
+    <value>290, 17</value>
+  </data>
+  <data name="chkCalcBubbleDew.Text" xml:space="preserve">
+    <value>Calculate Bubble and Dew Pressures and Temperatures</value>
+  </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>502, 602</value>
+    <value>502, 730</value>
   </data>
 </root>

@@ -681,7 +681,7 @@ Namespace Streams
                     IObj?.SetCurrent()
 
                     'calculate additional properties
-                    .CalcAdditionalPhaseProperties()
+                    If .CalculateAdditionalMaterialStreamProperties Then .CalcAdditionalPhaseProperties()
 
                     IObj?.SetCurrent()
 

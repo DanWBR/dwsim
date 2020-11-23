@@ -226,6 +226,8 @@ Namespace PropertyPackages
 
         Public Property IgnoreSalinityLimit As Boolean = False
 
+        Public Property CalculateAdditionalMaterialStreamProperties As Boolean = False
+
         ''' <summary>
         ''' ' For mobile compatibility only.
         ''' </summary>
@@ -11210,6 +11212,9 @@ Final3:
             e1 = (From el As XElement In data Select el Where el.Name = "IgnoreSalinityLimit").FirstOrDefault
             If e1 IsNot Nothing Then IgnoreSalinityLimit = e1.Value
 
+            e1 = (From el As XElement In data Select el Where el.Name = "CalculateAdditionalMaterialStreamProperties").FirstOrDefault
+            If e1 IsNot Nothing Then CalculateAdditionalMaterialStreamProperties = e1.Value
+
             If (From el As XElement In data Select el Where el.Name = "LiquidDensityCalculationMode_Supercritical").FirstOrDefault IsNot Nothing Then
                 Try
                     LiquidDensityCalculationMode_Subcritical = [Enum].Parse(LiquidDensityCalculationMode_Subcritical.GetType, (From el As XElement In data Select el Where el.Name = "LiquidDensityCalculationMode_Supercritical").FirstOrDefault.Value)
@@ -11612,6 +11617,7 @@ Final3:
                 .Add(New XElement("ActivityCoefficientModels_IgnoreMissingInteractionParameters", ActivityCoefficientModels_IgnoreMissingInteractionParameters))
                 .Add(New XElement("IgnoreVaporFractionLimit", IgnoreVaporFractionLimit))
                 .Add(New XElement("IgnoreSalinityLimit", IgnoreSalinityLimit))
+                .Add(New XElement("CalculateAdditionalMaterialStreamProperties", CalculateAdditionalMaterialStreamProperties))
 
                 Dim jsonoptions As New JsonSerializerSettings With {.StringEscapeHandling = StringEscapeHandling.EscapeHtml, .Formatting = Formatting.Indented}
 

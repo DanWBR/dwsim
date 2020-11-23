@@ -46,6 +46,10 @@ Partial Class PropertyPackageSettingsEditingControl
         Me.chkIgnoreIPs = New System.Windows.Forms.CheckBox()
         Me.chkUseSolidCp = New System.Windows.Forms.CheckBox()
         Me.Label10 = New System.Windows.Forms.Label()
+        Me.chkCalcAdditionalProps = New System.Windows.Forms.CheckBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.chkDoPhaseId = New System.Windows.Forms.CheckBox()
+        Me.chkCalcBubbleDew = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'cbLiqDens
@@ -184,10 +188,35 @@ Partial Class PropertyPackageSettingsEditingControl
         resources.ApplyResources(Me.Label10, "Label10")
         Me.Label10.Name = "Label10"
         '
+        'chkCalcAdditionalProps
+        '
+        resources.ApplyResources(Me.chkCalcAdditionalProps, "chkCalcAdditionalProps")
+        Me.chkCalcAdditionalProps.Name = "chkCalcAdditionalProps"
+        Me.chkCalcAdditionalProps.UseVisualStyleBackColor = True
+        '
+        'Label11
+        '
+        resources.ApplyResources(Me.Label11, "Label11")
+        Me.Label11.Name = "Label11"
+        '
+        'chkDoPhaseId
+        '
+        resources.ApplyResources(Me.chkDoPhaseId, "chkDoPhaseId")
+        Me.chkDoPhaseId.Name = "chkDoPhaseId"
+        '
+        'chkCalcBubbleDew
+        '
+        resources.ApplyResources(Me.chkCalcBubbleDew, "chkCalcBubbleDew")
+        Me.chkCalcBubbleDew.Name = "chkCalcBubbleDew"
+        '
         'PropertyPackageSettingsEditingControl
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.chkDoPhaseId)
+        Me.Controls.Add(Me.chkCalcBubbleDew)
+        Me.Controls.Add(Me.chkCalcAdditionalProps)
+        Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.chkUseSolidCp)
         Me.Controls.Add(Me.chkIgnoreIPs)
@@ -239,4 +268,8 @@ Partial Class PropertyPackageSettingsEditingControl
     Friend WithEvents chkIgnoreIPs As CheckBox
     Friend WithEvents chkUseSolidCp As CheckBox
     Friend WithEvents Label10 As Label
+    Friend WithEvents chkCalcAdditionalProps As CheckBox
+    Friend WithEvents Label11 As Label
+    Public WithEvents chkDoPhaseId As CheckBox
+    Public WithEvents chkCalcBubbleDew As CheckBox
 End Class

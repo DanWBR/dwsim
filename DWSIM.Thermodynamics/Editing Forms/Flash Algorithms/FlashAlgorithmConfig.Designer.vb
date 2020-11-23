@@ -32,14 +32,12 @@ Partial Class FlashAlgorithmConfig
         Me.chkReplaceFlashPT = New System.Windows.Forms.CheckBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label30 = New System.Windows.Forms.Label()
-        Me.chkDoPhaseId = New System.Windows.Forms.CheckBox()
         Me.tbPH_MaxDT = New System.Windows.Forms.TextBox()
         Me.chkFastModeNL = New System.Windows.Forms.CheckBox()
         Me.Label29 = New System.Windows.Forms.Label()
         Me.Label26 = New System.Windows.Forms.Label()
         Me.tbFlashValidationTolerance = New System.Windows.Forms.TextBox()
         Me.tbPV_EpsilonT = New System.Windows.Forms.TextBox()
-        Me.chkCalcBubbleDew = New System.Windows.Forms.CheckBox()
         Me.tbPV_DampingFactor = New System.Windows.Forms.TextBox()
         Me.chkValidateEqCalc = New System.Windows.Forms.CheckBox()
         Me.Label25 = New System.Windows.Forms.Label()
@@ -84,17 +82,17 @@ Partial Class FlashAlgorithmConfig
         '
         'TabControl1
         '
-        resources.ApplyResources(Me.TabControl1, "TabControl1")
         Me.TabControl1.Controls.Add(Me.TabPageGeneral)
         Me.TabControl1.Controls.Add(Me.TabPageConvPars)
         Me.TabControl1.Controls.Add(Me.TabPageST)
+        resources.ApplyResources(Me.TabControl1, "TabControl1")
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         '
         'TabPageGeneral
         '
-        resources.ApplyResources(Me.TabPageGeneral, "TabPageGeneral")
         Me.TabPageGeneral.Controls.Add(Me.GroupBox4)
+        resources.ApplyResources(Me.TabPageGeneral, "TabPageGeneral")
         Me.TabPageGeneral.Name = "TabPageGeneral"
         Me.TabPageGeneral.UseVisualStyleBackColor = True
         '
@@ -107,14 +105,12 @@ Partial Class FlashAlgorithmConfig
         Me.GroupBox4.Controls.Add(Me.chkReplaceFlashPT)
         Me.GroupBox4.Controls.Add(Me.Label13)
         Me.GroupBox4.Controls.Add(Me.Label30)
-        Me.GroupBox4.Controls.Add(Me.chkDoPhaseId)
         Me.GroupBox4.Controls.Add(Me.tbPH_MaxDT)
         Me.GroupBox4.Controls.Add(Me.chkFastModeNL)
         Me.GroupBox4.Controls.Add(Me.Label29)
         Me.GroupBox4.Controls.Add(Me.Label26)
         Me.GroupBox4.Controls.Add(Me.tbFlashValidationTolerance)
         Me.GroupBox4.Controls.Add(Me.tbPV_EpsilonT)
-        Me.GroupBox4.Controls.Add(Me.chkCalcBubbleDew)
         Me.GroupBox4.Controls.Add(Me.tbPV_DampingFactor)
         Me.GroupBox4.Controls.Add(Me.chkValidateEqCalc)
         Me.GroupBox4.Controls.Add(Me.Label25)
@@ -126,10 +122,10 @@ Partial Class FlashAlgorithmConfig
         '
         'cbFlashType
         '
-        resources.ApplyResources(Me.cbFlashType, "cbFlashType")
         Me.cbFlashType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbFlashType.FormattingEnabled = True
         Me.cbFlashType.Items.AddRange(New Object() {resources.GetString("cbFlashType.Items"), resources.GetString("cbFlashType.Items1"), resources.GetString("cbFlashType.Items2"), resources.GetString("cbFlashType.Items3"), resources.GetString("cbFlashType.Items4")})
+        resources.ApplyResources(Me.cbFlashType, "cbFlashType")
         Me.cbFlashType.Name = "cbFlashType"
         '
         'Label9
@@ -156,11 +152,6 @@ Partial Class FlashAlgorithmConfig
         '
         resources.ApplyResources(Me.Label30, "Label30")
         Me.Label30.Name = "Label30"
-        '
-        'chkDoPhaseId
-        '
-        resources.ApplyResources(Me.chkDoPhaseId, "chkDoPhaseId")
-        Me.chkDoPhaseId.Name = "chkDoPhaseId"
         '
         'tbPH_MaxDT
         '
@@ -192,11 +183,6 @@ Partial Class FlashAlgorithmConfig
         '
         resources.ApplyResources(Me.tbPV_EpsilonT, "tbPV_EpsilonT")
         Me.tbPV_EpsilonT.Name = "tbPV_EpsilonT"
-        '
-        'chkCalcBubbleDew
-        '
-        resources.ApplyResources(Me.chkCalcBubbleDew, "chkCalcBubbleDew")
-        Me.chkCalcBubbleDew.Name = "chkCalcBubbleDew"
         '
         'tbPV_DampingFactor
         '
@@ -230,8 +216,8 @@ Partial Class FlashAlgorithmConfig
         '
         'TabPageConvPars
         '
-        resources.ApplyResources(Me.TabPageConvPars, "TabPageConvPars")
         Me.TabPageConvPars.Controls.Add(Me.GroupBox1)
+        resources.ApplyResources(Me.TabPageConvPars, "TabPageConvPars")
         Me.TabPageConvPars.Name = "TabPageConvPars"
         Me.TabPageConvPars.UseVisualStyleBackColor = True
         '
@@ -339,9 +325,9 @@ Partial Class FlashAlgorithmConfig
         '
         'TabPageST
         '
-        resources.ApplyResources(Me.TabPageST, "TabPageST")
         Me.TabPageST.Controls.Add(Me.GroupBox10)
         Me.TabPageST.Controls.Add(Me.GroupBox9)
+        resources.ApplyResources(Me.TabPageST, "TabPageST")
         Me.TabPageST.Name = "TabPageST"
         Me.TabPageST.UseVisualStyleBackColor = True
         '
@@ -432,9 +418,7 @@ Partial Class FlashAlgorithmConfig
     Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
     Public WithEvents chkReplaceFlashPT As System.Windows.Forms.CheckBox
     Friend WithEvents Label13 As System.Windows.Forms.Label
-    Public WithEvents chkDoPhaseId As System.Windows.Forms.CheckBox
     Friend WithEvents tbFlashValidationTolerance As System.Windows.Forms.TextBox
-    Public WithEvents chkCalcBubbleDew As System.Windows.Forms.CheckBox
     Public WithEvents chkValidateEqCalc As System.Windows.Forms.CheckBox
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents tbPV_DampingFactor As TextBox

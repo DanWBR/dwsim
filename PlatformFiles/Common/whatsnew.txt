@@ -1,7 +1,6 @@
-Version 6.3 Update 4
+Version 6.3 Update 5
 
-- [NEW] Advanced Python Script Kinetics
-- [CHG] PR/SRK calculation speed improvements
-- [CHG] Rigorous Column solver improvements
-- [FIX] Thermo subsystem fixes
-- [FIX] Bug fixes
+- [CHG] Optimized script execution in advanced kinetic reactors
+- [FIX] Fixed convergence issues with Liquid-Liquid Extractor
+- [FIX] Fixed convergence issues with Gibbs Reactor
+- [FIX] Layout and other fixes

@@ -48,7 +48,11 @@ Public Class FOSSEEFlowsheets
 
         htmlpage.LoadHtml(source)
 
-        Dim rows = htmlpage.DocumentNode.Descendants("tbody").FirstOrDefault.Descendants("tr").ToList
+        Dim tbody = htmlpage.DocumentNode.Descendants("tbody").FirstOrDefault
+
+        If tbody Is Nothing Then Return New List(Of FOSSEEFlowsheet)
+
+        Dim rows = tbody.Descendants("tr").ToList
 
         Dim list As New List(Of FOSSEEFlowsheet)
         Dim i As Integer = 1
