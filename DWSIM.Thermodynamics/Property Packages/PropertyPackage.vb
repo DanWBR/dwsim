@@ -5356,6 +5356,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.massflow = Nothing
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.massfraction = Nothing
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.molarfraction = Nothing
+                    Me.CurrentMaterialStream.Phases(phaseID).Properties.bulk_modulus = Nothing
+                    Me.CurrentMaterialStream.Phases(phaseID).Properties.isothermal_compressibility = Nothing
 
                 Else
 
@@ -5385,6 +5387,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.dewPressure = Nothing
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.viscosity = Nothing
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.kinematic_viscosity = Nothing
+                    Me.CurrentMaterialStream.Phases(phaseID).Properties.bulk_modulus = Nothing
+                    Me.CurrentMaterialStream.Phases(phaseID).Properties.isothermal_compressibility = Nothing
 
                     If Not CalculatedOnly Then
                         Me.CurrentMaterialStream.Phases(phaseID).Properties.molarflow = Nothing
@@ -5736,7 +5740,20 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     Else
                         result = Me.ParseEquation(eqno, A, B, C, D, E, T) / mw
                     End If
-                    If result = 0.0 Then Return 3.5 * 8.314 / mw Else Return result
+                    If result = 0.0 Then
+                        'try estimating from LK method
+                        With Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties
+                            Dim sg60 = AUX_LIQDENSi(Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties, T) / 1000.0
+                            result = Auxiliary.PROPS.Cpig_lk(.Normal_Boiling_Point ^ 0.33 / sg60, .Acentric_Factor, T)
+                        End With
+                        If Double.IsNaN(result) Or Double.IsInfinity(result) Then
+                            Return 3.5 * 8.314 / mw
+                        Else
+                            Return result
+                        End If
+                    Else
+                        Return result
+                    End If
                 ElseIf db = "ChEDL Thermo" Then
                     Dim A, B, C, D, E, result As Double
                     Dim eqno As String = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.IdealgasCpEquation
