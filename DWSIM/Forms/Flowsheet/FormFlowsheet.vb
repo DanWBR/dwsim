@@ -3219,6 +3219,10 @@ Public Class FormFlowsheet
         FormSurface.Invalidate()
     End Sub
 
+    Public Sub RefreshInterface() Implements IFlowsheet.RefreshInterface
+        FormSurface.Refresh()
+    End Sub
+
 #End Region
 
 End Class

@@ -1477,7 +1477,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
             fgui.UpdateInformation()
 
-            fgui.UpdateInterface()
+            fgui.RefreshInterface()
 
             fgui.ProcessScripts(Scripts.EventType.SolverFinished, Scripts.ObjectType.Solver, "")
 

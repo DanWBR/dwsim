@@ -2672,5 +2672,8 @@ Label_00CC:
         FlowsheetSurface.AutoArrange()
     End Sub
 
+    Public Sub RefreshInterface() Implements IFlowsheet.RefreshInterface
+        UpdateInterface()
+    End Sub
 End Class
 

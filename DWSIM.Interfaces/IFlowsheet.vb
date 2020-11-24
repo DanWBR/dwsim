@@ -166,6 +166,8 @@
 
     Sub UpdateInformation()
 
+    Sub RefreshInterface()
+
     Function GetFlowsheetSurfaceWidth() As Integer
 
     Function GetFlowsheetSurfaceHeight() As Integer
