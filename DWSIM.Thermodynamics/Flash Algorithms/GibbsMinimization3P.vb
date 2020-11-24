@@ -670,6 +670,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     result = New Object() {L2 / F, V / F, Vx2, Vy, ecount, L1 / F, Vx1, 0.0#, PP.RET_NullVector}
                 End If
 
+            Else
+
+                result = _nl.Flash_PT(Vz, P, T, PP)
+
             End If
 
             d2 = Date.Now

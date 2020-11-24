@@ -683,6 +683,8 @@ Namespace Streams
                     'calculate additional properties
                     If .CalculateAdditionalMaterialStreamProperties Then .CalcAdditionalPhaseProperties()
 
+                    .CalcAdditionalEnergyTerms()
+
                     IObj?.SetCurrent()
 
                     'process overridden properties (single phase)

@@ -605,6 +605,17 @@ Namespace PropertyPackages
 
         End Sub
 
+        Public Sub CalcAdditionalEnergyTerms()
+
+            For Each p As IPhase In Me.CurrentMaterialStream.Phases.Values
+                CalcInternalEnergy(p)
+                CalcGibbsFreeEnergy(p)
+                CalcHelmholtzEnergy(p)
+                CalcDiffusionCoefficients(p)
+            Next
+
+        End Sub
+
         Public Sub CalcAdditionalPhaseProperties() Implements IPropertyPackage.CalcAdditionalPhaseProperties
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()

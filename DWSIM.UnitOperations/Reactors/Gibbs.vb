@@ -906,7 +906,7 @@ Namespace Reactors
                 Try
                     mylags = mymat.Solve(mypot.Multiply(-1))
                     For i = 0 To e
-                        lagrm(i) = mylags(i, 0)
+                        lagrm(i) = mylags(i, 0) / 100
                     Next
                 Catch ex As Exception
                     For i = 0 To e
@@ -1011,10 +1011,10 @@ Namespace Reactors
                     ns = .GetSolidPhaseMoleFraction
                 End With
 
-                If nv > 0.0# Then nv *= W0tot / pp.AUX_MMM(xv_0) * 1000 Else nv = 0.0001 * N0tot
-                If nl1 > 0.0# Then nl1 *= W0tot / pp.AUX_MMM(xl1_0) * 1000 Else nl1 = 0.0001 * N0tot
-                If nl2 > 0.0# Then nl2 *= W0tot / pp.AUX_MMM(xl2_0) * 1000 Else nl2 = 0.0001 * N0tot
-                If ns > 0.0# Then ns *= W0tot / pp.AUX_MMM(xs_0) * 1000 Else ns = 0.0001 * N0tot
+                If nv > 0.0# Then nv *= W0tot / pp.AUX_MMM(xv_0) * 1000 Else nv = 1.0E-30
+                If nl1 > 0.0# Then nl1 *= W0tot / pp.AUX_MMM(xl1_0) * 1000 Else nl1 = 1.0E-30
+                If nl2 > 0.0# Then nl2 *= W0tot / pp.AUX_MMM(xl2_0) * 1000 Else nl2 = 1.0E-30
+                If ns > 0.0# Then ns *= W0tot / pp.AUX_MMM(xs_0) * 1000 Else ns = 1.0E-30
 
                 nt = nv + nl1 + nl2 + ns
 

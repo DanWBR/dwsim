@@ -2885,7 +2885,7 @@ Public Class FormFlowsheet
         If Not Invalidating Then
             Me.UIThread(Sub()
                             Invalidating = True
-                            FormSurface.Refresh()
+                            FormSurface.TableLayoutPanel1.Refresh()
                             Invalidating = False
                         End Sub)
         End If
