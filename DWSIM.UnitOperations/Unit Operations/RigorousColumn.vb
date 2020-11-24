@@ -2868,9 +2868,9 @@ Namespace UnitOperations
 
                     Dim L1t, L2t As New List(Of Double)
                     Dim xt1, xt2 As New List(Of Double())
-                    For i = 0 To Stages.Count
-                        L1t.Add(L.Clone)
-                        L2t.Add(V.Clone)
+                    For i = 0 To Stages.Count - 1
+                        L1t.AddRange(L)
+                        L2t.AddRange(V)
                         xt1.Add(x(i).Clone)
                         xt2.Add(y(i).Clone)
                     Next
