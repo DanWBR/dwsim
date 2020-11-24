@@ -379,8 +379,8 @@ Public Class FormFlowsheet
         FormSurface.FlowsheetSurface.DrawFloatingTable = Options.DisplayFloatingPropertyTables
         FormSurface.FlowsheetSurface.DrawPropertyList = Options.DisplayCornerPropertyList
 
-        FormSurface.FlowsheetSurface.ZoomAll(FormSurface.SplitContainer1.Panel1.Width, FormSurface.SplitContainer1.Panel1.Height)
-        FormSurface.FlowsheetSurface.ZoomAll(FormSurface.SplitContainer1.Panel1.Width, FormSurface.SplitContainer1.Panel1.Height)
+        FormSurface.FlowsheetSurface.ZoomAll(FormSurface.SplitContainerHorizontal.Panel1.Width, FormSurface.SplitContainerHorizontal.Panel1.Height)
+        FormSurface.FlowsheetSurface.ZoomAll(FormSurface.SplitContainerHorizontal.Panel1.Width, FormSurface.SplitContainerHorizontal.Panel1.Height)
 
         Me.FormLog.Grid1.Sort(Me.FormLog.Grid1.Columns(1), ListSortDirection.Descending)
 
@@ -2495,12 +2495,12 @@ Public Class FormFlowsheet
     Public Event StatusChanged()
 
     Public Function GetFlowsheetSurfaceWidth() As Integer Implements IFlowsheet.GetFlowsheetSurfaceWidth
-        Return FormSurface.SplitContainer1.Panel1.Width
+        Return FormSurface.SplitContainerHorizontal.Panel1.Width
     End Function
 
 
     Public Function GetFlowsheetSurfaceHeight() As Integer Implements IFlowsheet.GetFlowsheetSurfaceHeight
-        Return FormSurface.SplitContainer1.Panel1.Height
+        Return FormSurface.SplitContainerHorizontal.Panel1.Height
     End Function
 
     Public Function ChangeCalculationOrder(objects As List(Of String)) As List(Of String) Implements IFlowsheet.ChangeCalculationOrder

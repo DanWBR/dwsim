@@ -118,8 +118,14 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnLeft.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 186</value>
+  </data>
   <data name="btnUp.Size" type="System.Drawing.Size, System.Drawing">
     <value>794, 24</value>
+  </data>
+  <data name="btnDown.Location" type="System.Drawing.Point, System.Drawing">
+    <value>33, 225</value>
   </data>
   <data name="btnDown.Size" type="System.Drawing.Size, System.Drawing">
     <value>794, 24</value>
@@ -127,11 +133,18 @@
   <data name="btnRight.Location" type="System.Drawing.Point, System.Drawing">
     <value>833, 33</value>
   </data>
+  <data name="btnRight.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 186</value>
+  </data>
   <data name="TableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>860, 252</value>
   </data>
-  <data name="SplitContainer1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="SplitContainerHorizontal.Size" type="System.Drawing.Size, System.Drawing">
     <value>860, 351</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="SplitContainerHorizontal.SplitterDistance" type="System.Int32, mscorlib">
+    <value>252</value>
   </data>
   <data name="ToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
     <value>200, 22</value>
@@ -410,7 +423,7 @@
     <value>Merge Streams</value>
   </data>
   <data name="CMS_Sel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 442</value>
+    <value>242, 420</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="PreviewDialog.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
@@ -437,6 +450,9 @@
         0YP7u7s4gRERg/u7uziIiIiD+7u7OIAAAIP7u7s4gAAAg////ziAAACDMzMzOIiIiIiIiIiI//8AAAAA
         AABsAgAAbAIAAAACAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAfAAAAHwAAAB8AAAAAAAAAA==
 </value>
+  </data>
+  <data name="PreviewDialog.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Inherit</value>
   </data>
   <data name="tsbControlPanelMode.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -522,23 +538,14 @@
   <data name="ToolStripButton3.Text" xml:space="preserve">
     <value>Default Zoom (100%)</value>
   </data>
-  <data name="tsbResizeMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
-  </data>
   <data name="tsbResizeMode.Text" xml:space="preserve">
     <value>Switch to/from Resize Object Mode</value>
-  </data>
-  <data name="tsbResizeModeKeepAR.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
   </data>
   <data name="tsbResizeModeKeepAR.Text" xml:space="preserve">
     <value>Keep Aspect Ratio on Resizing</value>
   </data>
   <data name="tsbDisplayGrid.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
-  </data>
-  <data name="tsbDisplayGrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
   </data>
   <data name="tsbDisplayGrid.Text" xml:space="preserve">
     <value>Snap Objects to Grid</value>
@@ -549,47 +556,26 @@
   <data name="tsbSnapObjectsToGrid.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="tsbSnapObjectsToGrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
-  </data>
   <data name="tsbSnapObjectsToGrid.Text" xml:space="preserve">
     <value>Snap Objects to Grid</value>
   </data>
   <data name="tsbSnapObjectsToGrid.ToolTipText" xml:space="preserve">
     <value>Snap Objects to Grid</value>
   </data>
-  <data name="ToolStripButton17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
-  </data>
   <data name="ToolStripButton17.Text" xml:space="preserve">
     <value>Quick Connect Mode</value>
-  </data>
-  <data name="tsbConfigPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
   </data>
   <data name="tsbConfigPage.Text" xml:space="preserve">
     <value>Configure Page</value>
   </data>
-  <data name="tsbConfigPrinter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
-  </data>
   <data name="tsbConfigPrinter.Text" xml:space="preserve">
     <value>Configure Printer</value>
-  </data>
-  <data name="tsbPrint.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
   </data>
   <data name="tsbPrint.Text" xml:space="preserve">
     <value>View and Print Flowsheet</value>
   </data>
-  <data name="tsbMultiSelectMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
-  </data>
   <data name="tsbMultiSelectMode.Text" xml:space="preserve">
     <value>Enable MultiSelect Mode</value>
-  </data>
-  <data name="tsbAlignLefts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
   </data>
   <data name="tsbAlignLefts.Text" xml:space="preserve">
     <value>Align lefts</value>
@@ -627,6 +613,21 @@
   <data name="ToolStripFlowsheet.Size" type="System.Drawing.Size, System.Drawing">
     <value>860, 25</value>
   </data>
+  <data name="SplitContainerVertical.Size" type="System.Drawing.Size, System.Drawing">
+    <value>860, 351</value>
+  </data>
+  <data name="SplitContainerVertical.SplitterDistance" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>235, 22</value>
+  </data>
+  <data name="ToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Switch Object Palette Location</value>
+  </data>
+  <data name="CMS_Palette.Size" type="System.Drawing.Size, System.Drawing">
+    <value>236, 48</value>
+  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>860, 376</value>
   </data>
@@ -648,6 +649,9 @@
         //////////////////////////////////////////////////////////////////8AAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Inherit</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Flowsheet</value>

@@ -70,9 +70,13 @@ Public Class FlowsheetSurface_SkiaSharp
 
         SimObjPanel = New SimulationObjectsPanel() With {.Dock = DockStyle.Fill, .Flowsheet = Flowsheet}
 
-        SplitContainer1.Panel2.Controls.Add(SimObjPanel)
+        SimObjPanel.ContextMenuStrip = CMS_Palette
 
-        SplitContainer1.Panel2MinSize *= GlobalSettings.Settings.DpiScale
+        SplitContainerHorizontal.Panel2.Controls.Add(SimObjPanel)
+
+        SplitContainerHorizontal.Panel2MinSize *= GlobalSettings.Settings.DpiScale
+
+        SplitContainerVertical.Panel2MinSize *= GlobalSettings.Settings.DpiScale
 
         AddHandler CopyFromTSMI.DropDownItemClicked, AddressOf MaterialStreamClickHandler
 
@@ -1365,7 +1369,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 MessageBox.Show("Cloning is not supported by CAPE-OPEN/Flowsheet Unit Operations.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Select
 
-        SplitContainer1.Panel1.Invalidate()
+        SplitContainerHorizontal.Panel1.Invalidate()
 
         newobj.SetFlowsheet(Flowsheet)
 
@@ -2295,7 +2299,7 @@ Public Class FlowsheetSurface_SkiaSharp
             gObj.Owner = Me.Flowsheet.SimulationObjects(gObj.Name)
             Me.Flowsheet.SimulationObjects(gObj.Name).SetFlowsheet(Flowsheet)
             FlowsheetSurface.DrawingObjects.Add(gObj)
-            SplitContainer1.Panel1.Invalidate()
+            SplitContainerHorizontal.Panel1.Invalidate()
             For Each obj In Me.Flowsheet.SimulationObjects.Values
                 obj.UpdateEditForm()
                 EditorTooltips.Update(obj, Flowsheet)
@@ -2312,7 +2316,7 @@ Public Class FlowsheetSurface_SkiaSharp
                                      .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_ObjectAdded"), gObj.Tag)})
         End If
 
-        SplitContainer1.Panel1.Cursor = Cursors.Arrow
+        SplitContainerHorizontal.Panel1.Cursor = Cursors.Arrow
 
 
         Return gObj.Name
@@ -2433,8 +2437,8 @@ Public Class FlowsheetSurface_SkiaSharp
     End Sub
 
     Private Sub ExibirTudoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExibirTudoToolStripMenuItem.Click
-        FlowsheetSurface.ZoomAll(SplitContainer1.Panel1.Width, SplitContainer1.Panel1.Height)
-        FlowsheetSurface.ZoomAll(SplitContainer1.Panel1.Width, SplitContainer1.Panel1.Height)
+        FlowsheetSurface.ZoomAll(SplitContainerHorizontal.Panel1.Width, SplitContainerHorizontal.Panel1.Height)
+        FlowsheetSurface.ZoomAll(SplitContainerHorizontal.Panel1.Width, SplitContainerHorizontal.Panel1.Height)
         Me.Invalidate()
     End Sub
 
@@ -2578,7 +2582,7 @@ Public Class FlowsheetSurface_SkiaSharp
         If tsbControlPanelMode.Checked Then Exit Sub
         FlowsheetSurface.Zoom += 0.05
         Me.TSTBZoom.Text = Format(Flowsheet.FormSurface.FlowsheetSurface.Zoom, "#%")
-        SplitContainer1.Panel1.Refresh()
+        SplitContainerHorizontal.Panel1.Refresh()
     End Sub
 
     Private Sub ToolStripButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton1.Click
@@ -2586,15 +2590,15 @@ Public Class FlowsheetSurface_SkiaSharp
         FlowsheetSurface.Zoom -= 0.05
         If FlowsheetSurface.Zoom < 0.05 Then FlowsheetSurface.Zoom = 0.05
         Me.TSTBZoom.Text = Format(FlowsheetSurface.Zoom, "#%")
-        SplitContainer1.Panel1.Refresh()
+        SplitContainerHorizontal.Panel1.Refresh()
     End Sub
 
     Private Sub ToolStripButton18_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
         If Flowsheet.SaveFileDialog1.ShowDialog = Windows.Forms.DialogResult.OK Then
-            Dim rect As Rectangle = New Rectangle(0, 0, SplitContainer1.Panel1.Width - 14, SplitContainer1.Panel1.Height - 14)
+            Dim rect As Rectangle = New Rectangle(0, 0, SplitContainerHorizontal.Panel1.Width - 14, SplitContainerHorizontal.Panel1.Height - 14)
             Dim img As Image = New Bitmap(rect.Width, rect.Height)
-            SplitContainer1.Panel1.DrawToBitmap(img, SplitContainer1.Panel1.Bounds)
+            SplitContainerHorizontal.Panel1.DrawToBitmap(img, SplitContainerHorizontal.Panel1.Bounds)
             img.Save(Flowsheet.SaveFileDialog1.FileName, Imaging.ImageFormat.Png)
             img.Dispose()
         End If
@@ -2608,14 +2612,14 @@ Public Class FlowsheetSurface_SkiaSharp
         FlowsheetSurface.ZoomAll(FControl.Width, FControl.Height)
         Application.DoEvents()
         Me.TSTBZoom.Text = Format(FlowsheetSurface.Zoom, "#%")
-        SplitContainer1.Panel1.Refresh()
+        SplitContainerHorizontal.Panel1.Refresh()
     End Sub
 
     Private Sub ToolStripButton3_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripButton3.Click
         If tsbControlPanelMode.Checked Then Exit Sub
         FlowsheetSurface.Zoom = 1
         Me.TSTBZoom.Text = Format(FlowsheetSurface.Zoom, "#%")
-        SplitContainer1.Panel1.Refresh()
+        SplitContainerHorizontal.Panel1.Refresh()
     End Sub
 
     Private Sub TSTBZoom_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TSTBZoom.KeyDown
@@ -2623,7 +2627,7 @@ Public Class FlowsheetSurface_SkiaSharp
         If e.KeyCode = Keys.Enter Then
             FlowsheetSurface.Zoom = Convert.ToInt32(Me.TSTBZoom.Text.Replace("%", "")) / 100
             Me.TSTBZoom.Text = Format(FlowsheetSurface.Zoom, "#%")
-            SplitContainer1.Panel1.Refresh()
+            SplitContainerHorizontal.Panel1.Refresh()
         End If
     End Sub
 
@@ -2671,7 +2675,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Private Sub FlowsheetSurface_SkiaSharp_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         Try
-            FlowsheetSurface.ZoomAll(SplitContainer1.Panel1.Width, SplitContainer1.Panel1.Height)
+            FlowsheetSurface.ZoomAll(SplitContainerHorizontal.Panel1.Width, SplitContainerHorizontal.Panel1.Height)
             FlowsheetSurface.ShowGrid = Flowsheet.Options.FlowsheetDisplayGrid
             FlowsheetSurface.SnapToGrid = Flowsheet.Options.FlowsheetSnapToGrid
             FlowsheetSurface.MultiSelectMode = Flowsheet.Options.FlowsheetMultiSelectMode
@@ -2724,7 +2728,7 @@ Public Class FlowsheetSurface_SkiaSharp
             Else
                 FlowsheetSurface.SelectedObject.Rotation = FlowsheetSurface.SelectedObject.Rotation + 90
             End If
-            SplitContainer1.Panel1.Invalidate()
+            SplitContainerHorizontal.Panel1.Invalidate()
         End If
     End Sub
 
@@ -2737,7 +2741,7 @@ Public Class FlowsheetSurface_SkiaSharp
             Else
                 FlowsheetSurface.SelectedObject.Rotation = FlowsheetSurface.SelectedObject.Rotation + 180
             End If
-            SplitContainer1.Panel1.Invalidate()
+            SplitContainerHorizontal.Panel1.Invalidate()
         End If
     End Sub
 
@@ -2750,7 +2754,7 @@ Public Class FlowsheetSurface_SkiaSharp
             Else
                 FlowsheetSurface.SelectedObject.Rotation = FlowsheetSurface.SelectedObject.Rotation + 270
             End If
-            SplitContainer1.Panel1.Invalidate()
+            SplitContainerHorizontal.Panel1.Invalidate()
         End If
     End Sub
 
@@ -2787,7 +2791,7 @@ Public Class FlowsheetSurface_SkiaSharp
         Else
             FlowsheetSurface.SelectedObject.FlippedH = False
         End If
-        SplitContainer1.Panel1.Invalidate()
+        SplitContainerHorizontal.Panel1.Invalidate()
     End Sub
 
     Private Sub ToolStripMenuItem14_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem14.Click
@@ -2805,7 +2809,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Sub CopyAsImage(Zoom As Integer)
 
-        Using bmp As New SKBitmap(SplitContainer1.Panel1.Width * Zoom, SplitContainer1.Panel1.Height * Zoom)
+        Using bmp As New SKBitmap(SplitContainerHorizontal.Panel1.Width * Zoom, SplitContainerHorizontal.Panel1.Height * Zoom)
             Using canvas As New SKCanvas(bmp)
                 canvas.Scale(Zoom)
                 FlowsheetSurface.UpdateCanvas(canvas)
@@ -2870,8 +2874,8 @@ Public Class FlowsheetSurface_SkiaSharp
 
         FlowsheetSurface.AlignSelectedObjects(direction)
 
-        SplitContainer1.Panel1.Invalidate()
-        SplitContainer1.Panel1.Invalidate()
+        SplitContainerHorizontal.Panel1.Invalidate()
+        SplitContainerHorizontal.Panel1.Invalidate()
 
     End Sub
 
@@ -2987,7 +2991,7 @@ Public Class FlowsheetSurface_SkiaSharp
         Dim obj = Flowsheet.GetFlowsheetGraphicObject(tstbSearch.Text)
         If Not obj Is Nothing Then
             Try
-                Dim center As Point = New Point(SplitContainer1.Panel1.Width / 2, SplitContainer1.Panel1.Height / 2)
+                Dim center As Point = New Point(SplitContainerHorizontal.Panel1.Width / 2, SplitContainerHorizontal.Panel1.Height / 2)
                 FlowsheetSurface.OffsetAll(center.X / FlowsheetSurface.Zoom - obj.X, center.Y / FlowsheetSurface.Zoom - obj.Y)
                 FlowsheetSurface.SelectedObject = obj
                 FControl.Invalidate()
@@ -3076,7 +3080,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Private Sub btnUp_Click(sender As Object, e As EventArgs) Handles btnUp.Click
 
-        Dim s As Size = SplitContainer1.Panel1.Size
+        Dim s As Size = SplitContainerHorizontal.Panel1.Size
         Dim z = FlowsheetSurface.Zoom
 
         FlowsheetSurface.OffsetAll(0, s.Height / z)
@@ -3086,7 +3090,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Private Sub btnDown_Click(sender As Object, e As EventArgs) Handles btnDown.Click
 
-        Dim s As Size = SplitContainer1.Panel1.Size
+        Dim s As Size = SplitContainerHorizontal.Panel1.Size
         Dim z = FlowsheetSurface.Zoom
 
         FlowsheetSurface.OffsetAll(0, -s.Height / z)
@@ -3096,7 +3100,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Private Sub btnLeft_Click(sender As Object, e As EventArgs) Handles btnLeft.Click
 
-        Dim s As Size = SplitContainer1.Panel1.Size
+        Dim s As Size = SplitContainerHorizontal.Panel1.Size
         Dim z = FlowsheetSurface.Zoom
 
         FlowsheetSurface.OffsetAll(s.Width / z, 0)
@@ -3106,7 +3110,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Private Sub btnRight_Click(sender As Object, e As EventArgs) Handles btnRight.Click
 
-        Dim s As Size = SplitContainer1.Panel1.Size
+        Dim s As Size = SplitContainerHorizontal.Panel1.Size
         Dim z = FlowsheetSurface.Zoom
 
         FlowsheetSurface.OffsetAll(-s.Width / z, 0)
@@ -3125,8 +3129,8 @@ Public Class FlowsheetSurface_SkiaSharp
     Private Sub LayoutAutomaticoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LayoutAutomaticoToolStripMenuItem.Click
 
         FlowsheetSurface.AutoArrange()
-        FlowsheetSurface.ZoomAll(SplitContainer1.Panel1.Width, SplitContainer1.Panel1.Height)
-        FlowsheetSurface.ZoomAll(SplitContainer1.Panel1.Width, SplitContainer1.Panel1.Height)
+        FlowsheetSurface.ZoomAll(SplitContainerHorizontal.Panel1.Width, SplitContainerHorizontal.Panel1.Height)
+        FlowsheetSurface.ZoomAll(SplitContainerHorizontal.Panel1.Width, SplitContainerHorizontal.Panel1.Height)
         FControl.Invalidate()
         RestaurarLayoutToolStripMenuItem.Enabled = True
 
@@ -3135,11 +3139,32 @@ Public Class FlowsheetSurface_SkiaSharp
     Private Sub RestaurarLayoutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RestaurarLayoutToolStripMenuItem.Click
 
         FlowsheetSurface.RestoreLayout()
-        FlowsheetSurface.ZoomAll(SplitContainer1.Panel1.Width, SplitContainer1.Panel1.Height)
-        FlowsheetSurface.ZoomAll(SplitContainer1.Panel1.Width, SplitContainer1.Panel1.Height)
+        FlowsheetSurface.ZoomAll(SplitContainerHorizontal.Panel1.Width, SplitContainerHorizontal.Panel1.Height)
+        FlowsheetSurface.ZoomAll(SplitContainerHorizontal.Panel1.Width, SplitContainerHorizontal.Panel1.Height)
         FControl.Invalidate()
         RestaurarLayoutToolStripMenuItem.Enabled = False
 
+    End Sub
+
+    Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem1.Click
+        If SplitContainerVertical.Panel2Collapsed Then
+            SimObjPanel.TabControl1.Alignment = TabAlignment.Right
+            SimObjPanel.TabControl1.Multiline = True
+            SplitContainerHorizontal.Panel2.Controls.Remove(SimObjPanel)
+            SplitContainerVertical.Panel2.Controls.Add(SimObjPanel)
+            SplitContainerVertical.SplitterDistance = (SplitContainerVertical.Width - 160) * GlobalSettings.Settings.DpiScale
+            SplitContainerVertical.Panel2Collapsed = False
+            SplitContainerHorizontal.Panel2Collapsed = True
+        Else
+            SimObjPanel.TabControl1.Alignment = TabAlignment.Top
+            SimObjPanel.TabControl1.Multiline = False
+            SimObjPanel.TabControl1.Width = SplitContainerHorizontal.Panel2.Width
+            SplitContainerVertical.Panel2.Controls.Remove(SimObjPanel)
+            SplitContainerHorizontal.Panel2.Controls.Add(SimObjPanel)
+            SplitContainerHorizontal.SplitterDistance = (SplitContainerVertical.Height - 100) * GlobalSettings.Settings.DpiScale
+            SplitContainerVertical.Panel2Collapsed = True
+            SplitContainerHorizontal.Panel2Collapsed = False
+        End If
     End Sub
 
     Private Sub tsbControlPanelMode_CheckedChanged(sender As Object, e As EventArgs) Handles tsbControlPanelMode.CheckedChanged
@@ -3157,7 +3182,7 @@ Public Class FlowsheetSurface_SkiaSharp
             GlobalSettings.Settings.DarkMode = True
             Drawing.SkiaSharp.GraphicsSurface.BackgroundColor = SKColors.DimGray
             Drawing.SkiaSharp.GraphicsSurface.ForegroundColor = SKColors.WhiteSmoke
-            SplitContainer1.Panel2Collapsed = True
+            SplitContainerHorizontal.Panel2Collapsed = True
         Else
             btnDown.Visible = False
             btnUp.Visible = False
@@ -3171,7 +3196,7 @@ Public Class FlowsheetSurface_SkiaSharp
             GlobalSettings.Settings.DarkMode = False
             Drawing.SkiaSharp.GraphicsSurface.BackgroundColor = SKColors.White
             Drawing.SkiaSharp.GraphicsSurface.ForegroundColor = SKColors.Black
-            SplitContainer1.Panel2Collapsed = False
+            SplitContainerHorizontal.Panel2Collapsed = False
         End If
         FControl.Invalidate()
 

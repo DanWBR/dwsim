@@ -3085,6 +3085,7 @@
     <None Include="Resources\icons8-save_all.png" />
     <None Include="Resources\icons8-live_folder.png" />
     <None Include="Resources\icons8-new_file.png" />
+    <None Include="Resources\icons8-compress.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />
