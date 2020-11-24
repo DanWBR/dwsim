@@ -125,7 +125,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>368, 97</value>
+    <value>386, 97</value>
   </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>Viscosity data (leave blank to calculate)</value>
@@ -142,12 +142,6 @@
   <data name="Label17.Text" xml:space="preserve">
     <value>[dimensionless]</value>
   </data>
-  <data name="Label18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 13</value>
-  </data>
-  <data name="Label18.Text" xml:space="preserve">
-    <value>kg / kmol</value>
-  </data>
   <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 13</value>
   </data>
@@ -161,7 +155,7 @@
     <value>Molecular Weight (MW)</value>
   </data>
   <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>671, 111</value>
+    <value>689, 111</value>
   </data>
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Input Data</value>
@@ -201,10 +195,10 @@
     <value>76</value>
   </data>
   <data name="DataGridView2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>666, 262</value>
+    <value>684, 265</value>
   </data>
   <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>672, 282</value>
+    <value>690, 285</value>
   </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Properties</value>
@@ -213,19 +207,19 @@
     <value>187, 119</value>
   </data>
   <data name="KButton1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>488, 24</value>
+    <value>506, 24</value>
   </data>
   <data name="KButton1.Text" xml:space="preserve">
     <value>Characterize Oil</value>
   </data>
   <data name="KButton3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>221, 456</value>
+    <value>239, 459</value>
   </data>
   <data name="KButton3.Text" xml:space="preserve">
     <value>Create and Add Oil Stream</value>
   </data>
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 462</value>
+    <value>9, 465</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>71, 13</value>
@@ -234,10 +228,10 @@
     <value>Stream Name</value>
   </data>
   <data name="TextBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>86, 459</value>
+    <value>86, 462</value>
   </data>
   <data name="TextBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 20</value>
+    <value>146, 20</value>
   </data>
   <data name="TextBox1.Text" xml:space="preserve">
     <value>OIL_1</value>
@@ -255,7 +249,7 @@
     <value>66, 21</value>
   </data>
   <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>679, 428</value>
+    <value>697, 431</value>
   </data>
   <data name="FaTabStripItem1.Title" xml:space="preserve">
     <value>General</value>
@@ -303,13 +297,13 @@
     <value>Critical Temperature</value>
   </data>
   <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>669, 321</value>
+    <value>687, 324</value>
   </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Methods and Correlations</value>
   </data>
-  <data name="Label21.Location" type="System.Drawing.Point, System.Drawing">
-    <value>490, 41</value>
+  <data name="LabelTemp4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>484, 41</value>
   </data>
   <data name="TextBoxTB0.Location" type="System.Drawing.Point, System.Drawing">
     <value>416, 38</value>
@@ -363,34 +357,34 @@
     <value>Molar Weight</value>
   </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>669, 71</value>
+    <value>687, 71</value>
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Initial Values</value>
   </data>
   <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>679, 428</value>
+    <value>697, 431</value>
   </data>
   <data name="FaTabStripItem2.Title" xml:space="preserve">
     <value>Options</value>
   </data>
   <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>681, 449</value>
+    <value>699, 452</value>
   </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>535, 456</value>
+    <value>553, 459</value>
   </data>
   <data name="Button1.Text" xml:space="preserve">
     <value>Load Assay Data</value>
   </data>
   <data name="Button2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>417, 456</value>
+    <value>435, 459</value>
   </data>
   <data name="Button2.Text" xml:space="preserve">
     <value>Save Assay Data</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>687, 485</value>
+    <value>705, 488</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>DWSIM - Bulk C7+ Petroleum Characterization</value>
