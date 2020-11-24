@@ -67,6 +67,7 @@ Version 6.3 Update 5
 - [CHG] Optimized script execution in advanced kinetic reactors
 - [FIX] Fixed convergence issues with Liquid-Liquid Extractor
 - [FIX] Fixed convergence issues with Gibbs Reactor
+- [FIX] Fixed issues with equilibrium calculations
 - [FIX] Layout and other fixes
 
 Version 6.3 Update 4

@@ -380,7 +380,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             ecount = 0
 
-            ThreePhase = False
+            result = _nl.Flash_PT(Vz, P, T, PP)
+
+            L1 = result(0)
+            V = result(1)
+            Vx1 = result(2)
+            Vy = result(3)
 
             objfunc = ObjFuncType.MinGibbs
 
@@ -389,9 +394,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim obj As Double
             Dim status As IpoptReturnCode = IpoptReturnCode.Feasible_Point_Found
-
-            objval = 0.0#
-            objval0 = 0.0#
 
             Dim IPOPT_Failure As Boolean = True
 
@@ -669,10 +671,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Else
                     result = New Object() {L2 / F, V / F, Vx2, Vy, ecount, L1 / F, Vx1, 0.0#, PP.RET_NullVector}
                 End If
-
-            Else
-
-                result = _nl.Flash_PT(Vz, P, T, PP)
 
             End If
 

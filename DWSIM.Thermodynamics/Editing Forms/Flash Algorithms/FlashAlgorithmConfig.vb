@@ -50,9 +50,6 @@ Public Class FlashAlgorithmConfig
 
         chkFastModeNL.Checked = Settings(Interfaces.Enums.FlashSetting.NL_FastMode)
 
-        NumericUpDown1.Value = Settings(Interfaces.Enums.FlashSetting.ST_Number_of_Random_Tries)
-        chkForcePT3P.Checked = Settings(Interfaces.Enums.FlashSetting.CheckIncipientLiquidForStability)
-
         Select Case Settings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType)
             Case "Default"
                 cbFlashType.SelectedIndex = 0
@@ -121,16 +118,6 @@ Public Class FlashAlgorithmConfig
 
         End Try
 
-    End Sub
-
-    Private Sub NumericUpDown1_ValueChanged(sender As Object, e As EventArgs) Handles NumericUpDown1.ValueChanged
-
-        If _loaded Then Settings(Interfaces.Enums.FlashSetting.ST_Number_of_Random_Tries) = NumericUpDown1.Value
-
-    End Sub
-
-    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles chkForcePT3P.CheckedChanged
-        Settings(Interfaces.Enums.FlashSetting.CheckIncipientLiquidForStability) = chkForcePT3P.Checked
     End Sub
 
 End Class
