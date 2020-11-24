@@ -3587,8 +3587,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                 ByVal specs As Dictionary(Of String, SepOps.ColumnSpec),
                                 ByVal IdealK As Boolean, ByVal IdealH As Boolean) As Object
 
-            Settings.SkipGUIUpdate = True
-
             Dim spval1, spval2 As Double
             Dim spci1, spci2 As Integer
 

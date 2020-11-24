@@ -169,8 +169,6 @@ Public Class Settings
 
     Public Shared Property EnableCustomTouchBar As Boolean = True
 
-    Public Shared Property SkipGUIUpdate As Boolean = False
-
     Shared Sub LoadExcelSettings(Optional ByVal configfile As String = "")
 
         Dim configfiledir = GetConfigFileDir()
