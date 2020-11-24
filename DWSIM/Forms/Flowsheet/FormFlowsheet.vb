@@ -1085,7 +1085,9 @@ Public Class FormFlowsheet
 
             CalculationQueue.Enqueue(objargs)
 
-            FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, , True)
+            Task.Factory.StartNew(Sub()
+                                      FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, , True)
+                                  End Sub)
 
         End If
 
@@ -2636,6 +2638,7 @@ Public Class FormFlowsheet
     End Sub
 
     Public Sub CheckStatus() Implements Interfaces.IFlowsheet.CheckStatus, IFlowsheetGUI.CheckStatus
+        UpdateInterface()
         FlowsheetSolver.FlowsheetSolver.CheckCalculatorStatus()
     End Sub
 
@@ -2797,12 +2800,16 @@ Public Class FormFlowsheet
                                    UpdateOpenEditForms()
                                End Sub
             If Not sender Is Nothing Then
-                FlowsheetSolver.FlowsheetSolver.CalculateObject(Me, sender.Name)
-                UpdateOpenEditForms()
+                Task.Factory.StartNew(Sub()
+                                          FlowsheetSolver.FlowsheetSolver.CalculateObject(Me, sender.Name)
+                                          UpdateOpenEditForms()
+                                      End Sub)
             Else
-                FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, Settings.SolverMode,
-                                                               Nothing, False, False,
-                                                               Nothing, Nothing, finishaction)
+                Task.Factory.StartNew(Sub()
+                                          FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, Settings.SolverMode,
+                                                                                         Nothing, False, False,
+                                                                                         Nothing, Nothing, finishaction)
+                                      End Sub)
             End If
             FormSurface.Invalidate()
         End If
@@ -2878,7 +2885,7 @@ Public Class FormFlowsheet
         If Not Invalidating Then
             Me.UIThread(Sub()
                             Invalidating = True
-                            Me.FormSurface.Invalidate()
+                            FormSurface.Refresh()
                             Invalidating = False
                         End Sub)
         End If

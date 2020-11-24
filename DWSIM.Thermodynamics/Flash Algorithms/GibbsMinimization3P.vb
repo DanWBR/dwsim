@@ -398,367 +398,276 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim problem As Ipopt = Nothing
             Dim ex0 As New Exception
 
-            Try
-                problem = New Ipopt(initval.Length, lconstr, uconstr, 0, Nothing, Nothing,
-                   0, 0, AddressOf eval_f, AddressOf eval_g,
-                   AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
-                problem.AddOption("print_level", 1)
-                problem.AddOption("tol", etol)
-                problem.AddOption("max_iter", maxit_e)
-                problem.AddOption("mu_strategy", "adaptive")
-                problem.AddOption("expect_infeasible_problem", "yes")
-                problem.AddOption("hessian_approximation", "limited-memory")
-                problem.SetIntermediateCallback(AddressOf intermediate)
-                status = problem.SolveProblem(initval, obj, Nothing, Nothing, Nothing, Nothing)
-                IPOPT_Failure = False
-            Catch ex As Exception
-                ex0 = ex
-            Finally
-                problem?.Dispose()
-                problem = Nothing
-            End Try
-
-            If IPOPT_Failure Then Throw New Exception("Failed to load IPOPT library: " + ex0.Message)
-
-            Select Case status
-                Case IpoptReturnCode.Diverging_Iterates,
-                          IpoptReturnCode.Error_In_Step_Computation
-                    Throw New Exception("PT Flash: IPOPT failed to converge.")
-                Case IpoptReturnCode.Maximum_Iterations_Exceeded
-                    Throw New Exception("PT Flash: Maximum iterations exceeded.")
-            End Select
-
-            IObj?.SetCurrent
-
-            For i = 0 To initval.Length - 1
-                If Double.IsNaN(initval(i)) Then initval(i) = 0.0#
-            Next
-
             Ki = Vy.DivideY(Vx1)
 
             IObj?.SetCurrent
 
-            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+            IObj?.Paragraphs.Add("Calling Liquid Phase Stability Test algorithm...")
 
-            IObj?.Paragraphs.Add(String.Format("Converged Vapor Phase molar fraction: {0}", V))
-            IObj?.Paragraphs.Add(String.Format("Converged Liquid Phase molar fraction: {0}", L))
-            IObj?.Paragraphs.Add(String.Format("Converged Vapor Phase composition: {0}", Vy.ToMathArrayString))
-            IObj?.Paragraphs.Add(String.Format("Converged Liquid Phase composition: {0}", Vx1.ToMathArrayString))
+            ' do a stability test in the liquid phase
 
-            Gz = FunctionValue(initval) * 1000
+            IObj?.SetCurrent
 
-            If Gz > Gz0 Then
-                'mixture is stable. no phase split.
-                Select Case mixphase
-                    Case PhaseName.Vapor
-                        V = 1.0
-                        L = 0.0
-                        Vy = Vz
-                    Case Else
-                        L = 1.0
-                        V = 0.0
-                        Vx1 = Vz
-                End Select
-            Else
-                'check if phases are the same
-                Dim diff As Double() = Vx1.Clone
-                For i = 0 To n
-                    diff(i) = Math.Abs(Vx1(i) - Vy(i))
-                Next
-                If diff.SumY() < 0.01 * n Then
-                    'the phases are the same.
-                    L = L + V
-                    V = 0.0
-                    Vy = Ki.MultiplyY(Vx1).NormalizeY()
+            Dim stresult = StabTest2(T, P, Vx1, PP.RET_VTC, PP)
+
+            If stresult.Count > 0 Then
+
+                IObj?.Paragraphs.Add("The liquid phase is not stable. Proceed to three-phase flash.")
+
+                Dim validsolutions = stresult.Where(Function(s) s.Max > 0.5).ToList()
+
+                If validsolutions.Count > 0 Then
+                    Vx2 = validsolutions(0)
+                Else
+                    Vx2 = stresult(0)
                 End If
-            End If
 
-            result = New Object() {L, V, Vx1, Vy, ecount, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
+                Dim maxl As Double = MathEx.Common.Max(Vx2)
+                Dim imaxl As Integer = Array.IndexOf(Vx2, maxl)
+
+
+                Dim initval2(2 * n + 1) As Double
+                Dim lconstr2(2 * n + 1) As Double
+                Dim uconstr2(2 * n + 1) As Double
+                Dim finalval2(2 * n + 1) As Double
+                Dim glow(n), gup(n), g(n) As Double
+
+                F = 1000.0#
+                V = F * V
+                L2 = F * Vz(imaxl)
+                L1 = F - L2 - V
+
+                If F * Vz(imaxl) < F * Vx1(imaxl) Then L2 = F * Vz(imaxl) Else L2 = F * Vx1(imaxl)
+
+                If L1 < 0.0# Then
+                    L1 = Abs(L1)
+                    L2 = F - L1 - V
+                End If
+
+                If L2 < 0.0# Then
+                    V += L2
+                    L2 = Abs(L2)
+                End If
+
+                For i = 0 To n
+                    If Vz(i) <> 0 Then
+                        initval2(i) = Vy(i) * V - Vx2(i) * L2
+                        If initval2(i) < 0.0# Then initval2(i) = 0.0#
+                    Else
+                        initval2(i) = 0.0#
+                    End If
+                    lconstr2(i) = 0.0#
+                    uconstr2(i) = fi(i) * F
+                    glow(i) = 0.0#
+                    gup(i) = 1000.0#
+                    If initval2(i) > uconstr2(i) Then initval2(i) = uconstr2(i)
+                Next
+                For i = n + 1 To 2 * n + 1
+                    If Vz(i - n - 1) <> 0 Then
+                        initval2(i) = (Vx2(i - n - 1) * L2)
+                        If initval2(i) < 0 Then initval2(i) = 0
+                    Else
+                        initval2(i) = 0.0#
+                    End If
+                    lconstr2(i) = 0.0#
+                    uconstr2(i) = fi(i - n - 1) * F
+                    If initval2(i) > uconstr2(i) Then initval2(i) = uconstr2(i)
+                Next
+
+                IObj?.Paragraphs.Add(String.Format("Initial Estimate for Vapor Phase Molar Fraction (V): {0}", V))
+                IObj?.Paragraphs.Add(String.Format("Initial Estimate for Liquid Phase 1 Molar Fraction (L1): {0}", L1))
+                IObj?.Paragraphs.Add(String.Format("Initial Estimate for Liquid Phase 2 Molar Fraction (L2): {0}", L2))
+
+                IObj?.Paragraphs.Add(String.Format("Initial Estimate for Vapor Phase Molar Composition: {0}", Vy.ToMathArrayString))
+                IObj?.Paragraphs.Add(String.Format("Initial Estimate for Liquid Phase 2 Molar Composition: {0}", Vx2.ToMathArrayString))
+
+                IObj?.SetCurrent
+
+                ecount = 0
+
+                ThreePhase = True
+
+                objval = 0.0#
+                objval0 = 0.0#
+
+                status = IpoptReturnCode.Invalid_Problem_Definition
+
+                IPOPT_Failure = True
+
+                ex0 = New Exception
+
+                Try
+                    problem = New Ipopt(initval2.Length, lconstr2, uconstr2, n + 1, glow, gup, (n + 1) * 2, 0,
+                        AddressOf eval_f, AddressOf eval_g,
+                        AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
+                    problem.AddOption("print_level", 1)
+                    problem.AddOption("tol", etol)
+                    problem.AddOption("max_iter", maxit_e * 10)
+                    problem.AddOption("mu_strategy", "adaptive")
+                    problem.AddOption("expect_infeasible_problem", "yes")
+                    problem.AddOption("hessian_approximation", "limited-memory")
+                    problem.SetIntermediateCallback(AddressOf intermediate)
+                    'solve the problem 
+                    status = problem.SolveProblem(initval2, obj, g, Nothing, Nothing, Nothing)
+                    IPOPT_Failure = False
+                Catch ex As Exception
+                    ex0 = ex
+                Finally
+                    problem?.Dispose()
+                    problem = Nothing
+                End Try
+
+                If IPOPT_Failure Then Throw New Exception("Failed to load IPOPT library: " + ex0.Message)
+
+                Select Case status
+                    Case IpoptReturnCode.Infeasible_Problem_Detected,
+                         IpoptReturnCode.Maximum_Iterations_Exceeded,
+                         IpoptReturnCode.User_Requested_Stop,
+                         IpoptReturnCode.Solve_Succeeded,
+                         IpoptReturnCode.Solved_To_Acceptable_Level
+                        'get solution with lowest gibbs energy
+                        initval = Solutions(GibbsEnergyValues.IndexOf(GibbsEnergyValues.Min))
+                    Case IpoptReturnCode.Diverging_Iterates,
+                        IpoptReturnCode.Error_In_Step_Computation,
+                        IpoptReturnCode.Internal_Error,
+                        IpoptReturnCode.Invalid_Number_Detected,
+                        IpoptReturnCode.Invalid_Option,
+                        IpoptReturnCode.NonIpopt_Exception_Thrown,
+                        IpoptReturnCode.Unrecoverable_Exception
+                        Throw New Exception("PT Flash: IPOPT failed to converge.")
+                End Select
+
+                For i = 0 To initval2.Length - 1
+                    If Double.IsNaN(initval2(i)) Then initval2(i) = 0.0#
+                Next
+
+                Gz = FunctionValue(initval2)
+
+                Dim mbr As Double = MassBalanceResidual()
+
+                If mbr > 0.01 * n Then
+                    Throw New Exception("PT Flash: Invalid solution.")
+                End If
+
+                If Gz > Gz0 Then
+                    'mixture is stable. no phase split.
+                    Select Case mixphase
+                        Case PhaseName.Vapor
+                            V = F
+                            L1 = 0
+                            L2 = 0
+                            Vy = Vz
+                        Case Else
+                            L1 = F
+                            L2 = 0
+                            V = 0
+                            Vx1 = Vz
+                    End Select
+                End If
+
+                'check if vapor and liquid1 phases are inverted
+
+                If TypeOf PP Is PengRobinsonPropertyPackage Or TypeOf PP Is PengRobinson1978PropertyPackage Then
+
+                    Dim fugvv, fugvl As Double()
+
+                    fugvv = PP.DW_CalcFugCoeff(Vy, T, P, State.Vapor)
+                    fugvl = PP.DW_CalcFugCoeff(Vy, T, P, State.Liquid)
+
+                    If fugvv.SubtractY(fugvl).AbsSqrSumY < 0.0001 Then
+
+                        Dim phase = IdentifyPhase(Vy, P, T, PP, "PR")
+
+                        If phase = "L" Then
+
+                            Dim Vhold, Vyhold() As Double
+                            Vhold = V
+                            V = L1
+                            L1 = Vhold
+
+                            Vyhold = Vy.Clone
+                            Vy = Vx1.Clone
+                            Vx1 = Vyhold
 
-            IObj?.Paragraphs.Add("The two-phase algorithm converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms. Error function value: " & F)
-
-            IObj?.Paragraphs.Add(String.Format("Final two-phase converged values for K: {0}", Ki.ToMathArrayString))
-
-            'if two-phase only, no need to do stability check on the liquid phase.
-
-            If ForceTwoPhaseOnly = False Then
-
-                IObj?.Paragraphs.Add("The algorithm will now move to the VLLE part. First it checks if there is a liquid phase. If yes, then it calls the liquid phase stability test algorithm to see if a second liquid phase can form at the current conditions.")
-
-                ' check if there is a liquid phase
-
-                If L >= 0 Then ' we have a liquid phase
-
-                    IObj?.Paragraphs.Add("We have a liquid phase. Checking its stability according to user specifications...")
-
-                    IObj?.Paragraphs.Add("Calling Liquid Phase Stability Test algorithm...")
-
-                    ' do a stability test in the liquid phase
-
-                    IObj?.SetCurrent
-
-                    Dim stresult = StabTest2(T, P, result(2), PP.RET_VTC, PP)
-
-                    If stresult.Count > 0 Then
-
-                        IObj?.Paragraphs.Add("The liquid phase is not stable. Proceed to three-phase flash.")
-
-                        Dim validsolutions = stresult.Where(Function(s) s.Max > 0.5).ToList()
-
-                        If validsolutions.Count > 0 Then
-                            Vx2 = validsolutions(0)
-                        Else
-                            Vx2 = stresult(0)
-                        End If
-
-                        Dim maxl As Double = MathEx.Common.Max(Vx2)
-                        Dim imaxl As Integer = Array.IndexOf(Vx2, maxl)
-
-
-                        Dim initval2(2 * n + 1) As Double
-                        Dim lconstr2(2 * n + 1) As Double
-                        Dim uconstr2(2 * n + 1) As Double
-                        Dim finalval2(2 * n + 1) As Double
-                        Dim glow(n), gup(n), g(n) As Double
-
-                        F = 1000.0#
-                        V = result(1)
-                        L2 = F * result(3)(imaxl)
-                        L1 = F - L2 - V
-
-                        If F * Vz(imaxl) < F * Vx1(imaxl) Then L2 = F * Vz(imaxl) Else L2 = F * Vx1(imaxl)
-
-                        If L1 < 0.0# Then
-                            L1 = Abs(L1)
-                            L2 = F - L1 - V
-                        End If
-
-                        If L2 < 0.0# Then
-                            V += L2
-                            L2 = Abs(L2)
-                        End If
-
-                        For i = 0 To n
-                            If Vz(i) <> 0 Then
-                                initval2(i) = Vy(i) * V - Vx2(i) * L2
-                                If initval2(i) < 0.0# Then initval2(i) = 0.0#
-                            Else
-                                initval2(i) = 0.0#
-                            End If
-                            lconstr2(i) = 0.0#
-                            uconstr2(i) = fi(i) * F
-                            glow(i) = 0.0#
-                            gup(i) = 1000.0#
-                            If initval2(i) > uconstr2(i) Then initval2(i) = uconstr2(i)
-                        Next
-                        For i = n + 1 To 2 * n + 1
-                            If Vz(i - n - 1) <> 0 Then
-                                initval2(i) = (Vx2(i - n - 1) * L2)
-                                If initval2(i) < 0 Then initval2(i) = 0
-                            Else
-                                initval2(i) = 0.0#
-                            End If
-                            lconstr2(i) = 0.0#
-                            uconstr2(i) = fi(i - n - 1) * F
-                            If initval2(i) > uconstr2(i) Then initval2(i) = uconstr2(i)
-                        Next
-
-                        IObj?.Paragraphs.Add(String.Format("Initial Estimate for Vapor Phase Molar Fraction (V): {0}", V))
-                        IObj?.Paragraphs.Add(String.Format("Initial Estimate for Liquid Phase 1 Molar Fraction (L1): {0}", L1))
-                        IObj?.Paragraphs.Add(String.Format("Initial Estimate for Liquid Phase 2 Molar Fraction (L2): {0}", L2))
-
-                        IObj?.Paragraphs.Add(String.Format("Initial Estimate for Vapor Phase Molar Composition: {0}", Vy.ToMathArrayString))
-                        IObj?.Paragraphs.Add(String.Format("Initial Estimate for Liquid Phase 2 Molar Composition: {0}", Vx2.ToMathArrayString))
-
-                        IObj?.SetCurrent
-
-                        ecount = 0
-
-                        ThreePhase = True
-
-                        objval = 0.0#
-                        objval0 = 0.0#
-
-                        status = IpoptReturnCode.Invalid_Problem_Definition
-
-                        IPOPT_Failure = True
-
-                        ex0 = New Exception
-
-                        Try
-                            problem = New Ipopt(initval2.Length, lconstr2, uconstr2, n + 1, glow, gup, (n + 1) * 2, 0,
-                                AddressOf eval_f, AddressOf eval_g,
-                                AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
-                            problem.AddOption("print_level", 1)
-                            problem.AddOption("tol", etol)
-                            problem.AddOption("max_iter", maxit_e * 10)
-                            problem.AddOption("mu_strategy", "adaptive")
-                            problem.AddOption("expect_infeasible_problem", "yes")
-                            problem.AddOption("hessian_approximation", "limited-memory")
-                            problem.SetIntermediateCallback(AddressOf intermediate)
-                            'solve the problem 
-                            status = problem.SolveProblem(initval2, obj, g, Nothing, Nothing, Nothing)
-                            IPOPT_Failure = False
-                        Catch ex As Exception
-                            ex0 = ex
-                        Finally
-                            problem?.Dispose()
-                            problem = Nothing
-                        End Try
-
-                        If IPOPT_Failure Then Throw New Exception("Failed to load IPOPT library: " + ex0.Message)
-
-                        Select Case status
-                            Case IpoptReturnCode.Infeasible_Problem_Detected,
-                                 IpoptReturnCode.Maximum_Iterations_Exceeded,
-                                 IpoptReturnCode.User_Requested_Stop
-                                'get solution with lowest gibbs energy
-                                initval = Solutions(GibbsEnergyValues.IndexOf(GibbsEnergyValues.Min))
-                            Case IpoptReturnCode.Diverging_Iterates,
-                                IpoptReturnCode.Error_In_Step_Computation,
-                                IpoptReturnCode.Internal_Error,
-                                IpoptReturnCode.Invalid_Number_Detected,
-                                IpoptReturnCode.Invalid_Option,
-                                IpoptReturnCode.NonIpopt_Exception_Thrown,
-                                IpoptReturnCode.Unrecoverable_Exception
-                                Throw New Exception("PT Flash: IPOPT failed to converge.")
-                        End Select
-
-                        For i = 0 To initval2.Length - 1
-                            If Double.IsNaN(initval2(i)) Then initval2(i) = 0.0#
-                        Next
-
-                        Gz = FunctionValue(initval2)
-
-                        Dim mbr As Double = MassBalanceResidual()
-
-                        If mbr > 0.01 * n Then
-                            Throw New Exception("PT Flash: Invalid solution.")
-                        End If
-
-                        If Gz > Gz0 Then
-                            'mixture is stable. no phase split.
-                            Select Case mixphase
-                                Case PhaseName.Vapor
-                                    V = F
-                                    L1 = 0
-                                    L2 = 0
-                                    Vy = Vz
-                                Case Else
-                                    L1 = F
-                                    L2 = 0
-                                    V = 0
-                                    Vx1 = Vz
-                            End Select
-                        End If
-
-                        'check if vapor and liquid1 phases are inverted
-
-                        If TypeOf PP Is PengRobinsonPropertyPackage Or TypeOf PP Is PengRobinson1978PropertyPackage Then
-
-                            Dim fugvv, fugvl As Double()
-
-                            fugvv = PP.DW_CalcFugCoeff(Vy, T, P, State.Vapor)
-                            fugvl = PP.DW_CalcFugCoeff(Vy, T, P, State.Liquid)
-
-                            If fugvv.SubtractY(fugvl).AbsSqrSumY < 0.0001 Then
-
-                                Dim phase = IdentifyPhase(Vy, P, T, PP, "PR")
-
-                                If phase = "L" Then
-
-                                    Dim Vhold, Vyhold() As Double
-                                    Vhold = V
-                                    V = L1
-                                    L1 = Vhold
-
-                                    Vyhold = Vy.Clone
-                                    Vy = Vx1.Clone
-                                    Vx1 = Vyhold
-
-                                End If
-
-                            End If
-
-                        ElseIf TypeOf PP Is SRKPropertyPackage Then
-
-                            Dim fugvv, fugvl As Double()
-
-                            fugvv = PP.DW_CalcFugCoeff(Vy, T, P, State.Vapor)
-                            fugvl = PP.DW_CalcFugCoeff(Vy, T, P, State.Liquid)
-
-                            If fugvv.SubtractY(fugvl).AbsSqrSumY < 0.0001 Then
-
-                                Dim phase = IdentifyPhase(Vy, P, T, PP, "SRK")
-
-                                If phase = "L" Then
-
-                                    Dim Vhold, Vyhold() As Double
-                                    Vhold = V
-                                    V = L1
-                                    L1 = Vhold
-
-                                    Vyhold = Vy.Clone
-                                    Vy = Vx1.Clone
-                                    Vx1 = Vyhold
-
-                                End If
-
-                            End If
-
-                        End If
-
-                        If L2 < 0.01 Then
-                            L2 = 0.0
-                        Else
-                            'check if liquid phases are the same
-                            Dim diffv As Double() = Vx2.Clone
-                            For i = 0 To n
-                                diffv(i) = Math.Abs(Vx1(i) - Vx2(i))
-                            Next
-                            If diffv.SumY() < 0.01 * n Then
-                                'the liquid phases are the same.
-                                L1 = L1 + L2
-                                L2 = 0.0
-                            End If
-                            'check if liquid2/vapor phases are the same
-                            Dim diffv2 As Double() = Vx2.Clone
-                            For i = 0 To n
-                                diffv2(i) = Math.Abs(Vx2(i) - Vy(i))
-                            Next
-                            If diffv2.SumY() < 0.01 * n Then
-                                'the liquid2/vapor phases are the same.
-                                V = V + L2
-                                L2 = 0.0
-                            End If
-                        End If
-
-                        IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
-
-                        IObj?.Paragraphs.Add("The three-phase algorithm converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms. Error function value: " & F)
-
-                        IObj?.Paragraphs.Add(String.Format("Converged Value for Vapor Phase Molar Fraction (V): {0}", V / F))
-                        IObj?.Paragraphs.Add(String.Format("Converged Value for Liquid Phase 1 Molar Fraction (L1): {0}", L1 / F))
-                        IObj?.Paragraphs.Add(String.Format("Converged Value for Liquid Phase 2 Molar Fraction (L2): {0}", L2 / F))
-
-                        IObj?.Paragraphs.Add(String.Format("Converged Value for Vapor Phase Molar Composition: {0}", Vy.ToMathArrayString))
-                        IObj?.Paragraphs.Add(String.Format("Converged Value for Liquid Phase 1 Molar Composition: {0}", Vx1.ToMathArrayString))
-                        IObj?.Paragraphs.Add(String.Format("Converged Value for Liquid Phase 2 Molar Composition: {0}", Vx2.ToMathArrayString))
-
-                        'order liquid phases by density
-
-                        Dim dens1, dens2 As Double
-                        dens1 = PP.AUX_LIQDENS(T, Vx1, P)
-                        dens2 = PP.AUX_LIQDENS(T, Vx2, P)
-
-                        If dens1 <= dens2 Then
-                            result = New Object() {L1 / F, V / F, Vx1, Vy, ecount, L2 / F, Vx2, 0.0#, PP.RET_NullVector}
-                        Else
-                            result = New Object() {L2 / F, V / F, Vx2, Vy, ecount, L1 / F, Vx1, 0.0#, PP.RET_NullVector}
                         End If
 
                     End If
 
+                ElseIf TypeOf PP Is SRKPropertyPackage Then
+
+                    Dim fugvv, fugvl As Double()
+
+                    fugvv = PP.DW_CalcFugCoeff(Vy, T, P, State.Vapor)
+                    fugvl = PP.DW_CalcFugCoeff(Vy, T, P, State.Liquid)
+
+                    If fugvv.SubtractY(fugvl).AbsSqrSumY < 0.0001 Then
+
+                        Dim phase = IdentifyPhase(Vy, P, T, PP, "SRK")
+
+                        If phase = "L" Then
+
+                            Dim Vhold, Vyhold() As Double
+                            Vhold = V
+                            V = L1
+                            L1 = Vhold
+
+                            Vyhold = Vy.Clone
+                            Vy = Vx1.Clone
+                            Vx1 = Vyhold
+
+                        End If
+
+                    End If
+
+                End If
+
+                If L2 < 0.01 Then
+                    L2 = 0.0
+                Else
+                    'check if liquid phases are the same
+                    Dim diffv As Double() = Vx2.Clone
+                    For i = 0 To n
+                        diffv(i) = Math.Abs(Vx1(i) - Vx2(i))
+                    Next
+                    If diffv.SumY() < 0.01 * n Then
+                        'the liquid phases are the same.
+                        L1 = L1 + L2
+                        L2 = 0.0
+                    End If
+                    'check if liquid2/vapor phases are the same
+                    Dim diffv2 As Double() = Vx2.Clone
+                    For i = 0 To n
+                        diffv2(i) = Math.Abs(Vx2(i) - Vy(i))
+                    Next
+                    If diffv2.SumY() < 0.01 * n Then
+                        'the liquid2/vapor phases are the same.
+                        V = V + L2
+                        L2 = 0.0
+                    End If
+                End If
+
+                IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
+
+                IObj?.Paragraphs.Add("The three-phase algorithm converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms. Error function value: " & F)
+
+                IObj?.Paragraphs.Add(String.Format("Converged Value for Vapor Phase Molar Fraction (V): {0}", V / F))
+                IObj?.Paragraphs.Add(String.Format("Converged Value for Liquid Phase 1 Molar Fraction (L1): {0}", L1 / F))
+                IObj?.Paragraphs.Add(String.Format("Converged Value for Liquid Phase 2 Molar Fraction (L2): {0}", L2 / F))
+
+                IObj?.Paragraphs.Add(String.Format("Converged Value for Vapor Phase Molar Composition: {0}", Vy.ToMathArrayString))
+                IObj?.Paragraphs.Add(String.Format("Converged Value for Liquid Phase 1 Molar Composition: {0}", Vx1.ToMathArrayString))
+                IObj?.Paragraphs.Add(String.Format("Converged Value for Liquid Phase 2 Molar Composition: {0}", Vx2.ToMathArrayString))
+
+                'order liquid phases by density
+
+                Dim dens1, dens2 As Double
+                dens1 = PP.AUX_LIQDENS(T, Vx1, P)
+                dens2 = PP.AUX_LIQDENS(T, Vx2, P)
+
+                If dens1 <= dens2 Then
+                    result = New Object() {L1 / F, V / F, Vx1, Vy, ecount, L2 / F, Vx2, 0.0#, PP.RET_NullVector}
+                Else
+                    result = New Object() {L2 / F, V / F, Vx2, Vy, ecount, L1 / F, Vx1, 0.0#, PP.RET_NullVector}
                 End If
 
             End If

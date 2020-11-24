@@ -649,7 +649,7 @@ Namespace Reactors
                 rx = FlowSheet.Reactions(rxid)
                 For Each comp As ReactionStoichBase In rx.Components.Values
                     If comp.StoichCoeff < 0 Then pvars.Add(-N0(comp.CompName) / comp.StoichCoeff)
-                    If comp.StoichCoeff > 0 Then nvars.Add(-N0(comp.CompName) / comp.StoichCoeff)
+                    If comp.StoichCoeff > 0 Then nvars.Add(N0(comp.CompName) / comp.StoichCoeff)
                 Next
                 lbound(i) = nvars.Max
                 ubound(i) = pvars.Min

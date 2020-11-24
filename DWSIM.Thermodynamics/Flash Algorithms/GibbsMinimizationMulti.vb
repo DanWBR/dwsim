@@ -472,8 +472,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Select Case status
                 Case IpoptReturnCode.Infeasible_Problem_Detected,
-                         IpoptReturnCode.Maximum_Iterations_Exceeded,
-                         IpoptReturnCode.User_Requested_Stop
+                        IpoptReturnCode.Maximum_Iterations_Exceeded,
+                        IpoptReturnCode.User_Requested_Stop,
+                        IpoptReturnCode.Solve_Succeeded,
+                        IpoptReturnCode.Solved_To_Acceptable_Level
                     'get solution with lowest gibbs energy
                     initval = Solutions(GibbsEnergyValues.IndexOf(GibbsEnergyValues.Min))
                 Case IpoptReturnCode.Diverging_Iterates,
