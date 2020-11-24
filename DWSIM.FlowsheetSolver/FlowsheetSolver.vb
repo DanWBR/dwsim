@@ -1276,7 +1276,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                                                  Dim rec = DirectCast(fbag.SimulationObjects(r), IRecycle)
                                                                  If rec.AccelerationMethod = AccelMethod.GlobalBroyden Then
                                                                      For Each kvp In rec.Errors
-                                                                         rec.Values(kvp.Key) = recvars(i) + recdvars(i)
+                                                                         rec.Values(kvp.Key) = recvars(i) + 0.7 * recdvars(i)
                                                                          i += 1
                                                                      Next
                                                                  End If
@@ -1731,7 +1731,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                         If success Then
                             For i = 0 To x.Length - 1
                                 dx(i) = -dx(i)
-                                x(i) += dx(i)
+                                x(i) += 0.7 * dx(i)
                             Next
                         End If
 
@@ -1828,7 +1828,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                     If success Then
                         For i = 0 To x.Length - 1
                             dx(i) = -dx(i)
-                            x(i) += dx(i)
+                            x(i) += 0.7 * dx(i)
                         Next
                     End If
 
