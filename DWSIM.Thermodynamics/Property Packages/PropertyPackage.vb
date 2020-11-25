@@ -226,7 +226,7 @@ Namespace PropertyPackages
 
         Public Property IgnoreSalinityLimit As Boolean = False
 
-        Public Property CalculateAdditionalMaterialStreamProperties As Boolean = False
+        Public Property CalculateAdditionalMaterialStreamProperties As Boolean = True
 
         ''' <summary>
         ''' ' For mobile compatibility only.
