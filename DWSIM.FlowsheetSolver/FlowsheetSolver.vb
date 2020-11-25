@@ -461,7 +461,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
         End While
 
-        fgui.ShowMessage(fgui.GetTranslatedString("Runtime") & ": " & (Date.Now - d0).ToString, IFlowsheet.MessageType.Information)
+        fgui.ShowMessage(fgui.GetTranslatedString("Runtime") & " (s): " & (Date.Now - d0).TotalSeconds.ToString("G4"), IFlowsheet.MessageType.Information)
 
         Return loopex
 
@@ -1418,7 +1418,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
             If age Is Nothing Then
 
                 fgui.ShowMessage(fgui.GetTranslatedString("FSfinishedsolvingok"), IFlowsheet.MessageType.Information)
-                fgui.ShowMessage(fgui.GetTranslatedString("Runtime") & ": " & (Date.Now - d1).ToString("g"), IFlowsheet.MessageType.Information)
+                fgui.ShowMessage(fgui.GetTranslatedString("Runtime") & " (s): " & (Date.Now - d1).TotalSeconds.ToString("G4"), IFlowsheet.MessageType.Information)
 
                 IObj?.Paragraphs.Add(String.Format("Solver finished calculation of all objects in {0} seconds.", (Date.Now - d1).TotalSeconds))
 

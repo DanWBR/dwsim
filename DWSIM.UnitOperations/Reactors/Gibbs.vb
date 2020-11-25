@@ -1107,6 +1107,13 @@ Namespace Reactors
 
                     Dim fail As Boolean = False
 
+                    If InitialEstimates.Count = 0 And ni_ext = 0 Then
+                        ' enhance initial estimates with simplex
+                        x = s2.ComputeMin(Function(x1)
+                                              Return FunctionValue2N(x1).AbsSqrSumY
+                                          End Function, x)
+                    End If
+
                     Try
                         finalx = nsolv.Solve(Function(x1)
                                                  Return FunctionValue2N(x1)

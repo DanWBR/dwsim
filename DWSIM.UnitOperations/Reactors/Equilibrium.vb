@@ -77,7 +77,7 @@ Namespace Reactors
 
         Public Property ExternalLoopMaximumIterations As Integer = 50
 
-        Public Property UseIPOPTSolver As Boolean = False
+        Public Property UseIPOPTSolver As Boolean = True
 
         Private LogErrorFunction As Boolean = False
 
