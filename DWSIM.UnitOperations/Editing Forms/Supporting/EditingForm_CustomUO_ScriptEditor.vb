@@ -55,6 +55,8 @@ Imports System.Drawing
             Me.Text = ScriptUO.GraphicObject.Tag & " - " & Me.Text
         End If
 
+        Dim apppath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)
+
         If Not CAPEOPEN Then
 
             Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
@@ -68,7 +70,7 @@ Imports System.Drawing
 
         Else
 
-            reader.Add(New Jolt.XmlDocCommentReader(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "CapeOpen.xml"))
+            reader.Add(New Jolt.XmlDocCommentReader(Path.Combine(apppath, "CapeOpen.xml")))
 
         End If
 

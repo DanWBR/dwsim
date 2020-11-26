@@ -74,6 +74,8 @@ Namespace My
 
         Private Sub MyApplication_Startup(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.StartupEventArgs) Handles Me.Startup
 
+            Directory.SetCurrentDirectory(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location))
+
             Control.CheckForIllegalCrossThreadCalls = False
 
             'upgrade settings from previous build, if applicable.
