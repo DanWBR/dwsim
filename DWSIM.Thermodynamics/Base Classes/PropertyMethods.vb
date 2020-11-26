@@ -83,7 +83,7 @@ Namespace PetroleumCharacterization.Methods
         ''' <returns>Critical Pressure of the fraction, Pa.</returns>
         ''' <remarks>Recommended for molecular weights between 70 and 300.</remarks>
         Public Shared Function Pc_LeeKesler(ByVal PEMe As Double, ByVal d15 As Double) As Double
-            Return 1000000.0 * 0.986923 * Exp(5.689 - 0.0566 / d15 - (0.43639 + 4.1216 / d15 + 0.21343 / d15 ^ 2) * 0.001 * PEMe + (0.47579 + 1.182 / d15 + 0.15302 / d15 ^ 2) * 0.000001 * PEMe ^ 2 - (2.4505 + 9.9099 / d15 ^ 2) * 0.0000000001 * PEMe ^ 3)
+            Return 100000.0 / 0.986923 * Exp(5.689 - 0.0566 / d15 - (0.43639 + 4.1216 / d15 + 0.21343 / d15 ^ 2) * 0.001 * PEMe + (0.47579 + 1.182 / d15 + 0.15302 / d15 ^ 2) * 0.000001 * PEMe ^ 2 - (2.4505 + 9.9099 / d15 ^ 2) * 0.0000000001 * PEMe ^ 3)
         End Function
 
         ''' <summary>
