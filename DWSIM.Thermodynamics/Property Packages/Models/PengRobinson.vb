@@ -51,10 +51,11 @@ Namespace PropertyPackages.Auxiliary
 
             Dim newclass As New PR_IPData
             With newclass
-                .ID1 = Me.ID1
-                .ID2 = Me.ID2
-                .kij = Me.kij
-                .comment = Me.comment
+                .ID1 = ID1
+                .ID2 = ID2
+                .Owner = Owner
+                .kij = kij
+                .comment = comment
             End With
             Return newclass
         End Function

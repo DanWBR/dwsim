@@ -11291,7 +11291,7 @@ Final3:
                         Dim pp As PengRobinsonPropertyPackage = Me
                         'pp.m_pr.InteractionParameters.Clear()
                         For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "InteractionParameters").FirstOrDefault.Elements.ToList
-                            Dim ip As New Auxiliary.PR_IPData() With {.kij = Double.Parse(xel.@Value, ci)}
+                            Dim ip As New Auxiliary.PR_IPData() With {.Owner = Me.GetModel(), .kij = Double.Parse(xel.@Value, ci)}
                             Dim dic As New Dictionary(Of String, Auxiliary.PR_IPData)
                             dic.Add(xel.@Compound2, ip)
                             If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
@@ -11352,7 +11352,7 @@ Final3:
                         Dim pp As SRKPropertyPackage = Me
                         'pp.m_pr.InteractionParameters.Clear()
                         For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "InteractionParameters").FirstOrDefault.Elements.ToList
-                            Dim ip As New Auxiliary.PR_IPData() With {.kij = Double.Parse(xel.@Value, ci)}
+                            Dim ip As New Auxiliary.PR_IPData() With {.Owner = Me.GetModel(), .kij = Double.Parse(xel.@Value, ci)}
                             Dim dic As New Dictionary(Of String, Auxiliary.PR_IPData)
                             dic.Add(xel.@Compound2, ip)
                             If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
