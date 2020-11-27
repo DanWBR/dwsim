@@ -570,7 +570,22 @@ Namespace Reactors
 
         End Sub
 
+        Private Mode2 As Boolean = False
+
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
+
+            Try
+                Mode2 = False
+                Calculate_Internal(args)
+            Catch ex As Exception
+                Mode2 = True
+                Calculate_Internal(args)
+            End Try
+
+        End Sub
+
+
+        Public Sub Calculate_Internal(Optional ByVal args As Object = Nothing)
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -698,7 +713,6 @@ Namespace Reactors
             Me.DeltaQ = 0
             Me.DeltaT = 0
 
-            Dim rx As Reaction
             ims = GetInletMaterialStream(0).Clone
             Dim pp As PropertyPackages.PropertyPackage = Me.PropertyPackage
             Dim ppr As New PropertyPackages.RaoultPropertyPackage()
@@ -906,7 +920,11 @@ Namespace Reactors
                 Try
                     mylags = mymat.Solve(mypot.Multiply(-1))
                     For i = 0 To e
-                        lagrm(i) = mylags(i, 0) / 100
+                        If Mode2 Then
+                            lagrm(i) = mylags(i, 0) / 100
+                        Else
+                            lagrm(i) = mylags(i, 0)
+                        End If
                     Next
                 Catch ex As Exception
                     For i = 0 To e
@@ -1107,7 +1125,7 @@ Namespace Reactors
 
                     Dim fail As Boolean = False
 
-                    If InitialEstimates.Count = 0 And ni_ext = 0 Then
+                    If InitialEstimates.Count = 0 And ni_ext = 0 And Mode2 Then
                         ' enhance initial estimates with simplex
                         x = s2.ComputeMin(Function(x1)
                                               Return FunctionValue2N(x1).AbsSqrSumY

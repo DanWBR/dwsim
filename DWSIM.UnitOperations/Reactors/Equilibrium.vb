@@ -387,7 +387,24 @@ Namespace Reactors
 
         End Sub
 
+        Private Mode2 As Boolean = False
+
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
+
+            Try
+                Mode2 = False
+                Calculate_Internal(args)
+            Catch ex As ArithmeticException
+                UseIPOPTSolver = False
+                Calculate_Internal(args)
+            Catch ex As Exception
+                Mode2 = True
+                Calculate_Internal(args)
+            End Try
+
+        End Sub
+
+        Public Sub Calculate_Internal(Optional ByVal args As Object = Nothing)
 
             Dim IObj As InspectorItem = Host.GetNewInspectorItem()
 
@@ -636,23 +653,15 @@ Namespace Reactors
             Ninerts = N0tot - Sum(fm0)
             Winerts = W0tot - wm0
 
-            Dim lbound(Me.ReactionExtents.Count - 1) As Double
-            Dim ubound(Me.ReactionExtents.Count - 1) As Double
+            Dim bounds As New List(Of Double)
 
-            Dim nvars As New List(Of Double)
-                Dim pvars As New List(Of Double)
-
-                i = 0
+            i = 0
             For Each rxid As String In Me.Reactions
-                nvars.Clear()
-                pvars.Clear()
                 rx = FlowSheet.Reactions(rxid)
                 For Each comp As ReactionStoichBase In rx.Components.Values
-                    If comp.StoichCoeff < 0 Then pvars.Add(-N0(comp.CompName) / comp.StoichCoeff)
-                    If comp.StoichCoeff > 0 Then nvars.Add(N0(comp.CompName) / comp.StoichCoeff)
+                    bounds.Add(-N0(comp.CompName) / comp.StoichCoeff)
+                    bounds.Add(N0(comp.CompName) / comp.StoichCoeff)
                 Next
-                lbound(i) = nvars.Max
-                ubound(i) = pvars.Min
                 i += 1
             Next
 
@@ -680,8 +689,8 @@ Namespace Reactors
 
             Me.InitialGibbsEnergy = g0
 
-            MinVal = Math.Min(lbound.Min, REx.Min) * 10
-            MaxVal = Math.Max(ubound.Max, REx.Max) * 10
+            MinVal = Math.Min(bounds.Min, REx.Min)
+            MaxVal = Math.Max(bounds.Max, REx.Max)
 
             Dim CalcFinished As Boolean = False
 
@@ -716,7 +725,7 @@ Namespace Reactors
 
                 'solve using newton's method
 
-                Dim x(r), newx(r), errval, sumerr As Double
+                Dim x(r), newx(r), errval, errval0, sumerr As Double
 
                 Dim niter As Integer
 
@@ -785,6 +794,7 @@ Namespace Reactors
 
                     newx = VariableValues(FunctionValues.IndexOf(FunctionValues.Min))
 
+                    errval0 = errval
                     errval = FunctionValue2N(newx).AbsSqrSumY
 
                     newx = newx.Select(Function(xi) Scaler.UnScale(xi, MinVal, MaxVal, 0, 100)).ToArray

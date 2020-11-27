@@ -92,7 +92,7 @@ Namespace MathEx.Optimization
                         'get solution with lowest function value
                         Return Solutions(FunctionValues.IndexOf(FunctionValues.Min))
                     Case Else
-                        Throw New Exception("IPOPT failed to converge.")
+                        Throw New ArithmeticException("IPOPT failed to converge.")
                 End Select
             End Using
 
