@@ -765,10 +765,6 @@ will converge to this solution.")
             Dim Vestimates As New Concurrent.ConcurrentBag(Of Double())
             Dim idx(nt) As Integer
 
-            'For j = 0 To n
-            '    If Vz(j) > 0 And T < VTc(i) Then Vtrials.Add(pp.RET_NullVector)
-            'Next
-
             For j = 0 To n
                 Vtrials.Add(pp.RET_NullVector)
             Next
@@ -783,14 +779,10 @@ will converge to this solution.")
                 Vtrials(j)(j) = 1.0
             Next
 
-            'For j = 0 To n
-            '    If T < VTc(j) Then Vtrials.RemoveAt(j)
-            'Next
-
             Dim tol As Double
             Dim fcv(n), fcl(n) As Double
 
-            tol = 0.00001
+            tol = 0.001
             maxits = 200
 
             Dim h(n), lnfi_z(n) As Double
@@ -857,11 +849,13 @@ will converge to this solution.")
                 i = i + 1
             Loop Until i = n + 1
 
-            Dim ntries As Integer = FlashSettings(Interfaces.Enums.FlashSetting.ST_Number_of_Random_Tries)
+            Vtrials.Add(Vz.Clone)
+
+            Dim ntries As Integer = 50
 
             For i = 0 To ntries
                 Dim random As New Random(i)
-                Vtrials.Add(Enumerable.Repeat(0, n + 1).Select(Function(d) random.NextDouble()).ToArray.MultiplyY(Vz))
+                Vtrials.Add(Enumerable.Repeat(0, n + 1).Select(Function(d) random.Next(0, 1000) / 1000.0).ToArray.MultiplyY(Vz))
             Next
 
             For i = 0 To Vtrials.Count - 1
