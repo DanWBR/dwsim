@@ -1954,6 +1954,8 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
         FlowsheetSurface.DrawPropertyList = Options.DisplayCornerPropertyList
         FlowsheetSurface.DrawFloatingTable = Options.DisplayFloatingPropertyTables
 
+        ReactionSets.Add("DefaultSet", New ReactionSet("DefaultSet", "Default Set", ""))
+
         AddPropPacks()
         AddExternalUOs()
 
