@@ -1198,15 +1198,9 @@ Namespace Reactors
 
                 Dim errfunc = FunctionValue2N(finalx).AbsSqrSumY
 
-                If errfunc > ExternalTolerance Then
+                If errfunc > ExternalTolerance Or Double.IsNaN(errfunc) Then
 
-                    errfunc = FunctionValue2N(finalx).AbsSqrSumY
-
-                    If errfunc > ExternalTolerance Then
-
-                        Throw New Exception(FlowSheet.GetTranslatedString("ConvergenceError"))
-
-                    End If
+                    Throw New Exception(FlowSheet.GetTranslatedString("ConvergenceError"))
 
                 End If
 

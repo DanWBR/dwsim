@@ -40,6 +40,7 @@ namespace SkiaSharp.Views.Desktop
 
 			// get the bitmap
 			CreateBitmap();
+
 			var data = bitmap.LockBits(new Rectangle(0, 0, Width, Height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
 
 			// create the surface

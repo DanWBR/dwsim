@@ -3227,7 +3227,15 @@ Public Class FormFlowsheet
     End Sub
 
     Public Sub RefreshInterface() Implements IFlowsheet.RefreshInterface
-        FormSurface.Refresh()
+
+        If Not Invalidating Then
+            Me.UIThread(Sub()
+                            Invalidating = True
+                            FormSurface.Refresh()
+                            Invalidating = False
+                        End Sub)
+        End If
+
     End Sub
 
 #End Region
