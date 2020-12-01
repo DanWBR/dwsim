@@ -98,6 +98,11 @@ Namespace PropertyPackages.Auxiliary
                     Else
                         Me.InteractionParameters(csdb.GetCSName(prip.ID1)).Add(csdb.GetCSName(prip.ID2), prip.Clone)
                     End If
+                ElseIf Me.InteractionParameters.ContainsKey(csdb.GetCSName(prip.ID2)) Then
+                    If Me.InteractionParameters(csdb.GetCSName(prip.ID2)).ContainsKey(csdb.GetCSName(prip.ID1)) Then
+                    Else
+                        Me.InteractionParameters(csdb.GetCSName(prip.ID2)).Add(csdb.GetCSName(prip.ID1), prip.Clone)
+                    End If
                 Else
                     Me.InteractionParameters.Add(csdb.GetCSName(prip.ID1), New Dictionary(Of String, PR_IPData))
                     Me.InteractionParameters(csdb.GetCSName(prip.ID1)).Add(csdb.GetCSName(prip.ID2), prip.Clone)
