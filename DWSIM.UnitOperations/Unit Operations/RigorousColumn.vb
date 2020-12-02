@@ -681,6 +681,10 @@ Namespace UnitOperations
 
         Inherits Column
 
+        Public Property ReboiledAbsorber As Boolean = False
+
+        Public Property RefluxedAbsorber As Boolean = False
+
         Public Sub New()
             MyBase.New()
         End Sub
@@ -1014,8 +1018,8 @@ Namespace UnitOperations
         End Sub
 
         Public Enum OpMode
-            Absorber
-            Extractor
+            Absorber = 0
+            Extractor = 1
         End Enum
 
         Public Property OperationMode() As OpMode

@@ -4687,7 +4687,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 End Try
                             Else
                                 Try
-                                    tmp1 = MyFlash.Flash_PV(New Double() {i * dx, 1 - i * dx}, P, 0.0#, Test1, Me, True, prevkib)
+                                    tmp1 = MyFlash.Flash_PV(New Double() {i * dx, 1 - i * dx}, P, 0.0#, Test1, Me)
                                     calcT = tmp1(4)
                                     Test1 = calcT
                                     prevkib = tmp1(6)
@@ -4697,7 +4697,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                     SharedClasses.ExceptionProcessing.ExceptionParser.ProcessAndDisplayException(Flowsheet, ex)
                                 End Try
                                 Try
-                                    tmp2 = MyFlash.Flash_PV(New Double() {i * dx, 1 - i * dx}, P, 1.0#, Test2, Me, True, prevkid)
+                                    tmp2 = MyFlash.Flash_PV(New Double() {i * dx, 1 - i * dx}, P, 1.0#, Test2, Me)
                                     calcT = tmp2(4)
                                     Test2 = calcT
                                     prevkid = tmp1(6)
@@ -4780,7 +4780,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                     Dim validdata = data.ReturnValidSets()
 
-                    Dim interpolator As New MathNet.Numerics.Interpolation.NevillePolynomialInterpolation(validdata.Item1, validdata.Item2)
+                    Dim interpolator As New MathNet.Numerics.Interpolation.BulirschStoerRationalInterpolation(validdata.Item1, validdata.Item2)
 
                     i = 0
                     For Each d As Double In py1.Clone
@@ -4794,7 +4794,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                     validdata = data.ReturnValidSets()
 
-                    interpolator = New MathNet.Numerics.Interpolation.NevillePolynomialInterpolation(validdata.Item1, validdata.Item2)
+                    interpolator = New MathNet.Numerics.Interpolation.BulirschStoerRationalInterpolation(validdata.Item1, validdata.Item2)
 
                     i = 0
                     For Each d As Double In py2.Clone
