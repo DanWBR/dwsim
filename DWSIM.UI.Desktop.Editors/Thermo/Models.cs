@@ -105,15 +105,11 @@ namespace DWSIM.UI.Desktop.Editors
                                                                 },
                                                                  (arg1, arg2) =>
                                                                  {
-                                                                     {
-                                                                         Application.Instance.Invoke(() => { pp.DisplayFlashConfigForm(); });
-                                                                     }
+                                                                     pp.DisplayFlashConfigForm();
                                                                  },
                                                                 (arg1, arg2) =>
                                                                 {
-                                                                    {
-                                                                        Application.Instance.Invoke(() => { pp.DisplayAdvancedEditingForm(); });
-                                                                    }
+                                                                    pp.DisplayAdvancedEditingForm();
                                                                 },
                                                                (arg1, arg2) =>
                                                                {

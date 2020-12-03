@@ -11970,7 +11970,11 @@ Final3:
         Public Sub DisplayFlashConfigForm()
             Dim fset As New FlashAlgorithmConfig
             fset.Settings = FlashSettings
-            fset.Show()
+            If Settings.IsRunningOnMono() Then
+                fset.ShowDialog()
+            Else
+                fset.Show()
+            End If
         End Sub
 
         Public Sub DisplayAdvancedEditingForm() Implements IPropertyPackage.DisplayAdvancedEditingForm
