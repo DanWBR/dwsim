@@ -3665,6 +3665,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     specR_OK = True
             End Select
 
+            If DirectCast(rc, DistillationColumn).ReboiledAbsorber Then specC_OK = True
+            If DirectCast(rc, DistillationColumn).RefluxedAbsorber Then specR_OK = True
+
             Dim ObjFunctionValues As New List(Of Double)
             Dim ResultsVector As New List(Of Object)
 
@@ -4167,6 +4170,11 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Dim Hfj(ns), Hv(ns), Hl(ns) As Double
             Dim VSSj(ns), LSSj(ns) As Double
 
+            Dim rebabs As Boolean = False, refabs As Boolean = False
+
+            If DirectCast(rc, DistillationColumn).ReboiledAbsorber Then rebabs = True
+            If DirectCast(rc, DistillationColumn).RefluxedAbsorber Then refabs = True
+
             'step0
 
             Dim cv As New SystemsOfUnits.Converter
@@ -4258,51 +4266,65 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             IObj?.Paragraphs.Add(String.Format("Vapor Enthalpies: {0}", Hv.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Liquid Enthalpies: {0}", Hl.ToMathArrayString))
 
-            Select Case specs("C").SType
-                Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
-                    LSSj(0) = spval1 / pp.AUX_MMM(x(0)) * 1000
-                    rr = (Lj(0) + LSSj(0)) / LSSj(0)
-                Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
-                    LSSj(0) = spval1
-                    rr = (Lj(0) + LSSj(0)) / LSSj(0)
-                Case ColumnSpec.SpecType.Stream_Ratio
-                    rr = spval1
-                Case ColumnSpec.SpecType.Heat_Duty
-                    Q(0) = spval1
-                    LSSj(0) = -Lj(0) - (Q(0) - Vj(1) * Hv(1) - F(0) * Hfj(0) + (Vj(0) + VSSj(0)) * Hv(0)) / Hl(0)
-                    rr = (Lj(0) + LSSj(0)) / LSSj(0)
-            End Select
+            If Not rebabs Then
+                Select Case specs("C").SType
+                    Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
+                        LSSj(0) = spval1 / pp.AUX_MMM(x(0)) * 1000
+                        rr = (Lj(0) + LSSj(0)) / LSSj(0)
+                    Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
+                        LSSj(0) = spval1
+                        rr = (Lj(0) + LSSj(0)) / LSSj(0)
+                    Case ColumnSpec.SpecType.Stream_Ratio
+                        rr = spval1
+                    Case ColumnSpec.SpecType.Heat_Duty
+                        Q(0) = spval1
+                        LSSj(0) = -Lj(0) - (Q(0) - Vj(1) * Hv(1) - F(0) * Hfj(0) + (Vj(0) + VSSj(0)) * Hv(0)) / Hl(0)
+                        rr = (Lj(0) + LSSj(0)) / LSSj(0)
+                End Select
+            Else
+                LSSj(0) = 0.0
+                rr = (Vj(1) + Fj(0)) / Vj(0) - 1
+            End If
 
-            Select Case specs("R").SType
-                Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
-                    B = spval2 / pp.AUX_MMM(x(ns)) * 1000
-                Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
-                    B = spval2
-                Case ColumnSpec.SpecType.Stream_Ratio
-                    B = sumF - LSSj(0) - sumLSS - sumVSS - Vj(0)
-                    Vj(ns) = B * spval2
-                Case ColumnSpec.SpecType.Heat_Duty
-                    Q(ns) = spval2
-                    Dim sum3, sum4, val1 As Double
-                    sum3 = 0
-                    sum4 = 0
-                    For i = 0 To ns
-                        sum3 += F(i) * Hfj(i) - LSSj(i) * Hl(i) - VSSj(i) * Hv(i)
-                    Next
-                    val1 = sum3 - Q(ns)
-                    sum4 = 0
-                    For i = 0 To ns - 1
-                        sum4 += Q(i) '- Lj(ns) * Hl(ns)
-                    Next
-                    B = -(val1 - (sum4 - Vj(0) * Hv(0))) / Hl(ns)
-            End Select
+            If Not refabs Then
+                Select Case specs("R").SType
+                    Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
+                        B = spval2 / pp.AUX_MMM(x(ns)) * 1000
+                    Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
+                        B = spval2
+                    Case ColumnSpec.SpecType.Stream_Ratio
+                        B = sumF - LSSj(0) - sumLSS - sumVSS - Vj(0)
+                        Vj(ns) = B * spval2
+                    Case ColumnSpec.SpecType.Heat_Duty
+                        Q(ns) = spval2
+                        Dim sum3, sum4, val1 As Double
+                        sum3 = 0
+                        sum4 = 0
+                        For i = 0 To ns
+                            sum3 += F(i) * Hfj(i) - LSSj(i) * Hl(i) - VSSj(i) * Hv(i)
+                        Next
+                        val1 = sum3 - Q(ns)
+                        sum4 = 0
+                        For i = 0 To ns - 1
+                            sum4 += Q(i) '- Lj(ns) * Hl(ns)
+                        Next
+                        B = -(val1 - (sum4 - Vj(0) * Hv(0))) / Hl(ns)
+                End Select
+            Else
+                B = Lj(ns)
+            End If
 
-            If condt = Column.condtype.Full_Reflux Then
+            If Not rebabs Then
+                If condt = Column.condtype.Full_Reflux Then
+                    Vj(0) = sumF - B - sumLSS - sumVSS
+                    LSSj(0) = 0.0#
+                Else
+                    D2 = sumF - B - sumLSS - sumVSS - Vj(0)
+                    LSSj(0) = D2
+                End If
+            Else
                 Vj(0) = sumF - B - sumLSS - sumVSS
                 LSSj(0) = 0.0#
-            Else
-                D2 = sumF - B - sumLSS - sumVSS - Vj(0)
-                LSSj(0) = D2
             End If
 
             'step3
@@ -4516,7 +4538,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                             yc(i)(j) = K(i)(j) * xc(i)(j)
                         Else
                             yc(i)(j) = eff(i) * K(i)(j) * xc(i)(j) + (1 - eff(i)) * yc(i + 1)(j)
-                            'yc(i)(j) = K(i)(j) * xc(i)(j)
                         End If
                         sumy(i) += yc(i)(j)
                     Next
@@ -4576,43 +4597,52 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 'handle specs
 
-                Select Case specs("C").SType
-                    Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
-                        LSSj(0) = spval1 / pp.AUX_MMM(xc(0)) * 1000
-                        rr = (Lj(0) + LSSj(0)) / LSSj(0)
-                    Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
-                        LSSj(0) = spval1
-                        rr = (Lj(0) + LSSj(0)) / LSSj(0)
-                    Case ColumnSpec.SpecType.Stream_Ratio
-                        rr = spval1
-                    Case ColumnSpec.SpecType.Heat_Duty
-                        Q(0) = spval1
-                        LSSj(0) = -Lj(0) - (Q(0) - Vj(1) * Hv(1) - F(0) * Hfj(0) + (Vj(0) + VSSj(0)) * Hv(0)) / Hl(0)
-                        rr = (Lj(0) + LSSj(0)) / LSSj(0)
-                End Select
+                If Not rebabs Then
+                    Select Case specs("C").SType
+                        Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
+                            LSSj(0) = spval1 / pp.AUX_MMM(xc(0)) * 1000
+                            rr = (Lj(0) + LSSj(0)) / LSSj(0)
+                        Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
+                            LSSj(0) = spval1
+                            rr = (Lj(0) + LSSj(0)) / LSSj(0)
+                        Case ColumnSpec.SpecType.Stream_Ratio
+                            rr = spval1
+                        Case ColumnSpec.SpecType.Heat_Duty
+                            Q(0) = spval1
+                            LSSj(0) = -Lj(0) - (Q(0) - Vj(1) * Hv(1) - F(0) * Hfj(0) + (Vj(0) + VSSj(0)) * Hv(0)) / Hl(0)
+                            rr = (Lj(0) + LSSj(0)) / LSSj(0)
+                    End Select
+                Else
+                    LSSj(0) = 0.0
+                    rr = (Vj(1) + Fj(0)) / Vj(0) - 1
+                End If
 
-                Select Case specs("R").SType
-                    Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
-                        B = spval2 / pp.AUX_MMM(xc(ns)) * 1000
-                    Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
-                        B = spval2
-                    Case ColumnSpec.SpecType.Stream_Ratio
-                        B = Vj(ns) / spval2
-                    Case ColumnSpec.SpecType.Heat_Duty
-                        Q(ns) = spval2
-                        Dim sum3, sum4, val1 As Double
-                        sum3 = 0
-                        sum4 = 0
-                        For i = 0 To ns
-                            sum3 += F(i) * Hfj(i) - LSSj(i) * Hl(i) - VSSj(i) * Hv(i)
-                        Next
-                        val1 = sum3 - Q(ns)
-                        sum4 = 0
-                        For i = 0 To ns - 1
-                            sum4 += Q(i)
-                        Next
-                        B = -(val1 - (sum4 - Vj(0) * Hv(0))) / Hl(ns)
-                End Select
+                If Not refabs Then
+                    Select Case specs("R").SType
+                        Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
+                            B = spval2 / pp.AUX_MMM(xc(ns)) * 1000
+                        Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
+                            B = spval2
+                        Case ColumnSpec.SpecType.Stream_Ratio
+                            B = Vj(ns) / spval2
+                        Case ColumnSpec.SpecType.Heat_Duty
+                            Q(ns) = spval2
+                            Dim sum3, sum4, val1 As Double
+                            sum3 = 0
+                            sum4 = 0
+                            For i = 0 To ns
+                                sum3 += F(i) * Hfj(i) - LSSj(i) * Hl(i) - VSSj(i) * Hv(i)
+                            Next
+                            val1 = sum3 - Q(ns)
+                            sum4 = 0
+                            For i = 0 To ns - 1
+                                sum4 += Q(i)
+                            Next
+                            B = -(val1 - (sum4 - Vj(0) * Hv(0))) / Hl(ns)
+                    End Select
+                Else
+                    B = Lj(ns)
+                End If
 
                 sumF = 0
                 sumLSS = 0
@@ -4623,7 +4653,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     sumVSS += VSS(i)
                 Next
 
-                If condt = Column.condtype.Full_Reflux Then
+                If condt = Column.condtype.Full_Reflux Or rebabs Then
                     Vj(0) = sumF - B - sumLSS - sumVSS
                     LSSj(0) = 0.0
                 Else
@@ -4659,12 +4689,18 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Vj_ant(i) = Vj(i)
                 Next
 
-                If Not condt = Column.condtype.Full_Reflux Then
-                    Vj(0) = V(0)
-                    Vj(1) = (rr + 1) * LSSj(0) - Fj(0) + Vj(0)
+                If Not rebabs Then
+                    If Not condt = Column.condtype.Full_Reflux Then
+                        Vj(0) = V(0)
+                        Vj(1) = (rr + 1) * LSSj(0) - Fj(0) + Vj(0)
+                    Else
+                        Vj(1) = (rr + 1) * Vj(0) - Fj(0)
+                    End If
                 Else
+                    Vj(0) = V(0)
                     Vj(1) = (rr + 1) * Vj(0) - Fj(0)
                 End If
+
                 For i = 2 To ns
                     Vj(i) = (gamma(i - 1) - alpha(i - 1) * Vj(i - 1)) / beta(i - 1)
                     If Vj(i) < 0 Then Vj(i) = 0.000001

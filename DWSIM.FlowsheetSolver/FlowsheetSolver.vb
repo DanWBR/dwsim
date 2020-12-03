@@ -1037,7 +1037,9 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
             If ChangeCalcOrder Then
                 If mode = 0 Or mode = 1 Then
-                    objstack = fgui.ChangeCalculationOrder(objstack)
+                    fgui.RunCodeOnUIThread(Sub()
+                                               objstack = fgui.ChangeCalculationOrder(objstack)
+                                           End Sub)
                 End If
             End If
 
