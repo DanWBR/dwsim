@@ -40,42 +40,69 @@ Namespace PropertyPackages
 
         Public MustOverride Function CalcHelmoltzEnergy(ByVal phasetype As String, ByVal T As Double, ByVal P As Double, ByVal Vz As Array, ByVal VKij As Object, ByVal VTc As Array, ByVal VPc As Array, ByVal Vw As Array, ByVal Aid As Double, Optional ByVal otherargs As Object = Nothing) As Double
 
-        Public Shared Function CalcIsothermalCompressibility(Vx As Double(), P As Double, T As Double, pp As PropertyPackage, ByVal eos As String) As Double
+        Public Shared Function CalcJouleThomsonCoefficient(Vx As Double(), P As Double, T As Double, pp As PropertyPackage, ByVal eos As String, cp As Double, VMM As Double) As Double
 
-            Dim g1, g2, g3, g4, g5, g6, t1, t2, v, a, b, dadT, R As Double, tmp As Double()
-
-            If eos = "SRK" Then
-                t1 = 1
-                t2 = 0
-                tmp = ThermoPlugs.SRK.ReturnParameters(T, P, Vx, pp.RET_VKij, pp.RET_VTC, pp.RET_VPC, pp.RET_VW)
-            Else
-                t1 = 1 + 2 ^ 0.5
-                t2 = 1 - 2 ^ 0.5
-                tmp = ThermoPlugs.PR.ReturnParameters(T, P, Vx, pp.RET_VKij, pp.RET_VTC, pp.RET_VPC, pp.RET_VW)
-            End If
-
-            a = tmp(0)
-            b = tmp(1)
-            v = tmp(2)
-            dadT = tmp(3)
-
-            g1 = 1 / (v - b)
-            g2 = 1 / (v + t1 * b)
-            g3 = 1 / (v + t2 * b)
-            g4 = g2 + g3
-            g5 = dadT
-            g6 = g2 * g3
-
+            Dim g1, v, a, b, dadT, R, dPdV, dPdT As Double, tmp As Double()
             R = 8.314
 
-            Dim d2PdvdT, dPdT, d2Pdv2, dPdv As Double
 
-            d2PdvdT = -R * g1 ^ 2 + g4 * g5 * g6
-            dPdT = R * g1 - g5 * g6
-            d2Pdv2 = 2 * R * T * g1 ^ 3 - 2 * a * g6 * (g2 ^ 2 + g6 + g3 ^ 2)
-            dPdv = -R * T * g1 ^ 2 + a * g4 * g6
+            If eos = "SRK" Then
 
-            Return -1 / dPdv / v
+                tmp = ThermoPlugs.SRK.ReturnParameters(T, P, Vx, pp.RET_VKij, pp.RET_VTC, pp.RET_VPC, pp.RET_VW)
+
+                a = tmp(0)
+                b = tmp(1)
+                v = tmp(2)
+                dadT = tmp(3)
+                g1 = 1 / (v - b)
+                dPdV = -R * T * g1 ^ 2 + a * (2 * v + b) / (v ^ 2 * (v + b) ^ 2)
+                dPdT = R * g1 - 1 / (v * (v + b)) * dadT
+            Else
+                tmp = ThermoPlugs.PR.ReturnParameters(T, P, Vx, pp.RET_VKij, pp.RET_VTC, pp.RET_VPC, pp.RET_VW)
+
+                a = tmp(0)
+                b = tmp(1)
+                v = tmp(2)
+                dadT = tmp(3)
+                g1 = 1 / (v - b)
+                dPdV = -R * T * (g1 ^ 2) + 2 * a * (v + b) / (v ^ 2 + 2 * b * v - b ^ 2) ^ 2
+                dPdT = R * g1 - 1 / ((v ^ 2 + 2 * b * v - b ^ 2)) * dadT
+            End If
+
+
+            Return -1 / (cp * VMM) * (T * dPdT / dPdV + v)
+
+
+        End Function
+
+        Public Shared Function CalcIsothermalCompressibility(Vx As Double(), P As Double, T As Double, pp As PropertyPackage, ByVal eos As String) As Double
+
+            Dim g1, v, a, b, dadT, R, dPdV As Double, tmp As Double()
+            R = 8.314
+
+
+            If eos = "SRK" Then
+                tmp = ThermoPlugs.SRK.ReturnParameters(T, P, Vx, pp.RET_VKij, pp.RET_VTC, pp.RET_VPC, pp.RET_VW)
+
+                a = tmp(0)
+                b = tmp(1)
+                v = tmp(2)
+                dadT = tmp(3)
+                g1 = 1 / (v - b)
+                dPdV = -R * T * g1 ^ 2 + a * (2 * v + b) / (v ^ 2 * (v + b) ^ 2)
+            Else
+                tmp = ThermoPlugs.PR.ReturnParameters(T, P, Vx, pp.RET_VKij, pp.RET_VTC, pp.RET_VPC, pp.RET_VW)
+
+                a = tmp(0)
+                b = tmp(1)
+                v = tmp(2)
+                dadT = tmp(3)
+                g1 = 1 / (v - b)
+                dPdV = -R * T * (g1 ^ 2) + 2 * a * (v + b) / (v ^ 2 + 2 * b * v - b ^ 2) ^ 2
+
+            End If
+
+            Return -1 / dPdV / v
 
         End Function
 

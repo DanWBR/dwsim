@@ -846,7 +846,8 @@ Namespace PropertyPackages
 
             IObj?.Close()
 
-            Return (K / rho) ^ 0.5
+            Return (p.Properties.heatCapacityCp / p.Properties.heatCapacityCv * K / rho) ^ 0.5
+
 
         End Function
 
