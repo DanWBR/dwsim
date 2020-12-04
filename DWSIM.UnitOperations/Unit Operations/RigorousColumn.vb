@@ -2685,7 +2685,11 @@ Namespace UnitOperations
                         Select Case Me.ColumnType
                             Case ColType.DistillationColumn
                                 If Me.CondenserType = condtype.Total_Condenser Then
-                                    V(0) = 0.0000000001
+                                    If DirectCast(Me, DistillationColumn).ReboiledAbsorber Then
+                                        V(0) = F(lastF)
+                                    Else
+                                        V(0) = 0.0000000001
+                                    End If
                                 Else
                                     V(0) = vaprate
                                 End If
@@ -2701,12 +2705,16 @@ Namespace UnitOperations
                     Else
                         Select Case Me.ColumnType
                             Case ColType.DistillationColumn
-                                If Me.CondenserType = condtype.Partial_Condenser Then
-                                    V(i) = (rr + 1) * (distrate + vaprate) - F(0)
-                                ElseIf Me.CondenserType = condtype.Full_Reflux Then
+                                If DirectCast(Me, DistillationColumn).ReboiledAbsorber Then
                                     V(i) = (rr + 1) * V(0) - F(0)
                                 Else
-                                    V(i) = (rr + 1) * distrate - F(0)
+                                    If Me.CondenserType = condtype.Partial_Condenser Then
+                                        V(i) = (rr + 1) * (distrate + vaprate) - F(0)
+                                    ElseIf Me.CondenserType = condtype.Full_Reflux Then
+                                        V(i) = (rr + 1) * V(0) - F(0)
+                                    Else
+                                        V(i) = (rr + 1) * distrate - F(0)
+                                    End If
                                 End If
                             Case ColType.RefluxedAbsorber
                                 V(i) = (rr + 1) * distrate - F(0) + V(0)
@@ -2723,12 +2731,16 @@ Namespace UnitOperations
                     If i = 0 Then
                         Select Case Me.ColumnType
                             Case ColType.DistillationColumn
-                                If Me.CondenserType = condtype.Partial_Condenser Then
-                                    L(0) = (distrate + vaprate) * rr
-                                ElseIf Me.CondenserType = condtype.Full_Reflux Then
+                                If DirectCast(Me, DistillationColumn).ReboiledAbsorber Then
                                     L(0) = vaprate * rr
                                 Else
-                                    L(0) = distrate * rr
+                                    If Me.CondenserType = condtype.Partial_Condenser Then
+                                        L(0) = (distrate + vaprate) * rr
+                                    ElseIf Me.CondenserType = condtype.Full_Reflux Then
+                                        L(0) = vaprate * rr
+                                    Else
+                                        L(0) = distrate * rr
+                                    End If
                                 End If
                             Case ColType.RefluxedAbsorber
                                 If Me.CondenserType = condtype.Partial_Condenser Then
@@ -2744,7 +2756,11 @@ Namespace UnitOperations
                     Else
                         Select Case Me.ColumnType
                             Case ColType.DistillationColumn
-                                If i < ns Then L(i) = V(i) + sum1(i) - V(0) Else L(i) = sum1(i) - V(0)
+                                If DirectCast(Me, DistillationColumn).ReboiledAbsorber Then
+                                    L(i) = F(firstF)
+                                Else
+                                    If i < ns Then L(i) = V(i) + sum1(i) - V(0) Else L(i) = sum1(i) - V(0)
+                                End If
                             Case ColType.RefluxedAbsorber
                                 If i < ns Then L(i) = V(i) + sum1(i) - V(0) Else L(i) = sum1(i) - V(0)
                             Case ColType.AbsorptionColumn
