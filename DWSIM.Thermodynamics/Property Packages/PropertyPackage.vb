@@ -627,7 +627,7 @@ Namespace PropertyPackages
             IObj?.Paragraphs.Add("Isothermal compressibility of a given phase is calculated 
                                 following the thermodynamic definition:")
 
-            IObj?.Paragraphs.Add("<m>\beta=-\frac{1}{V}\frac{\partial V}{\partial P}<m>")
+            IObj?.Paragraphs.Add("<m>\beta_T =-\frac{1}{V}\frac{\partial V}{\partial P}<m>")
 
             IObj?.Paragraphs.Add("The above expression is calculated rigorously by the PR and SRK 
                                 equations of state. For the other models, a numerical derivative 
@@ -638,14 +638,14 @@ Namespace PropertyPackages
             IObj?.Paragraphs.Add("The Bulk Modulus of a phase is defined as the inverse of the 
                                 isothermal compressibility:")
 
-            IObj?.Paragraphs.Add("<m>K=\frac{1}{\beta}<m>")
+            IObj?.Paragraphs.Add("<m>K=\frac{1}{\beta_T}<m>")
 
             IObj?.Paragraphs.Add("<h3>Speed of Sound</h3><p>")
 
-            IObj?.Paragraphs.Add("The speed of sound in a given phase is calculated by the 
+            IObj?.Paragraphs.Add("The speed of sound (isentropic) in a given phase is calculated by the 
                                 following equations:")
 
-            IObj?.Paragraphs.Add("<m>c=\sqrt{\frac{K}{\rho}},</m>")
+            IObj?.Paragraphs.Add("<m>c=\sqrt{\frac{C_p}{C_v}\frac{K}{\rho}},</m>")
 
             IObj?.Paragraphs.Add("where:")
 
@@ -654,6 +654,15 @@ Namespace PropertyPackages
             IObj?.Paragraphs.Add("<mi>K</mi> Bulk Modulus (Pa)")
 
             IObj?.Paragraphs.Add("<mi>\rho</mi> Phase Density (kg/m³)")
+
+            IObj?.Paragraphs.Add("<mi>C_p</mi> Constant pressure Heat capacity (kJ/kg K)")
+
+            IObj?.Paragraphs.Add("<mi>C_v</mi> Constant volume Heat capacity (kJ/kg K)")
+
+            IObj?.Paragraphs.Add("The ratio of heat capacities in above equation is equal to the ratio of 
+                                  the isothermal to the isentropic compressibility in order to shift the basis
+                                   from isothermal to isentropic.")
+
 
             IObj?.Paragraphs.Add("<h3>Joule-Thomson Coefficient</h3>")
 
@@ -673,7 +682,7 @@ Namespace PropertyPackages
 
             IObj?.Paragraphs.Add("<m>\mu=(\frac{\partial T}{\partial P})_{H},</m>")
 
-            IObj?.Paragraphs.Add("The JT coefficient is calculated rigorously by the PR and SRK 
+            IObj?.Paragraphs.Add("The JT coefficient is calculated analytically by the PR and SRK 
                                 equations of state, while the Goldzberg correlation is used for 
                                 all other models,")
 
