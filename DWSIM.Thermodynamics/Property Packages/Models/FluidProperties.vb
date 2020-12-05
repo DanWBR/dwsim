@@ -353,7 +353,7 @@ Namespace PropertyPackages.Auxiliary
             'T em °F
             T = T * 9 / 5 - 459.7
             'Tpc em °F
-            Tpc = T * 9 / 5 - 459.7
+            Tpc = Tpc * 9 / 5 - 459.7
             'Ppc em lbf/in.2
             Ppc = Ppc / 6894.76
             'Cp em J/kg°F
