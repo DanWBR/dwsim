@@ -42,6 +42,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
     Public Shared Event FlowsheetCalculationFinished As CustomEvent
     Public Shared Event MaterialStreamCalculationStarted As CustomEvent
     Public Shared Event MaterialStreamCalculationFinished As CustomEvent
+    Public Shared Event CalculationError As CustomEvent
     Public Shared Event CalculatingObject As CustomEvent2
 
     ''' <summary>
@@ -413,6 +414,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                         If fbag.DynamicMode Then myobj.UpdateDynamicsEditForm()
                     End If
                 Catch ex As AggregateException
+                    RaiseEvent CalculationError(myinfo, New EventArgs(), ex)
                     myobj.ErrorMessage = ""
                     For Each iex In ex.InnerExceptions
                         If TypeOf iex Is AggregateException Then
@@ -445,6 +447,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                     Next
                     If GlobalSettings.Settings.SolverBreakOnException Then Exit While
                 Catch ex As Exception
+                    RaiseEvent CalculationError(myinfo, New EventArgs(), ex)
                     myobj.ErrorMessage = ex.Message.ToString & vbCrLf
                     CheckExceptionForAdditionalInfo(ex)
                     loopex.Add(New Exception(myinfo.Tag & ": " & ex.Message))
@@ -518,6 +521,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                     If fbag.DynamicMode Then myobj.UpdateDynamicsEditForm()
                 End If
             Catch ex As AggregateException
+                RaiseEvent CalculationError(myinfo, New EventArgs(), ex)
                 fgui.ProcessScripts(Scripts.EventType.ObjectCalculationError, Scripts.ObjectType.FlowsheetObject, myobj.Name)
                 myobj.ErrorMessage = ""
                 For Each iex In ex.InnerExceptions
@@ -551,6 +555,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                 Next
                 If GlobalSettings.Settings.SolverBreakOnException Then Exit While
             Catch ex As Exception
+                RaiseEvent CalculationError(myinfo, New EventArgs(), ex)
                 fgui.ProcessScripts(Scripts.EventType.ObjectCalculationError, Scripts.ObjectType.FlowsheetObject, myobj.Name)
                 myobj.ErrorMessage = ex.Message.ToString
                 CheckExceptionForAdditionalInfo(ex)
@@ -625,6 +630,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                                              If fbag.DynamicMode Then myobj.UpdateDynamicsEditForm()
                                                          End If
                                                      Catch ex As AggregateException
+                                                         RaiseEvent CalculationError(myinfo, New EventArgs(), ex)
                                                          fgui.ProcessScripts(Scripts.EventType.ObjectCalculationError, Scripts.ObjectType.FlowsheetObject, myobj.Name)
                                                          myobj.ErrorMessage = ""
                                                          For Each iex In ex.InnerExceptions
@@ -658,6 +664,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                                          Next
                                                          If GlobalSettings.Settings.SolverBreakOnException Then state.Break()
                                                      Catch ex As Exception
+                                                         RaiseEvent CalculationError(myinfo, New EventArgs(), ex)
                                                          fgui.ProcessScripts(Scripts.EventType.ObjectCalculationError, Scripts.ObjectType.FlowsheetObject, myobj.Name)
                                                          myobj.ErrorMessage = ex.Message.ToString
                                                          CheckExceptionForAdditionalInfo(ex)
@@ -1481,17 +1488,17 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
             GlobalSettings.Settings.CalculatorBusy = False
 
-            RaiseEvent FlowsheetCalculationFinished(fobj, New System.EventArgs(), Nothing)
-
             IObj?.Close()
 
             FinishAny?.Invoke()
 
             If age Is Nothing Then
                 FinishSuccess?.Invoke()
+                RaiseEvent FlowsheetCalculationFinished(fobj, New System.EventArgs(), Nothing)
                 Return New List(Of Exception)
             Else
                 FinishWithErrors?.Invoke()
+                RaiseEvent FlowsheetCalculationFinished(fobj, New System.EventArgs(), age.InnerExceptions.ToList())
                 Return age.InnerExceptions.ToList()
             End If
 

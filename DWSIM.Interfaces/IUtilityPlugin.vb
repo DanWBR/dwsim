@@ -76,3 +76,13 @@ End Interface
     Function Run(args As Object) As Object
 
 End Interface
+
+<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IUtilityPlugin6
+
+    Inherits IUtilityPlugin5
+
+    Property AutoStart As Boolean
+
+    Property Hidden As Boolean
+
+End Interface
