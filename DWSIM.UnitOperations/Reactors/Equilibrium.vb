@@ -387,7 +387,30 @@ Namespace Reactors
 
         End Sub
 
+        Private Mode As Integer = 1
+
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
+
+            Dim Success As Boolean = False
+            Dim Exc As Exception = Nothing
+            For i = 1 To 4
+                Try
+                    Calculate_Internal(args)
+                    Success = True
+                    Exit For
+                Catch ex As Exception
+                    Exc = ex
+                End Try
+                Mode = i + 1
+            Next
+            If Not Success Then
+                Mode = 1
+                Throw Exc
+            End If
+
+        End Sub
+
+        Public Sub Calculate_Internal(Optional ByVal args As Object = Nothing)
 
             Dim IObj As InspectorItem = Host.GetNewInspectorItem()
 
@@ -649,7 +672,11 @@ Namespace Reactors
                 rx = FlowSheet.Reactions(rxid)
                 For Each comp As ReactionStoichBase In rx.Components.Values
                     If comp.StoichCoeff < 0 Then pvars.Add(-N0(comp.CompName) / comp.StoichCoeff)
-                    If comp.StoichCoeff > 0 Then nvars.Add(N0(comp.CompName) / comp.StoichCoeff)
+                    If Mode = 1 Then
+                        If comp.StoichCoeff > 0 Then nvars.Add(N0(comp.CompName) / comp.StoichCoeff)
+                    Else
+                        If comp.StoichCoeff > 0 Then nvars.Add(-N0(comp.CompName) / comp.StoichCoeff)
+                    End If
                 Next
                 lbound(i) = nvars.Max
                 ubound(i) = pvars.Min
@@ -680,8 +707,16 @@ Namespace Reactors
 
             Me.InitialGibbsEnergy = g0
 
-            MinVal = Math.Min(lbound.Min, REx.Min) * 10
-            MaxVal = Math.Max(ubound.Max, REx.Max) * 10
+            If Mode < 3 Then
+                MinVal = Math.Min(lbound.Min, REx.Min) * 10
+                MaxVal = Math.Max(ubound.Max, REx.Max) * 10
+            ElseIf Mode = 3 Then
+                MinVal = Math.Min(lbound.Min, REx.Min)
+                MaxVal = Math.Max(ubound.Max, REx.Max)
+            ElseIf Mode = 4 Then
+                MinVal = Math.Min(lbound.Min, REx.Min) * 100
+                MaxVal = Math.Max(ubound.Max, REx.Max) * 100
+            End If
 
             Dim CalcFinished As Boolean = False
 
@@ -704,7 +739,15 @@ Namespace Reactors
                 Keq.Add(Math.Abs(FlowSheet.Reactions(Me.Reactions(i)).EvaluateK(T, pp)))
             Next
 
-            If Keq.Max > 1000000.0 Or Keq.Min < 0.000001 Then LogErrorFunction = True Else LogErrorFunction = False
+            If Keq.Max > 1000000.0 Or Keq.Min < 0.000001 Then
+                LogErrorFunction = True
+            Else
+                If Mode < 3 Then
+                    LogErrorFunction = False
+                Else
+                    LogErrorFunction = True
+                End If
+            End If
 
             Do
 

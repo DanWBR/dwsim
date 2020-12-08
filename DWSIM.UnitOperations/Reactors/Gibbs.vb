@@ -570,7 +570,30 @@ Namespace Reactors
 
         End Sub
 
+        Private LagrangeFactor As Double = 1000.0
+
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
+
+            Dim Success As Boolean = False
+            Dim Exc As Exception = Nothing
+            For i = 1 To 4
+                Try
+                    Calculate_Internal(args)
+                    Success = True
+                    Exit For
+                Catch ex As Exception
+                    Exc = ex
+                End Try
+                LagrangeFactor /= 10.0
+            Next
+            If Not Success Then
+                LagrangeFactor = 1000.0
+                Throw Exc
+            End If
+
+        End Sub
+
+        Public Sub Calculate_Internal(Optional ByVal args As Object = Nothing)
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -698,7 +721,6 @@ Namespace Reactors
             Me.DeltaQ = 0
             Me.DeltaT = 0
 
-            Dim rx As Reaction
             ims = GetInletMaterialStream(0).Clone
             Dim pp As PropertyPackages.PropertyPackage = Me.PropertyPackage
             Dim ppr As New PropertyPackages.RaoultPropertyPackage()
@@ -906,7 +928,7 @@ Namespace Reactors
                 Try
                     mylags = mymat.Solve(mypot.Multiply(-1))
                     For i = 0 To e
-                        lagrm(i) = mylags(i, 0) / 100
+                        lagrm(i) = mylags(i, 0) / LagrangeFactor
                     Next
                 Catch ex As Exception
                     For i = 0 To e
@@ -1107,7 +1129,7 @@ Namespace Reactors
 
                     Dim fail As Boolean = False
 
-                    If InitialEstimates.Count = 0 And ni_ext = 0 Then
+                    If PreviousSolution.Count = 0 And ni_ext = 0 Then
                         ' enhance initial estimates with simplex
                         x = s2.ComputeMin(Function(x1)
                                               Return FunctionValue2N(x1).AbsSqrSumY

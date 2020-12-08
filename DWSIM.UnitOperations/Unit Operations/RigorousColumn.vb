@@ -2991,30 +2991,35 @@ Namespace UnitOperations
                 result = SolvingMethods.WangHenkeMethod.Solve(Me, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, -1, eff, Me.ColumnType, pp, Me.Specs, False, False)
                 ic = result(9)
             ElseIf TypeOf Me Is AbsorptionColumn Then
-                'run all trial compositions until it solves
-                Dim ntrials = L1trials.Count
-                Dim ex0 As Exception = Nothing
-                For i = 0 To ntrials - 1
-                    Try
-                        For j = 0 To Stages.Count - 1
-                            For k = 0 To nc - 1
-                                If x1trials(i)(j)(k) = 0.0 Then
-                                    Kval(j)(k) = 1.0E+20
-                                Else
-                                    Kval(j)(k) = (x2trials(i)(j)(k) / x1trials(i)(j)(k))
-                                End If
+                If llextractor Then
+                    'run all trial compositions until it solves
+                    Dim ntrials = L1trials.Count
+                    Dim ex0 As Exception = Nothing
+                    For i = 0 To ntrials - 1
+                        Try
+                            For j = 0 To Stages.Count - 1
+                                For k = 0 To nc - 1
+                                    If x1trials(i)(j)(k) = 0.0 Then
+                                        Kval(j)(k) = 1.0E+20
+                                    Else
+                                        Kval(j)(k) = (x2trials(i)(j)(k) / x1trials(i)(j)(k))
+                                    End If
+                                Next
                             Next
-                        Next
-                        result = SolvingMethods.BurninghamOttoMethod.Solve(nc, ns, maxits, tol, F, L2trials(i), Q, L1trials(i), VSS, LSS, Kval, x1trials(i), x2trials(i), z, fc, HF, T, P, -1, eff, pp, Me.Specs, False, False, llextractor)
-                        ic = result(9)
-                        ex0 = Nothing
-                        Exit For
-                    Catch ex As Exception
-                        'do nothing, try next set
-                        ex0 = ex
-                    End Try
-                Next
-                If ex0 IsNot Nothing Then Throw ex0
+                            result = SolvingMethods.BurninghamOttoMethod.Solve(nc, ns, maxits, tol, F, L2trials(i), Q, L1trials(i), VSS, LSS, Kval, x1trials(i), x2trials(i), z, fc, HF, T, P, -1, eff, pp, Me.Specs, False, False, llextractor)
+                            ic = result(9)
+                            ex0 = Nothing
+                            Exit For
+                        Catch ex As Exception
+                            'do nothing, try next set
+                            ex0 = ex
+                        End Try
+                    Next
+                    If ex0 IsNot Nothing Then Throw ex0
+                Else
+                    result = SolvingMethods.BurninghamOttoMethod.Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, -1, eff, pp, Me.Specs, False, False, llextractor)
+                    ic = result(9)
+                End If
             End If
 
             IObj?.Paragraphs.Add("Column is solved.")
@@ -5296,7 +5301,11 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 comperror = 0.0#
                 For i = 0 To ns
                     Tj_ant(i) = Tj(i)
-                    Tj(i) = Tj(i) + deltat(i)
+                    If Math.Abs(deltat(i)) > 20.0 Then
+                        Tj(i) = Tj(i) + Math.Sign(deltat(i)) * 20.0
+                    Else
+                        Tj(i) = Tj(i) + deltat(i)
+                    End If
                     If Double.IsNaN(Tj(i)) Or Double.IsInfinity(Tj(i)) Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
                     If IdealK Then
                         IObj2?.SetCurrent()
