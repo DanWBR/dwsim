@@ -535,7 +535,8 @@ namespace DWSIM.UI.Desktop.Editors
 
         void SetCustomFunctions()
         {
-            CrossPlatform.UI.Controls.ReoGrid.Formula.FormulaExtension.CustomFunctions["GETNAME"] = (cell, args) =>
+
+            FormulaExtension.CustomFunctions["GETNAME"] = (cell, args) =>
             { 
                     try
                     {
@@ -547,7 +548,7 @@ namespace DWSIM.UI.Desktop.Editors
                     }
             };
 
-            CrossPlatform.UI.Controls.ReoGrid.Formula.FormulaExtension.CustomFunctions["GETPROPVAL"] = (cell, args) =>
+            FormulaExtension.CustomFunctions["GETPROPVAL"] = (cell, args) =>
             {
                 if (args.Length == 2)
                 {
@@ -577,7 +578,7 @@ namespace DWSIM.UI.Desktop.Editors
                     return "INVALID ARGS";
             };
 
-            CrossPlatform.UI.Controls.ReoGrid.Formula.FormulaExtension.CustomFunctions["SETPROPVAL"] = (cell, args) =>
+            FormulaExtension.CustomFunctions["SETPROPVAL"] = (cell, args) =>
             {
                 if (args.Length == 3)
                 {
@@ -644,7 +645,7 @@ namespace DWSIM.UI.Desktop.Editors
                     return "INVALID ARGS";
             };
 
-            CrossPlatform.UI.Controls.ReoGrid.Formula.FormulaExtension.CustomFunctions["GETPROPUNITS"] = (cell, args) =>
+            FormulaExtension.CustomFunctions["GETPROPUNITS"] = (cell, args) =>
             {
                 if (args.Length == 2)
                 {
@@ -661,7 +662,7 @@ namespace DWSIM.UI.Desktop.Editors
                     return "INVALID ARGS";
             };
 
-            CrossPlatform.UI.Controls.ReoGrid.Formula.FormulaExtension.CustomFunctions["GETOBJID"] = (cell, args) =>
+            FormulaExtension.CustomFunctions["GETOBJID"] = (cell, args) =>
             {
                 if (args.Length == 1)
                 {
@@ -678,7 +679,7 @@ namespace DWSIM.UI.Desktop.Editors
                     return "INVALID ARGS";
             };
 
-            CrossPlatform.UI.Controls.ReoGrid.Formula.FormulaExtension.CustomFunctions["GETOBJNAME"] = (cell, args) =>
+            FormulaExtension.CustomFunctions["GETOBJNAME"] = (cell, args) =>
             {
                 if (args.Length == 1)
                 {
