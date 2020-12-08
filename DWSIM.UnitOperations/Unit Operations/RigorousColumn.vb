@@ -2638,7 +2638,7 @@ Namespace UnitOperations
                             T1 = pp.DW_CalcBubT(zm, P(0), MathEx.Common.Min(FT))(4) '* 1.01
                         End If
                     Catch ex As Exception
-                        T1 = MathEx.Common.Min(FT)
+                        T1 = FT.Where(Function(t_) t_ > 0.0).Min
                     End Try
                     Try
                         IObj?.SetCurrent()
@@ -2650,7 +2650,7 @@ Namespace UnitOperations
                             T2 = pp.DW_CalcDewT(zm, P(ns), MathEx.Common.Max(FT))(4) '* 0.99
                         End If
                     Catch ex As Exception
-                        T2 = MathEx.Common.Max(FT)
+                        T2 = FT.Where(Function(t_) t_ > 0.0).Max
                     End Try
             End Select
 
