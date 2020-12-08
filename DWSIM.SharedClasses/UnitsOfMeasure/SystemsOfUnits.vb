@@ -1426,7 +1426,7 @@ Namespace SystemsOfUnits
                 Case "mm"                               'comprimento'
                     Return value
                 Case "in.", "in"
-                    Return value / 39.3701 * 1000
+                    Return value / 39.3701
 
 
                 Case "dyn"                              'forca
@@ -1911,8 +1911,7 @@ Namespace SystemsOfUnits
                 Case "mm"                               'comprimento'
                     Return value
                 Case "in.", "in"
-                    Return value * 39.3701 / 1000
-
+                    Return value * 39.3701
 
                 Case "dyn"                              'forca
                     Return value * 100000
