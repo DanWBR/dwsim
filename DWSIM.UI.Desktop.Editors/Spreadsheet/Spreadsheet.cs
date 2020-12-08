@@ -535,6 +535,18 @@ namespace DWSIM.UI.Desktop.Editors
 
         void SetCustomFunctions()
         {
+            CrossPlatform.UI.Controls.ReoGrid.Formula.FormulaExtension.CustomFunctions["GETNAME"] = (cell, args) =>
+            { 
+                    try
+                    {
+                        return flowsheet.SimulationObjects[args[0].ToString()].GraphicObject.Tag;
+                    }
+                    catch (Exception ex)
+                    {
+                        return "ERROR: " + ex.Message;
+                    }
+            };
+
             CrossPlatform.UI.Controls.ReoGrid.Formula.FormulaExtension.CustomFunctions["GETPROPVAL"] = (cell, args) =>
             {
                 if (args.Length == 2)
