@@ -273,7 +273,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Vy = Vz.MultiplyY(Ki).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1)).NormalizeY
             Vx = Vy.DivideY(Ki).NormalizeY
 
-
             Dim r1 = ConvergeVF(IObj, V, Vz, Vx, Vy, Ki, P, T, PP)
 
             'Return New Object() {V, Vx, Vy, Ki, F, ecount}

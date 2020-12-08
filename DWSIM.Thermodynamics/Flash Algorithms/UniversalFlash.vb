@@ -83,7 +83,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                             errflag = True
                         End Try
                     Else
-                        Dim gmin As New GibbsMinimization3P With {.FlashSettings = FlashSettings}
+                        Dim gmin As New GibbsMinimizationMulti With {.FlashSettings = FlashSettings}
                         Try
                             result = gmin.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
                         Catch ex As Exception
@@ -144,7 +144,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                 errflag = True
                             End Try
                         Else
-                            Dim gmin As New GibbsMinimization3P With {.FlashSettings = FlashSettings}
+                            Dim gmin As New GibbsMinimizationMulti With {.FlashSettings = FlashSettings}
                             Try
                                 result = gmin.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
                             Catch ex As Exception

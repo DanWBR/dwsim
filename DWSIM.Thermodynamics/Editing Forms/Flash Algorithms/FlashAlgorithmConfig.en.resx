@@ -117,36 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="TabPageGeneral.Size" type="System.Drawing.Size, System.Drawing">
-    <value>681, 339</value>
-  </data>
-  <data name="TabPageGeneral.Text" xml:space="preserve">
-    <value>General</value>
-  </data>
-  <data name="TabPageConvPars.Size" type="System.Drawing.Size, System.Drawing">
-    <value>681, 339</value>
-  </data>
-  <data name="TabPageConvPars.Text" xml:space="preserve">
-    <value>Convergence</value>
-  </data>
-  <data name="TabPageST.Size" type="System.Drawing.Size, System.Drawing">
-    <value>681, 339</value>
-  </data>
-  <data name="TabPageST.Text" xml:space="preserve">
-    <value>Stability Test</value>
-  </data>
-  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>689, 365</value>
-  </data>
-  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>661, 325</value>
-  </data>
-  <data name="GroupBox4.Text" xml:space="preserve">
-    <value>General</value>
-  </data>
   <data name="cbFlashType.Items" xml:space="preserve">
-    <value>Default (SVLLE)</value>
+    <value>Default</value>
   </data>
   <data name="cbFlashType.Items1" xml:space="preserve">
     <value>VLE</value>
@@ -160,6 +132,7 @@
   <data name="cbFlashType.Items4" xml:space="preserve">
     <value>SVLLE</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="cbFlashType.Location" type="System.Drawing.Point, System.Drawing">
     <value>494, 20</value>
   </data>
@@ -280,11 +253,17 @@
   <data name="Label24.Text" xml:space="preserve">
     <value>PV Flash - Fixed Damping Factor Value (0.0 - 2.0)</value>
   </data>
-  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>665, 325</value>
+  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>661, 325</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Convergence Parameters</value>
+  <data name="GroupBox4.Text" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="TabPageGeneral.Size" type="System.Drawing.Size, System.Drawing">
+    <value>681, 339</value>
+  </data>
+  <data name="TabPageGeneral.Text" xml:space="preserve">
+    <value>General</value>
   </data>
   <data name="tbPHExtMaxIt.Location" type="System.Drawing.Point, System.Drawing">
     <value>489, 219</value>
@@ -406,41 +385,20 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Flash PT/PV - internal loop convergence tolerance (absolute)</value>
   </data>
-  <data name="GroupBox10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>665, 60</value>
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>665, 325</value>
   </data>
-  <data name="GroupBox10.Text" xml:space="preserve">
-    <value>Liquid Phase Stability Test</value>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Convergence Parameters</value>
   </data>
-  <data name="NumericUpDown1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>232, 27</value>
+  <data name="TabPageConvPars.Size" type="System.Drawing.Size, System.Drawing">
+    <value>681, 339</value>
   </data>
-  <data name="Label27.Size" type="System.Drawing.Size, System.Drawing">
-    <value>194, 13</value>
+  <data name="TabPageConvPars.Text" xml:space="preserve">
+    <value>Convergence</value>
   </data>
-  <data name="Label27.Text" xml:space="preserve">
-    <value>Number of Random Compositions to Try</value>
-  </data>
-  <data name="GroupBox9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>665, 88</value>
-  </data>
-  <data name="GroupBox9.Text" xml:space="preserve">
-    <value>General Options</value>
-  </data>
-  <data name="Label28.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 45</value>
-  </data>
-  <data name="Label28.Size" type="System.Drawing.Size, System.Drawing">
-    <value>596, 36</value>
-  </data>
-  <data name="Label28.Text" xml:space="preserve">
-    <value>If the result of the initial VLE Flash is a single vapor phase, DWSIM will check the stability of the incipient liquid for an alternate liquid phase which may exist under such conditions. </value>
-  </data>
-  <data name="chkForcePT3P.Size" type="System.Drawing.Size, System.Drawing">
-    <value>333, 17</value>
-  </data>
-  <data name="chkForcePT3P.Text" xml:space="preserve">
-    <value>Check Stability of Incipient Liquid Phase from Initial VLE PT Flash</value>
+  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>689, 365</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>689, 365</value>

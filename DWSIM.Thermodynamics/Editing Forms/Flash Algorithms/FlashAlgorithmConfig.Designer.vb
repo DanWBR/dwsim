@@ -71,16 +71,16 @@ Partial Class FlashAlgorithmConfig
         '
         'TabControl1
         '
+        resources.ApplyResources(Me.TabControl1, "TabControl1")
         Me.TabControl1.Controls.Add(Me.TabPageGeneral)
         Me.TabControl1.Controls.Add(Me.TabPageConvPars)
-        resources.ApplyResources(Me.TabControl1, "TabControl1")
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         '
         'TabPageGeneral
         '
-        Me.TabPageGeneral.Controls.Add(Me.GroupBox4)
         resources.ApplyResources(Me.TabPageGeneral, "TabPageGeneral")
+        Me.TabPageGeneral.Controls.Add(Me.GroupBox4)
         Me.TabPageGeneral.Name = "TabPageGeneral"
         Me.TabPageGeneral.UseVisualStyleBackColor = True
         '
@@ -110,10 +110,10 @@ Partial Class FlashAlgorithmConfig
         '
         'cbFlashType
         '
+        resources.ApplyResources(Me.cbFlashType, "cbFlashType")
         Me.cbFlashType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbFlashType.FormattingEnabled = True
         Me.cbFlashType.Items.AddRange(New Object() {resources.GetString("cbFlashType.Items"), resources.GetString("cbFlashType.Items1"), resources.GetString("cbFlashType.Items2"), resources.GetString("cbFlashType.Items3"), resources.GetString("cbFlashType.Items4")})
-        resources.ApplyResources(Me.cbFlashType, "cbFlashType")
         Me.cbFlashType.Name = "cbFlashType"
         '
         'Label9
@@ -204,8 +204,8 @@ Partial Class FlashAlgorithmConfig
         '
         'TabPageConvPars
         '
-        Me.TabPageConvPars.Controls.Add(Me.GroupBox1)
         resources.ApplyResources(Me.TabPageConvPars, "TabPageConvPars")
+        Me.TabPageConvPars.Controls.Add(Me.GroupBox1)
         Me.TabPageConvPars.Name = "TabPageConvPars"
         Me.TabPageConvPars.UseVisualStyleBackColor = True
         '

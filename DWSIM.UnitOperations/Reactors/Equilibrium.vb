@@ -73,7 +73,7 @@ Namespace Reactors
 
         Public Property ExternalLoopTolerance As Double = 0.5
 
-        Public Property InternalLoopMaximumIterations As Integer = 100
+        Public Property InternalLoopMaximumIterations As Integer = 10000
 
         Public Property ExternalLoopMaximumIterations As Integer = 50
 
@@ -101,7 +101,7 @@ Namespace Reactors
             For Each s As String In N.Keys
                 DN(s) = 0
                 For j = 0 To r
-                    DN(s) += E(i, j) * x(j)
+                    DN(s) += E(i, j) * Scaler.UnScale(x(j), MinVal, MaxVal, 0, 100)
                 Next
                 i += 1
             Next
@@ -323,9 +323,9 @@ Namespace Reactors
                 delta1 = con_val(i) - con_lc(i)
                 delta2 = con_val(i) - con_uc(i)
                 If delta1 < 0 Then
-                    pen_val += delta1 ^ 2
+                    pen_val += delta1 * 1000000.0# * (i + 1) ^ 2
                 ElseIf delta2 > 1 Then
-                    pen_val += delta2 ^ 2
+                    pen_val += delta2 * 1000000.0# * (i + 1) ^ 2
                 Else
                     pen_val += 0.0#
                 End If
@@ -649,7 +649,7 @@ Namespace Reactors
                 rx = FlowSheet.Reactions(rxid)
                 For Each comp As ReactionStoichBase In rx.Components.Values
                     If comp.StoichCoeff < 0 Then pvars.Add(-N0(comp.CompName) / comp.StoichCoeff)
-                    If comp.StoichCoeff > 0 Then nvars.Add(-N0(comp.CompName) / comp.StoichCoeff)
+                    If comp.StoichCoeff > 0 Then nvars.Add(N0(comp.CompName) / comp.StoichCoeff)
                 Next
                 lbound(i) = nvars.Max
                 ubound(i) = pvars.Min
@@ -682,8 +682,6 @@ Namespace Reactors
 
             MinVal = Math.Min(lbound.Min, REx.Min) * 10
             MaxVal = Math.Max(ubound.Max, REx.Max) * 10
-
-            If MaxVal = 0.0 Then MaxVal = Math.Abs(MinVal) * 0.1
 
             Dim CalcFinished As Boolean = False
 
@@ -740,15 +738,18 @@ Namespace Reactors
 
                     IObj3?.Paragraphs.Add(String.Format("Tentative Reaction Extents: {0}", x.ToMathArrayString))
 
+                    Dim xs As Double
+
                     Dim variables2 As New List(Of OptBoundVariable)
                     Dim variables As New List(Of Double)
                     Dim lbounds As New List(Of Double)
                     Dim ubounds As New List(Of Double)
                     For i = 0 To r
-                        variables.Add(x(i))
-                        variables2.Add(New OptBoundVariable(x(i), MinVal, MaxVal))
-                        lbounds.Add(MinVal)
-                        ubounds.Add(MaxVal)
+                        xs = Scaler.Scale(x(i), MinVal, MaxVal, 0, 100)
+                        variables.Add(xs)
+                        variables2.Add(New OptBoundVariable(xs, 0, 100))
+                        lbounds.Add(0)
+                        ubounds.Add(100)
                     Next
 
                     Dim VariableValues As New List(Of Double())
@@ -786,6 +787,8 @@ Namespace Reactors
 
                     errval = FunctionValue2N(newx).AbsSqrSumY
 
+                    newx = newx.Select(Function(xi) Scaler.UnScale(xi, MinVal, MaxVal, 0, 100)).ToArray
+
                     sumerr = x.SubtractY(newx).AbsSqrSumY
 
                     x = newx
@@ -802,7 +805,7 @@ Namespace Reactors
 
                 Dim penval = Math.Abs(ReturnPenaltyValue())
 
-                If penval > 0.001 Then
+                If penval > 0.1 Then
 
                     Throw New Exception("Invalid solution: mass balance residue > 0. Are all possible reactions defined?")
 

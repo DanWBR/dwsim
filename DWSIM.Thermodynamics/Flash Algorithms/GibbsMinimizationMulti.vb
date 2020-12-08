@@ -582,7 +582,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             End If
 
-            If Sx < 0.01 Then Sx = 0.0
+            If Sx < 1.0 Then Sx = 0.0
             If L2 < 0.01 Then
                 L2 = 0.0
             Else
