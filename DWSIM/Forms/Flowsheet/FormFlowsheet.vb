@@ -384,6 +384,10 @@ Public Class FormFlowsheet
 
         Me.FormLog.Grid1.Sort(Me.FormLog.Grid1.Columns(1), ListSortDirection.Descending)
 
+        For Each ws In FormSpreadsheet.Spreadsheet.Worksheets
+            ws.Recalculate()
+        Next
+
     End Sub
 
     Private Sub FormChild2_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed

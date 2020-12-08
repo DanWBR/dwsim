@@ -1937,9 +1937,6 @@ Public Class FormMain
                         File.Delete(tmpfile)
                     Next
                     form.FormSpreadsheet.Spreadsheet.CurrentWorksheet = form.FormSpreadsheet.Spreadsheet.Worksheets(0)
-                    For Each ws In form.FormSpreadsheet.Spreadsheet.Worksheets
-                        ws.Recalculate()
-                    Next
                 Else
                     Dim data1 As String = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data1").Value
                     Dim data2 As String = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data2").Value
@@ -2484,9 +2481,6 @@ Public Class FormMain
                         File.Delete(tmpfile)
                     Next
                     form.FormSpreadsheet.Spreadsheet.CurrentWorksheet = form.FormSpreadsheet.Spreadsheet.Worksheets(0)
-                    For Each ws In form.FormSpreadsheet.Spreadsheet.Worksheets
-                        ws.Recalculate()
-                    Next
                 Else
                     Dim data1 As String = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data1").Value
                     Dim data2 As String = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data2").Value
