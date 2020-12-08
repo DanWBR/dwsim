@@ -233,8 +233,8 @@ Namespace UnitOperations
                                 Dim comp As BaseClasses.Compound
                                 j = 0
                                 For Each comp In .Phases(0).Compounds.Values
-                                    comp.MoleFraction = ems.Phases(0).Compounds(comp.Name).MoleFraction
-                                    comp.MassFraction = DirectCast(FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name), MaterialStream).Phases(0).Compounds(comp.Name).MassFraction
+                                    comp.MoleFraction = ems.Phases(0).Compounds(comp.Name).MoleFraction.GetValueOrDefault
+                                    comp.MassFraction = ems.Phases(0).Compounds(comp.Name).MassFraction.GetValueOrDefault
                                     j += 1
                                 Next
                                 .Phases(0).Properties.massflow = W * Me.Ratios(i)
@@ -288,13 +288,13 @@ Namespace UnitOperations
                                 Dim comp As BaseClasses.Compound
                                 j = 0
                                 For Each comp In .Phases(0).Compounds.Values
-                                    comp.MoleFraction = ems.Phases(0).Compounds(comp.Name).MoleFraction
-                                    comp.MassFraction = DirectCast(FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name), MaterialStream).Phases(0).Compounds(comp.Name).MassFraction
+                                    comp.MoleFraction = ems.Phases(0).Compounds(comp.Name).MoleFraction.GetValueOrDefault
+                                    comp.MassFraction = ems.Phases(0).Compounds(comp.Name).MassFraction.GetValueOrDefault
                                     j += 1
                                 Next
                                 .Phases(0).Properties.massflow = wn(i)
-                                .Phases(0).Properties.massfraction = 1
-                                .Phases(0).Properties.molarfraction = 1
+                                .Phases(0).Properties.massfraction = 1.0
+                                .Phases(0).Properties.molarfraction = 1.0
                                 .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
                             End With
                         End If
@@ -344,14 +344,14 @@ Namespace UnitOperations
                                 Dim comp As BaseClasses.Compound
                                 j = 0
                                 For Each comp In .Phases(0).Compounds.Values
-                                    comp.MoleFraction = ems.Phases(0).Compounds(comp.Name).MoleFraction
-                                    comp.MassFraction = DirectCast(FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name), MaterialStream).Phases(0).Compounds(comp.Name).MassFraction
+                                    comp.MoleFraction = ems.Phases(0).Compounds(comp.Name).MoleFraction.GetValueOrDefault
+                                    comp.MassFraction = ems.Phases(0).Compounds(comp.Name).MassFraction.GetValueOrDefault
                                     j += 1
                                 Next
                                 .Phases(0).Properties.massflow = Nothing
                                 .Phases(0).Properties.molarflow = mn(i)
-                                .Phases(0).Properties.massfraction = 1
-                                .Phases(0).Properties.molarfraction = 1
+                                .Phases(0).Properties.massfraction = 1.0
+                                .Phases(0).Properties.molarfraction = 1.0
                                 .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
                             End With
                         End If
