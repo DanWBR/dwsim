@@ -996,8 +996,6 @@ Namespace PropertyPackages
             Dim T, P0 As Double
             T = CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
             P0 = CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
-            Dim beta, v, a, b, sos As Double
-            Dim tmp As Double()
 
             Select Case p.Name
                 Case "Mixture"
