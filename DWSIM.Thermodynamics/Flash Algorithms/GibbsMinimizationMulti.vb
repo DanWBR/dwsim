@@ -198,9 +198,16 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             fczl = PP.DW_CalcFugCoeff(Vz, T, P, State.Liquid)
             fczs = PP.DW_CalcSolidFugCoeff(T, P)
 
-            Gzv = Vz.MultiplyY(fczv.MultiplyY(Vz).LogY).SumY
-            Gzl = Vz.MultiplyY(fczl.MultiplyY(Vz).LogY).SumY
-            Gzs = Vz.MultiplyY(fczs.MultiplyY(Vz).LogY).SumY
+            Gzv = 0.0
+            Gzl = 0.0
+            Gzs = 0.0
+            For i = 0 To n
+                If Vz(i) > 0.0 Then
+                    Gzv += Vz(i) * Log(fczv(i) * Vz(i))
+                    Gzl += Vz(i) * Log(fczl(i) * Vz(i))
+                    Gzs += Vz(i) * Log(fczs(i) * Vz(i))
+                End If
+            Next
 
             Gz0 = {Gzv, Gzl, Gzs}.Min * 1000
 
@@ -223,12 +230,14 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Do
                     Vp(i) = PP.AUX_PVAPi(Vn(i), T)
                     Ki(i) = Vp(i) / P
+                    If Double.IsNaN(Ki(i)) Or Double.IsInfinity(Ki(i)) Then Ki(i) = 1.0E+20
                     i += 1
                 Loop Until i = n + 1
             Else
                 For i = 0 To n
                     Vp(i) = PP.AUX_PVAPi(Vn(i), T)
                     Ki(i) = PrevKi(i)
+                    If Double.IsNaN(Ki(i)) Or Double.IsInfinity(Ki(i)) Then Ki(i) = 1.0E+20
                 Next
             End If
 

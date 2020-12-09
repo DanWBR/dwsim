@@ -152,12 +152,15 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     End If
                 Next
                 Ki = Vp.MultiplyConstY(1 / P)
+                For i = 0 To n
+                    IObj?.SetCurrent()
+                    If Double.IsNaN(Ki(i)) Or Double.IsInfinity(Ki(i)) Then Ki(i) = 1.0E+20
+                Next
             Else
                 For i = 0 To n
                     IObj?.SetCurrent()
-                    Vp(i) = PP.AUX_PVAPi(i, T)
                     Ki(i) = PrevKi(i)
-                    If Double.IsNaN(Ki(i)) Then Ki(i) = 1.0E+20
+                    If Double.IsNaN(Ki(i)) Or Double.IsInfinity(Ki(i)) Then Ki(i) = 1.0E+20
                 Next
             End If
 
@@ -1583,6 +1586,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 Do
                     Vp(i) = PP.AUX_PVAPi(i, T)
                     Ki(i) = Vp(i) / P
+                    If Double.IsNaN(Ki(i)) Or Double.IsInfinity(Ki(i)) Then Ki(i) = 1.0E+20
                     i += 1
                 Loop Until i = n + 1
             Else
@@ -1590,6 +1594,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     For i = 0 To n
                         Vp(i) = PP.AUX_PVAPi(i, T)
                         Ki(i) = PrevKi(i)
+                        If Double.IsNaN(Ki(i)) Or Double.IsInfinity(Ki(i)) Then Ki(i) = 1.0E+20
                     Next
                 Else
                     i = 0
@@ -1597,6 +1602,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                         IObj?.SetCurrent
                         Vp(i) = PP.AUX_PVAPi(i, T)
                         Ki(i) = Vp(i) / P
+                        If Double.IsNaN(Ki(i)) Or Double.IsInfinity(Ki(i)) Then Ki(i) = 1.0E+20
                         i += 1
                     Loop Until i = n + 1
                 End If
@@ -2078,6 +2084,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     IObj?.SetCurrent
                     Vp(i) = PP.AUX_PVAPi(i, T)
                     Ki(i) = Vp(i) / P
+                    If Double.IsNaN(Ki(i)) Or Double.IsInfinity(Ki(i)) Then Ki(i) = 1.0E+20
                     i += 1
                 Loop Until i = n + 1
             Else
@@ -2085,6 +2092,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     For i = 0 To n
                         IObj?.SetCurrent
                         Ki(i) = PrevKi(i)
+                        If Double.IsNaN(Ki(i)) Or Double.IsInfinity(Ki(i)) Then Ki(i) = 1.0E+20
                     Next
                 Else
                     i = 0
@@ -2092,6 +2100,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                         IObj?.SetCurrent
                         Vp(i) = PP.AUX_PVAPi(i, T)
                         Ki(i) = Vp(i) / P
+                        If Double.IsNaN(Ki(i)) Or Double.IsInfinity(Ki(i)) Then Ki(i) = 1.0E+20
                         i += 1
                     Loop Until i = n + 1
                 End If
