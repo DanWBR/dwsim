@@ -368,11 +368,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Vy = rnl(3)
 
                 If L1 = 0.0 Then
-                    L1 = 0.01
-                    V = 0.99
+                    L1 = 0.0001
+                    V = 0.9999
                 End If
 
-                L2 = 0.01
+                L2 = 0.0001
 
                 Dim sum = V + L1 + L2 + Sx
 
@@ -592,7 +592,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             End If
 
             If Sx < 1.0 Then Sx = 0.0
-            If L2 < 0.01 Then
+            If L2 < 1.0 Then
                 L2 = 0.0
             Else
                 'check if liquid phases are the same
@@ -788,7 +788,7 @@ out:        Return result
             IObj?.Paragraphs.Add(String.Format("Calculated Liquid Phase 2 composition: {0}", Vx2.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Calculated Solid Phase composition: {0}", Vs.ToMathArrayString))
 
-            pval = (F - L1 - L2 - Sx - V) ^ 2
+            pval = MassBalanceResidual() ^ 2
 
             Gm = Gv + Gl1 + Gl2 + Gs + pval
 

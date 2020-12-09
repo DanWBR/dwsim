@@ -354,6 +354,9 @@
   <data name="panelSelIntegrator.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="nupIntegrationStep.Location" type="System.Drawing.Point, System.Drawing">
+    <value>209, 60</value>
+  </data>
   <data name="Label14.Location" type="System.Drawing.Point, System.Drawing">
     <value>19, 138</value>
   </data>
@@ -382,13 +385,10 @@
     <value>19, 62</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 13</value>
+    <value>104, 13</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
-    <value>Integration Step</value>
-  </data>
-  <data name="dtpIntegrationStep.Location" type="System.Drawing.Point, System.Drawing">
-    <value>208, 60</value>
+    <value>Integration Step (ms)</value>
   </data>
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
     <value>19, 99</value>

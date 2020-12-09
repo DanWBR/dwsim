@@ -587,7 +587,7 @@ Public Class FormDynamicsManager
 
         Dim i1 = Manager.IntegratorList(gridintegrators.Rows(gridintegrators.SelectedCells(0).RowIndex).Cells(0).Value)
 
-        dtpIntegrationStep.Value = dtpIntegrationStep.MinDate.Add(i1.IntegrationStep)
+        nupIntegrationStep.Value = i1.IntegrationStep.TotalMilliseconds
 
         dtpIntegratorDuration.Value = dtpIntegratorDuration.MinDate.Add(i1.Duration)
 
@@ -627,17 +627,6 @@ Public Class FormDynamicsManager
         Next
 
         Adding = False
-
-    End Sub
-
-    Private Sub dtpIntegrationStep_ValueChanged(sender As Object, e As EventArgs) Handles dtpIntegrationStep.ValueChanged
-        If Manager Is Nothing Then Exit Sub
-
-        Try
-            Dim i1 = Manager.IntegratorList(gridintegrators.Rows(gridintegrators.SelectedCells(0).RowIndex).Cells(0).Value)
-            i1.IntegrationStep = dtpIntegrationStep.Value - dtpIntegrationStep.MinDate
-        Catch ex As Exception
-        End Try
 
     End Sub
 
@@ -1189,5 +1178,15 @@ Public Class FormDynamicsManager
             gridschedules.Rows.RemoveAt(gridschedules.SelectedCells(0).RowIndex)
             UpdateSelectables()
         End If
+    End Sub
+
+    Private Sub nupIntegrationStep_ValueChanged(sender As Object, e As EventArgs) Handles nupIntegrationStep.ValueChanged
+        If Manager Is Nothing Then Exit Sub
+
+        Try
+            Dim i1 = Manager.IntegratorList(gridintegrators.Rows(gridintegrators.SelectedCells(0).RowIndex).Cells(0).Value)
+            i1.IntegrationStep = New TimeSpan(0, 0, 0, 0, nupIntegrationStep.Value)
+        Catch ex As Exception
+        End Try
     End Sub
 End Class

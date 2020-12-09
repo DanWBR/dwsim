@@ -978,14 +978,14 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             layout.CreateAndAddLabelAndControlRow("Duration", dtp);
 
-            var dtp2 = new DateTimePicker { Mode = DateTimePickerMode.Time, Value = new DateTime().Add(integ.IntegrationStep) };
+            var dtp2 = new NumericStepper {MinValue=100, MaxValue = 100000, Value = integ.IntegrationStep.TotalMilliseconds };
             dtp2.Font = new Font(SystemFont.Default, UI.Shared.Common.GetEditorFontSize());
             dtp2.ValueChanged += (s, e) =>
             {
-                integ.IntegrationStep = dtp2.Value.GetValueOrDefault().Subtract(new DateTime());
+                integ.IntegrationStep = new TimeSpan(0, 0, 0, 0, Convert.ToInt32(dtp2.Value));
             };
 
-            layout.CreateAndAddLabelAndControlRow("Integration Step", dtp2);
+            layout.CreateAndAddLabelAndControlRow("Integration Step (ms)", dtp2);
 
             layout.CreateAndAddNumericEditorRow("Real-Time Step (ms)", integ.RealTimeStepMs, 1, 10000, 0, (s, e) =>
             {

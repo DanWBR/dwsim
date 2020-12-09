@@ -96,12 +96,12 @@ Partial Class FormDynamicsManager
         Me.panelSelIntegrator = New System.Windows.Forms.Panel()
         Me.TabControl2 = New System.Windows.Forms.TabControl()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
+        Me.nupIntegrationStep = New System.Windows.Forms.NumericUpDown()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.nupRTStep = New System.Windows.Forms.NumericUpDown()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.dtpIntegratorDuration = New System.Windows.Forms.DateTimePicker()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.dtpIntegrationStep = New System.Windows.Forms.DateTimePicker()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.nupCalcControlFreq = New System.Windows.Forms.NumericUpDown()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -196,6 +196,7 @@ Partial Class FormDynamicsManager
         Me.panelSelIntegrator.SuspendLayout()
         Me.TabControl2.SuspendLayout()
         Me.TabPage5.SuspendLayout()
+        CType(Me.nupIntegrationStep, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nupRTStep, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nupCalcControlFreq, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nupCalcBalFreq, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -668,12 +669,12 @@ Partial Class FormDynamicsManager
         'TabPage5
         '
         resources.ApplyResources(Me.TabPage5, "TabPage5")
+        Me.TabPage5.Controls.Add(Me.nupIntegrationStep)
         Me.TabPage5.Controls.Add(Me.Label14)
         Me.TabPage5.Controls.Add(Me.nupRTStep)
         Me.TabPage5.Controls.Add(Me.Label7)
         Me.TabPage5.Controls.Add(Me.dtpIntegratorDuration)
         Me.TabPage5.Controls.Add(Me.Label1)
-        Me.TabPage5.Controls.Add(Me.dtpIntegrationStep)
         Me.TabPage5.Controls.Add(Me.Label2)
         Me.TabPage5.Controls.Add(Me.nupCalcControlFreq)
         Me.TabPage5.Controls.Add(Me.Label4)
@@ -684,6 +685,15 @@ Partial Class FormDynamicsManager
         Me.TabPage5.Controls.Add(Me.Label8)
         Me.TabPage5.Name = "TabPage5"
         Me.TabPage5.UseVisualStyleBackColor = True
+        '
+        'nupIntegrationStep
+        '
+        resources.ApplyResources(Me.nupIntegrationStep, "nupIntegrationStep")
+        Me.nupIntegrationStep.Increment = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.nupIntegrationStep.Maximum = New Decimal(New Integer() {100000, 0, 0, 0})
+        Me.nupIntegrationStep.Minimum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.nupIntegrationStep.Name = "nupIntegrationStep"
+        Me.nupIntegrationStep.Value = New Decimal(New Integer() {1000, 0, 0, 0})
         '
         'Label14
         '
@@ -715,14 +725,6 @@ Partial Class FormDynamicsManager
         '
         resources.ApplyResources(Me.Label1, "Label1")
         Me.Label1.Name = "Label1"
-        '
-        'dtpIntegrationStep
-        '
-        resources.ApplyResources(Me.dtpIntegrationStep, "dtpIntegrationStep")
-        Me.dtpIntegrationStep.Format = System.Windows.Forms.DateTimePickerFormat.Time
-        Me.dtpIntegrationStep.Name = "dtpIntegrationStep"
-        Me.dtpIntegrationStep.ShowUpDown = True
-        Me.dtpIntegrationStep.Value = New Date(1753, 1, 1, 0, 0, 0, 0)
         '
         'Label2
         '
@@ -1297,6 +1299,7 @@ Partial Class FormDynamicsManager
         Me.TabControl2.ResumeLayout(False)
         Me.TabPage5.ResumeLayout(False)
         Me.TabPage5.PerformLayout()
+        CType(Me.nupIntegrationStep, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nupRTStep, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nupCalcControlFreq, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nupCalcBalFreq, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1394,7 +1397,6 @@ Partial Class FormDynamicsManager
     Friend WithEvents Label5 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents dtpIntegratorDuration As DateTimePicker
-    Friend WithEvents dtpIntegrationStep As DateTimePicker
     Friend WithEvents nupCalcControlFreq As NumericUpDown
     Friend WithEvents nupCalcBalFreq As NumericUpDown
     Friend WithEvents nupCalcEqFreq As NumericUpDown
@@ -1466,4 +1468,5 @@ Partial Class FormDynamicsManager
     Friend WithEvents Label14 As Label
     Friend WithEvents nupRTStep As NumericUpDown
     Friend WithEvents chkResetAll As CheckBox
+    Friend WithEvents nupIntegrationStep As NumericUpDown
 End Class
