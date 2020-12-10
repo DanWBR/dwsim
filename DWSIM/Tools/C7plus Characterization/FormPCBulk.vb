@@ -64,9 +64,9 @@ Public Class FormPCBulk
 
         Dim i As Integer
 
-        If tb_mw.Text <> "" Then MW = Double.Parse(tb_mw.Text)
-        If tb_sg.Text <> "" Then SG = Double.Parse(tb_sg.Text)
-        If tb_wk.Text <> "" Then TB = SystemsOfUnits.Converter.ConvertToSI(su.temperature, Double.Parse(tb_wk.Text))
+        If tb_mw.Text <> "" Then MW = Double.Parse(tb_mw.Text) Else MW = 0
+        If tb_sg.Text <> "" Then SG = Double.Parse(tb_sg.Text) Else SG = 0
+        If tb_wk.Text <> "" Then TB = SystemsOfUnits.Converter.ConvertToSI(su.temperature, Double.Parse(tb_wk.Text)) Else TB = 0
         If tb_v1.Text <> "" Then V1 = SystemsOfUnits.Converter.ConvertToSI(su.cinematic_viscosity, Double.Parse(tb_v1.Text)) Else V1 = 0.0#
         If tb_v2.Text <> "" Then V2 = SystemsOfUnits.Converter.ConvertToSI(su.cinematic_viscosity, Double.Parse(tb_v2.Text)) Else V2 = 0.0#
         If tb_t1.Text <> "" Then T1 = SystemsOfUnits.Converter.ConvertToSI(su.temperature, Double.Parse(tb_t1.Text))
@@ -107,145 +107,236 @@ Public Class FormPCBulk
         Array.Resize(dV2_, n + 1)
         Array.Resize(q, n + 1)
 
-        If MW <> 0 Then
+        'For only one pseudo, values are specified/estimated directly - no distributions used 
+        If n = 1 Then
+            If MW <> 0 Then
+                dMW(1) = MW
+                If SG <> 0 And TB <> 0 Then
+                    dSG(1) = SG
+                    dTB(1) = TB
+                ElseIf SG = 0 And TB <> 0 Then
+                    dSG(1) = PropertyMethods.d15_Riazi(dMW(1))
+                    dTB(1) = TB
+                ElseIf SG = 0 And TB = 0 Then
+                    dSG(1) = PropertyMethods.d15_Riazi(dMW(1))
+                    dTB(1) = 1080 - Math.Exp(6.97996 - 0.01964 * dMW(1) ^ (2 / 3))
+                ElseIf SG <> 0 And TB = 0 Then
+                    dTB(1) = 1080 - Math.Exp(6.97996 - 0.01964 * dMW(1) ^ (2 / 3))
+                End If
+            ElseIf SG <> 0 Then
+                dSG(1) = SG
+                If MW <> 0 And TB <> 0 Then
+                    dMW(1) = MW
+                    dTB(1) = TB
+                ElseIf MW = 0 And TB <> 0 Then
+                    dTB(1) = TB
+                    Select Case Me.ComboBoxMW.SelectedItem.ToString
+                        Case "Winn (1956)"
+                            dMW(1) = PropertyMethods.MW_Winn(dTB(1), dSG(1))
+                        Case "Riazi (1986)"
+                            dMW(1) = PropertyMethods.MW_Riazi(dTB(1), dSG(1))
+                        Case "Lee-Kesler (1974)"
+                            dMW(1) = PropertyMethods.MW_LeeKesler(dTB(1), dSG(1))
+                        Case Else
+                            dMW(1) = PropertyMethods.MW_Riazi(dTB(1), dSG(1))
+                    End Select
+                ElseIf MW = 0 And TB = 0 Then
+                    dMW(1) = ((Math.Log(1.07 - dSG(1)) - 3.56073) / (-2.93886)) ^ 10
+                    dTB(1) = 1080 - Math.Exp(6.97996 - 0.01964 * dMW(1) ^ (2 / 3))
+                    Select Case Me.ComboBoxMW.SelectedItem.ToString
+                        Case "Winn (1956)"
+                            dMW(1) = PropertyMethods.MW_Winn(dTB(1), dSG(1))
+                        Case "Riazi (1986)"
+                            dMW(1) = PropertyMethods.MW_Riazi(dTB(1), dSG(1))
+                        Case "Lee-Kesler (1974)"
+                            dMW(1) = PropertyMethods.MW_LeeKesler(dTB(1), dSG(1))
+                        Case Else
+                            dMW(1) = PropertyMethods.MW_Riazi(dTB(1), dSG(1))
+                    End Select
+                End If
+                dMW(1) = PropertyMethods.MW_Winn(dTB(1), dSG(1))
+            ElseIf TB <> 0 Then
+                dTB(1) = TB
+                If MW <> 0 And SG <> 0 Then
+                    dMW(1) = MW
+                    dSG(1) = SG
+                ElseIf MW = 0 And SG <> 0 Then
+                    dSG(1) = SG
+                    Select Case Me.ComboBoxMW.SelectedItem.ToString
+                        Case "Winn (1956)"
+                            dMW(1) = PropertyMethods.MW_Winn(dTB(1), dSG(1))
+                        Case "Riazi (1986)"
+                            dMW(1) = PropertyMethods.MW_Riazi(dTB(1), dSG(1))
+                        Case "Lee-Kesler (1974)"
+                            dMW(1) = PropertyMethods.MW_LeeKesler(dTB(1), dSG(1))
+                        Case Else
+                            dMW(1) = PropertyMethods.MW_Riazi(dTB(1), dSG(1))
+                    End Select
 
-            DistMW()
+                ElseIf MW = 0 And SG = 0 Then
 
-            If SG <> 0 And TB <> 0 Then
+                    Select Case Me.ComboBoxMW.SelectedItem.ToString
+                        Case "Winn (1956)"
+                            dMW(1) = PropertyMethods.MW_Winn(dTB(1), dSG(1))
+                        Case "Riazi (1986)"
+                            dMW(1) = PropertyMethods.MW_Riazi(dTB(1), dSG(1))
+                        Case "Lee-Kesler (1974)"
+                            dMW(1) = PropertyMethods.MW_LeeKesler(dTB(1), dSG(1))
+                        Case Else
+                            dMW(1) = PropertyMethods.MW_Riazi(dTB(1), dSG(1))
+                    End Select
 
-                DistSG()
-                DistTB()
+                    dSG(1) = PropertyMethods.d15_Riazi(dMW(1))
 
-            ElseIf SG = 0 And TB <> 0 Then
-
-                For i = 1 To n
+                ElseIf MW <> 0 And SG = 0 Then
+                    dMW(1) = MW
                     dSG(i) = PropertyMethods.d15_Riazi(dMW(i))
-                Next
-
-                DistTB()
-
-            ElseIf SG = 0 And TB = 0 Then
-
-                For i = 1 To n
-                    dSG(i) = PropertyMethods.d15_Riazi(dMW(i))
-                    dTB(i) = 1080 - Math.Exp(6.97996 - 0.01964 * dMW(i) ^ (2 / 3))
-                Next
-
-            ElseIf SG <> 0 And TB = 0 Then
-
-                DistSG()
-
-                For i = 1 To n
-                    dTB(i) = 1080 - Math.Exp(6.97996 - 0.01964 * dMW(i) ^ (2 / 3))
-                Next
+                End If
 
             End If
-
-        ElseIf SG <> 0 Then
-
-            DistSG()
-
-            If MW <> 0 And TB <> 0 Then
-
-                DistMW()
-                DistTB()
-
-            ElseIf MW = 0 And TB <> 0 Then
-
-                DistTB()
-
-                For i = 1 To n
-
-                    Select Case Me.ComboBoxMW.SelectedItem.ToString
-                        Case "Winn (1956)"
-                            dMW(i) = PropertyMethods.MW_Winn(dTB(i), dSG(i))
-                        Case "Riazi (1986)"
-                            dMW(i) = PropertyMethods.MW_Riazi(dTB(i), dSG(i))
-                        Case "Lee-Kesler (1974)"
-                            dMW(i) = PropertyMethods.MW_LeeKesler(dTB(i), dSG(i))
-                        Case Else
-                            dMW(i) = PropertyMethods.MW_Riazi(dTB(i), dSG(i))
-                    End Select
-
-                Next
-
-            ElseIf MW = 0 And TB = 0 Then
-
-                For i = 1 To n
-                    dMW(i) = ((Math.Log(1.07 - dSG(i)) - 3.56073) / (-2.93886)) ^ 10
-                    dTB(i) = 1080 - Math.Exp(6.97996 - 0.01964 * dMW(i) ^ (2 / 3))
-                    Select Case Me.ComboBoxMW.SelectedItem.ToString
-                        Case "Winn (1956)"
-                            dMW(i) = PropertyMethods.MW_Winn(dTB(i), dSG(i))
-                        Case "Riazi (1986)"
-                            dMW(i) = PropertyMethods.MW_Riazi(dTB(i), dSG(i))
-                        Case "Lee-Kesler (1974)"
-                            dMW(i) = PropertyMethods.MW_LeeKesler(dTB(i), dSG(i))
-                        Case Else
-                            dMW(i) = PropertyMethods.MW_Riazi(dTB(i), dSG(i))
-                    End Select
-                Next
-
-            End If
-
-        ElseIf TB <> 0 Then
-
-            DistTB()
-
-            If MW <> 0 And SG <> 0 Then
-
-                DistMW()
-                DistSG()
-
-            ElseIf MW = 0 And SG <> 0 Then
-
-                DistSG()
-
-                For i = 1 To n
-
-                    Select Case Me.ComboBoxMW.SelectedItem.ToString
-                        Case "Winn (1956)"
-                            dMW(i) = PropertyMethods.MW_Winn(dTB(i), dSG(i))
-                        Case "Riazi (1986)"
-                            dMW(i) = PropertyMethods.MW_Riazi(dTB(i), dSG(i))
-                        Case "Lee-Kesler (1974)"
-                            dMW(i) = PropertyMethods.MW_LeeKesler(dTB(i), dSG(i))
-                        Case Else
-                            dMW(i) = PropertyMethods.MW_Riazi(dTB(i), dSG(i))
-                    End Select
-
-                Next
-
-            ElseIf MW = 0 And SG = 0 Then
-
-                For i = 1 To n
-
-                    Select Case Me.ComboBoxMW.SelectedItem.ToString
-                        Case "Winn (1956)"
-                            dMW(i) = PropertyMethods.MW_Winn(dTB(i), dSG(i))
-                        Case "Riazi (1986)"
-                            dMW(i) = PropertyMethods.MW_Riazi(dTB(i), dSG(i))
-                        Case "Lee-Kesler (1974)"
-                            dMW(i) = PropertyMethods.MW_LeeKesler(dTB(i), dSG(i))
-                        Case Else
-                            dMW(i) = PropertyMethods.MW_Riazi(dTB(i), dSG(i))
-                    End Select
-
-                    dSG(i) = PropertyMethods.d15_Riazi(dMW(i))
-
-                Next
-
-            ElseIf MW <> 0 And SG = 0 Then
+        Else
+            ' For more than 1 pseudo component 
+            If MW <> 0 Then
 
                 DistMW()
 
-                For i = 1 To n
-                    dSG(i) = PropertyMethods.d15_Riazi(dMW(i))
-                Next
+                If SG <> 0 And TB <> 0 Then
+
+                    DistSG()
+                    DistTB()
+
+                ElseIf SG = 0 And TB <> 0 Then
+
+                    For i = 1 To n
+                        dSG(i) = PropertyMethods.d15_Riazi(dMW(i))
+                    Next
+
+                    DistTB()
+
+                ElseIf SG = 0 And TB = 0 Then
+
+                    For i = 1 To n
+                        dSG(i) = PropertyMethods.d15_Riazi(dMW(i))
+                        dTB(i) = 1080 - Math.Exp(6.97996 - 0.01964 * dMW(i) ^ (2 / 3))
+                    Next
+
+                ElseIf SG <> 0 And TB = 0 Then
+
+                    DistSG()
+
+                    For i = 1 To n
+                        dTB(i) = 1080 - Math.Exp(6.97996 - 0.01964 * dMW(i) ^ (2 / 3))
+                    Next
+
+                End If
+
+            ElseIf SG <> 0 Then
+
+                DistSG()
+
+                If MW <> 0 And TB <> 0 Then
+
+                    DistMW()
+                    DistTB()
+
+                ElseIf MW = 0 And TB <> 0 Then
+
+                    DistTB()
+
+                    For i = 1 To n
+
+                        Select Case Me.ComboBoxMW.SelectedItem.ToString
+                            Case "Winn (1956)"
+                                dMW(i) = PropertyMethods.MW_Winn(dTB(i), dSG(i))
+                            Case "Riazi (1986)"
+                                dMW(i) = PropertyMethods.MW_Riazi(dTB(i), dSG(i))
+                            Case "Lee-Kesler (1974)"
+                                dMW(i) = PropertyMethods.MW_LeeKesler(dTB(i), dSG(i))
+                            Case Else
+                                dMW(i) = PropertyMethods.MW_Riazi(dTB(i), dSG(i))
+                        End Select
+
+                    Next
+
+                ElseIf MW = 0 And TB = 0 Then
+
+                    For i = 1 To n
+                        dMW(i) = ((Math.Log(1.07 - dSG(i)) - 3.56073) / (-2.93886)) ^ 10
+                        dTB(i) = 1080 - Math.Exp(6.97996 - 0.01964 * dMW(i) ^ (2 / 3))
+                        Select Case Me.ComboBoxMW.SelectedItem.ToString
+                            Case "Winn (1956)"
+                                dMW(i) = PropertyMethods.MW_Winn(dTB(i), dSG(i))
+                            Case "Riazi (1986)"
+                                dMW(i) = PropertyMethods.MW_Riazi(dTB(i), dSG(i))
+                            Case "Lee-Kesler (1974)"
+                                dMW(i) = PropertyMethods.MW_LeeKesler(dTB(i), dSG(i))
+                            Case Else
+                                dMW(i) = PropertyMethods.MW_Riazi(dTB(i), dSG(i))
+                        End Select
+                    Next
+
+                End If
+
+            ElseIf TB <> 0 Then
+
+                DistTB()
+
+                If MW <> 0 And SG <> 0 Then
+
+                    DistMW()
+                    DistSG()
+
+                ElseIf MW = 0 And SG <> 0 Then
+
+                    DistSG()
+
+                    For i = 1 To n
+
+                        Select Case Me.ComboBoxMW.SelectedItem.ToString
+                            Case "Winn (1956)"
+                                dMW(i) = PropertyMethods.MW_Winn(dTB(i), dSG(i))
+                            Case "Riazi (1986)"
+                                dMW(i) = PropertyMethods.MW_Riazi(dTB(i), dSG(i))
+                            Case "Lee-Kesler (1974)"
+                                dMW(i) = PropertyMethods.MW_LeeKesler(dTB(i), dSG(i))
+                            Case Else
+                                dMW(i) = PropertyMethods.MW_Riazi(dTB(i), dSG(i))
+                        End Select
+
+                    Next
+
+                ElseIf MW = 0 And SG = 0 Then
+
+                    For i = 1 To n
+
+                        Select Case Me.ComboBoxMW.SelectedItem.ToString
+                            Case "Winn (1956)"
+                                dMW(i) = PropertyMethods.MW_Winn(dTB(i), dSG(i))
+                            Case "Riazi (1986)"
+                                dMW(i) = PropertyMethods.MW_Riazi(dTB(i), dSG(i))
+                            Case "Lee-Kesler (1974)"
+                                dMW(i) = PropertyMethods.MW_LeeKesler(dTB(i), dSG(i))
+                            Case Else
+                                dMW(i) = PropertyMethods.MW_Riazi(dTB(i), dSG(i))
+                        End Select
+
+                        dSG(i) = PropertyMethods.d15_Riazi(dMW(i))
+
+                    Next
+
+                ElseIf MW <> 0 And SG = 0 Then
+
+                    DistMW()
+
+                    For i = 1 To n
+                        dSG(i) = PropertyMethods.d15_Riazi(dMW(i))
+                    Next
+
+                End If
 
             End If
-
         End If
+
 
         Dim v37, v98 As Double
 
@@ -256,7 +347,6 @@ Public Class FormPCBulk
         V20 = PropertyMethods.ViscTwu(T2, 37.8 + 273.15, 98.9 + 273.15, v37, v98)
 
         If V1 <> 0 And V2 <> 0 Then
-
             DistVISC1()
 
             DistVISC2()
