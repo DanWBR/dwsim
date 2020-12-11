@@ -752,7 +752,7 @@ Public Class FormMain
             End If
         Else
 
-#If DEBUG Then
+#If Not DEBUG Then
 
             If My.Settings.ShowDataCollectionForm Then
 
