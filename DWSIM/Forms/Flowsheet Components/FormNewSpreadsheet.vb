@@ -685,6 +685,14 @@ Public Class FormNewSpreadsheet
     Private Sub FormNewSpreadsheet_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
         If SpreadsheetControl IsNot Nothing Then SpreadsheetControl.SpreadsheetTSMI.Enabled = Me.Visible
     End Sub
+
+    Private Sub FormNewSpreadsheet_Activated(sender As Object, e As EventArgs) Handles Me.Activated
+
+        If My.Settings.SendCrashAndUsageAnalytics Then
+            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Entered Spreadsheet Window")
+        End If
+
+    End Sub
 #End If
 
 End Class

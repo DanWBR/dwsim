@@ -44,6 +44,11 @@ Public Class FormUnhandledException
 
     Private Sub FormUnhandledException_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        If My.Settings.SendCrashAndUsageAnalytics Then
+            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Unhandled Exception Form Shown")
+            Microsoft.AppCenter.Crashes.Crashes.TrackError(ex)
+        End If
+
         Dim mystring = SharedClasses.EncryptString.StringCipher.Decrypt("YEZeCozmw0l3XjOYI0EpOXHh1LK9as6Bi5Gwqr7pYZyXtcNYQyzayHXts6NjAJlpfixoim98NAwVHli/+h1fYk6g4W82ewXDxkLwzg5SFCCSS2W0K3TvGMgC0wQWuKfrut0QdnByVKZ4x+/svdQwwXsUkZdELOUtnWiOdeV6WIQ=", "dwsim000000")
         Dim mystring2 = SharedClasses.EncryptString.StringCipher.Decrypt("T+h/AQaXoM7xMDrov6dkD/82uHShQ6gX7MD+yyPG1ALdchPnpYsxHZWU8YcwP3jTPCZWRL9mmAWnQnWtp4ETyYh17Cgjt1EDYbEJJvh/PacWXami/6btnnbE0D5HBpnYrKamsf6qjjx9JbhQOZIvXJv6dIlJ7lMm5vWkhmLpNuc=", "dwsim000000")
 

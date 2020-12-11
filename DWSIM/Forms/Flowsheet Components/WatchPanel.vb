@@ -81,6 +81,10 @@
 
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
 
+        If My.Settings.SendCrashAndUsageAnalytics Then
+            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Added Watch Panel Item")
+        End If
+
         Dim frmprop As New FormPropSelection
 
         frmprop.ssmode = False

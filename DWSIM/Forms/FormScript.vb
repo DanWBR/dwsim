@@ -532,6 +532,10 @@ Imports IronPython.Hosting
 
     Private Sub NewToolStripButton_Click(sender As Object, e As EventArgs) Handles NewToolStripButton.Click
 
+        If My.Settings.SendCrashAndUsageAnalytics Then
+            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Added New Script")
+        End If
+
         InsertScriptTab(New Script())
 
     End Sub
@@ -1495,6 +1499,14 @@ Imports IronPython.Hosting
             scontrol.txtScript.Text = scontrol.txtScript.Text.Insert(scontrol.txtScript.SelectionStart, text)
             scontrol.txtScript.SelectionStart += text.Length + 1
             scontrol.txtScript.SelectionLength = 0
+        End If
+
+    End Sub
+
+    Private Sub FormScript_Activated(sender As Object, e As EventArgs) Handles Me.Activated
+
+        If My.Settings.SendCrashAndUsageAnalytics Then
+            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Activated Script Manager")
         End If
 
     End Sub

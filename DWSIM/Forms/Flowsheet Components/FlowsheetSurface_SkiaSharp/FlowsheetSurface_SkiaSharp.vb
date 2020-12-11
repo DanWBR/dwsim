@@ -1546,6 +1546,10 @@ Public Class FlowsheetSurface_SkiaSharp
 
         If Flowsheet Is Nothing Then Flowsheet = My.Application.ActiveSimulation
 
+        If My.Settings.SendCrashAndUsageAnalytics Then
+            Microsoft.AppCenter.Analytics.Analytics.TrackEvent(String.Format("Added Object '{0}' to the Flowsheet", type.ToString()))
+        End If
+
         Dim gObj As GraphicObject = Nothing
         Dim fillclr As SKColor = SKColors.White
         Dim lineclr As SKColor = SKColors.SteelBlue

@@ -16,6 +16,10 @@
 
     Public Sub Initialize() Implements Interfaces.IAttachedUtility.Initialize
 
+        If My.Settings.SendCrashAndUsageAnalytics Then
+            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Opened Gas-Liquid Separator Sizing Utility")
+        End If
+
         Me.Frm = AttachedTo.GetFlowsheet
 
         Me.ComboBox1.Items.Clear()

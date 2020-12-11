@@ -23,6 +23,10 @@
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
+        If My.Settings.SendCrashAndUsageAnalytics Then
+            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Added New Chart")
+        End If
+
         Dim tabpage As New TabPage
 
         Dim chart As New Charts.Chart

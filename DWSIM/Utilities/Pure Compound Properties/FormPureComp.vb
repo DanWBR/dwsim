@@ -47,6 +47,10 @@ Public Class FormPureComp
 
     Private Sub FormPureComp_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        If My.Settings.SendCrashAndUsageAnalytics Then
+            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Opened Pure Comp Props Utility")
+        End If
+
         If Not MyCompound Is Nothing Then Me.Text = Me.Text & " - " & MyCompound.Name
 
     End Sub
