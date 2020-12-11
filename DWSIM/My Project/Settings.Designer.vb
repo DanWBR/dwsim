@@ -841,7 +841,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
         Public Property SendCrashAndUsageAnalytics() As Boolean
             Get
                 Return CType(Me("SendCrashAndUsageAnalytics"),Boolean)
@@ -860,6 +860,18 @@ Namespace My
             End Get
             Set
                 Me("UserEmail") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property ShowDataCollectionForm() As Boolean
+            Get
+                Return CType(Me("ShowDataCollectionForm"),Boolean)
+            End Get
+            Set
+                Me("ShowDataCollectionForm") = value
             End Set
         End Property
     End Class

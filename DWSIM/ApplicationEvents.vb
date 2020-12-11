@@ -4,10 +4,6 @@ Imports System.IO
 Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.Threading
 Imports System.Runtime.InteropServices
-Imports Microsoft.AppCenter
-Imports Microsoft.AppCenter.Crashes
-Imports Microsoft.AppCenter.Analytics
-Imports System.Reflection
 
 Namespace My
 
@@ -141,56 +137,6 @@ Namespace My
                 standardOutput.AutoFlush = True
                 Console.SetOut(standardOutput)
                 Dim f1 As New FormMain
-            End If
-
-            If Settings.SendCrashAndUsageAnalytics Then
-
-                'enable analytics
-                Dim countryCode = System.Globalization.RegionInfo.CurrentRegion.TwoLetterISORegionName
-                AppCenter.SetCountryCode(countryCode)
-
-                Dim ca = Assembly.Load("Microsoft.AppCenter.Crashes")
-                Dim aa = Assembly.Load("Microsoft.AppCenter.Analytics")
-                Dim at = aa.GetType("Microsoft.AppCenter.Analytics.Analytics")
-                Dim ct = ca.GetType("Microsoft.AppCenter.Crashes.Crashes")
-                AppCenter.Start("b28eb1b8-3d8f-4be5-a888-e272018d604d", at, ct)
-
-                Crashes.GetErrorAttachments = Function(report)
-                                                  Dim email = Settings.UserEmail
-                                                  If email <> "" Then
-                                                      Return New ErrorAttachmentLog() {ErrorAttachmentLog.AttachmentWithText(email, "useremail.txt")}
-                                                  Else
-                                                      Return Nothing
-                                                  End If
-                                              End Function
-
-                Crashes.SetEnabledAsync(True)
-
-                AddHandler FlowsheetSolver.FlowsheetSolver.FlowsheetCalculationFinished,
-                    Sub(esender, eargs, data)
-                        If TypeOf data Is Double Then
-                            Dim datadict As New Dictionary(Of String, String)
-                            datadict.Add("Time Taken (s)", data.ToString())
-                            Analytics.TrackEvent("Flowsheet Calculation Finished", datadict)
-                        Else
-                            Analytics.TrackEvent("Flowsheet Calculation Finished with Errors")
-                            Dim errorlist As List(Of Exception) = data
-                            For Each er In errorlist
-                                Crashes.TrackError(er)
-                            Next
-                        End If
-                    End Sub
-
-                AddHandler FlowsheetSolver.FlowsheetSolver.CalculationError,
-                    Sub(esender, eargs, data)
-                        Dim calcargs As CalculationArgs = esender
-                        If data IsNot Nothing Then
-                            Dim datadict As New Dictionary(Of String, String)
-                            datadict.Add("Object Type", calcargs.ObjectType.ToString())
-                            Crashes.TrackError(data, datadict)
-                        End If
-                    End Sub
-
             End If
 
         End Sub

@@ -38,12 +38,11 @@ Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
 
-Imports CefSharp.WinForms
 Imports DWSIM.Interfaces
-Imports DWSIM.Thermodynamics.SpecialEOS
-Imports DWSIM.Thermodynamics.SpecialEOS.PCSAFT
 Imports DWSIM.Thermodynamics.AdvancedEOS
 Imports DWSIM.Thermodynamics.Databases
+Imports Microsoft.AppCenter.Crashes
+Imports Microsoft.AppCenter.Analytics
 
 Public Class FormMain
 
@@ -752,7 +751,71 @@ Public Class FormMain
                 OpenWelcomeScreen()
             End If
         Else
+
+#If DEBUG Then
+
+            If My.Settings.ShowDataCollectionForm Then
+
+                Dim fdc As New FormShareAnonymousUsageData
+                fdc.ShowDialog(Me)
+                My.Settings.ShowDataCollectionForm = False
+
+            End If
+
+            If My.Settings.SendCrashAndUsageAnalytics Then
+
+                'enable analytics
+                Dim countryCode = System.Globalization.RegionInfo.CurrentRegion.TwoLetterISORegionName
+                Microsoft.AppCenter.AppCenter.SetCountryCode(countryCode)
+
+                Dim ca = Assembly.Load("Microsoft.AppCenter.Crashes")
+                Dim aa = Assembly.Load("Microsoft.AppCenter.Analytics")
+                Dim at = aa.GetType("Microsoft.AppCenter.Analytics.Analytics")
+                Dim ct = ca.GetType("Microsoft.AppCenter.Crashes.Crashes")
+                Microsoft.AppCenter.AppCenter.Start("b28eb1b8-3d8f-4be5-a888-e272018d604d", at, ct)
+
+                Crashes.GetErrorAttachments = Function(report)
+                                                  Dim email = My.Settings.UserEmail
+                                                  If email <> "" Then
+                                                      Return New ErrorAttachmentLog() {ErrorAttachmentLog.AttachmentWithText(email, "useremail.txt")}
+                                                  Else
+                                                      Return Nothing
+                                                  End If
+                                              End Function
+
+                Crashes.SetEnabledAsync(True)
+
+                AddHandler FlowsheetSolver.FlowsheetSolver.FlowsheetCalculationFinished,
+                    Sub(esender, eargs, data)
+                        If TypeOf data Is Double Then
+                            Dim datadict As New Dictionary(Of String, String)
+                            datadict.Add("Time Taken (s)", data.ToString())
+                            Analytics.TrackEvent("Flowsheet Calculation Finished", datadict)
+                        Else
+                            Analytics.TrackEvent("Flowsheet Calculation Finished with Errors")
+                            Dim errorlist As List(Of Exception) = data
+                            For Each er In errorlist
+                                Crashes.TrackError(er)
+                            Next
+                        End If
+                    End Sub
+
+                AddHandler FlowsheetSolver.FlowsheetSolver.CalculationError,
+                    Sub(esender, eargs, data)
+                        Dim calcargs As CalculationArgs = esender
+                        If data IsNot Nothing Then
+                            Dim datadict As New Dictionary(Of String, String)
+                            datadict.Add("Object Type", calcargs.ObjectType.ToString())
+                            Crashes.TrackError(data, datadict)
+                        End If
+                    End Sub
+
+            End If
+
+#End If
+
             OpenWelcomeScreen()
+
         End If
 
     End Sub
