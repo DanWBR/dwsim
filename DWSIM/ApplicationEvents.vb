@@ -144,7 +144,11 @@ Namespace My
             End If
 
             If Settings.SendCrashAndUsageAnalytics Then
+
                 'enable analytics
+                Dim countryCode = System.Globalization.RegionInfo.CurrentRegion.TwoLetterISORegionName
+                AppCenter.SetCountryCode(countryCode)
+
                 Dim ca = Assembly.Load("Microsoft.AppCenter.Crashes")
                 Dim aa = Assembly.Load("Microsoft.AppCenter.Analytics")
                 Dim at = aa.GetType("Microsoft.AppCenter.Analytics.Analytics")
@@ -185,19 +189,6 @@ Namespace My
                             datadict.Add("Object Type", calcargs.ObjectType.ToString())
                             Crashes.TrackError(data, datadict)
                         End If
-                    End Sub
-
-                AddHandler FlowsheetSolver.FlowsheetSolver.UnitOpCalculationStarted,
-                    Sub(esender, eargs, data)
-                        Dim fsheet As Interfaces.IFlowsheet = esender
-                        Dim calcargs As CalculationArgs = data
-                        Dim ppname = fsheet.SimulationObjects(calcargs.Name).PropertyPackage.ComponentName
-                        Dim ncomp = fsheet.SelectedCompounds.Count
-                        Dim datadict As New Dictionary(Of String, String)
-                        datadict.Add("Object Type", calcargs.ObjectType.ToString())
-                        datadict.Add("Property Package", ppname)
-                        datadict.Add("Compounds", ncomp)
-                        Analytics.TrackEvent("Object Calculation Started", datadict)
                     End Sub
 
             End If
