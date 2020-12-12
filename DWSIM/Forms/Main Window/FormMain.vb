@@ -793,27 +793,33 @@ Public Class FormMain
 
                 AddHandler FlowsheetSolver.FlowsheetSolver.FlowsheetCalculationFinished,
                     Sub(esender, eargs, data)
-                        If TypeOf data Is Double Then
-                            Dim datadict As New Dictionary(Of String, String)
-                            datadict.Add("Time Taken (s)", data.ToString())
-                            Analytics.TrackEvent("Flowsheet Calculation Finished", datadict)
-                        Else
-                            Analytics.TrackEvent("Flowsheet Calculation Finished with Errors")
-                            Dim errorlist As List(Of Exception) = data
-                            For Each er In errorlist
-                                Crashes.TrackError(er)
-                            Next
-                        End If
+                        Try
+                            If TypeOf data Is Double Then
+                                Dim datadict As New Dictionary(Of String, String)
+                                datadict.Add("Time Taken (s)", data.ToString())
+                                Analytics.TrackEvent("Flowsheet Calculation Finished", datadict)
+                            Else
+                                Analytics.TrackEvent("Flowsheet Calculation Finished with Errors")
+                                Dim errorlist As List(Of Exception) = data
+                                For Each er In errorlist
+                                    Crashes.TrackError(er)
+                                Next
+                            End If
+                        Catch ex As Exception
+                        End Try
                     End Sub
 
                 AddHandler FlowsheetSolver.FlowsheetSolver.CalculationError,
                     Sub(esender, eargs, data)
-                        Dim calcargs As CalculationArgs = esender
-                        If data IsNot Nothing Then
-                            Dim datadict As New Dictionary(Of String, String)
-                            datadict.Add("Object Type", calcargs.ObjectType.ToString())
-                            Crashes.TrackError(data, datadict)
-                        End If
+                        Try
+                            Dim calcargs As CalculationArgs = esender
+                            If data IsNot Nothing Then
+                                Dim datadict As New Dictionary(Of String, String)
+                                datadict.Add("Object Type", calcargs.ObjectType.ToString())
+                                Crashes.TrackError(data, datadict)
+                            End If
+                        Catch ex As Exception
+                        End Try
                     End Sub
 
             End If
