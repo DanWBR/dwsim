@@ -73,6 +73,15 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Catch ex As Exception
                         errflag = True
                     End Try
+                    If errflag Then
+                        Dim gmin As New GibbsMinimizationMulti With {.FlashSettings = FlashSettings}
+                        Try
+                            result = gmin.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                            errflag = False
+                        Catch ex As Exception
+                            errflag = True
+                        End Try
+                    End If
                 Case "VLLE"
                     'VLLE
                     If Settings.ExcelMode Then
@@ -167,6 +176,15 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         Catch ex As Exception
                             errflag = True
                         End Try
+                        If errflag Then
+                            Dim gmin As New GibbsMinimizationMulti With {.FlashSettings = FlashSettings}
+                            Try
+                                result = gmin.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                                errflag = False
+                            Catch ex As Exception
+                                errflag = True
+                            End Try
+                        End If
                     End If
             End Select
 
