@@ -174,6 +174,10 @@ Public Class FrmCritpt
 
     Private Sub FrmCritpt_Shown(sender As Object, e As EventArgs) Handles Me.Load
 
+        If My.Settings.SendCrashAndUsageAnalytics Then
+            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Opened TCP Utility")
+        End If
+
         Me.Frm = AttachedTo.GetFlowsheet
         mat = AttachedTo
 

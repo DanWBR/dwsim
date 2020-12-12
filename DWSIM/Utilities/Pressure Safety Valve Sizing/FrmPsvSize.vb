@@ -21,6 +21,10 @@ Public Class FrmPsvSize
 
     Private Sub Form4_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        If My.Settings.SendCrashAndUsageAnalytics Then
+            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Opened PSV Sizing Utility")
+        End If
+
         Me.Frm = AttachedTo.GetFlowsheet
 
         Me.sz = New DWSIM.Utilities.PSV.Sizing

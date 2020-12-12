@@ -1494,7 +1494,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
             If age Is Nothing Then
                 FinishSuccess?.Invoke()
-                RaiseEvent FlowsheetCalculationFinished(fobj, New System.EventArgs(), Nothing)
+                RaiseEvent FlowsheetCalculationFinished(fobj, New System.EventArgs(), (Date.Now - d1).TotalSeconds)
                 Return New List(Of Exception)
             Else
                 FinishWithErrors?.Invoke()

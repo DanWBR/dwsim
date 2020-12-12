@@ -201,6 +201,10 @@ Public Class FormReportConfig
 
     Private Sub FormReportConfig_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        If My.Settings.SendCrashAndUsageAnalytics Then
+            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Opened Report Window")
+        End If
+
         frm = My.Application.ActiveSimulation
         Me.Text = DWSIM.App.GetLocalString("RelatoriodaSimulacao")
 

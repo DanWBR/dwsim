@@ -91,6 +91,10 @@ Public Class FormBinEnv
 
     Public Sub Initialize() Implements Interfaces.IAttachedUtility.Initialize
 
+        If My.Settings.SendCrashAndUsageAnalytics Then
+            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Opened Binary Envelope Utility")
+        End If
+
         Flowsheet = AttachedTo.GetFlowsheet
 
         If Flowsheet.SelectedCompounds.Count > 1 Then
