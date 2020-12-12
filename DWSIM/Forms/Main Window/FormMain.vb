@@ -37,7 +37,7 @@ Imports ICSharpCode.SharpZipLib.Zip
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
-
+Imports DWSIM.ExtensionMethods
 Imports DWSIM.Interfaces
 Imports DWSIM.Thermodynamics.AdvancedEOS
 Imports DWSIM.Thermodynamics.Databases
@@ -752,7 +752,7 @@ Public Class FormMain
             End If
         Else
 
-#If Not DEBUG Then
+#If DEBUG Then
 
             If My.Settings.ShowDataCollectionForm Then
 
@@ -765,14 +765,20 @@ Public Class FormMain
             If My.Settings.SendCrashAndUsageAnalytics Then
 
                 'enable analytics
-                Dim countryCode = System.Globalization.RegionInfo.CurrentRegion.TwoLetterISORegionName
+
+                Dim countryCode = RegionInfo.CurrentRegion.TwoLetterISORegionName
                 Microsoft.AppCenter.AppCenter.SetCountryCode(countryCode)
 
                 Dim ca = Assembly.Load("Microsoft.AppCenter.Crashes")
                 Dim aa = Assembly.Load("Microsoft.AppCenter.Analytics")
+
                 Dim at = aa.GetType("Microsoft.AppCenter.Analytics.Analytics")
                 Dim ct = ca.GetType("Microsoft.AppCenter.Crashes.Crashes")
-                Microsoft.AppCenter.AppCenter.Start("b28eb1b8-3d8f-4be5-a888-e272018d604d", at, ct)
+
+                Microsoft.AppCenter.AppCenter.Start(Assembly.Load("a9ZNu5n7/RjXFngiZWOrTmLEtyO8Y8lzkK+RLxYXQAhzEJiTSXVDaLlqCp+g9oixSE
+                pj2TUGZ3ns+AFLplFwM64k+Sj6PS0GzWIn+sXSGGrs5CRp+fKoUWTvvhEIy6hM".Decrypt(My.Settings.Key1)).GetType("vdFwK/IR4KZHUcVKHUe+YpEGhDghlARkankyeb66oMSpwIGoAYx
+                ZdfPaLCGlCRtk0sRg1HdN9QBzpNfRsVzp4u/+7xvJwF3AG/2XVsdchUdhuEmcPkymLeaunrg8Ufrz".Decrypt(My.Settings.Key1)).GetField("YwzaqzliUTwFjhHYWgb2t9NyDTxE5CRwHx3hZi
+                s3jOdpqOr4vh52fl3nx7wNYxrnRfGnJOqElG1SGFoI3WMb/NViVot7Wtc3r6SGMG6E0fPiOhVR53uv5SzgVBvPI90t".Decrypt(My.Settings.Key2)).GetValue(Nothing), at, ct)
 
                 Crashes.GetErrorAttachments = Function(report)
                                                   Dim email = My.Settings.UserEmail

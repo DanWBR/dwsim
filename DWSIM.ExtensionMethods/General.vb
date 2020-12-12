@@ -866,6 +866,17 @@ Public Module General
 
     End Function
 
+    <System.Runtime.CompilerServices.Extension> Function Encrypt(text As String, passphrase As String) As String
+
+        Return SharedClasses.EncryptString.StringCipher.Encrypt(text, passphrase)
+
+    End Function
+
+    <System.Runtime.CompilerServices.Extension> Function Decrypt(text As String, passphrase As String) As String
+
+        Return SharedClasses.EncryptString.StringCipher.Decrypt(text, passphrase)
+
+    End Function
 
 End Module
 

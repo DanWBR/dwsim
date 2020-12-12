@@ -210,5 +210,15 @@
     <Setting Name="ShowDataCollectionForm" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="Key1" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">51d86903-c99d-4710-a7f0-a38a447e436a</Value>
+    </Setting>
+    <Setting Name="Key2" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">c9c40f22-ee70-44bb-8654-b177db105878
+</Value>
+    </Setting>
+    <Setting Name="Key3" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">8a912ddd-956c-43d9-86bc-e372d90b3ae8</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
