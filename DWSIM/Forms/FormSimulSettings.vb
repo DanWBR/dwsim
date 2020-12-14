@@ -278,9 +278,7 @@ Public Class FormSimulSettings
     End Sub
 
     Private Sub Button2_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Opened Bulk C7+ Tool")
-        End If
+
         Me.FrmChild.FrmPCBulk.ShowDialog(Me)
     End Sub
 
@@ -1003,9 +1001,7 @@ Public Class FormSimulSettings
     End Sub
 
     Private Sub btnConfigPP_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConfigPP.Click
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Configure Property Package")
-        End If
+
         Dim ppid As String = ""
         If DWSIM.App.IsRunningOnMono Then
             ppid = dgvpp.Rows(dgvpp.SelectedCells(0).RowIndex).Cells(0).Value
@@ -1109,9 +1105,6 @@ Public Class FormSimulSettings
     End Sub
 
     Private Sub Button9_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button9.Click
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Opened Distillation Curves Tool")
-        End If
         Dim frmdc As New DCCharacterizationWizard
         frmdc.ShowDialog(Me)
     End Sub
@@ -1208,10 +1201,6 @@ Public Class FormSimulSettings
             pp.Flowsheet = FrmChild
         End With
 
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent(String.Format("Added Property Package '{0}' to the Flowsheet", pp.ComponentName))
-        End If
-
         FrmChild.Options.PropertyPackages.Add(pp.UniqueID, pp)
         Me.dgvpp.Rows.Add(New Object() {pp.UniqueID, pp.Tag, pp.ComponentName})
 
@@ -1265,9 +1254,7 @@ Public Class FormSimulSettings
     End Sub
 
     Private Sub Button3_Click_2(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Opened Assay Manager")
-        End If
+
         Dim frmam As New FormAssayManager
         frmam.ShowDialog(Me)
         frmam.Close()
@@ -1330,9 +1317,7 @@ Public Class FormSimulSettings
     End Sub
 
     Private Sub btnInfoLeft_Click(sender As Object, e As EventArgs) Handles btnInfoLeft.Click
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Viewing Compound Data")
-        End If
+
         Dim compound As Interfaces.ICompoundConstantProperties
         Dim compID As String = ""
         If DWSIM.App.IsRunningOnMono Then
@@ -1366,9 +1351,7 @@ Public Class FormSimulSettings
     End Sub
 
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Importing Compounds from JSON File")
-        End If
+
         If Me.OpenFileDialog3.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
             For Each fn In Me.OpenFileDialog3.FileNames
                 Try
@@ -1408,9 +1391,6 @@ Public Class FormSimulSettings
     End Sub
 
     Private Sub Button13_Click(sender As Object, e As EventArgs) Handles Button13.Click
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Importing Compounds from Online Sources")
-        End If
         Dim f As New FormImportCompoundOnline
         If f.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
             Try
@@ -1489,9 +1469,6 @@ Public Class FormSimulSettings
     End Sub
 
     Private Sub btnConfigPPAdv_Click(sender As Object, e As EventArgs) Handles btnConfigPPAdv.Click
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Configure Advanced Property Package Settings")
-        End If
         Dim ppid As String = ""
         If GlobalSettings.Settings.IsRunningOnMono Then
             ppid = dgvpp.Rows(dgvpp.SelectedCells(0).RowIndex).Cells(0).Value
@@ -1574,9 +1551,7 @@ Public Class FormSimulSettings
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles btnConfigFlash.Click
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Configure Flash Settings")
-        End If
+
         Dim ppid As String = ""
         If DWSIM.App.IsRunningOnMono Then
             ppid = dgvpp.Rows(dgvpp.SelectedCells(0).RowIndex).Cells(0).Value

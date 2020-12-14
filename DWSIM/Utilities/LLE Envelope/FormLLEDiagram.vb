@@ -534,10 +534,6 @@ Public Class FormLLEDiagram
 
     Public Sub Initialize() Implements Interfaces.IAttachedUtility.Initialize
 
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Opened LLE Diagram Utility")
-        End If
-
         Frm = AttachedTo.GetFlowsheet
         mat = New MaterialStream("", "", Frm, Nothing)
 

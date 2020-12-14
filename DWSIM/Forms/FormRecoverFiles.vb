@@ -24,10 +24,6 @@ Public Class FormRecoverFiles
 
     Private Sub FormRecoverFiles_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Recover Window Shown")
-        End If
-
         Dim data, nomearquivo As String
         For Each str As String In My.Settings.BackupFiles
             If File.Exists(str) Then

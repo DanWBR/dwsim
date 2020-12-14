@@ -67,9 +67,7 @@ Public Class FormReacManager
     End Sub
 
     Private Sub KryptonContextMenuItem1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles ConversaoToolStripMenuItem.Click
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Added New Conversion Reaction")
-        End If
+
         Dim frc As New FormReacConv
         Dim result As MsgBoxResult = frc.ShowDialog()
         With Me.GridRxns.Rows
@@ -82,9 +80,7 @@ Public Class FormReacManager
     End Sub
 
     Private Sub KryptonContextMenuItem2_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles EquilibrioToolStripMenuItem.Click
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Added New Equilibrium Reaction")
-        End If
+
         Dim fre As New FormReacEq
         fre.ShowDialog()
         fre.Dispose()
@@ -97,9 +93,7 @@ Public Class FormReacManager
     End Sub
 
     Private Sub KryptonContextMenuItem3_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles CineticaToolStripMenuItem.Click
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Added New Kinetic Reaction")
-        End If
+
         Dim frk As New FormReacKinetic
         frk.ShowDialog()
         frk.Dispose()
@@ -386,9 +380,6 @@ Public Class FormReacManager
     End Sub
 
     Private Sub HeterogeneaCataliticaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HeterogeneaCataliticaToolStripMenuItem.Click
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Added New HetCat Reaction")
-        End If
         Dim frk As New FormReacHeterog
         frk.ShowDialog()
         frk.Dispose()

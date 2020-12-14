@@ -46,10 +46,6 @@ Public Class MaterialStreamPanel
 
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
 
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Updated Material Stream Panel")
-        End If
-
         UpdateTable()
 
     End Sub

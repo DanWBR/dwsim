@@ -41,8 +41,6 @@ Imports DWSIM.ExtensionMethods
 Imports DWSIM.Interfaces
 Imports DWSIM.Thermodynamics.AdvancedEOS
 Imports DWSIM.Thermodynamics.Databases
-Imports Microsoft.AppCenter.Crashes
-Imports Microsoft.AppCenter.Analytics
 
 Public Class FormMain
 
@@ -751,80 +749,6 @@ Public Class FormMain
                 OpenWelcomeScreen()
             End If
         Else
-
-#If Not DEBUG Then
-
-            If My.Settings.ShowDataCollectionForm Then
-
-                Dim fdc As New FormShareAnonymousUsageData
-                fdc.ShowDialog(Me)
-                My.Settings.ShowDataCollectionForm = False
-
-            End If
-
-            If My.Settings.SendCrashAndUsageAnalytics Then
-
-                'enable analytics
-
-                Dim countryCode = RegionInfo.CurrentRegion.TwoLetterISORegionName
-                Microsoft.AppCenter.AppCenter.SetCountryCode(countryCode)
-
-                Dim ca = Assembly.Load("Microsoft.AppCenter.Crashes")
-                Dim aa = Assembly.Load("Microsoft.AppCenter.Analytics")
-
-                Dim at = aa.GetType("Microsoft.AppCenter.Analytics.Analytics")
-                Dim ct = ca.GetType("Microsoft.AppCenter.Crashes.Crashes")
-
-                Microsoft.AppCenter.AppCenter.Start(Assembly.Load("a9ZNu5n7/RjXFngiZWOrTmLEtyO8Y8lzkK+RLxYXQAhzEJiTSXVDaLlqCp+g9oixSE
-                pj2TUGZ3ns+AFLplFwM64k+Sj6PS0GzWIn+sXSGGrs5CRp+fKoUWTvvhEIy6hM".Decrypt(My.Settings.Key1)).GetType("vdFwK/IR4KZHUcVKHUe+YpEGhDghlARkankyeb66oMSpwIGoAYx
-                ZdfPaLCGlCRtk0sRg1HdN9QBzpNfRsVzp4u/+7xvJwF3AG/2XVsdchUdhuEmcPkymLeaunrg8Ufrz".Decrypt(My.Settings.Key1)).GetField("YwzaqzliUTwFjhHYWgb2t9NyDTxE5CRwHx3hZi
-                s3jOdpqOr4vh52fl3nx7wNYxrnRfGnJOqElG1SGFoI3WMb/NViVot7Wtc3r6SGMG6E0fPiOhVR53uv5SzgVBvPI90t".Decrypt(My.Settings.Key2)).GetValue(Nothing), at, ct)
-
-                Crashes.GetErrorAttachments = Function(report)
-                                                  Dim email = My.Settings.UserEmail
-                                                  If email <> "" Then
-                                                      Return New ErrorAttachmentLog() {ErrorAttachmentLog.AttachmentWithText(email, "useremail.txt")}
-                                                  Else
-                                                      Return Nothing
-                                                  End If
-                                              End Function
-
-                Crashes.SetEnabledAsync(True)
-
-                AddHandler FlowsheetSolver.FlowsheetSolver.FlowsheetCalculationFinished,
-                    Sub(esender, eargs, data)
-                        Try
-                            If TypeOf data Is Double Then
-                                Dim datadict As New Dictionary(Of String, String)
-                                datadict.Add("Time Taken (s)", data.ToString())
-                                Analytics.TrackEvent("Flowsheet Calculation Finished", datadict)
-                            Else
-                                Analytics.TrackEvent("Flowsheet Calculation Finished with Errors")
-                                Dim errorlist As List(Of Exception) = data
-                                For Each er In errorlist
-                                    Crashes.TrackError(er)
-                                Next
-                            End If
-                        Catch ex As Exception
-                        End Try
-                    End Sub
-
-                AddHandler FlowsheetSolver.FlowsheetSolver.CalculationError,
-                    Sub(esender, eargs, data)
-                        Try
-                            Dim calcargs As CalculationArgs = esender
-                            If data IsNot Nothing Then
-                                Dim datadict As New Dictionary(Of String, String)
-                                datadict.Add("Object Type", calcargs.ObjectType.ToString())
-                                Crashes.TrackError(data, datadict)
-                            End If
-                        Catch ex As Exception
-                        End Try
-                    End Sub
-
-            End If
-
-#End If
 
             OpenWelcomeScreen()
 

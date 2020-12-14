@@ -63,9 +63,6 @@ Public Class FormHYD
 
     Private Sub FormHYD_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Opened Hydrates Utility")
-        End If
         If Not loaded Then Initialize()
 
     End Sub

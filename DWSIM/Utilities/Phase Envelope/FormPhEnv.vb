@@ -63,10 +63,6 @@ Public Class FormPhEnv
 
     Public Sub Initialize() Implements Interfaces.IAttachedUtility.Initialize
 
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Opened Phase Envelope Utility")
-        End If
-
         Me.ComboBox1.SelectedIndex = 4
         Me.cbhydmodel.SelectedIndex = 0
 

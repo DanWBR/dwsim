@@ -748,10 +748,6 @@ Public Class FormFlowsheet
 
     Private Sub ConsoleOutputTSMI_Click(sender As Object, e As EventArgs) Handles ConsoleOutputTSMI.Click
 
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Opened Console Output")
-        End If
-
         If Calculator.ExcelLogForm Is Nothing OrElse Calculator.ExcelLogForm.IsDisposed Then
             Calculator.ExcelLogForm = New LogForm
             Dim txtwriter = New ConsoleRedirection.TextBoxStreamWriter(Calculator.ExcelLogForm.TextBox1)
@@ -780,9 +776,7 @@ Public Class FormFlowsheet
     End Sub
 
     Public Sub RectangleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RectangleToolStripMenuItem.Click
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Added a Rectangle")
-        End If
+
         Dim myTextObject As New Shapes.RectangleGraphic(New SkiaSharp.SKPoint(10, 10), "TEXT")
         Dim gObj As GraphicObject = Nothing
         gObj = myTextObject
@@ -794,9 +788,7 @@ Public Class FormFlowsheet
     End Sub
 
     Public Sub FiguraToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FiguraToolStripMenuItem.Click
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Added an Image")
-        End If
+
         With Me.OpenFileName
             .CheckFileExists = True
             .CheckPathExists = True
@@ -827,9 +819,7 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub GraficoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GraficoToolStripMenuItem.Click
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Added a Chart to the Flowsheet")
-        End If
+
         Dim myobj As New Charts.OxyPlotGraphic(30, 30)
         myobj.Name = "CHART-" & Guid.NewGuid.ToString
         myobj.Tag = "CHART" & ((From t As GraphicObject In Me.FormSurface.FlowsheetSurface.DrawingObjects Select t Where t.ObjectType = ObjectType.GO_Chart).Count + 1).ToString
@@ -1016,10 +1006,6 @@ Public Class FormFlowsheet
 
     Private Sub Restorelayout(sender As Object, e As EventArgs) Handles RestoreLayoutTSMI.Click
 
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Restored Layout")
-        End If
-
         FormLog.DockState = DockState.DockBottom
         FormMatList.DockState = DockState.Document
         FormSpreadsheet.DockState = DockState.Document
@@ -1043,37 +1029,22 @@ Public Class FormFlowsheet
     End Sub
 
     Public Sub tsmiUndo_Click(sender As Object, e As EventArgs) Handles tsmiUndo.Click
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Triggered Undo")
-        End If
         tsbUndo_Click(sender, e)
     End Sub
 
     Public Sub tsmiRedo_Click(sender As Object, e As EventArgs) Handles tsmiRedo.Click
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Triggered Redo")
-        End If
         tsbRedo_Click(sender, e)
     End Sub
 
     Public Sub tsmiCut_Click(sender As Object, e As EventArgs) Handles tsmiCut.Click
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Triggered Cut")
-        End If
         CutObjects()
     End Sub
 
     Public Sub tsmiCopy_Click(sender As Object, e As EventArgs) Handles tsmiCopy.Click
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Triggered Copy")
-        End If
         CopyObjects()
     End Sub
 
     Public Sub tsmiPaste_Click(sender As Object, e As EventArgs) Handles tsmiPaste.Click
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Triggered Paste")
-        End If
         PasteObjects()
     End Sub
 
@@ -1150,9 +1121,6 @@ Public Class FormFlowsheet
     End Sub
 
     Public Sub TSBTexto_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextoToolStripMenuItem.Click
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Added a Text Block")
-        End If
         Dim myTextObject As New TextGraphic(30, 30,
             DWSIM.App.GetLocalString("caixa_de_texto"))
         Dim gObj As GraphicObject = Nothing
@@ -1167,9 +1135,6 @@ Public Class FormFlowsheet
     End Sub
 
     Public Sub ToolStripButton19_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TabelaDePropriedatesMestraToolStripMenuItem.Click
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Added a Master Property Table")
-        End If
         Dim myMasterTable As New Drawing.SkiaSharp.GraphicObjects.Tables.MasterTableGraphic(30, 30)
         Dim gObj As GraphicObject = Nothing
         myMasterTable.Flowsheet = Me
@@ -1182,9 +1147,6 @@ Public Class FormFlowsheet
     End Sub
 
     Public Sub ToolStripButton4_Click(sender As Object, e As EventArgs) Handles TabelaDePropriedadesPlanilhaToolStripMenuItem.Click
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Added a Linked Property Table")
-        End If
         Dim mySpreadsheetTable As New SpreadsheetTableGraphic(30, 30)
         Dim gObj As GraphicObject = Nothing
         mySpreadsheetTable.Flowsheet = Me
@@ -1321,9 +1283,6 @@ Public Class FormFlowsheet
 
 
     Public Sub ToolStripButton6_Click(sender As Object, e As EventArgs) Handles TabelaDePropriedadesToolStripMenuItem.Click
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Added a Property Table")
-        End If
         Dim myPropertyTable As New TableGraphic(30, 30)
         Dim gObj As GraphicObject = Nothing
         myPropertyTable.Flowsheet = Me
@@ -1336,18 +1295,11 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub BlocoDeSimulacaoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BlocoDeSimulacaoToolStripMenuItem.Click
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Added a Flowsheet Object through the Selector")
-        End If
         Dim f As New FormAddFlowsheetObject() With {.Flowsheet = Me}
         f.ShowDialog(Me)
     End Sub
 
     Private Sub tsmiCloseOpenedEditors_Click(sender As Object, e As EventArgs) Handles tsmiCloseOpenedEditors.Click
-
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Closed Editors")
-        End If
 
         Me.UIThreadInvoke(Sub()
                               For Each obj In Me.SimulationObjects.Values
@@ -3144,10 +3096,6 @@ Public Class FormFlowsheet
 
     Private Sub tsbStoreSolution_Click(sender As Object, e As EventArgs) Handles tsbStoreSolution.Click
 
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Restored Flowsheet State")
-        End If
-
         Dim data = GetProcessData()
 
         Dim f As New FormEnterName
@@ -3171,10 +3119,6 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub tsbLoadSolution_Click(sender As Object, e As EventArgs) Handles tsbLoadSolution.Click
-
-        If My.Settings.SendCrashAndUsageAnalytics Then
-            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Saved Flowsheet State")
-        End If
 
         If tscbStoredSolutions.SelectedItem IsNot Nothing Then
             If StoredSolutions.ContainsKey(tscbStoredSolutions.SelectedItem.ToString) Then

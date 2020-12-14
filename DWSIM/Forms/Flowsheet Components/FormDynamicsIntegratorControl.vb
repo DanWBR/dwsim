@@ -48,9 +48,6 @@ Public Class FormDynamicsIntegratorControl
     Private Sub btnRun_Click(sender As Object, e As EventArgs) Handles btnRun.Click
 
         If Flowsheet.DynamicMode Then
-            If My.Settings.SendCrashAndUsageAnalytics Then
-                Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Dynamics Integrator Run Command")
-            End If
             RunIntegrator(False, False)
         Else
             Flowsheet.ShowMessage(DWSIM.App.GetLocalString("DynamicsDisabled"), Interfaces.IFlowsheet.MessageType.Warning)
