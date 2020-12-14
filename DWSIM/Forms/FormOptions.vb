@@ -51,8 +51,6 @@ Public Class FormOptions
         Me.cbGPU.Enabled = Me.chkEnableGPUProcessing.Checked
         Me.tbGPUCaps.Enabled = Me.chkEnableGPUProcessing.Checked
         Me.cbParallelism.Enabled = Me.chkEnableParallelCalcs.Checked
-        Me.cbTaskScheduler.SelectedIndex = My.Settings.TaskScheduler
-        Me.tbMaxThreadMultiplier.Text = My.Settings.MaxThreadMultiplier
         Me.chkEnableSIMD.Checked = My.Settings.UseSIMDExtensions
 
         Me.chkEnableInspector.Checked = My.Settings.InspectorEnabled
@@ -500,22 +498,18 @@ Public Class FormOptions
                 GroupBoxAzureConfig.Visible = False
                 GroupBoxNetworkComputerConfig.Visible = False
                 tbSolverTimeout.Enabled = False
-                GroupBoxBGThreadConfig.Visible = False
             Case 1, 2
                 GroupBoxAzureConfig.Visible = False
                 GroupBoxNetworkComputerConfig.Visible = False
                 tbSolverTimeout.Enabled = True
-                GroupBoxBGThreadConfig.Visible = True
             Case 3
                 GroupBoxAzureConfig.Visible = True
                 GroupBoxNetworkComputerConfig.Visible = False
                 tbSolverTimeout.Enabled = True
-                GroupBoxBGThreadConfig.Visible = False
             Case 4
                 GroupBoxAzureConfig.Visible = False
                 GroupBoxNetworkComputerConfig.Visible = True
                 tbSolverTimeout.Enabled = True
-                GroupBoxBGThreadConfig.Visible = False
         End Select
     End Sub
 
@@ -576,15 +570,6 @@ Public Class FormOptions
 
     Private Sub chkSaveBackupFile_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveBackupFile.CheckedChanged
         My.Settings.SaveBackupFile = chkSaveBackupFile.Checked
-    End Sub
-
-    Private Sub cbTaskScheduler_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbTaskScheduler.SelectedIndexChanged
-        If cbTaskScheduler.SelectedIndex = 0 Then tbMaxThreadMultiplier.Enabled = False Else tbMaxThreadMultiplier.Enabled = True
-        My.Settings.TaskScheduler = cbTaskScheduler.SelectedIndex
-    End Sub
-
-    Private Sub tbMaxThreadMultiplier_TextChanged(sender As Object, e As EventArgs) Handles tbMaxThreadMultiplier.TextChanged
-        My.Settings.MaxThreadMultiplier = tbMaxThreadMultiplier.Text
     End Sub
 
     Private Sub chkEnableSIMD_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableSIMD.CheckedChanged

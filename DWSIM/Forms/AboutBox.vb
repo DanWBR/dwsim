@@ -19,15 +19,7 @@ Public Class AboutBox
 
         Dim updfile = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "version.info"
 
-        Version.Text = "Version " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor
-        If File.Exists(updfile) Then
-            Dim vinfo As Integer = 0
-            Integer.TryParse(File.ReadAllText(updfile), vinfo)
-            If vinfo > 0 Then Version.Text += " Update " & vinfo
-        End If
-        If My.Settings.PreviewVersion <> "" Then
-            Version.Text += " " & My.Settings.PreviewVersion
-        End If
+        Version.Text = "Version " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build
 
         lblCurrentVersion.Text = Version.Text + " (Classic UI)"
 

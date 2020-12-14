@@ -40,12 +40,6 @@ Partial Class FormOptions
         Me.Label11 = New System.Windows.Forms.Label()
         Me.cbSolverMode = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.GroupBoxBGThreadConfig = New System.Windows.Forms.GroupBox()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.tbMaxThreadMultiplier = New System.Windows.Forms.TextBox()
-        Me.cbTaskScheduler = New System.Windows.Forms.ComboBox()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBoxAzureConfig = New System.Windows.Forms.GroupBox()
         Me.tbServiceBusNamespace = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -138,7 +132,6 @@ Partial Class FormOptions
         Me.FaTabStripItem1.SuspendLayout()
         Me.GroupBox18.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
-        Me.GroupBoxBGThreadConfig.SuspendLayout()
         Me.GroupBoxAzureConfig.SuspendLayout()
         Me.GroupBoxNetworkComputerConfig.SuspendLayout()
         Me.GroupBox7.SuspendLayout()
@@ -178,11 +171,11 @@ Partial Class FormOptions
         '
         'FaTabStripItem1
         '
-        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         Me.FaTabStripItem1.BackColor = System.Drawing.SystemColors.Window
         Me.FaTabStripItem1.Controls.Add(Me.GroupBox18)
         Me.FaTabStripItem1.Controls.Add(Me.GroupBox2)
         Me.FaTabStripItem1.Controls.Add(Me.GroupBox7)
+        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
         '
         'GroupBox18
@@ -213,7 +206,6 @@ Partial Class FormOptions
         Me.GroupBox2.Controls.Add(Me.Label11)
         Me.GroupBox2.Controls.Add(Me.cbSolverMode)
         Me.GroupBox2.Controls.Add(Me.Label2)
-        Me.GroupBox2.Controls.Add(Me.GroupBoxBGThreadConfig)
         Me.GroupBox2.Controls.Add(Me.GroupBoxAzureConfig)
         Me.GroupBox2.Controls.Add(Me.GroupBoxNetworkComputerConfig)
         Me.GroupBox2.Name = "GroupBox2"
@@ -257,50 +249,11 @@ Partial Class FormOptions
         resources.ApplyResources(Me.Label2, "Label2")
         Me.Label2.Name = "Label2"
         '
-        'GroupBoxBGThreadConfig
-        '
-        resources.ApplyResources(Me.GroupBoxBGThreadConfig, "GroupBoxBGThreadConfig")
-        Me.GroupBoxBGThreadConfig.Controls.Add(Me.Label10)
-        Me.GroupBoxBGThreadConfig.Controls.Add(Me.tbMaxThreadMultiplier)
-        Me.GroupBoxBGThreadConfig.Controls.Add(Me.cbTaskScheduler)
-        Me.GroupBoxBGThreadConfig.Controls.Add(Me.Label9)
-        Me.GroupBoxBGThreadConfig.Controls.Add(Me.Label1)
-        Me.GroupBoxBGThreadConfig.Name = "GroupBoxBGThreadConfig"
-        Me.GroupBoxBGThreadConfig.TabStop = False
-        '
-        'Label10
-        '
-        resources.ApplyResources(Me.Label10, "Label10")
-        Me.Label10.Name = "Label10"
-        '
-        'tbMaxThreadMultiplier
-        '
-        resources.ApplyResources(Me.tbMaxThreadMultiplier, "tbMaxThreadMultiplier")
-        Me.tbMaxThreadMultiplier.Name = "tbMaxThreadMultiplier"
-        '
-        'cbTaskScheduler
-        '
-        resources.ApplyResources(Me.cbTaskScheduler, "cbTaskScheduler")
-        Me.cbTaskScheduler.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbTaskScheduler.FormattingEnabled = True
-        Me.cbTaskScheduler.Items.AddRange(New Object() {resources.GetString("cbTaskScheduler.Items"), resources.GetString("cbTaskScheduler.Items1"), resources.GetString("cbTaskScheduler.Items2")})
-        Me.cbTaskScheduler.Name = "cbTaskScheduler"
-        '
-        'Label9
-        '
-        resources.ApplyResources(Me.Label9, "Label9")
-        Me.Label9.Name = "Label9"
-        '
-        'Label1
-        '
-        resources.ApplyResources(Me.Label1, "Label1")
-        Me.Label1.Name = "Label1"
-        '
         'GroupBoxAzureConfig
         '
-        resources.ApplyResources(Me.GroupBoxAzureConfig, "GroupBoxAzureConfig")
         Me.GroupBoxAzureConfig.Controls.Add(Me.tbServiceBusNamespace)
         Me.GroupBoxAzureConfig.Controls.Add(Me.Label8)
+        resources.ApplyResources(Me.GroupBoxAzureConfig, "GroupBoxAzureConfig")
         Me.GroupBoxAzureConfig.Name = "GroupBoxAzureConfig"
         Me.GroupBoxAzureConfig.TabStop = False
         '
@@ -316,11 +269,11 @@ Partial Class FormOptions
         '
         'GroupBoxNetworkComputerConfig
         '
-        resources.ApplyResources(Me.GroupBoxNetworkComputerConfig, "GroupBoxNetworkComputerConfig")
         Me.GroupBoxNetworkComputerConfig.Controls.Add(Me.tbServerPort)
         Me.GroupBoxNetworkComputerConfig.Controls.Add(Me.tbServerIP)
         Me.GroupBoxNetworkComputerConfig.Controls.Add(Me.Label15)
         Me.GroupBoxNetworkComputerConfig.Controls.Add(Me.Label16)
+        resources.ApplyResources(Me.GroupBoxNetworkComputerConfig, "GroupBoxNetworkComputerConfig")
         Me.GroupBoxNetworkComputerConfig.Name = "GroupBoxNetworkComputerConfig"
         Me.GroupBoxNetworkComputerConfig.TabStop = False
         '
@@ -395,9 +348,9 @@ Partial Class FormOptions
         '
         'cbParallelism
         '
-        resources.ApplyResources(Me.cbParallelism, "cbParallelism")
         Me.cbParallelism.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbParallelism.FormattingEnabled = True
+        resources.ApplyResources(Me.cbParallelism, "cbParallelism")
         Me.cbParallelism.Name = "cbParallelism"
         '
         'Label6
@@ -412,11 +365,11 @@ Partial Class FormOptions
         '
         'TabPage1
         '
-        resources.ApplyResources(Me.TabPage1, "TabPage1")
         Me.TabPage1.Controls.Add(Me.GroupBox13)
         Me.TabPage1.Controls.Add(Me.GroupBox5)
         Me.TabPage1.Controls.Add(Me.GroupBox12)
         Me.TabPage1.Controls.Add(Me.GroupBox11)
+        resources.ApplyResources(Me.TabPage1, "TabPage1")
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
@@ -536,10 +489,10 @@ Partial Class FormOptions
         '
         'FaTabStripItem3
         '
-        resources.ApplyResources(Me.FaTabStripItem3, "FaTabStripItem3")
         Me.FaTabStripItem3.BackColor = System.Drawing.SystemColors.Window
         Me.FaTabStripItem3.Controls.Add(Me.GroupBox4)
         Me.FaTabStripItem3.Controls.Add(Me.GroupBox10)
+        resources.ApplyResources(Me.FaTabStripItem3, "FaTabStripItem3")
         Me.FaTabStripItem3.Name = "FaTabStripItem3"
         '
         'GroupBox4
@@ -559,11 +512,11 @@ Partial Class FormOptions
         '
         'dgvdb
         '
-        resources.ApplyResources(Me.dgvdb, "dgvdb")
         Me.dgvdb.AllowUserToAddRows = False
         Me.dgvdb.AllowUserToDeleteRows = False
         Me.dgvdb.AllowUserToResizeColumns = False
         Me.dgvdb.AllowUserToResizeRows = False
+        resources.ApplyResources(Me.dgvdb, "dgvdb")
         Me.dgvdb.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvdb.BackgroundColor = System.Drawing.SystemColors.Control
         Me.dgvdb.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
@@ -655,11 +608,11 @@ Partial Class FormOptions
         '
         'dgvIPDB
         '
-        resources.ApplyResources(Me.dgvIPDB, "dgvIPDB")
         Me.dgvIPDB.AllowUserToAddRows = False
         Me.dgvIPDB.AllowUserToDeleteRows = False
         Me.dgvIPDB.AllowUserToResizeColumns = False
         Me.dgvIPDB.AllowUserToResizeRows = False
+        resources.ApplyResources(Me.dgvIPDB, "dgvIPDB")
         Me.dgvIPDB.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvIPDB.BackgroundColor = System.Drawing.SystemColors.Control
         Me.dgvIPDB.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
@@ -718,9 +671,9 @@ Partial Class FormOptions
         '
         'FaTabStripItem2
         '
-        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         Me.FaTabStripItem2.BackColor = System.Drawing.SystemColors.Window
         Me.FaTabStripItem2.Controls.Add(Me.GroupBox3)
+        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         Me.FaTabStripItem2.Name = "FaTabStripItem2"
         '
         'GroupBox3
@@ -791,7 +744,6 @@ Partial Class FormOptions
         '
         'FaTabStripItem7
         '
-        resources.ApplyResources(Me.FaTabStripItem7, "FaTabStripItem7")
         Me.FaTabStripItem7.BackColor = System.Drawing.SystemColors.Window
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox1)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox17)
@@ -799,12 +751,13 @@ Partial Class FormOptions
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox14)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox9)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox6)
+        resources.ApplyResources(Me.FaTabStripItem7, "FaTabStripItem7")
         Me.FaTabStripItem7.Name = "FaTabStripItem7"
         '
         'GroupBox1
         '
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Controls.Add(Me.chkShareData)
+        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
         '
@@ -852,8 +805,8 @@ Partial Class FormOptions
         '
         'GroupBox15
         '
-        resources.ApplyResources(Me.GroupBox15, "GroupBox15")
         Me.GroupBox15.Controls.Add(Me.chkIgnoreCompConstData)
+        resources.ApplyResources(Me.GroupBox15, "GroupBox15")
         Me.GroupBox15.Name = "GroupBox15"
         Me.GroupBox15.TabStop = False
         '
@@ -885,10 +838,10 @@ Partial Class FormOptions
         '
         'ComboBoxUILanguage
         '
-        resources.ApplyResources(Me.ComboBoxUILanguage, "ComboBoxUILanguage")
         Me.ComboBoxUILanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBoxUILanguage.FormattingEnabled = True
         Me.ComboBoxUILanguage.Items.AddRange(New Object() {resources.GetString("ComboBoxUILanguage.Items"), resources.GetString("ComboBoxUILanguage.Items1")})
+        resources.ApplyResources(Me.ComboBoxUILanguage, "ComboBoxUILanguage")
         Me.ComboBoxUILanguage.Name = "ComboBoxUILanguage"
         '
         'Label22
@@ -911,10 +864,10 @@ Partial Class FormOptions
         '
         'cbDebugLevel
         '
-        resources.ApplyResources(Me.cbDebugLevel, "cbDebugLevel")
         Me.cbDebugLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbDebugLevel.FormattingEnabled = True
         Me.cbDebugLevel.Items.AddRange(New Object() {resources.GetString("cbDebugLevel.Items"), resources.GetString("cbDebugLevel.Items1"), resources.GetString("cbDebugLevel.Items2"), resources.GetString("cbDebugLevel.Items3")})
+        resources.ApplyResources(Me.cbDebugLevel, "cbDebugLevel")
         Me.cbDebugLevel.Name = "cbDebugLevel"
         '
         'Label13
@@ -966,8 +919,6 @@ Partial Class FormOptions
         Me.GroupBox18.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
-        Me.GroupBoxBGThreadConfig.ResumeLayout(False)
-        Me.GroupBoxBGThreadConfig.PerformLayout()
         Me.GroupBoxAzureConfig.ResumeLayout(False)
         Me.GroupBoxAzureConfig.PerformLayout()
         Me.GroupBoxNetworkComputerConfig.ResumeLayout(False)
@@ -1065,12 +1016,6 @@ Partial Class FormOptions
     Public WithEvents chkSolverBreak As System.Windows.Forms.CheckBox
     Public WithEvents chkStorePreviousSolutions As System.Windows.Forms.CheckBox
     Public WithEvents chkSaveBackupFile As System.Windows.Forms.CheckBox
-    Friend WithEvents GroupBoxBGThreadConfig As System.Windows.Forms.GroupBox
-    Friend WithEvents Label10 As System.Windows.Forms.Label
-    Friend WithEvents tbMaxThreadMultiplier As System.Windows.Forms.TextBox
-    Friend WithEvents cbTaskScheduler As System.Windows.Forms.ComboBox
-    Friend WithEvents Label9 As System.Windows.Forms.Label
-    Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents GroupBoxAzureConfig As System.Windows.Forms.GroupBox
     Friend WithEvents tbServiceBusNamespace As System.Windows.Forms.TextBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
