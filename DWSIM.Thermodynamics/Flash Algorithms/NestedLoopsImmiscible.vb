@@ -77,7 +77,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             If CompoundProperties Is Nothing Then CompoundProperties = PP.DW_GetConstantProperties
 
-            Dim keycomps As String() = FlashSettings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestCompIds).ToArray(Globalization.CultureInfo.InvariantCulture, Type.GetType("System.String"))
+            Dim keycomps As String() = New String() {"Water"}
 
             If keycomps.Count = 0 Then
                 Throw New Exception("Immiscible VLLE Flash Algorithm error: you must select an immiscible compound for liquid phase splitting.")

@@ -127,6 +127,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             settings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType) = "Default"
 
+            settings(Interfaces.Enums.FlashSetting.ImmiscibleWaterOption) = False
+
             Return settings
 
         End Function
@@ -1442,6 +1444,9 @@ will converge to this solution.")
                 End If
                 If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType) Then
                     FlashSettings.Add(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType, "Default")
+                End If
+                If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.ImmiscibleWaterOption) Then
+                    FlashSettings.Add(Interfaces.Enums.FlashSetting.ImmiscibleWaterOption, False)
                 End If
             End If
 

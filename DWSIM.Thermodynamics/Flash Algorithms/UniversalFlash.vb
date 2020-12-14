@@ -84,17 +84,26 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     End If
                 Case "VLLE"
                     'VLLE
-                    If Settings.ExcelMode Then
-                        Try
-                            Dim nl As New NestedLoops3PV3 With {.FlashSettings = FlashSettings}
-                            result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-                        Catch ex As Exception
-                            errflag = True
-                        End Try
+                    If Not FlashSettings(FlashSetting.ImmiscibleWaterOption) Then
+                        If Settings.ExcelMode Then
+                            Try
+                                Dim nl As New NestedLoops3PV3 With {.FlashSettings = FlashSettings}
+                                result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                            Catch ex As Exception
+                                errflag = True
+                            End Try
+                        Else
+                            Dim gmin As New GibbsMinimizationMulti With {.FlashSettings = FlashSettings}
+                            Try
+                                result = gmin.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                            Catch ex As Exception
+                                errflag = True
+                            End Try
+                        End If
                     Else
-                        Dim gmin As New GibbsMinimizationMulti With {.FlashSettings = FlashSettings}
+                        Dim imm As New NestedLoopsImmiscible With {.FlashSettings = FlashSettings}
                         Try
-                            result = gmin.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                            result = imm.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
                         Catch ex As Exception
                             errflag = True
                         End Try

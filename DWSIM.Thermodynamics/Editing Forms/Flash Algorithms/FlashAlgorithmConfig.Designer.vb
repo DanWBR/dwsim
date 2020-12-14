@@ -26,6 +26,7 @@ Partial Class FlashAlgorithmConfig
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPageGeneral = New System.Windows.Forms.TabPage()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.chkImmiscible = New System.Windows.Forms.CheckBox()
         Me.cbFlashType = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.tbPT_DampingFactor = New System.Windows.Forms.TextBox()
@@ -87,6 +88,7 @@ Partial Class FlashAlgorithmConfig
         'GroupBox4
         '
         resources.ApplyResources(Me.GroupBox4, "GroupBox4")
+        Me.GroupBox4.Controls.Add(Me.chkImmiscible)
         Me.GroupBox4.Controls.Add(Me.cbFlashType)
         Me.GroupBox4.Controls.Add(Me.Label9)
         Me.GroupBox4.Controls.Add(Me.tbPT_DampingFactor)
@@ -107,6 +109,11 @@ Partial Class FlashAlgorithmConfig
         Me.GroupBox4.Controls.Add(Me.Label24)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.TabStop = False
+        '
+        'chkImmiscible
+        '
+        resources.ApplyResources(Me.chkImmiscible, "chkImmiscible")
+        Me.chkImmiscible.Name = "chkImmiscible"
         '
         'cbFlashType
         '
@@ -368,4 +375,5 @@ Partial Class FlashAlgorithmConfig
     Friend WithEvents Label30 As Label
     Friend WithEvents cbFlashType As ComboBox
     Friend WithEvents Label9 As Label
+    Public WithEvents chkImmiscible As CheckBox
 End Class

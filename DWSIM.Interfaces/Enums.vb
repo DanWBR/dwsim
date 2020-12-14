@@ -275,6 +275,8 @@ Namespace Enums
 
         ForceEquilibriumCalculationType = 25
 
+        ImmiscibleWaterOption = 26
+
     End Enum
 
     Public Enum FlashCalculationType

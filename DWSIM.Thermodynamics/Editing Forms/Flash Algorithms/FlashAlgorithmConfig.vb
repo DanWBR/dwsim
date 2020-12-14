@@ -50,6 +50,8 @@ Public Class FlashAlgorithmConfig
 
         chkFastModeNL.Checked = Settings(Interfaces.Enums.FlashSetting.NL_FastMode)
 
+        chkImmiscible.Checked = Settings(Interfaces.Enums.FlashSetting.ImmiscibleWaterOption)
+
         Select Case Settings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType)
             Case "Default"
                 cbFlashType.SelectedIndex = 0
@@ -112,6 +114,8 @@ Public Class FlashAlgorithmConfig
                     Settings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType) = "SVLLE"
             End Select
 
+            Settings(Interfaces.Enums.FlashSetting.ImmiscibleWaterOption) = chkImmiscible.Checked
+
         Catch ex As Exception
 
             MessageBox.Show("Error parsing input. Some settings may not have been updated.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -120,4 +124,11 @@ Public Class FlashAlgorithmConfig
 
     End Sub
 
+    Private Sub cbFlashType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbFlashType.SelectedIndexChanged
+        If cbFlashType.SelectedIndex = 2 Then
+            chkImmiscible.Enabled = True
+        Else
+            chkImmiscible.Enabled = False
+        End If
+    End Sub
 End Class

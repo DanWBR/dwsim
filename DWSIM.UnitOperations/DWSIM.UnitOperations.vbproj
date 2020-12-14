@@ -123,6 +123,9 @@
     <Reference Include="Jolt.Testing.GeneratedTypes">
       <HintPath>..\DWSIM\References\Jolt.Testing.GeneratedTypes.dll</HintPath>
     </Reference>
+    <Reference Include="LibOptimization, Version=1.12.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LibOptimization.1.12.4\lib\net46\LibOptimization.dll</HintPath>
+    </Reference>
     <Reference Include="Mapack">
       <HintPath>..\DWSIM\References\Mapack.dll</HintPath>
     </Reference>
