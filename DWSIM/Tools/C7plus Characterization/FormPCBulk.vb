@@ -435,6 +435,8 @@ Public Class FormPCBulk
                 Select Case Me.ComboBoxPC.SelectedItem.ToString
                     Case "Riazi-Daubert (1985)"
                         .Critical_Pressure = PropertyMethods.Pc_RiaziDaubert(.NBP, .PF_SG)
+                    Case "Riazi (2005)"
+                        .Critical_Pressure = PropertyMethods.Pc_Riazi(.NBP, .PF_SG)
                     Case "Lee-Kesler (1976)"
                         .Critical_Pressure = PropertyMethods.Pc_LeeKesler(.NBP, .PF_SG)
                     Case "Farah (2006)"

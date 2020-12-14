@@ -32,7 +32,7 @@ Namespace PetroleumCharacterization.Methods
         Public Shared Function Tc_RiaziDaubert(ByVal PEMe As Double, ByVal d15 As Double) As Double
             Dim t1, t2 As Double
             t1 = -0.0009314 * PEMe - 0.544442 * d15 + 0.00064791 * PEMe * d15
-            t2 = 9.5233 * Exp(-0.0009314 * PEMe - 0.544442 * d15 + 0.00064791 * PEMe * d15) * PEMe ^ 0.81067 * d15 ^ 0.53691
+            t2 = 9.5233 * Exp(t1) * PEMe ^ 0.81067 * d15 ^ 0.53691
             Return t2
         End Function
 
@@ -65,6 +65,20 @@ Namespace PetroleumCharacterization.Methods
         End Function
 
         ''' <summary>
+        ''' Calculates Critical Pressure of a petroleum fraction with Riazi method (2005).
+        ''' </summary>
+        ''' <param name="PEMe">Median Boiling Point of the fraction, K.</param>
+        ''' <param name="d15">Specific Gravity of the fraction at 15,6/15,6 °C.</param>
+        ''' <returns>Critical Pressure of the fraction, Pa.</returns>
+        ''' <remarks>Recommended for molecular weights between 70 and 300.</remarks>
+        Public Shared Function Pc_Riazi(ByVal PEMe As Double, ByVal d15 As Double) As Double
+            Dim t1, t2 As Double
+            t1 = -0.0135 * PEMe - 0.3129 * d15 + 0.009174 * PEMe * d15
+            t2 = 695750.0 * Exp(t1) * PEMe ^ 0.6791 * d15 ^ -0.6807
+            Return t2
+        End Function
+
+        ''' <summary>
         ''' Calculates the Critical Temperature of a petroleum fraction with Lee-Kesler method (1976).
         ''' </summary>
         ''' <param name="PEMe">Median Boiling Point of the fraction, K.</param>
@@ -83,7 +97,7 @@ Namespace PetroleumCharacterization.Methods
         ''' <returns>Critical Pressure of the fraction, Pa.</returns>
         ''' <remarks>Recommended for molecular weights between 70 and 300.</remarks>
         Public Shared Function Pc_LeeKesler(ByVal PEMe As Double, ByVal d15 As Double) As Double
-            Return 100000.0 / 0.986923 * Exp(5.689 - 0.0566 / d15 - (0.43639 + 4.1216 / d15 + 0.21343 / d15 ^ 2) * 0.001 * PEMe + (0.47579 + 1.182 / d15 + 0.15302 / d15 ^ 2) * 0.000001 * PEMe ^ 2 - (2.4505 + 9.9099 / d15 ^ 2) * 0.0000000001 * PEMe ^ 3)
+            Return 100000.0 * Exp(5.689 - 0.0566 / d15 - (0.43639 + 4.1216 / d15 + 0.21343 / d15 ^ 2) * 0.001 * PEMe + (0.47579 + 1.182 / d15 + 0.15302 / d15 ^ 2) * 0.000001 * PEMe ^ 2 - (2.4505 + 9.9099 / d15 ^ 2) * 0.0000000001 * PEMe ^ 3)
         End Function
 
         ''' <summary>
@@ -202,7 +216,7 @@ Namespace PetroleumCharacterization.Methods
         ''' <remarks>For light and medium fractions (PEMe 36~560 °C, d15 0.9688~0.63).</remarks>
         Public Shared Function MW_Riazi(ByVal PEMe As Double, ByVal d15 As Double) As Double
             Dim t1 As Double
-            t1 = 0.0002097 * PEMe - 7.78 * d15 + 0.00208476 * PEMe * d15
+            t1 = 0.0002097 * PEMe - 7.78712 * d15 + 0.00208476 * PEMe * d15
             Return 42.965 * Exp(t1) * PEMe ^ 1.26007 * d15 ^ 4.98308
         End Function
 
