@@ -1533,28 +1533,36 @@ Namespace Reactors
 
                 If prop.Contains("_") Then
 
-                    Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+                    Try
 
-                    Select Case propidx
-                        Case 0
-                            value = su.deltaP
-                        Case 1
-                            value = su.time
-                        Case 2
-                            value = su.volume
-                        Case 3
-                            value = su.distance
-                        Case 4
-                            value = su.density
-                        Case 5
-                            value = su.diameter
-                        Case 6
-                            value = ""
-                        Case 7
-                            value = su.deltaT
-                        Case 8
-                            value = su.heatflow
-                    End Select
+                        Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+
+                        Select Case propidx
+                            Case 0
+                                value = su.deltaP
+                            Case 1
+                                value = su.time
+                            Case 2
+                                value = su.volume
+                            Case 3
+                                value = su.distance
+                            Case 4
+                                value = su.density
+                            Case 5
+                                value = su.diameter
+                            Case 6
+                                value = ""
+                            Case 7
+                                value = su.deltaT
+                            Case 8
+                                value = su.heatflow
+                        End Select
+
+                    Catch ex As Exception
+
+                        Return ""
+
+                    End Try
 
                 Else
 

@@ -839,6 +839,7 @@ Namespace Reactors
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As String
+
             Dim u0 As String = MyBase.GetPropertyUnit(prop, su)
 
             If u0 <> "NF" Then
@@ -850,15 +851,25 @@ Namespace Reactors
 
                 If prop.Contains("_") Then
 
-                    Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+                    Try
 
-                    Select Case propidx
+                        Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-                        Case 0
-                            'PROP_HT_0	Pressure Drop
-                            value = su.deltaP
+                        Select Case propidx
 
-                    End Select
+                            Case 0
+                                'PROP_HT_0	Pressure Drop
+                                value = su.deltaP
+
+                        End Select
+
+                        Return value
+
+                    Catch ex As Exception
+
+                        Return ""
+
+                    End Try
 
                 Else
 

@@ -1638,17 +1638,27 @@ Namespace Reactors
 
                 If prop.Contains("_") Then
 
-                    Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+                    Try
 
-                    Select Case propidx
+                        Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-                        Case 0
-                            'PROP_GR_0	Pressure Drop
-                            value = su.deltaP
-                        Case 1
-                            'PROP_GR_1	Outlet Temperature
-                            value = su.temperature
-                    End Select
+                        Select Case propidx
+
+                            Case 0
+                                'PROP_GR_0	Pressure Drop
+                                value = su.deltaP
+                            Case 1
+                                'PROP_GR_1	Outlet Temperature
+                                value = su.temperature
+                        End Select
+
+                        Return value
+
+                    Catch ex As Exception
+
+                        Return ""
+
+                    End Try
 
                 Else
 

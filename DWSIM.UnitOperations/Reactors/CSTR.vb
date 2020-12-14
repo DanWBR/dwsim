@@ -1458,23 +1458,30 @@ out:        Dim ms1, ms2 As MaterialStream
 
                 If prop.Contains("_") Then
 
-                    Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+                    Try
 
-                    Select Case propidx
-                        Case 0
-                            value = su.deltaP
-                        Case 1
-                            value = su.time
-                        Case 2
-                            value = su.volume
-                        Case 3
-                            value = su.deltaT
-                        Case 4
-                            value = su.heatflow
-                        Case 5
-                            value = su.temperature
-                    End Select
+                        Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
+                        Select Case propidx
+                            Case 0
+                                value = su.deltaP
+                            Case 1
+                                value = su.time
+                            Case 2
+                                value = su.volume
+                            Case 3
+                                value = su.deltaT
+                            Case 4
+                                value = su.heatflow
+                            Case 5
+                                value = su.temperature
+                        End Select
+
+                    Catch ex As Exception
+
+                        Return ""
+
+                    End Try
 
                 Else
 

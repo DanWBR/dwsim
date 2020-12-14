@@ -1016,6 +1016,10 @@ Public Class FormFlowsheet
 
     Private Sub Restorelayout(sender As Object, e As EventArgs) Handles RestoreLayoutTSMI.Click
 
+        If My.Settings.SendCrashAndUsageAnalytics Then
+            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Restored Layout")
+        End If
+
         FormLog.DockState = DockState.DockBottom
         FormMatList.DockState = DockState.Document
         FormSpreadsheet.DockState = DockState.Document
@@ -1039,22 +1043,37 @@ Public Class FormFlowsheet
     End Sub
 
     Public Sub tsmiUndo_Click(sender As Object, e As EventArgs) Handles tsmiUndo.Click
+        If My.Settings.SendCrashAndUsageAnalytics Then
+            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Triggered Undo")
+        End If
         tsbUndo_Click(sender, e)
     End Sub
 
     Public Sub tsmiRedo_Click(sender As Object, e As EventArgs) Handles tsmiRedo.Click
+        If My.Settings.SendCrashAndUsageAnalytics Then
+            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Triggered Redo")
+        End If
         tsbRedo_Click(sender, e)
     End Sub
 
     Public Sub tsmiCut_Click(sender As Object, e As EventArgs) Handles tsmiCut.Click
+        If My.Settings.SendCrashAndUsageAnalytics Then
+            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Triggered Cut")
+        End If
         CutObjects()
     End Sub
 
     Public Sub tsmiCopy_Click(sender As Object, e As EventArgs) Handles tsmiCopy.Click
+        If My.Settings.SendCrashAndUsageAnalytics Then
+            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Triggered Copy")
+        End If
         CopyObjects()
     End Sub
 
     Public Sub tsmiPaste_Click(sender As Object, e As EventArgs) Handles tsmiPaste.Click
+        If My.Settings.SendCrashAndUsageAnalytics Then
+            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Triggered Paste")
+        End If
         PasteObjects()
     End Sub
 
@@ -1325,6 +1344,10 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub tsmiCloseOpenedEditors_Click(sender As Object, e As EventArgs) Handles tsmiCloseOpenedEditors.Click
+
+        If My.Settings.SendCrashAndUsageAnalytics Then
+            Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Closed Editors")
+        End If
 
         Me.UIThreadInvoke(Sub()
                               For Each obj In Me.SimulationObjects.Values
