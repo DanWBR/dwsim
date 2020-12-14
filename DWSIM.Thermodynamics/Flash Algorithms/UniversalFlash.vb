@@ -84,7 +84,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     End If
                 Case "VLLE"
                     'VLLE
-                    If Not FlashSettings(FlashSetting.ImmiscibleWaterOption) Then
+                    If Not FlashSettings(FlashSetting.ImmiscibleWaterOption) = True Then
                         If Settings.ExcelMode Then
                             Try
                                 Dim nl As New NestedLoops3PV3 With {.FlashSettings = FlashSettings}

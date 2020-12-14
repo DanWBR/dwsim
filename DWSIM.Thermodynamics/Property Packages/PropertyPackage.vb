@@ -11614,6 +11614,9 @@ Final3:
                 If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType) Then
                     FlashSettings.Add(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType, "Default")
                 End If
+                If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.ImmiscibleWaterOption) Then
+                    FlashSettings.Add(Interfaces.Enums.FlashSetting.ImmiscibleWaterOption, False)
+                End If
             End If
 
         End Function
