@@ -25,17 +25,7 @@ Public NotInheritable Class SplashScreen
 
     Private Sub SplashScreen_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        Dim updfile = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "version.info"
-        lblVersion.Text = "Version " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor
-#If PREVIEW Then
-        lblVersion.Text += " Preview 1"
-#Else
-        If File.Exists(updfile) Then
-            Dim vinfo As Integer = 0
-            Integer.TryParse(File.ReadAllText(updfile), vinfo)
-            If vinfo > 0 Then lblVersion.Text += " Update " & vinfo
-        End If
-#End If
+        lblVersion.Text = "Version " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build
 
         If Environment.Is64BitProcess Then
             lblVersion.Text += " (" + My.Application.Info.Version.ToString + ", Classic UI, 64-bit)"

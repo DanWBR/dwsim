@@ -1,5 +1,6 @@
 ﻿Adam Kovalovszki
 Adam Spencer
+Adrian Wegmann
 Alberto Marzi
 Alex Platon
 Alexander Semenyak
@@ -57,6 +58,7 @@ Marcelo Accorsi Miranda
 Marcos A F Silva
 Martin Heiser
 Michael Papantoniou
+Mikhail Evtushenko
 Nikita Petrosyan
 Ozmeister
 Parthib Rao

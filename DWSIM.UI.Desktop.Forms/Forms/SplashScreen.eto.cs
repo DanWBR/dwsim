@@ -49,20 +49,10 @@ namespace DWSIM.UI.Forms
 
             ClientSize = new Size(w, h);
 
-            var lbl1a = new Label { Style = "splashlabels1", Text = "Version".Localize() + " " + Assembly.GetExecutingAssembly().GetName().Version.Major.ToString() + "." + Assembly.GetExecutingAssembly().GetName().Version.Minor.ToString() };
-
-            var updfile = AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "version.info";
-
-#if PREVIEW
-            lbl1a.Text += " (Preview)";
-#else
-            if (File.Exists(updfile))
-            {
-                int vinfo = 0;
-                int.TryParse(File.ReadAllText(updfile), out vinfo);
-                if (vinfo > 0) lbl1a.Text += " Update " + vinfo;
-            }
-#endif
+            var lbl1a = new Label { Style = "splashlabels1", Text = "Version".Localize() + " " + Assembly.GetExecutingAssembly().GetName().Version.Major.ToString() +
+                "." + Assembly.GetExecutingAssembly().GetName().Version.Minor.ToString() +
+                "." + Assembly.GetExecutingAssembly().GetName().Version.Build.ToString()
+            };
 
             if (Environment.Is64BitProcess)
             {
