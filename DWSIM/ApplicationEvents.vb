@@ -76,7 +76,7 @@ Namespace My
 
             Directory.SetCurrentDirectory(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location))
 
-            Control.CheckForIllegalCrossThreadCalls = False
+            Control.CheckForIllegalCrossThreadCalls = True
 
             'upgrade settings from previous build, if applicable.
             If My.Settings.UpgradeRequired Then

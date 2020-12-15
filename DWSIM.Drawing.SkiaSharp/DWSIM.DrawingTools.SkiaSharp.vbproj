@@ -165,6 +165,7 @@
     <Compile Include="GraphicObjects\Shapes\ConversionReactor.vb" />
     <Compile Include="GraphicObjects\Shapes\Cooler.vb" />
     <Compile Include="GraphicObjects\Shapes\CSTR.vb" />
+    <Compile Include="GraphicObjects\Shapes\DummyGraphic.vb" />
     <Compile Include="GraphicObjects\Shapes\ExternalUnitOperationGraphic.vb" />
     <Compile Include="GraphicObjects\Shapes\Script.vb" />
     <Compile Include="GraphicObjects\Shapes\EnergyRecycle.vb" />

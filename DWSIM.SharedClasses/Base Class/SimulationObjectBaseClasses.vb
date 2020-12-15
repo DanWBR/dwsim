@@ -447,10 +447,10 @@ Namespace UnitOperations
         ''' <remarks></remarks>
         <Xml.Serialization.XmlIgnore()> Overridable Property EnergyFlow() As Nullable(Of Double)
             Get
-                Throw New NotImplementedException()
+                Return Nothing
             End Get
             Set(ByVal value As Nullable(Of Double))
-                Throw New NotImplementedException()
+
             End Set
         End Property
 

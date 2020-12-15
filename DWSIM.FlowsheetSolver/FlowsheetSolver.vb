@@ -763,7 +763,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
     ''' <param name="frompgrid">Starts the search from the edited object if the propert was changed from the property grid.</param>
     ''' <returns>A list of objects to be calculated in the flowsheet.</returns>
     ''' <remarks></remarks>
-    Private Shared Function GetSolvingList(fobj As Object, frompgrid As Boolean) As Object()
+    Public Shared Function GetSolvingList(fobj As Object, frompgrid As Boolean) As Object()
 
         Dim fgui As IFlowsheet = TryCast(fobj, IFlowsheet)
         Dim fbag As IFlowsheet = TryCast(fobj, IFlowsheet)
@@ -1297,10 +1297,15 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                                      End If
 
                                                      If frompgrid Then
-                                                         objl = GetSolvingList(fobj, False)
-                                                         lists = objl(1)
-                                                         filteredlist = objl(2)
-                                                         objstack = objl(0)
+                                                         Try
+                                                             objl = GetSolvingList(fobj, False)
+                                                             lists = objl(1)
+                                                             filteredlist = objl(2)
+                                                             objstack = objl(0)
+                                                         Catch ex As Exception
+                                                             GlobalSettings.Settings.CalculatorBusy = False
+                                                             Throw ex
+                                                         End Try
                                                      End If
 
                                                      icount += 1
@@ -1538,7 +1543,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
             fqueue.CalculationQueue.Enqueue(objargs)
 
-            Return SolveFlowsheet(fobj, Settings.SolverMode, , True)
+            Return SolveFlowsheet(fobj, Settings.SolverMode, Nothing, True)
 
         Else
 

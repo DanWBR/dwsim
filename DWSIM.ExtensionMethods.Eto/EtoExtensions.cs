@@ -7,6 +7,7 @@ using System.IO;
 using VerticalAlignment = Eto.Forms.VerticalAlignment;
 using DWSIM.ExtensionMethods.Eto;
 using System.Globalization;
+using System.Linq;
 
 namespace DWSIM.UI.Shared
 {
@@ -24,6 +25,13 @@ namespace DWSIM.UI.Shared
                 img.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
                 return stream.ToArray();
             }
+        }
+
+        public static IEnumerable<IEnumerable<T>> DifferentCombinations<T>(this IEnumerable<T> elements, int k)
+        {
+            return k == 0 ? new[] { new T[0] } :
+              elements.SelectMany((e, i) =>
+                elements.Skip(i + 1).DifferentCombinations(k - 1).Select(c => (new[] { e }).Concat(c)));
         }
 
         public static bool IsValidDouble(string s)

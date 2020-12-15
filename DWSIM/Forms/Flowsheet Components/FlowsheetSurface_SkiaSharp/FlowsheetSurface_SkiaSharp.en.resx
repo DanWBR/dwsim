@@ -146,6 +146,12 @@
   <data name="SplitContainerHorizontal.SplitterDistance" type="System.Int32, mscorlib">
     <value>252</value>
   </data>
+  <data name="SplitContainerVertical.Size" type="System.Drawing.Size, System.Drawing">
+    <value>860, 351</value>
+  </data>
+  <data name="SplitContainerVertical.SplitterDistance" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
   <data name="ToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
     <value>200, 22</value>
   </data>
@@ -451,9 +457,6 @@
         AABsAgAAbAIAAAACAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAfAAAAHwAAAB8AAAAAAAAAA==
 </value>
   </data>
-  <data name="PreviewDialog.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Inherit</value>
-  </data>
   <data name="tsbControlPanelMode.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -613,12 +616,6 @@
   <data name="ToolStripFlowsheet.Size" type="System.Drawing.Size, System.Drawing">
     <value>860, 25</value>
   </data>
-  <data name="SplitContainerVertical.Size" type="System.Drawing.Size, System.Drawing">
-    <value>860, 351</value>
-  </data>
-  <data name="SplitContainerVertical.SplitterDistance" type="System.Int32, mscorlib">
-    <value>25</value>
-  </data>
   <data name="ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>235, 22</value>
   </data>
@@ -626,7 +623,7 @@
     <value>Switch Object Palette Location</value>
   </data>
   <data name="CMS_Palette.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 48</value>
+    <value>236, 26</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>860, 376</value>
@@ -649,9 +646,6 @@
         //////////////////////////////////////////////////////////////////8AAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Inherit</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Flowsheet</value>

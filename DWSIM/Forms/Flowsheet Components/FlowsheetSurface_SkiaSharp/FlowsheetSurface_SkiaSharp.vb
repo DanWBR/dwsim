@@ -6,6 +6,7 @@ Imports DWSIM.UnitOperations
 Imports DWSIM.SharedClasses.DWSIM.Flowsheet
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes
 Imports SkiaSharp
+Imports DWSIM.Thermodynamics.BaseClasses
 
 Public Class FlowsheetSurface_SkiaSharp
 
@@ -359,7 +360,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Public Function CloneObject(gobj As GraphicObject) As GraphicObject
 
-        Flowsheet = My.Application.ActiveSimulation
+        If Flowsheet Is Nothing Then Flowsheet = My.Application.ActiveSimulation
 
         Dim obj As SharedClasses.UnitOperations.BaseClass = Flowsheet.Collections.FlowsheetObjectCollection(gobj.Name)
         Dim newobj As SharedClasses.UnitOperations.BaseClass = obj.Clone
@@ -374,7 +375,7 @@ Public Class FlowsheetSurface_SkiaSharp
         Dim mpx = FlowsheetSurface.SelectedObject.X + FlowsheetSurface.SelectedObject.Width * 1.1
         Dim mpy = FlowsheetSurface.SelectedObject.Y + FlowsheetSurface.SelectedObject.Height * 1.1
 
-        Select Case FlowsheetSurface.SelectedObject.ObjectType
+        Select Case gobj.ObjectType
 
             Case ObjectType.External
 

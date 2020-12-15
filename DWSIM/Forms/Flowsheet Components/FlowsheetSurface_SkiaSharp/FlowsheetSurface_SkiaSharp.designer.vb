@@ -29,6 +29,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.btnUp = New System.Windows.Forms.Button()
         Me.btnDown = New System.Windows.Forms.Button()
         Me.btnRight = New System.Windows.Forms.Button()
+        Me.SplitContainerVertical = New System.Windows.Forms.SplitContainer()
         Me.CMS_NoSel = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
@@ -136,20 +137,19 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.ToolStripSeparator16 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsbAlignVertical = New System.Windows.Forms.ToolStripButton()
         Me.tsbAlignHorizontal = New System.Windows.Forms.ToolStripButton()
-        Me.SplitContainerVertical = New System.Windows.Forms.SplitContainer()
         Me.CMS_Palette = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.SplitContainerHorizontal, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainerHorizontal.Panel1.SuspendLayout()
         Me.SplitContainerHorizontal.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
+        CType(Me.SplitContainerVertical, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SplitContainerVertical.Panel1.SuspendLayout()
+        Me.SplitContainerVertical.SuspendLayout()
         Me.CMS_NoSel.SuspendLayout()
         Me.CMS_Sel.SuspendLayout()
         Me.dckMenu.SuspendLayout()
         Me.ToolStripFlowsheet.SuspendLayout()
-        CType(Me.SplitContainerVertical, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SplitContainerVertical.Panel1.SuspendLayout()
-        Me.SplitContainerVertical.SuspendLayout()
         Me.CMS_Palette.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -201,6 +201,21 @@ Partial Class FlowsheetSurface_SkiaSharp
         resources.ApplyResources(Me.btnRight, "btnRight")
         Me.btnRight.Name = "btnRight"
         Me.btnRight.UseVisualStyleBackColor = True
+        '
+        'SplitContainerVertical
+        '
+        resources.ApplyResources(Me.SplitContainerVertical, "SplitContainerVertical")
+        Me.SplitContainerVertical.Name = "SplitContainerVertical"
+        '
+        'SplitContainerVertical.Panel1
+        '
+        resources.ApplyResources(Me.SplitContainerVertical.Panel1, "SplitContainerVertical.Panel1")
+        Me.SplitContainerVertical.Panel1.Controls.Add(Me.SplitContainerHorizontal)
+        '
+        'SplitContainerVertical.Panel2
+        '
+        resources.ApplyResources(Me.SplitContainerVertical.Panel2, "SplitContainerVertical.Panel2")
+        Me.SplitContainerVertical.Panel2Collapsed = True
         '
         'CMS_NoSel
         '
@@ -846,21 +861,6 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.tsbAlignHorizontal.Image = Global.DWSIM.My.Resources.Resources.shape_align_middle1
         Me.tsbAlignHorizontal.Name = "tsbAlignHorizontal"
         '
-        'SplitContainerVertical
-        '
-        resources.ApplyResources(Me.SplitContainerVertical, "SplitContainerVertical")
-        Me.SplitContainerVertical.Name = "SplitContainerVertical"
-        '
-        'SplitContainerVertical.Panel1
-        '
-        resources.ApplyResources(Me.SplitContainerVertical.Panel1, "SplitContainerVertical.Panel1")
-        Me.SplitContainerVertical.Panel1.Controls.Add(Me.SplitContainerHorizontal)
-        '
-        'SplitContainerVertical.Panel2
-        '
-        resources.ApplyResources(Me.SplitContainerVertical.Panel2, "SplitContainerVertical.Panel2")
-        Me.SplitContainerVertical.Panel2Collapsed = True
-        '
         'CMS_Palette
         '
         resources.ApplyResources(Me.CMS_Palette, "CMS_Palette")
@@ -891,14 +891,14 @@ Partial Class FlowsheetSurface_SkiaSharp
         CType(Me.SplitContainerHorizontal, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainerHorizontal.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
+        Me.SplitContainerVertical.Panel1.ResumeLayout(False)
+        CType(Me.SplitContainerVertical, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.SplitContainerVertical.ResumeLayout(False)
         Me.CMS_NoSel.ResumeLayout(False)
         Me.CMS_Sel.ResumeLayout(False)
         Me.dckMenu.ResumeLayout(False)
         Me.ToolStripFlowsheet.ResumeLayout(False)
         Me.ToolStripFlowsheet.PerformLayout()
-        Me.SplitContainerVertical.Panel1.ResumeLayout(False)
-        CType(Me.SplitContainerVertical, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.SplitContainerVertical.ResumeLayout(False)
         Me.CMS_Palette.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
