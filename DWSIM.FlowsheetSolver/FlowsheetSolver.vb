@@ -707,14 +707,13 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
     Public Shared Sub CheckCalculatorStatus()
         If Not Settings.CAPEOPENMode Then
             If Settings.CalculatorStopRequested = True Then
-                Settings.CalculatorStopRequested = False
                 If Settings.TaskCancellationTokenSource IsNot Nothing Then
                     If Not Settings.TaskCancellationTokenSource.IsCancellationRequested Then
                         Settings.TaskCancellationTokenSource.Cancel()
                     End If
                     Settings.TaskCancellationTokenSource.Token.ThrowIfCancellationRequested()
                 Else
-                    'Throw New Exception("Calculation Aborted")
+                    Throw New Exception("Calculation Aborted")
                 End If
             End If
         End If
@@ -982,6 +981,10 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                           Optional ByVal FinishAny As Action = Nothing,
                                           Optional ByVal ChangeCalcOrder As Boolean = False) As List(Of Exception)
 
+        'clears any previous calculation stop request.
+
+        Settings.CalculatorStopRequested = False
+
         Inspector.Host.CurrentSolutionID = Date.Now.ToBinary
 
         If GlobalSettings.Settings.InspectorEnabled Then
@@ -1225,7 +1228,9 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
                                                      'throws exceptions if any
 
-                                                     If Settings.SolverBreakOnException And exlist.Count > 0 Then Throw New AggregateException(exlist)
+                                                     If Settings.SolverBreakOnException And exlist.Count > 0 Then
+                                                         Throw New AggregateException(exlist)
+                                                     End If
 
                                                      'checks for recycle convergence.
 
@@ -1427,6 +1432,10 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                     tcpclient = Nothing
 
             End Select
+
+            'clears any calculation stop request.
+
+            Settings.CalculatorStopRequested = False
 
             'Frees GPU memory if enabled.
 
