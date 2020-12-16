@@ -3890,6 +3890,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                                    End Function, vars.ToArray())
 
+                If Double.IsNaN(errfunc) Or errfunc > tol(1) Then Throw New Exception(pp.Flowsheet?.GetTranslatedString("DCGeneralError"))
+
                 result = ResultsVector(ObjFunctionValues.IndexOf(ObjFunctionValues.Min))
 
                 pp.Flowsheet?.ShowMessage(String.Format("BP solver: converged at external iteration #{0}, final objective function (error) value = {1}", counter, errfunc), IFlowsheet.MessageType.Information)
@@ -4014,6 +4016,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                                                               End Function)
 
+                If Double.IsNaN(errfunc) Or errfunc > tol(1) Then Throw New Exception(pp.Flowsheet?.GetTranslatedString("DCGeneralError"))
+
                 result = ResultsVector(ObjFunctionValues.IndexOf(ObjFunctionValues.Min))
 
                 pp.Flowsheet?.ShowMessage(String.Format("BP solver: converged at external iteration #{0}, final objective function (error) value = {1}", counter, errfunc), IFlowsheet.MessageType.Information)
@@ -4100,6 +4104,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                                                            Return errfunc
 
                                                                        End Function)
+
+                If Double.IsNaN(errfunc) Or errfunc > tol(1) Then Throw New Exception(pp.Flowsheet?.GetTranslatedString("DCGeneralError"))
 
                 result = ResultsVector(ObjFunctionValues.IndexOf(ObjFunctionValues.Min))
 
