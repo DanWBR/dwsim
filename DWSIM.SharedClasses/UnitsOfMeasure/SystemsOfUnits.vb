@@ -1424,7 +1424,7 @@ Namespace SystemsOfUnits
                     Return value / 35.3147 / 1000 / 2.20462
 
                 Case "mm"                               'comprimento'
-                    Return value
+                    Return value / 1000
                 Case "in.", "in"
                     Return value / 39.3701
 
@@ -1909,7 +1909,7 @@ Namespace SystemsOfUnits
                     Return value * 35.3147 * 1000 * 2.20462
 
                 Case "mm"                               'comprimento'
-                    Return value
+                    Return value * 1000
                 Case "in.", "in"
                     Return value * 39.3701
 
