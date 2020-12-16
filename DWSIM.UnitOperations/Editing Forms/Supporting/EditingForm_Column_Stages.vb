@@ -94,11 +94,11 @@ Public Class EditingForm_Column_Stages
     End Sub
 
     Private Sub ToolStripButton5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton5.Click
-        If dgv1.SelectedCells.Count > 0 Then
+        For Each cell In dgv1.SelectedCells
             If Not dgv1.SelectedCells(0).ReadOnly Then
                 dgv1.SelectedCells(0).Value = Nothing
             End If
-        End If
+        Next
     End Sub
 
     Private Sub ToolStripButton3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton3.Click

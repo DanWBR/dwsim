@@ -86,7 +86,6 @@ Partial Class EditingForm_Column_Stages
         '
         Me.dgv1.AllowUserToAddRows = False
         Me.dgv1.AllowUserToDeleteRows = False
-        Me.dgv1.AllowUserToOrderColumns = True
         Me.dgv1.AllowUserToResizeRows = False
         resources.ApplyResources(Me.dgv1, "dgv1")
         Me.dgv1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
@@ -101,7 +100,6 @@ Partial Class EditingForm_Column_Stages
         DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dgv1.DefaultCellStyle = DataGridViewCellStyle3
-        Me.dgv1.MultiSelect = False
         Me.dgv1.Name = "dgv1"
         Me.dgv1.RowHeadersVisible = False
         Me.dgv1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect

@@ -1059,7 +1059,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
             End If
 
             If objstack.Count = 0 Then
-                GlobalSettings.Settings.CalculatorBusy = False
+                Settings.CalculatorBusy = False
                 FinishAny?.Invoke()
                 Return New List(Of Exception)
             End If

@@ -317,6 +317,22 @@ Namespace UnitOperations.Auxiliary.SepOps
         Private _liqmolflows As New List(Of Parameter)
         Private _vapmolflows As New List(Of Parameter)
 
+        Public Function Validate() As Boolean
+
+            If _stagetemps.Count = 0 Then Return False
+            If _vapmolflows.Count = 0 Then Return False
+            If _liqmolflows.Count = 0 Then Return False
+            If _liqcompositions.Count = 0 Then Return False
+            If _vapcompositions.Count = 0 Then Return False
+
+            If _stagetemps.Select(Function(x) x.Value).ToArray().Sum = 0.0 Then Return False
+            If _vapmolflows.Select(Function(x) x.Value).ToArray().Sum = 0.0 Then Return False
+            If _liqmolflows.Select(Function(x) x.Value).ToArray().Sum = 0.0 Then Return False
+
+            Return True
+
+        End Function
+
         Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
 
             For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "LiquidCompositions").SingleOrDefault.Elements.ToList
@@ -2625,9 +2641,13 @@ Namespace UnitOperations
                     T1 = MathEx.Common.WgtAvg(F, FT)
                     T2 = T1
                 Case ColType.RefluxedAbsorber
+                    P(0) -= CondenserDeltaP
                     T1 = MathEx.Common.WgtAvg(F, FT)
                     T2 = T1
                 Case ColType.DistillationColumn
+                    If Not DirectCast(Me, DistillationColumn).ReboiledAbsorber Then
+                        P(0) -= CondenserDeltaP
+                    End If
                     Try
                         IObj?.SetCurrent()
                         If distVx.Sum > 0 Then
@@ -2673,12 +2693,12 @@ Namespace UnitOperations
             For Each st As Stage In Me.Stages
                 P(i) = st.P
                 eff(i) = st.Efficiency
-                If Me.UseTemperatureEstimates Then
+                If Me.UseTemperatureEstimates And InitialEstimates.Validate() Then
                     T(i) = Me.InitialEstimates.StageTemps(i).Value
                 Else
                     T(i) = (T2 - T1) * (i) / ns + T1
                 End If
-                If Me.UseVaporFlowEstimates Then
+                If Me.UseVaporFlowEstimates And InitialEstimates.Validate() Then
                     V(i) = Me.InitialEstimates.VapMolarFlows(i).Value
                 Else
                     If i = 0 Then
@@ -2725,7 +2745,7 @@ Namespace UnitOperations
                         End Select
                     End If
                 End If
-                If Me.UseLiquidFlowEstimates Then
+                If Me.UseLiquidFlowEstimates And InitialEstimates.Validate() Then
                     L(i) = Me.InitialEstimates.LiqMolarFlows(i).Value
                 Else
                     If i = 0 Then
@@ -2771,7 +2791,7 @@ Namespace UnitOperations
                         If L(i) = 0 Then L(i) = 0.00001
                     End If
                 End If
-                If Me.UseCompositionEstimates Then
+                If Me.UseCompositionEstimates And InitialEstimates.Validate() Then
                     j = 0
                     For Each par As Parameter In Me.InitialEstimates.LiqCompositions(i).Values
                         x(i)(j) = par.Value
@@ -3098,7 +3118,7 @@ Namespace UnitOperations
                             .Phases(0).Properties.massflow = LSSf(0) * pp.AUX_MMM(xf(0)) / 1000
                             .Phases(0).Properties.molarflow = LSSf(0)
                             .Phases(0).Properties.temperature = Tf(0)
-                            .Phases(0).Properties.pressure = P(0) - Me.CondenserDeltaP
+                            .Phases(0).Properties.pressure = P(0)
                             IObj?.SetCurrent()
                             .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(xf(0), Tf(0), P(0), PropertyPackages.State.Liquid)
                             i = 0
@@ -3872,6 +3892,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 result = ResultsVector(ObjFunctionValues.IndexOf(ObjFunctionValues.Min))
 
+                pp.Flowsheet?.ShowMessage(String.Format("BP solver: converged at external iteration #{0}, final objective function (error) value = {1}", counter, errfunc), IFlowsheet.MessageType.Information)
+
                 Return result
 
             ElseIf Not specC_OK Then
@@ -3994,6 +4016,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 result = ResultsVector(ObjFunctionValues.IndexOf(ObjFunctionValues.Min))
 
+                pp.Flowsheet?.ShowMessage(String.Format("BP solver: converged at external iteration #{0}, final objective function (error) value = {1}", counter, errfunc), IFlowsheet.MessageType.Information)
+
                 Return result
 
             ElseIf Not specR_OK Then
@@ -4078,6 +4102,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                                                        End Function)
 
                 result = ResultsVector(ObjFunctionValues.IndexOf(ObjFunctionValues.Min))
+
+                pp.Flowsheet?.ShowMessage(String.Format("BP solver: converged at external iteration #{0}, final objective function (error) value = {1}", counter, errfunc), IFlowsheet.MessageType.Information)
 
                 Return result
 
