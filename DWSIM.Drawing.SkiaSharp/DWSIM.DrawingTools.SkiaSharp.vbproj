@@ -283,6 +283,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Bitmaps\attention.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Bitmaps\clock.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

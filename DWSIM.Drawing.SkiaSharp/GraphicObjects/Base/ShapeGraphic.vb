@@ -10,6 +10,8 @@ Namespace GraphicObjects
 
         Private AttentionImage As SKImage
 
+        Private CalculatingImage As SKImage
+
         Public Sub UpdateStatus()
             Dim alpha As Integer = 255
 
@@ -68,6 +70,36 @@ Namespace GraphicObjects
                 DrawNotDynamicsCompatible(g)
 
             End If
+
+        End Sub
+
+        Public Sub DrawCalculatingMode(ByVal canvas As SKCanvas)
+
+            If CalculatingImage Is Nothing Then
+
+                Dim assm = Me.GetType.Assembly
+                Using filestr As IO.Stream = assm.GetManifestResourceStream("DWSIM.Drawing.SkiaSharp.clock.png")
+                    Using bitmap = SKBitmap.Decode(filestr)
+                        CalculatingImage = SKImage.FromBitmap(bitmap)
+                    End Using
+                End Using
+
+            End If
+
+            Dim x0, y0, w0, h0 As Double
+
+            x0 = X + Width / 2 - Width / 4
+            y0 = Y + Height / 2 - Height / 4
+            w0 = Width / 2
+            h0 = Width / 2
+
+            Using p As New SKPaint With {.IsStroke = False, .Color = SKColors.White.WithAlpha(100)}
+                canvas.DrawRect(X, Y, X + Width, Y + Height, p)
+            End Using
+
+            Using p As New SKPaint With {.IsAntialias = GlobalSettings.Settings.DrawingAntiAlias, .FilterQuality = SKFilterQuality.High}
+                canvas.DrawImage(CalculatingImage, New SKRect(x0, y0, x0 + w0, y0 + w0), p)
+            End Using
 
         End Sub
 

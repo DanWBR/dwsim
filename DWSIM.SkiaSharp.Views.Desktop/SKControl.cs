@@ -31,10 +31,16 @@ namespace SkiaSharp.Views.Desktop
 		[Category("Appearance")]
 		public event EventHandler<SKPaintSurfaceEventArgs> PaintSurface;
 
+		private bool painting = false;
+
 		protected override void OnPaint(PaintEventArgs e)
 		{
 			if (designMode)
 				return;
+
+			if (painting) return;
+
+			painting = true;
 
 			base.OnPaint(e);
 
@@ -56,6 +62,8 @@ namespace SkiaSharp.Views.Desktop
 			// write the bitmap to the graphics
 			bitmap.UnlockBits(data);
 			e.Graphics.DrawImage(bitmap, 0, 0);
+
+			painting = false;
 		}
 
 		protected virtual void OnPaintSurface(SKPaintSurfaceEventArgs e)

@@ -388,6 +388,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
                 Dim myobj = fbag.SimulationObjects(myinfo.Name)
                 Try
+                    myobj.GraphicObject.Status = Status.Calculating
                     myobj.ErrorMessage = ""
                     If myobj.GraphicObject.Active Then
                         If FlowsheetSolverMode Then
@@ -413,7 +414,9 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                         myobj.UpdateEditForm()
                         If fbag.DynamicMode Then myobj.UpdateDynamicsEditForm()
                     End If
+                    myobj.GraphicObject.Status = Status.Calculated
                 Catch ex As AggregateException
+                    myobj.GraphicObject.Status = Status.ErrorCalculating
                     RaiseEvent CalculationError(myinfo, New EventArgs(), ex)
                     myobj.ErrorMessage = ""
                     For Each iex In ex.InnerExceptions
@@ -447,6 +450,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                     Next
                     If GlobalSettings.Settings.SolverBreakOnException Then Exit While
                 Catch ex As Exception
+                    myobj.GraphicObject.Status = Status.ErrorCalculating
                     RaiseEvent CalculationError(myinfo, New EventArgs(), ex)
                     myobj.ErrorMessage = ex.Message.ToString & vbCrLf
                     CheckExceptionForAdditionalInfo(ex)
@@ -505,6 +509,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
             IObj?.Paragraphs.Add("This is the main routine for the calculation of a single object. Check the nested items for model details.")
 
             Try
+                myobj.GraphicObject.Status = Status.Calculating
                 myobj.ErrorMessage = ""
                 If myobj.GraphicObject.Active Then
                     If myinfo.ObjectType = ObjectType.MaterialStream Then
@@ -520,7 +525,9 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                     myobj.UpdateEditForm()
                     If fbag.DynamicMode Then myobj.UpdateDynamicsEditForm()
                 End If
+                myobj.GraphicObject.Status = Status.Calculated
             Catch ex As AggregateException
+                myobj.GraphicObject.Status = Status.ErrorCalculating
                 RaiseEvent CalculationError(myinfo, New EventArgs(), ex)
                 fgui.ProcessScripts(Scripts.EventType.ObjectCalculationError, Scripts.ObjectType.FlowsheetObject, myobj.Name)
                 myobj.ErrorMessage = ""
@@ -555,6 +562,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                 Next
                 If GlobalSettings.Settings.SolverBreakOnException Then Exit While
             Catch ex As Exception
+                myobj.GraphicObject.Status = Status.ErrorCalculating
                 RaiseEvent CalculationError(myinfo, New EventArgs(), ex)
                 fgui.ProcessScripts(Scripts.EventType.ObjectCalculationError, Scripts.ObjectType.FlowsheetObject, myobj.Name)
                 myobj.ErrorMessage = ex.Message.ToString
@@ -614,6 +622,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                                      If ct.IsCancellationRequested = True Then ct.ThrowIfCancellationRequested()
                                                      Dim myobj = fbag.SimulationObjects(myinfo.Name)
                                                      myobj.ErrorMessage = ""
+                                                     myobj.GraphicObject.Status = Status.Calculating
                                                      Try
                                                          If myobj.GraphicObject.Active Then
                                                              If myinfo.ObjectType = ObjectType.MaterialStream Then
@@ -629,7 +638,9 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                                              myobj.UpdateEditForm()
                                                              If fbag.DynamicMode Then myobj.UpdateDynamicsEditForm()
                                                          End If
+                                                         myobj.GraphicObject.Status = Status.Calculated
                                                      Catch ex As AggregateException
+                                                         myobj.GraphicObject.Status = Status.ErrorCalculating
                                                          RaiseEvent CalculationError(myinfo, New EventArgs(), ex)
                                                          fgui.ProcessScripts(Scripts.EventType.ObjectCalculationError, Scripts.ObjectType.FlowsheetObject, myobj.Name)
                                                          myobj.ErrorMessage = ""
@@ -664,6 +675,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                                          Next
                                                          If GlobalSettings.Settings.SolverBreakOnException Then state.Break()
                                                      Catch ex As Exception
+                                                         myobj.GraphicObject.Status = Status.ErrorCalculating
                                                          RaiseEvent CalculationError(myinfo, New EventArgs(), ex)
                                                          fgui.ProcessScripts(Scripts.EventType.ObjectCalculationError, Scripts.ObjectType.FlowsheetObject, myobj.Name)
                                                          myobj.ErrorMessage = ex.Message.ToString
