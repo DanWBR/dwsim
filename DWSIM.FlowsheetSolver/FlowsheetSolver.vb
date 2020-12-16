@@ -702,7 +702,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                     End If
                     Settings.TaskCancellationTokenSource.Token.ThrowIfCancellationRequested()
                 Else
-                    Throw New Exception("Calculation Aborted")
+                    'Throw New Exception("Calculation Aborted")
                 End If
             End If
         End If

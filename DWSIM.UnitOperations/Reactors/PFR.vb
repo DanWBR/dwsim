@@ -205,7 +205,7 @@ Namespace Reactors
 
             j = 0
             For Each s As String In N00.Keys
-                If y(j) < 0 Then
+                If y(j) < 0.0 Then
                     C(s) = 0.0
                 Else
                     C(s) = y(j) / Qf
@@ -932,43 +932,52 @@ Namespace Reactors
                     Do
 
                         Dim odesolver = New DotNumerics.ODE.OdeImplicitRungeKutta5()
-                        odesolver.InitializeODEs(AddressOf ODEFunc, N.Count, 0.0, vc0)
-                        IObj2?.SetCurrent
-                        If dynamics Then
-                            odesolver.Solve(vc0, 0.0#, 0.01 * deltaV * Volume, deltaV * Volume, Sub(x As Double, y As Double())
-                                                                                                    vc = y
-                                                                                                End Sub)
-                        Else
-                            odesolver.Solve(vc0, 0.0#, 0.01 * deltaV * Volume, deltaV * Volume, Sub(x As Double, y As Double())
-                                                                                                    vc = y
-                                                                                                End Sub)
-                        End If
 
-                        ODEFunc(0, vc)
+                        ' progressively decrease tolerances until non-negative concentrations are found.
 
-                        If Double.IsNaN(vc.Sum) Then Throw New Exception(FlowSheet.GetTranslatedString("PFRMassBalanceError"))
+                        For nncounter = 1 To 10
 
-                        negative = False
-                        For i = 0 To vc.Count - 1
-                            If vc(i) < 0 Then
-                                ' negative flow detected. raise the flag.
-                                negative = True
+                            odesolver.AbsTol /= 10
+                            odesolver.RelTol /= 10
+                            odesolver.InitializeODEs(AddressOf ODEFunc, N.Count, 0.0, vc0)
+                            IObj2?.SetCurrent
+                            If dynamics Then
+                                odesolver.Solve(vc0, 0.0#, 0.01 * deltaV * Volume, deltaV * Volume, Sub(x As Double, y As Double())
+                                                                                                        vc = y
+                                                                                                    End Sub)
+                            Else
+                                odesolver.Solve(vc0, 0.0#, 0.01 * deltaV * Volume, deltaV * Volume, Sub(x As Double, y As Double())
+                                                                                                        vc = y
+                                                                                                    End Sub)
                             End If
+
+                            ODEFunc(0, vc)
+
+                            If Double.IsNaN(vc.Sum) Then Throw New Exception(FlowSheet.GetTranslatedString("PFRMassBalanceError"))
+
+                            negative = False
+                            For i = 0 To vc.Count - 1
+                                If vc(i) < 0.0 Then
+                                    If Math.Abs(vc(i)) > 0.0000000001 Then
+                                        negative = True
+                                    Else
+                                        vc(i) = 0.0
+                                    End If
+                                End If
+                            Next
+
+                            If Not negative Then Exit For
+
                         Next
 
                         If negative Then
-                            'use the previous molar amounts.
-                            vc = vc0.Clone
-                            ODEFunc(0, vc)
+                            Throw New Exception(FlowSheet.GetTranslatedString("PFRMassBalanceError") &
+                                                    String.Format(" Error details: ODE solver calculated negative molar flows at volume step {0}/{1} m3.", currvol, Volume))
                         End If
 
                         C.Clear()
                         i = 0
                         For Each sb As KeyValuePair(Of String, Double) In C0
-                            If vc(i) < 0.0# Then
-                                Throw New Exception(FlowSheet.GetTranslatedString("PFRMassBalanceError") &
-                                                String.Format(" Error details: ODE solver calculated negative molar flows at volume step {0}/{1} m3.", currvol, Volume))
-                            End If
                             C(sb.Key) = vc(i) / Qf
                             i = i + 1
                         Next
@@ -998,26 +1007,12 @@ Namespace Reactors
                             i += 1
                         Next
 
-                        i = 0
                         DHr = 0.0#
-                        Do
-
-                            'process reaction i
-
-                            rxn = FlowSheet.Reactions(ar(i))
-
-                            'Heat released (or absorbed) (kJ/s = kW)
-
-                            'DHr += rxn.ReactionHeat * (N(rxn.BaseReactant) - N0(rxn.BaseReactant)) / 1000
-                            If rxn.ReactionType = ReactionType.Kinetic Then
-                                DHr += rxn.ReactionHeat * (Rxi(rxn.ID)) / 1000 * deltaV * Volume
-                            ElseIf rxn.ReactionType = ReactionType.Heterogeneous_Catalytic Then
-                                DHr += rxn.ReactionHeat * (Rxi(rxn.ID)) / 1000 * CatalystLoading * deltaV * Volume
+                        For Each sb As Compound In ims.Phases(0).Compounds.Values
+                            If N.ContainsKey(sb.Name) Then
+                                DHr += sb.ConstantProperties.IG_Enthalpy_of_Formation_25C * sb.ConstantProperties.Molar_Weight * (N(sb.Name) - N0(sb.Name)) / 1000
                             End If
-
-                            i += 1
-
-                        Loop Until i = ar.Count
+                        Next
 
                         'update mole flows/fractions
                         Dim Nsum As Double = 0.0#
