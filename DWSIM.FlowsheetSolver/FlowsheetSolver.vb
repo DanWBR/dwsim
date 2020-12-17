@@ -716,6 +716,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                     Throw New Exception("Calculation Aborted")
                 End If
             End If
+            Settings.TaskCancellationTokenSource?.Token.ThrowIfCancellationRequested()
         End If
     End Sub
 
@@ -981,18 +982,20 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                           Optional ByVal FinishAny As Action = Nothing,
                                           Optional ByVal ChangeCalcOrder As Boolean = False) As List(Of Exception)
 
-        'clears any previous calculation stop request.
-
-        Settings.CalculatorStopRequested = False
-
-        Inspector.Host.CurrentSolutionID = Date.Now.ToBinary
-
-        If GlobalSettings.Settings.InspectorEnabled Then
-            GlobalSettings.Settings.EnableParallelProcessing = False
-            mode = 1
-        End If
-
         If GlobalSettings.Settings.CalculatorActivated Then
+
+            If GlobalSettings.Settings.CalculatorBusy Then Return New List(Of Exception)
+
+            Inspector.Host.CurrentSolutionID = Date.Now.ToBinary
+
+            If GlobalSettings.Settings.InspectorEnabled Then
+                GlobalSettings.Settings.EnableParallelProcessing = False
+                mode = 1
+            End If
+
+            'clears any previous calculation stop request.
+
+            Settings.CalculatorStopRequested = False
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -1380,12 +1383,6 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
                     fqueue.CalculationQueue.Clear()
 
-                    'disposes the cancellation token source.
-
-                    If fs.MasterFlowsheet Is Nothing Then ts.Dispose()
-
-                    GlobalSettings.Settings.TaskCancellationTokenSource = Nothing
-
                     'clears the object lists.
 
                     objstack.Clear()
@@ -1447,6 +1444,12 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
             'updates the display status of all objects in the calculation list.
 
             UpdateDisplayStatus(fobj, objstack.ToArray)
+
+            'disposes the cancellation token source.
+
+            If fs.MasterFlowsheet Is Nothing Then ts?.Dispose()
+
+            GlobalSettings.Settings.TaskCancellationTokenSource = Nothing
 
             'checks if exceptions were thrown during the calculation and displays them in the log window.
 

@@ -87,6 +87,8 @@ Public Class EditingForm_Column
             If .IsAdjustAttached Then lblConnectedTo.Text = .FlowSheet.SimulationObjects(.AttachedAdjustId).GraphicObject.Tag
 
             If TypeOf SimObject Is DistillationColumn Then
+                chkNoCondenser.Checked = DirectCast(SimObject, DistillationColumn).ReboiledAbsorber
+                chkNoReboiler.Checked = DirectCast(SimObject, DistillationColumn).RefluxedAbsorber
             ElseIf TypeOf SimObject Is AbsorptionColumn Then
                 TabControl1.TabPages.Remove(TabCondenser)
                 TabControl1.TabPages.Remove(TabReboiler)
@@ -644,6 +646,20 @@ Public Class EditingForm_Column
             ToolTip1.Show(SimObject.FlowSheet.GetTranslatedString("CommitChanges"), tbox, 0, tbox.Height + 4, 2000)
         End If
 
+    End Sub
+
+    Private Sub chkNoCondenser_CheckedChanged(sender As Object, e As EventArgs) Handles chkNoCondenser.CheckedChanged
+        PanelCondenser.Enabled = Not chkNoCondenser.Checked
+        If TypeOf SimObject Is DistillationColumn Then
+            DirectCast(SimObject, DistillationColumn).ReboiledAbsorber = chkNoCondenser.Checked
+        End If
+    End Sub
+
+    Private Sub chkNoReboiler_CheckedChanged(sender As Object, e As EventArgs) Handles chkNoReboiler.CheckedChanged
+        PanelReboiler.Enabled = Not chkNoReboiler.Checked
+        If TypeOf SimObject Is DistillationColumn Then
+            DirectCast(SimObject, DistillationColumn).RefluxedAbsorber = chkNoReboiler.Checked
+        End If
     End Sub
 
     Private Sub lblTag_KeyPress(sender As Object, e As KeyEventArgs) Handles lblTag.KeyUp

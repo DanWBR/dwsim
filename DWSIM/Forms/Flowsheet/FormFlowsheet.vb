@@ -734,11 +734,9 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles tsbAbortCalc.Click
-        If Settings.CalculatorBusy Then
-            Settings.CalculatorStopRequested = True
-            If Settings.TaskCancellationTokenSource IsNot Nothing Then
-                Settings.TaskCancellationTokenSource.Cancel()
-            End If
+        Settings.CalculatorStopRequested = True
+        If Settings.TaskCancellationTokenSource IsNot Nothing Then
+            Settings.TaskCancellationTokenSource.Cancel()
         End If
     End Sub
 
@@ -1452,22 +1450,23 @@ Public Class FormFlowsheet
                                 End If
                             End If
 
-                            If SimulationObjects.ContainsKey(namesel) Then
-
+                            Try
                                 If My.Application.PushUndoRedoAction Then AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.ObjectRemoved,
                                                                          .NewValue = gobj,
                                                                          .OldValue = Me.Collections.FlowsheetObjectCollection(namesel).SaveData(),
                                                                          .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_ObjectRemoved"), gobj.Tag)})
+                            Catch ex As Exception
+                            End Try
 
-                                Dim obj As SharedClasses.UnitOperations.BaseClass = SimulationObjects(namesel)
-                                obj.CloseEditForm()
-                                obj.Dispose()
+                            'DWSIM
+                            If Me.Collections.FlowsheetObjectCollection.ContainsKey(namesel) Then
+                                Me.Collections.FlowsheetObjectCollection(namesel).CloseEditForm()
+                                Me.Collections.FlowsheetObjectCollection(namesel).Dispose()
                                 Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-
                             End If
-
-                            Me.Collections.GraphicObjectCollection.Remove(namesel)
-
+                            If Me.Collections.GraphicObjectCollection.ContainsKey(namesel) Then
+                                Me.Collections.GraphicObjectCollection.Remove(namesel)
+                            End If
                             Me.FormSurface.FlowsheetSurface.DeleteSelectedObject(gobj)
 
                         End If
