@@ -1546,8 +1546,7 @@ namespace DWSIM.UI.Desktop.Editors
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Pressure Drop"));
                     s.CreateAndAddLabelRow(container, "Convergence Parameters");
-                    s.CreateAndAddCheckBoxRow(container, "Initialize Reaction Extents with Previous Values", reactor2.UsePreviousReactionExtents, (sender, e) => reactor2.UsePreviousReactionExtents = sender.Checked.GetValueOrDefault(), () => CallSolverIfNeeded());
-                    s.CreateAndAddDescriptionRow(container, "This will use the reaction extents from a previous solution to initialize the next calculation.");
+                    s.CreateAndAddCheckBoxRow(container, "Initialize from a Previous Solution", reactor2.UsePreviousSolution, (sender, e) => reactor2.UsePreviousSolution = sender.Checked.GetValueOrDefault(), () => CallSolverIfNeeded());
                     s.CreateAndAddTextBoxRow(container, nf, "Maximum Internal Iterations", reactor2.InternalLoopMaximumIterations, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2.InternalLoopMaximumIterations = int.Parse(sender.Text); }, () => CallSolverIfNeeded());
                     s.CreateAndAddTextBoxRow(container, nf, "Maximum External Iterations", reactor2.ExternalLoopMaximumIterations, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2.ExternalLoopMaximumIterations = int.Parse(sender.Text); }, () => CallSolverIfNeeded());
                     s.CreateAndAddTextBoxRow(container, nf, "Minimum Internal Error", reactor2.InternalLoopTolerance, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2.InternalLoopTolerance = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());

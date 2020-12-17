@@ -67,7 +67,7 @@ Namespace Reactors
 
         Public Property ComponentIDs As New List(Of String)
 
-        Public Property UsePreviousReactionExtents As Boolean = False
+        Public Property UsePreviousSolution As Boolean = False
 
         Public Property InternalLoopTolerance As Double = 0.001
 
@@ -662,32 +662,30 @@ Namespace Reactors
             Dim lbound(Me.ReactionExtents.Count - 1) As Double
             Dim ubound(Me.ReactionExtents.Count - 1) As Double
 
-            Dim nvars As New List(Of Double)
-            Dim pvars As New List(Of Double)
+            Dim bounds As New List(Of Double)
 
             i = 0
             For Each rxid As String In Me.Reactions
-                nvars.Clear()
-                pvars.Clear()
                 rx = FlowSheet.Reactions(rxid)
                 For Each comp As ReactionStoichBase In rx.Components.Values
-                    If comp.StoichCoeff < 0 Then pvars.Add(-N0(comp.CompName) / comp.StoichCoeff)
-                    If Mode = 1 Then
-                        If comp.StoichCoeff > 0 Then nvars.Add(N0(comp.CompName) / comp.StoichCoeff)
-                    Else
-                        If comp.StoichCoeff > 0 Then nvars.Add(-N0(comp.CompName) / comp.StoichCoeff)
-                    End If
+                    bounds.Add(Math.Abs(N0(comp.CompName) / comp.StoichCoeff))
                 Next
-                lbound(i) = nvars.Max
-                ubound(i) = pvars.Min
                 i += 1
             Next
+
+            i = 0
+            For Each rxid As String In Me.Reactions
+                lbound(i) = -bounds.Max
+                ubound(i) = bounds.Max
+                i += 1
+            Next
+
 
             Dim m As Integer = 0
 
             Dim REx(r) As Double
 
-            If UsePreviousReactionExtents And PreviousReactionExtents.Count > 0 Then
+            If UsePreviousSolution And PreviousReactionExtents.Count > 0 Then
                 REx = PreviousReactionExtents.Values.ToArray()
             End If
 
@@ -708,11 +706,11 @@ Namespace Reactors
             Me.InitialGibbsEnergy = g0
 
             If Mode < 3 Then
-                MinVal = Math.Min(lbound.Min, REx.Min) * 10
-                MaxVal = Math.Max(ubound.Max, REx.Max) * 10
-            ElseIf Mode = 3 Then
                 MinVal = Math.Min(lbound.Min, REx.Min)
                 MaxVal = Math.Max(ubound.Max, REx.Max)
+            ElseIf Mode = 3 Then
+                MinVal = Math.Min(lbound.Min, REx.Min) * 10
+                MaxVal = Math.Max(ubound.Max, REx.Max) * 10
             ElseIf Mode = 4 Then
                 MinVal = Math.Min(lbound.Min, REx.Min) * 100
                 MaxVal = Math.Max(ubound.Max, REx.Max) * 100
@@ -727,8 +725,8 @@ Namespace Reactors
             solver2.MaxIterations = InternalLoopMaximumIterations
             solver2.Tolerance = InternalLoopTolerance
 
-            Dim solver3 As New Simplex
-            solver3.MaxFunEvaluations = InternalLoopMaximumIterations
+            Dim solver3 As New Optimization.NewtonSolver
+            solver3.MaxIterations = InternalLoopMaximumIterations
             solver3.Tolerance = InternalLoopTolerance
 
             ' check equilibrium constants to define objective function form
@@ -797,7 +795,7 @@ Namespace Reactors
 
                     Dim VariableValues As New List(Of Double())
                     Dim FunctionValues As New List(Of Double)
-                    Dim result As Double
+                    Dim result As Double, resnewton As Double()
 
                     If UseIPOPTSolver Then
 
@@ -814,13 +812,14 @@ Namespace Reactors
 
                     Else
 
-                        newx = solver3.ComputeMin(Function(x1)
-                                                      FlowSheet.CheckStatus()
-                                                      VariableValues.Add(x1.Clone)
-                                                      result = FunctionValue2N(x1).AbsSqrSumY
-                                                      FunctionValues.Add(result)
-                                                      Return result
-                                                  End Function, variables2.ToArray)
+                        newx = solver3.Solve(Function(x1)
+                                                 FlowSheet.CheckStatus()
+                                                 VariableValues.Add(x1.Clone)
+                                                 resnewton = FunctionValue2N(x1)
+                                                 result = resnewton.AbsSqrSumY
+                                                 FunctionValues.Add(result)
+                                                 Return resnewton
+                                             End Function, variables.ToArray)
 
                         FlowSheet.CheckStatus()
 

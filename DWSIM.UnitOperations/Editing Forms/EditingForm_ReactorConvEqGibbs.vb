@@ -180,7 +180,7 @@ Public Class EditingForm_ReactorConvEqGibbs
                 TabControlParameters.TabPages.Remove(TabPageElements)
                 TabControlParameters.TabPages.Remove(TabPageGibbsParams)
 
-                chkInitializeExtents.Checked = DirectCast(SimObject, Reactors.Reactor_Equilibrium).UsePreviousReactionExtents
+                chkInitializeExtents.Checked = DirectCast(SimObject, Reactors.Reactor_Equilibrium).UsePreviousSolution
                 chkUseIPOPT.Checked = DirectCast(SimObject, Reactors.Reactor_Equilibrium).UseIPOPTSolver
 
                 tbExtLoopMaxItsEq.Text = DirectCast(SimObject, Reactors.Reactor_Equilibrium).ExternalLoopMaximumIterations
@@ -612,7 +612,7 @@ Public Class EditingForm_ReactorConvEqGibbs
 
     Private Sub chkInitializeExtents_CheckedChanged(sender As Object, e As EventArgs) Handles chkInitializeExtents.CheckedChanged
         If TypeOf SimObject Is Reactors.Reactor_Equilibrium And Loaded Then
-            DirectCast(SimObject, Reactors.Reactor_Equilibrium).UsePreviousReactionExtents = chkInitializeExtents.Checked
+            DirectCast(SimObject, Reactors.Reactor_Equilibrium).UsePreviousSolution = chkInitializeExtents.Checked
         End If
     End Sub
 
