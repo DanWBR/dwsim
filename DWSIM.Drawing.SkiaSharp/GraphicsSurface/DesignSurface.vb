@@ -334,6 +334,10 @@ Public Class GraphicsSurface
 
                     End If
 
+                    'If TypeOf dobj Is ShapeGraphic And dobj.Status = Status.Calculating Then
+                    '    DirectCast(dobj, ShapeGraphic).DrawCalculatingMode(DrawingCanvas)
+                    'End If
+
                     If TypeOf dobj Is ShapeGraphic And
                         dobj.ObjectType <> ObjectType.GO_MasterTable And
                         dobj.ObjectType <> ObjectType.GO_SpreadsheetTable And
