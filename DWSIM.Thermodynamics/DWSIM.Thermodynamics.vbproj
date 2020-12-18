@@ -84,6 +84,9 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoDiff, Version=1.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoDiff.1.2.2\lib\net461\AutoDiff.dll</HintPath>
+    </Reference>
     <Reference Include="CapeOpen">
       <HintPath>..\DWSIM\References\CapeOpen.dll</HintPath>
     </Reference>

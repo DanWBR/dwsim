@@ -1414,6 +1414,7 @@ Namespace SystemsOfUnits
                     Return value / 1000000.0
                 Case "L"
                     Return value / 1000.0
+
                 Case "cm3/mol"                          'volume molar'
                     Return value / 1000.0
                 Case "m3/kmol"
@@ -1437,14 +1438,18 @@ Namespace SystemsOfUnits
                     Return value / 0.224809
                 Case "mol/L"                            'conc molar
                     Return value * 1000
-                Case "kmol/m3"
+
+                Case "mol/m3"
                     Return value
+                Case "kmol/m3"
+                    Return value * 1000.0
                 Case "mol/cm3"
                     Return value * 1000000.0 / 1000
                 Case "mol/mL"
                     Return value * 1000000.0 / 1000
                 Case "lbmol/ft3"
                     Return value * 35.3147 * 1000 / 2.20462
+
                 Case "g/L"                              'conc massica
                     Return value
                 Case "kg/m3"
@@ -1919,16 +1924,20 @@ Namespace SystemsOfUnits
                     Return value
                 Case "lbf"
                     Return value * 0.224809
+
                 Case "mol/L"                            'conc molar
-                    Return value / 1000
-                Case "kmol/m3"
+                    Return value / 1000.0
+                Case "mol/m3"
                     Return value
+                Case "kmol/m3"
+                    Return value / 1000.0
                 Case "mol/cm3"
                     Return value / 1000000.0 * 1000
                 Case "mol/mL"
                     Return value / 1000000.0 * 1000
                 Case "lbmol/ft3"
                     Return value / 35.3147 / 1000 * 2.20462
+
                 Case "g/L"                              'conc massica
                     Return value
                 Case "kg/m3"

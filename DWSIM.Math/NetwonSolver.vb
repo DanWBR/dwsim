@@ -21,13 +21,17 @@ Namespace MathEx.Optimization
 
         Public Property Tolerance As Double = 0.0001
 
-        Public Property MaxIterations As Integer = 1000
+        Public Property MaxIterations As Integer = 100
 
         Public Property EnableDamping As Boolean = True
+
+        Public Property UseBroydenApproximation As Boolean = False
 
         Private _Iterations As Integer = 0
 
         Private fxb As Func(Of Double(), Double())
+
+        Private broydengrad As Double(,)
 
         Private brentsolver As New BrentOpt.BrentMinimize
 
@@ -55,8 +59,8 @@ Namespace MathEx.Optimization
         ''' <returns>vector of variables which solve the equations according to the minimum allowable error value (tolerance).</returns>
         Function Solve(functionbody As Func(Of Double(), Double()), vars As Double()) As Double()
 
-            Dim minimaldampings As Double() = New Double() {1.0E-20, 0.000000000000001, 0.0000000001, 0.00001, 0.0001, 0.001, 0.01, 0.1}
-            Dim epsilons As Double() = New Double() {0.0000000001, 0.000000001, 0.00000001, 0.0000001, 0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1}
+            Dim minimaldampings As Double() = New Double() {0.1, 0.01, 0.001, 0.0001, 0.00001, 0.0000000001, 0.000000000000001, 1.0E-20}
+            Dim epsilons As Double() = New Double() {0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1}
 
             Dim leave As Boolean = False
             Dim finalx As Double() = vars
@@ -120,7 +124,7 @@ Namespace MathEx.Optimization
 
                 If Common.SumSqr(fx) < Tolerance Then Exit Do
 
-                dfdx = gradient(epsilon, x)
+                dfdx = gradient(epsilon, x, fx)
 
                 success = SysLin.rsolve.rmatrixsolve(dfdx, fx, x.Length, dx)
 
@@ -172,30 +176,53 @@ Namespace MathEx.Optimization
 
         End Function
 
-        Private Function gradient(epsilon As Double, ByVal x() As Double) As Double(,)
+        Private Function gradient(epsilon As Double, ByVal x() As Double, fx() As Double) As Double(,)
 
             Dim f1(), f2() As Double
-            Dim g(x.Length - 1, x.Length - 1), x2(x.Length - 1) As Double
-            Dim i, j, k As Integer
+            Dim g(x.Length - 1, x.Length - 1), x2(x.Length - 1), dx(x.Length - 1), xbr(x.Length - 1), fbr(x.Length - 1) As Double
+            Dim i, j, k, n As Integer
 
-            f1 = fxb.Invoke(x)
-            For i = 0 To x.Length - 1
-                For j = 0 To x.Length - 1
-                    If i <> j Then
-                        x2(j) = x(j)
-                    Else
-                        If x(j) = 0.0# Then
-                            x2(j) = epsilon
+            n = x.Length - 1
+
+            If UseBroydenApproximation Then
+
+                If broydengrad Is Nothing Then broydengrad = g.Clone()
+
+                If _Iterations = 0 Then
+                    For i = 0 To n
+                        For j = 0 To n
+                            If i = j Then broydengrad(i, j) = 1.0 Else broydengrad(i, j) = 0.0
+                        Next
+                    Next
+                    Broyden.broydn(n, x, fx, dx, xbr, fbr, broydengrad, 0)
+                Else
+                    Broyden.broydn(n, x, fx, dx, xbr, fbr, broydengrad, 1)
+                End If
+
+                Return broydengrad
+
+            Else
+
+                f1 = fx
+                For i = 0 To x.Length - 1
+                    For j = 0 To x.Length - 1
+                        If i <> j Then
+                            x2(j) = x(j)
                         Else
-                            x2(j) = x(j) * (1 + epsilon)
+                            If x(j) = 0.0# Then
+                                x2(j) = epsilon
+                            Else
+                                x2(j) = x(j) * (1 + epsilon)
+                            End If
                         End If
-                    End If
+                    Next
+                    f2 = fxb.Invoke(x2)
+                    For k = 0 To x.Length - 1
+                        g(k, i) = (f2(k) - f1(k)) / (x2(i) - x(i))
+                    Next
                 Next
-                f2 = fxb.Invoke(x2)
-                For k = 0 To x.Length - 1
-                    g(k, i) = (f2(k) - f1(k)) / (x2(i) - x(i))
-                Next
-            Next
+
+            End If
 
             Return g
 

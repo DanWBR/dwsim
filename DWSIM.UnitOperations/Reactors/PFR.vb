@@ -73,8 +73,6 @@ Namespace Reactors
 
         Public Property Length As Double = 1.0#
 
-        Public Property CalcStep As Integer = 0
-
         Public Property Volume() As Double
             Get
                 Return m_vol
@@ -658,6 +656,8 @@ Namespace Reactors
 
             Dim negative As Boolean = False
 
+            Dim negativeflag As Boolean = False
+
             Dim dynamics As Boolean = False
 
             If args IsNot Nothing Then
@@ -665,13 +665,14 @@ Namespace Reactors
                 AccumulationStream = args
             End If
 
-            Dim deltaV As Double
+            Dim deltaV, deltaV0 As Double
 
             If dynamics Then
                 deltaV = 1.0 / AccumulationStreams.Count
             Else
                 deltaV = dV * dVF
             End If
+            deltaV0 = deltaV
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -817,8 +818,6 @@ Namespace Reactors
 
             Dim Tant As Double
 
-            CalcStep = 0
-
             Do
 
                 IObj?.SetCurrent
@@ -929,50 +928,61 @@ Namespace Reactors
 
                     'converge temperature
 
+                    deltaV = deltaV0
+
                     Do
 
-                        Dim odesolver = New DotNumerics.ODE.OdeImplicitRungeKutta5()
+                        If Not negativeflag Then
 
-                        ' progressively decrease tolerances until non-negative concentrations are found.
+                            Dim odesolver = New DotNumerics.ODE.OdeImplicitRungeKutta5()
 
-                        For nncounter = 1 To 10
+                            ' progressively decrease volume step until non-negative concentrations are found.
 
-                            odesolver.AbsTol /= 10
-                            odesolver.RelTol /= 10
-                            odesolver.InitializeODEs(AddressOf ODEFunc, N.Count, 0.0, vc0)
-                            IObj2?.SetCurrent
-                            If dynamics Then
-                                odesolver.Solve(vc0, 0.0#, 0.01 * deltaV * Volume, deltaV * Volume, Sub(x As Double, y As Double())
-                                                                                                        vc = y
-                                                                                                    End Sub)
-                            Else
-                                odesolver.Solve(vc0, 0.0#, 0.01 * deltaV * Volume, deltaV * Volume, Sub(x As Double, y As Double())
-                                                                                                        vc = y
-                                                                                                    End Sub)
+                            For nncounter = 1 To 10
+
+                                deltaV /= 10
+
+                                odesolver.InitializeODEs(AddressOf ODEFunc, N.Count, 0.0, vc0)
+                                IObj2?.SetCurrent
+                                If dynamics Then
+                                    odesolver.Solve(vc0, 0.0#, 0.01 * deltaV * Volume, deltaV * Volume, Sub(x As Double, y As Double())
+                                                                                                            vc = y
+                                                                                                        End Sub)
+                                Else
+                                    odesolver.Solve(vc0, 0.0#, 0.01 * deltaV * Volume, deltaV * Volume, Sub(x As Double, y As Double())
+                                                                                                            vc = y
+                                                                                                        End Sub)
+                                End If
+
+                                ODEFunc(0, vc)
+
+                                If Double.IsNaN(vc.Sum) Then Throw New Exception(FlowSheet.GetTranslatedString("PFRMassBalanceError"))
+
+                                negative = False
+                                For i = 0 To vc.Count - 1
+                                    If vc(i) < 0.0 Then
+                                        If Math.Abs(vc(i)) > 0.000001 Then
+                                            negative = True
+                                            negativeflag = True
+                                        Else
+                                            vc(i) = 0.0
+                                        End If
+                                    End If
+                                Next
+
+                                If Not negative Then Exit For
+
+                            Next
+
+                            If negative Then
+                                Throw New Exception(FlowSheet.GetTranslatedString("PFRMassBalanceError") &
+                                                    String.Format(" Error details: ODE solver calculated negative molar flows at volume step {0}/{1} m3.", currvol, Volume))
                             End If
+
+                        Else
 
                             ODEFunc(0, vc)
 
-                            If Double.IsNaN(vc.Sum) Then Throw New Exception(FlowSheet.GetTranslatedString("PFRMassBalanceError"))
-
-                            negative = False
-                            For i = 0 To vc.Count - 1
-                                If vc(i) < 0.0 Then
-                                    If Math.Abs(vc(i)) > 0.0000000001 Then
-                                        negative = True
-                                    Else
-                                        vc(i) = 0.0
-                                    End If
-                                End If
-                            Next
-
-                            If Not negative Then Exit For
-
-                        Next
-
-                        If negative Then
-                            Throw New Exception(FlowSheet.GetTranslatedString("PFRMassBalanceError") &
-                                                    String.Format(" Error details: ODE solver calculated negative molar flows at volume step {0}/{1} m3.", currvol, Volume))
                         End If
 
                         C.Clear()
@@ -1187,9 +1197,7 @@ Namespace Reactors
 
                 counter += 1
 
-                CalcStep = Convert.ToInt32(counter / nloops * 100)
-
-            Loop Until counter > nloops
+            Loop Until currvol >= Volume + deltaV
 
             If Not dynamics Then
 

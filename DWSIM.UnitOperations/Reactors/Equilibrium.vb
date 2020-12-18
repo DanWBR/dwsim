@@ -73,7 +73,7 @@ Namespace Reactors
 
         Public Property ExternalLoopTolerance As Double = 0.5
 
-        Public Property InternalLoopMaximumIterations As Integer = 10000
+        Public Property InternalLoopMaximumIterations As Integer = 1000
 
         Public Property ExternalLoopMaximumIterations As Integer = 50
 
@@ -728,6 +728,7 @@ Namespace Reactors
             Dim solver3 As New Optimization.NewtonSolver
             solver3.MaxIterations = InternalLoopMaximumIterations
             solver3.Tolerance = InternalLoopTolerance
+            solver3.UseBroydenApproximation = True
 
             ' check equilibrium constants to define objective function form
 
@@ -1019,10 +1020,12 @@ Namespace Reactors
             IObj?.Paragraphs.Add(String.Format("Final Gibbs Energy: {0}", g1))
 
             Me.ReactionExtents.Clear()
+            Me.PreviousReactionExtents.Clear()
 
             For Each rxid As String In Me.Reactions
                 rx = FlowSheet.Reactions(rxid)
                 ReactionExtents.Add(rx.ID, (N(rx.BaseReactant) - N0(rx.BaseReactant)) / rx.Components(rx.BaseReactant).StoichCoeff)
+                PreviousReactionExtents.Add(rx.ID, ReactionExtents(rx.ID))
             Next
 
             Dim W As Double = ims.Phases(0).Properties.massflow.GetValueOrDefault

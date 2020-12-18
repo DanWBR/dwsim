@@ -1110,6 +1110,7 @@ Namespace Reactors
                 Dim nsolv As New MathOps.MathEx.Optimization.NewtonSolver
                 nsolv.MaxIterations = MaximumInternalIterations
                 nsolv.Tolerance = InternalTolerance
+                nsolv.UseBroydenApproximation = True
 
                 Dim s2 As New Simplex
                 s2.MaxFunEvaluations = 50000
