@@ -69,9 +69,9 @@ Namespace Reactors
 
         Public Property UsePreviousSolution As Boolean = False
 
-        Public Property InternalLoopTolerance As Double = 0.001
+        Public Property InternalLoopTolerance As Double = 0.000001
 
-        Public Property ExternalLoopTolerance As Double = 0.5
+        Public Property ExternalLoopTolerance As Double = 0.01
 
         Public Property InternalLoopMaximumIterations As Integer = 1000
 
@@ -193,7 +193,7 @@ Namespace Reactors
                                 Case ReactionBasis.MolarFrac
                                     basis(j) = Vz(j)
                                 Case ReactionBasis.PartialPress
-                                    basis(j) = Vz(j) * fugv(j) * P.ConvertFromSI(.EquilibriumReactionBasisUnits)
+                                    basis(j) = (Vz(j) * fugv(j) * P).ConvertFromSI(.EquilibriumReactionBasisUnits)
                                 Case Else
                                     Throw New Exception("Selected Reaction Basis is not supported.")
                             End Select
@@ -207,7 +207,7 @@ Namespace Reactors
                                 Case ReactionBasis.MolarFrac
                                     basis(j) = Vz(j)
                                 Case ReactionBasis.PartialPress
-                                    basis(j) = Vz(j) * fugl(j) * P.ConvertFromSI(.EquilibriumReactionBasisUnits)
+                                    basis(j) = (Vz(j) * fugl(j) * P).ConvertFromSI(.EquilibriumReactionBasisUnits)
                                 Case Else
                                     Throw New Exception("Selected Reaction Basis is not supported.")
                             End Select
