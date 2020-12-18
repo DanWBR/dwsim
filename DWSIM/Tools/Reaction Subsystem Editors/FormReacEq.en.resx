@@ -120,11 +120,17 @@
   <data name="KryptonButton3.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>31, 13</value>
+  </data>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Units</value>
+  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="KryptonLabel12.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="KryptonLabel12.Size" type="System.Drawing.Size, System.Drawing">
     <value>144, 13</value>
   </data>
@@ -150,7 +156,10 @@
     <value>362, 20</value>
   </data>
   <data name="tbKeqConstant.Location" type="System.Drawing.Point, System.Drawing">
-    <value>109, 67</value>
+    <value>160, 67</value>
+  </data>
+  <data name="tbKeqConstant.Size" type="System.Drawing.Size, System.Drawing">
+    <value>362, 20</value>
   </data>
   <data name="rbKeqConstant.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 17</value>
@@ -173,6 +182,15 @@
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Equilibrium Constant (Keq)</value>
   </data>
+  <data name="tbApproach.Location" type="System.Drawing.Point, System.Drawing">
+    <value>265, 44</value>
+  </data>
+  <data name="tbApproach.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 20</value>
+  </data>
+  <data name="KryptonLabel9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 13</value>
+  </data>
   <data name="KryptonLabel9.Text" xml:space="preserve">
     <value>Approach (%)</value>
   </data>
@@ -193,12 +211,6 @@
   </data>
   <data name="KryptonLabel7.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 13</value>
-  </data>
-  <data name="KryptonLabel4.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="KryptonLabel4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 21</value>
   </data>
   <data name="KryptonLabel4.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 13</value>
@@ -227,9 +239,6 @@
   <data name="cbBase.Items6" xml:space="preserve">
     <value>Partial Pressure</value>
   </data>
-  <data name="KryptonLabel6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>191, 21</value>
-  </data>
   <data name="KryptonLabel6.Size" type="System.Drawing.Size, System.Drawing">
     <value>37, 13</value>
   </data>
@@ -240,7 +249,10 @@
     <value>Liquid</value>
   </data>
   <data name="tbPhase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>233, 17</value>
+    <value>265, 17</value>
+  </data>
+  <data name="tbPhase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 21</value>
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Equilibrium Reaction Parameters</value>

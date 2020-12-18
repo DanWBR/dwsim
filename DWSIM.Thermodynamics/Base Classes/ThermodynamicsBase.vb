@@ -452,6 +452,8 @@ Namespace BaseClasses
 
         Public Property ScriptTitle As String = "" Implements IReaction.ScriptTitle
 
+        Public Property EquilibriumReactionBasisUnits As String = "Pa" Implements IReaction.EquilibriumReactionBasisUnits
+
         Public Function EvaluateK1(T As Double, PP As Interfaces.IPropertyPackage) As Double Implements Interfaces.IReaction.EvaluateK
             Return EvaluateK(T, PP)
         End Function

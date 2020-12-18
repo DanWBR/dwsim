@@ -26,6 +26,8 @@ Partial Class FormReacEq
         Me.KryptonButton4 = New System.Windows.Forms.Button()
         Me.KryptonButton3 = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.cbUnits = New System.Windows.Forms.ComboBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.tbDelG = New System.Windows.Forms.TextBox()
         Me.KryptonLabel12 = New System.Windows.Forms.Label()
@@ -86,6 +88,9 @@ Partial Class FormReacEq
         '
         'GroupBox2
         '
+        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.Label2)
+        Me.GroupBox2.Controls.Add(Me.cbUnits)
         Me.GroupBox2.Controls.Add(Me.GroupBox3)
         Me.GroupBox2.Controls.Add(Me.tbApproach)
         Me.GroupBox2.Controls.Add(Me.KryptonLabel9)
@@ -97,12 +102,24 @@ Partial Class FormReacEq
         Me.GroupBox2.Controls.Add(Me.cbBase)
         Me.GroupBox2.Controls.Add(Me.KryptonLabel6)
         Me.GroupBox2.Controls.Add(Me.tbPhase)
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
         '
+        'Label2
+        '
+        resources.ApplyResources(Me.Label2, "Label2")
+        Me.Label2.Name = "Label2"
+        '
+        'cbUnits
+        '
+        resources.ApplyResources(Me.cbUnits, "cbUnits")
+        Me.cbUnits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbUnits.DropDownWidth = 121
+        Me.cbUnits.Name = "cbUnits"
+        '
         'GroupBox3
         '
+        resources.ApplyResources(Me.GroupBox3, "GroupBox3")
         Me.GroupBox3.Controls.Add(Me.tbDelG)
         Me.GroupBox3.Controls.Add(Me.KryptonLabel12)
         Me.GroupBox3.Controls.Add(Me.KryptonLabel5)
@@ -111,7 +128,6 @@ Partial Class FormReacEq
         Me.GroupBox3.Controls.Add(Me.rbKeqConstant)
         Me.GroupBox3.Controls.Add(Me.rbKeqGibbs)
         Me.GroupBox3.Controls.Add(Me.rbKeqfT)
-        resources.ApplyResources(Me.GroupBox3, "GroupBox3")
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.TabStop = False
         '
@@ -195,9 +211,9 @@ Partial Class FormReacEq
         '
         'cbBase
         '
+        resources.ApplyResources(Me.cbBase, "cbBase")
         Me.cbBase.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbBase.DropDownWidth = 121
-        resources.ApplyResources(Me.cbBase, "cbBase")
         Me.cbBase.Items.AddRange(New Object() {resources.GetString("cbBase.Items"), resources.GetString("cbBase.Items1"), resources.GetString("cbBase.Items2"), resources.GetString("cbBase.Items3"), resources.GetString("cbBase.Items4"), resources.GetString("cbBase.Items5"), resources.GetString("cbBase.Items6")})
         Me.cbBase.Name = "cbBase"
         '
@@ -208,14 +224,15 @@ Partial Class FormReacEq
         '
         'tbPhase
         '
+        resources.ApplyResources(Me.tbPhase, "tbPhase")
         Me.tbPhase.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.tbPhase.DropDownWidth = 121
         Me.tbPhase.Items.AddRange(New Object() {resources.GetString("tbPhase.Items"), resources.GetString("tbPhase.Items1")})
-        resources.ApplyResources(Me.tbPhase, "tbPhase")
         Me.tbPhase.Name = "tbPhase"
         '
         'GroupBox1
         '
+        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Controls.Add(Me.tbEquation)
         Me.GroupBox1.Controls.Add(Me.KryptonLabel3)
         Me.GroupBox1.Controls.Add(Me.KryptonButton2)
@@ -224,7 +241,6 @@ Partial Class FormReacEq
         Me.GroupBox1.Controls.Add(Me.tbStoich)
         Me.GroupBox1.Controls.Add(Me.KryptonDataGridView1)
         Me.GroupBox1.Controls.Add(Me.KryptonLabel1)
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
         '
@@ -263,13 +279,13 @@ Partial Class FormReacEq
         '
         'KryptonDataGridView1
         '
+        resources.ApplyResources(Me.KryptonDataGridView1, "KryptonDataGridView1")
         Me.KryptonDataGridView1.AllowUserToAddRows = False
         Me.KryptonDataGridView1.AllowUserToDeleteRows = False
         Me.KryptonDataGridView1.AllowUserToResizeRows = False
         Me.KryptonDataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.KryptonDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.KryptonDataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column2, Me.Column3, Me.Column7, Me.Column4, Me.Column5, Me.Column6, Me.Column1})
-        resources.ApplyResources(Me.KryptonDataGridView1, "KryptonDataGridView1")
         Me.KryptonDataGridView1.MultiSelect = False
         Me.KryptonDataGridView1.Name = "KryptonDataGridView1"
         Me.KryptonDataGridView1.RowHeadersVisible = False
@@ -327,11 +343,11 @@ Partial Class FormReacEq
         '
         'GroupBox4
         '
+        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
         Me.GroupBox4.Controls.Add(Me.KryptonLabel10)
         Me.GroupBox4.Controls.Add(Me.KryptonLabel11)
         Me.GroupBox4.Controls.Add(Me.tbName)
         Me.GroupBox4.Controls.Add(Me.tbDesc)
-        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.TabStop = False
         '
@@ -431,4 +447,6 @@ Partial Class FormReacEq
     Friend WithEvents Column5 As DataGridViewCheckBoxColumn
     Friend WithEvents Column6 As DataGridViewTextBoxColumn
     Friend WithEvents Column1 As DataGridViewTextBoxColumn
+    Public WithEvents Label2 As Label
+    Public WithEvents cbUnits As ComboBox
 End Class

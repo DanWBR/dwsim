@@ -96,7 +96,7 @@
     Property RateEquationNumerator As String
 
     Property RateEquationDenominator As String
-
+    Property EquilibriumReactionBasisUnits As String
     Function EvaluateK(T As Double, PP As IPropertyPackage) As Double
     Function GetPropertyList() As String()
     Function GetPropertyValue(prop As String) As Double

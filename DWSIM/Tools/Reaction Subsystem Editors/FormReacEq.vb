@@ -86,6 +86,9 @@ Public Class FormReacEq
                 Me.tbPhase.SelectedIndex = 1
         End Select
 
+        cbUnits.Enabled = False
+        cbUnits.Items.Clear()
+
         Select Case rc.ReactionBasis
             Case ReactionBasis.Activity
                 Me.cbBase.SelectedIndex = 0
@@ -93,14 +96,23 @@ Public Class FormReacEq
                 Me.cbBase.SelectedIndex = 1
             Case ReactionBasis.MolarConc
                 Me.cbBase.SelectedIndex = 2
+                cbUnits.Enabled = True
+                cbUnits.Items.AddRange(fc.Options.SelectedUnitSystem.GetUnitSet(UnitOfMeasure.molar_conc).ToArray())
+                cbUnits.SelectedItem = rc.EquilibriumReactionBasisUnits
             Case ReactionBasis.MassConc
                 Me.cbBase.SelectedIndex = 3
+                cbUnits.Enabled = True
+                cbUnits.Items.AddRange(fc.Options.SelectedUnitSystem.GetUnitSet(UnitOfMeasure.mass_conc).ToArray())
+                cbUnits.SelectedItem = rc.EquilibriumReactionBasisUnits
             Case ReactionBasis.MolarFrac
                 Me.cbBase.SelectedIndex = 4
             Case ReactionBasis.MolarConc
                 Me.cbBase.SelectedIndex = 5
             Case ReactionBasis.PartialPress
                 Me.cbBase.SelectedIndex = 6
+                cbUnits.Enabled = True
+                cbUnits.Items.AddRange(fc.Options.SelectedUnitSystem.GetUnitSet(UnitOfMeasure.pressure).ToArray())
+                cbUnits.SelectedItem = rc.EquilibriumReactionBasisUnits
         End Select
 
         Select Case rc.KExprType
@@ -297,6 +309,10 @@ Public Class FormReacEq
                     rc.ReactionBasis = ReactionBasis.PartialPress
             End Select
 
+            If cbUnits.Enabled Then
+                rc.EquilibriumReactionBasisUnits = cbUnits.SelectedItem.ToString()
+            End If
+
             'rc.ReactionHeat = Me.tbReacHeat.Text
             rc.Description = Me.tbDesc.Text
             rc.Name = Me.tbName.Text
@@ -348,4 +364,28 @@ Public Class FormReacEq
         Next
 
     End Sub
+
+    Private Sub cbBase_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbBase.SelectedIndexChanged
+        Select Case cbBase.SelectedIndex
+            Case 2
+                cbUnits.Items.Clear()
+                cbUnits.Enabled = True
+                cbUnits.Items.AddRange(fc.Options.SelectedUnitSystem.GetUnitSet(UnitOfMeasure.molar_conc).ToArray())
+                cbUnits.SelectedIndex = 0
+            Case 3
+                cbUnits.Items.Clear()
+                cbUnits.Enabled = True
+                cbUnits.Items.AddRange(fc.Options.SelectedUnitSystem.GetUnitSet(UnitOfMeasure.mass_conc).ToArray())
+                cbUnits.SelectedIndex = 0
+            Case 6
+                cbUnits.Items.Clear()
+                cbUnits.Enabled = True
+                cbUnits.Items.AddRange(fc.Options.SelectedUnitSystem.GetUnitSet(UnitOfMeasure.pressure).ToArray())
+                cbUnits.SelectedIndex = 0
+            Case Else
+                cbUnits.Items.Clear()
+                cbUnits.Enabled = False
+        End Select
+    End Sub
+
 End Class

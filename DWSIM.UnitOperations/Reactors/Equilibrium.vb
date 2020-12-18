@@ -170,11 +170,11 @@ Namespace Reactors
             i = 0
             For Each s As Compound In tms.Phases(0).Compounds.Values
                 If s.MoleFraction > 0.0# Then
-                    cpv(i) = (fugv(i) * Vz(i) * P / P0)
-                    cpl(i) = (fugl(i) * Vz(i))
+                    cpv(i) = fugv(i) * Vz(i) * P / P0
+                    cpl(i) = fugl(i) * Vz(i)
                 Else
-                    cpv(i) = (fugv(i) * 0.01 * P / P0)
-                    cpl(i) = (fugl(i) * 0.01)
+                    cpv(i) = fugv(i) * 0.01 * P / P0
+                    cpl(i) = fugl(i) * 0.01
                 End If
                 i += 1
             Next
@@ -193,7 +193,7 @@ Namespace Reactors
                                 Case ReactionBasis.MolarFrac
                                     basis(j) = Vz(j)
                                 Case ReactionBasis.PartialPress
-                                    basis(j) = Vz(j) * fugv(j) * P
+                                    basis(j) = Vz(j) * fugv(j) * P.ConvertFromSI(.EquilibriumReactionBasisUnits)
                                 Case Else
                                     Throw New Exception("Selected Reaction Basis is not supported.")
                             End Select
@@ -207,7 +207,7 @@ Namespace Reactors
                                 Case ReactionBasis.MolarFrac
                                     basis(j) = Vz(j)
                                 Case ReactionBasis.PartialPress
-                                    basis(j) = Vz(j) * fugl(j) * P
+                                    basis(j) = Vz(j) * fugl(j) * P.ConvertFromSI(.EquilibriumReactionBasisUnits)
                                 Case Else
                                     Throw New Exception("Selected Reaction Basis is not supported.")
                             End Select
@@ -220,7 +220,7 @@ Namespace Reactors
 
             Dim kr As Double
 
-            Dim penval As Double = If(NoPenVal, 0, ReturnPenaltyValue())
+            Dim penval As Double = ReturnPenaltyValue()
 
             For i = 0 To Me.Reactions.Count - 1
                 With FlowSheet.Reactions(Me.Reactions(i))
@@ -631,7 +631,7 @@ Namespace Reactors
                     If rx.Components.ContainsKey(cname) Then
                         E(j, i) = rx.Components(cname).StoichCoeff
                     Else
-                        E(j, i) = 0
+                        E(j, i) = 0.0
                     End If
                     j += 1
                 Next
