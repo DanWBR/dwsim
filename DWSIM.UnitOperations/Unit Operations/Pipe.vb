@@ -61,7 +61,7 @@ Namespace UnitOperations
         Protected m_flashP As Double = 1
         Protected m_flashT As Double = 1
 
-        Protected m_includejteffect As Boolean = False
+        Protected m_includeemulsion As Boolean = False
 
         Public Enum Specmode
             Length = 0
@@ -73,12 +73,12 @@ Namespace UnitOperations
         Public Property OutletPressure As Double = 101325
         Public Property OutletTemperature As Double = 298.15
 
-        Public Property IncludeJTEffect() As Boolean
+        Public Property IncludeEmulsion() As Boolean
             Get
-                Return m_includejteffect
+                Return m_includeemulsion
             End Get
             Set(ByVal value As Boolean)
-                m_includejteffect = value
+                m_includeemulsion = value
             End Set
         End Property
 
@@ -652,40 +652,6 @@ Namespace UnitOperations
 
                                 IObj4?.Paragraphs.Add(String.Format("Converged Outlet Temperature: {0} K", Tout))
                                 IObj4?.Paragraphs.Add(String.Format("Converged Outlet Pressure: {0} K", Pout))
-
-                                If IncludeJTEffect Then
-
-                                    IObj4?.Paragraphs.Add(String.Format("Taking into account JT effects..."))
-
-                                    Cp_m = (w_l * Cp_l + w_v * Cp_v) / w
-
-                                    If oms.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                        oms.Phases(0).Properties.temperature = Tin - 2
-                                        oms.PropertyPackage.CurrentMaterialStream = oms
-                                        IObj4?.SetCurrent()
-                                        oms.PropertyPackage.DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
-                                        z2 = oms.Phases(2).Properties.compressibilityFactor.GetValueOrDefault
-                                        dzdT = (z2 - z) / -2
-                                    Else
-                                        dzdT = 0.0#
-                                    End If
-
-                                    If w_l <> 0.0# Then
-                                        eta = 1 / (Cp_m * w) * (w_v / rho_v * (-Tin / z * dzdT) + w_l / rho_l)
-                                    Else
-                                        eta = 1 / (Cp_m * w) * (w_v / rho_v * (-Tin / z * dzdT))
-                                    End If
-
-                                    Hout = Hout - eta * Cp_m * (Pout - Pin) / w
-
-                                    Toutj = Tout + eta * (Pin - Pout) / 1000
-
-                                    Tout_ant = Tout
-                                    Tout = Toutj
-
-                                    IObj4?.Paragraphs.Add(String.Format("Updated Outlet Temperature: {0} K", Tout))
-
-                                End If
 
                                 oms.PropertyPackage.CurrentMaterialStream = oms
 

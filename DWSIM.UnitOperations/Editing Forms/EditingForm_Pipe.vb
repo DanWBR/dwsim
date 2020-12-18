@@ -126,7 +126,7 @@ Public Class EditingForm_Pipe
             tbTtol.Text = su.Converter.ConvertFromSI(units.deltaT, .TolT).ToString(nf)
             tbPtol.Text = su.Converter.ConvertFromSI(units.deltaP, .TolP).ToString(nf)
 
-            chkIncludeJT.Checked = .IncludeJTEffect
+            chkIncludeEmulsion.Checked = .IncludeEmulsion
 
             cbCalcMode.SelectedIndex = .Specification
 
@@ -408,8 +408,8 @@ Public Class EditingForm_Pipe
 
     End Sub
 
-    Private Sub chkIncludeJT_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeJT.CheckedChanged
-        SimObject.IncludeJTEffect = chkIncludeJT.Checked
+    Private Sub chkIncludeEmulsion_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeEmulsion.CheckedChanged
+        SimObject.IncludeEmulsion = chkIncludeEmulsion.Checked
     End Sub
 
     Private Sub cbCalcMode_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCalcMode.SelectedIndexChanged
