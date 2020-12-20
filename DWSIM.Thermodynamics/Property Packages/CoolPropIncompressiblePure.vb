@@ -452,7 +452,7 @@ Namespace PropertyPackages
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropy = result
 
                 IObj?.SetCurrent
-                result = Me.AUX_CONDTL(T)
+                result = Me.AUX_CONDTL(T, phaseID)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.thermalConductivity = result
 
                 IObj?.SetCurrent

@@ -172,11 +172,11 @@
   <data name="Button1.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="chkIncludeJT.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 17</value>
+  <data name="chkincludeEmulsion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 17</value>
   </data>
-  <data name="chkIncludeJT.Text" xml:space="preserve">
-    <value>Include Joule-Thomson Effect</value>
+  <data name="chkincludeEmulsion.Text" xml:space="preserve">
+    <value>Include Emulsion Effect</value>
   </data>
   <data name="btnConfigurePP.ToolTip" xml:space="preserve">
     <value>Configure</value>

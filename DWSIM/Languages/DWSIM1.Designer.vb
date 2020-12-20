@@ -8200,11 +8200,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Considerar resfriamento pelo efeito Joule-Thomson.
+        '''  Looks up a localized string similar to Considerar resfriamento pelo efeito Emulsion.
         '''</summary>
-        Friend Shared ReadOnly Property IncludeJTEffect() As String
+        Friend Shared ReadOnly Property IncludeEmulsion() As String
             Get
-                Return ResourceManager.GetString("IncludeJTEffect", resourceCulture)
+                Return ResourceManager.GetString("IncludeEmulsion", resourceCulture)
             End Get
         End Property
         
