@@ -272,6 +272,11 @@ Namespace UnitOperations
             IObj?.Paragraphs.Add("7. When both pressure and temperature converges, the results are 
                             passed to the next increment, where calculation restarts.")
 
+            IObj?.Paragraphs.Add("If enabling the option Include Emulsion Effect the liquid mixture emulsion 
+                            viscosity is estimated. Emulsion viscosity is assuming liquid1 to be hydrocarbons 
+                            liquid2 to be water. An inversion point at 50% oil volume fraction is assumed.")
+
+
             If args Is Nothing Then
                 If Not Me.GraphicObject.EnergyConnector.IsAttached Then
                     Throw New Exception(FlowSheet.GetTranslatedString("NohcorrentedeEnergyFlow3"))
