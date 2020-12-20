@@ -23,6 +23,7 @@ Imports DWSIM.MathOps.MathEx
 Imports DWSIM.MathOps.MathEx.Common
 
 Imports System.Threading.Tasks
+Imports DotNumerics.Optimization
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
@@ -486,161 +487,96 @@ out:
 
             result = New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
 
-            Dim GoneThrough As Boolean = False
-
-            If L = 0 And (FlashSettings(Interfaces.Enums.FlashSetting.CheckIncipientLiquidForStability)) Then
-
-                Dim stresult As Object = StabTest(T, P, result(2), PP.RET_VTC, PP)
-
-                If stresult(0) = False Then
-
-                    Dim nlflash As New NestedLoops()
-
-                    Dim m As Double = UBound(stresult(1), 1)
-
-                    Dim trialcomps As New List(Of Double())
-                    Dim results As New List(Of Object)
-
-                    For j = 0 To m
-                        Dim vxtrial(n) As Double
-                        For i = 0 To n
-                            vxtrial(i) = stresult(1)(j, i)
-                        Next
-                        trialcomps.Add(vxtrial)
-                    Next
-
-                    For Each tcomp In trialcomps
-                        Try
-                            Dim r2 = nlflash.Flash_PT(Vz, P, T, PP, True, Vy.DivideY(tcomp))
-                            results.Add(r2)
-                        Catch ex As Exception
-                        End Try
-                    Next
-
-                    If results.Where(Function(r) r(0) > 0.0).Count > 0 Then
-
-                        Dim validresult = results.Where(Function(r) r(0) > 0.0).First
-
-                        L = validresult(0)
-                        V = validresult(1)
-                        Vx = validresult(2)
-                        Vy = validresult(3)
-                        ecount = validresult(4)
-
-                        prevres = New PreviousResults With {.L1 = L, .L2 = 0, .V = V, .Vy = Vy, .Vx1 = Vx, .Vx2 = PP.RET_NullVector}
-
-                        result = New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
-
-                        GoneThrough = True
-
-                    End If
-
-                End If
-
-            End If
-
             ' check if there is a liquid phase
 
             IObj?.Paragraphs.Add("The algorithm will now move to the VLLE part. First it checks if there is a liquid phase. If yes, then it calls the liquid phase stability test algorithm to see if a second liquid phase can form at the current conditions.")
 
-            If L > 0 And Not GoneThrough Then
+            IObj?.Paragraphs.Add("We have a liquid phase. Checking its stability according to user specifications...")
 
-                IObj?.Paragraphs.Add("We have a liquid phase. Checking its stability according to user specifications...")
+            IObj?.Paragraphs.Add("Calling Liquid Phase Stability Test algorithm...")
 
-                IObj?.Paragraphs.Add("Calling Liquid Phase Stability Test algorithm...")
+            ' do a stability test in the liquid phase
 
-                ' do a stability test in the liquid phase
+            IObj?.SetCurrent
+
+            Dim stresult = StabTest2(T, P, result(2), PP.RET_VTC, PP)
+
+            If stresult.Count > 0 Then
+
+                IObj?.Paragraphs.Add("The liquid phase is not stable. Proceed to three-phase flash.")
+
+                Dim validsolutions = stresult.Where(Function(s) s.Max > 0.5).ToList()
+
+                Dim vx2est(n), fcl(n), fcv(n) As Double
+
+                If validsolutions.Count > 0 Then
+
+                    ' select the composition which gives the lowest gibbs energy.
+
+                    Dim Gt0 As Double = 100000.0, Gt As Double, ft() As Double, it As Integer
+                    i = 0
+                    For Each trialcomp In validsolutions
+                        ft = PP.DW_CalcFugCoeff(trialcomp, T, P, State.Liquid)
+                        Gt = 0.0
+                        For j = 0 To n
+                            If Vz(j) > 0.0 Then
+                                Gt += trialcomp(j) * Log(ft(j) * trialcomp(j))
+                            End If
+                        Next
+                        If Gt < Gt0 Then
+                            Gt0 = Gt
+                            it = i
+                        End If
+                        i += 1
+                    Next
+                    vx2est = validsolutions(it)
+                Else
+                    vx2est = stresult(0)
+                End If
+
+                Dim vx1e(Vz.Length - 1) As Double
+
+                'calculate L2
+
+                L2 = 0.3 / L
+
+                For i = 0 To n
+                    vx1e(i) = (1 - L2) * Vx(i) - L2 * vx2est(i)
+                    If vx1e(i) < 0.0 Then vx1e(i) = 0.0
+                Next
+
+                L1 = F - L2 - V
+
+                If L1 < 0.0# Then
+                    L1 = Abs(L1)
+                    L2 = F - L1 - V
+                End If
+
+                If L2 < 0.0# Then
+                    V += L2
+                    L2 = Abs(L2)
+                End If
+
+                Dim sumvx2 As Double
+                For i = 0 To n
+                    sumvx2 += Abs(vx1e(i))
+                Next
+
+                For i = 0 To n
+                    vx1e(i) = Abs(vx1e(i)) / sumvx2
+                Next
+
+                IObj?.Paragraphs.Add(String.Format("Initial Estimate for Vapor Phase Molar Fraction (V): {0}", V))
+                IObj?.Paragraphs.Add(String.Format("Initial Estimate for Liquid Phase 1 Molar Fraction (L1): {0}", L1))
+                IObj?.Paragraphs.Add(String.Format("Initial Estimate for Liquid Phase 2 Molar Fraction (L2): {0}", L2))
+
+                IObj?.Paragraphs.Add(String.Format("Initial Estimate for Vapor Phase Molar Composition: {0}", Vy.ToMathArrayString))
+                IObj?.Paragraphs.Add(String.Format("Initial Estimate for Liquid Phase 1 Molar Composition: {0}", vx1e.ToMathArrayString))
+                IObj?.Paragraphs.Add(String.Format("Initial Estimate for Liquid Phase 2 Molar Composition: {0}", vx2est.ToMathArrayString))
 
                 IObj?.SetCurrent
 
-                Dim stresult As Object = StabTest(T, P, result(2), PP.RET_VTC, PP)
-
-                If stresult(0) = False Then
-
-                    IObj?.Paragraphs.Add("The liquid phase is not stable. Proceed to three-phase flash.")
-
-                    ' liquid phase NOT stable. proceed to three-phase flash.
-
-                    Dim vx2est(n), fcl(n), fcv(n) As Double
-                    Dim m As Double = UBound(stresult(1), 1)
-                    Dim gl, gli As Double
-
-                    If StabSearchSeverity = 2 Then
-                        gli = 0
-                        For j = 0 To m
-                            For i = 0 To n
-                                vx2est(i) = stresult(1)(j, i)
-                            Next
-                            IObj?.SetCurrent
-                            fcl = PP.DW_CalcFugCoeff(vx2est, T, P, State.Liquid)
-                            gl = 0.0#
-                            For i = 0 To n
-                                If vx2est(i) <> 0.0# Then gl += vx2est(i) * Log(fcl(i) * vx2est(i))
-                            Next
-                            If gl <= gli Then
-                                gli = gl
-                                k = j
-                            End If
-                        Next
-                        For i = 0 To Vz.Length - 1
-                            vx2est(i) = stresult(1)(k, i)
-                        Next
-                    Else
-                        For i = 0 To Vz.Length - 1
-                            vx2est(i) = stresult(1)(m, i)
-                        Next
-                    End If
-
-                    Dim vx1e(Vz.Length - 1), vx2e(Vz.Length - 1) As Double
-
-                    Dim maxl As Double = MathEx.Common.Max(vx2est)
-                    Dim imaxl As Integer = Array.IndexOf(vx2est, maxl)
-
-                    F = 1
-                    V = result(1)
-                    L2 = F * result(3)(imaxl)
-                    L1 = F - L2 - V
-
-                    If L1 < 0.0# Then
-                        L1 = Abs(L1)
-                        L2 = F - L1 - V
-                    End If
-
-                    If L2 < 0.0# Then
-                        V += L2
-                        L2 = Abs(L2)
-                    End If
-
-                    For i = 0 To n
-                        If i <> imaxl Then
-                            vx1e(i) = Vz(i) - V * result(3)(i) - L2 * vx2est(i)
-                        Else
-                            vx1e(i) = Vz(i) * L2
-                        End If
-                    Next
-
-                    Dim sumvx2 As Double
-                    For i = 0 To n
-                        sumvx2 += Abs(vx1e(i))
-                    Next
-
-                    For i = 0 To n
-                        vx1e(i) = Abs(vx1e(i)) / sumvx2
-                    Next
-
-                    IObj?.Paragraphs.Add(String.Format("Initial Estimate for Vapor Phase Molar Fraction (V): {0}", V))
-                    IObj?.Paragraphs.Add(String.Format("Initial Estimate for Liquid Phase 1 Molar Fraction (L1): {0}", L1))
-                    IObj?.Paragraphs.Add(String.Format("Initial Estimate for Liquid Phase 2 Molar Fraction (L2): {0}", L2))
-
-                    IObj?.Paragraphs.Add(String.Format("Initial Estimate for Vapor Phase Molar Composition: {0}", Vy.ToMathArrayString))
-                    IObj?.Paragraphs.Add(String.Format("Initial Estimate for Liquid Phase 1 Molar Composition: {0}", vx1e.ToMathArrayString))
-                    IObj?.Paragraphs.Add(String.Format("Initial Estimate for Liquid Phase 2 Molar Composition: {0}", vx2est.ToMathArrayString))
-
-                    IObj?.SetCurrent
-
-                    result = Flash_PT_3P(Vz, V, L1, L2, Vy, vx1e, vx2est, P, T, PP)
-
-                End If
+                result = Flash_PT_3P(Vz, V, L1, L2, Vy, vx1e, vx2est, P, T, PP)
 
             End If
 

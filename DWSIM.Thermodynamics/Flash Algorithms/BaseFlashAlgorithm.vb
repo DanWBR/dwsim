@@ -853,11 +853,17 @@ will converge to this solution.")
 
             Vtrials.Add(Vz.Clone)
 
-            Dim ntries As Integer = 50
 
-            For i = 0 To ntries
-                Dim random As New Random(i)
-                Vtrials.Add(Enumerable.Repeat(0, n + 1).Select(Function(d) random.Next(0, 1000) / 1000.0).ToArray.MultiplyY(Vz))
+            Dim random As New Random(1000)
+
+            For i = 0 To n
+                Dim vnew = pp.RET_NullVector()
+                For j = 0 To n
+                    If i = j Then
+                        If Vz(j) > 0.0 Then vnew(j) = 1.0
+                    End If
+                Next
+                If vnew.Sum > 0.0 Then Vtrials.Add(vnew)
             Next
 
             For i = 0 To Vtrials.Count - 1

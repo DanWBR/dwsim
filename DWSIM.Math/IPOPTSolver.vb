@@ -58,7 +58,7 @@ Namespace MathEx.Optimization
         ''' <param name="lbounds">lower bounds for x</param>
         ''' <param name="ubounds">upper bounds for x</param>
         ''' <returns>vector of variables corresponding to the function's minimum value.</returns>
-        Public Function Solve(functionbody As Func(Of Double(), Double), functiongradient As Func(Of Double(), Double()), vars As Double(), lbounds As Double(), ubounds As Double()) As Double()
+        Public Function Solve(functionbody As Func(Of Double(), Double), functiongradient As Func(Of Double(), Double()), vars As Double(), Optional lbounds As Double() = Nothing, Optional ubounds As Double() = Nothing) As Double()
 
             Dim obj As Double = 0.0#
             Dim status As IpoptReturnCode = IpoptReturnCode.Feasible_Point_Found
@@ -68,6 +68,20 @@ Namespace MathEx.Optimization
 
             fxb = functionbody
             fxg = functiongradient
+
+            If lbounds Is Nothing Then
+                lbounds = vars.Clone()
+                For i As Integer = 0 To lbounds.Length - 1
+                    lbounds(i) = -1.0E+19
+                Next
+            End If
+
+            If ubounds Is Nothing Then
+                ubounds = vars.Clone()
+                For i As Integer = 0 To ubounds.Length - 1
+                    ubounds(i) = 1.0E+19
+                Next
+            End If
 
             Using problem As New Ipopt(vars.Length, lbounds, ubounds, 0, Nothing, Nothing,
                        0, 0, AddressOf eval_f, AddressOf eval_g,

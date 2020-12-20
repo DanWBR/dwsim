@@ -445,25 +445,19 @@ Namespace Reactors
 
         End Function
 
-        Private Function FixFugCoeff(fc() As Double, T As Double, st As PropertyPackages.State) As Double()
+        Private Function FixFugCoeff(fc() As Double, T As Double, P As Double, st As PropertyPackages.State) As Double()
 
             Dim newfc(fc.Length - 1) As Double, i As Integer
 
             newfc = fc.Clone
 
-            Dim Tf As Double() = Me.PropertyPackage.CurrentMaterialStream.Phases(0).Compounds.Values.Select(Function(c) c.ConstantProperties.TemperatureOfFusion).ToArray
+            Dim Tb As Double() = Me.PropertyPackage.CurrentMaterialStream.Phases(0).Compounds.Values.Select(Function(c) c.ConstantProperties.Normal_Boiling_Point).ToArray
 
             Select Case st
-                Case PropertyPackages.State.Vapor, PropertyPackages.State.Liquid
+                Case PropertyPackages.State.Liquid
                     For i = 0 To fc.Length - 1
-                        If Tf(i) > T Then
-                            'newfc(i) = 1.0E+30
-                        End If
-                    Next
-                Case PropertyPackages.State.Solid
-                    For i = 0 To fc.Length - 1
-                        If Tf(i) < T Then
-                            newfc(i) = 1.0E+30
+                        If Tb(i) < T Then
+                            newfc(i) = DirectCast(PropertyPackage, PropertyPackages.PropertyPackage).AUX_PVAPi(i, T) / P
                         End If
                     Next
             End Select
@@ -757,7 +751,7 @@ Namespace Reactors
 
             Select Case Me.ReactorOperationMode
                 Case OperationMode.Adiabatic
-                    T = T0 'initial value only, final value will be calculated by an iterative procedure
+                    T = 1500.0 'initial value only, final value will be calculated by an iterative procedure
                 Case OperationMode.Isothermic
                     T = T0
                 Case OperationMode.OutletTemperature
@@ -964,7 +958,7 @@ Namespace Reactors
 
             Dim CalcFinished As Boolean = False
 
-            Dim TLast As Double = T0 'remember T for iteration loops
+            Dim TLast As Double = T 'remember T for iteration loops
 
             cnt = 0
 
@@ -1040,10 +1034,10 @@ Namespace Reactors
 
                 nt = nv + nl1 + nl2 + ns
 
-                fv_0 = FixFugCoeff(fv_0, T, PropertyPackages.State.Vapor)
-                fl1_0 = FixFugCoeff(fl1_0, T, PropertyPackages.State.Liquid)
-                fl2_0 = FixFugCoeff(fl2_0, T, PropertyPackages.State.Liquid)
-                fs_0 = FixFugCoeff(fs_0, T, PropertyPackages.State.Solid)
+                fv_0 = FixFugCoeff(fv_0, T, P, PropertyPackages.State.Vapor)
+                fl1_0 = FixFugCoeff(fl1_0, T, P, PropertyPackages.State.Liquid)
+                fl2_0 = FixFugCoeff(fl2_0, T, P, PropertyPackages.State.Liquid)
+                fs_0 = FixFugCoeff(fs_0, T, P, PropertyPackages.State.Solid)
 
                 IObj2?.Paragraphs.Add(String.Format("Initial Vapor Phase Amount: {0}", nv))
                 IObj2?.Paragraphs.Add(String.Format("Initial Liquid Phase 1 Amount: {0}", nl1))
@@ -1170,10 +1164,10 @@ Namespace Reactors
                     IObj3?.SetCurrent
                     fs_0 = pp.DW_CalcSolidFugCoeff(T, P).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
 
-                    fv_0 = FixFugCoeff(fv_0, T, PropertyPackages.State.Vapor)
-                    fl1_0 = FixFugCoeff(fl1_0, T, PropertyPackages.State.Liquid)
-                    fl2_0 = FixFugCoeff(fl2_0, T, PropertyPackages.State.Liquid)
-                    fs_0 = FixFugCoeff(fs_0, T, PropertyPackages.State.Solid)
+                    fv_0 = FixFugCoeff(fv_0, T, P, PropertyPackages.State.Vapor)
+                    fl1_0 = FixFugCoeff(fl1_0, T, P, PropertyPackages.State.Liquid)
+                    fl2_0 = FixFugCoeff(fl2_0, T, P, PropertyPackages.State.Liquid)
+                    fs_0 = FixFugCoeff(fs_0, T, P, PropertyPackages.State.Solid)
 
                     IObj3?.Paragraphs.Add(String.Format("Vapor Phase Amount: {0}", nv))
                     IObj3?.Paragraphs.Add(String.Format("Liquid Phase 1 Amount: {0}", nl1))
@@ -1205,13 +1199,7 @@ Namespace Reactors
 
                 If errfunc > ExternalTolerance Then
 
-                    errfunc = FunctionValue2N(finalx).AbsSqrSumY
-
-                    If errfunc > ExternalTolerance Then
-
-                        Throw New Exception(FlowSheet.GetTranslatedString("ConvergenceError"))
-
-                    End If
+                    Throw New Exception(FlowSheet.GetTranslatedString("ConvergenceError"))
 
                 End If
 

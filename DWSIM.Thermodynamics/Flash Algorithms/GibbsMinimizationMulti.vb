@@ -372,7 +372,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     V = 0.9999
                 End If
 
-                L2 = 0.0001
+                L2 = 0.000001
 
                 Dim sum = V + L1 + L2 + Sx
 
@@ -393,7 +393,24 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Dim validsolutions = stresult.Where(Function(s) s.Max > 0.5).ToList()
 
                     If validsolutions.Count > 0 Then
-                        Vx2 = validsolutions(0)
+                        'select the composition which gives the lowest gibbs energy.
+                        Dim Gt0 As Double = 100000.0, Gt As Double, ft() As Double, it As Integer
+                        i = 0
+                        For Each trialcomp In validsolutions
+                            ft = PP.DW_CalcFugCoeff(trialcomp, T, P, State.Liquid)
+                            Gt = 0.0
+                            For j = 0 To n
+                                If Vz(j) > 0.0 Then
+                                    Gt += trialcomp(j) * Log(ft(j) * trialcomp(j))
+                                End If
+                            Next
+                            If Gt < Gt0 Then
+                                Gt0 = Gt
+                                it = i
+                            End If
+                            i += 1
+                        Next
+                        Vx2 = validsolutions(it)
                     Else
                         Vx2 = stresult(0)
                     End If

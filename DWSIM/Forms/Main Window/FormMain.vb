@@ -2970,12 +2970,12 @@ Public Class FormMain
             If Visible Then
                 Dim mypath As String = simulationfilename
                 If mypath = "" Then mypath = [path]
-                'process recent files list
-                If Not My.Settings.MostRecentFiles.Contains(mypath) Then
-                    My.Settings.MostRecentFiles.Add(mypath)
-                    If Not My.Application.CommandLineArgs.Count > 1 Then Me.UpdateMRUList()
-                End If
                 form.UIThread(Sub()
+                                  'process recent files list
+                                  If Not My.Settings.MostRecentFiles.Contains(mypath) Then
+                                      My.Settings.MostRecentFiles.Add(mypath)
+                                      If Not My.Application.CommandLineArgs.Count > 1 Then Me.UpdateMRUList()
+                                  End If
                                   form.Options.FilePath = Me.filename
                                   form.UpdateFormText()
                               End Sub)
