@@ -61,7 +61,7 @@ Namespace UnitOperations
         Protected m_flashP As Double = 1
         Protected m_flashT As Double = 1
 
-        Protected m_includejteffect As Boolean = False
+        Protected m_includeemulsion As Boolean = False
 
         Public Enum Specmode
             Length = 0
@@ -73,12 +73,12 @@ Namespace UnitOperations
         Public Property OutletPressure As Double = 101325
         Public Property OutletTemperature As Double = 298.15
 
-        Public Property IncludeJTEffect() As Boolean
+        Public Property IncludeEmulsion() As Boolean
             Get
-                Return m_includejteffect
+                Return m_includeemulsion
             End Get
             Set(ByVal value As Boolean)
-                m_includejteffect = value
+                m_includeemulsion = value
             End Set
         End Property
 
@@ -272,6 +272,11 @@ Namespace UnitOperations
             IObj?.Paragraphs.Add("7. When both pressure and temperature converges, the results are 
                             passed to the next increment, where calculation restarts.")
 
+            IObj?.Paragraphs.Add("If enabling the option Include Emulsion Effect the liquid mixture emulsion 
+                            viscosity is estimated. Emulsion viscosity is assuming liquid1 to be hydrocarbons 
+                            liquid2 to be water. An inversion point at 50% oil volume fraction is assumed.")
+
+
             If args Is Nothing Then
                 If Not Me.GraphicObject.EnergyConnector.IsAttached Then
                     Throw New Exception(FlowSheet.GetTranslatedString("NohcorrentedeEnergyFlow3"))
@@ -322,7 +327,7 @@ Namespace UnitOperations
 
             Dim Tin, Pin, Tout, Pout, Tout_ant, Pout_ant, Pout_ant2, Toutj, Text, Win, Qin, Qvin, Qlin, TinP, PinP,
                 rho_l, rho_v, Cp_l, Cp_v, Cp_m, K_l, K_v, eta_l, eta_v, tens, Hin, Hout, HinP,
-                fT, fP, fP_ant, fP_ant2, w_v, w_l, w, z, z2, dzdT, dText_dL As Double
+                fT, fP, fP_ant, fP_ant2, w_v, w_l, w, z, z2, dzdT, dText_dL, phi, eta_lh, eta_ll As Double
             Dim cntP, cntT As Integer
 
             If Me.Specification = Specmode.OutletTemperature Then
@@ -429,10 +434,28 @@ Namespace UnitOperations
 
                                 w = .Phases(0).Properties.massflow.GetValueOrDefault
                                 Tin = .Phases(0).Properties.temperature.GetValueOrDefault
-                                Qlin = .Phases(3).Properties.volumetric_flow.GetValueOrDefault + .Phases(4).Properties.volumetric_flow.GetValueOrDefault + .Phases(5).Properties.volumetric_flow.GetValueOrDefault + .Phases(6).Properties.volumetric_flow.GetValueOrDefault
+                                Qlin = .Phases(1).Properties.volumetric_flow.GetValueOrDefault
+                                '+ .Phases(4).Properties.volumetric_flow.GetValueOrDefault + .Phases(5).Properties.volumetric_flow.GetValueOrDefault + .Phases(6).Properties.volumetric_flow.GetValueOrDefault
                                 rho_l = .Phases(1).Properties.density.GetValueOrDefault
                                 If Double.IsNaN(rho_l) Then rho_l = 0.0#
-                                eta_l = .Phases(1).Properties.viscosity.GetValueOrDefault
+
+                                If IncludeEmulsion() And .Phases(3).Properties.volumetric_flow.GetValueOrDefault > 0.0 And .Phases(4).Properties.volumetric_flow.GetValueOrDefault > 0.0 Then
+                                    ' Oil fraction
+                                    phi = .Phases(3).Properties.volumetric_flow.GetValueOrDefault / (.Phases(4).Properties.volumetric_flow.GetValueOrDefault + .Phases(3).Properties.volumetric_flow.GetValueOrDefault)
+                                    eta_lh = .Phases(3).Properties.viscosity.GetValueOrDefault * Math.Exp(3.6 * (1 - phi))
+                                    eta_ll = .Phases(4).Properties.viscosity.GetValueOrDefault _
+                                            * (1 + 2.5 * phi * (.Phases(3).Properties.viscosity.GetValueOrDefault + 0.4 * .Phases(4).Properties.viscosity.GetValueOrDefault) / (.Phases(3).Properties.viscosity.GetValueOrDefault + .Phases(4).Properties.viscosity.GetValueOrDefault))
+                                    If phi > 0.5 Then
+                                        eta_l = eta_lh
+                                    ElseIf phi < 0.33 Then
+                                        eta_l = eta_ll
+                                    Else
+                                        eta_l = (phi - 0.33) / 0.17 * eta_lh + (1 - (phi - 0.33) / 0.17) * eta_ll
+                                    End If
+                                Else
+                                    eta_l = .Phases(1).Properties.viscosity.GetValueOrDefault
+                                End If
+
                                 K_l = .Phases(1).Properties.thermalConductivity.GetValueOrDefault
                                 Cp_l = .Phases(1).Properties.heatCapacityCp.GetValueOrDefault
                                 tens = .Phases(0).Properties.surfaceTension.GetValueOrDefault
@@ -653,40 +676,6 @@ Namespace UnitOperations
                                 IObj4?.Paragraphs.Add(String.Format("Converged Outlet Temperature: {0} K", Tout))
                                 IObj4?.Paragraphs.Add(String.Format("Converged Outlet Pressure: {0} K", Pout))
 
-                                If IncludeJTEffect Then
-
-                                    IObj4?.Paragraphs.Add(String.Format("Taking into account JT effects..."))
-
-                                    Cp_m = (w_l * Cp_l + w_v * Cp_v) / w
-
-                                    If oms.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                        oms.Phases(0).Properties.temperature = Tin - 2
-                                        oms.PropertyPackage.CurrentMaterialStream = oms
-                                        IObj4?.SetCurrent()
-                                        oms.PropertyPackage.DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
-                                        z2 = oms.Phases(2).Properties.compressibilityFactor.GetValueOrDefault
-                                        dzdT = (z2 - z) / -2
-                                    Else
-                                        dzdT = 0.0#
-                                    End If
-
-                                    If w_l <> 0.0# Then
-                                        eta = 1 / (Cp_m * w) * (w_v / rho_v * (-Tin / z * dzdT) + w_l / rho_l)
-                                    Else
-                                        eta = 1 / (Cp_m * w) * (w_v / rho_v * (-Tin / z * dzdT))
-                                    End If
-
-                                    Hout = Hout - eta * Cp_m * (Pout - Pin) / w
-
-                                    Toutj = Tout + eta * (Pin - Pout) / 1000
-
-                                    Tout_ant = Tout
-                                    Tout = Toutj
-
-                                    IObj4?.Paragraphs.Add(String.Format("Updated Outlet Temperature: {0} K", Tout))
-
-                                End If
-
                                 oms.PropertyPackage.CurrentMaterialStream = oms
 
                                 oms.Phases(0).Properties.temperature = Tout
@@ -709,7 +698,23 @@ Namespace UnitOperations
                                     Qlin = .Phases(3).Properties.volumetric_flow.GetValueOrDefault + .Phases(4).Properties.volumetric_flow.GetValueOrDefault + .Phases(5).Properties.volumetric_flow.GetValueOrDefault + .Phases(6).Properties.volumetric_flow.GetValueOrDefault
                                     rho_l = .Phases(1).Properties.density.GetValueOrDefault
                                     If Double.IsNaN(rho_l) Then rho_l = 0.0#
-                                    eta_l = .Phases(1).Properties.viscosity.GetValueOrDefault
+                                    If IncludeEmulsion() And .Phases(3).Properties.volumetric_flow.GetValueOrDefault > 0.0 And .Phases(4).Properties.volumetric_flow.GetValueOrDefault > 0.0 Then
+                                        ' Oil fraction
+                                        phi = .Phases(3).Properties.volumetric_flow.GetValueOrDefault / (.Phases(4).Properties.volumetric_flow.GetValueOrDefault + .Phases(3).Properties.volumetric_flow.GetValueOrDefault)
+                                        eta_lh = .Phases(3).Properties.viscosity.GetValueOrDefault * Math.Exp(3.6 * (1 - phi))
+                                        eta_ll = .Phases(4).Properties.viscosity.GetValueOrDefault _
+                                            * (1 + 2.5 * phi * (.Phases(3).Properties.viscosity.GetValueOrDefault + 0.4 * .Phases(4).Properties.viscosity.GetValueOrDefault) / (.Phases(3).Properties.viscosity.GetValueOrDefault + .Phases(4).Properties.viscosity.GetValueOrDefault))
+                                        If phi > 0.5 Then
+                                            eta_l = eta_lh
+                                        ElseIf phi < 0.33 Then
+                                            eta_l = eta_ll
+                                        Else
+                                            eta_l = (phi - 0.33) / 0.17 * eta_lh + (1 - (phi - 0.33) / 0.17) * eta_ll
+                                        End If
+                                    Else
+                                        eta_l = .Phases(1).Properties.viscosity.GetValueOrDefault
+                                    End If
+
                                     K_l = .Phases(1).Properties.thermalConductivity.GetValueOrDefault
                                     Cp_l = .Phases(1).Properties.heatCapacityCp.GetValueOrDefault
                                     tens = .Phases(0).Properties.surfaceTension.GetValueOrDefault
@@ -782,7 +787,23 @@ Namespace UnitOperations
 
                                     Qlin = .Phases(3).Properties.volumetric_flow.GetValueOrDefault + .Phases(4).Properties.volumetric_flow.GetValueOrDefault + .Phases(5).Properties.volumetric_flow.GetValueOrDefault + .Phases(6).Properties.volumetric_flow.GetValueOrDefault
                                     rho_l = .Phases(1).Properties.density.GetValueOrDefault
-                                    eta_l = .Phases(1).Properties.viscosity.GetValueOrDefault
+                                    If IncludeEmulsion() And .Phases(3).Properties.volumetric_flow.GetValueOrDefault > 0.0 And .Phases(4).Properties.volumetric_flow.GetValueOrDefault > 0.0 Then
+                                        ' Oil fraction
+                                        phi = .Phases(3).Properties.volumetric_flow.GetValueOrDefault / (.Phases(4).Properties.volumetric_flow.GetValueOrDefault + .Phases(3).Properties.volumetric_flow.GetValueOrDefault)
+                                        eta_lh = .Phases(3).Properties.viscosity.GetValueOrDefault * Math.Exp(3.6 * (1 - phi))
+                                        eta_ll = .Phases(4).Properties.viscosity.GetValueOrDefault _
+                                            * (1 + 2.5 * phi * (.Phases(3).Properties.viscosity.GetValueOrDefault + 0.4 * .Phases(4).Properties.viscosity.GetValueOrDefault) / (.Phases(3).Properties.viscosity.GetValueOrDefault + .Phases(4).Properties.viscosity.GetValueOrDefault))
+                                        If phi > 0.5 Then
+                                            eta_l = eta_lh
+                                        ElseIf phi < 0.33 Then
+                                            eta_l = eta_ll
+                                        Else
+                                            eta_l = (phi - 0.33) / 0.17 * eta_lh + (1 - (phi - 0.33) / 0.17) * eta_ll
+                                        End If
+                                    Else
+                                        eta_l = .Phases(1).Properties.viscosity.GetValueOrDefault
+                                    End If
+
                                     K_l = .Phases(1).Properties.thermalConductivity.GetValueOrDefault
                                     Cp_l = .Phases(1).Properties.heatCapacityCp.GetValueOrDefault
                                     tens = .Phases(0).Properties.surfaceTension.GetValueOrDefault

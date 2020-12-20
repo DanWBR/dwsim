@@ -2236,9 +2236,9 @@ namespace DWSIM.UI.Desktop.Editors
                                 }, () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Temperature Convergence Tolerance"));
-                    s.CreateAndAddCheckBoxRow(container, "Include Joule-Thomson Effect", pipe.IncludeJTEffect, (CheckBox arg2, EventArgs ev) =>
+                    s.CreateAndAddCheckBoxRow(container, "Include Joule-Thomson Effect", pipe.IncludeEmulsion, (CheckBox arg2, EventArgs ev) =>
                     {
-                        pipe.IncludeJTEffect = arg2.Checked.GetValueOrDefault();
+                        pipe.IncludeEmulsion = arg2.Checked.GetValueOrDefault();
                     }, () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Include Joule-Thomson Effect"));

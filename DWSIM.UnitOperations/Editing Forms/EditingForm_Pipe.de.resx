@@ -163,10 +163,10 @@
   <data name="btnConfigureFlashAlg.ToolTip" xml:space="preserve">
     <value>Konfigurieren</value>
   </data>
-  <data name="chkIncludeJT.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="chkincludeEmulsion.Size" type="System.Drawing.Size, System.Drawing">
     <value>207, 17</value>
   </data>
-  <data name="chkIncludeJT.Text" xml:space="preserve">
+  <data name="chkincludeEmulsion.Text" xml:space="preserve">
     <value>Joule-Thomson-Effekt berücksichtigen</value>
   </data>
   <data name="btnConfigurePP.ToolTip" xml:space="preserve">

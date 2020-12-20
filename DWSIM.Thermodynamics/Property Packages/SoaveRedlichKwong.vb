@@ -430,14 +430,14 @@ Namespace PropertyPackages
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropyF = result
                 Case "viscosity"
                     If sstate = "L" Then
-                        result = Me.AUX_LIQVISCm(T, P)
+                        result = Me.AUX_LIQVISCm(T, P, phaseID)
                     Else
                         result = Me.AUX_VAPVISCm(T, Me.CurrentMaterialStream.Phases(phaseID).Properties.density.GetValueOrDefault, Me.AUX_MMM(phase))
                     End If
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.viscosity = result
                 Case "thermalconductivity"
                     If sstate = "L" Then
-                        result = Me.AUX_CONDTL(T)
+                        result = Me.AUX_CONDTL(T, phaseID)
                     Else
                         result = Me.AUX_CONDTG(T, P)
                     End If
@@ -552,9 +552,9 @@ Namespace PropertyPackages
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_enthalpy = result
                 result = Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy.GetValueOrDefault * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropy = result
-                result = Me.AUX_CONDTL(T)
+                result = Me.AUX_CONDTL(T, phaseID)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.thermalConductivity = result
-                result = Me.AUX_LIQVISCm(T, P)
+                result = Me.AUX_LIQVISCm(T, P, phaseID)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.viscosity = result
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.kinematic_viscosity = result / Me.CurrentMaterialStream.Phases(phaseID).Properties.density.Value
 

@@ -3770,7 +3770,7 @@ Public Class PropertyGridEditors
 
             .Item.Add(DWSIM.App.GetLocalString("MximodeIteraesemP"), uo, "MaxPressureIterations", False, DWSIM.App.GetLocalString("Parmetros3"), "", True)
             .Item.Add(DWSIM.App.GetLocalString("MximodeIteraesemT"), uo, "MaxTemperatureIterations", False, DWSIM.App.GetLocalString("Parmetros3"), "", True)
-            .Item.Add(DWSIM.App.GetLocalString("IncludeJTEffect"), uo, "IncludeJTEffect", False, DWSIM.App.GetLocalString("Parmetros3"), "", True)
+            .Item.Add(DWSIM.App.GetLocalString("IncludeEmulsion"), uo, "IncludeEmulsion", False, DWSIM.App.GetLocalString("Parmetros3"), "", True)
             '.Item.Add(DWSIM.App.GetLocalString("Tolernciapreclculode") & " (%)", uo, "TriggerFlashP", False, DWSIM.App.GetLocalString("Parmetros3"), "", True)
             '.Item.Add(DWSIM.App.GetLocalString("Tolernciapreclculode2") & " (%)", uo, "TriggerFlashT", False, DWSIM.App.GetLocalString("Parmetros3"), "", True)
             .Item.Add(DWSIM.App.GetLocalString("Erromximodapresso") & " (Pa)", uo, "TolP", False, DWSIM.App.GetLocalString("Parmetros3"), "", True)

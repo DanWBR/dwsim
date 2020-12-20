@@ -4591,8 +4591,8 @@ Una modificiación al termino de atracción en la EE de Peng-Robinson publicado 
   <data name="SADJMaxIterationsReached" xml:space="preserve">
     <value>Ajuste simultáneo: número máximo de iteraciones alcanzado</value>
   </data>
-  <data name="IncludeJTEffect" xml:space="preserve">
-    <value>Considerar Refrigeración por efecto Joule-Thomson</value>
+  <data name="IncludeEmulsion" xml:space="preserve">
+    <value>Considerar Refrigeración por efecto Emulsion</value>
   </data>
   <data name="ReactionExtents" xml:space="preserve">
     <value>Coordenadas de Reacciones</value>

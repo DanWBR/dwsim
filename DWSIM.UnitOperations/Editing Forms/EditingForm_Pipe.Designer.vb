@@ -48,7 +48,7 @@ Partial Class EditingForm_Pipe
         Me.cbPtol = New System.Windows.Forms.ComboBox()
         Me.tbPtol = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.chkIncludeJT = New System.Windows.Forms.CheckBox()
+        Me.chkIncludeEmulsion = New System.Windows.Forms.CheckBox()
         Me.btnConfigurePP = New System.Windows.Forms.Button()
         Me.cbPDropModel = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -221,7 +221,7 @@ Partial Class EditingForm_Pipe
         Me.TabPage4.Controls.Add(Me.cbPtol)
         Me.TabPage4.Controls.Add(Me.tbPtol)
         Me.TabPage4.Controls.Add(Me.Button1)
-        Me.TabPage4.Controls.Add(Me.chkIncludeJT)
+        Me.TabPage4.Controls.Add(Me.chkincludeEmulsion)
         Me.TabPage4.Controls.Add(Me.btnConfigurePP)
         Me.TabPage4.Controls.Add(Me.cbPDropModel)
         Me.TabPage4.Controls.Add(Me.Label2)
@@ -305,14 +305,14 @@ Partial Class EditingForm_Pipe
         Me.ToolTipValues.SetToolTip(Me.Button1, resources.GetString("Button1.ToolTip2"))
         Me.Button1.UseVisualStyleBackColor = True
         '
-        'chkIncludeJT
+        'chkincludeEmulsion
         '
-        resources.ApplyResources(Me.chkIncludeJT, "chkIncludeJT")
-        Me.chkIncludeJT.Name = "chkIncludeJT"
-        Me.ToolTip1.SetToolTip(Me.chkIncludeJT, resources.GetString("chkIncludeJT.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.chkIncludeJT, resources.GetString("chkIncludeJT.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.chkIncludeJT, resources.GetString("chkIncludeJT.ToolTip2"))
-        Me.chkIncludeJT.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.chkincludeEmulsion, "chkincludeEmulsion")
+        Me.chkincludeEmulsion.Name = "chkincludeEmulsion"
+        Me.ToolTip1.SetToolTip(Me.chkincludeEmulsion, resources.GetString("chkincludeEmulsion.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.chkincludeEmulsion, resources.GetString("chkincludeEmulsion.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.chkincludeEmulsion, resources.GetString("chkincludeEmulsion.ToolTip2"))
+        Me.chkincludeEmulsion.UseVisualStyleBackColor = True
         '
         'btnConfigurePP
         '
@@ -738,7 +738,7 @@ Partial Class EditingForm_Pipe
     Public WithEvents TabPage4 As System.Windows.Forms.TabPage
     Public WithEvents TabPage5 As System.Windows.Forms.TabPage
     Public WithEvents TabPage6 As System.Windows.Forms.TabPage
-    Public WithEvents chkIncludeJT As System.Windows.Forms.CheckBox
+    Public WithEvents chkincludeEmulsion As System.Windows.Forms.CheckBox
     Public WithEvents cbPDropModel As System.Windows.Forms.ComboBox
     Public WithEvents Button1 As System.Windows.Forms.Button
     Public WithEvents Label4 As System.Windows.Forms.Label
