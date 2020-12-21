@@ -460,7 +460,6 @@ Namespace UnitOperations
                                 If Double.IsNaN(rho_l) Then rho_l = 0.0#
 
                                 If IncludeEmulsion() And .Phases(3).Properties.volumetric_flow.GetValueOrDefault > 0.0 And .Phases(4).Properties.volumetric_flow.GetValueOrDefault > 0.0 Then
-                                    ' Oil fraction
                                     eta_l = EmulsionViscosity(oms)
                                 Else
                                     eta_l = .Phases(1).Properties.viscosity.GetValueOrDefault
@@ -700,7 +699,6 @@ Namespace UnitOperations
                                 oms.Calculate(True, True)
 
                                 With oms
-
                                     w = .Phases(0).Properties.massflow.GetValueOrDefault
                                     Hout = .Phases(0).Properties.enthalpy.GetValueOrDefault
                                     Tout = .Phases(0).Properties.temperature.GetValueOrDefault
@@ -710,13 +708,10 @@ Namespace UnitOperations
                                     If Double.IsNaN(rho_l) Then rho_l = 0.0#
 
                                     If IncludeEmulsion() And .Phases(3).Properties.volumetric_flow.GetValueOrDefault > 0.0 And .Phases(4).Properties.volumetric_flow.GetValueOrDefault > 0.0 Then
-                                        ' Oil fraction
                                         eta_l = EmulsionViscosity(oms)
                                     Else
                                         eta_l = .Phases(1).Properties.viscosity.GetValueOrDefault
                                     End If
-
-
 
                                     K_l = .Phases(1).Properties.thermalConductivity.GetValueOrDefault
                                     Cp_l = .Phases(1).Properties.heatCapacityCp.GetValueOrDefault
