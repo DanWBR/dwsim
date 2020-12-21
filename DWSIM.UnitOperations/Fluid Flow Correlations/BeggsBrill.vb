@@ -381,7 +381,7 @@ Namespace FlowPackages
                 'calculo do fator de friccao
                 Dim f_ns = 0.0#
 
-                f_ns = FrictionFactor(NRe_ns, D, k)
+                f_ns = FrictionFactor(NRe_ns, D / 3.28084, k)
 
                 IObj?.Paragraphs.Add("<mi>Re_{ns}</mi> = " & NRe_ns)
                 IObj?.Paragraphs.Add("<mi>f_{ns}</mi> = " & f_ns)
