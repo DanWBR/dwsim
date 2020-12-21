@@ -41,18 +41,12 @@ Namespace FlowPackages
         Protected Region As Integer    'Code designating predicted flow regime
         Public FlowRegime As String 'Text description of predicted flow regime
 
-        <DllImport("PetAz", CallingConvention:=CallingConvention.Cdecl, EntryPoint:="calcpdrop")> _
+        <DllImport("PetAz", CallingConvention:=CallingConvention.Cdecl, EntryPoint:="calcpdrop")>
         Public Shared Sub calcpdrop(ByRef DensL As Single, ByRef DensG As Single, ByRef MuL As Single, ByRef MuG As Single,
                                                                ByRef Sigma As Single, ByRef Dia As Single, ByRef Rough As Single, ByRef Theta As Single,
                                                                ByRef VsL As Single, ByRef VsG As Single, ByRef Region As Integer, ByRef dPfr As Single,
                                                                ByRef dPhh As Single, ByRef eL As Single)
         End Sub
-
-        Function NRe(ByVal rho As Double, ByVal v As Double, ByVal D As Double, ByVal mu As Double) As Double
-
-            NRe = rho * v * D / mu
-
-        End Function
 
         Public Overrides Function CalculateDeltaP(ByVal D As Double, ByVal L As Double, ByVal deltaz As Double, ByVal k As Double, ByVal qv As Double, ByVal ql As Double, ByVal muv As Double, ByVal mul As Double, ByVal rhov As Double, ByVal rhol As Double, ByVal surft As Double) As Object
 
@@ -87,13 +81,8 @@ Namespace FlowPackages
                 mul = 0.001 * mul
                 Dim Re_fit = NRe(rhol, vlo, D, mul)
                 Dim fric = 0.0#
-                If Re_fit > 3250 Then
-                    Dim a1 = Math.Log(((k / D) ^ 1.1096) / 2.8257 + (7.149 / Re_fit) ^ 0.8961) / Math.Log(10.0#)
-                    Dim b1 = -2 * Math.Log((k / D) / 3.7065 - 5.0452 * a1 / Re_fit) / Math.Log(10.0#)
-                    fric = (1 / b1) ^ 2
-                Else
-                    fric = 64 / Re_fit
-                End If
+
+                fric = FrictionFactor(Re_fit, D, k)
 
                 Dim dPl = fric * L / D * vlo ^ 2 / 2 * rhol
                 Dim dPh = rhol * 9.8 * Math.Sin(Math.Asin(deltaz / L)) * L
@@ -113,13 +102,8 @@ Namespace FlowPackages
                 muv = 0.001 * muv
                 Dim Re_fit = NRe(rhov, vgo, D, muv)
                 Dim fric = 0.0#
-                If Re_fit > 3250 Then
-                    Dim a1 = Math.Log(((k / D) ^ 1.1096) / 2.8257 + (7.149 / Re_fit) ^ 0.8961) / Math.Log(10.0#)
-                    Dim b1 = -2 * Math.Log((k / D) / 3.7065 - 5.0452 * a1 / Re_fit) / Math.Log(10.0#)
-                    fric = (1 / b1) ^ 2
-                Else
-                    fric = 64 / Re_fit
-                End If
+
+                fric = FrictionFactor(Re_fit, D, k)
 
                 Dim dPl = fric * L / D * vgo ^ 2 / 2 * rhov
                 Dim dPh = rhov * 9.8 * Math.Sin(Math.Asin(deltaz / L)) * L
