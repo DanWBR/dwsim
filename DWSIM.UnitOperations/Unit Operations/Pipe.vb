@@ -212,6 +212,26 @@ Namespace UnitOperations
             Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of Pipe)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
         End Function
 
+        Public Function EmulsionViscosity(ms As MaterialStream) As Double
+            Dim phi, eta_lh, eta_ll, eta_l As Double
+            ' Oil fraction
+            With ms
+                phi = .Phases(3).Properties.volumetric_flow.GetValueOrDefault / (.Phases(4).Properties.volumetric_flow.GetValueOrDefault + .Phases(3).Properties.volumetric_flow.GetValueOrDefault)
+                eta_lh = .Phases(3).Properties.viscosity.GetValueOrDefault * Math.Exp(3.6 * (1 - phi))
+                eta_ll = .Phases(4).Properties.viscosity.GetValueOrDefault _
+                        * (1 + 2.5 * phi * (.Phases(3).Properties.viscosity.GetValueOrDefault + 0.4 * .Phases(4).Properties.viscosity.GetValueOrDefault) / (.Phases(3).Properties.viscosity.GetValueOrDefault + .Phases(4).Properties.viscosity.GetValueOrDefault))
+                If phi > 0.5 Then
+                    eta_l = eta_lh
+                ElseIf phi < 0.33 Then
+                    eta_l = eta_ll
+                Else
+                    eta_l = (phi - 0.33) / 0.17 * eta_lh + (1 - (phi - 0.33) / 0.17) * eta_ll
+                End If
+                Return eta_l
+            End With
+        End Function
+
+
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
@@ -441,17 +461,7 @@ Namespace UnitOperations
 
                                 If IncludeEmulsion() And .Phases(3).Properties.volumetric_flow.GetValueOrDefault > 0.0 And .Phases(4).Properties.volumetric_flow.GetValueOrDefault > 0.0 Then
                                     ' Oil fraction
-                                    phi = .Phases(3).Properties.volumetric_flow.GetValueOrDefault / (.Phases(4).Properties.volumetric_flow.GetValueOrDefault + .Phases(3).Properties.volumetric_flow.GetValueOrDefault)
-                                    eta_lh = .Phases(3).Properties.viscosity.GetValueOrDefault * Math.Exp(3.6 * (1 - phi))
-                                    eta_ll = .Phases(4).Properties.viscosity.GetValueOrDefault _
-                                            * (1 + 2.5 * phi * (.Phases(3).Properties.viscosity.GetValueOrDefault + 0.4 * .Phases(4).Properties.viscosity.GetValueOrDefault) / (.Phases(3).Properties.viscosity.GetValueOrDefault + .Phases(4).Properties.viscosity.GetValueOrDefault))
-                                    If phi > 0.5 Then
-                                        eta_l = eta_lh
-                                    ElseIf phi < 0.33 Then
-                                        eta_l = eta_ll
-                                    Else
-                                        eta_l = (phi - 0.33) / 0.17 * eta_lh + (1 - (phi - 0.33) / 0.17) * eta_ll
-                                    End If
+                                    eta_l = EmulsionViscosity(oms)
                                 Else
                                     eta_l = .Phases(1).Properties.viscosity.GetValueOrDefault
                                 End If
@@ -698,22 +708,15 @@ Namespace UnitOperations
                                     Qlin = .Phases(3).Properties.volumetric_flow.GetValueOrDefault + .Phases(4).Properties.volumetric_flow.GetValueOrDefault + .Phases(5).Properties.volumetric_flow.GetValueOrDefault + .Phases(6).Properties.volumetric_flow.GetValueOrDefault
                                     rho_l = .Phases(1).Properties.density.GetValueOrDefault
                                     If Double.IsNaN(rho_l) Then rho_l = 0.0#
+
                                     If IncludeEmulsion() And .Phases(3).Properties.volumetric_flow.GetValueOrDefault > 0.0 And .Phases(4).Properties.volumetric_flow.GetValueOrDefault > 0.0 Then
                                         ' Oil fraction
-                                        phi = .Phases(3).Properties.volumetric_flow.GetValueOrDefault / (.Phases(4).Properties.volumetric_flow.GetValueOrDefault + .Phases(3).Properties.volumetric_flow.GetValueOrDefault)
-                                        eta_lh = .Phases(3).Properties.viscosity.GetValueOrDefault * Math.Exp(3.6 * (1 - phi))
-                                        eta_ll = .Phases(4).Properties.viscosity.GetValueOrDefault _
-                                            * (1 + 2.5 * phi * (.Phases(3).Properties.viscosity.GetValueOrDefault + 0.4 * .Phases(4).Properties.viscosity.GetValueOrDefault) / (.Phases(3).Properties.viscosity.GetValueOrDefault + .Phases(4).Properties.viscosity.GetValueOrDefault))
-                                        If phi > 0.5 Then
-                                            eta_l = eta_lh
-                                        ElseIf phi < 0.33 Then
-                                            eta_l = eta_ll
-                                        Else
-                                            eta_l = (phi - 0.33) / 0.17 * eta_lh + (1 - (phi - 0.33) / 0.17) * eta_ll
-                                        End If
+                                        eta_l = EmulsionViscosity(oms)
                                     Else
                                         eta_l = .Phases(1).Properties.viscosity.GetValueOrDefault
                                     End If
+
+
 
                                     K_l = .Phases(1).Properties.thermalConductivity.GetValueOrDefault
                                     Cp_l = .Phases(1).Properties.heatCapacityCp.GetValueOrDefault
