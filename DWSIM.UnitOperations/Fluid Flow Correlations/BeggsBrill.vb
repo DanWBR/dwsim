@@ -22,13 +22,6 @@ Namespace FlowPackages
 
         Inherits FPBaseClass
 
-        Function NRe(ByVal rho As Double, ByVal v As Double, ByVal D As Double, ByVal mu As Double) As Double
-
-            'mu = mu * 0.001
-            NRe = rho * v * D / mu
-
-        End Function
-
         Public Overrides Function CalculateDeltaP(ByVal D As Double, ByVal L As Double, ByVal deltaz As Double, ByVal k As Double, ByVal qv As Double, ByVal ql As Double, ByVal muv As Double, ByVal mul As Double, ByVal rhov As Double, ByVal rhol As Double, ByVal surft As Double) As Object
             'Function PA_DP(ByVal D, ByVal L, ByVal Z, ByVal epsilon, ByVal QG, ByVal QL, ByVal mu_g, ByVal mu_l, ByVal rho_g, ByVal rho_l, ByVal sigma)
 
@@ -211,13 +204,8 @@ Namespace FlowPackages
                 mul = 0.001 * mul
                 Dim Re_fit = NRe(rhol, vlo, D, mul)
                 Dim fric = 0.0#
-                If Re_fit > 3250 Then
-                    Dim a1 = Math.Log(((k / D) ^ 1.1096) / 2.8257 + (7.149 / Re_fit) ^ 0.8961) / Math.Log(10.0#)
-                    Dim b1 = -2 * Math.Log((k / D) / 3.7065 - 5.0452 * a1 / Re_fit) / Math.Log(10.0#)
-                    fric = (1 / b1) ^ 2
-                Else
-                    fric = 64 / Re_fit
-                End If
+
+                fric = FrictionFactor(Re_fit, D, k)
 
                 IObj?.Paragraphs.Add("<mi>Re</mi> = " & Re_fit)
                 IObj?.Paragraphs.Add("<mi>f</mi> = " & fric)
@@ -241,13 +229,7 @@ Namespace FlowPackages
                 muv = 0.001 * muv
                 Dim Re_fit = NRe(rhov, vgo, D, muv)
                 Dim fric = 0.0#
-                If Re_fit > 3250 Then
-                    Dim a1 = Math.Log(((k / D) ^ 1.1096) / 2.8257 + (7.149 / Re_fit) ^ 0.8961) / Math.Log(10.0#)
-                    Dim b1 = -2 * Math.Log((k / D) / 3.7065 - 5.0452 * a1 / Re_fit) / Math.Log(10.0#)
-                    fric = (1 / b1) ^ 2
-                Else
-                    fric = 64 / Re_fit
-                End If
+                fric = FrictionFactor(Re_fit, D, k)
 
                 IObj?.Paragraphs.Add("<mi>Re</mi> = " & Re_fit)
                 IObj?.Paragraphs.Add("<mi>f</mi> = " & fric)
@@ -398,13 +380,8 @@ Namespace FlowPackages
 
                 'calculo do fator de friccao
                 Dim f_ns = 0.0#
-                If NRe_ns > 3250 Then
-                    Dim a = Math.Log(((k * 3.2808 / D) ^ 1.1096) / 2.8257 + (7.149 / NRe_ns) ^ 0.8961) / Math.Log(10.0#)
-                    Dim b = -2 * Math.Log((k * 3.2808 / D) / 3.7065 - 5.0452 * a / NRe_ns) / Math.Log(10.0#)
-                    f_ns = (1 / b) ^ 2
-                Else
-                    f_ns = 64 / NRe_ns
-                End If
+
+                f_ns = FrictionFactor(NRe_ns, D, k)
 
                 IObj?.Paragraphs.Add("<mi>Re_{ns}</mi> = " & NRe_ns)
                 IObj?.Paragraphs.Add("<mi>f_{ns}</mi> = " & f_ns)
