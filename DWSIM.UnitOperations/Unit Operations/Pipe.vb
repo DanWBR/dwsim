@@ -559,7 +559,9 @@ Namespace UnitOperations
                                             segmento.Elevacao = 0
                                             resf = Me.Kfit(segmento.TipoSegmento)
                                             If resf(1) Then
-                                                resv = fpp.CalculateDeltaP(.DI * 0.0254, resf(0) * 0.0254 * .DI / 1.0, 0, Me.rugosidade(.Material, segmento), Qvin * 24 * 3600, Qlin * 24 * 3600, eta_v * 1000, eta_l * 1000, rho_v, rho_l, tens)
+                                                Dim L_eq As Double
+                                                L_eq = resf(0) * 0.0254 * .DI
+                                                resv = fpp.CalculateDeltaP(.DI * 0.0254, L_eq, 0, Me.rugosidade(.Material, segmento), Qvin * 24 * 3600, Qlin * 24 * 3600, eta_v * 1000, eta_l * 1000, rho_v, rho_l, tens)
                                             Else
                                                 mu_mix = Qlin / (Qvin + Qlin) * eta_l + Qvin / (Qvin + Qlin) * eta_v
                                                 rho_mix = Qlin / (Qvin + Qlin) * rho_l + Qvin / (Qvin + Qlin) * rho_v
@@ -955,7 +957,7 @@ Namespace UnitOperations
 
 #Region "        Funcoes"
 
-        Function Kfit(ByVal name2 As String) As Array
+        Function Kfit(ByVal name2 As String) As Double()
 
             Dim name As String = name2.Substring(name2.IndexOf("[") + 1, name2.Length - name2.IndexOf("[") - 2)
 
@@ -968,7 +970,7 @@ Namespace UnitOperations
             End If
             'Curva Normal 45°;16,00;1;
             If name = 1 Then
-                tmp(0) = 16
+                tmp(0) = 16.0
                 tmp(1) = 1
             End If
             'Curva Normal 180°;50,00;1;
