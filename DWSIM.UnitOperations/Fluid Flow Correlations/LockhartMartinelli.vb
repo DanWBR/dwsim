@@ -144,7 +144,6 @@ Namespace FlowPackages
                 Vm = Vsl + Vsg
                 Cg = Vsg / Vm
                 Cl = 1 - Cg
-                x = qv * rhov / (qv * rhov + ql * rhol)
 
                 Re_SL = rhol * Vsl * D / mul
                 Re_SG = rhov * Vsg * D / muv
