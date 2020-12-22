@@ -433,6 +433,9 @@ Public Class FormLLEDiagram
         '==========================
         ' calculate konodes
         '==========================
+
+        Dim counter As Integer = 0
+
         Do
             Try
                 Ko = CalcKonode(Pt)
@@ -468,8 +471,7 @@ Public Class FormLLEDiagram
                     searchmode = True
                 End If
 
-
-                If (w < 0.01 And Not searchmode) Or stepsize < 0.001 Then Exit Do
+                If (w < 0.001 And Not searchmode) Or stepsize < 0.001 Or counter > 30 Then Exit Do
 
             Catch ex As Exception
                 MsgBox("Error" & vbCrLf & ex.Message)
@@ -505,6 +507,9 @@ Public Class FormLLEDiagram
 
                 final = True
             End If
+
+            counter += 1
+
         Loop
 
         PanelDiag.Refresh() 'redraw Diagram
