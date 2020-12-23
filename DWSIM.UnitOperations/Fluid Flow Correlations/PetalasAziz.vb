@@ -76,44 +76,12 @@ Namespace FlowPackages
 
             If qv = 0.0# Then
 
-                ql = ql / 3600 / 24
-                Dim vlo = ql / (Math.PI * D ^ 2 / 4)
-                mul = 0.001 * mul
-                Dim Re_fit = NRe(rhol, vlo, D, mul)
-                Dim fric = 0.0#
-
-                fric = FrictionFactor(Re_fit, D, k)
-
-                Dim dPl = fric * L / D * vlo ^ 2 / 2 * rhol
-                Dim dPh = rhol * 9.8 * Math.Sin(Math.Asin(deltaz / L)) * L
-
-                ResVector(0) = "Liquid Only"
-                ResVector(1) = 1
-                ResVector(2) = dPl
-                ResVector(3) = dPh
-                ResVector(4) = dPl + dPh
-
+                ResVector = Me.CalculateDeltaPLiquid(D, L, deltaz, k, ql, mul, rhol)
                 CalculateDeltaP = ResVector
 
             ElseIf ql = 0.0# Then
 
-                qv = qv / 3600 / 24
-                Dim vgo = qv / (Math.PI * D ^ 2 / 4)
-                muv = 0.001 * muv
-                Dim Re_fit = NRe(rhov, vgo, D, muv)
-                Dim fric = 0.0#
-
-                fric = FrictionFactor(Re_fit, D, k)
-
-                Dim dPl = fric * L / D * vgo ^ 2 / 2 * rhov
-                Dim dPh = rhov * 9.8 * Math.Sin(Math.Asin(deltaz / L)) * L
-
-                ResVector(0) = "Vapor Only"
-                ResVector(1) = 0
-                ResVector(2) = dPl
-                ResVector(3) = dPh
-                ResVector(4) = dPl + dPh
-
+                ResVector = Me.CalculateDeltaPGas(D, L, deltaz, k, qv, muv, rhov)
                 CalculateDeltaP = ResVector
 
             Else
@@ -182,17 +150,22 @@ Namespace FlowPackages
                         FlowRegime = "Single Phase"
                 End Select
 
-                CalculateDeltaP = New Object() {FlowRegime, eL, dPfr * 6894.76 * 3.28084 * L, dPhh * 6894.76 * 3.28084 * L, (dPfr + dPhh) * 6894.76 * 3.28084 * L}
+                ResVector(0) = FlowRegime
+                ResVector(1) = eL
+                ResVector(2) = dPfr * 6894.76 * 3.28084 * L
+                ResVector(3) = dPhh * 6894.76 * 3.28084 * L
+                ResVector(4) = (dPfr + dPhh) * 6894.76 * 3.28084 * L
 
+                CalculateDeltaP = ResVector
             End If
 
             IObj?.Paragraphs.Add("<h2>Results</h2>")
 
-            IObj?.Paragraphs.Add("Flow Regime: " & FlowRegime)
-            IObj?.Paragraphs.Add("<mi>e_L</mi> = " & eL)
-            IObj?.Paragraphs.Add("<mi>\Delta P_{friction}</mi> = " & dPfr * 6894.76 * 3.28084 * L & " Pa")
-            IObj?.Paragraphs.Add("<mi>\Delta P_{elevation}</mi> = " & dPhh * 6894.76 * 3.28084 * L & " Pa")
-            IObj?.Paragraphs.Add("<mi>\Delta P_{total}</mi> = " & (dPfr + dPhh) * 6894.76 * 3.28084 * L & " Pa")
+            IObj?.Paragraphs.Add("Flow Regime: " & ResVector(0))
+            IObj?.Paragraphs.Add("<mi>e_L</mi> = " & ResVector(1))
+            IObj?.Paragraphs.Add("<mi>\Delta P_{friction}</mi> = " & ResVector(2) & " Pa")
+            IObj?.Paragraphs.Add("<mi>\Delta P_{elevation}</mi> = " & ResVector(3) & " Pa")
+            IObj?.Paragraphs.Add("<mi>\Delta P_{total}</mi> = " & ResVector(4) & " Pa")
 
             IObj?.Close()
 

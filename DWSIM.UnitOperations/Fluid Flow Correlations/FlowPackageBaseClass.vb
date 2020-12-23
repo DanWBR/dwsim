@@ -26,6 +26,76 @@ Namespace FlowPackages
 
         Public MustOverride Function CalculateDeltaP(ByVal D As Double, ByVal L As Double, ByVal deltaz As Double, ByVal k As Double, ByVal qv As Double, ByVal ql As Double, ByVal muv As Double, ByVal mul As Double, ByVal rhov As Double, ByVal rhol As Double, ByVal surft As Double) As Object
 
+        Public Function CalculateDeltaPLiquid(ByVal D As Double, ByVal L As Double, ByVal deltaz As Double, ByVal k As Double, ByVal ql As Double, ByVal mul As Double, ByVal rhol As Double) As Object
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "CalculateDeltaPLiquid", "Liquid Pressure Drop", "Liquid Pressure Drop Calculation Routine", True)
+
+            IObj?.SetCurrent()
+
+            Dim ResVector(4) As Object
+
+            ql = ql / 3600 / 24
+            Dim vlo = ql / (Math.PI * D ^ 2 / 4)
+            mul = 0.001 * mul
+            Dim Re_fit = NRe(rhol, vlo, D, mul)
+            Dim fric = 0.0#
+
+            fric = FrictionFactor(Re_fit, D, k)
+
+            IObj?.Paragraphs.Add("<mi>Re</mi> = " & Re_fit)
+            IObj?.Paragraphs.Add("<mi>f</mi> = " & fric)
+            IObj?.Paragraphs.Add("<mi>v_L</mi> = " & vlo & " m/s")
+
+            Dim dPl = fric * L / D * vlo ^ 2 / 2 * rhol
+            Dim dPh = rhol * 9.8 * Math.Sin(Math.Asin(deltaz / L)) * L
+
+            ResVector(0) = "Liquid Only"
+            ResVector(1) = 1
+            ResVector(2) = dPl
+            ResVector(3) = dPh
+            ResVector(4) = dPl + dPh
+
+            IObj?.Close()
+
+            CalculateDeltaPLiquid = ResVector
+        End Function
+
+        Public Function CalculateDeltaPGas(ByVal D As Double, ByVal L As Double, ByVal deltaz As Double, ByVal k As Double, ByVal qv As Double, ByVal muv As Double, ByVal rhov As Double) As Object
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "CalculateDeltaPGas", "Gas Pressure Drop", "Gas Pressure Drop Calculation Routine", True)
+
+            IObj?.SetCurrent()
+
+            Dim ResVector(4) As Object
+
+            qv = qv / 3600 / 24
+            Dim vgo = qv / (Math.PI * D ^ 2 / 4)
+            muv = 0.001 * muv
+            Dim Re_fit = NRe(rhov, vgo, D, muv)
+            Dim fric = 0.0#
+            fric = FrictionFactor(Re_fit, D, k)
+
+            IObj?.Paragraphs.Add("<mi>Re</mi> = " & Re_fit)
+            IObj?.Paragraphs.Add("<mi>f</mi> = " & fric)
+            IObj?.Paragraphs.Add("<mi>v_V</mi> = " & vgo & " m/s")
+
+            Dim dPl = fric * L / D * vgo ^ 2 / 2 * rhov
+            Dim dPh = rhov * 9.8 * Math.Sin(Math.Asin(deltaz / L)) * L
+
+            ResVector(0) = "Vapor Only"
+            ResVector(1) = 0
+            ResVector(2) = dPl
+            ResVector(3) = dPh
+            ResVector(4) = dPl + dPh
+
+            IObj?.Close()
+
+            CalculateDeltaPGas = ResVector
+        End Function
+
+
         Public Function FrictionFactor(ByVal Re As Double, ByVal D As Double, ByVal k As Double) As Double
             Dim f, a1, b1, a, b, c As Double
             If Re > 4000 Then
