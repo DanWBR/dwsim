@@ -451,34 +451,34 @@ Namespace UnitOperations
 
                         With oms
 
-                                w = .Phases(0).Properties.massflow.GetValueOrDefault
-                                Tin = .Phases(0).Properties.temperature.GetValueOrDefault
-                                Qlin = .Phases(1).Properties.volumetric_flow.GetValueOrDefault
-                                '+ .Phases(4).Properties.volumetric_flow.GetValueOrDefault + .Phases(5).Properties.volumetric_flow.GetValueOrDefault + .Phases(6).Properties.volumetric_flow.GetValueOrDefault
-                                rho_l = .Phases(1).Properties.density.GetValueOrDefault
-                                If Double.IsNaN(rho_l) Then rho_l = 0.0#
+                            w = .Phases(0).Properties.massflow.GetValueOrDefault
+                            Tin = .Phases(0).Properties.temperature.GetValueOrDefault
+                            Qlin = .Phases(1).Properties.volumetric_flow.GetValueOrDefault
+                            '+ .Phases(4).Properties.volumetric_flow.GetValueOrDefault + .Phases(5).Properties.volumetric_flow.GetValueOrDefault + .Phases(6).Properties.volumetric_flow.GetValueOrDefault
+                            rho_l = .Phases(1).Properties.density.GetValueOrDefault
+                            If Double.IsNaN(rho_l) Then rho_l = 0.0#
 
-                                If IncludeEmulsion() And .Phases(3).Properties.volumetric_flow.GetValueOrDefault > 0.0 And .Phases(4).Properties.volumetric_flow.GetValueOrDefault > 0.0 Then
-                                    eta_l = EmulsionViscosity(oms)
-                                Else
-                                    eta_l = .Phases(1).Properties.viscosity.GetValueOrDefault
-                                End If
+                            If IncludeEmulsion() And .Phases(3).Properties.volumetric_flow.GetValueOrDefault > 0.0 And .Phases(4).Properties.volumetric_flow.GetValueOrDefault > 0.0 Then
+                                eta_l = EmulsionViscosity(oms)
+                            Else
+                                eta_l = .Phases(1).Properties.viscosity.GetValueOrDefault
+                            End If
 
-                                K_l = .Phases(1).Properties.thermalConductivity.GetValueOrDefault
-                                Cp_l = .Phases(1).Properties.heatCapacityCp.GetValueOrDefault
-                                tens = .Phases(0).Properties.surfaceTension.GetValueOrDefault
-                                If Double.IsNaN(tens) Then tens = 0.0#
-                                w_l = .Phases(1).Properties.massflow.GetValueOrDefault
+                            K_l = .Phases(1).Properties.thermalConductivity.GetValueOrDefault
+                            Cp_l = .Phases(1).Properties.heatCapacityCp.GetValueOrDefault
+                            tens = .Phases(0).Properties.surfaceTension.GetValueOrDefault
+                            If Double.IsNaN(tens) Then tens = 0.0#
+                            w_l = .Phases(1).Properties.massflow.GetValueOrDefault
 
-                                Qvin = .Phases(2).Properties.volumetric_flow.GetValueOrDefault
-                                rho_v = .Phases(2).Properties.density.GetValueOrDefault
-                                eta_v = .Phases(2).Properties.viscosity.GetValueOrDefault
-                                K_v = .Phases(2).Properties.thermalConductivity.GetValueOrDefault
-                                Cp_v = .Phases(2).Properties.heatCapacityCp.GetValueOrDefault
-                                w_v = .Phases(2).Properties.massflow.GetValueOrDefault
-                                z = .Phases(2).Properties.compressibilityFactor.GetValueOrDefault
+                            Qvin = .Phases(2).Properties.volumetric_flow.GetValueOrDefault
+                            rho_v = .Phases(2).Properties.density.GetValueOrDefault
+                            eta_v = .Phases(2).Properties.viscosity.GetValueOrDefault
+                            K_v = .Phases(2).Properties.thermalConductivity.GetValueOrDefault
+                            Cp_v = .Phases(2).Properties.heatCapacityCp.GetValueOrDefault
+                            w_v = .Phases(2).Properties.massflow.GetValueOrDefault
+                            z = .Phases(2).Properties.compressibilityFactor.GetValueOrDefault
 
-                            End With
+                        End With
 
                         Do
                             IObj3?.SetCurrent
@@ -686,7 +686,11 @@ Namespace UnitOperations
                                 IObj5?.SetCurrent()
                                 Tout = oms.PropertyPackage.FlashBase.CalculateEquilibrium(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.H, Pout, Hout, oms.PropertyPackage, oms.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Mixture), Nothing, Tout).CalculatedTemperature
                                 'Tout = 0.7 * Tout_ant + 0.3 * Tout
-                                Tout = (Tout + Tout_ant) / 2
+                                If U = 0 Or DQ = 0 Then
+                                    Tout_ant = Tout
+                                Else
+                                    Tout = (Tout + Tout_ant) / 2
+                                End If
 
                                 IObj5?.Paragraphs.Add(String.Format("Calculated Outlet Temperature: {0} K", Tout))
 
