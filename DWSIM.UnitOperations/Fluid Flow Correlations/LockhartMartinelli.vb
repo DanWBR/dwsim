@@ -65,52 +65,12 @@ Namespace FlowPackages
 
             If qv = 0.0# Then
 
-                ql = ql / 3600 / 24
-                Dim vlo = ql / (Math.PI * D ^ 2 / 4)
-                mul = 0.001 * mul
-                Dim Re_fit = NRe(rhol, vlo, D, mul)
-                Dim fric = 0.0#
-
-                fric = FrictionFactor(Re_fit, D, k)
-
-                IObj?.Paragraphs.Add("<mi>Re</mi> = " & Re_fit)
-                IObj?.Paragraphs.Add("<mi>f</mi> = " & fric)
-                IObj?.Paragraphs.Add("<mi>v_L</mi> = " & vlo & " m/s")
-
-                Dim dPl = fric * L / D * vlo ^ 2 / 2 * rhol
-                Dim dPh = rhol * 9.8 * Math.Sin(Math.Asin(deltaz / L)) * L
-
-                resvect(0) = "Liquid Only"
-                resvect(1) = 1
-                resvect(2) = dPl
-                resvect(3) = dPh
-                resvect(4) = dPl + dPh
-
+                resvect = Me.CalculateDeltaPLiquid(D, L, deltaz, k, ql, mul, rhol)
                 CalculateDeltaP = resvect
 
             ElseIf ql = 0.0# Then
 
-                qv = qv / 3600 / 24
-                Dim vgo = qv / (Math.PI * D ^ 2 / 4)
-                muv = 0.001 * muv
-                Dim Re_fit = NRe(rhov, vgo, D, muv)
-                Dim fric = 0.0#
-
-                fric = FrictionFactor(Re_fit, D, k)
-
-                IObj?.Paragraphs.Add("<mi>Re</mi> = " & Re_fit)
-                IObj?.Paragraphs.Add("<mi>f</mi> = " & fric)
-                IObj?.Paragraphs.Add("<mi>v_V</mi> = " & vgo & " m/s")
-
-                Dim dPl = fric * L / D * vgo ^ 2 / 2 * rhov
-                Dim dPh = rhov * 9.8 * Math.Sin(Math.Asin(deltaz / L)) * L
-
-                resvect(0) = "Vapor Only"
-                resvect(1) = 0
-                resvect(2) = dPl
-                resvect(3) = dPh
-                resvect(4) = dPl + dPh
-
+                resvect = Me.CalculateDeltaPGas(D, L, deltaz, k, qv, muv, rhov)
                 CalculateDeltaP = resvect
 
             Else
@@ -144,7 +104,6 @@ Namespace FlowPackages
                 Vm = Vsl + Vsg
                 Cg = Vsg / Vm
                 Cl = 1 - Cg
-                x = qv * rhov / (qv * rhov + ql * rhol)
 
                 Re_SL = rhol * Vsl * D / mul
                 Re_SG = rhov * Vsg * D / muv

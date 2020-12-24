@@ -31,27 +31,28 @@ Namespace FlowPackages
 
             IObj?.SetCurrent()
 
-            IObj?.Paragraphs.Add("Beggs and Brill (1973) correlation, is one of the few correlations capable of handling all flow directions encountered in oil and gas operations, namely uphill, downhill, horizontal, inclined and vertical flow for two phase fluid.</p>
-                                <p>Total pressure gradient is described by following relation.</p>
-                                <pre><code>dP/dZ = [(dP/dZ)<Sub>Fric.</Sub> +(dP/dZ)<Sub>Ele.</Sub>]/(1-E<Sub>k</Sub>)</code></pre>
-                                <p>where, (dP / dZ)<Sub>Fric.</Sub> Is pressure gradient due To friction, (dP / dZ)<Sub>Ele.</Sub> Is hydrostatic pressure difference And E<Sub>k</Sub> estimates pressure loss due To acceleration.</p>
+            IObj?.Paragraphs.Add("Beggs and Brill (1973) correlation, is one of the few correlations capable of handling all flow directions encountered in oil and gas operations, namely uphill, downhill, horizontal, inclined and vertical flow for two phase fluid.")
+            IObj?.Paragraphs.Add("Total pressure gradient Is described by following relation.")
+            IObj?.Paragraphs.Add("<m>\frac{dP}{dZ} = [\frac{dP}{dZ}_{Fric.} + \frac{dP}{dZ}_{Ele.}]/(1-E_k)</m>")
+
+            IObj?.Paragraphs.Add("<p>where, (dP / dZ)<Sub>Fric.</Sub> Is pressure gradient due To friction, (dP / dZ)<Sub>Ele.</Sub> Is hydrostatic pressure difference And E<Sub>k</Sub> estimates pressure loss due To acceleration.</p>
                                 <h3>Flow Pattern Map</h3>
                                 <p>A flow regime Is identified based On the Froude number Of the mixture (Fr<Sub>m</Sub>) And input liquid content (no slip liquid holdup C<Sub>L</Sub>).</p>
-                                <pre><code>Fr<Sub>m</Sub>= v<Sub>m</Sub>²/ g.D</code></pre>
+                                <m>Fr_m = \frac{v_m^2}{g.D}</m>
                                 <p>where, v<Sub>m</Sub> Is mixture velocity, D Is pipe inside diameter And g Is gravitational constant.</p>
-                                <pre><code>C<Sub>L</Sub>= Q<Sub>L</Sub>/ (Q<Sub>L</Sub> + Q<Sub>G</Sub>)</code></pre>
+                                <pre>C<Sub>L</Sub>= Q<Sub>L</Sub>/ (Q<Sub>L</Sub> + Q<Sub>G</Sub>)</pre>
                                 <p>where, Q<Sub>L</Sub> Is liquid volumetric flow And Q<Sub>G</Sub> Is gas volumetric flow.</p>
                                 <p>The transition lines For correlation are defined As follows:</p>
-                                <pre><code>L<Sub>1</Sub>= 316 C<Sub>L</Sub><sup>0.302</sup></code>
-                                <code>L<Sub>2</Sub>= 0.0009252 C<Sub>L</Sub><sup>-2.4684</sup></code>
-                                <code>L<Sub>3</Sub>= 0.1 C<Sub>L</Sub><sup>-1.4516</sup></code>
-                                <code>L<Sub>4</Sub>= 0.5 C<Sub>L</Sub><sup>-6.738</sup></code></pre>
+                                <pre>L<Sub>1</Sub>= 316 C<Sub>L</Sub><sup>0.302</sup>
+                                L<Sub>2</Sub>= 0.0009252 C<Sub>L</Sub><sup>-2.4684</sup>
+                                L<Sub>3</Sub>= 0.1 C<Sub>L</Sub><sup>-1.4516</sup>
+                                L<Sub>4</Sub>= 0.5 C<Sub>L</Sub><sup>-6.738</sup></pre>
                                 <h4>Segregated Flow</h4>
-                                <pre><code>C<Sub>L</Sub> &lt; 0.01 And Fr<Sub>m</Sub> &lt; L<Sub>1</Sub></code>
-                                <code>OR C<Sub>L</Sub> &gt;= 0.01 And Fr < Sub() > m</Sub> &lt; L<Sub>2</Sub></code></pre>
+                                <pre>C<Sub>L</Sub> &lt; 0.01 And Fr<Sub>m</Sub> &lt; L<Sub>1</Sub>
+                                OR C<Sub>L</Sub> &gt;= 0.01 And Fr < Sub() > m</Sub> &lt; L<Sub>2</Sub></pre>
                                 <h4>Intermittent Flow</h4>
-                                <pre><code>0.01 &lt;= C < Sub() > L</Sub> &lt; 0.4 And L<Sub>3</Sub> &lt; Fr<Sub>m</Sub> &lt;= L<Sub>1</Sub></code>
-                                <code>OR C<Sub>L</Sub> &gt;= 0.4 And L < Sub() > 3</Sub> &lt; Fr<Sub>m</Sub> &lt;= L<Sub>4</Sub></code></pre>
+                                <pre>0.01 &lt;= C < Sub() > L</Sub> &lt; 0.4 And L<Sub>3</Sub> &lt; Fr<Sub>m</Sub> &lt;= L<Sub>1</Sub>
+                                OR C<Sub>L</Sub> &gt;= 0.4 And L < Sub() > 3</Sub> &lt; Fr<Sub>m</Sub> &lt;= L<Sub>4</Sub></pre>
                                 <h4>Distributed Flow</h4>
                                 <pre><code>C<Sub>L</Sub> &lt; 0.4 And Fr<Sub>m</Sub> &gt;= L<Sub>4</Sub></code>
                                 <code>OR C<Sub>L</Sub> &gt;= 0.4 And Fr < Sub() > m</Sub> &gt; L<Sub>4</Sub></code></pre>
@@ -199,51 +200,12 @@ Namespace FlowPackages
 
             If qv = 0.0# Then
 
-                ql = ql / 3600 / 24
-                Dim vlo = ql / (Math.PI * D ^ 2 / 4)
-                mul = 0.001 * mul
-                Dim Re_fit = NRe(rhol, vlo, D, mul)
-                Dim fric = 0.0#
-
-                fric = FrictionFactor(Re_fit, D, k)
-
-                IObj?.Paragraphs.Add("<mi>Re</mi> = " & Re_fit)
-                IObj?.Paragraphs.Add("<mi>f</mi> = " & fric)
-                IObj?.Paragraphs.Add("<mi>v_L</mi> = " & vlo & " m/s")
-
-                Dim dPl = fric * L / D * vlo ^ 2 / 2 * rhol
-                Dim dPh = rhol * 9.8 * Math.Sin(Math.Asin(deltaz / L)) * L
-
-                ResVector(0) = "Liquid Only"
-                ResVector(1) = 1
-                ResVector(2) = dPl
-                ResVector(3) = dPh
-                ResVector(4) = dPl + dPh
-
+                ResVector = Me.CalculateDeltaPLiquid(D, L, deltaz, k, ql, mul, rhol)
                 CalculateDeltaP = ResVector
 
             ElseIf ql = 0.0# Then
 
-                qv = qv / 3600 / 24
-                Dim vgo = qv / (Math.PI * D ^ 2 / 4)
-                muv = 0.001 * muv
-                Dim Re_fit = NRe(rhov, vgo, D, muv)
-                Dim fric = 0.0#
-                fric = FrictionFactor(Re_fit, D, k)
-
-                IObj?.Paragraphs.Add("<mi>Re</mi> = " & Re_fit)
-                IObj?.Paragraphs.Add("<mi>f</mi> = " & fric)
-                IObj?.Paragraphs.Add("<mi>v_V</mi> = " & vgo & " m/s")
-
-                Dim dPl = fric * L / D * vgo ^ 2 / 2 * rhov
-                Dim dPh = rhov * 9.8 * Math.Sin(Math.Asin(deltaz / L)) * L
-
-                ResVector(0) = "Vapor Only"
-                ResVector(1) = 0
-                ResVector(2) = dPl
-                ResVector(3) = dPh
-                ResVector(4) = dPl + dPh
-
+                ResVector = Me.CalculateDeltaPGas(D, L, deltaz, k, qv, muv, rhov)
                 CalculateDeltaP = ResVector
 
             Else
