@@ -100,13 +100,6 @@ Public Class EditingForm_HeatExchanger
             If .GraphicObject.InputConnectors(1).IsAttached Then cbInlet2.SelectedItem = .GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Tag
             If .GraphicObject.OutputConnectors(1).IsAttached Then cbOutlet2.SelectedItem = .GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Tag
 
-            'property package
-
-            Dim proppacks As String() = .FlowSheet.PropertyPackages.Values.Select(Function(m) m.Tag).ToArray
-            cbPropPack.Items.Clear()
-            cbPropPack.Items.AddRange(proppacks)
-            cbPropPack.SelectedItem = .PropertyPackage?.Tag
-
             'parameters
 
             cbHotFluidPDrop.Items.Clear()
@@ -167,6 +160,9 @@ Public Class EditingForm_HeatExchanger
 
             chkIgnoreLMTD.Checked = .IgnoreLMTDError
 
+            tbOVF1.Text = .OutletVaporFraction1.ToString(nf)
+            tbOVF2.Text = .OutletVaporFraction2.ToString(nf)
+
             'results
 
             gridResults.Rows.Clear()
@@ -198,10 +194,6 @@ Public Class EditingForm_HeatExchanger
 
         Loaded = True
 
-    End Sub
-
-    Private Sub btnConfigurePP_Click(sender As Object, e As EventArgs) Handles btnConfigurePP.Click
-        SimObject.FlowSheet.PropertyPackages.Values.Where(Function(x) x.Tag = cbPropPack.SelectedItem.ToString).SingleOrDefault.DisplayEditingForm()
     End Sub
 
     Private Sub lblTag_TextChanged(sender As Object, e As EventArgs) Handles lblTag.TextChanged
@@ -354,6 +346,42 @@ Public Class EditingForm_HeatExchanger
                 tbColdFluidPDrop.Enabled = True
                 tbHotFluidPDrop.Enabled = True
                 tbEfficiency.Enabled = True
+            Case 9
+                'VF1
+                tbHotFluidOutletT.Enabled = False
+                cbHotFluidOutletT.Enabled = False
+                tbHeat.Enabled = False
+                cbHeat.Enabled = False
+                tbColdFluidPDrop.Enabled = True
+                tbHotFluidPDrop.Enabled = True
+                tbColdFluidOutletT.Enabled = False
+                cbColdFluidOutletT.Enabled = False
+                tbEfficiency.Enabled = False
+                tbOverallU.Enabled = False
+                tbArea.Enabled = True
+                cbArea.Enabled = True
+                cbHeat.Enabled = False
+                cbOverallHTC.Enabled = False
+                tbOVF1.Enabled = True
+                tbOVF2.Enabled = False
+            Case 10
+                'VF1
+                tbHotFluidOutletT.Enabled = False
+                cbHotFluidOutletT.Enabled = False
+                tbHeat.Enabled = False
+                cbHeat.Enabled = False
+                tbColdFluidPDrop.Enabled = True
+                tbHotFluidPDrop.Enabled = True
+                tbColdFluidOutletT.Enabled = False
+                cbColdFluidOutletT.Enabled = False
+                tbEfficiency.Enabled = False
+                tbOverallU.Enabled = False
+                tbArea.Enabled = True
+                cbArea.Enabled = True
+                cbHeat.Enabled = False
+                cbOverallHTC.Enabled = False
+                tbOVF1.Enabled = False
+                tbOVF2.Enabled = True
         End Select
 
     End Sub
@@ -430,6 +458,8 @@ Public Class EditingForm_HeatExchanger
         If sender Is tbHeatLoss Then uobj.HeatLoss = su.Converter.ConvertToSI(cbHeatLoss.SelectedItem.ToString, tbHeatLoss.Text.ParseExpressionToDouble)
         If sender Is tbMITA Then uobj.MITA = su.Converter.ConvertToSI(cbMITA.SelectedItem.ToString, tbMITA.Text.ParseExpressionToDouble)
         If sender Is tbEfficiency Then uobj.ThermalEfficiency = tbEfficiency.Text.ParseExpressionToDouble
+        If sender Is tbOVF1 Then uobj.OutletVaporFraction1 = tbOVF1.Text.ParseExpressionToDouble
+        If sender Is tbOVF2 Then uobj.OutletVaporFraction2 = tbOVF2.Text.ParseExpressionToDouble
 
         RequestCalc()
 
@@ -444,7 +474,8 @@ Public Class EditingForm_HeatExchanger
     Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbColdFluidPDrop.TextChanged, tbHotFluidPDrop.TextChanged,
                                                                         tbColdFluidOutletT.TextChanged, tbHotFluidOutletT.TextChanged,
                                                                         tbArea.TextChanged, tbHeat.TextChanged, tbOverallU.TextChanged,
-                                                                        tbMITA.TextChanged, tbHeatLoss.TextChanged, tbEfficiency.TextChanged
+                                                                        tbMITA.TextChanged, tbHeatLoss.TextChanged, tbEfficiency.TextChanged,
+                                                                        tbOVF1.TextChanged, tbOVF2.TextChanged
 
         Dim tbox = DirectCast(sender, TextBox)
 
@@ -459,7 +490,8 @@ Public Class EditingForm_HeatExchanger
     Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbColdFluidPDrop.KeyDown, tbHotFluidPDrop.KeyDown,
                                                                         tbColdFluidOutletT.KeyDown, tbHotFluidOutletT.KeyDown,
                                                                         tbArea.KeyDown, tbHeat.KeyDown, tbOverallU.KeyDown,
-                                                                        tbMITA.KeyDown, tbHeatLoss.KeyDown, tbEfficiency.KeyDown
+                                                                        tbMITA.KeyDown, tbHeatLoss.KeyDown, tbEfficiency.KeyDown,
+                                                                        tbOVF1.KeyDown, tbOVF2.KeyDown
 
         If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = System.Drawing.Color.Blue Then
 
@@ -469,13 +501,6 @@ Public Class EditingForm_HeatExchanger
 
         End If
 
-    End Sub
-
-    Private Sub cbPropPack_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPropPack.SelectedIndexChanged
-        If Loaded Then
-            SimObject.PropertyPackage = SimObject.FlowSheet.PropertyPackages.Values.Where(Function(x) x.Tag = cbPropPack.SelectedItem.ToString).SingleOrDefault
-            RequestCalc()
-        End If
     End Sub
 
     Private Sub cbInlet1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbInlet1.SelectedIndexChanged

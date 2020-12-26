@@ -43,6 +43,8 @@ Namespace UnitOperations
         ShellandTube_CalcFoulingFactor = 6
         PinchPoint = 7
         ThermalEfficiency = 8
+        OutletVaporFraction1 = 9
+        OutletVaporFraction2 = 10
 
     End Enum
 
@@ -104,6 +106,8 @@ Namespace UnitOperations
         Public Property IgnoreLMTDError As Boolean = True
         Public Property CorrectionFactorLMTD As Double = 1.0
         Public Property HeatLoss As Double = 0.0
+        Public Property OutletVaporFraction1 As Double = 0.0
+        Public Property OutletVaporFraction2 As Double = 0.0
 
         Public Property STProperties() As STHXProperties
             Get
@@ -651,7 +655,8 @@ Namespace UnitOperations
                 Case HeatExchangerCalcMode.CalcArea, HeatExchangerCalcMode.CalcTempColdOut,
                      HeatExchangerCalcMode.CalcBothTemp, HeatExchangerCalcMode.CalcTempHotOut,
                      HeatExchangerCalcMode.PinchPoint, HeatExchangerCalcMode.ThermalEfficiency,
-                     HeatExchangerCalcMode.ShellandTube_CalcFoulingFactor
+                     HeatExchangerCalcMode.ShellandTube_CalcFoulingFactor,
+                     HeatExchangerCalcMode.OutletVaporFraction1, HeatExchangerCalcMode.OutletVaporFraction2
 
                     Throw New Exception("This calculation mode is not supported while in Dynamic Mode.")
 
@@ -1793,6 +1798,150 @@ Namespace UnitOperations
 
                     A = Q / (LMTD * U) * 1000
 
+                Case HeatExchangerCalcMode.OutletVaporFraction1
+
+                    Dim Q1, H20, H21, H10, H11, VF0, T10, T11, T20, T21, DP1, DP2 As Double
+
+                    If T11 > T21 Then
+                        P1 = Ph1
+                        P2 = Pc1
+                        DP1 = HotSidePressureDrop
+                        DP2 = ColdSidePressureDrop
+                    Else
+                        P2 = Ph1
+                        P1 = Pc1
+                        DP2 = HotSidePressureDrop
+                        DP1 = ColdSidePressureDrop
+                    End If
+
+                    A = Area
+
+                    VF0 = StIn0.GetPhase("Vapor").Properties.molarfraction.GetValueOrDefault()
+                    T10 = StIn0.GetTemperature()
+                    H10 = StIn0.GetMassEnthalpy()
+
+                    StIn0.PropertyPackage.CurrentMaterialStream = StInHot
+                    IObj?.SetCurrent()
+                    Dim tmp = StIn0.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureVaporFraction, P1 - DP1, OutletVaporFraction1, T10)
+                    T11 = tmp.CalculatedTemperature.GetValueOrDefault()
+                    H11 = tmp.CalculatedEnthalpy()
+                    Q1 = -StIn0.GetMassFlow() * (tmp.CalculatedEnthalpy - StIn0.GetMassEnthalpy())
+
+                    Q = Math.Abs(Q1)
+
+                    T20 = StIn1.GetTemperature()
+                    H20 = StIn1.GetMassEnthalpy()
+                    H21 = H20 + (Q1 - HeatLoss) / StIn1.GetMassFlow()
+
+                    StIn1.PropertyPackage.CurrentMaterialStream = StIn1
+                    IObj?.SetCurrent()
+                    tmp = StIn1.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2 - DP2, H21, T21)
+                    T21 = tmp.CalculatedTemperature.GetValueOrDefault()
+                    OutletVaporFraction2 = tmp.GetVaporPhaseMoleFraction()
+
+                    If T11 > T21 Then
+                        Tc1 = T20
+                        Tc2 = T21
+                        Th1 = T10
+                        Th2 = T11
+                        Ph2 = Ph1 - DP1
+                        Pc2 = Pc1 - DP2
+                        Hc2 = H21
+                        Hh2 = H11
+                    Else
+                        Tc1 = T10
+                        Tc2 = T11
+                        Th1 = T20
+                        Th2 = T21
+                        Ph2 = Ph1 - DP2
+                        Pc2 = Pc1 - DP1
+                        Hc2 = H11
+                        Hh2 = H21
+                    End If
+
+                    Select Case Me.FlowDir
+                        Case FlowDirection.CoCurrent
+                            LMTD = ((Th1 - Tc1) - (Th2 - Tc2)) / Math.Log((Th1 - Tc1) / (Th2 - Tc2))
+                        Case FlowDirection.CounterCurrent
+                            LMTD = ((Th1 - Tc2) - (Th2 - Tc1)) / Math.Log((Th1 - Tc2) / (Th2 - Tc1))
+                    End Select
+
+                    If Not IgnoreLMTDError Then If Double.IsNaN(LMTD) Or Double.IsInfinity(LMTD) Then Throw New Exception(FlowSheet.GetTranslatedString("HXCalcError"))
+
+                    U = Q / (A * LMTD) * 1000
+
+                Case HeatExchangerCalcMode.OutletVaporFraction2
+
+                    Dim Q1, H10, H11, H20, H21, VF0, T10, T11, T20, T21, DP1, DP2 As Double
+
+                    If T11 > T21 Then
+                        P1 = Ph1
+                        P2 = Pc1
+                        DP1 = HotSidePressureDrop
+                        DP2 = ColdSidePressureDrop
+                    Else
+                        P2 = Ph1
+                        P1 = Pc1
+                        DP2 = HotSidePressureDrop
+                        DP1 = ColdSidePressureDrop
+                    End If
+
+                    A = Area
+
+                    VF0 = StIn1.GetPhase("Vapor").Properties.molarfraction.GetValueOrDefault()
+                    T10 = StIn1.GetTemperature()
+                    H10 = StIn1.GetMassEnthalpy()
+
+                    StIn1.PropertyPackage.CurrentMaterialStream = StIn1
+                    IObj?.SetCurrent()
+                    Dim tmp = StIn1.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureVaporFraction, P1 - DP1, OutletVaporFraction2, T10)
+                    T11 = tmp.CalculatedTemperature.GetValueOrDefault()
+                    H11 = tmp.CalculatedEnthalpy()
+                    Q1 = -StIn1.GetMassFlow() * (tmp.CalculatedEnthalpy - StIn1.GetMassEnthalpy())
+
+                    Q = Math.Abs(Q1)
+
+                    T20 = StIn0.GetTemperature()
+                    H20 = StIn0.GetMassEnthalpy()
+                    H21 = H20 + (Q1 - HeatLoss) / StIn0.GetMassFlow()
+
+                    StIn0.PropertyPackage.CurrentMaterialStream = StIn0
+                    IObj?.SetCurrent()
+                    tmp = StIn0.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2 - DP2, H21, T21)
+                    T21 = tmp.CalculatedTemperature.GetValueOrDefault()
+                    OutletVaporFraction2 = tmp.GetVaporPhaseMoleFraction()
+
+                    If T11 > T21 Then
+                        Tc1 = T20
+                        Tc2 = T21
+                        Th1 = T10
+                        Th2 = T11
+                        Ph2 = Ph1 - DP1
+                        Pc2 = Pc1 - DP2
+                        Hc2 = H21
+                        Hh2 = H11
+                    Else
+                        Tc1 = T10
+                        Tc2 = T11
+                        Th1 = T20
+                        Th2 = T21
+                        Ph2 = Ph1 - DP2
+                        Pc2 = Pc1 - DP1
+                        Hc2 = H11
+                        Hh2 = H21
+                    End If
+
+                    Select Case Me.FlowDir
+                        Case FlowDirection.CoCurrent
+                            LMTD = ((Th1 - Tc1) - (Th2 - Tc2)) / Math.Log((Th1 - Tc1) / (Th2 - Tc2))
+                        Case FlowDirection.CounterCurrent
+                            LMTD = ((Th1 - Tc2) - (Th2 - Tc1)) / Math.Log((Th1 - Tc2) / (Th2 - Tc1))
+                    End Select
+
+                    If Not IgnoreLMTDError Then If Double.IsNaN(LMTD) Or Double.IsInfinity(LMTD) Then Throw New Exception(FlowSheet.GetTranslatedString("HXCalcError"))
+
+                    U = Q / (A * LMTD) * 1000
+
                 Case HeatExchangerCalcMode.ShellandTube_Rating, HeatExchangerCalcMode.ShellandTube_CalcFoulingFactor
 
                     'Shell and Tube HX calculation using Tinker's method.
@@ -2517,6 +2666,10 @@ Namespace UnitOperations
                         value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, HeatLoss)
                     Case 29
                         value = CorrectionFactorLMTD
+                    Case 30
+                        value = OutletVaporFraction1
+                    Case 21
+                        value = OutletVaporFraction2
                 End Select
 
                 Return value
@@ -2550,8 +2703,10 @@ Namespace UnitOperations
                     proplist.Add("PROP_HX_27")
                     proplist.Add("PROP_HX_28")
                     proplist.Add("PROP_HX_29")
+                    proplist.Add("PROP_HX_30")
+                    proplist.Add("PROP_HX_31")
                 Case PropertyType.ALL
-                    For i = 0 To 29
+                    For i = 0 To 31
                         proplist.Add("PROP_HX_" + CStr(i))
                     Next
             End Select
@@ -2614,6 +2769,10 @@ Namespace UnitOperations
                     Me.HeatLoss = SystemsOfUnits.Converter.ConvertToSI(su.heatflow, propval)
                 Case 29
                     CorrectionFactorLMTD = propval
+                Case 30
+                    OutletVaporFraction1 = propval
+                Case 31
+                    OutletVaporFraction2 = propval
             End Select
             Return 1
         End Function
@@ -2797,6 +2956,10 @@ Namespace UnitOperations
                     Else
                         str.AppendLine("    Hot fluid outlet temperature: " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.HotSideOutletTemperature).ToString(numberformat, ci) & " " & su.temperature)
                     End If
+                Case HeatExchangerCalcMode.OutletVaporFraction1
+                    str.AppendLine("    Outlet Vapor Fraction 1: " & OutletVaporFraction1.ToString(numberformat))
+                Case HeatExchangerCalcMode.OutletVaporFraction2
+                    str.AppendLine("    Outlet Vapor Fraction 2: " & OutletVaporFraction2.ToString(numberformat))
             End Select
             str.AppendLine("    Hot fluid pressure drop: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.HotSidePressureDrop).ToString(numberformat, ci) & " " & su.deltaP)
             str.AppendLine("    Cold fluid pressure drop: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.ColdSidePressureDrop).ToString(numberformat, ci) & " " & su.deltaP)
@@ -2915,6 +3078,16 @@ Namespace UnitOperations
                            New String() {"Overall Heat Transfer Coefficient",
                            OverallCoefficient.GetValueOrDefault.ConvertFromSI(su.heat_transf_coeff).ToString(nf),
                            su.heat_transf_coeff}))
+                Case HeatExchangerCalcMode.OutletVaporFraction1
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"Outlet Vapor Fraction 1",
+                           OutletVaporFraction1.ToString(nf),
+                           ""}))
+                Case HeatExchangerCalcMode.OutletVaporFraction2
+                    list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
+                           New String() {"Outlet Vapor Fraction 2",
+                           OutletVaporFraction2.ToString(nf),
+                           ""}))
             End Select
 
             list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,

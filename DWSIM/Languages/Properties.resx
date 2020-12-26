@@ -1596,4 +1596,10 @@
   <data name="PROP_HX_29" xml:space="preserve">
     <value>Fator de Correção da MLDT</value>
   </data>
+  <data name="PROP_HX_30" xml:space="preserve">
+    <value>Fração de Vapor (Corrente 1)</value>
+  </data>
+  <data name="PROP_HX_31" xml:space="preserve">
+    <value>Fração de Vapor (Corrente 1)</value>
+  </data>
 </root>
