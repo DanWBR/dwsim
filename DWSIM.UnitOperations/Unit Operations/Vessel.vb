@@ -1069,7 +1069,7 @@ Namespace UnitOperations
             str.AppendLine("Gas/Liquid Separator: " & Me.GraphicObject.Tag)
             str.AppendLine("Property Package: " & Me.PropertyPackage.ComponentName)
             str.AppendLine()
-            str.AppendLine("Inlet conditions")
+            str.AppendLine("Inlet conditions (First Stream)")
             str.AppendLine()
             str.AppendLine("    Temperature: " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, istr.Phases(0).Properties.temperature.GetValueOrDefault).ToString(numberformat, ci) & " " & su.temperature)
             str.AppendLine("    Pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, istr.Phases(0).Properties.pressure.GetValueOrDefault).ToString(numberformat, ci) & " " & su.pressure)
@@ -1108,6 +1108,7 @@ Namespace UnitOperations
             Return str.ToString
 
         End Function
+
         Public Overrides Function GetPropertyDescription(p As String) As String
             If p.Equals("Override Separation Pressure") Then
                 Return "Overrides the separation pressure. Enabling this setting requires an energy stream connected to the separator."
