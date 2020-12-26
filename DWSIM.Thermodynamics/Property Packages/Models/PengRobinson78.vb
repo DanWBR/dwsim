@@ -158,7 +158,7 @@ Namespace PropertyPackages.Auxiliary
             Dim tmpa As Object = Calc_SUM2(n, Vx, a)
 
             aml2 = tmpa(0)
-            Dim aml As Double = tmpa(1)
+            Dim aml As Double = tmpa(1)(0)
 
             i = 0
             Dim bml = 0.0#
@@ -347,7 +347,7 @@ Namespace PropertyPackages.Auxiliary
 
             Dim tmpa As Object = Calc_SUM2(n, Vz, a)
 
-            Dim am As Double = tmpa(1)
+            Dim am As Double = tmpa(1)(0)
 
             Dim bm As Double = Vz.MultiplyY(bi).SumY
 
