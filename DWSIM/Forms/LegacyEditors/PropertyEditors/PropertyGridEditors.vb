@@ -4986,7 +4986,7 @@ Public Class PropertyGridEditors
                         .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
                     End With
 
-                Case Valve.CalculationMode.Kv_Gas, Valve.CalculationMode.Kv_Liquid, Valve.CalculationMode.Kv_Steam
+                Case Valve.CalculationMode.Kv_General, Valve.CalculationMode.Kv_Gas, Valve.CalculationMode.Kv_Liquid, Valve.CalculationMode.Kv_Steam
 
                     .Item.Add("Kv (max)", uo, "Kv", False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), "", True)
                     .Item.Add("Use Kv versus Opening relatioship", uo, "EnableOpeningKvRelationship", False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), "", True)
@@ -5035,7 +5035,7 @@ Public Class PropertyGridEditors
                             .CustomEditor = New DWSIM.Editors.Generic.UIUnitConverter
                         End With
 
-                    Case Valve.CalculationMode.Kv_Gas, Valve.CalculationMode.Kv_Liquid, Valve.CalculationMode.Kv_Steam
+                    Case Valve.CalculationMode.Kv_General, Valve.CalculationMode.Kv_Gas, Valve.CalculationMode.Kv_Liquid, Valve.CalculationMode.Kv_Steam
 
                         valor = Format(Converter.ConvertFromSI(su.pressure, uo.OutletPressure.GetValueOrDefault), uo.FlowSheet.Options.NumberFormat)
                         .Item.Add(FT(DWSIM.App.GetLocalString("ValveOutletPressure"), su.pressure), valor, False, DWSIM.App.GetLocalString("Resultados3"), "", True)

@@ -917,14 +917,17 @@ namespace DWSIM.UI.Desktop.Editors
                         case Valve.CalculationMode.OutletPressure:
                             pos5 = 0;
                             break;
-                        case Valve.CalculationMode.Kv_Liquid:
+                        case Valve.CalculationMode.Kv_General:
                             pos5 = 2;
                             break;
-                        case Valve.CalculationMode.Kv_Gas:
+                        case Valve.CalculationMode.Kv_Steam:
                             pos5 = 3;
                             break;
-                        case Valve.CalculationMode.Kv_Steam:
+                        case Valve.CalculationMode.Kv_Gas:
                             pos5 = 4;
+                            break;
+                        case Valve.CalculationMode.Kv_Liquid:
+                            pos5 = 5;
                             break;
                     }
                     s.CreateAndAddDropDownRow(container, "Calculation Mode", StringResources.valvecalcmode().ToList(), pos5, (DropDown arg3, EventArgs ev) =>
@@ -938,12 +941,9 @@ namespace DWSIM.UI.Desktop.Editors
                                 valve.CalcMode = Valve.CalculationMode.DeltaP;
                                 break;
                             case 2:
-                                valve.CalcMode = Valve.CalculationMode.Kv_Liquid;
+                                valve.CalcMode = Valve.CalculationMode.Kv_General;
                                 break;
                             case 3:
-                                valve.CalcMode = Valve.CalculationMode.Kv_Gas;
-                                break;
-                            case 4:
                                 valve.CalcMode = Valve.CalculationMode.Kv_Steam;
                                 break;
                         }

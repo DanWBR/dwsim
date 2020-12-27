@@ -154,9 +154,6 @@
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>General Info</value>
   </data>
-  <data name="rtbAnnotations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>335, 194</value>
-  </data>
   <data name="GroupBox4.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 480</value>
   </data>
@@ -165,6 +162,15 @@
   </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Notes</value>
+  </data>
+  <data name="rtbAnnotations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>335, 194</value>
+  </data>
+  <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>341, 60</value>
+  </data>
+  <data name="GroupBox3.Text" xml:space="preserve">
+    <value>Property Package Settings</value>
   </data>
   <data name="btnConfigurePP.Location" type="System.Drawing.Point, System.Drawing">
     <value>314, 26</value>
@@ -183,12 +189,6 @@
   </data>
   <data name="Label9.Text" xml:space="preserve">
     <value>Property Package</value>
-  </data>
-  <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>341, 60</value>
-  </data>
-  <data name="GroupBox3.Text" xml:space="preserve">
-    <value>Property Package Settings</value>
   </data>
   <data name="btnCalcKv.Location" type="System.Drawing.Point, System.Drawing">
     <value>245, 96</value>
@@ -257,13 +257,16 @@
     <value>Pressure Drop</value>
   </data>
   <data name="cbCalcMode.Items2" xml:space="preserve">
-    <value>Liquid Service Kv (IEC 60534)</value>
+    <value>General Service Kv (IEC 60534)</value>
   </data>
   <data name="cbCalcMode.Items3" xml:space="preserve">
-    <value>Gas Service Kv (IEC 60534)</value>
+    <value>Steam Service Kv </value>
   </data>
   <data name="cbCalcMode.Items4" xml:space="preserve">
-    <value>Steam Service Kv (IEC 60534)</value>
+    <value>Liquid Service Kv (Deprecated)</value>
+  </data>
+  <data name="cbCalcMode.Items5" xml:space="preserve">
+    <value>Gas Service Kv (Deprecated)</value>
   </data>
   <data name="cbCalcMode.Size" type="System.Drawing.Size, System.Drawing">
     <value>188, 21</value>
@@ -279,6 +282,12 @@
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Calculation Parameters</value>
+  </data>
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>341, 83</value>
+  </data>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Connections</value>
   </data>
   <data name="btnCreateAndConnectOutlet1.Location" type="System.Drawing.Point, System.Drawing">
     <value>287, 50</value>
@@ -334,17 +343,8 @@
   <data name="Label19.Text" xml:space="preserve">
     <value>Inlet Stream</value>
   </data>
-  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>341, 83</value>
-  </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Connections</value>
-  </data>
-  <data name="sizingtsmi.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 22</value>
-  </data>
-  <data name="sizingtsmi.Text" xml:space="preserve">
-    <value>Pressure Safety Valve Sizing/Evaluation</value>
+  <data name="UtilitiesCtxMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 30</value>
   </data>
   <data name="AddUtilityTSMI.Size" type="System.Drawing.Size, System.Drawing">
     <value>147, 26</value>
@@ -352,8 +352,11 @@
   <data name="AddUtilityTSMI.Text" xml:space="preserve">
     <value>Attach Utility</value>
   </data>
-  <data name="UtilitiesCtxMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 30</value>
+  <data name="sizingtsmi.Size" type="System.Drawing.Size, System.Drawing">
+    <value>277, 22</value>
+  </data>
+  <data name="sizingtsmi.Text" xml:space="preserve">
+    <value>Pressure Safety Valve Sizing/Evaluation</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>355, 705</value>
