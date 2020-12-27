@@ -213,8 +213,8 @@ Namespace UnitOperations
             Dim beta, A1, A2, s2_s1, L1, L2 As Double
 
             beta = _beta
-            A1 = 3.1416 * (_internaldiameter * 1000.0) ^ 2 / 4
-            A2 = 3.1416 * (_orificediameter * 1000.0) ^ 2 / 4
+            A1 = 3.1416 * (_internaldiameter / 1000.0) ^ 2 / 4
+            A2 = 3.1416 * (_orificediameter / 1000.0) ^ 2 / 4
 
             Select Case _orificetype
 
@@ -231,14 +231,14 @@ Namespace UnitOperations
                     'placa de orificio flange taps
 
                     s2_s1 = 0.0508
-                    L1 = 1 / ((_orificediameter * 1000.0) / 0.0254)
-                    L2 = 1 / ((_orificediameter * 1000.0) / 0.0254)
+                    L1 = 1 / (_orificediameter / 1000.0 / 0.0254)
+                    L2 = 1 / (_orificediameter / 1000.0 / 0.0254)
 
                 Case OrificeType.RadiusTaps
 
                     'placa de orificio radius taps
 
-                    s2_s1 = 1.5 * (_orificediameter * 1000.0)
+                    s2_s1 = 1.5 * _orificediameter / 1000.0
                     L1 = 1
                     L2 = 0.47
 
@@ -246,7 +246,7 @@ Namespace UnitOperations
 
             Dim ReD, Cd, DP As Double
 
-            ReD = Wi * (_orificediameter * 1000.0) / (A1 * mum)
+            ReD = Wi * _orificediameter / 1000.0 / (A1 * mum)
             If L1 < 0.4333 Then
                 Cd = 0.5959 + 0.312 * beta ^ 2.1 - 0.184 * beta ^ 8 + 0.0029 * beta ^ 2.5 * (10 ^ 6 / ReD) ^ 0.75 + 0.09 * L1 * (beta ^ 4 / (1 - beta ^ 4)) - 0.0337 * L2 * beta ^ 3
             Else
