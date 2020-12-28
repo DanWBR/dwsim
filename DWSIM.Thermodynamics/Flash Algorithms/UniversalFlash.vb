@@ -135,8 +135,14 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         End Try
                     ElseIf Not hres.LiquidPhaseSplit And hres.SolidPhase Then
                         'SVLE
+                        'Try
+                        '    Dim nl As New NestedLoopsSLE With {.FlashSettings = FlashSettings, .SolidSolution = False}
+                        '    result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                        'Catch ex As Exception
+                        '    errflag = True
+                        'End Try
                         Try
-                            Dim nl As New NestedLoopsSLE With {.FlashSettings = FlashSettings, .SolidSolution = False}
+                            Dim nl As New NestedLoopsSVLLE With {.FlashSettings = FlashSettings}
                             result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
                         Catch ex As Exception
                             errflag = True

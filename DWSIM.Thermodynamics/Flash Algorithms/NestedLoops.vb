@@ -177,6 +177,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             If T > MathEx.Common.Max(PP.RET_VTC, Vz) Then
                 Vy = Vz
                 Vx = Vy.DivideY(Ki).NormalizeY
+                Vx = Vx.ReplaceInvalidsWithZeroes()
                 V = 1
                 L = 0
                 GoTo out
@@ -211,13 +212,15 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     L = 1
                     V = 0
                     Vx = Vz
-                    Vy = Vx.MultiplyY(Ki).NormalizeY
+                    Vy = Vx.MultiplyY(Ki).NormalizeY()
+                    Vy = Vy.ReplaceInvalidsWithZeroes()
                     GoTo out
                 Else
                     L = 0
                     V = 1
                     Vy = Vz
-                    Vx = Vy.DivideY(Ki).NormalizeY
+                    Vx = Vy.DivideY(Ki).NormalizeY()
+                    Vx = Vx.ReplaceInvalidsWithZeroes()
                     GoTo out
                 End If
             End If
@@ -366,7 +369,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 Dim gl, gv As Double
                 fugv = PP.DW_CalcFugCoeff(Vz, T, P, State.Vapor)
                 fugl = PP.DW_CalcFugCoeff(Vz, T, P, State.Liquid)
-                If Math.Abs(fugv.Sum - fugl.Sum) < 0.000001 Then
+                If Math.Abs(fugv.Sum - fugl.Sum) < 0.000001 Or Double.IsNaN(fugl.Sum) Then
                     fugl = PP.RET_VPVAP(T).MultiplyConstY(1 / P)
                 End If
                 For i As Integer = 0 To n
@@ -387,17 +390,16 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 Throw ex
             End If
 
-            If V > 1.0# Then
+            If V >= 1.0# Then
                 V = 1.0
                 Vy = Vz
+                Ki = PP.DW_CalcKvalue_Ideal_VP(T, P)
                 Vx = Vy.DivideY(Ki).NormalizeY
-            ElseIf V < 0.0# Then
+            ElseIf V <= 0.0# Then
                 V = 0.0
                 Vx = Vz
+                Ki = PP.DW_CalcKvalue_Ideal_VP(T, P)
                 Vy = Vx.MultiplyY(Ki).NormalizeY
-            Else
-                Vy = Vz.MultiplyY(Ki).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1)).NormalizeY
-                Vx = Vy.DivideY(Ki).NormalizeY
             End If
 
             If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
@@ -1075,6 +1077,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                             Vy = serrobj(4)
                             Vx1 = serrobj(5)
                             Ki = Vy.DivideY(Vx1)
+                            Ki = Ki.ReplaceInvalidsWithZeroes()
                             IObj2?.SetCurrent()
                             fx2 = Serror("PT", x1 + epsilon(j), P, Vz, PP, True, Ki)(0)
 
@@ -1093,6 +1096,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                         Vy = serrobj(4)
                         Vx1 = serrobj(5)
                         Ki = Vy.DivideY(Vx1)
+                        Ki = Ki.ReplaceInvalidsWithZeroes()
+
 
                         IObj2?.Paragraphs.Add(String.Format("Current Entropy error: {0}", fx))
 
