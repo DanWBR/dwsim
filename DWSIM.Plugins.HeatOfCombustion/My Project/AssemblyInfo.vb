@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Heat of Combustion Calculation Plugin for DWSIM Simulator")>
 <Assembly: AssemblyCompany("")>
 <Assembly: AssemblyProduct("DWSIM.Plugins.HeatOfCombustion")>
-<Assembly: AssemblyCopyright("Copyright © 2010-2020 Daniel Medeiros")>
+<Assembly: AssemblyCopyright("Copyright © 2010-2021 Daniel Medeiros")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>

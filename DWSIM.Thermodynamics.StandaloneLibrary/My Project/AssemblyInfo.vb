@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("")>
 <Assembly: AssemblyCompany("")>
 <Assembly: AssemblyProduct("DWSIM.Thermodynamics.StandaloneLibrary")>
-<Assembly: AssemblyCopyright("Copyright ©  2018-2020 Daniel Medeiros")>
+<Assembly: AssemblyCopyright("Copyright © 2018-2021 Daniel Medeiros")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(True)>
