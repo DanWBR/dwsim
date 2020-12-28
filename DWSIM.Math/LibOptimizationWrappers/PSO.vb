@@ -85,10 +85,8 @@ Namespace MathEx.OptimizationL
 
             'set initialposition
             optimization.InitialPosition = vars
-
-            'set bpundary
-            'optimization.UpperBounds = ubounds
-            'optimization.LowerBounds = lbounds
+            optimization.InitialValueRangeLower = lbounds.Min
+            optimization.InitialValueRangeUpper = ubounds.Max
 
             'init
             optimization.Init()
@@ -96,9 +94,19 @@ Namespace MathEx.OptimizationL
                 Throw New Exception("Optimization error")
             End If
 
+            Dim fval As Double
+
             'do optimization
-            While (optimization.DoIteration(MaxIterations) = False)
-                LibOptimization.Util.clsUtil.DebugValue(optimization, ai_isOutValue:=False)
+            Dim it As Integer = 0
+            While (optimization.DoIteration(1) = False)
+                it += 1
+                If it > MaxIterations Then
+                    Throw New Exception("Optimization error - max iterations reached")
+                End If
+                fval = optimization.Result.Eval
+                If fval < Tolerance Then
+                    Exit While
+                End If
             End While
 
             'get result
@@ -111,5 +119,3 @@ Namespace MathEx.OptimizationL
 
 
 End Namespace
-
-

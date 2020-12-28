@@ -17,7 +17,7 @@
 
 Namespace MathEx.OptimizationL
 
-    Public Class Newton
+    Public Class DE
 
         Public Property Tolerance As Double = 0.0001
 
@@ -48,7 +48,7 @@ Namespace MathEx.OptimizationL
         End Sub
 
         ''' <summary>
-        ''' Minimizes a function value using HC algorithm.
+        ''' Minimizes a function value using DE algorithm.
         ''' </summary>
         ''' <param name="functionbody">f(x) where x is a vector of doubles, returns the value of the function.</param>
         ''' <param name="functiongradient">Optional. g(x) where x is a vector of doubles, returns the value of the gradient of the function with respect to each variable.</param>
@@ -80,15 +80,17 @@ Namespace MathEx.OptimizationL
                 Next
             End If
 
-            Dim optimization As New LibOptimization.Optimization.clsOptNewtonMethod(
+            Dim optimization As New LibOptimization.Optimization.clsOptDE(
                 New ObjectiveFunction(functionbody, functiongradient, 0.001, vars.Length))
 
             'set initialposition
             optimization.InitialPosition = vars
+            optimization.InitialValueRangeLower = lbounds.Min
+            optimization.InitialValueRangeUpper = ubounds.Max
 
             'set bpundary
-            'optimization.UpperBounds = ubounds
-            'optimization.LowerBounds = lbounds
+            optimization.UpperBounds = ubounds
+            optimization.LowerBounds = lbounds
 
             'init
             optimization.Init()
@@ -96,12 +98,18 @@ Namespace MathEx.OptimizationL
                 Throw New Exception("Optimization error")
             End If
 
+            Dim fval As Double
+
             'do optimization
             Dim it As Integer = 0
             While (optimization.DoIteration(1) = False)
                 it += 1
                 If it > MaxIterations Then
                     Throw New Exception("Optimization error - max iterations reached")
+                End If
+                fval = optimization.Result.Eval
+                If fval < Tolerance Then
+                    Exit While
                 End If
             End While
 
@@ -112,6 +120,6 @@ Namespace MathEx.OptimizationL
 
     End Class
 
+
+
 End Namespace
-
-

@@ -122,7 +122,9 @@
     <Compile Include="IPOPTSolver.vb" />
     <Compile Include="LBFGS.vb" />
     <Compile Include="LBFGSB.vb" />
+    <Compile Include="LibOptimizationWrappers\DE.vb" />
     <Compile Include="LibOptimizationWrappers\HillClimbing.vb" />
+    <Compile Include="LibOptimizationWrappers\HookeAndJeeves.vb" />
     <Compile Include="LibOptimizationWrappers\Newton.vb" />
     <Compile Include="LibOptimizationWrappers\ObjectiveFunction.vb" />
     <Compile Include="LibOptimizationWrappers\PSO.vb" />

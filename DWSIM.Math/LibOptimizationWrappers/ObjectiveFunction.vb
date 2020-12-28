@@ -38,7 +38,7 @@ Public Class ObjectiveFunction
 
     Public Overrides Function Hessian(x As List(Of Double)) As List(Of List(Of Double))
 
-        Return Nothing
+        Return FunctionHessian(x.ToArray())
 
     End Function
 
@@ -72,6 +72,39 @@ Public Class ObjectiveFunction
         Next
 
         Return g
+
+    End Function
+
+    Private Function FunctionHessian(ByVal x() As Double) As List(Of List(Of Double))
+
+        Dim n = x.Length - 1
+
+        Dim f2() As Double
+        Dim f3() As Double
+        Dim x2(n), x3(n) As Double
+        Dim k As Integer
+        Dim h As New List(Of List(Of Double))
+
+        For i = 0 To n
+            For j = 0 To n
+                If i <> j Then
+                    x2(j) = x(j)
+                    x3(j) = x(j)
+                Else
+                    x2(j) = x(j) * (1 + epsilon)
+                    x3(j) = x(j) * (1 - epsilon)
+                End If
+            Next
+            f2 = FunctionGradient(x2)
+            f3 = FunctionGradient(x3)
+            Dim l As New List(Of Double)
+            For k = 0 To n
+                l.Add((f2(k) - f3(k)) / (x2(i) - x3(i)))
+            Next
+            h.Add(l)
+        Next
+
+        Return h
 
     End Function
 
