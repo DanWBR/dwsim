@@ -130,6 +130,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 S = Vs.Sum
 
+                Vs = Vs.NormalizeY
+
                 IObj?.SetCurrent
 
                 result = nl1.Flash_PT(Vz2, P, T, PP)
