@@ -52,6 +52,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public prevres As PreviousResults
 
+        Private _nl As New NestedLoops
+
         Public Class PreviousResults
             Property V As Double
             Property L1 As Double
@@ -94,46 +96,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_PT(ByVal Vz As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
-
-            Inspector.Host.CheckAndAdd(IObj, "", "Flash_PT", Name & " (PT Flash)", "Pressure-Temperature Flash Algorithm Routine", True)
-
-            IObj?.Paragraphs.Add("This routine tries to find the compositions of a liquid and a vapor phase at equilibrium by solving the Rachford-Rice equation using a newton convergence approach.")
-
-            IObj?.Paragraphs.Add("The Rachford-Rice equation is")
-
-            IObj?.Paragraphs.Add("<math>\sum_i\frac{z_i \, (K_i - 1)}{1 + \beta \, (K_i - 1)}= 0</math>")
-
-            IObj?.Paragraphs.Add("where:")
-
-            IObj?.Paragraphs.Add("<math_inline>z_{i}</math_inline> is the mole fraction of component i in the feed liquid (assumed to be known);")
-            IObj?.Paragraphs.Add("<math_inline>\beta</math_inline> is the fraction of feed that is vaporised;")
-            IObj?.Paragraphs.Add("<math_inline>K_{i}</math_inline> is the equilibrium constant of component i.")
-
-            IObj?.Paragraphs.Add("The equilibrium constants K<sub>i</sub> are in general functions of many parameters, though the most important is arguably temperature; they are defined as:")
-
-            IObj?.Paragraphs.Add("<math>y_i = K_i \, x_i</math>")
-
-            IObj?.Paragraphs.Add("where:")
-
-            IObj?.Paragraphs.Add("<math_inline>x_i</math_inline> is the mole fraction of component i in liquid phase;")
-            IObj?.Paragraphs.Add("<math_inline>y_i</math_inline> is the mole fraction of component i in gas phase.")
-
-            IObj?.Paragraphs.Add("Once the Rachford-Rice equation has been solved for <math_inline>\beta</math_inline>, the compositions x<sub>i</sub> and y<sub>i</sub> can be immediately calculated as:")
-
-            IObj?.Paragraphs.Add("<math>x_i =\frac{z_i}{1+\beta(K_i-1)}\\y_i=K_i\,x_i</math>")
-
-            IObj?.Paragraphs.Add("The Rachford - Rice equation can have multiple solutions for <math_inline>\beta</math_inline>, at most one of which guarantees that all <math_inline>x_i</math_inline> and <math_inline>y_i</math_inline> will be positive. In particular, if there is only one <math_inline>\beta</math_inline> for which:")
-            IObj?.Paragraphs.Add("<math>\frac{1}{1-K_\text{max}}=\beta_\text{min}<\beta<\beta_\text{max}=\frac{1}{1-K_\text{min}}</math>")
-            IObj?.Paragraphs.Add("then that <math_inline>\beta</math_inline> is the solution; if there are multiple  such <math_inline>\beta</math_inline>s, it means that either <math_inline>K_{max}<1</math_inline> or <math_inline>K_{min}>1</math_inline>, indicating respectively that no gas phase can be sustained (and therefore <math_inline>\beta=0</math_inline>) or conversely that no liquid phase can exist (and therefore <math_inline>\beta=1</math_inline>).")
-
-            IObj?.Paragraphs.Add("DWSIM initializes the current calculation with ideal K-values estimated from vapor pressure data for each compound, or by using previously calculated values from an earlier solution.")
-
-            Dim d1, d2 As Date, dt As TimeSpan
-            Dim i, j, k As Integer
-
-            d1 = Date.Now
-
             etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance).ToDoubleFromInvariant
             maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_External_Iterations)
             itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance).ToDoubleFromInvariant
@@ -144,82 +106,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             proppack = PP
 
             ReDim Vn(n), Vx(n), Vy(n), Vx_ant(n), Vy_ant(n), Vp(n), Ki(n), fi(n)
-
-            Vn = PP.RET_VNAMES()
-            fi = Vz.Clone
-
-            Vpc = PP.RET_VPC
-            VTc = PP.RET_VTC
-            Vw = PP.RET_VW
-
-            'Calculate Ki`s
-
-            If Not ReuseKI Then
-                i = 0
-                Do
-                    Vp(i) = Vpc(i) * Exp(5.37 * (1 + Vw(i)) * (1 - VTc(i) / T))
-                    Ki(i) = Vp(i) / P
-                    i += 1
-                Loop Until i = n + 1
-            Else
-                For i = 0 To n
-                    IObj?.SetCurrent()
-                    Vp(i) = PP.AUX_PVAPi(Vn(i), T)
-                    Ki(i) = PrevKi(i)
-                Next
-            End If
-
-            'Estimate V
-
-            If T > MathEx.Common.Max(proppack.RET_VTC, Vz) Then
-                Vy = Vz
-                V = 1
-                L = 0
-                GoTo out
-            End If
-
-            i = 0
-            Px = 0
-            Do
-                If Vp(i) <> 0.0# Then Px = Px + (Vz(i) / Vp(i))
-                i = i + 1
-            Loop Until i = n + 1
-            Px = 1 / Px
-            Pmin = Px
-            i = 0
-            Px = 0
-            Do
-                Px = Px + Vz(i) * Vp(i)
-                i = i + 1
-            Loop Until i = n + 1
-            Pmax = Px
-            Pb = Pmax
-            Pd = Pmin
-
-            If Abs(Pb - Pd) / Pb < 0.0000001 Then
-                'one comp only
-                IObj?.SetCurrent()
-                Px = PP.AUX_PVAPM(T)
-                If Px <= P Then
-                    L = 1
-                    V = 0
-                    Vx = Vz
-                    GoTo out
-                Else
-                    L = 0
-                    V = 1
-                    Vy = Vz
-                    GoTo out
-                End If
-            End If
-
-            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
-
-            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
-            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
-            IObj?.Paragraphs.Add(String.Format("Compounds: {0}", PP.RET_VNAMES.ToMathArrayString))
-            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
-            IObj?.Paragraphs.Add(String.Format("Initial estimates for K: {0}", Ki.ToMathArrayString))
 
             Dim result As Object = Nothing
 
@@ -236,359 +122,36 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     'jump to 3pflash
 
-                    IObj?.Paragraphs.Add("The algorithm will now move to the VLLE part. First it checks if there is a liquid phase. If yes, then it calls the liquid phase stability test algorithm to see if a second liquid phase can form at the current conditions.")
-
-                    IObj?.Paragraphs.Add(String.Format("Initial Estimate for Vapor Phase Molar Fraction (V): {0}", prevres.V))
-                    IObj?.Paragraphs.Add(String.Format("Initial Estimate for Liquid Phase 1 Molar Fraction (L1): {0}", prevres.L1))
-                    IObj?.Paragraphs.Add(String.Format("Initial Estimate for Liquid Phase 2 Molar Fraction (L2): {0}", prevres.L2))
-
-                    IObj?.Paragraphs.Add(String.Format("Initial Estimate for Vapor Phase Molar Composition: {0}", prevres.Vy.ToMathArrayString))
-                    IObj?.Paragraphs.Add(String.Format("Initial Estimate for Liquid Phase 1 Molar Composition: {0}", prevres.Vx1.ToMathArrayString))
-                    IObj?.Paragraphs.Add(String.Format("Initial Estimate for Liquid Phase 2 Molar Composition: {0}", prevres.Vx2.ToMathArrayString))
-
-                    IObj?.SetCurrent
-
                     result = Flash_PT_3P(Vz, prevres.V, prevres.L1, prevres.L2, prevres.Vy, prevres.Vx1, prevres.Vx2, P, T, PP)
 
-                    GoTo out2
-
-                End If
-
-                Dim Vmin, Vmax, g As Double
-                Vmin = 1.0#
-                Vmax = 0.0#
-                For i = 0 To n
-                    If (Ki(i) * Vz(i) - 1) / (Ki(i) - 1) < Vmin Then Vmin = (Ki(i) * Vz(i) - 1) / (Ki(i) - 1)
-                    If (1 - Vz(i)) / (1 - Ki(i)) > Vmax Then Vmax = (1 - Vz(i)) / (1 - Ki(i))
-                Next
-
-                If Vmin < 0.0# Then Vmin = 0.0#
-                If Vmin = 1.0# Then Vmin = 0.0#
-                If Vmax = 0.0# Then Vmax = 1.0#
-                If Vmax > 1.0# Then Vmax = 1.0#
-
-                V = (Vmin + Vmax) / 2
-
-                g = 0.0#
-                For i = 0 To n
-                    g += Vz(i) * (Ki(i) - 1) / (V + (1 - V) * Ki(i))
-                Next
-
-                If g > 0 Then Vmin = V Else Vmax = V
-
-                V = Vmin + (Vmax - Vmin) / 2
-
-                L = 1 - V
-
-                If n = 0 Then
-                    If Vp(0) <= P Then
-                        L = 1
-                        V = 0
-                    Else
-                        L = 0
-                        V = 1
-                    End If
-                End If
-
-                i = 0
-                Do
-                    If Vz(i) <> 0 Then
-                        Vy(i) = Vz(i) * Ki(i) / ((Ki(i) - 1) * V + 1)
-                        Vx(i) = Vy(i) / Ki(i)
-                        If Vy(i) < 0 Then Vy(i) = 0
-                        If Vx(i) < 0 Then Vx(i) = 0
-                    Else
-                        Vy(i) = 0
-                        Vx(i) = 0
-                    End If
-                    i += 1
-                Loop Until i = n + 1
-
-                i = 0
-                soma_x = 0
-                soma_y = 0
-                Do
-                    soma_x = soma_x + Vx(i)
-                    soma_y = soma_y + Vy(i)
-                    i = i + 1
-                Loop Until i = n + 1
-                i = 0
-                Do
-                    Vx(i) = Vx(i) / soma_x
-                    Vy(i) = Vy(i) / soma_y
-                    i = i + 1
-                Loop Until i = n + 1
-
-            End If
-
-            IObj?.Paragraphs.Add(String.Format("Initial estimate for V: {0}", V))
-            IObj?.Paragraphs.Add(String.Format("Initial estimate for L (1-V): {0}", L))
-
-            IObj?.Paragraphs.Add(String.Format("Initial estimate for y: {0}", Vy.ToMathArrayString))
-            IObj?.Paragraphs.Add(String.Format("Initial estimate for x: {0}", Vx.ToMathArrayString))
-
-            ecount = 0
-            Dim convergiu = 0
-
-            Do
-
-                IObj?.SetCurrent()
-
-                Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
-
-                Inspector.Host.CheckAndAdd(IObj2, "", "Flash_PT", "PT Flash Newton Iteration", "Pressure-Temperature Flash Algorithm Convergence Iteration Step")
-
-                IObj2?.Paragraphs.Add(String.Format("This is the Newton convergence loop iteration #{0}. DWSIM will use the current values of y and x to calculate fugacity coefficients and update K using the Property Package rigorous models.", ecount))
-
-                IObj2?.SetCurrent()
-
-                Ki_ant = Ki.Clone
-                Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
-
-                i = 0
-                Do
-                    If Vz(i) <> 0 Then
-                        Vy_ant(i) = Vy(i)
-                        Vx_ant(i) = Vx(i)
-                        Vy(i) = Vz(i) * Ki(i) / ((Ki(i) - 1) * V + 1)
-                        Vx(i) = Vy(i) / Ki(i)
-                    Else
-                        Vy(i) = 0
-                        Vx(i) = 0
-                    End If
-                    i += 1
-                Loop Until i = n + 1
-
-                i = 0
-                soma_x = 0
-                soma_y = 0
-                Do
-                    soma_x = soma_x + Vx(i)
-                    soma_y = soma_y + Vy(i)
-                    i = i + 1
-                Loop Until i = n + 1
-                i = 0
-                Do
-                    Vx(i) = Vx(i) / soma_x
-                    Vy(i) = Vy(i) / soma_y
-                    i = i + 1
-                Loop Until i = n + 1
-
-                IObj2?.Paragraphs.Add(String.Format("y values (vapor phase composition) where updated. Current values: {0}", Vy.ToMathArrayString))
-                IObj2?.Paragraphs.Add(String.Format("x values (liquid phase composition) where updated. Current values: {0}", Vx.ToMathArrayString))
-
-                Dim e1 As Double = 0
-                Dim e2 As Double = 0
-                Dim e3 As Double = 0
-                i = 0
-                Do
-                    e1 = e1 + Math.Abs(Vx(i) - Vx_ant(i))
-                    e2 = e2 + Math.Abs(Vy(i) - Vy_ant(i))
-                    i = i + 1
-                Loop Until i = n + 1
-
-                e3 = (V - Vant)
-
-                IObj2?.Paragraphs.Add(String.Format("Current Vapor Fraction (<math_inline>\beta</math_inline>) error: {0}", e3))
-
-                If Double.IsNaN(Math.Abs(e1) + Math.Abs(e2)) Then
-
-                    Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
-
-                ElseIf Math.Abs(e3) < itol And (e1 + e2) < itol And ecount > 0 Then
-
-                    convergiu = 1
-
-                    Exit Do
-
                 Else
 
-                    Vant = V
+                    result = _nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                    L = result(0)
+                    V = result(1)
+                    Vx = result(2)
+                    Vy = result(3)
 
-                    Dim F = 0.0#
-                    Dim dF = 0.0#
-                    i = 0
-                    Do
-                        If Vz(i) > 0 Then
-                            F = F + Vz(i) * (Ki(i) - 1) / (1 + V * (Ki(i) - 1))
-                            dF = dF - Vz(i) * (Ki(i) - 1) ^ 2 / (1 + V * (Ki(i) - 1)) ^ 2
+                    If L > 0.0 Then
+
+                        Dim lps = GetPhaseSplitEstimates(T, P, L, Vx, PP)
+
+                        L1 = lps(0)
+                        Vx1 = lps(1)
+                        L2 = lps(2)
+                        Vx2 = lps(3)
+
+                        If L2 > 0.0 Then
+
+                            result = Flash_PT_3P(Vz, V, L1, L2, Vy, Vx1, Vx2, P, T, PP)
+
                         End If
-                        i = i + 1
-                    Loop Until i = n + 1
 
-                    IObj2?.Paragraphs.Add(String.Format("Current value of the Rachford-Rice error function: {0}", F))
-
-                    If Abs(F) < etol Then Exit Do
-
-                    Dim af, dfmin As Double
-
-                    If ecount = 0 Then
-                        dfmin = 0.1
-                    ElseIf ecount = 1 Then
-                        dfmin = 0.3
-                    ElseIf ecount = 2 Then
-                        dfmin = 0.5
-                    Else
-                        dfmin = 0.7
                     End If
 
-                    af = MinimizeGibbs(dfmin, PP, T, P, L, 0, F / dF, 0, Vy, Vx, PP.RET_NullVector)
-
-                    V = -F / dF * af + V
-
-                    IObj2?.Paragraphs.Add(String.Format("Updated Vapor Fraction (<math_inline>\beta</math_inline>) value: {0}", V))
-
                 End If
-
-                L = 1 - V
-
-                If V > 1 Then
-                    V = 1
-                    L = 0
-                    i = 0
-                    Do
-                        Vy(i) = Vz(i)
-                        i = i + 1
-                    Loop Until i = n + 1
-                ElseIf V < 0 Then
-                    V = 0
-                    L = 1
-                    i = 0
-                    Do
-                        Vx(i) = Vz(i)
-                        i = i + 1
-                    Loop Until i = n + 1
-                End If
-
-                ecount += 1
-
-                If Double.IsNaN(V) Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashTPVapFracError"))
-                If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
-
-                WriteDebugInfo("PT Flash [NL-3PV3]: Iteration #" & ecount & ", VF = " & V)
-
-                If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
-
-                IObj2?.Close()
-
-            Loop Until convergiu = 1
-
-            IObj?.Paragraphs.Add("The two-phase algorithm converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms. Error function value: " & F)
-
-            Dim g2 = Gibbs(PP, T, P, L1, 0.0, Vy, Vx, PP.RET_NullVector)
-
-            IObj?.Paragraphs.Add(String.Format("Gibbs Energy Value: {0}", g2))
-
-            IObj?.Paragraphs.Add(String.Format("Final two-phase converged values for K: {0}", Ki.ToMathArrayString))
-
-out:
-
-            prevres = New PreviousResults With {.L1 = L1, .L2 = 0, .V = V, .Vy = Vy, .Vx1 = Vx, .Vx2 = PP.RET_NullVector}
-
-            result = New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
-
-            ' check if there is a liquid phase
-
-            IObj?.Paragraphs.Add("The algorithm will now move to the VLLE part. First it checks if there is a liquid phase. If yes, then it calls the liquid phase stability test algorithm to see if a second liquid phase can form at the current conditions.")
-
-            IObj?.Paragraphs.Add("We have a liquid phase. Checking its stability according to user specifications...")
-
-            IObj?.Paragraphs.Add("Calling Liquid Phase Stability Test algorithm...")
-
-            ' do a stability test in the liquid phase
-
-            IObj?.SetCurrent
-
-            Dim stresult = StabTest2(T, P, result(2), PP.RET_VTC, PP)
-
-            If stresult.Count > 0 Then
-
-                IObj?.Paragraphs.Add("The liquid phase is not stable. Proceed to three-phase flash.")
-
-                Dim validsolutions = stresult.Where(Function(s) s.Max > 0.5).ToList()
-
-                Dim vx2est(n), fcl(n), fcv(n) As Double
-
-                If validsolutions.Count > 0 Then
-
-                    ' select the composition which gives the lowest gibbs energy.
-
-                    Dim Gt0 As Double = 100000.0, Gt As Double, ft() As Double, it As Integer
-                    i = 0
-                    For Each trialcomp In validsolutions
-                        ft = PP.DW_CalcFugCoeff(trialcomp, T, P, State.Liquid)
-                        Gt = 0.0
-                        For j = 0 To n
-                            If Vz(j) > 0.0 Then
-                                Gt += trialcomp(j) * Log(ft(j) * trialcomp(j))
-                            End If
-                        Next
-                        If Gt < Gt0 Then
-                            Gt0 = Gt
-                            it = i
-                        End If
-                        i += 1
-                    Next
-                    vx2est = validsolutions(it)
-                Else
-                    vx2est = stresult(0)
-                End If
-
-                Dim vx1e(Vz.Length - 1) As Double
-
-                'calculate L2
-
-                L2 = 0.3 / L
-
-                For i = 0 To n
-                    vx1e(i) = (1 - L2) * Vx(i) - L2 * vx2est(i)
-                    If vx1e(i) < 0.0 Then vx1e(i) = 0.0
-                Next
-
-                L1 = F - L2 - V
-
-                If L1 < 0.0# Then
-                    L1 = Abs(L1)
-                    L2 = F - L1 - V
-                End If
-
-                If L2 < 0.0# Then
-                    V += L2
-                    L2 = Abs(L2)
-                End If
-
-                Dim sumvx2 As Double
-                For i = 0 To n
-                    sumvx2 += Abs(vx1e(i))
-                Next
-
-                For i = 0 To n
-                    vx1e(i) = Abs(vx1e(i)) / sumvx2
-                Next
-
-                IObj?.Paragraphs.Add(String.Format("Initial Estimate for Vapor Phase Molar Fraction (V): {0}", V))
-                IObj?.Paragraphs.Add(String.Format("Initial Estimate for Liquid Phase 1 Molar Fraction (L1): {0}", L1))
-                IObj?.Paragraphs.Add(String.Format("Initial Estimate for Liquid Phase 2 Molar Fraction (L2): {0}", L2))
-
-                IObj?.Paragraphs.Add(String.Format("Initial Estimate for Vapor Phase Molar Composition: {0}", Vy.ToMathArrayString))
-                IObj?.Paragraphs.Add(String.Format("Initial Estimate for Liquid Phase 1 Molar Composition: {0}", vx1e.ToMathArrayString))
-                IObj?.Paragraphs.Add(String.Format("Initial Estimate for Liquid Phase 2 Molar Composition: {0}", vx2est.ToMathArrayString))
-
-                IObj?.SetCurrent
-
-                result = Flash_PT_3P(Vz, V, L1, L2, Vy, vx1e, vx2est, P, T, PP)
 
             End If
-
-out2:       d2 = Date.Now
-
-            dt = d2 - d1
-
-            WriteDebugInfo("PT Flash [NL-3PV3]: Converged in " & result(4) & " iterations. Time taken: " & dt.TotalMilliseconds & " ms")
-
-            IObj?.Paragraphs.Add("The three-phase algorithm converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms. Error function value: " & F)
-
-            IObj?.Close()
 
             Return result
 

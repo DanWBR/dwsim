@@ -143,131 +143,26 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             End If
 
-            Dim GoneThrough As Boolean = False
-
-            If L1 = 0 And S = 0.0 And (FlashSettings(Interfaces.Enums.FlashSetting.CheckIncipientLiquidForStability)) Then
-
-                Dim stresult As Object = StabTest(T, P, Vx1, PP.RET_VTC, PP)
-
-                If stresult(0) = False Then
-
-                    Dim nlflash As New NestedLoops()
-
-                    Dim m As Double = UBound(stresult(1), 1)
-
-                    Dim trialcomps As New List(Of Double())
-                    Dim results As New List(Of Object)
-
-                    For j = 0 To m
-                        Dim vxtrial(n) As Double
-                        For i = 0 To n
-                            vxtrial(i) = stresult(1)(j, i)
-                        Next
-                        trialcomps.Add(vxtrial)
-                    Next
-
-                    For Each tcomp In trialcomps
-                        Try
-                            Dim r2 = nlflash.Flash_PT(Vz, P, T, PP, True, Vy.DivideY(tcomp))
-                            results.Add(r2)
-                        Catch ex As Exception
-                        End Try
-                    Next
-
-                    If results.Where(Function(r) r(0) > 0.0).Count > 0 Then
-
-                        Dim validresult = results.Where(Function(r) r(0) > 0.0).First
-
-                        L1 = validresult(0)
-                        V = validresult(1)
-                        Vx1 = validresult(2)
-                        Vy = validresult(3)
-
-                        result = New Object() {L1, V, Vx1, Vy, 0, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
-
-                        GoneThrough = True
-
-                    End If
-
-                End If
-
-            End If
-
-            If L1 > 0 Then
-
-                Dim stresult = StabTest(T, P, Vx1, PP.RET_VTC, PP)
+            If L1 > 0.0 Then
 
                 IObj?.SetCurrent
 
                 Dim nonsolids = Vz.Count - PP.ForcedSolids.Count
 
-                If stresult(0) = False And Not GoneThrough And nonsolids > 1 Then
+                If nonsolids > 1 Then
 
-                    ' liquid phase NOT stable. proceed to three-phase flash.
+                    Dim lps = GetPhaseSplitEstimates(T, P, L1, Vx1, PP)
 
-                    Dim k As Integer = 0
+                    L1 = lps(0)
+                    Vx1 = lps(1)
+                    L2 = lps(2)
+                    Vx2 = lps(3)
 
-                    Dim vx2est(n), fcl(n), fcv(n) As Double
-                    Dim m As Double = UBound(stresult(1), 1)
-                    Dim gl, gli As Double
+                    If L2 > 0.0 Then
 
-                    gli = 0
-                    For j = 0 To m
-                        For i = 0 To n
-                            vx2est(i) = stresult(1)(j, i)
-                        Next
-                        IObj?.SetCurrent
-                        fcl = PP.DW_CalcFugCoeff(vx2est, T, P, State.Liquid)
-                        gl = 0.0#
-                        For i = 0 To n
-                            If vx2est(i) <> 0.0# Then gl += vx2est(i) * Log(fcl(i) * vx2est(i))
-                        Next
-                        If gl <= gli Then
-                            gli = gl
-                            k = j
-                        End If
-                    Next
-                    For i = 0 To Vz.Length - 1
-                        vx2est(i) = stresult(1)(k, i)
-                    Next
+                        result = nl2.Flash_PT_3P(Vz, V, L1, L2, Vy, Vx1, Vx2, P, T, PP)
 
-                    Dim vx1e(Vz.Length - 1), vx2e(Vz.Length - 1) As Double
-
-                    Dim maxl As Double = MathEx.Common.Max(vx2est)
-                    Dim imaxl As Integer = Array.IndexOf(vx2est, maxl)
-
-                    V = result(1)
-                    L2 = result(3)(imaxl)
-                    L1 = 1 - L2 - V
-
-                    If L1 < 0.0# Then
-                        L1 = Abs(L1)
-                        L2 = 1 - L1 - V
                     End If
-
-                    If L2 < 0.0# Then
-                        V += L2
-                        L2 = Abs(L2)
-                    End If
-
-                    For i = 0 To n
-                        If i <> imaxl Then
-                            vx1e(i) = Vz(i) - V * result(3)(i) - L2 * vx2est(i)
-                        Else
-                            vx1e(i) = Vz(i) * L2
-                        End If
-                    Next
-
-                    Dim sumvx2 As Double
-                    For i = 0 To n
-                        sumvx2 += Abs(vx1e(i))
-                    Next
-
-                    For i = 0 To n
-                        vx1e(i) = Abs(vx1e(i)) / sumvx2
-                    Next
-
-                    result = nl2.Flash_PT_3P(Vz, V, L1, L2, Vy, vx1e, vx2est, P, T, PP)
 
                     IObj?.SetCurrent
 
@@ -289,7 +184,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 IObj?.SetCurrent
 
-                If PP.RET_VTF.SumY > 0.0 And S = 0 Then
+                If PP.RET_VTF.SumY > 0.0 And S = 0.0 Then
 
                     result = nl3.Flash_SL(Vx1, P, T, PP)
 
@@ -305,7 +200,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 End If
 
-                If L2 > 0 Then
+                If L2 > 0.0 Then
 
                     If PP.RET_VTF.SumY > 0.0 OrElse PP.ForcedSolids.Count > 0 Then
 
@@ -325,7 +220,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 End If
 
-            ElseIf S = 0 Then
+            ElseIf S = 0.0 Then
 
                 IObj?.SetCurrent
 

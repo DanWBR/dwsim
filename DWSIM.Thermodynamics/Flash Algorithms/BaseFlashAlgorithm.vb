@@ -1150,6 +1150,93 @@ will converge to this solution.")
 
         End Function
 
+        Function GetPhaseSplitEstimates(T As Double, P As Double, L As Double, Vx As Double(), pp As PropertyPackage) As Object()
+
+            Dim stresult = StabTest2(T, P, Vx, pp.RET_VTC, pp)
+
+            Dim n = Vx.Length - 1
+            Dim i As Integer
+
+            Dim L1, L2 As Double
+            Dim Vx1, Vx2 As Double()
+
+            L1 = L
+            L2 = 0.0
+
+            Vx1 = Vx.Clone()
+            Vx2 = Vx.Clone()
+
+            If stresult.Count > 0 Then
+
+                Dim validsolutions = stresult.Where(Function(s) s.Max > 0.5).ToList()
+
+                Dim fcl(n), fcv(n) As Double
+
+                If validsolutions.Count > 0 Then
+
+                    ' select the composition which gives the lowest gibbs energy.
+
+                    Dim Gt0 As Double = 100000.0, Gt As Double, ft() As Double, it As Integer
+                    i = 0
+                    For Each trialcomp In validsolutions
+                        ft = pp.DW_CalcFugCoeff(trialcomp, T, P, State.Liquid)
+                        Gt = 0.0
+                        For j = 0 To n
+                            If Vx(j) > 0.0 Then
+                                Gt += trialcomp(j) * Log(ft(j) * trialcomp(j))
+                            End If
+                        Next
+                        If Gt < Gt0 Then
+                            Gt0 = Gt
+                            it = i
+                        End If
+                        i += 1
+                    Next
+                    Vx2 = validsolutions(it)
+                Else
+                    Vx2 = stresult(0)
+                End If
+
+                Dim vx1e(n) As Double
+
+                'calculate L2
+
+                Dim maxL2 = Vx2.Max
+                Dim maxL2i = Vx2.ToList().IndexOf(maxL2)
+
+                L2 = Vx(maxL2i) * L * maxL2
+
+                For i = 0 To n
+                    Vx1(i) = (1 - L2) * Vx(i) - L2 * Vx2(i)
+                    If Vx1(i) < 0.0 Then Vx1(i) = 0.0
+                Next
+
+                L1 = L - L2
+
+                If L1 < 0.0# Then
+                    L1 = Abs(L1)
+                    L2 = 1 - L1
+                End If
+
+                Dim sumvx2 As Double
+                For i = 0 To n
+                    sumvx2 += Abs(Vx1(i))
+                Next
+
+                For i = 0 To n
+                    Vx1(i) = Abs(Vx1(i)) / sumvx2
+                Next
+
+                Return New Object() {L1, Vx1, L2, Vx2}
+
+            Else
+
+                Return New Object() {L1, Vx1, L2, Vx2}
+
+            End If
+
+        End Function
+
 #End Region
 
 #Region "Phase Type Verification"
