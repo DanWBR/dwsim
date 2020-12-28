@@ -127,7 +127,7 @@ Public Class FormAddUtility
 
         utility.AttachedTo = obj
 
-        DirectCast(utility, DockContent).ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Float
+        DirectCast(utility, DockContent).ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document
 
         obj.AttachedUtilities.Add(utility)
         Flowsheet.DisplayForm(utility)

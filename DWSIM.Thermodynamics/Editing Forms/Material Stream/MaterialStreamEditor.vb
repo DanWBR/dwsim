@@ -1414,7 +1414,7 @@ Public Class MaterialStreamEditor
         utility.AttachedTo = MatStream
 
         With DirectCast(utility, DockContent)
-            .ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Float
+            .ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document
         End With
 
         MatStream.AttachedUtilities.Add(utility)
