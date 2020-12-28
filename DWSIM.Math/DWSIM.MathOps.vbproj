@@ -77,6 +77,9 @@
     <Reference Include="Cureos.Numerics">
       <HintPath>..\DWSIM\References\Cureos.Numerics.dll</HintPath>
     </Reference>
+    <Reference Include="LibOptimization, Version=1.12.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LibOptimization.1.12.4\lib\net35\LibOptimization.dll</HintPath>
+    </Reference>
     <Reference Include="Mapack">
       <HintPath>..\DWSIM\References\Mapack.dll</HintPath>
     </Reference>
@@ -119,6 +122,11 @@
     <Compile Include="IPOPTSolver.vb" />
     <Compile Include="LBFGS.vb" />
     <Compile Include="LBFGSB.vb" />
+    <Compile Include="LibOptimizationWrappers\HillClimbing.vb" />
+    <Compile Include="LibOptimizationWrappers\Newton.vb" />
+    <Compile Include="LibOptimizationWrappers\ObjectiveFunction.vb" />
+    <Compile Include="LibOptimizationWrappers\PSO.vb" />
+    <Compile Include="LibOptimizationWrappers\SimulatedAnnealing.vb" />
     <Compile Include="LM.vb" />
     <Compile Include="LMFit.vb" />
     <Compile Include="LP_Solve.vb" />
