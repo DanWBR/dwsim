@@ -197,19 +197,39 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_PV(Vz() As Double, P As Double, V As Double, Tref As Double, PP As PropertyPackage, Optional ReuseKI As Boolean = False, Optional PrevKi() As Double = Nothing) As Object
 
-            Dim nl = New NestedLoops
-            nl.FlashSettings = FlashSettings
+            Dim T0 As Double = Tref
+            If T0 = 0.0 Then T0 = 298.15
 
-            Return nl.Flash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
+            Dim hres = PerformHeuristicsTest(Vz, T0, P, PP)
+
+            If hres.LiquidPhaseSplit Then
+                Dim nl3 = New NestedLoops3PV3
+                nl3.FlashSettings = FlashSettings
+                Return nl3.Flash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
+            Else
+                Dim nl = New NestedLoops
+                nl.FlashSettings = FlashSettings
+                Return nl.Flash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
+            End If
 
         End Function
 
         Public Overrides Function Flash_TV(Vz() As Double, T As Double, V As Double, Pref As Double, PP As PropertyPackage, Optional ReuseKI As Boolean = False, Optional PrevKi() As Double = Nothing) As Object
 
-            Dim nl = New NestedLoops
-            nl.FlashSettings = FlashSettings
+            Dim P0 As Double = Pref
+            If P0 = 0.0 Then P0 = 101325
 
-            Return nl.Flash_TV(Vz, T, V, Pref, PP, ReuseKI, PrevKi)
+            Dim hres = PerformHeuristicsTest(Vz, T, P0, PP)
+
+            If hres.LiquidPhaseSplit Then
+                Dim nl3 = New NestedLoops3PV3
+                nl3.FlashSettings = FlashSettings
+                Return nl3.Flash_TV(Vz, T, V, Pref, PP, ReuseKI, PrevKi)
+            Else
+                Dim nl = New NestedLoops
+                nl.FlashSettings = FlashSettings
+                Return nl.Flash_TV(Vz, T, V, Pref, PP, ReuseKI, PrevKi)
+            End If
 
         End Function
 

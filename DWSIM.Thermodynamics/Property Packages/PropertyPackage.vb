@@ -4660,7 +4660,6 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     Dim x, y1, y2, Test1, Test2 As Double
                     Dim tmp1 As Object = Nothing, tmp2 As Object = Nothing
 
-                    'If VLE And Not Me.FlashBase = FlashMethod.NestedLoopsSLE And Not Me.FlashBase = FlashMethod.NestedLoopsSLE_SS Then
                     If VLE Then
 
                         i = 0
@@ -4734,16 +4733,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         DirectCast(MyFlash, NestedLoopsSVLLE).ClearEstimates()
                     End If
 
-                    If LLE And Not TypeOf MyFlash Is Auxiliary.FlashAlgorithms.NestedLoopsSLE Then
-
-                        If Not TypeOf MyFlash Is Auxiliary.FlashAlgorithms.NestedLoops3PV3 And
-                            Not TypeOf MyFlash Is Auxiliary.FlashAlgorithms.GibbsMinimization3P And
-                            Not TypeOf MyFlash Is Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P And
-                            Not TypeOf MyFlash Is Auxiliary.FlashAlgorithms.NestedLoopsSVLLE Then
-
-                            Throw New Exception(Calculator.GetLocalString("UnsuitableFlashAlgorithmSelected"))
-
-                        End If
+                    If LLE Then
 
                         If MyFlash.AlgoType = Enums.FlashMethod.Nested_Loops_SVLLE Then
                             DirectCast(MyFlash, NestedLoopsSVLLE).ClearEstimates()
@@ -4757,9 +4747,9 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                             tf = MathEx.Common.Max(Me.RET_VTF())
                             If tf = 0.0# Then tf = ti * 0.7
 
-                            For i = 0 To 25
-                                tit = tf + (ti - tf) / 25 * i
-                                If bw IsNot Nothing Then If bw.CancellationPending Then Exit For Else bw.ReportProgress(0, "LLE (" & i + 1 & "/25)")
+                            For i = 0 To 50
+                                tit = tf + (ti - tf) / 50 * i
+                                If bw IsNot Nothing Then If bw.CancellationPending Then Exit For Else bw.ReportProgress(0, "LLE (" & i + 1 & "/50)")
                                 Try
                                     result = MyFlash.Flash_PT(New Double() {uim * dx, 1 - uim * dx}, P, tit, Me)
                                     If result(5) > 0.0# Then

@@ -669,71 +669,22 @@ out:
             If result(0) > 0 Then
 
                 IObj?.SetCurrent
-                Dim stresult As Object = StabTest(T, P, result(2), PP.RET_VTC, PP)
+                Dim lps As Object = GetPhaseSplitEstimates(T, P, result(0), result(2), PP)
 
-                If stresult(0) = False Then
+                If lps(2) > 0 Then
 
                     If Not prevres Is Nothing Then
 
-                        result = Flash_TV_3P(Vz, prevres.V, prevres.L1, prevres.L2, prevres.Vy, prevres.Vx1, prevres.Vx2, T, V, P, PP)
+                        result = Flash_PV_3P(Vz, prevres.V, prevres.L1, prevres.L2, prevres.Vy, prevres.Vx1, prevres.Vx2, P, V, T, PP)
 
                     Else
 
-                        Dim vx2est(n), fcl(n), fcv(n) As Double
-                        Dim m As Double = UBound(stresult(1), 1)
-
-                        For i = 0 To Vz.Length - 1
-                            vx2est(i) = stresult(1)(m, i)
-                        Next
-
-                        Dim vx1e(Vz.Length - 1), vx2e(Vz.Length - 1) As Double
-
-                        Dim maxl As Double = MathEx.Common.Max(vx2est)
-                        Dim imaxl As Integer = Array.IndexOf(vx2est, maxl)
-
-                        F = 1
-                        V = result(1)
-                        L2 = F * result(3)(imaxl)
-                        L1 = F - L2 - V
-
-                        If L1 < 0.0# Then
-                            L1 = Abs(L1)
-                            L2 = F - L1 - V
-                        End If
-
-                        If L2 < 0.0# Then
-                            V += L2
-                            L2 = Abs(L2)
-                        End If
-
-                        For i = 0 To n
-                            If i <> imaxl Then
-                                vx1e(i) = Vz(i) - V * result(3)(i) - L2 * vx2est(i)
-                            Else
-                                vx1e(i) = Vz(i) * L2
-                            End If
-                        Next
-
-                        Dim sumvx2 As Double
-                        For i = 0 To n
-                            sumvx2 += Abs(vx1e(i))
-                        Next
-
-                        For i = 0 To n
-                            vx1e(i) = Abs(vx1e(i)) / sumvx2
-                        Next
-
-                        'do a simple LLE calculation to get initial estimates.
-                        Dim slle As New SimpleLLE() With {.InitialEstimatesForPhase1 = result(2), .InitialEstimatesForPhase2 = vx2est, .UseInitialEstimatesForPhase1 = True, .UseInitialEstimatesForPhase2 = True}
+                        L1 = lps(0)
+                        L2 = lps(2)
+                        Vx1 = lps(1)
+                        Vx2 = lps(3)
                         IObj?.SetCurrent
-                        Dim resultL As Object = slle.Flash_PT(result(2), P, T, PP)
 
-                        L1 = resultL(0)
-                        L2 = resultL(5)
-                        Vx1 = resultL(2)
-                        Vx2 = resultL(6)
-
-                        IObj?.SetCurrent
                         result = Flash_TV_3P(Vz, result(1), result(0) * L1, result(0) * L2, result(3), Vx1, Vx2, T, V, result(4), PP)
 
                     End If
@@ -790,9 +741,9 @@ out:
             If result(0) > 0.0 Then
 
                 IObj?.SetCurrent
-                Dim stresult As Object = StabTest(T, P, result(2), PP.RET_VTC, PP)
+                Dim lps As Object = GetPhaseSplitEstimates(T, P, result(0), result(2), PP)
 
-                If stresult(0) = False Then
+                If lps(2) > 0 Then
 
                     If Not prevres Is Nothing Then
 
@@ -800,61 +751,12 @@ out:
 
                     Else
 
-                        Dim vx2est(n), fcl(n), fcv(n) As Double
-                        Dim m As Double = UBound(stresult(1), 1)
-
-                        For i = 0 To Vz.Length - 1
-                            vx2est(i) = stresult(1)(m, i)
-                        Next
-
-                        Dim vx1e(Vz.Length - 1), vx2e(Vz.Length - 1) As Double
-
-                        Dim maxl As Double = MathEx.Common.Max(vx2est)
-                        Dim imaxl As Integer = Array.IndexOf(vx2est, maxl)
-
-                        F = 1
-                        V = result(1)
-                        L2 = F * result(3)(imaxl)
-                        L1 = F - L2 - V
-
-                        If L1 < 0.0# Then
-                            L1 = Abs(L1)
-                            L2 = F - L1 - V
-                        End If
-
-                        If L2 < 0.0# Then
-                            V += L2
-                            L2 = Abs(L2)
-                        End If
-
-                        For i = 0 To n
-                            If i <> imaxl Then
-                                vx1e(i) = Vz(i) - V * result(3)(i) - L2 * vx2est(i)
-                            Else
-                                vx1e(i) = Vz(i) * L2
-                            End If
-                        Next
-
-                        Dim sumvx2 As Double
-                        For i = 0 To n
-                            sumvx2 += Abs(vx1e(i))
-                        Next
-
-                        For i = 0 To n
-                            vx1e(i) = Abs(vx1e(i)) / sumvx2
-                        Next
-
-                        'do a simple LLE calculation to get initial estimates.
-                        Dim slle As New SimpleLLE() With {.InitialEstimatesForPhase1 = result(2), .InitialEstimatesForPhase2 = vx2est, .UseInitialEstimatesForPhase1 = True, .UseInitialEstimatesForPhase2 = True}
+                        L1 = lps(0)
+                        L2 = lps(2)
+                        Vx1 = lps(1)
+                        Vx2 = lps(3)
                         IObj?.SetCurrent
-                        Dim resultL As Object = slle.Flash_PT(result(2), P, T, PP)
-
-                        L1 = resultL(0)
-                        L2 = resultL(5)
-                        Vx1 = resultL(2)
-                        Vx2 = resultL(6)
-                        IObj?.SetCurrent
-                        result = Flash_PV_3P(Vz, result(1), result(0) * L1, result(0) * L2, result(3), Vx1, Vx2, P, V, T, PP)
+                        result = Flash_PV_3P(Vz, result(1), L1, L2, result(3), Vx1, Vx2, P, V, T, PP)
 
                     End If
 
@@ -877,6 +779,7 @@ out:
             Return result
 
         End Function
+
         Public Function Flash_PV_3P(ByVal Vz() As Double, ByVal Vest As Double, ByVal L1est As Double, ByVal L2est As Double, ByVal VyEST As Double(), ByVal Vx1EST As Double(), ByVal Vx2EST As Double(), ByVal P As Double, ByVal V As Double, ByVal Tref As Double, ByVal PP As PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi() As Double = Nothing) As Object
 
             Dim i As Integer
