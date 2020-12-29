@@ -544,7 +544,7 @@ Namespace UnitOperations
 
             Ti = msin.Phases(0).Properties.temperature.GetValueOrDefault
             Pi = msin.Phases(0).Properties.pressure.GetValueOrDefault
-            rho_li = msin.Phases(0).Properties.density.GetValueOrDefault
+            rho_li = msin.Phases(1).Properties.density.GetValueOrDefault
             qli = msin.Phases(1).Properties.volumetric_flow.GetValueOrDefault
             Hi = msin.Phases(0).Properties.enthalpy.GetValueOrDefault
             Wi = msin.Phases(0).Properties.massflow.GetValueOrDefault

@@ -1405,104 +1405,88 @@ Namespace UnitOperations
 
                 Case HeatExchangerCalcMode.PinchPoint
 
-                    Dim dhc, fx00, fx0, fx, x00, x0, x As Double, nsteps, cntint As Integer
+                    Dim dhc, dhh, dq, fx As Double, nsteps As Integer
 
                     nsteps = 25
 
                     Dim tcprof, thprof, dtprof, qprof As New List(Of Double)
 
-                    dhc = MaxHeatExchange / Wc / 2
+                    Dim brt As New MathOps.MathEx.BrentOpt.BrentMinimize
 
-                    cntint = 0
+                    dq = brt.brentoptimize2(0, MaxHeatExchange, 0.01,
+                                             Function(dqx)
 
-                    Do
+                                                 dhc = dqx / Wc
+                                                 dhh = dqx / Wh
 
-                        'calculate profiles
+                                                 'calculate profiles
 
-                        tcprof.Clear()
-                        thprof.Clear()
-                        dtprof.Clear()
-                        qprof.Clear()
+                                                 tcprof.Clear()
+                                                 thprof.Clear()
+                                                 dtprof.Clear()
+                                                 qprof.Clear()
 
-                        tmpstr = StInCold.Clone
-                        tmpstr.PropertyPackage = StInCold.PropertyPackage
-                        tmpstr.SetFlowsheet(StInCold.FlowSheet)
+                                                 tmpstr = StInCold.Clone
+                                                 tmpstr.PropertyPackage = StInCold.PropertyPackage
+                                                 tmpstr.SetFlowsheet(StInCold.FlowSheet)
 
-                        For i As Integer = 1 To nsteps
+                                                 For i As Integer = 1 To nsteps
 
-                            tmpstr.Phases(0).Properties.enthalpy = Hc1 + i / nsteps * dhc
-                            tmpstr.Phases(0).Properties.pressure = Pc1 - i / nsteps * ColdSidePressureDrop
-                            tmpstr.SpecType = StreamSpec.Pressure_and_Enthalpy
-                            IObj?.SetCurrent()
-                            tmpstr.Calculate(True, True)
+                                                     tmpstr.Phases(0).Properties.enthalpy = Hc1 + i / nsteps * dhc
+                                                     tmpstr.Phases(0).Properties.pressure = Pc1 - i / nsteps * ColdSidePressureDrop
+                                                     tmpstr.SpecType = StreamSpec.Pressure_and_Enthalpy
+                                                     IObj?.SetCurrent()
+                                                     tmpstr.Calculate(True, True)
 
-                            qprof.Add(i / nsteps * dhc * Wc)
-                            tcprof.Add(tmpstr.Phases(0).Properties.temperature.GetValueOrDefault)
+                                                     qprof.Add(i / nsteps * dqx)
+                                                     tcprof.Add(tmpstr.Phases(0).Properties.temperature.GetValueOrDefault)
 
-                        Next
+                                                 Next
 
-                        tmpstr = StInHot.Clone
-                        tmpstr.PropertyPackage = StInHot.PropertyPackage
-                        tmpstr.SetFlowsheet(StInHot.FlowSheet)
+                                                 tmpstr = StInHot.Clone
+                                                 tmpstr.PropertyPackage = StInHot.PropertyPackage
+                                                 tmpstr.SetFlowsheet(StInHot.FlowSheet)
 
-                        For i As Integer = 1 To nsteps
+                                                 For i As Integer = 1 To nsteps
 
-                            tmpstr.Phases(0).Properties.enthalpy = Hh1 - i / nsteps * dhc
-                            tmpstr.Phases(0).Properties.pressure = Ph1 - i / nsteps * HotSidePressureDrop
-                            tmpstr.SpecType = StreamSpec.Pressure_and_Enthalpy
-                            IObj?.SetCurrent()
-                            tmpstr.Calculate(True, True)
+                                                     tmpstr.Phases(0).Properties.enthalpy = Hh1 - i / nsteps * dhh
+                                                     tmpstr.Phases(0).Properties.pressure = Ph1 - i / nsteps * HotSidePressureDrop
+                                                     tmpstr.SpecType = StreamSpec.Pressure_and_Enthalpy
+                                                     IObj?.SetCurrent()
+                                                     tmpstr.Calculate(True, True)
 
-                            thprof.Add(tmpstr.Phases(0).Properties.temperature.GetValueOrDefault)
+                                                     thprof.Add(tmpstr.Phases(0).Properties.temperature.GetValueOrDefault)
 
-                        Next
+                                                 Next
 
-                        If FlowDir = FlowDirection.CounterCurrent Then thprof.Reverse()
+                                                 If FlowDir = FlowDirection.CounterCurrent Then thprof.Reverse()
 
-                        For i As Integer = 0 To nsteps - 1
-                            dtprof.Add(Abs(thprof(i) - tcprof(i)))
-                        Next
+                                                 For i As Integer = 0 To nsteps - 1
+                                                     dtprof.Add(Abs(thprof(i) - tcprof(i)))
+                                                 Next
 
-                        fx00 = fx0
-                        fx0 = fx
-                        fx = dtprof.Min - MITA
+                                                 fx = dtprof.Min - MITA
 
-                        x00 = x0
-                        x0 = x
-                        x = dhc
+                                                 Return fx ^ 2
 
-                        If Abs(fx - fx00) < 0.005 AndAlso cntint > 3 Then
-                            FlowSheet.ShowMessage(Me.GraphicObject.Tag & ": Minimum pinch is " & SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(FlowSheet.FlowsheetOptions.SelectedUnitSystem.temperature, dtprof.Min) & " " & FlowSheet.FlowsheetOptions.SelectedUnitSystem.temperature, IFlowsheet.MessageType.Warning)
-                            Exit Do
-                        End If
+                                             End Function)
 
-                        If cntint > 3 Then
-                            dhc = x - 0.4 * fx * (x - x00) / (fx - fx00)
-                        Else
-                            dhc *= 1.1
-                        End If
-
-                        If dhc < 0.0# Then dhc = MaxHeatExchange / Wc
-                        If dhc * Wc > MaxHeatExchange Then dhc = MaxHeatExchange / Wc
-
-                        cntint += 1
-
-                        If Double.IsNaN(fx) Or Double.IsNaN(dhc) Then Throw New Exception("Error calculating temperature profile.")
-
-                        If cntint > 50 Then
-                            FlowSheet.ShowMessage(Me.GraphicObject.Tag & ": Reached maximum number of iterations without converging. Check if the current MITA is consistent.", IFlowsheet.MessageType.Warning)
-                            Throw New Exception("Error calculating temperature profile.")
-                        End If
-
-                    Loop Until Abs(fx) < 0.01
+                    If Double.IsNaN(fx) Or Double.IsNaN(dhc) Then Throw New Exception("Error calculating temperature profile.")
 
                     Me.HeatProfile = qprof.ToArray
                     Me.TemperatureProfileCold = tcprof.ToArray
                     Me.TemperatureProfileHot = thprof.ToArray
 
+                    dhc = dq / Wc
+
                     Hc2 = Hc1 + dhc
                     Q = dhc * Wc
-                    Tc2 = tcprof(tcprof.Count - 1)
+
+                    If FlowDir = FlowDirection.CounterCurrent Then
+                        Tc2 = tcprof(0)
+                    Else
+                        Tc2 = tcprof(tcprof.Count - 1)
+                    End If
 
                     Dim tmp As IFlashCalculationResult
 
@@ -1531,7 +1515,7 @@ Namespace UnitOperations
 
                     A = Q / (LMTD * U) * 1000
 
-                    If Double.IsNaN(Area) Then Throw New Exception(FlowSheet.GetTranslatedString("HXCalcError"))
+                    'If Double.IsNaN(A) Then Throw New Exception(FlowSheet.GetTranslatedString("HXCalcError"))
 
                 Case HeatExchangerCalcMode.CalcBothTemp_UA
 
@@ -1802,7 +1786,10 @@ Namespace UnitOperations
 
                     Dim Q1, H20, H21, H10, H11, VF0, T10, T11, T20, T21, DP1, DP2 As Double
 
-                    If T11 > T21 Then
+                    T10 = StIn0.GetTemperature()
+                    T20 = StIn1.GetTemperature()
+
+                    If T10 > T20 Then
                         P1 = Ph1
                         P2 = Pc1
                         DP1 = HotSidePressureDrop
@@ -1817,7 +1804,6 @@ Namespace UnitOperations
                     A = Area
 
                     VF0 = StIn0.GetPhase("Vapor").Properties.molarfraction.GetValueOrDefault()
-                    T10 = StIn0.GetTemperature()
                     H10 = StIn0.GetMassEnthalpy()
 
                     StIn0.PropertyPackage.CurrentMaterialStream = StInHot
@@ -1829,7 +1815,6 @@ Namespace UnitOperations
 
                     Q = Math.Abs(Q1)
 
-                    T20 = StIn1.GetTemperature()
                     H20 = StIn1.GetMassEnthalpy()
                     H21 = H20 + (Q1 - HeatLoss) / StIn1.GetMassFlow()
 
@@ -1839,7 +1824,7 @@ Namespace UnitOperations
                     T21 = tmp.CalculatedTemperature.GetValueOrDefault()
                     OutletVaporFraction2 = tmp.GetVaporPhaseMoleFraction()
 
-                    If T11 > T21 Then
+                    If T10 > T20 Then
                         Tc1 = T20
                         Tc2 = T21
                         Th1 = T10
@@ -1874,7 +1859,7 @@ Namespace UnitOperations
 
                     Dim Q1, H10, H11, H20, H21, VF0, T10, T11, T20, T21, DP1, DP2 As Double
 
-                    If T11 > T21 Then
+                    If T10 > T20 Then
                         P1 = Ph1
                         P2 = Pc1
                         DP1 = HotSidePressureDrop
@@ -1911,7 +1896,7 @@ Namespace UnitOperations
                     T21 = tmp.CalculatedTemperature.GetValueOrDefault()
                     OutletVaporFraction2 = tmp.GetVaporPhaseMoleFraction()
 
-                    If T11 > T21 Then
+                    If T10 > T20 Then
                         Tc1 = T20
                         Tc2 = T21
                         Th1 = T10

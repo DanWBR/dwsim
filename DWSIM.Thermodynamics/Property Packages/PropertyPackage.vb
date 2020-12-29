@@ -1564,7 +1564,7 @@ Namespace PropertyPackages
 
             Dim HL, HV, HS, SL, SV, SS, DL, DV, DS, CPL, CPV, CPS, KL, KV, KS, CVL, CVV, CSV As Nullable(Of Double)
             Dim UL, UV, US, GL, GV, GS, AL, AV, AS_ As Double
-            Dim xl, xv, xs, wl, wv, ws, vl, vv, vs, result As Double
+            Dim xl, xv, xs, wl, wv, ws, result As Double
 
             xl = Me.CurrentMaterialStream.Phases(1).Properties.molarfraction.GetValueOrDefault
             xv = Me.CurrentMaterialStream.Phases(2).Properties.molarfraction.GetValueOrDefault
@@ -1588,25 +1588,11 @@ Namespace PropertyPackages
             If DV <> 0.0# And Not Double.IsNaN(DV) Then tv = Me.CurrentMaterialStream.Phases(2).Properties.massfraction.GetValueOrDefault / DV.GetValueOrDefault
             If DS <> 0.0# And Not Double.IsNaN(DS) Then ts = Me.CurrentMaterialStream.Phases(7).Properties.massfraction.GetValueOrDefault / DS.GetValueOrDefault
 
-            vl = tl / (tl + tv + ts)
-            vv = tv / (tl + tv + ts)
-            vs = ts / (tl + tv + ts)
-
-            If xl = 1 Then
-                vl = 1
-                vv = 0
-                vs = 0
-            ElseIf xv = 1 Then
-                vl = 0
-                vv = 1
-                vs = 0
-            ElseIf xs = 1 Then
-                vl = 0
-                vv = 0
-                vs = 1
-            End If
-
-            result = vl * DL.GetValueOrDefault + vv * DV.GetValueOrDefault + vs * DS.GetValueOrDefault
+            result = 0.0
+            If wl > 0.0 Then result += wl / DL.GetValueOrDefault()
+            If wv > 0.0 Then result += wv / DV.GetValueOrDefault()
+            If ws > 0.0 Then result += ws / DS.GetValueOrDefault()
+            result = 1 / result
             Me.CurrentMaterialStream.Phases(0).Properties.density = result
 
             HL = Me.CurrentMaterialStream.Phases(1).Properties.enthalpy.GetValueOrDefault

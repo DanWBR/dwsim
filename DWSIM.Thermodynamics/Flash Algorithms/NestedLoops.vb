@@ -142,15 +142,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             'Calculate Ki`s
 
+            Vp = PP.RET_VPVAP(T)
+
             If Not ReuseKI Then
-                For i = 0 To n
-                    If VPc(i) > 0.0# Then
-                        Vp(i) = VPc(i) * Exp(5.37 * (1 + Vw(i)) * (1 - VTc(i) / T))
-                    Else
-                        IObj?.SetCurrent()
-                        Vp(i) = PP.AUX_PVAPi(i, T)
-                    End If
-                Next
                 Ki = Vp.MultiplyConstY(1 / P)
                 For i = 0 To n
                     IObj?.SetCurrent()
@@ -203,10 +197,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             If Abs(Pb - Pd) / Pb < 0.0000001 Then
                 'one comp only
-                For i = 0 To n
-                    IObj?.SetCurrent()
-                    Vp(i) = PP.AUX_PVAPi(i, T)
-                Next
                 Px = Vp.MultiplyY(Vz).Sum
                 If Px <= P Then
                     L = 1
