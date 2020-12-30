@@ -116,31 +116,33 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Else
 
-                Dim Vz2 = Vz.Clone
-                Vs = PP.RET_NullVector
+                '    Dim Vz2 As Double() = Vz.Clone
+                '    Vs = PP.RET_NullVector
 
-                Dim VTfus As Double() = PP.RET_VTF
+                '    Dim VTfus As Double() = PP.RET_VTF
 
-                For i = 0 To n
-                    If Vz(i) > 0.0 And T < VTfus(i) Then
-                        Vs(i) = Vz(i)
-                        Vz2(i) = 0.0
-                    End If
-                Next
+                '    For i = 0 To n
+                '        If Vz(i) > 0.0 And T < VTfus(i) Then
+                '            Vs(i) = Vz(i)
+                '            Vz2(i) = 0.0
+                '        End If
+                '    Next
 
-                S = Vs.Sum
+                '    S = Vs.Sum
 
-                Vs = Vs.NormalizeY
+                '    Vs = Vs.NormalizeY
 
-                IObj?.SetCurrent
+                '    Vz2 = Vz2.NormalizeY()
 
-                result = nl1.Flash_PT(Vz2, P, T, PP)
+                '    IObj?.SetCurrent
 
-                L1 = result(0) * (1 - S)
-                V = result(1) * (1 - S)
+                result = nl1.Flash_PT(Vz, P, T, PP)
+
+                L1 = result(0)
+                V = result(1)
                 Vx1 = result(2)
                 Vy = result(3)
-                L2 = result(5) * (1 - S)
+                L2 = result(5)
                 Vx2 = result(6)
 
             End If
