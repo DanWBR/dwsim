@@ -507,18 +507,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
 out:
 
-            'order liquid phases by density
+            'order liquid phases by gibbs energy
 
-            Dim dens1, dens2 As Double
-
-            dens1 = PP.AUX_LIQDENS(T, Vx1, P)
-            dens2 = PP.AUX_LIQDENS(T, Vx2, P)
-
-            Dim g3 = Gibbs(PP, T, P, L1, L2, Vy, Vx1, Vx2)
+            Dim gl1 = PP.DW_CalcGibbsEnergy(Vx1, T, P, "L")
+            Dim gl2 = PP.DW_CalcGibbsEnergy(Vx2, T, P, "L")
 
             IObj?.Paragraphs.Add("The three-phase algorithm converged in " & ecount & " iterations.")
-
-            IObj?.Paragraphs.Add(String.Format("Gibbs Energy Value: {0}", g3))
 
             IObj?.Paragraphs.Add(String.Format("Converged Value for Vapor Phase Molar Fraction (V): {0}", V))
             IObj?.Paragraphs.Add(String.Format("Converged Value for Liquid Phase 1 Molar Fraction (L1): {0}", L1))
@@ -530,7 +524,7 @@ out:
 
             IObj?.Close()
 
-            If dens1 <= dens2 Then
+            If gl1 <= gl2 Then
                 prevres = New PreviousResults With {.L1 = L1, .L2 = L2, .V = V, .Vy = Vy, .Vx1 = Vx1, .Vx2 = Vx2}
                 Return New Object() {L1, V, Vx1, Vy, ecount, L2, Vx2, 0.0#, PP.RET_NullVector}
             Else
@@ -939,9 +933,18 @@ out:        L1 = L1 * (1 - V) 'calculate global phase fractions
 
             WriteDebugInfo("PV Flash [NL-3PV3]: Iteration #" & ecount & ", VF = " & V & ", L1 = " & L1 & ", T = " & T)
 
-            prevres = New PreviousResults With {.L1 = L1, .L2 = L2, .V = V, .Vy = Vy, .Vx1 = Vx1, .Vx2 = Vx2}
+            'order liquid phases by gibbs energy
 
-            Return New Object() {L1, V, Vx1, Vy, T, ecount, Ki1, L2, Vx2, 0.0#, PP.RET_NullVector}
+            Dim gl1 = PP.DW_CalcGibbsEnergy(Vx1, T, P, "L")
+            Dim gl2 = PP.DW_CalcGibbsEnergy(Vx2, T, P, "L")
+
+            If gl1 < gl2 Then
+                prevres = New PreviousResults With {.L1 = L1, .L2 = L2, .V = V, .Vy = Vy, .Vx1 = Vx1, .Vx2 = Vx2}
+                Return New Object() {L1, V, Vx1, Vy, T, ecount, Ki1, L2, Vx2, 0.0#, PP.RET_NullVector}
+            Else
+                prevres = New PreviousResults With {.L1 = L2, .L2 = L1, .V = V, .Vy = Vy, .Vx1 = Vx2, .Vx2 = Vx1}
+                Return New Object() {L2, V, Vx2, Vy, T, ecount, Ki1, L1, Vx1, 0.0#, PP.RET_NullVector}
+            End If
 
         End Function
 
@@ -1047,9 +1050,18 @@ out:        L1 = L1 * (1 - V) 'calculate global phase fractions
 
             WriteDebugInfo("TV Flash [NL-3PV3]: Iteration #" & ecount & ", VF = " & V & ", L1 = " & L1 & ", P = " & P)
 
-            prevres = New PreviousResults With {.L1 = L1, .L2 = L2, .V = V, .Vy = Vy, .Vx1 = Vx1, .Vx2 = Vx2}
+            'order liquid phases by gibbs energy
 
-            Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, PP.RET_NullVector}
+            Dim gl1 = PP.DW_CalcGibbsEnergy(Vx1, T, P, "L")
+            Dim gl2 = PP.DW_CalcGibbsEnergy(Vx2, T, P, "L")
+
+            If gl1 < gl2 Then
+                prevres = New PreviousResults With {.L1 = L1, .L2 = L2, .V = V, .Vy = Vy, .Vx1 = Vx1, .Vx2 = Vx2}
+                Return New Object() {L1, V, Vx1, Vy, T, ecount, Ki1, L2, Vx2, 0.0#, PP.RET_NullVector}
+            Else
+                prevres = New PreviousResults With {.L1 = L2, .L2 = L1, .V = V, .Vy = Vy, .Vx1 = Vx2, .Vx2 = Vx1}
+                Return New Object() {L2, V, Vx2, Vy, T, ecount, Ki1, L1, Vx1, 0.0#, PP.RET_NullVector}
+            End If
 
         End Function
 

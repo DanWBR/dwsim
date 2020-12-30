@@ -254,20 +254,15 @@ out:        d2 = Date.Now
                 'merge phases - both phases are identical
                 Return New Object() {1, V, Vz, PP.RET_NullVector, ecount, 0, Vx2, 0.0#, PP.RET_NullVector, gamma1, gamma2}
             Else
-                'order liquid phases by mixture NBP
-                Dim VNBP = PP.RET_VTB()
-                Dim nbp1 As Double = 0
-                Dim nbp2 As Double = 0
+                'order liquid phases by gibbs energy
 
-                For i = 0 To n
-                    nbp1 += Vx1(i) * VNBP(i)
-                    nbp2 += Vx2(i) * VNBP(i)
-                Next
+                Dim gl1 = PP.DW_CalcGibbsEnergy(Vx1, T, P, "L")
+                Dim gl2 = PP.DW_CalcGibbsEnergy(Vx2, T, P, "L")
 
-                If nbp1 >= nbp2 Then
-                    Return New Object() {L1, V, Vx1, PP.RET_NullVector, ecount, L2, Vx2, 0.0#, PP.RET_NullVector, gamma1, gamma2}
-                Else
+                If gl1 < gl2 Then
                     Return New Object() {L2, V, Vx2, PP.RET_NullVector, ecount, L1, Vx1, 0.0#, PP.RET_NullVector, gamma1, gamma2}
+                Else
+                    Return New Object() {L1, V, Vx1, PP.RET_NullVector, ecount, L2, Vx2, 0.0#, PP.RET_NullVector, gamma2, gamma1}
                 End If
             End If
 
