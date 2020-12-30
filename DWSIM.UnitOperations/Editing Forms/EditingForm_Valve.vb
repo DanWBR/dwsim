@@ -270,13 +270,13 @@ Public Class EditingForm_Valve
             Case 1
                 uobj.CalcMode = UnitOperations.Valve.CalculationMode.DeltaP
             Case 2
-                uobj.CalcMode = UnitOperations.Valve.CalculationMode.Kv_General
-            Case 3
-                uobj.CalcMode = UnitOperations.Valve.CalculationMode.Kv_Steam
-            Case 4
                 uobj.CalcMode = UnitOperations.Valve.CalculationMode.Kv_Liquid
-            Case 5
+            Case 3
                 uobj.CalcMode = UnitOperations.Valve.CalculationMode.Kv_Gas
+            Case 4
+                uobj.CalcMode = UnitOperations.Valve.CalculationMode.Kv_Steam
+            Case 5
+                uobj.CalcMode = UnitOperations.Valve.CalculationMode.Kv_General
         End Select
 
         If sender Is tbOutletPressure Then uobj.OutletPressure = su.Converter.ConvertToSI(cbPress.SelectedItem.ToString, tbOutletPressure.Text.ParseExpressionToDouble)

@@ -257,16 +257,16 @@
     <value>Pressure Drop</value>
   </data>
   <data name="cbCalcMode.Items2" xml:space="preserve">
-    <value>General Service Kv (IEC 60534)</value>
-  </data>
-  <data name="cbCalcMode.Items3" xml:space="preserve">
-    <value>Steam Service Kv </value>
-  </data>
-  <data name="cbCalcMode.Items4" xml:space="preserve">
     <value>Liquid Service Kv (Deprecated)</value>
   </data>
-  <data name="cbCalcMode.Items5" xml:space="preserve">
+  <data name="cbCalcMode.Items3" xml:space="preserve">
     <value>Gas Service Kv (Deprecated)</value>
+  </data>
+  <data name="cbCalcMode.Items4" xml:space="preserve">
+    <value>Steam Service Kv </value>
+  </data>
+  <data name="cbCalcMode.Items5" xml:space="preserve">
+    <value>General Service Kv (IEC 60534)</value>
   </data>
   <data name="cbCalcMode.Size" type="System.Drawing.Size, System.Drawing">
     <value>188, 21</value>
