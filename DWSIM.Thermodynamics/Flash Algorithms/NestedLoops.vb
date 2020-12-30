@@ -313,88 +313,117 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
         Private Function ConvergeVF(IObj As InspectorItem, V As Double, Vz As Double(), Vx As Double(), Vy As Double(), Ki As Double(), P As Double, T As Double, PP As PropertyPackage) As Object()
 
             Dim n As Integer = Vz.Length - 1
+            Dim i As Integer
 
-            Dim F, dF As Double
+            Dim Vn(n) As String, Vx_ant(n), Vy_ant(n), Vp(n), Ki_ant(n), fi(n) As Double
+
+            Dim ecount As Integer = 0
+            Dim converged As Integer = 0
+            Dim F, Vant, dF, e1, e2, e3 As Double
 
             IObj?.Paragraphs.Add(String.Format("Initial estimates for y: {0}", Vy.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Initial estimates for x: {0}", Vx.ToMathArrayString))
 
-            Dim found = MathNet.Numerics.RootFinding.RobustNewtonRaphson.TryFindRoot(
-                Function(xv)
-                    V = xv
-                    If V = 1.0# Then
-                        Vy = Vz
-                        Vx = Vy.DivideY(Ki).NormalizeY
-                    ElseIf V = 0.0# Then
-                        Vx = Vz
-                        Vy = Vx.MultiplyY(Ki).NormalizeY
-                    Else
-                        Vy = Vz.MultiplyY(Ki).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1)).NormalizeY
-                        Vx = Vy.DivideY(Ki).NormalizeY
-                    End If
-                    Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
-                    F = Vz.MultiplyY(Ki.AddConstY(-1).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1))).SumY
-                    Return F
-                End Function,
-                Function(xv)
-                    V = xv
-                    If V = 1.0# Then
-                        Vy = Vz
-                        Vx = Vy.DivideY(Ki).NormalizeY
-                    ElseIf V = 0.0# Then
-                        Vx = Vz
-                        Vy = Vx.MultiplyY(Ki).NormalizeY
-                    Else
-                        Vy = Vz.MultiplyY(Ki).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1)).NormalizeY
-                        Vx = Vy.DivideY(Ki).NormalizeY
-                    End If
-                    Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
-                    dF = Vz.NegateY.MultiplyY(Ki.AddConstY(-1).MultiplyY(Ki.AddConstY(-1)).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1)).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1))).SumY
-                    Return dF
-                End Function, 0.0, 1.0, etol, maxit_e, 20, V)
+            Do
 
-            If Not found Then
-                'calc min G
-                Dim fugv, fugl As Double()
-                Dim gl, gv As Double
-                fugv = PP.DW_CalcFugCoeff(Vz, T, P, State.Vapor)
-                fugl = PP.DW_CalcFugCoeff(Vz, T, P, State.Liquid)
-                If Math.Abs(fugv.Sum - fugl.Sum) < 0.000001 Or Double.IsNaN(fugl.Sum) Then
-                    fugl = PP.RET_VPVAP(T).MultiplyConstY(1 / P)
-                End If
-                For i As Integer = 0 To n
-                    If Vz(i) > 0.0 Then gl += Vz(i) * Log(Vz(i) * fugl(i))
-                    If Vz(i) > 0.0 Then gv += Vz(i) * Log(Vz(i) * fugv(i))
-                Next
-                If gv < gl Then
-                    V = 1.0
+                IObj?.SetCurrent()
+
+                Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+                Inspector.Host.CheckAndAdd(IObj2, "", "Flash_PT", "PT Flash Newton Iteration", "Pressure-Temperature Flash Algorithm Convergence Iteration Step")
+
+                IObj2?.Paragraphs.Add(String.Format("This is the Newton convergence loop iteration #{0}. DWSIM will use the current values of y and x to calculate fugacity coefficients and update K using the Property Package rigorous models.", ecount))
+
+                IObj2?.SetCurrent()
+
+                Ki_ant = Ki.Clone
+                Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
+
+                IObj2?.Paragraphs.Add(String.Format("K values where updated. Current values: {0}", Ki.ToMathArrayString))
+
+                Vy_ant = Vy.Clone
+                Vx_ant = Vx.Clone
+
+                If V = 1.0# Then
+                    Vy = Vz
+                    Vx = Vy.DivideY(Ki).NormalizeY
+                ElseIf V = 0.0# Then
+                    Vx = Vz
+                    Vy = Vx.MultiplyY(Ki).NormalizeY
                 Else
-                    V = 0.0
+                    Vy = Vz.MultiplyY(Ki).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1)).NormalizeY
+                    Vx = Vy.DivideY(Ki).NormalizeY
                 End If
-            End If
 
-            If Double.IsNaN(V) Then
-                Dim ex As New Exception(Calculator.GetLocalString("PropPack_FlashTPVapFracError") & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))
-                ex.Data.Add("DetailedDescription", "The Flash Algorithm was unable to converge to a solution.")
-                ex.Data.Add("UserAction", "Try another Property Package and/or Flash Algorithm.")
-                Throw ex
-            End If
+                IObj2?.Paragraphs.Add(String.Format("y values (vapor phase composition) where updated. Current values: {0}", Vy.ToMathArrayString))
+                IObj2?.Paragraphs.Add(String.Format("x values (liquid phase composition) where updated. Current values: {0}", Vx.ToMathArrayString))
 
-            If V >= 1.0# Then
-                V = 1.0
-                Vy = Vz
-                Ki = PP.DW_CalcKvalue_Ideal_VP(T, P)
-                Vx = Vy.DivideY(Ki).NormalizeY
-            ElseIf V <= 0.0# Then
-                V = 0.0
-                Vx = Vz
-                Ki = PP.DW_CalcKvalue_Ideal_VP(T, P)
-                Vy = Vx.MultiplyY(Ki).NormalizeY
-            End If
+                e1 = Vx.SubtractY(Vx_ant).AbsSumY
+                e2 = Vy.SubtractY(Vy_ant).AbsSumY
 
-            If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
+                e3 = (V - Vant)
 
-            Return New Object() {V, Vx, Vy, Ki, F, 0}
+                IObj2?.Paragraphs.Add(String.Format("Current Vapor Fraction (<math_inline>\beta</math_inline>) error: {0}", e3))
+
+                If Double.IsNaN(e1 + e2) Then
+
+                    Dim ex As New Exception(Calculator.GetLocalString("PropPack_FlashError") & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))
+                    ex.Data.Add("DetailedDescription", "The Flash Algorithm was unable to converge to a solution.")
+                    ex.Data.Add("UserAction", "Try another Property Package and/or Flash Algorithm.")
+                    Throw ex
+
+                ElseIf Math.Abs(e3) < 0.000001 And ecount > 0 Then
+
+                    converged = 1
+
+                    Exit Do
+
+                Else
+
+                    Vant = V
+
+                    F = Vz.MultiplyY(Ki.AddConstY(-1).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1))).SumY
+                    dF = Vz.NegateY.MultiplyY(Ki.AddConstY(-1).MultiplyY(Ki.AddConstY(-1)).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1)).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1))).SumY
+
+                    IObj2?.Paragraphs.Add(String.Format("Current value of the Rachford-Rice error function: {0}", F))
+
+                    If Abs(F) < etol Then Exit Do
+
+                    V = -F / dF * dampingfactor + Vant
+
+                    If LimitVaporFraction Then
+                        If V < 0.0 Then V = 0.0
+                        If V > 1.0 Then V = 1.0
+                    End If
+
+                    IObj2?.Paragraphs.Add(String.Format("Updated Vapor Fraction (<math_inline>\beta</math_inline>) value: {0}", V))
+
+                End If
+
+                ecount += 1
+
+                If Double.IsNaN(V) Then
+                    Dim ex As New Exception(Calculator.GetLocalString("PropPack_FlashTPVapFracError") & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))
+                    ex.Data.Add("DetailedDescription", "The Flash Algorithm was unable to converge to a solution.")
+                    ex.Data.Add("UserAction", "Try another Property Package and/or Flash Algorithm.")
+                    Throw ex
+                End If
+                If ecount > maxit_e Then
+                    Dim ex As New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2") & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))
+                    ex.Data.Add("DetailedDescription", "The Flash Algorithm was unable to converge to a solution.")
+                    ex.Data.Add("UserAction", "Try another Property Package and/or Flash Algorithm.")
+                    Throw ex
+                End If
+
+                WriteDebugInfo("PT Flash [NL]: Iteration #" & ecount & ", VF = " & V)
+
+                If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
+
+                IObj2?.Close()
+
+            Loop Until converged = 1
+
+            Return New Object() {V, Vx, Vy, Ki, F, ecount}
 
         End Function
 
