@@ -5642,7 +5642,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             Dim val As Double = 0
             Dim subst As Interfaces.ICompound
 
-            For Each subst In Me.CurrentMaterialStream.Phases(Phase).Compounds.Values
+            For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
                 val += subst.MoleFraction.GetValueOrDefault * Me.AUX_PVAPi(subst.Name, T)
             Next
 

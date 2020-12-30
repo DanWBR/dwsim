@@ -215,18 +215,18 @@ Namespace UnitOperations
 
                         If CalcMode = CalculationMode.Kv_General Or CalculationMode.Kv_Gas Or CalculationMode.Kv_Liquid Then
                             If ims.Phases(1).Properties.molarfraction = 1 Then
-                                Pv = ims.PropertyPackage.AUX_PVAPM(Ti)
-                                Pc = ims.PropertyPackage.AUX_PCM(PropertyPackages.Phase.Liquid)
-                                rhol = ims.Phases(1).Properties.density.GetValueOrDefault
+                                'Pv = ims.PropertyPackage.AUX_PVAPM(Ti)
+                                'Pc = ims.PropertyPackage.AUX_PCM(PropertyPackages.Phase.Liquid)
+                                'rhol = ims.Phases(1).Properties.density.GetValueOrDefault
 
-                                Wi = WLiquid(Kvc, P1 / 100000.0, P2 / 100000.0, rhol, Pv / 100000.0, Pc / 100000.0)
+                                'Wi = WLiquid(Kvc, P1 / 100000.0, P2 / 100000.0, rhol, Pv / 100000.0, Pc / 100000.0)
                                 Wi = Kvc * (1000.0 * rho * (P1 - P2) / 100000.0) ^ 0.5 / 3600
                             ElseIf ims.Phases(2).Properties.molarfraction = 1 Then
                                 ims.PropertyPackage.CurrentMaterialStream = ims
-                                rhog = ims.PropertyPackage.AUX_VAPDENS(Ti, P1)
-                                Cp_ig = ims.PropertyPackage.AUX_CPm(PropertyPackages.Phase.Vapor, Ti) * ims.Phases(2).Properties.molecularWeight()
-                                k = Cp_ig / (Cp_ig - 8.314)
-                                Wi = WGas(Kvc, P1 / 100000.0, P2 / 100000.0, k, rhog)
+                                'rhog = ims.PropertyPackage.AUX_VAPDENS(Ti, P1)
+                                'Cp_ig = ims.PropertyPackage.AUX_CPm(PropertyPackages.Phase.Vapor, Ti) * ims.Phases(2).Properties.molecularWeight()
+                                'k = Cp_ig / (Cp_ig - 8.314)
+                                'Wi = WGas(Kvc, P1 / 100000.0, P2 / 100000.0, k, rhog)
 
                                 rhog20 = ims.PropertyPackage.AUX_VAPDENS(273.15, 101325)
                                 If P2 > P1 / 2 Then
@@ -282,14 +282,19 @@ Namespace UnitOperations
                                 rhog20 = ims.PropertyPackage.AUX_VAPDENS(273.15, 101325)
                                 P1 = P2 / 100000.0 + Ti / rhog20 / (P2 / 100000) * (519 * Kvc / (Wi * 3600)) ^ -2
                             Else
-                                Throw New Exception("Two-phase not supported for given P/F spec.")
+                                ims.PropertyPackage.CurrentMaterialStream = ims
+                                rhog20 = ims.PropertyPackage.AUX_VAPDENS(273.15, 101325)
+                                rhol = ims.Phases(1).Properties.density.GetValueOrDefault
+                                massfrac_gas = ims.Phases(2).Properties.massflow.GetValueOrDefault / ims.Phases(0).Properties.massflow.GetValueOrDefault
+                                massfrac_liq = ims.Phases(1).Properties.massflow.GetValueOrDefault / ims.Phases(0).Properties.massflow.GetValueOrDefault
+                                P1 = P1TwoPhase(Wi * 3600, Kvc, P2 / 100000.0, Ti, rhog20, rhol, massfrac_gas, massfrac_liq)
                             End If
                         ElseIf CalcMode = CalculationMode.Kv_Steam Then
                             v2 = 1 / ims.PropertyPackage.AUX_VAPDENS(Ti, P2)
                             P1 = P2 / 100000.0 + v2 * (31.62 * Kvc / (Wi * 3600)) ^ -2
                         End If
                         P1 = P1 * 100000.0
-
+                        ims.SetPressure(P1)
                     ElseIf ims.DynamicsSpec = Dynamics.DynamicsSpecType.Pressure And
                         oms.DynamicsSpec = Dynamics.DynamicsSpecType.Flow Then
 
@@ -317,7 +322,17 @@ Namespace UnitOperations
                                     Throw New Exception("Unable to calculate the outlet pressure.")
                                 End If
                             Else
-                                Throw New Exception("Two-phase not supported for given P/F spec.")
+                                ims.PropertyPackage.CurrentMaterialStream = ims
+                                rhog = ims.Phases(2).Properties.density.GetValueOrDefault
+                                Cp_ig = ims.PropertyPackage.AUX_CPm(PropertyPackages.Phase.Vapor, Ti) * ims.Phases(2).Properties.molecularWeight()
+                                k = Cp_ig / (Cp_ig - 8.314)
+                                rhol = ims.Phases(1).Properties.density.GetValueOrDefault
+                                Pc = ims.PropertyPackage.AUX_PCM(PropertyPackages.Phase.Liquid)
+                                Pv = P1 'ims.PropertyPackage.AUX_PVAPM(PropertyPackages.Phase.Liquid, Ti)
+
+                                massfrac_gas = ims.Phases(2).Properties.massflow.GetValueOrDefault / ims.Phases(0).Properties.massflow.GetValueOrDefault
+                                massfrac_liq = ims.Phases(1).Properties.massflow.GetValueOrDefault / ims.Phases(0).Properties.massflow.GetValueOrDefault
+                                P2 = 100000.0 * P2TwoPhase(Wi * 3600, Kvc, P1 / 100000.0, rhog, rhol, k, Pv / 100000.0, Pc / 100000.0, massfrac_gas, massfrac_liq)
                             End If
                         ElseIf CalcMode = CalculationMode.Kv_Steam Then
                             P2 = P1 * 0.7 / 100000.0
@@ -415,7 +430,20 @@ Namespace UnitOperations
         End Function
 
         Public Function WTwoPhase(Kv As Double, P1 As Double, P2 As Double, rhog As Double, rhol As Double, k As Double, Pv As Double, Pc As Double, massfrac_gas As Double, massfrac_liq As Double) As Double
-            WTwoPhase = ((massfrac_liq / WLiquid(Kv, P1, P2, rhol, Pv, Pc)) + massfrac_gas / WGas(Kv, P1, P2, k, rhog)) ^ -0.5
+            WTwoPhase = 1 / (massfrac_liq / WLiquid(Kv, P1, P2, rhol, Pv, Pc) ^ 2 + massfrac_gas / WGas(Kv, P1, P2, k, rhog) ^ 2) ^ 0.5
+        End Function
+
+        Public Function SimpleWTwoPhase(Kv As Double, P1 As Double, P2 As Double, Ti As Double, rhog20 As Double, rhol As Double, massfrac_gas As Double, massfrac_liq As Double) As Double
+            Dim Wliquid, Wgas As Double
+
+            Wliquid = Kv * (1000.0 * rhol * (P1 - P2)) ^ 0.5
+            If P2 > P1 / 2 Then
+                Wgas = 519 * Kv / (Ti / (rhog20 * (P1 - P2) * P1)) ^ 0.5
+            Else
+                Wgas = 259.5 * Kv * P1 / (Ti / rhog20) ^ 0.5
+            End If
+
+            SimpleWTwoPhase = 1 / (massfrac_liq / Wliquid ^ 2 + massfrac_gas / Wgas ^ 2) ^ 0.5
         End Function
 
         Public Function KvLiquid(Wi As Double, P1 As Double, P2 As Double, rho As Double, Pv As Double, Pc As Double) As Double
@@ -427,7 +455,6 @@ Namespace UnitOperations
             End If
 
             KvLiquid = Wi / FP / (rho * 999.1 * (P1 - P2)) ^ 0.5
-
         End Function
 
         Public Function WLiquid(Kv As Double, P1 As Double, P2 As Double, rho As Double, Pv As Double, Pc As Double) As Double
@@ -441,6 +468,31 @@ Namespace UnitOperations
 
         End Function
 
+        Public Function P1TwoPhase(Wi As Double, Kv As Double, P2 As Double, Ti As Double, rhog20 As Double, rhol As Double, massfrac_gas As Double, massfrac_liq As Double) As Double
+
+            Dim x_c, Wtemp, Werror, P1, dP1, dW As Double
+            Dim icount As Integer
+
+            P1 = P2 * 1.1
+            dP1 = 0.001
+            Wtemp = SimpleWTwoPhase(Kv, P1, P2, Ti, rhog20, rhol, massfrac_gas, massfrac_liq)
+
+            icount = 0
+            Do While (Math.Abs(Wi - Wtemp) > 0.1)
+                Werror = Wi - Wtemp
+                dW = SimpleWTwoPhase(Kv, P1 + dP1, P2, Ti, rhog20, rhol, massfrac_gas, massfrac_liq) - Wtemp
+                P1 = P1 + 0.5 * dP1 / dW * (Werror)
+                If P1 < P2 Then P1 = P2 + 0.0001
+                Wtemp = SimpleWTwoPhase(Kv, P1, P2, Ti, rhog20, rhol, massfrac_gas, massfrac_liq)
+
+                If icount > 1000 Then Throw New Exception("P1 did not converge in 1000 iterations.")
+                icount += 1
+            Loop
+
+            P1TwoPhase = P1
+
+        End Function
+
         Public Function P2TwoPhase(Wi As Double, Kv As Double, P1 As Double, rhog As Double, rhol As Double, k As Double, Pv As Double, Pc As Double, massfrac_gas As Double, massfrac_liq As Double) As Double
             Dim P2_high, P2_low, P2_mid, x_c As Double
             Dim icount As Integer
@@ -449,7 +501,7 @@ Namespace UnitOperations
             P2_high = P1
             P2_low = P2_high - P2_high * x_c
 
-            If P2_low < P1 - FL ^ 2 * (P1 - F_F(Pv, Pc) * Pv) Then
+            If P2_low > (P1 - FL ^ 2 * (P1 - F_F(Pv, Pc) * Pv)) Then
                 P2_low = P1 - FL ^ 2 * (P1 - F_F(Pv, Pc) * Pv)
             End If
 
@@ -562,6 +614,15 @@ Namespace UnitOperations
 
             P2 = oms.Phases(0).Properties.pressure.GetValueOrDefault
 
+            If Me.CalcMode = CalculationMode.DeltaP Then
+                P2 = P1 - Me.DeltaP.GetValueOrDefault
+            ElseIf CalcMode = CalculationMode.OutletPressure Then
+                P2 = Me.OutletPressure.GetValueOrDefault
+            Else
+                P2 = oms.Phases(0).Properties.pressure.GetValueOrDefault
+            End If
+
+
             If CalcMode = CalculationMode.Kv_Steam Then
                 If P2 > P1 / 2 Then
                     v2 = 1 / ims.PropertyPackage.AUX_VAPDENS(Ti, P2)
@@ -583,14 +644,14 @@ Namespace UnitOperations
                     Pc = ims.PropertyPackage.AUX_PCM(PropertyPackages.Phase.Liquid)
                     rho = ims.Phases(1).Properties.density.GetValueOrDefault
                     Kv = KvLiquid(Wi * 3600, P1 / 100000.0, P2 / 100000.0, rho, Pv / 100000.0, Pc / 100000.0)
-                Else
+                ElseIf ims.Phases(2).Properties.molarfraction > 0 And ims.Phases(1).Properties.molarfraction > 0 Then
                     ims.PropertyPackage.CurrentMaterialStream = ims
                     rhog = ims.Phases(2).Properties.density.GetValueOrDefault
                     Cp_ig = ims.PropertyPackage.AUX_CPm(PropertyPackages.Phase.Vapor, Ti) * ims.Phases(2).Properties.molecularWeight()
                     k = Cp_ig / (Cp_ig - 8.314)
                     rhol = ims.Phases(1).Properties.density.GetValueOrDefault
                     Pc = ims.PropertyPackage.AUX_PCM(PropertyPackages.Phase.Liquid)
-                    Pv = ims.PropertyPackage.AUX_PVAPM(PropertyPackages.Phase.Liquid, Ti)
+                    Pv = P1 'ims.PropertyPackage.AUX_PVAPM(PropertyPackages.Phase.Liquid, Ti)
 
                     massfrac_gas = ims.Phases(2).Properties.massflow.GetValueOrDefault / ims.Phases(0).Properties.massflow.GetValueOrDefault
                     massfrac_liq = ims.Phases(1).Properties.massflow.GetValueOrDefault / ims.Phases(0).Properties.massflow.GetValueOrDefault
@@ -725,19 +786,8 @@ Namespace UnitOperations
             End If
 
 
-            If CalcMode = CalculationMode.Kv_Steam Then
-                P2 = Pi * 0.7 / 100000.0
-                icount = 0
-                Do
-                    v2 = 1 / ims.PropertyPackage.AUX_VAPDENS(Ti, P2)
-                    P2ant = P2
-                    P2 = Pi / 100000.0 - v2 * (31.62 * Kvc / (Wi * 3600)) ^ -2
-                    icount += 1
-                    If icount > 10000 Then Throw New Exception("P2 did not converge in 10000 iterations.")
-                Loop Until Math.Abs(P2 - P2ant) < 0.0001
-                P2 = P2 * 100000.0
-                IObj?.Paragraphs.Add(String.Format("Calculated Outlet Pressure P2 = {0} Pa", P2))
-            ElseIf CalcMode = CalculationMode.Kv_General Or CalculationMode.Kv_Gas Or CalculationMode.Kv_Liquid Then
+
+            If CalcMode <> CalculationMode.DeltaP And CalcMode <> CalculationMode.OutletPressure Then
                 If ims.Phases(2).Properties.molarfraction = 1 Then
                     ims.PropertyPackage.CurrentMaterialStream = ims
                     rhog = ims.PropertyPackage.AUX_VAPDENS(Ti, Pi)
@@ -758,12 +808,24 @@ Namespace UnitOperations
                     k = Cp_ig / (Cp_ig - 8.314)
                     rhol = ims.Phases(1).Properties.density.GetValueOrDefault
                     Pc = ims.PropertyPackage.AUX_PCM(PropertyPackages.Phase.Liquid)
-                    Pv = ims.PropertyPackage.AUX_PVAPM(PropertyPackages.Phase.Liquid, Ti)
+                    Pv = Pi 'ims.PropertyPackage.AUX_PVAPM(PropertyPackages.Phase.Liquid, Ti)
 
                     massfrac_gas = ims.Phases(2).Properties.massflow.GetValueOrDefault / ims.Phases(0).Properties.massflow.GetValueOrDefault
                     massfrac_liq = ims.Phases(1).Properties.massflow.GetValueOrDefault / ims.Phases(0).Properties.massflow.GetValueOrDefault
                     P2 = 100000.0 * P2TwoPhase(Wi * 3600, Kvc, Pi / 100000.0, rhog, rhol, k, Pv / 100000.0, Pc / 100000.0, massfrac_gas, massfrac_liq)
                 End If
+            ElseIf CalcMode = CalculationMode.Kv_Steam Then
+                P2 = Pi * 0.7 / 100000.0
+                icount = 0
+                Do
+                    v2 = 1 / ims.PropertyPackage.AUX_VAPDENS(Ti, P2)
+                    P2ant = P2
+                    P2 = Pi / 100000.0 - v2 * (31.62 * Kvc / (Wi * 3600)) ^ -2
+                    icount += 1
+                    If icount > 10000 Then Throw New Exception("P2 did not converge in 10000 iterations.")
+                Loop Until Math.Abs(P2 - P2ant) < 0.0001
+                P2 = P2 * 100000.0
+                IObj?.Paragraphs.Add(String.Format("Calculated Outlet Pressure P2 = {0} Pa", P2))
             End If
 
             If Me.CalcMode = CalculationMode.DeltaP Then
@@ -804,7 +866,7 @@ Namespace UnitOperations
 
             'If herr > 0.01 Then Throw New Exception("The enthalpy of inlet and outlet streams doesn't match. Result is invalid.")
 
-                Me.DeltaT = T2 - Ti
+            Me.DeltaT = T2 - Ti
             Me.DeltaQ = 0
 
             OutletTemperature = T2
