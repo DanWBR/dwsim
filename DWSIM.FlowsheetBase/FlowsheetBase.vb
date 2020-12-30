@@ -2189,112 +2189,186 @@ Label_00CC:
 
     Sub AddPropPacks()
 
-        Dim CPPP As CoolPropPropertyPackage = New CoolPropPropertyPackage()
-        CPPP.ComponentName = "CoolProp"
-        AvailablePropertyPackages.Add(CPPP.ComponentName.ToString, CPPP)
+        Dim plist As New Concurrent.BlockingCollection(Of PropertyPackage)
 
-        Dim CPIPP As New CoolPropIncompressiblePurePropertyPackage()
-        CPIPP.ComponentName = "CoolProp (Incompressible Fluids)"
-        CPIPP.ComponentDescription = "CoolProp (Incompressible Fluids)"
-        AvailablePropertyPackages.Add(CPIPP.ComponentName.ToString, CPIPP)
+        Dim t1 = New Task(Sub()
 
-        Dim CPIMPP As New CoolPropIncompressibleMixturePropertyPackage()
-        CPIMPP.ComponentName = "CoolProp (Incompressible Mixtures)"
-        CPIMPP.ComponentDescription = "CoolProp (Incompressible Mixtures)"
-        AvailablePropertyPackages.Add(CPIMPP.ComponentName.ToString, CPIMPP)
+                              Dim CPPP As CoolPropPropertyPackage = New CoolPropPropertyPackage()
+                              CPPP.ComponentName = "CoolProp"
+                              plist.Add(CPPP)
 
-        Dim STPP As SteamTablesPropertyPackage = New SteamTablesPropertyPackage()
-        STPP.ComponentName = "Steam Tables (IAPWS-IF97)"
-        AvailablePropertyPackages.Add(STPP.ComponentName.ToString, STPP)
+                              Dim CPIPP As New CoolPropIncompressiblePurePropertyPackage()
+                              CPIPP.ComponentName = "CoolProp (Incompressible Fluids)"
+                              CPIPP.ComponentDescription = "CoolProp (Incompressible Fluids)"
+                              plist.Add(CPIPP)
 
-        Dim SEAPP As SeawaterPropertyPackage = New SeawaterPropertyPackage()
-        SEAPP.ComponentName = "Seawater IAPWS-08"
-        AvailablePropertyPackages.Add(SEAPP.ComponentName.ToString, SEAPP)
+                              Dim CPIMPP As New CoolPropIncompressibleMixturePropertyPackage()
+                              CPIMPP.ComponentName = "CoolProp (Incompressible Mixtures)"
+                              CPIMPP.ComponentDescription = "CoolProp (Incompressible Mixtures)"
+                              plist.Add(CPIMPP)
 
-        Dim PRPP As PengRobinsonPropertyPackage = New PengRobinsonPropertyPackage()
-        PRPP.ComponentName = "Peng-Robinson (PR)"
-        AvailablePropertyPackages.Add(PRPP.ComponentName.ToString, PRPP)
+                              Dim STPP As SteamTablesPropertyPackage = New SteamTablesPropertyPackage()
+                              STPP.ComponentName = "Steam Tables (IAPWS-IF97)"
+                              plist.Add(STPP)
 
-        Dim PRSV2PP As PRSV2PropertyPackage = New PRSV2PropertyPackage()
-        PRSV2PP.ComponentName = "Peng-Robinson-Stryjek-Vera 2 (PRSV2-M)"
-        AvailablePropertyPackages.Add(PRSV2PP.ComponentName.ToString, PRSV2PP)
+                              Dim SEAPP As SeawaterPropertyPackage = New SeawaterPropertyPackage()
+                              SEAPP.ComponentName = "Seawater IAPWS-08"
+                              plist.Add(SEAPP)
 
-        Dim PRSV2PPVL As PRSV2VLPropertyPackage = New PRSV2VLPropertyPackage()
-        PRSV2PPVL.ComponentName = "Peng-Robinson-Stryjek-Vera 2 (PRSV2-VL)"
-        AvailablePropertyPackages.Add(PRSV2PPVL.ComponentName.ToString, PRSV2PPVL)
+                          End Sub)
 
-        Dim SRKPP As SRKPropertyPackage = New SRKPropertyPackage()
-        SRKPP.ComponentName = "Soave-Redlich-Kwong (SRK)"
-        AvailablePropertyPackages.Add(SRKPP.ComponentName.ToString, SRKPP)
+        Dim t2 = New Task(Sub()
 
-        Dim PRLKPP As PengRobinsonLKPropertyPackage = New PengRobinsonLKPropertyPackage()
-        PRLKPP.ComponentName = "Peng-Robinson / Lee-Kesler (PR/LK)"
-        AvailablePropertyPackages.Add(PRLKPP.ComponentName.ToString, PRLKPP)
+                              Dim PRPP As PengRobinsonPropertyPackage = New PengRobinsonPropertyPackage()
+                              PRPP.ComponentName = "Peng-Robinson (PR)"
+                              plist.Add(PRPP)
 
-        Dim UPP As UNIFACPropertyPackage = New UNIFACPropertyPackage()
-        UPP.ComponentName = "UNIFAC"
-        AvailablePropertyPackages.Add(UPP.ComponentName.ToString, UPP)
+                          End Sub)
 
-        Dim ULLPP As UNIFACLLPropertyPackage = New UNIFACLLPropertyPackage()
-        ULLPP.ComponentName = "UNIFAC-LL"
-        AvailablePropertyPackages.Add(ULLPP.ComponentName.ToString, ULLPP)
+        Dim t3 = New Task(Sub()
 
-        Dim MUPP As MODFACPropertyPackage = New MODFACPropertyPackage()
-        MUPP.ComponentName = "Modified UNIFAC (Dortmund)"
-        AvailablePropertyPackages.Add(MUPP.ComponentName.ToString, MUPP)
+                              Dim PRSV2PP As PRSV2PropertyPackage = New PRSV2PropertyPackage()
+                              PRSV2PP.ComponentName = "Peng-Robinson-Stryjek-Vera 2 (PRSV2-M)"
+                              plist.Add(PRSV2PP)
 
-        Dim NUPP As NISTMFACPropertyPackage = New NISTMFACPropertyPackage()
-        NUPP.ComponentName = "Modified UNIFAC (NIST)"
-        AvailablePropertyPackages.Add(NUPP.ComponentName.ToString, NUPP)
+                              Dim PRSV2PPVL As PRSV2VLPropertyPackage = New PRSV2VLPropertyPackage()
+                              PRSV2PPVL.ComponentName = "Peng-Robinson-Stryjek-Vera 2 (PRSV2-VL)"
+                              plist.Add(PRSV2PPVL)
 
-        Dim NRTLPP As NRTLPropertyPackage = New NRTLPropertyPackage()
-        NRTLPP.ComponentName = "NRTL"
-        AvailablePropertyPackages.Add(NRTLPP.ComponentName.ToString, NRTLPP)
+                          End Sub)
 
-        Dim UQPP As UNIQUACPropertyPackage = New UNIQUACPropertyPackage()
-        UQPP.ComponentName = "UNIQUAC"
-        AvailablePropertyPackages.Add(UQPP.ComponentName.ToString, UQPP)
+        Dim t4 = New Task(Sub()
 
-        Dim CSLKPP As ChaoSeaderPropertyPackage = New ChaoSeaderPropertyPackage()
-        CSLKPP.ComponentName = "Chao-Seader"
-        AvailablePropertyPackages.Add(CSLKPP.ComponentName.ToString, CSLKPP)
+                              Dim SRKPP As SRKPropertyPackage = New SRKPropertyPackage()
+                              SRKPP.ComponentName = "Soave-Redlich-Kwong (SRK)"
+                              plist.Add(SRKPP)
 
-        Dim GSLKPP As GraysonStreedPropertyPackage = New GraysonStreedPropertyPackage()
-        GSLKPP.ComponentName = "Grayson-Streed"
-        AvailablePropertyPackages.Add(GSLKPP.ComponentName.ToString, GSLKPP)
+                          End Sub)
 
-        Dim RPP As RaoultPropertyPackage = New RaoultPropertyPackage()
-        RPP.ComponentName = "Raoult's Law"
-        AvailablePropertyPackages.Add(RPP.ComponentName.ToString, RPP)
+        Dim t5 = New Task(Sub()
 
-        Dim LKPPP As LKPPropertyPackage = New LKPPropertyPackage()
-        LKPPP.ComponentName = "Lee-Kesler-Plöcker"
-        AvailablePropertyPackages.Add(LKPPP.ComponentName.ToString, LKPPP)
+                              Dim PRLKPP As PengRobinsonLKPropertyPackage = New PengRobinsonLKPropertyPackage()
+                              PRLKPP.ComponentName = "Peng-Robinson / Lee-Kesler (PR/LK)"
+                              plist.Add(PRLKPP)
 
-        Dim BOPP As BlackOilPropertyPackage = New BlackOilPropertyPackage()
-        BOPP.ComponentName = "Black Oil"
-        AvailablePropertyPackages.Add(BOPP.ComponentName.ToString, BOPP)
+                          End Sub)
 
-        Dim GERGPP As GERG2008PropertyPackage = New GERG2008PropertyPackage()
+        Dim t6 = New Task(Sub()
 
-        AvailablePropertyPackages.Add(GERGPP.ComponentName.ToString, GERGPP)
+                              Dim UPP As UNIFACPropertyPackage = New UNIFACPropertyPackage()
+                              UPP.ComponentName = "UNIFAC"
+                              plist.Add(UPP)
 
-        Dim PCSAFTPP As PCSAFT2PropertyPackage = New PCSAFT2PropertyPackage()
+                          End Sub)
 
-        AvailablePropertyPackages.Add(PCSAFTPP.ComponentName.ToString, PCSAFTPP)
+        Dim t7 = New Task(Sub()
 
-        Dim PR78PP As PengRobinsonPropertyPackage = New PengRobinsonPropertyPackage()
-        PR78PP.ComponentName = "Peng-Robinson 1978 (PR78)"
+                              Dim ULLPP As UNIFACLLPropertyPackage = New UNIFACLLPropertyPackage()
+                              ULLPP.ComponentName = "UNIFAC-LL"
+                              plist.Add(ULLPP)
 
-        AvailablePropertyPackages.Add(PR78PP.ComponentName.ToString, PR78PP)
+                          End Sub)
 
-        Dim PR78Adv As PengRobinson1978AdvancedPropertyPackage = New PengRobinson1978AdvancedPropertyPackage()
+        Dim t8 = New Task(Sub()
 
-        AvailablePropertyPackages.Add(PR78Adv.ComponentName.ToString, PR78Adv)
+                              Dim MUPP As MODFACPropertyPackage = New MODFACPropertyPackage()
+                              MUPP.ComponentName = "Modified UNIFAC (Dortmund)"
+                              plist.Add(MUPP)
 
-        Dim SRKAdv As SoaveRedlichKwongAdvancedPropertyPackage = New SoaveRedlichKwongAdvancedPropertyPackage()
+                          End Sub)
 
-        AvailablePropertyPackages.Add(SRKAdv.ComponentName.ToString, SRKAdv)
+        Dim t9 = New Task(Sub()
+
+                              Dim NUPP As NISTMFACPropertyPackage = New NISTMFACPropertyPackage()
+                              NUPP.ComponentName = "Modified UNIFAC (NIST)"
+                              plist.Add(NUPP)
+
+                          End Sub)
+
+        Dim t10 = New Task(Sub()
+
+                               Dim NRTLPP As NRTLPropertyPackage = New NRTLPropertyPackage()
+                               NRTLPP.ComponentName = "NRTL"
+                               plist.Add(NRTLPP)
+
+                               Dim UQPP As UNIQUACPropertyPackage = New UNIQUACPropertyPackage()
+                               UQPP.ComponentName = "UNIQUAC"
+                               plist.Add(UQPP)
+
+                               Dim CSLKPP As ChaoSeaderPropertyPackage = New ChaoSeaderPropertyPackage()
+                               CSLKPP.ComponentName = "Chao-Seader"
+                               plist.Add(CSLKPP)
+
+                               Dim GSLKPP As GraysonStreedPropertyPackage = New GraysonStreedPropertyPackage()
+                               GSLKPP.ComponentName = "Grayson-Streed"
+                               plist.Add(GSLKPP)
+
+                               Dim RPP As RaoultPropertyPackage = New RaoultPropertyPackage()
+                               RPP.ComponentName = "Raoult's Law"
+                               plist.Add(RPP)
+
+                               Dim LKPPP As LKPPropertyPackage = New LKPPropertyPackage()
+                               LKPPP.ComponentName = "Lee-Kesler-Plöcker"
+                               plist.Add(LKPPP)
+
+                           End Sub)
+
+        Dim t11 = New Task(Sub()
+
+                               Dim BOPP As BlackOilPropertyPackage = New BlackOilPropertyPackage()
+                               BOPP.ComponentName = "Black Oil"
+                               plist.Add(BOPP)
+
+                               Dim GERGPP As GERG2008PropertyPackage = New GERG2008PropertyPackage()
+                               plist.Add(GERGPP)
+
+                               Dim PCSAFTPP As PCSAFT2PropertyPackage = New PCSAFT2PropertyPackage()
+                               plist.Add(PCSAFTPP)
+
+                           End Sub)
+
+        Dim t12 = New Task(Sub()
+
+                               Dim PR78PP As PengRobinsonPropertyPackage = New PengRobinsonPropertyPackage()
+                               PR78PP.ComponentName = "Peng-Robinson 1978 (PR78)"
+                               plist.Add(PR78PP)
+
+                           End Sub)
+
+        Dim t13 = New Task(Sub()
+
+                               Dim PR78Adv As PengRobinson1978AdvancedPropertyPackage = New PengRobinson1978AdvancedPropertyPackage()
+                               plist.Add(PR78Adv)
+
+                           End Sub)
+
+        Dim t14 = New Task(Sub()
+
+                               Dim SRKAdv As SoaveRedlichKwongAdvancedPropertyPackage = New SoaveRedlichKwongAdvancedPropertyPackage()
+                               plist.Add(SRKAdv)
+
+                           End Sub)
+
+        t1.Start()
+        t2.Start()
+        t3.Start()
+        t4.Start()
+        t5.Start()
+        t6.Start()
+        t7.Start()
+        t8.Start()
+        t9.Start()
+        t10.Start()
+        t11.Start()
+        t12.Start()
+        t13.Start()
+        t14.Start()
+
+        Task.WaitAll(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14)
+
+        For Each pp In plist
+            AvailablePropertyPackages.Add(DirectCast(pp, CapeOpen.ICapeIdentification).ComponentName, pp)
+        Next
 
         Dim otherpps = SharedClasses.Utility.LoadAdditionalPropertyPackages()
 

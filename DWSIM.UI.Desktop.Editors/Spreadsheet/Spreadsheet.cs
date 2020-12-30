@@ -52,13 +52,13 @@ namespace DWSIM.UI.Desktop.Editors
             Columns.AddRange(new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" });
 
             flowsheet = fs;
-            scontrol = new ReoGridFullControl();
+            scontrol = new ReoGridFullControl(GlobalSettings.Settings.AutomationMode);
             Sheet = scontrol.GridControl;
             SetCustomFunctions();
             flowsheet.GetSpreadsheetObjectFunc = () => { return Sheet; };
             Sheet.CurrentWorksheet.Name = "MAIN";
 
-            scontrol.ImportDataMenuItem.Click += (sender, e) =>
+            if (scontrol.ImportDataMenuItem != null) scontrol.ImportDataMenuItem.Click += (sender, e) =>
             {
 
                 Application.Instance.Invoke(() =>
@@ -89,7 +89,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             };
 
-            scontrol.ExportDataMenuItem.Click += (sender, e) =>
+            if (scontrol.ExportDataMenuItem != null) scontrol.ExportDataMenuItem.Click += (sender, e) =>
             {
 
                 Application.Instance.Invoke(() =>
@@ -122,7 +122,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             };
 
-            scontrol.CreateChartMenuItem.Click += (sender, e) =>
+            if (scontrol.CreateChartMenuItem != null) scontrol.CreateChartMenuItem.Click += (sender, e) =>
             {
                 Application.Instance.Invoke(() =>
                 {

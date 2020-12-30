@@ -3,9 +3,11 @@
     Sub Main()
 
         'create automation manager
-        Dim interf As New DWSIM.Automation.Automation2
+        Dim interf As New DWSIM.Automation.Automation2()
 
         Dim sim As Interfaces.IFlowsheet
+
+        sim = interf.CreateFlowsheet()
 
         'load Cavett's Problem simulation file
         sim = interf.LoadFlowsheet("samples" & IO.Path.DirectorySeparatorChar & "Cavett's Problem.dwxml")
