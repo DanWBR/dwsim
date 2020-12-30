@@ -5613,6 +5613,20 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
         End Function
 
+        Public Function AUX_PVAPM(ByVal Phase As Phase, ByVal T As Double) As Double
+
+            Dim val As Double = 0
+            Dim subst As Interfaces.ICompound
+
+            For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
+                val += subst.MoleFraction.GetValueOrDefault * Me.AUX_PVAPi(subst.Name, T)
+            Next
+
+            Return val
+
+        End Function
+
+
         Public Function AUX_KIJ(ByVal sub1 As String, ByVal sub2 As String) As Double
 
             Dim Vc1 As Double = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Volume
