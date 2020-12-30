@@ -255,10 +255,8 @@ out:        d2 = Date.Now
                 Return New Object() {1, V, Vz, PP.RET_NullVector, ecount, 0, Vx2, 0.0#, PP.RET_NullVector, gamma1, gamma2}
             Else
                 'order liquid phases by gibbs energy
-
                 Dim gl1 = PP.DW_CalcGibbsEnergy(Vx1, T, P, "L")
                 Dim gl2 = PP.DW_CalcGibbsEnergy(Vx2, T, P, "L")
-
                 If gl1 < gl2 Then
                     Return New Object() {L2, V, Vx2, PP.RET_NullVector, ecount, L1, Vx1, 0.0#, PP.RET_NullVector, gamma1, gamma2}
                 Else
