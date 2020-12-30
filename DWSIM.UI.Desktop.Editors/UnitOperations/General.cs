@@ -918,16 +918,16 @@ namespace DWSIM.UI.Desktop.Editors
                             pos5 = 0;
                             break;
                         case Valve.CalculationMode.Kv_General:
-                            pos5 = 2;
+                            pos5 = 5;
                             break;
                         case Valve.CalculationMode.Kv_Steam:
-                            pos5 = 3;
-                            break;
-                        case Valve.CalculationMode.Kv_Gas:
                             pos5 = 4;
                             break;
+                        case Valve.CalculationMode.Kv_Gas:
+                            pos5 = 3;
+                            break;
                         case Valve.CalculationMode.Kv_Liquid:
-                            pos5 = 5;
+                            pos5 = 2;
                             break;
                     }
                     s.CreateAndAddDropDownRow(container, "Calculation Mode", StringResources.valvecalcmode().ToList(), pos5, (DropDown arg3, EventArgs ev) =>
@@ -941,10 +941,16 @@ namespace DWSIM.UI.Desktop.Editors
                                 valve.CalcMode = Valve.CalculationMode.DeltaP;
                                 break;
                             case 2:
-                                valve.CalcMode = Valve.CalculationMode.Kv_General;
+                                valve.CalcMode = Valve.CalculationMode.Kv_Liquid;
                                 break;
                             case 3:
+                                valve.CalcMode = Valve.CalculationMode.Kv_Gas;
+                                break;
+                            case 4:
                                 valve.CalcMode = Valve.CalculationMode.Kv_Steam;
+                                break;
+                            case 5:
+                                valve.CalcMode = Valve.CalculationMode.Kv_General;
                                 break;
                         }
                     }, () => CallSolverIfNeeded());

@@ -67,10 +67,10 @@ Namespace UnitOperations
         Public Enum CalculationMode
             DeltaP = 0
             OutletPressure = 1
-            Kv_General = 2
-            Kv_Steam = 3
-            Kv_Liquid = 4
-            Kv_Gas = 5
+            Kv_General = 5
+            Kv_Steam = 4
+            Kv_Liquid = 2
+            Kv_Gas = 3
         End Enum
 
         Public Sub New()
