@@ -258,9 +258,9 @@ out:        d2 = Date.Now
                 Dim gl1 = PP.DW_CalcGibbsEnergy(Vx1, T, P, "L")
                 Dim gl2 = PP.DW_CalcGibbsEnergy(Vx2, T, P, "L")
                 If gl1 < gl2 Then
-                    Return New Object() {L2, V, Vx2, PP.RET_NullVector, ecount, L1, Vx1, 0.0#, PP.RET_NullVector, gamma1, gamma2}
+                    Return New Object() {L2, V, Vx2, PP.RET_NullVector, ecount, L1, Vx1, 0.0#, PP.RET_NullVector, gamma2, gamma1}
                 Else
-                    Return New Object() {L1, V, Vx1, PP.RET_NullVector, ecount, L2, Vx2, 0.0#, PP.RET_NullVector, gamma2, gamma1}
+                    Return New Object() {L1, V, Vx1, PP.RET_NullVector, ecount, L2, Vx2, 0.0#, PP.RET_NullVector, gamma1, gamma2}
                 End If
             End If
 
