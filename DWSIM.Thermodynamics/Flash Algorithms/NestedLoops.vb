@@ -566,7 +566,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                                                                   fx = herrobj(0)
                                                                   Vy = herrobj(4)
                                                                   Vx1 = herrobj(5)
-                                                                  Ki = Vy.DivideY(Vx1)
+                                                                  Ki = PP.DW_CalcKvalue(Vx1, Vy, x1, P)
                                                               End Sub,
                                                                 Settings.TaskCancellationTokenSource.Token,
                                                                 TaskCreationOptions.None,
@@ -586,7 +586,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                             fx = herrobj(0)
                             Vy = herrobj(4)
                             Vx1 = herrobj(5)
-                            Ki = Vy.DivideY(Vx1)
+                            Ki = PP.DW_CalcKvalue(Vx1, Vy, x1, P)
+                            Ki = Ki.ReplaceInvalidsWithZeroes()
                             IObj2?.SetCurrent()
                             herrobj = Herror("PT", x1 + epsilon(j), P, Vz, PP, True, Ki)
 
@@ -604,7 +605,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                         fx = herrobj(0)
                         Vy = herrobj(4)
                         Vx1 = herrobj(5)
-                        Ki = Vy.DivideY(Vx1)
+                        Ki = PP.DW_CalcKvalue(Vx1, Vy, x1, P)
+                        Ki = Ki.ReplaceInvalidsWithZeroes()
 
                         IObj2?.Paragraphs.Add(String.Format("Current Enthalpy error: {0}", fx))
 
@@ -1075,7 +1077,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                                                                   fx = serrobj(0)
                                                                   Vy = serrobj(4)
                                                                   Vx1 = serrobj(5)
-                                                                  Ki = Vy.DivideY(Vx1)
+                                                                  Ki = PP.DW_CalcKvalue(Vx1, Vy, x1, P)
                                                               End Sub,
                                                                   Settings.TaskCancellationTokenSource.Token,
                                                                   TaskCreationOptions.None,
@@ -1095,8 +1097,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                             fx = serrobj(0)
                             Vy = serrobj(4)
                             Vx1 = serrobj(5)
-                            Ki = Vy.DivideY(Vx1)
-                            Ki = Ki.ReplaceInvalidsWithZeroes()
+                            Vx1 = serrobj(5)
+                            Ki = PP.DW_CalcKvalue(Vx1, Vy, x1, P)
                             IObj2?.SetCurrent()
                             fx2 = Serror("PT", x1 + epsilon(j), P, Vz, PP, True, Ki)(0)
 
@@ -1114,7 +1116,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                         fx = serrobj(0)
                         Vy = serrobj(4)
                         Vx1 = serrobj(5)
-                        Ki = Vy.DivideY(Vx1)
+                        Ki = PP.DW_CalcKvalue(Vx1, Vy, x1, P)
                         Ki = Ki.ReplaceInvalidsWithZeroes()
 
 
