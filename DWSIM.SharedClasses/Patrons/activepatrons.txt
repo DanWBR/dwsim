@@ -1,6 +1,5 @@
 ﻿Adam Kovalovszki
 Adam Spencer
-Adrian Wegmann
 Alberto Marzi
 Alex Platon
 Alexander Semenyak
@@ -15,7 +14,6 @@ Bruce
 Bruce Logue
 Carlos G. C. Reetz
 Casey Houston
-Chris Mcdougall
 Christian Hornhofer
 Christian Jordan
 David 
@@ -64,7 +62,6 @@ Ozmeister
 Parthib Rao
 Petroconsulting Llc
 Rajesh S Kempegowda
-Richard Zweiler
 Roland Berger
 Ryszard
 Samuel Levinson
