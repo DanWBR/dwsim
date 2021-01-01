@@ -11308,7 +11308,15 @@ Final3:
                             Dim dic As New Dictionary(Of String, Auxiliary.PR_IPData)
                             dic.Add(xel.@Compound2, ip)
                             If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
-                                pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                                If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound2) Then
+                                    pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                                Else
+                                    If Not pp.m_pr.InteractionParameters(xel.@Compound2).ContainsKey(xel.@Compound1) Then
+                                        pp.m_pr.InteractionParameters(xel.@Compound2).Add(xel.@Compound1, ip)
+                                    Else
+                                        pp.m_pr.InteractionParameters(xel.@Compound2)(xel.@Compound1) = ip
+                                    End If
+                                End If
                             Else
                                 If Not pp.m_pr.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
                                     pp.m_pr.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
@@ -11330,7 +11338,15 @@ Final3:
                         Dim dic As New Dictionary(Of String, Auxiliary.PRSV2_IPData)
                         dic.Add(xel.@Compound2, ip)
                         If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
-                            pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                            If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound2) Then
+                                pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                            Else
+                                If Not pp.m_pr.InteractionParameters(xel.@Compound2).ContainsKey(xel.@Compound1) Then
+                                    pp.m_pr.InteractionParameters(xel.@Compound2).Add(xel.@Compound1, ip)
+                                Else
+                                    pp.m_pr.InteractionParameters(xel.@Compound2)(xel.@Compound1) = ip
+                                End If
+                            End If
                         Else
                             If Not pp.m_pr.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
                                 pp.m_pr.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
@@ -11349,7 +11365,15 @@ Final3:
                         Dim dic As New Dictionary(Of String, Auxiliary.PRSV2_IPData)
                         dic.Add(xel.@Compound2, ip)
                         If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
-                            pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                            If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound2) Then
+                                pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                            Else
+                                If Not pp.m_pr.InteractionParameters(xel.@Compound2).ContainsKey(xel.@Compound1) Then
+                                    pp.m_pr.InteractionParameters(xel.@Compound2).Add(xel.@Compound1, ip)
+                                Else
+                                    pp.m_pr.InteractionParameters(xel.@Compound2)(xel.@Compound1) = ip
+                                End If
+                            End If
                         Else
                             If Not pp.m_pr.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
                                 pp.m_pr.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
@@ -11369,7 +11393,15 @@ Final3:
                             Dim dic As New Dictionary(Of String, Auxiliary.PR_IPData)
                             dic.Add(xel.@Compound2, ip)
                             If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
-                                pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                                If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound2) Then
+                                    pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                                Else
+                                    If Not pp.m_pr.InteractionParameters(xel.@Compound2).ContainsKey(xel.@Compound1) Then
+                                        pp.m_pr.InteractionParameters(xel.@Compound2).Add(xel.@Compound1, ip)
+                                    Else
+                                        pp.m_pr.InteractionParameters(xel.@Compound2)(xel.@Compound1) = ip
+                                    End If
+                                End If
                             Else
                                 If Not pp.m_pr.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
                                     pp.m_pr.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
@@ -11391,7 +11423,15 @@ Final3:
                         Dim dic As New Dictionary(Of String, Auxiliary.PR_IPData)
                         dic.Add(xel.@Compound2, ip)
                         If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
-                            pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                            If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound2) Then
+                                pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                            Else
+                                If Not pp.m_pr.InteractionParameters(xel.@Compound2).ContainsKey(xel.@Compound1) Then
+                                    pp.m_pr.InteractionParameters(xel.@Compound2).Add(xel.@Compound1, ip)
+                                Else
+                                    pp.m_pr.InteractionParameters(xel.@Compound2)(xel.@Compound1) = ip
+                                End If
+                            End If
                         Else
                             If Not pp.m_pr.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
                                 pp.m_pr.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
@@ -11411,7 +11451,15 @@ Final3:
                         Dim dic As New Dictionary(Of String, Auxiliary.PR_IPData)
                         dic.Add(xel.@Compound2, ip)
                         If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
-                            pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                            If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound2) Then
+                                pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                            Else
+                                If Not pp.m_pr.InteractionParameters(xel.@Compound2).ContainsKey(xel.@Compound1) Then
+                                    pp.m_pr.InteractionParameters(xel.@Compound2).Add(xel.@Compound1, ip)
+                                Else
+                                    pp.m_pr.InteractionParameters(xel.@Compound2)(xel.@Compound1) = ip
+                                End If
+                            End If
                         Else
                             If Not pp.m_pr.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
                                 pp.m_pr.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
@@ -11430,7 +11478,15 @@ Final3:
                         Dim dic As New Dictionary(Of String, Auxiliary.PR_IPData)
                         dic.Add(xel.@Compound2, ip)
                         If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
-                            pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                            If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound2) Then
+                                pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                            Else
+                                If Not pp.m_pr.InteractionParameters(xel.@Compound2).ContainsKey(xel.@Compound1) Then
+                                    pp.m_pr.InteractionParameters(xel.@Compound2).Add(xel.@Compound1, ip)
+                                Else
+                                    pp.m_pr.InteractionParameters(xel.@Compound2)(xel.@Compound1) = ip
+                                End If
+                            End If
                         Else
                             If Not pp.m_pr.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
                                 pp.m_pr.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
@@ -11450,7 +11506,15 @@ Final3:
                             Dim dic As New Dictionary(Of String, Auxiliary.PR_IPData)
                             dic.Add(xel.@Compound2, ip)
                             If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
-                                pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                                If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound2) Then
+                                    pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                                Else
+                                    If Not pp.m_pr.InteractionParameters(xel.@Compound2).ContainsKey(xel.@Compound1) Then
+                                        pp.m_pr.InteractionParameters(xel.@Compound2).Add(xel.@Compound1, ip)
+                                    Else
+                                        pp.m_pr.InteractionParameters(xel.@Compound2)(xel.@Compound1) = ip
+                                    End If
+                                End If
                             Else
                                 If Not pp.m_pr.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
                                     pp.m_pr.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
@@ -11494,7 +11558,15 @@ Final3:
                             Dim dic As New Dictionary(Of String, Auxiliary.PR_IPData)
                             dic.Add(xel.@Compound2, ip)
                             If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
-                                pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                                If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound2) Then
+                                    pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                                Else
+                                    If Not pp.m_pr.InteractionParameters(xel.@Compound2).ContainsKey(xel.@Compound1) Then
+                                        pp.m_pr.InteractionParameters(xel.@Compound2).Add(xel.@Compound1, ip)
+                                    Else
+                                        pp.m_pr.InteractionParameters(xel.@Compound2)(xel.@Compound1) = ip
+                                    End If
+                                End If
                             Else
                                 If Not pp.m_pr.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
                                     pp.m_pr.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
@@ -11535,7 +11607,15 @@ Final3:
                         Dim dic As New Dictionary(Of String, Auxiliary.PR_IPData)
                         dic.Add(xel.@Compound2, ip)
                         If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
-                            pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                            If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound2) Then
+                                pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                            Else
+                                If Not pp.m_pr.InteractionParameters(xel.@Compound2).ContainsKey(xel.@Compound1) Then
+                                    pp.m_pr.InteractionParameters(xel.@Compound2).Add(xel.@Compound1, ip)
+                                Else
+                                    pp.m_pr.InteractionParameters(xel.@Compound2)(xel.@Compound1) = ip
+                                End If
+                            End If
                         Else
                             If Not pp.m_pr.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
                                 pp.m_pr.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
@@ -11560,7 +11640,15 @@ Final3:
                                 Dim dic As New Dictionary(Of String, Auxiliary.LKP_IPData)
                                 dic.Add(xel.@Compound2, ip)
                                 If Not pp.m_lk.InteractionParameters.ContainsKey(xel.@Compound1) Then
-                                    pp.m_lk.InteractionParameters.Add(xel.@Compound1, dic)
+                                    If Not pp.m_lk.InteractionParameters.ContainsKey(xel.@Compound2) Then
+                                        pp.m_lk.InteractionParameters.Add(xel.@Compound1, dic)
+                                    Else
+                                        If Not pp.m_lk.InteractionParameters(xel.@Compound2).ContainsKey(xel.@Compound1) Then
+                                            pp.m_lk.InteractionParameters(xel.@Compound2).Add(xel.@Compound1, ip)
+                                        Else
+                                            pp.m_lk.InteractionParameters(xel.@Compound2)(xel.@Compound1) = ip
+                                        End If
+                                    End If
                                 Else
                                     If Not pp.m_lk.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
                                         pp.m_lk.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
