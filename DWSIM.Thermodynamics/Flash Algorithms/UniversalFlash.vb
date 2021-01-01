@@ -280,11 +280,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     'Return New Object() {L, 1 - L, 0.0#, Vx, Vs, L - L_old, ecount, d2 - d1}
 
-                    S = result(1) * Lm
-                    Lm = result(0) * Lm
+                    S = resultS(1) * Lm
+                    Lm = resultS(0) * Lm
 
-                    VxM = result(3)
-                    Vs = result(4)
+                    VxM = resultS(3)
+                    Vs = resultS(4)
 
                     Dim nll = New SimpleLLE()
 
@@ -292,10 +292,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     'Return New Object() {L1, V, Vx1, PP.RET_NullVector, ecount, L2, Vx2, 0.0#, PP.RET_NullVector, gamma1, gamma2}
 
-                    L1 = result(0) * Lm
-                    Vx1 = result(2)
-                    L2 = result(7) * Lm
-                    Vx2 = result(8)
+                    L1 = resultL(0) * Lm
+                    Vx1 = resultL(2)
+                    L2 = resultL(7) * Lm
+                    Vx2 = resultL(8)
 
                     Return New Object() {L1, V, Vx1, Vy, T, result(5), result(6), L2, Vx2, S, Vs}
 
@@ -396,11 +396,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     'Return New Object() {L, 1 - L, 0.0#, Vx, Vs, L - L_old, ecount, d2 - d1}
 
-                    S = result(1) * Lm
-                    Lm = result(0) * Lm
+                    S = resultS(1) * Lm
+                    Lm = resultS(0) * Lm
 
-                    VxM = result(3)
-                    Vs = result(4)
+                    VxM = resultS(3)
+                    Vs = resultS(4)
 
                     Dim nll = New SimpleLLE()
 
@@ -408,10 +408,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     'Return New Object() {L1, V, Vx1, PP.RET_NullVector, ecount, L2, Vx2, 0.0#, PP.RET_NullVector, gamma1, gamma2}
 
-                    L1 = result(0) * Lm
-                    Vx1 = result(2)
-                    L2 = result(7) * Lm
-                    Vx2 = result(8)
+                    L1 = resultL(0) * Lm
+                    Vx1 = resultL(2)
+                    L2 = resultL(7) * Lm
+                    Vx2 = resultL(8)
 
                     Return New Object() {L1, V, Vx1, Vy, P, result(5), result(6), L2, Vx2, S, Vs}
 
