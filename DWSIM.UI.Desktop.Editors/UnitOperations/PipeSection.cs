@@ -17,6 +17,7 @@ using cv = DWSIM.SharedClasses.SystemsOfUnits.Converter;
 using System.Reflection;
 using System.IO;
 using DWSIM.ExtensionMethods;
+using DWSIM.Thermodynamics.Streams;
 
 namespace DWSIM.UI.Desktop.Editors
 {
@@ -24,6 +25,7 @@ namespace DWSIM.UI.Desktop.Editors
     {
 
         public DWSIM.UnitOperations.UnitOperations.Auxiliary.Pipe.PipeSection section;
+        public Pipe pipe;
         public IFlowsheet flowsheet;
 
         public DynamicLayout container;
@@ -31,11 +33,12 @@ namespace DWSIM.UI.Desktop.Editors
         private List<string[]> ACD = new List<string[]>();
         private List<string> materials, sectypes;
 
-        public PipeSectionEditor(IFlowsheet fs, DWSIM.UnitOperations.UnitOperations.Auxiliary.Pipe.PipeSection sec, DynamicLayout layout)
+        public PipeSectionEditor(IFlowsheet fs, Pipe pipesegment, DWSIM.UnitOperations.UnitOperations.Auxiliary.Pipe.PipeSection sec, DynamicLayout layout)
         {
             flowsheet = fs;
             section = sec;
             container = layout;
+            pipe = pipesegment;
 
             materials = new List<string>();
 
@@ -64,14 +67,14 @@ namespace DWSIM.UI.Desktop.Editors
                     sectypes.Add(ACD[ACD.Count - 1][0]);
                 }
             }
-            
+
             Initialize();
 
         }
 
         void Initialize()
         {
-            
+
             var su = flowsheet.FlowsheetOptions.SelectedUnitSystem;
             var nf = flowsheet.FlowsheetOptions.NumberFormat;
 
@@ -84,7 +87,7 @@ namespace DWSIM.UI.Desktop.Editors
             var tbr = container.CreateAndAddTextBoxRow("G8", "Rugosity " + " (" + su.distance + ") *", cv.ConvertFromSI(su.distance, section.PipeWallRugosity), (sender, e) => { if (sender.Text.IsValidDoubleExpression()) section.PipeWallRugosity = cv.ConvertToSI(su.distance, sender.Text.ParseExpressionToDouble()); });
             var tbtc = container.CreateAndAddStringEditorRow("Thermal Conductivity " + " (" + su.thermalConductivity + ") *", section.PipeWallThermalConductivityExpression, (sender, e) => { section.PipeWallThermalConductivityExpression = sender.Text.ToString(); });
             container.CreateAndAddTextBoxRow("N0", "Increments", section.Incrementos, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) section.Incrementos = int.Parse(sender.Text.ToString()); });
-            container.CreateAndAddTextBoxRow("N0", "Quantity", section.Quantidade, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) section.Quantidade = int.Parse(sender.Text.ToString());});
+            container.CreateAndAddTextBoxRow("N0", "Quantity", section.Quantidade, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) section.Quantidade = int.Parse(sender.Text.ToString()); });
             container.CreateAndAddTextBoxRow(nf, "Length" + " (" + su.distance + ")", cv.ConvertFromSI(su.distance, section.Comprimento), (sender, e) => { if (sender.Text.IsValidDoubleExpression()) section.Comprimento = cv.ConvertToSI(su.distance, sender.Text.ParseExpressionToDouble()); });
             container.CreateAndAddTextBoxRow(nf, "Elevation" + " (" + su.distance + ")", cv.ConvertFromSI(su.distance, section.Elevacao), (sender, e) => { if (sender.Text.IsValidDoubleExpression()) section.Elevacao = cv.ConvertToSI(su.distance, sender.Text.ParseExpressionToDouble()); });
             container.CreateAndAddTextBoxRow(nf, "External Diameter" + " (" + su.diameter + ")", cv.Convert("in", su.diameter, section.DE), (sender, e) => { if (sender.Text.IsValidDoubleExpression()) section.DE = cv.Convert(su.diameter, "in", sender.Text.ParseExpressionToDouble()); });
@@ -102,19 +105,35 @@ namespace DWSIM.UI.Desktop.Editors
                 tbr.BackgroundColor = Eto.Drawing.SystemColors.ControlBackground;
                 tbtc.BackgroundColor = Eto.Drawing.SystemColors.ControlBackground;
             }
-            cbm.SelectedValueChanged += (sender, e) => {
+            cbm.SelectedValueChanged += (sender, e) =>
+            {
                 if (cbm.SelectedValue.ToString() == flowsheet.GetTranslatedString("UserDefined"))
                 {
                     tbr.ReadOnly = false;
                     tbtc.ReadOnly = false;
                     tbr.BackgroundColor = Eto.Drawing.SystemColors.ControlBackground;
                     tbtc.BackgroundColor = Eto.Drawing.SystemColors.ControlBackground;
+                    tbr.Text = section.PipeWallRugosity.ConvertFromSI(su.distance).ToString(nf);
+                    tbtc.Text = section.PipeWallThermalConductivityExpression;
+                    tbtc.TextAlignment = TextAlignment.Left;
                 }
-                else {
+                else
+                {
                     tbr.ReadOnly = true;
                     tbtc.ReadOnly = true;
                     tbr.BackgroundColor = Eto.Drawing.Colors.LightGrey;
                     tbtc.BackgroundColor = Eto.Drawing.Colors.LightGrey;
+                    tbr.Text = pipe.rugosidade(cbm.SelectedValue.ToString(), section).ConvertFromSI(su.distance).ToString(nf);
+                    if (pipe.GraphicObject.InputConnectors[0].IsAttached)
+                    {
+                        var stream = (MaterialStream)flowsheet.SimulationObjects[pipe.GraphicObject.InputConnectors[0].AttachedConnector.AttachedFrom.Name];
+                        tbtc.Text = pipe.k_parede(cbm.SelectedValue.ToString(), stream.GetTemperature(), section).ConvertFromSI(su.thermalConductivity).ToString(nf);
+                    }
+                    else
+                    {
+                        tbtc.Text = pipe.k_parede(cbm.SelectedValue.ToString(), 298.15, section).ConvertFromSI(su.thermalConductivity).ToString(nf);
+                    }
+                    tbtc.TextAlignment = TextAlignment.Right;
                 }
             };
         }

@@ -1158,7 +1158,7 @@ Namespace UnitOperations
 
         End Function
 
-        Function rugosidade(ByVal material As String, section As PipeSection) As Double
+        Public Function rugosidade(ByVal material As String, section As PipeSection) As Double
 
             Dim epsilon As Double
 
