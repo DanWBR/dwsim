@@ -422,7 +422,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     IObj2?.Paragraphs.Add(String.Format("Equilibrium Equation 1 error: {0}", F1))
                     IObj2?.Paragraphs.Add(String.Format("Equilibrium Equation 2 error: {0}", F2))
 
-                    If Abs(L1 * F1) + Abs(L2 * F2) < etol Then Exit Do
+                    If Abs(F1) + Abs(F2) < etol Then Exit Do
 
                     Dim MA As Mapack.Matrix = New Mapack.Matrix(2, 2)
                     Dim MB As Mapack.Matrix = New Mapack.Matrix(2, 1)
@@ -447,25 +447,25 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     L1ant = L1
                     Vant = V
 
-                    Dim df, dfmin As Double
+                    Dim df As Double
 
                     If ecount < 5 Then
-                        dfmin = 0.0
+                        df = 0.5
                     ElseIf ecount < 10 Then
-                        dfmin = 0.1
+                        df = 0.7
                     ElseIf ecount < 15 Then
-                        dfmin = 0.3
+                        df = 0.9
                     Else
-                        dfmin = 0.5
+                        df = 1.0
                     End If
-
-                    df = 1.0 'MinimizeGibbs(dfmin, PP, T, P, L1, L2, dL1, dL2, Vy, Vx1, Vx2)
 
                     L1 += -dL1 * df
                     L2 += -dL2 * df
 
-                    If Abs(dL1 * df) > 1.0 Then L1 = L1ant
-                    If Abs(dL2 * df) > 1.0 Then L2 = L2ant
+                    If Abs(dL1 * df) > 1.0 Or Abs(dL2 * df) > 1.0 Then
+                        L1 = L1ant
+                        L2 = L2ant
+                    End If
 
                     If L1 < 0 Then L1 = 0.0
                     If L2 < 0 Then L2 = 0.0
