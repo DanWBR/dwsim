@@ -240,20 +240,29 @@ Namespace UnitOperations
 
                     s2_s1 = 1.5 * _orificediameter
                     L1 = 1
+
                     L2 = 0.47
 
             End Select
 
-            Dim ReD, Cd, DP As Double
+            Dim ReD, Cd, DP, c1, c2, c3, M2, A As Double
 
-            ReD = Wi * _orificediameter / (A1 * mum)
-            If L1 < 0.4333 Then
-                Cd = 0.5959 + 0.312 * beta ^ 2.1 - 0.184 * beta ^ 8 + 0.0029 * beta ^ 2.5 * (10 ^ 6 / ReD) ^ 0.75 + 0.09 * L1 * (beta ^ 4 / (1 - beta ^ 4)) - 0.0337 * L2 * beta ^ 3
+            ReD = Wi * _internaldiameter / (A1 * mum)
+
+            M2 = 2 * L2 / (1 - beta)
+            A = (19000 * beta / ReD) ^ 0.8
+
+            c1 = 0.5961 + 0.0261 * beta ^ 2 - 0.216 * beta ^ 8 + 0.000521 * (10 ^ 6 * beta / ReD) ^ 0.7 + (0.0188 + 0.0063 * A) * beta ^ 3.5 * (10 ^ 6 / ReD) ^ 0.3
+            c2 = (0.043 + 0.08 * Math.Exp(-10 * L1) - 0.123 * Math.Exp(-7 * L1)) * (1 - 0.11 * A) * beta ^ 4 / (1 - beta ^ 4) - 0.031 * (M2 - 0.8 * M2 ^ 1.1) * beta ^ 1.3
+            If _internaldiameter * 1000 < 71.12 Then
+                c3 = 0.011 * (0.75 - beta) * (2.8 - (_internaldiameter * 1000) / 25.4)
             Else
-                Cd = 0.5959 + 0.312 * beta ^ 2.1 - 0.184 * beta ^ 8 + 0.0029 * beta ^ 2.5 * (10 ^ 6 / ReD) ^ 0.75 + 0.039 * L1 * (beta ^ 4 / (1 - beta ^ 4)) - 0.0337 * L2 * beta ^ 3
+                c3 = 0
             End If
+            Cd = c1 + c2 + c3
 
-            DP = (Wi / (_corrfactor * Cd * A2)) ^ 2 * (1 - beta ^ 4) / (2 * rhom)
+            'DP = (Wi / (_corrfactor * Cd * A2)) ^ 2 * (1 - beta ^ 4) / (2 * rhom)
+            DP = rhom / 2 * (Wi / rhom / (_corrfactor * Cd / (1 - beta ^ 4) ^ 0.5 * A2)) ^ 2
             DP = DP + (rhom * 9.8 * (s2_s1))
 
             _orificeDP = DP
