@@ -66,7 +66,7 @@ Version 6.4.0
 
 Author              Description
 Daniel Medeiros     Fixed stability and reliability issues with equilibrium calculations
-Gregor Reichert     Fixed a bug in Simple LLE Flash
+Gregor Reichert     Fixed bugs in Simple LLE and Nested Loops VLLE Flashes
 Daniel Medeiros     Optimized Automation2 flowsheet loading time
 Anders Andreasen    Implemented ANSI/IEC Valve sizing for Steady State with Masoneilan two-phase equation
 Daniel Medeiros     Fixed some bugs in Heat Exchanger and Pump Unit Ops
