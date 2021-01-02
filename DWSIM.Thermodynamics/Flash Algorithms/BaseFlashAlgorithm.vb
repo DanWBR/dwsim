@@ -1160,21 +1160,23 @@ will converge to this solution.")
             Dim L1, L2 As Double
             Dim Vx1, Vx2 As Double()
 
+            If L = 0 Then L = 1
             L1 = L
             L2 = 0.0
 
             Vx1 = Vx.Clone()
             Vx2 = Vx.Clone()
 
+            'if a second liquid phase is detected, estimate composition
             If stresult.Count > 0 Then
 
                 Dim validsolutions = stresult.Where(Function(s) s.Max > 0.5).ToList()
 
                 Dim fcl(n), fcv(n) As Double
 
-                If validsolutions.Count > 0 Then
-
-                    ' select the composition which gives the lowest gibbs energy.
+                If validsolutions.Count > 1 Then
+                    ' select the solution which gives the lowest gibbs energy.
+                    ' Take this solution as composition of phase 2
 
                     Dim Gt0 As Double = 100000.0, Gt As Double, ft() As Double, it As Integer
                     i = 0
@@ -1197,43 +1199,22 @@ will converge to this solution.")
                     Vx2 = stresult(0)
                 End If
 
-                Dim vx1e(n) As Double
-
                 'calculate L2
-
                 Dim maxL2 = Vx2.Max
                 Dim maxL2i = Vx2.ToList().IndexOf(maxL2)
+                L2 = Vx(maxL2i) * maxL2
 
-                L2 = Vx(maxL2i) * L * maxL2
-
-                For i = 0 To n
-                    Vx1(i) = (1 - L2) * Vx(i) - L2 * Vx2(i)
-                    If Vx1(i) < 0.0 Then Vx1(i) = 0.0
-                Next
-
-                L1 = L - L2
-
-                If L1 < 0.0# Then
-                    L1 = Abs(L1)
-                    L2 = 1 - L1
-                End If
-
-                Dim sumvx2 As Double
-                For i = 0 To n
-                    sumvx2 += Abs(Vx1(i))
-                Next
-
-                For i = 0 To n
-                    Vx1(i) = Abs(Vx1(i)) / sumvx2
-                Next
-
-                Return New Object() {L1, Vx1, L2, Vx2}
-
-            Else
-
-                Return New Object() {L1, Vx1, L2, Vx2}
+                'calculate L1
+                L1 = 1 - L2
+                Vx1 = Vx.SubtractY(Vx2.MultiplyConstY(L2)).MultiplyConstY(1 / L1)
 
             End If
+
+            'adjust sum of L1 and L2 to specified total liquid fraction L 
+            L1 *= L
+            L2 *= L
+
+            Return New Object() {L1, Vx1, L2, Vx2}
 
         End Function
 

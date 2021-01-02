@@ -870,7 +870,7 @@ out:
 
                 'adjust boiling point by logarithmic interpolation
                 Dim cnt As Integer
-                Dim Pn, P1, P2, lnP, lnP1, lnP2, T1, T2 As Double
+                Dim Pn, P1, P2, lnP, lnP1, lnP2, T1, T2, dTP As Double
 
                 lnP = Log(P)
                 cnt = 0
@@ -887,7 +887,14 @@ out:
                         P2 = P2 + Vx1(i) * gamma1(i) * PP.AUX_PVAPi(i, T2)
                     Next
                     lnP2 = Log(P2)
-                    T = T1 + (T2 - T1) * (lnP - lnP1) / (lnP2 - lnP1)
+                    dTP = (T2 - T1) * (lnP - lnP1) / (lnP2 - lnP1)
+
+                    'limit temperature change to avoid problems near aceotropic point
+                    If Abs(dTP) > 40 Then dTP = 40 * Sign(dTP)
+                    T = T1 + dTP
+                    If T < 200 Then T = 200
+                    If T > 700 Then T = 700
+
                     Pn = 0
                     For i = 0 To n
                         Pn = Pn + Vx1(i) * gamma1(i) * PP.AUX_PVAPi(i, T)
