@@ -67,10 +67,10 @@ Namespace UnitOperations
         Public Enum CalculationMode
             DeltaP = 0
             OutletPressure = 1
-            Kv_General = 5
-            Kv_Steam = 4
             Kv_Liquid = 2
             Kv_Gas = 3
+            Kv_Steam = 4
+            Kv_General = 5
         End Enum
 
         Public Sub New()
@@ -213,15 +213,16 @@ Namespace UnitOperations
 
                         P2 = oms.GetPressure
 
-                        If CalcMode = CalculationMode.Kv_General Or CalculationMode.Kv_Gas Or CalculationMode.Kv_Liquid Then
-                            If ims.Phases(1).Properties.molarfraction = 1 Then
+
+                        If CalcMode = CalculationMode.Kv_General Or CalcMode = CalculationMode.Kv_Gas Or CalcMode = CalculationMode.Kv_Liquid Then
+                            If ims.Phases(1).Properties.molarfraction = 1 Or CalcMode = CalculationMode.Kv_Liquid Then
                                 'Pv = ims.PropertyPackage.AUX_PVAPM(Ti)
                                 'Pc = ims.PropertyPackage.AUX_PCM(PropertyPackages.Phase.Liquid)
                                 'rhol = ims.Phases(1).Properties.density.GetValueOrDefault
 
                                 'Wi = WLiquid(Kvc, P1 / 100000.0, P2 / 100000.0, rhol, Pv / 100000.0, Pc / 100000.0)
                                 Wi = Kvc * (1000.0 * rho * (P1 - P2) / 100000.0) ^ 0.5 / 3600
-                            ElseIf ims.Phases(2).Properties.molarfraction = 1 Then
+                            ElseIf ims.Phases(2).Properties.molarfraction = 1 Or CalcMode = CalculationMode.Kv_Gas Then
                                 ims.PropertyPackage.CurrentMaterialStream = ims
                                 'rhog = ims.PropertyPackage.AUX_VAPDENS(Ti, P1)
                                 'Cp_ig = ims.PropertyPackage.AUX_CPm(PropertyPackages.Phase.Vapor, Ti) * ims.Phases(2).Properties.molecularWeight()
@@ -264,7 +265,7 @@ Namespace UnitOperations
                         oms.SetMassFlow(Wi)
 
                     ElseIf ims.DynamicsSpec = Dynamics.DynamicsSpecType.Flow And
-                        oms.DynamicsSpec = Dynamics.DynamicsSpecType.Pressure Then
+                                oms.DynamicsSpec = Dynamics.DynamicsSpecType.Pressure Then
 
                         'valid! calculate P1
 
@@ -274,10 +275,10 @@ Namespace UnitOperations
 
                         P2 = oms.GetPressure()
 
-                        If CalcMode = CalculationMode.Kv_General Or CalculationMode.Kv_Gas Or CalculationMode.Kv_Liquid Then
-                            If ims.Phases(1).Properties.molarfraction = 1 Then
+                        If CalcMode = CalculationMode.Kv_General Or CalcMode = CalculationMode.Kv_Gas Or CalcMode = CalculationMode.Kv_Liquid Then
+                            If ims.Phases(1).Properties.molarfraction = 1 Or CalcMode = CalculationMode.Kv_Liquid Then
                                 P1 = P2 / 100000.0 + 1 / (1000.0 * rho) * (Wi * 3600 / Kvc) ^ 2
-                            ElseIf ims.Phases(2).Properties.molarfraction = 1 Then
+                            ElseIf ims.Phases(2).Properties.molarfraction = 1 Or CalcMode = CalculationMode.Kv_Gas Then
                                 ims.PropertyPackage.CurrentMaterialStream = ims
                                 rhog20 = ims.PropertyPackage.AUX_VAPDENS(273.15, 101325)
                                 P1 = P2 / 100000.0 + Ti / rhog20 / (P2 / 100000) * (519 * Kvc / (Wi * 3600)) ^ -2
@@ -295,8 +296,9 @@ Namespace UnitOperations
                         End If
                         P1 = P1 * 100000.0
                         ims.SetPressure(P1)
+
                     ElseIf ims.DynamicsSpec = Dynamics.DynamicsSpecType.Pressure And
-                        oms.DynamicsSpec = Dynamics.DynamicsSpecType.Flow Then
+                                oms.DynamicsSpec = Dynamics.DynamicsSpecType.Flow Then
 
                         Wi = oms.GetMassFlow
 
@@ -304,13 +306,14 @@ Namespace UnitOperations
 
                         ims.SetMassFlow(Wi)
 
-                        'valid! calculate P2
 
-                        If CalcMode = CalculationMode.Kv_General Or CalculationMode.Kv_Gas Or CalculationMode.Kv_Liquid Then
-                            If ims.Phases(1).Properties.molarfraction = 1 Then
+                        'valid! Calculate P2
+
+                        If CalcMode = CalculationMode.Kv_General Or CalcMode = CalculationMode.Kv_Gas Or CalcMode = CalculationMode.Kv_Liquid Then
+                            If ims.Phases(1).Properties.molarfraction = 1 Or CalcMode = CalculationMode.Kv_Liquid Then
                                 P2 = P1 / 100000.0 - 1 / (1000.0 * rho) * (Wi * 3600 / Kvc) ^ 2
                                 P2 = P2 * 100000.0
-                            ElseIf ims.Phases(2).Properties.molarfraction = 1 Then
+                            ElseIf ims.Phases(2).Properties.molarfraction = 1 Or CalcMode = CalculationMode.Kv_Gas Then
                                 ims.PropertyPackage.CurrentMaterialStream = ims
                                 rhog20 = ims.PropertyPackage.AUX_VAPDENS(273.15, 101325)
                                 Dim roots = MathOps.Quadratic.quadForm(-rhog20, rhog20 * P1 / 100000, -Ti * (519 * Kvc / (Wi * 3600)) ^ -2)
@@ -632,14 +635,14 @@ Namespace UnitOperations
                     Kv = Wi * 3600 / 31.62 * (2 * v2 / (P1 / 100000.0)) ^ 0.5
                 End If
             Else
-                If ims.Phases(2).Properties.molarfraction = 1 Then
+                If ims.Phases(2).Properties.molarfraction = 1 Or CalcMode = CalculationMode.Kv_Gas Then
                     ims.PropertyPackage.CurrentMaterialStream = ims
                     rho = ims.PropertyPackage.AUX_VAPDENS(Ti, P1)
 
                     Cp_ig = ims.PropertyPackage.AUX_CPm(PropertyPackages.Phase.Vapor, Ti) * ims.Phases(2).Properties.molecularWeight()
                     k = Cp_ig / (Cp_ig - 8.314)
                     Kv = KvGas(Wi * 3600, P1 / 100000.0, P2 / 100000.0, k, rho)
-                ElseIf ims.Phases(1).Properties.molarfraction = 1 Then
+                ElseIf ims.Phases(1).Properties.molarfraction = 1 Or CalcMode = CalculationMode.Kv_Liquid Then
                     Pv = ims.PropertyPackage.AUX_PVAPM(Ti)
                     Pc = ims.PropertyPackage.AUX_PCM(PropertyPackages.Phase.Liquid)
                     rho = ims.Phases(1).Properties.density.GetValueOrDefault
@@ -788,14 +791,14 @@ Namespace UnitOperations
 
 
             If CalcMode <> CalculationMode.DeltaP And CalcMode <> CalculationMode.OutletPressure Then
-                If ims.Phases(2).Properties.molarfraction = 1 Then
+                If ims.Phases(2).Properties.molarfraction = 1 Or CalcMode = CalculationMode.Kv_Gas Then
                     ims.PropertyPackage.CurrentMaterialStream = ims
                     rhog = ims.PropertyPackage.AUX_VAPDENS(Ti, Pi)
                     Cp_ig = ims.PropertyPackage.AUX_CPm(PropertyPackages.Phase.Vapor, Ti) * ims.Phases(2).Properties.molecularWeight()
                     k = Cp_ig / (Cp_ig - 8.314)
                     P2 = P2_Gas(Wi * 3600, Kvc, Pi / 100000.0, k, rhog) * 100000.0
                     IObj?.Paragraphs.Add(String.Format("Calculated Outlet Pressure P2 = {0} Pa", P2))
-                ElseIf ims.Phases(1).Properties.molarfraction = 1 Then
+                ElseIf ims.Phases(1).Properties.molarfraction = 1 Or CalcMode = CalculationMode.Kv_Liquid Then
                     Pv = ims.PropertyPackage.AUX_PVAPM(Ti)
                     Pc = ims.PropertyPackage.AUX_PCM(PropertyPackages.Phase.Liquid)
                     rhol = ims.Phases(1).Properties.density.GetValueOrDefault
