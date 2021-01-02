@@ -124,14 +124,15 @@ Public Class EditingForm_Valve
                     cbCalcMode.SelectedIndex = 0
                 Case UnitOperations.Valve.CalculationMode.DeltaP
                     cbCalcMode.SelectedIndex = 1
-                Case UnitOperations.Valve.CalculationMode.Kv_General
-                    cbCalcMode.SelectedIndex = 2
-                Case UnitOperations.Valve.CalculationMode.Kv_Steam
-                    cbCalcMode.SelectedIndex = 3
                 Case UnitOperations.Valve.CalculationMode.Kv_Liquid
-                    cbCalcMode.SelectedIndex = 4
+                    cbCalcMode.SelectedIndex = 2
                 Case UnitOperations.Valve.CalculationMode.Kv_Gas
+                    cbCalcMode.SelectedIndex = 3
+                Case UnitOperations.Valve.CalculationMode.Kv_Steam
+                    cbCalcMode.SelectedIndex = 4
+                Case UnitOperations.Valve.CalculationMode.Kv_General
                     cbCalcMode.SelectedIndex = 5
+
             End Select
 
             tbOutletPressure.Text = su.Converter.ConvertFromSI(units.pressure, uobj.OutletPressure.GetValueOrDefault).ToString(nf)
@@ -203,7 +204,7 @@ Public Class EditingForm_Valve
                 tbKvOpRel.Enabled = True
                 tbOp.Enabled = True
                 chkEnableKvOpRel.Enabled = True
-                SimObject.CalcMode = UnitOperations.Valve.CalculationMode.Kv_General
+                SimObject.CalcMode = UnitOperations.Valve.CalculationMode.Kv_Liquid
                 btnCalcKv.Enabled = True
             Case 3
                 tbPressureDrop.Enabled = False
@@ -212,7 +213,7 @@ Public Class EditingForm_Valve
                 tbKvOpRel.Enabled = True
                 tbOp.Enabled = True
                 chkEnableKvOpRel.Enabled = True
-                SimObject.CalcMode = UnitOperations.Valve.CalculationMode.Kv_Steam
+                SimObject.CalcMode = UnitOperations.Valve.CalculationMode.Kv_Gas
                 btnCalcKv.Enabled = True
             Case 4
                 tbPressureDrop.Enabled = False
@@ -221,7 +222,7 @@ Public Class EditingForm_Valve
                 tbKvOpRel.Enabled = True
                 tbOp.Enabled = True
                 chkEnableKvOpRel.Enabled = True
-                SimObject.CalcMode = UnitOperations.Valve.CalculationMode.Kv_Liquid
+                SimObject.CalcMode = UnitOperations.Valve.CalculationMode.Kv_Steam
                 btnCalcKv.Enabled = True
             Case 5
                 tbPressureDrop.Enabled = False
@@ -230,8 +231,9 @@ Public Class EditingForm_Valve
                 tbKvOpRel.Enabled = True
                 tbOp.Enabled = True
                 chkEnableKvOpRel.Enabled = True
-                SimObject.CalcMode = UnitOperations.Valve.CalculationMode.Kv_Gas
+                SimObject.CalcMode = UnitOperations.Valve.CalculationMode.Kv_General
                 btnCalcKv.Enabled = True
+
         End Select
 
     End Sub
