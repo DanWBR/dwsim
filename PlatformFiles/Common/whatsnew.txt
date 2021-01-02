@@ -1,1 +1,37 @@
 Version 6.4.0
+
+Author              Description
+Daniel Medeiros     Fixed stability and reliability issues with equilibrium calculations
+Gregor Reichert     Fixed a bug in Simple LLE Flash
+Daniel Medeiros     Optimized Automation2 flowsheet loading time
+Anders Andreasen    Implemented ANSI/IEC Valve sizing for Steady State with Masoneilan two-phase equation
+Daniel Medeiros     Fixed some bugs in Heat Exchanger and Pump Unit Ops
+Anders Andreasen    Reworked Valve Unit Op to fully IEC 60534 compliant for turbulent flow both choked and no-choked conditions
+Anders Andreasen    Updated Petukhov heat transfer coefficient correlation to a version with better capabilities in transition flow (ref. Cengel)
+Daniel Medeiros     Added outlet Vapor Fraction calculation mode to Heat Exchanger
+Anders Andreasen	Fixed a bug in Orifice Plate calculation
+Alexander Semenyak  Fixed array access in PengRobinson78
+Daniel Medeiros     Fixed a bug with LLE diagram (Classic UI)
+Anders Andreasen    Fixed a bug with Lockhart-Martinelli pressure drop correlation
+Anders Andreasen    Bug fix unit conversion SI/Emeprial in Beggs and Brill two-phase friction factor
+Anders Andreasen    Fixed a problem with equvalent length from fitting being interger instead of double
+Anders Andreasen    Moving pipe fittings into temperature loop to allow pipe flow correlation to be used for dP calc
+Anders Andreasen    Changed mix liquid mixing rules for viscosity and thermal conductivity
+Anders Andreasen    Added emulsion model, and enabling different viscosity and thermal conductivity for different liquid phase equilibrium reaction basis units
+Daniel Medeiros     Fixed a bug in PFR model
+Daniel Medeiros     Fixed conversion of molar concentration PFR/CSTR
+Anders Andreasen    Removed JT effect in Pipe Unit Op, and replaced with Emulsion check
+Daniel Medeiros     Added Reboiled/Refluxed Absorber modes for Rigorous Distillation Column Unit Op
+Daniel Medeiros     Fixed flowsheet solver stop request
+Daniel Medeiros     Display currently calculating objects in green color
+Daniel Medeiros     Fixed conversion from mm to m
+Anders Andreasen    Small bug fix in Pc Lee-Kessler, added a Riazi method for Pc/Tc
+Anders Andreasen    Changed C7+ Petroleum characterisation to handle a single component
+Daniel Medeiros     Fixed issue 89: stream report error
+Daniel Medeiros     Fixed issue 86: SLE-Flash phase composition not 100%
+Daniel Medeiros     Fixed issue 83: Binary Envelope - Flash algo not suitable for LLE
+Daniel Medeiros     Fixed issue 82: PVF and TVF flash - no second liquid phase
+Daniel Medeiros     Fixed issue 64: Rugosity and thermal conductivity not displayed for default materials
+Daniel Medeiros     Fixed issue 55: Redundant Kij for Water and CO2 
+Daniel Medeiros     Fixed issue 89: stream report error
+Daniel Medeiros     Other bug fixes and enhancements
