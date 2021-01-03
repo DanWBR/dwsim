@@ -117,6 +117,8 @@ Public Class FormFlowsheet
 
     Private listeningaction As Action(Of String, Interfaces.IFlowsheet.MessageType)
 
+    Friend _translatefunction As Func(Of String, String)
+
     Public Property SupressMessages As Boolean = False
 
 #End Region
@@ -2675,7 +2677,10 @@ Public Class FormFlowsheet
     End Property
 
     Public Function GetTranslatedString1(text As String) As String Implements IFlowsheet.GetTranslatedString, IFlowsheetGUI.GetTranslatedString
-        Dim returntext As String = text
+        If _translatefunction IsNot Nothing Then
+            Return _translatefunction.Invoke(text)
+        End If
+        Dim returntext As String
         returntext = DWSIM.App.GetLocalString(text)
         If returntext <> text Then Return returntext
         returntext = DWSIM.App.GetPropertyName(text)
@@ -3254,6 +3259,10 @@ Public Class FormFlowsheet
                         End Sub)
         End If
 
+    End Sub
+
+    Public Sub SetTranslateTextExternalFunction(act As Func(Of String, String)) Implements IFlowsheet.SetTranslateTextExternalFunction
+        _translatefunction = act
     End Sub
 
 #End Region

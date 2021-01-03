@@ -180,6 +180,8 @@
 
     Function GetSpreadsheetObject() As Object
 
+    Sub SetTranslateTextExternalFunction(act As Func(Of String, String))
+
 End Interface
 
 ''' <summary>

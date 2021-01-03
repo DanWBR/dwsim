@@ -65,6 +65,8 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
     Public Property ScriptKeywordsU As String = ""
 
+    Protected _translatefunction As Func(Of String, String)
+
     Public Sub AddCompoundsToMaterialStream(ms As IMaterialStream) Implements IFlowsheet.AddCompoundsToMaterialStream
         For Each phase As IPhase In ms.Phases.Values
             For Each comp In Me.Options.SelectedComponents.Values
@@ -256,6 +258,10 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
     End Function
 
     Public Function GetTranslatedString(text As String) As String Implements IFlowsheet.GetTranslatedString
+
+        If _translatefunction IsNot Nothing Then
+            Return _translatefunction.Invoke(text)
+        End If
 
         If rm Is Nothing Then
             rm = New Resources.ResourceManager("DWSIM.FlowsheetBase.Strings", MyBase.GetType.GetTypeInfo.BaseType.GetTypeInfo.Assembly)
@@ -2750,6 +2756,10 @@ Label_00CC:
 
     Public Sub RefreshInterface() Implements IFlowsheet.RefreshInterface
         UpdateInterface()
+    End Sub
+
+    Public Sub SetTranslateTextExternalFunction(act As Func(Of String, String)) Implements IFlowsheet.SetTranslateTextExternalFunction
+        _translatefunction = act
     End Sub
 End Class
 

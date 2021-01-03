@@ -174,6 +174,12 @@ Namespace DWSIM
 
         Public Shared Function GetLocalString(ByVal id As String) As String
 
+            If My.Application.ActiveSimulation IsNot Nothing Then
+                If My.Application.ActiveSimulation._translatefunction IsNot Nothing Then
+                    Return My.Application.ActiveSimulation._translatefunction.Invoke(id)
+                End If
+            End If
+
             If My.Application._ResourceManager Is Nothing Then
 
                 Dim cultureinfo As String = "en"
@@ -202,9 +208,16 @@ Namespace DWSIM
             Else
                 Return ""
             End If
+
         End Function
 
         Public Shared Function GetPropertyName(ByVal PropID As String, Optional ByRef fp As FormMain = Nothing) As String
+
+            If My.Application.ActiveSimulation IsNot Nothing Then
+                If My.Application.ActiveSimulation._translatefunction IsNot Nothing Then
+                    Return My.Application.ActiveSimulation._translatefunction.Invoke(PropID)
+                End If
+            End If
 
             If My.Application._ResourceManager Is Nothing Then
 
