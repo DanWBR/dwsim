@@ -853,7 +853,6 @@ Partial Class FormFlowsheet
     Friend WithEvents CompoundCreatorWizardTSMI As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ConsoleOutputTSMI As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents InspectorTSMI As ToolStripMenuItem
-    Friend WithEvents ToolStrip1 As ToolStrip
     Friend WithEvents ToolStripButton1 As ToolStripButton
     Friend WithEvents tsbCalc As ToolStripButton
     Friend WithEvents tsbAbortCalc As ToolStripButton
@@ -880,4 +879,5 @@ Partial Class FormFlowsheet
     Friend WithEvents tsbDynIntegrator As ToolStripButton
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
     Friend WithEvents FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem As ToolStripMenuItem
+    Public WithEvents ToolStrip1 As ToolStrip
 End Class
