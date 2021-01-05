@@ -1894,7 +1894,7 @@ Namespace UnitOperations
                     IObj?.SetCurrent()
                     tmp = StIn0.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2 - DP2, H21, T21)
                     T21 = tmp.CalculatedTemperature.GetValueOrDefault()
-                    OutletVaporFraction2 = tmp.GetVaporPhaseMoleFraction()
+                    OutletVaporFraction1 = tmp.GetVaporPhaseMoleFraction()
 
                     If T10 > T20 Then
                         Tc1 = T20

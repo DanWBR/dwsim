@@ -437,7 +437,9 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             IObj?.SetCurrent()
 
-            If Me.FlashSettings(Interfaces.Enums.FlashSetting.NL_FastMode) = False OrElse PP.AUX_IS_SINGLECOMP(Phase.Mixture) Then
+            Dim hres = PerformHeuristicsTest(Vz, Tref, P, PP)
+
+            If Me.FlashSettings(Interfaces.Enums.FlashSetting.NL_FastMode) = False Or PP.AUX_IS_SINGLECOMP(Phase.Mixture) Or hres.SolidPhase Then
                 IObj?.Paragraphs.Add("Using the normal version of the PH Flash Algorithm.")
 
                 IObj?.Close()
@@ -462,7 +464,9 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             IObj?.SetCurrent()
 
-            If Me.FlashSettings(Interfaces.Enums.FlashSetting.NL_FastMode) = False OrElse PP.AUX_IS_SINGLECOMP(Phase.Mixture) Then
+            Dim hres = PerformHeuristicsTest(Vz, Tref, P, PP)
+
+            If Me.FlashSettings(Interfaces.Enums.FlashSetting.NL_FastMode) = False Or PP.AUX_IS_SINGLECOMP(Phase.Mixture) Or hres.SolidPhase Then
                 IObj?.Paragraphs.Add("Using the normal version of the PS Flash Algorithm.")
                 IObj?.Close()
                 Return Flash_PS_2(Vz, P, S, Tref, PP, ReuseKI, PrevKi)
@@ -848,6 +852,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     IObj?.SetCurrent()
                     resultFlash = Herror("PV", V, P, Vz, PP, True, Ki)
                     H1 = resultFlash(0)
+                    If V = 1.0 Or V = 0.0 And Math.Abs(H1) < 0.01 Then Exit Do
                     IObj?.Paragraphs.Add(String.Format("Enthalpy Error (Spec - Calculated): {0}", H1))
                 Loop Until Abs(H1) < itol Or ecount > maxitEXT
 
@@ -1372,6 +1377,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     IObj?.SetCurrent()
                     resultFlash = Serror("PV", V, P, Vz, PP, True, Ki)
                     S1 = resultFlash(0)
+                    If V = 1.0 Or V = 0.0 And Math.Abs(S1) < 0.01 Then Exit Do
                     IObj?.Paragraphs.Add(String.Format("Entropy Error (Spec - Calculated): {0}", S1))
                 Loop Until Abs(S1) < itol Or ecount > maxitEXT
 
