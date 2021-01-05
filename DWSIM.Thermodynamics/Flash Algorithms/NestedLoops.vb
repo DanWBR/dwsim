@@ -829,6 +829,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 Dim H1, H2, V1, V2 As Double
                 ecount = 0
                 V = 0
+                Dim hres = PerformHeuristicsTest(Vz, T, P, PP)
+                If hres.SolidPhase Then V = 0.5
                 H1 = Hb
                 Do
 
@@ -949,29 +951,54 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             End If
 
-            If PTFlashFunction IsNot Nothing Then
-                Dim tmp = PTFlashFunction.Invoke(Vz, P, T, PP, ReuseKI, Ki)
+            If V > 0 And V < 1 Then
+
+                'partial vaporization.
+                Dim tmp As Object
+                Dim hres = PerformHeuristicsTest(Vz, T, P, PP)
+                If hres.SolidPhase Then
+                    tmp = New NestedLoopsSLE().Flash_PV(Vz, P, V, 0.0, PP, ReuseKI, Ki)
+                Else
+                    tmp = Me.Flash_PV(Vz, P, V, 0.0#, PP, ReuseKI, Ki)
+                End If
                 L1 = tmp(0)
                 V = tmp(1)
                 Vx1 = tmp(2)
                 Vy = tmp(3)
-                ecount = tmp(4)
-                L2 = tmp(5)
-                Vx2 = tmp(6)
-                Sx = tmp(7)
-                Vs = tmp(8)
+                T = tmp(4)
+                L2 = tmp(7)
+                Vx2 = tmp(8)
+                Sx = tmp(9)
+                Vs = tmp(10)
+
             Else
-                Dim tmp = Me.Flash_PT(Vz, P, T, PP, ReuseKI, Ki)
-                L1 = tmp(0)
-                V = tmp(1)
-                Vx1 = tmp(2)
-                Vy = tmp(3)
-                ecount = tmp(4)
-                L2 = tmp(5)
-                Vx2 = tmp(6)
-                Sx = tmp(7)
-                Vs = tmp(8)
+
+                If PTFlashFunction IsNot Nothing Then
+                    Dim tmp = PTFlashFunction.Invoke(Vz, P, T, PP, ReuseKI, Ki)
+                    L1 = tmp(0)
+                    V = tmp(1)
+                    Vx1 = tmp(2)
+                    Vy = tmp(3)
+                    ecount = tmp(4)
+                    L2 = tmp(5)
+                    Vx2 = tmp(6)
+                    Sx = tmp(7)
+                    Vs = tmp(8)
+                Else
+                    Dim tmp = Me.Flash_PT(Vz, P, T, PP, ReuseKI, Ki)
+                    L1 = tmp(0)
+                    V = tmp(1)
+                    Vx1 = tmp(2)
+                    Vy = tmp(3)
+                    ecount = tmp(4)
+                    L2 = tmp(5)
+                    Vx2 = tmp(6)
+                    Sx = tmp(7)
+                    Vs = tmp(8)
+                End If
+
             End If
+
             For i = 0 To n
                 Ki(i) = Vy(i) / Vx1(i)
             Next
@@ -2525,7 +2552,13 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     T = X
                 End If
             Else
-                Dim tmp = Me.Flash_PV(Vz, P, X, 0.0#, PP, ReuseKi, Ki)
+                Dim tmp As Object
+                Dim hres = PerformHeuristicsTest(Vz, 298.15, P, PP)
+                If hres.SolidPhase Then
+                    tmp = New NestedLoopsSLE().Flash_PV(Vz, P, X, 0.0, PP, ReuseKi, Ki)
+                Else
+                    tmp = Me.Flash_PV(Vz, P, X, 0.0#, PP, ReuseKi, Ki)
+                End If
                 L1 = tmp(0)
                 V = tmp(1)
                 Vx1 = tmp(2)

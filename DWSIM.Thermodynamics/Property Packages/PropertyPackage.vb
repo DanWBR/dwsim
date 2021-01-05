@@ -6856,7 +6856,7 @@ Final3:
 
             Dim val As Double
 
-            If cprop.OriginalDB = "ChemSep" Or (cprop.OriginalDB = "User" And cprop.SolidDensityEquation <> "") Then
+            If cprop.OriginalDB = "ChemSep" Or (cprop.OriginalDB = "User" And cprop.SolidHeatCapacityEquation <> "") Then
                 Dim A, B, C, D, E, result As Double
                 Dim eqno As String = cprop.SolidHeatCapacityEquation
                 Dim mw As Double = cprop.Molar_Weight

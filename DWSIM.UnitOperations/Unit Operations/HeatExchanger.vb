@@ -1432,8 +1432,8 @@ Namespace UnitOperations
 
                                                  For i As Integer = 1 To nsteps
 
-                                                     tmpstr.Phases(0).Properties.enthalpy = Hc1 + i / nsteps * dhc
-                                                     tmpstr.Phases(0).Properties.pressure = Pc1 - i / nsteps * ColdSidePressureDrop
+                                                     tmpstr.Phases(0).Properties.enthalpy = Hc1 + Convert.ToDouble(i) / Convert.ToDouble(nsteps) * dhc
+                                                     tmpstr.Phases(0).Properties.pressure = Pc1 - Convert.ToDouble(i) / Convert.ToDouble(nsteps) * ColdSidePressureDrop
                                                      tmpstr.SpecType = StreamSpec.Pressure_and_Enthalpy
                                                      IObj?.SetCurrent()
                                                      tmpstr.Calculate(True, True)
@@ -1449,8 +1449,8 @@ Namespace UnitOperations
 
                                                  For i As Integer = 1 To nsteps
 
-                                                     tmpstr.Phases(0).Properties.enthalpy = Hh1 - i / nsteps * dhh
-                                                     tmpstr.Phases(0).Properties.pressure = Ph1 - i / nsteps * HotSidePressureDrop
+                                                     tmpstr.Phases(0).Properties.enthalpy = Hh1 - Convert.ToDouble(i) / Convert.ToDouble(nsteps) * dhh
+                                                     tmpstr.Phases(0).Properties.pressure = Ph1 - Convert.ToDouble(i) / Convert.ToDouble(nsteps) * HotSidePressureDrop
                                                      tmpstr.SpecType = StreamSpec.Pressure_and_Enthalpy
                                                      IObj?.SetCurrent()
                                                      tmpstr.Calculate(True, True)
@@ -1459,7 +1459,7 @@ Namespace UnitOperations
 
                                                  Next
 
-                                                 If FlowDir = FlowDirection.CounterCurrent Then thprof.Reverse()
+                                                 'If FlowDir = FlowDirection.CounterCurrent Then thprof.Reverse()
 
                                                  For i As Integer = 0 To nsteps - 1
                                                      dtprof.Add(Abs(thprof(i) - tcprof(i)))
@@ -1482,11 +1482,7 @@ Namespace UnitOperations
                     Hc2 = Hc1 + dhc
                     Q = dhc * Wc
 
-                    If FlowDir = FlowDirection.CounterCurrent Then
-                        Tc2 = tcprof(0)
-                    Else
-                        Tc2 = tcprof(tcprof.Count - 1)
-                    End If
+                    Tc2 = tcprof.Last
 
                     Dim tmp As IFlashCalculationResult
 
@@ -1806,7 +1802,7 @@ Namespace UnitOperations
                     VF0 = StIn0.GetPhase("Vapor").Properties.molarfraction.GetValueOrDefault()
                     H10 = StIn0.GetMassEnthalpy()
 
-                    StIn0.PropertyPackage.CurrentMaterialStream = StInHot
+                    StIn0.PropertyPackage.CurrentMaterialStream = StIn0
                     IObj?.SetCurrent()
                     Dim tmp = StIn0.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureVaporFraction, P1 - DP1, OutletVaporFraction1, T10)
                     T11 = tmp.CalculatedTemperature.GetValueOrDefault()
