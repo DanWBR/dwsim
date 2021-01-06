@@ -24,6 +24,7 @@ Public Class FormImportCompoundDataChemeo
                 Panel1.BringToFront()
                 CurrentPanel = "Panel1"
                 btnPrev.Enabled = False
+                btnNext.Enabled = True
             Case "Panel3"
                 Panel2.BringToFront()
                 CurrentPanel = "Panel2"
