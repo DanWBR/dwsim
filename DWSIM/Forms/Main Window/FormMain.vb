@@ -1617,18 +1617,19 @@ Public Class FormMain
         data = xdoc.Element("DWSIM_Simulation_Data").Element("Compounds").Elements.ToList
 
         For Each xel As XElement In data
-            Try
-                Dim obj As New ConstantProperties
-                obj.LoadData(xel.Elements.ToList)
-                If My.Settings.IgnoreCompoundPropertiesOnLoad AndAlso AvailableComponents.ContainsKey(obj.Name) Then
-                    form.Options.SelectedComponents.Add(obj.Name, AvailableComponents(obj.Name))
-                Else
-                    form.Options.SelectedComponents.Add(obj.Name, obj)
-                End If
-            Catch ex As Exception
-                excs.Add(New Exception("Error Loading Compound Information", ex))
-            End Try
+            Dim obj As New ConstantProperties
+            obj.Name = xel.Element("Name").Value
+            If Not form.AvailableCompounds.ContainsKey(obj.Name) Then form.AvailableCompounds.Add(obj.Name, obj)
+            form.Options.SelectedComponents.Add(obj.Name, obj)
         Next
+
+        Parallel.ForEach(data, Sub(xel)
+                                   Try
+                                       form.Options.SelectedComponents(xel.Element("Name").Value).LoadData(xel.Elements.ToList)
+                                   Catch ex As Exception
+                                       excs.Add(New Exception("Error Loading Compound Information", ex))
+                                   End Try
+                               End Sub)
 
         If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(35)
 
@@ -1720,7 +1721,7 @@ Public Class FormMain
                 Dim id As String = xel.<Name>.Value
                 Dim obj As SharedClasses.UnitOperations.BaseClass = Nothing
                 If xel.Element("Type").Value.Contains("Streams.MaterialStream") Then
-                    obj = pp.ReturnInstance(xel.Element("Type").Value)
+                    obj = New Streams.MaterialStream()
                 Else
                     Dim uokey As String = xel.Element("ComponentDescription").Value
                     If ExternalUnitOperations.ContainsKey(uokey) Then

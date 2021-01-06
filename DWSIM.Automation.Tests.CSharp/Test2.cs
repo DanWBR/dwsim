@@ -5,6 +5,7 @@ using System.IO;
 using DWSIM.Interfaces.Enums.GraphicObjects;
 using DWSIM.Thermodynamics.Streams;
 using DWSIM.UnitOperations.UnitOperations;
+using System.Diagnostics;
 
 class Test2
 {
@@ -15,11 +16,28 @@ class Test2
 
         //create automation manager
 
-        DWSIM.Automation.Automation2 interf = new DWSIM.Automation.Automation2();
+        var swInterface = Stopwatch.StartNew();
+        var interf = new DWSIM.Automation.Automation2();
+        swInterface.Stop();
+        Console.WriteLine($"Interface created in {swInterface.ElapsedMilliseconds} ms");
 
-        DWSIM.Interfaces.IFlowsheet sim;
+        //for (int i = 0; i < 5; i++)
+        //{
+        //    var swCreateFlowsheet = Stopwatch.StartNew();
+        //    var sim0 = interf.CreateFlowsheet();
+        //    swCreateFlowsheet.Stop();
+        //    Console.WriteLine($"Flowsheet created in {swCreateFlowsheet.ElapsedMilliseconds} ms");
 
-        sim = interf.CreateFlowsheet();
+        //    var swFlowsheet = Stopwatch.StartNew();
+        //    var sim = interf.LoadFlowsheet("samples" + System.IO.Path.DirectorySeparatorChar + "Biodiesel Production.dwxmz");
+        //    swFlowsheet.Stop();
+        //    Console.WriteLine($"Flowsheet loaded in {swFlowsheet.ElapsedMilliseconds} ms");
+        //}
+
+        //Console.ReadKey();
+        //return;
+
+        var sim = interf.CreateFlowsheet();
 
         // add water
 

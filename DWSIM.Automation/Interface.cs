@@ -117,9 +117,11 @@ namespace DWSIM.Automation
         public Automation2()
         {
             GlobalSettings.Settings.AutomationMode = true;
-            Console.WriteLine("Initializing DWSIM in Automation Mode, please wait...");
+            Console.WriteLine("Initializing DWSIM Automation Interface...");
             app = UI.Desktop.Program.MainApp(null);
             app.Attach(this);
+            FlowsheetBase.FlowsheetBase.AddPropPacks();
+            Console.WriteLine("DWSIM Automation Interface initialized successfully.");
         }
 
         public Interfaces.IFlowsheet LoadFlowsheet(string filepath)

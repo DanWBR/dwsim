@@ -124,9 +124,8 @@
   <data name="tbConvTol.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Label5.TabIndex" type="System.Int32, mscorlib">
-    <value>43</value>
+  <data name="&gt;&gt;cbRebComp.Name" xml:space="preserve">
+    <value>cbRebComp</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="chkNoReboiler.Size" type="System.Drawing.Size, System.Drawing">
@@ -135,6 +134,7 @@
   <data name="tbCondVapFlow.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="TabConnections.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
@@ -146,6 +146,9 @@
   </data>
   <data name="chkNoReboiler.ToolTip" xml:space="preserve">
     <value />
+  </data>
+  <data name="&gt;&gt;InitialEstimatesPanel.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="tbConvTol.Size" type="System.Drawing.Size, System.Drawing">
     <value>168, 20</value>
@@ -177,8 +180,8 @@
   <data name="&gt;&gt;Label17.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;TabPage1.Name" xml:space="preserve">
-    <value>TabPage1</value>
+  <data name="&gt;&gt;ToolTip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label12.Name" xml:space="preserve">
     <value>Label12</value>
@@ -189,6 +192,9 @@
   <data name="Label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="cbCondSpec.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="PanelCondenser.TabIndex" type="System.Int32, mscorlib">
     <value>58</value>
   </data>
@@ -198,17 +204,11 @@
   <data name="TabReboiler.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="cbCondComp.Items7" xml:space="preserve">
-    <value>Razão de Refluxo</value>
-  </data>
   <data name="cbRebComp.Items" xml:space="preserve">
     <value>Carga Térmica</value>
   </data>
   <data name="cbCondPDropUnits.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="chkUseIE_VF.ToolTip1" xml:space="preserve">
-    <value>Use initial estimates for stage vapor interflows</value>
   </data>
   <data name="cbRebSpecUnits.Items1" xml:space="preserve">
     <value>Média das Entradas</value>
@@ -231,8 +231,8 @@
   <data name="&gt;&gt;Label15.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label7.TabIndex" type="System.Int32, mscorlib">
-    <value>46</value>
+  <data name="cbCondComp.Items7" xml:space="preserve">
+    <value>Razão de Refluxo</value>
   </data>
   <data name="tbCondVapFlow.ToolTip1" xml:space="preserve">
     <value />
@@ -244,9 +244,6 @@
     <value />
   </data>
   <data name="TabPage1.ToolTip1" xml:space="preserve">
-    <value />
-  </data>
-  <data name="TabControl2.ToolTip2" xml:space="preserve">
     <value />
   </data>
   <data name="TabPage1.ToolTip2" xml:space="preserve">
@@ -263,6 +260,9 @@
   </data>
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
     <value>390, 461</value>
+  </data>
+  <data name="Label5.TabIndex" type="System.Int32, mscorlib">
+    <value>43</value>
   </data>
   <data name="&gt;&gt;btnConfigurePP.Parent" xml:space="preserve">
     <value>TabGeneral</value>
@@ -284,6 +284,9 @@
   </data>
   <data name="&gt;&gt;cbCondSpec.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tbMaxIt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>168, 122</value>
   </data>
   <data name="TabInitialEstimates.Text" xml:space="preserve">
     <value>Estimativas Iniciais</value>
@@ -363,9 +366,6 @@
   <data name="Label2.ToolTip2" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;cbRebPressure.Name" xml:space="preserve">
-    <value>cbRebPressure</value>
-  </data>
   <data name="cbCondSpecUnits.TabIndex" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
@@ -410,6 +410,9 @@
   </data>
   <data name="&gt;&gt;InitialEstimatesPanel.Name" xml:space="preserve">
     <value>InitialEstimatesPanel</value>
+  </data>
+  <data name="Label7.TabIndex" type="System.Int32, mscorlib">
+    <value>46</value>
   </data>
   <data name="Label8.Text" xml:space="preserve">
     <value>Vazão de Produto Vapor</value>
@@ -501,9 +504,6 @@
   <data name="TabConnections.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="btnResults.ToolTip1" xml:space="preserve">
-    <value />
-  </data>
   <data name="TabCondenser.Text" xml:space="preserve">
     <value>Condensador</value>
   </data>
@@ -552,9 +552,6 @@
   <data name="&gt;&gt;tbCondPressure.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="TabPage1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="cbCondSpecUnits.ToolTip1" xml:space="preserve">
     <value />
   </data>
@@ -581,9 +578,6 @@
   </data>
   <data name="tbRebPressure.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
-  </data>
-  <data name="&gt;&gt;cbRebSpecUnits.ZOrder" xml:space="preserve">
-    <value>5</value>
   </data>
   <data name="TabCondenser.ToolTip1" xml:space="preserve">
     <value />
@@ -621,8 +615,11 @@
   <data name="Label4.Text" xml:space="preserve">
     <value>Pressão do Condensador</value>
   </data>
-  <data name="Label16.ToolTip2" xml:space="preserve">
-    <value />
+  <data name="chkUseIE_LF.Location" type="System.Drawing.Point, System.Drawing">
+    <value>44, 253</value>
+  </data>
+  <data name="&gt;&gt;TabControl3.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;TabConnections.Parent" xml:space="preserve">
     <value>TabControl2</value>
@@ -641,6 +638,9 @@
   </data>
   <data name="tabstrip1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
+  </data>
+  <data name="&gt;&gt;TabPage2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;chkUseIE_VF.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -684,6 +684,9 @@
   <data name="&gt;&gt;chkUseIE_C.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="TabCondenser.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
   <data name="tabstrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -708,12 +711,6 @@
   <data name="&gt;&gt;Label7.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="chkNoCondenser.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 15</value>
-  </data>
-  <data name="tabstrip1.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
   <data name="lblStatus.ToolTip1" xml:space="preserve">
     <value />
   </data>
@@ -735,9 +732,6 @@
   <data name="&gt;&gt;InitialEstimatesPanel.Parent" xml:space="preserve">
     <value>TabInitialEstimates</value>
   </data>
-  <data name="&gt;&gt;TabCondenser.Name" xml:space="preserve">
-    <value>TabCondenser</value>
-  </data>
   <data name="cbAbsorberMode.ToolTip1" xml:space="preserve">
     <value />
   </data>
@@ -752,6 +746,9 @@
   </data>
   <data name="&gt;&gt;lblTag.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cbPropPack.Location" type="System.Drawing.Point, System.Drawing">
+    <value>145, 209</value>
   </data>
   <data name="Label13.Text" xml:space="preserve">
     <value>Ligado a</value>
@@ -804,14 +801,14 @@
   <data name="TabReboiler.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;cbRebComp.Name" xml:space="preserve">
-    <value>cbRebComp</value>
-  </data>
-  <data name="cbCondSpec.ToolTip2" xml:space="preserve">
-    <value />
+  <data name="lblStatus.Text" xml:space="preserve">
+    <value>Objeto</value>
   </data>
   <data name="tbRebSpecValue.Size" type="System.Drawing.Size, System.Drawing">
     <value>84, 20</value>
+  </data>
+  <data name="Label19.TabIndex" type="System.Int32, mscorlib">
+    <value>56</value>
   </data>
   <data name="lblConnectedTo.ToolTip" xml:space="preserve">
     <value />
@@ -830,6 +827,9 @@
   </data>
   <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 22</value>
+  </data>
+  <data name="Label16.Text" xml:space="preserve">
+    <value>Tolerância para Convergência</value>
   </data>
   <data name="Label19.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -854,9 +854,6 @@
   </data>
   <data name="&gt;&gt;TabGeneral.Parent" xml:space="preserve">
     <value>TabControl1</value>
-  </data>
-  <data name="cbCondPressureUnits.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="&gt;&gt;tbCondSpec.ZOrder" xml:space="preserve">
     <value>13</value>
@@ -900,6 +897,9 @@
   <data name="Label14.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="Label8.TabIndex" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
   <data name="btnConfigurePP.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
@@ -912,14 +912,11 @@
   <data name="&gt;&gt;cbRebSpecUnits.Parent" xml:space="preserve">
     <value>PanelReboiler</value>
   </data>
-  <data name="Label9.ToolTip1" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label24.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="chkActive.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
+  <data name="btnConfigurePP.ToolTip2" xml:space="preserve">
+    <value>Configure</value>
   </data>
   <data name="&gt;&gt;cbCondVapFlowUnits.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -927,11 +924,8 @@
   <data name="lblStatus.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="cbAbsorberMode.Items1" xml:space="preserve">
-    <value>Extratora Líquido-Líquido</value>
-  </data>
-  <data name="tbCondPDrop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 20</value>
+  <data name="cbCondVapFlowUnits.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="Label15.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -951,11 +945,11 @@
   <data name="$this.Text" xml:space="preserve">
     <value>EditingForm_Column</value>
   </data>
-  <data name="Label24.TabIndex" type="System.Int32, mscorlib">
-    <value>64</value>
-  </data>
   <data name="&gt;&gt;chkNoReboiler.Parent" xml:space="preserve">
     <value>TabReboiler</value>
+  </data>
+  <data name="&gt;&gt;chkActive.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 40</value>
@@ -972,6 +966,9 @@
   <data name="cbAbsorberMode.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="cbRebSpec.Items" xml:space="preserve">
+    <value>Carga Térmica</value>
+  </data>
   <data name="TabReboiler.Text" xml:space="preserve">
     <value>Refervedor</value>
   </data>
@@ -981,14 +978,14 @@
   <data name="TabConnections.Text" xml:space="preserve">
     <value>Conexões</value>
   </data>
-  <data name="Label15.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="TabPage1.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
   <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="&gt;&gt;GroupBox5.Name" xml:space="preserve">
+    <value>GroupBox5</value>
   </data>
   <data name="cbRebSpec.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1005,6 +1002,9 @@
   <data name="Label4.ToolTip2" xml:space="preserve">
     <value />
   </data>
+  <data name="tbMaxIt.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="&gt;&gt;btnResults.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -1014,8 +1014,8 @@
   <data name="cbPropPack.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="Label12.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+  <data name="&gt;&gt;Label13.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="cbCondType.Items1" xml:space="preserve">
     <value>Parcial</value>
@@ -1028,9 +1028,6 @@
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Label13.ToolTip1" xml:space="preserve">
-    <value />
   </data>
   <data name="TabControl1.ToolTip1" xml:space="preserve">
     <value />
@@ -1073,6 +1070,9 @@
   </data>
   <data name="btnConfigurePP.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
+  </data>
+  <data name="btnResults.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
   </data>
   <data name="&gt;&gt;TabReboiler.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -1191,11 +1191,11 @@
   <data name="tbCondSpec.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="Label7.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="cbCondPressureUnits.Location" type="System.Drawing.Point, System.Drawing">
     <value>253, 44</value>
+  </data>
+  <data name="&gt;&gt;TabControl1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;tbMaxIt.Name" xml:space="preserve">
     <value>tbMaxIt</value>
@@ -1278,6 +1278,9 @@
   <data name="&gt;&gt;Label15.Parent" xml:space="preserve">
     <value>PanelReboiler</value>
   </data>
+  <data name="chkUseIE_LF.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>123, 13</value>
   </data>
@@ -1290,9 +1293,6 @@
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Especificações</value>
   </data>
-  <data name="tabstrip1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="&gt;&gt;TabPage4.Name" xml:space="preserve">
     <value>TabPage4</value>
   </data>
@@ -1304,6 +1304,9 @@
   </data>
   <data name="&gt;&gt;TabReboiler.Parent" xml:space="preserve">
     <value>TabControl1</value>
+  </data>
+  <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
+    <value>145, 13</value>
   </data>
   <data name="lblTag.ToolTip" xml:space="preserve">
     <value />
@@ -1328,6 +1331,9 @@
   </data>
   <data name="chkUseIE_C.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
+  </data>
+  <data name="Label17.TabIndex" type="System.Int32, mscorlib">
+    <value>54</value>
   </data>
   <data name="DataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
     <value>Valor</value>
@@ -1380,11 +1386,11 @@
   <data name="cbCondVapFlowUnits.Items" xml:space="preserve">
     <value>Mínima das Entradas</value>
   </data>
+  <data name="lblConnectedTo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>38, 13</value>
+  </data>
   <data name="cbCondSpec.Items8" xml:space="preserve">
     <value>Temperatura</value>
-  </data>
-  <data name="Label24.ToolTip1" xml:space="preserve">
-    <value />
   </data>
   <data name="Label16.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1410,11 +1416,17 @@
   <data name="TabStages.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="cbAbsorberMode.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="&gt;&gt;cbAbsorberMode.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="InitialEstimatesPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 3</value>
+  </data>
+  <data name="Label9.Text" xml:space="preserve">
+    <value>Pacote de Propriedades</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn2.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn2</value>
@@ -1440,12 +1452,6 @@
   <data name="&gt;&gt;cbRebSpec.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="cbRebSpecUnits.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbMaxIt.TabIndex" type="System.Int32, mscorlib">
-    <value>42</value>
-  </data>
   <data name="&gt;&gt;tbRebSpecValue.Name" xml:space="preserve">
     <value>tbRebSpecValue</value>
   </data>
@@ -1458,8 +1464,11 @@
   <data name="Label16.TabIndex" type="System.Int32, mscorlib">
     <value>43</value>
   </data>
-  <data name="&gt;&gt;cbCondSpecUnits.Name" xml:space="preserve">
-    <value>cbCondSpecUnits</value>
+  <data name="Label12.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chkActive.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
   </data>
   <data name="tbNStages.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1480,6 +1489,9 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="tbCondPDrop.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label16.ToolTip2" xml:space="preserve">
     <value />
   </data>
   <data name="tbCondSpec.TabIndex" type="System.Int32, mscorlib">
@@ -1509,6 +1521,9 @@
   <data name="&gt;&gt;chkNoCondenser.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="&gt;&gt;cbCondType.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="&gt;&gt;Label16.Parent" xml:space="preserve">
     <value>TabGeneral</value>
   </data>
@@ -1520,6 +1535,9 @@
   </data>
   <data name="&gt;&gt;tbNStages.Name" xml:space="preserve">
     <value>tbNStages</value>
+  </data>
+  <data name="Label12.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
   </data>
   <data name="TabPage4.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1557,14 +1575,14 @@
   <data name="&gt;&gt;Label8.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="lblStatus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="&gt;&gt;chkNoReboiler.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="&gt;&gt;Label17.Parent" xml:space="preserve">
     <value>TabReboiler</value>
+  </data>
+  <data name="&gt;&gt;chkUseIE_VF.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
     <value>TabCondenser</value>
@@ -1635,9 +1653,6 @@
   <data name="&gt;&gt;TabStages.Name" xml:space="preserve">
     <value>TabStages</value>
   </data>
-  <data name="&gt;&gt;Column1.Name" xml:space="preserve">
-    <value>Column1</value>
-  </data>
   <data name="cbRebComp.Items7" xml:space="preserve">
     <value>Razão de Refluxo</value>
   </data>
@@ -1649,12 +1664,6 @@
   </data>
   <data name="chkNoCondenser.Text" xml:space="preserve">
     <value>Sem Condensador</value>
-  </data>
-  <data name="cbCondSpecUnits.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 13</value>
   </data>
   <data name="tbConvTol.Location" type="System.Drawing.Point, System.Drawing">
     <value>168, 149</value>
@@ -1682,9 +1691,6 @@
   </data>
   <data name="Label2.TabIndex" type="System.Int32, mscorlib">
     <value>54</value>
-  </data>
-  <data name="cbRebSpec.Items3" xml:space="preserve">
-    <value>Vazão Mássica de Produto</value>
   </data>
   <data name="chkUseIE_VF.ToolTip2" xml:space="preserve">
     <value>Use initial estimates for stage vapor interflows</value>
@@ -1722,14 +1728,14 @@
   <data name="&gt;&gt;cbCondComp.Parent" xml:space="preserve">
     <value>PanelCondenser</value>
   </data>
-  <data name="tabstrip1.ToolTip1" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;TabInitialEstimates.Parent" xml:space="preserve">
+    <value>TabControl2</value>
   </data>
   <data name="&gt;&gt;cbAbsorberMode.Parent" xml:space="preserve">
     <value>TabGeneral</value>
   </data>
-  <data name="&gt;&gt;Label13.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="chkNoCondenser.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 15</value>
   </data>
   <data name="&gt;&gt;chkUseIE_VF.Parent" xml:space="preserve">
     <value>TabInitialEstimates</value>
@@ -1752,17 +1758,11 @@
   <data name="TabConnections.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
-  <data name="PanelCondenser.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="cbCondType.Items" xml:space="preserve">
     <value>Total</value>
   </data>
   <data name="chkActive.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
-  </data>
-  <data name="&gt;&gt;TabControl3.Parent" xml:space="preserve">
-    <value>$this</value>
   </data>
   <data name="cbRebComp.TabIndex" type="System.Int32, mscorlib">
     <value>65</value>
@@ -1779,8 +1779,8 @@
   <data name="chkUseIE_C.Size" type="System.Drawing.Size, System.Drawing">
     <value>33, 17</value>
   </data>
-  <data name="&gt;&gt;tbCondVapFlow.Parent" xml:space="preserve">
-    <value>PanelCondenser</value>
+  <data name="&gt;&gt;Label14.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="GroupBox5.ToolTip1" xml:space="preserve">
     <value />
@@ -1803,11 +1803,11 @@
   <data name="&gt;&gt;cbCondPDropUnits.Name" xml:space="preserve">
     <value>cbCondPDropUnits</value>
   </data>
-  <data name="&gt;&gt;TabControl3.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="GroupBox5.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 6</value>
+  </data>
+  <data name="gridResults.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="cbCondVapFlowUnits.ToolTip1" xml:space="preserve">
     <value />
@@ -1860,6 +1860,9 @@
   <data name="btnConfigurePP.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
   </data>
+  <data name="&gt;&gt;chkUseIE_LF.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="TabPage2.ToolTip1" xml:space="preserve">
     <value />
   </data>
@@ -1887,6 +1890,9 @@
   <data name="Label6.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="&gt;&gt;TabInitialEstimates.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;cbRebSpec.Name" xml:space="preserve">
     <value>cbRebSpec</value>
   </data>
@@ -1895,9 +1901,6 @@
   </data>
   <data name="cbRebComp.ToolTip2" xml:space="preserve">
     <value />
-  </data>
-  <data name="btnConfigurePP.ToolTip2" xml:space="preserve">
-    <value>Configure</value>
   </data>
   <data name="&gt;&gt;cbRebPressure.Parent" xml:space="preserve">
     <value>TabReboiler</value>
@@ -1914,17 +1917,14 @@
   <data name="Label19.ToolTip2" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;tbCondPDrop.Name" xml:space="preserve">
-    <value>tbCondPDrop</value>
-  </data>
   <data name="&gt;&gt;cbCondPressureUnits.Name" xml:space="preserve">
     <value>cbCondPressureUnits</value>
   </data>
   <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
     <value>37, 13</value>
   </data>
-  <data name="&gt;&gt;cbCondType.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;tbCondVapFlow.Name" xml:space="preserve">
+    <value>tbCondVapFlow</value>
   </data>
   <data name="&gt;&gt;cbCondSpecUnits.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1941,7 +1941,7 @@
   <data name="Label11.Text" xml:space="preserve">
     <value>Objeto</value>
   </data>
-  <data name="tbMaxIt.ToolTip2" xml:space="preserve">
+  <data name="TabPage3.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="&gt;&gt;tbCondSpec.Type" xml:space="preserve">
@@ -1965,11 +1965,8 @@
   <data name="&gt;&gt;tbCondPressure.Parent" xml:space="preserve">
     <value>TabCondenser</value>
   </data>
-  <data name="&gt;&gt;InitialEstimatesPanel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;Label19.Name" xml:space="preserve">
-    <value>Label19</value>
+  <data name="tabstrip1.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;tabstrip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1982,9 +1979,6 @@
   </data>
   <data name="&gt;&gt;Label24.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="cbCondType.ToolTip2" xml:space="preserve">
-    <value />
   </data>
   <data name="tbNStages.ToolTip" xml:space="preserve">
     <value />
@@ -2040,8 +2034,14 @@
   <data name="&gt;&gt;Label9.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="tbRebPressure.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 20</value>
+  </data>
   <data name="tbNStages.Location" type="System.Drawing.Point, System.Drawing">
     <value>145, 37</value>
+  </data>
+  <data name="tbRebSpecValue.TabIndex" type="System.Int32, mscorlib">
+    <value>62</value>
   </data>
   <data name="Label9.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -2061,8 +2061,8 @@
   <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 163</value>
   </data>
-  <data name="Label17.TabIndex" type="System.Int32, mscorlib">
-    <value>54</value>
+  <data name="&gt;&gt;Column1.Name" xml:space="preserve">
+    <value>Column1</value>
   </data>
   <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 13</value>
@@ -2082,14 +2082,14 @@
   <data name="TabControl3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
+  <data name="Label7.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
   <data name="tbNStages.ToolTip1" xml:space="preserve">
     <value />
   </data>
   <data name="cbPropPack.Size" type="System.Drawing.Size, System.Drawing">
     <value>198, 21</value>
-  </data>
-  <data name="TabGeneral.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="&gt;&gt;TabPage2.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -2100,14 +2100,11 @@
   <data name="cbCondComp.Location" type="System.Drawing.Point, System.Drawing">
     <value>146, 88</value>
   </data>
-  <data name="lblStatus.Text" xml:space="preserve">
-    <value>Objeto</value>
-  </data>
   <data name="$this.ToolTip2" xml:space="preserve">
     <value />
   </data>
-  <data name="TabPage3.ToolTip" xml:space="preserve">
-    <value />
+  <data name="TabGeneral.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
   </data>
   <data name="chkUseIE_C.ToolTip1" xml:space="preserve">
     <value>Use initial estimates for stage mixture molar compositions</value>
@@ -2117,9 +2114,6 @@
   </data>
   <data name="&gt;&gt;TabInitialEstimates.Name" xml:space="preserve">
     <value>TabInitialEstimates</value>
-  </data>
-  <data name="&gt;&gt;TabPage2.Parent" xml:space="preserve">
-    <value>TabControl3</value>
   </data>
   <data name="lblConnectedTo.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -2136,8 +2130,8 @@
   <data name="cbCondSpec.Size" type="System.Drawing.Size, System.Drawing">
     <value>196, 21</value>
   </data>
-  <data name="tbRebSpecValue.TabIndex" type="System.Int32, mscorlib">
-    <value>62</value>
+  <data name="tabstrip1.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="cbCondPressureUnits.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2156,9 +2150,6 @@
   </data>
   <data name="GroupBox5.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
-  </data>
-  <data name="TabCondenser.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="&gt;&gt;cbCondType.Parent" xml:space="preserve">
     <value>PanelCondenser</value>
@@ -2193,6 +2184,9 @@
   <data name="Label13.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="chkNoReboiler.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 14</value>
+  </data>
   <data name="btnResults.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
@@ -2211,29 +2205,32 @@
   <data name="&gt;&gt;PanelReboiler.Name" xml:space="preserve">
     <value>PanelReboiler</value>
   </data>
+  <data name="cbCondPressureUnits.Items" xml:space="preserve">
+    <value>Mínima das Entradas</value>
+  </data>
   <data name="lblTag.ToolTip1" xml:space="preserve">
     <value />
   </data>
   <data name="TabCondenser.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="tbCondPressure.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
   <data name="&gt;&gt;lblStatus.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="Label12.ToolTip2" xml:space="preserve">
+  <data name="Label7.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="cbCondPressureUnits.ToolTip2" xml:space="preserve">
     <value />
   </data>
+  <data name="Label8.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="cbCondSpec.Items" xml:space="preserve">
     <value>Carga Térmica</value>
   </data>
-  <data name="TabCondenser.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+  <data name="tabstrip1.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;InitialEstimatesPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2265,14 +2262,14 @@
   <data name="&gt;&gt;tbRebPressure.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="cbPropPack.Location" type="System.Drawing.Point, System.Drawing">
-    <value>145, 209</value>
+  <data name="&gt;&gt;Label19.Name" xml:space="preserve">
+    <value>Label19</value>
   </data>
   <data name="tbRebSpecValue.Location" type="System.Drawing.Point, System.Drawing">
     <value>137, 62</value>
   </data>
-  <data name="TabReboiler.ToolTip" xml:space="preserve">
-    <value />
+  <data name="btnConfigurePP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>349, 209</value>
   </data>
   <data name="Label17.Text" xml:space="preserve">
     <value>Pressão do Refervedor</value>
@@ -2280,8 +2277,8 @@
   <data name="&gt;&gt;tabstrip1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="tbRebPressure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 20</value>
+  <data name="cbCondSpecUnits.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="btnConfigurePP.ToolTip1" xml:space="preserve">
     <value>Configure</value>
@@ -2292,13 +2289,16 @@
   <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 48</value>
   </data>
+  <data name="chkUseIE_VF.Location" type="System.Drawing.Point, System.Drawing">
+    <value>89, 253</value>
+  </data>
   <data name="GroupBox5.ToolTip2" xml:space="preserve">
     <value />
   </data>
-  <data name="lblConnectedTo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>38, 13</value>
+  <data name="&gt;&gt;TabCondenser.Name" xml:space="preserve">
+    <value>TabCondenser</value>
   </data>
-  <data name="gridResults.ToolTip2" xml:space="preserve">
+  <data name="TabPage1.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="&gt;&gt;cbCondComp.Type" xml:space="preserve">
@@ -2306,6 +2306,9 @@
   </data>
   <data name="TabControl1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
+  </data>
+  <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 65</value>
   </data>
   <data name="&gt;&gt;cbCondType.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2325,17 +2328,14 @@
   <data name="cbRebComp.Items6" xml:space="preserve">
     <value>Recuperação de Componente</value>
   </data>
-  <data name="Label9.ToolTip" xml:space="preserve">
+  <data name="btnResults.ToolTip1" xml:space="preserve">
     <value />
-  </data>
-  <data name="Column1.HeaderText" xml:space="preserve">
-    <value>Unidade</value>
   </data>
   <data name="lblStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="&gt;&gt;tbCondVapFlow.Name" xml:space="preserve">
-    <value>tbCondVapFlow</value>
+  <data name="&gt;&gt;TabConnections.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="chkUseIE_C.Location" type="System.Drawing.Point, System.Drawing">
     <value>133, 253</value>
@@ -2346,14 +2346,17 @@
   <data name="cbRebSpecUnits.Items" xml:space="preserve">
     <value>Mínima das Entradas</value>
   </data>
+  <data name="Label11.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="tbCondVapFlow.Location" type="System.Drawing.Point, System.Drawing">
     <value>147, 159</value>
   </data>
   <data name="cbRebPressure.ToolTip2" xml:space="preserve">
     <value />
   </data>
-  <data name="TabGeneral.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+  <data name="chkUseIE_VF.ToolTip1" xml:space="preserve">
+    <value>Use initial estimates for stage vapor interflows</value>
   </data>
   <data name="chkUseIE_LF.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -2376,8 +2379,8 @@
   <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 47</value>
   </data>
-  <data name="Label8.TabIndex" type="System.Int32, mscorlib">
-    <value>51</value>
+  <data name="&gt;&gt;TabControl3.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="cbCondComp.ToolTip2" xml:space="preserve">
     <value />
@@ -2394,14 +2397,11 @@
   <data name="&gt;&gt;gridResults.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="tbMaxIt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 122</value>
+  <data name="&gt;&gt;tbCondVapFlow.Parent" xml:space="preserve">
+    <value>PanelCondenser</value>
   </data>
   <data name="cbCondPDropUnits.Items2" xml:space="preserve">
     <value>Máxima das Entradas</value>
-  </data>
-  <data name="cbCondPDropUnits.ToolTip2" xml:space="preserve">
-    <value />
   </data>
   <data name="cbPropPack.ToolTip2" xml:space="preserve">
     <value />
@@ -2415,13 +2415,13 @@
   <data name="cbRebSpec.Location" type="System.Drawing.Point, System.Drawing">
     <value>137, 8</value>
   </data>
-  <data name="&gt;&gt;TabInitialEstimates.Parent" xml:space="preserve">
-    <value>TabControl2</value>
+  <data name="PanelCondenser.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="TabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
-  <data name="Label7.ToolTip1" xml:space="preserve">
+  <data name="tbCondPressure.ToolTip2" xml:space="preserve">
     <value />
   </data>
   <data name="TabControl2.ToolTip" xml:space="preserve">
@@ -2433,11 +2433,11 @@
   <data name="&gt;&gt;cbRebComp.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ToolTip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label9.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="chkUseIE_LF.Location" type="System.Drawing.Point, System.Drawing">
-    <value>44, 253</value>
+  <data name="cbCondType.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="TabPage3.Text" xml:space="preserve">
     <value>Configuração</value>
@@ -2448,8 +2448,8 @@
   <data name="&gt;&gt;chkActive.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;TabPage2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;TabPage2.Parent" xml:space="preserve">
+    <value>TabControl3</value>
   </data>
   <data name="Label24.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2457,17 +2457,14 @@
   <data name="cbCondType.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;chkUseIE_LF.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;cbRebSpecUnits.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>Informações Gerais</value>
   </data>
   <data name="cbRebSpec.Items2" xml:space="preserve">
     <value>Vazão Molar de Componente no Produto</value>
-  </data>
-  <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="TabPage4.ToolTip" xml:space="preserve">
     <value />
@@ -2481,9 +2478,6 @@
   <data name="Label5.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;TabConnections.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="cbCondComp.ToolTip1" xml:space="preserve">
     <value />
   </data>
@@ -2492,6 +2486,9 @@
   </data>
   <data name="&gt;&gt;TabPage2.Name" xml:space="preserve">
     <value>TabPage2</value>
+  </data>
+  <data name="&gt;&gt;cbRebPressure.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;chkUseIE_VF.Name" xml:space="preserve">
     <value>chkUseIE_VF</value>
@@ -2523,17 +2520,17 @@
   <data name="PanelReboiler.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;GroupBox5.Name" xml:space="preserve">
-    <value>GroupBox5</value>
+  <data name="tbCondPDrop.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 20</value>
   </data>
   <data name="&gt;&gt;Label4.Name" xml:space="preserve">
     <value>Label4</value>
   </data>
-  <data name="Label8.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="Label9.ToolTip1" xml:space="preserve">
+    <value />
   </data>
-  <data name="chkNoReboiler.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 14</value>
+  <data name="cbRebSpecUnits.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;TabPage3.Name" xml:space="preserve">
     <value>TabPage3</value>
@@ -2544,8 +2541,8 @@
   <data name="&gt;&gt;Label7.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="chkUseIE_VF.Location" type="System.Drawing.Point, System.Drawing">
-    <value>89, 253</value>
+  <data name="TabControl2.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;Label14.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2553,8 +2550,8 @@
   <data name="chkActive.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
   </data>
-  <data name="cbCondVapFlowUnits.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="TabGeneral.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;TabPage1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2562,8 +2559,8 @@
   <data name="&gt;&gt;chkUseIE_LF.Name" xml:space="preserve">
     <value>chkUseIE_LF</value>
   </data>
-  <data name="&gt;&gt;chkUseIE_VF.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="Column1.HeaderText" xml:space="preserve">
+    <value>Unidade</value>
   </data>
   <data name="Label13.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2577,14 +2574,14 @@
   <data name="&gt;&gt;cbCondPressureUnits.Parent" xml:space="preserve">
     <value>TabCondenser</value>
   </data>
-  <data name="btnConfigurePP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>349, 209</value>
+  <data name="Label13.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="InitialEstimatesPanel.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="chkUseIE_LF.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="lblStatus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="TabControl3.ToolTip1" xml:space="preserve">
     <value />
@@ -2595,8 +2592,8 @@
   <data name="chkNoReboiler.ToolTip2" xml:space="preserve">
     <value />
   </data>
-  <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 13</value>
+  <data name="cbAbsorberMode.Items1" xml:space="preserve">
+    <value>Extratora Líquido-Líquido</value>
   </data>
   <data name="Label14.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 126</value>
@@ -2604,26 +2601,23 @@
   <data name="tbCondPressure.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name="cbRebPressure.Items1" xml:space="preserve">
-    <value>Média das Entradas</value>
-  </data>
   <data name="cbRebSpec.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;Label14.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;chkActive.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label24.ToolTip1" xml:space="preserve">
+    <value />
   </data>
-  <data name="Label16.Text" xml:space="preserve">
-    <value>Tolerância para Convergência</value>
+  <data name="&gt;&gt;cbRebPressure.Name" xml:space="preserve">
+    <value>cbRebPressure</value>
   </data>
   <data name="&gt;&gt;tbCondPressure.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 65</value>
+  <data name="TabReboiler.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="TabPage3.ToolTip1" xml:space="preserve">
     <value />
@@ -2637,23 +2631,26 @@
   <data name="Label1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="TabPage3.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+  <data name="&gt;&gt;TabPage1.Name" xml:space="preserve">
+    <value>TabPage1</value>
   </data>
-  <data name="&gt;&gt;TabControl1.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="Label15.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="Label16.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="cbAbsorberMode.ToolTip" xml:space="preserve">
+  <data name="cbCondPressureUnits.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;TabInitialEstimates.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="cbRebPressure.Items1" xml:space="preserve">
+    <value>Média das Entradas</value>
   </data>
   <data name="lblConnectedTo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="&gt;&gt;cbCondSpecUnits.Name" xml:space="preserve">
+    <value>cbCondSpecUnits</value>
   </data>
   <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2679,14 +2676,17 @@
   <data name="Label5.ToolTip1" xml:space="preserve">
     <value />
   </data>
+  <data name="cbCondComp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>197, 21</value>
+  </data>
   <data name="cbCondVapFlowUnits.Items1" xml:space="preserve">
     <value>Média das Entradas</value>
   </data>
   <data name="TabControl3.ToolTip2" xml:space="preserve">
     <value />
   </data>
-  <data name="cbCondPressureUnits.Items" xml:space="preserve">
-    <value>Mínima das Entradas</value>
+  <data name="Label24.TabIndex" type="System.Int32, mscorlib">
+    <value>64</value>
   </data>
   <data name="&gt;&gt;TabPage4.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2724,7 +2724,7 @@
   <data name="chkUseIE_VF.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
-  <data name="Label11.ToolTip2" xml:space="preserve">
+  <data name="cbCondPDropUnits.ToolTip2" xml:space="preserve">
     <value />
   </data>
   <data name="Label19.Location" type="System.Drawing.Point, System.Drawing">
@@ -2745,8 +2745,8 @@
   <data name="chkUseIE_VF.Text" xml:space="preserve">
     <value>LF</value>
   </data>
-  <data name="btnResults.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Bottom</value>
+  <data name="TabCondenser.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="Label12.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2817,8 +2817,8 @@
   <data name="cbRebSpecUnits.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="Label19.TabIndex" type="System.Int32, mscorlib">
-    <value>56</value>
+  <data name="tbMaxIt.TabIndex" type="System.Int32, mscorlib">
+    <value>42</value>
   </data>
   <data name="Label19.ToolTip" xml:space="preserve">
     <value />
@@ -2847,8 +2847,8 @@
   <data name="tbRebSpecValue.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name="&gt;&gt;cbRebPressure.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 13</value>
   </data>
   <data name="chkActive.ToolTip2" xml:space="preserve">
     <value>Active/Inactive</value>
@@ -2883,14 +2883,14 @@
   <data name="cbCondSpecUnits.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 21</value>
   </data>
-  <data name="cbCondComp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>197, 21</value>
+  <data name="cbRebSpec.Items3" xml:space="preserve">
+    <value>Vazão Mássica de Produto</value>
   </data>
-  <data name="Label9.Text" xml:space="preserve">
-    <value>Pacote de Propriedades</value>
+  <data name="TabPage3.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
   </data>
-  <data name="cbRebSpec.Items" xml:space="preserve">
-    <value>Carga Térmica</value>
+  <data name="&gt;&gt;tbCondPDrop.Name" xml:space="preserve">
+    <value>tbCondPDrop</value>
   </data>
   <data name="chkUseIE_T.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
