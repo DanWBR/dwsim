@@ -32,6 +32,7 @@ Public Class FormBinEnv
     Public cv As New SystemsOfUnits.Converter
     Public nf As String
     Dim mw1, mw2 As Double
+    Dim MinX, MaxX As Double
 
     Private loaded As Boolean = False
 
@@ -102,11 +103,22 @@ Public Class FormBinEnv
             If Me.cbComp1.Items.Count > 0 Then Me.cbComp1.SelectedIndex = 0
             If Me.cbComp2.Items.Count > 1 Then Me.cbComp2.SelectedIndex = 1
 
+            mw1 = Flowsheet.SelectedCompounds.Values.ElementAt(0).Molar_Weight
+            mw2 = Flowsheet.SelectedCompounds.Values.ElementAt(1).Molar_Weight
+
+            MinX = 0
+            MaxX = 1
+            Me.tbStepCount.Text = (40).ToString()
+
             cbXAxisBasis.SelectedIndex = 0
 
             Me.tbP.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, 101325), nf)
             Me.tbT.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, 298.15), nf)
-            Me.tbdx.Text = (0.025).ToString()
+
+
+            Me.tbMin.Text = MinX.ToString()
+            Me.tbMax.Text = MaxX.ToString()
+
 
             Me.GraphControl.IsShowPointValues = True
 
@@ -122,7 +134,7 @@ Public Class FormBinEnv
 
     End Sub
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+    Private Sub BtnCalculate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnCalculate.Click
 
         If Me.cbComp1.SelectedItem.ToString <> Me.cbComp2.SelectedItem.ToString Then
 
@@ -187,14 +199,21 @@ Public Class FormBinEnv
                 lle = False
             End If
 
-            Me.Button1.Enabled = False
+            Me.BtnCalculate.Enabled = False
+            Me.BtnCalculate.BackColor = Color.LightGreen
 
             If My.Settings.EnableGPUProcessing Then
                 Calculator.InitComputeDevice()
                 Settings.gpu.EnableMultithreading()
             End If
 
-            Me.BackgroundWorker1.RunWorkerAsync(New Object() {tipocalc, P, T, chkVLE.Checked, lle, chkSLE.Checked, chkCritical.Checked, rbSolidSolution.Checked, chkCompareModels.Checked, cbPropPack.SelectedIndex, tbdx.Text.ToDoubleFromCurrent})
+            Dim Parameters As New Object()
+            Parameters = {tipocalc, P, T, chkVLE.Checked, lle,
+                          chkSLE.Checked, chkCritical.Checked, rbSolidSolution.Checked,
+                          chkCompareModels.Checked, cbPropPack.SelectedIndex,
+                          tbStepCount.Text.ToDoubleFromCurrent, MinX, MaxX}
+
+            Me.BackgroundWorker1.RunWorkerAsync(Parameters)
 
             Me.bw = Me.BackgroundWorker1
 
@@ -250,7 +269,36 @@ Public Class FormBinEnv
     Private Sub BackgroundWorker1_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles BackgroundWorker1.ProgressChanged
         Me.LabelStatus.Text = e.UserState.ToString
     End Sub
+    Function ConvertMolToDisplay(ByVal X As Double) As Double
+        Dim XRes As Double
 
+        Select Case cbXAxisBasis.SelectedIndex
+            Case 0
+                XRes = X
+            Case 1
+                XRes = X * mw1 / (X * mw1 + (1 - X) * mw2)
+            Case 2
+                XRes = X * 100
+            Case 3
+                XRes = X * mw1 / (X * mw1 + (1 - X) * mw2) * 100
+        End Select
+        Return XRes
+    End Function
+    Function ConvertDisplayedToMol(ByVal X As Double) As Double
+        Dim XRes As Double
+
+        Select Case cbXAxisBasis.SelectedIndex
+            Case 0
+                XRes = X
+            Case 1
+                XRes = X / mw1 / (X / mw1 + (1 - X) / mw2)
+            Case 2
+                XRes = X / 100
+            Case 3
+                XRes = X / mw1 / (X / mw1 + (100 - X) / mw2)
+        End Select
+        Return XRes
+    End Function
     Private Sub BackgroundWorker1_RunWorkerCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorker1.RunWorkerCompleted
 
         If My.Settings.EnableGPUProcessing Then
@@ -258,7 +306,8 @@ Public Class FormBinEnv
             Settings.gpu.FreeAll()
         End If
 
-        Me.Button1.Enabled = True
+        Me.BtnCalculate.Enabled = True
+        Me.BtnCalculate.BackColor = SystemColors.Control
         Me.PanelCalc.Visible = False
 
         Me.Grid1.Columns.Clear()
@@ -336,55 +385,21 @@ Public Class FormBinEnv
 
             Dim linetype As Integer = lidx
 
-            'convert x+y axis
-            Select Case cbXAxisBasis.SelectedIndex
-                Case 0
-                Case 1
-                    For i = 0 To r(0).count - 1
-                        r(0)(i) = r(0)(i) * mw1 / (r(0)(i) * mw1 + (1 - r(0)(i)) * mw2)
-                        If Me.RadioButton3.Checked Or Me.RadioButton4.Checked Then
-                            r(1)(i) = r(1)(i) * mw1 / (r(1)(i) * mw1 + (1 - r(1)(i)) * mw2)
-                        End If
-                    Next
-                    If r.Length > 2 Then
-                        For i = 0 To r(3).count - 1
-                            r(3)(i) = r(3)(i) * mw1 / (r(3)(i) * mw1 + (1 - r(3)(i)) * mw2)
-                        Next
-                        For i = 0 To r(4).count - 1
-                            r(4)(i) = r(4)(i) * mw1 / (r(4)(i) * mw1 + (1 - r(4)(i)) * mw2)
-                        Next
-                    End If
-                Case 2
-                    For i = 0 To r(0).count - 1
-                        r(0)(i) = r(0)(i) * 100
-                        If Me.RadioButton3.Checked Or Me.RadioButton4.Checked Then
-                            r(1)(i) = r(1)(i) * 100
-                        End If
-                    Next
-                    If r.Length > 2 Then
-                        For i = 0 To r(3).count - 1
-                            r(3)(i) = r(3)(i) * 100
-                        Next
-                        For i = 0 To r(4).count - 1
-                            r(4)(i) = r(4)(i) * 100
-                        Next
-                    End If
-                Case 3
-                    For i = 0 To r(0).count - 1
-                        r(0)(i) = r(0)(i) * mw1 / (r(0)(i) * mw1 + (1 - r(0)(i)) * mw2) * 100
-                        If Me.RadioButton3.Checked Or Me.RadioButton4.Checked Then
-                            r(1)(i) = r(1)(i) * mw1 / (r(1)(i) * mw1 + (1 - r(1)(i)) * mw2) * 100
-                        End If
-                    Next
-                    If r.Length > 2 Then
-                        For i = 0 To r(3).count - 1
-                            r(3)(i) = r(3)(i) * mw1 / (r(3)(i) * mw1 + (1 - r(3)(i)) * mw2) * 100
-                        Next
-                        For i = 0 To r(4).count - 1
-                            r(4)(i) = r(4)(i) * mw1 / (r(4)(i) * mw1 + (1 - r(4)(i)) * mw2) * 100
-                        Next
-                    End If
-            End Select
+            'convert x+y axis VLE
+            For i = 0 To r(0).count - 1
+                r(0)(i) = ConvertMolToDisplay(r(0)(i))
+                If Me.RadioButton3.Checked Or Me.RadioButton4.Checked Then
+                    r(1)(i) = ConvertMolToDisplay(r(1)(i))
+                End If
+            Next
+            If r.Length > 2 Then
+                For i = 0 To r(3).count - 1
+                    r(3)(i) = ConvertMolToDisplay(r(3)(i))
+                Next
+                For i = 0 To r(4).count - 1
+                    r(4)(i) = ConvertMolToDisplay(r(4)(i))
+                Next
+            End If
 
             If Me.RadioButton1.Checked Then
 
@@ -404,7 +419,7 @@ Public Class FormBinEnv
                 pxc = r(10)
                 pyc = r(11)
 
-                Dim vx1, vx2, vy1, vy2, vx1l1, vx1l2, vy3, vxs1, vys1, vxs2, vys2, vxc, vyc As New ArrayList
+                Dim vx1, vx2, vy1, vy2, vx1l1, vx1l2, vyL1, vyL2, vxs1, vys1, vxs2, vys2, vxc, vyc As New ArrayList
 
                 If py1.Count > 0 Then
                     i = 0
@@ -424,11 +439,22 @@ Public Class FormBinEnv
                 If px1l1.Count > 0 Then
                     i = 0
                     Do
-                        vx1l1.Add(px1l1(i))
-                        vx1l2.Add(px1l2(i))
-                        vy3.Add(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, py3(i)))
+                        If px1l1(i) > MinX And px1l1(i) < MaxX Then
+                            vx1l1.Add(px1l1(i))
+                            vyL1.Add(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, py3(i)))
+                        End If
                         i += 1
                     Loop Until i = px1l1.Count
+                End If
+                If px1l2.Count > 0 Then
+                    i = 0
+                    Do
+                        If px1l2(i) > MinX And px1l2(i) < MaxX Then
+                            vx1l2.Add(px1l2(i))
+                            vyL2.Add(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, py3(i)))
+                        End If
+                        i += 1
+                    Loop Until i = px1l2.Count
                 End If
 
                 If pys1.Count > 0 Then
@@ -458,7 +484,7 @@ Public Class FormBinEnv
                     Loop Until i = pxc.Count
                 End If
 
-                Dim n As Integer = New List(Of Integer)({vx1.Count, vx2.Count, vy1.Count, vy2.Count, vx1l1.Count, vy3.Count, vxs1.Count, vxc.Count}).Max
+                Dim n As Integer = New List(Of Integer)({vx1.Count, vx2.Count, vy1.Count, vy2.Count, vx1l1.Count, vyL1.Count, vyL2.Count, vxs1.Count, vxc.Count}).Max
 
                 With Me.Grid1.Columns
                     .Add("[" & ppname & "] ""c1", "[" & ppname & "] " & "VLE x (" & c(0) & ")")
@@ -506,13 +532,13 @@ Public Class FormBinEnv
                 j = 0
                 For Each d As Double In vx1l1
                     data(4, j) = vx1l1(j)
-                    data(5, j) = vy3(j)
+                    data(5, j) = vyL1(j)
                     j = j + 1
                 Next
                 j = 0
                 For Each d As Double In vx1l2
                     data(6, j) = vx1l2(j)
-                    data(7, j) = vy3(j)
+                    data(7, j) = vyL2(j)
                     j = j + 1
                 Next
                 j = 0
@@ -566,14 +592,14 @@ Public Class FormBinEnv
                         .Symbol.IsVisible = False
                     End With
                     If vx1l1.Count > 0 Then
-                        With .AddCurve(DWSIM.App.GetLocalString("[" & ppname & "] " & "LLE LP1"), vx1l1.ToArray(GetType(Double)), vy3.ToArray(GetType(Double)), Color.FromArgb(rand.Next(256), rand.Next(256), rand.Next(256)), ZedGraph.SymbolType.Circle)
+                        With .AddCurve(DWSIM.App.GetLocalString("[" & ppname & "] " & "LLE LP1"), vx1l1.ToArray(GetType(Double)), vyL1.ToArray(GetType(Double)), Color.FromArgb(rand.Next(256), rand.Next(256), rand.Next(256)), ZedGraph.SymbolType.Circle)
                             .Line.IsSmooth = False
                             .Line.SmoothTension = 0.3
                             .Line.Style = linetype
                             .Line.Width = 2
                             .Symbol.IsVisible = False
                         End With
-                        With .AddCurve(DWSIM.App.GetLocalString("[" & ppname & "] " & "LLE LP2"), vx1l2.ToArray(GetType(Double)), vy3.ToArray(GetType(Double)), Color.FromArgb(rand.Next(256), rand.Next(256), rand.Next(256)), ZedGraph.SymbolType.Circle)
+                        With .AddCurve(DWSIM.App.GetLocalString("[" & ppname & "] " & "LLE LP2"), vx1l2.ToArray(GetType(Double)), vyL2.ToArray(GetType(Double)), Color.FromArgb(rand.Next(256), rand.Next(256), rand.Next(256)), ZedGraph.SymbolType.Circle)
                             .Line.IsSmooth = False
                             .Line.SmoothTension = 0.3
                             .Line.Style = linetype
@@ -612,12 +638,10 @@ Public Class FormBinEnv
                     .Legend.IsVisible = True
                     .Legend.Position = ZedGraph.LegendPos.BottomFlushLeft
                     Me.GraphControl.IsAutoScrollRange = True
-                    Select Case cbXAxisBasis.SelectedIndex
-                        Case 0, 1
-                            Me.GraphControl.GraphPane.XAxis.Scale.Max = 1
-                        Case 2, 3
-                            Me.GraphControl.GraphPane.XAxis.Scale.Max = 100
-                    End Select
+
+                    Me.GraphControl.GraphPane.XAxis.Scale.Min = ConvertMolToDisplay(MinX)
+                    Me.GraphControl.GraphPane.XAxis.Scale.Max = ConvertMolToDisplay(MaxX)
+
                     .AxisChange(Me.CreateGraphics)
                     Me.GraphControl.Invalidate()
                 End With
@@ -741,12 +765,10 @@ Public Class FormBinEnv
                     .Legend.IsVisible = True
                     .Legend.Position = ZedGraph.LegendPos.BottomFlushLeft
                     Me.GraphControl.IsAutoScrollRange = True
-                    Select Case cbXAxisBasis.SelectedIndex
-                        Case 0, 1
-                            Me.GraphControl.GraphPane.XAxis.Scale.Max = 1
-                        Case 2, 3
-                            Me.GraphControl.GraphPane.XAxis.Scale.Max = 100
-                    End Select
+
+                    Me.GraphControl.GraphPane.XAxis.Scale.Min = ConvertMolToDisplay(MinX)
+                    Me.GraphControl.GraphPane.XAxis.Scale.Max = ConvertMolToDisplay(MaxX)
+
                     .AxisChange(Me.CreateGraphics)
                     Me.GraphControl.Invalidate()
                 End With
@@ -829,12 +851,13 @@ Public Class FormBinEnv
                     .Legend.IsVisible = True
                     .Legend.Position = ZedGraph.LegendPos.BottomFlushLeft
                     Me.GraphControl.IsAutoScrollRange = True
-                    Select Case cbXAxisBasis.SelectedIndex
-                        Case 0, 1
-                            Me.GraphControl.GraphPane.XAxis.Scale.Max = 1
-                        Case 2, 3
-                            Me.GraphControl.GraphPane.XAxis.Scale.Max = 100
-                    End Select
+
+                    Me.GraphControl.GraphPane.XAxis.Scale.Min = ConvertMolToDisplay(MinX)
+                    Me.GraphControl.GraphPane.XAxis.Scale.Max = ConvertMolToDisplay(MaxX)
+
+                    Me.GraphControl.GraphPane.YAxis.Scale.Min = ConvertMolToDisplay(MinX)
+                    Me.GraphControl.GraphPane.YAxis.Scale.Max = ConvertMolToDisplay(MaxX)
+
                     .AxisChange(Me.CreateGraphics)
                     Me.GraphControl.Invalidate()
                 End With
@@ -917,12 +940,13 @@ Public Class FormBinEnv
                     .Legend.IsVisible = True
                     .Legend.Position = ZedGraph.LegendPos.BottomFlushLeft
                     Me.GraphControl.IsAutoScrollRange = True
-                    Select Case cbXAxisBasis.SelectedIndex
-                        Case 0, 1
-                            Me.GraphControl.GraphPane.XAxis.Scale.Max = 1
-                        Case 2, 3
-                            Me.GraphControl.GraphPane.XAxis.Scale.Max = 100
-                    End Select
+
+                    Me.GraphControl.GraphPane.XAxis.Scale.Min = ConvertMolToDisplay(MinX)
+                    Me.GraphControl.GraphPane.XAxis.Scale.Max = ConvertMolToDisplay(MaxX)
+
+                    Me.GraphControl.GraphPane.YAxis.Scale.Min = ConvertMolToDisplay(MinX)
+                    Me.GraphControl.GraphPane.YAxis.Scale.Max = ConvertMolToDisplay(MaxX)
+
                     .AxisChange(Me.CreateGraphics)
                     Me.GraphControl.Invalidate()
                 End With
@@ -1201,7 +1225,7 @@ Public Class FormBinEnv
             Case "T"
                 Return Double.Parse(tbT.Text)
             Case "dx"
-                Return Double.Parse(tbdx.Text)
+                Return Double.Parse(tbStepCount.Text)
             Case "PP"
                 Return cbPropPack.SelectedIndex
             Case "CompareModels"
@@ -1292,7 +1316,7 @@ Public Class FormBinEnv
             Case "T"
                 tbT.Text = pvalue
             Case "dx"
-                tbdx.Text = pvalue
+                tbStepCount.Text = pvalue
             Case "PP"
                 cbPropPack.SelectedIndex = pvalue
             Case "CompareModels"
@@ -1325,12 +1349,25 @@ Public Class FormBinEnv
     End Sub
 
     Public Sub Update1() Implements Interfaces.IAttachedUtility.Update
-        Button1_Click(Me, New EventArgs)
+        BtnCalculate_Click(Me, New EventArgs)
     End Sub
 
     Public Function GetUtilityType() As Interfaces.Enums.FlowsheetUtility Implements Interfaces.IAttachedUtility.GetUtilityType
         Return FlowsheetUtility.PhaseEnvelopeBinary
     End Function
+
+    Private Sub tbMin_TextChanged(sender As Object, e As EventArgs) Handles tbMin.TextChanged
+        MinX = ConvertDisplayedToMol(tbMin.Text.ToDoubleFromCurrent)
+    End Sub
+
+    Private Sub tbMax_TextChanged(sender As Object, e As EventArgs) Handles tbMax.TextChanged
+        MaxX = ConvertDisplayedToMol(tbMax.Text.ToDoubleFromCurrent)
+    End Sub
+
+    Private Sub cbXAxisBasis_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbXAxisBasis.SelectedIndexChanged
+        tbMin.Text = ConvertMolToDisplay(MinX)
+        tbMax.Text = ConvertMolToDisplay(MaxX)
+    End Sub
 
     Public Property AutoUpdate As Boolean Implements Interfaces.IAttachedUtility.AutoUpdate
 

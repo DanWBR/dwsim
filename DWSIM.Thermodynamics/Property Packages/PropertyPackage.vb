@@ -4620,7 +4620,10 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
             n = Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1
 
-            Dim dx As Double = 0.025
+            Dim StepCount
+            Dim MinX As Double
+            Dim MaxX As Double
+            Dim dx As Double
 
             Dim tipocalc As String
             Dim result As Object
@@ -4637,10 +4640,11 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             SLE = parameters(5)
             Critical = parameters(6)
             SolidSolution = parameters(7)
-            Try
-                dx = parameters(10)
-            Catch ex As Exception
-            End Try
+
+            StepCount = parameters(10)
+            MinX = parameters(11)
+            MaxX = parameters(12)
+            dx = (MaxX - MinX) / StepCount
 
             Dim MyFlash As IFlashAlgorithm = FlashBase.Clone
 
@@ -4666,15 +4670,15 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                         Do
 
-                            If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "VLE (" & i + 1 & "/" + (1 / dx).ToString("#") + ")")
+                            If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "VLE (" & i + 1 & "/" & StepCount + 1 & ")")
 
-                            x = i * dx
+                            x = MinX + i * dx
 
                             px.Add(x)
 
                             If i = 0 Then
                                 Try
-                                    tmp1 = MyFlash.Flash_PV(New Double() {i * dx, 1 - i * dx}, P, 0.0#, 0.0#, Me)
+                                    tmp1 = MyFlash.Flash_PV(New Double() {x, 1 - x}, P, 0.0#, 0.0#, Me)
                                     calcT = tmp1(4)
                                     Test1 = calcT
                                     prevkib = tmp1(6)
@@ -4684,7 +4688,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                     SharedClasses.ExceptionProcessing.ExceptionParser.ProcessAndDisplayException(Flowsheet, ex)
                                 End Try
                                 Try
-                                    tmp2 = MyFlash.Flash_PV(New Double() {i * dx, 1 - i * dx}, P, 1.0#, 0.0#, Me)
+                                    tmp2 = MyFlash.Flash_PV(New Double() {x, 1 - x}, P, 1.0#, 0.0#, Me)
                                     y2 = tmp2(4)
                                     Test2 = y2
                                     prevkid = tmp1(6)
@@ -4695,7 +4699,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 End Try
                             Else
                                 Try
-                                    tmp1 = MyFlash.Flash_PV(New Double() {i * dx, 1 - i * dx}, P, 0.0#, Test1, Me)
+                                    tmp1 = MyFlash.Flash_PV(New Double() {x, 1 - x}, P, 0.0#, Test1, Me)
                                     calcT = tmp1(4)
                                     Test1 = calcT
                                     prevkib = tmp1(6)
@@ -4705,7 +4709,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                     SharedClasses.ExceptionProcessing.ExceptionParser.ProcessAndDisplayException(Flowsheet, ex)
                                 End Try
                                 Try
-                                    tmp2 = MyFlash.Flash_PV(New Double() {i * dx, 1 - i * dx}, P, 1.0#, Test2, Me)
+                                    tmp2 = MyFlash.Flash_PV(New Double() {x, 1 - x}, P, 1.0#, Test2, Me)
                                     calcT = tmp2(4)
                                     Test2 = calcT
                                     prevkid = tmp1(6)
@@ -4726,7 +4730,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                             i = i + 1
 
-                        Loop Until (i - 1) * dx >= 1
+                        Loop Until i > StepCount
                     End If
 
                     If MyFlash.AlgoType = Enums.FlashMethod.Nested_Loops_SVLLE Then
@@ -4751,7 +4755,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 tit = tf + (ti - tf) / 50 * i
                                 If bw IsNot Nothing Then If bw.CancellationPending Then Exit For Else bw.ReportProgress(0, "LLE (" & i + 1 & "/50)")
                                 Try
-                                    result = MyFlash.Flash_PT(New Double() {uim * dx, 1 - uim * dx}, P, tit, Me)
+                                    result = MyFlash.Flash_PT(New Double() {uim * dx + MinX, 1 - uim * dx - MinX}, P, tit, Me)
                                     If result(5) > 0.0# Then
                                         If Abs(result(2)(0) - result(6)(0)) > 0.01 Then
                                             px1l1.Add(result(2)(0))
@@ -4826,29 +4830,28 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                         i = 0
                         Do
-                            If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "SLE 1 (" & i + 1 & "/42)")
+                            x = MinX + i * dx
+                            If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "SLE 1 (" & i + 1 & "/" & StepCount + 1 & ")")
                             Try
-                                tmp1 = nlsle.Flash_PSF(New Double() {i * dx, 1 - i * dx}, P, L1, 0, Me)
+                                tmp1 = nlsle.Flash_PSF(New Double() {x, 1 - x}, P, L1, 0, Me)
                                 y1 = tmp1(4)
-                                x = i * dx
                                 pxs1.Add(x)
                                 pys1.Add(y1)
                             Catch ex As Exception
                                 SharedClasses.ExceptionProcessing.ExceptionParser.ProcessAndDisplayException(Flowsheet, ex)
                             End Try
                             i = i + 1
-                        Loop Until (i - 1) * dx >= 1
+                        Loop Until i > StepCount
 
                         i = 0
                         Do
-                            If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "SLE 2 (" & i + 1 & "/42)")
+                            x = MinX + i * dx
+                            If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "SLE 2 (" & i + 1 & "/" & StepCount + 1 & ")")
                             Try
-                                If i = 0 Then
+                                If x = 0 Then
                                     x = 0.001
-                                ElseIf i * dx = 1 Then
+                                ElseIf x = 1 Then
                                     x = 0.999
-                                Else
-                                    x = i * dx
                                 End If
                                 tmp1 = nlsle.Flash_PSF(New Double() {x, 1 - x}, P, L2, 0, Me)
                                 y2 = tmp1(4)
@@ -4859,7 +4862,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 SharedClasses.ExceptionProcessing.ExceptionParser.ProcessAndDisplayException(Flowsheet, ex)
                             End Try
                             i = i + 1
-                        Loop Until (i - 1) * dx >= 1
+                        Loop Until i > StepCount
                     End If
 
                     If Critical Then
@@ -4871,33 +4874,34 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                         i = 0
                         Do
-                            If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "Critical (" & i + 1 & "/42)")
+                            x = MinX + i * dx
+                            If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "Critical (" & i + 1 & "/" & StepCount + 1 & ")")
                             Try
                                 If TypeOf Me Is PengRobinsonPropertyPackage Then
-                                    If i = 0 Or (i * dx) >= 1 Then
+                                    If x = 0 Or x >= 1 Then
                                         Dim Tc As Double() = Me.RET_VTC
-                                        TCR = (i * dx) * Tc(0) + (1 - i * dx) * Tc(1)
+                                        TCR = x * Tc(0) + (1 - x) * Tc(1)
                                         PCR = 0.0#
                                         VCR = 0.0#
                                         CP.Clear()
                                         CP.Add(New Double() {TCR, PCR, VCR})
                                     Else
-                                        CP = cpc.CRITPT_PR(New Double() {i * dx, 1 - i * dx}, Me.RET_VTC, Me.RET_VPC, Me.RET_VVC, Me.RET_VW, Me.RET_VKij)
+                                        CP = cpc.CRITPT_PR(New Double() {x, 1 - x}, Me.RET_VTC, Me.RET_VPC, Me.RET_VVC, Me.RET_VW, Me.RET_VKij)
                                     End If
                                 ElseIf TypeOf Me Is SRKPropertyPackage Then
-                                    If i = 0 Or (i * dx) >= 1 Then
+                                    If x = 0 Or x >= 1 Then
                                         Dim Tc As Double() = Me.RET_VTC
-                                        TCR = (i * dx) * Tc(0) + (1 - i * dx) * Tc(1)
+                                        TCR = x * Tc(0) + (1 - x) * Tc(1)
                                         PCR = 0.0#
                                         VCR = 0.0#
                                         CP.Clear()
                                         CP.Add(New Double() {TCR, PCR, VCR})
                                     Else
-                                        CP = cpcs.CRITPT_PR(New Double() {i * dx, 1 - i * dx}, Me.RET_VTC, Me.RET_VPC, Me.RET_VVC, Me.RET_VW, Me.RET_VKij)
+                                        CP = cpcs.CRITPT_PR(New Double() {x, 1 - x}, Me.RET_VTC, Me.RET_VPC, Me.RET_VVC, Me.RET_VW, Me.RET_VKij)
                                     End If
                                 Else
                                     Dim Tc As Double() = Me.RET_VTC
-                                    TCR = (i * dx) * Tc(0) + (1 - i * dx) * Tc(1)
+                                    TCR = x * Tc(0) + (1 - x) * Tc(1)
                                     PCR = 0.0#
                                     VCR = 0.0#
                                     CP.Clear()
@@ -4908,7 +4912,6 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                     TCR = cp0(0)
                                     PCR = cp0(1)
                                     VCR = cp0(2)
-                                    x = i * dx
                                     pxc.Add(x)
                                     pyc.Add(TCR)
                                 End If
@@ -4916,7 +4919,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 SharedClasses.ExceptionProcessing.ExceptionParser.ProcessAndDisplayException(Flowsheet, ex)
                             End Try
                             i = i + 1
-                        Loop Until (i - 1) * dx >= 1
+                        Loop Until i > StepCount
                     End If
 
                     Return New Object() {px, py1, py2, px1l1, px1l2, py3, pxs1, pys1, pxs2, pys2, pxc, pyc}
@@ -4933,30 +4936,30 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                         i = 0
                         Do
-                            If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "VLE (" & i + 1 & "/42)")
+                            x = MinX + i * dx
+                            If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "VLE (" & i + 1 & "/" & StepCount + 1 & ")")
                             Try
                                 If i = 0 Then
-                                    tmp = Me.FlashBase.Flash_TV(New Double() {i * dx, 1 - i * dx}, T, 0, 0, Me)
+                                    tmp = Me.FlashBase.Flash_TV(New Double() {x, 1 - x}, T, 0, 0, Me)
                                     calcP = tmp(4)
                                     Pest1 = calcP
-                                    tmp = Me.FlashBase.Flash_TV(New Double() {i * dx, 1 - i * dx}, T, 1, 0, Me)
+                                    tmp = Me.FlashBase.Flash_TV(New Double() {x, 1 - x}, T, 1, 0, Me)
                                     y2 = tmp(4)
                                     Pest2 = y2
                                 Else
-                                    tmp = Me.FlashBase.Flash_TV(New Double() {i * dx, 1 - i * dx}, T, 0, Pest1, Me)
+                                    tmp = Me.FlashBase.Flash_TV(New Double() {x, 1 - x}, T, 0, Pest1, Me)
                                     calcP = tmp(4)
                                     Pest1 = calcP
-                                    tmp = Me.FlashBase.Flash_TV(New Double() {i * dx, 1 - i * dx}, T, 1, Pest2, Me)
+                                    tmp = Me.FlashBase.Flash_TV(New Double() {x, 1 - x}, T, 1, Pest2, Me)
                                     y2 = tmp(4)
                                     Pest2 = y2
                                 End If
-                                x = i * dx
                                 y1 = calcP
                                 px.Add(x)
                                 py1.Add(y1)
                                 py2.Add(y2)
                                 'check if liquid phase is stable.
-                                result = Me.FlashBase.Flash_PT(New Double() {i * dx, 1 - i * dx}, calcP * 1.3, T, Me)
+                                result = Me.FlashBase.Flash_PT(New Double() {x, 1 - x}, calcP * 1.3, T, Me)
                                 If result(5) > 0.0# Then
                                     Dim fcl1(1), fcl2(1) As Double
                                     fcl1 = Me.DW_CalcFugCoeff(result(2), T, calcP, State.Liquid)
@@ -4971,7 +4974,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 SharedClasses.ExceptionProcessing.ExceptionParser.ProcessAndDisplayException(Flowsheet, ex)
                             End Try
                             i = i + 1
-                        Loop Until (i - 1) * dx >= 1
+                        Loop Until i > StepCount
 
                         If unstable Then
                             Dim pi, pf, uim As Double, pit As Integer
@@ -4981,7 +4984,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                             i = 0
                             For pit = pi To pf Step (pf - pi) / 10
                                 If bw IsNot Nothing Then If bw.CancellationPending Then Exit For Else bw.ReportProgress(0, "LLE (" & i + 1 & "/28)")
-                                result = Me.FlashBase.Flash_PT(New Double() {uim * dx, 1 - uim * dx}, pit, T, Me)
+                                result = Me.FlashBase.Flash_PT(New Double() {uim * dx + MinX, 1 - uim * dx - MinX}, pit, T, Me)
                                 If result(5) > 0.0# Then
                                     If Abs(result(2)(0) - result(6)(0)) > 0.01 Then
                                         px1l1.Add(result(2)(0))
@@ -5007,25 +5010,25 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     If Not TypeOf Me.FlashBase Is Auxiliary.FlashAlgorithms.NestedLoopsSLE Then
                         i = 0
                         Do
-                            If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "VLE (" & i + 1 & "/42)")
+                            x = MinX + i * dx
+                            If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "VLE (" & i + 1 & StepCount + 1 & ")")
                             Try
                                 If i = 0 Then
-                                    tmp = Me.FlashBase.Flash_PV(New Double() {i * dx, 1 - i * dx}, P, 0, 0, Me)
+                                    tmp = Me.FlashBase.Flash_PV(New Double() {x, 1 - x}, P, 0, 0, Me)
                                     calcT = tmp(4)
                                     Test1 = calcT
                                 Else
-                                    tmp = Me.FlashBase.Flash_PV(New Double() {i * dx, 1 - i * dx}, P, 0, Test1, Me)
+                                    tmp = Me.FlashBase.Flash_PV(New Double() {x, 1 - x}, P, 0, Test1, Me)
                                     calcT = tmp(4)
                                     Test1 = calcT
                                 End If
-                                x = i * dx
                                 y = tmp(3)(0)
                                 px.Add(x)
                                 py.Add(y)
                             Catch ex As Exception
                             End Try
                             i = i + 1
-                        Loop Until (i - 1) * dx >= 1
+                        Loop Until i > StepCount
                     End If
 
                     Return New Object() {px, py}
@@ -5041,25 +5044,25 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     If Not TypeOf Me.FlashBase Is Auxiliary.FlashAlgorithms.NestedLoopsSLE Then
                         i = 0
                         Do
-                            If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "VLE (" & i + 1 & "/42)")
+                            x = MinX + i * dx
+                            If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "VLE (" & i + 1 & StepCount + 1 & ")")
                             Try
                                 If i = 0 Then
-                                    tmp = Me.FlashBase.Flash_TV(New Double() {i * dx, 1 - i * dx}, T, 0, 0, Me)
+                                    tmp = Me.FlashBase.Flash_TV(New Double() {x, 1 - x}, T, 0, 0, Me)
                                     calcP = tmp(4)
                                     Pest1 = calcP
                                 Else
-                                    tmp = Me.FlashBase.Flash_TV(New Double() {i * dx, 1 - i * dx}, T, 0, Pest1, Me)
+                                    tmp = Me.FlashBase.Flash_TV(New Double() {x, 1 - x}, T, 0, Pest1, Me)
                                     calcP = tmp(4)
                                     Pest1 = calcP
                                 End If
-                                x = i * dx
                                 y = tmp(3)(0)
                                 px.Add(x)
                                 py.Add(y)
                             Catch ex As Exception
                             End Try
                             i = i + 1
-                        Loop Until (i - 1) * dx >= 1
+                        Loop Until i > StepCount
                     End If
 
                     Return New Object() {px, py}
