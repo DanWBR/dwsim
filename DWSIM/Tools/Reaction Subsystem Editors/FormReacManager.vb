@@ -56,53 +56,59 @@ Public Class FormReacManager
 
     Private Sub KryptonButton8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton1.Click
         Dim rse As New FormReacSetEditor
-        rse.ShowDialog()
-        rse.Dispose()
-        With Me.GridRSets.Rows
-            .Clear()
-            For Each rs1 As ReactionSet In frmchild.Options.ReactionSets.Values
-                .Add(New Object() {rs1.Name, rs1.Description, rs1.ID})
-            Next
-        End With
+        rse.Show()
+        AddHandler rse.FormClosed, Sub()
+                                       With Me.GridRSets.Rows
+                                           .Clear()
+                                           For Each rs1 As ReactionSet In frmchild.Options.ReactionSets.Values
+                                               .Add(New Object() {rs1.Name, rs1.Description, rs1.ID})
+                                           Next
+                                       End With
+                                   End Sub
     End Sub
 
     Private Sub KryptonContextMenuItem1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles ConversaoToolStripMenuItem.Click
 
         Dim frc As New FormReacConv
-        Dim result As MsgBoxResult = frc.ShowDialog()
-        With Me.GridRxns.Rows
-            .Clear()
-            For Each rxn As Reaction In frmchild.Options.Reactions.Values
-                .Add(New Object() {rxn.Name, rxn.ReactionType, rxn.Equation, rxn.ID})
-            Next
-        End With
-        frc.Dispose()
+        frc.Show()
+        AddHandler frc.FormClosed, Sub()
+                                       With Me.GridRxns.Rows
+                                           .Clear()
+                                           For Each rxn As Reaction In frmchild.Options.Reactions.Values
+                                               .Add(New Object() {rxn.Name, rxn.ReactionType, rxn.Equation, rxn.ID})
+                                           Next
+                                       End With
+                                   End Sub
     End Sub
 
     Private Sub KryptonContextMenuItem2_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles EquilibrioToolStripMenuItem.Click
 
         Dim fre As New FormReacEq
-        fre.ShowDialog()
-        fre.Dispose()
-        With Me.GridRxns.Rows
-            .Clear()
-            For Each rxn As Reaction In frmchild.Options.Reactions.Values
-                .Add(New Object() {rxn.Name, rxn.ReactionType, rxn.Equation, rxn.ID})
-            Next
-        End With
+        fre.Show()
+        AddHandler fre.FormClosed, Sub()
+                                       With Me.GridRxns.Rows
+                                           .Clear()
+                                           For Each rxn As Reaction In frmchild.Options.Reactions.Values
+                                               .Add(New Object() {rxn.Name, rxn.ReactionType, rxn.Equation, rxn.ID})
+                                           Next
+                                       End With
+                                   End Sub
+
     End Sub
 
     Private Sub KryptonContextMenuItem3_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles CineticaToolStripMenuItem.Click
 
         Dim frk As New FormReacKinetic
-        frk.ShowDialog()
-        frk.Dispose()
-        With Me.GridRxns.Rows
-            .Clear()
-            For Each rxn As Reaction In frmchild.Options.Reactions.Values
-                .Add(New Object() {rxn.Name, rxn.ReactionType, rxn.Equation, rxn.ID})
-            Next
-        End With
+        frk.Show()
+        AddHandler frk.FormClosed, Sub()
+                                       With Me.GridRxns.Rows
+                                           .Clear()
+                                           For Each rxn As Reaction In frmchild.Options.Reactions.Values
+                                               .Add(New Object() {rxn.Name, rxn.ReactionType, rxn.Equation, rxn.ID})
+                                           Next
+                                       End With
+                                   End Sub
+
     End Sub
 
     Private Sub KryptonButton4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton4.Click
@@ -272,39 +278,61 @@ Public Class FormReacManager
                         .mode = "Edit"
                         .rc = rxn
                     End With
-                    frc.ShowDialog()
-                    frc.Dispose()
+                    AddHandler frc.FormClosed, Sub()
+                                                   For Each row As DataGridViewRow In GridRxns.Rows
+                                                       Dim rxn1 = frmchild.Options.Reactions(row.Cells(3).Value)
+                                                       row.Cells(0).Value = rxn1.Name
+                                                       row.Cells(1).Value = rxn1.ReactionType
+                                                       row.Cells(2).Value = rxn1.Equation
+                                                   Next
+                                               End Sub
+                    frc.Show()
                 Case ReactionType.Equilibrium
                     Dim fre As New FormReacEq
                     With fre
                         .mode = "Edit"
                         .rc = rxn
                     End With
-                    fre.ShowDialog()
-                    fre.Dispose()
+                    AddHandler fre.FormClosed, Sub()
+                                                   For Each row As DataGridViewRow In GridRxns.Rows
+                                                       Dim rxn1 = frmchild.Options.Reactions(row.Cells(3).Value)
+                                                       row.Cells(0).Value = rxn1.Name
+                                                       row.Cells(1).Value = rxn1.ReactionType
+                                                       row.Cells(2).Value = rxn1.Equation
+                                                   Next
+                                               End Sub
+                    fre.Show()
                 Case ReactionType.Kinetic
                     Dim frk As New FormReacKinetic
                     With frk
                         .mode = "Edit"
                         .rc = rxn
                     End With
-                    frk.ShowDialog()
-                    frk.Dispose()
+                    AddHandler frk.FormClosed, Sub()
+                                                   For Each row As DataGridViewRow In GridRxns.Rows
+                                                       Dim rxn1 = frmchild.Options.Reactions(row.Cells(3).Value)
+                                                       row.Cells(0).Value = rxn1.Name
+                                                       row.Cells(1).Value = rxn1.ReactionType
+                                                       row.Cells(2).Value = rxn1.Equation
+                                                   Next
+                                               End Sub
+                    frk.Show()
                 Case ReactionType.Heterogeneous_Catalytic
                     Dim frk As New FormReacHeterog
                     With frk
                         .mode = "Edit"
                         .rc = rxn
                     End With
-                    frk.ShowDialog()
-                    frk.Dispose()
+                    AddHandler frk.FormClosed, Sub()
+                                                   For Each row As DataGridViewRow In GridRxns.Rows
+                                                       Dim rxn1 = frmchild.Options.Reactions(row.Cells(3).Value)
+                                                       row.Cells(0).Value = rxn1.Name
+                                                       row.Cells(1).Value = rxn1.ReactionType
+                                                       row.Cells(2).Value = rxn1.Equation
+                                                   Next
+                                               End Sub
+                    frk.Show()
             End Select
-            For Each row As DataGridViewRow In GridRxns.Rows
-                Dim rxn1 = frmchild.Options.Reactions(row.Cells(3).Value)
-                row.Cells(0).Value = rxn1.Name
-                row.Cells(1).Value = rxn1.ReactionType
-                row.Cells(2).Value = rxn1.Equation
-            Next
         End If
     End Sub
 
@@ -381,14 +409,15 @@ Public Class FormReacManager
 
     Private Sub HeterogeneaCataliticaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HeterogeneaCataliticaToolStripMenuItem.Click
         Dim frk As New FormReacHeterog
-        frk.ShowDialog()
-        frk.Dispose()
-        With Me.GridRxns.Rows
-            .Clear()
-            For Each rxn As Reaction In frmchild.Options.Reactions.Values
-                .Add(New Object() {rxn.Name, rxn.ReactionType, rxn.Equation, rxn.ID})
-            Next
-        End With
+        frk.Show()
+        AddHandler frk.FormClosed, Sub()
+                                       With Me.GridRxns.Rows
+                                           .Clear()
+                                           For Each rxn As Reaction In frmchild.Options.Reactions.Values
+                                               .Add(New Object() {rxn.Name, rxn.ReactionType, rxn.Equation, rxn.ID})
+                                           Next
+                                       End With
+                                   End Sub
     End Sub
 
     Private Sub GridRxns_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles GridRxns.CellDoubleClick

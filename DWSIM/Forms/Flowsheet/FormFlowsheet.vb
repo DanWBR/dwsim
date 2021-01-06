@@ -2677,9 +2677,6 @@ Public Class FormFlowsheet
     End Property
 
     Public Function GetTranslatedString1(text As String) As String Implements IFlowsheet.GetTranslatedString, IFlowsheetGUI.GetTranslatedString
-        If _translatefunction IsNot Nothing Then
-            Return _translatefunction.Invoke(text)
-        End If
         Dim returntext As String
         returntext = DWSIM.App.GetLocalString(text)
         If returntext <> text Then Return returntext

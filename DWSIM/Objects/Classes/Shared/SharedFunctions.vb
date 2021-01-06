@@ -174,12 +174,6 @@ Namespace DWSIM
 
         Public Shared Function GetLocalString(ByVal id As String) As String
 
-            If My.Application.ActiveSimulation IsNot Nothing Then
-                If My.Application.ActiveSimulation._translatefunction IsNot Nothing Then
-                    Return My.Application.ActiveSimulation._translatefunction.Invoke(id)
-                End If
-            End If
-
             If My.Application._ResourceManager Is Nothing Then
 
                 Dim cultureinfo As String = "en"
@@ -204,7 +198,16 @@ Namespace DWSIM
             If id <> "" Then
                 Dim retstr As String
                 retstr = My.Application._ResourceManager.GetString(id, My.Application._CultureInfo)
-                If retstr Is Nothing Then Return id Else Return retstr
+                If retstr Is Nothing Then
+                    Return id
+                Else
+                    If My.Application.ActiveSimulation IsNot Nothing Then
+                        If My.Application.ActiveSimulation._translatefunction IsNot Nothing Then
+                            Return My.Application.ActiveSimulation._translatefunction.Invoke(retstr)
+                        End If
+                    End If
+                    Return retstr
+                End If
             Else
                 Return ""
             End If
