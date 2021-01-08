@@ -244,6 +244,5 @@ Namespace MathEx.Optimization
 
     End Class
 
-
 End Namespace
 

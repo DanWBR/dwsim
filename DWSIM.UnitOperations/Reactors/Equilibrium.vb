@@ -1027,6 +1027,12 @@ Namespace Reactors
                 efunc.Invoke(T)
             End If
 
+            If g1 > g0 Then
+
+                Throw New Exception("Invalid solution (gf > g0)")
+
+            End If
+
             IObj?.Paragraphs.Add(String.Format("Final Gibbs Energy: {0}", g1))
 
             Me.ReactionExtents.Clear()

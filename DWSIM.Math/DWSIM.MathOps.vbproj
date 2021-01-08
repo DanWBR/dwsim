@@ -149,7 +149,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="NetwonSolver.vb" />
+    <Compile Include="NewtonSolver.vb" />
     <Compile Include="Quadratic.vb" />
     <Compile Include="SysLin.vb" />
   </ItemGroup>
