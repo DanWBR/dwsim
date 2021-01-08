@@ -200,112 +200,48 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim T0 As Double = Tref
             If T0 = 0.0 Then T0 = 298.15
 
-            Dim names = PP.RET_VNAMES
+            Dim Flashtype As String = FlashSettings(FlashSetting.ForceEquilibriumCalculationType)
 
             Dim hres = PerformHeuristicsTest(Vz, T0, P, PP)
 
+            If Flashtype = "Default" Then
+
+                'chech possible phases to decide on suitabel flash algorithm
+                If hres.SolidPhase Or PP.ForcedSolids.Count > 0 Then
+                    If hres.LiquidPhaseSplit Then
+                        Flashtype = "SVLLE"
+                    Else
+                        Flashtype = "SVLE"
+                    End If
+                Else
+                    If hres.LiquidPhaseSplit Then
+                        Flashtype = "VLLE"
+                    Else
+                        Flashtype = "VLE"
+                    End If
+                End If
+            End If
+
             Dim result As Object = Nothing
 
-            Dim T, L1, L2, S, Vy(), Vx1(), Vx2(), Vs(), VxM(), Lm As Double
-
-            If PP.ForcedSolids.Count > 0 Then
-
-                'we have forced solids
-
-                Dim Vzns As Double() = Vz.Clone
-                Vs = PP.RET_NullVector
-                For Each item In PP.ForcedSolids
-                    Dim index = names.ToList.IndexOf(item)
-                    Vs(index) = Vz(index)
-                    Vzns(index) = 0.0
-                Next
-                S = Vs.Sum
-                Vzns = Vzns.NormalizeY
-                Vs = Vs.NormalizeY
-
-                If hres.LiquidPhaseSplit Then
-                    Dim nl3 = New NestedLoops3PV3
-                    nl3.FlashSettings = FlashSettings
-                    result = nl3.Flash_PV(Vzns, P, V, Tref, PP, ReuseKI, PrevKi)
-                Else
-                    Dim nl = New NestedLoops
-                    nl.FlashSettings = FlashSettings
-                    result = nl.Flash_PV(Vzns, P, V, Tref, PP, ReuseKI, PrevKi)
-                End If
-
-                'Return New Object() {L, V, Vx, Vy, T, ecount, Ki, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
-
-                L1 = result(0) * (1 - S)
-                V = result(1) * (1 - S)
-                Vx1 = result(2)
-                Vy = result(3)
-                T = result(4)
-                L2 = result(7) * (1 - S)
-                Vx2 = result(8)
-
-                Return New Object() {L1, V, Vx1, Vy, T, result(5), result(6), L2 * (1 - S), Vx2, S, Vs}
-
-            Else
-
-                If hres.LiquidPhaseSplit Then
-                    Dim nl3 = New NestedLoops3PV3
-                    nl3.FlashSettings = FlashSettings
-                    result = nl3.Flash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
-                Else
+            Select Case Flashtype
+                Case "VLE"
                     Dim nl = New NestedLoops
                     nl.FlashSettings = FlashSettings
                     result = nl.Flash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
-                End If
-
-                'Return New Object() {L, V, Vx, Vy, T, ecount, Ki, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
-
-                L1 = result(0)
-                V = result(1)
-                Vx1 = result(2)
-                Vy = result(3)
-                T = result(4)
-                L2 = result(7)
-                Vx2 = result(8)
-
-                If hres.SolidPhase And L1 > 0 Then
-
+                Case "VLLE"
+                    Dim nl3 = New NestedLoops3PV3
+                    nl3.FlashSettings = FlashSettings
+                    result = nl3.Flash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
+                Case "SVLE"
                     Dim nls = New NestedLoopsSLE
                     nls.FlashSettings = FlashSettings
-
-                    Lm = L1 + L2
-
-                    VxM = Vx1.MultiplyConstY(L1).AddY(Vx2.MultiplyConstY(L2)).MultiplyConstY(1 / (L1 + L2))
-
-                    Dim resultS = nls.Flash_SL(VxM, P, T, PP)
-
-                    'Return New Object() {L, 1 - L, 0.0#, Vx, Vs, L - L_old, ecount, d2 - d1}
-
-                    S = resultS(1) * Lm
-                    Lm = resultS(0) * Lm
-
-                    VxM = resultS(3)
-                    Vs = resultS(4)
-
-                    Dim nll = New SimpleLLE()
-
-                    Dim resultL = nll.Flash_PT(VxM, P, T, PP)
-
-                    'Return New Object() {L1, V, Vx1, PP.RET_NullVector, ecount, L2, Vx2, 0.0#, PP.RET_NullVector, gamma1, gamma2}
-
-                    L1 = resultL(0) * Lm
-                    Vx1 = resultL(2)
-                    L2 = resultL(7) * Lm
-                    Vx2 = resultL(8)
-
-                    Return New Object() {L1, V, Vx1, Vy, T, result(5), result(6), L2, Vx2, S, Vs}
-
-                Else
-
-                    Return New Object() {L1, V, Vx1, Vy, T, result(5), result(6), L2, Vx2, 0.0, PP.RET_NullVector()}
-
-                End If
-
-            End If
+                    result = nls.Flash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
+                Case "SVLLE"
+                    Dim nl As New NestedLoopsSVLLE With {.FlashSettings = FlashSettings}
+                    nl.FlashSettings = FlashSettings
+                    result = nl.Flash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
+            End Select
 
             Return result
 
