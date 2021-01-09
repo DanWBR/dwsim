@@ -13,7 +13,7 @@ DWSIM is a software for modeling, simulation and optimization of steady-state an
 
 ### License
 
-DWSIM is licensed under the GNU General Public License (GPL) Version 3.
+DWSIM is licensed under the Lesser GNU General Public License (GPL) Version 3.
 
 ### Supported Operating Systems
 
