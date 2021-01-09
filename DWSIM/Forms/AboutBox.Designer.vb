@@ -31,20 +31,18 @@ Partial Class AboutBox
         Me.Copyright = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.LabelLicense = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.LblOSInfo = New System.Windows.Forms.Label()
         Me.LblCLRInfo = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
         Me.FaTabStrip1 = New FarsiLibrary.Win.FATabStrip()
         Me.FaTabStripItem1 = New FarsiLibrary.Win.FATabStripItem()
-        Me.Label6 = New System.Windows.Forms.Label()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.lblGPGPUinfo = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Lblcpusimd = New System.Windows.Forms.Label()
@@ -91,6 +89,9 @@ Partial Class AboutBox
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStrip1.SuspendLayout()
         Me.FaTabStripItem1.SuspendLayout()
+        Me.TabControl1.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
         Me.FaTabStripItem5.SuspendLayout()
         CType(Me.dgvDWSIMComponents, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStripItem2.SuspendLayout()
@@ -146,17 +147,11 @@ Partial Class AboutBox
         Me.LinkLabel2.Name = "LinkLabel2"
         Me.LinkLabel2.TabStop = True
         '
-        'Label5
-        '
-        resources.ApplyResources(Me.Label5, "Label5")
-        Me.Label5.BackColor = System.Drawing.Color.Transparent
-        Me.Label5.Name = "Label5"
-        '
         'LabelLicense
         '
-        resources.ApplyResources(Me.LabelLicense, "LabelLicense")
         Me.LabelLicense.BackColor = System.Drawing.Color.Transparent
         Me.LabelLicense.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        resources.ApplyResources(Me.LabelLicense, "LabelLicense")
         Me.LabelLicense.Name = "LabelLicense"
         '
         'TextBox1
@@ -190,30 +185,6 @@ Partial Class AboutBox
         Me.Label4.BackColor = System.Drawing.Color.Transparent
         Me.Label4.Name = "Label4"
         '
-        'Label3
-        '
-        resources.ApplyResources(Me.Label3, "Label3")
-        Me.Label3.BackColor = System.Drawing.Color.Transparent
-        Me.Label3.Name = "Label3"
-        '
-        'Label8
-        '
-        resources.ApplyResources(Me.Label8, "Label8")
-        Me.Label8.BackColor = System.Drawing.Color.Transparent
-        Me.Label8.Name = "Label8"
-        '
-        'Label9
-        '
-        resources.ApplyResources(Me.Label9, "Label9")
-        Me.Label9.BackColor = System.Drawing.Color.Transparent
-        Me.Label9.Name = "Label9"
-        '
-        'Label10
-        '
-        resources.ApplyResources(Me.Label10, "Label10")
-        Me.Label10.BackColor = System.Drawing.Color.Transparent
-        Me.Label10.Name = "Label10"
-        '
         'FaTabStrip1
         '
         Me.FaTabStrip1.AlwaysShowClose = False
@@ -226,7 +197,7 @@ Partial Class AboutBox
         'FaTabStripItem1
         '
         Me.FaTabStripItem1.CanClose = False
-        Me.FaTabStripItem1.Controls.Add(Me.Label6)
+        Me.FaTabStripItem1.Controls.Add(Me.TabControl1)
         Me.FaTabStripItem1.Controls.Add(Me.lblGPGPUinfo)
         Me.FaTabStripItem1.Controls.Add(Me.Label14)
         Me.FaTabStripItem1.Controls.Add(Me.Lblcpusimd)
@@ -235,30 +206,47 @@ Partial Class AboutBox
         Me.FaTabStripItem1.Controls.Add(Me.Label12)
         Me.FaTabStripItem1.Controls.Add(Me.Lblmem)
         Me.FaTabStripItem1.Controls.Add(Me.Label11)
-        Me.FaTabStripItem1.Controls.Add(Me.Label9)
         Me.FaTabStripItem1.Controls.Add(Me.LinkLabel1)
-        Me.FaTabStripItem1.Controls.Add(Me.Label10)
         Me.FaTabStripItem1.Controls.Add(Me.Label2)
-        Me.FaTabStripItem1.Controls.Add(Me.Label8)
         Me.FaTabStripItem1.Controls.Add(Me.LinkLabel2)
-        Me.FaTabStripItem1.Controls.Add(Me.Label3)
-        Me.FaTabStripItem1.Controls.Add(Me.Label5)
         Me.FaTabStripItem1.Controls.Add(Me.LblCLRInfo)
         Me.FaTabStripItem1.Controls.Add(Me.Label4)
         Me.FaTabStripItem1.Controls.Add(Me.LabelLicense)
         Me.FaTabStripItem1.Controls.Add(Me.LblOSInfo)
-        Me.FaTabStripItem1.Controls.Add(Me.TextBox1)
         Me.FaTabStripItem1.Controls.Add(Me.Label7)
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
         Me.FaTabStripItem1.Selected = True
         resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         '
-        'Label6
+        'TabControl1
         '
-        resources.ApplyResources(Me.Label6, "Label6")
-        Me.Label6.BackColor = System.Drawing.Color.Transparent
-        Me.Label6.Name = "Label6"
+        Me.TabControl1.Controls.Add(Me.TabPage1)
+        Me.TabControl1.Controls.Add(Me.TabPage2)
+        resources.ApplyResources(Me.TabControl1, "TabControl1")
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        '
+        'TabPage1
+        '
+        Me.TabPage1.Controls.Add(Me.TextBox1)
+        resources.ApplyResources(Me.TabPage1, "TabPage1")
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'TabPage2
+        '
+        Me.TabPage2.Controls.Add(Me.TextBox2)
+        resources.ApplyResources(Me.TabPage2, "TabPage2")
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'TextBox2
+        '
+        Me.TextBox2.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.TextBox2, "TextBox2")
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.ReadOnly = True
         '
         'lblGPGPUinfo
         '
@@ -597,6 +585,11 @@ Partial Class AboutBox
         Me.FaTabStrip1.ResumeLayout(False)
         Me.FaTabStripItem1.ResumeLayout(False)
         Me.FaTabStripItem1.PerformLayout()
+        Me.TabControl1.ResumeLayout(False)
+        Me.TabPage1.ResumeLayout(False)
+        Me.TabPage1.PerformLayout()
+        Me.TabPage2.ResumeLayout(False)
+        Me.TabPage2.PerformLayout()
         Me.FaTabStripItem5.ResumeLayout(False)
         Me.FaTabStripItem5.PerformLayout()
         CType(Me.dgvDWSIMComponents, System.ComponentModel.ISupportInitialize).EndInit()
@@ -618,17 +611,12 @@ Partial Class AboutBox
     Public WithEvents Copyright As System.Windows.Forms.Label
     Public WithEvents Label2 As System.Windows.Forms.Label
     Public WithEvents LinkLabel2 As System.Windows.Forms.LinkLabel
-    Public WithEvents Label5 As System.Windows.Forms.Label
     Public WithEvents LabelLicense As System.Windows.Forms.Label
     Public WithEvents TextBox1 As System.Windows.Forms.TextBox
     Public WithEvents Label7 As System.Windows.Forms.Label
     Public WithEvents LblOSInfo As System.Windows.Forms.Label
     Public WithEvents LblCLRInfo As System.Windows.Forms.Label
     Public WithEvents Label4 As System.Windows.Forms.Label
-    Public WithEvents Label3 As System.Windows.Forms.Label
-    Public WithEvents Label8 As System.Windows.Forms.Label
-    Public WithEvents Label9 As System.Windows.Forms.Label
-    Public WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents FaTabStrip1 As FarsiLibrary.Win.FATabStrip
     Friend WithEvents FaTabStripItem1 As FarsiLibrary.Win.FATabStripItem
     Friend WithEvents FaTabStripItem2 As FarsiLibrary.Win.FATabStripItem
@@ -669,10 +657,13 @@ Partial Class AboutBox
     Friend WithEvents Column5 As System.Windows.Forms.DataGridViewLinkColumn
     Friend WithEvents Column6 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column7 As System.Windows.Forms.DataGridViewLinkColumn
-    Public WithEvents Label6 As Label
     Friend WithEvents FaTabStripItem6 As FarsiLibrary.Win.FATabStripItem
     Friend WithEvents DataGridView2 As DataGridView
     Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewLinkColumn3 As DataGridViewLinkColumn
+    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents TabPage1 As TabPage
+    Friend WithEvents TabPage2 As TabPage
+    Public WithEvents TextBox2 As TextBox
 End Class
