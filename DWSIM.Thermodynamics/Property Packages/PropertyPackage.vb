@@ -2354,7 +2354,7 @@ Namespace PropertyPackages
                                 subst.FugacityCoeff = FCL(i)
                                 subst.ActivityCoeff = 0
                                 subst.PartialVolume = 0
-                                subst.PartialPressure = 0
+                                subst.PartialPressure = Vx(i) * FCL(i) * P
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
@@ -2366,7 +2366,7 @@ Namespace PropertyPackages
                                 subst.FugacityCoeff = FCL2(i)
                                 subst.ActivityCoeff = 0
                                 subst.PartialVolume = 0
-                                subst.PartialPressure = 0
+                                subst.PartialPressure = Vx2(i) * FCL2(i) * P
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(4).Compounds.Values
@@ -2378,7 +2378,7 @@ Namespace PropertyPackages
                                 subst.FugacityCoeff = FCV(i)
                                 subst.ActivityCoeff = 0
                                 subst.PartialVolume = 0
-                                subst.PartialPressure = 0
+                                subst.PartialPressure = Vy(i) * FCV(i) * P
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
@@ -2556,7 +2556,7 @@ Namespace PropertyPackages
                                 subst.FugacityCoeff = FCL(i)
                                 subst.ActivityCoeff = 0
                                 subst.PartialVolume = 0
-                                subst.PartialPressure = 0
+                                subst.PartialPressure = Vx(i) * FCL(i) * P
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
@@ -2568,7 +2568,7 @@ Namespace PropertyPackages
                                 subst.FugacityCoeff = FCL2(i)
                                 subst.ActivityCoeff = 0
                                 subst.PartialVolume = 0
-                                subst.PartialPressure = 0
+                                subst.PartialPressure = Vx2(i) * FCL2(i) * P
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(4).Compounds.Values
@@ -2580,7 +2580,7 @@ Namespace PropertyPackages
                                 subst.FugacityCoeff = FCV(i)
                                 subst.ActivityCoeff = 0
                                 subst.PartialVolume = 0
-                                subst.PartialPressure = 0
+                                subst.PartialPressure = Vy(i) * FCV(i) * P
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
@@ -2833,7 +2833,7 @@ redirect:                       IObj?.SetCurrent()
                                     subst.FugacityCoeff = FCL(i)
                                     subst.ActivityCoeff = 0
                                     subst.PartialVolume = 0
-                                    subst.PartialPressure = 0
+                                    subst.PartialPressure = Vx(i) * FCL(i) * P
                                     i += 1
                                 Next
                                 i = 1
@@ -2847,7 +2847,7 @@ redirect:                       IObj?.SetCurrent()
                                     subst.FugacityCoeff = FCL2(i)
                                     subst.ActivityCoeff = 0
                                     subst.PartialVolume = 0
-                                    subst.PartialPressure = 0
+                                    subst.PartialPressure = Vx2(i) * FCL2(i) * P
                                     i += 1
                                 Next
                                 i = 1
@@ -2861,7 +2861,7 @@ redirect:                       IObj?.SetCurrent()
                                     subst.FugacityCoeff = FCV(i)
                                     subst.ActivityCoeff = 0
                                     subst.PartialVolume = 0
-                                    subst.PartialPressure = 0
+                                    subst.PartialPressure = Vy(i) * FCV(i) * P
                                     i += 1
                                 Next
                                 i = 1
@@ -3042,7 +3042,7 @@ redirect2:                      IObj?.SetCurrent()
                                     subst.FugacityCoeff = FCL(i)
                                     subst.ActivityCoeff = 0
                                     subst.PartialVolume = 0
-                                    subst.PartialPressure = 0
+                                    subst.PartialPressure = Vx(i) * FCL(i) * P
                                     i += 1
                                 Next
                                 i = 1
@@ -3056,7 +3056,7 @@ redirect2:                      IObj?.SetCurrent()
                                     subst.FugacityCoeff = FCL2(i)
                                     subst.ActivityCoeff = 0
                                     subst.PartialVolume = 0
-                                    subst.PartialPressure = 0
+                                    subst.PartialPressure = Vx2(i) * FCL2(i) * P
                                     i += 1
                                 Next
                                 i = 1
@@ -3070,7 +3070,7 @@ redirect2:                      IObj?.SetCurrent()
                                     subst.FugacityCoeff = FCV(i)
                                     subst.ActivityCoeff = 0
                                     subst.PartialVolume = 0
-                                    subst.PartialPressure = 0
+                                    subst.PartialPressure = Vy(i) * FCV(i) * P
                                     i += 1
                                 Next
 
@@ -9495,7 +9495,9 @@ Final3:
                 For Each pi As PhaseInfo In Me.PhaseMappings.Values
                     If phaseLabel = pi.PhaseLabel Then
                         For Each p As String In props
-                            Me.DW_CalcProp(p, pi.DWPhaseID)
+                            If p <> "partialpressure" Then
+                                Me.DW_CalcProp(p, pi.DWPhaseID)
+                            End If
                         Next
                         'Me.DW_CalcPhaseProps(pi.DWPhaseID)
                         Exit For
@@ -9816,6 +9818,12 @@ Final3:
                                 res.Add(Me.CurrentMaterialStream.Phases(f).Compounds(c).MolarFlow.GetValueOrDefault / Me.CurrentMaterialStream.Phases(f).Properties.volumetric_flow.GetValueOrDefault)
                             Next
                             basis = ""
+                        Case "partialpressure"
+                            For Each c As String In comps
+                                res.Add(Me.CurrentMaterialStream.Phases(f).Compounds(c).MoleFraction.GetValueOrDefault *
+                                        Me.CurrentMaterialStream.Phases(f).Compounds(c).FugacityCoeff.GetValueOrDefault * P)
+                            Next
+                            basis = ""
                         Case "phasefraction"
                             Select Case basis
                                 Case "Molar", "molar", "mole", "Mole"
@@ -10015,6 +10023,8 @@ Final3:
                 .Add("heatCapacityCv")
                 .Add("enthalpy")
                 .Add("entropy")
+                .Add("enthalpyF")
+                .Add("entropyF")
                 .Add("internalEnergy")
                 .Add("helmholtzEnergy")
                 .Add("gibbsEnergy")

@@ -4636,6 +4636,10 @@ Namespace Streams
                                 res.Add(Me.Phases(f).Compounds(c).MassFlow.GetValueOrDefault)
                             Next
                     End Select
+                Case "partialpressure"
+                    For Each c As String In comps
+                        res.Add(Me.Phases(f).Compounds(c).PartialPressure.GetValueOrDefault)
+                    Next
                 Case "fraction", "massfraction", "molarfraction"
                     Select Case basis
                         Case "Molar", "molar", "mole", "Mole"
@@ -5244,6 +5248,12 @@ Namespace Streams
                                 i += 1
                             Next
                     End Select
+                Case "partialpressure"
+                    Dim i As Integer = 0
+                    For Each c As String In comps
+                        Me.Phases(f).Compounds(c).PartialPressure = values(comps.IndexOf(c))
+                        i += 1
+                    Next
                 Case "phasefraction"
                     Select Case basis
                         Case "Molar", "molar", "mole", "Mole"
