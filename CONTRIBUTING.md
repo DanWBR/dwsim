@@ -14,8 +14,8 @@ The DWSIM project maintains that all code copyrights are held by the original au
 
 The DWSIM project uses the following licenses:
 
-* The  [Lesser General Public License Version 3](https://www.gnu.org/licenses/lgpl-3.0.txt).
-* The  [General Public License Version 3](https://www.gnu.org/licenses/gpl-3.0.txt).
+* The  [Lesser General Public License Version 3](https://www.gnu.org/licenses/lgpl-3.0.txt)
+* The  [General Public License Version 3](https://www.gnu.org/licenses/gpl-3.0.txt)
 
 ## Copying Files from Other Projects
 
@@ -24,7 +24,7 @@ At times DWSIM may use some files from other projects, typically where a binary 
 The following rules must be followed for any code contributions that include files from another project:
 
 * The license of the file is [permissive](https://en.wikipedia.org/wiki/Permissive_free_software_licence).
-* The license of the file is left in-tact.
+* The license of the file is left intact.
 * The contribution is correctly attributed in the `third party notices`(e.g. NOTICES) file in the repository to which it is being contributed.
 
 ## Porting Files from Other Projects
