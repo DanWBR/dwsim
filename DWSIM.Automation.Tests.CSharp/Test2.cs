@@ -16,26 +16,7 @@ class Test2
 
         //create automation manager
 
-        var swInterface = Stopwatch.StartNew();
         var interf = new DWSIM.Automation.Automation2();
-        swInterface.Stop();
-        Console.WriteLine($"Interface created in {swInterface.ElapsedMilliseconds} ms");
-
-        //for (int i = 0; i < 5; i++)
-        //{
-        //    var swCreateFlowsheet = Stopwatch.StartNew();
-        //    var sim0 = interf.CreateFlowsheet();
-        //    swCreateFlowsheet.Stop();
-        //    Console.WriteLine($"Flowsheet created in {swCreateFlowsheet.ElapsedMilliseconds} ms");
-
-        //    var swFlowsheet = Stopwatch.StartNew();
-        //    var sim = interf.LoadFlowsheet("samples" + System.IO.Path.DirectorySeparatorChar + "Biodiesel Production.dwxmz");
-        //    swFlowsheet.Stop();
-        //    Console.WriteLine($"Flowsheet loaded in {swFlowsheet.ElapsedMilliseconds} ms");
-        //}
-
-        //Console.ReadKey();
-        //return;
 
         var sim = interf.CreateFlowsheet();
 
