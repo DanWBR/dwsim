@@ -2,97 +2,53 @@
 Imports System.Net.Http
 Imports System.Net
 Imports System.Text
-Imports System.Collections.Specialized
-Imports System.IO
 Imports System.Web
-Imports Globalization = System.Globalization
+Imports System.Threading.Tasks
+Imports System.Web.Script.Serialization
+Imports System.Globalization
 
 Public Class ChemeoParser
 
-    Shared Function GetCompoundIDs(searchstring As String, exact As Boolean) As List(Of String())
+    Shared Async Function GetCompoundIDs(searchstring As String, exact As Boolean) As Task(Of List(Of String()))
+        Dim url As String = "https://www.chemeo.com/api/v1/search?q=" & HttpUtility.UrlEncode(searchstring)
 
-        Dim ci As System.Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
+        Dim response As HttpResponseMessage = Await GetResponse(url)
+        If response.IsSuccessStatusCode Then
+            Dim jss As New JavaScriptSerializer()
+            Dim json As String = Await response.Content.ReadAsStringAsync()
+            Dim result = jss.Deserialize(Of SearchResponse)(json)
+            Dim resultFilter = If(exact,
+                Function(x As Compound) String.Equals(x.Compound, searchstring, StringComparison.OrdinalIgnoreCase),
+                Function(x As Compound) True)
+            Return result.Compounds.Where(resultFilter).Select(Function(x) New String() {x.Id, x.Compound}).ToList()
+        Else
+            'do we want to report a failure?
+            Return New List(Of String())
+        End If
+    End Function
 
-        Dim website As String = "https://www.chemeo.com/search?q=" + HttpUtility.UrlEncode(searchstring)
-
-        Dim siteUri As Uri = New Uri(website)
+    Private Shared Async Function GetResponse(url As String) As Task(Of HttpResponseMessage)
+        Dim siteUri As Uri = New Uri(url)
         Dim proxyUri As Uri = Net.WebRequest.GetSystemWebProxy.GetProxy(siteUri)
 
         Dim handler As New HttpClientHandler()
 
         If Not siteUri.AbsolutePath = proxyUri.AbsolutePath Then
-            Dim proxyObj As New WebProxy(proxyUri)
-            proxyObj.Credentials = CredentialCache.DefaultCredentials
+            Dim proxyObj As New WebProxy(proxyUri) With {
+                .Credentials = CredentialCache.DefaultCredentials
+            }
             handler.Proxy = proxyObj
         End If
 
         Dim http As New HttpClient(handler)
 
-        Dim response = http.GetByteArrayAsync(website)
-        response.Wait()
-
-        Dim source As [String] = Encoding.GetEncoding("utf-8").GetString(response.Result, 0, response.Result.Length - 1)
-        source = WebUtility.HtmlDecode(source)
-
-        Dim htmlpage As New HtmlDocument()
-
-        htmlpage.LoadHtml(source)
-
-        Dim exactmatch = htmlpage.DocumentNode.Descendants("p").Where(Function(x) x.InnerText.Contains("Found one exact match")).SingleOrDefault
-
-        Dim results As New List(Of String())
-
-        If Not exactmatch Is Nothing Then
-            Dim link As String = exactmatch.Descendants("a").SingleOrDefault.Attributes("href").Value
-            Dim splittedstr = link.Split("/".ToCharArray, StringSplitOptions.RemoveEmptyEntries)
-            Dim id As String = splittedstr(1)
-            Dim name As String = HttpUtility.UrlDecode(splittedstr(2))
-            results.Add(New String() {id, name})
-        End If
-
-        If htmlpage.DocumentNode.InnerHtml.ToLower.Contains("your search did not match any chemical components") Then
-            Return results
-        ElseIf Not htmlpage.DocumentNode.InnerHtml.ToLower.Contains("table") Then
-            Return results
-        End If
-
-        Dim rows = htmlpage.DocumentNode.Descendants("table")(1).Descendants("tr").ToList
-
-        For Each r In rows
-            If Not r.InnerHtml.Contains("CAS") And Not r.InnerHtml.Contains("Next Results") Then
-                Try
-                    Dim id As String = ""
-                    Dim name As String = ""
-                    id = r.Descendants("a")(0).InnerText
-                    name = r.Descendants("a")(2).InnerText
-                    results.Add(New String() {id, name})
-                Catch ex As Exception
-                End Try
-            End If
-        Next
-
-        If results.Count > 0 Then
-            If exact Then
-                Dim match = results.Where(Function(x) x(1).ToLower.Equals(searchstring.ToLower)).ToList
-                If match.Count > 0 Then
-                    Return match
-                Else
-                    Dim list As New List(Of String())
-                    list.Add(results(0))
-                    Return list
-                End If
-            Else
-                Return results
-            End If
-        Else
-            Return results
-        End If
-
+        Dim response = Await http.GetAsync(url)
+        Return response
     End Function
 
     Shared Function GetCompoundData(ID As String) As BaseClasses.ConstantProperties
 
-        Dim ci As System.Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
+        Dim ci As CultureInfo = New CultureInfo("en-US")
 
         Dim website As String = "https://www.chemeo.com/cid/" + ID
 
