@@ -412,8 +412,9 @@ Public Class FormPureComp
 
             'liquid viscosity
             With constprop
-                Tmin = 0.6 * .Critical_Temperature
-                Tmax = .Critical_Temperature
+                Tmin = .TemperatureOfFusion
+                If Tmin = 0 Then Tmin = .Normal_Boiling_Point * 0.6
+                If Tmax = 0 Then Tmax = .Normal_Boiling_Point * 0.999
                 delta = (Tmax - Tmin) / 50
             End With
             T = Tmin
