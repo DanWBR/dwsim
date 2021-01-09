@@ -124,7 +124,7 @@ namespace DWSIM.UI.Forms.Forms
             container1.CreateAndAddTwoLabelsRow2("OS Info:", osinfo);
             container1.CreateAndAddTwoLabelsRow2("CLR Info:", clrinfo);
             container1.CreateAndAddTwoLabelsRow2("Memory Usage:", meminfo);
-            container1.CreateAndAddLabelRow3("DWSIM is released under the terms of the GNU General Public License (GPL) version 3.");
+            container1.CreateAndAddLabelRow3("DWSIM is released under the terms of the GNU Lesser General Public License (GPL) version 3.");
             
             var listcontainer = new GridView { DataStore = components, RowHeight = (int)(sf * 20) };
             var listcontainern = new GridView { DataStore = componentsn, RowHeight = (int)(sf * 20) };

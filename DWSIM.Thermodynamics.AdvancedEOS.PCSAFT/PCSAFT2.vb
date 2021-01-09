@@ -806,14 +806,14 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
             'Copyright (c) 2011 Ángel Martín, University of Valladolid (Spain)
             'This program Is free software: you can redistribute it And/Or modify
-            'it under the terms of the GNU General Public License as published by
+            'it under the terms of the GNU Lesser General Public License as published by
             'the Free Software Foundation, either version 3 of the License, Or
             '(at your option) any later version.
             'This program Is distributed in the hope that it will be useful,
             'but WITHOUT ANY WARRANTY without even the implied warranty of
             'MERCHANTABILITY Or FITNESS FOR A PARTICULAR PURPOSE.  See the
-            'GNU General Public License for more details.
-            'You should have received a copy of the GNU General Public License
+            'GNU Lesser General Public License for more details.
+            'You should have received a copy of the GNU Lesser General Public License
             'along with this program.  If Not, see <http://www.gnu.org/licenses/>.
 
             '**************************************************************************
@@ -885,14 +885,14 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
             'Copyright (c) 2011 Ángel Martín, University of Valladolid (Spain)
             'This program Is free software: you can redistribute it And/Or modify
-            'it under the terms of the GNU General Public License as published by
+            'it under the terms of the GNU Lesser General Public License as published by
             'the Free Software Foundation, either version 3 of the License, Or
             '(at your option) any later version.
             'This program Is distributed in the hope that it will be useful,
             'but WITHOUT ANY WARRANTY without even the implied warranty of
             'MERCHANTABILITY Or FITNESS FOR A PARTICULAR PURPOSE.  See the
-            'GNU General Public License for more details.
-            'You should have received a copy of the GNU General Public License
+            'GNU Lesser General Public License for more details.
+            'You should have received a copy of the GNU Lesser General Public License
             'along with this program.  If Not, see <http://www.gnu.org/licenses/>.
 
             Return sigma * (1 - 0.12 * Exp(-3 * epsilon / T)) 'Eq. 3 Of reference
@@ -930,14 +930,14 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
             'Copyright (c) 2011 Ángel Martín, University of Valladolid (Spain)
             'This program Is free software: you can redistribute it And/Or modify
-            'it under the terms of the GNU General Public License as published by
+            'it under the terms of the GNU Lesser General Public License as published by
             'the Free Software Foundation, either version 3 of the License, Or
             '(at your option) any later version.
             'This program Is distributed in the hope that it will be useful,
             'but WITHOUT ANY WARRANTY without even the implied warranty of
             'MERCHANTABILITY Or FITNESS FOR A PARTICULAR PURPOSE.  See the
-            'GNU General Public License for more details.
-            'You should have received a copy of the GNU General Public License
+            'GNU Lesser General Public License for more details.
+            'You should have received a copy of the GNU Lesser General Public License
             'along with this program.  If Not, see <http://www.gnu.org/licenses/>.
 
             '**************************************************************************
@@ -1010,14 +1010,14 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
             'Copyright (c) 2011 Ángel Martín, University of Valladolid (Spain)
             'This program Is free software: you can redistribute it And/Or modify
-            'it under the terms of the GNU General Public License as published by
+            'it under the terms of the GNU Lesser General Public License as published by
             'the Free Software Foundation, either version 3 of the License, Or
             '(at your option) any later version.
             'This program Is distributed in the hope that it will be useful,
             'but WITHOUT ANY WARRANTY without even the implied warranty of
             'MERCHANTABILITY Or FITNESS FOR A PARTICULAR PURPOSE.  See the
-            'GNU General Public License for more details.
-            'You should have received a copy of the GNU General Public License
+            'GNU Lesser General Public License for more details.
+            'You should have received a copy of the GNU Lesser General Public License
             'along with this program.  If Not, see <http://www.gnu.org/licenses/>.
 
             Dim a0(8), a1(8), a2(8), b0(8), b1(8), b2(8) As Double
@@ -1178,14 +1178,14 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
             'Copyright (c) 2011 Ángel Martín, University of Valladolid (Spain)
             'This program is free software: you can redistribute it and/or modify
-            'it under the terms of the GNU General Public License as published by
+            'it under the terms of the GNU Lesser General Public License as published by
             'the Free Software Foundation, either version 3 of the License, or
             '(at your option) any later version.
             'This program is distributed in the hope that it will be useful,
             'but WITHOUT ANY WARRANTY without even the implied warranty of
             'MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-            'GNU General Public License for more details.
-            'You should have received a copy of the GNU General Public License
+            'GNU Lesser General Public License for more details.
+            'You should have received a copy of the GNU Lesser General Public License
             'along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
             Dim x, m, sigma, epsilon, d As Double()
@@ -1275,14 +1275,14 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
             'Copyright (c) 2011 Ángel Martín, University of Valladolid (Spain)
             'This program is free software: you can redistribute it and/or modify
-            'it under the terms of the GNU General Public License as published by
+            'it under the terms of the GNU Lesser General Public License as published by
             'the Free Software Foundation, either version 3 of the License, or
             '(at your option) any later version.
             'This program is distributed in the hope that it will be useful,
             'but WITHOUT ANY WARRANTY without even the implied warranty of
             'MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-            'GNU General Public License for more details.
-            'You should have received a copy of the GNU General Public License
+            'GNU Lesser General Public License for more details.
+            'You should have received a copy of the GNU Lesser General Public License
             'along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
             Dim a0(8), a1(8), a2(8), b0(8), b1(8), b2(8) As Double
@@ -1513,14 +1513,14 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
             'Copyright (c) 2011 Ángel Martín, University of Valladolid (Spain)
             'This program is free software: you can redistribute it and/or modify
-            'it under the terms of the GNU General Public License as published by
+            'it under the terms of the GNU Lesser General Public License as published by
             'the Free Software Foundation, either version 3 of the License, or
             '(at your option) any later version.
             'This program is distributed in the hope that it will be useful,
             'but WITHOUT ANY WARRANTY without even the implied warranty of
             'MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-            'GNU General Public License for more details.
-            'You should have received a copy of the GNU General Public License
+            'GNU Lesser General Public License for more details.
+            'You should have received a copy of the GNU Lesser General Public License
             'along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
             Dim m, sigma, epsilon, d As Double()
@@ -1654,14 +1654,14 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
             'Copyright (c) 2011 Ángel Martín, University of Valladolid (Spain)
             'This program is free software: you can redistribute it and/or modify
-            'it under the terms of the GNU General Public License as published by
+            'it under the terms of the GNU Lesser General Public License as published by
             'the Free Software Foundation, either version 3 of the License, or
             '(at your option) any later version.
             'This program is distributed in the hope that it will be useful,
             'but WITHOUT ANY WARRANTY without even the implied warranty of
             'MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-            'GNU General Public License for more details.
-            'You should have received a copy of the GNU General Public License
+            'GNU Lesser General Public License for more details.
+            'You should have received a copy of the GNU Lesser General Public License
             'along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
             Dim x, m, sigma, epsilon, d As Double()
@@ -1732,14 +1732,14 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
             'Copyright (c) 2011 Ángel Martín, University of Valladolid (Spain)
             'This program Is free software: you can redistribute it And/Or modify
-            'it under the terms of the GNU General Public License as published by
+            'it under the terms of the GNU Lesser General Public License as published by
             'the Free Software Foundation, either version 3 of the License, Or
             '(at your option) any later version.
             'This program Is distributed in the hope that it will be useful,
             'but WITHOUT ANY WARRANTY without even the implied warranty of
             'MERCHANTABILITY Or FITNESS FOR A PARTICULAR PURPOSE.  See the
-            'GNU General Public License for more details.
-            'You should have received a copy of the GNU General Public License
+            'GNU Lesser General Public License for more details.
+            'You should have received a copy of the GNU Lesser General Public License
             'along with this program.  If Not, see <http://www.gnu.org/licenses/>.
 
             Dim a0(7), a1(7), a2(7), b0(7), b1(7), b2(7) As Double
@@ -1900,14 +1900,14 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
             'Copyright (c) 2011 Ángel Martín, University of Valladolid (Spain)
             'This program is free software: you can redistribute it and/or modify
-            'it under the terms of the GNU General Public License as published by
+            'it under the terms of the GNU Lesser General Public License as published by
             'the Free Software Foundation, either version 3 of the License, or
             '(at your option) any later version.
             'This program is distributed in the hope that it will be useful,
             'but WITHOUT ANY WARRANTY without even the implied warranty of
             'MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-            'GNU General Public License for more details.
-            'You should have received a copy of the GNU General Public License
+            'GNU Lesser General Public License for more details.
+            'You should have received a copy of the GNU Lesser General Public License
             'along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
             Dim x, m, sigma, epsilon, d As Double()
@@ -2011,14 +2011,14 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
             'Copyright (c) 2011 Ángel Martín, University of Valladolid (Spain)
             'This program Is free software: you can redistribute it And/Or modify
-            'it under the terms of the GNU General Public License as published by
+            'it under the terms of the GNU Lesser General Public License as published by
             'the Free Software Foundation, either version 3 of the License, Or
             '(at your option) any later version.
             'This program Is distributed in the hope that it will be useful,
             'but WITHOUT ANY WARRANTY without even the implied warranty of
             'MERCHANTABILITY Or FITNESS FOR A PARTICULAR PURPOSE.  See the
-            'GNU General Public License for more details.
-            'You should have received a copy of the GNU General Public License
+            'GNU Lesser General Public License for more details.
+            'You should have received a copy of the GNU Lesser General Public License
             'along with this program.  If Not, see <http://www.gnu.org/licenses/>.
 
             Dim numC, x(), indx1, indx2, kappa(,), epsilon(,), kappa_, epsilon_, kappa1, kappa2, epsilon1, epsilon2 As Double
@@ -2220,14 +2220,14 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
             'Copyright (c) 2011 Ángel Martín, University of Valladolid (Spain)
             'This program Is free software: you can redistribute it And/Or modify
-            'it under the terms of the GNU General Public License as published by
+            'it under the terms of the GNU Lesser General Public License as published by
             'the Free Software Foundation, either version 3 of the License, Or
             '(at your option) any later version.
             'This program Is distributed in the hope that it will be useful,
             'but WITHOUT ANY WARRANTY without even the implied warranty of
             'MERCHANTABILITY Or FITNESS FOR A PARTICULAR PURPOSE.  See the
-            'GNU General Public License for more details.
-            'You should have received a copy of the GNU General Public License
+            'GNU Lesser General Public License for more details.
+            'You should have received a copy of the GNU Lesser General Public License
             'along with this program.  If Not, see <http://www.gnu.org/licenses/>.
 
             numC = mix.numC
@@ -2329,14 +2329,14 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
             'Copyright (c) 2011 Ángel Martín, University of Valladolid (Spain)
             'This program Is free software: you can redistribute it And/Or modify
-            'it under the terms of the GNU General Public License as published by
+            'it under the terms of the GNU Lesser General Public License as published by
             'the Free Software Foundation, either version 3 of the License, Or
             '(at your option) any later version.
             'This program Is distributed in the hope that it will be useful,
             'but WITHOUT ANY WARRANTY without even the implied warranty of
             'MERCHANTABILITY Or FITNESS FOR A PARTICULAR PURPOSE.  See the
-            'GNU General Public License for more details.
-            'You should have received a copy of the GNU General Public License
+            'GNU Lesser General Public License for more details.
+            'You should have received a copy of the GNU Lesser General Public License
             'along with this program.  If Not, see <http://www.gnu.org/licenses/>.
 
             Dim x As Double()
@@ -2394,14 +2394,14 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
             'Copyright (c) 2011 Ángel Martín, University of Valladolid (Spain)
             'This program Is free software: you can redistribute it And/Or modify
-            'it under the terms of the GNU General Public License as published by
+            'it under the terms of the GNU Lesser General Public License as published by
             'the Free Software Foundation, either version 3 of the License, Or
             '(at your option) any later version.
             'This program Is distributed in the hope that it will be useful,
             'but WITHOUT ANY WARRANTY without even the implied warranty of
             'MERCHANTABILITY Or FITNESS FOR A PARTICULAR PURPOSE.  See the
-            'GNU General Public License for more details.
-            'You should have received a copy of the GNU General Public License
+            'GNU Lesser General Public License for more details.
+            'You should have received a copy of the GNU Lesser General Public License
             'along with this program.  If Not, see <http://www.gnu.org/licenses/>.
 
             Dim x, m, sigma, epsilon, d As Double()
@@ -2519,14 +2519,14 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
             'Copyright (c) 2011 Ángel Martín, University of Valladolid (Spain)
             'This program Is free software: you can redistribute it And/Or modify
-            'it under the terms of the GNU General Public License as published by
+            'it under the terms of the GNU Lesser General Public License as published by
             'the Free Software Foundation, either version 3 of the License, Or
             '(at your option) any later version.
             'This program Is distributed in the hope that it will be useful,
             'but WITHOUT ANY WARRANTY without even the implied warranty of
             'MERCHANTABILITY Or FITNESS FOR A PARTICULAR PURPOSE.  See the
-            'GNU General Public License for more details.
-            'You should have received a copy of the GNU General Public License
+            'GNU Lesser General Public License for more details.
+            'You should have received a copy of the GNU Lesser General Public License
             'along with this program.  If Not, see <http://www.gnu.org/licenses/>.
 
             '**************************************************************************
@@ -2652,14 +2652,14 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
             'Copyright (c) 2011 Ángel Martín, University of Valladolid (Spain)
             'This program Is free software: you can redistribute it And/Or modify
-            'it under the terms of the GNU General Public License as published by
+            'it under the terms of the GNU Lesser General Public License as published by
             'the Free Software Foundation, either version 3 of the License, Or
             '(at your option) any later version.
             'This program Is distributed in the hope that it will be useful,
             'but WITHOUT ANY WARRANTY without even the implied warranty of
             'MERCHANTABILITY Or FITNESS FOR A PARTICULAR PURPOSE.  See the
-            'GNU General Public License for more details.
-            'You should have received a copy of the GNU General Public License
+            'GNU Lesser General Public License for more details.
+            'You should have received a copy of the GNU Lesser General Public License
             'along with this program.  If Not, see <http://www.gnu.org/licenses/>.
 
             Dim numC, x(), indx1, indx2, kappa(,), epsilon(,), kappa_, epsilon_, kappa1, kappa2, epsilon1, epsilon2 As Double

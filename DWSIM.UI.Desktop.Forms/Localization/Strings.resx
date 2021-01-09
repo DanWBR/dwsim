@@ -166,7 +166,7 @@
     <value>Framework Version: </value>
   </data>
   <data name="GPLNotice" xml:space="preserve">
-    <value>This software is released under the terms of the GNU General Public License (GPL) version 3. See specific licenses for external components on the 'About' box.</value>
+    <value>This software is released under the terms of the GNU Lesser General Public License (GPL) version 3. See specific licenses for external components on the 'About' box.</value>
   </data>
   <data name="LoadingComponents" xml:space="preserve">
     <value>Loading Components...</value>

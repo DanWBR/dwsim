@@ -169,7 +169,7 @@ namespace DWSIM.UI.Forms.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This software is released under the terms of the GNU General Public License (GPL) version 3. See specific licenses for external components on the &apos;About&apos; box..
+        ///   Looks up a localized string similar to This software is released under the terms of the GNU Lesser General Public License (GPL) version 3. See specific licenses for external components on the &apos;About&apos; box..
         /// </summary>
         internal static string GPLNotice {
             get {
