@@ -53,7 +53,7 @@ Public Class FormImportCompoundDataChemeo
                 fsearch.Show()
 
                 Dim t As New Task(Of List(Of String()))(Function()
-                                                            Return ChemeoParser.GetCompoundIDs(searchtext, False)
+                                                            Return ChemeoParser.GetCompoundIDs(searchtext, False).GetAwaiter().GetResult()
                                                         End Function, tcs.Token)
 
                 t.ContinueWith(Sub()
