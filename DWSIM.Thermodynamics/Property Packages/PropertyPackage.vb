@@ -549,7 +549,7 @@ Namespace PropertyPackages
 
         Public Overridable Function Clone() As PropertyPackage
 
-            Return Me.MemberwiseClone()
+            Return Me.DeepClone()
 
         End Function
 
