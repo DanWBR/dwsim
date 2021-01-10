@@ -1383,6 +1383,9 @@ will converge to this solution.")
             Dim names = pp.RET_VNAMES().Select(Function(x) x.ToLower()).ToList()
             Dim props = pp.DW_GetConstantProperties()
 
+            If T = 0 Then T = 298.15
+            If P = 0 Then P = 101325
+
             'solids check
 
             Dim Tf = pp.RET_VTF
