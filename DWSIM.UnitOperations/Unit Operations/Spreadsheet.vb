@@ -330,7 +330,25 @@ Namespace UnitOperations
 
                     '======= caclculate output stream data ====================================================
 
-                    Me.DeltaQ = Hout - Hin
+                    Dim hfin, hfout As Double
+
+                    k = 0
+                    For Each ic In GraphicObject.InputConnectors
+                        If ic.IsAttached And ic.Type = GraphicObjects.ConType.ConIn Then
+                            hfin += GetInletMaterialStream(k).GetOverallHeatOfFormation()
+                        End If
+                        k += 1
+                    Next
+
+                    k = 0
+                    For Each oc In GraphicObject.OutputConnectors
+                        If oc.IsAttached Then
+                            hfout += GetOutletMaterialStream(k).GetOverallHeatOfFormation()
+                        End If
+                        k += 1
+                    Next
+
+                    Me.DeltaQ = Hout - Hin + hfout - hfin
 
                     'energy stream - update energy flow value (kW)
                     If es IsNot Nothing Then
