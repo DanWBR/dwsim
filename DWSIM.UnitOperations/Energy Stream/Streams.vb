@@ -44,6 +44,8 @@ Namespace Streams
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_EnergyStream
 
         Private WithEvents m_work As CapeOpen.RealParameter
+        Private WithEvents m_tLow As CapeOpen.RealParameter
+        Private WithEvents m_tUp As CapeOpen.RealParameter
 
         Private initialized As Boolean = False
 
@@ -86,6 +88,8 @@ Namespace Streams
         Sub CreateParamCol()
 
             m_work = New CapeOpen.RealParameter("work", Me.EnergyFlow.GetValueOrDefault, 0.0#, "J/s")
+            m_tLow = New CapeOpen.RealParameter("temperatureLow", 0.0, 0.0#, "K")
+            m_tUp = New CapeOpen.RealParameter("temperatureHigh", 2000.0, 0.0#, "K")
 
         End Sub
 
@@ -192,12 +196,21 @@ Namespace Streams
         End Sub
 
         Public Function Count() As Integer Implements CapeOpen.ICapeCollection.Count
-            Return 1
+            Return 3
         End Function
 
         Public Function Item(ByVal index As Object) As Object Implements CapeOpen.ICapeCollection.Item
             If Not initialized Then Init()
-            Return m_work
+            Select Case index.ToString()
+                Case "1", "work"
+                    Return m_work
+                Case "2", "temperatureLow"
+                    Return m_tLow
+                Case "3", "temperatureHigh"
+                    Return m_tUp
+                Case Else
+                    Return m_work
+            End Select
         End Function
 
 #End Region

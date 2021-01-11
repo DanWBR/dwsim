@@ -138,6 +138,10 @@ Namespace BaseClasses
 
         Public Property ExtraProperties As New ExpandoObject Implements ICompound.ExtraProperties
 
+        Public Property EnthalpyF_Dmol As Double? = 0.0 Implements Interfaces.ICompound.EnthalpyF_Dmol
+
+        Public Property EntropyF_Dmol As Double? = 0.0 Implements Interfaces.ICompound.EntropyF_Dmol
+
     End Class
 
     <System.Serializable()> Public Class Phase

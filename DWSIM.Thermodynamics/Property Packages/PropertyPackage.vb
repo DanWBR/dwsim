@@ -1105,6 +1105,38 @@ Namespace PropertyPackages
         ''' <remarks>The basis for the calculated enthalpy/entropy in DWSIM is zero at 25 C and 1 atm.</remarks>
         Public MustOverride Function DW_CalcEnthalpy(ByVal Vx As Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
 
+        Public Function DW_CalcEnthalpyDmoles(ByVal Vx As Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double()
+
+            Dim nmols As Double() = Vx.Clone
+            Dim n As Integer = Vx.Length - 1
+            Dim i, k As Integer
+
+            Dim deltan As Double = 0.0001
+
+            Dim deriv As Double() = Vx.Clone()
+
+            Dim H1, H2 As Double
+
+            For i = 0 To n
+                Dim newVx As Double() = Vx.Clone()
+                For k = 0 To n
+                    If i = k Then
+                        newVx(k) = nmols(k) + deltan
+                    Else
+                        newVx(k) = nmols(k)
+                    End If
+                Next
+                newVx = newVx.NormalizeY()
+                H1 = DW_CalcEnthalpy(Vx, T, P, st) + AUX_HFm25(Vx)
+                H2 = DW_CalcEnthalpy(newVx, T, P, st) + AUX_HFm25(newVx)
+                deriv(i) = (H2 - H1) / deltan
+            Next
+
+            Return deriv
+
+        End Function
+
+
         ''' <summary>
         ''' Calculates the enthalpy departure of a mixture.
         ''' </summary>
@@ -1126,6 +1158,37 @@ Namespace PropertyPackages
         ''' <returns>The entropy of the mixture in kJ/kg.K.</returns>
         ''' <remarks>The basis for the calculated enthalpy/entropy in DWSIM is zero at 25 C and 1 atm.</remarks>
         Public MustOverride Function DW_CalcEntropy(ByVal Vx As Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
+
+        Public Function DW_CalcEntropyDmoles(ByVal Vx As Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double()
+
+            Dim nmols As Double() = Vx.Clone
+            Dim n As Integer = Vx.Length - 1
+            Dim i, k As Integer
+
+            Dim deltan As Double = 0.0001
+
+            Dim deriv As Double() = Vx.Clone()
+
+            Dim S1, S2 As Double
+
+            For i = 0 To n
+                Dim newVx As Double() = Vx.Clone()
+                For k = 0 To n
+                    If i = k Then
+                        newVx(k) = nmols(k) + deltan
+                    Else
+                        newVx(k) = nmols(k)
+                    End If
+                Next
+                newVx = newVx.NormalizeY()
+                S1 = DW_CalcEntropy(Vx, T, P, st) + AUX_SFm25(Vx)
+                S2 = DW_CalcEntropy(newVx, T, P, st) + AUX_SFm25(newVx)
+                deriv(i) = (S2 - S1) / deltan
+            Next
+
+            Return deriv
+
+        End Function
 
         ''' <summary>
         ''' Calculates the entropy departure of a mixture.
@@ -5862,6 +5925,39 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
         End Function
 
+        Public Overridable Function AUX_HFm25(ByVal Vx As Double()) As Double
+
+            Dim val As Double
+            Dim subst As Interfaces.ICompound
+
+            Dim i As Integer = 0
+            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                val += Vx(i) * subst.ConstantProperties.IG_Enthalpy_of_Formation_25C * subst.ConstantProperties.Molar_Weight
+                i += 1
+            Next
+
+            Dim mw As Double = AUX_MMM(Vx)
+
+            If mw <> 0.0# Then Return val / mw Else Return 0.0#
+
+        End Function
+
+        Public Overridable Function AUX_SFm25(ByVal Vx As Double()) As Double
+
+            Dim val As Double
+            Dim subst As Interfaces.ICompound
+
+            Dim i As Integer = 0
+            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                val += Vx(i) * subst.ConstantProperties.IG_Entropy_of_Formation_25C * subst.ConstantProperties.Molar_Weight
+            Next
+
+            Dim mw As Double = AUX_MMM(Vx)
+
+            If mw <> 0.0# Then Return val / mw Else Return 0.0#
+
+        End Function
+
         Public Overridable Function RET_VPVAP(ByVal T As Double) As Double()
 
             Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
@@ -9495,11 +9591,40 @@ Final3:
                 For Each pi As PhaseInfo In Me.PhaseMappings.Values
                     If phaseLabel = pi.PhaseLabel Then
                         For Each p As String In props
-                            If p <> "partialpressure" Then
-                                Me.DW_CalcProp(p, pi.DWPhaseID)
-                            End If
+                            Select Case p
+                                Case "partialpressure"
+                                Case "enthalpyF.Dmoles"
+                                    Dim st As State
+                                    Select Case pi.DWPhaseID
+                                        Case Phase.Aqueous, Phase.Liquid, Phase.Liquid1, Phase.Liquid2, Phase.Liquid3
+                                            st = State.Liquid
+                                        Case Phase.Vapor
+                                            st = State.Vapor
+                                        Case Phase.Solid
+                                            st = State.Solid
+                                    End Select
+                                    Dim ms = DirectCast(Me.CurrentMaterialStream, MaterialStream)
+                                    Dim val = Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.molecularWeight.GetValueOrDefault
+                                    Dim cres = DW_CalcEnthalpyDmoles(ms.GetOverallComposition(), ms.GetTemperature, ms.GetPressure, st)
+                                    Me.CurrentMaterialStream.SetSinglePhaseProp(p, phaseLabel, "Mole", cres.MultiplyConstY(val))
+                                Case "entropyF.Dmoles"
+                                    Dim st As State
+                                    Select Case pi.DWPhaseID
+                                        Case Phase.Aqueous, Phase.Liquid, Phase.Liquid1, Phase.Liquid2, Phase.Liquid3
+                                            st = State.Liquid
+                                        Case Phase.Vapor
+                                            st = State.Vapor
+                                        Case Phase.Solid
+                                            st = State.Solid
+                                    End Select
+                                    Dim ms = DirectCast(Me.CurrentMaterialStream, MaterialStream)
+                                    Dim val = Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.molecularWeight.GetValueOrDefault
+                                    Dim cres = DW_CalcEntropyDmoles(ms.GetOverallComposition(), ms.GetTemperature, ms.GetPressure, st)
+                                    Me.CurrentMaterialStream.SetSinglePhaseProp(p, phaseLabel, "Mole", cres.MultiplyConstY(val))
+                                Case Else
+                                    Me.DW_CalcProp(p, pi.DWPhaseID)
+                            End Select
                         Next
-                        'Me.DW_CalcPhaseProps(pi.DWPhaseID)
                         Exit For
                     End If
                 Next
@@ -9528,6 +9653,7 @@ Final3:
 
                 Dim f As Integer = -1
                 Dim phs As PropertyPackages.Phase
+                Dim st As State
                 Select Case phaseLabel.ToLower
                     Case "overall"
                         f = 0
@@ -9540,6 +9666,15 @@ Final3:
                                 Exit For
                             End If
                         Next
+                End Select
+
+                Select Case phs
+                    Case Phase.Aqueous, Phase.Liquid, Phase.Liquid1, Phase.Liquid2, Phase.Liquid3
+                        st = State.Liquid
+                    Case Phase.Vapor
+                        st = State.Vapor
+                    Case Phase.Solid
+                        st = State.Solid
                 End Select
 
                 If f = -1 Then
@@ -9824,6 +9959,24 @@ Final3:
                                         Me.CurrentMaterialStream.Phases(f).Compounds(c).FugacityCoeff.GetValueOrDefault * P)
                             Next
                             basis = ""
+                        Case "enthalpyf.dmoles"
+                            Dim val = Me.CurrentMaterialStream.Phases(f).Properties.molecularWeight.GetValueOrDefault
+                            Dim cres = DW_CalcEnthalpyDmoles(Vx, T, P, st)
+                            Select Case basis
+                                Case "Molar", "molar", "mole", "Mole"
+                                    res.Add(cres.MultiplyConstY(val))
+                                Case "Mass", "mass"
+                                    res.Add(cres.MultiplyConstY(1000))
+                            End Select
+                        Case "entropyf.dmoles"
+                            Dim val = Me.CurrentMaterialStream.Phases(f).Properties.molecularWeight.GetValueOrDefault
+                            Dim cres = DW_CalcEntropyDmoles(Vx, T, P, st)
+                            Select Case basis
+                                Case "Molar", "molar", "mole", "Mole"
+                                    res.Add(cres.MultiplyConstY(val))
+                                Case "Mass", "mass"
+                                    res.Add(cres.MultiplyConstY(1000))
+                            End Select
                         Case "phasefraction"
                             Select Case basis
                                 Case "Molar", "molar", "mole", "Mole"
@@ -10024,7 +10177,9 @@ Final3:
                 .Add("enthalpy")
                 .Add("entropy")
                 .Add("enthalpyF")
+                .Add("enthalpyF.Dmoles")
                 .Add("entropyF")
+                .Add("entropyF.Dmoles")
                 .Add("internalEnergy")
                 .Add("helmholtzEnergy")
                 .Add("gibbsEnergy")
