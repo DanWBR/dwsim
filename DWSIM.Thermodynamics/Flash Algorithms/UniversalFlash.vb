@@ -94,11 +94,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         Dim imm As New NestedLoopsImmiscible With {.FlashSettings = FlashSettings}
                         result = imm.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
                     End If
-                Case "SVLE"
-                    Dim nl = New NestedLoopsSLE
-                    nl.FlashSettings = FlashSettings
-                    result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-                Case "SVLLE"
+                Case "SVLE", "SVLLE"
                     Dim nl As New NestedLoopsSVLLE
                     nl.FlashSettings = FlashSettings
                     result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
