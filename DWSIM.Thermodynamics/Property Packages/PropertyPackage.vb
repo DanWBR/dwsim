@@ -1111,11 +1111,13 @@ Namespace PropertyPackages
             Dim n As Integer = Vx.Length - 1
             Dim i, k As Integer
 
-            Dim deltan As Double = 0.0001
+            Dim deltan As Double = 0.00001
 
             Dim deriv As Double() = Vx.Clone()
 
             Dim H1, H2 As Double
+
+            H1 = DW_CalcEnthalpy(Vx, T, P, st) + AUX_HFm25(Vx)
 
             For i = 0 To n
                 Dim newVx As Double() = Vx.Clone()
@@ -1126,8 +1128,7 @@ Namespace PropertyPackages
                         newVx(k) = nmols(k)
                     End If
                 Next
-                newVx = newVx.NormalizeY()
-                H1 = DW_CalcEnthalpy(Vx, T, P, st) + AUX_HFm25(Vx)
+                newVx = newVx.MultiplyConstY(1 / (1 + deltan))
                 H2 = DW_CalcEnthalpy(newVx, T, P, st) + AUX_HFm25(newVx)
                 deriv(i) = (H2 - H1) / deltan
             Next
@@ -1165,7 +1166,7 @@ Namespace PropertyPackages
             Dim n As Integer = Vx.Length - 1
             Dim i, k As Integer
 
-            Dim deltan As Double = 0.0001
+            Dim deltan As Double = 0.001
 
             Dim deriv As Double() = Vx.Clone()
 
@@ -1180,7 +1181,7 @@ Namespace PropertyPackages
                         newVx(k) = nmols(k)
                     End If
                 Next
-                newVx = newVx.NormalizeY()
+                newVx = newVx.MultiplyConstY(1 / (1 + deltan))
                 S1 = DW_CalcEntropy(Vx, T, P, st) + AUX_SFm25(Vx)
                 S2 = DW_CalcEntropy(newVx, T, P, st) + AUX_SFm25(newVx)
                 deriv(i) = (S2 - S1) / deltan

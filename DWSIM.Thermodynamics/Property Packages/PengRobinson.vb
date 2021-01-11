@@ -386,6 +386,24 @@ Namespace PropertyPackages
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropy = s * mw
 
                 IObj?.SetCurrent
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpyF = h + AUX_HFm25(Phase)
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_enthalpyF = (h + AUX_HFm25(Phase)) * mw
+
+                IObj?.SetCurrent
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.entropyF = s + AUX_SFm25(Phase)
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropyF = (s + AUX_SFm25(Phase)) * mw
+
+                Dim dhdn = DW_CalcEnthalpyDmoles(RET_VMOL(dwpl), T, P, State.Vapor)
+                Dim dsdn = DW_CalcEntropyDmoles(RET_VMOL(dwpl), T, P, State.Vapor)
+
+                Dim i As Integer = 0
+                For Each c In Me.CurrentMaterialStream.Phases(phaseID).Compounds.Values
+                    c.EnthalpyF_Dmol = dhdn(i) * c.ConstantProperties.Molar_Weight
+                    c.EntropyF_Dmol = dsdn(i) * c.ConstantProperties.Molar_Weight
+                    i += 1
+                Next
+
+                IObj?.SetCurrent
                 z = Me.m_pr.Z_PR(T, P, RET_VMOL(Phase.Vapor), RET_VKij, RET_VTC, RET_VPC, RET_VW, "V")
                 If LiquidDensity_UsePenelouxVolumeTranslation Then
                     z -= Me.AUX_CM(Phase.Vapor) / 8.314 / T * P

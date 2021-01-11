@@ -1178,6 +1178,12 @@ Public Class FormSimulSettings
             ms.GraphicObject.Calculated = False
         Next
 
+        For Each pp In FrmChild.Options.PropertyPackages.Values
+            If DirectCast(pp, PropertyPackage).ForcedSolids.Contains(compid) Then
+                DirectCast(pp, PropertyPackage).ForcedSolids.Remove(compid)
+            End If
+        Next
+
         FrmChild.UpdateOpenEditForms()
 
         If My.Application.PushUndoRedoAction Then FrmChild.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.CompoundRemoved,
