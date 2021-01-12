@@ -427,7 +427,7 @@ Namespace Reactors
 
             For Each s As Compound In tms.Phases(0).Compounds.Values
                 mw = s.ConstantProperties.Molar_Weight
-                gibbsf.Add(s.ConstantProperties.IG_Enthalpy_of_Formation_25C * mw - T * s.ConstantProperties.IG_Entropy_of_Formation_25C * mw)
+                gibbsf.Add(s.ConstantProperties.IG_Gibbs_Energy_of_Formation_25C * mw)
             Next
 
             Dim gval As Double = 0.0
@@ -502,24 +502,11 @@ Namespace Reactors
 
             Dim xv = tms.GetOverallComposition()
 
-            Dim entropyf As New List(Of Double)
-            Dim mw As Double
-
-            For Each s As Compound In tms.Phases(0).Compounds.Values
-                mw = s.ConstantProperties.Molar_Weight
-                entropyf.Add(s.ConstantProperties.IG_Entropy_of_Formation_25C * mw)
-            Next
-
-            Dim sval As New List(Of Double)
-
-            For i = 0 To xv.Length - 1
-                sval.Add(xv(i) * entropyf(i))
-            Next
-
+            Dim sf = pp.AUX_SFm25(xv)
             Dim s0 = ims.Phases(0).Properties.entropy.GetValueOrDefault()
             Dim mw0 = ims.Phases(0).Properties.molecularWeight.GetValueOrDefault()
 
-            Return -(sval.Sum + s0 * mw) * sumfm
+            Return -(sf + s0) * sumw
 
         End Function
 
@@ -884,7 +871,7 @@ Namespace Reactors
             For i = 0 To N.Count - 1
                 lbo(i) = 0.0
                 ubo(i) = W0tot / CProps(i).Molar_Weight * 1000
-                ival(i) = 0.0
+                ival(i) = N0(Me.ComponentIDs(i))
             Next
 
             Dim solv As New Simplex
@@ -906,6 +893,7 @@ Namespace Reactors
 
                 Dim ebal As Double = 0.0
                 Dim errval As Double = 0.0
+                Dim werr As Double = 0.0
 
                 Dim icount As Integer = 0
 
@@ -922,7 +910,8 @@ Namespace Reactors
                                               ebal += (TotalElements(i) - ebal_i) ^ 2
                                           Next
                                           icount += 1
-                                          errval = gval + (ebal * 1000000) ^ 2
+                                          werr = (tms.GetMassFlow() - W0tot) ^ 2 * 10000
+                                          errval = gval + werr + (ebal * 1000000) ^ 2
                                           Return errval
                                       End Function, svars.ToArray())
 
@@ -1276,7 +1265,7 @@ Namespace Reactors
             For i = 0 To N.Count - 1
                 lbo(i) = 0.0
                 ubo(i) = W0tot / CProps(i).Molar_Weight * 1000
-                ival(i) = 0.0
+                ival(i) = N0(Me.ComponentIDs(i))
             Next
             ival(N.Count) = T
             lbo(N.Count) = 298.15
@@ -1300,6 +1289,7 @@ Namespace Reactors
             Dim TLast As Double = T
 
             Dim ebal As Double = 0.0
+            Dim wbal As Double = 0.0
             Dim errval As Double = 0.0
 
             Dim icount As Integer = 0
@@ -1320,7 +1310,8 @@ Namespace Reactors
                                           ebal += (TotalElements(i) - ebal_i) ^ 2
                                       Next
                                       icount += 1
-                                      errval = sval + (ebal * 1000000) ^ 2
+                                      wbal = (tms.GetMassFlow() - W0tot) ^ 2 * 100000
+                                      errval = sval + wbal + (ebal * 1000000) ^ 2
                                       objvalues.Add(errval)
                                       solutions.Add(xn)
                                       Return errval

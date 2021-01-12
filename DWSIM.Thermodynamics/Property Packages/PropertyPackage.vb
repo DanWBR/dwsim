@@ -1111,7 +1111,7 @@ Namespace PropertyPackages
             Dim n As Integer = Vx.Length - 1
             Dim i, k As Integer
 
-            Dim deltan As Double = 0.00001
+            Dim deltan As Double = 0.0000001
 
             Dim deriv As Double() = Vx.Clone()
 
@@ -1128,9 +1128,9 @@ Namespace PropertyPackages
                         newVx(k) = nmols(k)
                     End If
                 Next
-                newVx = newVx.MultiplyConstY(1 / (1 + deltan))
+                newVx = newVx.NormalizeY()
                 H2 = DW_CalcEnthalpy(newVx, T, P, st) + AUX_HFm25(newVx)
-                deriv(i) = (H2 - H1) / deltan
+                deriv(i) = (H2 * (1 + deltan) - H1) / deltan
             Next
 
             Return deriv
@@ -1166,7 +1166,7 @@ Namespace PropertyPackages
             Dim n As Integer = Vx.Length - 1
             Dim i, k As Integer
 
-            Dim deltan As Double = 0.001
+            Dim deltan As Double = 0.000001
 
             Dim deriv As Double() = Vx.Clone()
 
@@ -1181,10 +1181,10 @@ Namespace PropertyPackages
                         newVx(k) = nmols(k)
                     End If
                 Next
-                newVx = newVx.MultiplyConstY(1 / (1 + deltan))
+                newVx = newVx.NormalizeY()
                 S1 = DW_CalcEntropy(Vx, T, P, st) + AUX_SFm25(Vx)
                 S2 = DW_CalcEntropy(newVx, T, P, st) + AUX_SFm25(newVx)
-                deriv(i) = (S2 - S1) / deltan
+                deriv(i) = (S2 * (1 + deltan) - S1) / deltan
             Next
 
             Return deriv
@@ -9015,39 +9015,43 @@ Final3:
         ''' determine which is undefined.</remarks>
         Public Overridable Function GetCompoundConstant(ByVal props As Object, ByVal compIds As Object) As Object Implements ICapeThermoCompounds.GetCompoundConstant
             Dim vals As New ArrayList
-            For Each s As String In compIds
-                Dim c As Interfaces.ICompound = Me.CurrentMaterialStream.Phases(0).Compounds(s)
-                For Each p As String In props
-                    Select Case p.ToLower
-                        Case "molecularweight"
-                            vals.Add(c.ConstantProperties.Molar_Weight)
-                        Case "criticaltemperature"
-                            vals.Add(c.ConstantProperties.Critical_Temperature)
-                        Case "criticalpressure"
-                            vals.Add(c.ConstantProperties.Critical_Pressure)
-                        Case "criticalvolume"
-                            vals.Add(c.ConstantProperties.Critical_Volume / 1000)
-                        Case "criticalcompressibilityfactor"
-                            vals.Add(c.ConstantProperties.Critical_Compressibility)
-                        Case "acentricfactor"
-                            vals.Add(c.ConstantProperties.Acentric_Factor)
-                        Case "normalboilingpoint"
-                            vals.Add(c.ConstantProperties.Normal_Boiling_Point)
-                        Case "idealgasgibbsfreeenergyofformationat25c"
-                            vals.Add(c.ConstantProperties.IG_Gibbs_Energy_of_Formation_25C * c.ConstantProperties.Molar_Weight)
-                        Case "idealgasenthalpyofformationat25c"
-                            vals.Add(c.ConstantProperties.IG_Enthalpy_of_Formation_25C * c.ConstantProperties.Molar_Weight)
-                        Case "casregistrynumber"
-                            vals.Add(c.ConstantProperties.CAS_Number)
-                        Case "chemicalformula", "structureformula"
-                            vals.Add(c.ConstantProperties.Formula)
-                        Case "triplepointtemperature"
-                            vals.Add(c.ConstantProperties.TemperatureOfFusion)
-                        Case Else
-                            vals.Add(Double.MinValue)
-                    End Select
+            If props(0).ToString().ToLower() = "charge" And compIds Is Nothing Then
+                vals.Add(0.0)
+            Else
+                For Each s As String In compIds
+                    Dim c As Interfaces.ICompound = Me.CurrentMaterialStream.Phases(0).Compounds(s)
+                    For Each p As String In props
+                        Select Case p.ToLower
+                            Case "molecularweight"
+                                vals.Add(c.ConstantProperties.Molar_Weight)
+                            Case "criticaltemperature"
+                                vals.Add(c.ConstantProperties.Critical_Temperature)
+                            Case "criticalpressure"
+                                vals.Add(c.ConstantProperties.Critical_Pressure)
+                            Case "criticalvolume"
+                                vals.Add(c.ConstantProperties.Critical_Volume / 1000)
+                            Case "criticalcompressibilityfactor"
+                                vals.Add(c.ConstantProperties.Critical_Compressibility)
+                            Case "acentricfactor"
+                                vals.Add(c.ConstantProperties.Acentric_Factor)
+                            Case "normalboilingpoint"
+                                vals.Add(c.ConstantProperties.Normal_Boiling_Point)
+                            Case "idealgasgibbsfreeenergyofformationat25c"
+                                vals.Add(c.ConstantProperties.IG_Gibbs_Energy_of_Formation_25C * c.ConstantProperties.Molar_Weight)
+                            Case "idealgasenthalpyofformationat25c"
+                                vals.Add(c.ConstantProperties.IG_Enthalpy_of_Formation_25C * c.ConstantProperties.Molar_Weight)
+                            Case "casregistrynumber"
+                                vals.Add(c.ConstantProperties.CAS_Number)
+                            Case "chemicalformula", "structureformula"
+                                vals.Add(c.ConstantProperties.Formula)
+                            Case "triplepointtemperature"
+                                vals.Add(c.ConstantProperties.TemperatureOfFusion)
+                            Case Else
+                                vals.Add(Double.MinValue)
+                        End Select
+                    Next
                 Next
-            Next
+            End If
             Dim arr2(vals.Count - 1) As Object
             Array.Copy(vals.ToArray, arr2, vals.Count)
             Return arr2
@@ -9606,7 +9610,7 @@ Final3:
                                     End Select
                                     Dim ms = DirectCast(Me.CurrentMaterialStream, MaterialStream)
                                     Dim val = Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.molecularWeight.GetValueOrDefault
-                                    Dim cres = DW_CalcEnthalpyDmoles(ms.GetOverallComposition(), ms.GetTemperature, ms.GetPressure, st)
+                                    Dim cres = DW_CalcEnthalpyDmoles(ms.GetPhaseComposition(pi.DWPhaseIndex), ms.GetTemperature, ms.GetPressure, st)
                                     Me.CurrentMaterialStream.SetSinglePhaseProp(p, phaseLabel, "Mole", cres.MultiplyConstY(val))
                                 Case "entropyF.Dmoles"
                                     Dim st As State
@@ -9620,7 +9624,7 @@ Final3:
                                     End Select
                                     Dim ms = DirectCast(Me.CurrentMaterialStream, MaterialStream)
                                     Dim val = Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.molecularWeight.GetValueOrDefault
-                                    Dim cres = DW_CalcEntropyDmoles(ms.GetOverallComposition(), ms.GetTemperature, ms.GetPressure, st)
+                                    Dim cres = DW_CalcEntropyDmoles(ms.GetPhaseComposition(pi.DWPhaseIndex), ms.GetTemperature, ms.GetPressure, st)
                                     Me.CurrentMaterialStream.SetSinglePhaseProp(p, phaseLabel, "Mole", cres.MultiplyConstY(val))
                                 Case Else
                                     Me.DW_CalcProp(p, pi.DWPhaseID)
