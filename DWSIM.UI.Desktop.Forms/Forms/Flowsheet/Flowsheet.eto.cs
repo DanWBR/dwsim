@@ -79,16 +79,47 @@ namespace DWSIM.UI.Forms
 
         private DropDown ddstates;
 
+        private Timer BackupTimer;
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                if (!DynManagerControl.IsDisposed) DynManagerControl?.Dispose();
-                if (!DynIntegratorControl.IsDisposed) DynIntegratorControl?.Dispose();
-                if (!MaterialStreamListControl.IsDisposed) MaterialStreamListControl?.Dispose();
-                if (!SpreadsheetControl.IsDisposed) SpreadsheetControl?.Dispose();
-                if (!ChartsControl.IsDisposed) ChartsControl?.Dispose();
-                if (!FlowsheetControl.IsDisposed) FlowsheetControl?.Dispose();
+                if (!DynManagerControl.IsDisposed)
+                {
+                    DynManagerControl?.Dispose();
+                    DynManagerControl = null;
+                }
+                if (!DynIntegratorControl.IsDisposed)
+                {
+                    DynIntegratorControl?.Dispose();
+                    DynIntegratorControl = null;
+                }
+                if (!MaterialStreamListControl.IsDisposed)
+                {
+                    MaterialStreamListControl?.Dispose();
+                    MaterialStreamListControl = null;
+                }
+                if (!SpreadsheetControl.IsDisposed)
+                {
+                    SpreadsheetControl?.Dispose();
+                    SpreadsheetControl = null;
+                }
+                if (!ChartsControl.IsDisposed) {
+                    ChartsControl?.Dispose();
+                    ChartsControl = null;
+                }
+                if (!FlowsheetControl.IsDisposed) { 
+                    FlowsheetControl?.Dispose();
+                    FlowsheetControl = null;
+                }
+                BackupTimer?.Stop();
+                BackupTimer?.Dispose();
+                FlowsheetObject.Reset();
+                FlowsheetObject.AvailableCompounds.Clear();
+                FlowsheetObject.AvailablePropertyPackages.Clear();
+                FlowsheetObject.AvailableSystemsOfUnits.Clear();
+                FlowsheetObject = null;
             }
             base.Dispose(disposing);
         }
@@ -107,7 +138,7 @@ namespace DWSIM.UI.Forms
 
             backupfilename = DateTime.Now.ToString().Replace('-', '_').Replace(':', '_').Replace(' ', '_').Replace('/', '_') + ".dwxmz";
 
-            var BackupTimer = new Timer(GlobalSettings.Settings.BackupInterval * 60 * 1000);
+            BackupTimer = new Timer(GlobalSettings.Settings.BackupInterval * 60 * 1000);
             BackupTimer.Elapsed += (sender, e) =>
             {
                 Task.Factory.StartNew(() => SaveBackupCopy());
@@ -121,9 +152,7 @@ namespace DWSIM.UI.Forms
             FlowsheetObject.Initialize();
 
             Title = "New Flowsheet";
-
-            Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico", this.GetType().Assembly);
-
+            
             if (s.FlowsheetRenderer == s.SkiaCanvasRenderer.CPU)
             {
                 FlowsheetControl = new DWSIM.UI.Controls.FlowsheetSurfaceControl() { FlowsheetObject = FlowsheetObject, FlowsheetSurface = (DWSIM.Drawing.SkiaSharp.GraphicsSurface)FlowsheetObject.GetSurface() };
@@ -243,6 +272,8 @@ namespace DWSIM.UI.Forms
             // if automation then stop loadning UI controls
 
             if (GlobalSettings.Settings.AutomationMode) return;
+
+            Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico", this.GetType().Assembly);
 
             LoadObjects();
 
@@ -802,7 +833,8 @@ namespace DWSIM.UI.Forms
                 Split1.Panel1.Visible = !Split1.Panel1.Visible;
             };
 
-            btnCloseAllEditors.Click += (sender, e) => {
+            btnCloseAllEditors.Click += (sender, e) =>
+            {
                 EditorHolder.Pages.Clear();
             };
 
@@ -2091,7 +2123,7 @@ namespace DWSIM.UI.Forms
                 FlowsheetControl.FlowsheetSurface.AutoArrange();
                 ActZoomFit.Invoke();
             };
-            
+
             item8.Click += (sender, e) =>
             {
                 FlowsheetControl.FlowsheetSurface.RestoreLayout();

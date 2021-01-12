@@ -134,6 +134,12 @@ namespace DWSIM.Automation
             return fm.FlowsheetObject;
         }
 
+        public void ReleaseResources()
+        {
+            fm?.Dispose();
+            fm = null;
+        }
+
         public void SaveFlowsheet(IFlowsheet flowsheet, string filepath, bool compressed)
         {
             Console.WriteLine("Saving the Flowsheet, please wait...");
@@ -167,6 +173,7 @@ namespace DWSIM.Automation
             if (System.IO.Path.GetExtension(path).ToLower() == ".dwxmz")
             {
                 var xdoc = fm.FlowsheetObject.LoadZippedXML(path);
+                xdoc = null;
             }
             else if (System.IO.Path.GetExtension(path).ToLower() == ".dwxml")
             {
