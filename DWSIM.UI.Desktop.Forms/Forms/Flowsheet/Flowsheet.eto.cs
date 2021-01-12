@@ -79,6 +79,20 @@ namespace DWSIM.UI.Forms
 
         private DropDown ddstates;
 
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (!DynManagerControl.IsDisposed) DynManagerControl?.Dispose();
+                if (!DynIntegratorControl.IsDisposed) DynIntegratorControl?.Dispose();
+                if (!MaterialStreamListControl.IsDisposed) MaterialStreamListControl?.Dispose();
+                if (!SpreadsheetControl.IsDisposed) SpreadsheetControl?.Dispose();
+                if (!ChartsControl.IsDisposed) ChartsControl?.Dispose();
+                if (!FlowsheetControl.IsDisposed) FlowsheetControl?.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
         void InitializeComponent()
         {
 
