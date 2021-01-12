@@ -218,8 +218,6 @@ Namespace Databases
                             cp.IG_Enthalpy_of_Formation_25C = Double.Parse(node2.Attributes("value").Value, nf) / 1000 / cp.Molar_Weight
                         Case "GibbsEnergyOfFormation" '/1000/MW, kJ/kg
                             cp.IG_Gibbs_Energy_of_Formation_25C = Double.Parse(node2.Attributes("value").Value, nf) / 1000 / cp.Molar_Weight
-                        Case "AbsEntropy" '/1000/MW, kJ/kg
-                            cp.IG_Entropy_of_Formation_25C = Double.Parse(node2.Attributes("value").Value, nf) / 1000 / cp.Molar_Weight
                         Case "RacketParameter"
                             cp.Z_Rackett = Double.Parse(node2.Attributes("value").Value, nf)
                         Case "ChaoSeaderAcentricFactor"
@@ -516,6 +514,7 @@ Namespace Databases
                                 cp.NISTMODFACGroups.Add(sg, cp.MODFACGroups(sg))
                             Next
                     End Select
+                    cp.IG_Entropy_of_Formation_25C = (cp.IG_Enthalpy_of_Formation_25C - cp.IG_Gibbs_Energy_of_Formation_25C) / 298.15
                 Next
 
                 If CompName = "" Then
@@ -1459,6 +1458,7 @@ Namespace Databases
 
                         End Select
                     Next
+                    .IG_Entropy_of_Formation_25C = (.IG_Enthalpy_of_Formation_25C - .IG_Gibbs_Energy_of_Formation_25C) / 298.15
                 End With
                 cpa.Add(cp)
             Next
@@ -2045,6 +2045,7 @@ Namespace Databases
                                 .ID = Integer.Parse(node2.InnerText)
                         End Select
                     Next
+                    .IG_Entropy_of_Formation_25C = (.IG_Enthalpy_of_Formation_25C - .IG_Gibbs_Energy_of_Formation_25C) / 298.15
                 End With
                 cpa.Add(cp)
             Next

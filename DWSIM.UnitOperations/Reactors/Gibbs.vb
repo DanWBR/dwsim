@@ -1265,7 +1265,7 @@ Namespace Reactors
             For i = 0 To N.Count - 1
                 lbo(i) = 0.0
                 ubo(i) = W0tot / CProps(i).Molar_Weight * 1000
-                ival(i) = N0(Me.ComponentIDs(i))
+                ival(i) = 0.0 'N0(Me.ComponentIDs(i))
             Next
             ival(N.Count) = T
             lbo(N.Count) = 298.15
@@ -1298,7 +1298,7 @@ Namespace Reactors
             Dim objvalues As New List(Of Double)
 
             NFv = solv.ComputeMin(Function(xn)
-                                      If ebal < 0.0000001 And icount > 1000 Then Return errval
+                                      'If ebal < 0.0000001 And icount > 1000 Then Return errval
                                       Dim sval = FunctionValue2S2(xn)
                                       Dim ebal_i As Double
                                       ebal = 0.0
@@ -1307,11 +1307,11 @@ Namespace Reactors
                                           For j = 0 To c
                                               ebal_i += xn(j) * Me.ElementMatrix(i, j)
                                           Next
-                                          ebal += (TotalElements(i) - ebal_i) ^ 2
+                                          ebal += ((TotalElements(i) - ebal_i) / TotalElements(i)) ^ 2
                                       Next
                                       icount += 1
-                                      wbal = (tms.GetMassFlow() - W0tot) ^ 2 * 100000
-                                      errval = sval + wbal + (ebal * 1000000) ^ 2
+                                      wbal = ((tms.GetMassFlow() - W0tot) / W0tot) ^ 2
+                                      errval = sval + wbal + ebal
                                       objvalues.Add(errval)
                                       solutions.Add(xn)
                                       Return errval

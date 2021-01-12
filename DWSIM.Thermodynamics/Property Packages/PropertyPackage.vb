@@ -1115,9 +1115,10 @@ Namespace PropertyPackages
 
             Dim deriv As Double() = Vx.Clone()
 
-            Dim H1, H2 As Double
+            Dim H1, H2, M1, M2 As Double
 
-            H1 = DW_CalcEnthalpy(Vx, T, P, st) + AUX_HFm25(Vx)
+            M1 = AUX_MMM(Vx)
+            H1 = (DW_CalcEnthalpy(Vx, T, P, st) + AUX_HFm25(Vx)) * M1
 
             For i = 0 To n
                 Dim newVx As Double() = Vx.Clone()
@@ -1129,7 +1130,8 @@ Namespace PropertyPackages
                     End If
                 Next
                 newVx = newVx.NormalizeY()
-                H2 = DW_CalcEnthalpy(newVx, T, P, st) + AUX_HFm25(newVx)
+                M2 = AUX_MMM(newVx)
+                H2 = (DW_CalcEnthalpy(newVx, T, P, st) + AUX_HFm25(newVx)) * M2
                 deriv(i) = (H2 * (1 + deltan) - H1) / deltan
             Next
 
@@ -1166,11 +1168,14 @@ Namespace PropertyPackages
             Dim n As Integer = Vx.Length - 1
             Dim i, k As Integer
 
-            Dim deltan As Double = 0.000001
+            Dim deltan As Double = 0.0000001
 
             Dim deriv As Double() = Vx.Clone()
 
-            Dim S1, S2 As Double
+            Dim S1, S2, M1, M2 As Double
+
+            M1 = AUX_MMM(Vx)
+            S1 = (DW_CalcEntropy(Vx, T, P, st) + AUX_SFm25(Vx)) * M1
 
             For i = 0 To n
                 Dim newVx As Double() = Vx.Clone()
@@ -1181,9 +1186,9 @@ Namespace PropertyPackages
                         newVx(k) = nmols(k)
                     End If
                 Next
-                newVx = newVx.NormalizeY()
-                S1 = DW_CalcEntropy(Vx, T, P, st) + AUX_SFm25(Vx)
-                S2 = DW_CalcEntropy(newVx, T, P, st) + AUX_SFm25(newVx)
+                'newVx = newVx.NormalizeY()
+                M2 = AUX_MMM(newVx)
+                S2 = (DW_CalcEntropy(newVx, T, P, st) + AUX_SFm25(newVx)) * M2
                 deriv(i) = (S2 * (1 + deltan) - S1) / deltan
             Next
 
@@ -5950,7 +5955,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
             Dim i As Integer = 0
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                val += Vx(i) * subst.ConstantProperties.IG_Entropy_of_Formation_25C * subst.ConstantProperties.Molar_Weight
+                val += Vx(i) * (subst.ConstantProperties.IG_Enthalpy_of_Formation_25C - subst.ConstantProperties.IG_Gibbs_Energy_of_Formation_25C) / 298.15 * subst.ConstantProperties.Molar_Weight
+                'val += Vx(i) * subst.ConstantProperties.IG_Entropy_of_Formation_25C * subst.ConstantProperties.Molar_Weight
             Next
 
             Dim mw As Double = AUX_MMM(Vx)
@@ -9609,9 +9615,8 @@ Final3:
                                             st = State.Solid
                                     End Select
                                     Dim ms = DirectCast(Me.CurrentMaterialStream, MaterialStream)
-                                    Dim val = Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.molecularWeight.GetValueOrDefault
                                     Dim cres = DW_CalcEnthalpyDmoles(ms.GetPhaseComposition(pi.DWPhaseIndex), ms.GetTemperature, ms.GetPressure, st)
-                                    Me.CurrentMaterialStream.SetSinglePhaseProp(p, phaseLabel, "Mole", cres.MultiplyConstY(val))
+                                    Me.CurrentMaterialStream.SetSinglePhaseProp(p, phaseLabel, "", cres)
                                 Case "entropyF.Dmoles"
                                     Dim st As State
                                     Select Case pi.DWPhaseID
@@ -9623,9 +9628,8 @@ Final3:
                                             st = State.Solid
                                     End Select
                                     Dim ms = DirectCast(Me.CurrentMaterialStream, MaterialStream)
-                                    Dim val = Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.molecularWeight.GetValueOrDefault
                                     Dim cres = DW_CalcEntropyDmoles(ms.GetPhaseComposition(pi.DWPhaseIndex), ms.GetTemperature, ms.GetPressure, st)
-                                    Me.CurrentMaterialStream.SetSinglePhaseProp(p, phaseLabel, "Mole", cres.MultiplyConstY(val))
+                                    Me.CurrentMaterialStream.SetSinglePhaseProp(p, phaseLabel, "", cres)
                                 Case Else
                                     Me.DW_CalcProp(p, pi.DWPhaseID)
                             End Select

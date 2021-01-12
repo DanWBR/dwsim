@@ -4505,27 +4505,13 @@ Namespace Streams
                         res.Add(Me.Phases(f).Compounds(c).ActivityCoeff.GetValueOrDefault * Me.Phases(f).Compounds(c).MoleFraction.GetValueOrDefault)
                     Next
                 Case "enthalpyf.dmoles"
-                    Select Case basis
-                        Case "Molar", "molar", "mole", "Mole"
-                            For Each c As String In comps
-                                res.Add(Me.Phases(f).Compounds(c).EnthalpyF_Dmol.GetValueOrDefault * Me.Phases(f).Properties.molecularWeight)
-                            Next
-                        Case "Mass", "mass"
-                            For Each c As String In comps
-                                res.Add(Me.Phases(f).Compounds(c).EnthalpyF_Dmol.GetValueOrDefault * 1000)
-                            Next
-                    End Select
+                    For Each c As String In comps
+                        res.Add(Me.Phases(f).Compounds(c).EnthalpyF_Dmol.GetValueOrDefault)
+                    Next
                 Case "entropyf.dmoles"
-                    Select Case basis
-                        Case "Molar", "molar", "mole", "Mole"
-                            For Each c As String In comps
-                                res.Add(Me.Phases(f).Compounds(c).EntropyF_Dmol.GetValueOrDefault * Me.Phases(f).Properties.molecularWeight)
-                            Next
-                        Case "Mass", "mass"
-                            For Each c As String In comps
-                                res.Add(Me.Phases(f).Compounds(c).EntropyF_Dmol.GetValueOrDefault * 1000)
-                            Next
-                    End Select
+                    For Each c As String In comps
+                        res.Add(Me.Phases(f).Compounds(c).EntropyF_Dmol.GetValueOrDefault)
+                    Next
                 Case "fugacitycoefficient"
                     For Each c As String In comps
                         res.Add(Me.Phases(f).Compounds(c).FugacityCoeff.GetValueOrDefault)
@@ -5148,32 +5134,16 @@ Namespace Streams
                     Next
                 Case "enthalpyf.dmoles"
                     Dim i As Integer = 0
-                    Select Case basis
-                        Case "Molar", "molar", "mole", "Mole"
-                            For Each c As String In comps
-                                Me.Phases(f).Compounds(c).EnthalpyF_Dmol = values(comps.IndexOf(c)) / Me.PropertyPackage.AUX_MMM(phs)
-                                i += 1
-                            Next
-                        Case "Mass", "mass"
-                            For Each c As String In comps
-                                Me.Phases(f).Compounds(c).EnthalpyF_Dmol = values(comps.IndexOf(c)) / 1000
-                                i += 1
-                            Next
-                    End Select
+                    For Each c As String In comps
+                        Me.Phases(f).Compounds(c).EnthalpyF_Dmol = values(comps.IndexOf(c))
+                        i += 1
+                    Next
                 Case "entropyf.dmoles"
                     Dim i As Integer = 0
-                    Select Case basis
-                        Case "Molar", "molar", "mole", "Mole"
-                            For Each c As String In comps
-                                Me.Phases(f).Compounds(c).EntropyF_Dmol = values(comps.IndexOf(c)) / Me.PropertyPackage.AUX_MMM(phs)
-                                i += 1
-                            Next
-                        Case "Mass", "mass"
-                            For Each c As String In comps
-                                Me.Phases(f).Compounds(c).EntropyF_Dmol = values(comps.IndexOf(c)) / 1000
-                                i += 1
-                            Next
-                    End Select
+                    For Each c As String In comps
+                        Me.Phases(f).Compounds(c).EntropyF_Dmol = values(comps.IndexOf(c))
+                        i += 1
+                    Next
                 Case "density"
                     Select Case basis
                         Case "Molar", "molar", "mole", "Mole"
