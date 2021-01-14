@@ -5901,6 +5901,21 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
         End Function
 
+        Public Overridable Function AUX_GFm25(ByVal Phase As Phase) As Double
+
+            Dim val As Double
+            Dim subst As Interfaces.ICompound
+
+            For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
+                val += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.IG_Gibbs_Energy_of_Formation_25C * subst.ConstantProperties.Molar_Weight
+            Next
+
+            Dim mw As Double = Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Properties.molecularWeight.GetValueOrDefault
+
+            If mw <> 0.0# Then Return val / mw Else Return 0.0#
+
+        End Function
+
         Public Overridable Function AUX_HFm25(ByVal Phase As Phase) As Double
 
             Dim val As Double
@@ -5931,6 +5946,24 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
         End Function
 
+
+        Public Overridable Function AUX_GFm25(ByVal Vx As Double()) As Double
+
+            Dim val As Double
+            Dim subst As Interfaces.ICompound
+
+            Dim i As Integer = 0
+            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                val += Vx(i) * subst.ConstantProperties.IG_Gibbs_Energy_of_Formation_25C * subst.ConstantProperties.Molar_Weight
+                i += 1
+            Next
+
+            Dim mw As Double = AUX_MMM(Vx)
+
+            If mw <> 0.0# Then Return val / mw Else Return 0.0#
+
+        End Function
+
         Public Overridable Function AUX_HFm25(ByVal Vx As Double()) As Double
 
             Dim val As Double
@@ -5956,7 +5989,6 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             Dim i As Integer = 0
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 val += Vx(i) * (subst.ConstantProperties.IG_Enthalpy_of_Formation_25C - subst.ConstantProperties.IG_Gibbs_Energy_of_Formation_25C) / 298.15 * subst.ConstantProperties.Molar_Weight
-                'val += Vx(i) * subst.ConstantProperties.IG_Entropy_of_Formation_25C * subst.ConstantProperties.Molar_Weight
             Next
 
             Dim mw As Double = AUX_MMM(Vx)

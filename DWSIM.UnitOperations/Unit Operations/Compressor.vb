@@ -765,7 +765,7 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                         For i = 0 To cpower.x.Count - 1
                             If Double.TryParse(cpower.x(i), New Double) And Double.TryParse(cpower.y(i), New Double) Then
                                 xpower.Add(SystemsOfUnits.Converter.ConvertToSI(cpower.xunit.Replace(" @ P,T", ""), cpower.x(i)))
-                                ypower.Add(SystemsOfUnits.Converter.ConvertToSI(cpower.yunit, chead.y(i)))
+                                ypower.Add(SystemsOfUnits.Converter.ConvertToSI(cpower.yunit, cpower.y(i)))
                             End If
                         Next
                         For i = 0 To ceff.x.Count - 1
@@ -823,6 +823,8 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                     Else
                         Me.CurveEff = Double.NegativeInfinity
                     End If
+
+                    Wi = msin.Phases(0).Properties.massflow.GetValueOrDefault
 
                     If CurvePower = Double.NegativeInfinity Then
                         If ProcessPath = ProcessPathType.Adiabatic Then

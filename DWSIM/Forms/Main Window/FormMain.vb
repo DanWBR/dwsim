@@ -960,6 +960,7 @@ Public Class FormMain
             End If
         Next
         loadedCSDB = True
+        csdb.Dispose()
     End Sub
 
     Public Sub LoadDWSIMDB()
@@ -970,6 +971,7 @@ Public Class FormMain
         For Each cp As BaseClasses.ConstantProperties In cpa
             If Not Me.AvailableComponents.ContainsKey(cp.Name) Then Me.AvailableComponents.Add(cp.Name, cp)
         Next
+        dwdb.Dispose()
     End Sub
 
     Public Sub LoadAdditionalCompounds()
@@ -1016,6 +1018,7 @@ Public Class FormMain
             Next
         Catch ex As Exception
         End Try
+        cpdb.Dispose()
     End Sub
 
     Public Sub LoadCheDLDB()
@@ -1032,6 +1035,7 @@ Public Class FormMain
                 End If
             End If
         Next
+        chedl.Dispose()
 
     End Sub
 

@@ -420,22 +420,13 @@ Namespace Reactors
             pp.CurrentMaterialStream = tms
 
             Dim xv = tms.GetOverallComposition()
-            Dim fugv = tms.PropertyPackage.DW_CalcFugCoeff(xv, T, P, PropertyPackages.State.Vapor)
 
-            Dim gibbsf As New List(Of Double)
-            Dim mw As Double
+            Dim gf = pp.AUX_GFm25(xv)
 
-            For Each s As Compound In tms.Phases(0).Compounds.Values
-                mw = s.ConstantProperties.Molar_Weight
-                gibbsf.Add(s.ConstantProperties.IG_Gibbs_Energy_of_Formation_25C * mw)
-            Next
+            Dim g0 = tms.Phases(0).Properties.gibbs_free_energy.GetValueOrDefault()
+            Dim mw0 = tms.Phases(0).Properties.molecularWeight.GetValueOrDefault()
 
-            Dim gval As Double = 0.0
-            For i = 0 To xv.Length - 1
-                If xv(i) > 0.0 Then gval = xv(i) * (Log(xv(i) * fugv(i)) + gibbsf(i) / (8.314 * T))
-            Next
-
-            Return gval
+            Return (gf + g0) * mw0 * sumfm
 
         End Function
 
@@ -503,10 +494,10 @@ Namespace Reactors
             Dim xv = tms.GetOverallComposition()
 
             Dim sf = pp.AUX_SFm25(xv)
-            Dim s0 = ims.Phases(0).Properties.entropy.GetValueOrDefault()
-            Dim mw0 = ims.Phases(0).Properties.molecularWeight.GetValueOrDefault()
+            Dim s0 = tms.Phases(0).Properties.entropy.GetValueOrDefault()
+            Dim mw0 = tms.Phases(0).Properties.molecularWeight.GetValueOrDefault()
 
-            Return -(sf + s0) * sumw
+            Return -(sf + s0) * mw0 * sumfm
 
         End Function
 
@@ -893,12 +884,11 @@ Namespace Reactors
 
                 Dim ebal As Double = 0.0
                 Dim errval As Double = 0.0
-                Dim werr As Double = 0.0
+                Dim wbal As Double = 0.0
 
                 Dim icount As Integer = 0
 
                 NFv = solv.ComputeMin(Function(xn)
-                                          If ebal < 0.0000001 And icount > 1000 Then Return errval
                                           Dim gval = FunctionValue2G2(xn)
                                           Dim ebal_i As Double
                                           ebal = 0.0
@@ -907,11 +897,11 @@ Namespace Reactors
                                               For j = 0 To c
                                                   ebal_i += xn(j) * Me.ElementMatrix(i, j)
                                               Next
-                                              ebal += (TotalElements(i) - ebal_i) ^ 2
+                                              ebal += ((TotalElements(i) - ebal_i) / TotalElements(i)) ^ 2
                                           Next
                                           icount += 1
-                                          werr = (tms.GetMassFlow() - W0tot) ^ 2 * 10000
-                                          errval = gval + werr + (ebal * 1000000) ^ 2
+                                          wbal = ((tms.GetMassFlow() - W0tot) / W0tot) ^ 2
+                                          errval = Exp(gval) + wbal * 100 + ebal * 100
                                           Return errval
                                       End Function, svars.ToArray())
 
@@ -1261,15 +1251,17 @@ Namespace Reactors
 
             Dim keys = N.Keys.ToArray()
 
+            Dim Tscaled = scaler.Scale(T, 298.15, 2000, 0.0, 1.0)
+
             Dim ival(N.Count), lbo(N.Count), ubo(N.Count), NFv(N.Count) As Double
             For i = 0 To N.Count - 1
                 lbo(i) = 0.0
                 ubo(i) = W0tot / CProps(i).Molar_Weight * 1000
-                ival(i) = 0.0 'N0(Me.ComponentIDs(i))
+                ival(i) = N0(Me.ComponentIDs(i))
             Next
-            ival(N.Count) = T
-            lbo(N.Count) = 298.15
-            ubo(N.Count) = 2000
+            ival(N.Count) = Tscaled
+            lbo(N.Count) = 0.0
+            ubo(N.Count) = 1.0
 
             Dim solv As New Simplex
             solv.MaxFunEvaluations = 10000
@@ -1279,7 +1271,6 @@ Namespace Reactors
             For i = 0 To N.Count - 1
                 svars.Add(New OptSimplexBoundVariable(ival(i), lbo(i), ubo(i)))
             Next
-            Dim Tscaled = scaler.Scale(T, 298.15, 2000, 0.0, 1.0)
             svars.Add(New OptSimplexBoundVariable(Tscaled, 0.0, 1.0))
 
             Dim g0 = FunctionValue2G(N.Values.ToArray)
@@ -1311,7 +1302,7 @@ Namespace Reactors
                                       Next
                                       icount += 1
                                       wbal = ((tms.GetMassFlow() - W0tot) / W0tot) ^ 2
-                                      errval = sval + wbal + ebal
+                                      errval = Exp(sval) + wbal * 100 + ebal * 100
                                       objvalues.Add(errval)
                                       solutions.Add(xn)
                                       Return errval

@@ -85,8 +85,8 @@ Namespace MathEx.OptimizationL
 
             'set initialposition
             optimization.InitialPosition = vars
-            optimization.InitialValueRangeLower = lbounds.Min
-            optimization.InitialValueRangeUpper = ubounds.Max
+            optimization.InitialValueRangeLower = lbounds.Max
+            optimization.InitialValueRangeUpper = ubounds.Min
 
             'set bpundary
             optimization.UpperBounds = ubounds
