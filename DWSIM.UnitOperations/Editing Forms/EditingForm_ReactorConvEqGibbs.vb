@@ -259,18 +259,6 @@ Public Class EditingForm_ReactorConvEqGibbs
 
                 End If
 
-            ElseIf TypeOf SimObject Is Reactors.Reactor_Gibbs Then
-
-                Dim robj = DirectCast(SimObject, Reactors.Reactor_Gibbs)
-
-                If Not robj.ReactionExtents Is Nothing And robj.SolvMethod = Reactors.Reactor_Gibbs.SolvingMethod.ReactionExtents Then
-
-                    For Each dbl As KeyValuePair(Of String, Double) In robj.ReactionExtents
-                        gridReactions.Rows.Add(New Object() { .FlowSheet.Reactions(dbl.Key).Name, .FlowSheet.GetTranslatedString("ReactionCoordinate"), su.Converter.ConvertFromSI(units.molarflow, dbl.Value).ToString(nf), units.molarflow})
-                    Next
-
-                End If
-
             End If
 
             'conversions

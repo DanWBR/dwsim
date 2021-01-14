@@ -5946,9 +5946,7 @@ Public Class PropertyGridEditors
 
             .Item.Add(DWSIM.App.GetLocalString("RGCalcMode"), uo, "SolvMethod", False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("RGCalcMode_description"), True)
 
-            If uo.SolvMethod = Reactor_Gibbs.SolvingMethod.DirectMinimization Then
-
-                .Item.Add(DWSIM.App.GetLocalString("RGComponents"), uo, "ComponentIDs", False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("RGComponents_description"), True)
+            .Item.Add(DWSIM.App.GetLocalString("RGComponents"), uo, "ComponentIDs", False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("RGComponents_description"), True)
                 With .Item(.Item.Count - 1)
                     .DefaultValue = Nothing
                     .IsBrowsable = False
@@ -5968,17 +5966,6 @@ Public Class PropertyGridEditors
                     .IsBrowsable = False
                     .CustomEditor = New DWSIM.Editors.Reactors.UIElementMatrixEditor
                 End With
-
-            Else
-
-                If Not uo.FlowSheet.Options.ReactionSets.ContainsKey(uo.ReactionSetID) Then uo.ReactionSetID = "DefaultSet"
-                .Item.Add(DWSIM.App.GetLocalString("RConvPGridItem1"), uo.FlowSheet.Options.ReactionSets(uo.ReactionSetID).Name, False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("RConvPGridItem1Help"), True)
-                With .Item(.Item.Count - 1)
-                    .CustomEditor = New DWSIM.Editors.Reactors.UIReactionSetSelector
-                    .IsDropdownResizable = True
-                End With
-
-            End If
 
             .Item.Add(DWSIM.App.GetLocalString("RConvPGridItem2"), uo, "ReactorOperationMode", False, DWSIM.App.GetLocalString("Parmetrosdeclculo2"), DWSIM.App.GetLocalString("RConvPGridItem2Help"), True)
             With .Item(.Item.Count - 1)
@@ -6038,36 +6025,7 @@ Public Class PropertyGridEditors
                     .CustomEditor = New System.Drawing.Design.UITypeEditor
                 End With
 
-                If uo.SolvMethod = Reactor_Gibbs.SolvingMethod.DirectMinimization Then
-
-                    .Item.Add(DWSIM.App.GetLocalString("RGElementBalance"), uo.ElementBalance, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("RGElementBalance_description"), True)
-
-                Else
-
-                    If Not uo.ReactionExtents Is Nothing Then
-
-                        'CustomPropertyCollection
-                        Dim m2 As New PropertyGridEx.CustomPropertyCollection()
-
-                        For Each dbl As KeyValuePair(Of String, Double) In uo.ReactionExtents
-                            valor = Format(dbl.Value, uo.FlowSheet.Options.NumberFormat)
-                            m2.Add(uo.FlowSheet.Options.Reactions(dbl.Key).Name, valor, False, DWSIM.App.GetLocalString("CoordenadasReacoes"), DWSIM.App.GetLocalString("REqPGridItem1Help"), True)
-                            m2.Item(m2.Count - 1).IsReadOnly = True
-                            m2.Item(m2.Count - 1).DefaultValue = Nothing
-                            m2.Item(m2.Count - 1).DefaultType = GetType(Nullable(Of Double))
-                        Next
-
-                        .Item.Add(DWSIM.App.GetLocalString("CoordenadasReacoes"), m2, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("REqPGridItem2Help"), True)
-                        With .Item(.Item.Count - 1)
-                            .IsReadOnly = True
-                            .IsBrowsable = True
-                            .BrowsableLabelStyle = PropertyGridEx.BrowsableTypeConverter.LabelStyle.lsEllipsis
-                            .CustomEditor = New System.Drawing.Design.UITypeEditor
-                        End With
-
-                    End If
-
-                End If
+                .Item.Add(DWSIM.App.GetLocalString("RGElementBalance"), uo.ElementBalance, True, DWSIM.App.GetLocalString("Resultados3"), DWSIM.App.GetLocalString("RGElementBalance_description"), True)
 
             End If
 

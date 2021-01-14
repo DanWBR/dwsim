@@ -25,6 +25,8 @@ Namespace MathEx.Optimization
 
         Public Property MaxIterations As Integer = 1000
 
+        Public Property ReturnLowestObjFuncValue As Boolean = True
+
         Private _Iterations As Integer = 0
 
         Private fxb As Func(Of Double(), Double)
@@ -103,8 +105,12 @@ Namespace MathEx.Optimization
                             IpoptReturnCode.Infeasible_Problem_Detected,
                             IpoptReturnCode.Maximum_Iterations_Exceeded,
                             IpoptReturnCode.User_Requested_Stop
-                        'get solution with lowest function value
-                        Return Solutions(FunctionValues.IndexOf(FunctionValues.Min))
+                        If ReturnLowestObjFuncValue Then
+                            'get solution with lowest function value
+                            Return Solutions(FunctionValues.IndexOf(FunctionValues.Min))
+                        Else
+                            Return vars
+                        End If
                     Case Else
                         Throw New ArithmeticException("IPOPT failed to converge.")
                 End Select
