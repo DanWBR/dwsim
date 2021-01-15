@@ -708,10 +708,9 @@ Namespace Reactors
             solver2.MaxIterations = InternalLoopMaximumIterations
             solver2.Tolerance = InternalLoopTolerance
 
-            Dim solver3 As New Optimization.NewtonSolver
-            solver3.MaxIterations = InternalLoopMaximumIterations
+            Dim solver3 As New Simplex
+            solver3.MaxFunEvaluations = InternalLoopMaximumIterations
             solver3.Tolerance = InternalLoopTolerance
-            solver3.UseBroydenApproximation = True
 
             ' check equilibrium constants to define objective function form
 
@@ -781,7 +780,7 @@ Namespace Reactors
 
                                 Dim VariableValues As New List(Of Double())
                                 Dim FunctionValues As New List(Of Double)
-                                Dim result As Double, resnewton As Double()
+                                Dim result As Double
 
                                 If UseIPOPTSolver Then
 
@@ -798,14 +797,13 @@ Namespace Reactors
 
                                 Else
 
-                                    newx = solver3.Solve(Function(x1)
-                                                             FlowSheet.CheckStatus()
-                                                             VariableValues.Add(x1.Clone)
-                                                             resnewton = FunctionValue2N(x1)
-                                                             result = resnewton.AbsSqrSumY
-                                                             FunctionValues.Add(result)
-                                                             Return resnewton
-                                                         End Function, variables.ToArray)
+                                    newx = solver3.ComputeMin(Function(x1)
+                                                                  FlowSheet.CheckStatus()
+                                                                  VariableValues.Add(x1.Clone)
+                                                                  result = FunctionValue2N(x1).AbsSqrSumY
+                                                                  FunctionValues.Add(result)
+                                                                  Return result
+                                                              End Function, variables2.ToArray)
 
                                     FlowSheet.CheckStatus()
 
