@@ -151,86 +151,75 @@ Namespace Reactors
 
             Dim penval As Double = ReturnPenaltyValue()
 
-            If penval > 0.001 Then
 
-                For i = 0 To Me.Reactions.Count - 1
-                    f(i) = penval
-                Next
+            Dim fugv(tms.Phases(0).Compounds.Count - 1), fugl(tms.Phases(0).Compounds.Count - 1), prod(x.Length - 1) As Double
 
-                Return f
+            fugv = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Vapor)
+            fugl = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Liquid)
 
-            Else
+            i = 0
+            For Each s As Compound In tms.Phases(0).Compounds.Values
+                If s.MoleFraction > 0.0# Then
+                    cpv(i) = fugv(i) * Vz(i) * P / P0
+                    cpl(i) = fugl(i) * Vz(i)
+                Else
+                    cpv(i) = fugv(i) * 0.01 * P / P0
+                    cpl(i) = fugl(i) * 0.01
+                End If
+                i += 1
+            Next
 
-                Dim fugv(tms.Phases(0).Compounds.Count - 1), fugl(tms.Phases(0).Compounds.Count - 1), prod(x.Length - 1) As Double
-
-                fugv = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Vapor)
-                fugl = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Liquid)
-
-                i = 0
+            For i = 0 To Me.Reactions.Count - 1
+                prod(i) = 1.0#
+                j = 0
                 For Each s As Compound In tms.Phases(0).Compounds.Values
-                    If s.MoleFraction > 0.0# Then
-                        cpv(i) = fugv(i) * Vz(i) * P / P0
-                        cpl(i) = fugl(i) * Vz(i)
-                    Else
-                        cpv(i) = fugv(i) * 0.01 * P / P0
-                        cpl(i) = fugl(i) * 0.01
-                    End If
-                    i += 1
+                    With FlowSheet.Reactions(Me.Reactions(i))
+                        If .ReactionPhase = PhaseName.Vapor AndAlso .Components.ContainsKey(s.Name) Then
+                            Select Case .ReactionBasis
+                                Case ReactionBasis.Activity, ReactionBasis.Fugacity
+                                    basis(j) = cpv(j)
+                                Case ReactionBasis.MassFrac
+                                    basis(j) = pp.AUX_CONVERT_MOL_TO_MASS(Vz)(j)
+                                Case ReactionBasis.MolarFrac
+                                    basis(j) = Vz(j)
+                                Case ReactionBasis.PartialPress
+                                    basis(j) = (Vz(j) * fugv(j) * P).ConvertFromSI(.EquilibriumReactionBasisUnits)
+                                Case Else
+                                    Throw New Exception("Selected Reaction Basis is not supported.")
+                            End Select
+                            prod(i) *= basis(j) ^ .Components(s.Name).StoichCoeff
+                        ElseIf .ReactionPhase = PhaseName.Liquid AndAlso .Components.ContainsKey(s.Name) Then
+                            Select Case .ReactionBasis
+                                Case ReactionBasis.Activity, ReactionBasis.Fugacity
+                                    basis(j) = cpl(j)
+                                Case ReactionBasis.MassFrac
+                                    basis(j) = pp.AUX_CONVERT_MOL_TO_MASS(Vz)(j)
+                                Case ReactionBasis.MolarFrac
+                                    basis(j) = Vz(j)
+                                Case ReactionBasis.PartialPress
+                                    basis(j) = (Vz(j) * fugl(j) * P).ConvertFromSI(.EquilibriumReactionBasisUnits)
+                                Case Else
+                                    Throw New Exception("Selected Reaction Basis is not supported.")
+                            End Select
+                            prod(i) *= basis(j) ^ .Components(s.Name).StoichCoeff
+                        End If
+                    End With
+                    j += 1
                 Next
+            Next
 
-                For i = 0 To Me.Reactions.Count - 1
-                    prod(i) = 1.0#
-                    j = 0
-                    For Each s As Compound In tms.Phases(0).Compounds.Values
-                        With FlowSheet.Reactions(Me.Reactions(i))
-                            If .ReactionPhase = PhaseName.Vapor AndAlso .Components.ContainsKey(s.Name) Then
-                                Select Case .ReactionBasis
-                                    Case ReactionBasis.Activity, ReactionBasis.Fugacity
-                                        basis(j) = cpv(j)
-                                    Case ReactionBasis.MassFrac
-                                        basis(j) = pp.AUX_CONVERT_MOL_TO_MASS(Vz)(j)
-                                    Case ReactionBasis.MolarFrac
-                                        basis(j) = Vz(j)
-                                    Case ReactionBasis.PartialPress
-                                        basis(j) = (Vz(j) * fugv(j) * P).ConvertFromSI(.EquilibriumReactionBasisUnits)
-                                    Case Else
-                                        Throw New Exception("Selected Reaction Basis is not supported.")
-                                End Select
-                                prod(i) *= basis(j) ^ .Components(s.Name).StoichCoeff
-                            ElseIf .ReactionPhase = PhaseName.Liquid AndAlso .Components.ContainsKey(s.Name) Then
-                                Select Case .ReactionBasis
-                                    Case ReactionBasis.Activity, ReactionBasis.Fugacity
-                                        basis(j) = cpl(j)
-                                    Case ReactionBasis.MassFrac
-                                        basis(j) = pp.AUX_CONVERT_MOL_TO_MASS(Vz)(j)
-                                    Case ReactionBasis.MolarFrac
-                                        basis(j) = Vz(j)
-                                    Case ReactionBasis.PartialPress
-                                        basis(j) = (Vz(j) * fugl(j) * P).ConvertFromSI(.EquilibriumReactionBasisUnits)
-                                    Case Else
-                                        Throw New Exception("Selected Reaction Basis is not supported.")
-                                End Select
-                                prod(i) *= basis(j) ^ .Components(s.Name).StoichCoeff
-                            End If
-                        End With
-                        j += 1
-                    Next
-                Next
+            Dim kr As Double
 
-                Dim kr As Double
+            For i = 0 To Me.Reactions.Count - 1
+                kr = FlowSheet.Reactions(Me.Reactions(i)).EvaluateK(T, pp)
+                If LogErrorFunction Then
+                    f(i) = Math.Log(prod(i) / kr) + penval
+                Else
+                    f(i) = prod(i) - kr + penval
+                End If
+            Next
 
-                For i = 0 To Me.Reactions.Count - 1
-                    kr = FlowSheet.Reactions(Me.Reactions(i)).EvaluateK(T, pp)
-                    If LogErrorFunction Then
-                        f(i) = Math.Log(prod(i) / kr) + penval
-                    Else
-                        f(i) = prod(i) - kr + penval
-                    End If
-                Next
-
-                Return f
-
-            End If
+            Return f
 
         End Function
 
@@ -384,9 +373,26 @@ Namespace Reactors
 
         End Sub
 
+        Private Mode As Integer = 1
+
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
-            Calculate_Internal(args)
+            Dim Success As Boolean = False
+            Dim Exc As Exception = Nothing
+            For i = 1 To 4
+                Try
+                    Calculate_Internal(args)
+                    Success = True
+                    Exit For
+                Catch ex As Exception
+                    Exc = ex
+                End Try
+                Mode = i + 1
+            Next
+            If Not Success Then
+                Mode = 1
+                Throw Exc
+            End If
 
         End Sub
 
@@ -658,7 +664,6 @@ Namespace Reactors
                 i += 1
             Next
 
-
             Dim m As Integer = 0
 
             Dim REx(r) As Double
@@ -683,8 +688,16 @@ Namespace Reactors
 
             Me.InitialGibbsEnergy = g0
 
-            MinVal = Math.Min(lbound.Min, REx.Min) * 10
-            MaxVal = Math.Max(ubound.Max, REx.Max) * 10
+            If Mode < 3 Then
+                MinVal = Math.Min(lbound.Min, REx.Min)
+                MaxVal = Math.Max(ubound.Max, REx.Max)
+            ElseIf Mode = 3 Then
+                MinVal = Math.Min(lbound.Min, REx.Min) * 10
+                MaxVal = Math.Max(ubound.Max, REx.Max) * 10
+            ElseIf Mode = 4 Then
+                MinVal = Math.Min(lbound.Min, REx.Min) * 100
+                MaxVal = Math.Max(ubound.Max, REx.Max) * 100
+            End If
 
             Dim CalcFinished As Boolean = False
 
@@ -708,7 +721,15 @@ Namespace Reactors
                 Keq.Add(Math.Abs(FlowSheet.Reactions(Me.Reactions(i)).EvaluateK(T, pp)))
             Next
 
-            LogErrorFunction = True
+            If Keq.Max > 1000000.0 Or Keq.Min < 0.000001 Then
+                LogErrorFunction = True
+            Else
+                If Mode < 3 Then
+                    LogErrorFunction = False
+                Else
+                    LogErrorFunction = True
+                End If
+            End If
 
             Dim efunc = Function(Tx)
 
