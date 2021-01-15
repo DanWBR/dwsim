@@ -349,6 +349,13 @@ Namespace UnitOperations.Auxiliary.SepOps
 
         Public Function ValidateCompositions() As Boolean
 
+            If _liqcompositions.Select(Function(x) x.Values.Select(Function(x2) x2.Value).Sum).Sum = 0.0 Then
+                Return False
+            End If
+            If _vapcompositions.Select(Function(x) x.Values.Select(Function(x2) x2.Value).Sum).Sum = 0.0 Then
+                Return False
+            End If
+
             If _liqcompositions.Count = 0 Then Return False
             If _vapcompositions.Count = 0 Then Return False
 
