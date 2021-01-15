@@ -576,9 +576,7 @@ Namespace Reactors
             T0 = ims.Phases(0).Properties.temperature.GetValueOrDefault
 
             Select Case Me.ReactorOperationMode
-                Case OperationMode.Adiabatic
-                    T = T0 'initial value only, final value will be calculated by an iterative procedure
-                Case OperationMode.Isothermic
+                Case OperationMode.Adiabatic, OperationMode.Isothermic
                     T = T0
                 Case OperationMode.OutletTemperature
                     T = OutletTemperature

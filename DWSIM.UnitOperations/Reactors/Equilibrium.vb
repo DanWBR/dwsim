@@ -151,21 +151,8 @@ Namespace Reactors
 
             Dim fugv(tms.Phases(0).Compounds.Count - 1), fugl(tms.Phases(0).Compounds.Count - 1), prod(x.Length - 1) As Double
 
-            If GlobalSettings.Settings.EnableParallelProcessing Then
-                Dim t1 = Task.Factory.StartNew(Sub()
-                                                   fugv = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Vapor)
-                                               End Sub)
-                Dim t2 = Task.Factory.StartNew(Sub()
-                                                   fugl = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Liquid)
-                                               End Sub)
-                Task.WaitAll(t1, t2)
-            Else
-                _IObj?.SetCurrent
-                fugv = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Vapor)
-                _IObj?.SetCurrent
-                fugl = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Liquid)
-            End If
-
+            fugv = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Vapor)
+            fugl = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Liquid)
 
             i = 0
             For Each s As Compound In tms.Phases(0).Compounds.Values
@@ -387,26 +374,9 @@ Namespace Reactors
 
         End Sub
 
-        Private Mode As Integer = 1
-
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
-            Dim Success As Boolean = False
-            Dim Exc As Exception = Nothing
-            For i = 1 To 4
-                Try
-                    Calculate_Internal(args)
-                    Success = True
-                    Exit For
-                Catch ex As Exception
-                    Exc = ex
-                End Try
-                Mode = i + 1
-            Next
-            If Not Success Then
-                Mode = 1
-                Throw Exc
-            End If
+            Calculate_Internal(args)
 
         End Sub
 
@@ -567,9 +537,7 @@ Namespace Reactors
             P0 = 101325
 
             Select Case Me.ReactorOperationMode
-                Case OperationMode.Adiabatic
-                    T = T0 'initial value only, final value will be calculated by an iterative procedure
-                Case OperationMode.Isothermic
+                Case OperationMode.Adiabatic, OperationMode.Isothermic
                     T = T0
                 Case OperationMode.OutletTemperature
                     T = OutletTemperature
@@ -705,16 +673,8 @@ Namespace Reactors
 
             Me.InitialGibbsEnergy = g0
 
-            If Mode < 3 Then
-                MinVal = Math.Min(lbound.Min, REx.Min)
-                MaxVal = Math.Max(ubound.Max, REx.Max)
-            ElseIf Mode = 3 Then
-                MinVal = Math.Min(lbound.Min, REx.Min) * 10
-                MaxVal = Math.Max(ubound.Max, REx.Max) * 10
-            ElseIf Mode = 4 Then
-                MinVal = Math.Min(lbound.Min, REx.Min) * 100
-                MaxVal = Math.Max(ubound.Max, REx.Max) * 100
-            End If
+            MinVal = Math.Min(lbound.Min, REx.Min) * 10
+            MaxVal = Math.Max(ubound.Max, REx.Max) * 10
 
             Dim CalcFinished As Boolean = False
 
@@ -738,15 +698,7 @@ Namespace Reactors
                 Keq.Add(Math.Abs(FlowSheet.Reactions(Me.Reactions(i)).EvaluateK(T, pp)))
             Next
 
-            If Keq.Max > 1000000.0 Or Keq.Min < 0.000001 Then
-                LogErrorFunction = True
-            Else
-                If Mode < 3 Then
-                    LogErrorFunction = False
-                Else
-                    LogErrorFunction = True
-                End If
-            End If
+            LogErrorFunction = True
 
             Dim efunc = Function(Tx)
 
@@ -844,7 +796,7 @@ Namespace Reactors
 
                                 IObj3?.Close()
 
-                            Loop Until errval < InternalLoopTolerance Or (sumerr < InternalLoopTolerance And niter > 20) Or niter >= InternalLoopMaximumIterations
+                            Loop Until errval < InternalLoopTolerance Or (sumerr < InternalLoopTolerance) Or niter >= InternalLoopMaximumIterations
 
                             If niter >= InternalLoopMaximumIterations Then Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
 
@@ -1036,12 +988,10 @@ Namespace Reactors
             IObj?.Paragraphs.Add(String.Format("Final Gibbs Energy: {0}", g1))
 
             Me.ReactionExtents.Clear()
-            Me.PreviousReactionExtents.Clear()
 
             For Each rxid As String In Me.Reactions
                 rx = FlowSheet.Reactions(rxid)
                 ReactionExtents.Add(rx.ID, (N(rx.BaseReactant) - N0(rx.BaseReactant)) / rx.Components(rx.BaseReactant).StoichCoeff)
-                PreviousReactionExtents.Add(rx.ID, ReactionExtents(rx.ID))
             Next
 
             Dim W As Double = ims.Phases(0).Properties.massflow.GetValueOrDefault
