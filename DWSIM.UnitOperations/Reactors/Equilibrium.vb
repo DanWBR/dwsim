@@ -213,7 +213,7 @@ Namespace Reactors
             For i = 0 To Me.Reactions.Count - 1
                 kr = FlowSheet.Reactions(Me.Reactions(i)).EvaluateK(T, pp)
                 If LogErrorFunction Then
-                    f(i) = Math.Log(prod(i) / kr) + penval
+                    f(i) = Math.Log(Math.Abs(prod(i)) / kr) + penval
                 Else
                     f(i) = prod(i) - kr + penval
                 End If
