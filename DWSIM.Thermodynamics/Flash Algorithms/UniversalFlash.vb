@@ -4,16 +4,16 @@
 '    This file is part of DWSIM.
 '
 '    DWSIM is free software: you can redistribute it and/or modify
-'    it under the terms of the GNU General Public License as published by
+'    it under the terms of the GNU Lesser General Public License as published by
 '    the Free Software Foundation, either version 3 of the License, or
 '    (at your option) any later version.
 '
 '    DWSIM is distributed in the hope that it will be useful,
 '    but WITHOUT ANY WARRANTY; without even the implied warranty of
 '    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'    GNU General Public License for more details.
+'    GNU Lesser General Public License for more details.
 '
-'    You should have received a copy of the GNU General Public License
+'    You should have received a copy of the GNU Lesser General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Math
@@ -56,116 +56,51 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_PT(Vz() As Double, P As Double, T As Double, PP As PropertyPackage, Optional ReuseKI As Boolean = False, Optional PrevKi() As Double = Nothing) As Object
 
-            Dim names = PP.RET_VNAMES
+            Dim Flashtype As String = FlashSettings(FlashSetting.ForceEquilibriumCalculationType)
 
-            Dim n = Vz.Length - 1
+            Dim hres = PerformHeuristicsTest(Vz, T, P, PP)
 
-            Dim errflag As Boolean
+            If Flashtype = "Default" Then
+
+                'chech possible phases to decide on suitable flash algorithm
+                If hres.SolidPhase Or PP.ForcedSolids.Count > 0 Then
+                    If hres.LiquidPhaseSplit Then
+                        Flashtype = "SVLLE"
+                    Else
+                        Flashtype = "SVLE"
+                    End If
+                Else
+                    If hres.LiquidPhaseSplit Then
+                        Flashtype = "VLLE"
+                    Else
+                        Flashtype = "VLE"
+                    End If
+                End If
+            End If
 
             Dim result As Object = Nothing
 
-            Select Case FlashSettings(FlashSetting.ForceEquilibriumCalculationType)
+            Select Case Flashtype
                 Case "VLE"
-                    'VLE
-                    Try
-                        Dim nl As New NestedLoops With {.FlashSettings = FlashSettings}
-                        result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-                    Catch ex As Exception
-                        errflag = True
-                    End Try
+                    Dim nl = New NestedLoops
+                    nl.FlashSettings = FlashSettings
+                    result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
                 Case "VLLE"
-                    'VLLE
                     If Not FlashSettings(FlashSetting.ImmiscibleWaterOption) = True Then
-                        Try
-                            Dim nl As New NestedLoops3PV3 With {.FlashSettings = FlashSettings}
-                            result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-                        Catch ex As Exception
-                            errflag = True
-                        End Try
+                        Dim nl = New NestedLoops3PV3
+                        nl.FlashSettings = FlashSettings
+                        result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
                     Else
                         Dim imm As New NestedLoopsImmiscible With {.FlashSettings = FlashSettings}
-                        Try
-                            result = imm.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-                        Catch ex As Exception
-                            errflag = True
-                        End Try
+                        result = imm.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
                     End If
-                Case "SVLLE"
-                    'SVLLE
-                    Try
-                        Dim nl As New NestedLoopsSVLLE With {.FlashSettings = FlashSettings}
-                        result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-                    Catch ex As Exception
-                        errflag = True
-                    End Try
-                Case "SVLE"
-                    'SVLE
-                    Try
-                        Dim nl As New NestedLoopsSLE With {.FlashSettings = FlashSettings, .SolidSolution = False}
-                        result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-                    Catch ex As Exception
-                        errflag = True
-                    End Try
-                Case Else
-                    Dim hres = PerformHeuristicsTest(Vz, T, P, PP)
-                    If hres.LiquidPhaseSplit And hres.SolidPhase Then
-                        'SVLLE
-                        'If Settings.ExcelMode Then
-                        Try
-                            Dim nl As New NestedLoopsSVLLE With {.FlashSettings = FlashSettings}
-                            result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-                        Catch ex As Exception
-                            errflag = True
-                        End Try
-                        'Else
-                        '    Dim gmin As New GibbsMinimizationMulti With {.FlashSettings = FlashSettings}
-                        '    Try
-                        '        result = gmin.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-                        '    Catch ex As Exception
-                        '        errflag = True
-                        '    End Try
-                        'End If
-                    ElseIf hres.LiquidPhaseSplit And Not hres.SolidPhase Then
-                        'VLLE
-                        Try
-                            Dim nl As New NestedLoops3PV3 With {.FlashSettings = FlashSettings}
-                            result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-                        Catch ex As Exception
-                            errflag = True
-                        End Try
-                    ElseIf Not hres.LiquidPhaseSplit And hres.SolidPhase Then
-                        'SVLE
-                        Try
-                            Dim nl As New NestedLoopsSLE With {.FlashSettings = FlashSettings, .SolidSolution = False}
-                            result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-                        Catch ex As Exception
-                            errflag = True
-                        End Try
-                    Else
-                        'VLE
-                        Try
-                            Dim nl As New NestedLoops With {.FlashSettings = FlashSettings}
-                            result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-                        Catch ex As Exception
-                            errflag = True
-                        End Try
-                        If errflag Then
-                            Dim nl4 As New NestedLoopsSVLLE With {.FlashSettings = FlashSettings}
-                            Try
-                                result = nl4.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-                                errflag = False
-                            Catch ex As Exception
-                                errflag = True
-                            End Try
-                        End If
-                    End If
+                Case "SVLE", "SVLLE"
+                    Dim nl As New NestedLoopsSVLLE
+                    nl.FlashSettings = FlashSettings
+                    result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
             End Select
 
-            If errflag Then
-                Throw New Exception("Flash calculation error")
-            Else
-                Return result
-            End If
+            Return result
 
         End Function
 
@@ -191,19 +126,99 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_PV(Vz() As Double, P As Double, V As Double, Tref As Double, PP As PropertyPackage, Optional ReuseKI As Boolean = False, Optional PrevKi() As Double = Nothing) As Object
 
-            Dim nl = New NestedLoops
-            nl.FlashSettings = FlashSettings
+            Dim Flashtype As String = FlashSettings(FlashSetting.ForceEquilibriumCalculationType)
 
-            Return nl.Flash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
+            Dim hres = PerformHeuristicsTest(Vz, Tref, P, PP)
+
+            If Flashtype = "Default" Then
+
+                'chech possible phases to decide on suitabel flash algorithm
+                If hres.SolidPhase Or PP.ForcedSolids.Count > 0 Then
+                    If hres.LiquidPhaseSplit Then
+                        Flashtype = "SVLLE"
+                    Else
+                        Flashtype = "SVLE"
+                    End If
+                Else
+                    If hres.LiquidPhaseSplit Then
+                        Flashtype = "VLLE"
+                    Else
+                        Flashtype = "VLE"
+                    End If
+                End If
+            End If
+
+            Dim result As Object = Nothing
+
+            Select Case Flashtype
+                Case "VLE"
+                    Dim nl = New NestedLoops
+                    nl.FlashSettings = FlashSettings
+                    result = nl.Flash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
+                Case "VLLE"
+                    Dim nl3 = New NestedLoops3PV3
+                    nl3.FlashSettings = FlashSettings
+                    result = nl3.Flash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
+                Case "SVLE"
+                    Dim nls = New NestedLoopsSLE
+                    nls.FlashSettings = FlashSettings
+                    result = nls.Flash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
+                Case "SVLLE"
+                    Dim nl As New NestedLoopsSVLLE With {.FlashSettings = FlashSettings}
+                    nl.FlashSettings = FlashSettings
+                    result = nl.Flash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
+            End Select
+
+            Return result
 
         End Function
 
         Public Overrides Function Flash_TV(Vz() As Double, T As Double, V As Double, Pref As Double, PP As PropertyPackage, Optional ReuseKI As Boolean = False, Optional PrevKi() As Double = Nothing) As Object
 
-            Dim nl = New NestedLoops
-            nl.FlashSettings = FlashSettings
+            Dim Flashtype As String = FlashSettings(FlashSetting.ForceEquilibriumCalculationType)
 
-            Return nl.Flash_TV(Vz, T, V, Pref, PP, ReuseKI, PrevKi)
+            Dim hres = PerformHeuristicsTest(Vz, T, Pref, PP)
+
+            If Flashtype = "Default" Then
+
+                'chech possible phases to decide on suitabel flash algorithm
+                If hres.SolidPhase Or PP.ForcedSolids.Count > 0 Then
+                    If hres.LiquidPhaseSplit Then
+                        Flashtype = "SVLLE"
+                    Else
+                        Flashtype = "SVLE"
+                    End If
+                Else
+                    If hres.LiquidPhaseSplit Then
+                        Flashtype = "VLLE"
+                    Else
+                        Flashtype = "VLE"
+                    End If
+                End If
+            End If
+
+            Dim result As Object = Nothing
+
+            Select Case Flashtype
+                Case "VLE"
+                    Dim nl = New NestedLoops
+                    nl.FlashSettings = FlashSettings
+                    result = nl.Flash_TV(Vz, T, V, Pref, PP, ReuseKI, PrevKi)
+                Case "VLLE"
+                    Dim nl = New NestedLoops3PV3
+                    nl.FlashSettings = FlashSettings
+                    result = nl.Flash_TV(Vz, T, V, Pref, PP, ReuseKI, PrevKi)
+                Case "SVLE"
+                    Dim nl = New NestedLoopsSLE
+                    nl.FlashSettings = FlashSettings
+                    result = nl.Flash_TV(Vz, T, V, Pref, PP, ReuseKI, PrevKi)
+                Case "SVLLE"
+                    Dim nl As New NestedLoopsSVLLE
+                    nl.FlashSettings = FlashSettings
+                    result = nl.Flash_TV(Vz, T, V, Pref, PP, ReuseKI, PrevKi)
+            End Select
+
+            Return result
 
         End Function
 

@@ -4,16 +4,16 @@
 '    This file is part of DWSIM.
 '
 '    DWSIM is free software: you can redistribute it and/or modify
-'    it under the terms of the GNU General Public License as published by
+'    it under the terms of the GNU Lesser General Public License as published by
 '    the Free Software Foundation, either version 3 of the License, or
 '    (at your option) any later version.
 '
 '    DWSIM is distributed in the hope that it will be useful,
 '    but WITHOUT ANY WARRANTY; without even the implied warranty of
 '    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'    GNU General Public License for more details.
+'    GNU Lesser General Public License for more details.
 '
-'    You should have received a copy of the GNU General Public License
+'    You should have received a copy of the GNU Lesser General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Math
@@ -1150,6 +1150,74 @@ will converge to this solution.")
 
         End Function
 
+        Function GetPhaseSplitEstimates(T As Double, P As Double, L As Double, Vx As Double(), pp As PropertyPackage) As Object()
+
+            Dim stresult = StabTest2(T, P, Vx, pp.RET_VTC, pp)
+
+            Dim n = Vx.Length - 1
+            Dim i As Integer
+
+            Dim L1, L2 As Double
+            Dim Vx1, Vx2 As Double()
+
+            If L = 0 Then L = 1
+            L1 = L
+            L2 = 0.0
+
+            Vx1 = Vx.Clone()
+            Vx2 = Vx.Clone()
+
+            'if a second liquid phase is detected, estimate composition
+            If stresult.Count > 0 Then
+
+                Dim validsolutions = stresult.Where(Function(s) s.Max > 0.5).ToList()
+
+                Dim fcl(n), fcv(n) As Double
+
+                If validsolutions.Count > 1 Then
+                    ' select the solution which gives the lowest gibbs energy.
+                    ' Take this solution as composition of phase 2
+
+                    Dim Gt0 As Double = 100000.0, Gt As Double, ft() As Double, it As Integer
+                    i = 0
+                    For Each trialcomp In validsolutions
+                        ft = pp.DW_CalcFugCoeff(trialcomp, T, P, State.Liquid)
+                        Gt = 0.0
+                        For j = 0 To n
+                            If Vx(j) > 0.0 Then
+                                Gt += trialcomp(j) * Log(ft(j) * trialcomp(j))
+                            End If
+                        Next
+                        If Gt < Gt0 Then
+                            Gt0 = Gt
+                            it = i
+                        End If
+                        i += 1
+                    Next
+                    Vx2 = validsolutions(it)
+                Else
+                    Vx2 = stresult(0)
+                End If
+
+                'calculate L2
+                Dim maxL2 = Vx2.Max
+                Dim maxL2i = Vx2.ToList().IndexOf(maxL2)
+                L2 = Vx(maxL2i) * maxL2
+
+                'calculate L1
+                L1 = 1 - L2
+                Vx1 = Vx.SubtractY(Vx2.MultiplyConstY(L2)).MultiplyConstY(1 / L1)
+
+            End If
+
+            'adjust sum of L1 and L2 to specified total liquid fraction L 
+            L1 *= L
+            L2 *= L
+
+            Return New Object() {L1, Vx1, L2, Vx2}
+
+        End Function
+
 #End Region
 
 #Region "Phase Type Verification"
@@ -1314,6 +1382,9 @@ will converge to this solution.")
 
             Dim names = pp.RET_VNAMES().Select(Function(x) x.ToLower()).ToList()
             Dim props = pp.DW_GetConstantProperties()
+
+            If T = 0 Then T = 298.15
+            If P = 0 Then P = 101325
 
             'solids check
 

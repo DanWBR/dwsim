@@ -155,7 +155,7 @@
     <value>482, 13</value>
   </data>
   <data name="LabelLicense.Text" xml:space="preserve">
-    <value>DWSIM wird unter den Bedingungen der GNU General Public License (GPL) Version 3 veröffentlicht:</value>
+    <value>DWSIM wird unter den Bedingungen der GNU Lesser General Public License (GPL) Version 3 veröffentlicht:</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Über DWSIM Excel Add-In</value>

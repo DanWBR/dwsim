@@ -4,16 +4,16 @@
 '    This file is part of DWSIM.
 '
 '    DWSIM is free software: you can redistribute it and/or modify
-'    it under the terms of the GNU General Public License as published by
+'    it under the terms of the GNU Lesser General Public License as published by
 '    the Free Software Foundation, either version 3 of the License, or
 '    (at your option) any later version.
 '
 '    DWSIM is distributed in the hope that it will be useful,
 '    but WITHOUT ANY WARRANTY; without even the implied warranty of
 '    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'    GNU General Public License for more details.
+'    GNU Lesser General Public License for more details.
 '
-'    You should have received a copy of the GNU General Public License
+'    You should have received a copy of the GNU Lesser General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 
@@ -314,7 +314,7 @@ Namespace UnitOperations
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PS flash to calculate ideal outlet enthalpy... P = {0} Pa, S = {1} kJ/[kg.K]", P2, Si))
 
                     IObj?.SetCurrent()
-                    tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2, Si, Tout0)
+                    tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2, Si, Ti)
                     T2 = tmp.CalculatedTemperature
                     T2s = T2
                     CheckSpec(T2, True, "outlet temperature")
@@ -375,7 +375,7 @@ Curves:             If CalcMode = CalculationMode.Head Then
                     Do
 
                         IObj?.SetCurrent()
-                        tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2i, Si, Tout0)
+                        tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2i, Si, Ti)
 
                         Tout0 = tmp.CalculatedTemperature
 
@@ -457,7 +457,7 @@ Curves:             If CalcMode = CalculationMode.Head Then
                         For i = 0 To cpower.x.Count - 1
                             If Double.TryParse(cpower.x(i), New Double) And Double.TryParse(cpower.y(i), New Double) Then
                                 xpower.Add(SystemsOfUnits.Converter.ConvertToSI(cpower.xunit.Replace(" @ P,T", ""), cpower.x(i)))
-                                ypower.Add(SystemsOfUnits.Converter.ConvertToSI(cpower.yunit, chead.y(i)))
+                                ypower.Add(SystemsOfUnits.Converter.ConvertToSI(cpower.yunit, cpower.y(i)))
                             End If
                         Next
                         For i = 0 To ceff.x.Count - 1
@@ -515,6 +515,8 @@ Curves:             If CalcMode = CalculationMode.Head Then
                     Else
                         Me.CurveEff = Double.NegativeInfinity
                     End If
+
+                    Wi = ims.Phases(0).Properties.massflow.GetValueOrDefault
 
                     If CurvePower = Double.NegativeInfinity Then
                         If ProcessPath = ProcessPathType.Adiabatic Then

@@ -81,6 +81,7 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -98,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChemeoParser.vb" />
+    <Compile Include="ChemoResponses.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

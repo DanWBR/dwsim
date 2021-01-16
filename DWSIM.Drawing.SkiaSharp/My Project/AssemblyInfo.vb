@@ -14,7 +14,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("DWSIM Process Flowsheet Drawing Interface (SkiaSharp-based)")>
 <Assembly: AssemblyCompany("")> 
 <Assembly: AssemblyProduct("DWSIM.Drawing.SkiaSharp")>
-<Assembly: AssemblyCopyright("Copyright © 2017-2020 Daniel Medeiros")>
+<Assembly: AssemblyCopyright("Copyright © 2017-2021 Daniel Medeiros")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(True)>
@@ -33,6 +33,6 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("6.4.0.0")>
+<Assembly: AssemblyVersion("6.4.1.0")>
 
 <Assembly: NeutralResourcesLanguageAttribute("en")> 

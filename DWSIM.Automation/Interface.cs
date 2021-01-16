@@ -117,9 +117,11 @@ namespace DWSIM.Automation
         public Automation2()
         {
             GlobalSettings.Settings.AutomationMode = true;
-            Console.WriteLine("Initializing DWSIM in Automation Mode, please wait...");
+            Console.WriteLine("Initializing DWSIM Automation Interface...");
             app = UI.Desktop.Program.MainApp(null);
             app.Attach(this);
+            FlowsheetBase.FlowsheetBase.AddPropPacks();
+            Console.WriteLine("DWSIM Automation Interface initialized successfully.");
         }
 
         public Interfaces.IFlowsheet LoadFlowsheet(string filepath)
@@ -130,6 +132,12 @@ namespace DWSIM.Automation
             Console.WriteLine("Loading Flowsheet data, please wait...");
             LoadSimulation(filepath);
             return fm.FlowsheetObject;
+        }
+
+        public void ReleaseResources()
+        {
+            fm?.Dispose();
+            fm = null;
         }
 
         public void SaveFlowsheet(IFlowsheet flowsheet, string filepath, bool compressed)
@@ -165,6 +173,7 @@ namespace DWSIM.Automation
             if (System.IO.Path.GetExtension(path).ToLower() == ".dwxmz")
             {
                 var xdoc = fm.FlowsheetObject.LoadZippedXML(path);
+                xdoc = null;
             }
             else if (System.IO.Path.GetExtension(path).ToLower() == ".dwxml")
             {

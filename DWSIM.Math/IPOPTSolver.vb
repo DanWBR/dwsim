@@ -3,16 +3,16 @@
 '    This file is part of DWSIM.
 '
 '    DWSIM is free software: you can redistribute it and/or modify
-'    it under the terms of the GNU General Public License as published by
+'    it under the terms of the GNU Lesser General Public License as published by
 '    the Free Software Foundation, either version 3 of the License, or
 '    (at your option) any later version.
 '
 '    DWSIM is distributed in the hope that it will be useful,
 '    but WITHOUT ANY WARRANTY; without even the implied warranty of
 '    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'    GNU General Public License for more details.
+'    GNU Lesser General Public License for more details.
 '
-'    You should have received a copy of the GNU General Public License
+'    You should have received a copy of the GNU Lesser General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports Cureos.Numerics
@@ -24,6 +24,8 @@ Namespace MathEx.Optimization
         Public Property Tolerance As Double = 0.0001
 
         Public Property MaxIterations As Integer = 1000
+
+        Public Property ReturnLowestObjFuncValue As Boolean = True
 
         Private _Iterations As Integer = 0
 
@@ -103,8 +105,12 @@ Namespace MathEx.Optimization
                             IpoptReturnCode.Infeasible_Problem_Detected,
                             IpoptReturnCode.Maximum_Iterations_Exceeded,
                             IpoptReturnCode.User_Requested_Stop
-                        'get solution with lowest function value
-                        Return Solutions(FunctionValues.IndexOf(FunctionValues.Min))
+                        If ReturnLowestObjFuncValue Then
+                            'get solution with lowest function value
+                            Return Solutions(FunctionValues.IndexOf(FunctionValues.Min))
+                        Else
+                            Return vars
+                        End If
                     Case Else
                         Throw New ArithmeticException("IPOPT failed to converge.")
                 End Select

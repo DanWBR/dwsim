@@ -45,7 +45,16 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
     Public OptimizationCollection As New List(Of Optimization.OptimizationCase)
 
-    Public Property AvailablePropertyPackages As New Dictionary(Of String, IPropertyPackage) Implements IFlowsheet.AvailablePropertyPackages
+    Private Shared AvailablePropPacks As New Dictionary(Of String, IPropertyPackage)
+
+    Public Property AvailablePropertyPackages As Dictionary(Of String, IPropertyPackage) Implements IFlowsheet.AvailablePropertyPackages
+        Get
+            Return AvailablePropPacks
+        End Get
+        Set(value As Dictionary(Of String, IPropertyPackage))
+            AvailablePropPacks = value
+        End Set
+    End Property
 
     Public Property AvailableSystemsOfUnits As New List(Of IUnitsOfMeasure) Implements IFlowsheet.AvailableSystemsOfUnits
 
@@ -64,6 +73,8 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
     Public Property ScriptKeywordsF As String = ""
 
     Public Property ScriptKeywordsU As String = ""
+
+    Protected _translatefunction As Func(Of String, String)
 
     Public Sub AddCompoundsToMaterialStream(ms As IMaterialStream) Implements IFlowsheet.AddCompoundsToMaterialStream
         For Each phase As IPhase In ms.Phases.Values
@@ -256,6 +267,10 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
     End Function
 
     Public Function GetTranslatedString(text As String) As String Implements IFlowsheet.GetTranslatedString
+
+        If _translatefunction IsNot Nothing Then
+            Return _translatefunction.Invoke(text)
+        End If
 
         If rm Is Nothing Then
             rm = New Resources.ResourceManager("DWSIM.FlowsheetBase.Strings", MyBase.GetType.GetTypeInfo.BaseType.GetTypeInfo.Assembly)
@@ -1202,9 +1217,12 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
         End Try
 
         If savedfromclui Then
-            Parallel.ForEach(xdoc.Descendants, Sub(xel1)
-                                                   SharedClasses.Utility.UpdateElementForNewUI(xel1)
-                                               End Sub)
+            Try
+                Parallel.ForEach(xdoc.Descendants, Sub(xel1)
+                                                       SharedClasses.Utility.UpdateElementForNewUI(xel1)
+                                                   End Sub)
+            Catch ex As Exception
+            End Try
         End If
 
         Dim data As List(Of XElement) = xdoc.Element("DWSIM_Simulation_Data").Element("Settings").Elements.ToList
@@ -1264,15 +1282,19 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
         data = xdoc.Element("DWSIM_Simulation_Data").Element("Compounds").Elements.ToList
 
         For Each xel As XElement In data
-            Try
-                Dim obj As New ConstantProperties
-                obj.LoadData(xel.Elements.ToList)
-                If Not AvailableCompounds.ContainsKey(obj.Name) Then AvailableCompounds.Add(obj.Name, obj)
-                Options.SelectedComponents.Add(obj.Name, obj)
-            Catch ex As Exception
-                excs.Add(New Exception("Error Loading Compound Information", ex))
-            End Try
+            Dim obj As New ConstantProperties
+            obj.Name = xel.Element("Name").Value
+            If Not AvailableCompounds.ContainsKey(obj.Name) Then AvailableCompounds.Add(obj.Name, obj)
+            Options.SelectedComponents.Add(obj.Name, obj)
         Next
+
+        Parallel.ForEach(data, Sub(xel)
+                                   Try
+                                       Options.SelectedComponents(xel.Element("Name").Value).LoadData(xel.Elements.ToList)
+                                   Catch ex As Exception
+                                       excs.Add(New Exception("Error Loading Compound Information", ex))
+                                   End Try
+                               End Sub)
 
         data = xdoc.Element("DWSIM_Simulation_Data").Element("PropertyPackages").Elements.ToList
 
@@ -1327,7 +1349,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 Dim id As String = xel.<Name>.Value
                 Dim obj As ISimulationObject = Nothing
                 If xel.Element("Type").Value.Contains("Streams.MaterialStream") Then
-                    obj = CType(New RaoultPropertyPackage().ReturnInstance(xel.Element("Type").Value), ISimulationObject)
+                    obj = New MaterialStream()
                 Else
                     Dim uokey As String = xel.Element("ComponentDescription").Value
                     If ExternalUnitOperations.ContainsKey(uokey) Then
@@ -1960,54 +1982,61 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
         AddExternalUOs()
 
         Dim addedcomps As New List(Of String)
+        Dim casnumbers As New List(Of String)
 
-        Task.Factory.StartNew(Sub()
-                                  Dim csdb As New Databases.ChemSep
-                                  Dim cpa() As ConstantProperties
-                                  csdb.Load()
-                                  cpa = csdb.Transfer()
-                                  For Each cp As ConstantProperties In cpa
-                                      If Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
-                                  Next
-                                  Dim cpdb As New Databases.CoolProp
-                                  cpdb.Load()
-                                  cpa = cpdb.Transfer()
-                                  addedcomps = AvailableCompounds.Keys.Select(Function(x) x.ToLower).ToList()
-                                  For Each cp As ConstantProperties In cpa
-                                      If Not addedcomps.Contains(cp.Name.ToLower) Then AvailableCompounds.Add(cp.Name, cp)
-                                  Next
-                                  Dim bddb As New Databases.Biodiesel
-                                  bddb.Load()
-                                  cpa = bddb.Transfer()
-                                  addedcomps = AvailableCompounds.Keys.Select(Function(x) x.ToLower).ToList()
-                                  For Each cp As ConstantProperties In cpa
-                                      If Not addedcomps.Contains(cp.Name.ToLower) Then AvailableCompounds.Add(cp.Name, cp)
-                                  Next
-                                  Dim chedl As New Databases.ChEDL_Thermo
-                                  chedl.Load()
-                                  cpa = chedl.Transfer().ToArray()
-                                  addedcomps = AvailableCompounds.Keys.Select(Function(x) x.ToLower).ToList()
-                                  For Each cp As ConstantProperties In cpa
-                                      If Not addedcomps.Contains(cp.Name.ToLower) AndAlso Not AvailableCompounds.ContainsKey(cp.Name) Then
-                                          If AvailableCompounds.Values.Where(Function(x) x.CAS_Number = cp.CAS_Number).Count = 0 Then
-                                              AvailableCompounds.Add(cp.Name, cp)
-                                          End If
-                                      End If
-                                  Next
-                                  Dim elec As New Databases.Electrolyte
-                                  elec.Load()
-                                  cpa = elec.Transfer().ToArray()
-                                  addedcomps = AvailableCompounds.Keys.Select(Function(x) x.ToLower).ToList()
-                                  For Each cp As ConstantProperties In cpa
-                                      If Not addedcomps.Contains(cp.Name.ToLower) AndAlso Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
-                                  Next
-                                  Dim comps = Databases.UserDB.LoadAdditionalCompounds()
-                                  For Each cp As BaseClasses.ConstantProperties In comps
-                                      If Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
-                                  Next
-                                  AddSystemsOfUnits()
-                                  AddDefaultProperties()
-                              End Sub)
+        Dim tc = Task.Factory.StartNew(Sub()
+                                           Dim csdb As New Databases.ChemSep
+                                           Dim cpa() As ConstantProperties
+                                           csdb.Load()
+                                           cpa = csdb.Transfer()
+                                           For Each cp As ConstantProperties In cpa
+                                               If Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
+                                           Next
+                                           Dim cpdb As New Databases.CoolProp
+                                           cpdb.Load()
+                                           cpa = cpdb.Transfer()
+                                           addedcomps = AvailableCompounds.Keys.Select(Function(x) x.ToLower).ToList()
+                                           For Each cp As ConstantProperties In cpa
+                                               If Not addedcomps.Contains(cp.Name.ToLower) Then AvailableCompounds.Add(cp.Name, cp)
+                                           Next
+                                           Dim bddb As New Databases.Biodiesel
+                                           bddb.Load()
+                                           cpa = bddb.Transfer()
+                                           addedcomps = AvailableCompounds.Keys.Select(Function(x) x.ToLower).ToList()
+                                           For Each cp As ConstantProperties In cpa
+                                               If Not addedcomps.Contains(cp.Name.ToLower) Then AvailableCompounds.Add(cp.Name, cp)
+                                           Next
+                                           Dim chedl As New Databases.ChEDL_Thermo
+                                           chedl.Load()
+                                           cpa = chedl.Transfer().ToArray()
+                                           addedcomps = AvailableCompounds.Keys.Select(Function(x) x.ToLower).ToList()
+                                           casnumbers = AvailableCompounds.Values.Select(Function(x) x.CAS_Number).ToList()
+                                           For Each cp As ConstantProperties In cpa
+                                               If Not addedcomps.Contains(cp.Name.ToLower) And Not addedcomps.Contains(cp.Name) Then
+                                                   If Not casnumbers.Contains(cp.CAS_Number) Then
+                                                       If Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
+                                                   End If
+                                               End If
+                                           Next
+                                           Dim elec As New Databases.Electrolyte
+                                           elec.Load()
+                                           cpa = elec.Transfer().ToArray()
+                                           addedcomps = AvailableCompounds.Keys.Select(Function(x) x.ToLower).ToList()
+                                           For Each cp As ConstantProperties In cpa
+                                               If Not addedcomps.Contains(cp.Name.ToLower) AndAlso Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
+                                           Next
+                                           Dim comps = Databases.UserDB.LoadAdditionalCompounds()
+                                           For Each cp As BaseClasses.ConstantProperties In comps
+                                               If Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
+                                           Next
+                                           csdb.Dispose()
+                                           cpdb.Dispose()
+                                           chedl.Dispose()
+                                           AddSystemsOfUnits()
+                                           AddDefaultProperties()
+                                       End Sub)
+
+        If GlobalSettings.Settings.AutomationMode Then tc.Wait()
 
     End Sub
 
@@ -2187,120 +2216,196 @@ Label_00CC:
         End Using
     End Function
 
-    Sub AddPropPacks()
+    Public Shared Sub AddPropPacks()
 
-        Dim CPPP As CoolPropPropertyPackage = New CoolPropPropertyPackage()
-        CPPP.ComponentName = "CoolProp"
-        AvailablePropertyPackages.Add(CPPP.ComponentName.ToString, CPPP)
+        If AvailablePropPacks.Count > 0 Then Exit Sub
 
-        Dim CPIPP As New CoolPropIncompressiblePurePropertyPackage()
-        CPIPP.ComponentName = "CoolProp (Incompressible Fluids)"
-        CPIPP.ComponentDescription = "CoolProp (Incompressible Fluids)"
-        AvailablePropertyPackages.Add(CPIPP.ComponentName.ToString, CPIPP)
+        Dim plist As New Concurrent.BlockingCollection(Of PropertyPackage)
 
-        Dim CPIMPP As New CoolPropIncompressibleMixturePropertyPackage()
-        CPIMPP.ComponentName = "CoolProp (Incompressible Mixtures)"
-        CPIMPP.ComponentDescription = "CoolProp (Incompressible Mixtures)"
-        AvailablePropertyPackages.Add(CPIMPP.ComponentName.ToString, CPIMPP)
+        Dim t1 = New Task(Sub()
 
-        Dim STPP As SteamTablesPropertyPackage = New SteamTablesPropertyPackage()
-        STPP.ComponentName = "Steam Tables (IAPWS-IF97)"
-        AvailablePropertyPackages.Add(STPP.ComponentName.ToString, STPP)
+                              Dim CPPP As CoolPropPropertyPackage = New CoolPropPropertyPackage()
+                              CPPP.ComponentName = "CoolProp"
+                              plist.Add(CPPP)
 
-        Dim SEAPP As SeawaterPropertyPackage = New SeawaterPropertyPackage()
-        SEAPP.ComponentName = "Seawater IAPWS-08"
-        AvailablePropertyPackages.Add(SEAPP.ComponentName.ToString, SEAPP)
+                              Dim CPIPP As New CoolPropIncompressiblePurePropertyPackage()
+                              CPIPP.ComponentName = "CoolProp (Incompressible Fluids)"
+                              CPIPP.ComponentDescription = "CoolProp (Incompressible Fluids)"
+                              plist.Add(CPIPP)
 
-        Dim PRPP As PengRobinsonPropertyPackage = New PengRobinsonPropertyPackage()
-        PRPP.ComponentName = "Peng-Robinson (PR)"
-        AvailablePropertyPackages.Add(PRPP.ComponentName.ToString, PRPP)
+                              Dim CPIMPP As New CoolPropIncompressibleMixturePropertyPackage()
+                              CPIMPP.ComponentName = "CoolProp (Incompressible Mixtures)"
+                              CPIMPP.ComponentDescription = "CoolProp (Incompressible Mixtures)"
+                              plist.Add(CPIMPP)
 
-        Dim PRSV2PP As PRSV2PropertyPackage = New PRSV2PropertyPackage()
-        PRSV2PP.ComponentName = "Peng-Robinson-Stryjek-Vera 2 (PRSV2-M)"
-        AvailablePropertyPackages.Add(PRSV2PP.ComponentName.ToString, PRSV2PP)
+                              Dim STPP As SteamTablesPropertyPackage = New SteamTablesPropertyPackage()
+                              STPP.ComponentName = "Steam Tables (IAPWS-IF97)"
+                              plist.Add(STPP)
 
-        Dim PRSV2PPVL As PRSV2VLPropertyPackage = New PRSV2VLPropertyPackage()
-        PRSV2PPVL.ComponentName = "Peng-Robinson-Stryjek-Vera 2 (PRSV2-VL)"
-        AvailablePropertyPackages.Add(PRSV2PPVL.ComponentName.ToString, PRSV2PPVL)
+                              Dim SEAPP As SeawaterPropertyPackage = New SeawaterPropertyPackage()
+                              SEAPP.ComponentName = "Seawater IAPWS-08"
+                              plist.Add(SEAPP)
 
-        Dim SRKPP As SRKPropertyPackage = New SRKPropertyPackage()
-        SRKPP.ComponentName = "Soave-Redlich-Kwong (SRK)"
-        AvailablePropertyPackages.Add(SRKPP.ComponentName.ToString, SRKPP)
+                          End Sub)
 
-        Dim PRLKPP As PengRobinsonLKPropertyPackage = New PengRobinsonLKPropertyPackage()
-        PRLKPP.ComponentName = "Peng-Robinson / Lee-Kesler (PR/LK)"
-        AvailablePropertyPackages.Add(PRLKPP.ComponentName.ToString, PRLKPP)
+        Dim t2 = New Task(Sub()
 
-        Dim UPP As UNIFACPropertyPackage = New UNIFACPropertyPackage()
-        UPP.ComponentName = "UNIFAC"
-        AvailablePropertyPackages.Add(UPP.ComponentName.ToString, UPP)
+                              Dim PRPP As PengRobinsonPropertyPackage = New PengRobinsonPropertyPackage()
+                              PRPP.ComponentName = "Peng-Robinson (PR)"
+                              plist.Add(PRPP)
 
-        Dim ULLPP As UNIFACLLPropertyPackage = New UNIFACLLPropertyPackage()
-        ULLPP.ComponentName = "UNIFAC-LL"
-        AvailablePropertyPackages.Add(ULLPP.ComponentName.ToString, ULLPP)
+                          End Sub)
 
-        Dim MUPP As MODFACPropertyPackage = New MODFACPropertyPackage()
-        MUPP.ComponentName = "Modified UNIFAC (Dortmund)"
-        AvailablePropertyPackages.Add(MUPP.ComponentName.ToString, MUPP)
+        Dim t3 = New Task(Sub()
 
-        Dim NUPP As NISTMFACPropertyPackage = New NISTMFACPropertyPackage()
-        NUPP.ComponentName = "Modified UNIFAC (NIST)"
-        AvailablePropertyPackages.Add(NUPP.ComponentName.ToString, NUPP)
+                              Dim PRSV2PP As PRSV2PropertyPackage = New PRSV2PropertyPackage()
+                              PRSV2PP.ComponentName = "Peng-Robinson-Stryjek-Vera 2 (PRSV2-M)"
+                              plist.Add(PRSV2PP)
 
-        Dim NRTLPP As NRTLPropertyPackage = New NRTLPropertyPackage()
-        NRTLPP.ComponentName = "NRTL"
-        AvailablePropertyPackages.Add(NRTLPP.ComponentName.ToString, NRTLPP)
+                              Dim PRSV2PPVL As PRSV2VLPropertyPackage = New PRSV2VLPropertyPackage()
+                              PRSV2PPVL.ComponentName = "Peng-Robinson-Stryjek-Vera 2 (PRSV2-VL)"
+                              plist.Add(PRSV2PPVL)
 
-        Dim UQPP As UNIQUACPropertyPackage = New UNIQUACPropertyPackage()
-        UQPP.ComponentName = "UNIQUAC"
-        AvailablePropertyPackages.Add(UQPP.ComponentName.ToString, UQPP)
+                          End Sub)
 
-        Dim CSLKPP As ChaoSeaderPropertyPackage = New ChaoSeaderPropertyPackage()
-        CSLKPP.ComponentName = "Chao-Seader"
-        AvailablePropertyPackages.Add(CSLKPP.ComponentName.ToString, CSLKPP)
+        Dim t4 = New Task(Sub()
 
-        Dim GSLKPP As GraysonStreedPropertyPackage = New GraysonStreedPropertyPackage()
-        GSLKPP.ComponentName = "Grayson-Streed"
-        AvailablePropertyPackages.Add(GSLKPP.ComponentName.ToString, GSLKPP)
+                              Dim SRKPP As SRKPropertyPackage = New SRKPropertyPackage()
+                              SRKPP.ComponentName = "Soave-Redlich-Kwong (SRK)"
+                              plist.Add(SRKPP)
 
-        Dim RPP As RaoultPropertyPackage = New RaoultPropertyPackage()
-        RPP.ComponentName = "Raoult's Law"
-        AvailablePropertyPackages.Add(RPP.ComponentName.ToString, RPP)
+                          End Sub)
 
-        Dim LKPPP As LKPPropertyPackage = New LKPPropertyPackage()
-        LKPPP.ComponentName = "Lee-Kesler-Plöcker"
-        AvailablePropertyPackages.Add(LKPPP.ComponentName.ToString, LKPPP)
+        Dim t5 = New Task(Sub()
 
-        Dim BOPP As BlackOilPropertyPackage = New BlackOilPropertyPackage()
-        BOPP.ComponentName = "Black Oil"
-        AvailablePropertyPackages.Add(BOPP.ComponentName.ToString, BOPP)
+                              Dim PRLKPP As PengRobinsonLKPropertyPackage = New PengRobinsonLKPropertyPackage()
+                              PRLKPP.ComponentName = "Peng-Robinson / Lee-Kesler (PR/LK)"
+                              plist.Add(PRLKPP)
 
-        Dim GERGPP As GERG2008PropertyPackage = New GERG2008PropertyPackage()
+                          End Sub)
 
-        AvailablePropertyPackages.Add(GERGPP.ComponentName.ToString, GERGPP)
+        Dim t6 = New Task(Sub()
 
-        Dim PCSAFTPP As PCSAFT2PropertyPackage = New PCSAFT2PropertyPackage()
+                              Dim UPP As UNIFACPropertyPackage = New UNIFACPropertyPackage()
+                              UPP.ComponentName = "UNIFAC"
+                              plist.Add(UPP)
 
-        AvailablePropertyPackages.Add(PCSAFTPP.ComponentName.ToString, PCSAFTPP)
+                          End Sub)
 
-        Dim PR78PP As PengRobinsonPropertyPackage = New PengRobinsonPropertyPackage()
-        PR78PP.ComponentName = "Peng-Robinson 1978 (PR78)"
+        Dim t7 = New Task(Sub()
 
-        AvailablePropertyPackages.Add(PR78PP.ComponentName.ToString, PR78PP)
+                              Dim ULLPP As UNIFACLLPropertyPackage = New UNIFACLLPropertyPackage()
+                              ULLPP.ComponentName = "UNIFAC-LL"
+                              plist.Add(ULLPP)
 
-        Dim PR78Adv As PengRobinson1978AdvancedPropertyPackage = New PengRobinson1978AdvancedPropertyPackage()
+                          End Sub)
 
-        AvailablePropertyPackages.Add(PR78Adv.ComponentName.ToString, PR78Adv)
+        Dim t8 = New Task(Sub()
 
-        Dim SRKAdv As SoaveRedlichKwongAdvancedPropertyPackage = New SoaveRedlichKwongAdvancedPropertyPackage()
+                              Dim MUPP As MODFACPropertyPackage = New MODFACPropertyPackage()
+                              MUPP.ComponentName = "Modified UNIFAC (Dortmund)"
+                              plist.Add(MUPP)
 
-        AvailablePropertyPackages.Add(SRKAdv.ComponentName.ToString, SRKAdv)
+                          End Sub)
+
+        Dim t9 = New Task(Sub()
+
+                              Dim NUPP As NISTMFACPropertyPackage = New NISTMFACPropertyPackage()
+                              NUPP.ComponentName = "Modified UNIFAC (NIST)"
+                              plist.Add(NUPP)
+
+                          End Sub)
+
+        Dim t10 = New Task(Sub()
+
+                               Dim NRTLPP As NRTLPropertyPackage = New NRTLPropertyPackage()
+                               NRTLPP.ComponentName = "NRTL"
+                               plist.Add(NRTLPP)
+
+                               Dim UQPP As UNIQUACPropertyPackage = New UNIQUACPropertyPackage()
+                               UQPP.ComponentName = "UNIQUAC"
+                               plist.Add(UQPP)
+
+                               Dim CSLKPP As ChaoSeaderPropertyPackage = New ChaoSeaderPropertyPackage()
+                               CSLKPP.ComponentName = "Chao-Seader"
+                               plist.Add(CSLKPP)
+
+                               Dim GSLKPP As GraysonStreedPropertyPackage = New GraysonStreedPropertyPackage()
+                               GSLKPP.ComponentName = "Grayson-Streed"
+                               plist.Add(GSLKPP)
+
+                               Dim RPP As RaoultPropertyPackage = New RaoultPropertyPackage()
+                               RPP.ComponentName = "Raoult's Law"
+                               plist.Add(RPP)
+
+                               Dim LKPPP As LKPPropertyPackage = New LKPPropertyPackage()
+                               LKPPP.ComponentName = "Lee-Kesler-Plöcker"
+                               plist.Add(LKPPP)
+
+                           End Sub)
+
+        Dim t11 = New Task(Sub()
+
+                               Dim BOPP As BlackOilPropertyPackage = New BlackOilPropertyPackage()
+                               BOPP.ComponentName = "Black Oil"
+                               plist.Add(BOPP)
+
+                               Dim GERGPP As GERG2008PropertyPackage = New GERG2008PropertyPackage()
+                               plist.Add(GERGPP)
+
+                               Dim PCSAFTPP As PCSAFT2PropertyPackage = New PCSAFT2PropertyPackage()
+                               plist.Add(PCSAFTPP)
+
+                           End Sub)
+
+        Dim t12 = New Task(Sub()
+
+                               Dim PR78PP As PengRobinsonPropertyPackage = New PengRobinsonPropertyPackage()
+                               PR78PP.ComponentName = "Peng-Robinson 1978 (PR78)"
+                               plist.Add(PR78PP)
+
+                           End Sub)
+
+        Dim t13 = New Task(Sub()
+
+                               Dim PR78Adv As PengRobinson1978AdvancedPropertyPackage = New PengRobinson1978AdvancedPropertyPackage()
+                               plist.Add(PR78Adv)
+
+                           End Sub)
+
+        Dim t14 = New Task(Sub()
+
+                               Dim SRKAdv As SoaveRedlichKwongAdvancedPropertyPackage = New SoaveRedlichKwongAdvancedPropertyPackage()
+                               plist.Add(SRKAdv)
+
+                           End Sub)
+
+        t1.Start()
+        t2.Start()
+        t3.Start()
+        t4.Start()
+        t5.Start()
+        t6.Start()
+        t7.Start()
+        t8.Start()
+        t9.Start()
+        t10.Start()
+        t11.Start()
+        t12.Start()
+        t13.Start()
+        t14.Start()
+
+        Task.WaitAll(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14)
+
+        For Each pp In plist
+            AvailablePropPacks.Add(DirectCast(pp, CapeOpen.ICapeIdentification).ComponentName, pp)
+        Next
 
         Dim otherpps = SharedClasses.Utility.LoadAdditionalPropertyPackages()
 
         For Each pp In otherpps
-            If Not AvailablePropertyPackages.ContainsKey(DirectCast(pp, CapeOpen.ICapeIdentification).ComponentName) Then
-                AvailablePropertyPackages.Add(DirectCast(pp, CapeOpen.ICapeIdentification).ComponentName, pp)
+            If Not AvailablePropPacks.ContainsKey(DirectCast(pp, CapeOpen.ICapeIdentification).ComponentName) Then
+                AvailablePropPacks.Add(DirectCast(pp, CapeOpen.ICapeIdentification).ComponentName, pp)
             End If
         Next
 
@@ -2308,7 +2413,7 @@ Label_00CC:
         If Not GlobalSettings.Settings.IsRunningOnMono Then
             Dim COPP As CAPEOPENPropertyPackage = New CAPEOPENPropertyPackage()
             COPP.ComponentName = "CAPE-OPEN"
-            AvailablePropertyPackages.Add(COPP.ComponentName.ToString, COPP)
+            AvailablePropPacks.Add(COPP.ComponentName.ToString, COPP)
         End If
 
     End Sub
@@ -2676,6 +2781,10 @@ Label_00CC:
 
     Public Sub RefreshInterface() Implements IFlowsheet.RefreshInterface
         UpdateInterface()
+    End Sub
+
+    Public Sub SetTranslateTextExternalFunction(act As Func(Of String, String)) Implements IFlowsheet.SetTranslateTextExternalFunction
+        _translatefunction = act
     End Sub
 End Class
 

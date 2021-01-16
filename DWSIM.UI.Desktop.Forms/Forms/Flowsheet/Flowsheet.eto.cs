@@ -79,6 +79,51 @@ namespace DWSIM.UI.Forms
 
         private DropDown ddstates;
 
+        private Timer BackupTimer;
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (!DynManagerControl.IsDisposed)
+                {
+                    DynManagerControl?.Dispose();
+                    DynManagerControl = null;
+                }
+                if (!DynIntegratorControl.IsDisposed)
+                {
+                    DynIntegratorControl?.Dispose();
+                    DynIntegratorControl = null;
+                }
+                if (!MaterialStreamListControl.IsDisposed)
+                {
+                    MaterialStreamListControl?.Dispose();
+                    MaterialStreamListControl = null;
+                }
+                if (!SpreadsheetControl.IsDisposed)
+                {
+                    SpreadsheetControl?.Dispose();
+                    SpreadsheetControl = null;
+                }
+                if (!ChartsControl.IsDisposed) {
+                    ChartsControl?.Dispose();
+                    ChartsControl = null;
+                }
+                if (!FlowsheetControl.IsDisposed) { 
+                    FlowsheetControl?.Dispose();
+                    FlowsheetControl = null;
+                }
+                BackupTimer?.Stop();
+                BackupTimer?.Dispose();
+                FlowsheetObject.Reset();
+                FlowsheetObject.AvailableCompounds.Clear();
+                FlowsheetObject.AvailablePropertyPackages.Clear();
+                FlowsheetObject.AvailableSystemsOfUnits.Clear();
+                FlowsheetObject = null;
+            }
+            base.Dispose(disposing);
+        }
+
         void InitializeComponent()
         {
 
@@ -93,7 +138,7 @@ namespace DWSIM.UI.Forms
 
             backupfilename = DateTime.Now.ToString().Replace('-', '_').Replace(':', '_').Replace(' ', '_').Replace('/', '_') + ".dwxmz";
 
-            var BackupTimer = new Timer(GlobalSettings.Settings.BackupInterval * 60 * 1000);
+            BackupTimer = new Timer(GlobalSettings.Settings.BackupInterval * 60 * 1000);
             BackupTimer.Elapsed += (sender, e) =>
             {
                 Task.Factory.StartNew(() => SaveBackupCopy());
@@ -107,9 +152,7 @@ namespace DWSIM.UI.Forms
             FlowsheetObject.Initialize();
 
             Title = "New Flowsheet";
-
-            Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico", this.GetType().Assembly);
-
+            
             if (s.FlowsheetRenderer == s.SkiaCanvasRenderer.CPU)
             {
                 FlowsheetControl = new DWSIM.UI.Controls.FlowsheetSurfaceControl() { FlowsheetObject = FlowsheetObject, FlowsheetSurface = (DWSIM.Drawing.SkiaSharp.GraphicsSurface)FlowsheetObject.GetSurface() };
@@ -130,6 +173,109 @@ namespace DWSIM.UI.Forms
             });
 
             ClientSize = new Size((int)(sf * 1024), (int)(sf * 768));
+
+            // main panels
+
+            Spreadsheet = new DWSIM.UI.Desktop.Editors.Spreadsheet(FlowsheetObject) { ObjList = ObjectList };
+
+            FlowsheetObject.LoadSpreadsheetData = new Action<XDocument>((xdoc) =>
+            {
+                if (xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet") != null)
+                {
+                    var rgfdataelement = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData");
+                    if (rgfdataelement != null)
+                    {
+                        Application.Instance.Invoke(() =>
+                        {
+                            string rgfdata = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData").Value;
+                            rgfdata = rgfdata.Replace("Calibri", "Arial").Replace("10.25", "10");
+                            Dictionary<string, string> sdict = new Dictionary<string, string>();
+                            sdict = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(rgfdata);
+                            Spreadsheet.Sheet.RemoveWorksheet(0);
+                            Spreadsheet.Loaded = false;
+                            foreach (var item in sdict)
+                            {
+                                var tmpfile = System.IO.Path.GetTempFileName();
+                                var sheet = Spreadsheet.Sheet.NewWorksheet(item.Key);
+                                var xmldoc = Newtonsoft.Json.JsonConvert.DeserializeXmlNode(item.Value);
+                                xmldoc.Save(tmpfile);
+                                sheet.LoadRGF(tmpfile);
+                                File.Delete(tmpfile);
+                            }
+                            Spreadsheet.Loaded = true;
+                            Spreadsheet.Sheet.CurrentWorksheet = Spreadsheet.Sheet.Worksheets[0];
+                        });
+                    }
+                    else
+                    {
+                        string data1 = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data1").Value;
+                        string data2 = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data2").Value;
+                        if (!string.IsNullOrEmpty(data1)) Spreadsheet.CopyDT1FromString(data1);
+                        if (!string.IsNullOrEmpty(data2)) Spreadsheet.CopyDT2FromString(data2);
+                        Application.Instance.Invoke(() =>
+                        {
+                            Spreadsheet.CopyFromDT();
+                            Spreadsheet.EvaluateAll();
+                        });
+                    }
+                }
+            });
+
+            FlowsheetObject.SaveSpreadsheetData = new Action<XDocument>((xdoc) =>
+            {
+                xdoc.Element("DWSIM_Simulation_Data").Add(new XElement("Spreadsheet"));
+                xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Add(new XElement("RGFData"));
+                var tmpfile = System.IO.Path.GetTempFileName();
+                Application.Instance.Invoke(() =>
+                {
+                    Dictionary<string, string> sdict = new Dictionary<string, string>();
+                    foreach (var sheet in Spreadsheet.Sheet.Worksheets)
+                    {
+                        var tmpfile2 = System.IO.Path.GetTempFileName();
+                        sheet.SaveRGF(tmpfile2);
+                        var xmldoc = new XmlDocument();
+                        xmldoc.Load(tmpfile2);
+                        sdict.Add(sheet.Name, Newtonsoft.Json.JsonConvert.SerializeXmlNode(xmldoc));
+                        File.Delete(tmpfile2);
+                    }
+                    xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData").Value = Newtonsoft.Json.JsonConvert.SerializeObject(sdict);
+                });
+            });
+
+            FlowsheetObject.RetrieveSpreadsheetData = new Func<string, List<string[]>>((range) =>
+            {
+                return Spreadsheet.GetDataFromRange(range);
+            });
+
+            SpreadsheetControl = Spreadsheet.GetSpreadsheet(FlowsheetObject);
+
+            ChartsControl = new ChartManager(FlowsheetObject);
+
+            FlowsheetObject.AddChart = (dpage) =>
+            {
+                Application.Instance.Invoke(() =>
+                {
+                    ChartsControl.TabControl.Pages.Add(dpage);
+                    DocumentContainer.SelectedIndex = 3;
+                    ChartsControl.TabControl.SelectedPage = dpage;
+                });
+            };
+
+            ResultsControl = new ResultsViewer(FlowsheetObject);
+
+            MaterialStreamListControl = new MaterialStreamListViewer(FlowsheetObject);
+
+            DynManagerControl = new DynamicsManagerControl(FlowsheetObject);
+
+            DynIntegratorControl = new DynamicsIntegratorControl(FlowsheetObject);
+
+            // if automation then stop loadning UI controls
+
+            if (GlobalSettings.Settings.AutomationMode) return;
+
+            Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico", this.GetType().Assembly);
+
+            LoadObjects();
 
             // toolbar
 
@@ -188,8 +334,6 @@ namespace DWSIM.UI.Forms
             var btnGlobalOptions = new ButtonMenuItem { Text = "Global Settings", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-sorting_options.png", this.GetType().Assembly)), Shortcut = Keys.G | Application.Instance.AlternateModifier };
             var btnSolve = new ButtonMenuItem { Text = "Solve Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png", this.GetType().Assembly)), Shortcut = Keys.F5 };
             var btnSolveC = new ButtonMenuItem { Text = "Solve Flowsheet (Custom Calculation Order)", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png", this.GetType().Assembly)), Shortcut = Keys.F5 | Application.Instance.CommonModifier | Application.Instance.AlternateModifier };
-
-            var dd =
 
             // actions
 
@@ -668,101 +812,6 @@ namespace DWSIM.UI.Forms
             Menu.HelpItems.Add(hitem2);
             Menu.HelpItems.Add(hitem3);
 
-            Spreadsheet = new DWSIM.UI.Desktop.Editors.Spreadsheet(FlowsheetObject) { ObjList = ObjectList };
-
-            FlowsheetObject.LoadSpreadsheetData = new Action<XDocument>((xdoc) =>
-            {
-                if (xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet") != null)
-                {
-                    var rgfdataelement = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData");
-                    if (rgfdataelement != null)
-                    {
-                        Application.Instance.Invoke(() =>
-                        {
-                            string rgfdata = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData").Value;
-                            rgfdata = rgfdata.Replace("Calibri", "Arial").Replace("10.25", "10");
-                            Dictionary<string, string> sdict = new Dictionary<string, string>();
-                            sdict = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(rgfdata);
-                            Spreadsheet.Sheet.RemoveWorksheet(0);
-                            Spreadsheet.Loaded = false;
-                            foreach (var item in sdict)
-                            {
-                                var tmpfile = System.IO.Path.GetTempFileName();
-                                var sheet = Spreadsheet.Sheet.NewWorksheet(item.Key);
-                                var xmldoc = Newtonsoft.Json.JsonConvert.DeserializeXmlNode(item.Value);
-                                xmldoc.Save(tmpfile);
-                                sheet.LoadRGF(tmpfile);
-                                File.Delete(tmpfile);
-                            }
-                            Spreadsheet.Loaded = true;
-                            Spreadsheet.Sheet.CurrentWorksheet = Spreadsheet.Sheet.Worksheets[0];
-                        });
-                    }
-                    else
-                    {
-                        string data1 = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data1").Value;
-                        string data2 = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data2").Value;
-                        if (!string.IsNullOrEmpty(data1)) Spreadsheet.CopyDT1FromString(data1);
-                        if (!string.IsNullOrEmpty(data2)) Spreadsheet.CopyDT2FromString(data2);
-                        Application.Instance.Invoke(() =>
-                        {
-                            Spreadsheet.CopyFromDT();
-                            Spreadsheet.EvaluateAll();
-                        });
-                    }
-                }
-            });
-
-            FlowsheetObject.SaveSpreadsheetData = new Action<XDocument>((xdoc) =>
-            {
-                xdoc.Element("DWSIM_Simulation_Data").Add(new XElement("Spreadsheet"));
-                xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Add(new XElement("RGFData"));
-                var tmpfile = System.IO.Path.GetTempFileName();
-                Application.Instance.Invoke(() =>
-                {
-                    Dictionary<string, string> sdict = new Dictionary<string, string>();
-                    foreach (var sheet in Spreadsheet.Sheet.Worksheets)
-                    {
-                        var tmpfile2 = System.IO.Path.GetTempFileName();
-                        sheet.SaveRGF(tmpfile2);
-                        var xmldoc = new XmlDocument();
-                        xmldoc.Load(tmpfile2);
-                        sdict.Add(sheet.Name, Newtonsoft.Json.JsonConvert.SerializeXmlNode(xmldoc));
-                        File.Delete(tmpfile2);
-                    }
-                    xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("RGFData").Value = Newtonsoft.Json.JsonConvert.SerializeObject(sdict);
-                });
-            });
-
-            FlowsheetObject.RetrieveSpreadsheetData = new Func<string, List<string[]>>((range) =>
-            {
-                return Spreadsheet.GetDataFromRange(range);
-            });
-
-            SpreadsheetControl = Spreadsheet.GetSpreadsheet(FlowsheetObject);
-
-            ChartsControl = new ChartManager(FlowsheetObject);
-
-            FlowsheetObject.AddChart = (dpage) =>
-            {
-                Application.Instance.Invoke(() =>
-                {
-                    ChartsControl.TabControl.Pages.Add(dpage);
-                    DocumentContainer.SelectedIndex = 3;
-                    ChartsControl.TabControl.SelectedPage = dpage;
-                });
-            };
-
-            ResultsControl = new ResultsViewer(FlowsheetObject);
-
-            MaterialStreamListControl = new MaterialStreamListViewer(FlowsheetObject);
-
-            DynManagerControl = new DynamicsManagerControl(FlowsheetObject);
-
-            DynIntegratorControl = new DynamicsIntegratorControl(FlowsheetObject);
-
-            LoadObjects();
-
             ScriptListControl = new DWSIM.UI.Desktop.Editors.ScriptManager_Mac(FlowsheetObject);
 
             var Split1 = new Eto.Forms.Splitter { Orientation = Orientation.Horizontal, FixedPanel = SplitterFixedPanel.Panel1 };
@@ -784,7 +833,8 @@ namespace DWSIM.UI.Forms
                 Split1.Panel1.Visible = !Split1.Panel1.Visible;
             };
 
-            btnCloseAllEditors.Click += (sender, e) => {
+            btnCloseAllEditors.Click += (sender, e) =>
+            {
                 EditorHolder.Pages.Clear();
             };
 
@@ -2073,7 +2123,7 @@ namespace DWSIM.UI.Forms
                 FlowsheetControl.FlowsheetSurface.AutoArrange();
                 ActZoomFit.Invoke();
             };
-            
+
             item8.Click += (sender, e) =>
             {
                 FlowsheetControl.FlowsheetSurface.RestoreLayout();

@@ -47,7 +47,7 @@ Public Class FormNewSpreadsheet
 
 #If LINUX Then
 
-        SpreadsheetControl = New ReoGridFullControl()
+        SpreadsheetControl = New ReoGridFullControl(False)
 
         Dim nativesheet = WinFormsHelpers.ToNative(SpreadsheetControl, True)
 

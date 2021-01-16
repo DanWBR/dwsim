@@ -24,6 +24,7 @@ Public Class FormImportCompoundDataChemeo
                 Panel1.BringToFront()
                 CurrentPanel = "Panel1"
                 btnPrev.Enabled = False
+                btnNext.Enabled = True
             Case "Panel3"
                 Panel2.BringToFront()
                 CurrentPanel = "Panel2"
@@ -52,7 +53,7 @@ Public Class FormImportCompoundDataChemeo
                 fsearch.Show()
 
                 Dim t As New Task(Of List(Of String()))(Function()
-                                                            Return ChemeoParser.GetCompoundIDs(searchtext, False)
+                                                            Return ChemeoParser.GetCompoundIDs(searchtext, False).GetAwaiter().GetResult()
                                                         End Function, tcs.Token)
 
                 t.ContinueWith(Sub()

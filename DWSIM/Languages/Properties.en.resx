@@ -387,6 +387,12 @@
   <data name="PROP_HX_3" xml:space="preserve">
     <value>Cold fluid outlet temperature</value>
   </data>
+  <data name="PROP_HX_30" xml:space="preserve">
+    <value>Outlet Vapor Fraction (Stream 1)</value>
+  </data>
+  <data name="PROP_HX_31" xml:space="preserve">
+    <value>Outlet Vapor Fraction (Stream 2)</value>
+  </data>
   <data name="PROP_HX_4" xml:space="preserve">
     <value>Hot fluid outlet temperature</value>
   </data>

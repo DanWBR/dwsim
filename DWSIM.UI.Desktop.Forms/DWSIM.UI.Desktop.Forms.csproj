@@ -385,6 +385,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\Bitmaps\tshirt_mockup.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\TextFiles\lgpl-3.0.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

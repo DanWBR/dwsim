@@ -1,4 +1,4 @@
-﻿'Copyright 2020 Daniel Medeiros
+﻿'Copyright 2020-2021 Daniel Medeiros
 
 Imports DWSIM.Interfaces
 

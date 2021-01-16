@@ -917,14 +917,17 @@ namespace DWSIM.UI.Desktop.Editors
                         case Valve.CalculationMode.OutletPressure:
                             pos5 = 0;
                             break;
-                        case Valve.CalculationMode.Kv_Liquid:
-                            pos5 = 2;
+                        case Valve.CalculationMode.Kv_General:
+                            pos5 = 5;
+                            break;
+                        case Valve.CalculationMode.Kv_Steam:
+                            pos5 = 4;
                             break;
                         case Valve.CalculationMode.Kv_Gas:
                             pos5 = 3;
                             break;
-                        case Valve.CalculationMode.Kv_Steam:
-                            pos5 = 4;
+                        case Valve.CalculationMode.Kv_Liquid:
+                            pos5 = 2;
                             break;
                     }
                     s.CreateAndAddDropDownRow(container, "Calculation Mode", StringResources.valvecalcmode().ToList(), pos5, (DropDown arg3, EventArgs ev) =>
@@ -945,6 +948,9 @@ namespace DWSIM.UI.Desktop.Editors
                                 break;
                             case 4:
                                 valve.CalcMode = Valve.CalculationMode.Kv_Steam;
+                                break;
+                            case 5:
+                                valve.CalcMode = Valve.CalculationMode.Kv_General;
                                 break;
                         }
                     }, () => CallSolverIfNeeded());
@@ -1161,6 +1167,12 @@ namespace DWSIM.UI.Desktop.Editors
                         case HeatExchangerCalcMode.ThermalEfficiency:
                             pos7 = 8;
                             break;
+                        case HeatExchangerCalcMode.OutletVaporFraction1:
+                            pos7 = 9;
+                            break;
+                        case HeatExchangerCalcMode.OutletVaporFraction2:
+                            pos7 = 10;
+                            break;
                     }
 
                     s.CreateAndAddDropDownRow(container, "Calculation Mode", StringResources.hxcalcmode().ToList(), pos7, (DropDown arg3, EventArgs ev) =>
@@ -1194,6 +1206,12 @@ namespace DWSIM.UI.Desktop.Editors
                             case 8:
                                 hx.CalculationMode = HeatExchangerCalcMode.ThermalEfficiency;
                                 break;
+                            case 9:
+                                hx.CalculationMode = HeatExchangerCalcMode.OutletVaporFraction1;
+                                break;
+                            case 10:
+                                hx.CalculationMode = HeatExchangerCalcMode.OutletVaporFraction2;
+                                break;
                         }
                     }, () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container,
@@ -1210,6 +1228,7 @@ namespace DWSIM.UI.Desktop.Editors
                     strdescr.AppendLine("Shell and Tube (Design): Outlet Temperatures and Exchanger Geometry (input on separate tab)");
                     strdescr.AppendLine("Pinch Point: Overall HTC and MITA");
                     strdescr.AppendLine("Thermal Efficiency: HX Efficiency and Overall HTC");
+                    strdescr.AppendLine("Outlet Vapor Fraction: Vapor Fraction and Area");
                     strdescr.AppendLine("*Pressure drop is required for both fluids except for Shell and Tube Rating mode.");
 
                     s.CreateAndAddDescriptionRow(container, strdescr.ToString());
@@ -1408,7 +1427,32 @@ namespace DWSIM.UI.Desktop.Editors
                                arg3.TextColor = (Colors.Red);
                            }
                        }, () => CallSolverIfNeeded());
-                    s.CreateAndAddCheckBoxRow(container, "Ignore LMTD Error", hx.IgnoreLMTDError, (sender, e) => { hx.IgnoreLMTDError = sender.Checked.GetValueOrDefault(); });
+                    s.CreateAndAddTextBoxRow(container, nf, "Outlet Vapor Fraction (Stream 1)", hx.OutletVaporFraction1,
+                       (TextBox arg3, EventArgs ev) =>
+                       {
+                           if (arg3.Text.IsValidDoubleExpression())
+                           {
+                               arg3.TextColor = (SystemColors.ControlText);
+                               hx.OutletVaporFraction1 = arg3.Text.ToString().ParseExpressionToDouble();
+                           }
+                           else
+                           {
+                               arg3.TextColor = (Colors.Red);
+                           }
+                       }, () => CallSolverIfNeeded());
+                    s.CreateAndAddTextBoxRow(container, nf, "Outlet Vapor Fraction (Stream 2)", hx.OutletVaporFraction2,
+                       (TextBox arg3, EventArgs ev) =>
+                       {
+                           if (arg3.Text.IsValidDoubleExpression())
+                           {
+                               arg3.TextColor = (SystemColors.ControlText);
+                               hx.OutletVaporFraction1 = arg3.Text.ToString().ParseExpressionToDouble();
+                           }
+                           else
+                           {
+                               arg3.TextColor = (Colors.Red);
+                           }
+                       }, () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container,
                     SimObject.GetPropertyDescription("Ignore LMTD Error"));
                     break;

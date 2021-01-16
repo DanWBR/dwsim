@@ -86,7 +86,9 @@ namespace DWSIM.UI.Desktop.Shared
             "Shell and Tube (Rating)",
             "Shell and Tube (Design)",
             "Pinch Point",
-            "Thermal Efficiency" }; 
+            "Specify Thermal Efficiency", 
+            "Specify Outlet Molar Vapor Fraction (Stream 1)",
+            "Specify Outlet Molar Vapor Fraction (Stream 2)"}; 
         }
         public static String[] hxflowdir()
         {

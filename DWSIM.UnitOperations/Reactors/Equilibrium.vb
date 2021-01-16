@@ -4,16 +4,16 @@
 '    This file is part of DWSIM.
 '
 '    DWSIM is free software: you can redistribute it and/or modify
-'    it under the terms of the GNU General Public License as published by
+'    it under the terms of the GNU Lesser General Public License as published by
 '    the Free Software Foundation, either version 3 of the License, or
 '    (at your option) any later version.
 '
 '    DWSIM is distributed in the hope that it will be useful,
 '    but WITHOUT ANY WARRANTY; without even the implied warranty of
 '    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'    GNU General Public License for more details.
+'    GNU Lesser General Public License for more details.
 '
-'    You should have received a copy of the GNU General Public License
+'    You should have received a copy of the GNU Lesser General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 
@@ -149,23 +149,13 @@ Namespace Reactors
 
             Dim Vz As Double() = pp.RET_VMOL(PropertyPackages.Phase.Mixture)
 
+            Dim penval As Double = ReturnPenaltyValue()
+
+
             Dim fugv(tms.Phases(0).Compounds.Count - 1), fugl(tms.Phases(0).Compounds.Count - 1), prod(x.Length - 1) As Double
 
-            If GlobalSettings.Settings.EnableParallelProcessing Then
-                Dim t1 = Task.Factory.StartNew(Sub()
-                                                   fugv = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Vapor)
-                                               End Sub)
-                Dim t2 = Task.Factory.StartNew(Sub()
-                                                   fugl = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Liquid)
-                                               End Sub)
-                Task.WaitAll(t1, t2)
-            Else
-                _IObj?.SetCurrent
-                fugv = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Vapor)
-                _IObj?.SetCurrent
-                fugl = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Liquid)
-            End If
-
+            fugv = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Vapor)
+            fugl = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Liquid)
 
             i = 0
             For Each s As Compound In tms.Phases(0).Compounds.Values
@@ -220,17 +210,13 @@ Namespace Reactors
 
             Dim kr As Double
 
-            Dim penval As Double = ReturnPenaltyValue()
-
             For i = 0 To Me.Reactions.Count - 1
-                With FlowSheet.Reactions(Me.Reactions(i))
-                    kr = .EvaluateK(T, pp)
-                    If LogErrorFunction Then
-                        f(i) = Math.Log(prod(i) / kr) + penval
-                    Else
-                        f(i) = prod(i) - kr + penval
-                    End If
-                End With
+                kr = FlowSheet.Reactions(Me.Reactions(i)).EvaluateK(T, pp)
+                If LogErrorFunction Then
+                    f(i) = Math.Log(Math.Abs(prod(i)) / kr) + penval
+                Else
+                    f(i) = prod(i) - kr + penval
+                End If
             Next
 
             Return f
@@ -567,9 +553,7 @@ Namespace Reactors
             P0 = 101325
 
             Select Case Me.ReactorOperationMode
-                Case OperationMode.Adiabatic
-                    T = T0 'initial value only, final value will be calculated by an iterative procedure
-                Case OperationMode.Isothermic
+                Case OperationMode.Adiabatic, OperationMode.Isothermic
                     T = T0
                 Case OperationMode.OutletTemperature
                     T = OutletTemperature
@@ -680,7 +664,6 @@ Namespace Reactors
                 i += 1
             Next
 
-
             Dim m As Integer = 0
 
             Dim REx(r) As Double
@@ -725,10 +708,9 @@ Namespace Reactors
             solver2.MaxIterations = InternalLoopMaximumIterations
             solver2.Tolerance = InternalLoopTolerance
 
-            Dim solver3 As New Optimization.NewtonSolver
-            solver3.MaxIterations = InternalLoopMaximumIterations
+            Dim solver3 As New Simplex
+            solver3.MaxFunEvaluations = InternalLoopMaximumIterations
             solver3.Tolerance = InternalLoopTolerance
-            solver3.UseBroydenApproximation = True
 
             ' check equilibrium constants to define objective function form
 
@@ -748,284 +730,295 @@ Namespace Reactors
                 End If
             End If
 
-            Do
+            Dim efunc = Function(Tx)
 
-                Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+                            T = Tx
 
-                _IObj = IObj2
+                            Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-                Inspector.Host.CheckAndAdd(IObj2, "", "Calculate", "Equilibrium Reactor Convergence Temperature Loop Iteration #" & cnt, "", True)
+                            _IObj = IObj2
 
-                'solve using newton's method
+                            Inspector.Host.CheckAndAdd(IObj2, "", "Calculate", "Equilibrium Reactor Convergence Temperature Loop Iteration #" & cnt, "", True)
 
-                Dim x(r), newx(r), errval, sumerr As Double
+                            'solve using newton's method
 
-                Dim niter As Integer
+                            Dim x(r), newx(r), errval, sumerr As Double
 
-                x = REx
-                niter = 0
-                NoPenVal = False
+                            Dim niter As Integer
 
-                Do
+                            x = REx
+                            niter = 0
+                            NoPenVal = False
 
-                    IObj2?.SetCurrent
+                            Do
 
-                    Dim IObj3 As InspectorItem = Host.GetNewInspectorItem()
+                                IObj2?.SetCurrent
 
-                    _IObj = IObj3
+                                Dim IObj3 As InspectorItem = Host.GetNewInspectorItem()
 
-                    Inspector.Host.CheckAndAdd(IObj3, "", "Calculate", "Equilibrium Reactor Reaction Extents Convergence Loop Iteration #" & niter, "", True)
+                                _IObj = IObj3
 
-                    IObj3?.SetCurrent
+                                Inspector.Host.CheckAndAdd(IObj3, "", "Calculate", "Equilibrium Reactor Reaction Extents Convergence Loop Iteration #" & niter, "", True)
 
-                    IObj3?.Paragraphs.Add(String.Format("Tentative Reaction Extents: {0}", x.ToMathArrayString))
+                                IObj3?.SetCurrent
 
-                    Dim xs As Double
+                                IObj3?.Paragraphs.Add(String.Format("Tentative Reaction Extents: {0}", x.ToMathArrayString))
 
-                    Dim variables2 As New List(Of OptBoundVariable)
-                    Dim variables As New List(Of Double)
-                    Dim lbounds As New List(Of Double)
-                    Dim ubounds As New List(Of Double)
-                    For i = 0 To r
-                        xs = Scaler.Scale(x(i), MinVal, MaxVal, 0, 100)
-                        variables.Add(xs)
-                        variables2.Add(New OptBoundVariable(xs, 0, 100))
-                        lbounds.Add(0)
-                        ubounds.Add(100)
-                    Next
+                                Dim xs As Double
 
-                    Dim VariableValues As New List(Of Double())
-                    Dim FunctionValues As New List(Of Double)
-                    Dim result As Double, resnewton As Double()
+                                Dim variables2 As New List(Of OptBoundVariable)
+                                Dim variables As New List(Of Double)
+                                Dim lbounds As New List(Of Double)
+                                Dim ubounds As New List(Of Double)
+                                For i = 0 To r
+                                    xs = Scaler.Scale(x(i), MinVal, MaxVal, 0, 100)
+                                    variables.Add(xs)
+                                    variables2.Add(New OptBoundVariable(xs, 0, 100))
+                                    lbounds.Add(0)
+                                    ubounds.Add(100)
+                                Next
 
-                    If UseIPOPTSolver Then
+                                Dim VariableValues As New List(Of Double())
+                                Dim FunctionValues As New List(Of Double)
+                                Dim result As Double
 
-                        newx = solver2.Solve(Function(x1)
-                                                 FlowSheet.CheckStatus()
-                                                 VariableValues.Add(x1.Clone)
-                                                 result = FunctionValue2N(x1).AbsSqrSumY
-                                                 FunctionValues.Add(result)
-                                                 Return result
-                                             End Function, Nothing,
-                                                       variables.ToArray, lbounds.ToArray, ubounds.ToArray)
+                                If UseIPOPTSolver Then
 
-                        FlowSheet.CheckStatus()
+                                    newx = solver2.Solve(Function(x1)
+                                                             FlowSheet.CheckStatus()
+                                                             VariableValues.Add(x1.Clone)
+                                                             result = FunctionValue2N(x1).AbsSqrSumY
+                                                             FunctionValues.Add(result)
+                                                             Return result
+                                                         End Function, Nothing,
+                                                                   variables.ToArray, lbounds.ToArray, ubounds.ToArray)
 
-                    Else
+                                    FlowSheet.CheckStatus()
 
-                        newx = solver3.Solve(Function(x1)
-                                                 FlowSheet.CheckStatus()
-                                                 VariableValues.Add(x1.Clone)
-                                                 resnewton = FunctionValue2N(x1)
-                                                 result = resnewton.AbsSqrSumY
-                                                 FunctionValues.Add(result)
-                                                 Return resnewton
-                                             End Function, variables.ToArray)
+                                Else
 
-                        FlowSheet.CheckStatus()
+                                    newx = solver3.ComputeMin(Function(x1)
+                                                                  FlowSheet.CheckStatus()
+                                                                  VariableValues.Add(x1.Clone)
+                                                                  result = FunctionValue2N(x1).AbsSqrSumY
+                                                                  FunctionValues.Add(result)
+                                                                  Return result
+                                                              End Function, variables2.ToArray)
 
-                    End If
+                                    FlowSheet.CheckStatus()
 
-                    newx = VariableValues(FunctionValues.IndexOf(FunctionValues.Min))
+                                End If
 
-                    errval = FunctionValue2N(newx).AbsSqrSumY
+                                newx = VariableValues(FunctionValues.IndexOf(FunctionValues.Min))
 
-                    newx = newx.Select(Function(xi) Scaler.UnScale(xi, MinVal, MaxVal, 0, 100)).ToArray
+                                errval = FunctionValue2N(newx).AbsSqrSumY
 
-                    sumerr = x.SubtractY(newx).AbsSqrSumY
+                                newx = newx.Select(Function(xi) Scaler.UnScale(xi, MinVal, MaxVal, 0, 100)).ToArray
 
-                    x = newx
+                                sumerr = x.SubtractY(newx).AbsSqrSumY
 
-                    IObj3?.Paragraphs.Add(String.Format("Updated Reaction Extents: {0}", newx.ToMathArrayString))
+                                x = newx
 
-                    niter += 1
+                                IObj3?.Paragraphs.Add(String.Format("Updated Reaction Extents: {0}", newx.ToMathArrayString))
 
-                    IObj3?.Close()
+                                niter += 1
 
-                Loop Until errval < InternalLoopTolerance Or (sumerr < InternalLoopTolerance And niter > 20) Or niter >= InternalLoopMaximumIterations
+                                IObj3?.Close()
 
-                If niter >= InternalLoopMaximumIterations Then Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
+                            Loop Until errval < InternalLoopTolerance Or (sumerr < InternalLoopTolerance) Or niter >= InternalLoopMaximumIterations
 
-                Dim penval = Math.Abs(ReturnPenaltyValue())
+                            If niter >= InternalLoopMaximumIterations Then Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
 
-                If penval > 0.1 Then
+                            Dim penval = Math.Abs(ReturnPenaltyValue())
 
-                    Throw New Exception("Invalid solution: mass balance residue > 0. Are all possible reactions defined?")
+                            If penval > 0.1 Then
 
-                End If
+                                Throw New Exception("Invalid solution: mass balance residue > 0. Are all possible reactions defined?")
 
-                REx = x
+                            End If
 
-                IObj2?.SetCurrent
+                            REx = x
 
-                _IObj = IObj2
+                            IObj2?.SetCurrent
 
-                'reevaluate function
+                            _IObj = IObj2
 
-                tms.Phases(0).Properties.temperature = T
+                            i = 0
+                            For Each r As String In Me.Reactions
 
-                g1 = FunctionValue2G(REx)
+                                'process reaction i
 
-                IObj2?.SetCurrent
+                                rx = FlowSheet.Reactions(r)
 
-                Me.FinalGibbsEnergy = g1
+                                If rx.Tmax = 0 Then rx.Tmax = 2000
 
-                i = 0
-                For Each r As String In Me.Reactions
+                                If T >= rx.Tmin And T <= rx.Tmax Then
+                                    ReactionExtents(r) = REx(i)
+                                Else
+                                    ReactionExtents(r) = 0.0
+                                End If
 
-                    'process reaction i
+                                i += 1
 
-                    rx = FlowSheet.Reactions(r)
+                            Next
 
-                    If rx.Tmax = 0 Then rx.Tmax = 2000
+                            PreviousReactionExtents = New Dictionary(Of String, Double)(ReactionExtents)
 
-                    If T >= rx.Tmin And T <= rx.Tmax Then
-                        ReactionExtents(r) = REx(i)
-                    Else
-                        ReactionExtents(r) = 0.0
-                    End If
+                            Dim DHr, Hp As Double
 
-                    i += 1
+                            DHr = 0
 
-                Next
+                            i = 0
+                            Do
+                                'process reaction i
+                                rx = FlowSheet.Reactions(Me.Reactions(i))
 
-                PreviousReactionExtents = New Dictionary(Of String, Double)(ReactionExtents)
+                                Dim id(rx.Components.Count - 1) As String
+                                Dim stcoef(rx.Components.Count - 1) As Double
+                                Dim bcidx As Integer = 0
+                                j = 0
+                                For Each sb As ReactionStoichBase In rx.Components.Values
+                                    id(j) = sb.CompName
+                                    stcoef(j) = sb.StoichCoeff
+                                    If sb.IsBaseReactant Then bcidx = j
+                                    j += 1
+                                Next
 
-                Dim DHr, Hp As Double
+                                'Heat released (or absorbed) (kJ/s = kW) (Ideal Gas)
+                                If rx.Components(rx.BaseReactant).StoichCoeff > 0 Then
+                                    DHr += -rx.ReactionHeat * Me.ReactionExtents(Me.Reactions(i)) * rx.Components(rx.BaseReactant).StoichCoeff / 1000
+                                Else
+                                    DHr += rx.ReactionHeat * Me.ReactionExtents(Me.Reactions(i)) * rx.Components(rx.BaseReactant).StoichCoeff / 1000
+                                End If
 
-                DHr = 0
+                                i += 1
+                            Loop Until i = Me.Reactions.Count
 
-                i = 0
-                Do
-                    'process reaction i
-                    rx = FlowSheet.Reactions(Me.Reactions(i))
+                            'Ideal Gas Reactants Enthalpy (kJ/kg * kg/s = kW)
+                            'Hid_r += 0 'ppr.RET_Hid(298.15, ims.Phases(0).Properties.temperature.GetValueOrDefault, PropertyPackages.Phase.Mixture) * ims.Phases(0).Properties.massflow.GetValueOrDefault
 
-                    Dim id(rx.Components.Count - 1) As String
-                    Dim stcoef(rx.Components.Count - 1) As Double
-                    Dim bcidx As Integer = 0
-                    j = 0
-                    For Each sb As ReactionStoichBase In rx.Components.Values
-                        id(j) = sb.CompName
-                        stcoef(j) = sb.StoichCoeff
-                        If sb.IsBaseReactant Then bcidx = j
-                        j += 1
-                    Next
+                            ' comp. conversions
+                            For Each sb As Compound In ims.Phases(0).Compounds.Values
+                                If Me.ComponentConversions.ContainsKey(sb.Name) Then
+                                    Me.ComponentConversions(sb.Name) = -DN(sb.Name) / N0(sb.Name)
+                                End If
+                            Next
 
-                    'Heat released (or absorbed) (kJ/s = kW) (Ideal Gas)
-                    If rx.Components(rx.BaseReactant).StoichCoeff > 0 Then
-                        DHr += -rx.ReactionHeat * Me.ReactionExtents(Me.Reactions(i)) * rx.Components(rx.BaseReactant).StoichCoeff / 1000
-                    Else
-                        DHr += rx.ReactionHeat * Me.ReactionExtents(Me.Reactions(i)) * rx.Components(rx.BaseReactant).StoichCoeff / 1000
-                    End If
+                            'Check to see if are negative molar fractions.
+                            Dim sum1 As Double = 0
+                            For Each subst As Compound In tms.Phases(0).Compounds.Values
+                                If subst.MoleFraction.GetValueOrDefault < 0 Then
+                                    subst.MolarFlow = 0.0
+                                Else
+                                    sum1 += subst.MolarFlow.GetValueOrDefault
+                                End If
+                            Next
+                            For Each subst As Compound In tms.Phases(0).Compounds.Values
+                                subst.MoleFraction = subst.MolarFlow.GetValueOrDefault / sum1
+                            Next
 
-                    i += 1
-                Loop Until i = Me.Reactions.Count
+                            ims = tms.Clone
+                            ims.SetFlowsheet(tms.FlowSheet)
 
-                'Ideal Gas Reactants Enthalpy (kJ/kg * kg/s = kW)
-                'Hid_r += 0 'ppr.RET_Hid(298.15, ims.Phases(0).Properties.temperature.GetValueOrDefault, PropertyPackages.Phase.Mixture) * ims.Phases(0).Properties.massflow.GetValueOrDefault
+                            IObj2?.SetCurrent
 
-                ' comp. conversions
-                For Each sb As Compound In ims.Phases(0).Compounds.Values
-                    If Me.ComponentConversions.ContainsKey(sb.Name) Then
-                        Me.ComponentConversions(sb.Name) = -DN(sb.Name) / N0(sb.Name)
-                    End If
-                Next
+                            Dim erfunc As Double = 0.0
 
-                'Check to see if are negative molar fractions.
-                Dim sum1 As Double = 0
-                For Each subst As Compound In tms.Phases(0).Compounds.Values
-                    If subst.MoleFraction.GetValueOrDefault < 0 Then
-                        subst.MolarFlow = 0.0
-                    Else
-                        sum1 += subst.MolarFlow.GetValueOrDefault
-                    End If
-                Next
-                For Each subst As Compound In tms.Phases(0).Compounds.Values
-                    subst.MoleFraction = subst.MolarFlow.GetValueOrDefault / sum1
-                Next
+                            Select Case Me.ReactorOperationMode
 
-                ims = tms.Clone
-                ims.SetFlowsheet(tms.FlowSheet)
+                                Case OperationMode.Adiabatic
 
-                IObj2?.SetCurrent
+                                    ims.SetTemperature(T)
+                                    ims.SpecType = StreamSpec.Temperature_and_Pressure
+                                    ims.Calculate(True, True)
 
-                Select Case Me.ReactorOperationMode
+                                    'Products Enthalpy (kJ/kg * kg/s = kW)
+                                    Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
 
-                    Case OperationMode.Adiabatic
+                                    'Heat (kW)
+                                    erfunc = Hp - Hr0 - DHr
 
-                        Me.DeltaQ = 0.0#
+                                    Me.DeltaQ = 0
 
-                        'Products Enthalpy (kJ/kg * kg/s = kW)
-                        Hp = Hr0 + DHr
-                        Hp = Hp / ims.Phases(0).Properties.massflow.GetValueOrDefault
+                                    OutletTemperature = T
 
-                        ims.Phases(0).Properties.enthalpy = Hp
-                        ims.SpecType = StreamSpec.Pressure_and_Enthalpy
+                                    Me.DeltaT = T - T0
 
-                        ims.Calculate(True, True)
+                                Case OperationMode.Isothermic
 
-                        TLast = T
-                        T = ims.Phases(0).Properties.temperature.GetValueOrDefault
-                        Me.DeltaT = T - T0
+                                    ims.SpecType = StreamSpec.Temperature_and_Pressure
+                                    ims.Calculate(True, True)
 
-                        If Math.Abs(T - TLast) < ExternalLoopTolerance Then CalcFinished = True
+                                    'Products Enthalpy (kJ/kg * kg/s = kW)
+                                    Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
 
-                        T = 0.9 * TLast + 0.1 * T
+                                    'Heat (kW)
+                                    Me.DeltaQ = Hp - Hr0 - DHr
 
-                        ims.Phases(0).Properties.temperature = T
+                                    Me.DeltaT = 0
+                                    CalcFinished = True
 
-                    Case OperationMode.Isothermic
+                                Case OperationMode.OutletTemperature
 
-                        ims.SpecType = StreamSpec.Temperature_and_Pressure
-                        ims.Calculate(True, True)
+                                    Dim Tout As Double = Me.OutletTemperature
 
-                        'Products Enthalpy (kJ/kg * kg/s = kW)
-                        Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
+                                    Me.DeltaT = Tout - T
 
-                        'Heat (kW)
-                        Me.DeltaQ = Hp - Hr0 - DHr
+                                    ims.Phases(0).Properties.temperature = Tout
 
-                        Me.DeltaT = 0
-                        CalcFinished = True
+                                    ims.SpecType = StreamSpec.Temperature_and_Pressure
 
-                    Case OperationMode.OutletTemperature
+                                    ims.Calculate(True, True)
 
-                        Dim Tout As Double = Me.OutletTemperature
+                                    'Products Enthalpy (kJ/kg * kg/s = kW)
+                                    Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
 
-                        Me.DeltaT = Tout - T
+                                    'Heat (kW)
+                                    Me.DeltaQ = Hp - Hr0 - DHr
+                                    CalcFinished = True
 
-                        ims.Phases(0).Properties.temperature = Tout
+                            End Select
 
-                        ims.SpecType = StreamSpec.Temperature_and_Pressure
+                            cnt += 1
 
-                        ims.Calculate(True, True)
+                            If cnt >= ExternalLoopMaximumIterations Then Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
 
-                        'Products Enthalpy (kJ/kg * kg/s = kW)
-                        Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
+                            IObj2?.Close()
 
-                        'Heat (kW)
-                        Me.DeltaQ = Hp - Hr0 - DHr
-                        CalcFinished = True
+                            Return erfunc ^ 2
 
-                End Select
+                        End Function
 
-                cnt += 1
+            If ReactorOperationMode = OperationMode.Adiabatic Then
+                Dim brent As New BrentOpt.BrentMinimize
+                brent.brentoptimize2(200, T * 2 - 200, 0.01, Function(Tx)
+                                                                 Return efunc.Invoke(Tx)
+                                                             End Function)
+            Else
+                efunc.Invoke(T)
+            End If
 
-                If cnt >= ExternalLoopMaximumIterations Then Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
+            'reevaluate function
 
-                IObj2?.Close()
+            tms.Phases(0).Properties.temperature = T
 
-            Loop Until CalcFinished
+            g1 = FunctionValue2G(REx)
+
+            Me.FinalGibbsEnergy = g1
+
+            If g1 > g0 Then
+
+                Throw New Exception("Invalid solution (gf > g0)")
+
+            End If
 
             IObj?.Paragraphs.Add(String.Format("Final Gibbs Energy: {0}", g1))
 
             Me.ReactionExtents.Clear()
-            Me.PreviousReactionExtents.Clear()
 
             For Each rxid As String In Me.Reactions
                 rx = FlowSheet.Reactions(rxid)
                 ReactionExtents.Add(rx.ID, (N(rx.BaseReactant) - N0(rx.BaseReactant)) / rx.Components(rx.BaseReactant).StoichCoeff)
-                PreviousReactionExtents.Add(rx.ID, ReactionExtents(rx.ID))
             Next
 
             Dim W As Double = ims.Phases(0).Properties.massflow.GetValueOrDefault

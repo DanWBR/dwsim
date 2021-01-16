@@ -256,6 +256,13 @@ namespace DWSIM.UI.Desktop.Editors
                         phase.Compounds.Remove(name);
                     }
                 }
+                foreach (var pp in flowsheet.PropertyPackages.Values)
+                {
+                    if (((Thermodynamics.PropertyPackages.PropertyPackage)pp).ForcedSolids.Contains(name))
+                    {
+                        ((Thermodynamics.PropertyPackages.PropertyPackage)pp).ForcedSolids.Remove(name);
+                    }
+                }
             }
             else
             {

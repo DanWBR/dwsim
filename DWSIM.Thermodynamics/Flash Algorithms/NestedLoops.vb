@@ -4,16 +4,16 @@
 '    This file is part of DWSIM.
 '
 '    DWSIM is free software: you can redistribute it and/or modify
-'    it under the terms of the GNU General Public License as published by
+'    it under the terms of the GNU Lesser General Public License as published by
 '    the Free Software Foundation, either version 3 of the License, or
 '    (at your option) any later version.
 '
 '    DWSIM is distributed in the hope that it will be useful,
 '    but WITHOUT ANY WARRANTY; without even the implied warranty of
 '    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'    GNU General Public License for more details.
+'    GNU Lesser General Public License for more details.
 '
-'    You should have received a copy of the GNU General Public License
+'    You should have received a copy of the GNU Lesser General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Math
@@ -142,15 +142,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             'Calculate Ki`s
 
+            Vp = PP.RET_VPVAP(T)
+
             If Not ReuseKI Then
-                For i = 0 To n
-                    If VPc(i) > 0.0# Then
-                        Vp(i) = VPc(i) * Exp(5.37 * (1 + Vw(i)) * (1 - VTc(i) / T))
-                    Else
-                        IObj?.SetCurrent()
-                        Vp(i) = PP.AUX_PVAPi(i, T)
-                    End If
-                Next
                 Ki = Vp.MultiplyConstY(1 / P)
                 For i = 0 To n
                     IObj?.SetCurrent()
@@ -177,6 +171,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             If T > MathEx.Common.Max(PP.RET_VTC, Vz) Then
                 Vy = Vz
                 Vx = Vy.DivideY(Ki).NormalizeY
+                Vx = Vx.ReplaceInvalidsWithZeroes()
                 V = 1
                 L = 0
                 GoTo out
@@ -202,22 +197,20 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             If Abs(Pb - Pd) / Pb < 0.0000001 Then
                 'one comp only
-                For i = 0 To n
-                    IObj?.SetCurrent()
-                    Vp(i) = PP.AUX_PVAPi(i, T)
-                Next
                 Px = Vp.MultiplyY(Vz).Sum
                 If Px <= P Then
                     L = 1
                     V = 0
                     Vx = Vz
-                    Vy = Vx.MultiplyY(Ki).NormalizeY
+                    Vy = Vx.MultiplyY(Ki).NormalizeY()
+                    Vy = Vy.ReplaceInvalidsWithZeroes()
                     GoTo out
                 Else
                     L = 0
                     V = 1
                     Vy = Vz
-                    Vx = Vy.DivideY(Ki).NormalizeY
+                    Vx = Vy.DivideY(Ki).NormalizeY()
+                    Vx = Vx.ReplaceInvalidsWithZeroes()
                     GoTo out
                 End If
             End If
@@ -444,7 +437,9 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             IObj?.SetCurrent()
 
-            If Me.FlashSettings(Interfaces.Enums.FlashSetting.NL_FastMode) = False OrElse PP.AUX_IS_SINGLECOMP(Phase.Mixture) Then
+            Dim hres = PerformHeuristicsTest(Vz, Tref, P, PP)
+
+            If Me.FlashSettings(Interfaces.Enums.FlashSetting.NL_FastMode) = False Or PP.AUX_IS_SINGLECOMP(Phase.Mixture) Or hres.SolidPhase Then
                 IObj?.Paragraphs.Add("Using the normal version of the PH Flash Algorithm.")
 
                 IObj?.Close()
@@ -469,7 +464,9 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             IObj?.SetCurrent()
 
-            If Me.FlashSettings(Interfaces.Enums.FlashSetting.NL_FastMode) = False OrElse PP.AUX_IS_SINGLECOMP(Phase.Mixture) Then
+            Dim hres = PerformHeuristicsTest(Vz, Tref, P, PP)
+
+            If Me.FlashSettings(Interfaces.Enums.FlashSetting.NL_FastMode) = False Or PP.AUX_IS_SINGLECOMP(Phase.Mixture) Or hres.SolidPhase Then
                 IObj?.Paragraphs.Add("Using the normal version of the PS Flash Algorithm.")
                 IObj?.Close()
                 Return Flash_PS_2(Vz, P, S, Tref, PP, ReuseKI, PrevKi)
@@ -573,7 +570,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                                                                   fx = herrobj(0)
                                                                   Vy = herrobj(4)
                                                                   Vx1 = herrobj(5)
-                                                                  Ki = Vy.DivideY(Vx1)
+                                                                  Ki = PP.DW_CalcKvalue(Vx1, Vy, x1, P)
                                                               End Sub,
                                                                 Settings.TaskCancellationTokenSource.Token,
                                                                 TaskCreationOptions.None,
@@ -593,7 +590,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                             fx = herrobj(0)
                             Vy = herrobj(4)
                             Vx1 = herrobj(5)
-                            Ki = Vy.DivideY(Vx1)
+                            Ki = PP.DW_CalcKvalue(Vx1, Vy, x1, P)
+                            Ki = Ki.ReplaceInvalidsWithZeroes()
                             IObj2?.SetCurrent()
                             herrobj = Herror("PT", x1 + epsilon(j), P, Vz, PP, True, Ki)
 
@@ -611,7 +609,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                         fx = herrobj(0)
                         Vy = herrobj(4)
                         Vx1 = herrobj(5)
-                        Ki = Vy.DivideY(Vx1)
+                        Ki = PP.DW_CalcKvalue(Vx1, Vy, x1, P)
+                        Ki = Ki.ReplaceInvalidsWithZeroes()
 
                         IObj2?.Paragraphs.Add(String.Format("Current Enthalpy error: {0}", fx))
 
@@ -830,6 +829,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 Dim H1, H2, V1, V2 As Double
                 ecount = 0
                 V = 0
+                Dim hres = PerformHeuristicsTest(Vz, T, P, PP)
+                If hres.SolidPhase Then V = 0.5
                 H1 = Hb
                 Do
 
@@ -853,6 +854,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     IObj?.SetCurrent()
                     resultFlash = Herror("PV", V, P, Vz, PP, True, Ki)
                     H1 = resultFlash(0)
+                    If V = 1.0 Or V = 0.0 And Math.Abs(H1) < 0.01 Then Exit Do
                     IObj?.Paragraphs.Add(String.Format("Enthalpy Error (Spec - Calculated): {0}", H1))
                 Loop Until Abs(H1) < itol Or ecount > maxitEXT
 
@@ -949,29 +951,54 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             End If
 
-            If PTFlashFunction IsNot Nothing Then
-                Dim tmp = PTFlashFunction.Invoke(Vz, P, T, PP, ReuseKI, Ki)
+            If V > 0 And V < 1 Then
+
+                'partial vaporization.
+                Dim tmp As Object
+                Dim hres = PerformHeuristicsTest(Vz, T, P, PP)
+                If hres.SolidPhase Then
+                    tmp = New NestedLoopsSLE().Flash_PV(Vz, P, V, 0.0, PP, ReuseKI, Ki)
+                Else
+                    tmp = Me.Flash_PV(Vz, P, V, 0.0#, PP, ReuseKI, Ki)
+                End If
                 L1 = tmp(0)
                 V = tmp(1)
                 Vx1 = tmp(2)
                 Vy = tmp(3)
-                ecount = tmp(4)
-                L2 = tmp(5)
-                Vx2 = tmp(6)
-                Sx = tmp(7)
-                Vs = tmp(8)
+                T = tmp(4)
+                L2 = tmp(7)
+                Vx2 = tmp(8)
+                Sx = tmp(9)
+                Vs = tmp(10)
+
             Else
-                Dim tmp = Me.Flash_PT(Vz, P, T, PP, ReuseKI, Ki)
-                L1 = tmp(0)
-                V = tmp(1)
-                Vx1 = tmp(2)
-                Vy = tmp(3)
-                ecount = tmp(4)
-                L2 = tmp(5)
-                Vx2 = tmp(6)
-                Sx = tmp(7)
-                Vs = tmp(8)
+
+                If PTFlashFunction IsNot Nothing Then
+                    Dim tmp = PTFlashFunction.Invoke(Vz, P, T, PP, ReuseKI, Ki)
+                    L1 = tmp(0)
+                    V = tmp(1)
+                    Vx1 = tmp(2)
+                    Vy = tmp(3)
+                    ecount = tmp(4)
+                    L2 = tmp(5)
+                    Vx2 = tmp(6)
+                    Sx = tmp(7)
+                    Vs = tmp(8)
+                Else
+                    Dim tmp = Me.Flash_PT(Vz, P, T, PP, ReuseKI, Ki)
+                    L1 = tmp(0)
+                    V = tmp(1)
+                    Vx1 = tmp(2)
+                    Vy = tmp(3)
+                    ecount = tmp(4)
+                    L2 = tmp(5)
+                    Vx2 = tmp(6)
+                    Sx = tmp(7)
+                    Vs = tmp(8)
+                End If
+
             End If
+
             For i = 0 To n
                 Ki(i) = Vy(i) / Vx1(i)
             Next
@@ -1082,7 +1109,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                                                                   fx = serrobj(0)
                                                                   Vy = serrobj(4)
                                                                   Vx1 = serrobj(5)
-                                                                  Ki = Vy.DivideY(Vx1)
+                                                                  Ki = PP.DW_CalcKvalue(Vx1, Vy, x1, P)
                                                               End Sub,
                                                                   Settings.TaskCancellationTokenSource.Token,
                                                                   TaskCreationOptions.None,
@@ -1102,7 +1129,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                             fx = serrobj(0)
                             Vy = serrobj(4)
                             Vx1 = serrobj(5)
-                            Ki = Vy.DivideY(Vx1)
+                            Vx1 = serrobj(5)
+                            Ki = PP.DW_CalcKvalue(Vx1, Vy, x1, P)
                             IObj2?.SetCurrent()
                             fx2 = Serror("PT", x1 + epsilon(j), P, Vz, PP, True, Ki)(0)
 
@@ -1120,7 +1148,9 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                         fx = serrobj(0)
                         Vy = serrobj(4)
                         Vx1 = serrobj(5)
-                        Ki = Vy.DivideY(Vx1)
+                        Ki = PP.DW_CalcKvalue(Vx1, Vy, x1, P)
+                        Ki = Ki.ReplaceInvalidsWithZeroes()
+
 
                         IObj2?.Paragraphs.Add(String.Format("Current Entropy error: {0}", fx))
 
@@ -1374,6 +1404,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     IObj?.SetCurrent()
                     resultFlash = Serror("PV", V, P, Vz, PP, True, Ki)
                     S1 = resultFlash(0)
+                    If V = 1.0 Or V = 0.0 And Math.Abs(S1) < 0.01 Then Exit Do
                     IObj?.Paragraphs.Add(String.Format("Entropy Error (Spec - Calculated): {0}", S1))
                 Loop Until Abs(S1) < itol Or ecount > maxitEXT
 
@@ -2521,7 +2552,13 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     T = X
                 End If
             Else
-                Dim tmp = Me.Flash_PV(Vz, P, X, 0.0#, PP, ReuseKi, Ki)
+                Dim tmp As Object
+                Dim hres = PerformHeuristicsTest(Vz, 298.15, P, PP)
+                If hres.SolidPhase Then
+                    tmp = New NestedLoopsSLE().Flash_PV(Vz, P, X, 0.0, PP, ReuseKi, Ki)
+                Else
+                    tmp = Me.Flash_PV(Vz, P, X, 0.0#, PP, ReuseKi, Ki)
+                End If
                 L1 = tmp(0)
                 V = tmp(1)
                 Vx1 = tmp(2)

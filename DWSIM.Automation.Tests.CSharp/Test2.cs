@@ -5,6 +5,7 @@ using System.IO;
 using DWSIM.Interfaces.Enums.GraphicObjects;
 using DWSIM.Thermodynamics.Streams;
 using DWSIM.UnitOperations.UnitOperations;
+using System.Diagnostics;
 
 class Test2
 {
@@ -15,11 +16,9 @@ class Test2
 
         //create automation manager
 
-        DWSIM.Automation.Automation2 interf = new DWSIM.Automation.Automation2();
+        var interf = new DWSIM.Automation.Automation2();
 
-        DWSIM.Interfaces.IFlowsheet sim;
-
-        sim = interf.CreateFlowsheet();
+        var sim = interf.CreateFlowsheet();
 
         // add water
 

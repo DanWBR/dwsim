@@ -4,16 +4,16 @@
 '    This file is part of DWSIM.
 '
 '    DWSIM is free software: you can redistribute it and/or modify
-'    it under the terms of the GNU General Public License as published by
+'    it under the terms of the GNU Lesser General Public License as published by
 '    the Free Software Foundation, either version 3 of the License, or
 '    (at your option) any later version.
 '
 '    DWSIM is distributed in the hope that it will be useful,
 '    but WITHOUT ANY WARRANTY; without even the implied warranty of
 '    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'    GNU General Public License for more details.
+'    GNU Lesser General Public License for more details.
 '
-'    You should have received a copy of the GNU General Public License
+'    You should have received a copy of the GNU Lesser General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Runtime.Serialization.Formatters.Binary
@@ -549,7 +549,7 @@ Namespace PropertyPackages
 
         Public Overridable Function Clone() As PropertyPackage
 
-            Return Me.MemberwiseClone()
+            Return Me.DeepClone()
 
         End Function
 
@@ -1105,6 +1105,41 @@ Namespace PropertyPackages
         ''' <remarks>The basis for the calculated enthalpy/entropy in DWSIM is zero at 25 C and 1 atm.</remarks>
         Public MustOverride Function DW_CalcEnthalpy(ByVal Vx As Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
 
+        Public Function DW_CalcEnthalpyDmoles(ByVal Vx As Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double()
+
+            Dim nmols As Double() = Vx.Clone
+            Dim n As Integer = Vx.Length - 1
+            Dim i, k As Integer
+
+            Dim deltan As Double = 0.0000001
+
+            Dim deriv As Double() = Vx.Clone()
+
+            Dim H1, H2, M1, M2 As Double
+
+            M1 = AUX_MMM(Vx)
+            H1 = (DW_CalcEnthalpy(Vx, T, P, st) + AUX_HFm25(Vx)) * M1
+
+            For i = 0 To n
+                Dim newVx As Double() = Vx.Clone()
+                For k = 0 To n
+                    If i = k Then
+                        newVx(k) = nmols(k) + deltan
+                    Else
+                        newVx(k) = nmols(k)
+                    End If
+                Next
+                newVx = newVx.NormalizeY()
+                M2 = AUX_MMM(newVx)
+                H2 = (DW_CalcEnthalpy(newVx, T, P, st) + AUX_HFm25(newVx)) * M2
+                deriv(i) = (H2 * (1 + deltan) - H1) / deltan
+            Next
+
+            Return deriv
+
+        End Function
+
+
         ''' <summary>
         ''' Calculates the enthalpy departure of a mixture.
         ''' </summary>
@@ -1126,6 +1161,40 @@ Namespace PropertyPackages
         ''' <returns>The entropy of the mixture in kJ/kg.K.</returns>
         ''' <remarks>The basis for the calculated enthalpy/entropy in DWSIM is zero at 25 C and 1 atm.</remarks>
         Public MustOverride Function DW_CalcEntropy(ByVal Vx As Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
+
+        Public Function DW_CalcEntropyDmoles(ByVal Vx As Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double()
+
+            Dim nmols As Double() = Vx.Clone
+            Dim n As Integer = Vx.Length - 1
+            Dim i, k As Integer
+
+            Dim deltan As Double = 0.0000001
+
+            Dim deriv As Double() = Vx.Clone()
+
+            Dim S1, S2, M1, M2 As Double
+
+            M1 = AUX_MMM(Vx)
+            S1 = (DW_CalcEntropy(Vx, T, P, st) + AUX_SFm25(Vx)) * M1
+
+            For i = 0 To n
+                Dim newVx As Double() = Vx.Clone()
+                For k = 0 To n
+                    If i = k Then
+                        newVx(k) = nmols(k) + deltan
+                    Else
+                        newVx(k) = nmols(k)
+                    End If
+                Next
+                'newVx = newVx.NormalizeY()
+                M2 = AUX_MMM(newVx)
+                S2 = (DW_CalcEntropy(newVx, T, P, st) + AUX_SFm25(newVx)) * M2
+                deriv(i) = (S2 * (1 + deltan) - S1) / deltan
+            Next
+
+            Return deriv
+
+        End Function
 
         ''' <summary>
         ''' Calculates the entropy departure of a mixture.
@@ -1564,7 +1633,7 @@ Namespace PropertyPackages
 
             Dim HL, HV, HS, SL, SV, SS, DL, DV, DS, CPL, CPV, CPS, KL, KV, KS, CVL, CVV, CSV As Nullable(Of Double)
             Dim UL, UV, US, GL, GV, GS, AL, AV, AS_ As Double
-            Dim xl, xv, xs, wl, wv, ws, vl, vv, vs, result As Double
+            Dim xl, xv, xs, wl, wv, ws, result As Double
 
             xl = Me.CurrentMaterialStream.Phases(1).Properties.molarfraction.GetValueOrDefault
             xv = Me.CurrentMaterialStream.Phases(2).Properties.molarfraction.GetValueOrDefault
@@ -1588,25 +1657,11 @@ Namespace PropertyPackages
             If DV <> 0.0# And Not Double.IsNaN(DV) Then tv = Me.CurrentMaterialStream.Phases(2).Properties.massfraction.GetValueOrDefault / DV.GetValueOrDefault
             If DS <> 0.0# And Not Double.IsNaN(DS) Then ts = Me.CurrentMaterialStream.Phases(7).Properties.massfraction.GetValueOrDefault / DS.GetValueOrDefault
 
-            vl = tl / (tl + tv + ts)
-            vv = tv / (tl + tv + ts)
-            vs = ts / (tl + tv + ts)
-
-            If xl = 1 Then
-                vl = 1
-                vv = 0
-                vs = 0
-            ElseIf xv = 1 Then
-                vl = 0
-                vv = 1
-                vs = 0
-            ElseIf xs = 1 Then
-                vl = 0
-                vv = 0
-                vs = 1
-            End If
-
-            result = vl * DL.GetValueOrDefault + vv * DV.GetValueOrDefault + vs * DS.GetValueOrDefault
+            result = 0.0
+            If wl > 0.0 Then result += wl / DL.GetValueOrDefault()
+            If wv > 0.0 Then result += wv / DV.GetValueOrDefault()
+            If ws > 0.0 Then result += ws / DS.GetValueOrDefault()
+            result = 1 / result
             Me.CurrentMaterialStream.Phases(0).Properties.density = result
 
             HL = Me.CurrentMaterialStream.Phases(1).Properties.enthalpy.GetValueOrDefault
@@ -2368,7 +2423,7 @@ Namespace PropertyPackages
                                 subst.FugacityCoeff = FCL(i)
                                 subst.ActivityCoeff = 0
                                 subst.PartialVolume = 0
-                                subst.PartialPressure = 0
+                                subst.PartialPressure = Vx(i) * FCL(i) * P
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
@@ -2380,7 +2435,7 @@ Namespace PropertyPackages
                                 subst.FugacityCoeff = FCL2(i)
                                 subst.ActivityCoeff = 0
                                 subst.PartialVolume = 0
-                                subst.PartialPressure = 0
+                                subst.PartialPressure = Vx2(i) * FCL2(i) * P
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(4).Compounds.Values
@@ -2392,7 +2447,7 @@ Namespace PropertyPackages
                                 subst.FugacityCoeff = FCV(i)
                                 subst.ActivityCoeff = 0
                                 subst.PartialVolume = 0
-                                subst.PartialPressure = 0
+                                subst.PartialPressure = Vy(i) * FCV(i) * P
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
@@ -2570,7 +2625,7 @@ Namespace PropertyPackages
                                 subst.FugacityCoeff = FCL(i)
                                 subst.ActivityCoeff = 0
                                 subst.PartialVolume = 0
-                                subst.PartialPressure = 0
+                                subst.PartialPressure = Vx(i) * FCL(i) * P
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(3).Compounds.Values
@@ -2582,7 +2637,7 @@ Namespace PropertyPackages
                                 subst.FugacityCoeff = FCL2(i)
                                 subst.ActivityCoeff = 0
                                 subst.PartialVolume = 0
-                                subst.PartialPressure = 0
+                                subst.PartialPressure = Vx2(i) * FCL2(i) * P
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(4).Compounds.Values
@@ -2594,7 +2649,7 @@ Namespace PropertyPackages
                                 subst.FugacityCoeff = FCV(i)
                                 subst.ActivityCoeff = 0
                                 subst.PartialVolume = 0
-                                subst.PartialPressure = 0
+                                subst.PartialPressure = Vy(i) * FCV(i) * P
                                 i += 1
                             Next
                             For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
@@ -2847,7 +2902,7 @@ redirect:                       IObj?.SetCurrent()
                                     subst.FugacityCoeff = FCL(i)
                                     subst.ActivityCoeff = 0
                                     subst.PartialVolume = 0
-                                    subst.PartialPressure = 0
+                                    subst.PartialPressure = Vx(i) * FCL(i) * P
                                     i += 1
                                 Next
                                 i = 1
@@ -2861,7 +2916,7 @@ redirect:                       IObj?.SetCurrent()
                                     subst.FugacityCoeff = FCL2(i)
                                     subst.ActivityCoeff = 0
                                     subst.PartialVolume = 0
-                                    subst.PartialPressure = 0
+                                    subst.PartialPressure = Vx2(i) * FCL2(i) * P
                                     i += 1
                                 Next
                                 i = 1
@@ -2875,7 +2930,7 @@ redirect:                       IObj?.SetCurrent()
                                     subst.FugacityCoeff = FCV(i)
                                     subst.ActivityCoeff = 0
                                     subst.PartialVolume = 0
-                                    subst.PartialPressure = 0
+                                    subst.PartialPressure = Vy(i) * FCV(i) * P
                                     i += 1
                                 Next
                                 i = 1
@@ -3056,7 +3111,7 @@ redirect2:                      IObj?.SetCurrent()
                                     subst.FugacityCoeff = FCL(i)
                                     subst.ActivityCoeff = 0
                                     subst.PartialVolume = 0
-                                    subst.PartialPressure = 0
+                                    subst.PartialPressure = Vx(i) * FCL(i) * P
                                     i += 1
                                 Next
                                 i = 1
@@ -3070,7 +3125,7 @@ redirect2:                      IObj?.SetCurrent()
                                     subst.FugacityCoeff = FCL2(i)
                                     subst.ActivityCoeff = 0
                                     subst.PartialVolume = 0
-                                    subst.PartialPressure = 0
+                                    subst.PartialPressure = Vx2(i) * FCL2(i) * P
                                     i += 1
                                 Next
                                 i = 1
@@ -3084,7 +3139,7 @@ redirect2:                      IObj?.SetCurrent()
                                     subst.FugacityCoeff = FCV(i)
                                     subst.ActivityCoeff = 0
                                     subst.PartialVolume = 0
-                                    subst.PartialPressure = 0
+                                    subst.PartialPressure = Vy(i) * FCV(i) * P
                                     i += 1
                                 Next
 
@@ -4634,7 +4689,10 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
             n = Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1
 
-            Dim dx As Double = 0.025
+            Dim StepCount
+            Dim MinX As Double
+            Dim MaxX As Double
+            Dim dx As Double
 
             Dim tipocalc As String
             Dim result As Object
@@ -4651,10 +4709,11 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             SLE = parameters(5)
             Critical = parameters(6)
             SolidSolution = parameters(7)
-            Try
-                dx = parameters(10)
-            Catch ex As Exception
-            End Try
+
+            StepCount = parameters(10)
+            MinX = parameters(11)
+            MaxX = parameters(12)
+            dx = (MaxX - MinX) / StepCount
 
             Dim MyFlash As IFlashAlgorithm = FlashBase.Clone
 
@@ -4674,22 +4733,21 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     Dim x, y1, y2, Test1, Test2 As Double
                     Dim tmp1 As Object = Nothing, tmp2 As Object = Nothing
 
-                    'If VLE And Not Me.FlashBase = FlashMethod.NestedLoopsSLE And Not Me.FlashBase = FlashMethod.NestedLoopsSLE_SS Then
                     If VLE Then
 
                         i = 0
 
                         Do
 
-                            If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "VLE (" & i + 1 & "/" + (1 / dx).ToString("#") + ")")
+                            If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "VLE (" & i + 1 & "/" & StepCount + 1 & ")")
 
-                            x = i * dx
+                            x = MinX + i * dx
 
                             px.Add(x)
 
                             If i = 0 Then
                                 Try
-                                    tmp1 = MyFlash.Flash_PV(New Double() {i * dx, 1 - i * dx}, P, 0.0#, 0.0#, Me)
+                                    tmp1 = MyFlash.Flash_PV(New Double() {x, 1 - x}, P, 0.0#, 0.0#, Me)
                                     calcT = tmp1(4)
                                     Test1 = calcT
                                     prevkib = tmp1(6)
@@ -4699,7 +4757,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                     SharedClasses.ExceptionProcessing.ExceptionParser.ProcessAndDisplayException(Flowsheet, ex)
                                 End Try
                                 Try
-                                    tmp2 = MyFlash.Flash_PV(New Double() {i * dx, 1 - i * dx}, P, 1.0#, 0.0#, Me)
+                                    tmp2 = MyFlash.Flash_PV(New Double() {x, 1 - x}, P, 1.0#, 0.0#, Me)
                                     y2 = tmp2(4)
                                     Test2 = y2
                                     prevkid = tmp1(6)
@@ -4710,7 +4768,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 End Try
                             Else
                                 Try
-                                    tmp1 = MyFlash.Flash_PV(New Double() {i * dx, 1 - i * dx}, P, 0.0#, Test1, Me)
+                                    tmp1 = MyFlash.Flash_PV(New Double() {x, 1 - x}, P, 0.0#, Test1, Me)
                                     calcT = tmp1(4)
                                     Test1 = calcT
                                     prevkib = tmp1(6)
@@ -4720,7 +4778,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                     SharedClasses.ExceptionProcessing.ExceptionParser.ProcessAndDisplayException(Flowsheet, ex)
                                 End Try
                                 Try
-                                    tmp2 = MyFlash.Flash_PV(New Double() {i * dx, 1 - i * dx}, P, 1.0#, Test2, Me)
+                                    tmp2 = MyFlash.Flash_PV(New Double() {x, 1 - x}, P, 1.0#, Test2, Me)
                                     calcT = tmp2(4)
                                     Test2 = calcT
                                     prevkid = tmp1(6)
@@ -4741,23 +4799,14 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                             i = i + 1
 
-                        Loop Until (i - 1) * dx >= 1
+                        Loop Until i > StepCount
                     End If
 
                     If MyFlash.AlgoType = Enums.FlashMethod.Nested_Loops_SVLLE Then
                         DirectCast(MyFlash, NestedLoopsSVLLE).ClearEstimates()
                     End If
 
-                    If LLE And Not TypeOf MyFlash Is Auxiliary.FlashAlgorithms.NestedLoopsSLE Then
-
-                        If Not TypeOf MyFlash Is Auxiliary.FlashAlgorithms.NestedLoops3PV3 And
-                            Not TypeOf MyFlash Is Auxiliary.FlashAlgorithms.GibbsMinimization3P And
-                            Not TypeOf MyFlash Is Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P And
-                            Not TypeOf MyFlash Is Auxiliary.FlashAlgorithms.NestedLoopsSVLLE Then
-
-                            Throw New Exception(Calculator.GetLocalString("UnsuitableFlashAlgorithmSelected"))
-
-                        End If
+                    If LLE Then
 
                         If MyFlash.AlgoType = Enums.FlashMethod.Nested_Loops_SVLLE Then
                             DirectCast(MyFlash, NestedLoopsSVLLE).ClearEstimates()
@@ -4771,11 +4820,11 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                             tf = MathEx.Common.Max(Me.RET_VTF())
                             If tf = 0.0# Then tf = ti * 0.7
 
-                            For i = 0 To 25
-                                tit = tf + (ti - tf) / 25 * i
-                                If bw IsNot Nothing Then If bw.CancellationPending Then Exit For Else bw.ReportProgress(0, "LLE (" & i + 1 & "/25)")
+                            For i = 0 To 50
+                                tit = tf + (ti - tf) / 50 * i
+                                If bw IsNot Nothing Then If bw.CancellationPending Then Exit For Else bw.ReportProgress(0, "LLE (" & i + 1 & "/50)")
                                 Try
-                                    result = MyFlash.Flash_PT(New Double() {uim * dx, 1 - uim * dx}, P, tit, Me)
+                                    result = MyFlash.Flash_PT(New Double() {uim * dx + MinX, 1 - uim * dx - MinX}, P, tit, Me)
                                     If result(5) > 0.0# Then
                                         If Abs(result(2)(0) - result(6)(0)) > 0.01 Then
                                             px1l1.Add(result(2)(0))
@@ -4850,29 +4899,28 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                         i = 0
                         Do
-                            If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "SLE 1 (" & i + 1 & "/42)")
+                            x = MinX + i * dx
+                            If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "SLE 1 (" & i + 1 & "/" & StepCount + 1 & ")")
                             Try
-                                tmp1 = nlsle.Flash_PSF(New Double() {i * dx, 1 - i * dx}, P, L1, 0, Me)
+                                tmp1 = nlsle.Flash_PSF(New Double() {x, 1 - x}, P, L1, 0, Me)
                                 y1 = tmp1(4)
-                                x = i * dx
                                 pxs1.Add(x)
                                 pys1.Add(y1)
                             Catch ex As Exception
                                 SharedClasses.ExceptionProcessing.ExceptionParser.ProcessAndDisplayException(Flowsheet, ex)
                             End Try
                             i = i + 1
-                        Loop Until (i - 1) * dx >= 1
+                        Loop Until i > StepCount
 
                         i = 0
                         Do
-                            If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "SLE 2 (" & i + 1 & "/42)")
+                            x = MinX + i * dx
+                            If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "SLE 2 (" & i + 1 & "/" & StepCount + 1 & ")")
                             Try
-                                If i = 0 Then
+                                If x = 0 Then
                                     x = 0.001
-                                ElseIf i * dx = 1 Then
+                                ElseIf x = 1 Then
                                     x = 0.999
-                                Else
-                                    x = i * dx
                                 End If
                                 tmp1 = nlsle.Flash_PSF(New Double() {x, 1 - x}, P, L2, 0, Me)
                                 y2 = tmp1(4)
@@ -4883,7 +4931,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 SharedClasses.ExceptionProcessing.ExceptionParser.ProcessAndDisplayException(Flowsheet, ex)
                             End Try
                             i = i + 1
-                        Loop Until (i - 1) * dx >= 1
+                        Loop Until i > StepCount
                     End If
 
                     If Critical Then
@@ -4895,33 +4943,34 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                         i = 0
                         Do
-                            If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "Critical (" & i + 1 & "/42)")
+                            x = MinX + i * dx
+                            If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "Critical (" & i + 1 & "/" & StepCount + 1 & ")")
                             Try
                                 If TypeOf Me Is PengRobinsonPropertyPackage Then
-                                    If i = 0 Or (i * dx) >= 1 Then
+                                    If x = 0 Or x >= 1 Then
                                         Dim Tc As Double() = Me.RET_VTC
-                                        TCR = (i * dx) * Tc(0) + (1 - i * dx) * Tc(1)
+                                        TCR = x * Tc(0) + (1 - x) * Tc(1)
                                         PCR = 0.0#
                                         VCR = 0.0#
                                         CP.Clear()
                                         CP.Add(New Double() {TCR, PCR, VCR})
                                     Else
-                                        CP = cpc.CRITPT_PR(New Double() {i * dx, 1 - i * dx}, Me.RET_VTC, Me.RET_VPC, Me.RET_VVC, Me.RET_VW, Me.RET_VKij)
+                                        CP = cpc.CRITPT_PR(New Double() {x, 1 - x}, Me.RET_VTC, Me.RET_VPC, Me.RET_VVC, Me.RET_VW, Me.RET_VKij)
                                     End If
                                 ElseIf TypeOf Me Is SRKPropertyPackage Then
-                                    If i = 0 Or (i * dx) >= 1 Then
+                                    If x = 0 Or x >= 1 Then
                                         Dim Tc As Double() = Me.RET_VTC
-                                        TCR = (i * dx) * Tc(0) + (1 - i * dx) * Tc(1)
+                                        TCR = x * Tc(0) + (1 - x) * Tc(1)
                                         PCR = 0.0#
                                         VCR = 0.0#
                                         CP.Clear()
                                         CP.Add(New Double() {TCR, PCR, VCR})
                                     Else
-                                        CP = cpcs.CRITPT_PR(New Double() {i * dx, 1 - i * dx}, Me.RET_VTC, Me.RET_VPC, Me.RET_VVC, Me.RET_VW, Me.RET_VKij)
+                                        CP = cpcs.CRITPT_PR(New Double() {x, 1 - x}, Me.RET_VTC, Me.RET_VPC, Me.RET_VVC, Me.RET_VW, Me.RET_VKij)
                                     End If
                                 Else
                                     Dim Tc As Double() = Me.RET_VTC
-                                    TCR = (i * dx) * Tc(0) + (1 - i * dx) * Tc(1)
+                                    TCR = x * Tc(0) + (1 - x) * Tc(1)
                                     PCR = 0.0#
                                     VCR = 0.0#
                                     CP.Clear()
@@ -4932,7 +4981,6 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                     TCR = cp0(0)
                                     PCR = cp0(1)
                                     VCR = cp0(2)
-                                    x = i * dx
                                     pxc.Add(x)
                                     pyc.Add(TCR)
                                 End If
@@ -4940,7 +4988,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 SharedClasses.ExceptionProcessing.ExceptionParser.ProcessAndDisplayException(Flowsheet, ex)
                             End Try
                             i = i + 1
-                        Loop Until (i - 1) * dx >= 1
+                        Loop Until i > StepCount
                     End If
 
                     Return New Object() {px, py1, py2, px1l1, px1l2, py3, pxs1, pys1, pxs2, pys2, pxc, pyc}
@@ -4957,30 +5005,30 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                         i = 0
                         Do
-                            If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "VLE (" & i + 1 & "/42)")
+                            x = MinX + i * dx
+                            If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "VLE (" & i + 1 & "/" & StepCount + 1 & ")")
                             Try
                                 If i = 0 Then
-                                    tmp = Me.FlashBase.Flash_TV(New Double() {i * dx, 1 - i * dx}, T, 0, 0, Me)
+                                    tmp = Me.FlashBase.Flash_TV(New Double() {x, 1 - x}, T, 0, 0, Me)
                                     calcP = tmp(4)
                                     Pest1 = calcP
-                                    tmp = Me.FlashBase.Flash_TV(New Double() {i * dx, 1 - i * dx}, T, 1, 0, Me)
+                                    tmp = Me.FlashBase.Flash_TV(New Double() {x, 1 - x}, T, 1, 0, Me)
                                     y2 = tmp(4)
                                     Pest2 = y2
                                 Else
-                                    tmp = Me.FlashBase.Flash_TV(New Double() {i * dx, 1 - i * dx}, T, 0, Pest1, Me)
+                                    tmp = Me.FlashBase.Flash_TV(New Double() {x, 1 - x}, T, 0, Pest1, Me)
                                     calcP = tmp(4)
                                     Pest1 = calcP
-                                    tmp = Me.FlashBase.Flash_TV(New Double() {i * dx, 1 - i * dx}, T, 1, Pest2, Me)
+                                    tmp = Me.FlashBase.Flash_TV(New Double() {x, 1 - x}, T, 1, Pest2, Me)
                                     y2 = tmp(4)
                                     Pest2 = y2
                                 End If
-                                x = i * dx
                                 y1 = calcP
                                 px.Add(x)
                                 py1.Add(y1)
                                 py2.Add(y2)
                                 'check if liquid phase is stable.
-                                result = Me.FlashBase.Flash_PT(New Double() {i * dx, 1 - i * dx}, calcP * 1.3, T, Me)
+                                result = Me.FlashBase.Flash_PT(New Double() {x, 1 - x}, calcP * 1.3, T, Me)
                                 If result(5) > 0.0# Then
                                     Dim fcl1(1), fcl2(1) As Double
                                     fcl1 = Me.DW_CalcFugCoeff(result(2), T, calcP, State.Liquid)
@@ -4995,7 +5043,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 SharedClasses.ExceptionProcessing.ExceptionParser.ProcessAndDisplayException(Flowsheet, ex)
                             End Try
                             i = i + 1
-                        Loop Until (i - 1) * dx >= 1
+                        Loop Until i > StepCount
 
                         If unstable Then
                             Dim pi, pf, uim As Double, pit As Integer
@@ -5005,7 +5053,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                             i = 0
                             For pit = pi To pf Step (pf - pi) / 10
                                 If bw IsNot Nothing Then If bw.CancellationPending Then Exit For Else bw.ReportProgress(0, "LLE (" & i + 1 & "/28)")
-                                result = Me.FlashBase.Flash_PT(New Double() {uim * dx, 1 - uim * dx}, pit, T, Me)
+                                result = Me.FlashBase.Flash_PT(New Double() {uim * dx + MinX, 1 - uim * dx - MinX}, pit, T, Me)
                                 If result(5) > 0.0# Then
                                     If Abs(result(2)(0) - result(6)(0)) > 0.01 Then
                                         px1l1.Add(result(2)(0))
@@ -5031,25 +5079,25 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     If Not TypeOf Me.FlashBase Is Auxiliary.FlashAlgorithms.NestedLoopsSLE Then
                         i = 0
                         Do
-                            If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "VLE (" & i + 1 & "/42)")
+                            x = MinX + i * dx
+                            If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "VLE (" & i + 1 & StepCount + 1 & ")")
                             Try
                                 If i = 0 Then
-                                    tmp = Me.FlashBase.Flash_PV(New Double() {i * dx, 1 - i * dx}, P, 0, 0, Me)
+                                    tmp = Me.FlashBase.Flash_PV(New Double() {x, 1 - x}, P, 0, 0, Me)
                                     calcT = tmp(4)
                                     Test1 = calcT
                                 Else
-                                    tmp = Me.FlashBase.Flash_PV(New Double() {i * dx, 1 - i * dx}, P, 0, Test1, Me)
+                                    tmp = Me.FlashBase.Flash_PV(New Double() {x, 1 - x}, P, 0, Test1, Me)
                                     calcT = tmp(4)
                                     Test1 = calcT
                                 End If
-                                x = i * dx
                                 y = tmp(3)(0)
                                 px.Add(x)
                                 py.Add(y)
                             Catch ex As Exception
                             End Try
                             i = i + 1
-                        Loop Until (i - 1) * dx >= 1
+                        Loop Until i > StepCount
                     End If
 
                     Return New Object() {px, py}
@@ -5065,25 +5113,25 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     If Not TypeOf Me.FlashBase Is Auxiliary.FlashAlgorithms.NestedLoopsSLE Then
                         i = 0
                         Do
-                            If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "VLE (" & i + 1 & "/42)")
+                            x = MinX + i * dx
+                            If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "VLE (" & i + 1 & StepCount + 1 & ")")
                             Try
                                 If i = 0 Then
-                                    tmp = Me.FlashBase.Flash_TV(New Double() {i * dx, 1 - i * dx}, T, 0, 0, Me)
+                                    tmp = Me.FlashBase.Flash_TV(New Double() {x, 1 - x}, T, 0, 0, Me)
                                     calcP = tmp(4)
                                     Pest1 = calcP
                                 Else
-                                    tmp = Me.FlashBase.Flash_TV(New Double() {i * dx, 1 - i * dx}, T, 0, Pest1, Me)
+                                    tmp = Me.FlashBase.Flash_TV(New Double() {x, 1 - x}, T, 0, Pest1, Me)
                                     calcP = tmp(4)
                                     Pest1 = calcP
                                 End If
-                                x = i * dx
                                 y = tmp(3)(0)
                                 px.Add(x)
                                 py.Add(y)
                             Catch ex As Exception
                             End Try
                             i = i + 1
-                        Loop Until (i - 1) * dx >= 1
+                        Loop Until i > StepCount
                     End If
 
                     Return New Object() {px, py}
@@ -5637,6 +5685,20 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
         End Function
 
+        Public Function AUX_PVAPM(ByVal Phase As Phase, ByVal T As Double) As Double
+
+            Dim val As Double = 0
+            Dim subst As Interfaces.ICompound
+
+            For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
+                val += subst.MoleFraction.GetValueOrDefault * Me.AUX_PVAPi(subst.Name, T)
+            Next
+
+            Return val
+
+        End Function
+
+
         Public Function AUX_KIJ(ByVal sub1 As String, ByVal sub2 As String) As Double
 
             Dim Vc1 As Double = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Volume
@@ -5839,6 +5901,21 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
         End Function
 
+        Public Overridable Function AUX_GFm25(ByVal Phase As Phase) As Double
+
+            Dim val As Double
+            Dim subst As Interfaces.ICompound
+
+            For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
+                val += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.IG_Gibbs_Energy_of_Formation_25C * subst.ConstantProperties.Molar_Weight
+            Next
+
+            Dim mw As Double = Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Properties.molecularWeight.GetValueOrDefault
+
+            If mw <> 0.0# Then Return val / mw Else Return 0.0#
+
+        End Function
+
         Public Overridable Function AUX_HFm25(ByVal Phase As Phase) As Double
 
             Dim val As Double
@@ -5864,6 +5941,57 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             Next
 
             Dim mw As Double = Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Properties.molecularWeight.GetValueOrDefault
+
+            If mw <> 0.0# Then Return val / mw Else Return 0.0#
+
+        End Function
+
+
+        Public Overridable Function AUX_GFm25(ByVal Vx As Double()) As Double
+
+            Dim val As Double
+            Dim subst As Interfaces.ICompound
+
+            Dim i As Integer = 0
+            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                val += Vx(i) * subst.ConstantProperties.IG_Gibbs_Energy_of_Formation_25C * subst.ConstantProperties.Molar_Weight
+                i += 1
+            Next
+
+            Dim mw As Double = AUX_MMM(Vx)
+
+            If mw <> 0.0# Then Return val / mw Else Return 0.0#
+
+        End Function
+
+        Public Overridable Function AUX_HFm25(ByVal Vx As Double()) As Double
+
+            Dim val As Double
+            Dim subst As Interfaces.ICompound
+
+            Dim i As Integer = 0
+            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                val += Vx(i) * subst.ConstantProperties.IG_Enthalpy_of_Formation_25C * subst.ConstantProperties.Molar_Weight
+                i += 1
+            Next
+
+            Dim mw As Double = AUX_MMM(Vx)
+
+            If mw <> 0.0# Then Return val / mw Else Return 0.0#
+
+        End Function
+
+        Public Overridable Function AUX_SFm25(ByVal Vx As Double()) As Double
+
+            Dim val As Double
+            Dim subst As Interfaces.ICompound
+
+            Dim i As Integer = 0
+            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                val += Vx(i) * (subst.ConstantProperties.IG_Enthalpy_of_Formation_25C - subst.ConstantProperties.IG_Gibbs_Energy_of_Formation_25C) / 298.15 * subst.ConstantProperties.Molar_Weight
+            Next
+
+            Dim mw As Double = AUX_MMM(Vx)
 
             If mw <> 0.0# Then Return val / mw Else Return 0.0#
 
@@ -6866,7 +6994,7 @@ Final3:
 
             Dim val As Double
 
-            If cprop.OriginalDB = "ChemSep" Or (cprop.OriginalDB = "User" And cprop.SolidDensityEquation <> "") Then
+            If cprop.OriginalDB = "ChemSep" Or (cprop.OriginalDB = "User" And cprop.SolidHeatCapacityEquation <> "") Then
                 Dim A, B, C, D, E, result As Double
                 Dim eqno As String = cprop.SolidHeatCapacityEquation
                 Dim mw As Double = cprop.Molar_Weight
@@ -8925,39 +9053,43 @@ Final3:
         ''' determine which is undefined.</remarks>
         Public Overridable Function GetCompoundConstant(ByVal props As Object, ByVal compIds As Object) As Object Implements ICapeThermoCompounds.GetCompoundConstant
             Dim vals As New ArrayList
-            For Each s As String In compIds
-                Dim c As Interfaces.ICompound = Me.CurrentMaterialStream.Phases(0).Compounds(s)
-                For Each p As String In props
-                    Select Case p.ToLower
-                        Case "molecularweight"
-                            vals.Add(c.ConstantProperties.Molar_Weight)
-                        Case "criticaltemperature"
-                            vals.Add(c.ConstantProperties.Critical_Temperature)
-                        Case "criticalpressure"
-                            vals.Add(c.ConstantProperties.Critical_Pressure)
-                        Case "criticalvolume"
-                            vals.Add(c.ConstantProperties.Critical_Volume / 1000)
-                        Case "criticalcompressibilityfactor"
-                            vals.Add(c.ConstantProperties.Critical_Compressibility)
-                        Case "acentricfactor"
-                            vals.Add(c.ConstantProperties.Acentric_Factor)
-                        Case "normalboilingpoint"
-                            vals.Add(c.ConstantProperties.Normal_Boiling_Point)
-                        Case "idealgasgibbsfreeenergyofformationat25c"
-                            vals.Add(c.ConstantProperties.IG_Gibbs_Energy_of_Formation_25C * c.ConstantProperties.Molar_Weight)
-                        Case "idealgasenthalpyofformationat25c"
-                            vals.Add(c.ConstantProperties.IG_Enthalpy_of_Formation_25C * c.ConstantProperties.Molar_Weight)
-                        Case "casregistrynumber"
-                            vals.Add(c.ConstantProperties.CAS_Number)
-                        Case "chemicalformula", "structureformula"
-                            vals.Add(c.ConstantProperties.Formula)
-                        Case "triplepointtemperature"
-                            vals.Add(c.ConstantProperties.TemperatureOfFusion)
-                        Case Else
-                            vals.Add(Double.MinValue)
-                    End Select
+            If props(0).ToString().ToLower() = "charge" And compIds Is Nothing Then
+                vals.Add(0.0)
+            Else
+                For Each s As String In compIds
+                    Dim c As Interfaces.ICompound = Me.CurrentMaterialStream.Phases(0).Compounds(s)
+                    For Each p As String In props
+                        Select Case p.ToLower
+                            Case "molecularweight"
+                                vals.Add(c.ConstantProperties.Molar_Weight)
+                            Case "criticaltemperature"
+                                vals.Add(c.ConstantProperties.Critical_Temperature)
+                            Case "criticalpressure"
+                                vals.Add(c.ConstantProperties.Critical_Pressure)
+                            Case "criticalvolume"
+                                vals.Add(c.ConstantProperties.Critical_Volume / 1000)
+                            Case "criticalcompressibilityfactor"
+                                vals.Add(c.ConstantProperties.Critical_Compressibility)
+                            Case "acentricfactor"
+                                vals.Add(c.ConstantProperties.Acentric_Factor)
+                            Case "normalboilingpoint"
+                                vals.Add(c.ConstantProperties.Normal_Boiling_Point)
+                            Case "idealgasgibbsfreeenergyofformationat25c"
+                                vals.Add(c.ConstantProperties.IG_Gibbs_Energy_of_Formation_25C * c.ConstantProperties.Molar_Weight)
+                            Case "idealgasenthalpyofformationat25c"
+                                vals.Add(c.ConstantProperties.IG_Enthalpy_of_Formation_25C * c.ConstantProperties.Molar_Weight)
+                            Case "casregistrynumber"
+                                vals.Add(c.ConstantProperties.CAS_Number)
+                            Case "chemicalformula", "structureformula"
+                                vals.Add(c.ConstantProperties.Formula)
+                            Case "triplepointtemperature"
+                                vals.Add(c.ConstantProperties.TemperatureOfFusion)
+                            Case Else
+                                vals.Add(Double.MinValue)
+                        End Select
+                    Next
                 Next
-            Next
+            End If
             Dim arr2(vals.Count - 1) As Object
             Array.Copy(vals.ToArray, arr2, vals.Count)
             Return arr2
@@ -9502,9 +9634,38 @@ Final3:
                 For Each pi As PhaseInfo In Me.PhaseMappings.Values
                     If phaseLabel = pi.PhaseLabel Then
                         For Each p As String In props
-                            Me.DW_CalcProp(p, pi.DWPhaseID)
+                            Select Case p
+                                Case "partialpressure"
+                                Case "enthalpyF.Dmoles"
+                                    Dim st As State
+                                    Select Case pi.DWPhaseID
+                                        Case Phase.Aqueous, Phase.Liquid, Phase.Liquid1, Phase.Liquid2, Phase.Liquid3
+                                            st = State.Liquid
+                                        Case Phase.Vapor
+                                            st = State.Vapor
+                                        Case Phase.Solid
+                                            st = State.Solid
+                                    End Select
+                                    Dim ms = DirectCast(Me.CurrentMaterialStream, MaterialStream)
+                                    Dim cres = DW_CalcEnthalpyDmoles(ms.GetPhaseComposition(pi.DWPhaseIndex), ms.GetTemperature, ms.GetPressure, st)
+                                    Me.CurrentMaterialStream.SetSinglePhaseProp(p, phaseLabel, "", cres)
+                                Case "entropyF.Dmoles"
+                                    Dim st As State
+                                    Select Case pi.DWPhaseID
+                                        Case Phase.Aqueous, Phase.Liquid, Phase.Liquid1, Phase.Liquid2, Phase.Liquid3
+                                            st = State.Liquid
+                                        Case Phase.Vapor
+                                            st = State.Vapor
+                                        Case Phase.Solid
+                                            st = State.Solid
+                                    End Select
+                                    Dim ms = DirectCast(Me.CurrentMaterialStream, MaterialStream)
+                                    Dim cres = DW_CalcEntropyDmoles(ms.GetPhaseComposition(pi.DWPhaseIndex), ms.GetTemperature, ms.GetPressure, st)
+                                    Me.CurrentMaterialStream.SetSinglePhaseProp(p, phaseLabel, "", cres)
+                                Case Else
+                                    Me.DW_CalcProp(p, pi.DWPhaseID)
+                            End Select
                         Next
-                        'Me.DW_CalcPhaseProps(pi.DWPhaseID)
                         Exit For
                     End If
                 Next
@@ -9533,6 +9694,7 @@ Final3:
 
                 Dim f As Integer = -1
                 Dim phs As PropertyPackages.Phase
+                Dim st As State
                 Select Case phaseLabel.ToLower
                     Case "overall"
                         f = 0
@@ -9545,6 +9707,15 @@ Final3:
                                 Exit For
                             End If
                         Next
+                End Select
+
+                Select Case phs
+                    Case Phase.Aqueous, Phase.Liquid, Phase.Liquid1, Phase.Liquid2, Phase.Liquid3
+                        st = State.Liquid
+                    Case Phase.Vapor
+                        st = State.Vapor
+                    Case Phase.Solid
+                        st = State.Solid
                 End Select
 
                 If f = -1 Then
@@ -9823,6 +9994,30 @@ Final3:
                                 res.Add(Me.CurrentMaterialStream.Phases(f).Compounds(c).MolarFlow.GetValueOrDefault / Me.CurrentMaterialStream.Phases(f).Properties.volumetric_flow.GetValueOrDefault)
                             Next
                             basis = ""
+                        Case "partialpressure"
+                            For Each c As String In comps
+                                res.Add(Me.CurrentMaterialStream.Phases(f).Compounds(c).MoleFraction.GetValueOrDefault *
+                                        Me.CurrentMaterialStream.Phases(f).Compounds(c).FugacityCoeff.GetValueOrDefault * P)
+                            Next
+                            basis = ""
+                        Case "enthalpyf.dmoles"
+                            Dim val = Me.CurrentMaterialStream.Phases(f).Properties.molecularWeight.GetValueOrDefault
+                            Dim cres = DW_CalcEnthalpyDmoles(Vx, T, P, st)
+                            Select Case basis
+                                Case "Molar", "molar", "mole", "Mole"
+                                    res.Add(cres.MultiplyConstY(val))
+                                Case "Mass", "mass"
+                                    res.Add(cres.MultiplyConstY(1000))
+                            End Select
+                        Case "entropyf.dmoles"
+                            Dim val = Me.CurrentMaterialStream.Phases(f).Properties.molecularWeight.GetValueOrDefault
+                            Dim cres = DW_CalcEntropyDmoles(Vx, T, P, st)
+                            Select Case basis
+                                Case "Molar", "molar", "mole", "Mole"
+                                    res.Add(cres.MultiplyConstY(val))
+                                Case "Mass", "mass"
+                                    res.Add(cres.MultiplyConstY(1000))
+                            End Select
                         Case "phasefraction"
                             Select Case basis
                                 Case "Molar", "molar", "mole", "Mole"
@@ -10022,6 +10217,10 @@ Final3:
                 .Add("heatCapacityCv")
                 .Add("enthalpy")
                 .Add("entropy")
+                .Add("enthalpyF")
+                .Add("enthalpyF.Dmoles")
+                .Add("entropyF")
+                .Add("entropyF.Dmoles")
                 .Add("internalEnergy")
                 .Add("helmholtzEnergy")
                 .Add("gibbsEnergy")
@@ -11318,7 +11517,15 @@ Final3:
                             Dim dic As New Dictionary(Of String, Auxiliary.PR_IPData)
                             dic.Add(xel.@Compound2, ip)
                             If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
-                                pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                                If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound2) Then
+                                    pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                                Else
+                                    If Not pp.m_pr.InteractionParameters(xel.@Compound2).ContainsKey(xel.@Compound1) Then
+                                        pp.m_pr.InteractionParameters(xel.@Compound2).Add(xel.@Compound1, ip)
+                                    Else
+                                        pp.m_pr.InteractionParameters(xel.@Compound2)(xel.@Compound1) = ip
+                                    End If
+                                End If
                             Else
                                 If Not pp.m_pr.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
                                     pp.m_pr.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
@@ -11340,7 +11547,15 @@ Final3:
                         Dim dic As New Dictionary(Of String, Auxiliary.PRSV2_IPData)
                         dic.Add(xel.@Compound2, ip)
                         If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
-                            pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                            If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound2) Then
+                                pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                            Else
+                                If Not pp.m_pr.InteractionParameters(xel.@Compound2).ContainsKey(xel.@Compound1) Then
+                                    pp.m_pr.InteractionParameters(xel.@Compound2).Add(xel.@Compound1, ip)
+                                Else
+                                    pp.m_pr.InteractionParameters(xel.@Compound2)(xel.@Compound1) = ip
+                                End If
+                            End If
                         Else
                             If Not pp.m_pr.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
                                 pp.m_pr.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
@@ -11359,7 +11574,15 @@ Final3:
                         Dim dic As New Dictionary(Of String, Auxiliary.PRSV2_IPData)
                         dic.Add(xel.@Compound2, ip)
                         If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
-                            pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                            If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound2) Then
+                                pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                            Else
+                                If Not pp.m_pr.InteractionParameters(xel.@Compound2).ContainsKey(xel.@Compound1) Then
+                                    pp.m_pr.InteractionParameters(xel.@Compound2).Add(xel.@Compound1, ip)
+                                Else
+                                    pp.m_pr.InteractionParameters(xel.@Compound2)(xel.@Compound1) = ip
+                                End If
+                            End If
                         Else
                             If Not pp.m_pr.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
                                 pp.m_pr.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
@@ -11379,7 +11602,15 @@ Final3:
                             Dim dic As New Dictionary(Of String, Auxiliary.PR_IPData)
                             dic.Add(xel.@Compound2, ip)
                             If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
-                                pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                                If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound2) Then
+                                    pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                                Else
+                                    If Not pp.m_pr.InteractionParameters(xel.@Compound2).ContainsKey(xel.@Compound1) Then
+                                        pp.m_pr.InteractionParameters(xel.@Compound2).Add(xel.@Compound1, ip)
+                                    Else
+                                        pp.m_pr.InteractionParameters(xel.@Compound2)(xel.@Compound1) = ip
+                                    End If
+                                End If
                             Else
                                 If Not pp.m_pr.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
                                     pp.m_pr.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
@@ -11401,7 +11632,15 @@ Final3:
                         Dim dic As New Dictionary(Of String, Auxiliary.PR_IPData)
                         dic.Add(xel.@Compound2, ip)
                         If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
-                            pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                            If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound2) Then
+                                pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                            Else
+                                If Not pp.m_pr.InteractionParameters(xel.@Compound2).ContainsKey(xel.@Compound1) Then
+                                    pp.m_pr.InteractionParameters(xel.@Compound2).Add(xel.@Compound1, ip)
+                                Else
+                                    pp.m_pr.InteractionParameters(xel.@Compound2)(xel.@Compound1) = ip
+                                End If
+                            End If
                         Else
                             If Not pp.m_pr.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
                                 pp.m_pr.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
@@ -11421,7 +11660,15 @@ Final3:
                         Dim dic As New Dictionary(Of String, Auxiliary.PR_IPData)
                         dic.Add(xel.@Compound2, ip)
                         If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
-                            pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                            If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound2) Then
+                                pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                            Else
+                                If Not pp.m_pr.InteractionParameters(xel.@Compound2).ContainsKey(xel.@Compound1) Then
+                                    pp.m_pr.InteractionParameters(xel.@Compound2).Add(xel.@Compound1, ip)
+                                Else
+                                    pp.m_pr.InteractionParameters(xel.@Compound2)(xel.@Compound1) = ip
+                                End If
+                            End If
                         Else
                             If Not pp.m_pr.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
                                 pp.m_pr.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
@@ -11440,7 +11687,15 @@ Final3:
                         Dim dic As New Dictionary(Of String, Auxiliary.PR_IPData)
                         dic.Add(xel.@Compound2, ip)
                         If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
-                            pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                            If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound2) Then
+                                pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                            Else
+                                If Not pp.m_pr.InteractionParameters(xel.@Compound2).ContainsKey(xel.@Compound1) Then
+                                    pp.m_pr.InteractionParameters(xel.@Compound2).Add(xel.@Compound1, ip)
+                                Else
+                                    pp.m_pr.InteractionParameters(xel.@Compound2)(xel.@Compound1) = ip
+                                End If
+                            End If
                         Else
                             If Not pp.m_pr.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
                                 pp.m_pr.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
@@ -11460,7 +11715,15 @@ Final3:
                             Dim dic As New Dictionary(Of String, Auxiliary.PR_IPData)
                             dic.Add(xel.@Compound2, ip)
                             If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
-                                pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                                If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound2) Then
+                                    pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                                Else
+                                    If Not pp.m_pr.InteractionParameters(xel.@Compound2).ContainsKey(xel.@Compound1) Then
+                                        pp.m_pr.InteractionParameters(xel.@Compound2).Add(xel.@Compound1, ip)
+                                    Else
+                                        pp.m_pr.InteractionParameters(xel.@Compound2)(xel.@Compound1) = ip
+                                    End If
+                                End If
                             Else
                                 If Not pp.m_pr.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
                                     pp.m_pr.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
@@ -11504,7 +11767,15 @@ Final3:
                             Dim dic As New Dictionary(Of String, Auxiliary.PR_IPData)
                             dic.Add(xel.@Compound2, ip)
                             If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
-                                pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                                If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound2) Then
+                                    pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                                Else
+                                    If Not pp.m_pr.InteractionParameters(xel.@Compound2).ContainsKey(xel.@Compound1) Then
+                                        pp.m_pr.InteractionParameters(xel.@Compound2).Add(xel.@Compound1, ip)
+                                    Else
+                                        pp.m_pr.InteractionParameters(xel.@Compound2)(xel.@Compound1) = ip
+                                    End If
+                                End If
                             Else
                                 If Not pp.m_pr.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
                                     pp.m_pr.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
@@ -11545,7 +11816,15 @@ Final3:
                         Dim dic As New Dictionary(Of String, Auxiliary.PR_IPData)
                         dic.Add(xel.@Compound2, ip)
                         If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
-                            pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                            If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound2) Then
+                                pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                            Else
+                                If Not pp.m_pr.InteractionParameters(xel.@Compound2).ContainsKey(xel.@Compound1) Then
+                                    pp.m_pr.InteractionParameters(xel.@Compound2).Add(xel.@Compound1, ip)
+                                Else
+                                    pp.m_pr.InteractionParameters(xel.@Compound2)(xel.@Compound1) = ip
+                                End If
+                            End If
                         Else
                             If Not pp.m_pr.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
                                 pp.m_pr.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
@@ -11570,7 +11849,15 @@ Final3:
                                 Dim dic As New Dictionary(Of String, Auxiliary.LKP_IPData)
                                 dic.Add(xel.@Compound2, ip)
                                 If Not pp.m_lk.InteractionParameters.ContainsKey(xel.@Compound1) Then
-                                    pp.m_lk.InteractionParameters.Add(xel.@Compound1, dic)
+                                    If Not pp.m_lk.InteractionParameters.ContainsKey(xel.@Compound2) Then
+                                        pp.m_lk.InteractionParameters.Add(xel.@Compound1, dic)
+                                    Else
+                                        If Not pp.m_lk.InteractionParameters(xel.@Compound2).ContainsKey(xel.@Compound1) Then
+                                            pp.m_lk.InteractionParameters(xel.@Compound2).Add(xel.@Compound1, ip)
+                                        Else
+                                            pp.m_lk.InteractionParameters(xel.@Compound2)(xel.@Compound1) = ip
+                                        End If
+                                    End If
                                 Else
                                     If Not pp.m_lk.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
                                         pp.m_lk.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)

@@ -134,7 +134,7 @@
     <value>481, 13</value>
   </data>
   <data name="LabelLicense.Text" xml:space="preserve">
-    <value>DWSIM wird zu den Bedingungen der GNU General Public License (GPL) version 3 herausgegeben:</value>
+    <value>DWSIM wird zu den Bedingungen der GNU Lesser General Public License (GPL) version 3 herausgegeben:</value>
   </data>
   <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 13</value>

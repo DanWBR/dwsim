@@ -28,6 +28,7 @@ Partial Class FormReportConfig
         Me.KButton5 = New System.Windows.Forms.Button()
         Me.KButton7 = New System.Windows.Forms.Button()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.CheckBox9 = New System.Windows.Forms.CheckBox()
         Me.CheckBox8 = New System.Windows.Forms.CheckBox()
         Me.CheckBox7 = New System.Windows.Forms.CheckBox()
         Me.CheckBox6 = New System.Windows.Forms.CheckBox()
@@ -51,10 +52,10 @@ Partial Class FormReportConfig
         '
         'GroupBox3
         '
+        resources.ApplyResources(Me.GroupBox3, "GroupBox3")
         Me.GroupBox3.Controls.Add(Me.KButton4)
         Me.GroupBox3.Controls.Add(Me.KButton5)
         Me.GroupBox3.Controls.Add(Me.KButton7)
-        resources.ApplyResources(Me.GroupBox3, "GroupBox3")
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.TabStop = False
         '
@@ -75,6 +76,8 @@ Partial Class FormReportConfig
         '
         'GroupBox4
         '
+        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
+        Me.GroupBox4.Controls.Add(Me.CheckBox9)
         Me.GroupBox4.Controls.Add(Me.CheckBox8)
         Me.GroupBox4.Controls.Add(Me.CheckBox7)
         Me.GroupBox4.Controls.Add(Me.CheckBox6)
@@ -83,9 +86,13 @@ Partial Class FormReportConfig
         Me.GroupBox4.Controls.Add(Me.CheckBox3)
         Me.GroupBox4.Controls.Add(Me.CheckBox2)
         Me.GroupBox4.Controls.Add(Me.CheckBox1)
-        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.TabStop = False
+        '
+        'CheckBox9
+        '
+        resources.ApplyResources(Me.CheckBox9, "CheckBox9")
+        Me.CheckBox9.Name = "CheckBox9"
         '
         'CheckBox8
         '
@@ -126,9 +133,9 @@ Partial Class FormReportConfig
         '
         'CheckBox1
         '
+        resources.ApplyResources(Me.CheckBox1, "CheckBox1")
         Me.CheckBox1.Checked = True
         Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
-        resources.ApplyResources(Me.CheckBox1, "CheckBox1")
         Me.CheckBox1.Name = "CheckBox1"
         '
         'SaveFileDialog1
@@ -140,8 +147,8 @@ Partial Class FormReportConfig
         '
         'TreeViewObj
         '
-        Me.TreeViewObj.CheckBoxes = True
         resources.ApplyResources(Me.TreeViewObj, "TreeViewObj")
+        Me.TreeViewObj.CheckBoxes = True
         Me.TreeViewObj.FullRowSelect = True
         Me.TreeViewObj.HideSelection = False
         Me.TreeViewObj.Name = "TreeViewObj"
@@ -170,17 +177,17 @@ Partial Class FormReportConfig
         '
         'GroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.TreeViewObj)
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.TreeViewObj)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
         '
         'GroupBox5
         '
+        resources.ApplyResources(Me.GroupBox5, "GroupBox5")
         Me.GroupBox5.Controls.Add(Me.ListView1)
         Me.GroupBox5.Controls.Add(Me.Button2)
         Me.GroupBox5.Controls.Add(Me.Button1)
-        resources.ApplyResources(Me.GroupBox5, "GroupBox5")
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.TabStop = False
         '
@@ -226,4 +233,5 @@ Partial Class FormReportConfig
     Public WithEvents CheckBox6 As System.Windows.Forms.CheckBox
     Public WithEvents CheckBox5 As System.Windows.Forms.CheckBox
     Public WithEvents CheckBox4 As System.Windows.Forms.CheckBox
+    Public WithEvents CheckBox9 As CheckBox
 End Class

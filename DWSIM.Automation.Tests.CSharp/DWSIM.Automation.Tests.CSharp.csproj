@@ -35,7 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>Test2</StartupObject>
+    <StartupObject>Test3</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CapeOpen">
@@ -55,6 +55,7 @@
     <Compile Include="Test2.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Test3.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -63,7 +64,6 @@
     <ProjectReference Include="..\DWSIM.Automation\DWSIM.Automation.csproj">
       <Project>{4bb36089-89f6-4bbf-a39c-1d0a3f232f07}</Project>
       <Name>DWSIM.Automation</Name>
-      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.GlobalSettings\DWSIM.GlobalSettings.vbproj">
       <Project>{725c8134-9fe3-43aa-9b33-d9046657fb2a}</Project>

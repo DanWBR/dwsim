@@ -4,16 +4,16 @@
 '    This file is part of DWSIM.
 '
 '    DWSIM is free software: you can redistribute it and/or modify
-'    it under the terms of the GNU General Public License as published by
+'    it under the terms of the GNU Lesser General Public License as published by
 '    the Free Software Foundation, either version 3 of the License, or
 '    (at your option) any later version.
 '
 '    DWSIM is distributed in the hope that it will be useful,
 '    but WITHOUT ANY WARRANTY; without even the implied warranty of
 '    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'    GNU General Public License for more details.
+'    GNU Lesser General Public License for more details.
 '
-'    You should have received a copy of the GNU General Public License
+'    You should have received a copy of the GNU Lesser General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports DWSIM.MathOps.MathEx
@@ -317,17 +317,47 @@ Namespace UnitOperations.Auxiliary.SepOps
         Private _liqmolflows As New List(Of Parameter)
         Private _vapmolflows As New List(Of Parameter)
 
-        Public Function Validate() As Boolean
+        Public Function ValidateTemperatures() As Boolean
 
             If _stagetemps.Count = 0 Then Return False
-            If _vapmolflows.Count = 0 Then Return False
-            If _liqmolflows.Count = 0 Then Return False
-            If _liqcompositions.Count = 0 Then Return False
-            If _vapcompositions.Count = 0 Then Return False
 
             If _stagetemps.Select(Function(x) x.Value).ToArray().Sum = 0.0 Then Return False
+
+            Return True
+
+        End Function
+
+        Public Function ValidateVaporFlows() As Boolean
+
+            If _vapmolflows.Count = 0 Then Return False
+
             If _vapmolflows.Select(Function(x) x.Value).ToArray().Sum = 0.0 Then Return False
+
+            Return True
+
+        End Function
+
+        Public Function ValidateLiquidFlows() As Boolean
+
+            If _liqmolflows.Count = 0 Then Return False
+
             If _liqmolflows.Select(Function(x) x.Value).ToArray().Sum = 0.0 Then Return False
+
+            Return True
+
+        End Function
+
+        Public Function ValidateCompositions() As Boolean
+
+            If _liqcompositions.Select(Function(x) x.Values.Select(Function(x2) x2.Value).Sum).Sum = 0.0 Then
+                Return False
+            End If
+            If _vapcompositions.Select(Function(x) x.Values.Select(Function(x2) x2.Value).Sum).Sum = 0.0 Then
+                Return False
+            End If
+
+            If _liqcompositions.Count = 0 Then Return False
+            If _vapcompositions.Count = 0 Then Return False
 
             Return True
 
@@ -1614,6 +1644,100 @@ Namespace UnitOperations
         Private _ie As New InitialEstimates
         Private _autoupdie As Boolean = False
 
+        ''' <summary>
+        ''' Set the number of stages (n > 3)
+        ''' </summary>
+        ''' <param name="n"></param>
+        Public Sub SetNumberOfStages(n As Integer)
+
+            If n <= 3 Then Throw New Exception("Invalid number of stages")
+
+            NumberOfStages = n
+
+            Dim ne As Integer = NumberOfStages
+
+            Dim nep As Integer = Stages.Count
+
+            Dim dif As Integer = ne - nep
+
+            If dif < 0 Then
+                Stages.RemoveRange(nep + dif - 1, -dif)
+                With InitialEstimates
+                    .LiqCompositions.RemoveRange(nep + dif - 1, -dif)
+                    .VapCompositions.RemoveRange(nep + dif - 1, -dif)
+                    .LiqMolarFlows.RemoveRange(nep + dif - 1, -dif)
+                    .VapMolarFlows.RemoveRange(nep + dif - 1, -dif)
+                    .StageTemps.RemoveRange(nep + dif - 1, -dif)
+                End With
+            ElseIf dif > 0 Then
+                Dim i As Integer
+                For i = 1 To dif
+                    Stages.Insert(Stages.Count - 1, New Stage(Guid.NewGuid().ToString))
+                    Stages(Stages.Count - 2).Name = "Stage_" & Stages.Count - 2
+                    With InitialEstimates
+                        Dim d As New Dictionary(Of String, Parameter)
+                        For Each cp In FlowSheet.SelectedCompounds.Values
+                            d.Add(cp.Name, New Parameter)
+                        Next
+                        .LiqCompositions.Insert(.LiqCompositions.Count - 1, d)
+                        .VapCompositions.Insert(.VapCompositions.Count - 1, d)
+                        .LiqMolarFlows.Insert(.LiqMolarFlows.Count - 1, New Parameter)
+                        .VapMolarFlows.Insert(.VapMolarFlows.Count - 1, New Parameter)
+                        .StageTemps.Insert(.StageTemps.Count - 1, New Parameter)
+                    End With
+                Next
+            End If
+
+        End Sub
+
+        ''' <summary>
+        ''' Sets the Stream feed stage.
+        ''' </summary>
+        ''' <param name="streamName">Material Stream ID ('Name') property.</param>
+        ''' <param name="stageIndex">Stage Index (0 = condenser)</param>
+        Public Sub SetStreamFeedStage(streamName As String, stageIndex As Integer)
+
+            Dim si = MaterialStreams.Where(Function(s) s.Value.StreamID = streamName).FirstOrDefault()
+            si.Value.AssociatedStage = Stages(stageIndex).ID
+
+        End Sub
+
+        ''' <summary>
+        ''' Sets the Stream feed stage.
+        ''' </summary>
+        ''' <param name="streamName">Material Stream ID ('Name') property.</param>
+        ''' <param name="stageID">Stage ID (unique ID)</param>
+        Public Sub SetStreamFeedStage(streamName As String, stageID As String)
+
+            Dim si = MaterialStreams.Where(Function(s) s.Value.StreamID = streamName).FirstOrDefault()
+            si.Value.AssociatedStage = stageID
+
+        End Sub
+
+        ''' <summary>
+        ''' Sets the Stream feed stage.
+        ''' </summary>
+        ''' <param name="stream"></param>
+        ''' <param name="stageIndex">Stage Index (0 = condenser)</param>
+        Public Sub SetStreamFeedStage(stream As MaterialStream, stageIndex As Integer)
+
+            Dim si = MaterialStreams.Where(Function(s) s.Value.StreamID = stream.Name).FirstOrDefault()
+            si.Value.AssociatedStage = Stages(stageIndex).ID
+
+        End Sub
+
+        ''' <summary>
+        ''' Sets the Stream feed stage.
+        ''' </summary>
+        ''' <param name="stream"></param>
+        ''' <param name="stageID">Stage ID (unique ID)</param>
+        Public Sub SetStreamFeedStage(stream As MaterialStream, stageID As String)
+
+            Dim si = MaterialStreams.Where(Function(s) s.Value.StreamID = stream.Name).FirstOrDefault()
+            si.Value.AssociatedStage = stageID
+
+        End Sub
+
         Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean
 
             MyBase.LoadData(data)
@@ -2711,12 +2835,12 @@ Namespace UnitOperations
             For Each st As Stage In Me.Stages
                 P(i) = st.P
                 eff(i) = st.Efficiency
-                If Me.UseTemperatureEstimates And InitialEstimates.Validate() Then
+                If Me.UseTemperatureEstimates And InitialEstimates.ValidateTemperatures() Then
                     T(i) = Me.InitialEstimates.StageTemps(i).Value
                 Else
                     T(i) = (T2 - T1) * (i) / ns + T1
                 End If
-                If Me.UseVaporFlowEstimates And InitialEstimates.Validate() Then
+                If Me.UseVaporFlowEstimates And InitialEstimates.ValidateVaporFlows() Then
                     V(i) = Me.InitialEstimates.VapMolarFlows(i).Value
                 Else
                     If i = 0 Then
@@ -2763,7 +2887,7 @@ Namespace UnitOperations
                         End Select
                     End If
                 End If
-                If Me.UseLiquidFlowEstimates And InitialEstimates.Validate() Then
+                If Me.UseLiquidFlowEstimates And InitialEstimates.ValidateLiquidFlows() Then
                     L(i) = Me.InitialEstimates.LiqMolarFlows(i).Value
                 Else
                     If i = 0 Then
@@ -2809,7 +2933,7 @@ Namespace UnitOperations
                         If L(i) = 0 Then L(i) = 0.00001
                     End If
                 End If
-                If Me.UseCompositionEstimates And InitialEstimates.Validate() Then
+                If Me.UseCompositionEstimates And InitialEstimates.ValidateCompositions() Then
                     j = 0
                     For Each par As Parameter In Me.InitialEstimates.LiqCompositions(i).Values
                         x(i)(j) = par.Value
@@ -2821,10 +2945,14 @@ Namespace UnitOperations
                         j = j + 1
                     Next
                     z(i) = zm
-                    Kval(i) = pp.DW_CalcKvalue(x(i), y(i), T(i), P(i), "LL")
+                    Kval(i) = pp.DW_CalcKvalue(x(i), y(i), T(i), P(i))
                 Else
                     IObj?.SetCurrent()
+
                     Dim flashresult As Object = Nothing
+
+                    z(i) = zm
+
                     If rebVx.Sum > 0 And distVx.Sum > 0 Then
                         For j = 0 To nc - 1
                             x(i)(j) = distVx(j) + Convert.ToDouble(i) / Convert.ToDouble(ns) * (rebVx(j) - distVx(j))
@@ -2848,19 +2976,25 @@ Namespace UnitOperations
                         '    Next
                         '    x(i) = x(i).NormalizeY
                         '    y(i) = y(i).NormalizeY
+                        Kval(i) = pp.DW_CalcKvalue(x(i), y(i), T(i), P(i))
                     Else
-                        flashresult = pp.FlashBase.Flash_PT(zm, P(i), T(i), pp)
+                        Kval(i) = pp.DW_CalcKvalue_Ideal_VP(T(i), P(i))
                         For j = 0 To nc - 1
-                            If flashresult(0) = 0.0 Then
-                                x(i)(j) = flashresult(2)(j)
-                            Else
-                                x(i)(j) = (flashresult(0) * flashresult(2)(j) + flashresult(5) * flashresult(6)(j)) / (flashresult(0) + flashresult(5))
-                            End If
+                            x(i)(j) = (L(i) + V(i)) * z(i)(j) / (L(i) + V(i) * Kval(i)(j))
+                            y(i)(j) = Kval(i)(j) * x(i)(j)
                         Next
-                        y(i) = flashresult(3)
+                        x(i) = x(i).NormalizeY()
+                        y(i) = y(i).NormalizeY()
+                        'flashresult = pp.FlashBase.Flash_PT(zm, P(i), T(i), pp)
+                        'For j = 0 To nc - 1
+                        '    If flashresult(0) = 0.0 Then
+                        '        x(i)(j) = flashresult(2)(j)
+                        '    Else
+                        '        x(i)(j) = (flashresult(0) * flashresult(2)(j) + flashresult(5) * flashresult(6)(j)) / (flashresult(0) + flashresult(5))
+                        '    End If
+                        'Next
+                        'y(i) = flashresult(3)
                     End If
-                    z(i) = zm
-                    Kval(i) = pp.DW_CalcKvalue(x(i), y(i), T(i), P(i))
                     If llextractor And pp.AUX_CheckTrivial(Kval(i)) Then
                         Throw New Exception("Your column is configured as a Liquid-Liquid Extractor, but the Property Package / Flash Algorithm set associated with the column is unable to generate an initial estimate for two liquid phases. Please select a different set or change the Flash Algorithm's Stability Analysis parameters and try again.")
                     End If
@@ -4271,8 +4405,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             Dim ic As Integer
             Dim t_error, t_error_ant As Double
-            Dim Tj(ns), Tj_ant(ns) As Double
-            Dim Fj(ns), Lj(ns), Vj(ns), Vj_ant(ns), dVj(ns), xc(ns)(), fcj(ns)(), yc(ns)(), lc(ns)(), vc(ns)(), zc(ns)(), K(ns)() As Double
+            Dim Tj(ns), Tj_ant(ns), dTj(ns) As Double
+            Dim Fj(ns), Lj(ns), Vj(ns), Vj_ant(ns), dVj(ns), xc(ns)(), fcj(ns)(), yc(ns)(), lc(ns)(), vc(ns)(), zc(ns)(), K(ns)(), Kant(ns)() As Double
             Dim Hfj(ns), Hv(ns), Hl(ns) As Double
             Dim VSSj(ns), LSSj(ns) As Double
 
@@ -4306,6 +4440,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Array.Resize(zc(i), nc)
                 Array.Resize(zc(i), nc)
                 Array.Resize(K(i), nc)
+                Array.Resize(Kant(i), nc)
             Next
 
             For i = 0 To ns
@@ -4589,13 +4724,18 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                                                      If IdealK Then
                                                                          Dim tmpvar As Object = ppr.DW_CalcBubT(xc(ipar), P(ipar), Tj(ipar), K(ipar), True)
                                                                          Tj(ipar) = tmpvar(4)
+                                                                         Kant(ipar) = K(ipar)
                                                                          K(ipar) = tmpvar(6)
                                                                      Else
                                                                          Dim tmpvar As Object = pp.DW_CalcBubT(xc(ipar), P(ipar), Tj(ipar), K(ipar), True)
                                                                          Tj(ipar) = tmpvar(4)
+                                                                         Kant(ipar) = K(ipar)
                                                                          K(ipar) = tmpvar(6)
                                                                      End If
-                                                                     If Tj(ipar) < 0 Or Double.IsNaN(Tj(ipar)) Then Tj(ipar) = Tj_ant(ipar)
+                                                                     If Tj(ipar) < 0.0 Or Double.IsNaN(Tj(ipar)) Then
+                                                                         Tj(ipar) = Tj_ant(ipar)
+                                                                         K(ipar) = Kant(ipar)
+                                                                     End If
                                                                  End Sub),
                                                       Settings.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
@@ -4612,10 +4752,24 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                             tmp = pp.DW_CalcBubT(xc(i), P(i), Tj(i), K(i), True)
                         End If
                         Tj(i) = tmp(4)
+                        Kant(i) = K(i)
                         K(i) = tmp(6)
-                        If Tj(i) < 0 Or Double.IsNaN(Tj(i)) Then Tj(i) = Tj_ant(i)
+                        If Tj(i) < 0.0 Or Double.IsNaN(Tj(i)) Then
+                            Tj(i) = Tj_ant(i)
+                            K(i) = Kant(i)
+                        End If
                     Next
                 End If
+
+                dTj = Tj.SubtractY(Tj_ant)
+
+                'For i = 0 To ns
+                '    If Math.Abs(dTj(i)) > 5 Then
+                '        dTj(i) = Math.Sign(dTj(i)) * 5
+                '        Tj(i) = Tj_ant(i) + dTj(i)
+                '        K(i) = pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
+                '    End If
+                'Next
 
                 If ic < 5 Then
                     For i = 0 To ns
@@ -4624,10 +4778,12 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 End If
 
                 For i = 0 To ns
+                    If Double.IsNaN(Tj(i)) Or Double.IsInfinity(Tj(i)) Then
+                        Tj(i) = Tj_ant(i)
+                    End If
                     For j = 0 To nc - 1
                         If Double.IsNaN(K(i)(j)) Then K(i)(j) = pp.AUX_PVAPi(j, Tj(i)) / P(i)
                     Next
-                    If Double.IsNaN(Tj(i)) Or Double.IsInfinity(Tj(i)) Then Tj(i) = Tj_ant(i)
                 Next
 
                 IObj2?.Paragraphs.Add(String.Format("Updated Temperatures: {0}", Tj.ToMathArrayString))

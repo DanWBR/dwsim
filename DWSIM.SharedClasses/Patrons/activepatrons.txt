@@ -1,6 +1,5 @@
 ﻿Adam Kovalovszki
 Adam Spencer
-Adrian Wegmann
 Alberto Marzi
 Alex Platon
 Alexander Semenyak
@@ -15,7 +14,6 @@ Bruce
 Bruce Logue
 Carlos G. C. Reetz
 Casey Houston
-Chris Mcdougall
 Christian Hornhofer
 Christian Jordan
 David 
@@ -24,6 +22,7 @@ Domenico Marchese
 Don Harrold
 Dorivaldo Junior
 Doug Palfreyman
+Duncan Nowicki
 Emanuel Cardoso Santos
 F An
 Filippo Borroni
@@ -33,6 +32,7 @@ Guha Industries
 Henar González
 Henk Fikkert
 Hep Ingham
+Hugo Burbach
 Hugo Gonzalez
 Hurudza
 Ivagner Ferreira
@@ -64,7 +64,7 @@ Ozmeister
 Parthib Rao
 Petroconsulting Llc
 Rajesh S Kempegowda
-Richard Zweiler
+Richard Huntington
 Roland Berger
 Ryszard
 Samuel Levinson

@@ -541,28 +541,29 @@ Public Class EditingForm_HeaterCooler
 
         If sender Is btnCreateAndConnectInlet1 Then
 
-            Dim obj = fs.AddObject(ObjectType.MaterialStream, sgobj.InputConnectors(0).Position.X - 50, sgobj.InputConnectors(0).Position.Y, "")
+            Dim obj = fs.AddObject(ObjectType.MaterialStream, sgobj.InputConnectors(0).Position.X - 50, sgobj.InputConnectors(0).Position.Y - 10, "")
 
             If sgobj.InputConnectors(0).IsAttached Then fs.DisconnectObjects(sgobj.InputConnectors(0).AttachedConnector.AttachedFrom, sgobj)
             fs.ConnectObjects(obj.GraphicObject, sgobj, 0, 0)
 
         ElseIf sender Is btnCreateAndConnectOutlet1 Then
 
-            Dim obj = fs.AddObject(ObjectType.MaterialStream, sgobj.OutputConnectors(0).Position.X + 30, sgobj.OutputConnectors(0).Position.Y, "")
+            Dim obj = fs.AddObject(ObjectType.MaterialStream, sgobj.OutputConnectors(0).Position.X + 30, sgobj.OutputConnectors(0).Position.Y - 10, "")
 
             If sgobj.OutputConnectors(0).IsAttached Then fs.DisconnectObjects(sgobj, sgobj.OutputConnectors(0).AttachedConnector.AttachedTo)
             fs.ConnectObjects(sgobj, obj.GraphicObject, 0, 0)
 
         ElseIf sender Is btnCreateAndConnectEnergy Then
 
-            Dim obj = fs.AddObject(ObjectType.EnergyStream, sgobj.EnergyConnector.Position.X + 30, sgobj.EnergyConnector.Position.Y + 30, "")
 
             If TypeOf SimObject Is UnitOperations.Heater Then
+                Dim obj = fs.AddObject(ObjectType.EnergyStream, sgobj.EnergyConnector.Position.X - 50, sgobj.EnergyConnector.Position.Y + 30, "")
 
                 If sgobj.InputConnectors(1).IsAttached Then fs.DisconnectObjects(sgobj.InputConnectors(1).AttachedConnector.AttachedFrom, sgobj)
                 fs.ConnectObjects(obj.GraphicObject, sgobj, 0, 1)
 
             Else
+                Dim obj = fs.AddObject(ObjectType.EnergyStream, sgobj.EnergyConnector.Position.X + 30, sgobj.EnergyConnector.Position.Y + 30, "")
 
                 If sgobj.EnergyConnector.IsAttached Then fs.DisconnectObjects(sgobj, sgobj.EnergyConnector.AttachedConnector.AttachedTo)
                 fs.ConnectObjects(sgobj, obj.GraphicObject, 0, 0)

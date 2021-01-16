@@ -4,16 +4,16 @@
 '    This file is part of DWSIM.
 '
 '    DWSIM is free software: you can redistribute it and/or modify
-'    it under the terms of the GNU General Public License as published by
+'    it under the terms of the GNU Lesser General Public License as published by
 '    the Free Software Foundation, either version 3 of the License, or
 '    (at your option) any later version.
 '
 '    DWSIM is distributed in the hope that it will be useful,
 '    but WITHOUT ANY WARRANTY; without even the implied warranty of
 '    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'    GNU General Public License for more details.
+'    GNU Lesser General Public License for more details.
 '
-'    You should have received a copy of the GNU General Public License
+'    You should have received a copy of the GNU Lesser General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Collections.Generic
@@ -137,6 +137,10 @@ Namespace BaseClasses
         Public Property DiffusionCoefficient As Double? Implements Interfaces.ICompound.DiffusionCoefficient
 
         Public Property ExtraProperties As New ExpandoObject Implements ICompound.ExtraProperties
+
+        Public Property EnthalpyF_Dmol As Double? = 0.0 Implements Interfaces.ICompound.EnthalpyF_Dmol
+
+        Public Property EntropyF_Dmol As Double? = 0.0 Implements Interfaces.ICompound.EntropyF_Dmol
 
     End Class
 
@@ -677,21 +681,15 @@ Namespace BaseClasses
         Public Sub GetReactionCompoundIds(ByVal reacId As String, ByRef compIds As Object, ByRef compCharge As Object, ByRef compCASNumber As Object) Implements CapeOpen.ICapeReactionChemistry.GetReactionCompoundIds
             Dim i As Integer = 0
             Dim narr, carr, charr As New ArrayList
-            Dim nm As Object = Nothing
-            Dim fm As Object = Nothing
-            Dim ci As Object = Nothing
-            Dim bp As Object = Nothing
-            Dim mw As Object = Nothing
-            Dim cid As Object = Nothing
-            DirectCast(Me.m_str, CapeOpen.ICapeThermoCompounds).GetCompoundList(cid, fm, nm, bp, mw, ci)
-            Dim n As Integer = CType(nm, String()).Length - 1
+            Dim comps = m_pme.SelectedCompounds.Values.ToList()
+            Dim n As Integer = comps.Count - 1
             For Each c As ReactionStoichBase In Me.m_pme.Reactions(GetIDbyName(reacId)).Components.Values
                 With Me.m_pme.SelectedCompounds(c.CompName)
                     For i = 0 To n
-                        If ci(i) = .CAS_Number Then
-                            narr.Add(cid(i))
-                            carr.Add(ci(i))
-                            charr.Add(0.0#)
+                        If comps(i).CAS_Number = .CAS_Number Then
+                            narr.Add(comps(i).Name)
+                            carr.Add(comps(i).CAS_Number)
+                            charr.Add(Convert.ToDouble(comps(i).Charge))
                             Exit For
                         End If
                     Next
@@ -727,6 +725,8 @@ Namespace BaseClasses
                     Return "molarity"
                 Case ReactionBasis.MolarFrac
                     Return "molefraction"
+                Case ReactionBasis.PartialPress
+                    Return "partialpressure"
                 Case Else
                     Throw New CapeOpen.CapeNoImplException
             End Select
@@ -1033,10 +1033,13 @@ Namespace BaseClasses
                                     Case KOpt.Expression
                                         If .ExpContext Is Nothing Then
                                             .ExpContext = New Ciloci.Flee.ExpressionContext
+                                            .ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
                                             With .ExpContext
                                                 .Imports.AddType(GetType(System.Math))
                                             End With
                                         End If
+                                        .ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
+                                        .ExpContext.Variables.Clear()
                                         .ExpContext.Variables.Add("T", T)
                                         .Expr = .ExpContext.CompileGeneric(Of Double)(.Expression)
                                         .Kvalue = Math.Exp(.Expr.Evaluate)

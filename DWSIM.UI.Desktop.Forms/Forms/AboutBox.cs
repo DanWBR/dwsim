@@ -89,7 +89,7 @@ namespace DWSIM.UI.Forms.Forms
                     case "16.0.0.0": osinfo = "macOS Sierra (v10.12.0)"; break;
                     case "16.1.0.0": osinfo = "macOS Sierra (v10.12.1)"; break;
                     case "16.3.0.0": osinfo = "macOS Sierra (v10.12.2)"; break;
-                    case "16.4.0.0": osinfo = "macOS Sierra (v10.12.3)"; break;
+                    case "16.4.1.0": osinfo = "macOS Sierra (v10.12.3)"; break;
                     case "16.5.0.0": osinfo = "macOS Sierra (v10.12.4)"; break;
                     case "16.6.0.0": osinfo = "macOS Sierra (v10.12.5)"; break;
                     case "16.7.0.0": osinfo = "macOS Sierra (v10.12.6)"; break;
@@ -105,6 +105,10 @@ namespace DWSIM.UI.Forms.Forms
                     case "19.3.0.0": osinfo = "macOS Catalina (v10.15.3)"; break;
                     case "19.4.0.0": osinfo = "macOS Catalina (v10.15.4)"; break;
                     case "19.5.0.0": osinfo = "macOS Catalina (v10.15.5)"; break;
+                    case "19.6.0.0": osinfo = "macOS Catalina (v10.15.7)"; break;
+                    case "20.0.0.0": osinfo = "macOS Big Sur (v11.0.0)"; break;
+                    case "20.1.0.0": osinfo = "macOS Big Sur (v11.0.1)"; break;
+                    case "20.3.0.0": osinfo = "macOS Big Sur (v11.1.0)"; break;
                     default: osinfo = "macOS (v" + osversion + ")"; break;
                 }
             }
@@ -118,13 +122,10 @@ namespace DWSIM.UI.Forms.Forms
 
             var container1 = new DynamicLayout() { Padding = new Padding(10) };
 
-            container1.CreateAndAddTwoLabelsRow2("Developer/Mantainer:", "Daniel Medeiros (dwsim@inforside.com.br)");
-            container1.CreateAndAddTwoLabelsRow2("Contributors:", "Gregor Reichert, Gustavo León and others");
-            container1.CreateAndAddTwoLabelsRow2("Splash Screen Design:", "Wendel Azevedo (www.behance.net/wendelmarcus)");
+            container1.CreateAndAddDescriptionRow("DWSIM is released under the terms of the GNU Lesser General Public License (GPL) version 3. The LGPLv3 license is a set of additional permissions added to GPLv3.");
             container1.CreateAndAddTwoLabelsRow2("OS Info:", osinfo);
             container1.CreateAndAddTwoLabelsRow2("CLR Info:", clrinfo);
             container1.CreateAndAddTwoLabelsRow2("Memory Usage:", meminfo);
-            container1.CreateAndAddLabelRow3("DWSIM is released under the terms of the GNU General Public License (GPL) version 3.");
             
             var listcontainer = new GridView { DataStore = components, RowHeight = (int)(sf * 20) };
             var listcontainern = new GridView { DataStore = componentsn, RowHeight = (int)(sf * 20) };
@@ -209,18 +210,29 @@ namespace DWSIM.UI.Forms.Forms
                 gpltext = reader.ReadToEnd();
             }
 
+            string lgpltext;
+            using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("DWSIM.UI.Forms.Resources.TextFiles.lgpl-3.0.txt"))
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                lgpltext = reader.ReadToEnd();
+            }
+
             var txt1 = new TextArea { Text = gpltext, ReadOnly = true, Font = Fonts.Monospace(10.0f) };
+            var txt2 = new TextArea { Text = lgpltext, ReadOnly = true, Font = Fonts.Monospace(10.0f) };
 
             var t1 = new TableLayout(new TableRow(txt1));
+            var t2 = new TableLayout(new TableRow(txt2));
 
             var tab1 = new TabPage { Content = container1, Text = "General Information" };
-            var tab2 = new TabPage { Content = new Scrollable { Content = t1 }, Text = "DWSIM License" };
+            var tab2 = new TabPage { Content = new Scrollable { Content = t1 }, Text = "GPLv3 License" };
+            var tab2a = new TabPage { Content = new Scrollable { Content = t2 }, Text = "LGPLv3 License" };
             var tab3 = new TabPage { Content = new Scrollable { Content = listcontainer }, Text = "External Components" };
             var tab4 = new TabPage { Content = new Scrollable { Content = listcontainern }, Text = "NuGet Packages" };
 
             var tabc = new TabControl();
             tabc.Pages.Add(tab1);
             tabc.Pages.Add(tab2);
+            tabc.Pages.Add(tab2a);
             tabc.Pages.Add(tab3);
             tabc.Pages.Add(tab4);
 

@@ -3,16 +3,16 @@
 '    This file is part of DWSIM.
 '
 '    DWSIM is free software: you can redistribute it and/or modify
-'    it under the terms of the GNU General Public License as published by
+'    it under the terms of the GNU Lesser General Public License as published by
 '    the Free Software Foundation, either version 3 of the License, or
 '    (at your option) any later version.
 '
 '    DWSIM is distributed in the hope that it will be useful,
 '    but WITHOUT ANY WARRANTY; without even the implied warranty of
 '    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'    GNU General Public License for more details.
+'    GNU Lesser General Public License for more details.
 '
-'    You should have received a copy of the GNU General Public License
+'    You should have received a copy of the GNU Lesser General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Namespace MathEx.Optimization
@@ -59,7 +59,7 @@ Namespace MathEx.Optimization
         ''' <returns>vector of variables which solve the equations according to the minimum allowable error value (tolerance).</returns>
         Function Solve(functionbody As Func(Of Double(), Double()), vars As Double()) As Double()
 
-            Dim minimaldampings As Double() = New Double() {0.1, 0.01, 0.001}
+            Dim minimaldampings As Double() = New Double() {0.1}
             Dim epsilons As Double() = New Double() {0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1}
 
             Dim leave As Boolean = False
@@ -243,7 +243,6 @@ Namespace MathEx.Optimization
         End Function
 
     End Class
-
 
 End Namespace
 

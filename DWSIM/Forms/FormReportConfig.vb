@@ -3,16 +3,16 @@
 '    This file is part of DWSIM.
 '
 '    DWSIM is free software: you can redistribute it and/or modify
-'    it under the terms of the GNU General Public License as published by
+'    it under the terms of the GNU Lesser General Public License as published by
 '    the Free Software Foundation, either version 3 of the License, or
 '    (at your option) any later version.
 '
 '    DWSIM is distributed in the hope that it will be useful,
 '    but WITHOUT ANY WARRANTY; without even the implied warranty of
 '    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'    GNU General Public License for more details.
+'    GNU Lesser General Public License for more details.
 '
-'    You should have received a copy of the GNU General Public License
+'    You should have received a copy of the GNU Lesser General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports NetOffice
@@ -54,14 +54,15 @@ Public Class FormReportConfig
         Dim properties() As String
         Dim description As String
         Dim objtype As ObjectType
-        Dim propidx, r1, r2, r3, r4, r5, r6 As Integer
-        Dim inclcond, inclcomp, inclmist, inclvap, inclliqm, inclliq1, inclliq2, inclaq As Boolean
+        Dim propidx, r1, r2, r3, r4, r5, r6, r7 As Integer
+        Dim inclcond, inclcomp, inclmist, inclvap, inclliqm, inclliq1, inclliq2, inclaq, inclsolid As Boolean
         r1 = 5
         r2 = 12
         r3 = 30
         r4 = 48
         r5 = 66
         r6 = 84
+        r7 = 131
         inclcond = Me.CheckBox1.Checked
         inclcomp = Me.CheckBox2.Checked
         inclmist = Me.CheckBox3.Checked
@@ -70,6 +71,7 @@ Public Class FormReportConfig
         inclliq1 = Me.CheckBox6.Checked
         inclliq2 = Me.CheckBox7.Checked
         inclaq = Me.CheckBox8.Checked
+        inclsolid = Me.CheckBox9.Checked
 
         For Each lvi As ListViewItem In Me.ListView1.Items
             baseobj = frm.Collections.FlowsheetObjectCollection(lvi.Tag)
@@ -88,6 +90,12 @@ Public Class FormReportConfig
                         End If
                     Next
                 End If
+                If inclcomp Then
+                    DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetLocalString("FraomolarnaMistura"), "", ""})
+                    For Each subst As BaseClasses.Compound In frm.Collections.FlowsheetObjectCollection(lvi.Tag).Phases(0).Compounds.Values
+                        DT.Rows.Add(New String() {lvi.Text, description, subst.Name, Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
+                    Next
+                End If
                 If inclmist Then
                     For propidx = r1 To r2 - 1
                         value = baseobj.GetPropertyValue(properties(propidx), su)
@@ -97,12 +105,12 @@ Public Class FormReportConfig
                             DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetPropertyName(properties(propidx)), value, baseobj.GetPropertyUnit(properties(propidx), su)})
                         End If
                     Next
-                    If inclcomp Then
-                        DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetLocalString("FraomolarnaMistura"), "", ""})
-                        For Each subst As BaseClasses.Compound In frm.Collections.FlowsheetObjectCollection(lvi.Tag).Phases(0).Compounds.Values
-                            DT.Rows.Add(New String() {lvi.Text, description, subst.Name, Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
-                        Next
-                    End If
+                End If
+                If inclcomp Then
+                    DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetPropertyName("PROP_MS_106"), "", ""})
+                    For Each subst As BaseClasses.Compound In frm.Collections.FlowsheetObjectCollection(lvi.Tag).Phases(2).Compounds.Values
+                        DT.Rows.Add(New String() {lvi.Text, description, subst.Name, Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
+                    Next
                 End If
                 If inclvap Then
                     For propidx = r2 To r3 - 1
@@ -113,12 +121,12 @@ Public Class FormReportConfig
                             DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetPropertyName(properties(propidx)), value, baseobj.GetPropertyUnit(properties(propidx), su)})
                         End If
                     Next
-                    If inclcomp Then
-                        DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetLocalString("FraomolarnaPhaseVapor"), "", ""})
-                        For Each subst As BaseClasses.Compound In frm.Collections.FlowsheetObjectCollection(lvi.Tag).Phases(2).Compounds.Values
-                            DT.Rows.Add(New String() {lvi.Text, description, subst.Name, Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
-                        Next
-                    End If
+                End If
+                If inclcomp Then
+                    DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetPropertyName("PROP_MS_107"), "", ""})
+                    For Each subst As BaseClasses.Compound In frm.Collections.FlowsheetObjectCollection(lvi.Tag).Phases(1).Compounds.Values
+                        DT.Rows.Add(New String() {lvi.Text, description, subst.Name, Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
+                    Next
                 End If
                 If inclliqm Then
                     For propidx = r3 To r4 - 1
@@ -129,12 +137,12 @@ Public Class FormReportConfig
                             DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetPropertyName(properties(propidx)), value, baseobj.GetPropertyUnit(properties(propidx), su)})
                         End If
                     Next
-                    If inclcomp Then
-                        DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetLocalString("FraomolarnaPhaseLquid"), "", ""})
-                        For Each subst As BaseClasses.Compound In frm.Collections.FlowsheetObjectCollection(lvi.Tag).Phases(1).Compounds.Values
-                            DT.Rows.Add(New String() {lvi.Text, description, subst.Name, Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
-                        Next
-                    End If
+                End If
+                If inclcomp Then
+                    DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetPropertyName("PROP_MS_108"), "", ""})
+                    For Each subst As BaseClasses.Compound In frm.Collections.FlowsheetObjectCollection(lvi.Tag).Phases(3).Compounds.Values
+                        DT.Rows.Add(New String() {lvi.Text, description, subst.Name, Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
+                    Next
                 End If
                 If inclliq1 Then
                     For propidx = r4 To r5 - 1
@@ -145,12 +153,12 @@ Public Class FormReportConfig
                             DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetPropertyName(properties(propidx)), value, baseobj.GetPropertyUnit(properties(propidx), su)})
                         End If
                     Next
-                    If inclcomp Then
-                        DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetLocalString("FraomolarnaPhaseLquid"), "", ""})
-                        For Each subst As BaseClasses.Compound In frm.Collections.FlowsheetObjectCollection(lvi.Tag).Phases(3).Compounds.Values
-                            DT.Rows.Add(New String() {lvi.Text, description, subst.Name, Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
-                        Next
-                    End If
+                End If
+                If inclcomp Then
+                    DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetPropertyName("PROP_MS_109"), "", ""})
+                    For Each subst As BaseClasses.Compound In frm.Collections.FlowsheetObjectCollection(lvi.Tag).Phases(4).Compounds.Values
+                        DT.Rows.Add(New String() {lvi.Text, description, subst.Name, Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
+                    Next
                 End If
                 If inclliq2 Then
                     For propidx = r5 To r6 - 1
@@ -161,12 +169,12 @@ Public Class FormReportConfig
                             DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetPropertyName(properties(propidx)), value, baseobj.GetPropertyUnit(properties(propidx), su)})
                         End If
                     Next
-                    If inclcomp Then
-                        DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetLocalString("FraomolarnaPhaseLquid"), "", ""})
-                        For Each subst As BaseClasses.Compound In frm.Collections.FlowsheetObjectCollection(lvi.Tag).Phases(4).Compounds.Values
-                            DT.Rows.Add(New String() {lvi.Text, description, subst.Name, Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
-                        Next
-                    End If
+                End If
+                If inclcomp Then
+                    DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetPropertyName("PROP_MS_110"), "", ""})
+                    For Each subst As BaseClasses.Compound In frm.Collections.FlowsheetObjectCollection(lvi.Tag).Phases(6).Compounds.Values
+                        DT.Rows.Add(New String() {lvi.Text, description, subst.Name, Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
+                    Next
                 End If
                 If inclaq Then
                     For propidx = r6 To 101
@@ -177,12 +185,22 @@ Public Class FormReportConfig
                             DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetPropertyName(properties(propidx)), value, baseobj.GetPropertyUnit(properties(propidx), su)})
                         End If
                     Next
-                    If inclcomp Then
-                        DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetLocalString("FraomolarnaPhaseLquid"), "", ""})
-                        For Each subst As BaseClasses.Compound In frm.Collections.FlowsheetObjectCollection(lvi.Tag).Phases(6).Compounds.Values
-                            DT.Rows.Add(New String() {lvi.Text, description, subst.Name, Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
-                        Next
-                    End If
+                End If
+                If inclcomp Then
+                    DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetPropertyName("PROP_MS_146"), "", ""})
+                    For Each subst As BaseClasses.Compound In frm.Collections.FlowsheetObjectCollection(lvi.Tag).Phases(7).Compounds.Values
+                        DT.Rows.Add(New String() {lvi.Text, description, subst.Name, Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
+                    Next
+                End If
+                If inclsolid Then
+                    For propidx = r7 To 148
+                        value = baseobj.GetPropertyValue(properties(propidx), su)
+                        If Double.TryParse(value, New Double) Then
+                            DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetPropertyName(properties(propidx)), Format(Double.Parse(value), nf), baseobj.GetPropertyUnit(properties(propidx), su)})
+                        Else
+                            DT.Rows.Add(New String() {lvi.Text, description, DWSIM.App.GetPropertyName(properties(propidx)), value, baseobj.GetPropertyUnit(properties(propidx), su)})
+                        End If
+                    Next
                 End If
             Else
                 For Each prop As String In properties

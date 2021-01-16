@@ -4,16 +4,16 @@
 '    This file is part of DWSIM.
 '
 '    DWSIM is free software: you can redistribute it and/or modify
-'    it under the terms of the GNU General Public License as published by
+'    it under the terms of the GNU Lesser General Public License as published by
 '    the Free Software Foundation, either version 3 of the License, or
 '    (at your option) any later version.
 '
 '    DWSIM is distributed in the hope that it will be useful,
 '    but WITHOUT ANY WARRANTY; without even the implied warranty of
 '    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'    GNU General Public License for more details.
+'    GNU Lesser General Public License for more details.
 '
-'    You should have received a copy of the GNU General Public License
+'    You should have received a copy of the GNU Lesser General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports DWSIM.Thermodynamics.BaseClasses
@@ -4504,6 +4504,14 @@ Namespace Streams
                     For Each c As String In comps
                         res.Add(Me.Phases(f).Compounds(c).ActivityCoeff.GetValueOrDefault * Me.Phases(f).Compounds(c).MoleFraction.GetValueOrDefault)
                     Next
+                Case "enthalpyf.dmoles"
+                    For Each c As String In comps
+                        res.Add(Me.Phases(f).Compounds(c).EnthalpyF_Dmol.GetValueOrDefault)
+                    Next
+                Case "entropyf.dmoles"
+                    For Each c As String In comps
+                        res.Add(Me.Phases(f).Compounds(c).EntropyF_Dmol.GetValueOrDefault)
+                    Next
                 Case "fugacitycoefficient"
                     For Each c As String In comps
                         res.Add(Me.Phases(f).Compounds(c).FugacityCoeff.GetValueOrDefault)
@@ -4580,7 +4588,7 @@ Namespace Streams
                                 res.Add(Me.Phases(f).Properties.entropyF.GetValueOrDefault * val)
                             End If
                         Case "Mass", "mass"
-                            res.Add(Me.Phases(f).Properties.entropy.GetValueOrDefault * 1000)
+                            res.Add(Me.Phases(f).Properties.entropyF.GetValueOrDefault * 1000)
                     End Select
                 Case "internalenergy"
                     If basis.Equals("mole") Then
@@ -4636,6 +4644,10 @@ Namespace Streams
                                 res.Add(Me.Phases(f).Compounds(c).MassFlow.GetValueOrDefault)
                             Next
                     End Select
+                Case "partialpressure"
+                    For Each c As String In comps
+                        res.Add(Me.Phases(f).Compounds(c).PartialPressure.GetValueOrDefault)
+                    Next
                 Case "fraction", "massfraction", "molarfraction"
                     Select Case basis
                         Case "Molar", "molar", "mole", "Mole"
@@ -5120,10 +5132,22 @@ Namespace Streams
                         Me.Phases(f).Compounds(c).FugacityCoeff = Math.Exp(values(comps.IndexOf(c)))
                         i += 1
                     Next
+                Case "enthalpyf.dmoles"
+                    Dim i As Integer = 0
+                    For Each c As String In comps
+                        Me.Phases(f).Compounds(c).EnthalpyF_Dmol = values(comps.IndexOf(c))
+                        i += 1
+                    Next
+                Case "entropyf.dmoles"
+                    Dim i As Integer = 0
+                    For Each c As String In comps
+                        Me.Phases(f).Compounds(c).EntropyF_Dmol = values(comps.IndexOf(c))
+                        i += 1
+                    Next
                 Case "density"
                     Select Case basis
                         Case "Molar", "molar", "mole", "Mole"
-                            Me.Phases(f).Properties.density = values(0) / 1000 * Me.PropertyPackage.AUX_MMM(phs)
+                            Me.Phases(f).Properties.density = values(0) / 1000
                         Case "Mass", "mass"
                             Me.Phases(f).Properties.density = values(0)
                     End Select
@@ -5244,6 +5268,12 @@ Namespace Streams
                                 i += 1
                             Next
                     End Select
+                Case "partialpressure"
+                    Dim i As Integer = 0
+                    For Each c As String In comps
+                        Me.Phases(f).Compounds(c).PartialPressure = values(comps.IndexOf(c))
+                        i += 1
+                    Next
                 Case "phasefraction"
                     Select Case basis
                         Case "Molar", "molar", "mole", "Mole"

@@ -2081,7 +2081,7 @@ Oberflächenspannung (flüssig): Brock-Bird-Methode</value>
     <value>Raoult'sches Gesetz</value>
   </data>
   <data name="LicenseInfo" xml:space="preserve">
-    <value>Diese Software unterliegt den Bestimmungen der GNU General Public License (GPL) Version 3. Siehe 'gpl.txt' für mehr Details.</value>
+    <value>Diese Software unterliegt den Bestimmungen der GNU Lesser General Public License (GPL) Version 3. Siehe 'gpl.txt' für mehr Details.</value>
   </data>
   <data name="LimitedeEstabilidade" xml:space="preserve">
     <value>Stabilitätsgrenze</value>

@@ -4,16 +4,16 @@
 '    This file is part of DWSIM.
 '
 '    DWSIM is free software: you can redistribute it and/or modify
-'    it under the terms of the GNU General Public License as published by
+'    it under the terms of the GNU Lesser General Public License as published by
 '    the Free Software Foundation, either version 3 of the License, or
 '    (at your option) any later version.
 '
 '    DWSIM is distributed in the hope that it will be useful,
 '    but WITHOUT ANY WARRANTY; without even the implied warranty of
 '    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'    GNU General Public License for more details.
+'    GNU Lesser General Public License for more details.
 '
-'    You should have received a copy of the GNU General Public License
+'    You should have received a copy of the GNU Lesser General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 
@@ -536,8 +536,6 @@ Namespace UnitOperations
                 esin = args(2)
             End If
 
-            Dim Tout0 As Double = msout.GetTemperature()
-
             Me.PropertyPackage.CurrentMaterialStream = msin
 
             Me.PropertyPackage.CurrentMaterialStream.Validate()
@@ -546,7 +544,7 @@ Namespace UnitOperations
 
             Ti = msin.Phases(0).Properties.temperature.GetValueOrDefault
             Pi = msin.Phases(0).Properties.pressure.GetValueOrDefault
-            rho_li = msin.Phases(0).Properties.density.GetValueOrDefault
+            rho_li = msin.Phases(1).Properties.density.GetValueOrDefault
             qli = msin.Phases(1).Properties.volumetric_flow.GetValueOrDefault
             Hi = msin.Phases(0).Properties.enthalpy.GetValueOrDefault
             Wi = msin.Phases(0).Properties.massflow.GetValueOrDefault
@@ -760,7 +758,7 @@ Namespace UnitOperations
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", P2, H2))
 
                     IObj?.SetCurrent()
-                    tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, Tout0)
+                    tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, Ti)
                     T2 = tmp.CalculatedTemperature.GetValueOrDefault
                     CheckSpec(T2, True, "outlet temperature")
 
@@ -801,7 +799,7 @@ Namespace UnitOperations
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", P2, H2))
 
                     IObj?.SetCurrent()
-                    tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, Tout0)
+                    tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, Ti)
                     T2 = tmp.CalculatedTemperature.GetValueOrDefault
                     CheckSpec(T2, True, "outlet temperature")
 
@@ -834,7 +832,7 @@ Namespace UnitOperations
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", P2, H2))
 
                     IObj?.SetCurrent()
-                    Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, Tout0)
+                    Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, Ti)
                     T2 = tmp.CalculatedTemperature.GetValueOrDefault
                     CheckSpec(T2, True, "outlet temperature")
 
@@ -877,7 +875,7 @@ Namespace UnitOperations
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", P2, H2))
 
                     IObj?.SetCurrent()
-                    Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, Tout0)
+                    Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, Ti)
                     T2 = tmp.CalculatedTemperature
                     CheckSpec(T2, True, "outlet temperature")
 

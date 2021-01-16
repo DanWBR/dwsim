@@ -1019,11 +1019,11 @@ namespace DWSIM.UI.Desktop.Editors
                 catch { }
             });
 
-            var t2 = Task.Factory.StartNew(() =>
+            var t2 = Task.Factory.StartNew(async () =>
             {
                 try
                 {
-                    var cids = Thermodynamics.Databases.ChemeoLink.ChemeoParser.GetCompoundIDs(comp.Name, false);
+                    var cids = await Thermodynamics.Databases.ChemeoLink.ChemeoParser.GetCompoundIDs(comp.Name, false);
                     chemeoc = Thermodynamics.Databases.ChemeoLink.ChemeoParser.GetCompoundData(cids[0][0]);
                 }
                 catch { }

@@ -10,16 +10,16 @@ Imports DWSIM.UI.Desktop
 '    This file is part of DWSIM.
 '
 '    DWSIM is free software: you can redistribute it and/or modify
-'    it under the terms of the GNU General Public License as published by
+'    it under the terms of the GNU Lesser General Public License as published by
 '    the Free Software Foundation, either version 3 of the License, or
 '    (at your option) any later version.
 '
 '    DWSIM is distributed in the hope that it will be useful,
 '    but WITHOUT ANY WARRANTY; without even the implied warranty of
 '    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'    GNU General Public License for more details.
+'    GNU Lesser General Public License for more details.
 '
-'    You should have received a copy of the GNU General Public License
+'    You should have received a copy of the GNU Lesser General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Namespace DWSIM
@@ -198,13 +198,24 @@ Namespace DWSIM
             If id <> "" Then
                 Dim retstr As String
                 retstr = My.Application._ResourceManager.GetString(id, My.Application._CultureInfo)
-                If retstr Is Nothing Then Return id Else Return retstr
+                If retstr Is Nothing Then
+                    Return id
+                Else
+                    If My.Application.ActiveSimulation IsNot Nothing Then
+                        If My.Application.ActiveSimulation._translatefunction IsNot Nothing Then
+                            Return My.Application.ActiveSimulation._translatefunction.Invoke(retstr)
+                        End If
+                    End If
+                    Return retstr
+                End If
             Else
                 Return ""
             End If
+
         End Function
 
         Public Shared Function GetPropertyName(ByVal PropID As String, Optional ByRef fp As FormMain = Nothing) As String
+
 
             If My.Application._ResourceManager Is Nothing Then
 
@@ -234,10 +245,28 @@ Namespace DWSIM
                     pname = My.Application._PropertyNameManager.GetString(prop, My.Application._CultureInfo)
                     If pname = "" Then pname = prop
                     retstr = pname + " / " + sname
-                    If retstr Is Nothing Then Return PropID Else Return retstr
+                    If retstr Is Nothing Then
+                        Return PropID
+                    Else
+                        If My.Application.ActiveSimulation IsNot Nothing Then
+                            If My.Application.ActiveSimulation._translatefunction IsNot Nothing Then
+                                Return My.Application.ActiveSimulation._translatefunction.Invoke(retstr)
+                            End If
+                        End If
+                        Return retstr
+                    End If
                 Else
                     retstr = My.Application._PropertyNameManager.GetString(prop, My.Application._CultureInfo)
-                    If retstr Is Nothing Then Return PropID Else Return retstr
+                    If retstr Is Nothing Then
+                        Return PropID
+                    Else
+                        If My.Application.ActiveSimulation IsNot Nothing Then
+                            If My.Application.ActiveSimulation._translatefunction IsNot Nothing Then
+                                Return My.Application.ActiveSimulation._translatefunction.Invoke(retstr)
+                            End If
+                        End If
+                        Return retstr
+                    End If
                 End If
             Else
                 retstr = ""

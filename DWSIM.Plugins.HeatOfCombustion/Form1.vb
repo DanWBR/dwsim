@@ -1,4 +1,5 @@
-﻿Imports DWSIM.Interfaces
+﻿Imports DWSIM.ExtensionMethods
+Imports DWSIM.Interfaces
 
 Public Class Form1
 
@@ -60,10 +61,10 @@ Public Class Form1
                 End If
             Next
 
-            tbMassHHV.Text = (-hhv_mass).ToString(fsheet.FlowsheetOptions.NumberFormat)
-            tbMassLHV.Text = (-lhv_mass).ToString(fsheet.FlowsheetOptions.NumberFormat)
-            tbMolarHHV.Text = (-hhv_molar).ToString(fsheet.FlowsheetOptions.NumberFormat)
-            tbMolarLHV.Text = (-lhv_molar).ToString(fsheet.FlowsheetOptions.NumberFormat)
+            tbMassHHV.Text = -hhv_mass.ConvertFromSI(fsheet.FlowsheetOptions.SelectedUnitSystem.enthalpy).ToString(fsheet.FlowsheetOptions.NumberFormat)
+            tbMassLHV.Text = -lhv_mass.ConvertFromSI(fsheet.FlowsheetOptions.SelectedUnitSystem.enthalpy).ToString(fsheet.FlowsheetOptions.NumberFormat)
+            tbMolarHHV.Text = -hhv_molar.ConvertFromSI(fsheet.FlowsheetOptions.SelectedUnitSystem.molar_enthalpy).ToString(fsheet.FlowsheetOptions.NumberFormat)
+            tbMolarLHV.Text = -lhv_molar.ConvertFromSI(fsheet.FlowsheetOptions.SelectedUnitSystem.molar_enthalpy).ToString(fsheet.FlowsheetOptions.NumberFormat)
 
         End If
 

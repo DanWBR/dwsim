@@ -35,11 +35,11 @@ Partial Class EditingForm_HeatExchanger
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.btnConfigurePP = New System.Windows.Forms.Button()
-        Me.cbPropPack = New System.Windows.Forms.ComboBox()
-        Me.Label9 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.tbOVF2 = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.tbOVF1 = New System.Windows.Forms.TextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.cbEfficiency = New System.Windows.Forms.ComboBox()
         Me.tbEfficiency = New System.Windows.Forms.TextBox()
         Me.Label21 = New System.Windows.Forms.Label()
@@ -102,7 +102,6 @@ Partial Class EditingForm_HeatExchanger
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox5.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
@@ -183,49 +182,13 @@ Partial Class EditingForm_HeatExchanger
         Me.ToolTipChangeTag.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip2"))
         '
-        'GroupBox3
-        '
-        resources.ApplyResources(Me.GroupBox3, "GroupBox3")
-        Me.GroupBox3.Controls.Add(Me.btnConfigurePP)
-        Me.GroupBox3.Controls.Add(Me.cbPropPack)
-        Me.GroupBox3.Controls.Add(Me.Label9)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.TabStop = False
-        Me.ToolTipChangeTag.SetToolTip(Me.GroupBox3, resources.GetString("GroupBox3.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.GroupBox3, resources.GetString("GroupBox3.ToolTip1"))
-        Me.ToolTip1.SetToolTip(Me.GroupBox3, resources.GetString("GroupBox3.ToolTip2"))
-        '
-        'btnConfigurePP
-        '
-        resources.ApplyResources(Me.btnConfigurePP, "btnConfigurePP")
-        Me.btnConfigurePP.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
-        Me.btnConfigurePP.Name = "btnConfigurePP"
-        Me.ToolTip1.SetToolTip(Me.btnConfigurePP, resources.GetString("btnConfigurePP.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.btnConfigurePP, resources.GetString("btnConfigurePP.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.btnConfigurePP, resources.GetString("btnConfigurePP.ToolTip2"))
-        Me.btnConfigurePP.UseVisualStyleBackColor = True
-        '
-        'cbPropPack
-        '
-        resources.ApplyResources(Me.cbPropPack, "cbPropPack")
-        Me.cbPropPack.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbPropPack.FormattingEnabled = True
-        Me.cbPropPack.Name = "cbPropPack"
-        Me.ToolTip1.SetToolTip(Me.cbPropPack, resources.GetString("cbPropPack.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.cbPropPack, resources.GetString("cbPropPack.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.cbPropPack, resources.GetString("cbPropPack.ToolTip2"))
-        '
-        'Label9
-        '
-        resources.ApplyResources(Me.Label9, "Label9")
-        Me.Label9.Name = "Label9"
-        Me.ToolTip1.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip2"))
-        '
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.tbOVF2)
+        Me.GroupBox2.Controls.Add(Me.Label10)
+        Me.GroupBox2.Controls.Add(Me.tbOVF1)
+        Me.GroupBox2.Controls.Add(Me.Label9)
         Me.GroupBox2.Controls.Add(Me.cbEfficiency)
         Me.GroupBox2.Controls.Add(Me.tbEfficiency)
         Me.GroupBox2.Controls.Add(Me.Label21)
@@ -267,6 +230,38 @@ Partial Class EditingForm_HeatExchanger
         Me.ToolTipChangeTag.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip1"))
         Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip2"))
+        '
+        'tbOVF2
+        '
+        resources.ApplyResources(Me.tbOVF2, "tbOVF2")
+        Me.tbOVF2.Name = "tbOVF2"
+        Me.ToolTipValues.SetToolTip(Me.tbOVF2, resources.GetString("tbOVF2.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbOVF2, resources.GetString("tbOVF2.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbOVF2, resources.GetString("tbOVF2.ToolTip2"))
+        '
+        'Label10
+        '
+        resources.ApplyResources(Me.Label10, "Label10")
+        Me.Label10.Name = "Label10"
+        Me.ToolTip1.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip2"))
+        '
+        'tbOVF1
+        '
+        resources.ApplyResources(Me.tbOVF1, "tbOVF1")
+        Me.tbOVF1.Name = "tbOVF1"
+        Me.ToolTipValues.SetToolTip(Me.tbOVF1, resources.GetString("tbOVF1.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbOVF1, resources.GetString("tbOVF1.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbOVF1, resources.GetString("tbOVF1.ToolTip2"))
+        '
+        'Label9
+        '
+        resources.ApplyResources(Me.Label9, "Label9")
+        Me.Label9.Name = "Label9"
+        Me.ToolTip1.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip2"))
         '
         'cbEfficiency
         '
@@ -580,7 +575,7 @@ Partial Class EditingForm_HeatExchanger
         resources.ApplyResources(Me.cbCalcMode, "cbCalcMode")
         Me.cbCalcMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbCalcMode.FormattingEnabled = True
-        Me.cbCalcMode.Items.AddRange(New Object() {resources.GetString("cbCalcMode.Items"), resources.GetString("cbCalcMode.Items1"), resources.GetString("cbCalcMode.Items2"), resources.GetString("cbCalcMode.Items3"), resources.GetString("cbCalcMode.Items4"), resources.GetString("cbCalcMode.Items5"), resources.GetString("cbCalcMode.Items6"), resources.GetString("cbCalcMode.Items7"), resources.GetString("cbCalcMode.Items8")})
+        Me.cbCalcMode.Items.AddRange(New Object() {resources.GetString("cbCalcMode.Items"), resources.GetString("cbCalcMode.Items1"), resources.GetString("cbCalcMode.Items2"), resources.GetString("cbCalcMode.Items3"), resources.GetString("cbCalcMode.Items4"), resources.GetString("cbCalcMode.Items5"), resources.GetString("cbCalcMode.Items6"), resources.GetString("cbCalcMode.Items7"), resources.GetString("cbCalcMode.Items8"), resources.GetString("cbCalcMode.Items9"), resources.GetString("cbCalcMode.Items10")})
         Me.cbCalcMode.Name = "cbCalcMode"
         Me.ToolTip1.SetToolTip(Me.cbCalcMode, resources.GetString("cbCalcMode.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbCalcMode, resources.GetString("cbCalcMode.ToolTip1"))
@@ -844,7 +839,6 @@ Partial Class EditingForm_HeatExchanger
         Me.Controls.Add(Me.GroupBox6)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GroupBox5)
-        Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
         Me.Name = "EditingForm_HeatExchanger"
         Me.ToolTipChangeTag.SetToolTip(Me, resources.GetString("$this.ToolTip"))
@@ -852,8 +846,6 @@ Partial Class EditingForm_HeatExchanger
         Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip2"))
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
@@ -870,16 +862,12 @@ Partial Class EditingForm_HeatExchanger
     Public WithEvents Label13 As System.Windows.Forms.Label
     Public WithEvents Label12 As System.Windows.Forms.Label
     Public WithEvents Label11 As System.Windows.Forms.Label
-    Public WithEvents GroupBox3 As System.Windows.Forms.GroupBox
-    Public WithEvents cbPropPack As System.Windows.Forms.ComboBox
-    Public WithEvents Label9 As System.Windows.Forms.Label
     Public WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Public WithEvents cbCalcMode As System.Windows.Forms.ComboBox
     Public WithEvents Label8 As System.Windows.Forms.Label
     Public WithEvents cbColdFluidPDrop As System.Windows.Forms.ComboBox
     Public WithEvents tbColdFluidPDrop As System.Windows.Forms.TextBox
     Public WithEvents Label3 As System.Windows.Forms.Label
-    Public WithEvents btnConfigurePP As System.Windows.Forms.Button
     Public WithEvents cbHotFluidPDrop As System.Windows.Forms.ComboBox
     Public WithEvents tbHotFluidPDrop As System.Windows.Forms.TextBox
     Public WithEvents Label2 As System.Windows.Forms.Label
@@ -937,4 +925,8 @@ Partial Class EditingForm_HeatExchanger
     Public WithEvents tbEfficiency As TextBox
     Public WithEvents Label21 As Label
     Friend WithEvents ToolTipChangeTag As ToolTip
+    Public WithEvents tbOVF2 As TextBox
+    Public WithEvents Label10 As Label
+    Public WithEvents tbOVF1 As TextBox
+    Public WithEvents Label9 As Label
 End Class

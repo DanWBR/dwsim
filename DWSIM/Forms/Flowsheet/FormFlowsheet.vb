@@ -3,16 +3,16 @@
 '    This file is part of DWSIM.
 '
 '    DWSIM is free software: you can redistribute it and/or modify
-'    it under the terms of the GNU General Public License as published by
+'    it under the terms of the GNU Lesser General Public License as published by
 '    the Free Software Foundation, either version 3 of the License, or
 '    (at your option) any later version.
 '
 '    DWSIM is distributed in the hope that it will be useful,
 '    but WITHOUT ANY WARRANTY; without even the implied warranty of
 '    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'    GNU General Public License for more details.
+'    GNU Lesser General Public License for more details.
 '
-'    You should have received a copy of the GNU General Public License
+'    You should have received a copy of the GNU Lesser General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
@@ -116,6 +116,8 @@ Public Class FormFlowsheet
     Public RedoStack As New Stack(Of UndoRedoAction)
 
     Private listeningaction As Action(Of String, Interfaces.IFlowsheet.MessageType)
+
+    Friend _translatefunction As Func(Of String, String)
 
     Public Property SupressMessages As Boolean = False
 
@@ -2675,7 +2677,7 @@ Public Class FormFlowsheet
     End Property
 
     Public Function GetTranslatedString1(text As String) As String Implements IFlowsheet.GetTranslatedString, IFlowsheetGUI.GetTranslatedString
-        Dim returntext As String = text
+        Dim returntext As String
         returntext = DWSIM.App.GetLocalString(text)
         If returntext <> text Then Return returntext
         returntext = DWSIM.App.GetPropertyName(text)
@@ -3254,6 +3256,10 @@ Public Class FormFlowsheet
                         End Sub)
         End If
 
+    End Sub
+
+    Public Sub SetTranslateTextExternalFunction(act As Func(Of String, String)) Implements IFlowsheet.SetTranslateTextExternalFunction
+        _translatefunction = act
     End Sub
 
 #End Region

@@ -4,16 +4,16 @@
 '    This file is part of DWSIM.
 '
 '    DWSIM is free software: you can redistribute it and/or modify
-'    it under the terms of the GNU General Public License as published by
+'    it under the terms of the GNU Lesser General Public License as published by
 '    the Free Software Foundation, either version 3 of the License, or
 '    (at your option) any later version.
 '
 '    DWSIM is distributed in the hope that it will be useful,
 '    but WITHOUT ANY WARRANTY; without even the implied warranty of
 '    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'    GNU General Public License for more details.
+'    GNU Lesser General Public License for more details.
 '
-'    You should have received a copy of the GNU General Public License
+'    You should have received a copy of the GNU Lesser General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Math
@@ -969,16 +969,96 @@ out2:           If (Math.Abs(GL_old - L) < 0.0000005) And (Math.Abs(GV_old - V) 
         Public Overrides Function Flash_TV(ByVal Vz As Double(), ByVal T As Double, ByVal V As Double, ByVal Pref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
             Dim d1, d2 As Date, dt As TimeSpan
+            Dim names = PP.RET_VNAMES
+            Dim P, L, S, Vy(), Vx(), Vs(), VxM() As Double
+            Dim Lant, Vant, Sant, Pant As Double
+            Dim eTotal, eP, eL, eV, eS, eXL, eXV, eXS As Double
+            Dim Vxant(), Vyant(), Vsant() As Double
+            Dim result As Object = Nothing
+            Dim ecount As Integer
 
             d1 = Date.Now
 
-            d2 = Date.Now
+            etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance).ToDoubleFromInvariant
+            maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_External_Iterations)
+            itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance).ToDoubleFromInvariant
+            maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
 
+            'initialize flash calculations
+            Dim nl = New NestedLoops
+            nl.FlashSettings = FlashSettings
+
+            Dim nls = New NestedLoopsSLE
+            nls.FlashSettings = FlashSettings
+
+            'initialize VLE mixture
+            Vx = Vz.Clone
+            Vy = PP.RET_NullVector
+            Vs = PP.RET_NullVector
+            L = 1
+            V = 0
+            S = 0
+            P = Pref
+
+            Do
+                ecount += 1
+
+                'save old values
+                Lant = L
+                Vant = V
+                Sant = S
+                Vxant = Vx
+                Vyant = Vy
+                Vsant = Vs
+                Pant = P
+
+                'mix vapor and liquid
+                VxM = Vx.MultiplyConstY(L).AddY(Vy.MultiplyConstY(V)).NormalizeY
+
+                'first run VLE flash
+                result = nl.Flash_TV(VxM, T, V, Pref, PP, ReuseKI, PrevKi)
+                'Return New Object() {L, V, Vx, Vy, P, ecount, Ki, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
+                L = result(0) * (1 - S)
+                V = result(1) * (1 - S)
+                Vx = result(2)
+                Vy = result(3)
+                P = result(4)
+
+                'mix solid and liquid
+                VxM = Vx.MultiplyConstY(L).AddY(Vs.MultiplyConstY(S)).NormalizeY
+
+                'calculate solid liquid flash with that mixture
+                Dim resultS = nls.Flash_SL(VxM, P, T, PP)
+                'Return New Object() {L, 1 - L, 0.0#, Vx, Vs, L - L_old, ecount, d2 - d1}
+                S = resultS(1) * (1 - V)
+                L = resultS(0) * (1 - V)
+                Vx = resultS(3)
+                Vs = resultS(4)
+
+                'calculate errors
+                eL = Abs(L - Lant)
+                eV = Abs(V - Vant)
+                eS = Abs(S - Sant)
+                eP = Abs(P - Pant) / 100
+                eXL = Vx.SubtractY(Vxant).AbsSumY
+                eXV = Vy.SubtractY(Vyant).AbsSumY
+                eXS = Vs.SubtractY(Vsant).AbsSumY
+
+                eTotal = eL + eV + eS + eXL + eXV + eXS + eP
+
+            Loop Until eTotal < etol Or ecount > maxit_e
+
+            d2 = Date.Now
             dt = d2 - d1
 
-            WriteDebugInfo("TV Flash [NL-SLE]: Converged in " & 0 & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
+            If ecount > maxit_e Then
+                Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
+                WriteDebugInfo("Error: TV Flash [NL-SLE]: Did not converge in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
+            Else
+                WriteDebugInfo("TV Flash [NL-SLE]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
+            End If
 
-            Return New Object() {0.0#, 0.0#, PP.RET_NullVector, PP.RET_NullVector, 0, 0, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
+            Return New Object() {L, V, Vx, Vy, P, ecount, PP.RET_NullVector, 0, PP.RET_NullVector, S, Vs}
 
         End Function
 
@@ -1228,6 +1308,8 @@ out2:           If (Math.Abs(GL_old - L) < 0.0000005) And (Math.Abs(GV_old - V) 
                             Else
                                 Vy(i) = 0
                                 Vx(i) = 0
+                                Vy_ant(i) = 0
+                                Vx_ant(i) = 0
                             End If
                             i += 1
                         Loop Until i = n + 1

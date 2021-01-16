@@ -4,16 +4,16 @@
 '    This file is part of DWSIM.
 '
 '    DWSIM is free software: you can redistribute it and/or modify
-'    it under the terms of the GNU General Public License as published by
+'    it under the terms of the GNU Lesser General Public License as published by
 '    the Free Software Foundation, either version 3 of the License, or
 '    (at your option) any later version.
 '
 '    DWSIM is distributed in the hope that it will be useful,
 '    but WITHOUT ANY WARRANTY; without even the implied warranty of
 '    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'    GNU General Public License for more details.
+'    GNU Lesser General Public License for more details.
 '
-'    You should have received a copy of the GNU General Public License
+'    You should have received a copy of the GNU Lesser General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 
@@ -53,8 +53,8 @@ Namespace UnitOperations
         Protected _orificeDP As Double = 0
         Protected _fluidDP As Double = 0
         Protected _beta As Double = 0.5
-        Protected _orificediameter As Double = 100.0#
-        Protected _internaldiameter As Double = 200.0#
+        Protected _orificediameter As Double = 100.0# / 1000.0
+        Protected _internaldiameter As Double = 200.0# / 1000.0
         Protected _orificetype As OrificeType = OrificeType.FlangeTaps
         Protected _calcmethod As CalcMethod
         Protected _corrfactor As Double = 1
@@ -213,8 +213,8 @@ Namespace UnitOperations
             Dim beta, A1, A2, s2_s1, L1, L2 As Double
 
             beta = _beta
-            A1 = 3.1416 * (_internaldiameter / 1000.0) ^ 2 / 4
-            A2 = 3.1416 * (_orificediameter / 1000.0) ^ 2 / 4
+            A1 = 3.1416 * _internaldiameter ^ 2 / 4
+            A2 = 3.1416 * _orificediameter ^ 2 / 4
 
             Select Case _orificetype
 
@@ -231,29 +231,38 @@ Namespace UnitOperations
                     'placa de orificio flange taps
 
                     s2_s1 = 0.0508
-                    L1 = 1 / (_orificediameter / 1000.0 / 0.0254)
-                    L2 = 1 / (_orificediameter / 1000.0 / 0.0254)
+                    L1 = 1 / (_orificediameter / 0.0254)
+                    L2 = 1 / (_orificediameter / 0.0254)
 
                 Case OrificeType.RadiusTaps
 
                     'placa de orificio radius taps
 
-                    s2_s1 = 1.5 * _orificediameter / 1000.0
+                    s2_s1 = 1.5 * _orificediameter
                     L1 = 1
+
                     L2 = 0.47
 
             End Select
 
-            Dim ReD, Cd, DP As Double
+            Dim ReD, Cd, DP, c1, c2, c3, M2, A As Double
 
-            ReD = Wi * _orificediameter / 1000.0 / (A1 * mum)
-            If L1 < 0.4333 Then
-                Cd = 0.5959 + 0.312 * beta ^ 2.1 - 0.184 * beta ^ 8 + 0.0029 * beta ^ 2.5 * (10 ^ 6 / ReD) ^ 0.75 + 0.09 * L1 * (beta ^ 4 / (1 - beta ^ 4)) - 0.0337 * L2 * beta ^ 3
+            ReD = Wi * _internaldiameter / (A1 * mum)
+
+            M2 = 2 * L2 / (1 - beta)
+            A = (19000 * beta / ReD) ^ 0.8
+
+            c1 = 0.5961 + 0.0261 * beta ^ 2 - 0.216 * beta ^ 8 + 0.000521 * (10 ^ 6 * beta / ReD) ^ 0.7 + (0.0188 + 0.0063 * A) * beta ^ 3.5 * (10 ^ 6 / ReD) ^ 0.3
+            c2 = (0.043 + 0.08 * Math.Exp(-10 * L1) - 0.123 * Math.Exp(-7 * L1)) * (1 - 0.11 * A) * beta ^ 4 / (1 - beta ^ 4) - 0.031 * (M2 - 0.8 * M2 ^ 1.1) * beta ^ 1.3
+            If _internaldiameter * 1000 < 71.12 Then
+                c3 = 0.011 * (0.75 - beta) * (2.8 - (_internaldiameter * 1000) / 25.4)
             Else
-                Cd = 0.5959 + 0.312 * beta ^ 2.1 - 0.184 * beta ^ 8 + 0.0029 * beta ^ 2.5 * (10 ^ 6 / ReD) ^ 0.75 + 0.039 * L1 * (beta ^ 4 / (1 - beta ^ 4)) - 0.0337 * L2 * beta ^ 3
+                c3 = 0
             End If
+            Cd = c1 + c2 + c3
 
-            DP = (Wi / (_corrfactor * Cd * A2)) ^ 2 * (1 - beta ^ 4) / (2 * rhom)
+            'DP = (Wi / (_corrfactor * Cd * A2)) ^ 2 * (1 - beta ^ 4) / (2 * rhom)
+            DP = rhom / 2 * (Wi / rhom / (_corrfactor * Cd / (1 - beta ^ 4) ^ 0.5 * A2)) ^ 2
             DP = DP + (rhom * 9.8 * (s2_s1))
 
             _orificeDP = DP

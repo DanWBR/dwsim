@@ -28,9 +28,14 @@ Partial Class FormBinEnv
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
-        Me.tbdx = New System.Windows.Forms.TextBox()
+        Me.tbMin = New System.Windows.Forms.TextBox()
+        Me.tbMax = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.tbStepCount = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.BtnCalculate = New System.Windows.Forms.Button()
         Me.PanelCalc = New System.Windows.Forms.Panel()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.LabelStatus = New System.Windows.Forms.Label()
@@ -112,9 +117,14 @@ Partial Class FormBinEnv
         'GroupBox6
         '
         resources.ApplyResources(Me.GroupBox6, "GroupBox6")
-        Me.GroupBox6.Controls.Add(Me.tbdx)
+        Me.GroupBox6.Controls.Add(Me.tbMin)
+        Me.GroupBox6.Controls.Add(Me.tbMax)
+        Me.GroupBox6.Controls.Add(Me.Label11)
+        Me.GroupBox6.Controls.Add(Me.Label10)
+        Me.GroupBox6.Controls.Add(Me.Label9)
+        Me.GroupBox6.Controls.Add(Me.tbStepCount)
         Me.GroupBox6.Controls.Add(Me.Label8)
-        Me.GroupBox6.Controls.Add(Me.Button1)
+        Me.GroupBox6.Controls.Add(Me.BtnCalculate)
         Me.GroupBox6.Controls.Add(Me.PanelCalc)
         Me.GroupBox6.Controls.Add(Me.chkCompareModels)
         Me.GroupBox6.Controls.Add(Me.FlowLayoutPanel1)
@@ -144,20 +154,45 @@ Partial Class FormBinEnv
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.TabStop = False
         '
-        'tbdx
+        'tbMin
         '
-        resources.ApplyResources(Me.tbdx, "tbdx")
-        Me.tbdx.Name = "tbdx"
+        resources.ApplyResources(Me.tbMin, "tbMin")
+        Me.tbMin.Name = "tbMin"
+        '
+        'tbMax
+        '
+        resources.ApplyResources(Me.tbMax, "tbMax")
+        Me.tbMax.Name = "tbMax"
+        '
+        'Label11
+        '
+        resources.ApplyResources(Me.Label11, "Label11")
+        Me.Label11.Name = "Label11"
+        '
+        'Label10
+        '
+        resources.ApplyResources(Me.Label10, "Label10")
+        Me.Label10.Name = "Label10"
+        '
+        'Label9
+        '
+        resources.ApplyResources(Me.Label9, "Label9")
+        Me.Label9.Name = "Label9"
+        '
+        'tbStepCount
+        '
+        resources.ApplyResources(Me.tbStepCount, "tbStepCount")
+        Me.tbStepCount.Name = "tbStepCount"
         '
         'Label8
         '
         resources.ApplyResources(Me.Label8, "Label8")
         Me.Label8.Name = "Label8"
         '
-        'Button1
+        'BtnCalculate
         '
-        resources.ApplyResources(Me.Button1, "Button1")
-        Me.Button1.Name = "Button1"
+        resources.ApplyResources(Me.BtnCalculate, "BtnCalculate")
+        Me.BtnCalculate.Name = "BtnCalculate"
         '
         'PanelCalc
         '
@@ -600,7 +635,7 @@ Partial Class FormBinEnv
     Public WithEvents RadioButton2 As System.Windows.Forms.RadioButton
     Public WithEvents RadioButton1 As System.Windows.Forms.RadioButton
     Public WithEvents Label1 As System.Windows.Forms.Label
-    Public WithEvents Button1 As System.Windows.Forms.Button
+    Public WithEvents BtnCalculate As System.Windows.Forms.Button
     Public WithEvents cbComp1 As System.Windows.Forms.ComboBox
     Public WithEvents Label23 As System.Windows.Forms.Label
     Public WithEvents GroupBox2 As System.Windows.Forms.GroupBox
@@ -660,6 +695,11 @@ Partial Class FormBinEnv
     Friend WithEvents PanelCalc As System.Windows.Forms.Panel
     Public WithEvents Button2 As System.Windows.Forms.Button
     Public WithEvents LabelStatus As System.Windows.Forms.Label
-    Friend WithEvents tbdx As TextBox
+    Friend WithEvents tbStepCount As TextBox
     Public WithEvents Label8 As Label
+    Public WithEvents Label11 As Label
+    Public WithEvents Label10 As Label
+    Friend WithEvents tbMax As TextBox
+    Friend WithEvents tbMin As TextBox
+    Public WithEvents Label9 As Label
 End Class

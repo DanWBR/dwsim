@@ -118,9 +118,11 @@ Public Class EditingForm_CompressorExpander_Curves
 
             Dim uo = DirectCast(simobj, Compressor)
 
-            Dim curves = uo.CreateCurves
+            Dim curves = uo.CreateCurves()
 
-            Dim speed = uo.Curves.Keys.Max + 1
+            uo.Curves.Add(uo.Speed, curves)
+
+            Dim speed = uo.Speed
 
             Dim editor As New ComprExprCurveSet
 
@@ -144,7 +146,9 @@ Public Class EditingForm_CompressorExpander_Curves
 
             Dim curves = uo.CreateCurves
 
-            Dim speed = uo.Curves.Keys.Max + 1
+            uo.Curves.Add(uo.Speed, curves)
+
+            Dim speed = uo.Speed
 
             Dim editor As New ComprExprCurveSet
             editor.curvedata = curves

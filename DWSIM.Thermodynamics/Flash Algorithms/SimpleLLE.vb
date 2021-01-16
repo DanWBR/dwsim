@@ -4,16 +4,16 @@
 '    This file is part of DWSIM.
 '
 '    DWSIM is free software: you can redistribute it and/or modify
-'    it under the terms of the GNU General Public License as published by
+'    it under the terms of the GNU Lesser General Public License as published by
 '    the Free Software Foundation, either version 3 of the License, or
 '    (at your option) any later version.
 '
 '    DWSIM is distributed in the hope that it will be useful,
 '    but WITHOUT ANY WARRANTY; without even the implied warranty of
 '    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'    GNU General Public License for more details.
+'    GNU Lesser General Public License for more details.
 '
-'    You should have received a copy of the GNU General Public License
+'    You should have received a copy of the GNU Lesser General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Math
@@ -254,20 +254,13 @@ out:        d2 = Date.Now
                 'merge phases - both phases are identical
                 Return New Object() {1, V, Vz, PP.RET_NullVector, ecount, 0, Vx2, 0.0#, PP.RET_NullVector, gamma1, gamma2}
             Else
-                'order liquid phases by mixture NBP
-                Dim VNBP = PP.RET_VTB()
-                Dim nbp1 As Double = 0
-                Dim nbp2 As Double = 0
-
-                For i = 0 To n
-                    nbp1 += Vx1(i) * VNBP(i)
-                    nbp2 += Vx2(i) * VNBP(i)
-                Next
-
-                If nbp1 >= nbp2 Then
-                    Return New Object() {L1, V, Vx1, PP.RET_NullVector, ecount, L2, Vx2, 0.0#, PP.RET_NullVector, gamma1, gamma2}
+                'order liquid phases by gibbs energy
+                Dim gl1 = PP.DW_CalcGibbsEnergy(Vx1, T, P, "L")
+                Dim gl2 = PP.DW_CalcGibbsEnergy(Vx2, T, P, "L")
+                If gl1 < gl2 Then
+                    Return New Object() {L2, V, Vx2, PP.RET_NullVector, ecount, L1, Vx1, 0.0#, PP.RET_NullVector, gamma2, gamma1}
                 Else
-                    Return New Object() {L2, V, Vx2, PP.RET_NullVector, ecount, L1, Vx1, 0.0#, PP.RET_NullVector, gamma1, gamma2}
+                    Return New Object() {L1, V, Vx1, PP.RET_NullVector, ecount, L2, Vx2, 0.0#, PP.RET_NullVector, gamma1, gamma2}
                 End If
             End If
 

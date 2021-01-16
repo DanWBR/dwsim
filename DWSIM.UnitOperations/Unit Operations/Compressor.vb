@@ -4,16 +4,16 @@
 '    This file is part of DWSIM.
 '
 '    DWSIM is free software: you can redistribute it and/or modify
-'    it under the terms of the GNU General Public License as published by
+'    it under the terms of the GNU Lesser General Public License as published by
 '    the Free Software Foundation, either version 3 of the License, or
 '    (at your option) any later version.
 '
 '    DWSIM is distributed in the hope that it will be useful,
 '    but WITHOUT ANY WARRANTY; without even the implied warranty of
 '    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'    GNU General Public License for more details.
+'    GNU Lesser General Public License for more details.
 '
-'    You should have received a copy of the GNU General Public License
+'    You should have received a copy of the GNU Lesser General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 
@@ -285,7 +285,6 @@ Namespace UnitOperations
             End If
 
             Dim Pout0 As Double = msout.GetPressure()
-            Dim Tout0 As Double = msout.GetTemperature()
 
             If DebugMode Then AppendDebugLine("Calculation mode: " & CalcMode.ToString)
 
@@ -361,9 +360,7 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                     Do
 
                         IObj?.SetCurrent()
-                        tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2i, Si, Tout0)
-
-                        Tout0 = tmp.CalculatedTemperature
+                        tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2i, Si, Ti)
 
                         If ProcessPath = ProcessPathType.Adiabatic Then
                             Qloop = Wi * (tmp.CalculatedEnthalpy - Hi) / (Me.AdiabaticEfficiency / 100)
@@ -406,7 +403,7 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PS flash to calculate ideal outlet enthalpy... P = {0} Pa, S = {1} kJ/[kg.K]", P2, Si))
 
                     IObj?.SetCurrent()
-                    tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2, Si, Tout0)
+                    tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2, Si, Ti)
                     T2s = tmp.CalculatedTemperature
                     H2s = tmp.CalculatedEnthalpy
 
@@ -585,7 +582,7 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PS flash to calculate ideal outlet enthalpy... P = {0} Pa, S = {1} kJ/[kg.K]", P2, Si))
 
                     IObj?.SetCurrent()
-                    Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2, Si, Tout0)
+                    Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2, Si, Ti)
                     T2 = tmp.CalculatedTemperature
                     T2s = T2
                     H2 = tmp.CalculatedEnthalpy
@@ -768,7 +765,7 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                         For i = 0 To cpower.x.Count - 1
                             If Double.TryParse(cpower.x(i), New Double) And Double.TryParse(cpower.y(i), New Double) Then
                                 xpower.Add(SystemsOfUnits.Converter.ConvertToSI(cpower.xunit.Replace(" @ P,T", ""), cpower.x(i)))
-                                ypower.Add(SystemsOfUnits.Converter.ConvertToSI(cpower.yunit, chead.y(i)))
+                                ypower.Add(SystemsOfUnits.Converter.ConvertToSI(cpower.yunit, cpower.y(i)))
                             End If
                         Next
                         For i = 0 To ceff.x.Count - 1
@@ -826,6 +823,8 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                     Else
                         Me.CurveEff = Double.NegativeInfinity
                     End If
+
+                    Wi = msin.Phases(0).Properties.massflow.GetValueOrDefault
 
                     If CurvePower = Double.NegativeInfinity Then
                         If ProcessPath = ProcessPathType.Adiabatic Then

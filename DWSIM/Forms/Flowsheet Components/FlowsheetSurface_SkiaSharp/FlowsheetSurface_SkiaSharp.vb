@@ -3035,11 +3035,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
             id = AddObjectToSurface(ObjectType.Valve, x, y, False)
             Dim valve = DirectCast(Flowsheet.SimulationObjects(id), Valve)
-            If istream.Phases(2).Properties.molarfraction.GetValueOrDefault >= 0.5 Then
-                valve.CalcMode = Valve.CalculationMode.Kv_Gas
-            Else
-                valve.CalcMode = Valve.CalculationMode.Kv_Liquid
-            End If
+            valve.CalcMode = Valve.CalculationMode.Kv_General
             valve.Kv = 2.0
             valve.EnableOpeningKvRelationship = True
             valve.OpeningPct = 50

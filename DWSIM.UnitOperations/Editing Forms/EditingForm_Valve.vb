@@ -130,6 +130,9 @@ Public Class EditingForm_Valve
                     cbCalcMode.SelectedIndex = 3
                 Case UnitOperations.Valve.CalculationMode.Kv_Steam
                     cbCalcMode.SelectedIndex = 4
+                Case UnitOperations.Valve.CalculationMode.Kv_General
+                    cbCalcMode.SelectedIndex = 5
+
             End Select
 
             tbOutletPressure.Text = su.Converter.ConvertFromSI(units.pressure, uobj.OutletPressure.GetValueOrDefault).ToString(nf)
@@ -182,18 +185,18 @@ Public Class EditingForm_Valve
                 tbKv.Enabled = False
                 tbKvOpRel.Enabled = False
                 tbOp.Enabled = False
-                chkEnableKvOpRel.Enabled = False
+                chkEnableKvOpRel.Enabled = True
                 SimObject.CalcMode = UnitOperations.Valve.CalculationMode.OutletPressure
-                btnCalcKv.Enabled = False
+                btnCalcKv.Enabled = True
             Case 1
                 tbPressureDrop.Enabled = True
                 tbOutletPressure.Enabled = False
                 tbKv.Enabled = False
                 tbKvOpRel.Enabled = False
                 tbOp.Enabled = False
-                chkEnableKvOpRel.Enabled = False
+                chkEnableKvOpRel.Enabled = True
                 SimObject.CalcMode = UnitOperations.Valve.CalculationMode.DeltaP
-                btnCalcKv.Enabled = False
+                btnCalcKv.Enabled = True
             Case 2
                 tbPressureDrop.Enabled = False
                 tbOutletPressure.Enabled = False
@@ -221,6 +224,16 @@ Public Class EditingForm_Valve
                 chkEnableKvOpRel.Enabled = True
                 SimObject.CalcMode = UnitOperations.Valve.CalculationMode.Kv_Steam
                 btnCalcKv.Enabled = True
+            Case 5
+                tbPressureDrop.Enabled = False
+                tbOutletPressure.Enabled = False
+                tbKv.Enabled = True
+                tbKvOpRel.Enabled = True
+                tbOp.Enabled = True
+                chkEnableKvOpRel.Enabled = True
+                SimObject.CalcMode = UnitOperations.Valve.CalculationMode.Kv_General
+                btnCalcKv.Enabled = True
+
         End Select
 
     End Sub
@@ -264,6 +277,8 @@ Public Class EditingForm_Valve
                 uobj.CalcMode = UnitOperations.Valve.CalculationMode.Kv_Gas
             Case 4
                 uobj.CalcMode = UnitOperations.Valve.CalculationMode.Kv_Steam
+            Case 5
+                uobj.CalcMode = UnitOperations.Valve.CalculationMode.Kv_General
         End Select
 
         If sender Is tbOutletPressure Then uobj.OutletPressure = su.Converter.ConvertToSI(cbPress.SelectedItem.ToString, tbOutletPressure.Text.ParseExpressionToDouble)
@@ -494,7 +509,7 @@ Public Class EditingForm_Valve
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnCalcKv.Click
+    Private Sub btnCalcKv_Click(sender As Object, e As EventArgs) Handles btnCalcKv.Click
 
         SimObject.CalculateKv()
 

@@ -63,7 +63,7 @@ Namespace GraphicObjects.Shapes
             Me.EnergyConnector.Type = ConType.ConEn
             Me.EnergyConnector.Direction = ConDir.Up
             Me.EnergyConnector.ConnectorName = "Energy Stream"
-            Me.EnergyConnector.Active = False
+            Me.EnergyConnector.Active = True
 
             With InputConnectors
 

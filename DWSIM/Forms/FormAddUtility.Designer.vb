@@ -41,9 +41,9 @@ Partial Class FormAddUtility
         '
         'ListBox1
         '
-        resources.ApplyResources(Me.ListBox1, "ListBox1")
         Me.ListBox1.FormattingEnabled = True
         Me.ListBox1.Items.AddRange(New Object() {resources.GetString("ListBox1.Items"), resources.GetString("ListBox1.Items1"), resources.GetString("ListBox1.Items2")})
+        resources.ApplyResources(Me.ListBox1, "ListBox1")
         Me.ListBox1.Name = "ListBox1"
         '
         'Button1
@@ -75,14 +75,14 @@ Partial Class FormAddUtility
         '
         'ListBox2
         '
-        resources.ApplyResources(Me.ListBox2, "ListBox2")
         Me.ListBox2.FormattingEnabled = True
+        resources.ApplyResources(Me.ListBox2, "ListBox2")
         Me.ListBox2.Name = "ListBox2"
         '
         'ListBox3
         '
-        resources.ApplyResources(Me.ListBox3, "ListBox3")
         Me.ListBox3.FormattingEnabled = True
+        resources.ApplyResources(Me.ListBox3, "ListBox3")
         Me.ListBox3.Name = "ListBox3"
         '
         'FormAddUtility

@@ -50,7 +50,7 @@ namespace DWSIM.UI.Desktop.Editors
                 var pscontainer = new DynamicLayout();
                 var slcontainer = new StackLayoutItem(pscontainer);
                 //pscontainer.BackgroundColor = Eto.Drawing.Colors.White;
-                var editor = new PipeSectionEditor(flowsheet, profile.Sections[ps.Indice], pscontainer);
+                var editor = new PipeSectionEditor(flowsheet, (Pipe)SimObject, profile.Sections[ps.Indice], pscontainer);
                 var btnRemove = s.CreateAndAddButtonRow(pscontainer, "Remove Segment", null, null);
                 btnRemove.Click += (sender, e) =>
                 {
@@ -80,7 +80,7 @@ namespace DWSIM.UI.Desktop.Editors
                 var pscontainer = new DynamicLayout();
                 var slcontainer = new StackLayoutItem(pscontainer);
                 //pscontainer.BackgroundColor = Eto.Drawing.Colors.White;
-                var editor = new PipeSectionEditor(flowsheet, section, pscontainer);
+                var editor = new PipeSectionEditor(flowsheet, (Pipe)SimObject, section, pscontainer);
                 var btnRemove = s.CreateAndAddButtonRow(pscontainer, "Remove Segment", null, null);
                 btnRemove.Click += (sender, e) =>
                 {

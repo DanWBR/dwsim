@@ -358,4 +358,24 @@ Public Module SIMDExtenders
 
     End Function
 
+    ''' <summary>
+    ''' Replace NaNs and Infinities with zero.
+    ''' </summary>
+    ''' <param name="vector"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <System.Runtime.CompilerServices.Extension()> Public Function ReplaceInvalidsWithZeroes(vector As Double()) As Double()
+
+        Dim vector0 As Double() = vector.Clone()
+
+        For i As Integer = 0 To vector.Length - 1
+            If Double.IsNaN(vector(i)) Or Double.IsInfinity(vector(i)) Then
+                vector0(i) = 0.0
+            End If
+        Next
+
+        Return vector0
+
+    End Function
+
 End Module

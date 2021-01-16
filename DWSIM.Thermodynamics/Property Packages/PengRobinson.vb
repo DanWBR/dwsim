@@ -4,16 +4,16 @@
 '    This file is part of DWSIM.
 '
 '    DWSIM is free software: you can redistribute it and/or modify
-'    it under the terms of the GNU General Public License as published by
+'    it under the terms of the GNU Lesser General Public License as published by
 '    the Free Software Foundation, either version 3 of the License, or
 '    (at your option) any later version.
 '
 '    DWSIM is distributed in the hope that it will be useful,
 '    but WITHOUT ANY WARRANTY; without even the implied warranty of
 '    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'    GNU General Public License for more details.
+'    GNU Lesser General Public License for more details.
 '
-'    You should have received a copy of the GNU General Public License
+'    You should have received a copy of the GNU Lesser General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports DWSIM.Thermodynamics.PropertyPackages
@@ -384,6 +384,14 @@ Namespace PropertyPackages
                 s = DW_CalcEntropy(RET_VMOL(dwpl), T, P, State.Vapor)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = s
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropy = s * mw
+
+                IObj?.SetCurrent
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpyF = h + AUX_HFm25(Phase)
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_enthalpyF = (h + AUX_HFm25(Phase)) * mw
+
+                IObj?.SetCurrent
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.entropyF = s + AUX_SFm25(Phase)
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropyF = (s + AUX_SFm25(Phase)) * mw
 
                 IObj?.SetCurrent
                 z = Me.m_pr.Z_PR(T, P, RET_VMOL(Phase.Vapor), RET_VKij, RET_VTC, RET_VPC, RET_VW, "V")

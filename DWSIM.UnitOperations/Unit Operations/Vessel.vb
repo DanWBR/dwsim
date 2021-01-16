@@ -4,16 +4,16 @@
 '    This file is part of DWSIM.
 '
 '    DWSIM is free software: you can redistribute it and/or modify
-'    it under the terms of the GNU General Public License as published by
+'    it under the terms of the GNU Lesser General Public License as published by
 '    the Free Software Foundation, either version 3 of the License, or
 '    (at your option) any later version.
 '
 '    DWSIM is distributed in the hope that it will be useful,
 '    but WITHOUT ANY WARRANTY; without even the implied warranty of
 '    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'    GNU General Public License for more details.
+'    GNU Lesser General Public License for more details.
 '
-'    You should have received a copy of the GNU General Public License
+'    You should have received a copy of the GNU Lesser General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 
@@ -634,60 +634,131 @@ Namespace UnitOperations
                 End With
             End If
 
-            cp = Me.GraphicObject.OutputConnectors(1) 'liquid 1
-            If cp.IsAttached Then
-                ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
-                With ms
-                    .Clear()
-                    .ClearAllProps()
-                    .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
-                    .Phases(0).Properties.temperature = T
-                    .Phases(0).Properties.pressure = P
-                    .Phases(0).Properties.enthalpy = MixedStream.Phases(3).Properties.enthalpy.GetValueOrDefault
-                    If W1 > 0.0# Then .Phases(0).Properties.massflow = W1 Else .Phases(0).Properties.molarflow = 0.0#
-                    .Phases(0).Properties.enthalpy = HL1
-                    Dim comp As BaseClasses.Compound
-                    i = 0
-                    For Each comp In .Phases(0).Compounds.Values
-                        comp.MoleFraction = VnL1(Vids.IndexOf(comp.Name))
-                        comp.MassFraction = VmL1(Vids.IndexOf(comp.Name))
-                        i += 1
-                    Next
-                    If WS = 0.0 Then
-                        .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Liquid1)
-                        .Phases(3).Properties.molarfraction = 1.0
-                        .AtEquilibrium = True
-                    End If
-                End With
-            End If
+            'calculate liquid densities.
 
-            cp = Me.GraphicObject.OutputConnectors(2) 'liquid 2
-            If cp.IsAttached Then
-                ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
-                With ms
-                    .Clear()
-                    .ClearAllProps()
-                    .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
-                    .Phases(0).Properties.temperature = T
-                    .Phases(0).Properties.pressure = P
-                    .Phases(0).Properties.enthalpy = MixedStream.Phases(4).Properties.enthalpy.GetValueOrDefault
-                    If W2 > 0.0# Then .Phases(0).Properties.massflow = W2 Else .Phases(0).Properties.molarflow = 0.0#
-                    .Phases(0).Properties.enthalpy = HL2
-                    Dim comp As BaseClasses.Compound
-                    i = 0
-                    For Each comp In .Phases(0).Compounds.Values
-                        comp.MoleFraction = VnL2(Vids.IndexOf(comp.Name))
-                        comp.MassFraction = VmL2(Vids.IndexOf(comp.Name))
-                        i += 1
-                    Next
-                    If WS = 0.0 Then
-                        .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Liquid1)
-                        .Phases(3).Properties.molarfraction = 1.0
-                        .AtEquilibrium = True
-                    End If
-                End With
+            PropertyPackage.CurrentMaterialStream = MixedStream
+
+            Dim dens1 = DirectCast(PropertyPackage, PropertyPackages.PropertyPackage).AUX_LIQDENS(T, VnL1, P)
+            Dim dens2 As Double = dens1
+
+            If VnL2.Sum > 0 Then dens2 = DirectCast(PropertyPackage, PropertyPackages.PropertyPackage).AUX_LIQDENS(T, VnL2, P)
+
+            If dens1 <= dens2 Then
+
+                cp = Me.GraphicObject.OutputConnectors(1) 'liquid 1
+                If cp.IsAttached Then
+                    ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
+                    With ms
+                        .Clear()
+                        .ClearAllProps()
+                        .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
+                        .Phases(0).Properties.temperature = T
+                        .Phases(0).Properties.pressure = P
+                        .Phases(0).Properties.enthalpy = MixedStream.Phases(3).Properties.enthalpy.GetValueOrDefault
+                        If W1 > 0.0# Then .Phases(0).Properties.massflow = W1 Else .Phases(0).Properties.molarflow = 0.0#
+                        .Phases(0).Properties.enthalpy = HL1
+                        Dim comp As BaseClasses.Compound
+                        i = 0
+                        For Each comp In .Phases(0).Compounds.Values
+                            comp.MoleFraction = VnL1(Vids.IndexOf(comp.Name))
+                            comp.MassFraction = VmL1(Vids.IndexOf(comp.Name))
+                            i += 1
+                        Next
+                        If WS = 0.0 Then
+                            .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Liquid1)
+                            .Phases(3).Properties.molarfraction = 1.0
+                            .AtEquilibrium = True
+                        End If
+                    End With
+                End If
+
+                cp = Me.GraphicObject.OutputConnectors(2) 'liquid 2
+                If cp.IsAttached Then
+                    ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
+                    With ms
+                        .Clear()
+                        .ClearAllProps()
+                        .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
+                        .Phases(0).Properties.temperature = T
+                        .Phases(0).Properties.pressure = P
+                        .Phases(0).Properties.enthalpy = MixedStream.Phases(4).Properties.enthalpy.GetValueOrDefault
+                        If W2 > 0.0# Then .Phases(0).Properties.massflow = W2 Else .Phases(0).Properties.molarflow = 0.0#
+                        .Phases(0).Properties.enthalpy = HL2
+                        Dim comp As BaseClasses.Compound
+                        i = 0
+                        For Each comp In .Phases(0).Compounds.Values
+                            comp.MoleFraction = VnL2(Vids.IndexOf(comp.Name))
+                            comp.MassFraction = VmL2(Vids.IndexOf(comp.Name))
+                            i += 1
+                        Next
+                        If WS = 0.0 Then
+                            .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Liquid1)
+                            .Phases(3).Properties.molarfraction = 1.0
+                            .AtEquilibrium = True
+                        End If
+                    End With
+                Else
+                    If MixedStream.Phases(4).Properties.massflow.GetValueOrDefault > 0.0# Then Throw New Exception(FlowSheet.GetTranslatedString("SeparatorVessel_SecondLiquidPhaseFound"))
+                End If
+
             Else
-                If MixedStream.Phases(4).Properties.massflow.GetValueOrDefault > 0.0# Then Throw New Exception(FlowSheet.GetTranslatedString("SeparatorVessel_SecondLiquidPhaseFound"))
+
+                cp = Me.GraphicObject.OutputConnectors(1) 'liquid 1
+                If cp.IsAttached Then
+                    ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
+                    With ms
+                        .Clear()
+                        .ClearAllProps()
+                        .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
+                        .Phases(0).Properties.temperature = T
+                        .Phases(0).Properties.pressure = P
+                        .Phases(0).Properties.enthalpy = MixedStream.Phases(4).Properties.enthalpy.GetValueOrDefault
+                        If W2 > 0.0# Then .Phases(0).Properties.massflow = W2 Else .Phases(0).Properties.molarflow = 0.0#
+                        .Phases(0).Properties.enthalpy = HL2
+                        Dim comp As BaseClasses.Compound
+                        i = 0
+                        For Each comp In .Phases(0).Compounds.Values
+                            comp.MoleFraction = VnL2(Vids.IndexOf(comp.Name))
+                            comp.MassFraction = VmL2(Vids.IndexOf(comp.Name))
+                            i += 1
+                        Next
+                        If WS = 0.0 Then
+                            .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Liquid1)
+                            .Phases(3).Properties.molarfraction = 1.0
+                            .AtEquilibrium = True
+                        End If
+                    End With
+                End If
+
+                cp = Me.GraphicObject.OutputConnectors(2) 'liquid 2
+                If cp.IsAttached Then
+                    ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
+                    With ms
+                        .Clear()
+                        .ClearAllProps()
+                        .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
+                        .Phases(0).Properties.temperature = T
+                        .Phases(0).Properties.pressure = P
+                        .Phases(0).Properties.enthalpy = MixedStream.Phases(3).Properties.enthalpy.GetValueOrDefault
+                        If W1 > 0.0# Then .Phases(0).Properties.massflow = W1 Else .Phases(0).Properties.molarflow = 0.0#
+                        .Phases(0).Properties.enthalpy = HL1
+                        Dim comp As BaseClasses.Compound
+                        i = 0
+                        For Each comp In .Phases(0).Compounds.Values
+                            comp.MoleFraction = VnL1(Vids.IndexOf(comp.Name))
+                            comp.MassFraction = VmL1(Vids.IndexOf(comp.Name))
+                            i += 1
+                        Next
+                        If WS = 0.0 Then
+                            .CopyCompositions(PhaseLabel.Mixture, PhaseLabel.Liquid1)
+                            .Phases(3).Properties.molarfraction = 1.0
+                            .AtEquilibrium = True
+                        End If
+                    End With
+                Else
+                    If MixedStream.Phases(3).Properties.massflow.GetValueOrDefault > 0.0# Then Throw New Exception(FlowSheet.GetTranslatedString("SeparatorVessel_SecondLiquidPhaseFound"))
+                End If
+
             End If
 
             Hf = MixedStream.Phases(0).Properties.enthalpy.GetValueOrDefault * W
@@ -1069,7 +1140,7 @@ Namespace UnitOperations
             str.AppendLine("Gas/Liquid Separator: " & Me.GraphicObject.Tag)
             str.AppendLine("Property Package: " & Me.PropertyPackage.ComponentName)
             str.AppendLine()
-            str.AppendLine("Inlet conditions")
+            str.AppendLine("Inlet conditions (First Stream)")
             str.AppendLine()
             str.AppendLine("    Temperature: " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, istr.Phases(0).Properties.temperature.GetValueOrDefault).ToString(numberformat, ci) & " " & su.temperature)
             str.AppendLine("    Pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, istr.Phases(0).Properties.pressure.GetValueOrDefault).ToString(numberformat, ci) & " " & su.pressure)
@@ -1108,6 +1179,7 @@ Namespace UnitOperations
             Return str.ToString
 
         End Function
+
         Public Overrides Function GetPropertyDescription(p As String) As String
             If p.Equals("Override Separation Pressure") Then
                 Return "Overrides the separation pressure. Enabling this setting requires an energy stream connected to the separator."

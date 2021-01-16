@@ -3,16 +3,16 @@
 '    This file is part of DWSIM.
 '
 '    DWSIM is free software: you can redistribute it and/or modify
-'    it under the terms of the GNU General Public License as published by
+'    it under the terms of the GNU Lesser General Public License as published by
 '    the Free Software Foundation, either version 3 of the License, or
 '    (at your option) any later version.
 '
 '    DWSIM is distributed in the hope that it will be useful,
 '    but WITHOUT ANY WARRANTY; without even the implied warranty of
 '    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'    GNU General Public License for more details.
+'    GNU Lesser General Public License for more details.
 '
-'    You should have received a copy of the GNU General Public License
+'    You should have received a copy of the GNU Lesser General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 'Imports DWSIM.SimulationObjects
@@ -960,6 +960,7 @@ Public Class FormMain
             End If
         Next
         loadedCSDB = True
+        csdb.Dispose()
     End Sub
 
     Public Sub LoadDWSIMDB()
@@ -970,6 +971,7 @@ Public Class FormMain
         For Each cp As BaseClasses.ConstantProperties In cpa
             If Not Me.AvailableComponents.ContainsKey(cp.Name) Then Me.AvailableComponents.Add(cp.Name, cp)
         Next
+        dwdb.Dispose()
     End Sub
 
     Public Sub LoadAdditionalCompounds()
@@ -1016,6 +1018,7 @@ Public Class FormMain
             Next
         Catch ex As Exception
         End Try
+        cpdb.Dispose()
     End Sub
 
     Public Sub LoadCheDLDB()
@@ -1032,6 +1035,7 @@ Public Class FormMain
                 End If
             End If
         Next
+        chedl.Dispose()
 
     End Sub
 
@@ -1617,18 +1621,19 @@ Public Class FormMain
         data = xdoc.Element("DWSIM_Simulation_Data").Element("Compounds").Elements.ToList
 
         For Each xel As XElement In data
-            Try
-                Dim obj As New ConstantProperties
-                obj.LoadData(xel.Elements.ToList)
-                If My.Settings.IgnoreCompoundPropertiesOnLoad AndAlso AvailableComponents.ContainsKey(obj.Name) Then
-                    form.Options.SelectedComponents.Add(obj.Name, AvailableComponents(obj.Name))
-                Else
-                    form.Options.SelectedComponents.Add(obj.Name, obj)
-                End If
-            Catch ex As Exception
-                excs.Add(New Exception("Error Loading Compound Information", ex))
-            End Try
+            Dim obj As New ConstantProperties
+            obj.Name = xel.Element("Name").Value
+            If Not form.AvailableCompounds.ContainsKey(obj.Name) Then form.AvailableCompounds.Add(obj.Name, obj)
+            form.Options.SelectedComponents.Add(obj.Name, obj)
         Next
+
+        Parallel.ForEach(data, Sub(xel)
+                                   Try
+                                       form.Options.SelectedComponents(xel.Element("Name").Value).LoadData(xel.Elements.ToList)
+                                   Catch ex As Exception
+                                       excs.Add(New Exception("Error Loading Compound Information", ex))
+                                   End Try
+                               End Sub)
 
         If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(35)
 
@@ -1713,7 +1718,7 @@ Public Class FormMain
                 Dim id As String = xel.<Name>.Value
                 Dim obj As SharedClasses.UnitOperations.BaseClass = Nothing
                 If xel.Element("Type").Value.Contains("Streams.MaterialStream") Then
-                    obj = pp.ReturnInstance(xel.Element("Type").Value)
+                    obj = New Streams.MaterialStream()
                 Else
                     Dim uokey As String = xel.Element("ComponentDescription").Value
                     If ExternalUnitOperations.ContainsKey(uokey) Then
