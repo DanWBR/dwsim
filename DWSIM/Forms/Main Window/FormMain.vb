@@ -1682,7 +1682,7 @@ Public Class FormMain
                         Throw New Exception("Reaktoro (Aqueous Electrolytes) Property Package library not found. Please download and install it in order to run this simulation.")
                     End If
                 End if
-                'ElseIf
+                'ElseIf - comment ElseIf for correct loading GERG2008, PC-SAFT2, ....
                 If xel.Element("Type").Value.Contains("ThermoC") Then
                     Dim thermockey As String = "ThermoC Bridge"
                     If PropertyPackages.ContainsKey(thermockey) Then
