@@ -1674,13 +1674,15 @@ Public Class FormMain
                 xel.Element("Type").Value = xel.Element("Type").Value.Replace("DWSIM.DWSIM.SimulationObjects", "DWSIM.Thermodynamics")
                 Dim obj As PropertyPackage = Nothing
                 If xel.Element("Type").Value.Contains("AdvancedEOS") Then
-                    Dim adveoskey As String = "PC-SAFT (with Association Support)"
+                    Dim adveoskey As String = "Reaktoro (Aqueous Electrolytes)"
                     If PropertyPackages.ContainsKey(adveoskey) Then
                         obj = PropertyPackages(adveoskey).ReturnInstance(xel.Element("Type").Value)
                     Else
-                        Throw New Exception("Advanced EOS Property Package library not found. Please download and install it in order to run this simulation.")
+                        Throw New Exception("Reaktoro (Aqueous Electrolytes) Property Package library not found. Please download and install it in order to run this simulation.")
                     End If
-                ElseIf xel.Element("Type").Value.Contains("ThermoC") Then
+                End if
+                'ElseIf - comment ElseIf for correct loading GERG2008, PC-SAFT2, ....
+                If xel.Element("Type").Value.Contains("ThermoC") Then
                     Dim thermockey As String = "ThermoC Bridge"
                     If PropertyPackages.ContainsKey(thermockey) Then
                         obj = PropertyPackages(thermockey).ReturnInstance(xel.Element("Type").Value)
