@@ -183,11 +183,9 @@ namespace DWSIM.UI.Forms
 
             Task.Factory.StartNew(() =>
             {
-                var updfile = AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "version.info";
-                string uinfo = "0";
-                if (File.Exists(updfile)) uinfo = File.ReadAllText(updfile);
-                GlobalSettings.Settings.CurrentRunningVersion = Assembly.GetExecutingAssembly().GetName().Version.Major.ToString() + "." + Assembly.GetExecutingAssembly().GetName().Version.Minor.ToString() + "." + uinfo;
-                Console.WriteLine("Current Version: " + GlobalSettings.Settings.CurrentRunningVersion);
+                GlobalSettings.Settings.CurrentRunningVersion = Assembly.GetExecutingAssembly().GetName().Version.Major.ToString() + "." +
+                Assembly.GetExecutingAssembly().GetName().Version.Minor.ToString() + "." +
+                Assembly.GetExecutingAssembly().GetName().Version.Build.ToString();
                 return SharedClasses.UpdateCheck.CheckForUpdates();
             }).ContinueWith((t) =>
             {
