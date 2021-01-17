@@ -568,6 +568,8 @@ Namespace PropertyPackages
 
             objMemStream.Seek(0, SeekOrigin.Begin)
 
+            objBinaryFormatter.Binder = New DeserializationBinder()
+
             ObjectCopy = objBinaryFormatter.Deserialize(objMemStream)
 
             objMemStream.Close()
