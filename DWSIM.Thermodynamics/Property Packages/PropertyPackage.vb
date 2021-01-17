@@ -12366,7 +12366,7 @@ Final3:
                                              End Sub)
             container2.CreateAndAddLabelAndButtonRow("View SI Units for Phase Properties", "View Units", Nothing,
                                                      Sub(sender, e)
-                                                         Process.Start("https://github.com/DanWBR/dwsim5/blob/master/DWSIM.SharedClasses/UnitsOfMeasure/SystemsOfUnits.vb#L267")
+                                                         Process.Start("https://github.com/DanWBR/dwsim6/blob/windows/DWSIM.SharedClasses/UnitsOfMeasure/SystemsOfUnits.vb#L278")
                                                      End Sub)
 
             Dim form = sui.GetDefaultTabbedForm("Advanced Property Package Settings", 700, 600, {container1, container2})
