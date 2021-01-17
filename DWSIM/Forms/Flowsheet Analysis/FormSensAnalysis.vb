@@ -862,6 +862,8 @@ Public Class FormSensAnalysis
             For i As Integer = 0 To Me.dgVariables.SelectedRows.Count - 1
                 Me.dgVariables.Rows.Remove(Me.dgVariables.SelectedRows(0))
             Next
+        else if Me.dgVariables.RowCount=1 Then 
+            Me.dgVariables.Rows.RemoveAt(0)
         End If
     End Sub
 
@@ -983,6 +985,8 @@ Public Class FormSensAnalysis
             For i As Integer = 0 To Me.dgDepVariables.SelectedRows.Count - 1
                 Me.dgDepVariables.Rows.Remove(Me.dgDepVariables.SelectedRows(0))
             Next
+        else if Me.dgDepVariables.RowCount=1 Then 
+            Me.dgDepVariables.Rows.RemoveAt(0)
         End If
     End Sub
 
