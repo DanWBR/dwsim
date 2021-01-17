@@ -112,7 +112,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             If Flashtype = "Default" Then
 
-                'chech possible phases to decide on suitable flash algorithm
+                'check possible phases to decide on suitable flash algorithm
                 If hres.SolidPhase Or PP.ForcedSolids.Count > 0 Then
                     If hres.LiquidPhaseSplit Then
                         Flashtype = "SVLLE"
@@ -150,11 +150,45 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_PS(ByVal Vz As Double(), ByVal P As Double, ByVal S As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim nl = New NestedLoops
-            nl.FlashSettings = FlashSettings
-            nl.PTFlashFunction = AddressOf Flash_PT
+            Dim Flashtype As String = FlashSettings(FlashSetting.ForceEquilibriumCalculationType)
 
-            Return nl.Flash_PS(Vz, P, S, Tref, PP, ReuseKI, PrevKi)
+            Dim sres = PerformHeuristicsTest(Vz, Tref, P, PP)
+
+            If Flashtype = "Default" Then
+
+                'check possible phases to decide on suitable flash algorithm
+                If sres.SolidPhase Or PP.ForcedSolids.Count > 0 Then
+                    If sres.LiquidPhaseSplit Then
+                        Flashtype = "SVLLE"
+                    Else
+                        Flashtype = "SVLE"
+                    End If
+                Else
+                    If sres.LiquidPhaseSplit Then
+                        Flashtype = "VLLE"
+                    Else
+                        Flashtype = "VLE"
+                    End If
+                End If
+            End If
+
+            Dim result As Object = Nothing
+
+            Select Case Flashtype
+                Case "VLE", "SVLE", "SVLLE"
+                    Dim nl = New NestedLoops
+                    nl.FlashSettings = FlashSettings
+                    nl.PTFlashFunction = AddressOf Flash_PT
+                    result = nl.Flash_PS(Vz, P, S, Tref, PP, ReuseKI, PrevKi)
+
+                Case "VLLE"
+                    Dim nl = New NestedLoops3PV3
+                    nl.FlashSettings = FlashSettings
+                    result = nl.Flash_PS(Vz, P, S, Tref, PP, ReuseKI, PrevKi)
+            End Select
+
+            Return result
+
 
         End Function
 
