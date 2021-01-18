@@ -928,19 +928,17 @@ Namespace Reactors
 
                     'converge temperature
 
-                    deltaV = deltaV0
+                    Dim odesolver = New DotNumerics.ODE.OdeImplicitRungeKutta5()
 
                     Do
 
-                        If Not negativeflag Then
+                        deltaV = deltaV0
 
-                            Dim odesolver = New DotNumerics.ODE.OdeImplicitRungeKutta5()
+                        If Not negativeflag Then
 
                             ' progressively decrease volume step until non-negative concentrations are found.
 
-                            For nncounter = 1 To 10
-
-                                deltaV /= 10
+                            For nncounter = 1 To 30
 
                                 odesolver.InitializeODEs(AddressOf ODEFunc, N.Count, 0.0, vc0)
                                 IObj2?.SetCurrent
@@ -971,6 +969,8 @@ Namespace Reactors
                                 Next
 
                                 If Not negative Then Exit For
+
+                                deltaV /= 2
 
                             Next
 
