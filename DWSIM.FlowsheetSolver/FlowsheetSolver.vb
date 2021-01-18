@@ -1231,7 +1231,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
                                                      'throws exceptions if any
 
-                                                     If Settings.SolverBreakOnException And exlist.Count > 0 Then
+                                                     If Settings.SolverBreakOnException And exlist.Count > 0 And False Then ' JARL remove "And False"
                                                          Throw New AggregateException(exlist)
                                                      End If
 

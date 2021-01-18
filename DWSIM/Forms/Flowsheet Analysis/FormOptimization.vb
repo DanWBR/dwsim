@@ -394,6 +394,7 @@ Public Class FormOptimization
                     Case OptimizationCase.SolvingMethod.AL_BRENT
                         Dim brentsolver As New BrentOpt.BrentMinimize
                         brentsolver.DefineFuncDelegate(AddressOf CalcFuncVal_Brent)
+                        ' Brent's method without restriction should be limited to [-oo, oo]; ... and this causes computational problems...
                         fmin = brentsolver.brentoptimize(0, initval(0) * 100, .tolerance, xmin)
                     Case OptimizationCase.SolvingMethod.AL_BRENT_B
                         Dim brentsolver As New BrentOpt.BrentMinimize
