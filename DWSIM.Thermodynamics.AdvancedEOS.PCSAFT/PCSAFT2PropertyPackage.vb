@@ -47,7 +47,7 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
     End Class
 
-    Public Class PCSAFT2PropertyPackage
+    <System.Serializable> Public Class PCSAFT2PropertyPackage
 
         Inherits PropertyPackage
 

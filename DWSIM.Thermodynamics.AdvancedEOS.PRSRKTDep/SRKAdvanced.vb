@@ -4,14 +4,14 @@ Imports DWSIM.Thermodynamics.PropertyPackages
 
 Namespace DWSIM.Thermodynamics.AdvancedEOS
 
-    Public Class SoaveRedlichKwongAdvancedPropertyPackage
+    <System.Serializable> Public Class SoaveRedlichKwongAdvancedPropertyPackage
 
         Inherits SRKPropertyPackage
 
         Private TInternal As Double = 0.0
         Private PInternal As Double = 0.0
 
-        Private ec As New Ciloci.Flee.ExpressionContext
+        <NonSerialized> Private ec As New Ciloci.Flee.ExpressionContext
 
         Public KijExpressions As New Dictionary(Of String, String)
 

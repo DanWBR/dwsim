@@ -5,7 +5,7 @@ Imports DWSIM.ExtensionMethods
 
 Namespace DWSIM.Thermodynamics.AdvancedEOS
 
-    Public Class GERG2008PropertyPackage
+    <System.Serializable> Public Class GERG2008PropertyPackage
 
         Inherits PropertyPackage
 
