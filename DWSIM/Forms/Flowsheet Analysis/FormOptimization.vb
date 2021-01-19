@@ -394,7 +394,7 @@ Public Class FormOptimization
                     Case OptimizationCase.SolvingMethod.AL_BRENT
                         Dim brentsolver As New BrentOpt.BrentMinimize
                         brentsolver.DefineFuncDelegate(AddressOf CalcFuncVal_Brent)
-                        ' Brent's method without restriction should be limited to [-oo, oo]; ... and this causes computational problems...
+                        ' Brent's method without restriction should be limited to [-oo, oo]; ...and this causes computational problems...
                         fmin = brentsolver.brentoptimize(0, initval(0) * 100, .tolerance, xmin)
                     Case OptimizationCase.SolvingMethod.AL_BRENT_B
                         Dim brentsolver As New BrentOpt.BrentMinimize
@@ -909,7 +909,7 @@ Public Class FormOptimization
         End If
 
         Dim varID(x.Length), objID(x.Length), objProp(x.Length), objName(x.Length), FobjID, FobjProp As String
-        Dim AvarID(x.Length), AobjID(Me.keysaux.Count - 1), AobjProp(Me.keysaux.Count - 1), AobjName(Me.keysaux.Count - 1) As String
+        Dim AvarID(Me.keysaux.Count - 1), AobjID(Me.keysaux.Count - 1), AobjProp(Me.keysaux.Count - 1), AobjName(Me.keysaux.Count - 1) As String
         Dim i As Integer
 
         For i = 0 To Me.keysind.Count - 1
@@ -1046,7 +1046,8 @@ Public Class FormOptimization
                     .Variables.Add(objName(i), SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(varID(i)).unit, x(i)))
                 Next
                 For i = 0 To Me.keysaux.Count - 1
-                    .Variables.Add(AobjName(i), SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(i)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(i - 1)).objectID).GetPropertyValue(AobjProp(i))))
+                    '.Variables.Add(AobjName(i), SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(i)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(i - 1)).objectID).GetPropertyValue(AobjProp(i))))
+                    .Variables.Add(AobjName(i), SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(i)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(i)).objectID).GetPropertyValue(AobjProp(i))))
                 Next
             End With
 
@@ -1080,7 +1081,8 @@ Public Class FormOptimization
                             .Variables(objName(i)) = SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(varID(i)).unit, x0)
                             For j = 0 To Me.keysaux.Count - 1
                                 If AobjID(i) <> "SpreadsheetCell" And AobjID(i) <> "ReactionProperty" Then
-                                    .Variables(AobjName(j)) = SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j - 1)).objectID).GetPropertyValue(AobjProp(j)))
+                                    '.Variables(AobjName(j)) = SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j - 1)).objectID).GetPropertyValue(AobjProp(j)))
+                                    .Variables(AobjName(j)) = SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j)).objectID).GetPropertyValue(AobjProp(j)))
                                 ElseIf AobjID(i) = "ReactionProperty" Then
                                     Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = AobjProp(j).Split("|")(0)).FirstOrDefault
                                     .Variables(AobjName(j)) = rx.GetPropertyValue(AobjProp(j).Split("|")(1))
@@ -1123,7 +1125,8 @@ Public Class FormOptimization
                             .Variables(objName(i)) = SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(varID(i)).unit, x1)
                             For j = 0 To Me.keysaux.Count - 1
                                 If AobjID(i) <> "SpreadsheetCell" And AobjID(i) <> "ReactionProperty" Then
-                                    .Variables(AobjName(j)) = SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j - 1)).objectID).GetPropertyValue(AobjProp(j)))
+                                    '.Variables(AobjName(j)) = SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j - 1)).objectID).GetPropertyValue(AobjProp(j)))
+                                    .Variables(AobjName(j)) = SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j)).objectID).GetPropertyValue(AobjProp(j)))
                                 ElseIf AobjID(i) = "ReactionProperty" Then
                                     Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = AobjProp(j).Split("|")(0)).FirstOrDefault
                                     .Variables(AobjName(j)) = rx.GetPropertyValue(AobjProp(j).Split("|")(1))
@@ -1164,7 +1167,8 @@ Public Class FormOptimization
                             .Variables(objName(i)) = SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(varID(i)).unit, x2)
                             For j = 0 To Me.keysaux.Count - 1
                                 If AobjID(i) <> "SpreadsheetCell" And AobjID(i) <> "ReactionProperty" Then
-                                    .Variables(AobjName(j)) = SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j - 1)).objectID).GetPropertyValue(AobjProp(j)))
+                                    '.Variables(AobjName(j)) = SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j - 1)).objectID).GetPropertyValue(AobjProp(j)))
+                                    .Variables(AobjName(j)) = SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j)).objectID).GetPropertyValue(AobjProp(j)))
                                 ElseIf AobjID(i) = "ReactionProperty" Then
                                     Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = AobjProp(j).Split("|")(0)).FirstOrDefault
                                     .Variables(AobjName(j)) = rx.GetPropertyValue(AobjProp(j).Split("|")(1))
@@ -1208,7 +1212,8 @@ Public Class FormOptimization
                         .Variables(objName(i)) = SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(varID(i)).unit, x3)
                         For j = 0 To Me.keysaux.Count - 1
                             If AobjID(i) <> "SpreadsheetCell" And AobjID(i) <> "ReactionProperty" Then
-                                .Variables(AobjName(j)) = SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j - 1)).objectID).GetPropertyValue(AobjProp(j)))
+                                '.Variables(AobjName(j)) = SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j - 1)).objectID).GetPropertyValue(AobjProp(j)))
+                                .Variables(AobjName(j)) = SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j)).objectID).GetPropertyValue(AobjProp(j)))
                             ElseIf AobjID(i) = "ReactionProperty" Then
                                 Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = AobjProp(j).Split("|")(0)).FirstOrDefault
                                 .Variables(AobjName(j)) = rx.GetPropertyValue(AobjProp(j).Split("|")(1))
@@ -1250,7 +1255,8 @@ Public Class FormOptimization
                             .Variables(objName(i)) = SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(varID(i)).unit, x4)
                             For j = 0 To Me.keysaux.Count - 1
                                 If AobjID(i) <> "SpreadsheetCell" And AobjID(i) <> "ReactionProperty" Then
-                                    .Variables(AobjName(j)) = SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j - 1)).objectID).GetPropertyValue(AobjProp(j)))
+                                    '.Variables(AobjName(j)) = SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j - 1)).objectID).GetPropertyValue(AobjProp(j)))
+                                    .Variables(AobjName(j)) = SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(j)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(j)).objectID).GetPropertyValue(AobjProp(j)))
                                 ElseIf AobjID(i) = "ReactionProperty" Then
                                     Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = AobjProp(j).Split("|")(0)).FirstOrDefault
                                     .Variables(AobjName(j)) = rx.GetPropertyValue(AobjProp(j).Split("|")(1))
