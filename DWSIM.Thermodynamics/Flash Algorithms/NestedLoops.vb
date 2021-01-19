@@ -313,7 +313,6 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
         Private Function ConvergeVF(IObj As InspectorItem, V As Double, Vz As Double(), Vx As Double(), Vy As Double(), Ki As Double(), P As Double, T As Double, PP As PropertyPackage) As Object()
 
             Dim n As Integer = Vz.Length - 1
-            Dim i As Integer
 
             Dim Vn(n) As String, Vx_ant(n), Vy_ant(n), Vp(n), Ki_ant(n), fi(n) As Double
 

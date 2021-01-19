@@ -13,7 +13,9 @@ DWSIM is a software for modeling, simulation and optimization of steady-state an
 
 ### License
 
-DWSIM is licensed under the Lesser GNU Lesser General Public License (GPL) Version 3.
+DWSIM is licensed under the GNU Lesser General Public License (LGPL) Version 3. LGPLv3 adds an exception for libraries that connect to DWSIM to add extra functionality (for example, plugins, unit operations and thermodynamic packages). These libraries do not need to be licensed under the GPLv3, therefore, they can be proprietary and closed source, as long as the author distributes DWSIM and its source code without modification together with such libraries, if they are made available to the public (free or paid).
+
+See COPYING and COPYING.LESSER for more information.
 
 ### Supported Operating Systems
 

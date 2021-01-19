@@ -760,10 +760,9 @@ Public Class FormMain
 
         ' check for updates
         Task.Factory.StartNew(Function()
-                                  Dim updfile = AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "version.info"
-                                  Dim uinfo = "0"
-                                  If (File.Exists(updfile)) Then uinfo = File.ReadAllText(updfile)
-                                  GlobalSettings.Settings.CurrentRunningVersion = Assembly.GetExecutingAssembly().GetName().Version.Major.ToString() + "." + Assembly.GetExecutingAssembly().GetName().Version.Minor.ToString() + "." + uinfo
+                                  GlobalSettings.Settings.CurrentRunningVersion = Assembly.GetExecutingAssembly().GetName().Version.Major.ToString() + "." +
+                                  Assembly.GetExecutingAssembly().GetName().Version.Minor.ToString() + "." +
+                                  Assembly.GetExecutingAssembly().GetName().Version.Build.ToString()
                                   Return SharedClasses.UpdateCheck.CheckForUpdates()
                               End Function).ContinueWith(Sub(t)
                                                              If (t.Result) Then
@@ -1674,14 +1673,7 @@ Public Class FormMain
             Try
                 xel.Element("Type").Value = xel.Element("Type").Value.Replace("DWSIM.DWSIM.SimulationObjects", "DWSIM.Thermodynamics")
                 Dim obj As PropertyPackage = Nothing
-                If xel.Element("Type").Value.Contains("AdvancedEOS") Then
-                    Dim adveoskey As String = "PC-SAFT (with Association Support)"
-                    If PropertyPackages.ContainsKey(adveoskey) Then
-                        obj = PropertyPackages(adveoskey).ReturnInstance(xel.Element("Type").Value)
-                    Else
-                        Throw New Exception("Advanced EOS Property Package library not found. Please download and install it in order to run this simulation.")
-                    End If
-                ElseIf xel.Element("Type").Value.Contains("ThermoC") Then
+                If xel.Element("Type").Value.Contains("ThermoC") Then
                     Dim thermockey As String = "ThermoC Bridge"
                     If PropertyPackages.ContainsKey(thermockey) Then
                         obj = PropertyPackages(thermockey).ReturnInstance(xel.Element("Type").Value)

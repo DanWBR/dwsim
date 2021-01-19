@@ -349,6 +349,13 @@ Namespace UnitOperations.Auxiliary.SepOps
 
         Public Function ValidateCompositions() As Boolean
 
+            If _liqcompositions.Select(Function(x) x.Values.Select(Function(x2) x2.Value).Sum).Sum = 0.0 Then
+                Return False
+            End If
+            If _vapcompositions.Select(Function(x) x.Values.Select(Function(x2) x2.Value).Sum).Sum = 0.0 Then
+                Return False
+            End If
+
             If _liqcompositions.Count = 0 Then Return False
             If _vapcompositions.Count = 0 Then Return False
 
@@ -4413,8 +4420,28 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Dim cv As New SystemsOfUnits.Converter
             Dim spval1, spval2 As Double
 
-            spval1 = SystemsOfUnits.Converter.ConvertToSI(specs("C").SpecUnit, specs("C").SpecValue)
-            spval2 = SystemsOfUnits.Converter.ConvertToSI(specs("R").SpecUnit, specs("R").SpecValue)
+            spval1 = specs("C").SpecValue
+            spval2 = specs("R").SpecValue
+
+            Select Case specs("C").SType
+                Case ColumnSpec.SpecType.Temperature,
+                      ColumnSpec.SpecType.Product_Molar_Flow_Rate,
+                      ColumnSpec.SpecType.Product_Mass_Flow_Rate,
+                      ColumnSpec.SpecType.Heat_Duty,
+                      ColumnSpec.SpecType.Component_Molar_Flow_Rate,
+                      ColumnSpec.SpecType.Component_Mass_Flow_Rate
+                    spval1 = spval1.ConvertToSI(specs("C").SpecUnit)
+            End Select
+
+            Select Case specs("R").SType
+                Case ColumnSpec.SpecType.Temperature,
+                      ColumnSpec.SpecType.Product_Molar_Flow_Rate,
+                      ColumnSpec.SpecType.Product_Mass_Flow_Rate,
+                      ColumnSpec.SpecType.Heat_Duty,
+                      ColumnSpec.SpecType.Component_Molar_Flow_Rate,
+                      ColumnSpec.SpecType.Component_Mass_Flow_Rate
+                    spval2 = spval2.ConvertToSI(specs("R").SpecUnit)
+            End Select
 
             'step1
 

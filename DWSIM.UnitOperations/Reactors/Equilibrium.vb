@@ -149,6 +149,9 @@ Namespace Reactors
 
             Dim Vz As Double() = pp.RET_VMOL(PropertyPackages.Phase.Mixture)
 
+            Dim penval As Double = ReturnPenaltyValue()
+
+
             Dim fugv(tms.Phases(0).Compounds.Count - 1), fugl(tms.Phases(0).Compounds.Count - 1), prod(x.Length - 1) As Double
 
             fugv = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Vapor)
@@ -207,17 +210,13 @@ Namespace Reactors
 
             Dim kr As Double
 
-            Dim penval As Double = ReturnPenaltyValue()
-
             For i = 0 To Me.Reactions.Count - 1
-                With FlowSheet.Reactions(Me.Reactions(i))
-                    kr = .EvaluateK(T, pp)
-                    If LogErrorFunction Then
-                        f(i) = Math.Log(prod(i) / kr) + penval
-                    Else
-                        f(i) = prod(i) - kr + penval
-                    End If
-                End With
+                kr = FlowSheet.Reactions(Me.Reactions(i)).EvaluateK(T, pp)
+                If LogErrorFunction Then
+                    f(i) = Math.Log(Math.Abs(prod(i)) / kr) + penval
+                Else
+                    f(i) = prod(i) - kr + penval
+                End If
             Next
 
             Return f
@@ -374,9 +373,26 @@ Namespace Reactors
 
         End Sub
 
+        Private Mode As Integer = 1
+
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
-            Calculate_Internal(args)
+            Dim Success As Boolean = False
+            Dim Exc As Exception = Nothing
+            For i = 1 To 4
+                Try
+                    Calculate_Internal(args)
+                    Success = True
+                    Exit For
+                Catch ex As Exception
+                    Exc = ex
+                End Try
+                Mode = i + 1
+            Next
+            If Not Success Then
+                Mode = 1
+                Throw Exc
+            End If
 
         End Sub
 
@@ -648,7 +664,6 @@ Namespace Reactors
                 i += 1
             Next
 
-
             Dim m As Integer = 0
 
             Dim REx(r) As Double
@@ -673,8 +688,16 @@ Namespace Reactors
 
             Me.InitialGibbsEnergy = g0
 
-            MinVal = Math.Min(lbound.Min, REx.Min) * 10
-            MaxVal = Math.Max(ubound.Max, REx.Max) * 10
+            If Mode < 3 Then
+                MinVal = Math.Min(lbound.Min, REx.Min)
+                MaxVal = Math.Max(ubound.Max, REx.Max)
+            ElseIf Mode = 3 Then
+                MinVal = Math.Min(lbound.Min, REx.Min) * 10
+                MaxVal = Math.Max(ubound.Max, REx.Max) * 10
+            ElseIf Mode = 4 Then
+                MinVal = Math.Min(lbound.Min, REx.Min) * 100
+                MaxVal = Math.Max(ubound.Max, REx.Max) * 100
+            End If
 
             Dim CalcFinished As Boolean = False
 
@@ -685,10 +708,9 @@ Namespace Reactors
             solver2.MaxIterations = InternalLoopMaximumIterations
             solver2.Tolerance = InternalLoopTolerance
 
-            Dim solver3 As New Optimization.NewtonSolver
-            solver3.MaxIterations = InternalLoopMaximumIterations
+            Dim solver3 As New Simplex
+            solver3.MaxFunEvaluations = InternalLoopMaximumIterations
             solver3.Tolerance = InternalLoopTolerance
-            solver3.UseBroydenApproximation = True
 
             ' check equilibrium constants to define objective function form
 
@@ -698,7 +720,15 @@ Namespace Reactors
                 Keq.Add(Math.Abs(FlowSheet.Reactions(Me.Reactions(i)).EvaluateK(T, pp)))
             Next
 
-            LogErrorFunction = True
+            If Keq.Max > 1000000.0 Or Keq.Min < 0.000001 Then
+                LogErrorFunction = True
+            Else
+                If Mode < 3 Then
+                    LogErrorFunction = False
+                Else
+                    LogErrorFunction = True
+                End If
+            End If
 
             Dim efunc = Function(Tx)
 
@@ -750,7 +780,7 @@ Namespace Reactors
 
                                 Dim VariableValues As New List(Of Double())
                                 Dim FunctionValues As New List(Of Double)
-                                Dim result As Double, resnewton As Double()
+                                Dim result As Double
 
                                 If UseIPOPTSolver Then
 
@@ -767,14 +797,13 @@ Namespace Reactors
 
                                 Else
 
-                                    newx = solver3.Solve(Function(x1)
-                                                             FlowSheet.CheckStatus()
-                                                             VariableValues.Add(x1.Clone)
-                                                             resnewton = FunctionValue2N(x1)
-                                                             result = resnewton.AbsSqrSumY
-                                                             FunctionValues.Add(result)
-                                                             Return resnewton
-                                                         End Function, variables.ToArray)
+                                    newx = solver3.ComputeMin(Function(x1)
+                                                                  FlowSheet.CheckStatus()
+                                                                  VariableValues.Add(x1.Clone)
+                                                                  result = FunctionValue2N(x1).AbsSqrSumY
+                                                                  FunctionValues.Add(result)
+                                                                  Return result
+                                                              End Function, variables2.ToArray)
 
                                     FlowSheet.CheckStatus()
 
@@ -813,16 +842,6 @@ Namespace Reactors
                             IObj2?.SetCurrent
 
                             _IObj = IObj2
-
-                            'reevaluate function
-
-                            tms.Phases(0).Properties.temperature = T
-
-                            g1 = FunctionValue2G(REx)
-
-                            IObj2?.SetCurrent
-
-                            Me.FinalGibbsEnergy = g1
 
                             i = 0
                             For Each r As String In Me.Reactions
@@ -978,6 +997,14 @@ Namespace Reactors
             Else
                 efunc.Invoke(T)
             End If
+
+            'reevaluate function
+
+            tms.Phases(0).Properties.temperature = T
+
+            g1 = FunctionValue2G(REx)
+
+            Me.FinalGibbsEnergy = g1
 
             If g1 > g0 Then
 

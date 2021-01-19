@@ -713,12 +713,6 @@ Namespace Reactors
 
                             ElementBalance = ebal
 
-                            'this call to FunctionValue2G returns the final gibbs energy in kJ/s.
-
-                            Dim g1 = FunctionValue2G(N.Values.ToArray)
-
-                            Me.FinalGibbsEnergy = g1
-
                             'calculate component conversions.
 
                             For Each sb As Compound In ims.Phases(0).Compounds.Values
@@ -828,6 +822,14 @@ Namespace Reactors
             Else
                 gfunc.Invoke(T)
             End If
+
+            'this call to FunctionValue2G returns the final gibbs energy in kJ/s.
+
+            tms.SetTemperature(T)
+
+            Dim g1 = FunctionValue2G(N.Values.ToArray)
+
+            Me.FinalGibbsEnergy = g1
 
             Dim W As Double = ims.Phases(0).Properties.massflow.GetValueOrDefault
 
