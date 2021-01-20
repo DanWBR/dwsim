@@ -23,9 +23,9 @@ Namespace MathEx
 
     Public Class PolySolve
 
-        Shared Function Poly_Roots(ByVal Coeff) As Double(,)
+        Shared Function Poly_Roots(ByVal Coeff As Double()) As Double(,)
 
-            Poly_Roots = CalcRoots2(Coeff(3), Coeff(2), Coeff(1), Coeff(0))
+            Return CalcRoots2(Coeff(3), Coeff(2), Coeff(1), Coeff(0))
 
         End Function
 
@@ -39,11 +39,17 @@ Namespace MathEx
             Dim roots(2, 1) As Double
 
             roots(0, 0) = root1.Real
-            roots(0, 1) = IIf(Math.Abs(root1.Imaginary) > 0.0000000001, root1.Imaginary, 0.0)
+            If Math.Abs(root1.Imaginary) > 0.0000000001 Then
+                roots(0, 1) = root1.Imaginary
+            End If
             roots(1, 0) = root2.Real
-            roots(1, 1) = IIf(Math.Abs(root2.Imaginary) > 0.0000000001, root2.Imaginary, 0.0)
+            If Math.Abs(root2.Imaginary) > 0.0000000001 Then
+                roots(1, 1) = root2.Imaginary
+            End If
             roots(2, 0) = root3.Real
-            roots(2, 1) = IIf(Math.Abs(root3.Imaginary) > 0.0000000001, root3.Imaginary, 0.0)
+            If Math.Abs(root3.Imaginary) > 0.0000000001 Then
+                roots(2, 1) = root3.Imaginary
+            End If
 
             Return roots
 

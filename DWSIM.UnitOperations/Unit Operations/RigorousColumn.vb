@@ -35,6 +35,7 @@ Imports OxyPlot.Axes
 Imports DotNumerics.Optimization
 Imports DWSIM.MathOps.MathEx.Optimization
 Imports DWSIM.MathOps.MathEx.BrentOpt
+Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms
 
 Namespace UnitOperations.Auxiliary.SepOps
 
@@ -3834,6 +3835,12 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                 ByVal specs As Dictionary(Of String, SepOps.ColumnSpec),
                                 ByVal IdealK As Boolean, ByVal IdealH As Boolean) As Object
 
+            Dim flashalgs As New List(Of FlashAlgorithm)
+
+            For ia As Integer = 0 To ns
+                flashalgs.Add(pp.FlashBase)
+            Next
+
             Dim spval1, spval2 As Double
             Dim spci1, spci2 As Integer
 
@@ -3886,6 +3893,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Dim ObjFunctionValues As New List(Of Double)
             Dim ResultsVector As New List(Of Object)
 
+            Dim altmode As Boolean = False
+
             If Not specC_OK And Not specR_OK Then
 
                 Dim refluxratio As Double = 0.0
@@ -3913,9 +3922,20 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 Dim result As Object = Nothing
 
-                result = Solve_Internal(rc, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval,
+                Try
+                    result = Solve_Internal(rc, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval,
                                            x, y, z, fc, HF, T, P, condt, stopatitnumber, eff,
-                                           coltype, pp, newspecs, IdealK, IdealH)
+                                           coltype, pp, newspecs, IdealK, IdealH, False, flashalgs)
+                    altmode = False
+                Catch ex As Exception
+                    altmode = True
+                End Try
+
+                If altmode Then
+                    result = Solve_Internal(rc, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval,
+                                           x, y, z, fc, HF, T, P, condt, stopatitnumber, eff,
+                                           coltype, pp, newspecs, IdealK, IdealH, True, flashalgs)
+                End If
 
                 T = result(0)
                 V = result(1)
@@ -3952,9 +3972,20 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                                        If cspec.SpecValue < 0 Then Return 1.0E+20
 
-                                       result = Solve_Internal(rc, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval,
+                                       Try
+                                           result = Solve_Internal(rc, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval,
                                            x, y, z, fc, HF, T, P, condt, stopatitnumber, eff,
-                                           coltype, pp, newspecs, IdealK, IdealH)
+                                           coltype, pp, newspecs, IdealK, IdealH, False, flashalgs)
+                                           altmode = False
+                                       Catch ex As Exception
+                                           altmode = True
+                                       End Try
+
+                                       If altmode Then
+                                           result = Solve_Internal(rc, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval,
+                                           x, y, z, fc, HF, T, P, condt, stopatitnumber, eff,
+                                           coltype, pp, newspecs, IdealK, IdealH, True, flashalgs)
+                                       End If
 
                                        'Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ic, t_error}
 
@@ -4116,9 +4147,20 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                                        If cspec.SpecValue < 0 Then Return 1.0E+20
 
-                                       result = Solve_Internal(rc, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval,
-                                x, y, z, fc, HF, T, P, condt, stopatitnumber, eff,
-                                coltype, pp, newspecs, IdealK, IdealH)
+                                       Try
+                                           result = Solve_Internal(rc, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval,
+                                                x, y, z, fc, HF, T, P, condt, stopatitnumber, eff,
+                                                coltype, pp, newspecs, IdealK, IdealH, False, flashalgs)
+                                           altmode = False
+                                       Catch ex As Exception
+                                           altmode = True
+                                       End Try
+
+                                       If altmode Then
+                                           result = Solve_Internal(rc, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval,
+                                           x, y, z, fc, HF, T, P, condt, stopatitnumber, eff,
+                                           coltype, pp, newspecs, IdealK, IdealH, True, flashalgs)
+                                       End If
 
                                        'Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ic, t_error}
 
@@ -4226,68 +4268,80 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Dim errfunc As Double = 1.0E+20
 
                 Dim bmin As New BrentMinimize()
-                bmin.brentoptimize2(F.Sum * 0.05, F.Sum, tol(1) / 100, Function(xvar)
+                bmin.brentoptimize2(F.Sum * 0.05, F.Sum, tol(1) / 100,
+                                    Function(xvar)
 
-                                                                           rspec.SpecValue = xvar
+                                        rspec.SpecValue = xvar
 
-                                                                           result = Solve_Internal(rc, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval,
-                                                                   x, y, z, fc, HF, T, P, condt, stopatitnumber, eff,
-                                                                   coltype, pp, newspecs, IdealK, IdealH)
+                                        Try
+                                            result = Solve_Internal(rc, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval,
+                                                x, y, z, fc, HF, T, P, condt, stopatitnumber, eff,
+                                                coltype, pp, newspecs, IdealK, IdealH, False, flashalgs)
+                                            altmode = False
+                                        Catch ex As Exception
+                                            altmode = True
+                                        End Try
 
-                                                                           'Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ic, t_error}
+                                        If altmode Then
+                                            result = Solve_Internal(rc, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval,
+                                           x, y, z, fc, HF, T, P, condt, stopatitnumber, eff,
+                                           coltype, pp, newspecs, IdealK, IdealH, True, flashalgs)
+                                        End If
 
-                                                                           errfunc = 0.0
+                                        'Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ic, t_error}
 
-                                                                           Dim T2 = result(0)
-                                                                           Dim V2 = result(1)
-                                                                           Dim L2 = result(2)
-                                                                           Dim VSS2 = result(3)
-                                                                           Dim LSS2 = result(4)
-                                                                           Dim y2 = result(5)
-                                                                           Dim x2 = result(6)
-                                                                           Dim Kval2 = result(7)
-                                                                           Dim Q2 = result(8)
+                                        errfunc = 0.0
 
-                                                                           Select Case specs("R").SType
-                                                                               Case ColumnSpec.SpecType.Component_Fraction
-                                                                                   If specs("R").SpecUnit = "M" Or specs("R").SpecUnit = "Molar" Then
-                                                                                       errfunc += Log((x2(ns)(spci2)) / spval2) ^ 2
-                                                                                       specs("R").CalculatedValue = x2(ns)(spci1)
-                                                                                   Else 'W
-                                                                                       errfunc += Log((pp.AUX_CONVERT_MOL_TO_MASS(x2(ns))(spci2)) / spval2) ^ 2
-                                                                                       specs("R").CalculatedValue = pp.AUX_CONVERT_MOL_TO_MASS(x2(ns))(spci2)
-                                                                                   End If
-                                                                               Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
-                                                                                   errfunc += Log((L2(ns) * x2(ns)(spci2) * pp.RET_VMM()(spci2) / 1000) / spval2) ^ 2
-                                                                                   specs("R").CalculatedValue = L2(ns) * x2(ns)(spci2) * pp.RET_VMM()(spci2) / 1000
-                                                                               Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
-                                                                                   errfunc += Log((L2(ns) * x2(ns)(spci2)) / spval2) ^ 2
-                                                                                   specs("R").CalculatedValue = L2(ns) * x2(ns)(spci2)
-                                                                               Case ColumnSpec.SpecType.Component_Recovery
-                                                                                   Dim rec As Double = spval2 / 100
-                                                                                   Dim sumc As Double = 0
-                                                                                   For j = 0 To ns
-                                                                                       sumc += z(j)(spci2) * F(j)
-                                                                                   Next
-                                                                                   errfunc += Log(L2(ns) * x2(ns)(spci2) / sumc / rec) ^ 2
-                                                                                   specs("R").CalculatedValue = L2(ns) * x2(ns)(spci2) / sumc * 100
-                                                                               Case ColumnSpec.SpecType.Temperature
-                                                                                   errfunc += Log(T2(ns) / spval2) ^ 2
-                                                                                   specs("R").CalculatedValue = T2(ns)
-                                                                           End Select
+                                        Dim T2 = result(0)
+                                        Dim V2 = result(1)
+                                        Dim L2 = result(2)
+                                        Dim VSS2 = result(3)
+                                        Dim LSS2 = result(4)
+                                        Dim y2 = result(5)
+                                        Dim x2 = result(6)
+                                        Dim Kval2 = result(7)
+                                        Dim Q2 = result(8)
 
-                                                                           counter += 1
+                                        Select Case specs("R").SType
+                                            Case ColumnSpec.SpecType.Component_Fraction
+                                                If specs("R").SpecUnit = "M" Or specs("R").SpecUnit = "Molar" Then
+                                                    errfunc += Log((x2(ns)(spci2)) / spval2) ^ 2
+                                                    specs("R").CalculatedValue = x2(ns)(spci1)
+                                                Else 'W
+                                                    errfunc += Log((pp.AUX_CONVERT_MOL_TO_MASS(x2(ns))(spci2)) / spval2) ^ 2
+                                                    specs("R").CalculatedValue = pp.AUX_CONVERT_MOL_TO_MASS(x2(ns))(spci2)
+                                                End If
+                                            Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
+                                                errfunc += Log((L2(ns) * x2(ns)(spci2) * pp.RET_VMM()(spci2) / 1000) / spval2) ^ 2
+                                                specs("R").CalculatedValue = L2(ns) * x2(ns)(spci2) * pp.RET_VMM()(spci2) / 1000
+                                            Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
+                                                errfunc += Log((L2(ns) * x2(ns)(spci2)) / spval2) ^ 2
+                                                specs("R").CalculatedValue = L2(ns) * x2(ns)(spci2)
+                                            Case ColumnSpec.SpecType.Component_Recovery
+                                                Dim rec As Double = spval2 / 100
+                                                Dim sumc As Double = 0
+                                                For j = 0 To ns
+                                                    sumc += z(j)(spci2) * F(j)
+                                                Next
+                                                errfunc += Log(L2(ns) * x2(ns)(spci2) / sumc / rec) ^ 2
+                                                specs("R").CalculatedValue = L2(ns) * x2(ns)(spci2) / sumc * 100
+                                            Case ColumnSpec.SpecType.Temperature
+                                                errfunc += Log(T2(ns) / spval2) ^ 2
+                                                specs("R").CalculatedValue = T2(ns)
+                                        End Select
 
-                                                                           If Math.IEEERemainder(counter, 10) = 0.0 Then
-                                                                               pp.Flowsheet?.ShowMessage(String.Format("BP solver: external iteration #{0}, current objective function (error) value = {1}", counter, errfunc), IFlowsheet.MessageType.Information)
-                                                                           End If
+                                        counter += 1
 
-                                                                           ResultsVector.Add(result)
-                                                                           ObjFunctionValues.Add(errfunc)
+                                        If Math.IEEERemainder(counter, 10) = 0.0 Then
+                                            pp.Flowsheet?.ShowMessage(String.Format("BP solver: external iteration #{0}, current objective function (error) value = {1}", counter, errfunc), IFlowsheet.MessageType.Information)
+                                        End If
 
-                                                                           Return errfunc
+                                        ResultsVector.Add(result)
+                                        ObjFunctionValues.Add(errfunc)
 
-                                                                       End Function)
+                                        Return errfunc
+
+                                    End Function)
 
                 If Double.IsNaN(errfunc) Or errfunc > tol(1) Then Throw New Exception(pp.Flowsheet?.GetTranslatedString("DCGeneralError"))
 
@@ -4299,7 +4353,18 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             Else
 
-                Return Solve_Internal(rc, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, condt, stopatitnumber, eff, coltype, pp, specs, IdealK, IdealH)
+                Try
+                    Return Solve_Internal(rc, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, condt,
+                                          stopatitnumber, eff, coltype, pp, specs, IdealK, IdealH, False, flashalgs)
+                    altmode = False
+                Catch ex As Exception
+                    altmode = True
+                End Try
+
+                If altmode Then
+                    Return Solve_Internal(rc, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, condt,
+                                          stopatitnumber, eff, coltype, pp, specs, IdealK, IdealH, True, flashalgs)
+                End If
 
             End If
 
@@ -4318,7 +4383,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                 ByVal coltype As Column.ColType,
                                 ByVal pp As PropertyPackages.PropertyPackage,
                                 ByVal specs As Dictionary(Of String, SepOps.ColumnSpec),
-                                ByVal IdealK As Boolean, ByVal IdealH As Boolean) As Object
+                                ByVal IdealK As Boolean, ByVal IdealH As Boolean, ByVal AlternateMode As Boolean,
+                                ByVal flashalgs As List(Of FlashAlgorithm)) As Object
 
             pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
@@ -4404,9 +4470,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Dim poptions As New ParallelOptions() With {.TaskScheduler = Settings.AppTaskScheduler}
 
             Dim ic As Integer
-            Dim t_error, t_error_ant As Double
+            Dim t_error, t_error_ant, xcerror(ns) As Double
             Dim Tj(ns), Tj_ant(ns), dTj(ns) As Double
-            Dim Fj(ns), Lj(ns), Vj(ns), Vj_ant(ns), dVj(ns), xc(ns)(), fcj(ns)(), yc(ns)(), lc(ns)(), vc(ns)(), zc(ns)(), K(ns)(), Kant(ns)() As Double
+            Dim Fj(ns), Lj(ns), Vj(ns), Vj_ant(ns), dVj(ns), xc(ns)(), xc0(ns)(), fcj(ns)(), yc(ns)(), lc(ns)(), vc(ns)(), zc(ns)(), K(ns)(), Kant(ns)() As Double
             Dim Hfj(ns), Hv(ns), Hl(ns) As Double
             Dim VSSj(ns), LSSj(ns) As Double
 
@@ -4454,6 +4520,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             For i = 0 To ns
                 Array.Resize(fcj(i), nc)
                 Array.Resize(xc(i), nc)
+                Array.Resize(xc0(i), nc)
                 Array.Resize(yc(i), nc)
                 Array.Resize(lc(i), nc)
                 Array.Resize(vc(i), nc)
@@ -4590,6 +4657,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             'step3
 
+            Dim fx(ns), xtj(ns), dfdx(ns, ns), fxb(ns), xtjb(ns), dxtj(ns) As Double
+
             'internal loop
 
             ic = 0
@@ -4707,10 +4776,14 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Next
                 Next
 
+
                 For i = 0 To ns
+                    xcerror(i) = 0.0
                     For j = 0 To nc - 1
+                        xc0(i)(j) = xc(i)(j)
                         If sumx(i) > 0.0# Then xc(i)(j) = lc(i)(j) / sumx(i) Else xc(i)(j) = yc(i)(j) / K(i)(j)
                     Next
+                    xcerror(i) = xc(i).Sum - xc0(i).Sum
                 Next
 
                 For i = 0 To ns
@@ -4739,15 +4812,16 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 IObj2?.Paragraphs.Add("Calculating new temperatures...")
 
                 If doparallel Then
-                    Dim t1 As Task = Task.Factory.StartNew(Sub() Parallel.For(0, ns + 1, poptions,
+                    Dim t1 As Task = Task.Factory.StartNew(Sub()
+                                                               Parallel.For(0, ns + 1, poptions,
                                                                  Sub(ipar)
                                                                      If IdealK Then
-                                                                         Dim tmpvar As Object = ppr.DW_CalcBubT(xc(ipar), P(ipar), Tj(ipar), K(ipar), True)
+                                                                         Dim tmpvar As Object = flashalgs(ipar).Flash_PV(xc(ipar), P(ipar), 0.0, Tj(ipar), ppr, True, K(ipar))
                                                                          Tj(ipar) = tmpvar(4)
                                                                          Kant(ipar) = K(ipar)
                                                                          K(ipar) = tmpvar(6)
                                                                      Else
-                                                                         Dim tmpvar As Object = pp.DW_CalcBubT(xc(ipar), P(ipar), Tj(ipar), K(ipar), True)
+                                                                         Dim tmpvar As Object = flashalgs(ipar).Flash_PV(xc(ipar), P(ipar), 0.0, Tj(ipar), pp, True, K(ipar))
                                                                          Tj(ipar) = tmpvar(4)
                                                                          Kant(ipar) = K(ipar)
                                                                          K(ipar) = tmpvar(6)
@@ -4756,7 +4830,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                                                          Tj(ipar) = Tj_ant(ipar)
                                                                          K(ipar) = Kant(ipar)
                                                                      End If
-                                                                 End Sub),
+                                                                 End Sub)
+                                                           End Sub,
                                                       Settings.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
                                                       Settings.AppTaskScheduler)
@@ -4766,10 +4841,10 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         IObj2?.SetCurrent
                         If IdealK Then
                             ppr.CurrentMaterialStream.Flowsheet.CheckStatus()
-                            tmp = ppr.DW_CalcBubT(xc(i), P(i), Tj(i), K(i), True)
+                            tmp = flashalgs(i).Flash_PV(xc(i), P(i), 0.0, Tj(i), ppr, True, K(i))
                         Else
                             pp.CurrentMaterialStream.Flowsheet.CheckStatus()
-                            tmp = pp.DW_CalcBubT(xc(i), P(i), Tj(i), K(i), True)
+                            tmp = flashalgs(i).Flash_PV(xc(i), P(i), 0.0, Tj(i), pp, True, K(i))
                         End If
                         Tj(i) = tmp(4)
                         Kant(i) = K(i)
@@ -4783,18 +4858,41 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 dTj = Tj.SubtractY(Tj_ant)
 
-                'For i = 0 To ns
-                '    If Math.Abs(dTj(i)) > 5 Then
-                '        dTj(i) = Math.Sign(dTj(i)) * 5
-                '        Tj(i) = Tj_ant(i) + dTj(i)
-                '        K(i) = pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
-                '    End If
-                'Next
+                fx = dTj
+                xtj = Tj
 
-                If ic < 5 Then
-                    For i = 0 To ns
-                        Tj(i) = Tj(i) / 2 + Tj_ant(i) / 2
-                    Next
+                If AlternateMode Then
+
+                    If ic = 0 Then
+
+                        For i = 0 To ns
+                            For j = 0 To ns
+                                If i = j Then dfdx(i, j) = 1 Else dfdx(i, j) = 0
+                            Next
+                        Next
+
+                        Broyden.broydn(ns, xtj, fx, dxtj, xtjb, fxb, dfdx, 0)
+
+                    Else
+
+                        Broyden.broydn(ns, xtj, fx, dxtj, xtjb, fxb, dfdx, 1)
+
+                        For i = 0 To ns
+                            Tj(i) = Tj(i) + dxtj(i)
+                        Next
+
+                    End If
+
+                Else
+
+                    If ic < 5 Then
+
+                        For i = 0 To ns
+                            Tj(i) = 0.5 * Tj(i) + 0.5 * Tj_ant(i)
+                        Next
+
+                    End If
+
                 End If
 
                 For i = 0 To ns

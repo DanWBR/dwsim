@@ -292,7 +292,8 @@ Namespace PropertyPackages.ThermoPlugs
 
         End Function
 
-        Public Overrides Function CalcLnFug(ByVal T As Double, ByVal P As Double, ByVal Vx As Array, ByVal VKij As Object, ByVal VTc As Array, ByVal VPc As Array, ByVal Vw As Array, Optional ByVal otherargs As Object = Nothing, Optional ByVal forcephase As String = "") As Double()
+        Public Overrides Function CalcLnFug(ByVal T As Double, ByVal P As Double, ByVal Vx As Double(), ByVal VKij As Double(,), ByVal VTc As Double(),
+                                            ByVal VPc As Double(), ByVal Vw As Double(), Optional ByVal otherargs As Object = Nothing, Optional ByVal forcephase As String = "") As Double()
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -430,9 +431,9 @@ Namespace PropertyPackages.ThermoPlugs
             If _zarray.Count = 0 Then Throw New Exception(String.Format("SRK EOS: unable to find a root with provided parameters [T = {0} K, P = {1} Pa, MoleFracs={2}]", T.ToString, P.ToString, Vx.ToArrayString))
             If forcephase <> "" Then
                 If forcephase = "L" Then
-                    Z = Common.Min(_zarray.ToArray())
+                    Z = _zarray.Min
                 ElseIf forcephase = "V" Then
-                    Z = Common.Max(_zarray.ToArray())
+                    Z = _zarray.Max
                 End If
             Else
                 _mingz = ZtoMinG(_zarray.ToArray, T, P, Vx, VKij, Tc, Pc, w)
@@ -509,9 +510,9 @@ Namespace PropertyPackages.ThermoPlugs
             _zarray = CalcZ2(AG, BG)
             If forcephase <> "" Then
                 If forcephase = "L" Then
-                    Z = Common.Min(_zarray.ToArray())
+                    Z = _zarray.Min
                 ElseIf forcephase = "V" Then
-                    Z = Common.Max(_zarray.ToArray())
+                    Z = _zarray.Max
                 End If
             Else
                 _mingz = ZtoMinG(_zarray.ToArray(), T, P, Vx, VKij, VTc, VPc, Vw)

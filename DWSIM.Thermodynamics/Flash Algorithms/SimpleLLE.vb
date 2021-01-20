@@ -504,8 +504,8 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
                     i += 1
                 Loop Until i = n + 1
 
-                Pmin = Common.Min(Vp)
-                Pmax = Common.Max(Vp)
+                Pmin = Vp.Min
+                Pmax = Vp.Max
 
                 Pref = Pmin + (1 - V) * (Pmax - Pmin)
 

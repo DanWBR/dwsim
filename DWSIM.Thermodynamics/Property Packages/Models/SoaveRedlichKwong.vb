@@ -297,7 +297,8 @@ Namespace PropertyPackages.Auxiliary
             Dim ai(), bi(), ci() As Double
             Dim n As Integer, R As Double
             Dim Tc(), Pc(), Vc(), w(), Zc(), alpha(), m(), a(,), b(,), Z, Tr() As Double
-            Dim i, j, dadT
+            Dim i, j As Integer
+            Dim dadt As Double
 
             n = Vz.Length - 1
 
@@ -382,65 +383,48 @@ Namespace PropertyPackages.Auxiliary
             Dim tv
             Dim tv2
 
-            If Not IsNumeric(temp1) Then
+            If temp1(0, 0) > temp1(1, 0) Then
+                tv = temp1(1, 0)
+                tv2 = temp1(1, 1)
+                temp1(1, 0) = temp1(0, 0)
+                temp1(0, 0) = tv
+                temp1(1, 1) = temp1(0, 1)
+                temp1(0, 1) = tv2
+            End If
+            If temp1(0, 0) > temp1(2, 0) Then
+                tv = temp1(2, 0)
+                temp1(2, 0) = temp1(0, 0)
+                temp1(0, 0) = tv
+                tv2 = temp1(2, 1)
+                temp1(2, 1) = temp1(0, 1)
+                temp1(0, 1) = tv2
+            End If
+            If temp1(1, 0) > temp1(2, 0) Then
+                tv = temp1(2, 0)
+                temp1(2, 0) = temp1(1, 0)
+                temp1(1, 0) = tv
+                tv2 = temp1(2, 1)
+                temp1(2, 1) = temp1(1, 1)
+                temp1(1, 1) = tv2
+            End If
 
-                If temp1(0, 0) > temp1(1, 0) Then
-                    tv = temp1(1, 0)
-                    tv2 = temp1(1, 1)
-                    temp1(1, 0) = temp1(0, 0)
-                    temp1(0, 0) = tv
-                    temp1(1, 1) = temp1(0, 1)
-                    temp1(0, 1) = tv2
-                End If
-                If temp1(0, 0) > temp1(2, 0) Then
-                    tv = temp1(2, 0)
-                    temp1(2, 0) = temp1(0, 0)
-                    temp1(0, 0) = tv
-                    tv2 = temp1(2, 1)
-                    temp1(2, 1) = temp1(0, 1)
-                    temp1(0, 1) = tv2
-                End If
-                If temp1(1, 0) > temp1(2, 0) Then
-                    tv = temp1(2, 0)
-                    temp1(2, 0) = temp1(1, 0)
-                    temp1(1, 0) = tv
-                    tv2 = temp1(2, 1)
-                    temp1(2, 1) = temp1(1, 1)
-                    temp1(1, 1) = tv2
-                End If
-
-                If TIPO = "L" Then
-                    Z = temp1(0, 0)
-                    If temp1(0, 1) <> 0 Then
-                        Z = temp1(1, 0)
-                        If temp1(1, 1) <> 0 Then
-                            Z = temp1(2, 0)
-                        End If
-                    End If
-                    If Z < 0 Then Z = temp1(1, 0)
-                ElseIf TIPO = "V" Then
-                    Z = temp1(2, 0)
-                    If temp1(2, 1) <> 0 Then
-                        Z = temp1(1, 0)
-                        If temp1(1, 1) <> 0 Then
-                            Z = temp1(0, 0)
-                        End If
+            If TIPO = "L" Then
+                Z = temp1(0, 0)
+                If temp1(0, 1) <> 0 Then
+                    Z = temp1(1, 0)
+                    If temp1(1, 1) <> 0 Then
+                        Z = temp1(2, 0)
                     End If
                 End If
-
-            Else
-
-                Dim findZV, dfdz, zant As Double
-                If TIPO = "V" Then Z = 1 Else Z = 0.05
-                Do
-                    findZV = coeff(3) * Z ^ 3 + coeff(2) * Z ^ 2 + coeff(1) * Z + coeff(0)
-                    dfdz = 3 * coeff(3) * Z ^ 2 + 2 * coeff(2) * Z + coeff(1)
-                    zant = Z
-                    Z = Z - findZV / dfdz
-                    If Z < 0 Then Z = 1
-                Loop Until Math.Abs(findZV) < 0.0001 Or Double.IsNaN(Z)
-
-
+                If Z < 0 Then Z = temp1(1, 0)
+            ElseIf TIPO = "V" Then
+                Z = temp1(2, 0)
+                If temp1(2, 1) <> 0 Then
+                    Z = temp1(1, 0)
+                    If temp1(1, 1) <> 0 Then
+                        Z = temp1(0, 0)
+                    End If
+                End If
             End If
 
             IObj?.Paragraphs.Add(String.Format("<math_inline>Z</math_inline>: {0}", Z))
@@ -454,24 +438,15 @@ Namespace PropertyPackages.Auxiliary
             Dim aux1, aux2, auxtmp(n) As Double
             aux1 = -R / 2 * (0.42748 / T) ^ 0.5
 
-            If Settings.EnableParallelProcessing Then
-                Parallel.For(0, n + 1, Sub(k)
-                                           For l As Integer = 0 To n
-                                               auxtmp(k) += Vz(k) * Vz(l) * (1 - VKij(k, l)) * (ci(l) * (ai(k) * Tc(l) / Pc(l)) ^ 0.5 + ci(k) * (ai(l) * Tc(k) / Pc(k)) ^ 0.5)
-                                           Next
-                                       End Sub)
-                aux2 = auxtmp.SumY
-            Else
-                i = 0
+            i = 0
+            Do
+                j = 0
                 Do
-                    j = 0
-                    Do
-                        aux2 += Vz(i) * Vz(j) * (1 - VKij(i, j)) * (ci(j) * (ai(i) * Tc(j) / Pc(j)) ^ 0.5 + ci(i) * (ai(j) * Tc(i) / Pc(i)) ^ 0.5)
-                        j = j + 1
-                    Loop Until j = n + 1
-                    i = i + 1
-                Loop Until i = n + 1
-            End If
+                    aux2 += Vz(i) * Vz(j) * (1 - VKij(i, j)) * (ci(j) * (ai(i) * Tc(j) / Pc(j)) ^ 0.5 + ci(i) * (ai(j) * Tc(i) / Pc(i)) ^ 0.5)
+                    j = j + 1
+                Loop Until j = n + 1
+                i = i + 1
+            Loop Until i = n + 1
 
             dadT = aux1 * aux2
 
@@ -489,7 +464,7 @@ Namespace PropertyPackages.Auxiliary
             IObj?.Paragraphs.Add(String.Format("Calculated Enthalpy Departure: {0} kJ/kmol", DHres))
             IObj?.Paragraphs.Add(String.Format("Calculated Enthalpy Departure: {0} kJ/kg", DHres / MMm))
 
-            If MathEx.Common.Sum(Vz) = 0.0# Then
+            If Vz.Sum = 0.0# Then
                 H_SRK_MIX = 0.0#
             Else
                 IObj?.Paragraphs.Add(String.Format("Calculated Total Enthalpy (Ideal + Departure): {0} kJ/kg", Hid + DHres / MMm))
@@ -1420,7 +1395,7 @@ Final3:
 
         End Function
 
-      Function CalcLnFug(ByVal T, ByVal P, ByVal Vx, ByVal VKij, ByVal VTc, ByVal VPc, ByVal Vw, ByVal VTb, ByVal TIPO)
+        Function CalcLnFug(ByVal T, ByVal P, ByVal Vx, ByVal VKij, ByVal VTc, ByVal VPc, ByVal Vw, ByVal VTb, ByVal TIPO)
 
             Dim n, R, coeff(3) As Double
             Dim Vant(0, 4) As Double
@@ -1568,8 +1543,8 @@ Final3:
             Tmc = 0.20268 * aml / (R * bml)
             rho = P / (ZV * R * T)
             dPdrho_ = 0.1 * R * T
-            dPdrho = bml * rho * R * T * (1 - bml * rho) ^ -2 + R * T * (1 - bml * rho) ^ -1 + _
-                    aml * rho ^ 2 * (1 + 2 * bml * rho - (bml * rho) ^ 2) ^ -2 * (2 * bml - 2 * bml ^ 2 * rho) + _
+            dPdrho = bml * rho * R * T * (1 - bml * rho) ^ -2 + R * T * (1 - bml * rho) ^ -1 +
+                    aml * rho ^ 2 * (1 + 2 * bml * rho - (bml * rho) ^ 2) ^ -2 * (2 * bml - 2 * bml ^ 2 * rho) +
                     2 * aml * rho * (1 + 2 * bml * rho - (bml * rho) ^ 2) ^ -1
 
             If TIPO = "L" Then

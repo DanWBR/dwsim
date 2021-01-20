@@ -25,6 +25,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Inherits FlashAlgorithm
 
+        Dim nl As New NestedLoops
+        Dim nl3 As New NestedLoops3PV3
+        Dim nls As New NestedLoopsSLE
+        Dim nlsv As New NestedLoopsSVLLE
+
         Public Sub New()
             MyBase.New
             Order = 0
@@ -220,21 +225,17 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Select Case Flashtype
                 Case "VLE"
-                    Dim nl = New NestedLoops
                     nl.FlashSettings = FlashSettings
                     result = nl.Flash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
                 Case "VLLE"
-                    Dim nl3 = New NestedLoops3PV3
                     nl3.FlashSettings = FlashSettings
                     result = nl3.Flash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
                 Case "SVLE"
-                    Dim nls = New NestedLoopsSLE
                     nls.FlashSettings = FlashSettings
                     result = nls.Flash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
                 Case "SVLLE"
-                    Dim nl As New NestedLoopsSVLLE With {.FlashSettings = FlashSettings}
-                    nl.FlashSettings = FlashSettings
-                    result = nl.Flash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
+                    nlsv.FlashSettings = FlashSettings
+                    result = nlsv.Flash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
             End Select
 
             Return result
@@ -269,21 +270,17 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Select Case Flashtype
                 Case "VLE"
-                    Dim nl = New NestedLoops
                     nl.FlashSettings = FlashSettings
                     result = nl.Flash_TV(Vz, T, V, Pref, PP, ReuseKI, PrevKi)
                 Case "VLLE"
-                    Dim nl = New NestedLoops3PV3
-                    nl.FlashSettings = FlashSettings
-                    result = nl.Flash_TV(Vz, T, V, Pref, PP, ReuseKI, PrevKi)
+                    nl3.FlashSettings = FlashSettings
+                    result = nl3.Flash_TV(Vz, T, V, Pref, PP, ReuseKI, PrevKi)
                 Case "SVLE"
-                    Dim nl = New NestedLoopsSLE
-                    nl.FlashSettings = FlashSettings
-                    result = nl.Flash_TV(Vz, T, V, Pref, PP, ReuseKI, PrevKi)
+                    nls.FlashSettings = FlashSettings
+                    result = nls.Flash_TV(Vz, T, V, Pref, PP, ReuseKI, PrevKi)
                 Case "SVLLE"
-                    Dim nl As New NestedLoopsSVLLE
-                    nl.FlashSettings = FlashSettings
-                    result = nl.Flash_TV(Vz, T, V, Pref, PP, ReuseKI, PrevKi)
+                    nlsv.FlashSettings = FlashSettings
+                    result = nlsv.Flash_TV(Vz, T, V, Pref, PP, ReuseKI, PrevKi)
             End Select
 
             Return result

@@ -188,7 +188,7 @@ Namespace DWSIM.Utilities.HYD
             Dim ai(n), bi(n), tmp(3, n + 1), a(n, n), b(n, n)
             Dim aml2(n), amv2(n)
             Dim alpha(n), m(n)
-            Dim b1(n), b2(n), coeff(3)
+            Dim b1(n), b2(n), coeff(3) As Double
             Dim j As Integer
 
             Dim ai_(n)
@@ -959,7 +959,7 @@ STEP2:
             Dim ai(n), bi(n), tmp(3, n + 1), a(n, n), b(n, n)
             Dim aml2(n), amv2(n)
             Dim alpha(n), m(n)
-            Dim b1(n), b2(n), coeff(3)
+            Dim b1(n), b2(n), coeff(3) As Double
             Dim j As Integer
 
             Dim ai_(n)
