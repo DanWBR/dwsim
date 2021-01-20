@@ -1759,7 +1759,7 @@ Namespace PropertyPackages
             Dim P As Double = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
             Dim T As Double = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
 
-            If Not Settings.CAPEOPENMode Then
+            If Not Settings.CAPEOPENMode And Not TypeOf Me Is CAPEOPENPropertyPackage Then
                 If Me.FlashBase.FlashSettings(Enums.FlashSetting.CalculateBubbleAndDewPoints) Then
                     Try
                         Dim Vz As Double() = Me.RET_VMOL(Phase.Mixture)

@@ -100,7 +100,7 @@ Public Class Settings
     Public Shared Property UserInteractionsDatabases As New List(Of String)
     Public Shared Property UserDatabases As New List(Of String)
 
-    Public Shared Property HideSolidPhaseFromCAPEOPENComponents As Boolean = False
+    Public Shared Property HideSolidPhaseFromCAPEOPENComponents As Boolean = True
 
     Public Shared Property DrawingAntiAlias As Boolean = True
 
