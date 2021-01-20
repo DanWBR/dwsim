@@ -6039,7 +6039,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                 With Me.CurrentMaterialStream.Phases(0).Compounds(sub1)
 
-                    Return Auxiliary.PROPS.Pvp_leekesler(T, .ConstantProperties.Critical_Temperature, .ConstantProperties.Critical_Pressure, .ConstantProperties.Acentric_Factor)
+                    Return Auxiliary.PROPS.Pvp_leekesler(T, .Critical_Temperature, .Critical_Pressure, .Acentric_Factor)
 
                 End With
 
@@ -6080,7 +6080,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     '<vp_c name="Vapour pressure"  units="Pa" >
                     If eqno = "0" Then
                         With CompoundPropCache(ID)
-                            result = Auxiliary.PROPS.Pvp_leekesler(T, .ConstantProperties.Critical_Temperature, .ConstantProperties.Critical_Pressure, .ConstantProperties.Acentric_Factor)
+                            result = Auxiliary.PROPS.Pvp_leekesler(T, .Critical_Temperature, .Critical_Pressure, .Acentric_Factor)
                         End With
                     Else
                         If Integer.TryParse(eqno, New Integer) Then
@@ -6088,7 +6088,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         Else
                             If eqno = "" Then
                                 With CompoundPropCache(ID)
-                                    result = Auxiliary.PROPS.Pvp_leekesler(T, .ConstantProperties.Critical_Temperature, .ConstantProperties.Critical_Pressure, .ConstantProperties.Acentric_Factor)
+                                    result = Auxiliary.PROPS.Pvp_leekesler(T, .Critical_Temperature, .Critical_Pressure, .Acentric_Factor)
                                 End With
                             Else
                                 result = Me.ParseEquation(eqno, A, B, C, D, E, T) 'Pa
@@ -6108,7 +6108,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     Return result * 1000
                 Else
                     With CompoundPropCache(ID)
-                        Return Auxiliary.PROPS.Pvp_leekesler(T, .ConstantProperties.Critical_Temperature, .ConstantProperties.Critical_Pressure, .ConstantProperties.Acentric_Factor)
+                        Return Auxiliary.PROPS.Pvp_leekesler(T, .Critical_Temperature, .Critical_Pressure, .Acentric_Factor)
                     End With
                 End If
 
