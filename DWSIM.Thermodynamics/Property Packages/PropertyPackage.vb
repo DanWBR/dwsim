@@ -154,7 +154,6 @@ Namespace PropertyPackages
 #Region "    Caching"
 
         <XmlIgnore> Private CompoundPropCache As New Dictionary(Of Integer, ICompoundConstantProperties)
-        <XmlIgnore> Private IntCpDTCache As New Concurrent.ConcurrentDictionary(Of Integer, Concurrent.ConcurrentDictionary(Of Integer, Double))
 
 #End Region
 
@@ -7313,28 +7312,7 @@ Final3:
 
         Public Function AUX_INT_CPDTi(ByVal T1 As Double, ByVal T2 As Double, ByVal ID As Integer) As Double
 
-            Dim Tcache = Convert.ToInt32(T2 * 10)
-            Dim cflag As Boolean = True
-            Dim value As Double
-
-            If CompoundPropCache.ContainsKey(ID) Then
-                If IntCpDTCache.ContainsKey(ID) Then
-                    If IntCpDTCache(ID).ContainsKey(Tcache) Then
-                        value = IntCpDTCache(ID)(Tcache)
-                        cflag = False
-                    End If
-                End If
-                If cflag Then
-                    value = AUX_INT_CPDTi(T1, T2, CompoundPropCache(ID).Name)
-                    If Not IntCpDTCache.ContainsKey(ID) Then
-                        IntCpDTCache.TryAdd(ID, New Concurrent.ConcurrentDictionary(Of Integer, Double))
-                    End If
-                    IntCpDTCache(ID).TryAdd(Tcache, value)
-                End If
-                Return value
-            Else
-                Throw New Exception("Invalid call to IntCpDT")
-            End If
+            Return AUX_INT_CPDTi(T1, T2, CompoundPropCache(ID).Name)
 
         End Function
 

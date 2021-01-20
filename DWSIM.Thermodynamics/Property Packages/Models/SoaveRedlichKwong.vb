@@ -336,7 +336,7 @@ Namespace PropertyPackages.Auxiliary
             Do
                 j = 0
                 Do
-                    a(i, j) = (ai(i) * ai(j)) ^ 0.5 * (1 - VKij(i, j))
+                    a(i, j) = Math.Sqrt(ai(i) * ai(j)) * (1 - VKij(i, j))
                     j = j + 1
                 Loop Until j = n + 1
                 i = i + 1
@@ -1437,7 +1437,7 @@ Final3:
             Do
                 j = 0
                 Do
-                    a(i, j) = (ai(i) * ai(j)) ^ 0.5 * (1 - VKij(i, j))
+                    a(i, j) = Math.Sqrt(ai(i) * ai(j)) * (1 - VKij(i, j))
                     j = j + 1
                 Loop Until j = n + 1
                 i = i + 1

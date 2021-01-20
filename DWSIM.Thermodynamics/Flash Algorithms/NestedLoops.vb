@@ -2047,14 +2047,14 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             Dim eflag As Boolean = True
             Dim result As Object = Nothing
             Try
-                result = Flash_PV_2(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
+                result = Flash_PV_1(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
                 eflag = False
             Catch ex As Exception
 
             End Try
 
             If eflag Then
-                Return Flash_PV_1(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
+                Return Flash_PV_2(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
             Else
                 Return result
             End If
