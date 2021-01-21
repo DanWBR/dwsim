@@ -40,7 +40,7 @@
             feed.SetProp("totalflow", "overall", Nothing, "", "mass", New Double() {flows(i)})
             'calculate the flowsheet (run the simulation)
             Console.WriteLine("Running simulation with F = " & flows(i) & " kg/s, please wait...")
-            interf.CalculateFlowsheet(sim, Nothing)
+            interf.CalculateFlowsheet2(sim)
             'check for errors during the last run
             If sim.Solved = False Then
                 Console.WriteLine("Error solving flowsheet: " & sim.ErrorMessage)

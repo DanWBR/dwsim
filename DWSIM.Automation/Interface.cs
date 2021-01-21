@@ -151,6 +151,7 @@ namespace DWSIM.Automation
         {
             GlobalSettings.Settings.CalculatorActivated = true;
             GlobalSettings.Settings.SolverBreakOnException = true;
+            GlobalSettings.Settings.SolverMode = 1;
             GlobalSettings.Settings.EnableGPUProcessing = false;
             GlobalSettings.Settings.EnableParallelProcessing = true;
             Console.WriteLine("Solving Flowsheet, please wait...");
@@ -161,7 +162,7 @@ namespace DWSIM.Automation
         {
             GlobalSettings.Settings.CalculatorActivated = true;
             GlobalSettings.Settings.SolverBreakOnException = true;
-            GlobalSettings.Settings.SolverMode = 0;
+            GlobalSettings.Settings.SolverMode = 1;
             GlobalSettings.Settings.SolverTimeoutSeconds = 120;
             GlobalSettings.Settings.EnableGPUProcessing = false;
             GlobalSettings.Settings.EnableParallelProcessing = true;
