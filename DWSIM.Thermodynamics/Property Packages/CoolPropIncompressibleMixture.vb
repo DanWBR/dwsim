@@ -40,7 +40,7 @@ Namespace PropertyPackages
 
         Public SolutionDataList As New Dictionary(Of String, SolutionData)
 
-        Public Class SolutionData
+        <System.Serializable()> Public Class SolutionData
             Public Name As String
             Public Description As String
             Public Tmin, Tmax, Tbase, xmin, xmax As Double

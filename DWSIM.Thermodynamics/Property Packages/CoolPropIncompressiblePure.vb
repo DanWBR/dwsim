@@ -40,7 +40,7 @@ Namespace PropertyPackages
 
         Public FluidDataList As New Dictionary(Of String, FluidData)
 
-        Public Class FluidData
+        <System.Serializable()> Public Class FluidData
             Public Name As String
             Public Description As String
             Public Tmin, Tmax, Tbase As Double
