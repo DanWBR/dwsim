@@ -163,6 +163,8 @@ Public Class EditingForm_HeatExchanger
             tbOVF1.Text = .OutletVaporFraction1.ToString(nf)
             tbOVF2.Text = .OutletVaporFraction2.ToString(nf)
 
+            chkForcePinchToOutlets.Checked = .PinchPointAtOutlets
+
             'results
 
             gridResults.Rows.Clear()
@@ -234,6 +236,8 @@ Public Class EditingForm_HeatExchanger
         cbArea.Enabled = True
         cbHeat.Enabled = True
         cbMITA.Enabled = False
+
+        chkForcePinchToOutlets.Enabled = False
 
         btnEditSTProps.Enabled = False
 
@@ -330,6 +334,7 @@ Public Class EditingForm_HeatExchanger
                 tbColdFluidPDrop.Enabled = True
                 tbHotFluidPDrop.Enabled = True
                 tbEfficiency.Enabled = False
+                chkForcePinchToOutlets.Enabled = True
             Case 8
                 'Thermal Efficiency
                 tbHotFluidOutletT.Enabled = False
@@ -724,6 +729,10 @@ Public Class EditingForm_HeatExchanger
 
         End If
 
+    End Sub
+
+    Private Sub chkForcePinchToOutlets_CheckedChanged(sender As Object, e As EventArgs) Handles chkForcePinchToOutlets.CheckedChanged
+        SimObject.PinchPointAtOutlets = chkForcePinchToOutlets.Checked
     End Sub
 
 End Class

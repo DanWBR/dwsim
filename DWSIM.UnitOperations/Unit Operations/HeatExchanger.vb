@@ -109,6 +109,8 @@ Namespace UnitOperations
         Public Property OutletVaporFraction1 As Double = 0.0
         Public Property OutletVaporFraction2 As Double = 0.0
 
+        Public Property PinchPointAtOutlets As Boolean = False
+
         Public Property STProperties() As STHXProperties
             Get
                 If m_stprops Is Nothing Then m_stprops = New STHXProperties
@@ -1459,7 +1461,9 @@ Namespace UnitOperations
 
                                                  Next
 
-                                                 'If FlowDir = FlowDirection.CounterCurrent Then thprof.Reverse()
+                                                 If Not PinchPointAtOutlets And FlowDir = FlowDirection.CounterCurrent Then
+                                                     thprof.Reverse()
+                                                 End If
 
                                                  For i As Integer = 0 To nsteps - 1
                                                      dtprof.Add(Abs(thprof(i) - tcprof(i)))

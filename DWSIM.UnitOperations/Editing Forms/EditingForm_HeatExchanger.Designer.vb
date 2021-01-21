@@ -36,6 +36,7 @@ Partial Class EditingForm_HeatExchanger
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.chkForcePinchToOutlets = New System.Windows.Forms.CheckBox()
         Me.tbOVF2 = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.tbOVF1 = New System.Windows.Forms.TextBox()
@@ -185,6 +186,7 @@ Partial Class EditingForm_HeatExchanger
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.chkForcePinchToOutlets)
         Me.GroupBox2.Controls.Add(Me.tbOVF2)
         Me.GroupBox2.Controls.Add(Me.Label10)
         Me.GroupBox2.Controls.Add(Me.tbOVF1)
@@ -230,6 +232,15 @@ Partial Class EditingForm_HeatExchanger
         Me.ToolTipChangeTag.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip1"))
         Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip2"))
+        '
+        'chkForcePinchToOutlets
+        '
+        resources.ApplyResources(Me.chkForcePinchToOutlets, "chkForcePinchToOutlets")
+        Me.chkForcePinchToOutlets.Name = "chkForcePinchToOutlets"
+        Me.ToolTip1.SetToolTip(Me.chkForcePinchToOutlets, resources.GetString("chkForcePinchToOutlets.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.chkForcePinchToOutlets, resources.GetString("chkForcePinchToOutlets.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.chkForcePinchToOutlets, resources.GetString("chkForcePinchToOutlets.ToolTip2"))
+        Me.chkForcePinchToOutlets.UseVisualStyleBackColor = True
         '
         'tbOVF2
         '
@@ -929,4 +940,5 @@ Partial Class EditingForm_HeatExchanger
     Public WithEvents Label10 As Label
     Public WithEvents tbOVF1 As TextBox
     Public WithEvents Label9 As Label
+    Public WithEvents chkForcePinchToOutlets As CheckBox
 End Class

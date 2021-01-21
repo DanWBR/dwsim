@@ -79,7 +79,8 @@ namespace DWSIM.UI.Desktop.Editors
             {
                 SimObject.GraphicObject.Tag = arg3.Text;
                 SimObject.GetFlowsheet().UpdateInterface();
-            }, () => {
+            }, () =>
+            {
                 SimObject.GetFlowsheet().UpdateOpenEditForms();
             });
 
@@ -1414,6 +1415,11 @@ namespace DWSIM.UI.Desktop.Editors
                        }, () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("MITA"));
+                    s.CreateAndAddCheckBoxRow(container, "Force Pinch Point Location to Outlets", hx.PinchPointAtOutlets,
+                        (chk, e) =>
+                        {
+                            hx.PinchPointAtOutlets = chk.Checked.GetValueOrDefault();
+                        });
                     s.CreateAndAddTextBoxRow(container, nf, "Heat Transfer Efficiency (%)", hx.ThermalEfficiency,
                        (TextBox arg3, EventArgs ev) =>
                        {
@@ -1453,8 +1459,11 @@ namespace DWSIM.UI.Desktop.Editors
                                arg3.TextColor = (Colors.Red);
                            }
                        }, () => CallSolverIfNeeded());
-                    s.CreateAndAddDescriptionRow(container,
-                    SimObject.GetPropertyDescription("Ignore LMTD Error"));
+                    s.CreateAndAddCheckBoxRow(container, "Ignore LMTD Error", hx.IgnoreLMTDError,
+                          (chk, e) =>
+                          {
+                              hx.IgnoreLMTDError = chk.Checked.GetValueOrDefault();
+                          });
                     break;
                 case ObjectType.RCT_Conversion:
                     var reactor = (Reactor_Conversion)SimObject;
