@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 6.4.1
+Version 6.4.2
 Copyright (c) 2017-2021 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,17 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim6/commits/windows
+
+Version 6.4.2
+
+Author              Description
+Daniel Medeiros     Code optimization and calculation speed improvements     
+Daniel Medeiros     Fixed Heat Exchanger Pinch Point calculation mode
+Daniel Medeiros     Fixed a bug in Automation Library
+Daniel Medeiros     Fixed a regression in Property Package cloning
+Daniel Medeiros     Fixed a bug with Rigorous Column spec unit conversion
+Daniel Medeiros     Fixed a bug with PFR
+Gregor Reichert     Fixed VLLE PS Flash
 
 Version 6.4.1
 

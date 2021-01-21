@@ -1,12 +1,10 @@
-Version 6.4.1
+Version 6.4.2
 
 Author              Description
-Daniel Medeiros     Fixed issues with Equilibrium and Gibbs Reactors
-Daniel Medeiros     Fixed issues with Expander, Compressor and Heat Exchanger Models
-Daniel Medeiros     Fixed memory leaks in Automation mode
-Daniel Medeiros     Fixed an issue with forced solids
-Daniel Medeiros     Fixed issues in some CAPE-OPEN interface functions
-Daniel Medeiros     Fixed Spreadsheet Unit Operation heat balance
-Daniel Medeiros     Reduced saved file loading time
-Gregor Reichert     Fixed solids handling in some equilibrium calculations
-John Konecny        Fixed/Refactored Chemeo data importing (issue #97)
+Daniel Medeiros     Code optimization and calculation speed improvements     
+Daniel Medeiros     Fixed Heat Exchanger Pinch Point calculation mode
+Daniel Medeiros     Fixed a bug in Automation Library
+Daniel Medeiros     Fixed a regression in Property Package cloning
+Daniel Medeiros     Fixed a bug with Rigorous Column spec unit conversion
+Daniel Medeiros     Fixed a bug with PFR
+Gregor Reichert     Fixed VLLE PS Flash
