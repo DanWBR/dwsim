@@ -563,7 +563,12 @@ Namespace PropertyPackages
 
         Public Overridable Function Clone() As PropertyPackage
 
-            Return Me.DeepClone()
+            Dim pp As PropertyPackage = Me.MemberwiseClone()
+
+            pp.FlashSettings = New Dictionary(Of FlashSetting, String)(FlashSettings)
+            pp.ForcedSolids = New List(Of String)(ForcedSolids)
+
+            Return pp
 
         End Function
 
