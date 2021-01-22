@@ -555,7 +555,7 @@ Public Class FormOptimization
             var = Me.selectedoptcase.variables(row.Cells(0).Value)
             If var.objectID <> "SpreadsheetCell" And var.objectID <> "ReactionProperty" Then
                 row.Cells(8).Value = Format(SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(row.Cells(0).Value).unit, form.Collections.FlowsheetObjectCollection(var.objectID).GetPropertyValue(var.propID)), nf)
-            ElseIf var.objectID = "ReactionProperty" Then<
+            ElseIf var.objectID = "ReactionProperty" Then
                 Dim rx = form.Reactions.Values.Where(Function(x) x.Name = var.propID.Split("|")(0)).FirstOrDefault
                 row.Cells(8).Value = Format(rx.GetPropertyValue(var.propID.Split("|")(1)), nf)
             Else
