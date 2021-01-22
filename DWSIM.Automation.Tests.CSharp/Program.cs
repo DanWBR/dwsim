@@ -11,7 +11,7 @@ namespace AddObjectsToDWSIM
         static void Main()
         {
             // replace with DWSIM's installation directory on your computer
-            System.IO.Directory.SetCurrentDirectory("C:/Program Files/DWSIM5");
+            System.IO.Directory.SetCurrentDirectory("C:/Program Files/DWSIM6");
 
             //create automation manager
             DWSIM.Automation.Automation interf = new DWSIM.Automation.Automation();
