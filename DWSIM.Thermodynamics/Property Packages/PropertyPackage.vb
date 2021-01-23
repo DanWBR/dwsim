@@ -6042,7 +6042,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
             If CompoundPropCache(ID).IsPF = 1 Then
 
-                With Me.CurrentMaterialStream.Phases(0).Compounds(sub1)
+                With CompoundPropCache(ID)
 
                     Return Auxiliary.PROPS.Pvp_leekesler(T, .Critical_Temperature, .Critical_Pressure, .Acentric_Factor)
 
