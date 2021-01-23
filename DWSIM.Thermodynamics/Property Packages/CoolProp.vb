@@ -56,15 +56,18 @@ Namespace PropertyPackages
 
         Sub GetListOfSupportedCompounds()
 
-            Dim comps() As String = CoolProp.get_global_param_string("FluidsList").Split(",")
+            Dim comps As List(Of String) = CoolProp.get_global_param_string("FluidsList").Split(",").ToList()
+            comps = comps.Select(Function(a) a.Trim()).ToList()
 
             CompoundAliases.Clear()
             SupportedComponents.Clear()
 
-            Dim aliases(), cas As String
+            Dim aliases As New List(Of String), cas As String
 
             For Each c In comps
-                aliases = CoolProp.get_fluid_param_string(c, "aliases").Split(",")
+                aliases = CoolProp.get_fluid_param_string(c, "aliases").Split(",").ToList()
+                aliases = aliases.Select(Function(a) a.Trim()).Where(Function(a2) a2 <> "" And a2 <> " ").ToList()
+                aliases.Add(c)
                 SupportedComponents.AddRange(aliases)
                 cas = CoolProp.get_fluid_param_string(c, "CAS")
                 CompoundAliases.Add(cas, aliases.ToList)
