@@ -19,7 +19,7 @@ The software is designed for use by trained professional personnel and is not a 
 LICENSE
 ==================================================
 
-DWSIM is licensed under the GNU Lesser General Public License (GPL) Version 3.
+DWSIM is licensed under the GNU General Public License (GPL) Version 3.
  
 ==================================================
 SYSTEM REQUIREMENTS
