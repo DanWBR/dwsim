@@ -28,16 +28,11 @@ Namespace PropertyPackages
     <System.Runtime.InteropServices.Guid(PengRobinsonLKPropertyPackage.ClassId)>
     <System.Serializable()> Public Class PengRobinsonLKPropertyPackage
 
-        Inherits PropertyPackages.PropertyPackage
+        Inherits PropertyPackages.PengRobinsonPropertyPackage
 
         Public Shadows Const ClassId As String = "8544E0DC-5D07-44e5-8AC9-77EFB1ACD911"
 
-        Public MAT_KIJ(38, 38)
-
-        Private m_props As New PropertyPackages.Auxiliary.PROPS
-        Public m_pr As New PropertyPackages.Auxiliary.PengRobinson
         Public m_lk As New PropertyPackages.Auxiliary.LeeKesler
-        '<System.NonSerialized()> Private m_xn As DLLXnumbers.Xnumbers
 
         Public Sub New(ByVal comode As Boolean)
             MyBase.New(comode)
@@ -47,16 +42,14 @@ Namespace PropertyPackages
 
             MyBase.New()
 
-            'With Me.Parameters
-            '    .Add("PP_USE_EOS_LIQDENS", 0)
-            'End With
-
             Me.IsConfigurable = True
             Me._packagetype = PropertyPackages.PackageType.EOS
 
         End Sub
         Public Overrides Function GetModel() As Object
+
             Return m_pr
+
         End Function
 
 
@@ -78,64 +71,6 @@ Namespace PropertyPackages
 
 #Region "    DWSIM Functions"
 
-        Public Function RET_KIJ(ByVal id1 As String, ByVal id2 As String) As Double
-            If Me.m_pr.InteractionParameters.ContainsKey(id1) Then
-                If Me.m_pr.InteractionParameters(id1).ContainsKey(id2) Then
-                    Return m_pr.InteractionParameters(id1)(id2).kij
-                Else
-                    If Me.m_pr.InteractionParameters.ContainsKey(id2) Then
-                        If Me.m_pr.InteractionParameters(id2).ContainsKey(id1) Then
-                            Return m_pr.InteractionParameters(id2)(id1).kij
-                        Else
-                            Return 0
-                        End If
-                    Else
-                        Return 0
-                    End If
-                End If
-            Else
-                Return 0
-            End If
-        End Function
-
-        Public Overrides Function RET_VKij() As Double(,)
-
-            Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1, Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-            Dim i As Integer = 0
-            Dim l As Integer = 0
-
-            i = 0
-            For Each cp As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                l = 0
-                For Each cp2 As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                    val(i, l) = Me.RET_KIJ(cp.Name, cp2.Name)
-                    l = l + 1
-                Next
-                i = i + 1
-            Next
-
-            Return val
-
-        End Function
-
-        Public Overrides Function DW_CalcCp_ISOL(ByVal Phase1 As PropertyPackages.Phase, ByVal T As Double, ByVal P As Double) As Double
-            Select Case Phase1
-                Case Phase.Liquid
-                    Return Auxiliary.PROPS.CpCvR("L", T, P, RET_VMOL(Phase1), RET_VKij(), RET_VMAS(Phase1), RET_VTC(), RET_VPC(), RET_VCP(T), RET_VMM(), RET_VW(), RET_VZRa())(1)
-                Case Phase.Aqueous
-                    Return Auxiliary.PROPS.CpCvR("L", T, P, RET_VMOL(Phase1), RET_VKij(), RET_VMAS(Phase1), RET_VTC(), RET_VPC(), RET_VCP(T), RET_VMM(), RET_VW(), RET_VZRa())(1)
-                Case Phase.Liquid1
-                    Return Auxiliary.PROPS.CpCvR("L", T, P, RET_VMOL(Phase1), RET_VKij(), RET_VMAS(Phase1), RET_VTC(), RET_VPC(), RET_VCP(T), RET_VMM(), RET_VW(), RET_VZRa())(1)
-                Case Phase.Liquid2
-                    Return Auxiliary.PROPS.CpCvR("L", T, P, RET_VMOL(Phase1), RET_VKij(), RET_VMAS(Phase1), RET_VTC(), RET_VPC(), RET_VCP(T), RET_VMM(), RET_VW(), RET_VZRa())(1)
-                Case Phase.Liquid3
-                    Return Auxiliary.PROPS.CpCvR("L", T, P, RET_VMOL(Phase1), RET_VKij(), RET_VMAS(Phase1), RET_VTC(), RET_VPC(), RET_VCP(T), RET_VMM(), RET_VW(), RET_VZRa())(1)
-                Case Phase.Vapor
-                    Return Auxiliary.PROPS.CpCvR("V", T, P, RET_VMOL(Phase1), RET_VKij(), RET_VMAS(Phase1), RET_VTC(), RET_VPC(), RET_VCP(T), RET_VMM(), RET_VW(), RET_VZRa())(1)
-            End Select
-            Return 0.0#
-        End Function
-
         Public Overrides Function DW_CalcEnergyFlowMistura_ISOL(ByVal T As Double, ByVal P As Double) As Double
 
             Dim HM, HV, HL As Double
@@ -149,34 +84,6 @@ Namespace PropertyPackages
             Return ent_massica * flow
 
         End Function
-
-        Public Overrides Function DW_CalcK_ISOL(ByVal Phase1 As PropertyPackages.Phase, ByVal T As Double, ByVal P As Double) As Double
-            If Phase1 = Phase.Liquid Then
-                Return Me.AUX_CONDTL(T)
-            ElseIf Phase1 = Phase.Vapor Then
-                Return Me.AUX_CONDTG(T, P)
-            Else
-                Return 0.0#
-            End If
-        End Function
-
-        Public Overrides Function DW_CalcMassaEspecifica_ISOL(ByVal Phase1 As PropertyPackages.Phase, ByVal T As Double, ByVal P As Double, Optional ByVal Pvp As Double = 0) As Double
-            If Phase1 = Phase.Liquid Then
-                Return Me.AUX_LIQDENS(T, P, Pvp)
-            ElseIf Phase1 = Phase.Vapor Then
-                Return Me.AUX_VAPDENS(T, P)
-            ElseIf Phase1 = Phase.Mixture Then
-                Return Me.CurrentMaterialStream.Phases(1).Properties.volumetric_flow.GetValueOrDefault * Me.AUX_LIQDENS(T) / Me.CurrentMaterialStream.Phases(0).Properties.volumetric_flow.GetValueOrDefault + Me.CurrentMaterialStream.Phases(2).Properties.volumetric_flow.GetValueOrDefault * Me.AUX_VAPDENS(T, P) / Me.CurrentMaterialStream.Phases(0).Properties.volumetric_flow.GetValueOrDefault
-            End If
-        End Function
-
-        Public Overrides Function DW_CalcMM_ISOL(ByVal Phase1 As PropertyPackages.Phase, ByVal T As Double, ByVal P As Double) As Double
-            Return Me.AUX_MMM(Phase1)
-        End Function
-
-        Public Overrides Sub DW_CalcOverallProps()
-            MyBase.DW_CalcOverallProps()
-        End Sub
 
         Public Overrides Sub DW_CalcProp(ByVal [property] As String, ByVal phase As Phase)
 
@@ -420,200 +327,7 @@ Namespace PropertyPackages
 
         End Sub
 
-        Public Overrides Function DW_CalcPVAP_ISOL(ByVal T As Double) As Double
-            Return Auxiliary.PROPS.Pvp_leekesler(T, Me.RET_VTC(Phase.Liquid), Me.RET_VPC(Phase.Liquid), Me.RET_VW(Phase.Liquid))
-        End Function
-
-        Public Overrides Function DW_CalcTensaoSuperficial_ISOL(ByVal Phase1 As PropertyPackages.Phase, ByVal T As Double, ByVal P As Double) As Double
-            Return Me.AUX_SURFTM(T)
-        End Function
-
-        Public Overrides Sub DW_CalcTwoPhaseProps(ByVal Phase1 As PropertyPackages.Phase, ByVal Phase2 As PropertyPackages.Phase)
-
-            Dim T As Double
-
-            T = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
-            Me.CurrentMaterialStream.Phases(0).Properties.surfaceTension = Me.AUX_SURFTM(T)
-
-        End Sub
-
-        Public Overrides Function DW_CalcViscosidadeDinamica_ISOL(ByVal Phase1 As PropertyPackages.Phase, ByVal T As Double, ByVal P As Double) As Double
-            If Phase1 = Phase.Liquid Then
-                Return Me.AUX_LIQVISCm(T, P)
-            ElseIf Phase1 = Phase.Vapor Then
-                Return Me.AUX_VAPVISCm(T, Me.AUX_VAPDENS(T, P), Me.AUX_MMM(Phase.Vapor))
-            Else
-                Return 0.0#
-            End If
-        End Function
-
-        Function dfidRbb_H(ByVal Rbb, ByVal Kb0, ByVal Vz, ByVal Vu, ByVal sum_Hvi0, ByVal DHv, ByVal DHl, ByVal HT) As Double
-
-            Dim i As Integer = 0
-            Dim n = Vz.Length - 1
-
-            Dim Vpbb2(n), L2, V2, Kb2 As Double
-
-            i = 0
-            Dim sum_pi2 = 0.0#
-            Dim sum_eui_pi2 = 0.0#
-            Do
-                Vpbb2(i) = Vz(i) / (1 - Rbb + Kb0 * Rbb * Exp(Vu(i)))
-                sum_pi2 += Vpbb2(i)
-                sum_eui_pi2 += Exp(Vu(i)) * Vpbb2(i)
-                i = i + 1
-            Loop Until i = n + 1
-            Kb2 = sum_pi2 / sum_eui_pi2
-
-            L2 = (1 - Rbb) * sum_pi2
-            V2 = 1 - L2
-
-            Return L2 * (DHv - DHl) - sum_Hvi0 - DHv + HT * Me.AUX_MMM(Vz)
-
-        End Function
-
-        Function dfidRbb_S(ByVal Rbb, ByVal Kb0, ByVal Vz, ByVal Vu, ByVal sum_Hvi0, ByVal DHv, ByVal DHl, ByVal ST) As Double
-
-            Dim i As Integer = 0
-            Dim n = Vz.Length - 1
-
-            Dim Vpbb2(n), L, V As Double
-
-            i = 0
-            Dim sum_pi2 = 0.0#
-            Dim sum_eui_pi2 = 0.0#
-            Do
-                Vpbb2(i) = Vz(i) / (1 - Rbb + Kb0 * Rbb * Exp(Vu(i)))
-                sum_pi2 += Vpbb2(i)
-                sum_eui_pi2 += Exp(Vu(i)) * Vpbb2(i)
-                i = i + 1
-            Loop Until i = n + 1
-
-            L = (1 - Rbb) * sum_pi2
-            V = 1 - L
-
-            Return L * (DHv - DHl) - sum_Hvi0 - DHv + ST * Me.AUX_MMM(Vz)
-
-        End Function
-
 #End Region
-
-#Region "    Metodos Numericos"
-
-        Public Function IntegralSimpsonCp(ByVal a As Double,
-                 ByVal b As Double,
-                 ByVal Epsilon As Double, ByVal subst As String) As Double
-
-            Dim Result As Double
-            Dim switch As Boolean = False
-            Dim h As Double
-            Dim s As Double
-            Dim s1 As Double
-            Dim s2 As Double
-            Dim s3 As Double
-            Dim x As Double
-            Dim tm As Double
-
-            If a > b Then
-                switch = True
-                tm = a
-                a = b
-                b = tm
-            ElseIf Abs(a - b) < 0.01 Then
-                Return 0
-            End If
-
-            s2 = 1.0#
-            h = b - a
-            s = Me.AUX_CPi(subst, a) + Me.AUX_CPi(subst, b)
-            Do
-                s3 = s2
-                h = h / 2.0#
-                s1 = 0.0#
-                x = a + h
-                Do
-                    s1 = s1 + 2.0# * Me.AUX_CPi(subst, x)
-                    x = x + 2.0# * h
-                Loop Until Not x < b
-                s = s + s1
-                s2 = (s + s1) * h / 3.0#
-                x = Abs(s3 - s2) / 15.0#
-            Loop Until Not x > Epsilon
-            Result = s2
-
-            If switch Then Result = -Result
-
-            IntegralSimpsonCp = Result
-
-        End Function
-
-        Public Function IntegralSimpsonCp_T(ByVal a As Double,
-         ByVal b As Double,
-         ByVal Epsilon As Double, ByVal subst As String) As Double
-
-            'Cp = A + B*T + C*T^2 + D*T^3 + E*T^4 where Cp in kJ/kg-mol , T in K 
-
-
-            Dim Result As Double
-            Dim h As Double
-            Dim s As Double
-            Dim s1 As Double
-            Dim s2 As Double
-            Dim s3 As Double
-            Dim x As Double
-            Dim tm As Double
-            Dim switch As Boolean = False
-
-            If a > b Then
-                switch = True
-                tm = a
-                a = b
-                b = tm
-            ElseIf Abs(a - b) < 0.01 Then
-                Return 0
-            End If
-
-            s2 = 1.0#
-            h = b - a
-            s = Me.AUX_CPi(subst, a) / a + Me.AUX_CPi(subst, b) / b
-            Do
-                s3 = s2
-                h = h / 2.0#
-                s1 = 0.0#
-                x = a + h
-                Do
-                    s1 = s1 + 2.0# * Me.AUX_CPi(subst, x) / x
-                    x = x + 2.0# * h
-                Loop Until Not x < b
-                s = s + s1
-                s2 = (s + s1) * h / 3.0#
-                x = Abs(s3 - s2) / 15.0#
-            Loop Until Not x > Epsilon
-            Result = s2
-
-            If switch Then Result = -Result
-
-            IntegralSimpsonCp_T = Result
-
-        End Function
-
-#End Region
-
-        Public Overrides Function SupportsComponent(ByVal comp As Interfaces.ICompoundConstantProperties) As Boolean
-
-            Return True
-
-            'If Me.SupportedComponents.Contains(comp.ID) Then
-            '    Return True
-            'ElseIf comp.IsPF = 1 Then
-            '    Return True
-            'ElseIf comp.IsHYPO = 1 Then
-            '    Return True
-            'Else
-            '    Return False
-            'End If
-
-        End Function
 
         Public Overrides Function DW_CalcEnthalpy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
 
@@ -646,103 +360,6 @@ Namespace PropertyPackages
 
         End Function
 
-        Public Overrides Function DW_CalcCv_ISOL(ByVal Phase1 As Phase, ByVal T As Double, ByVal P As Double) As Double
-            Select Case Phase1
-                Case Phase.Liquid
-                    Return Auxiliary.PROPS.CpCvR("L", T, P, RET_VMOL(Phase1), RET_VKij(), RET_VMAS(Phase1), RET_VTC(), RET_VPC(), RET_VCP(T), RET_VMM(), RET_VW(), RET_VZRa())(2)
-                Case Phase.Aqueous
-                    Return Auxiliary.PROPS.CpCvR("L", T, P, RET_VMOL(Phase1), RET_VKij(), RET_VMAS(Phase1), RET_VTC(), RET_VPC(), RET_VCP(T), RET_VMM(), RET_VW(), RET_VZRa())(2)
-                Case Phase.Liquid1
-                    Return Auxiliary.PROPS.CpCvR("L", T, P, RET_VMOL(Phase1), RET_VKij(), RET_VMAS(Phase1), RET_VTC(), RET_VPC(), RET_VCP(T), RET_VMM(), RET_VW(), RET_VZRa())(2)
-                Case Phase.Liquid2
-                    Return Auxiliary.PROPS.CpCvR("L", T, P, RET_VMOL(Phase1), RET_VKij(), RET_VMAS(Phase1), RET_VTC(), RET_VPC(), RET_VCP(T), RET_VMM(), RET_VW(), RET_VZRa())(2)
-                Case Phase.Liquid3
-                    Return Auxiliary.PROPS.CpCvR("L", T, P, RET_VMOL(Phase1), RET_VKij(), RET_VMAS(Phase1), RET_VTC(), RET_VPC(), RET_VCP(T), RET_VMM(), RET_VW(), RET_VZRa())(2)
-                Case Phase.Vapor
-                    Return Auxiliary.PROPS.CpCvR("V", T, P, RET_VMOL(Phase1), RET_VKij(), RET_VMAS(Phase1), RET_VTC(), RET_VPC(), RET_VCP(T), RET_VMM(), RET_VW(), RET_VZRa())(2)
-            End Select
-            Return 0.0#
-        End Function
-
-        Public Overrides Sub DW_CalcCompPartialVolume(ByVal phase As Phase, ByVal T As Double, ByVal P As Double)
-
-            Dim partvol As New Object
-            Dim key As String = "0"
-            Dim i As Integer = 0
-
-            Select Case phase
-                Case Phase.Liquid
-                    key = "1"
-                    If LiquidDensityCalculationMode_Subcritical = LiquidDensityCalcMode.EOS Then
-                        partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
-                    Else
-                        partvol = New ArrayList
-                        For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(key).Compounds.Values
-                            partvol.Add(1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T)))
-                        Next
-                    End If
-                Case Phase.Aqueous
-                    key = "6"
-                    If LiquidDensityCalculationMode_Subcritical = LiquidDensityCalcMode.EOS Then
-                        partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
-                    Else
-                        partvol = New ArrayList
-                        For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(key).Compounds.Values
-                            partvol.Add(1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T)))
-                        Next
-                    End If
-                Case Phase.Liquid1
-                    key = "3"
-                    If LiquidDensityCalculationMode_Subcritical = LiquidDensityCalcMode.EOS Then
-                        partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
-                    Else
-                        partvol = New ArrayList
-                        For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(key).Compounds.Values
-                            partvol.Add(1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T)))
-                        Next
-                    End If
-                Case Phase.Liquid2
-                    key = "4"
-                    If LiquidDensityCalculationMode_Subcritical = LiquidDensityCalcMode.EOS Then
-                        partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
-                    Else
-                        partvol = New ArrayList
-                        For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(key).Compounds.Values
-                            partvol.Add(1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T)))
-                        Next
-                    End If
-                Case Phase.Liquid3
-                    key = "5"
-                    If LiquidDensityCalculationMode_Subcritical = LiquidDensityCalcMode.EOS Then
-                        partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "L", 0.01)
-                    Else
-                        partvol = New ArrayList
-                        For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(key).Compounds.Values
-                            partvol.Add(1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T)))
-                        Next
-                    End If
-                Case Phase.Vapor
-                    partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "V", 0.01)
-                    key = "2"
-                Case PropertyPackages.Phase.Solid
-                    partvol = RET_NullVector()
-            End Select
-
-            i = 0
-            For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(key).Compounds.Values
-                subst.PartialVolume = partvol(i)
-                i += 1
-            Next
-
-        End Sub
-
-        Public Overrides Function AUX_VAPDENS(ByVal T As Double, ByVal P As Double) As Double
-            Dim val As Double
-            Dim Z As Double = Me.m_lk.Z_LK("V", T / Me.AUX_TCM(PropertyPackages.Phase.Vapor), P / Me.AUX_PCM(PropertyPackages.Phase.Vapor), Me.AUX_WM(PropertyPackages.Phase.Vapor))(0)
-            val = P / (Z * 8.314 * T) / 1000 * AUX_MMM(Phase.Vapor)
-            Return val
-        End Function
-
         Public Overrides Function DW_CalcEntropy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
 
             Dim S As Double
@@ -771,67 +388,6 @@ Namespace PropertyPackages
             End If
 
             Return S
-        End Function
-
-        Public Overrides Function DW_CalcFugCoeff(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double()
-
-            Calculator.WriteToConsole(Me.ComponentName & " fugacity coefficient calculation for phase '" & st.ToString & "' requested at T = " & T & " K and P = " & P & " Pa.", 2)
-            Calculator.WriteToConsole("Compounds: " & Me.RET_VNAMES.ToArrayString, 2)
-            Calculator.WriteToConsole("Mole fractions: " & Vx.ToArrayString(), 2)
-
-            Dim prn As New PropertyPackages.ThermoPlugs.PR
-
-            Dim lnfug As Object
-
-            If st = State.Liquid Then
-                lnfug = prn.CalcLnFug(T, P, Vx, Me.RET_VKij, Me.RET_VTC, Me.RET_VPC, Me.RET_VW, Nothing, "L")
-            Else
-                lnfug = prn.CalcLnFug(T, P, Vx, Me.RET_VKij, Me.RET_VTC, Me.RET_VPC, Me.RET_VW, Nothing, "V")
-            End If
-
-            Dim n As Integer = UBound(lnfug)
-            Dim i As Integer
-            Dim fugcoeff(n) As Double
-
-            For i = 0 To n
-                fugcoeff(i) = Exp(lnfug(i))
-            Next
-
-            Calculator.WriteToConsole("Result: " & fugcoeff.ToArrayString(), 2)
-
-            Return fugcoeff
-
-        End Function
-
-        Public Overrides ReadOnly Property MobileCompatible As Boolean
-            Get
-                Return False
-            End Get
-        End Property
-
-        Public Overrides Function AUX_Z(Vx() As Double, T As Double, P As Double, state As PhaseName) As Double
-
-            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
-
-            Inspector.Host.CheckAndAdd(IObj, "", "AUX_Z", "Compressibility Factor", "Compressibility Factor Calculation Routine")
-
-            IObj?.SetCurrent()
-
-            Dim val As Double
-            If state = PhaseName.Liquid Then
-                val = m_pr.Z_PR(T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, "L")
-            Else
-                val = m_pr.Z_PR(T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, "V")
-            End If
-
-            IObj?.Paragraphs.Add("<h2>Results</h2>")
-
-            IObj?.Paragraphs.Add(String.Format("Compressibility Factor: {0}", val))
-
-            IObj?.Close()
-
-            Return val
-
         End Function
 
     End Class
