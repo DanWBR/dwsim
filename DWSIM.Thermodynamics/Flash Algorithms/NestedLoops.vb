@@ -2285,11 +2285,26 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     Dim K1(n), K2(n), dKdT(n) As Double
 
-                    IObj?.SetCurrent
-                    K1 = PP.DW_CalcKvalue(Vx, Vy, T - epsilon, P)
-
-                    IObj?.SetCurrent
-                    K2 = PP.DW_CalcKvalue(Vx, Vy, T + epsilon, P)
+                    If Settings.EnableParallelProcessing Then
+                        Dim task1 = Task.Factory.StartNew(Sub()
+                                                              K1 = PP.DW_CalcKvalue(Vx, Vy, T - epsilon, P)
+                                                          End Sub,
+                                                        Settings.TaskCancellationTokenSource.Token,
+                                                        TaskCreationOptions.None,
+                                                       Settings.AppTaskScheduler)
+                        Dim task2 = Task.Factory.StartNew(Sub()
+                                                              K2 = PP.DW_CalcKvalue(Vx, Vy, T + epsilon, P)
+                                                          End Sub,
+                                                    Settings.TaskCancellationTokenSource.Token,
+                                                    TaskCreationOptions.None,
+                                                   Settings.AppTaskScheduler)
+                        Task.WaitAll(task1, task2)
+                    Else
+                        IObj?.SetCurrent
+                        K1 = PP.DW_CalcKvalue(Vx, Vy, T - epsilon, P)
+                        IObj?.SetCurrent
+                        K2 = PP.DW_CalcKvalue(Vx, Vy, T + epsilon, P)
+                    End If
 
                     dKdT = K2.SubtractY(K1).MultiplyConstY(1 / (2 * epsilon))
 
