@@ -496,20 +496,14 @@ Namespace PropertyPackages.Auxiliary
 
             R = 8.314
 
-            i = 0
-            Do
-                Tr(i) = T / Tc(i)
-                i = i + 1
-            Loop Until i = n + 1
-
             Dim MMm As Double = Vz.MultiplyY(VMM).SumY
 
             i = 0
             Do
-                alpha(i) = (1 + (0.37464 + 1.54226 * w(i) - 0.26992 * w(i) ^ 2) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
-                ai(i) = 0.45724 * alpha(i) * R ^ 2 * Tc(i) ^ 2 / Pc(i)
+                ci(i) = 0.37464 + 1.54226 * w(i) - 0.26992 * Math.Pow(w(i), 2)
+                alpha(i) = Math.Pow(1 + ci(i) * (1 - Math.Sqrt(T / Tc(i))), 2)
+                ai(i) = 0.45724 * alpha(i) * Math.Pow(R * Tc(i), 2) / Pc(i)
                 bi(i) = 0.0778 * R * Tc(i) / Pc(i)
-                ci(i) = 0.37464 + 1.54226 * w(i) - 0.26992 * w(i) ^ 2
                 i = i + 1
             Loop Until i = n + 1
 
@@ -527,7 +521,7 @@ Namespace PropertyPackages.Auxiliary
             IObj?.Paragraphs.Add("<math_inline>a_{m}</math_inline>: " & am)
             IObj?.Paragraphs.Add("<math_inline>b_{m}</math_inline>: " & bm)
 
-            Dim AG1 = am * P / (R * T) ^ 2
+            Dim AG1 = am * P / Math.Pow(R * T, 2)
             Dim BG1 = bm * P / (R * T)
 
             IObj?.Paragraphs.Add(String.Format("<math_inline>A</math_inline>: {0}", AG1))
@@ -1245,14 +1239,8 @@ Namespace PropertyPackages.ThermoPlugs
 
             i = 0
             Do
-                Tr(i) = T / Tc(i)
-                i = i + 1
-            Loop Until i = n + 1
-
-            i = 0
-            Do
-                alpha(i) = (1 + (0.37464 + 1.54226 * w(i) - 0.26992 * w(i) ^ 2) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
-                ai(i) = 0.45724 * alpha(i) * R ^ 2 * Tc(i) ^ 2 / Pc(i)
+                alpha(i) = Math.Pow(1 + (0.37464 + 1.54226 * w(i) - 0.26992 * Math.Pow(w(i), 2)) * (1 - Math.Sqrt(T / Tc(i))), 2)
+                ai(i) = 0.45724 * alpha(i) * Math.Pow(R * Tc(i), 2) / Pc(i)
                 bi(i) = 0.0778 * R * Tc(i) / Pc(i)
                 i = i + 1
             Loop Until i = n + 1
@@ -1272,7 +1260,7 @@ Namespace PropertyPackages.ThermoPlugs
             IObj?.Paragraphs.Add("<math_inline>a_{m}</math_inline>: " & aml)
             IObj?.Paragraphs.Add("<math_inline>b_{m}</math_inline>: " & bml)
 
-            AG = aml * P / (R * T) ^ 2
+            AG = aml * P / Math.Pow(R * T, 2)
             BG = bml * P / (R * T)
 
             IObj?.Paragraphs.Add(String.Format("<math_inline>A</math_inline>: {0}", AG))
@@ -1282,7 +1270,7 @@ Namespace PropertyPackages.ThermoPlugs
 
             IObj?.SetCurrent()
 
-            _zarray = CalcZ(T, P, Vx, VKij, Tc, Pc, w)
+            _zarray = CalcZ2(AG, BG)
             If _zarray.Count = 0 Then
                 Dim ex As New Exception(String.Format("PR EOS: unable to find a root with provided parameters [T = {0} K, P = {1} Pa, MoleFracs={2}]", T.ToString, P.ToString, Vx.ToArrayString))
                 ex.Data.Add("DetailedDescription", "This error occurs when the PR EOS is unable to find a density root with the given parameters.")
@@ -1303,22 +1291,16 @@ Namespace PropertyPackages.ThermoPlugs
 
             IObj?.Paragraphs.Add(String.Format("<math_inline>Z</math_inline>: {0}", Z))
 
-            Dim Pcorr As Double = P
-
-            'Dim ZP As Double() = CheckRoot(Z, aml, bml, P, T, forcephase)
-            'Z = ZP(0)
-            'Pcorr = ZP(1)
-
             Dim t1, t2, t3, t4, t5 As Double
             i = 0
             Do
                 t1 = bi(i) * (Z - 1) / bml
                 t2 = -Math.Log(Z - BG)
                 t3 = AG * (2 * aml2(i) / aml - bi(i) / bml)
-                t4 = Math.Log((Z + (1 + 2 ^ 0.5) * BG) / (Z + (1 - 2 ^ 0.5) * BG))
-                t5 = 2 * 2 ^ 0.5 * BG
+                t4 = Math.Log((Z + (1 + 1.414213) * BG) / (Z + (1 - 1.414213) * BG))
+                t5 = 2 * 1.414213 * BG
                 LN_CF(i) = t1 + t2 - (t3 * t4 / t5)
-                LN_CF(i) = LN_CF(i) + Math.Log(Pcorr / P)
+                LN_CF(i) = LN_CF(i)
                 i = i + 1
             Loop Until i = n + 1
 
@@ -1366,7 +1348,7 @@ Namespace PropertyPackages.ThermoPlugs
             aml = MathEx.Common.Sum(aml_temp)
             bml = MathEx.Common.Sum(bml_temp)
 
-            AG = aml * P / (R * T) ^ 2
+            AG = aml * P / Math.Pow(R * T, 2)
             BG = bml * P / (R * T)
 
             Dim _zarray As List(Of Double), _mingz As Double(), Z As Double
