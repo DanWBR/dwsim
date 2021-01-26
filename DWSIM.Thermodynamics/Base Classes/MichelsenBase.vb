@@ -57,7 +57,21 @@ Namespace PropertyPackages
                 g1 = 1 / (v - b)
                 dPdV = -R * T * g1 ^ 2 + a * (2 * v + b) / (v ^ 2 * (v + b) ^ 2)
                 dPdT = R * g1 - 1 / (v * (v + b)) * dadT
+
+            ElseIf eos = "PR78" Then
+
+                tmp = ThermoPlugs.PR78.ReturnParameters(T, P, Vx, pp.RET_VKij, pp.RET_VTC, pp.RET_VPC, pp.RET_VW)
+
+                a = tmp(0)
+                b = tmp(1)
+                v = tmp(2)
+                dadT = tmp(3)
+                g1 = 1 / (v - b)
+                dPdV = -R * T * g1 ^ 2 + a * (2 * v + b) / (v ^ 2 * (v + b) ^ 2)
+                dPdT = R * g1 - 1 / (v * (v + b)) * dadT
+
             Else
+
                 tmp = ThermoPlugs.PR.ReturnParameters(T, P, Vx, pp.RET_VKij, pp.RET_VTC, pp.RET_VPC, pp.RET_VW)
 
                 a = tmp(0)
@@ -67,6 +81,7 @@ Namespace PropertyPackages
                 g1 = 1 / (v - b)
                 dPdV = -R * T * (g1 ^ 2) + 2 * a * (v + b) / (v ^ 2 + 2 * b * v - b ^ 2) ^ 2
                 dPdT = R * g1 - 1 / ((v ^ 2 + 2 * b * v - b ^ 2)) * dadT
+
             End If
 
 
@@ -82,6 +97,7 @@ Namespace PropertyPackages
 
 
             If eos = "SRK" Then
+
                 tmp = ThermoPlugs.SRK.ReturnParameters(T, P, Vx, pp.RET_VKij, pp.RET_VTC, pp.RET_VPC, pp.RET_VW)
 
                 a = tmp(0)
@@ -90,7 +106,20 @@ Namespace PropertyPackages
                 dadT = tmp(3)
                 g1 = 1 / (v - b)
                 dPdV = -R * T * g1 ^ 2 + a * (2 * v + b) / (v ^ 2 * (v + b) ^ 2)
+
+            ElseIf eos = "PR78" Then
+
+                tmp = ThermoPlugs.PR78.ReturnParameters(T, P, Vx, pp.RET_VKij, pp.RET_VTC, pp.RET_VPC, pp.RET_VW)
+
+                a = tmp(0)
+                b = tmp(1)
+                v = tmp(2)
+                dadT = tmp(3)
+                g1 = 1 / (v - b)
+                dPdV = -R * T * g1 ^ 2 + a * (2 * v + b) / (v ^ 2 * (v + b) ^ 2)
+
             Else
+
                 tmp = ThermoPlugs.PR.ReturnParameters(T, P, Vx, pp.RET_VKij, pp.RET_VTC, pp.RET_VPC, pp.RET_VW)
 
                 a = tmp(0)

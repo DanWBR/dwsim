@@ -754,6 +754,32 @@ Namespace PropertyPackages
 
 #End Region
 
+        Public Overrides Function CalcIsothermalCompressibility(p As Interfaces.IPhase) As Double
+
+            Dim T, P0 As Double
+            T = CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
+            P0 = CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
+
+            Select Case p.Name
+                Case "Mixture"
+                    Return 0.0#
+                Case "Vapor"
+                    Return ThermoPlug.CalcIsothermalCompressibility(RET_VMOL(Phase.Vapor), P0, T, Me, "SRK")
+                Case "OverallLiquid"
+                    Return 0.0#
+                Case "Liquid1"
+                    Return ThermoPlug.CalcIsothermalCompressibility(RET_VMOL(Phase.Liquid1), P0, T, Me, "SRK")
+                Case "Liquid2"
+                    Return ThermoPlug.CalcIsothermalCompressibility(RET_VMOL(Phase.Liquid2), P0, T, Me, "SRK")
+                Case "Liquid3"
+                    Return ThermoPlug.CalcIsothermalCompressibility(RET_VMOL(Phase.Liquid3), P0, T, Me, "SRK")
+                Case "Aqueous"
+                    Return ThermoPlug.CalcIsothermalCompressibility(RET_VMOL(Phase.Aqueous), P0, T, Me, "SRK")
+                Case "Solid"
+                    Return 0.0#
+            End Select
+        End Function
+
         Public Overrides Function DW_CalcEnthalpy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
 
             If OverrideEnthalpyCalculation Then

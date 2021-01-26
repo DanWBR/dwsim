@@ -2286,18 +2286,16 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     Dim K1(n), K2(n), dKdT(n) As Double
 
                     If Settings.EnableParallelProcessing Then
-                        Dim task1 = Task.Factory.StartNew(Sub()
-                                                              K1 = PP.DW_CalcKvalue(Vx, Vy, T - epsilon, P)
-                                                          End Sub,
-                                                        Settings.TaskCancellationTokenSource.Token,
-                                                        TaskCreationOptions.None,
-                                                       Settings.AppTaskScheduler)
-                        Dim task2 = Task.Factory.StartNew(Sub()
-                                                              K2 = PP.DW_CalcKvalue(Vx, Vy, T + epsilon, P)
-                                                          End Sub,
-                                                    Settings.TaskCancellationTokenSource.Token,
-                                                    TaskCreationOptions.None,
-                                                   Settings.AppTaskScheduler)
+                        Dim task1 = New Task(Sub()
+                                                 K1 = PP.DW_CalcKvalue(Vx, Vy, T - epsilon, P)
+                                             End Sub,
+                                                        Settings.TaskCancellationTokenSource.Token)
+                        Dim task2 = New Task(Sub()
+                                                 K2 = PP.DW_CalcKvalue(Vx, Vy, T + epsilon, P)
+                                             End Sub,
+                                                    Settings.TaskCancellationTokenSource.Token)
+                        task1.Start()
+                        task2.Start()
                         Task.WaitAll(task1, task2)
                     Else
                         IObj?.SetCurrent

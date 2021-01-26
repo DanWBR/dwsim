@@ -294,16 +294,14 @@ Namespace PropertyPackages.Auxiliary
 
             IObj?.Paragraphs.Add(String.Format("<h2>Calculated Intermediate Parameters</h2>"))
 
-            Dim ai(), bi(), ci() As Double
             Dim n As Integer, R As Double
-            Dim Vc(), Zc(), alpha(), m(), a(,), b(,), Z As Double
-            Dim i, j As Integer
-            Dim dadt As Double
-
             n = Vz.Length - 1
 
-            ReDim ai(n), bi(n), ci(n), a(n, n), b(n, n)
-            ReDim Vc(n), Zc(n), alpha(n), m(n)
+            Dim ai(n), bi(n), ci(n) As Double
+            Dim Vc(n), Zc(n), alpha(n), m(n), a(n, n), b(n, n), Z As Double
+
+            Dim i, j As Integer
+            Dim dadt As Double
 
             R = 8.314
 
@@ -316,10 +314,10 @@ Namespace PropertyPackages.Auxiliary
 
             i = 0
             Do
-                alpha(i) = (1 + (0.48 + 1.574 * w(i) - 0.176 * w(i) ^ 2) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
-                ai(i) = 0.42748 * alpha(i) * R ^ 2 * Tc(i) ^ 2 / Pc(i)
+                alpha(i) = Math.Pow(1 + (0.48 + 1.574 * w(i) - 0.176 * w(i) ^ 2) * (1 - Math.Sqrt(T / Tc(i))), 2)
+                ai(i) = 0.42748 * alpha(i) * Math.Pow(R * Tc(i), 2) / Pc(i)
                 bi(i) = 0.08664 * R * Tc(i) / Pc(i)
-                ci(i) = 0.48 + 1.574 * w(i) - 0.176 * w(i) ^ 2
+                ci(i) = 0.48 + 1.574 * w(i) - 0.176 * Math.Pow(w(i), 2)
                 i = i + 1
             Loop Until i = n + 1
 
@@ -357,7 +355,7 @@ Namespace PropertyPackages.Auxiliary
             IObj?.Paragraphs.Add("<math_inline>a_{m}</math_inline>: " & am)
             IObj?.Paragraphs.Add("<math_inline>b_{m}</math_inline>: " & bm)
 
-            Dim AG1 = am * P / (R * T) ^ 2
+            Dim AG1 = am * P / Math.Pow(R * T, 2)
             Dim BG1 = bm * P / (R * T)
 
             IObj?.Paragraphs.Add(String.Format("<math_inline>A</math_inline>: {0}", AG1))
@@ -366,7 +364,7 @@ Namespace PropertyPackages.Auxiliary
             Dim coeff(3) As Double
 
             coeff(0) = -AG1 * BG1
-            coeff(1) = AG1 - BG1 - BG1 ^ 2
+            coeff(1) = AG1 - BG1 - BG1 * BG1
             coeff(2) = -1
             coeff(3) = 1
 
@@ -401,18 +399,18 @@ Namespace PropertyPackages.Auxiliary
 
             If TIPO = "L" Then
                 Z = temp1(0, 0)
-                If temp1(0, 1) <> 0 Then
+                If temp1(0, 1) > 0 Then
                     Z = temp1(1, 0)
-                    If temp1(1, 1) <> 0 Then
+                    If temp1(1, 1) > 0 Then
                         Z = temp1(2, 0)
                     End If
                 End If
                 If Z < 0 Then Z = temp1(1, 0)
             ElseIf TIPO = "V" Then
                 Z = temp1(2, 0)
-                If temp1(2, 1) <> 0 Then
+                If temp1(2, 1) > 0.0 Then
                     Z = temp1(1, 0)
-                    If temp1(1, 1) <> 0 Then
+                    If temp1(1, 1) > 0.0 Then
                         Z = temp1(0, 0)
                     End If
                 End If
@@ -427,13 +425,13 @@ Namespace PropertyPackages.Auxiliary
             Dim tmp1 = MMm / V / 1000
 
             Dim aux1, aux2, auxtmp(n) As Double
-            aux1 = -R / 2 * (0.42748 / T) ^ 0.5
+            aux1 = -R / 2 * Math.Sqrt(0.42748 / T)
 
             i = 0
             Do
                 j = 0
                 Do
-                    aux2 += Vz(i) * Vz(j) * (1 - VKij(i, j)) * (ci(j) * (ai(i) * Tc(j) / Pc(j)) ^ 0.5 + ci(i) * (ai(j) * Tc(i) / Pc(i)) ^ 0.5)
+                    aux2 += Vz(i) * Vz(j) * (1 - VKij(i, j)) * (ci(j) * Math.Sqrt(ai(i) * Tc(j) / Pc(j)) + ci(i) * Math.Sqrt(ai(j) * Tc(i) / Pc(i)))
                     j = j + 1
                 Loop Until j = n + 1
                 i = i + 1
@@ -445,9 +443,9 @@ Namespace PropertyPackages.Auxiliary
             uu = 1
             ww = 0
 
-            Dim DAres = am / (bm * (uu ^ 2 - 4 * ww) ^ 0.5) * Math.Log((2 * Z + BG1 * (uu - (uu ^ 2 - 4 * ww) ^ 0.5)) / (2 * Z + BG1 * (uu + (uu ^ 2 - 4 * ww) ^ 0.5))) - R * T * Math.Log((Z - BG1) / Z) - R * T * Math.Log(Z)
+            Dim DAres = am / (bm * Math.Sqrt(uu ^ 2 - 4 * ww)) * Math.Log((2 * Z + BG1 * (uu - Math.Sqrt(uu ^ 2 - 4 * ww))) / (2 * Z + BG1 * (uu + Math.Sqrt(uu ^ 2 - 4 * ww)))) - R * T * Math.Log((Z - BG1) / Z) - R * T * Math.Log(Z)
             Dim V0 As Double = R * 298.15 / 101325
-            Dim DSres = R * Math.Log((Z - BG1) / Z) + R * Math.Log(Z) - 1 / ((uu ^ 2 - 4 * ww) ^ 0.5 * bm) * dadt * Math.Log((2 * Z + BG1 * (uu - (uu ^ 2 - 4 * ww) ^ 0.5)) / (2 * Z + BG1 * (uu + (uu ^ 2 - 4 * ww) ^ 0.5)))
+            Dim DSres = R * Math.Log((Z - BG1) / Z) + R * Math.Log(Z) - 1 / (Math.Sqrt(uu ^ 2 - 4 * ww) * bm) * dadt * Math.Log((2 * Z + BG1 * (uu - Math.Sqrt(uu ^ 2 - 4 * ww))) / (2 * Z + BG1 * (uu + Math.Sqrt(uu ^ 2 - 4 * ww))))
             Dim DHres = DAres + T * (DSres) + R * T * (Z - 1)
 
             IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
@@ -459,7 +457,7 @@ Namespace PropertyPackages.Auxiliary
                 H_SRK_MIX = 0.0#
             Else
                 IObj?.Paragraphs.Add(String.Format("Calculated Total Enthalpy (Ideal + Departure): {0} kJ/kg", Hid + DHres / MMm))
-                H_SRK_MIX = Hid + DHres / MMm '/ 1000
+                H_SRK_MIX = Hid + DHres / MMm
             End If
 
             IObj?.Close()
