@@ -70,7 +70,7 @@ Namespace PropertyPackages.ThermoPlugs
             Do
                 j = 0
                 Do
-                    a(i, j) = (ai(i) * ai(j)) ^ 0.5 * (1 - vkij(i, j))
+                    a(i, j) = Math.Sqrt(ai(i) * ai(j)) * (1 - vkij(i, j))
                     j = j + 1
                 Loop Until j = n + 1
                 i = i + 1
@@ -104,7 +104,6 @@ Namespace PropertyPackages.ThermoPlugs
 
             Dim n, R, coeff(3) As Double
             Dim Vant(0, 4) As Double
-            Dim criterioOK As Boolean = False
             Dim AG, BG, aml, bml As Double
 
             n = Vx.Length - 1
@@ -372,7 +371,6 @@ Namespace PropertyPackages.ThermoPlugs
 
             Dim n, R, coeff(3) As Double
             Dim Vant(0, 4) As Double
-            Dim criterioOK As Boolean = False
             Dim AG, BG, aml, bml As Double
             Dim t1, t2, t3, t4, t5 As Double
 
@@ -380,21 +378,16 @@ Namespace PropertyPackages.ThermoPlugs
 
             Dim ai(n), bi(n), tmp(n + 1), a(n, n), b(n, n) As Double
             Dim aml2(n), amv2(n), LN_CF(n), PHI(n) As Double
-            Dim alpha(n), m(n), Tr(n) As Double
+            Dim alpha(n), m(n) As Double
 
             R = 8.314
 
             Dim i As Integer
-            i = 0
-            Do
-                Tr(i) = T / Tc(i)
-                i = i + 1
-            Loop Until i = n + 1
 
             i = 0
             Do
-                alpha(i) = (1 + (0.48 + 1.574 * w(i) - 0.176 * w(i) ^ 2) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
-                ai(i) = 0.42748 * alpha(i) * R ^ 2 * Tc(i) ^ 2 / Pc(i)
+                alpha(i) = Math.Pow(1 + (0.48 + 1.574 * w(i) - 0.176 * Math.Pow(w(i), 2)) * (1 - Math.Sqrt(T / Tc(i))), 2)
+                ai(i) = 0.42748 * alpha(i) * Math.Pow(R * Tc(i), 2) / Pc(i)
                 bi(i) = 0.08664 * R * Tc(i) / Pc(i)
                 i = i + 1
             Loop Until i = n + 1
@@ -409,17 +402,12 @@ Namespace PropertyPackages.ThermoPlugs
             aml2 = tmpa(0)
             aml = tmpa(1)(0)
 
-            i = 0
-            bml = 0
-            Do
-                bml = bml + Vx(i) * bi(i)
-                i = i + 1
-            Loop Until i = n + 1
+            bml = Vx.MultiplyY(bi).SumY
 
             IObj?.Paragraphs.Add("<math_inline>a_{m}</math_inline>: " & aml)
             IObj?.Paragraphs.Add("<math_inline>b_{m}</math_inline>: " & bml)
 
-            AG = aml * P / (R * T) ^ 2
+            AG = aml * P / Math.Pow(R * T, 2)
             BG = bml * P / (R * T)
 
             IObj?.Paragraphs.Add(String.Format("<math_inline>A</math_inline>: {0}", AG))
@@ -427,7 +415,7 @@ Namespace PropertyPackages.ThermoPlugs
 
             Dim _zarray As List(Of Double), _mingz As Double(), Z As Double
 
-            _zarray = CalcZ(T, P, Vx, VKij, Tc, Pc, w)
+            _zarray = CalcZ2(AG, BG)
             If _zarray.Count = 0 Then Throw New Exception(String.Format("SRK EOS: unable to find a root with provided parameters [T = {0} K, P = {1} Pa, MoleFracs={2}]", T.ToString, P.ToString, Vx.ToArrayString))
             If forcephase <> "" Then
                 If forcephase = "L" Then
@@ -440,11 +428,6 @@ Namespace PropertyPackages.ThermoPlugs
                 Z = _zarray(_mingz(0))
             End If
 
-            Dim Pcorr As Double = P
-            'Dim ZP As Double() = CheckRoot(Z, aml, bml, P, T, forcephase)
-            'Z = ZP(0)
-            'Pcorr = ZP(1)
-
             IObj?.Paragraphs.Add(String.Format("<math_inline>Z</math_inline>: {0}", Z))
 
             i = 0
@@ -454,7 +437,7 @@ Namespace PropertyPackages.ThermoPlugs
                 t3 = AG * (2 * aml2(i) / aml - bi(i) / bml)
                 t4 = Math.Log((Z + BG) / Z)
                 t5 = BG
-                LN_CF(i) = t1 + t2 - (t3 * t4 / t5) + Math.Log(Pcorr / P)
+                LN_CF(i) = t1 + t2 - (t3 * t4 / t5)
                 i = i + 1
             Loop Until i = n + 1
 

@@ -235,7 +235,7 @@ Namespace PropertyPackages.Auxiliary
 
         End Function
 
-        Function H_SRK_MIX(ByVal TIPO As String, ByVal T As Double, ByVal P As Double, ByVal Vz As Double(), ByVal VKij As Double(,), ByVal VTc As Double(), ByVal VPc As Double(), ByVal Vw As Double(), ByVal VMM As Double(), ByVal Hid As Double) As Double
+        Function H_SRK_MIX(ByVal TIPO As String, ByVal T As Double, ByVal P As Double, ByVal Vz As Double(), ByVal VKij As Double(,), ByVal Tc As Double(), ByVal Pc As Double(), ByVal w As Double(), ByVal VMM As Double(), ByVal Hid As Double) As Double
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -287,16 +287,16 @@ Namespace PropertyPackages.Auxiliary
             IObj?.Paragraphs.Add(String.Format("Ideal Enthalpy (Ideal Gas State): {0} kJ/kg", Hid))
             IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Interaction Parameters: {0}", VKij.ToMathArrayString))
-            IObj?.Paragraphs.Add(String.Format("Critical Temperatures: {0} K", VTc.ToMathArrayString))
-            IObj?.Paragraphs.Add(String.Format("Critical Pressures: {0} Pa", VPc.ToMathArrayString))
-            IObj?.Paragraphs.Add(String.Format("Acentric Factors: {0} ", Vw.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Temperatures: {0} K", Tc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Pressures: {0} Pa", Pc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Acentric Factors: {0} ", w.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("State: {0}", TIPO))
 
             IObj?.Paragraphs.Add(String.Format("<h2>Calculated Intermediate Parameters</h2>"))
 
             Dim ai(), bi(), ci() As Double
             Dim n As Integer, R As Double
-            Dim Tc(), Pc(), Vc(), w(), Zc(), alpha(), m(), a(,), b(,), Z, Tr() As Double
+            Dim Vc(), Zc(), alpha(), m(), a(,), b(,), Z, Tr() As Double
             Dim i, j As Integer
             Dim dadt As Double
 
@@ -306,15 +306,6 @@ Namespace PropertyPackages.Auxiliary
             ReDim Tc(n), Pc(n), Vc(n), Zc(n), w(n), alpha(n), m(n), Tr(n)
 
             R = 8.314
-
-            i = 0
-            Do
-                Tc(i) = VTc(i)
-                Tr(i) = T / Tc(i)
-                Pc(i) = VPc(i)
-                w(i) = Vw(i)
-                i = i + 1
-            Loop Until i = n + 1
 
             i = 0
             Dim MMm = 0.0#
@@ -448,7 +439,7 @@ Namespace PropertyPackages.Auxiliary
                 i = i + 1
             Loop Until i = n + 1
 
-            dadT = aux1 * aux2
+            dadt = aux1 * aux2
 
             Dim uu, ww As Double
             uu = 1
@@ -456,7 +447,7 @@ Namespace PropertyPackages.Auxiliary
 
             Dim DAres = am / (bm * (uu ^ 2 - 4 * ww) ^ 0.5) * Math.Log((2 * Z + BG1 * (uu - (uu ^ 2 - 4 * ww) ^ 0.5)) / (2 * Z + BG1 * (uu + (uu ^ 2 - 4 * ww) ^ 0.5))) - R * T * Math.Log((Z - BG1) / Z) - R * T * Math.Log(Z)
             Dim V0 As Double = R * 298.15 / 101325
-            Dim DSres = R * Math.Log((Z - BG1) / Z) + R * Math.Log(Z) - 1 / ((uu ^ 2 - 4 * ww) ^ 0.5 * bm) * dadT * Math.Log((2 * Z + BG1 * (uu - (uu ^ 2 - 4 * ww) ^ 0.5)) / (2 * Z + BG1 * (uu + (uu ^ 2 - 4 * ww) ^ 0.5)))
+            Dim DSres = R * Math.Log((Z - BG1) / Z) + R * Math.Log(Z) - 1 / ((uu ^ 2 - 4 * ww) ^ 0.5 * bm) * dadt * Math.Log((2 * Z + BG1 * (uu - (uu ^ 2 - 4 * ww) ^ 0.5)) / (2 * Z + BG1 * (uu + (uu ^ 2 - 4 * ww) ^ 0.5)))
             Dim DHres = DAres + T * (DSres) + R * T * (Z - 1)
 
             IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
