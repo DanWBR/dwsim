@@ -296,14 +296,14 @@ Namespace PropertyPackages.Auxiliary
 
             Dim ai(), bi(), ci() As Double
             Dim n As Integer, R As Double
-            Dim Vc(), Zc(), alpha(), m(), a(,), b(,), Z, Tr() As Double
+            Dim Vc(), Zc(), alpha(), m(), a(,), b(,), Z As Double
             Dim i, j As Integer
             Dim dadt As Double
 
             n = Vz.Length - 1
 
             ReDim ai(n), bi(n), ci(n), a(n, n), b(n, n)
-            ReDim Tc(n), Pc(n), Vc(n), Zc(n), w(n), alpha(n), m(n), Tr(n)
+            ReDim Vc(n), Zc(n), alpha(n), m(n)
 
             R = 8.314
 
