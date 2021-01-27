@@ -61,6 +61,9 @@
       <HintPath>..\DWSIM\References\CapeOpen.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -78,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DWSIM.Automation\DWSIM.Automation.csproj">
@@ -93,6 +97,10 @@
       <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
       <Name>DWSIM.Interfaces</Name>
       <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Math\DWSIM.MathOps.vbproj">
+      <Project>{fdfb92de-d189-49dc-91cc-60ee78d1356c}</Project>
+      <Name>DWSIM.MathOps</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.SharedClasses\DWSIM.SharedClasses.vbproj">
       <Project>{30e167d2-5b5a-453a-a92c-18ff3bbb6691}</Project>

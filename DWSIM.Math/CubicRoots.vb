@@ -29,6 +29,12 @@ Namespace MathEx
 
         End Function
 
+        Shared Function Poly_Roots3(ByVal Coeff As Double()) As Double()
+
+            Return CalcRoots3(Coeff(3), Coeff(2), Coeff(1), Coeff(0))
+
+        End Function
+
         Shared Function CalcRoots2(ByVal a As Double, ByVal b As Double, ByVal c As Double, ByVal d As Double) As Double(,)
 
             Dim roots0 = FindRoots.Cubic(d, c, b, a)
@@ -50,6 +56,39 @@ Namespace MathEx
             If Math.Abs(root3.Imaginary) > 0.0000000001 Then
                 roots(2, 1) = root3.Imaginary
             End If
+
+            Return roots
+
+        End Function
+
+        Shared Function CalcRoots3(ByVal a As Double, ByVal b As Double, ByVal c As Double, ByVal d As Double) As Double()
+
+            Dim roots0 = FindRoots.Cubic(d, c, b, a)
+            Dim root1 = roots0.Item1
+            Dim root2 = roots0.Item2
+            Dim root3 = roots0.Item3
+
+            Dim roots(2) As Double
+            Dim real1 As Double
+
+            If root1.Imaginary < 0.000001 Then
+                roots(0) = root1.Real
+                real1 = roots(0)
+            End If
+            If root2.Imaginary < 0.000001 Then
+                roots(1) = root2.Real
+                real1 = roots(1)
+            End If
+            If root3.Imaginary < 0.000001 Then
+                roots(2) = root3.Real
+                real1 = roots(2)
+            End If
+
+            If roots(0) < 0.0000000001 Then roots(0) = real1
+            If roots(1) < 0.0000000001 Then roots(1) = real1
+            If roots(2) < 0.0000000001 Then roots(2) = real1
+
+            Array.Sort(roots)
 
             Return roots
 

@@ -314,10 +314,10 @@ Namespace PropertyPackages.Auxiliary
 
             i = 0
             Do
-                alpha(i) = Math.Pow(1 + (0.48 + 1.574 * w(i) - 0.176 * w(i) ^ 2) * (1 - Math.Sqrt(T / Tc(i))), 2)
+                ci(i) = 0.48 + 1.574 * w(i) - 0.176 * Math.Pow(w(i), 2)
+                alpha(i) = Math.Pow(1 + ci(i) * (1 - Math.Sqrt(T / Tc(i))), 2)
                 ai(i) = 0.42748 * alpha(i) * Math.Pow(R * Tc(i), 2) / Pc(i)
                 bi(i) = 0.08664 * R * Tc(i) / Pc(i)
-                ci(i) = 0.48 + 1.574 * w(i) - 0.176 * Math.Pow(w(i), 2)
                 i = i + 1
             Loop Until i = n + 1
 
@@ -368,52 +368,19 @@ Namespace PropertyPackages.Auxiliary
             coeff(2) = -1
             coeff(3) = 1
 
-            Dim temp1 = Poly_Roots(coeff)
-            Dim tv
-            Dim tv2
+            Dim _zarray As Double(), _mingz As Double()
 
-            If temp1(0, 0) > temp1(1, 0) Then
-                tv = temp1(1, 0)
-                tv2 = temp1(1, 1)
-                temp1(1, 0) = temp1(0, 0)
-                temp1(0, 0) = tv
-                temp1(1, 1) = temp1(0, 1)
-                temp1(0, 1) = tv2
-            End If
-            If temp1(0, 0) > temp1(2, 0) Then
-                tv = temp1(2, 0)
-                temp1(2, 0) = temp1(0, 0)
-                temp1(0, 0) = tv
-                tv2 = temp1(2, 1)
-                temp1(2, 1) = temp1(0, 1)
-                temp1(0, 1) = tv2
-            End If
-            If temp1(1, 0) > temp1(2, 0) Then
-                tv = temp1(2, 0)
-                temp1(2, 0) = temp1(1, 0)
-                temp1(1, 0) = tv
-                tv2 = temp1(2, 1)
-                temp1(2, 1) = temp1(1, 1)
-                temp1(1, 1) = tv2
-            End If
-
-            If TIPO = "L" Then
-                Z = temp1(0, 0)
-                If temp1(0, 1) > 0 Then
-                    Z = temp1(1, 0)
-                    If temp1(1, 1) > 0 Then
-                        Z = temp1(2, 0)
-                    End If
+            _zarray = CalcZ2(AG1, BG1)
+            If _zarray.Count = 0 Then Throw New Exception(String.Format("SRK EOS: unable to find a root with provided parameters [T = {0} K, P = {1} Pa, MoleFracs={2}]", T.ToString, P.ToString, Vz.ToArrayString))
+            If TIPO <> "" Then
+                If TIPO = "L" Then
+                    Z = _zarray.Min
+                ElseIf TIPO = "V" Then
+                    Z = _zarray.Max
                 End If
-                If Z < 0 Then Z = temp1(1, 0)
-            ElseIf TIPO = "V" Then
-                Z = temp1(2, 0)
-                If temp1(2, 1) > 0.0 Then
-                    Z = temp1(1, 0)
-                    If temp1(1, 1) > 0.0 Then
-                        Z = temp1(0, 0)
-                    End If
-                End If
+            Else
+                _mingz = ZtoMinG(_zarray.ToArray, T, P, Vz, VKij, Tc, Pc, w)
+                Z = _zarray(_mingz(0))
             End If
 
             IObj?.Paragraphs.Add(String.Format("<math_inline>Z</math_inline>: {0}", Z))

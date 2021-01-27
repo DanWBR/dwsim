@@ -2100,27 +2100,18 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             Lf = 1 - Vf
 
             Dim Vx(n), Vy(n), Vx_ant(n), Vy_ant(n), Vp(n), Ki(n), fi(n), dVxy(n) As Double
-            Dim Vt(n), VTc(n), Tmin, Tmax, dFdT, Tsat(n) As Double
+            Dim Vt(n), VTc(n), dFdT, Tsat(n) As Double
 
             VTc = PP.RET_VTC()
             fi = Vz.Clone
-
-            Tmin = 0.0#
-            Tmax = 0.0#
 
             If Tref = 0.0# Then
                 i = 0
                 Tref = 0.0#
                 Do
-                    'Tref += 0.8 * Vz(i) * VTc(i)
                     Tref += Vz(i) * PP.AUX_TSATi(P, i)
-                    Tmin += 0.1 * Vz(i) * VTc(i)
-                    Tmax += 2.0 * Vz(i) * VTc(i)
                     i += 1
                 Loop Until i = n + 1
-            Else
-                Tmin = Tref - 50
-                Tmax = Tref + 50
             End If
 
             T = Tref
@@ -2196,6 +2187,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             Dim marcador3, marcador2, marcador As Integer
             Dim stmp4_ant, stmp4, Tant, fval, fval_ant As Double
 
+            Dim K1(n), K2(n), dKdT(n) As Double
+
             If V = 1.0# Or V = 0.0# Then
 
                 If V = 1.0 Then
@@ -2250,7 +2243,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                             stmp4 = Vy.DivideY(Ki).SumY
                         End If
 
-                        If V = 0 Then
+                        If V = 0.0 Then
                             Vy_ant = Vy.Clone
                             Vy = Ki.MultiplyY(Vx).MultiplyConstY(1 / stmp4)
                         Else
@@ -2260,7 +2253,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                         marcador2 = 0
                         If marcador = 1 Then
-                            If V = 0 Then
+                            If V = 0.0 Then
                                 If Math.Abs(Vy(0) - Vy_ant(0)) < 0.001 Then
                                     marcador2 = 1
                                 End If
@@ -2283,17 +2276,13 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     IObj2?.Paragraphs.Add(String.Format("Updated x: {0}", Vx.ToMathArrayString))
                     IObj2?.Paragraphs.Add(String.Format("Updated y: {0}", Vy.ToMathArrayString))
 
-                    Dim K1(n), K2(n), dKdT(n) As Double
-
                     If Settings.EnableParallelProcessing Then
                         Dim task1 = New Task(Sub()
                                                  K1 = PP.DW_CalcKvalue(Vx, Vy, T - epsilon, P)
-                                             End Sub,
-                                                        Settings.TaskCancellationTokenSource.Token)
+                                             End Sub, Settings.TaskCancellationTokenSource.Token)
                         Dim task2 = New Task(Sub()
                                                  K2 = PP.DW_CalcKvalue(Vx, Vy, T + epsilon, P)
-                                             End Sub,
-                                                    Settings.TaskCancellationTokenSource.Token)
+                                             End Sub, Settings.TaskCancellationTokenSource.Token)
                         task1.Start()
                         task2.Start()
                         Task.WaitAll(task1, task2)
@@ -2421,8 +2410,6 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                         stmp4 = Ki.MultiplyY(Vx).SumY
 
-                        Dim K1(n), K2(n), dKdT(n) As Double
-
                         IObj2?.SetCurrent
 
                         K1 = PP.DW_CalcKvalue(Vx, Vy, T - epsilon, P)
@@ -2440,8 +2427,6 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     Else
 
                         stmp4 = Vy.DivideY(Ki).SumY
-
-                        Dim K1(n), K2(n), dKdT(n) As Double
 
                         IObj2?.SetCurrent
 
@@ -2517,6 +2502,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
         End Function
 
         Public Function Flash_PV_2(ByVal Vz As Double(), ByVal P As Double, ByVal V As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
+
+            Dim cdata = PP.DW_GetConstantProperties()
 
             Dim i, n, ecount, key As Integer
             Dim d1, d2 As Date, dt As TimeSpan
@@ -2676,7 +2663,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                         Next
                         PsatKey = P * PsatKey
                     End If
-                    T = PP.AUX_TSATi(PsatKey, key)
+                    T = PP.AUX_TSATi(PsatKey, cdata(key), T)
                 End If
 
                 Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)

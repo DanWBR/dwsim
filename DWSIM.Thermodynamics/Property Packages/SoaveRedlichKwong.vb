@@ -998,9 +998,9 @@ Namespace PropertyPackages
             Dim lnfug As Double()
 
             If st = State.Liquid Then
-                lnfug = srkn.CalcLnFug(T, P, Vx, Me.RET_VKij, Me.RET_VTC, Me.RET_VPC, Me.RET_VW, Nothing, "L")
+                lnfug = srkn.CalcLnFug(T, P, Vx, Me.RET_VKij, Me.RET_VTC, Me.RET_VPC, Me.RET_VW, Nothing, 0)
             Else
-                lnfug = srkn.CalcLnFug(T, P, Vx, Me.RET_VKij, Me.RET_VTC, Me.RET_VPC, Me.RET_VW, Nothing, "V")
+                lnfug = srkn.CalcLnFug(T, P, Vx, Me.RET_VKij, Me.RET_VTC, Me.RET_VPC, Me.RET_VW, Nothing, 1)
             End If
 
             IObj?.Close()

@@ -5911,6 +5911,115 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
         End Function
 
+        Public Overridable Function AUX_CPi(cprops As ICompoundConstantProperties, ByVal T As Double) As Double
+
+            Dim db As String = cprops.OriginalDB
+
+            If cprops.IsPF = 1 Then
+
+                With cprops
+                    Return Auxiliary.PROPS.Cpig_lk(.PF_Watson_K, .Acentric_Factor, T) '* .Molar_Weight
+                End With
+
+            Else
+
+                If db = "DWSIM" Or db = "" Then
+                    Dim A, B, C, D, E, result As Double
+                    A = cprops.Ideal_Gas_Heat_Capacity_Const_A
+                    B = cprops.Ideal_Gas_Heat_Capacity_Const_B
+                    C = cprops.Ideal_Gas_Heat_Capacity_Const_C
+                    D = cprops.Ideal_Gas_Heat_Capacity_Const_D
+                    E = cprops.Ideal_Gas_Heat_Capacity_Const_E
+                    'Cp = A + B*T + C*T^2 + D*T^3 + E*T^4 where Cp in kJ/kg-mol , T in K 
+                    result = A + B * T + C * T ^ 2 + D * T ^ 3 + E * T ^ 4
+                    Return result / cprops.Molar_Weight 'kJ/kg.K
+                ElseIf db = "CheResources" Then
+                    Dim A, B, C, D, E, result As Double
+                    A = cprops.Ideal_Gas_Heat_Capacity_Const_A
+                    B = cprops.Ideal_Gas_Heat_Capacity_Const_B
+                    C = cprops.Ideal_Gas_Heat_Capacity_Const_C
+                    D = cprops.Ideal_Gas_Heat_Capacity_Const_D
+                    E = cprops.Ideal_Gas_Heat_Capacity_Const_E
+                    'CAL/MOL.K [CP=A+(B*T)+(C*T^2)+(D*T^3)], T in K
+                    result = A + B * T + C * T ^ 2 + D * T ^ 3
+                    Return result / cprops.Molar_Weight * 4.1868 'kJ/kg.K
+                ElseIf db = "ChemSep" Or db = "ChEDL Thermo" Or db = "User" Then
+                    Dim A, B, C, D, E, result As Double
+                    Dim eqno As String = cprops.IdealgasCpEquation
+                    Dim mw As Double = cprops.Molar_Weight
+                    A = cprops.Ideal_Gas_Heat_Capacity_Const_A
+                    B = cprops.Ideal_Gas_Heat_Capacity_Const_B
+                    C = cprops.Ideal_Gas_Heat_Capacity_Const_C
+                    D = cprops.Ideal_Gas_Heat_Capacity_Const_D
+                    E = cprops.Ideal_Gas_Heat_Capacity_Const_E
+                    If Integer.TryParse(eqno, New Integer) Then
+                        result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) / 1000 / mw 'kJ/kg.K
+                    Else
+                        result = Me.ParseEquation(eqno, A, B, C, D, E, T) / mw
+                    End If
+                    If result = 0.0 Then
+                        'try estimating from LK method
+                        With cprops
+                            Dim sg60 = AUX_LIQDENSi(cprops, T) / 1000.0
+                            result = Auxiliary.PROPS.Cpig_lk(.Normal_Boiling_Point ^ 0.33 / sg60, .Acentric_Factor, T)
+                        End With
+                        If Double.IsNaN(result) Or Double.IsInfinity(result) Then
+                            Return 3.5 * 8.314 / mw
+                        Else
+                            Return result
+                        End If
+                    Else
+                        Return result
+                    End If
+                ElseIf db = "ChEDL Thermo" Then
+                    Dim A, B, C, D, E, result As Double
+                    Dim eqno As String = cprops.IdealgasCpEquation
+                    A = cprops.Ideal_Gas_Heat_Capacity_Const_A
+                    B = cprops.Ideal_Gas_Heat_Capacity_Const_B
+                    C = cprops.Ideal_Gas_Heat_Capacity_Const_C
+                    D = cprops.Ideal_Gas_Heat_Capacity_Const_D
+                    E = cprops.Ideal_Gas_Heat_Capacity_Const_E
+                    result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kJ/kg.K
+                    Return result
+                ElseIf db = "CoolProp" Then
+                    Dim A, B, C, D, E, result As Double
+                    Dim eqno As String = cprops.IdealgasCpEquation
+                    Dim mw As Double = cprops.Molar_Weight
+                    A = cprops.Ideal_Gas_Heat_Capacity_Const_A
+                    B = cprops.Ideal_Gas_Heat_Capacity_Const_B
+                    C = cprops.Ideal_Gas_Heat_Capacity_Const_C
+                    D = cprops.Ideal_Gas_Heat_Capacity_Const_D
+                    E = cprops.Ideal_Gas_Heat_Capacity_Const_E
+                    result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kJ/kg.K
+                    Return result
+                ElseIf db = "Biodiesel" Then
+                    Dim A, B, C, D, E, result As Double
+                    Dim eqno As String = cprops.IdealgasCpEquation
+                    A = cprops.Ideal_Gas_Heat_Capacity_Const_A
+                    B = cprops.Ideal_Gas_Heat_Capacity_Const_B
+                    C = cprops.Ideal_Gas_Heat_Capacity_Const_C
+                    D = cprops.Ideal_Gas_Heat_Capacity_Const_D
+                    E = cprops.Ideal_Gas_Heat_Capacity_Const_E
+                    result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kJ/kg.K
+                    Return result
+                ElseIf db = "KDB" Then
+                    Dim A, B, C, D, E As Double
+                    Dim eqno As String = cprops.IdealgasCpEquation
+                    A = cprops.Ideal_Gas_Heat_Capacity_Const_A
+                    B = cprops.Ideal_Gas_Heat_Capacity_Const_B
+                    C = cprops.Ideal_Gas_Heat_Capacity_Const_C
+                    D = cprops.Ideal_Gas_Heat_Capacity_Const_D
+                    E = cprops.Ideal_Gas_Heat_Capacity_Const_E
+                    Dim mw As Double = cprops.Molar_Weight
+                    Return Me.ParseEquation(eqno, A, B, C, D, E, T) / mw
+                Else
+                    Return 0
+                End If
+
+            End If
+
+        End Function
+
         Public Function AUX_CPm(ByVal Phase As Phase, ByVal T As Double) As Double
 
             Dim val As Double
@@ -6035,6 +6144,91 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
         End Function
 
+        Public Overridable Function AUX_PVAPi(ByVal sub1 As ICompoundConstantProperties, ByVal T As Double)
+
+            Dim ID = sub1.ID
+
+            If sub1.IsPF = 1 Then
+
+                With sub1
+
+                    Return Auxiliary.PROPS.Pvp_leekesler(T, .Critical_Temperature, .Critical_Pressure, .Acentric_Factor)
+
+                End With
+
+            Else
+
+
+                If sub1.OriginalDB = "DWSIM" Or
+                sub1.OriginalDB = "" Then
+                    Dim A, B, C, D, E, result As Double
+                    A = sub1.Vapor_Pressure_Constant_A
+                    B = sub1.Vapor_Pressure_Constant_B
+                    C = sub1.Vapor_Pressure_Constant_C
+                    D = sub1.Vapor_Pressure_Constant_D
+                    E = sub1.Vapor_Pressure_Constant_E
+                    result = Math.Exp(A + B / T + C * Math.Log(T) + D * T ^ E)
+                    Return result
+                ElseIf sub1.OriginalDB = "CheResources" Then
+                    Dim A, B, C, result As Double
+                    A = sub1.Vapor_Pressure_Constant_A
+                    B = sub1.Vapor_Pressure_Constant_B
+                    C = sub1.Vapor_Pressure_Constant_C
+                    '[LN(P)=A-B/(T+C), P(mmHG) T(K)]
+                    result = Math.Exp(A - B / (T + C)) * 133.322368 'mmHg to Pascal
+                    Return result
+                ElseIf sub1.OriginalDB = "ChemSep" Or
+                sub1.OriginalDB = "CoolProp" Or
+                sub1.OriginalDB = "User" Or
+                sub1.OriginalDB = "ChEDL Thermo" Or
+                sub1.OriginalDB = "KDB" Then
+                    Dim A, B, C, D, E, result As Double
+                    Dim eqno As String = sub1.VaporPressureEquation
+                    Dim mw As Double = sub1.Molar_Weight
+                    A = sub1.Vapor_Pressure_Constant_A
+                    B = sub1.Vapor_Pressure_Constant_B
+                    C = sub1.Vapor_Pressure_Constant_C
+                    D = sub1.Vapor_Pressure_Constant_D
+                    E = sub1.Vapor_Pressure_Constant_E
+                    '<vp_c name="Vapour pressure"  units="Pa" >
+                    If eqno = "0" Then
+                        With sub1
+                            result = Auxiliary.PROPS.Pvp_leekesler(T, .Critical_Temperature, .Critical_Pressure, .Acentric_Factor)
+                        End With
+                    Else
+                        If Integer.TryParse(eqno, New Integer) Then
+                            result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'Pa
+                        Else
+                            If eqno = "" Then
+                                With sub1
+                                    result = Auxiliary.PROPS.Pvp_leekesler(T, .Critical_Temperature, .Critical_Pressure, .Acentric_Factor)
+                                End With
+                            Else
+                                result = Me.ParseEquation(eqno, A, B, C, D, E, T) 'Pa
+                            End If
+                        End If
+                    End If
+                    Return result
+                ElseIf sub1.OriginalDB = "Biodiesel" Then
+                    Dim A, B, C, D, E, result As Double
+                    Dim eqno As String = sub1.VaporPressureEquation
+                    A = sub1.Vapor_Pressure_Constant_A
+                    B = sub1.Vapor_Pressure_Constant_B
+                    C = sub1.Vapor_Pressure_Constant_C
+                    D = sub1.Vapor_Pressure_Constant_D
+                    E = sub1.Vapor_Pressure_Constant_E
+                    result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kPa
+                    Return result * 1000
+                Else
+                    With sub1
+                        Return Auxiliary.PROPS.Pvp_leekesler(T, .Critical_Temperature, .Critical_Pressure, .Acentric_Factor)
+                    End With
+                End If
+
+            End If
+
+        End Function
+
 
         Public Overridable Function AUX_PVAPi(ByVal sub1 As String, ByVal T As Double)
 
@@ -6133,6 +6327,111 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             Next
 
             Return AUX_PVAPi(nome, T)
+
+        End Function
+
+        Public Overridable Function AUX_TSATi(ByVal PVAP As Double, ByVal subst As ICompoundConstantProperties) As Double
+
+            Dim i As Integer
+
+            Dim Tinf, Tsup As Double
+
+            Dim fT, fT_inf, nsub, delta_T As Double
+
+            Tinf = 10
+            Tsup = 2000
+
+            nsub = 25
+
+            delta_T = (Tsup - Tinf) / nsub
+
+            i = 0
+            Do
+                i = i + 1
+                fT = PVAP - Me.AUX_PVAPi(subst, Tinf)
+                Tinf = Tinf + delta_T
+                fT_inf = PVAP - Me.AUX_PVAPi(subst, Tinf)
+            Loop Until fT * fT_inf < 0 Or fT_inf > fT Or i >= 100
+            If i = 100 Then Return 0.0#
+            Tsup = Tinf
+            Tinf = Tinf - delta_T
+
+            'metodo de Brent para encontrar Vc
+
+            Dim aaa, bbb, ccc, ddd, eee, min11, min22, faa, fbb, fcc, ppp, qqq, rrr, sss, tol11, xmm As Double
+            Dim ITMAX2 As Integer = 100
+            Dim iter2 As Integer
+
+            aaa = Tinf
+            bbb = Tsup
+            ccc = Tsup
+
+            faa = PVAP - Me.AUX_PVAPi(subst, aaa)
+            fbb = PVAP - Me.AUX_PVAPi(subst, bbb)
+            fcc = fbb
+
+            iter2 = 0
+            Do
+                If (fbb > 0 And fcc > 0) Or (fbb < 0 And fcc < 0) Then
+                    ccc = aaa
+                    fcc = faa
+                    ddd = bbb - aaa
+                    eee = ddd
+                End If
+                If Math.Abs(fcc) < Math.Abs(fbb) Then
+                    aaa = bbb
+                    bbb = ccc
+                    ccc = aaa
+                    faa = fbb
+                    fbb = fcc
+                    fcc = faa
+                End If
+                tol11 = 0.0001
+                xmm = 0.5 * (ccc - bbb)
+                If (Math.Abs(xmm) <= tol11) Or (fbb = 0) Then GoTo Final3
+                If (Math.Abs(eee) >= tol11) And (Math.Abs(faa) > Math.Abs(fbb)) Then
+                    sss = fbb / faa
+                    If aaa = ccc Then
+                        ppp = 2 * xmm * sss
+                        qqq = 1 - sss
+                    Else
+                        qqq = faa / fcc
+                        rrr = fbb / fcc
+                        ppp = sss * (2 * xmm * qqq * (qqq - rrr) - (bbb - aaa) * (rrr - 1))
+                        qqq = (qqq - 1) * (rrr - 1) * (sss - 1)
+                    End If
+                    If ppp > 0 Then qqq = -qqq
+                    ppp = Math.Abs(ppp)
+                    min11 = 3 * xmm * qqq - Math.Abs(tol11 * qqq)
+                    min22 = Math.Abs(eee * qqq)
+                    Dim tvar2 As Double
+                    If min11 < min22 Then tvar2 = min11
+                    If min11 > min22 Then tvar2 = min22
+                    If 2 * ppp < tvar2 Then
+                        eee = ddd
+                        ddd = ppp / qqq
+                    Else
+                        ddd = xmm
+                        eee = ddd
+                    End If
+                Else
+                    ddd = xmm
+                    eee = ddd
+                End If
+                aaa = bbb
+                faa = fbb
+                If (Math.Abs(ddd) > tol11) Then
+                    bbb += ddd
+                Else
+                    bbb += Math.Sign(xmm) * tol11
+                End If
+                fbb = PVAP - Me.AUX_PVAPi(subst, bbb)
+                iter2 += 1
+            Loop Until iter2 = ITMAX2
+
+Final3:
+
+            Return bbb
 
         End Function
 
@@ -6342,6 +6641,14 @@ Final3:
 Final3:
 
             Return bbb
+
+        End Function
+
+        Public Function AUX_TSATi(ByVal PVAP As Double, ByVal comp As ICompoundConstantProperties, ByVal Tguess As Double) As Double
+
+            Return MathNet.Numerics.RootFinding.Brent.FindRoot(Function(T)
+                                                                   Return AUX_PVAPi(comp, T) - PVAP
+                                                               End Function, Tguess - 100, Tguess + 100)
 
         End Function
 
@@ -7320,6 +7627,41 @@ Final3:
             Return AUX_INT_CPDTi(T1, T2, CompoundPropCache(ID).Name)
 
         End Function
+
+        Public Function AUX_INT_CPDTi(ByVal T1 As Double, ByVal T2 As Double, ByVal subst As ICompoundConstantProperties) As Double
+
+            Dim nsteps As Integer = Math.Abs(T2 - T1) / 10
+
+            If nsteps < 10 Then
+                If Math.Abs(T2 - T1) < 1 Then
+                    nsteps = 2
+                ElseIf Math.Abs(T2 - T1) < 3 Then
+                    nsteps = 4
+                ElseIf Math.Abs(T2 - T1) < 5 Then
+                    nsteps = 6
+                Else
+                    nsteps = 10
+                End If
+            End If
+
+            Dim deltaT As Double = (T2 - T1) / nsteps
+
+            Dim Ti As Double
+
+            Ti = T1 + deltaT / 2
+
+            Dim integrals(nsteps - 1) As Double
+
+            For i = 0 To nsteps - 1
+                integrals(i) = AUX_CPi(subst, Ti + i * deltaT)
+            Next
+
+            Dim outval = integrals.Sum * deltaT
+
+            Return outval
+
+        End Function
+
 
         Public Function AUX_INT_CPDTi_L(ByVal T1 As Double, ByVal T2 As Double, ByVal subst As String) As Double
 
