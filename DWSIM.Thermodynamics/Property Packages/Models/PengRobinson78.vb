@@ -19,7 +19,7 @@
 '   Reference: https://www.sciencedirect.com/science/article/abs/pii/S0378381206000835
 
 Imports FileHelpers
-Imports DWSIM.Thermodynamics.PropertyPackages.ThermoPlugs.PR
+Imports DWSIM.Thermodynamics.PropertyPackages.ThermoPlugs.PR78
 Imports DWSIM.MathOps.MathEx.PolySolve
 Imports Cudafy.Host
 Imports Cudafy

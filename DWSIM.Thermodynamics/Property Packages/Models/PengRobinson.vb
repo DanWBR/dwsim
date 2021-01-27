@@ -1277,9 +1277,9 @@ Namespace PropertyPackages.ThermoPlugs
                 Throw ex
             End If
             If phase = 0 Then
-                Z = _zarray(0)
+                Z = _zarray.Min
             ElseIf phase = 1 Then
-                Z = _zarray(2)
+                Z = _zarray.Max
             Else
                 _mingz = ZtoMinG(_zarray.ToArray, T, P, Vx, VKij, Tc, Pc, w)
                 Z = _zarray(_mingz(0))
@@ -1351,9 +1351,9 @@ Namespace PropertyPackages.ThermoPlugs
 
             _zarray = CalcZ2(AG, BG)
             If phase = 0 Then
-                Z = _zarray(0)
+                Z = _zarray.Min
             ElseIf phase = 1 Then
-                Z = _zarray(2)
+                Z = _zarray.Max
             Else
                 _mingz = ZtoMinG(_zarray.ToArray, T, P, Vx, VKij, Tc, Pc, W)
                 Z = _zarray(_mingz(0))
