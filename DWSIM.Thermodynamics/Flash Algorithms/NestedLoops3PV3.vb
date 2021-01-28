@@ -126,38 +126,29 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 Else
 
-                    'old code:
-                    'result = _nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-                    'L = result(0)
-                    'V = result(1)
-                    'Vx = result(2)
-                    'Vy = result(3)
+                    result = _nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
 
-                    'If L > 0.0 Then
+                    L = result(0)
+                    V = result(1)
+                    Vx = result(2)
+                    Vy = result(3)
 
-                    '    Dim lps = GetPhaseSplitEstimates(T, P, L, Vx, PP)
+                    If L > 0.0 Then
 
-                    '    L1 = lps(0)
-                    '    Vx1 = lps(1)
-                    '    L2 = lps(2)
-                    '    Vx2 = lps(3)
+                        Dim lps = GetPhaseSplitEstimates(T, P, L, Vx, PP)
 
-                    '    If L2 > 0.0 Then
+                        L1 = lps(0)
+                        Vx1 = lps(1)
+                        L2 = lps(2)
+                        Vx2 = lps(3)
 
-                    '        result = Flash_PT_3P(Vz, V, L1, L2, Vy, Vx1, Vx2, P, T, PP)
+                        If L2 > 0.0 Then
 
-                    '    End If
+                            result = Flash_PT_3P(Vz, V, L1, L2, Vy, Vx1, Vx2, P, T, PP)
 
-                    'End If
+                        End If
 
-                    Dim lps = GetPhaseSplitEstimates(T, P, 1, Vz, PP)
-
-                    L1 = lps(0)
-                    Vx1 = lps(1)
-                    L2 = lps(2)
-                    Vx2 = lps(3)
-
-                    result = Flash_PT_3P(Vz, 0, L1, L2, Vy, Vx1, Vx2, P, T, PP)
+                    End If
 
                 End If
 
