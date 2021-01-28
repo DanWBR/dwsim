@@ -7255,7 +7255,9 @@ Final3:
                     C = subst.ConstantProperties.Solid_Density_Const_C
                     D = subst.ConstantProperties.Solid_Density_Const_D
                     E = subst.ConstantProperties.Solid_Density_Const_E
-                    result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kmol/m3
+                    If eqno <> "" Then
+                        result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kmol/m3
+                    End If
                     If eqno = "" OrElse result = 0.0 Then
                         zerodens += subst.MassFraction.GetValueOrDefault
                     Else
@@ -7269,7 +7271,9 @@ Final3:
                     C = subst.ConstantProperties.Solid_Density_Const_C
                     D = subst.ConstantProperties.Solid_Density_Const_D
                     E = subst.ConstantProperties.Solid_Density_Const_E
-                    result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kg/m3
+                    If eqno <> "" Then
+                        result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kg/m3
+                    End If
                     val += subst.MassFraction.GetValueOrDefault * 1 / (result)
                 Else
                     If subst.ConstantProperties.SolidDensityAtTs <> 0.0# Then
@@ -7298,7 +7302,7 @@ Final3:
                 C = cprop.Solid_Density_Const_C
                 D = cprop.Solid_Density_Const_D
                 E = cprop.Solid_Density_Const_E
-                result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kmol/m3
+                If eqno <> "" Then result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kmol/m3
                 val = 1 / (result * mw)
             ElseIf cprop.OriginalDB = "ChEDL Thermo" Then
                 Dim A, B, C, D, E, result As Double
@@ -7308,7 +7312,7 @@ Final3:
                 C = cprop.Solid_Density_Const_C
                 D = cprop.Solid_Density_Const_D
                 E = cprop.Solid_Density_Const_E
-                result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kg/m3
+                If eqno <> "" Then result = result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kg/m3
                 val = 1 / (result)
             Else
                 If cprop.SolidDensityAtTs <> 0.0# Then
@@ -8816,6 +8820,8 @@ Final3:
         Function CalcCSTDepProp(ByVal eqno As String, ByVal A As Double, ByVal B As Double, ByVal C As Double, ByVal D As Double, ByVal E As Double, ByVal T As Double, ByVal Tc As Double) As Double
 
             Dim Tr As Double = T / Tc
+
+            If eqno = "" Then Return 0.0
 
             Dim eq = Integer.Parse(eqno)
 

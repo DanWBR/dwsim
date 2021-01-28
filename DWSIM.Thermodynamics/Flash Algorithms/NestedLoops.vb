@@ -436,18 +436,29 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             IObj?.SetCurrent()
 
-            If Me.FlashSettings(Interfaces.Enums.FlashSetting.NL_FastMode) = False Or PP.AUX_IS_SINGLECOMP(Phase.Mixture) Then
-                IObj?.Paragraphs.Add("Using the normal version of the PH Flash Algorithm.")
+            Dim FlashType As String = FlashSettings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType)
+            Dim hassolids As Boolean = False
 
+            If FlashType = "Default" Or FlashType = "SVLE" Or FlashType = "SVLLE" Then
+                Dim hres = PerformHeuristicsTest(Vz, Tref, P, PP)
+                hassolids = hres.SolidPhase
+            End If
+
+            If Me.FlashSettings(Interfaces.Enums.FlashSetting.NL_FastMode) = False Or
+                PP.AUX_IS_SINGLECOMP(Phase.Mixture) Or hassolids Then
+
+                IObj?.Paragraphs.Add("Using the normal version of the PH Flash Algorithm.")
                 IObj?.Close()
 
                 Return Flash_PH_2(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
-            Else
-                IObj?.Paragraphs.Add("Using the fast version of the PH Flash Algorithm.")
 
+            Else
+
+                IObj?.Paragraphs.Add("Using the fast version of the PH Flash Algorithm.")
                 IObj?.Close()
 
                 Return Flash_PH_1(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
+
             End If
         End Function
 
