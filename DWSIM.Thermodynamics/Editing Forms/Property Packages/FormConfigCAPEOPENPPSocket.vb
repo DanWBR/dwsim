@@ -279,17 +279,19 @@ Imports DWSIM.Interfaces.Interfaces2
                     If _phasemappings("Aqueous").PhaseLabel = "" Then _phasemappings("Aqueous").PhaseLabel = "Disabled"
                 End If
 
-                If _phasemappings("Solid").PhaseLabel = "" Then
-                    i = 0
-                    For Each s In staggr
-                        If s = "Solid" And Not alreadymapped(i) Then
-                            _phasemappings("Solid").PhaseLabel = plist(i)
-                            alreadymapped(i) = True
-                            Exit For
-                        End If
-                        i += 1
-                    Next
-                    If _phasemappings("Solid").PhaseLabel = "" Then _phasemappings("Solid").PhaseLabel = "Disabled"
+                If _phasemappings.ContainsKey("Solid") Then
+                    If _phasemappings("Solid").PhaseLabel = "" Then
+                        i = 0
+                        For Each s In staggr
+                            If s = "Solid" And Not alreadymapped(i) Then
+                                _phasemappings("Solid").PhaseLabel = plist(i)
+                                alreadymapped(i) = True
+                                Exit For
+                            End If
+                            i += 1
+                        Next
+                        If _phasemappings("Solid").PhaseLabel = "" Then _phasemappings("Solid").PhaseLabel = "Disabled"
+                    End If
                 End If
 
             End If

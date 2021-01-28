@@ -4,16 +4,16 @@
 '    This file is part of DWSIM.
 '
 '    DWSIM is free software: you can redistribute it and/or modify
-'    it under the terms of the GNU Lesser General Public License as published by
+'    it under the terms of the GNU General Public License as published by
 '    the Free Software Foundation, either version 3 of the License, or
 '    (at your option) any later version.
 '
 '    DWSIM is distributed in the hope that it will be useful,
 '    but WITHOUT ANY WARRANTY; without even the implied warranty of
 '    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'    GNU Lesser General Public License for more details.
+'    GNU General Public License for more details.
 '
-'    You should have received a copy of the GNU Lesser General Public License
+'    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports DWSIM.MathOps.MathEx.PolySolve
@@ -327,7 +327,7 @@ Namespace DWSIM.Utilities.HYD
             Dim ai(n), bi(n), tmp(3, n + 1), a(n, n), b(n, n)
             Dim aml2(n), amv2(n)
             Dim alpha(n), m(n)
-            Dim b1(n), b2(n), coeff(3)
+            Dim b1(n), b2(n), coeff(3) As Double
             Dim j As Integer
 
             Dim ai_(n)
@@ -1103,7 +1103,7 @@ STEP2:
             Dim ai(n), bi(n), tmp(3, n + 1), a(n, n), b(n, n)
             Dim aml2(n), amv2(n)
             Dim alpha(n), m(n)
-            Dim b1(n), b2(n), coeff(3)
+            Dim b1(n), b2(n), coeff(3) As Double
             Dim j As Integer
 
             Dim ai_(n)

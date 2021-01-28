@@ -4,16 +4,16 @@
 '    This file is part of DWSIM.
 '
 '    DWSIM is free software: you can redistribute it and/or modify
-'    it under the terms of the GNU Lesser General Public License as published by
+'    it under the terms of the GNU General Public License as published by
 '    the Free Software Foundation, either version 3 of the License, or
 '    (at your option) any later version.
 '
 '    DWSIM is distributed in the hope that it will be useful,
 '    but WITHOUT ANY WARRANTY; without even the implied warranty of
 '    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'    GNU Lesser General Public License for more details.
+'    GNU General Public License for more details.
 '
-'    You should have received a copy of the GNU Lesser General Public License
+'    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 '   Reference: https://www.sciencedirect.com/science/article/abs/pii/S0378381206000835
@@ -868,9 +868,9 @@ Namespace PropertyPackages
             Dim lnfug As Double()
 
             If st = State.Liquid Then
-                lnfug = prn.CalcLnFug(T, P, Vx, Me.RET_VKij, Me.RET_VTC, Me.RET_VPC, Me.RET_VW, Nothing, "L")
+                lnfug = prn.CalcLnFug(T, P, Vx, Me.RET_VKij, Me.RET_VTC, Me.RET_VPC, Me.RET_VW, Nothing, 0)
             Else
-                lnfug = prn.CalcLnFug(T, P, Vx, Me.RET_VKij, Me.RET_VTC, Me.RET_VPC, Me.RET_VW, Nothing, "V")
+                lnfug = prn.CalcLnFug(T, P, Vx, Me.RET_VKij, Me.RET_VTC, Me.RET_VPC, Me.RET_VW, Nothing, 1)
             End If
 
             Dim n As Integer = UBound(lnfug)
@@ -1000,6 +1000,73 @@ Namespace PropertyPackages
             Return val
 
         End Function
+
+
+        Public Overrides Function CalcIsothermalCompressibility(p As Interfaces.IPhase) As Double
+
+            Dim T, P0 As Double
+            T = CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
+            P0 = CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
+
+            Select Case p.Name
+                Case "Mixture"
+                    Return 0.0#
+                Case "Vapor"
+                    Return ThermoPlug.CalcIsothermalCompressibility(RET_VMOL(Phase.Vapor), P0, T, Me, "PR78")
+                Case "OverallLiquid"
+                    Return 0.0#
+                Case "Liquid1"
+                    Return ThermoPlug.CalcIsothermalCompressibility(RET_VMOL(Phase.Liquid1), P0, T, Me, "PR78")
+                Case "Liquid2"
+                    Return ThermoPlug.CalcIsothermalCompressibility(RET_VMOL(Phase.Liquid2), P0, T, Me, "PR78")
+                Case "Liquid3"
+                    Return ThermoPlug.CalcIsothermalCompressibility(RET_VMOL(Phase.Liquid3), P0, T, Me, "PR78")
+                Case "Aqueous"
+                    Return ThermoPlug.CalcIsothermalCompressibility(RET_VMOL(Phase.Aqueous), P0, T, Me, "PR78")
+                Case "Solid"
+                    Return 0.0#
+            End Select
+        End Function
+
+        Public Overrides Function CalcJouleThomsonCoefficient(p As Interfaces.IPhase) As Double
+
+            Dim T, P0, cp As Double
+
+            T = CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
+            P0 = CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
+
+            Select Case p.Name
+                Case "Mixture"
+                    Return 0.0#
+                Case "Vapor"
+
+                    DW_CalcProp("heatCapacityCp", Phase.Vapor)
+                    cp = p.Properties.heatCapacityCp.GetValueOrDefault
+                    'Return m_pr.JT_PR(AUX_Z(RET_VMOL(Phase.Vapor), T, P0, Phase.Vapor), T, P0, RET_VMOL(Phase.Vapor), Me.RET_VMM(), Me.RET_VZC(), Me.RET_VTC(), Me.RET_VPC(), cp, Me.RET_VW())
+                    Return ThermoPlug.CalcJouleThomsonCoefficient(RET_VMOL(Phase.Vapor), P0, T, Me, "PR78", cp, AUX_MMM(Phase.Vapor))
+                Case "OverallLiquid"
+                    Return 0.0#
+                Case "Liquid1"
+                    DW_CalcProp("heatCapacityCp", Phase.Liquid1)
+                    cp = p.Properties.heatCapacityCp.GetValueOrDefault
+                    Return ThermoPlug.CalcJouleThomsonCoefficient(RET_VMOL(Phase.Liquid1), P0, T, Me, "PR78", cp, AUX_MMM(Phase.Liquid1))
+                Case "Liquid2"
+                    DW_CalcProp("heatCapacityCp", Phase.Liquid2)
+                    cp = p.Properties.heatCapacityCp.GetValueOrDefault
+                    Return ThermoPlug.CalcJouleThomsonCoefficient(RET_VMOL(Phase.Liquid2), P0, T, Me, "PR78", cp, AUX_MMM(Phase.Liquid2))
+                Case "Liquid3"
+                    DW_CalcProp("heatCapacityCp", Phase.Liquid3)
+                    cp = p.Properties.heatCapacityCp.GetValueOrDefault
+                    Return ThermoPlug.CalcJouleThomsonCoefficient(RET_VMOL(Phase.Liquid3), P0, T, Me, "PR78", cp, AUX_MMM(Phase.Liquid3))
+                Case "Aqueous"
+                    DW_CalcProp("heatCapacityCp", Phase.Aqueous)
+                    cp = p.Properties.heatCapacityCp.GetValueOrDefault
+                    Return ThermoPlug.CalcJouleThomsonCoefficient(RET_VMOL(Phase.Aqueous), P0, T, Me, "PR78", cp, AUX_MMM(Phase.Aqueous))
+                Case "Solid"
+                    Return 0.0#
+            End Select
+        End Function
+
 
     End Class
 

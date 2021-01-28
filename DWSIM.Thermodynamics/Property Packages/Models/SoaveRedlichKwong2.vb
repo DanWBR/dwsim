@@ -4,16 +4,16 @@
 '    This file is part of DWSIM.
 '
 '    DWSIM is free software: you can redistribute it and/or modify
-'    it under the terms of the GNU Lesser General Public License as published by
+'    it under the terms of the GNU General Public License as published by
 '    the Free Software Foundation, either version 3 of the License, or
 '    (at your option) any later version.
 '
 '    DWSIM is distributed in the hope that it will be useful,
 '    but WITHOUT ANY WARRANTY; without even the implied warranty of
 '    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'    GNU Lesser General Public License for more details.
+'    GNU General Public License for more details.
 '
-'    You should have received a copy of the GNU Lesser General Public License
+'    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports DWSIM.MathOps.MathEx
@@ -61,50 +61,61 @@ Namespace PropertyPackages.ThermoPlugs
 
         End Function
 
-        Public Shared Function Calc_SUM1(n As Integer, ai As Double(), vkij As Double(,)) As Double(,)
+        Public Shared Function Calc_SUM1(n As Integer, ai As Double(), vkij As Double(,)) As Double()
 
-            Dim a(n, n) As Double
+            Dim a((n + 1) * (n + 1)) As Double
 
-            Dim i, j As Integer
-            i = 0
-            Do
-                j = 0
-                Do
-                    a(i, j) = (ai(i) * ai(j)) ^ 0.5 * (1 - vkij(i, j))
-                    j = j + 1
-                Loop Until j = n + 1
-                i = i + 1
-            Loop Until i = n + 1
+            Dim i, j, k As Integer
+            For i = 0 To n
+                For j = 0 To n
+                    a(k) = Math.Sqrt(ai(i) * ai(j)) * (1 - vkij(i, j))
+                    k += 1
+                Next
+            Next
 
             Return a
 
         End Function
 
-        Shared Function Calc_SUM2(n As Integer, Vx As Double(), a As Double(,)) As Double()()
+        Public Shared Function Calc_SUM2(n As Integer, Vx As Double(), a As Double()) As Double()()
 
             Dim saml, aml(n), aml2(n) As Double
 
-            Dim i, j As Integer
-                i = 0
-            Do
-                j = 0
-                Do
-                    saml = saml + Vx(i) * Vx(j) * a(i, j)
-                    aml2(i) = aml2(i) + Vx(j) * a(j, i)
-                    j = j + 1
-                Loop Until j = n + 1
-                i = i + 1
-            Loop Until i = n + 1
+            Dim i, j, k As Integer
+            For i = 0 To n
+                For j = 0 To n
+                    saml = saml + Vx(i) * Vx(j) * a(k)
+                    aml2(i) = aml2(i) + Vx(j) * a(k)
+                    k += 1
+                Next
+            Next
 
             Return {aml2, New Double() {saml}}
 
         End Function
 
+        Public Shared Function Calc_SUM3(n As Integer, Vx As Double(), ai As Double(), vkij As Double(,)) As Double()()
+
+            Dim saml, aml(n), aml2(n), val As Double
+
+            Dim i, j As Integer
+            For i = 0 To n
+                For j = 0 To n
+                    val = Math.Sqrt(ai(i) * ai(j)) * (1 - vkij(i, j))
+                    saml = saml + Vx(i) * Vx(j) * val
+                    aml2(i) = aml2(i) + Vx(j) * val
+                Next
+            Next
+
+            Return {aml2, New Double() {saml}}
+
+        End Function
+
+
         Shared Function ReturnParameters(ByVal T As Double, ByVal P As Double, ByVal Vx As Array, ByVal VKij As Object, ByVal VTc As Array, ByVal VPc As Array, ByVal Vw As Array)
 
             Dim n, R, coeff(3) As Double
             Dim Vant(0, 4) As Double
-            Dim criterioOK As Boolean = False
             Dim AG, BG, aml, bml As Double
 
             n = Vx.Length - 1
@@ -208,7 +219,7 @@ Namespace PropertyPackages.ThermoPlugs
 
             Dim G(UBound(Z_)) As Double
 
-            Dim ai(n), bi(n), ci(n), a(n, n), b(n, n) As Double
+            Dim ai(n), bi(n), ci(n), a((n + 1) * (n + 1)) As Double
             Dim Tc(n), Pc(n), Vc(n), Zc(n), w(n), alpha(n), m(n), Tr(n) As Double
 
             R = 8.314
@@ -292,7 +303,8 @@ Namespace PropertyPackages.ThermoPlugs
 
         End Function
 
-        Public Overrides Function CalcLnFug(ByVal T As Double, ByVal P As Double, ByVal Vx As Array, ByVal VKij As Object, ByVal VTc As Array, ByVal VPc As Array, ByVal Vw As Array, Optional ByVal otherargs As Object = Nothing, Optional ByVal forcephase As String = "") As Double()
+        Public Overrides Function CalcLnFug(ByVal T As Double, ByVal P As Double, ByVal Vx As Double(), ByVal VKij As Double(,), ByVal VTc As Double(),
+                                            ByVal VPc As Double(), ByVal Vw As Double(), Optional ByVal otherargs As Object = Nothing, Optional ByVal phase As Integer = -1) As Double()
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -304,10 +316,10 @@ Namespace PropertyPackages.ThermoPlugs
 
             If Settings.EnableGPUProcessing Then
                 IObj?.Paragraphs.Add("DWSIM will calculate SRK EOS Fugacity Coefficient using the GPU.")
-                results = CalcLnFugGPU(T, P, Vx, VKij, VTc, VPc, Vw, otherargs, forcephase)
+                results = CalcLnFugGPU(T, P, Vx, VKij, VTc, VPc, Vw, otherargs, phase)
             Else
                 IObj?.Paragraphs.Add("DWSIM will calculate SRK EOS Fugacity Coefficient using the CPU.")
-                results = CalcLnFugCPU(T, P, Vx, VKij, VTc, VPc, Vw, otherargs, forcephase)
+                results = CalcLnFugCPU(T, P, Vx, VKij, VTc, VPc, Vw, otherargs, phase)
             End If
 
             IObj?.Close()
@@ -316,10 +328,11 @@ Namespace PropertyPackages.ThermoPlugs
 
         End Function
 
-        Private Function CalcLnFugCPU(ByVal T As Double, ByVal P As Double, ByVal Vx As Double(), ByVal VKij As Double(,), ByVal Tc As Double(), ByVal Pc As Double(), ByVal w As Double(), Optional ByVal otherargs As Object = Nothing, Optional ByVal forcephase As String = "")
+        Private Function CalcLnFugCPU(ByVal T As Double, ByVal P As Double, ByVal Vx As Double(), ByVal VKij As Double(,), ByVal Tc As Double(), ByVal Pc As Double(), ByVal w As Double(), Optional ByVal otherargs As Object = Nothing, Optional ByVal phase As Integer = -1)
+
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, "", "CalcLnFugCPU", "SRK EOS Fugacity Coefficient (CPU)", "SRK EOS Fugacity Coefficient Calculation Routine")
+             If IObj IsNot Nothing then Inspector.Host.CheckAndAdd(IObj, "", "CalcLnFugCPU", "SRK EOS Fugacity Coefficient (CPU)", "SRK EOS Fugacity Coefficient Calculation Routine")
 
             IObj?.Paragraphs.Add("The SRK equation is a cubic Equation of State (characteristic related to the exponent of the molar volume) 
                                     which relates temperature, pressure And molar volume of a pure component or a mixture of components at equilibrium. The cubic 
@@ -365,42 +378,29 @@ Namespace PropertyPackages.ThermoPlugs
             IObj?.Paragraphs.Add(String.Format("Critical Temperatures: {0} K", Tc.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Critical Pressures: {0} Pa", Pc.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Acentric Factors: {0} ", w.ToMathArrayString))
-            IObj?.Paragraphs.Add(String.Format("State: {0}", forcephase))
 
             IObj?.Paragraphs.Add(String.Format("<h2>Calculated Intermediate Parameters</h2>"))
 
-            Dim n, R, coeff(3) As Double
-            Dim Vant(0, 4) As Double
-            Dim criterioOK As Boolean = False
+            Dim n As Integer, R, coeff(3) As Double
             Dim AG, BG, aml, bml As Double
-            Dim t1, t2, t3, t4, t5 As Double
 
             n = Vx.Length - 1
 
-            Dim ai(n), bi(n), tmp(n + 1), a(n, n), b(n, n) As Double
-            Dim aml2(n), amv2(n), LN_CF(n), PHI(n) As Double
-            Dim alpha(n), m(n), Tr(n) As Double
+            Dim ai(n), bi(n), tmp(n + 1) As Double
+            Dim aml2(n), amv2(n), LN_CF(n) As Double
+            Dim alpha(n), m(n) As Double
 
             R = 8.314
 
             Dim i As Integer
-            i = 0
-            Do
-                Tr(i) = T / Tc(i)
-                i = i + 1
-            Loop Until i = n + 1
 
-            i = 0
-            Do
-                alpha(i) = (1 + (0.48 + 1.574 * w(i) - 0.176 * w(i) ^ 2) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
-                ai(i) = 0.42748 * alpha(i) * R ^ 2 * Tc(i) ^ 2 / Pc(i)
+            For i = 0 To n
+                alpha(i) = Math.Pow(1.0 + (0.48 + 1.574 * w(i) - 0.176 * Math.Pow(w(i), 2.0)) * (1.0 - Math.Sqrt(T / Tc(i))), 2.0)
+                ai(i) = 0.42748 * alpha(i) * Math.Pow(R * Tc(i), 2.0) / Pc(i)
                 bi(i) = 0.08664 * R * Tc(i) / Pc(i)
-                i = i + 1
-            Loop Until i = n + 1
+            Next
 
-            a = Calc_SUM1(n, ai, VKij)
-
-            Dim tmpa As Double()() = Calc_SUM2(n, Vx, a)
+            Dim tmpa As Double()() = Calc_SUM3(n, Vx, ai, VKij)
 
             IObj?.Paragraphs.Add("<math_inline>a_{i}</math_inline>: " & ai.ToMathArrayString)
             IObj?.Paragraphs.Add("<math_inline>b_{i}</math_inline>: " & bi.ToMathArrayString)
@@ -409,53 +409,40 @@ Namespace PropertyPackages.ThermoPlugs
             aml = tmpa(1)(0)
 
             i = 0
-            bml = 0
             Do
-                bml = bml + Vx(i) * bi(i)
+                bml += Vx(i) * bi(i)
                 i = i + 1
             Loop Until i = n + 1
 
             IObj?.Paragraphs.Add("<math_inline>a_{m}</math_inline>: " & aml)
             IObj?.Paragraphs.Add("<math_inline>b_{m}</math_inline>: " & bml)
 
-            AG = aml * P / (R * T) ^ 2
+            AG = aml * P / Math.Pow(R * T, 2.0)
             BG = bml * P / (R * T)
 
             IObj?.Paragraphs.Add(String.Format("<math_inline>A</math_inline>: {0}", AG))
             IObj?.Paragraphs.Add(String.Format("<math_inline>B</math_inline>: {0}", BG))
 
-            Dim _zarray As List(Of Double), _mingz As Double(), Z As Double
+            Dim _zarray As Double(), Z As Double
 
-            _zarray = CalcZ(T, P, Vx, VKij, Tc, Pc, w)
-            If _zarray.Count = 0 Then Throw New Exception(String.Format("SRK EOS: unable to find a root with provided parameters [T = {0} K, P = {1} Pa, MoleFracs={2}]", T.ToString, P.ToString, Vx.ToArrayString))
-            If forcephase <> "" Then
-                If forcephase = "L" Then
-                    Z = Common.Min(_zarray.ToArray())
-                ElseIf forcephase = "V" Then
-                    Z = Common.Max(_zarray.ToArray())
-                End If
+            _zarray = CalcZ2(AG, BG)
+
+            If _zarray.Length = 0 Then Throw New Exception(String.Format("SRK EOS: unable to find a root with provided parameters [T = {0} K, P = {1} Pa, MoleFracs={2}]", T.ToString, P.ToString, Vx.ToArrayString))
+
+            If phase = 0 Then
+                Z = _zarray(0)
+            ElseIf phase = 1 Then
+                Z = _zarray(2)
             Else
-                _mingz = ZtoMinG(_zarray.ToArray, T, P, Vx, VKij, Tc, Pc, w)
+                Dim _mingz = ZtoMinG(_zarray.ToArray, T, P, Vx, VKij, Tc, Pc, w)
                 Z = _zarray(_mingz(0))
             End If
 
-            Dim Pcorr As Double = P
-            'Dim ZP As Double() = CheckRoot(Z, aml, bml, P, T, forcephase)
-            'Z = ZP(0)
-            'Pcorr = ZP(1)
-
             IObj?.Paragraphs.Add(String.Format("<math_inline>Z</math_inline>: {0}", Z))
 
-            i = 0
-            Do
-                t1 = bi(i) * (Z - 1) / bml
-                t2 = -Math.Log(Z - BG)
-                t3 = AG * (2 * aml2(i) / aml - bi(i) / bml)
-                t4 = Math.Log((Z + BG) / Z)
-                t5 = BG
-                LN_CF(i) = t1 + t2 - (t3 * t4 / t5) + Math.Log(Pcorr / P)
-                i = i + 1
-            Loop Until i = n + 1
+            For i = 0 To n
+                LN_CF(i) = bi(i) * (Z - 1.0) / bml - Math.Log(Z - BG) - ((AG * (2.0 * aml2(i) / aml - bi(i) / bml)) * (Math.Log((Z + BG) / Z)) / BG)
+            Next
 
             IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
 
@@ -467,7 +454,7 @@ Namespace PropertyPackages.ThermoPlugs
 
         End Function
 
-        Private Function CalcLnFugGPU(ByVal T As Double, ByVal P As Double, ByVal Vx As Array, ByVal VKij As Double(,), ByVal VTc As Array, ByVal VPc As Array, ByVal Vw As Array, Optional ByVal otherargs As Object = Nothing, Optional ByVal forcephase As String = "")
+        Private Function CalcLnFugGPU(ByVal T As Double, ByVal P As Double, ByVal Vx As Array, ByVal VKij As Double(,), ByVal VTc As Array, ByVal VPc As Array, ByVal Vw As Array, Optional ByVal otherargs As Object = Nothing, Optional ByVal phase As Integer = -1)
 
             Dim n, R, coeff(3) As Double
             Dim Vant(0, 4) As Double
@@ -504,24 +491,17 @@ Namespace PropertyPackages.ThermoPlugs
             AG = aml * P / (R * T) ^ 2
             BG = bml * P / (R * T)
 
-            Dim _zarray As List(Of Double), _mingz As Double(), Z As Double
+            Dim _zarray As Double(), _mingz As Double(), Z As Double
 
             _zarray = CalcZ2(AG, BG)
-            If forcephase <> "" Then
-                If forcephase = "L" Then
-                    Z = Common.Min(_zarray.ToArray())
-                ElseIf forcephase = "V" Then
-                    Z = Common.Max(_zarray.ToArray())
-                End If
+            If phase = 0 Then
+                Z = _zarray.Min
+            ElseIf phase = 1 Then
+                Z = _zarray.Max
             Else
                 _mingz = ZtoMinG(_zarray.ToArray(), T, P, Vx, VKij, VTc, VPc, Vw)
                 Z = _zarray(_mingz(0))
             End If
-
-            Dim Pcorr As Double = P
-            Dim ZP As Double() = CheckRoot(Z, aml, bml, P, T, forcephase)
-            Z = ZP(0)
-            Pcorr = ZP(1)
 
             i = 0
             Do
@@ -530,7 +510,7 @@ Namespace PropertyPackages.ThermoPlugs
                 t3 = AG * (2 * aml2(i) / aml - bi(i) / bml)
                 t4 = Math.Log((Z + BG) / Z)
                 t5 = BG
-                LN_CF(i) = t1 + t2 - (t3 * t4 / t5) + Math.Log(Pcorr / P)
+                LN_CF(i) = t1 + t2 - (t3 * t4 / t5)
                 i = i + 1
             Loop Until i = n + 1
 
@@ -665,60 +645,17 @@ Namespace PropertyPackages.ThermoPlugs
 
         End Sub
 
-        Shared Function CalcZ2(AG As Double, BG As Double) As List(Of Double)
+        Shared Function CalcZ2(AG As Double, BG As Double) As Double()
 
             Dim coeff(3) As Double
             Dim Vant(0, 4) As Double
 
             coeff(0) = -AG * BG
-            coeff(1) = AG - BG - BG ^ 2
+            coeff(1) = AG - BG - BG * BG
             coeff(2) = -1
             coeff(3) = 1
 
-            Dim temp1 = Poly_Roots(coeff)
-            Dim tv = 0.0#
-            Dim ZV, tv2 As Double
-
-            Dim result As New List(Of Double)
-
-            If temp1(0, 0) > temp1(1, 0) Then
-                tv = temp1(1, 0)
-                temp1(1, 0) = temp1(0, 0)
-                temp1(0, 0) = tv
-                tv2 = temp1(1, 1)
-                temp1(1, 1) = temp1(0, 1)
-                temp1(0, 1) = tv2
-            End If
-            If temp1(0, 0) > temp1(2, 0) Then
-                tv = temp1(2, 0)
-                temp1(2, 0) = temp1(0, 0)
-                temp1(0, 0) = tv
-                tv2 = temp1(2, 1)
-                temp1(2, 1) = temp1(0, 1)
-                temp1(0, 1) = tv2
-            End If
-            If temp1(1, 0) > temp1(2, 0) Then
-                tv = temp1(2, 0)
-                temp1(2, 0) = temp1(1, 0)
-                temp1(1, 0) = tv
-                tv2 = temp1(2, 1)
-                temp1(2, 1) = temp1(1, 1)
-                temp1(1, 1) = tv2
-            End If
-
-            ZV = temp1(2, 0)
-            If temp1(2, 1) <> 0 Then
-                ZV = temp1(1, 0)
-                If temp1(1, 1) <> 0 Then
-                    ZV = temp1(0, 0)
-                End If
-            End If
-
-            If temp1(0, 1) = 0.0# And temp1(0, 0) > 0.0# Then result.Add(temp1(0, 0))
-            If temp1(1, 1) = 0.0# And temp1(1, 0) > 0.0# Then result.Add(temp1(1, 0))
-            If temp1(2, 1) = 0.0# And temp1(2, 0) > 0.0# Then result.Add(temp1(2, 0))
-
-            Return result
+            Return Poly_Roots3(coeff)
 
         End Function
 
@@ -728,7 +665,7 @@ Namespace PropertyPackages.ThermoPlugs
 
             Dim ai(n), bi(n), aml2(n), amv2(n) As Double
             Dim R, coeff(3), tmp(n + 1) As Double
-            Dim Tc(n), Pc(n), W(n), alpha(n), Vant(0, 4), m(n), a(n, n), b(n, n), Tr(n) As Double
+            Dim Tc(n), Pc(n), W(n), alpha(n), Vant(0, 4), m(n), a((n + 1) * (n + 1)), b(n, n), Tr(n) As Double
 
             R = 8.314
 
@@ -1646,7 +1583,7 @@ Namespace PropertyPackages.ThermoPlugs
 
         End Function
 
-        Public Overrides Function CalcLnFugTV(ByVal T As Double, ByVal V As Double, ByVal Vx As System.Array, ByVal VKij As Object, ByVal VTc As System.Array, ByVal VPc As System.Array, ByVal Vw As System.Array, Optional ByVal otherargs As Object = Nothing, Optional ByVal forcephase As String = "") As Double()
+        Public Overrides Function CalcLnFugTV(ByVal T As Double, ByVal V As Double, ByVal Vx As System.Array, ByVal VKij As Object, ByVal VTc As System.Array, ByVal VPc As System.Array, ByVal Vw As System.Array, Optional ByVal otherargs As Object = Nothing, Optional ByVal phase As Integer = -1) As Double()
 
             Dim P As Double = Me.CalcP(V, T, Vx, VKij, VTc, VPc, Vw, otherargs)
 

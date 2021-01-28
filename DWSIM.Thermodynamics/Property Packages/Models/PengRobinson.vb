@@ -4,16 +4,16 @@
 '    This file is part of DWSIM.
 '
 '    DWSIM is free software: you can redistribute it and/or modify
-'    it under the terms of the GNU Lesser General Public License as published by
+'    it under the terms of the GNU General Public License as published by
 '    the Free Software Foundation, either version 3 of the License, or
 '    (at your option) any later version.
 '
 '    DWSIM is distributed in the hope that it will be useful,
 '    but WITHOUT ANY WARRANTY; without even the implied warranty of
 '    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'    GNU Lesser General Public License for more details.
+'    GNU General Public License for more details.
 '
-'    You should have received a copy of the GNU Lesser General Public License
+'    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 Imports FileHelpers
 Imports DWSIM.Thermodynamics.PropertyPackages.ThermoPlugs.PR
@@ -23,7 +23,7 @@ Imports Cudafy
 
 Namespace PropertyPackages.Auxiliary
 
-    <DelimitedRecord(";")> <IgnoreFirst()> <System.Serializable()> _
+    <DelimitedRecord(";")> <IgnoreFirst()> <System.Serializable()>
     Public Class PR_IPData
 
         Implements ICloneable
@@ -496,32 +496,16 @@ Namespace PropertyPackages.Auxiliary
 
             R = 8.314
 
-            i = 0
-            Do
-                Tr(i) = T / Tc(i)
-                i = i + 1
-            Loop Until i = n + 1
-
             Dim MMm As Double = Vz.MultiplyY(VMM).SumY
 
-            If Settings.EnableParallelProcessing Then
-                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism, .TaskScheduler = Settings.AppTaskScheduler}
-                Parallel.For(0, n + 1, poptions, Sub(ii)
-                                                     alpha(ii) = (1 + (0.37464 + 1.54226 * w(ii) - 0.26992 * w(ii) ^ 2) * (1 - (T / Tc(ii)) ^ 0.5)) ^ 2
-                                                     ai(ii) = 0.45724 * alpha(ii) * R ^ 2 * Tc(ii) ^ 2 / Pc(ii)
-                                                     bi(ii) = 0.0778 * R * Tc(ii) / Pc(ii)
-                                                     ci(ii) = 0.37464 + 1.54226 * w(ii) - 0.26992 * w(ii) ^ 2
-                                                 End Sub)
-            Else
-                i = 0
-                Do
-                    alpha(i) = (1 + (0.37464 + 1.54226 * w(i) - 0.26992 * w(i) ^ 2) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
-                    ai(i) = 0.45724 * alpha(i) * R ^ 2 * Tc(i) ^ 2 / Pc(i)
-                    bi(i) = 0.0778 * R * Tc(i) / Pc(i)
-                    ci(i) = 0.37464 + 1.54226 * w(i) - 0.26992 * w(i) ^ 2
-                    i = i + 1
-                Loop Until i = n + 1
-            End If
+            i = 0
+            Do
+                ci(i) = 0.37464 + 1.54226 * w(i) - 0.26992 * Math.Pow(w(i), 2)
+                alpha(i) = Math.Pow(1 + ci(i) * (1 - Math.Sqrt(T / Tc(i))), 2)
+                ai(i) = 0.45724 * alpha(i) * Math.Pow(R * Tc(i), 2) / Pc(i)
+                bi(i) = 0.0778 * R * Tc(i) / Pc(i)
+                i = i + 1
+            Loop Until i = n + 1
 
             a = Calc_SUM1(n, ai, VKij)
 
@@ -537,7 +521,7 @@ Namespace PropertyPackages.Auxiliary
             IObj?.Paragraphs.Add("<math_inline>a_{m}</math_inline>: " & am)
             IObj?.Paragraphs.Add("<math_inline>b_{m}</math_inline>: " & bm)
 
-            Dim AG1 = am * P / (R * T) ^ 2
+            Dim AG1 = am * P / Math.Pow(R * T, 2)
             Dim BG1 = bm * P / (R * T)
 
             IObj?.Paragraphs.Add(String.Format("<math_inline>A</math_inline>: {0}", AG1))
@@ -867,9 +851,9 @@ Namespace PropertyPackages.Auxiliary
         Function OF_Rho(ByVal rho As Double, ByVal aml As Double, ByVal bml As Double, ByVal T As Double) As Double
 
             Dim R As Double = 8.314
-            Return 0.1 * 8.314 * T - _
-                        bml * rho * R * T * (1 - bml * rho) ^ -2 + R * T * (1 - bml * rho) ^ -1 + _
-                        aml * rho ^ 2 * (1 + 2 * bml * rho - (bml * rho) ^ 2) ^ -2 * (2 * bml - 2 * bml ^ 2 * rho) + _
+            Return 0.1 * 8.314 * T -
+                        bml * rho * R * T * (1 - bml * rho) ^ -2 + R * T * (1 - bml * rho) ^ -1 +
+                        aml * rho ^ 2 * (1 + 2 * bml * rho - (bml * rho) ^ 2) ^ -2 * (2 * bml - 2 * bml ^ 2 * rho) +
                         2 * aml * rho * (1 + 2 * bml * rho - (bml * rho) ^ 2) ^ -1
 
         End Function
@@ -922,11 +906,11 @@ Namespace PropertyPackages.ThermoPlugs
             Dim a(n, n) As Double
 
             Dim i, j As Integer
-                i = 0
+            i = 0
             Do
                 j = 0
                 Do
-                    a(i, j) = (ai(i) * ai(j)) ^ 0.5 * (1 - vkij(i, j))
+                    a(i, j) = Math.Sqrt(ai(i) * ai(j)) * (1 - vkij(i, j))
                     j = j + 1
                 Loop Until j = n + 1
                 i = i + 1
@@ -941,7 +925,7 @@ Namespace PropertyPackages.ThermoPlugs
             Dim saml, aml(n), aml2(n) As Double
 
             Dim i, j As Integer
-                i = 0
+            i = 0
             Do
                 j = 0
                 Do
@@ -1159,7 +1143,8 @@ Namespace PropertyPackages.ThermoPlugs
 
         End Function
 
-        Public Overrides Function CalcLnFug(ByVal T As Double, ByVal P As Double, ByVal Vx As Array, ByVal VKij As Object, ByVal VTc As Array, ByVal VPc As Array, ByVal Vw As Array, Optional ByVal otherargs As Object = Nothing, Optional ByVal forcephase As String = "") As Double()
+        Public Overrides Function CalcLnFug(ByVal T As Double, ByVal P As Double, ByVal Vx As Double(), ByVal VKij As Double(,), ByVal VTc As Double(),
+                                            ByVal VPc As Double(), ByVal Vw As Double(), Optional ByVal otherargs As Object = Nothing, Optional ByVal phase As Integer = -1) As Double()
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -1171,10 +1156,10 @@ Namespace PropertyPackages.ThermoPlugs
 
             If Settings.EnableGPUProcessing Then
                 IObj?.Paragraphs.Add("DWSIM will calculate PR EOS Fugacity Coefficient using the GPU.")
-                result = CalcLnFugGPU(T, P, Vx, VKij, VTc, VPc, Vw, otherargs, forcephase)
+                result = CalcLnFugGPU(T, P, Vx, VKij, VTc, VPc, Vw, otherargs, phase)
             Else
                 IObj?.Paragraphs.Add("DWSIM will calculate PR EOS Fugacity Coefficient using the CPU.")
-                result = CalcLnFugCPU(T, P, Vx, VKij, VTc, VPc, Vw, otherargs, forcephase)
+                result = CalcLnFugCPU(T, P, Vx, VKij, VTc, VPc, Vw, otherargs, phase)
             End If
 
             IObj?.Close()
@@ -1183,7 +1168,7 @@ Namespace PropertyPackages.ThermoPlugs
 
         End Function
 
-        Private Function CalcLnFugCPU(ByVal T As Double, ByVal P As Double, ByVal Vx As Double(), ByVal VKij As Double(,), ByVal Tc As Double(), ByVal Pc As Double(), ByVal w As Double(), Optional ByVal otherargs As Object = Nothing, Optional ByVal forcephase As String = "")
+        Private Function CalcLnFugCPU(ByVal T As Double, ByVal P As Double, ByVal Vx As Double(), ByVal VKij As Double(,), ByVal Tc As Double(), ByVal Pc As Double(), ByVal w As Double(), Optional ByVal otherargs As Object = Nothing, Optional ByVal phase As Integer = -1)
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -1233,7 +1218,6 @@ Namespace PropertyPackages.ThermoPlugs
             IObj?.Paragraphs.Add(String.Format("Critical Temperatures: {0} K", Tc.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Critical Pressures: {0} Pa", Pc.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Acentric Factors: {0} ", w.ToMathArrayString))
-            IObj?.Paragraphs.Add(String.Format("State: {0}", forcephase))
 
             IObj?.Paragraphs.Add(String.Format("<h2>Calculated Intermediate Parameters</h2>"))
 
@@ -1254,14 +1238,8 @@ Namespace PropertyPackages.ThermoPlugs
 
             i = 0
             Do
-                Tr(i) = T / Tc(i)
-                i = i + 1
-            Loop Until i = n + 1
-
-            i = 0
-            Do
-                alpha(i) = (1 + (0.37464 + 1.54226 * w(i) - 0.26992 * w(i) ^ 2) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
-                ai(i) = 0.45724 * alpha(i) * R ^ 2 * Tc(i) ^ 2 / Pc(i)
+                alpha(i) = Math.Pow(1 + (0.37464 + 1.54226 * w(i) - 0.26992 * Math.Pow(w(i), 2)) * (1 - Math.Sqrt(T / Tc(i))), 2)
+                ai(i) = 0.45724 * alpha(i) * Math.Pow(R * Tc(i), 2) / Pc(i)
                 bi(i) = 0.0778 * R * Tc(i) / Pc(i)
                 i = i + 1
             Loop Until i = n + 1
@@ -1281,7 +1259,7 @@ Namespace PropertyPackages.ThermoPlugs
             IObj?.Paragraphs.Add("<math_inline>a_{m}</math_inline>: " & aml)
             IObj?.Paragraphs.Add("<math_inline>b_{m}</math_inline>: " & bml)
 
-            AG = aml * P / (R * T) ^ 2
+            AG = aml * P / Math.Pow(R * T, 2)
             BG = bml * P / (R * T)
 
             IObj?.Paragraphs.Add(String.Format("<math_inline>A</math_inline>: {0}", AG))
@@ -1291,45 +1269,36 @@ Namespace PropertyPackages.ThermoPlugs
 
             IObj?.SetCurrent()
 
-            _zarray = CalcZ(T, P, Vx, VKij, Tc, Pc, w)
+            _zarray = CalcZ2(AG, BG)
             If _zarray.Count = 0 Then
                 Dim ex As New Exception(String.Format("PR EOS: unable to find a root with provided parameters [T = {0} K, P = {1} Pa, MoleFracs={2}]", T.ToString, P.ToString, Vx.ToArrayString))
                 ex.Data.Add("DetailedDescription", "This error occurs when the PR EOS is unable to find a density root with the given parameters.")
                 ex.Data.Add("UserAction", "Check if the parameters are valid (T, P, composition). If this error keeps occuring, try another Property Package or check the Material Stream / Unit Operation properties.")
                 Throw ex
             End If
-            If forcephase <> "" Then
-                If forcephase = "L" Then
-                    Z = _zarray.Min
-                ElseIf forcephase = "V" Then
-                    Z = _zarray.Max
-                End If
+            If phase = 0 Then
+                Z = _zarray.Min
+            ElseIf phase = 1 Then
+                Z = _zarray.Max
             Else
-                IObj?.SetCurrent()
-                _mingz = ZtoMinG(_zarray.ToArray(), T, P, Vx, VKij, Tc, Pc, w)
+                _mingz = ZtoMinG(_zarray.ToArray, T, P, Vx, VKij, Tc, Pc, w)
                 Z = _zarray(_mingz(0))
             End If
 
             IObj?.Paragraphs.Add(String.Format("<math_inline>Z</math_inline>: {0}", Z))
 
-            Dim Pcorr As Double = P
-
-            'Dim ZP As Double() = CheckRoot(Z, aml, bml, P, T, forcephase)
-            'Z = ZP(0)
-            'Pcorr = ZP(1)
-
             Dim t1, t2, t3, t4, t5 As Double
-                i = 0
-                Do
-                    t1 = bi(i) * (Z - 1) / bml
-                    t2 = -Math.Log(Z - BG)
-                    t3 = AG * (2 * aml2(i) / aml - bi(i) / bml)
-                    t4 = Math.Log((Z + (1 + 2 ^ 0.5) * BG) / (Z + (1 - 2 ^ 0.5) * BG))
-                    t5 = 2 * 2 ^ 0.5 * BG
-                    LN_CF(i) = t1 + t2 - (t3 * t4 / t5)
-                    LN_CF(i) = LN_CF(i) + Math.Log(Pcorr / P)
-                    i = i + 1
-                Loop Until i = n + 1
+            i = 0
+            Do
+                t1 = bi(i) * (Z - 1) / bml
+                t2 = -Math.Log(Z - BG)
+                t3 = AG * (2 * aml2(i) / aml - bi(i) / bml)
+                t4 = Math.Log((Z + (1 + 1.414213) * BG) / (Z + (1 - 1.414213) * BG))
+                t5 = 2 * 1.414213 * BG
+                LN_CF(i) = t1 + t2 - (t3 * t4 / t5)
+                LN_CF(i) = LN_CF(i)
+                i = i + 1
+            Loop Until i = n + 1
 
             IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
 
@@ -1341,7 +1310,7 @@ Namespace PropertyPackages.ThermoPlugs
 
         End Function
 
-        Private Function CalcLnFugGPU(ByVal T As Double, ByVal P As Double, ByVal Vx As Array, ByVal VKij As Double(,), ByVal VTc As Array, ByVal VPc As Array, ByVal Vw As Array, Optional ByVal otherargs As Object = Nothing, Optional ByVal forcephase As String = "")
+        Private Function CalcLnFugGPU(ByVal T As Double, ByVal P As Double, ByVal Vx As Array, ByVal VKij As Double(,), ByVal VTc As Array, ByVal VPc As Array, ByVal Vw As Array, Optional ByVal otherargs As Object = Nothing, Optional ByVal phase As Integer = -1)
 
             Dim n, R, coeff(3) As Double
             Dim Vant(0, 4) As Double
@@ -1375,27 +1344,20 @@ Namespace PropertyPackages.ThermoPlugs
             aml = MathEx.Common.Sum(aml_temp)
             bml = MathEx.Common.Sum(bml_temp)
 
-            AG = aml * P / (R * T) ^ 2
+            AG = aml * P / Math.Pow(R * T, 2)
             BG = bml * P / (R * T)
 
             Dim _zarray As List(Of Double), _mingz As Double(), Z As Double
 
             _zarray = CalcZ2(AG, BG)
-            If forcephase <> "" Then
-                If forcephase = "L" Then
-                    Z = _zarray.Min
-                ElseIf forcephase = "V" Then
-                    Z = _zarray.Max
-                End If
+            If phase = 0 Then
+                Z = _zarray.Min
+            ElseIf phase = 1 Then
+                Z = _zarray.Max
             Else
-                _mingz = ZtoMinG(_zarray.ToArray(), T, P, Vx, VKij, VTc, VPc, Vw)
+                _mingz = ZtoMinG(_zarray.ToArray, T, P, Vx, VKij, Tc, Pc, W)
                 Z = _zarray(_mingz(0))
             End If
-
-            Dim Pcorr As Double = P
-            Dim ZP As Double() = CheckRoot(Z, aml, bml, P, T, forcephase)
-            Z = ZP(0)
-            Pcorr = ZP(1)
 
             i = 0
             Do
@@ -1405,7 +1367,6 @@ Namespace PropertyPackages.ThermoPlugs
                 t4 = Math.Log((Z + (1 + 2 ^ 0.5) * BG) / (Z + (1 - 2 ^ 0.5) * BG))
                 t5 = 2 * 2 ^ 0.5 * BG
                 LN_CF(i) = t1 + t2 - (t3 * t4 / t5)
-                LN_CF(i) = LN_CF(i) + Math.Log(Pcorr / P)
                 i = i + 1
             Loop Until i = n + 1
 
@@ -2560,7 +2521,7 @@ Namespace PropertyPackages.ThermoPlugs
 
         End Function
 
-        Public Overrides Function CalcLnFugTV(ByVal T As Double, ByVal V As Double, ByVal Vx As System.Array, ByVal VKij As Object, ByVal VTc As System.Array, ByVal VPc As System.Array, ByVal Vw As System.Array, Optional ByVal otherargs As Object = Nothing, Optional ByVal forcephase As String = "") As Double()
+        Public Overrides Function CalcLnFugTV(ByVal T As Double, ByVal V As Double, ByVal Vx As System.Array, ByVal VKij As Object, ByVal VTc As System.Array, ByVal VPc As System.Array, ByVal Vw As System.Array, Optional ByVal otherargs As Object = Nothing, Optional ByVal phase As Integer = -1) As Double()
 
             Dim P As Double = Me.CalcP(V, T, Vx, VKij, VTc, VPc, Vw, otherargs)
 

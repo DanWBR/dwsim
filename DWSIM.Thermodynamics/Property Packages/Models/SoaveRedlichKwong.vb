@@ -4,16 +4,16 @@
 '    This file is part of DWSIM.
 '
 '    DWSIM is free software: you can redistribute it and/or modify
-'    it under the terms of the GNU Lesser General Public License as published by
+'    it under the terms of the GNU General Public License as published by
 '    the Free Software Foundation, either version 3 of the License, or
 '    (at your option) any later version.
 '
 '    DWSIM is distributed in the hope that it will be useful,
 '    but WITHOUT ANY WARRANTY; without even the implied warranty of
 '    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'    GNU Lesser General Public License for more details.
+'    GNU General Public License for more details.
 '
-'    You should have received a copy of the GNU Lesser General Public License
+'    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 Imports FileHelpers
 Imports DWSIM.Thermodynamics.PropertyPackages.ThermoPlugs.SRK
@@ -235,7 +235,7 @@ Namespace PropertyPackages.Auxiliary
 
         End Function
 
-        Function H_SRK_MIX(ByVal TIPO As String, ByVal T As Double, ByVal P As Double, ByVal Vz As Double(), ByVal VKij As Double(,), ByVal VTc As Double(), ByVal VPc As Double(), ByVal Vw As Double(), ByVal VMM As Double(), ByVal Hid As Double) As Double
+        Function H_SRK_MIX(ByVal TIPO As String, ByVal T As Double, ByVal P As Double, ByVal Vz As Double(), ByVal VKij As Double(,), ByVal Tc As Double(), ByVal Pc As Double(), ByVal w As Double(), ByVal VMM As Double(), ByVal Hid As Double) As Double
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -287,33 +287,23 @@ Namespace PropertyPackages.Auxiliary
             IObj?.Paragraphs.Add(String.Format("Ideal Enthalpy (Ideal Gas State): {0} kJ/kg", Hid))
             IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Interaction Parameters: {0}", VKij.ToMathArrayString))
-            IObj?.Paragraphs.Add(String.Format("Critical Temperatures: {0} K", VTc.ToMathArrayString))
-            IObj?.Paragraphs.Add(String.Format("Critical Pressures: {0} Pa", VPc.ToMathArrayString))
-            IObj?.Paragraphs.Add(String.Format("Acentric Factors: {0} ", Vw.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Temperatures: {0} K", Tc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Critical Pressures: {0} Pa", Pc.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Acentric Factors: {0} ", w.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("State: {0}", TIPO))
 
             IObj?.Paragraphs.Add(String.Format("<h2>Calculated Intermediate Parameters</h2>"))
 
-            Dim ai(), bi(), ci() As Double
             Dim n As Integer, R As Double
-            Dim Tc(), Pc(), Vc(), w(), Zc(), alpha(), m(), a(,), b(,), Z, Tr() As Double
-            Dim i, j, dadT
-
             n = Vz.Length - 1
 
-            ReDim ai(n), bi(n), ci(n), a(n, n), b(n, n)
-            ReDim Tc(n), Pc(n), Vc(n), Zc(n), w(n), alpha(n), m(n), Tr(n)
+            Dim ai(n), bi(n), ci(n) As Double
+            Dim Vc(n), Zc(n), alpha(n), m(n), a(n, n), b(n, n), Z As Double
+
+            Dim i, j As Integer
+            Dim dadt As Double
 
             R = 8.314
-
-            i = 0
-            Do
-                Tc(i) = VTc(i)
-                Tr(i) = T / Tc(i)
-                Pc(i) = VPc(i)
-                w(i) = Vw(i)
-                i = i + 1
-            Loop Until i = n + 1
 
             i = 0
             Dim MMm = 0.0#
@@ -324,10 +314,10 @@ Namespace PropertyPackages.Auxiliary
 
             i = 0
             Do
-                alpha(i) = (1 + (0.48 + 1.574 * w(i) - 0.176 * w(i) ^ 2) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
-                ai(i) = 0.42748 * alpha(i) * R ^ 2 * Tc(i) ^ 2 / Pc(i)
+                ci(i) = 0.48 + 1.574 * w(i) - 0.176 * Math.Pow(w(i), 2)
+                alpha(i) = Math.Pow(1 + ci(i) * (1 - Math.Sqrt(T / Tc(i))), 2)
+                ai(i) = 0.42748 * alpha(i) * Math.Pow(R * Tc(i), 2) / Pc(i)
                 bi(i) = 0.08664 * R * Tc(i) / Pc(i)
-                ci(i) = 0.48 + 1.574 * w(i) - 0.176 * w(i) ^ 2
                 i = i + 1
             Loop Until i = n + 1
 
@@ -335,7 +325,7 @@ Namespace PropertyPackages.Auxiliary
             Do
                 j = 0
                 Do
-                    a(i, j) = (ai(i) * ai(j)) ^ 0.5 * (1 - VKij(i, j))
+                    a(i, j) = Math.Sqrt(ai(i) * ai(j)) * (1 - VKij(i, j))
                     j = j + 1
                 Loop Until j = n + 1
                 i = i + 1
@@ -365,7 +355,7 @@ Namespace PropertyPackages.Auxiliary
             IObj?.Paragraphs.Add("<math_inline>a_{m}</math_inline>: " & am)
             IObj?.Paragraphs.Add("<math_inline>b_{m}</math_inline>: " & bm)
 
-            Dim AG1 = am * P / (R * T) ^ 2
+            Dim AG1 = am * P / Math.Pow(R * T, 2)
             Dim BG1 = bm * P / (R * T)
 
             IObj?.Paragraphs.Add(String.Format("<math_inline>A</math_inline>: {0}", AG1))
@@ -374,73 +364,23 @@ Namespace PropertyPackages.Auxiliary
             Dim coeff(3) As Double
 
             coeff(0) = -AG1 * BG1
-            coeff(1) = AG1 - BG1 - BG1 ^ 2
+            coeff(1) = AG1 - BG1 - BG1 * BG1
             coeff(2) = -1
             coeff(3) = 1
 
-            Dim temp1 = Poly_Roots(coeff)
-            Dim tv
-            Dim tv2
+            Dim _zarray As Double(), _mingz As Double()
 
-            If Not IsNumeric(temp1) Then
-
-                If temp1(0, 0) > temp1(1, 0) Then
-                    tv = temp1(1, 0)
-                    tv2 = temp1(1, 1)
-                    temp1(1, 0) = temp1(0, 0)
-                    temp1(0, 0) = tv
-                    temp1(1, 1) = temp1(0, 1)
-                    temp1(0, 1) = tv2
-                End If
-                If temp1(0, 0) > temp1(2, 0) Then
-                    tv = temp1(2, 0)
-                    temp1(2, 0) = temp1(0, 0)
-                    temp1(0, 0) = tv
-                    tv2 = temp1(2, 1)
-                    temp1(2, 1) = temp1(0, 1)
-                    temp1(0, 1) = tv2
-                End If
-                If temp1(1, 0) > temp1(2, 0) Then
-                    tv = temp1(2, 0)
-                    temp1(2, 0) = temp1(1, 0)
-                    temp1(1, 0) = tv
-                    tv2 = temp1(2, 1)
-                    temp1(2, 1) = temp1(1, 1)
-                    temp1(1, 1) = tv2
-                End If
-
+            _zarray = CalcZ2(AG1, BG1)
+            If _zarray.Count = 0 Then Throw New Exception(String.Format("SRK EOS: unable to find a root with provided parameters [T = {0} K, P = {1} Pa, MoleFracs={2}]", T.ToString, P.ToString, Vz.ToArrayString))
+            If TIPO <> "" Then
                 If TIPO = "L" Then
-                    Z = temp1(0, 0)
-                    If temp1(0, 1) <> 0 Then
-                        Z = temp1(1, 0)
-                        If temp1(1, 1) <> 0 Then
-                            Z = temp1(2, 0)
-                        End If
-                    End If
-                    If Z < 0 Then Z = temp1(1, 0)
+                    Z = _zarray.Min
                 ElseIf TIPO = "V" Then
-                    Z = temp1(2, 0)
-                    If temp1(2, 1) <> 0 Then
-                        Z = temp1(1, 0)
-                        If temp1(1, 1) <> 0 Then
-                            Z = temp1(0, 0)
-                        End If
-                    End If
+                    Z = _zarray.Max
                 End If
-
             Else
-
-                Dim findZV, dfdz, zant As Double
-                If TIPO = "V" Then Z = 1 Else Z = 0.05
-                Do
-                    findZV = coeff(3) * Z ^ 3 + coeff(2) * Z ^ 2 + coeff(1) * Z + coeff(0)
-                    dfdz = 3 * coeff(3) * Z ^ 2 + 2 * coeff(2) * Z + coeff(1)
-                    zant = Z
-                    Z = Z - findZV / dfdz
-                    If Z < 0 Then Z = 1
-                Loop Until Math.Abs(findZV) < 0.0001 Or Double.IsNaN(Z)
-
-
+                _mingz = ZtoMinG(_zarray.ToArray, T, P, Vz, VKij, Tc, Pc, w)
+                Z = _zarray(_mingz(0))
             End If
 
             IObj?.Paragraphs.Add(String.Format("<math_inline>Z</math_inline>: {0}", Z))
@@ -452,36 +392,27 @@ Namespace PropertyPackages.Auxiliary
             Dim tmp1 = MMm / V / 1000
 
             Dim aux1, aux2, auxtmp(n) As Double
-            aux1 = -R / 2 * (0.42748 / T) ^ 0.5
+            aux1 = -R / 2 * Math.Sqrt(0.42748 / T)
 
-            If Settings.EnableParallelProcessing Then
-                Parallel.For(0, n + 1, Sub(k)
-                                           For l As Integer = 0 To n
-                                               auxtmp(k) += Vz(k) * Vz(l) * (1 - VKij(k, l)) * (ci(l) * (ai(k) * Tc(l) / Pc(l)) ^ 0.5 + ci(k) * (ai(l) * Tc(k) / Pc(k)) ^ 0.5)
-                                           Next
-                                       End Sub)
-                aux2 = auxtmp.SumY
-            Else
-                i = 0
+            i = 0
+            Do
+                j = 0
                 Do
-                    j = 0
-                    Do
-                        aux2 += Vz(i) * Vz(j) * (1 - VKij(i, j)) * (ci(j) * (ai(i) * Tc(j) / Pc(j)) ^ 0.5 + ci(i) * (ai(j) * Tc(i) / Pc(i)) ^ 0.5)
-                        j = j + 1
-                    Loop Until j = n + 1
-                    i = i + 1
-                Loop Until i = n + 1
-            End If
+                    aux2 += Vz(i) * Vz(j) * (1 - VKij(i, j)) * (ci(j) * Math.Sqrt(ai(i) * Tc(j) / Pc(j)) + ci(i) * Math.Sqrt(ai(j) * Tc(i) / Pc(i)))
+                    j = j + 1
+                Loop Until j = n + 1
+                i = i + 1
+            Loop Until i = n + 1
 
-            dadT = aux1 * aux2
+            dadt = aux1 * aux2
 
             Dim uu, ww As Double
             uu = 1
             ww = 0
 
-            Dim DAres = am / (bm * (uu ^ 2 - 4 * ww) ^ 0.5) * Math.Log((2 * Z + BG1 * (uu - (uu ^ 2 - 4 * ww) ^ 0.5)) / (2 * Z + BG1 * (uu + (uu ^ 2 - 4 * ww) ^ 0.5))) - R * T * Math.Log((Z - BG1) / Z) - R * T * Math.Log(Z)
+            Dim DAres = am / (bm * Math.Sqrt(uu ^ 2 - 4 * ww)) * Math.Log((2 * Z + BG1 * (uu - Math.Sqrt(uu ^ 2 - 4 * ww))) / (2 * Z + BG1 * (uu + Math.Sqrt(uu ^ 2 - 4 * ww)))) - R * T * Math.Log((Z - BG1) / Z) - R * T * Math.Log(Z)
             Dim V0 As Double = R * 298.15 / 101325
-            Dim DSres = R * Math.Log((Z - BG1) / Z) + R * Math.Log(Z) - 1 / ((uu ^ 2 - 4 * ww) ^ 0.5 * bm) * dadT * Math.Log((2 * Z + BG1 * (uu - (uu ^ 2 - 4 * ww) ^ 0.5)) / (2 * Z + BG1 * (uu + (uu ^ 2 - 4 * ww) ^ 0.5)))
+            Dim DSres = R * Math.Log((Z - BG1) / Z) + R * Math.Log(Z) - 1 / (Math.Sqrt(uu ^ 2 - 4 * ww) * bm) * dadt * Math.Log((2 * Z + BG1 * (uu - Math.Sqrt(uu ^ 2 - 4 * ww))) / (2 * Z + BG1 * (uu + Math.Sqrt(uu ^ 2 - 4 * ww))))
             Dim DHres = DAres + T * (DSres) + R * T * (Z - 1)
 
             IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
@@ -489,11 +420,11 @@ Namespace PropertyPackages.Auxiliary
             IObj?.Paragraphs.Add(String.Format("Calculated Enthalpy Departure: {0} kJ/kmol", DHres))
             IObj?.Paragraphs.Add(String.Format("Calculated Enthalpy Departure: {0} kJ/kg", DHres / MMm))
 
-            If MathEx.Common.Sum(Vz) = 0.0# Then
+            If Vz.Sum = 0.0# Then
                 H_SRK_MIX = 0.0#
             Else
                 IObj?.Paragraphs.Add(String.Format("Calculated Total Enthalpy (Ideal + Departure): {0} kJ/kg", Hid + DHres / MMm))
-                H_SRK_MIX = Hid + DHres / MMm '/ 1000
+                H_SRK_MIX = Hid + DHres / MMm
             End If
 
             IObj?.Close()
@@ -1420,7 +1351,7 @@ Final3:
 
         End Function
 
-      Function CalcLnFug(ByVal T, ByVal P, ByVal Vx, ByVal VKij, ByVal VTc, ByVal VPc, ByVal Vw, ByVal VTb, ByVal TIPO)
+        Function CalcLnFug(ByVal T, ByVal P, ByVal Vx, ByVal VKij, ByVal VTc, ByVal VPc, ByVal Vw, ByVal VTb, ByVal TIPO)
 
             Dim n, R, coeff(3) As Double
             Dim Vant(0, 4) As Double
@@ -1462,7 +1393,7 @@ Final3:
             Do
                 j = 0
                 Do
-                    a(i, j) = (ai(i) * ai(j)) ^ 0.5 * (1 - VKij(i, j))
+                    a(i, j) = Math.Sqrt(ai(i) * ai(j)) * (1 - VKij(i, j))
                     j = j + 1
                 Loop Until j = n + 1
                 i = i + 1
@@ -1568,8 +1499,8 @@ Final3:
             Tmc = 0.20268 * aml / (R * bml)
             rho = P / (ZV * R * T)
             dPdrho_ = 0.1 * R * T
-            dPdrho = bml * rho * R * T * (1 - bml * rho) ^ -2 + R * T * (1 - bml * rho) ^ -1 + _
-                    aml * rho ^ 2 * (1 + 2 * bml * rho - (bml * rho) ^ 2) ^ -2 * (2 * bml - 2 * bml ^ 2 * rho) + _
+            dPdrho = bml * rho * R * T * (1 - bml * rho) ^ -2 + R * T * (1 - bml * rho) ^ -1 +
+                    aml * rho ^ 2 * (1 + 2 * bml * rho - (bml * rho) ^ 2) ^ -2 * (2 * bml - 2 * bml ^ 2 * rho) +
                     2 * aml * rho * (1 + 2 * bml * rho - (bml * rho) ^ 2) ^ -1
 
             If TIPO = "L" Then

@@ -27,7 +27,7 @@ If applicable, add screenshots to help explain your problem.
 
 **Desktop (please complete the following information):**
  - OS: [e.g. Windows, Linux, macOS]
- - Version [e.g. v6.3 Update 5]
+ - Version [e.g. v6.4.1]
 
 **Additional context**
 Add any other context about the problem here.

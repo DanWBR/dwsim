@@ -132,7 +132,7 @@
     <Compile Include="LM.vb" />
     <Compile Include="LMFit.vb" />
     <Compile Include="LP_Solve.vb" />
-    <Compile Include="MATRIX2.vb" />
+    <Compile Include="CubicRoots.vb" />
     <Compile Include="MatrixOps.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

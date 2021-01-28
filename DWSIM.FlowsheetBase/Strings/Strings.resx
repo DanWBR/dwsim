@@ -1957,7 +1957,7 @@
     <value>Raoult's Law</value>
   </data>
   <data name="LicenseInfo" xml:space="preserve">
-    <value>This software is released under the terms of the GNU Lesser General Public License (GPL) version 3. See 'gpl.txt' for more details.</value>
+    <value>This software is released under the terms of the GNU General Public License (GPL) version 3. See 'gpl.txt' for more details.</value>
   </data>
   <data name="LimitedeEstabilidade" xml:space="preserve">
     <value>Stability Limit</value>

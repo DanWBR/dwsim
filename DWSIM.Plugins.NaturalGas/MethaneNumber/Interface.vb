@@ -3,14 +3,14 @@
 ' Copyright 2014, Optimized Technical Solutions, LLC
 
 '    This program is free software: you can redistribute it and/or modify
-'    it under the terms of the GNU Lesser General Public License as published by
+'    it under the terms of the GNU General Public License as published by
 '    the Free Software Foundation, version 3 of the License.
 '    http://opensource.org/licenses/GPL-3.0
 
 '    This program is distributed in the hope that it will be useful,
 '    but WITHOUT ANY WARRANTY; without even the implied warranty of
 '    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'    GNU Lesser General Public License for more details.
+'    GNU General Public License for more details.
 
 ' EXCEL VBA interface to classes to estimate methane number and other gas composition properties
 

@@ -59,6 +59,9 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.ExtensionMethods", "D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{59BD7344-FE2F-4A7F-A309-FE7E090C6342}"
 	ProjectSection(SolutionItems) = preProject
+		CODE_OF_CONDUCT.md = CODE_OF_CONDUCT.md
+		CONTRIBUTING.md = CONTRIBUTING.md
+		COPYING = COPYING
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -73,8 +76,6 @@ EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Automation.Tests", "DWSIM.Automation.Tests\DWSIM.Automation.Tests.vbproj", "{E77FDF74-D152-42EE-8A55-90EC13DB797F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.Libraries.OctaveSharp", "DWSIM.Libraries.OctaveSharp\DWSIM.Libraries.OctaveSharp.csproj", "{A93330A8-2E9F-4A01-8F3E-9EFC685AA378}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.Thermodynamics.AdvancedEOS", "DWSIM.Thermodynamics.AdvancedEOS\DWSIM.Thermodynamics.AdvancedEOS.csproj", "{DC5B9572-697E-485A-B659-FDC65956611F}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Thermodynamics.Databases.KDBLink", "DWSIM.Thermodynamics.Databases.KDBLink\DWSIM.Thermodynamics.Databases.KDBLink.vbproj", "{FEA05AE3-5EE2-4A7B-88B3-1A4F9000EA08}"
 EndProject
@@ -986,7 +987,7 @@ Global
 		{E77FDF74-D152-42EE-8A55-90EC13DB797F}.Debug|wine32.ActiveCfg = Debug|Any CPU
 		{E77FDF74-D152-42EE-8A55-90EC13DB797F}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{E77FDF74-D152-42EE-8A55-90EC13DB797F}.Debug|x64.Build.0 = Debug|Any CPU
-		{E77FDF74-D152-42EE-8A55-90EC13DB797F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E77FDF74-D152-42EE-8A55-90EC13DB797F}.Debug|x86.ActiveCfg = Debug|x86
 		{E77FDF74-D152-42EE-8A55-90EC13DB797F}.Release Linux|Any CPU.ActiveCfg = Release|Any CPU
 		{E77FDF74-D152-42EE-8A55-90EC13DB797F}.Release Linux|Any CPU.Build.0 = Release|Any CPU
 		{E77FDF74-D152-42EE-8A55-90EC13DB797F}.Release Linux|wine32.ActiveCfg = Release|Any CPU
@@ -1041,30 +1042,6 @@ Global
 		{A93330A8-2E9F-4A01-8F3E-9EFC685AA378}.Release|x64.Build.0 = Release|x64
 		{A93330A8-2E9F-4A01-8F3E-9EFC685AA378}.Release|x86.ActiveCfg = Release|Any CPU
 		{A93330A8-2E9F-4A01-8F3E-9EFC685AA378}.Release|x86.Build.0 = Release|Any CPU
-		{DC5B9572-697E-485A-B659-FDC65956611F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DC5B9572-697E-485A-B659-FDC65956611F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DC5B9572-697E-485A-B659-FDC65956611F}.Debug|wine32.ActiveCfg = Debug|Any CPU
-		{DC5B9572-697E-485A-B659-FDC65956611F}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{DC5B9572-697E-485A-B659-FDC65956611F}.Debug|x64.Build.0 = Debug|Any CPU
-		{DC5B9572-697E-485A-B659-FDC65956611F}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{DC5B9572-697E-485A-B659-FDC65956611F}.Release Linux|Any CPU.ActiveCfg = Release|Any CPU
-		{DC5B9572-697E-485A-B659-FDC65956611F}.Release Linux|Any CPU.Build.0 = Release|Any CPU
-		{DC5B9572-697E-485A-B659-FDC65956611F}.Release Linux|wine32.ActiveCfg = Release|Any CPU
-		{DC5B9572-697E-485A-B659-FDC65956611F}.Release Linux|x64.ActiveCfg = Release|Any CPU
-		{DC5B9572-697E-485A-B659-FDC65956611F}.Release Linux|x86.ActiveCfg = Release|Any CPU
-		{DC5B9572-697E-485A-B659-FDC65956611F}.Release WinMac|Any CPU.ActiveCfg = Release|Any CPU
-		{DC5B9572-697E-485A-B659-FDC65956611F}.Release WinMac|Any CPU.Build.0 = Release|Any CPU
-		{DC5B9572-697E-485A-B659-FDC65956611F}.Release WinMac|wine32.ActiveCfg = Release|Any CPU
-		{DC5B9572-697E-485A-B659-FDC65956611F}.Release WinMac|x64.ActiveCfg = Release|Any CPU
-		{DC5B9572-697E-485A-B659-FDC65956611F}.Release WinMac|x86.ActiveCfg = Release|Any CPU
-		{DC5B9572-697E-485A-B659-FDC65956611F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DC5B9572-697E-485A-B659-FDC65956611F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DC5B9572-697E-485A-B659-FDC65956611F}.Release|wine32.ActiveCfg = Release|Any CPU
-		{DC5B9572-697E-485A-B659-FDC65956611F}.Release|wine32.Build.0 = Release|Any CPU
-		{DC5B9572-697E-485A-B659-FDC65956611F}.Release|x64.ActiveCfg = Release|x64
-		{DC5B9572-697E-485A-B659-FDC65956611F}.Release|x64.Build.0 = Release|x64
-		{DC5B9572-697E-485A-B659-FDC65956611F}.Release|x86.ActiveCfg = Release|Any CPU
-		{DC5B9572-697E-485A-B659-FDC65956611F}.Release|x86.Build.0 = Release|Any CPU
 		{FEA05AE3-5EE2-4A7B-88B3-1A4F9000EA08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FEA05AE3-5EE2-4A7B-88B3-1A4F9000EA08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEA05AE3-5EE2-4A7B-88B3-1A4F9000EA08}.Debug|wine32.ActiveCfg = Debug|Any CPU
@@ -1707,8 +1684,8 @@ Global
 		{4FD11110-5C50-4069-B3DA-A5FE1D2417C5}.Debug|wine32.Build.0 = Debug|Any CPU
 		{4FD11110-5C50-4069-B3DA-A5FE1D2417C5}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{4FD11110-5C50-4069-B3DA-A5FE1D2417C5}.Debug|x64.Build.0 = Debug|Any CPU
-		{4FD11110-5C50-4069-B3DA-A5FE1D2417C5}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{4FD11110-5C50-4069-B3DA-A5FE1D2417C5}.Debug|x86.Build.0 = Debug|Any CPU
+		{4FD11110-5C50-4069-B3DA-A5FE1D2417C5}.Debug|x86.ActiveCfg = Debug|x86
+		{4FD11110-5C50-4069-B3DA-A5FE1D2417C5}.Debug|x86.Build.0 = Debug|x86
 		{4FD11110-5C50-4069-B3DA-A5FE1D2417C5}.Release Linux|Any CPU.ActiveCfg = Release|Any CPU
 		{4FD11110-5C50-4069-B3DA-A5FE1D2417C5}.Release Linux|Any CPU.Build.0 = Release|Any CPU
 		{4FD11110-5C50-4069-B3DA-A5FE1D2417C5}.Release Linux|wine32.ActiveCfg = Release|Any CPU

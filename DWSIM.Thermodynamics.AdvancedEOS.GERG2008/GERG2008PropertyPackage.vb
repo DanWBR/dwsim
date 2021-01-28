@@ -5,7 +5,7 @@ Imports DWSIM.ExtensionMethods
 
 Namespace DWSIM.Thermodynamics.AdvancedEOS
 
-    Public Class GERG2008PropertyPackage
+    <System.Serializable> Public Class GERG2008PropertyPackage
 
         Inherits PropertyPackage
 
@@ -897,7 +897,7 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
             Dim Temperature, Pressure As Double
             Temperature = CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
-            Pressure = CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
+            Pressure = CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
 
             gerg.SetupGERG()
 
@@ -945,7 +945,7 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
             Dim Temperature, Pressure As Double
             Temperature = CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
-            Pressure = CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
+            Pressure = CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
 
             gerg.SetupGERG()
 

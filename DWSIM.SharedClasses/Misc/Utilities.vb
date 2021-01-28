@@ -533,17 +533,10 @@ Public Class Utility
 
         Dim ppacks As New List(Of IPropertyPackage)
 
-        Dim adveos As String = Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location) + Path.DirectorySeparatorChar + "DWSIM.Thermodynamics.AdvancedEOS.dll"
-        If File.Exists(adveos) Then
-            Dim pplist As List(Of Interfaces.IPropertyPackage) = GetPropertyPackages(Assembly.LoadFile(adveos))
-            For Each pp In pplist
-                ppacks.Add(pp)
-            Next
-        End If
-
         Dim thermoceos As String = Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location) + Path.DirectorySeparatorChar + "DWSIM.Thermodynamics.ThermoC.dll"
         If File.Exists(thermoceos) Then
-            Dim pplist As List(Of Interfaces.IPropertyPackage) = GetPropertyPackages(Assembly.LoadFile(thermoceos))
+            Dim tca = Assembly.LoadFile(thermoceos)
+            Dim pplist As List(Of Interfaces.IPropertyPackage) = GetPropertyPackages(tca)
             For Each pp In pplist
                 ppacks.Add(pp)
             Next
@@ -561,6 +554,31 @@ Public Class Utility
                 Next
             Catch ex As Exception
                 MessageBox.Show(ex.ToString)
+            End Try
+        End If
+
+        Return ppacks
+
+    End Function
+
+    Shared Function LoadAdditionalPropertyPackageAssemblies() As List(Of Assembly)
+
+        Dim ppacks As New List(Of Assembly)
+
+        Dim thermoceos As String = Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location) + Path.DirectorySeparatorChar + "DWSIM.Thermodynamics.ThermoC.dll"
+        If File.Exists(thermoceos) Then
+            Dim tca = Assembly.LoadFile(thermoceos)
+            ppacks.Add(tca)
+        End If
+
+        Dim ppath As String = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location), "ppacks")
+        If Directory.Exists(ppath) Then
+            Try
+                Dim otherpps As String() = Directory.GetFiles(ppath, "*.dll", SearchOption.TopDirectoryOnly)
+                For Each fpath In otherpps
+                    ppacks.Add(Assembly.LoadFile(fpath))
+                Next
+            Catch ex As Exception
             End Try
         End If
 

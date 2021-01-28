@@ -4,16 +4,16 @@
 '    This file is part of DWSIM.
 '
 '    DWSIM is free software: you can redistribute it and/or modify
-'    it under the terms of the GNU Lesser General Public License as published by
+'    it under the terms of the GNU General Public License as published by
 '    the Free Software Foundation, either version 3 of the License, or
 '    (at your option) any later version.
 '
 '    DWSIM is distributed in the hope that it will be useful,
 '    but WITHOUT ANY WARRANTY; without even the implied warranty of
 '    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'    GNU Lesser General Public License for more details.
+'    GNU General Public License for more details.
 '
-'    You should have received a copy of the GNU Lesser General Public License
+'    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Numerics
@@ -23,9 +23,15 @@ Namespace MathEx
 
     Public Class PolySolve
 
-        Shared Function Poly_Roots(ByVal Coeff) As Double(,)
+        Shared Function Poly_Roots(ByVal Coeff As Double()) As Double(,)
 
-            Poly_Roots = CalcRoots2(Coeff(3), Coeff(2), Coeff(1), Coeff(0))
+            Return CalcRoots2(Coeff(3), Coeff(2), Coeff(1), Coeff(0))
+
+        End Function
+
+        Shared Function Poly_Roots3(ByVal Coeff As Double()) As Double()
+
+            Return CalcRoots3(Coeff(3), Coeff(2), Coeff(1), Coeff(0))
 
         End Function
 
@@ -39,11 +45,50 @@ Namespace MathEx
             Dim roots(2, 1) As Double
 
             roots(0, 0) = root1.Real
-            roots(0, 1) = IIf(Math.Abs(root1.Imaginary) > 0.0000000001, root1.Imaginary, 0.0)
+            If Math.Abs(root1.Imaginary) > 0.0000000001 Then
+                roots(0, 1) = root1.Imaginary
+            End If
             roots(1, 0) = root2.Real
-            roots(1, 1) = IIf(Math.Abs(root2.Imaginary) > 0.0000000001, root2.Imaginary, 0.0)
+            If Math.Abs(root2.Imaginary) > 0.0000000001 Then
+                roots(1, 1) = root2.Imaginary
+            End If
             roots(2, 0) = root3.Real
-            roots(2, 1) = IIf(Math.Abs(root3.Imaginary) > 0.0000000001, root3.Imaginary, 0.0)
+            If Math.Abs(root3.Imaginary) > 0.0000000001 Then
+                roots(2, 1) = root3.Imaginary
+            End If
+
+            Return roots
+
+        End Function
+
+        Shared Function CalcRoots3(ByVal a As Double, ByVal b As Double, ByVal c As Double, ByVal d As Double) As Double()
+
+            Dim roots0 = FindRoots.Cubic(d, c, b, a)
+            Dim root1 = roots0.Item1
+            Dim root2 = roots0.Item2
+            Dim root3 = roots0.Item3
+
+            Dim roots(2) As Double
+            Dim real1 As Double
+
+            If root1.Imaginary < 0.000001 Then
+                roots(0) = root1.Real
+                real1 = roots(0)
+            End If
+            If root2.Imaginary < 0.000001 Then
+                roots(1) = root2.Real
+                real1 = roots(1)
+            End If
+            If root3.Imaginary < 0.000001 Then
+                roots(2) = root3.Real
+                real1 = roots(2)
+            End If
+
+            If roots(0) < 0.0000000001 Then roots(0) = real1
+            If roots(1) < 0.0000000001 Then roots(1) = real1
+            If roots(2) < 0.0000000001 Then roots(2) = real1
+
+            Array.Sort(roots)
 
             Return roots
 

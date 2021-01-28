@@ -4,16 +4,16 @@
 '    This file is part of DWSIM.
 '
 '    DWSIM is free software: you can redistribute it and/or modify
-'    it under the terms of the GNU Lesser General Public License as published by
+'    it under the terms of the GNU General Public License as published by
 '    the Free Software Foundation, either version 3 of the License, or
 '    (at your option) any later version.
 '
 '    DWSIM is distributed in the hope that it will be useful,
 '    but WITHOUT ANY WARRANTY; without even the implied warranty of
 '    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'    GNU Lesser General Public License for more details.
+'    GNU General Public License for more details.
 '
-'    You should have received a copy of the GNU Lesser General Public License
+'    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 
@@ -108,6 +108,8 @@ Namespace UnitOperations
         Public Property HeatLoss As Double = 0.0
         Public Property OutletVaporFraction1 As Double = 0.0
         Public Property OutletVaporFraction2 As Double = 0.0
+
+        Public Property PinchPointAtOutlets As Boolean = False
 
         Public Property STProperties() As STHXProperties
             Get
@@ -1459,7 +1461,9 @@ Namespace UnitOperations
 
                                                  Next
 
-                                                 'If FlowDir = FlowDirection.CounterCurrent Then thprof.Reverse()
+                                                 If Not PinchPointAtOutlets And FlowDir = FlowDirection.CounterCurrent Then
+                                                     thprof.Reverse()
+                                                 End If
 
                                                  For i As Integer = 0 To nsteps - 1
                                                      dtprof.Add(Abs(thprof(i) - tcprof(i)))

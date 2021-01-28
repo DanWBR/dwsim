@@ -5,14 +5,14 @@ Imports DWSIM.Thermodynamics.PropertyPackages
 
 Namespace DWSIM.Thermodynamics.AdvancedEOS
 
-    Public Class PengRobinson1978AdvancedPropertyPackage
+    <System.Serializable> Public Class PengRobinson1978AdvancedPropertyPackage
 
         Inherits PengRobinson1978PropertyPackage
 
         Private TInternal As Double = 0.0
         Private PInternal As Double = 0.0
 
-        Private ec As New Ciloci.Flee.ExpressionContext
+        <NonSerialized> Private ec As New Ciloci.Flee.ExpressionContext
 
         Public KijExpressions As New Dictionary(Of String, String)
 

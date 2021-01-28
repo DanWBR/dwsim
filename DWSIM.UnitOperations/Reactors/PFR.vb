@@ -4,16 +4,16 @@
 '    This file is part of DWSIM.
 '
 '    DWSIM is free software: you can redistribute it and/or modify
-'    it under the terms of the GNU Lesser General Public License as published by
+'    it under the terms of the GNU General Public License as published by
 '    the Free Software Foundation, either version 3 of the License, or
 '    (at your option) any later version.
 '
 '    DWSIM is distributed in the hope that it will be useful,
 '    but WITHOUT ANY WARRANTY; without even the implied warranty of
 '    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'    GNU Lesser General Public License for more details.
+'    GNU General Public License for more details.
 '
-'    You should have received a copy of the GNU Lesser General Public License
+'    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 
@@ -928,19 +928,17 @@ Namespace Reactors
 
                     'converge temperature
 
-                    deltaV = deltaV0
+                    Dim odesolver = New DotNumerics.ODE.OdeImplicitRungeKutta5()
 
                     Do
 
-                        If Not negativeflag Then
+                        deltaV = deltaV0
 
-                            Dim odesolver = New DotNumerics.ODE.OdeImplicitRungeKutta5()
+                        If Not negativeflag Then
 
                             ' progressively decrease volume step until non-negative concentrations are found.
 
-                            For nncounter = 1 To 10
-
-                                deltaV /= 10
+                            For nncounter = 1 To 30
 
                                 odesolver.InitializeODEs(AddressOf ODEFunc, N.Count, 0.0, vc0)
                                 IObj2?.SetCurrent
@@ -971,6 +969,8 @@ Namespace Reactors
                                 Next
 
                                 If Not negative Then Exit For
+
+                                deltaV /= 2
 
                             Next
 

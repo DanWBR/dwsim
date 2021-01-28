@@ -4,16 +4,16 @@
 '    This file is part of DWSIM.
 '
 '    DWSIM is free software: you can redistribute it and/or modify
-'    it under the terms of the GNU Lesser General Public License as published by
+'    it under the terms of the GNU General Public License as published by
 '    the Free Software Foundation, either version 3 of the License, or
 '    (at your option) any later version.
 '
 '    DWSIM is distributed in the hope that it will be useful,
 '    but WITHOUT ANY WARRANTY; without even the implied warranty of
 '    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'    GNU Lesser General Public License for more details.
+'    GNU General Public License for more details.
 '
-'    You should have received a copy of the GNU Lesser General Public License
+'    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Math
@@ -26,9 +26,9 @@ Namespace PropertyPackages
 
         Public MustOverride Function CalcP(ByVal V As Double, ByVal T As Double, ByVal Vx As Array, ByVal VKij As Object, ByVal VTc As Array, ByVal VPc As Array, ByVal Vw As Array, Optional ByVal otherargs As Object = Nothing)
 
-        Public MustOverride Function CalcLnFug(ByVal T As Double, ByVal P As Double, ByVal Vx As Array, ByVal VKij As Object, ByVal VTc As Array, ByVal VPc As Array, ByVal Vw As Array, Optional ByVal otherargs As Object = Nothing, Optional ByVal forcephase As String = "") As Double()
+        Public MustOverride Function CalcLnFug(ByVal T As Double, ByVal P As Double, ByVal Vx As Double(), ByVal VKij As Double(,), ByVal VTc As Double(), ByVal VPc As Double(), ByVal Vw As Double(), Optional ByVal otherargs As Object = Nothing, Optional ByVal phase As Integer = -1) As Double()
 
-        Public MustOverride Function CalcLnFugTV(ByVal T As Double, ByVal V As Double, ByVal Vx As Array, ByVal VKij As Object, ByVal VTc As Array, ByVal VPc As Array, ByVal Vw As Array, Optional ByVal otherargs As Object = Nothing, Optional ByVal forcephase As String = "") As Double()
+        Public MustOverride Function CalcLnFugTV(ByVal T As Double, ByVal V As Double, ByVal Vx As Array, ByVal VKij As Object, ByVal VTc As Array, ByVal VPc As Array, ByVal Vw As Array, Optional ByVal otherargs As Object = Nothing, Optional ByVal phase As Integer = -1) As Double()
 
         Public MustOverride Function PhaseType(ByVal T As Double, ByVal P As Double, ByVal Vx As Array, ByVal VKij As Object, ByVal VTc As Array, ByVal VPc As Array, ByVal Vw As Array, Optional ByVal otherargs As Object = Nothing)
 
@@ -57,7 +57,21 @@ Namespace PropertyPackages
                 g1 = 1 / (v - b)
                 dPdV = -R * T * g1 ^ 2 + a * (2 * v + b) / (v ^ 2 * (v + b) ^ 2)
                 dPdT = R * g1 - 1 / (v * (v + b)) * dadT
+
+            ElseIf eos = "PR78" Then
+
+                tmp = ThermoPlugs.PR78.ReturnParameters(T, P, Vx, pp.RET_VKij, pp.RET_VTC, pp.RET_VPC, pp.RET_VW)
+
+                a = tmp(0)
+                b = tmp(1)
+                v = tmp(2)
+                dadT = tmp(3)
+                g1 = 1 / (v - b)
+                dPdV = -R * T * g1 ^ 2 + a * (2 * v + b) / (v ^ 2 * (v + b) ^ 2)
+                dPdT = R * g1 - 1 / (v * (v + b)) * dadT
+
             Else
+
                 tmp = ThermoPlugs.PR.ReturnParameters(T, P, Vx, pp.RET_VKij, pp.RET_VTC, pp.RET_VPC, pp.RET_VW)
 
                 a = tmp(0)
@@ -67,6 +81,7 @@ Namespace PropertyPackages
                 g1 = 1 / (v - b)
                 dPdV = -R * T * (g1 ^ 2) + 2 * a * (v + b) / (v ^ 2 + 2 * b * v - b ^ 2) ^ 2
                 dPdT = R * g1 - 1 / ((v ^ 2 + 2 * b * v - b ^ 2)) * dadT
+
             End If
 
 
@@ -82,6 +97,7 @@ Namespace PropertyPackages
 
 
             If eos = "SRK" Then
+
                 tmp = ThermoPlugs.SRK.ReturnParameters(T, P, Vx, pp.RET_VKij, pp.RET_VTC, pp.RET_VPC, pp.RET_VW)
 
                 a = tmp(0)
@@ -90,7 +106,20 @@ Namespace PropertyPackages
                 dadT = tmp(3)
                 g1 = 1 / (v - b)
                 dPdV = -R * T * g1 ^ 2 + a * (2 * v + b) / (v ^ 2 * (v + b) ^ 2)
+
+            ElseIf eos = "PR78" Then
+
+                tmp = ThermoPlugs.PR78.ReturnParameters(T, P, Vx, pp.RET_VKij, pp.RET_VTC, pp.RET_VPC, pp.RET_VW)
+
+                a = tmp(0)
+                b = tmp(1)
+                v = tmp(2)
+                dadT = tmp(3)
+                g1 = 1 / (v - b)
+                dPdV = -R * T * g1 ^ 2 + a * (2 * v + b) / (v ^ 2 * (v + b) ^ 2)
+
             Else
+
                 tmp = ThermoPlugs.PR.ReturnParameters(T, P, Vx, pp.RET_VKij, pp.RET_VTC, pp.RET_VPC, pp.RET_VW)
 
                 a = tmp(0)

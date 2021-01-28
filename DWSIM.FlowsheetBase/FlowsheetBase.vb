@@ -1303,14 +1303,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 xel.Element("Type").Value = xel.Element("Type").Value.Replace("PortableDTL.DTL.SimulationObjects", "DWSIM.Thermodynamics")
                 xel.Element("Type").Value = xel.Element("Type").Value.Replace("DWSIM.DWSIM.SimulationObjects", "DWSIM.Thermodynamics")
                 Dim obj As PropertyPackage = Nothing
-                If xel.Element("Type").Value.Contains("AdvancedEOS") Then
-                    Dim adveoskey As String = "PC-SAFT (with Association Support)"
-                    If AvailablePropertyPackages.ContainsKey(adveoskey) Then
-                        obj = AvailablePropertyPackages(adveoskey).ReturnInstance(xel.Element("Type").Value)
-                    Else
-                        Throw New Exception("Advanced EOS Property Package library not found. Please download and install it in order to run this simulation.")
-                    End If
-                ElseIf xel.Element("Type").Value.Contains("ThermoC") Then
+                If xel.Element("Type").Value.Contains("ThermoC") Then
                     Dim thermockey As String = "ThermoC Bridge"
                     If AvailablePropertyPackages.ContainsKey(thermockey) Then
                         obj = AvailablePropertyPackages(thermockey).ReturnInstance(xel.Element("Type").Value)

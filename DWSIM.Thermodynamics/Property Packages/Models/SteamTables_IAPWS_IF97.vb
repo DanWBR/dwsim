@@ -1233,17 +1233,17 @@
             ' tSatW = -1: pressure outside range
             '
             '
-            If pressure < 0.00611213 Or pressure > 220.64 Then
-                tSatW = -1.0#
-            Else
-                Call InitFieldsreg4()
-                bet = (0.1 * pressure) ^ 0.25
-                eco = bet ^ 2 + nreg4(3) * bet + nreg4(6)
-                fco = nreg4(1) * bet ^ 2 + nreg4(4) * bet + nreg4(7)
-                gco = nreg4(2) * bet ^ 2 + nreg4(5) * bet + nreg4(8)
-                dco = 2 * gco / (-fco - (fco ^ 2 - 4 * eco * gco) ^ 0.5)
-                tSatW = 0.5 * (nreg4(10) + dco - ((nreg4(10) + dco) ^ 2 - 4 * (nreg4(9) + nreg4(10) * dco)) ^ 0.5)
-            End If
+            'If pressure < 0.00611213 Or pressure > 220.64 Then
+            '    tSatW = -1.0#
+            'Else
+            Call InitFieldsreg4()
+            bet = (0.1 * pressure) ^ 0.25
+            eco = bet ^ 2 + nreg4(3) * bet + nreg4(6)
+            fco = nreg4(1) * bet ^ 2 + nreg4(4) * bet + nreg4(7)
+            gco = nreg4(2) * bet ^ 2 + nreg4(5) * bet + nreg4(8)
+            dco = 2 * gco / (-fco - (fco ^ 2 - 4 * eco * gco) ^ 0.5)
+            tSatW = 0.5 * (nreg4(10) + dco - ((nreg4(10) + dco) ^ 2 - 4 * (nreg4(9) + nreg4(10) * dco)) ^ 0.5)
+            'End If
             ''
         End Function
 
