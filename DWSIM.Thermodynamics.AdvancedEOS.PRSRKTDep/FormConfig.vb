@@ -249,7 +249,7 @@ Public Class FormConfig
 
             Dim tmp As Double = 1 - 8 * (Vc1 * Vc2) ^ 0.5 / ((Vc1 ^ (1 / 3) + Vc2 ^ (1 / 3)) ^ 3)
 
-            r.Cells(2).Value = tmp
+            r.Cells(2).Value = Convert.ToString(tmp, CultureInfo.InvariantCulture)
 
         Next
 
