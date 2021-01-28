@@ -592,8 +592,8 @@ Imports System.Drawing
 
     Public Function DN(ByVal i As Integer, ByVal k As Integer) As Object
 
-        If Double.TryParse(DNom(i, k), New Double) Then
-            Return Double.Parse(DNom(i, k), System.Globalization.CultureInfo.InvariantCulture)
+        If Double.TryParse(DNom(i, k), System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture.NumberFormat, New Double) Then
+            Return Double.Parse(DNom(i, k), System.Globalization.CultureInfo.InvariantCulture.NumberFormat)
         Else
             Return DNom(i, k)
         End If
