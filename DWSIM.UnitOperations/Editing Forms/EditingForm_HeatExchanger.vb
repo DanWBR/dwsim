@@ -229,6 +229,8 @@ Public Class EditingForm_HeatExchanger
         tbHeat.Enabled = True
         tbMITA.Enabled = False
         tbEfficiency.Enabled = False
+        tbOVF1.Enabled = False
+        tbOVF2.Enabled = False
 
         cbColdFluidOutletT.Enabled = True
         cbHotFluidOutletT.Enabled = True
@@ -368,7 +370,6 @@ Public Class EditingForm_HeatExchanger
                 cbHeat.Enabled = False
                 cbOverallHTC.Enabled = False
                 tbOVF1.Enabled = True
-                tbOVF2.Enabled = False
             Case 10
                 'VF1
                 tbHotFluidOutletT.Enabled = False
@@ -385,7 +386,6 @@ Public Class EditingForm_HeatExchanger
                 cbArea.Enabled = True
                 cbHeat.Enabled = False
                 cbOverallHTC.Enabled = False
-                tbOVF1.Enabled = False
                 tbOVF2.Enabled = True
         End Select
 

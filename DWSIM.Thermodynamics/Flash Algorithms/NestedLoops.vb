@@ -460,6 +460,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 Return Flash_PH_1(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
 
             End If
+
         End Function
 
         Public Overrides Function Flash_PS(ByVal Vz As Double(), ByVal P As Double, ByVal S As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
@@ -2770,6 +2771,11 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 End If
             Else
                 Dim tmp = Me.Flash_PV(Vz, P, X, 0.0#, PP, ReuseKi, Ki)
+                T = tmp(4)
+                Dim hres = PerformHeuristicsTest(Vz, T, P, PP)
+                If hres.SolidPhase Then
+                    tmp = New NestedLoopsSLE().Flash_PV(Vz, P, X, T, PP, ReuseKi, Ki)
+                End If
                 L1 = tmp(0)
                 V = tmp(1)
                 Vx1 = tmp(2)
@@ -2857,6 +2863,11 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 End If
             Else
                 Dim tmp = Me.Flash_PV(Vz, P, X, 0.0#, PP, ReuseKi, Ki)
+                T = tmp(4)
+                Dim hres = PerformHeuristicsTest(Vz, T, P, PP)
+                If hres.SolidPhase Then
+                    tmp = New NestedLoopsSLE().Flash_PV(Vz, P, X, T, PP, ReuseKi, Ki)
+                End If
                 L1 = tmp(0)
                 V = tmp(1)
                 Vx1 = tmp(2)
