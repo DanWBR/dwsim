@@ -158,7 +158,7 @@ Namespace PropertyPackages.Auxiliary
             Dim tmpa As Object = Calc_SUM2(n, Vx, a)
 
             aml2 = tmpa(0)
-            Dim aml As Double = tmpa(1)(0)
+            Dim aml As Double = tmpa(1)
 
             i = 0
             Dim bml = 0.0#
