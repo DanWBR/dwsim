@@ -1,5 +1,6 @@
 ﻿'    DWSIM Universal Flash Algorithm
 '    Copyright 2020 Daniel Wagner O. de Medeiros
+'              2021 Gregor Reichert
 '
 '    This file is part of DWSIM.
 '
@@ -24,11 +25,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
     Public Class UniversalFlash
 
         Inherits FlashAlgorithm
-
-        Dim nl As New NestedLoops
-        Dim nl3 As New NestedLoops3PV3
-        Dim nls As New NestedLoopsSLE
-        Dim nlsv As New NestedLoopsSVLLE
 
         Public Sub New()
             MyBase.New
@@ -225,15 +221,19 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Select Case Flashtype
                 Case "VLE"
+                    Dim nl = New NestedLoops
                     nl.FlashSettings = FlashSettings
                     result = nl.Flash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
                 Case "VLLE"
+                    Dim nl3 As New NestedLoops3PV3
                     nl3.FlashSettings = FlashSettings
                     result = nl3.Flash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
                 Case "SVLE"
+                    Dim nls As New NestedLoopsSLE
                     nls.FlashSettings = FlashSettings
                     result = nls.Flash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
                 Case "SVLLE"
+                    Dim nlsv As New NestedLoopsSVLLE
                     nlsv.FlashSettings = FlashSettings
                     result = nlsv.Flash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
             End Select
@@ -270,15 +270,19 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Select Case Flashtype
                 Case "VLE"
+                    Dim nl As New NestedLoops
                     nl.FlashSettings = FlashSettings
                     result = nl.Flash_TV(Vz, T, V, Pref, PP, ReuseKI, PrevKi)
                 Case "VLLE"
+                    Dim nl3 As New NestedLoops3PV3
                     nl3.FlashSettings = FlashSettings
                     result = nl3.Flash_TV(Vz, T, V, Pref, PP, ReuseKI, PrevKi)
                 Case "SVLE"
+                    Dim nls As New NestedLoopsSLE
                     nls.FlashSettings = FlashSettings
                     result = nls.Flash_TV(Vz, T, V, Pref, PP, ReuseKI, PrevKi)
                 Case "SVLLE"
+                    Dim nlsv As New NestedLoopsSVLLE
                     nlsv.FlashSettings = FlashSettings
                     result = nlsv.Flash_TV(Vz, T, V, Pref, PP, ReuseKI, PrevKi)
             End Select
