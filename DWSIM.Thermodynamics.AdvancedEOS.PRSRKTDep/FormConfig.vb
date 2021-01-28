@@ -22,6 +22,7 @@ Imports DWSIM.Thermodynamics
 Imports System.Windows.Forms
 Imports DWSIM
 Imports DWSIM.Thermodynamics.AdvancedEOS
+Imports System.Globalization
 
 Public Class FormConfig
 

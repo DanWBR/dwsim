@@ -436,9 +436,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             IObj?.SetCurrent()
 
-            Dim hres = PerformHeuristicsTest(Vz, Tref, P, PP)
-
-            If Me.FlashSettings(Interfaces.Enums.FlashSetting.NL_FastMode) = False Or PP.AUX_IS_SINGLECOMP(Phase.Mixture) Or hres.SolidPhase Then
+            If Me.FlashSettings(Interfaces.Enums.FlashSetting.NL_FastMode) = False Or PP.AUX_IS_SINGLECOMP(Phase.Mixture) Then
                 IObj?.Paragraphs.Add("Using the normal version of the PH Flash Algorithm.")
 
                 IObj?.Close()
@@ -465,7 +463,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             Dim hres = PerformHeuristicsTest(Vz, Tref, P, PP)
 
-            If Me.FlashSettings(Interfaces.Enums.FlashSetting.NL_FastMode) = False Or PP.AUX_IS_SINGLECOMP(Phase.Mixture) Or hres.SolidPhase Then
+            If Me.FlashSettings(Interfaces.Enums.FlashSetting.NL_FastMode) = False Or PP.AUX_IS_SINGLECOMP(Phase.Mixture) Then
                 IObj?.Paragraphs.Add("Using the normal version of the PS Flash Algorithm.")
                 IObj?.Close()
                 Return Flash_PS_2(Vz, P, S, Tref, PP, ReuseKI, PrevKi)
@@ -2760,13 +2758,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     T = X
                 End If
             Else
-                Dim tmp As Object
-                Dim hres = PerformHeuristicsTest(Vz, 298.15, P, PP)
-                If hres.SolidPhase Then
-                    tmp = New NestedLoopsSLE().Flash_PV(Vz, P, X, 0.0, PP, ReuseKi, Ki)
-                Else
-                    tmp = Me.Flash_PV(Vz, P, X, 0.0#, PP, ReuseKi, Ki)
-                End If
+                Dim tmp = Me.Flash_PV(Vz, P, X, 0.0#, PP, ReuseKi, Ki)
                 L1 = tmp(0)
                 V = tmp(1)
                 Vx1 = tmp(2)
