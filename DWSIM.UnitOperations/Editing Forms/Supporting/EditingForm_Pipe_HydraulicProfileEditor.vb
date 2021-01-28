@@ -592,8 +592,8 @@ Imports System.Drawing
 
     Public Function DN(ByVal i As Integer, ByVal k As Integer) As Object
 
-        If Double.TryParse(DNom(i, k), New Double) Then
-            Return Double.Parse(DNom(i, k), System.Globalization.CultureInfo.InvariantCulture)
+        If Double.TryParse(DNom(i, k), System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture.NumberFormat, New Double) Then
+            Return Double.Parse(DNom(i, k), System.Globalization.CultureInfo.InvariantCulture.NumberFormat)
         Else
             Return DNom(i, k)
         End If
@@ -808,6 +808,8 @@ Imports System.Drawing
         Dim idx = ToolStripMenuItem2.DropDownItems.IndexOf(e.ClickedItem)
 
         Dim r = idx + 25 - 4
+        Dim t = DN(r, 1)
+
         GridMalha.CurrentCell.Value = Format(cv.Convert("in", Units.diameter, DN(r, 1)), NumberFormat)
         GridMalha.Rows(GridMalha.CurrentRow.Index + 1).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(cv.Convert("in", Units.diameter, DN(r, 6)), NumberFormat)
 
@@ -1058,6 +1060,7 @@ Imports System.Drawing
                 j = 0
                 Do
                     DNom(l, j) = linha_atual(j)
+                    ' JARL
                     j = j + 1
                 Loop Until j = 7
                 l = l + 1
