@@ -94,6 +94,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             IObj?.Paragraphs.Add(String.Format("Initial estimates for Liquid Phase 2: {0}", InitialEstimatesForPhase2.ToMathArrayString))
 
             Dim i, j, n, ecount As Integer
+            Dim foundfirst As Boolean
+
             n = Vz.Length - 1
 
             Dim Vx1(n), Vx2(n), Vy(n), Vn1(n), Vn2(n), Ki(n), fi1(n), fi2(n), gamma1(n), gamma2(n), Vp(n) As Double
@@ -131,14 +133,14 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 j = 0
                 For i = 0 To n
                     If Vz(i) > 0 And Vz(i) < minn Then
-                        j = i
                         minn = Vz(i)
                     End If
                 Next
                 For i = 0 To n
-                    If Vz(i) = minn Then
+                    If Vz(i) = minn And Not foundfirst Then
                         Vn1(i) = Vz(i) * 0.05
                         Vn2(i) = Vz(i) * 0.95
+                        foundfirst = True
                     Else
                         Vn1(i) = Vz(i) * 0.95
                         Vn2(i) = Vz(i) * 0.05

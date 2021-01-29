@@ -101,60 +101,100 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance).ToDoubleFromInvariant
             maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
 
+            Dim Pvap As Double
+            Dim gamma1(), gamma2() As Double
+            Dim result As Object = Nothing
+
             n = Vz.Length - 1
 
             proppack = PP
+            '============================================================
+            '= estimate liquid compositions assuming liquid phases only =
+            '============================================================
+            Dim slle As New SimpleLLE()
+            Dim resultL As Object = slle.Flash_PT(Vz, P, T, PP)
+            L1 = resultL(0) 'phase fraction liquid/liquid
+            L2 = resultL(5)
+            Vx1 = resultL(2)
+            Vx2 = resultL(6)
+            gamma1 = resultL(9)
+            gamma2 = resultL(10)
 
-            ReDim Vn(n), Vx(n), Vy(n), Vx_ant(n), Vy_ant(n), Vp(n), Ki(n), fi(n)
+            '============================================================
+            '= calculate total vapor pressure of phase 1                =
+            '= In equilibrium the vapor pressure of both phases is      =
+            '= identical. Therefore only one phase is sufficient for    =
+            '= calculation. If no second liquid phase is existing,      =
+            '= phase 1 will still be available.                         =
+            '============================================================
+            For i = 0 To n
+                Pvap += Vx1(i) * gamma1(i) * PP.AUX_PVAPi(i, T)
+            Next
 
-            Dim result As Object = Nothing
+            '============================================================
+            '= If we are below boiling pressure then we are done.       =
+            '= If we are above boiling point only a single liquid phase =
+            '= can exist due to phase rule. A VLE flash will be run.    =
+            '============================================================
 
-            If prevres IsNot Nothing AndAlso prevres.L2 = 0.0 Then
-
-                V = prevres.V
-                L = prevres.L1
-                Vy = prevres.Vy
-                Vx = prevres.Vx1
-
+            If P > Pvap Then
+                'we are below boiling point
+                result = {L1, 0, Vx1, PP.RET_NullVector, T, L2, Vx2, 0, PP.RET_NullVector}
             Else
-
-                If prevres IsNot Nothing Then
-
-                    'jump to 3pflash
-
-                    result = Flash_PT_3P(Vz, prevres.V, prevres.L1, prevres.L2, prevres.Vy, prevres.Vx1, prevres.Vx2, P, T, PP)
-
-                Else
-
-                    result = _nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-
-                    L = result(0)
-                    V = result(1)
-                    Vx = result(2)
-                    Vy = result(3)
-
-                    If L > 0.0 Then
-
-                        Dim lps = GetPhaseSplitEstimates(T, P, L, Vx, PP)
-
-                        L1 = lps(0)
-                        Vx1 = lps(1)
-                        L2 = lps(2)
-                        Vx2 = lps(3)
-
-                        If L2 > 0.0 Then
-
-                            result = Flash_PT_3P(Vz, V, L1, L2, Vy, Vx1, Vx2, P, T, PP)
-
-                        End If
-
-                    End If
-
-                End If
-
+                'we are above boiling point
+                result = _nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
             End If
 
             Return result
+
+            'ReDim Vn(n), Vx(n), Vy(n), Vx_ant(n), Vy_ant(n), Vp(n), Ki(n), fi(n)
+
+            'If prevres IsNot Nothing AndAlso prevres.L2 = 0.0 Then
+
+            '    V = prevres.V
+            '    L = prevres.L1
+            '    Vy = prevres.Vy
+            '    Vx = prevres.Vx1
+
+            'Else
+
+            '    If prevres IsNot Nothing Then
+
+            '        'jump to 3pflash
+
+            '        result = Flash_PT_3P(Vz, prevres.V, prevres.L1, prevres.L2, prevres.Vy, prevres.Vx1, prevres.Vx2, P, T, PP)
+
+            '    Else
+
+            '        result = _nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+
+            '        L = result(0)
+            '        V = result(1)
+            '        Vx = result(2)
+            '        Vy = result(3)
+
+            '        If L > 0.0 Then
+
+            '            Dim lps = GetPhaseSplitEstimates(T, P, L, Vx, PP)
+
+            '            L1 = lps(0)
+            '            Vx1 = lps(1)
+            '            L2 = lps(2)
+            '            Vx2 = lps(3)
+
+            '            If L2 > 0.0 Then
+
+            '                result = Flash_PT_3P(Vz, V, L1, L2, Vy, Vx1, Vx2, P, T, PP)
+
+            '            End If
+
+            '        End If
+
+            '    End If
+
+            'End If
+
+            'Return result
 
         End Function
 
