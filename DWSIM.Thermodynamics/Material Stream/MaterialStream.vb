@@ -6118,6 +6118,7 @@ Namespace Streams
                     f.Tag = "ObjectEditor"
                     Me.FlowSheet.DisplayForm(f)
                 Else
+                    f.UpdateInfo()
                     f.Activate()
                 End If
             End If
