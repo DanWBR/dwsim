@@ -277,7 +277,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             If r1(6) = True Then
                 r2 = ConvergeVF2(Vmin, Vmax, V, Vz, Vx, Vy, Ki, P, T, PP)
-                If r2(4) < etol Then r1 = r2
+                If Math.Abs(r2(4)) < etol Then
+                    r1 = r2
+                End If
             End If
 
             V = r1(0)
@@ -1003,7 +1005,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 Loop Until Abs(H1) < itol Or ecount > maxitEXT
 
                 If T <= Tmin Or T >= Tmax Or ecount > maxitEXT Then
-                    Dim ex As New Exception("PH Flash [NL]: Invalid result: Temperature did not converge." & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToMathArrayString()))
+                    Dim ex As New Exception("PH Flash [NL]: Invalid result: Temperature did not converge." & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))
                     ex.Data.Add("DetailedDescription", "The Flash Algorithm was unable to converge to a solution.")
                     ex.Data.Add("UserAction", "Try another Property Package and/or Flash Algorithm.")
                     Throw ex
