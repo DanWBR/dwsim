@@ -269,9 +269,18 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Vy = Vz.MultiplyY(Ki).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1)).NormalizeY
             Vx = Vy.DivideY(Ki).NormalizeY
 
-            Dim r1 = ConvergeVF(IObj, V, Vz, Vx, Vy, Ki, P, T, PP)
+            Dim r1, r2 As Object()
 
-            'Return New Object() {V, Vx, Vy, Ki, F, ecount}
+            'Return New Object() {V, Vx, Vy, Ki, F, ecount, overshoot}
+
+            r1 = ConvergeVF(IObj, V, Vz, Vx, Vy, Ki, P, T, PP)
+
+            If r1(6) = True Then
+                r2 = ConvergeVF2(Vmin, Vmax, V, Vz, Vx, Vy, Ki, P, T, PP)
+                If Math.Abs(r2(4)) < etol Then
+                    r1 = r2
+                End If
+            End If
 
             V = r1(0)
             L = 1 - V
@@ -319,6 +328,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             Dim ecount As Integer = 0
             Dim converged As Integer = 0
             Dim F, Vant, dF, e1, e2, e3 As Double
+            Dim overshoot As Boolean = False
 
             IObj?.Paragraphs.Add(String.Format("Initial estimates for y: {0}", Vy.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Initial estimates for x: {0}", Vx.ToMathArrayString))
@@ -373,8 +383,6 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                 ElseIf Math.Abs(e3) < 0.000001 And ecount > 0 Then
 
-                    converged = 1
-
                     Exit Do
 
                 Else
@@ -391,8 +399,16 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     V = -F / dF * dampingfactor + Vant
 
                     If LimitVaporFraction Then
-                        If V < 0.0 Then V = 0.0
-                        If V > 1.0 Then V = 1.0
+                        If V < 0.0 Then
+                            overshoot = True
+                            V = 0.0
+                            Exit Do
+                        End If
+                        If V > 1.0 Then
+                            overshoot = True
+                            V = 1.0
+                            Exit Do
+                        End If
                     End If
 
                     IObj2?.Paragraphs.Add(String.Format("Updated Vapor Fraction (<math_inline>\beta</math_inline>) value: {0}", V))
@@ -422,7 +438,44 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             Loop Until converged = 1
 
-            Return New Object() {V, Vx, Vy, Ki, F, ecount}
+            Return New Object() {V, Vx, Vy, Ki, F, ecount, overshoot}
+
+        End Function
+
+        Private Function ConvergeVF2(Vmin As Double, Vmax As Double, V As Double, Vz As Double(), Vx As Double(), Vy As Double(), Ki As Double(), P As Double, T As Double, PP As PropertyPackage) As Object()
+
+            Dim F As Double = 0.0
+
+            Dim EvalF As Func(Of Double, Double) = Function(Vvar)
+
+                                                       V = Vvar
+
+                                                       Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
+
+                                                       If V = 1.0# Then
+                                                           Vy = Vz
+                                                           Vx = Vy.DivideY(Ki).NormalizeY
+                                                       ElseIf V = 0.0# Then
+                                                           Vx = Vz
+                                                           Vy = Vx.MultiplyY(Ki).NormalizeY
+                                                       Else
+                                                           Vy = Vz.MultiplyY(Ki).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1)).NormalizeY
+                                                           Vx = Vy.DivideY(Ki).NormalizeY
+                                                       End If
+
+                                                       F = Vz.MultiplyY(Ki.AddConstY(-1).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1))).SumY
+
+                                                       Return F
+
+                                                   End Function
+
+            Dim bt As New BrentOpt.Brent
+
+            V = bt.BrentOpt2(Vmin, Vmax, 50, 0.000001, 100, Function(x)
+                                                                Return EvalF.Invoke(x)
+                                                            End Function)
+
+            Return New Object() {V, Vx, Vy, Ki, F, 0.0}
 
         End Function
 
@@ -952,7 +1005,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 Loop Until Abs(H1) < itol Or ecount > maxitEXT
 
                 If T <= Tmin Or T >= Tmax Or ecount > maxitEXT Then
-                    Dim ex As New Exception("PH Flash [NL]: Invalid result: Temperature did not converge." & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToMathArrayString()))
+                    Dim ex As New Exception("PH Flash [NL]: Invalid result: Temperature did not converge." & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))
                     ex.Data.Add("DetailedDescription", "The Flash Algorithm was unable to converge to a solution.")
                     ex.Data.Add("UserAction", "Try another Property Package and/or Flash Algorithm.")
                     Throw ex

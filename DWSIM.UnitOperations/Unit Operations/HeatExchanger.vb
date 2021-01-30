@@ -1844,12 +1844,7 @@ Namespace UnitOperations
                         Hh2 = H21
                     End If
 
-                    Select Case Me.FlowDir
-                        Case FlowDirection.CoCurrent
-                            LMTD = ((Th1 - Tc1) - (Th2 - Tc2)) / Math.Log((Th1 - Tc1) / (Th2 - Tc2))
-                        Case FlowDirection.CounterCurrent
-                            LMTD = ((Th1 - Tc2) - (Th2 - Tc1)) / Math.Log((Th1 - Tc2) / (Th2 - Tc1))
-                    End Select
+                    LMTD = Math.Abs(Th2 - Tc2)
 
                     If Not IgnoreLMTDError Then If Double.IsNaN(LMTD) Or Double.IsInfinity(LMTD) Then Throw New Exception(FlowSheet.GetTranslatedString("HXCalcError"))
 
@@ -1916,12 +1911,7 @@ Namespace UnitOperations
                         Hh2 = H21
                     End If
 
-                    Select Case Me.FlowDir
-                        Case FlowDirection.CoCurrent
-                            LMTD = ((Th1 - Tc1) - (Th2 - Tc2)) / Math.Log((Th1 - Tc1) / (Th2 - Tc2))
-                        Case FlowDirection.CounterCurrent
-                            LMTD = ((Th1 - Tc2) - (Th2 - Tc1)) / Math.Log((Th1 - Tc2) / (Th2 - Tc1))
-                    End Select
+                    LMTD = Math.Abs(Th2 - Tc2)
 
                     If Not IgnoreLMTDError Then If Double.IsNaN(LMTD) Or Double.IsInfinity(LMTD) Then Throw New Exception(FlowSheet.GetTranslatedString("HXCalcError"))
 
@@ -2536,8 +2526,10 @@ Namespace UnitOperations
                 StOutHot.SetFlashSpec("PH")
                 StOutCold.SetFlashSpec("PH")
 
-                If Th2 < Tc1 Or Tc2 > Th1 Then
-                    FlowSheet.ShowMessage(Me.GraphicObject.Tag & ": Temperature Cross", IFlowsheet.MessageType.Warning)
+                If CalculationMode <> HeatExchangerCalcMode.OutletVaporFraction1 And CalculationMode <> HeatExchangerCalcMode.OutletVaporFraction2 Then
+                    If Th2 < Tc1 Or Tc2 > Th1 Then
+                        FlowSheet.ShowMessage(Me.GraphicObject.Tag & ": Temperature Cross", IFlowsheet.MessageType.Warning)
+                    End If
                 End If
 
             Else
