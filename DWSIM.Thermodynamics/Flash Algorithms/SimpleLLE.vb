@@ -1,5 +1,6 @@
 '    Simplified LLE Flash Algorithm
 '    Copyright 2013-2014 Daniel Wagner O. de Medeiros
+'    Copyright 2021 Gregor Reichert
 '
 '    This file is part of DWSIM.
 '
@@ -86,14 +87,17 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
             IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
-            IObj?.Paragraphs.Add(String.Format("Compounds: {0}", PP.RET_VNAMES.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Components: {0}", PP.RET_VNAMES.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Use estimates for Liquid Phase 1: {0}", UseInitialEstimatesForPhase1))
-            IObj?.Paragraphs.Add(String.Format("Initial estimates for Liquid Phase 1: {0}", InitialEstimatesForPhase1.ToMathArrayString))
+            If UseInitialEstimatesForPhase1 Then IObj?.Paragraphs.Add(String.Format("Initial estimates for Liquid Phase 1: {0}", InitialEstimatesForPhase1.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Use estimates for Liquid Phase 2: {0}", UseInitialEstimatesForPhase2))
-            IObj?.Paragraphs.Add(String.Format("Initial estimates for Liquid Phase 2: {0}", InitialEstimatesForPhase2.ToMathArrayString))
+            If UseInitialEstimatesForPhase2 Then IObj?.Paragraphs.Add(String.Format("Initial estimates for Liquid Phase 2: {0}", InitialEstimatesForPhase2.ToMathArrayString))
 
             Dim i, j, n, ecount As Integer
+            Dim foundfirst As Boolean
+            Dim result As Object
+
             n = Vz.Length - 1
 
             Dim Vx1(n), Vx2(n), Vy(n), Vn1(n), Vn2(n), Ki(n), fi1(n), fi2(n), gamma1(n), gamma2(n), Vp(n) As Double
@@ -131,14 +135,14 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 j = 0
                 For i = 0 To n
                     If Vz(i) > 0 And Vz(i) < minn Then
-                        j = i
                         minn = Vz(i)
                     End If
                 Next
                 For i = 0 To n
-                    If Vz(i) = minn Then
+                    If Vz(i) = minn And Not foundfirst Then
                         Vn1(i) = Vz(i) * 0.05
                         Vn2(i) = Vz(i) * 0.95
+                        foundfirst = True
                     Else
                         Vn1(i) = Vz(i) * 0.95
                         Vn2(i) = Vz(i) * 0.05
@@ -167,19 +171,25 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Vn2(i) /= S
             Next
 
-            'calculate vapour pressures
+            'calculate vapor pressures
+            IObj?.SetCurrent
             For i = 0 To n
-                IObj?.SetCurrent
                 Vp(i) = PP.AUX_PVAPi(i, T)
             Next
+            IObj?.Paragraphs.Add(String.Format("Vapor pressures: {0} Pa", Vp.ToMathArrayString))
 
 
-            Dim err As Double = 0.0#
-            Dim err_ant As Double = 0.0#
+            Dim err As Double
 
             ecount = 0
 
+            IObj?.Paragraphs.Add("<h2>Starting iteration loop</h2>")
             Do
+                IObj?.SetCurrent()
+                Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+                Inspector.Host.CheckAndAdd(IObj2, "", "Flash_PT", "LLE-Flash Newton Iteration #" & ecount + 1, "Constant-Temperature LLE Flash Algorithm Convergence Iteration Step")
+
+                IObj2?.Paragraphs.Add(String.Format("<b>Iteration:</b> {0}", ecount + 1))
                 Vx1_ant = Vx1.Clone
                 Vx2_ant = Vx2.Clone
 
@@ -188,28 +198,55 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 Vx1 = Vn1.MultiplyConstY(1 / L1).NormalizeY
                 Vx2 = Vn2.MultiplyConstY(1 / L2).NormalizeY
+                IObj2?.Paragraphs.Add(String.Format("Components: {0}", PP.RET_VNAMES.ToMathArrayString))
+                IObj2?.Paragraphs.Add(String.Format("Composition phase 1: {0}", Vx1.ToMathArrayString))
+                IObj2?.Paragraphs.Add(String.Format("Composition phase 2: {0}", Vx2.ToMathArrayString))
 
-                IObj?.SetCurrent
+                IObj2?.SetCurrent
+                IObj2?.Paragraphs.Add(String.Format("Calculating fugacity coefficients of liquid phases:", ecount))
                 fi1 = PP.DW_CalcFugCoeff(Vx1, T, P, State.Liquid)
-                IObj?.SetCurrent
                 fi2 = PP.DW_CalcFugCoeff(Vx2, T, P, State.Liquid)
+                IObj2?.SetCurrent
+                IObj2?.Paragraphs.Add(String.Format("Fugacity coefficients phase 1: {0}", fi1.ToMathArrayString))
+                IObj2?.Paragraphs.Add(String.Format("Fugacity coefficients phase 2: {0}", fi2.ToMathArrayString))
 
                 For i = 0 To n
                     gamma1(i) = P / Vp(i) * fi1(i)
                     gamma2(i) = P / Vp(i) * fi2(i)
                 Next
 
-                err_ant = err
-
                 err = Vx1.MultiplyY(gamma1).SubtractY(Vx2.MultiplyY(gamma2)).AbsSumY()
-                e1 = Vx1_ant.NegateY.AddY(Vx1).AbsSumY
-                e2 = Vx2_ant.NegateY.AddY(Vx2).AbsSumY
-                S = Vx2.NegateY.AddY(Vx1).AbsSumY
+                e1 = Vx1_ant.SubtractY(Vx1).AbsSumY
+                e2 = Vx2_ant.SubtractY(Vx2).AbsSumY
+                S = Vx1.SubtractY(Vx2).AbsSumY
+
+                IObj2?.SetCurrent
+                IObj2?.Paragraphs.Add(String.Format("<hr><b>Actual Errors:</b><br>
+                                                     Total Activity Difference between Phases: {0} (< 1e-6)<br><br>
+                                                     Total Composition Changes since last Iteration:<br>
+                                                     Phase 1: {1}<br>
+                                                     Phase 2: {2}<br><br>",
+                                                     err, e1, e2))
+
+                IObj2?.Paragraphs.Add(String.Format("<b>Check Phases and Compositions:</b><br>
+                                                     Components: {0} <br>
+                                                     Component Differences between phases: {1}<br>
+                                                     Total Absolute Composition Difference: {2} (> 1e-3)<br>
+                                                     Phase 1 Fraction {3}: (> 1e-4)<br>
+                                                     Phase 2 Fraction {4}: (> 1e-4)<br><br>
+                                                     Change of Phase Fractions since last Iteration: {5} (< 1e-7)",
+                                                     PP.RET_VNAMES.ToMathArrayString, Vx1.SubtractY(Vx2).ToMathArrayString, S, L1, L2, Abs(L1_ant - L1) + Abs(L2_ant - L2)))
 
                 If Double.IsNaN(err) Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
 
-                If ecount > 0 And (Abs(err) < 0.000001 Or L1 < 0.0001 Or L2 < 0.0001 Or S < 0.0001) Then Exit Do
-                If Abs(L1_ant - L1) + Abs(L2_ant - L2) < 0.0000001 Then Exit Do
+                If ecount > 0 And (err < 0.000001 Or L1 < 0.0001 Or L2 < 0.0001 Or S < 0.001) Then
+                    IObj2?.Close()
+                    Exit Do
+                End If
+                If Abs(L1_ant - L1) + Abs(L2_ant - L2) < 0.0000001 Then
+                    IObj2?.Close()
+                    Exit Do
+                End If
 
                 Vn1 = Vz.DivideY(gamma1.MultiplyConstY(L2).DivideY(gamma2.MultiplyConstY(L1)).AddConstY(1))
                 Vn2 = Vz.SubtractY(Vn1)
@@ -226,43 +263,60 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Vn2 = Vz.SubtractY(Vn1)
                     L1 = Vn1.SumY
                     L2 = 1 - L1
+
+                    IObj2?.SetCurrent
+                    IObj2?.Paragraphs.Add(String.Format("<b>Oscillation detected! Stabilising compositions.</b>"))
                 End If
 
                 ecount += 1
 
                 If ecount > 10000 Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt"))
 
+                IObj2?.Close()
             Loop
 
 out:        d2 = Date.Now
             dt = d2 - d1
 
-            WriteDebugInfo("PT Flash [SimpleLLE]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms. Error function value: " & err)
-
-            IObj?.Paragraphs.Add("PT Flash [SimpleLLE]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms. Error function value: " & err)
-
-            IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
-
-            IObj?.Paragraphs.Add(String.Format("Liquid Phase 1 Molar Fraction: {0}", L1))
-            IObj?.Paragraphs.Add(String.Format("Liquid Phase 2 Molar Fraction: {0}", L2))
-            IObj?.Paragraphs.Add(String.Format("Liquid Phase 1 Molar Composition: {0}", Vx1.ToMathArrayString))
-            IObj?.Paragraphs.Add(String.Format("Liquid Phase 2 Molar Composition: {0}", Vx2.ToMathArrayString))
-
-            IObj?.Close()
-
-            If L1 < 0.0001 Or L2 < 0.0001 Or S < 0.0001 Then
+            IObj?.SetCurrent
+            If L1 < 0.0001 Or L2 < 0.0001 Or S < 0.001 Then
                 'merge phases - both phases are identical
-                Return New Object() {1, V, Vz, PP.RET_NullVector, ecount, 0, Vx2, 0.0#, PP.RET_NullVector, gamma1, gamma2}
+                IObj?.Paragraphs.Add(String.Format("<hr><b>Phase merge necessary!</b><br>"))
+                IObj?.Paragraphs.Add(String.Format("Both Liquid phases either are identical or one phase has vanished!"))
+                If L1 < 0.0001 Then IObj?.Paragraphs.Add(String.Format("Liquid phase 1 Molar Fraction: {0} < 0.0001", L1))
+                If L2 < 0.0001 Then IObj?.Paragraphs.Add(String.Format("Liquid phase 2 Molar Fraction: {0} < 0.0001", L2))
+                If S < 0.001 Then
+                    IObj?.Paragraphs.Add(String.Format("Components: {0}", PP.RET_VNAMES.ToMathArrayString))
+                    IObj?.Paragraphs.Add(String.Format("Liquid phases compositions are identical! <br>Fraction differences: {0}", Vx1.SubtractY(Vx2).ToMathArrayString))
+                End If
+
+                result = {1, V, Vz, PP.RET_NullVector, ecount, 0, Vx2, 0.0#, PP.RET_NullVector, gamma1, gamma2}
             Else
+
                 'order liquid phases by gibbs energy
                 Dim gl1 = PP.DW_CalcGibbsEnergy(Vx1, T, P, "L")
                 Dim gl2 = PP.DW_CalcGibbsEnergy(Vx2, T, P, "L")
                 If gl1 < gl2 Then
-                    Return New Object() {L2, V, Vx2, PP.RET_NullVector, ecount, L1, Vx1, 0.0#, PP.RET_NullVector, gamma2, gamma1}
+                    result = {L2, V, Vx2, PP.RET_NullVector, ecount, L1, Vx1, 0.0#, PP.RET_NullVector, gamma2, gamma1}
                 Else
-                    Return New Object() {L1, V, Vx1, PP.RET_NullVector, ecount, L2, Vx2, 0.0#, PP.RET_NullVector, gamma1, gamma2}
+                    result = {L1, V, Vx1, PP.RET_NullVector, ecount, L2, Vx2, 0.0#, PP.RET_NullVector, gamma1, gamma2}
                 End If
             End If
+
+            IObj?.Paragraphs.Add(String.Format("<hr><h2>Results:</h2>
+                                                Liquid Phase 1 Fraction: {0}<br> 
+                                                Liquid Phase 2 Fraction: {1}<br><br>
+                                                Compounds: {2}<br>
+                                                Liquid Phase 1 Composition: {3}<br>
+                                                Liquid Phase 2 Composition: {4}", L1, L2, PP.RET_VNAMES.ToMathArrayString, Vx1.ToMathArrayString, Vx2.ToMathArrayString))
+
+            WriteDebugInfo("PT Flash [SimpleLLE]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms. Error function value: " & err)
+
+            IObj?.Paragraphs.Add("PT Flash [SimpleLLE]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms. Error function value: " & err)
+
+            IObj?.Close()
+
+            Return result
 
         End Function
 
