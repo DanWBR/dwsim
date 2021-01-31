@@ -59,22 +59,41 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim Flashtype As String = FlashSettings(FlashSetting.ForceEquilibriumCalculationType)
 
-            Dim hres = PerformHeuristicsTest(Vz, T, P, PP)
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            Inspector.Host.CheckAndAdd(IObj, "", "Flash_PT", Name & " (PT Flash)", "Pressure-Temperature Flash Algorithm Routine", True)
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Components: {0}", PP.RET_VNAMES.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Flash Settings: {0}", Flashtype))
+
+            If ReuseKI Then
+                IObj?.Paragraphs.Add("Reuse Ki's: true")
+                IObj?.Paragraphs.Add(String.Format("Previous Ki's: {0}", PrevKi.ToMathArrayString))
+            End If
 
             If Flashtype = "Default" Then
+                IObj?.Paragraphs.Add("<hr><b>Perform Phase Heuristics Test to decide on suitable algorithm.</b>")
+                Dim hres = PerformHeuristicsTest(Vz, T, P, PP)
 
                 'chech possible phases to decide on suitable flash algorithm
                 If hres.SolidPhase Or PP.ForcedSolids.Count > 0 Then
                     If hres.LiquidPhaseSplit Then
                         Flashtype = "SVLLE"
+                        IObj?.Paragraphs.Add("Heuristics Result: Solid + Liquid Phase Split")
                     Else
                         Flashtype = "SVLE"
+                        IObj?.Paragraphs.Add("Heuristics Result: Solid")
                     End If
                 Else
                     If hres.LiquidPhaseSplit Then
                         Flashtype = "VLLE"
+                        IObj?.Paragraphs.Add("Heuristics Result: Liquid Phase Split")
                     Else
                         Flashtype = "VLE"
+                        IObj?.Paragraphs.Add("Heuristics Result: Neither Solid nor Liquid Phase Split")
                     End If
                 End If
             End If
@@ -83,23 +102,29 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Select Case Flashtype
                 Case "VLE"
+                    IObj?.Paragraphs.Add("Selected Flash Algorithm: VLE")
                     Dim nl = New NestedLoops
                     nl.FlashSettings = FlashSettings
                     result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
                 Case "VLLE"
                     If Not FlashSettings(FlashSetting.ImmiscibleWaterOption) = True Then
+                        IObj?.Paragraphs.Add("Selected Flash Algorithm: VLLE")
                         Dim nl = New NestedLoops3PV3
                         nl.FlashSettings = FlashSettings
                         result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
                     Else
+                        IObj?.Paragraphs.Add("Selected Flash Algorithm: VLLE - Immiscible Water")
                         Dim imm As New NestedLoopsImmiscible With {.FlashSettings = FlashSettings}
                         result = imm.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
                     End If
                 Case "SVLE", "SVLLE"
+                    IObj?.Paragraphs.Add("Selected Flash Algorithm: SVLLE")
                     Dim nl As New NestedLoopsSVLLE
                     nl.FlashSettings = FlashSettings
                     result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
             End Select
+
+            IObj?.Close()
 
             Return result
 
@@ -109,22 +134,36 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim Flashtype As String = FlashSettings(FlashSetting.ForceEquilibriumCalculationType)
 
-            Dim hres = PerformHeuristicsTest(Vz, Tref, P, PP)
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            Inspector.Host.CheckAndAdd(IObj, "", "Flash_PH", Name & " (PH Flash)", "Pressure-Enthalpy Flash Algorithm Routine", True)
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Enthalpy: {0} KJ/Kg", H))
+            IObj?.Paragraphs.Add(String.Format("Components: {0}", PP.RET_VNAMES.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Flash Settings: {0}", Flashtype))
 
             If Flashtype = "Default" Then
+                IObj?.Paragraphs.Add("<hr><b>Perform Phase Heuristics Test to decide on suitable algorithm.</b>")
+                Dim hres = PerformHeuristicsTest(Vz, Tref, P, PP)
 
-                'check possible phases to decide on suitable flash algorithm
+                'chech possible phases to decide on suitable flash algorithm
                 If hres.SolidPhase Or PP.ForcedSolids.Count > 0 Then
                     If hres.LiquidPhaseSplit Then
                         Flashtype = "SVLLE"
+                        IObj?.Paragraphs.Add("Heuristics Result: Solid + Liquid Phase Split")
                     Else
                         Flashtype = "SVLE"
+                        IObj?.Paragraphs.Add("Heuristics Result: Solid")
                     End If
                 Else
                     If hres.LiquidPhaseSplit Then
                         Flashtype = "VLLE"
+                        IObj?.Paragraphs.Add("Heuristics Result: Liquid Phase Split")
                     Else
                         Flashtype = "VLE"
+                        IObj?.Paragraphs.Add("Heuristics Result: Neither Solid nor Liquid Phase Split")
                     End If
                 End If
             End If
@@ -133,19 +172,22 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Select Case Flashtype
                 Case "VLE", "SVLE", "SVLLE"
+                    IObj?.Paragraphs.Add("Selected Flash Algorithm: VLE")
                     Dim nl = New NestedLoops
                     nl.FlashSettings = FlashSettings
                     nl.PTFlashFunction = AddressOf Flash_PT
                     result = nl.Flash_PH(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
 
                 Case "VLLE"
+                    IObj?.Paragraphs.Add("Selected Flash Algorithm: VLLE")
                     Dim nl = New NestedLoops3PV3
                     nl.FlashSettings = FlashSettings
                     result = nl.Flash_PH(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
             End Select
 
-            Return result
+            IObj?.Close()
 
+            Return result
 
         End Function
 
@@ -153,22 +195,36 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim Flashtype As String = FlashSettings(FlashSetting.ForceEquilibriumCalculationType)
 
-            Dim sres = PerformHeuristicsTest(Vz, Tref, P, PP)
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            Inspector.Host.CheckAndAdd(IObj, "", "Flash_PS", Name & " (PS Flash)", "Pressure-Entropy Flash Algorithm Routine", True)
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Entropy: {0} kJ/[kg.K]", S))
+            IObj?.Paragraphs.Add(String.Format("Components: {0}", PP.RET_VNAMES.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Flash Settings: {0}", Flashtype))
 
             If Flashtype = "Default" Then
+                IObj?.Paragraphs.Add("<hr><b>Perform Phase Heuristics Test to decide on suitable algorithm.</b>")
+                Dim hres = PerformHeuristicsTest(Vz, Tref, P, PP)
 
-                'check possible phases to decide on suitable flash algorithm
-                If sres.SolidPhase Or PP.ForcedSolids.Count > 0 Then
-                    If sres.LiquidPhaseSplit Then
+                'chech possible phases to decide on suitable flash algorithm
+                If hres.SolidPhase Or PP.ForcedSolids.Count > 0 Then
+                    If hres.LiquidPhaseSplit Then
                         Flashtype = "SVLLE"
+                        IObj?.Paragraphs.Add("Heuristics Result: Solid + Liquid Phase Split")
                     Else
                         Flashtype = "SVLE"
+                        IObj?.Paragraphs.Add("Heuristics Result: Solid")
                     End If
                 Else
-                    If sres.LiquidPhaseSplit Then
+                    If hres.LiquidPhaseSplit Then
                         Flashtype = "VLLE"
+                        IObj?.Paragraphs.Add("Heuristics Result: Liquid Phase Split")
                     Else
                         Flashtype = "VLE"
+                        IObj?.Paragraphs.Add("Heuristics Result: Neither Solid nor Liquid Phase Split")
                     End If
                 End If
             End If
@@ -177,19 +233,22 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Select Case Flashtype
                 Case "VLE", "SVLE", "SVLLE"
+                    IObj?.Paragraphs.Add("Selected Flash Algorithm: VLE")
                     Dim nl = New NestedLoops
                     nl.FlashSettings = FlashSettings
                     nl.PTFlashFunction = AddressOf Flash_PT
                     result = nl.Flash_PS(Vz, P, S, Tref, PP, ReuseKI, PrevKi)
 
                 Case "VLLE"
+                    IObj?.Paragraphs.Add("Selected Flash Algorithm: VLLE")
                     Dim nl = New NestedLoops3PV3
                     nl.FlashSettings = FlashSettings
                     result = nl.Flash_PS(Vz, P, S, Tref, PP, ReuseKI, PrevKi)
             End Select
 
-            Return result
+            IObj?.Close()
 
+            Return result
 
         End Function
 
@@ -197,22 +256,36 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim Flashtype As String = FlashSettings(FlashSetting.ForceEquilibriumCalculationType)
 
-            Dim hres = PerformHeuristicsTest(Vz, Tref, P, PP)
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            Inspector.Host.CheckAndAdd(IObj, "", "Flash_PV", Name & " (PV Flash)", "Pressure - Vapor Fraction Flash Algorithm Routine", True)
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Vapor Fraction: {0}", V))
+            IObj?.Paragraphs.Add(String.Format("Components: {0}", PP.RET_VNAMES.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Flash Settings: {0}", Flashtype))
 
             If Flashtype = "Default" Then
+                IObj?.Paragraphs.Add("<hr><b>Perform Phase Heuristics Test to decide on suitable algorithm.</b>")
+                Dim hres = PerformHeuristicsTest(Vz, Tref, P, PP)
 
-                'chech possible phases to decide on suitabel flash algorithm
+                'chech possible phases to decide on suitable flash algorithm
                 If hres.SolidPhase Or PP.ForcedSolids.Count > 0 Then
                     If hres.LiquidPhaseSplit Then
                         Flashtype = "SVLLE"
+                        IObj?.Paragraphs.Add("Heuristics Result: Solid + Liquid Phase Split")
                     Else
                         Flashtype = "SVLE"
+                        IObj?.Paragraphs.Add("Heuristics Result: Solid")
                     End If
                 Else
                     If hres.LiquidPhaseSplit Then
                         Flashtype = "VLLE"
+                        IObj?.Paragraphs.Add("Heuristics Result: Liquid Phase Split")
                     Else
                         Flashtype = "VLE"
+                        IObj?.Paragraphs.Add("Heuristics Result: Neither Solid nor Liquid Phase Split")
                     End If
                 End If
             End If
@@ -221,22 +294,28 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Select Case Flashtype
                 Case "VLE"
+                    IObj?.Paragraphs.Add("Selected Flash Algorithm: VLE")
                     Dim nl = New NestedLoops
                     nl.FlashSettings = FlashSettings
                     result = nl.Flash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
                 Case "VLLE"
+                    IObj?.Paragraphs.Add("Selected Flash Algorithm: VLLE")
                     Dim nl3 As New NestedLoops3PV3
                     nl3.FlashSettings = FlashSettings
                     result = nl3.Flash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
                 Case "SVLE"
+                    IObj?.Paragraphs.Add("Selected Flash Algorithm: SVLE")
                     Dim nls As New NestedLoopsSLE
                     nls.FlashSettings = FlashSettings
                     result = nls.Flash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
                 Case "SVLLE"
+                    IObj?.Paragraphs.Add("Selected Flash Algorithm: SVLLE")
                     Dim nlsv As New NestedLoopsSVLLE
                     nlsv.FlashSettings = FlashSettings
                     result = nlsv.Flash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
             End Select
+
+            IObj?.Close()
 
             Return result
 
@@ -246,22 +325,35 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim Flashtype As String = FlashSettings(FlashSetting.ForceEquilibriumCalculationType)
 
-            Dim hres = PerformHeuristicsTest(Vz, T, Pref, PP)
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+            Inspector.Host.CheckAndAdd(IObj, "", "Flash_TV", Name & " (TV Flash)", "Temperature - Vapor Fraction Flash Algorithm Routine", True)
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Vapor Fraction: {0}", V))
+            IObj?.Paragraphs.Add(String.Format("Components: {0}", PP.RET_VNAMES.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Flash Settings: {0}", Flashtype))
 
             If Flashtype = "Default" Then
+                Dim hres = PerformHeuristicsTest(Vz, T, Pref, PP)
 
-                'chech possible phases to decide on suitabel flash algorithm
+                'chech possible phases to decide on suitable flash algorithm
                 If hres.SolidPhase Or PP.ForcedSolids.Count > 0 Then
                     If hres.LiquidPhaseSplit Then
                         Flashtype = "SVLLE"
+                        IObj?.Paragraphs.Add("Heuristics Result: Solid + Liquid Phase Split")
                     Else
                         Flashtype = "SVLE"
+                        IObj?.Paragraphs.Add("Heuristics Result: Solid")
                     End If
                 Else
                     If hres.LiquidPhaseSplit Then
                         Flashtype = "VLLE"
+                        IObj?.Paragraphs.Add("Heuristics Result: Liquid Phase Split")
                     Else
                         Flashtype = "VLE"
+                        IObj?.Paragraphs.Add("Heuristics Result: Neither Solid nor Liquid Phase Split")
                     End If
                 End If
             End If
@@ -270,22 +362,28 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Select Case Flashtype
                 Case "VLE"
+                    IObj?.Paragraphs.Add("Selected Flash Algorithm: VLE")
                     Dim nl As New NestedLoops
                     nl.FlashSettings = FlashSettings
                     result = nl.Flash_TV(Vz, T, V, Pref, PP, ReuseKI, PrevKi)
                 Case "VLLE"
+                    IObj?.Paragraphs.Add("Selected Flash Algorithm: VLLE")
                     Dim nl3 As New NestedLoops3PV3
                     nl3.FlashSettings = FlashSettings
                     result = nl3.Flash_TV(Vz, T, V, Pref, PP, ReuseKI, PrevKi)
                 Case "SVLE"
+                    IObj?.Paragraphs.Add("Selected Flash Algorithm: SVLE")
                     Dim nls As New NestedLoopsSLE
                     nls.FlashSettings = FlashSettings
                     result = nls.Flash_TV(Vz, T, V, Pref, PP, ReuseKI, PrevKi)
                 Case "SVLLE"
+                    IObj?.Paragraphs.Add("Selected Flash Algorithm: SVLLE")
                     Dim nlsv As New NestedLoopsSVLLE
                     nlsv.FlashSettings = FlashSettings
                     result = nlsv.Flash_TV(Vz, T, V, Pref, PP, ReuseKI, PrevKi)
             End Select
+
+            IObj?.Close()
 
             Return result
 

@@ -251,55 +251,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Return result
 
-            'ReDim Vn(n), Vx(n), Vy(n), Vx_ant(n), Vy_ant(n), Vp(n), Ki(n), fi(n)
-
-            'If prevres IsNot Nothing AndAlso prevres.L2 = 0.0 Then
-
-            '    V = prevres.V
-            '    L = prevres.L1
-            '    Vy = prevres.Vy
-            '    Vx = prevres.Vx1
-
-            'Else
-
-            '    If prevres IsNot Nothing Then
-
-            '        'jump to 3pflash
-
-            '        result = Flash_PT_3P(Vz, prevres.V, prevres.L1, prevres.L2, prevres.Vy, prevres.Vx1, prevres.Vx2, P, T, PP)
-
-            '    Else
-
-            '        result = _nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-
-            '        L = result(0)
-            '        V = result(1)
-            '        Vx = result(2)
-            '        Vy = result(3)
-
-            '        If L > 0.0 Then
-
-            '            Dim lps = GetPhaseSplitEstimates(T, P, L, Vx, PP)
-
-            '            L1 = lps(0)
-            '            Vx1 = lps(1)
-            '            L2 = lps(2)
-            '            Vx2 = lps(3)
-
-            '            If L2 > 0.0 Then
-
-            '                result = Flash_PT_3P(Vz, V, L1, L2, Vy, Vx1, Vx2, P, T, PP)
-
-            '            End If
-
-            '        End If
-
-            '    End If
-
-            'End If
-
-            'Return result
-
         End Function
 
         Public Function Flash_PT_3P(ByVal Vz As Double(), ByVal Vest As Double, ByVal L1est As Double, ByVal L2est As Double, ByVal VyEST As Double(), ByVal Vx1EST As Double(), ByVal Vx2EST As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage) As Object
