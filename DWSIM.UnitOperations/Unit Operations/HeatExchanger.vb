@@ -1432,7 +1432,7 @@ Namespace UnitOperations
                                                  tmpstr.PropertyPackage = StInCold.PropertyPackage
                                                  tmpstr.SetFlowsheet(StInCold.FlowSheet)
 
-                                                 For i As Integer = 1 To nsteps
+                                                 For i As Integer = 0 To nsteps
 
                                                      tmpstr.Phases(0).Properties.enthalpy = Hc1 + Convert.ToDouble(i) / Convert.ToDouble(nsteps) * dhc
                                                      tmpstr.Phases(0).Properties.pressure = Pc1 - Convert.ToDouble(i) / Convert.ToDouble(nsteps) * ColdSidePressureDrop
@@ -1449,7 +1449,7 @@ Namespace UnitOperations
                                                  tmpstr.PropertyPackage = StInHot.PropertyPackage
                                                  tmpstr.SetFlowsheet(StInHot.FlowSheet)
 
-                                                 For i As Integer = 1 To nsteps
+                                                 For i As Integer = 0 To nsteps
 
                                                      tmpstr.Phases(0).Properties.enthalpy = Hh1 - Convert.ToDouble(i) / Convert.ToDouble(nsteps) * dhh
                                                      tmpstr.Phases(0).Properties.pressure = Ph1 - Convert.ToDouble(i) / Convert.ToDouble(nsteps) * HotSidePressureDrop
@@ -1465,7 +1465,7 @@ Namespace UnitOperations
                                                      thprof.Reverse()
                                                  End If
 
-                                                 For i As Integer = 0 To nsteps - 1
+                                                 For i As Integer = 0 To nsteps
                                                      dtprof.Add(Abs(thprof(i) - tcprof(i)))
                                                  Next
 
