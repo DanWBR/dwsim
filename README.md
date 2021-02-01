@@ -5,9 +5,7 @@
 [![donate](https://img.shields.io/badge/make%20a-donation-greenblue.svg)](https://sourceforge.net/p/dwsim/donate/)
 
 ## DWSIM - Open Source Process Simulator
-Copyright 2017-2021 Daniel Medeiros and contributors
-
-Copyright 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo León
+Copyright 2008-2021 Daniel Medeiros and contributors
 
 DWSIM is a software for modeling, simulation and optimization of steady-state and dynamic chemical processes.
 
@@ -15,7 +13,7 @@ DWSIM is a software for modeling, simulation and optimization of steady-state an
 
 DWSIM is licensed under the GNU General Public License (GPL) Version 3.
 
-See COPYING and COPYING.LESSER for more information.
+See COPYING for more information.
 
 ### Supported Operating Systems
 
