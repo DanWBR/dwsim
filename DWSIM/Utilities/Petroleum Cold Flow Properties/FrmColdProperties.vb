@@ -335,10 +335,10 @@ Public Class FrmColdProperties
         CetaneIndex = 415.26 - 7.673 * API + 0.186 * (MeABP * 1.8 - 458.67) + 3.503 * API * Log10(1.8 * MeABP - 458.67) - 193.816 * Log10(MeABP * 1.8 - 458.67)
 
         'Reid Vapor Pressure
-        'reference: http://www.epa.gov/ttn/chief/ap42/ch07/final/c07s01.pdf, page 7.1-56
+        'reference: https://www.epa.gov/air-emissions-factors-and-quantification/ap-42-fifth-edition-volume-i-chapter-7-liquid-storage-0 , page 7.1-82
         'TVP = Exp((2799 / (310.95 * 1.8) - 2.227) * Log10(RVP/ 6894.76) - 7261 / (310.95 * 1.8) + 12.82)*6894.76
 
-        RVP = (10 ^ ((Log(TVP / 6894.76) + 7261 / (310.95 * 1.8) - 12.82) / (2799 / (310.95 * 1.8) - 2.227)) + 14.6959) * 6894.76
+        RVP = (10 ^ ((Log(TVP / 6894.76) + 7261 / (310.95 * 1.8) - 12.82) / (2799 / (310.95 * 1.8) - 2.227))) * 6894.76
 
     End Sub
 
