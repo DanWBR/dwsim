@@ -1411,7 +1411,7 @@ Namespace UnitOperations
 
                     nsteps = 25
 
-                    Dim tcprof, thprof, dtprof, qprof As New List(Of Double)
+                    Dim tcprof, thprof, dtprof, qprof, seg_ua, seg_lmtd As New List(Of Double)
 
                     Dim brt As New MathOps.MathEx.BrentOpt.BrentMinimize
 
@@ -1465,8 +1465,14 @@ Namespace UnitOperations
                                                      thprof.Reverse()
                                                  End If
 
+                                                 seg_ua.Clear()
+                                                 seg_lmtd.Clear()
                                                  For i As Integer = 0 To nsteps
                                                      dtprof.Add(Abs(thprof(i) - tcprof(i)))
+                                                     If i > 0 Then
+                                                         seg_lmtd.Add((dtprof(i) - dtprof(i - 1)) / Log(dtprof(i) / dtprof(i - 1)))
+                                                         seg_ua.Add((qprof(i) - qprof(i - 1)) / seg_lmtd.Last)
+                                                     End If
                                                  Next
 
                                                  fx = dtprof.Min - MITA
@@ -1500,12 +1506,7 @@ Namespace UnitOperations
                     Th2 = tmp.CalculatedTemperature
                     If DebugMode Then AppendDebugLine(String.Format("Calculated hot stream outlet temperature T2 = {0} K", Th2))
 
-                    Select Case Me.FlowDir
-                        Case FlowDirection.CoCurrent
-                            LMTD = ((Th1 - Tc1) - (Th2 - Tc2)) / Math.Log((Th1 - Tc1) / (Th2 - Tc2))
-                        Case FlowDirection.CounterCurrent
-                            LMTD = ((Th1 - Tc2) - (Th2 - Tc1)) / Math.Log((Th1 - Tc2) / (Th2 - Tc1))
-                    End Select
+                    LMTD = Q / seg_ua.Sum
 
                     LMTD *= CorrectionFactorLMTD
 
