@@ -2830,7 +2830,6 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 Dim hres = PerformHeuristicsTest(Vz, T, P, PP)
                 If hres.SolidPhase Then
                     tmp = New NestedLoopsSLE().Flash_PV(Vz, P, X, T, PP, False, Nothing)
-                Else
                 End If
                 L1 = tmp(0)
                 V = tmp(1)
