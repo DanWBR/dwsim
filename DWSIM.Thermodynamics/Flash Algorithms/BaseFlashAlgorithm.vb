@@ -1393,7 +1393,7 @@ will converge to this solution.")
             For i = 0 To n - 1
                 If Tf(i) > T And Tf(i) > 1 And Vz(i) > 0.001 Then
                     hres.SolidPhase = True
-                    Exit For
+                    hres.SolidFraction += Vz(i)
                 End If
             Next
 
@@ -1402,7 +1402,7 @@ will converge to this solution.")
                 For Each solid In pp.ForcedSolids
                     If Vz(names.IndexOf(solid.ToLower())) > 0 Then
                         hres.SolidPhase = True
-                        Exit For
+                        hres.SolidFraction += Vz(names.IndexOf(solid.ToLower()))
                     End If
                 Next
             End If
@@ -1580,6 +1580,7 @@ will converge to this solution.")
 
         Public Property LiquidPhaseSplit As Boolean = False
         Public Property SolidPhase As Boolean = False
+        Public Property SolidFraction As Double = 0.0
 
     End Class
 

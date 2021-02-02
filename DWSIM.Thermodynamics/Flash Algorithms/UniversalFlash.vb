@@ -177,7 +177,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     nl.FlashSettings = FlashSettings
                     nl.PTFlashFunction = AddressOf Flash_PT
                     result = nl.Flash_PH(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
-
                 Case "VLLE"
                     IObj?.Paragraphs.Add("Selected Flash Algorithm: VLLE")
                     Dim nl = New NestedLoops3PV3
