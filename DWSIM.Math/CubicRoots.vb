@@ -25,7 +25,7 @@ Namespace MathEx
 
         Shared Function Poly_Roots(ByVal Coeff As Double()) As Double(,)
 
-            Return CalcRoots2(Coeff(3), Coeff(2), Coeff(1), Coeff(0))
+            Return CalcRoots(Coeff(3), Coeff(2), Coeff(1), Coeff(0))
 
         End Function
 

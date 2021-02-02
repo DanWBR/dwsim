@@ -95,64 +95,159 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         End Property
 
         Public Overrides Function Flash_PT(ByVal Vz As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Inspector.Host.CheckAndAdd(IObj, "", "Flash_PT", Name & " (PT Flash)", "Pressure-Temperature Flash Algorithm Routine", True)
+
+            IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
+
+            IObj?.Paragraphs.Add(String.Format("Temperature: {0} K", T))
+            IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
+            IObj?.Paragraphs.Add(String.Format("Compounds: {0}", PP.RET_VNAMES.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
 
             etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance).ToDoubleFromInvariant
             maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_External_Iterations)
             itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance).ToDoubleFromInvariant
             maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
 
+            Dim Pvap As Double
+            Dim PV() As Double = PP.RET_VPVAP(T)
+
+            Dim gamma1(), gamma2() As Double
+            Dim result As Object = Nothing
+
+            Dim d1, d2, d3, d4, d5, d6, d7, d8 As DateTime
+            Dim dT1, dT2, dT3, dT4 As TimeSpan
+
             n = Vz.Length - 1
 
             proppack = PP
+            '============================================================
+            '= estimate liquid compositions assuming liquid phases only =
+            '============================================================
+            IObj?.Paragraphs.Add(String.Format("<hr><b>1. Run LLE-Flash</b>"))
+            d1 = Now
+            Dim slle As New SimpleLLE()
+            Dim resultL As Object = slle.Flash_PT(Vz, P, T, PP)
+            L1 = resultL(0) 'phase fraction liquid/liquid
+            L2 = resultL(5)
+            Vx1 = resultL(2)
+            Vx2 = resultL(6)
+            gamma1 = resultL(9)
+            gamma2 = resultL(10)
+            d2 = Now
+            dT1 = d2 - d1
 
-            ReDim Vn(n), Vx(n), Vy(n), Vx_ant(n), Vy_ant(n), Vp(n), Ki(n), fi(n)
+            IObj?.Paragraphs.Add(String.Format("Phase fraction L1: {0}", L1))
+            IObj?.Paragraphs.Add(String.Format("Phase fraction L2: {0}", L2))
+            IObj?.Paragraphs.Add(String.Format("Compounds: {0}", PP.RET_VNAMES.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Molar fractions L1: {0}", Vx1.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Molar fractions L2: {0}", Vx2.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Activity coefficients L1: {0}", gamma1.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Activity coefficients L2: {0}", gamma2.ToMathArrayString))
 
-            Dim result As Object = Nothing
+            '============================================================
+            '= calculate total vapor pressure of phase 1                =
+            '= In equilibrium the vapor pressure of both phases is      =
+            '= identical. Therefore only one phase is sufficient for    =
+            '= calculation. If no second liquid phase is existing,      =
+            '= phase 1 will still be available.                         =
+            '============================================================
+            Pvap = Vx1.MultiplyY(gamma1).MultiplyY(PV).SumY
+            IObj?.SetCurrent
+            IObj?.Paragraphs.Add(String.Format("<hr><b>2. Calculate boiling pressure</b><br><br>Boiling Pressure: {0} Pa", Pvap))
 
-            If prevres IsNot Nothing AndAlso prevres.L2 = 0.0 Then
+            '============================================================
+            '= If we are below boiling pressure then we are done.       =
+            '============================================================
 
-                V = prevres.V
-                L = prevres.L1
-                Vy = prevres.Vy
-                Vx = prevres.Vx1
-
+            If P > Pvap Then
+                'we are below boiling point
+                IObj?.SetCurrent
+                IObj?.Paragraphs.Add(String.Format("Specified Pressure ({0} Pa) is above Boiling Pressure ({1} Pa).", P, Pvap))
+                IObj?.Paragraphs.Add(String.Format("No vapor phase exists. Final solution is found."))
+                result = {L1, 0, Vx1, PP.RET_NullVector, T, L2, Vx2, 0, PP.RET_NullVector}
             Else
+                'we are abov boiling point
+                'first split liquids and vapor
+                IObj?.SetCurrent
+                IObj?.Paragraphs.Add(String.Format("Specified Pressure {0} Pa is below Boiling Pressure: {1} Pa <br><br>This mixture is boiling! We need to run some kind of VLE falsh calculation.", P, Pvap))
 
-                If prevres IsNot Nothing Then
 
-                    'jump to 3pflash
+                IObj?.Paragraphs.Add(String.Format("<hr><b>3. Split liquid and vapor phases by VLE PT-flash.</b>"))
+                d3 = Now
+                result = _nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                L = result(0)
+                V = result(1)
+                Vx = result(2)
+                Vy = result(3)
 
-                    result = Flash_PT_3P(Vz, prevres.V, prevres.L1, prevres.L2, prevres.Vy, prevres.Vx1, prevres.Vx2, P, T, PP)
+                d4 = Now
+                dT2 = d4 - d3
+                IObj?.SetCurrent
+                IObj?.Paragraphs.Add("<b>VLE flash result:</b>")
+                IObj?.Paragraphs.Add(String.Format("Liquid fraction {0}", L))
+                IObj?.Paragraphs.Add(String.Format("Vapor fraction {0}", V))
+                IObj?.Paragraphs.Add(String.Format("Compounds: {0}", PP.RET_VNAMES.ToMathArrayString))
+                IObj?.Paragraphs.Add(String.Format("Liquid composition {0}", Vx.ToMathArrayString))
+                IObj?.Paragraphs.Add(String.Format("Vapor composition {0}", Vy.ToMathArrayString))
 
-                Else
 
-                    result = _nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                'Check number of components and if a liquid phase exists
+                'Due to general phase rule, with more than 2 components a 3 phase PT flash may be necessary
+                If n > 1 And L > 0 Then
+                    IObj?.SetCurrent
+                    IObj?.Paragraphs.Add("<hr><b>4. Check Liquid Split</b>")
+                    IObj?.Paragraphs.Add("There are more than 2 components in mixture and a liquid phase is existing.<br>
+                                          Due to general phase rule this liquid might split up. We need to check that.")
 
-                    L = result(0)
-                    V = result(1)
-                    Vx = result(2)
-                    Vy = result(3)
+                    'Check possible LLE phase split from remaining liquid
+                    d5 = Now
 
-                    If L > 0.0 Then
+                    Dim lps = GetPhaseSplitEstimates(T, P, L, Vx, PP)
+                    L1 = lps(0)
+                    Vx1 = lps(1)
+                    L2 = lps(2)
+                    Vx2 = lps(3)
 
-                        Dim lps = GetPhaseSplitEstimates(T, P, L, Vx, PP)
+                    d6 = Now
+                    dT3 = d6 - d5
 
-                        L1 = lps(0)
-                        Vx1 = lps(1)
-                        L2 = lps(2)
-                        Vx2 = lps(3)
-
-                        If L2 > 0.0 Then
-
-                            result = Flash_PT_3P(Vz, V, L1, L2, Vy, Vx1, Vx2, P, T, PP)
-
-                        End If
-
+                    'If a second liquid phase is predicted, run a 3 phase PT flash
+                    If L2 > 0 Then
+                        IObj?.SetCurrent
+                        IObj?.Paragraphs.Add("There are two liquid phases predicted. We will need a 3-Phase-Flash!")
+                        IObj?.Paragraphs.Add("<hr><b>5. Run 3-Phase-PT-Flash</b>")
+                        d7 = Now
+                        result = Flash_PT_3P(Vz, V, L1, L2, Vy, Vx1, Vx2, P, T, PP)
+                        d8 = Now
+                        dT4 = d8 - d7
+                    Else
+                        IObj?.SetCurrent
+                        IObj?.Paragraphs.Add("<b>Result:>/b> Only a single liquid phase was predicted. Previous VLE-Flash result can be taken as final result.")
                     End If
 
                 End If
 
             End If
+            L1 = result(0)
+            L2 = result(5)
+            V = result(1)
+            Vx1 = result(2)
+            Vx1 = result(6)
+            Vy = result(3)
+            IObj?.SetCurrent
+            IObj?.Paragraphs.Add(String.Format("<hr><h2>Results</h2>"))
+            IObj?.Paragraphs.Add(String.Format("Compounds: {0}", PP.RET_VNAMES.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Liquid 1 fraction {0}<br>
+                                                Liquid 2 fraction {1}<br>
+                                                Vapor fraction {2}<br>
+                                                Liquid 1 composition {3}<br>
+                                                Liquid 2 composition {4}<br>
+                                                Vapor composition {5}", L1, L2, V, Vx1.ToMathArrayString, Vx2.ToMathArrayString, Vy.ToMathArrayString))
+
+            IObj?.Close()
 
             Return result
 

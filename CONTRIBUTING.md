@@ -8,13 +8,12 @@ You don't have to do this up-front. You can simply clone, fork, and submit your 
 
 ## Code Copyrights
 
-The DWSIM project maintains that all code copyrights are held by the original author(s), but licensed back, under LGPLv3, to the greater community of users.
+The DWSIM project maintains that all code copyrights are held by the original author(s), but licensed back, under GPLv3, to the greater community of users.
 
 ## Source License
 
-The DWSIM project uses the following licenses:
+The DWSIM project uses the following license:
 
-* The  [Lesser General Public License Version 3](https://www.gnu.org/licenses/lgpl-3.0.txt)
 * The  [General Public License Version 3](https://www.gnu.org/licenses/gpl-3.0.txt)
 
 ## Copying Files from Other Projects

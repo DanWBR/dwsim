@@ -67,14 +67,14 @@ Public Class TwoDimChartControl
 #Else
                         Dim data As Object(,) = sheet.GetRangeData(New unvell.ReoGrid.RangePosition(item.Split("!")(1)))
 #End If
-                        If Data.GetLength(0) > 1 Then
+                        If data.GetLength(0) > 1 Then
                             Dim j As Integer = 0
-                            For j = 0 To Data.GetLength(0) - 1
+                            For j = 0 To data.GetLength(0) - 1
                                 Dim d As Double = 0.0
-                                Double.TryParse(Data(j, 0).ToString, d)
+                                Double.TryParse(data(j, 0).ToString, d)
                                 xlist.Add(d)
                             Next
-                        ElseIf Data.GetLength(1) > 1 Then
+                        ElseIf data.GetLength(1) > 1 Then
                             Dim j As Integer = 0
                             For j = 0 To data.GetLength(1) - 1
                                 Dim d As Double = 0.0
@@ -125,53 +125,57 @@ Public Class TwoDimChartControl
                     For Each item In Chart.SpreadsheetDataSourcesX
                         Dim xlist As New List(Of Double)
                         Dim sheet = Spreadsheet.GetWorksheetByName(item.Split("!")(0))
+                        If Not sheet Is Nothing Then
 #If LINUX Then
-                        Dim data As Object(,) = sheet.GetRangeData(New RangePosition(item.Split("!")(1)))
+                            Dim data As Object(,) = sheet.GetRangeData(New RangePosition(item.Split("!")(1)))
 #Else
-                        Dim data As Object(,) = sheet.GetRangeData(New unvell.ReoGrid.RangePosition(item.Split("!")(1)))
+                            Dim data As Object(,) = sheet.GetRangeData(New unvell.ReoGrid.RangePosition(item.Split("!")(1)))
 #End If
-                        If data.GetLength(0) > 1 Then
-                            Dim j As Integer = 0
-                            For j = 0 To data.GetLength(0) - 1
-                                Dim d As Double = 0.0
-                                Double.TryParse(data(j, 0).ToString, d)
-                                xlist.Add(d)
-                            Next
-                        ElseIf data.GetLength(1) > 1 Then
-                            Dim j As Integer = 0
-                            For j = 0 To data.GetLength(1) - 1
-                                Dim d As Double = 0.0
-                                Double.TryParse(data(0, j).ToString, d)
-                                xlist.Add(d)
-                            Next
+                            If data.GetLength(0) > 1 Then
+                                Dim j As Integer = 0
+                                For j = 0 To data.GetLength(0) - 1
+                                    Dim d As Double = 0.0
+                                    Double.TryParse(data(j, 0).ToString, d)
+                                    xlist.Add(d)
+                                Next
+                            ElseIf data.GetLength(1) > 1 Then
+                                Dim j As Integer = 0
+                                For j = 0 To data.GetLength(1) - 1
+                                    Dim d As Double = 0.0
+                                    Double.TryParse(data(0, j).ToString, d)
+                                    xlist.Add(d)
+                                Next
+                            End If
+                            xnumbers.Add(xlist)
                         End If
-                        xnumbers.Add(xlist)
                     Next
 
                     For Each item In Chart.SpreadsheetDataSourcesY
                         Dim ylist As New List(Of Double)
                         Dim sheet = Spreadsheet.GetWorksheetByName(item.Split("!")(0))
+                        If Not sheet Is Nothing Then
 #If LINUX Then
                         Dim data As Object(,) = sheet.GetRangeData(New RangePosition(item.Split("!")(1)))
 #Else
-                        Dim data As Object(,) = sheet.GetRangeData(New unvell.ReoGrid.RangePosition(item.Split("!")(1)))
+                            Dim data As Object(,) = sheet.GetRangeData(New unvell.ReoGrid.RangePosition(item.Split("!")(1)))
 #End If
-                        If data.GetLength(0) > 1 Then
-                            Dim j As Integer = 0
-                            For j = 0 To data.GetLength(0) - 1
-                                Dim d As Double = 0.0
-                                Double.TryParse(data(j, 0).ToString, d)
-                                ylist.Add(d)
-                            Next
-                        ElseIf data.GetLength(1) > 1 Then
-                            Dim j As Integer = 0
-                            For j = 0 To data.GetLength(1) - 1
-                                Dim d As Double = 0.0
-                                Double.TryParse(data(0, j).ToString, d)
-                                ylist.Add(d)
-                            Next
+                            If data.GetLength(0) > 1 Then
+                                Dim j As Integer = 0
+                                For j = 0 To data.GetLength(0) - 1
+                                    Dim d As Double = 0.0
+                                    Double.TryParse(data(j, 0).ToString, d)
+                                    ylist.Add(d)
+                                Next
+                            ElseIf data.GetLength(1) > 1 Then
+                                Dim j As Integer = 0
+                                For j = 0 To data.GetLength(1) - 1
+                                    Dim d As Double = 0.0
+                                    Double.TryParse(data(0, j).ToString, d)
+                                    ylist.Add(d)
+                                Next
+                            End If
+                            ynumbers.Add(ylist)
                         End If
-                        ynumbers.Add(ylist)
                     Next
 
                     For i As Integer = 0 To xnumbers.Count - 1
