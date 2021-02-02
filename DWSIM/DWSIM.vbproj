@@ -37,6 +37,10 @@
     </UpgradeBackupLocation>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
     <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -51,10 +55,6 @@
     <ApplicationVersion>0.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -3524,6 +3524,9 @@ erase /S /Q "$(SolutionDir)DistPackages\Linux\*.dat" 2&gt;nul 1&gt;nul 4&gt;nul
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F /D
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\macOS\" /E /Y /F /D
 
+xcopy "$(SolutionDir)\PlatformFiles\Common" "$(TargetDir)"  /E /Y /F /D
+xcopy "$(SolutionDir)\PlatformFiles\Windows" "$(TargetDir)"  /E /Y /F /D
+
 erase /S /Q "$(SolutionDir)DistPackages\Windows\DWSIM.vshost.*" 2&gt;nul 1&gt;nul 4&gt;nul
 erase /S /Q "$(SolutionDir)DistPackages\Windows\*.tmp" 2&gt;nul 1&gt;nul 4&gt;nul
 erase /S /Q "$(SolutionDir)DistPackages\Windows\*.dylib" 2&gt;nul 1&gt;nul 4&gt;nul
@@ -3534,6 +3537,9 @@ erase /S /Q "$(SolutionDir)DistPackages\macOS\*.tmp" 2&gt;nul 1&gt;nul 4&gt;nul
 ) else if "$(PlatformName)"=="x86" (
 
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Windows_32\" /E /Y /F /D
+
+xcopy "$(SolutionDir)\PlatformFiles\Common" "$(TargetDir)"  /E /Y /F /D
+xcopy "$(SolutionDir)\PlatformFiles\Windows32" "$(TargetDir)"  /E /Y /F /D
 
 erase /S /Q "$(SolutionDir)DistPackages\Windows_32\DWSIM.vshost.*" 2&gt;nul 1&gt;nul 4&gt;nul
 erase /S  /Q "$(SolutionDir)DistPackages\Windows_32\*.tmp" 2&gt;nul 1&gt;nul 4&gt;nul
