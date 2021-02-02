@@ -48,7 +48,6 @@ Public Class ObjectEditorForm
                 Dim lastCrp As Control = control
                 While Not control Is Nothing
                     lastCrp = control
-                    controlLoc = PointToScreen(control.Location)
                     controlLoc = control.Parent?.PointToScreen(control.Location)
                     mouseloc = PointToScreen(eventloc)
                     relativeloc = New Drawing.Point(mouseloc.X - controlLoc.X, mouseloc.Y - controlLoc.Y)
@@ -80,7 +79,11 @@ Public Class ObjectEditorForm
     Private Sub DisplayTimer_Elapsed(sender As Object, e As ElapsedEventArgs) Handles DisplayTimer.Elapsed
         If (e.SignalTime - DisplayTime).TotalSeconds >= 10 Then
             Try
-                ToolTipValues.Hide(_currentToolTipControl)
+                If _currentToolTipControl IsNot Nothing Then
+                    ToolTipValues.Hide(_currentToolTipControl)
+                Else
+                    ToolTipValues.RemoveAll()
+                End If
             Catch ex As Exception
             Finally
                 DisplayTimer.Stop()

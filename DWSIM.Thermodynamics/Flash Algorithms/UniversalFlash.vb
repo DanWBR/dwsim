@@ -105,28 +105,28 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     IObj?.Paragraphs.Add("Selected Flash Algorithm: VLE")
                     Dim nl = New NestedLoops
                     nl.FlashSettings = FlashSettings
-                    result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                    result = nl.Flash_PT(Vz, P, T, PP, False, Nothing)
                 Case "VLLE"
                     If Not FlashSettings(FlashSetting.ImmiscibleWaterOption) = True Then
                         IObj?.Paragraphs.Add("Selected Flash Algorithm: VLLE")
                         Dim nl = New NestedLoops3PV3
                         nl.FlashSettings = FlashSettings
-                        result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                        result = nl.Flash_PT(Vz, P, T, PP, False, Nothing)
                     Else
                         IObj?.Paragraphs.Add("Selected Flash Algorithm: VLLE - Immiscible Water")
                         Dim imm As New NestedLoopsImmiscible With {.FlashSettings = FlashSettings}
-                        result = imm.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                        result = imm.Flash_PT(Vz, P, T, PP, False, Nothing)
                     End If
                 Case "SVLE"
                     IObj?.Paragraphs.Add("Selected Flash Algorithm: SVLE")
                     Dim nl As New NestedLoopsSLE
                     nl.FlashSettings = FlashSettings
-                    result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                    result = nl.Flash_PT(Vz, P, T, PP, False, Nothing)
                 Case "SVLLE"
                     IObj?.Paragraphs.Add("Selected Flash Algorithm: SVLLE")
                     Dim nl As New NestedLoopsSVLLE
                     nl.FlashSettings = FlashSettings
-                    result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                    result = nl.Flash_PT(Vz, P, T, PP, False, Nothing)
             End Select
 
             IObj?.Close()

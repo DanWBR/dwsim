@@ -347,7 +347,11 @@ Namespace Reactors
             i = 0
             For Each s As Compound In tms.Phases(0).Compounds.Values
                 t1 = pp.AUX_DELGF_T(298.15, T, s.Name) * s.ConstantProperties.Molar_Weight
-                t2 = Log(s.MoleFraction.GetValueOrDefault())
+                If s.MoleFraction.GetValueOrDefault > 0 Then
+                    t2 = Log(s.MoleFraction.GetValueOrDefault())
+                Else
+                    t2 = Log(1.0E-20)
+                End If
                 t3 = Log(fv(i) * P / P0)
                 gf += s.MoleFraction.GetValueOrDefault() * (t1 + t2 + t3) * 8.314 * T
                 i += 1

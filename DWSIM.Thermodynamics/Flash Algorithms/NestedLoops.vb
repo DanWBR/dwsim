@@ -348,6 +348,11 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 Ki_ant = Ki.Clone
                 Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
 
+                For i = 0 To n
+                    If Ki(i) < 0.0000000001 Then Ki(i) = 0.0000000001
+                    If Ki(i) > 1.0E+20 Then Ki(i) = 1.0E+20
+                Next
+
                 IObj2?.Paragraphs.Add(String.Format("K values where updated. Current values: {0}", Ki.ToMathArrayString))
 
                 Vy_ant = Vy.Clone
