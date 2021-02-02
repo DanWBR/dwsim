@@ -275,7 +275,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             r1 = ConvergeVF(IObj, V, Vz, Vx, Vy, Ki, P, T, PP)
 
-            If r1(6) = True Then
+            If r1(6) = True And Math.Abs(Vmax - Vmin) > 0.01 Then
                 r2 = ConvergeVF2(Vmin, Vmax, V, Vz, Vx, Vy, Ki, P, T, PP)
                 If Math.Abs(r2(4)) < etol Then
                     r1 = r2
@@ -2825,12 +2825,12 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     T = X
                 End If
             Else
-                Dim hres = PerformHeuristicsTest(Vz, 298.15, P, PP)
-                Dim tmp As Object()
+                Dim tmp As Object() = Me.Flash_PV(Vz, P, X, 0.0#, PP, ReuseKi, Ki)
+                T = tmp(4)
+                Dim hres = PerformHeuristicsTest(Vz, T, P, PP)
                 If hres.SolidPhase Then
                     tmp = New NestedLoopsSLE().Flash_PV(Vz, P, X, T, PP, False, Nothing)
                 Else
-                    tmp = Me.Flash_PV(Vz, P, X, 0.0#, PP, ReuseKi, Ki)
                 End If
                 L1 = tmp(0)
                 V = tmp(1)

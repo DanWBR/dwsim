@@ -154,7 +154,7 @@ Final3:
                 y = fx(x_inf)
                 x_inf = x_inf + delta_x
                 y_inf = fx(x_inf)
-            Loop Until y * y_inf < 0 Or x_inf > x_sup
+            Loop Until y * y_inf < 0 Or x_inf >= x_sup
             x_sup = x_inf - delta_x
 
             Dim aaa, bbb, ccc, ddd, eee, min11, min22, faa, fbb, fcc, ppp, qqq, rrr, sss, tol11, xmm As Double
