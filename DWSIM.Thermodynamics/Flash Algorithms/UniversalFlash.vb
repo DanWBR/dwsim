@@ -117,7 +117,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         Dim imm As New NestedLoopsImmiscible With {.FlashSettings = FlashSettings}
                         result = imm.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
                     End If
-                Case "SVLE", "SVLLE"
+                Case "SVLE"
+                    IObj?.Paragraphs.Add("Selected Flash Algorithm: SVLE")
+                    Dim nl As New NestedLoopsSLE
+                    nl.FlashSettings = FlashSettings
+                    result = nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                Case "SVLLE"
                     IObj?.Paragraphs.Add("Selected Flash Algorithm: SVLLE")
                     Dim nl As New NestedLoopsSVLLE
                     nl.FlashSettings = FlashSettings
