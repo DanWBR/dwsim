@@ -151,7 +151,6 @@ Namespace Reactors
 
             Dim penval As Double = ReturnPenaltyValue()
 
-
             Dim fugv(tms.Phases(0).Compounds.Count - 1), fugl(tms.Phases(0).Compounds.Count - 1), prod(x.Length - 1) As Double
 
             fugv = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Vapor)
@@ -208,16 +207,19 @@ Namespace Reactors
                 Next
             Next
 
-            Dim kr As Double
+            Dim kr, ktot, prodtot, f1 As Double
+
+            ktot = 1.0
+            prodtot = 1.0
 
             For i = 0 To Me.Reactions.Count - 1
                 kr = FlowSheet.Reactions(Me.Reactions(i)).EvaluateK(T, pp)
-                If LogErrorFunction Then
-                    f(i) = Math.Log(Math.Abs(prod(i)) / kr) + penval
-                Else
-                    f(i) = prod(i) - kr + penval
-                End If
+                ktot *= kr
+                prodtot *= Math.Abs(prod(i))
+                f(i) = Math.Log(Math.Abs(prod(i)) / kr) + penval ^ 2
             Next
+
+            f1 = Math.Log(prodtot / ktot) ^ 2 + penval ^ 2
 
             Return f
 
@@ -389,6 +391,19 @@ Namespace Reactors
                 End Try
                 Mode = i + 1
             Next
+            If Not Success Then
+                UseIPOPTSolver = Not UseIPOPTSolver
+                For i = 1 To 4
+                    Try
+                        Calculate_Internal(args)
+                        Success = True
+                        Exit For
+                    Catch ex As Exception
+                        Exc = ex
+                    End Try
+                    Mode = i + 1
+                Next
+            End If
             If Not Success Then
                 Mode = 1
                 Throw Exc
@@ -708,8 +723,8 @@ Namespace Reactors
             solver2.MaxIterations = InternalLoopMaximumIterations
             solver2.Tolerance = InternalLoopTolerance
 
-            Dim solver3 As New Simplex
-            solver3.MaxFunEvaluations = InternalLoopMaximumIterations
+            Dim solver3 As New Optimization.NewtonSolver
+            solver3.MaxIterations = InternalLoopMaximumIterations
             solver3.Tolerance = InternalLoopTolerance
 
             ' check equilibrium constants to define objective function form
@@ -787,7 +802,7 @@ Namespace Reactors
                                     newx = solver2.Solve(Function(x1)
                                                              FlowSheet.CheckStatus()
                                                              VariableValues.Add(x1.Clone)
-                                                             result = FunctionValue2N(x1).AbsSqrSumY
+                                                             result = FunctionValue2N(x1).AbsSqrSumY() + ReturnPenaltyValue() ^ 2
                                                              FunctionValues.Add(result)
                                                              Return result
                                                          End Function, Nothing,
@@ -795,23 +810,21 @@ Namespace Reactors
 
                                     FlowSheet.CheckStatus()
 
+                                    newx = VariableValues(FunctionValues.IndexOf(FunctionValues.Min))
+
                                 Else
 
-                                    newx = solver3.ComputeMin(Function(x1)
-                                                                  FlowSheet.CheckStatus()
-                                                                  VariableValues.Add(x1.Clone)
-                                                                  result = FunctionValue2N(x1).AbsSqrSumY
-                                                                  FunctionValues.Add(result)
-                                                                  Return result
-                                                              End Function, variables2.ToArray)
+                                    newx = solver3.Solve(Function(x1)
+                                                             FlowSheet.CheckStatus()
+                                                             VariableValues.Add(x1.Clone)
+                                                             Return FunctionValue2N(x1)
+                                                         End Function, variables.ToArray())
 
                                     FlowSheet.CheckStatus()
 
                                 End If
 
-                                newx = VariableValues(FunctionValues.IndexOf(FunctionValues.Min))
-
-                                errval = FunctionValue2N(newx).AbsSqrSumY
+                                errval = FunctionValue2N(newx).AbsSqrSumY()
 
                                 newx = newx.Select(Function(xi) Scaler.UnScale(xi, MinVal, MaxVal, 0, 100)).ToArray
 
@@ -985,15 +998,17 @@ Namespace Reactors
 
                             IObj2?.Close()
 
-                            Return erfunc ^ 2
+                            Return erfunc
 
                         End Function
 
             If ReactorOperationMode = OperationMode.Adiabatic Then
-                Dim brent As New BrentOpt.BrentMinimize
-                brent.brentoptimize2(200, T * 2 - 200, 0.01, Function(Tx)
-                                                                 Return efunc.Invoke(Tx)
-                                                             End Function)
+                Dim newton As New Optimization.NewtonSolver
+                newton.MaxIterations = 20
+                newton.Tolerance = 0.01
+                newton.Solve(Function(Tx)
+                                 Return New Double() {efunc.Invoke(Tx(0))}
+                             End Function, New Double() {T})
             Else
                 efunc.Invoke(T)
             End If
@@ -1006,7 +1021,7 @@ Namespace Reactors
 
             Me.FinalGibbsEnergy = g1
 
-            If g1 > g0 Then
+            If g1 > g0 And ReactorOperationMode <> OperationMode.Adiabatic Then
 
                 Throw New Exception("Invalid solution (gf > g0)")
 
