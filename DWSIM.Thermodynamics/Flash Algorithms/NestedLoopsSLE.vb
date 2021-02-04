@@ -1241,10 +1241,10 @@ out2:           If (Math.Abs(GL_old - L) < 0.0000005) And (Math.Abs(GV_old - V) 
                     Dim K1(n), K2(n), dKdT(n) As Double
 
                     K1 = PP.DW_CalcKvalue(Vx, Vy, T, P)
-                    K2 = PP.DW_CalcKvalue(Vx, Vy, T + 0.01, P)
+                    K2 = PP.DW_CalcKvalue(Vx, Vy, T + 1, P)
 
                     For i = 0 To n
-                        dKdT(i) = (K2(i) - K1(i)) / 0.01
+                        dKdT(i) = (K2(i) - K1(i))
                     Next
 
                     fval = stmp4 - 1
