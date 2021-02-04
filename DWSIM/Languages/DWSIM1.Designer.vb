@@ -7219,6 +7219,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Possível condição de formação de sólidos encontrada. Se você deseja considerar a presença de sólidos no cálculo de equilíbrio, vá para as configurações de Flash do Pacote de Propriedades e marque a opção correspondente..
+        '''</summary>
+        Friend Shared ReadOnly Property FoundSolidsWarning() As String
+            Get
+                Return ResourceManager.GetString("FoundSolidsWarning", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to FPROPS.
         '''</summary>
         Friend Shared ReadOnly Property FPP() As String

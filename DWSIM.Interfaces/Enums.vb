@@ -277,6 +277,8 @@ Namespace Enums
 
         ImmiscibleWaterOption = 26
 
+        HandleSolidsInDefaultEqCalcMode = 27
+
     End Enum
 
     Public Enum FlashCalculationType

@@ -12290,6 +12290,9 @@ Final3:
                 If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.ImmiscibleWaterOption) Then
                     FlashSettings.Add(Interfaces.Enums.FlashSetting.ImmiscibleWaterOption, False)
                 End If
+                If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.HandleSolidsInDefaultEqCalcMode) Then
+                    FlashSettings.Add(Interfaces.Enums.FlashSetting.HandleSolidsInDefaultEqCalcMode, False)
+                End If
             End If
 
         End Function

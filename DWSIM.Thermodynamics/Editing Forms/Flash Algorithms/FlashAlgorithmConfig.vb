@@ -52,6 +52,8 @@ Public Class FlashAlgorithmConfig
 
         chkImmiscible.Checked = Settings(Interfaces.Enums.FlashSetting.ImmiscibleWaterOption)
 
+        chkHandleSolids.Checked = Settings(Interfaces.Enums.FlashSetting.HandleSolidsInDefaultEqCalcMode)
+
         Select Case Settings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType)
             Case "Default"
                 cbFlashType.SelectedIndex = 0
@@ -116,6 +118,8 @@ Public Class FlashAlgorithmConfig
 
             Settings(Interfaces.Enums.FlashSetting.ImmiscibleWaterOption) = chkImmiscible.Checked
 
+            Settings(Interfaces.Enums.FlashSetting.HandleSolidsInDefaultEqCalcMode) = chkHandleSolids.Checked
+
         Catch ex As Exception
 
             MessageBox.Show("Error parsing input. Some settings may not have been updated.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -130,5 +134,11 @@ Public Class FlashAlgorithmConfig
         Else
             chkImmiscible.Enabled = False
         End If
+        If cbFlashType.SelectedIndex = 0 Then
+            chkHandleSolids.Enabled = True
+        Else
+            chkHandleSolids.Enabled = False
+        End If
     End Sub
+
 End Class

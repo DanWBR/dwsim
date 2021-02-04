@@ -129,6 +129,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             settings(Interfaces.Enums.FlashSetting.ImmiscibleWaterOption) = False
 
+            settings(Interfaces.Enums.FlashSetting.HandleSolidsInDefaultEqCalcMode) = False
+
             Return settings
 
         End Function
@@ -1383,15 +1385,15 @@ will converge to this solution.")
             Dim names = pp.RET_VNAMES().Select(Function(x) x.ToLower()).ToList()
             Dim props = pp.DW_GetConstantProperties()
 
-            If T = 0 Then T = 298.15
-            If P = 0 Then P = 101325
+            If T = 0.0 Then T = 298.15
+            If P = 0.0 Then P = 101325
 
             'solids check
 
             Dim Tf = pp.RET_VTF
 
             For i = 0 To n - 1
-                If Tf(i) > T And Tf(i) > 1 And Vz(i) > 0.001 Then
+                If Tf(i) > T And Tf(i) > 1.0 And Vz(i) > 0.1 Then
                     hres.SolidPhase = True
                     hres.SolidFraction += Vz(i)
                 End If
@@ -1413,9 +1415,6 @@ will converge to this solution.")
                 Return hres
 
             End If
-
-            'check activity coefficients
-            'Dim act = pp.DW_CalcFugCoeff(Vz, T, P, State.Liquid).MultiplyConstY(P).DivideY(pp.RET_VPVAP(T))
 
             'liquid phase split check
 
@@ -1473,6 +1472,15 @@ will converge to this solution.")
                 End If
             End If
 
+            Dim FlashType As String = FlashSettings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType)
+            Dim HandleSolids As Boolean = FlashSettings(Interfaces.Enums.FlashSetting.HandleSolidsInDefaultEqCalcMode)
+
+            If FlashType = "Default" And hres.SolidPhase And Not HandleSolids Then
+                pp.Flowsheet.ShowMessage(pp.Flowsheet.GetTranslatedString("FoundSolidsWarning"), Interfaces.IFlowsheet.MessageType.Warning)
+                hres.SolidPhase = False
+                hres.SolidFraction = 0.0
+            End If
+
             Return hres
 
         End Function
@@ -1524,6 +1532,9 @@ will converge to this solution.")
                 End If
                 If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.ImmiscibleWaterOption) Then
                     FlashSettings.Add(Interfaces.Enums.FlashSetting.ImmiscibleWaterOption, False)
+                End If
+                If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.HandleSolidsInDefaultEqCalcMode) Then
+                    FlashSettings.Add(Interfaces.Enums.FlashSetting.HandleSolidsInDefaultEqCalcMode, False)
                 End If
             End If
 

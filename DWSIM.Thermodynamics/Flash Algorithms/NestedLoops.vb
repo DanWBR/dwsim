@@ -531,9 +531,16 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             IObj?.SetCurrent()
 
-            Dim hres = PerformHeuristicsTest(Vz, Tref, P, PP)
+            Dim FlashType As String = FlashSettings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType)
+            Dim hassolids As Boolean = False
 
-            If Me.FlashSettings(Interfaces.Enums.FlashSetting.NL_FastMode) = False Or PP.AUX_IS_SINGLECOMP(Phase.Mixture) Then
+            If FlashType = "Default" Or FlashType = "SVLE" Or FlashType = "SVLLE" Then
+                Dim hres = PerformHeuristicsTest(Vz, Tref, P, PP)
+                hassolids = hres.SolidPhase
+            End If
+
+            If Me.FlashSettings(Interfaces.Enums.FlashSetting.NL_FastMode) = False Or
+                PP.AUX_IS_SINGLECOMP(Phase.Mixture) Or hassolids Then
                 IObj?.Paragraphs.Add("Using the normal version of the PS Flash Algorithm.")
                 IObj?.Close()
                 Return Flash_PS_2(Vz, P, S, Tref, PP, ReuseKI, PrevKi)
@@ -2907,10 +2914,6 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                                              Return errfunc ^ 2
 
                                          End Function, New Double() {Tref}, 5)
-
-            'If errfunc > 0.01 Then
-            '    Throw New Exception(Calculator.GetLocalString("PVF Flash: failed to calculate the equilibrium temperature."))
-            'End If
 
             T = result(0)
 

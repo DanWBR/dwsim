@@ -95,6 +95,71 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         End Property
 
         Public Overrides Function Flash_PT(ByVal Vz As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
+
+            etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance).ToDoubleFromInvariant
+            maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_External_Iterations)
+            itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance).ToDoubleFromInvariant
+            maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
+
+            n = Vz.Length - 1
+
+            proppack = PP
+
+            ReDim Vn(n), Vx(n), Vy(n), Vx_ant(n), Vy_ant(n), Vp(n), Ki(n), fi(n)
+
+            Dim result As Object = Nothing
+
+            If prevres IsNot Nothing AndAlso prevres.L2 = 0.0 Then
+
+                V = prevres.V
+                L = prevres.L1
+                Vy = prevres.Vy
+                Vx = prevres.Vx1
+
+            Else
+
+                If prevres IsNot Nothing Then
+
+                    'jump to 3pflash
+
+                    result = Flash_PT_3P(Vz, prevres.V, prevres.L1, prevres.L2, prevres.Vy, prevres.Vx1, prevres.Vx2, P, T, PP)
+
+                Else
+
+                    result = _nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+
+                    L = result(0)
+                    V = result(1)
+                    Vx = result(2)
+                    Vy = result(3)
+
+                    If L > 0.0 Then
+
+                        Dim lps = GetPhaseSplitEstimates(T, P, L, Vx, PP)
+
+                        L1 = lps(0)
+                        Vx1 = lps(1)
+                        L2 = lps(2)
+                        Vx2 = lps(3)
+
+                        If L2 > 0.0 Then
+
+                            result = Flash_PT_3P(Vz, V, L1, L2, Vy, Vx1, Vx2, P, T, PP)
+
+                        End If
+
+                    End If
+
+                End If
+
+            End If
+
+            Return result
+
+        End Function
+
+        Public Function Flash_PT_New(ByVal Vz As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
+
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
             Inspector.Host.CheckAndAdd(IObj, "", "Flash_PT", Name & " (PT Flash)", "Pressure-Temperature Flash Algorithm Routine", True)
@@ -123,9 +188,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             n = Vz.Length - 1
 
             proppack = PP
+
             '============================================================
             '= estimate liquid compositions assuming liquid phases only =
             '============================================================
+
             IObj?.Paragraphs.Add(String.Format("<hr><b>1. Run LLE-Flash</b>"))
             d1 = Now
             Dim slle As New SimpleLLE()
@@ -1367,7 +1434,7 @@ out:
             IObj?.SetCurrent
             Dim lps As Object = GetPhaseSplitEstimates(T, P, result(0), result(2), PP)
 
-            If lps(2) > 0 Then
+            If lps(2) > 0.05 Then
 
                 If Not prevres Is Nothing Then
 
@@ -1557,10 +1624,13 @@ out:
                     e2 = e2 + Math.Abs(Vy(i) - Vyant(i))
                     i = i + 1
                 Loop Until i = n + 1
+
                 e3 = Math.Abs(T - Tant) + Math.Abs(L1 - L1ant) + Math.Abs(L2 - L2ant)
 
                 ecount += 1
+
                 If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt"))
+
             Loop Until (e1 + e2 + e3 + e4) < etol
 
 out:        L1 = L1 * (1 - V) 'calculate global phase fractions

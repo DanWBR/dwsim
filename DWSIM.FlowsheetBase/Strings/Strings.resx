@@ -5369,4 +5369,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="AdditionalProperties" xml:space="preserve">
     <value>Additional Properties</value>
   </data>
+  <data name="FoundSolidsWarning" xml:space="preserve">
+    <value>Solids precipitation may occur at the current conditions. If you want to consider the presence of solids in the equilibrium calculation, go to the Property Package Flash settings and check the corresponding option.</value>
+  </data>
 </root>

@@ -5670,4 +5670,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="AdditionalProperties" xml:space="preserve">
     <value>Propriedades Adicionais</value>
   </data>
+  <data name="FoundSolidsWarning" xml:space="preserve">
+    <value>Possível condição de formação de sólidos encontrada. Se você deseja considerar a presença de sólidos no cálculo de equilíbrio, vá para as configurações de Flash do Pacote de Propriedades e marque a opção correspondente.</value>
+  </data>
 </root>
