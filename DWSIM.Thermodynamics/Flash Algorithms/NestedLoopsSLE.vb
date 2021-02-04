@@ -1324,10 +1324,10 @@ out2:           If (Math.Abs(GL_old - L) < 0.0000005) And (Math.Abs(GV_old - V) 
                             Dim K1(n), K2(n), dKdT(n) As Double
 
                             K1 = PP.DW_CalcKvalue(Vx, Vy, T, P)
-                            K2 = PP.DW_CalcKvalue(Vx, Vy, T + 0.1, P)
+                            K2 = PP.DW_CalcKvalue(Vx, Vy, T + 0.01, P)
 
                             For i = 0 To n
-                                dKdT(i) = (K2(i) - K1(i)) / (0.1)
+                                dKdT(i) = (K2(i) - K1(i)) / (0.01)
                             Next
 
                             i = 0
@@ -1349,10 +1349,10 @@ out2:           If (Math.Abs(GL_old - L) < 0.0000005) And (Math.Abs(GV_old - V) 
                             Dim K1(n), K2(n), dKdT(n) As Double
 
                             K1 = PP.DW_CalcKvalue(Vx, Vy, T, P)
-                            K2 = PP.DW_CalcKvalue(Vx, Vy, T + 1, P)
+                            K2 = PP.DW_CalcKvalue(Vx, Vy, T + 0.01, P)
 
                             For i = 0 To n
-                                dKdT(i) = (K2(i) - K1(i)) / (1)
+                                dKdT(i) = (K2(i) - K1(i)) / (0.01)
                             Next
 
                             i = 0
@@ -1369,13 +1369,10 @@ out2:           If (Math.Abs(GL_old - L) < 0.0000005) And (Math.Abs(GV_old - V) 
                         fval = stmp4 - 1
 
                         Tant = T
-                        deltaT = -fval / dFdT * AF
-                        AF *= 1.01
-                        If Abs(deltaT) > 0.1 * T Then
-                            T = T + Sign(deltaT) * 0.1 * T
-                        Else
-                            T = T + deltaT
-                        End If
+
+                        deltaT = -fval / dFdT
+
+                        T = T + deltaT
 
                         e1 = Vx.SubtractY(Vx_ant).AbsSumY + Vy.SubtractY(Vy_ant).AbsSumY + Math.Abs(T - Tant)
 

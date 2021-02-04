@@ -117,12 +117,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         Dim imm As New NestedLoopsImmiscible With {.FlashSettings = FlashSettings}
                         result = imm.Flash_PT(Vz, P, T, PP, False, Nothing)
                     End If
-                Case "SVLE"
-                    IObj?.Paragraphs.Add("Selected Flash Algorithm: SVLE")
-                    Dim nl As New NestedLoopsSLE
-                    nl.FlashSettings = FlashSettings
-                    result = nl.Flash_PT(Vz, P, T, PP, False, Nothing)
-                Case "SVLLE"
+                'Case "SVLE"
+                '    IObj?.Paragraphs.Add("Selected Flash Algorithm: SVLE")
+                '    Dim nl As New NestedLoopsSLE
+                '    nl.FlashSettings = FlashSettings
+                '    result = nl.Flash_PT(Vz, P, T, PP, False, Nothing)
+                Case "SVLE", "SVLLE"
                     IObj?.Paragraphs.Add("Selected Flash Algorithm: SVLLE")
                     Dim nl As New NestedLoopsSVLLE
                     nl.FlashSettings = FlashSettings
@@ -181,12 +181,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Dim nl = New NestedLoops
                     nl.FlashSettings = FlashSettings
                     nl.PTFlashFunction = AddressOf Flash_PT
-                    result = nl.Flash_PH(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
+                    result = nl.Flash_PH(Vz, P, H, Tref, PP, False, Nothing)
                 Case "VLLE"
                     IObj?.Paragraphs.Add("Selected Flash Algorithm: VLLE")
                     Dim nl = New NestedLoops3PV3
                     nl.FlashSettings = FlashSettings
-                    result = nl.Flash_PH(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
+                    result = nl.Flash_PH(Vz, P, H, Tref, PP, False, Nothing)
             End Select
 
             IObj?.Close()
@@ -241,13 +241,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Dim nl = New NestedLoops
                     nl.FlashSettings = FlashSettings
                     nl.PTFlashFunction = AddressOf Flash_PT
-                    result = nl.Flash_PS(Vz, P, S, Tref, PP, ReuseKI, PrevKi)
-
+                    result = nl.Flash_PS(Vz, P, S, Tref, PP, False, Nothing)
                 Case "VLLE"
                     IObj?.Paragraphs.Add("Selected Flash Algorithm: VLLE")
                     Dim nl = New NestedLoops3PV3
                     nl.FlashSettings = FlashSettings
-                    result = nl.Flash_PS(Vz, P, S, Tref, PP, ReuseKI, PrevKi)
+                    result = nl.Flash_PS(Vz, P, S, Tref, PP, False, Nothing)
             End Select
 
             IObj?.Close()

@@ -275,12 +275,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             r1 = ConvergeVF(IObj, V, Vz, Vx, Vy, Ki, P, T, PP)
 
-            If r1(6) = True And Math.Abs(Vmax - Vmin) > 0.01 Then
-                r2 = ConvergeVF2(Vmin, Vmax, V, Vz, Vx, Vy, Ki, P, T, PP)
-                If Math.Abs(r2(4)) < etol Then
-                    r1 = r2
-                End If
-            End If
+            'If r1(6) = True And Math.Abs(Vmax - Vmin) > 0.01 Then
+            '    r2 = ConvergeVF2(Vmin, Vmax, V, Vz, Vx, Vy, Ki, P, T, PP)
+            '    If Math.Abs(r2(4)) < etol Then
+            '        r1 = r2
+            '    End If
+            'End If
 
             V = r1(0)
             L = 1 - V
