@@ -1475,8 +1475,8 @@ will converge to this solution.")
             Dim FlashType As String = FlashSettings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType)
             Dim HandleSolids As Boolean = FlashSettings(Interfaces.Enums.FlashSetting.HandleSolidsInDefaultEqCalcMode)
 
-            If FlashType = "Default" And hres.SolidPhase And Not HandleSolids Then
-                pp.Flowsheet.ShowMessage(String.Format(pp.Flowsheet.GetTranslatedString("FoundSolidsWarning") + " (P = {0:N2} Pa, T = {1:N2} K)", P, T), Interfaces.IFlowsheet.MessageType.Warning)
+            If FlashType = "Default" And hres.SolidPhase And Not HandleSolids And pp.ForcedSolids.Count = 0 Then
+                'pp.Flowsheet.ShowMessage(String.Format(pp.Flowsheet.GetTranslatedString("FoundSolidsWarning") + " (P = {0:N2} Pa, T = {1:N2} K)", P, T), Interfaces.IFlowsheet.MessageType.Warning)
                 hres.SolidPhase = False
                 hres.SolidFraction = 0.0
             End If

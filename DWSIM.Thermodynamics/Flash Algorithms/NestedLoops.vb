@@ -2118,28 +2118,13 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
         Public Overrides Function Flash_PV(ByVal Vz As Double(), ByVal P As Double, ByVal V As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
             Dim eflag As Boolean = True
-            Dim result As Object = Nothing
+            Dim result As Object() = Nothing
 
-            Try
-                result = Flash_PV_1(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
-                eflag = False
-            Catch ex As Exception
-            End Try
+            result = Flash_PV_1(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
+            If result.Count = 1 Then result = Flash_PV_2(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
+            If result.Count = 1 Then result = Flash_PV_3(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
 
-            If eflag Then
-                Try
-                    result = Flash_PV_2(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
-                    eflag = False
-                Catch ex As Exception
-                End Try
-                If eflag Then
-                    Return Flash_PV_3(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
-                Else
-                    Return result
-                End If
-            Else
-                Return result
-            End If
+            Return result
 
         End Function
 
@@ -2434,6 +2419,11 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     IObj2?.Close()
 
+                    If T < 0 Then
+                        IObj?.Close()
+                        Return New Object() {-1}
+                    End If
+
                 Loop Until Math.Abs(fval) < etol Or Double.IsNaN(T) = True Or ecount > maxit_e
 
             Else
@@ -2554,6 +2544,11 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     IObj2?.Close()
 
+                    If T < 0 Then
+                        IObj?.Close()
+                        Return New Object() {-1}
+                    End If
+
                 Loop Until (Math.Abs(fval) < etol And e1 < etol) Or Double.IsNaN(T) = True Or ecount > maxit_e
 
             End If
@@ -2562,13 +2557,14 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             dt = d2 - d1
 
-            If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PVF Flash: maximum iterations reached.") & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))
+            If ecount > maxit_e Then
+                IObj?.Close()
+                Return New Object() {-1}
+            End If
 
             If PP.AUX_CheckTrivial(Ki) Then
-                Dim ex As New Exception("PVF Flash [NL]: Invalid result: converged to the trivial solution (T = " & T & " ).")
-                ex.Data.Add("DetailedDescription", "The Flash Algorithm was unable to converge to a solution.")
-                ex.Data.Add("UserAction", "Try another Property Package and/or Flash Algorithm.")
-                Throw ex
+                IObj?.Close()
+                Return New Object() {-1}
             End If
 
             WriteDebugInfo("PV Flash [NL]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
@@ -2764,19 +2760,22 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                 If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
+                If T <= 1 Then
+                    Return New Object() {-1}
+                End If
+
             Loop Until Math.Abs(T - Tant) < etol Or Double.IsNaN(T) = True Or ecount > maxit_e
 
             d2 = Date.Now
 
             dt = d2 - d1
 
-            If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PVF Flash: maximum iterations reached.") & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))
+            If ecount > maxit_e Then
+                Return New Object() {-1}
+            End If
 
             If PP.AUX_CheckTrivial(Ki) Then
-                Dim ex As New Exception("PVF Flash [NL]: Invalid result: converged to the trivial solution (T = " & T & " ).")
-                ex.Data.Add("DetailedDescription", "The Flash Algorithm was unable to converge to a solution.")
-                ex.Data.Add("UserAction", "Try another Property Package and/or Flash Algorithm.")
-                Throw ex
+                Return New Object() {-1}
             End If
 
             WriteDebugInfo("PV Flash [NL]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")

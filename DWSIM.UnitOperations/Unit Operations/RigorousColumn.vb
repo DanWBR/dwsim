@@ -2793,7 +2793,11 @@ Namespace UnitOperations
                                 T1 = fcalc.CalculatedTemperature
                                 distVy = distVx.MultiplyY(fcalc.Kvalues.Select(Function(k) Convert.ToDouble(IIf(Double.IsNaN(k), 0.0, k))).ToArray()).NormalizeY()
                             Else
-                                T1 = pp.DW_CalcBubT(zm, P(0), MathEx.Common.Min(FT))(4) '* 1.01
+                                If Specs("C").SType = ColumnSpec.SpecType.Temperature Then
+                                    T1 = Specs("C").SpecValue.ConvertToSI(Specs("C").SpecUnit)
+                                Else
+                                    T1 = pp.DW_CalcBubT(zm, P(0), FT.MinY_NonZero())(4) '* 1.01
+                                End If
                             End If
                         Catch ex As Exception
                             T1 = FT.Where(Function(t_) t_ > 0.0).Min
@@ -2809,7 +2813,11 @@ Namespace UnitOperations
                                 T2 = fcalc.CalculatedTemperature
                                 rebVy = rebVx.MultiplyY(fcalc.Kvalues.Select(Function(k) Convert.ToDouble(IIf(Double.IsNaN(k), 0.0, k))).ToArray()).NormalizeY()
                             Else
-                                T2 = pp.DW_CalcDewT(zm, P(ns), MathEx.Common.Max(FT))(4) '* 0.99
+                                If Specs("R").SType = ColumnSpec.SpecType.Temperature Then
+                                    T2 = Specs("R").SpecValue.ConvertToSI(Specs("R").SpecUnit)
+                                Else
+                                    T2 = pp.DW_CalcDewT(zm, P(ns), FT.Max)(4) '* 0.99
+                                End If
                             End If
                         Catch ex As Exception
                             T2 = FT.Where(Function(t_) t_ > 0.0).Max
