@@ -6648,7 +6648,7 @@ Final3:
 
             Return MathNet.Numerics.RootFinding.Brent.FindRoot(Function(T)
                                                                    Return AUX_PVAPi(comp, T) - PVAP
-                                                               End Function, 1, Tguess * 2.0)
+                                                               End Function, 1.0, 2000.0)
 
         End Function
 
