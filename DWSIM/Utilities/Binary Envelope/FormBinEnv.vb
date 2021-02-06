@@ -644,6 +644,7 @@ Public Class FormBinEnv
 
                     .AxisChange(Me.CreateGraphics)
                     Me.GraphControl.Invalidate()
+
                 End With
 
             ElseIf Me.RadioButton2.Checked Then
@@ -768,6 +769,9 @@ Public Class FormBinEnv
 
                     Me.GraphControl.GraphPane.XAxis.Scale.Min = ConvertMolToDisplay(MinX)
                     Me.GraphControl.GraphPane.XAxis.Scale.Max = ConvertMolToDisplay(MaxX)
+
+                    Me.GraphControl.GraphPane.YAxis.Scale.MinAuto = True
+                    Me.GraphControl.GraphPane.YAxis.Scale.MaxAuto = True
 
                     .AxisChange(Me.CreateGraphics)
                     Me.GraphControl.Invalidate()

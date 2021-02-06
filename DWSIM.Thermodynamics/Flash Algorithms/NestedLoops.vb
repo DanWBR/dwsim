@@ -2121,8 +2121,12 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             Dim result As Object() = Nothing
 
             result = Flash_PV_1(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
-            If result.Count = 1 Then result = Flash_PV_2(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
-            If result.Count = 1 Then result = Flash_PV_3(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
+            If result.Count = 1 Then
+                result = Flash_PV_2(Vz, P, V, Tref, PP, False, Nothing)
+            End If
+            If result.Count = 1 Then
+                result = Flash_PV_3(Vz, P, V, Tref, PP, False, Nothing)
+            End If
 
             Return result
 
@@ -2661,6 +2665,14 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             key = keys.OrderBy(Function(k) Math.Abs(Vtb(k) - 300.0)).First()
 
+            key = 0
+
+            For i = 0 To n
+                If Vz(i) > 0.001 And Vtb(i) < Vtb(key) Then
+                    key = i
+                End If
+            Next
+
             PsatKey = Vp(key)
 
             i = 0
@@ -2875,9 +2887,11 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             Dim splx As New Simplex
             splx.MaxFunEvaluations = 1000
-            splx.Tolerance = 0.01
+            splx.Tolerance = 0.00001
 
             Dim errfunc As Double = 0.0
+
+            Dim var As New OptSimplexBoundVariable(Tref, 10, 2000)
 
             Dim result = splx.ComputeMin(Function(Tx)
 
@@ -2910,7 +2924,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                                              Return errfunc ^ 2
 
-                                         End Function, New Double() {Tref}, 5)
+                                         End Function, {var}, 5)
 
             T = result(0)
 

@@ -48,6 +48,24 @@ Public Module SIMDExtenders
     End Function
 
     ''' <summary>
+    ''' Computes the absolute value of each vector element.
+    ''' </summary>
+    ''' <param name="vector"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <System.Runtime.CompilerServices.Extension()> Public Function AbsY(vector As Double()) As Double()
+
+        Dim vector2(vector.Length - 1) As Double
+
+        For i As Integer = 0 To vector.Length - 1
+            vector2(i) = Math.Abs(vector(i))
+        Next
+
+        Return vector2
+
+    End Function
+
+    ''' <summary>
     ''' Returns the smallest element in the vector.
     ''' </summary>
     ''' <param name="vector"></param>
