@@ -3317,7 +3317,9 @@ Label_00CC:
     Private Sub VerToolStripMenuItem_DropDownOpened(sender As Object, e As EventArgs) Handles VerToolStripMenuItem.DropDownOpened
 
         If Me.ActiveMdiChild IsNot Nothing Then
-            If TypeOf Me.ActiveMdiChild Is FormFlowsheet Then DirectCast(Me.ActiveMdiChild, FormFlowsheet).UpdateToolstripItemVisibility()
+            If TypeOf Me.ActiveMdiChild Is FormFlowsheet Then
+                DirectCast(Me.ActiveMdiChild, FormFlowsheet).UpdateToolstripItemVisibility()
+            End If
         End If
 
     End Sub

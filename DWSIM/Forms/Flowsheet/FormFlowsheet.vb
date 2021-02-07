@@ -1020,11 +1020,19 @@ Public Class FormFlowsheet
 
         tsmiCut.Enabled = isenabled
         tsmiCopy.Enabled = isenabled
-        tsmiPaste.Enabled = isenabled
         tsmiCloneSelected.Enabled = isenabled
         tsmiExportData.Enabled = isenabled
         tsmiRemoveSelected.Enabled = isenabled
         tsmiRecalc.Enabled = isenabled
+
+        'check if the clipboard contains flowsheet objects
+        Try
+            Dim xdoc As XDocument = XDocument.Parse(Clipboard.GetText())
+            Dim data As List(Of XElement) = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects").Elements.ToList
+            tsmiPaste.Enabled = True
+        Catch ex As Exception
+            tsmiPaste.Enabled = False
+        End Try
 
     End Sub
 
@@ -1270,7 +1278,6 @@ Public Class FormFlowsheet
 
         tsmiCut.Enabled = status
         tsmiCopy.Enabled = status
-        tsmiPaste.Enabled = status
         tsmiRecalc.Enabled = status
         tsmiCloneSelected.Enabled = status
         tsmiRemoveSelected.Enabled = status

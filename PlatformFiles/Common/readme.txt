@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 6.4.2
+Version 6.4.3
 Copyright (c) 2017-2021 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,21 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim6/commits/windows
+
+Version 6.4.3
+
+Author              Description
+Daniel Medeiros     Improved stability and reliability of the Distillation/Absorption Column model     
+Daniel/Gregor       Improved stability and reliability of equilibrium calculations
+Daniel Medeiros     Fixed Heat Exchanger Pinch Point calculation mode
+Anders Andreasen    Partial fix for Reid Vapor Pressure calculation
+Alexander Semenyak  Fixed array access in PR78 Property Package
+Alexander Semenyak  Fixed comma separator in non-dot decimal separator cultures
+Jarl Pedersen       Fixed Globalization issue for parsing Pipes.dat file
+Jarl Pedersen       Fixed a bug with Flowsheet Optimization tool (CUI)
+Daniel Medeiros     Fixed CoolProp compound aliases     
+Daniel Medeiros     Fixed bugs in GERG2008 Property Package
+Daniel Medeiros     Refactored PRLK Property Package
 
 Version 6.4.2
 
