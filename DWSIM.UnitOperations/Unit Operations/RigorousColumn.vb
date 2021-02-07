@@ -312,6 +312,11 @@ Namespace UnitOperations.Auxiliary.SepOps
 
         Implements Interfaces.ICustomXMLSerialization
 
+        Public Property VaporProductFlowRate As Double?
+        Public Property DistillateFlowRate As Double?
+        Public Property BottomsFlowRate As Double?
+        Public Property RefluxRatio As Double?
+
         Private _liqcompositions As New List(Of Dictionary(Of String, Parameter))
         Private _vapcompositions As New List(Of Dictionary(Of String, Parameter))
         Private _stagetemps As New List(Of Parameter)
@@ -366,6 +371,8 @@ Namespace UnitOperations.Auxiliary.SepOps
 
         Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
 
+            XMLSerializer.XMLSerializer.Deserialize(Me, data)
+
             For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "LiquidCompositions").SingleOrDefault.Elements.ToList
                 Dim var As New Dictionary(Of String, Parameter)
                 For Each xel2 As XElement In xel.Elements
@@ -408,7 +415,7 @@ Namespace UnitOperations.Auxiliary.SepOps
 
         Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements Interfaces.ICustomXMLSerialization.SaveData
 
-            Dim elements As New List(Of System.Xml.Linq.XElement)
+            Dim elements = XMLSerializer.XMLSerializer.Serialize(Me)
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
 
             With elements
@@ -2545,6 +2552,8 @@ Namespace UnitOperations
                 End If
             End If
 
+            If InitialEstimates.RefluxRatio IsNot Nothing Then rr = InitialEstimates.RefluxRatio
+
             Dim Tref = FT.Where(Function(ti) ti > 0).Average
             Dim Pref = Stages.Select(Function(s) s.P).Average
 
@@ -2667,6 +2676,13 @@ Namespace UnitOperations
                     End If
             End Select
 
+            If InitialEstimates.VaporProductFlowRate IsNot Nothing And UseVaporFlowEstimates Then
+                vaprate = InitialEstimates.VaporProductFlowRate
+            End If
+            If InitialEstimates.DistillateFlowRate IsNot Nothing And UseLiquidFlowEstimates Then
+                distrate = InitialEstimates.DistillateFlowRate
+            End If
+
             Select Case Specs("R").SType
                 Case ColumnSpec.SpecType.Component_Mass_Flow_Rate,
                       ColumnSpec.SpecType.Component_Molar_Flow_Rate,
@@ -2686,6 +2702,13 @@ Namespace UnitOperations
                         vaprate = 0.0
                     End If
             End Select
+
+            If InitialEstimates.VaporProductFlowRate IsNot Nothing And UseVaporFlowEstimates Then
+                vaprate = InitialEstimates.VaporProductFlowRate
+            End If
+            If InitialEstimates.DistillateFlowRate IsNot Nothing And UseLiquidFlowEstimates Then
+                distrate = InitialEstimates.DistillateFlowRate
+            End If
 
             Dim lamount As Double = 0.0
 
@@ -3327,6 +3350,9 @@ Namespace UnitOperations
 
             If Me.AutoUpdateInitialEstimates Then
                 IObj?.Paragraphs.Add("Auto-updating initial estimates...")
+                InitialEstimates.VaporProductFlowRate = Vf(0)
+                InitialEstimates.DistillateFlowRate = LSSf(0)
+                InitialEstimates.BottomsFlowRate = Lf(0)
                 For i = 0 To Me.Stages.Count - 1
                     Me.InitialEstimates.StageTemps(i).Value = Tf(i)
                     Me.InitialEstimates.VapMolarFlows(i).Value = Vf(i)
@@ -4268,7 +4294,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                        Try
                                            result = Solve_Internal(rc, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval,
                                                 x, y, z, fc, HF, T, P, condt, stopatitnumber, eff,
-                                                coltype, pp, newspecs, IdealK, IdealH, True, flashalgs)
+                                                coltype, pp, newspecs, IdealK, IdealH, 0, flashalgs)
                                            altmode = False
                                        Catch ex As Exception
                                            altmode = True
@@ -4277,7 +4303,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                        If altmode Then
                                            result = Solve_Internal(rc, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval,
                                            x, y, z, fc, HF, T, P, condt, stopatitnumber, eff,
-                                           coltype, pp, newspecs, IdealK, IdealH, False, flashalgs)
+                                           coltype, pp, newspecs, IdealK, IdealH, 1, flashalgs)
                                        End If
 
                                        'Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ic, t_error}
@@ -4358,7 +4384,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                                        Return errfunc
 
-                                   End Function, vars.ToArray(), 1)
+                                   End Function, vars.ToArray())
 
                 If Double.IsNaN(errfunc) Or errfunc > tol(1) Then Throw New Exception(pp.Flowsheet?.GetTranslatedString("DCGeneralError"))
 
@@ -4428,7 +4454,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                        Try
                                            result = Solve_Internal(rc, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval,
                                                                            x, y, z, fc, HF, T, P, condt, stopatitnumber, eff,
-                                                                           coltype, pp, newspecs, IdealK, IdealH, True, flashalgs)
+                                                                           coltype, pp, newspecs, IdealK, IdealH, 0, flashalgs)
                                            altmode = False
                                        Catch ex As Exception
                                            altmode = True
@@ -4437,7 +4463,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                        If altmode Then
                                            result = Solve_Internal(rc, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval,
                                                                       x, y, z, fc, HF, T, P, condt, stopatitnumber, eff,
-                                                                      coltype, pp, newspecs, IdealK, IdealH, False, flashalgs)
+                                                                      coltype, pp, newspecs, IdealK, IdealH, 1, flashalgs)
                                        End If
 
                                        'Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ic, t_error}
@@ -4493,7 +4519,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                                        Return errfunc
 
-                                   End Function, vars.ToArray(), 0.1 * bottomsrate)
+                                   End Function, vars.ToArray(), 0.01 * bottomsrate)
 
                 If Double.IsNaN(errfunc) Or errfunc > tol(1) Then Throw New Exception(pp.Flowsheet?.GetTranslatedString("DCGeneralError"))
 
@@ -4964,7 +4990,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 Dim af As Double = 1.0
 
-                If Mode = 0 Or Mode = 2 Or ic = 0 Then
+                If Mode = 0 Or ic = 0 Then
 
                     If doparallel Then
 
@@ -4976,13 +5002,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                                                              Tj(ipar) = tmpvar(4)
                                                                              Kant(ipar) = K(ipar)
                                                                              K(ipar) = tmpvar(6)
-                                                                         Else
-                                                                             Tj(ipar) = 0.0
-                                                                             For jpar As Integer = 0 To nc - 1
-                                                                                 Tj(ipar) += xc(ipar)(jpar) * pp.AUX_TSATi(P(ipar), jpar)
-                                                                             Next
-                                                                             Kant(ipar) = K(ipar)
-                                                                             K(ipar) = pp.DW_CalcKvalue_Ideal_Wilson(Tj(ipar), P(ipar))
                                                                          End If
                                                                          If Tj(ipar) < 0.0 Or Double.IsNaN(Tj(ipar)) Then
                                                                              Tj(ipar) = Tj_ant(ipar)
@@ -5005,13 +5024,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                 Tj(i) = tmp(4)
                                 Kant(i) = K(i)
                                 K(i) = tmp(6)
-                            Else
-                                Tj(i) = 0.0
-                                For j = 0 To nc - 1
-                                    Tj(i) += xc(i)(j) * pp.AUX_TSATi(P(i), j)
-                                Next
-                                Kant(i) = K(i)
-                                K(i) = pp.DW_CalcKvalue_Ideal_Wilson(Tj(i), P(i))
                             End If
                             If Tj(i) < 0.0 Or Double.IsNaN(Tj(i)) Then
                                 Tj(i) = Tj_ant(i)
