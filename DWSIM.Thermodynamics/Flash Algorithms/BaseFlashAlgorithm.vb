@@ -1393,7 +1393,7 @@ will converge to this solution.")
             Dim Tf = pp.RET_VTF
 
             For i = 0 To n - 1
-                If Tf(i) > T And Tf(i) > 1.0 And Vz(i) > 0.0 Then
+                If Tf(i) > T And Tf(i) > 1.0 And Vz(i) > 0.000001 Then
                     hres.SolidPhase = True
                     hres.SolidFraction += Vz(i)
                 End If
