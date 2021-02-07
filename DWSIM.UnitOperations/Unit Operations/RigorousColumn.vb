@@ -2683,6 +2683,17 @@ Namespace UnitOperations
                 distrate = InitialEstimates.DistillateFlowRate
             End If
 
+            If TypeOf Me Is DistillationColumn AndAlso DirectCast(Me, DistillationColumn).ReboiledAbsorber Then
+                distrate = 0.0
+            Else
+                If Me.CondenserType = condtype.Full_Reflux Then
+                    distrate = 0.0
+                ElseIf Me.CondenserType = condtype.Partial_Condenser Then
+                Else
+                    vaprate = 0.0
+                End If
+            End If
+
             Select Case Specs("R").SType
                 Case ColumnSpec.SpecType.Component_Mass_Flow_Rate,
                       ColumnSpec.SpecType.Component_Molar_Flow_Rate,
@@ -2708,6 +2719,17 @@ Namespace UnitOperations
             End If
             If InitialEstimates.DistillateFlowRate IsNot Nothing And UseLiquidFlowEstimates Then
                 distrate = InitialEstimates.DistillateFlowRate
+            End If
+
+            If TypeOf Me Is DistillationColumn AndAlso DirectCast(Me, DistillationColumn).ReboiledAbsorber Then
+                distrate = 0.0
+            Else
+                If Me.CondenserType = condtype.Full_Reflux Then
+                    distrate = 0.0
+                ElseIf Me.CondenserType = condtype.Partial_Condenser Then
+                Else
+                    vaprate = 0.0
+                End If
             End If
 
             Dim lamount As Double = 0.0
@@ -4400,7 +4422,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 Dim newspecs As New Dictionary(Of String, ColumnSpec)
                 Dim rspec As New ColumnSpec()
-                rspec.SpecValue = F.Sum / 10
+                rspec.SpecValue = bottomsrate
                 rspec.SType = ColumnSpec.SpecType.Product_Molar_Flow_Rate
                 newspecs.Add("C", specs("C"))
                 newspecs.Add("R", rspec)

@@ -2373,6 +2373,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     fval_ant = fval
                     fval = stmp4 - 1
 
+                    If Math.Abs(fval) < etol Then Exit Do
+
                     ecount += 1
 
                     i = 0
@@ -2389,6 +2391,10 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     Tant = T
                     deltaT_ant = deltaT
                     deltaT = -df * fval / dFdT
+
+                    If Math.Abs(deltaT) > T * 0.1 Then
+                        deltaT = Math.Sign(deltaT) * 10.0
+                    End If
 
                     IObj2?.Paragraphs.Add(String.Format("Temperature error: {0} K", deltaT))
 
@@ -2428,7 +2434,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                         Return New Object() {-1}
                     End If
 
-                Loop Until Math.Abs(fval) < etol Or Double.IsNaN(T) = True Or ecount > maxit_e
+                Loop Until Double.IsNaN(T) = True Or ecount > maxit_e
 
             Else
 
@@ -2887,7 +2893,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             Dim splx As New Simplex
             splx.MaxFunEvaluations = 1000
-            splx.Tolerance = 0.00001
+            splx.Tolerance = 0.00000001
 
             Dim errfunc As Double = 0.0
 
@@ -2924,7 +2930,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                                              Return errfunc ^ 2
 
-                                         End Function, {var}, 5)
+                                         End Function, {var})
 
             T = result(0)
 
