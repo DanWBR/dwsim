@@ -4541,7 +4541,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                                        Return errfunc
 
-                                   End Function, vars.ToArray(), 0.01 * bottomsrate)
+                                   End Function, vars.ToArray())
 
                 If Double.IsNaN(errfunc) Or errfunc > tol(1) Then Throw New Exception(pp.Flowsheet?.GetTranslatedString("DCGeneralError"))
 
