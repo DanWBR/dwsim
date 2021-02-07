@@ -79,7 +79,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Dim hres = PerformHeuristicsTest(Vz, T, P, PP)
 
                 'chech possible phases to decide on suitable flash algorithm
-                If hres.SolidPhase Or PP.ForcedSolids.Count > 0 Then
+                If PP.ForcedSolids.Count > 0 Then
+                    Flashtype = "SVLLE"
+                    IObj?.Paragraphs.Add("Heuristics Result: Solid + Liquid Phase Split")
+                ElseIf hres.SolidPhase Then
                     If hres.LiquidPhaseSplit Then
                         Flashtype = "SVLLE"
                         IObj?.Paragraphs.Add("Heuristics Result: Solid + Liquid Phase Split")
@@ -154,7 +157,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Dim hres = PerformHeuristicsTest(Vz, Tref, P, PP)
 
                 'chech possible phases to decide on suitable flash algorithm
-                If hres.SolidPhase Or PP.ForcedSolids.Count > 0 Then
+                If PP.ForcedSolids.Count > 0 Then
+                    Flashtype = "SVLLE"
+                    IObj?.Paragraphs.Add("Heuristics Result: Solid + Liquid Phase Split")
+                ElseIf hres.SolidPhase Then
                     If hres.LiquidPhaseSplit Then
                         Flashtype = "SVLLE"
                         IObj?.Paragraphs.Add("Heuristics Result: Solid + Liquid Phase Split")

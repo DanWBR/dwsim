@@ -493,15 +493,17 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             IObj?.SetCurrent()
 
             Dim FlashType As String = FlashSettings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType)
-            Dim hassolids As Boolean = False
+            Dim trigger As Boolean = False
 
             If FlashType = "Default" Or FlashType = "SVLE" Or FlashType = "SVLLE" Then
                 Dim hres = PerformHeuristicsTest(Vz, Tref, P, PP)
-                hassolids = hres.SolidPhase
+                trigger = hres.SolidPhase
             End If
 
+            If PP.ForcedSolids.Count > 0 Then trigger = False
+
             If Me.FlashSettings(Interfaces.Enums.FlashSetting.NL_FastMode) = False Or
-                PP.AUX_IS_SINGLECOMP(Phase.Mixture) Or hassolids Then
+                PP.AUX_IS_SINGLECOMP(Phase.Mixture) Or trigger Then
 
                 IObj?.Paragraphs.Add("Using the normal version of the PH Flash Algorithm.")
                 IObj?.Close()
@@ -530,15 +532,17 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             IObj?.SetCurrent()
 
             Dim FlashType As String = FlashSettings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType)
-            Dim hassolids As Boolean = False
+            Dim trigger As Boolean = False
 
             If FlashType = "Default" Or FlashType = "SVLE" Or FlashType = "SVLLE" Then
                 Dim hres = PerformHeuristicsTest(Vz, Tref, P, PP)
-                hassolids = hres.SolidPhase
+                trigger = hres.SolidPhase
             End If
 
+            If PP.ForcedSolids.Count > 0 Then trigger = False
+
             If Me.FlashSettings(Interfaces.Enums.FlashSetting.NL_FastMode) = False Or
-                PP.AUX_IS_SINGLECOMP(Phase.Mixture) Or hassolids Then
+                PP.AUX_IS_SINGLECOMP(Phase.Mixture) Or trigger Then
                 IObj?.Paragraphs.Add("Using the normal version of the PS Flash Algorithm.")
                 IObj?.Close()
                 Return Flash_PS_2(Vz, P, S, Tref, PP, ReuseKI, PrevKi)
@@ -3024,7 +3028,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 Dim tmp As Object() = Me.Flash_PV(Vz, P, X, 0.0#, PP, ReuseKi, Ki)
                 T = tmp(4)
                 Dim hres = PerformHeuristicsTest(Vz, T, P, PP)
-                If hres.SolidPhase Then
+                If hres.SolidPhase And Not PP.ForcedSolids.Count > 0 Then
                     tmp = New NestedLoopsSLE().Flash_PV(Vz, P, X, T, PP, False, Nothing)
                 End If
                 L1 = tmp(0)
@@ -3116,7 +3120,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 Dim tmp = Me.Flash_PV(Vz, P, X, 0.0#, PP, ReuseKi, Ki)
                 T = tmp(4)
                 Dim hres = PerformHeuristicsTest(Vz, T, P, PP)
-                If hres.SolidPhase Then
+                If hres.SolidPhase And Not PP.ForcedSolids.Count > 0 Then
                     tmp = New NestedLoopsSLE().Flash_PV(Vz, P, X, T, PP, ReuseKi, Ki)
                 End If
                 L1 = tmp(0)
