@@ -2672,9 +2672,9 @@ Namespace UnitOperations
                         distrate = 0.0
                     Else
                         If Me.CondenserType = condtype.Full_Reflux Then
-                            vaprate = sumF * Vflash - sum0_
+                            vaprate = sumF / 2 - sum0_
                         Else
-                            distrate = sumF * Vflash - sum0_ - vaprate
+                            distrate = sumF / 2 - sum0_ - vaprate
                         End If
                     End If
             End Select
@@ -3971,7 +3971,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Dim flashalgs As New List(Of FlashAlgorithm)
 
             For ia As Integer = 0 To ns
-                flashalgs.Add(pp.FlashBase)
+                flashalgs.Add(New NestedLoops With {.FlashSettings = pp.FlashSettings})
             Next
 
             Dim spval1, spval2 As Double
@@ -5017,7 +5017,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         Dim t1 As Task = Task.Factory.StartNew(Sub()
                                                                    Parallel.For(0, ns + 1, poptions,
                                                                      Sub(ipar)
-                                                                         Dim tmpvar As Object = flashalgs(ipar).Flash_PV(xc(ipar), P(ipar), 0.0, Tj(ipar), pp, False, Nothing)
+                                                                         Dim tmpvar As Object = flashalgs(ipar).Flash_PV(xc(ipar), P(ipar), 0.0, Tj(ipar), pp, True, K(ipar))
                                                                          Tj(ipar) = tmpvar(4)
                                                                          Kant(ipar) = K(ipar)
                                                                          K(ipar) = tmpvar(6)
@@ -5050,11 +5050,11 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                     dTj = Tj.SubtractY(Tj_ant)
 
-                    If dTj.AbsY.Max > 50.0 Then af = 50.0 / dTj.AbsY.Max
-
-                    For i = 0 To ns
-                        Tj(i) = Tj_ant(i) + af * dTj(i)
-                    Next
+                    If ic < 5 Then
+                        For i = 0 To ns
+                            Tj(i) = Tj(i) / 2 + Tj_ant(i) / 2
+                        Next
+                    End If
 
                 Else
 
@@ -5378,7 +5378,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 IObj2?.Close()
 
-            Loop Until t_error < tolerance * ns / 1000
+            Loop Until t_error < tolerance * ns
 
             IObj?.Paragraphs.Add("The algorithm converged in " & ic & " iterations.")
 

@@ -2121,15 +2121,14 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
         Public Overrides Function Flash_PV(ByVal Vz As Double(), ByVal P As Double, ByVal V As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim eflag As Boolean = True
-            Dim result As Object() = Nothing
+            Dim result As Object()
 
             result = Flash_PV_1(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
             If result.Count = 1 Then
-                result = Flash_PV_2(Vz, P, V, Tref, PP, False, Nothing)
+                result = Flash_PV_2(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
             End If
             If result.Count = 1 Then
-                result = Flash_PV_3(Vz, P, V, Tref, PP, False, Nothing)
+                result = Flash_PV_3(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
             End If
 
             Return result
@@ -2396,9 +2395,9 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     deltaT_ant = deltaT
                     deltaT = -df * fval / dFdT
 
-                    If Math.Abs(deltaT) > T * 0.1 Then
-                        deltaT = Math.Sign(deltaT) * 10.0
-                    End If
+                    'If Math.Abs(deltaT) > T * 0.1 Then
+                    '    deltaT = Math.Sign(deltaT) * 10.0
+                    'End If
 
                     IObj2?.Paragraphs.Add(String.Format("Temperature error: {0} K", deltaT))
 
