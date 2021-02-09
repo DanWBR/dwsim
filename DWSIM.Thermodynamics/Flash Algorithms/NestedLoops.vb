@@ -599,7 +599,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             epsilon(1) = 0.1
             epsilon(2) = 0.01
 
-            Dim fx, fx2, fx_ant, dfdx, x1, x0, dx As Double
+            Dim fx, fx1, fx2, fx_ant, dfdx, x1, x0, dx As Double
 
             Dim cnt As Integer
 
@@ -634,65 +634,48 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     If cnt > 20 Then xvals.Add(x1)
                     fx_ant = fx
 
-                    Ki = PP.RET_VPVAP(x1).MultiplyConstY(1 / P)
                     Dim herrobj As Object
 
-                    If cnt < 2 Then
+                    If Settings.EnableParallelProcessing And Not DisableParallelCalcs Then
 
-                        If Settings.EnableParallelProcessing And Not DisableParallelCalcs Then
-
-                            Dim task1 = Task.Factory.StartNew(Sub()
-                                                                  herrobj = Herror("PT", x1, P, Vz, PP, True, Ki)
-                                                                  fx = herrobj(0)
-                                                                  Vy = herrobj(4)
-                                                                  Vx1 = herrobj(5)
-                                                                  Ki = PP.DW_CalcKvalue(Vx1, Vy, x1, P)
-                                                              End Sub,
-                                                                Settings.TaskCancellationTokenSource.Token,
-                                                                TaskCreationOptions.None,
-                                                               Settings.AppTaskScheduler)
-                            Dim task2 = Task.Factory.StartNew(Sub()
-                                                                  fx2 = Herror("PT", x1 + epsilon(j), P, Vz, PP, True, Ki)(0)
-                                                              End Sub,
-                                                                Settings.TaskCancellationTokenSource.Token,
-                                                                TaskCreationOptions.None,
-                                                               Settings.AppTaskScheduler)
-                            Task.WaitAll(task1, task2)
-
-                        Else
-
-                            IObj2?.SetCurrent()
-                            herrobj = Herror("PT", x1, P, Vz, PP, True, Ki)
-                            fx = herrobj(0)
-                            Vy = herrobj(4)
-                            Vx1 = herrobj(5)
-                            Ki = PP.DW_CalcKvalue(Vx1, Vy, x1, P)
-                            Ki = Ki.ReplaceInvalidsWithZeroes()
-                            IObj2?.SetCurrent()
-                            herrobj = Herror("PT", x1 + epsilon(j), P, Vz, PP, True, Ki)
-
-                        End If
-
-                        IObj2?.Paragraphs.Add(String.Format("Current Enthalpy error: {0}", fx2))
-
-                        dfdx = (fx2 - fx) / epsilon(j)
+                        Dim task0 = Task.Factory.StartNew(Sub()
+                                                              herrobj = Herror("PT", x1, P, Vz, PP, False, Nothing)
+                                                              fx = herrobj(0)
+                                                          End Sub,
+                                                            Settings.TaskCancellationTokenSource.Token,
+                                                            TaskCreationOptions.None,
+                                                           Settings.AppTaskScheduler)
+                        Dim task1 = Task.Factory.StartNew(Sub()
+                                                              fx1 = Herror("PT", x1 - epsilon(j), P, Vz, PP, False, Nothing)(0)
+                                                          End Sub,
+                                                            Settings.TaskCancellationTokenSource.Token,
+                                                            TaskCreationOptions.None,
+                                                           Settings.AppTaskScheduler)
+                        Dim task2 = Task.Factory.StartNew(Sub()
+                                                              fx2 = Herror("PT", x1 + epsilon(j), P, Vz, PP, False, Nothing)(0)
+                                                          End Sub,
+                                                            Settings.TaskCancellationTokenSource.Token,
+                                                            TaskCreationOptions.None,
+                                                           Settings.AppTaskScheduler)
+                        Task.WaitAll(task0, task1, task2)
 
                     Else
 
-                        fx2 = fx
                         IObj2?.SetCurrent()
-                        herrobj = Herror("PT", x1, P, Vz, PP, True, Ki)
+                        herrobj = Herror("PT", x1, P, Vz, PP, False, Nothing)
                         fx = herrobj(0)
-                        Vy = herrobj(4)
-                        Vx1 = herrobj(5)
-                        Ki = PP.DW_CalcKvalue(Vx1, Vy, x1, P)
-                        Ki = Ki.ReplaceInvalidsWithZeroes()
-
-                        IObj2?.Paragraphs.Add(String.Format("Current Enthalpy error: {0}", fx))
-
-                        dfdx = (fx - fx2) / (x1 - x0)
+                        IObj2?.SetCurrent()
+                        herrobj = Herror("PT", x1 - epsilon(j), P, Vz, PP, False, Nothing)
+                        fx1 = herrobj(0)
+                        IObj2?.SetCurrent()
+                        herrobj = Herror("PT", x1 + epsilon(j), P, Vz, PP, False, Nothing)
+                        fx2 = herrobj(0)
 
                     End If
+
+                    IObj2?.Paragraphs.Add(String.Format("Current Enthalpy error: {0}", fx2))
+
+                    dfdx = (fx2 - fx1) / (2 * epsilon(j))
 
                     If Double.IsNaN(fx) Then
                         Dim ex As New Exception("PH Flash [NL]: Invalid result: Temperature did not converge." & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))
@@ -1139,7 +1122,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             epsilon(1) = 0.1
             epsilon(2) = 0.01
 
-            Dim fx, fx2, fx_ant, dfdx, x1, x0, dx As Double
+            Dim fx, fx1, fx2, fx_ant, dfdx, x1, x0, dx As Double
 
             Dim cnt As Integer
 
@@ -1160,7 +1143,6 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                 Dim fxvals, xvals As New List(Of Double)
 
-                Ki = PP.RET_VPVAP(x1).MultiplyConstY(1 / P)
                 Dim serrobj As Object
 
                 Do
@@ -1176,63 +1158,47 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     If cnt > 20 Then xvals.Add(x1)
                     fx_ant = fx
 
-                    If cnt < 2 Then
+                    If Settings.EnableParallelProcessing And Not DisableParallelCalcs Then
 
-                        If Settings.EnableParallelProcessing And Not DisableParallelCalcs Then
-
-                            Dim task1 = Task.Factory.StartNew(Sub()
-                                                                  serrobj = Serror("PT", x1, P, Vz, PP, True, Ki)
-                                                                  fx = serrobj(0)
-                                                                  Vy = serrobj(4)
-                                                                  Vx1 = serrobj(5)
-                                                                  Ki = PP.DW_CalcKvalue(Vx1, Vy, x1, P)
-                                                              End Sub,
-                                                                  Settings.TaskCancellationTokenSource.Token,
-                                                                  TaskCreationOptions.None,
-                                                                 Settings.AppTaskScheduler)
-                            Dim task2 = Task.Factory.StartNew(Sub()
-                                                                  fx2 = Serror("PT", x1 + epsilon(j), P, Vz, PP, True, Ki)(0)
-                                                              End Sub,
-                                                              Settings.TaskCancellationTokenSource.Token,
-                                                              TaskCreationOptions.None,
-                                                             Settings.AppTaskScheduler)
-                            Task.WaitAll(task1, task2)
-
-                        Else
-
-                            IObj2?.SetCurrent()
-                            serrobj = Serror("PT", x1, P, Vz, PP, True, Ki)
-                            fx = serrobj(0)
-                            Vy = serrobj(4)
-                            Vx1 = serrobj(5)
-                            Vx1 = serrobj(5)
-                            Ki = PP.DW_CalcKvalue(Vx1, Vy, x1, P)
-                            IObj2?.SetCurrent()
-                            fx2 = Serror("PT", x1 + epsilon(j), P, Vz, PP, True, Ki)(0)
-
-                        End If
-
-                        IObj2?.Paragraphs.Add(String.Format("Current Entropy error: {0}", fx2))
-
-                        dfdx = (fx2 - fx) / epsilon(j)
+                        Dim task0 = Task.Factory.StartNew(Sub()
+                                                              serrobj = Serror("PT", x1, P, Vz, PP, False, Nothing)
+                                                              fx = serrobj(0)
+                                                          End Sub,
+                                                            Settings.TaskCancellationTokenSource.Token,
+                                                            TaskCreationOptions.None,
+                                                           Settings.AppTaskScheduler)
+                        Dim task1 = Task.Factory.StartNew(Sub()
+                                                              fx1 = Serror("PT", x1 - epsilon(j), P, Vz, PP, False, Nothing)(0)
+                                                          End Sub,
+                                                            Settings.TaskCancellationTokenSource.Token,
+                                                            TaskCreationOptions.None,
+                                                           Settings.AppTaskScheduler)
+                        Dim task2 = Task.Factory.StartNew(Sub()
+                                                              fx2 = Serror("PT", x1 + epsilon(j), P, Vz, PP, False, Nothing)(0)
+                                                          End Sub,
+                                                            Settings.TaskCancellationTokenSource.Token,
+                                                            TaskCreationOptions.None,
+                                                           Settings.AppTaskScheduler)
+                        Task.WaitAll(task0, task1, task2)
 
                     Else
 
-                        fx2 = fx
                         IObj2?.SetCurrent()
-                        serrobj = Serror("PT", x1, P, Vz, PP, True, Ki)
+                        serrobj = Serror("PT", x1, P, Vz, PP, False, Nothing)
                         fx = serrobj(0)
-                        Vy = serrobj(4)
-                        Vx1 = serrobj(5)
-                        Ki = PP.DW_CalcKvalue(Vx1, Vy, x1, P)
-                        Ki = Ki.ReplaceInvalidsWithZeroes()
-
-
-                        IObj2?.Paragraphs.Add(String.Format("Current Entropy error: {0}", fx))
-
-                        dfdx = (fx - fx2) / (x1 - x0)
+                        IObj2?.SetCurrent()
+                        serrobj = Serror("PT", x1 - epsilon(j), P, Vz, PP, False, Nothing)
+                        fx1 = serrobj(0)
+                        IObj2?.SetCurrent()
+                        serrobj = Serror("PT", x1 + epsilon(j), P, Vz, PP, False, Nothing)
+                        fx2 = serrobj(0)
 
                     End If
+
+                    IObj2?.Paragraphs.Add(String.Format("Current Entropy error: {0}", fx2))
+
+                    dfdx = (fx2 - fx1) / (2 * epsilon(j))
+
 
                     If Double.IsNaN(fx) Then
                         Dim ex As New Exception("PS Flash [NL]: Invalid result: Temperature did not converge." & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))

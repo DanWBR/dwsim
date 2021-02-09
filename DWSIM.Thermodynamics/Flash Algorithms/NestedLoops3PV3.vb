@@ -129,7 +129,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Dim idealpp = New RaoultPropertyPackage()
                     idealpp.CurrentMaterialStream = PP.CurrentMaterialStream
 
-                    result = _nl.Flash_PT(Vz, P, T, idealpp, ReuseKI, PrevKi)
+                    result = _nl.Flash_PT(Vz, P, T, idealpp, False, Nothing)
 
                     idealpp.CurrentMaterialStream = Nothing
                     idealpp = Nothing
@@ -810,7 +810,7 @@ out:
             If errflag Then
                 Dim nl As New NestedLoops
                 nl.PTFlashFunction = AddressOf Flash_PT
-                Return nl.Flash_PH_1(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
+                Return nl.Flash_PH_1(Vz, P, H, Tref, PP, False, Nothing)
             End If
 
         End Function
