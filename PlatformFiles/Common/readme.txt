@@ -68,6 +68,7 @@ Author              Description
 Daniel Medeiros     Improved stability and reliability of the Distillation/Absorption Column model     
 Daniel/Gregor       Improved stability and reliability of equilibrium calculations
 Daniel Medeiros     Fixed Heat Exchanger Pinch Point calculation mode
+Daniel Medeiros     Fixed a bug in PFR particle diameter conversion
 Anders Andreasen    Partial fix for Reid Vapor Pressure calculation
 Alexander Semenyak  Fixed array access in PR78 Property Package
 Alexander Semenyak  Fixed comma separator in non-dot decimal separator cultures

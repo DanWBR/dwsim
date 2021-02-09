@@ -1175,7 +1175,7 @@ Namespace Reactors
                     'has catalyst, use Ergun equation for pressure drop in reactor beds
 
                     Dim vel As Double = (Qlin + Qvin) / (PI * diameter ^ 2 / 4)
-                    Dim dp As Double = Me.CatalystParticleDiameter / 1000.0
+                    Dim dp As Double = Me.CatalystParticleDiameter
                     Dim ev As Double = Me.CatalystVoidFraction
 
                     Dim pdrop As Double = 150 * eta * L / dp ^ 2 * (1 - ev) ^ 2 / ev ^ 3 * vel + 1.75 * L * rho / dp * (1 - ev) / ev ^ 3 * vel ^ 2
