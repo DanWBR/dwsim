@@ -856,7 +856,7 @@ will converge to this solution.")
             Vtrials.Add(Vz.Clone)
 
 
-            Dim random As New Random(1000)
+            Dim random As New Random(0)
 
             For i = 0 To n
                 Dim vnew = pp.RET_NullVector()
@@ -1177,26 +1177,9 @@ will converge to this solution.")
                 Dim fcl(n), fcv(n) As Double
 
                 If validsolutions.Count > 1 Then
-                    ' select the solution which gives the lowest gibbs energy.
+                    ' select the solution which has the highest amount of a single compound.
                     ' Take this solution as composition of phase 2
-
-                    Dim Gt0 As Double = 100000.0, Gt As Double, ft() As Double, it As Integer
-                    i = 0
-                    For Each trialcomp In validsolutions
-                        ft = pp.DW_CalcFugCoeff(trialcomp, T, P, State.Liquid)
-                        Gt = 0.0
-                        For j = 0 To n
-                            If Vx(j) > 0.0 Then
-                                Gt += trialcomp(j) * Log(ft(j) * trialcomp(j))
-                            End If
-                        Next
-                        If Gt < Gt0 Then
-                            Gt0 = Gt
-                            it = i
-                        End If
-                        i += 1
-                    Next
-                    Vx2 = validsolutions(it)
+                    Vx2 = validsolutions.OrderByDescending(Function(vec) vec.Max).First()
                 Else
                     Vx2 = stresult(0)
                 End If

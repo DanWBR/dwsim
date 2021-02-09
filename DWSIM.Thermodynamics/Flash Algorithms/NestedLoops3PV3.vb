@@ -126,7 +126,13 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 Else
 
-                    result = _nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                    Dim idealpp = New RaoultPropertyPackage()
+                    idealpp.CurrentMaterialStream = PP.CurrentMaterialStream
+
+                    result = _nl.Flash_PT(Vz, P, T, idealpp, ReuseKI, PrevKi)
+
+                    idealpp.CurrentMaterialStream = Nothing
+                    idealpp = Nothing
 
                     L = result(0)
                     V = result(1)
@@ -146,7 +152,15 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                             result = Flash_PT_3P(Vz, V, L1, L2, Vy, Vx1, Vx2, P, T, PP)
 
+                        Else
+
+                            result = _nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+
                         End If
+
+                    Else
+
+                        result = _nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
 
                     End If
 
@@ -465,6 +479,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             WriteDebugInfo("PT Flash [NL-3PV3]: Iteration #" & ecount & ", VF = " & V & ", L1 = " & L1 & ", L2 = " & L2)
 
+            Dim F1 = 0.0#, F2 = 0.0#
+            Dim dF1dL1 = 0.0#, dF1dL2 = 0.0#, dF2dL1 = 0.0#, dF2dL2 = 0.0#
+            Dim dL1, dL2 As Double
+
             Do
 
                 IObj?.SetCurrent()
@@ -515,8 +533,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Vx1ant(i) = Vx1(i)
                     Vx2ant(i) = Vx2(i)
                     Vyant(i) = Vy(i)
-                    b1(i) = 1 - Ki1(i) ^ -1
-                    b2(i) = 1 - Ki2(i) ^ -1
+                    b1(i) = 1 - 1 / Ki1(i)
+                    b2(i) = 1 - 1 / Ki2(i)
                     Vy(i) = Vz(i) / (1 - b1(i) * L1 - b2(i) * L2)
                     Vx1(i) = Vy(i) / Ki1(i)
                     Vx2(i) = Vy(i) / Ki2(i)
@@ -568,17 +586,21 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Else
 
                     Vant = V
-                    Dim F1 = 0.0#, F2 = 0.0#
-                    Dim dF1dL1 = 0.0#, dF1dL2 = 0.0#, dF2dL1 = 0.0#, dF2dL2 = 0.0#
-                    Dim dL1, dL2 As Double
+
                     i = 0
+                    F1 = 0.0
+                    F2 = 0.0
+                    dF1dL1 = 0.0
+                    dF1dL2 = 0.0
+                    dF2dL1 = 0.0
+                    dF2dL2 = 0.0
                     Do
-                        F1 = F1 + b1(i) * Vz(i) / (1 - b1(i) * L1 - b2(i) * L2)
-                        F2 = F2 + b2(i) * Vz(i) / (1 - b1(i) * L1 - b2(i) * L2)
-                        dF1dL1 = dF1dL1 + b1(i) * Vz(i) * (-b1(i)) / (1 - b1(i) * L1 - b2(i) * L2) ^ 2
-                        dF1dL2 = dF1dL2 + b1(i) * Vz(i) * (-b2(i)) / (1 - b1(i) * L1 - b2(i) * L2) ^ 2
-                        dF2dL1 = dF2dL1 + b2(i) * Vz(i) * (-b1(i)) / (1 - b1(i) * L1 - b2(i) * L2) ^ 2
-                        dF2dL2 = dF2dL2 + b2(i) * Vz(i) * (-b2(i)) / (1 - b1(i) * L1 - b2(i) * L2) ^ 2
+                        F1 += b1(i) * Vz(i) / (1 - b1(i) * L1 - b2(i) * L2)
+                        F2 += b2(i) * Vz(i) / (1 - b1(i) * L1 - b2(i) * L2)
+                        dF1dL1 += b1(i) * Vz(i) * -b1(i) / Math.Pow(1 - b1(i) * L1 - b2(i) * L2, 2)
+                        dF1dL2 += b1(i) * Vz(i) * -b2(i) / Math.Pow(1 - b1(i) * L1 - b2(i) * L2, 2)
+                        dF2dL1 += b2(i) * Vz(i) * -b1(i) / Math.Pow(1 - b1(i) * L1 - b2(i) * L2, 2)
+                        dF2dL2 += b2(i) * Vz(i) * -b2(i) / Math.Pow(1 - b1(i) * L1 - b2(i) * L2, 2)
                         i = i + 1
                     Loop Until i = n + 1
 
@@ -598,6 +620,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     MB(0, 0) = -F1
                     MB(1, 0) = -F2
 
+
                     Try
                         MX = MA.Solve(MB)
                     Catch ex As Exception
@@ -613,11 +636,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Dim df As Double
 
                     If ecount < 5 Then
-                        df = 0.5
+                        df = 0.1
                     ElseIf ecount < 10 Then
-                        df = 0.7
+                        df = 0.5
                     ElseIf ecount < 15 Then
-                        df = 0.9
+                        df = 0.7
                     Else
                         df = 1.0
                     End If
@@ -779,6 +802,22 @@ out:
 
         Public Overrides Function Flash_PH(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
+            Dim errflag As Boolean = True
+            Try
+                Return Flash_PH_1(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
+            Catch ex As Exception
+            End Try
+            If errflag Then
+                Dim nl As New NestedLoops
+                nl.PTFlashFunction = AddressOf Flash_PT
+                Return nl.Flash_PH_1(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
+            End If
+
+        End Function
+
+
+        Public Function Flash_PH_1(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
+
             prevres = Nothing
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
@@ -820,7 +859,7 @@ out:
             Tmax = 10000.0#
             Tmin = 20.0#
 
-            Dim fx0, fx1, dfdx, X0, X1, dx As Double
+            Dim fx0, fx1, fx2, dfdx, X0, X1, X2, dx As Double
 
             T = Tref
             If Tref = 0 Then T = 298.15
@@ -881,7 +920,7 @@ out:
                 IObj?.Paragraphs.Add(String.Format("Specified enthalpy between Bubble Point and Dew Point. Calculation requires iteration of vapor fraction."))
                 Type = "PV"
                 X0 = Hb / (Hb - Hd)
-                epsilon = 0.01 'vapor fraction step
+                epsilon = 0.001 'vapor fraction step
             Else
                 IObj?.Paragraphs.Add(String.Format("Specified enthalpy between Bubble Point and Dew Point. Calculation requires iteration of vapor fraction."))
                 Type = "PT"
@@ -890,7 +929,7 @@ out:
                 If Hd > 0 Then Tmin = Td 'Limit temperature above dew point
                 If X0 < Tmin Then X0 = Tmin
                 If X0 > Tmax Then X0 = Tmax
-                epsilon = 0.1 'temperature step
+                epsilon = 0.01 'temperature step
             End If
 
             '==================================================================================
@@ -926,27 +965,35 @@ out:
                 If Abs(fx0) < tolEXT Then Exit Do
 
                 'Limit X1 to valid range
-                X1 = X0 + epsilon
+                X1 = X0 - epsilon
+                X2 = X0 + epsilon
                 If Type = "PT" Then
-                    If (X1 > Tmax) Or (X1 < Tmin) Then
-                        epsilon = -epsilon
-                        X1 = X0 + epsilon
+                    If (X2 > Tmax) Then
+                        X1 = X0 - 2 * epsilon
+                        X2 = X0
+                    ElseIf (X2 < Tmin) Then
+                        X1 = X0
+                        X2 = X0 + 2 * epsilon
                     End If
                 Else
-                    If (X1 > 1) Or (X1 < 0) Then
-                        epsilon = -epsilon
-                        X1 = X0 + epsilon
+                    If (X2 > 1) Then
+                        X1 = X0 - 2 * epsilon
+                        X2 = X0
+                    ElseIf (X2 < 0) Then
+                        X1 = X0
+                        X2 = X0 + 2 * epsilon
                     End If
                 End If
 
                 prevres = Nothing
                 ErrRes = Herror(Type, X1, P, Vz)
                 fx1 = ErrRes(0)
+                ErrRes = Herror(Type, X2, P, Vz)
+                fx2 = ErrRes(0)
 
                 IObj2?.Paragraphs.Add(String.Format("Current Enthalpy error: {0}", fx0))
 
-
-                dfdx = (fx1 - fx0) / epsilon
+                dfdx = (fx2 - fx1) / (2 * epsilon)
                 dx = fx0 / dfdx
                 X0 -= dx
 
@@ -1587,7 +1634,7 @@ out:
                     'limit temperature change to avoid problems near aceotropic point
                     If Abs(dTP) > 40 Then dTP = 40 * Sign(dTP)
                     T = T1 + dTP
-                    If T < 200 Then T = 200
+                    If T < 10 Then T = 10
                     If T > 700 Then T = 700
 
                     Pn = 0
