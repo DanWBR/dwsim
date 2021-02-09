@@ -475,7 +475,11 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             Dim bt As New BrentOpt.Brent
 
             V = bt.BrentOpt2(Vmin, Vmax, 50, 0.000001, 100, Function(x)
-                                                                Return EvalF.Invoke(x)
+                                                                If x >= 0 And x <= 1 Then
+                                                                    Return EvalF.Invoke(x)
+                                                                Else
+                                                                    Return 10000000000.0
+                                                                End If
                                                             End Function)
 
             Return New Object() {V, Vx, Vy, Ki, F, 0.0}
