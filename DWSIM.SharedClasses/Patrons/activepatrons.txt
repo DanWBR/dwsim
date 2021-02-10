@@ -27,6 +27,7 @@ Duncan Nowicki
 Emanuel Cardoso Santos
 F An
 Filippo Borroni
+Gerry Agnew
 Gokhan Candan 
 Guenther Holzer
 Guha Industries
@@ -66,6 +67,7 @@ Nikita Petrosyan
 Ozmeister
 Parthib Rao
 Petroconsulting Llc
+Philippe Wesel
 Rajesh S Kempegowda
 Richard Huntington
 Roland Berger
@@ -75,7 +77,6 @@ Steven Baltakatei Sandoval
 Sukin Oh 
 Tayeong Lee
 Tibor Lányi
-Todd Harvey
 Václav Babuka
 Will Flores
 Yoshihide Watabe
