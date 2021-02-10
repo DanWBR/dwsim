@@ -1647,7 +1647,7 @@ Namespace SystemsOfUnits
                 Case "SCFM"
                     Return value / (23.69 * 60 / 1000) / 35.3147
 
-                Case "MMBTU/h", "MMBTU/hr"
+                Case "MMBTU/h", "MMBTU/hr", "MMBtu/h", "MMBtu/hr"
                     Return value / 3412.14 * 1000 * 1000
                 Case "BTU/d"
                     Return value / 3412.14 / 24
@@ -2133,7 +2133,7 @@ Namespace SystemsOfUnits
                 Case "SCFM"
                     Return value * (23.69 * 60 / 1000) * 35.3147
 
-                Case "MMBTU/h", "MMBTU/hr"
+                Case "MMBTU/h", "MMBTU/hr", "MMBtu/h", "MMBtu/hr"
                     Return value * 3412.14 / 1000 / 1000
                 Case "BTU/d"
                     Return value * 3412.14 * 24
