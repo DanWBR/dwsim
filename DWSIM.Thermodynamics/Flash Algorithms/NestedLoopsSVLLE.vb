@@ -147,7 +147,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             End If
 
-            If L1 > 0.0 Then
+            If L1 > 0.001 Then
 
                 IObj?.SetCurrent
 
