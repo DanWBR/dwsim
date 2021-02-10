@@ -984,7 +984,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
         If GlobalSettings.Settings.CalculatorActivated Then
 
-            If GlobalSettings.Settings.CalculatorBusy Then Return New List(Of Exception)
+            If GlobalSettings.Settings.CalculatorBusy And Not Adjusting Then Return New List(Of Exception)
 
             Inspector.Host.CurrentSolutionID = Date.Now.ToBinary
 
