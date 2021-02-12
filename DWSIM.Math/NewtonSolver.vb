@@ -59,7 +59,7 @@ Namespace MathEx.Optimization
         ''' <returns>vector of variables which solve the equations according to the minimum allowable error value (tolerance).</returns>
         Function Solve(functionbody As Func(Of Double(), Double()), vars As Double()) As Double()
 
-            Dim minimaldampings As Double() = New Double() {0.1}
+            Dim minimaldampings As Double() = New Double() {0.001, 0.01, 0.1}
             Dim epsilons As Double() = New Double() {0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1}
 
             Dim leave As Boolean = False
@@ -179,7 +179,7 @@ Namespace MathEx.Optimization
         Private Function gradient(epsilon As Double, ByVal x() As Double, fx() As Double) As Double(,)
 
             Dim f1(), f2() As Double
-            Dim g(x.Length - 1, x.Length - 1), x2(x.Length - 1), dx(x.Length - 1), xbr(x.Length - 1), fbr(x.Length - 1) As Double
+            Dim g(x.Length - 1, x.Length - 1), x1(x.Length - 1), x2(x.Length - 1), dx(x.Length - 1), xbr(x.Length - 1), fbr(x.Length - 1) As Double
             Dim i, j, k, n As Integer
 
             n = x.Length - 1
@@ -203,22 +203,25 @@ Namespace MathEx.Optimization
 
             Else
 
-                f1 = fx
                 For i = 0 To x.Length - 1
                     For j = 0 To x.Length - 1
                         If i <> j Then
+                            x1(j) = x(j)
                             x2(j) = x(j)
                         Else
                             If x(j) = 0.0# Then
-                                x2(j) = epsilon
+                                x1(j) = epsilon
+                                x2(j) = 2 * epsilon
                             Else
+                                x1(j) = x(j) * (1 - epsilon)
                                 x2(j) = x(j) * (1 + epsilon)
                             End If
                         End If
                     Next
+                    f1 = fxb.Invoke(x1)
                     f2 = fxb.Invoke(x2)
                     For k = 0 To x.Length - 1
-                        g(k, i) = (f2(k) - f1(k)) / (x2(i) - x(i))
+                        g(k, i) = (f2(k) - f1(k)) / (x2(i) - x1(i))
                     Next
                 Next
 

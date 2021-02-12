@@ -8698,18 +8698,26 @@ Final3:
 
         Public Overridable Function AUX_IS_SINGLECOMP(ByVal Phase As Phase) As Boolean
 
-            Dim c As Integer, bo As Boolean
+            Dim sc, bo As Boolean
 
             Dim subst As Interfaces.ICompound
 
             bo = False
-            c = 0
+            sc = False
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
-                If subst.MoleFraction.GetValueOrDefault <> 0 Then c += 1
-                If subst.ConstantProperties.IsBlackOil Then bo = True
+                If subst.ConstantProperties.IsBlackOil Then
+                    bo = True
+                    Exit For
+                End If
+            Next
+            For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
+                If subst.MoleFraction.GetValueOrDefault > 0.999999 Then
+                    sc = True
+                    Exit For
+                End If
             Next
 
-            If c = 1 And Not bo Then Return True Else Return False
+            If sc And Not bo Then Return True Else Return False
 
         End Function
 
