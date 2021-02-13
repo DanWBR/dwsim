@@ -275,7 +275,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             r1 = ConvergeVF(IObj, V, Vz, Vx, Vy, Ki, P, T, PP)
 
-            If r1(6) = True And Math.Abs(Vmax - Vmin) > 0.01 And P > 15 * 101325 Then
+            If r1(6) = True And Math.Abs(Vmax - Vmin) > 0.01 And P > 3 * 101325 Then
                 r2 = ConvergeVF2(Vmin, Vmax, V, Vz, Vx, Vy, Ki, P, T, PP)
                 If Math.Abs(r2(4)) < etol Then r1 = r2
             End If
@@ -2095,10 +2095,13 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             result = Flash_PV_1(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
             If result.Count = 1 Then
-                result = Flash_PV_2(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
+                result = Flash_PV_1(Vz, P, V, 0.0, PP, False, Nothing)
             End If
             If result.Count = 1 Then
-                result = Flash_PV_3(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
+                result = Flash_PV_2(Vz, P, V, 0.0, PP, False, Nothing)
+            End If
+            If result.Count = 1 Then
+                result = Flash_PV_3(Vz, P, V, 0.0, PP, False, Nothing)
             End If
 
             Return result

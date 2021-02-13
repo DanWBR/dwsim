@@ -2653,18 +2653,23 @@ Namespace UnitOperations
                         vaprate = 0.0
                     End If
                 Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
-                    If Me.CondenserType = condtype.Full_Reflux Then
+                    If TypeOf Me Is DistillationColumn AndAlso DirectCast(Me, DistillationColumn).ReboiledAbsorber Then
                         vaprate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) - sum0_
                         distrate = 0.0
-                    ElseIf Me.CondenserType = condtype.Partial_Condenser Then
-                        If Me.Specs("C").SType = ColumnSpec.SpecType.Product_Molar_Flow_Rate Then
-                            distrate = SystemsOfUnits.Converter.ConvertToSI(Me.Specs("C").SpecUnit, Me.Specs("C").SpecValue)
-                        Else
-                            distrate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) - sum0_ - vaprate
-                        End If
                     Else
-                        distrate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) - sum0_
-                        vaprate = 0.0
+                        If Me.CondenserType = condtype.Full_Reflux Then
+                            vaprate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) - sum0_
+                            distrate = 0.0
+                        ElseIf Me.CondenserType = condtype.Partial_Condenser Then
+                            If Me.Specs("C").SType = ColumnSpec.SpecType.Product_Molar_Flow_Rate Then
+                                distrate = SystemsOfUnits.Converter.ConvertToSI(Me.Specs("C").SpecUnit, Me.Specs("C").SpecValue)
+                            Else
+                                distrate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) - sum0_ - vaprate
+                            End If
+                        Else
+                            distrate = sumF - SystemsOfUnits.Converter.ConvertToSI(Me.Specs("R").SpecUnit, Me.Specs("R").SpecValue) - sum0_
+                            vaprate = 0.0
+                        End If
                     End If
                 Case Else
                     If DirectCast(Me, DistillationColumn).ReboiledAbsorber Then
@@ -3066,92 +3071,81 @@ Namespace UnitOperations
 
                 If needsXYestimates Then
 
-                    Dim xycounter As Integer = 0
-                    Dim Kval0ant As Double()
+                    LSS(0) = 0
+                    VSS(0) = 0
+                    LSS(ns) = 0
 
-                    Do
+                    Dim sumLSS = LSS.Sum
+                    Dim sumVSS = VSS.Sum
 
-                        LSS(0) = 0
-                        VSS(0) = 0
-                        LSS(ns) = 0
+                    VSS(0) = vaprate
+                    LSS(0) = distrate
+                    LSS(ns) = sumF - LSS(0) - sumLSS - sumVSS - V(0)
 
-                        Dim sumLSS = LSS.Sum
-                        Dim sumVSS = VSS.Sum
+                    Dim at(nc - 1)(), bt(nc - 1)(), ct(nc - 1)(), dt(nc - 1)(), xt(nc - 1)() As Double
 
-                        VSS(0) = vaprate
-                        LSS(0) = distrate
-                        LSS(ns) = sumF - LSS(0) - sumLSS - sumVSS - V(0)
+                    For i = 0 To nc - 1
+                        Array.Resize(at(i), ns + 1)
+                        Array.Resize(bt(i), ns + 1)
+                        Array.Resize(ct(i), ns + 1)
+                        Array.Resize(dt(i), ns + 1)
+                        Array.Resize(xt(i), ns + 1)
+                    Next
 
-                        Dim at(nc - 1)(), bt(nc - 1)(), ct(nc - 1)(), dt(nc - 1)(), xt(nc - 1)() As Double
+                    Dim sum1t(ns), sum2t(ns) As Double
 
-                        For i = 0 To nc - 1
-                            Array.Resize(at(i), ns + 1)
-                            Array.Resize(bt(i), ns + 1)
-                            Array.Resize(ct(i), ns + 1)
-                            Array.Resize(dt(i), ns + 1)
-                            Array.Resize(xt(i), ns + 1)
+                    For i = 0 To ns
+                        sum1t(i) = 0
+                        sum2t(i) = 0
+                        For j = 0 To i
+                            sum1t(i) += F(j) - LSS(j) - VSS(j)
                         Next
-
-                        Dim sum1t(ns), sum2t(ns) As Double
-
-                        For i = 0 To ns
-                            sum1t(i) = 0
-                            sum2t(i) = 0
-                            For j = 0 To i
-                                sum1t(i) += F(j) - LSS(j) - VSS(j)
+                        If i > 0 Then
+                            For j = 0 To i - 1
+                                sum2t(i) += F(j) - LSS(j) - VSS(j)
                             Next
-                            If i > 0 Then
-                                For j = 0 To i - 1
-                                    sum2t(i) += F(j) - LSS(j) - VSS(j)
-                                Next
+                        End If
+                    Next
+
+                    For i = 0 To nc - 1
+                        For j = 0 To ns
+                            dt(i)(j) = -F(j) * z(j)(i)
+                            If j < ns Then
+                                bt(i)(j) = -(V(j + 1) + sum1t(j) - V(0) + LSS(j) + (V(j) + VSS(j)) * Kval(j)(i))
+                            Else
+                                bt(i)(j) = -(sum1(j) - V(0) + LSS(j) + (V(j) + VSS(j)) * Kval(j)(i))
                             End If
+                            'tdma solve
+                            If j < ns Then ct(i)(j) = V(j + 1) * Kval(j + 1)(i)
+                            If j > 0 Then at(i)(j) = V(j) + sum2t(j) - V(0)
                         Next
+                    Next
 
-                        For i = 0 To nc - 1
-                            For j = 0 To ns
-                                dt(i)(j) = -F(j) * z(j)(i)
-                                If j < ns Then
-                                    bt(i)(j) = -(V(j + 1) + sum1t(j) - V(0) + LSS(j) + (V(j) + VSS(j)) * Kval(j)(i))
-                                Else
-                                    bt(i)(j) = -(sum1(j) - V(0) + LSS(j) + (V(j) + VSS(j)) * Kval(j)(i))
-                                End If
-                                'tdma solve
-                                If j < ns Then ct(i)(j) = V(j + 1) * Kval(j + 1)(i)
-                                If j > 0 Then at(i)(j) = V(j) + sum2t(j) - V(0)
-                            Next
+                    'tomich
+                    For i = 0 To nc - 1
+                        xt(i) = SolvingMethods.Tomich.TDMASolve(at(i), bt(i), ct(i), dt(i))
+                    Next
+
+                    Dim sumx(ns), sumy(ns) As Double
+
+                    For i = 0 To ns
+                        sumx(i) = 0
+                        For j = 0 To nc - 1
+                            x(i)(j) = xt(j)(i)
+                            If x(i)(j) < 0.0# Then x(i)(j) = 0.0000001
+                            sumx(i) += x(i)(j)
                         Next
+                    Next
 
-                        'tomich
-                        For i = 0 To nc - 1
-                            xt(i) = SolvingMethods.Tomich.TDMASolve(at(i), bt(i), ct(i), dt(i))
-                        Next
+                    For i = 0 To ns
+                        x(i) = x(i).NormalizeY()
+                        y(i) = x(i).MultiplyY(Kval(i)).NormalizeY()
+                        Kval(i) = pp.DW_CalcKvalue(x(i), y(i), T(i), P(i))
+                    Next
 
-                        Dim sumx(ns), sumy(ns) As Double
-
-                        For i = 0 To ns
-                            sumx(i) = 0
-                            For j = 0 To nc - 1
-                                x(i)(j) = xt(j)(i)
-                                If x(i)(j) < 0.0# Then x(i)(j) = 0.0000001
-                                sumx(i) += x(i)(j)
-                            Next
-                        Next
-
-                        Kval0ant = Kval(0)
-
-                        For i = 0 To ns
-                            x(i) = x(i).NormalizeY()
-                            y(i) = x(i).MultiplyY(Kval(i)).NormalizeY()
-                            Kval(i) = pp.DW_CalcKvalue(x(i), y(i), T(i), P(i))
-                        Next
-
-                        LSS(0) = 0
-                        VSS(0) = 0
-                        LSS(ns) = 0
-
-                        xycounter += 1
-
-                    Loop Until xycounter = 20 Or Kval(0).SubtractY(Kval0ant).AbsSqrSumY < 0.0001
+                    LSS(0) = 0
+                    VSS(0) = 0
+                    LSS(ns) = 0
 
                 End If
 
@@ -4547,7 +4541,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                                        Return errfunc
 
-                                   End Function, vars.ToArray())
+                                   End Function, vars.ToArray(), bottomsrate * 0.01)
 
                 If Double.IsNaN(errfunc) Or errfunc > tolerance Then Throw New Exception(pp.Flowsheet?.GetTranslatedString("DCGeneralError"))
 
@@ -4843,6 +4837,11 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             'step3
 
+            Dim af As Double = 1.0
+            Dim maxDT As Double = 50.0
+
+            Dim Kfac(ns) As Double
+
             Dim fx(ns), xtj(ns), dfdx(ns, ns), fxb(ns), xtjb(ns), dxtj(ns) As Double
 
             'internal loop
@@ -5002,8 +5001,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 IObj2?.Paragraphs.Add("Calculating new temperatures...")
 
-                Dim af As Double = 1.0
-
                 If Mode = 0 Or ic = 0 Then
 
                     If doparallel Then
@@ -5011,7 +5008,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         Dim t1 As Task = Task.Factory.StartNew(Sub()
                                                                    Parallel.For(0, ns + 1, poptions,
                                                                      Sub(ipar)
-                                                                         Dim tmpvar As Object = flashalgs(ipar).Flash_PV(xc(ipar), P(ipar), 0.0, Tj(ipar), pp, True, K(ipar))
+                                                                         Dim tmpvar As Object = flashalgs(ipar).Flash_PV(xc(ipar), P(ipar), 0.0, Tj(ipar), pp, False, Nothing)
                                                                          Tj(ipar) = tmpvar(4)
                                                                          Kant(ipar) = K(ipar)
                                                                          K(ipar) = tmpvar(6)
@@ -5044,10 +5041,33 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                     dTj = Tj.SubtractY(Tj_ant)
 
-                    If ic < 5 Then
+                    'check Kvalues
+
+                    For i = 0 To ns
+                        Kfac(i) = K(i).Max / K(i).Min
+                    Next
+
+                    If Kfac.Max > 10000 Then
+                        'wide boiling mixture. switch to Mode 1.
+                        Mode = 1
+                    End If
+
+                    If dTj.AbsY.Max > maxDT Then af = maxDT / dTj.AbsY.Max Else af = 1.0
+
+                    If maxDT < 50 Then
                         For i = 0 To ns
-                            Tj(i) = Tj(i) / 2 + Tj_ant(i) / 2
+                            Tj(i) = Tj_ant(i) + af * dTj(i)
+                            If Tj(i) < 0.0 Or Double.IsNaN(Tj(i)) Then
+                                Tj(i) = Tj_ant(i)
+                                K(i) = Kant(i)
+                            End If
                         Next
+                    Else
+                        If ic < 5 Then
+                            For i = 0 To ns
+                                Tj(i) = Tj(i) / 2 + Tj_ant(i) / 2
+                            Next
+                        End If
                     End If
 
                 Else
@@ -5074,10 +5094,16 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                     End If
 
-                    If dxtj.AbsY.Max > 50.0 Then af = 50.0 / dxtj.AbsY.Max
+                    If Kfac.Max > 10000 Then
+                        'wide boiling mixture.
+                        maxDT = 5
+                    Else
+                        maxDT = 50
+                    End If
+
+                    If dxtj.AbsY.Max > maxDT Then af = maxDT / dxtj.AbsY.Max Else af = 1.0
 
                     For i = 0 To ns
-
                         Tj(i) = Tj(i) + af * dxtj(i)
                         If Tj(i) < 0.0 Or Double.IsNaN(Tj(i)) Then
                             Tj(i) = Tj_ant(i)
@@ -5117,6 +5143,22 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     For j = 0 To nc - 1
                         If Double.IsNaN(K(i)(j)) Then K(i)(j) = pp.AUX_PVAPi(j, Tj(i)) / P(i)
                     Next
+                Next
+
+                'check for trivial solutions
+
+                For i = 0 To ns
+                    If pp.AUX_CheckTrivial(K(i), 0.05) Then
+                        Tj(i) = Tj_ant(i)
+                        K(i) = pp.DW_CalcKvalue_Ideal_Wilson(Tj(i), P(i))
+                        xc(i) = K(i).DivideY(yc(i))
+                        For j = 0 To nc - 1
+                            If Double.IsInfinity(xc(i)(j)) Then
+                                xc(i)(j) = 0.0
+                            End If
+                        Next
+                        xc(i) = xc(i).NormalizeY()
+                    End If
                 Next
 
                 IObj2?.Paragraphs.Add(String.Format("Updated Temperatures: {0}", Tj.ToMathArrayString))

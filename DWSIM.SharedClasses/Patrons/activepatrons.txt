@@ -42,6 +42,7 @@ Jan Boshoff
 Javier Fontalvo Alzate
 Jens Greimeier
 Jeremiah McAfoose
+Joe Rhodes
 John Gorke
 John Herring
 John Kossik
