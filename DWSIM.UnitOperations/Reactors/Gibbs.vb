@@ -299,7 +299,7 @@ Namespace Reactors
             i = 0
             For Each s As String In DN.Keys
                 N(s) = x(i)
-                If x(i) < 0 Then N(s) = 0
+                'If x(i) < 0 Then N(s) = 0
                 i += 1
             Next
 
@@ -740,6 +740,8 @@ Namespace Reactors
             ipo.ReturnLowestObjFuncValue = False
 
             Dim g0 = FunctionValue2G(N.Values.ToArray)
+
+            Me.InitialGibbsEnergy = g0
 
             Dim CalcFinished As Boolean = False
 

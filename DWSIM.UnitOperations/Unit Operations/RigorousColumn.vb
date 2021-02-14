@@ -2708,18 +2708,23 @@ Namespace UnitOperations
                       ColumnSpec.SpecType.Component_Molar_Flow_Rate,
                       ColumnSpec.SpecType.Component_Recovery,
                       ColumnSpec.SpecType.Component_Fraction
-                    If Me.CondenserType = condtype.Full_Reflux Then
-                        vaprate = sumF - hamount - sum0_
+                    If TypeOf Me Is DistillationColumn AndAlso DirectCast(Me, DistillationColumn).ReboiledAbsorber Then
+                        vaprate = (sumF - sum0_) / 2
                         distrate = 0.0
-                    ElseIf Me.CondenserType = condtype.Partial_Condenser Then
-                        If Me.Specs("C").SType = ColumnSpec.SpecType.Product_Molar_Flow_Rate Then
-                            distrate = SystemsOfUnits.Converter.ConvertToSI(Me.Specs("C").SpecUnit, Me.Specs("C").SpecValue) / mwf * 1000
-                        Else
-                            distrate = sumF - hamount - sum0_ - vaprate
-                        End If
                     Else
-                        distrate = sumF - hamount - sum0_
-                        vaprate = 0.0
+                        If Me.CondenserType = condtype.Full_Reflux Then
+                            vaprate = sumF - hamount - sum0_
+                            distrate = 0.0
+                        ElseIf Me.CondenserType = condtype.Partial_Condenser Then
+                            If Me.Specs("C").SType = ColumnSpec.SpecType.Product_Molar_Flow_Rate Then
+                                distrate = SystemsOfUnits.Converter.ConvertToSI(Me.Specs("C").SpecUnit, Me.Specs("C").SpecValue) / mwf * 1000
+                            Else
+                                distrate = sumF - hamount - sum0_ - vaprate
+                            End If
+                        Else
+                            distrate = sumF - hamount - sum0_
+                            vaprate = 0.0
+                        End If
                     End If
             End Select
 
