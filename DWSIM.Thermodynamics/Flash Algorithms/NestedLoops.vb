@@ -2390,11 +2390,18 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                         End If
                         Exit Do
                     Else
+
+                        If Double.IsNaN(fval) Then
+                            IObj?.Close()
+                            Return New Object() {-1}
+                        End If
+
                         If Math.Sign(fval * fval_ant) = -1 Then
                             T = T + deltaT / 2
                         Else
                             T = T + deltaT
                         End If
+
                     End If
 
                     IObj2?.Paragraphs.Add(String.Format("Updated Temperature: {0} K", T))
