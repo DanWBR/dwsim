@@ -32,6 +32,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports System.Windows.Forms
 Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
 Imports System.Globalization
+Imports DWSIM.ExtensionMethods
 
 Namespace Streams
 
@@ -7582,12 +7583,157 @@ Namespace Streams
         ''' </summary>
         ''' <param name="value">Flow in kg/s</param>
         Public Sub SetMassFlow(value As Double)
+
             Phases(0).Properties.massflow = value
             Phases(0).Properties.molarflow = value / Phases(0).Properties.molecularWeight * 1000
             Phases(0).Properties.volumetric_flow = value / Phases(0).Properties.density.GetValueOrDefault
             DefinedFlow = FlowSpec.Mass
             AtEquilibrium = False
+
         End Sub
+
+        ''' <summary>
+        ''' Set the mass flow for a single compound and updates the overall mass flow and composition.
+        ''' </summary>
+        ''' <param name="compoundName">Name of the compound</param>
+        ''' <param name="flow">flow rate in kg/s</param>
+        ''' <remarks>The stream must be fully calculated before calling this function.</remarks>
+        Public Sub SetOverallCompoundMassFlow(compoundName As String, flow As Double)
+
+            Dim compidx = Phases(0).Compounds.Values.Select(Function(c) c.Name).ToList().IndexOf(compoundName)
+
+            SetOverallCompoundMassFlow(compidx, flow)
+
+        End Sub
+
+        ''' <summary>
+        ''' Set the mass flow for a single compound and updates the overall mass flow and composition.
+        ''' </summary>
+        ''' <param name="compoundIndex">Name of the compound</param>
+        ''' <param name="flow">flow rate in kg/s</param>
+        ''' <remarks>The stream must be fully calculated before calling this function.</remarks>
+        Public Sub SetOverallCompoundMassFlow(compoundIndex As Integer, flow As Double)
+
+            Dim flows = Phases(0).Compounds.Values.Select(Function(c) c.MassFlow.GetValueOrDefault()).ToArray()
+
+            flows(compoundIndex) = flow
+
+            SetMassFlow(flows.Sum)
+
+            SetOverallComposition(MassFractionsToMoleFractions(flows.NormalizeY))
+
+            Dim i As Integer = 0
+            For Each c In Phases(0).Compounds.Values
+                c.MassFraction = flows(i) / flows.Sum
+                c.MassFlow = flows(i)
+                c.MolarFlow = c.MoleFraction * GetMolarFlow()
+                i += 1
+            Next
+
+            AtEquilibrium = False
+
+        End Sub
+
+        ''' <summary>
+        ''' Set the molar flow for a single compound and updates the overall molar flow and composition.
+        ''' </summary>
+        ''' <param name="compoundName">Name of the compound</param>
+        ''' <param name="flow">flow rate in mol/s</param>
+        ''' <remarks>The stream must be fully calculated before calling this function.</remarks>
+        Public Sub SetOverallCompoundMolarFlow(compoundName As String, flow As Double)
+
+            Dim compidx = Phases(0).Compounds.Values.Select(Function(c) c.Name).ToList().IndexOf(compoundName)
+
+            SetOverallCompoundMolarFlow(compidx, flow)
+
+        End Sub
+
+        ''' <summary>
+        ''' Set the molar flow for a single compound and updates the overall molar flow and composition.
+        ''' </summary>
+        ''' <param name="compoundIndex">Index of the compound</param>
+        ''' <param name="flow">flow rate in mol/s</param>
+        ''' <remarks>The stream must be fully calculated before calling this function.</remarks>
+        Public Sub SetOverallCompoundMolarFlow(compoundIndex As Integer, flow As Double)
+
+            Dim flows = Phases(0).Compounds.Values.Select(Function(c) c.MolarFlow.GetValueOrDefault()).ToArray()
+
+            flows(compoundIndex) = flow
+
+            SetMolarFlow(flows.Sum)
+
+            SetOverallComposition(flows.NormalizeY)
+
+            Dim massfracs = MoleFractionsToMassFractions(flows.NormalizeY)
+
+            Dim i As Integer = 0
+            For Each c In Phases(0).Compounds.Values
+                c.MolarFlow = c.MoleFraction * flows.Sum
+                c.MassFraction = massfracs(i)
+                c.MassFlow = massfracs(i) * GetMassFlow()
+                i += 1
+            Next
+
+            AtEquilibrium = False
+
+        End Sub
+
+        ''' <summary>
+        ''' Converts mole fractions to mass fractions using the current compound list.
+        ''' </summary>
+        ''' <param name="molefractions"></param>
+        ''' <returns></returns>
+        Public Function MoleFractionsToMassFractions(molefractions As Double()) As Double()
+
+            Dim Vwe(molefractions.Length - 1) As Double
+            Dim mol_x_mm As Double = 0
+            Dim i As Integer = 0
+            Dim sub1 As Interfaces.ICompound
+            For Each sub1 In Me.Phases(0).Compounds.Values
+                mol_x_mm += molefractions(i) * sub1.ConstantProperties.Molar_Weight
+                i += 1
+            Next
+
+            i = 0
+            For Each sub1 In Me.Phases(0).Compounds.Values
+                If mol_x_mm <> 0 Then
+                    Vwe(i) = molefractions(i) * sub1.ConstantProperties.Molar_Weight / mol_x_mm
+                Else
+                    Vwe(i) = 0.0#
+                End If
+                i += 1
+            Next
+
+            Return Vwe
+
+        End Function
+
+        ''' <summary>
+        ''' Converts mass fractions to mole fractions using the current compound list.
+        ''' </summary>
+        ''' <param name="massfractions"></param>
+        ''' <returns></returns>
+        Public Function MassFractionsToMoleFractions(massfractions As Double()) As Double()
+
+            Dim Vw(massfractions.Length - 1) As Double
+            Dim mass_div_mm As Double
+            Dim i As Integer = 0
+            Dim sub1 As Interfaces.ICompound
+            For Each sub1 In Me.Phases(0).Compounds.Values
+                mass_div_mm += massfractions(i) / sub1.ConstantProperties.Molar_Weight
+                i += 1
+            Next
+
+            i = 0
+            For Each sub1 In Me.Phases(0).Compounds.Values
+                Vw(i) = massfractions(i) / sub1.ConstantProperties.Molar_Weight / mass_div_mm
+                i += 1
+            Next
+
+            Return Vw
+
+        End Function
+
 
         Public Function GetMassEnthalpy() As Double
             Return Phases(0).Properties.enthalpy.GetValueOrDefault
