@@ -3315,8 +3315,8 @@ Namespace UnitOperations
             IObj?.SetCurrent()
 
             If TypeOf Me Is DistillationColumn Then
-                'result = SolvingMethods.WangHenkeMethod.Solve(Me, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, -1, eff, Me.ColumnType, pp, Me.Specs, False, False)
-                result = New SolvingMethods.NaphtaliSandholmMethod().Solve(Me, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, eff, Me.ColumnType, pp, Me.Specs, False)
+                result = SolvingMethods.WangHenkeMethod.Solve(Me, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, -1, eff, Me.ColumnType, pp, Me.Specs, False, False)
+                'result = New SolvingMethods.NaphtaliSandholmMethod().Solve(Me, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, eff, Me.ColumnType, pp, Me.Specs, False)
                 ic = result(9)
             ElseIf TypeOf Me Is AbsorptionColumn Then
                 If llextractor Then
@@ -6239,9 +6239,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Next
 
             For i = 0 To ns
-                For j = 0 To nc - 1
-                    zc(i)(j) = (xc(i)(j) + yc(i)(j))
-                Next
+                zc(i) = _fc(i).NormalizeY()
             Next
 
             sumF = 0
@@ -6569,21 +6567,24 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                 ByVal specs As Dictionary(Of String, SepOps.ColumnSpec),
                               Optional ByVal LLEX As Boolean = False) As Object
 
-            Dim result As Object = Nothing
+            Try
+                'run 4 iterations of the bubble point method to enhance the initial estimates.
+                'if it doesn't suceeed, go on with the original estimates.
 
-            result = WangHenkeMethod.Solve(dc, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval,
+                Dim result = WangHenkeMethod.Solve(dc, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval,
                                            x, y, z, fc, HF, T, P, condt, 4, eff,
                                            coltype, pp, specs, False, False)
-
-            T = result(0)
-            V = result(1)
-            L = result(2)
-            VSS = result(3)
-            LSS = result(4)
-            y = result(5)
-            x = result(6)
-            Kval = result(7)
-            Q = result(8)
+                T = result(0)
+                V = result(1)
+                L = result(2)
+                VSS = result(3)
+                LSS = result(4)
+                y = result(5)
+                x = result(6)
+                Kval = result(7)
+                Q = result(8)
+            Catch ex As Exception
+            End Try
 
             _Tj_ant = T.Clone
 
@@ -6768,8 +6769,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             Dim el_err As Double = 0.0#
             Dim el_err_ant As Double = 0.0#
-            Dim il_err As Double = 0.0#
-            Dim il_err_ant As Double = 0.0#
+            Dim il_err As Double()
+            Dim il_err_ant As Double()
 
             'independent variables
 
@@ -6829,25 +6830,27 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             Dim n As Integer = xvar.Length - 1
 
-            'xvar = MathNet.Numerics.RootFinding.Broyden.FindRoot(Function(xvars)
-            '                                                         Return FunctionValue(xvars)
-            '                                                     End Function, xvar)
+            il_err_ant = FunctionValue(xvar)
 
-            Dim nsolv As New Optimization.NewtonSolver
-            nsolv.EnableDamping = True
-            nsolv.UseBroydenApproximation = True
+            xvar = MathNet.Numerics.RootFinding.Broyden.FindRoot(Function(xvars)
+                                                                     Return FunctionValue(xvars)
+                                                                 End Function, xvar)
 
-            xvar = nsolv.Solve(Function(xvars)
-                                   Return FunctionValue(xvars)
-                               End Function, xvar)
+            'Dim nsolv As New Optimization.NewtonSolver
+            'nsolv.EnableDamping = True
+            'nsolv.UseBroydenApproximation = True
+
+            'xvar = nsolv.Solve(Function(xvars)
+            '                       Return FunctionValue(xvars)
+            '                   End Function, xvar)
 
             IObj?.Paragraphs.Add(String.Format("Final Variable Values: {0}", xvar.ToMathArrayString))
 
-            il_err = FunctionValue(xvar).AbsSqrSumY()
+            il_err = FunctionValue(xvar)
 
-            pp.CurrentMaterialStream.Flowsheet.ShowMessage("Naphtali-Sandholm solver: final objective function (error) value = " & il_err, IFlowsheet.MessageType.Information)
+            pp.CurrentMaterialStream.Flowsheet.ShowMessage("Naphtali-Sandholm solver: final objective function (error) value = " & il_err.AbsSqrSumY, IFlowsheet.MessageType.Information)
 
-            If Abs(il_err) > tol(1) Then
+            If Abs(il_err.AbsSqrSumY) > tol(1) Then
                 Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCErrorStillHigh"))
             End If
 
@@ -6872,18 +6875,24 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             For i = 0 To ns
                 For j = 0 To nc - 1
-                    xc(i)(j) = lc(i)(j) / sumlkj(i)
+                    If sumlkj(i) > 0 Then
+                        xc(i)(j) = lc(i)(j) / sumlkj(i)
+                    End If
                 Next
                 For j = 0 To nc - 1
-                    yc(i)(j) = vc(i)(j) / sumvkj(i)
+                    If sumvkj(i) > 0 Then
+                        yc(i)(j) = vc(i)(j) / sumvkj(i)
+                    Else
+                        yc(i)(j) = xc(i)(j) * _Kval(i)(j)
+                    End If
                 Next
             Next
 
             ' finished, de-normalize and return arrays
-            Dim K(ns, nc - 1) As Double
+            Dim K(ns)() As Double
             For i = 0 To ns
                 For j = 0 To nc - 1
-                    K(i, j) = _Kval(i)(j)
+                    K(i) = _Kval(i)
                 Next
             Next
 
@@ -6896,10 +6905,10 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 sumLSS += LSSj(i)
             Next
             If condt = Column.condtype.Full_Reflux Then
-                Vj(0) = 1.0# - Lj(ns) - sumLSS - sumVSS
+                Vj(0) = F.Sum - Lj(ns) - sumLSS - sumVSS
                 LSSj(0) = 0.0#
             Else
-                LSSj(0) = 1.0# - Lj(ns) - sumLSS - sumVSS - Vj(0)
+                LSSj(0) = F.Sum - Lj(ns) - sumLSS - sumVSS - Vj(0)
             End If
 
             For i = 0 To ns
