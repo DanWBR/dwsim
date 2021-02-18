@@ -304,7 +304,7 @@ Namespace UnitOperations.Auxiliary.Pipe
         ByVal VAPVEL As Nullable(Of Double), ByVal QTRANSF As Nullable(Of Double), ByVal EINICIAL As Nullable(Of Double), ByVal HTC As Nullable(Of Double))
 
             With Me
-                .PressaoInicial = Pi
+                .Pressure_Initial = Pi
                 .TemperaturaInicial = Ti
                 .MUv = MUV
                 .MUl = MUL
@@ -317,16 +317,16 @@ Namespace UnitOperations.Auxiliary.Pipe
                 .Qv = QV
                 .Ql = QL
                 .Surft = SURFT
-                .DpPorFriccao = DPF
-                .DpPorHidrostatico = DPH
-                .HoldupDeLiquido = EL
-                .TipoFluxo = TIPOFLUXO
+                .DpFriction = DPF
+                .DpStatic = DPH
+                .LiquidHoldup = EL
+                .FlowRegime = TIPOFLUXO
                 .VapVel = VAPVEL
                 .LiqVel = LIQVEL
                 .VapRe = VAPRE
                 .LiqRe = LIQRE
-                .CalorTransferido = QTRANSF
-                .EnergyFlow_Inicial = EINICIAL
+                .HeatTransferred = QTRANSF
+                .EnergyFlow_Initial = EINICIAL
                 .HTC = HTC
             End With
 
@@ -334,7 +334,7 @@ Namespace UnitOperations.Auxiliary.Pipe
 
 #End Region
 
-        Public Property PressaoInicial() As Nullable(Of Double)
+        Public Property Pressure_Initial() As Nullable(Of Double)
             Get
                 Return Me.m_Pi
             End Get
@@ -352,7 +352,7 @@ Namespace UnitOperations.Auxiliary.Pipe
             End Set
         End Property
 
-        Public Property DpPorFriccao() As Nullable(Of Double)
+        Public Property DpFriction() As Nullable(Of Double)
             Get
                 Return Me.m_dPf
             End Get
@@ -361,7 +361,7 @@ Namespace UnitOperations.Auxiliary.Pipe
             End Set
         End Property
 
-        Public Property DpPorHidrostatico() As Nullable(Of Double)
+        Public Property DpStatic() As Nullable(Of Double)
             Get
                 Return Me.m_dPh
             End Get
@@ -370,7 +370,7 @@ Namespace UnitOperations.Auxiliary.Pipe
             End Set
         End Property
 
-        Public Property HoldupDeLiquido() As Nullable(Of Double)
+        Public Property LiquidHoldup() As Nullable(Of Double)
             Get
                 Return Me.m_LiqHoldup
             End Get
@@ -415,7 +415,7 @@ Namespace UnitOperations.Auxiliary.Pipe
             End Set
         End Property
 
-        Public Property CalorTransferido() As Nullable(Of Double)
+        Public Property HeatTransferred() As Nullable(Of Double)
             Get
                 Return Me.m_HeatTransf
             End Get
@@ -424,7 +424,7 @@ Namespace UnitOperations.Auxiliary.Pipe
             End Set
         End Property
 
-        Public Property TipoFluxo() As String
+        Public Property FlowRegime() As String
             Get
                 Return Me.m_tipo_fluxo
             End Get
@@ -433,7 +433,7 @@ Namespace UnitOperations.Auxiliary.Pipe
             End Set
         End Property
 
-        Public Property TipoFluxoDescricao() As String
+        Public Property FlowRegimeDescription() As String
             Get
                 Return Me.m_fluxo_desc
             End Get
@@ -496,7 +496,7 @@ Namespace UnitOperations.Auxiliary.Pipe
             End Set
         End Property
 
-        Public Property EnergyFlow_Inicial() As Nullable(Of Double)
+        Public Property EnergyFlow_Initial() As Nullable(Of Double)
             Get
                 Return Me.m_Einicial
             End Get

@@ -74,13 +74,13 @@ Public Class EditingForm_Pipe_ResultsChart
                         For qi = 1 To 1
                             If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
                                 For Each res In ps.Results
-                                    vx(i) = cv.ConvertFromSI(su.pressure, res.PressaoInicial)
+                                    vx(i) = cv.ConvertFromSI(su.pressure, res.Pressure_Initial)
                                     comp_ant += ps.Comprimento / ps.Incrementos
                                     i += 1
                                 Next
                             Else
                                 For Each res In ps.Results
-                                    vx(i) = cv.ConvertFromSI(su.pressure, res.PressaoInicial)
+                                    vx(i) = cv.ConvertFromSI(su.pressure, res.Pressure_Initial)
                                     comp_ant += ps.Comprimento / ps.Incrementos
                                     i += 1
                                 Next
@@ -178,13 +178,13 @@ Public Class EditingForm_Pipe_ResultsChart
                         For qi = 1 To 1
                             If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
                                 For Each res In ps.Results
-                                    vx(i) = cv.ConvertFromSI(su.heatflow, res.CalorTransferido)
+                                    vx(i) = cv.ConvertFromSI(su.heatflow, res.HeatTransferred)
                                     comp_ant += ps.Comprimento / ps.Incrementos
                                     i += 1
                                 Next
                             Else
                                 For Each res In ps.Results
-                                    vx(i) = cv.ConvertFromSI(su.heatflow, res.CalorTransferido)
+                                    vx(i) = cv.ConvertFromSI(su.heatflow, res.HeatTransferred)
                                     comp_ant += ps.Comprimento / ps.Incrementos
                                     i += 1
                                 Next
@@ -225,12 +225,12 @@ Public Class EditingForm_Pipe_ResultsChart
                         For qi = 1 To 1
                             If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
                                 For Each res In ps.Results
-                                    vy(i) = res.HoldupDeLiquido
+                                    vy(i) = res.LiquidHoldup
                                     i += 1
                                 Next
                             Else
                                 For Each res In ps.Results
-                                    vy(i) = res.HoldupDeLiquido
+                                    vy(i) = res.LiquidHoldup
                                     i += 1
                                 Next
                             End If
@@ -275,13 +275,13 @@ Public Class EditingForm_Pipe_ResultsChart
                         For qi = 1 To 1
                             If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
                                 For Each res In ps.Results
-                                    vy(i) = cv.ConvertFromSI(su.pressure, res.PressaoInicial)
+                                    vy(i) = cv.ConvertFromSI(su.pressure, res.Pressure_Initial)
                                     comp_ant += ps.Comprimento / ps.Incrementos
                                     i += 1
                                 Next
                             Else
                                 For Each res In ps.Results
-                                    vy(i) = cv.ConvertFromSI(su.pressure, res.PressaoInicial)
+                                    vy(i) = cv.ConvertFromSI(su.pressure, res.Pressure_Initial)
                                     comp_ant += ps.Comprimento / ps.Incrementos
                                     i += 1
                                 Next
@@ -379,13 +379,13 @@ Public Class EditingForm_Pipe_ResultsChart
                         For qi = 1 To 1
                             If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
                                 For Each res In ps.Results
-                                    vy(i) = cv.ConvertFromSI(su.heatflow, res.CalorTransferido)
+                                    vy(i) = cv.ConvertFromSI(su.heatflow, res.HeatTransferred)
                                     comp_ant += ps.Comprimento / ps.Incrementos
                                     i += 1
                                 Next
                             Else
                                 For Each res In ps.Results
-                                    vy(i) = cv.ConvertFromSI(su.heatflow, res.CalorTransferido)
+                                    vy(i) = cv.ConvertFromSI(su.heatflow, res.HeatTransferred)
                                     comp_ant += ps.Comprimento / ps.Incrementos
                                     i += 1
                                 Next

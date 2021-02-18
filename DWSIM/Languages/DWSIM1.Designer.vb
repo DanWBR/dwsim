@@ -1480,7 +1480,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to Calor transferido.
         '''</summary>
-        Friend Shared ReadOnly Property Calortransferido() As String
+        Friend Shared ReadOnly Property HeatTransferred() As String
             Get
                 Return ResourceManager.GetString("Calortransferido", resourceCulture)
             End Get

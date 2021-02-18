@@ -381,7 +381,7 @@ namespace DWSIM.UI.Desktop.Editors
                         {
                             foreach (var res in sec.Results)
                             {
-                                vec.Add(cv.ConvertFromSI(su.pressure, res.PressaoInicial.GetValueOrDefault()));
+                                vec.Add(cv.ConvertFromSI(su.pressure, res.Pressure_Initial.GetValueOrDefault()));
                             }
                         }
                     }
@@ -433,7 +433,7 @@ namespace DWSIM.UI.Desktop.Editors
                         {
                             foreach (var res in sec.Results)
                             {
-                                vec.Add(cv.ConvertFromSI(su.heatflow, res.CalorTransferido.GetValueOrDefault()));
+                                vec.Add(cv.ConvertFromSI(su.heatflow, res.HeatTransferred.GetValueOrDefault()));
                             }
                         }
                     }
@@ -446,7 +446,7 @@ namespace DWSIM.UI.Desktop.Editors
                         {
                             foreach (var res in sec.Results)
                             {
-                                vec.Add(res.HoldupDeLiquido.GetValueOrDefault());
+                                vec.Add(res.LiquidHoldup.GetValueOrDefault());
                             }
                         }
                     }
