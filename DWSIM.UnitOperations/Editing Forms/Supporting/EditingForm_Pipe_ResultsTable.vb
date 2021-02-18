@@ -36,12 +36,12 @@ Public Class EditingForm_Pipe_ResultsTable
             Dim comp_ant As Double = 0
             For Each ps In .Sections.Values
                 If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
-                    For Each res In ps.Resultados
+                    For Each res In ps.Results
                         Me.DataGridView1.Rows.Add(New Object() {cv.ConvertFromSI(su.distance, comp_ant).ToString(nf), (Math.Atan(ps.Elevacao / (ps.Comprimento ^ 2 - ps.Elevacao ^ 2) ^ 0.5) * 180 / Math.PI).ToString(nf), cv.ConvertFromSI(su.pressure, res.PressaoInicial.GetValueOrDefault).ToString(nf), cv.ConvertFromSI(su.temperature, res.TemperaturaInicial.GetValueOrDefault).ToString(nf), cv.ConvertFromSI(su.velocity, res.LiqVel).ToString(nf), cv.ConvertFromSI(su.velocity, res.VapVel).ToString(nf), cv.ConvertFromSI(su.heatflow, res.CalorTransferido).ToString(nf), res.HoldupDeLiquido.GetValueOrDefault.ToString(nf), res.TipoFluxo, cv.ConvertFromSI(su.heat_transf_coeff, res.HTC).ToString(nf), cv.ConvertFromSI(su.heat_transf_coeff, res.HTC_internal).ToString(nf), cv.ConvertFromSI(su.heat_transf_coeff, res.HTC_pipewall).ToString(nf), cv.ConvertFromSI(su.heat_transf_coeff, res.HTC_insulation).ToString(nf), cv.ConvertFromSI(su.heat_transf_coeff, res.HTC_external).ToString(nf)})
                         comp_ant += ps.Comprimento / ps.Incrementos
                     Next
                 Else
-                    For Each res In ps.Resultados
+                    For Each res In ps.Results
                         Me.DataGridView1.Rows.Add(New Object() {cv.ConvertFromSI(su.distance, comp_ant).ToString(nf), (Math.Atan(ps.Elevacao / (ps.Comprimento ^ 2 - ps.Elevacao ^ 2) ^ 0.5) * 180 / Math.PI).ToString(nf), cv.ConvertFromSI(su.pressure, res.PressaoInicial.GetValueOrDefault).ToString(nf), cv.ConvertFromSI(su.temperature, res.TemperaturaInicial.GetValueOrDefault).ToString(nf), cv.ConvertFromSI(su.velocity, res.LiqVel).ToString(nf), cv.ConvertFromSI(su.velocity, res.VapVel).ToString(nf), cv.ConvertFromSI(su.heatflow, res.CalorTransferido).ToString(nf), res.HoldupDeLiquido.GetValueOrDefault.ToString(nf), res.TipoFluxo})
                         comp_ant += ps.Comprimento
                     Next

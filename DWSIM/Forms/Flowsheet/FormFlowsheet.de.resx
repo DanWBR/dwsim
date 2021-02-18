@@ -362,10 +362,10 @@
   <data name="IronRubyToolStripMenuItem.Text" xml:space="preserve">
     <value>Script Manager</value>
   </data>
-  <data name="ResultadosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ResultsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>92, 26</value>
   </data>
-  <data name="ResultadosToolStripMenuItem.Text" xml:space="preserve">
+  <data name="ResultsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Ergebnisse</value>
   </data>
   <data name="GerarRelatorioToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">

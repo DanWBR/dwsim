@@ -144,7 +144,7 @@ Namespace UnitOperations.Auxiliary.Pipe
 
         End Function
 
-        Public ReadOnly Property Resultados() As System.Collections.Generic.List(Of PipeResults)
+        Public ReadOnly Property Results() As System.Collections.Generic.List(Of PipeResults)
             Get
                 Return m_results
             End Get

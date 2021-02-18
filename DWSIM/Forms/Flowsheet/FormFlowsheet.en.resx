@@ -441,10 +441,10 @@
   <data name="GerarRelatorioToolStripMenuItem.Text" xml:space="preserve">
     <value>Create Report</value>
   </data>
-  <data name="ResultadosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ResultsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 24</value>
   </data>
-  <data name="ResultadosToolStripMenuItem.Text" xml:space="preserve">
+  <data name="ResultsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Results</value>
   </data>
   <data name="CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
