@@ -1363,7 +1363,9 @@ Namespace UnitOperations
 
                     Q = MaxHeatExchange * ThermalEfficiency / 100.0
 
-                    If Q > MaxHeatExchange Then Throw New Exception("Defined heat exchange is invalid (higher than the theoretical maximum).")
+                    If Q.GetValueOrDefault() / MaxHeatExchange > 1.001 Then
+                        Throw New Exception("Defined heat exchange is invalid (higher than the theoretical maximum).")
+                    End If
 
                     DeltaHc = Q / Wc
                     DeltaHh = -(Q + HeatLoss) / Wh
