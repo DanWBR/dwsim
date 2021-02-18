@@ -394,7 +394,7 @@ namespace DWSIM.UI.Desktop.Editors
                         {
                             foreach (var res in sec.Results)
                             {
-                                vec.Add(cv.ConvertFromSI(su.temperature, res.TemperaturaInicial.GetValueOrDefault()));
+                                vec.Add(cv.ConvertFromSI(su.temperature, res.Temperature_Initial.GetValueOrDefault()));
                             }
                         }
                     }
