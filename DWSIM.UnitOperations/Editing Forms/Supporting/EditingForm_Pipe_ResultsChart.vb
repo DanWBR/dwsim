@@ -100,13 +100,13 @@ Public Class EditingForm_Pipe_ResultsChart
                         For qi = 1 To 1
                             If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
                                 For Each res In ps.Results
-                                    vx(i) = cv.ConvertFromSI(su.temperature, res.TemperaturaInicial)
+                                    vx(i) = cv.ConvertFromSI(su.temperature, res.Temperature_Initial)
                                     comp_ant += ps.Comprimento / ps.Incrementos
                                     i += 1
                                 Next
                             Else
                                 For Each res In ps.Results
-                                    vx(i) = cv.ConvertFromSI(su.temperature, res.TemperaturaInicial)
+                                    vx(i) = cv.ConvertFromSI(su.temperature, res.Temperature_Initial)
                                     comp_ant += ps.Comprimento / ps.Incrementos
                                     i += 1
                                 Next
@@ -301,13 +301,13 @@ Public Class EditingForm_Pipe_ResultsChart
                         For qi = 1 To 1
                             If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
                                 For Each res In ps.Results
-                                    vy(i) = cv.ConvertFromSI(su.temperature, res.TemperaturaInicial)
+                                    vy(i) = cv.ConvertFromSI(su.temperature, res.Temperature_Initial)
                                     comp_ant += ps.Comprimento / ps.Incrementos
                                     i += 1
                                 Next
                             Else
                                 For Each res In ps.Results
-                                    vy(i) = cv.ConvertFromSI(su.temperature, res.TemperaturaInicial)
+                                    vy(i) = cv.ConvertFromSI(su.temperature, res.Temperature_Initial)
                                     comp_ant += ps.Comprimento / ps.Incrementos
                                     i += 1
                                 Next

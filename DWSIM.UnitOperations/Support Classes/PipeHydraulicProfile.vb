@@ -305,7 +305,7 @@ Namespace UnitOperations.Auxiliary.Pipe
 
             With Me
                 .Pressure_Initial = Pi
-                .TemperaturaInicial = Ti
+                .Temperature_Initial = Ti
                 .MUv = MUV
                 .MUl = MUL
                 .RHOv = RHOV
@@ -343,7 +343,7 @@ Namespace UnitOperations.Auxiliary.Pipe
             End Set
         End Property
 
-        Public Property TemperaturaInicial() As Nullable(Of Double)
+        Public Property Temperature_Initial() As Nullable(Of Double)
             Get
                 Return Me.m_Ti
             End Get

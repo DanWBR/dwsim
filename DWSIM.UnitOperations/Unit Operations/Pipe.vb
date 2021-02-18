@@ -527,7 +527,7 @@ Namespace UnitOperations
                                         count = 0
                                         With results
 
-                                            .TemperaturaInicial = Tin
+                                            .Temperature_Initial = Tin
                                             .Pressure_Initial = Pin
                                             .EnergyFlow_Initial = Hin
                                             .Cpl = Cp_l
@@ -767,7 +767,7 @@ Namespace UnitOperations
                                 .LiquidHoldup = holdup
                                 .FlowRegime = tipofluxo
 
-                                segmento.Results.Add(New PipeResults(.Pressure_Initial, .TemperaturaInicial, .MUv, .MUl, .RHOv, .RHOl,
+                                segmento.Results.Add(New PipeResults(.Pressure_Initial, .Temperature_Initial, .MUv, .MUl, .RHOv, .RHOl,
                                                                         .Cpv, .Cpl, .Kv, .Kl, .Qv, .Ql, .Surft, .DpFriction, .DpStatic,
                                                                         .LiquidHoldup, .FlowRegime, .LiqRe, .VapRe, .LiqVel, .VapVel, .HeatTransferred,
                                                                         .EnergyFlow_Initial, U) With {.HTC_external = results.HTC_external,
@@ -854,7 +854,7 @@ Namespace UnitOperations
             CheckSpec(Hout, False, "outlet enthalpy")
 
             With results
-                .TemperaturaInicial = Tout
+                .Temperature_Initial = Tout
                 .Pressure_Initial = Pout
                 .EnergyFlow_Initial = Hout
                 .Cpl = Cp_l
@@ -1770,7 +1770,7 @@ Final3:     T = bbb
                             Case "SurfaceTension"
                                 Return cv.ConvertFromSI(su.surfaceTension, Profile.Sections(skey).Results(sindex).Surft)
                             Case "InitialTemperature"
-                                Return cv.ConvertFromSI(su.temperature, Profile.Sections(skey).Results(sindex).TemperaturaInicial)
+                                Return cv.ConvertFromSI(su.temperature, Profile.Sections(skey).Results(sindex).Temperature_Initial)
                             Case "FlowRegime"
                                 Return Profile.Sections(skey).Results(sindex).FlowRegime
                             Case "VelocityLiquid"
@@ -2313,7 +2313,7 @@ Final3:     T = bbb
             For Each ps In Profile.Sections.Values
                 For Each res In ps.Results
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
-                                   vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, res.TemperaturaInicial.GetValueOrDefault).ToString(numberformat, ci))
+                                   vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, res.Temperature_Initial.GetValueOrDefault).ToString(numberformat, ci))
                     comp_ant += ps.Comprimento / ps.Incrementos
                 Next
             Next
@@ -2622,7 +2622,7 @@ Final3:     T = bbb
                     'temperaturee
                     For Each sec In Profile.Sections.Values
                         For Each res In sec.Results
-                            vec.Add(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, res.TemperaturaInicial.GetValueOrDefault()))
+                            vec.Add(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, res.Temperature_Initial.GetValueOrDefault()))
                         Next
                     Next
                     Exit Select
