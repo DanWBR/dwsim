@@ -88,7 +88,13 @@ Namespace GraphicObjects
 
             Dim valtext = (currentvalue * multiplier).ToString(formatstring)
 
-            Using paint As New SKPaint With {.TextSize = 29.0 * f, .Color = SKColors.LightGreen, .IsAntialias = True}
+            Dim displaycolor As SKColor = SKColors.DarkGreen
+
+            If Drawing.SkiaSharp.GraphicsSurface.BackgroundColor <> SKColors.White Then
+                displaycolor = SKColors.White
+            End If
+
+            Using paint As New SKPaint With {.TextSize = 29.0 * f, .Color = displaycolor, .IsAntialias = True}
                 Dim assm = Me.GetType.Assembly
                 Using filestr As IO.Stream = assm.GetManifestResourceStream("DWSIM.Drawing.SkiaSharp.digital7_mono_italic.ttf")
                     paint.Typeface = SKTypeface.FromStream(filestr)
