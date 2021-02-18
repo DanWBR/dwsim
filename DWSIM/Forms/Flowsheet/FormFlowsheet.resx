@@ -288,8 +288,8 @@
   <data name="tsbLoadSolution.Text" xml:space="preserve">
     <value>Restaurar Selecionado</value>
   </data>
-  <data name="&gt;&gt;ResultadosToolStripMenuItem.Name" xml:space="preserve">
-    <value>ResultadosToolStripMenuItem</value>
+  <data name="&gt;&gt;ResultsToolStripMenuItem.Name" xml:space="preserve">
+    <value>ResultsToolStripMenuItem</value>
   </data>
   <data name="ExibirToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 24</value>
@@ -300,7 +300,7 @@
   <data name="&gt;&gt;tsbStoreSolution.Name" xml:space="preserve">
     <value>tsbStoreSolution</value>
   </data>
-  <data name="&gt;&gt;ResultadosToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;ResultsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;CloseToolStripMenuItem.Type" xml:space="preserve">
@@ -1321,7 +1321,7 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>1444, 881</value>
   </data>
-  <data name="ResultadosToolStripMenuItem.Text" xml:space="preserve">
+  <data name="ResultsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Resultados</value>
   </data>
   <data name="ControlesDoIntegradorToolStripMenuItem.Text" xml:space="preserve">
@@ -1384,7 +1384,7 @@
   <data name="&gt;&gt;tsmiExportData.Name" xml:space="preserve">
     <value>tsmiExportData</value>
   </data>
-  <data name="ResultadosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ResultsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 24</value>
   </data>
   <data name="&gt;&gt;tsbCalc.Type" xml:space="preserve">

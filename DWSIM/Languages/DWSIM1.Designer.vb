@@ -1480,7 +1480,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to Calor transferido.
         '''</summary>
-        Friend Shared ReadOnly Property Calortransferido() As String
+        Friend Shared ReadOnly Property HeatTransferred() As String
             Get
                 Return ResourceManager.GetString("Calortransferido", resourceCulture)
             End Get
@@ -13080,7 +13080,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to Resultados.
         '''</summary>
-        Friend Shared ReadOnly Property Resultados() As String
+        Friend Shared ReadOnly Property Results() As String
             Get
                 Return ResourceManager.GetString("Resultados", resourceCulture)
             End Get
@@ -16302,7 +16302,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to  - Visualizar Resultados (Gráfico).
         '''</summary>
-        Friend Shared ReadOnly Property VisualizarResultados() As String
+        Friend Shared ReadOnly Property VisualizarResults() As String
             Get
                 Return ResourceManager.GetString("VisualizarResultados", resourceCulture)
             End Get
@@ -16338,7 +16338,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to Visualizo resultados.
         '''</summary>
-        Friend Shared ReadOnly Property Visualizoresultados() As String
+        Friend Shared ReadOnly Property VisualizoResults() As String
             Get
                 Return ResourceManager.GetString("Visualizoresultados", resourceCulture)
             End Get

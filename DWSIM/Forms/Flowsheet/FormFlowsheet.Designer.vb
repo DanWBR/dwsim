@@ -69,7 +69,7 @@ Partial Class FormFlowsheet
         Me.OtimizaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AnaliseDeSensibilidadeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MultivariateOptimizerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ResultadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ResultsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GerarRelatorioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PluginsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -167,7 +167,7 @@ Partial Class FormFlowsheet
         resources.ApplyResources(Me.MenuStrip1, "MenuStrip1")
         Me.MenuStrip1.AllowItemReorder = True
         Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ArquivoToolStripMenuItem, Me.EditarToolStripMenuItem, Me.InserirToolStripMenuItem, Me.FerramentasToolStripMenuItem, Me.ModoDinâmicoToolStripMenuItem, Me.UtilitiesTSMI, Me.OtimizaToolStripMenuItem, Me.ResultadosToolStripMenuItem, Me.PluginsToolStripMenuItem, Me.ExibirToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ArquivoToolStripMenuItem, Me.EditarToolStripMenuItem, Me.InserirToolStripMenuItem, Me.FerramentasToolStripMenuItem, Me.ModoDinâmicoToolStripMenuItem, Me.UtilitiesTSMI, Me.OtimizaToolStripMenuItem, Me.ResultsToolStripMenuItem, Me.PluginsToolStripMenuItem, Me.ExibirToolStripMenuItem})
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.ShowItemToolTips = True
         '
@@ -474,13 +474,13 @@ Partial Class FormFlowsheet
         Me.MultivariateOptimizerToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.arrow_switch
         Me.MultivariateOptimizerToolStripMenuItem.Name = "MultivariateOptimizerToolStripMenuItem"
         '
-        'ResultadosToolStripMenuItem
+        'ResultsToolStripMenuItem
         '
-        resources.ApplyResources(Me.ResultadosToolStripMenuItem, "ResultadosToolStripMenuItem")
-        Me.ResultadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GerarRelatorioToolStripMenuItem})
-        Me.ResultadosToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
-        Me.ResultadosToolStripMenuItem.MergeIndex = 7
-        Me.ResultadosToolStripMenuItem.Name = "ResultadosToolStripMenuItem"
+        resources.ApplyResources(Me.ResultsToolStripMenuItem, "ResultsToolStripMenuItem")
+        Me.ResultsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GerarRelatorioToolStripMenuItem})
+        Me.ResultsToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
+        Me.ResultsToolStripMenuItem.MergeIndex = 7
+        Me.ResultsToolStripMenuItem.Name = "ResultsToolStripMenuItem"
         '
         'GerarRelatorioToolStripMenuItem
         '
@@ -793,7 +793,7 @@ Partial Class FormFlowsheet
     Public WithEvents TSTable As FarsiLibrary.Win.FATabStripItem
     Public WithEvents BGLoadComp As System.ComponentModel.BackgroundWorker
     Public WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
-    Public WithEvents ResultadosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Public WithEvents ResultsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents GerarRelatorioToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents bgCalc As System.ComponentModel.BackgroundWorker
     Public WithEvents OtimizaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem

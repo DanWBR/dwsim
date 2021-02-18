@@ -430,7 +430,7 @@ Namespace UnitOperations
 
                 For Each segmento In Me.Profile.Sections.Values
 
-                    segmento.Resultados.Clear()
+                    segmento.Results.Clear()
 
                     For iq = 1 To segmento.Quantidade
 
@@ -527,9 +527,9 @@ Namespace UnitOperations
                                         count = 0
                                         With results
 
-                                            .TemperaturaInicial = Tin
-                                            .PressaoInicial = Pin
-                                            .EnergyFlow_Inicial = Hin
+                                            .Temperature_Initial = Tin
+                                            .Pressure_Initial = Pin
+                                            .EnergyFlow_Initial = Hin
                                             .Cpl = Cp_l
                                             .Cpv = Cp_v
                                             .Kl = K_l
@@ -761,16 +761,16 @@ Namespace UnitOperations
 
                             With results
 
-                                .CalorTransferido = DQ
-                                .DpPorFriccao = dpf
-                                .DpPorHidrostatico = dph
-                                .HoldupDeLiquido = holdup
-                                .TipoFluxo = tipofluxo
+                                .HeatTransferred = DQ
+                                .DpFriction = dpf
+                                .DpStatic = dph
+                                .LiquidHoldup = holdup
+                                .FlowRegime = tipofluxo
 
-                                segmento.Resultados.Add(New PipeResults(.PressaoInicial, .TemperaturaInicial, .MUv, .MUl, .RHOv, .RHOl,
-                                                                        .Cpv, .Cpl, .Kv, .Kl, .Qv, .Ql, .Surft, .DpPorFriccao, .DpPorHidrostatico,
-                                                                        .HoldupDeLiquido, .TipoFluxo, .LiqRe, .VapRe, .LiqVel, .VapVel, .CalorTransferido,
-                                                                        .EnergyFlow_Inicial, U) With {.HTC_external = results.HTC_external,
+                                segmento.Results.Add(New PipeResults(.Pressure_Initial, .Temperature_Initial, .MUv, .MUl, .RHOv, .RHOl,
+                                                                        .Cpv, .Cpl, .Kv, .Kl, .Qv, .Ql, .Surft, .DpFriction, .DpStatic,
+                                                                        .LiquidHoldup, .FlowRegime, .LiqRe, .VapRe, .LiqVel, .VapVel, .HeatTransferred,
+                                                                        .EnergyFlow_Initial, U) With {.HTC_external = results.HTC_external,
                                                                                                    .HTC_internal = results.HTC_internal,
                                                                                                    .HTC_insulation = results.HTC_insulation,
                                                                                                    .HTC_pipewall = results.HTC_pipewall})
@@ -854,9 +854,9 @@ Namespace UnitOperations
             CheckSpec(Hout, False, "outlet enthalpy")
 
             With results
-                .TemperaturaInicial = Tout
-                .PressaoInicial = Pout
-                .EnergyFlow_Inicial = Hout
+                .Temperature_Initial = Tout
+                .Pressure_Initial = Pout
+                .EnergyFlow_Initial = Hout
                 .Cpl = Cp_l
                 .Cpv = Cp_v
                 .Kl = K_l
@@ -872,15 +872,15 @@ Namespace UnitOperations
                 .VapRe = 4 / Math.PI * .RHOv * .Qv / (.MUv * segmento.DI * 0.0254)
                 .LiqVel = .Ql / (Math.PI * (segmento.DI * 0.0254) ^ 2 / 4)
                 .VapVel = .Qv / (Math.PI * (segmento.DI * 0.0254) ^ 2 / 4)
-                .CalorTransferido = DQ
-                .DpPorFriccao = dpf
-                .DpPorHidrostatico = dph
-                .HoldupDeLiquido = holdup
-                .TipoFluxo = "-"
-                .TipoFluxoDescricao = ""
+                .HeatTransferred = DQ
+                .DpFriction = dpf
+                .DpStatic = dph
+                .LiquidHoldup = holdup
+                .FlowRegime = "-"
+                .FlowRegimeDescription = ""
                 .HTC = U
             End With
-            segmento.Resultados.Add(results)
+            segmento.Results.Add(results)
 
             Me.DeltaP = (PinP - Pout)
             Me.DeltaT = (TinP - Tout)
@@ -923,7 +923,7 @@ Namespace UnitOperations
             Dim segmento As New PipeSection
 
             For Each segmento In Me.Profile.Sections.Values
-                segmento.Resultados.Clear()
+                segmento.Results.Clear()
             Next
 
             'Zerar valores da corrente de materia conectada a jusante
@@ -1724,59 +1724,59 @@ Final3:     T = bbb
                         Dim sprop As String = prop.Split(",")(4)
                         Select Case sprop
                             Case "HeatTransfer"
-                                Return cv.ConvertFromSI(su.heatflow, Profile.Sections(skey).Resultados(sindex).CalorTransferido)
+                                Return cv.ConvertFromSI(su.heatflow, Profile.Sections(skey).Results(sindex).HeatTransferred)
                             Case "HeatCapacityLiquid"
-                                Return cv.ConvertFromSI(su.heatCapacityCp, Profile.Sections(skey).Resultados(sindex).Cpl)
+                                Return cv.ConvertFromSI(su.heatCapacityCp, Profile.Sections(skey).Results(sindex).Cpl)
                             Case "HeatCapacityVapor"
-                                Return cv.ConvertFromSI(su.heatCapacityCp, Profile.Sections(skey).Resultados(sindex).Cpv)
+                                Return cv.ConvertFromSI(su.heatCapacityCp, Profile.Sections(skey).Results(sindex).Cpv)
                             Case "PressureDropFriction"
-                                Return cv.ConvertFromSI(su.deltaP, Profile.Sections(skey).Resultados(sindex).DpPorFriccao)
+                                Return cv.ConvertFromSI(su.deltaP, Profile.Sections(skey).Results(sindex).DpFriction)
                             Case "PressureDropHydrostatic"
-                                Return cv.ConvertFromSI(su.deltaP, Profile.Sections(skey).Resultados(sindex).DpPorHidrostatico)
+                                Return cv.ConvertFromSI(su.deltaP, Profile.Sections(skey).Results(sindex).DpStatic)
                             Case "PressureDropTotal"
-                                Return cv.ConvertFromSI(su.deltaP, Profile.Sections(skey).Resultados(sindex).DpPorFriccao + Profile.Sections(skey).Resultados(sindex).DpPorHidrostatico)
+                                Return cv.ConvertFromSI(su.deltaP, Profile.Sections(skey).Results(sindex).DpFriction + Profile.Sections(skey).Results(sindex).DpStatic)
                             Case "LiquidHoldup"
-                                Return Profile.Sections(skey).Resultados(sindex).HoldupDeLiquido
+                                Return Profile.Sections(skey).Results(sindex).LiquidHoldup
                             Case "HTCoverall"
-                                Return cv.ConvertFromSI(su.heat_transf_coeff, Profile.Sections(skey).Resultados(sindex).HTC)
+                                Return cv.ConvertFromSI(su.heat_transf_coeff, Profile.Sections(skey).Results(sindex).HTC)
                             Case "HTCexternal"
-                                Return cv.ConvertFromSI(su.heat_transf_coeff, Profile.Sections(skey).Resultados(sindex).HTC_external)
+                                Return cv.ConvertFromSI(su.heat_transf_coeff, Profile.Sections(skey).Results(sindex).HTC_external)
                             Case "HTCinternal"
-                                Return cv.ConvertFromSI(su.heat_transf_coeff, Profile.Sections(skey).Resultados(sindex).HTC_internal)
+                                Return cv.ConvertFromSI(su.heat_transf_coeff, Profile.Sections(skey).Results(sindex).HTC_internal)
                             Case "HTCinsulation"
-                                Return cv.ConvertFromSI(su.heat_transf_coeff, Profile.Sections(skey).Resultados(sindex).HTC_insulation)
+                                Return cv.ConvertFromSI(su.heat_transf_coeff, Profile.Sections(skey).Results(sindex).HTC_insulation)
                             Case "HTCpipewall"
-                                Return cv.ConvertFromSI(su.heat_transf_coeff, Profile.Sections(skey).Resultados(sindex).HTC_pipewall)
+                                Return cv.ConvertFromSI(su.heat_transf_coeff, Profile.Sections(skey).Results(sindex).HTC_pipewall)
                             Case "ThermalConductivityLiquid"
-                                Return cv.ConvertFromSI(su.thermalConductivity, Profile.Sections(skey).Resultados(sindex).Kl)
+                                Return cv.ConvertFromSI(su.thermalConductivity, Profile.Sections(skey).Results(sindex).Kl)
                             Case "ThermalConductivityVapor"
-                                Return cv.ConvertFromSI(su.thermalConductivity, Profile.Sections(skey).Resultados(sindex).Kv)
+                                Return cv.ConvertFromSI(su.thermalConductivity, Profile.Sections(skey).Results(sindex).Kv)
                             Case "ReynoldsNumberLiquid"
-                                Return Profile.Sections(skey).Resultados(sindex).LiqRe
+                                Return Profile.Sections(skey).Results(sindex).LiqRe
                             Case "ReynoldsNumberVapor"
-                                Return Profile.Sections(skey).Resultados(sindex).VapRe
+                                Return Profile.Sections(skey).Results(sindex).VapRe
                             Case "ViscosityLiquid"
-                                Return cv.ConvertFromSI(su.viscosity, Profile.Sections(skey).Resultados(sindex).MUl)
+                                Return cv.ConvertFromSI(su.viscosity, Profile.Sections(skey).Results(sindex).MUl)
                             Case "ViscosityVapor"
-                                Return cv.ConvertFromSI(su.viscosity, Profile.Sections(skey).Resultados(sindex).MUv)
+                                Return cv.ConvertFromSI(su.viscosity, Profile.Sections(skey).Results(sindex).MUv)
                             Case "VolumetricFlowLiquid"
-                                Return cv.ConvertFromSI(su.volumetricFlow, Profile.Sections(skey).Resultados(sindex).Ql)
+                                Return cv.ConvertFromSI(su.volumetricFlow, Profile.Sections(skey).Results(sindex).Ql)
                             Case "VolumetricFlowVapor"
-                                Return cv.ConvertFromSI(su.volumetricFlow, Profile.Sections(skey).Resultados(sindex).Qv)
+                                Return cv.ConvertFromSI(su.volumetricFlow, Profile.Sections(skey).Results(sindex).Qv)
                             Case "DensityLiquid"
-                                Return cv.ConvertFromSI(su.density, Profile.Sections(skey).Resultados(sindex).RHOl)
+                                Return cv.ConvertFromSI(su.density, Profile.Sections(skey).Results(sindex).RHOl)
                             Case "DensityVapor"
-                                Return cv.ConvertFromSI(su.density, Profile.Sections(skey).Resultados(sindex).RHOv)
+                                Return cv.ConvertFromSI(su.density, Profile.Sections(skey).Results(sindex).RHOv)
                             Case "SurfaceTension"
-                                Return cv.ConvertFromSI(su.surfaceTension, Profile.Sections(skey).Resultados(sindex).Surft)
+                                Return cv.ConvertFromSI(su.surfaceTension, Profile.Sections(skey).Results(sindex).Surft)
                             Case "InitialTemperature"
-                                Return cv.ConvertFromSI(su.temperature, Profile.Sections(skey).Resultados(sindex).TemperaturaInicial)
+                                Return cv.ConvertFromSI(su.temperature, Profile.Sections(skey).Results(sindex).Temperature_Initial)
                             Case "FlowRegime"
-                                Return Profile.Sections(skey).Resultados(sindex).TipoFluxo
+                                Return Profile.Sections(skey).Results(sindex).FlowRegime
                             Case "VelocityLiquid"
-                                Return cv.ConvertFromSI(su.velocity, Profile.Sections(skey).Resultados(sindex).LiqVel)
+                                Return cv.ConvertFromSI(su.velocity, Profile.Sections(skey).Results(sindex).LiqVel)
                             Case "VelocityVapor"
-                                Return cv.ConvertFromSI(su.velocity, Profile.Sections(skey).Resultados(sindex).VapVel)
+                                Return cv.ConvertFromSI(su.velocity, Profile.Sections(skey).Results(sindex).VapVel)
                             Case Else
                                 Return 0.0
                         End Select
@@ -1864,7 +1864,7 @@ Final3:     T = bbb
             Next
             For Each ps In Profile.Sections
                 Dim j As Integer = 1
-                For Each res In ps.Value.Resultados
+                For Each res In ps.Value.Results
                     proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",HeatTransfer")
                     proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",HeatCapacityLiquid")
                     proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",HeatCapacityVapor")
@@ -2259,7 +2259,7 @@ Final3:     T = bbb
             str.AppendLine("Length (" & su.distance & ")" & vbTab & "Elevation (" & su.distance & ")")
             comp_ant = 0
             For Each ps In Profile.Sections.Values
-                For Each res In ps.Resultados
+                For Each res In ps.Results
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
                                    vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.distance, (Math.Atan(ps.Elevacao / (ps.Comprimento ^ 2 - ps.Elevacao ^ 2) ^ 0.5) * 180 / Math.PI)).ToString(numberformat, ci))
                     comp_ant += ps.Comprimento / ps.Incrementos
@@ -2272,9 +2272,9 @@ Final3:     T = bbb
             str.AppendLine("Length (" & su.distance & ")" & vbTab & "Pressure (" & su.pressure & ")")
             comp_ant = 0
             For Each ps In Profile.Sections.Values
-                For Each res In ps.Resultados
+                For Each res In ps.Results
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
-                                   vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, res.PressaoInicial.GetValueOrDefault).ToString(numberformat, ci))
+                                   vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, res.Pressure_Initial.GetValueOrDefault).ToString(numberformat, ci))
                     comp_ant += ps.Comprimento / ps.Incrementos
                 Next
             Next
@@ -2285,9 +2285,9 @@ Final3:     T = bbb
             str.AppendLine("Length (" & su.distance & ")" & vbTab & "Pressure Drop (" & su.deltaP & ")")
             comp_ant = 0
             For Each ps In Profile.Sections.Values
-                For Each res In ps.Resultados
+                For Each res In ps.Results
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
-                                   vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, res.DpPorFriccao).ToString(numberformat, ci))
+                                   vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, res.DpFriction).ToString(numberformat, ci))
                     comp_ant += ps.Comprimento / ps.Incrementos
                 Next
             Next
@@ -2298,9 +2298,9 @@ Final3:     T = bbb
             str.AppendLine("Length (" & su.distance & ")" & vbTab & "Pressure Drop (" & su.deltaP & ")")
             comp_ant = 0
             For Each ps In Profile.Sections.Values
-                For Each res In ps.Resultados
+                For Each res In ps.Results
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
-                                   vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, res.DpPorHidrostatico).ToString(numberformat, ci))
+                                   vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, res.DpStatic).ToString(numberformat, ci))
                     comp_ant += ps.Comprimento / ps.Incrementos
                 Next
             Next
@@ -2311,9 +2311,9 @@ Final3:     T = bbb
             str.AppendLine("Length (" & su.distance & ")" & vbTab & "Temperature (" & su.temperature & ")")
             comp_ant = 0
             For Each ps In Profile.Sections.Values
-                For Each res In ps.Resultados
+                For Each res In ps.Results
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
-                                   vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, res.TemperaturaInicial.GetValueOrDefault).ToString(numberformat, ci))
+                                   vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, res.Temperature_Initial.GetValueOrDefault).ToString(numberformat, ci))
                     comp_ant += ps.Comprimento / ps.Incrementos
                 Next
             Next
@@ -2324,7 +2324,7 @@ Final3:     T = bbb
             str.AppendLine("Length (" & su.distance & ")" & vbTab & "Liquid Velocity (" & su.velocity & ")")
             comp_ant = 0
             For Each ps In Profile.Sections.Values
-                For Each res In ps.Resultados
+                For Each res In ps.Results
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
                                    vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.velocity, res.LiqVel.GetValueOrDefault).ToString(numberformat, ci))
                     comp_ant += ps.Comprimento / ps.Incrementos
@@ -2337,7 +2337,7 @@ Final3:     T = bbb
             str.AppendLine("Length (" & su.distance & ")" & vbTab & "Vapor Velocity (" & su.velocity & ")")
             comp_ant = 0
             For Each ps In Profile.Sections.Values
-                For Each res In ps.Resultados
+                For Each res In ps.Results
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
                                    vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.velocity, res.VapVel.GetValueOrDefault).ToString(numberformat, ci))
                     comp_ant += ps.Comprimento / ps.Incrementos
@@ -2350,7 +2350,7 @@ Final3:     T = bbb
             str.AppendLine("Length (" & su.distance & ")" & vbTab & "Liquid Re")
             comp_ant = 0
             For Each ps In Profile.Sections.Values
-                For Each res In ps.Resultados
+                For Each res In ps.Results
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
                                    vbTab & res.LiqRe.GetValueOrDefault.ToString(numberformat, ci))
                     comp_ant += ps.Comprimento / ps.Incrementos
@@ -2363,7 +2363,7 @@ Final3:     T = bbb
             str.AppendLine("Length (" & su.distance & ")" & vbTab & "Vapor Re")
             comp_ant = 0
             For Each ps In Profile.Sections.Values
-                For Each res In ps.Resultados
+                For Each res In ps.Results
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
                                    vbTab & res.VapRe.GetValueOrDefault.ToString(numberformat, ci))
                     comp_ant += ps.Comprimento / ps.Incrementos
@@ -2376,9 +2376,9 @@ Final3:     T = bbb
             str.AppendLine("Length (" & su.distance & ")" & vbTab & "Liquid Holdup")
             comp_ant = 0
             For Each ps In Profile.Sections.Values
-                For Each res In ps.Resultados
+                For Each res In ps.Results
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
-                                   vbTab & res.HoldupDeLiquido.GetValueOrDefault.ToString(numberformat, ci))
+                                   vbTab & res.LiquidHoldup.GetValueOrDefault.ToString(numberformat, ci))
                     comp_ant += ps.Comprimento / ps.Incrementos
                 Next
             Next
@@ -2389,9 +2389,9 @@ Final3:     T = bbb
             str.AppendLine("Length (" & su.distance & ")" & vbTab & "Flow Pattern")
             comp_ant = 0
             For Each ps In Profile.Sections.Values
-                For Each res In ps.Resultados
+                For Each res In ps.Results
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
-                                   vbTab & res.TipoFluxo)
+                                   vbTab & res.FlowRegime)
                     comp_ant += ps.Comprimento / ps.Incrementos
                 Next
             Next
@@ -2402,9 +2402,9 @@ Final3:     T = bbb
             str.AppendLine("Length (" & su.distance & ")" & vbTab & "Heat Exchanged (" & su.heatflow & ")")
             comp_ant = 0
             For Each ps In Profile.Sections.Values
-                For Each res In ps.Resultados
+                For Each res In ps.Results
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
-                                   vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, res.CalorTransferido.GetValueOrDefault).ToString(numberformat, ci))
+                                   vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, res.HeatTransferred.GetValueOrDefault).ToString(numberformat, ci))
                     comp_ant += ps.Comprimento / ps.Incrementos
                 Next
             Next
@@ -2415,7 +2415,7 @@ Final3:     T = bbb
             str.AppendLine("Length (" & su.distance & ")" & vbTab & "Overall HTC (" & su.heat_transf_coeff & ")")
             comp_ant = 0
             For Each ps In Profile.Sections.Values
-                For Each res In ps.Resultados
+                For Each res In ps.Results
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
                                    vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC.GetValueOrDefault).ToString(numberformat, ci))
                     comp_ant += ps.Comprimento / ps.Incrementos
@@ -2428,7 +2428,7 @@ Final3:     T = bbb
             str.AppendLine("Length (" & su.distance & ")" & vbTab & "Internal HTC (" & su.heat_transf_coeff & ")")
             comp_ant = 0
             For Each ps In Profile.Sections.Values
-                For Each res In ps.Resultados
+                For Each res In ps.Results
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
                                    vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC_internal).ToString(numberformat, ci))
                     comp_ant += ps.Comprimento / ps.Incrementos
@@ -2441,7 +2441,7 @@ Final3:     T = bbb
             str.AppendLine("Length (" & su.distance & ")" & vbTab & "Pipe Wall HTC (" & su.heat_transf_coeff & ")")
             comp_ant = 0
             For Each ps In Profile.Sections.Values
-                For Each res In ps.Resultados
+                For Each res In ps.Results
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
                                    vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC_pipewall).ToString(numberformat, ci))
                     comp_ant += ps.Comprimento / ps.Incrementos
@@ -2454,7 +2454,7 @@ Final3:     T = bbb
             str.AppendLine("Length (" & su.distance & ")" & vbTab & "Insulation HTC (" & su.heat_transf_coeff & ")")
             comp_ant = 0
             For Each ps In Profile.Sections.Values
-                For Each res In ps.Resultados
+                For Each res In ps.Results
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
                                    vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC_insulation).ToString(numberformat, ci))
                     comp_ant += ps.Comprimento / ps.Incrementos
@@ -2467,7 +2467,7 @@ Final3:     T = bbb
             str.AppendLine("Length (" & su.distance & ")" & vbTab & "External HTC (" & su.heat_transf_coeff & ")")
             comp_ant = 0
             For Each ps In Profile.Sections.Values
-                For Each res In ps.Resultados
+                For Each res In ps.Results
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
                                    vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC_external).ToString(numberformat, ci))
                     comp_ant += ps.Comprimento / ps.Incrementos
@@ -2480,9 +2480,9 @@ Final3:     T = bbb
             str.AppendLine("Length (" & su.distance & ")" & vbTab & "Energy Flow (" & su.heatflow & ")")
             comp_ant = 0
             For Each ps In Profile.Sections.Values
-                For Each res In ps.Resultados
+                For Each res In ps.Results
                     str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
-                                   vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, res.EnergyFlow_Inicial).ToString(numberformat, ci))
+                                   vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, res.EnergyFlow_Initial).ToString(numberformat, ci))
                     comp_ant += ps.Comprimento / ps.Incrementos
                 Next
             Next
@@ -2596,7 +2596,7 @@ Final3:     T = bbb
                     'distance
                     Dim comp_ant As Double = 0.0F
                     For Each sec In Profile.Sections.Values
-                        For Each res In sec.Resultados
+                        For Each res In sec.Results
                             vec.Add(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant))
                             comp_ant += sec.Comprimento / sec.Incrementos
                         Next
@@ -2605,7 +2605,7 @@ Final3:     T = bbb
                 Case 1
                     'elevation
                     For Each sec In Profile.Sections.Values
-                        For Each res In sec.Resultados
+                        For Each res In sec.Results
                             vec.Add(Math.Atan(sec.Elevacao / Math.Pow(Math.Pow(sec.Comprimento, 2) - Math.Pow(sec.Elevacao, 2), 0.5) * 180 / Math.PI))
                         Next
                     Next
@@ -2613,23 +2613,23 @@ Final3:     T = bbb
                 Case 2
                     'pressure
                     For Each sec In Profile.Sections.Values
-                        For Each res In sec.Resultados
-                            vec.Add(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, res.PressaoInicial.GetValueOrDefault()))
+                        For Each res In sec.Results
+                            vec.Add(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, res.Pressure_Initial.GetValueOrDefault()))
                         Next
                     Next
                     Exit Select
                 Case 3
                     'temperaturee
                     For Each sec In Profile.Sections.Values
-                        For Each res In sec.Resultados
-                            vec.Add(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, res.TemperaturaInicial.GetValueOrDefault()))
+                        For Each res In sec.Results
+                            vec.Add(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, res.Temperature_Initial.GetValueOrDefault()))
                         Next
                     Next
                     Exit Select
                 Case 4
                     'vel liqe
                     For Each sec In Profile.Sections.Values
-                        For Each res In sec.Resultados
+                        For Each res In sec.Results
                             vec.Add(SystemsOfUnits.Converter.ConvertFromSI(su.velocity, res.LiqVel.GetValueOrDefault()))
                         Next
                     Next
@@ -2637,7 +2637,7 @@ Final3:     T = bbb
                 Case 5
                     'vel vape
                     For Each sec In Profile.Sections.Values
-                        For Each res In sec.Resultados
+                        For Each res In sec.Results
                             vec.Add(SystemsOfUnits.Converter.ConvertFromSI(su.velocity, res.VapVel.GetValueOrDefault()))
                         Next
                     Next
@@ -2645,23 +2645,23 @@ Final3:     T = bbb
                 Case 6
                     'heatflowe
                     For Each sec In Profile.Sections.Values
-                        For Each res In sec.Resultados
-                            vec.Add(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, res.CalorTransferido.GetValueOrDefault()))
+                        For Each res In sec.Results
+                            vec.Add(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, res.HeatTransferred.GetValueOrDefault()))
                         Next
                     Next
                     Exit Select
                 Case 7
                     'liqholde
                     For Each sec In Profile.Sections.Values
-                        For Each res In sec.Resultados
-                            vec.Add(res.HoldupDeLiquido.GetValueOrDefault())
+                        For Each res In sec.Results
+                            vec.Add(res.LiquidHoldup.GetValueOrDefault())
                         Next
                     Next
                     Exit Select
                 Case 8
                     'OHTCe
                     For Each sec In Profile.Sections.Values
-                        For Each res In sec.Resultados
+                        For Each res In sec.Results
                             vec.Add(SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC.GetValueOrDefault()))
                         Next
                     Next
@@ -2669,7 +2669,7 @@ Final3:     T = bbb
                 Case 9
                     'IHTCC
                     For Each sec In Profile.Sections.Values
-                        For Each res In sec.Resultados
+                        For Each res In sec.Results
                             vec.Add(SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC_internal))
                         Next
                     Next
@@ -2677,7 +2677,7 @@ Final3:     T = bbb
                 Case 10
                     'IHTC
                     For Each sec In Profile.Sections.Values
-                        For Each res In sec.Resultados
+                        For Each res In sec.Results
                             vec.Add(SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC_pipewall))
                         Next
                     Next
@@ -2685,7 +2685,7 @@ Final3:     T = bbb
                 Case 11
                     'IHTC
                     For Each sec In Profile.Sections.Values
-                        For Each res In sec.Resultados
+                        For Each res In sec.Results
                             vec.Add(SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC_insulation))
                         Next
                     Next
@@ -2693,7 +2693,7 @@ Final3:     T = bbb
                 Case 12
                     'EHTC
                     For Each sec In Profile.Sections.Values
-                        For Each res In sec.Resultados
+                        For Each res In sec.Results
                             vec.Add(SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC_external))
                         Next
                     Next
