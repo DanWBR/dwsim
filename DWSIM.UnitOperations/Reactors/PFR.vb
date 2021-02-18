@@ -809,6 +809,7 @@ Namespace Reactors
             DHRT.Clear()
 
             'do the calculations on each deltaV
+
             Dim currvol As Double = 0.0#
             Dim prevvol As Double = 0.0#
 
@@ -913,6 +914,24 @@ Namespace Reactors
                         i += 1
 
                     Loop Until i = ar.Count
+
+                    If points IsNot Nothing AndAlso points.Count = 0 AndAlso Not dynamics Then
+
+                        'add data to array
+
+                        Dim tmparr0(C0.Count + 2) As Double
+                        tmparr0(0) = 0.0
+                        i = 1
+                        For Each d As Double In Me.C0.Values
+                            tmparr0(i) = d
+                            i = i + 1
+                        Next
+                        tmparr0(i) = T0
+                        tmparr0(i + 1) = P0
+
+                        Me.points.Add(tmparr0)
+
+                    End If
 
                     'SOLVE ODEs
 
@@ -1119,7 +1138,7 @@ Namespace Reactors
 
                     'add data to array
                     Dim tmparr(C.Count + 2) As Double
-                    tmparr(0) = currvol / Volume * Length
+                    tmparr(0) = (currvol + deltaV * Volume) / Volume * Length
                     i = 1
                     For Each d As Double In Me.C.Values
                         tmparr(i) = d
@@ -1197,7 +1216,11 @@ Namespace Reactors
 
                 counter += 1
 
-            Loop Until currvol >= Volume + deltaV
+                If currvol + deltaV * Volume > Volume Then
+                    deltaV0 = (Volume - currvol) / Volume
+                End If
+
+            Loop Until currvol >= Volume
 
             If Not dynamics Then
 

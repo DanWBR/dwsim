@@ -128,9 +128,9 @@ Namespace MathEx.Optimization
 
                 success = SysLin.rsolve.rmatrixsolve(dfdx, fx, x.Length, dx)
 
-                If Common.SumSqr(dx) < Tolerance Then Exit Do
-
                 If success Then
+
+                    If Common.SumSqr(dx) < Tolerance Then Exit Do
 
                     'this call to the brent solver calculates the damping factor which minimizes the error (fval).
 

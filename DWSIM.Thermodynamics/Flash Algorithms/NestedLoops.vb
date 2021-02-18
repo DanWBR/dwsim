@@ -275,9 +275,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             r1 = ConvergeVF(IObj, V, Vz, Vx, Vy, Ki, P, T, PP)
 
-            If r1(6) = True And Math.Abs(Vmax - Vmin) > 0.01 And P > 3 * 101325 Then
+            If r1(6) = True And Math.Abs(Vmax - Vmin) > 0.01 Then
                 r2 = ConvergeVF2(Vmin, Vmax, V, Vz, Vx, Vy, Ki, P, T, PP)
-                If Math.Abs(r2(4)) < etol Then r1 = r2
+                If Math.Abs(r2(4)) < 0.001 Then r1 = r2
             End If
 
             V = r1(0)
@@ -346,10 +346,10 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 Ki_ant = Ki.Clone
                 Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
 
-                For i = 0 To n
-                    If Ki(i) < 0.0000000001 Then Ki(i) = 0.0000000001
-                    If Ki(i) > 1.0E+20 Then Ki(i) = 1.0E+20
-                Next
+                'For i = 0 To n
+                '    If Ki(i) < 0.0000000001 Then Ki(i) = 0.0000000001
+                '    If Ki(i) > 1.0E+20 Then Ki(i) = 1.0E+20
+                'Next
 
                 IObj2?.Paragraphs.Add(String.Format("K values where updated. Current values: {0}", Ki.ToMathArrayString))
 
@@ -468,19 +468,19 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                                                        F = Vz.MultiplyY(Ki.AddConstY(-1).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1))).SumY
 
-                                                       Return F
+                                                       Return F ^ 2
 
                                                    End Function
 
-            Dim bt As New BrentOpt.Brent
+            Dim bt As New BrentOpt.BrentMinimize
 
-            V = bt.BrentOpt2(Vmin, Vmax, 50, 0.000001, 100, Function(x)
-                                                                If x >= 0 And x <= 1 Then
-                                                                    Return EvalF.Invoke(x)
-                                                                Else
-                                                                    Return 10000000000.0
-                                                                End If
-                                                            End Function)
+            V = bt.brentoptimize2(Vmin, Vmax, 1.0E-18, Function(x)
+                                                           If x >= 0 And x <= 1 Then
+                                                               Return EvalF.Invoke(x)
+                                                           Else
+                                                               Return 10000000000.0
+                                                           End If
+                                                       End Function)
 
             Return New Object() {V, Vx, Vy, Ki, F, 0.0}
 
@@ -2390,11 +2390,18 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                         End If
                         Exit Do
                     Else
+
+                        If Double.IsNaN(fval) Then
+                            IObj?.Close()
+                            Return New Object() {-1}
+                        End If
+
                         If Math.Sign(fval * fval_ant) = -1 Then
                             T = T + deltaT / 2
                         Else
                             T = T + deltaT
                         End If
+
                     End If
 
                     IObj2?.Paragraphs.Add(String.Format("Updated Temperature: {0} K", T))

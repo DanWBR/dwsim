@@ -1,5 +1,6 @@
 ﻿Adam Kovalovszki
 Adam Spencer
+Alberto Baumeister
 Alberto Marzi
 Alex Platon
 Alexander Semenyak
