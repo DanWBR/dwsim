@@ -111,13 +111,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>if "$(ConfigurationName)"=="Release" (
-
-xcopy "$(SolutionDir)DWSIM.Tests\bin\x64\Release\*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F /D 2&gt;nul 1&gt;nul 4&gt;nul
-xcopy "$(SolutionDir)DWSIM.Tests\bin\x86\Release\*" "$(SolutionDir)DistPackages\Windows_32\" /E /Y /F /D 2&gt;nul 1&gt;nul 4&gt;nul
-xcopy "$(SolutionDir)DWSIM.Tests\bin\x64\Release\*" "$(SolutionDir)DistPackages\macOS\" /E /Y /F /D 2&gt;nul 1&gt;nul 4&gt;nul
-xcopy "$(SolutionDir)DWSIM.Tests\bin\x64\Release\*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F /D 2&gt;nul 1&gt;nul 4&gt;nul
-
-)</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

@@ -171,9 +171,8 @@
   <PropertyGroup>
     <PostBuildEvent>if "$(ConfigurationName)"=="Release" (
 
-xcopy "$(SolutionDir)$(ProjectName)\bin\x64\Release\*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F /D 2&gt;nul 1&gt;nul 4&gt;nul
-xcopy "$(SolutionDir)$(ProjectName)\bin\x86\Release\*" "$(SolutionDir)DistPackages\Windows_32\" /E /Y /F /D 2&gt;nul 1&gt;nul 4&gt;nul
-xcopy "$(SolutionDir)$(ProjectName)\bin\x64\Release\*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F /D 2&gt;nul 1&gt;nul 4&gt;nul
+xcopy "$(SolutionDir)$(ProjectName)\bin\Release\*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F /D 2&gt;nul 1&gt;nul 4&gt;nul
+xcopy "$(SolutionDir)$(ProjectName)\bin\Release\*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F /D 2&gt;nul 1&gt;nul 4&gt;nul
 
 erase /S /Q "$(SolutionDir)DistPackages\Windows\plugins\*Skia*" 2&gt;nul 1&gt;nul 4&gt;nul
 erase /S /Q "$(SolutionDir)DistPackages\Windows\plugins\*Eto*" 2&gt;nul 1&gt;nul 4&gt;nul
