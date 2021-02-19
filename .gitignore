@@ -105,3 +105,5 @@ TCPServer/bin/Debug/*
 /DistPackages
 /.vs/DWSIM5/v15/Server/sqlite3
 /.vs
+/PlatformFiles/Windows/libcef.dll
+/PlatformFiles/Windows_32/libcef.dll
