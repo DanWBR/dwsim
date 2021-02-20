@@ -10287,38 +10287,41 @@ Final3:
                                     res.Add(Me.CurrentMaterialStream.Phases(f).Properties.entropy.GetValueOrDefault * 1000)
                             End Select
                         Case "internalenergy"
-                            If basis.Equals("mole") Then
-                                Dim val As Double = Me.CurrentMaterialStream.Phases(f).Properties.molecularWeight.GetValueOrDefault
-                                If val = 0.0# Then
-                                    res.Add(Me.CurrentMaterialStream.Phases(f).Properties.molar_internal_energy.GetValueOrDefault)
-                                Else
-                                    res.Add(Me.CurrentMaterialStream.Phases(f).Properties.internal_energy.GetValueOrDefault * val)
-                                End If
-                            Else
-                                res.Add(Me.CurrentMaterialStream.Phases(f).Properties.internal_energy.GetValueOrDefault)
-                            End If
+                            Select Case basis
+                                Case "Molar", "molar", "mole", "Mole"
+                                    Dim val As Double = Me.CurrentMaterialStream.Phases(f).Properties.molecularWeight.GetValueOrDefault
+                                    If val = 0.0# Then
+                                        res.Add(Me.CurrentMaterialStream.Phases(f).Properties.molar_internal_energy.GetValueOrDefault)
+                                    Else
+                                        res.Add(Me.CurrentMaterialStream.Phases(f).Properties.internal_energy.GetValueOrDefault * val)
+                                    End If
+                                Case "Mass", "mass"
+                                    res.Add(Me.CurrentMaterialStream.Phases(f).Properties.internal_energy.GetValueOrDefault * 1000)
+                            End Select
                         Case "gibbsenergy"
-                            If basis.Equals("mole") Then
-                                Dim val As Double = Me.CurrentMaterialStream.Phases(f).Properties.molecularWeight.GetValueOrDefault
-                                If val = 0.0# Then
-                                    res.Add(Me.CurrentMaterialStream.Phases(f).Properties.molar_gibbs_free_energy.GetValueOrDefault)
-                                Else
-                                    res.Add(Me.CurrentMaterialStream.Phases(f).Properties.gibbs_free_energy.GetValueOrDefault * val)
-                                End If
-                            Else
-                                res.Add(Me.CurrentMaterialStream.Phases(f).Properties.gibbs_free_energy.GetValueOrDefault)
-                            End If
+                            Select Case basis
+                                Case "Molar", "molar", "mole", "Mole"
+                                    Dim val As Double = Me.CurrentMaterialStream.Phases(f).Properties.molecularWeight.GetValueOrDefault
+                                    If val = 0.0# Then
+                                        res.Add(Me.CurrentMaterialStream.Phases(f).Properties.molar_gibbs_free_energy.GetValueOrDefault)
+                                    Else
+                                        res.Add(Me.CurrentMaterialStream.Phases(f).Properties.gibbs_free_energy.GetValueOrDefault * val)
+                                    End If
+                                Case "Mass", "mass"
+                                    res.Add(Me.CurrentMaterialStream.Phases(f).Properties.gibbs_free_energy.GetValueOrDefault * 1000)
+                            End Select
                         Case "helmholtzenergy"
-                            If basis.Equals("mole") Then
-                                Dim val As Double = Me.CurrentMaterialStream.Phases(f).Properties.molecularWeight.GetValueOrDefault
-                                If val = 0.0# Then
-                                    res.Add(Me.CurrentMaterialStream.Phases(f).Properties.molar_helmholtz_energy.GetValueOrDefault)
-                                Else
-                                    res.Add(Me.CurrentMaterialStream.Phases(f).Properties.helmholtz_energy.GetValueOrDefault * val)
-                                End If
-                            Else
-                                res.Add(Me.CurrentMaterialStream.Phases(f).Properties.helmholtz_energy.GetValueOrDefault)
-                            End If
+                            Select Case basis
+                                Case "Molar", "molar", "mole", "Mole"
+                                    Dim val As Double = Me.CurrentMaterialStream.Phases(f).Properties.molecularWeight.GetValueOrDefault
+                                    If val = 0.0# Then
+                                        res.Add(Me.CurrentMaterialStream.Phases(f).Properties.molar_helmholtz_energy.GetValueOrDefault)
+                                    Else
+                                        res.Add(Me.CurrentMaterialStream.Phases(f).Properties.helmholtz_energy.GetValueOrDefault * val)
+                                    End If
+                                Case "Mass", "mass"
+                                    res.Add(Me.CurrentMaterialStream.Phases(f).Properties.helmholtz_energy.GetValueOrDefault * 1000)
+                            End Select
                         Case "moles"
                             res.Add(Me.CurrentMaterialStream.Phases(f).Properties.molarflow.GetValueOrDefault)
                             basis = ""

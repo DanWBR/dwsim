@@ -4592,38 +4592,41 @@ Namespace Streams
                             res.Add(Me.Phases(f).Properties.entropyF.GetValueOrDefault * 1000)
                     End Select
                 Case "internalenergy"
-                    If basis.Equals("mole") Then
-                        Dim val As Double = Me.Phases(f).Properties.molecularWeight.GetValueOrDefault
-                        If val = 0.0# Then
-                            res.Add(Me.Phases(f).Properties.molar_internal_energy.GetValueOrDefault)
-                        Else
-                            res.Add(Me.Phases(f).Properties.internal_energy.GetValueOrDefault * val)
-                        End If
-                    Else
-                        res.Add(Me.Phases(f).Properties.internal_energy.GetValueOrDefault)
-                    End If
+                    Select Case basis
+                        Case "Molar", "molar", "mole", "Mole"
+                            Dim val As Double = Me.Phases(f).Properties.molecularWeight.GetValueOrDefault
+                            If val = 0.0# Then
+                                res.Add(Me.Phases(f).Properties.molar_internal_energy.GetValueOrDefault)
+                            Else
+                                res.Add(Me.Phases(f).Properties.internal_energy.GetValueOrDefault * val)
+                            End If
+                        Case "Mass", "mass"
+                            res.Add(Me.Phases(f).Properties.internal_energy.GetValueOrDefault * 1000)
+                    End Select
                 Case "gibbsenergy"
-                    If basis.Equals("mole") Then
-                        Dim val As Double = Me.Phases(f).Properties.molecularWeight.GetValueOrDefault
-                        If val = 0.0# Then
-                            res.Add(Me.Phases(f).Properties.molar_gibbs_free_energy.GetValueOrDefault)
-                        Else
-                            res.Add(Me.Phases(f).Properties.gibbs_free_energy.GetValueOrDefault * val)
-                        End If
-                    Else
-                        res.Add(Me.Phases(f).Properties.gibbs_free_energy.GetValueOrDefault)
-                    End If
+                    Select Case basis
+                        Case "Molar", "molar", "mole", "Mole"
+                            Dim val As Double = Me.Phases(f).Properties.molecularWeight.GetValueOrDefault
+                            If val = 0.0# Then
+                                res.Add(Me.Phases(f).Properties.molar_gibbs_free_energy.GetValueOrDefault)
+                            Else
+                                res.Add(Me.Phases(f).Properties.gibbs_free_energy.GetValueOrDefault * val)
+                            End If
+                        Case "Mass", "mass"
+                            res.Add(Me.Phases(f).Properties.gibbs_free_energy.GetValueOrDefault * 1000)
+                    End Select
                 Case "helmholtzenergy"
-                    If basis.Equals("mole") Then
-                        Dim val As Double = Me.Phases(f).Properties.molecularWeight.GetValueOrDefault
-                        If val = 0.0# Then
-                            res.Add(Me.Phases(f).Properties.molar_helmholtz_energy.GetValueOrDefault)
-                        Else
-                            res.Add(Me.Phases(f).Properties.helmholtz_energy.GetValueOrDefault * val)
-                        End If
-                    Else
-                        res.Add(Me.Phases(f).Properties.helmholtz_energy.GetValueOrDefault)
-                    End If
+                    Select Case basis
+                        Case "Molar", "molar", "mole", "Mole"
+                            Dim val As Double = Me.Phases(f).Properties.molecularWeight.GetValueOrDefault
+                            If val = 0.0# Then
+                                res.Add(Me.Phases(f).Properties.molar_helmholtz_energy.GetValueOrDefault)
+                            Else
+                                res.Add(Me.Phases(f).Properties.helmholtz_energy.GetValueOrDefault * val)
+                            End If
+                        Case "Mass", "mass"
+                            res.Add(Me.Phases(f).Properties.helmholtz_energy.GetValueOrDefault * 1000)
+                    End Select
                 Case "moles"
                     res.Add(Me.Phases(f).Properties.molarflow.GetValueOrDefault)
                 Case "mass"
@@ -4742,9 +4745,19 @@ Namespace Streams
                 Case "activity"
                     units = "Pa"
                 Case "volume"
-                    units = "m3/mol"
+                    Select Case basis
+                        Case "Molar", "molar", "mole", "Mole"
+                            units = "m3/mol"
+                        Case "Mass", "mass"
+                            units = "m3/kg"
+                    End Select
                 Case "density"
-                    units = "kg/m3"
+                    Select Case basis
+                        Case "Molar", "molar", "mole", "Mole"
+                            units = "mol/m3"
+                        Case "Mass", "mass"
+                            units = "kg/m3"
+                    End Select
                 Case "moles"
                     units = "mol"
                 Case "mass"
@@ -4758,7 +4771,9 @@ Namespace Streams
                 Case "flow", "totalflow"
                     Select Case basis
                         Case "Molar", "molar", "mole", "Mole"
+                            units = "mol/s"
                         Case "Mass", "mass"
+                            units = "kg/s"
                     End Select
                 Case "concentration"
                     units = "kg/m3"
@@ -5148,7 +5163,7 @@ Namespace Streams
                 Case "density"
                     Select Case basis
                         Case "Molar", "molar", "mole", "Mole"
-                            Me.Phases(f).Properties.density = values(0) / 1000
+                            Me.Phases(f).Properties.density = values(0) / 1000 * Me.PropertyPackage.AUX_MMM(phs)
                         Case "Mass", "mass"
                             Me.Phases(f).Properties.density = values(0)
                     End Select
