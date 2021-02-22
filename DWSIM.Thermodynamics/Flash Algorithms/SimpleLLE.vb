@@ -39,6 +39,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Dim Sv0, Svid, Slid, Sf, Sv, Sl As Double
 
         Public Property InitialEstimatesForPhase1 As Double()
+        Public Property InitialEstimateForPhase1Amount As Double?
         Public Property UseInitialEstimatesForPhase1 As Boolean = False
 
         Public Property InitialEstimatesForPhase2 As Double()
@@ -113,23 +114,28 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
 
             If UseInitialEstimatesForPhase1 And UseInitialEstimatesForPhase2 Then
-                L1 = 0
-                L2 = 0
-                For i = 0 To n
-                    If Vz(i) > 0 Then
-                        j += 1
-                        If InitialEstimatesForPhase1(i) = InitialEstimatesForPhase2(i) Then
-                            L1 += 0.5
-                        Else
-                            Dim diff As Double = (InitialEstimatesForPhase1(i) - InitialEstimatesForPhase2(i))
-                            If diff > 0.0# Then L1 += Abs((Vz(i) - InitialEstimatesForPhase2(i)) / diff)
+                If InitialEstimateForPhase1Amount.HasValue Then
+                    L1 = InitialEstimateForPhase1Amount.Value
+                    L2 = 1 - L1
+                Else
+                    L1 = 0
+                    L2 = 0
+                    For i = 0 To n
+                        If Vz(i) > 0 Then
+                            j += 1
+                            If InitialEstimatesForPhase1(i) = InitialEstimatesForPhase2(i) Then
+                                L1 += 0.5
+                            Else
+                                Dim diff As Double = (InitialEstimatesForPhase1(i) - InitialEstimatesForPhase2(i))
+                                If diff > 0.0# Then L1 += Abs((Vz(i) - InitialEstimatesForPhase2(i)) / diff)
+                            End If
                         End If
-                    End If
-                Next
-                L1 = L1 / j
-                If L1 > 0.99 Then L1 = 0.99
-                If L1 < 0.01 Then L1 = 0.01
-                L2 = 1 - L1
+                    Next
+                    L1 = L1 / j
+                    If L1 > 0.99 Then L1 = 0.99
+                    If L1 < 0.01 Then L1 = 0.01
+                    L2 = 1 - L1
+                End If
             Else
                 Dim minn As Double = Vz(0)
                 j = 0
