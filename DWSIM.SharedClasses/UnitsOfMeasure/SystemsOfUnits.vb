@@ -1841,7 +1841,7 @@ Namespace SystemsOfUnits
                 Case "W"
                     Return value * 1000
                 Case "MJ/h"
-                    Return value * 1000.0 / 3600.0
+                    Return value / 1000.0 * 3600.0
 
                 Case "BTU/lb"
                     Return value * 0.429923
