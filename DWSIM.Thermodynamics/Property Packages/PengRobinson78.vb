@@ -651,6 +651,8 @@ Namespace PropertyPackages
 
                 IObj?.Close()
 
+                If Double.IsNaN(H) Then H = 0.0
+
                 Return H
 
             End If
@@ -702,6 +704,8 @@ Namespace PropertyPackages
                 End If
 
                 IObj?.Close()
+
+                If Double.IsNaN(S) Then S = 0.0
 
                 Return S
 

@@ -273,11 +273,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             'Return New Object() {V, Vx, Vy, Ki, F, ecount, overshoot}
 
-            r1 = ConvergeVF(IObj, V, Vz, Vx, Vy, Ki, P, T, PP)
+            r1 = ConvergeVF(IObj, V, Vz, Vx, Vy, Ki, P, T, PP, False)
 
             If r1(6) = True And Math.Abs(Vmax - Vmin) > 0.01 Then
-                r2 = ConvergeVF2(Vmin, Vmax, V, Vz, Vx, Vy, Ki, P, T, PP)
-                If Math.Abs(r2(4)) < 0.001 Then r1 = r2
+                r1 = ConvergeVF(IObj, (Vmin + Vmax) / 2, Vz, Vx, Vy, Ki, P, T, PP, True)
             End If
 
             V = r1(0)
@@ -317,7 +316,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
         End Function
 
-        Private Function ConvergeVF(IObj As InspectorItem, V As Double, Vz As Double(), Vx As Double(), Vy As Double(), Ki As Double(), P As Double, T As Double, PP As PropertyPackage) As Object()
+        Private Function ConvergeVF(IObj As InspectorItem, V As Double, Vz As Double(), Vx As Double(), Vy As Double(), Ki As Double(), P As Double, T As Double, PP As PropertyPackage, damp As Boolean) As Object()
 
             Dim n As Integer = Vz.Length - 1
 
@@ -327,6 +326,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             Dim converged As Integer = 0
             Dim F, Vant, dF, e1, e2, e3 As Double
             Dim overshoot As Boolean = False
+            Dim dfac As Double = dampingfactor
 
             IObj?.Paragraphs.Add(String.Format("Initial estimates for y: {0}", Vy.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Initial estimates for x: {0}", Vx.ToMathArrayString))
@@ -345,11 +345,6 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                 Ki_ant = Ki.Clone
                 Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
-
-                'For i = 0 To n
-                '    If Ki(i) < 0.0000000001 Then Ki(i) = 0.0000000001
-                '    If Ki(i) > 1.0E+20 Then Ki(i) = 1.0E+20
-                'Next
 
                 IObj2?.Paragraphs.Add(String.Format("K values where updated. Current values: {0}", Ki.ToMathArrayString))
 
@@ -399,7 +394,15 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     If Abs(F) < etol Then Exit Do
 
-                    V = -F / dF * dampingfactor + Vant
+                    If damp Then
+                        dfac = (ecount + 1) * 0.2
+                        If dfac > 1.0 Then dfac = 1.0
+                        If -F / dF * dfac + Vant > 1.0 Or -F / dF * dfac + Vant < 0.0 Then
+                            dfac /= 10
+                        End If
+                    End If
+
+                    V = -F / dF * dfac + Vant
 
                     If LimitVaporFraction Then
                         If V < 0.0 Then

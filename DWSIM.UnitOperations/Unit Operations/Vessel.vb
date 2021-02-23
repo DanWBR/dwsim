@@ -643,6 +643,9 @@ Namespace UnitOperations
 
             If VnL2.Sum > 0 Then dens2 = DirectCast(PropertyPackage, PropertyPackages.PropertyPackage).AUX_LIQDENS(T, VnL2, P)
 
+            If Double.IsNaN(dens1) Then dens1 = 0.0
+            If Double.IsNaN(dens2) Then dens2 = 0.0
+
             If dens1 <= dens2 Then
 
                 cp = Me.GraphicObject.OutputConnectors(1) 'liquid 1
@@ -655,13 +658,22 @@ Namespace UnitOperations
                         .Phases(0).Properties.temperature = T
                         .Phases(0).Properties.pressure = P
                         .Phases(0).Properties.enthalpy = MixedStream.Phases(3).Properties.enthalpy.GetValueOrDefault
-                        If W1 > 0.0# Then .Phases(0).Properties.massflow = W1 Else .Phases(0).Properties.molarflow = 0.0#
+                        If W1 > 0.0# Then
+                            .Phases(0).Properties.massflow = W1
+                        Else
+                            .Phases(0).Properties.molarflow = 0.0#
+                        End If
                         .Phases(0).Properties.enthalpy = HL1
                         Dim comp As BaseClasses.Compound
                         i = 0
                         For Each comp In .Phases(0).Compounds.Values
-                            comp.MoleFraction = VnL1(Vids.IndexOf(comp.Name))
-                            comp.MassFraction = VmL1(Vids.IndexOf(comp.Name))
+                            If W1 > 0 Then
+                                comp.MoleFraction = VnL1(Vids.IndexOf(comp.Name))
+                                comp.MassFraction = VmL1(Vids.IndexOf(comp.Name))
+                            Else
+                                comp.MoleFraction = MixedStream.Phases(3).Compounds(comp.Name).MoleFraction.GetValueOrDefault
+                                comp.MassFraction = MixedStream.Phases(3).Compounds(comp.Name).MassFraction.GetValueOrDefault
+                            End If
                             i += 1
                         Next
                         If WS = 0.0 Then
@@ -682,13 +694,22 @@ Namespace UnitOperations
                         .Phases(0).Properties.temperature = T
                         .Phases(0).Properties.pressure = P
                         .Phases(0).Properties.enthalpy = MixedStream.Phases(4).Properties.enthalpy.GetValueOrDefault
-                        If W2 > 0.0# Then .Phases(0).Properties.massflow = W2 Else .Phases(0).Properties.molarflow = 0.0#
+                        If W2 > 0.0# Then
+                            .Phases(0).Properties.massflow = W2
+                        Else
+                            .Phases(0).Properties.molarflow = 0.0#
+                        End If
                         .Phases(0).Properties.enthalpy = HL2
                         Dim comp As BaseClasses.Compound
                         i = 0
                         For Each comp In .Phases(0).Compounds.Values
-                            comp.MoleFraction = VnL2(Vids.IndexOf(comp.Name))
-                            comp.MassFraction = VmL2(Vids.IndexOf(comp.Name))
+                            If W2 > 0 Then
+                                comp.MoleFraction = VnL2(Vids.IndexOf(comp.Name))
+                                comp.MassFraction = VmL2(Vids.IndexOf(comp.Name))
+                            Else
+                                comp.MoleFraction = MixedStream.Phases(4).Compounds(comp.Name).MoleFraction.GetValueOrDefault
+                                comp.MassFraction = MixedStream.Phases(4).Compounds(comp.Name).MassFraction.GetValueOrDefault
+                            End If
                             i += 1
                         Next
                         If WS = 0.0 Then
