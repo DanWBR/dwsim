@@ -179,6 +179,8 @@ Public Class EditingForm_Adjust_ControlPanel
 
                 DWSIM.FlowsheetSolver.FlowsheetSolver.CalculateObject(formC, myADJ.ManipulatedObject.GraphicObject.Name)
 
+                formC.UpdateOpenEditForms()
+
                 If myADJ.Referenced Then
                     rfVal = Me.GetRefVarValue()
                     Dim punit = formC.SimulationObjects(myADJ.ReferencedObjectData.ID).GetPropertyUnit(myADJ.ReferencedObjectData.PropertyName, su)
