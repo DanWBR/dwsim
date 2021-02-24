@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 6.4.3
+Version 6.4.4
 Copyright (c) 2017-2021 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,21 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim6/commits/windows
+
+Version 6.4.4
+
+Author              Description
+Daniel Medeiros     Fixed issue 111 (The field is not updated correctly after the method converges)
+Daniel Medeiros     Fixed issue 117 (Issue with recycling mixed streams)
+Daniel Medeiros     Fixed issue with VLE PT Flash
+Daniel Medeiros     Fixed an issue with simultaneous adjust solver
+Daniel Medeiros     Fixed PFR volume iteration
+Daniel Medeiros     Fixed flowsheet update after finishing calculation
+Daniel Medeiros     Fixed units for some properties in Excel Add-In
+Daniel Medeiros     Fixed conversion from kW to MJ/h
+Daniel Medeiros     Fixed conversion of BTU/h and MMBTU/h
+Daniel Medeiros     Fixed issues with Heat Exchanger Shell and Tube calculation mode
+Daniel Medeiros     Darker green color in digital gauge
 
 Version 6.4.3
 
