@@ -68,6 +68,7 @@ Author              Description
 Daniel Medeiros     Fixed issue 111 (The field is not updated correctly after the method converges)
 Daniel Medeiros     Fixed issue 117 (Issue with recycling mixed streams)
 Daniel Medeiros     Fixed issue with VLE PT Flash
+Daniel Medeiros     Added an option to use IO Flash in VLE/VLLE equilibrium calculations
 Daniel Medeiros     Fixed an issue with simultaneous adjust solver
 Daniel Medeiros     Fixed PFR volume iteration
 Daniel Medeiros     Fixed flowsheet update after finishing calculation
