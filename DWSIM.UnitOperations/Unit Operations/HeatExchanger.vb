@@ -777,10 +777,10 @@ Namespace UnitOperations
 
                     If STProperties.Tube_Fluid = 0 Then
                         'cold
-                        hi = Pipe.hint_petukhov(kc, di, fric, Ret, Prt)
+                        hi = kc / di * (fric / 8) * Ret * Prt / (1.07 + 12.7 * (fric / 8) ^ 0.5 * (Prt ^ (2 / 3) - 1))
                     Else
                         'hot
-                        hi = Pipe.hint_petukhov(kh, di, fric, Ret, Prt)
+                        hi = kh / di * (fric / 8) * Ret * Prt / (1.07 + 12.7 * (fric / 8) ^ 0.5 * (Prt ^ (2 / 3) - 1))
                     End If
 
                     'shell internal diameter
@@ -2160,10 +2160,10 @@ Namespace UnitOperations
                         'tube heat transfer coeff
                         If STProperties.Tube_Fluid = 0 Then
                             'cold
-                            hi = Pipe.hint_petukhov(kc, di, fric, Ret, Prt)
+                            hi = kc / di * (fric / 8) * Ret * Prt / (1.07 + 12.7 * (fric / 8) ^ 0.5 * (Prt ^ (2 / 3) - 1))
                         Else
                             'hot
-                            hi = Pipe.hint_petukhov(kh, di, fric, Ret, Prt)
+                            hi = kh / di * (fric / 8) * Ret * Prt / (1.07 + 12.7 * (fric / 8) ^ 0.5 * (Prt ^ (2 / 3) - 1))
                         End If
 
                         IObj?.Paragraphs.Add("<mi>h_{int,tube}</mi> = " & hi & " W/[m2.K]")
