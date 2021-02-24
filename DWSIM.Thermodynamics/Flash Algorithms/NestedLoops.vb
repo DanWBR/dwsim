@@ -282,9 +282,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             If r1(6) = True And Math.Abs(Vmax - Vmin) > 0.01 Then
                 r1 = ConvergeVF(IObj, (Vmin + Vmax) / 2, Vz, Vx0, Vy0, Ki0, P, T, PP, 1)
-                If r1(6) = True And Math.Abs(Vmax - Vmin) > 0.01 Then
-                    r1 = ConvergeVF(IObj, (Vmin + Vmax) / 2, Vz, Vx0, Vy0, Ki0, P, T, PP, 2)
-                End If
             End If
 
             V = r1(0)
