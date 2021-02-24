@@ -131,6 +131,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             n = Vz.Length - 1
 
             Dim Vn(n) As String, Vx(n), Vy(n), Vx_ant(n), Vy_ant(n), Vp(n), Ki(n), Ki_ant(n), fi(n) As Double
+            Dim Vx0(n), Vy0(n), Ki0(n) As Double
             Dim VPc(n), VTc(n), Vw(n) As Double
 
             VPc = PP.RET_VPC()
@@ -269,14 +270,21 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Vy = Vz.MultiplyY(Ki).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1)).NormalizeY
             Vx = Vy.DivideY(Ki).NormalizeY
 
-            Dim r1, r2 As Object()
+            Ki0 = Ki.Clone()
+            Vx0 = Vx.Clone()
+            Vy0 = Vy.Clone()
+
+            Dim r1 As Object()
 
             'Return New Object() {V, Vx, Vy, Ki, F, ecount, overshoot}
 
-            r1 = ConvergeVF(IObj, V, Vz, Vx, Vy, Ki, P, T, PP, False)
+            r1 = ConvergeVF(IObj, V, Vz, Vx0, Vy0, Ki0, P, T, PP, 0)
 
             If r1(6) = True And Math.Abs(Vmax - Vmin) > 0.01 Then
-                r1 = ConvergeVF(IObj, (Vmin + Vmax) / 2, Vz, Vx, Vy, Ki, P, T, PP, True)
+                r1 = ConvergeVF(IObj, (Vmin + Vmax) / 2, Vz, Vx0, Vy0, Ki0, P, T, PP, 1)
+                If r1(6) = True And Math.Abs(Vmax - Vmin) > 0.01 Then
+                    r1 = ConvergeVF(IObj, (Vmin + Vmax) / 2, Vz, Vx0, Vy0, Ki0, P, T, PP, 2)
+                End If
             End If
 
             V = r1(0)
@@ -312,11 +320,11 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             IObj?.Close()
 
-            Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
+            Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector, Ki}
 
         End Function
 
-        Private Function ConvergeVF(IObj As InspectorItem, V As Double, Vz As Double(), Vx As Double(), Vy As Double(), Ki As Double(), P As Double, T As Double, PP As PropertyPackage, damp As Boolean) As Object()
+        Private Function ConvergeVF(IObj As InspectorItem, V As Double, Vz As Double(), Vx As Double(), Vy As Double(), Ki As Double(), P As Double, T As Double, PP As PropertyPackage, damplevel As Integer) As Object()
 
             Dim n As Integer = Vz.Length - 1
 
@@ -394,11 +402,17 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     If Abs(F) < etol Then Exit Do
 
-                    If damp Then
+                    If damplevel = 1 Then
                         dfac = (ecount + 1) * 0.2
                         If dfac > 1.0 Then dfac = 1.0
                         If -F / dF * dfac + Vant > 1.0 Or -F / dF * dfac + Vant < 0.0 Then
                             dfac /= 10
+                        End If
+                    ElseIf damplevel = 2 Then
+                        dfac = (ecount + 1) * 0.1
+                        If dfac > 1.0 Then dfac = 1.0
+                        If -F / dF * dfac + Vant > 1.0 Or -F / dF * dfac + Vant < 0.0 Then
+                            dfac /= 50
                         End If
                     End If
 

@@ -279,6 +279,8 @@ Namespace Enums
 
         HandleSolidsInDefaultEqCalcMode = 27
 
+        UseIOFlash = 28
+
     End Enum
 
     Public Enum FlashCalculationType

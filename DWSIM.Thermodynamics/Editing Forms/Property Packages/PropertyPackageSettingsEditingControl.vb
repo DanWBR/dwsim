@@ -52,10 +52,6 @@ Public Class PropertyPackageSettingsEditingControl
 
         chkIgnoreVapFracLim.Checked = PropPack.IgnoreVaporFractionLimit
 
-        chkDoPhaseId.Checked = PropPack.FlashSettings(Interfaces.Enums.FlashSetting.UsePhaseIdentificationAlgorithm)
-
-        chkCalcBubbleDew.Checked = PropPack.FlashSettings(Interfaces.Enums.FlashSetting.CalculateBubbleAndDewPoints)
-
         chkCalcAdditionalProps.Checked = PropPack.CalculateAdditionalMaterialStreamProperties
 
         AddHandler cbLiqDens.SelectedIndexChanged, Sub()
@@ -116,13 +112,6 @@ Public Class PropertyPackageSettingsEditingControl
                                                               PropPack.CalculateAdditionalMaterialStreamProperties = chkCalcAdditionalProps.Checked
                                                           End Sub
 
-        AddHandler chkDoPhaseId.CheckedChanged, Sub()
-                                                    PropPack.FlashSettings(Interfaces.Enums.FlashSetting.UsePhaseIdentificationAlgorithm) = chkDoPhaseId.Checked
-                                                End Sub
-
-        AddHandler chkCalcBubbleDew.CheckedChanged, Sub()
-                                                        PropPack.FlashSettings(Interfaces.Enums.FlashSetting.CalculateBubbleAndDewPoints) = chkCalcBubbleDew.Checked
-                                                    End Sub
     End Sub
 
 End Class

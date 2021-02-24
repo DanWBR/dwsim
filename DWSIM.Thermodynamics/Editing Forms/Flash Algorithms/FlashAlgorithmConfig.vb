@@ -27,7 +27,6 @@ Public Class FlashAlgorithmConfig
 
         ci = Globalization.CultureInfo.InvariantCulture
 
-        chkReplaceFlashPT.Checked = Settings(Interfaces.Enums.FlashSetting.Replace_PTFlash)
         chkValidateEqCalc.Checked = Settings(Interfaces.Enums.FlashSetting.ValidateEquilibriumCalc)
         tbFlashValidationTolerance.Text = Double.Parse(Settings(Interfaces.Enums.FlashSetting.ValidationGibbsTolerance), ci).ToString
 
@@ -54,6 +53,12 @@ Public Class FlashAlgorithmConfig
 
         chkHandleSolids.Checked = Settings(Interfaces.Enums.FlashSetting.HandleSolidsInDefaultEqCalcMode)
 
+        chkUseIOFlash.Checked = Settings(Interfaces.Enums.FlashSetting.UseIOFlash)
+
+        chkDoPhaseId.Checked = Settings(Interfaces.Enums.FlashSetting.UsePhaseIdentificationAlgorithm)
+
+        chkCalcBubbleDew.Checked = Settings(Interfaces.Enums.FlashSetting.CalculateBubbleAndDewPoints)
+
         Select Case Settings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType)
             Case "Default"
                 cbFlashType.SelectedIndex = 0
@@ -77,7 +82,6 @@ Public Class FlashAlgorithmConfig
 
             If Not ExcelMode Then
 
-                Settings(Interfaces.Enums.FlashSetting.Replace_PTFlash) = chkReplaceFlashPT.Checked
                 Settings(Interfaces.Enums.FlashSetting.ValidateEquilibriumCalc) = chkValidateEqCalc.Checked
 
                 Settings(Interfaces.Enums.FlashSetting.ValidationGibbsTolerance) = Double.Parse(tbFlashValidationTolerance.Text).ToString(ci)
@@ -120,6 +124,12 @@ Public Class FlashAlgorithmConfig
 
             Settings(Interfaces.Enums.FlashSetting.HandleSolidsInDefaultEqCalcMode) = chkHandleSolids.Checked
 
+            Settings(Interfaces.Enums.FlashSetting.UseIOFlash) = chkUseIOFlash.Checked
+
+            Settings(Interfaces.Enums.FlashSetting.UsePhaseIdentificationAlgorithm) = chkDoPhaseId.Checked
+
+            Settings(Interfaces.Enums.FlashSetting.CalculateBubbleAndDewPoints) = chkCalcBubbleDew.Checked
+
         Catch ex As Exception
 
             MessageBox.Show("Error parsing input. Some settings may not have been updated.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -138,6 +148,11 @@ Public Class FlashAlgorithmConfig
             chkHandleSolids.Enabled = True
         Else
             chkHandleSolids.Enabled = False
+        End If
+        If cbFlashType.SelectedIndex < 3 Then
+            chkUseIOFlash.Enabled = True
+        Else
+            chkUseIOFlash.Enabled = False
         End If
     End Sub
 

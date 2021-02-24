@@ -12304,6 +12304,9 @@ Final3:
                 If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.HandleSolidsInDefaultEqCalcMode) Then
                     FlashSettings.Add(Interfaces.Enums.FlashSetting.HandleSolidsInDefaultEqCalcMode, False)
                 End If
+                If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.UseIOFlash) Then
+                    FlashSettings.Add(Interfaces.Enums.FlashSetting.UseIOFlash, False)
+                End If
             End If
 
         End Function

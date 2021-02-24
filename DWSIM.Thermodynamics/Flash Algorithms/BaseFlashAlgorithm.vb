@@ -131,6 +131,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             settings(Interfaces.Enums.FlashSetting.HandleSolidsInDefaultEqCalcMode) = False
 
+            settings(Interfaces.Enums.FlashSetting.UseIOFlash) = False
+
             Return settings
 
         End Function
@@ -1518,6 +1520,9 @@ will converge to this solution.")
                 End If
                 If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.HandleSolidsInDefaultEqCalcMode) Then
                     FlashSettings.Add(Interfaces.Enums.FlashSetting.HandleSolidsInDefaultEqCalcMode, False)
+                End If
+                If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.UseIOFlash) Then
+                    FlashSettings.Add(Interfaces.Enums.FlashSetting.UseIOFlash, False)
                 End If
             End If
 
