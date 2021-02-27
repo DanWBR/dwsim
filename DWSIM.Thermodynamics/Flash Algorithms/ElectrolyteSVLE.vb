@@ -610,11 +610,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             For i = 0 To nc
                 If CompoundProperties(i).IsIon Then
                     'CP(i) = molality(i) * activcoeff(i)
-                    CP(i) = Vxl(i) '* activcoeff(i)
+                    CP(i) = Vxl(i) * activcoeff(i)
                 ElseIf CompoundProperties(i).IsSalt Then
                     CP(i) = 1.0#
                 Else
-                    CP(i) = Vxl(i) '* activcoeff(i)
+                    CP(i) = Vxl(i) * activcoeff(i)
                 End If
             Next
 
