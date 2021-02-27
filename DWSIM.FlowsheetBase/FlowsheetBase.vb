@@ -2339,6 +2339,15 @@ Label_00CC:
 
         Dim t11 = New Task(Sub()
 
+
+                               Dim EUQPP As ExUNIQUACPropertyPackage = New ExUNIQUACPropertyPackage()
+                               EUQPP.ComponentName = "Extended UNIQUAC (Aqueous Electrolytes)"
+                               plist.Add(EUQPP)
+
+                               Dim ENQPP As New ElectrolyteNRTLPropertyPackage()
+                               ENQPP.ComponentName = "Electrolyte NRTL (Aqueous Electrolytes)"
+                               plist.Add(ENQPP)
+
                                Dim BOPP As BlackOilPropertyPackage = New BlackOilPropertyPackage()
                                BOPP.ComponentName = "Black Oil"
                                plist.Add(BOPP)

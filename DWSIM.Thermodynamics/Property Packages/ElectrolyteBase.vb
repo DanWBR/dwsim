@@ -628,14 +628,14 @@ Namespace PropertyPackages
 
                             Me.CurrentMaterialStream.Phases(0).Properties.molarflow = M * W / MW * 1000
 
-                            i = 0
-                            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                                subst.MoleFraction = Vnf(i) / M
-                                i += 1
-                            Next
-                            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                                subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 0)
-                            Next
+                            'i = 0
+                            'For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                            '    subst.MoleFraction = Vnf(i) / M
+                            '    i += 1
+                            'Next
+                            'For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                            '    subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 0)
+                            'Next
 
                             Dim Vx = result("LiquidPhaseMolarComposition")
                             Dim Vy = result("VaporPhaseMolarComposition")
