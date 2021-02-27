@@ -1003,7 +1003,7 @@ Namespace Reactors
 
             If ReactorOperationMode = OperationMode.Adiabatic Then
                 Dim newton As New Optimization.NewtonSolver
-                newton.MaxIterations = 20
+                newton.MaxIterations = 50
                 newton.Tolerance = 0.01
                 newton.EnableDamping = True
                 newton.Solve(Function(Tx)

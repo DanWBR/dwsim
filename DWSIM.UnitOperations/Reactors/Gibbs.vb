@@ -892,9 +892,19 @@ Namespace Reactors
 
             If ReactorOperationMode = OperationMode.Adiabatic Then
                 Dim brent As New BrentOpt.BrentMinimize
-                brent.brentoptimize2(200, T * 2 - 200, 0.01, Function(Tx)
-                                                                 Return gfunc.Invoke(Tx)
-                                                             End Function)
+                Dim tryagain As Boolean = True
+                Try
+                    brent.brentoptimize2(200, T * 3 - 200, 0.01, Function(Tx)
+                                                                     Return gfunc.Invoke(Tx)
+                                                                 End Function)
+                    tryagain = False
+                Catch ex As Exception
+                End Try
+                If tryagain Then
+                    brent.brentoptimize2(200, T * 2 - 200, 0.01, Function(Tx)
+                                                                     Return gfunc.Invoke(Tx)
+                                                                 End Function)
+                End If
             Else
                 gfunc.Invoke(T)
             End If

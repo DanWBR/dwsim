@@ -59,7 +59,7 @@ Namespace MathEx.Optimization
         ''' <returns>vector of variables which solve the equations according to the minimum allowable error value (tolerance).</returns>
         Function Solve(functionbody As Func(Of Double(), Double()), vars As Double()) As Double()
 
-            Dim minimaldampings As Double() = New Double() {0.01, 0.1}
+            Dim minimaldampings As Double() = New Double() {0.001, 0.01, 0.1}
             Dim epsilons As Double() = New Double() {0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1}
 
             Dim leave As Boolean = False
@@ -223,7 +223,7 @@ Namespace MathEx.Optimization
                     f1 = fxb.Invoke(x1)
                     f2 = fxb.Invoke(x2)
                     For k = 0 To x.Length - 1
-                        g(k, i) = (f2(k) - f1(k)) / (x2(i) - x(i))
+                        g(k, i) = (f2(k) - f1(k)) / (x2(i) - x1(i))
                     Next
                 Next
 
