@@ -16,19 +16,11 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports DWSIM.Thermodynamics.PropertyPackages
 Imports System.Math
-Imports System.Xml.Linq
-Imports System.Linq
-
 Imports DWSIM.MathOps.MathEx
 Imports DWSIM.MathOps.MathEx.Common
-Imports Ciloci.Flee
 Imports DWSIM.Interfaces.Enums
-Imports Cureos.Numerics
 Imports DotNumerics.Optimization
-Imports DWSIM.Thermodynamics.BaseClasses
-Imports DotNumerics.Scaling
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
@@ -54,8 +46,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Dim Hf, Hl, Hv, Hs, T, P, P0, Ninerts, Winerts, E(,) As Double
         Dim r, c, els, comps As Integer
 
-        Private IdealCalc As Boolean = False
-
         Public Property ReactionSet As String = "DefaultSet"
         Public Property Reactions As List(Of String)
         Public Property ReactionExtents As Dictionary(Of String, Double)
@@ -66,17 +56,15 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Public Property MaximumIterations As Integer = 100
         Public Property Tolerance As Double = 0.001
 
-        Public Property ObjectiveFunctionHistory As New List(Of Double)
+        Public Property ElementMatrix() As Double(,)
 
-        Public Property CalculateChemicalEquilibria As Boolean = False
+        Public Property Elements() As String()
 
-        Public Property OptimizeInitialEstimates As Boolean = True
+        Public Property TotalElements() As Double()
 
-        Public Property UseIPOPTSolver As Boolean = True
+        Public Property ActiveComponents() As List(Of String)
 
-        Public Property AlternateBoundsInitializer As Boolean = False
-
-        Public Property RigorousEnergyBalance As Boolean = True
+        Public Property ActiveReactions() As List(Of String)
 
         Private Vxl0, Vf0 As Double()
 
@@ -146,7 +134,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim V_ant As Double = 0.0#
             Dim Lerr As Double = 0.0
 
-            Dim rext As Double() = Nothing
             Dim result As Object
 
             sumN = 1.0#
@@ -165,19 +152,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     ''SolveChemicalEquilibria' returns the equilibrium molar amounts in the liquid phase, including precipitates.
 
-                    If CalculateChemicalEquilibria And Vnl(wid) > 0.0# And Vp(wid) < P Then
+                    If Vnl(wid) > 0.0# And Vp(wid) < P Then
 
-                        If int_count > 0 Then
-                            For i = 0 To rext.Count - 1
-                                rext(i) = 0.0
-                            Next
-                        End If
+                        result = SolveChemicalEquilibria(Vnl, T, P, ids)
 
-                        result = SolveChemicalEquilibria(Vnl, T, P, ids, rext)
-
-                        Vnl = result(0).clone
-
-                        rext = result(1)
+                        Vnl = result.clone
 
                     End If
 
@@ -255,7 +234,42 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Function
 
-        Private Function SolveChemicalEquilibria(ByVal Vnl As Double(), ByVal T As Double, ByVal P As Double, ByVal ids As List(Of String), Optional ByVal prevx As Double() = Nothing) As Array
+        Public Sub CreateElementMatrix(amounts As Double(), compounds As String(), cprops As Dictionary(Of String, Interfaces.ICompoundConstantProperties))
+
+            Dim elements As New List(Of String)
+
+            For Each sn As String In Me.ComponentIDs
+                For Each el As String In cprops(sn).Elements.Keys
+                    If Not elements.Contains(el) Then elements.Add(el)
+                Next
+            Next
+
+            Me.Elements = elements.ToArray()
+
+            els = Me.Elements.Length - 1
+            c = Me.ComponentIDs.Count - 1
+
+            ReDim ElementMatrix(els, c)
+            ReDim TotalElements(els)
+
+            Dim sum_e As Double
+
+            For i = 0 To els
+                sum_e = 0
+                For j = 0 To c
+                    If cprops(compounds(j)).Elements.ContainsKey(elements(i)) Then
+                        ElementMatrix(i, j) = cprops(compounds(j)).Elements(elements(i))
+                    Else
+                        ElementMatrix(i, j) = 0
+                    End If
+                    sum_e += amounts(j) * ElementMatrix(i, j)
+                Next
+                TotalElements(i) = sum_e
+            Next
+
+        End Sub
+
+        Private Function SolveChemicalEquilibria(ByVal Vnl As Double(), ByVal T As Double, ByVal P As Double, ByVal ids As List(Of String)) As Array
 
             Dim i, j As Integer
 
@@ -334,24 +348,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 r = Me.Reactions.Count - 1
                 c = Me.ComponentIDs.Count - 1
 
-                ReDim E(c, r)
-
-                'E: matrix of stoichometric coefficients
-                i = 0
-                For Each rxid As String In Me.Reactions
-                    rx = proppack.CurrentMaterialStream.Flowsheet.Reactions(rxid)
-                    j = 0
-                    For Each cname As String In Me.ComponentIDs
-                        If rx.Components.ContainsKey(cname) Then
-                            E(j, i) = rx.Components(cname).StoichCoeff
-                        Else
-                            E(j, i) = 0
-                        End If
-                        j += 1
-                    Next
-                    i += 1
-                Next
-
                 Dim fm0(c), N0tot As Double
 
                 N0.Clear()
@@ -369,100 +365,120 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 N0tot = 1.0#
                 Ninerts = N0tot - Sum(fm0)
 
-                'upper and lower bounds for reaction extents (just an estimate, will be different when a single compound appears in multiple reactions)
-
-                Dim lbound(Me.ReactionExtents.Count - 1) As Double
-                Dim ubound(Me.ReactionExtents.Count - 1) As Double
-
-                i = 0
-                For Each rxid As String In Me.Reactions
-                    lbound(i) = -Vnl.Sum()
-                    ubound(i) = Vnl.Sum()
-                    i += 1
-                Next
-
                 Me.T = T
                 Me.P = P
 
-                'initial estimates for the reaction extents
-
-                Dim REx(r), iest(r), x(r), fx As Double
-
-                If prevx IsNot Nothing Then
-                    For i = 0 To r
-                        REx(i) = prevx(i) * 0.99
-                    Next
-                Else
-                    i = 0
-                    For Each rxnsb As Interfaces.IReactionSetBase In proppack.CurrentMaterialStream.Flowsheet.ReactionSets(Me.ReactionSet).Reactions.Values
-                        If proppack.CurrentMaterialStream.Flowsheet.Reactions(rxnsb.ReactionID).ReactionType = ReactionType.Equilibrium And rxnsb.IsActive Then
-                            rxn = proppack.CurrentMaterialStream.Flowsheet.Reactions(rxnsb.ReactionID)
-                            REx(i) = 0.0
-                            i += 1
-                        End If
-                    Next
-                End If
-
-                MinVal = Math.Min(lbound.Min, REx.Min)
-                MaxVal = Math.Max(ubound.Max, REx.Max)
-
                 'check if there is enough reactant to proceeed with chemical equilibrium calculation
 
-                If ubound.SumY > 0.0# Then
+                Dim Nf As Double()
 
-                    Dim xs As Double
+                If N.Values.Sum > 0.0# Then
 
-                    Dim variables2 As New List(Of OptBoundVariable)
-                    Dim variables As New List(Of Double)
-                    Dim lbounds As New List(Of Double)
-                    Dim ubounds As New List(Of Double)
-                    For i = 0 To r
-                        variables.Add(x(i))
-                        variables2.Add(New OptBoundVariable(xs, MinVal, MaxVal))
-                        lbounds.Add(MinVal)
-                        ubounds.Add(MaxVal)
+                    Dim keys = N.Keys.ToArray()
+
+                    Dim CProps = proppack.DW_GetConstantProperties()
+
+                    Dim cdic As New Dictionary(Of String, Interfaces.ICompoundConstantProperties)
+                    For Each sn In keys
+                        cdic.Add(sn, CProps.Where(Function(s) s.Name = sn).FirstOrDefault)
                     Next
 
-                    Dim VariableValues As New List(Of Double())
-                    Dim FunctionValues As New List(Of Double)
-                    Dim result As Double
+                    CreateElementMatrix(N.Values.ToArray(), keys, cdic)
 
-                    ObjectiveFunctionHistory.Clear()
+                    ActiveComponents = New List(Of String)
 
-                    If UseIPOPTSolver Then
+                    Dim ival(N.Count - 1), lbo(N.Count - 1), ubo(N.Count - 1), NFv(N.Count - 1) As Double
+                    Dim active As Boolean
+                    For i = 0 To N.Count - 1
+                        lbo(i) = Math.Log(1.0E-50)
+                        ubo(i) = Math.Log(Vnl.Sum * 2)
+                        ival(i) = Math.Log(N0(Me.ComponentIDs(i)))
+                        If Double.IsInfinity(ival(i)) Then ival(i) = Math.Log(1.0E-30)
+                        active = True
+                        For j = 0 To Elements.Count - 1
+                            If CProps(i).Elements.Contains(Elements(j)) And TotalElements(j) < 1.0E-20 Then
+                                ival(i) = Math.Log(1.0E-100)
+                                lbo(i) = ival(i)
+                                ubo(i) = ival(i)
+                                active = False
+                            End If
+                        Next
+                        If active Then ActiveComponents.Add(CProps(i).Name)
+                    Next
 
-                        Dim solver2 As New Optimization.IPOPTSolver
-                        solver2.MaxIterations = MaximumIterations
-                        solver2.Tolerance = 1.0E-20
+                    ActiveReactions = New List(Of String)
 
-                        x = solver2.Solve(Function(x1)
-                                              VariableValues.Add(x1.Clone)
-                                              result = FunctionValue2N(x1).AbsSqrSumY()
-                                              FunctionValues.Add(result)
-                                              Return result
-                                          End Function, Nothing, variables.ToArray, lbounds.ToArray, ubounds.ToArray)
+                    For Each rxid As String In Me.Reactions
+                        rx = proppack.CurrentMaterialStream.Flowsheet.Reactions(rxid)
+                        If Not rx.Components.Keys.Except(ActiveComponents).Any() Then
+                            ActiveReactions.Add(rxid)
+                        End If
+                    Next
 
-                    Else
+                    Dim W0 = Vnl.Sum * proppack.AUX_MMM(Vnl)
 
-                        Dim solver2 As New Optimization.NewtonSolver
-                        solver2.MaxIterations = MaximumIterations
-                        solver2.EnableDamping = True
-                        solver2.UseBroydenApproximation = True
-                        solver2.Tolerance = 1.0E-20
+                    Dim errval As Double = 0.0
+                    Dim ebal As Double = 0.0
+                    Dim wbal As Double = 0.0
+                    Dim rval As Double = 0.0
+                    Dim ebal_i As Double
+                    Dim ni As Double
+                    Dim W1 As Double
 
-                        x = solver2.Solve(Function(x1)
-                                              Return FunctionValue2N(x1)
-                                          End Function, variables.ToArray)
+                    Dim solver2 As New Optimization.IPOPTSolver
+                    solver2.MaxIterations = MaximumIterations
+                    solver2.Tolerance = 1.0E-20
 
-                    End If
+                    Dim rval0 = FunctionValue2N(ival, False).AbsSqrSumY
+
+                    Nf = solver2.Solve(Function(x1)
+                                           rval = FunctionValue2N(x1, True).AbsSqrSumY
+                                           ebal = 0.0
+                                           For i = 0 To els
+                                               ebal_i = 0
+                                               For j = 0 To c
+                                                   ni = Math.Exp(x1(j))
+                                                   ebal_i += ni * Me.ElementMatrix(i, j)
+                                               Next
+                                               ebal += (TotalElements(i) - ebal_i) ^ 2
+                                           Next
+                                           W1 = x1.ExpY.Sum * proppack.AUX_MMM(x1.ExpY)
+                                           wbal = (W1 - W0) ^ 2
+                                           errval = rval + wbal * rval0 + ebal * rval0
+                                           Return errval
+                                       End Function, Nothing, ival, lbo, ubo)
+
+                    Nf = solver2.Solve(Function(x1)
+                                           rval = FunctionValue2N(x1, False).AbsSqrSumY
+                                           ebal = 0.0
+                                           For i = 0 To els
+                                               ebal_i = 0
+                                               For j = 0 To c
+                                                   ni = Math.Exp(x1(j))
+                                                   ebal_i += ni * Me.ElementMatrix(i, j)
+                                               Next
+                                               ebal += (TotalElements(i) - ebal_i) ^ 2
+                                           Next
+                                           W1 = x1.ExpY.Sum * proppack.AUX_MMM(x1.ExpY)
+                                           wbal = (W1 - W0) ^ 2
+                                           errval = rval + wbal * rval0 + ebal * rval0
+                                           Return errval
+                                       End Function, Nothing, Nf, lbo, ubo)
 
                     ' check objective function value
 
-                    fx = Me.FunctionValue2N(x).AbsSqrSumY
-
-                    If Double.IsNaN(fx) Then
+                    If Double.IsNaN(errval) Then
                         Throw New Exception("Chemical Equilibrium Solver error: general numerical error.")
                     End If
+
+                    For i = 0 To N.Count - 1
+                        N(keys(i)) = Math.Exp(Nf(i))
+                        If N(keys(i)) < 1.0E-75 Then
+                            N(keys(i)) = 0.0
+                        End If
+                        DN(keys(i)) = N(keys(i)) - N0(keys(i))
+                        i += 1
+                    Next
 
                 End If
 
@@ -486,6 +502,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 Dim mtot As Double = 0
                 For i = 0 To nc
+                    If Vnl2(i) < 1.0E-50 Then
+                        Vnl2(i) = 0.0
+                    End If
                     mtot += Vnl2(i)
                 Next
 
@@ -493,41 +512,38 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 '    Vx(i) = Vx(i) '/ mtot
                 'Next
 
-                Return New Object() {Vnl2, x}
+                Return Vnl2
 
             Else
 
-                Return New Object() {Vnl, Nothing}
+                Return Vnl
 
             End If
 
         End Function
 
-        Private Function FunctionValue2N(ByVal x() As Double) As Double()
+        Private Function FunctionValue2N(ByVal x() As Double, ideal As Boolean) As Double()
 
-            Dim i, j, nc, wid As Integer
+            Dim i, j, nc As Integer
 
             nc = Me.CompoundProperties.Count - 1
 
             i = 0
-            For Each s As String In N.Keys
-                DN(s) = 0
-                For j = 0 To r
-                    DN(s) += E(i, j) * x(j)
-                Next
+            For Each s As String In DN.Keys
+                N(s) = Math.Exp(x(i))
                 i += 1
             Next
 
-            For Each s As String In DN.Keys
-                N(s) = N0(s) + DN(s)
-                If N(s) < 0.0# Then N(s) = -N(s)
+            i = 0
+            For Each s As String In N.Keys
+                DN(s) = N(s) - N0(s)
+                i += 1
             Next
 
             Dim Vxl(nc) As Double
 
             'calculate molality considering 1 mol of mixture.
 
-            Dim wtotal As Double = 0.0#
             Dim mtotal As Double = 0.0#
             Dim molality(nc) As Double
 
@@ -545,23 +561,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Next
             Next
 
-            Dim val1, val2 As Double
-            Dim pen_val As Double = 0.0
-
-            i = 0
-            Do
-                If CompoundProperties(i).Name = "Water" Then
-                    wid = i
-                    wtotal += Vxl(i) * CompoundProperties(i).Molar_Weight / 1000
-                End If
-                mtotal += Vxl(i)
-                i += 1
-            Loop Until i = nc + 1
-
-            val1 = N0.Values.ToArray.SumY * proppack.AUX_MMM(Vxl0)
-            val2 = N.Values.ToArray.SumY * proppack.AUX_MMM(Vxl)
-
-            pen_val += 100000 * (val1 - val2) ^ 2
+            Dim wtotal As Double = N.Values.Sum * proppack.AUX_MMM(Vxl) / 1000
 
             Dim Xsolv As Double = 1
 
@@ -592,7 +592,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim activcoeff(nc) As Double
 
-            If IdealCalc Then
+            If ideal Then
                 For i = 0 To nc
                     activcoeff(i) = 1.0#
                 Next
@@ -609,8 +609,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             For i = 0 To nc
                 If CompoundProperties(i).IsIon Then
-                    'CP(i) = molality(i) * activcoeff(i)
-                    CP(i) = Vxl(i) * activcoeff(i)
+                    CP(i) = molality(i) * activcoeff(i)
+                    'CP(i) = Vxl(i) * activcoeff(i)
                 ElseIf CompoundProperties(i).IsSalt Then
                     CP(i) = 1.0#
                 Else
@@ -619,13 +619,13 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Next
 
             For i = 0 To Me.Reactions.Count - 1
-                prod(i) = 1
+                prod(i) = 1.0
                 For Each s As String In Me.ComponentIDs
                     With proppack.CurrentMaterialStream.Flowsheet.Reactions(Me.Reactions(i))
                         If .Components.ContainsKey(s) Then
                             For j = 0 To nc
                                 If CompoundProperties(j).Name = s Then
-                                    If CP(j) <> 0.0 Then
+                                    If CP(j) > 1.0E-45 Then
                                         prod(i) *= CP(j) ^ .Components(s).StoichCoeff
                                     End If
                                     Exit For
@@ -636,13 +636,15 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Next
             Next
 
-            pen_val = ReturnPenaltyValue(Vxl)
-
             Dim rx As Interfaces.IReaction
             Dim fvals(Me.Reactions.Count - 1) As Double
             For i = 0 To Me.Reactions.Count - 1
                 rx = proppack.CurrentMaterialStream.Flowsheet.Reactions(Me.Reactions(i))
-                fvals(i) = Log(rx.ConstantKeqValue / prod(i)) '+ pen_val
+                If ActiveReactions.Contains(rx.ID) Then
+                    fvals(i) = Log(rx.ConstantKeqValue / prod(i))
+                Else
+                    fvals(i) = 0.0
+                End If
             Next
 
             proppack.CurrentMaterialStream.Flowsheet?.CheckStatus()
@@ -716,10 +718,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             x1 = Tref
 
-            Dim prevset = CalculateChemicalEquilibria
-
-            CalculateChemicalEquilibria = RigorousEnergyBalance
-
             Do
 
                 If cnt < 2 Then
@@ -752,8 +750,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 cnt += 1
 
             Loop
-
-            CalculateChemicalEquilibria = prevset
 
             T = x1
 

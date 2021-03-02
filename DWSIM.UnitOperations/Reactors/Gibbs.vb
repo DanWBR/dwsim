@@ -527,7 +527,7 @@ Namespace Reactors
             ReDim Me.ElementMatrix(els, c)
             ReDim Me.TotalElements(els)
 
-            Dim sum_e As Integer
+            Dim sum_e As Double
 
             For i = 0 To els
                 sum_e = 0

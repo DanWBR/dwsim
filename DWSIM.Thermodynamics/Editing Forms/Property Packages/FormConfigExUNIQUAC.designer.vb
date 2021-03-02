@@ -39,17 +39,12 @@ Partial Class FormConfigExUNIQUAC
         Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LabelWithDivider3 = New System.Windows.Forms.Label()
         Me.FaTabStripItem2 = New FarsiLibrary.Win.FATabStripItem()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.Button3 = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.chkOptimize = New System.Windows.Forms.CheckBox()
-        Me.chkIPOPT = New System.Windows.Forms.CheckBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.tbTol = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.tbMaxIts = New System.Windows.Forms.TextBox()
         Me.cbReacSets = New System.Windows.Forms.ComboBox()
-        Me.chkCalcChemEq = New System.Windows.Forms.CheckBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.FaTabStripItem1 = New FarsiLibrary.Win.FATabStripItem()
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -58,27 +53,26 @@ Partial Class FormConfigExUNIQUAC
         Me.GroupBox3.SuspendLayout()
         CType(Me.dgvu1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStripItem2.SuspendLayout()
-        Me.GroupBox4.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'FaTabStrip1
         '
-        resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.AlwaysShowClose = False
         Me.FaTabStrip1.AlwaysShowMenuGlyph = False
+        resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem3, Me.FaTabStripItem2, Me.FaTabStripItem1})
         Me.FaTabStrip1.Name = "FaTabStrip1"
         Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem3
         '
         'FaTabStripItem3
         '
-        resources.ApplyResources(Me.FaTabStripItem3, "FaTabStripItem3")
         Me.FaTabStripItem3.CanClose = False
         Me.FaTabStripItem3.Controls.Add(Me.GroupBox3)
         Me.FaTabStripItem3.IsDrawn = True
         Me.FaTabStripItem3.Name = "FaTabStripItem3"
         Me.FaTabStripItem3.Selected = True
+        resources.ApplyResources(Me.FaTabStripItem3, "FaTabStripItem3")
         '
         'GroupBox3
         '
@@ -90,11 +84,11 @@ Partial Class FormConfigExUNIQUAC
         '
         'dgvu1
         '
-        resources.ApplyResources(Me.dgvu1, "dgvu1")
         Me.dgvu1.AllowUserToAddRows = False
         Me.dgvu1.AllowUserToDeleteRows = False
         Me.dgvu1.AllowUserToResizeColumns = False
         Me.dgvu1.AllowUserToResizeRows = False
+        resources.ApplyResources(Me.dgvu1, "dgvu1")
         Me.dgvu1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvu1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvu1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column3, Me.Column4, Me.Column5, Me.Column6})
@@ -146,52 +140,23 @@ Partial Class FormConfigExUNIQUAC
         '
         'FaTabStripItem2
         '
-        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         Me.FaTabStripItem2.CanClose = False
-        Me.FaTabStripItem2.Controls.Add(Me.GroupBox4)
         Me.FaTabStripItem2.Controls.Add(Me.GroupBox2)
         Me.FaTabStripItem2.IsDrawn = True
         Me.FaTabStripItem2.Name = "FaTabStripItem2"
-        '
-        'GroupBox4
-        '
-        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
-        Me.GroupBox4.Controls.Add(Me.Button3)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.TabStop = False
-        '
-        'Button3
-        '
-        resources.ApplyResources(Me.Button3, "Button3")
-        Me.Button3.Name = "Button3"
-        Me.Button3.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         '
         'GroupBox2
         '
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Controls.Add(Me.chkOptimize)
-        Me.GroupBox2.Controls.Add(Me.chkIPOPT)
         Me.GroupBox2.Controls.Add(Me.Label3)
         Me.GroupBox2.Controls.Add(Me.tbTol)
         Me.GroupBox2.Controls.Add(Me.Label2)
         Me.GroupBox2.Controls.Add(Me.tbMaxIts)
         Me.GroupBox2.Controls.Add(Me.cbReacSets)
-        Me.GroupBox2.Controls.Add(Me.chkCalcChemEq)
         Me.GroupBox2.Controls.Add(Me.Label1)
+        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
-        '
-        'chkOptimize
-        '
-        resources.ApplyResources(Me.chkOptimize, "chkOptimize")
-        Me.chkOptimize.Name = "chkOptimize"
-        Me.chkOptimize.UseVisualStyleBackColor = True
-        '
-        'chkIPOPT
-        '
-        resources.ApplyResources(Me.chkIPOPT, "chkIPOPT")
-        Me.chkIPOPT.Name = "chkIPOPT"
-        Me.chkIPOPT.UseVisualStyleBackColor = True
         '
         'Label3
         '
@@ -215,16 +180,10 @@ Partial Class FormConfigExUNIQUAC
         '
         'cbReacSets
         '
-        resources.ApplyResources(Me.cbReacSets, "cbReacSets")
         Me.cbReacSets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbReacSets.FormattingEnabled = True
+        resources.ApplyResources(Me.cbReacSets, "cbReacSets")
         Me.cbReacSets.Name = "cbReacSets"
-        '
-        'chkCalcChemEq
-        '
-        resources.ApplyResources(Me.chkCalcChemEq, "chkCalcChemEq")
-        Me.chkCalcChemEq.Name = "chkCalcChemEq"
-        Me.chkCalcChemEq.UseVisualStyleBackColor = True
         '
         'Label1
         '
@@ -233,10 +192,10 @@ Partial Class FormConfigExUNIQUAC
         '
         'FaTabStripItem1
         '
-        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         Me.FaTabStripItem1.CanClose = False
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
+        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         '
         'FormConfigExUNIQUAC
         '
@@ -252,8 +211,6 @@ Partial Class FormConfigExUNIQUAC
         Me.GroupBox3.ResumeLayout(False)
         CType(Me.dgvu1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FaTabStripItem2.ResumeLayout(False)
-        Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox4.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
@@ -272,14 +229,9 @@ Partial Class FormConfigExUNIQUAC
     Friend WithEvents FaTabStripItem2 As FarsiLibrary.Win.FATabStripItem
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents cbReacSets As System.Windows.Forms.ComboBox
-    Friend WithEvents chkCalcChemEq As System.Windows.Forms.CheckBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents tbTol As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents tbMaxIts As System.Windows.Forms.TextBox
-    Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
-    Friend WithEvents Button3 As System.Windows.Forms.Button
-    Friend WithEvents chkOptimize As CheckBox
-    Friend WithEvents chkIPOPT As CheckBox
 End Class

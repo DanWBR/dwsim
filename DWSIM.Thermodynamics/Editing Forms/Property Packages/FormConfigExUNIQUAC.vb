@@ -96,16 +96,6 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(id1) Then
         Me.tbMaxIts.Text = ppu.ElectrolyteFlash.MaximumIterations
         Me.tbTol.Text = ppu.ElectrolyteFlash.Tolerance
 
-        chkCalcChemEq.Checked = ppu.ElectrolyteFlash.CalculateChemicalEquilibria
-        chkIPOPT.Checked = ppu.ElectrolyteFlash.UseIPOPTSolver
-        chkOptimize.Checked = ppu.ElectrolyteFlash.OptimizeInitialEstimates
-
-        cbReacSets.Enabled = chkCalcChemEq.Checked
-        tbMaxIts.Enabled = chkCalcChemEq.Checked
-        tbTol.Enabled = chkCalcChemEq.Checked
-        chkIPOPT.Enabled = chkCalcChemEq.Checked
-        chkOptimize.Enabled = chkCalcChemEq.Checked
-
         Try
             Dim reacsetname As String = (From rset As ReactionSet In _form.ReactionSets.Values Select rset Where rset.ID = ppu.ElectrolyteFlash.ReactionSet).FirstOrDefault.Name
             Me.cbReacSets.SelectedItem = reacsetname
@@ -172,18 +162,6 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(id1) Then
         End If
     End Sub
 
-    Private Sub chkCalcChemEq_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkCalcChemEq.CheckedChanged
-        If Loaded Then
-            Dim ppu As PropertyPackages.ExUNIQUACPropertyPackage = _pp
-            ppu.ElectrolyteFlash.CalculateChemicalEquilibria = chkCalcChemEq.Checked
-            cbReacSets.Enabled = chkCalcChemEq.Checked
-            tbMaxIts.Enabled = chkCalcChemEq.Checked
-            tbTol.Enabled = chkCalcChemEq.Checked
-            chkIPOPT.Enabled = chkCalcChemEq.Checked
-            chkOptimize.Enabled = chkCalcChemEq.Checked
-        End If
-    End Sub
-
     Private Sub cbReacSets_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cbReacSets.SelectedIndexChanged
         If Loaded Then
             Dim ppu As PropertyPackages.ExUNIQUACPropertyPackage = _pp
@@ -192,26 +170,4 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(id1) Then
         End If
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        Dim data As Double() = DirectCast(_pp, PropertyPackages.ExUNIQUACPropertyPackage).ElectrolyteFlash.ObjectiveFunctionHistory.ToArray
-        Dim str As String = ""
-        For Each d In data
-            str += d.ToString & vbCrLf
-        Next
-        Clipboard.SetText(str)
-    End Sub
-
-    Private Sub chkIPOPT_CheckedChanged(sender As Object, e As EventArgs) Handles chkIPOPT.CheckedChanged
-        If Loaded Then
-            Dim ppu As PropertyPackages.ExUNIQUACPropertyPackage = _pp
-            ppu.ElectrolyteFlash.UseIPOPTSolver = chkIPOPT.Checked
-        End If
-    End Sub
-
-    Private Sub chkOptimize_CheckedChanged(sender As Object, e As EventArgs) Handles chkOptimize.CheckedChanged
-        If Loaded Then
-            Dim ppu As PropertyPackages.ExUNIQUACPropertyPackage = _pp
-            ppu.ElectrolyteFlash.OptimizeInitialEstimates = chkOptimize.Checked
-        End If
-    End Sub
 End Class

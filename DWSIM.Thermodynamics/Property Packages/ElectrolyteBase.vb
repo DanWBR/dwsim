@@ -971,26 +971,11 @@ Namespace PropertyPackages
             Dim xel0 As XElement = (From xelv As XElement In data Where xelv.Name = "ElectrolyteFlash_ReactionSetID").SingleOrDefault
             If Not xel0 Is Nothing Then Me.ElectrolyteFlash.ReactionSet = xel0.Value
 
-            Dim xel As XElement = (From xelv As XElement In data Where xelv.Name = "ElectrolyteFlash_CalculateChemicalEquilibria").SingleOrDefault
-            If Not xel Is Nothing Then Me.ElectrolyteFlash.CalculateChemicalEquilibria = xel.Value
-
             Dim xel2 As XElement = (From xelv As XElement In data Where xelv.Name = "ElectrolyteFlash_Tolerance").SingleOrDefault
             If Not xel2 Is Nothing Then Me.ElectrolyteFlash.Tolerance = xel2.Value
 
             Dim xel3 As XElement = (From xelv As XElement In data Where xelv.Name = "ElectrolyteFlash_MaximumIterations").SingleOrDefault
             If Not xel3 Is Nothing Then Me.ElectrolyteFlash.MaximumIterations = xel3.Value
-
-            Dim xel4 As XElement = (From xelv As XElement In data Where xelv.Name = "ElectrolyteFlash_UseIPOPT").SingleOrDefault
-            If Not xel4 Is Nothing Then Me.ElectrolyteFlash.UseIPOPTSolver = xel4.Value
-
-            Dim xel5 As XElement = (From xelv As XElement In data Where xelv.Name = "ElectrolyteFlash_OptimizeInitialEstimates").SingleOrDefault
-            If Not xel5 Is Nothing Then Me.ElectrolyteFlash.OptimizeInitialEstimates = xel5.Value
-
-            Dim xel6 As XElement = (From xelv As XElement In data Where xelv.Name = "ElectrolyteFlash_AlternateBoundsInitializer").SingleOrDefault
-            If Not xel6 Is Nothing Then Me.ElectrolyteFlash.AlternateBoundsInitializer = xel6.Value
-
-            Dim xel7 As XElement = (From xelv As XElement In data Where xelv.Name = "ElectrolyteFlash_RigorousEnergyBalance").SingleOrDefault
-            If Not xel7 Is Nothing Then Me.ElectrolyteFlash.RigorousEnergyBalance = xel7.Value
 
         End Function
 
@@ -1001,13 +986,8 @@ Namespace PropertyPackages
 
             With elements
                 .Add(New XElement("ElectrolyteFlash_ReactionSetID", Me.ElectrolyteFlash.ReactionSet))
-                .Add(New XElement("ElectrolyteFlash_CalculateChemicalEquilibria", Me.ElectrolyteFlash.CalculateChemicalEquilibria))
                 .Add(New XElement("ElectrolyteFlash_Tolerance", Me.ElectrolyteFlash.Tolerance))
                 .Add(New XElement("ElectrolyteFlash_MaximumIterations", Me.ElectrolyteFlash.MaximumIterations))
-                .Add(New XElement("ElectrolyteFlash_UseIPOPT", Me.ElectrolyteFlash.UseIPOPTSolver))
-                .Add(New XElement("ElectrolyteFlash_OptimizeInitialEstimates", Me.ElectrolyteFlash.OptimizeInitialEstimates))
-                .Add(New XElement("ElectrolyteFlash_AlternateBoundsInitializer", Me.ElectrolyteFlash.AlternateBoundsInitializer))
-                .Add(New XElement("ElectrolyteFlash_RigorousEnergyBalance", Me.ElectrolyteFlash.RigorousEnergyBalance))
             End With
 
             Return elements

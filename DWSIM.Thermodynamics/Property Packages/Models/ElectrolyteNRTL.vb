@@ -1014,16 +1014,6 @@ Namespace PropertyPackages.Auxiliary
 
             Dim s0(n), s0t(n) As Double
 
-            'Parallel.For(0, n + 1, Sub(m1P)
-            '                           Dim kP As Integer
-            '                           s0(m1P) = 0
-            '                           s0t(m1P) = 0
-            '                           For kp = 0 To n
-            '                               s0(m1P) += X(kP) * G_k_m(edata, kP, m1P)
-            '                               s0t(m1P) += X(kP) * G_k_m(edata, kP, m1P) * TAU_k_m(edata, kP, m1P)
-            '                           Next
-            '                       End Sub)
-
             For m1 = 0 To n
                 s0(m1) = 0
                 s0t(m1) = 0
@@ -1054,19 +1044,6 @@ Namespace PropertyPackages.Auxiliary
                                        Next
                                    End Sub)
 
-            'For c = 0 To n
-            '    For a1 = 0 To n
-            '        s1(c)(a1) = 0
-            '        s1t(c)(a1) = 0
-            '        For k = 0 To n
-            '            If k <> c Then
-            '                s1(c)(a1) += X(k) * G_ki_ji(edata, k, c, a1)
-            '                s1t(c)(a1) += X(k) * G_ki_ji(edata, k, c, a1) * TAU_ki_ji(edata, k, c, a1)
-            '            End If
-            '        Next
-            '    Next
-            'Next
-
             Dim s2(n)(), s2t(n)() As Double
 
             For i = 0 To n
@@ -1087,19 +1064,6 @@ Namespace PropertyPackages.Auxiliary
                                            Next
                                        Next
                                    End Sub)
-
-            'For a = 0 To n
-            '    For c1 = 0 To n
-            '        s2(a)(c1) = 0
-            '        s2t(a)(c1) = 0
-            '        For k = 0 To n
-            '            If k <> a Then
-            '                s2(a)(c1) += X(k) * G_ki_ji(edata, k, a, c1)
-            '                s2t(a)(c1) += X(k) * G_ki_ji(edata, k, a, c1) * TAU_ki_ji(edata, k, a, c1)
-            '            End If
-            '        Next
-            '    Next
-            'Next
 
             Dim sm1(n), sm2(n), sm3(n), sma1(n), sma2(n), sma3(n), smc1(n), smc2(n), smc3(n) As Double
 
@@ -1209,83 +1173,6 @@ Namespace PropertyPackages.Auxiliary
                                        Parallel.ForEach(tasks, Sub(tk) tk.Start())
                                        Task.WaitAll(tasks.ToArray)
                                    End Sub)
-
-            'For m = 0 To n
-            '    sm1(m) = 0.0
-            '    For m1 = 0 To n
-            '        If cprops(m1).Charge = 0 Then
-            '            sm1(m) += X(m1) * G_k_m(edata, m, m1) / s0(m1) * (TAU_k_m(edata, m, m1) - s0t(m1) / s0(m1))
-            '        End If
-            '    Next
-            '    sma1(m) = 0.0
-            '    For c1 = 0 To n
-            '        For k = 0 To n
-            '            If k <> m And cprops(m).Charge < 0 And cprops(c1).Charge > 0 Then
-            '                sma1(m) += x0(c1) * X(k) * G_ki_ji(edata, k, c1, m) * TAU_ki_ji(edata, k, c1, m) / s2(m)(c1)
-            '            End If
-            '        Next
-            '    Next
-            '    smc1(m) = 0.0
-            '    For a1 = 0 To n
-            '        For k = 0 To n
-            '            If k <> m And cprops(m).Charge > 0 And cprops(a1).Charge < 0 Then
-            '                smc1(m) += x0(a1) * X(k) * G_ki_ji(edata, k, a1, m) * TAU_ki_ji(edata, k, a1, m) / s2(m)(a1)
-            '            End If
-            '        Next
-            '    Next
-            '    sm2(m) = 0.0
-            '    For c = 0 To n
-            '        If cprops(c).Charge > 0 Then
-            '            For a1 = 0 To n
-            '                If cprops(a1).Charge < 0 Then
-            '                    sm2(m) += x0(a1) * X(c) * G_ki_ji(edata, m, c, a1) / s1(c)(a1) * (TAU_ki_ji(edata, m, c, a1) - s1t(c)(a1) / s1(c)(a1))
-            '                End If
-            '            Next
-            '        End If
-            '    Next
-            '    sma2(m) = 0.0
-            '    For m1 = 0 To n
-            '        If cprops(m).Charge < 0 And cprops(m1).Charge = 0 Then
-            '            sma2(m) += X(m1) * G_k_m(edata, m, m1) / s0(m1) * (TAU_k_m(edata, m, m1) - s0t(m1) / s0(m1))
-            '        End If
-            '    Next
-            '    smc2(m) = 0.0
-            '    For m1 = 0 To n
-            '        If cprops(m).Charge > 0 And cprops(m1).Charge = 0 Then
-            '            smc2(m) += X(m1) * G_k_m(edata, m, m1) / s0(m1) * (TAU_k_m(edata, m, m1) - s0t(m1) / s0(m1))
-            '        End If
-            '    Next
-            '    sm3(m) = 0.0
-            '    For a = 0 To n
-            '        If cprops(a).Charge < 0 Then
-            '            For c1 = 0 To n
-            '                If cprops(c1).Charge > 0 Then
-            '                    sm3(m) += x0(c1) * X(a) * G_ki_ji(edata, m, c1, a) / s2(a)(c1) * (TAU_ki_ji(edata, m, c1, a) - s2t(a)(c1) / s2(a)(c1))
-            '                End If
-            '            Next
-            '        End If
-            '    Next
-            '    sma3(m) = 0.0
-            '    For c = 0 To n
-            '        If cprops(c).Charge > 0 Then
-            '            For a1 = 0 To n
-            '                If cprops(a1).Charge < 0 Then
-            '                    sma3(m) += x0(a1) * X(c) * G_ki_ji(edata, m, c, a1) / s2(c)(a1) * (TAU_ki_ji(edata, m, c, a1) - s2t(c)(a1) / s2(c)(a1))
-            '                End If
-            '            Next
-            '        End If
-            '    Next
-            '    smc3(m) = 0.0
-            '    For a = 0 To n
-            '        If cprops(a).Charge < 0 Then
-            '            For c1 = 0 To n
-            '                If cprops(c1).Charge > 0 Then
-            '                    smc3(m) += x0(c1) * X(a) * G_ki_ji(edata, m, c1, a) / s2(a)(c1) * (TAU_ki_ji(edata, m, c1, a) - s2t(a)(c1) / s2(a)(c1))
-            '                End If
-            '            Next
-            '        End If
-            '    Next
-            'Next
 
             'short range contribution
 
