@@ -610,7 +610,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             For i = 0 To nc
                 If CompoundProperties(i).IsIon Then
                     CP(i) = molality(i) * activcoeff(i)
-                    'CP(i) = Vxl(i) * activcoeff(i)
                 ElseIf CompoundProperties(i).IsSalt Then
                     CP(i) = 1.0#
                 Else
@@ -650,6 +649,112 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             proppack.CurrentMaterialStream.Flowsheet?.CheckStatus()
 
             Return fvals
+
+        End Function
+
+        Private Function FunctionValue2G(ByVal x() As Double, ideal As Boolean) As Double
+
+            Dim i, j, nc As Integer
+
+            nc = Me.CompoundProperties.Count - 1
+
+            i = 0
+            For Each s As String In DN.Keys
+                N(s) = Math.Exp(x(i))
+                i += 1
+            Next
+
+            i = 0
+            For Each s As String In N.Keys
+                DN(s) = N(s) - N0(s)
+                i += 1
+            Next
+
+            Dim Vxl(nc) As Double
+
+            'calculate molality considering 1 mol of mixture.
+
+            Dim molality(nc) As Double
+
+            For i = 0 To nc
+                Vxl(i) = Vxl0(i)
+            Next
+
+            For i = 0 To N.Count - 1
+                For j = 0 To nc
+                    If CompoundProperties(j).Name = ComponentIDs(i) Then
+                        Vxl(j) = N(ComponentIDs(i)) / N.Values.Sum
+                        If Vxl(i) < 0 Then Vxl(i) = Abs(Vxl(i))
+                        Exit For
+                    End If
+                Next
+            Next
+
+            Dim wtotal As Double = N.Values.Sum * proppack.AUX_MMM(Vxl) / 1000
+
+            'solvent density without solids and ions
+
+            Dim Vxns(nc) As Double
+
+            For i = 0 To nc
+                If Not CompoundProperties(i).IsSalt And Not CompoundProperties(i).IsIon Then
+                    Vxns(i) = Vxl(i)
+                End If
+            Next
+
+            'Vxns = Vxns.NormalizeY
+
+            Dim wden As Double = 0.0#
+            If TypeOf proppack Is ExUNIQUACPropertyPackage Then
+                wden = CType(proppack, ExUNIQUACPropertyPackage).m_elec.LiquidDensity(Vxns, T, CompoundProperties)
+            ElseIf TypeOf proppack Is ElectrolyteNRTLPropertyPackage Then
+                wden = CType(proppack, ElectrolyteNRTLPropertyPackage).m_elec.LiquidDensity(Vxns, T, CompoundProperties)
+            End If
+
+            i = 0
+            Do
+                molality(i) = Vxl(i) / wtotal * wden / 1000
+                i += 1
+            Loop Until i = nc + 1
+
+            Dim activcoeff(nc) As Double
+
+            If ideal Then
+                For i = 0 To nc
+                    activcoeff(i) = 1.0#
+                Next
+            Else
+                If TypeOf proppack Is ExUNIQUACPropertyPackage Then
+                    activcoeff = CType(proppack, ExUNIQUACPropertyPackage).m_uni.GAMMA_MR(T, Vxl.Clone, CompoundProperties)
+                ElseIf TypeOf proppack Is ElectrolyteNRTLPropertyPackage Then
+                    activcoeff = CType(proppack, ElectrolyteNRTLPropertyPackage).m_enrtl.GAMMA_MR(T, Vxl.Clone, CompoundProperties)
+                End If
+            End If
+
+            Dim CP(nc) As Double
+
+            For i = 0 To nc
+                If CompoundProperties(i).IsIon Then
+                    CP(i) = molality(i) * activcoeff(i)
+                ElseIf CompoundProperties(i).IsSalt Then
+                    CP(i) = 1.0#
+                Else
+                    CP(i) = Vxl(i) * activcoeff(i)
+                End If
+            Next
+
+            Dim P0 = 101325
+
+            Dim gf = 0.0
+            Dim t1, t3 As Double
+
+            For i = 0 To nc
+                t1 = proppack.AUX_DELGF_T(298.15, T, CompoundProperties(i).Name) * CompoundProperties(i).Molar_Weight
+                t3 = Log(CP(i) * P / P0)
+                gf += Vxl(i) * (t1 + t3) * 8.314 * T
+            Next
+
+            Return gf * N.Values.Sum / 1000.0
 
         End Function
 

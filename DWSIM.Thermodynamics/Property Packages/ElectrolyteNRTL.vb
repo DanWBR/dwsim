@@ -631,7 +631,9 @@ Namespace PropertyPackages
 
         Public Overrides Function AUX_Z(Vx() As Double, T As Double, P As Double, state As PhaseName) As Double
 
-            Return 1.0
+            Dim result = Me.AUX_LIQDENS(T, Vx, P)
+
+            Return 1 / (8.314 * result * 1000 / Me.AUX_MMM(Vx) * T / P)
 
         End Function
 

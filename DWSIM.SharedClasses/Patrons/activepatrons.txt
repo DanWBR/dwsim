@@ -31,14 +31,11 @@ Filippo Borroni
 Gerry Agnew
 Gokhan Candan 
 Guenther Holzer
-Guha Industries
 Henar González
 Henk Fikkert
 Hep Ingham
 Hugo Burbach
-Hugo Gonzalez
 Hurudza
-Ivagner Ferreira
 Jan Boshoff
 Javier Fontalvo Alzate
 Jens Greimeier
@@ -56,7 +53,6 @@ Laércio Antonio Piva
 Lauterbach Verfahrenstechnik Gmbh
 Les Waymont
 Lewis Estall
-Li Tang
 Louis Wibberley
 Luis M. Góngora
 Luiza Martins
