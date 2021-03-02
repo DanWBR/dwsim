@@ -93,11 +93,11 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(id1) Then
             cbReacSets.Items.Add(rset.Name)
         Next
 
-        Me.tbMaxIts.Text = ppu.ElectrolyteFlash.MaximumIterations
-        Me.tbTol.Text = ppu.ElectrolyteFlash.Tolerance
+        Me.tbMaxIts.Text = ppu.MaxIterations
+        Me.tbTol.Text = ppu.Tolerance
 
         Try
-            Dim reacsetname As String = (From rset As ReactionSet In _form.ReactionSets.Values Select rset Where rset.ID = ppu.ElectrolyteFlash.ReactionSet).FirstOrDefault.Name
+            Dim reacsetname As String = (From rset As ReactionSet In _form.ReactionSets.Values Select rset Where rset.ID = ppu.ReactionSet).FirstOrDefault.Name
             Me.cbReacSets.SelectedItem = reacsetname
         Catch ex As Exception
 
@@ -143,7 +143,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(id1) Then
             Dim ppu As PropertyPackages.ExUNIQUACPropertyPackage = _pp
             If Integer.TryParse(tbMaxIts.Text, New Integer) Then
                 tbMaxIts.ForeColor = Color.Blue
-                ppu.ElectrolyteFlash.MaximumIterations = tbMaxIts.Text
+                ppu.MaxIterations = tbMaxIts.Text
             Else
                 tbMaxIts.ForeColor = Color.Red
             End If
@@ -155,7 +155,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(id1) Then
             Dim ppu As PropertyPackages.ExUNIQUACPropertyPackage = _pp
             If Double.TryParse(tbTol.Text, New Double) Then
                 tbTol.ForeColor = Color.Blue
-                ppu.ElectrolyteFlash.Tolerance = tbTol.Text
+                ppu.Tolerance = tbTol.Text
             Else
                 tbTol.ForeColor = Color.Red
             End If
@@ -166,7 +166,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(id1) Then
         If Loaded Then
             Dim ppu As PropertyPackages.ExUNIQUACPropertyPackage = _pp
             Dim reacsetID As String = (From rset As ReactionSet In _form.ReactionSets.Values Select rset Where rset.Name = cbReacSets.SelectedItem.ToString).FirstOrDefault.ID
-            ppu.ElectrolyteFlash.ReactionSet = reacsetID
+            ppu.ReactionSet = reacsetID
         End If
     End Sub
 
