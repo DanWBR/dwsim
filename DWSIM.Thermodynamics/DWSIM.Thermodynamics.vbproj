@@ -193,6 +193,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Editing Forms\Property Packages\FormConfigPitzer.designer.vb">
+      <DependentUpon>FormConfigPitzer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigPitzer.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Helper Classes\SerializationBinder.vb" />
     <Compile Include="Interfaces\IActivityCoefficientBase.vb" />
     <Compile Include="Base Classes\ThermodynamicsBase.vb" />
@@ -345,6 +351,7 @@
     <Compile Include="Material Stream\MaterialStream.vb" />
     <Compile Include="Property Packages\Models\ElectrolyteNRTL.vb" />
     <Compile Include="Property Packages\Models\PengRobinson78.vb" />
+    <Compile Include="Property Packages\Models\Pitzer.vb" />
     <Compile Include="Property Packages\Models\TrueCriticalPoint.vb" />
     <Compile Include="Base Classes\PropertyMethods.vb" />
     <Compile Include="Main\Calculator.vb" />
@@ -355,6 +362,7 @@
     <Compile Include="Property Packages\Models\Hypotheticals.vb" />
     <Compile Include="Base Classes\MichelsenBase.vb" />
     <Compile Include="Property Packages\PengRobinson78.vb" />
+    <Compile Include="Property Packages\Pitzer.vb" />
     <Compile Include="Property Packages\PropertyPackage.vb" />
     <Compile Include="Property Packages\Models\FluidProperties.vb" />
     <Compile Include="Flash Algorithms\BaseFlashAlgorithm.vb" />
@@ -528,6 +536,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigENRTL.resx">
       <DependentUpon>FormConfigENRTL.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigPitzer.de.resx">
+      <DependentUpon>FormConfigPitzer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigPitzer.en.resx">
+      <DependentUpon>FormConfigPitzer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigPitzer.es.resx">
+      <DependentUpon>FormConfigPitzer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigPitzer.resx">
+      <DependentUpon>FormConfigPitzer.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigExUNIQUAC.de.resx">
       <DependentUpon>FormConfigExUNIQUAC.vb</DependentUpon>

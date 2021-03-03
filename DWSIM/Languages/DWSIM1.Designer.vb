@@ -1480,7 +1480,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to Calor transferido.
         '''</summary>
-        Friend Shared ReadOnly Property HeatTransferred() As String
+        Friend Shared ReadOnly Property Calortransferido() As String
             Get
                 Return ResourceManager.GetString("Calortransferido", resourceCulture)
             End Get
@@ -4493,6 +4493,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property DescPengRobinsonPP() As String
             Get
                 Return ResourceManager.GetString("DescPengRobinsonPP", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to O modelo de Pitzer estendeu a teoria de Debye-Huckel usando uma expansão virial para explicar a dependência da força iônica das forças de curto alcance nas interações de íons binários e ternários. O modelo é aplicável a soluções de alta força iônica. O modelo Pitzer encontra ampla aplicação para a correlação e previsão de propriedades termodinâmicas de soluções eletrolíticas..
+        '''</summary>
+        Friend Shared ReadOnly Property DescPITPP() As String
+            Get
+                Return ResourceManager.GetString("DescPITPP", resourceCulture)
             End Get
         End Property
         
@@ -13080,7 +13089,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to Resultados.
         '''</summary>
-        Friend Shared ReadOnly Property Results() As String
+        Friend Shared ReadOnly Property Resultados() As String
             Get
                 Return ResourceManager.GetString("Resultados", resourceCulture)
             End Get
@@ -16302,7 +16311,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to  - Visualizar Resultados (Gráfico).
         '''</summary>
-        Friend Shared ReadOnly Property VisualizarResults() As String
+        Friend Shared ReadOnly Property VisualizarResultados() As String
             Get
                 Return ResourceManager.GetString("VisualizarResultados", resourceCulture)
             End Get
@@ -16338,7 +16347,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to Visualizo resultados.
         '''</summary>
-        Friend Shared ReadOnly Property VisualizoResults() As String
+        Friend Shared ReadOnly Property Visualizoresultados() As String
             Get
                 Return ResourceManager.GetString("Visualizoresultados", resourceCulture)
             End Get
