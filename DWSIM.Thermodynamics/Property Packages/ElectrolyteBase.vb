@@ -35,7 +35,7 @@ Namespace PropertyPackages
         Public m_elec As New PropertyPackages.Auxiliary.Electrolyte
         Private m_id As New PropertyPackages.Auxiliary.Ideal
 
-        Public Property ReactionSet As String = ""
+        Public Property ReactionSet As String = "DefaultSet"
         Public Property MaxIterations As Integer = 100
         Public Property Tolerance As Double = 0.0000000001
 
