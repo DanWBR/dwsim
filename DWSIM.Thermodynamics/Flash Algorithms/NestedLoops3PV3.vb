@@ -116,6 +116,31 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Vy = prevres.Vy
                 Vx = prevres.Vx1
 
+                If L > 0.0 Then
+
+                    Dim lps = GetPhaseSplitEstimates(T, P, L, Vx, PP)
+
+                    L1 = lps(0)
+                    Vx1 = lps(1)
+                    L2 = lps(2)
+                    Vx2 = lps(3)
+
+                    If L2 > 0.0 Then
+
+                        result = Flash_PT_3P(Vz, V, L1, L2, Vy, Vx1, Vx2, P, T, PP)
+
+                    Else
+
+                        result = _nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+
+                    End If
+
+                Else
+
+                    result = _nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+
+                End If
+
             Else
 
                 If prevres IsNot Nothing Then
@@ -522,6 +547,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 i = 0
                 Do
+                    If Double.IsNaN(CFV(i)) Then CFV(i) = 1.0
                     If Vz(i) <> 0 Then Ki1(i) = CFL1(i) / CFV(i)
                     If Vz(i) <> 0 Then Ki2(i) = CFL2(i) / CFV(i)
                     i = i + 1

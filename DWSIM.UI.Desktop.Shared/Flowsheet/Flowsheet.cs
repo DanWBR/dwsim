@@ -136,7 +136,7 @@ namespace DWSIM.UI.Desktop.Shared
                 GlobalSettings.Settings.CalculatorBusy = false;
                 GlobalSettings.Settings.TaskCancellationTokenSource = new System.Threading.CancellationTokenSource();
 
-                //if (FinishedSolving != null) FinishedSolving.Invoke();
+                if (FinishedSolving != null) FinishedSolving.Invoke();
 
             });
 
