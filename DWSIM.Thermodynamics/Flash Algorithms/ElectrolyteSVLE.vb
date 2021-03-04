@@ -590,8 +590,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 wden = CType(proppack, ExUNIQUACPropertyPackage).m_elec.LiquidDensity(Vxns, T, CompoundProperties)
             ElseIf TypeOf proppack Is ElectrolyteNRTLPropertyPackage Then
                 wden = CType(proppack, ElectrolyteNRTLPropertyPackage).m_elec.LiquidDensity(Vxns, T, CompoundProperties)
-            ElseIf TypeOf proppack Is PitzerPropertyPackage Then
-                wden = CType(proppack, PitzerPropertyPackage).m_elec.LiquidDensity(Vxns, T, CompoundProperties)
+            ElseIf TypeOf proppack Is LIQUAC2PropertyPackage Then
+                wden = CType(proppack, LIQUAC2PropertyPackage).m_elec.LiquidDensity(Vxns, T, CompoundProperties)
             End If
 
             i = 0
@@ -611,8 +611,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     activcoeff = CType(proppack, ExUNIQUACPropertyPackage).m_uni.GAMMA_MR(T, Vxl, CompoundProperties)
                 ElseIf TypeOf proppack Is ElectrolyteNRTLPropertyPackage Then
                     activcoeff = CType(proppack, ElectrolyteNRTLPropertyPackage).m_enrtl.GAMMA_MR(T, Vxl, CompoundProperties)
-                ElseIf TypeOf proppack Is PitzerPropertyPackage Then
-                    activcoeff = CType(proppack, PitzerPropertyPackage).m_pitzer.GAMMA_MR(T, Vxl, CompoundProperties)
+                ElseIf TypeOf proppack Is LIQUAC2PropertyPackage Then
+                    activcoeff = CType(proppack, LIQUAC2PropertyPackage).m_liquac.GAMMA_MR(T, Vxl, CompoundProperties)
                 End If
             End If
 

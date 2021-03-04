@@ -15,6 +15,8 @@
 '
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
+'
+'    Reference: https://pubs.acs.org/doi/10.1021/ie0510122
 
 Imports System.Collections.Generic
 Imports FileHelpers
@@ -156,10 +158,27 @@ Namespace PropertyPackages.Auxiliary
             Dim fh2 As New FileHelperEngine(Of LIQUAC2_IPData)
             Dim fh3 As New FileHelperEngine(Of LIQUAC2_RiQiData)
             Dim fh4 As New FileHelperEngine(Of DielectricConstants)
-            uniquacipc = fh1.ReadFile(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "uniquac.dat")
-            liquac2c = fh2.ReadFile(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "LIQUAC2_IP.txt")
-            liquac2rqc = fh3.ReadFile(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "LIQUAC2_RiQi.txt")
-            liquac2dcc = fh4.ReadFile(My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "DielectricConstants.txt")
+
+            Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.uniquac.dat")
+                Using t As New IO.StreamReader(filestr)
+                    uniquacipc = fh1.ReadStream(t)
+                End Using
+            End Using
+            Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.LIQUAC2_IP.txt")
+                Using t As New IO.StreamReader(filestr)
+                    liquac2c = fh2.ReadStream(t)
+                End Using
+            End Using
+            Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.LIQUAC2_RiQi.txt")
+                Using t As New IO.StreamReader(filestr)
+                    liquac2rqc = fh3.ReadStream(t)
+                End Using
+            End Using
+            Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.dielectricconstants.txt")
+                Using t As New IO.StreamReader(filestr)
+                    liquac2dcc = fh4.ReadStream(t)
+                End Using
+            End Using
 
             Dim csdb As New ChemSepHelper.ChemSepIDConverter
 
@@ -205,19 +224,6 @@ Namespace PropertyPackages.Auxiliary
             For Each liquac2dc In liquac2dcc
                 Me.DielectricConstants.Add(liquac2dc.Name, liquac2dc.Clone)
             Next
-
-            uniquacip = Nothing
-            uniquacipc = Nothing
-            liquac2 = Nothing
-            liquac2c = Nothing
-            liquac2rq = Nothing
-            liquac2rqc = Nothing
-            liquac2dc = Nothing
-            liquac2dcc = Nothing
-            fh1 = Nothing
-            fh2 = Nothing
-            fh3 = Nothing
-            fh4 = Nothing
 
         End Sub
 
@@ -530,6 +536,8 @@ Namespace PropertyPackages.Auxiliary
             Do
                 fi(i) = Vx(i) * VR(i) / r
                 teta(i) = Vx(i) * VQ(i) / q
+                If fi(i) = 0 Then fi(i) = 1.0E-40
+                If teta(i) = 0 Then teta(i) = 1.0E-40
                 i = i + 1
             Loop Until i = n + 1
 
@@ -598,7 +606,7 @@ Namespace PropertyPackages.Auxiliary
                     lngsr(i) = lngc(i) + lngr(i)
                     If .IsIon Then
                         'reference state normalization
-                        lngsr(i) -= Log(VR(i) / Rref) + 1 - VR(i) / Rref - 5 * VQ(i) * (Log(VR(i) * Qref / (Rref * VQ(i))) + 1 - VR(i) * Qref / (Rref * VQ(i)))
+                        If VR(i) > 0.0 Then lngsr(i) -= Log(VR(i) / Rref) + 1 - VR(i) / Rref - 5 * VQ(i) * (Log(VR(i) * Qref / (Rref * VQ(i))) + 1 - VR(i) * Qref / (Rref * VQ(i)))
                         lngsr(i) -= VQ(i) * (1 - Log(phirefi(i)) - phiiref(i))
                         lngsr(i) += Log(Xsolv)
                     ElseIf .IsSalt Then
@@ -636,6 +644,9 @@ Namespace PropertyPackages.Auxiliary
 
             For i = 0 To n
                 g(i) = Math.Exp(lng(i))
+                If VR(i) = 0 And VQ(i) = 0 Then
+                    g(i) = 1.0
+                End If
             Next
 
             Return g

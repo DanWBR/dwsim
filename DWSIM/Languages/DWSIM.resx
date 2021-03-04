@@ -5676,4 +5676,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="DescPITPP" xml:space="preserve">
     <value>O modelo de Pitzer estendeu a teoria de Debye-Huckel usando uma expansão virial para explicar a dependência da força iônica das forças de curto alcance nas interações de íons binários e ternários. O modelo é aplicável a soluções de alta força iônica. O modelo Pitzer encontra ampla aplicação para a correlação e previsão de propriedades termodinâmicas de soluções eletrolíticas.</value>
   </data>
+  <data name="DescLIPP" xml:space="preserve">
+    <value>Uma versão do modelo LIQUAC modificado por Kiepe, Noll e Gmehling.</value>
+  </data>
 </root>

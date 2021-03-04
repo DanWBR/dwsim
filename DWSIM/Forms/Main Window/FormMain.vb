@@ -633,11 +633,11 @@ Public Class FormMain
 
         PropertyPackages.Add(ENQPP.ComponentName.ToString, ENQPP)
 
-        Dim PITPP As New PitzerPropertyPackage()
-        PITPP.ComponentName = "Pitzer (Aqueous Electrolytes)"
-        PITPP.ComponentDescription = DWSIM.App.GetLocalString("DescPITPP")
+        Dim LIQPP As New LIQUAC2PropertyPackage()
+        LIQPP.ComponentName = "Modified LIQUAC (Aqueous Electrolytes)"
+        LIQPP.ComponentDescription = DWSIM.App.GetLocalString("DescLIPP")
 
-        PropertyPackages.Add(PITPP.ComponentName.ToString, PITPP)
+        PropertyPackages.Add(LIQPP.ComponentName.ToString, LIQPP)
 
         Dim BOPP As BlackOilPropertyPackage = New BlackOilPropertyPackage()
         BOPP.ComponentName = "Black Oil"

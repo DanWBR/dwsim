@@ -2348,9 +2348,9 @@ Label_00CC:
                                ENQPP.ComponentName = "Electrolyte NRTL (Aqueous Electrolytes)"
                                plist.Add(ENQPP)
 
-                               Dim PITPP As New PitzerPropertyPackage()
-                               PITPP.ComponentName = "Pitzer (Aqueous Electrolytes)"
-                               plist.Add(PITPP)
+                               Dim LIQPP As New LIQUAC2PropertyPackage()
+                               LIQPP.ComponentName = "Modified LIQUAC (Aqueous Electrolytes)"
+                               plist.Add(LIQPP)
 
                                Dim BOPP As BlackOilPropertyPackage = New BlackOilPropertyPackage()
                                BOPP.ComponentName = "Black Oil"

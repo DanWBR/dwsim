@@ -1,14 +1,1 @@
-Version 6.4.4
-
-- Fixed issue 111 (The field is not updated correctly after the method converges)
-- Fixed issue 117 (Issue with recycling mixed streams)
-- Fixed issue with VLE PT Flash
-- Added an option to use IO Flash in VLE/VLLE equilibrium calculations
-- Fixed an issue with simultaneous adjust solver
-- Fixed PFR volume iteration
-- Fixed flowsheet update after finishing calculation
-- Fixed units for some properties in Excel Add-In
-- Fixed conversion from kW to MJ/h
-- Fixed conversion of BTU/h and MMBTU/h
-- Fixed issues with Heat Exchanger Shell and Tube calculation mode
-- Darker green color in digital gauge
+Version 6.4.5

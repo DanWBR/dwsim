@@ -4414,6 +4414,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Uma versão do modelo LIQUAC modificado por Kiepe, Noll e Gmehling..
+        '''</summary>
+        Friend Shared ReadOnly Property DescLIPP() As String
+            Get
+                Return ResourceManager.GetString("DescLIPP", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Neste Pacote de Propriedades, a Equação baseada na Teoria dos Estados Correspondentes desenvolvida por Lee e Kesler foi aprimorada por Plöcker para cálculo da fugacidade dos componentes em misturas assimétricas. Aqui, todas as propriedades são calculadas pela Equação LKP, incluindo os K-values..
         '''</summary>
         Friend Shared ReadOnly Property DescLKPPP() As String
