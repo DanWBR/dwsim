@@ -653,8 +653,6 @@ Namespace PropertyPackages.Auxiliary
 
         End Function
 
-
-
     End Class
 
 End Namespace

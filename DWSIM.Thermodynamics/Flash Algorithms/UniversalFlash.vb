@@ -195,6 +195,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim result As Object = Nothing
 
+            Dim UseIO As Boolean = FlashSettings(FlashSetting.UseIOFlash)
+
             Select Case Flashtype
                 Case "VLE", "SVLE", "SVLLE"
                     IObj?.Paragraphs.Add("Selected Flash Algorithm: VLE")
@@ -203,10 +205,22 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     nl.PTFlashFunction = AddressOf Flash_PT
                     result = nl.Flash_PH(Vz, P, H, Tref, PP, False, Nothing)
                 Case "VLLE"
-                    IObj?.Paragraphs.Add("Selected Flash Algorithm: VLLE")
-                    Dim nl = New NestedLoops3PV3
-                    nl.FlashSettings = FlashSettings
-                    result = nl.Flash_PH(Vz, P, H, Tref, PP, False, Nothing)
+                    If Not FlashSettings(FlashSetting.ImmiscibleWaterOption) = True Then
+                        If Not UseIO Then
+                            IObj?.Paragraphs.Add("Selected Flash Algorithm: VLLE")
+                            Dim nl = New NestedLoops3PV3
+                            nl.FlashSettings = FlashSettings
+                            result = nl.Flash_PH(Vz, P, H, Tref, PP, False, Nothing)
+                        Else
+                            Dim io = New BostonFournierInsideOut3P
+                            io.FlashSettings = FlashSettings
+                            result = io.Flash_PH(Vz, P, H, Tref, PP, False, Nothing)
+                        End If
+                    Else
+                        IObj?.Paragraphs.Add("Selected Flash Algorithm: VLLE - Immiscible Water")
+                        Dim imm As New NestedLoopsImmiscible With {.FlashSettings = FlashSettings}
+                        result = imm.Flash_PH(Vz, P, H, Tref, PP, False, Nothing)
+                    End If
             End Select
 
             IObj?.Close()
@@ -255,6 +269,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim result As Object = Nothing
 
+            Dim UseIO As Boolean = FlashSettings(FlashSetting.UseIOFlash)
+
             Select Case Flashtype
                 Case "VLE", "SVLE", "SVLLE"
                     IObj?.Paragraphs.Add("Selected Flash Algorithm: VLE")
@@ -263,10 +279,22 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     nl.PTFlashFunction = AddressOf Flash_PT
                     result = nl.Flash_PS(Vz, P, S, Tref, PP, False, Nothing)
                 Case "VLLE"
-                    IObj?.Paragraphs.Add("Selected Flash Algorithm: VLLE")
-                    Dim nl = New NestedLoops3PV3
-                    nl.FlashSettings = FlashSettings
-                    result = nl.Flash_PS(Vz, P, S, Tref, PP, False, Nothing)
+                    If Not FlashSettings(FlashSetting.ImmiscibleWaterOption) = True Then
+                        If Not UseIO Then
+                            IObj?.Paragraphs.Add("Selected Flash Algorithm: VLLE")
+                            Dim nl = New NestedLoops3PV3
+                            nl.FlashSettings = FlashSettings
+                            result = nl.Flash_PS(Vz, P, S, Tref, PP, False, Nothing)
+                        Else
+                            Dim io = New BostonFournierInsideOut3P
+                            io.FlashSettings = FlashSettings
+                            result = io.Flash_PS(Vz, P, S, Tref, PP, False, Nothing)
+                        End If
+                    Else
+                        IObj?.Paragraphs.Add("Selected Flash Algorithm: VLLE - Immiscible Water")
+                        Dim imm As New NestedLoopsImmiscible With {.FlashSettings = FlashSettings}
+                        result = imm.Flash_PS(Vz, P, S, Tref, PP, False, Nothing)
+                    End If
             End Select
 
             IObj?.Close()

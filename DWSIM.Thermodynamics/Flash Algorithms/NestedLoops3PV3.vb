@@ -139,35 +139,34 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Vx = result(2)
                     Vy = result(3)
 
+                    If L > 0.0 Then
+
+                        Dim lps = GetPhaseSplitEstimates(T, P, L, Vx, PP)
+
+                        L1 = lps(0)
+                        Vx1 = lps(1)
+                        L2 = lps(2)
+                        Vx2 = lps(3)
+
+                        If L2 > 0.0 Then
+
+                            result = Flash_PT_3P(Vz, V, L1, L2, Vy, Vx1, Vx2, P, T, PP)
+
+                        Else
+
+                            result = _nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+
+                        End If
+
+                    Else
+
+                        result = _nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+
+                    End If
+
                 End If
 
             End If
-
-            If L > 0.0 Then
-
-                Dim lps = GetPhaseSplitEstimates(T, P, L, Vx, PP)
-
-                L1 = lps(0)
-                Vx1 = lps(1)
-                L2 = lps(2)
-                Vx2 = lps(3)
-
-                If L2 > 0.0 Then
-
-                    result = Flash_PT_3P(Vz, V, L1, L2, Vy, Vx1, Vx2, P, T, PP)
-
-                Else
-
-                    result = _nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-
-                End If
-
-            Else
-
-                result = _nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-
-            End If
-
 
             Return result
 
@@ -621,7 +620,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     MB(0, 0) = -F1
                     MB(1, 0) = -F2
 
-
                     Try
                         MX = MA.Solve(MB)
                     Catch ex As Exception
@@ -636,23 +634,14 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     Dim df As Double
 
-                    If ecount < 5 Then
-                        df = 0.1
-                    ElseIf ecount < 10 Then
-                        df = 0.5
-                    ElseIf ecount < 15 Then
-                        df = 0.7
-                    Else
-                        df = 1.0
+                    df = (ecount + 1) * 0.2
+                    If df > 1.0 Then df = 1.0
+                    If -F / df * df + Vant > 1.0 Or -F / df * df + Vant < 0.0 Then
+                        df /= 10
                     End If
 
                     L1 += -dL1 * df
                     L2 += -dL2 * df
-
-                    If Abs(dL1 * df) > 1.0 Or Abs(dL2 * df) > 1.0 Then
-                        L1 = L1ant
-                        L2 = L2ant
-                    End If
 
                     If L1 < 0 Then L1 = 0.0
                     If L2 < 0 Then L2 = 0.0
@@ -806,11 +795,13 @@ out:
             Dim errflag As Boolean = True
             Try
                 Return Flash_PH_1(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
+                errflag = False
             Catch ex As Exception
             End Try
             If errflag Then
                 Dim nl As New NestedLoops
                 nl.PTFlashFunction = AddressOf Flash_PT
+                nl.DisableParallelCalcs = True
                 Return nl.Flash_PH_1(Vz, P, H, Tref, PP, False, Nothing)
             End If
 
@@ -1020,6 +1011,12 @@ out:
             Loop Until ecount > maxitEXT Or Double.IsNaN(X0)
 
             IObj?.Paragraphs.Add(String.Format("The PH Flash algorithm converged in {0} iterations. Final Temperature value: {1} K  Final Vapor Fraction {2}", ecount, T, V))
+
+            If ecount > maxitEXT Then
+                Dim ex As New Exception("PH Flash [NL]: Invalid result: Temperature did not converge." & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))
+                ex.Data.Add("DetailedDescription", "The Flash Algorithm was unable to converge to a solution.")
+                Throw ex
+            End If
 
             Ki = Vy.DivideY(Vx1)
 
