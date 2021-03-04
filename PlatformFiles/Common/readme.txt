@@ -62,6 +62,19 @@ VERSION HISTORY / CHANGELOG
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim6/commits/windows
 
+Version 6.4.5
+
+Author				Description
+Daniel Medeiros		Fixed Compressor/Expander power calculation in Polytropic mode
+Daniel Medeiros		Fixed Gibbs Reactor in Adiabatic mode
+Daniel Medeiros		Fixed issue with VLLE Flash
+Daniel Medeiros		Steady-State Adjust/Controller enhancements
+Daniel Medeiros		Fixed UNIFAC-LL (issue 118)
+Daniel Medeiros		Fixed Condenser/Reboiler pressure editing (Cross-Platform UI)
+Daniel Medeiros		Fixed editors not updating after flowsheet solve (Cross-Platform UI)
+Daniel Medeiros		Fixed issue in Advanced Kinetics expression parser
+Daniel Medeiros		Fixed Solids Separator energy balance warning
+
 Version 6.4.4
 
 Author              Description

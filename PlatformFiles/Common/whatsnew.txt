@@ -1,1 +1,11 @@
 Version 6.4.5
+
+- Fixed Compressor/Expander power calculation in Polytropic mode
+- Fixed Gibbs Reactor in Adiabatic mode
+- Fixed issue with VLLE Flash
+- Steady-State Adjust/Controller enhancements
+- Fixed UNIFAC-LL (issue 118)
+- Fixed Condenser/Reboiler pressure editing (Cross-Platform UI)
+- Fixed editors not updating after flowsheet solve (Cross-Platform UI)
+- Fixed issue in Advanced Kinetics expression parser
+- Fixed Solids Separator energy balance warning
