@@ -1767,13 +1767,25 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
                         dfdx = FunctionGradientSync(fobj, x)
 
-                        Dim success As Boolean
-                        success = MathEx.SysLin.rsolve.rmatrixsolve(dfdx, fx, x.Length, dx)
+                        Dim dfac As Double = 100000.0
+                        Dim success = MathEx.SysLin.rsolve.rmatrixsolve(dfdx, fx, x.Length, dx)
                         If success Then
+
+                            dfac = (ic + 1) * 0.2
+                            If dfac > 1.0 Then dfac = 1.0
+
+                            For i = 0 To x.Length - 1
+                                If Math.Abs(-dx(i) * dfac) > x(i) Then
+                                    dfac /= 10
+                                    Exit For
+                                End If
+                            Next
+
                             For i = 0 To x.Length - 1
                                 dx(i) = -dx(i)
-                                x(i) += 0.7 * dx(i)
+                                x(i) += dfac * dx(i)
                             Next
+
                         End If
 
                         ic += 1
@@ -1864,13 +1876,25 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
                     dfdx = FunctionGradientAsync(fobj, x, ct)
 
-                    Dim success As Boolean
-                    success = MathEx.SysLin.rsolve.rmatrixsolve(dfdx, fx, x.Length, dx)
+                    Dim dfac As Double = 100000.0
+                    Dim success = MathEx.SysLin.rsolve.rmatrixsolve(dfdx, fx, x.Length, dx)
                     If success Then
+
+                        dfac = (ic + 1) * 0.2
+                        If dfac > 1.0 Then dfac = 1.0
+
+                        For i = 0 To x.Length - 1
+                            If Math.Abs(-dx(i) * dfac) > x(i) Then
+                                dfac /= 10
+                                Exit For
+                            End If
+                        Next
+
                         For i = 0 To x.Length - 1
                             dx(i) = -dx(i)
-                            x(i) += 0.7 * dx(i)
+                            x(i) += dfac * dx(i)
                         Next
+
                     End If
 
                     fs.CheckStatus()

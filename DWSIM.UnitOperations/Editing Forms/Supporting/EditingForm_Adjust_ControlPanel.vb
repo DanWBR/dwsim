@@ -1,6 +1,7 @@
 ﻿Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
 Imports System.Windows.Forms
 Imports System.Drawing
+Imports DWSIM.ExtensionMethods
 
 Public Class EditingForm_Adjust_ControlPanel
 
@@ -25,12 +26,18 @@ Public Class EditingForm_Adjust_ControlPanel
         Me.nf = myADJ.FlowSheet.FlowsheetOptions.NumberFormat
 
         With myADJ
+
             Me.tbAjuste.Text = cv.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su), .AdjustValue)
             Me.tbMaxIt.Text = .MaximumIterations
             Me.tbStep.Text = .StepSize
             Me.tbTol.Text = .Tolerance
-            Me.tbMin.Text = .MinVal.GetValueOrDefault
-            Me.tbMax.Text = .MaxVal.GetValueOrDefault
+
+            If Not .MinVal.HasValue Then .MinVal = (Convert.ToDouble(GetMnpVarValue()) * 0.2).ConvertFromSI(myADJ.ManipulatedObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, su))
+            If Not .MaxVal.HasValue Then .MaxVal = (Convert.ToDouble(GetMnpVarValue()) * 2.0).ConvertFromSI(myADJ.ManipulatedObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, su))
+
+            Me.tbMin.Text = .MinVal.GetValueOrDefault().ToString(formC.FlowsheetOptions.NumberFormat)
+            Me.tbMax.Text = .MaxVal.GetValueOrDefault().ToString(formC.FlowsheetOptions.NumberFormat)
+
         End With
 
         Me.lblStatus.Text = formC.GetTranslatedString("StatusOcioso")
@@ -132,54 +139,36 @@ Public Class EditingForm_Adjust_ControlPanel
             co.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
         Next
 
-        If Me.rbSecante.Checked Then
+        Dim updateproc = Sub(xval As Double, f As Double, c As Integer)
 
-            Dim cnt As Integer = 0
-            Dim var, varAnt, varAnt2, fi, fi_ant, fi_ant2 As Double
-            var = mvVal
-            Do
-                fi_ant2 = fi_ant
-                fi_ant = fi
-                fi = cvVal.ConvertToSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su)) -
-                adjval.ConvertToSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su))
+                             Me.lblStatus.Text = formC.GetTranslatedString("Ajustando")
+                             Me.lblItXdeY.Text = formC.GetTranslatedString("Iterao") & " " & (c + 1) & " " & formC.GetTranslatedString("de") & " " & maxit
+                             Me.tbErro.Text = f.ToString("G")
 
-                Me.lblStatus.Text = formC.GetTranslatedString("Ajustando")
-                Me.lblItXdeY.Text = formC.GetTranslatedString("Iterao") & " " & (cnt + 1) & " " & formC.GetTranslatedString("de") & " " & maxit
-                Me.tbErro.Text = fi.ToString("G")
+                             px.Add(xval.ConvertFromSI(myADJ.ManipulatedObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, su)))
+                             py1.Add(adjval)
+                             py2.Add(cvVal)
 
-                If cnt <= 2 Then
-                    varAnt2 = varAnt
-                    varAnt = var
-                    If cnt > 1 And fi > fi_ant Then
-                        var = var - 2 * stepsize
-                    Else
-                        var = var + stepsize
-                    End If
-                Else
-                    varAnt2 = varAnt
-                    varAnt = var
-                    If fi <> fi_ant2 Then
-                        var = var - fi * (var - varAnt2) / (fi - fi_ant2)
-                    End If
+                             AtualizaGrafico()
+
+                         End Sub
+
+        Dim fval As Double
+
+        Dim cnt = 0
+
+        Dim mvVal0 = mvVal
+
+        Dim funcproc As Func(Of Double, Double) =
+            Function(xval)
+
+                If cancelar Then
+                    Throw New TaskCanceledException(formC.GetTranslatedString("Ajustecanceladopelou"))
                 End If
 
-                If Me.usemaxmin Then
-                    If var <= min Or var >= max Then
-                        Dim msgres As MsgBoxResult = MessageBox.Show(formC.GetTranslatedString("Avarivelmanipuladaat") _
-                                        & vbCrLf & formC.GetTranslatedString("Desejacontinuaroproc"),
-                                        formC.GetTranslatedString("Limitesdavarivelmani"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-                        If msgres = MsgBoxResult.No Then
-                            cancelar = True
-                            Exit Do
-                        End If
-                    End If
-                End If
+                Me.SetMnpVarValue(xval)
 
-                Me.SetMnpVarValue(var)
-
-                DWSIM.FlowsheetSolver.FlowsheetSolver.CalculateObject(formC, myADJ.ManipulatedObject.GraphicObject.Name)
-
-                formC.UpdateOpenEditForms()
+                DWSIM.FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(formC, GlobalSettings.Settings.SolverMode)
 
                 If myADJ.Referenced Then
                     rfVal = Me.GetRefVarValue()
@@ -192,388 +181,158 @@ Public Class EditingForm_Adjust_ControlPanel
                 End If
 
                 cvVal = Me.GetCtlVarValue()
+
+                fval = cvVal.ConvertToSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su)) -
+                       adjval.ConvertToSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su))
+
+                If InvokeRequired Then
+                    UIThreadInvoke(Sub()
+                                       updateproc.Invoke(xval, fval, cnt)
+                                   End Sub)
+                Else
+                    updateproc.Invoke(xval, fval, cnt)
+                End If
+
                 cnt += 1
 
-                px.Add(var.ConvertFromSI(myADJ.ManipulatedObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, su)))
-                py1.Add(adjval)
-                py2.Add(cvVal)
+                Return fval
 
-                AtualizaGrafico()
+            End Function
 
-                If fi = fi_ant Then
-                    Dim msgres As MsgBoxResult = MessageBox.Show(formC.GetTranslatedString("Avarivelmanipuladano") _
-                                    & vbCrLf & formC.GetTranslatedString("Desejacontinuaroproc"),
-                                    formC.GetTranslatedString("Problemasnaconvergnc"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-                    If msgres = MsgBoxResult.No Then
-                        cancelar = True
-                        Exit Do
-                    End If
-                End If
+        Dim funcrestore = Sub(xvar As Double)
+                              Me.SetMnpVarValue(xvar)
+                              DWSIM.FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(formC, GlobalSettings.Settings.SolverMode)
+                          End Sub
 
-                If cnt >= maxit Then
-                    Dim msgres As MsgBoxResult = MessageBox.Show(formC.GetTranslatedString("Onmeromximodeiteraes"),
-                                                    formC.GetTranslatedString("Nmeromximodeiteraesa3"),
-                                                    MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-                    If msgres = MsgBoxResult.No Then
-                        cancelar = False
-                        Me.lblStatus.Text = formC.GetTranslatedString("Mximodeiteraesatingi")
-                        Me.btnIniciar.Enabled = True
-                        Me.myADJ.GraphicObject.Calculated = False
-                        Exit Sub
-                    Else
-                        cnt = 1
-                    End If
-                End If
-                Application.DoEvents()
-                If cancelar = True Then Exit Do
-            Loop Until Math.Abs(fi) < tol Or Double.IsNaN(var)
+        Dim funcfinish = Sub()
 
-            If cancelar = True Then
-                Me.lblStatus.Text = formC.GetTranslatedString("Ajustecanceladopelou")
-                Me.myADJ.GraphicObject.Calculated = False
-            Else
-                Me.lblStatus.Text = formC.GetTranslatedString("Valorajustadocomsuce")
-                Me.myADJ.GraphicObject.Calculated = True
-            End If
+                             If cancelar = True Then
+                                 Me.lblStatus.Text = formC.GetTranslatedString("Ajustecanceladopelou")
+                                 Me.myADJ.GraphicObject.Calculated = False
+                             Else
+                                 Me.lblStatus.Text = formC.GetTranslatedString("Valorajustadocomsuce")
+                                 Me.myADJ.GraphicObject.Calculated = True
+                             End If
 
-        ElseIf Me.rbBrent.Checked Then
+                             Me.btnIniciar.Enabled = True
+
+                             cancelar = False
+
+                             Dim j, k As Integer
+                             Dim data(4, py1.Count - 1) As String
+                             j = 0
+                             For Each d As Double In py1
+                                 data(0, j) = j
+                                 data(1, j) = px(j)
+                                 data(2, j) = py2(j)
+                                 data(3, j) = py1(j)
+                                 data(4, j) = -py1(j) + py2(j)
+                                 j = j + 1
+                             Next
+                             With Me.Grid1.Rows
+                                 .Clear()
+                                 If data.Length > 0 Then
+                                     k = 0
+                                     Do
+                                         .Add()
+                                         j = 0
+                                         Do
+                                             If Double.TryParse(data(j, k), New Double) Then
+                                                 .Item(k).Cells(j).Value = Format(CDbl(data(j, k)), nf)
+                                             Else
+                                                 .Item(k).Cells(j).Value = data(j, k)
+                                             End If
+                                             j = j + 1
+                                         Loop Until j = 5
+                                         k = k + 1
+                                     Loop Until k = py1.Count
+                                 End If
+                             End With
+
+                         End Sub
+
+        If rbSecante.Checked Then
+
+            Task.Factory.StartNew(Sub()
+                                      mvVal = MathNet.Numerics.RootFinding.Secant.FindRoot(
+                                        Function(xval)
+                                            Return funcproc.Invoke(xval)
+                                        End Function, mvVal, mvVal * 1.01,,, tol, maxit)
+                                  End Sub).ContinueWith(Sub(t)
+                                                            UIThread(Sub() formC.UpdateOpenEditForms())
+                                                            UIThread(Sub() funcfinish.Invoke())
+                                                            If t.Exception IsNot Nothing Then
+                                                                funcrestore.Invoke(mvVal0)
+                                                                MessageBox.Show(t.Exception.Message, formC.GetTranslatedString("Erro"),
+                                                                                MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                                            End If
+                                                        End Sub)
+
+        ElseIf rbBrent.Checked Then
 
             minval = myADJ.MinVal.GetValueOrDefault.ConvertToSI(myADJ.ManipulatedObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, su))
             maxval = myADJ.MaxVal.GetValueOrDefault.ConvertToSI(myADJ.ManipulatedObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, su))
 
-            Dim l As Integer = 0
-            Dim i As Integer = 0
+            Task.Factory.StartNew(Sub()
+                                      mvVal = MathNet.Numerics.RootFinding.Brent.FindRoot(
+                                        Function(xval)
+                                            Return funcproc.Invoke(xval)
+                                        End Function, minval, maxval, tol, maxit)
+                                  End Sub).ContinueWith(Sub(t)
+                                                            UIThread(Sub() formC.UpdateOpenEditForms())
+                                                            UIThread(Sub() funcfinish.Invoke())
+                                                            If t.Exception IsNot Nothing Then
+                                                                funcrestore.Invoke(mvVal0)
+                                                                MessageBox.Show(t.Exception.Message, formC.GetTranslatedString("Erro"),
+                                                                                MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                                            End If
+                                                        End Sub)
 
-            Dim f, f_inf, nsub, delta As Double
+        ElseIf rbNewton.Checked Then
 
-            nsub = 5
+            Dim nsolv As New DWSIM.MathOps.MathEx.Optimization.NewtonSolver()
+            nsolv.EnableDamping = False
+            nsolv.MaxIterations = maxit
+            nsolv.Tolerance = tol
 
-            delta = (maxval - minval) / nsub
+            Task.Factory.StartNew(Sub()
+                                      mvVal = nsolv.Solve(Function(xvars)
+                                                              Return New Double() {funcproc.Invoke(xvars(0))}
+                                                          End Function, New Double() {mvVal})(0)
+                                  End Sub).ContinueWith(Sub(t)
+                                                            UIThread(Sub() formC.UpdateOpenEditForms())
+                                                            UIThread(Sub() funcfinish.Invoke())
+                                                            If t.Exception IsNot Nothing Then
+                                                                funcrestore.Invoke(mvVal0)
+                                                                MessageBox.Show(t.Exception.Message, formC.GetTranslatedString("Erro"),
+                                                                                MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                                            End If
+                                                        End Sub)
 
-            Do
-                px.Add(minval.ConvertFromSI(myADJ.ManipulatedObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, su)))
-                Me.SetMnpVarValue(minval)
+        ElseIf rbIPOPT.Checked Then
 
-                DWSIM.FlowsheetSolver.FlowsheetSolver.CalculateObject(formC, myADJ.ManipulatedObject.GraphicObject.Name)
+            Dim isolv As New DWSIM.MathOps.MathEx.Optimization.IPOPTSolver()
+            isolv.MaxIterations = maxit
+            isolv.Tolerance = tol
 
-                If myADJ.Referenced Then
-                    rfVal = Me.GetRefVarValue()
-                    Dim punit = formC.SimulationObjects(myADJ.ReferencedObjectData.ID).GetPropertyUnit(myADJ.ReferencedObjectData.PropertyName, su)
-                    If su.GetUnitType(punit) = Enums.UnitOfMeasure.temperature Then
-                        adjval = rfVal + cv.ConvertFromSI(punit & ".", myADJ.AdjustValue)
-                    Else
-                        adjval = rfVal + cv.ConvertFromSI(punit, myADJ.AdjustValue)
-                    End If
-                End If
-
-                cvVal = Me.GetCtlVarValue()
-                f = cvVal.ConvertToSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su)) -
-                adjval.ConvertToSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su))
-
-                Me.lblItXdeY.Text = formC.GetTranslatedString("Procurandosubinterva")
-                Me.tbErro.Text = f
-                py1.Add(adjval)
-                py2.Add(cvVal)
-                AtualizaGrafico()
-                minval = minval + delta
-                px.Add(minval.ConvertFromSI(myADJ.ManipulatedObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, su)))
-                Me.SetMnpVarValue(minval)
-
-                DWSIM.FlowsheetSolver.FlowsheetSolver.CalculateObject(formC, myADJ.ManipulatedObject.GraphicObject.Name)
-
-                Me.lblStatus.Text = formC.GetTranslatedString("Ajustando")
-                Me.lblItXdeY.Text = formC.GetTranslatedString("Procurandosubinterva")
-                cvVal = Me.GetCtlVarValue()
-                f_inf = cvVal.ConvertToSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su)) -
-                    adjval.ConvertToSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su))
-                py1.Add(adjval)
-                py2.Add(cvVal)
-                Me.tbErro.Text = f_inf
-                AtualizaGrafico()
-                l += 1
-                If l > 5 Then
-                    MessageBox.Show(formC.GetTranslatedString("Oajustenoencontrouum"), formC.GetTranslatedString("Semsoluo"), MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Me.lblStatus.Text = formC.GetTranslatedString("Noexistesoluonointer")
-                    Me.lblItXdeY.Text = ""
-                    cancelar = False
-                    Me.btnIniciar.Enabled = True
-                    Me.myADJ.GraphicObject.Calculated = False
-                    Exit Sub
-                End If
-                If f = f_inf Then
-                    Dim msgres As MsgBoxResult = MessageBox.Show(formC.GetTranslatedString("Avarivelmanipuladano") _
-                                    & vbCrLf & formC.GetTranslatedString("Desejacontinuaroproc"),
-                                    formC.GetTranslatedString("Problemasnaconvergnc"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-                    If msgres = MsgBoxResult.No Then
-                        Me.lblStatus.Text = formC.GetTranslatedString("Ajustecanceladopelou")
-                        Me.btnIniciar.Enabled = True
-                        Me.myADJ.GraphicObject.Calculated = False
-                        Exit Sub
-                    End If
-                End If
-                If cancelar = True Then Exit Do
-            Loop Until f * f_inf < 0
-            maxval = minval
-            minval = minval - delta
-
-            'método de Brent
-            Dim aaa, bbb, ccc, ddd, eee, min11, min22, faa, fbb, fcc, ppp, qqq, rrr, sss, tol11, xmm As Double
-            Dim ITMAX2 As Integer = maxit
-            Dim iter2 As Integer
-            aaa = minval
-            bbb = maxval
-            ccc = maxval
-            faa = f
-            fbb = f_inf
-            fcc = fbb
-            iter2 = 0
-            Do
-                If cancelar = True Then Exit Do
-                Me.lblStatus.Text = formC.GetTranslatedString("Ajustando")
-                Me.lblItXdeY.Text = formC.GetTranslatedString("Iterao") & " " & (iter2 + l + 1) & " " & formC.GetTranslatedString("de") & " " & maxit
-                Me.tbErro.Text = fbb
-                Application.DoEvents()
-
-                If (fbb > 0 And fcc > 0) Or (fbb < 0 And fcc < 0) Then
-                    ccc = aaa
-                    fcc = faa
-                    ddd = bbb - aaa
-                    eee = ddd
-                End If
-                If Math.Abs(fcc) < Math.Abs(fbb) Then
-                    aaa = bbb
-                    bbb = ccc
-                    ccc = aaa
-                    faa = fbb
-                    fbb = fcc
-                    fcc = faa
-                End If
-                tol11 = tol
-                xmm = 0.5 * (ccc - bbb)
-                If Math.Abs(fbb) < tol Then GoTo Final3
-                If (Math.Abs(eee) >= tol11) And (Math.Abs(faa) > Math.Abs(fbb)) Then
-                    sss = fbb / faa
-                    If aaa = ccc Then
-                        ppp = 2 * xmm * sss
-                        qqq = 1 - sss
-                    Else
-                        qqq = faa / fcc
-                        rrr = fbb / fcc
-                        ppp = sss * (2 * xmm * qqq * (qqq - rrr) - (bbb - aaa) * (rrr - 1))
-                        qqq = (qqq - 1) * (rrr - 1) * (sss - 1)
-                    End If
-                    If ppp > 0 Then qqq = -qqq
-                    ppp = Math.Abs(ppp)
-                    min11 = 3 * xmm * qqq - Math.Abs(tol11 * qqq)
-                    min22 = Math.Abs(eee * qqq)
-                    Dim tvar2 As Double
-                    If min11 < min22 Then tvar2 = min11
-                    If min11 > min22 Then tvar2 = min22
-                    If 2 * ppp < tvar2 Then
-                        eee = ddd
-                        ddd = ppp / qqq
-                    Else
-                        ddd = xmm
-                        eee = ddd
-                    End If
-                Else
-                    ddd = xmm
-                    eee = ddd
-                End If
-                aaa = bbb
-                faa = fbb
-                If (Math.Abs(ddd) > tol11) Then
-                    bbb += ddd
-                Else
-                    bbb += Math.Sign(xmm) * tol11
-                End If
-                Me.SetMnpVarValue(bbb)
-
-                DWSIM.FlowsheetSolver.FlowsheetSolver.CalculateObject(formC, myADJ.ManipulatedObject.GraphicObject.Name)
-
-                If myADJ.Referenced Then
-                    rfVal = Me.GetRefVarValue()
-                    Dim punit = formC.SimulationObjects(myADJ.ReferencedObjectData.ID).GetPropertyUnit(myADJ.ReferencedObjectData.PropertyName, su)
-                    If su.GetUnitType(punit) = Enums.UnitOfMeasure.temperature Then
-                        adjval = rfVal + cv.ConvertFromSI(punit & ".", myADJ.AdjustValue)
-                    Else
-                        adjval = rfVal + cv.ConvertFromSI(punit, myADJ.AdjustValue)
-                    End If
-                End If
-
-                cvVal = Me.GetCtlVarValue()
-                fbb = cvVal - adjval
-
-                Me.tbErro.Text = fbb
-                iter2 += 1
-
-                px.Add(bbb.ConvertFromSI(myADJ.ManipulatedObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, su)))
-                py1.Add(adjval)
-                py2.Add(cvVal)
-
-                AtualizaGrafico()
-
-                If iter2 + l - 1 >= maxit Then
-                    Dim msgres As MsgBoxResult = MessageBox.Show(formC.GetTranslatedString("Onmeromximodeiteraes"),
-                                                    formC.GetTranslatedString("Nmeromximodeiteraesa3"),
-                                                    MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-                    If msgres = MsgBoxResult.No Then
-                        cancelar = False
-                        Me.lblStatus.Text = formC.GetTranslatedString("Mximodeiteraesatingi")
-                        Me.btnIniciar.Enabled = True
-                        Me.myADJ.GraphicObject.Calculated = False
-                        Exit Sub
-                    Else
-                        iter2 = 1
-                    End If
-                End If
-                If cancelar = True Then Exit Do
-            Loop Until iter2 >= ITMAX2
-
-Final3:
-            If cancelar = True Then
-                Me.lblStatus.Text = formC.GetTranslatedString("Ajustecanceladopelou")
-                Me.myADJ.GraphicObject.Calculated = False
-            Else
-                Me.lblStatus.Text = formC.GetTranslatedString("Valorajustadocomsuce")
-                Me.myADJ.GraphicObject.Calculated = True
-            End If
+            Task.Factory.StartNew(Sub()
+                                      mvVal = isolv.Solve(Function(xvars)
+                                                              Return funcproc.Invoke(xvars(0)) ^ 2
+                                                          End Function, Nothing, New Double() {mvVal}, New Double() {minval}, New Double() {maxval})(0)
+                                  End Sub).ContinueWith(Sub(t)
+                                                            UIThread(Sub() formC.UpdateOpenEditForms())
+                                                            UIThread(Sub() funcfinish.Invoke())
+                                                            If t.Exception IsNot Nothing Then
+                                                                funcrestore.Invoke(mvVal0)
+                                                                MessageBox.Show(t.Exception.Message, formC.GetTranslatedString("Erro"),
+                                                                                MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                                            End If
+                                                        End Sub)
 
         End If
 
-        Me.btnIniciar.Enabled = True
-
-        cancelar = False
-
-        Dim j, k As Integer
-        Dim data(4, py1.Count - 1) As String
-        j = 0
-        For Each d As Double In py1
-            data(0, j) = j
-            data(1, j) = px(j)
-            data(2, j) = py2(j)
-            data(3, j) = py1(j)
-            data(4, j) = -py1(j) + py2(j)
-            j = j + 1
-        Next
-        With Me.Grid1.Rows
-            .Clear()
-            If data.Length > 0 Then
-                k = 0
-                Do
-                    .Add()
-                    j = 0
-                    Do
-                        If Double.TryParse(data(j, k), New Double) Then
-                            .Item(k).Cells(j).Value = Format(CDbl(data(j, k)), nf)
-                        Else
-                            .Item(k).Cells(j).Value = data(j, k)
-                        End If
-                        j = j + 1
-                    Loop Until j = 5
-                    k = k + 1
-                Loop Until k = py1.Count
-            End If
-        End With
 
     End Sub
-
-    'Private Function SetCtlVarValue(ByVal val As Nullable(Of Double))
-
-    '    With Me.myADJ.ControlledObjectData
-    '        Select Case .m_Type
-    '            Case formC.GetTranslatedString("CorrentedeMatria")
-    '                Select Case .PropertyName
-    '                    Case formC.GetTranslatedString("Temperatura")
-    '                        Me.formC.Collections.CLCS_MaterialStreamCollection(.ID).Fases(0).SPMProperties.temperature = val
-    '                    Case formC.GetTranslatedString("Presso")
-    '                        Me.formC.Collections.CLCS_MaterialStreamCollection(.ID).Fases(0).SPMProperties.pressure = val
-    '                    Case formC.GetTranslatedString("Vazomssica")
-    '                        Me.formC.Collections.CLCS_MaterialStreamCollection(.ID).Fases(0).SPMProperties.massflow = val
-    '                    Case formC.GetTranslatedString("Vazovolumtrica")
-    '                        Me.formC.Collections.CLCS_MaterialStreamCollection(.ID).Fases(0).SPMProperties.volumetric_flow = val
-    '                    Case formC.GetTranslatedString("Vazomolar")
-    '                        Me.formC.Collections.CLCS_MaterialStreamCollection(.ID).Fases(0).SPMProperties.molarflow = val
-    '                    Case Else
-    '                        Return Nothing
-    '                End Select
-    '            Case "Corrente de Energia"
-    '                Return Me.formC.Collections.CLCS_EnergyStreamCollection(.ID).Energia.GetValueOrDefault
-    '            Case formC.GetTranslatedString("Misturadores")
-    '                Return Nothing
-    '            Case formC.GetTranslatedString("MisturadoresMatEn")
-    '                Return Nothing
-    '            Case formC.GetTranslatedString("Divisores")
-    '                Return Nothing
-    '            Case formC.GetTranslatedString("Tubulaes")
-    '                Select Case .PropertyName
-    '                    Case formC.GetTranslatedString("DeltaP")
-    '                        Me.formC.Collections.CLCS_PipeCollection(.ID).DeltaP = val
-    '                    Case formC.GetTranslatedString("DeltaT")
-    '                        Me.formC.Collections.CLCS_PipeCollection(.ID).DeltaT = val
-    '                    Case formC.GetTranslatedString("Calortrocado")
-    '                        Me.formC.Collections.CLCS_PipeCollection(.ID).DeltaQ = val
-    '                    Case Else
-    '                        Return Nothing
-    '                End Select
-    '            Case formC.GetTranslatedString("Vlvulas")
-    '                Select Case .PropertyName
-    '                    Case formC.GetTranslatedString("DeltaT")
-    '                        Me.formC.Collections.CLCS_ValveCollection(.ID).DeltaT = val
-    '                    Case Else
-    '                        Return Nothing
-    '                End Select
-    '            Case formC.GetTranslatedString("Bombas")
-    '                Select Case .PropertyName
-    '                    Case formC.GetTranslatedString("DeltaT")
-    '                        Me.formC.Collections.CLCS_PumpCollection(.ID).DeltaT = val
-    '                    Case formC.GetTranslatedString("Potnciarequerida")
-    '                        Me.formC.Collections.CLCS_PumpCollection(.ID).DeltaQ = val
-    '                    Case Else
-    '                        Return Nothing
-    '                End Select
-    '            Case formC.GetTranslatedString("Tanques")
-    '                Return Nothing
-    '            Case formC.GetTranslatedString("Separadores")
-    '                Return Nothing
-    '            Case formC.GetTranslatedString("Compressores"))
-    '                Select Case .PropertyName
-    '                    Case formC.GetTranslatedString("DeltaT")
-    '                        Me.formC.Collections.CLCS_CompressorCollection(.ID).DeltaT = val
-    '                    Case formC.GetTranslatedString("Potnciarequerida")
-    '                        Me.formC.Collections.CLCS_CompressorCollection(.ID).DeltaQ = val
-    '                    Case Else
-    '                        Return Nothing
-    '                End Select
-    '            Case formC.GetTranslatedString("Turbinas")
-    '                Select Case .PropertyName
-    '                    Case formC.GetTranslatedString("DeltaT")
-    '                        Me.formC.Collections.CLCS_TurbineCollection(.ID).DeltaT = val
-    '                    Case formC.GetTranslatedString("Potnciagerada")
-    '                        Me.formC.Collections.CLCS_TurbineCollection(.ID).DeltaQ = val
-    '                    Case Else
-    '                        Return Nothing
-    '                End Select
-    '            Case formC.GetTranslatedString("Aquecedores")
-    '                Select Case .PropertyName
-    '                    Case formC.GetTranslatedString("DeltaT")
-    '                        Me.formC.Collections.CLCS_HeaterCollection(.ID).DeltaT = val
-    '                    Case Else
-    '                        Return Nothing
-    '                End Select
-    '            Case formC.GetTranslatedString("Resfriadores")
-    '                Select Case .PropertyName
-    '                    Case formC.GetTranslatedString("DeltaT")
-    '                        Me.formC.Collections.CLCS_CoolerCollection(.ID).DeltaT = val
-    '                    Case Else
-    '                        Return Nothing
-    '                End Select
-    '        End Select
-    '    End With
-
-    '    Return 1
-
-    'End Function
 
     Private Function GetCtlVarValue()
 
@@ -715,7 +474,7 @@ Final3:
         End If
     End Sub
 
-    Private Sub rbSecante_CheckedChanged(sender As Object, e As EventArgs) Handles rbSecante.CheckedChanged
+    Private Sub rbSecante_CheckedChanged(sender As Object, e As EventArgs) Handles rbSecante.CheckedChanged, rbNewton.CheckedChanged, rbBrent.CheckedChanged, rbIPOPT.CheckedChanged
         If loaded Then
             If myADJ.MaxVal.GetValueOrDefault = 0 And myADJ.MinVal.GetValueOrDefault = 0 Then
                 Me.usemaxmin = False

@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="lblTag.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblTag.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblTag.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="chkActive.ToolTip" xml:space="preserve">
     <value>Active/Inactive</value>
   </data>
@@ -126,11 +135,47 @@
   <data name="Label11.Text" xml:space="preserve">
     <value>Object</value>
   </data>
+  <data name="Label11.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label11.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label11.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>General Info</value>
   </data>
+  <data name="GroupBox5.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GroupBox5.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GroupBox5.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="rtbAnnotations.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="rtbAnnotations.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="rtbAnnotations.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Notes</value>
+  </data>
+  <data name="GroupBox4.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GroupBox4.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GroupBox4.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="tbTolerance.Location" type="System.Drawing.Point, System.Drawing">
@@ -139,17 +184,53 @@
   <data name="tbTolerance.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 20</value>
   </data>
+  <data name="tbTolerance.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tbTolerance.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tbTolerance.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>133, 13</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Tolerance (Maximum Error)</value>
   </data>
+  <data name="Label1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label1.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label1.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="lblSPUnits.Location" type="System.Drawing.Point, System.Drawing">
     <value>341, 48</value>
   </data>
+  <data name="lblSPUnits.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblSPUnits.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblSPUnits.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="btnOpenControlPanel.Text" xml:space="preserve">
     <value>Open Adjust Control Panel</value>
+  </data>
+  <data name="btnOpenControlPanel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="btnOpenControlPanel.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="btnOpenControlPanel.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="tbSetPoint.Location" type="System.Drawing.Point, System.Drawing">
     <value>195, 45</value>
@@ -157,20 +238,59 @@
   <data name="tbSetPoint.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 20</value>
   </data>
+  <data name="tbSetPoint.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tbSetPoint.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tbSetPoint.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>181, 13</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Set-Point/Offset (Controlled Property)</value>
   </data>
+  <data name="Label3.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label3.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label3.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chkSolveGlobal.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 21</value>
+  </data>
   <data name="chkSolveGlobal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 17</value>
+    <value>210, 17</value>
   </data>
   <data name="chkSolveGlobal.Text" xml:space="preserve">
-    <value>Solve Globally</value>
+    <value>Converge/Solve with Flowsheet Solver</value>
+  </data>
+  <data name="chkSolveGlobal.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chkSolveGlobal.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chkSolveGlobal.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Parameters</value>
+  </data>
+  <data name="GroupBox2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GroupBox2.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GroupBox2.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="chkUseReferenced.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 203</value>
@@ -181,14 +301,41 @@
   <data name="chkUseReferenced.Text" xml:space="preserve">
     <value>Reference Object</value>
   </data>
+  <data name="chkUseReferenced.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chkUseReferenced.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="chkUseReferenced.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="lblRefVal.Location" type="System.Drawing.Point, System.Drawing">
     <value>124, 257</value>
+  </data>
+  <data name="lblRefVal.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblRefVal.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblRefVal.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>71, 13</value>
   </data>
   <data name="Label9.Text" xml:space="preserve">
     <value>Current Value</value>
+  </data>
+  <data name="Label9.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label9.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label9.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 231</value>
@@ -199,11 +346,29 @@
   <data name="Label10.Text" xml:space="preserve">
     <value>Reference Property</value>
   </data>
+  <data name="Label10.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label10.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label10.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="cbRefProp.Location" type="System.Drawing.Point, System.Drawing">
     <value>122, 227</value>
   </data>
   <data name="cbRefProp.Size" type="System.Drawing.Size, System.Drawing">
     <value>215, 21</value>
+  </data>
+  <data name="cbRefProp.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cbRefProp.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cbRefProp.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="cbRefObj.Location" type="System.Drawing.Point, System.Drawing">
     <value>122, 200</value>
@@ -211,11 +376,38 @@
   <data name="cbRefObj.Size" type="System.Drawing.Size, System.Drawing">
     <value>215, 21</value>
   </data>
+  <data name="cbRefObj.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cbRefObj.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cbRefObj.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="lblTargetVal.Location" type="System.Drawing.Point, System.Drawing">
     <value>125, 169</value>
   </data>
+  <data name="lblTargetVal.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblTargetVal.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblTargetVal.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="lblSourceVal.Location" type="System.Drawing.Point, System.Drawing">
     <value>125, 80</value>
+  </data>
+  <data name="lblSourceVal.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblSourceVal.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblSourceVal.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>71, 13</value>
@@ -223,11 +415,29 @@
   <data name="Label6.Text" xml:space="preserve">
     <value>Current Value</value>
   </data>
+  <data name="Label6.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label6.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label6.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>71, 13</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>Current Value</value>
+  </data>
+  <data name="Label5.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label5.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label5.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 13</value>
@@ -235,11 +445,29 @@
   <data name="Label2.Text" xml:space="preserve">
     <value>Controlled Property</value>
   </data>
+  <data name="Label2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label2.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label2.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="cbTargetProp.Location" type="System.Drawing.Point, System.Drawing">
     <value>122, 139</value>
   </data>
   <data name="cbTargetProp.Size" type="System.Drawing.Size, System.Drawing">
     <value>215, 21</value>
+  </data>
+  <data name="cbTargetProp.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cbTargetProp.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cbTargetProp.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="cbTargetObj.Location" type="System.Drawing.Point, System.Drawing">
     <value>122, 112</value>
@@ -247,11 +475,29 @@
   <data name="cbTargetObj.Size" type="System.Drawing.Size, System.Drawing">
     <value>215, 21</value>
   </data>
+  <data name="cbTargetObj.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cbTargetObj.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cbTargetObj.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 13</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Controlled Object</value>
+  </data>
+  <data name="Label4.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label4.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label4.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 54</value>
@@ -262,17 +508,44 @@
   <data name="Label7.Text" xml:space="preserve">
     <value>Manipulated Property</value>
   </data>
+  <data name="Label7.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label7.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label7.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="cbSourceProp.Location" type="System.Drawing.Point, System.Drawing">
     <value>122, 50</value>
   </data>
   <data name="cbSourceProp.Size" type="System.Drawing.Size, System.Drawing">
     <value>215, 21</value>
   </data>
+  <data name="cbSourceProp.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cbSourceProp.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cbSourceProp.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="cbSourceObj.Location" type="System.Drawing.Point, System.Drawing">
     <value>122, 23</value>
   </data>
   <data name="cbSourceObj.Size" type="System.Drawing.Size, System.Drawing">
     <value>215, 21</value>
+  </data>
+  <data name="cbSourceObj.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cbSourceObj.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cbSourceObj.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="Label19.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 27</value>
@@ -283,7 +556,34 @@
   <data name="Label19.Text" xml:space="preserve">
     <value>Manipulated Object</value>
   </data>
+  <data name="Label19.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label19.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label19.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Linked Objects</value>
+  </data>
+  <data name="GroupBox1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GroupBox1.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GroupBox1.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="$this.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="$this.ToolTip2" xml:space="preserve">
+    <value />
   </data>
 </root>

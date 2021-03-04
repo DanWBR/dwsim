@@ -121,9 +121,8 @@
   <data name="tbTolerance.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 20</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="cbRefProp.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
+  <data name="rtbAnnotations.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 16</value>
   </data>
   <data name="&gt;&gt;cbSourceProp.ZOrder" xml:space="preserve">
     <value>15</value>
@@ -138,16 +137,22 @@
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 13</value>
   </data>
+  <data name="&gt;&gt;lblTag.Parent" xml:space="preserve">
+    <value>GroupBox5</value>
+  </data>
   <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
   <data name="lblRefVal.Size" type="System.Drawing.Size, System.Drawing">
     <value>10, 13</value>
   </data>
+  <data name="Label10.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="lblRefVal.Location" type="System.Drawing.Point, System.Drawing">
     <value>137, 257</value>
   </data>
-  <data name="$this.ToolTip" xml:space="preserve">
+  <data name="Label11.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="lblRefVal.ToolTip1" xml:space="preserve">
@@ -159,17 +164,18 @@
   <data name="&gt;&gt;cbSourceProp.Name" xml:space="preserve">
     <value>cbSourceProp</value>
   </data>
-  <data name="&gt;&gt;lblTag.Parent" xml:space="preserve">
-    <value>GroupBox5</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cbRefProp.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
   </data>
   <data name="&gt;&gt;chkUseReferenced.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;Label19.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
   <data name="&gt;&gt;Label4.ZOrder" xml:space="preserve">
     <value>13</value>
-  </data>
-  <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 57</value>
   </data>
   <data name="&gt;&gt;cbSourceProp.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -207,8 +213,8 @@
   <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
-  <data name="Label2.ToolTip2" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;GroupBox4.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="chkSolveGlobal.ToolTip2" xml:space="preserve">
     <value />
@@ -225,14 +231,20 @@
   <data name="&gt;&gt;lblTargetVal.Name" xml:space="preserve">
     <value>lblTargetVal</value>
   </data>
+  <data name="tbTolerance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>167, 73</value>
+  </data>
+  <data name="Label7.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
   <data name="GroupBox1.ToolTip2" xml:space="preserve">
     <value />
   </data>
   <data name="&gt;&gt;chkActive.Name" xml:space="preserve">
     <value>chkActive</value>
   </data>
-  <data name="Label3.Text" xml:space="preserve">
-    <value>Set-Point Prop. Controlada</value>
+  <data name="&gt;&gt;cbTargetObj.ZOrder" xml:space="preserve">
+    <value>12</value>
   </data>
   <data name="&gt;&gt;GroupBox5.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -318,8 +330,8 @@
   <data name="Label11.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;Label19.ZOrder" xml:space="preserve">
-    <value>17</value>
+  <data name="&gt;&gt;Label6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;chkSolveGlobal.ZOrder" xml:space="preserve">
     <value>6</value>
@@ -327,7 +339,7 @@
   <data name="Label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;lblSourceVal.Type" xml:space="preserve">
+  <data name="&gt;&gt;Label4.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
@@ -338,9 +350,6 @@
   </data>
   <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 115</value>
-  </data>
-  <data name="lblSPUnits.TabIndex" type="System.Int32, mscorlib">
-    <value>37</value>
   </data>
   <data name="Label9.Text" xml:space="preserve">
     <value>Valor Atual</value>
@@ -359,6 +368,9 @@
   </data>
   <data name="chkActive.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="cbSourceObj.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;lblSPUnits.Parent" xml:space="preserve">
     <value>GroupBox2</value>
@@ -384,9 +396,6 @@
   <data name="Label4.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 13</value>
-  </data>
   <data name="&gt;&gt;Label4.Name" xml:space="preserve">
     <value>Label4</value>
   </data>
@@ -405,14 +414,14 @@
   <data name="btnOpenControlPanel.ToolTip2" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;cbSourceObj.Name" xml:space="preserve">
-    <value>cbSourceObj</value>
-  </data>
   <data name="Label1.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="cbTargetObj.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="lblSPUnits.TabIndex" type="System.Int32, mscorlib">
+    <value>37</value>
+  </data>
+  <data name="Label2.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;cbTargetObj.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -423,8 +432,8 @@
   <data name="cbRefObj.Location" type="System.Drawing.Point, System.Drawing">
     <value>134, 200</value>
   </data>
-  <data name="&gt;&gt;GroupBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label3.Text" xml:space="preserve">
+    <value>Set-Point Prop. Controlada</value>
   </data>
   <data name="Label6.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -457,7 +466,7 @@
     <value />
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=6.0.7375.20029, Culture=neutral, PublicKeyToken=null</value>
+    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=6.4.5.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="chkActive.Location" type="System.Drawing.Point, System.Drawing">
     <value>316, 18</value>
@@ -474,6 +483,12 @@
   <data name="&gt;&gt;cbRefProp.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="GroupBox2.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblTargetVal.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="GroupBox5.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 4</value>
   </data>
@@ -489,8 +504,8 @@
   <data name="lblTargetVal.ToolTip2" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;ToolTipChangeTag.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;rtbAnnotations.Name" xml:space="preserve">
+    <value>rtbAnnotations</value>
   </data>
   <data name="&gt;&gt;Label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -500,9 +515,6 @@
   </data>
   <data name="lblSPUnits.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="Label11.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="cbSourceProp.ToolTip" xml:space="preserve">
     <value />
@@ -519,8 +531,8 @@
   <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
-  <data name="tbSetPoint.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
+  <data name="Label19.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;Label6.Name" xml:space="preserve">
     <value>Label6</value>
@@ -549,14 +561,11 @@
   <data name="&gt;&gt;GroupBox2.Name" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
-  <data name="&gt;&gt;Label6.ZOrder" xml:space="preserve">
-    <value>8</value>
+  <data name="tbSetPoint.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
   </data>
   <data name="chkActive.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
-  </data>
-  <data name="GroupBox5.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="lblTag.Location" type="System.Drawing.Point, System.Drawing">
     <value>113, 19</value>
@@ -567,14 +576,14 @@
   <data name="&gt;&gt;lblTag.Name" xml:space="preserve">
     <value>lblTag</value>
   </data>
+  <data name="Label1.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="Label6.ToolTip2" xml:space="preserve">
     <value />
   </data>
   <data name="GroupBox4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
-  </data>
-  <data name="chkSolveGlobal.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="rtbAnnotations.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -582,8 +591,8 @@
   <data name="cbTargetProp.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
-  <data name="&gt;&gt;GroupBox4.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="cbTargetObj.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="tbTolerance.TabIndex" type="System.Int32, mscorlib">
     <value>39</value>
@@ -608,9 +617,6 @@
   </data>
   <data name="cbTargetProp.ToolTip2" xml:space="preserve">
     <value />
-  </data>
-  <data name="chkUseReferenced.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
   </data>
   <data name="cbTargetProp.ToolTip1" xml:space="preserve">
     <value />
@@ -660,8 +666,8 @@
   <data name="&gt;&gt;Label9.Name" xml:space="preserve">
     <value>Label9</value>
   </data>
-  <data name="&gt;&gt;btnOpenControlPanel.Name" xml:space="preserve">
-    <value>btnOpenControlPanel</value>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;ToolTip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -690,8 +696,8 @@
   <data name="chkActive.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
   </data>
-  <data name="cbRefProp.ToolTip2" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;chkActive.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="cbTargetObj.Size" type="System.Drawing.Size, System.Drawing">
     <value>224, 21</value>
@@ -750,9 +756,6 @@
   <data name="Label9.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
   </data>
-  <data name="btnOpenControlPanel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="&gt;&gt;tbSetPoint.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -795,7 +798,10 @@
   <data name="chkActive.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="Label19.ToolTip" xml:space="preserve">
+  <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 57</value>
+  </data>
+  <data name="cbRefProp.ToolTip2" xml:space="preserve">
     <value />
   </data>
   <data name="lblSPUnits.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -812,6 +818,9 @@
   </data>
   <data name="lblTag.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
+  </data>
+  <data name="&gt;&gt;Label6.ZOrder" xml:space="preserve">
+    <value>8</value>
   </data>
   <data name="&gt;&gt;tbTolerance.Name" xml:space="preserve">
     <value>tbTolerance</value>
@@ -864,14 +873,11 @@
   <data name="Label9.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;chkActive.Parent" xml:space="preserve">
-    <value>GroupBox5</value>
+  <data name="&gt;&gt;lblSourceVal.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="rtbAnnotations.ToolTip1" xml:space="preserve">
     <value />
-  </data>
-  <data name="chkActive.Size" type="System.Drawing.Size, System.Drawing">
-    <value>21, 21</value>
   </data>
   <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 257</value>
@@ -894,6 +900,9 @@
   <data name="Label9.ToolTip2" xml:space="preserve">
     <value />
   </data>
+  <data name="cbTargetObj.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="tbSetPoint.ToolTip1" xml:space="preserve">
     <value />
   </data>
@@ -903,14 +912,14 @@
   <data name="chkSolveGlobal.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="tbTolerance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>167, 73</value>
+  <data name="btnOpenControlPanel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;tbTolerance.Parent" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
-  <data name="Label6.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;cbSourceObj.Name" xml:space="preserve">
+    <value>cbSourceObj</value>
   </data>
   <data name="&gt;&gt;cbTargetProp.Parent" xml:space="preserve">
     <value>GroupBox1</value>
@@ -945,8 +954,8 @@
   <data name="Label7.Text" xml:space="preserve">
     <value>Propriedade</value>
   </data>
-  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
+  <data name="btnOpenControlPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 104</value>
   </data>
   <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 13</value>
@@ -954,8 +963,8 @@
   <data name="Label5.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="Label7.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 13</value>
   </data>
   <data name="btnOpenControlPanel.ToolTip" xml:space="preserve">
     <value />
@@ -969,11 +978,11 @@
   <data name="Label10.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
   <data name="&gt;&gt;btnOpenControlPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="btnOpenControlPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 104</value>
   </data>
   <data name="&gt;&gt;chkSolveGlobal.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1020,9 +1029,6 @@
   <data name="&gt;&gt;lblSPUnits.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="chkActive.ToolTip1" xml:space="preserve">
-    <value>Aktivieren/Deaktivieren</value>
-  </data>
   <data name="&gt;&gt;lblSourceVal.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
@@ -1038,14 +1044,17 @@
   <data name="$this.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;chkActive.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="chkSolveGlobal.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="cbSourceProp.Location" type="System.Drawing.Point, System.Drawing">
     <value>113, 50</value>
   </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>Informações Gerais</value>
+  </data>
+  <data name="Label6.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
     <value>343, 199</value>
@@ -1059,8 +1068,8 @@
   <data name="Label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Label19.ToolTip1" xml:space="preserve">
-    <value />
+  <data name="chkUseReferenced.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Tolerância</value>
@@ -1071,11 +1080,11 @@
   <data name="Label19.ToolTip2" xml:space="preserve">
     <value />
   </data>
+  <data name="&gt;&gt;GroupBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 13</value>
-  </data>
-  <data name="&gt;&gt;rtbAnnotations.Name" xml:space="preserve">
-    <value>rtbAnnotations</value>
   </data>
   <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 80</value>
@@ -1089,17 +1098,14 @@
   <data name="chkUseReferenced.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="cbTargetObj.ToolTip2" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;btnOpenControlPanel.Name" xml:space="preserve">
+    <value>btnOpenControlPanel</value>
   </data>
   <data name="&gt;&gt;cbSourceProp.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
   <data name="Label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
-  </data>
-  <data name="&gt;&gt;Label6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label7.Name" xml:space="preserve">
     <value>Label7</value>
@@ -1116,17 +1122,14 @@
   <data name="Label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;cbTargetObj.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
   <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 22</value>
   </data>
   <data name="&gt;&gt;cbRefObj.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="Label1.ToolTip2" xml:space="preserve">
-    <value />
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>132, 13</value>
   </data>
   <data name="tbTolerance.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -1149,6 +1152,9 @@
   <data name="tbSetPoint.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="&gt;&gt;ToolTipChangeTag.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="lblTag.ToolTip2" xml:space="preserve">
     <value />
   </data>
@@ -1164,14 +1170,17 @@
   <data name="&gt;&gt;rtbAnnotations.Parent" xml:space="preserve">
     <value>GroupBox4</value>
   </data>
-  <data name="GroupBox2.ToolTip1" xml:space="preserve">
-    <value />
+  <data name="chkActive.ToolTip1" xml:space="preserve">
+    <value>Aktivieren/Deaktivieren</value>
   </data>
   <data name="cbTargetProp.Location" type="System.Drawing.Point, System.Drawing">
     <value>113, 139</value>
   </data>
   <data name="lblSourceVal.ToolTip1" xml:space="preserve">
     <value />
+  </data>
+  <data name="&gt;&gt;chkActive.Parent" xml:space="preserve">
+    <value>GroupBox5</value>
   </data>
   <data name="&gt;&gt;tbTolerance.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -1221,9 +1230,6 @@
   <data name="&gt;&gt;lblTargetVal.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;Label4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;lblRefVal.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -1238,9 +1244,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>355, 697</value>
-  </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 13</value>
   </data>
   <data name="GroupBox2.ToolTip2" xml:space="preserve">
     <value />
@@ -1281,14 +1284,11 @@
   <data name="tbTolerance.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="cbSourceObj.ToolTip2" xml:space="preserve">
+  <data name="GroupBox5.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="&gt;&gt;tbSetPoint.Parent" xml:space="preserve">
     <value>GroupBox2</value>
-  </data>
-  <data name="rtbAnnotations.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 16</value>
   </data>
   <data name="&gt;&gt;Label11.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1296,11 +1296,11 @@
   <data name="lblRefVal.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="Label10.ToolTip2" xml:space="preserve">
-    <value />
+  <data name="Label3.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
   </data>
-  <data name="lblTargetVal.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="chkActive.Size" type="System.Drawing.Size, System.Drawing">
+    <value>21, 21</value>
   </data>
   <data name="chkUseReferenced.ToolTip2" xml:space="preserve">
     <value />
@@ -1326,9 +1326,6 @@
   <data name="tbTolerance.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="Label3.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
-  </data>
   <data name="lblTag.ToolTip1" xml:space="preserve">
     <value />
   </data>
@@ -1349,6 +1346,9 @@
   </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>Valor Atual</value>
+  </data>
+  <data name="Label19.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="cbRefProp.ToolTip1" xml:space="preserve">
     <value />
@@ -1388,6 +1388,9 @@
   </data>
   <metadata name="ToolTipChangeTag.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>244, 17</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>en</value>
   </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

@@ -117,18 +117,36 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnParar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>499, 98</value>
+  </data>
   <data name="btnParar.Text" xml:space="preserve">
     <value>Stop</value>
+  </data>
+  <data name="btnIniciar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>499, 50</value>
   </data>
   <data name="btnIniciar.Text" xml:space="preserve">
     <value>Start Adjust</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="rbBrent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>218, 24</value>
+  </data>
   <data name="rbSecante.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 17</value>
   </data>
   <data name="rbSecante.Text" xml:space="preserve">
     <value>Secant</value>
+  </data>
+  <data name="tbMax.Location" type="System.Drawing.Point, System.Drawing">
+    <value>651, 23</value>
+  </data>
+  <data name="tbMin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>586, 23</value>
+  </data>
+  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>496, 26</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 13</value>
@@ -141,6 +159,24 @@
   </data>
   <data name="KryptonLabel1.Text" xml:space="preserve">
     <value>Convergence method</value>
+  </data>
+  <data name="tbStep.Location" type="System.Drawing.Point, System.Drawing">
+    <value>150, 76</value>
+  </data>
+  <data name="tbStep.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 20</value>
+  </data>
+  <data name="tbMaxIt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>150, 50</value>
+  </data>
+  <data name="tbMaxIt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 20</value>
+  </data>
+  <data name="tbTol.Location" type="System.Drawing.Point, System.Drawing">
+    <value>150, 102</value>
+  </data>
+  <data name="tbTol.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 20</value>
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 13</value>
@@ -160,14 +196,17 @@
   <data name="Label3.Text" xml:space="preserve">
     <value>Step size</value>
   </data>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>718, 135</value>
+  </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Parameters</value>
   </data>
   <data name="GraphControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>498, 246</value>
+    <value>702, 343</value>
   </data>
   <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>498, 246</value>
+    <value>702, 343</value>
   </data>
   <data name="FaTabStripItem1.Title" xml:space="preserve">
     <value>Graph</value>
@@ -176,7 +215,13 @@
     <value>Table</value>
   </data>
   <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>500, 267</value>
+    <value>704, 364</value>
+  </data>
+  <data name="tbErro.Location" type="System.Drawing.Point, System.Drawing">
+    <value>581, 48</value>
+  </data>
+  <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>496, 51</value>
   </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 13</value>
@@ -184,55 +229,29 @@
   <data name="Label8.Text" xml:space="preserve">
     <value>Current error</value>
   </data>
+  <data name="tbAjuste.Location" type="System.Drawing.Point, System.Drawing">
+    <value>581, 22</value>
+  </data>
+  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>496, 25</value>
+  </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 13</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Adjust value</value>
   </data>
-  <data name="GroupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 170</value>
-  </data>
   <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>514, 351</value>
+    <value>718, 448</value>
   </data>
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Results</value>
   </data>
-  <data name="ToolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 25</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>734, 610</value>
   </data>
-  <data name="ToolStripLabel1.Text" xml:space="preserve">
-    <value>Docking</value>
-  </data>
-  <data name="tsbDockingLeft.Text" xml:space="preserve">
-    <value>Left</value>
-  </data>
-  <data name="tsbDockingLeftAutoHide.Text" xml:space="preserve">
-    <value>Left Auto-Hide</value>
-  </data>
-  <data name="tsbDockingRightAutoHide.Text" xml:space="preserve">
-    <value>Right Auto-Hide</value>
-  </data>
-  <data name="tsbDockingRight.Text" xml:space="preserve">
-    <value>Right</value>
-  </data>
-  <data name="tsbDockingTop.Text" xml:space="preserve">
-    <value>Top</value>
-  </data>
-  <data name="tsbDockingBottom.Text" xml:space="preserve">
-    <value>Bottom</value>
-  </data>
-  <data name="tsbDockingDocument.Text" xml:space="preserve">
-    <value>Document</value>
-  </data>
-  <data name="tsbDockingFloat.Text" xml:space="preserve">
-    <value>Floating Window</value>
-  </data>
-  <data name="tsbClose.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 25</value>
-  </data>
-  <data name="tsbClose.Text" xml:space="preserve">
-    <value>Close</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
   </data>
 </root>

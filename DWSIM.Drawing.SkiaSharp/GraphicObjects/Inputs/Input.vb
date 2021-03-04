@@ -9,6 +9,8 @@ Namespace GraphicObjects
 
         Inherits ShapeGraphic
 
+        <Xml.Serialization.XmlIgnore> Private Font As SKTypeface
+
         <Xml.Serialization.XmlIgnore> Public Property PointList As New List(Of Point)
 
 #Region "Constructors"
@@ -78,28 +80,38 @@ Namespace GraphicObjects
 
             Dim valtext = currentvalue.ToString(nf)
 
-            Using paint As New SKPaint With {.TextSize = 29.0 * f, .Color = GetForeColor(), .IsAntialias = True}
+            If Font Is Nothing Then
                 Dim assm = Me.GetType.Assembly
                 Using filestr As IO.Stream = assm.GetManifestResourceStream("DWSIM.Drawing.SkiaSharp.digital7_mono.ttf")
-                    paint.Typeface = SKTypeface.FromStream(filestr)
-                    Dim trect As New SKRect(0, 0, 2, 2)
-                    paint.GetTextPath(valtext, 0, 0).GetBounds(trect)
-                    Dim strx As Single = (w - trect.Width) / 2
-                    Dim stry As Single = h - trect.Height / 2
-                    w = trect.Width + 30 * f
-                    strx = (w - trect.Width) / 2
-                    Width = w
-                    Using paint2 As New SKPaint With {.Color = SKColors.Gray, .IsStroke = False, .IsAntialias = True}
-                        canvas.DrawRect(X - 2 * f, Y - 2 * f, w + 4 * f, h + 4 * f, paint2)
-                    End Using
-                    Using paint2 As New SKPaint With {.Color = SKColors.LightGray, .IsStroke = False, .IsAntialias = True}
-                        canvas.DrawRect(X - 1 * f, Y - 1 * f, w + 2 * f, h + 2 * f, paint2)
-                    End Using
-                    Using paint2 As New SKPaint With {.Color = GetBackColor(), .IsStroke = False, .IsAntialias = True}
-                        canvas.DrawRect(X, Y, w, h, paint2)
-                    End Using
-                    canvas.DrawText(valtext, X + strx, Y + stry, paint)
+                    Font = SKTypeface.FromStream(filestr)
                 End Using
+            End If
+
+            Dim strx, stry As Single
+
+            Using paint As New SKPaint With {.TextSize = 29.0 * f, .Color = GetForeColor(), .IsAntialias = False}
+                paint.Typeface = Font
+                Dim trect As New SKRect(0, 0, 2, 2)
+                paint.GetTextPath(valtext, 0, 0).GetBounds(trect)
+                strx = (w - trect.Width) / 2
+                stry = h - trect.Height / 2
+                w = trect.Width + 30 * f
+                strx = (w - trect.Width) / 2
+                Width = w
+            End Using
+
+            Using paint As New SKPaint With {.TextSize = 29.0 * f, .Color = GetForeColor(), .IsAntialias = True}
+                paint.Typeface = Font
+                Using paint2 As New SKPaint With {.Color = SKColors.Gray, .IsStroke = False, .IsAntialias = True}
+                    canvas.DrawRect(X - 2 * f, Y - 2 * f, w + 4 * f, h + 4 * f, paint2)
+                End Using
+                Using paint2 As New SKPaint With {.Color = SKColors.LightGray, .IsStroke = False, .IsAntialias = True}
+                    canvas.DrawRect(X - 1 * f, Y - 1 * f, w + 2 * f, h + 2 * f, paint2)
+                End Using
+                Using paint2 As New SKPaint With {.Color = GetBackColor(), .IsStroke = False, .IsAntialias = True}
+                    canvas.DrawRect(X, Y, w, h, paint2)
+                End Using
+                canvas.DrawText(valtext, X + strx, Y + stry, paint)
             End Using
 
             Owner.Calculate()
