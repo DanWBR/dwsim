@@ -7877,7 +7877,6 @@ Namespace Streams
                         sub1.MoleFraction = 0.0#
                     End If
                 Next
-                Me.PropertyPackage.CurrentMaterialStream = Me.FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
                 .Phases(0).Properties.temperature = (W0 * T0 + W1 * T1) / (W0 + W1)
                 .SpecType = StreamSpec.Pressure_and_Enthalpy
                 .PropertyPackage.CurrentMaterialStream = Me
