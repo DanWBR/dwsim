@@ -16,7 +16,9 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 '
-'    Reference: https://aiche.onlinelibrary.wiley.com/doi/abs/10.1002/aic.10151
+'    Reference: Chau‐Chyun Chen  L. B. Evans. A local composition model for the excess
+'               Gibbs energy of aqueous electrolyte systems,
+'               https://aiche.onlinelibrary.wiley.com/doi/abs/10.1002/aic.690320311
 
 Imports FileHelpers
 Imports System.Math
