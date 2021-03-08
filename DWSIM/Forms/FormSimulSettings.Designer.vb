@@ -59,6 +59,7 @@ Partial Class FormSimulSettings
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.Button3 = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Button5 = New System.Windows.Forms.Button()
         Me.cbOrderCompoundsBy = New System.Windows.Forms.ComboBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.btnInfoLeft = New System.Windows.Forms.Button()
@@ -407,6 +408,7 @@ Partial Class FormSimulSettings
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.Button5)
         Me.GroupBox2.Controls.Add(Me.cbOrderCompoundsBy)
         Me.GroupBox2.Controls.Add(Me.Label12)
         Me.GroupBox2.Controls.Add(Me.btnInfoLeft)
@@ -418,6 +420,14 @@ Partial Class FormSimulSettings
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
         Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
+        '
+        'Button5
+        '
+        resources.ApplyResources(Me.Button5, "Button5")
+        Me.Button5.Image = Global.DWSIM.My.Resources.Resources.cross
+        Me.Button5.Name = "Button5"
+        Me.ToolTip1.SetToolTip(Me.Button5, resources.GetString("Button5.ToolTip"))
+        Me.Button5.UseVisualStyleBackColor = True
         '
         'cbOrderCompoundsBy
         '
@@ -1343,4 +1353,5 @@ Partial Class FormSimulSettings
     Public WithEvents btnConfigFlash As Button
     Friend WithEvents GroupBox4 As GroupBox
     Friend WithEvents chkSkipEqCalcs As CheckBox
+    Friend WithEvents Button5 As Button
 End Class

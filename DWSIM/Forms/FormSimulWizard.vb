@@ -175,7 +175,9 @@ Public Class FormSimulWizard
         End If
     End Sub
 
-    Private Sub TextBox1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBox1.TextChanged
+    Private WithEvents TypingTimer As Timer
+
+    Private Sub TypingTimer_Tick(sender As Object, e As EventArgs) Handles TypingTimer.Tick
 
         ogc1.ClearSelection()
 
@@ -214,6 +216,18 @@ Public Class FormSimulWizard
             End If
         End If
 
+        TypingTimer?.Stop()
+
+    End Sub
+
+    Private Sub TextBox1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBox1.TextChanged
+
+        If TypingTimer Is Nothing Then
+            TypingTimer = New Timer()
+        End If
+        TypingTimer.Interval = 750
+        TypingTimer.Stop()
+        TypingTimer.Start()
 
     End Sub
 
@@ -1112,6 +1126,10 @@ Public Class FormSimulWizard
 
         End If
 
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        TextBox1.Text = ""
     End Sub
 
 End Class

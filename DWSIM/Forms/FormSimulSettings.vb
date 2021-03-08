@@ -959,21 +959,24 @@ Public Class FormSimulSettings
     End Function
 
 
-    Private Sub TextBox1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBox1.TextChanged
+
+    Private WithEvents TypingTimer As Timer
+
+    Private Sub TypingTimer_Tick(sender As Object, e As EventArgs) Handles TypingTimer.Tick
+
         ogc1.ClearSelection()
-        ogc1.SuspendLayout()
+
         Dim needselecting As Boolean = True
+
         For Each r As DataGridViewRow In ogc1.Rows
             If Not r.Cells(2).Value Is Nothing Then
                 If r.Cells(2).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Or
                    r.Cells(3).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Or
-                   r.Cells(4).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Or
-                   r.Cells(6).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Then
+                   r.Cells(5).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Then
                     r.Visible = True
-                    If r.Cells(2).Value.ToString.Equals(Me.TextBox1.Text) Or
-                    r.Cells(3).Value.ToString.Equals(Me.TextBox1.Text) Or
-                    r.Cells(4).Value.ToString.Equals(Me.TextBox1.Text) Or
-                    r.Cells(6).Value.ToString.Equals(Me.TextBox1.Text) Then
+                    If r.Cells(2).Value.ToString.ToLower.Equals(Me.TextBox1.Text.ToLower) Or
+                                       r.Cells(3).Value.ToString.ToLower.Equals(Me.TextBox1.Text.ToLower) Or
+                                       r.Cells(5).Value.ToString.ToLower.Equals(Me.TextBox1.Text.ToLower) Then
                         r.Selected = True
                         needselecting = False
                     End If
@@ -990,13 +993,26 @@ Public Class FormSimulSettings
                 r.Selected = False
                 r.Visible = True
             Next
-            ogc1.ResumeLayout()
             ogc1.FirstDisplayedScrollingRowIndex = 0
-            Application.DoEvents()
             ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
         Else
-            ogc1.ResumeLayout()
+            If ogc1.SelectedRows.Count > 0 Then
+                ogc1.FirstDisplayedScrollingRowIndex = ogc1.SelectedRows(0).Index
+            End If
         End If
+
+        TypingTimer?.Stop()
+
+    End Sub
+
+    Private Sub TextBox1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBox1.TextChanged
+
+        If TypingTimer Is Nothing Then
+            TypingTimer = New Timer()
+        End If
+        TypingTimer.Interval = 750
+        TypingTimer.Stop()
+        TypingTimer.Start()
 
     End Sub
 
@@ -1566,6 +1582,10 @@ Public Class FormSimulSettings
         End If
         Dim pp As PropertyPackage = FrmChild.PropertyPackages(ppid)
         pp.DisplayFlashConfigForm()
+    End Sub
+
+    Private Sub Button5_Click_1(sender As Object, e As EventArgs) Handles Button5.Click
+        TextBox1.Text = ""
     End Sub
 
     Private Sub FormSimulSettings_Shown(sender As Object, e As EventArgs) Handles Me.Shown

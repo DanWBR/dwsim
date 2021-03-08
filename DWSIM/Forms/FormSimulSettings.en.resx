@@ -234,7 +234,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABo
-        MQAAAk1TRnQBSQFMAgEBCgEAAVwBDAFcAQwBEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        MQAAAk1TRnQBSQFMAgEBCgEAAXQBDAF0AQwBEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABMAMAAQEBAAEgBgABMDEAAQEDOwFkAWUCUgH0AbICgQH/Aa8CgQH/AWICSAH2AUICQQFzIAADLQFG
         AVkCVgG+AVsCWQHEATECMAFNAWACWQHrAQABgQEAAf8DAwEEpAADKAE9AWQCXAHnAbICgQH/AcsBqwGJ
         Af8B0QG0AZUB/wG7AY4BgQH/AbUBhwGBAf8BqwKBAf8BYAJZAesDLQFGEAADHgErAVECTwGlA38B/gGP
@@ -448,10 +448,17 @@
 </value>
   </data>
   <data name="Button3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>383, 50</value>
+    <value>418, 50</value>
   </data>
   <data name="Button3.Text" xml:space="preserve">
     <value>Open Assay Manager</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Button5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="Button5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>816, 15</value>
   </data>
   <data name="cbOrderCompoundsBy.Items" xml:space="preserve">
     <value>Default (As Added)</value>
@@ -490,7 +497,7 @@
     <value>634, 310</value>
   </data>
   <data name="cbOrderCompoundsBy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 21</value>
+    <value>204, 21</value>
   </data>
   <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
     <value>521, 314</value>
@@ -532,7 +539,7 @@
     <value>Import from JSON File</value>
   </data>
   <data name="TextBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>744, 20</value>
+    <value>751, 20</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 13</value>
@@ -565,10 +572,10 @@
     <value>6, 42</value>
   </data>
   <data name="ogc1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>797, 259</value>
+    <value>832, 259</value>
   </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>809, 341</value>
+    <value>844, 341</value>
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Components / Compounds</value>
@@ -625,7 +632,6 @@
   <data name="btnConfigFlash.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnConfigFlash.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -634,6 +640,9 @@
   </data>
   <data name="btnConfigFlash.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="btnConfigFlash.Location" type="System.Drawing.Point, System.Drawing">
+    <value>86, 3</value>
   </data>
   <data name="btnConfigFlash.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 23</value>
@@ -644,9 +653,6 @@
   <data name="btnConfigFlash.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageBeforeText</value>
   </data>
-  <data name="btnConfigFlash.ToolTip" xml:space="preserve">
-    <value>Configure Phase Equilibria Calculation Settings</value>
-  </data>
   <data name="btnConfigPP.Size" type="System.Drawing.Size, System.Drawing">
     <value>77, 23</value>
   </data>
@@ -655,9 +661,6 @@
   </data>
   <data name="btnConfigPP.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageBeforeText</value>
-  </data>
-  <data name="btnConfigPP.ToolTip" xml:space="preserve">
-    <value>Configure Model Settings</value>
   </data>
   <data name="btnDeletePP.Location" type="System.Drawing.Point, System.Drawing">
     <value>333, 3</value>
@@ -670,6 +673,9 @@
   </data>
   <data name="btnDeletePP.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageBeforeText</value>
+  </data>
+  <data name="btnCopyPP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>255, 3</value>
   </data>
   <data name="btnCopyPP.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 23</value>
@@ -691,9 +697,6 @@
   </data>
   <data name="btnConfigPPAdv.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageBeforeText</value>
-  </data>
-  <data name="btnConfigPPAdv.ToolTip" xml:space="preserve">
-    <value>Configure Advanced Settings (Forced Solids, etc)</value>
   </data>
   <data name="TableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 342</value>
@@ -786,13 +789,13 @@
     <value>6, 353</value>
   </data>
   <data name="GroupBox10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>809, 83</value>
+    <value>844, 83</value>
   </data>
   <data name="GroupBox10.Text" xml:space="preserve">
     <value>Petroleum Fractions</value>
   </data>
   <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>823, 444</value>
+    <value>858, 444</value>
   </data>
   <data name="TabPage1.Text" xml:space="preserve">
     <value>Compounds</value>
@@ -999,7 +1002,7 @@
     <value>Miscelaneous</value>
   </data>
   <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>831, 470</value>
+    <value>866, 470</value>
   </data>
   <data name="OpenFileDialog3.Filter" xml:space="preserve">
     <value>JSON Files|*.json</value>
@@ -1008,7 +1011,7 @@
     <value>Import Compound from JSON File</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>831, 470</value>
+    <value>866, 470</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
