@@ -1710,7 +1710,6 @@ Namespace BaseClasses
 
         End Function
 
-
         ''' <summary>
         ''' Returns the Ideal Gas Heat Capacity in kJ/[kg.K]
         ''' </summary>
@@ -1824,7 +1823,6 @@ Namespace BaseClasses
 
         End Function
 
-
         ''' <summary>
         ''' Returns the Enthalpy of Vaporization in kJ/kg
         ''' </summary>
@@ -1886,7 +1884,6 @@ Namespace BaseClasses
 
         End Function
 
-
         ''' <summary>
         ''' Returns the Vapor Viscosity in Pa.s
         ''' </summary>
@@ -1919,7 +1916,6 @@ Namespace BaseClasses
 
         End Function
 
-
         ''' <summary>
         ''' Returns the Vapor Thermal Conductivity in W/(m.K)
         ''' </summary>
@@ -1943,7 +1939,6 @@ Namespace BaseClasses
             Return val
 
         End Function
-
 
         ''' <summary>
         ''' Returns the Liquid Viscosity in Pa.s
@@ -2032,7 +2027,6 @@ Namespace BaseClasses
 
         End Function
 
-
         ''' <summary>
         ''' Returns the Liquid Thermal Conductivity in W/(m.K)
         ''' </summary>
@@ -2056,7 +2050,6 @@ Namespace BaseClasses
             Return val
 
         End Function
-
 
         ''' <summary>
         ''' Returns the Liquid Heat Capacity in kJ/[kg.K]
@@ -2092,7 +2085,6 @@ Namespace BaseClasses
 
         End Function
 
-
         ''' <summary>
         ''' Returns the Liquid Density in kg/m3
         ''' </summary>
@@ -2119,7 +2111,6 @@ Namespace BaseClasses
             Return val 'kg/m3
 
         End Function
-
 
         ''' <summary>
         ''' Returns the Solid Density in kg/m3
