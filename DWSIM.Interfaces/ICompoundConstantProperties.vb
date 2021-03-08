@@ -242,4 +242,20 @@
     'for custom ordering purposes
     Property Tag As String
 
+    'helper functions
+    Function ExportToJSON() As String
+    Sub ImportFromJSON(data As String)
+
+    Function GetVaporPressure(T As Double, Optional ByRef message As String = "") As Double
+    Function GetIdealGasHeatCapacity(T As Double, Optional ByRef message As String = "") As Double
+    Function GetEnthalpyOfVaporization(T As Double, Optional ByRef message As String = "") As Double
+    Function GetVaporViscosity(T As Double, Optional ByRef message As String = "") As Double
+    Function GetVaporThermalConductivity(T As Double, Optional ByRef message As String = "") As Double
+    Function GetLiquidViscosity(T As Double, Optional ByRef message As String = "") As Double
+    Function GetLiquidThermalConductivity(T As Double, Optional ByRef message As String = "") As Double
+    Function GetLiquidHeatCapacity(T As Double, Optional ByRef message As String = "") As Double
+    Function GetLiquidDensity(T As Double, Optional ByRef message As String = "") As Double
+    Function GetSolidDensity(T As Double, Optional ByRef message As String = "") As Double
+    Function GetSolidHeatCapacity(T As Double, Optional ByRef message As String = "") As Double
+
 End Interface

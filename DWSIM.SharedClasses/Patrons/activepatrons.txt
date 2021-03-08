@@ -24,7 +24,6 @@ Domenico Marchese
 Don Harrold
 Dorivaldo Junior
 Doug Palfreyman
-Duncan Nowicki
 Emanuel Cardoso Santos
 F An
 Filippo Borroni
@@ -69,6 +68,7 @@ Philippe Wesel
 Rajesh S Kempegowda
 Richard Huntington
 Roland Berger
+Rupert Easter
 Ryszard
 Samuel Levinson
 Steven Baltakatei Sandoval
