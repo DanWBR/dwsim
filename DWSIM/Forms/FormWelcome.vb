@@ -391,6 +391,7 @@ Public Class FormWelcome
     End Sub
 
     Private Sub LinkLabel4_LinkClicked_1(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel4.LinkClicked
+
         Dim NewMDIChild As New FormCompoundCreator()
         'Set the Parent Form of the Child window.
         NewMDIChild.MdiParent = Me.Owner
@@ -459,6 +460,15 @@ Public Class FormWelcome
     Private Sub FormWelcome_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
 
         FormMain.PainelDeBoasvindasToolStripMenuItem.Checked = Visible
+
+    End Sub
+
+    Private Sub LinkLabel11_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel11.LinkClicked
+
+        Dim wform As New UI.Desktop.Editors.CompoundCreatorWizard(Nothing)
+        wform.SetupAndDisplayPage(1)
+        'start dispatcher for WPF Interop
+        If Not GlobalSettings.Settings.IsRunningOnMono Then System.Windows.Threading.Dispatcher.Run()
 
     End Sub
 

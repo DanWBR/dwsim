@@ -122,7 +122,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAD0
-        DwAAAk1TRnQBSQFMAgEBBQEAAYABBQGAAQUBEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        DwAAAk1TRnQBSQFMAgEBBQEAAZABBQGQAQUBEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABIAMAAQEBAAEQBgABEP8AFQABeQF3ARMBcwFJAW4BJwFuAScBbgEnAW4BJwFuAScBbgEnAW4BJwFu
         AScBbgEnAW4BSAFuATUBc2QAAWoBbgG7AXsBdQF7AXMBewFyAXsBcQF7AVABewFPAXsBTwF7AU4BewFN
         AXsBLQF7AbgBfwFoAW5kAAFoAW4B/QF/AbQBfwGSAX8BkAF7AW4BewFsAXsBSgF7AUgBewFHAXsBJQF7
@@ -287,6 +287,18 @@
   </data>
   <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>820, 138</value>
+  </data>
+  <data name="LinkLabel11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>202, 110</value>
+  </data>
+  <data name="LinkLabel11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>170, 16</value>
+  </data>
+  <data name="LinkLabel11.Text" xml:space="preserve">
+    <value>Create New (with Wizard)</value>
+  </data>
+  <data name="LinkLabel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>401, 110</value>
   </data>
   <data name="LinkLabel3.Size" type="System.Drawing.Size, System.Drawing">
     <value>94, 16</value>
