@@ -890,7 +890,7 @@ Partial Class FormMain
     Friend WithEvents ToolStripSeparator8 As ToolStripSeparator
     Friend WithEvents tsmiFOSSEE As ToolStripMenuItem
     Public WithEvents PatronToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents WelcomePanel As Panel
+    Public WithEvents WelcomePanel As Panel
     Friend WithEvents PainelDeBoasvindasToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents tsbInspector As ToolStripButton
     Friend WithEvents tsFileSeparator As ToolStripSeparator
