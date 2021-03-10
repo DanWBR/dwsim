@@ -334,27 +334,27 @@ Public Class FormFlowsheet
             Application.DoEvents()
             Application.DoEvents()
 
-            'If Not DWSIM.App.IsRunningOnMono Then
-            '    Dim fw As New FormSimulWizard
-            '    With fw
-            '        .StartPosition = FormStartPosition.CenterScreen
-            '        .WindowState = FormWindowState.Normal
-            '        .ShowDialog(Me)
-            '        If .switch Then
-            '            With Me.FrmStSim1
-            '                .WindowState = FormWindowState.Normal
-            '                .StartPosition = FormStartPosition.CenterScreen
-            '                .ShowDialog(Me)
-            '            End With
-            '        End If
-            '    End With
-            'Else
-            '    With Me.FrmStSim1
-            '        .WindowState = FormWindowState.Normal
-            '        .StartPosition = FormStartPosition.CenterScreen
-            '        .ShowDialog(Me)
-            '    End With
-            'End If
+            If Not DWSIM.App.IsRunningOnMono Then
+                Dim fw As New FormSimulWizard
+                With fw
+                    .StartPosition = FormStartPosition.CenterScreen
+                    .WindowState = FormWindowState.Normal
+                    .ShowDialog(Me)
+                    If .switch Then
+                        With Me.FrmStSim1
+                            .WindowState = FormWindowState.Normal
+                            .StartPosition = FormStartPosition.CenterScreen
+                            .ShowDialog(Me)
+                        End With
+                    End If
+                End With
+            Else
+                With Me.FrmStSim1
+                    .WindowState = FormWindowState.Normal
+                    .StartPosition = FormStartPosition.CenterScreen
+                    .ShowDialog(Me)
+                End With
+            End If
 
         End If
 
