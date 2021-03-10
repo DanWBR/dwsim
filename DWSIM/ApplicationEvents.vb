@@ -41,6 +41,8 @@ Namespace My
 
         Public Property ActiveSimulation As FormFlowsheet
 
+        Public Property MainForm As FormMain
+
         Public Property UserUnitSystems As Dictionary(Of String, SystemsOfUnits.Units)
 
         Private Sub MyApplication_Shutdown(sender As Object, e As EventArgs) Handles Me.Shutdown

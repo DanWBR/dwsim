@@ -203,12 +203,12 @@ Public Class FormOptions
     Private Sub KryptonCheckBox6_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonCheckBox6.CheckedChanged
         My.Settings.BackupActivated = Me.KryptonCheckBox6.Checked
         If Me.KryptonCheckBox6.Checked Then
-            FormMain.TimerBackup.Enabled = True
+            My.Application.MainForm.TimerBackup.Enabled = True
             Me.KryptonButton1.Enabled = True
             Me.KryptonTextBox1.Enabled = True
             Me.TrackBar1.Enabled = True
         Else
-            FormMain.TimerBackup.Enabled = False
+            My.Application.MainForm.TimerBackup.Enabled = False
             Me.KryptonButton1.Enabled = False
             Me.KryptonTextBox1.Enabled = False
             Me.TrackBar1.Enabled = False
@@ -230,7 +230,7 @@ Public Class FormOptions
             Me.KryptonLabel3.Text = TrackBar1.Value & " " & DWSIM.App.GetLocalString("minutos")
         End If
         My.Settings.BackupInterval = TrackBar1.Value
-        FormMain.TimerBackup.Interval = TrackBar1.Value * 60000
+        My.Application.MainForm.TimerBackup.Interval = TrackBar1.Value * 60000
     End Sub
 
     Private Sub Button7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button7.Click
@@ -243,16 +243,16 @@ Public Class FormOptions
                 If componentes.Length > 0 Then
                     If Me.cbudb.Checked Then
                         For Each c As ConstantProperties In componentes
-                            If Not FormMain.AvailableComponents.ContainsKey(c.Name) Then
-                                FormMain.AvailableComponents.Add(c.Name, c)
+                            If Not My.Application.MainForm.AvailableComponents.ContainsKey(c.Name) Then
+                                My.Application.MainForm.AvailableComponents.Add(c.Name, c)
                             Else
-                                FormMain.AvailableComponents(c.Name) = c
+                                My.Application.MainForm.AvailableComponents(c.Name) = c
                             End If
                         Next
                     Else
                         For Each c As ConstantProperties In componentes
-                            If Not FormMain.AvailableComponents.ContainsKey(c.Name) Then
-                                FormMain.AvailableComponents.Add(c.Name, c)
+                            If Not My.Application.MainForm.AvailableComponents.ContainsKey(c.Name) Then
+                                My.Application.MainForm.AvailableComponents.Add(c.Name, c)
                             End If
                         Next
                     End If
@@ -342,7 +342,7 @@ Public Class FormOptions
         End If
 
         'chemsep database
-        If FormMain.loadedCSDB Then
+        If My.Application.MainForm.loadedCSDB Then
             name = "ChemSep   "
             path2 = My.Settings.ChemSepDatabasePath
             If File.Exists(path2) Then
@@ -631,7 +631,7 @@ Public Class FormOptions
     Private Sub chkEnableInspector_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableInspector.CheckedChanged
         My.Settings.InspectorEnabled = chkEnableInspector.Checked
         Settings.InspectorEnabled = My.Settings.InspectorEnabled
-        FormMain.tsbInspector.Checked = chkEnableInspector.Checked
+        My.Application.MainForm.tsbInspector.Checked = chkEnableInspector.Checked
     End Sub
 
     Private Sub cbRenderer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbRenderer.SelectedIndexChanged

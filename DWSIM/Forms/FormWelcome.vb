@@ -70,7 +70,7 @@ Public Class FormWelcome
         Dim samples = Directory.EnumerateFiles(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "samples", "*.dw*", SearchOption.TopDirectoryOnly)
 
         For Each f As String In samples
-            FormMain.SampleList.Add(f)
+            My.Application.MainForm.SampleList.Add(f)
             Me.lvsamples.Items.Add(Path.GetFileName(f), 0).Tag = f
             Dim lvi = Me.lvsamples.Items(Me.lvsamples.Items.Count - 1)
             lvi.ToolTipText = f
@@ -99,7 +99,7 @@ Public Class FormWelcome
                                                                                        For Each item As FOSSEEFlowsheet In t.Result
                                                                                            fslist.Add(item.DownloadLink, item)
                                                                                            FOSSEEList.Items.Add(New ListViewItem(item.DisplayName, 1) With {.Tag = item.DownloadLink})
-                                                                                           FormMain.FOSSEEList.Add(item)
+                                                                                           My.Application.MainForm.FOSSEEList.Add(item)
                                                                                        Next
                                                                                        Owner.UpdateFOSSEEList()
                                                                                    End If
@@ -119,7 +119,7 @@ Public Class FormWelcome
         Application.DoEvents()
         Application.DoEvents()
         Me.Parent.Visible = False
-        FormMain.NewToolStripButton_Click(sender, e)
+        My.Application.MainForm.NewToolStripButton_Click(sender, e)
 
     End Sub
 
@@ -127,13 +127,13 @@ Public Class FormWelcome
         Application.DoEvents()
         Application.DoEvents()
         Me.Parent.Visible = False
-        Call FormMain.LoadFileDialog()
+        Call My.Application.MainForm.LoadFileDialog()
     End Sub
 
     Private Sub lvlatest_ItemActivate(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvlatest.ItemActivate, lvsamples.ItemActivate
 
         Me.Parent.Visible = False
-        FormMain.PainelDeBoasvindasToolStripMenuItem.Checked = False
+        My.Application.MainForm.PainelDeBoasvindasToolStripMenuItem.Checked = False
 
         Dim lview = DirectCast(sender, ListView)
 
@@ -146,35 +146,35 @@ Public Class FormWelcome
 
             Application.DoEvents()
 
-            FormMain.filename = lview.SelectedItems(0).Tag
+            My.Application.MainForm.filename = lview.SelectedItems(0).Tag
             Select Case Path.GetExtension(lview.SelectedItems(0).Tag).ToLower
                 Case ".dwxml"
-                    'FormMain.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + lview.SelectedItems(0).Tag + "..."
+                    'My.Application.MainForm.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + lview.SelectedItems(0).Tag + "..."
                     Application.DoEvents()
                     Application.DoEvents()
-                    FormMain.LoadXML(lview.SelectedItems(0).Tag, Sub(x)
-                                                                     Me.Invoke(Sub() floading.ProgressBar1.Value = x)
-                                                                 End Sub)
+                    My.Application.MainForm.LoadXML(lview.SelectedItems(0).Tag, Sub(x)
+                                                                                    Me.Invoke(Sub() floading.ProgressBar1.Value = x)
+                                                                                End Sub)
                 Case ".dwxmz"
-                    'FormMain.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + lview.SelectedItems(0).Tag + "..."
+                    'My.Application.MainForm.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + lview.SelectedItems(0).Tag + "..."
                     Application.DoEvents()
                     Application.DoEvents()
-                    FormMain.LoadAndExtractXMLZIP(lview.SelectedItems(0).Tag, Sub(x)
-                                                                                  Me.Invoke(Sub() floading.ProgressBar1.Value = x)
-                                                                              End Sub)
+                    My.Application.MainForm.LoadAndExtractXMLZIP(lview.SelectedItems(0).Tag, Sub(x)
+                                                                                                 Me.Invoke(Sub() floading.ProgressBar1.Value = x)
+                                                                                             End Sub)
                 Case ".dwsim"
-                    'FormMain.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + lview.SelectedItems(0).Tag + "..."
+                    'My.Application.MainForm.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + lview.SelectedItems(0).Tag + "..."
                     'Application.DoEvents()
                     'Application.DoEvents()
-                    'FormMain.LoadF(lview.SelectedItems(0).Tag)
+                    'My.Application.MainForm.LoadF(lview.SelectedItems(0).Tag)
                 Case ".xml"
-                    'FormMain.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + lview.SelectedItems(0).Tag + "..."
+                    'My.Application.MainForm.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + lview.SelectedItems(0).Tag + "..."
                     Application.DoEvents()
                     Application.DoEvents()
-                    FormMain.LoadMobileXML(lview.SelectedItems(0).Tag)
+                    My.Application.MainForm.LoadMobileXML(lview.SelectedItems(0).Tag)
                 Case ".dwcsd"
                     Dim NewMDIChild As New FormCompoundCreator()
-                    NewMDIChild.MdiParent = FormMain
+                    NewMDIChild.MdiParent = My.Application.MainForm
                     NewMDIChild.Show()
                     Dim objStreamReader As New FileStream(lview.SelectedItems(0).Tag, FileMode.Open, FileAccess.Read)
                     Dim x As New BinaryFormatter()
@@ -186,7 +186,7 @@ Public Class FormWelcome
                     NewMDIChild.Activate()
                 Case ".dwcsd2"
                     Dim NewMDIChild As New FormCompoundCreator()
-                    NewMDIChild.MdiParent = FormMain
+                    NewMDIChild.MdiParent = My.Application.MainForm
                     NewMDIChild.Show()
                     NewMDIChild.mycase = Newtonsoft.Json.JsonConvert.DeserializeObject(Of CompoundGeneratorCase)(File.ReadAllText(lview.SelectedItems(0).Tag))
                     NewMDIChild.WriteData()
@@ -240,8 +240,8 @@ Public Class FormWelcome
         Application.DoEvents()
         Application.DoEvents()
         Me.Parent.Visible = False
-        FormMain.OpenFileDialog1.InitialDirectory = Me.lvlatestfolders.SelectedItems(0).Tag
-        Call FormMain.LoadFileDialog()
+        My.Application.MainForm.OpenFileDialog1.InitialDirectory = Me.lvlatestfolders.SelectedItems(0).Tag
+        Call My.Application.MainForm.LoadFileDialog()
 
     End Sub
 
@@ -250,7 +250,7 @@ Public Class FormWelcome
         'Set the Parent Form of the Child window.
         NewMDIChild.MdiParent = Me.Owner
         'Display the new form.
-        NewMDIChild.Text = "CompoundCreator" & FormMain.m_childcount
+        NewMDIChild.Text = "CompoundCreator" & My.Application.MainForm.m_childcount
         Me.Parent.Visible = False
         Application.DoEvents()
         Application.DoEvents()
@@ -263,7 +263,7 @@ Public Class FormWelcome
         'Set the Parent Form of the Child window.
         NewMDIChild.MdiParent = Me.Owner
         'Display the new form.
-        NewMDIChild.Text = "DataRegression" & FormMain.m_childcount
+        NewMDIChild.Text = "DataRegression" & My.Application.MainForm.m_childcount
         Me.Parent.Visible = False
         Application.DoEvents()
         Application.DoEvents()
@@ -339,14 +339,14 @@ Public Class FormWelcome
                                                                              Dim xdoc = SharedClasses.FOSSEEFlowsheets.LoadFlowsheet(tk.Result)
                                                                              Me.UIThread(Sub()
                                                                                              Me.Parent.Visible = False
-                                                                                             FormMain.PainelDeBoasvindasToolStripMenuItem.Checked = False
+                                                                                             My.Application.MainForm.PainelDeBoasvindasToolStripMenuItem.Checked = False
                                                                                              floading.Label1.Text = DWSIM.App.GetLocalString("LoadingFile") & vbCrLf & "(" & item.Title & ")"
                                                                                              floading.Show()
                                                                                              Application.DoEvents()
                                                                                              Try
-                                                                                                 FormMain.LoadXML2(xdoc, Sub(x)
-                                                                                                                             Me.Invoke(Sub() floading.ProgressBar1.Value = x)
-                                                                                                                         End Sub)
+                                                                                                 My.Application.MainForm.LoadXML2(xdoc, Sub(x)
+                                                                                                                                            Me.Invoke(Sub() floading.ProgressBar1.Value = x)
+                                                                                                                                        End Sub)
                                                                                              Catch ex As Exception
                                                                                                  MessageBox.Show(tk.Exception, "Error loading file", MessageBoxButtons.OK, MessageBoxIcon.Error)
                                                                                              Finally
@@ -380,14 +380,14 @@ Public Class FormWelcome
         Application.DoEvents()
         Application.DoEvents()
         Me.Parent.Visible = False
-        FormMain.NewToolStripButton_Click(sender, e)
+        My.Application.MainForm.NewToolStripButton_Click(sender, e)
     End Sub
 
     Private Sub LinkLabel2_LinkClicked_1(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel2.LinkClicked
         Application.DoEvents()
         Application.DoEvents()
         Me.Parent.Visible = False
-        Call FormMain.LoadFileDialog()
+        Call My.Application.MainForm.LoadFileDialog()
     End Sub
 
     Private Sub LinkLabel4_LinkClicked_1(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel4.LinkClicked
@@ -396,7 +396,7 @@ Public Class FormWelcome
         'Set the Parent Form of the Child window.
         NewMDIChild.MdiParent = Me.Owner
         'Display the new form.
-        NewMDIChild.Text = "CompoundCreator" & FormMain.m_childcount
+        NewMDIChild.Text = "CompoundCreator" & My.Application.MainForm.m_childcount
         Me.Parent.Visible = False
         Application.DoEvents()
         Application.DoEvents()
@@ -409,7 +409,7 @@ Public Class FormWelcome
         'Set the Parent Form of the Child window.
         NewMDIChild.MdiParent = Me.Owner
         'Display the new form.
-        NewMDIChild.Text = "DataRegression" & FormMain.m_childcount
+        NewMDIChild.Text = "DataRegression" & My.Application.MainForm.m_childcount
         Me.Parent.Visible = False
         Application.DoEvents()
         Application.DoEvents()
@@ -421,14 +421,14 @@ Public Class FormWelcome
         Application.DoEvents()
         Application.DoEvents()
         Me.Parent.Visible = False
-        Call FormMain.LoadFileDialog()
+        Call My.Application.MainForm.LoadFileDialog()
     End Sub
 
     Private Sub LinkLabel5_LinkClicked_1(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel5.LinkClicked
         Application.DoEvents()
         Application.DoEvents()
         Me.Parent.Visible = False
-        Call FormMain.LoadFileDialog()
+        Call My.Application.MainForm.LoadFileDialog()
     End Sub
 
     Private Sub LinkLabel9_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel9.LinkClicked
@@ -459,7 +459,7 @@ Public Class FormWelcome
 
     Private Sub FormWelcome_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
 
-        FormMain.PainelDeBoasvindasToolStripMenuItem.Checked = Visible
+        My.Application.MainForm.PainelDeBoasvindasToolStripMenuItem.Checked = Visible
 
     End Sub
 

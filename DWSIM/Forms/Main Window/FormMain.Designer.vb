@@ -684,6 +684,8 @@ Partial Class FormMain
 
     Public Sub New()
 
+        My.Application.MainForm = Me
+
         If DWSIM.App.IsRunningOnMono Or GlobalSettings.Settings.AutomationMode Then
 
             If DWSIM.App.IsRunningOnMono Then
