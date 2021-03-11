@@ -165,6 +165,7 @@ namespace DWSIM.UI.Desktop.Editors
 
                         ScriptEditor.cbLinkedObject.Items.Add(new ListItem { Text = "Simulation", Key = "Simulation" });
                         ScriptEditor.cbLinkedObject.Items.Add(new ListItem { Text = "Solver", Key = "Solver" });
+                        ScriptEditor.cbLinkedObject.Items.Add(new ListItem { Text = "Integrator", Key = "Integrator" });
 
                         foreach (var obj in Flowsheet.SimulationObjects.Values)
                         {
@@ -192,6 +193,9 @@ namespace DWSIM.UI.Desktop.Editors
                                     break;
                                 case Scripts.ObjectType.Solver:
                                     ScriptEditor.cbLinkedObject.SelectedIndex = 1;
+                                    break;
+                                case Scripts.ObjectType.Integrator:
+                                    ScriptEditor.cbLinkedObject.SelectedIndex = 2;
                                     break;
                             }
                         }
@@ -239,6 +243,15 @@ namespace DWSIM.UI.Desktop.Editors
                                 break;
                             case Scripts.EventType.SimulationTimer60:
                                 ScriptEditor.cbLinkedEvent.SelectedIndex = 7;
+                                break;
+                            case Scripts.EventType.IntegratorStarted:
+                                ScriptEditor.cbLinkedEvent.SelectedIndex = 0;
+                                break;
+                            case Scripts.EventType.IntegratorFinished:
+                                ScriptEditor.cbLinkedEvent.SelectedIndex = 1;
+                                break;
+                            case Scripts.EventType.IntegratorError:
+                                ScriptEditor.cbLinkedEvent.SelectedIndex = 2;
                                 break;
                         }
 
@@ -481,6 +494,22 @@ namespace DWSIM.UI.Desktop.Editors
                     else
                     {
                         scr.LinkedEventType = Scripts.EventType.SolverRecycleLoop;
+                    }
+                    break;
+                case 2:
+                    scr.LinkedObjectType = Scripts.ObjectType.Integrator;
+                    scr.LinkedObjectName = "";
+                    if (ScriptEditor.cbLinkedEvent.SelectedIndex == 0)
+                    {
+                        scr.LinkedEventType = Scripts.EventType.IntegratorStarted;
+                    }
+                    else if (ScriptEditor.cbLinkedEvent.SelectedIndex == 1)
+                    {
+                        scr.LinkedEventType = Scripts.EventType.IntegratorFinished;
+                    }
+                    else
+                    {
+                        scr.LinkedEventType = Scripts.EventType.IntegratorError;
                     }
                     break;
                 default:
