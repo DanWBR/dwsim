@@ -111,6 +111,7 @@
     <Compile Include="IDynamicsIntegrator.vb" />
     <Compile Include="IInput.vb" />
     <Compile Include="IMaterialStream.vb" />
+    <Compile Include="IMenuExtender.vb" />
     <Compile Include="IPersistStream.vb" />
     <Compile Include="IPhase.vb" />
     <Compile Include="IPhaseProperties.vb" />

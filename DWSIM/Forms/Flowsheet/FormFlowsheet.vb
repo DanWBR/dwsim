@@ -1601,7 +1601,7 @@ Public Class FormFlowsheet
                 .Image = My.Resources.plugin
                 .DisplayStyle = ToolStripItemDisplayStyle.ImageAndText
             End With
-            Me.PluginsToolStripMenuItem.DropDownItems.Add(tsmi)
+            Me.PluginsTSMI.DropDownItems.Add(tsmi)
             AddHandler tsmi.Click, AddressOf Me.PluginClick
         Next
 

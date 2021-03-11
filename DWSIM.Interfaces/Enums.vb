@@ -486,6 +486,31 @@ Namespace Enums
 
     End Enum
 
+    Public Enum MenuExtenderLevel
+
+        MainWindow = 0
+        FlowsheetWindow = 1
+
+    End Enum
+
+    Public Enum MenuExtenderCategory
+
+        File = 0
+        Edit = 1
+        Settings = 2
+        Tools = 3
+        Utilities = 4
+        Dynamics = 5
+        Optimization = 6
+        Results = 7
+        View = 8
+        Help = 9
+        NewItem = 10
+        FlowsheetSurface = 11
+        ToolStrip = 12
+
+    End Enum
+
 End Namespace
 
 Namespace Enums.GraphicObjects
