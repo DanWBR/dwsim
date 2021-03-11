@@ -221,6 +221,8 @@ Namespace Reactors
 
             f1 = Math.Log(prodtot / ktot) ^ 2 + penval ^ 2
 
+            FlowSheet.CheckStatus()
+
             Return f
 
         End Function

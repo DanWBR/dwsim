@@ -419,6 +419,8 @@ Namespace Reactors
                 Next
             End If
 
+            FlowSheet.CheckStatus()
+
             Return gf * sumfm / 1000.0 / 1000.0 / 1000.0
 
         End Function

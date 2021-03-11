@@ -1029,8 +1029,6 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                 Settings.TaskCancellationTokenSource = ts
             End If
 
-            Dim ct As CancellationToken = Settings.TaskCancellationTokenSource.Token
-
             Dim obj As ISimulationObject
 
             'mode:
@@ -1139,6 +1137,8 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
             If Settings.EnableGPUProcessing Then Settings.gpu.EnableMultithreading()
 
+            Dim maintask As Task
+
             Select Case mode
 
                 Case 0, 1, 2
@@ -1159,181 +1159,183 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
                     Dim objargs As CalculationArgs = Nothing
 
-                    Dim maintask As New Task(Sub()
+                    maintask = New Task(Sub()
 
-                                                 Dim icount As Integer = 0
+                                            Dim icount As Integer = 0
 
-                                                 While Not converged
+                                            While Not converged
 
-                                                     'add the objects to the calculation queue.
+                                                'add the objects to the calculation queue.
 
-                                                     For Each o As String In objstack
-                                                         If fbag.SimulationObjects.ContainsKey(o) Then
-                                                             obj = fbag.SimulationObjects(o)
-                                                             If obj.GraphicObject.ObjectType = ObjectType.MaterialStream Then
-                                                                 Dim ms As IMaterialStream = fbag.SimulationObjects(obj.Name)
-                                                                 ms.AtEquilibrium = False
-                                                             End If
-                                                             objargs = New CalculationArgs
-                                                             With objargs
-                                                                 .Sender = "FlowsheetSolver"
-                                                                 .Calculated = True
-                                                                 .Name = obj.Name
-                                                                 .ObjectType = obj.GraphicObject.ObjectType
-                                                                 .Tag = obj.GraphicObject.Tag
-                                                                 fqueue.CalculationQueue.Enqueue(objargs)
-                                                             End With
-                                                         End If
-                                                     Next
+                                                For Each o As String In objstack
+                                                    If fbag.SimulationObjects.ContainsKey(o) Then
+                                                        obj = fbag.SimulationObjects(o)
+                                                        If obj.GraphicObject.ObjectType = ObjectType.MaterialStream Then
+                                                            Dim ms As IMaterialStream = fbag.SimulationObjects(obj.Name)
+                                                            ms.AtEquilibrium = False
+                                                        End If
+                                                        objargs = New CalculationArgs
+                                                        With objargs
+                                                            .Sender = "FlowsheetSolver"
+                                                            .Calculated = True
+                                                            .Name = obj.Name
+                                                            .ObjectType = obj.GraphicObject.ObjectType
+                                                            .Tag = obj.GraphicObject.Tag
+                                                            fqueue.CalculationQueue.Enqueue(objargs)
+                                                        End With
+                                                    End If
+                                                Next
 
-                                                     'set the flowsheet instance for all objects, this is required for the async threads
+                                                'set the flowsheet instance for all objects, this is required for the async threads
 
-                                                     For Each o In fbag.SimulationObjects.Values
-                                                         o.SetFlowsheet(fobj)
-                                                     Next
+                                                For Each o In fbag.SimulationObjects.Values
+                                                    o.SetFlowsheet(fobj)
+                                                Next
 
-                                                     'set all objects' status to 'not calculated' (red) in the list
+                                                'set all objects' status to 'not calculated' (red) in the list
 
-                                                     For Each o In objstack
-                                                         obj = fbag.SimulationObjects(o)
-                                                         With obj
-                                                             .Calculated = False
-                                                             If Not obj.GraphicObject Is Nothing Then
-                                                                 If obj.GraphicObject.Active Then
-                                                                     obj.GraphicObject.Calculated = False
-                                                                 Else
-                                                                     fgui.ShowMessage(obj.GraphicObject.Tag & ": " & fgui.GetTranslatedString("ObjDeactivated"), IFlowsheet.MessageType.Warning)
-                                                                     obj.GraphicObject.Status = Status.Inactive
-                                                                 End If
-                                                             End If
-                                                         End With
-                                                     Next
+                                                For Each o In objstack
+                                                    obj = fbag.SimulationObjects(o)
+                                                    With obj
+                                                        .Calculated = False
+                                                        If Not obj.GraphicObject Is Nothing Then
+                                                            If obj.GraphicObject.Active Then
+                                                                obj.GraphicObject.Calculated = False
+                                                            Else
+                                                                fgui.ShowMessage(obj.GraphicObject.Tag & ": " & fgui.GetTranslatedString("ObjDeactivated"), IFlowsheet.MessageType.Warning)
+                                                                obj.GraphicObject.Status = Status.Inactive
+                                                            End If
+                                                        End If
+                                                    End With
+                                                Next
 
-                                                     If mode = 0 Then
+                                                If mode = 0 Then
 
-                                                         exlist = ProcessCalculationQueue(fobj, True, True, 0, Nothing, ct, Adjusting)
+                                                    exlist = ProcessCalculationQueue(fobj, True, True, 0, Nothing,
+                                                                                     Settings.TaskCancellationTokenSource.Token, Adjusting)
 
-                                                     ElseIf mode = 1 Or mode = 2 Then
+                                                ElseIf mode = 1 Or mode = 2 Then
 
-                                                         filteredlist2.Clear()
+                                                    filteredlist2.Clear()
 
-                                                         For Each li In filteredlist
-                                                             Dim objcalclist As New List(Of CalculationArgs)
-                                                             For Each o In li.Value
-                                                                 obj = fbag.SimulationObjects(o)
-                                                                 objcalclist.Add(New CalculationArgs() With {.Sender = "FlowsheetSolver", .Name = obj.Name, .ObjectType = obj.GraphicObject.ObjectType, .Tag = obj.GraphicObject.Tag})
-                                                             Next
-                                                             filteredlist2.Add(li.Key, objcalclist)
-                                                         Next
+                                                    For Each li In filteredlist
+                                                        Dim objcalclist As New List(Of CalculationArgs)
+                                                        For Each o In li.Value
+                                                            obj = fbag.SimulationObjects(o)
+                                                            objcalclist.Add(New CalculationArgs() With {.Sender = "FlowsheetSolver", .Name = obj.Name, .ObjectType = obj.GraphicObject.ObjectType, .Tag = obj.GraphicObject.Tag})
+                                                        Next
+                                                        filteredlist2.Add(li.Key, objcalclist)
+                                                    Next
 
-                                                         exlist = ProcessCalculationQueue(fobj, True, True, mode, filteredlist2, ct, Adjusting)
+                                                    exlist = ProcessCalculationQueue(fobj, True, True, mode, filteredlist2,
+                                                                                     Settings.TaskCancellationTokenSource.Token, Adjusting)
 
-                                                     End If
+                                                End If
 
-                                                     'throws exceptions if any
+                                                'throws exceptions if any
 
-                                                     If Settings.SolverBreakOnException And exlist.Count > 0 Then
-                                                         Throw New AggregateException(exlist)
-                                                     End If
+                                                If Settings.SolverBreakOnException And exlist.Count > 0 Then
+                                                    Throw New AggregateException(exlist)
+                                                End If
 
-                                                     'checks for recycle convergence.
+                                                'checks for recycle convergence.
 
-                                                     converged = True
-                                                     For Each r As String In recycles
-                                                         obj = fbag.SimulationObjects(r)
-                                                         converged = DirectCast(obj, IRecycle).Converged
-                                                         If Not converged Then Exit For
-                                                     Next
+                                                converged = True
+                                                For Each r As String In recycles
+                                                    obj = fbag.SimulationObjects(r)
+                                                    converged = DirectCast(obj, IRecycle).Converged
+                                                    If Not converged Then Exit For
+                                                Next
 
-                                                     'in dynamic mode, recycles are redundant
+                                                'in dynamic mode, recycles are redundant
 
-                                                     If fbag.DynamicMode Then converged = True
+                                                If fbag.DynamicMode Then converged = True
 
-                                                     If Not converged Then
+                                                If Not converged Then
 
-                                                         Dim avgerr As Double = 0.0#
-                                                         Dim rcount As Integer = 0
+                                                    Dim avgerr As Double = 0.0#
+                                                    Dim rcount As Integer = 0
 
-                                                         For Each r As String In recycles
-                                                             obj = fbag.SimulationObjects(r)
-                                                             With DirectCast(obj, IRecycle)
-                                                                 avgerr += 0.33 * .ConvergenceHistory.TemperaturaE / .ConvergenceHistory.Temperatura
-                                                                 avgerr += 0.33 * .ConvergenceHistory.PressaoE / .ConvergenceHistory.Pressao
-                                                                 avgerr += 0.33 * .ConvergenceHistory.VazaoMassicaE / .ConvergenceHistory.VazaoMassica
-                                                             End With
-                                                             rcount += 1
-                                                         Next
+                                                    For Each r As String In recycles
+                                                        obj = fbag.SimulationObjects(r)
+                                                        With DirectCast(obj, IRecycle)
+                                                            avgerr += 0.33 * .ConvergenceHistory.TemperaturaE / .ConvergenceHistory.Temperatura
+                                                            avgerr += 0.33 * .ConvergenceHistory.PressaoE / .ConvergenceHistory.Pressao
+                                                            avgerr += 0.33 * .ConvergenceHistory.VazaoMassicaE / .ConvergenceHistory.VazaoMassica
+                                                        End With
+                                                        rcount += 1
+                                                    Next
 
-                                                         avgerr *= 100
-                                                         avgerr /= rcount
+                                                    avgerr *= 100
+                                                    avgerr /= rcount
 
-                                                         fgui.ShowMessage("Recycle loop #" & (icount + 1) & ", average recycle error: " & Format(avgerr, "N") & "%", IFlowsheet.MessageType.Information)
+                                                    fgui.ShowMessage("Recycle loop #" & (icount + 1) & ", average recycle error: " & Format(avgerr, "N") & "%", IFlowsheet.MessageType.Information)
 
-                                                     End If
+                                                End If
 
-                                                     'process the scripts associated with the recycle loop event.
+                                                'process the scripts associated with the recycle loop event.
 
-                                                     fgui.ProcessScripts(Scripts.EventType.SolverRecycleLoop, Scripts.ObjectType.Solver, "")
+                                                fgui.ProcessScripts(Scripts.EventType.SolverRecycleLoop, Scripts.ObjectType.Solver, "")
 
-                                                     'if the all recycles have converged (if any), then exit the loop.
+                                                'if the all recycles have converged (if any), then exit the loop.
 
-                                                     If converged Then
+                                                If converged Then
 
-                                                         Exit While
+                                                    Exit While
 
-                                                     Else
+                                                Else
 
-                                                         If totalv > 0 Then
+                                                    If totalv > 0 Then
 
-                                                             'update variables of all recycles set to global broyden.
+                                                        'update variables of all recycles set to global broyden.
 
-                                                             Dim i As Integer = 0
-                                                             For Each r As String In recycles
-                                                                 Dim rec = DirectCast(fbag.SimulationObjects(r), IRecycle)
-                                                                 If rec.AccelerationMethod = AccelMethod.GlobalBroyden Then
-                                                                     For Each kvp In rec.Values
-                                                                         recvars(i) = kvp.Value
-                                                                         recerrs(i) = rec.Errors(kvp.Key)
-                                                                         i += 1
-                                                                     Next
-                                                                 End If
-                                                             Next
+                                                        Dim i As Integer = 0
+                                                        For Each r As String In recycles
+                                                            Dim rec = DirectCast(fbag.SimulationObjects(r), IRecycle)
+                                                            If rec.AccelerationMethod = AccelMethod.GlobalBroyden Then
+                                                                For Each kvp In rec.Values
+                                                                    recvars(i) = kvp.Value
+                                                                    recerrs(i) = rec.Errors(kvp.Key)
+                                                                    i += 1
+                                                                Next
+                                                            End If
+                                                        Next
 
-                                                             MathEx.Broyden.broydn(totalv - 1, recvars, recerrs, recdvars, recvarsb, recerrsb, rechess, If(icount < 2, 0, 1))
+                                                        MathEx.Broyden.broydn(totalv - 1, recvars, recerrs, recdvars, recvarsb, recerrsb, rechess, If(icount < 2, 0, 1))
 
-                                                             i = 0
-                                                             For Each r As String In recycles
-                                                                 Dim rec = DirectCast(fbag.SimulationObjects(r), IRecycle)
-                                                                 If rec.AccelerationMethod = AccelMethod.GlobalBroyden Then
-                                                                     For Each kvp In rec.Errors
-                                                                         rec.Values(kvp.Key) = recvars(i) + 0.7 * recdvars(i)
-                                                                         i += 1
-                                                                     Next
-                                                                 End If
-                                                                 rec.SetOutletStreamProperties()
-                                                             Next
+                                                        i = 0
+                                                        For Each r As String In recycles
+                                                            Dim rec = DirectCast(fbag.SimulationObjects(r), IRecycle)
+                                                            If rec.AccelerationMethod = AccelMethod.GlobalBroyden Then
+                                                                For Each kvp In rec.Errors
+                                                                    rec.Values(kvp.Key) = recvars(i) + 0.7 * recdvars(i)
+                                                                    i += 1
+                                                                Next
+                                                            End If
+                                                            rec.SetOutletStreamProperties()
+                                                        Next
 
-                                                         End If
+                                                    End If
 
-                                                     End If
+                                                End If
 
-                                                     If frompgrid Then
-                                                         Try
-                                                             objl = GetSolvingList(fobj, False)
-                                                             lists = objl(1)
-                                                             filteredlist = objl(2)
-                                                             objstack = objl(0)
-                                                         Catch ex As Exception
-                                                             GlobalSettings.Settings.CalculatorBusy = False
-                                                             Throw ex
-                                                         End Try
-                                                     End If
+                                                If frompgrid Then
+                                                    Try
+                                                        objl = GetSolvingList(fobj, False)
+                                                        lists = objl(1)
+                                                        filteredlist = objl(2)
+                                                        objstack = objl(0)
+                                                    Catch ex As Exception
+                                                        GlobalSettings.Settings.CalculatorBusy = False
+                                                        Throw ex
+                                                    End Try
+                                                End If
 
-                                                     icount += 1
+                                                icount += 1
 
-                                                 End While
+                                            End While
 
-                                             End Sub)
+                                        End Sub, Settings.TaskCancellationTokenSource.Token)
 
                     'configure the task scheduler
 
@@ -1361,8 +1363,8 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                             'this task will run asynchronously.
                             maintask.Start(Settings.AppTaskScheduler)
                             While Not (Date.Now - d1).TotalMilliseconds >= Settings.SolverTimeoutSeconds * 1000
-                                maintask.Wait(500, ct)
-                                fgui.CheckStatus()
+                                maintask.Wait(500)
+                                'fgui.CheckStatus()
                                 If maintask.Status = TaskStatus.RanToCompletion Then Exit While
                             End While
                             If maintask.Status = TaskStatus.Running Then Throw New TimeoutException(fgui.GetTranslatedString("SolverTimeout"))
@@ -1376,8 +1378,10 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                     Catch ex As Exception
                         age = New AggregateException(ex.Message.ToString, ex)
                     Finally
-                        If maintask.IsCompleted Then maintask.Dispose()
-                        maintask = Nothing
+                        If maintask.IsCompleted Then
+                            maintask.Dispose()
+                            maintask = Nothing
+                        End If
                     End Try
 
                     'clears the calculation queue.
