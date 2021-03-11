@@ -59,6 +59,7 @@ Namespace Enums
             Simulation = 0
             Solver = 1
             FlowsheetObject = 2
+            Integrator = 3
         End Enum
 
         Public Enum EventType
@@ -76,6 +77,9 @@ Namespace Enums
             SimulationTimer15 = 11
             SimulationTimer30 = 12
             SimulationTimer60 = 13
+            IntegratorStarted = 14
+            IntegratorFinished = 15
+            IntegratorError = 16
         End Enum
 
     End Class

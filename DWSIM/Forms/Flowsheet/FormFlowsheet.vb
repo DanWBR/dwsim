@@ -162,7 +162,7 @@ Public Class FormFlowsheet
         FormDynamics.Flowsheet = Me
         FormIntegratorControls.Flowsheet = Me
 
-        Me.MdiParent = My.Application.MainForm
+        Me.MdiParent = My.Application.MainWindowForm
 
         If DWSIM.App.IsRunningOnMono Then
             'Me.FlowLayoutPanel1.AutoSize = False
@@ -209,7 +209,7 @@ Public Class FormFlowsheet
 
         If Not Me.m_IsLoadedFromFile Then
 
-            For Each item In My.Application.MainForm.aTypeList.OrderBy(Function(x) x.Name)
+            For Each item In My.Application.MainWindowForm.aTypeList.OrderBy(Function(x) x.Name)
                 If Not item.IsAbstract Then
                     Dim obj = DirectCast(Activator.CreateInstance(item), Interfaces.ISimulationObject)
                     obj.SetFlowsheet(Me)
@@ -218,7 +218,7 @@ Public Class FormFlowsheet
                 End If
             Next
 
-            For Each item In My.Application.MainForm.ExternalUnitOperations.Values
+            For Each item In My.Application.MainWindowForm.ExternalUnitOperations.Values
                 item.SetFlowsheet(Me)
                 Me.FlowsheetOptions.VisibleProperties(item.GetType.Name) = DirectCast(item, ISimulationObject).GetDefaultProperties().ToList()
             Next
@@ -236,7 +236,7 @@ Public Class FormFlowsheet
             Me.Options.NotSelectedComponents = New Dictionary(Of String, Interfaces.ICompoundConstantProperties)
 
             Dim tmpc As BaseClasses.ConstantProperties
-            For Each tmpc In My.Application.MainForm.AvailableComponents.Values
+            For Each tmpc In My.Application.MainWindowForm.AvailableComponents.Values
                 Dim newc As New BaseClasses.ConstantProperties
                 newc = tmpc
                 Me.Options.NotSelectedComponents.Add(tmpc.Name, newc)
@@ -359,14 +359,14 @@ Public Class FormFlowsheet
         End If
 
         If DWSIM.App.IsRunningOnMono Then
-            My.Application.MainForm.ToolStripButton1.Enabled = True
-            My.Application.MainForm.SaveAllToolStripButton.Enabled = True
-            My.Application.MainForm.SaveToolStripButton.Enabled = True
-            My.Application.MainForm.SaveToolStripMenuItem.Enabled = True
-            My.Application.MainForm.SaveAllToolStripMenuItem.Enabled = True
-            My.Application.MainForm.SaveAsToolStripMenuItem.Enabled = True
-            My.Application.MainForm.ToolStripButton1.Enabled = True
-            My.Application.MainForm.CloseAllToolstripMenuItem.Enabled = True
+            My.Application.MainWindowForm.ToolStripButton1.Enabled = True
+            My.Application.MainWindowForm.SaveAllToolStripButton.Enabled = True
+            My.Application.MainWindowForm.SaveToolStripButton.Enabled = True
+            My.Application.MainWindowForm.SaveToolStripMenuItem.Enabled = True
+            My.Application.MainWindowForm.SaveAllToolStripMenuItem.Enabled = True
+            My.Application.MainWindowForm.SaveAsToolStripMenuItem.Enabled = True
+            My.Application.MainWindowForm.ToolStripButton1.Enabled = True
+            My.Application.MainWindowForm.CloseAllToolstripMenuItem.Enabled = True
         End If
 
         Me.ProcessScripts(Enums.Scripts.EventType.SimulationOpened, Enums.Scripts.ObjectType.Simulation, "")
@@ -393,7 +393,7 @@ Public Class FormFlowsheet
 
     Private Sub FormChild2_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
 
-        ToolStripManager.RevertMerge(My.Application.MainForm.ToolStrip1, ToolStrip1)
+        ToolStripManager.RevertMerge(My.Application.MainWindowForm.ToolStrip1, ToolStrip1)
 
         Me.ProcessScripts(Enums.Scripts.EventType.SimulationClosed, Enums.Scripts.ObjectType.Simulation, "")
 
@@ -421,27 +421,27 @@ Public Class FormFlowsheet
 
         End If
 
-        Dim cnt As Integer = My.Application.MainForm.MdiChildren.Length
+        Dim cnt As Integer = My.Application.MainWindowForm.MdiChildren.Length
 
         If cnt = 0 Then
 
-            My.Application.MainForm.ToolStripButton1.Enabled = False
-            My.Application.MainForm.SaveAllToolStripButton.Enabled = False
-            My.Application.MainForm.SaveToolStripButton.Enabled = False
-            My.Application.MainForm.SaveToolStripMenuItem.Enabled = False
-            My.Application.MainForm.SaveAllToolStripMenuItem.Enabled = False
-            My.Application.MainForm.SaveAsToolStripMenuItem.Enabled = False
-            My.Application.MainForm.ToolStripButton1.Enabled = False
+            My.Application.MainWindowForm.ToolStripButton1.Enabled = False
+            My.Application.MainWindowForm.SaveAllToolStripButton.Enabled = False
+            My.Application.MainWindowForm.SaveToolStripButton.Enabled = False
+            My.Application.MainWindowForm.SaveToolStripMenuItem.Enabled = False
+            My.Application.MainWindowForm.SaveAllToolStripMenuItem.Enabled = False
+            My.Application.MainWindowForm.SaveAsToolStripMenuItem.Enabled = False
+            My.Application.MainWindowForm.ToolStripButton1.Enabled = False
 
         Else
 
-            My.Application.MainForm.ToolStripButton1.Enabled = True
-            My.Application.MainForm.SaveAllToolStripButton.Enabled = True
-            My.Application.MainForm.SaveToolStripButton.Enabled = True
-            My.Application.MainForm.SaveToolStripMenuItem.Enabled = True
-            My.Application.MainForm.SaveAllToolStripMenuItem.Enabled = True
-            My.Application.MainForm.SaveAsToolStripMenuItem.Enabled = True
-            My.Application.MainForm.ToolStripButton1.Enabled = True
+            My.Application.MainWindowForm.ToolStripButton1.Enabled = True
+            My.Application.MainWindowForm.SaveAllToolStripButton.Enabled = True
+            My.Application.MainWindowForm.SaveToolStripButton.Enabled = True
+            My.Application.MainWindowForm.SaveToolStripMenuItem.Enabled = True
+            My.Application.MainWindowForm.SaveAllToolStripMenuItem.Enabled = True
+            My.Application.MainWindowForm.SaveAsToolStripMenuItem.Enabled = True
+            My.Application.MainWindowForm.ToolStripButton1.Enabled = True
 
         End If
 
@@ -461,13 +461,13 @@ Public Class FormFlowsheet
 
             If x = MsgBoxResult.Yes Then
 
-                My.Application.MainForm.SaveFile(False)
+                My.Application.MainWindowForm.SaveFile(False)
                 Me.m_overrideCloseQuestion = True
                 Me.Close()
 
             ElseIf x = MsgBoxResult.Cancel Then
 
-                My.Application.MainForm.CancelClosing = True
+                My.Application.MainWindowForm.CancelClosing = True
                 e.Cancel = True
 
             Else
@@ -534,7 +534,7 @@ Public Class FormFlowsheet
 
         If Not My.Application.UserUnitSystems.ContainsKey(su.Name) Then
             My.Application.UserUnitSystems.Add(su.Name, su)
-            My.Application.MainForm.AvailableUnitSystems.Add(su.Name, su)
+            My.Application.MainWindowForm.AvailableUnitSystems.Add(su.Name, su)
             Me.FrmStSim1.ComboBox2.Items.Add(su.Name)
         Else
             MessageBox.Show("Please input a different name for the unit system.")
@@ -1244,8 +1244,8 @@ Public Class FormFlowsheet
 
             Application.DoEvents()
 
-            If My.Application.MainForm.COMonitoringObjects.Count = 0 Then
-                My.Application.MainForm.SearchCOMOs()
+            If My.Application.MainWindowForm.COMonitoringObjects.Count = 0 Then
+                My.Application.MainWindowForm.SearchCOMOs()
             End If
 
             Me.CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.DropDownItems.Clear()
@@ -1635,7 +1635,7 @@ Public Class FormFlowsheet
 
         'process plugin list
 
-        For Each icomo As UnitOperations.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo In My.Application.MainForm.COMonitoringObjects.Values
+        For Each icomo As UnitOperations.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo In My.Application.MainWindowForm.COMonitoringObjects.Values
 
             Dim tsmi As New ToolStripMenuItem
             With tsmi
@@ -1661,7 +1661,7 @@ Public Class FormFlowsheet
 
         Dim tsmi As ToolStripMenuItem = CType(sender, ToolStripMenuItem)
 
-        Dim myCOMO As UnitOperations.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo = My.Application.MainForm.COMonitoringObjects.Item(tsmi.Tag)
+        Dim myCOMO As UnitOperations.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo = My.Application.MainWindowForm.COMonitoringObjects.Item(tsmi.Tag)
 
         Dim _como As Object = Nothing
         Try
@@ -1927,7 +1927,7 @@ Public Class FormFlowsheet
 
         Dim data As List(Of XElement) = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects").Elements.ToList
 
-        My.Application.MainForm.AddGraphicObjects(Me, data, excs, pkey, 40, True)
+        My.Application.MainWindowForm.AddGraphicObjects(Me, data, excs, pkey, 40, True)
 
         Dim pp As New PropertyPackages.RaoultPropertyPackage()
 
@@ -2051,7 +2051,7 @@ Public Class FormFlowsheet
         pp.Dispose()
         pp = Nothing
 
-        My.Application.MainForm.AddSimulationObjects(Me, objlist, excs, pkey)
+        My.Application.MainWindowForm.AddSimulationObjects(Me, objlist, excs, pkey)
 
         For Each obj In objlist
             If FormSurface.FlowsheetSurface.SelectedObject Is Nothing Then FormSurface.FlowsheetSurface.SelectedObject = obj.GraphicObject
@@ -2276,7 +2276,7 @@ Public Class FormFlowsheet
 
                 Case UndoRedoActionType.SystemOfUnitsChanged
 
-                    Dim sobj = My.Application.MainForm.AvailableUnitSystems(act.ObjID)
+                    Dim sobj = My.Application.MainWindowForm.AvailableUnitSystems(act.ObjID)
 
                     'Property not listed, set using Reflection
                     Dim method As FieldInfo = sobj.GetType().GetField(act.ObjID2)
@@ -2548,7 +2548,7 @@ Public Class FormFlowsheet
 
     Public Property AvailableSystemsOfUnits As List(Of IUnitsOfMeasure) Implements IFlowsheet.AvailableSystemsOfUnits
         Get
-            Return My.Application.MainForm.AvailableUnitSystems.Values.Select(Function(x) DirectCast(x, IUnitsOfMeasure)).ToList()
+            Return My.Application.MainWindowForm.AvailableUnitSystems.Values.Select(Function(x) DirectCast(x, IUnitsOfMeasure)).ToList()
         End Get
         Set(value As List(Of IUnitsOfMeasure))
             Throw New NotImplementedException
@@ -2802,7 +2802,7 @@ Public Class FormFlowsheet
     End Property
 
     Public Sub SaveToXML(file As String) Implements IFlowsheetBag.SaveToXML
-        My.Application.MainForm.SaveXML(file, Me)
+        My.Application.MainWindowForm.SaveXML(file, Me)
     End Sub
 
     Public Sub UpdateProcessData(xdoc As XDocument) Implements IFlowsheetBag.UpdateProcessData
@@ -3056,10 +3056,10 @@ Public Class FormFlowsheet
 
     Public Property AvailableCompounds As Dictionary(Of String, ICompoundConstantProperties) Implements IFlowsheet.AvailableCompounds
         Get
-            Return My.Application.MainForm.AvailableComponents
+            Return My.Application.MainWindowForm.AvailableComponents
         End Get
         Set(value As Dictionary(Of String, ICompoundConstantProperties))
-            My.Application.MainForm.AvailableComponents = value
+            My.Application.MainWindowForm.AvailableComponents = value
         End Set
     End Property
 

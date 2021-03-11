@@ -438,6 +438,16 @@ Imports IronPython.Hosting
                                         Else
                                             scr.LinkedEventType = Scripts.EventType.SolverRecycleLoop
                                         End If
+                                    Case 2
+                                        scr.LinkedObjectType = Scripts.ObjectType.Integrator
+                                        scr.LinkedObjectName = ""
+                                        If seditor.cbLinkedEvent.SelectedIndex = 0 Then
+                                            scr.LinkedEventType = Scripts.EventType.IntegratorStarted
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
+                                            scr.LinkedEventType = Scripts.EventType.IntegratorFinished
+                                        Else
+                                            scr.LinkedEventType = Scripts.EventType.IntegratorError
+                                        End If
                                     Case Else
                                         If seditor.chkLink.Checked Then
                                             scr.LinkedObjectType = Scripts.ObjectType.FlowsheetObject
@@ -490,6 +500,16 @@ Imports IronPython.Hosting
                                             scr.LinkedEventType = Scripts.EventType.SolverFinished
                                         Else
                                             scr.LinkedEventType = Scripts.EventType.SolverRecycleLoop
+                                        End If
+                                    Case 2
+                                        scr.LinkedObjectType = Scripts.ObjectType.Integrator
+                                        scr.LinkedObjectName = ""
+                                        If seditor.cbLinkedEvent.SelectedIndex = 0 Then
+                                            scr.LinkedEventType = Scripts.EventType.IntegratorStarted
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
+                                            scr.LinkedEventType = Scripts.EventType.IntegratorFinished
+                                        Else
+                                            scr.LinkedEventType = Scripts.EventType.IntegratorError
                                         End If
                                     Case Else
                                         If seditor.chkLink.Checked Then
@@ -583,6 +603,8 @@ Imports IronPython.Hosting
                             .cbLinkedObject.SelectedIndex = 0
                         Case Scripts.ObjectType.Solver
                             .cbLinkedObject.SelectedIndex = 1
+                        Case Scripts.ObjectType.Integrator
+                            .cbLinkedObject.SelectedIndex = 2
                     End Select
                 End If
 
@@ -615,6 +637,12 @@ Imports IronPython.Hosting
                         .cbLinkedEvent.SelectedIndex = 6
                     Case Scripts.EventType.SimulationTimer60
                         .cbLinkedEvent.SelectedIndex = 7
+                    Case Scripts.EventType.IntegratorStarted
+                        .cbLinkedEvent.SelectedIndex = 0
+                    Case Scripts.EventType.IntegratorFinished
+                        .cbLinkedEvent.SelectedIndex = 1
+                    Case Scripts.EventType.IntegratorError
+                        .cbLinkedEvent.SelectedIndex = 2
                 End Select
 
                 .cbPythonEngine.SelectedIndex = scriptdata.PythonInterpreter
@@ -660,6 +688,8 @@ Imports IronPython.Hosting
                             .cbLinkedObject.SelectedIndex = 0
                         Case Scripts.ObjectType.Solver
                             .cbLinkedObject.SelectedIndex = 1
+                        Case Scripts.ObjectType.Integrator
+                            .cbLinkedObject.SelectedIndex = 2
                     End Select
                 End If
 
@@ -692,6 +722,12 @@ Imports IronPython.Hosting
                         .cbLinkedEvent.SelectedIndex = 6
                     Case Scripts.EventType.SimulationTimer60
                         .cbLinkedEvent.SelectedIndex = 7
+                    Case Scripts.EventType.IntegratorStarted
+                        .cbLinkedEvent.SelectedIndex = 0
+                    Case Scripts.EventType.IntegratorFinished
+                        .cbLinkedEvent.SelectedIndex = 1
+                    Case Scripts.EventType.IntegratorError
+                        .cbLinkedEvent.SelectedIndex = 2
                 End Select
 
                 .cbPythonEngine.SelectedIndex = scriptdata.PythonInterpreter

@@ -41,7 +41,7 @@ Namespace My
 
         Public Property ActiveSimulation As FormFlowsheet
 
-        Public Property MainForm As FormMain
+        Public Property MainWindowForm As FormMain
 
         Public Property UserUnitSystems As Dictionary(Of String, SystemsOfUnits.Units)
 

@@ -257,6 +257,8 @@ Public Class FormDynamicsIntegratorControl
 
         Dim exceptions As New List(Of Exception)
 
+        Flowsheet.ProcessScripts(Scripts.EventType.IntegratorStarted, Scripts.ObjectType.Integrator, "")
+
         Dim maintask = New Task(Sub()
 
                                     Dim j As Integer = 0
@@ -384,6 +386,7 @@ Public Class FormDynamicsIntegratorControl
                                                                   Flowsheet.UpdateOpenEditForms()
                                                                   Dim baseexception As Exception
                                                                   If t.Exception IsNot Nothing Then
+                                                                      Flowsheet.ProcessScripts(Scripts.EventType.IntegratorError, Scripts.ObjectType.Integrator, "")
                                                                       For Each ex In t.Exception.Flatten().InnerExceptions
                                                                           Dim euid As String = Guid.NewGuid().ToString()
                                                                           SharedClasses.ExceptionProcessing.ExceptionList.Exceptions.Add(euid, ex)
@@ -407,6 +410,8 @@ Public Class FormDynamicsIntegratorControl
                                                                               Flowsheet.ShowMessage(baseexception.Message.ToString, Interfaces.IFlowsheet.MessageType.GeneralError, euid)
                                                                           End If
                                                                       Next
+                                                                  Else
+                                                                      Flowsheet.ProcessScripts(Scripts.EventType.IntegratorFinished, Scripts.ObjectType.Integrator, "")
                                                                   End If
                                                               End Sub)
                               End Sub)
