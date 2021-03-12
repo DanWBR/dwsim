@@ -52,6 +52,15 @@ Public Class FormCompoundCreator
 
         Me.MenuStrip1.Visible = False
 
+        graphCPIG.GraphPane.Border.IsVisible = False
+        graphLIQCP.GraphPane.Border.IsVisible = False
+        graphLIQDENS.GraphPane.Border.IsVisible = False
+        graphLIQTC.GraphPane.Border.IsVisible = False
+        graphLIQVISC.GraphPane.Border.IsVisible = False
+        graphPVAP.GraphPane.Border.IsVisible = False
+        graphSOLIDCP.GraphPane.Border.IsVisible = False
+        graphSOLIDDENS.GraphPane.Border.IsVisible = False
+
         'Grid UNIFAC
 
         Dim pathsep = System.IO.Path.DirectorySeparatorChar
@@ -1408,12 +1417,20 @@ Public Class FormCompoundCreator
                 c_scp = obj(0)
                 r_scp = obj(2)
                 n_scp = obj(3)
-            Case 6, 7
+            Case 6
                 'regressão dos dados - liquid heat capacity
                 obj = lmfit.GetCoeffs(CopyToVector(mycase.DataCPLiquid, 0), CopyToVector(mycase.DataCPLiquid, 1), c_cpl, Utilities.PetroleumCharacterization.LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
                 c_cpl = obj(0)
                 r_cpl = obj(2)
                 n_cpl = obj(3)
+
+            Case 7
+                'regressão dos dados - liquid thermal conductivity
+                obj = lmfit.GetCoeffs(CopyToVector(mycase.DataLTC, 0), CopyToVector(mycase.DataLTC, 1), c_cpl, Utilities.PetroleumCharacterization.LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
+                c_cpl = obj(0)
+                r_cpl = obj(2)
+                n_cpl = obj(3)
+
         End Select
 
         Select Case tipo
@@ -1867,6 +1884,7 @@ Public Class FormCompoundCreator
             End If
         End If
     End Sub
+
     Private Sub rbEstimateSolidDens_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles rbEstimateSolidDens.CheckedChanged
         If loaded Then
             If rbEstimateSolidDens.Checked Then
@@ -1874,7 +1892,9 @@ Public Class FormCompoundCreator
             End If
         End If
     End Sub
+
     Private Sub btnViewPVAP_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnViewPVAP.Click
+
         Dim mytext As New System.Text.StringBuilder
         Dim px, py1, py2, py3, LT As New ArrayList, x, y, T, T1, T2, dT As Double
         Dim Eq, Heading1, Heading2 As String
@@ -1905,7 +1925,7 @@ Public Class FormCompoundCreator
                 py1.Add(y)
             Next
             CurveCount = +1
-            frc.y1ctitle = "Experiment"
+            frc.y1ctitle = "Experimental Data"
             Heading1 = "T" & vbTab & "yExp"
             Heading2 = "[" & su.temperature & "]" & vbTab & "[" & su.pressure & "]"
             LT.Add(1) 'Point type curve
@@ -1987,10 +2007,19 @@ Public Class FormCompoundCreator
             .yformat = 2
             .ytitle = "Pvap [" & su.pressure & "]"
             .xtitle = "T [" & su.temperature & "]"
-            .ShowDialog(Me)
+            .DrawChart()
+            graphPVAP.MasterPane = .graph.MasterPane.Clone()
+            graphPVAP.MasterPane.Rect = New RectangleF(-1, -1, graphPVAP.Width + 1, graphPVAP.Height + 1)
+            graphPVAP.GraphPane.Border.IsVisible = False
+            graphPVAP.MasterPane.AxisChange(CreateGraphics)
+            graphPVAP.MasterPane.DoLayout(CreateGraphics)
+            graphPVAP.Invalidate()
         End With
+        frc.Dispose()
     End Sub
+
     Private Sub btnViewCPIG_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnViewCPIG.Click
+
         Dim mytext As New System.Text.StringBuilder
         Dim px, py1, py2 As New ArrayList, x, y1, y2, T As Double
         Dim pp As New PropertyPackages.RaoultPropertyPackage(False)
@@ -2012,7 +2041,7 @@ Public Class FormCompoundCreator
                 .px = px
                 .py1 = py1
                 .ycurvetypes = New ArrayList(New Integer() {3})
-                .y1ctitle = "Formula"
+                .y1ctitle = "Regressed/Input Equation"
                 .title = "Ideal Gas Heat Capacity Estimation Results"
             End With
         Else
@@ -2033,8 +2062,8 @@ Public Class FormCompoundCreator
                 .py1 = py1
                 .py2 = py2
                 .ycurvetypes = New ArrayList(New Integer() {1, 3})
-                .y1ctitle = "Experiment"
-                .y2ctitle = "Formula"
+                .y1ctitle = "Experimental Data"
+                .y2ctitle = "Regressed/Input Equation"
                 .title = "Ideal Gas Heat Capacity Calculation Results"
             End With
         End If
@@ -2046,7 +2075,13 @@ Public Class FormCompoundCreator
             .ytitle = "Cpig [" & su.heatCapacityCp & "]"
             .xtitle = "T [" & su.temperature & "]"
             .title = "Ideal Gas Heat Capacity Fitting Results"
-            .ShowDialog(Me)
+            .DrawChart()
+            graphCPIG.MasterPane = .graph.MasterPane.Clone()
+            graphCPIG.MasterPane.Rect = New RectangleF(-1, -1, graphCPIG.Width, graphCPIG.Height)
+            graphCPIG.GraphPane.Border.IsVisible = False
+            graphCPIG.MasterPane.AxisChange(CreateGraphics)
+            graphCPIG.MasterPane.DoLayout(CreateGraphics)
+            graphCPIG.Invalidate()
         End With
 
     End Sub
@@ -2079,7 +2114,7 @@ Public Class FormCompoundCreator
                 py1.Add(SystemsOfUnits.Converter.ConvertFromSI(su.density, d(1)))
             Next
             CurveCount = +1
-            frc.y1ctitle = "Experiment"
+            frc.y1ctitle = "Experimental Data"
             Heading1 = "T" & vbTab & "yExp"
             Heading2 = "[" & su.temperature & "]" & vbTab & "[" & su.density & "]"
             LT.Add(1) 'Point type curve
@@ -2167,7 +2202,13 @@ Public Class FormCompoundCreator
             .yformat = 1
             .ytitle = "Rho [" & su.density & "]"
             .xtitle = "T [" & su.temperature & "]"
-            .ShowDialog(Me)
+            .DrawChart()
+            graphLIQDENS.MasterPane = .graph.MasterPane.Clone()
+            graphLIQDENS.MasterPane.Rect = New RectangleF(-1, -1, graphLIQDENS.Width + 1, graphLIQDENS.Height + 1)
+            graphLIQDENS.GraphPane.Border.IsVisible = False
+            graphLIQDENS.MasterPane.AxisChange(CreateGraphics)
+            graphLIQDENS.MasterPane.DoLayout(CreateGraphics)
+            graphLIQDENS.Invalidate()
         End With
     End Sub
 
@@ -2202,7 +2243,7 @@ Public Class FormCompoundCreator
                 .px = px
                 .py1 = py1
                 .ycurvetypes = New ArrayList(New Integer() {3})
-                .y1ctitle = "Formula"
+                .y1ctitle = "Regressed/Input Equation"
                 .title = "Solid Heat Capacity estimation"
             End With
         Else
@@ -2226,8 +2267,8 @@ Public Class FormCompoundCreator
                 .py1 = py1
                 .py2 = py2
                 .ycurvetypes = New ArrayList(New Integer() {1, 3})
-                .y1ctitle = "Experiment"
-                .y2ctitle = "Formula"
+                .y1ctitle = "Experimental Data"
+                .y2ctitle = "Regressed/Input Equation"
                 .title = "Solid Heat Capacity Fitting Results"
             End With
         End If
@@ -2238,7 +2279,13 @@ Public Class FormCompoundCreator
             .yformat = 1
             .ytitle = "Cp [ " & su.heatCapacityCp & " ]"
             .xtitle = "T [ " & su.temperature & " ]"
-            .ShowDialog(Me)
+            .DrawChart()
+            graphSOLIDCP.MasterPane = .graph.MasterPane.Clone()
+            graphSOLIDCP.MasterPane.Rect = New RectangleF(-1, -1, graphSOLIDCP.Width + 1, graphSOLIDCP.Height + 1)
+            graphSOLIDCP.GraphPane.Border.IsVisible = False
+            graphSOLIDCP.MasterPane.AxisChange(CreateGraphics)
+            graphSOLIDCP.MasterPane.DoLayout(CreateGraphics)
+            graphSOLIDCP.Invalidate()
         End With
     End Sub
     Private Sub btnViewSolidDens_Click(sender As System.Object, e As System.EventArgs) Handles btnViewSolidDens.Click
@@ -2268,7 +2315,7 @@ Public Class FormCompoundCreator
             With frc
                 .py1 = py1
                 .ycurvetypes = New ArrayList(New Integer() {3})
-                .y1ctitle = "Formula"
+                .y1ctitle = "Regressed/Input Equation"
                 .title = "Solid Density Formula"
             End With
         Else
@@ -2290,8 +2337,8 @@ Public Class FormCompoundCreator
             With frc
                 .py1 = py1
                 .py2 = py2
-                .y1ctitle = "Experiment"
-                .y2ctitle = "Formula"
+                .y1ctitle = "Experimental Data"
+                .y2ctitle = "Regressed/Input Equation"
                 .ycurvetypes = New ArrayList(New Integer() {1, 3})
                 .title = "Solid Density Fitting Results"
             End With
@@ -2304,7 +2351,13 @@ Public Class FormCompoundCreator
             .yformat = 1
             .ytitle = "Rho [" & su.density & "]"
             .xtitle = "T [" & su.temperature & "]"
-            .ShowDialog(Me)
+            .DrawChart()
+            graphSOLIDDENS.MasterPane = .graph.MasterPane.Clone()
+            graphSOLIDDENS.MasterPane.Rect = New RectangleF(-1, -1, graphSOLIDDENS.Width + 1, graphSOLIDDENS.Height + 1)
+            graphSOLIDDENS.GraphPane.Border.IsVisible = False
+            graphSOLIDDENS.MasterPane.AxisChange(CreateGraphics)
+            graphSOLIDDENS.MasterPane.DoLayout(CreateGraphics)
+            graphSOLIDDENS.Invalidate()
         End With
     End Sub
     Private Sub btnViewLIQVISC_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnViewLIQVISC.Click
@@ -2336,7 +2389,7 @@ Public Class FormCompoundCreator
                 py1.Add(SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, d(1)))
             Next
             CurveCount = +1
-            frc.y1ctitle = "Experiment"
+            frc.y1ctitle = "Experimental Data"
             Heading1 = "T" & vbTab & "yExp"
             Heading2 = "[" & su.temperature & "]" & vbTab & "[" & su.viscosity & "]"
             LT.Add(1) 'Point type curve
@@ -2418,7 +2471,13 @@ Public Class FormCompoundCreator
             .yformat = 1
             .ytitle = "Visc. [" & su.viscosity & "]"
             .xtitle = "T [" & su.temperature & "]"
-            .ShowDialog(Me)
+            .DrawChart()
+            graphLIQVISC.MasterPane = .graph.MasterPane.Clone()
+            graphLIQVISC.MasterPane.Rect = New RectangleF(-1, -1, graphLIQVISC.Width + 1, graphLIQVISC.Height + 1)
+            graphLIQVISC.GraphPane.Border.IsVisible = False
+            graphLIQVISC.MasterPane.AxisChange(CreateGraphics)
+            graphLIQVISC.MasterPane.DoLayout(CreateGraphics)
+            graphLIQVISC.Invalidate()
         End With
     End Sub
 
@@ -2877,7 +2936,7 @@ Public Class FormCompoundCreator
                 .px = px
                 .py1 = py1
                 .ycurvetypes = New ArrayList(New Integer() {3})
-                .y1ctitle = "Formula"
+                .y1ctitle = "Regressed/Input Equation"
                 .title = "Liquid Heat Capacity Estimation Results"
             End With
         Else
@@ -2898,8 +2957,8 @@ Public Class FormCompoundCreator
                 .py1 = py1
                 .py2 = py2
                 .ycurvetypes = New ArrayList(New Integer() {1, 3})
-                .y1ctitle = "Experiment"
-                .y2ctitle = "Formula"
+                .y1ctitle = "Experimental Data"
+                .y2ctitle = "Regressed/Input Equation"
                 .title = "Liquid Heat Capacity Calculation Results"
             End With
         End If
@@ -2911,7 +2970,13 @@ Public Class FormCompoundCreator
             .ytitle = "Cp Liquid [" & su.heatCapacityCp & "]"
             .xtitle = "T [" & su.temperature & "]"
             .title = "Liquid Heat Capacity Fitting Results"
-            .ShowDialog(Me)
+            .DrawChart()
+            graphLIQCP.MasterPane = .graph.MasterPane.Clone()
+            graphLIQCP.MasterPane.Rect = New RectangleF(-1, -1, graphLIQCP.Width + 1, graphLIQCP.Height + 1)
+            graphLIQCP.GraphPane.Border.IsVisible = False
+            graphLIQCP.MasterPane.AxisChange(CreateGraphics)
+            graphLIQCP.MasterPane.DoLayout(CreateGraphics)
+            graphLIQCP.Invalidate()
         End With
     End Sub
 
@@ -2938,7 +3003,7 @@ Public Class FormCompoundCreator
                 .px = px
                 .py1 = py1
                 .ycurvetypes = New ArrayList(New Integer() {3})
-                .y1ctitle = "Formula"
+                .y1ctitle = "Regressed/Input Equation"
                 .title = "Liquid Thermal Conductivity Estimation Results"
             End With
         Else
@@ -2959,8 +3024,8 @@ Public Class FormCompoundCreator
                 .py1 = py1
                 .py2 = py2
                 .ycurvetypes = New ArrayList(New Integer() {1, 3})
-                .y1ctitle = "Experiment"
-                .y2ctitle = "Formula"
+                .y1ctitle = "Experimental Data"
+                .y2ctitle = "Regressed/Input Equation"
                 .title = "Liquid Thermal Conductivity Calculation Results"
             End With
         End If
@@ -2972,7 +3037,13 @@ Public Class FormCompoundCreator
             .ytitle = "TC Liquid [" & su.thermalConductivity & "]"
             .xtitle = "T [" & su.temperature & "]"
             .title = "Liquid Thermal Conductivity Fitting Results"
-            .ShowDialog(Me)
+            .DrawChart()
+            graphLIQTC.MasterPane = .graph.MasterPane.Clone()
+            graphLIQTC.MasterPane.Rect = New RectangleF(-1, -1, graphLIQTC.Width + 1, graphLIQTC.Height + 1)
+            graphLIQTC.GraphPane.Border.IsVisible = False
+            graphLIQTC.MasterPane.AxisChange(CreateGraphics)
+            graphLIQTC.MasterPane.DoLayout(CreateGraphics)
+            graphLIQTC.Invalidate()
         End With
     End Sub
 

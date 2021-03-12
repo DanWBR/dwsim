@@ -31,8 +31,7 @@
 
     End Sub
 
-
-    Sub DrawChart()
+    Public Sub DrawChart()
 
         Dim rnd As New Random()
 
