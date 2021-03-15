@@ -48,11 +48,12 @@ Public Class FormUnhandledException
         Dim mystring2 = SharedClasses.EncryptString.StringCipher.Decrypt("T+h/AQaXoM7xMDrov6dkD/82uHShQ6gX7MD+yyPG1ALdchPnpYsxHZWU8YcwP3jTPCZWRL9mmAWnQnWtp4ETyYh17Cgjt1EDYbEJJvh/PacWXami/6btnnbE0D5HBpnYrKamsf6qjjx9JbhQOZIvXJv6dIlJ7lMm5vWkhmLpNuc=", "dwsim000000")
 
         If DWSIM.App.IsRunningOnMono Then Console.WriteLine(ex.ToString.Replace(mystring, "").Replace(mystring2, ""))
-        Me.TextBox1.Text = ex.Message.ToString.Replace(mystring, "").Replace(mystring2, "")
+
         Me.TextBox2.Text = ex.ToString.Replace(mystring, "").Replace(mystring2, "")
+
         Button4.Enabled = False
         Try
-            Dim baseaddress As String = "https://github.com/DanWBR/dwsim5/blob/master/"
+            Dim baseaddress As String = "https://github.com/DanWBR/dwsim6/blob/windows/"
             Dim st As New StackTrace(ex, True)
             Dim frame As StackFrame = st.GetFrame(0)
             Dim path As String = frame.GetFileName.Replace(mystring, baseaddress)
@@ -104,52 +105,6 @@ Public Class FormUnhandledException
         Dim searchtext As String = ex.Message.ToString.Replace(" ", "+")
 
         Process.Start(baseaddress + searchtext)
-
-    End Sub
-
-    Private Sub Button3_Click(sender As Object, e As EventArgs)
-
-        Dim myfile As String = My.Computer.FileSystem.SpecialDirectories.Temp & Path.DirectorySeparatorChar & "DWSIM" & Path.DirectorySeparatorChar & "dwsim.txt"
-        Dim webcl As New System.Net.WebClient()
-
-        Dim proxyObj As New WebProxy(Net.WebRequest.GetSystemWebProxy.GetProxy(New Uri("http://dwsim.inforside.com.br")))
-        proxyObj.Credentials = CredentialCache.DefaultCredentials
-
-        webcl.Proxy = proxyObj
-
-        Try
-            webcl.DownloadFile("http://dwsim.inforside.com.br/dwsim.txt", myfile)
-            If File.Exists(myfile) Then
-                Dim txt() As String = File.ReadAllLines(myfile)
-                Dim build As Integer
-                build = txt(0)
-                If My.Application.Info.Version.Build < Convert.ToInt32(build) Then
-                    Dim bdate As Date, fname As String, dlpath As String, changelog As String = ""
-                    bdate = Date.Parse(txt(1), New CultureInfo("en-US"))
-                    dlpath = txt(2)
-                    fname = txt(3)
-                    For i As Integer = 4 To txt.Length - 1
-                        changelog += txt(i) + vbCrLf
-                    Next
-                    Dim strb As New StringBuilder()
-                    With strb
-                        .AppendLine(DWSIM.App.GetLocalString("BuildNumber") & ": " & build & vbCrLf)
-                        .AppendLine(DWSIM.App.GetLocalString("BuildDate") & ": " & bdate.ToString(My.Application.Culture.DateTimeFormat.ShortDatePattern, My.Application.Culture) & vbCrLf)
-                        .AppendLine(DWSIM.App.GetLocalString("Changes") & ": " & vbCrLf & changelog & vbCrLf)
-                        .AppendLine(DWSIM.App.GetLocalString("DownloadQuestion"))
-                    End With
-                    Dim msgresult As MsgBoxResult = MessageBox.Show(strb.ToString, DWSIM.App.GetLocalString("NewVersionAvailable"), MessageBoxButtons.YesNo, MessageBoxIcon.Information)
-                    If msgresult = MsgBoxResult.Yes Then Process.Start(dlpath)
-                Else
-                    MessageBox.Show("DWSIM is already up-to-date.", "Checking for updates...", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                End If
-            End If
-        Catch ex As Exception
-            MessageBox.Show(ex.Message.ToString, "Error while checking for updates", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
-            webcl = Nothing
-            proxyObj = Nothing
-        End Try
 
     End Sub
 

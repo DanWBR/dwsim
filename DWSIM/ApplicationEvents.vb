@@ -147,7 +147,6 @@ Namespace My
             If Not CommandLineMode Then
                 If Not GlobalSettings.Settings.AutomationMode Then
                     Dim frmEx As New FormUnhandledException
-                    frmEx.TextBox1.Text = e.Exception.ToString
                     frmEx.ex = e.Exception
                     frmEx.ShowDialog()
                     e.ExitApplication = False

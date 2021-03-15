@@ -1630,6 +1630,10 @@ Namespace PropertyPackages.ThermoPlugs
 
             IObj?.Close()
 
+            If result.Count = 0 Then
+                Throw New Exception("PR EOS: Unable to calculate compressility factor at given conditions.")
+            End If
+
             Return result
 
         End Function
@@ -1686,6 +1690,10 @@ Namespace PropertyPackages.ThermoPlugs
             If temp1(0, 1) = 0.0# And temp1(0, 0) > 0.0# Then result.Add(temp1(0, 0))
             If temp1(1, 1) = 0.0# And temp1(1, 0) > 0.0# Then result.Add(temp1(1, 0))
             If temp1(2, 1) = 0.0# And temp1(2, 0) > 0.0# Then result.Add(temp1(2, 0))
+
+            If result.Count = 0 Then
+                Throw New Exception("PR EOS: Unable to calculate compressility factor at given conditions.")
+            End If
 
             Return result
 

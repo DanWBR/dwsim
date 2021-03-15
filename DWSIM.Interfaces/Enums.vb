@@ -510,8 +510,9 @@ Namespace Enums
         View = 8
         Help = 9
         NewItem = 10
-        FlowsheetSurface = 11
-        ToolStrip = 12
+        FlowsheetSurfaceSelected = 11
+        FlowsheetSurfaceNotSelected = 12
+        ToolStrip = 13
 
     End Enum
 
