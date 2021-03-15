@@ -591,6 +591,12 @@ Public Class FormMain
 
         PropertyPackages.Add(NRTLPP.ComponentName.ToString, NRTLPP)
 
+        Dim WPP As WilsonPropertyPackage = New WilsonPropertyPackage()
+        WPP.ComponentName = "Wilson"
+        WPP.ComponentDescription = "Wilson Activity Coefficient Model"
+
+        PropertyPackages.Add(WPP.ComponentName.ToString, WPP)
+
         Dim UQPP As UNIQUACPropertyPackage = New UNIQUACPropertyPackage()
         UQPP.ComponentName = "UNIQUAC"
         UQPP.ComponentDescription = DWSIM.App.GetLocalString("DescUNIQUACPP")

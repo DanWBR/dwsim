@@ -199,6 +199,12 @@
     <Compile Include="Editing Forms\Property Packages\FormConfigLIQUAC.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Editing Forms\Property Packages\WilsonPPEditor.designer.vb">
+      <DependentUpon>WilsonPPEditor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Property Packages\WilsonPPEditor.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Helper Classes\SerializationBinder.vb" />
     <Compile Include="Interfaces\IActivityCoefficientBase.vb" />
     <Compile Include="Base Classes\ThermodynamicsBase.vb" />
@@ -361,6 +367,7 @@
     <Compile Include="Property Packages\ElectrolyteBase.vb" />
     <Compile Include="Property Packages\Models\Hypotheticals.vb" />
     <Compile Include="Base Classes\MichelsenBase.vb" />
+    <Compile Include="Property Packages\Models\WilsonModel.vb" />
     <Compile Include="Property Packages\PengRobinson78.vb" />
     <Compile Include="Property Packages\PropertyPackage.vb" />
     <Compile Include="Property Packages\Models\FluidProperties.vb" />
@@ -447,6 +454,7 @@
     <Compile Include="Property Packages\UNIFAC.vb" />
     <Compile Include="Property Packages\Models\UNIQUAC.vb" />
     <Compile Include="Property Packages\UNIQUAC.vb" />
+    <Compile Include="Property Packages\WilsonPropertyPackage.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Editing Forms\Excel Interface\AboutForm.de.resx">
@@ -626,6 +634,9 @@
     <EmbeddedResource Include="Editing Forms\Property Packages\PropertyPackageSettingsEditingControl.resx">
       <DependentUpon>PropertyPackageSettingsEditingControl.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\WilsonPPEditor.resx">
+      <DependentUpon>WilsonPPEditor.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Unhandled Exceptions\FormUnhandledException.de.resx">
       <DependentUpon>FormUnhandledException.vb</DependentUpon>
     </EmbeddedResource>
@@ -650,6 +661,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Assets\wilson_bips.csv" />
     <None Include="Resources\cross.png" />
     <None Include="Resources\copy.gif" />
     <EmbeddedResource Include="Assets\Databases\chedl_thermo.json" />

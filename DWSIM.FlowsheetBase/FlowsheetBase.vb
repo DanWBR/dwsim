@@ -2311,6 +2311,10 @@ Label_00CC:
 
         Dim t10 = New Task(Sub()
 
+                               Dim WPP As WilsonPropertyPackage = New WilsonPropertyPackage()
+                               WPP.ComponentName = "Wilson"
+                               plist.Add(WPP)
+
                                Dim NRTLPP As NRTLPropertyPackage = New NRTLPropertyPackage()
                                NRTLPP.ComponentName = "NRTL"
                                plist.Add(NRTLPP)
