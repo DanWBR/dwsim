@@ -1585,7 +1585,7 @@ Public Class GraphicsSurface
         Dim settings = New FastIncrementalLayoutSettings()
         settings.AvoidOverlaps = True
         settings.PackingMethod = PackingMethod.Compact
-        settings.NodeSeparation = 100 * DistanceFactor
+        settings.NodeSeparation = 50 * DistanceFactor
         settings.RouteEdges = True
         settings.RespectEdgePorts = True
         Dim eset = New Microsoft.Msagl.Core.Routing.EdgeRoutingSettings()
