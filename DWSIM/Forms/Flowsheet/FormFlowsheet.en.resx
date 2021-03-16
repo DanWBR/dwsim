@@ -119,15 +119,15 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="CloseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 22</value>
+    <value>249, 26</value>
   </data>
   <data name="CloseToolStripMenuItem.Text" xml:space="preserve">
     <value>Close Active Simulation</value>
   </data>
-  <data name="ArquivoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="FileTSMI.Size" type="System.Drawing.Size, System.Drawing">
     <value>37, 24</value>
   </data>
-  <data name="ArquivoToolStripMenuItem.Text" xml:space="preserve">
+  <data name="FileTSMI.Text" xml:space="preserve">
     <value>&amp;File</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
@@ -135,7 +135,7 @@
     <value>None</value>
   </data>
   <data name="tsmiUndo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 22</value>
+    <value>270, 26</value>
   </data>
   <data name="tsmiUndo.Text" xml:space="preserve">
     <value>Undo</value>
@@ -144,76 +144,76 @@
     <value>None</value>
   </data>
   <data name="tsmiRedo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 22</value>
+    <value>270, 26</value>
   </data>
   <data name="tsmiRedo.Text" xml:space="preserve">
     <value>Redo</value>
   </data>
   <data name="ToolStripSeparator14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>263, 6</value>
+    <value>267, 6</value>
   </data>
   <data name="tsmiCut.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 22</value>
+    <value>270, 26</value>
   </data>
   <data name="tsmiCut.Text" xml:space="preserve">
     <value>Cut selected objects</value>
   </data>
   <data name="tsmiCopy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 22</value>
+    <value>270, 26</value>
   </data>
   <data name="tsmiCopy.Text" xml:space="preserve">
     <value>Copy selected objects</value>
   </data>
   <data name="tsmiPaste.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 22</value>
+    <value>270, 26</value>
   </data>
   <data name="tsmiPaste.Text" xml:space="preserve">
     <value>Paste objects</value>
   </data>
   <data name="tsmiRemoveSelected.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 22</value>
+    <value>270, 26</value>
   </data>
   <data name="tsmiRemoveSelected.Text" xml:space="preserve">
     <value>Remove selected objects</value>
   </data>
   <data name="tsmiCloneSelected.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 22</value>
+    <value>270, 26</value>
   </data>
   <data name="tsmiCloneSelected.Text" xml:space="preserve">
     <value>Clone selected objects</value>
   </data>
   <data name="tsmiRecalc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 22</value>
+    <value>270, 26</value>
   </data>
   <data name="tsmiRecalc.Text" xml:space="preserve">
     <value>Recalculate object</value>
   </data>
   <data name="tsmiExportData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 22</value>
+    <value>270, 26</value>
   </data>
   <data name="tsmiExportData.Text" xml:space="preserve">
     <value>Export data to Clipboard</value>
   </data>
   <data name="ToolStripSeparator18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>263, 6</value>
+    <value>267, 6</value>
   </data>
   <data name="tsmiConfigSimulation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 22</value>
+    <value>270, 26</value>
   </data>
   <data name="tsmiConfigSimulation.Text" xml:space="preserve">
     <value>Simulation Settings</value>
   </data>
-  <data name="EditarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="EditTSMI.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 24</value>
   </data>
-  <data name="EditarToolStripMenuItem.Text" xml:space="preserve">
+  <data name="EditTSMI.Text" xml:space="preserve">
     <value>E&amp;dit</value>
   </data>
   <data name="BlocoDeSimulacaoToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>None</value>
   </data>
   <data name="BlocoDeSimulacaoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 22</value>
+    <value>210, 26</value>
   </data>
   <data name="BlocoDeSimulacaoToolStripMenuItem.Text" xml:space="preserve">
     <value>Flowsheet Object</value>
@@ -223,100 +223,100 @@
     <value>False</value>
   </data>
   <data name="TabelaDePropriedadesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 22</value>
+    <value>210, 26</value>
   </data>
   <data name="TabelaDePropriedadesToolStripMenuItem.Text" xml:space="preserve">
     <value>Property Table</value>
   </data>
   <data name="TabelaDePropriedatesMestraToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 22</value>
+    <value>210, 26</value>
   </data>
   <data name="TabelaDePropriedatesMestraToolStripMenuItem.Text" xml:space="preserve">
     <value>Master Property Table</value>
   </data>
   <data name="TabelaDePropriedadesPlanilhaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 22</value>
+    <value>210, 26</value>
   </data>
   <data name="TabelaDePropriedadesPlanilhaToolStripMenuItem.Text" xml:space="preserve">
     <value>Linked Spreadsheet Table</value>
   </data>
   <data name="FiguraToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 22</value>
+    <value>210, 26</value>
   </data>
   <data name="FiguraToolStripMenuItem.Text" xml:space="preserve">
     <value>Image</value>
   </data>
   <data name="TextoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 22</value>
+    <value>210, 26</value>
   </data>
   <data name="TextoToolStripMenuItem.Text" xml:space="preserve">
     <value>Text</value>
   </data>
   <data name="RectangleToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 22</value>
+    <value>210, 26</value>
   </data>
   <data name="RectangleToolStripMenuItem.Text" xml:space="preserve">
     <value>Rectangle</value>
   </data>
   <data name="GraficoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 22</value>
+    <value>210, 26</value>
   </data>
   <data name="GraficoToolStripMenuItem.Text" xml:space="preserve">
     <value>Chart</value>
   </data>
-  <data name="InserirToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="InsertTSMI.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 24</value>
   </data>
-  <data name="InserirToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Insert</value>
+  <data name="InsertTSMI.Text" xml:space="preserve">
+    <value>Insert</value>
   </data>
   <data name="CompoundCreatorWizardTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>324, 22</value>
+    <value>328, 26</value>
   </data>
   <data name="CompoundCreatorWizardTSMI.Text" xml:space="preserve">
     <value>Compound Creator Wizard</value>
   </data>
   <data name="PropriedadesDasSubstanciasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>324, 22</value>
+    <value>328, 26</value>
   </data>
   <data name="PropriedadesDasSubstanciasToolStripMenuItem.Text" xml:space="preserve">
     <value>Pure Compound Property Viewer/Editor</value>
   </data>
   <data name="CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>324, 22</value>
+    <value>328, 26</value>
   </data>
   <data name="CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem.Text" xml:space="preserve">
     <value>Petroleum Characterization (Bulk C7+)</value>
   </data>
   <data name="CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>324, 22</value>
+    <value>328, 26</value>
   </data>
   <data name="CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem.Text" xml:space="preserve">
     <value>Petroleum Characterization (Distillation Curves)</value>
   </data>
   <data name="GerenciadorDeAmostrasDePetroleoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>324, 22</value>
+    <value>328, 26</value>
   </data>
   <data name="GerenciadorDeAmostrasDePetroleoToolStripMenuItem.Text" xml:space="preserve">
     <value>Petroleum Assay Manager</value>
   </data>
   <data name="InspectorTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>324, 22</value>
+    <value>328, 26</value>
   </data>
   <data name="InspectorTSMI.Text" xml:space="preserve">
     <value>Solution Inspector</value>
   </data>
   <data name="ToolStripSeparator15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>321, 6</value>
+    <value>325, 6</value>
   </data>
-  <data name="FerramentasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ToolsTSMI.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 24</value>
   </data>
-  <data name="FerramentasToolStripMenuItem.Text" xml:space="preserve">
+  <data name="ToolsTSMI.Text" xml:space="preserve">
     <value>&amp;Tools</value>
   </data>
   <data name="ModoDinamicoAtivoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 22</value>
+    <value>195, 26</value>
   </data>
   <data name="ModoDinamicoAtivoToolStripMenuItem.Text" xml:space="preserve">
     <value>Dynamic Mode Active</value>
@@ -348,7 +348,7 @@
 </value>
   </data>
   <data name="GerenciadorDoModoDinamicoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 22</value>
+    <value>195, 26</value>
   </data>
   <data name="GerenciadorDoModoDinamicoToolStripMenuItem.Text" xml:space="preserve">
     <value>Dynamics Manager</value>
@@ -382,22 +382,22 @@
 </value>
   </data>
   <data name="ControlesDoIntegradorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 22</value>
+    <value>195, 26</value>
   </data>
   <data name="ControlesDoIntegradorToolStripMenuItem.Text" xml:space="preserve">
     <value>Integrator Controls</value>
   </data>
   <data name="FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 22</value>
+    <value>195, 26</value>
   </data>
   <data name="FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem.Text" xml:space="preserve">
     <value>PID Controller Tuning</value>
   </data>
-  <data name="ModoDinâmicoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="DynamicsTSMI.Size" type="System.Drawing.Size, System.Drawing">
     <value>71, 24</value>
   </data>
-  <data name="ModoDinâmicoToolStripMenuItem.Text" xml:space="preserve">
-    <value>D&amp;ynamics</value>
+  <data name="DynamicsTSMI.Text" xml:space="preserve">
+    <value>&amp;Dynamics</value>
   </data>
   <data name="TSMIAddUtility.Size" type="System.Drawing.Size, System.Drawing">
     <value>130, 22</value>
@@ -418,37 +418,34 @@
     <value>Displays a list of Utilities currently attached to Flowsheet Objects.</value>
   </data>
   <data name="AnaliseDeSensibilidadeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 22</value>
+    <value>196, 26</value>
   </data>
   <data name="AnaliseDeSensibilidadeToolStripMenuItem.Text" xml:space="preserve">
     <value>Sensitivity Analysis</value>
   </data>
   <data name="MultivariateOptimizerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 22</value>
+    <value>196, 26</value>
   </data>
   <data name="MultivariateOptimizerToolStripMenuItem.Text" xml:space="preserve">
     <value>Multivariate Optimizer</value>
   </data>
-  <data name="OtimizaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="OptimizationTSMI.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 24</value>
   </data>
-  <data name="OtimizaToolStripMenuItem.Text" xml:space="preserve">
+  <data name="OptimizationTSMI.Text" xml:space="preserve">
     <value>&amp;Optimization</value>
   </data>
   <data name="GerarRelatorioToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
+    <value>184, 26</value>
   </data>
   <data name="GerarRelatorioToolStripMenuItem.Text" xml:space="preserve">
     <value>Create Report</value>
   </data>
-  <data name="ResultsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ResultsTSMI.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 24</value>
   </data>
-  <data name="ResultsToolStripMenuItem.Text" xml:space="preserve">
+  <data name="ResultsTSMI.Text" xml:space="preserve">
     <value>&amp;Results</value>
-  </data>
-  <data name="CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 22</value>
   </data>
   <data name="CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.Text" xml:space="preserve">
     <value>CAPE-OPEN Plugins</value>
@@ -501,10 +498,10 @@
   <data name="tsmiCloseOpenedEditors.Text" xml:space="preserve">
     <value>Close Opened Object Editors</value>
   </data>
-  <data name="ExibirToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ShowTSMI.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 24</value>
   </data>
-  <data name="ExibirToolStripMenuItem.Text" xml:space="preserve">
+  <data name="ShowTSMI.Text" xml:space="preserve">
     <value>&amp;View</value>
   </data>
   <data name="ToolStripMenuItem3.Text" xml:space="preserve">
@@ -558,27 +555,27 @@
   <data name="tsbDynManager.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        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
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAASiSURBVFhH7ZfbTxxVHMdJvEQffNIYEx/8DzQmvvukbz6Z
+        mphY0WBphV0uu+zSUmAKZYHdnb0My+6ywMyZ2fuFhYJYoMVqS2ygiE2hLVjSVKC1D70JBaTcvs4Ms7DQ
+        5RaKD4Zv8s1md878vp85v5lzZtMOlEqm7/n36VzCmbXCdZOG8LRa+FA5tH+iKOplSzb53KzhB0wF5Cnl
+        j89X/NIOytm8SGuEGVOBMGhRkUPSOOWUFyOjrvEN8WpPGlTkQXWZf9LwYyvKh8+hfOT8msXv0u+mcvKU
+        zmMf03lCiXSeUmJvMuqEYSrHvlx5RgxODt3E0jhpvEnL3VRK7E20moBiQzAfF2CsDMhXutkMGA1+mPQC
+        ClwcKJV9WSmxN4l9heZKCzR9zSiKRVBV4RNhvKjyx1HRe1b+NIlwp0/xUAscvj7P4nA3C1rNQSmxKstR
+        /l2rmv/UlEXeUX7aXqsAST7e2YTTTBDSsWIzQWZ8JTTZyQB0NveJQ8NfKtN65+uptvlTGu+8Q+ftsqjZ
+        j5UhmysVQMLSscQVpwKwqLgsRk3GqRxm2ds6hNidRTRNALHb8/C2XYehJDxfo/fdFescseRHXlci12u3
+        ABmtLIoZ8b5R25eDFt/UYFcE8ZogavR+cP4+hG9MyxCyxwFfzz3U2zqWTmm9c0yBz2HOanxPiV7RTgGO
+        RVgYjAR2LY9OLoCHN5rwbKJ51Y+Hm3AxFIFD7xMDO+EXg1dBRIeHpsD5esF8RxYYvX/AquY+2zGAoZrA
+        ls/jt7YQZu6shaby9O24OC4MT2kAropmCGdHEftzpTWSpfaQ5iH5UXYV8nH5MdT2bQ6Q3snCmksQMfvg
+        LuTREw7iyUg8Zfg6jzdj9GIUIWsIjsIA2NAAgv0Pwfsug9H5UFstridiG9NMhcItinItS3d+KoBvOlhx
+        2olc9K+rMXQ1BlArtqHd5cdYX/T54BQe+CEMWw4P8REF7e5B5U8PYOifk+vLS7E5ny+u1tRPVpWTheJY
+        VF4TUgEkPDkaR288hPoiAX6DF9KNODu2PlRq1e/tYQhlArhSgt5gA2y5ghycsAyQkLwZiZuNWc+PmI+Q
+        BWl1lAbonByYDLKUXDzhOTF0+EJkrT2hEO72x/CzLwinjkec5vBHhwezg25MXXVvDZAsafsV94iI8QSZ
+        MGnZlrJ8MpcKINlSezobAuI0E3TXN+L+r3WYHXKvelcAyaIzPW/tBECyNO1MHlkXfABwAPD/Aeg/E4bk
+        VMEJ/2cAbInwXLjkfQGg0slrtlz+H2mFSwQlADbOym4AqtonYEvnl5SYrWXPYb9i8txPfJR36mZ3RF6C
+        NwJIUNsBWEWA6sgILGWtsGY5n1lKW44qEduLoqKv0ir2y5p89ppT55q+HHMvTt5a25a3Anh0pQ6X+EZ5
+        ym1F/vtmXeTwnv7gWLMbP2I0JGrPaJiNuwLT9wZW3o42AoxdqIO/3LJc8y1ZcOq5JouK/UAp8WJkPuZ9
+        25ZLSpks8kighL+HzoVhF19errV4UEtZFx3ZZEp8aT3pyBbeVE7ZH3kyPa9Ys/gvnFrST+fzM64TZFD6
+        nxk9FH1JGbKJ0tL+BQQTvULhNUxaAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="tsbDynManager.Text" xml:space="preserve">
@@ -587,29 +584,29 @@
   <data name="tsbDynIntegrator.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        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
-        27uysv4BpAP8ab3OpJQAAAAASUVORK5CYII=
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAUTSURBVFhHxVdbU1NXFOal7+1j+zPa5z45007pgw/ttE/W
+        SwULpWpREKjIpagTUCug3OQmBaWCN8aaICCBBDbkdk4CScgFEjp4AYqjTp+7ur8V9ikksVUG9cx8s/f+
+        9jpZ31l7rZVzMtRV9kvHuyWm9g+Lzlz66HWiwNT6wbrLf6/y2q5jJ+t6Vy/1WVZ7ro8+a5XjRrT1Dz0B
+        kvl0tu03RtYuD4w9TebBYa+m/fpKZX1X77rrjIyi0w3vwXls5Rktrj6n+3qEx43Q5x8xkvl0tnNLayQC
+        iyk8OOxhfqHv9lqxqeVjFoCwN/YPrijDNyHg6h3r38XVrVksAOeCUOLHALMzyONGDLlDjGQ+ne2wFqZB
+        11wKDw57mJuFj6TfbEMAzkgphYGaK2yMQGxhyeDT2b5MBMwT2tYFhCwjBv9WBMxeaDL4Ny9AVorn0I8G
+        v20CUOPKCZJNzRUm/YsMTQ/R1FdfG3w6W2doiaz6fAoPDnuYmyf1rQnwjAoSn3xKeuRBiq02qfG4JQEv
+        ewQh8zCJHTtoIRxPsQ1c7aP4o7XtyYFYZJGhOCUg0PMbTX2WSRHhNmyVzczZ8zSvB7ZHQHjUThEJxSkB
+        M3UXyZN3kEK/Dxq2ykYrOMYlui0CAt29DMUpAXp5Jc2cr6dA1xXDVtk4d31D/s7urQlIbsW20kqG4pBs
+        wER2Do39eo3Gq0yGLdtoIRKZmfKeiu1pxe6DhxmKUxFwfbuf5n1zpB8vM2wxLgSibO85nJ82ArjnlY4A
+        jgDFsYDoQ3JlZVP8wZ/kzs0zbDGGh8c5P1z7s1IEoGJmmy69ggBZo27Z7YBY7CFzEKB5w+TJP8JrJU4J
+        QHUEr90gd04uBeOPNwlAwuK+lxZgvWUhb/VZRmTCwRwEeKxT5K06zWtEAm1ZCUAJhscF6WUV5Hf4NgmY
+        OVdL0zt3kvDHXywAr0rYBKyNHaR3XiFvRw95e/qYc8gONt03QFp9E69d+QUUmI3SsCecWB8ppKBfdj/5
+        R+W5aSbbTIx5wHkgh/ftgzbyLiwzdze5E+J9DaqBsfJTJG4NSlhInKpmzuqN0vjFVhJt3bwWZVUkzKM0
+        6Ewkl9izj59QXO6lifoWGpHCmJcREvuySDR30Ji83y6FgTcL74uPwJ53yOiEnqOFzOEInDUyzDLZsJ5t
+        aeOzxRHEl5+S+8B3zEcmXeQ5aWInvLZNkc90hqIuL4niUn568P+ZA5O7dvMIIKsxQoCjpJTmNT+vg/23
+        uRlBAEpQk3vgYwsPyCmTVwnwt3bS3M07LBJR+l8BKLGJ/QfYCHDnfE/xpVUWMI35H8vMo1X7ZEeEAFWC
+        6h6HrBAlQDtWzAIxF7k/cJ5g/kIBUYdO9pITxo95fz5FUaeeELBnr8FzMyotZwFo2cG+m8Yekk74pCNZ
+        JS751IoXZ2rJd9vC8xQB/Q0Nf4kTlSTk+VvPXkwkECATCpz9eDkfjcF7ZXJ98SWNFZ8gsXsviYF7xt5k
+        4U9kP1rEZy5ktSh+tPeWTEgZHelnpLF9s4C2tv4nfpuTgBG7bpRQMLTInGPIRtPjToMH/HYX3R8Y4v1g
+        7LHB6+4A2e+OMh/wJcoUsGkR0uQLDXiL3DcElJxreh+fSypUqrlsBI4ASObT2cIZnjiZB4c9zLvv3Hte
+        WNP6OQvAhW81fC7hiwX/VDijTZCNg5HMp7FFk0GdJ/PgsAfnFXVdWnZz8zvr7hMXvtXwuYTQvE7gyVOc
+        v70rI+MfdS/8Y2Qm7Y4AAAAASUVORK5CYII=
 </value>
   </data>
   <data name="tsbDynIntegrator.Text" xml:space="preserve">
