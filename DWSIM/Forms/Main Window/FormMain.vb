@@ -80,7 +80,7 @@ Public Class FormMain
 
     Public Property ExternalUnitOperations As New Dictionary(Of String, Interfaces.IExternalUnitOperation)
 
-    Public Property Extenders As New Dictionary(Of String, IMenuExtenderCollection)
+    Public Property Extenders As New Dictionary(Of String, IExtenderCollection)
 
     Public COMonitoringObjects As New Dictionary(Of String, UnitOperations.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo)
 
@@ -141,14 +141,14 @@ Public Class FormMain
 
             'load extenders
 
-            Dim extlist As List(Of IMenuExtenderCollection) = GetExtenders(LoadExtenderDLLs())
+            Dim extlist As List(Of IExtenderCollection) = GetExtenders(LoadExtenderDLLs())
 
             For Each extender In extlist
                 Extenders.Add(extender.ID, extender)
                 Try
-                    If extender.Level = MenuExtenderLevel.MainWindow Then
+                    If extender.Level = ExtenderLevel.MainWindow Then
                         Dim newmenuitem As ToolStripMenuItem = Nothing
-                        If extender.Category = MenuExtenderCategory.NewItem Then
+                        If extender.Category = ExtenderCategory.NewItem Then
                             newmenuitem = New ToolStripMenuItem()
                             newmenuitem.Text = extender.DisplayText
                             newmenuitem.DisplayStyle = ToolStripItemDisplayStyle.Text
@@ -162,32 +162,35 @@ Public Class FormMain
                                                           item.Run()
                                                       End Sub
                             Select Case extender.Category
-                                Case MenuExtenderCategory.File
+                                Case ExtenderCategory.File
                                     If item.InsertAtPosition > 0 Then
                                         FileTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                     Else
                                         FileTSMI.DropDownItems.Add(exttsmi)
                                     End If
-                                Case MenuExtenderCategory.Edit
+                                Case ExtenderCategory.Edit
                                     If item.InsertAtPosition > 0 Then
                                         EditTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                     Else
                                         EditTSMI.DropDownItems.Add(exttsmi)
                                     End If
-                                Case MenuExtenderCategory.Tools
+                                Case ExtenderCategory.Tools
                                     If item.InsertAtPosition > 0 Then
                                         ToolsTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                     Else
                                         ToolsTSMI.DropDownItems.Add(exttsmi)
                                     End If
-                                Case MenuExtenderCategory.Help
+                                Case ExtenderCategory.Help
                                     If item.InsertAtPosition > 0 Then
                                         HelpTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                     Else
                                         HelpTSMI.DropDownItems.Add(exttsmi)
                                     End If
-                                Case MenuExtenderCategory.NewItem
+                                Case ExtenderCategory.NewItem
                                     newmenuitem?.DropDownItems.Add(exttsmi)
+                                Case ExtenderCategory.InitializationScript
+                                    item.SetMainWindow(Me)
+                                    item.Run()
                             End Select
                         Next
                         If newmenuitem IsNot Nothing Then
@@ -512,21 +515,21 @@ Public Class FormMain
 
     End Function
 
-    Function GetExtenders(ByVal alist As List(Of Assembly)) As List(Of IMenuExtenderCollection)
+    Function GetExtenders(ByVal alist As List(Of Assembly)) As List(Of IExtenderCollection)
 
         Dim availableTypes As New List(Of Type)()
 
         For Each currentAssembly As Assembly In alist
             Try
-                availableTypes.AddRange(currentAssembly.GetTypes())
+                availableTypes.AddRange(currentAssembly.GetExportedTypes())
             Catch ex As Exception
                 MessageBox.Show(ex.Message, "Error loading Extender", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         Next
 
-        Dim extList As List(Of Type) = availableTypes.FindAll(Function(t) t Is GetType(IMenuExtenderCollection))
+        Dim extList As List(Of Type) = availableTypes.FindAll(Function(t) t.GetInterfaces().Contains(GetType(Interfaces.IExtenderCollection)))
 
-        Return extList.ConvertAll(Of IMenuExtenderCollection)(Function(t As Type) TryCast(Activator.CreateInstance(t), IMenuExtenderCollection))
+        Return extList.ConvertAll(Of IExtenderCollection)(Function(t As Type) TryCast(Activator.CreateInstance(t), IExtenderCollection))
 
     End Function
 
@@ -3558,12 +3561,16 @@ Label_00CC:
     End Sub
 
     Private Sub ExitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExitToolStripMenuItem.Click
+
         Me.Close()
+
     End Sub
 
     Private Sub AboutToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AboutToolStripMenuItem.Click
+
         Dim frmAbout As New AboutBox
         frmAbout.ShowDialog(Me)
+
     End Sub
 
     Private Sub OpenRecent_click(ByVal sender As System.Object, ByVal e As System.EventArgs)

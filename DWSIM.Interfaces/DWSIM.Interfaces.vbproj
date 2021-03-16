@@ -71,6 +71,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -111,7 +113,7 @@
     <Compile Include="IDynamicsIntegrator.vb" />
     <Compile Include="IInput.vb" />
     <Compile Include="IMaterialStream.vb" />
-    <Compile Include="IMenuExtender.vb" />
+    <Compile Include="IExtender.vb" />
     <Compile Include="IPersistStream.vb" />
     <Compile Include="IPhase.vb" />
     <Compile Include="IPhaseProperties.vb" />
@@ -125,6 +127,7 @@
     <Compile Include="IExternalUnitOperation.vb" />
     <Compile Include="ISpecialOps.vb" />
     <Compile Include="ISimulationObject.vb" />
+    <Compile Include="ISplashScreen.vb" />
     <Compile Include="ISwitch.vb" />
     <Compile Include="IUndoRedoAction.vb" />
     <Compile Include="IUnitsOfMeasure.vb" />

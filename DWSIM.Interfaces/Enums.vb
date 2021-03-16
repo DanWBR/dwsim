@@ -490,14 +490,14 @@ Namespace Enums
 
     End Enum
 
-    Public Enum MenuExtenderLevel
+    Public Enum ExtenderLevel
 
         MainWindow = 0
         FlowsheetWindow = 1
 
     End Enum
 
-    Public Enum MenuExtenderCategory
+    Public Enum ExtenderCategory
 
         File = 0
         Edit = 1
@@ -513,6 +513,7 @@ Namespace Enums
         FlowsheetSurfaceSelected = 11
         FlowsheetSurfaceNotSelected = 12
         ToolStrip = 13
+        InitializationScript = 14
 
     End Enum
 

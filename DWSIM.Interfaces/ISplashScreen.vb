@@ -16,36 +16,8 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Public Interface IMenuExtenderCollection
+Public Interface ISplashScreen
 
-    Property ID As String
-
-    Property Description As String
-
-    Property DisplayText As String
-
-    Property Category As Enums.MenuExtenderCategory
-
-    Property Level As Enums.MenuExtenderLevel
-
-    Property Collection As List(Of IMenuExtender)
-
-End Interface
-
-Public Interface IMenuExtender
-
-    Property ID As String
-
-    Function SetMainWindow(mainwindow As Object)
-
-    Function SetFlowsheet(form As IFlowsheet) As Boolean
-
-    Property DisplayText As String
-
-    Property DisplayImage As Object
-
-    Property InsertAtPosition As Integer
-
-    Sub Run()
+    Function GetSplashScreen() As System.Windows.Forms.Form
 
 End Interface

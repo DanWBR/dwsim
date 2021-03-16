@@ -84,7 +84,7 @@ Public Class FlowsheetSurface_SkiaSharp
         'load context menu extenders
         For Each extender In My.Application.MainWindowForm.Extenders.Values
             Try
-                If extender.Level = MenuExtenderLevel.FlowsheetWindow Then
+                If extender.Level = ExtenderLevel.FlowsheetWindow Then
                     For Each item In extender.Collection
                         Dim exttsmi As New ToolStripMenuItem
                         exttsmi.Text = item.DisplayText
@@ -95,13 +95,13 @@ Public Class FlowsheetSurface_SkiaSharp
                                                       item.Run()
                                                   End Sub
                         Select Case extender.Category
-                            Case MenuExtenderCategory.FlowsheetSurfaceNotSelected
+                            Case ExtenderCategory.FlowsheetSurfaceNotSelected
                                 If item.InsertAtPosition > 0 Then
                                     CMS_NoSel.Items.Insert(item.InsertAtPosition, exttsmi)
                                 Else
                                     CMS_NoSel.Items.Add(exttsmi)
                                 End If
-                            Case MenuExtenderCategory.FlowsheetSurfaceSelected
+                            Case ExtenderCategory.FlowsheetSurfaceSelected
                                 If item.InsertAtPosition > 0 Then
                                     CMS_Sel.Items.Insert(item.InsertAtPosition, exttsmi)
                                 Else
