@@ -459,6 +459,9 @@
   <data name="btnCreateAndConnectEnergy.ToolTip1" xml:space="preserve">
     <value />
   </data>
+  <data name="btnCreateAndConnectEnergy.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="btnCreateAndConnectOutlet1.Location" type="System.Drawing.Point, System.Drawing">
     <value>304, 50</value>
   </data>
@@ -468,6 +471,9 @@
   <data name="btnCreateAndConnectOutlet1.ToolTip1" xml:space="preserve">
     <value />
   </data>
+  <data name="btnCreateAndConnectOutlet1.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="btnCreateAndConnectInlet1.Location" type="System.Drawing.Point, System.Drawing">
     <value>304, 23</value>
   </data>
@@ -475,6 +481,9 @@
     <value>Create and Connect</value>
   </data>
   <data name="btnCreateAndConnectInlet1.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="btnCreateAndConnectInlet1.ToolTip2" xml:space="preserve">
     <value />
   </data>
   <data name="btnDisconnectEnergy.Location" type="System.Drawing.Point, System.Drawing">

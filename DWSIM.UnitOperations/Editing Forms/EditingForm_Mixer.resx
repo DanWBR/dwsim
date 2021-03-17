@@ -150,9 +150,6 @@
   <data name="btnCreateAndConnectOutlet1.ToolTip" xml:space="preserve">
     <value>Criar e Conectar</value>
   </data>
-  <data name="btnCreateAndConnectOutlet1.ToolTip1" xml:space="preserve">
-    <value>Criar e Conectar</value>
-  </data>
   <data name="&gt;&gt;btnCreateAndConnectOutlet1.Name" xml:space="preserve">
     <value>btnCreateAndConnectOutlet1</value>
   </data>
@@ -184,9 +181,6 @@
     <value>46</value>
   </data>
   <data name="btnCreateAndConnectInlet6.ToolTip" xml:space="preserve">
-    <value>Criar e Conectar</value>
-  </data>
-  <data name="btnCreateAndConnectInlet6.ToolTip1" xml:space="preserve">
     <value>Criar e Conectar</value>
   </data>
   <data name="&gt;&gt;btnCreateAndConnectInlet6.Name" xml:space="preserve">
@@ -222,9 +216,6 @@
   <data name="btnCreateAndConnectInlet5.ToolTip" xml:space="preserve">
     <value>Criar e Conectar</value>
   </data>
-  <data name="btnCreateAndConnectInlet5.ToolTip1" xml:space="preserve">
-    <value>Criar e Conectar</value>
-  </data>
   <data name="&gt;&gt;btnCreateAndConnectInlet5.Name" xml:space="preserve">
     <value>btnCreateAndConnectInlet5</value>
   </data>
@@ -256,9 +247,6 @@
     <value>44</value>
   </data>
   <data name="btnCreateAndConnectInlet4.ToolTip" xml:space="preserve">
-    <value>Criar e Conectar</value>
-  </data>
-  <data name="btnCreateAndConnectInlet4.ToolTip1" xml:space="preserve">
     <value>Criar e Conectar</value>
   </data>
   <data name="&gt;&gt;btnCreateAndConnectInlet4.Name" xml:space="preserve">
@@ -294,9 +282,6 @@
   <data name="btnCreateAndConnectInlet3.ToolTip" xml:space="preserve">
     <value>Criar e Conectar</value>
   </data>
-  <data name="btnCreateAndConnectInlet3.ToolTip1" xml:space="preserve">
-    <value>Criar e Conectar</value>
-  </data>
   <data name="&gt;&gt;btnCreateAndConnectInlet3.Name" xml:space="preserve">
     <value>btnCreateAndConnectInlet3</value>
   </data>
@@ -330,9 +315,6 @@
   <data name="btnCreateAndConnectInlet2.ToolTip" xml:space="preserve">
     <value>Criar e Conectar</value>
   </data>
-  <data name="btnCreateAndConnectInlet2.ToolTip1" xml:space="preserve">
-    <value>Criar e Conectar</value>
-  </data>
   <data name="&gt;&gt;btnCreateAndConnectInlet2.Name" xml:space="preserve">
     <value>btnCreateAndConnectInlet2</value>
   </data>
@@ -364,9 +346,6 @@
     <value>41</value>
   </data>
   <data name="btnCreateAndConnectInlet1.ToolTip" xml:space="preserve">
-    <value>Criar e Conectar</value>
-  </data>
-  <data name="btnCreateAndConnectInlet1.ToolTip1" xml:space="preserve">
     <value>Criar e Conectar</value>
   </data>
   <data name="&gt;&gt;btnCreateAndConnectInlet1.Name" xml:space="preserve">
@@ -1546,6 +1525,6 @@
     <value>EditingForm_Mixer</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=6.3.7603.33002, Culture=neutral, PublicKeyToken=null</value>
+    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=6.4.5.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

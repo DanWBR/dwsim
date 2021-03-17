@@ -654,9 +654,6 @@
   <data name="btnCreateAndConnectOutlet2.ToolTip" xml:space="preserve">
     <value>Criar e Conectar</value>
   </data>
-  <data name="btnCreateAndConnectOutlet2.ToolTip1" xml:space="preserve">
-    <value>Criar e Conectar</value>
-  </data>
   <data name="&gt;&gt;btnCreateAndConnectOutlet2.Name" xml:space="preserve">
     <value>btnCreateAndConnectOutlet2</value>
   </data>
@@ -690,9 +687,6 @@
   <data name="btnCreateAndConnectOutlet1.ToolTip" xml:space="preserve">
     <value>Criar e Conectar</value>
   </data>
-  <data name="btnCreateAndConnectOutlet1.ToolTip1" xml:space="preserve">
-    <value>Criar e Conectar</value>
-  </data>
   <data name="&gt;&gt;btnCreateAndConnectOutlet1.Name" xml:space="preserve">
     <value>btnCreateAndConnectOutlet1</value>
   </data>
@@ -724,9 +718,6 @@
     <value>45</value>
   </data>
   <data name="btnCreateAndConnectInlet1.ToolTip" xml:space="preserve">
-    <value>Criar e Conectar</value>
-  </data>
-  <data name="btnCreateAndConnectInlet1.ToolTip1" xml:space="preserve">
     <value>Criar e Conectar</value>
   </data>
   <data name="&gt;&gt;btnCreateAndConnectInlet1.Name" xml:space="preserve">
@@ -1075,6 +1066,6 @@
     <value>EditingForm_SolidsSep</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=5.7.7108.16983, Culture=neutral, PublicKeyToken=null</value>
+    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=6.4.5.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

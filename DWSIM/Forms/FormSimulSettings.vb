@@ -971,12 +971,12 @@ Public Class FormSimulSettings
         For Each r As DataGridViewRow In ogc1.Rows
             If Not r.Cells(2).Value Is Nothing Then
                 If r.Cells(2).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Or
-                   r.Cells(3).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Or
-                   r.Cells(5).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Then
+                   r.Cells(4).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Or
+                   r.Cells(6).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Then
                     r.Visible = True
                     If r.Cells(2).Value.ToString.ToLower.Equals(Me.TextBox1.Text.ToLower) Or
-                                       r.Cells(3).Value.ToString.ToLower.Equals(Me.TextBox1.Text.ToLower) Or
-                                       r.Cells(5).Value.ToString.ToLower.Equals(Me.TextBox1.Text.ToLower) Then
+                                       r.Cells(4).Value.ToString.ToLower.Equals(Me.TextBox1.Text.ToLower) Or
+                                       r.Cells(6).Value.ToString.ToLower.Equals(Me.TextBox1.Text.ToLower) Then
                         r.Selected = True
                         needselecting = False
                     End If
@@ -1379,6 +1379,9 @@ Public Class FormSimulSettings
                 Try
                     Dim comp = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BaseClasses.ConstantProperties)(File.ReadAllText(fn))
                     If Not Me.FrmChild.Options.SelectedComponents.ContainsKey(comp.Name) Then
+                        If Not Me.FrmChild.AvailableCompounds.ContainsKey(comp.Name) Then
+                            Me.FrmChild.AvailableCompounds.Add(comp.Name, comp)
+                        End If
                         Me.FrmChild.Options.SelectedComponents.Add(comp.Name, comp)
                         Dim ms As Streams.MaterialStream
                         Dim proplist As New ArrayList

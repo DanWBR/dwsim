@@ -2666,6 +2666,10 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 End If
             Next
 
+            If keys.Count = 0 Then
+                Throw New Exception("Error calculating saturation temperature.")
+            End If
+
             key = keys.OrderBy(Function(k) Math.Abs(Vtb(k) - 300.0)).First()
 
             key = 0

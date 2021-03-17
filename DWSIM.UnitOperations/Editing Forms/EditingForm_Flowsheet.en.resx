@@ -119,10 +119,10 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblTag.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 20</value>
+    <value>271, 20</value>
   </data>
   <data name="chkActive.Location" type="System.Drawing.Point, System.Drawing">
-    <value>368, 43</value>
+    <value>383, 43</value>
   </data>
   <data name="chkActive.ToolTip" xml:space="preserve">
     <value>Active/Inactive</value>
@@ -137,7 +137,7 @@
     <value>Object</value>
   </data>
   <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>403, 98</value>
+    <value>418, 98</value>
   </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>General Info</value>
@@ -160,244 +160,244 @@
 </value>
   </data>
   <data name="BtnSearch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>367, 23</value>
+    <value>382, 23</value>
   </data>
   <data name="btnCreateAndConnectOutlet10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>342, 433</value>
+    <value>357, 433</value>
   </data>
   <data name="btnCreateAndConnectOutlet10.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
   </data>
   <data name="btnCreateAndConnectOutlet9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>342, 412</value>
+    <value>357, 412</value>
   </data>
   <data name="btnCreateAndConnectOutlet9.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
   </data>
   <data name="btnCreateAndConnectOutlet8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>342, 391</value>
+    <value>357, 391</value>
   </data>
   <data name="btnCreateAndConnectOutlet8.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
   </data>
   <data name="btnDisconnectOutlet10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>368, 433</value>
+    <value>383, 433</value>
   </data>
   <data name="btnDisconnectOutlet10.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
   <data name="btnDisconnectOutlet9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>368, 412</value>
+    <value>383, 412</value>
   </data>
   <data name="btnDisconnectOutlet9.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
   <data name="btnDisconnectOutlet8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>368, 391</value>
+    <value>383, 391</value>
   </data>
   <data name="btnDisconnectOutlet8.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
   <data name="btnCreateAndConnectOutlet7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>342, 369</value>
+    <value>357, 369</value>
   </data>
   <data name="btnCreateAndConnectOutlet7.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
   </data>
   <data name="btnDisconnectOutlet7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>368, 369</value>
+    <value>383, 369</value>
   </data>
   <data name="btnDisconnectOutlet7.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
   <data name="btnCreateAndConnectInlet10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>342, 212</value>
+    <value>357, 212</value>
   </data>
   <data name="btnCreateAndConnectInlet10.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
   </data>
   <data name="btnCreateAndConnectInlet9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>342, 191</value>
+    <value>357, 191</value>
   </data>
   <data name="btnCreateAndConnectInlet9.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
   </data>
   <data name="btnCreateAndConnectInlet8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>342, 170</value>
+    <value>357, 170</value>
   </data>
   <data name="btnCreateAndConnectInlet8.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
   </data>
   <data name="btnCreateAndConnectInlet7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>342, 149</value>
+    <value>357, 149</value>
   </data>
   <data name="btnCreateAndConnectInlet7.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
   </data>
   <data name="btnDisconnect10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>368, 212</value>
+    <value>383, 212</value>
   </data>
   <data name="btnDisconnect10.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
   <data name="btnDisconnect9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>368, 191</value>
+    <value>383, 191</value>
   </data>
   <data name="btnDisconnect9.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
   <data name="btnDisconnect8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>368, 170</value>
+    <value>383, 170</value>
   </data>
   <data name="btnDisconnect8.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
   <data name="btnDisconnect7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>368, 149</value>
+    <value>383, 149</value>
   </data>
   <data name="btnDisconnect7.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
   <data name="btnCreateAndConnectOutlet6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>342, 348</value>
+    <value>357, 348</value>
   </data>
   <data name="btnCreateAndConnectOutlet6.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
   </data>
   <data name="btnCreateAndConnectOutlet5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>342, 327</value>
+    <value>357, 327</value>
   </data>
   <data name="btnCreateAndConnectOutlet5.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
   </data>
   <data name="btnCreateAndConnectOutlet4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>342, 306</value>
+    <value>357, 306</value>
   </data>
   <data name="btnCreateAndConnectOutlet4.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
   </data>
   <data name="btnDisconnectOutlet6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>368, 348</value>
+    <value>383, 348</value>
   </data>
   <data name="btnDisconnectOutlet6.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
   <data name="btnDisconnectOutlet5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>368, 327</value>
+    <value>383, 327</value>
   </data>
   <data name="btnDisconnectOutlet5.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
   <data name="btnDisconnectOutlet4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>368, 306</value>
+    <value>383, 306</value>
   </data>
   <data name="btnDisconnectOutlet4.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
   <data name="btnCreateAndConnectOutlet3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>342, 285</value>
+    <value>357, 285</value>
   </data>
   <data name="btnCreateAndConnectOutlet3.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
   </data>
   <data name="btnCreateAndConnectOutlet2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>342, 264</value>
+    <value>357, 264</value>
   </data>
   <data name="btnCreateAndConnectOutlet2.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
   </data>
   <data name="btnCreateAndConnectOutlet1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>342, 243</value>
+    <value>357, 243</value>
   </data>
   <data name="btnCreateAndConnectOutlet1.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
   </data>
   <data name="btnCreateAndConnectInlet6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>342, 128</value>
+    <value>357, 128</value>
   </data>
   <data name="btnCreateAndConnectInlet6.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
   </data>
   <data name="btnCreateAndConnectInlet5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>342, 107</value>
+    <value>357, 107</value>
   </data>
   <data name="btnCreateAndConnectInlet5.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
   </data>
   <data name="btnCreateAndConnectInlet4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>342, 86</value>
+    <value>357, 86</value>
   </data>
   <data name="btnCreateAndConnectInlet4.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
   </data>
   <data name="btnCreateAndConnectInlet3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>342, 65</value>
+    <value>357, 65</value>
   </data>
   <data name="btnCreateAndConnectInlet3.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
   </data>
   <data name="btnCreateAndConnectInlet2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>342, 44</value>
+    <value>357, 44</value>
   </data>
   <data name="btnCreateAndConnectInlet2.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
   </data>
   <data name="btnCreateAndConnectInlet1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>342, 23</value>
+    <value>357, 23</value>
   </data>
   <data name="btnCreateAndConnectInlet1.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
   </data>
   <data name="btnDisconnectOutlet3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>368, 285</value>
+    <value>383, 285</value>
   </data>
   <data name="btnDisconnectOutlet3.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
   <data name="btnDisconnectOutlet2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>368, 264</value>
+    <value>383, 264</value>
   </data>
   <data name="btnDisconnectOutlet2.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
   <data name="btnDisconnectOutlet1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>368, 243</value>
+    <value>383, 243</value>
   </data>
   <data name="btnDisconnectOutlet1.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
   <data name="btnDisconnect6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>368, 128</value>
+    <value>383, 128</value>
   </data>
   <data name="btnDisconnect6.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
   <data name="btnDisconnect5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>368, 107</value>
+    <value>383, 107</value>
   </data>
   <data name="btnDisconnect5.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
   <data name="btnDisconnect4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>368, 86</value>
+    <value>383, 86</value>
   </data>
   <data name="btnDisconnect4.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
   <data name="btnDisconnect3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>368, 65</value>
+    <value>383, 65</value>
   </data>
   <data name="btnDisconnect3.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
   <data name="btnDisconnect2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>368, 44</value>
+    <value>383, 44</value>
   </data>
   <data name="btnDisconnect2.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
   <data name="btnDisconnect1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>368, 23</value>
+    <value>383, 23</value>
   </data>
   <data name="btnDisconnect1.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
@@ -412,10 +412,10 @@
     <value>Units</value>
   </data>
   <data name="dgvinputvars.Size" type="System.Drawing.Size, System.Drawing">
-    <value>383, 147</value>
+    <value>401, 171</value>
   </data>
   <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>389, 153</value>
+    <value>407, 177</value>
   </data>
   <data name="TabPage1.Text" xml:space="preserve">
     <value>Input</value>
@@ -429,14 +429,20 @@
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
+  <data name="dgvoutputvars.Size" type="System.Drawing.Size, System.Drawing">
+    <value>383, 147</value>
+  </data>
+  <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>389, 153</value>
+  </data>
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Output</value>
   </data>
   <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>397, 179</value>
+    <value>415, 203</value>
   </data>
   <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>403, 198</value>
+    <value>421, 222</value>
   </data>
   <data name="GroupBox6.Text" xml:space="preserve">
     <value>Linked Variables</value>
@@ -448,7 +454,7 @@
     <value>Outlet Stream 10</value>
   </data>
   <data name="cbOutlet10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 21</value>
+    <value>204, 21</value>
   </data>
   <data name="Label21.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 13</value>
@@ -457,7 +463,7 @@
     <value>Outlet Stream 9</value>
   </data>
   <data name="cbOutlet9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 21</value>
+    <value>204, 21</value>
   </data>
   <data name="Label22.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 13</value>
@@ -466,7 +472,7 @@
     <value>Outlet Stream 8</value>
   </data>
   <data name="cbOutlet8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 21</value>
+    <value>204, 21</value>
   </data>
   <data name="Label23.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 13</value>
@@ -475,7 +481,7 @@
     <value>Outlet Stream 7</value>
   </data>
   <data name="cbOutlet7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 21</value>
+    <value>204, 21</value>
   </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 13</value>
@@ -502,16 +508,16 @@
     <value>Inlet Stream 7</value>
   </data>
   <data name="cbInlet10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 21</value>
+    <value>204, 21</value>
   </data>
   <data name="cbInlet9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 21</value>
+    <value>204, 21</value>
   </data>
   <data name="cbInlet8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 21</value>
+    <value>204, 21</value>
   </data>
   <data name="cbInlet7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 21</value>
+    <value>204, 21</value>
   </data>
   <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 13</value>
@@ -520,7 +526,7 @@
     <value>Outlet Stream 6</value>
   </data>
   <data name="cbOutlet6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 21</value>
+    <value>204, 21</value>
   </data>
   <data name="Label18.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 13</value>
@@ -529,7 +535,7 @@
     <value>Outlet Stream 5</value>
   </data>
   <data name="cbOutlet5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 21</value>
+    <value>204, 21</value>
   </data>
   <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 13</value>
@@ -538,7 +544,7 @@
     <value>Outlet Stream 4</value>
   </data>
   <data name="cbOutlet4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 21</value>
+    <value>204, 21</value>
   </data>
   <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 13</value>
@@ -547,7 +553,7 @@
     <value>Outlet Stream 3</value>
   </data>
   <data name="cbOutlet3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 21</value>
+    <value>204, 21</value>
   </data>
   <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 13</value>
@@ -556,7 +562,7 @@
     <value>Outlet Stream 2</value>
   </data>
   <data name="cbOutlet2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 21</value>
+    <value>204, 21</value>
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 13</value>
@@ -589,22 +595,22 @@
     <value>Inlet Stream 3</value>
   </data>
   <data name="cbOutlet1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 21</value>
+    <value>204, 21</value>
   </data>
   <data name="cbInlet6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 21</value>
+    <value>204, 21</value>
   </data>
   <data name="cbInlet5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 21</value>
+    <value>204, 21</value>
   </data>
   <data name="cbInlet4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 21</value>
+    <value>204, 21</value>
   </data>
   <data name="cbInlet3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 21</value>
+    <value>204, 21</value>
   </data>
   <data name="cbInlet2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 21</value>
+    <value>204, 21</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 13</value>
@@ -613,7 +619,7 @@
     <value>Inlet Stream 2</value>
   </data>
   <data name="cbInlet1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 21</value>
+    <value>204, 21</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 13</value>
@@ -622,7 +628,7 @@
     <value>Inlet Stream 1</value>
   </data>
   <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>403, 469</value>
+    <value>418, 469</value>
   </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Connections</value>
@@ -649,7 +655,7 @@
     <value>Initialize on Load</value>
   </data>
   <data name="TbFileName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>287, 20</value>
+    <value>302, 20</value>
   </data>
   <data name="Label24.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 13</value>
@@ -658,7 +664,7 @@
     <value>Flowsheet</value>
   </data>
   <data name="btnViewFlowsheet.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 28</value>
+    <value>187, 28</value>
   </data>
   <data name="btnViewFlowsheet.Text" xml:space="preserve">
     <value>View Flowsheet</value>
@@ -667,12 +673,12 @@
     <value>Open Control Panel</value>
   </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>403, 137</value>
+    <value>418, 137</value>
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Calculation Parameters</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>426, 881</value>
+    <value>426, 941</value>
   </data>
 </root>

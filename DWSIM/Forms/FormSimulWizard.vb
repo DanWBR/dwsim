@@ -993,7 +993,9 @@ Public Class FormSimulWizard
             Try
                 Dim comp = f.BaseCompound
                 If Not Me.FrmChild.Options.SelectedComponents.ContainsKey(comp.Name) Then
-                    If Not Me.FrmChild.AvailableCompounds.ContainsKey(comp.Name) Then Me.FrmChild.AvailableCompounds.Add(comp.Name, comp)
+                    If Not Me.FrmChild.AvailableCompounds.ContainsKey(comp.Name) Then
+                        Me.FrmChild.AvailableCompounds.Add(comp.Name, comp)
+                    End If
                     Me.FrmChild.Options.SelectedComponents.Add(comp.Name, comp)
                     Dim ms As Streams.MaterialStream
                     Dim proplist As New ArrayList
@@ -1020,6 +1022,9 @@ Public Class FormSimulWizard
                 Try
                     Dim comp = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BaseClasses.ConstantProperties)(File.ReadAllText(fn))
                     If Not Me.FrmChild.Options.SelectedComponents.ContainsKey(comp.Name) Then
+                        If Not Me.FrmChild.AvailableCompounds.ContainsKey(comp.Name) Then
+                            Me.FrmChild.AvailableCompounds.Add(comp.Name, comp)
+                        End If
                         Me.FrmChild.Options.SelectedComponents.Add(comp.Name, comp)
                         Dim ms As Streams.MaterialStream
                         Dim proplist As New ArrayList
