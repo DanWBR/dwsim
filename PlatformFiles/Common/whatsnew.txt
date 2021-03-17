@@ -1,11 +1,10 @@
-Version 6.4.5
+Version 6.4.6
 
-- Fixed Compressor/Expander power calculation in Polytropic mode
-- Fixed Gibbs Reactor in Adiabatic mode
-- Fixed issue with VLLE Flash
-- Steady-State Adjust/Controller enhancements
-- Fixed UNIFAC-LL (issue 118)
-- Fixed Condenser/Reboiler pressure editing (Cross-Platform UI)
-- Fixed editors not updating after flowsheet solve (Cross-Platform UI)
-- Fixed issue in Advanced Kinetics expression parser
-- Fixed Solids Separator energy balance warning
+Added Wilson Activity Coefficient Property Package
+Updated/Redesigned Compound Creator (Classic UI)
+Added Compound Creator Wizard to Welcome Screen (Classic UI)
+Smoother compound search (Classic UI)
+Updated Automation interface
+Added PID Controller Setpoint property
+Added Dynamic Integrator scripting events
+Decreased Auto-Layout distance between objects
