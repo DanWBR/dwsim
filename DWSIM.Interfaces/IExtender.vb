@@ -18,33 +18,33 @@
 
 Public Interface IExtenderCollection
 
-    Property ID As String
+    ReadOnly Property ID As String
 
-    Property Description As String
+    ReadOnly Property Description As String
 
-    Property DisplayText As String
+    ReadOnly Property DisplayText As String
 
-    Property Category As Enums.ExtenderCategory
+    ReadOnly Property Category As Enums.ExtenderCategory
 
-    Property Level As Enums.ExtenderLevel
+    ReadOnly Property Level As Enums.ExtenderLevel
 
-    Property Collection As List(Of IExtender)
+    ReadOnly Property Collection As List(Of IExtender)
 
 End Interface
 
 Public Interface IExtender
 
-    Property ID As String
+    ReadOnly Property ID As String
 
     Function SetMainWindow(mainwindow As Object)
 
     Function SetFlowsheet(form As IFlowsheet) As Boolean
 
-    Property DisplayText As String
+    ReadOnly Property DisplayText As String
 
-    Property DisplayImage As System.Drawing.Bitmap
+    ReadOnly Property DisplayImage As System.Drawing.Bitmap
 
-    Property InsertAtPosition As Integer
+    ReadOnly Property InsertAtPosition As Integer
 
     Sub Run()
 
