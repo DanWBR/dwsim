@@ -525,6 +525,20 @@ Public Class Utility
             Next
         End If
 
+        ppath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location), "extenders")
+        If Directory.Exists(ppath) Then
+            Dim otheruos As String() = Directory.GetFiles(ppath, "*.dll", SearchOption.TopDirectoryOnly)
+            For Each fpath In otheruos
+                Try
+                    Dim pplist As List(Of Interfaces.IExternalUnitOperation) = GetUnitOperations(Assembly.LoadFile(fpath))
+                    For Each pp In pplist
+                        euos.Add(pp)
+                    Next
+                Catch ex As Exception
+                End Try
+            Next
+        End If
+
         Return euos
 
     End Function
@@ -554,6 +568,20 @@ Public Class Utility
                 Next
             Catch ex As Exception
                 MessageBox.Show(ex.ToString)
+            End Try
+        End If
+
+        ppath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location), "extenders")
+        If Directory.Exists(ppath) Then
+            Try
+                Dim otherpps As String() = Directory.GetFiles(ppath, "*.dll", SearchOption.TopDirectoryOnly)
+                For Each fpath In otherpps
+                    Dim pplist As List(Of Interfaces.IPropertyPackage) = GetPropertyPackages(Assembly.LoadFile(fpath))
+                    For Each pp In pplist
+                        ppacks.Add(pp)
+                    Next
+                Next
+            Catch ex As Exception
             End Try
         End If
 

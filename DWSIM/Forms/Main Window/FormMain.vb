@@ -15,7 +15,6 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-'Imports DWSIM.SimulationObjects
 Imports System.ComponentModel
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports System.IO
@@ -134,14 +133,6 @@ Public Class FormMain
             Next
 
 #If Not WINE32 Then
-
-            'load external property packages from 'propertypackages' folder, if there is any
-
-            Dim epplist As List(Of PropertyPackage) = GetExternalPPs(LoadExternalPPs())
-
-            For Each pp As PropertyPackage In epplist
-                PropertyPackages.Add(pp.ComponentName, pp)
-            Next
 
             'load extenders
 
@@ -480,50 +471,6 @@ Public Class FormMain
     Function isPlugin(ByVal t As Type)
         Dim interfaceTypes As New List(Of Type)(t.GetInterfaces())
         Return (interfaceTypes.Contains(GetType(Interfaces.IUtilityPlugin)))
-    End Function
-
-    Private Function LoadExternalPPs() As List(Of Assembly)
-
-        Dim pluginassemblylist As List(Of Assembly) = New List(Of Assembly)
-
-        If Directory.Exists(Path.Combine(Environment.CurrentDirectory, "propertypackages")) Then
-
-            Dim dinfo As New DirectoryInfo(Path.Combine(Environment.CurrentDirectory, "propertypackages"))
-
-            Dim files() As FileInfo = dinfo.GetFiles("*.dll")
-
-            If Not files Is Nothing Then
-                For Each fi As FileInfo In files
-                    pluginassemblylist.Add(Assembly.LoadFrom(fi.FullName))
-                Next
-            End If
-
-        End If
-
-        Return pluginassemblylist
-
-    End Function
-
-    Function GetExternalPPs(ByVal alist As List(Of Assembly)) As List(Of PropertyPackage)
-
-        Dim availableTypes As New List(Of Type)()
-
-        For Each currentAssembly As Assembly In alist
-            Try
-                availableTypes.AddRange(currentAssembly.GetTypes())
-            Catch ex As Exception
-                MessageBox.Show(ex.Message.ToCharArray, "Error loading plugin", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End Try
-        Next
-
-        Dim ppList As List(Of Type) = availableTypes.FindAll(AddressOf isPP)
-
-        Return ppList.ConvertAll(Of PropertyPackage)(Function(t As Type) TryCast(Activator.CreateInstance(t), PropertyPackage))
-
-    End Function
-
-    Function isPP(ByVal t As Type)
-        Return (t Is GetType(PropertyPackage))
     End Function
 
     Private Function LoadExtenderDLLs() As List(Of Assembly)
