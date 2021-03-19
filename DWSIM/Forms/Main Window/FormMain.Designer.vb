@@ -891,7 +891,6 @@ Partial Class FormMain
     Friend WithEvents tsmiFOSSEE As ToolStripMenuItem
     Public WithEvents PatronToolStripMenuItem As ToolStripMenuItem
     Public WithEvents WelcomePanel As Panel
-    Friend WithEvents PainelDeBoasvindasToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents tsbInspector As ToolStripButton
     Friend WithEvents tsFileSeparator As ToolStripSeparator
     Friend WithEvents tsFolderSeparator As ToolStripSeparator
@@ -902,4 +901,5 @@ Partial Class FormMain
     Friend WithEvents CapitalCostToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents OPCPluginToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DTLToolStripMenuItem As ToolStripMenuItem
+    Public WithEvents PainelDeBoasvindasToolStripMenuItem As ToolStripMenuItem
 End Class

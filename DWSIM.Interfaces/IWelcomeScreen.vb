@@ -16,36 +16,10 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Public Interface IExtenderCollection
+Public Interface IWelcomeScreen
 
-    ReadOnly Property ID As String
+    Function GetWelcomeScreen() As System.Windows.Forms.UserControl
 
-    ReadOnly Property Description As String
-
-    ReadOnly Property DisplayText As String
-
-    ReadOnly Property Category As Enums.ExtenderCategory
-
-    ReadOnly Property Level As Enums.ExtenderLevel
-
-    ReadOnly Property Collection As List(Of IExtender)
-
-End Interface
-
-Public Interface IExtender
-
-    ReadOnly Property ID As String
-
-    Sub SetMainWindow(mainwindow As System.Windows.Forms.Form)
-
-    Sub SetFlowsheet(form As IFlowsheet)
-
-    ReadOnly Property DisplayText As String
-
-    ReadOnly Property DisplayImage As System.Drawing.Bitmap
-
-    ReadOnly Property InsertAtPosition As Integer
-
-    Sub Run()
+    Sub SetMainForm(form As System.Windows.Forms.Form)
 
 End Interface

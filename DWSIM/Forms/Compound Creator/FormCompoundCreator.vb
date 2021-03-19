@@ -38,7 +38,7 @@ Public Class FormCompoundCreator
     Public jb As New Joback
     Friend m_props As PROPS
 
-    Friend mycase As New CompoundGeneratorCase
+    Public mycase As New CompoundGeneratorCase
 
     Friend loaded As Boolean = False
     Friend PureUNIFACCompound As Boolean = True

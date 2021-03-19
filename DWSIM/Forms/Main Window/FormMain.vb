@@ -86,9 +86,13 @@ Public Class FormMain
 
     Public ObjectList As New Dictionary(Of String, Interfaces.ISimulationObject)
 
+    Public Property MostRecentFiles As Specialized.StringCollection
+
 #Region "    Form Events"
 
     Public Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+        MostRecentFiles = My.Settings.MostRecentFiles
 
         If GlobalSettings.Settings.OldUI Then
 
@@ -215,10 +219,7 @@ Public Class FormMain
 
             tsbInspector.Checked = GlobalSettings.Settings.InspectorEnabled
 
-            Me.FrmWelcome = New FormWelcome
-            Me.FrmWelcome.Owner = Me
-            Me.FrmWelcome.Dock = DockStyle.Fill
-            Me.WelcomePanel.Controls.Add(Me.FrmWelcome)
+            SetupWelcomeScreen()
 
         End If
 
@@ -393,6 +394,38 @@ Public Class FormMain
         Next
 
     End Sub
+
+    Private Sub SetupWelcomeScreen()
+
+        Dim splfile = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "extenders", "WelcomeScreen.dll")
+
+        If File.Exists(splfile) Then
+
+            Dim types = Assembly.LoadFrom(splfile).GetExportedTypes()
+
+            Dim tList As List(Of Type) = types.ToList().FindAll(Function(t) t.GetInterfaces().Contains(GetType(IWelcomeScreen)))
+
+            Dim lst = tList.ConvertAll(Function(t As Type) TryCast(Activator.CreateInstance(t), IWelcomeScreen))
+
+            lst(0).SetMainForm(Me)
+
+            Dim ucontrol = lst(0).GetWelcomeScreen()
+
+            ucontrol.Dock = DockStyle.Fill
+
+            Me.WelcomePanel.Controls.Add(ucontrol)
+
+        Else
+
+            Me.FrmWelcome = New FormWelcome
+            Me.FrmWelcome.Owner = Me
+            Me.FrmWelcome.Dock = DockStyle.Fill
+            Me.WelcomePanel.Controls.Add(Me.FrmWelcome)
+
+        End If
+
+    End Sub
+
 
     Private Function LoadPluginAssemblies() As List(Of Assembly)
 

@@ -60,6 +60,7 @@ Partial Class FormLoadingSimulation
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
-    Friend WithEvents Label1 As System.Windows.Forms.Label
+
+    Public WithEvents ProgressBar1 As ProgressBar
+    Public WithEvents Label1 As Label
 End Class
