@@ -10,6 +10,7 @@ Amir Mehrkesh
 Anders Andreasen
 Andras Nady
 Andrew Dickson
+Bill Byers
 Bo Tjernberg
 Bruce
 Bruce Logue
@@ -19,6 +20,7 @@ Christian Hornhofer
 Christian Jordan
 Daniela Barajas Ivey
 David 
+David Whitlock
 Diego A. Acosta
 Domenico Marchese
 Don Harrold

@@ -716,6 +716,9 @@ Namespace Reactors
                 For j = 0 To c
                     sum_e += N0(Me.ComponentIDs(j)) * Me.ElementMatrix(i, j)
                 Next
+                If sum_e < 1.0E-20 Then
+                    Throw New Exception("The Element Matrix is invalid. Check reacting components with zero flow at the reactor inlet.")
+                End If
                 Me.TotalElements(i) = sum_e
             Next
 
