@@ -91,7 +91,7 @@ Public Class FlowsheetSurface_SkiaSharp
                         exttsmi.Image = item.DisplayImage
                         AddHandler exttsmi.Click, Sub(s2, e2)
                                                       item.SetMainWindow(My.Application.MainWindowForm)
-                                                      item.SetFlowsheet(Me)
+                                                      item.SetFlowsheet(Flowsheet)
                                                       item.Run()
                                                   End Sub
                         Select Case extender.Category
