@@ -1977,57 +1977,57 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
         Dim addedcomps As New List(Of String)
         Dim casnumbers As New List(Of String)
 
-        Dim tc = Task.Factory.StartNew(Sub()
-                                           Dim csdb As New Databases.ChemSep
-                                           Dim cpa() As ConstantProperties
-                                           csdb.Load()
-                                           cpa = csdb.Transfer()
-                                           For Each cp As ConstantProperties In cpa
-                                               If Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
-                                           Next
-                                           Dim cpdb As New Databases.CoolProp
-                                           cpdb.Load()
-                                           cpa = cpdb.Transfer()
-                                           addedcomps = AvailableCompounds.Keys.Select(Function(x) x.ToLower).ToList()
-                                           For Each cp As ConstantProperties In cpa
-                                               If Not addedcomps.Contains(cp.Name.ToLower) Then AvailableCompounds.Add(cp.Name, cp)
-                                           Next
-                                           Dim bddb As New Databases.Biodiesel
-                                           bddb.Load()
-                                           cpa = bddb.Transfer()
-                                           addedcomps = AvailableCompounds.Keys.Select(Function(x) x.ToLower).ToList()
-                                           For Each cp As ConstantProperties In cpa
-                                               If Not addedcomps.Contains(cp.Name.ToLower) Then AvailableCompounds.Add(cp.Name, cp)
-                                           Next
-                                           Dim chedl As New Databases.ChEDL_Thermo
-                                           chedl.Load()
-                                           cpa = chedl.Transfer().ToArray()
-                                           addedcomps = AvailableCompounds.Keys.Select(Function(x) x.ToLower).ToList()
-                                           casnumbers = AvailableCompounds.Values.Select(Function(x) x.CAS_Number).ToList()
-                                           For Each cp As ConstantProperties In cpa
-                                               If Not addedcomps.Contains(cp.Name.ToLower) And Not addedcomps.Contains(cp.Name) Then
-                                                   If Not casnumbers.Contains(cp.CAS_Number) Then
-                                                       If Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
-                                                   End If
-                                               End If
-                                           Next
-                                           Dim elec As New Databases.Electrolyte
-                                           elec.Load()
-                                           cpa = elec.Transfer().ToArray()
-                                           addedcomps = AvailableCompounds.Keys.Select(Function(x) x.ToLower).ToList()
-                                           For Each cp As ConstantProperties In cpa
-                                               If Not addedcomps.Contains(cp.Name.ToLower) AndAlso Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
-                                           Next
-                                           Dim comps = Databases.UserDB.LoadAdditionalCompounds()
-                                           For Each cp As BaseClasses.ConstantProperties In comps
-                                               If Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
-                                           Next
-                                           csdb.Dispose()
-                                           cpdb.Dispose()
-                                           chedl.Dispose()
-                                           AddSystemsOfUnits()
-                                           AddDefaultProperties()
-                                       End Sub)
+        Dim tc = Task.Run(Sub()
+                              Dim csdb As New Databases.ChemSep
+                              Dim cpa() As ConstantProperties
+                              csdb.Load()
+                              cpa = csdb.Transfer()
+                              For Each cp As ConstantProperties In cpa
+                                  If Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
+                              Next
+                              Dim cpdb As New Databases.CoolProp
+                              cpdb.Load()
+                              cpa = cpdb.Transfer()
+                              addedcomps = AvailableCompounds.Keys.Select(Function(x) x.ToLower).ToList()
+                              For Each cp As ConstantProperties In cpa
+                                  If Not addedcomps.Contains(cp.Name.ToLower) Then AvailableCompounds.Add(cp.Name, cp)
+                              Next
+                              Dim bddb As New Databases.Biodiesel
+                              bddb.Load()
+                              cpa = bddb.Transfer()
+                              addedcomps = AvailableCompounds.Keys.Select(Function(x) x.ToLower).ToList()
+                              For Each cp As ConstantProperties In cpa
+                                  If Not addedcomps.Contains(cp.Name.ToLower) Then AvailableCompounds.Add(cp.Name, cp)
+                              Next
+                              Dim chedl As New Databases.ChEDL_Thermo
+                              chedl.Load()
+                              cpa = chedl.Transfer().ToArray()
+                              addedcomps = AvailableCompounds.Keys.Select(Function(x) x.ToLower).ToList()
+                              casnumbers = AvailableCompounds.Values.Select(Function(x) x.CAS_Number).ToList()
+                              For Each cp As ConstantProperties In cpa
+                                  If Not addedcomps.Contains(cp.Name.ToLower) And Not addedcomps.Contains(cp.Name) Then
+                                      If Not casnumbers.Contains(cp.CAS_Number) Then
+                                          If Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
+                                      End If
+                                  End If
+                              Next
+                              Dim elec As New Databases.Electrolyte
+                              elec.Load()
+                              cpa = elec.Transfer().ToArray()
+                              addedcomps = AvailableCompounds.Keys.Select(Function(x) x.ToLower).ToList()
+                              For Each cp As ConstantProperties In cpa
+                                  If Not addedcomps.Contains(cp.Name.ToLower) AndAlso Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
+                              Next
+                              Dim comps = Databases.UserDB.LoadAdditionalCompounds()
+                              For Each cp As BaseClasses.ConstantProperties In comps
+                                  If Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
+                              Next
+                              csdb.Dispose()
+                              cpdb.Dispose()
+                              chedl.Dispose()
+                              AddSystemsOfUnits()
+                              AddDefaultProperties()
+                          End Sub)
 
         If GlobalSettings.Settings.AutomationMode Then tc.Wait()
 
@@ -2215,7 +2215,7 @@ Label_00CC:
 
         Dim plist As New Concurrent.BlockingCollection(Of PropertyPackage)
 
-        Dim t1 = New Task(Sub()
+        Dim t1 = Task.Run(Sub()
 
                               Dim CPPP As CoolPropPropertyPackage = New CoolPropPropertyPackage()
                               CPPP.ComponentName = "CoolProp"
@@ -2241,7 +2241,7 @@ Label_00CC:
 
                           End Sub)
 
-        Dim t2 = New Task(Sub()
+        Dim t2 = Task.Run(Sub()
 
                               Dim PRPP As PengRobinsonPropertyPackage = New PengRobinsonPropertyPackage()
                               PRPP.ComponentName = "Peng-Robinson (PR)"
@@ -2249,7 +2249,7 @@ Label_00CC:
 
                           End Sub)
 
-        Dim t3 = New Task(Sub()
+        Dim t3 = Task.Run(Sub()
 
                               Dim PRSV2PP As PRSV2PropertyPackage = New PRSV2PropertyPackage()
                               PRSV2PP.ComponentName = "Peng-Robinson-Stryjek-Vera 2 (PRSV2-M)"
@@ -2261,7 +2261,7 @@ Label_00CC:
 
                           End Sub)
 
-        Dim t4 = New Task(Sub()
+        Dim t4 = Task.Run(Sub()
 
                               Dim SRKPP As SRKPropertyPackage = New SRKPropertyPackage()
                               SRKPP.ComponentName = "Soave-Redlich-Kwong (SRK)"
@@ -2269,7 +2269,7 @@ Label_00CC:
 
                           End Sub)
 
-        Dim t5 = New Task(Sub()
+        Dim t5 = Task.Run(Sub()
 
                               Dim PRLKPP As PengRobinsonLKPropertyPackage = New PengRobinsonLKPropertyPackage()
                               PRLKPP.ComponentName = "Peng-Robinson / Lee-Kesler (PR/LK)"
@@ -2277,7 +2277,7 @@ Label_00CC:
 
                           End Sub)
 
-        Dim t6 = New Task(Sub()
+        Dim t6 = Task.Run(Sub()
 
                               Dim UPP As UNIFACPropertyPackage = New UNIFACPropertyPackage()
                               UPP.ComponentName = "UNIFAC"
@@ -2285,7 +2285,7 @@ Label_00CC:
 
                           End Sub)
 
-        Dim t7 = New Task(Sub()
+        Dim t7 = Task.Run(Sub()
 
                               Dim ULLPP As UNIFACLLPropertyPackage = New UNIFACLLPropertyPackage()
                               ULLPP.ComponentName = "UNIFAC-LL"
@@ -2293,7 +2293,7 @@ Label_00CC:
 
                           End Sub)
 
-        Dim t8 = New Task(Sub()
+        Dim t8 = Task.Run(Sub()
 
                               Dim MUPP As MODFACPropertyPackage = New MODFACPropertyPackage()
                               MUPP.ComponentName = "Modified UNIFAC (Dortmund)"
@@ -2301,7 +2301,7 @@ Label_00CC:
 
                           End Sub)
 
-        Dim t9 = New Task(Sub()
+        Dim t9 = Task.Run(Sub()
 
                               Dim NUPP As NISTMFACPropertyPackage = New NISTMFACPropertyPackage()
                               NUPP.ComponentName = "Modified UNIFAC (NIST)"
@@ -2309,7 +2309,7 @@ Label_00CC:
 
                           End Sub)
 
-        Dim t10 = New Task(Sub()
+        Dim t10 = Task.Run(Sub()
 
                                Dim WPP As WilsonPropertyPackage = New WilsonPropertyPackage()
                                WPP.ComponentName = "Wilson"
@@ -2341,7 +2341,7 @@ Label_00CC:
 
                            End Sub)
 
-        Dim t11 = New Task(Sub()
+        Dim t11 = Task.Run(Sub()
 
 
                                Dim EUQPP As ExUNIQUACPropertyPackage = New ExUNIQUACPropertyPackage()
@@ -2368,7 +2368,7 @@ Label_00CC:
 
                            End Sub)
 
-        Dim t12 = New Task(Sub()
+        Dim t12 = Task.Run(Sub()
 
                                Dim PR78PP As PengRobinsonPropertyPackage = New PengRobinsonPropertyPackage()
                                PR78PP.ComponentName = "Peng-Robinson 1978 (PR78)"
@@ -2376,34 +2376,19 @@ Label_00CC:
 
                            End Sub)
 
-        Dim t13 = New Task(Sub()
+        Dim t13 = Task.Run(Sub()
 
                                Dim PR78Adv As PengRobinson1978AdvancedPropertyPackage = New PengRobinson1978AdvancedPropertyPackage()
                                plist.Add(PR78Adv)
 
                            End Sub)
 
-        Dim t14 = New Task(Sub()
+        Dim t14 = Task.Run(Sub()
 
                                Dim SRKAdv As SoaveRedlichKwongAdvancedPropertyPackage = New SoaveRedlichKwongAdvancedPropertyPackage()
                                plist.Add(SRKAdv)
 
                            End Sub)
-
-        t1.Start()
-        t2.Start()
-        t3.Start()
-        t4.Start()
-        t5.Start()
-        t6.Start()
-        t7.Start()
-        t8.Start()
-        t9.Start()
-        t10.Start()
-        t11.Start()
-        t12.Start()
-        t13.Start()
-        t14.Start()
 
         Task.WaitAll(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14)
 
@@ -2541,7 +2526,7 @@ Label_00CC:
     End Sub
 
     Public Async Sub RunScriptAsync(ScriptID As String)
-        Await Task.Factory.StartNew(Sub() RunScript(ScriptID))
+        Await Task.Run(Sub() RunScript(ScriptID))
     End Sub
 
     Private Sub RunScript_IronPython(scripttext As String)
@@ -2586,57 +2571,57 @@ Label_00CC:
 
         If GlobalSettings.Settings.RunningPlatform <> Settings.Platform.Windows Then
 
-            Dim t1 = Task.Factory.StartNew(Sub()
+            Dim t1 = Task.Run(Sub()
 
-                                               If Not GlobalSettings.Settings.PythonInitialized Then
+                                  If Not GlobalSettings.Settings.PythonInitialized Then
 
-                                                   RunCodeOnUIThread(Sub()
-                                                                         PythonEngine.Initialize()
-                                                                         GlobalSettings.Settings.PythonInitialized = True
-                                                                         PythonEngine.BeginAllowThreads()
-                                                                     End Sub)
+                                      RunCodeOnUIThread(Sub()
+                                                            PythonEngine.Initialize()
+                                                            GlobalSettings.Settings.PythonInitialized = True
+                                                            PythonEngine.BeginAllowThreads()
+                                                        End Sub)
 
-                                               End If
+                                  End If
 
-                                               Using Py.GIL
+                                  Using Py.GIL
 
-                                                   Try
+                                      Try
 
-                                                       Dim sys As Object = PythonEngine.ImportModule("sys")
+                                          Dim sys As Object = PythonEngine.ImportModule("sys")
 
-                                                       Dim codeToRedirectOutput As String = "import sys" & vbCrLf + "from io import BytesIO as StringIO" & vbCrLf + "sys.stdout = mystdout = StringIO()" & vbCrLf + "sys.stdout.flush()" & vbCrLf + "sys.stderr = mystderr = StringIO()" & vbCrLf + "sys.stderr.flush()"
-                                                       PythonEngine.RunSimpleString(codeToRedirectOutput)
+                                          Dim codeToRedirectOutput As String = "import sys" & vbCrLf + "from io import BytesIO as StringIO" & vbCrLf + "sys.stdout = mystdout = StringIO()" & vbCrLf + "sys.stdout.flush()" & vbCrLf + "sys.stderr = mystderr = StringIO()" & vbCrLf + "sys.stderr.flush()"
+                                          PythonEngine.RunSimpleString(codeToRedirectOutput)
 
-                                                       Dim locals As New PyDict()
+                                          Dim locals As New PyDict()
 
-                                                       locals.SetItem("Plugins", UtilityPlugins.ToPython)
-                                                       locals.SetItem("Flowsheet", Me.ToPython)
-                                                       Try
-                                                           locals.SetItem("Spreadsheet", (GetSpreadsheetObjectFunc.Invoke()).ToPython)
-                                                       Catch ex As Exception
-                                                       End Try
-                                                       Dim Solver As New FlowsheetSolver.FlowsheetSolver
-                                                       locals.SetItem("Solver", Solver.ToPython)
+                                          locals.SetItem("Plugins", UtilityPlugins.ToPython)
+                                          locals.SetItem("Flowsheet", Me.ToPython)
+                                          Try
+                                              locals.SetItem("Spreadsheet", (GetSpreadsheetObjectFunc.Invoke()).ToPython)
+                                          Catch ex As Exception
+                                          End Try
+                                          Dim Solver As New FlowsheetSolver.FlowsheetSolver
+                                          locals.SetItem("Solver", Solver.ToPython)
 
-                                                       If Not GlobalSettings.Settings.IsRunningOnMono() Then
-                                                           locals.SetItem("Application", GetApplicationObject.ToPython)
-                                                       End If
+                                          If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                                              locals.SetItem("Application", GetApplicationObject.ToPython)
+                                          End If
 
-                                                       PythonEngine.Exec(scripttext, Nothing, locals.Handle)
+                                          PythonEngine.Exec(scripttext, Nothing, locals.Handle)
 
-                                                       ShowMessage(sys.stdout.getvalue().ToString, IFlowsheet.MessageType.Information)
+                                          ShowMessage(sys.stdout.getvalue().ToString, IFlowsheet.MessageType.Information)
 
-                                                   Catch ex As Exception
+                                      Catch ex As Exception
 
-                                                       ShowMessage("Error running script: " & ex.Message.ToString, IFlowsheet.MessageType.GeneralError)
+                                          ShowMessage("Error running script: " & ex.Message.ToString, IFlowsheet.MessageType.GeneralError)
 
-                                                   Finally
+                                      Finally
 
-                                                   End Try
+                                      End Try
 
-                                               End Using
+                                  End Using
 
-                                           End Sub)
+                              End Sub)
 
             t1.Wait()
 
@@ -2644,71 +2629,71 @@ Label_00CC:
 
             If Not GlobalSettings.Settings.PythonInitialized Then
 
-                Dim t As Task = Task.Factory.StartNew(Sub()
-                                                          RunCodeOnUIThread(Sub()
-                                                                                If Not GlobalSettings.Settings.IsRunningOnMono() Then
-                                                                                    PythonEngine.PythonHome = GlobalSettings.Settings.PythonPath
-                                                                                End If
-                                                                                PythonEngine.Initialize()
-                                                                                GlobalSettings.Settings.PythonInitialized = True
-                                                                            End Sub)
-                                                      End Sub)
+                Dim t As Task = Task.Run(Sub()
+                                             RunCodeOnUIThread(Sub()
+                                                                   If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                                                                       PythonEngine.PythonHome = GlobalSettings.Settings.PythonPath
+                                                                   End If
+                                                                   PythonEngine.Initialize()
+                                                                   GlobalSettings.Settings.PythonInitialized = True
+                                                               End Sub)
+                                         End Sub)
                 t.Wait()
 
-                Dim t2 As Task = Task.Factory.StartNew(Sub()
-                                                           RunCodeOnUIThread(Sub()
-                                                                                 PythonEngine.BeginAllowThreads()
-                                                                             End Sub)
-                                                       End Sub)
+                Dim t2 As Task = Task.Run(Sub()
+                                              RunCodeOnUIThread(Sub()
+                                                                    PythonEngine.BeginAllowThreads()
+                                                                End Sub)
+                                          End Sub)
                 t2.Wait()
 
             End If
 
-            Dim t3 As Task = Task.Factory.StartNew(Sub()
-                                                       RunCodeOnUIThread(Sub()
-                                                                             Using Py.GIL
+            Dim t3 As Task = Task.Run(Sub()
+                                          RunCodeOnUIThread(Sub()
+                                                                Using Py.GIL
 
-                                                                                 Try
+                                                                    Try
 
-                                                                                     Dim sys As Object = PythonEngine.ImportModule("sys")
+                                                                        Dim sys As Object = PythonEngine.ImportModule("sys")
 
-                                                                                     'If Not GlobalSettings.Settings.IsRunningOnMono() Then
-                                                                                     Dim codeToRedirectOutput As String = "import sys" & vbCrLf + "from io import BytesIO as StringIO" & vbCrLf + "sys.stdout = mystdout = StringIO()" & vbCrLf + "sys.stdout.flush()" & vbCrLf + "sys.stderr = mystderr = StringIO()" & vbCrLf + "sys.stderr.flush()"
-                                                                                     PythonEngine.RunSimpleString(codeToRedirectOutput)
-                                                                                     'End If
+                                                                        'If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                                                                        Dim codeToRedirectOutput As String = "import sys" & vbCrLf + "from io import BytesIO as StringIO" & vbCrLf + "sys.stdout = mystdout = StringIO()" & vbCrLf + "sys.stdout.flush()" & vbCrLf + "sys.stderr = mystderr = StringIO()" & vbCrLf + "sys.stderr.flush()"
+                                                                        PythonEngine.RunSimpleString(codeToRedirectOutput)
+                                                                        'End If
 
-                                                                                     Dim locals As New PyDict()
+                                                                        Dim locals As New PyDict()
 
-                                                                                     locals.SetItem("Plugins", UtilityPlugins.ToPython)
-                                                                                     locals.SetItem("Flowsheet", Me.ToPython)
-                                                                                     Try
-                                                                                         locals.SetItem("Spreadsheet", (GetSpreadsheetObjectFunc.Invoke()).ToPython)
-                                                                                     Catch ex As Exception
-                                                                                     End Try
-                                                                                     Dim Solver As New FlowsheetSolver.FlowsheetSolver
-                                                                                     locals.SetItem("Solver", Solver.ToPython)
+                                                                        locals.SetItem("Plugins", UtilityPlugins.ToPython)
+                                                                        locals.SetItem("Flowsheet", Me.ToPython)
+                                                                        Try
+                                                                            locals.SetItem("Spreadsheet", (GetSpreadsheetObjectFunc.Invoke()).ToPython)
+                                                                        Catch ex As Exception
+                                                                        End Try
+                                                                        Dim Solver As New FlowsheetSolver.FlowsheetSolver
+                                                                        locals.SetItem("Solver", Solver.ToPython)
 
-                                                                                     If Not GlobalSettings.Settings.IsRunningOnMono() Then
-                                                                                         locals.SetItem("Application", GetApplicationObject.ToPython)
-                                                                                     End If
+                                                                        If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                                                                            locals.SetItem("Application", GetApplicationObject.ToPython)
+                                                                        End If
 
-                                                                                     PythonEngine.Exec(scripttext, Nothing, locals.Handle)
+                                                                        PythonEngine.Exec(scripttext, Nothing, locals.Handle)
 
-                                                                                     'If Not GlobalSettings.Settings.IsRunningOnMono() Then
-                                                                                     ShowMessage(sys.stdout.getvalue().ToString, IFlowsheet.MessageType.Information)
-                                                                                     'End If
+                                                                        'If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                                                                        ShowMessage(sys.stdout.getvalue().ToString, IFlowsheet.MessageType.Information)
+                                                                        'End If
 
-                                                                                 Catch ex As Exception
+                                                                    Catch ex As Exception
 
-                                                                                     ShowMessage("Error running script: " & ex.Message.ToString, IFlowsheet.MessageType.GeneralError)
+                                                                        ShowMessage("Error running script: " & ex.Message.ToString, IFlowsheet.MessageType.GeneralError)
 
-                                                                                 Finally
+                                                                    Finally
 
-                                                                                 End Try
+                                                                    End Try
 
-                                                                             End Using
-                                                                         End Sub)
-                                                   End Sub)
+                                                                End Using
+                                                            End Sub)
+                                      End Sub)
             t3.Wait()
 
         End If
