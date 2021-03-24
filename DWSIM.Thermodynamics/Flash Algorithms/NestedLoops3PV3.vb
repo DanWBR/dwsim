@@ -890,22 +890,18 @@ out:
 
             If Settings.EnableParallelProcessing Then
 
-                Dim task1 = Task.Factory.StartNew(Sub()
-                                                      Dim ErrRes1 = Herror("PV", 0, P, Vz) 'boiling point
-                                                      Hb = ErrRes1(0)
-                                                      Tb = ErrRes1(1)
-                                                  End Sub,
-                                                      Settings.TaskCancellationTokenSource.Token,
-                                                      TaskCreationOptions.None,
-                                                     Settings.AppTaskScheduler)
-                Dim task2 = Task.Factory.StartNew(Sub()
-                                                      Dim ErrRes2 = Herror("PV", 1, P, Vz) 'dew point
-                                                      Hd = ErrRes2(0)
-                                                      Td = ErrRes2(1)
-                                                  End Sub,
-                                                  Settings.TaskCancellationTokenSource.Token,
-                                                  TaskCreationOptions.None,
-                                                 Settings.AppTaskScheduler)
+                Dim task1 = TaskHelper.Run(Sub()
+                                               Dim ErrRes1 = Herror("PV", 0, P, Vz) 'boiling point
+                                               Hb = ErrRes1(0)
+                                               Tb = ErrRes1(1)
+                                           End Sub,
+                                                      Settings.TaskCancellationTokenSource.Token)
+                Dim task2 = TaskHelper.Run(Sub()
+                                               Dim ErrRes2 = Herror("PV", 1, P, Vz) 'dew point
+                                               Hd = ErrRes2(0)
+                                               Td = ErrRes2(1)
+                                           End Sub,
+                                                  Settings.TaskCancellationTokenSource.Token)
                 Task.WaitAll(task1, task2)
 
             Else
@@ -1111,22 +1107,16 @@ out:
 
             If Settings.EnableParallelProcessing Then
 
-                Dim task1 = Task.Factory.StartNew(Sub()
-                                                      Dim ErrRes1 = Serror("PV", 0, S, P, T, Vz) 'boiling point
-                                                      Sb = ErrRes1(0)
-                                                      Tb = ErrRes1(1)
-                                                  End Sub,
-                                                      Settings.TaskCancellationTokenSource.Token,
-                                                      TaskCreationOptions.None,
-                                                     Settings.AppTaskScheduler)
-                Dim task2 = Task.Factory.StartNew(Sub()
-                                                      Dim ErrRes2 = Serror("PV", 1, S, P, T, Vz) 'dew point
-                                                      Sd = ErrRes2(0)
-                                                      Td = ErrRes2(1)
-                                                  End Sub,
-                                                  Settings.TaskCancellationTokenSource.Token,
-                                                  TaskCreationOptions.None,
-                                                 Settings.AppTaskScheduler)
+                Dim task1 = TaskHelper.Run(Sub()
+                                               Dim ErrRes1 = Serror("PV", 0, S, P, T, Vz) 'boiling point
+                                               Sb = ErrRes1(0)
+                                               Tb = ErrRes1(1)
+                                           End Sub, Settings.TaskCancellationTokenSource.Token)
+                Dim task2 = TaskHelper.Run(Sub()
+                                               Dim ErrRes2 = Serror("PV", 1, S, P, T, Vz) 'dew point
+                                               Sd = ErrRes2(0)
+                                               Td = ErrRes2(1)
+                                           End Sub, Settings.TaskCancellationTokenSource.Token)
                 Task.WaitAll(task1, task2)
 
             Else

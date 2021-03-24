@@ -526,9 +526,9 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             });
 
             if (waittofinish)
-                maintask.RunSynchronously(DWSIM.GlobalSettings.Settings.AppTaskScheduler);
+                maintask.RunSynchronously(TaskScheduler.Default);
             else
-                maintask.Start(DWSIM.GlobalSettings.Settings.AppTaskScheduler);
+                maintask.Start(TaskScheduler.Default);
 
             return maintask;
         }

@@ -611,82 +611,79 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
             End If
         Next
 
-        Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism,
-                                                    .TaskScheduler = Settings.AppTaskScheduler}
-
         For Each li In orderedlist
             Dim objlist As New ArrayList
             For Each item In li.Value
                 objlist.Add(item.Name)
             Next
-            Parallel.ForEach(li.Value, poptions, Sub(myinfo, state)
-                                                     If ct.IsCancellationRequested = True Then ct.ThrowIfCancellationRequested()
-                                                     Dim myobj = fbag.SimulationObjects(myinfo.Name)
-                                                     myobj.ErrorMessage = ""
-                                                     myobj.GraphicObject.Status = Status.Calculating
-                                                     Try
-                                                         If myobj.GraphicObject.Active Then
-                                                             If myinfo.ObjectType = ObjectType.MaterialStream Then
-                                                                 CalculateMaterialStreamAsync(fobj, myobj, ct)
-                                                             Else
-                                                                 CalculateObjectAsync(fobj, myinfo, ct)
-                                                             End If
-                                                             For Each au In myobj.AttachedUtilities
-                                                                 If au.AutoUpdate Then au.Update()
-                                                             Next
-                                                             myobj.GraphicObject.Calculated = True
-                                                             myobj.LastUpdated = Date.Now
-                                                             myobj.UpdateEditForm()
-                                                             If fbag.DynamicMode Then myobj.UpdateDynamicsEditForm()
-                                                         End If
-                                                         myobj.GraphicObject.Status = Status.Calculated
-                                                     Catch ex As AggregateException
-                                                         myobj.GraphicObject.Status = Status.ErrorCalculating
-                                                         RaiseEvent CalculationError(myinfo, New EventArgs(), ex)
-                                                         fgui.ProcessScripts(Scripts.EventType.ObjectCalculationError, Scripts.ObjectType.FlowsheetObject, myobj.Name)
-                                                         myobj.ErrorMessage = ""
-                                                         For Each iex In ex.InnerExceptions
-                                                             If TypeOf iex Is AggregateException Then
-                                                                 For Each iex2 In DirectCast(iex, AggregateException).InnerExceptions
-                                                                     If TypeOf iex2 Is AggregateException Then
-                                                                         For Each iex3 In DirectCast(iex2, AggregateException).InnerExceptions
-                                                                             If TypeOf iex3 Is AggregateException Then
-                                                                                 For Each iex4 In DirectCast(iex3, AggregateException).InnerExceptions
-                                                                                     myobj.ErrorMessage += iex4.Message.ToString & vbCrLf
-                                                                                     CheckExceptionForAdditionalInfo(iex4)
-                                                                                     loopex.Add(New Exception(myinfo.Tag & ": " & iex4.Message, iex4))
-                                                                                 Next
-                                                                             Else
-                                                                                 myobj.ErrorMessage += iex3.Message.ToString & vbCrLf
-                                                                                 CheckExceptionForAdditionalInfo(iex3)
-                                                                                 loopex.Add(New Exception(myinfo.Tag & ": " & iex3.Message, iex3))
-                                                                             End If
-                                                                         Next
-                                                                     Else
-                                                                         myobj.ErrorMessage += iex2.Message.ToString & vbCrLf
-                                                                         CheckExceptionForAdditionalInfo(iex2)
-                                                                         loopex.Add(New Exception(myinfo.Tag & ": " & iex2.Message, iex2))
-                                                                     End If
-                                                                 Next
-                                                             Else
-                                                                 myobj.ErrorMessage += iex.Message.ToString & vbCrLf
-                                                                 CheckExceptionForAdditionalInfo(iex)
-                                                                 loopex.Add(New Exception(myinfo.Tag & ": " & iex.Message, iex))
-                                                             End If
-                                                         Next
-                                                         If GlobalSettings.Settings.SolverBreakOnException Then state.Break()
-                                                     Catch ex As Exception
-                                                         myobj.GraphicObject.Status = Status.ErrorCalculating
-                                                         RaiseEvent CalculationError(myinfo, New EventArgs(), ex)
-                                                         fgui.ProcessScripts(Scripts.EventType.ObjectCalculationError, Scripts.ObjectType.FlowsheetObject, myobj.Name)
-                                                         myobj.ErrorMessage = ex.Message.ToString
-                                                         CheckExceptionForAdditionalInfo(ex)
-                                                         loopex.Add(New Exception(myinfo.Tag & ": " & ex.Message, ex))
-                                                         If GlobalSettings.Settings.SolverBreakOnException Then state.Break()
-                                                     Finally
-                                                         fgui.UpdateInterface()
-                                                     End Try
-                                                 End Sub)
+            Parallel.ForEach(li.Value, Sub(myinfo, state)
+                                           If ct.IsCancellationRequested = True Then ct.ThrowIfCancellationRequested()
+                                           Dim myobj = fbag.SimulationObjects(myinfo.Name)
+                                           myobj.ErrorMessage = ""
+                                           myobj.GraphicObject.Status = Status.Calculating
+                                           Try
+                                               If myobj.GraphicObject.Active Then
+                                                   If myinfo.ObjectType = ObjectType.MaterialStream Then
+                                                       CalculateMaterialStreamAsync(fobj, myobj, ct)
+                                                   Else
+                                                       CalculateObjectAsync(fobj, myinfo, ct)
+                                                   End If
+                                                   For Each au In myobj.AttachedUtilities
+                                                       If au.AutoUpdate Then au.Update()
+                                                   Next
+                                                   myobj.GraphicObject.Calculated = True
+                                                   myobj.LastUpdated = Date.Now
+                                                   myobj.UpdateEditForm()
+                                                   If fbag.DynamicMode Then myobj.UpdateDynamicsEditForm()
+                                               End If
+                                               myobj.GraphicObject.Status = Status.Calculated
+                                           Catch ex As AggregateException
+                                               myobj.GraphicObject.Status = Status.ErrorCalculating
+                                               RaiseEvent CalculationError(myinfo, New EventArgs(), ex)
+                                               fgui.ProcessScripts(Scripts.EventType.ObjectCalculationError, Scripts.ObjectType.FlowsheetObject, myobj.Name)
+                                               myobj.ErrorMessage = ""
+                                               For Each iex In ex.InnerExceptions
+                                                   If TypeOf iex Is AggregateException Then
+                                                       For Each iex2 In DirectCast(iex, AggregateException).InnerExceptions
+                                                           If TypeOf iex2 Is AggregateException Then
+                                                               For Each iex3 In DirectCast(iex2, AggregateException).InnerExceptions
+                                                                   If TypeOf iex3 Is AggregateException Then
+                                                                       For Each iex4 In DirectCast(iex3, AggregateException).InnerExceptions
+                                                                           myobj.ErrorMessage += iex4.Message.ToString & vbCrLf
+                                                                           CheckExceptionForAdditionalInfo(iex4)
+                                                                           loopex.Add(New Exception(myinfo.Tag & ": " & iex4.Message, iex4))
+                                                                       Next
+                                                                   Else
+                                                                       myobj.ErrorMessage += iex3.Message.ToString & vbCrLf
+                                                                       CheckExceptionForAdditionalInfo(iex3)
+                                                                       loopex.Add(New Exception(myinfo.Tag & ": " & iex3.Message, iex3))
+                                                                   End If
+                                                               Next
+                                                           Else
+                                                               myobj.ErrorMessage += iex2.Message.ToString & vbCrLf
+                                                               CheckExceptionForAdditionalInfo(iex2)
+                                                               loopex.Add(New Exception(myinfo.Tag & ": " & iex2.Message, iex2))
+                                                           End If
+                                                       Next
+                                                   Else
+                                                       myobj.ErrorMessage += iex.Message.ToString & vbCrLf
+                                                       CheckExceptionForAdditionalInfo(iex)
+                                                       loopex.Add(New Exception(myinfo.Tag & ": " & iex.Message, iex))
+                                                   End If
+                                               Next
+                                               If GlobalSettings.Settings.SolverBreakOnException Then state.Break()
+                                           Catch ex As Exception
+                                               myobj.GraphicObject.Status = Status.ErrorCalculating
+                                               RaiseEvent CalculationError(myinfo, New EventArgs(), ex)
+                                               fgui.ProcessScripts(Scripts.EventType.ObjectCalculationError, Scripts.ObjectType.FlowsheetObject, myobj.Name)
+                                               myobj.ErrorMessage = ex.Message.ToString
+                                               CheckExceptionForAdditionalInfo(ex)
+                                               loopex.Add(New Exception(myinfo.Tag & ": " & ex.Message, ex))
+                                               If GlobalSettings.Settings.SolverBreakOnException Then state.Break()
+                                           Finally
+                                               fgui.UpdateInterface()
+                                           End Try
+                                       End Sub)
         Next
 
         For Each obj In fbag.SimulationObjects.Values
@@ -1342,29 +1339,14 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
                     Dim nthreads As Integer = Settings.MaxThreadMultiplier * System.Environment.ProcessorCount
 
-                    Select Case Settings.TaskScheduler
-                        Case 0 'default
-                            If Settings.EnableGPUProcessing Then
-                                Settings.AppTaskScheduler = TaskScheduler.Current
-                            Else
-                                Settings.AppTaskScheduler = TaskScheduler.Default
-                            End If
-                        Case 1 'sta
-                            Settings.AppTaskScheduler = New TaskSchedulers.StaTaskScheduler(nthreads)
-                        Case 2 'limited concurrency
-                            Settings.AppTaskScheduler = New TaskSchedulers.LimitedConcurrencyLevelTaskScheduler(nthreads)
-                        Case Else
-                            'custom scheduler
-                    End Select
-
                     Try
                         If mode = 0 Then
                             'this task will run synchronously with the UI thread.
-                            maintask.RunSynchronously(Settings.AppTaskScheduler)
+                            maintask.RunSynchronously()
                         Else
                             'fobj.UpdateStatusLabel(fgui.GetTranslatedString("Calculando") & " " & fgui.GetTranslatedString("Fluxograma") & "...")
                             'this task will run asynchronously.
-                            maintask.Start(Settings.AppTaskScheduler)
+                            maintask.Start()
                             While Not (Date.Now - d1).TotalMilliseconds >= Settings.SolverTimeoutSeconds * 1000
                                 maintask.Wait(500)
                                 'fgui.CheckStatus()

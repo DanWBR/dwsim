@@ -564,72 +564,60 @@ Namespace Streams
 
                     If doparallel Then
 
-                        Dim task1 = Task.Factory.StartNew(Sub()
-                                                              If Me.Phases(3).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                                                  IObj?.Paragraphs.Add("Calculating properties of Phase 'Liquid 1'...")
-                                                                  .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid1)
-                                                              Else
-                                                                  .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid1)
-                                                              End If
-                                                          End Sub,
-                                                  Settings.TaskCancellationTokenSource.Token,
-                                                  TaskCreationOptions.None,
-                                                 Settings.AppTaskScheduler)
-                        Dim task2 = Task.Factory.StartNew(Sub()
-                                                              If Me.Phases(4).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                                                  IObj?.Paragraphs.Add("Calculating properties of Phase 'Liquid 2'...")
-                                                                  .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid2)
-                                                              Else
-                                                                  .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid2)
-                                                              End If
-                                                          End Sub,
-                                                     Settings.TaskCancellationTokenSource.Token,
-                                                  TaskCreationOptions.None,
-                                                 Settings.AppTaskScheduler)
-                        Dim task3 = Task.Factory.StartNew(Sub()
-                                                              If Me.Phases(5).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                                                  IObj?.Paragraphs.Add("Calculating properties of Phase 'Liquid 3'...")
-                                                                  .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid3)
-                                                              Else
-                                                                  .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid3)
-                                                              End If
-                                                          End Sub,
-                                                  Settings.TaskCancellationTokenSource.Token,
-                                                  TaskCreationOptions.None,
-                                                 Settings.AppTaskScheduler)
-                        Dim task4 = Task.Factory.StartNew(Sub()
-                                                              If Me.Phases(6).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                                                  IObj?.Paragraphs.Add("Calculating properties of Phase 'Aqueous'...")
-                                                                  .DW_CalcPhaseProps(PropertyPackages.Phase.Aqueous)
-                                                              Else
-                                                                  .DW_ZerarPhaseProps(PropertyPackages.Phase.Aqueous)
-                                                              End If
-                                                          End Sub,
-                                                  Settings.TaskCancellationTokenSource.Token,
-                                                  TaskCreationOptions.None,
-                                                 Settings.AppTaskScheduler)
-                        Dim task5 = Task.Factory.StartNew(Sub()
-                                                              If Me.Phases(7).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                                                  IObj?.Paragraphs.Add("Calculating properties of Phase 'Solid'...")
-                                                                  .DW_CalcSolidPhaseProps()
-                                                              Else
-                                                                  .DW_ZerarPhaseProps(PropertyPackages.Phase.Solid)
-                                                              End If
-                                                          End Sub,
-                                                  Settings.TaskCancellationTokenSource.Token,
-                                                  TaskCreationOptions.None,
-                                                 Settings.AppTaskScheduler)
-                        Dim task6 = Task.Factory.StartNew(Sub()
-                                                              If Me.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                                                  IObj?.Paragraphs.Add("Calculating properties of Phase 'Vapor'...")
-                                                                  .DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
-                                                              Else
-                                                                  .DW_ZerarPhaseProps(PropertyPackages.Phase.Vapor)
-                                                              End If
-                                                          End Sub,
-                                                  Settings.TaskCancellationTokenSource.Token,
-                                                  TaskCreationOptions.None,
-                                                 Settings.AppTaskScheduler)
+                        Dim task1 = TaskHelper.Run(Sub()
+                                                       If Me.Phases(3).Properties.molarfraction.GetValueOrDefault > 0 Then
+                                                           IObj?.Paragraphs.Add("Calculating properties of Phase 'Liquid 1'...")
+                                                           .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid1)
+                                                       Else
+                                                           .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid1)
+                                                       End If
+                                                   End Sub,
+                                                  Settings.TaskCancellationTokenSource.Token)
+                        Dim task2 = TaskHelper.Run(Sub()
+                                                       If Me.Phases(4).Properties.molarfraction.GetValueOrDefault > 0 Then
+                                                           IObj?.Paragraphs.Add("Calculating properties of Phase 'Liquid 2'...")
+                                                           .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid2)
+                                                       Else
+                                                           .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid2)
+                                                       End If
+                                                   End Sub,
+                                                     Settings.TaskCancellationTokenSource.Token)
+                        Dim task3 = TaskHelper.Run(Sub()
+                                                       If Me.Phases(5).Properties.molarfraction.GetValueOrDefault > 0 Then
+                                                           IObj?.Paragraphs.Add("Calculating properties of Phase 'Liquid 3'...")
+                                                           .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid3)
+                                                       Else
+                                                           .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid3)
+                                                       End If
+                                                   End Sub,
+                                                  Settings.TaskCancellationTokenSource.Token)
+                        Dim task4 = TaskHelper.Run(Sub()
+                                                       If Me.Phases(6).Properties.molarfraction.GetValueOrDefault > 0 Then
+                                                           IObj?.Paragraphs.Add("Calculating properties of Phase 'Aqueous'...")
+                                                           .DW_CalcPhaseProps(PropertyPackages.Phase.Aqueous)
+                                                       Else
+                                                           .DW_ZerarPhaseProps(PropertyPackages.Phase.Aqueous)
+                                                       End If
+                                                   End Sub,
+                                                  Settings.TaskCancellationTokenSource.Token)
+                        Dim task5 = TaskHelper.Run(Sub()
+                                                       If Me.Phases(7).Properties.molarfraction.GetValueOrDefault > 0 Then
+                                                           IObj?.Paragraphs.Add("Calculating properties of Phase 'Solid'...")
+                                                           .DW_CalcSolidPhaseProps()
+                                                       Else
+                                                           .DW_ZerarPhaseProps(PropertyPackages.Phase.Solid)
+                                                       End If
+                                                   End Sub,
+                                                  Settings.TaskCancellationTokenSource.Token)
+                        Dim task6 = TaskHelper.Run(Sub()
+                                                       If Me.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
+                                                           IObj?.Paragraphs.Add("Calculating properties of Phase 'Vapor'...")
+                                                           .DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
+                                                       Else
+                                                           .DW_ZerarPhaseProps(PropertyPackages.Phase.Vapor)
+                                                       End If
+                                                   End Sub,
+                                                  Settings.TaskCancellationTokenSource.Token)
                         Task.WaitAll(task1, task2, task3, task4, task5, task6)
 
                     Else

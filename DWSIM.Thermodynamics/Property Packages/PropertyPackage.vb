@@ -1278,22 +1278,18 @@ Namespace PropertyPackages
 
                 If Settings.EnableParallelProcessing Then
 
-                    Dim task1 = Task.Factory.StartNew(Sub()
-                                                          fugliq = Me.DW_CalcFugCoeff(Vx, T, P, State.Liquid)
-                                                      End Sub,
-                                                        Settings.TaskCancellationTokenSource.Token,
-                                                        TaskCreationOptions.None,
-                                                       Settings.AppTaskScheduler)
-                    Dim task2 = Task.Factory.StartNew(Sub()
-                                                          If type = "LV" Then
-                                                              fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Vapor)
-                                                          Else ' LL
-                                                              fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Liquid)
-                                                          End If
-                                                      End Sub,
-                                                    Settings.TaskCancellationTokenSource.Token,
-                                                    TaskCreationOptions.None,
-                                                   Settings.AppTaskScheduler)
+                    Dim task1 = TaskHelper.Run(Sub()
+                                                   fugliq = Me.DW_CalcFugCoeff(Vx, T, P, State.Liquid)
+                                               End Sub,
+                                                        Settings.TaskCancellationTokenSource.Token)
+                    Dim task2 = TaskHelper.Run(Sub()
+                                                   If type = "LV" Then
+                                                       fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Vapor)
+                                                   Else ' LL
+                                                       fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Liquid)
+                                                   End If
+                                               End Sub,
+                                                    Settings.TaskCancellationTokenSource.Token)
                     Task.WaitAll(task1, task2)
 
                 Else

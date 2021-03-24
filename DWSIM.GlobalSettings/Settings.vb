@@ -42,8 +42,6 @@ Public Class Settings
 
     Public Shared Property FlowsheetRenderer As SkiaCanvasRenderer = SkiaCanvasRenderer.CPU
 
-    Public Shared Property AppTaskScheduler As TaskScheduler = Tasks.TaskScheduler.Default
-
     Public Shared Property gpu As Cudafy.Host.GPGPU
     Public Shared Property gpumod As CudafyModule
     Public Shared Property prevlang As Integer = 0 '0 = CUDA, 1 = OpenCL
@@ -77,7 +75,6 @@ Public Class Settings
     Public Shared Property CudafyDeviceID As Integer = 0
     Public Shared Property DebugLevel As Integer = 0
     Public Shared Property MaxThreadMultiplier As Integer = 8
-    Public Shared Property TaskScheduler As Integer = 0
     Public Shared Property SolverTimeoutSeconds As Integer = 15 * 60
     Public Shared Property SolverMode As Integer = 0
     Public Shared Property ServiceBusConnectionString As String = ""
@@ -417,7 +414,6 @@ Public Class Settings
 
         SaveExistingFile = source.Configs("Misc").GetBoolean("SaveBackupFile", True)
         MaxThreadMultiplier = source.Configs("Misc").GetInt("MaxThreadMultiplier", 8)
-        TaskScheduler = source.Configs("Misc").GetInt("TaskScheduler", 0)
         UseSIMDExtensions = source.Configs("Misc").GetBoolean("UseSIMDExtensions", True)
 
         CurrentVersion = source.Configs("Misc").Get("CurrentVersion", "")
@@ -542,7 +538,6 @@ Public Class Settings
         source.Configs("Misc").Set("SolverTimeoutSeconds", SolverTimeoutSeconds)
         source.Configs("Misc").Set("SaveBackupFile", SaveExistingFile)
         source.Configs("Misc").Set("MaxThreadMultiplier", MaxThreadMultiplier)
-        source.Configs("Misc").Set("TaskScheduler", TaskScheduler)
         source.Configs("Misc").Set("UseSIMDExtensions", UseSIMDExtensions)
 
         source.Configs("Misc").Set("CurrentVersion", CurrentVersion)

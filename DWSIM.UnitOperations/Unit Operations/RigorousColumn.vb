@@ -4664,7 +4664,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             IObj?.Paragraphs.Add("<h2>Calculated Parameters</h2>")
 
             Dim doparallel As Boolean = Settings.EnableParallelProcessing
-            Dim poptions As New ParallelOptions() With {.TaskScheduler = Settings.AppTaskScheduler}
 
             Dim ic As Integer
             Dim t_error, t_error_ant, xcerror(ns) As Double
@@ -4754,14 +4753,12 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             If doparallel Then
 
-                Dim task1 As Task = Task.Factory.StartNew(Sub() Parallel.For(0, ns + 1, poptions,
+                Dim task1 As Task = TaskHelper.Run(Sub() Parallel.For(0, ns + 1,
                                                          Sub(ipar)
                                                              Hl(ipar) = pp.DW_CalcEnthalpy(x(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(x(ipar)) / 1000
                                                              Hv(ipar) = pp.DW_CalcEnthalpy(y(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Vapor) * pp.AUX_MMM(y(ipar)) / 1000
                                                          End Sub),
-                                                      Settings.TaskCancellationTokenSource.Token,
-                                                      TaskCreationOptions.None,
-                                                      Settings.AppTaskScheduler)
+                                                      Settings.TaskCancellationTokenSource.Token)
                 task1.Wait()
 
             Else
@@ -4934,13 +4931,11 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 If doparallel Then
 
-                    Dim t1 As Task = Task.Factory.StartNew(Sub() Parallel.For(0, nc, poptions,
+                    Dim t1 As Task = TaskHelper.Run(Sub() Parallel.For(0, nc,
                                                                  Sub(ipar)
                                                                      xt(ipar) = Tomich.TDMASolve(at(ipar), bt(ipar), ct(ipar), dt(ipar))
                                                                  End Sub),
-                                                      Settings.TaskCancellationTokenSource.Token,
-                                                      TaskCreationOptions.None,
-                                                      Settings.AppTaskScheduler)
+                                                      Settings.TaskCancellationTokenSource.Token)
                     t1.Wait()
 
                 Else
@@ -5010,8 +5005,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                     If doparallel Then
 
-                        Dim t1 As Task = Task.Factory.StartNew(Sub()
-                                                                   Parallel.For(0, ns + 1, poptions,
+                        Dim t1 As Task = TaskHelper.Run(Sub()
+                                                            Parallel.For(0, ns + 1,
                                                                      Sub(ipar)
                                                                          Dim tmpvar As Object = flashalgs(ipar).Flash_PV(xc(ipar), P(ipar), 0.0, Tj(ipar), pp, False, Nothing)
                                                                          Tj(ipar) = tmpvar(4)
@@ -5022,10 +5017,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                                                              K(ipar) = Kant(ipar)
                                                                          End If
                                                                      End Sub)
-                                                               End Sub,
-                                                          Settings.TaskCancellationTokenSource.Token,
-                                                          TaskCreationOptions.None,
-                                                          Settings.AppTaskScheduler)
+                                                        End Sub,
+                                                          Settings.TaskCancellationTokenSource.Token)
                         t1.Wait()
 
                     Else
@@ -5120,15 +5113,13 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                     If doparallel Then
 
-                        Dim t1 As Task = Task.Factory.StartNew(Sub()
-                                                                   Parallel.For(0, ns + 1, poptions,
+                        Dim t1 As Task = TaskHelper.Run(Sub()
+                                                            Parallel.For(0, ns + 1,
                                                                      Sub(ipar)
                                                                          K(ipar) = pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar), P(ipar))
                                                                      End Sub)
-                                                               End Sub,
-                                                          Settings.TaskCancellationTokenSource.Token,
-                                                          TaskCreationOptions.None,
-                                                          Settings.AppTaskScheduler)
+                                                        End Sub,
+                                                          Settings.TaskCancellationTokenSource.Token)
                         t1.Wait()
 
                     Else
@@ -5195,21 +5186,17 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 If doparallel Then
 
-                    Dim t1 As Task = Task.Factory.StartNew(Sub() Parallel.For(0, ns + 1, poptions,
+                    Dim t1 As Task = TaskHelper.Run(Sub() Parallel.For(0, ns + 1,
                                                                                      Sub(ipar)
                                                                                          Hl(ipar) = pp.DW_CalcEnthalpy(xc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(ipar)) / 1000
                                                                                      End Sub),
-                                                      Settings.TaskCancellationTokenSource.Token,
-                                                      TaskCreationOptions.None,
-                                                      Settings.AppTaskScheduler)
+                                                      Settings.TaskCancellationTokenSource.Token)
 
-                    Dim t2 As Task = Task.Factory.StartNew(Sub() Parallel.For(0, ns + 1, poptions,
+                    Dim t2 As Task = TaskHelper.Run(Sub() Parallel.For(0, ns + 1,
                                                                                      Sub(ipar)
                                                                                          Hv(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(ipar)) / 1000
                                                                                      End Sub),
-                                                      Settings.TaskCancellationTokenSource.Token,
-                                                      TaskCreationOptions.None,
-                                                      Settings.AppTaskScheduler)
+                                                      Settings.TaskCancellationTokenSource.Token)
                     Task.WaitAll(t1, t2)
 
                 Else
@@ -5786,7 +5773,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 If doparallel Then
 
-                    Dim task1 As Task = Task.Factory.StartNew(Sub() Parallel.For(0, ns + 1, poptions,
+                    Dim task1 As Task = TaskHelper.Run(Sub() Parallel.For(0, ns + 1,
                                                              Sub(ipar)
                                                                  If IdealH Then
                                                                      Hl(ipar) = ppr.DW_CalcEnthalpy(xc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * ppr.AUX_MMM(xc(ipar)) / 1000
@@ -5810,9 +5797,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                                                      End If
                                                                  End If
                                                              End Sub),
-                                                      Settings.TaskCancellationTokenSource.Token,
-                                                      TaskCreationOptions.None,
-                                                      Settings.AppTaskScheduler)
+                                                      Settings.TaskCancellationTokenSource.Token)
 
                     task1.Wait(30000)
                 Else
@@ -6152,7 +6137,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             IObj?.Paragraphs.Add(String.Format("Input Variables: {0}", xl.ToMathArrayString))
 
             Dim doparallel As Boolean = Settings.EnableParallelProcessing
-            Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism, .TaskScheduler = Settings.AppTaskScheduler}
 
             Dim VSS, LSS, F, Q, P, HF, eff As Double()
             Dim fc()() As Double
@@ -6266,7 +6250,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             If doparallel Then
 
-                Dim task1 As Task = Task.Factory.StartNew(Sub() Parallel.For(0, ns + 1, poptions,
+                Dim task1 As Task = TaskHelper.Run(Sub() Parallel.For(0, ns + 1,
                                                          Sub(ipar)
                                                              Dim tmp0 As Object
                                                              If llextr Then
@@ -6279,9 +6263,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                                                  Kval(ipar)(jj) = tmp0(jj)
                                                              Next
                                                          End Sub),
-                                                      Settings.TaskCancellationTokenSource.Token,
-                                                      TaskCreationOptions.None,
-                                                      Settings.AppTaskScheduler)
+                                                      Settings.TaskCancellationTokenSource.Token)
                 task1.Wait()
 
             Else
@@ -6308,7 +6290,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             If doparallel Then
 
-                Dim task1 As Task = Task.Factory.StartNew(Sub() Parallel.For(0, ns + 1, poptions,
+                Dim task1 As Task = TaskHelper.Run(Sub() Parallel.For(0, ns + 1,
                                                          Sub(ipar)
                                                              If Vj(ipar) <> 0.0# Then
                                                                  If llextr Then
@@ -6325,9 +6307,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                                                  Hl(ipar) = 0.0#
                                                              End If
                                                          End Sub),
-                                                      Settings.TaskCancellationTokenSource.Token,
-                                                      TaskCreationOptions.None,
-                                                      Settings.AppTaskScheduler)
+                                                      Settings.TaskCancellationTokenSource.Token)
                 task1.Wait()
 
             Else

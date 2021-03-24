@@ -138,7 +138,7 @@ namespace DWSIM.UI.Desktop.Shared
             {
                 try
                 {
-                    st.Start(DWSIM.GlobalSettings.Settings.AppTaskScheduler);
+                    st.Start(TaskScheduler.Default);
                     st.Wait();
                 }
                 catch (AggregateException aex)
@@ -165,7 +165,7 @@ namespace DWSIM.UI.Desktop.Shared
             }
             else
             {
-                st.Start(DWSIM.GlobalSettings.Settings.AppTaskScheduler);
+                st.Start(TaskScheduler.Default);
             }
 
         }
@@ -205,7 +205,7 @@ namespace DWSIM.UI.Desktop.Shared
 
             try
             {
-                st.Start(DWSIM.GlobalSettings.Settings.AppTaskScheduler);
+                st.Start(TaskScheduler.Default);
                 st.Wait();
             }
             catch (AggregateException aex)

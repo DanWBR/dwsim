@@ -534,29 +534,25 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, Vx, 0.0#, PP.RET_Nu
 
             If Settings.EnableParallelProcessing Then
 
-                Dim task1 = Task.Factory.StartNew(Sub()
-                                                      DHv1 = PP.DW_CalcEnthalpyDeparture(Vy, T, P, PropertyPackages.State.Vapor) * PP.AUX_MMM(Vy) / 1000
-                                                      DHv2 = PP.DW_CalcEnthalpyDeparture(Vy, Tref, P, PropertyPackages.State.Vapor) * PP.AUX_MMM(Vy) / 1000
-                                                      C = DHv2
-                                                      D = (DHv1 - C) / (T - Tref)
-                                                  End Sub,
-                                                      Settings.TaskCancellationTokenSource.Token,
-                                                      TaskCreationOptions.None,
-                                                     Settings.AppTaskScheduler)
-                Dim task2 = Task.Factory.StartNew(Sub()
-                                                      If T < MathEx.Common.Max(VTc, Vz) Then
-                                                          DHl1 = PP.DW_CalcEnthalpyDeparture(Vx, T, P, PropertyPackages.State.Liquid) * PP.AUX_MMM(Vx) / 1000
-                                                          DHl2 = PP.DW_CalcEnthalpyDeparture(Vx, Tref, P, PropertyPackages.State.Liquid) * PP.AUX_MMM(Vx) / 1000
-                                                          E = DHl2
-                                                          F = (DHl1 - E) / (T - Tref)
-                                                      Else
-                                                          E = 0
-                                                          F = 0
-                                                      End If
-                                                  End Sub,
-                                                  Settings.TaskCancellationTokenSource.Token,
-                                                  TaskCreationOptions.None,
-                                                 Settings.AppTaskScheduler)
+                Dim task1 = TaskHelper.Run(Sub()
+                                               DHv1 = PP.DW_CalcEnthalpyDeparture(Vy, T, P, PropertyPackages.State.Vapor) * PP.AUX_MMM(Vy) / 1000
+                                               DHv2 = PP.DW_CalcEnthalpyDeparture(Vy, Tref, P, PropertyPackages.State.Vapor) * PP.AUX_MMM(Vy) / 1000
+                                               C = DHv2
+                                               D = (DHv1 - C) / (T - Tref)
+                                           End Sub,
+                                                      Settings.TaskCancellationTokenSource.Token)
+                Dim task2 = TaskHelper.Run(Sub()
+                                               If T < MathEx.Common.Max(VTc, Vz) Then
+                                                   DHl1 = PP.DW_CalcEnthalpyDeparture(Vx, T, P, PropertyPackages.State.Liquid) * PP.AUX_MMM(Vx) / 1000
+                                                   DHl2 = PP.DW_CalcEnthalpyDeparture(Vx, Tref, P, PropertyPackages.State.Liquid) * PP.AUX_MMM(Vx) / 1000
+                                                   E = DHl2
+                                                   F = (DHl1 - E) / (T - Tref)
+                                               Else
+                                                   E = 0
+                                                   F = 0
+                                               End If
+                                           End Sub,
+                                                  Settings.TaskCancellationTokenSource.Token)
                 Task.WaitAll(task1, task2)
 
             Else
@@ -652,29 +648,25 @@ restart:    Do
 
                 If Settings.EnableParallelProcessing Then
 
-                    Dim task1 = Task.Factory.StartNew(Sub()
-                                                          DHv1 = PP.DW_CalcEnthalpyDeparture(Vy, T, P, PropertyPackages.State.Vapor) * PP.AUX_MMM(Vy) / 1000
-                                                          DHv2 = PP.DW_CalcEnthalpyDeparture(Vy, T0, P, PropertyPackages.State.Vapor) * PP.AUX_MMM(Vy) / 1000
-                                                          Cc = DHv2
-                                                          Dc = (DHv1 - Cc) / (T - T0)
-                                                      End Sub,
-                                                      Settings.TaskCancellationTokenSource.Token,
-                                                      TaskCreationOptions.None,
-                                                     Settings.AppTaskScheduler)
-                    Dim task2 = Task.Factory.StartNew(Sub()
-                                                          If T < MathEx.Common.Max(VTc, Vz) Then
-                                                              DHl1 = PP.DW_CalcEnthalpyDeparture(Vx, T, P, PropertyPackages.State.Liquid) * PP.AUX_MMM(Vx) / 1000
-                                                              DHl2 = PP.DW_CalcEnthalpyDeparture(Vx, T0, P, PropertyPackages.State.Liquid) * PP.AUX_MMM(Vx) / 1000
-                                                              Ec = DHl2
-                                                              Fc = (DHl1 - Ec) / (T - T0)
-                                                          Else
-                                                              Ec = 0
-                                                              Fc = 0
-                                                          End If
-                                                      End Sub,
-                                                  Settings.TaskCancellationTokenSource.Token,
-                                                  TaskCreationOptions.None,
-                                                 Settings.AppTaskScheduler)
+                    Dim task1 = TaskHelper.Run(Sub()
+                                                   DHv1 = PP.DW_CalcEnthalpyDeparture(Vy, T, P, PropertyPackages.State.Vapor) * PP.AUX_MMM(Vy) / 1000
+                                                   DHv2 = PP.DW_CalcEnthalpyDeparture(Vy, T0, P, PropertyPackages.State.Vapor) * PP.AUX_MMM(Vy) / 1000
+                                                   Cc = DHv2
+                                                   Dc = (DHv1 - Cc) / (T - T0)
+                                               End Sub,
+                                                      Settings.TaskCancellationTokenSource.Token)
+                    Dim task2 = TaskHelper.Run(Sub()
+                                                   If T < MathEx.Common.Max(VTc, Vz) Then
+                                                       DHl1 = PP.DW_CalcEnthalpyDeparture(Vx, T, P, PropertyPackages.State.Liquid) * PP.AUX_MMM(Vx) / 1000
+                                                       DHl2 = PP.DW_CalcEnthalpyDeparture(Vx, T0, P, PropertyPackages.State.Liquid) * PP.AUX_MMM(Vx) / 1000
+                                                       Ec = DHl2
+                                                       Fc = (DHl1 - Ec) / (T - T0)
+                                                   Else
+                                                       Ec = 0
+                                                       Fc = 0
+                                                   End If
+                                               End Sub,
+                                                  Settings.TaskCancellationTokenSource.Token)
                     Task.WaitAll(task1, task2)
 
                 Else
