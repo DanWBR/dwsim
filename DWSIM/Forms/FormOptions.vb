@@ -33,24 +33,11 @@ Public Class FormOptions
     Private Sub FormOptions_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         Dim i As Integer = 0
-        Me.cbParallelism.Items.Clear()
-        Me.cbParallelism.Items.Add("Default")
-        For i = 1 To System.Environment.ProcessorCount
-            Me.cbParallelism.Items.Add(i.ToString)
-        Next
-        If My.Settings.MaxDegreeOfParallelism = -1 Then
-            Me.cbParallelism.SelectedIndex = 0
-        ElseIf My.Settings.MaxDegreeOfParallelism <= System.Environment.ProcessorCount Then
-            Me.cbParallelism.SelectedItem = My.Settings.MaxDegreeOfParallelism.ToString
-        Else
-            Me.cbParallelism.SelectedIndex = Me.cbParallelism.Items.Count - 1
-        End If
 
         Me.chkEnableParallelCalcs.Checked = My.Settings.EnableParallelProcessing
         Me.chkEnableGPUProcessing.Checked = My.Settings.EnableGPUProcessing
         Me.cbGPU.Enabled = Me.chkEnableGPUProcessing.Checked
         Me.tbGPUCaps.Enabled = Me.chkEnableGPUProcessing.Checked
-        Me.cbParallelism.Enabled = Me.chkEnableParallelCalcs.Checked
         Me.chkEnableSIMD.Checked = My.Settings.UseSIMDExtensions
 
         Me.chkEnableInspector.Checked = My.Settings.InspectorEnabled
@@ -438,17 +425,7 @@ Public Class FormOptions
 
     Private Sub chkEnableParallelCalcs_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkEnableParallelCalcs.CheckedChanged
         My.Settings.EnableParallelProcessing = Me.chkEnableParallelCalcs.Checked
-        Me.cbParallelism.Enabled = Me.chkEnableParallelCalcs.Checked
         Settings.EnableParallelProcessing = My.Settings.EnableParallelProcessing
-    End Sub
-
-    Private Sub cbParallelism_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cbParallelism.SelectedIndexChanged
-        If Me.cbParallelism.SelectedIndex = 0 Then
-            My.Settings.MaxDegreeOfParallelism = -1
-        Else
-            My.Settings.MaxDegreeOfParallelism = Me.cbParallelism.SelectedItem
-        End If
-        Settings.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism
     End Sub
 
     Private Sub cbGPU_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cbGPU.SelectedIndexChanged
