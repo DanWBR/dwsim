@@ -1,7 +1,7 @@
 ﻿Imports System.Math
 Imports System.Linq
 Imports DWSIM.ExtensionMethods
-
+Imports DWSIM.SharedClasses
 
 Namespace DWSIM.Thermodynamics.AdvancedEOS
 
@@ -224,11 +224,8 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
             Dim h1, h2 As Double
             Dim t1, t2 As Task
 
-            t1 = New Task(Sub() h1 = CalcHr(T, P, liq_or_gas, Zestimate) + HidFunc.Invoke(T) * mix.MW)
-            t2 = New Task(Sub() h2 = CalcHr(T + h, P, liq_or_gas, Zestimate) + HidFunc.Invoke(T + h) * mix.MW)
-
-            t1.Start()
-            t2.Start()
+            t1 = TaskHelper.Run(Sub() h1 = CalcHr(T, P, liq_or_gas, Zestimate) + HidFunc.Invoke(T) * mix.MW)
+            t2 = TaskHelper.Run(Sub() h2 = CalcHr(T + h, P, liq_or_gas, Zestimate) + HidFunc.Invoke(T + h) * mix.MW)
 
             Task.WaitAll(t1, t2)
 
@@ -318,11 +315,8 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
             Dim t1, t2 As Task
             Dim s1, s2 As Double
 
-            t1 = New Task(Sub() s1 = CalcSr(T, P, liq_or_gas, Z) + SidFunc.Invoke(T, P) * mix.MW)
-            t2 = New Task(Sub() s2 = CalcSr(T + epsilon, P2, liq_or_gas, Z2) + SidFunc.Invoke(T + epsilon, P2) * mix.MW)
-
-            t1.Start()
-            t2.Start()
+            t1 = TaskHelper.Run(Sub() s1 = CalcSr(T, P, liq_or_gas, Z) + SidFunc.Invoke(T, P) * mix.MW)
+            t2 = TaskHelper.Run(Sub() s2 = CalcSr(T + epsilon, P2, liq_or_gas, Z2) + SidFunc.Invoke(T + epsilon, P2) * mix.MW)
 
             Task.WaitAll(t1, t2)
 
@@ -342,21 +336,15 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
             Dim Ar, Ar2, Z, Z2 As Double
 
-            t1 = New Task(Sub() Z = compr(T, P, mix, liq_or_gas, Zestimate))
+            t1 = TaskHelper.Run(Sub() Z = compr(T, P, mix, liq_or_gas, Zestimate))
 
-            t2 = New Task(Sub() Z2 = compr(T + epsilon, P, mix, liq_or_gas, Zestimate))
-
-            t1.Start()
-            t2.Start()
+            t2 = TaskHelper.Run(Sub() Z2 = compr(T + epsilon, P, mix, liq_or_gas, Zestimate))
 
             Task.WaitAll(t1, t2)
 
-            t3 = New Task(Sub() Ar = Helmholtz(T, P, mix, liq_or_gas, Z))
+            t3 = TaskHelper.Run(Sub() Ar = Helmholtz(T, P, mix, liq_or_gas, Z))
 
-            t4 = New Task(Sub() Ar2 = Helmholtz(T + epsilon, P, mix, liq_or_gas, Z2))
-
-            t3.Start()
-            t4.Start()
+            t4 = TaskHelper.Run(Sub() Ar2 = Helmholtz(T + epsilon, P, mix, liq_or_gas, Z2))
 
             Task.WaitAll(t3, t4)
 
@@ -418,11 +406,8 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
             End If
 
-            t1 = New Task(Sub() Ar = CalcdFdT(T, P, liq_or_gas, Z))
-            t2 = New Task(Sub() Ar2 = CalcdFdT(T + epsilon, P2, liq_or_gas, Z2))
-
-            t1.Start()
-            t2.Start()
+            t1 = TaskHelper.Run(Sub() Ar = CalcdFdT(T, P, liq_or_gas, Z))
+            t2 = TaskHelper.Run(Sub() Ar2 = CalcdFdT(T + epsilon, P2, liq_or_gas, Z2))
 
             Task.WaitAll(t1, t2)
 
@@ -446,15 +431,12 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
             Dim t1, t2 As Task
 
-            t1 = New Task(Sub()
-                              d2FdV2 = CalcdF2dV2(T, P, liq_or_gas, Z)
-                              dPdV = -R * T * d2FdV2 - R * T / V ^ 2
-                          End Sub)
+            t1 = TaskHelper.Run(Sub()
+                                    d2FdV2 = CalcdF2dV2(T, P, liq_or_gas, Z)
+                                    dPdV = -R * T * d2FdV2 - R * T / V ^ 2
+                                End Sub)
 
-            t2 = New Task(Sub() dPdT = -R * T * Calcd2FdTdV(T, P, liq_or_gas, Z) + P / T)
-
-            t1.Start()
-            t2.Start()
+            t2 = TaskHelper.Run(Sub() dPdT = -R * T * Calcd2FdTdV(T, P, liq_or_gas, Z) + P / T)
 
             Task.WaitAll(t1, t2)
 
@@ -518,12 +500,9 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
             End If
 
-            t1 = New Task(Sub() Ar = (Helmholtz(T, P, mix, liq_or_gas, Z) + R * T * Log(Z)) / (R * T))
+            t1 = TaskHelper.Run(Sub() Ar = (Helmholtz(T, P, mix, liq_or_gas, Z) + R * T * Log(Z)) / (R * T))
 
-            t2 = New Task(Sub() Ar2 = (Helmholtz(T, P2, mix, liq_or_gas, Z2) + R * T * Log(Z2)) / (R * T))
-
-            t1.Start()
-            t2.Start()
+            t2 = TaskHelper.Run(Sub() Ar2 = (Helmholtz(T, P2, mix, liq_or_gas, Z2) + R * T * Log(Z2)) / (R * T))
 
             Task.WaitAll(t1, t2)
 
@@ -583,12 +562,9 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
             Dim t1, t2 As Task
 
-            t1 = New Task(Sub() Ar = (Helmholtz(T, P, mix, liq_or_gas, Z) + R * T * Log(Z)) / (R * T))
+            t1 = TaskHelper.Run(Sub() Ar = (Helmholtz(T, P, mix, liq_or_gas, Z) + R * T * Log(Z)) / (R * T))
 
-            t2 = New Task(Sub() Ar2 = (Helmholtz(T + epsilon, P2, mix, liq_or_gas, Z2) + R * (T + epsilon) * Log(Z2)) / (R * (T + epsilon)))
-
-            t1.Start()
-            t2.Start()
+            t2 = TaskHelper.Run(Sub() Ar2 = (Helmholtz(T + epsilon, P2, mix, liq_or_gas, Z2) + R * (T + epsilon) * Log(Z2)) / (R * (T + epsilon)))
 
             Task.WaitAll(t1, t2)
 
@@ -643,11 +619,8 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
             End If
 
-            t1 = New Task(Sub() Ar = (Helmholtz(T, P, mix, liq_or_gas, Z) + R * T * Log(Z)) / (R * T))
-            t2 = New Task(Sub() Ar2 = (Helmholtz(T, P2, mix, liq_or_gas, Z2) + R * T * Log(Z2)) / (R * T))
-
-            t1.Start()
-            t2.Start()
+            t1 = TaskHelper.Run(Sub() Ar = (Helmholtz(T, P, mix, liq_or_gas, Z) + R * T * Log(Z)) / (R * T))
+            t2 = TaskHelper.Run(Sub() Ar2 = (Helmholtz(T, P2, mix, liq_or_gas, Z2) + R * T * Log(Z2)) / (R * T))
 
             Task.WaitAll(t1, t2)
 
@@ -702,12 +675,9 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
             End If
 
-            t1 = New Task(Sub() Ar = CalcdFdT(T, P, liq_or_gas, Z))
+            t1 = TaskHelper.Run(Sub() Ar = CalcdFdT(T, P, liq_or_gas, Z))
 
-            t2 = New Task(Sub() Ar2 = CalcdFdT(T, P2, liq_or_gas, Z2))
-
-            t1.Start()
-            t2.Start()
+            t2 = TaskHelper.Run(Sub() Ar2 = CalcdFdT(T, P2, liq_or_gas, Z2))
 
             Task.WaitAll(t1, t2)
 
@@ -836,29 +806,25 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
             Dim t1, t2, t3 As Task
 
             'Hard chain contribution
-            t1 = New Task(Sub() muHC = mu_HC(T, dens_num, mix))
+            t1 = TaskHelper.Run(Sub() muHC = mu_HC(T, dens_num, mix))
 
             'Dispersive contribution
-            t2 = New Task(Sub() muDisp = mu_Disp(T, dens_num, mix))
+            t2 = TaskHelper.Run(Sub() muDisp = mu_Disp(T, dens_num, mix))
 
             'Association contribution
-            t3 = New Task(Sub()
-                              NumAss = zeros(mix.numC)
+            t3 = TaskHelper.Run(Sub()
+                                    NumAss = zeros(mix.numC)
 
-                              For i = 1 To mix.numC
-                                  NumAss(i) = mix.comp(i).EoSParam(4)
-                              Next
+                                    For i = 1 To mix.numC
+                                        NumAss(i) = mix.comp(i).EoSParam(4)
+                                    Next
 
-                              If sum(NumAss) > 0 Then
-                                  muAss = mu_Ass(T, dens_num, mix)
-                              Else
-                                  muAss = zeros(mix.numC)
-                              End If
-                          End Sub)
-
-            t1.Start()
-            t2.Start()
-            t3.Start()
+                                    If sum(NumAss) > 0 Then
+                                        muAss = mu_Ass(T, dens_num, mix)
+                                    Else
+                                        muAss = zeros(mix.numC)
+                                    End If
+                                End Sub)
 
             Task.WaitAll(t1, t2, t3)
 

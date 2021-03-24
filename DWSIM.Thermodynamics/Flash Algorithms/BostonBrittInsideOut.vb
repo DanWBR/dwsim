@@ -23,6 +23,7 @@ Imports DWSIM.MathOps.MathEx.Common
 
 Imports System.Threading.Tasks
 Imports System.Linq
+Imports DWSIM.SharedClasses
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
@@ -1007,25 +1008,23 @@ restart:    Do
 
             If Settings.EnableParallelProcessing Then
 
-                Dim task1 As Task = New Task(Sub()
-                                                 DSv1 = PP.DW_CalcEntropyDeparture(Vy, T, P, PropertyPackages.State.Vapor) * PP.AUX_MMM(Vy)
-                                                 DSv2 = PP.DW_CalcEntropyDeparture(Vy, Tref, P, PropertyPackages.State.Vapor) * PP.AUX_MMM(Vy)
-                                                 C = DSv2
-                                                 D = (DSv1 - C) / (T - Tref)
-                                             End Sub)
-                Dim task2 As Task = New Task(Sub()
-                                                 If T < MathEx.Common.Max(VTc, Vz) Then
-                                                     DSl1 = PP.DW_CalcEntropyDeparture(Vx, T, P, PropertyPackages.State.Liquid) * PP.AUX_MMM(Vx)
-                                                     DSl2 = PP.DW_CalcEntropyDeparture(Vx, Tref, P, PropertyPackages.State.Liquid) * PP.AUX_MMM(Vx)
-                                                     E = DSl2
-                                                     F = (DSl1 - E) / (T - Tref)
-                                                 Else
-                                                     E = 0
-                                                     F = 0
-                                                 End If
-                                             End Sub)
-                task1.Start()
-                task2.Start()
+                Dim task1 As Task = TaskHelper.Run(Sub()
+                                                       DSv1 = PP.DW_CalcEntropyDeparture(Vy, T, P, PropertyPackages.State.Vapor) * PP.AUX_MMM(Vy)
+                                                       DSv2 = PP.DW_CalcEntropyDeparture(Vy, Tref, P, PropertyPackages.State.Vapor) * PP.AUX_MMM(Vy)
+                                                       C = DSv2
+                                                       D = (DSv1 - C) / (T - Tref)
+                                                   End Sub)
+                Dim task2 As Task = TaskHelper.Run(Sub()
+                                                       If T < MathEx.Common.Max(VTc, Vz) Then
+                                                           DSl1 = PP.DW_CalcEntropyDeparture(Vx, T, P, PropertyPackages.State.Liquid) * PP.AUX_MMM(Vx)
+                                                           DSl2 = PP.DW_CalcEntropyDeparture(Vx, Tref, P, PropertyPackages.State.Liquid) * PP.AUX_MMM(Vx)
+                                                           E = DSl2
+                                                           F = (DSl1 - E) / (T - Tref)
+                                                       Else
+                                                           E = 0
+                                                           F = 0
+                                                       End If
+                                                   End Sub)
                 Task.WaitAll(task1, task2)
 
             Else
@@ -1123,25 +1122,23 @@ restart:    Do
 
                 If Settings.EnableParallelProcessing Then
 
-                    Dim task1 As Task = New Task(Sub()
-                                                     DSv1 = PP.DW_CalcEntropyDeparture(Vy, T, P, PropertyPackages.State.Vapor) * PP.AUX_MMM(Vy)
-                                                     DSv2 = PP.DW_CalcEntropyDeparture(Vy, T0, P, PropertyPackages.State.Vapor) * PP.AUX_MMM(Vy)
-                                                     Cc = DSv2
-                                                     Dc = (DSv1 - Cc) / (T - T0)
-                                                 End Sub)
-                    Dim task2 As Task = New Task(Sub()
-                                                     If T < MathEx.Common.Max(VTc, Vz) Then
-                                                         DSl1 = PP.DW_CalcEntropyDeparture(Vx, T, P, PropertyPackages.State.Liquid) * PP.AUX_MMM(Vx)
-                                                         DSl2 = PP.DW_CalcEntropyDeparture(Vx, T0, P, PropertyPackages.State.Liquid) * PP.AUX_MMM(Vx)
-                                                         Ec = DSl2
-                                                         Fc = (DSl1 - Ec) / (T - T0)
-                                                     Else
-                                                         Ec = 0
-                                                         Fc = 0
-                                                     End If
-                                                 End Sub)
-                    task1.Start()
-                    task2.Start()
+                    Dim task1 As Task = TaskHelper.Run(Sub()
+                                                           DSv1 = PP.DW_CalcEntropyDeparture(Vy, T, P, PropertyPackages.State.Vapor) * PP.AUX_MMM(Vy)
+                                                           DSv2 = PP.DW_CalcEntropyDeparture(Vy, T0, P, PropertyPackages.State.Vapor) * PP.AUX_MMM(Vy)
+                                                           Cc = DSv2
+                                                           Dc = (DSv1 - Cc) / (T - T0)
+                                                       End Sub)
+                    Dim task2 As Task = TaskHelper.Run(Sub()
+                                                           If T < MathEx.Common.Max(VTc, Vz) Then
+                                                               DSl1 = PP.DW_CalcEntropyDeparture(Vx, T, P, PropertyPackages.State.Liquid) * PP.AUX_MMM(Vx)
+                                                               DSl2 = PP.DW_CalcEntropyDeparture(Vx, T0, P, PropertyPackages.State.Liquid) * PP.AUX_MMM(Vx)
+                                                               Ec = DSl2
+                                                               Fc = (DSl1 - Ec) / (T - T0)
+                                                           Else
+                                                               Ec = 0
+                                                               Fc = 0
+                                                           End If
+                                                       End Sub)
                     Task.WaitAll(task1, task2)
 
                 Else

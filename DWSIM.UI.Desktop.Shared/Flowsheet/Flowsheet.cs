@@ -125,13 +125,6 @@ namespace DWSIM.UI.Desktop.Shared
 
             st.ContinueWith((t) =>
             {
-                //if (!Application.Instance.Platform.IsWpf)
-                //{
-                //    Application.Instance.AsyncInvoke(() =>
-                //    {
-                //        FlowsheetControl.Invalidate();
-                //    });
-                //}
                 GlobalSettings.Settings.CalculatorStopRequested = false;
                 GlobalSettings.Settings.CalculatorBusy = false;
                 GlobalSettings.Settings.TaskCancellationTokenSource = new System.Threading.CancellationTokenSource();
@@ -145,7 +138,7 @@ namespace DWSIM.UI.Desktop.Shared
             {
                 try
                 {
-                    st.Start();
+                    st.Start(DWSIM.GlobalSettings.Settings.AppTaskScheduler);
                     st.Wait();
                 }
                 catch (AggregateException aex)
@@ -172,7 +165,7 @@ namespace DWSIM.UI.Desktop.Shared
             }
             else
             {
-                st.Start();
+                st.Start(DWSIM.GlobalSettings.Settings.AppTaskScheduler);
             }
 
         }
@@ -212,7 +205,7 @@ namespace DWSIM.UI.Desktop.Shared
 
             try
             {
-                st.Start();
+                st.Start(DWSIM.GlobalSettings.Settings.AppTaskScheduler);
                 st.Wait();
             }
             catch (AggregateException aex)

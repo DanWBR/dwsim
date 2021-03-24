@@ -28,6 +28,7 @@ Imports DWSIM.Interfaces.Enums
 Imports DWSIM.GlobalSettings
 Imports DWSIM.ExtensionMethods
 Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
+Imports DWSIM.SharedClasses
 
 'custom event handler declaration
 Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventArgs, ByVal extrainfo As Object)
@@ -1352,6 +1353,8 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                             Settings.AppTaskScheduler = New TaskSchedulers.StaTaskScheduler(nthreads)
                         Case 2 'limited concurrency
                             Settings.AppTaskScheduler = New TaskSchedulers.LimitedConcurrencyLevelTaskScheduler(nthreads)
+                        Case Else
+                            'custom scheduler
                     End Select
 
                     Try

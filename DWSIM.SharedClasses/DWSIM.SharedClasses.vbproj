@@ -192,6 +192,7 @@
     </Compile>
     <Compile Include="Patrons\Patrons.vb" />
     <Compile Include="SimulationCharts\Charts.vb" />
+    <Compile Include="TaskHelper\TaskHelper.vb" />
     <Compile Include="UnitsOfMeasure\SystemsOfUnits.vb" />
     <Compile Include="UpdateCheck\UpdateCheck.vb" />
   </ItemGroup>

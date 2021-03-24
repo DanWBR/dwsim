@@ -24,6 +24,7 @@ Imports DWSIM.MathOps.MathEx.Common
 
 Imports System.Threading.Tasks
 Imports DotNumerics.Optimization
+Imports DWSIM.SharedClasses
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
@@ -447,14 +448,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             If Settings.EnableParallelProcessing Then
 
-                Dim task1 As Task = New Task(Sub()
-                                                 Ki1 = PP.DW_CalcKvalue(Vx1EST, VyEST, T, P)
-                                             End Sub)
-                Dim task2 As Task = New Task(Sub()
-                                                 Ki2 = PP.DW_CalcKvalue(Vx2EST, VyEST, T, P)
-                                             End Sub)
-                task1.Start()
-                task2.Start()
+                Dim task1 As Task = TaskHelper.Run(Sub()
+                                                       Ki1 = PP.DW_CalcKvalue(Vx1EST, VyEST, T, P)
+                                                   End Sub)
+                Dim task2 As Task = TaskHelper.Run(Sub()
+                                                       Ki2 = PP.DW_CalcKvalue(Vx2EST, VyEST, T, P)
+                                                   End Sub)
                 Task.WaitAll(task1, task2)
 
             Else
@@ -529,12 +528,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 IObj2?.SetCurrent()
 
                 If Settings.EnableParallelProcessing Then
-                    Dim task1 As Task = New Task(Sub() CFL1 = proppack.DW_CalcFugCoeff(Vx1, T, P, State.Liquid))
-                    Dim task2 As Task = New Task(Sub() CFL2 = proppack.DW_CalcFugCoeff(Vx2, T, P, State.Liquid))
-                    Dim task3 As Task = New Task(Sub() CFV = proppack.DW_CalcFugCoeff(Vy, T, P, State.Vapor))
-                    task1.Start()
-                    task2.Start()
-                    task3.Start()
+                    Dim task1 As Task = TaskHelper.Run(Sub() CFL1 = proppack.DW_CalcFugCoeff(Vx1, T, P, State.Liquid))
+                    Dim task2 As Task = TaskHelper.Run(Sub() CFL2 = proppack.DW_CalcFugCoeff(Vx2, T, P, State.Liquid))
+                    Dim task3 As Task = TaskHelper.Run(Sub() CFV = proppack.DW_CalcFugCoeff(Vy, T, P, State.Vapor))
                     Task.WaitAll(task1, task2, task3)
                 Else
                     IObj2?.SetCurrent()
@@ -745,12 +741,9 @@ out:
             brent.DefineFuncDelegate(Function(x)
                                          Dim l1x, l2x As Double
                                          If Settings.EnableParallelProcessing Then
-                                             Dim task1 As Task = New Task(Sub() fcv = proppack.DW_CalcFugCoeff(_Vy, T, P, State.Vapor))
-                                             Dim task2 As Task = New Task(Sub() fcl = proppack.DW_CalcFugCoeff(_Vx1, T, P, State.Liquid))
-                                             Dim task3 As Task = New Task(Sub() fcl2 = proppack.DW_CalcFugCoeff(_Vx2, T, P, State.Liquid))
-                                             task1.Start()
-                                             task2.Start()
-                                             task3.Start()
+                                             Dim task1 As Task = TaskHelper.Run(Sub() fcv = proppack.DW_CalcFugCoeff(_Vy, T, P, State.Vapor))
+                                             Dim task2 As Task = TaskHelper.Run(Sub() fcl = proppack.DW_CalcFugCoeff(_Vx1, T, P, State.Liquid))
+                                             Dim task3 As Task = TaskHelper.Run(Sub() fcl2 = proppack.DW_CalcFugCoeff(_Vx2, T, P, State.Liquid))
                                              Task.WaitAll(task1, task2, task3)
                                          Else
                                              fcv = proppack.DW_CalcFugCoeff(_Vy, T, P, State.Vapor)
@@ -789,12 +782,9 @@ out:
             Dim fcv(n), fcl(n), fcl2(n), Gm, Gv, Gl1, Gl2, _V As Double
 
             If Settings.EnableParallelProcessing Then
-                Dim task1 As Task = New Task(Sub() fcv = proppack.DW_CalcFugCoeff(_Vy, T, P, State.Vapor))
-                Dim task2 As Task = New Task(Sub() fcl = proppack.DW_CalcFugCoeff(_Vx1, T, P, State.Liquid))
-                Dim task3 As Task = New Task(Sub() fcl2 = proppack.DW_CalcFugCoeff(_Vx2, T, P, State.Liquid))
-                task1.Start()
-                task2.Start()
-                task3.Start()
+                Dim task1 As Task = TaskHelper.Run(Sub() fcv = proppack.DW_CalcFugCoeff(_Vy, T, P, State.Vapor))
+                Dim task2 As Task = TaskHelper.Run(Sub() fcl = proppack.DW_CalcFugCoeff(_Vx1, T, P, State.Liquid))
+                Dim task3 As Task = TaskHelper.Run(Sub() fcl2 = proppack.DW_CalcFugCoeff(_Vx2, T, P, State.Liquid))
                 Task.WaitAll(task1, task2, task3)
             Else
                 fcv = proppack.DW_CalcFugCoeff(_Vy, T, P, State.Vapor)

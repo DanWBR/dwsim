@@ -3386,20 +3386,20 @@ Label_00CC:
                     'Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Salvandosimulao") + " (" + Me.filename + ")"
                     Application.DoEvents()
                     If Path.GetExtension(Me.filename).ToLower = ".dwxml" Then
-                        Task.Factory.StartNew(Sub() SaveXML(Me.filename, Me.ActiveMdiChild)).ContinueWith(Sub(t)
-                                                                                                              'Me.ToolStripStatusLabel1.Text = ""
-                                                                                                              If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
-                                                                                                          End Sub, TaskContinuationOptions.ExecuteSynchronously)
+                        TaskHelper.Run(Sub() SaveXML(Me.filename, Me.ActiveMdiChild)).ContinueWith(Sub(t)
+                                                                                                       'Me.ToolStripStatusLabel1.Text = ""
+                                                                                                       If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
+                                                                                                   End Sub, TaskContinuationOptions.ExecuteSynchronously)
                     ElseIf Path.GetExtension(Me.filename).ToLower = ".xml" Then
-                        Task.Factory.StartNew(Sub() SaveMobileXML(Me.filename, Me.ActiveMdiChild)).ContinueWith(Sub(t)
-                                                                                                                    'Me.ToolStripStatusLabel1.Text = ""
-                                                                                                                    If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
-                                                                                                                End Sub, TaskContinuationOptions.ExecuteSynchronously)
+                        TaskHelper.Run(Sub() SaveMobileXML(Me.filename, Me.ActiveMdiChild)).ContinueWith(Sub(t)
+                                                                                                             'Me.ToolStripStatusLabel1.Text = ""
+                                                                                                             If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
+                                                                                                         End Sub, TaskContinuationOptions.ExecuteSynchronously)
                     ElseIf Path.GetExtension(Me.filename).ToLower = ".dwxmz" Then
-                        Task.Factory.StartNew(Sub() SaveXMLZIP(Me.filename, Me.ActiveMdiChild)).ContinueWith(Sub(t)
-                                                                                                                 ' Me.ToolStripStatusLabel1.Text = ""
-                                                                                                                 If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
-                                                                                                             End Sub, TaskContinuationOptions.ExecuteSynchronously)
+                        TaskHelper.Run(Sub() SaveXMLZIP(Me.filename, Me.ActiveMdiChild)).ContinueWith(Sub(t)
+                                                                                                          ' Me.ToolStripStatusLabel1.Text = ""
+                                                                                                          If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
+                                                                                                      End Sub, TaskContinuationOptions.ExecuteSynchronously)
                     Else
                         Me.bgSaveFile.RunWorkerAsync()
                     End If
@@ -3655,17 +3655,17 @@ Label_00CC:
                                 '    Me.ToolStripStatusLabel1.Text = ""
                                 'End Try
                             ElseIf Path.GetExtension(form2.Options.FilePath).ToLower = ".dwxml" Then
-                                Task.Factory.StartNew(Sub() SaveXML(form2.Options.FilePath, form2)).ContinueWith(Sub(t)
-                                                                                                                     form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
-                                                                                                                 End Sub, TaskContinuationOptions.OnlyOnFaulted)
+                                TaskHelper.Run(Sub() SaveXML(form2.Options.FilePath, form2)).ContinueWith(Sub(t)
+                                                                                                              form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
+                                                                                                          End Sub, TaskContinuationOptions.OnlyOnFaulted)
                             ElseIf Path.GetExtension(form2.Options.FilePath).ToLower = ".xml" Then
-                                Task.Factory.StartNew(Sub() SaveMobileXML(form2.Options.FilePath, form2)).ContinueWith(Sub(t)
-                                                                                                                           form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
-                                                                                                                       End Sub, TaskContinuationOptions.OnlyOnFaulted)
+                                TaskHelper.Run(Sub() SaveMobileXML(form2.Options.FilePath, form2)).ContinueWith(Sub(t)
+                                                                                                                    form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
+                                                                                                                End Sub, TaskContinuationOptions.OnlyOnFaulted)
                             ElseIf Path.GetExtension(form2.Options.FilePath).ToLower = ".dwxmz" Then
-                                Task.Factory.StartNew(Sub() SaveXMLZIP(form2.Options.FilePath, form2)).ContinueWith(Sub(t)
-                                                                                                                        form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
-                                                                                                                    End Sub, TaskContinuationOptions.OnlyOnFaulted)
+                                TaskHelper.Run(Sub() SaveXMLZIP(form2.Options.FilePath, form2)).ContinueWith(Sub(t)
+                                                                                                                 form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
+                                                                                                             End Sub, TaskContinuationOptions.OnlyOnFaulted)
                             End If
                         Else
                             Dim myStream As System.IO.FileStream
@@ -3684,17 +3684,17 @@ Label_00CC:
                                         '    Me.ToolStripStatusLabel1.Text = ""
                                         'End Try
                                     ElseIf Path.GetExtension(myStream.Name).ToLower = ".dwxml" Then
-                                        Task.Factory.StartNew(Sub() SaveXML(myStream.Name, form2)).ContinueWith(Sub(t)
-                                                                                                                    form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
-                                                                                                                End Sub, TaskContinuationOptions.OnlyOnFaulted)
+                                        TaskHelper.Run(Sub() SaveXML(myStream.Name, form2)).ContinueWith(Sub(t)
+                                                                                                             form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
+                                                                                                         End Sub, TaskContinuationOptions.OnlyOnFaulted)
                                     ElseIf Path.GetExtension(myStream.Name).ToLower = ".xml" Then
-                                        Task.Factory.StartNew(Sub() SaveMobileXML(myStream.Name, form2)).ContinueWith(Sub(t)
-                                                                                                                          form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
-                                                                                                                      End Sub, TaskContinuationOptions.OnlyOnFaulted)
+                                        TaskHelper.Run(Sub() SaveMobileXML(myStream.Name, form2)).ContinueWith(Sub(t)
+                                                                                                                   form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
+                                                                                                               End Sub, TaskContinuationOptions.OnlyOnFaulted)
                                     ElseIf Path.GetExtension(myStream.Name).ToLower = ".dwxmz" Then
-                                        Task.Factory.StartNew(Sub() SaveXMLZIP(myStream.Name, form2)).ContinueWith(Sub(t)
-                                                                                                                       form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
-                                                                                                                   End Sub, TaskContinuationOptions.OnlyOnFaulted)
+                                        TaskHelper.Run(Sub() SaveXMLZIP(myStream.Name, form2)).ContinueWith(Sub(t)
+                                                                                                                form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
+                                                                                                            End Sub, TaskContinuationOptions.OnlyOnFaulted)
                                     End If
                                 End If
                             End If
@@ -3757,10 +3757,10 @@ Label_00CC:
                         SaveXML(form2.Options.FilePath, form2)
                     ElseIf Path.GetExtension(Me.filename).ToLower = ".xml" Then
                         If saveasync Then
-                            Task.Factory.StartNew(Sub() SaveMobileXML(form2.Options.FilePath, form2)).ContinueWith(Sub(t)
-                                                                                                                       'Me.ToolStripStatusLabel1.Text = ""
-                                                                                                                       If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
-                                                                                                                   End Sub, TaskContinuationOptions.ExecuteSynchronously)
+                            TaskHelper.Run(Sub() SaveMobileXML(form2.Options.FilePath, form2)).ContinueWith(Sub(t)
+                                                                                                                'Me.ToolStripStatusLabel1.Text = ""
+                                                                                                                If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
+                                                                                                            End Sub, TaskContinuationOptions.ExecuteSynchronously)
                         Else
                             SaveMobileXML(form2.Options.FilePath, form2)
                         End If

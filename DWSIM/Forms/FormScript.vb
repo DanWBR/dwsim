@@ -268,62 +268,62 @@ Imports IronPython.Hosting
 
         If Not Settings.PythonInitialized Then
 
-            Dim t As Task = Task.Factory.StartNew(Sub()
-                                                      fsheet.UIThread(Sub()
-                                                                          If Not GlobalSettings.Settings.IsRunningOnMono() Then
-                                                                              PythonEngine.PythonHome = GlobalSettings.Settings.PythonPath
-                                                                          End If
-                                                                          PythonEngine.Initialize()
-                                                                          Settings.PythonInitialized = True
-                                                                          PythonEngine.BeginAllowThreads()
-                                                                      End Sub)
-                                                  End Sub)
+            Dim t As Task = TaskHelper.Run(Sub()
+                                               fsheet.UIThread(Sub()
+                                                                   If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                                                                       PythonEngine.PythonHome = GlobalSettings.Settings.PythonPath
+                                                                   End If
+                                                                   PythonEngine.Initialize()
+                                                                   Settings.PythonInitialized = True
+                                                                   PythonEngine.BeginAllowThreads()
+                                                               End Sub)
+                                           End Sub)
             t.Wait()
 
         End If
 
-        Dim t3 As Task = Task.Factory.StartNew(Sub()
-                                                   Using Py.GIL
+        Dim t3 As Task = TaskHelper.Run(Sub()
+                                            Using Py.GIL
 
-                                                       Try
+                                                Try
 
-                                                           Dim sys As Object = PythonEngine.ImportModule("sys")
+                                                    Dim sys As Object = PythonEngine.ImportModule("sys")
 
-                                                           If Not GlobalSettings.Settings.IsRunningOnMono() Then
-                                                               Dim codeToRedirectOutput As String = "import sys" & vbCrLf + "from io import BytesIO as StringIO" & vbCrLf + "sys.stdout = mystdout = StringIO()" & vbCrLf + "sys.stdout.flush()" & vbCrLf + "sys.stderr = mystderr = StringIO()" & vbCrLf + "sys.stderr.flush()"
-                                                               PythonEngine.RunSimpleString(codeToRedirectOutput)
-                                                           End If
+                                                    If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                                                        Dim codeToRedirectOutput As String = "import sys" & vbCrLf + "from io import BytesIO as StringIO" & vbCrLf + "sys.stdout = mystdout = StringIO()" & vbCrLf + "sys.stdout.flush()" & vbCrLf + "sys.stderr = mystderr = StringIO()" & vbCrLf + "sys.stderr.flush()"
+                                                        PythonEngine.RunSimpleString(codeToRedirectOutput)
+                                                    End If
 
-                                                           Dim locals As New PyDict()
+                                                    Dim locals As New PyDict()
 
-                                                           locals.SetItem("Plugins", My.Application.UtilityPlugins.ToPython)
-                                                           locals.SetItem("Flowsheet", fsheet.ToPython)
-                                                           locals.SetItem("Spreadsheet", fsheet.FormSpreadsheet.Spreadsheet.ToPython)
-                                                           Dim Solver As New FlowsheetSolver.FlowsheetSolver
-                                                           locals.SetItem("Solver", Solver.ToPython)
+                                                    locals.SetItem("Plugins", My.Application.UtilityPlugins.ToPython)
+                                                    locals.SetItem("Flowsheet", fsheet.ToPython)
+                                                    locals.SetItem("Spreadsheet", fsheet.FormSpreadsheet.Spreadsheet.ToPython)
+                                                    Dim Solver As New FlowsheetSolver.FlowsheetSolver
+                                                    locals.SetItem("Solver", Solver.ToPython)
 
-                                                           PythonEngine.Exec(scripttext, Nothing, locals.Handle)
+                                                    PythonEngine.Exec(scripttext, Nothing, locals.Handle)
 
-                                                           If Not GlobalSettings.Settings.IsRunningOnMono() Then
-                                                               fsheet.WriteToLog(sys.stdout.getvalue().ToString, Color.Blue, MessageType.Information)
-                                                           End If
+                                                    If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                                                        fsheet.WriteToLog(sys.stdout.getvalue().ToString, Color.Blue, MessageType.Information)
+                                                    End If
 
-                                                       Catch ex As Exception
+                                                Catch ex As Exception
 
-                                                           If My.Application.CommandLineMode Then
-                                                               Console.WriteLine()
-                                                               Console.WriteLine("Error running script: " & ex.ToString)
-                                                               Console.WriteLine()
-                                                           Else
-                                                               fsheet.WriteToLog("Error running script: " & ex.Message.ToString, Color.Red, MessageType.GeneralError)
-                                                           End If
+                                                    If My.Application.CommandLineMode Then
+                                                        Console.WriteLine()
+                                                        Console.WriteLine("Error running script: " & ex.ToString)
+                                                        Console.WriteLine()
+                                                    Else
+                                                        fsheet.WriteToLog("Error running script: " & ex.Message.ToString, Color.Red, MessageType.GeneralError)
+                                                    End If
 
-                                                       Finally
+                                                Finally
 
-                                                       End Try
+                                                End Try
 
-                                                   End Using
-                                               End Sub)
+                                            End Using
+                                        End Sub)
         t3.Wait()
 
     End Sub
@@ -869,17 +869,17 @@ Imports IronPython.Hosting
                 Dim script = DirectCast(Me.TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControlMono).txtScript.Text
                 Dim interp = DirectCast(Me.TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControlMono).cbPythonEngine.SelectedIndex
                 If interp = 0 Then
-                    Task.Factory.StartNew(Sub() RunScript_IronPython(script, fc, Nothing))
+                    TaskHelper.Run(Sub() RunScript_IronPython(script, fc, Nothing))
                 Else
-                    Task.Factory.StartNew(Sub() RunScript_PythonNET(script, fc))
+                    TaskHelper.Run(Sub() RunScript_PythonNET(script, fc))
                 End If
             Else
                 Dim script = DirectCast(Me.TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControl).txtScript.Text
                 Dim interp = DirectCast(Me.TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControl).cbPythonEngine.SelectedIndex
                 If interp = 0 Then
-                    Task.Factory.StartNew(Sub() RunScript_IronPython(script, fc, Nothing))
+                    TaskHelper.Run(Sub() RunScript_IronPython(script, fc, Nothing))
                 Else
-                    Task.Factory.StartNew(Sub() RunScript_PythonNET(script, fc))
+                    TaskHelper.Run(Sub() RunScript_PythonNET(script, fc))
                 End If
             End If
         End If
@@ -912,66 +912,66 @@ Imports IronPython.Hosting
 
                 CancelDebugToken = New CancellationTokenSource()
 
-                Dim t = Task.Factory.StartNew(Sub() RunScript_IronPython(script, fc, Sub(frame)
+                Dim t = TaskHelper.Run(Sub() RunScript_IronPython(script, fc, Sub(frame)
 
-                                                                                         Dim breakpoints As New List(Of Integer)
+                                                                                  Dim breakpoints As New List(Of Integer)
 
-                                                                                         Me.UIThreadInvoke(Sub() breakpoints = scripteditor.txtScript.GetBookmarks)
+                                                                                  Me.UIThreadInvoke(Sub() breakpoints = scripteditor.txtScript.GetBookmarks)
 
-                                                                                         If breakpoints.Contains(frame.f_lineno) Then
+                                                                                  If breakpoints.Contains(frame.f_lineno) Then
 
-                                                                                             DebuggingPaused = True
+                                                                                      DebuggingPaused = True
 
-                                                                                             Me.UIThreadInvoke(Sub()
+                                                                                      Me.UIThreadInvoke(Sub()
 
-                                                                                                                   scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerAdd(4)
-                                                                                                                   scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerAdd(5)
-                                                                                                                   scripteditor.txtScript.Lines(frame.f_lineno - 1).Goto()
+                                                                                                            scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerAdd(4)
+                                                                                                            scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerAdd(5)
+                                                                                                            scripteditor.txtScript.Lines(frame.f_lineno - 1).Goto()
 
-                                                                                                                   Dim vars As New List(Of Object)
-                                                                                                                   Dim names As New List(Of String)
-                                                                                                                   For Each item In frame.f_globals
-                                                                                                                       names.Add(item.Key)
-                                                                                                                       vars.Add(item.Value)
-                                                                                                                   Next
+                                                                                                            Dim vars As New List(Of Object)
+                                                                                                            Dim names As New List(Of String)
+                                                                                                            For Each item In frame.f_globals
+                                                                                                                names.Add(item.Key)
+                                                                                                                vars.Add(item.Value)
+                                                                                                            Next
 
-                                                                                                                   tv.Model = New TypeBrowserModel(vars, names)
+                                                                                                            tv.Model = New TypeBrowserModel(vars, names)
 
-                                                                                                               End Sub)
+                                                                                                        End Sub)
 
-                                                                                             While DebuggingPaused
+                                                                                      While DebuggingPaused
 
-                                                                                                 If CancelDebugToken.IsCancellationRequested Then
+                                                                                          If CancelDebugToken.IsCancellationRequested Then
 
-                                                                                                     Me.UIThreadInvoke(Sub()
+                                                                                              Me.UIThreadInvoke(Sub()
 
-                                                                                                                           scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerDelete(4)
-                                                                                                                           scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerDelete(5)
+                                                                                                                    scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerDelete(4)
+                                                                                                                    scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerDelete(5)
 
-                                                                                                                           tv.Model = Nothing
+                                                                                                                    tv.Model = Nothing
 
-                                                                                                                       End Sub)
+                                                                                                                End Sub)
 
-                                                                                                     Throw New TaskCanceledException()
+                                                                                              Throw New TaskCanceledException()
 
-                                                                                                 End If
+                                                                                          End If
 
-                                                                                                 Thread.Sleep(100)
+                                                                                          Thread.Sleep(100)
 
-                                                                                             End While
+                                                                                      End While
 
-                                                                                             Me.UIThreadInvoke(Sub()
+                                                                                      Me.UIThreadInvoke(Sub()
 
-                                                                                                                   scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerDelete(4)
-                                                                                                                   scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerDelete(5)
+                                                                                                            scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerDelete(4)
+                                                                                                            scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerDelete(5)
 
-                                                                                                                   tv.Model = Nothing
+                                                                                                            tv.Model = Nothing
 
-                                                                                                               End Sub)
+                                                                                                        End Sub)
 
-                                                                                         End If
+                                                                                  End If
 
-                                                                                     End Sub), CancelDebugToken)
+                                                                              End Sub), CancelDebugToken.Token)
 
                 t.ContinueWith(Sub()
                                    UIThread(Sub()

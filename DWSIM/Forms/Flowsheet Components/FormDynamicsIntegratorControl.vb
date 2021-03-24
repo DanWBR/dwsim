@@ -417,9 +417,9 @@ Public Class FormDynamicsIntegratorControl
                               End Sub)
 
         If waittofinish Then
-            maintask.RunSynchronously()
+            maintask.RunSynchronously(GlobalSettings.Settings.AppTaskScheduler)
         Else
-            maintask.Start()
+            maintask.Start(GlobalSettings.Settings.AppTaskScheduler)
         End If
 
         Return maintask

@@ -25,6 +25,7 @@ Imports System.IO
 Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.Runtime.Serialization
 Imports IronPython.Runtime.Operations
+Imports DWSIM.SharedClasses
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
@@ -797,18 +798,12 @@ will converge to this solution.")
 
             If Settings.EnableParallelProcessing Then
 
-                Dim task1 = Task.Factory.StartNew(Sub()
-                                                      fcv = pp.DW_CalcFugCoeff(Vz, T, P, State.Vapor)
-                                                  End Sub,
-                                                      Settings.TaskCancellationTokenSource.Token,
-                                                      TaskCreationOptions.None,
-                                                     Settings.AppTaskScheduler)
-                Dim task2 = Task.Factory.StartNew(Sub()
-                                                      fcl = pp.DW_CalcFugCoeff(Vz, T, P, State.Liquid)
-                                                  End Sub,
-                                                  Settings.TaskCancellationTokenSource.Token,
-                                                  TaskCreationOptions.None,
-                                                 Settings.AppTaskScheduler)
+                Dim task1 = TaskHelper.Run(Sub()
+                                               fcv = pp.DW_CalcFugCoeff(Vz, T, P, State.Vapor)
+                                           End Sub, Settings.TaskCancellationTokenSource.Token)
+                Dim task2 = TaskHelper.Run(Sub()
+                                               fcl = pp.DW_CalcFugCoeff(Vz, T, P, State.Liquid)
+                                           End Sub, Settings.TaskCancellationTokenSource.Token)
                 Task.WaitAll(task1, task2)
 
             Else
@@ -1239,14 +1234,12 @@ will converge to this solution.")
                 Do
                     If Settings.EnableParallelProcessing Then
 
-                        Dim task1 As Task = New Task(Sub()
-                                                         fx = 1 - CalcPIP(Vx, P, Tinv, pp, eos)(0)
-                                                     End Sub)
-                        Dim task2 As Task = New Task(Sub()
-                                                         fx2 = 1 - CalcPIP(Vx, P, Tinv - 1, pp, eos)(0)
-                                                     End Sub)
-                        task1.Start()
-                        task2.Start()
+                        Dim task1 As Task = TaskHelper.Run(Sub()
+                                                               fx = 1 - CalcPIP(Vx, P, Tinv, pp, eos)(0)
+                                                           End Sub)
+                        Dim task2 As Task = TaskHelper.Run(Sub()
+                                                               fx2 = 1 - CalcPIP(Vx, P, Tinv - 1, pp, eos)(0)
+                                                           End Sub)
                         Task.WaitAll(task1, task2)
 
                     Else

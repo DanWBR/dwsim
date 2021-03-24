@@ -10,6 +10,7 @@ using DWSIM.Interfaces.Enums;
 using DWSIM.UnitOperations.SpecialOps;
 using DWSIM.CrossPlatform.UI.Controls.ReoGrid;
 using System.Diagnostics;
+using DWSIM.SharedClasses;
 
 namespace DWSIM.UI.Desktop.Editors.Dynamics
 {
@@ -525,9 +526,9 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             });
 
             if (waittofinish)
-                maintask.RunSynchronously();
+                maintask.RunSynchronously(DWSIM.GlobalSettings.Settings.AppTaskScheduler);
             else
-                maintask.Start();
+                maintask.Start(DWSIM.GlobalSettings.Settings.AppTaskScheduler);
 
             return maintask;
         }

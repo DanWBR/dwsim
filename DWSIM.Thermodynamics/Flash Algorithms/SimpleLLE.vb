@@ -24,6 +24,7 @@ Imports DWSIM.MathOps.MathEx.Common
 
 Imports System.Threading.Tasks
 Imports System.Linq
+Imports DWSIM.SharedClasses
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
@@ -377,16 +378,13 @@ out:        d2 = Date.Now
             Do
                 If Settings.EnableParallelProcessing Then
 
-                    Dim task1 As Task = New Task(Sub()
-                                                     fx = Herror(x1, {P, Vz, PP})
-                                                 End Sub)
-                    Dim task2 As Task = New Task(Sub()
-                                                     fx2 = Herror(x1 + 1, {P, Vz, PP})
-                                                 End Sub)
-                    task1.Start()
-                    task2.Start()
+                    Dim task1 As Task = TaskHelper.Run(Sub()
+                                                           fx = Herror(x1, {P, Vz, PP})
+                                                       End Sub)
+                    Dim task2 As Task = TaskHelper.Run(Sub()
+                                                           fx2 = Herror(x1 + 1, {P, Vz, PP})
+                                                       End Sub)
                     Task.WaitAll(task1, task2)
-
                 Else
                     fx = Herror(x1, {P, Vz, PP})
                     fx2 = Herror(x1 + 1, {P, Vz, PP})
@@ -477,14 +475,12 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
             Do
                 If Settings.EnableParallelProcessing Then
 
-                    Dim task1 As Task = New Task(Sub()
-                                                     fx = Serror(x1, {P, Vz, PP})
-                                                 End Sub)
-                    Dim task2 As Task = New Task(Sub()
-                                                     fx2 = Serror(x1 + 1, {P, Vz, PP})
-                                                 End Sub)
-                    task1.Start()
-                    task2.Start()
+                    Dim task1 As Task = TaskHelper.Run(Sub()
+                                                           fx = Serror(x1, {P, Vz, PP})
+                                                       End Sub)
+                    Dim task2 As Task = TaskHelper.Run(Sub()
+                                                           fx2 = Serror(x1 + 1, {P, Vz, PP})
+                                                       End Sub)
                     Task.WaitAll(task1, task2)
 
                 Else

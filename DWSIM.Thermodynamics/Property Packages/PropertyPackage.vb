@@ -44,6 +44,7 @@ Imports Microsoft.Scripting.Hosting
 Imports sui = DWSIM.UI.Shared.Common
 Imports DWSIM.UI.Shared
 Imports DWSIM.Interfaces.Enums
+Imports DWSIM.SharedClasses
 
 Namespace PropertyPackages
 
@@ -1581,14 +1582,12 @@ Namespace PropertyPackages
 
             If Settings.EnableParallelProcessing Then
 
-                Dim task1 As Task = New Task(Sub()
-                                                 fugliq = Me.DW_CalcFugCoeff(Vx, T, P, State.Liquid)
-                                             End Sub)
-                Dim task2 As Task = New Task(Sub()
-                                                 fugvap = Me.DW_CalcFugCoeff(Vx, T, P, State.Vapor)
-                                             End Sub)
-                task1.Start()
-                task2.Start()
+                Dim task1 As Task = TaskHelper.Run(Sub()
+                                                       fugliq = Me.DW_CalcFugCoeff(Vx, T, P, State.Liquid)
+                                                   End Sub)
+                Dim task2 As Task = TaskHelper.Run(Sub()
+                                                       fugvap = Me.DW_CalcFugCoeff(Vx, T, P, State.Vapor)
+                                                   End Sub)
                 Task.WaitAll(task1, task2)
 
             Else

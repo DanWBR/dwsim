@@ -19,6 +19,7 @@
 Imports System.Math
 Imports Cureos.Numerics
 Imports DWSIM.Interfaces.Enums
+Imports DWSIM.SharedClasses
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
@@ -748,22 +749,18 @@ out:        Return result
 
             If Settings.EnableParallelProcessing Then
 
-                Dim task1 As Task = New Task(Sub()
-                                                 fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
-                                             End Sub)
-                Dim task2 As Task = New Task(Sub()
-                                                 fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
-                                             End Sub)
-                Dim task3 As Task = New Task(Sub()
-                                                 fcl2 = proppack.DW_CalcFugCoeff(Vx2, Tf, Pf, State.Liquid)
-                                             End Sub)
-                Dim task4 As Task = New Task(Sub()
-                                                 fcs = proppack.DW_CalcSolidFugCoeff(Tf, Pf)
-                                             End Sub)
-                task1.Start()
-                task2.Start()
-                task3.Start()
-                task4.Start()
+                Dim task1 As Task = TaskHelper.Run(Sub()
+                                                       fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
+                                                   End Sub)
+                Dim task2 As Task = TaskHelper.Run(Sub()
+                                                       fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
+                                                   End Sub)
+                Dim task3 As Task = TaskHelper.Run(Sub()
+                                                       fcl2 = proppack.DW_CalcFugCoeff(Vx2, Tf, Pf, State.Liquid)
+                                                   End Sub)
+                Dim task4 As Task = TaskHelper.Run(Sub()
+                                                       fcs = proppack.DW_CalcSolidFugCoeff(Tf, Pf)
+                                                   End Sub)
                 Task.WaitAll(task1, task2, task3, task4)
 
             Else
@@ -868,22 +865,18 @@ out:        Return result
 
             If Settings.EnableParallelProcessing Then
 
-                Dim task1 As Task = New Task(Sub()
-                                                 fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
-                                             End Sub)
-                Dim task2 As Task = New Task(Sub()
-                                                 fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
-                                             End Sub)
-                Dim task3 As Task = New Task(Sub()
-                                                 fcl2 = proppack.DW_CalcFugCoeff(Vx2, Tf, Pf, State.Liquid)
-                                             End Sub)
-                Dim task4 As Task = New Task(Sub()
-                                                 fcs = proppack.DW_CalcSolidFugCoeff(Tf, Pf)
-                                             End Sub)
-                task1.Start()
-                task2.Start()
-                task3.Start()
-                task4.Start()
+                Dim task1 As Task = TaskHelper.Run(Sub()
+                                                       fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
+                                                   End Sub)
+                Dim task2 As Task = TaskHelper.Run(Sub()
+                                                       fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
+                                                   End Sub)
+                Dim task3 As Task = TaskHelper.Run(Sub()
+                                                       fcl2 = proppack.DW_CalcFugCoeff(Vx2, Tf, Pf, State.Liquid)
+                                                   End Sub)
+                Dim task4 As Task = TaskHelper.Run(Sub()
+                                                       fcs = proppack.DW_CalcSolidFugCoeff(Tf, Pf)
+                                                   End Sub)
                 Task.WaitAll(task1, task2, task3, task4)
 
             Else
@@ -964,14 +957,12 @@ out:        Return result
                 Next
                 If Settings.EnableParallelProcessing Then
 
-                    Dim task1 As Task = New Task(Sub()
-                                                     f2 = FunctionGradient(x2)
-                                                 End Sub)
-                    Dim task2 As Task = New Task(Sub()
-                                                     f3 = FunctionGradient(x3)
-                                                 End Sub)
-                    task1.Start()
-                    task2.Start()
+                    Dim task1 As Task = TaskHelper.Run(Sub()
+                                                           f2 = FunctionGradient(x2)
+                                                       End Sub)
+                    Dim task2 As Task = TaskHelper.Run(Sub()
+                                                           f3 = FunctionGradient(x3)
+                                                       End Sub)
                     Task.WaitAll(task1, task2)
 
                 Else
