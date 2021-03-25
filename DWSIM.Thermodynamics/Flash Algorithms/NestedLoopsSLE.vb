@@ -861,9 +861,15 @@ out:        d2 = Date.Now
 
                         If Abs(F) < etol / 100 Then Exit Do
 
-                        V = -F / dF + Vant
+                        Dim dfac = (ecount + 1) * 0.1
+                        If dfac > 1.0 Then dfac = 1.0
+                        If -F / dF * dfac + Vant > 1.0 Or -F / dF * dfac + Vant < 0.0 Then
+                            dfac /= 50
+                        End If
 
-                        IObj3?.Paragraphs.Add(String.Format("Updated Vapor Fraction (<math_inline>\beta</math_inline>) value: {0}", V))
+                        V = -F / dF * dfac + Vant
+
+                    IObj3?.Paragraphs.Add(String.Format("Updated Vapor Fraction (<math_inline>\beta</math_inline>) value: {0}", V))
 
                     End If
 

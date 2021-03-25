@@ -6641,8 +6641,13 @@ Final3:
 
         Public Function AUX_TSATi(ByVal PVAP As Double, ByVal comp As ICompoundConstantProperties, ByVal Tguess As Double) As Double
 
+            Dim pvapt As Double
             Return MathNet.Numerics.RootFinding.Brent.FindRoot(Function(T)
-                                                                   Return AUX_PVAPi(comp, T) - PVAP
+                                                                   pvapt = AUX_PVAPi(comp, T)
+                                                                   If Double.IsNaN(pvapt) Or Double.IsNaN(PVAP) Then
+                                                                       Throw New Exception(String.Format("Error calculation vapor pressure for {0} at {1} K.", comp.Name, T))
+                                                                   End If
+                                                                   Return pvapt - PVAP
                                                                End Function, 1.0, 2000.0)
 
         End Function
@@ -6737,7 +6742,13 @@ Final3:
         Public Function AUX_HFUSi(ByVal sub1 As String, ByVal T As Double)
 
             'return DHfus in kJ/kg
-            Return Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.EnthalpyOfFusionAtTf * 1000 / Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Molar_Weight
+            Dim cpc = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties
+
+            If cpc.TemperatureOfFusion <= T Then
+                Return cpc.EnthalpyOfFusionAtTf * 1000 / cpc.Molar_Weight
+            Else
+                Return 0
+            End If
 
         End Function
 

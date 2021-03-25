@@ -72,7 +72,10 @@ Public Class FormOptions
 
         'solver
 
+        If My.Settings.SolverMode = 0 Then My.Settings.SolverMode = 1
+
         cbSolverMode.SelectedIndex = My.Settings.SolverMode
+
         tbServiceBusNamespace.Text = My.Settings.ServiceBusConnectionString
         tbSolverTimeout.Text = My.Settings.SolverTimeoutSeconds
         cbDebugLevel.SelectedIndex = My.Settings.DebugLevel
@@ -471,19 +474,15 @@ Public Class FormOptions
     Private Sub cbSolverMode_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSolverMode.SelectedIndexChanged
         My.Settings.SolverMode = cbSolverMode.SelectedIndex
         Select Case cbSolverMode.SelectedIndex
-            Case 0
-                GroupBoxAzureConfig.Visible = False
-                GroupBoxNetworkComputerConfig.Visible = False
-                tbSolverTimeout.Enabled = False
-            Case 1, 2
+            Case 0, 1
                 GroupBoxAzureConfig.Visible = False
                 GroupBoxNetworkComputerConfig.Visible = False
                 tbSolverTimeout.Enabled = True
-            Case 3
+            Case 2
                 GroupBoxAzureConfig.Visible = True
                 GroupBoxNetworkComputerConfig.Visible = False
                 tbSolverTimeout.Enabled = True
-            Case 4
+            Case 3
                 GroupBoxAzureConfig.Visible = False
                 GroupBoxNetworkComputerConfig.Visible = True
                 tbSolverTimeout.Enabled = True
