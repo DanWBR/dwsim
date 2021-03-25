@@ -1331,10 +1331,6 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
                                               End Sub, Settings.TaskCancellationTokenSource.Token)
 
-                    'configure the task scheduler
-
-                    Dim nthreads As Integer = Settings.MaxThreadMultiplier * System.Environment.ProcessorCount
-
                     Try
                         While Not (Date.Now - d1).TotalMilliseconds >= Settings.SolverTimeoutSeconds * 1000
                             maintask.Wait(500)
