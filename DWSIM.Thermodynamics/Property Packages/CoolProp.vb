@@ -1056,7 +1056,7 @@ Namespace PropertyPackages
                             Pmax = CoolProp.Props1SI(GetCoolPropName(sub1), "PMAX")
                             Tc = CoolProp.Props1SI(GetCoolPropName(sub1), "TCRIT")
                             If T > Tmin And T < Tmax And P > Pmin And P < Pmax And T <= Tc Then
-                                Tb = CoolProp.PropsSI("T", "P", P, "Q", 1, GetCoolPropName(sub1))
+                                If T < Tc Then Tb = CoolProp.PropsSI("T", "P", P, "Q", 1, GetCoolPropName(sub1)) Else Tb = Tc
                                 If T < Tb And Abs(T - Tb) > 0.01 And T > Tmin Then
                                     vk(i) = CoolProp.PropsSI("C", "T", T, "P", P, GetCoolPropName(sub1)) / 1000
                                 Else
@@ -1097,7 +1097,7 @@ Namespace PropertyPackages
                             Pmin = CoolProp.Props1SI(GetCoolPropName(sub1), "PMIN")
                             Pmax = CoolProp.Props1SI(GetCoolPropName(sub1), "PMAX")
                             If T > Tmin And T < Tmax And P > Pmin And P < Pmax Then
-                                Tb = CoolProp.PropsSI("T", "P", P, "Q", 1, GetCoolPropName(sub1))
+                                If T < Tc Then Tb = CoolProp.PropsSI("T", "P", P, "Q", 1, GetCoolPropName(sub1)) Else Tb = Tc
                                 If T > Tb And Abs(T - Tb) > 0.01 Then
                                     vk(i) = CoolProp.PropsSI("C", "T", T, "P", P, GetCoolPropName(sub1)) / 1000
                                 Else
