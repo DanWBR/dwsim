@@ -956,6 +956,8 @@ Namespace Reactors
 
             Dim ids2 = ims.PropertyPackage.RET_VNAMES().ToList
 
+            Dim Hv As Double
+
             cp = Me.GraphicObject.OutputConnectors(0)
             If cp.IsAttached Then
                 ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
@@ -964,7 +966,6 @@ Namespace Reactors
                     .SpecType = StreamSpec.Temperature_and_Pressure
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
-                    .Phases(0).Properties.enthalpy = H / wv
                     Dim comp As BaseClasses.Compound
                     For Each comp In .Phases(0).Compounds.Values
                         If xv = 0.0# Then
@@ -975,6 +976,9 @@ Namespace Reactors
                             comp.MassFraction = Vwy(ids2.IndexOf(comp.Name))
                         End If
                     Next
+                    .PropertyPackage.CurrentMaterialStream = ms
+                    Hv = .PropertyPackage.DW_CalcEnthalpy(ms.GetOverallComposition(), T, P, PropertyPackages.State.Vapor)
+                    .Phases(0).Properties.enthalpy = Hv
                     .Phases(0).Properties.massflow = W * wv
                 End With
             End If
@@ -998,6 +1002,7 @@ Namespace Reactors
                             comp.MassFraction = (Vwx(ids2.IndexOf(comp.Name)) * wl + Vws(ids2.IndexOf(comp.Name)) * ws) / (1 - wv)
                         End If
                     Next
+                    .Phases(0).Properties.enthalpy = (H - Hv * wv) / (1 - wv)
                     .Phases(0).Properties.massflow = W * (1 - wv)
                 End With
             End If

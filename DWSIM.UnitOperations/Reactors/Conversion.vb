@@ -619,7 +619,6 @@ Namespace Reactors
             If cp.IsAttached Then
                 ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
                 With ms
-                    .PropertyPackage.CurrentMaterialStream = ms
                     .SpecType = StreamSpec.Temperature_and_Pressure
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
@@ -633,6 +632,7 @@ Namespace Reactors
                             comp.MassFraction = Vwy(ids.IndexOf(comp.Name))
                         End If
                     Next
+                    .PropertyPackage.CurrentMaterialStream = ms
                     Hv = .PropertyPackage.DW_CalcEnthalpy(ms.GetOverallComposition(), T, P, PropertyPackages.State.Vapor)
                     .Phases(0).Properties.enthalpy = Hv
                     .Phases(0).Properties.massflow = W * wv
