@@ -84,7 +84,7 @@ Partial Class FormConfigUNIQUAC
         resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem3, Me.FaTabStripItem2})
         Me.FaTabStrip1.Name = "FaTabStrip1"
-        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem1
+        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem3
         '
         'FaTabStripItem3
         '
@@ -92,6 +92,7 @@ Partial Class FormConfigUNIQUAC
         Me.FaTabStripItem3.Controls.Add(Me.GroupBox3)
         Me.FaTabStripItem3.IsDrawn = True
         Me.FaTabStripItem3.Name = "FaTabStripItem3"
+        Me.FaTabStripItem3.Selected = True
         resources.ApplyResources(Me.FaTabStripItem3, "FaTabStripItem3")
         '
         'GroupBox3
@@ -332,6 +333,7 @@ Partial Class FormConfigUNIQUAC
         Me.FaTabStripItem1.CanClose = False
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
+        Me.FaTabStripItem1.Selected = True
         resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         '
         'BackgroundWorker1

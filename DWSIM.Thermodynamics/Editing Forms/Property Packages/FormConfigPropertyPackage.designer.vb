@@ -41,13 +41,13 @@ Partial Class FormConfigPropertyPackage
         Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.TabPageU = New System.Windows.Forms.TabPage()
         Me.GroupBox2.SuspendLayout()
         CType(Me.KryptonDataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.IPGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
-        Me.TabPage2.SuspendLayout()
+        Me.TabPageU.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox2
@@ -161,7 +161,7 @@ Partial Class FormConfigPropertyPackage
         '
         resources.ApplyResources(Me.TabControl1, "TabControl1")
         Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Controls.Add(Me.TabPageU)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         '
@@ -172,12 +172,12 @@ Partial Class FormConfigPropertyPackage
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
-        'TabPage2
+        'TabPageU
         '
-        resources.ApplyResources(Me.TabPage2, "TabPage2")
-        Me.TabPage2.Controls.Add(Me.IPGrid)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.TabPageU, "TabPageU")
+        Me.TabPageU.Controls.Add(Me.IPGrid)
+        Me.TabPageU.Name = "TabPageU"
+        Me.TabPageU.UseVisualStyleBackColor = True
         '
         'FormConfigPropertyPackage
         '
@@ -193,7 +193,7 @@ Partial Class FormConfigPropertyPackage
         CType(Me.IPGrid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
-        Me.TabPage2.ResumeLayout(False)
+        Me.TabPageU.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -207,5 +207,5 @@ Partial Class FormConfigPropertyPackage
     Friend WithEvents Column6 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents TabPage1 As TabPage
-    Friend WithEvents TabPage2 As TabPage
+    Friend WithEvents TabPageU As TabPage
 End Class

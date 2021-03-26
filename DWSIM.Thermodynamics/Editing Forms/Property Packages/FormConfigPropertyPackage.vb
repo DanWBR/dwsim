@@ -199,8 +199,6 @@ Public Class FormConfigPropertyPackage
 
     Private Sub FormConfigPR_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        Me.TabPage2.Visible = False
-
         Me.Text += " (" & _pp.Tag & ") [" + _pp.ComponentName + "]"
 
         Me.KryptonDataGridView2.DataSource = Nothing
@@ -210,30 +208,23 @@ Public Class FormConfigPropertyPackage
            _pp.ComponentName.ToString.Contains(Calculator.GetLocalString("Chao-Seader")) Or
            _pp.ComponentName.ToString.Contains(Calculator.GetLocalString("Grayson-Streed")) Or
            _pp.ComponentName.ToString.Contains("CoolProp") Then
-            Me.TabPage1.Visible = False
+            TabControl1.TabPages.Remove(TabPage1)
             Exit Sub
-        Else
-            Me.TabPage1.Visible = True
         End If
         If TypeOf _pp Is UNIFACPropertyPackage Then
-            TabPage2.Visible = True
-            TabControl1.SelectedTab = Me.TabPage2
-            TabPage2.Text = "UNIFAC"
-        End If
-        If TypeOf _pp Is UNIFACLLPropertyPackage Then
-            TabPage2.Visible = True
-            TabControl1.SelectedTab = Me.TabPage2
-            TabPage2.Text = "UNIFAC-LL"
-        End If
-        If TypeOf _pp Is MODFACPropertyPackage Then
-            TabPage2.Visible = True
-            TabControl1.SelectedTab = Me.TabPage2
-            TabPage2.Text = "MODFAC (Dortmund)"
-        End If
-        If TypeOf _pp Is NISTMFACPropertyPackage Then
-            TabPage2.Visible = True
-            TabControl1.SelectedTab = Me.TabPage2
-            TabPage2.Text = "MODFAC (NIST)"
+            TabControl1.SelectedTab = Me.TabPageU
+            TabPageU.Text = "UNIFAC"
+        ElseIf TypeOf _pp Is UNIFACLLPropertyPackage Then
+            TabControl1.SelectedTab = Me.TabPageU
+            TabPageU.Text = "UNIFAC-LL"
+        ElseIf TypeOf _pp Is MODFACPropertyPackage Then
+            TabControl1.SelectedTab = Me.TabPageU
+            TabPageU.Text = "MODFAC (Dortmund)"
+        ElseIf TypeOf _pp Is NISTMFACPropertyPackage Then
+            TabControl1.SelectedTab = Me.TabPageU
+            TabPageU.Text = "MODFAC (NIST)"
+        Else
+            TabControl1.TabPages.Remove(TabPageU)
         End If
         Me.KryptonDataGridView2.Rows.Clear()
 
