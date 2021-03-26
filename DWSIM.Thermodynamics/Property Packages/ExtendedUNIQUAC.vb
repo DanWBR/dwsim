@@ -65,6 +65,12 @@ Namespace PropertyPackages
 
         End Sub
 
+        Public Overrides Function GetEditingForm() As Form
+
+            Return New FormConfigExUNIQUAC() With {._form = Flowsheet, ._pp = Me, ._comps = Flowsheet.SelectedCompounds}
+
+        End Function
+
 #Region "    DWSIM Functions"
 
         Public Overrides Sub DW_CalcProp(ByVal [property] As String, ByVal phase As Phase)

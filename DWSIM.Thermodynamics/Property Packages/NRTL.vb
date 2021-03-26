@@ -59,13 +59,19 @@ Namespace PropertyPackages
 
             If GlobalSettings.Settings.CAPEOPENMode Then
                 Dim f As New FormConfigNRTL() With {._pp = Me, ._comps = _selectedcomps.ToDictionary(Of String, Interfaces.ICompoundConstantProperties)(Function(k) k.Key, Function(k) k.Value)}
-                                f.ShowDialog()
+                f.ShowDialog()
             Else
                 Dim f As New FormConfigNRTL() With {._pp = Me, ._comps = Flowsheet.SelectedCompounds}
-                                f.ShowDialog()
+                f.ShowDialog()
             End If
 
         End Sub
+
+        Public Overrides Function GetEditingForm() As Form
+
+            Return New FormConfigNRTL() With {._pp = Me, ._comps = Flowsheet.SelectedCompounds}
+
+        End Function
 
         Public Overrides Function CheckMissingInteractionParameters(Vx As Double()) As Boolean
 

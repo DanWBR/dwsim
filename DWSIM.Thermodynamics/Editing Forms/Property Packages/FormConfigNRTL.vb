@@ -33,8 +33,6 @@ Public Class FormConfigNRTL
 
         Loaded = False
 
-        FaTabStripItem1.Controls.Add(New PropertyPackageSettingsEditingControl(_pp) With {.Dock = DockStyle.Fill})
-
         Me.Text += " (" & _pp.Tag & ") [" + _pp.ComponentName + "]"
 
         Me.KryptonDataGridView2.DataSource = Nothing

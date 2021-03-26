@@ -199,44 +199,41 @@ Public Class FormConfigPropertyPackage
 
     Private Sub FormConfigPR_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        FaTabStripItem1.Controls.Add(New PropertyPackageSettingsEditingControl(_pp) With {.Dock = DockStyle.Fill})
+        Me.TabPage2.Visible = False
 
         Me.Text += " (" & _pp.Tag & ") [" + _pp.ComponentName + "]"
 
         Me.KryptonDataGridView2.DataSource = Nothing
 
-        If _pp.ComponentName.ToString.Contains("Raoult") Or _
-           _pp.ComponentName.ToString.Contains(Calculator.GetLocalString("Vapor")) Or _
-           _pp.ComponentName.ToString.Contains(Calculator.GetLocalString("Chao-Seader")) Or _
-           _pp.ComponentName.ToString.Contains(Calculator.GetLocalString("Grayson-Streed")) Or _
+        If _pp.ComponentName.ToString.Contains("Raoult") Or
+           _pp.ComponentName.ToString.Contains(Calculator.GetLocalString("Vapor")) Or
+           _pp.ComponentName.ToString.Contains(Calculator.GetLocalString("Chao-Seader")) Or
+           _pp.ComponentName.ToString.Contains(Calculator.GetLocalString("Grayson-Streed")) Or
            _pp.ComponentName.ToString.Contains("CoolProp") Then
-            Me.FaTabStripItem2.Visible = False
-            Me.FaTabStripItem1.Selected = True
+            Me.TabPage1.Visible = False
             Exit Sub
         Else
-            Me.FaTabStripItem2.Visible = True
-            Me.FaTabStripItem1.Selected = True
+            Me.TabPage1.Visible = True
         End If
-        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem1
         If TypeOf _pp Is UNIFACPropertyPackage Then
-            TabStripUNIFAC.Visible = True
-            FaTabStrip1.SelectedItem = Me.TabStripUNIFAC
-            TabStripUNIFAC.Title = "UNIFAC"
+            TabPage2.Visible = True
+            TabControl1.SelectedTab = Me.TabPage2
+            TabPage2.Text = "UNIFAC"
         End If
         If TypeOf _pp Is UNIFACLLPropertyPackage Then
-            TabStripUNIFAC.Visible = True
-            FaTabStrip1.SelectedItem = Me.TabStripUNIFAC
-            TabStripUNIFAC.Title = "UNIFAC-LL"
+            TabPage2.Visible = True
+            TabControl1.SelectedTab = Me.TabPage2
+            TabPage2.Text = "UNIFAC-LL"
         End If
         If TypeOf _pp Is MODFACPropertyPackage Then
-            TabStripUNIFAC.Visible = True
-            FaTabStrip1.SelectedItem = Me.TabStripUNIFAC
-            TabStripUNIFAC.Title = "MODFAC (Dortmund)"
+            TabPage2.Visible = True
+            TabControl1.SelectedTab = Me.TabPage2
+            TabPage2.Text = "MODFAC (Dortmund)"
         End If
         If TypeOf _pp Is NISTMFACPropertyPackage Then
-            TabStripUNIFAC.Visible = True
-            FaTabStrip1.SelectedItem = Me.TabStripUNIFAC
-            TabStripUNIFAC.Title = "MODFAC (NIST)"
+            TabPage2.Visible = True
+            TabControl1.SelectedTab = Me.TabPage2
+            TabPage2.Text = "MODFAC (NIST)"
         End If
         Me.KryptonDataGridView2.Rows.Clear()
 

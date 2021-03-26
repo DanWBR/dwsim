@@ -33,8 +33,6 @@ Public Class FormConfigENRTL
 
         Loaded = False
 
-        FaTabStripItem1.Controls.Add(New PropertyPackageSettingsEditingControl(_pp) With {.Dock = DockStyle.Fill})
-
         Me.Text += " (" & _pp.Tag & ")"
 
         Dim ppu As PropertyPackages.ElectrolyteNRTLPropertyPackage = _pp

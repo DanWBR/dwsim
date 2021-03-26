@@ -201,6 +201,7 @@ Partial Class PropertyPackageSettingsEditingControl
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.SystemColors.Window
         Me.Controls.Add(Me.chkCalcAdditionalProps)
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.Label10)

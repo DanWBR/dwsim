@@ -44,6 +44,8 @@ Namespace PropertyPackages
             Me.SupportedComponents.Add(15)
             Me._packagetype = PropertyPackages.PackageType.Miscelaneous
 
+            IsConfigurable = False
+
         End Sub
         Public Overrides Function GetModel() As Object
             Return m_iapws97

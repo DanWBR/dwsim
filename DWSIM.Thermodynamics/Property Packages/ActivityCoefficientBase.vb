@@ -76,6 +76,12 @@ Namespace PropertyPackages
 
         End Sub
 
+        Public Overrides Function GetEditingForm() As Form
+
+            Return New FormConfigPropertyPackage() With {._form = Me.Flowsheet, ._pp = Me, ._comps = Flowsheet.SelectedCompounds}
+
+        End Function
+
 #End Region
 
 #Region "Functions to Calculate Isolated Properties"

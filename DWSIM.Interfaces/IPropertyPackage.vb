@@ -63,7 +63,7 @@
     ReadOnly Property MobileCompatible As Boolean
 
     Function ReturnInstance(typename As String) As Object
-
+    Sub DisplayGroupedEditingForm()
 End Interface
 
 <InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IPhaseEnvelopeOptions

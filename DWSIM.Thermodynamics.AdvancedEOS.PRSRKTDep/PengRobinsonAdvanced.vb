@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports System.Windows.Forms
 Imports DWSIM.Interfaces
 Imports DWSIM.Interfaces.Enums
 Imports DWSIM.Thermodynamics.PropertyPackages
@@ -57,6 +58,12 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
             End If
 
         End Sub
+
+        Public Overrides Function GetEditingForm() As Form
+
+            Return New FormConfig() With {._form = Me.Flowsheet, ._pp = Me, ._comps = Flowsheet.SelectedCompounds}
+
+        End Function
 
         Public Overrides Function RET_VKij() As Double(,)
 

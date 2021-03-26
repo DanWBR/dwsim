@@ -29,7 +29,6 @@ Partial Class WilsonPPEditor
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.dgvu1 = New System.Windows.Forms.DataGridView()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -43,7 +42,6 @@ Partial Class WilsonPPEditor
         'TabControl1
         '
         Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(0, 0)
         Me.TabControl1.Name = "TabControl1"
@@ -61,16 +59,6 @@ Partial Class WilsonPPEditor
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Interaction Parameters"
         Me.TabPage1.UseVisualStyleBackColor = True
-        '
-        'TabPage2
-        '
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(689, 375)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "General Settings"
-        Me.TabPage2.UseVisualStyleBackColor = True
         '
         'dgvu1
         '
@@ -144,7 +132,6 @@ Partial Class WilsonPPEditor
 
     Friend WithEvents TabControl1 As Windows.Forms.TabControl
     Friend WithEvents TabPage1 As Windows.Forms.TabPage
-    Friend WithEvents TabPage2 As Windows.Forms.TabPage
     Public WithEvents dgvu1 As Windows.Forms.DataGridView
     Friend WithEvents Column3 As Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column4 As Windows.Forms.DataGridViewTextBoxColumn

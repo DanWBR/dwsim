@@ -34,6 +34,12 @@ Partial Class FormConfigLIQUAC
         Me.FaTabStripItem3 = New FarsiLibrary.Win.FATabStripItem()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.dgvu1 = New System.Windows.Forms.DataGridView()
+        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LabelWithDivider3 = New System.Windows.Forms.Label()
         Me.FaTabStripItem2 = New FarsiLibrary.Win.FATabStripItem()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -43,12 +49,6 @@ Partial Class FormConfigLIQUAC
         Me.tbMaxIts = New System.Windows.Forms.TextBox()
         Me.cbReacSets = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStrip1.SuspendLayout()
         Me.FaTabStripItem3.SuspendLayout()
@@ -102,63 +102,6 @@ Partial Class FormConfigLIQUAC
         DataGridViewCellStyle7.Format = "N5"
         Me.dgvu1.RowsDefaultCellStyle = DataGridViewCellStyle7
         Me.dgvu1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        '
-        'LabelWithDivider3
-        '
-        resources.ApplyResources(Me.LabelWithDivider3, "LabelWithDivider3")
-        Me.LabelWithDivider3.Name = "LabelWithDivider3"
-        '
-        'FaTabStripItem2
-        '
-        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
-        Me.FaTabStripItem2.CanClose = False
-        Me.FaTabStripItem2.Controls.Add(Me.GroupBox2)
-        Me.FaTabStripItem2.IsDrawn = True
-        Me.FaTabStripItem2.Name = "FaTabStripItem2"
-        '
-        'GroupBox2
-        '
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Controls.Add(Me.Label3)
-        Me.GroupBox2.Controls.Add(Me.tbTol)
-        Me.GroupBox2.Controls.Add(Me.Label2)
-        Me.GroupBox2.Controls.Add(Me.tbMaxIts)
-        Me.GroupBox2.Controls.Add(Me.cbReacSets)
-        Me.GroupBox2.Controls.Add(Me.Label1)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.TabStop = False
-        '
-        'Label3
-        '
-        resources.ApplyResources(Me.Label3, "Label3")
-        Me.Label3.Name = "Label3"
-        '
-        'tbTol
-        '
-        resources.ApplyResources(Me.tbTol, "tbTol")
-        Me.tbTol.Name = "tbTol"
-        '
-        'Label2
-        '
-        resources.ApplyResources(Me.Label2, "Label2")
-        Me.Label2.Name = "Label2"
-        '
-        'tbMaxIts
-        '
-        resources.ApplyResources(Me.tbMaxIts, "tbMaxIts")
-        Me.tbMaxIts.Name = "tbMaxIts"
-        '
-        'cbReacSets
-        '
-        resources.ApplyResources(Me.cbReacSets, "cbReacSets")
-        Me.cbReacSets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbReacSets.FormattingEnabled = True
-        Me.cbReacSets.Name = "cbReacSets"
-        '
-        'Label1
-        '
-        resources.ApplyResources(Me.Label1, "Label1")
-        Me.Label1.Name = "Label1"
         '
         'Column3
         '
@@ -217,6 +160,63 @@ Partial Class FormConfigLIQUAC
         Me.Column8.FillWeight = 20.0!
         resources.ApplyResources(Me.Column8, "Column8")
         Me.Column8.Name = "Column8"
+        '
+        'LabelWithDivider3
+        '
+        resources.ApplyResources(Me.LabelWithDivider3, "LabelWithDivider3")
+        Me.LabelWithDivider3.Name = "LabelWithDivider3"
+        '
+        'FaTabStripItem2
+        '
+        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
+        Me.FaTabStripItem2.CanClose = False
+        Me.FaTabStripItem2.Controls.Add(Me.GroupBox2)
+        Me.FaTabStripItem2.IsDrawn = True
+        Me.FaTabStripItem2.Name = "FaTabStripItem2"
+        '
+        'GroupBox2
+        '
+        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.Label3)
+        Me.GroupBox2.Controls.Add(Me.tbTol)
+        Me.GroupBox2.Controls.Add(Me.Label2)
+        Me.GroupBox2.Controls.Add(Me.tbMaxIts)
+        Me.GroupBox2.Controls.Add(Me.cbReacSets)
+        Me.GroupBox2.Controls.Add(Me.Label1)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.TabStop = False
+        '
+        'Label3
+        '
+        resources.ApplyResources(Me.Label3, "Label3")
+        Me.Label3.Name = "Label3"
+        '
+        'tbTol
+        '
+        resources.ApplyResources(Me.tbTol, "tbTol")
+        Me.tbTol.Name = "tbTol"
+        '
+        'Label2
+        '
+        resources.ApplyResources(Me.Label2, "Label2")
+        Me.Label2.Name = "Label2"
+        '
+        'tbMaxIts
+        '
+        resources.ApplyResources(Me.tbMaxIts, "tbMaxIts")
+        Me.tbMaxIts.Name = "tbMaxIts"
+        '
+        'cbReacSets
+        '
+        resources.ApplyResources(Me.cbReacSets, "cbReacSets")
+        Me.cbReacSets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbReacSets.FormattingEnabled = True
+        Me.cbReacSets.Name = "cbReacSets"
+        '
+        'Label1
+        '
+        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.Name = "Label1"
         '
         'FormConfigLIQUAC
         '

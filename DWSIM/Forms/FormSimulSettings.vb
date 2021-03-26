@@ -1025,7 +1025,8 @@ Public Class FormSimulSettings
             ppid = dgvpp.SelectedRows(0).Cells(0).Value
         End If
         Dim pp As PropertyPackages.PropertyPackage = FrmChild.PropertyPackages(ppid)
-        pp.DisplayEditingForm()
+        pp.DisplayGroupedEditingForm()
+
     End Sub
 
     Private Sub btnDeletePP_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDeletePP.Click
@@ -1089,13 +1090,10 @@ Public Class FormSimulSettings
                     If dgvpp.Rows(dgvpp.SelectedCells(0).RowIndex).Cells(0).Value <> Nothing Then
                         btnDeletePP.Enabled = True
                         If FrmChild.Options.PropertyPackages.ContainsKey(dgvpp.Rows(dgvpp.SelectedCells(0).RowIndex).Cells(0).Value) Then
-                            btnConfigPPAdv.Enabled = True
                             If FrmChild.Options.PropertyPackages(dgvpp.Rows(dgvpp.SelectedCells(0).RowIndex).Cells(0).Value).IsConfigurable Then
                                 btnConfigPP.Enabled = True
-                                btnConfigFlash.Enabled = True
                             Else
                                 btnConfigPP.Enabled = False
-                                btnConfigFlash.Enabled = False
                             End If
                             btnCopyPP.Enabled = True
                         End If
@@ -1106,13 +1104,10 @@ Public Class FormSimulSettings
             If dgvpp.SelectedRows.Count > 0 Then
                 btnDeletePP.Enabled = True
                 If FrmChild.Options.PropertyPackages.ContainsKey(dgvpp.SelectedRows(0).Cells(0).Value) Then
-                    btnConfigPPAdv.Enabled = True
                     If FrmChild.Options.PropertyPackages(dgvpp.SelectedRows(0).Cells(0).Value).IsConfigurable Then
                         btnConfigPP.Enabled = True
-                        btnConfigFlash.Enabled = True
                     Else
                         btnConfigPP.Enabled = False
-                        btnConfigFlash.Enabled = False
                     End If
                     btnCopyPP.Enabled = True
                 End If
@@ -1493,7 +1488,7 @@ Public Class FormSimulSettings
         FrmChild.Options.DefaultFloatingTableCompoundAmountBasis = cbDefaultFloatingTableCompoundAmountBasis.SelectedIndex
     End Sub
 
-    Private Sub btnConfigPPAdv_Click(sender As Object, e As EventArgs) Handles btnConfigPPAdv.Click
+    Private Sub btnConfigPPAdv_Click(sender As Object, e As EventArgs)
         Dim ppid As String = ""
         If GlobalSettings.Settings.IsRunningOnMono Then
             ppid = dgvpp.Rows(dgvpp.SelectedCells(0).RowIndex).Cells(0).Value
@@ -1575,7 +1570,7 @@ Public Class FormSimulSettings
         FrmChild.Options.SkipEquilibriumCalculationOnDefinedStreams = chkSkipEqCalcs.Checked
     End Sub
 
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles btnConfigFlash.Click
+    Private Sub Button5_Click(sender As Object, e As EventArgs)
 
         Dim ppid As String = ""
         If DWSIM.App.IsRunningOnMono Then
@@ -1589,6 +1584,10 @@ Public Class FormSimulSettings
 
     Private Sub Button5_Click_1(sender As Object, e As EventArgs) Handles Button5.Click
         TextBox1.Text = ""
+    End Sub
+
+    Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
+        Process.Start("https://docs.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings")
     End Sub
 
     Private Sub FormSimulSettings_Shown(sender As Object, e As EventArgs) Handles Me.Shown

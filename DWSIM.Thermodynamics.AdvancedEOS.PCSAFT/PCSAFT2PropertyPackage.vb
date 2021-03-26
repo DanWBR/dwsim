@@ -5,6 +5,7 @@ Imports DWSIM.ExtensionMethods
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
 Imports System.IO
 Imports FileHelpers
+Imports System.Windows.Forms
 
 Namespace DWSIM.Thermodynamics.AdvancedEOS
 
@@ -153,6 +154,12 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
             f.ShowDialog()
 
         End Sub
+
+        Public Overrides Function GetEditingForm() As Form
+
+            Return New FormConfig() With {.PP = Me}
+
+        End Function
 
         Private Function GetPRZ(Vx() As Double, T As Double, P As Double, tipo As String)
 

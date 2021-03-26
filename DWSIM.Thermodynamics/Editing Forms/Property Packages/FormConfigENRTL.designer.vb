@@ -43,7 +43,6 @@ Partial Class FormConfigENRTL
         Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LabelWithDivider3 = New System.Windows.Forms.Label()
-        Me.FaTabStripItem1 = New FarsiLibrary.Win.FATabStripItem()
         Me.FaTabStripItem2 = New FarsiLibrary.Win.FATabStripItem()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -66,9 +65,8 @@ Partial Class FormConfigENRTL
         Me.FaTabStrip1.AlwaysShowClose = False
         Me.FaTabStrip1.AlwaysShowMenuGlyph = False
         resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
-        Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem3, Me.FaTabStripItem1, Me.FaTabStripItem2})
+        Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem3, Me.FaTabStripItem2})
         Me.FaTabStrip1.Name = "FaTabStrip1"
-        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem3
         '
         'FaTabStripItem3
         '
@@ -76,7 +74,6 @@ Partial Class FormConfigENRTL
         Me.FaTabStripItem3.Controls.Add(Me.GroupBox3)
         Me.FaTabStripItem3.IsDrawn = True
         Me.FaTabStripItem3.Name = "FaTabStripItem3"
-        Me.FaTabStripItem3.Selected = True
         resources.ApplyResources(Me.FaTabStripItem3, "FaTabStripItem3")
         '
         'GroupBox3
@@ -163,13 +160,6 @@ Partial Class FormConfigENRTL
         resources.ApplyResources(Me.LabelWithDivider3, "LabelWithDivider3")
         Me.LabelWithDivider3.Name = "LabelWithDivider3"
         '
-        'FaTabStripItem1
-        '
-        Me.FaTabStripItem1.CanClose = False
-        Me.FaTabStripItem1.IsDrawn = True
-        Me.FaTabStripItem1.Name = "FaTabStripItem1"
-        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
-        '
         'FaTabStripItem2
         '
         Me.FaTabStripItem2.CanClose = False
@@ -243,7 +233,6 @@ Partial Class FormConfigENRTL
 
     End Sub
     Private WithEvents FaTabStrip1 As FarsiLibrary.Win.FATabStrip
-    Private WithEvents FaTabStripItem1 As FarsiLibrary.Win.FATabStripItem
     Public WithEvents FaTabStripItem3 As FarsiLibrary.Win.FATabStripItem
     Public WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Public WithEvents dgvu1 As System.Windows.Forms.DataGridView

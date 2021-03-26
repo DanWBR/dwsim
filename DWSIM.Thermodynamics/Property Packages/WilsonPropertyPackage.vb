@@ -32,6 +32,12 @@
 
     End Sub
 
+    Public Overrides Function GetEditingForm() As Form
+
+        Return New WilsonPPEditor With {.WilsonPP = Me}
+
+    End Function
+
     Public Overrides Function GetModel() As Object
 
         Return WilsonM

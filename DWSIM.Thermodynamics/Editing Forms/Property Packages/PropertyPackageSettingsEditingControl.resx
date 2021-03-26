@@ -117,10 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 13</value>
-  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="cbHSCpCalcMode.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -131,17 +127,14 @@
   <data name="chkLiqViscPCorr.Text" xml:space="preserve">
     <value>Corrigir Valor Experimental para Altas Pressões</value>
   </data>
-  <data name="cbHSCpCalcMode.Items2" xml:space="preserve">
-    <value>Propriedade em Excesso</value>
+  <data name="chkLiqViscPCorr.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
   </data>
   <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkIgnoreVapFracLim.ZOrder" xml:space="preserve">
     <value>5</value>
-  </data>
-  <data name="&gt;&gt;Label6.ZOrder" xml:space="preserve">
-    <value>18</value>
   </data>
   <data name="&gt;&gt;cbHSCpCalcMode.Parent" xml:space="preserve">
     <value>$this</value>
@@ -150,20 +143,18 @@
   <data name="Label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 506</value>
-  </data>
   <data name="&gt;&gt;cbLiqDens.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;chkUseSolidCp.Name" xml:space="preserve">
-    <value>chkUseSolidCp</value>
-  </data>
-  <data name="&gt;&gt;Label9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label11.Text" xml:space="preserve">
+    <value>Corrente de Matéria</value>
   </data>
   <data name="&gt;&gt;chkIgnoreSalLim.Parent" xml:space="preserve">
     <value>$this</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="Label4.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="&gt;&gt;chkLiqDensPeneloux.Parent" xml:space="preserve">
     <value>$this</value>
@@ -177,14 +168,14 @@
   <data name="cbLiqDens.Location" type="System.Drawing.Point, System.Drawing">
     <value>200, 96</value>
   </data>
+  <data name="&gt;&gt;chkCalcAdditionalProps.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="cbLiqVIscMixRule.Items2" xml:space="preserve">
     <value>Média Mássica Invertida</value>
   </data>
-  <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
+  <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="chkUseSolidCp.Text" xml:space="preserve">
-    <value>Usar Cp do Sólido para Cálculo da Entalpia</value>
   </data>
   <data name="Label11.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -201,8 +192,8 @@
   <data name="&gt;&gt;chkLiqDensPeneloux.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;chkCalcAdditionalProps.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="cbLiqVisc.Items" xml:space="preserve">
+    <value>Lestou-Stiel</value>
   </data>
   <data name="&gt;&gt;Label8.Parent" xml:space="preserve">
     <value>$this</value>
@@ -210,29 +201,23 @@
   <data name="&gt;&gt;Label7.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;chkIgnoreIPs.Name" xml:space="preserve">
+    <value>chkIgnoreIPs</value>
+  </data>
   <data name="chkLiqDensPCorr.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 13</value>
   </data>
-  <data name="&gt;&gt;Label10.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="Label10.TabIndex" type="System.Int32, mscorlib">
-    <value>25</value>
-  </data>
-  <data name="chkLiqFugPoynt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 346</value>
-  </data>
   <data name="&gt;&gt;Label11.Name" xml:space="preserve">
     <value>Label11</value>
   </data>
-  <data name="chkLiqDensPeneloux.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 164</value>
+  <data name="chkCalcAdditionalProps.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="Label3.Text" xml:space="preserve">
-    <value>Viscosidade (Fase Líquida)</value>
+  <data name="&gt;&gt;chkCalcAdditionalProps.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label8.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -252,26 +237,29 @@
   <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 15</value>
   </data>
-  <data name="chkCalcAdditionalProps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 17</value>
+  <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 506</value>
   </data>
-  <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
-    <value>22</value>
-  </data>
-  <data name="&gt;&gt;chkUseSolidCp.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="Label9.AutoSize" type="System.Boolean, mscorlib">
+  <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;chkIgnoreIPs.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="cbLiqDens.Items1" xml:space="preserve">
+    <value>Rackett + Dados Experimentais (se disponíveis)</value>
+  </data>
+  <data name="&gt;&gt;chkIgnoreVapFracLim.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;chkLiqViscPCorr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="chkIgnoreVapFracLim.Text" xml:space="preserve">
     <value>Ignorar Limites da Fração de Vapor</value>
   </data>
-  <data name="Label5.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="chkLiqViscPCorr.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;Label1.Name" xml:space="preserve">
     <value>Label1</value>
@@ -288,8 +276,11 @@
   <data name="chkVapFugIdeal.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
   </data>
-  <data name="chkLiqViscPCorr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 284</value>
+  <data name="&gt;&gt;chkIgnoreVapFracLim.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="chkVapFugIdeal.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;Label8.ZOrder" xml:space="preserve">
     <value>16</value>
@@ -297,8 +288,8 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
-  <data name="&gt;&gt;chkLiqFugPoynt.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="chkLiqFugPoynt.Size" type="System.Drawing.Size, System.Drawing">
     <value>263, 17</value>
@@ -324,14 +315,17 @@
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 13</value>
   </data>
-  <data name="Label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="Label6.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="chkIgnoreSalLim.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;chkVapFugIdeal.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="chkCalcAdditionalProps.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="&gt;&gt;Label3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label4.Name" xml:space="preserve">
     <value>Label4</value>
@@ -351,14 +345,17 @@
   <data name="&gt;&gt;cbLiqDens.ZOrder" xml:space="preserve">
     <value>24</value>
   </data>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Regra de Mistura</value>
+  </data>
   <data name="&gt;&gt;Label10.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="chkVapFugIdeal.Text" xml:space="preserve">
     <value>Fase Vapor: Considerar ideal</value>
   </data>
-  <data name="Label9.Text" xml:space="preserve">
-    <value>Outros</value>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>502, 660</value>
   </data>
   <data name="chkIgnoreSalLim.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -366,8 +363,8 @@
   <data name="chkLiqDensPCorr.Size" type="System.Drawing.Size, System.Drawing">
     <value>244, 17</value>
   </data>
-  <data name="&gt;&gt;chkIgnoreVapFracLim.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 412</value>
   </data>
   <data name="cbLiqVIscMixRule.Items3" xml:space="preserve">
     <value>Média Mássica Invertida Logarítmica</value>
@@ -378,12 +375,6 @@
   <data name="cbLiqVisc.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="chkIgnoreSalLim.Text" xml:space="preserve">
-    <value>Ignorar Limite de Salinidade</value>
-  </data>
-  <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="Label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -393,14 +384,17 @@
   <data name="&gt;&gt;Label7.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
+  <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
+    <value>22</value>
+  </data>
   <data name="chkIgnoreIPs.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>194, 13</value>
   </data>
-  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;chkCalcAdditionalProps.Name" xml:space="preserve">
+    <value>chkCalcAdditionalProps</value>
   </data>
   <data name="&gt;&gt;chkLiqDensPCorr.ZOrder" xml:space="preserve">
     <value>23</value>
@@ -408,8 +402,8 @@
   <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
-  <data name="chkVapFugIdeal.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;chkIgnoreIPs.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="chkUseSolidCp.Size" type="System.Drawing.Size, System.Drawing">
     <value>229, 17</value>
@@ -426,8 +420,8 @@
   <data name="Label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="Label5.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 197</value>
@@ -435,8 +429,8 @@
   <data name="Label2.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="Label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="cbLiqVIscMixRule.Location" type="System.Drawing.Point, System.Drawing">
+    <value>200, 250</value>
   </data>
   <data name="Label6.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -459,14 +453,14 @@
   <data name="chkIgnoreSalLim.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;chkUseSolidCp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="chkIgnoreVapFracLim.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 597</value>
   </data>
-  <data name="cbLiqVIscMixRule.Items" xml:space="preserve">
-    <value>Média Molar</value>
+  <data name="&gt;&gt;chkVapFugIdeal.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="cbLiqVIscMixRule.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -483,17 +477,14 @@
   <data name="&gt;&gt;chkLiqViscPCorr.Name" xml:space="preserve">
     <value>chkLiqViscPCorr</value>
   </data>
-  <data name="cbHSCpCalcMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>197, 437</value>
-  </data>
-  <data name="&gt;&gt;chkIgnoreVapFracLim.Parent" xml:space="preserve">
+  <data name="&gt;&gt;chkLiqFugPoynt.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="Label3.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
-  <data name="chkCalcAdditionalProps.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="chkCalcAdditionalProps.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 17</value>
   </data>
   <data name="chkIgnoreIPs.Size" type="System.Drawing.Size, System.Drawing">
     <value>240, 17</value>
@@ -507,26 +498,23 @@
   <data name="&gt;&gt;chkIgnoreVapFracLim.Name" xml:space="preserve">
     <value>chkIgnoreVapFracLim</value>
   </data>
-  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 13</value>
+  <data name="&gt;&gt;chkIgnoreIPs.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="cbLiqVIscMixRule.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="chkLiqFugPoynt.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="chkLiqDensPeneloux.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
-  </data>
-  <data name="&gt;&gt;chkIgnoreIPs.Parent" xml:space="preserve">
-    <value>$this</value>
   </data>
   <data name="Label7.Text" xml:space="preserve">
     <value>Método de Cálculo</value>
   </data>
-  <data name="&gt;&gt;Label3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label9.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
-  <data name="chkIgnoreSalLim.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 564</value>
+  <data name="Label9.Text" xml:space="preserve">
+    <value>Outros</value>
   </data>
   <data name="cbLiqDens.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -543,17 +531,11 @@
   <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 226</value>
   </data>
-  <data name="&gt;&gt;Label8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="cbLiqDens.Size" type="System.Drawing.Size, System.Drawing">
     <value>281, 21</value>
   </data>
   <data name="Label7.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
-  </data>
-  <data name="&gt;&gt;chkVapFugIdeal.Name" xml:space="preserve">
-    <value>chkVapFugIdeal</value>
   </data>
   <data name="chkLiqFugPoynt.Text" xml:space="preserve">
     <value>Fase Líquida: Usar Fator de Correção de Poynting</value>
@@ -570,14 +552,14 @@
   <data name="chkIgnoreVapFracLim.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
   </data>
-  <data name="Label8.Text" xml:space="preserve">
-    <value>Método de Cálculo</value>
+  <data name="chkIgnoreSalLim.Text" xml:space="preserve">
+    <value>Ignorar Limite de Salinidade</value>
   </data>
   <data name="&gt;&gt;Label7.Name" xml:space="preserve">
     <value>Label7</value>
   </data>
-  <data name="chkCalcAdditionalProps.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
+  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 317</value>
   </data>
   <data name="cbHSCpCalcMode.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -585,17 +567,14 @@
   <data name="&gt;&gt;chkLiqDensPCorr.Name" xml:space="preserve">
     <value>chkLiqDensPCorr</value>
   </data>
-  <data name="Label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="chkLiqDensPCorr.Text" xml:space="preserve">
+    <value>Corrigir Valor Experimental para Altas Pressões</value>
   </data>
   <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 102</value>
   </data>
-  <data name="cbLiqVIscMixRule.Location" type="System.Drawing.Point, System.Drawing">
-    <value>200, 250</value>
-  </data>
-  <data name="&gt;&gt;chkLiqFugPoynt.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="Label5.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="&gt;&gt;cbLiqVIscMixRule.Parent" xml:space="preserve">
     <value>$this</value>
@@ -609,20 +588,17 @@
   <data name="chkIgnoreVapFracLim.Size" type="System.Drawing.Size, System.Drawing">
     <value>191, 17</value>
   </data>
-  <data name="Label9.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="chkUseSolidCp.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
+  <data name="chkLiqViscPCorr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 284</value>
   </data>
   <data name="&gt;&gt;cbHSCpCalcMode.Name" xml:space="preserve">
     <value>cbHSCpCalcMode</value>
   </data>
-  <data name="cbLiqVIscMixRule.Size" type="System.Drawing.Size, System.Drawing">
-    <value>281, 21</value>
+  <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="Label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="chkIgnoreIPs.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 531</value>
@@ -642,8 +618,8 @@
   <data name="&gt;&gt;Label4.ZOrder" xml:space="preserve">
     <value>20</value>
   </data>
-  <data name="chkVapFugIdeal.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="chkUseSolidCp.Text" xml:space="preserve">
+    <value>Usar Cp do Sólido para Cálculo da Entalpia</value>
   </data>
   <data name="chkIgnoreVapFracLim.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -654,14 +630,17 @@
   <data name="&gt;&gt;cbLiqVIscMixRule.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label4.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
+    <value>21</value>
+  </data>
+  <data name="&gt;&gt;Label9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;chkCalcAdditionalProps.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>502, 660</value>
+  <data name="chkLiqDensPeneloux.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 164</value>
   </data>
   <data name="&gt;&gt;cbHSCpCalcMode.ZOrder" xml:space="preserve">
     <value>12</value>
@@ -669,17 +648,17 @@
   <data name="&gt;&gt;chkLiqDensPeneloux.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
-  <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="cbHSCpCalcMode.Items2" xml:space="preserve">
+    <value>Propriedade em Excesso</value>
   </data>
-  <data name="cbHSCpCalcMode.Items3" xml:space="preserve">
-    <value>Dados Experimentais</value>
+  <data name="chkIgnoreSalLim.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 564</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>PropertyPackageSettingsEditingControl</value>
   </data>
-  <data name="chkCalcAdditionalProps.Text" xml:space="preserve">
-    <value>Calcular Propriedades Adicionais</value>
+  <data name="&gt;&gt;chkLiqFugPoynt.ZOrder" xml:space="preserve">
+    <value>9</value>
   </data>
   <data name="chkCalcAdditionalProps.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 40</value>
@@ -690,11 +669,11 @@
   <data name="&gt;&gt;Label6.Name" xml:space="preserve">
     <value>Label6</value>
   </data>
-  <data name="Label5.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  <data name="&gt;&gt;Label8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label1.Text" xml:space="preserve">
-    <value>Regra de Mistura</value>
+  <data name="&gt;&gt;chkUseSolidCp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -705,23 +684,29 @@
   <data name="&gt;&gt;Label5.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;chkUseSolidCp.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="chkLiqFugPoynt.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 317</value>
+  <data name="&gt;&gt;chkUseSolidCp.Name" xml:space="preserve">
+    <value>chkUseSolidCp</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="chkVapFugIdeal.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 13</value>
   </data>
-  <data name="Label2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 626</value>
+  </data>
+  <data name="&gt;&gt;Label8.Name" xml:space="preserve">
+    <value>Label8</value>
   </data>
   <data name="&gt;&gt;chkIgnoreIPs.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -729,8 +714,11 @@
   <data name="&gt;&gt;cbHSCpCalcMode.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label8.Name" xml:space="preserve">
-    <value>Label8</value>
+  <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 441</value>
+  </data>
+  <data name="&gt;&gt;Label6.ZOrder" xml:space="preserve">
+    <value>18</value>
   </data>
   <data name="&gt;&gt;Label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -738,26 +726,29 @@
   <data name="cbLiqVisc.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="cbLiqDens.Items1" xml:space="preserve">
-    <value>Rackett + Dados Experimentais (se disponíveis)</value>
+  <data name="Label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;Label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
-    <value>21</value>
+  <data name="Label10.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
   </data>
-  <data name="&gt;&gt;chkLiqViscPCorr.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="chkIgnoreIPs.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
+  <data name="cbHSCpCalcMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>197, 437</value>
   </data>
   <data name="cbHSCpCalcMode.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 412</value>
+  <data name="Label3.Text" xml:space="preserve">
+    <value>Viscosidade (Fase Líquida)</value>
+  </data>
+  <data name="&gt;&gt;cbLiqVisc.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="chkIgnoreIPs.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
   </data>
   <data name="chkVapFugIdeal.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 379</value>
@@ -765,14 +756,17 @@
   <data name="cbLiqVIscMixRule.Items1" xml:space="preserve">
     <value>Média Molar Logarítmica</value>
   </data>
-  <data name="chkLiqViscPCorr.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="chkUseSolidCp.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 13</value>
   </data>
   <data name="Label4.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="cbLiqVisc.Items" xml:space="preserve">
-    <value>Lestou-Stiel</value>
+  <data name="cbHSCpCalcMode.Items3" xml:space="preserve">
+    <value>Dados Experimentais</value>
   </data>
   <data name="chkCalcAdditionalProps.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -783,32 +777,32 @@
   <data name="&gt;&gt;chkLiqDensPCorr.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="Label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;chkLiqFugPoynt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 441</value>
+  <data name="&gt;&gt;Label10.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="cbLiqDens.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 13</value>
   </data>
   <data name="Label11.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;chkIgnoreIPs.Name" xml:space="preserve">
-    <value>chkIgnoreIPs</value>
+  <data name="cbLiqVIscMixRule.Items" xml:space="preserve">
+    <value>Média Molar</value>
   </data>
   <data name="Label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;cbLiqVisc.ZOrder" xml:space="preserve">
-    <value>13</value>
+  <data name="Label9.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="chkIgnoreVapFracLim.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="chkLiqDensPCorr.Text" xml:space="preserve">
-    <value>Corrigir Valor Experimental para Altas Pressões</value>
+  <data name="chkLiqFugPoynt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 346</value>
   </data>
   <data name="Label9.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -825,17 +819,23 @@
   <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
+  <data name="cbLiqVIscMixRule.Size" type="System.Drawing.Size, System.Drawing">
+    <value>281, 21</value>
+  </data>
   <data name="cbHSCpCalcMode.Items1" xml:space="preserve">
     <value>Ideal</value>
+  </data>
+  <data name="Label8.Text" xml:space="preserve">
+    <value>Método de Cálculo</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Cálculo de Fugacidade</value>
   </data>
+  <data name="Label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="chkIgnoreSalLim.Size" type="System.Drawing.Size, System.Drawing">
     <value>156, 17</value>
-  </data>
-  <data name="&gt;&gt;chkCalcAdditionalProps.Name" xml:space="preserve">
-    <value>chkCalcAdditionalProps</value>
   </data>
   <data name="cbHSCpCalcMode.Size" type="System.Drawing.Size, System.Drawing">
     <value>281, 21</value>
@@ -846,11 +846,8 @@
   <data name="&gt;&gt;chkIgnoreSalLim.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;Label10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="chkLiqViscPCorr.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+  <data name="&gt;&gt;chkVapFugIdeal.Name" xml:space="preserve">
+    <value>chkVapFugIdeal</value>
   </data>
   <data name="&gt;&gt;Label11.Parent" xml:space="preserve">
     <value>$this</value>
@@ -867,11 +864,14 @@
   <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>119, 13</value>
   </data>
-  <data name="&gt;&gt;chkLiqFugPoynt.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="chkLiqDensPeneloux.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="Label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="cbLiqDens.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="Label2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="Label11.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
@@ -879,19 +879,19 @@
   <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
   </data>
-  <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
+  <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 626</value>
-  </data>
-  <data name="Label11.Text" xml:space="preserve">
-    <value>Corrente de Matéria</value>
+  <data name="chkCalcAdditionalProps.Text" xml:space="preserve">
+    <value>Calcular Propriedades Adicionais</value>
   </data>
   <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
     <value>19</value>
   </data>
   <data name="&gt;&gt;Label11.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label4.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
@@ -900,17 +900,17 @@
   <data name="Label3.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;chkCalcAdditionalProps.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="Label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="Label6.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="Label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="chkIgnoreIPs.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="chkLiqFugPoynt.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;cbLiqVisc.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

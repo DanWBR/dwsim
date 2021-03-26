@@ -11,8 +11,6 @@ Public Class WilsonPPEditor
 
         Loaded = False
 
-        Me.TabPage2.Controls.Add(New PropertyPackageSettingsEditingControl(WilsonPP) With {.Dock = DockStyle.Fill})
-
         Dim id1, id2 As String
 
         For Each cp As ConstantProperties In WilsonPP.Flowsheet.SelectedCompounds.Values

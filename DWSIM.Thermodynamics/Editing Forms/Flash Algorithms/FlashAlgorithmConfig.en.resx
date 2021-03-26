@@ -130,6 +130,10 @@
   <data name="chkCalcBubbleDew.Text" xml:space="preserve">
     <value>Calculate Saturation Conditions</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="chkUseIOFlash.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="chkUseIOFlash.Location" type="System.Drawing.Point, System.Drawing">
     <value>392, 68</value>
   </data>
@@ -138,6 +142,9 @@
   </data>
   <data name="chkUseIOFlash.Text" xml:space="preserve">
     <value>Use IO Flash</value>
+  </data>
+  <data name="chkHandleSolids.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="chkHandleSolids.Location" type="System.Drawing.Point, System.Drawing">
     <value>392, 46</value>
@@ -148,6 +155,9 @@
   <data name="chkHandleSolids.Text" xml:space="preserve">
     <value>Handle Solids</value>
   </data>
+  <data name="chkImmiscible.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="chkImmiscible.Location" type="System.Drawing.Point, System.Drawing">
     <value>392, 90</value>
   </data>
@@ -156,6 +166,9 @@
   </data>
   <data name="chkImmiscible.Text" xml:space="preserve">
     <value>Immiscible Water</value>
+  </data>
+  <data name="cbFlashType.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="cbFlashType.Items" xml:space="preserve">
     <value>Default</value>
@@ -184,15 +197,17 @@
   <data name="Label9.Text" xml:space="preserve">
     <value>Phase Equilibria Calculation Type</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tbPT_DampingFactor.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left</value>
+    <value>Top, Right</value>
   </data>
   <data name="tbPT_DampingFactor.Location" type="System.Drawing.Point, System.Drawing">
     <value>392, 337</value>
   </data>
   <data name="tbPT_DampingFactor.Size" type="System.Drawing.Size, System.Drawing">
     <value>191, 20</value>
+  </data>
+  <data name="Label13.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="Label13.Location" type="System.Drawing.Point, System.Drawing">
     <value>495, 154</value>
@@ -207,7 +222,7 @@
     <value>PT Flash - Fixed Damping Factor Value (0.0 - 2.0)</value>
   </data>
   <data name="tbPH_MaxDT.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left</value>
+    <value>Top, Right</value>
   </data>
   <data name="tbPH_MaxDT.Location" type="System.Drawing.Point, System.Drawing">
     <value>393, 311</value>
@@ -242,11 +257,14 @@
   <data name="Label26.Text" xml:space="preserve">
     <value>PV Flash - Temperature Delta for K-value Numerical Derivative Calculation</value>
   </data>
+  <data name="tbFlashValidationTolerance.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="tbFlashValidationTolerance.Location" type="System.Drawing.Point, System.Drawing">
     <value>392, 151</value>
   </data>
   <data name="tbPV_EpsilonT.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left</value>
+    <value>Top, Right</value>
   </data>
   <data name="tbPV_EpsilonT.Location" type="System.Drawing.Point, System.Drawing">
     <value>393, 233</value>
@@ -255,7 +273,7 @@
     <value>191, 20</value>
   </data>
   <data name="tbPV_DampingFactor.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left</value>
+    <value>Top, Right</value>
   </data>
   <data name="tbPV_DampingFactor.Location" type="System.Drawing.Point, System.Drawing">
     <value>393, 285</value>
@@ -291,7 +309,7 @@
     <value>Gibbs Free Energy Variation Tolerance</value>
   </data>
   <data name="tbPV_MaxDT.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left</value>
+    <value>Top, Right</value>
   </data>
   <data name="tbPV_MaxDT.Location" type="System.Drawing.Point, System.Drawing">
     <value>393, 259</value>
