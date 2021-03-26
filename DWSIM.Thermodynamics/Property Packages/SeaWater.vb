@@ -50,6 +50,7 @@ Namespace PropertyPackages
             Me._packagetype = PropertyPackages.PackageType.Miscelaneous
 
         End Sub
+
         Public Overrides Function GetModel() As Object
             Return SIA
         End Function
@@ -80,6 +81,10 @@ Namespace PropertyPackages
                 Return FlashAlgorithm
             End Get
         End Property
+
+        Public Overrides Function AUX_IS_SINGLECOMP(Phase As Phase) As Boolean
+            Return True
+        End Function
 
         Public Overrides Function AUX_VAPDENS(ByVal T As Double, ByVal P As Double) As Double
 

@@ -527,7 +527,15 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 IObj?.Paragraphs.Add("Using the normal version of the PH Flash Algorithm.")
                 IObj?.Close()
 
-                Return Flash_PH_2(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
+                Dim haserror As Boolean = True
+                Try
+                    Return Flash_PH_2(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
+                    haserror = False
+                Catch ex As Exception
+                End Try
+                If haserror Then
+                    Return Flash_PH_1(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
+                End If
 
             Else
 
