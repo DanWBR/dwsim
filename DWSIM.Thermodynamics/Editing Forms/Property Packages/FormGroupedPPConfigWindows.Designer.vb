@@ -79,6 +79,7 @@ Partial Class FormGroupedPPConfigWindows
         resources.ApplyResources(Me.CLBSolids, "CLBSolids")
         Me.CLBSolids.CheckOnClick = True
         Me.CLBSolids.FormattingEnabled = True
+        Me.CLBSolids.MultiColumn = True
         Me.CLBSolids.Name = "CLBSolids"
         '
         'Label1
