@@ -12720,6 +12720,10 @@ Final3:
 
             peditor.Text += " (" & Tag & ") [" + ComponentName + "]"
 
+            AddHandler peditor.FormClosing, Sub(s2, e2)
+                                                fset.FlashAlgorithmConfig_FormClosing(s2, e2)
+                                            End Sub
+
             If Settings.IsRunningOnMono() Then
                 peditor.ShowDialog()
             Else

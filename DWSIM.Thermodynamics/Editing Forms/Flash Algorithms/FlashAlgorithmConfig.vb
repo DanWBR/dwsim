@@ -76,7 +76,7 @@ Public Class FlashAlgorithmConfig
 
     End Sub
 
-    Private Sub FlashAlgorithmConfig_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+    Public Sub FlashAlgorithmConfig_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
 
         Try
 

@@ -77,6 +77,7 @@ Partial Class FormGroupedPPConfigWindows
         'CLBSolids
         '
         resources.ApplyResources(Me.CLBSolids, "CLBSolids")
+        Me.CLBSolids.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.CLBSolids.CheckOnClick = True
         Me.CLBSolids.FormattingEnabled = True
         Me.CLBSolids.MultiColumn = True

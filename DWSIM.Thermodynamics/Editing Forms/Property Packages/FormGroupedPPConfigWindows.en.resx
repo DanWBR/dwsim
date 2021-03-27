@@ -124,14 +124,20 @@
   <data name="TabPageBIPs.Text" xml:space="preserve">
     <value>Model Parameters</value>
   </data>
+  <data name="TabPageFlash.Size" type="System.Drawing.Size, System.Drawing">
+    <value>755, 423</value>
+  </data>
   <data name="TabPageFlash.Text" xml:space="preserve">
     <value>Equilibrium Calculation Settings</value>
+  </data>
+  <data name="TabPageProps.Size" type="System.Drawing.Size, System.Drawing">
+    <value>755, 423</value>
   </data>
   <data name="TabPageProps.Text" xml:space="preserve">
     <value>Property Calculation Settings</value>
   </data>
   <data name="CLBSolids.Size" type="System.Drawing.Size, System.Drawing">
-    <value>590, 319</value>
+    <value>711, 345</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>297, 13</value>
@@ -139,11 +145,17 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Select the compounds that must always be in the solid phase.</value>
   </data>
+  <data name="TabPageSolids.Size" type="System.Drawing.Size, System.Drawing">
+    <value>755, 423</value>
+  </data>
   <data name="TabPageSolids.Text" xml:space="preserve">
     <value>Forced Solids</value>
   </data>
   <data name="Button1.Text" xml:space="preserve">
     <value>Open Property Calculation Override Editor</value>
+  </data>
+  <data name="TabPagePropOverr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>755, 423</value>
   </data>
   <data name="TabPagePropOverr.Text" xml:space="preserve">
     <value>Property Overrides</value>

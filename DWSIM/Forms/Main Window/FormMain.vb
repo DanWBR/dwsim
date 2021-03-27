@@ -1007,6 +1007,9 @@ Public Class FormMain
         'load Biodiesel XML database
         LoadBDDB()
 
+        'load FoodProp compounds
+        LoadFoodPropCompounds()
+
         'additional compounds
         LoadAdditionalCompounds()
 
@@ -1090,6 +1093,18 @@ Public Class FormMain
         For Each cp As BaseClasses.ConstantProperties In comps
             If Not Me.AvailableComponents.ContainsKey(cp.Name) Then Me.AvailableComponents.Add(cp.Name, cp)
         Next
+    End Sub
+
+    Public Sub LoadFoodPropCompounds()
+
+        Dim udb As New UserDB
+        Using filestr As Stream = Assembly.GetAssembly(udb.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.FoodProp.xml")
+            Dim fcomps = Databases.UserDB.ReadComps(filestr)
+            For Each cp As BaseClasses.ConstantProperties In fcomps
+                If Not AvailableComponents.ContainsKey(cp.Name) Then AvailableComponents.Add(cp.Name, cp)
+            Next
+        End Using
+
     End Sub
 
     Public Sub LoadBDDB()

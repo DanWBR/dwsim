@@ -209,6 +209,7 @@ Public Class FormConfigPropertyPackage
            _pp.ComponentName.ToString.Contains(Calculator.GetLocalString("Grayson-Streed")) Or
            _pp.ComponentName.ToString.Contains("CoolProp") Then
             TabControl1.TabPages.Remove(TabPage1)
+            TabControl1.TabPages.Remove(TabPageU)
             Exit Sub
         End If
         If TypeOf _pp Is UNIFACPropertyPackage Then

@@ -869,6 +869,10 @@
   <ItemGroup>
     <None Include="Resources\bullet_green.png" />
   </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\Databases\FoodProp\FoodProp.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
     <PostBuildEvent>

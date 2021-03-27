@@ -15,6 +15,11 @@
 
         Next
 
+        If Not PropertyPackage.IsConfigurable Then
+            TabControl1.TabPages.Remove(TabPageBIPs)
+            TabControl1.SelectedTab = TabPageFlash
+        End If
+
         Loaded = True
 
     End Sub

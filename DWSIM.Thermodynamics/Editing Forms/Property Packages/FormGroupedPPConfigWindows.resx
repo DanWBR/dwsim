@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Configurar Pacote de Propriedades</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>644, 435</value>
@@ -141,8 +144,8 @@
   <data name="&gt;&gt;TabPageBIPs.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Button1.Name" xml:space="preserve">
-    <value>Button1</value>
+  <data name="CLBSolids.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;TabPageProps.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -165,6 +168,12 @@
   <data name="TabPageBIPs.Size" type="System.Drawing.Size, System.Drawing">
     <value>636, 409</value>
   </data>
+  <data name="&gt;&gt;TabPageFlash.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;Button1.Name" xml:space="preserve">
+    <value>Button1</value>
+  </data>
   <data name="TabPageFlash.Size" type="System.Drawing.Size, System.Drawing">
     <value>636, 409</value>
   </data>
@@ -173,12 +182,6 @@
   </data>
   <data name="Label1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
-  </data>
-  <data name="&gt;&gt;TabPageBIPs.Name" xml:space="preserve">
-    <value>TabPageBIPs</value>
-  </data>
-  <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="&gt;&gt;CLBSolids.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckedListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -210,11 +213,11 @@
   <data name="&gt;&gt;Label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;TabPageFlash.Parent" xml:space="preserve">
+    <value>TabControl1</value>
+  </data>
   <data name="TabPagePropOverr.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
-  </data>
-  <data name="TabPageProps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>636, 409</value>
   </data>
   <data name="TabPageFlash.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -237,14 +240,14 @@
   <data name="&gt;&gt;TabPageSolids.Parent" xml:space="preserve">
     <value>TabControl1</value>
   </data>
-  <data name="Button1.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="TabPageFlash.Text" xml:space="preserve">
+    <value>Cálculos de Equilíbrio</value>
   </data>
   <data name="&gt;&gt;TabPagePropOverr.Name" xml:space="preserve">
     <value>TabPagePropOverr</value>
   </data>
-  <data name="CLBSolids.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="&gt;&gt;TabPageBIPs.Parent" xml:space="preserve">
+    <value>TabControl1</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -252,8 +255,8 @@
   <data name="&gt;&gt;Button1.Parent" xml:space="preserve">
     <value>TabPagePropOverr</value>
   </data>
-  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
-    <value>TabPageSolids</value>
+  <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>448, 23</value>
   </data>
   <data name="TabPageProps.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
@@ -263,9 +266,6 @@
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Selecione os Componentes que devem sempre estar na fase sólida.</value>
-  </data>
-  <data name="&gt;&gt;TabControl1.Name" xml:space="preserve">
-    <value>TabControl1</value>
   </data>
   <data name="&gt;&gt;TabPagePropOverr.Parent" xml:space="preserve">
     <value>TabControl1</value>
@@ -300,17 +300,20 @@
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>17, 16</value>
   </data>
-  <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>448, 23</value>
-  </data>
   <data name="&gt;&gt;TabControl1.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="TabPageBIPs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
   </data>
   <data name="TabPageBIPs.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
-  <data name="TabPageBIPs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
+  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
+    <value>TabPageSolids</value>
+  </data>
+  <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="TabPageBIPs.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -318,13 +321,10 @@
   <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;TabPageFlash.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="TabPageProps.Size" type="System.Drawing.Size, System.Drawing">
+    <value>636, 409</value>
   </data>
-  <data name="&gt;&gt;TabPageBIPs.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;TabPageFlash.Parent" xml:space="preserve">
+  <data name="&gt;&gt;TabControl1.Name" xml:space="preserve">
     <value>TabControl1</value>
   </data>
   <data name="&gt;&gt;TabPageProps.Parent" xml:space="preserve">
@@ -351,17 +351,17 @@
   <data name="TabPagePropOverr.Text" xml:space="preserve">
     <value>Substituição de Rotinas</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Configurar Pacote de Propriedades</value>
+  <data name="&gt;&gt;TabPageBIPs.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="TabPageFlash.Text" xml:space="preserve">
-    <value>Cálculos de Equilíbrio</value>
+  <data name="Button1.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="Button1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="&gt;&gt;TabPageBIPs.Parent" xml:space="preserve">
-    <value>TabControl1</value>
+  <data name="&gt;&gt;TabPageBIPs.Name" xml:space="preserve">
+    <value>TabPageBIPs</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

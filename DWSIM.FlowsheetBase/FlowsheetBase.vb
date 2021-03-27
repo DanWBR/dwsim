@@ -2022,6 +2022,12 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                                     For Each cp As BaseClasses.ConstantProperties In comps
                                         If Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
                                     Next
+                                    Using filestr As Stream = Assembly.GetAssembly(elec.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.FoodProp.xml")
+                                        Dim fcomps = Databases.UserDB.ReadComps(filestr)
+                                        For Each cp As BaseClasses.ConstantProperties In fcomps
+                                            If Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
+                                        Next
+                                    End Using
                                     csdb.Dispose()
                                     cpdb.Dispose()
                                     chedl.Dispose()

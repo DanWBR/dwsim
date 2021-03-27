@@ -1541,11 +1541,11 @@ Public Class FormCompoundCreator
                 End If
             Next
 
-            .Solid_Heat_Capacity_Const_A = result(0)(0) * 1000
-            .Solid_Heat_Capacity_Const_B = result(0)(1) * 1000
-            .Solid_Heat_Capacity_Const_C = result(0)(2) * 1000
-            .Solid_Heat_Capacity_Const_D = result(0)(3) * 1000
-            .Solid_Heat_Capacity_Const_E = result(0)(4) * 1000
+            .Solid_Heat_Capacity_Const_A = result(0)(0)
+            .Solid_Heat_Capacity_Const_B = result(0)(1)
+            .Solid_Heat_Capacity_Const_C = result(0)(2)
+            .Solid_Heat_Capacity_Const_D = result(0)(3)
+            .Solid_Heat_Capacity_Const_E = result(0)(4)
 
             tbCpS_A.Text = .Solid_Heat_Capacity_Const_A
             tbCpS_B.Text = .Solid_Heat_Capacity_Const_B

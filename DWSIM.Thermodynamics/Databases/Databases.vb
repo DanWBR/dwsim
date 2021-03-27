@@ -1187,13 +1187,27 @@ Namespace Databases
 
         End Sub
 
+        Public Shared Function ReadComps(ByVal input As Stream) As Thermodynamics.BaseClasses.ConstantProperties()
+
+            Dim reader As XmlReader = XmlReader.Create(input)
+            reader.Read()
+
+            Return ReadComps(reader)
+
+        End Function
+
         Public Shared Function ReadComps(ByVal xmlpath As String) As Thermodynamics.BaseClasses.ConstantProperties()
 
-            Dim xmldoc As XmlDocument
             Dim reader As XmlReader = XmlReader.Create(xmlpath)
             reader.Read()
 
-            xmldoc = New XmlDocument
+            Return ReadComps(reader)
+
+        End Function
+
+        Public Shared Function ReadComps(reader As XmlReader) As Thermodynamics.BaseClasses.ConstantProperties()
+
+            Dim xmldoc = New XmlDocument
             xmldoc.Load(reader)
 
             Dim cp As Thermodynamics.BaseClasses.ConstantProperties
