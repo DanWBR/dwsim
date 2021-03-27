@@ -852,7 +852,7 @@ Public Class FormSimulWizard
             ppid = dgvpp.SelectedRows(0).Cells(0).Value
             Dim pp As PropertyPackages.PropertyPackage = FrmChild.Options.PropertyPackages(ppid)
             If pp.IsConfigurable Then
-                pp.DisplayEditingForm()
+                pp.DisplayGroupedEditingForm()
             Else
                 MessageBox.Show(DWSIM.App.GetLocalString("NonConfigurablePP"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             End If
