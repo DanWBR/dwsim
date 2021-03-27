@@ -3323,6 +3323,32 @@ Public Class FormCompoundCreator
             End Try
         End If
     End Sub
+
+    Private Sub ImportarDeArquivoJSONToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportarDeArquivoJSONToolStripMenuItem.Click
+        If Me.OpenFileDialog3.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+            Try
+                Dim comp = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BaseClasses.ConstantProperties)(File.ReadAllText(OpenFileDialog3.FileName))
+                StoreData()
+                mycase.cp = comp
+                mycase.CalcMW = False
+                mycase.CalcNBP = False
+                mycase.CalcAF = False
+                mycase.CalcCSSP = False
+                mycase.CalcTC = False
+                mycase.CalcPC = False
+                mycase.CalcZC = False
+                mycase.CalcZRA = False
+                mycase.CalcHF = False
+                mycase.CalcGF = False
+                loaded = False
+                WriteData()
+                loaded = True
+            Catch ex As Exception
+                MessageBox.Show(DWSIM.App.GetLocalString("Erro") + ": " + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End If
+    End Sub
+
     Private Sub EstruturaUNIFACMODFACDDBToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EstruturaUNIFACMODFACDDBToolStripMenuItem.Click
         Dim f As New FormImportCompoundDataDDB
         StoreData()

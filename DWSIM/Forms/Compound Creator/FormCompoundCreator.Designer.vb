@@ -342,6 +342,7 @@ Partial Class FormCompoundCreator
         Me.BancoDeDadosKDBCHERICToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BancoDeDadosChemeoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EstruturaUNIFACMODFACDDBToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ImportarDeArquivoJSONToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SistemasDeUnidadesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.cbUnits = New System.Windows.Forms.ToolStripComboBox()
         Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -436,6 +437,7 @@ Partial Class FormCompoundCreator
         Me.Button1 = New System.Windows.Forms.Button()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.SaveFileDialog2 = New System.Windows.Forms.SaveFileDialog()
+        Me.OpenFileDialog3 = New System.Windows.Forms.OpenFileDialog()
         CType(Me.pbRender, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PicUNIFAC, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridUNIFAC, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -2506,7 +2508,7 @@ Partial Class FormCompoundCreator
         'ComponenteToolStripMenuItem
         '
         resources.ApplyResources(Me.ComponenteToolStripMenuItem, "ComponenteToolStripMenuItem")
-        Me.ComponenteToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SalvarNoBancoDeDadosToolStripMenuItem, Me.ExportarDadosParaArquivoJSONToolStripMenuItem, Me.ImportarDadosToolStripMenuItem})
+        Me.ComponenteToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SalvarNoBancoDeDadosToolStripMenuItem, Me.ExportarDadosParaArquivoJSONToolStripMenuItem, Me.ImportarDadosToolStripMenuItem, Me.ImportarDeArquivoJSONToolStripMenuItem})
         Me.ComponenteToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.ComponenteToolStripMenuItem.MergeIndex = 3
         Me.ComponenteToolStripMenuItem.Name = "ComponenteToolStripMenuItem"
@@ -2547,6 +2549,12 @@ Partial Class FormCompoundCreator
         resources.ApplyResources(Me.EstruturaUNIFACMODFACDDBToolStripMenuItem, "EstruturaUNIFACMODFACDDBToolStripMenuItem")
         Me.EstruturaUNIFACMODFACDDBToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.world_connect
         Me.EstruturaUNIFACMODFACDDBToolStripMenuItem.Name = "EstruturaUNIFACMODFACDDBToolStripMenuItem"
+        '
+        'ImportarDeArquivoJSONToolStripMenuItem
+        '
+        resources.ApplyResources(Me.ImportarDeArquivoJSONToolStripMenuItem, "ImportarDeArquivoJSONToolStripMenuItem")
+        Me.ImportarDeArquivoJSONToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.icons8_live_folder
+        Me.ImportarDeArquivoJSONToolStripMenuItem.Name = "ImportarDeArquivoJSONToolStripMenuItem"
         '
         'SistemasDeUnidadesToolStripMenuItem
         '
@@ -3570,6 +3578,10 @@ Partial Class FormCompoundCreator
         Me.SaveFileDialog2.OverwritePrompt = False
         Me.SaveFileDialog2.RestoreDirectory = True
         '
+        'OpenFileDialog3
+        '
+        resources.ApplyResources(Me.OpenFileDialog3, "OpenFileDialog3")
+        '
         'FormCompoundCreator
         '
         resources.ApplyResources(Me, "$this")
@@ -4020,4 +4032,6 @@ Partial Class FormCompoundCreator
     Friend WithEvents Label106 As Label
     Friend WithEvents Label107 As Label
     Friend WithEvents rbRegressSolidCp As RadioButton
+    Friend WithEvents ImportarDeArquivoJSONToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents OpenFileDialog3 As OpenFileDialog
 End Class
