@@ -89,6 +89,8 @@ Public Class FormMain
 
 #Region "    Form Events"
 
+    Public Event ToolOpened(sender As Object, e As EventArgs)
+
     Public Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         MostRecentFiles = My.Settings.MostRecentFiles
@@ -3505,6 +3507,8 @@ Label_00CC:
 
         Dim newform As New FormFlowsheet()
 
+        RaiseEvent ToolOpened("New Flowsheet", New EventArgs())
+
         With newform
             .Text = "Simulation" & m_childcount
             .MdiParent = Me
@@ -3880,6 +3884,9 @@ Label_00CC:
     End Sub
 
     Private Sub GuiaDoUsuarioToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GuiaDoUsuarioToolStripMenuItem.Click
+
+        RaiseEvent ToolOpened("View User Guide", New EventArgs())
+
         If DWSIM.App.IsRunningOnMono Then
             Dim p As New Process()
             With p
@@ -3943,6 +3950,9 @@ Label_00CC:
 
     Private Sub ContentsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ContentsToolStripMenuItem.Click
         'call general help
+
+        RaiseEvent ToolOpened("Help", New EventArgs())
+
         DWSIM.App.HelpRequested("Frame.htm")
     End Sub
 
@@ -3973,6 +3983,9 @@ Label_00CC:
 
     Private Sub NovoEstudoDoCriadorDeComponentesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles NovoEstudoDoCriadorDeComponentesToolStripMenuItem.Click
         Dim NewMDIChild As New FormCompoundCreator()
+
+        RaiseEvent ToolOpened("New Compound Creator", New EventArgs())
+
         'Set the Parent Form of the Child window.
         NewMDIChild.MdiParent = Me
         'Display the new form.
@@ -3984,6 +3997,9 @@ Label_00CC:
 
     Private Sub NovoEstudoDeRegressaoDeDadosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles NovoEstudoDeRegressaoDeDadosToolStripMenuItem.Click
         Dim NewMDIChild As New FormDataRegression()
+
+        RaiseEvent ToolOpened("New Regression Study", New EventArgs())
+
         'Set the Parent Form of the Child window.
         NewMDIChild.MdiParent = Me
         'Display the new form.
@@ -3995,6 +4011,9 @@ Label_00CC:
 
     Private Sub NovoRegressaoUNIFACIPs_Click(sender As Object, e As EventArgs) Handles NovoRegressaoUNIFACIPs.Click
         Dim NewMDIChild As New FormUNIFACRegression()
+
+        RaiseEvent ToolOpened("New UNIFAC IP Regression", New EventArgs())
+
         'Set the Parent Form of the Child window.
         NewMDIChild.MdiParent = Me
         'Display the new form.
@@ -4012,6 +4031,8 @@ Label_00CC:
         End If
     End Sub
     Private Sub PreferenciasDoDWSIMToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PreferenciasDoDWSIMToolStripMenuItem.Click
+
+        RaiseEvent ToolOpened("View General Settings", New EventArgs())
 
         If Settings.DpiScale > 1.0 Then
             Me.SettingsPanel.Width = 400 * Settings.DpiScale

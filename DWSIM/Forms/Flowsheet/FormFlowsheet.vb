@@ -125,6 +125,8 @@ Public Class FormFlowsheet
 
 #Region "    Form Event Handlers "
 
+    Public Event ToolOpened(sender As Object, e As EventArgs)
+
     Public Sub New()
 
         ' This call is required by the Windows Form Designer.
@@ -812,6 +814,7 @@ Public Class FormFlowsheet
 #Region "    Click Event Handlers "
 
     Public Sub tsbAtivar_CheckedChanged(sender As Object, e As EventArgs) Handles tsbAtivar.CheckedChanged
+        RaiseEvent ToolOpened("Enable/Disable Solver", New EventArgs())
         GlobalSettings.Settings.CalculatorActivated = tsbAtivar.Checked
         tsbCalc.Enabled = tsbAtivar.Checked
         tsbCalcF.Enabled = tsbAtivar.Checked
@@ -820,6 +823,7 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles tsbAbortCalc.Click
+        RaiseEvent ToolOpened("Abort Solve Flowsheet", New EventArgs())
         Settings.CalculatorStopRequested = True
         If Settings.TaskCancellationTokenSource IsNot Nothing Then
             Settings.TaskCancellationTokenSource.Cancel()
@@ -842,6 +846,7 @@ Public Class FormFlowsheet
 
     Private Sub tsbCalcF_Click(sender As Object, e As EventArgs) Handles tsbCalcF.Click
         If Not DynamicMode Then
+            RaiseEvent ToolOpened("Force Solve Flowsheet", New EventArgs())
             GlobalSettings.Settings.TaskCancellationTokenSource = Nothing
             GlobalSettings.Settings.CalculatorBusy = False
             My.Application.ActiveSimulation = Me
@@ -916,6 +921,8 @@ Public Class FormFlowsheet
 
     Private Sub AssistenteDeCriacaoDeSubstânciasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CompoundCreatorWizardTSMI.Click
 
+        RaiseEvent ToolOpened("Compound Creator Wizard", New EventArgs())
+
         FrmStSim1.loaded = False
 
         Dim wform As New UI.Desktop.Editors.CompoundCreatorWizard(Me)
@@ -937,6 +944,8 @@ Public Class FormFlowsheet
 
     Private Sub InspetorDeSolucoesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InspectorTSMI.Click
 
+        RaiseEvent ToolOpened("Solution Inspector", New EventArgs())
+
         Dim iform As New Inspector.Window
         iform.Show()
 
@@ -953,6 +962,7 @@ Public Class FormFlowsheet
 
     Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles tsbCalc.Click
         If Not DynamicMode Then
+            RaiseEvent ToolOpened("Solve Flowsheet", New EventArgs())
             Settings.TaskCancellationTokenSource = Nothing
             My.Application.ActiveSimulation = Me
             If My.Computer.Keyboard.ShiftKeyDown Then GlobalSettings.Settings.CalculatorBusy = False
@@ -1263,20 +1273,24 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub AnaliseDeSensibilidadeToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AnaliseDeSensibilidadeToolStripMenuItem.Click
+        RaiseEvent ToolOpened("Sensitivity Analysis", New EventArgs())
         Me.FormSensAnalysis0 = New FormSensAnalysis
         Me.FormSensAnalysis0.Show(Me.dckPanel)
     End Sub
 
     Private Sub MultivariateOptimizerToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MultivariateOptimizerToolStripMenuItem.Click
+        RaiseEvent ToolOpened("Optimization", New EventArgs())
         Me.FormOptimization0 = New FormOptimization
         Me.FormOptimization0.Show(Me.dckPanel)
     End Sub
 
     Private Sub CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem.Click
+        RaiseEvent ToolOpened("Bulk C7+ Characterization", New EventArgs())
         Me.FrmPCBulk.ShowDialog(Me)
     End Sub
 
     Private Sub CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem.Click
+        RaiseEvent ToolOpened("Distillation Curves Characterization", New EventArgs())
         Dim frmdc As New DCCharacterizationWizard
         frmdc.ShowDialog(Me)
     End Sub
@@ -1300,6 +1314,7 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub SimulationConfig_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsmiConfigSimulation.Click
+        RaiseEvent ToolOpened("Simulation Settings", New EventArgs())
         If DWSIM.App.IsRunningOnMono Then
             Me.FrmStSim1 = New FormSimulSettings()
             Me.FrmStSim1.Show(Me.dckPanel)
@@ -1309,6 +1324,7 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub GerarRelatorioToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GerarRelatorioToolStripMenuItem.Click
+        RaiseEvent ToolOpened("Report Tool", New EventArgs())
         FrmReport = New FormReportConfig
         Me.FrmReport.Show(Me)
     End Sub
@@ -1349,6 +1365,7 @@ Public Class FormFlowsheet
 
 
     Private Sub GerenciadorDeAmostrasDePetroleoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GerenciadorDeAmostrasDePetroleoToolStripMenuItem.Click
+        RaiseEvent ToolOpened("Assay Manager", New EventArgs())
         Dim frmam As New FormAssayManager
         frmam.ShowDialog(Me)
         Try
@@ -3024,6 +3041,9 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub PropriedadesDasSubstanciasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PropriedadesDasSubstanciasToolStripMenuItem.Click
+
+        RaiseEvent ToolOpened("Pure Compound Viewer", New EventArgs())
+
         Dim frmpc As New FormPureComp With {.Flowsheet = Me}
         frmpc.ShowDialog(Me)
     End Sub
@@ -3198,6 +3218,8 @@ Public Class FormFlowsheet
 
     Private Sub tsbStoreSolution_Click(sender As Object, e As EventArgs) Handles tsbStoreSolution.Click
 
+        RaiseEvent ToolOpened("Store Flowsheet State", New EventArgs())
+
         Dim data = GetProcessData()
 
         Dim f As New FormEnterName
@@ -3221,6 +3243,8 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub tsbLoadSolution_Click(sender As Object, e As EventArgs) Handles tsbLoadSolution.Click
+
+        RaiseEvent ToolOpened("Restore Flowsheet State", New EventArgs())
 
         If tscbStoredSolutions.SelectedItem IsNot Nothing Then
             If StoredSolutions.ContainsKey(tscbStoredSolutions.SelectedItem.ToString) Then
@@ -3250,6 +3274,7 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub GerenciadorDoModoDinâmicoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GerenciadorDoModoDinamicoToolStripMenuItem.Click
+        RaiseEvent ToolOpened("Dynamics Manager", New EventArgs())
         FormDynamics.Activate()
     End Sub
 
@@ -3298,6 +3323,8 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem.Click
+
+        RaiseEvent ToolOpened("PID Controller Tuning", New EventArgs())
 
         Dim ft As New FormPIDTuning With {.Flowsheet = Me}
 
