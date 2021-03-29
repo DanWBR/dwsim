@@ -86,15 +86,22 @@ The Thermodynamics libraries contains the Property Packages and associated Therm
 The main classes defined in DWSIM.Thermodynamics are:
 
 * [**CompoundConstantProperties**](https://github.com/DanWBR/dwsim6/blob/fd71e980d234f423059a119aaff58df2fc9e7cfb/DWSIM.Thermodynamics/Base%20Classes/ThermodynamicsBase.vb#L1395): contains all the unique parameters that define a compound (i.e. name, molecular weight, normal boiling point, critical temperature, etc).
+
 * [**Compound**](https://github.com/DanWBR/dwsim6/blob/fd71e980d234f423059a119aaff58df2fc9e7cfb/DWSIM.Thermodynamics/Base%20Classes/ThermodynamicsBase.vb#L36): contains a **ConstantProperties** object as well as mutable parameters like mass/mole/volumetric flows and fractions, within the context of a Material Stream.
+
 * [**Reaction**](https://github.com/DanWBR/dwsim6/blob/fd71e980d234f423059a119aaff58df2fc9e7cfb/DWSIM.Thermodynamics/Base%20Classes/ThermodynamicsBase.vb#L242): contains all parameters that define a chemical reaction.
+
 * [**ReactionSet**](https://github.com/DanWBR/dwsim6/blob/fd71e980d234f423059a119aaff58df2fc9e7cfb/DWSIM.Thermodynamics/Base%20Classes/ThermodynamicsBase.vb#L521): contains a list of associated **Reaction** objects.
+
 * [**PhaseProperties**](https://github.com/DanWBR/dwsim6/blob/fd71e980d234f423059a119aaff58df2fc9e7cfb/DWSIM.Thermodynamics/Base%20Classes/ThermodynamicsBase.vb#L1224): defines the properties of a Phase (Vapor, Liquid, Solid...) or a mixture of phases.
+
 * [**Phase**](https://github.com/DanWBR/dwsim6/blob/fd71e980d234f423059a119aaff58df2fc9e7cfb/DWSIM.Thermodynamics/Base%20Classes/ThermodynamicsBase.vb#L147): defines a fluid phase. Contains a **PhaseProperties** object and a list of **Compound** objects.
 
-* [**Material Stream**](https://github.com/DanWBR/dwsim6/blob/windows/DWSIM.Thermodynamics/Material%20Stream/MaterialStream.vb): defines flow of matter from one point to another in a flowsheet, or the transport of matter between unit operations. Contains a list of **Phase** objects and lots of helper parameters and methods.
+* [**Material Stream**](https://github.com/DanWBR/dwsim6/blob/fd71e980d234f423059a119aaff58df2fc9e7cfb/DWSIM.Thermodynamics/Material%20Stream/MaterialStream.vb): defines flow of matter from one point to another in a flowsheet, or the transport of matter between unit operations. Contains a list of **Phase** objects and lots of helper parameters and methods.
 
+* [**Property Package**](): A Property Package is a collection of phase equilibria and property calculation methods, specific to a chemical engineering application. The Property Package performs almost all of its calculations on a associated MaterialStream object. When the [equilibrium](https://github.com/DanWBR/dwsim6/blob/fd71e980d234f423059a119aaff58df2fc9e7cfb/DWSIM.Thermodynamics/Property%20Packages/PropertyPackage.vb#L2204) and [property](https://github.com/DanWBR/dwsim6/blob/fd71e980d234f423059a119aaff58df2fc9e7cfb/DWSIM.Thermodynamics/Property%20Packages/PengRobinson.vb#L257) calculations are performed, the Property Package updates the **Phase** objects in the Material Stream with the calculated total and per-compound phase flows, as well as the phase properties.
 
+The [Flash Algorithm objects](https://github.com/DanWBR/dwsim6/blob/fd71e980d234f423059a119aaff58df2fc9e7cfb/DWSIM.Thermodynamics/Flash%20Algorithms/UniversalFlash.vb) are used by the Property Packages to calculate the distribution of a defined mixture of compounds in different phases according to a group of specificied properties, like Temperature, Pressure, Enthalpy, Entropy and Vaporized Fraction.
 
 #### DWSIM.Math.* ####
 
