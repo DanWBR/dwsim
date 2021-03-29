@@ -2025,6 +2025,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                                     Using filestr As Stream = Assembly.GetAssembly(elec.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.FoodProp.xml")
                                         Dim fcomps = Databases.UserDB.ReadComps(filestr)
                                         For Each cp As BaseClasses.ConstantProperties In fcomps
+                                            cp.CurrentDB = "FoodProp"
                                             If Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
                                         Next
                                     End Using

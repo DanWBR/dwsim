@@ -1103,6 +1103,7 @@ Public Class FormMain
         Using filestr As Stream = Assembly.GetAssembly(udb.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.FoodProp.xml")
             Dim fcomps = Databases.UserDB.ReadComps(filestr)
             For Each cp As BaseClasses.ConstantProperties In fcomps
+                cp.CurrentDB = "FoodProp"
                 If Not AvailableComponents.ContainsKey(cp.Name) Then AvailableComponents.Add(cp.Name, cp)
             Next
         End Using

@@ -22,7 +22,7 @@ Imports DWSIM.Thermodynamics.PropertyPackages
 
 Public Class FormSimulWizard
 
-    Private FrmChild As FormFlowsheet
+    Public CurrentFlowsheet As FormFlowsheet
     Dim loaded As Boolean = False
 
     Private prevsort As System.ComponentModel.ListSortDirection = System.ComponentModel.ListSortDirection.Ascending
@@ -51,8 +51,6 @@ Public Class FormSimulWizard
 
         Dim pathsep As Char = Path.DirectorySeparatorChar
 
-        FrmChild = My.Application.ActiveSimulation
-
         Dim comp As BaseClasses.ConstantProperties
         If Not loaded Or reset Then
 
@@ -63,11 +61,11 @@ Public Class FormSimulWizard
 
             ACSC1 = New AutoCompleteStringCollection
 
-            For Each comp In Me.FrmChild.Options.SelectedComponents.Values
-                ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
+            For Each comp In Me.CurrentFlowsheet.Options.SelectedComponents.Values
+                ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.CurrentDB, comp.IsCOOLPROPSupported})
             Next
-            For Each comp In Me.FrmChild.Options.NotSelectedComponents.Values
-                ogc1.Rows.Add(New Object() {comp.Name, False, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
+            For Each comp In Me.CurrentFlowsheet.Options.NotSelectedComponents.Values
+                ogc1.Rows.Add(New Object() {comp.Name, False, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.CurrentDB, comp.IsCOOLPROPSupported})
                 'For Each c As DataGridViewCell In Me.ogc1.Rows(idx).Cells
                 '    If comp.OriginalDB <> "Electrolytes" Then
                 '        If comp.Acentric_Factor = 0.0# Or comp.Critical_Compressibility = 0.0# Then
@@ -126,8 +124,8 @@ Public Class FormSimulWizard
         Else
 
             For Each r As DataGridViewRow In ogc1.Rows
-                If FrmChild.Options.NotSelectedComponents.ContainsKey(r.Cells(0).Value) Then
-                    comp = FrmChild.Options.NotSelectedComponents(r.Cells(0).Value)
+                If CurrentFlowsheet.Options.NotSelectedComponents.ContainsKey(r.Cells(0).Value) Then
+                    comp = CurrentFlowsheet.Options.NotSelectedComponents(r.Cells(0).Value)
                     For Each c As DataGridViewCell In r.Cells
                         If comp.Acentric_Factor = 0.0# Or comp.Critical_Compressibility = 0.0# Then
                             c.Style.ForeColor = Color.Red
@@ -141,7 +139,7 @@ Public Class FormSimulWizard
 
         With Me.dgvpp.Rows
             .Clear()
-            For Each pp2 As PropertyPackages.PropertyPackage In FrmChild.Options.PropertyPackages.Values
+            For Each pp2 As PropertyPackages.PropertyPackage In CurrentFlowsheet.Options.PropertyPackages.Values
                 .Add(New Object() {pp2.UniqueID, pp2.Tag, pp2.ComponentName})
             Next
         End With
@@ -187,7 +185,8 @@ Public Class FormSimulWizard
             If Not r.Cells(2).Value Is Nothing Then
                 If r.Cells(2).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Or
                    r.Cells(3).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Or
-                   r.Cells(5).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Then
+                   r.Cells(5).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Or
+                   r.Cells(6).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Then
                     r.Visible = True
                     If r.Cells(2).Value.ToString.ToLower.Equals(Me.TextBox1.Text.ToLower) Or
                                        r.Cells(3).Value.ToString.ToLower.Equals(Me.TextBox1.Text.ToLower) Or
@@ -240,16 +239,16 @@ Public Class FormSimulWizard
     Sub AddCompToSimulation(ByVal compid As String)
         ' TODO Add code to check that index is within range. If it is out of range, don't do anything.
         If Me.loaded Then
-            If Not Me.FrmChild.Options.SelectedComponents.ContainsKey(compid) Then
+            If Not Me.CurrentFlowsheet.Options.SelectedComponents.ContainsKey(compid) Then
                 Dim tmpcomp As New BaseClasses.ConstantProperties
-                tmpcomp = Me.FrmChild.Options.NotSelectedComponents(compid)
+                tmpcomp = Me.CurrentFlowsheet.Options.NotSelectedComponents(compid)
 
-                Me.FrmChild.Options.SelectedComponents.Add(tmpcomp.Name, tmpcomp)
-                Me.FrmChild.Options.NotSelectedComponents.Remove(tmpcomp.Name)
+                Me.CurrentFlowsheet.Options.SelectedComponents.Add(tmpcomp.Name, tmpcomp)
+                Me.CurrentFlowsheet.Options.NotSelectedComponents.Remove(tmpcomp.Name)
                 Dim ms As Streams.MaterialStream
 
                 Dim proplist As New ArrayList
-                For Each ms In FrmChild.Collections.FlowsheetObjectCollection.Values
+                For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values
                     For Each phase As BaseClasses.Phase In ms.Phases.Values
                         phase.Compounds.Add(tmpcomp.Name, New BaseClasses.Compound(tmpcomp.Name, ""))
                         phase.Compounds(tmpcomp.Name).ConstantProperties = tmpcomp
@@ -263,13 +262,13 @@ Public Class FormSimulWizard
 
         Dim tmpcomp As New BaseClasses.ConstantProperties
         Dim nm As String = compid
-        tmpcomp = Me.FrmChild.Options.SelectedComponents(nm)
-        Me.FrmChild.Options.SelectedComponents.Remove(tmpcomp.Name)
-        Me.FrmChild.Options.NotSelectedComponents.Add(tmpcomp.Name, tmpcomp)
+        tmpcomp = Me.CurrentFlowsheet.Options.SelectedComponents(nm)
+        Me.CurrentFlowsheet.Options.SelectedComponents.Remove(tmpcomp.Name)
+        Me.CurrentFlowsheet.Options.NotSelectedComponents.Add(tmpcomp.Name, tmpcomp)
         Dim ms As Streams.MaterialStream
         Dim proplist As New ArrayList
 
-        For Each ms In FrmChild.Collections.FlowsheetObjectCollection.Values
+        For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values
             For Each phase As BaseClasses.Phase In ms.Phases.Values
                 phase.Compounds.Remove(tmpcomp.Name)
             Next
@@ -280,11 +279,11 @@ Public Class FormSimulWizard
         Dim pp As PropertyPackages.PropertyPackage
         pp = FormMain.PropertyPackages(ListViewPP.SelectedItems(0)).Clone
         With pp
-            pp.Tag = pp.ComponentName + " (" + (FrmChild.PropertyPackages.Count + 1).ToString() + ")"
+            pp.Tag = pp.ComponentName + " (" + (CurrentFlowsheet.PropertyPackages.Count + 1).ToString() + ")"
             pp.UniqueID = "PP-" & Guid.NewGuid.ToString
-            pp.Flowsheet = FrmChild
+            pp.Flowsheet = CurrentFlowsheet
         End With
-        FrmChild.Options.PropertyPackages.Add(pp.UniqueID, pp)
+        CurrentFlowsheet.Options.PropertyPackages.Add(pp.UniqueID, pp)
         Me.dgvpp.Rows.Add(New Object() {pp.UniqueID, pp.Tag, pp.ComponentName, "..."})
         Me.dgvpp.Rows(Me.dgvpp.Rows.Count - 1).Selected = True
         If TypeOf pp Is PropertyPackages.CAPEOPENPropertyPackage Then
@@ -294,8 +293,8 @@ Public Class FormSimulWizard
 
     Private Sub ComboBox2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox2.SelectedIndexChanged
 
-        FrmChild.Options.SelectedUnitSystem = FormMain.AvailableUnitSystems.Item(ComboBox2.SelectedItem.ToString)
-        Dim su As SystemsOfUnits.Units = FrmChild.Options.SelectedUnitSystem
+        CurrentFlowsheet.Options.SelectedUnitSystem = FormMain.AvailableUnitSystems.Item(ComboBox2.SelectedItem.ToString)
+        Dim su As SystemsOfUnits.Units = CurrentFlowsheet.Options.SelectedUnitSystem
 
         With Me.DataGridView1.Rows
             .Clear()
@@ -648,7 +647,7 @@ Public Class FormSimulWizard
             Dim oldvalue As String = ""
             Dim member As String = ""
 
-            Dim su As SystemsOfUnits.Units = FrmChild.Options.SelectedUnitSystem
+            Dim su As SystemsOfUnits.Units = CurrentFlowsheet.Options.SelectedUnitSystem
 
             Select Case cell.Style.Tag
                 Case 1
@@ -850,7 +849,7 @@ Public Class FormSimulWizard
         If e.ColumnIndex = 3 Then
             Dim ppid As String = ""
             ppid = dgvpp.SelectedRows(0).Cells(0).Value
-            Dim pp As PropertyPackages.PropertyPackage = FrmChild.Options.PropertyPackages(ppid)
+            Dim pp As PropertyPackages.PropertyPackage = CurrentFlowsheet.Options.PropertyPackages(ppid)
             If pp.IsConfigurable Then
                 pp.DisplayGroupedEditingForm()
             Else
@@ -862,7 +861,7 @@ Public Class FormSimulWizard
     Private Sub btnInfoLeft_Click(sender As Object, e As EventArgs) Handles btnInfoLeft.Click
 
         If ogc1.SelectedRows.Count > 0 Then
-            Dim f As New FormPureComp() With {.Flowsheet = FrmChild, .Added = False, .MyCompound = Me.FrmChild.AvailableCompounds(ogc1.SelectedRows(0).Cells(0).Value)}
+            Dim f As New FormPureComp() With {.Flowsheet = CurrentFlowsheet, .Added = False, .MyCompound = Me.CurrentFlowsheet.AvailableCompounds(ogc1.SelectedRows(0).Cells(0).Value)}
             f.ShowDialog(Me)
         Else
             MessageBox.Show(DWSIM.App.GetLocalString("Error! No component selected!"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
@@ -879,11 +878,11 @@ Public Class FormSimulWizard
             For Each fn In Me.OpenFileDialog1.FileNames
                 Try
                     Dim comp = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BaseClasses.ConstantProperties)(File.ReadAllText(fn))
-                    If Not Me.FrmChild.Options.SelectedComponents.ContainsKey(comp.Name) Then
-                        Me.FrmChild.Options.SelectedComponents.Add(comp.Name, comp)
+                    If Not Me.CurrentFlowsheet.Options.SelectedComponents.ContainsKey(comp.Name) Then
+                        Me.CurrentFlowsheet.Options.SelectedComponents.Add(comp.Name, comp)
                         Dim ms As Streams.MaterialStream
                         Dim proplist As New ArrayList
-                        For Each ms In FrmChild.Collections.FlowsheetObjectCollection.Values
+                        For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values
                             For Each phase As BaseClasses.Phase In ms.Phases.Values
                                 phase.Compounds.Add(comp.Name, New BaseClasses.Compound(comp.Name, ""))
                                 phase.Compounds(comp.Name).ConstantProperties = comp
@@ -906,12 +905,12 @@ Public Class FormSimulWizard
         If f.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
             Try
                 Dim comp = f.BaseCompound
-                If Not Me.FrmChild.Options.SelectedComponents.ContainsKey(comp.Name) Then
-                    If Not Me.FrmChild.AvailableCompounds.ContainsKey(comp.Name) Then Me.FrmChild.AvailableCompounds.Add(comp.Name, comp)
-                    Me.FrmChild.Options.SelectedComponents.Add(comp.Name, comp)
+                If Not Me.CurrentFlowsheet.Options.SelectedComponents.ContainsKey(comp.Name) Then
+                    If Not Me.CurrentFlowsheet.AvailableCompounds.ContainsKey(comp.Name) Then Me.CurrentFlowsheet.AvailableCompounds.Add(comp.Name, comp)
+                    Me.CurrentFlowsheet.Options.SelectedComponents.Add(comp.Name, comp)
                     Dim ms As Streams.MaterialStream
                     Dim proplist As New ArrayList
-                    For Each ms In FrmChild.Collections.FlowsheetObjectCollection.Values
+                    For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values
                         For Each phase As BaseClasses.Phase In ms.Phases.Values
                             phase.Compounds.Add(comp.Name, New BaseClasses.Compound(comp.Name, ""))
                             phase.Compounds(comp.Name).ConstantProperties = comp
@@ -932,7 +931,7 @@ Public Class FormSimulWizard
 
         Dim newsu = New SystemsOfUnits.Units
 
-        newsu = Newtonsoft.Json.JsonConvert.DeserializeObject(Of SharedClasses.SystemsOfUnits.Units)(Newtonsoft.Json.JsonConvert.SerializeObject(FrmChild.Options.SelectedUnitSystem))
+        newsu = Newtonsoft.Json.JsonConvert.DeserializeObject(Of SharedClasses.SystemsOfUnits.Units)(Newtonsoft.Json.JsonConvert.SerializeObject(CurrentFlowsheet.Options.SelectedUnitSystem))
         newsu.Name = newsu.Name + "_" + (FormMain.AvailableUnitSystems.Count + 1).ToString
 
         If Not My.Application.UserUnitSystems.ContainsKey(newsu.Name) Then
@@ -992,14 +991,14 @@ Public Class FormSimulWizard
         If f.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
             Try
                 Dim comp = f.BaseCompound
-                If Not Me.FrmChild.Options.SelectedComponents.ContainsKey(comp.Name) Then
-                    If Not Me.FrmChild.AvailableCompounds.ContainsKey(comp.Name) Then
-                        Me.FrmChild.AvailableCompounds.Add(comp.Name, comp)
+                If Not Me.CurrentFlowsheet.Options.SelectedComponents.ContainsKey(comp.Name) Then
+                    If Not Me.CurrentFlowsheet.AvailableCompounds.ContainsKey(comp.Name) Then
+                        Me.CurrentFlowsheet.AvailableCompounds.Add(comp.Name, comp)
                     End If
-                    Me.FrmChild.Options.SelectedComponents.Add(comp.Name, comp)
+                    Me.CurrentFlowsheet.Options.SelectedComponents.Add(comp.Name, comp)
                     Dim ms As Streams.MaterialStream
                     Dim proplist As New ArrayList
-                    For Each ms In FrmChild.Collections.FlowsheetObjectCollection.Values
+                    For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values
                         For Each phase As BaseClasses.Phase In ms.Phases.Values
                             phase.Compounds.Add(comp.Name, New BaseClasses.Compound(comp.Name, ""))
                             phase.Compounds(comp.Name).ConstantProperties = comp
@@ -1021,14 +1020,14 @@ Public Class FormSimulWizard
             For Each fn In Me.OpenFileDialog1.FileNames
                 Try
                     Dim comp = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BaseClasses.ConstantProperties)(File.ReadAllText(fn))
-                    If Not Me.FrmChild.Options.SelectedComponents.ContainsKey(comp.Name) Then
-                        If Not Me.FrmChild.AvailableCompounds.ContainsKey(comp.Name) Then
-                            Me.FrmChild.AvailableCompounds.Add(comp.Name, comp)
+                    If Not Me.CurrentFlowsheet.Options.SelectedComponents.ContainsKey(comp.Name) Then
+                        If Not Me.CurrentFlowsheet.AvailableCompounds.ContainsKey(comp.Name) Then
+                            Me.CurrentFlowsheet.AvailableCompounds.Add(comp.Name, comp)
                         End If
-                        Me.FrmChild.Options.SelectedComponents.Add(comp.Name, comp)
+                        Me.CurrentFlowsheet.Options.SelectedComponents.Add(comp.Name, comp)
                         Dim ms As Streams.MaterialStream
                         Dim proplist As New ArrayList
-                        For Each ms In FrmChild.Collections.FlowsheetObjectCollection.Values
+                        For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values
                             For Each phase As BaseClasses.Phase In ms.Phases.Values
                                 phase.Compounds.Add(comp.Name, New BaseClasses.Compound(comp.Name, ""))
                                 phase.Compounds(comp.Name).ConstantProperties = comp
@@ -1068,15 +1067,15 @@ Public Class FormSimulWizard
 
     Sub AddPRPropPack()
 
-        If FrmChild.Options.PropertyPackages.Count = 0 Then
+        If CurrentFlowsheet.Options.PropertyPackages.Count = 0 Then
 
             Dim pp As New PropertyPackages.PengRobinsonPropertyPackage
             With pp
-                pp.Tag = pp.ComponentName + " (" + (FrmChild.PropertyPackages.Count + 1).ToString() + ")"
+                pp.Tag = pp.ComponentName + " (" + (CurrentFlowsheet.PropertyPackages.Count + 1).ToString() + ")"
                 pp.UniqueID = "PP-" & Guid.NewGuid.ToString
-                pp.Flowsheet = FrmChild
+                pp.Flowsheet = CurrentFlowsheet
             End With
-            FrmChild.Options.PropertyPackages.Add(pp.UniqueID, pp)
+            CurrentFlowsheet.Options.PropertyPackages.Add(pp.UniqueID, pp)
 
             Me.dgvpp.Rows.Add(New Object() {pp.UniqueID, pp.Tag, pp.ComponentName, "..."})
             Me.dgvpp.Rows(Me.dgvpp.Rows.Count - 1).Selected = True
@@ -1123,7 +1122,7 @@ Public Class FormSimulWizard
 
             Dim NewMDIChild As New FormCompoundCreator()
             'Set the Parent Form of the Child window.
-            NewMDIChild.MdiParent = FrmChild.MdiParent
+            NewMDIChild.MdiParent = CurrentFlowsheet.MdiParent
             'Display the new form.
             NewMDIChild.Text = "CompCreator" & FormMain.m_childcount
             NewMDIChild.Show()

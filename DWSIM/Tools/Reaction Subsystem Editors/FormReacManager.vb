@@ -26,7 +26,7 @@ Public Class FormReacManager
 
     Inherits UserControl
 
-    Protected frmchild As FormFlowsheet
+    Public CurrentFlowsheet As FormFlowsheet
     Public col As BaseClasses.ReactionsCollection
 
     Sub New()
@@ -38,16 +38,14 @@ Public Class FormReacManager
 
     Private Sub FormReacManager_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        frmchild = My.Application.ActiveSimulation
-
         With Me.GridRSets.Rows
-            For Each rxnset As ReactionSet In frmchild.Options.ReactionSets.Values
+            For Each rxnset As ReactionSet In CurrentFlowsheet.Options.ReactionSets.Values
                 .Add(New Object() {rxnset.Name, rxnset.Description, rxnset.ID})
             Next
         End With
 
         With Me.GridRxns.Rows
-            For Each rxn As Reaction In frmchild.Options.Reactions.Values
+            For Each rxn As Reaction In CurrentFlowsheet.Options.Reactions.Values
                 .Add(New Object() {rxn.Name, rxn.ReactionType, rxn.Equation, rxn.ID})
             Next
         End With
@@ -60,7 +58,7 @@ Public Class FormReacManager
         AddHandler rse.FormClosed, Sub()
                                        With Me.GridRSets.Rows
                                            .Clear()
-                                           For Each rs1 As ReactionSet In frmchild.Options.ReactionSets.Values
+                                           For Each rs1 As ReactionSet In CurrentFlowsheet.Options.ReactionSets.Values
                                                .Add(New Object() {rs1.Name, rs1.Description, rs1.ID})
                                            Next
                                        End With
@@ -74,7 +72,7 @@ Public Class FormReacManager
         AddHandler frc.FormClosed, Sub()
                                        With Me.GridRxns.Rows
                                            .Clear()
-                                           For Each rxn As Reaction In frmchild.Options.Reactions.Values
+                                           For Each rxn As Reaction In CurrentFlowsheet.Options.Reactions.Values
                                                .Add(New Object() {rxn.Name, rxn.ReactionType, rxn.Equation, rxn.ID})
                                            Next
                                        End With
@@ -88,7 +86,7 @@ Public Class FormReacManager
         AddHandler fre.FormClosed, Sub()
                                        With Me.GridRxns.Rows
                                            .Clear()
-                                           For Each rxn As Reaction In frmchild.Options.Reactions.Values
+                                           For Each rxn As Reaction In CurrentFlowsheet.Options.Reactions.Values
                                                .Add(New Object() {rxn.Name, rxn.ReactionType, rxn.Equation, rxn.ID})
                                            Next
                                        End With
@@ -103,7 +101,7 @@ Public Class FormReacManager
         AddHandler frk.FormClosed, Sub()
                                        With Me.GridRxns.Rows
                                            .Clear()
-                                           For Each rxn As Reaction In frmchild.Options.Reactions.Values
+                                           For Each rxn As Reaction In CurrentFlowsheet.Options.Reactions.Values
                                                .Add(New Object() {rxn.Name, rxn.ReactionType, rxn.Equation, rxn.ID})
                                            Next
                                        End With
@@ -115,8 +113,8 @@ Public Class FormReacManager
 
         Dim myStream As System.IO.FileStream
         col = New ReactionsCollection
-        col.Collection = New BaseClasses.Reaction(frmchild.Options.Reactions.Count - 1) {}
-        frmchild.Options.Reactions.Values.CopyTo(col.Collection, 0)
+        col.Collection = New BaseClasses.Reaction(CurrentFlowsheet.Options.Reactions.Count - 1) {}
+        CurrentFlowsheet.Options.Reactions.Values.CopyTo(col.Collection, 0)
 
         If Me.SaveFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
             myStream = Me.SaveFileDialog1.OpenFile()
@@ -139,9 +137,9 @@ Public Class FormReacManager
                             xdoc.Add(New XElement("DWSIM_Reaction_Data"))
                             xel = xdoc.Element("DWSIM_Reaction_Data")
                             For Each row As DataGridViewRow In GridRxns.SelectedRows
-                                xel.Add(New XElement("Reaction", {DirectCast(frmchild.Options.Reactions(row.Cells(3).Value), Interfaces.ICustomXMLSerialization).SaveData().ToArray()}))
+                                xel.Add(New XElement("Reaction", {DirectCast(CurrentFlowsheet.Options.Reactions(row.Cells(3).Value), Interfaces.ICustomXMLSerialization).SaveData().ToArray()}))
                             Next
-                            For Each pp As KeyValuePair(Of String, Interfaces.IReaction) In frmchild.Options.Reactions
+                            For Each pp As KeyValuePair(Of String, Interfaces.IReaction) In CurrentFlowsheet.Options.Reactions
                             Next
                             xdoc.Save(myStream)
                         Catch ex As Exception
@@ -198,7 +196,7 @@ Public Class FormReacManager
                 Dim carray As New ArrayList
                 For Each rxn As Reaction In rxns.Collection
                     For Each ssbase As ReactionStoichBase In rxn.Components.Values
-                        If Not Me.frmchild.Options.SelectedComponents.ContainsKey(ssbase.CompName) Then
+                        If Not Me.CurrentFlowsheet.Options.SelectedComponents.ContainsKey(ssbase.CompName) Then
                             If Not carray.Contains(ssbase.CompName) Then carray.Add(ssbase.CompName)
                         End If
                     Next
@@ -219,12 +217,12 @@ Public Class FormReacManager
                         Dim tmpcomp As New BaseClasses.ConstantProperties
                         i = 0
                         Do
-                            If Not Me.frmchild.Options.SelectedComponents.ContainsKey(carray(i)) Then
-                                If Not Me.frmchild.Options.NotSelectedComponents.ContainsKey(carray(i)) Then
+                            If Not Me.CurrentFlowsheet.Options.SelectedComponents.ContainsKey(carray(i)) Then
+                                If Not Me.CurrentFlowsheet.Options.NotSelectedComponents.ContainsKey(carray(i)) Then
                                     MessageBox.Show("Component " & carray(i) & " is absent from the list of available components.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                                 Else
-                                    tmpcomp = Me.frmchild.Options.NotSelectedComponents(carray(i))
-                                    Me.frmchild.FrmStSim1.AddCompToSimulation(tmpcomp.Name)
+                                    tmpcomp = Me.CurrentFlowsheet.Options.NotSelectedComponents(carray(i))
+                                    Me.CurrentFlowsheet.FrmStSim1.AddCompToSimulation(tmpcomp.Name)
                                 End If
                             End If
                             i += 1
@@ -233,10 +231,10 @@ Public Class FormReacManager
                 End If
                 'add reactions
                 For Each rxn As Reaction In rxns.Collection
-                    If Not frmchild.Options.Reactions.ContainsKey(rxn.ID) Then
-                        Me.frmchild.Options.Reactions.Add(rxn.ID, rxn)
+                    If Not CurrentFlowsheet.Options.Reactions.ContainsKey(rxn.ID) Then
+                        Me.CurrentFlowsheet.Options.Reactions.Add(rxn.ID, rxn)
                         Me.GridRxns.Rows.Add(New Object() {rxn.Name, rxn.ReactionType, rxn.Equation, rxn.ID})
-                        Me.frmchild.Options.ReactionSets("DefaultSet").Reactions.Add(rxn.ID, New ReactionSetBase(rxn.ID, 0, True))
+                        Me.CurrentFlowsheet.Options.ReactionSets("DefaultSet").Reactions.Add(rxn.ID, New ReactionSetBase(rxn.ID, 0, True))
                     End If
                 Next
             End If
@@ -246,10 +244,10 @@ Public Class FormReacManager
 
     Private Sub KryptonButton10_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton7.Click
         If Not Me.GridRxns.SelectedRows.Count = 0 Then
-            Dim rxn As Reaction = frmchild.Options.Reactions(Me.GridRxns.SelectedRows(0).Cells(3).Value)
+            Dim rxn As Reaction = CurrentFlowsheet.Options.Reactions(Me.GridRxns.SelectedRows(0).Cells(3).Value)
             Dim rxn2 As Reaction = rxn.Clone()
             rxn2.Name = rxn.Name + "1"
-            frmchild.Options.Reactions.Add(rxn2.ID, rxn2)
+            CurrentFlowsheet.Options.Reactions.Add(rxn2.ID, rxn2)
             Me.GridRxns.Rows.Add(New Object() {rxn2.Name, rxn2.ReactionType, rxn2.Equation, rxn2.ID})
         End If
 
@@ -257,11 +255,11 @@ Public Class FormReacManager
 
     Private Sub KryptonButton9_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton8.Click
         If Not Me.GridRxns.SelectedRows.Count = 0 Then
-            frmchild.Options.Reactions.Remove(Me.GridRxns.SelectedRows(0).Cells(3).Value)
+            CurrentFlowsheet.Options.Reactions.Remove(Me.GridRxns.SelectedRows(0).Cells(3).Value)
             UpdateRxnSets()
             With Me.GridRxns.Rows
                 .Clear()
-                For Each rxn1 As Reaction In frmchild.Options.Reactions.Values
+                For Each rxn1 As Reaction In CurrentFlowsheet.Options.Reactions.Values
                     .Add(New Object() {rxn1.Name, rxn1.ReactionType, rxn1.Equation, rxn1.ID})
                 Next
             End With
@@ -270,7 +268,7 @@ Public Class FormReacManager
 
     Private Sub KryptonButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton6.Click
         If Not Me.GridRxns.SelectedRows.Count = 0 Then
-            Dim rxn As Reaction = frmchild.Options.Reactions(Me.GridRxns.SelectedRows(0).Cells(3).Value)
+            Dim rxn As Reaction = CurrentFlowsheet.Options.Reactions(Me.GridRxns.SelectedRows(0).Cells(3).Value)
             Select Case rxn.ReactionType
                 Case ReactionType.Conversion
                     Dim frc As New FormReacConv
@@ -280,7 +278,7 @@ Public Class FormReacManager
                     End With
                     AddHandler frc.FormClosed, Sub()
                                                    For Each row As DataGridViewRow In GridRxns.Rows
-                                                       Dim rxn1 = frmchild.Options.Reactions(row.Cells(3).Value)
+                                                       Dim rxn1 = CurrentFlowsheet.Options.Reactions(row.Cells(3).Value)
                                                        row.Cells(0).Value = rxn1.Name
                                                        row.Cells(1).Value = rxn1.ReactionType
                                                        row.Cells(2).Value = rxn1.Equation
@@ -295,7 +293,7 @@ Public Class FormReacManager
                     End With
                     AddHandler fre.FormClosed, Sub()
                                                    For Each row As DataGridViewRow In GridRxns.Rows
-                                                       Dim rxn1 = frmchild.Options.Reactions(row.Cells(3).Value)
+                                                       Dim rxn1 = CurrentFlowsheet.Options.Reactions(row.Cells(3).Value)
                                                        row.Cells(0).Value = rxn1.Name
                                                        row.Cells(1).Value = rxn1.ReactionType
                                                        row.Cells(2).Value = rxn1.Equation
@@ -310,7 +308,7 @@ Public Class FormReacManager
                     End With
                     AddHandler frk.FormClosed, Sub()
                                                    For Each row As DataGridViewRow In GridRxns.Rows
-                                                       Dim rxn1 = frmchild.Options.Reactions(row.Cells(3).Value)
+                                                       Dim rxn1 = CurrentFlowsheet.Options.Reactions(row.Cells(3).Value)
                                                        row.Cells(0).Value = rxn1.Name
                                                        row.Cells(1).Value = rxn1.ReactionType
                                                        row.Cells(2).Value = rxn1.Equation
@@ -325,7 +323,7 @@ Public Class FormReacManager
                     End With
                     AddHandler frk.FormClosed, Sub()
                                                    For Each row As DataGridViewRow In GridRxns.Rows
-                                                       Dim rxn1 = frmchild.Options.Reactions(row.Cells(3).Value)
+                                                       Dim rxn1 = CurrentFlowsheet.Options.Reactions(row.Cells(3).Value)
                                                        row.Cells(0).Value = rxn1.Name
                                                        row.Cells(1).Value = rxn1.ReactionType
                                                        row.Cells(2).Value = rxn1.Equation
@@ -338,11 +336,11 @@ Public Class FormReacManager
 
     Private Sub KryptonButton3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton2.Click
         If Not Me.GridRSets.SelectedRows.Count = 0 Then
-            Dim rxs As ReactionSet = frmchild.Options.ReactionSets(Me.GridRSets.SelectedRows(0).Cells(2).Value)
+            Dim rxs As ReactionSet = CurrentFlowsheet.Options.ReactionSets(Me.GridRSets.SelectedRows(0).Cells(2).Value)
             If rxs.ID = "DefaultSet" Then
                 MessageBox.Show(DWSIM.App.GetLocalString("Naopodeexcluirdefaultset"))
             Else
-                frmchild.Options.ReactionSets.Remove(Me.GridRSets.SelectedRows(0).Cells(2).Value)
+                CurrentFlowsheet.Options.ReactionSets.Remove(Me.GridRSets.SelectedRows(0).Cells(2).Value)
                 Me.GridRSets.Rows.Remove(Me.GridRSets.SelectedRows(0))
             End If
         End If
@@ -350,13 +348,13 @@ Public Class FormReacManager
 
     Private Sub KryptonButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton5.Click
         If Not Me.GridRSets.SelectedRows.Count = 0 Then
-            Dim rxs As ReactionSet = frmchild.Options.ReactionSets(Me.GridRSets.SelectedRows(0).Cells(2).Value)
+            Dim rxs As ReactionSet = CurrentFlowsheet.Options.ReactionSets(Me.GridRSets.SelectedRows(0).Cells(2).Value)
             If rxs.ID = "DefaultSet" Then
                 MessageBox.Show(DWSIM.App.GetLocalString("Naopodecopiardefaultset"))
             Else
                 Dim rxs2 As ReactionSet = rxs.Clone()
                 rxs2.Name = rxs.Name + "1"
-                frmchild.Options.ReactionSets.Add(rxs2.ID, rxs2)
+                CurrentFlowsheet.Options.ReactionSets.Add(rxs2.ID, rxs2)
                 Me.GridRSets.Rows.Add(New Object() {rxs2.Name, rxs2.Description, rxs2.ID})
             End If
         End If
@@ -364,7 +362,7 @@ Public Class FormReacManager
 
     Private Sub KryptonButton6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton3.Click
         If Not Me.GridRSets.SelectedRows.Count = 0 Then
-            Dim rset As ReactionSet = frmchild.Options.ReactionSets(Me.GridRSets.SelectedRows(0).Cells(2).Value)
+            Dim rset As ReactionSet = CurrentFlowsheet.Options.ReactionSets(Me.GridRSets.SelectedRows(0).Cells(2).Value)
             Dim rse As New FormReacSetEditor
             With rse
                 .mode = "Edit"
@@ -373,7 +371,7 @@ Public Class FormReacManager
             rse.ShowDialog()
             rse.Dispose()
             For Each row As DataGridViewRow In GridRSets.Rows
-                Dim rset1 = frmchild.Options.ReactionSets(row.Cells(2).Value)
+                Dim rset1 = CurrentFlowsheet.Options.ReactionSets(row.Cells(2).Value)
                 row.Cells(0).Value = rset1.Name
                 row.Cells(1).Value = rset1.Description
             Next
@@ -384,9 +382,9 @@ Public Class FormReacManager
 
         'check the reactions present in the sets
         Dim remarray As New ArrayList
-        For Each rxs As ReactionSet In frmchild.Options.ReactionSets.Values
+        For Each rxs As ReactionSet In CurrentFlowsheet.Options.ReactionSets.Values
             For Each rxnbase As ReactionSetBase In rxs.Reactions.Values
-                If Not frmchild.Options.Reactions.ContainsKey(rxnbase.ReactionID) Then
+                If Not CurrentFlowsheet.Options.Reactions.ContainsKey(rxnbase.ReactionID) Then
                     If Not remarray.Contains(rxnbase.ReactionID) Then remarray.Add(rxnbase.ReactionID)
                 End If
             Next
@@ -396,7 +394,7 @@ Public Class FormReacManager
         If remarray.Count > 0 Then
             Dim i As Integer = 0
             Do
-                For Each rxs As ReactionSet In frmchild.Options.ReactionSets.Values
+                For Each rxs As ReactionSet In CurrentFlowsheet.Options.ReactionSets.Values
                     If rxs.Reactions.ContainsKey(remarray(i)) Then rxs.Reactions.Remove(remarray(i))
                 Next
                 i += 1
@@ -413,7 +411,7 @@ Public Class FormReacManager
         AddHandler frk.FormClosed, Sub()
                                        With Me.GridRxns.Rows
                                            .Clear()
-                                           For Each rxn As Reaction In frmchild.Options.Reactions.Values
+                                           For Each rxn As Reaction In CurrentFlowsheet.Options.Reactions.Values
                                                .Add(New Object() {rxn.Name, rxn.ReactionType, rxn.Equation, rxn.ID})
                                            Next
                                        End With

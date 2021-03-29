@@ -1624,6 +1624,7 @@ out:
                     P1 = P1 + Vx1(i) * gamma1(i) * PP.AUX_PVAPi(i, T)
                 Next
                 lnP1 = Log(P1)
+                Dim icount As Integer = 0
                 Do
                     cnt += 1
                     T1 = T
@@ -1647,6 +1648,11 @@ out:
                     Next
                     lnP1 = Log(Pn)
                     F = P - Pn
+
+                    icount += 1
+
+                    If icount > maxit_i Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt"))
+
                 Loop While Abs(P - Pn) > 1
 
                 'Detect symetric oscillations in vicinity to critical point of a component

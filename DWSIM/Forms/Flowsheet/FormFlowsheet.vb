@@ -423,6 +423,7 @@ Public Class FormFlowsheet
             If Not DWSIM.App.IsRunningOnMono Then
                 Dim fw As New FormSimulWizard
                 With fw
+                    .CurrentFlowsheet = Me
                     .StartPosition = FormStartPosition.CenterScreen
                     .WindowState = FormWindowState.Normal
                     .ShowDialog(Me)
@@ -954,8 +955,10 @@ Public Class FormFlowsheet
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
         If DWSIM.App.IsRunningOnMono Then
             Me.FrmStSim1 = New FormSimulSettings()
+            FrmStSim1.CurrentFlowsheet = Me
             Me.FrmStSim1.Show(Me.dckPanel)
         Else
+            FrmStSim1.CurrentFlowsheet = Me
             Me.FrmStSim1.Show(Me.dckPanel)
         End If
     End Sub
@@ -2046,7 +2049,7 @@ Public Class FormFlowsheet
 
             Dim idx As Integer
 
-            If Not Me.FrmStSim1.initialized Then Me.FrmStSim1.Init()
+            FrmStSim1.Init()
 
             For Each comp In complist
                 If Not Me.Options.SelectedComponents.ContainsKey(comp.Name) Then
@@ -2082,6 +2085,8 @@ Public Class FormFlowsheet
                     excs.Add(New Exception("Error Loading Property Package Information", ex))
                 End Try
             Next
+
+            FrmStSim1.Init()
 
         End If
 

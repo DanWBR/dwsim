@@ -1401,7 +1401,7 @@ will converge to this solution.")
                 If Vz(names.IndexOf("water")) > 0.01 And Vz(names.IndexOf("water")) < 1.0 Then
                     Dim hcs = names.Where(Function(x) x.EndsWith("ane") Or x.EndsWith("ene") Or x.EndsWith("ine")).ToList()
                     For Each hc In hcs
-                        If Vz(names.IndexOf(hc)) > 0.01 And props(names.IndexOf(hc)).Critical_Temperature > T Then
+                        If Vz(names.IndexOf(hc)) > 0.000001 And props(names.IndexOf(hc)).Critical_Temperature > T Then
                             hres.LiquidPhaseSplit = True
                             Exit For
                         End If
@@ -1414,7 +1414,7 @@ will converge to this solution.")
                     If Vz(names.IndexOf(ald)) > 0.01 And Vz(names.IndexOf(ald)) < 1.0 Then
                         Dim hcs = names.Where(Function(x) x.EndsWith("ane") Or x.EndsWith("ene") Or x.EndsWith("ine")).ToList()
                         For Each hc In hcs
-                            If Vz(names.IndexOf(hc)) > 0.01 And props(names.IndexOf(hc)).Critical_Temperature > T Then
+                            If Vz(names.IndexOf(hc)) > 0.000001 And props(names.IndexOf(hc)).Critical_Temperature > T Then
                                 hres.LiquidPhaseSplit = True
                                 Exit For
                             End If
@@ -1429,7 +1429,7 @@ will converge to this solution.")
                     If Vz(names.IndexOf(alc)) > 0.01 And Vz(names.IndexOf(alc)) < 1.0 Then
                         Dim hcs = names.Where(Function(x) x.EndsWith("ane") Or x.EndsWith("ene") Or x.EndsWith("ine")).ToList()
                         For Each hc In hcs
-                            If Vz(names.IndexOf(hc)) > 0.01 And props(names.IndexOf(hc)).Critical_Temperature > T Then
+                            If Vz(names.IndexOf(hc)) > 0.000001 And props(names.IndexOf(hc)).Critical_Temperature > T Then
                                 hres.LiquidPhaseSplit = True
                                 Exit For
                             End If
@@ -1442,7 +1442,7 @@ will converge to this solution.")
                     'get alcohols
                     Dim alcohols = names.Where(Function(x) x.EndsWith("ol")).ToList()
                     For Each alcohol In alcohols
-                        If Vz(names.IndexOf(alcohol)) > 0.01 And Vz(names.IndexOf(alcohol)) < 1.0 And props(names.IndexOf(alcohol)).Molar_Weight > 70 Then
+                        If Vz(names.IndexOf(alcohol)) > 0.000001 And Vz(names.IndexOf(alcohol)) < 1.0 And props(names.IndexOf(alcohol)).Molar_Weight > 70 Then
                             hres.LiquidPhaseSplit = True
                             Exit For
                         End If

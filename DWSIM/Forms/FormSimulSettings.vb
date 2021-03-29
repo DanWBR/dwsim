@@ -28,7 +28,7 @@ Public Class FormSimulSettings
 
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
-    Private FrmChild As FormFlowsheet
+    Public CurrentFlowsheet As FormFlowsheet
     Public loaded As Boolean = False
     Public initialized As Boolean = False
     Public supports As Boolean = True
@@ -79,6 +79,7 @@ Public Class FormSimulSettings
         End If
 
         Dim rm As New FormReacManager
+        rm.CurrentFlowsheet = CurrentFlowsheet
         rm.Dock = DockStyle.Fill
         TabPageReactions.Controls.Add(rm)
 
@@ -88,14 +89,14 @@ Public Class FormSimulSettings
 
     Private Sub FormStSim_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
 
-        If Me.FrmChild.Options.SelectedComponents.Count = 0 And Me.FrmChild.Options.PropertyPackages.Count = 0 Then
+        If Me.CurrentFlowsheet.Options.SelectedComponents.Count = 0 And Me.CurrentFlowsheet.Options.PropertyPackages.Count = 0 Then
             MessageBox.Show(DWSIM.App.GetLocalString("Adicionesubstnciassi"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
             MessageBox.Show(DWSIM.App.GetLocalString("NoexistemPacotesdePr"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
             'e.Cancel = True
-        ElseIf Me.FrmChild.Options.SelectedComponents.Count = 0 Then
+        ElseIf Me.CurrentFlowsheet.Options.SelectedComponents.Count = 0 Then
             MessageBox.Show(DWSIM.App.GetLocalString("Adicionesubstnciassi"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
             'e.Cancel = True
-        ElseIf Me.FrmChild.Options.PropertyPackages.Count = 0 Then
+        ElseIf Me.CurrentFlowsheet.Options.PropertyPackages.Count = 0 Then
             MessageBox.Show(DWSIM.App.GetLocalString("NoexistemPacotesdePr"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
             'e.Cancel = True
         Else
@@ -122,8 +123,6 @@ Public Class FormSimulSettings
 
         Dim pathsep As Char = Path.DirectorySeparatorChar
 
-        FrmChild = My.Application.ActiveSimulation
-
         Dim comp As BaseClasses.ConstantProperties
 
         If Not loaded Or reset Then
@@ -133,11 +132,11 @@ Public Class FormSimulSettings
             colAdd.TrueValue = True
             colAdd.IndeterminateValue = False
 
-            For Each comp In Me.FrmChild.Options.SelectedComponents.Values
-                ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.Tag, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
+            For Each comp In Me.CurrentFlowsheet.Options.SelectedComponents.Values
+                ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.Tag, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.CurrentDB, comp.IsCOOLPROPSupported})
             Next
-            For Each comp In Me.FrmChild.Options.NotSelectedComponents.Values
-                ogc1.Rows.Add(New Object() {comp.Name, False, comp.Name, comp.Tag, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
+            For Each comp In Me.CurrentFlowsheet.Options.NotSelectedComponents.Values
+                ogc1.Rows.Add(New Object() {comp.Name, False, comp.Name, comp.Tag, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.CurrentDB, comp.IsCOOLPROPSupported})
             Next
 
             Dim addobj As Boolean = True
@@ -145,7 +144,7 @@ Public Class FormSimulSettings
             'property packages
             Me.DataGridViewPP.Rows.Clear()
             For Each pp2 As PropertyPackages.PropertyPackage In FormMain.PropertyPackages.Values.OrderBy(Function(x) x.ComponentName)
-                If Not FrmChild.MobileCompatibilityMode Then
+                If Not CurrentFlowsheet.MobileCompatibilityMode Then
                     addobj = True
                 Else
                     addobj = pp2.MobileCompatible
@@ -173,7 +172,7 @@ Public Class FormSimulSettings
                                                                End Function))
 
             Dim add As Boolean = False
-            If FrmChild.FlowsheetOptions.VisibleProperties.Count = 0 Then add = True
+            If CurrentFlowsheet.FlowsheetOptions.VisibleProperties.Count = 0 Then add = True
 
             cbObjectType.Items.Clear()
             availableproperties.Clear()
@@ -181,11 +180,11 @@ Public Class FormSimulSettings
             For Each item In aTypeList.OrderBy(Function(x) x.Name)
                 If Not item.IsAbstract Then
                     Dim obj = DirectCast(Activator.CreateInstance(item), Interfaces.ISimulationObject)
-                    obj.SetFlowsheet(FrmChild)
+                    obj.SetFlowsheet(CurrentFlowsheet)
                     cbObjectType.Items.Add(obj.GetDisplayName)
                     availableproperties.Add(obj.GetDisplayName, obj.GetProperties(PropertyType.ALL))
                     aTypeRefs.Add(obj.GetDisplayName, item.Name)
-                    If add Then FrmChild.FlowsheetOptions.VisibleProperties.Add(item.Name, obj.GetDefaultProperties.ToList)
+                    If add Then CurrentFlowsheet.FlowsheetOptions.VisibleProperties.Add(item.Name, obj.GetDefaultProperties.ToList)
                     obj = Nothing
                 End If
             Next
@@ -193,7 +192,7 @@ Public Class FormSimulSettings
 
             With Me.dgvpp.Rows
                 .Clear()
-                For Each pp2 As PropertyPackages.PropertyPackage In FrmChild.Options.PropertyPackages.Values
+                For Each pp2 As PropertyPackages.PropertyPackage In CurrentFlowsheet.Options.PropertyPackages.Values
                     .Add(New Object() {pp2.UniqueID, pp2.Tag, pp2.ComponentName})
                 Next
             End With
@@ -204,8 +203,8 @@ Public Class FormSimulSettings
         Else
 
             For Each r As DataGridViewRow In ogc1.Rows
-                If FrmChild.Options.NotSelectedComponents.ContainsKey(r.Cells(0).Value) Then
-                    comp = FrmChild.Options.NotSelectedComponents(r.Cells(0).Value)
+                If CurrentFlowsheet.Options.NotSelectedComponents.ContainsKey(r.Cells(0).Value) Then
+                    comp = CurrentFlowsheet.Options.NotSelectedComponents(r.Cells(0).Value)
                     For Each c As DataGridViewCell In r.Cells
                         If comp.Acentric_Factor = 0.0# Or comp.Critical_Compressibility = 0.0# Then
                             c.Style.ForeColor = Color.Red
@@ -217,77 +216,77 @@ Public Class FormSimulSettings
 
         End If
 
-        ComboBox1.SelectedItem = Me.FrmChild?.Options.NumberFormat
-        ComboBox3.SelectedItem = Me.FrmChild?.Options.FractionNumberFormat
+        ComboBox1.SelectedItem = Me.CurrentFlowsheet?.Options.NumberFormat
+        ComboBox3.SelectedItem = Me.CurrentFlowsheet?.Options.FractionNumberFormat
 
-        If Me.FrmChild.Options.SelectedUnitSystem.Name <> "" Then
-            ComboBox2.SelectedItem = Me.FrmChild.Options.SelectedUnitSystem.Name
+        If Me.CurrentFlowsheet.Options.SelectedUnitSystem.Name <> "" Then
+            ComboBox2.SelectedItem = Me.CurrentFlowsheet.Options.SelectedUnitSystem.Name
         Else
             ComboBox2.SelectedIndex = 0
         End If
 
-        Me.TBaut.Text = Me.FrmChild.Options.SimulationAuthor
-        Me.TBdesc.Text = Me.FrmChild.Options.SimulationComments.Replace(vbLf, vbCrLf)
-        Me.TBtit.Text = Me.FrmChild.Options.SimulationName
+        Me.TBaut.Text = Me.CurrentFlowsheet.Options.SimulationAuthor
+        Me.TBdesc.Text = Me.CurrentFlowsheet.Options.SimulationComments.Replace(vbLf, vbCrLf)
+        Me.TBtit.Text = Me.CurrentFlowsheet.Options.SimulationName
 
-        Me.tbPassword.Text = FrmChild.Options.Password
-        Me.chkUsePassword.Checked = FrmChild.Options.UsePassword
+        Me.tbPassword.Text = CurrentFlowsheet.Options.Password
+        Me.chkUsePassword.Checked = CurrentFlowsheet.Options.UsePassword
 
         If DWSIM.App.IsRunningOnMono Then btnConfigPP.Enabled = True
 
-        cbMassBalanceCheck.SelectedIndex = FrmChild.Options.MassBalanceCheck
+        cbMassBalanceCheck.SelectedIndex = CurrentFlowsheet.Options.MassBalanceCheck
 
-        cbEnergyBalanceCheck.SelectedIndex = FrmChild.Options.EnergyBalanceCheck
+        cbEnergyBalanceCheck.SelectedIndex = CurrentFlowsheet.Options.EnergyBalanceCheck
 
-        tbMassBalTol.Text = FrmChild.Options.MassBalanceRelativeTolerance.ToString()
+        tbMassBalTol.Text = CurrentFlowsheet.Options.MassBalanceRelativeTolerance.ToString()
 
-        tbEnergyBalTol.Text = FrmChild.Options.EnergyBalanceRelativeTolerance.ToString()
+        tbEnergyBalTol.Text = CurrentFlowsheet.Options.EnergyBalanceRelativeTolerance.ToString()
 
-        chkShowFloatingTables.Checked = FrmChild.Options.DisplayFloatingPropertyTables
-        chkShowAnchoredPropertyLists.Checked = FrmChild.Options.DisplayCornerPropertyList
+        chkShowFloatingTables.Checked = CurrentFlowsheet.Options.DisplayFloatingPropertyTables
+        chkShowAnchoredPropertyLists.Checked = CurrentFlowsheet.Options.DisplayCornerPropertyList
 
-        chkDisplayFloatingTableCompoundAmounts.Checked = FrmChild.Options.DisplayFloatingTableCompoundAmounts
-        cbDefaultFloatingTableCompoundAmountBasis.SelectedIndex = FrmChild.Options.DefaultFloatingTableCompoundAmountBasis
+        chkDisplayFloatingTableCompoundAmounts.Checked = CurrentFlowsheet.Options.DisplayFloatingTableCompoundAmounts
+        cbDefaultFloatingTableCompoundAmountBasis.SelectedIndex = CurrentFlowsheet.Options.DefaultFloatingTableCompoundAmountBasis
 
-        cbOrderCompoundsBy.SelectedIndex = FrmChild.Options.CompoundOrderingMode
+        cbOrderCompoundsBy.SelectedIndex = CurrentFlowsheet.Options.CompoundOrderingMode
 
-        chkSkipEqCalcs.Checked = FrmChild.Options.SkipEquilibriumCalculationOnDefinedStreams
+        chkSkipEqCalcs.Checked = CurrentFlowsheet.Options.SkipEquilibriumCalculationOnDefinedStreams
 
         Me.loaded = True
 
     End Sub
 
     Private Sub ComboBox1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox1.SelectedIndexChanged
-        FrmChild.Options.NumberFormat = Me.ComboBox1.SelectedItem
-        FrmChild.UpdateOpenEditForms()
+        CurrentFlowsheet.Options.NumberFormat = Me.ComboBox1.SelectedItem
+        CurrentFlowsheet.UpdateOpenEditForms()
     End Sub
 
     Private Sub TBtit_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBtit.TextChanged
         If Me.loaded Then
-            Me.FrmChild.Options.SimulationName = Me.TBtit.Text
-            Me.FrmChild.Text = Me.TBtit.Text + " (" + Me.FrmChild.Options.FilePath + ")"
+            Me.CurrentFlowsheet.Options.SimulationName = Me.TBtit.Text
+            Me.CurrentFlowsheet.Text = Me.TBtit.Text + " (" + Me.CurrentFlowsheet.Options.FilePath + ")"
         End If
     End Sub
 
     Private Sub TBaut_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBaut.TextChanged
-        If Me.loaded Then Me.FrmChild.Options.SimulationAuthor = Me.TBaut.Text
+        If Me.loaded Then Me.CurrentFlowsheet.Options.SimulationAuthor = Me.TBaut.Text
     End Sub
 
     Private Sub TBdesc_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBdesc.TextChanged
-        If Me.loaded Then Me.FrmChild.Options.SimulationComments = Me.TBdesc.Text
+        If Me.loaded Then Me.CurrentFlowsheet.Options.SimulationComments = Me.TBdesc.Text
     End Sub
 
     Private Sub Button2_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
 
-        Me.FrmChild.FrmPCBulk.ShowDialog(Me)
+        Me.CurrentFlowsheet.FrmPCBulk.ShowDialog(Me)
     End Sub
 
     Public Sub ComboBox2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox2.SelectedIndexChanged
 
         My.Application.PushUndoRedoAction = False
 
-        FrmChild.Options.SelectedUnitSystem = FormMain.AvailableUnitSystems.Item(ComboBox2.SelectedItem.ToString)
-        Dim su As SystemsOfUnits.Units = FrmChild.Options.SelectedUnitSystem
+        CurrentFlowsheet.Options.SelectedUnitSystem = FormMain.AvailableUnitSystems.Item(ComboBox2.SelectedItem.ToString)
+        Dim su As SystemsOfUnits.Units = CurrentFlowsheet.Options.SelectedUnitSystem
 
         With Me.DataGridView1.Rows
             .Clear()
@@ -630,7 +629,7 @@ Public Class FormSimulSettings
             .Style.Tag = 39
         End With
 
-        FrmChild.UpdateOpenEditForms()
+        CurrentFlowsheet.UpdateOpenEditForms()
 
         My.Application.PushUndoRedoAction = True
 
@@ -644,7 +643,7 @@ Public Class FormSimulSettings
             Dim oldvalue As String = ""
             Dim member As String = ""
 
-            Dim su As SystemsOfUnits.Units = FrmChild.Options.SelectedUnitSystem
+            Dim su As SystemsOfUnits.Units = CurrentFlowsheet.Options.SelectedUnitSystem
 
             Select Case cell.Style.Tag
                 Case 1
@@ -805,16 +804,16 @@ Public Class FormSimulSettings
                     su.conductance = cell.Value
             End Select
 
-            If initialized And Not DWSIM.App.IsRunningOnMono And My.Application.PushUndoRedoAction Then FrmChild.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.SystemOfUnitsChanged,
+            If initialized And Not DWSIM.App.IsRunningOnMono And My.Application.PushUndoRedoAction Then CurrentFlowsheet.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.SystemOfUnitsChanged,
                          .ObjID = su.Name,
                          .ObjID2 = member,
                          .NewValue = cell.Value,
                          .OldValue = oldvalue,
                          .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_SystemOfUnitsChanged"), su.Name, Me.DataGridView1.Rows(e.RowIndex).Cells(e.ColumnIndex - 1).Value, .OldValue, .NewValue)})
 
-            Me.FrmChild.FormSurface.UpdateSelectedObject()
+            Me.CurrentFlowsheet.FormSurface.UpdateSelectedObject()
 
-            FrmChild.UpdateOpenEditForms()
+            CurrentFlowsheet.UpdateOpenEditForms()
 
         End If
 
@@ -827,16 +826,16 @@ Public Class FormSimulSettings
 
     Private Sub KryptonButton18_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonButton18.Click
 
-        If Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("SistemaSI") And _
-            Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("SistemaCGS") And _
-            Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("SistemaIngls") And _
-            Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("Personalizado1BR") And _
-            Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("Personalizado2SC") And _
+        If Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("SistemaSI") And
+            Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("SistemaCGS") And
+            Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("SistemaIngls") And
+            Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("Personalizado1BR") And
+            Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("Personalizado2SC") And
             Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("Personalizado3CNTP") Then
 
             Dim str = Me.ComboBox2.SelectedItem
 
-            FrmChild.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.SystemOfUnitsRemoved,
+            CurrentFlowsheet.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.SystemOfUnitsRemoved,
                   .NewValue = FormMain.AvailableUnitSystems(str),
                  .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_SystemOfUnitsRemoved"), FormMain.AvailableUnitSystems(str).Name)})
 
@@ -858,11 +857,11 @@ Public Class FormSimulSettings
 
     Private Sub KryptonButton23_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonButton23.Click
 
-        If Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("SistemaSI") And _
-            Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("SistemaCGS") And _
-            Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("SistemaIngls") And _
-            Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("Personalizado1BR") And _
-            Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("Personalizado2SC") And _
+        If Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("SistemaSI") And
+            Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("SistemaCGS") And
+            Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("SistemaIngls") And
+            Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("Personalizado1BR") And
+            Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("Personalizado2SC") And
             Me.ComboBox2.SelectedItem <> DWSIM.App.GetLocalString("Personalizado3CNTP") Then
 
             Dim myStream As System.IO.FileStream
@@ -870,7 +869,7 @@ Public Class FormSimulSettings
             If Me.SaveFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
                 myStream = Me.SaveFileDialog1.OpenFile()
                 If Not (myStream Is Nothing) Then
-                    Dim su As SystemsOfUnits.Units = FrmChild.Options.SelectedUnitSystem
+                    Dim su As SystemsOfUnits.Units = CurrentFlowsheet.Options.SelectedUnitSystem
                     Dim mySerializer As Binary.BinaryFormatter = New Binary.BinaryFormatter(Nothing, New System.Runtime.Serialization.StreamingContext())
                     Try
                         mySerializer.Serialize(myStream, su)
@@ -904,10 +903,10 @@ Public Class FormSimulSettings
                     End If
                     FormMain.AvailableUnitSystems.Add(su.Name, su)
                     Me.ComboBox2.Items.Add(su.Name)
-                    Me.FrmChild.Options.SelectedUnitSystem.Name = su.Name
+                    Me.CurrentFlowsheet.Options.SelectedUnitSystem.Name = su.Name
                     Dim array1(FormMain.AvailableUnitSystems.Count - 1) As String
                     FormMain.AvailableUnitSystems.Keys.CopyTo(array1, 0)
-                    ComboBox2.SelectedItem = Me.FrmChild.Options.SelectedUnitSystem.Name
+                    ComboBox2.SelectedItem = Me.CurrentFlowsheet.Options.SelectedUnitSystem.Name
                 Catch ex As System.Runtime.Serialization.SerializationException
                     MessageBox.Show(ex.Message, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Finally
@@ -972,7 +971,8 @@ Public Class FormSimulSettings
             If Not r.Cells(2).Value Is Nothing Then
                 If r.Cells(2).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Or
                    r.Cells(4).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Or
-                   r.Cells(6).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Then
+                   r.Cells(6).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Or
+                   r.Cells(7).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Then
                     r.Visible = True
                     If r.Cells(2).Value.ToString.ToLower.Equals(Me.TextBox1.Text.ToLower) Or
                                        r.Cells(4).Value.ToString.ToLower.Equals(Me.TextBox1.Text.ToLower) Or
@@ -1024,7 +1024,7 @@ Public Class FormSimulSettings
         Else
             ppid = dgvpp.SelectedRows(0).Cells(0).Value
         End If
-        Dim pp As PropertyPackages.PropertyPackage = FrmChild.PropertyPackages(ppid)
+        Dim pp As PropertyPackages.PropertyPackage = CurrentFlowsheet.PropertyPackages(ppid)
         pp.DisplayGroupedEditingForm()
 
     End Sub
@@ -1032,24 +1032,24 @@ Public Class FormSimulSettings
     Private Sub btnDeletePP_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDeletePP.Click
         If DWSIM.App.IsRunningOnMono Then
             If dgvpp.SelectedCells.Count > 0 Then
-                FrmChild.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.PropertyPackageRemoved,
+                CurrentFlowsheet.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.PropertyPackageRemoved,
                           .ObjID = dgvpp.Rows(dgvpp.SelectedCells(0).RowIndex).Cells(0).Value,
-                          .NewValue = FrmChild.Options.PropertyPackages(dgvpp.Rows(dgvpp.SelectedCells(0).RowIndex).Cells(0).Value).Clone,
+                          .NewValue = CurrentFlowsheet.Options.PropertyPackages(dgvpp.Rows(dgvpp.SelectedCells(0).RowIndex).Cells(0).Value).Clone,
                           .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_PropertyPackageRemoved"), dgvpp.Rows(dgvpp.SelectedCells(0).RowIndex).Cells(1).Value)})
-                FrmChild.Options.PropertyPackages.Remove(dgvpp.Rows(dgvpp.SelectedCells(0).RowIndex).Cells(0).Value)
+                CurrentFlowsheet.Options.PropertyPackages.Remove(dgvpp.Rows(dgvpp.SelectedCells(0).RowIndex).Cells(0).Value)
                 dgvpp.Rows.RemoveAt(dgvpp.SelectedCells(0).RowIndex)
             End If
         Else
             If Not dgvpp.SelectedRows.Count = 0 Then
-                FrmChild.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.PropertyPackageRemoved,
+                CurrentFlowsheet.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.PropertyPackageRemoved,
                    .ObjID = dgvpp.Rows(dgvpp.SelectedCells(0).RowIndex).Cells(0).Value,
-                   .NewValue = FrmChild.Options.PropertyPackages(dgvpp.SelectedRows(0).Cells(0).Value).Clone,
+                   .NewValue = CurrentFlowsheet.Options.PropertyPackages(dgvpp.SelectedRows(0).Cells(0).Value).Clone,
                    .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_PropertyPackageRemoved"), dgvpp.SelectedRows(0).Cells(1).Value)})
-                FrmChild.Options.PropertyPackages.Remove(dgvpp.SelectedRows(0).Cells(0).Value)
+                CurrentFlowsheet.Options.PropertyPackages.Remove(dgvpp.SelectedRows(0).Cells(0).Value)
                 dgvpp.Rows.Remove(dgvpp.SelectedRows(0))
             End If
         End If
-        If dgvpp.Rows.Count > 0 Then FrmChild.UpdateOpenEditForms()
+        If dgvpp.Rows.Count > 0 Then CurrentFlowsheet.UpdateOpenEditForms()
 
     End Sub
 
@@ -1062,15 +1062,15 @@ Public Class FormSimulSettings
             Else
                 ppid = dgvpp.SelectedRows(0).Cells(0).Value
             End If
-            pp = FrmChild.Options.PropertyPackages(ppid).DeepClone
-            pp.Flowsheet = FrmChild
+            pp = CurrentFlowsheet.Options.PropertyPackages(ppid).DeepClone
+            pp.Flowsheet = CurrentFlowsheet
             With pp
                 pp.Tag = pp.Tag & CStr(FormFlowsheet.Options.PropertyPackages.Count)
                 pp.UniqueID = Guid.NewGuid.ToString
             End With
-            FrmChild.Options.PropertyPackages.Add(pp.UniqueID, pp)
+            CurrentFlowsheet.Options.PropertyPackages.Add(pp.UniqueID, pp)
             Me.dgvpp.Rows.Add(New Object() {pp.UniqueID, pp.Tag, pp.ComponentName})
-            FrmChild.UpdateOpenEditForms()
+            CurrentFlowsheet.UpdateOpenEditForms()
 
         Catch ex As Exception
 
@@ -1079,7 +1079,7 @@ Public Class FormSimulSettings
 
     Private Sub dgvpp_CellValueChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvpp.CellValueChanged
         If loaded Then
-            FrmChild.Options.PropertyPackages(dgvpp.Rows(e.RowIndex).Cells(0).Value).Tag = dgvpp.Rows(e.RowIndex).Cells(1).Value
+            CurrentFlowsheet.Options.PropertyPackages(dgvpp.Rows(e.RowIndex).Cells(0).Value).Tag = dgvpp.Rows(e.RowIndex).Cells(1).Value
         End If
     End Sub
 
@@ -1089,8 +1089,8 @@ Public Class FormSimulSettings
                 If dgvpp.SelectedCells(0).RowIndex >= 0 Then
                     If dgvpp.Rows(dgvpp.SelectedCells(0).RowIndex).Cells(0).Value <> Nothing Then
                         btnDeletePP.Enabled = True
-                        If FrmChild.Options.PropertyPackages.ContainsKey(dgvpp.Rows(dgvpp.SelectedCells(0).RowIndex).Cells(0).Value) Then
-                            If FrmChild.Options.PropertyPackages(dgvpp.Rows(dgvpp.SelectedCells(0).RowIndex).Cells(0).Value).IsConfigurable Then
+                        If CurrentFlowsheet.Options.PropertyPackages.ContainsKey(dgvpp.Rows(dgvpp.SelectedCells(0).RowIndex).Cells(0).Value) Then
+                            If CurrentFlowsheet.Options.PropertyPackages(dgvpp.Rows(dgvpp.SelectedCells(0).RowIndex).Cells(0).Value).IsConfigurable Then
                                 btnConfigPP.Enabled = True
                             Else
                                 btnConfigPP.Enabled = False
@@ -1103,8 +1103,8 @@ Public Class FormSimulSettings
         Else
             If dgvpp.SelectedRows.Count > 0 Then
                 btnDeletePP.Enabled = True
-                If FrmChild.Options.PropertyPackages.ContainsKey(dgvpp.SelectedRows(0).Cells(0).Value) Then
-                    If FrmChild.Options.PropertyPackages(dgvpp.SelectedRows(0).Cells(0).Value).IsConfigurable Then
+                If CurrentFlowsheet.Options.PropertyPackages.ContainsKey(dgvpp.SelectedRows(0).Cells(0).Value) Then
+                    If CurrentFlowsheet.Options.PropertyPackages(dgvpp.SelectedRows(0).Cells(0).Value).IsConfigurable Then
                         btnConfigPP.Enabled = True
                     Else
                         btnConfigPP.Enabled = False
@@ -1125,24 +1125,24 @@ Public Class FormSimulSettings
         ' TODO Add code to check that index is within range. If it is out of range, don't do anything.
         If Me.loaded Then
 
-            If Not Me.FrmChild.Options.SelectedComponents.ContainsKey(compid) Then
+            If Not Me.CurrentFlowsheet.Options.SelectedComponents.ContainsKey(compid) Then
 
                 Dim tmpcomp As New BaseClasses.ConstantProperties
-                tmpcomp = Me.FrmChild.Options.NotSelectedComponents(compid)
+                tmpcomp = Me.CurrentFlowsheet.Options.NotSelectedComponents(compid)
 
-                Me.FrmChild.Options.SelectedComponents.Add(tmpcomp.Name, tmpcomp)
-                Me.FrmChild.Options.NotSelectedComponents.Remove(tmpcomp.Name)
+                Me.CurrentFlowsheet.Options.SelectedComponents.Add(tmpcomp.Name, tmpcomp)
+                Me.CurrentFlowsheet.Options.NotSelectedComponents.Remove(tmpcomp.Name)
 
-                For Each mstr In FrmChild.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream)
+                For Each mstr In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream)
                     For Each phase In mstr.Phases.Values
                         phase.Compounds.Add(tmpcomp.Name, New Compound(tmpcomp.Name, ""))
                         phase.Compounds(tmpcomp.Name).ConstantProperties = tmpcomp
                     Next
                 Next
 
-                FrmChild.UpdateOpenEditForms()
+                CurrentFlowsheet.UpdateOpenEditForms()
 
-                If My.Application.PushUndoRedoAction Then FrmChild.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.CompoundAdded,
+                If My.Application.PushUndoRedoAction Then CurrentFlowsheet.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.CompoundAdded,
                           .ObjID = tmpcomp.Name,
                           .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_CompoundAdded"), tmpcomp.Name)})
 
@@ -1158,14 +1158,14 @@ Public Class FormSimulSettings
 
         Dim tmpcomp As New BaseClasses.ConstantProperties
         Dim nm As String = compid
-        tmpcomp = Me.FrmChild.Options.SelectedComponents(nm)
-        Me.FrmChild.Options.SelectedComponents.Remove(tmpcomp.Name)
-        Me.FrmChild.Options.NotSelectedComponents.Add(tmpcomp.Name, tmpcomp)
+        tmpcomp = Me.CurrentFlowsheet.Options.SelectedComponents(nm)
+        Me.CurrentFlowsheet.Options.SelectedComponents.Remove(tmpcomp.Name)
+        Me.CurrentFlowsheet.Options.NotSelectedComponents.Add(tmpcomp.Name, tmpcomp)
         Me.AddCompToGrid(tmpcomp)
         Dim ms As Streams.MaterialStream
         Dim proplist As New ArrayList
 
-        For Each ms In FrmChild.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream)
+        For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream)
             Dim amount As Double = 0#
             If ms.Phases(0).Properties.massflow.HasValue Then
                 amount = ms.Phases(0).Compounds(tmpcomp.Name).MassFlow.GetValueOrDefault
@@ -1189,15 +1189,15 @@ Public Class FormSimulSettings
             ms.GraphicObject.Calculated = False
         Next
 
-        For Each pp In FrmChild.Options.PropertyPackages.Values
+        For Each pp In CurrentFlowsheet.Options.PropertyPackages.Values
             If DirectCast(pp, PropertyPackage).ForcedSolids.Contains(compid) Then
                 DirectCast(pp, PropertyPackage).ForcedSolids.Remove(compid)
             End If
         Next
 
-        FrmChild.UpdateOpenEditForms()
+        CurrentFlowsheet.UpdateOpenEditForms()
 
-        If My.Application.PushUndoRedoAction Then FrmChild.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.CompoundRemoved,
+        If My.Application.PushUndoRedoAction Then CurrentFlowsheet.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.CompoundRemoved,
           .ObjID = tmpcomp.Name,
           .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_CompoundRemoved"), tmpcomp.Name)})
 
@@ -1213,17 +1213,17 @@ Public Class FormSimulSettings
         pp = FormMain.PropertyPackages(Me.DataGridViewPP.SelectedRows(0).Cells(0).Value).Clone
 
         With pp
-            pp.Tag = pp.ComponentName + " (" + (FrmChild.PropertyPackages.Count + 1).ToString() + ")"
+            pp.Tag = pp.ComponentName + " (" + (CurrentFlowsheet.PropertyPackages.Count + 1).ToString() + ")"
             pp.UniqueID = "PP-" & Guid.NewGuid.ToString
-            pp.Flowsheet = FrmChild
+            pp.Flowsheet = CurrentFlowsheet
         End With
 
-        FrmChild.Options.PropertyPackages.Add(pp.UniqueID, pp)
+        CurrentFlowsheet.Options.PropertyPackages.Add(pp.UniqueID, pp)
         Me.dgvpp.Rows.Add(New Object() {pp.UniqueID, pp.Tag, pp.ComponentName})
 
-        FrmChild.UpdateOpenEditForms()
+        CurrentFlowsheet.UpdateOpenEditForms()
 
-        FrmChild.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.PropertyPackageAdded,
+        CurrentFlowsheet.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.PropertyPackageAdded,
                                  .ObjID = pp.UniqueID,
                                  .NewValue = pp.Clone,
                                  .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_PropertyPackageAdded"), pp.Tag)})
@@ -1239,8 +1239,8 @@ Public Class FormSimulSettings
     End Sub
 
     Private Sub ComboBox3_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox3.SelectedIndexChanged
-        FrmChild.Options.FractionNumberFormat = Me.ComboBox3.SelectedItem
-        FrmChild.UpdateOpenEditForms()
+        CurrentFlowsheet.Options.FractionNumberFormat = Me.ComboBox3.SelectedItem
+        CurrentFlowsheet.UpdateOpenEditForms()
     End Sub
 
     Private Sub TextBox1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TextBox1.KeyDown
@@ -1259,11 +1259,11 @@ Public Class FormSimulSettings
 
     Private Sub chkUsePassword_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkUsePassword.CheckedChanged
         If chkUsePassword.Checked Then tbPassword.Enabled = True Else tbPassword.Enabled = False
-        FrmChild.Options.UsePassword = chkUsePassword.Checked
+        CurrentFlowsheet.Options.UsePassword = chkUsePassword.Checked
     End Sub
 
     Private Sub tbPassword_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tbPassword.TextChanged
-        FrmChild.Options.Password = tbPassword.Text
+        CurrentFlowsheet.Options.Password = tbPassword.Text
     End Sub
 
     Private Sub DataGridView1_DataError(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewDataErrorEventArgs) Handles DataGridView1.DataError
@@ -1304,7 +1304,7 @@ Public Class FormSimulSettings
         Next
 
         For Each item In availableproperties(cbObjectType.SelectedItem)
-            If FrmChild.FlowsheetOptions.VisibleProperties(aTypeRefs(cbObjectType.SelectedItem)).Contains(item) Then
+            If CurrentFlowsheet.FlowsheetOptions.VisibleProperties(aTypeRefs(cbObjectType.SelectedItem)).Contains(item) Then
                 PropertyListView.Items(item).Checked = True
             End If
         Next
@@ -1314,12 +1314,12 @@ Public Class FormSimulSettings
     Private Sub PropertyListView_ItemChecked(sender As Object, e As ItemCheckedEventArgs) Handles PropertyListView.ItemChecked
         If loaded Then
             If e.Item.Checked Then
-                If Not FrmChild.FlowsheetOptions.VisibleProperties(aTypeRefs(cbObjectType.SelectedItem)).Contains(e.Item.Tag) Then
-                    FrmChild.FlowsheetOptions.VisibleProperties(aTypeRefs(cbObjectType.SelectedItem)).Add(e.Item.Tag)
+                If Not CurrentFlowsheet.FlowsheetOptions.VisibleProperties(aTypeRefs(cbObjectType.SelectedItem)).Contains(e.Item.Tag) Then
+                    CurrentFlowsheet.FlowsheetOptions.VisibleProperties(aTypeRefs(cbObjectType.SelectedItem)).Add(e.Item.Tag)
                 End If
             Else
-                If FrmChild.FlowsheetOptions.VisibleProperties(aTypeRefs(cbObjectType.SelectedItem)).Contains(e.Item.Tag) Then
-                    FrmChild.FlowsheetOptions.VisibleProperties(aTypeRefs(cbObjectType.SelectedItem)).Remove(e.Item.Tag)
+                If CurrentFlowsheet.FlowsheetOptions.VisibleProperties(aTypeRefs(cbObjectType.SelectedItem)).Contains(e.Item.Tag) Then
+                    CurrentFlowsheet.FlowsheetOptions.VisibleProperties(aTypeRefs(cbObjectType.SelectedItem)).Remove(e.Item.Tag)
                 End If
             End If
         End If
@@ -1342,17 +1342,17 @@ Public Class FormSimulSettings
         Else
             compID = ogc1.SelectedRows(0).Cells(0).Value
         End If
-        If FrmChild.AvailableCompounds.ContainsKey(compID) Then
-            compound = Me.FrmChild.AvailableCompounds(compID)
-        ElseIf FrmChild.Options.SelectedComponents.ContainsKey(compID) Then
-            compound = Me.FrmChild.Options.SelectedComponents(compID)
-        ElseIf FrmChild.Options.NotSelectedComponents.ContainsKey(compID) Then
-            compound = Me.FrmChild.Options.NotSelectedComponents(compID)
+        If CurrentFlowsheet.AvailableCompounds.ContainsKey(compID) Then
+            compound = Me.CurrentFlowsheet.AvailableCompounds(compID)
+        ElseIf CurrentFlowsheet.Options.SelectedComponents.ContainsKey(compID) Then
+            compound = Me.CurrentFlowsheet.Options.SelectedComponents(compID)
+        ElseIf CurrentFlowsheet.Options.NotSelectedComponents.ContainsKey(compID) Then
+            compound = Me.CurrentFlowsheet.Options.NotSelectedComponents(compID)
         Else
             compound = Nothing
         End If
-        Dim f As New FormPureComp() With {.Flowsheet = FrmChild, .Added = False, .MyCompound = compound}
-        FrmChild.DisplayForm(f)
+        Dim f As New FormPureComp() With {.Flowsheet = CurrentFlowsheet, .Added = False, .MyCompound = compound}
+        CurrentFlowsheet.DisplayForm(f)
     End Sub
 
     Private Sub btnSelectAll_Click(sender As Object, e As EventArgs) Handles btnSelectAll.Click
@@ -1373,14 +1373,14 @@ Public Class FormSimulSettings
             For Each fn In Me.OpenFileDialog3.FileNames
                 Try
                     Dim comp = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BaseClasses.ConstantProperties)(File.ReadAllText(fn))
-                    If Not Me.FrmChild.Options.SelectedComponents.ContainsKey(comp.Name) Then
-                        If Not Me.FrmChild.AvailableCompounds.ContainsKey(comp.Name) Then
-                            Me.FrmChild.AvailableCompounds.Add(comp.Name, comp)
+                    If Not Me.CurrentFlowsheet.Options.SelectedComponents.ContainsKey(comp.Name) Then
+                        If Not Me.CurrentFlowsheet.AvailableCompounds.ContainsKey(comp.Name) Then
+                            Me.CurrentFlowsheet.AvailableCompounds.Add(comp.Name, comp)
                         End If
-                        Me.FrmChild.Options.SelectedComponents.Add(comp.Name, comp)
+                        Me.CurrentFlowsheet.Options.SelectedComponents.Add(comp.Name, comp)
                         Dim ms As Streams.MaterialStream
                         Dim proplist As New ArrayList
-                        For Each ms In FrmChild.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream)
+                        For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream)
                             For Each phase As BaseClasses.Phase In ms.Phases.Values
                                 phase.Compounds.Add(comp.Name, New BaseClasses.Compound(comp.Name, ""))
                                 phase.Compounds(comp.Name).ConstantProperties = comp
@@ -1392,10 +1392,10 @@ Public Class FormSimulSettings
                     Else
                         'compound exists.
                         If MessageBox.Show(DWSIM.App.GetLocalString("UpdateFromJSON"), "DWSIM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-                            Me.FrmChild.Options.SelectedComponents(comp.Name) = comp
+                            Me.CurrentFlowsheet.Options.SelectedComponents(comp.Name) = comp
                             Dim ms As Streams.MaterialStream
                             Dim proplist As New ArrayList
-                            For Each ms In FrmChild.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream)
+                            For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream)
                                 For Each phase As BaseClasses.Phase In ms.Phases.Values
                                     phase.Compounds(comp.Name).ConstantProperties = comp
                                 Next
@@ -1416,11 +1416,11 @@ Public Class FormSimulSettings
         If f.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
             Try
                 Dim comp = f.BaseCompound
-                If Not Me.FrmChild.Options.SelectedComponents.ContainsKey(comp.Name) Then
-                    Me.FrmChild.Options.SelectedComponents.Add(comp.Name, comp)
+                If Not Me.CurrentFlowsheet.Options.SelectedComponents.ContainsKey(comp.Name) Then
+                    Me.CurrentFlowsheet.Options.SelectedComponents.Add(comp.Name, comp)
                     Dim ms As Streams.MaterialStream
                     Dim proplist As New ArrayList
-                    For Each ms In FrmChild.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream)
+                    For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream)
                         For Each phase As BaseClasses.Phase In ms.Phases.Values
                             phase.Compounds.Add(comp.Name, New BaseClasses.Compound(comp.Name, ""))
                             phase.Compounds(comp.Name).ConstantProperties = comp
@@ -1439,54 +1439,54 @@ Public Class FormSimulSettings
     End Sub
 
     Private Sub cbMassBalanceCheck_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbMassBalanceCheck.SelectedIndexChanged
-        FrmChild.Options.MassBalanceCheck = cbMassBalanceCheck.SelectedIndex
+        CurrentFlowsheet.Options.MassBalanceCheck = cbMassBalanceCheck.SelectedIndex
     End Sub
 
     Private Sub cbEnergyBalanceCheck_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbEnergyBalanceCheck.SelectedIndexChanged
-        FrmChild.Options.EnergyBalanceCheck = cbEnergyBalanceCheck.SelectedIndex
+        CurrentFlowsheet.Options.EnergyBalanceCheck = cbEnergyBalanceCheck.SelectedIndex
     End Sub
 
     Private Sub tbMassBalTol_TextChanged(sender As Object, e As EventArgs) Handles tbMassBalTol.TextChanged
-        If tbMassBalTol.Text.IsValidDouble Then FrmChild.Options.MassBalanceRelativeTolerance = tbMassBalTol.Text.ToDoubleFromCurrent
+        If tbMassBalTol.Text.IsValidDouble Then CurrentFlowsheet.Options.MassBalanceRelativeTolerance = tbMassBalTol.Text.ToDoubleFromCurrent
     End Sub
 
     Private Sub tbEnergyBalTol_TextChanged(sender As Object, e As EventArgs) Handles tbEnergyBalTol.TextChanged
-        If tbEnergyBalTol.Text.IsValidDouble Then FrmChild.Options.EnergyBalanceRelativeTolerance = tbEnergyBalTol.Text.ToDoubleFromCurrent
+        If tbEnergyBalTol.Text.IsValidDouble Then CurrentFlowsheet.Options.EnergyBalanceRelativeTolerance = tbEnergyBalTol.Text.ToDoubleFromCurrent
     End Sub
 
     Private Sub chkShowFloatingTables_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowFloatingTables.CheckedChanged
-        FrmChild.Options.DisplayFloatingPropertyTables = chkShowFloatingTables.Checked
-        FrmChild.FormSurface.FlowsheetSurface.DrawFloatingTable = chkShowFloatingTables.Checked
+        CurrentFlowsheet.Options.DisplayFloatingPropertyTables = chkShowFloatingTables.Checked
+        CurrentFlowsheet.FormSurface.FlowsheetSurface.DrawFloatingTable = chkShowFloatingTables.Checked
     End Sub
 
     Private Sub chkShowAnchoredPropertyLists_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowAnchoredPropertyLists.CheckedChanged
-        FrmChild.Options.DisplayCornerPropertyList = chkShowAnchoredPropertyLists.Checked
-        FrmChild.FormSurface.FlowsheetSurface.DrawPropertyList = chkShowAnchoredPropertyLists.Checked
+        CurrentFlowsheet.Options.DisplayCornerPropertyList = chkShowAnchoredPropertyLists.Checked
+        CurrentFlowsheet.FormSurface.FlowsheetSurface.DrawPropertyList = chkShowAnchoredPropertyLists.Checked
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
 
-        FontDialog1.Font = New Font(FrmChild.Options.DisplayCornerPropertyListFontName, FrmChild.Options.DisplayCornerPropertyListFontSize, FontStyle.Bold)
+        FontDialog1.Font = New Font(CurrentFlowsheet.Options.DisplayCornerPropertyListFontName, CurrentFlowsheet.Options.DisplayCornerPropertyListFontSize, FontStyle.Bold)
 
         Dim colortype = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("System.Drawing,")).FirstOrDefault().GetType("System.Drawing.KnownColor")
-        Dim mycolor = [Enum].Parse(colortype, FrmChild.Options.DisplayCornerPropertyListFontColor, True)
+        Dim mycolor = [Enum].Parse(colortype, CurrentFlowsheet.Options.DisplayCornerPropertyListFontColor, True)
 
         FontDialog1.Color = Color.FromKnownColor(mycolor)
         FontDialog1.ShowColor = True
         FontDialog1.ShowDialog(Me)
 
-        FrmChild.Options.DisplayCornerPropertyListFontName = FontDialog1.Font.FontFamily.Name
-        FrmChild.Options.DisplayCornerPropertyListFontColor = FontDialog1.Color.Name
-        FrmChild.Options.DisplayCornerPropertyListFontSize = FontDialog1.Font.Size
+        CurrentFlowsheet.Options.DisplayCornerPropertyListFontName = FontDialog1.Font.FontFamily.Name
+        CurrentFlowsheet.Options.DisplayCornerPropertyListFontColor = FontDialog1.Color.Name
+        CurrentFlowsheet.Options.DisplayCornerPropertyListFontSize = FontDialog1.Font.Size
 
     End Sub
 
     Private Sub chkDisplayFloatingTableCompoundAmounts_CheckedChanged(sender As Object, e As EventArgs) Handles chkDisplayFloatingTableCompoundAmounts.CheckedChanged
-        FrmChild.Options.DisplayFloatingTableCompoundAmounts = chkDisplayFloatingTableCompoundAmounts.Checked
+        CurrentFlowsheet.Options.DisplayFloatingTableCompoundAmounts = chkDisplayFloatingTableCompoundAmounts.Checked
     End Sub
 
     Private Sub cbDefaultFloatingTableCompoundAmountBasis_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDefaultFloatingTableCompoundAmountBasis.SelectedIndexChanged
-        FrmChild.Options.DefaultFloatingTableCompoundAmountBasis = cbDefaultFloatingTableCompoundAmountBasis.SelectedIndex
+        CurrentFlowsheet.Options.DefaultFloatingTableCompoundAmountBasis = cbDefaultFloatingTableCompoundAmountBasis.SelectedIndex
     End Sub
 
     Private Sub btnConfigPPAdv_Click(sender As Object, e As EventArgs)
@@ -1496,7 +1496,7 @@ Public Class FormSimulSettings
         Else
             ppid = dgvpp.SelectedRows(0).Cells(0).Value
         End If
-        Dim pp As PropertyPackages.PropertyPackage = FrmChild.Options.PropertyPackages(ppid)
+        Dim pp As PropertyPackages.PropertyPackage = CurrentFlowsheet.Options.PropertyPackages(ppid)
 
         pp.DisplayAdvancedEditingForm()
 
@@ -1523,10 +1523,10 @@ Public Class FormSimulSettings
 
                 Dim cid = ogc1.Rows(e.RowIndex).Cells(0).Value.ToString
 
-                If FrmChild.Options.SelectedComponents.ContainsKey(cid) Then
-                    FrmChild.Options.SelectedComponents(cid).Tag = ogc1.Rows(e.RowIndex).Cells(colTag.Index).Value
+                If CurrentFlowsheet.Options.SelectedComponents.ContainsKey(cid) Then
+                    CurrentFlowsheet.Options.SelectedComponents(cid).Tag = ogc1.Rows(e.RowIndex).Cells(colTag.Index).Value
                 Else
-                    FrmChild.Options.NotSelectedComponents(cid).Tag = ogc1.Rows(e.RowIndex).Cells(colTag.Index).Value
+                    CurrentFlowsheet.Options.NotSelectedComponents(cid).Tag = ogc1.Rows(e.RowIndex).Cells(colTag.Index).Value
                 End If
 
             End If
@@ -1544,22 +1544,22 @@ Public Class FormSimulSettings
     End Sub
 
     Private Sub cbOrderCompoundsBy_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbOrderCompoundsBy.SelectedIndexChanged
-        FrmChild.Options.CompoundOrderingMode = cbOrderCompoundsBy.SelectedIndex
-        FrmChild.UpdateOpenEditForms()
+        CurrentFlowsheet.Options.CompoundOrderingMode = cbOrderCompoundsBy.SelectedIndex
+        CurrentFlowsheet.UpdateOpenEditForms()
     End Sub
 
     Private Sub BtnCloneSI_Click(sender As Object, e As EventArgs) Handles btnCloneSI.Click
 
-        Dim newsu = Newtonsoft.Json.JsonConvert.DeserializeObject(Of SystemsOfUnits.Units)(Newtonsoft.Json.JsonConvert.SerializeObject(FrmChild.Options.SelectedUnitSystem))
+        Dim newsu = Newtonsoft.Json.JsonConvert.DeserializeObject(Of SystemsOfUnits.Units)(Newtonsoft.Json.JsonConvert.SerializeObject(CurrentFlowsheet.Options.SelectedUnitSystem))
 
         Dim cnt As Integer = 1
         While FormMain.AvailableUnitSystems.ContainsKey(newsu.Name)
-            newsu.Name = FrmChild.Options.SelectedUnitSystem.Name & "_" & cnt.ToString
+            newsu.Name = CurrentFlowsheet.Options.SelectedUnitSystem.Name & "_" & cnt.ToString
             cnt += 1
         End While
 
-        FrmChild.AddUnitSystem(newsu)
-        FrmChild.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.SystemOfUnitsAdded,
+        CurrentFlowsheet.AddUnitSystem(newsu)
+        CurrentFlowsheet.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.SystemOfUnitsAdded,
                                              .NewValue = newsu,
                                              .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_SystemOfUnitsAdded"), newsu.Name)})
 
@@ -1568,7 +1568,7 @@ Public Class FormSimulSettings
     End Sub
 
     Private Sub chkSkipEqCalcs_CheckedChanged(sender As Object, e As EventArgs) Handles chkSkipEqCalcs.CheckedChanged
-        FrmChild.Options.SkipEquilibriumCalculationOnDefinedStreams = chkSkipEqCalcs.Checked
+        CurrentFlowsheet.Options.SkipEquilibriumCalculationOnDefinedStreams = chkSkipEqCalcs.Checked
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs)
@@ -1579,7 +1579,7 @@ Public Class FormSimulSettings
         Else
             ppid = dgvpp.SelectedRows(0).Cells(0).Value
         End If
-        Dim pp As PropertyPackage = FrmChild.PropertyPackages(ppid)
+        Dim pp As PropertyPackage = CurrentFlowsheet.PropertyPackages(ppid)
         pp.DisplayFlashConfigForm()
     End Sub
 
