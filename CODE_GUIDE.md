@@ -79,6 +79,23 @@ The most important libraries in DWSIM are: **DWSIM.Thermodynamics** and **DWSIM.
 
 The Shared Classes library also contains many other functions which are used by both UIs, like checking for updates, loading FOSSEE flowsheets, and other utilities.
 
+#### DWSIM.Thermodynamics.* ####
+
+The Thermodynamics libraries contains the Property Packages and associated Thermo and Property models, Flash Algorithms and their respective editors.
+
+The main classes defined in DWSIM.Thermodynamics are:
+
+* [**CompoundConstantProperties**](https://github.com/DanWBR/dwsim6/blob/fd71e980d234f423059a119aaff58df2fc9e7cfb/DWSIM.Thermodynamics/Base%20Classes/ThermodynamicsBase.vb#L1395): contains all the unique parameters that define a compound (i.e. name, molecular weight, normal boiling point, critical temperature, etc).
+* [**Compound**](https://github.com/DanWBR/dwsim6/blob/fd71e980d234f423059a119aaff58df2fc9e7cfb/DWSIM.Thermodynamics/Base%20Classes/ThermodynamicsBase.vb#L36): contains a **ConstantProperties** object as well as mutable parameters like mass/mole/volumetric flows and fractions, within the context of a Material Stream.
+* [**Reaction**](https://github.com/DanWBR/dwsim6/blob/fd71e980d234f423059a119aaff58df2fc9e7cfb/DWSIM.Thermodynamics/Base%20Classes/ThermodynamicsBase.vb#L242): contains all parameters that define a chemical reaction.
+* [**ReactionSet**](https://github.com/DanWBR/dwsim6/blob/fd71e980d234f423059a119aaff58df2fc9e7cfb/DWSIM.Thermodynamics/Base%20Classes/ThermodynamicsBase.vb#L521): contains a list of associated **Reaction** objects.
+* [**PhaseProperties**](https://github.com/DanWBR/dwsim6/blob/fd71e980d234f423059a119aaff58df2fc9e7cfb/DWSIM.Thermodynamics/Base%20Classes/ThermodynamicsBase.vb#L1224): defines the properties of a Phase (Vapor, Liquid, Solid...) or a mixture of phases.
+* [**Phase**](https://github.com/DanWBR/dwsim6/blob/fd71e980d234f423059a119aaff58df2fc9e7cfb/DWSIM.Thermodynamics/Base%20Classes/ThermodynamicsBase.vb#L147): defines a fluid phase. Contains a **PhaseProperties** object and a list of **Compound** objects.
+
+* [**Material Stream**](https://github.com/DanWBR/dwsim6/blob/windows/DWSIM.Thermodynamics/Material%20Stream/MaterialStream.vb): defines flow of matter from one point to another in a flowsheet, or the transport of matter between unit operations. Contains a list of **Phase** objects and lots of helper parameters and methods.
+
+
+
 #### DWSIM.Math.* ####
 
 The Math libraries contain shared math code, like optimization, regression, sorting and other utility classes.
