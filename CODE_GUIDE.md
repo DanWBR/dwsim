@@ -79,11 +79,11 @@ The most important libraries in DWSIM are: **DWSIM.Thermodynamics** and **DWSIM.
 
 The Shared Classes library also contains many other functions which are used by both UIs, like checking for updates, loading FOSSEE flowsheets, and other utilities.
 
-#### DWSIM.Math.* #####
+#### DWSIM.Math.* ####
 
 The Math libraries contain shared math code, like optimization, regression, sorting and other utility classes.
 
-### DWSIM.Drawing.* ####
+#### DWSIM.Drawing.* ####
 
 The Drawing libraries contains the code required to draw the objects in the flowsheet, as well as the PFD surface class itself. Every single object in the flowsheet  must have a graphical representation, implementing the [IGraphicObject](https://github.com/DanWBR/dwsim6/blob/windows/DWSIM.Interfaces/IGraphicObject.vb) interface. All simulation objects have a [GraphicObject](https://github.com/DanWBR/dwsim6/blob/windows/DWSIM.Drawing/GraphicObjects/GraphicObject.vb) property which contains the "graphical" part of it. 
 
@@ -97,7 +97,9 @@ Using SkiaSharp enables the Classic and Cross-Platform UI to share the same draw
 
 #### DWSIM.UI.* #####
 
-The DWSIM.UI.* libraries contains the Cross-Platform UI code.
+The DWSIM.UI.* libraries contains the Cross-Platform UI code. When compiled, the last project in the group generates **DWSIM.UI.Desktop.exe**, the Cross-Platform UI launcher.
 
+#### DWSIM ####
 
+The DWSIM project contains the Classic UI code. When compiled, it generates the Classic UI executable, **DWSIM.exe**.
 
