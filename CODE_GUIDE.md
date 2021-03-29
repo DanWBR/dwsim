@@ -20,6 +20,8 @@ Just for the sake of curiosity, the Android and iOS versions of DWSIM are based 
 
 ### Libraries
 
+#### DWSIM.Interfaces ####
+
 The first and more important library is [**DWSIM.Interfaces**](https://github.com/DanWBR/dwsim6/tree/windows/DWSIM.Interfaces). It contains the interfaces which should be implemented by the Shared code and Classic UI/Cross-Platform UI specific projects. Note that this is different than the CAPE-OPEN interfaces, which are defined in the CapeOpen.dll library, which can be located [here](https://github.com/DanWBR/dwsim6/blob/windows/DWSIM/References/CapeOpen.dll). The most important objects in DWSIM implement both its own interfaces and the CAPE-OPEN ones:
 
 **Material Stream** object:
@@ -64,3 +66,38 @@ Public MustInherit Class FlowsheetBase
 
   Implements IFlowsheet, IFlowsheetCalculationQueue
 ```
+
+The DWSIM.Interfaces library ensures that a simulation saved in the Classic UI can be loaded in the Cross-Platform UI, which are totally different implementations of the simulation objects. Take, for instance, the [implementation of the Dynamics Manager in the Classic UI](https://github.com/DanWBR/dwsim6/blob/windows/DWSIM/Forms/Flowsheet%20Components/FormDynamicsManager.vb) versus the [Dynamic Manager in the Cross-Platform UI](https://github.com/DanWBR/dwsim6/blob/windows/DWSIM.UI.Desktop.Editors/Dynamics/DynamicsManagerControl.cs).
+
+#### DWSIM.GlobalSettings ####
+
+The Global Settings library contains all the shared settings (solver configuration, user databases, most recent files, etc) used by the currently running DWSIM application, be it the Classic UI or the Cross-Platform UI one. It is also used when DWSIM is running in automation mode or even as an Excel Add-In.
+
+#### DWSIM.SharedClasses ####
+
+The most important libraries in DWSIM are: **DWSIM.Thermodynamics** and **DWSIM.UnitOperations**. As there is some shared code between these two, I chose to create a separate library to host it. For instance, the **System of Units** classes and Unit Conversion functions, and the base class for a flowsheet object ([SimulationObjectBaseClass](https://github.com/DanWBR/dwsim6/blob/windows/DWSIM.SharedClasses/Base%20Class/SimulationObjectBaseClasses.vb), which implements [ISimulationObject](https://github.com/DanWBR/dwsim6/blob/windows/DWSIM.Interfaces/ISimulationObject.vb), the base interface for all Simulation Objects), which is inherited by the Material Stream (contained in the Thermo library) and the remaining Unit Operation and Energy Stream classes (contained in the Unit Operations library).
+
+The Shared Classes library also contains many other functions which are used by both UIs, like checking for updates, loading FOSSEE flowsheets, and other utilities.
+
+#### DWSIM.Math.* #####
+
+The Math libraries contain shared math code, like optimization, regression, sorting and other utility classes.
+
+### DWSIM.Drawing.* ####
+
+The Drawing libraries contains the code required to draw the objects in the flowsheet, as well as the PFD surface class itself. Every single object in the flowsheet  must have a graphical representation, implementing the [IGraphicObject](https://github.com/DanWBR/dwsim6/blob/windows/DWSIM.Interfaces/IGraphicObject.vb) interface. All simulation objects have a [GraphicObject](https://github.com/DanWBR/dwsim6/blob/windows/DWSIM.Drawing/GraphicObjects/GraphicObject.vb) property which contains the "graphical" part of it. 
+
+The GraphicObject class defines the inlet and outlet ports (connection points) for all simulation objects. They have a list of **InputConnectors** and **OutputConnectors**. These connectors contain the information about which object is connected to another object, and through which connection points.
+
+To get information about the connections between flowsheet objects, you must then look for their graphical representations (GraphicObjects). The simulation objects *per se* only contain information about themselves, though their graphical representations also carry a property named **Owner**, which contains a reference to the corresponding simulation objects. This makes sure that everyone knows everyone in the flowsheet.
+
+The Drawing code is based on the [SkiaSharp](https://github.com/mono/SkiaSharp) library. SkiaSharp is a cross-platform 2D graphics API for .NET platforms based on Google's Skia Graphics Library. It provides a comprehensive 2D API that can be used across mobile, server and desktop models to render images.
+
+Using SkiaSharp enables the Classic and Cross-Platform UI to share the same drawing code.
+
+#### DWSIM.UI.* #####
+
+The DWSIM.UI.* libraries contains the Cross-Platform UI code.
+
+
+
