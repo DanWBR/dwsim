@@ -4063,7 +4063,7 @@
     <value>Error calculating the exchanger: input parameters generated a physically inconsistent solution.</value>
   </data>
   <data name="TKResTime" xml:space="preserve">
-    <value>Residence time</value>
+    <value>Liquid residence time</value>
   </data>
   <data name="TKVol" xml:space="preserve">
     <value>Volume</value>
@@ -5734,5 +5734,8 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   </data>
   <data name="DescLIPP" xml:space="preserve">
     <value>A modified version of the LIQUAC model by Kiepe, Noll and Gmehling.</value>
+  </data>
+  <data name="TKResTimeV" xml:space="preserve">
+    <value>Vapor residence time</value>
   </data>
 </root>

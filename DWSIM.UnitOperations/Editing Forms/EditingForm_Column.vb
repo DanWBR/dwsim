@@ -90,12 +90,12 @@ Public Class EditingForm_Column
                 chkNoCondenser.Checked = DirectCast(SimObject, DistillationColumn).ReboiledAbsorber
                 chkNoReboiler.Checked = DirectCast(SimObject, DistillationColumn).RefluxedAbsorber
             ElseIf TypeOf SimObject Is AbsorptionColumn Then
-                TabControl1.TabPages.Remove(TabCondenser)
-                TabControl1.TabPages.Remove(TabReboiler)
+                TabContainerSpecification.TabPages.Remove(TabCondenser)
+                TabContainerSpecification.TabPages.Remove(TabReboiler)
             ElseIf TypeOf SimObject Is RefluxedAbsorber Then
-                TabControl1.TabPages.Remove(TabReboiler)
+                TabContainerSpecification.TabPages.Remove(TabReboiler)
             ElseIf TypeOf SimObject Is ReboiledAbsorber Then
-                TabControl1.TabPages.Remove(TabCondenser)
+                TabContainerSpecification.TabPages.Remove(TabCondenser)
             End If
 
             'parameters

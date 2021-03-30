@@ -162,6 +162,7 @@ Public Class EditingForm_ReactorCSTR
             gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("DeltaT"), su.Converter.ConvertFromSI(units.deltaT, .DeltaT.GetValueOrDefault).ToString(nf), units.deltaT})
             gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("RConvPGridItem3"), su.Converter.ConvertFromSI(units.heatflow, .DeltaQ.GetValueOrDefault).ToString(nf), units.heatflow})
             gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("TKResTime"), su.Converter.ConvertFromSI(units.time, .ResidenceTimeL).ToString(nf), units.time})
+            gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("TKResTimeV"), su.Converter.ConvertFromSI(units.time, .ResidenceTimeV).ToString(nf), units.time})
 
             'reaction props
 

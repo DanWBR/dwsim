@@ -4073,7 +4073,7 @@ Tensão Superficial da Fase Líquida: Método Brock-Bird</value>
     <value>Erro ao calcular o trocador: os parâmetros fornecidos geraram uma solução inconsistente.</value>
   </data>
   <data name="TKResTime" xml:space="preserve">
-    <value>Tempo de residência do fluido</value>
+    <value>Tempo de residência do líquido</value>
   </data>
   <data name="TKVol" xml:space="preserve">
     <value>Volume do tanque</value>
@@ -5678,5 +5678,8 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   </data>
   <data name="DescLIPP" xml:space="preserve">
     <value>Uma versão do modelo LIQUAC modificado por Kiepe, Noll e Gmehling.</value>
+  </data>
+  <data name="TKResTimeV" xml:space="preserve">
+    <value>Tempo de residência do vapor</value>
   </data>
 </root>

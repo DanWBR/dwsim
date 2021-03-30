@@ -1245,7 +1245,7 @@
     <value>Fluxo de Energia</value>
   </data>
   <data name="PROP_CS_1" xml:space="preserve">
-    <value>Tempo de residência</value>
+    <value>Tempo de residência do líquido</value>
   </data>
   <data name="PROP_CS_2" xml:space="preserve">
     <value>Volume</value>
@@ -1601,5 +1601,11 @@
   </data>
   <data name="PROP_HX_31" xml:space="preserve">
     <value>Fração de Vapor (Corrente 1)</value>
+  </data>
+  <data name="PROP_CS_6" xml:space="preserve">
+    <value>Headspace</value>
+  </data>
+  <data name="PROP_CS_7" xml:space="preserve">
+    <value>Tempo de residência do vapor</value>
   </data>
 </root>

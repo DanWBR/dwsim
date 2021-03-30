@@ -1133,6 +1133,10 @@ out:        Dim ms1, ms2 As MaterialStream
                             value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault)
                         Case 5
                             value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.OutletTemperature)
+                        Case 6
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.volume, Me.Headspace)
+                        Case 7
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.time, Me.ResidenceTimeV)
                     End Select
 
 
@@ -1200,15 +1204,15 @@ out:        Dim ms1, ms2 As MaterialStream
             If basecol.Length > 0 Then proplist.AddRange(basecol)
             Select Case proptype
                 Case PropertyType.RW
-                    For i = 0 To 5
+                    For i = 0 To 7
                         proplist.Add("PROP_CS_" + CStr(i))
                     Next
                 Case PropertyType.WR
-                    For i = 0 To 5
+                    For i = 0 To 6
                         proplist.Add("PROP_CS_" + CStr(i))
                     Next
                 Case PropertyType.ALL, PropertyType.RO
-                    For i = 0 To 5
+                    For i = 0 To 7
                         proplist.Add("PROP_CS_" + CStr(i))
                     Next
                     proplist.Add("Calculation Mode")
@@ -1248,6 +1252,8 @@ out:        Dim ms1, ms2 As MaterialStream
                     Me.DeltaT = SystemsOfUnits.Converter.ConvertToSI(su.deltaT, propval)
                 Case 5
                     Me.OutletTemperature = SystemsOfUnits.Converter.ConvertToSI(su.temperature, propval)
+                Case 6
+                    Me.Headspace = SystemsOfUnits.Converter.ConvertToSI(su.volume, propval)
             End Select
             Return 1
         End Function
@@ -1281,6 +1287,10 @@ out:        Dim ms1, ms2 As MaterialStream
                                 value = su.heatflow
                             Case 5
                                 value = su.temperature
+                            Case 6
+                                value = su.volume
+                            Case 7
+                                value = su.time
                         End Select
 
                     Catch ex As Exception

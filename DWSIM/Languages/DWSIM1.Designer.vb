@@ -14869,11 +14869,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Tempo de residência do fluido.
+        '''  Looks up a localized string similar to Tempo de residência do líquido.
         '''</summary>
         Friend Shared ReadOnly Property TKResTime() As String
             Get
                 Return ResourceManager.GetString("TKResTime", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Tempo de residência do vapor.
+        '''</summary>
+        Friend Shared ReadOnly Property TKResTimeV() As String
+            Get
+                Return ResourceManager.GetString("TKResTimeV", resourceCulture)
             End Get
         End Property
         
