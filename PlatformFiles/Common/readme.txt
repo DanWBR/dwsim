@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 6.4.6
+Version 6.4.7
 Copyright (c) 2017-2021 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,20 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim6/commits/windows
+
+Version 6.4.7
+
+Daniel Medeiros		New Database with Food Compounds (https://github.com/Spogis/DWSIMFoodProp)
+Daniel Medeiros		Updated CoolProp libraries to v6.4.1
+Daniel Medeiros		Grouped all Property Package editors in a single window (Classic UI)
+Daniel Medeiros		Exposed CSTR's Vapor Residence Time and Headspace
+Daniel Medeiros		Added an option to import compound data into Compound Creator from JSON files
+Daniel Medeiros		Fixed issues with some flash algorithms
+Daniel Medeiros		Fixed issues with Compound Creator
+Daniel Medeiros		Fixed Gibbs/Equilibrium/Conversion Reactor mixed-phase product enthalpies
+Daniel Medeiros		Fixed a bug with solids handling
+Daniel Medeiros		Fixed a bug in Seawater Property Package 
+Daniel Medeiros		General UI Fixes
 
 Version 6.4.6
 

@@ -320,33 +320,63 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
 
             s.CreateAndAddLabelRow(container, "Controller Parameters");
 
-            var txtvalue = s.CreateAndAddTextBoxRow(container, nf, "Set-Point/Offset", 0.0f, (sender, e) =>
+            var adjval = 0.0;
+
+            if (adjust.GetFlowsheet().SimulationObjects.ContainsKey(adjust.ControlledObjectData.ID))
             {
-                if (adjust.GetFlowsheet().SimulationObjects.ContainsKey(adjust.ControlledObjectData.ID))
+                var obj0 = adjust.GetFlowsheet().SimulationObjects[adjust.ControlledObjectData.ID];
+                if (obj0 != null)
                 {
-                    var obj = adjust.GetFlowsheet().SimulationObjects[adjust.ControlledObjectData.ID];
-                    if (s.IsValidDouble(sender.Text))
+                    if (adjust.Referenced)
                     {
-                        if (adjust.Referenced)
+                        obj0 = adjust.GetFlowsheet().SimulationObjects[adjust.ReferencedObjectData.ID];
+                        var punit = obj0.GetPropertyUnit(adjust.ReferencedObjectData.PropertyName, su);
+                        if (su.GetUnitType(punit) == UnitOfMeasure.temperature)
                         {
-                            obj = adjust.GetFlowsheet().SimulationObjects[adjust.ReferencedObjectData.ID];
-                            var punit = obj.GetPropertyUnit(adjust.ReferencedObjectData.PropertyName, su);
-                            if (su.GetUnitType(punit) == UnitOfMeasure.temperature)
-                            {
-                                adjust.AdjustValue = cv.ConvertToSI(punit + ".", Double.Parse(sender.Text));
-                            }
-                            else
-                            {
-                                adjust.AdjustValue = cv.ConvertToSI(punit, Double.Parse(sender.Text));
-                            }
+                            adjval = adjust.AdjustValue.ConvertFromSI(punit + ".");
                         }
                         else
                         {
-                            adjust.AdjustValue = cv.ConvertToSI(obj.GetPropertyUnit(adjust.ControlledObjectData.PropertyName, su), Double.Parse(sender.Text));
+                            adjval = adjust.AdjustValue.ConvertFromSI(punit);
                         }
                     }
+                    else
+                    {
+                        adjval = adjust.AdjustValue.ConvertFromSI(obj0.GetPropertyUnit(adjust.ControlledObjectData.PropertyName, su));
+                    }
                 }
-            }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)adjust.GetFlowsheet()).HighLevelSolve.Invoke(); });
+            }
+            else {
+                adjval = adjust.AdjustValue;
+            }
+
+            var txtvalue = s.CreateAndAddTextBoxRow(container, nf, "Set-Point/Offset", adjval, (sender, e) =>
+             {
+                 if (adjust.GetFlowsheet().SimulationObjects.ContainsKey(adjust.ControlledObjectData.ID))
+                 {
+                     var obj = adjust.GetFlowsheet().SimulationObjects[adjust.ControlledObjectData.ID];
+                     if (s.IsValidDouble(sender.Text))
+                     {
+                         if (adjust.Referenced)
+                         {
+                             obj = adjust.GetFlowsheet().SimulationObjects[adjust.ReferencedObjectData.ID];
+                             var punit = obj.GetPropertyUnit(adjust.ReferencedObjectData.PropertyName, su);
+                             if (su.GetUnitType(punit) == UnitOfMeasure.temperature)
+                             {
+                                 adjust.AdjustValue = cv.ConvertToSI(punit + ".", sender.Text.ToDoubleFromCurrent());
+                             }
+                             else
+                             {
+                                 adjust.AdjustValue = cv.ConvertToSI(punit, sender.Text.ToDoubleFromCurrent());
+                             }
+                         }
+                         else
+                         {
+                             adjust.AdjustValue = cv.ConvertToSI(obj.GetPropertyUnit(adjust.ControlledObjectData.PropertyName, su), sender.Text.ToDoubleFromCurrent());
+                         }
+                     }
+                 }
+             }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)adjust.GetFlowsheet()).HighLevelSolve.Invoke(); });
 
             if (adjust.ManipulatedObjectData.ID != "" && adjust.GetFlowsheet().SimulationObjects.ContainsKey(adjust.ManipulatedObjectData.ID))
             {
@@ -369,7 +399,8 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
 
             s.CreateAndAddCheckBoxRow(container, "Run with the Simultaneous Adjust Solver", adjust.SimultaneousAdjust, (sender, e) => adjust.SimultaneousAdjust = sender.Checked.GetValueOrDefault());
 
-            s.CreateAndAddButtonRow(container, "Open Control Panel", null, (btn, e) =>{
+            s.CreateAndAddButtonRow(container, "Open Control Panel", null, (btn, e) =>
+            {
                 var fcp = new UnitOperations.EditingForm_Adjust_ControlPanel();
                 fcp.myADJ = adjust;
                 fcp.Show();
@@ -696,7 +727,7 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
             {
                 if (s.IsValidDouble(sender.Text))
                 {
-                    pid.AdjustValue = Double.Parse(sender.Text);
+                    pid.AdjustValue = sender.Text.ToDoubleFromCurrent();
                 }
             });
 
@@ -704,7 +735,7 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
             {
                 if (s.IsValidDouble(sender.Text))
                 {
-                    pid.Offset = Double.Parse(sender.Text);
+                    pid.Offset = sender.Text.ToDoubleFromCurrent();
                 }
             });
 
@@ -712,7 +743,7 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
             {
                 if (s.IsValidDouble(sender.Text))
                 {
-                    pid.OutputMin = Double.Parse(sender.Text);
+                    pid.OutputMin = sender.Text.ToDoubleFromCurrent();
                 }
             });
 
@@ -720,7 +751,7 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
             {
                 if (s.IsValidDouble(sender.Text))
                 {
-                    pid.OutputMax = Double.Parse(sender.Text);
+                    pid.OutputMax = sender.Text.ToDoubleFromCurrent();
                 }
             });
 
@@ -728,7 +759,7 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
             {
                 if (s.IsValidDouble(sender.Text))
                 {
-                    pid.Kp = Double.Parse(sender.Text);
+                    pid.Kp = sender.Text.ToDoubleFromCurrent();
                 }
             });
 
@@ -736,7 +767,7 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
             {
                 if (s.IsValidDouble(sender.Text))
                 {
-                    pid.Ki = Double.Parse(sender.Text);
+                    pid.Ki = sender.Text.ToDoubleFromCurrent();
                 }
             });
 
@@ -744,7 +775,7 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
             {
                 if (s.IsValidDouble(sender.Text))
                 {
-                    pid.Kd = Double.Parse(sender.Text);
+                    pid.Kd = sender.Text.ToDoubleFromCurrent();
                 }
             });
 
@@ -752,7 +783,7 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
             {
                 if (s.IsValidDouble(sender.Text))
                 {
-                    pid.WindupGuard = Double.Parse(sender.Text);
+                    pid.WindupGuard = sender.Text.ToDoubleFromCurrent();
                 }
             });
 
@@ -1002,13 +1033,15 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
                    spec.SelectedPropertyUnits = tb.Text;
                });
 
-            s.CreateAndAddNumericEditorRow(container, "Integer Digits", 
-                spec.IntegralDigits, 1, 10, 0, (ns, e) => {
+            s.CreateAndAddNumericEditorRow(container, "Integer Digits",
+                spec.IntegralDigits, 1, 10, 0, (ns, e) =>
+                {
                     spec.IntegralDigits = (int)ns.Value;
                 });
 
             s.CreateAndAddNumericEditorRow(container, "Decimal Digits",
-                spec.DecimalDigits, 1, 10, 0, (ns, e) => {
+                spec.DecimalDigits, 1, 10, 0, (ns, e) =>
+                {
                     spec.DecimalDigits = (int)ns.Value;
                 });
 

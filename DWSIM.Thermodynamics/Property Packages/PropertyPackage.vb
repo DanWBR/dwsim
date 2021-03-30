@@ -12732,7 +12732,26 @@ Final3:
 
         End Sub
 
-        Public Sub DisplayAdvancedEditingForm() Implements IPropertyPackage.DisplayAdvancedEditingForm
+
+        Public Function DisplayAdvancedEditingForm() As Object Implements IPropertyPackage.DisplayAdvancedEditingForm
+
+            Dim container1 = sui.GetDefaultContainer()
+
+            container1.Tag = "Advanced Settings"
+            container1.CreateAndAddLabelRow("Forced Solids")
+            container1.CreateAndAddLabelRow2("Select the compounds which will be forcedly put into the solid phase." & vbCrLf &
+                                             "This setting will work only with the Nested Loops SVLE (Eutetic) Flash Algorithm.")
+
+            For Each comp In Flowsheet.SelectedCompounds.Values
+                container1.CreateAndAddCheckBoxRow(comp.Name, ForcedSolids.Contains(comp.Name),
+                                                   Sub(sender, e)
+                                                       If sender.Checked.GetValueOrDefault Then
+                                                           If Not ForcedSolids.Contains(comp.Name) Then ForcedSolids.Add(comp.Name)
+                                                       Else
+                                                           If ForcedSolids.Contains(comp.Name) Then ForcedSolids.Remove(comp.Name)
+                                                       End If
+                                                   End Sub)
+            Next
 
             Dim container2 = sui.GetDefaultContainer()
 
@@ -12793,11 +12812,20 @@ Final3:
                                                          Process.Start("https://github.com/DanWBR/dwsim6/blob/windows/DWSIM.SharedClasses/UnitsOfMeasure/SystemsOfUnits.vb#L278")
                                                      End Sub)
 
-            Dim form = sui.GetDefaultEditorForm("Advanced Property Package Settings", 700, 600, container2)
-            form.Topmost = True
-            form.Show()
+            If GlobalSettings.Settings.OldUI Then
+                Dim form = sui.GetDefaultEditorForm("Advanced Property Package Settings", 700, 600, container2)
+                form.Topmost = True
+                form.Show()
+                Return form
+            Else
+                Dim form = sui.GetDefaultTabbedForm("Advanced Property Package Settings", 700, 600, {container1, container2})
+                form.Topmost = True
+                form.Show()
+                Return form
+            End If
 
-        End Sub
+
+        End Function
 
         <JsonIgnore> <XmlIgnore> Property Flowsheet As IFlowsheet Implements IPropertyPackage.Flowsheet
             Get

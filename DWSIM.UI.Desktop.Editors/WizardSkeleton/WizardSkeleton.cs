@@ -16,12 +16,13 @@ using DWSIM.ExtensionMethods;
 using System.IO;
 
 using s = DWSIM.GlobalSettings.Settings;
+using System.Windows.Threading;
 
 namespace DWSIM.UI.Desktop.Editors
 {
     public class WizardPage : Form
     {
-        
+
         public bool hasBackButton { get; set; }
         public bool hasNextButton { get; set; }
         public bool hasCancelButton { get; set; }
@@ -42,13 +43,14 @@ namespace DWSIM.UI.Desktop.Editors
 
         public Label footerLabel;
 
-        public WizardPage(): base()
+        public WizardPage() : base()
         {
-        
+
         }
 
         public void Init(int width, int height)
         {
+
 
             string imgprefix = "DWSIM.UI.Desktop.Editors.Resources.Icons.";
 
@@ -81,13 +83,18 @@ namespace DWSIM.UI.Desktop.Editors
 
             var buttons = new List<Button>();
 
-            if (hasCancelButton){
+            if (hasCancelButton)
+            {
                 btnCancel = new Button { Text = "Cancel" };
-                if (cancelAction != null) btnCancel.Click += (sender, e) => cancelAction.Invoke();
+                if (cancelAction != null) btnCancel.Click += (sender, e) =>
+                {
+                    cancelAction.Invoke();
+                };
                 buttons.Add(btnCancel);
             }
 
-            if (hasBackButton){
+            if (hasBackButton)
+            {
                 btnBack = new Button { Text = "Previous" };
                 if (backAction != null) btnBack.Click += (sender, e) => backAction.Invoke();
                 buttons.Add(btnBack);
@@ -103,20 +110,23 @@ namespace DWSIM.UI.Desktop.Editors
             if (hasFinishButton)
             {
                 btnFinish = new Button { Text = "Finish" };
-                if (finishAction != null) btnFinish.Click += (sender, e) => finishAction.Invoke();
+                if (finishAction != null) btnFinish.Click += (sender, e) =>
+                {
+                    finishAction.Invoke();
+                };
                 buttons.Add(btnFinish);
             }
 
             var tr = new TableRow();
 
-            footerSpinner = new Spinner {Visible = false, Size = new Size((int)(s.UIScalingFactor * 20), (int)(s.UIScalingFactor*20)) };
+            footerSpinner = new Spinner { Visible = false, Size = new Size((int)(s.UIScalingFactor * 20), (int)(s.UIScalingFactor * 20)) };
             tr.Cells.Add(footerSpinner);
 
-            footerLabel = new Label { Text = FooterText, VerticalAlignment = VerticalAlignment.Center }; 
+            footerLabel = new Label { Text = FooterText, VerticalAlignment = VerticalAlignment.Center };
             tr.Cells.Add(footerLabel);
 
             tr.Cells.Add(null);
-            
+
             foreach (var btn in buttons)
             {
                 if (Application.Instance.Platform.IsWinForms) btn.Height = (int)(s.UIScalingFactor * 30);
@@ -140,10 +150,10 @@ namespace DWSIM.UI.Desktop.Editors
             Content = container;
 
             ContentContainer = middlecontainer;
-            
+
             var center = Screen.PrimaryScreen.WorkingArea.Center;
             center.X -= (int)(s.UIScalingFactor * width) / 2;
-            center.Y -= ((int)(s.UIScalingFactor * height) + (int)(s.UIScalingFactor*150)) / 2;
+            center.Y -= ((int)(s.UIScalingFactor * height) + (int)(s.UIScalingFactor * 150)) / 2;
 
             Location = new Point(center);
 

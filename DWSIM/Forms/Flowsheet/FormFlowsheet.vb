@@ -929,9 +929,6 @@ Public Class FormFlowsheet
         Dim wform As New UI.Desktop.Editors.CompoundCreatorWizard(Me)
         wform.SetupAndDisplayPage(1)
 
-        'start dispatcher for WPF Interop
-        If Not GlobalSettings.Settings.IsRunningOnMono Then System.Windows.Threading.Dispatcher.Run()
-
     End Sub
 
     Private Sub ToolStripSplitButton1_ButtonClick(sender As Object, e As EventArgs)

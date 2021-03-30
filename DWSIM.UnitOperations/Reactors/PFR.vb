@@ -446,6 +446,8 @@ Namespace Reactors
 
             If Double.IsNaN(dy.Sum) Then Throw New Exception("PFR ODE solver failed to find a solution.")
 
+            FlowSheet.CheckStatus()
+
             Return dy
 
         End Function

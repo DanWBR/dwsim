@@ -56,7 +56,7 @@
 
     Sub DisplayEditingForm()
 
-    Sub DisplayAdvancedEditingForm()
+    Function DisplayAdvancedEditingForm() As Object
 
     Sub CalcAdditionalPhaseProperties()
 

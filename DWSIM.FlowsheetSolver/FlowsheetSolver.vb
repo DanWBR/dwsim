@@ -1137,6 +1137,8 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
                 Case 0, 1, 2
 
+                    If mode = 0 Then mode = 1
+
                     '0 = main thread, 1 = bg thread, 2 = bg parallel threads
 
                     'define variable to check for flowsheet convergence if there are recycle ops
@@ -1203,12 +1205,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                                           End With
                                                       Next
 
-                                                      If mode = 0 Then
-
-                                                          exlist = ProcessCalculationQueue(fobj, True, True, 0, Nothing,
-                                                                                     Settings.TaskCancellationTokenSource.Token, Adjusting)
-
-                                                      ElseIf mode = 1 Or mode = 2 Then
+                                                      If mode <= 2 Then
 
                                                           filteredlist2.Clear()
 
@@ -1334,7 +1331,9 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                     Try
                         While Not (Date.Now - d1).TotalMilliseconds >= Settings.SolverTimeoutSeconds * 1000
                             maintask.Wait(500)
-                            'fgui.CheckStatus()
+                            If Settings.TaskCancellationTokenSource.IsCancellationRequested Then
+                                Throw New OperationCanceledException()
+                            End If
                             If maintask.Status = TaskStatus.RanToCompletion Then Exit While
                         End While
                         If maintask.Status = TaskStatus.Running Then Throw New TimeoutException(fgui.GetTranslatedString("SolverTimeout"))

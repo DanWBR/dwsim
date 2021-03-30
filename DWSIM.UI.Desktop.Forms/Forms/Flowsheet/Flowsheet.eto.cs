@@ -1483,7 +1483,7 @@ namespace DWSIM.UI.Forms
                     Application.Instance.AsyncInvoke(() =>
                     {
                         ResultsControl.UpdateList();
-                        MaterialStreamListControl.UpdateList();
+                        //MaterialStreamListControl.UpdateList();
                         UpdateEditorPanels();
                     });
                 });

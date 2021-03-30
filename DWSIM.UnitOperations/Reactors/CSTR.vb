@@ -898,6 +898,8 @@ Namespace Reactors
 
                 If NIter > MaxIterations Then Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
 
+                FlowSheet.CheckStatus()
+
             Loop Until IErr < Tolerance Or MaxChange < Tolerance * 10 'repeat until composition is constant
 
             '====================================================

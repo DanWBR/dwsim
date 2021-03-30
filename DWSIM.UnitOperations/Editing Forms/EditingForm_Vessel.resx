@@ -787,7 +787,7 @@
     <value>34</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=6.4.6.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=6.4.7.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="Label8.ToolTip2" xml:space="preserve">
     <value />
