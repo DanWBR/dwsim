@@ -36,6 +36,7 @@ Imports DotNumerics.Optimization
 Imports DWSIM.MathOps.MathEx.Optimization
 Imports DWSIM.MathOps.MathEx.BrentOpt
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms
+Imports DWSIM.UnitOperations.UnitOperations.Column
 
 Namespace UnitOperations.Auxiliary.SepOps
 
@@ -493,6 +494,65 @@ Namespace UnitOperations.Auxiliary.SepOps
 
     End Class
 
+    Public Class ColumnSolverInputData
+
+        Public Property ColumnObject As Column
+
+        Public Property NumberOfCompounds As Integer
+        Public Property NumberOfStages As Integer
+
+        Public Property MaximumIterations As Integer
+        Public Property Tolerances() As List(Of Double)
+
+        Public Property StageTemperatures As List(Of Double)
+        Public Property StagePressures As List(Of Double)
+        Public Property StageHeats As List(Of Double)
+        Public Property StageEfficiencies As List(Of Double)
+
+        Public Property FeedFlows As List(Of Double)
+        Public Property FeedCompositions As List(Of Double())
+        Public Property FeedEnthalpies As List(Of Double)
+        Public Property VaporFlows As List(Of Double)
+        Public Property VaporCompositions As List(Of Double())
+        Public Property LiquidFlows As List(Of Double)
+        Public Property LiquidCompositions As List(Of Double())
+        Public Property VaporSideDraws As List(Of Double)
+        Public Property LiquidSideDraws As List(Of Double)
+
+        Public Property Kvalues As List(Of Double())
+        Public Property OverallCompositions As List(Of Double())
+
+        Public Property CondenserType As condtype
+        Public Property ColumnType As ColType
+
+        Public Property CondenserSpec As ColumnSpec
+        Public Property ReboilerSpec As ColumnSpec
+
+        Public Property L1trials As List(Of Double())
+        Public Property L2trials As List(Of Double())
+        Public Property x1trials As List(Of Double()())
+        Public Property x2trials As List(Of Double()())
+
+    End Class
+
+    Public Class ColumnSolverOutputData
+
+        Public Property IterationsTaken As Integer
+        Public Property FinalError As Double
+
+        Public Property StageTemperatures As List(Of Double)
+        Public Property StageHeats As List(Of Double)
+
+        Public Property VaporFlows As List(Of Double)
+        Public Property VaporCompositions As List(Of Double())
+        Public Property LiquidFlows As List(Of Double)
+        Public Property LiquidCompositions As List(Of Double())
+        Public Property VaporSideDraws As List(Of Double)
+        Public Property LiquidSideDraws As List(Of Double)
+        Public Property Kvalues As List(Of Double())
+
+    End Class
+
     <System.Serializable()> Public Class StreamInformation
 
         Implements Interfaces.ICustomXMLSerialization
@@ -724,6 +784,16 @@ Namespace UnitOperations.Auxiliary.SepOps
         Public Property CalculatedValue As Double
 
         Public Property InitialEstimate As Double?
+
+    End Class
+
+    Public MustInherit Class ColumnSolver
+
+        Public MustOverride ReadOnly Property Name As String
+
+        Public MustOverride ReadOnly Property Description As String
+
+        Public MustOverride Function SolveColumn(input As ColumnSolverInputData) As ColumnSolverOutputData
 
     End Class
 
@@ -1652,6 +1722,10 @@ Namespace UnitOperations
         Private _ie As New InitialEstimates
         Private _autoupdie As Boolean = False
 
+        'solver
+
+        <Xml.Serialization.XmlIgnore> Property Solver As ColumnSolver
+
         ''' <summary>
         ''' Set the number of stages (n > 3)
         ''' </summary>
@@ -2358,7 +2432,13 @@ Namespace UnitOperations
         Public ic, ec As Integer
         Public compids As New ArrayList
 
-        Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
+        Public Overridable Sub SetColumnSolver(colsolver As ColumnSolver)
+
+            Solver = colsolver
+
+        End Sub
+
+        Public Overridable Function GetSolverInputData() As ColumnSolverInputData
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -3310,14 +3390,93 @@ Namespace UnitOperations
                 IObj?.Paragraphs.Add(String.Format("Compound (if applicable): {0}", sp.ComponentID))
             Next
 
-            Dim result As Object = Nothing
+            IObj?.Close()
 
-            IObj?.SetCurrent()
+            Dim solverinput As New ColumnSolverInputData
+
+            With solverinput
+                .ColumnObject = Me
+                .StageTemperatures = T.ToList
+                .StagePressures = P.ToList
+                .StageHeats = Q.ToList
+                .StageEfficiencies = eff.ToList
+                .NumberOfCompounds = nc
+                .NumberOfStages = ns
+                .ColumnType = ColumnType
+                .CondenserSpec = Specs("C")
+                .ReboilerSpec = Specs("R")
+                .CondenserType = CondenserType
+                .FeedCompositions = fc.ToList
+                .FeedEnthalpies = HF.ToList
+                .FeedFlows = F.ToList
+                .VaporCompositions = y.ToList
+                .VaporFlows = V.ToList
+                .VaporSideDraws = VSS.ToList
+                .LiquidCompositions = x.ToList
+                .LiquidFlows = L.ToList
+                .LiquidSideDraws = LSS.ToList
+                .Kvalues = Kval.ToList()
+                .MaximumIterations = maxits
+                .Tolerances = tol.ToList
+                .OverallCompositions = z.ToList
+                .L1trials = L1trials
+                .L2trials = L2trials
+                .x1trials = x1trials
+                .x2trials = x2trials
+            End With
+
+            Return solverinput
+
+        End Function
+
+        Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
+
+            Dim inputdata = GetSolverInputData()
+
+            Dim nc = inputdata.NumberOfCompounds
+            Dim ns = inputdata.NumberOfStages
+            Dim maxits = inputdata.MaximumIterations
+            Dim tol = inputdata.Tolerances.ToArray()
+            Dim F = inputdata.FeedFlows.ToArray()
+            Dim V = inputdata.VaporFlows.ToArray()
+            Dim L = inputdata.LiquidFlows.ToArray()
+            Dim VSS = inputdata.VaporSideDraws.ToArray()
+            Dim LSS = inputdata.LiquidSideDraws.ToArray()
+            Dim Kval = inputdata.Kvalues.ToArray()
+            Dim Q = inputdata.StageHeats.ToArray()
+            Dim x = inputdata.LiquidCompositions.ToArray()
+            Dim y = inputdata.VaporCompositions.ToArray()
+            Dim z = inputdata.OverallCompositions.ToArray()
+            Dim fc = inputdata.FeedCompositions.ToArray()
+            Dim HF = inputdata.FeedEnthalpies.ToArray()
+            Dim T = inputdata.StageTemperatures.ToArray()
+            Dim P = inputdata.StagePressures.ToArray()
+            Dim eff = inputdata.StageEfficiencies.ToArray()
+
+            Dim pp = DirectCast(PropertyPackage, PropertyPackages.PropertyPackage)
+
+            Dim L1trials = inputdata.L1trials
+            Dim L2trials = inputdata.L2trials
+            Dim x1trials = inputdata.x1trials
+            Dim x2trials = inputdata.x2trials
+
+            Dim i, j As Integer
+
+            Dim llextractor As Boolean = False
+            Dim myabs As AbsorptionColumn = TryCast(Me, AbsorptionColumn)
+            If myabs IsNot Nothing Then
+                If CType(Me, AbsorptionColumn).OperationMode = AbsorptionColumn.OpMode.Absorber Then
+                    llextractor = False
+                Else
+                    llextractor = True
+                End If
+            End If
+
+            Dim so As ColumnSolverOutputData = Nothing
 
             If TypeOf Me Is DistillationColumn Then
-                result = SolvingMethods.WangHenkeMethod.Solve(Me, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, -1, eff, Me.ColumnType, pp, Me.Specs, False, False)
-                'result = New SolvingMethods.NaphtaliSandholmMethod().Solve(Me, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, eff, Me.ColumnType, pp, Me.Specs, False)
-                ic = result(9)
+                SetColumnSolver(New SolvingMethods.WangHenkeMethod())
+                so = Solver.SolveColumn(inputdata)
             ElseIf TypeOf Me Is AbsorptionColumn Then
                 If llextractor Then
                     'run all trial compositions until it solves
@@ -3334,8 +3493,12 @@ Namespace UnitOperations
                                     End If
                                 Next
                             Next
-                            result = SolvingMethods.BurninghamOttoMethod.Solve(nc, ns, maxits, tol, F, L2trials(i), Q, L1trials(i), VSS, LSS, Kval, x1trials(i), x2trials(i), z, fc, HF, T, P, -1, eff, pp, Me.Specs, False, False, llextractor)
-                            ic = result(9)
+                            inputdata.VaporFlows = L2trials(i).ToList()
+                            inputdata.LiquidFlows = L1trials(i).ToList()
+                            inputdata.Kvalues = Kval.ToList()
+                            inputdata.LiquidCompositions = x1trials(i).ToList()
+                            inputdata.VaporCompositions = x2trials(i).ToList()
+                            so = Solver.SolveColumn(inputdata)
                             ex0 = Nothing
                             Exit For
                         Catch ex As Exception
@@ -3345,41 +3508,38 @@ Namespace UnitOperations
                     Next
                     If ex0 IsNot Nothing Then Throw ex0
                 Else
-                    result = SolvingMethods.BurninghamOttoMethod.Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, -1, eff, pp, Me.Specs, False, False, llextractor)
-                    ic = result(9)
+                    SetColumnSolver(New SolvingMethods.BurninghamOttoMethod())
+                    so = Solver.SolveColumn(inputdata)
                 End If
             End If
 
-            IObj?.Paragraphs.Add("Column is solved.")
+            ic = so.IterationsTaken
 
-            '{Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ic, t_error}
-
-            Me.CondenserDuty = result(8)(0)
-            Me.ReboilerDuty = result(8)(ns)
+            Me.CondenserDuty = so.StageHeats(0)
+            Me.ReboilerDuty = so.StageHeats(ns)
 
             'store final values
             xf.Clear()
             yf.Clear()
             Kf.Clear()
             For i = 0 To ns
-                yf.Add(result(5)(i))
-                xf.Add(result(6)(i))
-                x(i) = result(5)(i)
-                y(i) = result(6)(i)
-                Kf.Add(result(7)(i))
-                Kval(i) = result(7)(i)
+                xf.Add(so.LiquidCompositions(i))
+                yf.Add(so.VaporCompositions(i))
+                x(i) = so.LiquidCompositions(i)
+                y(i) = so.VaporCompositions(i)
+                Kf.Add(so.Kvalues(i))
+                Kval(i) = so.Kvalues(i)
             Next
-            Tf = result(0)
-            Vf = result(1)
-            Lf = result(2)
-            VSSf = result(3)
-            LSSf = result(4)
-            Q = result(8)
+            Tf = so.StageTemperatures.ToArray()
+            Vf = so.VaporFlows.ToArray()
+            Lf = so.LiquidFlows.ToArray()
+            VSSf = so.VaporSideDraws.ToArray()
+            LSSf = so.LiquidSideDraws.ToArray()
+            Q = so.StageHeats.ToArray()
 
             'if enabled, auto update initial estimates
 
             If Me.AutoUpdateInitialEstimates Then
-                IObj?.Paragraphs.Add("Auto-updating initial estimates...")
                 InitialEstimates.VaporProductFlowRate = Vf(0)
                 InitialEstimates.DistillateFlowRate = LSSf(0)
                 InitialEstimates.BottomsFlowRate = Lf(0)
@@ -3412,8 +3572,6 @@ Namespace UnitOperations
 
             'copy results to output streams
 
-            IObj?.Paragraphs.Add("Copying results to outlet streams...")
-
             'product flows
 
             Dim msm As MaterialStream = Nothing
@@ -3430,7 +3588,6 @@ Namespace UnitOperations
                             .Phases(0).Properties.molarflow = LSSf(0)
                             .Phases(0).Properties.temperature = Tf(0)
                             .Phases(0).Properties.pressure = P(0)
-                            IObj?.SetCurrent()
                             .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(xf(0), Tf(0), P(0), PropertyPackages.State.Liquid)
                             i = 0
                             For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
@@ -3454,7 +3611,6 @@ Namespace UnitOperations
                             .Phases(0).Properties.massflow = Vf(0) * pp.AUX_MMM(yf(0)) / 1000
                             .Phases(0).Properties.temperature = Tf(0)
                             .Phases(0).Properties.pressure = P(0)
-                            IObj?.SetCurrent()
                             If llextractor Then
                                 .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(yf(0), Tf(0), P(0), PropertyPackages.State.Liquid)
                             Else
@@ -3482,7 +3638,6 @@ Namespace UnitOperations
                             .Phases(0).Properties.massflow = Lf(ns) * pp.AUX_MMM(xf(ns)) / 1000
                             .Phases(0).Properties.temperature = Tf(ns)
                             .Phases(0).Properties.pressure = P(ns)
-                            IObj?.SetCurrent()
                             .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(xf(ns), Tf(ns), P(ns), PropertyPackages.State.Liquid)
                             i = 0
                             For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
@@ -3508,7 +3663,6 @@ Namespace UnitOperations
                                 .Phases(0).Properties.massflow = LSSf(sidx) * pp.AUX_MMM(xf(sidx)) / 1000
                                 .Phases(0).Properties.temperature = Tf(sidx)
                                 .Phases(0).Properties.pressure = P(sidx)
-                                IObj?.SetCurrent()
                                 .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(xf(sidx), Tf(sidx), P(sidx), PropertyPackages.State.Liquid)
                                 i = 0
                                 For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
@@ -3531,7 +3685,6 @@ Namespace UnitOperations
                                 .Phases(0).Properties.massflow = VSSf(sidx) * pp.AUX_MMM(yf(sidx)) / 1000
                                 .Phases(0).Properties.temperature = Tf(sidx)
                                 .Phases(0).Properties.pressure = P(sidx)
-                                IObj?.SetCurrent()
                                 .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(yf(sidx), Tf(sidx), P(sidx), PropertyPackages.State.Vapor)
                                 i = 0
                                 For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
@@ -3553,8 +3706,6 @@ Namespace UnitOperations
 
             'condenser/reboiler duties
 
-            IObj?.Paragraphs.Add("Updating Reboiler/Condenser duties...")
-
             Dim esm As Streams.EnergyStream
 
             For Each sinf In Me.EnergyStreams.Values
@@ -3574,8 +3725,6 @@ Namespace UnitOperations
                     esm.GraphicObject.Calculated = True
                 End If
             Next
-
-            IObj?.Close()
 
         End Sub
 
@@ -3955,6 +4104,20 @@ End Namespace
 Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
     <System.Serializable()> Public Class WangHenkeMethod
+
+        Inherits ColumnSolver
+
+        Public Overrides ReadOnly Property Name As String
+            Get
+                Return "Wang-Henke Solver"
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property Description As String
+            Get
+                Return "Wang-Henke Bubble-Point (BP) Solver"
+            End Get
+        End Property
 
         Public Shared Function Solve(ByVal rc As Column, ByVal nc As Integer, ByVal ns As Integer, ByVal maxits As Integer,
                                 ByVal tol As Double(), ByVal F As Double(), ByVal V As Double(),
@@ -5423,9 +5586,89 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
         End Function
 
+        Public Overrides Function SolveColumn(input As ColumnSolverInputData) As ColumnSolverOutputData
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Dim nc = input.NumberOfCompounds
+            Dim ns = input.NumberOfStages
+            Dim maxits = input.MaximumIterations
+            Dim tol = input.Tolerances.ToArray()
+            Dim F = input.FeedFlows.ToArray()
+            Dim V = input.VaporFlows.ToArray()
+            Dim L = input.LiquidFlows.ToArray()
+            Dim VSS = input.VaporSideDraws.ToArray()
+            Dim LSS = input.LiquidSideDraws.ToArray()
+            Dim Kval = input.Kvalues.ToArray()
+            Dim Q = input.StageHeats.ToArray()
+            Dim x = input.LiquidCompositions.ToArray()
+            Dim y = input.VaporCompositions.ToArray()
+            Dim z = input.OverallCompositions.ToArray()
+            Dim fc = input.FeedCompositions.ToArray()
+            Dim HF = input.FeedEnthalpies.ToArray()
+            Dim T = input.StageTemperatures.ToArray()
+            Dim P = input.StagePressures.ToArray()
+            Dim eff = input.StageEfficiencies.ToArray()
+
+            Dim L1trials = input.L1trials
+            Dim L2trials = input.L2trials
+            Dim x1trials = input.x1trials
+            Dim x2trials = input.x2trials
+
+            Dim col = input.ColumnObject
+
+            Dim llextractor As Boolean = False
+            Dim myabs As AbsorptionColumn = TryCast(col, AbsorptionColumn)
+            If myabs IsNot Nothing Then
+                If CType(col, AbsorptionColumn).OperationMode = AbsorptionColumn.OpMode.Absorber Then
+                    llextractor = False
+                Else
+                    llextractor = True
+                End If
+            End If
+
+            Dim result As Object() = Solve(col, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P,
+                               input.CondenserType, -1, eff, input.ColumnType, col.PropertyPackage, col.Specs, False, False)
+
+            Dim output As New ColumnSolverOutputData
+
+            'Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ic, t_error}
+
+            With output
+                .FinalError = result(10)
+                .IterationsTaken = result(9)
+                .StageTemperatures = DirectCast(result(0), Double()).ToList()
+                .VaporFlows = DirectCast(result(1), Double()).ToList()
+                .LiquidFlows = DirectCast(result(2), Double()).ToList()
+                .VaporSideDraws = DirectCast(result(3), Double()).ToList()
+                .LiquidSideDraws = DirectCast(result(4), Double()).ToList()
+                .VaporCompositions = DirectCast(result(5), Double()()).ToList()
+                .LiquidCompositions = DirectCast(result(6), Double()()).ToList()
+                .Kvalues = DirectCast(result(7), Double()()).ToList()
+                .StageHeats = DirectCast(result(8), Double()).ToList()
+            End With
+
+            Return output
+
+        End Function
+
     End Class
 
     <System.Serializable()> Public Class BurninghamOttoMethod
+
+        Inherits ColumnSolver
+
+        Public Overrides ReadOnly Property Name As String
+            Get
+                Throw New NotImplementedException()
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property Description As String
+            Get
+                Throw New NotImplementedException()
+            End Get
+        End Property
 
         Public Shared Function Solve(ByVal nc As Integer, ByVal ns As Integer, ByVal maxits As Integer,
                                 ByVal tol As Double(), ByVal F As Double(), ByVal V As Double(),
@@ -6005,6 +6248,72 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
         End Function
 
+        Public Overrides Function SolveColumn(input As ColumnSolverInputData) As ColumnSolverOutputData
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Dim nc = input.NumberOfCompounds
+            Dim ns = input.NumberOfStages
+            Dim maxits = input.MaximumIterations
+            Dim tol = input.Tolerances.ToArray()
+            Dim F = input.FeedFlows.ToArray()
+            Dim V = input.VaporFlows.ToArray()
+            Dim L = input.LiquidFlows.ToArray()
+            Dim VSS = input.VaporSideDraws.ToArray()
+            Dim LSS = input.LiquidSideDraws.ToArray()
+            Dim Kval = input.Kvalues.ToArray()
+            Dim Q = input.StageHeats.ToArray()
+            Dim x = input.LiquidCompositions.ToArray()
+            Dim y = input.VaporCompositions.ToArray()
+            Dim z = input.OverallCompositions.ToArray()
+            Dim fc = input.FeedCompositions.ToArray()
+            Dim HF = input.FeedEnthalpies.ToArray()
+            Dim T = input.StageTemperatures.ToArray()
+            Dim P = input.StagePressures.ToArray()
+            Dim eff = input.StageEfficiencies.ToArray()
+
+            Dim L1trials = input.L1trials
+            Dim L2trials = input.L2trials
+            Dim x1trials = input.x1trials
+            Dim x2trials = input.x2trials
+
+            Dim col = input.ColumnObject
+
+            Dim llextractor As Boolean = False
+            Dim myabs As AbsorptionColumn = TryCast(col, AbsorptionColumn)
+            If myabs IsNot Nothing Then
+                If CType(col, AbsorptionColumn).OperationMode = AbsorptionColumn.OpMode.Absorber Then
+                    llextractor = False
+                Else
+                    llextractor = True
+                End If
+            End If
+
+            Dim result As Object() = Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P,
+                               input.CondenserType, eff, col.PropertyPackage, col.Specs, False, False, llextractor)
+
+            Dim output As New ColumnSolverOutputData
+
+            'Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ic, t_error}
+
+            With output
+                .FinalError = result(10)
+                .IterationsTaken = result(9)
+                .StageTemperatures = DirectCast(result(0), Double()).ToList()
+                .VaporFlows = DirectCast(result(1), Double()).ToList()
+                .LiquidFlows = DirectCast(result(2), Double()).ToList()
+                .VaporSideDraws = DirectCast(result(3), Double()).ToList()
+                .LiquidSideDraws = DirectCast(result(4), Double()).ToList()
+                .VaporCompositions = DirectCast(result(5), Double()()).ToList()
+                .LiquidCompositions = DirectCast(result(6), Double()()).ToList()
+                .Kvalues = DirectCast(result(7), Double()()).ToList()
+                .StageHeats = DirectCast(result(8), Double()).ToList()
+            End With
+
+            Return output
+
+        End Function
+
     End Class
 
     <System.Serializable()> Public Class Tomich
@@ -6090,6 +6399,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
     <System.Serializable()> Public Class NaphtaliSandholmMethod
 
+        Inherits ColumnSolver
+
         Dim _IObj As Inspector.InspectorItem
 
         Sub New()
@@ -6114,6 +6425,18 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
         Private grad As Boolean = False
 
         Private ik, ih As Boolean
+
+        Public Overrides ReadOnly Property Name As String
+            Get
+                Return "Napthali-Sandholm"
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property Description As String
+            Get
+                Return "Napthali-Sandholm Simultaneous Correction (SC) Solver"
+            End Get
+        End Property
 
         Public Function FunctionValue(ByVal xl() As Double) As Double()
 
@@ -6935,6 +7258,72 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             IObj?.Close()
 
             Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ec, il_err, ic, el_err, dFdXvar}
+
+        End Function
+
+        Public Overrides Function SolveColumn(input As ColumnSolverInputData) As ColumnSolverOutputData
+
+            Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+
+            Dim nc = input.NumberOfCompounds
+            Dim ns = input.NumberOfStages
+            Dim maxits = input.MaximumIterations
+            Dim tol = input.Tolerances.ToArray()
+            Dim F = input.FeedFlows.ToArray()
+            Dim V = input.VaporFlows.ToArray()
+            Dim L = input.LiquidFlows.ToArray()
+            Dim VSS = input.VaporSideDraws.ToArray()
+            Dim LSS = input.LiquidSideDraws.ToArray()
+            Dim Kval = input.Kvalues.ToArray()
+            Dim Q = input.StageHeats.ToArray()
+            Dim x = input.LiquidCompositions.ToArray()
+            Dim y = input.VaporCompositions.ToArray()
+            Dim z = input.OverallCompositions.ToArray()
+            Dim fc = input.FeedCompositions.ToArray()
+            Dim HF = input.FeedEnthalpies.ToArray()
+            Dim T = input.StageTemperatures.ToArray()
+            Dim P = input.StagePressures.ToArray()
+            Dim eff = input.StageEfficiencies.ToArray()
+
+            Dim L1trials = input.L1trials
+            Dim L2trials = input.L2trials
+            Dim x1trials = input.x1trials
+            Dim x2trials = input.x2trials
+
+            Dim col = input.ColumnObject
+
+            Dim llextractor As Boolean = False
+            Dim myabs As AbsorptionColumn = TryCast(col, AbsorptionColumn)
+            If myabs IsNot Nothing Then
+                If CType(col, AbsorptionColumn).OperationMode = AbsorptionColumn.OpMode.Absorber Then
+                    llextractor = False
+                Else
+                    llextractor = True
+                End If
+            End If
+
+            Dim result As Object() = Solve(col, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P,
+                               input.CondenserType, eff, input.ColumnType, col.PropertyPackage, col.Specs, llextractor)
+
+            Dim output As New ColumnSolverOutputData
+
+            'Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ec, il_err, ic, el_err, dFdXvar}
+
+            With output
+                .FinalError = result(10) + result(12)
+                .IterationsTaken = result(9) + result(11)
+                .StageTemperatures = DirectCast(result(0), Double()).ToList()
+                .VaporFlows = DirectCast(result(1), Double()).ToList()
+                .LiquidFlows = DirectCast(result(2), Double()).ToList()
+                .VaporSideDraws = DirectCast(result(3), Double()).ToList()
+                .LiquidSideDraws = DirectCast(result(4), Double()).ToList()
+                .VaporCompositions = DirectCast(result(5), Double()()).ToList()
+                .LiquidCompositions = DirectCast(result(6), Double()()).ToList()
+                .Kvalues = DirectCast(result(7), Double()()).ToList()
+                .StageHeats = DirectCast(result(8), Double()).ToList()
+            End With
+
+            Return output
 
         End Function
 

@@ -1634,6 +1634,7 @@ Public Class FormMain
         form.Show()
         form.Activate()
 
+        form.FrmStSim1.CurrentFlowsheet = form
         form.FrmStSim1.Init(True)
 
         form.FormSurface.Invalidate()
@@ -2183,6 +2184,7 @@ Public Class FormMain
             form.Show()
             form.Activate()
 
+            form.FrmStSim1.CurrentFlowsheet = form
             form.FrmStSim1.Init(True)
 
             form.FormSurface.Invalidate()
@@ -2717,6 +2719,7 @@ Public Class FormMain
 
         End If
 
+        form.FrmStSim1.CurrentFlowsheet = form
         form.FrmStSim1.Init(True)
 
         Try

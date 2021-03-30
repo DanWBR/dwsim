@@ -245,7 +245,6 @@ Public Class EditingForm_Column
                     gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("DCCondenserDuty"), su.Converter.ConvertFromSI(units.heatflow, .CondenserDuty).ToString(nf), units.heatflow})
             End Select
             gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("DCILIts"), .ic, ""})
-            gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("DCELIts"), .ec, ""})
 
             btnResults.Enabled = .x0.Count > 0
 
