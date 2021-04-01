@@ -3475,7 +3475,7 @@ Namespace UnitOperations
             Dim so As ColumnSolverOutputData = Nothing
 
             If TypeOf Me Is DistillationColumn Then
-                SetColumnSolver(New SolvingMethods.WangHenkeMethod())
+                SetColumnSolver(New SolvingMethods.NaphtaliSandholmMethod())
                 so = Solver.SolveColumn(inputdata)
             ElseIf TypeOf Me Is AbsorptionColumn Then
                 If llextractor Then
@@ -6541,7 +6541,11 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     yc(i)(j) = vc(i)(j) / sumvkj(i)
                 Next
                 For j = 0 To nc - 1
-                    If sumlkj(i) > 0.0# Then xc(i)(j) = lc(i)(j) / sumlkj(i) Else xc(i)(j) = yc(i)(j) / (_pp.AUX_PVAPi(j, Tj(i)) / P(i))
+                    If sumlkj(i) > 0.0# Then
+                        xc(i)(j) = lc(i)(j) / sumlkj(i)
+                    Else
+                        xc(i)(j) = yc(i)(j) / (_pp.AUX_PVAPi(j, Tj(i)) / P(i))
+                    End If
                 Next
             Next
 
@@ -6710,7 +6714,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     If _condtype <> Column.condtype.Full_Reflux Then
                         spfval1 = Log((LSSj(0) * xc(0)(spci1) * _pp.RET_VMM()(spci1) / 1000) / spval1)
                     Else
-                        spfval1 += Log((Vj(0) * yc(0)(spci1) * _pp.RET_VMM()(spci1) / 1000) / spval1)
+                        spfval1 = Log((Vj(0) * yc(0)(spci1) * _pp.RET_VMM()(spci1) / 1000) / spval1)
                     End If
                 Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
                     spfval1 = LSSj(0) * xc(0)(spci1) - spval1

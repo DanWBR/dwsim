@@ -1545,7 +1545,7 @@ Namespace SystemsOfUnits
                 Case "cP"
                     Return value / 1000
                 Case "lbm /[ft.h]"
-                    Return value / 2419.09
+                    Return value / 0.000671968975140001 * 3600
                 Case "kcal/h"
                     Return value / 859.845
                 Case "m"
@@ -1575,7 +1575,7 @@ Namespace SystemsOfUnits
                 Case "ft2/s"
                     Return value / 10.7639
                 Case "lbm/[ft.s]"
-                    Return value / 0.671969
+                    Return value / 0.000671968975140001
                 Case "BTU/h", "BTU/hr"
                     Return value / 3412.14
                 Case "ft"
@@ -2036,7 +2036,7 @@ Namespace SystemsOfUnits
                 Case "Pa.s"
                     Return value
                 Case "lbm /[ft.h]"
-                    Return value * 2419.09
+                    Return value * 0.000671968975140001 / 3600
                 Case "cP"
                     Return value * 1000
                 Case "kcal/h"
@@ -2064,7 +2064,7 @@ Namespace SystemsOfUnits
                 Case "ft2/s"
                     Return value * 10.7639
                 Case "lbm/[ft.s]"
-                    Return value * 0.671969
+                    Return value * 0.000671968975140001
                 Case "BTU/h"
                     Return value * 3412.14
                 Case "ft"

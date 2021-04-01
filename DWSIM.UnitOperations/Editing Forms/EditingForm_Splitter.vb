@@ -278,17 +278,21 @@ Public Class EditingForm_Splitter
         If sender Is tbFlowSpec2 Then uobj.Stream2FlowSpec = su.Converter.ConvertToSI(cbFlowSpec2.SelectedItem.ToString, tbFlowSpec2.Text.ParseExpressionToDouble)
         If sender Is tbRatio1 Then
             uobj.Ratios(0) = tbRatio1.Text.ParseExpressionToDouble()
-            uobj.Ratios(1) = 1.0 - uobj.Ratios(0)
-            tbRatio2.Text = CDbl(uobj.Ratios(1)).ToString("N4")
             TrackBar1.Value = CInt(uobj.Ratios(0) * 100)
-            TrackBar2.Value = CInt(uobj.Ratios(1) * 100)
+            If Not SimObject.GraphicObject.OutputConnectors(2).IsAttached Then
+                uobj.Ratios(1) = 1.0 - uobj.Ratios(0)
+                tbRatio2.Text = CDbl(uobj.Ratios(1)).ToString("N4")
+                TrackBar2.Value = CInt(uobj.Ratios(1) * 100)
+            End If
         End If
         If sender Is tbRatio2 Then
             uobj.Ratios(1) = tbRatio2.Text.ParseExpressionToDouble()
-            uobj.Ratios(0) = 1.0 - uobj.Ratios(1)
-            tbRatio1.Text = CDbl(uobj.Ratios(0)).ToString("N4")
-            TrackBar1.Value = CInt(uobj.Ratios(0) * 100)
             TrackBar2.Value = CInt(uobj.Ratios(1) * 100)
+            If Not SimObject.GraphicObject.OutputConnectors(2).IsAttached Then
+                uobj.Ratios(0) = 1.0 - uobj.Ratios(1)
+                tbRatio1.Text = CDbl(uobj.Ratios(0)).ToString("N4")
+                TrackBar1.Value = CInt(uobj.Ratios(0) * 100)
+            End If
         End If
 
         RequestCalc()
