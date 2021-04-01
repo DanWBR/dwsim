@@ -25,8 +25,7 @@ Domenico Marchese
 Don Harrold
 Dorivaldo Junior
 Doug Palfreyman
-Emanuel Cardoso Santos
-Erika Sarmiento
+Emanuel Santos
 F An
 Filippo Borroni
 Gerry Agnew
@@ -38,7 +37,7 @@ Hep Ingham
 Hugo Burbach
 Hurudza
 Jan Boshoff
-Javier Fontalvo Alzate
+Javier Alzate
 Jens Greimeier
 Jeremiah McAfoose
 Joe Rhodes
@@ -46,7 +45,7 @@ John Gorke
 John Herring
 John Kossik
 Jonathan
-Jose Galen Drury Zamora
+Jose Zamora
 Joseph Attia
 Karen Elrington
 Khairul Anam
@@ -57,8 +56,8 @@ Lewis Estall
 Louis Wibberley
 Luis M. Góngora
 Luiza Martins
-Marcelo Accorsi Miranda
-Marcos A F Silva
+Marcelo Miranda
+Marcos Silva
 Martin Heiser
 Michael Papantoniou
 Mikhail Evtushenko
@@ -67,13 +66,13 @@ Ozmeister
 Parthib Rao
 Petroconsulting Llc
 Philippe Wesel
-Rajesh S Kempegowda
+Rajesh Kempegowda
 Richard Huntington
 Roland Berger
 Rupert Easter
 Ryszard
 Samuel Levinson
-Steven Baltakatei Sandoval
+Steven Sandoval
 Sukin Oh 
 Tayeong Lee
 Václav Babuka

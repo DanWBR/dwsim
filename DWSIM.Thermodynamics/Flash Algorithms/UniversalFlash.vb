@@ -18,6 +18,7 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Math
+Imports System.Xml.Serialization
 Imports DWSIM.Interfaces.Enums
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
@@ -25,6 +26,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
     Public Class UniversalFlash
 
         Inherits FlashAlgorithm
+
+        <XmlIgnore> Public Shared UserDefinedFlash As UserDefinedFlash
 
         Public Sub New()
             MyBase.New
@@ -56,6 +59,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         End Property
 
         Public Overrides Function Flash_PT(Vz() As Double, P As Double, T As Double, PP As PropertyPackage, Optional ReuseKI As Boolean = False, Optional PrevKi() As Double = Nothing) As Object
+
+            If UserDefinedFlash IsNot Nothing AndAlso UserDefinedFlash.PTFlash IsNot Nothing Then
+                Dim result_o = UserDefinedFlash.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                Return result_o
+            End If
 
             Dim Flashtype As String = FlashSettings(FlashSetting.ForceEquilibriumCalculationType)
 
@@ -154,6 +162,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_PH(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
+            If UserDefinedFlash IsNot Nothing AndAlso UserDefinedFlash.PHFlash IsNot Nothing Then
+                Dim result_o = UserDefinedFlash.Flash_PH(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
+                Return result_o
+            End If
+
             Dim Flashtype As String = FlashSettings(FlashSetting.ForceEquilibriumCalculationType)
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
@@ -231,6 +244,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_PS(ByVal Vz As Double(), ByVal P As Double, ByVal S As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
+            If UserDefinedFlash IsNot Nothing AndAlso UserDefinedFlash.PSFlash IsNot Nothing Then
+                Dim result_o = UserDefinedFlash.Flash_PS(Vz, P, S, Tref, PP, ReuseKI, PrevKi)
+                Return result_o
+            End If
+
             Dim Flashtype As String = FlashSettings(FlashSetting.ForceEquilibriumCalculationType)
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
@@ -305,6 +323,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_PV(Vz() As Double, P As Double, V As Double, Tref As Double, PP As PropertyPackage, Optional ReuseKI As Boolean = False, Optional PrevKi() As Double = Nothing) As Object
 
+            If UserDefinedFlash IsNot Nothing AndAlso UserDefinedFlash.PVFlash IsNot Nothing Then
+                Dim result_o = UserDefinedFlash.Flash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
+                Return result_o
+            End If
+
             Dim Flashtype As String = FlashSettings(FlashSetting.ForceEquilibriumCalculationType)
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
@@ -373,6 +396,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         End Function
 
         Public Overrides Function Flash_TV(Vz() As Double, T As Double, V As Double, Pref As Double, PP As PropertyPackage, Optional ReuseKI As Boolean = False, Optional PrevKi() As Double = Nothing) As Object
+
+            If UserDefinedFlash IsNot Nothing AndAlso UserDefinedFlash.TVFlash IsNot Nothing Then
+                Dim result_o = UserDefinedFlash.Flash_TV(Vz, T, V, Pref, PP, ReuseKI, PrevKi)
+                Return result_o
+            End If
 
             Dim Flashtype As String = FlashSettings(FlashSetting.ForceEquilibriumCalculationType)
 
