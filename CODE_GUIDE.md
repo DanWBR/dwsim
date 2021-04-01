@@ -8,7 +8,7 @@ As stated in [this video](https://www.youtube.com/watch?v=Zbs3baMpoBM), the firs
 
 After reading the above paper, you could take a look at the [CAPE-OPEN standards](https://www.colan.org/) for more insight on the data structures and functions required by CAPE-OPEN objects. DWSIM implemented CAPE-OPEN interfaces in later versions. The initial implementation of basic classes (compounds, reactions, material stream, etc) looked like CAPE-OPEN objects, but many functions had to be created and changes had to be done to these initial classes in order to have functional CAPE-OPEN objects as in the most recent versions.
 
-## High-level aspects ##
+## A little History ##
 
 DWSIM is programmed mainly in Visual Basic .NET language, because it was a natural evolution from VBA, which was the language that I (Daniel) was working with at the end of my graduation period. I knew very little about C++/C# at the time. I'm able to understand and write C# and Python code now, but not C++.
 
@@ -107,7 +107,7 @@ The [Flash Algorithm objects](https://github.com/DanWBR/dwsim6/blob/fd71e980d234
 
 The Math libraries contain shared math code, like optimization, regression, sorting and other utility classes.
 
-### DWSIM.Drawing.*
+### DWSIM.Drawing.SkiaSharp
 
 The Drawing libraries contains the code required to draw the objects in the flowsheet, as well as the PFD surface class itself. Every single object in the flowsheet  must have a graphical representation, implementing the [IGraphicObject](https://github.com/DanWBR/dwsim6/blob/windows/DWSIM.Interfaces/IGraphicObject.vb) interface. All simulation objects have a [GraphicObject](https://github.com/DanWBR/dwsim6/blob/windows/DWSIM.Drawing/GraphicObjects/GraphicObject.vb) property which contains the "graphical" part of it. 
 
@@ -127,3 +127,26 @@ The DWSIM.UI.* libraries contains the Cross-Platform UI code. When compiled, the
 
 The DWSIM project contains the Classic UI code. When compiled, it generates the Classic UI executable, **DWSIM.exe**.
 
+## The Flowsheet Object: Structure and Object Dependencies
+
+The Flowsheet Object contains lists for all modeling and simulation-related objects, like Compounds, Streams, Unit Operations, Logical Blocks, Reactions, Reaction Sets, Systems of Units, Python Scripts, the PFD graphical representations of the simulation objects and more.
+
+The objects are interconnected in many ways:
+
+* A Material Stream object holds a reference to a Property Package and for the list of Compounds added to the Flowsheet. Each Phase in the Material Stream has a list of **ICompound** objects, and each of these **ICompound** objects holds a reference to a **ICompoundConstantProperties** object stored in the **SelectedCompounds** list of the Flowsheet object.
+
+* A **Unit Operation** also hols a reference to a Property Package. The Unit Operation also know which streams are connected to it, and can create clones of these streams. Since the Property Package always performs calculations in a Material Stream, these clones can be used to perform intermediate calculations, and the results of these calculations will then be written to the streams connected to the outlet ports.
+
+* The Property Package gets information about the compounds through the Material Stream associated to it, but can also access the Constant Properties of these compounds through a reference to the Flowsheet itself.
+
+* Every Simulation Object has an associated graphical representation (= a ShapeGraphic object). They know each other too!
+
+* Every Simulation Object also holds a reference to the parent **Flowsheet** object, and it is through this reference that it can access the Reactions Reaction Sets, Systems of Units and other information.
+
+<img width="973" alt="flowsheet_structure" src="https://user-images.githubusercontent.com/2669419/113356315-09511280-9310-11eb-9b18-b2cb2706fedf.png">
+
+## The Flowsheet Solver
+
+The **Flowsheet Solver** is a separate entity which resolves the ordering required to solve the flowsheet, calling the calculation routines for each object in the determined sequence and monitoring the solving task for errors.
+
+The [order](https://github.com/DanWBR/dwsim6/blob/a0eb9fdc2be9bb7bde466e4bd0e3219271f57394/DWSIM.FlowsheetSolver/FlowsheetSolver.vb#L772) in which the calculation objects are calculated is defined by the connections between them. The user can also define a custom calculation order before the solver starts.
