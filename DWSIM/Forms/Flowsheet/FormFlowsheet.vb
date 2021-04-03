@@ -409,6 +409,8 @@ Public Class FormFlowsheet
 
     Public Sub FormChild_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
 
+        FrmStSim1.CurrentFlowsheet = Me
+
         Me.WindowState = FormWindowState.Maximized
 
         For Each item In StoredSolutions
@@ -929,15 +931,6 @@ Public Class FormFlowsheet
         Dim wform As New UI.Desktop.Editors.CompoundCreatorWizard(Me)
         wform.SetupAndDisplayPage(1)
 
-    End Sub
-
-    Private Sub ToolStripSplitButton1_ButtonClick(sender As Object, e As EventArgs)
-        If DWSIM.App.IsRunningOnMono Then
-            Me.FrmStSim1 = New FormSimulSettings()
-            Me.FrmStSim1.Show(Me.dckPanel)
-        Else
-            Me.FrmStSim1.Show(Me.dckPanel)
-        End If
     End Sub
 
     Private Sub InspetorDeSolucoesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InspectorTSMI.Click
