@@ -4243,17 +4243,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 Dim errfunc As Double = 1.0E+20
 
-                Dim ival, ubo, lbo As New List(Of Double)
-
-                ival.Add(refluxratio)
-                ival.Add(bottomsrate)
-
-                lbo.Add(0.01)
-                lbo.Add(0.01 * F.Sum)
-
-                ubo.Add(100.0)
-                ubo.Add(F.Sum)
-
                 Dim fbody As Func(Of Double(), Integer, Double, Double) =
                     Function(xvars, mode, tol1)
 
@@ -4379,13 +4368,13 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 vars.Add(New OptSimplexBoundVariable(refluxratio, 0.01, 100.0))
                 vars.Add(New OptSimplexBoundVariable(bottomsrate, 0.01 * F.Sum, F.Sum))
                 simplex.MaxFunEvaluations = maxits
-                simplex.Tolerance = tolerance / 100
+                simplex.Tolerance = tolerance
                 simplex.ComputeMin(Function(xv0)
                                        If Settings.CalculatorStopRequested Then Return errfunc
                                        If errfunc < simplex.Tolerance Then
                                            Return errfunc
                                        End If
-                                       Return fbody.Invoke(xv0, 0, tolerance)
+                                       Return fbody.Invoke(xv0, 0, tolerance / 100)
                                    End Function, vars.ToArray(), 1)
 
                 If errfunc > tolerance Then
@@ -4394,12 +4383,12 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     vars.Add(New OptSimplexBoundVariable(refluxratio, 0.01, 100.0))
                     vars.Add(New OptSimplexBoundVariable(bottomsrate, 0.01 * F.Sum, F.Sum))
                     simplex.MaxFunEvaluations = maxits
-                    simplex.Tolerance = tolerance / 100
+                    simplex.Tolerance = tolerance
                     simplex.ComputeMin(Function(xv0)
                                            If Settings.CalculatorStopRequested Then Return errfunc
                                            If errfunc < simplex.Tolerance Then Return errfunc
-                                           Return fbody.Invoke(xv0, 1, tolerance)
-                                       End Function, vars.ToArray())
+                                           Return fbody.Invoke(xv0, 1, tolerance / 100)
+                                       End Function, vars.ToArray(), 1)
                 End If
 
                 If Double.IsNaN(errfunc) Then
