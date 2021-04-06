@@ -37,7 +37,7 @@ namespace DWSIM.UI.Shared
         public static bool IsValidDouble(string s)
         {
             double d = 0;
-            return double.TryParse(s, NumberStyles.Any & ~NumberStyles.AllowThousands, CultureInfo.InvariantCulture, out d);
+            return double.TryParse(s, NumberStyles.Any & ~NumberStyles.AllowThousands, CultureInfo.InstalledUICulture, out d);
         }
 
         public static int GetEditorFontSize()

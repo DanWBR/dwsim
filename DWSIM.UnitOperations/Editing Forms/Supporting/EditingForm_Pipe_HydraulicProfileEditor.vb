@@ -303,11 +303,11 @@ Imports System.Drawing
 
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PipeHydraulicProfileEditor))
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PipeHydraulicProfileEditor))
         Me.GridMalha = New System.Windows.Forms.DataGridView()
         Me.ColBase = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CMenu1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -347,7 +347,6 @@ Imports System.Drawing
         '
         'GridMalha
         '
-        resources.ApplyResources(Me.GridMalha, "GridMalha")
         Me.GridMalha.AllowUserToAddRows = False
         Me.GridMalha.AllowUserToOrderColumns = True
         Me.GridMalha.AllowUserToResizeRows = False
@@ -365,6 +364,7 @@ Imports System.Drawing
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.GridMalha.DefaultCellStyle = DataGridViewCellStyle2
+        resources.ApplyResources(Me.GridMalha, "GridMalha")
         Me.GridMalha.GridColor = System.Drawing.SystemColors.Control
         Me.GridMalha.MultiSelect = False
         Me.GridMalha.Name = "GridMalha"
@@ -396,62 +396,62 @@ Imports System.Drawing
         '
         'CMenu1
         '
-        resources.ApplyResources(Me.CMenu1, "CMenu1")
         Me.CMenu1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.ToolStripMenuItem3, Me.ToolStripMenuItem4, Me.ToolStripMenuItem5, Me.ToolStripMenuItem6, Me.ToolStripMenuItem7, Me.ToolStripMenuItem8, Me.ToolStripMenuItem9, Me.ToolStripMenuItem10, Me.ToolStripMenuItem11})
         Me.CMenu1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.CMenu1.Name = "ContextMenuStrip1"
         Me.CMenu1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
         Me.CMenu1.ShowImageMargin = False
+        resources.ApplyResources(Me.CMenu1, "CMenu1")
         '
         'ToolStripMenuItem2
         '
-        resources.ApplyResources(Me.ToolStripMenuItem2, "ToolStripMenuItem2")
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+        resources.ApplyResources(Me.ToolStripMenuItem2, "ToolStripMenuItem2")
         '
         'ToolStripMenuItem3
         '
-        resources.ApplyResources(Me.ToolStripMenuItem3, "ToolStripMenuItem3")
         Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
+        resources.ApplyResources(Me.ToolStripMenuItem3, "ToolStripMenuItem3")
         '
         'ToolStripMenuItem4
         '
-        resources.ApplyResources(Me.ToolStripMenuItem4, "ToolStripMenuItem4")
         Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
+        resources.ApplyResources(Me.ToolStripMenuItem4, "ToolStripMenuItem4")
         '
         'ToolStripMenuItem5
         '
-        resources.ApplyResources(Me.ToolStripMenuItem5, "ToolStripMenuItem5")
         Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
+        resources.ApplyResources(Me.ToolStripMenuItem5, "ToolStripMenuItem5")
         '
         'ToolStripMenuItem6
         '
-        resources.ApplyResources(Me.ToolStripMenuItem6, "ToolStripMenuItem6")
         Me.ToolStripMenuItem6.Name = "ToolStripMenuItem6"
+        resources.ApplyResources(Me.ToolStripMenuItem6, "ToolStripMenuItem6")
         '
         'ToolStripMenuItem7
         '
-        resources.ApplyResources(Me.ToolStripMenuItem7, "ToolStripMenuItem7")
         Me.ToolStripMenuItem7.Name = "ToolStripMenuItem7"
+        resources.ApplyResources(Me.ToolStripMenuItem7, "ToolStripMenuItem7")
         '
         'ToolStripMenuItem8
         '
-        resources.ApplyResources(Me.ToolStripMenuItem8, "ToolStripMenuItem8")
         Me.ToolStripMenuItem8.Name = "ToolStripMenuItem8"
+        resources.ApplyResources(Me.ToolStripMenuItem8, "ToolStripMenuItem8")
         '
         'ToolStripMenuItem9
         '
-        resources.ApplyResources(Me.ToolStripMenuItem9, "ToolStripMenuItem9")
         Me.ToolStripMenuItem9.Name = "ToolStripMenuItem9"
+        resources.ApplyResources(Me.ToolStripMenuItem9, "ToolStripMenuItem9")
         '
         'ToolStripMenuItem10
         '
-        resources.ApplyResources(Me.ToolStripMenuItem10, "ToolStripMenuItem10")
         Me.ToolStripMenuItem10.Name = "ToolStripMenuItem10"
+        resources.ApplyResources(Me.ToolStripMenuItem10, "ToolStripMenuItem10")
         '
         'ToolStripMenuItem11
         '
-        resources.ApplyResources(Me.ToolStripMenuItem11, "ToolStripMenuItem11")
         Me.ToolStripMenuItem11.Name = "ToolStripMenuItem11"
+        resources.ApplyResources(Me.ToolStripMenuItem11, "ToolStripMenuItem11")
         '
         'ToolStrip1
         '
@@ -461,81 +461,81 @@ Imports System.Drawing
         '
         'ToolStripButton1
         '
-        resources.ApplyResources(Me.ToolStripButton1, "ToolStripButton1")
         Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.add
+        resources.ApplyResources(Me.ToolStripButton1, "ToolStripButton1")
         Me.ToolStripButton1.Name = "ToolStripButton1"
         '
         'ToolStripButton2
         '
-        resources.ApplyResources(Me.ToolStripButton2, "ToolStripButton2")
         Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton2.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.arrow_up
+        resources.ApplyResources(Me.ToolStripButton2, "ToolStripButton2")
         Me.ToolStripButton2.Name = "ToolStripButton2"
         '
         'ToolStripButton3
         '
-        resources.ApplyResources(Me.ToolStripButton3, "ToolStripButton3")
         Me.ToolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton3.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.delete
+        resources.ApplyResources(Me.ToolStripButton3, "ToolStripButton3")
         Me.ToolStripButton3.Name = "ToolStripButton3"
         '
         'ToolStripButton4
         '
-        resources.ApplyResources(Me.ToolStripButton4, "ToolStripButton4")
         Me.ToolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton4.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.cross
+        resources.ApplyResources(Me.ToolStripButton4, "ToolStripButton4")
         Me.ToolStripButton4.Name = "ToolStripButton4"
         '
         'ToolStripSeparator1
         '
-        resources.ApplyResources(Me.ToolStripSeparator1, "ToolStripSeparator1")
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        resources.ApplyResources(Me.ToolStripSeparator1, "ToolStripSeparator1")
         '
         'ToolStripButton5
         '
-        resources.ApplyResources(Me.ToolStripButton5, "ToolStripButton5")
         Me.ToolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton5.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_tick
+        resources.ApplyResources(Me.ToolStripButton5, "ToolStripButton5")
         Me.ToolStripButton5.Name = "ToolStripButton5"
         '
         'ToolStripSeparator2
         '
-        resources.ApplyResources(Me.ToolStripSeparator2, "ToolStripSeparator2")
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        resources.ApplyResources(Me.ToolStripSeparator2, "ToolStripSeparator2")
         '
         'ToolStripLabel1
         '
-        resources.ApplyResources(Me.ToolStripLabel1, "ToolStripLabel1")
         Me.ToolStripLabel1.Name = "ToolStripLabel1"
+        resources.ApplyResources(Me.ToolStripLabel1, "ToolStripLabel1")
         '
         'ToolStripLabel2
         '
-        resources.ApplyResources(Me.ToolStripLabel2, "ToolStripLabel2")
         Me.ToolStripLabel2.Name = "ToolStripLabel2"
+        resources.ApplyResources(Me.ToolStripLabel2, "ToolStripLabel2")
         '
         'TabControl1
         '
-        resources.ApplyResources(Me.TabControl1, "TabControl1")
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
+        resources.ApplyResources(Me.TabControl1, "TabControl1")
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         '
         'TabPage1
         '
-        resources.ApplyResources(Me.TabPage1, "TabPage1")
         Me.TabPage1.Controls.Add(Me.GridMalha)
         Me.TabPage1.Controls.Add(Me.ToolStrip1)
+        resources.ApplyResources(Me.TabPage1, "TabPage1")
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
         'TabPage2
         '
-        resources.ApplyResources(Me.TabPage2, "TabPage2")
         Me.TabPage2.Controls.Add(Me.KryptonRadioButton2)
         Me.TabPage2.Controls.Add(Me.KryptonRadioButton1)
         Me.TabPage2.Controls.Add(Me.GraphControl)
+        resources.ApplyResources(Me.TabPage2, "TabPage2")
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
@@ -557,14 +557,15 @@ Imports System.Drawing
         Me.GraphControl.BackColor = System.Drawing.Color.WhiteSmoke
         Me.GraphControl.IsAntiAlias = True
         Me.GraphControl.IsAutoScrollRange = True
+        Me.GraphControl.IsShowCopyMessage = False
         Me.GraphControl.Name = "GraphControl"
-        Me.GraphControl.ScrollGrace = 0.0R
-        Me.GraphControl.ScrollMaxX = 0.0R
-        Me.GraphControl.ScrollMaxY = 0.0R
-        Me.GraphControl.ScrollMaxY2 = 0.0R
-        Me.GraphControl.ScrollMinX = 0.0R
-        Me.GraphControl.ScrollMinY = 0.0R
-        Me.GraphControl.ScrollMinY2 = 0.0R
+        Me.GraphControl.ScrollGrace = 0R
+        Me.GraphControl.ScrollMaxX = 0R
+        Me.GraphControl.ScrollMaxY = 0R
+        Me.GraphControl.ScrollMaxY2 = 0R
+        Me.GraphControl.ScrollMinX = 0R
+        Me.GraphControl.ScrollMinY = 0R
+        Me.GraphControl.ScrollMinY2 = 0R
         '
         'PipeHydraulicProfileEditor
         '

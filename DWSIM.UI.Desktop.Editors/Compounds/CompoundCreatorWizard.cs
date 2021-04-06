@@ -109,7 +109,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             var dl = c.GetDefaultContainer();
             dl.Height = Height;
-            dl.Width = Width;
+            dl.Width = Width - 20;
 
             var ctypes = new string[] { "Default", "Simplified", "Electrolyte", "Black-Oil" };
 
@@ -224,7 +224,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             page2.Init(Width, Height);
 
-            dl.Width = Width;
+            dl.Width = Width - 20;
 
             dl.CreateAndAddLabelRow("Identification");
             dl.CreateAndAddStringEditorRow("Compound Name", comp.Name, (sender, e) => comp.Name = sender.Text);
@@ -292,7 +292,7 @@ namespace DWSIM.UI.Desktop.Editors
             page2.Init(Width, Height);
 
             var dl = c.GetDefaultContainer();
-            dl.Width = Width;
+            dl.Width = Width - 20;
 
             switch (comptype)
             {
@@ -463,7 +463,7 @@ namespace DWSIM.UI.Desktop.Editors
             page.Init(Width, Height);
 
             var dl = c.GetDefaultContainer();
-            dl.Width = Width;
+            dl.Width = Width - 20;
 
             c.CreateAndAddLabelRow(dl, "UNIFAC Structure");
             c.CreateAndAddCheckBoxRow(dl, "Estimate Constant Properties from UNIFAC structure information", estimatefromunifac, (sender, e) => estimatefromunifac = sender.Checked.GetValueOrDefault());
@@ -527,7 +527,7 @@ namespace DWSIM.UI.Desktop.Editors
             page.Init(Width, Height);
 
             var dl = c.GetDefaultContainer();
-            dl.Width = Width;
+            dl.Width = Width - 20;
 
             if (estimatefromunifac) EstimateFromUNIFAC();
 
@@ -646,7 +646,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             var dl = c.GetDefaultContainer();
             dl.Height = Height;
-            dl.Width = Width;
+            dl.Width = Width - 20;
 
             c.CreateAndAddLabelRow2(dl, "For temperature-dependent properties, you can let DWSIM estimate them or input an expression using T as variable. Use dot ('.') as the decimal separator when entering numerical values.");
 
@@ -850,7 +850,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             var dl = c.GetDefaultContainer();
             dl.Height = Height;
-            dl.Width = Width;
+            dl.Width = Width - 20;
 
             dl.CreateAndAddLabelRow("Export Options");
 

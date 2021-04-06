@@ -50,7 +50,7 @@ Namespace UnitOperations
         Protected m_selectedflowpackage As FlowPackage = FlowPackage.Beggs_Brill
         Protected m_dp As Nullable(Of Double)
         Protected m_dt As Nullable(Of Double)
-        Protected m_DQ As Nullable(Of Double)
+        Protected m_dq As Nullable(Of Double)
 
         Protected m_tolP As Double = 100
         Protected m_tolT As Double = 0.01
