@@ -3228,7 +3228,7 @@ Namespace UnitOperations
                         Kval(i) = pp.DW_CalcKvalue(x(i), y(i), T(i), P(i))
                     Next
 
-                    LSS(0) = 0
+                    'LSS(0) = 0
                     VSS(0) = 0
                     LSS(ns) = 0
 
@@ -3475,7 +3475,7 @@ Namespace UnitOperations
             Dim so As ColumnSolverOutputData = Nothing
 
             If TypeOf Me Is DistillationColumn Then
-                SetColumnSolver(New SolvingMethods.NaphtaliSandholmMethod())
+                SetColumnSolver(New SolvingMethods.WangHenkeMethod())
                 so = Solver.SolveColumn(inputdata)
             ElseIf TypeOf Me Is AbsorptionColumn Then
                 If llextractor Then
@@ -5306,19 +5306,19 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 'check for trivial solutions
 
-                For i = 0 To ns
-                    If pp.AUX_CheckTrivial(K(i), 0.05) Then
-                        Tj(i) = Tj_ant(i)
-                        K(i) = pp.DW_CalcKvalue_Ideal_Wilson(Tj(i), P(i))
-                        xc(i) = K(i).DivideY(yc(i))
-                        For j = 0 To nc - 1
-                            If Double.IsInfinity(xc(i)(j)) Then
-                                xc(i)(j) = 0.0
-                            End If
-                        Next
-                        xc(i) = xc(i).NormalizeY()
-                    End If
-                Next
+                'For i = 0 To ns
+                '    If pp.AUX_CheckTrivial(K(i), 0.05) Then
+                '        Tj(i) = Tj_ant(i)
+                '        K(i) = pp.DW_CalcKvalue_Ideal_Wilson(Tj(i), P(i))
+                '        xc(i) = K(i).DivideY(yc(i))
+                '        For j = 0 To nc - 1
+                '            If Double.IsInfinity(xc(i)(j)) Then
+                '                xc(i)(j) = 0.0
+                '            End If
+                '        Next
+                '        xc(i) = xc(i).NormalizeY()
+                '    End If
+                'Next
 
                 IObj2?.Paragraphs.Add(String.Format("Updated Temperatures: {0}", Tj.ToMathArrayString))
 
