@@ -24,6 +24,7 @@ Imports System.Linq
 Imports DWSIM.MathOps.MathEx
 Imports DWSIM.MathOps.MathEx.Common
 Imports Ciloci.Flee
+Imports DWSIM.Interfaces.Enums
 
 Namespace PropertyPackages
 
@@ -107,6 +108,19 @@ Namespace PropertyPackages
             Return Me.m_elec.LiquidDensity(RET_VMOL(phase), T, constprops)
 
         End Function
+
+        Public Overrides Function AUX_Z(Vx() As Double, T As Double, P As Double, state As PhaseName) As Double
+
+            If state = PhaseName.Liquid Then
+                Dim result = m_elec.LiquidDensity(Vx, T, DW_GetConstantProperties())
+                Return 1 / (8.314 * result * 1000 / Me.AUX_MMM(Vx) * T / P)
+            Else
+                Return 1.0
+            End If
+
+
+        End Function
+
 
         Public Function RET_KIJ(ByVal id1 As String, ByVal id2 As String) As Double
             Return 0
@@ -311,19 +325,19 @@ Namespace PropertyPackages
                     For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
                         subst.PartialVolume = subst.ConstantProperties.Molar_Weight / AUX_LIQDENSi(subst, T)
                     Next
-                Case phase.Aqueous
+                Case Phase.Aqueous
                     For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(6).Compounds.Values
                         subst.PartialVolume = subst.ConstantProperties.Molar_Weight / AUX_LIQDENSi(subst, T)
                     Next
-                Case phase.Liquid1
+                Case Phase.Liquid1
                     For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(3).Compounds.Values
                         subst.PartialVolume = subst.ConstantProperties.Molar_Weight / AUX_LIQDENSi(subst, T)
                     Next
-                Case phase.Liquid2
+                Case Phase.Liquid2
                     For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(4).Compounds.Values
                         subst.PartialVolume = subst.ConstantProperties.Molar_Weight / AUX_LIQDENSi(subst, T)
                     Next
-                Case phase.Liquid3
+                Case Phase.Liquid3
                     For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(5).Compounds.Values
                         subst.PartialVolume = subst.ConstantProperties.Molar_Weight / AUX_LIQDENSi(subst, T)
                     Next

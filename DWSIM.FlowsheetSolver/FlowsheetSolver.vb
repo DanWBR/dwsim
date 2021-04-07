@@ -1692,7 +1692,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                 Dim n As Integer = 0
 
                 For Each adj As IAdjust In fbag.SimulationObjects.Values.Where(Function(a) TypeOf a Is IAdjust)
-                    If adj.SimultaneousAdjust Then n += 1
+                    If adj.SimultaneousAdjust And DirectCast(adj, ISimulationObject).GraphicObject.Active Then n += 1
                 Next
 
                 If n > 0 Then
@@ -1708,7 +1708,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
                     i = 0
                     For Each adj As IAdjust In fbag.SimulationObjects.Values.Where(Function(a) TypeOf a Is IAdjust)
-                        If adj.SimultaneousAdjust Then
+                        If adj.SimultaneousAdjust And DirectCast(adj, ISimulationObject).GraphicObject.Active Then
                             x(i) = GetMnpVarValue(fobj, adj)
                             tols(i) = adj.Tolerance
                             i += 1
@@ -1801,7 +1801,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
             Dim n As Integer = 0
 
             For Each adj As IAdjust In fbag.SimulationObjects.Values.Where(Function(a) TypeOf a Is IAdjust)
-                If adj.SimultaneousAdjust Then n += 1
+                If adj.SimultaneousAdjust And DirectCast(adj, ISimulationObject).GraphicObject.Active Then n += 1
             Next
 
             If n > 0 Then
@@ -1817,7 +1817,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
                 i = 0
                 For Each adj As IAdjust In fbag.SimulationObjects.Values.Where(Function(a) TypeOf a Is IAdjust)
-                    If adj.SimultaneousAdjust Then
+                    If adj.SimultaneousAdjust And DirectCast(adj, ISimulationObject).GraphicObject.Active Then
                         x(i) = GetMnpVarValue(fobj, adj)
                         tols(i) = adj.Tolerance
                         i += 1
@@ -1899,7 +1899,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
         Dim i As Integer = 0
         For Each adj As IAdjust In fbag.SimulationObjects.Values.Where(Function(a) TypeOf a Is IAdjust)
-            If adj.SimultaneousAdjust Then
+            If adj.SimultaneousAdjust And DirectCast(adj, ISimulationObject).GraphicObject.Active Then
                 SetMnpVarValue(x(i), fobj, adj)
                 i += 1
             End If
@@ -1912,7 +1912,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
         Dim fx(x.Length - 1) As Double
         i = 0
         For Each adj As IAdjust In fbag.SimulationObjects.Values.Where(Function(a) TypeOf a Is IAdjust)
-            If adj.SimultaneousAdjust Then
+            If adj.SimultaneousAdjust And DirectCast(adj, ISimulationObject).GraphicObject.Active Then
                 Dim adjvalue As Double
                 Dim punit = fbag.SimulationObjects(adj.ControlledObjectData.ID).GetPropertyUnit(adj.ControlledObjectData.PropertyName, fbag.FlowsheetOptions.SelectedUnitSystem)
                 If adj.Referenced Then
@@ -1989,7 +1989,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
         Dim i As Integer = 0
         For Each adj As IAdjust In fbag.SimulationObjects.Values.Where(Function(a) TypeOf a Is IAdjust)
-            If adj.SimultaneousAdjust Then
+            If adj.SimultaneousAdjust And DirectCast(adj, ISimulationObject).GraphicObject.Active Then
                 SetMnpVarValue(x(i), fobj, adj)
                 i += 1
             End If
@@ -2002,18 +2002,20 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
         Dim fx(x.Length - 1) As Double
         i = 0
         For Each adj As IAdjust In fbag.SimulationObjects.Values.Where(Function(a) TypeOf a Is IAdjust)
-            Dim adjvalue As Double
-            Dim punit = fbag.SimulationObjects(adj.ControlledObjectData.ID).GetPropertyUnit(adj.ControlledObjectData.PropertyName, fbag.FlowsheetOptions.SelectedUnitSystem)
-            If adj.Referenced Then
-                If fbag.FlowsheetOptions.SelectedUnitSystem.GetUnitType(punit) = UnitOfMeasure.temperature Then
-                    adjvalue = cv.ConvertFromSI(punit & ".", adj.AdjustValue)
+            If adj.SimultaneousAdjust And DirectCast(adj, ISimulationObject).GraphicObject.Active Then
+                Dim adjvalue As Double
+                Dim punit = fbag.SimulationObjects(adj.ControlledObjectData.ID).GetPropertyUnit(adj.ControlledObjectData.PropertyName, fbag.FlowsheetOptions.SelectedUnitSystem)
+                If adj.Referenced Then
+                    If fbag.FlowsheetOptions.SelectedUnitSystem.GetUnitType(punit) = UnitOfMeasure.temperature Then
+                        adjvalue = cv.ConvertFromSI(punit & ".", adj.AdjustValue)
+                    Else
+                        adjvalue = cv.ConvertFromSI(punit, adj.AdjustValue)
+                    End If
+                    fx(i) = adjvalue + GetRefVarValue(fobj, adj) - GetCtlVarValue(fobj, adj)
                 Else
-                    adjvalue = cv.ConvertFromSI(punit, adj.AdjustValue)
+                    adjvalue = cv.ConvertFromSI(fbag.SimulationObjects(adj.ControlledObjectData.ID).GetPropertyUnit(adj.ControlledObjectData.PropertyName, fbag.FlowsheetOptions.SelectedUnitSystem), adj.AdjustValue)
+                    fx(i) = adjvalue - GetCtlVarValue(fobj, adj)
                 End If
-                fx(i) = adjvalue + GetRefVarValue(fobj, adj) - GetCtlVarValue(fobj, adj)
-            Else
-                adjvalue = cv.ConvertFromSI(fbag.SimulationObjects(adj.ControlledObjectData.ID).GetPropertyUnit(adj.ControlledObjectData.PropertyName, fbag.FlowsheetOptions.SelectedUnitSystem), adj.AdjustValue)
-                fx(i) = adjvalue - GetCtlVarValue(fobj, adj)
             End If
         Next
 

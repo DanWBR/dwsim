@@ -639,14 +639,6 @@ Namespace PropertyPackages
             End Get
         End Property
 
-        Public Overrides Function AUX_Z(Vx() As Double, T As Double, P As Double, state As PhaseName) As Double
-
-            Dim result = Me.AUX_LIQDENS(T, Vx, P)
-
-            Return 1 / (8.314 * result * 1000 / Me.AUX_MMM(Vx) * T / P)
-
-        End Function
-
     End Class
 
 End Namespace
