@@ -668,9 +668,16 @@ Public Module General
         If Double.IsNaN(d) Or Double.IsInfinity(d) Then Return False Else Return True
     End Function
 
-    <System.Runtime.CompilerServices.Extension()> _
+    <System.Runtime.CompilerServices.Extension()>
     Public Function IsValid(d As Nullable(Of Double)) As Boolean
         If Double.IsNaN(d.GetValueOrDefault) Or Double.IsInfinity(d.GetValueOrDefault) Then Return False Else Return True
+    End Function
+
+    <System.Runtime.CompilerServices.Extension()>
+    Public Function IsValid(d As Double()) As Boolean
+
+        Return d.Where(Function(d0) Double.IsNaN(d0) Or Double.IsInfinity(d0)).Count = 0
+
     End Function
 
     <System.Runtime.CompilerServices.Extension()> _

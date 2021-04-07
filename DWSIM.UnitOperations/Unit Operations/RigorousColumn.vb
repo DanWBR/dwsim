@@ -330,6 +330,8 @@ Namespace UnitOperations.Auxiliary.SepOps
 
             If _stagetemps.Select(Function(x) x.Value).ToArray().Sum = 0.0 Then Return False
 
+            If Not _stagetemps.Select(Function(x) x.Value).ToArray().IsValid Then Return False
+
             Return True
 
         End Function
@@ -339,6 +341,8 @@ Namespace UnitOperations.Auxiliary.SepOps
             If _vapmolflows.Count = 0 Then Return False
 
             If _vapmolflows.Select(Function(x) x.Value).ToArray().Sum = 0.0 Then Return False
+
+            If Not _vapmolflows.Select(Function(x) x.Value).ToArray().IsValid Then Return False
 
             Return True
 
@@ -350,6 +354,8 @@ Namespace UnitOperations.Auxiliary.SepOps
 
             If _liqmolflows.Select(Function(x) x.Value).ToArray().Sum = 0.0 Then Return False
 
+            If Not _liqmolflows.Select(Function(x) x.Value).ToArray().IsValid Then Return False
+
             Return True
 
         End Function
@@ -360,6 +366,12 @@ Namespace UnitOperations.Auxiliary.SepOps
                 Return False
             End If
             If _vapcompositions.Select(Function(x) x.Values.Select(Function(x2) x2.Value).Sum).Sum = 0.0 Then
+                Return False
+            End If
+            If Not _liqcompositions.Select(Function(x) x.Values.Select(Function(x2) x2.Value).Sum).ToArray().IsValid Then
+                Return False
+            End If
+            If Not _vapcompositions.Select(Function(x) x.Values.Select(Function(x2) x2.Value).Sum).ToArray().IsValid Then
                 Return False
             End If
 
@@ -3475,8 +3487,17 @@ Namespace UnitOperations
             Dim so As ColumnSolverOutputData = Nothing
 
             If TypeOf Me Is DistillationColumn Then
-                SetColumnSolver(New SolvingMethods.WangHenkeMethod())
-                so = Solver.SolveColumn(inputdata)
+                Dim solvererror = True
+                Try
+                    SetColumnSolver(New SolvingMethods.WangHenkeMethod())
+                    so = Solver.SolveColumn(inputdata)
+                    solvererror = False
+                Catch ex As Exception
+                End Try
+                If solvererror Then
+                    SetColumnSolver(New SolvingMethods.NaphtaliSandholmMethod())
+                    so = Solver.SolveColumn(inputdata)
+                End If
             ElseIf TypeOf Me Is AbsorptionColumn Then
                 If llextractor Then
                     'run all trial compositions until it solves
@@ -3540,24 +3561,27 @@ Namespace UnitOperations
             'if enabled, auto update initial estimates
 
             If Me.AutoUpdateInitialEstimates Then
-                InitialEstimates.VaporProductFlowRate = Vf(0)
-                InitialEstimates.DistillateFlowRate = LSSf(0)
-                InitialEstimates.BottomsFlowRate = Lf(0)
-                For i = 0 To Me.Stages.Count - 1
-                    Me.InitialEstimates.StageTemps(i).Value = Tf(i)
-                    Me.InitialEstimates.VapMolarFlows(i).Value = Vf(i)
-                    Me.InitialEstimates.LiqMolarFlows(i).Value = Lf(i)
-                    j = 0
-                    For Each par As Parameter In Me.InitialEstimates.LiqCompositions(i).Values
-                        par.Value = xf(i)(j)
-                        j = j + 1
+                'check if initial estimates are valid
+                If Vf.IsValid And Lf.IsValid And LSSf.IsValid And Tf.IsValid Then
+                    InitialEstimates.VaporProductFlowRate = Vf(0)
+                    InitialEstimates.DistillateFlowRate = LSSf(0)
+                    InitialEstimates.BottomsFlowRate = Lf(0)
+                    For i = 0 To Me.Stages.Count - 1
+                        Me.InitialEstimates.StageTemps(i).Value = Tf(i)
+                        Me.InitialEstimates.VapMolarFlows(i).Value = Vf(i)
+                        Me.InitialEstimates.LiqMolarFlows(i).Value = Lf(i)
+                        j = 0
+                        For Each par As Parameter In Me.InitialEstimates.LiqCompositions(i).Values
+                            par.Value = xf(i)(j)
+                            j = j + 1
+                        Next
+                        j = 0
+                        For Each par As Parameter In Me.InitialEstimates.VapCompositions(i).Values
+                            par.Value = yf(i)(j)
+                            j = j + 1
+                        Next
                     Next
-                    j = 0
-                    For Each par As Parameter In Me.InitialEstimates.VapCompositions(i).Values
-                        par.Value = yf(i)(j)
-                        j = j + 1
-                    Next
-                Next
+                End If
             End If
 
             'update stage temperatures
@@ -5198,7 +5222,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                             End If
                         Next
                     Else
-                        If ic < 5 Then
+                        If ic < 5 Or ic > 100 Then
                             For i = 0 To ns
                                 Tj(i) = Tj(i) / 2 + Tj_ant(i) / 2
                             Next
@@ -5525,9 +5549,13 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 ic = ic + 1
 
                 If Not IdealH And Not IdealK Then
-                    If ic >= maxits Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCMaxIterationsReached"))
+                    If ic >= maxits Then
+                        Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCMaxIterationsReached"))
+                    End If
                 End If
-                If Double.IsNaN(t_error) Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
+                If Not Tj.IsValid Or Not Vj.IsValid Or Not Lj.IsValid Then
+                    Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
+                End If
                 If ic = stopatitnumber - 1 Then Exit Do
 
                 pp.CurrentMaterialStream.Flowsheet.CheckStatus()
