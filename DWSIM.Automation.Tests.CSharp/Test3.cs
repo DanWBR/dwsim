@@ -10,16 +10,27 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DWSIM.Automation.Tests.CSharp
+public class Test3
 {
-    public class Test3
+    [STAThread]
+    static void Main()
     {
-        [STAThread]
-        static void Main()
-        {
-           
-        }
 
+        System.IO.Directory.SetCurrentDirectory(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+
+        //create automation manager
+
+        var interf = new DWSIM.Automation.Automation2();
+
+        var sim = interf.LoadFlowsheet(@"");
+
+        sim.SetMessageListener((s, mt) => Console.WriteLine(s));
+
+        var errors = interf.CalculateFlowsheet2(sim);
+
+        Console.WriteLine("Solved.");
+
+        Console.ReadLine();
     }
 
 }

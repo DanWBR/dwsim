@@ -25,9 +25,9 @@ Partial Class EditingForm_Column
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_Column))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.lblTag = New System.Windows.Forms.TextBox()
         Me.chkActive = New System.Windows.Forms.CheckBox()
@@ -40,15 +40,6 @@ Partial Class EditingForm_Column
         Me.cbPropPack = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TabContainerSpecification = New System.Windows.Forms.TabControl()
-        Me.TabGeneral = New System.Windows.Forms.TabPage()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.tbConvTol = New System.Windows.Forms.TextBox()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.cbAbsorberMode = New System.Windows.Forms.ComboBox()
-        Me.tbMaxIt = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.tbNStages = New System.Windows.Forms.TextBox()
         Me.TabCondenser = New System.Windows.Forms.TabPage()
         Me.chkNoCondenser = New System.Windows.Forms.CheckBox()
         Me.PanelCondenser = New System.Windows.Forms.Panel()
@@ -81,43 +72,44 @@ Partial Class EditingForm_Column
         Me.Label17 = New System.Windows.Forms.Label()
         Me.cbRebPressure = New System.Windows.Forms.ComboBox()
         Me.tbRebPressure = New System.Windows.Forms.TextBox()
-        Me.TabControl2 = New System.Windows.Forms.TabControl()
-        Me.TabConnections = New System.Windows.Forms.TabPage()
-        Me.TabStages = New System.Windows.Forms.TabPage()
-        Me.TabInitialEstimates = New System.Windows.Forms.TabPage()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.tbConvTol = New System.Windows.Forms.TextBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.cbAbsorberMode = New System.Windows.Forms.ComboBox()
+        Me.tbMaxIt = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.tbNStages = New System.Windows.Forms.TextBox()
         Me.InitialEstimatesPanel = New System.Windows.Forms.Panel()
         Me.chkUseIE_C = New System.Windows.Forms.CheckBox()
         Me.chkUseIE_VF = New System.Windows.Forms.CheckBox()
         Me.chkUseIE_LF = New System.Windows.Forms.CheckBox()
         Me.chkUseIE_T = New System.Windows.Forms.CheckBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.tabstrip1 = New System.Windows.Forms.TabControl()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.btnResults = New System.Windows.Forms.Button()
         Me.gridResults = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabContainerAll = New System.Windows.Forms.TabControl()
+        Me.TabPage6 = New System.Windows.Forms.TabPage()
+        Me.TabStages = New System.Windows.Forms.TabPage()
+        Me.TabConnections = New System.Windows.Forms.TabPage()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox5.SuspendLayout()
         Me.TabContainerSpecification.SuspendLayout()
-        Me.TabGeneral.SuspendLayout()
         Me.TabCondenser.SuspendLayout()
         Me.PanelCondenser.SuspendLayout()
         Me.TabReboiler.SuspendLayout()
         Me.PanelReboiler.SuspendLayout()
-        Me.TabControl2.SuspendLayout()
-        Me.TabInitialEstimates.SuspendLayout()
-        Me.tabstrip1.SuspendLayout()
-        Me.TabPage1.SuspendLayout()
         CType(Me.gridResults, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabContainerAll.SuspendLayout()
+        Me.TabPage6.SuspendLayout()
         Me.TabPage2.SuspendLayout()
-        Me.TabPage3.SuspendLayout()
+        Me.TabPage5.SuspendLayout()
         Me.TabPage4.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -226,7 +218,6 @@ Partial Class EditingForm_Column
         'TabContainerSpecification
         '
         resources.ApplyResources(Me.TabContainerSpecification, "TabContainerSpecification")
-        Me.TabContainerSpecification.Controls.Add(Me.TabGeneral)
         Me.TabContainerSpecification.Controls.Add(Me.TabCondenser)
         Me.TabContainerSpecification.Controls.Add(Me.TabReboiler)
         Me.TabContainerSpecification.Name = "TabContainerSpecification"
@@ -234,93 +225,6 @@ Partial Class EditingForm_Column
         Me.ToolTipChangeTag.SetToolTip(Me.TabContainerSpecification, resources.GetString("TabContainerSpecification.ToolTip"))
         Me.ToolTip1.SetToolTip(Me.TabContainerSpecification, resources.GetString("TabContainerSpecification.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.TabContainerSpecification, resources.GetString("TabContainerSpecification.ToolTip2"))
-        '
-        'TabGeneral
-        '
-        resources.ApplyResources(Me.TabGeneral, "TabGeneral")
-        Me.TabGeneral.Controls.Add(Me.Label16)
-        Me.TabGeneral.Controls.Add(Me.tbConvTol)
-        Me.TabGeneral.Controls.Add(Me.btnConfigurePP)
-        Me.TabGeneral.Controls.Add(Me.Label14)
-        Me.TabGeneral.Controls.Add(Me.cbAbsorberMode)
-        Me.TabGeneral.Controls.Add(Me.tbMaxIt)
-        Me.TabGeneral.Controls.Add(Me.cbPropPack)
-        Me.TabGeneral.Controls.Add(Me.Label9)
-        Me.TabGeneral.Controls.Add(Me.Label6)
-        Me.TabGeneral.Controls.Add(Me.Label1)
-        Me.TabGeneral.Controls.Add(Me.tbNStages)
-        Me.TabGeneral.Name = "TabGeneral"
-        Me.ToolTip1.SetToolTip(Me.TabGeneral, resources.GetString("TabGeneral.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.TabGeneral, resources.GetString("TabGeneral.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.TabGeneral, resources.GetString("TabGeneral.ToolTip2"))
-        Me.TabGeneral.UseVisualStyleBackColor = True
-        '
-        'Label16
-        '
-        resources.ApplyResources(Me.Label16, "Label16")
-        Me.Label16.Name = "Label16"
-        Me.ToolTip1.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip2"))
-        '
-        'tbConvTol
-        '
-        resources.ApplyResources(Me.tbConvTol, "tbConvTol")
-        Me.tbConvTol.Name = "tbConvTol"
-        Me.ToolTipValues.SetToolTip(Me.tbConvTol, resources.GetString("tbConvTol.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.tbConvTol, resources.GetString("tbConvTol.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.tbConvTol, resources.GetString("tbConvTol.ToolTip2"))
-        '
-        'Label14
-        '
-        resources.ApplyResources(Me.Label14, "Label14")
-        Me.Label14.Name = "Label14"
-        Me.ToolTip1.SetToolTip(Me.Label14, resources.GetString("Label14.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label14, resources.GetString("Label14.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label14, resources.GetString("Label14.ToolTip2"))
-        '
-        'cbAbsorberMode
-        '
-        resources.ApplyResources(Me.cbAbsorberMode, "cbAbsorberMode")
-        Me.cbAbsorberMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbAbsorberMode.FormattingEnabled = True
-        Me.cbAbsorberMode.Items.AddRange(New Object() {resources.GetString("cbAbsorberMode.Items"), resources.GetString("cbAbsorberMode.Items1")})
-        Me.cbAbsorberMode.Name = "cbAbsorberMode"
-        Me.ToolTip1.SetToolTip(Me.cbAbsorberMode, resources.GetString("cbAbsorberMode.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.cbAbsorberMode, resources.GetString("cbAbsorberMode.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.cbAbsorberMode, resources.GetString("cbAbsorberMode.ToolTip2"))
-        '
-        'tbMaxIt
-        '
-        resources.ApplyResources(Me.tbMaxIt, "tbMaxIt")
-        Me.tbMaxIt.Name = "tbMaxIt"
-        Me.ToolTipValues.SetToolTip(Me.tbMaxIt, resources.GetString("tbMaxIt.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.tbMaxIt, resources.GetString("tbMaxIt.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.tbMaxIt, resources.GetString("tbMaxIt.ToolTip2"))
-        '
-        'Label6
-        '
-        resources.ApplyResources(Me.Label6, "Label6")
-        Me.Label6.Name = "Label6"
-        Me.ToolTip1.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip2"))
-        '
-        'Label1
-        '
-        resources.ApplyResources(Me.Label1, "Label1")
-        Me.Label1.Name = "Label1"
-        Me.ToolTip1.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip2"))
-        '
-        'tbNStages
-        '
-        resources.ApplyResources(Me.tbNStages, "tbNStages")
-        Me.tbNStages.Name = "tbNStages"
-        Me.ToolTipValues.SetToolTip(Me.tbNStages, resources.GetString("tbNStages.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.tbNStages, resources.GetString("tbNStages.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.tbNStages, resources.GetString("tbNStages.ToolTip2"))
         '
         'TabCondenser
         '
@@ -649,49 +553,72 @@ Partial Class EditingForm_Column
         Me.ToolTip1.SetToolTip(Me.tbRebPressure, resources.GetString("tbRebPressure.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.tbRebPressure, resources.GetString("tbRebPressure.ToolTip2"))
         '
-        'TabControl2
+        'Label16
         '
-        resources.ApplyResources(Me.TabControl2, "TabControl2")
-        Me.TabControl2.Controls.Add(Me.TabConnections)
-        Me.TabControl2.Controls.Add(Me.TabStages)
-        Me.TabControl2.Controls.Add(Me.TabInitialEstimates)
-        Me.TabControl2.Name = "TabControl2"
-        Me.TabControl2.SelectedIndex = 0
-        Me.ToolTipChangeTag.SetToolTip(Me.TabControl2, resources.GetString("TabControl2.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.TabControl2, resources.GetString("TabControl2.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.TabControl2, resources.GetString("TabControl2.ToolTip2"))
+        resources.ApplyResources(Me.Label16, "Label16")
+        Me.Label16.Name = "Label16"
+        Me.ToolTip1.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip2"))
         '
-        'TabConnections
+        'tbConvTol
         '
-        resources.ApplyResources(Me.TabConnections, "TabConnections")
-        Me.TabConnections.Name = "TabConnections"
-        Me.ToolTip1.SetToolTip(Me.TabConnections, resources.GetString("TabConnections.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.TabConnections, resources.GetString("TabConnections.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.TabConnections, resources.GetString("TabConnections.ToolTip2"))
-        Me.TabConnections.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.tbConvTol, "tbConvTol")
+        Me.tbConvTol.Name = "tbConvTol"
+        Me.ToolTipValues.SetToolTip(Me.tbConvTol, resources.GetString("tbConvTol.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbConvTol, resources.GetString("tbConvTol.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbConvTol, resources.GetString("tbConvTol.ToolTip2"))
         '
-        'TabStages
+        'Label14
         '
-        resources.ApplyResources(Me.TabStages, "TabStages")
-        Me.TabStages.Name = "TabStages"
-        Me.ToolTip1.SetToolTip(Me.TabStages, resources.GetString("TabStages.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.TabStages, resources.GetString("TabStages.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.TabStages, resources.GetString("TabStages.ToolTip2"))
-        Me.TabStages.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.Label14, "Label14")
+        Me.Label14.Name = "Label14"
+        Me.ToolTip1.SetToolTip(Me.Label14, resources.GetString("Label14.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label14, resources.GetString("Label14.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label14, resources.GetString("Label14.ToolTip2"))
         '
-        'TabInitialEstimates
+        'cbAbsorberMode
         '
-        resources.ApplyResources(Me.TabInitialEstimates, "TabInitialEstimates")
-        Me.TabInitialEstimates.Controls.Add(Me.InitialEstimatesPanel)
-        Me.TabInitialEstimates.Controls.Add(Me.chkUseIE_C)
-        Me.TabInitialEstimates.Controls.Add(Me.chkUseIE_VF)
-        Me.TabInitialEstimates.Controls.Add(Me.chkUseIE_LF)
-        Me.TabInitialEstimates.Controls.Add(Me.chkUseIE_T)
-        Me.TabInitialEstimates.Name = "TabInitialEstimates"
-        Me.ToolTip1.SetToolTip(Me.TabInitialEstimates, resources.GetString("TabInitialEstimates.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.TabInitialEstimates, resources.GetString("TabInitialEstimates.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.TabInitialEstimates, resources.GetString("TabInitialEstimates.ToolTip2"))
-        Me.TabInitialEstimates.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cbAbsorberMode, "cbAbsorberMode")
+        Me.cbAbsorberMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbAbsorberMode.FormattingEnabled = True
+        Me.cbAbsorberMode.Items.AddRange(New Object() {resources.GetString("cbAbsorberMode.Items"), resources.GetString("cbAbsorberMode.Items1")})
+        Me.cbAbsorberMode.Name = "cbAbsorberMode"
+        Me.ToolTip1.SetToolTip(Me.cbAbsorberMode, resources.GetString("cbAbsorberMode.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbAbsorberMode, resources.GetString("cbAbsorberMode.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbAbsorberMode, resources.GetString("cbAbsorberMode.ToolTip2"))
+        '
+        'tbMaxIt
+        '
+        resources.ApplyResources(Me.tbMaxIt, "tbMaxIt")
+        Me.tbMaxIt.Name = "tbMaxIt"
+        Me.ToolTipValues.SetToolTip(Me.tbMaxIt, resources.GetString("tbMaxIt.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbMaxIt, resources.GetString("tbMaxIt.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbMaxIt, resources.GetString("tbMaxIt.ToolTip2"))
+        '
+        'Label6
+        '
+        resources.ApplyResources(Me.Label6, "Label6")
+        Me.Label6.Name = "Label6"
+        Me.ToolTip1.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip2"))
+        '
+        'Label1
+        '
+        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.Name = "Label1"
+        Me.ToolTip1.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip2"))
+        '
+        'tbNStages
+        '
+        resources.ApplyResources(Me.tbNStages, "tbNStages")
+        Me.tbNStages.Name = "tbNStages"
+        Me.ToolTipValues.SetToolTip(Me.tbNStages, resources.GetString("tbNStages.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbNStages, resources.GetString("tbNStages.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbNStages, resources.GetString("tbNStages.ToolTip2"))
         '
         'InitialEstimatesPanel
         '
@@ -737,27 +664,6 @@ Partial Class EditingForm_Column
         Me.ToolTipValues.SetToolTip(Me.chkUseIE_T, resources.GetString("chkUseIE_T.ToolTip2"))
         Me.chkUseIE_T.UseVisualStyleBackColor = True
         '
-        'tabstrip1
-        '
-        resources.ApplyResources(Me.tabstrip1, "tabstrip1")
-        Me.tabstrip1.Controls.Add(Me.TabPage1)
-        Me.tabstrip1.Name = "tabstrip1"
-        Me.tabstrip1.SelectedIndex = 0
-        Me.ToolTipChangeTag.SetToolTip(Me.tabstrip1, resources.GetString("tabstrip1.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.tabstrip1, resources.GetString("tabstrip1.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.tabstrip1, resources.GetString("tabstrip1.ToolTip2"))
-        '
-        'TabPage1
-        '
-        resources.ApplyResources(Me.TabPage1, "TabPage1")
-        Me.TabPage1.Controls.Add(Me.btnResults)
-        Me.TabPage1.Controls.Add(Me.gridResults)
-        Me.TabPage1.Name = "TabPage1"
-        Me.ToolTip1.SetToolTip(Me.TabPage1, resources.GetString("TabPage1.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.TabPage1, resources.GetString("TabPage1.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.TabPage1, resources.GetString("TabPage1.ToolTip2"))
-        Me.TabPage1.UseVisualStyleBackColor = True
-        '
         'btnResults
         '
         resources.ApplyResources(Me.btnResults, "btnResults")
@@ -784,8 +690,8 @@ Partial Class EditingForm_Column
         '
         'DataGridViewTextBoxColumn1
         '
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle10
         Me.DataGridViewTextBoxColumn1.FillWeight = 60.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn1, "DataGridViewTextBoxColumn1")
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
@@ -793,8 +699,8 @@ Partial Class EditingForm_Column
         '
         'DataGridViewTextBoxColumn2
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle11
         Me.DataGridViewTextBoxColumn2.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
@@ -802,8 +708,8 @@ Partial Class EditingForm_Column
         '
         'Column1
         '
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle12
         Me.Column1.FillWeight = 30.0!
         resources.ApplyResources(Me.Column1, "Column1")
         Me.Column1.Name = "Column1"
@@ -812,14 +718,55 @@ Partial Class EditingForm_Column
         'TabContainerAll
         '
         resources.ApplyResources(Me.TabContainerAll, "TabContainerAll")
+        Me.TabContainerAll.Controls.Add(Me.TabPage6)
+        Me.TabContainerAll.Controls.Add(Me.TabStages)
+        Me.TabContainerAll.Controls.Add(Me.TabConnections)
         Me.TabContainerAll.Controls.Add(Me.TabPage2)
-        Me.TabContainerAll.Controls.Add(Me.TabPage3)
+        Me.TabContainerAll.Controls.Add(Me.TabPage5)
         Me.TabContainerAll.Controls.Add(Me.TabPage4)
         Me.TabContainerAll.Name = "TabContainerAll"
         Me.TabContainerAll.SelectedIndex = 0
         Me.ToolTipChangeTag.SetToolTip(Me.TabContainerAll, resources.GetString("TabContainerAll.ToolTip"))
         Me.ToolTip1.SetToolTip(Me.TabContainerAll, resources.GetString("TabContainerAll.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.TabContainerAll, resources.GetString("TabContainerAll.ToolTip2"))
+        '
+        'TabPage6
+        '
+        resources.ApplyResources(Me.TabPage6, "TabPage6")
+        Me.TabPage6.Controls.Add(Me.Label16)
+        Me.TabPage6.Controls.Add(Me.Label6)
+        Me.TabPage6.Controls.Add(Me.cbPropPack)
+        Me.TabPage6.Controls.Add(Me.tbConvTol)
+        Me.TabPage6.Controls.Add(Me.Label9)
+        Me.TabPage6.Controls.Add(Me.tbMaxIt)
+        Me.TabPage6.Controls.Add(Me.btnConfigurePP)
+        Me.TabPage6.Controls.Add(Me.Label1)
+        Me.TabPage6.Controls.Add(Me.cbAbsorberMode)
+        Me.TabPage6.Controls.Add(Me.Label14)
+        Me.TabPage6.Controls.Add(Me.tbNStages)
+        Me.TabPage6.Name = "TabPage6"
+        Me.ToolTip1.SetToolTip(Me.TabPage6, resources.GetString("TabPage6.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.TabPage6, resources.GetString("TabPage6.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.TabPage6, resources.GetString("TabPage6.ToolTip2"))
+        Me.TabPage6.UseVisualStyleBackColor = True
+        '
+        'TabStages
+        '
+        resources.ApplyResources(Me.TabStages, "TabStages")
+        Me.TabStages.Name = "TabStages"
+        Me.ToolTip1.SetToolTip(Me.TabStages, resources.GetString("TabStages.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.TabStages, resources.GetString("TabStages.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.TabStages, resources.GetString("TabStages.ToolTip2"))
+        Me.TabStages.UseVisualStyleBackColor = True
+        '
+        'TabConnections
+        '
+        resources.ApplyResources(Me.TabConnections, "TabConnections")
+        Me.TabConnections.Name = "TabConnections"
+        Me.ToolTip1.SetToolTip(Me.TabConnections, resources.GetString("TabConnections.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.TabConnections, resources.GetString("TabConnections.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.TabConnections, resources.GetString("TabConnections.ToolTip2"))
+        Me.TabConnections.UseVisualStyleBackColor = True
         '
         'TabPage2
         '
@@ -831,20 +778,25 @@ Partial Class EditingForm_Column
         Me.ToolTipChangeTag.SetToolTip(Me.TabPage2, resources.GetString("TabPage2.ToolTip2"))
         Me.TabPage2.UseVisualStyleBackColor = True
         '
-        'TabPage3
+        'TabPage5
         '
-        resources.ApplyResources(Me.TabPage3, "TabPage3")
-        Me.TabPage3.Controls.Add(Me.TabControl2)
-        Me.TabPage3.Name = "TabPage3"
-        Me.ToolTip1.SetToolTip(Me.TabPage3, resources.GetString("TabPage3.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.TabPage3, resources.GetString("TabPage3.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.TabPage3, resources.GetString("TabPage3.ToolTip2"))
-        Me.TabPage3.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.TabPage5, "TabPage5")
+        Me.TabPage5.Controls.Add(Me.InitialEstimatesPanel)
+        Me.TabPage5.Controls.Add(Me.chkUseIE_C)
+        Me.TabPage5.Controls.Add(Me.chkUseIE_T)
+        Me.TabPage5.Controls.Add(Me.chkUseIE_LF)
+        Me.TabPage5.Controls.Add(Me.chkUseIE_VF)
+        Me.TabPage5.Name = "TabPage5"
+        Me.ToolTip1.SetToolTip(Me.TabPage5, resources.GetString("TabPage5.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.TabPage5, resources.GetString("TabPage5.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.TabPage5, resources.GetString("TabPage5.ToolTip2"))
+        Me.TabPage5.UseVisualStyleBackColor = True
         '
         'TabPage4
         '
         resources.ApplyResources(Me.TabPage4, "TabPage4")
-        Me.TabPage4.Controls.Add(Me.tabstrip1)
+        Me.TabPage4.Controls.Add(Me.gridResults)
+        Me.TabPage4.Controls.Add(Me.btnResults)
         Me.TabPage4.Name = "TabPage4"
         Me.ToolTip1.SetToolTip(Me.TabPage4, resources.GetString("TabPage4.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.TabPage4, resources.GetString("TabPage4.ToolTip1"))
@@ -869,8 +821,6 @@ Partial Class EditingForm_Column
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.TabContainerSpecification.ResumeLayout(False)
-        Me.TabGeneral.ResumeLayout(False)
-        Me.TabGeneral.PerformLayout()
         Me.TabCondenser.ResumeLayout(False)
         Me.TabCondenser.PerformLayout()
         Me.PanelCondenser.ResumeLayout(False)
@@ -879,15 +829,13 @@ Partial Class EditingForm_Column
         Me.TabReboiler.PerformLayout()
         Me.PanelReboiler.ResumeLayout(False)
         Me.PanelReboiler.PerformLayout()
-        Me.TabControl2.ResumeLayout(False)
-        Me.TabInitialEstimates.ResumeLayout(False)
-        Me.TabInitialEstimates.PerformLayout()
-        Me.tabstrip1.ResumeLayout(False)
-        Me.TabPage1.ResumeLayout(False)
         CType(Me.gridResults, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabContainerAll.ResumeLayout(False)
+        Me.TabPage6.ResumeLayout(False)
+        Me.TabPage6.PerformLayout()
         Me.TabPage2.ResumeLayout(False)
-        Me.TabPage3.ResumeLayout(False)
+        Me.TabPage5.ResumeLayout(False)
+        Me.TabPage5.PerformLayout()
         Me.TabPage4.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -904,21 +852,14 @@ Partial Class EditingForm_Column
     Public WithEvents btnConfigurePP As System.Windows.Forms.Button
     Public WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Public WithEvents lblTag As System.Windows.Forms.TextBox
-    Public WithEvents tabstrip1 As System.Windows.Forms.TabControl
-    Public WithEvents TabPage1 As System.Windows.Forms.TabPage
     Public WithEvents gridResults As System.Windows.Forms.DataGridView
     Public WithEvents Label6 As System.Windows.Forms.Label
     Public WithEvents tbNStages As System.Windows.Forms.TextBox
     Public WithEvents Label1 As System.Windows.Forms.Label
     Public WithEvents TabContainerSpecification As System.Windows.Forms.TabControl
-    Public WithEvents TabGeneral As System.Windows.Forms.TabPage
     Public WithEvents TabCondenser As System.Windows.Forms.TabPage
     Public WithEvents TabReboiler As System.Windows.Forms.TabPage
     Public WithEvents cbAbsorberMode As System.Windows.Forms.ComboBox
-    Public WithEvents TabControl2 As System.Windows.Forms.TabControl
-    Public WithEvents TabConnections As System.Windows.Forms.TabPage
-    Public WithEvents TabStages As System.Windows.Forms.TabPage
-    Public WithEvents TabInitialEstimates As System.Windows.Forms.TabPage
     Public WithEvents cbCondType As System.Windows.Forms.ComboBox
     Public WithEvents Label2 As System.Windows.Forms.Label
     Public WithEvents Label8 As System.Windows.Forms.Label
@@ -960,11 +901,14 @@ Partial Class EditingForm_Column
     Public WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ToolTipChangeTag As ToolTip
     Friend WithEvents TabPage2 As TabPage
-    Friend WithEvents TabPage3 As TabPage
+    Friend WithEvents TabConnections As TabPage
     Friend WithEvents TabPage4 As TabPage
     Friend WithEvents chkNoCondenser As CheckBox
     Friend WithEvents PanelCondenser As Panel
     Friend WithEvents PanelReboiler As Panel
     Friend WithEvents chkNoReboiler As CheckBox
     Public WithEvents TabContainerAll As TabControl
+    Friend WithEvents TabPage6 As TabPage
+    Friend WithEvents TabStages As TabPage
+    Friend WithEvents TabPage5 As TabPage
 End Class

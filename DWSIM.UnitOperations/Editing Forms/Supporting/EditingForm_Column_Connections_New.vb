@@ -209,6 +209,8 @@ Public Class EditingForm_Column_Connections_New
             i += 1
         Next
 
+        gridDuties.Sort(gridDuties.Columns(1), System.ComponentModel.ListSortDirection.Ascending)
+
         Dim stage As String = ""
 
         For Each si In rc.MaterialStreams.Values
@@ -251,9 +253,9 @@ Public Class EditingForm_Column_Connections_New
                 End If
             End If
             If (si.StreamBehavior = StreamInformation.Behavior.Distillate) Then
-                gridAssociations.Rows.Add(New Object() {si.ID, "Condenser Duty", rc.GetFlowsheet().SimulationObjects(si.StreamID).GraphicObject.Tag, stage})
+                'gridAssociations.Rows.Add(New Object() {si.ID, "Condenser Duty", rc.GetFlowsheet().SimulationObjects(si.StreamID).GraphicObject.Tag, stage})
             ElseIf (si.StreamBehavior = StreamInformation.Behavior.BottomsLiquid) Then
-                gridAssociations.Rows.Add(New Object() {si.ID, "Reboiler Duty", rc.GetFlowsheet().SimulationObjects(si.StreamID).GraphicObject.Tag, stage})
+                'gridAssociations.Rows.Add(New Object() {si.ID, "Reboiler Duty", rc.GetFlowsheet().SimulationObjects(si.StreamID).GraphicObject.Tag, stage})
             End If
         Next
 
