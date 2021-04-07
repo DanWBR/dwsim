@@ -95,14 +95,14 @@ Namespace PropertyPackages
 
             If Me._phasemappings Is Nothing Then CreatePhaseMappings()
 
-            Dim f As New FormConfigCAPEOPENPPSocket With {.pp = Me}
+            Dim f As New FormConfigCAPEOPENPPSocket With {.pp = Me, ._form = Flowsheet}
             f.Show()
 
         End Sub
 
         Public Overrides Function GetEditingForm() As Form
 
-            Return New FormConfigCAPEOPENPPSocket() With {.pp = Me}
+            Return New FormConfigCAPEOPENPPSocket() With {.pp = Me, ._form = Flowsheet}
 
         End Function
 
