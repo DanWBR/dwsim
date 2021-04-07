@@ -10,8 +10,6 @@ Imports DWSIM.Interfaces.Interfaces2
 
     Inherits FormConfigPropertyPackageBase
 
-    <System.NonSerialized()> Public _copp, _pptpl As Object
-    Public _selts As CapeOpenObjInfo
     Private _coobjects As New List(Of CapeOpenObjInfo)
     Private _loaded As Boolean = False
 
@@ -46,40 +44,40 @@ Imports DWSIM.Interfaces.Interfaces2
             End With
         Next
 
-        If Not _selts Is Nothing Then
-            cbThermoServer.SelectedItem = _selts.Name
-            If Not _pptpl Is Nothing Then
-                Dim t As Type = Type.GetTypeFromProgID(_selts.TypeName)
-                _pptpl = Activator.CreateInstance(t)
+        If Not pp._selts Is Nothing Then
+            cbThermoServer.SelectedItem = pp._selts.Name
+            If Not pp._pptpl Is Nothing Then
+                Dim t As Type = Type.GetTypeFromProgID(pp._selts.TypeName)
+                pp._pptpl = Activator.CreateInstance(t)
             End If
-            Dim myppm As CapeOpen.ICapeUtilities = TryCast(_pptpl, CapeOpen.ICapeUtilities)
+            Dim myppm As CapeOpen.ICapeUtilities = TryCast(pp._pptpl, CapeOpen.ICapeUtilities)
             If Not myppm Is Nothing Then
                 Try
                     myppm.Initialize()
                 Catch ex As Exception
-                    Dim ecu As CapeOpen.ECapeUser = _pptpl
+                    Dim ecu As CapeOpen.ECapeUser = pp._pptpl
                     MessageBox.Show("Error initializing CAPE-OPEN Property Package - " + ex.Message.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     MessageBox.Show("CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description)
                 End Try
             End If
             Dim proppacks As String()
             If pp._coversion = "1.0" Then
-                proppacks = CType(_pptpl, ICapeThermoSystem).GetPropertyPackages
+                proppacks = CType(pp._pptpl, ICapeThermoSystem).GetPropertyPackages
             Else
-                proppacks = CType(_pptpl, ICapeThermoPropertyPackageManager).GetPropertyPackageList
+                proppacks = CType(pp._pptpl, ICapeThermoPropertyPackageManager).GetPropertyPackageList
             End If
             For Each pp As String In proppacks
                 Me.cbPropPack.Items.Add(pp)
             Next
-            Me.lblName2.Text = _selts.Name
-            Me.lblVersion2.Text = _selts.Version
-            Me.lblAuthorURL2.Text = _selts.VendorURL
-            Me.lblDesc2.Text = _selts.Description
-            Me.lblAbout2.Text = _selts.AboutInfo
+            Me.lblName2.Text = pp._selts.Name
+            Me.lblVersion2.Text = pp._selts.Version
+            Me.lblAuthorURL2.Text = pp._selts.VendorURL
+            Me.lblDesc2.Text = pp._selts.Description
+            Me.lblAbout2.Text = pp._selts.AboutInfo
         End If
 
-        If Not _copp Is Nothing Then
-            Dim pname As String = CType(_copp, ICapeIdentification).ComponentName
+        If Not pp._copp Is Nothing Then
+            Dim pname As String = CType(pp._copp, ICapeIdentification).ComponentName
             If Not Me.cbPropPack.Items.Contains(pname) Then
                 Me.cbPropPack.Items.Add(pname)
             End If
@@ -158,14 +156,14 @@ Imports DWSIM.Interfaces.Interfaces2
 
         Dim i As Integer = 0
 
-        If Not _copp Is Nothing Then
+        If Not pp._copp Is Nothing Then
 
             If pp._coversion = "1.0" Then
-                CType(_copp, ICapeThermoPropertyPackage).GetComponentList(complist, formulae, names, boiltemps, molwts, casids)
-                plist = CType(_copp, ICapeThermoPropertyPackage).GetPhaseList()
+                CType(pp._copp, ICapeThermoPropertyPackage).GetComponentList(complist, formulae, names, boiltemps, molwts, casids)
+                plist = CType(pp._copp, ICapeThermoPropertyPackage).GetPhaseList()
             Else
-                CType(_copp, ICapeThermoCompounds).GetCompoundList(complist, formulae, names, boiltemps, molwts, casids)
-                CType(_copp, ICapeThermoPhases).GetPhaseList(plist, staggr, kci)
+                CType(pp._copp, ICapeThermoCompounds).GetCompoundList(complist, formulae, names, boiltemps, molwts, casids)
+                CType(pp._copp, ICapeThermoPhases).GetPhaseList(plist, staggr, kci)
             End If
             For Each s As String In complist
                 cb.Items.Add(s)
@@ -350,25 +348,25 @@ Imports DWSIM.Interfaces.Interfaces2
 
             For Each coui As CapeOpenObjInfo In _coobjects
                 If coui.Name = cbThermoServer.SelectedItem.ToString Then
-                    _selts = coui
+                    pp._selts = coui
                 End If
             Next
 
-            Dim t As Type = Type.GetTypeFromProgID(_selts.TypeName)
-            _pptpl = Activator.CreateInstance(t)
+            Dim t As Type = Type.GetTypeFromProgID(pp._selts.TypeName)
+            pp._pptpl = Activator.CreateInstance(t)
 
-            If TryCast(_pptpl, IPersistStreamInit) IsNot Nothing Then
-                CType(_pptpl, IPersistStreamInit).InitNew()
+            If TryCast(pp._pptpl, IPersistStreamInit) IsNot Nothing Then
+                CType(pp._pptpl, IPersistStreamInit).InitNew()
             End If
-            If TryCast(_pptpl, ICapeUtilities) IsNot Nothing Then
-                CType(_pptpl, ICapeUtilities).Initialize()
+            If TryCast(pp._pptpl, ICapeUtilities) IsNot Nothing Then
+                CType(pp._pptpl, ICapeUtilities).Initialize()
             End If
 
             Dim proppacks As Object
             If pp._coversion = "1.0" Then
-                proppacks = CType(_pptpl, ICapeThermoSystem).GetPropertyPackages
+                proppacks = CType(pp._pptpl, ICapeThermoSystem).GetPropertyPackages
             Else
-                proppacks = CType(_pptpl, ICapeThermoPropertyPackageManager).GetPropertyPackageList
+                proppacks = CType(pp._pptpl, ICapeThermoPropertyPackageManager).GetPropertyPackageList
             End If
 
             Me.cbPropPack.Items.Clear()
@@ -378,11 +376,11 @@ Imports DWSIM.Interfaces.Interfaces2
                 Next
             End If
 
-            Me.lblName2.Text = _selts.Name
-            Me.lblVersion2.Text = _selts.Version
-            Me.lblAuthorURL2.Text = _selts.VendorURL
-            Me.lblDesc2.Text = _selts.Description
-            Me.lblAbout2.Text = _selts.AboutInfo
+            Me.lblName2.Text = pp._selts.Name
+            Me.lblVersion2.Text = pp._selts.Version
+            Me.lblAuthorURL2.Text = pp._selts.VendorURL
+            Me.lblDesc2.Text = pp._selts.Description
+            Me.lblAbout2.Text = pp._selts.AboutInfo
 
         End If
 
@@ -390,7 +388,7 @@ Imports DWSIM.Interfaces.Interfaces2
 
     Private Sub btnEditPropServer_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEditThermoServer.Click
 
-        Dim myuo As ICapeUtilities = TryCast(_pptpl, ICapeUtilities)
+        Dim myuo As ICapeUtilities = TryCast(pp._pptpl, ICapeUtilities)
 
         If Not myuo Is Nothing Then
             Try
@@ -407,7 +405,7 @@ Imports DWSIM.Interfaces.Interfaces2
 
     Private Sub btnEditEqServer_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEditPropPack.Click
 
-        Dim myuo As ICapeUtilities = TryCast(_copp, ICapeUtilities)
+        Dim myuo As ICapeUtilities = TryCast(pp._copp, ICapeUtilities)
 
         If Not myuo Is Nothing Then
             Try
@@ -453,15 +451,15 @@ Imports DWSIM.Interfaces.Interfaces2
         If _loaded Then
 
             If pp._coversion = "1.0" Then
-                _copp = CType(_pptpl, ICapeThermoSystem).ResolvePropertyPackage(cbPropPack.SelectedItem.ToString)
+                pp._copp = CType(pp._pptpl, ICapeThermoSystem).ResolvePropertyPackage(cbPropPack.SelectedItem.ToString)
             Else
-                _copp = CType(_pptpl, ICapeThermoPropertyPackageManager).GetPropertyPackage(cbPropPack.SelectedItem.ToString)
+                pp._copp = CType(pp._pptpl, ICapeThermoPropertyPackageManager).GetPropertyPackage(cbPropPack.SelectedItem.ToString)
             End If
-            If TryCast(_pptpl, IPersistStreamInit) IsNot Nothing Then
-                CType(_copp, IPersistStreamInit).InitNew()
+            If TryCast(pp._pptpl, IPersistStreamInit) IsNot Nothing Then
+                CType(pp._copp, IPersistStreamInit).InitNew()
             End If
-            If TryCast(_pptpl, ICapeUtilities) IsNot Nothing Then
-                CType(_copp, ICapeUtilities).Initialize()
+            If TryCast(pp._pptpl, ICapeUtilities) IsNot Nothing Then
+                CType(pp._copp, ICapeUtilities).Initialize()
             End If
             pp._ppname = cbPropPack.SelectedItem.ToString
             UpdateMappings()

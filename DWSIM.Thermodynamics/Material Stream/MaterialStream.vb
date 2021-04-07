@@ -364,7 +364,8 @@ Namespace Streams
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
             If FlowSheet IsNot Nothing Then
                 If AtEquilibrium And Not FlowSheet.DynamicMode And
-                    FlowSheet.FlowsheetOptions.SkipEquilibriumCalculationOnDefinedStreams Then
+                    FlowSheet.FlowsheetOptions.SkipEquilibriumCalculationOnDefinedStreams And
+                    Not TypeOf PropertyPackage Is CAPEOPENPropertyPackage Then
                     Calculate(False, True)
                 Else
                     Calculate(True, True)

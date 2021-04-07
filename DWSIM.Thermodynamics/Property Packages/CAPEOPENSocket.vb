@@ -1161,6 +1161,7 @@ Namespace PropertyPackages
             For i = 0 To Vz.Length - 1
                 mw2.Add(complist(i), mw(i))
             Next
+            i = 0
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 val += Vz(i) * mw2(_mappings(subst.Name))
                 i += 1

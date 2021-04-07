@@ -850,10 +850,14 @@ Public Class FormSimulWizard
             Dim ppid As String = ""
             ppid = dgvpp.SelectedRows(0).Cells(0).Value
             Dim pp As PropertyPackages.PropertyPackage = CurrentFlowsheet.Options.PropertyPackages(ppid)
-            If pp.IsConfigurable Then
-                pp.DisplayGroupedEditingForm()
+            If TypeOf pp Is CAPEOPENPropertyPackage Then
+                pp.DisplayEditingForm()
             Else
-                MessageBox.Show(DWSIM.App.GetLocalString("NonConfigurablePP"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                If pp.IsConfigurable Then
+                    pp.DisplayGroupedEditingForm()
+                Else
+                    MessageBox.Show(DWSIM.App.GetLocalString("NonConfigurablePP"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                End If
             End If
         End If
     End Sub

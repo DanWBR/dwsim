@@ -12695,39 +12695,47 @@ Final3:
 
         Public Sub DisplayGroupedEditingForm() Implements IPropertyPackage.DisplayGroupedEditingForm
 
-            Dim eform = GetEditingForm()
-            eform.TopLevel = False
-            eform.FormBorderStyle = FormBorderStyle.None
-            eform.Dock = DockStyle.Fill
-            eform.Visible = True
+            If TypeOf Me Is CAPEOPENPropertyPackage Then
 
-            Dim fset As New FlashAlgorithmConfig
-            fset.Settings = FlashSettings
-            fset.TopLevel = False
-            fset.FormBorderStyle = FormBorderStyle.None
-            fset.Dock = DockStyle.Fill
-            fset.Visible = True
+                DisplayEditingForm()
 
-            Dim pform = New PropertyPackageSettingsEditingControl(Me) With {.Dock = DockStyle.Fill}
-
-            Dim peditor As New Thermodynamics.FormGroupedPPConfigWindows()
-            peditor.Flowsheet = Flowsheet
-            peditor.PropertyPackage = Me
-
-            peditor.TabPageBIPs.Controls.Add(eform)
-            peditor.TabPageFlash.Controls.Add(fset)
-            peditor.TabPageProps.Controls.Add(pform)
-
-            peditor.Text += " (" & Tag & ") [" + ComponentName + "]"
-
-            AddHandler peditor.FormClosing, Sub(s2, e2)
-                                                fset.FlashAlgorithmConfig_FormClosing(s2, e2)
-                                            End Sub
-
-            If Settings.IsRunningOnMono() Then
-                peditor.ShowDialog()
             Else
-                peditor.Show()
+
+                Dim eform = GetEditingForm()
+                eform.TopLevel = False
+                eform.FormBorderStyle = FormBorderStyle.None
+                eform.Dock = DockStyle.Fill
+                eform.Visible = True
+
+                Dim fset As New FlashAlgorithmConfig
+                fset.Settings = FlashSettings
+                fset.TopLevel = False
+                fset.FormBorderStyle = FormBorderStyle.None
+                fset.Dock = DockStyle.Fill
+                fset.Visible = True
+
+                Dim pform = New PropertyPackageSettingsEditingControl(Me) With {.Dock = DockStyle.Fill}
+
+                Dim peditor As New Thermodynamics.FormGroupedPPConfigWindows()
+                peditor.Flowsheet = Flowsheet
+                peditor.PropertyPackage = Me
+
+                peditor.TabPageBIPs.Controls.Add(eform)
+                peditor.TabPageFlash.Controls.Add(fset)
+                peditor.TabPageProps.Controls.Add(pform)
+
+                peditor.Text += " (" & Tag & ") [" + ComponentName + "]"
+
+                AddHandler peditor.FormClosing, Sub(s2, e2)
+                                                    fset.FlashAlgorithmConfig_FormClosing(s2, e2)
+                                                End Sub
+
+                If Settings.IsRunningOnMono() Then
+                    peditor.ShowDialog()
+                Else
+                    peditor.Show()
+                End If
+
             End If
 
         End Sub
