@@ -381,6 +381,8 @@ Namespace UnitOperations
 
             Dim countext As Integer = 0
 
+            Dim currL As Double = 0.0#
+
             Do
 
                 IObj?.SetCurrent
@@ -401,7 +403,7 @@ Namespace UnitOperations
                 'Iteracao para cada segmento
                 Dim count As Integer = 0
 
-                Dim currL As Double = 0.0#
+                currL = 0.0#
 
                 Dim j As Integer = 0
 
@@ -481,6 +483,7 @@ Namespace UnitOperations
                         End With
 
                         Do
+
                             IObj3?.SetCurrent
 
                             Dim IObj4 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
@@ -628,6 +631,8 @@ Namespace UnitOperations
 
                                 With segmento
 
+                                    results.External_Temperature = Text + dText_dL * currL
+
                                     Cp_m = holdup * Cp_l + (1 - holdup) * Cp_v
 
                                     If Not Me.ThermalProfile.TipoPerfil = ThermalEditorDefinitions.ThermalProfileType.Definir_Q Then
@@ -639,7 +644,7 @@ Namespace UnitOperations
                                             Tpe = Tin + (Tout - Tin) / 2
                                             IObj5?.SetCurrent
                                             Dim resultU As Double() = CalcOverallHeatTransferCoefficient(segmento, .Material, holdup, .Comprimento / .Incrementos,
-                                                                                .DI * 0.0254, .DE * 0.0254, Me.rugosidade(.Material, segmento), Tpe, Text + dText_dL * currL,
+                                                                                .DI * 0.0254, .DE * 0.0254, Me.rugosidade(.Material, segmento), Tpe, results.External_Temperature,
                                                                                 results.VapVel, results.LiqVel, results.Cpl, results.Cpv, results.Kl, results.Kv,
                                                                                 results.MUl, results.MUv, results.RHOl, results.RHOv,
                                                                                 Me.ThermalProfile.Incluir_cti, Me.ThermalProfile.Incluir_isolamento,
@@ -653,8 +658,8 @@ Namespace UnitOperations
                                             End With
                                         End If
                                         If U <> 0.0# Then
-                                            DQ = (Tout - Tin) / Math.Log((Text + dText_dL * currL - Tin) / (Text + dText_dL * currL - Tout)) * U / 1000 * A
-                                            DQmax = (Text + dText_dL * currL - Tin) * Cp_m * Win
+                                            DQ = (Tout - Tin) / Math.Log((results.External_Temperature - Tin) / (results.External_Temperature - Tout)) * U / 1000 * A
+                                            DQmax = (results.External_Temperature - Tin) * Cp_m * Win
                                             If Double.IsNaN(DQ) Then DQ = 0.0#
                                             If Math.Abs(DQ) > Math.Abs(DQmax) Then DQ = DQmax
                                             'Tout = DQ / (Win * Cp_m) + Tin
@@ -746,7 +751,7 @@ Namespace UnitOperations
                                 K_l = .Phases(1).Properties.thermalConductivity.GetValueOrDefault
                                 Cp_l = .Phases(1).Properties.heatCapacityCp.GetValueOrDefault
                                 tens = .Phases(0).Properties.surfaceTension.GetValueOrDefault
-                                If Double.IsNaN(tens) Then rho_l = 0.0#
+                                If Double.IsNaN(tens) Then tens = 0.0#
                                 w_l = .Phases(1).Properties.massflow.GetValueOrDefault
 
                                 Qvin = .Phases(2).Properties.volumetric_flow.GetValueOrDefault
@@ -773,13 +778,16 @@ Namespace UnitOperations
                                                                         .EnergyFlow_Initial, U) With {.HTC_external = results.HTC_external,
                                                                                                    .HTC_internal = results.HTC_internal,
                                                                                                    .HTC_insulation = results.HTC_insulation,
-                                                                                                   .HTC_pipewall = results.HTC_pipewall})
+                                                                                                   .HTC_pipewall = results.HTC_pipewall,
+                                                                                                   .External_Temperature = results.External_Temperature})
 
                             End With
 
                             Hin = Hout
                             Tin = Tout
                             Pin = Pout
+
+                            currL += segmento.Comprimento / nseg
 
                             j += 1
 
@@ -792,8 +800,6 @@ Namespace UnitOperations
                     Next
 
                 Next
-
-                currL += segmento.Comprimento
 
                 If Me.Specification = Specmode.OutletTemperature Then
                     If Math.Abs(Tout - OutletTemperature) < 0.01 Then
@@ -879,6 +885,7 @@ Namespace UnitOperations
                 .FlowRegime = "-"
                 .FlowRegimeDescription = ""
                 .HTC = U
+                .External_Temperature = Text + dText_dL * currL
             End With
             segmento.Results.Add(results)
 
@@ -1777,6 +1784,8 @@ Final3:     T = bbb
                                 Return cv.ConvertFromSI(su.velocity, Profile.Sections(skey).Results(sindex).LiqVel)
                             Case "VelocityVapor"
                                 Return cv.ConvertFromSI(su.velocity, Profile.Sections(skey).Results(sindex).VapVel)
+                            Case "ExternalTemperature"
+                                Return cv.ConvertFromSI(su.temperature, Profile.Sections(skey).Results(sindex).External_Temperature)
                             Case Else
                                 Return 0.0
                         End Select
@@ -1892,6 +1901,7 @@ Final3:     T = bbb
                     proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",FlowRegime")
                     proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",VelocityLiquid")
                     proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",VelocityVapor")
+                    proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Results," + j.ToString + ",ExternalTemperature")
                     j += 1
                 Next
             Next
@@ -2091,6 +2101,8 @@ Final3:     T = bbb
                             Return su.velocity
                         Case "VelocityVapor"
                             Return su.velocity
+                        Case "ExternalTemperature"
+                            Return su.temperature
                         Case Else
                             Return 0.0
                     End Select
@@ -2510,7 +2522,7 @@ Final3:     T = bbb
         End Function
 
         Public Overrides Function GetChartModelNames() As List(Of String)
-            Return New List(Of String)({"Temperature Profile", "Pressure Profile", "Heat Flow Profile", "Liquid Velocity Profile", "Vapor Velocity Profile", "Liquid Holdup Profile", "Inclination Profile", "Overall HTC Profile", "Internal HTC Profile", "Wall k/L Profile", "Insulation k/L Profile", "External HTC Profile"})
+            Return New List(Of String)({"Temperature Profile", "Pressure Profile", "Heat Flow Profile", "Liquid Velocity Profile", "Vapor Velocity Profile", "Liquid Holdup Profile", "Inclination Profile", "Overall HTC Profile", "Internal HTC Profile", "Wall k/L Profile", "Insulation k/L Profile", "External HTC Profile", "External Temperature Profile"})
         End Function
 
         Public Overrides Function GetChartModel(name As String) As Object
@@ -2582,6 +2594,9 @@ Final3:     T = bbb
                 Case "External HTC Profile"
                     model.AddLineSeries(px, PopulateData(12))
                     model.Axes(1).Title = "Heat Transfer Coefficient (" + su.heat_transf_coeff + ")"
+                Case "External Temperature Profile"
+                    model.AddLineSeries(px, PopulateData(13))
+                    model.Axes(1).Title = "External Temperature (" + su.temperature + ")"
             End Select
 
             Return model
@@ -2695,6 +2710,14 @@ Final3:     T = bbb
                     For Each sec In Profile.Sections.Values
                         For Each res In sec.Results
                             vec.Add(SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC_external))
+                        Next
+                    Next
+                    Exit Select
+                Case 13
+                    'TEXT
+                    For Each sec In Profile.Sections.Values
+                        For Each res In sec.Results
+                            vec.Add(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, res.External_Temperature))
                         Next
                     Next
                     Exit Select

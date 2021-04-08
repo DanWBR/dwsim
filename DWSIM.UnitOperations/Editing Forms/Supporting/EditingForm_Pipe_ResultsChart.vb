@@ -393,6 +393,32 @@ Public Class EditingForm_Pipe_ResultsChart
                         Next
                     Next
                 End With
+            Case 8
+                Me.m_ytitle = "Text (" & su.temperature & ")"
+                With PipeOp.Profile
+                    Dim ps As PipeSection
+                    Dim res As PipeResults
+                    Dim comp_ant As Double = 0
+                    Dim i As Integer = 0
+                    Dim qi As Integer = 1
+                    For Each ps In .Sections.Values
+                        For qi = 1 To 1
+                            If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
+                                For Each res In ps.Results
+                                    vy(i) = cv.ConvertFromSI(su.temperature, res.External_Temperature)
+                                    comp_ant += ps.Comprimento / ps.Incrementos
+                                    i += 1
+                                Next
+                            Else
+                                For Each res In ps.Results
+                                    vy(i) = cv.ConvertFromSI(su.temperature, res.External_Temperature)
+                                    comp_ant += ps.Comprimento / ps.Incrementos
+                                    i += 1
+                                Next
+                            End If
+                        Next
+                    Next
+                End With
         End Select
 
         Me.m_vx = vx
@@ -407,10 +433,10 @@ Public Class EditingForm_Pipe_ResultsChart
 
             With Me.ZedGraphControl1.GraphPane
                 .CurveList.Clear()
-                With .AddCurve(Me.ComboBox2.SelectedItem, Me.m_vx, Me.m_vy, Color.SlateBlue, ZedGraph.SymbolType.Circle)
+                With .AddCurve(Me.ComboBox2.SelectedItem, Me.m_vx, Me.m_vy, Color.SlateBlue, ZedGraph.SymbolType.None)
                     .Color = Color.SteelBlue
                     .Line.IsSmooth = False
-                    .Symbol.Fill.Type = ZedGraph.FillType.Solid
+                    .Line.Width = 3
                 End With
                 .Title.Text = Me.ComboBox2.SelectedItem
                 .Title.FontSpec.Size = 24
@@ -437,7 +463,8 @@ Public Class EditingForm_Pipe_ResultsChart
             With .AddCurve(Me.ComboBox2.SelectedItem, Me.m_vx, Me.m_vy, Color.SlateBlue, ZedGraph.SymbolType.Circle)
                 .Color = Color.SteelBlue
                 .Line.IsSmooth = False
-                .Symbol.Fill.Type = ZedGraph.FillType.Solid
+                .Line.IsVisible = True
+                .Symbol.IsVisible = False
             End With
             .Title.Text = Me.ComboBox2.SelectedItem
             .Title.FontSpec.Size = 24

@@ -121,9 +121,6 @@
     <value>Estimate Overall Heat Transfer Coefficient</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="GroupBox7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>327, 287</value>
-  </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>104, 13</value>
   </data>
@@ -146,19 +143,25 @@
     <value>159, 13</value>
   </data>
   <data name="Label26.Text" xml:space="preserve">
-    <value>Ambient Temperature / Gradient</value>
+    <value>External Temperature / Gradient</value>
   </data>
   <data name="Label28.Location" type="System.Drawing.Point, System.Drawing">
     <value>240, 251</value>
+  </data>
+  <data name="Label28.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 13</value>
+  </data>
+  <data name="Label28.Text" xml:space="preserve">
+    <value>m/s or m</value>
   </data>
   <data name="TextBoxVEL.Location" type="System.Drawing.Point, System.Drawing">
     <value>170, 249</value>
   </data>
   <data name="Label29.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 13</value>
+    <value>115, 13</value>
   </data>
   <data name="Label29.Text" xml:space="preserve">
-    <value>Velocity [or deepness]</value>
+    <value>Velocity or Initial Depth</value>
   </data>
   <data name="ComboBoxMAMB.Items" xml:space="preserve">
     <value>Air</value>
@@ -245,53 +248,53 @@
     <value>151, 21</value>
   </data>
   <data name="Label35.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 13</value>
+    <value>92, 13</value>
   </data>
   <data name="Label35.Text" xml:space="preserve">
-    <value>Insulation material</value>
+    <value>Insulation Material</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="CheckBoxICTE.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="CheckBoxICTE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>126, 17</value>
+    <value>127, 17</value>
   </data>
   <data name="CheckBoxICTE.Text" xml:space="preserve">
-    <value>Include external HTC</value>
+    <value>Include External HTC</value>
   </data>
   <data name="CheckBoxICTI.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="CheckBoxICTI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 17</value>
+    <value>124, 17</value>
   </data>
   <data name="CheckBoxICTI.Text" xml:space="preserve">
-    <value>Include internal HTC</value>
+    <value>Include Internal HTC</value>
   </data>
   <data name="CheckBoxII.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="CheckBoxII.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 17</value>
+    <value>109, 17</value>
   </data>
   <data name="CheckBoxII.Text" xml:space="preserve">
-    <value>Include insulation</value>
+    <value>Include Insulation</value>
   </data>
   <data name="CheckBoxIPT.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="CheckBoxIPT.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 17</value>
+    <value>114, 17</value>
   </data>
   <data name="CheckBoxIPT.Text" xml:space="preserve">
-    <value>Include pipe walls</value>
+    <value>Include Pipe Walls</value>
+  </data>
+  <data name="GroupBox7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>327, 287</value>
   </data>
   <data name="RadioButton8.Text" xml:space="preserve">
-    <value>Define the heat exchanged</value>
-  </data>
-  <data name="GroupBox8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 39</value>
+    <value>Define the Heat Exchanged</value>
   </data>
   <data name="Label37.Location" type="System.Drawing.Point, System.Drawing">
     <value>221, 16</value>
@@ -300,10 +303,13 @@
     <value>169, 13</value>
   </data>
   <data name="Label38.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 13</value>
+    <value>87, 13</value>
   </data>
   <data name="Label38.Text" xml:space="preserve">
-    <value>Heat exchanged</value>
+    <value>Heat Exchanged</value>
+  </data>
+  <data name="GroupBox8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>326, 39</value>
   </data>
   <data name="RadioButton9.Text" xml:space="preserve">
     <value>Define Overall Heat Transfer Coefficient</value>
@@ -330,7 +336,7 @@
     <value>159, 13</value>
   </data>
   <data name="Label51.Text" xml:space="preserve">
-    <value>Ambient Temperature / Gradient</value>
+    <value>External Temperature / Gradient</value>
   </data>
   <data name="Label52.Location" type="System.Drawing.Point, System.Drawing">
     <value>221, 20</value>

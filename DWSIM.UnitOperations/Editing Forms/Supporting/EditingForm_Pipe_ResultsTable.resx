@@ -154,6 +154,9 @@
   <data name="&gt;&gt;DataGridView1.Name" xml:space="preserve">
     <value>DataGridView1</value>
   </data>
+  <data name="&gt;&gt;Column11.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="Column4.Width" type="System.Int32, mscorlib">
     <value>87</value>
   </data>
@@ -191,7 +194,7 @@
   <data name="Column10.Width" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
-  <data name="&gt;&gt;Column11.Type" xml:space="preserve">
+  <data name="&gt;&gt;Column4.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Column12.Name" xml:space="preserve">
@@ -207,6 +210,9 @@
   <data name="Column11.HeaderText" xml:space="preserve">
     <value>k/L Parede</value>
   </data>
+  <data name="&gt;&gt;Column15.Name" xml:space="preserve">
+    <value>Column15</value>
+  </data>
   <data name="&gt;&gt;Column7.Name" xml:space="preserve">
     <value>Column7</value>
   </data>
@@ -216,8 +222,8 @@
   <data name="DataGridView1.Size" type="System.Drawing.Size, System.Drawing">
     <value>682, 222</value>
   </data>
-  <data name="&gt;&gt;Column4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Column5.Width" type="System.Int32, mscorlib">
+    <value>80</value>
   </data>
   <data name="Column14.HeaderText" xml:space="preserve">
     <value>Inclinação (graus)</value>
@@ -246,6 +252,9 @@
   <data name="&gt;&gt;DataGridView1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="&gt;&gt;Column15.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="Column8.Width" type="System.Int32, mscorlib">
     <value>69</value>
   </data>
@@ -258,8 +267,11 @@
   <data name="Column12.Width" type="System.Int32, mscorlib">
     <value>76</value>
   </data>
-  <data name="&gt;&gt;Column8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Column15.HeaderText" xml:space="preserve">
+    <value>Temperatura Ambiente</value>
+  </data>
+  <data name="Column15.Width" type="System.Int32, mscorlib">
+    <value>108</value>
   </data>
   <data name="Column5.HeaderText" xml:space="preserve">
     <value>Vel. Vapor (m/s)</value>
@@ -275,6 +287,9 @@
   </data>
   <data name="Column2.HeaderText" xml:space="preserve">
     <value>Pressão (kPa)</value>
+  </data>
+  <data name="&gt;&gt;Column8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Column7.HeaderText" xml:space="preserve">
     <value>Fração de Líquido</value>
@@ -299,9 +314,6 @@
   </data>
   <data name="Column3.HeaderText" xml:space="preserve">
     <value>Temperatura (°C)</value>
-  </data>
-  <data name="Column5.Width" type="System.Int32, mscorlib">
-    <value>80</value>
   </data>
   <data name="&gt;&gt;Column2.Name" xml:space="preserve">
     <value>Column2</value>
@@ -338,6 +350,12 @@
   </metadata>
   <metadata name="Column7.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
+  </metadata>
+  <metadata name="Column15.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>en</value>
   </metadata>
   <metadata name="Column6.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

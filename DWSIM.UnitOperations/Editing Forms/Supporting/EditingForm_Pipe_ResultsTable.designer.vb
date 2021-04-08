@@ -36,6 +36,7 @@ Partial Class EditingForm_Pipe_ResultsTable
         Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column14 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -51,6 +52,7 @@ Partial Class EditingForm_Pipe_ResultsTable
         Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column13 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column15 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -70,7 +72,7 @@ Partial Class EditingForm_Pipe_ResultsTable
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column14, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column6, Me.Column7, Me.Column8, Me.Column9, Me.Column10, Me.Column11, Me.Column12, Me.Column13})
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column14, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column6, Me.Column7, Me.Column8, Me.Column9, Me.Column10, Me.Column11, Me.Column12, Me.Column13, Me.Column15})
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
         Me.DataGridView1.RowHeadersVisible = False
@@ -196,12 +198,21 @@ Partial Class EditingForm_Pipe_ResultsTable
         '
         'Column13
         '
-        DataGridViewCellStyle13.Format = "N4"
+        DataGridViewCellStyle13.Format = "G4"
         Me.Column13.DefaultCellStyle = DataGridViewCellStyle13
         resources.ApplyResources(Me.Column13, "Column13")
         Me.Column13.Name = "Column13"
         Me.Column13.ReadOnly = True
         Me.Column13.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Column15
+        '
+        DataGridViewCellStyle14.Format = "N4"
+        Me.Column15.DefaultCellStyle = DataGridViewCellStyle14
+        resources.ApplyResources(Me.Column15, "Column15")
+        Me.Column15.Name = "Column15"
+        Me.Column15.ReadOnly = True
+        Me.Column15.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'EditingForm_Pipe_ResultsTable
         '
@@ -214,18 +225,19 @@ Partial Class EditingForm_Pipe_ResultsTable
 
     End Sub
     Public WithEvents DataGridView1 As System.Windows.Forms.DataGridView
-    Public WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Public WithEvents Column14 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Public WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Public WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Public WithEvents Column4 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Public WithEvents Column5 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Public WithEvents Column6 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Public WithEvents Column7 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Public WithEvents Column8 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Public WithEvents Column9 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Public WithEvents Column10 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Public WithEvents Column11 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Public WithEvents Column12 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Public WithEvents Column13 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column1 As DataGridViewTextBoxColumn
+    Friend WithEvents Column14 As DataGridViewTextBoxColumn
+    Friend WithEvents Column2 As DataGridViewTextBoxColumn
+    Friend WithEvents Column3 As DataGridViewTextBoxColumn
+    Friend WithEvents Column4 As DataGridViewTextBoxColumn
+    Friend WithEvents Column5 As DataGridViewTextBoxColumn
+    Friend WithEvents Column6 As DataGridViewTextBoxColumn
+    Friend WithEvents Column7 As DataGridViewTextBoxColumn
+    Friend WithEvents Column8 As DataGridViewTextBoxColumn
+    Friend WithEvents Column9 As DataGridViewTextBoxColumn
+    Friend WithEvents Column10 As DataGridViewTextBoxColumn
+    Friend WithEvents Column11 As DataGridViewTextBoxColumn
+    Friend WithEvents Column12 As DataGridViewTextBoxColumn
+    Friend WithEvents Column13 As DataGridViewTextBoxColumn
+    Friend WithEvents Column15 As DataGridViewTextBoxColumn
 End Class

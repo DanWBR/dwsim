@@ -50,7 +50,7 @@ Partial Class EditingForm_Pipe_ResultsChart
         resources.ApplyResources(Me.ComboBox2, "ComboBox2")
         Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox2.DropDownWidth = 161
-        Me.ComboBox2.Items.AddRange(New Object() {resources.GetString("ComboBox2.Items"), resources.GetString("ComboBox2.Items1"), resources.GetString("ComboBox2.Items2"), resources.GetString("ComboBox2.Items3"), resources.GetString("ComboBox2.Items4"), resources.GetString("ComboBox2.Items5"), resources.GetString("ComboBox2.Items6"), resources.GetString("ComboBox2.Items7")})
+        Me.ComboBox2.Items.AddRange(New Object() {resources.GetString("ComboBox2.Items"), resources.GetString("ComboBox2.Items1"), resources.GetString("ComboBox2.Items2"), resources.GetString("ComboBox2.Items3"), resources.GetString("ComboBox2.Items4"), resources.GetString("ComboBox2.Items5"), resources.GetString("ComboBox2.Items6"), resources.GetString("ComboBox2.Items7"), resources.GetString("ComboBox2.Items8")})
         Me.ComboBox2.Name = "ComboBox2"
         '
         'Label2
@@ -83,15 +83,16 @@ Partial Class EditingForm_Pipe_ResultsChart
         resources.ApplyResources(Me.ZedGraphControl1, "ZedGraphControl1")
         Me.ZedGraphControl1.IsAntiAlias = True
         Me.ZedGraphControl1.IsAutoScrollRange = True
+        Me.ZedGraphControl1.IsShowCopyMessage = False
         Me.ZedGraphControl1.IsShowPointValues = True
         Me.ZedGraphControl1.Name = "ZedGraphControl1"
-        Me.ZedGraphControl1.ScrollGrace = 0.0R
-        Me.ZedGraphControl1.ScrollMaxX = 0.0R
-        Me.ZedGraphControl1.ScrollMaxY = 0.0R
-        Me.ZedGraphControl1.ScrollMaxY2 = 0.0R
-        Me.ZedGraphControl1.ScrollMinX = 0.0R
-        Me.ZedGraphControl1.ScrollMinY = 0.0R
-        Me.ZedGraphControl1.ScrollMinY2 = 0.0R
+        Me.ZedGraphControl1.ScrollGrace = 0R
+        Me.ZedGraphControl1.ScrollMaxX = 0R
+        Me.ZedGraphControl1.ScrollMaxY = 0R
+        Me.ZedGraphControl1.ScrollMaxY2 = 0R
+        Me.ZedGraphControl1.ScrollMinX = 0R
+        Me.ZedGraphControl1.ScrollMinY = 0R
+        Me.ZedGraphControl1.ScrollMinY2 = 0R
         '
         'EditingForm_Pipe_ResultsChart
         '
