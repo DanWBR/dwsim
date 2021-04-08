@@ -2331,6 +2331,19 @@ Final3:     T = bbb
             Next
 
             str.AppendLine()
+            str.AppendLine("External Temperature Profile")
+            str.AppendLine()
+            str.AppendLine("Length (" & su.distance & ")" & vbTab & "Temperature (" & su.temperature & ")")
+            comp_ant = 0
+            For Each ps In Profile.Sections.Values
+                For Each res In ps.Results
+                    str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
+                                   vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, res.External_Temperature).ToString(numberformat, ci))
+                    comp_ant += ps.Comprimento / ps.Incrementos
+                Next
+            Next
+
+            str.AppendLine()
             str.AppendLine("Liquid Velocity Profile")
             str.AppendLine()
             str.AppendLine("Length (" & su.distance & ")" & vbTab & "Liquid Velocity (" & su.velocity & ")")
