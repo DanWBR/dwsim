@@ -978,7 +978,9 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
         If GlobalSettings.Settings.CalculatorActivated Then
 
-            If GlobalSettings.Settings.CalculatorBusy And Not Adjusting Then Return New List(Of Exception)
+            If GlobalSettings.Settings.CalculatorBusy And Not Adjusting Then
+                Return New List(Of Exception)
+            End If
 
             Inspector.Host.CurrentSolutionID = Date.Now.ToBinary
 
@@ -1000,6 +1002,20 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
             IObj?.Paragraphs.Add("When the user requests a flowsheet calculation, it tries to determine the order of the objects to be calculated.")
 
             Dim fs As IFlowsheet = TryCast(fobj, IFlowsheet)
+
+            If fs.PropertyPackages.Count = 0 Then
+                Dim el = New List(Of Exception)
+                el.Add(New Exception(fs.GetTranslatedString("NoPropPackAdded")))
+                fs.ShowMessage(fs.GetTranslatedString("NoPropPackAdded"), IFlowsheet.MessageType.GeneralError)
+                Return el
+            End If
+
+            If fs.SelectedCompounds.Count = 0 Then
+                Dim el = New List(Of Exception)
+                el.Add(New Exception(fs.GetTranslatedString("NoCompoundsAdded")))
+                fs.ShowMessage(fs.GetTranslatedString("NoCompoundsAdded"), IFlowsheet.MessageType.GeneralError)
+                Return el
+            End If
 
             If Not fs Is Nothing Then
                 If fs.MasterFlowsheet Is Nothing And Not Adjusting And GlobalSettings.Settings.CalculatorBusy Then
@@ -1219,7 +1235,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                                           Next
 
                                                           exlist = ProcessCalculationQueue(fobj, True, True, mode, filteredlist2,
-                                                                                     Settings.TaskCancellationTokenSource.Token, Adjusting)
+                                                                                 Settings.TaskCancellationTokenSource.Token, Adjusting)
 
                                                       End If
 

@@ -9928,6 +9928,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Você não adicionou nenhuma substância à simulação..
+        '''</summary>
+        Friend Shared ReadOnly Property NoCompoundsAdded() As String
+            Get
+                Return ResourceManager.GetString("NoCompoundsAdded", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Nenhum banco de dados definido!.
         '''</summary>
         Friend Shared ReadOnly Property NoDatabaseDefined() As String
@@ -10230,6 +10239,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property Nopossvelrealizaress() As String
             Get
                 Return ResourceManager.GetString("Nopossvelrealizaress", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Você não adicionou nenhum Pacote de Propriedades à simulação..
+        '''</summary>
+        Friend Shared ReadOnly Property NoPropPackAdded() As String
+            Get
+                Return ResourceManager.GetString("NoPropPackAdded", resourceCulture)
             End Get
         End Property
         

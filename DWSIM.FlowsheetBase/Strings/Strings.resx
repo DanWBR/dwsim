@@ -5375,4 +5375,10 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="DescPITPP" xml:space="preserve">
     <value>DescPITPP	The Pitzer model extended the Debye-Huckel theory using a virial expansion to account for the ionic strength dependence of the short range forces in binary and ternary ion interactions. The model is applicable to solutions of high ionic strength. The Pitzer model finds extensive application for the correlation and prediction of thermodynamic properties of electrolyte solutions.</value>
   </data>
+  <data name="NoCompoundsAdded" xml:space="preserve">
+    <value>You didn't add any Compound to the simulation.</value>
+  </data>
+  <data name="NoPropPackAdded" xml:space="preserve">
+    <value>You didn't add any Property Package to the simulation.</value>
+  </data>
 </root>

@@ -5682,4 +5682,10 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="TKResTimeV" xml:space="preserve">
     <value>Tempo de residência do vapor</value>
   </data>
+  <data name="NoCompoundsAdded" xml:space="preserve">
+    <value>Você não adicionou nenhuma substância à simulação.</value>
+  </data>
+  <data name="NoPropPackAdded" xml:space="preserve">
+    <value>Você não adicionou nenhum Pacote de Propriedades à simulação.</value>
+  </data>
 </root>
