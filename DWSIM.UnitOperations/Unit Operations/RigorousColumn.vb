@@ -5379,12 +5379,12 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 ''check for trivial solutions
 
-                For i = 0 To ns
-                    If pp.AUX_CheckTrivial(K(i), 0.05) Then
-                        'Tj(i) = Tj_ant(i)
-                        K(i) = Kant(i)
-                    End If
-                Next
+                'For i = 0 To ns
+                '    If pp.AUX_CheckTrivial(K(i), 0.05) Then
+                '        Tj(i) = Tj_ant(i)
+                '        K(i) = Kant(i)
+                '    End If
+                'Next
 
                 IObj2?.Paragraphs.Add(String.Format("Updated Temperatures: {0}", Tj.ToMathArrayString))
 
