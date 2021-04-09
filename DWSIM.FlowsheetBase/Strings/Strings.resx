@@ -859,7 +859,7 @@
     <value>Interstage Flows</value>
   </data>
   <data name="DCGeneralError" xml:space="preserve">
-    <value>A convergence error was found while trying to solve the column. Please check input variables and try again.</value>
+    <value>A convergence error was found while trying to solve the column. Possible reasons are: unfeasible specs, initial estimates far from solution and/or very non-ideal (wide-boiling or azeotropic) mixtures being fed to the column.</value>
   </data>
   <data name="DCILIts" xml:space="preserve">
     <value>Internal loop iterations</value>

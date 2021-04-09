@@ -4928,16 +4928,16 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Select Case specs("C").SType
                     Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
                         LSSj(0) = spval1 / pp.AUX_MMM(x(0)) * 1000
-                        rr = (Lj(0) + LSSj(0)) / LSSj(0)
+                        rr = Lj(0) / LSSj(0)
                     Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
                         LSSj(0) = spval1
-                        rr = (Lj(0) + LSSj(0)) / LSSj(0)
+                        rr = Lj(0) / LSSj(0)
                     Case ColumnSpec.SpecType.Stream_Ratio
                         rr = spval1
                     Case ColumnSpec.SpecType.Heat_Duty
                         Q(0) = spval1
                         LSSj(0) = -Lj(0) - (Q(0) - Vj(1) * Hv(1) - F(0) * Hfj(0) + (Vj(0) + VSSj(0)) * Hv(0)) / Hl(0)
-                        rr = (Lj(0) + LSSj(0)) / LSSj(0)
+                        rr = Lj(0) / LSSj(0)
                 End Select
             Else
                 LSSj(0) = 0.0
@@ -5363,16 +5363,16 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Select Case specs("C").SType
                         Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
                             LSSj(0) = spval1 / pp.AUX_MMM(xc(0)) * 1000
-                            rr = (Lj(0) + LSSj(0)) / LSSj(0)
+                            rr = Lj(0) / LSSj(0)
                         Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
                             LSSj(0) = spval1
-                            rr = (Lj(0) + LSSj(0)) / LSSj(0)
+                            rr = Lj(0) / LSSj(0)
                         Case ColumnSpec.SpecType.Stream_Ratio
                             rr = spval1
                         Case ColumnSpec.SpecType.Heat_Duty
                             Q(0) = spval1
                             LSSj(0) = -Lj(0) - (Q(0) - Vj(1) * Hv(1) - F(0) * Hfj(0) + (Vj(0) + VSSj(0)) * Hv(0)) / Hl(0)
-                            rr = (Lj(0) + LSSj(0)) / LSSj(0)
+                            rr = Lj(0) / LSSj(0)
                     End Select
                 Else
                     LSSj(0) = 0.0
@@ -5467,16 +5467,19 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     If Vj(i) < 0 Then Vj(i) = 0.0000000001
                 Next
 
-                For i = 0 To ns
-                    dVj(i) = Vj(i) - Vj_ant(i)
-                    If Abs(dVj(i)) > 0.1 * Vj_ant(i) Then Vj(i) = Vj_ant(i) * (1 + Math.Sign(dVj(i)) * 0.1)
-                Next
-
                 'Ljs
                 For i = 0 To ns
                     If i < ns Then
-                        If rebabs And i = 0 Then
-                            Lj(0) = (Vj(1) * Hv(1) + F(0) * Hfj(0) - (Vj(0) + VSSj(0)) * Hv(0) - LSSj(0) * Hl(0)) / Hl(0)
+                        If i = 0 Then
+                            If rebabs Then
+                                Lj(0) = (Vj(1) * Hv(1) + F(0) * Hfj(0) - (Vj(0) + VSSj(0)) * Hv(0) - LSSj(0) * Hl(0)) / Hl(0)
+                            Else
+                                If LSSj(0) > 0.0 Then
+                                    Lj(0) = rr * LSSj(0)
+                                Else
+                                    Lj(i) = Vj(i + 1) + sum1(i) - Vj(0)
+                                End If
+                            End If
                         Else
                             Lj(i) = Vj(i + 1) + sum1(i) - Vj(0)
                         End If
