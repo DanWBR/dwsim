@@ -6530,7 +6530,11 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             For i = 0 To ns
                 For j = 0 To nc - 1
-                    yc(i)(j) = vc(i)(j) / sumvkj(i)
+                    If sumvkj(i) > 0.0 Then
+                        yc(i)(j) = vc(i)(j) / sumvkj(i)
+                    Else
+                        yc(i)(j) = 0.0
+                    End If
                 Next
                 For j = 0 To nc - 1
                     If sumlkj(i) > 0.0# Then
@@ -6690,6 +6694,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     If _condtype <> Column.condtype.Full_Reflux Then
                         If _specs("C").SpecUnit = "M" Or _specs("C").SpecUnit = "Molar" Then
                             spfval1 = Log(xc(0)(spci1) / spval1)
+                            _specs("C").CalculatedValue = xc(0)(spci1)
                         Else 'W
                             spfval1 = Log((_pp.AUX_CONVERT_MOL_TO_MASS(xc(0))(spci1)) / spval1)
                             _specs("C").CalculatedValue = _pp.AUX_CONVERT_MOL_TO_MASS(xc(0))(spci1)
@@ -6700,20 +6705,25 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                             _specs("C").CalculatedValue = yc(0)(spci1)
                         Else 'W
                             spfval1 = Log((_pp.AUX_CONVERT_MOL_TO_MASS(yc(0))(spci1)) / spval1)
+                            _specs("C").CalculatedValue = (_pp.AUX_CONVERT_MOL_TO_MASS(yc(0))(spci1))
                         End If
                     End If
                 Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
                     If _condtype <> Column.condtype.Full_Reflux Then
                         spfval1 = Log((LSSj(0) * xc(0)(spci1) * _pp.RET_VMM()(spci1) / 1000) / spval1)
+                        _specs("C").CalculatedValue = (LSSj(0) * xc(0)(spci1) * _pp.RET_VMM()(spci1) / 1000)
                     Else
                         spfval1 = Log((Vj(0) * yc(0)(spci1) * _pp.RET_VMM()(spci1) / 1000) / spval1)
+                        _specs("C").CalculatedValue = (Vj(0) * yc(0)(spci1) * _pp.RET_VMM()(spci1) / 1000)
                     End If
                 Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
                     spfval1 = LSSj(0) * xc(0)(spci1) - spval1
                     If _condtype <> Column.condtype.Full_Reflux Then
                         spfval1 = Log((LSSj(0) * xc(0)(spci1)) / spval1)
+                        _specs("C").CalculatedValue = LSSj(0) * xc(0)(spci1)
                     Else
                         spfval1 = Log((Vj(0) * yc(0)(spci1)) / spval1)
+                        _specs("C").CalculatedValue = Vj(0) * yc(0)(spci1)
                     End If
                 Case ColumnSpec.SpecType.Component_Recovery
                     Dim rec As Double = spval1 / 100
@@ -6723,34 +6733,42 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Next
                     If _condtype <> Column.condtype.Full_Reflux Then
                         spfval1 = Log(LSSj(0) * xc(0)(spci1) / sumc / rec)
+                        _specs("C").CalculatedValue = LSSj(0) * xc(0)(spci1) / sumc
                     Else
                         spfval1 = Log(Vj(0) * yc(0)(spci1) / sumc / rec)
+                        _specs("C").CalculatedValue = Vj(0) * yc(0)(spci1) / sumc
                     End If
                 Case ColumnSpec.SpecType.Heat_Duty
                     Q(0) = spval1
                 Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
                     spfval1 = Log(LSSj(0) / (spval1 / _pp.AUX_MMM(xc(0)) * 1000))
+                    _specs("C").CalculatedValue = LSSj(0) / _pp.AUX_MMM(xc(0)) / 1000
                 Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
                     spfval1 = Log(LSSj(0) / spval1)
+                    _specs("C").CalculatedValue = LSSj(0)
                 Case ColumnSpec.SpecType.Stream_Ratio
                     spfval1 = Log(Lj(0) / LSSj(0) / spval1)
+                    _specs("C").CalculatedValue = Lj(0) / LSSj(0)
                 Case ColumnSpec.SpecType.Temperature
                     spfval1 = Log((Tj(0)) / spval1)
+                    _specs("C").CalculatedValue = Tj(0)
             End Select
 
             Select Case _specs("R").SType
                 Case ColumnSpec.SpecType.Component_Fraction
                     If _specs("C").SpecUnit = "M" Or _specs("C").SpecUnit = "Molar" Then
                         spfval2 = Log(xc(ns)(spci2) / spval2)
+                        _specs("R").CalculatedValue = xc(ns)(spci2)
                     Else 'W
                         spfval2 = Log((_pp.AUX_CONVERT_MOL_TO_MASS(xc(ns))(spci2)) / spval2)
-                        _specs("C").CalculatedValue = _pp.AUX_CONVERT_MOL_TO_MASS(xc(ns))(spci2)
+                        _specs("R").CalculatedValue = _pp.AUX_CONVERT_MOL_TO_MASS(xc(ns))(spci2)
                     End If
                 Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
                     spfval2 = Log((Lj(ns) * xc(ns)(spci2) * _pp.RET_VMM()(spci2) / 1000) / spval2)
+                    _specs("R").CalculatedValue = (Lj(ns) * xc(ns)(spci2) * _pp.RET_VMM()(spci2) / 1000)
                 Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
-                    spfval2 = Lj(ns) * xc(ns)(spci2) - spval2
                     spfval2 = Log((Lj(ns) * xc(ns)(spci2)) / spval2)
+                    _specs("R").CalculatedValue = (Lj(ns) * xc(ns)(spci2))
                 Case ColumnSpec.SpecType.Component_Recovery
                     Dim rec As Double = spval2 / 100
                     Dim sumc As Double = 0
@@ -6758,16 +6776,22 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         sumc += zc(j)(spci2) * F(j)
                     Next
                     spfval2 = Log(Lj(ns) * xc(ns)(spci2) / sumc / rec)
+                    _specs("R").CalculatedValue = Lj(ns) * xc(ns)(spci2) / sumc
                 Case ColumnSpec.SpecType.Heat_Duty
                     Q(ns) = spval2
+                    _specs("R").CalculatedValue = spval2
                 Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
                     spfval2 = Log(Lj(ns) / (spval2 / _pp.AUX_MMM(xc(ns)) * 1000))
+                    _specs("R").CalculatedValue = Lj(ns) / (_pp.AUX_MMM(xc(ns)) * 1000)
                 Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
                     spfval2 = Log(Lj(ns) / spval2)
+                    _specs("R").CalculatedValue = Lj(ns)
                 Case ColumnSpec.SpecType.Stream_Ratio
-                    spfval2 = Log(Lj(ns) / Lj(ns) / spval2)
+                    spfval2 = Log(Vj(ns) / Lj(ns) / spval2)
+                    _specs("R").CalculatedValue = Vj(ns) / Lj(ns)
                 Case ColumnSpec.SpecType.Temperature
                     spfval2 = Log((Tj(ns)) / spval2)
+                    _specs("R").CalculatedValue = Tj(ns)
             End Select
 
             For i = 0 To ns
@@ -6816,12 +6840,11 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 For j = 0 To nc - 1
                     sum1 += Kval(0)(j) * xc(0)(j)
                 Next
-                i = 0
                 For j = 0 To nc - 1
                     If j = 0 Then
-                        E(i, j) = 1 - sum1
+                        E(0, j) = 1 - sum1
                     Else
-                        E(i, j) = xc(i)(j) - yc(i)(j)
+                        E(0, j) = lc(0)(j) - Lj(0) * vc(0)(j) / Vj(0)
                     End If
                 Next
             End If
@@ -7008,6 +7031,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Q(i) = Q(i)
             Next
 
+            If V(0) = 0.0 Then V(0) = 0.0000000001
+
             Dim Sl(ns), Sv(ns), maxvc(ns), maxlc(ns) As Double
 
             For i = 0 To ns
@@ -7110,8 +7135,16 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             For i = 0 To ns
                 xvar(i * (2 * nc + 1)) = Tj(i) / _maxT
                 For j = 0 To nc - 1
-                    xvar(i * (2 * nc + 1) + j + 1) = vc(i)(j) / _maxvc(i)
-                    xvar(i * (2 * nc + 1) + j + 1 + nc) = lc(i)(j) / _maxlc(i)
+                    If _maxvc(i) > 0.0 Then
+                        xvar(i * (2 * nc + 1) + j + 1) = vc(i)(j) / _maxvc(i)
+                    Else
+                        xvar(i * (2 * nc + 1) + j + 1) = 0.0
+                    End If
+                    If _maxlc(i) > 0.0 Then
+                        xvar(i * (2 * nc + 1) + j + 1 + nc) = lc(i)(j) / _maxlc(i)
+                    Else
+                        xvar(i * (2 * nc + 1) + j + 1 + nc) = 0.0
+                    End If
                 Next
             Next
 
@@ -7133,15 +7166,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             xvar = MathNet.Numerics.RootFinding.Broyden.FindRoot(Function(xvars)
                                                                      Return FunctionValue(xvars)
-                                                                 End Function, xvar)
-
-            'Dim nsolv As New Optimization.NewtonSolver
-            'nsolv.EnableDamping = True
-            'nsolv.UseBroydenApproximation = True
-
-            'xvar = nsolv.Solve(Function(xvars)
-            '                       Return FunctionValue(xvars)
-            '                   End Function, xvar)
+                                                                 End Function, xvar, tol(0), maxits)
 
             IObj?.Paragraphs.Add(String.Format("Final Variable Values: {0}", xvar.ToMathArrayString))
 
@@ -7306,7 +7331,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             'Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ec, il_err, ic, el_err, dFdXvar}
 
             With output
-                .FinalError = result(10) + result(12)
+                .FinalError = DirectCast(result(10), Double()).AbsSqrSumY + result(12)
                 .IterationsTaken = result(9) + result(11)
                 .StageTemperatures = DirectCast(result(0), Double()).ToList()
                 .VaporFlows = DirectCast(result(1), Double()).ToList()
