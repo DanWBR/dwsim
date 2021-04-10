@@ -1,13 +1,12 @@
-Version 6.4.7
+Version 6.4.8
 
-New Database with Food Compounds (https://github.com/Spogis/DWSIMFoodProp)
-Updated CoolProp libraries to v6.4.1
-Grouped all Property Package editors in a single window (Classic UI)
-Exposed CSTR's Vapor Residence Time and Headspace
-Added an option to import compound data into Compound Creator from JSON files
-Fixed issues with some flash algorithms
-Fixed issues with Compound Creator
-Fixed Gibbs/Equilibrium/Conversion Reactor mixed-phase product enthalpies
-Fixed a bug with solids handling
-Fixed a bug in Seawater Property Package 
-General UI Fixes
+Updated User's Guide
+Added Model Customization samples
+Enhanced reliability of the Rigorous Column model solvers
+Fixed issue 129 - CAPE-OPEN Thermodynamic Package configure failed
+Fixed External Temperature gradient calculation in Pipe Segment model
+Added visualization of External Temperature to Pipe Segment model
+Fixed infinite loop in Electrolyte Property Packages
+Fixed Adjust/Set not being inactive when they should
+Fixed a bug with NL VLLE flash algorithm
+Other minor fixes and enhancements

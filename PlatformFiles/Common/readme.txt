@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 6.4.7
+Version 6.4.8
 Copyright (c) 2017-2021 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,20 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim6/commits/windows
+
+Version 6.4.8
+
+Author				Description
+Daniel Medeiros		Updated User's Guide
+Daniel Medeiros		Added Model Customization samples
+Daniel Medeiros		Enhanced reliability of the Rigorous Column model solvers
+Daniel Medeiros		Fixed issue 129 - CAPE-OPEN Thermodynamic Package configure failed
+Daniel Medeiros		Fixed External Temperature gradient calculation in Pipe Segment model
+Daniel Medeiros		Added visualization of External Temperature to Pipe Segment model
+Daniel Medeiros		Fixed infinite loop in Electrolyte Property Packages
+Daniel Medeiros		Fixed Adjust/Set not being inactive when they should
+Daniel Medeiros		Fixed a bug with NL VLLE flash algorithm
+Daniel Medeiros		Other minor fixes and enhancements
 
 Version 6.4.7
 
