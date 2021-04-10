@@ -4567,6 +4567,29 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                 specs("C").CalculatedValue = T2(0)
                         End Select
 
+                        Select Case specs("R").SType
+                            Case ColumnSpec.SpecType.Component_Fraction
+                                If specs("R").SpecUnit = "M" Or specs("R").SpecUnit = "Molar" Then
+                                    specs("R").CalculatedValue = x2(ns)(spci1)
+                                Else 'W
+                                    specs("R").CalculatedValue = pp.AUX_CONVERT_MOL_TO_MASS(x2(ns))(spci2)
+                                End If
+                            Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
+                                specs("R").CalculatedValue = L2(ns) * x2(ns)(spci2) * pp.RET_VMM()(spci2) / 1000
+                            Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
+                                specs("R").CalculatedValue = L2(ns) * x2(ns)(spci2)
+                            Case ColumnSpec.SpecType.Component_Recovery
+                                Dim sumc As Double = 0
+                                For j = 0 To ns
+                                    sumc += z(j)(spci2) * F(j)
+                                Next
+                                specs("R").CalculatedValue = L2(ns) * x2(ns)(spci2) / sumc * 100
+                            Case ColumnSpec.SpecType.Temperature
+                                specs("R").CalculatedValue = T2(ns)
+                            Case ColumnSpec.SpecType.Stream_Ratio
+                                specs("R").CalculatedValue = V2(ns) / L2(ns)
+                        End Select
+
                         counter += 1
 
                         If Math.IEEERemainder(counter, 10) = 0.0 Then
@@ -4626,6 +4649,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Kval = result(7)
                 Q = result(8)
 
+                bottomsrate = L.Last
+
                 Dim counter As Integer = 0
                 Dim errfunc As Double = 1.0E+20
 
@@ -4661,6 +4686,47 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         Kval = result(7)
                         Q = result(8)
                     End If
+
+                    Select Case specs("C").SType
+                        Case ColumnSpec.SpecType.Component_Fraction
+                            If condt <> Column.condtype.Full_Reflux Then
+                                If specs("C").SpecUnit = "M" Or specs("C").SpecUnit = "Molar" Then
+                                    specs("C").CalculatedValue = x2(0)(spci1)
+                                Else 'W
+                                    specs("C").CalculatedValue = pp.AUX_CONVERT_MOL_TO_MASS(x2(0))(spci1)
+                                End If
+                            Else
+                                If specs("C").SpecUnit = "M" Or specs("C").SpecUnit = "Molar" Then
+                                    specs("C").CalculatedValue = y2(0)(spci1)
+                                Else 'W
+                                    specs("C").CalculatedValue = pp.AUX_CONVERT_MOL_TO_MASS(y2(0))(spci1)
+                                End If
+                            End If
+                        Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
+                            If condt <> Column.condtype.Full_Reflux Then
+                                specs("C").CalculatedValue = LSS2(0) * x2(0)(spci1) * pp.RET_VMM()(spci1) / 1000
+                            Else
+                                specs("C").CalculatedValue = V2(0) * y2(0)(spci1) * pp.RET_VMM()(spci1) / 1000
+                            End If
+                        Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
+                            If condt <> Column.condtype.Full_Reflux Then
+                                specs("C").CalculatedValue = LSS2(0) * x2(0)(spci1)
+                            Else
+                                specs("C").CalculatedValue = V2(0) * y2(0)(spci1)
+                            End If
+                        Case ColumnSpec.SpecType.Component_Recovery
+                            Dim sumc As Double = 0
+                            For j = 0 To ns
+                                sumc += z(j)(spci1) * F(j)
+                            Next
+                            If condt <> Column.condtype.Full_Reflux Then
+                                specs("C").CalculatedValue = LSS2(0) * x2(0)(spci1) / sumc * 100
+                            Else
+                                specs("C").CalculatedValue = V2(0) * y2(0)(spci1) / sumc * 100
+                            End If
+                        Case ColumnSpec.SpecType.Temperature
+                            specs("C").CalculatedValue = T2(0)
+                    End Select
 
                     Select Case specs("R").SType
                         Case ColumnSpec.SpecType.Component_Fraction
@@ -4716,6 +4782,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 Try
                     MathNet.Numerics.RootFinding.Broyden.FindRoot(Function(xvars)
+                                                                      If xvars(0) > F.Sum Then
+                                                                          xvars(0) = 0.99 * F.Sum
+                                                                      End If
                                                                       Return New Double() {freb.Invoke(xvars(0), 0)}
                                                                   End Function, New Double() {bottomsrate}, tolerance, maxits)
                     success = True
@@ -4732,9 +4801,10 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     ResultsVector.Clear()
 
                     Try
-                        MathNet.Numerics.RootFinding.Broyden.FindRoot(Function(xvars)
-                                                                          Return New Double() {freb.Invoke(xvars(0), 1)}
-                                                                      End Function, New Double() {bottomsrate}, tolerance, maxits)
+                        Dim br As New DWSIM.MathOps.MathEx.BrentOpt.Brent()
+                        br.BrentOpt2(bottomsrate * 0.1, F.Sum, 30, tolerance, maxits, Function(xvar)
+                                                                                          Return freb.Invoke(xvar, 1)
+                                                                                      End Function)
                         success = True
                     Catch ex As Exception
                         success = False
@@ -4750,41 +4820,15 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     ObjFunctionValues.Clear()
                     ResultsVector.Clear()
 
-                    Try
-                        MathNet.Numerics.RootFinding.Brent.FindRootExpand(Function(xvar)
-                                                                              Return freb.Invoke(xvar, 0)
-                                                                          End Function,
-                                                                          bottomsrate * 0.98,
+                    MathNet.Numerics.RootFinding.Brent.FindRootExpand(Function(xvar)
+                                                                          Return freb.Invoke(xvar, 0)
+                                                                      End Function,
+                                                                          bottomsrate * 0.5,
                                                                           bottomsrate * 1.02, tolerance, maxits)
-                        success = True
-                    Catch ex As Exception
-                        success = False
-                    End Try
 
                 End If
 
-                If Not success Then
-
-                    counter = 0
-                    errfunc = 1.0E+20
-
-                    ObjFunctionValues.Clear()
-                    ResultsVector.Clear()
-
-                    Try
-                        MathNet.Numerics.RootFinding.Brent.FindRootExpand(Function(xvar)
-                                                                              Return freb.Invoke(xvar, 1)
-                                                                          End Function,
-                                                                          bottomsrate * 0.98,
-                                                                          bottomsrate * 1.02, tolerance, maxits)
-                        success = True
-                    Catch ex As Exception
-                        success = False
-                    End Try
-
-                End If
-
-                If Double.IsNaN(errfunc) Or errfunc > tolerance Then Throw New Exception(pp.Flowsheet?.GetTranslatedString("DCGeneralError"))
+                If Double.IsNaN(errfunc) Or Math.Abs(errfunc) > tolerance Then Throw New Exception(pp.Flowsheet?.GetTranslatedString("DCGeneralError"))
 
                 result = ResultsVector(ObjFunctionValues.IndexOf(ObjFunctionValues.Min))
 
@@ -5192,7 +5236,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     sumx(i) = 0
                     For j = 0 To nc - 1
                         lc(i)(j) = xt(j)(i)
-                        If lc(i)(j) < 0.0# Then lc(i)(j) = 0.0000001
+                        If lc(i)(j) < 0.0# Then
+                            lc(i)(j) = -lc(i)(j)
+                        End If
                         sumx(i) += lc(i)(j)
                     Next
                 Next
@@ -5202,7 +5248,11 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         xcerror(i) = 0.0
                         For j = 0 To nc - 1
                             xc0(i)(j) = xc(i)(j)
-                            If sumx(i) > 0.0# Then xc(i)(j) = lc(i)(j) / sumx(i) Else xc(i)(j) = yc(i)(j) / K(i)(j)
+                            If sumx(i) > 0.0# Then
+                                xc(i)(j) = lc(i)(j) / sumx(i)
+                            Else
+                                xc(i)(j) = yc(i)(j) / K(i)(j)
+                            End If
                         Next
                         xcerror(i) = lc(i).Sum - 1.0
                     Next
@@ -5218,7 +5268,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         lc(i)(j) = xt(j)(i)
                         Lj(i) += lc(i)(j)
                     Next
-                    If Lj(i) < 0.0# Then Lj(i) = 0.001
+                    If Lj(i) < 0.0# Then
+                        Lj(i) = -Lj(i)
+                    End If
                 Next
 
                 IObj2?.Paragraphs.Add(String.Format("l: {0}", lc.ToMathArrayString))
@@ -5297,11 +5349,11 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                             End If
                         Next
                     Else
-                        If ic < 5 Or ic > 100 Then
-                            For i = 0 To ns
-                                Tj(i) = Tj(i) / 2 + Tj_ant(i) / 2
-                            Next
-                        End If
+                        'If ic < 5 Or ic > 100 Then
+                        For i = 0 To ns
+                            Tj(i) = Tj(i) / 2 + Tj_ant(i) / 2
+                        Next
+                        'End If
                     End If
 
                 Else
@@ -5376,15 +5428,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         If Double.IsNaN(K(i)(j)) Then K(i)(j) = pp.AUX_PVAPi(j, Tj(i)) / P(i)
                     Next
                 Next
-
-                ''check for trivial solutions
-
-                'For i = 0 To ns
-                '    If pp.AUX_CheckTrivial(K(i), 0.05) Then
-                '        Tj(i) = Tj_ant(i)
-                '        K(i) = Kant(i)
-                '    End If
-                'Next
 
                 IObj2?.Paragraphs.Add(String.Format("Updated Temperatures: {0}", Tj.ToMathArrayString))
 
@@ -7186,11 +7229,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Dim sumvkj(ns), sumlkj(ns) As Double
             Dim fxvar((ns + 1) * (2 * nc + 1) - 1) As Double
             Dim xvar((ns + 1) * (2 * nc + 1) - 1), lb((ns + 1) * (2 * nc + 1) - 1), ub((ns + 1) * (2 * nc + 1) - 1) As Double
-            Dim dxvar((ns + 1) * (2 * nc + 1) - 1) As Double
-            Dim dFdXvar((ns + 1) * (2 * nc + 1) - 1, (ns + 1) * (2 * nc + 1) - 1) As Double
-            Dim hes((ns + 1) * (2 * nc + 1) - 1, (ns + 1) * (2 * nc + 1) - 1) As Double
-
-            Dim bx((ns + 1) * (2 * nc + 1) - 1), bx_ant((ns + 1) * (2 * nc + 1) - 1), bxb((ns + 1) * (2 * nc + 1) - 1), bf((ns + 1) * (2 * nc + 1) - 1), bfb((ns + 1) * (2 * nc + 1) - 1), bp((ns + 1) * (2 * nc + 1) - 1), bp_ant((ns + 1) * (2 * nc + 1) - 1) As Double
 
             For i = 0 To ns
                 VSSj(i) = VSS(i)
@@ -7230,6 +7268,11 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         xvar(i * (2 * nc + 1) + j + 1 + nc) = 0.0
                     End If
                 Next
+            Next
+
+            For i = 0 To ub.Length - 1
+                lb(i) = 1.0E-20
+                ub(i) = 2.0
             Next
 
             IObj?.Paragraphs.Add("Creating variable vectors...")
@@ -7362,7 +7405,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             IObj?.Close()
 
-            Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ec, il_err, ic, el_err, dFdXvar}
+            Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ec, il_err, ic, el_err}
 
         End Function
 
