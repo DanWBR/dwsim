@@ -5688,4 +5688,16 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="NoPropPackAdded" xml:space="preserve">
     <value>Você não adicionou nenhum Pacote de Propriedades à simulação.</value>
   </data>
+  <data name="CondenserCalcValue" xml:space="preserve">
+    <value>Valor Calculado para o Condensador</value>
+  </data>
+  <data name="CondenserSpecValue" xml:space="preserve">
+    <value>Valor Especificado para o Condensador</value>
+  </data>
+  <data name="ReboilerCalcValue" xml:space="preserve">
+    <value>Valor Calculado para o Refervedor</value>
+  </data>
+  <data name="ReboilerSpecValue" xml:space="preserve">
+    <value>Valor Especificado para o Refervedor</value>
+  </data>
 </root>

@@ -3511,6 +3511,7 @@ Namespace UnitOperations
                     End If
                 End If
             ElseIf TypeOf Me Is AbsorptionColumn Then
+                SetColumnSolver(New SolvingMethods.BurninghamOttoMethod())
                 If llextractor Then
                     'run all trial compositions until it solves
                     Dim ntrials = L1trials.Count
@@ -3541,7 +3542,6 @@ Namespace UnitOperations
                     Next
                     If ex0 IsNot Nothing Then Throw ex0
                 Else
-                    SetColumnSolver(New SolvingMethods.BurninghamOttoMethod())
                     so = Solver.SolveColumn(inputdata)
                 End If
             End If

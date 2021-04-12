@@ -20,6 +20,7 @@ Christian Hornhofer
 Christian Jordan
 David 
 David Whitlock
+Deryck Coetzer
 Diego A. Acosta
 Domenico Marchese
 Don Harrold
@@ -59,6 +60,7 @@ Luiza Martins
 Marcelo Miranda
 Marcos Silva
 Martin Heiser
+Matt Hogg
 Michael Papantoniou
 Mikhail Evtushenko
 Nikita Petrosyan

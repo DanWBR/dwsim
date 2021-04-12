@@ -238,6 +238,10 @@ Public Class EditingForm_Column
                 Case ColType.DistillationColumn
                     gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("DCCondenserDuty"), su.Converter.ConvertFromSI(units.heatflow, .CondenserDuty).ToString(nf), units.heatflow})
                     gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("DCReboilerDuty"), su.Converter.ConvertFromSI(units.heatflow, .ReboilerDuty).ToString(nf), units.heatflow})
+                    gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("CondenserSpecValue"), su.Converter.ConvertFromSI(.Specs("C").SpecUnit, .Specs("C").SpecValue).ToString(nf), .Specs("C").SpecUnit})
+                    gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("CondenserCalcValue"), su.Converter.ConvertFromSI(.Specs("C").SpecUnit, .Specs("C").CalculatedValue).ToString(nf), .Specs("C").SpecUnit})
+                    gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("ReboilerSpecValue"), su.Converter.ConvertFromSI(.Specs("R").SpecUnit, .Specs("R").SpecValue).ToString(nf), .Specs("R").SpecUnit})
+                    gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("ReboilerCalcValue"), su.Converter.ConvertFromSI(.Specs("R").SpecUnit, .Specs("R").CalculatedValue).ToString(nf), .Specs("R").SpecUnit})
                 Case ColType.AbsorptionColumn
                 Case ColType.ReboiledAbsorber
                     gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("DCReboilerDuty"), su.Converter.ConvertFromSI(units.heatflow, .ReboilerDuty).ToString(nf), units.heatflow})

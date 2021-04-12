@@ -2414,6 +2414,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Valor Calculado para o Condensador.
+        '''</summary>
+        Friend Shared ReadOnly Property CondenserCalcValue() As String
+            Get
+                Return ResourceManager.GetString("CondenserCalcValue", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Valor Especificado para o Condensador.
+        '''</summary>
+        Friend Shared ReadOnly Property CondenserSpecValue() As String
+            Get
+                Return ResourceManager.GetString("CondenserSpecValue", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Condições.
         '''</summary>
         Friend Shared ReadOnly Property Condies() As String
@@ -12795,6 +12813,24 @@ Namespace My.Resources
         Friend Shared ReadOnly Property ReboiledAbsorber_Desc() As String
             Get
                 Return ResourceManager.GetString("ReboiledAbsorber_Desc", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Valor Calculado para o Refervedor.
+        '''</summary>
+        Friend Shared ReadOnly Property ReboilerCalcValue() As String
+            Get
+                Return ResourceManager.GetString("ReboilerCalcValue", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Valor Especificado para o Refervedor.
+        '''</summary>
+        Friend Shared ReadOnly Property ReboilerSpecValue() As String
+            Get
+                Return ResourceManager.GetString("ReboilerSpecValue", resourceCulture)
             End Get
         End Property
         

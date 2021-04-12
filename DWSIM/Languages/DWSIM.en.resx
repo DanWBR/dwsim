@@ -955,7 +955,7 @@
     <value>Edit Connections</value>
   </data>
   <data name="DCELIts" xml:space="preserve">
-    <value>External loop iterations</value>
+    <value>Iterations Taken</value>
   </data>
   <data name="DCELTol" xml:space="preserve">
     <value>External Loop</value>
@@ -976,7 +976,7 @@
     <value>A convergence error was found while trying to solve the column. Possible reasons are: unfeasible specs, initial estimates far from solution and/or very non-ideal (wide-boiling or azeotropic) mixtures being fed to the column.</value>
   </data>
   <data name="DCILIts" xml:space="preserve">
-    <value>Internal loop iterations</value>
+    <value>Iterations Taken</value>
   </data>
   <data name="DCILTol" xml:space="preserve">
     <value>Internal Loop (IO method only)</value>
@@ -5743,5 +5743,17 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   </data>
   <data name="NoPropPackAdded" xml:space="preserve">
     <value>You didn't add any Property Package to the simulation.</value>
+  </data>
+  <data name="CondenserCalcValue" xml:space="preserve">
+    <value>Condenser Specification Calculated Value</value>
+  </data>
+  <data name="CondenserSpecValue" xml:space="preserve">
+    <value>Condenser Specification Value</value>
+  </data>
+  <data name="ReboilerCalcValue" xml:space="preserve">
+    <value>Reboiler Specification Calculated Value</value>
+  </data>
+  <data name="ReboilerSpecValue" xml:space="preserve">
+    <value>Reboiler Specification Value</value>
   </data>
 </root>
