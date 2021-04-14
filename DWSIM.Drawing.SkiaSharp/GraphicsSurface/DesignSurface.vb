@@ -1358,7 +1358,7 @@ Public Class GraphicsSurface
                                       t.Stop()
                                       DrawAddedAnimation = True
                                   Else
-                                      InvalidateCallback.Invoke()
+                                      InvalidateCallback?.Invoke()
                                   End If
                               End Sub
         t.Start()

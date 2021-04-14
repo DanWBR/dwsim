@@ -4888,6 +4888,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Distância / Comprimento.
+        '''</summary>
+        Friend Shared ReadOnly Property DistComp() As String
+            Get
+                Return ResourceManager.GetString("DistComp", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Coluna de Destilação.
         '''</summary>
         Friend Shared ReadOnly Property DistillationColumn() As String

@@ -5700,4 +5700,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="ReboilerSpecValue" xml:space="preserve">
     <value>Valor Especificado para o Refervedor</value>
   </data>
+  <data name="DistComp" xml:space="preserve">
+    <value>Distância / Comprimento</value>
+  </data>
 </root>

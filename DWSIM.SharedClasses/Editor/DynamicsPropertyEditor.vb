@@ -1,4 +1,6 @@
-﻿Public Class DynamicsPropertyEditor
+﻿Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
+
+Public Class DynamicsPropertyEditor
 
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
@@ -36,11 +38,18 @@
 
             If col2.ContainsKey(p.Key) And col3.ContainsKey(p.Key) Then
 
-                Dim utype = col3(p.Key)
+                Dim utype As Interfaces.Enums.UnitOfMeasure = col3(p.Key)
                 Dim unitsstring = units.GetCurrentUnits(utype)
 
+                Dim value As String
+                If Double.TryParse(p.Value, New Double) Then
+                    value = cv.ConvertFromSI(units.GetCurrentUnits(utype), Convert.ToDouble(p.Value)).ToString(nf)
+                Else
+                    value = p.Value.ToString
+                End If
+
                 Dim l As New Label With {.Text = p.Key, .Font = New Drawing.Font(.Font, Drawing.FontStyle.Bold), .Dock = DockStyle.Fill, .AutoSize = False, .TextAlign = Drawing.ContentAlignment.MiddleLeft}
-                Dim tb As New TextBox With {.Text = If(Double.TryParse(p.Value, New Double), Convert.ToDouble(p.Value).ToString(nf), p.Value.ToString), .Dock = DockStyle.Fill, .TextAlign = HorizontalAlignment.Right}
+                Dim tb As New TextBox With {.Text = value, .Dock = DockStyle.Fill, .TextAlign = HorizontalAlignment.Right}
                 Dim l2 As New Label With {.Text = unitsstring, .Dock = DockStyle.Fill, .AutoSize = False, .TextAlign = Drawing.ContentAlignment.MiddleLeft}
                 Dim l3 As New Label With {.Text = col2(p.Key).ToString, .Dock = DockStyle.Fill, .AutoSize = False, .Height = 46 * GlobalSettings.Settings.DpiScale, .TextAlign = Drawing.ContentAlignment.TopLeft}
 
@@ -55,7 +64,7 @@
                 AddHandler tb.KeyUp, Sub(s, e)
                                          If e.KeyData = Keys.Enter Then
                                              If tb.ForeColor = System.Drawing.Color.Blue Then
-                                                 col1(p.Key) = Double.Parse(tb.Text)
+                                                 col1(p.Key) = cv.ConvertToSI(units.GetCurrentUnits(utype), Double.Parse(tb.Text))
                                                  tb.SelectAll()
                                              End If
                                          End If
