@@ -213,6 +213,12 @@
     <Compile Include="Base Classes\UnitOperations.vb" />
     <Compile Include="Controllers\PIDController.vb" />
     <Compile Include="Databases\PumpDatabase.vb" />
+    <Compile Include="Editing Forms\Dynamics\EditingForm_SeparatorFiller.Designer.vb">
+      <DependentUpon>EditingForm_SeparatorFiller.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Dynamics\EditingForm_SeparatorFiller.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\EditingForm_AnalogGauge.Designer.vb">
       <DependentUpon>EditingForm_AnalogGauge.vb</DependentUpon>
     </Compile>
@@ -646,6 +652,12 @@
     <Compile Include="Unit Operations\Vessel.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Editing Forms\Dynamics\EditingForm_SeparatorFiller.en.resx">
+      <DependentUpon>EditingForm_SeparatorFiller.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Dynamics\EditingForm_SeparatorFiller.resx">
+      <DependentUpon>EditingForm_SeparatorFiller.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Adjust.de.resx">
       <DependentUpon>EditingForm_Adjust.vb</DependentUpon>
     </EmbeddedResource>

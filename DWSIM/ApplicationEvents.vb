@@ -46,6 +46,18 @@ Namespace My
 
         Private Sub MyApplication_Startup(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.StartupEventArgs) Handles Me.Startup
 
+            If Environment.OSVersion.Version >= New Version(6, 3, 0) Then
+                'win 8.1 added support for per monitor dpi
+                If (Environment.OSVersion.Version >= New Version(10, 0, 15063)) Then
+                    'creators update added support For per monitor v2
+                    NativeMethods.SetProcessDpiAwarenessContext(NativeMethods.DPI_AWARENESS_CONTEXT.DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2)
+                Else
+                    NativeMethods.SetProcessDpiAwareness(NativeMethods.PROCESS_DPI_AWARENESS.Process_Per_Monitor_DPI_Aware)
+                End If
+            Else
+                NativeMethods.SetProcessDPIAware()
+            End If
+
             Directory.SetCurrentDirectory(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location))
 
             Control.CheckForIllegalCrossThreadCalls = True

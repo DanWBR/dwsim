@@ -11,6 +11,8 @@ Public Class DynamicsPropertyEditor
     Dim units As SharedClasses.SystemsOfUnits.Units
     Dim nf As String
 
+    Public UpdateCallBack As Action(Of TableLayoutPanel)
+
     Private Sub DynamicsPropertyEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Shown
 
         UpdateInfo()
@@ -97,6 +99,8 @@ Public Class DynamicsPropertyEditor
             End If
 
         Next
+
+        UpdateCallBack?.Invoke(PropertiesLayout)
 
         PropertiesLayout.ResumeLayout()
 

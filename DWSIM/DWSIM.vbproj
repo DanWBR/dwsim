@@ -1011,6 +1011,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Objects\Classes\Shared\DPIAwareness.vb" />
     <Compile Include="Objects\Classes\Shared\GraphicObjectControlPanelModeEditors.vb" />
     <Compile Include="Objects\Classes\Shared\SharedFunctions.vb" />
     <Compile Include="Objects\Classes\TreeViewModels\BaseItem.vb" />

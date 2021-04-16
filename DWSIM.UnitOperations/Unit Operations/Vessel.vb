@@ -157,6 +157,62 @@ Namespace UnitOperations
 
         End Sub
 
+        Public Overrides Sub DisplayDynamicsEditForm()
+
+            If fd Is Nothing Then
+                fd = New DynamicsPropertyEditor With {.SimObject = Me}
+                fd.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockRight
+                fd.Tag = "ObjectEditor"
+                fd.UpdateCallBack = Sub(table)
+                                        AddButtonsToDynEditor(table)
+                                    End Sub
+                Me.FlowSheet.DisplayForm(fd)
+            Else
+                If fd.IsDisposed Then
+                    fd = New DynamicsPropertyEditor With {.SimObject = Me}
+                    fd.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockRight
+                    fd.Tag = "ObjectEditor"
+                    fd.UpdateCallBack = Sub(table)
+                                            AddButtonsToDynEditor(table)
+                                        End Sub
+                    Me.FlowSheet.DisplayForm(fd)
+                Else
+                    fd.Activate()
+                End If
+            End If
+
+        End Sub
+
+        Private Sub AddButtonsToDynEditor(table As TableLayoutPanel)
+
+            Dim button1 As New Button With {.Text = FlowSheet.GetTranslatedString("ViewAccumulationStream"),
+                .Dock = DockStyle.Bottom, .AutoSize = True, .AutoSizeMode = AutoSizeMode.GrowAndShrink}
+            AddHandler button1.Click, Sub(s, e)
+                                          AccumulationStream.SetFlowsheet(FlowSheet)
+                                          Dim fms As New MaterialStreamEditor With {
+                                          .MatStream = AccumulationStream,
+                                          .IsAccumulationStream = True,
+                                          .Text = Me.GraphicObject.Tag + ": " + FlowSheet.GetTranslatedString("AccumulationStream")}
+                                          FlowSheet.DisplayForm(fms)
+                                      End Sub
+
+            Dim button2 As New Button With {.Text = FlowSheet.GetTranslatedString("FillWithStream"),
+                .Dock = DockStyle.Bottom, .AutoSize = True, .AutoSizeMode = AutoSizeMode.GrowAndShrink}
+            AddHandler button2.Click, Sub(s, e)
+                                          AccumulationStream.SetFlowsheet(FlowSheet)
+                                          Dim fms As New EditingForm_SeparatorFiller With {.Separator = Me}
+                                          fms.ShowDialog()
+                                      End Sub
+
+            table.Controls.Add(button1)
+            table.Controls.Add(button2)
+            table.Controls.Add(New Panel())
+
+        End Sub
+
+
+
+
         Private prevM, currentM As Double
 
         Public Overrides Sub RunDynamicModel()
@@ -225,7 +281,9 @@ Namespace UnitOperations
             Else
 
                 AccumulationStream.SetFlowsheet(FlowSheet)
-                If imsmix.GetMassFlow() > 0 Then AccumulationStream = AccumulationStream.Add(imsmix, timestep)
+                If imsmix.GetMassFlow() > 0 Then
+                    AccumulationStream = AccumulationStream.Add(imsmix, timestep)
+                End If
                 AccumulationStream.PropertyPackage.CurrentMaterialStream = AccumulationStream
                 AccumulationStream.Calculate()
                 If oms1.GetMassFlow() > 0 Then AccumulationStream = AccumulationStream.Subtract(oms1, timestep)

@@ -52,6 +52,11 @@ Namespace UnitOperations
             If Not ael Is Nothing Then
                 AccumulationStream = New Thermodynamics.Streams.MaterialStream()
                 AccumulationStream.LoadData(ael.Elements.ToList)
+                For Each phase In AccumulationStream.Phases.Values
+                    For Each comp In phase.Compounds.Values
+                        comp.ConstantProperties = FlowSheet.SelectedCompounds(comp.Name)
+                    Next
+                Next
             End If
 
             Try

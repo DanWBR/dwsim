@@ -5759,4 +5759,13 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="DistComp" xml:space="preserve">
     <value>Distance / Length</value>
   </data>
+  <data name="AccumulationStream" xml:space="preserve">
+    <value>Accumulation Stream</value>
+  </data>
+  <data name="FillWithStream" xml:space="preserve">
+    <value>Fill with Material Stream</value>
+  </data>
+  <data name="ViewAccumulationStream" xml:space="preserve">
+    <value>View/Edit Accumulation Stream</value>
+  </data>
 </root>

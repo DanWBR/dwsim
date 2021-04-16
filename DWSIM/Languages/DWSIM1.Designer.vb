@@ -461,6 +461,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Corrente de Acúmulo.
+        '''</summary>
+        Friend Shared ReadOnly Property AccumulationStream() As String
+            Get
+                Return ResourceManager.GetString("AccumulationStream", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Aceleração.
         '''</summary>
         Friend Shared ReadOnly Property Aceleracao() As String
@@ -6540,6 +6549,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property FileSaved() As String
             Get
                 Return ResourceManager.GetString("FileSaved", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Preencher com Material.
+        '''</summary>
+        Friend Shared ReadOnly Property FillWithStream() As String
+            Get
+                Return ResourceManager.GetString("FillWithStream", resourceCulture)
             End Get
         End Property
         
@@ -16242,6 +16260,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property Vidro() As String
             Get
                 Return ResourceManager.GetString("Vidro", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Ver Corrente de Acúmulo.
+        '''</summary>
+        Friend Shared ReadOnly Property ViewAccumulationStream() As String
+            Get
+                Return ResourceManager.GetString("ViewAccumulationStream", resourceCulture)
             End Get
         End Property
         

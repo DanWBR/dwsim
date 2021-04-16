@@ -58,5 +58,5 @@ Partial Class DynamicsPropertyEditor
 
     End Sub
     Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents PropertiesLayout As TableLayoutPanel
+    Public WithEvents PropertiesLayout As TableLayoutPanel
 End Class
