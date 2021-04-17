@@ -88,6 +88,8 @@ Public Class EditingForm_SeparatorFiller
 
         tbResults.Text += "Finished Successfully!"
 
+        Separator.UpdateDynamicsEditForm()
+
     End Sub
 
 End Class

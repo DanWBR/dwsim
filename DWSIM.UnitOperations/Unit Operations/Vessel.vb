@@ -210,9 +210,6 @@ Namespace UnitOperations
 
         End Sub
 
-
-
-
         Private prevM, currentM As Double
 
         Public Overrides Sub RunDynamicModel()
