@@ -217,7 +217,7 @@ Namespace PropertyPackages
 
         Public Property LiquidFugacity_UsePoyntingCorrectionFactor As Boolean = True
 
-        Public Property ActivityCoefficientModels_IgnoreMissingInteractionParameters As Boolean = True
+        Public Property ActivityCoefficientModels_IgnoreMissingInteractionParameters As Boolean = False
 
         Public Property VaporPhaseFugacityCalculationMode As VaporPhaseFugacityCalcMode = VaporPhaseFugacityCalcMode.Ideal
 

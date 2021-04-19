@@ -4536,11 +4536,8 @@ Namespace Streams
                     Select Case basis
                         Case "Molar", "molar", "mole", "Mole"
                             Dim val = Me.Phases(f).Properties.molecularWeight.GetValueOrDefault
-                            If val = 0.0# Then
-                                res.Add(Me.Phases(f).Properties.molar_enthalpy.GetValueOrDefault)
-                            Else
-                                res.Add(Me.Phases(f).Properties.enthalpy.GetValueOrDefault * val)
-                            End If
+                            If val = 0.0# Then val = Me.PropertyPackage.AUX_MMM(phs)
+                            res.Add(Me.Phases(f).Properties.enthalpy.GetValueOrDefault * val)
                         Case "Mass", "mass"
                             res.Add(Me.Phases(f).Properties.enthalpy.GetValueOrDefault * 1000)
                     End Select
@@ -4548,11 +4545,8 @@ Namespace Streams
                     Select Case basis
                         Case "Molar", "molar", "mole", "Mole"
                             Dim val = Me.Phases(f).Properties.molecularWeight.GetValueOrDefault
-                            If val = 0.0# Then
-                                res.Add(Me.Phases(f).Properties.molar_entropy.GetValueOrDefault)
-                            Else
-                                res.Add(Me.Phases(f).Properties.entropy.GetValueOrDefault * val)
-                            End If
+                            If val = 0.0# Then val = Me.PropertyPackage.AUX_MMM(phs)
+                            res.Add(Me.Phases(f).Properties.entropy.GetValueOrDefault * val)
                         Case "Mass", "mass"
                             res.Add(Me.Phases(f).Properties.entropy.GetValueOrDefault * 1000)
                     End Select
@@ -4560,11 +4554,8 @@ Namespace Streams
                     Select Case basis
                         Case "Molar", "molar", "mole", "Mole"
                             Dim val = Me.Phases(f).Properties.molecularWeight.GetValueOrDefault
-                            If val = 0.0# Then
-                                res.Add(Me.Phases(f).Properties.molar_enthalpyF.GetValueOrDefault)
-                            Else
-                                res.Add(Me.Phases(f).Properties.enthalpyF.GetValueOrDefault * val)
-                            End If
+                            If val = 0.0# Then val = Me.PropertyPackage.AUX_MMM(phs)
+                            res.Add(Me.Phases(f).Properties.enthalpyF.GetValueOrDefault * val)
                         Case "Mass", "mass"
                             res.Add(Me.Phases(f).Properties.enthalpyF.GetValueOrDefault * 1000)
                     End Select
@@ -4572,11 +4563,8 @@ Namespace Streams
                     Select Case basis
                         Case "Molar", "molar", "mole", "Mole"
                             Dim val = Me.Phases(f).Properties.molecularWeight.GetValueOrDefault
-                            If val = 0.0# Then
-                                res.Add(Me.Phases(f).Properties.molar_entropyF.GetValueOrDefault)
-                            Else
-                                res.Add(Me.Phases(f).Properties.entropyF.GetValueOrDefault * val)
-                            End If
+                            If val = 0.0# Then val = Me.PropertyPackage.AUX_MMM(phs)
+                            res.Add(Me.Phases(f).Properties.entropyF.GetValueOrDefault * val)
                         Case "Mass", "mass"
                             res.Add(Me.Phases(f).Properties.entropyF.GetValueOrDefault * 1000)
                     End Select
@@ -4584,11 +4572,8 @@ Namespace Streams
                     Select Case basis
                         Case "Molar", "molar", "mole", "Mole"
                             Dim val As Double = Me.Phases(f).Properties.molecularWeight.GetValueOrDefault
-                            If val = 0.0# Then
-                                res.Add(Me.Phases(f).Properties.molar_internal_energy.GetValueOrDefault)
-                            Else
-                                res.Add(Me.Phases(f).Properties.internal_energy.GetValueOrDefault * val)
-                            End If
+                            If val = 0.0# Then val = Me.PropertyPackage.AUX_MMM(phs)
+                            res.Add(Me.Phases(f).Properties.internal_energy.GetValueOrDefault * val)
                         Case "Mass", "mass"
                             res.Add(Me.Phases(f).Properties.internal_energy.GetValueOrDefault * 1000)
                     End Select
@@ -4596,11 +4581,8 @@ Namespace Streams
                     Select Case basis
                         Case "Molar", "molar", "mole", "Mole"
                             Dim val As Double = Me.Phases(f).Properties.molecularWeight.GetValueOrDefault
-                            If val = 0.0# Then
-                                res.Add(Me.Phases(f).Properties.molar_gibbs_free_energy.GetValueOrDefault)
-                            Else
-                                res.Add(Me.Phases(f).Properties.gibbs_free_energy.GetValueOrDefault * val)
-                            End If
+                            If val = 0.0# Then val = Me.PropertyPackage.AUX_MMM(phs)
+                            res.Add(Me.Phases(f).Properties.gibbs_free_energy.GetValueOrDefault * val)
                         Case "Mass", "mass"
                             res.Add(Me.Phases(f).Properties.gibbs_free_energy.GetValueOrDefault * 1000)
                     End Select
@@ -4608,11 +4590,8 @@ Namespace Streams
                     Select Case basis
                         Case "Molar", "molar", "mole", "Mole"
                             Dim val As Double = Me.Phases(f).Properties.molecularWeight.GetValueOrDefault
-                            If val = 0.0# Then
-                                res.Add(Me.Phases(f).Properties.molar_helmholtz_energy.GetValueOrDefault)
-                            Else
-                                res.Add(Me.Phases(f).Properties.helmholtz_energy.GetValueOrDefault * val)
-                            End If
+                            If val = 0.0# Then val = Me.PropertyPackage.AUX_MMM(phs)
+                            res.Add(Me.Phases(f).Properties.helmholtz_energy.GetValueOrDefault * val)
                         Case "Mass", "mass"
                             res.Add(Me.Phases(f).Properties.helmholtz_energy.GetValueOrDefault * 1000)
                     End Select
