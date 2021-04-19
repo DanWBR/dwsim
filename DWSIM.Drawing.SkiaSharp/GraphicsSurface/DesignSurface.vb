@@ -868,6 +868,12 @@ Public Class GraphicsSurface
 
             SelectedObject?.DisplayControlPanelModeEditor()
 
+            If TypeOf SelectedObject Is SwitchGraphic Then
+                Dim switchobj = DirectCast(SelectedObject.Owner, ISwitch)
+                switchobj.IsOn = Not switchobj.IsOn
+                DirectCast(switchobj, ISimulationObject).Calculate()
+            End If
+
         Else
 
             If MultiSelectMode Then

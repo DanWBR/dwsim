@@ -1505,7 +1505,11 @@ Public Class MaterialStreamEditor
     End Sub
 
     Private Sub chkActive_CheckedChanged(sender As Object, e As EventArgs) Handles chkActive.CheckedChanged
-        If Loaded Then MatStream.GraphicObject.Active = chkActive.Checked
+        If Loaded Then
+            MatStream.GraphicObject.Active = chkActive.Checked
+            MatStream.FlowSheet.UpdateInterface()
+            UpdateInfo()
+        End If
     End Sub
 
     Private Sub gridInputComposition_KeyDown(sender As Object, e As KeyEventArgs) Handles gridInputComposition.KeyDown

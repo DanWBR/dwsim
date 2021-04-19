@@ -247,7 +247,11 @@ Public Class EditingForm_Mixer
     End Sub
 
     Private Sub chkActive_CheckedChanged(sender As Object, e As EventArgs) Handles chkActive.CheckedChanged
-        If Loaded Then MixerObject.GraphicObject.Active = chkActive.Checked
+        If Loaded Then
+            MixerObject.GraphicObject.Active = chkActive.Checked
+            MixerObject.FlowSheet.UpdateInterface()
+            UpdateInfo()
+        End If
     End Sub
 
     Private Sub cbPressureCalcMode_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPressureCalcMode.SelectedIndexChanged

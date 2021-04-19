@@ -355,7 +355,11 @@ Public Class EditingForm_CompoundSeparator
     End Sub
 
     Private Sub chkActive_CheckedChanged(sender As Object, e As EventArgs) Handles chkActive.CheckedChanged
-        If Loaded Then SimObject.GraphicObject.Active = chkActive.Checked
+        If Loaded Then
+            SimObject.GraphicObject.Active = chkActive.Checked
+            SimObject.FlowSheet.UpdateInterface()
+            UpdateInfo()
+        End If
     End Sub
 
     Private Sub rbStream1_CheckedChanged(sender As Object, e As EventArgs) Handles rbStream1.CheckedChanged
