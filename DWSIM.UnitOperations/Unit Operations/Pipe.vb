@@ -1336,7 +1336,7 @@ Namespace UnitOperations
             Dim esp_isol = 0.0#
             If isolamento = True Then
 
-                esp_isol = Me.m_thermalprofile.Espessura / 1000.0 'mm to m
+                esp_isol = Me.m_thermalprofile.Espessura 'm
                 U_isol = Me.m_thermalprofile.Condtermica / (Math.Log((Dext + esp_isol) / Dext) * Dext)
 
             End If
