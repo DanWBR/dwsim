@@ -107,14 +107,16 @@ Namespace GraphicObjects.Shapes
             Dim rect As New SKRect(X, Y, X + Width, X + Height)
 
             Dim gp As New SKPath()
-            gp.MoveTo(Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height))
+            gp.MoveTo((X), (Y + 0.5 * Height))
 
-            gp.LineTo(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y))
-            gp.LineTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height))
-            gp.LineTo(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height))
-            gp.LineTo(Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height))
+            gp.LineTo((X + 0.5 * Width), (Y))
+            gp.LineTo((X + Width), (Y + 0.5 * Height))
+            gp.LineTo((X + 0.5 * Width), (Y + Height))
+            gp.LineTo((X), (Y + 0.5 * Height))
 
             gp.Close()
+
+            canvas.DrawPath(gp, myPen)
 
             If GradientMode Then
 
@@ -140,8 +142,6 @@ Namespace GraphicObjects.Shapes
 
             End If
 
-            canvas.DrawPath(gp, myPen)
-
             Dim tpaint As New SKPaint()
 
             With tpaint
@@ -155,8 +155,8 @@ Namespace GraphicObjects.Shapes
             Dim trect As New SKRect(0, 0, 2, 2)
             tpaint.GetTextPath("C", 0, 0).GetBounds(trect)
 
-            Dim ax, ay As Integer
-            ax = Me.X + (Me.Width - (trect.Right - trect.Left)) / 2
+            Dim ax, ay As Double
+            ax = Me.X + (Me.Width - (trect.Right - trect.Left)) / 2 - 1.0
             ay = Me.Y + (Me.Height - (trect.Top - trect.Bottom)) / 2
 
             If FlippedH Or FlippedV Or Rotation <> 0 Then

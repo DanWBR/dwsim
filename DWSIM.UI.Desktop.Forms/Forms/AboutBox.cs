@@ -62,7 +62,11 @@ namespace DWSIM.UI.Forms.Forms
             string vtext = "Version".Localize() + " " + Assembly.GetExecutingAssembly().GetName().Version.Major.ToString() + 
                 "." + Assembly.GetExecutingAssembly().GetName().Version.Minor.ToString() +
                 "." + Assembly.GetExecutingAssembly().GetName().Version.Build.ToString();
-            
+
+#if DEBUG
+            vtext += "-" + File.GetLastWriteTimeUtc(Assembly.GetExecutingAssembly().Location).ToString();
+#endif
+
             string crtext = Shared.AssemblyCopyright;
 
             layout.Add(new ImageView { Size = new Size((int)(sf * 100), (int)(sf * 100)), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "DWSIM_ico.png")) }, 0, 0);

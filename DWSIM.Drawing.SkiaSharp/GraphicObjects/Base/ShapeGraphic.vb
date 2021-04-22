@@ -265,10 +265,10 @@ Namespace GraphicObjects
 
             Dim ax, ay As Integer
             If Me.FlippedH Then
-                ax = Me.X + (Me.Width - size.Width) / 2
+                ax = Me.X + (Me.Width - size.Width) / 2 - 1.0
                 ay = Me.Y + Me.Height * 0.8 - size.Height
             Else
-                ax = Me.X + (Me.Width - size.Width) / 2
+                ax = Me.X + (Me.Width - size.Width) / 2 - 1.0
                 ay = Me.Y + Me.Height * 0.8 - size.Height
             End If
 

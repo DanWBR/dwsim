@@ -12,7 +12,7 @@ Andras Nady
 Andrew Dickson
 Bill Byers
 Bo Tjernberg
-Bruce
+Bruce Rising
 Bruce Logue
 Carlos G. C. Reetz
 Casey Houston
@@ -27,7 +27,7 @@ Don Harrold
 Dorivaldo Junior
 Doug Palfreyman
 Emanuel Santos
-F An
+Fatma Alnuaimi
 Filippo Borroni
 Gerry Agnew
 Gokhan Candan 
@@ -70,6 +70,7 @@ Petroconsulting Llc
 Philippe Wesel
 Rajesh Kempegowda
 Richard Huntington
+Roberto Bianchini
 Roland Berger
 Rupert Easter
 Ryszard

@@ -3005,6 +3005,7 @@ Public Class FormFlowsheet
             Me.UIThread(Sub()
                             Invalidating = True
                             FormSurface.TableLayoutPanel1.Refresh()
+                            Application.DoEvents()
                             Invalidating = False
                         End Sub)
         End If

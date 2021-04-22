@@ -1,4 +1,4 @@
-﻿Imports System.IO
+﻿Imports System.Reflection
 
 '    Copyright 2008 Daniel Wagner O. de Medeiros
 '
@@ -28,7 +28,7 @@ Public NotInheritable Class SplashScreen
         lblVersion.Text = "Version " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build
 
 #If DEBUG Then
-        lblVersion.Text += " (for debugging)"
+        lblVersion.Text += "-" + IO.File.GetLastWriteTimeUtc(Assembly.GetExecutingAssembly().Location).ToString()
 #End If
 
         If Environment.Is64BitProcess Then
