@@ -308,43 +308,43 @@ Public Class FormFlowsheet
                                                   End Sub
                         Select Case extender.Category
                             Case ExtenderCategory.File
-                                If item.InsertAtPosition > 0 Then
+                                If item.InsertAtPosition >= 0 Then
                                     FileTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                 Else
                                     FileTSMI.DropDownItems.Add(exttsmi)
                                 End If
                             Case ExtenderCategory.Edit
-                                If item.InsertAtPosition > 0 Then
+                                If item.InsertAtPosition >= 0 Then
                                     EditTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                 Else
                                     EditTSMI.DropDownItems.Add(exttsmi)
                                 End If
                             Case ExtenderCategory.Tools
-                                If item.InsertAtPosition > 0 Then
+                                If item.InsertAtPosition >= 0 Then
                                     ToolsTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                 Else
                                     ToolsTSMI.DropDownItems.Add(exttsmi)
                                 End If
                             Case ExtenderCategory.Dynamics
-                                If item.InsertAtPosition > 0 Then
+                                If item.InsertAtPosition >= 0 Then
                                     DynamicsTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                 Else
                                     DynamicsTSMI.DropDownItems.Add(exttsmi)
                                 End If
                             Case ExtenderCategory.Optimization
-                                If item.InsertAtPosition > 0 Then
+                                If item.InsertAtPosition >= 0 Then
                                     OptimizationTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                 Else
                                     OptimizationTSMI.DropDownItems.Add(exttsmi)
                                 End If
                             Case ExtenderCategory.Results
-                                If item.InsertAtPosition > 0 Then
+                                If item.InsertAtPosition >= 0 Then
                                     ResultsTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                 Else
                                     ResultsTSMI.DropDownItems.Add(exttsmi)
                                 End If
                             Case ExtenderCategory.Utilities
-                                If item.InsertAtPosition > 0 Then
+                                If item.InsertAtPosition >= 0 Then
                                     UtilitiesTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                 Else
                                     UtilitiesTSMI.DropDownItems.Add(exttsmi)
@@ -352,7 +352,7 @@ Public Class FormFlowsheet
                             Case ExtenderCategory.NewItem
                                 newmenuitem?.DropDownItems.Add(exttsmi)
                             Case ExtenderCategory.ToolStrip
-                                If item.InsertAtPosition > 0 Then
+                                If item.InsertAtPosition >= 0 Then
                                     ToolStrip1.Items.Insert(item.InsertAtPosition, exttsmi)
                                 Else
                                     ToolStrip1.Items.Add(exttsmi)

@@ -160,25 +160,25 @@ Public Class FormMain
                                                       End Sub
                             Select Case extender.Category
                                 Case ExtenderCategory.File
-                                    If item.InsertAtPosition > 0 Then
+                                    If item.InsertAtPosition >= 0 Then
                                         FileTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                     Else
                                         FileTSMI.DropDownItems.Add(exttsmi)
                                     End If
                                 Case ExtenderCategory.Edit
-                                    If item.InsertAtPosition > 0 Then
+                                    If item.InsertAtPosition >= 0 Then
                                         EditTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                     Else
                                         EditTSMI.DropDownItems.Add(exttsmi)
                                     End If
                                 Case ExtenderCategory.Tools
-                                    If item.InsertAtPosition > 0 Then
+                                    If item.InsertAtPosition >= 0 Then
                                         ToolsTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                     Else
                                         ToolsTSMI.DropDownItems.Add(exttsmi)
                                     End If
                                 Case ExtenderCategory.Help
-                                    If item.InsertAtPosition > 0 Then
+                                    If item.InsertAtPosition >= 0 Then
                                         HelpTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                     Else
                                         HelpTSMI.DropDownItems.Add(exttsmi)
