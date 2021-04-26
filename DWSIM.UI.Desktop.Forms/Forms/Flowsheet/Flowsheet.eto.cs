@@ -415,6 +415,17 @@ namespace DWSIM.UI.Forms
                 dialog.CurrentFilterIndex = 0;
                 if (dialog.ShowDialog(this) == DialogResult.Ok)
                 {
+                    if (!Path.HasExtension(dialog.FileName))
+                    {
+                        if (dialog.CurrentFilterIndex == 0)
+                        {
+                            dialog.FileName = Path.ChangeExtension(dialog.FileName, ".dwxmz");
+                        }
+                        else
+                        {
+                            dialog.FileName = Path.ChangeExtension(dialog.FileName, ".xml");
+                        }
+                    }
                     SaveSimulation(dialog.FileName);
                 }
             };
