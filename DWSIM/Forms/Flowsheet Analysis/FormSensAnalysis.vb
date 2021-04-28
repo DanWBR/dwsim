@@ -702,6 +702,7 @@ Public Class FormSensAnalysis
                     'run simulation
                     Dim exceptions = FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, Settings.SolverMode)
                     If exceptions.Count > 0 Then Throw New AggregateException(exceptions)
+                    Application.DoEvents()
                     'get the value of the dependent variable
                     If rbExp.Checked Then
                         Me.selectedsacase.econtext = New ExpressionContext

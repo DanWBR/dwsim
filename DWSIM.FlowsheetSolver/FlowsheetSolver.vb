@@ -1278,6 +1278,8 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
                                                           fgui.ShowMessage("Recycle loop #" & (icount + 1) & ", average recycle error: " & Format(avgerr, "N") & "%", IFlowsheet.MessageType.Information)
 
+                                                          fgui.UpdateInterface()
+
                                                       End If
 
                                                       'process the scripts associated with the recycle loop event.
