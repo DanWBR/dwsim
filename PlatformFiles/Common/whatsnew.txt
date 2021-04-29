@@ -1,12 +1,15 @@
-Version 6.4.8
+Version 6.4.9
 
-Updated User's Guide
-Added Model Customization samples
-Enhanced reliability of the Rigorous Column model solvers
-Fixed issue 129 - CAPE-OPEN Thermodynamic Package configure failed
-Fixed External Temperature gradient calculation in Pipe Segment model
-Added visualization of External Temperature to Pipe Segment model
-Fixed infinite loop in Electrolyte Property Packages
-Fixed Adjust/Set not being inactive when they should
-Fixed a bug with NL VLLE flash algorithm
-Other minor fixes and enhancements
+Implemented feature request #126: Dymamics Integrator pause and resume (Classic UI)
+New Separator Filler Utility (Dynamics)
+Fixed issue #138: Flowsheet can't be saved
+Fixed issue #137: Estimate Pipe Overall Heat Transfer Coefficient
+Fixed issue #130: Stream Enthalpy not being correctly set by CAPE-OPEN Property Packages
+Fixed issues with Seawater Property Package 
+Fixed drawing of some PFD Objects
+Fixed Switch logical block behavior
+Fixed active/inactive buttons not updating status in object editors (Classic UI)
+Fixed Integrator results sheet formatting
+Dynamics Volume-Temperature (VT) Flash fixes
+Fixed distance units handling (Classic UI)
+Fixed Liquid-Liquid Extraction column not working

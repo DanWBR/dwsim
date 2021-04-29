@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 6.4.8
+Version 6.4.9
 Copyright (c) 2017-2021 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -62,6 +62,23 @@ VERSION HISTORY / CHANGELOG
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim6/commits/windows
 
+Version 6.4.9
+
+Author				Description
+Daniel Medeiros		Implemented feature request #126: Dynamics Integrator pause and resume (Classic UI)
+Daniel Medeiros		New Separator Filler Utility (Dynamics)
+Daniel Medeiros		Fixed issue #138: Flowsheet can't be saved
+Daniel Medeiros		Fixed issue #137: Estimate Pipe Overall Heat Transfer Coefficient
+Daniel Medeiros		Fixed issue #130: Stream Enthalpy not being correctly set by CAPE-OPEN Property Packages
+Daniel Medeiros		Fixed issues with Seawater Property Package 
+Daniel Medeiros		Fixed drawing of some PFD Objects
+Daniel Medeiros		Fixed Switch logical block behavior
+Daniel Medeiros		Fixed active/inactive buttons not updating status in object editors (Classic UI)
+Daniel Medeiros		Fixed Integrator results sheet formatting
+Daniel Medeiros		Dynamics Volume-Temperature (VT) Flash fixes
+Daniel Medeiros		Fixed distance units handling (Classic UI)
+Daniel Medeiros		Fixed Liquid-Liquid Extraction column not working
+
 Version 6.4.8
 
 Author				Description
@@ -78,6 +95,7 @@ Daniel Medeiros		Other minor fixes and enhancements
 
 Version 6.4.7
 
+Author				Description
 Daniel Medeiros		New Database with Food Compounds (https://github.com/Spogis/DWSIMFoodProp)
 Daniel Medeiros		Updated CoolProp libraries to v6.4.1
 Daniel Medeiros		Grouped all Property Package editors in a single window (Classic UI)
