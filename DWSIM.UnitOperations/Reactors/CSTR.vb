@@ -472,7 +472,7 @@ Namespace Reactors
             'Initialisations
             Q = ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault 'Mixture
             QV = ims.Phases(2).Properties.volumetric_flow.GetValueOrDefault 'Vapour
-            QL = ims.Phases(3).Properties.volumetric_flow.GetValueOrDefault 'Liquid
+            QL = ims.Phases(1).Properties.volumetric_flow.GetValueOrDefault 'Liquid
             QS = ims.Phases(7).Properties.volumetric_flow.GetValueOrDefault 'Solid
 
             If QL > 0 Then
@@ -559,7 +559,7 @@ Namespace Reactors
 
                 Q = ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault 'Mixture
                 QV = ims.Phases(2).Properties.volumetric_flow.GetValueOrDefault 'Vapour
-                QL = ims.Phases(3).Properties.volumetric_flow.GetValueOrDefault 'Liquid
+                QL = ims.Phases(1).Properties.volumetric_flow.GetValueOrDefault 'Liquid
                 QS = ims.Phases(7).Properties.volumetric_flow.GetValueOrDefault 'Solid
 
                 If ReactorMode = EReactorMode.SingleOutlet Then

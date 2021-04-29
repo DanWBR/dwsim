@@ -1627,12 +1627,6 @@ Namespace BaseClasses
 
         End Sub
 
-        ''' <summary>
-        ''' Returns the Vapor Pressure in Pa
-        ''' </summary>
-        ''' <param name="T">Temperature in K</param>
-        ''' <param name="message"></param>
-        ''' <returns></returns>
         Public Function GetVaporPressure(T As Double, Optional ByRef message As String = "") As Double Implements ICompoundConstantProperties.GetVaporPressure
 
             If IsPF = 1 Then
@@ -1710,12 +1704,6 @@ Namespace BaseClasses
 
         End Function
 
-        ''' <summary>
-        ''' Returns the Ideal Gas Heat Capacity in kJ/[kg.K]
-        ''' </summary>
-        ''' <param name="T">Temperature in K</param>
-        ''' <param name="message"></param>
-        ''' <returns></returns>
         Public Function GetIdealGasHeatCapacity(T As Double, Optional ByRef message As String = "") As Double Implements ICompoundConstantProperties.GetIdealGasHeatCapacity
 
             Dim db As String = OriginalDB
@@ -1823,12 +1811,6 @@ Namespace BaseClasses
 
         End Function
 
-        ''' <summary>
-        ''' Returns the Enthalpy of Vaporization in kJ/kg
-        ''' </summary>
-        ''' <param name="T">Temperature in K</param>
-        ''' <param name="message"></param>
-        ''' <returns></returns>
         Public Function GetEnthalpyOfVaporization(T As Double, Optional ByRef message As String = "") As Double Implements ICompoundConstantProperties.GetEnthalpyOfVaporization
 
             Dim A, B, C, D, E, Tr, result As Double
@@ -1884,12 +1866,6 @@ Namespace BaseClasses
 
         End Function
 
-        ''' <summary>
-        ''' Returns the Vapor Viscosity in Pa.s
-        ''' </summary>
-        ''' <param name="T">Temperature in K</param>
-        ''' <param name="message"></param>
-        ''' <returns></returns>
         Public Function GetVaporViscosity(T As Double, Optional ByRef message As String = "") As Double Implements ICompoundConstantProperties.GetVaporViscosity
 
             Dim val As Double
@@ -1916,12 +1892,6 @@ Namespace BaseClasses
 
         End Function
 
-        ''' <summary>
-        ''' Returns the Vapor Thermal Conductivity in W/(m.K)
-        ''' </summary>
-        ''' <param name="T">Temperature in K</param>
-        ''' <param name="message"></param>
-        ''' <returns></returns>
         Public Function GetVaporThermalConductivity(T As Double, Optional ByRef message As String = "") As Double Implements ICompoundConstantProperties.GetVaporThermalConductivity
 
             Dim val As Double
@@ -1940,12 +1910,6 @@ Namespace BaseClasses
 
         End Function
 
-        ''' <summary>
-        ''' Returns the Liquid Viscosity in Pa.s
-        ''' </summary>
-        ''' <param name="T">Temperature in K</param>
-        ''' <param name="message"></param>
-        ''' <returns></returns>
         Public Function GetLiquidViscosity(T As Double, Optional ByRef message As String = "") As Double Implements ICompoundConstantProperties.GetLiquidViscosity
 
             If IsPF = 1 Then
@@ -2027,12 +1991,6 @@ Namespace BaseClasses
 
         End Function
 
-        ''' <summary>
-        ''' Returns the Liquid Thermal Conductivity in W/(m.K)
-        ''' </summary>
-        ''' <param name="T">Temperature in K</param>
-        ''' <param name="message"></param>
-        ''' <returns></returns>
         Public Function GetLiquidThermalConductivity(T As Double, Optional ByRef message As String = "") As Double Implements ICompoundConstantProperties.GetLiquidThermalConductivity
 
             Dim val As Double
@@ -2051,12 +2009,6 @@ Namespace BaseClasses
 
         End Function
 
-        ''' <summary>
-        ''' Returns the Liquid Heat Capacity in kJ/[kg.K]
-        ''' </summary>
-        ''' <param name="T">Temperature in K</param>
-        ''' <param name="message"></param>
-        ''' <returns></returns>
         Public Function GetLiquidHeatCapacity(T As Double, Optional ByRef message As String = "") As Double Implements ICompoundConstantProperties.GetLiquidHeatCapacity
 
             Dim val As Double
@@ -2085,12 +2037,6 @@ Namespace BaseClasses
 
         End Function
 
-        ''' <summary>
-        ''' Returns the Liquid Density in kg/m3
-        ''' </summary>
-        ''' <param name="T">Temperature in K</param>
-        ''' <param name="message"></param>
-        ''' <returns></returns>
         Public Function GetLiquidDensity(T As Double, Optional ByRef message As String = "") As Double Implements ICompoundConstantProperties.GetLiquidDensity
 
             Dim val As Double
@@ -2112,12 +2058,6 @@ Namespace BaseClasses
 
         End Function
 
-        ''' <summary>
-        ''' Returns the Solid Density in kg/m3
-        ''' </summary>
-        ''' <param name="T">Temperature in K</param>
-        ''' <param name="message"></param>
-        ''' <returns></returns>
         Public Function GetSolidDensity(T As Double, Optional ByRef message As String = "") As Double Implements ICompoundConstantProperties.GetSolidDensity
 
             Dim val As Double
@@ -2158,12 +2098,6 @@ Namespace BaseClasses
 
         End Function
 
-        ''' <summary>
-        ''' Returns the Solid Cp in kJ/[kg.K]
-        ''' </summary>
-        ''' <param name="T">Temperature in K</param>
-        ''' <param name="message"></param>
-        ''' <returns></returns>
         Public Function GetSolidHeatCapacity(T As Double, Optional ByRef message As String = "") As Double Implements ICompoundConstantProperties.GetSolidHeatCapacity
 
             Dim val As Double

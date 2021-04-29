@@ -1556,7 +1556,7 @@ Namespace UnitOperations
                         PIh2 = (1 + tmp.GetLiquidPhase1MoleFraction) * (1 + tmp.GetVaporPhaseMoleFraction * (1 + tmp.GetSolidPhaseMoleFraction)) 'phase indicator hot stream
                         If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate hot stream outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]  ===> Th2 = {2} K", Ph2, Hh2, Th2))
 
-                        If Abs((Qi - Q_old) / Q_old) < 0.001 Or count > 100 Then Exit Do
+                        If Abs((Qi - Q_old) / Q_old) < 0.001 Or count > 300 Then Exit Do
 
                         WWc = Wc * (Hc2 - Hc1) / (Tc2 - Tc1) * 1000 'Heat Capacity Rate cold side
                         WWh = Wh * (Hh2 - Hh1) / (Th2 - Th1) * 1000 'Heat Capacity Rate hot side
@@ -1609,6 +1609,8 @@ Namespace UnitOperations
                             LMTD = Qi / U / A * 1000
                         End If
 
+                        If Not IgnoreLMTDError Then If Double.IsNaN(LMTD) Or Double.IsInfinity(LMTD) Then Throw New Exception(FlowSheet.GetTranslatedString("HXCalcError"))
+
                         If DebugMode Then
                             AppendDebugLine(String.Format("Logarithmic Temperature Difference :{0} K", LMTD))
                             AppendDebugLine(String.Format("Heat Exchange Q = {0} KW", Qi))
@@ -1622,7 +1624,7 @@ Namespace UnitOperations
 
                     Q = Qi
 
-                    If count > 100 Then Throw New Exception("Reached maximum number of iterations! Final Q change: " & Qi - Q_old & " kW ; " & Abs((Qi - Q_old) / Q_old * 100) & " % ")
+                    If count > 300 Then Throw New Exception("Reached maximum number of iterations! Final Q change: " & Qi - Q_old & " kW ; " & Abs((Qi - Q_old) / Q_old * 100) & " % ")
 
                     PIc1 = (1 + StInCold.Phases(1).Properties.molarfraction.GetValueOrDefault) * (1 + StInCold.Phases(2).Properties.molarfraction.GetValueOrDefault) * (1 + StInCold.Phases(7).Properties.molarfraction.GetValueOrDefault)
                     PIh1 = (1 + StInHot.Phases(1).Properties.molarfraction.GetValueOrDefault) * (1 + StInHot.Phases(2).Properties.molarfraction.GetValueOrDefault) * (1 + StInHot.Phases(7).Properties.molarfraction.GetValueOrDefault)

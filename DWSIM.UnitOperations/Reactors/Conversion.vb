@@ -323,7 +323,7 @@ Namespace Reactors
 
                                           Select Case rxn.ReactionPhase
                                               Case PhaseName.Liquid
-                                                  m0 = ims.Phases(3).Properties.molarflow.GetValueOrDefault
+                                                  m0 = ims.Phases(1).Properties.molarflow.GetValueOrDefault
                                                   nif = ims.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Liquid).MultiplyConstY(m0)
                                               Case PhaseName.Vapor
                                                   m0 = ims.Phases(2).Properties.molarflow.GetValueOrDefault

@@ -739,4 +739,7 @@ Public Class EditingForm_HeatExchanger
         SimObject.PinchPointAtOutlets = chkForcePinchToOutlets.Checked
     End Sub
 
+    Private Sub chkIgnoreLMTD_CheckedChanged(sender As Object, e As EventArgs) Handles chkIgnoreLMTD.CheckedChanged
+        SimObject.IgnoreLMTDError = chkIgnoreLMTD.Checked
+    End Sub
 End Class
