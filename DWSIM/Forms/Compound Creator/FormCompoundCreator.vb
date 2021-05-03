@@ -1908,7 +1908,7 @@ Public Class FormCompoundCreator
         'Fill x() table and add experimental data if available
         If mycase.DataPVAP.Count = 0 Then
             T2 = TextBoxTc.Text
-            T1 = TextBoxMeltingTemp.Text
+            T1 = If(TextBoxMeltingTemp.Text = "", T2 * 0.3, TextBoxMeltingTemp.Text.ToDoubleFromCurrent())
             dT = (T2 - T1) / 25
             T = T1
             Do
@@ -2029,7 +2029,11 @@ Public Class FormCompoundCreator
         If mycase.DataCPIG.Count = 0 Then
             mytext.AppendLine("T" & vbTab & "yCALC")
             mytext.AppendLine("[" & su.temperature & "]" & vbTab & "[" & su.heatCapacityCp & "]")
-            For T = 200 To 1500 Step 25
+            Dim T1, T2, DT As Double
+            T1 = mycase.cp.Critical_Temperature * 0.2
+            T2 = mycase.cp.Critical_Temperature
+            DT = 25
+            For T = T1 To T2 Step DT
                 x = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T)
                 px.Add(x)
                 y1 = SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, pp.CalcCSTDepProp(cbEqCPIG.SelectedItem.Split(":")(0), tbCPIG_A.Text, tbCPIG_B.Text, tbCPIG_C.Text, tbCPIG_D.Text, tbCPIG_E.Text, T, 0) / 1000) / TextBoxMW.Text
@@ -2099,7 +2103,7 @@ Public Class FormCompoundCreator
         'Fill x() table and add experimental data if available
         If mycase.DataLDENS.Count = 0 Then
             T2 = TextBoxTc.Text * 0.999
-            T1 = TextBoxMeltingTemp.Text
+            T1 = If(TextBoxMeltingTemp.Text = "", T2 * 0.3, TextBoxMeltingTemp.Text.ToDoubleFromCurrent())
             dT = (T2 - T1) / 25
             T = T1
             Do
@@ -2374,7 +2378,7 @@ Public Class FormCompoundCreator
         'Fill x() table and add experimental data if available
         If mycase.DataLVISC.Count = 0 Then
             T2 = TextBoxNBP.Text * 0.999
-            T1 = TextBoxMeltingTemp.Text
+            T1 = If(TextBoxMeltingTemp.Text = "", T2 * 0.3, TextBoxMeltingTemp.Text.ToDoubleFromCurrent())
             dT = (T2 - T1) / 25
             T = T1
             Do
@@ -2924,7 +2928,11 @@ Public Class FormCompoundCreator
         If mycase.DataCPLiquid.Count = 0 Then
             mytext.AppendLine("T" & vbTab & "yCALC")
             mytext.AppendLine("[" & su.temperature & "]" & vbTab & "[" & su.heatCapacityCp & "]")
-            For T = 200 To 1500 Step 25
+            Dim T1, T2, DT As Double
+            T1 = mycase.cp.Normal_Boiling_Point * 0.3
+            T2 = mycase.cp.Normal_Boiling_Point
+            DT = 25
+            For T = T1 To T2 Step DT
                 x = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T)
                 px.Add(x)
                 y1 = SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, pp.CalcCSTDepProp(cbEqCPLiquid.SelectedItem.Split(":")(0), tbCPLiquid_A.Text, tbCPLiquid_B.Text, tbCPLiquid_C.Text, tbCPLiquid_D.Text, tbCPLiquid_E.Text, T, 0) / 1000) / TextBoxMW.Text
@@ -3312,6 +3320,7 @@ Public Class FormCompoundCreator
     End Sub
 
     Private Sub ExportarDadosParaArquivoJSONToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportarDadosParaArquivoJSONToolStripMenuItem.Click
+        Me.SaveFileDialog1.FileName = TextBoxName.Text
         If Me.SaveFileDialog1.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
             Try
                 mycase.cp.OriginalDB = "User"

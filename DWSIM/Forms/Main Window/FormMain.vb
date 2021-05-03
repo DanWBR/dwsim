@@ -3811,6 +3811,7 @@ Label_00CC:
             ElseIf TypeOf Me.ActiveMdiChild Is FormCompoundCreator Then
                 Dim filename As String = CType(Me.ActiveMdiChild, FormCompoundCreator).mycase.Filename
                 If filename = "" Then
+                    Me.SaveStudyDlg.FileName = CType(Me.ActiveMdiChild, FormCompoundCreator).TextBoxName.Text
                     If Me.SaveStudyDlg.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
                         SaveBackup(Me.SaveStudyDlg.FileName)
                         CType(Me.ActiveMdiChild, FormCompoundCreator).mycase.Filename = Me.SaveStudyDlg.FileName
