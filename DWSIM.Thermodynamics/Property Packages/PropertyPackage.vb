@@ -152,7 +152,7 @@ Namespace PropertyPackages
         'DWSIM IPropertyPackage
         Implements IPropertyPackage
 
-#Region "    Caching"
+#Region "   Caching"
 
         <XmlIgnore> Private CompoundPropCache As New Dictionary(Of Integer, ICompoundConstantProperties)
 
@@ -538,6 +538,7 @@ Namespace PropertyPackages
                             CompoundPropCache.Add(c.ConstantProperties.ID, c.ConstantProperties)
                         End If
                     Next
+                    MaterialStreamSetter?.Invoke()
                 End If
             End Set
         End Property
@@ -599,6 +600,8 @@ Namespace PropertyPackages
 #End Region
 
 #Region "   Must Override or Overridable Functions"
+
+        Public MaterialStreamSetter As Action
 
         Public Overridable Function GetModel() As Object
 
