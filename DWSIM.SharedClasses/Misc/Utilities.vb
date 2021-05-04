@@ -616,15 +616,15 @@ Public Class Utility
 
     Shared Function GetPropertyPackages(ByVal assmbly As Assembly) As List(Of Interfaces.IPropertyPackage)
 
-        Dim availableTypes As New List(Of Type)()
+        Dim availableTypes As New List(Of TypeInfo)()
 
         Try
-            availableTypes.AddRange(assmbly.GetTypes())
+            availableTypes.AddRange(assmbly.DefinedTypes())
         Catch ex As Exception
             Console.WriteLine("Error loading types from assembly '" + assmbly.FullName + "': " + ex.ToString)
         End Try
 
-        Dim ppList As List(Of Type) = availableTypes.FindAll(Function(t) t.GetInterfaces().Contains(GetType(Interfaces.IPropertyPackage)) And Not t.IsAbstract)
+        Dim ppList As List(Of TypeInfo) = availableTypes.FindAll(Function(t) t.GetInterfaces().Contains(GetType(Interfaces.IPropertyPackage)) And Not t.IsAbstract)
 
         Return ppList.ConvertAll(Of Interfaces.IPropertyPackage)(Function(t As Type) TryCast(Activator.CreateInstance(t), Interfaces.IPropertyPackage))
 
@@ -632,15 +632,15 @@ Public Class Utility
 
     Shared Function GetUnitOperations(ByVal assmbly As Assembly) As List(Of Interfaces.IExternalUnitOperation)
 
-        Dim availableTypes As New List(Of Type)()
+        Dim availableTypes As New List(Of TypeInfo)()
 
         Try
-            availableTypes.AddRange(assmbly.GetTypes())
+            availableTypes.AddRange(assmbly.DefinedTypes())
         Catch ex As Exception
             Console.WriteLine("Error loading types from assembly '" + assmbly.FullName + "': " + ex.ToString)
         End Try
 
-        Dim ppList As List(Of Type) = availableTypes.FindAll(Function(t) t.GetInterfaces().Contains(GetType(Interfaces.IExternalUnitOperation)) And Not t.IsAbstract And Not Attribute.IsDefined(t, Type.GetType("System.ObsoleteAttribute")))
+        Dim ppList As List(Of TypeInfo) = availableTypes.FindAll(Function(t) t.GetInterfaces().Contains(GetType(Interfaces.IExternalUnitOperation)) And Not t.IsAbstract And Not Attribute.IsDefined(t, Type.GetType("System.ObsoleteAttribute")))
 
         Dim list As New List(Of IExternalUnitOperation)
 
