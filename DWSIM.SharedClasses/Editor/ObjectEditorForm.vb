@@ -82,7 +82,7 @@ Public Class ObjectEditorForm
                 If _currentToolTipControl IsNot Nothing Then
                     ToolTipValues.Hide(_currentToolTipControl)
                 Else
-                    ToolTipValues.RemoveAll()
+                    'ToolTipValues.RemoveAll()
                 End If
             Catch ex As Exception
             Finally

@@ -6843,7 +6843,7 @@ Final3:
 
         End Function
 
-        Public Function AUX_LIQVISCm(ByVal T As Double, P As Double, Optional ByVal phaseid As Integer = 3) As Double
+        Public Overridable Function AUX_LIQVISCm(ByVal T As Double, P As Double, Optional ByVal phaseid As Integer = 3) As Double
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 

@@ -953,7 +953,13 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles tsbCalc.Click
+
         If Not DynamicMode Then
+
+            UIThreadInvoke(Sub()
+                               Me.FormLog.Grid1.Rows.Clear()
+                           End Sub)
+
             RaiseEvent ToolOpened("Solve Flowsheet", New EventArgs())
             Settings.TaskCancellationTokenSource = Nothing
             My.Application.ActiveSimulation = Me
@@ -2912,6 +2918,10 @@ Public Class FormFlowsheet
     End Function
 
     Public Sub RequestCalculation(Optional sender As ISimulationObject = Nothing, Optional changecalcorder As Boolean = False) Implements IFlowsheet.RequestCalculation
+
+        UIThreadInvoke(Sub()
+                           Me.FormLog.Grid1.Rows.Clear()
+                       End Sub)
 
         If Not DynamicMode Then
             Dim finishaction = Sub()
