@@ -12696,7 +12696,7 @@ Final3:
             End If
         End Sub
 
-        Public Sub DisplayGroupedEditingForm() Implements IPropertyPackage.DisplayGroupedEditingForm
+        Public Overridable Sub DisplayGroupedEditingForm() Implements IPropertyPackage.DisplayGroupedEditingForm
 
             If TypeOf Me Is CAPEOPENPropertyPackage Then
 

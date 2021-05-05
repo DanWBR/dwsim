@@ -419,7 +419,6 @@ Public Class FormMain
 
     End Sub
 
-
     Private Function LoadPluginAssemblies() As List(Of Assembly)
 
         Dim pluginassemblylist As List(Of Assembly) = New List(Of Assembly)
