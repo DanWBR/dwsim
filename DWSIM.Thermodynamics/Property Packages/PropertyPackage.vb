@@ -538,10 +538,14 @@ Namespace PropertyPackages
                             CompoundPropCache.Add(c.ConstantProperties.ID, c.ConstantProperties)
                         End If
                     Next
-                    MaterialStreamSetter?.Invoke()
+                    RunPostMaterialStreamSetRoutine()
                 End If
             End Set
         End Property
+
+        Public Overridable Sub RunPostMaterialStreamSetRoutine()
+
+        End Sub
 
         Public ReadOnly Property SupportedComponents() As System.Collections.Generic.List(Of String)
             Get
@@ -600,8 +604,6 @@ Namespace PropertyPackages
 #End Region
 
 #Region "   Must Override or Overridable Functions"
-
-        Public MaterialStreamSetter As Action
 
         Public Overridable Function GetModel() As Object
 
