@@ -50,6 +50,7 @@ Namespace PropertyPackages
             Me._packagetype = PropertyPackages.PackageType.Miscelaneous
 
         End Sub
+
         Public Overrides Function GetModel() As Object
             Return SIA
         End Function
@@ -80,6 +81,10 @@ Namespace PropertyPackages
                 Return FlashAlgorithm
             End Get
         End Property
+
+        Public Overrides Function AUX_IS_SINGLECOMP(Phase As Phase) As Boolean
+            Return False
+        End Function
 
         Public Overrides Function AUX_VAPDENS(ByVal T As Double, ByVal P As Double) As Double
 
@@ -676,6 +681,19 @@ Namespace PropertyPackages
             Else
                 Return Me.m_iapws97.pSatW(T) * 100000
             End If
+
+        End Function
+
+        Public Function SaturationTemperature(Vx As Double(), P As Double) As Double
+
+            Dim pvapt As Double
+            Return MathNet.Numerics.RootFinding.Brent.FindRoot(Function(T)
+                                                                   pvapt = VaporPressure(Vx, T)
+                                                                   If Double.IsNaN(pvapt) Or Double.IsNaN(P) Then
+                                                                       Throw New Exception(String.Format("Error calculation vapor pressure."))
+                                                                   End If
+                                                                   Return pvapt - P
+                                                               End Function, 350, 1000)
 
         End Function
 

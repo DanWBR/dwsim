@@ -1011,6 +1011,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Objects\Classes\Shared\DPIAwareness.vb" />
     <Compile Include="Objects\Classes\Shared\GraphicObjectControlPanelModeEditors.vb" />
     <Compile Include="Objects\Classes\Shared\SharedFunctions.vb" />
     <Compile Include="Objects\Classes\TreeViewModels\BaseItem.vb" />
@@ -3538,6 +3539,9 @@ erase /S /Q "$(SolutionDir)DistPackages\Linux\*.dat" 2&gt;nul 1&gt;nul 4&gt;nul
 
 ) else if "$(PlatformName)"=="x64" (
 
+if not exist "$(SolutionDir)DistPackages\Windows_32\" mkdir $(SolutionDir)DistPackages\Windows_32\
+if not exist "$(SolutionDir)DistPackages\Linux\" mkdir $(SolutionDir)DistPackages\Linux\
+
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F /D
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\macOS\" /E /Y /F /D
 
@@ -3552,6 +3556,10 @@ erase /S /Q "$(SolutionDir)DistPackages\macOS\DWSIM.vshost.*" 2&gt;nul 1&gt;nul 
 erase /S /Q "$(SolutionDir)DistPackages\macOS\*.tmp" 2&gt;nul 1&gt;nul 4&gt;nul
 
 ) else if "$(PlatformName)"=="x86" (
+
+if not exist "$(SolutionDir)DistPackages\Windows\" mkdir $(SolutionDir)DistPackages\Windows\
+if not exist "$(SolutionDir)DistPackages\Linux\" mkdir $(SolutionDir)DistPackages\Linux\
+if not exist "$(SolutionDir)DistPackages\macOS\" mkdir $(SolutionDir)DistPackages\macOS\
 
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Windows_32\" /E /Y /F /D
 

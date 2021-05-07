@@ -1,8 +1,8 @@
 ﻿Imports DWSIM.Thermodynamics.Streams
 
-Module StreamListExtender
+Public Module StreamListExtender
 
-    <System.Runtime.CompilerServices.Extension()> _
+    <System.Runtime.CompilerServices.Extension()>
     Public Function GetInletMaterialStream(ByVal unitop As UnitOperations.UnitOpBaseClass, index As Integer) As MaterialStream
 
         If unitop.GraphicObject.InputConnectors(index).IsAttached Then
@@ -13,7 +13,7 @@ Module StreamListExtender
 
     End Function
 
-    <System.Runtime.CompilerServices.Extension()> _
+    <System.Runtime.CompilerServices.Extension()>
     Public Function GetOutletMaterialStream(ByVal unitop As UnitOperations.UnitOpBaseClass, index As Integer) As MaterialStream
 
         If unitop.GraphicObject.OutputConnectors(index).IsAttached Then
@@ -24,7 +24,7 @@ Module StreamListExtender
 
     End Function
 
-    <System.Runtime.CompilerServices.Extension()> _
+    <System.Runtime.CompilerServices.Extension()>
     Public Function GetInletEnergyStream(ByVal unitop As UnitOperations.UnitOpBaseClass, index As Integer) As Streams.EnergyStream
 
         If unitop.GraphicObject.InputConnectors(index).IsAttached Then
@@ -35,7 +35,7 @@ Module StreamListExtender
 
     End Function
 
-    <System.Runtime.CompilerServices.Extension()> _
+    <System.Runtime.CompilerServices.Extension()>
     Public Function GetOutletEnergyStream(ByVal unitop As UnitOperations.UnitOpBaseClass, index As Integer) As Streams.EnergyStream
 
         If unitop.GraphicObject.OutputConnectors(index).IsAttached Then
@@ -46,7 +46,7 @@ Module StreamListExtender
 
     End Function
 
-    <System.Runtime.CompilerServices.Extension()> _
+    <System.Runtime.CompilerServices.Extension()>
     Public Function GetEnergyStream(ByVal unitop As UnitOperations.UnitOpBaseClass) As Streams.EnergyStream
         If unitop.GraphicObject.EnergyConnector.IsAttached Then
             If unitop.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.ObjectType = Enums.GraphicObjects.ObjectType.EnergyStream Then

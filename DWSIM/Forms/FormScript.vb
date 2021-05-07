@@ -268,62 +268,62 @@ Imports IronPython.Hosting
 
         If Not Settings.PythonInitialized Then
 
-            Dim t As Task = Task.Factory.StartNew(Sub()
-                                                      fsheet.UIThread(Sub()
-                                                                          If Not GlobalSettings.Settings.IsRunningOnMono() Then
-                                                                              PythonEngine.PythonHome = GlobalSettings.Settings.PythonPath
-                                                                          End If
-                                                                          PythonEngine.Initialize()
-                                                                          Settings.PythonInitialized = True
-                                                                          PythonEngine.BeginAllowThreads()
-                                                                      End Sub)
-                                                  End Sub)
+            Dim t As Task = TaskHelper.Run(Sub()
+                                               fsheet.UIThread(Sub()
+                                                                   If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                                                                       PythonEngine.PythonHome = GlobalSettings.Settings.PythonPath
+                                                                   End If
+                                                                   PythonEngine.Initialize()
+                                                                   Settings.PythonInitialized = True
+                                                                   PythonEngine.BeginAllowThreads()
+                                                               End Sub)
+                                           End Sub)
             t.Wait()
 
         End If
 
-        Dim t3 As Task = Task.Factory.StartNew(Sub()
-                                                   Using Py.GIL
+        Dim t3 As Task = TaskHelper.Run(Sub()
+                                            Using Py.GIL
 
-                                                       Try
+                                                Try
 
-                                                           Dim sys As Object = PythonEngine.ImportModule("sys")
+                                                    Dim sys As Object = PythonEngine.ImportModule("sys")
 
-                                                           If Not GlobalSettings.Settings.IsRunningOnMono() Then
-                                                               Dim codeToRedirectOutput As String = "import sys" & vbCrLf + "from io import BytesIO as StringIO" & vbCrLf + "sys.stdout = mystdout = StringIO()" & vbCrLf + "sys.stdout.flush()" & vbCrLf + "sys.stderr = mystderr = StringIO()" & vbCrLf + "sys.stderr.flush()"
-                                                               PythonEngine.RunSimpleString(codeToRedirectOutput)
-                                                           End If
+                                                    If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                                                        Dim codeToRedirectOutput As String = "import sys" & vbCrLf + "from io import BytesIO as StringIO" & vbCrLf + "sys.stdout = mystdout = StringIO()" & vbCrLf + "sys.stdout.flush()" & vbCrLf + "sys.stderr = mystderr = StringIO()" & vbCrLf + "sys.stderr.flush()"
+                                                        PythonEngine.RunSimpleString(codeToRedirectOutput)
+                                                    End If
 
-                                                           Dim locals As New PyDict()
+                                                    Dim locals As New PyDict()
 
-                                                           locals.SetItem("Plugins", My.Application.UtilityPlugins.ToPython)
-                                                           locals.SetItem("Flowsheet", fsheet.ToPython)
-                                                           locals.SetItem("Spreadsheet", fsheet.FormSpreadsheet.Spreadsheet.ToPython)
-                                                           Dim Solver As New FlowsheetSolver.FlowsheetSolver
-                                                           locals.SetItem("Solver", Solver.ToPython)
+                                                    locals.SetItem("Plugins", My.Application.UtilityPlugins.ToPython)
+                                                    locals.SetItem("Flowsheet", fsheet.ToPython)
+                                                    locals.SetItem("Spreadsheet", fsheet.FormSpreadsheet.Spreadsheet.ToPython)
+                                                    Dim Solver As New FlowsheetSolver.FlowsheetSolver
+                                                    locals.SetItem("Solver", Solver.ToPython)
 
-                                                           PythonEngine.Exec(scripttext, Nothing, locals.Handle)
+                                                    PythonEngine.Exec(scripttext, Nothing, locals.Handle)
 
-                                                           If Not GlobalSettings.Settings.IsRunningOnMono() Then
-                                                               fsheet.WriteToLog(sys.stdout.getvalue().ToString, Color.Blue, MessageType.Information)
-                                                           End If
+                                                    If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                                                        fsheet.WriteToLog(sys.stdout.getvalue().ToString, Color.Blue, MessageType.Information)
+                                                    End If
 
-                                                       Catch ex As Exception
+                                                Catch ex As Exception
 
-                                                           If My.Application.CommandLineMode Then
-                                                               Console.WriteLine()
-                                                               Console.WriteLine("Error running script: " & ex.ToString)
-                                                               Console.WriteLine()
-                                                           Else
-                                                               fsheet.WriteToLog("Error running script: " & ex.Message.ToString, Color.Red, MessageType.GeneralError)
-                                                           End If
+                                                    If My.Application.CommandLineMode Then
+                                                        Console.WriteLine()
+                                                        Console.WriteLine("Error running script: " & ex.ToString)
+                                                        Console.WriteLine()
+                                                    Else
+                                                        fsheet.WriteToLog("Error running script: " & ex.Message.ToString, Color.Red, MessageType.GeneralError)
+                                                    End If
 
-                                                       Finally
+                                                Finally
 
-                                                       End Try
+                                                End Try
 
-                                                   End Using
-                                               End Sub)
+                                            End Using
+                                        End Sub)
         t3.Wait()
 
     End Sub
@@ -394,119 +394,143 @@ Imports IronPython.Hosting
 
     Public Sub UpdateScripts()
 
-        fc.ScriptCollection.Clear()
+        fc.UIThread(Sub()
 
-        For Each tab As FATabStripItem In TabStripScripts.Items
-            If Not DWSIM.App.IsRunningOnMono Then
-                Dim seditor As ScriptEditorControl = DirectCast(tab.Controls(0).Controls(0), ScriptEditorControl)
-                Dim scr As New Script() With
-                                {.ID = Guid.NewGuid().ToString,
-                                 .Title = tab.Title,
-                                 .Linked = seditor.chkLink.Checked,
-                                 .ScriptText = seditor.txtScript.Text,
-                                 .PythonInterpreter = seditor.cbPythonEngine.SelectedIndex}
-                Select Case seditor.cbLinkedObject.SelectedIndex
-                    Case 0
-                        scr.LinkedObjectType = Scripts.ObjectType.Simulation
-                        scr.LinkedObjectName = ""
-                        If seditor.cbLinkedEvent.SelectedIndex = 0 Then
-                            scr.LinkedEventType = Scripts.EventType.SimulationOpened
-                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
-                            scr.LinkedEventType = Scripts.EventType.SimulationSaved
-                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 2 Then
-                            scr.LinkedEventType = Scripts.EventType.SimulationClosed
-                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 3 Then
-                            scr.LinkedEventType = Scripts.EventType.SimulationTimer1
-                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 4 Then
-                            scr.LinkedEventType = Scripts.EventType.SimulationTimer5
-                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 5 Then
-                            scr.LinkedEventType = Scripts.EventType.SimulationTimer15
-                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 6 Then
-                            scr.LinkedEventType = Scripts.EventType.SimulationTimer30
-                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 7 Then
-                            scr.LinkedEventType = Scripts.EventType.SimulationTimer60
-                        End If
-                    Case 1
-                        scr.LinkedObjectType = Scripts.ObjectType.Solver
-                        scr.LinkedObjectName = ""
-                        If seditor.cbLinkedEvent.SelectedIndex = 0 Then
-                            scr.LinkedEventType = Scripts.EventType.SolverStarted
-                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
-                            scr.LinkedEventType = Scripts.EventType.SolverFinished
-                        Else
-                            scr.LinkedEventType = Scripts.EventType.SolverRecycleLoop
-                        End If
-                    Case Else
-                        If seditor.chkLink.Checked Then
-                            scr.LinkedObjectType = Scripts.ObjectType.FlowsheetObject
-                            scr.LinkedObjectName = fc.GetFlowsheetGraphicObject(seditor.cbLinkedObject.SelectedItem.ToString).Name
-                        End If
-                        If seditor.cbLinkedEvent.SelectedIndex = 0 Then
-                            scr.LinkedEventType = Scripts.EventType.ObjectCalculationStarted
-                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
-                            scr.LinkedEventType = Scripts.EventType.ObjectCalculationFinished
-                        Else
-                            scr.LinkedEventType = Scripts.EventType.ObjectCalculationError
-                        End If
-                End Select
-                fc.ScriptCollection.Add(scr.ID, scr)
-            Else
-                Dim seditor As ScriptEditorControlMono = DirectCast(tab.Controls(0).Controls(0), ScriptEditorControlMono)
-                Dim scr As New Script() With
-                                {.ID = Guid.NewGuid().ToString,
-                                 .Title = tab.Title,
-                                 .Linked = seditor.chkLink.Checked,
-                                 .ScriptText = seditor.txtScript.Text,
-                                 .PythonInterpreter = seditor.cbPythonEngine.SelectedIndex}
-                Select Case seditor.cbLinkedObject.SelectedIndex
-                    Case 0
-                        scr.LinkedObjectType = Scripts.ObjectType.Simulation
-                        scr.LinkedObjectName = ""
-                        If seditor.cbLinkedEvent.SelectedIndex = 0 Then
-                            scr.LinkedEventType = Scripts.EventType.SimulationOpened
-                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
-                            scr.LinkedEventType = Scripts.EventType.SimulationSaved
-                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 2 Then
-                            scr.LinkedEventType = Scripts.EventType.SimulationClosed
-                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 3 Then
-                            scr.LinkedEventType = Scripts.EventType.SimulationTimer1
-                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 4 Then
-                            scr.LinkedEventType = Scripts.EventType.SimulationTimer5
-                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 5 Then
-                            scr.LinkedEventType = Scripts.EventType.SimulationTimer15
-                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 6 Then
-                            scr.LinkedEventType = Scripts.EventType.SimulationTimer30
-                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 7 Then
-                            scr.LinkedEventType = Scripts.EventType.SimulationTimer60
-                        End If
-                    Case 1
-                        scr.LinkedObjectType = Scripts.ObjectType.Solver
-                        scr.LinkedObjectName = ""
-                        If seditor.cbLinkedEvent.SelectedIndex = 0 Then
-                            scr.LinkedEventType = Scripts.EventType.SolverStarted
-                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
-                            scr.LinkedEventType = Scripts.EventType.SolverFinished
-                        Else
-                            scr.LinkedEventType = Scripts.EventType.SolverRecycleLoop
-                        End If
-                    Case Else
-                        If seditor.chkLink.Checked Then
-                            scr.LinkedObjectType = Scripts.ObjectType.FlowsheetObject
-                            scr.LinkedObjectName = fc.GetFlowsheetGraphicObject(seditor.cbLinkedObject.SelectedItem.ToString).Name
-                        End If
-                        If seditor.cbLinkedEvent.SelectedIndex = 0 Then
-                            scr.LinkedEventType = Scripts.EventType.ObjectCalculationStarted
-                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
-                            scr.LinkedEventType = Scripts.EventType.ObjectCalculationFinished
-                        Else
-                            scr.LinkedEventType = Scripts.EventType.ObjectCalculationError
-                        End If
-                End Select
-                fc.ScriptCollection.Add(scr.ID, scr)
-            End If
-        Next
+                        fc.ScriptCollection.Clear()
 
-        fc.WriteToLog("Script Data updated sucessfully.", Color.Blue, MessageType.Information)
+                        For Each tab As FATabStripItem In TabStripScripts.Items
+                            If Not DWSIM.App.IsRunningOnMono Then
+                                Dim seditor As ScriptEditorControl = DirectCast(tab.Controls(0).Controls(0), ScriptEditorControl)
+                                Dim scr As New Script() With
+                                                {.ID = Guid.NewGuid().ToString,
+                                                 .Title = tab.Title,
+                                                 .Linked = seditor.chkLink.Checked,
+                                                 .ScriptText = seditor.txtScript.Text,
+                                                 .PythonInterpreter = seditor.cbPythonEngine.SelectedIndex}
+                                Select Case seditor.cbLinkedObject.SelectedIndex
+                                    Case 0
+                                        scr.LinkedObjectType = Scripts.ObjectType.Simulation
+                                        scr.LinkedObjectName = ""
+                                        If seditor.cbLinkedEvent.SelectedIndex = 0 Then
+                                            scr.LinkedEventType = Scripts.EventType.SimulationOpened
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
+                                            scr.LinkedEventType = Scripts.EventType.SimulationSaved
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 2 Then
+                                            scr.LinkedEventType = Scripts.EventType.SimulationClosed
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 3 Then
+                                            scr.LinkedEventType = Scripts.EventType.SimulationTimer1
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 4 Then
+                                            scr.LinkedEventType = Scripts.EventType.SimulationTimer5
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 5 Then
+                                            scr.LinkedEventType = Scripts.EventType.SimulationTimer15
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 6 Then
+                                            scr.LinkedEventType = Scripts.EventType.SimulationTimer30
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 7 Then
+                                            scr.LinkedEventType = Scripts.EventType.SimulationTimer60
+                                        End If
+                                    Case 1
+                                        scr.LinkedObjectType = Scripts.ObjectType.Solver
+                                        scr.LinkedObjectName = ""
+                                        If seditor.cbLinkedEvent.SelectedIndex = 0 Then
+                                            scr.LinkedEventType = Scripts.EventType.SolverStarted
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
+                                            scr.LinkedEventType = Scripts.EventType.SolverFinished
+                                        Else
+                                            scr.LinkedEventType = Scripts.EventType.SolverRecycleLoop
+                                        End If
+                                    Case 2
+                                        scr.LinkedObjectType = Scripts.ObjectType.Integrator
+                                        scr.LinkedObjectName = ""
+                                        If seditor.cbLinkedEvent.SelectedIndex = 0 Then
+                                            scr.LinkedEventType = Scripts.EventType.IntegratorStarted
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
+                                            scr.LinkedEventType = Scripts.EventType.IntegratorFinished
+                                        Else
+                                            scr.LinkedEventType = Scripts.EventType.IntegratorError
+                                        End If
+                                    Case Else
+                                        If seditor.chkLink.Checked Then
+                                            scr.LinkedObjectType = Scripts.ObjectType.FlowsheetObject
+                                            scr.LinkedObjectName = fc.GetFlowsheetGraphicObject(seditor.cbLinkedObject.SelectedItem.ToString).Name
+                                        End If
+                                        If seditor.cbLinkedEvent.SelectedIndex = 0 Then
+                                            scr.LinkedEventType = Scripts.EventType.ObjectCalculationStarted
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
+                                            scr.LinkedEventType = Scripts.EventType.ObjectCalculationFinished
+                                        Else
+                                            scr.LinkedEventType = Scripts.EventType.ObjectCalculationError
+                                        End If
+                                End Select
+                                fc.ScriptCollection.Add(scr.ID, scr)
+                            Else
+                                Dim seditor As ScriptEditorControlMono = DirectCast(tab.Controls(0).Controls(0), ScriptEditorControlMono)
+                                Dim scr As New Script() With
+                                                {.ID = Guid.NewGuid().ToString,
+                                                 .Title = tab.Title,
+                                                 .Linked = seditor.chkLink.Checked,
+                                                 .ScriptText = seditor.txtScript.Text,
+                                                 .PythonInterpreter = seditor.cbPythonEngine.SelectedIndex}
+                                Select Case seditor.cbLinkedObject.SelectedIndex
+                                    Case 0
+                                        scr.LinkedObjectType = Scripts.ObjectType.Simulation
+                                        scr.LinkedObjectName = ""
+                                        If seditor.cbLinkedEvent.SelectedIndex = 0 Then
+                                            scr.LinkedEventType = Scripts.EventType.SimulationOpened
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
+                                            scr.LinkedEventType = Scripts.EventType.SimulationSaved
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 2 Then
+                                            scr.LinkedEventType = Scripts.EventType.SimulationClosed
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 3 Then
+                                            scr.LinkedEventType = Scripts.EventType.SimulationTimer1
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 4 Then
+                                            scr.LinkedEventType = Scripts.EventType.SimulationTimer5
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 5 Then
+                                            scr.LinkedEventType = Scripts.EventType.SimulationTimer15
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 6 Then
+                                            scr.LinkedEventType = Scripts.EventType.SimulationTimer30
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 7 Then
+                                            scr.LinkedEventType = Scripts.EventType.SimulationTimer60
+                                        End If
+                                    Case 1
+                                        scr.LinkedObjectType = Scripts.ObjectType.Solver
+                                        scr.LinkedObjectName = ""
+                                        If seditor.cbLinkedEvent.SelectedIndex = 0 Then
+                                            scr.LinkedEventType = Scripts.EventType.SolverStarted
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
+                                            scr.LinkedEventType = Scripts.EventType.SolverFinished
+                                        Else
+                                            scr.LinkedEventType = Scripts.EventType.SolverRecycleLoop
+                                        End If
+                                    Case 2
+                                        scr.LinkedObjectType = Scripts.ObjectType.Integrator
+                                        scr.LinkedObjectName = ""
+                                        If seditor.cbLinkedEvent.SelectedIndex = 0 Then
+                                            scr.LinkedEventType = Scripts.EventType.IntegratorStarted
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
+                                            scr.LinkedEventType = Scripts.EventType.IntegratorFinished
+                                        Else
+                                            scr.LinkedEventType = Scripts.EventType.IntegratorError
+                                        End If
+                                    Case Else
+                                        If seditor.chkLink.Checked Then
+                                            scr.LinkedObjectType = Scripts.ObjectType.FlowsheetObject
+                                            scr.LinkedObjectName = fc.GetFlowsheetGraphicObject(seditor.cbLinkedObject.SelectedItem.ToString).Name
+                                        End If
+                                        If seditor.cbLinkedEvent.SelectedIndex = 0 Then
+                                            scr.LinkedEventType = Scripts.EventType.ObjectCalculationStarted
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
+                                            scr.LinkedEventType = Scripts.EventType.ObjectCalculationFinished
+                                        Else
+                                            scr.LinkedEventType = Scripts.EventType.ObjectCalculationError
+                                        End If
+                                End Select
+                                fc.ScriptCollection.Add(scr.ID, scr)
+                            End If
+                        Next
+
+                        fc.WriteToLog("Script Data updated sucessfully.", Color.Blue, MessageType.Information)
+
+                    End Sub)
 
     End Sub
 
@@ -579,6 +603,8 @@ Imports IronPython.Hosting
                             .cbLinkedObject.SelectedIndex = 0
                         Case Scripts.ObjectType.Solver
                             .cbLinkedObject.SelectedIndex = 1
+                        Case Scripts.ObjectType.Integrator
+                            .cbLinkedObject.SelectedIndex = 2
                     End Select
                 End If
 
@@ -611,6 +637,12 @@ Imports IronPython.Hosting
                         .cbLinkedEvent.SelectedIndex = 6
                     Case Scripts.EventType.SimulationTimer60
                         .cbLinkedEvent.SelectedIndex = 7
+                    Case Scripts.EventType.IntegratorStarted
+                        .cbLinkedEvent.SelectedIndex = 0
+                    Case Scripts.EventType.IntegratorFinished
+                        .cbLinkedEvent.SelectedIndex = 1
+                    Case Scripts.EventType.IntegratorError
+                        .cbLinkedEvent.SelectedIndex = 2
                 End Select
 
                 .cbPythonEngine.SelectedIndex = scriptdata.PythonInterpreter
@@ -656,6 +688,8 @@ Imports IronPython.Hosting
                             .cbLinkedObject.SelectedIndex = 0
                         Case Scripts.ObjectType.Solver
                             .cbLinkedObject.SelectedIndex = 1
+                        Case Scripts.ObjectType.Integrator
+                            .cbLinkedObject.SelectedIndex = 2
                     End Select
                 End If
 
@@ -688,6 +722,12 @@ Imports IronPython.Hosting
                         .cbLinkedEvent.SelectedIndex = 6
                     Case Scripts.EventType.SimulationTimer60
                         .cbLinkedEvent.SelectedIndex = 7
+                    Case Scripts.EventType.IntegratorStarted
+                        .cbLinkedEvent.SelectedIndex = 0
+                    Case Scripts.EventType.IntegratorFinished
+                        .cbLinkedEvent.SelectedIndex = 1
+                    Case Scripts.EventType.IntegratorError
+                        .cbLinkedEvent.SelectedIndex = 2
                 End Select
 
                 .cbPythonEngine.SelectedIndex = scriptdata.PythonInterpreter
@@ -829,17 +869,17 @@ Imports IronPython.Hosting
                 Dim script = DirectCast(Me.TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControlMono).txtScript.Text
                 Dim interp = DirectCast(Me.TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControlMono).cbPythonEngine.SelectedIndex
                 If interp = 0 Then
-                    Task.Factory.StartNew(Sub() RunScript_IronPython(script, fc, Nothing))
+                    TaskHelper.Run(Sub() RunScript_IronPython(script, fc, Nothing))
                 Else
-                    Task.Factory.StartNew(Sub() RunScript_PythonNET(script, fc))
+                    TaskHelper.Run(Sub() RunScript_PythonNET(script, fc))
                 End If
             Else
                 Dim script = DirectCast(Me.TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControl).txtScript.Text
                 Dim interp = DirectCast(Me.TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControl).cbPythonEngine.SelectedIndex
                 If interp = 0 Then
-                    Task.Factory.StartNew(Sub() RunScript_IronPython(script, fc, Nothing))
+                    TaskHelper.Run(Sub() RunScript_IronPython(script, fc, Nothing))
                 Else
-                    Task.Factory.StartNew(Sub() RunScript_PythonNET(script, fc))
+                    TaskHelper.Run(Sub() RunScript_PythonNET(script, fc))
                 End If
             End If
         End If
@@ -872,66 +912,66 @@ Imports IronPython.Hosting
 
                 CancelDebugToken = New CancellationTokenSource()
 
-                Dim t = Task.Factory.StartNew(Sub() RunScript_IronPython(script, fc, Sub(frame)
+                Dim t = TaskHelper.Run(Sub() RunScript_IronPython(script, fc, Sub(frame)
 
-                                                                                         Dim breakpoints As New List(Of Integer)
+                                                                                  Dim breakpoints As New List(Of Integer)
 
-                                                                                         Me.UIThreadInvoke(Sub() breakpoints = scripteditor.txtScript.GetBookmarks)
+                                                                                  Me.UIThreadInvoke(Sub() breakpoints = scripteditor.txtScript.GetBookmarks)
 
-                                                                                         If breakpoints.Contains(frame.f_lineno) Then
+                                                                                  If breakpoints.Contains(frame.f_lineno) Then
 
-                                                                                             DebuggingPaused = True
+                                                                                      DebuggingPaused = True
 
-                                                                                             Me.UIThreadInvoke(Sub()
+                                                                                      Me.UIThreadInvoke(Sub()
 
-                                                                                                                   scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerAdd(4)
-                                                                                                                   scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerAdd(5)
-                                                                                                                   scripteditor.txtScript.Lines(frame.f_lineno - 1).Goto()
+                                                                                                            scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerAdd(4)
+                                                                                                            scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerAdd(5)
+                                                                                                            scripteditor.txtScript.Lines(frame.f_lineno - 1).Goto()
 
-                                                                                                                   Dim vars As New List(Of Object)
-                                                                                                                   Dim names As New List(Of String)
-                                                                                                                   For Each item In frame.f_globals
-                                                                                                                       names.Add(item.Key)
-                                                                                                                       vars.Add(item.Value)
-                                                                                                                   Next
+                                                                                                            Dim vars As New List(Of Object)
+                                                                                                            Dim names As New List(Of String)
+                                                                                                            For Each item In frame.f_globals
+                                                                                                                names.Add(item.Key)
+                                                                                                                vars.Add(item.Value)
+                                                                                                            Next
 
-                                                                                                                   tv.Model = New TypeBrowserModel(vars, names)
+                                                                                                            tv.Model = New TypeBrowserModel(vars, names)
 
-                                                                                                               End Sub)
+                                                                                                        End Sub)
 
-                                                                                             While DebuggingPaused
+                                                                                      While DebuggingPaused
 
-                                                                                                 If CancelDebugToken.IsCancellationRequested Then
+                                                                                          If CancelDebugToken.IsCancellationRequested Then
 
-                                                                                                     Me.UIThreadInvoke(Sub()
+                                                                                              Me.UIThreadInvoke(Sub()
 
-                                                                                                                           scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerDelete(4)
-                                                                                                                           scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerDelete(5)
+                                                                                                                    scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerDelete(4)
+                                                                                                                    scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerDelete(5)
 
-                                                                                                                           tv.Model = Nothing
+                                                                                                                    tv.Model = Nothing
 
-                                                                                                                       End Sub)
+                                                                                                                End Sub)
 
-                                                                                                     Throw New TaskCanceledException()
+                                                                                              Throw New TaskCanceledException()
 
-                                                                                                 End If
+                                                                                          End If
 
-                                                                                                 Thread.Sleep(100)
+                                                                                          Thread.Sleep(100)
 
-                                                                                             End While
+                                                                                      End While
 
-                                                                                             Me.UIThreadInvoke(Sub()
+                                                                                      Me.UIThreadInvoke(Sub()
 
-                                                                                                                   scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerDelete(4)
-                                                                                                                   scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerDelete(5)
+                                                                                                            scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerDelete(4)
+                                                                                                            scripteditor.txtScript.Lines(frame.f_lineno - 1).MarkerDelete(5)
 
-                                                                                                                   tv.Model = Nothing
+                                                                                                            tv.Model = Nothing
 
-                                                                                                               End Sub)
+                                                                                                        End Sub)
 
-                                                                                         End If
+                                                                                  End If
 
-                                                                                     End Sub), CancelDebugToken)
+                                                                              End Sub), CancelDebugToken.Token)
 
                 t.ContinueWith(Sub()
                                    UIThread(Sub()

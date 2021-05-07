@@ -21,6 +21,10 @@ Public Class AboutBox
 
         Version.Text = "Version " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build
 
+#If DEBUG Then
+        Version.Text += "-" + IO.File.GetLastWriteTimeUtc(Assembly.GetExecutingAssembly().Location).ToString()
+#End If
+
         lblCurrentVersion.Text = Version.Text + " (Classic UI)"
 
         Copyright.Text = My.Application.Info.Copyright

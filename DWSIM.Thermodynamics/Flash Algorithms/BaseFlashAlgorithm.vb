@@ -25,6 +25,7 @@ Imports System.IO
 Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.Runtime.Serialization
 Imports IronPython.Runtime.Operations
+Imports DWSIM.SharedClasses
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
@@ -130,6 +131,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             settings(Interfaces.Enums.FlashSetting.ImmiscibleWaterOption) = False
 
             settings(Interfaces.Enums.FlashSetting.HandleSolidsInDefaultEqCalcMode) = False
+
+            settings(Interfaces.Enums.FlashSetting.UseIOFlash) = False
 
             Return settings
 
@@ -439,21 +442,24 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim var As New DotNumerics.Optimization.OptSimplexBoundVariable(Pref, Pref * 0.7, Pref * 1.4)
 
             Dim flashresult As New FlashCalculationResult
+            Dim errval As Double
 
             simplex.ComputeMin(Function(Pvec)
                                    Dim P = Pvec(0)
                                    flashresult = CalculateEquilibrium(FlashSpec.P, FlashSpec.T, P, T, PP, Vz, PrevKi, 0.0)
-                                   Dim ZL1, ZL2, ZV, VL2, VL1, VV As Double
-                                   ZL1 = PP.AUX_Z(flashresult.GetLiquidPhase1MoleFractions, T, P, Interfaces.Enums.PhaseName.Liquid)
-                                   ZL2 = PP.AUX_Z(flashresult.GetLiquidPhase2MoleFractions, T, P, Interfaces.Enums.PhaseName.Liquid)
-                                   ZV = PP.AUX_Z(flashresult.GetVaporPhaseMoleFractions, T, P, Interfaces.Enums.PhaseName.Vapor)
-                                   If Double.IsNaN(ZV) Then ZV = 0
-                                   If Double.IsNaN(ZL1) Then ZL1 = 0
-                                   If Double.IsNaN(ZL2) Then ZL2 = 0
-                                   VL1 = flashresult.GetLiquidPhase1MoleFraction * ZL1 * 8.314 * T / P
-                                   VL2 = flashresult.GetLiquidPhase2MoleFraction * ZL2 * 8.314 * T / P
-                                   VV = flashresult.GetVaporPhaseMoleFraction * ZV * 8.314 * T / P
-                                   Return ((Vspec - VV - VL1 - VL2) / Vspec) ^ 2
+                                   Dim RHOL1, RHOL2, RHOV, VL2, VL1, VV As Double
+                                   RHOL1 = PP.AUX_LIQDENS(T, flashresult.GetLiquidPhase1MoleFraction, P) / PP.AUX_MMM(flashresult.GetLiquidPhase1MoleFraction) * 1000 'mol/m3
+                                   RHOL2 = PP.AUX_LIQDENS(T, flashresult.GetLiquidPhase2MoleFraction, P) / PP.AUX_MMM(flashresult.GetLiquidPhase2MoleFraction) * 1000 'mol/m3
+                                   RHOV = PP.AUX_Z(flashresult.GetVaporPhaseMoleFractions, T, P, Interfaces.Enums.PhaseName.Vapor) * 8.314 * T / P 'mol/m3
+                                   RHOV = 1 / RHOV 'kmol/m3
+                                   VL1 = flashresult.GetLiquidPhase1MoleFraction / RHOL1
+                                   VL2 = flashresult.GetLiquidPhase2MoleFraction / RHOL2
+                                   VV = flashresult.GetVaporPhaseMoleFraction / RHOV
+                                   If Double.IsInfinity(VL1) Or Double.IsNaN(VL1) Then VL1 = 0.0
+                                   If Double.IsInfinity(VL2) Or Double.IsNaN(VL2) Then VL2 = 0.0
+                                   If Double.IsInfinity(VV) Or Double.IsNaN(VV) Then VV = 0.0
+                                   errval = ((Vspec - VV - VL1 - VL2) / Vspec) ^ 2
+                                   Return errval
                                End Function, {var})
 
             Return flashresult
@@ -476,16 +482,17 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             simplex.ComputeMin(Function(Tvec)
                                    Dim T = Tvec(0)
                                    flashresult = CalculateEquilibrium(FlashSpec.P, FlashSpec.T, P, T, PP, Vz, PrevKi, 0.0)
-                                   Dim ZL1, ZL2, ZV, VL2, VL1, VV As Double
-                                   ZL1 = PP.AUX_Z(flashresult.GetLiquidPhase1MoleFractions, T, P, Interfaces.Enums.PhaseName.Liquid)
-                                   ZL2 = PP.AUX_Z(flashresult.GetLiquidPhase2MoleFractions, T, P, Interfaces.Enums.PhaseName.Liquid)
-                                   ZV = PP.AUX_Z(flashresult.GetVaporPhaseMoleFractions, T, P, Interfaces.Enums.PhaseName.Vapor)
-                                   If Double.IsNaN(ZV) Then ZV = 0
-                                   If Double.IsNaN(ZL1) Then ZL1 = 0
-                                   If Double.IsNaN(ZL2) Then ZL2 = 0
-                                   VL1 = flashresult.GetLiquidPhase1MoleFraction * ZL1 * 8.314 * T / P
-                                   VL2 = flashresult.GetLiquidPhase2MoleFraction * ZL2 * 8.314 * T / P
-                                   VV = flashresult.GetVaporPhaseMoleFraction * ZV * 8.314 * T / P
+                                   Dim RHOL1, RHOL2, RHOV, VL2, VL1, VV As Double
+                                   RHOL1 = PP.AUX_LIQDENS(T, flashresult.GetLiquidPhase1MoleFraction, P) / PP.AUX_MMM(flashresult.GetLiquidPhase1MoleFraction) * 1000 'mol/m3
+                                   RHOL2 = PP.AUX_LIQDENS(T, flashresult.GetLiquidPhase2MoleFraction, P) / PP.AUX_MMM(flashresult.GetLiquidPhase2MoleFraction) * 1000 'mol/m3
+                                   RHOV = PP.AUX_Z(flashresult.GetVaporPhaseMoleFractions, T, P, Interfaces.Enums.PhaseName.Vapor) * 8.314 * T / P 'mol/m3
+                                   RHOV = 1 / RHOV 'kmol/m3
+                                   VL1 = flashresult.GetLiquidPhase1MoleFraction / RHOL1
+                                   VL2 = flashresult.GetLiquidPhase2MoleFraction / RHOL2
+                                   VV = flashresult.GetVaporPhaseMoleFraction / RHOV
+                                   If Double.IsInfinity(VL1) Or Double.IsNaN(VL1) Then VL1 = 0.0
+                                   If Double.IsInfinity(VL2) Or Double.IsNaN(VL2) Then VL2 = 0.0
+                                   If Double.IsInfinity(VV) Or Double.IsNaN(VV) Then VV = 0.0
                                    Return ((Vspec - VV - VL1 - VL2) / Vspec) ^ 2
                                End Function, {var})
 
@@ -511,13 +518,17 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                    Dim T = vec(0)
                                    Dim P = vec(1)
                                    flashresult = CalculateEquilibrium(FlashSpec.P, FlashSpec.T, P, T, PP, Vz, PrevKi, 0.0)
-                                   Dim ZL1, ZL2, ZV, VL2, VL1, VV As Double
-                                   ZL1 = PP.AUX_Z(flashresult.GetLiquidPhase1MoleFractions, T, P, Interfaces.Enums.PhaseName.Liquid)
-                                   ZL2 = PP.AUX_Z(flashresult.GetLiquidPhase2MoleFractions, T, P, Interfaces.Enums.PhaseName.Liquid)
-                                   ZV = PP.AUX_Z(flashresult.GetVaporPhaseMoleFractions, T, P, Interfaces.Enums.PhaseName.Vapor)
-                                   VL1 = flashresult.GetLiquidPhase1MoleFraction * ZL1 * 8.314 * T / P
-                                   VL2 = flashresult.GetLiquidPhase2MoleFraction * ZL2 * 8.314 * T / P
-                                   VV = flashresult.GetVaporPhaseMoleFraction * ZV * 8.314 * T / P
+                                   Dim RHOL1, RHOL2, RHOV, VL2, VL1, VV As Double
+                                   RHOL1 = PP.AUX_LIQDENS(T, flashresult.GetLiquidPhase1MoleFraction, P) / PP.AUX_MMM(flashresult.GetLiquidPhase1MoleFraction) * 1000 'mol/m3
+                                   RHOL2 = PP.AUX_LIQDENS(T, flashresult.GetLiquidPhase2MoleFraction, P) / PP.AUX_MMM(flashresult.GetLiquidPhase2MoleFraction) * 1000 'mol/m3
+                                   RHOV = PP.AUX_Z(flashresult.GetVaporPhaseMoleFractions, T, P, Interfaces.Enums.PhaseName.Vapor) * 8.314 * T / P 'mol/m3
+                                   RHOV = 1 / RHOV 'kmol/m3
+                                   VL1 = flashresult.GetLiquidPhase1MoleFraction / RHOL1
+                                   VL2 = flashresult.GetLiquidPhase2MoleFraction / RHOL2
+                                   VV = flashresult.GetVaporPhaseMoleFraction / RHOV
+                                   If Double.IsInfinity(VL1) Or Double.IsNaN(VL1) Then VL1 = 0.0
+                                   If Double.IsInfinity(VL2) Or Double.IsNaN(VL2) Then VL2 = 0.0
+                                   If Double.IsInfinity(VV) Or Double.IsNaN(VV) Then VV = 0.0
                                    Dim HL1, HL2, HV As Double
                                    HL1 = flashresult.GetLiquidPhase1MassFraction * PP.DW_CalcEnthalpy(flashresult.GetLiquidPhase1MoleFractions, T, P, State.Liquid)
                                    HL2 = flashresult.GetLiquidPhase2MassFraction * PP.DW_CalcEnthalpy(flashresult.GetLiquidPhase2MoleFractions, T, P, State.Liquid)
@@ -547,13 +558,17 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                    Dim T = vec(0)
                                    Dim P = vec(1)
                                    flashresult = CalculateEquilibrium(FlashSpec.P, FlashSpec.T, P, T, PP, Vz, PrevKi, 0.0)
-                                   Dim ZL1, ZL2, ZV, VL2, VL1, VV As Double
-                                   ZL1 = PP.AUX_Z(flashresult.GetLiquidPhase1MoleFractions, T, P, Interfaces.Enums.PhaseName.Liquid)
-                                   ZL2 = PP.AUX_Z(flashresult.GetLiquidPhase2MoleFractions, T, P, Interfaces.Enums.PhaseName.Liquid)
-                                   ZV = PP.AUX_Z(flashresult.GetVaporPhaseMoleFractions, T, P, Interfaces.Enums.PhaseName.Vapor)
-                                   VL1 = flashresult.GetLiquidPhase1MoleFraction * ZL1 * 8.314 * T / P
-                                   VL2 = flashresult.GetLiquidPhase2MoleFraction * ZL2 * 8.314 * T / P
-                                   VV = flashresult.GetVaporPhaseMoleFraction * ZV * 8.314 * T / P
+                                   Dim RHOL1, RHOL2, RHOV, VL2, VL1, VV As Double
+                                   RHOL1 = PP.AUX_LIQDENS(T, flashresult.GetLiquidPhase1MoleFraction, P) / PP.AUX_MMM(flashresult.GetLiquidPhase1MoleFraction) * 1000 'mol/m3
+                                   RHOL2 = PP.AUX_LIQDENS(T, flashresult.GetLiquidPhase2MoleFraction, P) / PP.AUX_MMM(flashresult.GetLiquidPhase2MoleFraction) * 1000 'mol/m3
+                                   RHOV = PP.AUX_Z(flashresult.GetVaporPhaseMoleFractions, T, P, Interfaces.Enums.PhaseName.Vapor) * 8.314 * T / P 'mol/m3
+                                   RHOV = 1 / RHOV 'kmol/m3
+                                   VL1 = flashresult.GetLiquidPhase1MoleFraction / RHOL1
+                                   VL2 = flashresult.GetLiquidPhase2MoleFraction / RHOL2
+                                   VV = flashresult.GetVaporPhaseMoleFraction / RHOV
+                                   If Double.IsInfinity(VL1) Or Double.IsNaN(VL1) Then VL1 = 0.0
+                                   If Double.IsInfinity(VL2) Or Double.IsNaN(VL2) Then VL2 = 0.0
+                                   If Double.IsInfinity(VV) Or Double.IsNaN(VV) Then VV = 0.0
                                    Dim SL1, SL2, SV As Double
                                    SL1 = flashresult.GetLiquidPhase1MassFraction * PP.DW_CalcEnthalpy(flashresult.GetLiquidPhase1MoleFractions, T, P, State.Liquid)
                                    SL2 = flashresult.GetLiquidPhase2MassFraction * PP.DW_CalcEnthalpy(flashresult.GetLiquidPhase2MoleFractions, T, P, State.Liquid)
@@ -564,6 +579,50 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Return flashresult
 
         End Function
+
+        Public Function Flash_VU(ByVal Vz As Double(), ByVal Vspec As Double, ByVal U As Double, ByVal Pref As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As FlashCalculationResult
+
+            'PV = nZRT
+
+            Dim simplex As New DotNumerics.Optimization.Simplex
+
+            simplex.MaxFunEvaluations = 1000
+            simplex.Tolerance = 0.0001
+
+            Dim var1 As New DotNumerics.Optimization.OptSimplexBoundVariable(Tref, Tref * 0.9, Tref * 1.1)
+            Dim var2 As New DotNumerics.Optimization.OptSimplexBoundVariable(Pref, Pref * 0.7, Pref * 1.4)
+
+            Dim flashresult As New FlashCalculationResult
+
+            simplex.ComputeMin(Function(vec)
+                                   Dim T = vec(0)
+                                   Dim P = vec(1)
+                                   flashresult = CalculateEquilibrium(FlashSpec.P, FlashSpec.T, P, T, PP, Vz, PrevKi, 0.0)
+                                   Dim RHOL1, RHOL2, RHOV, VL2, VL1, VV As Double
+                                   RHOL1 = PP.AUX_LIQDENS(T, flashresult.GetLiquidPhase1MoleFraction, P) / PP.AUX_MMM(flashresult.GetLiquidPhase1MoleFraction) * 1000 'mol/m3
+                                   RHOL2 = PP.AUX_LIQDENS(T, flashresult.GetLiquidPhase2MoleFraction, P) / PP.AUX_MMM(flashresult.GetLiquidPhase2MoleFraction) * 1000 'mol/m3
+                                   RHOV = PP.AUX_Z(flashresult.GetVaporPhaseMoleFractions, T, P, Interfaces.Enums.PhaseName.Vapor) * 8.314 * T / P 'mol/m3
+                                   RHOV = 1 / RHOV 'kmol/m3
+                                   VL1 = flashresult.GetLiquidPhase1MoleFraction / RHOL1
+                                   VL2 = flashresult.GetLiquidPhase2MoleFraction / RHOL2
+                                   VV = flashresult.GetVaporPhaseMoleFraction / RHOV
+                                   If Double.IsInfinity(VL1) Or Double.IsNaN(VL1) Then VL1 = 0.0
+                                   If Double.IsInfinity(VL2) Or Double.IsNaN(VL2) Then VL2 = 0.0
+                                   If Double.IsInfinity(VV) Or Double.IsNaN(VV) Then VV = 0.0
+                                   Dim HL1, HL2, HV, UL1, UL2, UV As Double
+                                   HL1 = flashresult.GetLiquidPhase1MassFraction * PP.DW_CalcEnthalpy(flashresult.GetLiquidPhase1MoleFractions, T, P, State.Liquid)
+                                   HL2 = flashresult.GetLiquidPhase2MassFraction * PP.DW_CalcEnthalpy(flashresult.GetLiquidPhase2MoleFractions, T, P, State.Liquid)
+                                   HV = flashresult.GetVaporPhaseMassFraction * PP.DW_CalcEnthalpy(flashresult.GetVaporPhaseMoleFractions, T, P, State.Vapor)
+                                   UL1 = HL1 - P * VL1 / PP.AUX_MMM(flashresult.GetLiquidPhase1MoleFraction)
+                                   UL2 = HL2 - P * VL2 / PP.AUX_MMM(flashresult.GetLiquidPhase2MoleFraction)
+                                   UV = HV - P * VV / PP.AUX_MMM(flashresult.GetVaporPhaseMoleFractions)
+                                   Return ((Vspec - VV - VL1 - VL2) / Vspec) ^ 2 + ((U - UV - UL1 - UL2) / U) ^ 2
+                               End Function, {var1, var2})
+
+            Return flashresult
+
+        End Function
+
 
 #End Region
 
@@ -795,18 +854,12 @@ will converge to this solution.")
 
             If Settings.EnableParallelProcessing Then
 
-                Dim task1 = Task.Factory.StartNew(Sub()
-                                                      fcv = pp.DW_CalcFugCoeff(Vz, T, P, State.Vapor)
-                                                  End Sub,
-                                                      Settings.TaskCancellationTokenSource.Token,
-                                                      TaskCreationOptions.None,
-                                                     Settings.AppTaskScheduler)
-                Dim task2 = Task.Factory.StartNew(Sub()
-                                                      fcl = pp.DW_CalcFugCoeff(Vz, T, P, State.Liquid)
-                                                  End Sub,
-                                                  Settings.TaskCancellationTokenSource.Token,
-                                                  TaskCreationOptions.None,
-                                                 Settings.AppTaskScheduler)
+                Dim task1 = TaskHelper.Run(Sub()
+                                               fcv = pp.DW_CalcFugCoeff(Vz, T, P, State.Vapor)
+                                           End Sub, Settings.TaskCancellationTokenSource.Token)
+                Dim task2 = TaskHelper.Run(Sub()
+                                               fcl = pp.DW_CalcFugCoeff(Vz, T, P, State.Liquid)
+                                           End Sub, Settings.TaskCancellationTokenSource.Token)
                 Task.WaitAll(task1, task2)
 
             Else
@@ -1237,14 +1290,12 @@ will converge to this solution.")
                 Do
                     If Settings.EnableParallelProcessing Then
 
-                        Dim task1 As Task = New Task(Sub()
-                                                         fx = 1 - CalcPIP(Vx, P, Tinv, pp, eos)(0)
-                                                     End Sub)
-                        Dim task2 As Task = New Task(Sub()
-                                                         fx2 = 1 - CalcPIP(Vx, P, Tinv - 1, pp, eos)(0)
-                                                     End Sub)
-                        task1.Start()
-                        task2.Start()
+                        Dim task1 As Task = TaskHelper.Run(Sub()
+                                                               fx = 1 - CalcPIP(Vx, P, Tinv, pp, eos)(0)
+                                                           End Sub)
+                        Dim task2 As Task = TaskHelper.Run(Sub()
+                                                               fx2 = 1 - CalcPIP(Vx, P, Tinv - 1, pp, eos)(0)
+                                                           End Sub)
                         Task.WaitAll(task1, task2)
 
                     Else
@@ -1406,7 +1457,7 @@ will converge to this solution.")
                 If Vz(names.IndexOf("water")) > 0.01 And Vz(names.IndexOf("water")) < 1.0 Then
                     Dim hcs = names.Where(Function(x) x.EndsWith("ane") Or x.EndsWith("ene") Or x.EndsWith("ine")).ToList()
                     For Each hc In hcs
-                        If Vz(names.IndexOf(hc)) > 0.01 And props(names.IndexOf(hc)).Critical_Temperature > T Then
+                        If Vz(names.IndexOf(hc)) > 0.000001 And props(names.IndexOf(hc)).Critical_Temperature > T Then
                             hres.LiquidPhaseSplit = True
                             Exit For
                         End If
@@ -1419,7 +1470,7 @@ will converge to this solution.")
                     If Vz(names.IndexOf(ald)) > 0.01 And Vz(names.IndexOf(ald)) < 1.0 Then
                         Dim hcs = names.Where(Function(x) x.EndsWith("ane") Or x.EndsWith("ene") Or x.EndsWith("ine")).ToList()
                         For Each hc In hcs
-                            If Vz(names.IndexOf(hc)) > 0.01 And props(names.IndexOf(hc)).Critical_Temperature > T Then
+                            If Vz(names.IndexOf(hc)) > 0.000001 And props(names.IndexOf(hc)).Critical_Temperature > T Then
                                 hres.LiquidPhaseSplit = True
                                 Exit For
                             End If
@@ -1434,7 +1485,7 @@ will converge to this solution.")
                     If Vz(names.IndexOf(alc)) > 0.01 And Vz(names.IndexOf(alc)) < 1.0 Then
                         Dim hcs = names.Where(Function(x) x.EndsWith("ane") Or x.EndsWith("ene") Or x.EndsWith("ine")).ToList()
                         For Each hc In hcs
-                            If Vz(names.IndexOf(hc)) > 0.01 And props(names.IndexOf(hc)).Critical_Temperature > T Then
+                            If Vz(names.IndexOf(hc)) > 0.000001 And props(names.IndexOf(hc)).Critical_Temperature > T Then
                                 hres.LiquidPhaseSplit = True
                                 Exit For
                             End If
@@ -1447,7 +1498,7 @@ will converge to this solution.")
                     'get alcohols
                     Dim alcohols = names.Where(Function(x) x.EndsWith("ol")).ToList()
                     For Each alcohol In alcohols
-                        If Vz(names.IndexOf(alcohol)) > 0.01 And Vz(names.IndexOf(alcohol)) < 1.0 And props(names.IndexOf(alcohol)).Molar_Weight > 70 Then
+                        If Vz(names.IndexOf(alcohol)) > 0.000001 And Vz(names.IndexOf(alcohol)) < 1.0 And props(names.IndexOf(alcohol)).Molar_Weight > 70 Then
                             hres.LiquidPhaseSplit = True
                             Exit For
                         End If
@@ -1518,6 +1569,9 @@ will converge to this solution.")
                 End If
                 If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.HandleSolidsInDefaultEqCalcMode) Then
                     FlashSettings.Add(Interfaces.Enums.FlashSetting.HandleSolidsInDefaultEqCalcMode, False)
+                End If
+                If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.UseIOFlash) Then
+                    FlashSettings.Add(Interfaces.Enums.FlashSetting.UseIOFlash, False)
                 End If
             End If
 

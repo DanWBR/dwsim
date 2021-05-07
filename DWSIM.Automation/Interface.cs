@@ -24,7 +24,8 @@ namespace DWSIM.Automation
         List<Exception> CalculateFlowsheet2(IFlowsheet flowsheet);
         List<Exception> CalculateFlowsheet3(IFlowsheet flowsheet, int timeout_seconds);
         IFlowsheet CreateFlowsheet();
-
+        void ReleaseResources();
+        object GetMainWindow();
 
     }
 
@@ -116,6 +117,16 @@ namespace DWSIM.Automation
         public IFlowsheet CreateFlowsheet()
         {
             return new FormFlowsheet();
+        }
+
+        public void ReleaseResources()
+        {
+            //
+        }
+
+        public object GetMainWindow()
+        {
+            return fm;
         }
     }
 
@@ -224,6 +235,10 @@ namespace DWSIM.Automation
             return fm.FlowsheetObject;
         }
 
+        public object GetMainWindow()
+        {
+            throw new NotImplementedException();
+        }
     }
 
 

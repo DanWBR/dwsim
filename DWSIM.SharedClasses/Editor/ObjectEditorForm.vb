@@ -80,9 +80,11 @@ Public Class ObjectEditorForm
         If (e.SignalTime - DisplayTime).TotalSeconds >= 10 Then
             Try
                 If _currentToolTipControl IsNot Nothing Then
-                    ToolTipValues.Hide(_currentToolTipControl)
+                    _currentToolTipControl.UIThreadInvoke(Sub()
+                                                              ToolTipValues.Hide(_currentToolTipControl)
+                                                          End Sub)
                 Else
-                    ToolTipValues.RemoveAll()
+                    'ToolTipValues.RemoveAll()
                 End If
             Catch ex As Exception
             Finally

@@ -46,7 +46,7 @@ Public Class Integrator
 
     Public Property RealTime As Boolean = False Implements IDynamicsIntegrator.RealTime
 
-    Public Property MonitoredVariableValues As Dictionary(Of Integer, List(Of IDynamicsMonitoredVariable)) = New Dictionary(Of Integer, List(Of IDynamicsMonitoredVariable)) Implements IDynamicsIntegrator.MonitoredVariableValues
+    Public Property MonitoredVariableValues As Dictionary(Of Long, List(Of IDynamicsMonitoredVariable)) = New Dictionary(Of Long, List(Of IDynamicsMonitoredVariable)) Implements IDynamicsIntegrator.MonitoredVariableValues
 
     Public Property MonitoredVariables As List(Of IDynamicsMonitoredVariable) = New List(Of IDynamicsMonitoredVariable) Implements IDynamicsIntegrator.MonitoredVariables
 

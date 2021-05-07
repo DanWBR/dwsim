@@ -525,6 +525,20 @@ Public Class Utility
             Next
         End If
 
+        ppath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location), "extenders")
+        If Directory.Exists(ppath) Then
+            Dim otheruos As String() = Directory.GetFiles(ppath, "*.dll", SearchOption.TopDirectoryOnly)
+            For Each fpath In otheruos
+                Try
+                    Dim pplist As List(Of Interfaces.IExternalUnitOperation) = GetUnitOperations(Assembly.LoadFile(fpath))
+                    For Each pp In pplist
+                        euos.Add(pp)
+                    Next
+                Catch ex As Exception
+                End Try
+            Next
+        End If
+
         Return euos
 
     End Function
@@ -554,6 +568,20 @@ Public Class Utility
                 Next
             Catch ex As Exception
                 MessageBox.Show(ex.ToString)
+            End Try
+        End If
+
+        ppath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location), "extenders")
+        If Directory.Exists(ppath) Then
+            Try
+                Dim otherpps As String() = Directory.GetFiles(ppath, "*.dll", SearchOption.TopDirectoryOnly)
+                For Each fpath In otherpps
+                    Dim pplist As List(Of Interfaces.IPropertyPackage) = GetPropertyPackages(Assembly.LoadFile(fpath))
+                    For Each pp In pplist
+                        ppacks.Add(pp)
+                    Next
+                Next
+            Catch ex As Exception
             End Try
         End If
 
@@ -588,15 +616,15 @@ Public Class Utility
 
     Shared Function GetPropertyPackages(ByVal assmbly As Assembly) As List(Of Interfaces.IPropertyPackage)
 
-        Dim availableTypes As New List(Of Type)()
+        Dim availableTypes As New List(Of TypeInfo)()
 
         Try
-            availableTypes.AddRange(assmbly.GetTypes())
+            availableTypes.AddRange(assmbly.DefinedTypes())
         Catch ex As Exception
             Console.WriteLine("Error loading types from assembly '" + assmbly.FullName + "': " + ex.ToString)
         End Try
 
-        Dim ppList As List(Of Type) = availableTypes.FindAll(Function(t) t.GetInterfaces().Contains(GetType(Interfaces.IPropertyPackage)) And Not t.IsAbstract)
+        Dim ppList As List(Of TypeInfo) = availableTypes.FindAll(Function(t) t.GetInterfaces().Contains(GetType(Interfaces.IPropertyPackage)) And Not t.IsAbstract)
 
         Return ppList.ConvertAll(Of Interfaces.IPropertyPackage)(Function(t As Type) TryCast(Activator.CreateInstance(t), Interfaces.IPropertyPackage))
 
@@ -604,15 +632,15 @@ Public Class Utility
 
     Shared Function GetUnitOperations(ByVal assmbly As Assembly) As List(Of Interfaces.IExternalUnitOperation)
 
-        Dim availableTypes As New List(Of Type)()
+        Dim availableTypes As New List(Of TypeInfo)()
 
         Try
-            availableTypes.AddRange(assmbly.GetTypes())
+            availableTypes.AddRange(assmbly.DefinedTypes())
         Catch ex As Exception
             Console.WriteLine("Error loading types from assembly '" + assmbly.FullName + "': " + ex.ToString)
         End Try
 
-        Dim ppList As List(Of Type) = availableTypes.FindAll(Function(t) t.GetInterfaces().Contains(GetType(Interfaces.IExternalUnitOperation)) And Not t.IsAbstract And Not Attribute.IsDefined(t, Type.GetType("System.ObsoleteAttribute")))
+        Dim ppList As List(Of TypeInfo) = availableTypes.FindAll(Function(t) t.GetInterfaces().Contains(GetType(Interfaces.IExternalUnitOperation)) And Not t.IsAbstract And Not Attribute.IsDefined(t, Type.GetType("System.ObsoleteAttribute")))
 
         Dim list As New List(Of IExternalUnitOperation)
 

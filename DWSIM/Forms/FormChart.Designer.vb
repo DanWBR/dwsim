@@ -35,14 +35,15 @@ Partial Class FormChart
         'graph
         '
         resources.ApplyResources(Me.graph, "graph")
+        Me.graph.IsShowCopyMessage = False
         Me.graph.Name = "graph"
-        Me.graph.ScrollGrace = 0.0R
-        Me.graph.ScrollMaxX = 0.0R
-        Me.graph.ScrollMaxY = 0.0R
-        Me.graph.ScrollMaxY2 = 0.0R
-        Me.graph.ScrollMinX = 0.0R
-        Me.graph.ScrollMinY = 0.0R
-        Me.graph.ScrollMinY2 = 0.0R
+        Me.graph.ScrollGrace = 0R
+        Me.graph.ScrollMaxX = 0R
+        Me.graph.ScrollMaxY = 0R
+        Me.graph.ScrollMaxY2 = 0R
+        Me.graph.ScrollMinX = 0R
+        Me.graph.ScrollMinY = 0R
+        Me.graph.ScrollMinY2 = 0R
         '
         'GroupBox1
         '
@@ -79,8 +80,8 @@ Partial Class FormChart
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents graph As ZedGraph.ZedGraphControl
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents tbinfo As System.Windows.Forms.TextBox
+    Public WithEvents graph As ZedGraph.ZedGraphControl
 End Class

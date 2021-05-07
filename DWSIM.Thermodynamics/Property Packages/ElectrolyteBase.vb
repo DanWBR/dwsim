@@ -24,6 +24,7 @@ Imports System.Linq
 Imports DWSIM.MathOps.MathEx
 Imports DWSIM.MathOps.MathEx.Common
 Imports Ciloci.Flee
+Imports DWSIM.Interfaces.Enums
 
 Namespace PropertyPackages
 
@@ -33,8 +34,11 @@ Namespace PropertyPackages
 
         Private m_props As New PropertyPackages.Auxiliary.PROPS
         Public m_elec As New PropertyPackages.Auxiliary.Electrolyte
-        Public Property ElectrolyteFlash As PropertyPackages.Auxiliary.FlashAlgorithms.ElectrolyteSVLE
         Private m_id As New PropertyPackages.Auxiliary.Ideal
+
+        Public Property ReactionSet As String = "DefaultSet"
+        Public Property MaxIterations As Integer = 100
+        Public Property Tolerance As Double = 0.0000000001
 
         Public Sub New(ByVal comode As Boolean)
 
@@ -43,8 +47,6 @@ Namespace PropertyPackages
             Me.IsConfigurable = True
             Me._packagetype = PropertyPackages.PackageType.ActivityCoefficient
             Me.IsElectrolytePP = True
-
-            Me.ElectrolyteFlash = New Auxiliary.FlashAlgorithms.ElectrolyteSVLE
 
         End Sub
 
@@ -55,8 +57,6 @@ Namespace PropertyPackages
             Me.IsConfigurable = True
             Me._packagetype = PropertyPackages.PackageType.ActivityCoefficient
             Me.IsElectrolytePP = True
-
-            Me.ElectrolyteFlash = New Auxiliary.FlashAlgorithms.ElectrolyteSVLE
 
         End Sub
 
@@ -70,8 +70,11 @@ Namespace PropertyPackages
 
             Get
 
-                If Me.ElectrolyteFlash.CompoundProperties Is Nothing Then Me.ElectrolyteFlash.CompoundProperties = DW_GetConstantProperties()
-                Return Me.ElectrolyteFlash
+                Return New Auxiliary.FlashAlgorithms.ElectrolyteSVLE With {
+                    .CompoundProperties = DW_GetConstantProperties(),
+                    .ReactionSet = ReactionSet,
+                    .Tolerance = Tolerance,
+                    .MaximumIterations = MaxIterations}
 
             End Get
 
@@ -105,6 +108,19 @@ Namespace PropertyPackages
             Return Me.m_elec.LiquidDensity(RET_VMOL(phase), T, constprops)
 
         End Function
+
+        Public Overrides Function AUX_Z(Vx() As Double, T As Double, P As Double, state As PhaseName) As Double
+
+            If state = PhaseName.Liquid Then
+                Dim result = m_elec.LiquidDensity(Vx, T, DW_GetConstantProperties())
+                Return 1 / (8.314 * result * 1000 / Me.AUX_MMM(Vx) * T / P)
+            Else
+                Return 1.0
+            End If
+
+
+        End Function
+
 
         Public Function RET_KIJ(ByVal id1 As String, ByVal id2 As String) As Double
             Return 0
@@ -309,19 +325,19 @@ Namespace PropertyPackages
                     For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
                         subst.PartialVolume = subst.ConstantProperties.Molar_Weight / AUX_LIQDENSi(subst, T)
                     Next
-                Case phase.Aqueous
+                Case Phase.Aqueous
                     For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(6).Compounds.Values
                         subst.PartialVolume = subst.ConstantProperties.Molar_Weight / AUX_LIQDENSi(subst, T)
                     Next
-                Case phase.Liquid1
+                Case Phase.Liquid1
                     For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(3).Compounds.Values
                         subst.PartialVolume = subst.ConstantProperties.Molar_Weight / AUX_LIQDENSi(subst, T)
                     Next
-                Case phase.Liquid2
+                Case Phase.Liquid2
                     For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(4).Compounds.Values
                         subst.PartialVolume = subst.ConstantProperties.Molar_Weight / AUX_LIQDENSi(subst, T)
                     Next
-                Case phase.Liquid3
+                Case Phase.Liquid3
                     For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(5).Compounds.Values
                         subst.PartialVolume = subst.ConstantProperties.Molar_Weight / AUX_LIQDENSi(subst, T)
                     Next
@@ -397,9 +413,12 @@ Namespace PropertyPackages
             Next
 
             Me.m_elec = New Auxiliary.Electrolyte
-            If Me.ElectrolyteFlash Is Nothing Then Me.ElectrolyteFlash = New Auxiliary.FlashAlgorithms.ElectrolyteSVLE
-            Me.ElectrolyteFlash.CompoundProperties = constprops
-            Me.ElectrolyteFlash.proppack = Me
+            Dim ElectrolyteFlash = New Auxiliary.FlashAlgorithms.ElectrolyteSVLE
+            ElectrolyteFlash.CompoundProperties = constprops
+            ElectrolyteFlash.ReactionSet = ReactionSet
+            ElectrolyteFlash.Tolerance = Tolerance
+            ElectrolyteFlash.MaximumIterations = MaxIterations
+            ElectrolyteFlash.proppack = Me
 
             Select Case spec1
 
@@ -412,7 +431,7 @@ Namespace PropertyPackages
                             T = val1
                             P = val2
 
-                            result = Me.ElectrolyteFlash.Flash_PT(RET_VMOL(Phase.Mixture), T, P)
+                            result = ElectrolyteFlash.Flash_PT(RET_VMOL(Phase.Mixture), T, P)
 
                             xl = result("LiquidPhaseMoleFraction")
                             xv = result("VaporPhaseMoleFraction")
@@ -473,7 +492,7 @@ Namespace PropertyPackages
                             P = val1
                             H = val2
 
-                            result = Me.ElectrolyteFlash.Flash_PH(RET_VMOL(Phase.Mixture), P, H, T)
+                            result = ElectrolyteFlash.Flash_PH(RET_VMOL(Phase.Mixture), P, H, T)
 
                             T = result("Temperature")
 
@@ -514,7 +533,7 @@ Namespace PropertyPackages
                             P = val1
                             xv = val2
 
-                            result = Me.ElectrolyteFlash.Flash_PV(RET_VMOL(Phase.Mixture), P, xv, T)
+                            result = ElectrolyteFlash.Flash_PV(RET_VMOL(Phase.Mixture), P, xv, T)
 
                             T = result("Temperature")
 
@@ -593,9 +612,12 @@ Namespace PropertyPackages
             Next
 
             Me.m_elec = New Auxiliary.Electrolyte
-            If Me.ElectrolyteFlash Is Nothing Then Me.ElectrolyteFlash = New Auxiliary.FlashAlgorithms.ElectrolyteSVLE
-            Me.ElectrolyteFlash.CompoundProperties = constprops
-            Me.ElectrolyteFlash.proppack = Me
+            Dim ElectrolyteFlash = New Auxiliary.FlashAlgorithms.ElectrolyteSVLE
+            ElectrolyteFlash.CompoundProperties = constprops
+            ElectrolyteFlash.ReactionSet = ReactionSet
+            ElectrolyteFlash.Tolerance = Tolerance
+            ElectrolyteFlash.MaximumIterations = MaxIterations
+            ElectrolyteFlash.proppack = Me
 
             Select Case spec1
 
@@ -608,7 +630,7 @@ Namespace PropertyPackages
                             T = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
                             P = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
 
-                            result = Me.ElectrolyteFlash.Flash_PT(RET_VMOL(Phase.Mixture), T, P)
+                            result = ElectrolyteFlash.Flash_PT(RET_VMOL(Phase.Mixture), T, P)
 
                             xl = result("LiquidPhaseMoleFraction")
                             xv = result("VaporPhaseMoleFraction")
@@ -628,14 +650,14 @@ Namespace PropertyPackages
 
                             Me.CurrentMaterialStream.Phases(0).Properties.molarflow = M * W / MW * 1000
 
-                            i = 0
-                            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                                subst.MoleFraction = Vnf(i) / M
-                                i += 1
-                            Next
-                            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                                subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 0)
-                            Next
+                            'i = 0
+                            'For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                            '    subst.MoleFraction = Vnf(i) / M
+                            '    i += 1
+                            'Next
+                            'For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                            '    subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 0)
+                            'Next
 
                             Dim Vx = result("LiquidPhaseMolarComposition")
                             Dim Vy = result("VaporPhaseMolarComposition")
@@ -727,7 +749,7 @@ Namespace PropertyPackages
                             H = Me.CurrentMaterialStream.Phases(0).Properties.enthalpy.GetValueOrDefault
                             P = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
 
-                            result = Me.ElectrolyteFlash.Flash_PH(RET_VMOL(Phase.Mixture), P, H, T)
+                            result = ElectrolyteFlash.Flash_PH(RET_VMOL(Phase.Mixture), P, H, T)
 
                             T = result("Temperature")
 
@@ -825,7 +847,7 @@ Namespace PropertyPackages
                             T = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
                             P = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
 
-                            result = Me.ElectrolyteFlash.Flash_PV(RET_VMOL(Phase.Mixture), P, xv, T)
+                            result = ElectrolyteFlash.Flash_PV(RET_VMOL(Phase.Mixture), P, xv, T)
 
                             T = result("Temperature")
 
@@ -966,31 +988,14 @@ Namespace PropertyPackages
 
             MyBase.LoadData(data)
 
-            Me.ElectrolyteFlash = New PropertyPackages.Auxiliary.FlashAlgorithms.ElectrolyteSVLE
-
             Dim xel0 As XElement = (From xelv As XElement In data Where xelv.Name = "ElectrolyteFlash_ReactionSetID").SingleOrDefault
-            If Not xel0 Is Nothing Then Me.ElectrolyteFlash.ReactionSet = xel0.Value
-
-            Dim xel As XElement = (From xelv As XElement In data Where xelv.Name = "ElectrolyteFlash_CalculateChemicalEquilibria").SingleOrDefault
-            If Not xel Is Nothing Then Me.ElectrolyteFlash.CalculateChemicalEquilibria = xel.Value
+            If Not xel0 Is Nothing Then ReactionSet = xel0.Value
 
             Dim xel2 As XElement = (From xelv As XElement In data Where xelv.Name = "ElectrolyteFlash_Tolerance").SingleOrDefault
-            If Not xel2 Is Nothing Then Me.ElectrolyteFlash.Tolerance = xel2.Value
+            If Not xel2 Is Nothing Then Tolerance = xel2.Value
 
             Dim xel3 As XElement = (From xelv As XElement In data Where xelv.Name = "ElectrolyteFlash_MaximumIterations").SingleOrDefault
-            If Not xel3 Is Nothing Then Me.ElectrolyteFlash.MaximumIterations = xel3.Value
-
-            Dim xel4 As XElement = (From xelv As XElement In data Where xelv.Name = "ElectrolyteFlash_UseIPOPT").SingleOrDefault
-            If Not xel4 Is Nothing Then Me.ElectrolyteFlash.UseIPOPTSolver = xel4.Value
-
-            Dim xel5 As XElement = (From xelv As XElement In data Where xelv.Name = "ElectrolyteFlash_OptimizeInitialEstimates").SingleOrDefault
-            If Not xel5 Is Nothing Then Me.ElectrolyteFlash.OptimizeInitialEstimates = xel5.Value
-
-            Dim xel6 As XElement = (From xelv As XElement In data Where xelv.Name = "ElectrolyteFlash_AlternateBoundsInitializer").SingleOrDefault
-            If Not xel6 Is Nothing Then Me.ElectrolyteFlash.AlternateBoundsInitializer = xel6.Value
-
-            Dim xel7 As XElement = (From xelv As XElement In data Where xelv.Name = "ElectrolyteFlash_RigorousEnergyBalance").SingleOrDefault
-            If Not xel7 Is Nothing Then Me.ElectrolyteFlash.RigorousEnergyBalance = xel7.Value
+            If Not xel3 Is Nothing Then MaxIterations = xel3.Value
 
         End Function
 
@@ -1000,14 +1005,9 @@ Namespace PropertyPackages
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
 
             With elements
-                .Add(New XElement("ElectrolyteFlash_ReactionSetID", Me.ElectrolyteFlash.ReactionSet))
-                .Add(New XElement("ElectrolyteFlash_CalculateChemicalEquilibria", Me.ElectrolyteFlash.CalculateChemicalEquilibria))
-                .Add(New XElement("ElectrolyteFlash_Tolerance", Me.ElectrolyteFlash.Tolerance))
-                .Add(New XElement("ElectrolyteFlash_MaximumIterations", Me.ElectrolyteFlash.MaximumIterations))
-                .Add(New XElement("ElectrolyteFlash_UseIPOPT", Me.ElectrolyteFlash.UseIPOPTSolver))
-                .Add(New XElement("ElectrolyteFlash_OptimizeInitialEstimates", Me.ElectrolyteFlash.OptimizeInitialEstimates))
-                .Add(New XElement("ElectrolyteFlash_AlternateBoundsInitializer", Me.ElectrolyteFlash.AlternateBoundsInitializer))
-                .Add(New XElement("ElectrolyteFlash_RigorousEnergyBalance", Me.ElectrolyteFlash.RigorousEnergyBalance))
+                .Add(New XElement("ElectrolyteFlash_ReactionSetID", ReactionSet))
+                .Add(New XElement("ElectrolyteFlash_Tolerance", Tolerance))
+                .Add(New XElement("ElectrolyteFlash_MaximumIterations", MaxIterations))
             End With
 
             Return elements

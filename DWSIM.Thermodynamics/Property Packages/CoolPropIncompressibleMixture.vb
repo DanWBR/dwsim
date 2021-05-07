@@ -64,6 +64,12 @@ Namespace PropertyPackages
             f.ShowDialog()
         End Sub
 
+        Public Overrides Function GetEditingForm() As Form
+
+            Return New FormConfigCoolPropIncompMixture() With {.pp = Me}
+
+        End Function
+
         Public Overrides Function SaveData() As List(Of XElement)
             Dim elements = XMLSerializer.XMLSerializer.Serialize(Me)
             elements.AddRange(MyBase.SaveData)

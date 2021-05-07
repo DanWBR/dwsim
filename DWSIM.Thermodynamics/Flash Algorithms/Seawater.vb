@@ -619,7 +619,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
             xv = V
             xl = 1 - V
 
-            P = PP.AUX_PVAPi(wid, T)
+            P = DirectCast(PP, SeawaterPropertyPackage).VaporPressure(Vz, T)
 
             Dim tmp As Object() = Nothing
 
@@ -677,7 +677,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
             xv = V
             xl = 1 - V
 
-            T = PP.AUX_TSATi(P, wid)
+            T = DirectCast(PP, SeawaterPropertyPackage).SaturationTemperature(Vz, P)
 
             Dim tmp As Object() = Nothing
 

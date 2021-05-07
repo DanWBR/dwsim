@@ -18,6 +18,7 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Math
+Imports System.Xml.Serialization
 Imports DWSIM.Interfaces.Enums
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
@@ -25,6 +26,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
     Public Class UniversalFlash
 
         Inherits FlashAlgorithm
+
+        <XmlIgnore> Public Shared UserDefinedFlash As UserDefinedFlash
 
         Public Sub New()
             MyBase.New
@@ -57,7 +60,14 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_PT(Vz() As Double, P As Double, T As Double, PP As PropertyPackage, Optional ReuseKI As Boolean = False, Optional PrevKi() As Double = Nothing) As Object
 
+            If UserDefinedFlash IsNot Nothing AndAlso UserDefinedFlash.PTFlash IsNot Nothing Then
+                Dim result_o = UserDefinedFlash.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                Return result_o
+            End If
+
             Dim Flashtype As String = FlashSettings(FlashSetting.ForceEquilibriumCalculationType)
+
+            Dim UseIO As Boolean = FlashSettings(FlashSetting.UseIOFlash)
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
             Inspector.Host.CheckAndAdd(IObj, "", "Flash_PT", Name & " (PT Flash)", "Pressure-Temperature Flash Algorithm Routine", True)
@@ -101,20 +111,32 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 End If
             End If
 
-            Dim result As Object = Nothing
+            Dim result As Object() = Nothing
 
             Select Case Flashtype
                 Case "VLE"
                     IObj?.Paragraphs.Add("Selected Flash Algorithm: VLE")
-                    Dim nl = New NestedLoops
-                    nl.FlashSettings = FlashSettings
-                    result = nl.Flash_PT(Vz, P, T, PP, False, Nothing)
-                Case "VLLE"
-                    If Not FlashSettings(FlashSetting.ImmiscibleWaterOption) = True Then
-                        IObj?.Paragraphs.Add("Selected Flash Algorithm: VLLE")
-                        Dim nl = New NestedLoops3PV3
+                    If Not UseIO Then
+                        Dim nl = New NestedLoops
                         nl.FlashSettings = FlashSettings
                         result = nl.Flash_PT(Vz, P, T, PP, False, Nothing)
+                    Else
+                        Dim io = New BostonBrittInsideOut
+                        io.FlashSettings = FlashSettings
+                        result = io.Flash_PT(Vz, P, T, PP, False, Nothing)
+                    End If
+                Case "VLLE"
+                    If Not FlashSettings(FlashSetting.ImmiscibleWaterOption) = True Then
+                        If Not UseIO Then
+                            IObj?.Paragraphs.Add("Selected Flash Algorithm: VLLE")
+                            Dim nl = New NestedLoops3PV3
+                            nl.FlashSettings = FlashSettings
+                            result = nl.Flash_PT(Vz, P, T, PP, False, Nothing)
+                        Else
+                            Dim io = New BostonFournierInsideOut3P
+                            io.FlashSettings = FlashSettings
+                            result = io.Flash_PT(Vz, P, T, PP, False, Nothing)
+                        End If
                     Else
                         IObj?.Paragraphs.Add("Selected Flash Algorithm: VLLE - Immiscible Water")
                         Dim imm As New NestedLoopsImmiscible With {.FlashSettings = FlashSettings}
@@ -139,6 +161,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         End Function
 
         Public Overrides Function Flash_PH(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
+
+            If UserDefinedFlash IsNot Nothing AndAlso UserDefinedFlash.PHFlash IsNot Nothing Then
+                Dim result_o = UserDefinedFlash.Flash_PH(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
+                Return result_o
+            End If
 
             Dim Flashtype As String = FlashSettings(FlashSetting.ForceEquilibriumCalculationType)
 
@@ -181,6 +208,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim result As Object = Nothing
 
+            Dim UseIO As Boolean = FlashSettings(FlashSetting.UseIOFlash)
+
             Select Case Flashtype
                 Case "VLE", "SVLE", "SVLLE"
                     IObj?.Paragraphs.Add("Selected Flash Algorithm: VLE")
@@ -189,10 +218,22 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     nl.PTFlashFunction = AddressOf Flash_PT
                     result = nl.Flash_PH(Vz, P, H, Tref, PP, False, Nothing)
                 Case "VLLE"
-                    IObj?.Paragraphs.Add("Selected Flash Algorithm: VLLE")
-                    Dim nl = New NestedLoops3PV3
-                    nl.FlashSettings = FlashSettings
-                    result = nl.Flash_PH(Vz, P, H, Tref, PP, False, Nothing)
+                    If Not FlashSettings(FlashSetting.ImmiscibleWaterOption) = True Then
+                        If Not UseIO Then
+                            IObj?.Paragraphs.Add("Selected Flash Algorithm: VLLE")
+                            Dim nl = New NestedLoops3PV3
+                            nl.FlashSettings = FlashSettings
+                            result = nl.Flash_PH(Vz, P, H, Tref, PP, False, Nothing)
+                        Else
+                            Dim io = New BostonFournierInsideOut3P
+                            io.FlashSettings = FlashSettings
+                            result = io.Flash_PH(Vz, P, H, Tref, PP, False, Nothing)
+                        End If
+                    Else
+                        IObj?.Paragraphs.Add("Selected Flash Algorithm: VLLE - Immiscible Water")
+                        Dim imm As New NestedLoopsImmiscible With {.FlashSettings = FlashSettings}
+                        result = imm.Flash_PH(Vz, P, H, Tref, PP, False, Nothing)
+                    End If
             End Select
 
             IObj?.Close()
@@ -202,6 +243,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         End Function
 
         Public Overrides Function Flash_PS(ByVal Vz As Double(), ByVal P As Double, ByVal S As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
+
+            If UserDefinedFlash IsNot Nothing AndAlso UserDefinedFlash.PSFlash IsNot Nothing Then
+                Dim result_o = UserDefinedFlash.Flash_PS(Vz, P, S, Tref, PP, ReuseKI, PrevKi)
+                Return result_o
+            End If
 
             Dim Flashtype As String = FlashSettings(FlashSetting.ForceEquilibriumCalculationType)
 
@@ -241,6 +287,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim result As Object = Nothing
 
+            Dim UseIO As Boolean = FlashSettings(FlashSetting.UseIOFlash)
+
             Select Case Flashtype
                 Case "VLE", "SVLE", "SVLLE"
                     IObj?.Paragraphs.Add("Selected Flash Algorithm: VLE")
@@ -249,10 +297,22 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     nl.PTFlashFunction = AddressOf Flash_PT
                     result = nl.Flash_PS(Vz, P, S, Tref, PP, False, Nothing)
                 Case "VLLE"
-                    IObj?.Paragraphs.Add("Selected Flash Algorithm: VLLE")
-                    Dim nl = New NestedLoops3PV3
-                    nl.FlashSettings = FlashSettings
-                    result = nl.Flash_PS(Vz, P, S, Tref, PP, False, Nothing)
+                    If Not FlashSettings(FlashSetting.ImmiscibleWaterOption) = True Then
+                        If Not UseIO Then
+                            IObj?.Paragraphs.Add("Selected Flash Algorithm: VLLE")
+                            Dim nl = New NestedLoops3PV3
+                            nl.FlashSettings = FlashSettings
+                            result = nl.Flash_PS(Vz, P, S, Tref, PP, False, Nothing)
+                        Else
+                            Dim io = New BostonFournierInsideOut3P
+                            io.FlashSettings = FlashSettings
+                            result = io.Flash_PS(Vz, P, S, Tref, PP, False, Nothing)
+                        End If
+                    Else
+                        IObj?.Paragraphs.Add("Selected Flash Algorithm: VLLE - Immiscible Water")
+                        Dim imm As New NestedLoopsImmiscible With {.FlashSettings = FlashSettings}
+                        result = imm.Flash_PS(Vz, P, S, Tref, PP, False, Nothing)
+                    End If
             End Select
 
             IObj?.Close()
@@ -262,6 +322,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         End Function
 
         Public Overrides Function Flash_PV(Vz() As Double, P As Double, V As Double, Tref As Double, PP As PropertyPackage, Optional ReuseKI As Boolean = False, Optional PrevKi() As Double = Nothing) As Object
+
+            If UserDefinedFlash IsNot Nothing AndAlso UserDefinedFlash.PVFlash IsNot Nothing Then
+                Dim result_o = UserDefinedFlash.Flash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
+                Return result_o
+            End If
 
             Dim Flashtype As String = FlashSettings(FlashSetting.ForceEquilibriumCalculationType)
 
@@ -331,6 +396,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         End Function
 
         Public Overrides Function Flash_TV(Vz() As Double, T As Double, V As Double, Pref As Double, PP As PropertyPackage, Optional ReuseKI As Boolean = False, Optional PrevKi() As Double = Nothing) As Object
+
+            If UserDefinedFlash IsNot Nothing AndAlso UserDefinedFlash.TVFlash IsNot Nothing Then
+                Dim result_o = UserDefinedFlash.Flash_TV(Vz, T, V, Pref, PP, ReuseKI, PrevKi)
+                Return result_o
+            End If
 
             Dim Flashtype As String = FlashSettings(FlashSetting.ForceEquilibriumCalculationType)
 

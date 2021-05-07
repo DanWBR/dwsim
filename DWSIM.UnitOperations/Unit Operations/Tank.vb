@@ -113,13 +113,56 @@ Namespace UnitOperations
             MyBase.New()
         End Sub
 
-
         Public Overrides Sub CreateDynamicProperties()
 
             AddDynamicProperty("Liquid Level", "Current Liquid Level", 0, UnitOfMeasure.distance)
             AddDynamicProperty("Height", "Available Liquid Height", 2, UnitOfMeasure.distance)
             AddDynamicProperty("Initialize using Inlet Stream", "Initializes the tank's content with information from the inlet stream, if the vessel content is null.", 0, UnitOfMeasure.none)
             AddDynamicProperty("Reset Content", "Empties the tank's content on the next run.", 0, UnitOfMeasure.none)
+
+        End Sub
+
+        Public Overrides Sub DisplayDynamicsEditForm()
+
+            If fd Is Nothing Then
+                fd = New DynamicsPropertyEditor With {.SimObject = Me}
+                fd.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockRight
+                fd.Tag = "ObjectEditor"
+                fd.UpdateCallBack = Sub(table)
+                                        AddButtonsToDynEditor(table)
+                                    End Sub
+                Me.FlowSheet.DisplayForm(fd)
+            Else
+                If fd.IsDisposed Then
+                    fd = New DynamicsPropertyEditor With {.SimObject = Me}
+                    fd.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockRight
+                    fd.Tag = "ObjectEditor"
+                    fd.UpdateCallBack = Sub(table)
+                                            AddButtonsToDynEditor(table)
+                                        End Sub
+                    Me.FlowSheet.DisplayForm(fd)
+                Else
+                    fd.Activate()
+                End If
+            End If
+
+        End Sub
+
+        Private Sub AddButtonsToDynEditor(table As TableLayoutPanel)
+
+            Dim button1 As New Button With {.Text = FlowSheet.GetTranslatedString("ViewAccumulationStream"),
+                .Dock = DockStyle.Bottom, .AutoSize = True, .AutoSizeMode = AutoSizeMode.GrowAndShrink}
+            AddHandler button1.Click, Sub(s, e)
+                                          AccumulationStream.SetFlowsheet(FlowSheet)
+                                          Dim fms As New MaterialStreamEditor With {
+                                          .MatStream = AccumulationStream,
+                                          .IsAccumulationStream = True,
+                                          .Text = Me.GraphicObject.Tag + ": " + FlowSheet.GetTranslatedString("AccumulationStream")}
+                                          FlowSheet.DisplayForm(fms)
+                                      End Sub
+
+            table.Controls.Add(button1)
+            table.Controls.Add(New Panel())
 
         End Sub
 

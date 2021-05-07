@@ -20,7 +20,7 @@ Imports System.Math
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
-    Public Class UserDefined
+    Public Class UserDefinedFlash
 
         Inherits FlashAlgorithm
 

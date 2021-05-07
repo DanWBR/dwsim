@@ -221,6 +221,8 @@ Namespace Reactors
 
             f1 = Math.Log(prodtot / ktot) ^ 2 + penval ^ 2
 
+            FlowSheet.CheckStatus()
+
             Return f
 
         End Function
@@ -1003,7 +1005,7 @@ Namespace Reactors
 
             If ReactorOperationMode = OperationMode.Adiabatic Then
                 Dim newton As New Optimization.NewtonSolver
-                newton.MaxIterations = 20
+                newton.MaxIterations = 50
                 newton.Tolerance = 0.01
                 newton.EnableDamping = True
                 newton.Solve(Function(Tx)
@@ -1077,6 +1079,8 @@ Namespace Reactors
 
             OutletTemperature = T
 
+            Dim Hv As Double
+
             cp = Me.GraphicObject.OutputConnectors(0)
             If cp.IsAttached Then
                 ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
@@ -1085,7 +1089,6 @@ Namespace Reactors
                     .SpecType = StreamSpec.Temperature_and_Pressure
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
-                    .Phases(0).Properties.enthalpy = H / wv
                     Dim comp As BaseClasses.Compound
                     For Each comp In .Phases(0).Compounds.Values
                         comp.MoleFraction = Vy(ids.IndexOf(comp.Name))
@@ -1095,6 +1098,9 @@ Namespace Reactors
                         comp.MoleFraction = Vy(ids.IndexOf(comp.Name))
                         comp.MassFraction = Vwy(ids.IndexOf(comp.Name))
                     Next
+                    .PropertyPackage.CurrentMaterialStream = ms
+                    Hv = .PropertyPackage.DW_CalcEnthalpy(ms.GetOverallComposition(), T, P, PropertyPackages.State.Vapor)
+                    .Phases(0).Properties.enthalpy = Hv
                     .Phases(0).Properties.massflow = W * wv
                 End With
             End If
@@ -1107,7 +1113,6 @@ Namespace Reactors
                     .SpecType = StreamSpec.Temperature_and_Pressure
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
-                    If wv < 1.0# Then .Phases(0).Properties.enthalpy = H / (1 - wv) Else .Phases(0).Properties.enthalpy = 0.0#
                     Dim comp As BaseClasses.Compound
                     For Each comp In .Phases(0).Compounds.Values
                         comp.MoleFraction = Vx(ids.IndexOf(comp.Name))
@@ -1117,6 +1122,7 @@ Namespace Reactors
                         comp.MoleFraction = Vx(ids.IndexOf(comp.Name))
                         comp.MassFraction = Vwx(ids.IndexOf(comp.Name))
                     Next
+                    .Phases(0).Properties.enthalpy = (H - Hv * wv) / (1 - wv)
                     .Phases(0).Properties.massflow = W * (1 - wv)
                 End With
             End If

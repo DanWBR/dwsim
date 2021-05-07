@@ -17,6 +17,8 @@ Public Class MaterialStreamEditor
 
     Private committing As Boolean = False
 
+    Public IsAccumulationStream As Boolean = False
+
     Private Sub MaterialStreamEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         UpdateInfo()
@@ -90,48 +92,69 @@ Public Class MaterialStreamEditor
 
             'first block
 
-            chkActive.Checked = MatStream.GraphicObject.Active
+            If Not IsAccumulationStream Then
 
-            Me.Text = .GraphicObject.Tag & " (" & .GetDisplayName() & ")"
+                chkActive.Checked = MatStream.GraphicObject.Active
 
-            lblTag.Text = .GraphicObject.Tag
-            If .Calculated Then
-                lblStatus.Text = .FlowSheet.GetTranslatedString("Calculado") & " (" & .LastUpdated.ToString & ")"
-                lblStatus.ForeColor = Drawing.Color.Blue
-            Else
-                If Not .GraphicObject.Active Then
-                    lblStatus.Text = .FlowSheet.GetTranslatedString("Inativo")
-                    lblStatus.ForeColor = Drawing.Color.Gray
-                ElseIf .ErrorMessage <> "" Then
-                    If .ErrorMessage.Length > 50 Then
-                        lblStatus.Text = .FlowSheet.GetTranslatedString("Erro") & " (" & .ErrorMessage.Substring(50) & "...)"
-                    Else
-                        lblStatus.Text = .FlowSheet.GetTranslatedString("Erro") & " (" & .ErrorMessage & ")"
-                    End If
-                    lblStatus.ForeColor = Drawing.Color.Red
+                Me.Text = .GraphicObject.Tag & " (" & .GetDisplayName() & ")"
+
+                lblTag.Text = .GraphicObject.Tag
+                If .Calculated Then
+                    lblStatus.Text = .FlowSheet.GetTranslatedString("Calculado") & " (" & .LastUpdated.ToString & ")"
+                    lblStatus.ForeColor = Drawing.Color.Blue
                 Else
-                    lblStatus.Text = .FlowSheet.GetTranslatedString("NoCalculado")
-                    lblStatus.ForeColor = Drawing.Color.Black
+                    If Not .GraphicObject.Active Then
+                        lblStatus.Text = .FlowSheet.GetTranslatedString("Inativo")
+                        lblStatus.ForeColor = Drawing.Color.Gray
+                    ElseIf .ErrorMessage <> "" Then
+                        If .ErrorMessage.Length > 50 Then
+                            lblStatus.Text = .FlowSheet.GetTranslatedString("Erro") & " (" & .ErrorMessage.Substring(50) & "...)"
+                        Else
+                            lblStatus.Text = .FlowSheet.GetTranslatedString("Erro") & " (" & .ErrorMessage & ")"
+                        End If
+                        lblStatus.ForeColor = Drawing.Color.Red
+                    Else
+                        lblStatus.Text = .FlowSheet.GetTranslatedString("NoCalculado")
+                        lblStatus.ForeColor = Drawing.Color.Black
+                    End If
                 End If
+
+            Else
+
+                lblTag.Text = "Accumulation Stream"
+                lblStatus.Text = "N/A"
+                lblStatus.ForeColor = Drawing.Color.Gray
+
             End If
+
 
             lblConnectedTo.Text = ""
 
-            If .IsSpecAttached Then lblConnectedTo.Text = .FlowSheet.SimulationObjects(.AttachedSpecId).GraphicObject.Tag
-            If .IsAdjustAttached Then lblConnectedTo.Text = .FlowSheet.SimulationObjects(.AttachedAdjustId).GraphicObject.Tag
+            Try
+                If .IsSpecAttached Then lblConnectedTo.Text = .FlowSheet.SimulationObjects(.AttachedSpecId).GraphicObject.Tag
+            Catch ex As Exception
+            End Try
+            Try
+                If .IsAdjustAttached Then lblConnectedTo.Text = .FlowSheet.SimulationObjects(.AttachedAdjustId).GraphicObject.Tag
+            Catch ex As Exception
+            End Try
 
             'connections
 
-            Dim objlist As String() = .FlowSheet.SimulationObjects.Values.Where(Function(x) TypeOf x Is SharedClasses.UnitOperations.BaseClass Or x.GraphicObject.ObjectType = ObjectType.OT_Recycle).Select(Function(m) m.GraphicObject.Tag).ToArray
+            If Not IsAccumulationStream Then
 
-            cbInlet.Items.Clear()
-            cbInlet.Items.AddRange(objlist)
+                Dim objlist As String() = .FlowSheet.SimulationObjects.Values.Where(Function(x) TypeOf x Is SharedClasses.UnitOperations.BaseClass Or x.GraphicObject.ObjectType = ObjectType.OT_Recycle).Select(Function(m) m.GraphicObject.Tag).ToArray
 
-            cbOutlet.Items.Clear()
-            cbOutlet.Items.AddRange(objlist)
+                cbInlet.Items.Clear()
+                cbInlet.Items.AddRange(objlist)
 
-            If .GraphicObject.InputConnectors(0).IsAttached Then cbInlet.SelectedItem = .GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Tag
-            If .GraphicObject.OutputConnectors(0).IsAttached Then cbOutlet.SelectedItem = .GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Tag
+                cbOutlet.Items.Clear()
+                cbOutlet.Items.AddRange(objlist)
+
+                If .GraphicObject.InputConnectors(0).IsAttached Then cbInlet.SelectedItem = .GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Tag
+                If .GraphicObject.OutputConnectors(0).IsAttached Then cbOutlet.SelectedItem = .GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Tag
+
+            End If
 
             'conditions
 
@@ -248,7 +271,7 @@ Public Class MaterialStreamEditor
 
             cbCompoundPhaseProperties.SelectedIndex = 0
 
-            If .Calculated Then
+            If .Calculated Or IsAccumulationStream Then
 
                 If Not TabControlMain.TabPages.Contains(TabPageResultsComp) Then TabControlMain.TabPages.Add(TabPageResultsComp)
                 If Not TabControlMain.TabPages.Contains(TabPageResultsProps) Then TabControlMain.TabPages.Add(TabPageResultsProps)
@@ -396,6 +419,27 @@ Public Class MaterialStreamEditor
                 tbMoleFlow.Enabled = True
                 tbVolFlow.Enabled = True
                 TabPageInputComposition.Enabled = True
+
+                If IsAccumulationStream Then
+                    tbTemp.Enabled = False
+                    tbPressure.Enabled = False
+                    tbEnth.Enabled = False
+                    tbEntr.Enabled = False
+                    tbMassFlow.Enabled = True
+                    tbMoleFlow.Enabled = True
+                    tbVolFlow.Enabled = True
+                    TabPageInputComposition.Enabled = True
+                    cbSpec.Enabled = False
+                    cbDynSpec.Enabled = False
+                    lblTag.Enabled = False
+                    cbInlet.Enabled = False
+                    cbOutlet.Enabled = False
+                    btnDisconnectI.Enabled = False
+                    btnDisconnectO.Enabled = False
+                    cbPropPack.Enabled = False
+                    chkActive.Enabled = False
+                End If
+
             End If
 
         End With
@@ -1195,7 +1239,9 @@ Public Class MaterialStreamEditor
 
         SaveViewState()
 
-        MatStream.FlowSheet.RequestCalculation(MatStream)
+        If Not IsAccumulationStream Then
+            MatStream.FlowSheet.RequestCalculation(MatStream)
+        End If
 
     End Sub
 
@@ -1451,7 +1497,7 @@ Public Class MaterialStreamEditor
     End Sub
 
     Private Sub btnConfigurePP_Click(sender As Object, e As EventArgs) Handles btnConfigurePP.Click
-        MatStream.FlowSheet.PropertyPackages.Values.Where(Function(x) x.Tag = cbPropPack.SelectedItem.ToString).FirstOrDefault.DisplayEditingForm()
+        MatStream.FlowSheet.PropertyPackages.Values.Where(Function(x) x.Tag = cbPropPack.SelectedItem.ToString).FirstOrDefault.DisplayGroupedEditingForm()
     End Sub
 
     Private Sub rtbAnnotations_RtfChanged(sender As Object, e As EventArgs) Handles rtbAnnotations.RtfChanged
@@ -1459,7 +1505,11 @@ Public Class MaterialStreamEditor
     End Sub
 
     Private Sub chkActive_CheckedChanged(sender As Object, e As EventArgs) Handles chkActive.CheckedChanged
-        If Loaded Then MatStream.GraphicObject.Active = chkActive.Checked
+        If Loaded Then
+            MatStream.GraphicObject.Active = chkActive.Checked
+            MatStream.FlowSheet.UpdateInterface()
+            UpdateInfo()
+        End If
     End Sub
 
     Private Sub gridInputComposition_KeyDown(sender As Object, e As KeyEventArgs) Handles gridInputComposition.KeyDown

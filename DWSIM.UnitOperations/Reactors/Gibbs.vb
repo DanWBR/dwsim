@@ -419,6 +419,8 @@ Namespace Reactors
                 Next
             End If
 
+            FlowSheet.CheckStatus()
+
             Return gf * sumfm / 1000.0 / 1000.0 / 1000.0
 
         End Function
@@ -527,7 +529,7 @@ Namespace Reactors
             ReDim Me.ElementMatrix(els, c)
             ReDim Me.TotalElements(els)
 
-            Dim sum_e As Integer
+            Dim sum_e As Double
 
             For i = 0 To els
                 sum_e = 0
@@ -714,6 +716,9 @@ Namespace Reactors
                 For j = 0 To c
                     sum_e += N0(Me.ComponentIDs(j)) * Me.ElementMatrix(i, j)
                 Next
+                If sum_e < 1.0E-20 Then
+                    Throw New Exception("The Element Matrix is invalid. Check reacting components with zero flow at the reactor inlet.")
+                End If
                 Me.TotalElements(i) = sum_e
             Next
 
@@ -892,9 +897,19 @@ Namespace Reactors
 
             If ReactorOperationMode = OperationMode.Adiabatic Then
                 Dim brent As New BrentOpt.BrentMinimize
-                brent.brentoptimize2(200, T * 2 - 200, 0.01, Function(Tx)
-                                                                 Return gfunc.Invoke(Tx)
-                                                             End Function)
+                Dim tryagain As Boolean = True
+                Try
+                    brent.brentoptimize2(200, T * 3 - 200, 0.01, Function(Tx)
+                                                                     Return gfunc.Invoke(Tx)
+                                                                 End Function)
+                    tryagain = False
+                Catch ex As Exception
+                End Try
+                If tryagain Then
+                    brent.brentoptimize2(200, T * 2 - 200, 0.01, Function(Tx)
+                                                                     Return gfunc.Invoke(Tx)
+                                                                 End Function)
+                End If
             Else
                 gfunc.Invoke(T)
             End If
@@ -941,6 +956,8 @@ Namespace Reactors
 
             Dim ids2 = ims.PropertyPackage.RET_VNAMES().ToList
 
+            Dim Hv As Double
+
             cp = Me.GraphicObject.OutputConnectors(0)
             If cp.IsAttached Then
                 ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
@@ -949,7 +966,6 @@ Namespace Reactors
                     .SpecType = StreamSpec.Temperature_and_Pressure
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
-                    .Phases(0).Properties.enthalpy = H / wv
                     Dim comp As BaseClasses.Compound
                     For Each comp In .Phases(0).Compounds.Values
                         If xv = 0.0# Then
@@ -960,6 +976,9 @@ Namespace Reactors
                             comp.MassFraction = Vwy(ids2.IndexOf(comp.Name))
                         End If
                     Next
+                    .PropertyPackage.CurrentMaterialStream = ms
+                    Hv = .PropertyPackage.DW_CalcEnthalpy(ms.GetOverallComposition(), T, P, PropertyPackages.State.Vapor)
+                    .Phases(0).Properties.enthalpy = Hv
                     .Phases(0).Properties.massflow = W * wv
                 End With
             End If
@@ -983,6 +1002,7 @@ Namespace Reactors
                             comp.MassFraction = (Vwx(ids2.IndexOf(comp.Name)) * wl + Vws(ids2.IndexOf(comp.Name)) * ws) / (1 - wv)
                         End If
                     Next
+                    .Phases(0).Properties.enthalpy = (H - Hv * wv) / (1 - wv)
                     .Phases(0).Properties.massflow = W * (1 - wv)
                 End With
             End If

@@ -271,6 +271,12 @@ Public Class FormUnitGen
             .Add(New Object() {DWSIM.App.GetLocalString("Conductance")})
             .Item(.Count - 1).Cells(1) = cb
 
+            cb = New DataGridViewComboBoxCell
+            cb.Items.AddRange(currentset.GetUnitSet(UnitOfMeasure.distance).ToArray)
+            cb.Value = currentset.distance
+            .Add(New Object() {DWSIM.App.GetLocalString("DistComp")})
+            .Item(.Count - 1).Cells(1) = cb
+
         End With
     End Sub
 
@@ -336,7 +342,7 @@ Public Class FormUnitGen
                 .head = Me.DataGridView1.Rows(16).Cells(1).Value
                 .deltaP = Me.DataGridView1.Rows(14).Cells(1).Value
                 .deltaT = Me.DataGridView1.Rows(15).Cells(1).Value
-                .distance = Me.DataGridView1.Rows(16).Cells(1).Value
+                .head = Me.DataGridView1.Rows(16).Cells(1).Value
                 .time = Me.DataGridView1.Rows(18).Cells(1).Value
                 .volume = Me.DataGridView1.Rows(19).Cells(1).Value
                 .molar_volume = Me.DataGridView1.Rows(20).Cells(1).Value
@@ -360,6 +366,7 @@ Public Class FormUnitGen
                 .jouleThomsonCoefficient = Me.DataGridView1.Rows(37).Cells(1).Value
                 .diffusivity = Me.DataGridView1.Rows(38).Cells(1).Value
                 .conductance = Me.DataGridView1.Rows(39).Cells(1).Value
+                .distance = Me.DataGridView1.Rows(40).Cells(1).Value
             End With
 
             If Not Wizard Then

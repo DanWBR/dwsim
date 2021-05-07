@@ -278,17 +278,21 @@ Public Class EditingForm_Splitter
         If sender Is tbFlowSpec2 Then uobj.Stream2FlowSpec = su.Converter.ConvertToSI(cbFlowSpec2.SelectedItem.ToString, tbFlowSpec2.Text.ParseExpressionToDouble)
         If sender Is tbRatio1 Then
             uobj.Ratios(0) = tbRatio1.Text.ParseExpressionToDouble()
-            uobj.Ratios(1) = 1.0 - uobj.Ratios(0)
-            tbRatio2.Text = CDbl(uobj.Ratios(1)).ToString("N4")
             TrackBar1.Value = CInt(uobj.Ratios(0) * 100)
-            TrackBar2.Value = CInt(uobj.Ratios(1) * 100)
+            If Not SimObject.GraphicObject.OutputConnectors(2).IsAttached Then
+                uobj.Ratios(1) = 1.0 - uobj.Ratios(0)
+                tbRatio2.Text = CDbl(uobj.Ratios(1)).ToString("N4")
+                TrackBar2.Value = CInt(uobj.Ratios(1) * 100)
+            End If
         End If
         If sender Is tbRatio2 Then
             uobj.Ratios(1) = tbRatio2.Text.ParseExpressionToDouble()
-            uobj.Ratios(0) = 1.0 - uobj.Ratios(1)
-            tbRatio1.Text = CDbl(uobj.Ratios(0)).ToString("N4")
-            TrackBar1.Value = CInt(uobj.Ratios(0) * 100)
             TrackBar2.Value = CInt(uobj.Ratios(1) * 100)
+            If Not SimObject.GraphicObject.OutputConnectors(2).IsAttached Then
+                uobj.Ratios(0) = 1.0 - uobj.Ratios(1)
+                tbRatio1.Text = CDbl(uobj.Ratios(0)).ToString("N4")
+                TrackBar1.Value = CInt(uobj.Ratios(0) * 100)
+            End If
         End If
 
         RequestCalc()
@@ -444,14 +448,18 @@ Public Class EditingForm_Splitter
     End Sub
 
     Private Sub chkActive_CheckedChanged(sender As Object, e As EventArgs) Handles chkActive.CheckedChanged
-        If Loaded Then SimObject.GraphicObject.Active = chkActive.Checked
+        If Loaded Then
+            SimObject.GraphicObject.Active = chkActive.Checked
+            SimObject.FlowSheet.UpdateInterface()
+            UpdateInfo()
+        End If
     End Sub
 
     Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles TrackBar1.Scroll
         If Loaded Then
-            SimObject.Ratios(0) = TrackBar1.Value / 100.0
+            SimObject.Ratios(0) = TrackBar1.Value / 10000.0
             If Not SimObject.GraphicObject.OutputConnectors(2).IsAttached Then
-                TrackBar2.Value = 100 - TrackBar1.Value
+                TrackBar2.Value = 10000 - TrackBar1.Value
                 SimObject.Ratios(1) = 1.0 - SimObject.Ratios(0)
                 tbRatio2.Text = Convert.ToDouble(SimObject.Ratios(1)).ToString("N4")
             End If
@@ -461,9 +469,9 @@ Public Class EditingForm_Splitter
 
     Private Sub TrackBar2_Scroll(sender As Object, e As EventArgs) Handles TrackBar2.Scroll
         If Loaded Then
-            SimObject.Ratios(1) = TrackBar2.Value / 100
+            SimObject.Ratios(1) = TrackBar2.Value / 10000
             If Not SimObject.GraphicObject.OutputConnectors(2).IsAttached Then
-                TrackBar1.Value = 100 - TrackBar2.Value
+                TrackBar1.Value = 10000 - TrackBar2.Value
                 SimObject.Ratios(0) = 1.0 - SimObject.Ratios(1)
                 tbRatio1.Text = CDbl(SimObject.Ratios(0)).ToString("N4")
             End If

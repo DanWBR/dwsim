@@ -105,11 +105,13 @@ namespace DWSIM.UI.Forms
                     SpreadsheetControl?.Dispose();
                     SpreadsheetControl = null;
                 }
-                if (!ChartsControl.IsDisposed) {
+                if (!ChartsControl.IsDisposed)
+                {
                     ChartsControl?.Dispose();
                     ChartsControl = null;
                 }
-                if (!FlowsheetControl.IsDisposed) { 
+                if (!FlowsheetControl.IsDisposed)
+                {
                     FlowsheetControl?.Dispose();
                     FlowsheetControl = null;
                 }
@@ -152,7 +154,7 @@ namespace DWSIM.UI.Forms
             FlowsheetObject.Initialize();
 
             Title = "New Flowsheet";
-            
+
             if (s.FlowsheetRenderer == s.SkiaCanvasRenderer.CPU)
             {
                 FlowsheetControl = new DWSIM.UI.Controls.FlowsheetSurfaceControl() { FlowsheetObject = FlowsheetObject, FlowsheetSurface = (DWSIM.Drawing.SkiaSharp.GraphicsSurface)FlowsheetObject.GetSurface() };
@@ -413,6 +415,17 @@ namespace DWSIM.UI.Forms
                 dialog.CurrentFilterIndex = 0;
                 if (dialog.ShowDialog(this) == DialogResult.Ok)
                 {
+                    if (!Path.HasExtension(dialog.FileName))
+                    {
+                        if (dialog.CurrentFilterIndex == 0)
+                        {
+                            dialog.FileName = Path.ChangeExtension(dialog.FileName, ".dwxmz");
+                        }
+                        else
+                        {
+                            dialog.FileName = Path.ChangeExtension(dialog.FileName, ".xml");
+                        }
+                    }
                     SaveSimulation(dialog.FileName);
                 }
             };
@@ -1481,7 +1494,7 @@ namespace DWSIM.UI.Forms
                     Application.Instance.AsyncInvoke(() =>
                     {
                         ResultsControl.UpdateList();
-                        MaterialStreamListControl.UpdateList();
+                        //MaterialStreamListControl.UpdateList();
                         UpdateEditorPanels();
                     });
                 });
@@ -1591,10 +1604,7 @@ namespace DWSIM.UI.Forms
 
                 string xmlfile = Path.ChangeExtension(Path.GetTempFileName(), "xml");
 
-                using (var fstream = new FileStream(xmlfile, FileMode.OpenOrCreate, FileAccess.ReadWrite))
-                {
-                    FlowsheetObject.SaveToXML().Save(fstream);
-                }
+                FlowsheetObject.SaveToXML().Save(xmlfile);
 
                 var i_Files = new List<string>();
                 if (File.Exists(xmlfile))
@@ -1635,17 +1645,11 @@ namespace DWSIM.UI.Forms
             }
             else if (System.IO.Path.GetExtension(path).ToLower() == ".dwxml")
             {
-                using (var fstream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite))
-                {
-                    FlowsheetObject.SaveToXML().Save(fstream);
-                }
+                FlowsheetObject.SaveToXML().Save(path);
             }
             else if (System.IO.Path.GetExtension(path).ToLower() == ".xml")
             {
-                using (var fstream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite))
-                {
-                    FlowsheetObject.SaveToMXML().Save(fstream);
-                }
+                FlowsheetObject.SaveToMXML().Save(path);
             }
 
             if (!s.AutomationMode)

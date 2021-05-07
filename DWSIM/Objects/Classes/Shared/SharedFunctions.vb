@@ -64,8 +64,6 @@ Namespace DWSIM
             Integer.TryParse(My.Settings.ServerPort, GlobalSettings.Settings.ServerPort)
             GlobalSettings.Settings.ServiceBusConnectionString = My.Settings.ServiceBusConnectionString
 
-            GlobalSettings.Settings.TaskScheduler = My.Settings.TaskScheduler
-
             GlobalSettings.Settings.MaxThreadMultiplier = My.Settings.MaxThreadMultiplier
             GlobalSettings.Settings.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism
             GlobalSettings.Settings.EnableParallelProcessing = My.Settings.EnableParallelProcessing

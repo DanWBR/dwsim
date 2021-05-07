@@ -205,10 +205,7 @@
   <data name="ExitToolStripMenuItem.Text" xml:space="preserve">
     <value>Exi&amp;t DWSIM</value>
   </data>
-  <data name="FileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 19</value>
-  </data>
-  <data name="FileToolStripMenuItem.Text" xml:space="preserve">
+  <data name="FileTSMI.Text" xml:space="preserve">
     <value>&amp;File</value>
   </data>
   <data name="PreferenciasDoDWSIMToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
@@ -217,10 +214,7 @@
   <data name="PreferenciasDoDWSIMToolStripMenuItem.Text" xml:space="preserve">
     <value>General Settings</value>
   </data>
-  <data name="VerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 19</value>
-  </data>
-  <data name="VerToolStripMenuItem.Text" xml:space="preserve">
+  <data name="EditTSMI.Text" xml:space="preserve">
     <value>E&amp;dit</value>
   </data>
   <data name="DatabaseManagerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
@@ -235,10 +229,7 @@
   <data name="RegistroCAPEOPENToolStripMenuItem.Text" xml:space="preserve">
     <value>CAPE-OPEN Component Registration</value>
   </data>
-  <data name="FerramentasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 19</value>
-  </data>
-  <data name="FerramentasToolStripMenuItem.Text" xml:space="preserve">
+  <data name="ToolsTSMI.Text" xml:space="preserve">
     <value>&amp;Tools</value>
   </data>
   <data name="CascadeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
@@ -266,25 +257,22 @@
     <value>&amp;Windows</value>
   </data>
   <data name="MostrarBarraDeFerramentasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="MostrarBarraDeFerramentasToolStripMenuItem.Text" xml:space="preserve">
     <value>Show Toolstrip</value>
   </data>
   <data name="PainelDeBoasvindasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="PainelDeBoasvindasToolStripMenuItem.Text" xml:space="preserve">
     <value>Welcome Panel</value>
   </data>
-  <data name="VerToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 19</value>
-  </data>
-  <data name="VerToolStripMenuItem1.Text" xml:space="preserve">
+  <data name="ViewTSMI.Text" xml:space="preserve">
     <value>&amp;View</value>
   </data>
   <data name="ContentsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 22</value>
+    <value>174, 22</value>
   </data>
   <data name="ContentsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Show Help</value>
@@ -296,13 +284,13 @@
     <value>User Guide (PDF)</value>
   </data>
   <data name="DocumentacaoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 22</value>
+    <value>174, 22</value>
   </data>
   <data name="DocumentacaoToolStripMenuItem.Text" xml:space="preserve">
     <value>Documentation</value>
   </data>
   <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 6</value>
+    <value>171, 6</value>
   </data>
   <data name="WikiToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -365,27 +353,24 @@
     <value>Inform a Bug</value>
   </data>
   <data name="DWSIMNaInternetToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 22</value>
+    <value>174, 22</value>
   </data>
   <data name="DWSIMNaInternetToolStripMenuItem.Text" xml:space="preserve">
     <value>Support</value>
   </data>
   <data name="PatronToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 22</value>
+    <value>174, 22</value>
   </data>
   <data name="PatronToolStripMenuItem.Text" xml:space="preserve">
     <value>Become a Patron</value>
   </data>
   <data name="AboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 22</value>
+    <value>174, 22</value>
   </data>
   <data name="AboutToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;About DWSIM...</value>
+    <value>&amp;About DWSIM</value>
   </data>
-  <data name="HelpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 19</value>
-  </data>
-  <data name="HelpToolStripMenuItem.Text" xml:space="preserve">
+  <data name="HelpTSMI.Text" xml:space="preserve">
     <value>&amp;Help</value>
   </data>
   <data name="DownloadSupplementarySoftwareToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">

@@ -54,6 +54,10 @@ namespace DWSIM.UI.Forms
                 "." + Assembly.GetExecutingAssembly().GetName().Version.Build.ToString()
             };
 
+#if DEBUG
+            lbl1a.Text += "-" + File.GetLastWriteTimeUtc(Assembly.GetExecutingAssembly().Location).ToString();
+#endif
+
             if (Environment.Is64BitProcess)
             {
                 lbl1a.Text +=  " (Cross-Platform UI, 64-bit)";

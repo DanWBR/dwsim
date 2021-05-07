@@ -15,7 +15,6 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-'Imports DWSIM.SimulationObjects
 Imports System.ComponentModel
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports System.IO
@@ -48,7 +47,6 @@ Public Class FormMain
 
     Public Shared m_childcount As Integer = 1
     Public filename As String
-    Public sairdevez As Boolean = False
     Public loadedCSDB As Boolean = False
     Public pathsep As Char
 
@@ -58,18 +56,9 @@ Public Class FormMain
 
     Private dropdownlist As ArrayList
 
-    Private dlok As Boolean = False
     Public CancelClosing As Boolean = False
 
     Private tmpform2 As FormFlowsheet
-
-    Public AvailableComponents As New Dictionary(Of String, Interfaces.ICompoundConstantProperties)
-    Public AvailableUnitSystems As New Dictionary(Of String, SystemsOfUnits.Units)
-    Public PropertyPackages As New Dictionary(Of String, PropertyPackages.PropertyPackage)
-    Public FlashAlgorithms As New Dictionary(Of String, Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.FlashAlgorithm)
-    Public Property ExternalUnitOperations As New Dictionary(Of String, Interfaces.IExternalUnitOperation)
-
-    Public COMonitoringObjects As New Dictionary(Of String, UnitOperations.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo)
     Public WithEvents timer1 As New Timer
 
     Public calculatorassembly, unitopassembly As Assembly
@@ -78,9 +67,160 @@ Public Class FormMain
     Public SampleList As New List(Of String)
     Public FOSSEEList As New List(Of FOSSEEFlowsheet)
 
+    'Collections
+
+    Public AvailableComponents As New Dictionary(Of String, Interfaces.ICompoundConstantProperties)
+
+    Public AvailableUnitSystems As New Dictionary(Of String, SystemsOfUnits.Units)
+
+    Public PropertyPackages As New Dictionary(Of String, PropertyPackages.PropertyPackage)
+
+    Public FlashAlgorithms As New Dictionary(Of String, Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.FlashAlgorithm)
+
+    Public Property ExternalUnitOperations As New Dictionary(Of String, Interfaces.IExternalUnitOperation)
+
+    Public Property Extenders As New Dictionary(Of String, IExtenderCollection)
+
+    Public COMonitoringObjects As New Dictionary(Of String, UnitOperations.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo)
+
     Public ObjectList As New Dictionary(Of String, Interfaces.ISimulationObject)
 
+    Public Property MostRecentFiles As Specialized.StringCollection
+
 #Region "    Form Events"
+
+    Public Event ToolOpened(sender As Object, e As EventArgs)
+
+    Public Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+        MostRecentFiles = My.Settings.MostRecentFiles
+
+        If GlobalSettings.Settings.OldUI Then
+
+            calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
+            unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations")).FirstOrDefault
+
+            aTypeList.AddRange(calculatorassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
+            aTypeList.AddRange(unitopassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
+
+            For Each item In aTypeList.OrderBy(Function(x) x.Name)
+                If Not item.IsAbstract Then
+                    Dim obj = DirectCast(Activator.CreateInstance(item), Interfaces.ISimulationObject)
+                    ObjectList.Add(obj.GetDisplayName(), obj)
+                End If
+            Next
+
+            For Each item In ExternalUnitOperations.Values.OrderBy(Function(x) x.Name)
+                ObjectList.Add(item.Name, item)
+            Next
+
+            My.Application.MainThreadId = Threading.Thread.CurrentThread.ManagedThreadId
+
+            If My.Settings.BackupFolder = "" Then My.Settings.BackupFolder = My.Computer.FileSystem.SpecialDirectories.Temp & Path.DirectorySeparatorChar & "DWSIM"
+
+            If My.Settings.BackupActivated Then
+                Me.TimerBackup.Interval = My.Settings.BackupInterval * 60000
+                Me.TimerBackup.Enabled = True
+            End If
+
+            Me.dropdownlist = New ArrayList
+            Me.UpdateMRUList()
+
+            'load plugins from 'Plugins' folder
+
+            Dim pluginlist As List(Of Interfaces.IUtilityPlugin) = GetPlugins(LoadPluginAssemblies())
+
+            For Each ip As Interfaces.IUtilityPlugin In pluginlist
+                My.Application.UtilityPlugins.Add(ip.UniqueID, ip)
+            Next
+
+#If Not WINE32 Then
+
+            'load extenders
+
+            Dim extlist As List(Of IExtenderCollection) = GetExtenders(LoadExtenderDLLs())
+
+            For Each extender In extlist
+                Extenders.Add(extender.ID, extender)
+                Try
+                    If extender.Level = ExtenderLevel.MainWindow Then
+                        Dim newmenuitem As ToolStripMenuItem = Nothing
+                        If extender.Category = ExtenderCategory.NewItem Then
+                            newmenuitem = New ToolStripMenuItem()
+                            newmenuitem.Text = extender.DisplayText
+                            newmenuitem.DisplayStyle = ToolStripItemDisplayStyle.Text
+                        End If
+                        For Each item In extender.Collection
+                            Dim exttsmi As New ToolStripMenuItem
+                            exttsmi.Text = item.DisplayText
+                            exttsmi.Image = item.DisplayImage
+                            AddHandler exttsmi.Click, Sub(s2, e2)
+                                                          item.SetMainWindow(Me)
+                                                          item.Run()
+                                                      End Sub
+                            Select Case extender.Category
+                                Case ExtenderCategory.File
+                                    If item.InsertAtPosition >= 0 Then
+                                        FileTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
+                                    Else
+                                        FileTSMI.DropDownItems.Add(exttsmi)
+                                    End If
+                                Case ExtenderCategory.Edit
+                                    If item.InsertAtPosition >= 0 Then
+                                        EditTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
+                                    Else
+                                        EditTSMI.DropDownItems.Add(exttsmi)
+                                    End If
+                                Case ExtenderCategory.Tools
+                                    If item.InsertAtPosition >= 0 Then
+                                        ToolsTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
+                                    Else
+                                        ToolsTSMI.DropDownItems.Add(exttsmi)
+                                    End If
+                                Case ExtenderCategory.Help
+                                    If item.InsertAtPosition >= 0 Then
+                                        HelpTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
+                                    Else
+                                        HelpTSMI.DropDownItems.Add(exttsmi)
+                                    End If
+                                Case ExtenderCategory.NewItem
+                                    newmenuitem?.DropDownItems.Add(exttsmi)
+                                Case ExtenderCategory.InitializationScript
+                                    item.SetMainWindow(Me)
+                                    item.Run()
+                            End Select
+                        Next
+                        If newmenuitem IsNot Nothing Then
+                            MenuStrip1.Items.Add(newmenuitem)
+                        End If
+                    End If
+                Catch ex As Exception
+                End Try
+            Next
+
+#End If
+
+            'Search and populate CAPE-OPEN Flowsheet Monitoring Object collection
+            'SearchCOMOs() 'doing this only when the user hovers the mouse over the plugins toolstrip menu item
+
+            If My.Settings.ScriptPaths Is Nothing Then My.Settings.ScriptPaths = New Collections.Specialized.StringCollection()
+
+            Me.FrmOptions = New FormOptions
+            Me.FrmOptions.Dock = DockStyle.Fill
+            Me.SettingsPanel.Controls.Add(Me.FrmOptions)
+            Me.ButtonClose.BringToFront()
+
+            tsbInspector.Checked = GlobalSettings.Settings.InspectorEnabled
+
+            SetupWelcomeScreen()
+
+        End If
+
+        Me.Text = DWSIM.App.GetLocalString("FormParent_FormText")
+
+        GlobalSettings.Settings.DpiScale = Me.CreateGraphics.DpiX / 96.0
+
+    End Sub
 
     Private Sub FormMain_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles Me.DragDrop
         If e.Data.GetDataPresent(DataFormats.FileDrop) Then
@@ -189,7 +329,6 @@ Public Class FormMain
     Private Sub MyApplication_UnhandledException(ByVal sender As Object, ByVal e As System.Threading.ThreadExceptionEventArgs)
         Try
             Dim frmEx As New FormUnhandledException
-            frmEx.TextBox1.Text = e.Exception.ToString
             frmEx.ex = e.Exception
             frmEx.ShowDialog()
         Finally
@@ -200,87 +339,11 @@ Public Class FormMain
     Private Sub MyApplication_UnhandledException2(ByVal sender As Object, ByVal e As System.UnhandledExceptionEventArgs)
         Try
             Dim frmEx As New FormUnhandledException
-            frmEx.TextBox1.Text = e.ExceptionObject.ToString
             frmEx.ex = e.ExceptionObject
             frmEx.ShowDialog()
         Catch ex As Exception
 
         End Try
-    End Sub
-
-    Public Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
-        If GlobalSettings.Settings.OldUI Then
-
-            calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
-            unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations")).FirstOrDefault
-
-            aTypeList.AddRange(calculatorassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
-            aTypeList.AddRange(unitopassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
-
-            For Each item In aTypeList.OrderBy(Function(x) x.Name)
-                If Not item.IsAbstract Then
-                    Dim obj = DirectCast(Activator.CreateInstance(item), Interfaces.ISimulationObject)
-                    ObjectList.Add(obj.GetDisplayName(), obj)
-                End If
-            Next
-
-            For Each item In ExternalUnitOperations.Values.OrderBy(Function(x) x.Name)
-                ObjectList.Add(item.Name, item)
-            Next
-
-            My.Application.MainThreadId = Threading.Thread.CurrentThread.ManagedThreadId
-
-            If My.Settings.BackupFolder = "" Then My.Settings.BackupFolder = My.Computer.FileSystem.SpecialDirectories.Temp & Path.DirectorySeparatorChar & "DWSIM"
-
-            If My.Settings.BackupActivated Then
-                Me.TimerBackup.Interval = My.Settings.BackupInterval * 60000
-                Me.TimerBackup.Enabled = True
-            End If
-
-            Me.dropdownlist = New ArrayList
-            Me.UpdateMRUList()
-
-            'load plugins from 'Plugins' folder
-
-            Dim pluginlist As List(Of Interfaces.IUtilityPlugin) = GetPlugins(LoadPluginAssemblies())
-
-            For Each ip As Interfaces.IUtilityPlugin In pluginlist
-                My.Application.UtilityPlugins.Add(ip.UniqueID, ip)
-            Next
-
-#If Not WINE32 Then
-            'load external property packages from 'propertypackages' folder, if there is any
-            Dim epplist As List(Of PropertyPackage) = GetExternalPPs(LoadExternalPPs())
-
-            For Each pp As PropertyPackage In epplist
-                PropertyPackages.Add(pp.ComponentName, pp)
-            Next
-#End If
-
-            'Search and populate CAPE-OPEN Flowsheet Monitoring Object collection
-            'SearchCOMOs() 'doing this only when the user hovers the mouse over the plugins toolstrip menu item
-
-            If My.Settings.ScriptPaths Is Nothing Then My.Settings.ScriptPaths = New Collections.Specialized.StringCollection()
-
-            Me.FrmOptions = New FormOptions
-            Me.FrmOptions.Dock = DockStyle.Fill
-            Me.SettingsPanel.Controls.Add(Me.FrmOptions)
-            Me.ButtonClose.BringToFront()
-
-            tsbInspector.Checked = GlobalSettings.Settings.InspectorEnabled
-
-            Me.FrmWelcome = New FormWelcome
-            Me.FrmWelcome.Owner = Me
-            Me.FrmWelcome.Dock = DockStyle.Fill
-            Me.WelcomePanel.Controls.Add(Me.FrmWelcome)
-
-        End If
-
-        Me.Text = DWSIM.App.GetLocalString("FormParent_FormText")
-
-        GlobalSettings.Settings.DpiScale = Me.CreateGraphics.DpiX / 96.0
-
     End Sub
 
     Sub SearchCOMOs()
@@ -322,6 +385,37 @@ Public Class FormMain
             Next
             mykey.Close()
         Next
+
+    End Sub
+
+    Private Sub SetupWelcomeScreen()
+
+        Dim splfile = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "extenders", "WelcomeScreen.dll")
+
+        If File.Exists(splfile) Then
+
+            Dim types = Assembly.LoadFrom(splfile).GetExportedTypes()
+
+            Dim tList As List(Of Type) = types.ToList().FindAll(Function(t) t.GetInterfaces().Contains(GetType(IWelcomeScreen)))
+
+            Dim lst = tList.ConvertAll(Function(t As Type) TryCast(Activator.CreateInstance(t), IWelcomeScreen))
+
+            lst(0).SetMainForm(Me)
+
+            Dim ucontrol = lst(0).GetWelcomeScreen()
+
+            ucontrol.Dock = DockStyle.Fill
+
+            Me.WelcomePanel.Controls.Add(ucontrol)
+
+        Else
+
+            Me.FrmWelcome = New FormWelcome
+            Me.FrmWelcome.Owner = Me
+            Me.FrmWelcome.Dock = DockStyle.Fill
+            Me.WelcomePanel.Controls.Add(Me.FrmWelcome)
+
+        End If
 
     End Sub
 
@@ -380,49 +474,44 @@ Public Class FormMain
         Return (interfaceTypes.Contains(GetType(Interfaces.IUtilityPlugin)))
     End Function
 
-    Private Function LoadExternalPPs() As List(Of Assembly)
+    Private Function LoadExtenderDLLs() As List(Of Assembly)
 
-        Dim pluginassemblylist As List(Of Assembly) = New List(Of Assembly)
+        Dim extenderdlls As List(Of Assembly) = New List(Of Assembly)
 
-        If Directory.Exists(Path.Combine(Environment.CurrentDirectory, "propertypackages")) Then
+        If Directory.Exists(Path.Combine(Environment.CurrentDirectory, "extenders")) Then
 
-            Dim dinfo As New DirectoryInfo(Path.Combine(Environment.CurrentDirectory, "propertypackages"))
+            Dim dinfo As New DirectoryInfo(Path.Combine(Environment.CurrentDirectory, "extenders"))
 
             Dim files() As FileInfo = dinfo.GetFiles("*.dll")
 
             If Not files Is Nothing Then
                 For Each fi As FileInfo In files
-                    pluginassemblylist.Add(Assembly.LoadFrom(fi.FullName))
+                    extenderdlls.Add(Assembly.LoadFrom(fi.FullName))
                 Next
             End If
 
         End If
 
-        Return pluginassemblylist
+        Return extenderdlls
 
     End Function
 
-    Function GetExternalPPs(ByVal alist As List(Of Assembly)) As List(Of PropertyPackage)
+    Function GetExtenders(ByVal alist As List(Of Assembly)) As List(Of IExtenderCollection)
 
         Dim availableTypes As New List(Of Type)()
 
         For Each currentAssembly As Assembly In alist
             Try
-                availableTypes.AddRange(currentAssembly.GetTypes())
+                availableTypes.AddRange(currentAssembly.GetExportedTypes())
             Catch ex As Exception
-                MessageBox.Show(ex.Message.ToCharArray, "Error loading plugin", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show(ex.Message, "Error loading Extender", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         Next
 
-        Dim ppList As List(Of Type) = availableTypes.FindAll(AddressOf isPP)
+        Dim extList As List(Of Type) = availableTypes.FindAll(Function(t) t.GetInterfaces().Contains(GetType(Interfaces.IExtenderCollection)))
 
-        Return ppList.ConvertAll(Of PropertyPackage)(Function(t As Type) TryCast(Activator.CreateInstance(t), PropertyPackage))
+        Return extList.ConvertAll(Of IExtenderCollection)(Function(t As Type) TryCast(Activator.CreateInstance(t), IExtenderCollection))
 
-    End Function
-
-
-    Function isPP(ByVal t As Type)
-        Return (t Is GetType(PropertyPackage))
     End Function
 
     Private Sub UpdateMRUList()
@@ -435,9 +524,9 @@ Public Class FormMain
 
         Dim j As Integer = 0
         For Each k As String In Me.dropdownlist
-            Dim tsmi As ToolStripItem = Me.FileToolStripMenuItem.DropDownItems(Convert.ToInt32(k - j))
+            Dim tsmi As ToolStripItem = Me.FileTSMI.DropDownItems(Convert.ToInt32(k - j))
             If tsmi.DisplayStyle = ToolStripItemDisplayStyle.Text Then
-                Me.FileToolStripMenuItem.DropDownItems.Remove(tsmi)
+                Me.FileTSMI.DropDownItems.Remove(tsmi)
                 j = j + 1
             End If
         Next
@@ -446,7 +535,7 @@ Public Class FormMain
 
         Dim toremove As New ArrayList
 
-        Dim tsindex = FileToolStripMenuItem.DropDownItems.IndexOf(tsFileSeparator)
+        Dim tsindex = FileTSMI.DropDownItems.IndexOf(tsFileSeparator)
 
         If Not My.Settings.MostRecentFiles Is Nothing Then
             For Each str As String In My.Settings.MostRecentFiles
@@ -457,8 +546,8 @@ Public Class FormMain
                         .Tag = str
                         .DisplayStyle = ToolStripItemDisplayStyle.Text
                     End With
-                    Me.FileToolStripMenuItem.DropDownItems.Insert(tsindex, tsmi)
-                    Me.dropdownlist.Add(Me.FileToolStripMenuItem.DropDownItems.Count - 2)
+                    Me.FileTSMI.DropDownItems.Insert(tsindex, tsmi)
+                    Me.dropdownlist.Add(Me.FileTSMI.DropDownItems.Count - 2)
                     AddHandler tsmi.Click, AddressOf Me.OpenRecent_click
                 Else
                     toremove.Add(str)
@@ -468,7 +557,7 @@ Public Class FormMain
                 My.Settings.MostRecentFiles.Remove(s)
             Next
             If My.Settings.MostRecentFiles.Count > 0 Then
-                Me.dropdownlist.Add(Me.FileToolStripMenuItem.DropDownItems.Count - 2)
+                Me.dropdownlist.Add(Me.FileTSMI.DropDownItems.Count - 2)
             End If
         Else
             My.Settings.MostRecentFiles = New System.Collections.Specialized.StringCollection
@@ -484,11 +573,11 @@ Public Class FormMain
 
         If latestfolders.Count > 0 Then
             tsFolderSeparator.Visible = True
-            Dim tfindex = FileToolStripMenuItem.DropDownItems.IndexOf(tsFolderSeparator)
+            Dim tfindex = FileTSMI.DropDownItems.IndexOf(tsFolderSeparator)
             For Each s In latestfolders
                 Dim tsmi As New ToolStripMenuItem With {.Text = s, .Tag = s, .DisplayStyle = ToolStripItemDisplayStyle.Text}
-                Me.FileToolStripMenuItem.DropDownItems.Insert(tfindex, tsmi)
-                Me.dropdownlist.Add(Me.FileToolStripMenuItem.DropDownItems.Count - 2)
+                Me.FileTSMI.DropDownItems.Insert(tfindex, tsmi)
+                Me.dropdownlist.Add(Me.FileTSMI.DropDownItems.Count - 2)
                 AddHandler tsmi.Click, AddressOf Me.OpenRecentFolder_click
             Next
         Else
@@ -591,6 +680,12 @@ Public Class FormMain
 
         PropertyPackages.Add(NRTLPP.ComponentName.ToString, NRTLPP)
 
+        Dim WPP As WilsonPropertyPackage = New WilsonPropertyPackage()
+        WPP.ComponentName = "Wilson"
+        WPP.ComponentDescription = "Wilson Activity Coefficient Model"
+
+        PropertyPackages.Add(WPP.ComponentName.ToString, WPP)
+
         Dim UQPP As UNIQUACPropertyPackage = New UNIQUACPropertyPackage()
         UQPP.ComponentName = "UNIQUAC"
         UQPP.ComponentDescription = DWSIM.App.GetLocalString("DescUNIQUACPP")
@@ -620,6 +715,24 @@ Public Class FormMain
         LKPPP.ComponentDescription = DWSIM.App.GetLocalString("DescLKPPP")
 
         PropertyPackages.Add(LKPPP.ComponentName.ToString, LKPPP)
+
+        Dim EUQPP As ExUNIQUACPropertyPackage = New ExUNIQUACPropertyPackage()
+        EUQPP.ComponentName = "Extended UNIQUAC (Aqueous Electrolytes)"
+        EUQPP.ComponentDescription = DWSIM.App.GetLocalString("DescEUPP")
+
+        PropertyPackages.Add(EUQPP.ComponentName.ToString, EUQPP)
+
+        Dim ENQPP As New ElectrolyteNRTLPropertyPackage()
+        ENQPP.ComponentName = "Electrolyte NRTL (Aqueous Electrolytes)"
+        ENQPP.ComponentDescription = DWSIM.App.GetLocalString("DescENPP")
+
+        PropertyPackages.Add(ENQPP.ComponentName.ToString, ENQPP)
+
+        Dim LIQPP As New LIQUAC2PropertyPackage()
+        LIQPP.ComponentName = "Modified LIQUAC (Aqueous Electrolytes)"
+        LIQPP.ComponentDescription = DWSIM.App.GetLocalString("DescLIPP")
+
+        PropertyPackages.Add(LIQPP.ComponentName.ToString, LIQPP)
 
         Dim BOPP As BlackOilPropertyPackage = New BlackOilPropertyPackage()
         BOPP.ComponentName = "Black Oil"
@@ -895,6 +1008,9 @@ Public Class FormMain
         'load Biodiesel XML database
         LoadBDDB()
 
+        'load FoodProp compounds
+        LoadFoodPropCompounds()
+
         'additional compounds
         LoadAdditionalCompounds()
 
@@ -978,6 +1094,19 @@ Public Class FormMain
         For Each cp As BaseClasses.ConstantProperties In comps
             If Not Me.AvailableComponents.ContainsKey(cp.Name) Then Me.AvailableComponents.Add(cp.Name, cp)
         Next
+    End Sub
+
+    Public Sub LoadFoodPropCompounds()
+
+        Dim udb As New UserDB
+        Using filestr As Stream = Assembly.GetAssembly(udb.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.FoodProp.xml")
+            Dim fcomps = Databases.UserDB.ReadComps(filestr)
+            For Each cp As BaseClasses.ConstantProperties In fcomps
+                cp.CurrentDB = "FoodProp"
+                If Not AvailableComponents.ContainsKey(cp.Name) Then AvailableComponents.Add(cp.Name, cp)
+            Next
+        End Using
+
     End Sub
 
     Public Sub LoadBDDB()
@@ -1504,6 +1633,7 @@ Public Class FormMain
         form.Show()
         form.Activate()
 
+        form.FrmStSim1.CurrentFlowsheet = form
         form.FrmStSim1.Init(True)
 
         form.FormSurface.Invalidate()
@@ -2053,6 +2183,7 @@ Public Class FormMain
             form.Show()
             form.Activate()
 
+            form.FrmStSim1.CurrentFlowsheet = form
             form.FrmStSim1.Init(True)
 
             form.FormSurface.Invalidate()
@@ -2587,6 +2718,7 @@ Public Class FormMain
 
         End If
 
+        form.FrmStSim1.CurrentFlowsheet = form
         form.FrmStSim1.Init(True)
 
         Try
@@ -3274,20 +3406,20 @@ Label_00CC:
                     'Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Salvandosimulao") + " (" + Me.filename + ")"
                     Application.DoEvents()
                     If Path.GetExtension(Me.filename).ToLower = ".dwxml" Then
-                        Task.Factory.StartNew(Sub() SaveXML(Me.filename, Me.ActiveMdiChild)).ContinueWith(Sub(t)
-                                                                                                              'Me.ToolStripStatusLabel1.Text = ""
-                                                                                                              If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
-                                                                                                          End Sub, TaskContinuationOptions.ExecuteSynchronously)
+                        TaskHelper.Run(Sub() SaveXML(Me.filename, Me.ActiveMdiChild)).ContinueWith(Sub(t)
+                                                                                                       'Me.ToolStripStatusLabel1.Text = ""
+                                                                                                       If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
+                                                                                                   End Sub, TaskContinuationOptions.ExecuteSynchronously)
                     ElseIf Path.GetExtension(Me.filename).ToLower = ".xml" Then
-                        Task.Factory.StartNew(Sub() SaveMobileXML(Me.filename, Me.ActiveMdiChild)).ContinueWith(Sub(t)
-                                                                                                                    'Me.ToolStripStatusLabel1.Text = ""
-                                                                                                                    If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
-                                                                                                                End Sub, TaskContinuationOptions.ExecuteSynchronously)
+                        TaskHelper.Run(Sub() SaveMobileXML(Me.filename, Me.ActiveMdiChild)).ContinueWith(Sub(t)
+                                                                                                             'Me.ToolStripStatusLabel1.Text = ""
+                                                                                                             If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
+                                                                                                         End Sub, TaskContinuationOptions.ExecuteSynchronously)
                     ElseIf Path.GetExtension(Me.filename).ToLower = ".dwxmz" Then
-                        Task.Factory.StartNew(Sub() SaveXMLZIP(Me.filename, Me.ActiveMdiChild)).ContinueWith(Sub(t)
-                                                                                                                 ' Me.ToolStripStatusLabel1.Text = ""
-                                                                                                                 If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
-                                                                                                             End Sub, TaskContinuationOptions.ExecuteSynchronously)
+                        TaskHelper.Run(Sub() SaveXMLZIP(Me.filename, Me.ActiveMdiChild)).ContinueWith(Sub(t)
+                                                                                                          ' Me.ToolStripStatusLabel1.Text = ""
+                                                                                                          If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
+                                                                                                      End Sub, TaskContinuationOptions.ExecuteSynchronously)
                     Else
                         Me.bgSaveFile.RunWorkerAsync()
                     End If
@@ -3314,7 +3446,7 @@ Label_00CC:
         f.ShowDialog(Me)
     End Sub
 
-    Private Sub VerToolStripMenuItem_DropDownOpened(sender As Object, e As EventArgs) Handles VerToolStripMenuItem.DropDownOpened
+    Private Sub VerToolStripMenuItem_DropDownOpened(sender As Object, e As EventArgs) Handles EditTSMI.DropDownOpened
 
         If Me.ActiveMdiChild IsNot Nothing Then
             If TypeOf Me.ActiveMdiChild Is FormFlowsheet Then
@@ -3378,6 +3510,8 @@ Label_00CC:
 
         Dim newform As New FormFlowsheet()
 
+        RaiseEvent ToolOpened("New Flowsheet", New EventArgs())
+
         With newform
             .Text = "Simulation" & m_childcount
             .MdiParent = Me
@@ -3429,12 +3563,16 @@ Label_00CC:
     End Sub
 
     Private Sub ExitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExitToolStripMenuItem.Click
+
         Me.Close()
+
     End Sub
 
     Private Sub AboutToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AboutToolStripMenuItem.Click
+
         Dim frmAbout As New AboutBox
         frmAbout.ShowDialog(Me)
+
     End Sub
 
     Private Sub OpenRecent_click(ByVal sender As System.Object, ByVal e As System.EventArgs)
@@ -3539,17 +3677,17 @@ Label_00CC:
                                 '    Me.ToolStripStatusLabel1.Text = ""
                                 'End Try
                             ElseIf Path.GetExtension(form2.Options.FilePath).ToLower = ".dwxml" Then
-                                Task.Factory.StartNew(Sub() SaveXML(form2.Options.FilePath, form2)).ContinueWith(Sub(t)
-                                                                                                                     form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
-                                                                                                                 End Sub, TaskContinuationOptions.OnlyOnFaulted)
+                                TaskHelper.Run(Sub() SaveXML(form2.Options.FilePath, form2)).ContinueWith(Sub(t)
+                                                                                                              form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
+                                                                                                          End Sub, TaskContinuationOptions.OnlyOnFaulted)
                             ElseIf Path.GetExtension(form2.Options.FilePath).ToLower = ".xml" Then
-                                Task.Factory.StartNew(Sub() SaveMobileXML(form2.Options.FilePath, form2)).ContinueWith(Sub(t)
-                                                                                                                           form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
-                                                                                                                       End Sub, TaskContinuationOptions.OnlyOnFaulted)
+                                TaskHelper.Run(Sub() SaveMobileXML(form2.Options.FilePath, form2)).ContinueWith(Sub(t)
+                                                                                                                    form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
+                                                                                                                End Sub, TaskContinuationOptions.OnlyOnFaulted)
                             ElseIf Path.GetExtension(form2.Options.FilePath).ToLower = ".dwxmz" Then
-                                Task.Factory.StartNew(Sub() SaveXMLZIP(form2.Options.FilePath, form2)).ContinueWith(Sub(t)
-                                                                                                                        form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
-                                                                                                                    End Sub, TaskContinuationOptions.OnlyOnFaulted)
+                                TaskHelper.Run(Sub() SaveXMLZIP(form2.Options.FilePath, form2)).ContinueWith(Sub(t)
+                                                                                                                 form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
+                                                                                                             End Sub, TaskContinuationOptions.OnlyOnFaulted)
                             End If
                         Else
                             Dim myStream As System.IO.FileStream
@@ -3568,17 +3706,17 @@ Label_00CC:
                                         '    Me.ToolStripStatusLabel1.Text = ""
                                         'End Try
                                     ElseIf Path.GetExtension(myStream.Name).ToLower = ".dwxml" Then
-                                        Task.Factory.StartNew(Sub() SaveXML(myStream.Name, form2)).ContinueWith(Sub(t)
-                                                                                                                    form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
-                                                                                                                End Sub, TaskContinuationOptions.OnlyOnFaulted)
+                                        TaskHelper.Run(Sub() SaveXML(myStream.Name, form2)).ContinueWith(Sub(t)
+                                                                                                             form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
+                                                                                                         End Sub, TaskContinuationOptions.OnlyOnFaulted)
                                     ElseIf Path.GetExtension(myStream.Name).ToLower = ".xml" Then
-                                        Task.Factory.StartNew(Sub() SaveMobileXML(myStream.Name, form2)).ContinueWith(Sub(t)
-                                                                                                                          form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
-                                                                                                                      End Sub, TaskContinuationOptions.OnlyOnFaulted)
+                                        TaskHelper.Run(Sub() SaveMobileXML(myStream.Name, form2)).ContinueWith(Sub(t)
+                                                                                                                   form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
+                                                                                                               End Sub, TaskContinuationOptions.OnlyOnFaulted)
                                     ElseIf Path.GetExtension(myStream.Name).ToLower = ".dwxmz" Then
-                                        Task.Factory.StartNew(Sub() SaveXMLZIP(myStream.Name, form2)).ContinueWith(Sub(t)
-                                                                                                                       form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
-                                                                                                                   End Sub, TaskContinuationOptions.OnlyOnFaulted)
+                                        TaskHelper.Run(Sub() SaveXMLZIP(myStream.Name, form2)).ContinueWith(Sub(t)
+                                                                                                                form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
+                                                                                                            End Sub, TaskContinuationOptions.OnlyOnFaulted)
                                     End If
                                 End If
                             End If
@@ -3641,10 +3779,10 @@ Label_00CC:
                         SaveXML(form2.Options.FilePath, form2)
                     ElseIf Path.GetExtension(Me.filename).ToLower = ".xml" Then
                         If saveasync Then
-                            Task.Factory.StartNew(Sub() SaveMobileXML(form2.Options.FilePath, form2)).ContinueWith(Sub(t)
-                                                                                                                       'Me.ToolStripStatusLabel1.Text = ""
-                                                                                                                       If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
-                                                                                                                   End Sub, TaskContinuationOptions.ExecuteSynchronously)
+                            TaskHelper.Run(Sub() SaveMobileXML(form2.Options.FilePath, form2)).ContinueWith(Sub(t)
+                                                                                                                'Me.ToolStripStatusLabel1.Text = ""
+                                                                                                                If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
+                                                                                                            End Sub, TaskContinuationOptions.ExecuteSynchronously)
                         Else
                             SaveMobileXML(form2.Options.FilePath, form2)
                         End If
@@ -3672,6 +3810,7 @@ Label_00CC:
             ElseIf TypeOf Me.ActiveMdiChild Is FormCompoundCreator Then
                 Dim filename As String = CType(Me.ActiveMdiChild, FormCompoundCreator).mycase.Filename
                 If filename = "" Then
+                    Me.SaveStudyDlg.FileName = CType(Me.ActiveMdiChild, FormCompoundCreator).TextBoxName.Text
                     If Me.SaveStudyDlg.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
                         SaveBackup(Me.SaveStudyDlg.FileName)
                         CType(Me.ActiveMdiChild, FormCompoundCreator).mycase.Filename = Me.SaveStudyDlg.FileName
@@ -3749,6 +3888,9 @@ Label_00CC:
     End Sub
 
     Private Sub GuiaDoUsuarioToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GuiaDoUsuarioToolStripMenuItem.Click
+
+        RaiseEvent ToolOpened("View User Guide", New EventArgs())
+
         If DWSIM.App.IsRunningOnMono Then
             Dim p As New Process()
             With p
@@ -3812,6 +3954,9 @@ Label_00CC:
 
     Private Sub ContentsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ContentsToolStripMenuItem.Click
         'call general help
+
+        RaiseEvent ToolOpened("Help", New EventArgs())
+
         DWSIM.App.HelpRequested("Frame.htm")
     End Sub
 
@@ -3842,6 +3987,9 @@ Label_00CC:
 
     Private Sub NovoEstudoDoCriadorDeComponentesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles NovoEstudoDoCriadorDeComponentesToolStripMenuItem.Click
         Dim NewMDIChild As New FormCompoundCreator()
+
+        RaiseEvent ToolOpened("New Compound Creator", New EventArgs())
+
         'Set the Parent Form of the Child window.
         NewMDIChild.MdiParent = Me
         'Display the new form.
@@ -3853,6 +4001,9 @@ Label_00CC:
 
     Private Sub NovoEstudoDeRegressaoDeDadosToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles NovoEstudoDeRegressaoDeDadosToolStripMenuItem.Click
         Dim NewMDIChild As New FormDataRegression()
+
+        RaiseEvent ToolOpened("New Regression Study", New EventArgs())
+
         'Set the Parent Form of the Child window.
         NewMDIChild.MdiParent = Me
         'Display the new form.
@@ -3864,6 +4015,9 @@ Label_00CC:
 
     Private Sub NovoRegressaoUNIFACIPs_Click(sender As Object, e As EventArgs) Handles NovoRegressaoUNIFACIPs.Click
         Dim NewMDIChild As New FormUNIFACRegression()
+
+        RaiseEvent ToolOpened("New UNIFAC IP Regression", New EventArgs())
+
         'Set the Parent Form of the Child window.
         NewMDIChild.MdiParent = Me
         'Display the new form.
@@ -3881,6 +4035,8 @@ Label_00CC:
         End If
     End Sub
     Private Sub PreferenciasDoDWSIMToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PreferenciasDoDWSIMToolStripMenuItem.Click
+
+        RaiseEvent ToolOpened("View General Settings", New EventArgs())
 
         If Settings.DpiScale > 1.0 Then
             Me.SettingsPanel.Width = 400 * Settings.DpiScale

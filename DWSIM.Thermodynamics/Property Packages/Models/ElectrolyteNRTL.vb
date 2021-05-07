@@ -15,10 +15,15 @@
 '
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
+'
+'    Reference: Chau‐Chyun Chen  L. B. Evans. A local composition model for the excess
+'               Gibbs energy of aqueous electrolyte systems,
+'               https://aiche.onlinelibrary.wiley.com/doi/abs/10.1002/aic.690320311
 
 Imports FileHelpers
 Imports System.Math
 Imports DWSIM.ExtensionMethods
+Imports DWSIM.SharedClasses
 
 Namespace PropertyPackages.Auxiliary
 
@@ -1014,16 +1019,6 @@ Namespace PropertyPackages.Auxiliary
 
             Dim s0(n), s0t(n) As Double
 
-            'Parallel.For(0, n + 1, Sub(m1P)
-            '                           Dim kP As Integer
-            '                           s0(m1P) = 0
-            '                           s0t(m1P) = 0
-            '                           For kp = 0 To n
-            '                               s0(m1P) += X(kP) * G_k_m(edata, kP, m1P)
-            '                               s0t(m1P) += X(kP) * G_k_m(edata, kP, m1P) * TAU_k_m(edata, kP, m1P)
-            '                           Next
-            '                       End Sub)
-
             For m1 = 0 To n
                 s0(m1) = 0
                 s0t(m1) = 0
@@ -1054,19 +1049,6 @@ Namespace PropertyPackages.Auxiliary
                                        Next
                                    End Sub)
 
-            'For c = 0 To n
-            '    For a1 = 0 To n
-            '        s1(c)(a1) = 0
-            '        s1t(c)(a1) = 0
-            '        For k = 0 To n
-            '            If k <> c Then
-            '                s1(c)(a1) += X(k) * G_ki_ji(edata, k, c, a1)
-            '                s1t(c)(a1) += X(k) * G_ki_ji(edata, k, c, a1) * TAU_ki_ji(edata, k, c, a1)
-            '            End If
-            '        Next
-            '    Next
-            'Next
-
             Dim s2(n)(), s2t(n)() As Double
 
             For i = 0 To n
@@ -1088,204 +1070,113 @@ Namespace PropertyPackages.Auxiliary
                                        Next
                                    End Sub)
 
-            'For a = 0 To n
-            '    For c1 = 0 To n
-            '        s2(a)(c1) = 0
-            '        s2t(a)(c1) = 0
-            '        For k = 0 To n
-            '            If k <> a Then
-            '                s2(a)(c1) += X(k) * G_ki_ji(edata, k, a, c1)
-            '                s2t(a)(c1) += X(k) * G_ki_ji(edata, k, a, c1) * TAU_ki_ji(edata, k, a, c1)
-            '            End If
-            '        Next
-            '    Next
-            'Next
-
             Dim sm1(n), sm2(n), sm3(n), sma1(n), sma2(n), sma3(n), smc1(n), smc2(n), smc3(n) As Double
 
             Parallel.For(0, n + 1, Sub(mP)
                                        Dim tasks As New List(Of Task)
-                                       tasks.Add(New Task(Sub()
-                                                              Dim m1P As Integer
-                                                              sm1(mP) = 0.0
-                                                              For m1P = 0 To n
-                                                                  If cprops(m1P).Charge = 0 Then
-                                                                      sm1(mP) += X(m1P) * G_k_m(edata, mP, m1P) / s0(m1P) * (TAU_k_m(edata, mP, m1P) - s0t(m1P) / s0(m1P))
-                                                                  End If
-                                                              Next
-                                                          End Sub))
-                                       tasks.Add(New Task(Sub()
-                                                              Dim c1P, kP As Integer
-                                                              sma1(mP) = 0.0
-                                                              For c1P = 0 To n
-                                                                  For kP = 0 To n
-                                                                      If kP <> mP And cprops(mP).Charge < 0 And cprops(c1P).Charge > 0 Then
-                                                                          sma1(mP) += x0(c1P) * X(kP) * G_ki_ji(edata, kP, c1P, mP) * TAU_ki_ji(edata, kP, c1P, mP) / s2(mP)(c1P)
-                                                                      End If
-                                                                  Next
-                                                              Next
-                                                          End Sub))
-                                       tasks.Add(New Task(Sub()
-                                                              Dim a1P, kP As Integer
-                                                              smc1(mP) = 0.0
-                                                              For a1P = 0 To n
-                                                                  For kP = 0 To n
-                                                                      If kP <> mP And cprops(mP).Charge > 0 And cprops(a1P).Charge < 0 Then
-                                                                          smc1(mP) += x0(a1P) * X(kP) * G_ki_ji(edata, kP, a1P, mP) * TAU_ki_ji(edata, kP, a1P, mP) / s2(mP)(a1P)
-                                                                      End If
-                                                                  Next
-                                                              Next
-                                                          End Sub))
-                                       tasks.Add(New Task(Sub()
-                                                              Dim cP2, a1P As Integer
-                                                              sm2(mP) = 0.0
-                                                              For cP2 = 0 To n
-                                                                  If cprops(cP2).Charge > 0 Then
-                                                                      For a1P = 0 To n
-                                                                          If cprops(a1P).Charge < 0 Then
-                                                                              sm2(mP) += x0(a1P) * X(cP2) * G_ki_ji(edata, mP, cP2, a1P) / s1(cP2)(a1P) * (TAU_ki_ji(edata, mP, cP2, a1P) - s1t(cP2)(a1P) / s1(cP2)(a1P))
-                                                                          End If
-                                                                      Next
-                                                                  End If
-                                                              Next
-                                                          End Sub))
-                                       tasks.Add(New Task(Sub()
-                                                              Dim m1P As Integer
-                                                              sma2(mP) = 0.0
-                                                              For m1P = 0 To n
-                                                                  If cprops(mP).Charge < 0 And cprops(m1P).Charge = 0 Then
-                                                                      sma2(mP) += X(m1P) * G_k_m(edata, mP, m1P) / s0(m1P) * (TAU_k_m(edata, mP, m1P) - s0t(m1P) / s0(m1P))
-                                                                  End If
-                                                              Next
-                                                          End Sub))
-                                       tasks.Add(New Task(Sub()
-                                                              Dim m1P As Integer
-                                                              smc2(mP) = 0.0
-                                                              For m1P = 0 To n
-                                                                  If cprops(mP).Charge > 0 And cprops(m1P).Charge = 0 Then
-                                                                      smc2(mP) += X(m1P) * G_k_m(edata, mP, m1P) / s0(m1P) * (TAU_k_m(edata, mP, m1P) - s0t(m1P) / s0(m1P))
-                                                                  End If
-                                                              Next
-                                                          End Sub))
-                                       tasks.Add(New Task(Sub()
-                                                              Dim aP, c1P As Integer
-                                                              sm3(mP) = 0.0
-                                                              For aP = 0 To n
-                                                                  If cprops(aP).Charge < 0 Then
-                                                                      For c1P = 0 To n
-                                                                          If cprops(c1P).Charge > 0 Then
-                                                                              sm3(mP) += x0(c1P) * X(aP) * G_ki_ji(edata, mP, c1P, aP) / s2(aP)(c1P) * (TAU_ki_ji(edata, mP, c1P, aP) - s2t(aP)(c1P) / s2(aP)(c1P))
-                                                                          End If
-                                                                      Next
-                                                                  End If
-                                                              Next
-                                                          End Sub))
-                                       tasks.Add(New Task(Sub()
-                                                              Dim a1P, c As Integer
-                                                              sma3(mP) = 0.0
-                                                              For c = 0 To n
-                                                                  If cprops(c).Charge > 0 Then
-                                                                      For a1P = 0 To n
-                                                                          If cprops(a1P).Charge < 0 Then
-                                                                              sma3(mP) += x0(a1P) * X(c) * G_ki_ji(edata, mP, c, a1P) / s2(c)(a1P) * (TAU_ki_ji(edata, mP, c, a1P) - s2t(c)(a1P) / s2(c)(a1P))
-                                                                          End If
-                                                                      Next
-                                                                  End If
-                                                              Next
-                                                          End Sub))
-                                       tasks.Add(New Task(Sub()
-                                                              Dim aP, c1P As Integer
-                                                              smc3(mP) = 0.0
-                                                              For aP = 0 To n
-                                                                  If cprops(aP).Charge < 0 Then
-                                                                      For c1P = 0 To n
-                                                                          If cprops(c1P).Charge > 0 Then
-                                                                              smc3(mP) += x0(c1P) * X(aP) * G_ki_ji(edata, mP, c1P, aP) / s2(aP)(c1P) * (TAU_ki_ji(edata, mP, c1P, aP) - s2t(aP)(c1P) / s2(aP)(c1P))
-                                                                          End If
-                                                                      Next
-                                                                  End If
-                                                              Next
-                                                          End Sub))
-                                       Parallel.ForEach(tasks, Sub(tk) tk.Start())
+                                       tasks.Add(TaskHelper.Run(Sub()
+                                                                    Dim m1P As Integer
+                                                                    sm1(mP) = 0.0
+                                                                    For m1P = 0 To n
+                                                                        If cprops(m1P).Charge = 0 Then
+                                                                            sm1(mP) += X(m1P) * G_k_m(edata, mP, m1P) / s0(m1P) * (TAU_k_m(edata, mP, m1P) - s0t(m1P) / s0(m1P))
+                                                                        End If
+                                                                    Next
+                                                                End Sub))
+                                       tasks.Add(TaskHelper.Run(Sub()
+                                                                    Dim c1P, kP As Integer
+                                                                    sma1(mP) = 0.0
+                                                                    For c1P = 0 To n
+                                                                        For kP = 0 To n
+                                                                            If kP <> mP And cprops(mP).Charge < 0 And cprops(c1P).Charge > 0 Then
+                                                                                sma1(mP) += x0(c1P) * X(kP) * G_ki_ji(edata, kP, c1P, mP) * TAU_ki_ji(edata, kP, c1P, mP) / s2(mP)(c1P)
+                                                                            End If
+                                                                        Next
+                                                                    Next
+                                                                End Sub))
+                                       tasks.Add(TaskHelper.Run(Sub()
+                                                                    Dim a1P, kP As Integer
+                                                                    smc1(mP) = 0.0
+                                                                    For a1P = 0 To n
+                                                                        For kP = 0 To n
+                                                                            If kP <> mP And cprops(mP).Charge > 0 And cprops(a1P).Charge < 0 Then
+                                                                                smc1(mP) += x0(a1P) * X(kP) * G_ki_ji(edata, kP, a1P, mP) * TAU_ki_ji(edata, kP, a1P, mP) / s2(mP)(a1P)
+                                                                            End If
+                                                                        Next
+                                                                    Next
+                                                                End Sub))
+                                       tasks.Add(TaskHelper.Run(Sub()
+                                                                    Dim cP2, a1P As Integer
+                                                                    sm2(mP) = 0.0
+                                                                    For cP2 = 0 To n
+                                                                        If cprops(cP2).Charge > 0 Then
+                                                                            For a1P = 0 To n
+                                                                                If cprops(a1P).Charge < 0 Then
+                                                                                    sm2(mP) += x0(a1P) * X(cP2) * G_ki_ji(edata, mP, cP2, a1P) / s1(cP2)(a1P) * (TAU_ki_ji(edata, mP, cP2, a1P) - s1t(cP2)(a1P) / s1(cP2)(a1P))
+                                                                                End If
+                                                                            Next
+                                                                        End If
+                                                                    Next
+                                                                End Sub))
+                                       tasks.Add(TaskHelper.Run(Sub()
+                                                                    Dim m1P As Integer
+                                                                    sma2(mP) = 0.0
+                                                                    For m1P = 0 To n
+                                                                        If cprops(mP).Charge < 0 And cprops(m1P).Charge = 0 Then
+                                                                            sma2(mP) += X(m1P) * G_k_m(edata, mP, m1P) / s0(m1P) * (TAU_k_m(edata, mP, m1P) - s0t(m1P) / s0(m1P))
+                                                                        End If
+                                                                    Next
+                                                                End Sub))
+                                       tasks.Add(TaskHelper.Run(Sub()
+                                                                    Dim m1P As Integer
+                                                                    smc2(mP) = 0.0
+                                                                    For m1P = 0 To n
+                                                                        If cprops(mP).Charge > 0 And cprops(m1P).Charge = 0 Then
+                                                                            smc2(mP) += X(m1P) * G_k_m(edata, mP, m1P) / s0(m1P) * (TAU_k_m(edata, mP, m1P) - s0t(m1P) / s0(m1P))
+                                                                        End If
+                                                                    Next
+                                                                End Sub))
+                                       tasks.Add(TaskHelper.Run(Sub()
+                                                                    Dim aP, c1P As Integer
+                                                                    sm3(mP) = 0.0
+                                                                    For aP = 0 To n
+                                                                        If cprops(aP).Charge < 0 Then
+                                                                            For c1P = 0 To n
+                                                                                If cprops(c1P).Charge > 0 Then
+                                                                                    sm3(mP) += x0(c1P) * X(aP) * G_ki_ji(edata, mP, c1P, aP) / s2(aP)(c1P) * (TAU_ki_ji(edata, mP, c1P, aP) - s2t(aP)(c1P) / s2(aP)(c1P))
+                                                                                End If
+                                                                            Next
+                                                                        End If
+                                                                    Next
+                                                                End Sub))
+                                       tasks.Add(TaskHelper.Run(Sub()
+                                                                    Dim a1P, c As Integer
+                                                                    sma3(mP) = 0.0
+                                                                    For c = 0 To n
+                                                                        If cprops(c).Charge > 0 Then
+                                                                            For a1P = 0 To n
+                                                                                If cprops(a1P).Charge < 0 Then
+                                                                                    sma3(mP) += x0(a1P) * X(c) * G_ki_ji(edata, mP, c, a1P) / s2(c)(a1P) * (TAU_ki_ji(edata, mP, c, a1P) - s2t(c)(a1P) / s2(c)(a1P))
+                                                                                End If
+                                                                            Next
+                                                                        End If
+                                                                    Next
+                                                                End Sub))
+                                       tasks.Add(TaskHelper.Run(Sub()
+                                                                    Dim aP, c1P As Integer
+                                                                    smc3(mP) = 0.0
+                                                                    For aP = 0 To n
+                                                                        If cprops(aP).Charge < 0 Then
+                                                                            For c1P = 0 To n
+                                                                                If cprops(c1P).Charge > 0 Then
+                                                                                    smc3(mP) += x0(c1P) * X(aP) * G_ki_ji(edata, mP, c1P, aP) / s2(aP)(c1P) * (TAU_ki_ji(edata, mP, c1P, aP) - s2t(aP)(c1P) / s2(aP)(c1P))
+                                                                                End If
+                                                                            Next
+                                                                        End If
+                                                                    Next
+                                                                End Sub))
                                        Task.WaitAll(tasks.ToArray)
                                    End Sub)
-
-            'For m = 0 To n
-            '    sm1(m) = 0.0
-            '    For m1 = 0 To n
-            '        If cprops(m1).Charge = 0 Then
-            '            sm1(m) += X(m1) * G_k_m(edata, m, m1) / s0(m1) * (TAU_k_m(edata, m, m1) - s0t(m1) / s0(m1))
-            '        End If
-            '    Next
-            '    sma1(m) = 0.0
-            '    For c1 = 0 To n
-            '        For k = 0 To n
-            '            If k <> m And cprops(m).Charge < 0 And cprops(c1).Charge > 0 Then
-            '                sma1(m) += x0(c1) * X(k) * G_ki_ji(edata, k, c1, m) * TAU_ki_ji(edata, k, c1, m) / s2(m)(c1)
-            '            End If
-            '        Next
-            '    Next
-            '    smc1(m) = 0.0
-            '    For a1 = 0 To n
-            '        For k = 0 To n
-            '            If k <> m And cprops(m).Charge > 0 And cprops(a1).Charge < 0 Then
-            '                smc1(m) += x0(a1) * X(k) * G_ki_ji(edata, k, a1, m) * TAU_ki_ji(edata, k, a1, m) / s2(m)(a1)
-            '            End If
-            '        Next
-            '    Next
-            '    sm2(m) = 0.0
-            '    For c = 0 To n
-            '        If cprops(c).Charge > 0 Then
-            '            For a1 = 0 To n
-            '                If cprops(a1).Charge < 0 Then
-            '                    sm2(m) += x0(a1) * X(c) * G_ki_ji(edata, m, c, a1) / s1(c)(a1) * (TAU_ki_ji(edata, m, c, a1) - s1t(c)(a1) / s1(c)(a1))
-            '                End If
-            '            Next
-            '        End If
-            '    Next
-            '    sma2(m) = 0.0
-            '    For m1 = 0 To n
-            '        If cprops(m).Charge < 0 And cprops(m1).Charge = 0 Then
-            '            sma2(m) += X(m1) * G_k_m(edata, m, m1) / s0(m1) * (TAU_k_m(edata, m, m1) - s0t(m1) / s0(m1))
-            '        End If
-            '    Next
-            '    smc2(m) = 0.0
-            '    For m1 = 0 To n
-            '        If cprops(m).Charge > 0 And cprops(m1).Charge = 0 Then
-            '            smc2(m) += X(m1) * G_k_m(edata, m, m1) / s0(m1) * (TAU_k_m(edata, m, m1) - s0t(m1) / s0(m1))
-            '        End If
-            '    Next
-            '    sm3(m) = 0.0
-            '    For a = 0 To n
-            '        If cprops(a).Charge < 0 Then
-            '            For c1 = 0 To n
-            '                If cprops(c1).Charge > 0 Then
-            '                    sm3(m) += x0(c1) * X(a) * G_ki_ji(edata, m, c1, a) / s2(a)(c1) * (TAU_ki_ji(edata, m, c1, a) - s2t(a)(c1) / s2(a)(c1))
-            '                End If
-            '            Next
-            '        End If
-            '    Next
-            '    sma3(m) = 0.0
-            '    For c = 0 To n
-            '        If cprops(c).Charge > 0 Then
-            '            For a1 = 0 To n
-            '                If cprops(a1).Charge < 0 Then
-            '                    sma3(m) += x0(a1) * X(c) * G_ki_ji(edata, m, c, a1) / s2(c)(a1) * (TAU_ki_ji(edata, m, c, a1) - s2t(c)(a1) / s2(c)(a1))
-            '                End If
-            '            Next
-            '        End If
-            '    Next
-            '    smc3(m) = 0.0
-            '    For a = 0 To n
-            '        If cprops(a).Charge < 0 Then
-            '            For c1 = 0 To n
-            '                If cprops(c1).Charge > 0 Then
-            '                    smc3(m) += x0(c1) * X(a) * G_ki_ji(edata, m, c1, a) / s2(a)(c1) * (TAU_ki_ji(edata, m, c1, a) - s2t(a)(c1) / s2(a)(c1))
-            '                End If
-            '            Next
-            '        End If
-            '    Next
-            'Next
 
             'short range contribution
 

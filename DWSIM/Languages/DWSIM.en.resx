@@ -955,7 +955,7 @@
     <value>Edit Connections</value>
   </data>
   <data name="DCELIts" xml:space="preserve">
-    <value>External loop iterations</value>
+    <value>Iterations Taken</value>
   </data>
   <data name="DCELTol" xml:space="preserve">
     <value>External Loop</value>
@@ -973,10 +973,10 @@
     <value>Interstage Flows</value>
   </data>
   <data name="DCGeneralError" xml:space="preserve">
-    <value>A convergence error was found while trying to solve the column. Please check input variables and try again.</value>
+    <value>A convergence error was found while trying to solve the column. Possible reasons are: unfeasible specs, initial estimates far from solution and/or very non-ideal (wide-boiling or azeotropic) mixtures being fed to the column.</value>
   </data>
   <data name="DCILIts" xml:space="preserve">
-    <value>Internal loop iterations</value>
+    <value>Iterations Taken</value>
   </data>
   <data name="DCILTol" xml:space="preserve">
     <value>Internal Loop (IO method only)</value>
@@ -4063,7 +4063,7 @@
     <value>Error calculating the exchanger: input parameters generated a physically inconsistent solution.</value>
   </data>
   <data name="TKResTime" xml:space="preserve">
-    <value>Residence time</value>
+    <value>Liquid residence time</value>
   </data>
   <data name="TKVol" xml:space="preserve">
     <value>Volume</value>
@@ -5728,5 +5728,44 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   </data>
   <data name="FoundSolidsWarning" xml:space="preserve">
     <value>Solids precipitation may occur at the current conditions. If you want to consider the presence of solids in the equilibrium calculation, go to the Property Package Flash settings and check the corresponding option.</value>
+  </data>
+  <data name="DescPITPP" xml:space="preserve">
+    <value>The Pitzer model extended the Debye-Huckel theory using a virial expansion to account for the ionic strength dependence of the short range forces in binary and ternary ion interactions. The model is applicable to solutions of high ionic strength. The Pitzer model finds extensive application for the correlation and prediction of thermodynamic properties of electrolyte solutions.</value>
+  </data>
+  <data name="DescLIPP" xml:space="preserve">
+    <value>A modified version of the LIQUAC model by Kiepe, Noll and Gmehling.</value>
+  </data>
+  <data name="TKResTimeV" xml:space="preserve">
+    <value>Vapor residence time</value>
+  </data>
+  <data name="NoCompoundsAdded" xml:space="preserve">
+    <value>You didn't add any Compound to the simulation.</value>
+  </data>
+  <data name="NoPropPackAdded" xml:space="preserve">
+    <value>You didn't add any Property Package to the simulation.</value>
+  </data>
+  <data name="CondenserCalcValue" xml:space="preserve">
+    <value>Condenser Specification Calculated Value</value>
+  </data>
+  <data name="CondenserSpecValue" xml:space="preserve">
+    <value>Condenser Specification Value</value>
+  </data>
+  <data name="ReboilerCalcValue" xml:space="preserve">
+    <value>Reboiler Specification Calculated Value</value>
+  </data>
+  <data name="ReboilerSpecValue" xml:space="preserve">
+    <value>Reboiler Specification Value</value>
+  </data>
+  <data name="DistComp" xml:space="preserve">
+    <value>Distance / Length</value>
+  </data>
+  <data name="AccumulationStream" xml:space="preserve">
+    <value>Accumulation Stream</value>
+  </data>
+  <data name="FillWithStream" xml:space="preserve">
+    <value>Fill with Material Stream</value>
+  </data>
+  <data name="ViewAccumulationStream" xml:space="preserve">
+    <value>View/Edit Accumulation Stream</value>
   </data>
 </root>

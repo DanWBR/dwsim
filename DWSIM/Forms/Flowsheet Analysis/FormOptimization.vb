@@ -173,10 +173,10 @@ Public Class FormOptimization
 
         optcase.name = "optcase" & form.Collections.OPT_OptimizationCollection.Count
 
+        form.Collections.OPT_OptimizationCollection.Add(optcase)
+
         Me.lbCases.Items.Add(optcase.name)
         Me.lbCases.SelectedItem = optcase.name
-
-        form.Collections.OPT_OptimizationCollection.Add(optcase)
 
     End Sub
 

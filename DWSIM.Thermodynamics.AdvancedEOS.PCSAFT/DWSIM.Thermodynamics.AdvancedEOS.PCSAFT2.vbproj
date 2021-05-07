@@ -143,6 +143,10 @@
       <Project>{fdfb92de-d189-49dc-91cc-60ee78d1356c}</Project>
       <Name>DWSIM.MathOps</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.SharedClasses\DWSIM.SharedClasses.vbproj">
+      <Project>{30e167d2-5b5a-453a-a92c-18ff3bbb6691}</Project>
+      <Name>DWSIM.SharedClasses</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Thermodynamics\DWSIM.Thermodynamics.vbproj">
       <Project>{369bc7af-836b-4de1-93e3-b051bc148b23}</Project>
       <Name>DWSIM.Thermodynamics</Name>

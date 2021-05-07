@@ -47,7 +47,7 @@
 
     Property RealTime As Boolean
 
-    Property MonitoredVariableValues As Dictionary(Of Integer, List(Of IDynamicsMonitoredVariable))
+    Property MonitoredVariableValues As Dictionary(Of Long, List(Of IDynamicsMonitoredVariable))
 
     Property MonitoredVariables As List(Of IDynamicsMonitoredVariable)
 

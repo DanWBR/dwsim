@@ -55,8 +55,6 @@ Partial Class FormOptions
         Me.tbGPUCaps = New System.Windows.Forms.TextBox()
         Me.cbGPU = New System.Windows.Forms.ComboBox()
         Me.chkEnableGPUProcessing = New System.Windows.Forms.CheckBox()
-        Me.cbParallelism = New System.Windows.Forms.ComboBox()
-        Me.Label6 = New System.Windows.Forms.Label()
         Me.chkEnableParallelCalcs = New System.Windows.Forms.CheckBox()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.GroupBox13 = New System.Windows.Forms.GroupBox()
@@ -241,7 +239,7 @@ Partial Class FormOptions
         resources.ApplyResources(Me.cbSolverMode, "cbSolverMode")
         Me.cbSolverMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbSolverMode.FormattingEnabled = True
-        Me.cbSolverMode.Items.AddRange(New Object() {resources.GetString("cbSolverMode.Items"), resources.GetString("cbSolverMode.Items1"), resources.GetString("cbSolverMode.Items2"), resources.GetString("cbSolverMode.Items3"), resources.GetString("cbSolverMode.Items4")})
+        Me.cbSolverMode.Items.AddRange(New Object() {resources.GetString("cbSolverMode.Items"), resources.GetString("cbSolverMode.Items1"), resources.GetString("cbSolverMode.Items2"), resources.GetString("cbSolverMode.Items3")})
         Me.cbSolverMode.Name = "cbSolverMode"
         '
         'Label2
@@ -305,8 +303,6 @@ Partial Class FormOptions
         Me.GroupBox7.Controls.Add(Me.GroupBox8)
         Me.GroupBox7.Controls.Add(Me.cbGPU)
         Me.GroupBox7.Controls.Add(Me.chkEnableGPUProcessing)
-        Me.GroupBox7.Controls.Add(Me.cbParallelism)
-        Me.GroupBox7.Controls.Add(Me.Label6)
         Me.GroupBox7.Controls.Add(Me.chkEnableParallelCalcs)
         Me.GroupBox7.Name = "GroupBox7"
         Me.GroupBox7.TabStop = False
@@ -345,18 +341,6 @@ Partial Class FormOptions
         '
         resources.ApplyResources(Me.chkEnableGPUProcessing, "chkEnableGPUProcessing")
         Me.chkEnableGPUProcessing.Name = "chkEnableGPUProcessing"
-        '
-        'cbParallelism
-        '
-        Me.cbParallelism.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbParallelism.FormattingEnabled = True
-        resources.ApplyResources(Me.cbParallelism, "cbParallelism")
-        Me.cbParallelism.Name = "cbParallelism"
-        '
-        'Label6
-        '
-        resources.ApplyResources(Me.Label6, "Label6")
-        Me.Label6.Name = "Label6"
         '
         'chkEnableParallelCalcs
         '
@@ -984,8 +968,6 @@ Partial Class FormOptions
     Public WithEvents Button2 As System.Windows.Forms.Button
     Public WithEvents GroupBox7 As System.Windows.Forms.GroupBox
     Public WithEvents chkEnableParallelCalcs As System.Windows.Forms.CheckBox
-    Friend WithEvents cbParallelism As System.Windows.Forms.ComboBox
-    Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents cbGPU As System.Windows.Forms.ComboBox
     Public WithEvents chkEnableGPUProcessing As System.Windows.Forms.CheckBox
     Friend WithEvents GroupBox8 As System.Windows.Forms.GroupBox

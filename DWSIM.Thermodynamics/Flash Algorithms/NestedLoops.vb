@@ -21,6 +21,7 @@ Imports DotNumerics.Optimization
 Imports DWSIM.MathOps.MathEx
 Imports DWSIM.MathOps.MathEx.BrentOpt
 Imports DWSIM.MathOps.MathEx.Interpolation
+Imports DWSIM.SharedClasses
 Imports Eto.Forms
 Imports IronPython.Runtime.Operations
 Imports MathNet.Numerics
@@ -131,6 +132,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             n = Vz.Length - 1
 
             Dim Vn(n) As String, Vx(n), Vy(n), Vx_ant(n), Vy_ant(n), Vp(n), Ki(n), Ki_ant(n), fi(n) As Double
+            Dim Vx0(n), Vy0(n), Ki0(n) As Double
             Dim VPc(n), VTc(n), Vw(n) As Double
 
             VPc = PP.RET_VPC()
@@ -269,15 +271,18 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Vy = Vz.MultiplyY(Ki).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1)).NormalizeY
             Vx = Vy.DivideY(Ki).NormalizeY
 
-            Dim r1, r2 As Object()
+            Ki0 = Ki.Clone()
+            Vx0 = Vx.Clone()
+            Vy0 = Vy.Clone()
+
+            Dim r1 As Object()
 
             'Return New Object() {V, Vx, Vy, Ki, F, ecount, overshoot}
 
-            r1 = ConvergeVF(IObj, V, Vz, Vx, Vy, Ki, P, T, PP)
+            r1 = ConvergeVF(IObj, V, Vz, Vx0, Vy0, Ki0, P, T, PP, 0)
 
             If r1(6) = True And Math.Abs(Vmax - Vmin) > 0.01 Then
-                r2 = ConvergeVF2(Vmin, Vmax, V, Vz, Vx, Vy, Ki, P, T, PP)
-                If Math.Abs(r2(4)) < 0.001 Then r1 = r2
+                r1 = ConvergeVF(IObj, (Vmin + Vmax) / 2, Vz, Vx0, Vy0, Ki0, P, T, PP, 1)
             End If
 
             V = r1(0)
@@ -313,11 +318,11 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             IObj?.Close()
 
-            Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
+            Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector, Ki}
 
         End Function
 
-        Private Function ConvergeVF(IObj As InspectorItem, V As Double, Vz As Double(), Vx As Double(), Vy As Double(), Ki As Double(), P As Double, T As Double, PP As PropertyPackage) As Object()
+        Private Function ConvergeVF(IObj As InspectorItem, V As Double, Vz As Double(), Vx As Double(), Vy As Double(), Ki As Double(), P As Double, T As Double, PP As PropertyPackage, damplevel As Integer) As Object()
 
             Dim n As Integer = Vz.Length - 1
 
@@ -327,6 +332,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             Dim converged As Integer = 0
             Dim F, Vant, dF, e1, e2, e3 As Double
             Dim overshoot As Boolean = False
+            Dim dfac As Double = dampingfactor
 
             IObj?.Paragraphs.Add(String.Format("Initial estimates for y: {0}", Vy.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Initial estimates for x: {0}", Vx.ToMathArrayString))
@@ -345,11 +351,6 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                 Ki_ant = Ki.Clone
                 Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
-
-                'For i = 0 To n
-                '    If Ki(i) < 0.0000000001 Then Ki(i) = 0.0000000001
-                '    If Ki(i) > 1.0E+20 Then Ki(i) = 1.0E+20
-                'Next
 
                 IObj2?.Paragraphs.Add(String.Format("K values where updated. Current values: {0}", Ki.ToMathArrayString))
 
@@ -399,7 +400,21 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     If Abs(F) < etol Then Exit Do
 
-                    V = -F / dF * dampingfactor + Vant
+                    If damplevel = 1 Then
+                        dfac = (ecount + 1) * 0.2
+                        If dfac > 1.0 Then dfac = 1.0
+                        If -F / dF * dfac + Vant > 1.0 Or -F / dF * dfac + Vant < 0.0 Then
+                            dfac /= 10
+                        End If
+                    ElseIf damplevel = 2 Then
+                        dfac = (ecount + 1) * 0.1
+                        If dfac > 1.0 Then dfac = 1.0
+                        If -F / dF * dfac + Vant > 1.0 Or -F / dF * dfac + Vant < 0.0 Then
+                            dfac /= 50
+                        End If
+                    End If
+
+                    V = -F / dF * dfac + Vant
 
                     If LimitVaporFraction Then
                         If V < 0.0 Then
@@ -512,7 +527,15 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 IObj?.Paragraphs.Add("Using the normal version of the PH Flash Algorithm.")
                 IObj?.Close()
 
-                Return Flash_PH_2(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
+                Dim haserror As Boolean = True
+                Try
+                    Return Flash_PH_2(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
+                    haserror = False
+                Catch ex As Exception
+                End Try
+                If haserror Then
+                    Return Flash_PH_1(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
+                End If
 
             Else
 
@@ -642,25 +665,16 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     If Settings.EnableParallelProcessing And Not DisableParallelCalcs Then
 
-                        Dim task0 = Task.Factory.StartNew(Sub()
-                                                              herrobj = Herror("PT", x1, P, Vz, PP, False, Nothing)
-                                                              fx = herrobj(0)
-                                                          End Sub,
-                                                            Settings.TaskCancellationTokenSource.Token,
-                                                            TaskCreationOptions.None,
-                                                           Settings.AppTaskScheduler)
-                        Dim task1 = Task.Factory.StartNew(Sub()
-                                                              fx1 = Herror("PT", x1 - epsilon(j), P, Vz, PP, False, Nothing)(0)
-                                                          End Sub,
-                                                            Settings.TaskCancellationTokenSource.Token,
-                                                            TaskCreationOptions.None,
-                                                           Settings.AppTaskScheduler)
-                        Dim task2 = Task.Factory.StartNew(Sub()
-                                                              fx2 = Herror("PT", x1 + epsilon(j), P, Vz, PP, False, Nothing)(0)
-                                                          End Sub,
-                                                            Settings.TaskCancellationTokenSource.Token,
-                                                            TaskCreationOptions.None,
-                                                           Settings.AppTaskScheduler)
+                        Dim task0 = TaskHelper.Run(Sub()
+                                                       herrobj = Herror("PT", x1, P, Vz, PP, False, Nothing)
+                                                       fx = herrobj(0)
+                                                   End Sub, Settings.TaskCancellationTokenSource.Token)
+                        Dim task1 = TaskHelper.Run(Sub()
+                                                       fx1 = Herror("PT", x1 - epsilon(j), P, Vz, PP, False, Nothing)(0)
+                                                   End Sub, Settings.TaskCancellationTokenSource.Token)
+                        Dim task2 = TaskHelper.Run(Sub()
+                                                       fx2 = Herror("PT", x1 + epsilon(j), P, Vz, PP, False, Nothing)(0)
+                                                   End Sub, Settings.TaskCancellationTokenSource.Token)
                         Task.WaitAll(task0, task1, task2)
 
                     Else
@@ -843,22 +857,16 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             If Settings.EnableParallelProcessing And Not DisableParallelCalcs Then
 
-                Dim task1 = Task.Factory.StartNew(Sub()
-                                                      Dim ErrRes1 = Herror("PV", 0, P, Vz, PP, False, Nothing)
-                                                      Hb = ErrRes1(0)
-                                                      Tb = ErrRes1(1)
-                                                  End Sub,
-                                                      Settings.TaskCancellationTokenSource.Token,
-                                                      TaskCreationOptions.None,
-                                                     Settings.AppTaskScheduler)
-                Dim task2 = Task.Factory.StartNew(Sub()
-                                                      Dim ErrRes2 = Herror("PV", 1, P, Vz, PP, False, Nothing)
-                                                      Hd = ErrRes2(0)
-                                                      Td = ErrRes2(1)
-                                                  End Sub,
-                                                  Settings.TaskCancellationTokenSource.Token,
-                                                  TaskCreationOptions.None,
-                                                 Settings.AppTaskScheduler)
+                Dim task1 = TaskHelper.Run(Sub()
+                                               Dim ErrRes1 = Herror("PV", 0, P, Vz, PP, False, Nothing)
+                                               Hb = ErrRes1(0)
+                                               Tb = ErrRes1(1)
+                                           End Sub, Settings.TaskCancellationTokenSource.Token)
+                Dim task2 = TaskHelper.Run(Sub()
+                                               Dim ErrRes2 = Herror("PV", 1, P, Vz, PP, False, Nothing)
+                                               Hd = ErrRes2(0)
+                                               Td = ErrRes2(1)
+                                           End Sub, Settings.TaskCancellationTokenSource.Token)
                 Task.WaitAll(task1, task2)
 
             Else
@@ -1164,25 +1172,16 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     If Settings.EnableParallelProcessing And Not DisableParallelCalcs Then
 
-                        Dim task0 = Task.Factory.StartNew(Sub()
-                                                              serrobj = Serror("PT", x1, P, Vz, PP, False, Nothing)
-                                                              fx = serrobj(0)
-                                                          End Sub,
-                                                            Settings.TaskCancellationTokenSource.Token,
-                                                            TaskCreationOptions.None,
-                                                           Settings.AppTaskScheduler)
-                        Dim task1 = Task.Factory.StartNew(Sub()
-                                                              fx1 = Serror("PT", x1 - epsilon(j), P, Vz, PP, False, Nothing)(0)
-                                                          End Sub,
-                                                            Settings.TaskCancellationTokenSource.Token,
-                                                            TaskCreationOptions.None,
-                                                           Settings.AppTaskScheduler)
-                        Dim task2 = Task.Factory.StartNew(Sub()
-                                                              fx2 = Serror("PT", x1 + epsilon(j), P, Vz, PP, False, Nothing)(0)
-                                                          End Sub,
-                                                            Settings.TaskCancellationTokenSource.Token,
-                                                            TaskCreationOptions.None,
-                                                           Settings.AppTaskScheduler)
+                        Dim task0 = TaskHelper.Run(Sub()
+                                                       serrobj = Serror("PT", x1, P, Vz, PP, False, Nothing)
+                                                       fx = serrobj(0)
+                                                   End Sub, Settings.TaskCancellationTokenSource.Token)
+                        Dim task1 = TaskHelper.Run(Sub()
+                                                       fx1 = Serror("PT", x1 - epsilon(j), P, Vz, PP, False, Nothing)(0)
+                                                   End Sub, Settings.TaskCancellationTokenSource.Token)
+                        Dim task2 = TaskHelper.Run(Sub()
+                                                       fx2 = Serror("PT", x1 + epsilon(j), P, Vz, PP, False, Nothing)(0)
+                                                   End Sub, Settings.TaskCancellationTokenSource.Token)
                         Task.WaitAll(task0, task1, task2)
 
                     Else
@@ -1377,22 +1376,16 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
             If Settings.EnableParallelProcessing Then
 
-                Dim task1 = Task.Factory.StartNew(Sub()
-                                                      Dim ErrRes1 = Serror("PV", 0, P, Vz, PP, False, Nothing)
-                                                      Sb = ErrRes1(0)
-                                                      Tb = ErrRes1(1)
-                                                  End Sub,
-                                                      Settings.TaskCancellationTokenSource.Token,
-                                                      TaskCreationOptions.None,
-                                                     Settings.AppTaskScheduler)
-                Dim task2 = Task.Factory.StartNew(Sub()
-                                                      Dim ErrRes2 = Serror("PV", 1, P, Vz, PP, False, Nothing)
-                                                      Sd = ErrRes2(0)
-                                                      Td = ErrRes2(1)
-                                                  End Sub,
-                                                  Settings.TaskCancellationTokenSource.Token,
-                                                  TaskCreationOptions.None,
-                                                 Settings.AppTaskScheduler)
+                Dim task1 = TaskHelper.Run(Sub()
+                                               Dim ErrRes1 = Serror("PV", 0, P, Vz, PP, False, Nothing)
+                                               Sb = ErrRes1(0)
+                                               Tb = ErrRes1(1)
+                                           End Sub, Settings.TaskCancellationTokenSource.Token)
+                Dim task2 = TaskHelper.Run(Sub()
+                                               Dim ErrRes2 = Serror("PV", 1, P, Vz, PP, False, Nothing)
+                                               Sd = ErrRes2(0)
+                                               Td = ErrRes2(1)
+                                           End Sub, Settings.TaskCancellationTokenSource.Token)
                 Task.WaitAll(task1, task2)
 
             Else
@@ -2324,14 +2317,12 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     IObj2?.Paragraphs.Add(String.Format("Updated y: {0}", Vy.ToMathArrayString))
 
                     If Settings.EnableParallelProcessing Then
-                        Dim task1 = New Task(Sub()
-                                                 K1 = PP.DW_CalcKvalue(Vx, Vy, T - epsilon, P)
-                                             End Sub, Settings.TaskCancellationTokenSource.Token)
-                        Dim task2 = New Task(Sub()
-                                                 K2 = PP.DW_CalcKvalue(Vx, Vy, T + epsilon, P)
-                                             End Sub, Settings.TaskCancellationTokenSource.Token)
-                        task1.Start()
-                        task2.Start()
+                        Dim task1 = TaskHelper.Run(Sub()
+                                                       K1 = PP.DW_CalcKvalue(Vx, Vy, T - epsilon, P)
+                                                   End Sub, Settings.TaskCancellationTokenSource.Token)
+                        Dim task2 = TaskHelper.Run(Sub()
+                                                       K2 = PP.DW_CalcKvalue(Vx, Vy, T + epsilon, P)
+                                                   End Sub, Settings.TaskCancellationTokenSource.Token)
                         Task.WaitAll(task1, task2)
                     Else
                         IObj?.SetCurrent
@@ -2651,6 +2642,10 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     keys.Add(i)
                 End If
             Next
+
+            If keys.Count = 0 Then
+                Throw New Exception("Error calculating saturation temperature.")
+            End If
 
             key = keys.OrderBy(Function(k) Math.Abs(Vtb(k) - 300.0)).First()
 

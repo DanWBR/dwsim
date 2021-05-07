@@ -349,19 +349,16 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="cbSolverMode.Items" xml:space="preserve">
-    <value>Thread Principal</value>
-  </data>
-  <data name="cbSolverMode.Items1" xml:space="preserve">
     <value>Thread em Segundo Plano</value>
   </data>
-  <data name="cbSolverMode.Items2" xml:space="preserve">
+  <data name="cbSolverMode.Items1" xml:space="preserve">
     <value>Threads Paralelas em Segundo Plano</value>
   </data>
-  <data name="cbSolverMode.Items3" xml:space="preserve">
+  <data name="cbSolverMode.Items2" xml:space="preserve">
     <value>Microsoft Azure Service Bus</value>
   </data>
-  <data name="cbSolverMode.Items4" xml:space="preserve">
-    <value>Servidor na Rede</value>
+  <data name="cbSolverMode.Items3" xml:space="preserve">
+    <value>Servidor TCP-IP</value>
   </data>
   <data name="cbSolverMode.Location" type="System.Drawing.Point, System.Drawing">
     <value>99, 20</value>
@@ -649,7 +646,7 @@
     <value>NoControl</value>
   </data>
   <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>28, 127</value>
+    <value>27, 102</value>
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 13</value>
@@ -679,7 +676,7 @@
     <value>NoControl</value>
   </data>
   <data name="chkEnableSIMD.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 74</value>
+    <value>11, 49</value>
   </data>
   <data name="chkEnableSIMD.Size" type="System.Drawing.Size, System.Drawing">
     <value>156, 17</value>
@@ -721,7 +718,7 @@
     <value>Vertical</value>
   </data>
   <data name="tbGPUCaps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>320, 154</value>
+    <value>320, 179</value>
   </data>
   <data name="tbGPUCaps.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -739,10 +736,10 @@
     <value>0</value>
   </data>
   <data name="GroupBox8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 150</value>
+    <value>6, 125</value>
   </data>
   <data name="GroupBox8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 174</value>
+    <value>326, 199</value>
   </data>
   <data name="GroupBox8.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -766,7 +763,7 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="cbGPU.Location" type="System.Drawing.Point, System.Drawing">
-    <value>92, 123</value>
+    <value>91, 98</value>
   </data>
   <data name="cbGPU.Size" type="System.Drawing.Size, System.Drawing">
     <value>227, 21</value>
@@ -796,7 +793,7 @@
     <value>NoControl</value>
   </data>
   <data name="chkEnableGPUProcessing.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 98</value>
+    <value>11, 73</value>
   </data>
   <data name="chkEnableGPUProcessing.Size" type="System.Drawing.Size, System.Drawing">
     <value>236, 17</value>
@@ -818,54 +815,6 @@
   </data>
   <data name="&gt;&gt;chkEnableGPUProcessing.ZOrder" xml:space="preserve">
     <value>4</value>
-  </data>
-  <data name="cbParallelism.Location" type="System.Drawing.Point, System.Drawing">
-    <value>133, 47</value>
-  </data>
-  <data name="cbParallelism.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 21</value>
-  </data>
-  <data name="cbParallelism.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;cbParallelism.Name" xml:space="preserve">
-    <value>cbParallelism</value>
-  </data>
-  <data name="&gt;&gt;cbParallelism.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbParallelism.Parent" xml:space="preserve">
-    <value>GroupBox7</value>
-  </data>
-  <data name="&gt;&gt;cbParallelism.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="Label6.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>28, 51</value>
-  </data>
-  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 13</value>
-  </data>
-  <data name="Label6.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="Label6.Text" xml:space="preserve">
-    <value>Paralelismo Máximo</value>
-  </data>
-  <data name="&gt;&gt;Label6.Name" xml:space="preserve">
-    <value>Label6</value>
-  </data>
-  <data name="&gt;&gt;Label6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
-    <value>GroupBox7</value>
-  </data>
-  <data name="&gt;&gt;Label6.ZOrder" xml:space="preserve">
-    <value>6</value>
   </data>
   <data name="chkEnableParallelCalcs.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -895,7 +844,7 @@
     <value>GroupBox7</value>
   </data>
   <data name="&gt;&gt;chkEnableParallelCalcs.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>5</value>
   </data>
   <data name="GroupBox7.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 228</value>
@@ -2735,7 +2684,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABo
-        KgAAAk1TRnQBSQFMAgEBCgEAAQwBCgEMAQoBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        KgAAAk1TRnQBSQFMAgEBCgEAASQBCgEkAQoBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABMAMAAQEBAAEYBgABJBIAAekCpwHpAqcB5wKlAeUCowHlAqMB5QKjAeQCogHiAqAB4QKfAd4CnAHe
         ApwB3AKaAdoCmAHaApgB2gKYAdoCmAHkAqIB4gKgAeECnwHeApwB3AGcAZoB2gKYAdoCmAHZApcB1wKV
         AdYClAHTApEB0wKRAdECjwHPAo0BzwKNAc8CjWAABvYD9APzAfIB8wHyA/ED8APuA+0D6wPpA+gB5wLm

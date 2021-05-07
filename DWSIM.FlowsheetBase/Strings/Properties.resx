@@ -204,6 +204,12 @@
   <data name="PROP_CS_5" xml:space="preserve">
     <value>Outlet Temperature</value>
   </data>
+  <data name="PROP_CS_6" xml:space="preserve">
+    <value>Headspace</value>
+  </data>
+  <data name="PROP_CS_7" xml:space="preserve">
+    <value>Vapor residence time</value>
+  </data>
   <data name="PROP_DC_0" xml:space="preserve">
     <value>Condenser Pressure</value>
     <comment>1</comment>

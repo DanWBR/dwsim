@@ -626,7 +626,7 @@ Public Class FormPureComp
             If Not constprop.UNIFACGroups Is Nothing Then
                 Dim unif As New Thermodynamics.PropertyPackages.Auxiliary.Unifac
                 For Each s As String In constprop.UNIFACGroups.Keys
-                    tbUNIFAC.Text += unif.ID2Group(s) & " " & constprop.UNIFACGroups(s) & ", "
+                    tbUNIFAC.Text += unif.ID2Group(s) & " = " & constprop.UNIFACGroups(s) & ", "
                 Next
                 tbUNIFAC.Text = tbUNIFAC.Text.TrimEnd(New Char() {",", " "})
             End If
@@ -636,7 +636,7 @@ Public Class FormPureComp
             If Not constprop.MODFACGroups Is Nothing Then
                 Dim unif As New Thermodynamics.PropertyPackages.Auxiliary.Modfac
                 For Each s As String In constprop.MODFACGroups.Keys
-                    tbMODFAC.Text += unif.ID2Group(s) & " " & constprop.MODFACGroups(s) & ", "
+                    tbMODFAC.Text += unif.ID2Group(s) & " = " & constprop.MODFACGroups(s) & ", "
                 Next
                 tbMODFAC.Text = tbMODFAC.Text.TrimEnd(New Char() {",", " "})
             End If
@@ -646,7 +646,7 @@ Public Class FormPureComp
             If Not constprop.NISTMODFACGroups Is Nothing Then
                 Dim unif As New Thermodynamics.PropertyPackages.Auxiliary.NISTMFAC
                 For Each s As String In constprop.NISTMODFACGroups.Keys
-                    tbMODFACNIST.Text += unif.ID2Group(s) & " " & constprop.NISTMODFACGroups(s) & ", "
+                    tbMODFACNIST.Text += unif.ID2Group(s) & " = " & constprop.NISTMODFACGroups(s) & ", "
                 Next
                 tbMODFACNIST.Text = tbMODFACNIST.Text.TrimEnd(New Char() {",", " "})
             End If
@@ -655,6 +655,11 @@ Public Class FormPureComp
             tbSMILES.Text = constprop.SMILES
             tbInChI.Text = constprop.InChI
 
+            tbElements.Text = ""
+            For Each el In constprop.Elements.Keys
+                tbElements.Text += el + " = " + constprop.Elements(el).ToString + ", "
+            Next
+            tbElements.Text = tbElements.Text.TrimEnd().TrimEnd(",")
 
             If Not DWSIM.App.IsRunningOnMono Then
 

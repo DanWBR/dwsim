@@ -859,7 +859,7 @@
     <value>Interstage Flows</value>
   </data>
   <data name="DCGeneralError" xml:space="preserve">
-    <value>A convergence error was found while trying to solve the column. Please check input variables and try again.</value>
+    <value>A convergence error was found while trying to solve the column. Possible reasons are: unfeasible specs, initial estimates far from solution and/or very non-ideal (wide-boiling or azeotropic) mixtures being fed to the column.</value>
   </data>
   <data name="DCILIts" xml:space="preserve">
     <value>Internal loop iterations</value>
@@ -5371,5 +5371,14 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   </data>
   <data name="FoundSolidsWarning" xml:space="preserve">
     <value>Solids precipitation may occur at the current conditions. If you want to consider the presence of solids in the equilibrium calculation, go to the Property Package Flash settings and check the corresponding option.</value>
+  </data>
+  <data name="DescPITPP" xml:space="preserve">
+    <value>DescPITPP	The Pitzer model extended the Debye-Huckel theory using a virial expansion to account for the ionic strength dependence of the short range forces in binary and ternary ion interactions. The model is applicable to solutions of high ionic strength. The Pitzer model finds extensive application for the correlation and prediction of thermodynamic properties of electrolyte solutions.</value>
+  </data>
+  <data name="NoCompoundsAdded" xml:space="preserve">
+    <value>You didn't add any Compound to the simulation.</value>
+  </data>
+  <data name="NoPropPackAdded" xml:space="preserve">
+    <value>You didn't add any Property Package to the simulation.</value>
   </data>
 </root>

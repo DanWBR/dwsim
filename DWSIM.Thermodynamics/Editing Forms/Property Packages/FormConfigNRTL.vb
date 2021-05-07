@@ -20,6 +20,7 @@ Imports System.IO
 Imports System.Text
 Imports DotNumerics
 Imports System.Threading.Tasks
+Imports DWSIM.SharedClasses
 
 Public Class FormConfigNRTL
 
@@ -31,8 +32,6 @@ Public Class FormConfigNRTL
     Private Sub ConfigFormUNIQUAC_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         Loaded = False
-
-        FaTabStripItem1.Controls.Add(New PropertyPackageSettingsEditingControl(_pp) With {.Dock = DockStyle.Fill})
 
         Me.Text += " (" & _pp.Tag & ") [" + _pp.ComponentName + "]"
 
@@ -297,18 +296,15 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
 
         If GlobalSettings.Settings.EnableParallelProcessing Then
             Try
-                Dim task1 As Task = New Task(Sub()
-                                                 a1 = nrtl.GAMMA_MR(298.15, New Double() {0.25, 0.75}, ppn.RET_VIDS)
-                                             End Sub)
-                Dim task2 As Task = New Task(Sub()
-                                                 a2 = nrtl.GAMMA_MR(298.15, New Double() {0.5, 0.5}, ppn.RET_VIDS)
-                                             End Sub)
-                Dim task3 As Task = New Task(Sub()
-                                                 a3 = nrtl.GAMMA_MR(298.15, New Double() {0.75, 0.25}, ppn.RET_VIDS)
-                                             End Sub)
-                task1.Start()
-                task2.Start()
-                task3.Start()
+                Dim task1 As Task = TaskHelper.Run(Sub()
+                                                       a1 = nrtl.GAMMA_MR(298.15, New Double() {0.25, 0.75}, ppn.RET_VIDS)
+                                                   End Sub)
+                Dim task2 As Task = TaskHelper.Run(Sub()
+                                                       a2 = nrtl.GAMMA_MR(298.15, New Double() {0.5, 0.5}, ppn.RET_VIDS)
+                                                   End Sub)
+                Dim task3 As Task = TaskHelper.Run(Sub()
+                                                       a3 = nrtl.GAMMA_MR(298.15, New Double() {0.75, 0.25}, ppn.RET_VIDS)
+                                                   End Sub)
                 Task.WaitAll(task1, task2, task3)
             Catch ae As AggregateException
                 Throw ae.Flatten().InnerException
@@ -395,15 +391,15 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
                 If GlobalSettings.Settings.EnableParallelProcessing Then
                     If GlobalSettings.Settings.EnableGPUProcessing Then GlobalSettings.Settings.gpu.EnableMultithreading()
                     Try
-                        Dim task1 As Task = New Task(Sub()
-                                                         a1 = unifac.GAMMA_MR(T1, New Double() {0.25, 0.75}, ppu.RET_VQ(), ppu.RET_VR, ppu.RET_VEKI)
-                                                     End Sub)
-                        Dim task2 As Task = New Task(Sub()
-                                                         a2 = unifac.GAMMA_MR(T1, New Double() {0.5, 0.5}, ppu.RET_VQ(), ppu.RET_VR, ppu.RET_VEKI)
-                                                     End Sub)
-                        Dim task3 As Task = New Task(Sub()
-                                                         a3 = unifac.GAMMA_MR(T1, New Double() {0.75, 0.25}, ppu.RET_VQ(), ppu.RET_VR, ppu.RET_VEKI)
-                                                     End Sub)
+                        Dim task1 As Task = TaskHelper.Run(Sub()
+                                                               a1 = unifac.GAMMA_MR(T1, New Double() {0.25, 0.75}, ppu.RET_VQ(), ppu.RET_VR, ppu.RET_VEKI)
+                                                           End Sub)
+                        Dim task2 As Task = TaskHelper.Run(Sub()
+                                                               a2 = unifac.GAMMA_MR(T1, New Double() {0.5, 0.5}, ppu.RET_VQ(), ppu.RET_VR, ppu.RET_VEKI)
+                                                           End Sub)
+                        Dim task3 As Task = TaskHelper.Run(Sub()
+                                                               a3 = unifac.GAMMA_MR(T1, New Double() {0.75, 0.25}, ppu.RET_VQ(), ppu.RET_VR, ppu.RET_VEKI)
+                                                           End Sub)
                         task1.Start()
                         task2.Start()
                         task3.Start()
@@ -515,15 +511,15 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
             If GlobalSettings.Settings.EnableParallelProcessing Then
                 If GlobalSettings.Settings.EnableGPUProcessing Then GlobalSettings.Settings.gpu.EnableMultithreading()
                 Try
-                    Dim task1 As Task = New Task(Sub()
-                                                     a1 = unifac.GAMMA_MR(T1, New Double() {0.25, 0.75}, ppu.RET_VQ(), ppu.RET_VR, ppu.RET_VEKI)
-                                                 End Sub)
-                    Dim task2 As Task = New Task(Sub()
-                                                     a2 = unifac.GAMMA_MR(T1, New Double() {0.5, 0.5}, ppu.RET_VQ(), ppu.RET_VR, ppu.RET_VEKI)
-                                                 End Sub)
-                    Dim task3 As Task = New Task(Sub()
-                                                     a3 = unifac.GAMMA_MR(T1, New Double() {0.75, 0.25}, ppu.RET_VQ(), ppu.RET_VR, ppu.RET_VEKI)
-                                                 End Sub)
+                    Dim task1 As Task = TaskHelper.Run(Sub()
+                                                           a1 = unifac.GAMMA_MR(T1, New Double() {0.25, 0.75}, ppu.RET_VQ(), ppu.RET_VR, ppu.RET_VEKI)
+                                                       End Sub)
+                    Dim task2 As Task = TaskHelper.Run(Sub()
+                                                           a2 = unifac.GAMMA_MR(T1, New Double() {0.5, 0.5}, ppu.RET_VQ(), ppu.RET_VR, ppu.RET_VEKI)
+                                                       End Sub)
+                    Dim task3 As Task = TaskHelper.Run(Sub()
+                                                           a3 = unifac.GAMMA_MR(T1, New Double() {0.75, 0.25}, ppu.RET_VQ(), ppu.RET_VR, ppu.RET_VEKI)
+                                                       End Sub)
                     task1.Start()
                     task2.Start()
                     task3.Start()

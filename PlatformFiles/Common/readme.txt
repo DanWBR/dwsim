@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 6.4.3
+Version 6.4.9
 Copyright (c) 2017-2021 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,93 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim6/commits/windows
+
+Version 6.4.9
+
+Author				Description
+Daniel Medeiros		Implemented feature request #126: Dynamics Integrator pause and resume (Classic UI)
+Daniel Medeiros		New Separator Filler Utility (Dynamics)
+Daniel Medeiros		Fixed issue #138: Flowsheet can't be saved
+Daniel Medeiros		Fixed issue #137: Estimate Pipe Overall Heat Transfer Coefficient
+Daniel Medeiros		Fixed issue #130: Stream Enthalpy not being correctly set by CAPE-OPEN Property Packages
+Daniel Medeiros		Fixed issues with Seawater Property Package 
+Daniel Medeiros		Fixed drawing of some PFD Objects
+Daniel Medeiros		Fixed Switch logical block behavior
+Daniel Medeiros		Fixed active/inactive buttons not updating status in object editors (Classic UI)
+Daniel Medeiros		Fixed Integrator results sheet formatting
+Daniel Medeiros		Dynamics Volume-Temperature (VT) Flash fixes
+Daniel Medeiros		Fixed distance units handling (Classic UI)
+Daniel Medeiros		Fixed Liquid-Liquid Extraction column not working
+
+Version 6.4.8
+
+Author				Description
+Daniel Medeiros		Updated User's Guide
+Daniel Medeiros		Added Model Customization samples
+Daniel Medeiros		Enhanced reliability of the Rigorous Column model solvers
+Daniel Medeiros		Fixed issue 129 - CAPE-OPEN Thermodynamic Package configure failed
+Daniel Medeiros		Fixed External Temperature gradient calculation in Pipe Segment model
+Daniel Medeiros		Added visualization of External Temperature to Pipe Segment model
+Daniel Medeiros		Fixed infinite loop in Electrolyte Property Packages
+Daniel Medeiros		Fixed Adjust/Set not being inactive when they should
+Daniel Medeiros		Fixed a bug with NL VLLE flash algorithm
+Daniel Medeiros		Other minor fixes and enhancements
+
+Version 6.4.7
+
+Author				Description
+Daniel Medeiros		New Database with Food Compounds (https://github.com/Spogis/DWSIMFoodProp)
+Daniel Medeiros		Updated CoolProp libraries to v6.4.1
+Daniel Medeiros		Grouped all Property Package editors in a single window (Classic UI)
+Daniel Medeiros		Exposed CSTR's Vapor Residence Time and Headspace
+Daniel Medeiros		Added an option to import compound data into Compound Creator from JSON files
+Daniel Medeiros		Fixed issues with some flash algorithms
+Daniel Medeiros		Fixed issues with Compound Creator
+Daniel Medeiros		Fixed Gibbs/Equilibrium/Conversion Reactor mixed-phase product enthalpies
+Daniel Medeiros		Fixed a bug with solids handling
+Daniel Medeiros		Fixed a bug in Seawater Property Package 
+Daniel Medeiros		General UI Fixes
+
+Version 6.4.6
+
+Author				Description
+Daniel Medeiros		Added Wilson Activity Coefficient Property Package
+Daniel Medeiros		Updated/Redesigned Compound Creator (Classic UI)
+Daniel Medeiros		Added Compound Creator Wizard to Welcome Screen (Classic UI)
+Daniel Medeiros		Smoother compound search (Classic UI)
+Daniel Medeiros		Updated Automation interface
+Daniel Medeiros		Added PID Controller Setpoint property
+Daniel Medeiros		Added Dynamic Integrator scripting events
+Daniel Medeiros		Decreased Auto-Layout distance between objects
+
+Version 6.4.5
+
+Author				Description
+Daniel Medeiros		Fixed Compressor/Expander power calculation in Polytropic mode
+Daniel Medeiros		Fixed Gibbs Reactor in Adiabatic mode
+Daniel Medeiros		Fixed issue with VLLE Flash
+Daniel Medeiros		Steady-State Adjust/Controller enhancements
+Daniel Medeiros		Fixed UNIFAC-LL (issue 118)
+Daniel Medeiros		Fixed Condenser/Reboiler pressure editing (Cross-Platform UI)
+Daniel Medeiros		Fixed editors not updating after flowsheet solve (Cross-Platform UI)
+Daniel Medeiros		Fixed issue in Advanced Kinetics expression parser
+Daniel Medeiros		Fixed Solids Separator energy balance warning
+
+Version 6.4.4
+
+Author              Description
+Daniel Medeiros     Fixed issue 111 (The field is not updated correctly after the method converges)
+Daniel Medeiros     Fixed issue 117 (Issue with recycling mixed streams)
+Daniel Medeiros     Fixed issue with VLE PT Flash
+Daniel Medeiros     Added an option to use IO Flash in VLE/VLLE equilibrium calculations
+Daniel Medeiros     Fixed an issue with simultaneous adjust solver
+Daniel Medeiros     Fixed PFR volume iteration
+Daniel Medeiros     Fixed flowsheet update after finishing calculation
+Daniel Medeiros     Fixed units for some properties in Excel Add-In
+Daniel Medeiros     Fixed conversion from kW to MJ/h
+Daniel Medeiros     Fixed conversion of BTU/h and MMBTU/h
+Daniel Medeiros     Fixed issues with Heat Exchanger Shell and Tube calculation mode
+Daniel Medeiros     Darker green color in digital gauge
 
 Version 6.4.3
 

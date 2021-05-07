@@ -117,36 +117,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="FaTabStripItem2.Title" xml:space="preserve">
+    <value>Advanced Settings</value>
+  </data>
+  <data name="FaTabStripItem1.Title" xml:space="preserve">
+    <value>General Options</value>
+  </data>
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Interaction Parameters</value>
   </data>
-  <data name="Button3.Text" xml:space="preserve">
-    <value>Copy Objective Function History from Last Chemical Equilibrium Calculation</value>
-  </data>
-  <data name="GroupBox4.Text" xml:space="preserve">
-    <value>Debug</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="chkOptimize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 172</value>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>622, 336</value>
   </data>
-  <data name="chkOptimize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 17</value>
-  </data>
-  <data name="chkOptimize.Text" xml:space="preserve">
-    <value>Optimize Initial Estimates</value>
-  </data>
-  <data name="chkIPOPT.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 142</value>
-  </data>
-  <data name="chkIPOPT.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 17</value>
-  </data>
-  <data name="chkIPOPT.Text" xml:space="preserve">
-    <value>Use IPOPT Solver</value>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Chemical Equilibrium</value>
   </data>
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 113</value>
+    <value>13, 86</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>119, 13</value>
@@ -155,10 +143,10 @@
     <value>Convergence tolerance</value>
   </data>
   <data name="tbTol.Location" type="System.Drawing.Point, System.Drawing">
-    <value>248, 110</value>
+    <value>252, 83</value>
   </data>
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 84</value>
+    <value>13, 57</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>151, 13</value>
@@ -167,37 +155,19 @@
     <value>Maximum number of iterations</value>
   </data>
   <data name="tbMaxIts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>248, 81</value>
+    <value>252, 54</value>
   </data>
   <data name="cbReacSets.Location" type="System.Drawing.Point, System.Drawing">
-    <value>178, 52</value>
-  </data>
-  <data name="chkCalcChemEq.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 25</value>
-  </data>
-  <data name="chkCalcChemEq.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 17</value>
-  </data>
-  <data name="chkCalcChemEq.Text" xml:space="preserve">
-    <value>Calculate Chemical Equilibrium</value>
+    <value>182, 25</value>
   </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 55</value>
+    <value>13, 28</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 13</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Reaction Set</value>
-  </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Chemical Equilibrium</value>
-  </data>
-  <data name="FaTabStripItem2.Title" xml:space="preserve">
-    <value>Advanced Settings</value>
-  </data>
-  <data name="FaTabStripItem1.Title" xml:space="preserve">
-    <value>General Options</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Configure Extended UNIQUAC Property Package</value>

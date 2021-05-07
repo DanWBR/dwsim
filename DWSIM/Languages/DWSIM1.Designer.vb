@@ -461,6 +461,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Corrente de Acúmulo.
+        '''</summary>
+        Friend Shared ReadOnly Property AccumulationStream() As String
+            Get
+                Return ResourceManager.GetString("AccumulationStream", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Aceleração.
         '''</summary>
         Friend Shared ReadOnly Property Aceleracao() As String
@@ -1480,7 +1489,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to Calor transferido.
         '''</summary>
-        Friend Shared ReadOnly Property HeatTransferred() As String
+        Friend Shared ReadOnly Property Calortransferido() As String
             Get
                 Return ResourceManager.GetString("Calortransferido", resourceCulture)
             End Get
@@ -2410,6 +2419,24 @@ Namespace My.Resources
         Friend Shared ReadOnly Property Concreto() As String
             Get
                 Return ResourceManager.GetString("Concreto", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Valor Calculado para o Condensador.
+        '''</summary>
+        Friend Shared ReadOnly Property CondenserCalcValue() As String
+            Get
+                Return ResourceManager.GetString("CondenserCalcValue", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Valor Especificado para o Condensador.
+        '''</summary>
+        Friend Shared ReadOnly Property CondenserSpecValue() As String
+            Get
+                Return ResourceManager.GetString("CondenserSpecValue", resourceCulture)
             End Get
         End Property
         
@@ -4414,6 +4441,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Uma versão do modelo LIQUAC modificado por Kiepe, Noll e Gmehling..
+        '''</summary>
+        Friend Shared ReadOnly Property DescLIPP() As String
+            Get
+                Return ResourceManager.GetString("DescLIPP", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Neste Pacote de Propriedades, a Equação baseada na Teoria dos Estados Correspondentes desenvolvida por Lee e Kesler foi aprimorada por Plöcker para cálculo da fugacidade dos componentes em misturas assimétricas. Aqui, todas as propriedades são calculadas pela Equação LKP, incluindo os K-values..
         '''</summary>
         Friend Shared ReadOnly Property DescLKPPP() As String
@@ -4493,6 +4529,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property DescPengRobinsonPP() As String
             Get
                 Return ResourceManager.GetString("DescPengRobinsonPP", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to O modelo de Pitzer estendeu a teoria de Debye-Huckel usando uma expansão virial para explicar a dependência da força iônica das forças de curto alcance nas interações de íons binários e ternários. O modelo é aplicável a soluções de alta força iônica. O modelo Pitzer encontra ampla aplicação para a correlação e previsão de propriedades termodinâmicas de soluções eletrolíticas..
+        '''</summary>
+        Friend Shared ReadOnly Property DescPITPP() As String
+            Get
+                Return ResourceManager.GetString("DescPITPP", resourceCulture)
             End Get
         End Property
         
@@ -4848,6 +4893,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property Dinternoin() As String
             Get
                 Return ResourceManager.GetString("Dinternoin", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Distância / Comprimento.
+        '''</summary>
+        Friend Shared ReadOnly Property DistComp() As String
+            Get
+                Return ResourceManager.GetString("DistComp", resourceCulture)
             End Get
         End Property
         
@@ -6495,6 +6549,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property FileSaved() As String
             Get
                 Return ResourceManager.GetString("FileSaved", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Preencher com Material.
+        '''</summary>
+        Friend Shared ReadOnly Property FillWithStream() As String
+            Get
+                Return ResourceManager.GetString("FillWithStream", resourceCulture)
             End Get
         End Property
         
@@ -9910,6 +9973,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Você não adicionou nenhuma substância à simulação..
+        '''</summary>
+        Friend Shared ReadOnly Property NoCompoundsAdded() As String
+            Get
+                Return ResourceManager.GetString("NoCompoundsAdded", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Nenhum banco de dados definido!.
         '''</summary>
         Friend Shared ReadOnly Property NoDatabaseDefined() As String
@@ -10212,6 +10284,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property Nopossvelrealizaress() As String
             Get
                 Return ResourceManager.GetString("Nopossvelrealizaress", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Você não adicionou nenhum Pacote de Propriedades à simulação..
+        '''</summary>
+        Friend Shared ReadOnly Property NoPropPackAdded() As String
+            Get
+                Return ResourceManager.GetString("NoPropPackAdded", resourceCulture)
             End Get
         End Property
         
@@ -12763,6 +12844,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Valor Calculado para o Refervedor.
+        '''</summary>
+        Friend Shared ReadOnly Property ReboilerCalcValue() As String
+            Get
+                Return ResourceManager.GetString("ReboilerCalcValue", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Valor Especificado para o Refervedor.
+        '''</summary>
+        Friend Shared ReadOnly Property ReboilerSpecValue() As String
+            Get
+                Return ResourceManager.GetString("ReboilerSpecValue", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to &amp;Recalcular.
         '''</summary>
         Friend Shared ReadOnly Property Recalcular() As String
@@ -13080,7 +13179,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to Resultados.
         '''</summary>
-        Friend Shared ReadOnly Property Results() As String
+        Friend Shared ReadOnly Property Resultados() As String
             Get
                 Return ResourceManager.GetString("Resultados", resourceCulture)
             End Get
@@ -14851,11 +14950,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Tempo de residência do fluido.
+        '''  Looks up a localized string similar to Tempo de residência do líquido.
         '''</summary>
         Friend Shared ReadOnly Property TKResTime() As String
             Get
                 Return ResourceManager.GetString("TKResTime", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Tempo de residência do vapor.
+        '''</summary>
+        Friend Shared ReadOnly Property TKResTimeV() As String
+            Get
+                Return ResourceManager.GetString("TKResTimeV", resourceCulture)
             End Get
         End Property
         
@@ -16156,6 +16264,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Ver Corrente de Acúmulo.
+        '''</summary>
+        Friend Shared ReadOnly Property ViewAccumulationStream() As String
+            Get
+                Return ResourceManager.GetString("ViewAccumulationStream", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Visc 1.
         '''</summary>
         Friend Shared ReadOnly Property Visc1() As String
@@ -16302,7 +16419,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to  - Visualizar Resultados (Gráfico).
         '''</summary>
-        Friend Shared ReadOnly Property VisualizarResults() As String
+        Friend Shared ReadOnly Property VisualizarResultados() As String
             Get
                 Return ResourceManager.GetString("VisualizarResultados", resourceCulture)
             End Get
@@ -16338,7 +16455,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to Visualizo resultados.
         '''</summary>
-        Friend Shared ReadOnly Property VisualizoResults() As String
+        Friend Shared ReadOnly Property Visualizoresultados() As String
             Get
                 Return ResourceManager.GetString("Visualizoresultados", resourceCulture)
             End Get

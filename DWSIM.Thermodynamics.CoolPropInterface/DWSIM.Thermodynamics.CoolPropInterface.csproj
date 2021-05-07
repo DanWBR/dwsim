@@ -58,6 +58,9 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="source\AbstractState.cs" />
+    <Compile Include="source\AbstractStateGenerator.cs" />
+    <Compile Include="source\backends.cs" />
+    <Compile Include="source\backend_families.cs" />
     <Compile Include="source\composition_types.cs" />
     <Compile Include="source\Configuration.cs" />
     <Compile Include="source\ConfigurationDataTypes.cs" />
@@ -74,12 +77,16 @@
     <Compile Include="source\PhaseEnvelopeData.cs" />
     <Compile Include="source\phases.cs" />
     <Compile Include="source\SimpleState.cs" />
+    <Compile Include="source\SpinodalData.cs" />
     <Compile Include="source\SsatSimpleState.cs" />
     <Compile Include="source\StringVector.cs" />
     <Compile Include="source\SWIGTYPE_p_bool.cs" />
     <Compile Include="source\SWIGTYPE_p_CoolPropDbl.cs" />
+    <Compile Include="source\SWIGTYPE_p_CoolProp__backend_families.cs" />
     <Compile Include="source\SWIGTYPE_p_CoolProp__parameters.cs" />
+    <Compile Include="source\SWIGTYPE_p_CoolProp__phases.cs" />
     <Compile Include="source\SWIGTYPE_p_double.cs" />
+    <Compile Include="source\SWIGTYPE_p_shared_ptrT_CoolProp__AbstractStateGenerator_t.cs" />
     <Compile Include="source\SWIGTYPE_p_std__mapT_configuration_keys_CoolProp__ConfigurationItem_t.cs" />
     <Compile Include="source\SWIGTYPE_p_std__string.cs" />
     <Compile Include="source\SWIGTYPE_p_std__vectorT_CoolPropDbl_t.cs" />

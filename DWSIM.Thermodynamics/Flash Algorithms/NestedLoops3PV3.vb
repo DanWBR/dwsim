@@ -24,6 +24,7 @@ Imports DWSIM.MathOps.MathEx.Common
 
 Imports System.Threading.Tasks
 Imports DotNumerics.Optimization
+Imports DWSIM.SharedClasses
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
@@ -116,6 +117,31 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Vy = prevres.Vy
                 Vx = prevres.Vx1
 
+                If L > 0.0 Then
+
+                    Dim lps = GetPhaseSplitEstimates(T, P, L, Vx, PP)
+
+                    L1 = lps(0)
+                    Vx1 = lps(1)
+                    L2 = lps(2)
+                    Vx2 = lps(3)
+
+                    If L2 > 0.0 Then
+
+                        result = Flash_PT_3P(Vz, V, L1, L2, Vy, Vx1, Vx2, P, T, PP)
+
+                    Else
+
+                        result = _nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+
+                    End If
+
+                Else
+
+                    result = _nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+
+                End If
+
             Else
 
                 If prevres IsNot Nothing Then
@@ -139,35 +165,34 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Vx = result(2)
                     Vy = result(3)
 
+                    If L > 0.0 Then
+
+                        Dim lps = GetPhaseSplitEstimates(T, P, L, Vx, PP)
+
+                        L1 = lps(0)
+                        Vx1 = lps(1)
+                        L2 = lps(2)
+                        Vx2 = lps(3)
+
+                        If L2 > 0.0 Then
+
+                            result = Flash_PT_3P(Vz, V, L1, L2, Vy, Vx1, Vx2, P, T, PP)
+
+                        Else
+
+                            result = _nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+
+                        End If
+
+                    Else
+
+                        result = _nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+
+                    End If
+
                 End If
 
             End If
-
-            If L > 0.0 Then
-
-                Dim lps = GetPhaseSplitEstimates(T, P, L, Vx, PP)
-
-                L1 = lps(0)
-                Vx1 = lps(1)
-                L2 = lps(2)
-                Vx2 = lps(3)
-
-                If L2 > 0.0 Then
-
-                    result = Flash_PT_3P(Vz, V, L1, L2, Vy, Vx1, Vx2, P, T, PP)
-
-                Else
-
-                    result = _nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-
-                End If
-
-            Else
-
-                result = _nl.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-
-            End If
-
 
             Return result
 
@@ -423,14 +448,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             If Settings.EnableParallelProcessing Then
 
-                Dim task1 As Task = New Task(Sub()
-                                                 Ki1 = PP.DW_CalcKvalue(Vx1EST, VyEST, T, P)
-                                             End Sub)
-                Dim task2 As Task = New Task(Sub()
-                                                 Ki2 = PP.DW_CalcKvalue(Vx2EST, VyEST, T, P)
-                                             End Sub)
-                task1.Start()
-                task2.Start()
+                Dim task1 As Task = TaskHelper.Run(Sub()
+                                                       Ki1 = PP.DW_CalcKvalue(Vx1EST, VyEST, T, P)
+                                                   End Sub)
+                Dim task2 As Task = TaskHelper.Run(Sub()
+                                                       Ki2 = PP.DW_CalcKvalue(Vx2EST, VyEST, T, P)
+                                                   End Sub)
                 Task.WaitAll(task1, task2)
 
             Else
@@ -505,12 +528,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 IObj2?.SetCurrent()
 
                 If Settings.EnableParallelProcessing Then
-                    Dim task1 As Task = New Task(Sub() CFL1 = proppack.DW_CalcFugCoeff(Vx1, T, P, State.Liquid))
-                    Dim task2 As Task = New Task(Sub() CFL2 = proppack.DW_CalcFugCoeff(Vx2, T, P, State.Liquid))
-                    Dim task3 As Task = New Task(Sub() CFV = proppack.DW_CalcFugCoeff(Vy, T, P, State.Vapor))
-                    task1.Start()
-                    task2.Start()
-                    task3.Start()
+                    Dim task1 As Task = TaskHelper.Run(Sub() CFL1 = proppack.DW_CalcFugCoeff(Vx1, T, P, State.Liquid))
+                    Dim task2 As Task = TaskHelper.Run(Sub() CFL2 = proppack.DW_CalcFugCoeff(Vx2, T, P, State.Liquid))
+                    Dim task3 As Task = TaskHelper.Run(Sub() CFV = proppack.DW_CalcFugCoeff(Vy, T, P, State.Vapor))
                     Task.WaitAll(task1, task2, task3)
                 Else
                     IObj2?.SetCurrent()
@@ -523,6 +543,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 i = 0
                 Do
+                    If Double.IsNaN(CFV(i)) Then CFV(i) = 1.0
                     If Vz(i) <> 0 Then Ki1(i) = CFL1(i) / CFV(i)
                     If Vz(i) <> 0 Then Ki2(i) = CFL2(i) / CFV(i)
                     i = i + 1
@@ -621,7 +642,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     MB(0, 0) = -F1
                     MB(1, 0) = -F2
 
-
                     Try
                         MX = MA.Solve(MB)
                     Catch ex As Exception
@@ -636,23 +656,14 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     Dim df As Double
 
-                    If ecount < 5 Then
-                        df = 0.1
-                    ElseIf ecount < 10 Then
-                        df = 0.5
-                    ElseIf ecount < 15 Then
-                        df = 0.7
-                    Else
-                        df = 1.0
+                    df = (ecount + 1) * 0.2
+                    If df > 1.0 Then df = 1.0
+                    If -F / df * df + Vant > 1.0 Or -F / df * df + Vant < 0.0 Then
+                        df /= 10
                     End If
 
                     L1 += -dL1 * df
                     L2 += -dL2 * df
-
-                    If Abs(dL1 * df) > 1.0 Or Abs(dL2 * df) > 1.0 Then
-                        L1 = L1ant
-                        L2 = L2ant
-                    End If
 
                     If L1 < 0 Then L1 = 0.0
                     If L2 < 0 Then L2 = 0.0
@@ -715,8 +726,13 @@ out:
                 prevres = New PreviousResults With {.L1 = L1, .L2 = L2, .V = V, .Vy = Vy, .Vx1 = Vx1, .Vx2 = Vx2}
                 Return New Object() {L1, V, Vx1, Vy, ecount, L2, Vx2, 0.0#, PP.RET_NullVector}
             Else
-                prevres = New PreviousResults With {.L1 = L2, .L2 = L1, .V = V, .Vy = Vy, .Vx1 = Vx2, .Vx2 = Vx1}
-                Return New Object() {L2, V, Vx2, Vy, ecount, L1, Vx1, 0.0#, PP.RET_NullVector}
+                If L2 < 0.00000001 Then
+                    prevres = New PreviousResults With {.L1 = L1, .L2 = L2, .V = V, .Vy = Vy, .Vx1 = Vx1, .Vx2 = Vx2}
+                    Return New Object() {L1, V, Vx1, Vy, ecount, L2, Vx2, 0.0#, PP.RET_NullVector}
+                Else
+                    prevres = New PreviousResults With {.L1 = L2, .L2 = L1, .V = V, .Vy = Vy, .Vx1 = Vx2, .Vx2 = Vx1}
+                    Return New Object() {L2, V, Vx2, Vy, ecount, L1, Vx1, 0.0#, PP.RET_NullVector}
+                End If
             End If
 
         End Function
@@ -730,12 +746,9 @@ out:
             brent.DefineFuncDelegate(Function(x)
                                          Dim l1x, l2x As Double
                                          If Settings.EnableParallelProcessing Then
-                                             Dim task1 As Task = New Task(Sub() fcv = proppack.DW_CalcFugCoeff(_Vy, T, P, State.Vapor))
-                                             Dim task2 As Task = New Task(Sub() fcl = proppack.DW_CalcFugCoeff(_Vx1, T, P, State.Liquid))
-                                             Dim task3 As Task = New Task(Sub() fcl2 = proppack.DW_CalcFugCoeff(_Vx2, T, P, State.Liquid))
-                                             task1.Start()
-                                             task2.Start()
-                                             task3.Start()
+                                             Dim task1 As Task = TaskHelper.Run(Sub() fcv = proppack.DW_CalcFugCoeff(_Vy, T, P, State.Vapor))
+                                             Dim task2 As Task = TaskHelper.Run(Sub() fcl = proppack.DW_CalcFugCoeff(_Vx1, T, P, State.Liquid))
+                                             Dim task3 As Task = TaskHelper.Run(Sub() fcl2 = proppack.DW_CalcFugCoeff(_Vx2, T, P, State.Liquid))
                                              Task.WaitAll(task1, task2, task3)
                                          Else
                                              fcv = proppack.DW_CalcFugCoeff(_Vy, T, P, State.Vapor)
@@ -774,12 +787,9 @@ out:
             Dim fcv(n), fcl(n), fcl2(n), Gm, Gv, Gl1, Gl2, _V As Double
 
             If Settings.EnableParallelProcessing Then
-                Dim task1 As Task = New Task(Sub() fcv = proppack.DW_CalcFugCoeff(_Vy, T, P, State.Vapor))
-                Dim task2 As Task = New Task(Sub() fcl = proppack.DW_CalcFugCoeff(_Vx1, T, P, State.Liquid))
-                Dim task3 As Task = New Task(Sub() fcl2 = proppack.DW_CalcFugCoeff(_Vx2, T, P, State.Liquid))
-                task1.Start()
-                task2.Start()
-                task3.Start()
+                Dim task1 As Task = TaskHelper.Run(Sub() fcv = proppack.DW_CalcFugCoeff(_Vy, T, P, State.Vapor))
+                Dim task2 As Task = TaskHelper.Run(Sub() fcl = proppack.DW_CalcFugCoeff(_Vx1, T, P, State.Liquid))
+                Dim task3 As Task = TaskHelper.Run(Sub() fcl2 = proppack.DW_CalcFugCoeff(_Vx2, T, P, State.Liquid))
                 Task.WaitAll(task1, task2, task3)
             Else
                 fcv = proppack.DW_CalcFugCoeff(_Vy, T, P, State.Vapor)
@@ -806,11 +816,13 @@ out:
             Dim errflag As Boolean = True
             Try
                 Return Flash_PH_1(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
+                errflag = False
             Catch ex As Exception
             End Try
             If errflag Then
                 Dim nl As New NestedLoops
                 nl.PTFlashFunction = AddressOf Flash_PT
+                nl.DisableParallelCalcs = True
                 Return nl.Flash_PH_1(Vz, P, H, Tref, PP, False, Nothing)
             End If
 
@@ -883,22 +895,18 @@ out:
 
             If Settings.EnableParallelProcessing Then
 
-                Dim task1 = Task.Factory.StartNew(Sub()
-                                                      Dim ErrRes1 = Herror("PV", 0, P, Vz) 'boiling point
-                                                      Hb = ErrRes1(0)
-                                                      Tb = ErrRes1(1)
-                                                  End Sub,
-                                                      Settings.TaskCancellationTokenSource.Token,
-                                                      TaskCreationOptions.None,
-                                                     Settings.AppTaskScheduler)
-                Dim task2 = Task.Factory.StartNew(Sub()
-                                                      Dim ErrRes2 = Herror("PV", 1, P, Vz) 'dew point
-                                                      Hd = ErrRes2(0)
-                                                      Td = ErrRes2(1)
-                                                  End Sub,
-                                                  Settings.TaskCancellationTokenSource.Token,
-                                                  TaskCreationOptions.None,
-                                                 Settings.AppTaskScheduler)
+                Dim task1 = TaskHelper.Run(Sub()
+                                               Dim ErrRes1 = Herror("PV", 0, P, Vz) 'boiling point
+                                               Hb = ErrRes1(0)
+                                               Tb = ErrRes1(1)
+                                           End Sub,
+                                                      Settings.TaskCancellationTokenSource.Token)
+                Dim task2 = TaskHelper.Run(Sub()
+                                               Dim ErrRes2 = Herror("PV", 1, P, Vz) 'dew point
+                                               Hd = ErrRes2(0)
+                                               Td = ErrRes2(1)
+                                           End Sub,
+                                                  Settings.TaskCancellationTokenSource.Token)
                 Task.WaitAll(task1, task2)
 
             Else
@@ -1021,6 +1029,12 @@ out:
 
             IObj?.Paragraphs.Add(String.Format("The PH Flash algorithm converged in {0} iterations. Final Temperature value: {1} K  Final Vapor Fraction {2}", ecount, T, V))
 
+            If ecount > maxitEXT Then
+                Dim ex As New Exception("PH Flash [NL]: Invalid result: Temperature did not converge." & String.Format(" (T = {0} K, P = {1} Pa, MoleFracs = {2})", T.ToString("N2"), P.ToString("N2"), Vz.ToArrayString()))
+                ex.Data.Add("DetailedDescription", "The Flash Algorithm was unable to converge to a solution.")
+                Throw ex
+            End If
+
             Ki = Vy.DivideY(Vx1)
 
             d2 = Date.Now
@@ -1098,22 +1112,16 @@ out:
 
             If Settings.EnableParallelProcessing Then
 
-                Dim task1 = Task.Factory.StartNew(Sub()
-                                                      Dim ErrRes1 = Serror("PV", 0, S, P, T, Vz) 'boiling point
-                                                      Sb = ErrRes1(0)
-                                                      Tb = ErrRes1(1)
-                                                  End Sub,
-                                                      Settings.TaskCancellationTokenSource.Token,
-                                                      TaskCreationOptions.None,
-                                                     Settings.AppTaskScheduler)
-                Dim task2 = Task.Factory.StartNew(Sub()
-                                                      Dim ErrRes2 = Serror("PV", 1, S, P, T, Vz) 'dew point
-                                                      Sd = ErrRes2(0)
-                                                      Td = ErrRes2(1)
-                                                  End Sub,
-                                                  Settings.TaskCancellationTokenSource.Token,
-                                                  TaskCreationOptions.None,
-                                                 Settings.AppTaskScheduler)
+                Dim task1 = TaskHelper.Run(Sub()
+                                               Dim ErrRes1 = Serror("PV", 0, S, P, T, Vz) 'boiling point
+                                               Sb = ErrRes1(0)
+                                               Tb = ErrRes1(1)
+                                           End Sub, Settings.TaskCancellationTokenSource.Token)
+                Dim task2 = TaskHelper.Run(Sub()
+                                               Dim ErrRes2 = Serror("PV", 1, S, P, T, Vz) 'dew point
+                                               Sd = ErrRes2(0)
+                                               Td = ErrRes2(1)
+                                           End Sub, Settings.TaskCancellationTokenSource.Token)
                 Task.WaitAll(task1, task2)
 
             Else
@@ -1621,6 +1629,7 @@ out:
                     P1 = P1 + Vx1(i) * gamma1(i) * PP.AUX_PVAPi(i, T)
                 Next
                 lnP1 = Log(P1)
+                Dim icount As Integer = 0
                 Do
                     cnt += 1
                     T1 = T
@@ -1644,6 +1653,11 @@ out:
                     Next
                     lnP1 = Log(Pn)
                     F = P - Pn
+
+                    icount += 1
+
+                    If icount > maxit_i Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt"))
+
                 Loop While Abs(P - Pn) > 1
 
                 'Detect symetric oscillations in vicinity to critical point of a component

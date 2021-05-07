@@ -46,127 +46,47 @@ Namespace GraphicObjects.Shapes
 
         Public Overrides Sub CreateConnectors(InCount As Integer, OutCount As Integer)
 
-            Dim myIC1 As New ConnectionPoint
-            myIC1.Position = New Point(X, Y)
-            myIC1.Type = ConType.ConIn
-            myIC1.ConnectorName = "Inlet Port #1"
+            'Creates all the connection points.
 
-            Dim myIC2 As New ConnectionPoint
-            myIC2.Position = New Point(X, Y + 1 * 0.13 * Height)
-            myIC2.Type = ConType.ConIn
-            myIC2.ConnectorName = "Inlet Port #2"
+            If InputConnectors.Count = 0 Then
 
-            Dim myIC3 As New ConnectionPoint
-            myIC3.Position = New Point(X, Y + 2 * 0.13 * Height)
-            myIC3.Type = ConType.ConIn
-            myIC3.ConnectorName = "Inlet Port #3"
+                For i As Integer = 1 To 20
 
-            Dim myIC5 As New ConnectionPoint
-            myIC5.Position = New Point(X, Y + 3 * 0.13 * Height)
-            myIC5.Type = ConType.ConIn
-            myIC5.ConnectorName = "Inlet Port #4"
+                    Dim Con As New ConnectionPoint
+                    Con.Type = ConType.ConIn
+                    InputConnectors.Add(Con)
 
-            Dim myIC6 As New ConnectionPoint
-            myIC6.Position = New Point(X, Y + 4 * 0.13 * Height)
-            myIC6.Type = ConType.ConIn
-            myIC6.ConnectorName = "Inlet Port #5"
+                Next
 
-            Dim myIC7 As New ConnectionPoint
-            myIC7.Position = New Point(X, Y + 5 * 0.13 * Height)
-            myIC7.Type = ConType.ConIn
-            myIC7.ConnectorName = "Inlet Port #6"
+            End If
 
-            Dim myOC1 As New ConnectionPoint
-            myOC1.Position = New Point(X + Width, Y)
-            myOC1.Type = ConType.ConOut
-            myOC1.ConnectorName = "Outlet Port #1"
+            If OutputConnectors.Count = 0 Then
 
-            Dim myOC2 As New ConnectionPoint
-            myOC2.Position = New Point(X + Width, Y + 1 * 0.13 * Height)
-            myOC2.Type = ConType.ConOut
-            myOC2.ConnectorName = "Outlet Port #2"
+                For i As Integer = 1 To 20
 
-            Dim myOC3 As New ConnectionPoint
-            myOC3.Position = New Point(X + Width, Y + 2 * 0.13 * Height)
-            myOC3.Type = ConType.ConOut
-            myOC3.ConnectorName = "Outlet Port #3"
+                    Dim Con As New ConnectionPoint
+                    Con.Type = ConType.ConOut
+                    OutputConnectors.Add(Con)
 
-            Dim myOC5 As New ConnectionPoint
-            myOC5.Position = New Point(X + Width, Y + 3 * 0.13 * Height)
-            myOC5.Type = ConType.ConIn
-            myOC5.ConnectorName = "Outlet Port #4"
+                Next
 
-            Dim myOC6 As New ConnectionPoint
-            myOC6.Position = New Point(X + Width, Y + 4 * 0.13 * Height)
-            myOC6.Type = ConType.ConIn
-            myOC6.ConnectorName = "Outlet Port #5"
-
-            Dim myOC7 As New ConnectionPoint
-            myOC7.Position = New Point(X + Width, Y + 5 * 0.13 * Height)
-            myOC7.Type = ConType.ConIn
-            myOC7.ConnectorName = "Outlet Port #6"
-
-            Dim myIC4 As New ConnectionPoint
-            myIC4.Position = New Point(X, Y)
-            myIC4.Type = ConType.ConEn
-            myIC4.Direction = ConDir.Up
-            myIC4.ConnectorName = "Inlet Energy Port"
-
-            Dim myOC4 As New ConnectionPoint
-            myOC4.Position = New Point(X + Width, Y + Height)
-            myOC4.Type = ConType.ConEn
-            myOC4.Direction = ConDir.Down
-            myOC4.ConnectorName = "Outlet Energy Port"
+            End If
 
             With InputConnectors
-
-                If .Count <> 0 Then
-                    .Item(0).Position = New Point(X, Y)
-                    .Item(1).Position = New Point(X, Y + 1 * 0.13 * Height)
-                    .Item(2).Position = New Point(X, Y + 2 * 0.13 * Height)
-                    .Item(3).Position = New Point(X, Y + 3 * 0.13 * Height)
-                    .Item(4).Position = New Point(X, Y + 4 * 0.13 * Height)
-                    .Item(5).Position = New Point(X, Y + 5 * 0.13 * Height)
-                    .Item(6).Position = New Point(X, Y + Height)
-                Else
-                    .Add(myIC1)
-                    .Add(myIC2)
-                    .Add(myIC3)
-                    .Add(myIC5)
-                    .Add(myIC6)
-                    .Add(myIC7)
-                    .Add(myIC4)
-                End If
-
+                For i As Integer = 0 To InputConnectors.Count - 1
+                    .Item(i).Position = New Point(X, Y + (i + 1) / 20 * Height)
+                    .Item(i).ConnectorName = "#" & (i + 1)
+                Next
             End With
 
             With OutputConnectors
-
-                If .Count <> 0 Then
-                    .Item(0).Position = New Point(X + Width, Y)
-                    .Item(1).Position = New Point(X + Width, Y + 1 * 0.13 * Height)
-                    .Item(2).Position = New Point(X + Width, Y + 2 * 0.13 * Height)
-                    .Item(3).Position = New Point(X + Width, Y + 3 * 0.13 * Height)
-                    .Item(4).Position = New Point(X + Width, Y + 4 * 0.13 * Height)
-                    .Item(5).Position = New Point(X + Width, Y + 5 * 0.13 * Height)
-                    .Item(6).Position = New Point(X + Width, Y + Height)
-                Else
-                    .Add(myOC1)
-                    .Add(myOC2)
-                    .Add(myOC3)
-                    .Add(myOC5)
-                    .Add(myOC6)
-                    .Add(myOC7)
-                    .Add(myOC4)
-                End If
-
+                For i As Integer = 0 To OutputConnectors.Count - 1
+                    .Item(i).Position = New Point(X + Width, Y + (i + 1) / 20 * Height)
+                    .Item(i).ConnectorName = "#" & (i - 1)
+                Next
             End With
 
-            Me.EnergyConnector.Position = New Point(X + 0.5 * Width, Y + Height)
-            Me.EnergyConnector.Type = ConType.ConEn
-            Me.EnergyConnector.Direction = ConDir.Up
-            Me.EnergyConnector.ConnectorName = "Energy Stream"
-            Me.EnergyConnector.Active = False
+            EnergyConnector.Active = False
 
         End Sub
 

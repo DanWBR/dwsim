@@ -36,7 +36,7 @@ Public Class FormUNIFACRegression
 
     Inherits Form
 
-    Friend mycase As New UNIFACIPRegressionCase
+    Public mycase As New UNIFACIPRegressionCase
 
     Public cv As SystemsOfUnits.Converter
     Public ci As Globalization.CultureInfo = Globalization.CultureInfo.CurrentUICulture

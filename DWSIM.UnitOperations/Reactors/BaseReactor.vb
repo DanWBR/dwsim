@@ -190,7 +190,7 @@ Namespace Reactors
             Dim scripttext = script.ScriptText
 
             scope = engine.CreateScope()
-            scope.SetVariable("Flowsheet", Me)
+            scope.SetVariable("Flowsheet", rc.FlowSheet)
             scope.SetVariable("reaction", rxn)
             scope.SetVariable("reactor", rc)
             scope.SetVariable("T", T)

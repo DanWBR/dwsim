@@ -41,7 +41,7 @@ Namespace MathEx.Optimization
 
         Private FunctionValues As List(Of Double)
 
-        Public ReadOnly Property Iterations
+        Public ReadOnly Property Iterations As Integer
             Get
                 Return _Iterations
             End Get

@@ -90,12 +90,12 @@ Public Class EditingForm_Column
                 chkNoCondenser.Checked = DirectCast(SimObject, DistillationColumn).ReboiledAbsorber
                 chkNoReboiler.Checked = DirectCast(SimObject, DistillationColumn).RefluxedAbsorber
             ElseIf TypeOf SimObject Is AbsorptionColumn Then
-                TabControl1.TabPages.Remove(TabCondenser)
-                TabControl1.TabPages.Remove(TabReboiler)
+                TabContainerSpecification.TabPages.Remove(TabCondenser)
+                TabContainerSpecification.TabPages.Remove(TabReboiler)
             ElseIf TypeOf SimObject Is RefluxedAbsorber Then
-                TabControl1.TabPages.Remove(TabReboiler)
+                TabContainerSpecification.TabPages.Remove(TabReboiler)
             ElseIf TypeOf SimObject Is ReboiledAbsorber Then
-                TabControl1.TabPages.Remove(TabCondenser)
+                TabContainerSpecification.TabPages.Remove(TabCondenser)
             End If
 
             'parameters
@@ -238,6 +238,10 @@ Public Class EditingForm_Column
                 Case ColType.DistillationColumn
                     gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("DCCondenserDuty"), su.Converter.ConvertFromSI(units.heatflow, .CondenserDuty).ToString(nf), units.heatflow})
                     gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("DCReboilerDuty"), su.Converter.ConvertFromSI(units.heatflow, .ReboilerDuty).ToString(nf), units.heatflow})
+                    gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("CondenserSpecValue"), su.Converter.ConvertFromSI(.Specs("C").SpecUnit, .Specs("C").SpecValue).ToString(nf), .Specs("C").SpecUnit})
+                    gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("CondenserCalcValue"), su.Converter.ConvertFromSI(.Specs("C").SpecUnit, .Specs("C").CalculatedValue).ToString(nf), .Specs("C").SpecUnit})
+                    gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("ReboilerSpecValue"), su.Converter.ConvertFromSI(.Specs("R").SpecUnit, .Specs("R").SpecValue).ToString(nf), .Specs("R").SpecUnit})
+                    gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("ReboilerCalcValue"), su.Converter.ConvertFromSI(.Specs("R").SpecUnit, .Specs("R").CalculatedValue).ToString(nf), .Specs("R").SpecUnit})
                 Case ColType.AbsorptionColumn
                 Case ColType.ReboiledAbsorber
                     gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("DCReboilerDuty"), su.Converter.ConvertFromSI(units.heatflow, .ReboilerDuty).ToString(nf), units.heatflow})
@@ -245,7 +249,6 @@ Public Class EditingForm_Column
                     gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("DCCondenserDuty"), su.Converter.ConvertFromSI(units.heatflow, .CondenserDuty).ToString(nf), units.heatflow})
             End Select
             gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("DCILIts"), .ic, ""})
-            gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("DCELIts"), .ec, ""})
 
             btnResults.Enabled = .x0.Count > 0
 
@@ -263,7 +266,7 @@ Public Class EditingForm_Column
     End Sub
 
     Private Sub btnConfigurePP_Click(sender As Object, e As EventArgs) Handles btnConfigurePP.Click
-        SimObject.FlowSheet.PropertyPackages.Values.Where(Function(x) x.Tag = cbPropPack.SelectedItem.ToString).SingleOrDefault.DisplayEditingForm()
+        SimObject.FlowSheet.PropertyPackages.Values.Where(Function(x) x.Tag = cbPropPack.SelectedItem.ToString).SingleOrDefault.DisplayGroupedEditingForm()
     End Sub
 
     Private Sub lblTag_TextChanged(sender As Object, e As EventArgs) Handles lblTag.TextChanged
@@ -285,7 +288,11 @@ Public Class EditingForm_Column
     End Sub
 
     Private Sub chkActive_CheckedChanged(sender As Object, e As EventArgs) Handles chkActive.CheckedChanged
-        If Loaded Then SimObject.GraphicObject.Active = chkActive.Checked
+        If Loaded Then
+            SimObject.GraphicObject.Active = chkActive.Checked
+            SimObject.FlowSheet.UpdateInterface()
+            UpdateInfo()
+        End If
     End Sub
 
     Private Sub tb_TextChanged(sender As Object, e As EventArgs)

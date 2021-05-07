@@ -3141,7 +3141,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
             dogpu = My.Settings.EnableGPUProcessing
         Else
             doparallel = True
-        dogpu = False
+            dogpu = False
         End If
 
         If dogpu Then Calculator.InitComputeDevice()
@@ -3292,7 +3292,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
 
     End Sub
 
-    Private Sub ToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem1.Click, ToolStripMenuItem2.Click, _
+    Private Sub ToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem1.Click, ToolStripMenuItem2.Click,
     ToolStripMenuItem3.Click, ToolStripMenuItem4.Click, ToolStripMenuItem5.Click, ToolStripMenuItem6.Click, ToolStripMenuItem7.Click
 
         Dim P, T, x11, x12, y1 As Double, comp1, comp2, model As String
@@ -3650,8 +3650,8 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                 Next
                 Dim obj As Double
                 Dim status As IpoptReturnCode
-                Using problem As New Ipopt(initval2.Length, lconstr2, uconstr2, 0, Nothing, Nothing, _
-                 0, 0, AddressOf eval_f, AddressOf eval_g, _
+                Using problem As New Ipopt(initval2.Length, lconstr2, uconstr2, 0, Nothing, Nothing,
+                 0, 0, AddressOf eval_f, AddressOf eval_g,
                  AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
                     problem.AddOption("tol", currcase.tolerance)
                     problem.AddOption("max_iter", Convert.ToInt32(currcase.maxits))

@@ -284,7 +284,6 @@ Namespace PropertyPackages.Auxiliary
             IObj?.Paragraphs.Add(String.Format("<h2>Calculated Intermediate Parameters</h2>"))
 
             Dim doparallel As Boolean = Settings.EnableParallelProcessing
-            Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism, .TaskScheduler = Settings.AppTaskScheduler}
 
             Dim n As Integer = Vx.Length - 1
 
@@ -349,10 +348,10 @@ Namespace PropertyPackages.Auxiliary
             Loop Until i = n + 1
 
             If doparallel And n > 10 Then
-                Parallel.For(0, n + 1, poptions, Sub(ip)
-                                                     Gij(ip) = alpha12(ip).NegateY.MultiplyY(tau_ij(ip)).ExpY
-                                                     Gji(ip) = alpha12(ip).NegateY.MultiplyY(tau_ji(ip)).ExpY
-                                                 End Sub)
+                Parallel.For(0, n + 1, Sub(ip)
+                                           Gij(ip) = alpha12(ip).NegateY.MultiplyY(tau_ij(ip)).ExpY
+                                           Gji(ip) = alpha12(ip).NegateY.MultiplyY(tau_ji(ip)).ExpY
+                                       End Sub)
             Else
                 For i = 0 To n
                     Gij(i) = alpha12(i).NegateY.MultiplyY(tau_ij(i)).ExpY
@@ -368,10 +367,10 @@ Namespace PropertyPackages.Auxiliary
             IObj?.Paragraphs.Add(String.Format("alpha12: {0}", alpha12.ToMathArrayString))
 
             If doparallel And n > 10 Then
-                Parallel.For(0, n + 1, poptions, Sub(ip)
-                                                     S(ip) = Vx.MultiplyY(Gji(ip)).SumY
-                                                     C(ip) = Vx.MultiplyY(Gji(ip)).MultiplyY(tau_ji(ip)).SumY
-                                                 End Sub)
+                Parallel.For(0, n + 1, Sub(ip)
+                                           S(ip) = Vx.MultiplyY(Gji(ip)).SumY
+                                           C(ip) = Vx.MultiplyY(Gji(ip)).MultiplyY(tau_ji(ip)).SumY
+                                       End Sub)
             Else
                 For i = 0 To n
                     S(i) = Vx.MultiplyY(Gji(i)).SumY
@@ -385,9 +384,9 @@ Namespace PropertyPackages.Auxiliary
             lnVg = C.DivideY(S)
 
             If doparallel And n > 10 Then
-                Parallel.For(0, n + 1, poptions, Sub(ip)
-                                                     lnVg(ip) += Vx.MultiplyY(Gij(ip)).MultiplyY(tau_ij(ip).SubtractY(C.DivideY(S))).DivideY(S).SumY
-                                                 End Sub)
+                Parallel.For(0, n + 1, Sub(ip)
+                                           lnVg(ip) += Vx.MultiplyY(Gij(ip)).MultiplyY(tau_ij(ip).SubtractY(C.DivideY(S))).DivideY(S).SumY
+                                       End Sub)
             Else
                 For i = 0 To n
                     lnVg(i) += Vx.MultiplyY(Gij(i)).MultiplyY(tau_ij(i).SubtractY(C.DivideY(S))).DivideY(S).SumY

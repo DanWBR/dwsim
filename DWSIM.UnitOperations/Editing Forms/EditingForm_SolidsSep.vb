@@ -244,7 +244,11 @@ Public Class EditingForm_SolidsSep
     End Sub
 
     Private Sub chkActive_CheckedChanged(sender As Object, e As EventArgs) Handles chkActive.CheckedChanged
-        If Loaded Then SimObject.GraphicObject.Active = chkActive.Checked
+        If Loaded Then
+            SimObject.GraphicObject.Active = chkActive.Checked
+            SimObject.FlowSheet.UpdateInterface()
+            UpdateInfo()
+        End If
     End Sub
 
     Private Sub TrackBar1_Scroll(sender As Object, e As EventArgs) Handles TrackBar1.Scroll

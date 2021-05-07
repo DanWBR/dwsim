@@ -446,6 +446,8 @@ Namespace Reactors
 
             If Double.IsNaN(dy.Sum) Then Throw New Exception("PFR ODE solver failed to find a solution.")
 
+            FlowSheet.CheckStatus()
+
             Return dy
 
         End Function
@@ -849,9 +851,9 @@ Namespace Reactors
                         Case PhaseName.Vapor
                             Qf = ims.Phases(2).Properties.volumetric_flow.GetValueOrDefault()
                         Case PhaseName.Liquid
-                            Qf = ims.Phases(3).Properties.volumetric_flow.GetValueOrDefault()
+                            Qf = ims.Phases(1).Properties.volumetric_flow.GetValueOrDefault()
                         Case PhaseName.Mixture
-                            Qf = ims.Phases(3).Properties.volumetric_flow.GetValueOrDefault() +
+                            Qf = ims.Phases(1).Properties.volumetric_flow.GetValueOrDefault() +
                                 ims.Phases(2).Properties.volumetric_flow.GetValueOrDefault()
                     End Select
                 End If
@@ -881,7 +883,7 @@ Namespace Reactors
 
                             Select Case rxn.ReactionPhase
                                 Case PhaseName.Liquid
-                                    m0 = ims.Phases(3).Compounds(sb.CompName).MolarFlow.GetValueOrDefault
+                                    m0 = ims.Phases(1).Compounds(sb.CompName).MolarFlow.GetValueOrDefault
                                 Case PhaseName.Vapor
                                     m0 = ims.Phases(2).Compounds(sb.CompName).MolarFlow.GetValueOrDefault
                                 Case PhaseName.Mixture

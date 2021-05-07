@@ -393,7 +393,7 @@ Namespace UnitOperations
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public fd As DynamicsPropertyEditor
 
-        Public Sub DisplayDynamicsEditForm() Implements ISimulationObject.DisplayDynamicsEditForm
+        Public Overridable Sub DisplayDynamicsEditForm() Implements ISimulationObject.DisplayDynamicsEditForm
 
             If fd Is Nothing Then
                 fd = New DynamicsPropertyEditor With {.SimObject = Me}

@@ -193,4 +193,10 @@
   <data name="Column13.Width" type="System.Int32, mscorlib">
     <value>59</value>
   </data>
+  <data name="Column15.HeaderText" xml:space="preserve">
+    <value>External Temperature</value>
+  </data>
+  <data name="Column15.Width" type="System.Int32, mscorlib">
+    <value>103</value>
+  </data>
 </root>

@@ -33,7 +33,7 @@ Public Class ScriptEditorControl
 
         Me.txtScript.Tag = 1
 
-        cbLinkedObject.Items.AddRange(New String() {"Simulation", "Solver"})
+        cbLinkedObject.Items.AddRange(New String() {"Simulation", "Solver", "Integrator"})
         cbLinkedEvent.Items.AddRange(New String() {"Simulation Opened", "Simulation Saved", "Simulation Closed", "1 min. Timer", "5 min. Timer", "15 min. Timer", "30 min. Timer", "60 min. Timer"})
 
         For Each obj In form.SimulationObjects.Values
@@ -63,6 +63,9 @@ Public Class ScriptEditorControl
             Case 1
                 cbLinkedEvent.Items.Clear()
                 cbLinkedEvent.Items.AddRange(New String() {"Solver Started", "Solver Finished", "Recycle Loop"})
+            Case 2
+                cbLinkedEvent.Items.Clear()
+                cbLinkedEvent.Items.AddRange(New String() {"Integrator Started", "Integrator Finished", "Integrator Error"})
             Case Else
                 cbLinkedEvent.Items.Clear()
                 cbLinkedEvent.Items.AddRange(New String() {"Object Calculation Started", "Object Calculation Finished", "Object Calculation Error"})

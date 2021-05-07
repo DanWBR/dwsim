@@ -15,6 +15,8 @@
 '
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
+'
+'    Reference: https://www.phasediagram.dk/programming-guide-for-the-extended-uniquac-model/
 
 Imports FileHelpers
 Imports System.Math

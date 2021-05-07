@@ -59,6 +59,7 @@ Namespace Enums
             Simulation = 0
             Solver = 1
             FlowsheetObject = 2
+            Integrator = 3
         End Enum
 
         Public Enum EventType
@@ -76,6 +77,9 @@ Namespace Enums
             SimulationTimer15 = 11
             SimulationTimer30 = 12
             SimulationTimer60 = 13
+            IntegratorStarted = 14
+            IntegratorFinished = 15
+            IntegratorError = 16
         End Enum
 
     End Class
@@ -279,6 +283,8 @@ Namespace Enums
 
         HandleSolidsInDefaultEqCalcMode = 27
 
+        UseIOFlash = 28
+
     End Enum
 
     Public Enum FlashCalculationType
@@ -481,6 +487,33 @@ Namespace Enums
 
         SpreadsheetRange = 0
         FlowsheetObject = 1
+
+    End Enum
+
+    Public Enum ExtenderLevel
+
+        MainWindow = 0
+        FlowsheetWindow = 1
+
+    End Enum
+
+    Public Enum ExtenderCategory
+
+        File = 0
+        Edit = 1
+        Settings = 2
+        Tools = 3
+        Utilities = 4
+        Dynamics = 5
+        Optimization = 6
+        Results = 7
+        View = 8
+        Help = 9
+        NewItem = 10
+        FlowsheetSurfaceSelected = 11
+        FlowsheetSurfaceNotSelected = 12
+        ToolStrip = 13
+        InitializationScript = 14
 
     End Enum
 

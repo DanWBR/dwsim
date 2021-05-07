@@ -33,24 +33,11 @@ Public Class FormOptions
     Private Sub FormOptions_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         Dim i As Integer = 0
-        Me.cbParallelism.Items.Clear()
-        Me.cbParallelism.Items.Add("Default")
-        For i = 1 To System.Environment.ProcessorCount
-            Me.cbParallelism.Items.Add(i.ToString)
-        Next
-        If My.Settings.MaxDegreeOfParallelism = -1 Then
-            Me.cbParallelism.SelectedIndex = 0
-        ElseIf My.Settings.MaxDegreeOfParallelism <= System.Environment.ProcessorCount Then
-            Me.cbParallelism.SelectedItem = My.Settings.MaxDegreeOfParallelism.ToString
-        Else
-            Me.cbParallelism.SelectedIndex = Me.cbParallelism.Items.Count - 1
-        End If
 
         Me.chkEnableParallelCalcs.Checked = My.Settings.EnableParallelProcessing
         Me.chkEnableGPUProcessing.Checked = My.Settings.EnableGPUProcessing
         Me.cbGPU.Enabled = Me.chkEnableGPUProcessing.Checked
         Me.tbGPUCaps.Enabled = Me.chkEnableGPUProcessing.Checked
-        Me.cbParallelism.Enabled = Me.chkEnableParallelCalcs.Checked
         Me.chkEnableSIMD.Checked = My.Settings.UseSIMDExtensions
 
         Me.chkEnableInspector.Checked = My.Settings.InspectorEnabled
@@ -85,7 +72,10 @@ Public Class FormOptions
 
         'solver
 
+        If My.Settings.SolverMode = 0 Then My.Settings.SolverMode = 1
+
         cbSolverMode.SelectedIndex = My.Settings.SolverMode
+
         tbServiceBusNamespace.Text = My.Settings.ServiceBusConnectionString
         tbSolverTimeout.Text = My.Settings.SolverTimeoutSeconds
         cbDebugLevel.SelectedIndex = My.Settings.DebugLevel
@@ -203,12 +193,12 @@ Public Class FormOptions
     Private Sub KryptonCheckBox6_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonCheckBox6.CheckedChanged
         My.Settings.BackupActivated = Me.KryptonCheckBox6.Checked
         If Me.KryptonCheckBox6.Checked Then
-            FormMain.TimerBackup.Enabled = True
+            My.Application.MainWindowForm.TimerBackup.Enabled = True
             Me.KryptonButton1.Enabled = True
             Me.KryptonTextBox1.Enabled = True
             Me.TrackBar1.Enabled = True
         Else
-            FormMain.TimerBackup.Enabled = False
+            My.Application.MainWindowForm.TimerBackup.Enabled = False
             Me.KryptonButton1.Enabled = False
             Me.KryptonTextBox1.Enabled = False
             Me.TrackBar1.Enabled = False
@@ -230,7 +220,7 @@ Public Class FormOptions
             Me.KryptonLabel3.Text = TrackBar1.Value & " " & DWSIM.App.GetLocalString("minutos")
         End If
         My.Settings.BackupInterval = TrackBar1.Value
-        FormMain.TimerBackup.Interval = TrackBar1.Value * 60000
+        My.Application.MainWindowForm.TimerBackup.Interval = TrackBar1.Value * 60000
     End Sub
 
     Private Sub Button7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button7.Click
@@ -243,16 +233,16 @@ Public Class FormOptions
                 If componentes.Length > 0 Then
                     If Me.cbudb.Checked Then
                         For Each c As ConstantProperties In componentes
-                            If Not FormMain.AvailableComponents.ContainsKey(c.Name) Then
-                                FormMain.AvailableComponents.Add(c.Name, c)
+                            If Not My.Application.MainWindowForm.AvailableComponents.ContainsKey(c.Name) Then
+                                My.Application.MainWindowForm.AvailableComponents.Add(c.Name, c)
                             Else
-                                FormMain.AvailableComponents(c.Name) = c
+                                My.Application.MainWindowForm.AvailableComponents(c.Name) = c
                             End If
                         Next
                     Else
                         For Each c As ConstantProperties In componentes
-                            If Not FormMain.AvailableComponents.ContainsKey(c.Name) Then
-                                FormMain.AvailableComponents.Add(c.Name, c)
+                            If Not My.Application.MainWindowForm.AvailableComponents.ContainsKey(c.Name) Then
+                                My.Application.MainWindowForm.AvailableComponents.Add(c.Name, c)
                             End If
                         Next
                     End If
@@ -342,7 +332,7 @@ Public Class FormOptions
         End If
 
         'chemsep database
-        If FormMain.loadedCSDB Then
+        If My.Application.MainWindowForm.loadedCSDB Then
             name = "ChemSep   "
             path2 = My.Settings.ChemSepDatabasePath
             If File.Exists(path2) Then
@@ -438,17 +428,7 @@ Public Class FormOptions
 
     Private Sub chkEnableParallelCalcs_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkEnableParallelCalcs.CheckedChanged
         My.Settings.EnableParallelProcessing = Me.chkEnableParallelCalcs.Checked
-        Me.cbParallelism.Enabled = Me.chkEnableParallelCalcs.Checked
         Settings.EnableParallelProcessing = My.Settings.EnableParallelProcessing
-    End Sub
-
-    Private Sub cbParallelism_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cbParallelism.SelectedIndexChanged
-        If Me.cbParallelism.SelectedIndex = 0 Then
-            My.Settings.MaxDegreeOfParallelism = -1
-        Else
-            My.Settings.MaxDegreeOfParallelism = Me.cbParallelism.SelectedItem
-        End If
-        Settings.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism
     End Sub
 
     Private Sub cbGPU_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cbGPU.SelectedIndexChanged
@@ -494,19 +474,15 @@ Public Class FormOptions
     Private Sub cbSolverMode_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSolverMode.SelectedIndexChanged
         My.Settings.SolverMode = cbSolverMode.SelectedIndex
         Select Case cbSolverMode.SelectedIndex
-            Case 0
-                GroupBoxAzureConfig.Visible = False
-                GroupBoxNetworkComputerConfig.Visible = False
-                tbSolverTimeout.Enabled = False
-            Case 1, 2
+            Case 0, 1
                 GroupBoxAzureConfig.Visible = False
                 GroupBoxNetworkComputerConfig.Visible = False
                 tbSolverTimeout.Enabled = True
-            Case 3
+            Case 2
                 GroupBoxAzureConfig.Visible = True
                 GroupBoxNetworkComputerConfig.Visible = False
                 tbSolverTimeout.Enabled = True
-            Case 4
+            Case 3
                 GroupBoxAzureConfig.Visible = False
                 GroupBoxNetworkComputerConfig.Visible = True
                 tbSolverTimeout.Enabled = True
@@ -631,7 +607,7 @@ Public Class FormOptions
     Private Sub chkEnableInspector_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableInspector.CheckedChanged
         My.Settings.InspectorEnabled = chkEnableInspector.Checked
         Settings.InspectorEnabled = My.Settings.InspectorEnabled
-        FormMain.tsbInspector.Checked = chkEnableInspector.Checked
+        My.Application.MainWindowForm.tsbInspector.Checked = chkEnableInspector.Checked
     End Sub
 
     Private Sub cbRenderer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbRenderer.SelectedIndexChanged

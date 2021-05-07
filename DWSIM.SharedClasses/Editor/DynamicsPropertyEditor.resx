@@ -130,16 +130,19 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="PropertiesLayout.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 16</value>
+    <value>6, 31</value>
+  </data>
+  <data name="PropertiesLayout.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 6, 6, 6</value>
   </data>
   <data name="PropertiesLayout.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 5, 5, 5</value>
+    <value>10, 10, 10, 10</value>
   </data>
   <data name="PropertiesLayout.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="PropertiesLayout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>376, 380</value>
+    <value>752, 761</value>
   </data>
   <data name="PropertiesLayout.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -163,10 +166,16 @@
     <value>Fill</value>
   </data>
   <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 5</value>
+    <value>10, 10</value>
+  </data>
+  <data name="GroupBox2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 6, 6, 6</value>
+  </data>
+  <data name="GroupBox2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 6, 6, 6</value>
   </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>382, 399</value>
+    <value>764, 798</value>
   </data>
   <data name="GroupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -190,16 +199,19 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>96, 96</value>
+    <value>192, 192</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>392, 409</value>
+    <value>784, 818</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 6, 6, 6</value>
+  </data>
   <data name="$this.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 5, 5, 5</value>
+    <value>10, 10, 10, 10</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>DynamicsPropertyEditor</value>

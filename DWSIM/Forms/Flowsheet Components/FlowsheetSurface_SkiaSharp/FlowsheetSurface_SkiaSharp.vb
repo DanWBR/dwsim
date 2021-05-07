@@ -81,6 +81,40 @@ Public Class FlowsheetSurface_SkiaSharp
 
         AddHandler CopyFromTSMI.DropDownItemClicked, AddressOf MaterialStreamClickHandler
 
+        'load context menu extenders
+        For Each extender In My.Application.MainWindowForm.Extenders.Values
+            Try
+                If extender.Level = ExtenderLevel.FlowsheetWindow Then
+                    For Each item In extender.Collection
+                        Dim exttsmi As New ToolStripMenuItem
+                        exttsmi.Text = item.DisplayText
+                        exttsmi.Image = item.DisplayImage
+                        AddHandler exttsmi.Click, Sub(s2, e2)
+                                                      item.SetMainWindow(My.Application.MainWindowForm)
+                                                      item.SetFlowsheet(Flowsheet)
+                                                      item.Run()
+                                                  End Sub
+                        Select Case extender.Category
+                            Case ExtenderCategory.FlowsheetSurfaceNotSelected
+                                If item.InsertAtPosition > 0 Then
+                                    CMS_NoSel.Items.Insert(item.InsertAtPosition, exttsmi)
+                                Else
+                                    CMS_NoSel.Items.Add(exttsmi)
+                                End If
+                            Case ExtenderCategory.FlowsheetSurfaceSelected
+                                If item.InsertAtPosition > 0 Then
+                                    CMS_Sel.Items.Insert(item.InsertAtPosition, exttsmi)
+                                Else
+                                    CMS_Sel.Items.Add(exttsmi)
+                                End If
+                        End Select
+                    Next
+                End If
+            Catch ex As Exception
+            End Try
+        Next
+
+
     End Sub
 
     Public Function ReturnForm(ByVal str As String) As IDockContent

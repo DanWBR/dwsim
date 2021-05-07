@@ -169,7 +169,7 @@ Public Class EditingForm_ShortcutColumn
     End Sub
 
     Private Sub btnConfigurePP_Click(sender As Object, e As EventArgs) Handles btnConfigurePP.Click
-        SimObject.FlowSheet.PropertyPackages.Values.Where(Function(x) x.Tag = cbPropPack.SelectedItem.ToString).SingleOrDefault.DisplayEditingForm()
+        SimObject.FlowSheet.PropertyPackages.Values.Where(Function(x) x.Tag = cbPropPack.SelectedItem.ToString).SingleOrDefault.DisplayGroupedEditingForm()
     End Sub
 
     Private Sub lblTag_TextChanged(sender As Object, e As EventArgs) Handles lblTag.TextChanged
@@ -317,7 +317,11 @@ Public Class EditingForm_ShortcutColumn
     End Sub
 
     Private Sub chkActive_CheckedChanged(sender As Object, e As EventArgs) Handles chkActive.CheckedChanged
-        If Loaded Then SimObject.GraphicObject.Active = chkActive.Checked
+        If Loaded Then
+            SimObject.GraphicObject.Active = chkActive.Checked
+            SimObject.FlowSheet.UpdateInterface()
+            UpdateInfo()
+        End If
     End Sub
 
     Private Sub btnCreateAndConnectInlet1_Click(sender As Object, e As EventArgs) Handles btnCreateAndConnectInlet1.Click, btnCreateAndConnectOutlet1.Click, btnCreateAndConnectOutlet2.Click, btnCreateAndConnectEnergy1.Click, btnCreateAndConnectEnergy2.Click

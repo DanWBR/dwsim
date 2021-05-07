@@ -82,7 +82,11 @@ Namespace GraphicObjects.Shapes
 
             Dim aPen As New SKPaint()
             With aPen
-                .Color = SKColors.Blue
+                If Active Then
+                    .Color = SKColors.Blue
+                Else
+                    .Color = SKColors.Gray
+                End If
                 .StrokeWidth = LineWidth
                 .IsStroke = True
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
@@ -98,7 +102,11 @@ Namespace GraphicObjects.Shapes
 
             Dim myPen As New SKPaint()
             With myPen
-                .Color = SKColors.LightBlue
+                If Active Then
+                    .Color = SKColors.LightBlue
+                Else
+                    .Color = SKColors.LightGray
+                End If
                 .StrokeWidth = LineWidth
                 .IsStroke = False
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
@@ -108,7 +116,11 @@ Namespace GraphicObjects.Shapes
 
             Dim myPen2 As New SKPaint()
             With myPen2
-                .Color = SKColors.Blue
+                If Active Then
+                    .Color = SKColors.Blue
+                Else
+                    .Color = SKColors.Gray
+                End If
                 .StrokeWidth = LineWidth
                 .IsStroke = True
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
@@ -121,7 +133,11 @@ Namespace GraphicObjects.Shapes
             With tpaint
                 .TextSize = 18.0#
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Color = SKColors.Blue
+                If Active Then
+                    .Color = SKColors.Blue
+                Else
+                    .Color = SKColors.Gray
+                End If
                 .IsStroke = False
                 .Typeface = DefaultTypeFace
             End With

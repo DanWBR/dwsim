@@ -17,8 +17,8 @@ Public Class SimulationObjectsPanel
 
         'add chemsep model
 
-        Dim csmodel = FormMain.aTypeList.Where(Function(x) x.FullName.ToLower.Contains("distillationcolumn")).SingleOrDefault
-        Dim comodel = FormMain.aTypeList.Where(Function(x) x.FullName.ToLower.Contains("capeopenuo")).SingleOrDefault
+        Dim csmodel = My.Application.MainWindowForm.aTypeList.Where(Function(x) x.FullName.ToLower.Contains("distillationcolumn")).SingleOrDefault
+        Dim comodel = My.Application.MainWindowForm.aTypeList.Where(Function(x) x.FullName.ToLower.Contains("capeopenuo")).SingleOrDefault
         Dim csobj = DirectCast(Activator.CreateInstance(csmodel), Interfaces.ISimulationObject)
         Dim coobj = DirectCast(Activator.CreateInstance(comodel), Interfaces.ISimulationObject)
         If Not Flowsheet.MobileCompatibilityMode Then
@@ -36,7 +36,7 @@ Public Class SimulationObjectsPanel
 
         'add other models
 
-        For Each item In FormMain.aTypeList
+        For Each item In My.Application.MainWindowForm.aTypeList
             If Not item.IsAbstract Then
                 Dim obj = DirectCast(Activator.CreateInstance(item), Interfaces.ISimulationObject)
                 If Not Flowsheet.MobileCompatibilityMode Then
@@ -59,7 +59,7 @@ Public Class SimulationObjectsPanel
             End If
         Next
 
-        For Each item In FormMain.ExternalUnitOperations
+        For Each item In My.Application.MainWindowForm.ExternalUnitOperations
             Dim obj = item.Value
             If Not Flowsheet.MobileCompatibilityMode Then
                 add = obj.GetType.GetProperty("Visible").GetValue(obj)

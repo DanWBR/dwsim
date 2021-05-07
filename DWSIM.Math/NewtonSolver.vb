@@ -130,7 +130,7 @@ Namespace MathEx.Optimization
 
                 If success Then
 
-                    If Common.SumSqr(dx) < Tolerance Then Exit Do
+                    'If Common.SumSqr(dx) < Tolerance Then Exit Do
 
                     'this call to the brent solver calculates the damping factor which minimizes the error (fval).
 

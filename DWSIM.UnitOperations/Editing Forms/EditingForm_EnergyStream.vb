@@ -239,7 +239,11 @@ Public Class EditingForm_EnergyStream
     End Sub
 
     Private Sub chkActive_CheckedChanged(sender As Object, e As EventArgs) Handles chkActive.CheckedChanged
-        If Loaded Then SimObject.GraphicObject.Active = chkActive.Checked
+        If Loaded Then
+            SimObject.GraphicObject.Active = chkActive.Checked
+            SimObject.FlowSheet.UpdateInterface()
+            UpdateInfo()
+        End If
     End Sub
 
     Private Sub lblTag_KeyPress(sender As Object, e As KeyEventArgs) Handles lblTag.KeyUp

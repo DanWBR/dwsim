@@ -323,7 +323,7 @@ Namespace Reactors
 
                                           Select Case rxn.ReactionPhase
                                               Case PhaseName.Liquid
-                                                  m0 = ims.Phases(3).Properties.molarflow.GetValueOrDefault
+                                                  m0 = ims.Phases(1).Properties.molarflow.GetValueOrDefault
                                                   nif = ims.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Liquid).MultiplyConstY(m0)
                                               Case PhaseName.Vapor
                                                   m0 = ims.Phases(2).Properties.molarflow.GetValueOrDefault
@@ -593,6 +593,8 @@ Namespace Reactors
             Vy = tmp.GetVaporPhaseMoleFractions
             Vs = tmp.GetSolidPhaseMoleFractions
 
+            Dim Hv As Double
+
             Dim ids = ims.PropertyPackage.RET_VNAMES().ToList
 
             Dim ms As MaterialStream
@@ -620,7 +622,6 @@ Namespace Reactors
                     .SpecType = StreamSpec.Temperature_and_Pressure
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
-                    .Phases(0).Properties.enthalpy = H / wv
                     Dim comp As BaseClasses.Compound
                     For Each comp In .Phases(0).Compounds.Values
                         If xv = 0.0# Then
@@ -631,6 +632,9 @@ Namespace Reactors
                             comp.MassFraction = Vwy(ids.IndexOf(comp.Name))
                         End If
                     Next
+                    .PropertyPackage.CurrentMaterialStream = ms
+                    Hv = .PropertyPackage.DW_CalcEnthalpy(ms.GetOverallComposition(), T, P, PropertyPackages.State.Vapor)
+                    .Phases(0).Properties.enthalpy = Hv
                     .Phases(0).Properties.massflow = W * wv
                     .Phases(0).Properties.massfraction = 1.0#
                     .Phases(0).Properties.molarfraction = 1.0#
@@ -644,7 +648,6 @@ Namespace Reactors
                     .SpecType = StreamSpec.Temperature_and_Pressure
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
-                    If wv < 1.0# Then .Phases(0).Properties.enthalpy = H / (1 - wv) Else .Phases(0).Properties.enthalpy = 0.0#
                     Dim comp As BaseClasses.Compound
                     For Each comp In .Phases(0).Compounds.Values
                         If (xl + xs) = 0.0# Then
@@ -655,6 +658,7 @@ Namespace Reactors
                             comp.MassFraction = (Vwx(ids.IndexOf(comp.Name)) * wtotalx + Vws(ids.IndexOf(comp.Name)) * wtotalS) / (wtotalx + wtotalS)
                         End If
                     Next
+                    .Phases(0).Properties.enthalpy = (H - Hv * wv) / (1 - wv)
                     .Phases(0).Properties.massflow = W * (1 - wv)
                     .Phases(0).Properties.massfraction = 1.0#
                     .Phases(0).Properties.molarfraction = 1.0#

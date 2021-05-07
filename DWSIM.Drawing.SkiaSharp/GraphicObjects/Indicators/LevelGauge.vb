@@ -91,9 +91,9 @@ Namespace GraphicObjects
 
             Dim nf = Owner.GetFlowsheet.FlowsheetOptions.NumberFormat
 
-            Dim minvaltext = (owneri.MinimumValue * multiplier).ToString("N0")
-            Dim maxvaltext = (owneri.MaximumValue * multiplier).ToString("N0")
-            Dim valtext = (currentvalue * multiplier).ToString("N0")
+            Dim minvaltext = (owneri.MinimumValue * multiplier).ToString("N2")
+            Dim maxvaltext = (owneri.MaximumValue * multiplier).ToString("N2")
+            Dim valtext = (currentvalue * multiplier).ToString("N2")
 
             Dim origin = X + w * 0.3
 

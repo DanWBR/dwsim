@@ -20,8 +20,7 @@ Namespace My
     ' Solution Explorer), and make changes on the Application tab.
     '
     Partial Friend Class MyApplication
-        
-        <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
+
         Public Sub New()
             MyBase.New(Global.Microsoft.VisualBasic.ApplicationServices.AuthenticationMode.Windows)
             Me.IsSingleInstance = false
@@ -29,15 +28,15 @@ Namespace My
             Me.SaveMySettingsOnExit = true
             Me.ShutDownStyle = Global.Microsoft.VisualBasic.ApplicationServices.ShutdownMode.AfterMainFormCloses
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
+
         Protected Overrides Sub OnCreateMainForm()
             Me.MainForm = Global.DWSIM.FormMain
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
+
         Protected Overrides Sub OnCreateSplashScreen()
-            Me.SplashScreen = Global.DWSIM.SplashScreen
+            Me.SplashScreen = GetSplashScreen()
         End Sub
+
     End Class
+
 End Namespace

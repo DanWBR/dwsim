@@ -10,6 +10,7 @@ using DWSIM.Interfaces.Enums;
 using DWSIM.UnitOperations.SpecialOps;
 using DWSIM.CrossPlatform.UI.Controls.ReoGrid;
 using System.Diagnostics;
+using DWSIM.SharedClasses;
 
 namespace DWSIM.UI.Desktop.Editors.Dynamics
 {
@@ -350,6 +351,8 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
                 double i = 0;
 
+                Flowsheet.ProcessScripts(Scripts.EventType.IntegratorStarted, Scripts.ObjectType.Integrator, "");
+
                 while (i <= final)
                 {
                     int i0 = (int)i;
@@ -476,52 +479,56 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
                     Flowsheet.UpdateEditorPanels.Invoke();
                     if (t.Exception != null)
                     {
+                        Flowsheet.ProcessScripts(Scripts.EventType.IntegratorError, Scripts.ObjectType.Integrator, "");
                         Exception baseexception;
                         foreach (var ex in t.Exception.Flatten().InnerExceptions)
+                        {
+                            string euid = Guid.NewGuid().ToString();
+                            SharedClasses.ExceptionProcessing.ExceptionList.Exceptions.Add(euid, ex);
+                            if (ex is AggregateException)
                             {
-                                string euid = Guid.NewGuid().ToString();
-                                SharedClasses.ExceptionProcessing.ExceptionList.Exceptions.Add(euid, ex);
-                                if (ex is AggregateException)
+                                baseexception = ex.InnerException;
+                                foreach (var iex in ((AggregateException)ex).Flatten().InnerExceptions)
                                 {
-                                    baseexception = ex.InnerException;
-                                    foreach (var iex in ((AggregateException)ex).Flatten().InnerExceptions)
+                                    while (iex.InnerException != null)
                                     {
-                                        while (iex.InnerException != null)
-                                        {
-                                            baseexception = iex.InnerException;
-                                        }
-                                        Flowsheet.ShowMessage(baseexception.Message.ToString(), Interfaces.IFlowsheet.MessageType.GeneralError, euid);
+                                        baseexception = iex.InnerException;
                                     }
+                                    Flowsheet.ShowMessage(baseexception.Message.ToString(), Interfaces.IFlowsheet.MessageType.GeneralError, euid);
                                 }
-                                else
+                            }
+                            else
+                            {
+                                baseexception = ex;
+                                if (baseexception.InnerException != null)
                                 {
-                                    baseexception = ex;
-                                    if (baseexception.InnerException != null)
+                                    while (baseexception.InnerException.InnerException != null)
                                     {
-                                        while (baseexception.InnerException.InnerException != null)
+                                        baseexception = baseexception.InnerException;
+                                        if ((baseexception == null))
                                         {
-                                            baseexception = baseexception.InnerException;
-                                            if ((baseexception == null))
-                                            {
-                                                break;
-                                            }
-                                            if ((baseexception.InnerException == null))
-                                            {
-                                                break;
-                                            }
+                                            break;
                                         }
-                                        Flowsheet.ShowMessage(baseexception.Message.ToString(), Interfaces.IFlowsheet.MessageType.GeneralError, euid);
+                                        if ((baseexception.InnerException == null))
+                                        {
+                                            break;
+                                        }
                                     }
+                                    Flowsheet.ShowMessage(baseexception.Message.ToString(), Interfaces.IFlowsheet.MessageType.GeneralError, euid);
                                 }
+                            }
                         }
+                    }
+                    else {
+                        Flowsheet.ProcessScripts(Scripts.EventType.IntegratorFinished, Scripts.ObjectType.Integrator, "");
                     }
                 });
             });
 
             if (waittofinish)
-                maintask.RunSynchronously();
+                maintask.RunSynchronously(TaskScheduler.Default);
             else
-                maintask.Start();
+                maintask.Start(TaskScheduler.Default);
 
             return maintask;
         }

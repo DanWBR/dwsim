@@ -125,6 +125,8 @@ Public Class FormFlowsheet
 
 #Region "    Form Event Handlers "
 
+    Public Event ToolOpened(sender As Object, e As EventArgs)
+
     Public Sub New()
 
         ' This call is required by the Windows Form Designer.
@@ -162,7 +164,7 @@ Public Class FormFlowsheet
         FormDynamics.Flowsheet = Me
         FormIntegratorControls.Flowsheet = Me
 
-        Me.MdiParent = FormMain
+        Me.MdiParent = My.Application.MainWindowForm
 
         If DWSIM.App.IsRunningOnMono Then
             'Me.FlowLayoutPanel1.AutoSize = False
@@ -209,7 +211,7 @@ Public Class FormFlowsheet
 
         If Not Me.m_IsLoadedFromFile Then
 
-            For Each item In FormMain.aTypeList.OrderBy(Function(x) x.Name)
+            For Each item In My.Application.MainWindowForm.aTypeList.OrderBy(Function(x) x.Name)
                 If Not item.IsAbstract Then
                     Dim obj = DirectCast(Activator.CreateInstance(item), Interfaces.ISimulationObject)
                     obj.SetFlowsheet(Me)
@@ -218,7 +220,7 @@ Public Class FormFlowsheet
                 End If
             Next
 
-            For Each item In FormMain.ExternalUnitOperations.Values
+            For Each item In My.Application.MainWindowForm.ExternalUnitOperations.Values
                 item.SetFlowsheet(Me)
                 Me.FlowsheetOptions.VisibleProperties(item.GetType.Name) = DirectCast(item, ISimulationObject).GetDefaultProperties().ToList()
             Next
@@ -236,7 +238,7 @@ Public Class FormFlowsheet
             Me.Options.NotSelectedComponents = New Dictionary(Of String, Interfaces.ICompoundConstantProperties)
 
             Dim tmpc As BaseClasses.ConstantProperties
-            For Each tmpc In FormMain.AvailableComponents.Values
+            For Each tmpc In My.Application.MainWindowForm.AvailableComponents.Values
                 Dim newc As New BaseClasses.ConstantProperties
                 newc = tmpc
                 Me.Options.NotSelectedComponents.Add(tmpc.Name, newc)
@@ -285,6 +287,90 @@ Public Class FormFlowsheet
         'load plugins
         CreatePluginsList()
 
+        'load menu extenders
+        For Each extender In My.Application.MainWindowForm.Extenders.Values
+            Try
+                If extender.Level = ExtenderLevel.FlowsheetWindow Then
+                    Dim newmenuitem As ToolStripMenuItem = Nothing
+                    If extender.Category = ExtenderCategory.NewItem Then
+                        newmenuitem = New ToolStripMenuItem()
+                        newmenuitem.Text = extender.DisplayText
+                        newmenuitem.DisplayStyle = ToolStripItemDisplayStyle.Text
+                    End If
+                    For Each item In extender.Collection
+                        Dim exttsmi As New ToolStripMenuItem
+                        exttsmi.Text = item.DisplayText
+                        exttsmi.Image = item.DisplayImage
+                        AddHandler exttsmi.Click, Sub(s2, e2)
+                                                      item.SetMainWindow(My.Application.MainWindowForm)
+                                                      item.SetFlowsheet(Me)
+                                                      item.Run()
+                                                  End Sub
+                        Select Case extender.Category
+                            Case ExtenderCategory.File
+                                If item.InsertAtPosition >= 0 Then
+                                    FileTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
+                                Else
+                                    FileTSMI.DropDownItems.Add(exttsmi)
+                                End If
+                            Case ExtenderCategory.Edit
+                                If item.InsertAtPosition >= 0 Then
+                                    EditTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
+                                Else
+                                    EditTSMI.DropDownItems.Add(exttsmi)
+                                End If
+                            Case ExtenderCategory.Tools
+                                If item.InsertAtPosition >= 0 Then
+                                    ToolsTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
+                                Else
+                                    ToolsTSMI.DropDownItems.Add(exttsmi)
+                                End If
+                            Case ExtenderCategory.Dynamics
+                                If item.InsertAtPosition >= 0 Then
+                                    DynamicsTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
+                                Else
+                                    DynamicsTSMI.DropDownItems.Add(exttsmi)
+                                End If
+                            Case ExtenderCategory.Optimization
+                                If item.InsertAtPosition >= 0 Then
+                                    OptimizationTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
+                                Else
+                                    OptimizationTSMI.DropDownItems.Add(exttsmi)
+                                End If
+                            Case ExtenderCategory.Results
+                                If item.InsertAtPosition >= 0 Then
+                                    ResultsTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
+                                Else
+                                    ResultsTSMI.DropDownItems.Add(exttsmi)
+                                End If
+                            Case ExtenderCategory.Utilities
+                                If item.InsertAtPosition >= 0 Then
+                                    UtilitiesTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
+                                Else
+                                    UtilitiesTSMI.DropDownItems.Add(exttsmi)
+                                End If
+                            Case ExtenderCategory.NewItem
+                                newmenuitem?.DropDownItems.Add(exttsmi)
+                            Case ExtenderCategory.ToolStrip
+                                If item.InsertAtPosition >= 0 Then
+                                    ToolStrip1.Items.Insert(item.InsertAtPosition, exttsmi)
+                                Else
+                                    ToolStrip1.Items.Add(exttsmi)
+                                End If
+                            Case ExtenderCategory.InitializationScript
+                                item.SetMainWindow(My.Application.MainWindowForm)
+                                item.SetFlowsheet(Me)
+                                item.Run()
+                        End Select
+                    Next
+                    If newmenuitem IsNot Nothing Then
+                        MenuStrip1.Items.Add(newmenuitem)
+                    End If
+                End If
+            Catch ex As Exception
+            End Try
+        Next
+
         loaded = True
 
         If My.Settings.ObjectEditor = 0 Then FormProps.Hide()
@@ -320,7 +406,10 @@ Public Class FormFlowsheet
         End Select
         Return Nothing
     End Function
+
     Public Sub FormChild_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
+
+        FrmStSim1.CurrentFlowsheet = Me
 
         Me.WindowState = FormWindowState.Maximized
 
@@ -332,11 +421,11 @@ Public Class FormFlowsheet
 
             Me.Invalidate()
             Application.DoEvents()
-            Application.DoEvents()
 
             If Not DWSIM.App.IsRunningOnMono Then
                 Dim fw As New FormSimulWizard
                 With fw
+                    .CurrentFlowsheet = Me
                     .StartPosition = FormStartPosition.CenterScreen
                     .WindowState = FormWindowState.Normal
                     .ShowDialog(Me)
@@ -359,14 +448,14 @@ Public Class FormFlowsheet
         End If
 
         If DWSIM.App.IsRunningOnMono Then
-            FormMain.ToolStripButton1.Enabled = True
-            FormMain.SaveAllToolStripButton.Enabled = True
-            FormMain.SaveToolStripButton.Enabled = True
-            FormMain.SaveToolStripMenuItem.Enabled = True
-            FormMain.SaveAllToolStripMenuItem.Enabled = True
-            FormMain.SaveAsToolStripMenuItem.Enabled = True
-            FormMain.ToolStripButton1.Enabled = True
-            FormMain.CloseAllToolstripMenuItem.Enabled = True
+            My.Application.MainWindowForm.ToolStripButton1.Enabled = True
+            My.Application.MainWindowForm.SaveAllToolStripButton.Enabled = True
+            My.Application.MainWindowForm.SaveToolStripButton.Enabled = True
+            My.Application.MainWindowForm.SaveToolStripMenuItem.Enabled = True
+            My.Application.MainWindowForm.SaveAllToolStripMenuItem.Enabled = True
+            My.Application.MainWindowForm.SaveAsToolStripMenuItem.Enabled = True
+            My.Application.MainWindowForm.ToolStripButton1.Enabled = True
+            My.Application.MainWindowForm.CloseAllToolstripMenuItem.Enabled = True
         End If
 
         Me.ProcessScripts(Enums.Scripts.EventType.SimulationOpened, Enums.Scripts.ObjectType.Simulation, "")
@@ -393,7 +482,7 @@ Public Class FormFlowsheet
 
     Private Sub FormChild2_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
 
-        ToolStripManager.RevertMerge(FormMain.ToolStrip1, ToolStrip1)
+        ToolStripManager.RevertMerge(My.Application.MainWindowForm.ToolStrip1, ToolStrip1)
 
         Me.ProcessScripts(Enums.Scripts.EventType.SimulationClosed, Enums.Scripts.ObjectType.Simulation, "")
 
@@ -421,27 +510,27 @@ Public Class FormFlowsheet
 
         End If
 
-        Dim cnt As Integer = FormMain.MdiChildren.Length
+        Dim cnt As Integer = My.Application.MainWindowForm.MdiChildren.Length
 
         If cnt = 0 Then
 
-            FormMain.ToolStripButton1.Enabled = False
-            FormMain.SaveAllToolStripButton.Enabled = False
-            FormMain.SaveToolStripButton.Enabled = False
-            FormMain.SaveToolStripMenuItem.Enabled = False
-            FormMain.SaveAllToolStripMenuItem.Enabled = False
-            FormMain.SaveAsToolStripMenuItem.Enabled = False
-            FormMain.ToolStripButton1.Enabled = False
+            My.Application.MainWindowForm.ToolStripButton1.Enabled = False
+            My.Application.MainWindowForm.SaveAllToolStripButton.Enabled = False
+            My.Application.MainWindowForm.SaveToolStripButton.Enabled = False
+            My.Application.MainWindowForm.SaveToolStripMenuItem.Enabled = False
+            My.Application.MainWindowForm.SaveAllToolStripMenuItem.Enabled = False
+            My.Application.MainWindowForm.SaveAsToolStripMenuItem.Enabled = False
+            My.Application.MainWindowForm.ToolStripButton1.Enabled = False
 
         Else
 
-            FormMain.ToolStripButton1.Enabled = True
-            FormMain.SaveAllToolStripButton.Enabled = True
-            FormMain.SaveToolStripButton.Enabled = True
-            FormMain.SaveToolStripMenuItem.Enabled = True
-            FormMain.SaveAllToolStripMenuItem.Enabled = True
-            FormMain.SaveAsToolStripMenuItem.Enabled = True
-            FormMain.ToolStripButton1.Enabled = True
+            My.Application.MainWindowForm.ToolStripButton1.Enabled = True
+            My.Application.MainWindowForm.SaveAllToolStripButton.Enabled = True
+            My.Application.MainWindowForm.SaveToolStripButton.Enabled = True
+            My.Application.MainWindowForm.SaveToolStripMenuItem.Enabled = True
+            My.Application.MainWindowForm.SaveAllToolStripMenuItem.Enabled = True
+            My.Application.MainWindowForm.SaveAsToolStripMenuItem.Enabled = True
+            My.Application.MainWindowForm.ToolStripButton1.Enabled = True
 
         End If
 
@@ -461,13 +550,13 @@ Public Class FormFlowsheet
 
             If x = MsgBoxResult.Yes Then
 
-                FormMain.SaveFile(False)
+                My.Application.MainWindowForm.SaveFile(False)
                 Me.m_overrideCloseQuestion = True
                 Me.Close()
 
             ElseIf x = MsgBoxResult.Cancel Then
 
-                FormMain.CancelClosing = True
+                My.Application.MainWindowForm.CancelClosing = True
                 e.Cancel = True
 
             Else
@@ -534,7 +623,7 @@ Public Class FormFlowsheet
 
         If Not My.Application.UserUnitSystems.ContainsKey(su.Name) Then
             My.Application.UserUnitSystems.Add(su.Name, su)
-            FormMain.AvailableUnitSystems.Add(su.Name, su)
+            My.Application.MainWindowForm.AvailableUnitSystems.Add(su.Name, su)
             Me.FrmStSim1.ComboBox2.Items.Add(su.Name)
         Else
             MessageBox.Show("Please input a different name for the unit system.")
@@ -644,62 +733,61 @@ Public Class FormFlowsheet
 
                 Message = texto
 
-                frsht.UIThread(New System.Action(Sub()
-                                                     RaiseEvent NewMessageSent(texto)
-                                                 End Sub))
+                frsht.UIThreadInvoke(New System.Action(Sub()
+                                                           RaiseEvent NewMessageSent(texto)
+                                                       End Sub))
 
-                If frsht.Visible Then
+                frsht.UIThreadInvoke(New System.Action(Sub()
 
-                    frsht.UIThread(New System.Action(Sub()
+                                                           If frsht.Visible Then
 
-                                                         Dim showtips As Boolean = True
-                                                         If GlobalSettings.Settings.OldUI Then
-                                                             showtips = My.Settings.ShowTips
-                                                         End If
+                                                               Dim showtips As Boolean = True
+                                                               If GlobalSettings.Settings.OldUI Then
+                                                                   showtips = My.Settings.ShowTips
+                                                               End If
 
-                                                         If Not My.Application.CommandLineMode Then
+                                                               If Not My.Application.CommandLineMode Then
 
-                                                             Dim frlog = frsht.FormLog
+                                                                   Dim frlog = frsht.FormLog
 
-                                                             Dim img As Bitmap
-                                                             Dim strtipo As String
-                                                             Select Case tipo
-                                                                 Case SharedClasses.DWSIM.Flowsheet.MessageType.Warning
-                                                                     img = My.Resources._error
-                                                                     strtipo = DWSIM.App.GetLocalString("Aviso")
-                                                                 Case SharedClasses.DWSIM.Flowsheet.MessageType.GeneralError
-                                                                     img = My.Resources.exclamation
-                                                                     strtipo = DWSIM.App.GetLocalString("Erro")
-                                                                 Case SharedClasses.DWSIM.Flowsheet.MessageType.Tip
-                                                                     If Not showtips Then Exit Sub
-                                                                     img = My.Resources.lightbulb
-                                                                     strtipo = DWSIM.App.GetLocalString("Dica")
-                                                                 Case Else
-                                                                     img = My.Resources.information
-                                                                     strtipo = DWSIM.App.GetLocalString("Mensagem")
-                                                             End Select
+                                                                   Dim img As Bitmap
+                                                                   Dim strtipo As String
+                                                                   Select Case tipo
+                                                                       Case SharedClasses.DWSIM.Flowsheet.MessageType.Warning
+                                                                           img = My.Resources._error
+                                                                           strtipo = DWSIM.App.GetLocalString("Aviso")
+                                                                       Case SharedClasses.DWSIM.Flowsheet.MessageType.GeneralError
+                                                                           img = My.Resources.exclamation
+                                                                           strtipo = DWSIM.App.GetLocalString("Erro")
+                                                                       Case SharedClasses.DWSIM.Flowsheet.MessageType.Tip
+                                                                           If Not showtips Then Exit Sub
+                                                                           img = My.Resources.lightbulb
+                                                                           strtipo = DWSIM.App.GetLocalString("Dica")
+                                                                       Case Else
+                                                                           img = My.Resources.information
+                                                                           strtipo = DWSIM.App.GetLocalString("Mensagem")
+                                                                   End Select
 
-                                                             If frlog.Grid1.Rows.Count > 1500 Then
-                                                                 frlog.Grid1.Rows.Clear()
-                                                             End If
+                                                                   If frlog.Grid1.Rows.Count > 1500 Then
+                                                                       frlog.Grid1.Rows.Clear()
+                                                                   End If
 
-                                                             frlog.Grid1.Rows.Insert(0, New Object() {img, frlog.Grid1.Rows.Count, Date.Now, strtipo, texto})
+                                                                   frlog.Grid1.Rows.Add(New Object() {img, frlog.Grid1.Rows.Count, Date.Now, strtipo, texto})
 
-                                                             If frlog.Grid1.Rows.Count > 0 Then
-                                                                 frlog.Grid1.Rows(0).Cells("Info").Tag = exceptionID
-                                                                 frlog.Grid1.Rows(0).Cells("Mensagem").Style.ForeColor = cor
-                                                                 frlog.Grid1.ClearSelection()
-                                                                 Try
-                                                                     frlog.Grid1.FirstDisplayedScrollingRowIndex = 0
-                                                                 Catch ex As Exception
-                                                                 End Try
-                                                             End If
+                                                                   frlog.Grid1.Sort(frlog.Grid1.Columns(1), ListSortDirection.Descending)
 
-                                                         End If
+                                                                   If frlog.Grid1.Rows.Count > 0 Then
+                                                                       frlog.Grid1.Rows(0).Cells("Info").Tag = exceptionID
+                                                                       frlog.Grid1.Rows(0).Cells("Mensagem").Style.ForeColor = cor
+                                                                       frlog.Grid1.ClearSelection()
+                                                                       frlog.Grid1.Rows(0).Selected = True
+                                                                   End If
 
-                                                     End Sub))
+                                                               End If
 
-                End If
+                                                           End If
+
+                                                       End Sub))
 
             End If
 
@@ -728,6 +816,7 @@ Public Class FormFlowsheet
 #Region "    Click Event Handlers "
 
     Public Sub tsbAtivar_CheckedChanged(sender As Object, e As EventArgs) Handles tsbAtivar.CheckedChanged
+        RaiseEvent ToolOpened("Enable/Disable Solver", New EventArgs())
         GlobalSettings.Settings.CalculatorActivated = tsbAtivar.Checked
         tsbCalc.Enabled = tsbAtivar.Checked
         tsbCalcF.Enabled = tsbAtivar.Checked
@@ -736,6 +825,7 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles tsbAbortCalc.Click
+        RaiseEvent ToolOpened("Abort Solve Flowsheet", New EventArgs())
         Settings.CalculatorStopRequested = True
         If Settings.TaskCancellationTokenSource IsNot Nothing Then
             Settings.TaskCancellationTokenSource.Cancel()
@@ -758,6 +848,7 @@ Public Class FormFlowsheet
 
     Private Sub tsbCalcF_Click(sender As Object, e As EventArgs) Handles tsbCalcF.Click
         If Not DynamicMode Then
+            RaiseEvent ToolOpened("Force Solve Flowsheet", New EventArgs())
             GlobalSettings.Settings.TaskCancellationTokenSource = Nothing
             GlobalSettings.Settings.CalculatorBusy = False
             My.Application.ActiveSimulation = Me
@@ -832,26 +923,18 @@ Public Class FormFlowsheet
 
     Private Sub AssistenteDeCriacaoDeSubstânciasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CompoundCreatorWizardTSMI.Click
 
+        RaiseEvent ToolOpened("Compound Creator Wizard", New EventArgs())
+
         FrmStSim1.loaded = False
 
         Dim wform As New UI.Desktop.Editors.CompoundCreatorWizard(Me)
         wform.SetupAndDisplayPage(1)
 
-        'start dispatcher for WPF Interop
-        If Not GlobalSettings.Settings.IsRunningOnMono Then System.Windows.Threading.Dispatcher.Run()
-
-    End Sub
-
-    Private Sub ToolStripSplitButton1_ButtonClick(sender As Object, e As EventArgs)
-        If DWSIM.App.IsRunningOnMono Then
-            Me.FrmStSim1 = New FormSimulSettings()
-            Me.FrmStSim1.Show(Me.dckPanel)
-        Else
-            Me.FrmStSim1.Show(Me.dckPanel)
-        End If
     End Sub
 
     Private Sub InspetorDeSolucoesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InspectorTSMI.Click
+
+        RaiseEvent ToolOpened("Solution Inspector", New EventArgs())
 
         Dim iform As New Inspector.Window
         iform.Show()
@@ -861,19 +944,28 @@ Public Class FormFlowsheet
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
         If DWSIM.App.IsRunningOnMono Then
             Me.FrmStSim1 = New FormSimulSettings()
+            FrmStSim1.CurrentFlowsheet = Me
             Me.FrmStSim1.Show(Me.dckPanel)
         Else
+            FrmStSim1.CurrentFlowsheet = Me
             Me.FrmStSim1.Show(Me.dckPanel)
         End If
     End Sub
 
     Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles tsbCalc.Click
+
         If Not DynamicMode Then
+
+            UIThreadInvoke(Sub()
+                               Me.FormLog.Grid1.Rows.Clear()
+                           End Sub)
+
+            RaiseEvent ToolOpened("Solve Flowsheet", New EventArgs())
             Settings.TaskCancellationTokenSource = Nothing
             My.Application.ActiveSimulation = Me
             If My.Computer.Keyboard.ShiftKeyDown Then GlobalSettings.Settings.CalculatorBusy = False
-            Task.Factory.StartNew(Sub()
-                                      FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, Settings.TaskCancellationTokenSource, False, False, Nothing, Nothing,
+            TaskHelper.Run(Sub()
+                               FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, Settings.TaskCancellationTokenSource, False, False, Nothing, Nothing,
                                                         Sub()
                                                             If My.Settings.ObjectEditor = 1 Then
                                                                 Me.UIThread(Sub()
@@ -882,7 +974,7 @@ Public Class FormFlowsheet
                                                                             End Sub)
                                                             End If
                                                         End Sub, My.Computer.Keyboard.CtrlKeyDown And My.Computer.Keyboard.AltKeyDown)
-                                  End Sub)
+                           End Sub)
         Else
             ShowMessage(DWSIM.App.GetLocalString("DynEnabled"), IFlowsheet.MessageType.Warning)
         End If
@@ -1179,20 +1271,24 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub AnaliseDeSensibilidadeToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AnaliseDeSensibilidadeToolStripMenuItem.Click
+        RaiseEvent ToolOpened("Sensitivity Analysis", New EventArgs())
         Me.FormSensAnalysis0 = New FormSensAnalysis
         Me.FormSensAnalysis0.Show(Me.dckPanel)
     End Sub
 
     Private Sub MultivariateOptimizerToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MultivariateOptimizerToolStripMenuItem.Click
+        RaiseEvent ToolOpened("Optimization", New EventArgs())
         Me.FormOptimization0 = New FormOptimization
         Me.FormOptimization0.Show(Me.dckPanel)
     End Sub
 
     Private Sub CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem.Click
+        RaiseEvent ToolOpened("Bulk C7+ Characterization", New EventArgs())
         Me.FrmPCBulk.ShowDialog(Me)
     End Sub
 
     Private Sub CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem.Click
+        RaiseEvent ToolOpened("Distillation Curves Characterization", New EventArgs())
         Dim frmdc As New DCCharacterizationWizard
         frmdc.ShowDialog(Me)
     End Sub
@@ -1216,6 +1312,7 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub SimulationConfig_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsmiConfigSimulation.Click
+        RaiseEvent ToolOpened("Simulation Settings", New EventArgs())
         If DWSIM.App.IsRunningOnMono Then
             Me.FrmStSim1 = New FormSimulSettings()
             Me.FrmStSim1.Show(Me.dckPanel)
@@ -1225,6 +1322,7 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub GerarRelatorioToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GerarRelatorioToolStripMenuItem.Click
+        RaiseEvent ToolOpened("Report Tool", New EventArgs())
         FrmReport = New FormReportConfig
         Me.FrmReport.Show(Me)
     End Sub
@@ -1244,8 +1342,8 @@ Public Class FormFlowsheet
 
             Application.DoEvents()
 
-            If FormMain.COMonitoringObjects.Count = 0 Then
-                FormMain.SearchCOMOs()
+            If My.Application.MainWindowForm.COMonitoringObjects.Count = 0 Then
+                My.Application.MainWindowForm.SearchCOMOs()
             End If
 
             Me.CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.DropDownItems.Clear()
@@ -1265,6 +1363,7 @@ Public Class FormFlowsheet
 
 
     Private Sub GerenciadorDeAmostrasDePetroleoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GerenciadorDeAmostrasDePetroleoToolStripMenuItem.Click
+        RaiseEvent ToolOpened("Assay Manager", New EventArgs())
         Dim frmam As New FormAssayManager
         frmam.ShowDialog(Me)
         Try
@@ -1601,7 +1700,7 @@ Public Class FormFlowsheet
                 .Image = My.Resources.plugin
                 .DisplayStyle = ToolStripItemDisplayStyle.ImageAndText
             End With
-            Me.PluginsToolStripMenuItem.DropDownItems.Add(tsmi)
+            Me.PluginsTSMI.DropDownItems.Add(tsmi)
             AddHandler tsmi.Click, AddressOf Me.PluginClick
         Next
 
@@ -1635,7 +1734,7 @@ Public Class FormFlowsheet
 
         'process plugin list
 
-        For Each icomo As UnitOperations.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo In FormMain.COMonitoringObjects.Values
+        For Each icomo As UnitOperations.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo In My.Application.MainWindowForm.COMonitoringObjects.Values
 
             Dim tsmi As New ToolStripMenuItem
             With tsmi
@@ -1661,7 +1760,7 @@ Public Class FormFlowsheet
 
         Dim tsmi As ToolStripMenuItem = CType(sender, ToolStripMenuItem)
 
-        Dim myCOMO As UnitOperations.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo = FormMain.COMonitoringObjects.Item(tsmi.Tag)
+        Dim myCOMO As UnitOperations.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo = My.Application.MainWindowForm.COMonitoringObjects.Item(tsmi.Tag)
 
         Dim _como As Object = Nothing
         Try
@@ -1927,7 +2026,7 @@ Public Class FormFlowsheet
 
         Dim data As List(Of XElement) = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects").Elements.ToList
 
-        FormMain.AddGraphicObjects(Me, data, excs, pkey, 40, True)
+        My.Application.MainWindowForm.AddGraphicObjects(Me, data, excs, pkey, 40, True)
 
         Dim pp As New PropertyPackages.RaoultPropertyPackage()
 
@@ -1945,7 +2044,7 @@ Public Class FormFlowsheet
 
             Dim idx As Integer
 
-            If Not Me.FrmStSim1.initialized Then Me.FrmStSim1.Init()
+            FrmStSim1.Init()
 
             For Each comp In complist
                 If Not Me.Options.SelectedComponents.ContainsKey(comp.Name) Then
@@ -1981,6 +2080,8 @@ Public Class FormFlowsheet
                     excs.Add(New Exception("Error Loading Property Package Information", ex))
                 End Try
             Next
+
+            FrmStSim1.Init()
 
         End If
 
@@ -2051,7 +2152,7 @@ Public Class FormFlowsheet
         pp.Dispose()
         pp = Nothing
 
-        FormMain.AddSimulationObjects(Me, objlist, excs, pkey)
+        My.Application.MainWindowForm.AddSimulationObjects(Me, objlist, excs, pkey)
 
         For Each obj In objlist
             If FormSurface.FlowsheetSurface.SelectedObject Is Nothing Then FormSurface.FlowsheetSurface.SelectedObject = obj.GraphicObject
@@ -2276,7 +2377,7 @@ Public Class FormFlowsheet
 
                 Case UndoRedoActionType.SystemOfUnitsChanged
 
-                    Dim sobj = FormMain.AvailableUnitSystems(act.ObjID)
+                    Dim sobj = My.Application.MainWindowForm.AvailableUnitSystems(act.ObjID)
 
                     'Property not listed, set using Reflection
                     Dim method As FieldInfo = sobj.GetType().GetField(act.ObjID2)
@@ -2548,7 +2649,7 @@ Public Class FormFlowsheet
 
     Public Property AvailableSystemsOfUnits As List(Of IUnitsOfMeasure) Implements IFlowsheet.AvailableSystemsOfUnits
         Get
-            Return FormMain.AvailableUnitSystems.Values.Select(Function(x) DirectCast(x, IUnitsOfMeasure)).ToList()
+            Return My.Application.MainWindowForm.AvailableUnitSystems.Values.Select(Function(x) DirectCast(x, IUnitsOfMeasure)).ToList()
         End Get
         Set(value As List(Of IUnitsOfMeasure))
             Throw New NotImplementedException
@@ -2802,7 +2903,7 @@ Public Class FormFlowsheet
     End Property
 
     Public Sub SaveToXML(file As String) Implements IFlowsheetBag.SaveToXML
-        FormMain.SaveXML(file, Me)
+        My.Application.MainWindowForm.SaveXML(file, Me)
     End Sub
 
     Public Sub UpdateProcessData(xdoc As XDocument) Implements IFlowsheetBag.UpdateProcessData
@@ -2817,6 +2918,10 @@ Public Class FormFlowsheet
     End Function
 
     Public Sub RequestCalculation(Optional sender As ISimulationObject = Nothing, Optional changecalcorder As Boolean = False) Implements IFlowsheet.RequestCalculation
+
+        UIThreadInvoke(Sub()
+                           Me.FormLog.Grid1.Rows.Clear()
+                       End Sub)
 
         If Not DynamicMode Then
             Dim finishaction = Sub()
@@ -2908,7 +3013,7 @@ Public Class FormFlowsheet
         If Not Invalidating Then
             Me.UIThread(Sub()
                             Invalidating = True
-                            FormSurface.TableLayoutPanel1.Refresh()
+                            FormSurface.FControl.Invalidate()
                             Invalidating = False
                         End Sub)
         End If
@@ -2940,6 +3045,9 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub PropriedadesDasSubstanciasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PropriedadesDasSubstanciasToolStripMenuItem.Click
+
+        RaiseEvent ToolOpened("Pure Compound Viewer", New EventArgs())
+
         Dim frmpc As New FormPureComp With {.Flowsheet = Me}
         frmpc.ShowDialog(Me)
     End Sub
@@ -3056,10 +3164,10 @@ Public Class FormFlowsheet
 
     Public Property AvailableCompounds As Dictionary(Of String, ICompoundConstantProperties) Implements IFlowsheet.AvailableCompounds
         Get
-            Return FormMain.AvailableComponents
+            Return My.Application.MainWindowForm.AvailableComponents
         End Get
         Set(value As Dictionary(Of String, ICompoundConstantProperties))
-            FormMain.AvailableComponents = value
+            My.Application.MainWindowForm.AvailableComponents = value
         End Set
     End Property
 
@@ -3114,6 +3222,8 @@ Public Class FormFlowsheet
 
     Private Sub tsbStoreSolution_Click(sender As Object, e As EventArgs) Handles tsbStoreSolution.Click
 
+        RaiseEvent ToolOpened("Store Flowsheet State", New EventArgs())
+
         Dim data = GetProcessData()
 
         Dim f As New FormEnterName
@@ -3137,6 +3247,8 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub tsbLoadSolution_Click(sender As Object, e As EventArgs) Handles tsbLoadSolution.Click
+
+        RaiseEvent ToolOpened("Restore Flowsheet State", New EventArgs())
 
         If tscbStoredSolutions.SelectedItem IsNot Nothing Then
             If StoredSolutions.ContainsKey(tscbStoredSolutions.SelectedItem.ToString) Then
@@ -3166,6 +3278,7 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub GerenciadorDoModoDinâmicoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GerenciadorDoModoDinamicoToolStripMenuItem.Click
+        RaiseEvent ToolOpened("Dynamics Manager", New EventArgs())
         FormDynamics.Activate()
     End Sub
 
@@ -3214,6 +3327,8 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem.Click
+
+        RaiseEvent ToolOpened("PID Controller Tuning", New EventArgs())
 
         Dim ft As New FormPIDTuning With {.Flowsheet = Me}
 

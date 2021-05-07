@@ -193,6 +193,24 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Editing Forms\Property Packages\FormConfigLIQUAC.Designer.vb">
+      <DependentUpon>FormConfigLIQUAC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigLIQUAC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormGroupedPPConfigWindows.Designer.vb">
+      <DependentUpon>FormGroupedPPConfigWindows.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormGroupedPPConfigWindows.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editing Forms\Property Packages\WilsonPPEditor.designer.vb">
+      <DependentUpon>WilsonPPEditor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Property Packages\WilsonPPEditor.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Helper Classes\SerializationBinder.vb" />
     <Compile Include="Interfaces\IActivityCoefficientBase.vb" />
     <Compile Include="Base Classes\ThermodynamicsBase.vb" />
@@ -343,6 +361,7 @@
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
     <Compile Include="Material Stream\MaterialStream.vb" />
+    <Compile Include="Property Packages\LIQUAC2PropertyPackage.vb" />
     <Compile Include="Property Packages\Models\ElectrolyteNRTL.vb" />
     <Compile Include="Property Packages\Models\PengRobinson78.vb" />
     <Compile Include="Property Packages\Models\TrueCriticalPoint.vb" />
@@ -354,6 +373,7 @@
     <Compile Include="Property Packages\ElectrolyteBase.vb" />
     <Compile Include="Property Packages\Models\Hypotheticals.vb" />
     <Compile Include="Base Classes\MichelsenBase.vb" />
+    <Compile Include="Property Packages\Models\WilsonModel.vb" />
     <Compile Include="Property Packages\PengRobinson78.vb" />
     <Compile Include="Property Packages\PropertyPackage.vb" />
     <Compile Include="Property Packages\Models\FluidProperties.vb" />
@@ -440,6 +460,7 @@
     <Compile Include="Property Packages\UNIFAC.vb" />
     <Compile Include="Property Packages\Models\UNIQUAC.vb" />
     <Compile Include="Property Packages\UNIQUAC.vb" />
+    <Compile Include="Property Packages\WilsonPropertyPackage.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Editing Forms\Excel Interface\AboutForm.de.resx">
@@ -529,6 +550,15 @@
     <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigENRTL.resx">
       <DependentUpon>FormConfigENRTL.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigLIQUAC.en.resx">
+      <DependentUpon>FormConfigLIQUAC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigLIQUAC.es.resx">
+      <DependentUpon>FormConfigLIQUAC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigLIQUAC.resx">
+      <DependentUpon>FormConfigLIQUAC.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigExUNIQUAC.de.resx">
       <DependentUpon>FormConfigExUNIQUAC.vb</DependentUpon>
     </EmbeddedResource>
@@ -604,11 +634,20 @@
     <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigUNIQUAC.resx">
       <DependentUpon>FormConfigUNIQUAC.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormGroupedPPConfigWindows.en.resx">
+      <DependentUpon>FormGroupedPPConfigWindows.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormGroupedPPConfigWindows.resx">
+      <DependentUpon>FormGroupedPPConfigWindows.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Property Packages\PropertyPackageSettingsEditingControl.en.resx">
       <DependentUpon>PropertyPackageSettingsEditingControl.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Property Packages\PropertyPackageSettingsEditingControl.resx">
       <DependentUpon>PropertyPackageSettingsEditingControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\WilsonPPEditor.resx">
+      <DependentUpon>WilsonPPEditor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Unhandled Exceptions\FormUnhandledException.de.resx">
       <DependentUpon>FormUnhandledException.vb</DependentUpon>
@@ -634,6 +673,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Assets\wilson_bips.csv" />
     <None Include="Resources\cross.png" />
     <None Include="Resources\copy.gif" />
     <EmbeddedResource Include="Assets\Databases\chedl_thermo.json" />
@@ -828,6 +868,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\bullet_green.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\Databases\FoodProp\FoodProp.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>

@@ -335,7 +335,11 @@ Public Class EditingForm_Vessel
     End Sub
 
     Private Sub chkActive_CheckedChanged(sender As Object, e As EventArgs) Handles chkActive.CheckedChanged
-        If Loaded Then VesselObject.GraphicObject.Active = chkActive.Checked
+        If Loaded Then
+            VesselObject.GraphicObject.Active = chkActive.Checked
+            VesselObject.FlowSheet.UpdateInterface()
+            UpdateInfo()
+        End If
     End Sub
 
     Sub RequestCalc()
@@ -411,7 +415,7 @@ Public Class EditingForm_Vessel
     End Sub
 
     Private Sub btnConfigurePP_Click(sender As Object, e As EventArgs) Handles btnConfigurePP.Click
-        VesselObject.FlowSheet.PropertyPackages.Values.Where(Function(x) x.Tag = cbPropPack.SelectedItem.ToString).SingleOrDefault.DisplayEditingForm()
+        VesselObject.FlowSheet.PropertyPackages.Values.Where(Function(x) x.Tag = cbPropPack.SelectedItem.ToString).SingleOrDefault.DisplayGroupedEditingForm()
     End Sub
 
     Private Sub cbPressureCalcMode_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPressureCalcMode.SelectedIndexChanged

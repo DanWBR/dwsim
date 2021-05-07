@@ -115,6 +115,15 @@ Namespace SpecialOps
 
         Public Property MVValue As Double = 0.0
 
+        Public Property SetPoint As Double
+            Get
+                Return AdjustValue
+            End Get
+            Set(value As Double)
+                AdjustValue = value
+            End Set
+        End Property
+
         Public Overrides ReadOnly Property SupportsDynamicMode As Boolean = True
 
         Public Overrides Function CloneXML() As Object

@@ -164,8 +164,9 @@ Partial Class EditingForm_Splitter
         '
         resources.ApplyResources(Me.rtbAnnotations, "rtbAnnotations")
         Me.rtbAnnotations.Name = "rtbAnnotations"
-        Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\deflang1046{\fonttbl{\f0\fnil\fcharset0 Microsoft S" &
-    "ans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\viewkind4\uc1\pard\f0\fs17\par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1046{\fonttbl{\f0\fnil Microsoft " &
+    "Sans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{\*\generator Riched20 10.0.18362}\viewkind4\uc1 " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\pard\f0\fs17\" &
+    "par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rtbAnnotations.ShowRedo = False
         Me.rtbAnnotations.ShowUndo = False
         Me.ToolTipValues.SetToolTip(Me.rtbAnnotations, resources.GetString("rtbAnnotations.ToolTip"))
@@ -214,7 +215,7 @@ Partial Class EditingForm_Splitter
         'TrackBar2
         '
         resources.ApplyResources(Me.TrackBar2, "TrackBar2")
-        Me.TrackBar2.Maximum = 100
+        Me.TrackBar2.Maximum = 10000
         Me.TrackBar2.Name = "TrackBar2"
         Me.TrackBar2.TickFrequency = 5
         Me.ToolTip1.SetToolTip(Me.TrackBar2, resources.GetString("TrackBar2.ToolTip"))
@@ -224,7 +225,7 @@ Partial Class EditingForm_Splitter
         'TrackBar1
         '
         resources.ApplyResources(Me.TrackBar1, "TrackBar1")
-        Me.TrackBar1.Maximum = 100
+        Me.TrackBar1.Maximum = 10000
         Me.TrackBar1.Name = "TrackBar1"
         Me.TrackBar1.TickFrequency = 5
         Me.ToolTip1.SetToolTip(Me.TrackBar1, resources.GetString("TrackBar1.ToolTip"))

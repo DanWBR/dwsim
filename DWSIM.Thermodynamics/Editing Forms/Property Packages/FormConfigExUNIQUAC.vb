@@ -93,21 +93,11 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(id1) Then
             cbReacSets.Items.Add(rset.Name)
         Next
 
-        Me.tbMaxIts.Text = ppu.ElectrolyteFlash.MaximumIterations
-        Me.tbTol.Text = ppu.ElectrolyteFlash.Tolerance
-
-        chkCalcChemEq.Checked = ppu.ElectrolyteFlash.CalculateChemicalEquilibria
-        chkIPOPT.Checked = ppu.ElectrolyteFlash.UseIPOPTSolver
-        chkOptimize.Checked = ppu.ElectrolyteFlash.OptimizeInitialEstimates
-
-        cbReacSets.Enabled = chkCalcChemEq.Checked
-        tbMaxIts.Enabled = chkCalcChemEq.Checked
-        tbTol.Enabled = chkCalcChemEq.Checked
-        chkIPOPT.Enabled = chkCalcChemEq.Checked
-        chkOptimize.Enabled = chkCalcChemEq.Checked
+        Me.tbMaxIts.Text = ppu.MaxIterations
+        Me.tbTol.Text = ppu.Tolerance
 
         Try
-            Dim reacsetname As String = (From rset As ReactionSet In _form.ReactionSets.Values Select rset Where rset.ID = ppu.ElectrolyteFlash.ReactionSet).FirstOrDefault.Name
+            Dim reacsetname As String = (From rset As ReactionSet In _form.ReactionSets.Values Select rset Where rset.ID = ppu.ReactionSet).FirstOrDefault.Name
             Me.cbReacSets.SelectedItem = reacsetname
         Catch ex As Exception
 
@@ -153,7 +143,7 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(id1) Then
             Dim ppu As PropertyPackages.ExUNIQUACPropertyPackage = _pp
             If Integer.TryParse(tbMaxIts.Text, New Integer) Then
                 tbMaxIts.ForeColor = Color.Blue
-                ppu.ElectrolyteFlash.MaximumIterations = tbMaxIts.Text
+                ppu.MaxIterations = tbMaxIts.Text
             Else
                 tbMaxIts.ForeColor = Color.Red
             End If
@@ -165,22 +155,10 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(id1) Then
             Dim ppu As PropertyPackages.ExUNIQUACPropertyPackage = _pp
             If Double.TryParse(tbTol.Text, New Double) Then
                 tbTol.ForeColor = Color.Blue
-                ppu.ElectrolyteFlash.Tolerance = tbTol.Text
+                ppu.Tolerance = tbTol.Text
             Else
                 tbTol.ForeColor = Color.Red
             End If
-        End If
-    End Sub
-
-    Private Sub chkCalcChemEq_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkCalcChemEq.CheckedChanged
-        If Loaded Then
-            Dim ppu As PropertyPackages.ExUNIQUACPropertyPackage = _pp
-            ppu.ElectrolyteFlash.CalculateChemicalEquilibria = chkCalcChemEq.Checked
-            cbReacSets.Enabled = chkCalcChemEq.Checked
-            tbMaxIts.Enabled = chkCalcChemEq.Checked
-            tbTol.Enabled = chkCalcChemEq.Checked
-            chkIPOPT.Enabled = chkCalcChemEq.Checked
-            chkOptimize.Enabled = chkCalcChemEq.Checked
         End If
     End Sub
 
@@ -188,30 +166,8 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(id1) Then
         If Loaded Then
             Dim ppu As PropertyPackages.ExUNIQUACPropertyPackage = _pp
             Dim reacsetID As String = (From rset As ReactionSet In _form.ReactionSets.Values Select rset Where rset.Name = cbReacSets.SelectedItem.ToString).FirstOrDefault.ID
-            ppu.ElectrolyteFlash.ReactionSet = reacsetID
+            ppu.ReactionSet = reacsetID
         End If
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        Dim data As Double() = DirectCast(_pp, PropertyPackages.ExUNIQUACPropertyPackage).ElectrolyteFlash.ObjectiveFunctionHistory.ToArray
-        Dim str As String = ""
-        For Each d In data
-            str += d.ToString & vbCrLf
-        Next
-        Clipboard.SetText(str)
-    End Sub
-
-    Private Sub chkIPOPT_CheckedChanged(sender As Object, e As EventArgs) Handles chkIPOPT.CheckedChanged
-        If Loaded Then
-            Dim ppu As PropertyPackages.ExUNIQUACPropertyPackage = _pp
-            ppu.ElectrolyteFlash.UseIPOPTSolver = chkIPOPT.Checked
-        End If
-    End Sub
-
-    Private Sub chkOptimize_CheckedChanged(sender As Object, e As EventArgs) Handles chkOptimize.CheckedChanged
-        If Loaded Then
-            Dim ppu As PropertyPackages.ExUNIQUACPropertyPackage = _pp
-            ppu.ElectrolyteFlash.OptimizeInitialEstimates = chkOptimize.Checked
-        End If
-    End Sub
 End Class

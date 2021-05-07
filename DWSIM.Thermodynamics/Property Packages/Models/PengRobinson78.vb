@@ -317,17 +317,16 @@ Namespace PropertyPackages.Auxiliary
             Dim MMm As Double = Vz.MultiplyY(VMM).SumY
 
             If Settings.EnableParallelProcessing Then
-                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism, .TaskScheduler = Settings.AppTaskScheduler}
-                Parallel.For(0, n + 1, poptions, Sub(ii)
-                                                     alpha(ii) = (1 + (0.37464 + 1.54226 * w(ii) - 0.26992 * w(ii) ^ 2) * (1 - (T / Tc(ii)) ^ 0.5)) ^ 2
-                                                     ai(ii) = 0.45724 * alpha(ii) * R ^ 2 * Tc(ii) ^ 2 / Pc(ii)
-                                                     bi(ii) = 0.0778 * R * Tc(ii) / Pc(ii)
-                                                     If w(ii) <= 0.491 Then
-                                                         ci(ii) = 0.37464 + 1.5422 * w(ii) - 0.26992 * w(ii) ^ 2
-                                                     Else
-                                                         ci(ii) = 0.379642 + 1.48503 * w(ii) - 0.164423 * w(ii) ^ 2 + 0.016666 * w(ii) ^ 3
-                                                     End If
-                                                 End Sub)
+                Parallel.For(0, n + 1, Sub(ii)
+                                           alpha(ii) = (1 + (0.37464 + 1.54226 * w(ii) - 0.26992 * w(ii) ^ 2) * (1 - (T / Tc(ii)) ^ 0.5)) ^ 2
+                                           ai(ii) = 0.45724 * alpha(ii) * R ^ 2 * Tc(ii) ^ 2 / Pc(ii)
+                                           bi(ii) = 0.0778 * R * Tc(ii) / Pc(ii)
+                                           If w(ii) <= 0.491 Then
+                                               ci(ii) = 0.37464 + 1.5422 * w(ii) - 0.26992 * w(ii) ^ 2
+                                           Else
+                                               ci(ii) = 0.379642 + 1.48503 * w(ii) - 0.164423 * w(ii) ^ 2 + 0.016666 * w(ii) ^ 3
+                                           End If
+                                       End Sub)
             Else
                 i = 0
                 Do
@@ -713,12 +712,11 @@ Namespace PropertyPackages.ThermoPlugs
             aux1 = -8.314 / 2 * (0.45724 / T) ^ 0.5
 
             If Settings.EnableParallelProcessing Then
-                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism, .TaskScheduler = Settings.AppTaskScheduler}
-                Parallel.For(0, n + 1, poptions, Sub(k)
-                                                     For l As Integer = 0 To n
-                                                         auxtmp(k) += Vz(k) * Vz(l) * (1 - VKij(k, l)) * (ci(l) * (ai(k) * Tc(l) / Pc(l)) ^ 0.5 + ci(k) * (ai(l) * Tc(k) / Pc(k)) ^ 0.5)
-                                                     Next
-                                                 End Sub)
+                Parallel.For(0, n + 1, Sub(k)
+                                           For l As Integer = 0 To n
+                                               auxtmp(k) += Vz(k) * Vz(l) * (1 - VKij(k, l)) * (ci(l) * (ai(k) * Tc(l) / Pc(l)) ^ 0.5 + ci(k) * (ai(l) * Tc(k) / Pc(k)) ^ 0.5)
+                                           Next
+                                       End Sub)
                 aux2 = auxtmp.SumY
             Else
                 Dim i, j As Integer
@@ -742,12 +740,11 @@ Namespace PropertyPackages.ThermoPlugs
             Dim a(n, n) As Double
 
             If Settings.EnableParallelProcessing Then
-                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism, .TaskScheduler = Settings.AppTaskScheduler}
-                Parallel.For(0, n + 1, poptions, Sub(k)
-                                                     For j As Integer = 0 To n
-                                                         a(k, j) = (ai(k) * ai(j)) ^ 0.5 * (1 - vkij(k, j))
-                                                     Next
-                                                 End Sub)
+                Parallel.For(0, n + 1, Sub(k)
+                                           For j As Integer = 0 To n
+                                               a(k, j) = (ai(k) * ai(j)) ^ 0.5 * (1 - vkij(k, j))
+                                           Next
+                                       End Sub)
             Else
                 Dim i, j As Integer
                 i = 0
@@ -770,13 +767,12 @@ Namespace PropertyPackages.ThermoPlugs
             Dim saml, aml(n), aml2(n) As Double
 
             If Settings.EnableParallelProcessing Then
-                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism, .TaskScheduler = Settings.AppTaskScheduler}
-                Parallel.For(0, n + 1, poptions, Sub(k)
-                                                     For j As Integer = 0 To n
-                                                         aml(k) += Vx(k) * Vx(j) * a(k, j)
-                                                         aml2(k) += Vx(j) * a(j, k)
-                                                     Next
-                                                 End Sub)
+                Parallel.For(0, n + 1, Sub(k)
+                                           For j As Integer = 0 To n
+                                               aml(k) += Vx(k) * Vx(j) * a(k, j)
+                                               aml2(k) += Vx(j) * a(j, k)
+                                           Next
+                                       End Sub)
                 saml = aml.SumY
             Else
                 Dim i, j As Integer
@@ -923,17 +919,16 @@ Namespace PropertyPackages.ThermoPlugs
             Loop Until i = n + 1
 
             If Settings.EnableParallelProcessing Then
-                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism, .TaskScheduler = Settings.AppTaskScheduler}
-                Parallel.For(0, n + 1, poptions, Sub(ii)
-                                                     alpha(ii) = (1 + (0.37464 + 1.54226 * w(ii) - 0.26992 * w(ii) ^ 2) * (1 - (T / Tc(ii)) ^ 0.5)) ^ 2
-                                                     ai(ii) = 0.45724 * alpha(ii) * R ^ 2 * Tc(ii) ^ 2 / Pc(ii)
-                                                     bi(ii) = 0.0778 * R * Tc(ii) / Pc(ii)
-                                                     If w(ii) <= 0.491 Then
-                                                         ci(ii) = 0.37464 + 1.5422 * w(ii) - 0.26992 * w(ii) ^ 2
-                                                     Else
-                                                         ci(ii) = 0.379642 + 1.48503 * w(ii) - 0.164423 * w(ii) ^ 2 + 0.016666 * w(ii) ^ 3
-                                                     End If
-                                                 End Sub)
+                Parallel.For(0, n + 1, Sub(ii)
+                                           alpha(ii) = (1 + (0.37464 + 1.54226 * w(ii) - 0.26992 * w(ii) ^ 2) * (1 - (T / Tc(ii)) ^ 0.5)) ^ 2
+                                           ai(ii) = 0.45724 * alpha(ii) * R ^ 2 * Tc(ii) ^ 2 / Pc(ii)
+                                           bi(ii) = 0.0778 * R * Tc(ii) / Pc(ii)
+                                           If w(ii) <= 0.491 Then
+                                               ci(ii) = 0.37464 + 1.5422 * w(ii) - 0.26992 * w(ii) ^ 2
+                                           Else
+                                               ci(ii) = 0.379642 + 1.48503 * w(ii) - 0.164423 * w(ii) ^ 2 + 0.016666 * w(ii) ^ 3
+                                           End If
+                                       End Sub)
             Else
                 i = 0
                 Do
@@ -1113,17 +1108,16 @@ Namespace PropertyPackages.ThermoPlugs
 
 
             If Settings.EnableParallelProcessing Then
-                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism, .TaskScheduler = Settings.AppTaskScheduler}
-                Parallel.For(0, n + 1, poptions, Sub(ii)
-                                                     If w(ii) <= 0.491 Then
-                                                         ci(ii) = 0.37464 + 1.5422 * w(ii) - 0.26992 * w(ii) ^ 2
-                                                     Else
-                                                         ci(ii) = 0.379642 + 1.48503 * w(ii) - 0.164423 * w(ii) ^ 2 + 0.016666 * w(ii) ^ 3
-                                                     End If
-                                                     alpha(ii) = (1 + ci(ii) * (1 - (T / Tc(ii)) ^ 0.5)) ^ 2
-                                                     ai(ii) = 0.45724 * alpha(ii) * R ^ 2 * Tc(ii) ^ 2 / Pc(ii)
-                                                     bi(ii) = 0.0778 * R * Tc(ii) / Pc(ii)
-                                                 End Sub)
+                Parallel.For(0, n + 1, Sub(ii)
+                                           If w(ii) <= 0.491 Then
+                                               ci(ii) = 0.37464 + 1.5422 * w(ii) - 0.26992 * w(ii) ^ 2
+                                           Else
+                                               ci(ii) = 0.379642 + 1.48503 * w(ii) - 0.164423 * w(ii) ^ 2 + 0.016666 * w(ii) ^ 3
+                                           End If
+                                           alpha(ii) = (1 + ci(ii) * (1 - (T / Tc(ii)) ^ 0.5)) ^ 2
+                                           ai(ii) = 0.45724 * alpha(ii) * R ^ 2 * Tc(ii) ^ 2 / Pc(ii)
+                                           bi(ii) = 0.0778 * R * Tc(ii) / Pc(ii)
+                                       End Sub)
             Else
                 i = 0
                 Do
@@ -1192,17 +1186,16 @@ Namespace PropertyPackages.ThermoPlugs
             'Pcorr = ZP(1)
 
             If Settings.EnableParallelProcessing Then
-                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism, .TaskScheduler = Settings.AppTaskScheduler}
-                Parallel.For(0, n + 1, poptions, Sub(ii)
-                                                     Dim t1, t2, t3, t4, t5 As Double
-                                                     t1 = bi(ii) * (Z - 1) / bml
-                                                     t2 = -Math.Log(Z - BG)
-                                                     t3 = AG * (2 * aml2(ii) / aml - bi(ii) / bml)
-                                                     t4 = Math.Log((Z + (1 + 2 ^ 0.5) * BG) / (Z + (1 - 2 ^ 0.5) * BG))
-                                                     t5 = 2 * 2 ^ 0.5 * BG
-                                                     LN_CF(ii) = t1 + t2 - (t3 * t4 / t5)
-                                                     LN_CF(ii) = LN_CF(ii) + Math.Log(Pcorr / P)
-                                                 End Sub)
+                Parallel.For(0, n + 1, Sub(ii)
+                                           Dim t1, t2, t3, t4, t5 As Double
+                                           t1 = bi(ii) * (Z - 1) / bml
+                                           t2 = -Math.Log(Z - BG)
+                                           t3 = AG * (2 * aml2(ii) / aml - bi(ii) / bml)
+                                           t4 = Math.Log((Z + (1 + 2 ^ 0.5) * BG) / (Z + (1 - 2 ^ 0.5) * BG))
+                                           t5 = 2 * 2 ^ 0.5 * BG
+                                           LN_CF(ii) = t1 + t2 - (t3 * t4 / t5)
+                                           LN_CF(ii) = LN_CF(ii) + Math.Log(Pcorr / P)
+                                       End Sub)
             Else
                 Dim t1, t2, t3, t4, t5 As Double
                 i = 0
@@ -1477,17 +1470,16 @@ Namespace PropertyPackages.ThermoPlugs
             Loop Until i = n + 1
 
             If Settings.EnableParallelProcessing Then
-                Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism, .TaskScheduler = Settings.AppTaskScheduler}
-                Parallel.For(0, n + 1, poptions, Sub(ii)
-                                                     If W(ii) <= 0.491 Then
-                                                         ci(ii) = 0.37464 + 1.5422 * W(ii) - 0.26992 * W(ii) ^ 2
-                                                     Else
-                                                         ci(ii) = 0.379642 + 1.48503 * W(ii) - 0.164423 * W(ii) ^ 2 + 0.016666 * W(ii) ^ 3
-                                                     End If
-                                                     alpha(ii) = (1 + ci(ii) * (1 - (T / Tc(ii)) ^ 0.5)) ^ 2
-                                                     ai(ii) = 0.45724 * alpha(ii) * R ^ 2 * Tc(ii) ^ 2 / Pc(ii)
-                                                     bi(ii) = 0.0778 * R * Tc(ii) / Pc(ii)
-                                                 End Sub)
+                Parallel.For(0, n + 1, Sub(ii)
+                                           If W(ii) <= 0.491 Then
+                                               ci(ii) = 0.37464 + 1.5422 * W(ii) - 0.26992 * W(ii) ^ 2
+                                           Else
+                                               ci(ii) = 0.379642 + 1.48503 * W(ii) - 0.164423 * W(ii) ^ 2 + 0.016666 * W(ii) ^ 3
+                                           End If
+                                           alpha(ii) = (1 + ci(ii) * (1 - (T / Tc(ii)) ^ 0.5)) ^ 2
+                                           ai(ii) = 0.45724 * alpha(ii) * R ^ 2 * Tc(ii) ^ 2 / Pc(ii)
+                                           bi(ii) = 0.0778 * R * Tc(ii) / Pc(ii)
+                                       End Sub)
             Else
                 i = 0
                 Do
@@ -1579,6 +1571,10 @@ Namespace PropertyPackages.ThermoPlugs
 
             IObj?.Close()
 
+            If result.Count = 0 Then
+                Throw New Exception("PR EOS: Unable to calculate compressility factor at given conditions.")
+            End If
+
             Return result
 
         End Function
@@ -1635,6 +1631,10 @@ Namespace PropertyPackages.ThermoPlugs
             If temp1(0, 1) = 0.0# And temp1(0, 0) > 0.0# Then result.Add(temp1(0, 0))
             If temp1(1, 1) = 0.0# And temp1(1, 0) > 0.0# Then result.Add(temp1(1, 0))
             If temp1(2, 1) = 0.0# And temp1(2, 0) > 0.0# Then result.Add(temp1(2, 0))
+
+            If result.Count = 0 Then
+                Throw New Exception("PR EOS: Unable to calculate compressility factor at given conditions.")
+            End If
 
             Return result
 

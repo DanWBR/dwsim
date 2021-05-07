@@ -63,6 +63,12 @@ Namespace PropertyPackages
 
         End Sub
 
+        Public Overrides Function GetEditingForm() As Form
+
+            Return New FormConfigLKP() With {._pp = Me, ._comps = Flowsheet.SelectedCompounds}
+
+        End Function
+
         Public Overrides Sub ConfigParameters()
 
         End Sub

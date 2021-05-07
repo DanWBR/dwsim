@@ -868,6 +868,12 @@ Public Class GraphicsSurface
 
             SelectedObject?.DisplayControlPanelModeEditor()
 
+            If TypeOf SelectedObject Is SwitchGraphic Then
+                Dim switchobj = DirectCast(SelectedObject.Owner, ISwitch)
+                switchobj.IsOn = Not switchobj.IsOn
+                DirectCast(switchobj, ISimulationObject).Calculate()
+            End If
+
         Else
 
             If MultiSelectMode Then
@@ -1358,7 +1364,7 @@ Public Class GraphicsSurface
                                       t.Stop()
                                       DrawAddedAnimation = True
                                   Else
-                                      InvalidateCallback.Invoke()
+                                      InvalidateCallback?.Invoke()
                                   End If
                               End Sub
         t.Start()
@@ -1585,7 +1591,7 @@ Public Class GraphicsSurface
         Dim settings = New FastIncrementalLayoutSettings()
         settings.AvoidOverlaps = True
         settings.PackingMethod = PackingMethod.Compact
-        settings.NodeSeparation = 100 * DistanceFactor
+        settings.NodeSeparation = 50 * DistanceFactor
         settings.RouteEdges = True
         settings.RespectEdgePorts = True
         Dim eset = New Microsoft.Msagl.Core.Routing.EdgeRoutingSettings()

@@ -134,200 +134,6 @@ Namespace Reactors
             Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of Reactor_CSTR)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
         End Function
 
-        Public Function ODEFunc(ByVal x As Double, ByVal y As Double()) As Double()
-
-            'this function calculates the change (dy) of compound mole amounts (y) for the current volume (x).
-            'x = m3
-            'y and dy = mol/s
-
-            Dim conv As New SystemsOfUnits.Converter
-
-            Dim i As Integer = 0
-            Dim j As Integer = 0
-            Dim scBC As Double = 0
-            Dim BC As String = ""
-
-            'calculate concentrations in mol/m3 = mol/s * s/m3
-            j = 0
-            For Each s As String In N00.Keys
-                C(s) = y(j) * ResidenceTimeL / Volume
-                j = j + 1
-            Next
-
-            'conversion factors for different basis other than molar concentrations
-            Dim convfactors As New Dictionary(Of String, Double)
-
-            'loop through reactions
-            Dim rxn As Reaction
-            Dim ar = Me.ReactionsSequence(activeAL)
-
-            i = 0
-            Do
-                'process reaction i
-                rxn = FlowSheet.Reactions(ar(i))
-                For Each sb As ReactionStoichBase In rxn.Components.Values
-                    'initialize reaction rate
-                    Ri(sb.CompName) = 0.0#
-                Next
-                i += 1
-            Loop Until i = ar.Count
-
-            i = 0
-            Do
-
-                'process reaction i
-                rxn = FlowSheet.Reactions(ar(i))
-                BC = rxn.BaseReactant
-                scBC = rxn.Components(BC).StoichCoeff
-
-                Dim T As Double = ims.Phases(0).Properties.temperature.GetValueOrDefault
-
-                Dim rx As Double = 0.0#
-
-                convfactors = Me.GetConvFactors(rxn, ims)
-
-                If rxn.ReactionType = ReactionType.Kinetic Then
-
-                    'calculate reaction constants
-
-                    Dim kxf, kxr As Double
-
-                    If rxn.ReactionKinFwdType = ReactionKineticType.Arrhenius Then
-
-                        kxf = rxn.A_Forward * Exp(-SystemsOfUnits.Converter.Convert(rxn.E_Forward_Unit, "J/mol", rxn.E_Forward) / (8.314 * T))
-
-                    Else
-
-                        rxn.ExpContext = New Ciloci.Flee.ExpressionContext
-                        rxn.ExpContext.Imports.AddType(GetType(System.Math))
-
-                        rxn.ExpContext.Variables.Clear()
-                        rxn.ExpContext.Variables.Add("T", ims.Phases(0).Properties.temperature.GetValueOrDefault)
-                        rxn.ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
-
-                        rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.ReactionKinFwdExpression)
-
-                        kxf = rxn.Expr.Evaluate
-
-                    End If
-
-                    If rxn.ReactionKinRevType = ReactionKineticType.Arrhenius Then
-
-                        kxr = rxn.A_Reverse * Exp(-SystemsOfUnits.Converter.Convert(rxn.E_Reverse_Unit, "J/mol", rxn.E_Reverse) / (8.314 * T))
-
-                    Else
-
-                        rxn.ExpContext = New Ciloci.Flee.ExpressionContext
-                        rxn.ExpContext.Imports.AddType(GetType(System.Math))
-
-                        rxn.ExpContext.Variables.Clear()
-                        rxn.ExpContext.Variables.Add("T", ims.Phases(0).Properties.temperature.GetValueOrDefault)
-                        rxn.ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
-
-                        rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.ReactionKinRevExpression)
-
-                        kxr = rxn.Expr.Evaluate
-
-                    End If
-
-                    If T < rxn.Tmin Or T > rxn.Tmax Then
-                        kxf = 0.0#
-                        kxr = 0.0#
-                    End If
-
-                    Dim rxf As Double = 1.0#
-                    Dim rxr As Double = 1.0#
-
-                    'kinetic expression
-                    For Each sb As ReactionStoichBase In rxn.Components.Values
-                        rxf *= (C(sb.CompName) * convfactors(sb.CompName)) ^ sb.DirectOrder
-                        rxr *= (C(sb.CompName) * convfactors(sb.CompName)) ^ sb.ReverseOrder
-                    Next
-
-                    'calculate reaction rate
-                    rx = kxf * rxf - kxr * rxr
-
-                    'convert to internal SI units
-                    Rxi(rxn.ID) = SystemsOfUnits.Converter.ConvertToSI(rxn.VelUnit, rx)
-
-                    Kf(i) = kxf
-                    Kr(i) = kxr
-
-                ElseIf rxn.ReactionType = ReactionType.Heterogeneous_Catalytic Then
-
-                    Dim numval, denmval As Double
-
-                    rxn.ExpContext = New Ciloci.Flee.ExpressionContext
-                    rxn.ExpContext.Imports.AddType(GetType(System.Math))
-
-                    rxn.ExpContext.Variables.Clear()
-                    rxn.ExpContext.Variables.Add("T", ims.Phases(0).Properties.temperature.GetValueOrDefault)
-                    rxn.ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
-
-                    Dim ir As Integer = 1
-                    Dim ip As Integer = 1
-                    Dim ine As Integer = 1
-
-                    For Each sb As ReactionStoichBase In rxn.Components.Values
-                        If sb.StoichCoeff < 0 Then
-                            rxn.ExpContext.Variables.Add("R" & ir.ToString, C(sb.CompName) * convfactors(sb.CompName))
-                            ir += 1
-                        ElseIf sb.StoichCoeff > 0 Then
-                            rxn.ExpContext.Variables.Add("P" & ip.ToString, C(sb.CompName) * convfactors(sb.CompName))
-                            ip += 1
-                        Else
-                            rxn.ExpContext.Variables.Add("N" & ine.ToString, C(sb.CompName) * convfactors(sb.CompName))
-                            ine += 1
-                        End If
-                    Next
-
-                    rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.RateEquationNumerator)
-
-                    numval = rxn.Expr.Evaluate
-
-                    rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.RateEquationDenominator)
-
-                    denmval = rxn.Expr.Evaluate
-
-                    'calculate reaction rate & convert to internal SI units
-                    rx = SystemsOfUnits.Converter.ConvertToSI(rxn.VelUnit, numval / denmval)
-
-                    Rxi(rxn.ID) = rx
-
-                End If
-
-                'calculate total compound consumption/generation rates in mol/m3/s
-                For Each sb As ReactionStoichBase In rxn.Components.Values
-                    If rxn.ReactionType = ReactionType.Kinetic Then
-                        Ri(sb.CompName) += Rxi(rxn.ID) * sb.StoichCoeff / rxn.Components(BC).StoichCoeff
-                    ElseIf rxn.ReactionType = ReactionType.Heterogeneous_Catalytic Then
-                        Ri(sb.CompName) += Rxi(rxn.ID) * sb.StoichCoeff / rxn.Components(BC).StoichCoeff * Me.CatalystAmount
-                    End If
-
-                Next
-
-                i += 1
-
-            Loop Until i = ar.Count
-
-            Dim dy(Ri.Count - 1) As Double
-
-            'calculate compound mole flows change
-
-            j = 0
-            For Each kv As KeyValuePair(Of String, Double) In Ri
-                dy(j) = -kv.Value * x 'x = volume
-                j += 1
-            Next
-
-            FlowSheet.CheckStatus()
-
-            'return dNi = dy
-
-            Return dy
-
-        End Function
-
         Public Overrides Sub CreateDynamicProperties()
 
             AddDynamicProperty("Operating Pressure", "Current Operating Pressure", 0, UnitOfMeasure.pressure)
@@ -666,7 +472,7 @@ Namespace Reactors
             'Initialisations
             Q = ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault 'Mixture
             QV = ims.Phases(2).Properties.volumetric_flow.GetValueOrDefault 'Vapour
-            QL = ims.Phases(3).Properties.volumetric_flow.GetValueOrDefault 'Liquid
+            QL = ims.Phases(1).Properties.volumetric_flow.GetValueOrDefault 'Liquid
             QS = ims.Phases(7).Properties.volumetric_flow.GetValueOrDefault 'Solid
 
             If QL > 0 Then
@@ -753,7 +559,7 @@ Namespace Reactors
 
                 Q = ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault 'Mixture
                 QV = ims.Phases(2).Properties.volumetric_flow.GetValueOrDefault 'Vapour
-                QL = ims.Phases(3).Properties.volumetric_flow.GetValueOrDefault 'Liquid
+                QL = ims.Phases(1).Properties.volumetric_flow.GetValueOrDefault 'Liquid
                 QS = ims.Phases(7).Properties.volumetric_flow.GetValueOrDefault 'Solid
 
                 If ReactorMode = EReactorMode.SingleOutlet Then
@@ -1092,6 +898,8 @@ Namespace Reactors
 
                 If NIter > MaxIterations Then Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
 
+                FlowSheet.CheckStatus()
+
             Loop Until IErr < Tolerance Or MaxChange < Tolerance * 10 'repeat until composition is constant
 
             '====================================================
@@ -1327,6 +1135,10 @@ out:        Dim ms1, ms2 As MaterialStream
                             value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault)
                         Case 5
                             value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.OutletTemperature)
+                        Case 6
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.volume, Me.Headspace)
+                        Case 7
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.time, Me.ResidenceTimeV)
                     End Select
 
 
@@ -1394,15 +1206,15 @@ out:        Dim ms1, ms2 As MaterialStream
             If basecol.Length > 0 Then proplist.AddRange(basecol)
             Select Case proptype
                 Case PropertyType.RW
-                    For i = 0 To 5
+                    For i = 0 To 7
                         proplist.Add("PROP_CS_" + CStr(i))
                     Next
                 Case PropertyType.WR
-                    For i = 0 To 5
+                    For i = 0 To 6
                         proplist.Add("PROP_CS_" + CStr(i))
                     Next
                 Case PropertyType.ALL, PropertyType.RO
-                    For i = 0 To 5
+                    For i = 0 To 7
                         proplist.Add("PROP_CS_" + CStr(i))
                     Next
                     proplist.Add("Calculation Mode")
@@ -1442,6 +1254,8 @@ out:        Dim ms1, ms2 As MaterialStream
                     Me.DeltaT = SystemsOfUnits.Converter.ConvertToSI(su.deltaT, propval)
                 Case 5
                     Me.OutletTemperature = SystemsOfUnits.Converter.ConvertToSI(su.temperature, propval)
+                Case 6
+                    Me.Headspace = SystemsOfUnits.Converter.ConvertToSI(su.volume, propval)
             End Select
             Return 1
         End Function
@@ -1475,6 +1289,10 @@ out:        Dim ms1, ms2 As MaterialStream
                                 value = su.heatflow
                             Case 5
                                 value = su.temperature
+                            Case 6
+                                value = su.volume
+                            Case 7
+                                value = su.time
                         End Select
 
                     Catch ex As Exception

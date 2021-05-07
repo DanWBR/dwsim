@@ -72,6 +72,7 @@ Namespace PropertyPackages
 
         End Sub
 
+
 #Region "    DWSIM Functions"
 
         Public Overrides Function DW_CalcCp_ISOL(ByVal Phase1 As PropertyPackages.Phase, ByVal T As Double, ByVal P As Double) As Double
@@ -651,6 +652,8 @@ Namespace PropertyPackages
 
                 IObj?.Close()
 
+                If Double.IsNaN(H) Then H = 0.0
+
                 Return H
 
             End If
@@ -702,6 +705,8 @@ Namespace PropertyPackages
                 End If
 
                 IObj?.Close()
+
+                If Double.IsNaN(S) Then S = 0.0
 
                 Return S
 

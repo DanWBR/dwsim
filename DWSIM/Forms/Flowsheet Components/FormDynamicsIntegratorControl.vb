@@ -45,10 +45,27 @@ Public Class FormDynamicsIntegratorControl
         Flowsheet.DynamicsManager.CurrentSchedule = Flowsheet.DynamicsManager.ScheduleList.Values.ToList(cbScenario.SelectedIndex).ID
     End Sub
 
+    Private Paused As Boolean = False
+    Private Running As Boolean = False
+
     Private Sub btnRun_Click(sender As Object, e As EventArgs) Handles btnRun.Click
 
+        If Running Then Paused = Not Paused
+
+        If Paused Then
+            btnRun.BackgroundImage = My.Resources.icons8_play
+        Else
+            btnRun.BackgroundImage = My.Resources.icons8_pause
+        End If
+
         If Flowsheet.DynamicMode Then
-            RunIntegrator(False, False)
+            If Not Running Then
+                RunIntegrator(False, False, False)
+            Else
+                If Not Paused Then
+                    RunIntegrator(False, False, True)
+                End If
+            End If
         Else
             Flowsheet.ShowMessage(DWSIM.App.GetLocalString("DynamicsDisabled"), Interfaces.IFlowsheet.MessageType.Warning)
         End If
@@ -57,6 +74,9 @@ Public Class FormDynamicsIntegratorControl
 
     Private Sub btnStop_Click(sender As Object, e As EventArgs) Handles btnStop.Click
 
+        btnRun.BackgroundImage = My.Resources.icons8_play
+
+        Paused = False
         Abort = True
 
     End Sub
@@ -73,7 +93,7 @@ Public Class FormDynamicsIntegratorControl
             list.Add(vnew)
         Next
 
-        integrator.MonitoredVariableValues.Add(tstep, list)
+        integrator.MonitoredVariableValues.Add(tstamp.Ticks, list)
 
     End Sub
 
@@ -134,7 +154,7 @@ Public Class FormDynamicsIntegratorControl
     Private Sub btnRealtime_Click(sender As Object, e As EventArgs) Handles btnRealtime.Click
 
         If Flowsheet.DynamicMode Then
-            RunIntegrator(True, False)
+            RunIntegrator(True, False, False)
         Else
             Flowsheet.ShowMessage(DWSIM.App.GetLocalString("DynamicsDisabled"), Interfaces.IFlowsheet.MessageType.Warning)
         End If
@@ -159,9 +179,7 @@ Public Class FormDynamicsIntegratorControl
 
     End Sub
 
-    Public Function RunIntegrator(realtime As Boolean, waittofinish As Boolean) As Task
-
-        btnRun.Enabled = False
+    Public Function RunIntegrator(realtime As Boolean, waittofinish As Boolean, restarting As Boolean) As Task
 
         btnRealtime.Enabled = False
 
@@ -170,45 +188,38 @@ Public Class FormDynamicsIntegratorControl
         Abort = False
 
         Dim schedule = Flowsheet.DynamicsManager.ScheduleList(Flowsheet.DynamicsManager.CurrentSchedule)
-
         Dim integrator = Flowsheet.DynamicsManager.IntegratorList(schedule.CurrentIntegrator)
 
         integrator.RealTime = realtime
 
         Dim Controllers = Flowsheet.SimulationObjects.Values.Where(Function(x) x.ObjectClass = SimulationObjectClass.Controllers).ToList
 
-        If Not waittofinish Then
-
-            If Not realtime Then
-
-                If Not schedule.UseCurrentStateAsInitial Then
-
-                    RestoreState(schedule.InitialFlowsheetStateID)
-
+        If Not restarting Then
+            If Not waittofinish Then
+                If Not realtime Then
+                    If Not schedule.UseCurrentStateAsInitial Then
+                        RestoreState(schedule.InitialFlowsheetStateID)
+                    End If
                 End If
-
             End If
-
         End If
 
-        ProgressBar1.Value = 0
+        If Not restarting Then ProgressBar1.Value = 0
 
         ProgressBar1.Minimum = 0
 
-        integrator.MonitoredVariableValues.Clear()
+        If Not restarting Then integrator.MonitoredVariableValues.Clear()
 
         lblFinish.Text = integrator.Duration.ToString("c")
 
         If realtime Then
 
             ProgressBar1.Maximum = Integer.MaxValue
-
             ProgressBar1.Style = ProgressBarStyle.Marquee
 
         Else
 
             ProgressBar1.Maximum = integrator.Duration.TotalSeconds
-
             ProgressBar1.Style = ProgressBarStyle.Continuous
 
         End If
@@ -219,11 +230,13 @@ Public Class FormDynamicsIntegratorControl
 
         Dim final = ProgressBar1.Maximum
 
-        For Each controller As PIDController In Controllers
-            controller.Reset()
-        Next
+        If Not restarting Then
+            For Each controller As PIDController In Controllers
+                controller.Reset()
+            Next
+        End If
 
-        If schedule.ResetContentsOfAllObjects Then
+        If schedule.ResetContentsOfAllObjects And Not restarting Then
             For Each obj In Flowsheet.SimulationObjects.Values
                 If obj.HasPropertiesForDynamicMode Then
                     If TypeOf obj Is BaseClass Then
@@ -245,9 +258,10 @@ Public Class FormDynamicsIntegratorControl
             Next
         End If
 
-        integrator.CurrentTime = New Date
-
-        integrator.MonitoredVariableValues.Clear()
+        If Not restarting Then
+            integrator.CurrentTime = New Date
+            integrator.MonitoredVariableValues.Clear()
+        End If
 
         Dim controllers_check As Double = 100000
         Dim streams_check As Double = 100000
@@ -257,16 +271,26 @@ Public Class FormDynamicsIntegratorControl
 
         Dim exceptions As New List(Of Exception)
 
+        If Not restarting Then
+            Flowsheet.ProcessScripts(Scripts.EventType.IntegratorStarted, Scripts.ObjectType.Integrator, "")
+        End If
+
         Dim maintask = New Task(Sub()
 
-                                    Dim j As Integer = 0
+                                    Running = True
 
                                     Dim i As Double = 0
+
+                                    If restarting Then
+                                        Flowsheet.RunCodeOnUIThread(Sub()
+                                                                        i = ProgressBar1.Value
+                                                                    End Sub)
+                                        Application.DoEvents()
+                                    End If
 
                                     While i <= final
 
                                         Dim sw As New Stopwatch
-
                                         sw.Start()
 
                                         Dim i0 As Integer = i
@@ -309,7 +333,7 @@ Public Class FormDynamicsIntegratorControl
 
                                         If exceptions.Count > 0 Then Exit While
 
-                                        StoreVariableValues(integrator, j, integrator.CurrentTime)
+                                        StoreVariableValues(integrator, i, integrator.CurrentTime)
 
                                         Flowsheet.RunCodeOnUIThread(Sub()
                                                                         Flowsheet.FormDynamics.UpdateControllerList()
@@ -338,32 +362,21 @@ Public Class FormDynamicsIntegratorControl
                                         Dim waittime = integrator.RealTimeStepMs - sw.ElapsedMilliseconds
 
                                         If waittime > 0 And realtime Then
-
                                             Task.Delay(waittime).Wait()
-
                                         End If
 
                                         sw.Stop()
 
-                                        If Abort Then Exit While
+                                        If Abort Or Paused Then Exit While
 
                                         If Not realtime Then
-
                                             If schedule.UsesEventList Then
-
                                                 ProcessEvents(schedule.CurrentEventList, integrator.CurrentTime, integrator.IntegrationStep)
-
                                             End If
-
                                             If schedule.UsesCauseAndEffectMatrix Then
-
                                                 ProcessCEMatrix(schedule.CurrentCauseAndEffectMatrix)
-
                                             End If
-
                                         End If
-
-                                        j += 1
 
                                         i += interval
 
@@ -374,16 +387,22 @@ Public Class FormDynamicsIntegratorControl
                                 End Sub)
 
         maintask.ContinueWith(Sub(t)
+                                  If Not Paused Then Running = False
                                   Flowsheet.RunCodeOnUIThread(Sub()
-                                                                  btnRun.Enabled = True
                                                                   btnViewResults.Enabled = True
                                                                   btnRealtime.Enabled = True
-                                                                  ProgressBar1.Value = 0
-                                                                  ProgressBar1.Style = ProgressBarStyle.Continuous
+                                                                  If Not Paused Then
+                                                                      ProgressBar1.Value = 0
+                                                                      ProgressBar1.Style = ProgressBarStyle.Continuous
+                                                                  End If
                                                                   Flowsheet.SupressMessages = False
                                                                   Flowsheet.UpdateOpenEditForms()
                                                                   Dim baseexception As Exception
                                                                   If t.Exception IsNot Nothing Then
+                                                                      btnRun.BackgroundImage = My.Resources.icons8_play
+                                                                      Paused = False
+                                                                      Running = False
+                                                                      Flowsheet.ProcessScripts(Scripts.EventType.IntegratorError, Scripts.ObjectType.Integrator, "")
                                                                       For Each ex In t.Exception.Flatten().InnerExceptions
                                                                           Dim euid As String = Guid.NewGuid().ToString()
                                                                           SharedClasses.ExceptionProcessing.ExceptionList.Exceptions.Add(euid, ex)
@@ -407,14 +426,16 @@ Public Class FormDynamicsIntegratorControl
                                                                               Flowsheet.ShowMessage(baseexception.Message.ToString, Interfaces.IFlowsheet.MessageType.GeneralError, euid)
                                                                           End If
                                                                       Next
+                                                                  Else
+                                                                      Flowsheet.ProcessScripts(Scripts.EventType.IntegratorFinished, Scripts.ObjectType.Integrator, "")
                                                                   End If
                                                               End Sub)
                               End Sub)
 
         If waittofinish Then
-            maintask.RunSynchronously()
+            maintask.RunSynchronously(TaskScheduler.Default)
         Else
-            maintask.Start()
+            maintask.Start(TaskScheduler.Default)
         End If
 
         Return maintask
@@ -443,11 +464,7 @@ Public Class FormDynamicsIntegratorControl
 
         i = 1
         For Each item In integrator.MonitoredVariableValues
-            If integrator.RealTime Then
-                sheet.Cells(i, 0).Data = item.Key * integrator.RealTimeStepMs
-            Else
-                sheet.Cells(i, 0).Data = item.Key * integrator.IntegrationStep.TotalMilliseconds
-            End If
+            sheet.Cells(i, 0).Data = New TimeSpan(item.Key).TotalMilliseconds
             j = 1
             For Each var In item.Value
                 sheet.Cells(i, j).Data = var.PropertyValue.ToDoubleFromInvariant
@@ -455,6 +472,13 @@ Public Class FormDynamicsIntegratorControl
             Next
             i += 1
         Next
+
+        sheet.SetRangeDataFormat(New unvell.ReoGrid.RangePosition(
+                                 New unvell.ReoGrid.CellPosition(1, 1),
+                                 New unvell.ReoGrid.CellPosition(i - 1, j - 1)),
+                                 unvell.ReoGrid.DataFormat.CellDataFormatFlag.Number,
+                                 New unvell.ReoGrid.DataFormat.NumberDataFormatter.NumberFormatArgs With {
+                                    .DecimalPlaces = 4, .UseSeparator = False})
 
         Flowsheet.FormSpreadsheet.Activate()
 

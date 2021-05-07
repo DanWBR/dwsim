@@ -117,19 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="lblTag.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
   <data name="chkActive.ToolTip1" xml:space="preserve">
-    <value />
-  </data>
-  <data name="chkActive.ToolTip2" xml:space="preserve">
-    <value>Active/Inactive</value>
-  </data>
-  <data name="lblConnectedTo.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lblStatus.ToolTip2" xml:space="preserve">
     <value />
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
@@ -139,38 +127,14 @@
   <data name="Label13.Text" xml:space="preserve">
     <value>Linked to</value>
   </data>
-  <data name="Label13.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label12.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label11.Text" xml:space="preserve">
     <value>Object</value>
-  </data>
-  <data name="Label11.ToolTip2" xml:space="preserve">
-    <value />
   </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>General Info</value>
   </data>
-  <data name="GroupBox5.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
-  <data name="rtbAnnotations.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Notes</value>
-  </data>
-  <data name="GroupBox4.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbRatio2.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbRatio1.ToolTip2" xml:space="preserve">
-    <value />
   </data>
   <data name="TrackBar2.Location" type="System.Drawing.Point, System.Drawing">
     <value>133, 75</value>
@@ -178,23 +142,11 @@
   <data name="TrackBar2.Size" type="System.Drawing.Size, System.Drawing">
     <value>205, 20</value>
   </data>
-  <data name="TrackBar2.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
   <data name="TrackBar1.Location" type="System.Drawing.Point, System.Drawing">
     <value>133, 49</value>
   </data>
   <data name="TrackBar1.Size" type="System.Drawing.Size, System.Drawing">
     <value>205, 20</value>
-  </data>
-  <data name="TrackBar1.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cbFlowSpec2.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbFlowSpec2.ToolTip2" xml:space="preserve">
-    <value />
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 13</value>
@@ -202,23 +154,11 @@
   <data name="Label5.Text" xml:space="preserve">
     <value>Stream 2 Flow Spec</value>
   </data>
-  <data name="Label5.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cbFlowSpec1.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbFlowSpec1.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 13</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Stream 1 Flow Spec</value>
-  </data>
-  <data name="Label4.ToolTip2" xml:space="preserve">
-    <value />
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 13</value>
@@ -226,17 +166,11 @@
   <data name="Label2.Text" xml:space="preserve">
     <value>Stream 2 Split Ratio</value>
   </data>
-  <data name="Label2.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 13</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Stream 1 Split Ratio</value>
-  </data>
-  <data name="Label3.ToolTip2" xml:space="preserve">
-    <value />
   </data>
   <data name="cbCalcMode.Items" xml:space="preserve">
     <value>Stream Split Ratios</value>
@@ -247,53 +181,41 @@
   <data name="cbCalcMode.Items2" xml:space="preserve">
     <value>Stream Mole Flow Specs</value>
   </data>
-  <data name="cbCalcMode.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 13</value>
   </data>
   <data name="Label8.Text" xml:space="preserve">
     <value>Calculation Type</value>
   </data>
-  <data name="Label8.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Calculation Parameters</value>
-  </data>
-  <data name="GroupBox2.ToolTip2" xml:space="preserve">
-    <value />
   </data>
   <data name="btnCreateAndConnectOutlet3.ToolTip1" xml:space="preserve">
     <value />
   </data>
   <data name="btnCreateAndConnectOutlet3.ToolTip2" xml:space="preserve">
-    <value>Create and Connect</value>
+    <value />
   </data>
   <data name="btnCreateAndConnectOutlet2.ToolTip1" xml:space="preserve">
     <value />
   </data>
   <data name="btnCreateAndConnectOutlet2.ToolTip2" xml:space="preserve">
-    <value>Create and Connect</value>
+    <value />
   </data>
   <data name="btnCreateAndConnectOutlet1.ToolTip1" xml:space="preserve">
     <value />
   </data>
   <data name="btnCreateAndConnectOutlet1.ToolTip2" xml:space="preserve">
-    <value>Create and Connect</value>
+    <value />
   </data>
   <data name="btnCreateAndConnectInlet1.ToolTip1" xml:space="preserve">
     <value />
   </data>
   <data name="btnCreateAndConnectInlet1.ToolTip2" xml:space="preserve">
-    <value>Create and Connect</value>
+    <value />
   </data>
   <data name="btnDisconnectOutlet3.ToolTip1" xml:space="preserve">
     <value />
-  </data>
-  <data name="btnDisconnectOutlet3.ToolTip2" xml:space="preserve">
-    <value>Disconnect</value>
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 13</value>
@@ -301,17 +223,8 @@
   <data name="Label6.Text" xml:space="preserve">
     <value>Outlet Stream 3</value>
   </data>
-  <data name="Label6.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cbOutlet3.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
   <data name="btnDisconnectOutlet2.ToolTip1" xml:space="preserve">
     <value />
-  </data>
-  <data name="btnDisconnectOutlet2.ToolTip2" xml:space="preserve">
-    <value>Disconnect</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 13</value>
@@ -319,23 +232,11 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Outlet Stream 2</value>
   </data>
-  <data name="Label1.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cbOutlet2.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
   <data name="btnDisconnectOutlet1.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="btnDisconnectOutlet1.ToolTip2" xml:space="preserve">
-    <value>Disconnect</value>
-  </data>
   <data name="btnDisconnect1.ToolTip1" xml:space="preserve">
     <value />
-  </data>
-  <data name="btnDisconnect1.ToolTip2" xml:space="preserve">
-    <value>Disconnect</value>
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 13</value>
@@ -343,31 +244,13 @@
   <data name="Label7.Text" xml:space="preserve">
     <value>Outlet Stream 1</value>
   </data>
-  <data name="Label7.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cbOutlet1.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cbInlet1.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 13</value>
   </data>
   <data name="Label19.Text" xml:space="preserve">
     <value>Inlet Stream</value>
   </data>
-  <data name="Label19.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Connections</value>
-  </data>
-  <data name="GroupBox1.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
-  <data name="$this.ToolTip2" xml:space="preserve">
-    <value />
   </data>
 </root>

@@ -10,14 +10,10 @@ Imports DWSIM.Interfaces.Interfaces2
 
     Inherits FormConfigPropertyPackageBase
 
-    <System.NonSerialized()> Public _copp, _pptpl As Object
-    Public _selts As CapeOpenObjInfo
     Private _coobjects As New List(Of CapeOpenObjInfo)
     Private _loaded As Boolean = False
-    Public _coversion As String
-    Public _ppname As String
-    Public _mappings As New Dictionary(Of String, String)
-    Public _phasemappings As New Dictionary(Of String, PhaseInfo)
+
+    Public pp As CAPEOPENPropertyPackage
 
     'CAPE-OPEN 1.0 Property Calculation Routines {678c09a2-7d66-11d2-a67d-00105a42887f}
     'CAPE-OPEN 1.0 Thermo Systems {678c09a3-7d66-11d2-a67d-00105a42887f}
@@ -30,9 +26,9 @@ Imports DWSIM.Interfaces.Interfaces2
 
     Private Sub FormConfigCAPEOPEN_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        Me._coobjects.Clear()
+        _coobjects.Clear()
 
-        If _coversion = "1.0" Then
+        If pp._coversion = "1.0" Then
             SearchCO("{678c09a3-7d66-11d2-a67d-00105a42887f}")
             rb10.Checked = True
         Else
@@ -48,40 +44,40 @@ Imports DWSIM.Interfaces.Interfaces2
             End With
         Next
 
-        If Not _selts Is Nothing Then
-            cbThermoServer.SelectedItem = _selts.Name
-            If Not _pptpl Is Nothing Then
-                Dim t As Type = Type.GetTypeFromProgID(_selts.TypeName)
-                _pptpl = Activator.CreateInstance(t)
+        If Not pp._selts Is Nothing Then
+            cbThermoServer.SelectedItem = pp._selts.Name
+            If Not pp._pptpl Is Nothing Then
+                Dim t As Type = Type.GetTypeFromProgID(pp._selts.TypeName)
+                pp._pptpl = Activator.CreateInstance(t)
             End If
-            Dim myppm As CapeOpen.ICapeUtilities = TryCast(_pptpl, CapeOpen.ICapeUtilities)
+            Dim myppm As CapeOpen.ICapeUtilities = TryCast(pp._pptpl, CapeOpen.ICapeUtilities)
             If Not myppm Is Nothing Then
                 Try
                     myppm.Initialize()
                 Catch ex As Exception
-                    Dim ecu As CapeOpen.ECapeUser = _pptpl
+                    Dim ecu As CapeOpen.ECapeUser = pp._pptpl
                     MessageBox.Show("Error initializing CAPE-OPEN Property Package - " + ex.Message.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     MessageBox.Show("CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description)
                 End Try
             End If
             Dim proppacks As String()
-            If _coversion = "1.0" Then
-                proppacks = CType(_pptpl, ICapeThermoSystem).GetPropertyPackages
+            If pp._coversion = "1.0" Then
+                proppacks = CType(pp._pptpl, ICapeThermoSystem).GetPropertyPackages
             Else
-                proppacks = CType(_pptpl, ICapeThermoPropertyPackageManager).GetPropertyPackageList
+                proppacks = CType(pp._pptpl, ICapeThermoPropertyPackageManager).GetPropertyPackageList
             End If
             For Each pp As String In proppacks
                 Me.cbPropPack.Items.Add(pp)
             Next
-            Me.lblName2.Text = _selts.Name
-            Me.lblVersion2.Text = _selts.Version
-            Me.lblAuthorURL2.Text = _selts.VendorURL
-            Me.lblDesc2.Text = _selts.Description
-            Me.lblAbout2.Text = _selts.AboutInfo
+            Me.lblName2.Text = pp._selts.Name
+            Me.lblVersion2.Text = pp._selts.Version
+            Me.lblAuthorURL2.Text = pp._selts.VendorURL
+            Me.lblDesc2.Text = pp._selts.Description
+            Me.lblAbout2.Text = pp._selts.AboutInfo
         End If
 
-        If Not _copp Is Nothing Then
-            Dim pname As String = CType(_copp, ICapeIdentification).ComponentName
+        If Not pp._copp Is Nothing Then
+            Dim pname As String = CType(pp._copp, ICapeIdentification).ComponentName
             If Not Me.cbPropPack.Items.Contains(pname) Then
                 Me.cbPropPack.Items.Add(pname)
             End If
@@ -101,13 +97,13 @@ Imports DWSIM.Interfaces.Interfaces2
             For Each r As DataGridViewRow In dgmap.Rows
                 Dim comp As String = r.Cells(0).Value
                 Dim map As String = r.Cells(2).Value
-                _mappings(comp) = map
+                pp._mappings(comp) = map
             Next
 
             For Each r As DataGridViewRow In dgvph.Rows
                 Dim phase As String = r.Cells(0).Value
                 Dim cophaselabel As String = r.Cells(2).Value
-                _phasemappings(phase).PhaseLabel = cophaselabel
+                pp._phasemappings(phase).PhaseLabel = cophaselabel
             Next
 
         End If
@@ -118,12 +114,12 @@ Imports DWSIM.Interfaces.Interfaces2
 
         'compounds/components and phases
 
-        If _mappings Is Nothing Then _mappings = New Dictionary(Of String, String)
+        If pp._mappings Is Nothing Then pp._mappings = New Dictionary(Of String, String)
 
         'check mappings
 
         Dim nc As Integer = _form.SelectedCompounds.Count
-        Dim mc As Integer = _mappings.Count
+        Dim mc As Integer = pp._mappings.Count
 
         Dim remap As Boolean = False
 
@@ -132,7 +128,7 @@ Imports DWSIM.Interfaces.Interfaces2
             remap = True
         Else
             For Each c In _form.SelectedCompounds.Values
-                If Not _mappings.ContainsKey(c.Name) Then
+                If Not pp._mappings.ContainsKey(c.Name) Then
                     'remapping necessary
                     remap = True
                 End If
@@ -140,9 +136,9 @@ Imports DWSIM.Interfaces.Interfaces2
         End If
 
         If remap Then
-            _mappings.Clear()
+            pp._mappings.Clear()
             For Each c In _form.SelectedCompounds.Values
-                _mappings.Add(c.Name, "")
+                pp._mappings.Add(c.Name, "")
             Next
         End If
 
@@ -160,14 +156,14 @@ Imports DWSIM.Interfaces.Interfaces2
 
         Dim i As Integer = 0
 
-        If Not _copp Is Nothing Then
+        If Not pp._copp Is Nothing Then
 
-            If _coversion = "1.0" Then
-                CType(_copp, ICapeThermoPropertyPackage).GetComponentList(complist, formulae, names, boiltemps, molwts, casids)
-                plist = CType(_copp, ICapeThermoPropertyPackage).GetPhaseList()
+            If pp._coversion = "1.0" Then
+                CType(pp._copp, ICapeThermoPropertyPackage).GetComponentList(complist, formulae, names, boiltemps, molwts, casids)
+                plist = CType(pp._copp, ICapeThermoPropertyPackage).GetPhaseList()
             Else
-                CType(_copp, ICapeThermoCompounds).GetCompoundList(complist, formulae, names, boiltemps, molwts, casids)
-                CType(_copp, ICapeThermoPhases).GetPhaseList(plist, staggr, kci)
+                CType(pp._copp, ICapeThermoCompounds).GetCompoundList(complist, formulae, names, boiltemps, molwts, casids)
+                CType(pp._copp, ICapeThermoPhases).GetPhaseList(plist, staggr, kci)
             End If
             For Each s As String In complist
                 cb.Items.Add(s)
@@ -175,20 +171,20 @@ Imports DWSIM.Interfaces.Interfaces2
 
             dgmap.Columns(2).CellTemplate = cb
 
-            Dim comps = _mappings.Keys.ToArray()
+            Dim comps = pp._mappings.Keys.ToArray()
 
             For Each s As String In comps
                 i = 0
                 For Each c As String In casids
                     If _form.SelectedCompounds(s).CAS_Number = c Then
-                        _mappings(s) = complist(i)
+                        pp._mappings(s) = complist(i)
                     End If
                     i += 1
                 Next
             Next
 
             Me.dgmap.Rows.Clear()
-            For Each kvp As KeyValuePair(Of String, String) In _mappings
+            For Each kvp As KeyValuePair(Of String, String) In pp._mappings
                 Me.dgmap.Rows.Add(New Object() {kvp.Key, kvp.Key, kvp.Value})
             Next
 
@@ -210,93 +206,93 @@ Imports DWSIM.Interfaces.Interfaces2
                 b = False
             Next
 
-            If _coversion = "1.0" Then
+            If pp._coversion = "1.0" Then
 
             Else
 
-                If _phasemappings("Vapor").PhaseLabel = "" Then
+                If pp._phasemappings("Vapor").PhaseLabel = "" Then
                     i = 0
                     For Each s In staggr
                         If s = "Vapor" And Not alreadymapped(i) Then
-                            _phasemappings("Vapor").PhaseLabel = plist(i)
+                            pp._phasemappings("Vapor").PhaseLabel = plist(i)
                             alreadymapped(i) = True
                             Exit For
                         End If
                         i += 1
                     Next
-                    If _phasemappings("Vapor").PhaseLabel = "" Then _phasemappings("Vapor").PhaseLabel = "Disabled"
+                    If pp._phasemappings("Vapor").PhaseLabel = "" Then pp._phasemappings("Vapor").PhaseLabel = "Disabled"
                 End If
 
-                If _phasemappings("Liquid1").PhaseLabel = "" Then
+                If pp._phasemappings("Liquid1").PhaseLabel = "" Then
                     i = 0
                     For Each s In staggr
                         If s = "Liquid" And Not alreadymapped(i) Then
-                            _phasemappings("Liquid1").PhaseLabel = plist(i)
+                            pp._phasemappings("Liquid1").PhaseLabel = plist(i)
                             alreadymapped(i) = True
                             Exit For
                         End If
                         i += 1
                     Next
-                    If _phasemappings("Liquid1").PhaseLabel = "" Then _phasemappings("Liquid1").PhaseLabel = "Disabled"
+                    If pp._phasemappings("Liquid1").PhaseLabel = "" Then pp._phasemappings("Liquid1").PhaseLabel = "Disabled"
                 End If
 
-                If _phasemappings("Liquid2").PhaseLabel = "" Then
+                If pp._phasemappings("Liquid2").PhaseLabel = "" Then
                     i = 0
                     For Each s In staggr
                         If s = "Liquid" And Not alreadymapped(i) Then
-                            _phasemappings("Liquid2").PhaseLabel = plist(i)
+                            pp._phasemappings("Liquid2").PhaseLabel = plist(i)
                             alreadymapped(i) = True
                             Exit For
                         End If
                         i += 1
                     Next
-                    If _phasemappings("Liquid2").PhaseLabel = "" Then _phasemappings("Liquid2").PhaseLabel = "Disabled"
+                    If pp._phasemappings("Liquid2").PhaseLabel = "" Then pp._phasemappings("Liquid2").PhaseLabel = "Disabled"
                 End If
 
-                If _phasemappings("Liquid3").PhaseLabel = "" Then
+                If pp._phasemappings("Liquid3").PhaseLabel = "" Then
                     i = 0
                     For Each s In staggr
                         If s = "Liquid" And Not alreadymapped(i) Then
-                            _phasemappings("Liquid3").PhaseLabel = plist(i)
+                            pp._phasemappings("Liquid3").PhaseLabel = plist(i)
                             alreadymapped(i) = True
                             Exit For
                         End If
                         i += 1
                     Next
-                    If _phasemappings("Liquid3").PhaseLabel = "" Then _phasemappings("Liquid3").PhaseLabel = "Disabled"
+                    If pp._phasemappings("Liquid3").PhaseLabel = "" Then pp._phasemappings("Liquid3").PhaseLabel = "Disabled"
                 End If
 
-                If _phasemappings("Aqueous").PhaseLabel = "" Then
+                If pp._phasemappings("Aqueous").PhaseLabel = "" Then
                     i = 0
                     For Each s In staggr
                         If s = "Liquid" And Not alreadymapped(i) Then
-                            _phasemappings("Aqueous").PhaseLabel = plist(i)
+                            pp._phasemappings("Aqueous").PhaseLabel = plist(i)
                             alreadymapped(i) = True
                             Exit For
                         End If
                         i += 1
                     Next
-                    If _phasemappings("Aqueous").PhaseLabel = "" Then _phasemappings("Aqueous").PhaseLabel = "Disabled"
+                    If pp._phasemappings("Aqueous").PhaseLabel = "" Then pp._phasemappings("Aqueous").PhaseLabel = "Disabled"
                 End If
 
-                If _phasemappings.ContainsKey("Solid") Then
-                    If _phasemappings("Solid").PhaseLabel = "" Then
+                If pp._phasemappings.ContainsKey("Solid") Then
+                    If pp._phasemappings("Solid").PhaseLabel = "" Then
                         i = 0
                         For Each s In staggr
                             If s = "Solid" And Not alreadymapped(i) Then
-                                _phasemappings("Solid").PhaseLabel = plist(i)
+                                pp._phasemappings("Solid").PhaseLabel = plist(i)
                                 alreadymapped(i) = True
                                 Exit For
                             End If
                             i += 1
                         Next
-                        If _phasemappings("Solid").PhaseLabel = "" Then _phasemappings("Solid").PhaseLabel = "Disabled"
+                        If pp._phasemappings("Solid").PhaseLabel = "" Then pp._phasemappings("Solid").PhaseLabel = "Disabled"
                     End If
                 End If
 
             End If
 
-            For Each kvp As KeyValuePair(Of String, PhaseInfo) In _phasemappings
+            For Each kvp As KeyValuePair(Of String, PhaseInfo) In pp._phasemappings
                 Me.dgvph.Rows.Add(New Object() {kvp.Key, kvp.Key, kvp.Value.PhaseLabel})
             Next
 
@@ -352,25 +348,25 @@ Imports DWSIM.Interfaces.Interfaces2
 
             For Each coui As CapeOpenObjInfo In _coobjects
                 If coui.Name = cbThermoServer.SelectedItem.ToString Then
-                    _selts = coui
+                    pp._selts = coui
                 End If
             Next
 
-            Dim t As Type = Type.GetTypeFromProgID(_selts.TypeName)
-            _pptpl = Activator.CreateInstance(t)
+            Dim t As Type = Type.GetTypeFromProgID(pp._selts.TypeName)
+            pp._pptpl = Activator.CreateInstance(t)
 
-            If TryCast(_pptpl, IPersistStreamInit) IsNot Nothing Then
-                CType(_pptpl, IPersistStreamInit).InitNew()
+            If TryCast(pp._pptpl, IPersistStreamInit) IsNot Nothing Then
+                CType(pp._pptpl, IPersistStreamInit).InitNew()
             End If
-            If TryCast(_pptpl, ICapeUtilities) IsNot Nothing Then
-                CType(_pptpl, ICapeUtilities).Initialize()
+            If TryCast(pp._pptpl, ICapeUtilities) IsNot Nothing Then
+                CType(pp._pptpl, ICapeUtilities).Initialize()
             End If
 
             Dim proppacks As Object
-            If _coversion = "1.0" Then
-                proppacks = CType(_pptpl, ICapeThermoSystem).GetPropertyPackages
+            If pp._coversion = "1.0" Then
+                proppacks = CType(pp._pptpl, ICapeThermoSystem).GetPropertyPackages
             Else
-                proppacks = CType(_pptpl, ICapeThermoPropertyPackageManager).GetPropertyPackageList
+                proppacks = CType(pp._pptpl, ICapeThermoPropertyPackageManager).GetPropertyPackageList
             End If
 
             Me.cbPropPack.Items.Clear()
@@ -380,11 +376,11 @@ Imports DWSIM.Interfaces.Interfaces2
                 Next
             End If
 
-            Me.lblName2.Text = _selts.Name
-            Me.lblVersion2.Text = _selts.Version
-            Me.lblAuthorURL2.Text = _selts.VendorURL
-            Me.lblDesc2.Text = _selts.Description
-            Me.lblAbout2.Text = _selts.AboutInfo
+            Me.lblName2.Text = pp._selts.Name
+            Me.lblVersion2.Text = pp._selts.Version
+            Me.lblAuthorURL2.Text = pp._selts.VendorURL
+            Me.lblDesc2.Text = pp._selts.Description
+            Me.lblAbout2.Text = pp._selts.AboutInfo
 
         End If
 
@@ -392,7 +388,7 @@ Imports DWSIM.Interfaces.Interfaces2
 
     Private Sub btnEditPropServer_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEditThermoServer.Click
 
-        Dim myuo As ICapeUtilities = TryCast(_pptpl, ICapeUtilities)
+        Dim myuo As ICapeUtilities = TryCast(pp._pptpl, ICapeUtilities)
 
         If Not myuo Is Nothing Then
             Try
@@ -409,7 +405,7 @@ Imports DWSIM.Interfaces.Interfaces2
 
     Private Sub btnEditEqServer_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEditPropPack.Click
 
-        Dim myuo As ICapeUtilities = TryCast(_copp, ICapeUtilities)
+        Dim myuo As ICapeUtilities = TryCast(pp._copp, ICapeUtilities)
 
         If Not myuo Is Nothing Then
             Try
@@ -426,13 +422,13 @@ Imports DWSIM.Interfaces.Interfaces2
 
     Private Sub rb10_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rb10.CheckedChanged
 
-        If rb10.Checked Then _coversion = "1.0" Else _coversion = "1.1"
+        If rb10.Checked Then pp._coversion = "1.0" Else pp._coversion = "1.1"
 
         If _loaded Then
 
             Me._coobjects.Clear()
 
-            If _coversion = "1.0" Then
+            If pp._coversion = "1.0" Then
                 SearchCO("{678c09a3-7d66-11d2-a67d-00105a42887f}")
             Else
                 SearchCO("{cf51e383-0110-4ed8-acb7-b50cfde6908e}")
@@ -454,18 +450,18 @@ Imports DWSIM.Interfaces.Interfaces2
 
         If _loaded Then
 
-            If _coversion = "1.0" Then
-                _copp = CType(_pptpl, ICapeThermoSystem).ResolvePropertyPackage(cbPropPack.SelectedItem.ToString)
+            If pp._coversion = "1.0" Then
+                pp._copp = CType(pp._pptpl, ICapeThermoSystem).ResolvePropertyPackage(cbPropPack.SelectedItem.ToString)
             Else
-                _copp = CType(_pptpl, ICapeThermoPropertyPackageManager).GetPropertyPackage(cbPropPack.SelectedItem.ToString)
+                pp._copp = CType(pp._pptpl, ICapeThermoPropertyPackageManager).GetPropertyPackage(cbPropPack.SelectedItem.ToString)
             End If
-            If TryCast(_pptpl, IPersistStreamInit) IsNot Nothing Then
-                CType(_copp, IPersistStreamInit).InitNew()
+            If TryCast(pp._pptpl, IPersistStreamInit) IsNot Nothing Then
+                CType(pp._copp, IPersistStreamInit).InitNew()
             End If
-            If TryCast(_pptpl, ICapeUtilities) IsNot Nothing Then
-                CType(_copp, ICapeUtilities).Initialize()
+            If TryCast(pp._pptpl, ICapeUtilities) IsNot Nothing Then
+                CType(pp._copp, ICapeUtilities).Initialize()
             End If
-            _ppname = cbPropPack.SelectedItem.ToString
+            pp._ppname = cbPropPack.SelectedItem.ToString
             UpdateMappings()
         End If
 

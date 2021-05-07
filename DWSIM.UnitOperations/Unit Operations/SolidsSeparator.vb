@@ -50,6 +50,10 @@ Namespace UnitOperations
         Public Property SeparationEfficiency() As Double = 100.0#
         Public Property LiquidSeparationEfficiency() As Double = 100.0#
 
+        Public Overrides Sub PerformPostCalcValidation()
+
+        End Sub
+
         Public Sub New()
             MyBase.New()
         End Sub

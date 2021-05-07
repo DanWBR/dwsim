@@ -564,6 +564,8 @@ Namespace UnitOperations.Auxiliary.Pipe
         Public Property HTC_insulation As Double = 0.0#
         Public Property HTC_external As Double = 0.0#
 
+        Public Property External_Temperature As Double = 0.0
+
         Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
 
             XMLSerializer.XMLSerializer.Deserialize(Me, data)

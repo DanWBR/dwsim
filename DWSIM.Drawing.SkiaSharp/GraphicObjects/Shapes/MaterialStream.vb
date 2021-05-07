@@ -97,21 +97,23 @@ Namespace GraphicObjects.Shapes
                 .StrokeWidth = LineWidth
                 .IsStroke = Not Fill
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .PathEffect = SKPathEffect.CreateCorner(1.0F)
+                .PathEffect = SKPathEffect.CreateCorner(0.3F)
             End With
 
             Dim gp As New SKPath()
 
-            gp.MoveTo(Convert.ToInt32(X), Convert.ToInt32(Y + 0.35 * Height))
-            gp.LineTo(Convert.ToInt32(X + 0.75 * Width), Convert.ToInt32(Y + 0.35 * Height))
-            gp.LineTo(Convert.ToInt32(X + 0.75 * Width), Convert.ToInt32(Y + 0.25 * Height))
-            gp.LineTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height))
-            gp.LineTo(Convert.ToInt32(X + 0.75 * Width), Convert.ToInt32(Y + 0.75 * Height))
-            gp.LineTo(Convert.ToInt32(X + 0.75 * Width), Convert.ToInt32(Y + 0.65 * Height))
-            gp.LineTo(Convert.ToInt32(X), Convert.ToInt32(Y + 0.65 * Height))
-            gp.LineTo(Convert.ToInt32(X), Convert.ToInt32(Y + 0.35 * Height))
+            gp.MoveTo((X), (Y + 0.35 * Height))
+            gp.LineTo((X + 0.75 * Width), (Y + 0.35 * Height))
+            gp.LineTo((X + 0.75 * Width), (Y + 0.25 * Height))
+            gp.LineTo((X + Width), (Y + 0.5 * Height))
+            gp.LineTo((X + 0.75 * Width), (Y + 0.75 * Height))
+            gp.LineTo((X + 0.75 * Width), (Y + 0.65 * Height))
+            gp.LineTo((X), (Y + 0.65 * Height))
+            gp.LineTo((X), (Y + 0.35 * Height))
 
             gp.Close()
+
+            canvas.DrawPath(gp, myPen)
 
             If GradientMode Then
 
@@ -137,7 +139,6 @@ Namespace GraphicObjects.Shapes
 
             End If
 
-            canvas.DrawPath(gp, myPen)
 
             If Owner?.GetFlowsheet.DynamicMode Then
 

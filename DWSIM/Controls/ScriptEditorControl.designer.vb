@@ -254,6 +254,7 @@ Partial Class ScriptEditorControl
         '
         'treeViewItems
         '
+        Me.treeViewItems.LineColor = System.Drawing.Color.Empty
         resources.ApplyResources(Me.treeViewItems, "treeViewItems")
         Me.treeViewItems.Name = "treeViewItems"
         Me.treeViewItems.PathSeparator = "."

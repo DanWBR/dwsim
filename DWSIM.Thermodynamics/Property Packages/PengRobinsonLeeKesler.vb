@@ -341,6 +341,8 @@ Namespace PropertyPackages
                 H = Me.m_lk.H_LK_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Hid(298.15, T, Vx)) - Me.RET_HFUSM(AUX_CONVERT_MOL_TO_MASS(Vx), T)
             End If
 
+            If Double.IsNaN(H) Then H = 0.0
+
             Return H
 
         End Function
@@ -371,6 +373,8 @@ Namespace PropertyPackages
             ElseIf st = State.Solid Then
                 S = Me.m_lk.S_LK_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Sid(298.15, T, P, Vx)) - Me.RET_HFUSM(AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
             End If
+
+            If Double.IsNaN(S) Then S = 0.0
 
             Return S
 

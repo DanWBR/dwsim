@@ -162,6 +162,7 @@ Public Class EditingForm_ReactorCSTR
             gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("DeltaT"), su.Converter.ConvertFromSI(units.deltaT, .DeltaT.GetValueOrDefault).ToString(nf), units.deltaT})
             gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("RConvPGridItem3"), su.Converter.ConvertFromSI(units.heatflow, .DeltaQ.GetValueOrDefault).ToString(nf), units.heatflow})
             gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("TKResTime"), su.Converter.ConvertFromSI(units.time, .ResidenceTimeL).ToString(nf), units.time})
+            gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("TKResTimeV"), su.Converter.ConvertFromSI(units.time, .ResidenceTimeV).ToString(nf), units.time})
 
             'reaction props
 
@@ -208,7 +209,7 @@ Public Class EditingForm_ReactorCSTR
     End Sub
 
     Private Sub btnConfigurePP_Click(sender As Object, e As EventArgs) Handles btnConfigurePP.Click
-        SimObject.FlowSheet.PropertyPackages.Values.Where(Function(x) x.Tag = cbPropPack.SelectedItem.ToString).SingleOrDefault.DisplayEditingForm()
+        SimObject.FlowSheet.PropertyPackages.Values.Where(Function(x) x.Tag = cbPropPack.SelectedItem.ToString).SingleOrDefault.DisplayGroupedEditingForm()
     End Sub
 
     Private Sub lblTag_TextChanged(sender As Object, e As EventArgs) Handles lblTag.TextChanged
@@ -380,7 +381,11 @@ Public Class EditingForm_ReactorCSTR
     End Sub
 
     Private Sub chkActive_CheckedChanged(sender As Object, e As EventArgs) Handles chkActive.CheckedChanged
-        If Loaded Then SimObject.GraphicObject.Active = chkActive.Checked
+        If Loaded Then
+            SimObject.GraphicObject.Active = chkActive.Checked
+            SimObject.FlowSheet.UpdateInterface()
+            UpdateInfo()
+        End If
     End Sub
 
     Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbOutletTemperature.TextChanged, tbOutletTemperature.TextChanged, tbCatLoad.TextChanged, tbPDrop.TextChanged, tbVol.TextChanged, tbHeadspace.TextChanged

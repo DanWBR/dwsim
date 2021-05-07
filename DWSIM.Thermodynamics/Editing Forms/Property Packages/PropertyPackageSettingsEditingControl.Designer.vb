@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class PropertyPackageSettingsEditingControl
     Inherits System.Windows.Forms.UserControl
 
     'UserControl overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class PropertyPackageSettingsEditingControl
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PropertyPackageSettingsEditingControl))
         Me.cbLiqDens = New System.Windows.Forms.ComboBox()
@@ -48,8 +48,6 @@ Partial Class PropertyPackageSettingsEditingControl
         Me.Label10 = New System.Windows.Forms.Label()
         Me.chkCalcAdditionalProps = New System.Windows.Forms.CheckBox()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.chkDoPhaseId = New System.Windows.Forms.CheckBox()
-        Me.chkCalcBubbleDew = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'cbLiqDens
@@ -199,22 +197,11 @@ Partial Class PropertyPackageSettingsEditingControl
         resources.ApplyResources(Me.Label11, "Label11")
         Me.Label11.Name = "Label11"
         '
-        'chkDoPhaseId
-        '
-        resources.ApplyResources(Me.chkDoPhaseId, "chkDoPhaseId")
-        Me.chkDoPhaseId.Name = "chkDoPhaseId"
-        '
-        'chkCalcBubbleDew
-        '
-        resources.ApplyResources(Me.chkCalcBubbleDew, "chkCalcBubbleDew")
-        Me.chkCalcBubbleDew.Name = "chkCalcBubbleDew"
-        '
         'PropertyPackageSettingsEditingControl
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.chkDoPhaseId)
-        Me.Controls.Add(Me.chkCalcBubbleDew)
+        Me.BackColor = System.Drawing.SystemColors.Window
         Me.Controls.Add(Me.chkCalcAdditionalProps)
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.Label10)
@@ -270,6 +257,4 @@ Partial Class PropertyPackageSettingsEditingControl
     Friend WithEvents Label10 As Label
     Friend WithEvents chkCalcAdditionalProps As CheckBox
     Friend WithEvents Label11 As Label
-    Public WithEvents chkDoPhaseId As CheckBox
-    Public WithEvents chkCalcBubbleDew As CheckBox
 End Class

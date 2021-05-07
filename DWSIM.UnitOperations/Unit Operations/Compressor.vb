@@ -357,16 +357,129 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
 
                     'recalculate Q with P2i
 
+                    Dim rho1, rho2, rho2i, n_isent, n_poly, Wic, Wpc, fce As Double
+
                     Do
 
-                        IObj?.SetCurrent()
-                        tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2i, Si, Ti)
+                        P2 = P2i
 
-                        If ProcessPath = ProcessPathType.Adiabatic Then
-                            Qloop = Wi * (tmp.CalculatedEnthalpy - Hi) / (Me.AdiabaticEfficiency / 100)
+                        IObj?.SetCurrent()
+                        PropertyPackage.CurrentMaterialStream = msin
+                        tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2, Si, Ti)
+                        T2s = tmp.CalculatedTemperature
+                        H2s = tmp.CalculatedEnthalpy
+
+                        Dim tms As MaterialStream = msin.Clone()
+
+                        If ProcessPath = ProcessPathType.Polytropic Then
+
+                            AdiabaticEfficiency = PolytropicEfficiency
+
+                            Dim ef0, ef1 As Double
+
+                            Do
+
+                                IObj?.SetCurrent()
+                                PropertyPackage.CurrentMaterialStream = msin
+                                tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, Hi + Me.DeltaQ / Wi, T2)
+                                T2 = tmp.CalculatedTemperature
+                                Me.DeltaT = T2 - Ti
+
+                                CheckSpec(T2, True, "outlet temperature")
+
+                                H2 = Hi + Me.DeltaQ / Wi
+
+                                OutletTemperature = T2
+
+                                rho1 = msin.GetPhase("Mixture").Properties.density.GetValueOrDefault
+
+                                tms.PropertyPackage = PropertyPackage
+                                PropertyPackage.CurrentMaterialStream = tms
+                                tms.Phases(0).Properties.temperature = T2s
+                                tms.Phases(0).Properties.pressure = P2
+                                tms.Phases(0).Properties.enthalpy = H2s
+                                tms.Calculate()
+
+                                rho2i = tms.GetPhase("Mixture").Properties.density.GetValueOrDefault
+
+                                tms.PropertyPackage = PropertyPackage
+                                PropertyPackage.CurrentMaterialStream = tms
+                                tms.Phases(0).Properties.temperature = T2
+                                tms.Phases(0).Properties.pressure = P2
+                                tms.Phases(0).Properties.enthalpy = H2
+                                tms.Calculate()
+
+                                rho2 = tms.GetPhase("Mixture").Properties.density.GetValueOrDefault
+
+                                ' volume exponent (isent)
+
+                                n_isent = Math.Log(P2 / Pi) / Math.Log(rho2i / rho1)
+
+                                ' volume exponent (polyt)
+
+                                n_poly = Math.Log(P2 / Pi) / Math.Log(rho2 / rho1)
+
+                                fce = ((P2 / Pi) ^ ((n_poly - 1) / n_poly) - 1) * ((n_poly / (n_poly - 1)) * (n_isent - 1) / n_isent) / ((P2 / Pi) ^ ((n_isent - 1) / n_isent) - 1)
+
+                                ' real work
+
+                                ef0 = AdiabaticEfficiency
+
+                                AdiabaticEfficiency = PolytropicEfficiency / fce
+
+                                ef1 = AdiabaticEfficiency
+
+                            Loop Until Math.Abs(ef1 - ef0) < 0.00001
+
                         Else
-                            Qloop = Wi * (tmp.CalculatedEnthalpy - Hi) / (Me.PolytropicEfficiency / 100)
+
+                            IObj?.SetCurrent()
+                            PropertyPackage.CurrentMaterialStream = msin
+                            tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, Hi + Me.DeltaQ / Wi, T2)
+                            T2 = tmp.CalculatedTemperature
+                            Me.DeltaT = T2 - Ti
+
+                            CheckSpec(T2, True, "outlet temperature")
+
+                            H2 = Hi + Me.DeltaQ / Wi
+
+                            OutletTemperature = T2
+
+                            rho1 = msin.GetPhase("Mixture").Properties.density.GetValueOrDefault
+
+                            tms.PropertyPackage = PropertyPackage
+                            PropertyPackage.CurrentMaterialStream = tms
+                            tms.Phases(0).Properties.temperature = T2s
+                            tms.Phases(0).Properties.pressure = P2
+                            tms.Phases(0).Properties.enthalpy = H2s
+                            tms.Calculate()
+
+                            rho2i = tms.GetPhase("Mixture").Properties.density.GetValueOrDefault
+
+                            tms.PropertyPackage = PropertyPackage
+                            PropertyPackage.CurrentMaterialStream = tms
+                            tms.Phases(0).Properties.temperature = T2
+                            tms.Phases(0).Properties.pressure = P2
+                            tms.Phases(0).Properties.enthalpy = H2
+                            tms.Calculate()
+
+                            rho2 = tms.GetPhase("Mixture").Properties.density.GetValueOrDefault
+
+                            ' volume exponent (isent)
+
+                            n_isent = Math.Log(P2 / Pi) / Math.Log(rho2i / rho1)
+
+                            ' volume exponent (polyt)
+
+                            n_poly = Math.Log(P2 / Pi) / Math.Log(rho2 / rho1)
+
+                            fce = ((P2 / Pi) ^ ((n_poly - 1) / n_poly) - 1) * ((n_poly / (n_poly - 1)) * (n_isent - 1) / n_isent) / ((P2 / Pi) ^ ((n_isent - 1) / n_isent) - 1)
+
+                            PolytropicEfficiency = AdiabaticEfficiency * fce
+
                         End If
+
+                        Qloop = Wi * (H2s - Hi) / (Me.AdiabaticEfficiency / 100)
 
                         If DebugMode Then AppendDebugLine(String.Format("Qi: {0}", Qi))
 
@@ -380,121 +493,20 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                         If icnt <= 2 Then
                             P2i *= 1.01
                         Else
-                            P2i = P2i - 0.3 * fx / ((fx - fx00) / (P2i - P2i00))
+                            P2i = P2i - 0.7 * fx / ((fx - fx00) / (P2i - P2i00))
                         End If
 
                         If DebugMode Then AppendDebugLine(String.Format("P2i: {0}", P2i))
 
                         icnt += 1
 
-                    Loop Until Math.Abs((DeltaQ - Qloop) / DeltaQ) < 0.001
+                    Loop Until Math.Abs((DeltaQ - Qloop) / DeltaQ) < 0.00001
 
                     P2 = P2i
-
-                    If DebugMode Then AppendDebugLine(String.Format("Calculated outlet pressure: {0} Pa", P2))
-
-                    CheckSpec(P2, True, "outlet pressure")
-
-                    DeltaP = P2 - Pi
-                    POut = P2
-
-                    CheckSpec(Si, False, "inlet entropy")
-
-                    If DebugMode Then AppendDebugLine(String.Format("Doing a PS flash to calculate ideal outlet enthalpy... P = {0} Pa, S = {1} kJ/[kg.K]", P2, Si))
-
-                    IObj?.SetCurrent()
-                    tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2, Si, Ti)
-                    T2s = tmp.CalculatedTemperature
-                    H2s = tmp.CalculatedEnthalpy
-
-                    IObj?.Paragraphs.Add("<h3>Results</h3>")
-
-                    IObj?.Paragraphs.Add("<mi>S_{2,id}</mi>: " & String.Format("{0} kJ/[kg.K]", tmp.CalculatedEntropy))
-                    IObj?.Paragraphs.Add("<mi>T_{2,id}</mi>: " & String.Format("{0} K", tmp.CalculatedTemperature))
-                    IObj?.Paragraphs.Add("<mi>H_{2,id}</mi>: " & String.Format("{0} kJ/kg", tmp.CalculatedEnthalpy))
-
-                    If DebugMode Then AppendDebugLine(String.Format("Calculated ideal outlet enthalpy Hid = {0} kJ/kg", tmp.CalculatedEnthalpy))
-
-                    If ProcessPath = ProcessPathType.Adiabatic Then
-                        H2 = Hi + (H2s - Hi) / (Me.AdiabaticEfficiency / 100)
-                    Else
-                        H2 = Hi + (H2s - Hi) / (Me.PolytropicEfficiency / 100)
-                    End If
-
-                    If DebugMode Then AppendDebugLine(String.Format("Calculated real outlet enthalpy Hr = {0} kJ/kg", H2))
-
-                    CheckSpec(H2, False, "outlet enthalpy")
-
-                    If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", P2, H2))
-
-                    IObj?.SetCurrent()
-                    tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, T2s)
-
-                    T2 = tmp.CalculatedTemperature
-
-                    If DebugMode Then AppendDebugLine(String.Format("Calculated outlet temperature T2 = {0} K", T2))
-
-                    CheckSpec(T2, True, "outlet temperature")
-
-                    Me.DeltaT = T2 - Ti
-
-                    OutletTemperature = T2
-
-                    IObj?.Paragraphs.Add(String.Format("<mi>P_2</mi>: {0} Pa", P2))
-                    IObj?.Paragraphs.Add(String.Format("<mi>H_2</mi>: {0} kJ/kg", H2))
-                    IObj?.Paragraphs.Add(String.Format("<mi>S_2</mi>: {0} kJ/[kg.K]", tmp.CalculatedEntropy))
-                    IObj?.Paragraphs.Add(String.Format("<mi>T_2</mi>: {0} K", T2))
-
-                    Dim rho1, rho2, rho2i, n_isent, n_poly, fce As Double
-                    Dim tms As MaterialStream = msin.Clone()
-
-                    rho1 = msin.GetPhase("Mixture").Properties.density.GetValueOrDefault
-
-                    tms.PropertyPackage = PropertyPackage
-                    PropertyPackage.CurrentMaterialStream = tms
-                    tms.Phases(0).Properties.temperature = T2s
-                    tms.Phases(0).Properties.pressure = P2
-                    tms.Phases(0).Properties.enthalpy = H2s
-                    tms.Calculate()
-
-                    rho2i = tms.GetPhase("Mixture").Properties.density.GetValueOrDefault
-
-                    tms.PropertyPackage = PropertyPackage
-                    PropertyPackage.CurrentMaterialStream = tms
-                    tms.Phases(0).Properties.temperature = T2
-                    tms.Phases(0).Properties.pressure = P2
-                    tms.Phases(0).Properties.enthalpy = H2
-                    tms.Calculate()
-
-                    rho2 = tms.GetPhase("Mixture").Properties.density.GetValueOrDefault
-
-                    ' volume exponent (isent)
-
-                    n_isent = Math.Log(P2 / Pi) / Math.Log(rho2i / rho1)
-
-                    ' volume exponent (polyt)
-
-                    n_poly = Math.Log(P2 / Pi) / Math.Log(rho2 / rho1)
-
-                    ' efficiencies
-
-                    fce = ((P2 / Pi) ^ ((n_poly - 1) / n_poly) - 1) * ((n_poly / (n_poly - 1)) * (n_isent - 1) / n_isent) / ((P2 / Pi) ^ ((n_isent - 1) / n_isent) - 1)
-
-                    If ProcessPath = ProcessPathType.Adiabatic Then
-
-                        PolytropicEfficiency = fce * AdiabaticEfficiency
-
-                    Else
-
-                        AdiabaticEfficiency = PolytropicEfficiency / fce
-
-                    End If
 
                     AdiabaticCoefficient = n_isent
 
                     PolytropicCoefficient = n_poly
-
-                    Dim Wic, Wpc As Double
 
                     Wic = Wi * n_isent / (n_isent - 1) * fce * (Pi / rho1) * ((P2 / Pi) ^ ((n_isent - 1) / n_isent) - 1) / 1000
 
@@ -563,9 +575,6 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                     IObj?.Paragraphs.Add(String.Format("<mi>S_1</mi>: {0} kJ/[kg.K]", Si))
                     IObj?.Paragraphs.Add(String.Format("<mi>\eta</mi>: {0} %", AdiabaticEfficiency))
 
-                    If DebugMode Then AppendDebugLine(String.Format("Property Package: {0}", Me.PropertyPackage.Name))
-                    If DebugMode Then AppendDebugLine(String.Format("Input variables: T = {0} K, P = {1} Pa, H = {2} kJ/kg, S = {3} kJ/[kg.K], W = {4} kg/s", Ti, Pi, Hi, Si, Wi, cp))
-
                     Me.PropertyPackage.CurrentMaterialStream = msin
 
                     Select Case Me.CalcMode
@@ -578,8 +587,6 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                     End Select
 
                     CheckSpec(Si, False, "inlet entropy")
-
-                    If DebugMode Then AppendDebugLine(String.Format("Doing a PS flash to calculate ideal outlet enthalpy... P = {0} Pa, S = {1} kJ/[kg.K]", P2, Si))
 
                     IObj?.SetCurrent()
                     Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2, Si, Ti)
@@ -594,90 +601,139 @@ Curves:             Me.PropertyPackage.CurrentMaterialStream = msin
                     IObj?.Paragraphs.Add("<mi>T_{2,id}</mi>: " & String.Format("{0} K", T2))
                     IObj?.Paragraphs.Add("<mi>H_{2,id}</mi>: " & String.Format("{0} kJ/kg", H2))
 
-                    If DebugMode Then AppendDebugLine(String.Format("Calculated ideal outlet enthalpy Hid = {0} kJ/kg", tmp.CalculatedEnthalpy))
-
                     CheckSpec(T2, True, "outlet temperature")
                     CheckSpec(H2, False, "outlet enthalpy")
 
-                    If ProcessPath = ProcessPathType.Adiabatic Then
+                    Dim rho1, rho2, rho2i, n_isent, n_poly, Wic, Wpc, fce As Double
 
-                        Me.DeltaQ = Wi * (H2s - Hi) / (AdiabaticEfficiency / 100)
+                    Dim tms As MaterialStream = msin.Clone()
+
+                    If ProcessPath = ProcessPathType.Polytropic Then
+
+                        AdiabaticEfficiency = PolytropicEfficiency
+
+                        If Math.Abs(P2 - Pi) > 1 Then
+
+                            Dim ef0, ef1 As Double
+
+                            Do
+
+                                Me.DeltaQ = Wi * (H2s - Hi) / (AdiabaticEfficiency / 100)
+
+                                IObj?.SetCurrent()
+                                PropertyPackage.CurrentMaterialStream = msin
+                                tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, Hi + Me.DeltaQ / Wi, T2)
+                                T2 = tmp.CalculatedTemperature
+                                Me.DeltaT = T2 - Ti
+
+                                CheckSpec(T2, True, "outlet temperature")
+
+                                H2 = Hi + Me.DeltaQ / Wi
+
+                                OutletTemperature = T2
+
+                                rho1 = msin.GetPhase("Mixture").Properties.density.GetValueOrDefault
+
+                                tms.PropertyPackage = PropertyPackage
+                                PropertyPackage.CurrentMaterialStream = tms
+                                tms.Phases(0).Properties.temperature = T2s
+                                tms.Phases(0).Properties.pressure = P2
+                                tms.Phases(0).Properties.enthalpy = H2s
+                                tms.Calculate()
+
+                                rho2i = tms.GetPhase("Mixture").Properties.density.GetValueOrDefault
+
+                                tms.PropertyPackage = PropertyPackage
+                                PropertyPackage.CurrentMaterialStream = tms
+                                tms.Phases(0).Properties.temperature = T2
+                                tms.Phases(0).Properties.pressure = P2
+                                tms.Phases(0).Properties.enthalpy = H2
+                                tms.Calculate()
+
+                                rho2 = tms.GetPhase("Mixture").Properties.density.GetValueOrDefault
+
+                                ' volume exponent (isent)
+
+                                n_isent = Math.Log(P2 / Pi) / Math.Log(rho2i / rho1)
+
+                                ' volume exponent (polyt)
+
+                                n_poly = Math.Log(P2 / Pi) / Math.Log(rho2 / rho1)
+
+                                fce = ((P2 / Pi) ^ ((n_poly - 1) / n_poly) - 1) * ((n_poly / (n_poly - 1)) * (n_isent - 1) / n_isent) / ((P2 / Pi) ^ ((n_isent - 1) / n_isent) - 1)
+
+                                ' real work
+
+                                ef0 = AdiabaticEfficiency
+
+                                AdiabaticEfficiency = PolytropicEfficiency / fce
+
+                                ef1 = AdiabaticEfficiency
+
+                            Loop Until Math.Abs(ef1 - ef0) < 0.00001
+
+                        Else
+
+                            H2 = Hi
+                            T2 = Ti
+                            DeltaQ = 0.0
+
+                        End If
 
                     Else
 
-                        Me.DeltaQ = Wi * (H2s - Hi) / (PolytropicEfficiency / 100)
+                            Me.DeltaQ = Wi * (H2s - Hi) / (AdiabaticEfficiency / 100)
+
+                        IObj?.SetCurrent()
+                        PropertyPackage.CurrentMaterialStream = msin
+                        tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, Hi + Me.DeltaQ / Wi, T2)
+                        T2 = tmp.CalculatedTemperature
+                        Me.DeltaT = T2 - Ti
+
+                        CheckSpec(T2, True, "outlet temperature")
+
+                        H2 = Hi + Me.DeltaQ / Wi
+
+                        OutletTemperature = T2
+
+                        rho1 = msin.GetPhase("Mixture").Properties.density.GetValueOrDefault
+
+                        tms.PropertyPackage = PropertyPackage
+                        PropertyPackage.CurrentMaterialStream = tms
+                        tms.Phases(0).Properties.temperature = T2s
+                        tms.Phases(0).Properties.pressure = P2
+                        tms.Phases(0).Properties.enthalpy = H2s
+                        tms.Calculate()
+
+                        rho2i = tms.GetPhase("Mixture").Properties.density.GetValueOrDefault
+
+                        tms.PropertyPackage = PropertyPackage
+                        PropertyPackage.CurrentMaterialStream = tms
+                        tms.Phases(0).Properties.temperature = T2
+                        tms.Phases(0).Properties.pressure = P2
+                        tms.Phases(0).Properties.enthalpy = H2
+                        tms.Calculate()
+
+                        rho2 = tms.GetPhase("Mixture").Properties.density.GetValueOrDefault
+
+                        ' volume exponent (isent)
+
+                        n_isent = Math.Log(P2 / Pi) / Math.Log(rho2i / rho1)
+
+                        ' volume exponent (polyt)
+
+                        n_poly = Math.Log(P2 / Pi) / Math.Log(rho2 / rho1)
+
+                        fce = ((P2 / Pi) ^ ((n_poly - 1) / n_poly) - 1) * ((n_poly / (n_poly - 1)) * (n_isent - 1) / n_isent) / ((P2 / Pi) ^ ((n_isent - 1) / n_isent) - 1)
+
+                        PolytropicEfficiency = AdiabaticEfficiency * fce
 
                     End If
-
-                    If DebugMode Then AppendDebugLine(String.Format("Calculated real compressor power = {0} kW", DeltaQ))
-
-                    'CheckSpec(DeltaQ, True, "power")
-
-                    If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", P2, Hi + Me.DeltaQ / Wi))
-
-                    IObj?.SetCurrent()
-                    PropertyPackage.CurrentMaterialStream = msin
-                    tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, Hi + Me.DeltaQ / Wi, T2)
-                    T2 = tmp.CalculatedTemperature
-                    Me.DeltaT = T2 - Ti
-
-                    If DebugMode Then AppendDebugLine(String.Format("Calculated outlet temperature T2 = {0} K", T2))
-
-                    CheckSpec(T2, True, "outlet temperature")
-
-                    H2 = Hi + Me.DeltaQ / Wi
-
-                    OutletTemperature = T2
 
                     IObj?.Paragraphs.Add(String.Format("<mi>P_2</mi>: {0} Pa", P2))
                     IObj?.Paragraphs.Add(String.Format("<mi>H_2</mi>: {0} kJ/kg", H2))
                     IObj?.Paragraphs.Add(String.Format("<mi>S_2</mi>: {0} kJ/[kg.K]", tmp.CalculatedEntropy))
                     IObj?.Paragraphs.Add(String.Format("<mi>T_2</mi>: {0} K", T2))
-
-                    Dim rho1, rho2, rho2i, n_isent, n_poly, Wic, Wpc, fce As Double
-                    Dim tms As MaterialStream = msin.Clone()
-
-                    rho1 = msin.GetPhase("Mixture").Properties.density.GetValueOrDefault
-
-                    tms.PropertyPackage = PropertyPackage
-                    PropertyPackage.CurrentMaterialStream = tms
-                    tms.Phases(0).Properties.temperature = T2s
-                    tms.Phases(0).Properties.pressure = P2
-                    tms.Phases(0).Properties.enthalpy = H2s
-                    tms.Calculate()
-
-                    rho2i = tms.GetPhase("Mixture").Properties.density.GetValueOrDefault
-
-                    tms.PropertyPackage = PropertyPackage
-                    PropertyPackage.CurrentMaterialStream = tms
-                    tms.Phases(0).Properties.temperature = T2
-                    tms.Phases(0).Properties.pressure = P2
-                    tms.Phases(0).Properties.enthalpy = H2
-                    tms.Calculate()
-
-                    rho2 = tms.GetPhase("Mixture").Properties.density.GetValueOrDefault
-
-                    ' volume exponent (isent)
-
-                    n_isent = Math.Log(P2 / Pi) / Math.Log(rho2i / rho1)
-
-                    ' volume exponent (polyt)
-
-                    n_poly = Math.Log(P2 / Pi) / Math.Log(rho2 / rho1)
-
-                    fce = ((P2 / Pi) ^ ((n_poly - 1) / n_poly) - 1) * ((n_poly / (n_poly - 1)) * (n_isent - 1) / n_isent) / ((P2 / Pi) ^ ((n_isent - 1) / n_isent) - 1)
-
-                    ' real work
-
-                    If ProcessPath = ProcessPathType.Adiabatic Then
-
-                        PolytropicEfficiency = AdiabaticEfficiency * fce
-
-                    Else
-
-                        AdiabaticEfficiency = PolytropicEfficiency / fce
-
-                    End If
 
                     Wic = Wi * n_isent / (n_isent - 1) * fce * (Pi / rho1) * ((P2 / Pi) ^ ((n_isent - 1) / n_isent) - 1) / 1000
 

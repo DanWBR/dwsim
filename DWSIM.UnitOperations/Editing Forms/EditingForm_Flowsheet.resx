@@ -137,8 +137,8 @@
   <data name="Label5.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
-  <data name="cbOutlet5.TabIndex" type="System.Int32, mscorlib">
-    <value>61</value>
+  <data name="GroupBox2.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnCreateAndConnectOutlet9.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
@@ -153,11 +153,11 @@
   <data name="&gt;&gt;GroupBox5.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
+  <data name="cbInlet4.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="&gt;&gt;cbOutlet10.Parent" xml:space="preserve">
     <value>GroupBox1</value>
-  </data>
-  <data name="btnCreateAndConnectOutlet9.ToolTip2" xml:space="preserve">
-    <value />
   </data>
   <data name="&gt;&gt;Label16.ZOrder" xml:space="preserve">
     <value>27</value>
@@ -177,8 +177,8 @@
   <data name="Label20.Text" xml:space="preserve">
     <value>Corrente de Saída 10</value>
   </data>
-  <data name="&gt;&gt;lblStatus.Parent" xml:space="preserve">
-    <value>GroupBox5</value>
+  <data name="&gt;&gt;chkRedirect.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="cbInlet5.ToolTip2" xml:space="preserve">
     <value />
@@ -264,9 +264,6 @@
   <data name="btnCreateAndConnectOutlet7.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="Label21.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="btnCreateAndConnectInlet3.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
   </data>
@@ -278,9 +275,6 @@
   </data>
   <data name="&gt;&gt;btnCreateAndConnectInlet2.ZOrder" xml:space="preserve">
     <value>51</value>
-  </data>
-  <data name="GroupBox2.ToolTip1" xml:space="preserve">
-    <value />
   </data>
   <data name="Label17.ToolTip2" xml:space="preserve">
     <value />
@@ -336,8 +330,8 @@
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
     <value>406, 153</value>
   </data>
-  <data name="btnCreateAndConnectInlet10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="cbOutlet1.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="cbOutlet1.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -351,8 +345,8 @@
   <data name="chkActive.ToolTip" xml:space="preserve">
     <value>Ativar/Desativar</value>
   </data>
-  <data name="btnCreateAndConnectOutlet5.ToolTip" xml:space="preserve">
-    <value>Criar e Conectar</value>
+  <data name="Label1.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="cbInlet3.Location" type="System.Drawing.Point, System.Drawing">
     <value>144, 65</value>
@@ -399,8 +393,8 @@
   <data name="btnCreateAndConnectOutlet7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="cbInlet4.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;cbInlet9.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
   </data>
   <data name="Label16.ToolTip" xml:space="preserve">
     <value />
@@ -441,7 +435,7 @@
   <data name="Label11.Text" xml:space="preserve">
     <value>Objeto</value>
   </data>
-  <data name="btnCreateAndConnectOutlet5.ToolTip2" xml:space="preserve">
+  <data name="btnCreateAndConnectInlet10.ToolTip1" xml:space="preserve">
     <value />
   </data>
   <data name="btnOpenControlPanel.Text" xml:space="preserve">
@@ -483,6 +477,9 @@
   <data name="&gt;&gt;btnDisconnectOutlet8.Name" xml:space="preserve">
     <value>btnDisconnectOutlet8</value>
   </data>
+  <data name="btnDisconnectOutlet9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>385, 412</value>
+  </data>
   <data name="&gt;&gt;cbInlet9.Name" xml:space="preserve">
     <value>cbInlet9</value>
   </data>
@@ -498,11 +495,14 @@
   <data name="&gt;&gt;Label18.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 13</value>
+  </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
-  <data name="&gt;&gt;Label13.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="btnCreateAndConnectInlet2.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;GroupBox5.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -512,9 +512,6 @@
   </data>
   <data name="&gt;&gt;btnDisconnect5.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Label22.TabIndex" type="System.Int32, mscorlib">
-    <value>91</value>
   </data>
   <data name="TabPage1.Text" xml:space="preserve">
     <value>Entrada</value>
@@ -531,8 +528,8 @@
   <data name="btnCreateAndConnectInlet4.ToolTip2" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;btnDisconnectOutlet8.ZOrder" xml:space="preserve">
-    <value>9</value>
+  <data name="btnDisconnectOutlet3.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="Label4.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -545,9 +542,6 @@
   </data>
   <data name="&gt;&gt;btnCreateAndConnectOutlet5.Parent" xml:space="preserve">
     <value>GroupBox1</value>
-  </data>
-  <data name="Label7.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
   </data>
   <data name="Label8.Text" xml:space="preserve">
     <value>Corrente de Entrada 10</value>
@@ -597,9 +591,6 @@
   <data name="Label2.Text" xml:space="preserve">
     <value>Corrente de Entrada 2</value>
   </data>
-  <data name="btnDisconnect5.ToolTip1" xml:space="preserve">
-    <value />
-  </data>
   <data name="&gt;&gt;Label20.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -608,6 +599,9 @@
   </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
     <value>420, 137</value>
+  </data>
+  <data name="Column2.HeaderText" xml:space="preserve">
+    <value>Unidade</value>
   </data>
   <data name="Label11.ToolTip" xml:space="preserve">
     <value />
@@ -629,9 +623,6 @@
   </data>
   <data name="btnCreateAndConnectOutlet5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
-  </data>
-  <data name="btnCreateAndConnectInlet8.ToolTip1" xml:space="preserve">
-    <value />
   </data>
   <data name="Label10.ToolTip2" xml:space="preserve">
     <value />
@@ -686,8 +677,8 @@
         AElFTkSuQmCC
 </value>
   </data>
-  <data name="btnDisconnect9.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="btnDisconnectOutlet3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>21, 21</value>
   </data>
   <data name="dgvoutputvars.ToolTip2" xml:space="preserve">
     <value />
@@ -697,6 +688,9 @@
   </data>
   <data name="btnCreateAndConnectInlet1.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
+  </data>
+  <data name="Label19.TabIndex" type="System.Int32, mscorlib">
+    <value>59</value>
   </data>
   <data name="btnCreateAndConnectInlet8.TabIndex" type="System.Int32, mscorlib">
     <value>83</value>
@@ -719,17 +713,11 @@
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>EditingForm_FlowsheetUO</value>
   </data>
-  <data name="chkUpdateProcessData.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="btnCreateAndConnectOutlet4.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
   </data>
   <data name="lblTag.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
-  </data>
-  <data name="&gt;&gt;btnDisconnect8.Name" xml:space="preserve">
-    <value>btnDisconnect8</value>
   </data>
   <data name="Label6.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -782,8 +770,8 @@
   <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 13</value>
   </data>
-  <data name="&gt;&gt;TabPage2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 13</value>
   </data>
   <data name="cbOutlet1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -817,6 +805,9 @@
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Corrente de Entrada 4</value>
+  </data>
+  <data name="&gt;&gt;btnDisconnectOutlet4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label16.ToolTip2" xml:space="preserve">
     <value />
@@ -854,9 +845,6 @@
   <data name="btnCreateAndConnectInlet6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="&gt;&gt;btnCreateAndConnectOutlet8.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
-  </data>
   <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -875,8 +863,11 @@
   <data name="btnDisconnectOutlet7.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="btnDisconnectOutlet5.ToolTip2" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
+  </data>
+  <data name="cbOutlet5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="&gt;&gt;dgvoutputvars.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -887,9 +878,6 @@
   <data name="btnDisconnectOutlet10.ToolTip" xml:space="preserve">
     <value>Desconectar</value>
   </data>
-  <data name="&gt;&gt;lblStatus.Name" xml:space="preserve">
-    <value>lblStatus</value>
-  </data>
   <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
     <value>420, 198</value>
   </data>
@@ -899,14 +887,14 @@
   <data name="btnDisconnectOutlet9.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
   </data>
-  <data name="btnOpenControlPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="GroupBox6.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="chkUpdateProcessData.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 110</value>
+  </data>
+  <data name="BtnSearch.Location" type="System.Drawing.Point, System.Drawing">
+    <value>384, 23</value>
   </data>
   <data name="Label12.Text" xml:space="preserve">
     <value>Status</value>
@@ -932,8 +920,8 @@
   <data name="Column3.HeaderText" xml:space="preserve">
     <value>Variável</value>
   </data>
-  <data name="cbInlet5.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;Label4.ZOrder" xml:space="preserve">
+    <value>69</value>
   </data>
   <data name="cbInlet2.ToolTip2" xml:space="preserve">
     <value />
@@ -1001,9 +989,6 @@
   <data name="Label17.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 352</value>
   </data>
-  <data name="Label19.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 310</value>
-  </data>
   <data name="Label13.Text" xml:space="preserve">
     <value>Ligado a</value>
   </data>
@@ -1040,8 +1025,8 @@
   <data name="btnOpenControlPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>203, 28</value>
   </data>
-  <data name="btnCreateAndConnectInlet9.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="btnCreateAndConnectOutlet9.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;btnCreateAndConnectOutlet7.Parent" xml:space="preserve">
     <value>GroupBox1</value>
@@ -1069,6 +1054,9 @@
   </data>
   <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;Label13.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="&gt;&gt;cbOutlet9.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1109,9 +1097,6 @@
   <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 22</value>
   </data>
-  <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
-    <value>70</value>
-  </data>
   <data name="btnCreateAndConnectInlet4.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
   </data>
@@ -1148,6 +1133,9 @@
   <data name="&gt;&gt;btnOpenControlPanel.Name" xml:space="preserve">
     <value>btnOpenControlPanel</value>
   </data>
+  <data name="Label1.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="&gt;&gt;btnDisconnect2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -1158,7 +1146,7 @@
     <value>Criar e Conectar</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=6.1.7542.20315, Culture=neutral, PublicKeyToken=null</value>
+    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=6.4.9.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cbInlet4.Parent" xml:space="preserve">
     <value>GroupBox1</value>
@@ -1184,9 +1172,6 @@
   <data name="GroupBox6.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="cbInlet8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>145, 170</value>
-  </data>
   <data name="&gt;&gt;Label8.Name" xml:space="preserve">
     <value>Label8</value>
   </data>
@@ -1202,6 +1187,9 @@
   <data name="TbFileName.TabIndex" type="System.Int32, mscorlib">
     <value>33</value>
   </data>
+  <data name="cbInlet8.TabIndex" type="System.Int32, mscorlib">
+    <value>71</value>
+  </data>
   <data name="&gt;&gt;btnCreateAndConnectOutlet2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -1214,11 +1202,8 @@
   <data name="lblConnectedTo.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;Label21.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;cbInlet8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;lblConnectedTo.Parent" xml:space="preserve">
+    <value>GroupBox5</value>
   </data>
   <data name="&gt;&gt;TbFileName.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -1241,8 +1226,8 @@
   <data name="btnDisconnect8.ToolTip2" xml:space="preserve">
     <value />
   </data>
-  <data name="BtnSearch.ToolTip" xml:space="preserve">
-    <value>Procurar</value>
+  <data name="btnCreateAndConnectInlet1.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;btnDisconnect6.ZOrder" xml:space="preserve">
     <value>60</value>
@@ -1298,14 +1283,17 @@
   <data name="Label15.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
-  <data name="btnOpenControlPanel.ToolTip1" xml:space="preserve">
-    <value />
+  <data name="btnDisconnect9.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>EditingForm_Flowsheet</value>
   </data>
   <data name="Label24.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
+  </data>
+  <data name="&gt;&gt;Label6.ZOrder" xml:space="preserve">
+    <value>67</value>
   </data>
   <data name="&gt;&gt;btnDisconnect5.Name" xml:space="preserve">
     <value>btnDisconnect5</value>
@@ -1361,6 +1349,9 @@
   <data name="TabPage1.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
+  <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="&gt;&gt;Label7.ZOrder" xml:space="preserve">
     <value>66</value>
   </data>
@@ -1385,8 +1376,8 @@
   <data name="btnDisconnectOutlet9.TabIndex" type="System.Int32, mscorlib">
     <value>95</value>
   </data>
-  <data name="cbOutlet5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="btnDisconnect3.ToolTip" xml:space="preserve">
+    <value>Desconectar</value>
   </data>
   <data name="btnDisconnect6.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -1418,14 +1409,14 @@
   <data name="cbInlet4.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="BtnSearch.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="TabControl1.ToolTip1" xml:space="preserve">
     <value />
   </data>
   <data name="&gt;&gt;cbInlet6.ZOrder" xml:space="preserve">
     <value>72</value>
+  </data>
+  <data name="cbOutlet3.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
   </data>
   <data name="cbOutlet6.TabIndex" type="System.Int32, mscorlib">
     <value>64</value>
@@ -1435,6 +1426,9 @@
   </data>
   <data name="&gt;&gt;btnDisconnectOutlet6.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cbInlet5.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;btnCreateAndConnectInlet2.Parent" xml:space="preserve">
     <value>GroupBox1</value>
@@ -1474,6 +1468,9 @@
   </data>
   <data name="Label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="cbInlet6.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="cbOutlet10.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1532,7 +1529,13 @@
   <data name="cbInlet7.ToolTip1" xml:space="preserve">
     <value />
   </data>
+  <data name="btnCreateAndConnectInlet8.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="Label17.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnDisconnect3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lblStatus.Location" type="System.Drawing.Point, System.Drawing">
@@ -1595,8 +1598,8 @@
   <data name="btnCreateAndConnectOutlet10.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;cbOutlet3.ZOrder" xml:space="preserve">
-    <value>55</value>
+  <data name="Label21.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblConnectedTo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1628,8 +1631,8 @@
   <data name="btnCreateAndConnectOutlet5.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="Label20.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 13</value>
+  <data name="chkRedirect.Location" type="System.Drawing.Point, System.Drawing">
+    <value>145, 88</value>
   </data>
   <data name="&gt;&gt;cbOutlet10.Name" xml:space="preserve">
     <value>cbOutlet10</value>
@@ -1637,8 +1640,8 @@
   <data name="&gt;&gt;cbInlet7.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
-  <data name="Column5.HeaderText" xml:space="preserve">
-    <value>Valor</value>
+  <data name="Label20.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 13</value>
   </data>
   <data name="btnCreateAndConnectOutlet9.Location" type="System.Drawing.Point, System.Drawing">
     <value>359, 412</value>
@@ -1655,6 +1658,9 @@
   <data name="&gt;&gt;lblTag.Name" xml:space="preserve">
     <value>lblTag</value>
   </data>
+  <data name="&gt;&gt;Label12.Parent" xml:space="preserve">
+    <value>GroupBox5</value>
+  </data>
   <data name="btnCreateAndConnectInlet10.ToolTip2" xml:space="preserve">
     <value />
   </data>
@@ -1667,14 +1673,11 @@
   <data name="dgvoutputvars.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="&gt;&gt;Column3.Name" xml:space="preserve">
-    <value>Column3</value>
-  </data>
   <data name="&gt;&gt;btnDisconnectOutlet2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="btnCreateAndConnectInlet1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>21, 21</value>
+  <data name="cbOutlet10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>206, 21</value>
   </data>
   <data name="&gt;&gt;Label14.Parent" xml:space="preserve">
     <value>GroupBox1</value>
@@ -1691,8 +1694,8 @@
   <data name="btnDisconnectOutlet5.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;lblConnectedTo.Parent" xml:space="preserve">
-    <value>GroupBox5</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>443, 874</value>
   </data>
   <data name="btnDisconnect4.ToolTip2" xml:space="preserve">
     <value />
@@ -1703,20 +1706,23 @@
   <data name="Label7.Text" xml:space="preserve">
     <value>Corrente de Saída 1</value>
   </data>
-  <data name="&gt;&gt;chkRedirect.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="btnDisconnectOutlet7.ToolTip" xml:space="preserve">
+    <value>Desconectar</value>
   </data>
   <data name="&gt;&gt;btnDisconnectOutlet7.Name" xml:space="preserve">
     <value>btnDisconnectOutlet7</value>
   </data>
-  <data name="&gt;&gt;chkUpdateProcessData.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="chkInitialize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 88</value>
   </data>
   <data name="cbInlet6.Size" type="System.Drawing.Size, System.Drawing">
     <value>206, 21</value>
   </data>
   <data name="Label12.ToolTip" xml:space="preserve">
     <value />
+  </data>
+  <data name="btnDisconnectOutlet4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label6.ToolTip" xml:space="preserve">
     <value />
@@ -1778,8 +1784,8 @@
   <data name="btnCreateAndConnectOutlet1.ToolTip" xml:space="preserve">
     <value>Criar e Conectar</value>
   </data>
-  <data name="&gt;&gt;Label17.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
+  <data name="btnDisconnectOutlet10.TabIndex" type="System.Int32, mscorlib">
+    <value>98</value>
   </data>
   <data name="btnCreateAndConnectOutlet3.ToolTip2" xml:space="preserve">
     <value />
@@ -1793,8 +1799,11 @@
   <data name="Label23.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="Column4.HeaderText" xml:space="preserve">
-    <value>Column4</value>
+  <data name="&gt;&gt;btnDisconnectOutlet8.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;cbOutlet3.ZOrder" xml:space="preserve">
+    <value>55</value>
   </data>
   <data name="btnCreateAndConnectOutlet10.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
@@ -1841,8 +1850,8 @@
   <data name="cbInlet1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="&gt;&gt;Label17.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="btnCreateAndConnectOutlet9.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="btnCreateAndConnectInlet5.TabIndex" type="System.Int32, mscorlib">
     <value>52</value>
@@ -1874,8 +1883,8 @@
   <data name="&gt;&gt;btnDisconnect8.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
-  <data name="Label13.ToolTip1" xml:space="preserve">
-    <value />
+  <data name="Label7.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
   </data>
   <data name="&gt;&gt;Column2.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1939,9 +1948,6 @@
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn2.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn2</value>
-  </data>
-  <data name="btnDisconnectOutlet7.ToolTip" xml:space="preserve">
-    <value>Desconectar</value>
   </data>
   <data name="Label17.ToolTip" xml:space="preserve">
     <value />
@@ -2009,11 +2015,14 @@
   <data name="Label4.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="&gt;&gt;TabPage2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="cbOutlet4.ToolTip2" xml:space="preserve">
     <value />
   </data>
-  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 13</value>
+  <data name="Column4.HeaderText" xml:space="preserve">
+    <value>Column4</value>
   </data>
   <data name="Label14.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2029,9 +2038,6 @@
   </data>
   <data name="cbInlet5.Location" type="System.Drawing.Point, System.Drawing">
     <value>144, 107</value>
-  </data>
-  <data name="&gt;&gt;cbInlet9.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
   </data>
   <data name="btnCreateAndConnectOutlet4.ToolTip" xml:space="preserve">
     <value>Criar e Conectar</value>
@@ -2051,6 +2057,9 @@
   <data name="cbInlet9.ToolTip1" xml:space="preserve">
     <value />
   </data>
+  <data name="TabPage1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="btnDisconnectOutlet10.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
   </data>
@@ -2065,6 +2074,9 @@
   </data>
   <data name="btnDisconnectOutlet7.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
+  </data>
+  <data name="&gt;&gt;btnCreateAndConnectOutlet6.Name" xml:space="preserve">
+    <value>btnCreateAndConnectOutlet6</value>
   </data>
   <data name="&gt;&gt;Column5.Name" xml:space="preserve">
     <value>Column5</value>
@@ -2090,6 +2102,9 @@
   <data name="Label12.ToolTip1" xml:space="preserve">
     <value />
   </data>
+  <data name="&gt;&gt;cbInlet8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="TabControl1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -2102,9 +2117,6 @@
   <data name="lblConnectedTo.ToolTip2" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;btnDisconnect7.Name" xml:space="preserve">
-    <value>btnDisconnect7</value>
-  </data>
   <data name="btnDisconnectOutlet8.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
@@ -2114,26 +2126,29 @@
   <data name="btnDisconnectOutlet2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="btnCreateAndConnectInlet2.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
   <data name="&gt;&gt;cbOutlet7.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
   <data name="cbInlet4.Location" type="System.Drawing.Point, System.Drawing">
     <value>144, 86</value>
   </data>
-  <data name="btnDisconnectOutlet4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;Label17.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
+  </data>
+  <data name="btnViewFlowsheet.Location" type="System.Drawing.Point, System.Drawing">
+    <value>217, 51</value>
   </data>
   <data name="&gt;&gt;btnDisconnectOutlet8.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
-  <data name="btnDisconnectOutlet6.ToolTip" xml:space="preserve">
-    <value>Desconectar</value>
-  </data>
-  <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
+  <data name="&gt;&gt;btnCreateAndConnectOutlet8.Parent" xml:space="preserve">
     <value>GroupBox1</value>
+  </data>
+  <data name="btnCreateAndConnectInlet9.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="btnCreateAndConnectOutlet6.TabIndex" type="System.Int32, mscorlib">
+    <value>69</value>
   </data>
   <data name="cbOutlet7.Size" type="System.Drawing.Size, System.Drawing">
     <value>206, 21</value>
@@ -2165,8 +2180,8 @@
   <data name="&gt;&gt;Label18.ZOrder" xml:space="preserve">
     <value>39</value>
   </data>
-  <data name="btnViewFlowsheet.Location" type="System.Drawing.Point, System.Drawing">
-    <value>217, 51</value>
+  <data name="&gt;&gt;GroupBox6.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="btnDisconnectOutlet5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2177,8 +2192,8 @@
   <data name="&gt;&gt;btnCreateAndConnectOutlet10.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
-  <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 13</value>
+  <data name="&gt;&gt;cbOutlet2.Name" xml:space="preserve">
+    <value>cbOutlet2</value>
   </data>
   <data name="Label20.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2189,6 +2204,9 @@
   <data name="btnDisconnect7.ToolTip" xml:space="preserve">
     <value>Desconectar</value>
   </data>
+  <data name="chkRedirect.Text" xml:space="preserve">
+    <value>Redirecionar mensagens do calculador</value>
+  </data>
   <data name="TabControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -2198,8 +2216,8 @@
   <data name="cbOutlet6.Size" type="System.Drawing.Size, System.Drawing">
     <value>206, 21</value>
   </data>
-  <data name="cbOutlet1.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;lblConnectedTo.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="cbOutlet9.ToolTip2" xml:space="preserve">
     <value />
@@ -2210,8 +2228,8 @@
   <data name="cbOutlet8.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="btnDisconnect3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;TbFileName.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
   </data>
   <data name="Label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2237,8 +2255,8 @@
   <data name="cbInlet7.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="btnDisconnect3.ToolTip" xml:space="preserve">
-    <value>Desconectar</value>
+  <data name="&gt;&gt;chkUpdateProcessData.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label20.ToolTip1" xml:space="preserve">
     <value />
@@ -2318,9 +2336,6 @@
   <data name="GroupBox1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="Label9.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
   <data name="&gt;&gt;btnCreateAndConnectOutlet9.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
@@ -2336,8 +2351,8 @@
   <data name="btnDisconnectOutlet6.TabIndex" type="System.Int32, mscorlib">
     <value>66</value>
   </data>
-  <data name="lblConnectedTo.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;btnOpenControlPanel.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
   </data>
   <data name="cbInlet6.Location" type="System.Drawing.Point, System.Drawing">
     <value>144, 128</value>
@@ -2351,8 +2366,8 @@
   <data name="cbOutlet6.ToolTip2" xml:space="preserve">
     <value />
   </data>
-  <data name="Column2.HeaderText" xml:space="preserve">
-    <value>Unidade</value>
+  <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
   </data>
   <data name="Label16.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 153</value>
@@ -2372,17 +2387,11 @@
   <data name="cbOutlet3.Size" type="System.Drawing.Size, System.Drawing">
     <value>206, 21</value>
   </data>
-  <data name="&gt;&gt;Label15.ZOrder" xml:space="preserve">
-    <value>54</value>
-  </data>
   <data name="btnDisconnectOutlet2.ToolTip" xml:space="preserve">
     <value>Desconectar</value>
   </data>
   <data name="cbOutlet2.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
-  </data>
-  <data name="&gt;&gt;btnDisconnect8.ZOrder" xml:space="preserve">
-    <value>22</value>
   </data>
   <data name="&gt;&gt;Label13.Parent" xml:space="preserve">
     <value>GroupBox5</value>
@@ -2390,20 +2399,17 @@
   <data name="Label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="btnCreateAndConnectInlet1.ToolTip2" xml:space="preserve">
+  <data name="btnDisconnectOutlet5.ToolTip2" xml:space="preserve">
     <value />
   </data>
   <data name="Label22.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="btnDisconnectOutlet10.TabIndex" type="System.Int32, mscorlib">
-    <value>98</value>
-  </data>
   <data name="&gt;&gt;cbOutlet6.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="chkRedirect.Location" type="System.Drawing.Point, System.Drawing">
-    <value>145, 88</value>
+  <data name="&gt;&gt;Column4.Name" xml:space="preserve">
+    <value>Column4</value>
   </data>
   <data name="Label7.ToolTip2" xml:space="preserve">
     <value />
@@ -2429,8 +2435,8 @@
   <data name="chkRedirect.TabIndex" type="System.Int32, mscorlib">
     <value>36</value>
   </data>
-  <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="Label15.Text" xml:space="preserve">
+    <value>Corrente de Saída 3</value>
   </data>
   <data name="btnDisconnectOutlet2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2459,9 +2465,6 @@
   <data name="GroupBox5.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="chkRedirect.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
   <data name="lblConnectedTo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -2486,8 +2489,8 @@
   <data name="GroupBox5.Location" type="System.Drawing.Point, System.Drawing">
     <value>2, 4</value>
   </data>
-  <data name="&gt;&gt;btnDisconnectOutlet7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;btnCreateAndConnectOutlet8.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="cbInlet7.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -2516,8 +2519,8 @@
   <data name="btnCreateAndConnectInlet3.ToolTip" xml:space="preserve">
     <value>Criar e Conectar</value>
   </data>
-  <data name="&gt;&gt;Column4.Name" xml:space="preserve">
-    <value>Column4</value>
+  <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
   </data>
   <data name="btnCreateAndConnectInlet7.TabIndex" type="System.Int32, mscorlib">
     <value>82</value>
@@ -2528,8 +2531,8 @@
   <data name="btnCreateAndConnectInlet3.ToolTip2" xml:space="preserve">
     <value />
   </data>
-  <data name="cbOutlet6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>145, 349</value>
+  <data name="&gt;&gt;btnDisconnect7.Name" xml:space="preserve">
+    <value>btnDisconnect7</value>
   </data>
   <data name="btnDisconnect8.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
@@ -2549,9 +2552,6 @@
   <data name="&gt;&gt;lblTag.Parent" xml:space="preserve">
     <value>GroupBox5</value>
   </data>
-  <data name="Label18.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="btnDisconnect7.ToolTip1" xml:space="preserve">
     <value />
   </data>
@@ -2567,8 +2567,8 @@
   <data name="TabPage2.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="btnDisconnectOutlet9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>385, 412</value>
+  <data name="BtnSearch.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="Label16.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2579,8 +2579,8 @@
   <data name="&gt;&gt;btnCreateAndConnectInlet1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblConnectedTo.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="Label9.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="btnDisconnectOutlet3.Location" type="System.Drawing.Point, System.Drawing">
     <value>385, 285</value>
@@ -2590,9 +2590,6 @@
   </data>
   <data name="cbOutlet8.Size" type="System.Drawing.Size, System.Drawing">
     <value>206, 21</value>
-  </data>
-  <data name="&gt;&gt;cbInlet10.ZOrder" xml:space="preserve">
-    <value>28</value>
   </data>
   <data name="btnDisconnectOutlet2.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -2609,11 +2606,11 @@
   <data name="&gt;&gt;TabControl1.Parent" xml:space="preserve">
     <value>GroupBox6</value>
   </data>
-  <data name="&gt;&gt;btnDisconnectOutlet9.Type" xml:space="preserve">
+  <data name="&gt;&gt;btnDisconnectOutlet7.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnCreateAndConnectInlet4.ZOrder" xml:space="preserve">
-    <value>49</value>
+  <data name="&gt;&gt;btnDisconnectOutlet9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cbInlet5.Name" xml:space="preserve">
     <value>cbInlet5</value>
@@ -2654,8 +2651,8 @@
   <data name="Label23.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
+  <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 13</value>
   </data>
   <data name="&gt;&gt;btnDisconnectOutlet3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2686,6 +2683,9 @@
   </data>
   <data name="&gt;&gt;btnDisconnectOutlet1.Parent" xml:space="preserve">
     <value>GroupBox1</value>
+  </data>
+  <data name="btnCreateAndConnectOutlet5.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="btnCreateAndConnectInlet6.Location" type="System.Drawing.Point, System.Drawing">
     <value>359, 128</value>
@@ -2792,6 +2792,9 @@
   <data name="&gt;&gt;cbOutlet3.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="btnCreateAndConnectOutlet3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="btnDisconnect3.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
@@ -2822,9 +2825,6 @@
   <data name="btnDisconnect6.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;cbOutlet10.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
   <data name="btnCreateAndConnectInlet9.TabIndex" type="System.Int32, mscorlib">
     <value>84</value>
   </data>
@@ -2849,8 +2849,8 @@
   <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 13</value>
   </data>
-  <data name="Label15.ToolTip" xml:space="preserve">
-    <value />
+  <data name="btnCreateAndConnectOutlet5.ToolTip" xml:space="preserve">
+    <value>Criar e Conectar</value>
   </data>
   <data name="Label13.ToolTip2" xml:space="preserve">
     <value />
@@ -2872,6 +2872,9 @@
   </data>
   <data name="Label21.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="btnDisconnectOutlet6.ToolTip" xml:space="preserve">
+    <value>Desconectar</value>
   </data>
   <data name="&gt;&gt;Label1.Name" xml:space="preserve">
     <value>Label1</value>
@@ -2918,8 +2921,8 @@
   <data name="btnCreateAndConnectOutlet10.Location" type="System.Drawing.Point, System.Drawing">
     <value>359, 433</value>
   </data>
-  <data name="btnDisconnectOutlet3.ToolTip1" xml:space="preserve">
-    <value />
+  <data name="cbInlet8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>145, 170</value>
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Painel de Controle</value>
@@ -2963,20 +2966,17 @@
   <data name="&gt;&gt;Label12.Name" xml:space="preserve">
     <value>Label12</value>
   </data>
-  <data name="&gt;&gt;btnCreateAndConnectOutlet6.ZOrder" xml:space="preserve">
-    <value>32</value>
+  <data name="&gt;&gt;dgvinputvars.Parent" xml:space="preserve">
+    <value>TabPage1</value>
   </data>
-  <data name="Label21.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;btnViewFlowsheet.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="&gt;&gt;Column3.Name" xml:space="preserve">
+    <value>Column3</value>
   </data>
   <data name="&gt;&gt;btnCreateAndConnectInlet7.ZOrder" xml:space="preserve">
     <value>19</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>443, 874</value>
+  <data name="&gt;&gt;chkUpdateProcessData.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="btnDisconnectOutlet5.Location" type="System.Drawing.Point, System.Drawing">
     <value>385, 327</value>
@@ -3002,8 +3002,8 @@
   <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 174</value>
   </data>
-  <data name="Label1.ToolTip2" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;cbOutlet10.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="&gt;&gt;btnDisconnect3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3023,8 +3023,8 @@
   <data name="btnDisconnect5.Location" type="System.Drawing.Point, System.Drawing">
     <value>385, 107</value>
   </data>
-  <data name="Label21.ToolTip2" xml:space="preserve">
-    <value />
+  <data name="cbInlet9.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="btnCreateAndConnectOutlet1.Location" type="System.Drawing.Point, System.Drawing">
     <value>359, 243</value>
@@ -3053,8 +3053,8 @@
   <data name="Label21.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;btnDisconnectOutlet4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="BtnSearch.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="btnDisconnectOutlet3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -3065,14 +3065,14 @@
   <data name="&gt;&gt;Label6.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="btnCreateAndConnectInlet1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>21, 21</value>
+  </data>
   <data name="&gt;&gt;btnCreateAndConnectOutlet4.Name" xml:space="preserve">
     <value>btnCreateAndConnectOutlet4</value>
   </data>
   <data name="btnCreateAndConnectOutlet4.Location" type="System.Drawing.Point, System.Drawing">
     <value>359, 306</value>
-  </data>
-  <data name="cbOutlet7.ToolTip1" xml:space="preserve">
-    <value />
   </data>
   <data name="&gt;&gt;ToolTip1.Name" xml:space="preserve">
     <value>ToolTip1</value>
@@ -3091,12 +3091,6 @@
   </data>
   <data name="btnDisconnectOutlet2.ToolTip1" xml:space="preserve">
     <value />
-  </data>
-  <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
-  </data>
-  <data name="&gt;&gt;Label22.ZOrder" xml:space="preserve">
-    <value>10</value>
   </data>
   <data name="btnCreateAndConnectOutlet8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3119,14 +3113,11 @@
   <data name="dgvinputvars.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
-  <data name="btnCreateAndConnectInlet10.ToolTip1" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;btnCreateAndConnectOutlet6.ZOrder" xml:space="preserve">
+    <value>32</value>
   </data>
-  <data name="Label20.TabIndex" type="System.Int32, mscorlib">
-    <value>97</value>
-  </data>
-  <data name="&gt;&gt;btnOpenControlPanel.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
+  <data name="btnCreateAndConnectOutlet4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="Label3.ToolTip" xml:space="preserve">
     <value />
@@ -3164,8 +3155,8 @@
   <data name="Label17.Text" xml:space="preserve">
     <value>Corrente de Saída 6</value>
   </data>
-  <data name="TabPage1.ToolTip2" xml:space="preserve">
-    <value />
+  <data name="btnDisconnect10.ToolTip" xml:space="preserve">
+    <value>Desconectar</value>
   </data>
   <data name="cbOutlet4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -3173,11 +3164,11 @@
   <data name="chkInitialize.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="cbOutlet10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 21</value>
+  <data name="&gt;&gt;cbOutlet2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label19.TabIndex" type="System.Int32, mscorlib">
-    <value>59</value>
+  <data name="lblConnectedTo.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;OpenFileDialog1.Type" xml:space="preserve">
     <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3206,8 +3197,8 @@
   <data name="btnDisconnect10.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="cbInlet8.TabIndex" type="System.Int32, mscorlib">
-    <value>71</value>
+  <data name="Column5.HeaderText" xml:space="preserve">
+    <value>Valor</value>
   </data>
   <data name="&gt;&gt;btnCreateAndConnectOutlet4.ZOrder" xml:space="preserve">
     <value>34</value>
@@ -3224,11 +3215,8 @@
   <data name="&gt;&gt;GroupBox2.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="TabPage1.ToolTip" xml:space="preserve">
+  <data name="Label21.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="&gt;&gt;chkInitialize.Name" xml:space="preserve">
-    <value>chkInitialize</value>
   </data>
   <data name="btnDisconnectOutlet7.TabIndex" type="System.Int32, mscorlib">
     <value>88</value>
@@ -3251,14 +3239,14 @@
   <data name="BtnSearch.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;Label4.ZOrder" xml:space="preserve">
-    <value>69</value>
+  <data name="btnCreateAndConnectInlet8.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="cbInlet1.ToolTip2" xml:space="preserve">
     <value />
   </data>
-  <data name="chkRedirect.Text" xml:space="preserve">
-    <value>Redirecionar mensagens do calculador</value>
+  <data name="btnDisconnectOutlet9.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="&gt;&gt;btnCreateAndConnectOutlet1.Name" xml:space="preserve">
     <value>btnCreateAndConnectOutlet1</value>
@@ -3290,8 +3278,8 @@
   <data name="chkActive.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
   </data>
-  <data name="btnCreateAndConnectOutlet6.TabIndex" type="System.Int32, mscorlib">
-    <value>69</value>
+  <data name="Label20.TabIndex" type="System.Int32, mscorlib">
+    <value>97</value>
   </data>
   <data name="btnDisconnectOutlet5.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
@@ -3329,14 +3317,14 @@
   <data name="Label8.TabIndex" type="System.Int32, mscorlib">
     <value>77</value>
   </data>
-  <data name="chkInitialize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 88</value>
+  <data name="Label22.TabIndex" type="System.Int32, mscorlib">
+    <value>91</value>
   </data>
   <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
     <value>68</value>
   </data>
-  <data name="&gt;&gt;cbOutlet2.Name" xml:space="preserve">
-    <value>cbOutlet2</value>
+  <data name="&gt;&gt;cbInlet10.ZOrder" xml:space="preserve">
+    <value>28</value>
   </data>
   <data name="&gt;&gt;cbInlet6.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3377,8 +3365,8 @@
   <data name="btnCreateAndConnectOutlet2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="BtnSearch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>384, 23</value>
+  <data name="&gt;&gt;btnDisconnect7.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
   </data>
   <data name="GroupBox5.ToolTip2" xml:space="preserve">
     <value />
@@ -3431,8 +3419,8 @@
   <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>2, 576</value>
   </data>
-  <data name="&gt;&gt;chkUpdateProcessData.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Label22.ZOrder" xml:space="preserve">
+    <value>10</value>
   </data>
   <data name="Label3.ToolTip1" xml:space="preserve">
     <value />
@@ -3512,14 +3500,14 @@
   <data name="&gt;&gt;btnCreateAndConnectInlet7.Name" xml:space="preserve">
     <value>btnCreateAndConnectInlet7</value>
   </data>
-  <data name="&gt;&gt;cbOutlet2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="chkUpdateProcessData.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;chkRedirect.Name" xml:space="preserve">
     <value>chkRedirect</value>
   </data>
-  <data name="btnCreateAndConnectInlet8.ToolTip2" xml:space="preserve">
-    <value />
+  <data name="btnCreateAndConnectOutlet4.TabIndex" type="System.Int32, mscorlib">
+    <value>67</value>
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>103, 13</value>
@@ -3538,6 +3526,9 @@
   </data>
   <data name="GroupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
+  </data>
+  <data name="Label22.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="GroupBox6.Text" xml:space="preserve">
     <value>Variáveis</value>
@@ -3563,11 +3554,14 @@
   <data name="Label9.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="btnDisconnectOutlet3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>21, 21</value>
+  <data name="cbOutlet3.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="btnCreateAndConnectOutlet7.ToolTip2" xml:space="preserve">
     <value />
+  </data>
+  <data name="&gt;&gt;TabControl1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="btnCreateAndConnectOutlet1.TabIndex" type="System.Int32, mscorlib">
     <value>54</value>
@@ -3629,6 +3623,12 @@
   <data name="&gt;&gt;chkInitialize.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="Label21.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;Label17.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="btnDisconnect8.ToolTip" xml:space="preserve">
     <value>Desconectar</value>
   </data>
@@ -3641,8 +3641,8 @@
   <data name="&gt;&gt;cbOutlet10.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnCreateAndConnectInlet5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label13.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;cbOutlet9.Parent" xml:space="preserve">
     <value>GroupBox1</value>
@@ -3674,8 +3674,8 @@
   <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
     <value>103, 13</value>
   </data>
-  <data name="&gt;&gt;dgvinputvars.Parent" xml:space="preserve">
-    <value>TabPage1</value>
+  <data name="cbOutlet5.TabIndex" type="System.Int32, mscorlib">
+    <value>61</value>
   </data>
   <data name="btnDisconnect10.Location" type="System.Drawing.Point, System.Drawing">
     <value>385, 212</value>
@@ -3701,8 +3701,8 @@
   <data name="btnCreateAndConnectInlet5.ToolTip2" xml:space="preserve">
     <value />
   </data>
-  <data name="btnCreateAndConnectOutlet4.TabIndex" type="System.Int32, mscorlib">
-    <value>67</value>
+  <data name="&gt;&gt;btnDisconnect8.ZOrder" xml:space="preserve">
+    <value>22</value>
   </data>
   <data name="&gt;&gt;btnDisconnectOutlet3.Parent" xml:space="preserve">
     <value>GroupBox1</value>
@@ -3713,8 +3713,8 @@
   <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 247</value>
   </data>
-  <data name="cbOutlet3.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
+  <data name="&gt;&gt;btnViewFlowsheet.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="btnCreateAndConnectOutlet4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3740,8 +3740,8 @@
   <data name="cbOutlet9.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;TabControl1.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="Label15.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="Label13.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 72</value>
@@ -3779,8 +3779,8 @@
   <data name="btnCreateAndConnectOutlet8.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
   </data>
-  <data name="&gt;&gt;GroupBox6.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;Label15.ZOrder" xml:space="preserve">
+    <value>54</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn1.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn1</value>
@@ -3806,11 +3806,11 @@
   <data name="btnCreateAndConnectOutlet3.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="btnDisconnect3.ToolTip2" xml:space="preserve">
-    <value />
+  <data name="BtnSearch.ToolTip" xml:space="preserve">
+    <value>Procurar</value>
   </data>
-  <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 13</value>
+  <data name="&gt;&gt;chkInitialize.Name" xml:space="preserve">
+    <value>chkInitialize</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 13</value>
@@ -3821,11 +3821,11 @@
   <data name="Label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;btnCreateAndConnectOutlet8.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;Label21.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
-  <data name="btnCreateAndConnectInlet9.ToolTip" xml:space="preserve">
-    <value>Criar e Conectar</value>
+  <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
+    <value>70</value>
   </data>
   <data name="&gt;&gt;btnDisconnect9.ZOrder" xml:space="preserve">
     <value>21</value>
@@ -3836,8 +3836,8 @@
   <data name="btnCreateAndConnectInlet2.Location" type="System.Drawing.Point, System.Drawing">
     <value>359, 44</value>
   </data>
-  <data name="&gt;&gt;btnDisconnect7.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
+  <data name="btnCreateAndConnectInlet9.ToolTip" xml:space="preserve">
+    <value>Criar e Conectar</value>
   </data>
   <data name="cbOutlet3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -3848,14 +3848,14 @@
   <data name="btnDisconnect8.Location" type="System.Drawing.Point, System.Drawing">
     <value>385, 170</value>
   </data>
-  <data name="cbInlet9.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="Label19.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 310</value>
   </data>
-  <data name="btnDisconnect10.ToolTip" xml:space="preserve">
-    <value>Desconectar</value>
+  <data name="Label18.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="btnCreateAndConnectOutlet9.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="btnOpenControlPanel.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;btnViewFlowsheet.Parent" xml:space="preserve">
     <value>GroupBox2</value>
@@ -3884,9 +3884,6 @@
   <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 90</value>
   </data>
-  <data name="&gt;&gt;TbFileName.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
-  </data>
   <data name="Label12.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -3905,8 +3902,8 @@
   <data name="btnDisconnectOutlet1.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
   </data>
-  <data name="btnCreateAndConnectOutlet3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="TabPage1.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;btnCreateAndConnectInlet9.ZOrder" xml:space="preserve">
     <value>17</value>
@@ -3923,11 +3920,17 @@
   <data name="&gt;&gt;btnDisconnect4.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label22.ToolTip2" xml:space="preserve">
+  <data name="btnOpenControlPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="btnDisconnect5.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;btnCreateAndConnectOutlet6.Name" xml:space="preserve">
-    <value>btnCreateAndConnectOutlet6</value>
+  <data name="&gt;&gt;btnCreateAndConnectInlet5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblStatus.Parent" xml:space="preserve">
+    <value>GroupBox5</value>
   </data>
   <data name="cbInlet1.ToolTip1" xml:space="preserve">
     <value />
@@ -3938,11 +3941,11 @@
   <data name="&gt;&gt;btnDisconnectOutlet7.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
-  <data name="BtnSearch.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="&gt;&gt;btnDisconnect8.Name" xml:space="preserve">
+    <value>btnDisconnect8</value>
   </data>
-  <data name="cbOutlet3.ToolTip2" xml:space="preserve">
-    <value />
+  <data name="btnCreateAndConnectInlet10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="btnDisconnect6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -3953,8 +3956,8 @@
   <data name="&gt;&gt;Label24.Name" xml:space="preserve">
     <value>Label24</value>
   </data>
-  <data name="&gt;&gt;Label6.ZOrder" xml:space="preserve">
-    <value>67</value>
+  <data name="&gt;&gt;btnCreateAndConnectInlet4.ZOrder" xml:space="preserve">
+    <value>49</value>
   </data>
   <data name="cbInlet10.ToolTip2" xml:space="preserve">
     <value />
@@ -3980,14 +3983,11 @@
   <data name="&gt;&gt;btnDisconnectOutlet1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="btnDisconnectOutlet9.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
   <data name="&gt;&gt;btnCreateAndConnectOutlet9.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="btnCreateAndConnectOutlet4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="btnDisconnect3.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;Label10.ZOrder" xml:space="preserve">
     <value>26</value>
@@ -4001,14 +4001,14 @@
   <data name="btnDisconnectOutlet7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Label15.Text" xml:space="preserve">
-    <value>Corrente de Saída 3</value>
+  <data name="chkRedirect.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="Label19.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="cbInlet6.ToolTip2" xml:space="preserve">
-    <value />
+  <data name="cbOutlet6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>145, 349</value>
   </data>
   <data name="cbInlet10.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -4019,14 +4019,14 @@
   <data name="btnCreateAndConnectOutlet4.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;Label12.Parent" xml:space="preserve">
-    <value>GroupBox5</value>
+  <data name="cbOutlet7.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="btnDisconnectOutlet10.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="Label1.ToolTip1" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;lblStatus.Name" xml:space="preserve">
+    <value>lblStatus</value>
   </data>
   <data name="&gt;&gt;Label16.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

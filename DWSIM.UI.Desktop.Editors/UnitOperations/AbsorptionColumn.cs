@@ -172,6 +172,14 @@ namespace DWSIM.UI.Desktop.Editors
                                                        if (s.IsValidDouble(arg11.Text))
                                                        {
                                                            stage.P = cv.ConvertToSI(su.pressure, Double.Parse(arg11.Text));
+                                                           if (column.Stages.IndexOf(stage) == 0)
+                                                           {
+                                                               column.CondenserPressure = stage.P;
+                                                           }
+                                                           else if (column.Stages.IndexOf(stage) == column.Stages.Count - 1)
+                                                           {
+                                                               column.ReboilerPressure = stage.P;
+                                                           }
                                                        }
                                                    }));
                 }
@@ -191,7 +199,7 @@ namespace DWSIM.UI.Desktop.Editors
                 var scroll = new Eto.Forms.Scrollable();
                 scroll.Content = sview;
 
-                s.CreateDialog(scroll, "Edit Stages", 400, 600).ShowModal(container);
+                s.CreateDialog(scroll, "Edit Stages", 600, 600).ShowModal(container);
 
             });
 

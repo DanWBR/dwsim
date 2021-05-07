@@ -26,12 +26,14 @@ Partial Class FlashAlgorithmConfig
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPageGeneral = New System.Windows.Forms.TabPage()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.chkDoPhaseId = New System.Windows.Forms.CheckBox()
+        Me.chkCalcBubbleDew = New System.Windows.Forms.CheckBox()
+        Me.chkUseIOFlash = New System.Windows.Forms.CheckBox()
         Me.chkHandleSolids = New System.Windows.Forms.CheckBox()
         Me.chkImmiscible = New System.Windows.Forms.CheckBox()
         Me.cbFlashType = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.tbPT_DampingFactor = New System.Windows.Forms.TextBox()
-        Me.chkReplaceFlashPT = New System.Windows.Forms.CheckBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label30 = New System.Windows.Forms.Label()
         Me.tbPH_MaxDT = New System.Windows.Forms.TextBox()
@@ -89,12 +91,14 @@ Partial Class FlashAlgorithmConfig
         'GroupBox4
         '
         resources.ApplyResources(Me.GroupBox4, "GroupBox4")
+        Me.GroupBox4.Controls.Add(Me.chkDoPhaseId)
+        Me.GroupBox4.Controls.Add(Me.chkCalcBubbleDew)
+        Me.GroupBox4.Controls.Add(Me.chkUseIOFlash)
         Me.GroupBox4.Controls.Add(Me.chkHandleSolids)
         Me.GroupBox4.Controls.Add(Me.chkImmiscible)
         Me.GroupBox4.Controls.Add(Me.cbFlashType)
         Me.GroupBox4.Controls.Add(Me.Label9)
         Me.GroupBox4.Controls.Add(Me.tbPT_DampingFactor)
-        Me.GroupBox4.Controls.Add(Me.chkReplaceFlashPT)
         Me.GroupBox4.Controls.Add(Me.Label13)
         Me.GroupBox4.Controls.Add(Me.Label30)
         Me.GroupBox4.Controls.Add(Me.tbPH_MaxDT)
@@ -111,6 +115,21 @@ Partial Class FlashAlgorithmConfig
         Me.GroupBox4.Controls.Add(Me.Label24)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.TabStop = False
+        '
+        'chkDoPhaseId
+        '
+        resources.ApplyResources(Me.chkDoPhaseId, "chkDoPhaseId")
+        Me.chkDoPhaseId.Name = "chkDoPhaseId"
+        '
+        'chkCalcBubbleDew
+        '
+        resources.ApplyResources(Me.chkCalcBubbleDew, "chkCalcBubbleDew")
+        Me.chkCalcBubbleDew.Name = "chkCalcBubbleDew"
+        '
+        'chkUseIOFlash
+        '
+        resources.ApplyResources(Me.chkUseIOFlash, "chkUseIOFlash")
+        Me.chkUseIOFlash.Name = "chkUseIOFlash"
         '
         'chkHandleSolids
         '
@@ -139,11 +158,6 @@ Partial Class FlashAlgorithmConfig
         '
         resources.ApplyResources(Me.tbPT_DampingFactor, "tbPT_DampingFactor")
         Me.tbPT_DampingFactor.Name = "tbPT_DampingFactor"
-        '
-        'chkReplaceFlashPT
-        '
-        resources.ApplyResources(Me.chkReplaceFlashPT, "chkReplaceFlashPT")
-        Me.chkReplaceFlashPT.Name = "chkReplaceFlashPT"
         '
         'Label13
         '
@@ -365,7 +379,6 @@ Partial Class FlashAlgorithmConfig
     Friend WithEvents chkFastModeNL As System.Windows.Forms.CheckBox
     Friend WithEvents TabPageGeneral As System.Windows.Forms.TabPage
     Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
-    Public WithEvents chkReplaceFlashPT As System.Windows.Forms.CheckBox
     Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents tbFlashValidationTolerance As System.Windows.Forms.TextBox
     Public WithEvents chkValidateEqCalc As System.Windows.Forms.CheckBox
@@ -384,4 +397,7 @@ Partial Class FlashAlgorithmConfig
     Friend WithEvents Label9 As Label
     Public WithEvents chkImmiscible As CheckBox
     Public WithEvents chkHandleSolids As CheckBox
+    Public WithEvents chkUseIOFlash As CheckBox
+    Public WithEvents chkDoPhaseId As CheckBox
+    Public WithEvents chkCalcBubbleDew As CheckBox
 End Class

@@ -30,7 +30,7 @@ Partial Class FormMain
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMain))
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
-        Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FileTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.NewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NovoEstudoDoCriadorDeComponentesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NovoEstudoDeRegressaoDeDadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -48,19 +48,19 @@ Partial Class FormMain
         Me.tsFileSeparator = New System.Windows.Forms.ToolStripSeparator()
         Me.tsFolderSeparator = New System.Windows.Forms.ToolStripSeparator()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.VerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EditTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.PreferenciasDoDWSIMToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.FerramentasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolsTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.DatabaseManagerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RegistroCAPEOPENToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WindowsMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.CascadeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TileVerticalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TileHorizontalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.VerToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ViewTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.MostrarBarraDeFerramentasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PainelDeBoasvindasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HelpTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContentsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DocumentacaoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GuiaDoUsuarioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -122,17 +122,17 @@ Partial Class FormMain
         '
         resources.ApplyResources(Me.MenuStrip1, "MenuStrip1")
         Me.MenuStrip1.AllowItemReorder = True
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.VerToolStripMenuItem, Me.FerramentasToolStripMenuItem, Me.WindowsMenu, Me.VerToolStripMenuItem1, Me.HelpToolStripMenuItem, Me.DownloadSupplementarySoftwareToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileTSMI, Me.EditTSMI, Me.ToolsTSMI, Me.WindowsMenu, Me.ViewTSMI, Me.HelpTSMI, Me.DownloadSupplementarySoftwareToolStripMenuItem})
         Me.MenuStrip1.MdiWindowListItem = Me.WindowsMenu
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.ShowItemToolTips = True
         '
-        'FileToolStripMenuItem
+        'FileTSMI
         '
-        resources.ApplyResources(Me.FileToolStripMenuItem, "FileToolStripMenuItem")
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.NovoEstudoDoCriadorDeComponentesToolStripMenuItem, Me.NovoEstudoDeRegressaoDeDadosToolStripMenuItem, Me.NovoRegressaoUNIFACIPs, Me.OpenToolStripMenuItem, Me.tsmiFOSSEE, Me.tsmiSamples, Me.toolStripSeparator, Me.SaveToolStripMenuItem, Me.SaveAllToolStripMenuItem, Me.SaveAsToolStripMenuItem, Me.ToolStripSeparator2, Me.CloseAllToolstripMenuItem, Me.toolStripSeparator1, Me.tsFileSeparator, Me.tsFolderSeparator, Me.ExitToolStripMenuItem})
-        Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
-        Me.FileToolStripMenuItem.Overflow = System.Windows.Forms.ToolStripItemOverflow.AsNeeded
+        resources.ApplyResources(Me.FileTSMI, "FileTSMI")
+        Me.FileTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.NovoEstudoDoCriadorDeComponentesToolStripMenuItem, Me.NovoEstudoDeRegressaoDeDadosToolStripMenuItem, Me.NovoRegressaoUNIFACIPs, Me.OpenToolStripMenuItem, Me.tsmiFOSSEE, Me.tsmiSamples, Me.toolStripSeparator, Me.SaveToolStripMenuItem, Me.SaveAllToolStripMenuItem, Me.SaveAsToolStripMenuItem, Me.ToolStripSeparator2, Me.CloseAllToolstripMenuItem, Me.toolStripSeparator1, Me.tsFileSeparator, Me.tsFolderSeparator, Me.ExitToolStripMenuItem})
+        Me.FileTSMI.Name = "FileTSMI"
+        Me.FileTSMI.Overflow = System.Windows.Forms.ToolStripItemOverflow.AsNeeded
         '
         'NewToolStripMenuItem
         '
@@ -231,12 +231,12 @@ Partial Class FormMain
         Me.ExitToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.undo_16
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
         '
-        'VerToolStripMenuItem
+        'EditTSMI
         '
-        resources.ApplyResources(Me.VerToolStripMenuItem, "VerToolStripMenuItem")
-        Me.VerToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PreferenciasDoDWSIMToolStripMenuItem})
-        Me.VerToolStripMenuItem.Name = "VerToolStripMenuItem"
-        Me.VerToolStripMenuItem.Overflow = System.Windows.Forms.ToolStripItemOverflow.AsNeeded
+        resources.ApplyResources(Me.EditTSMI, "EditTSMI")
+        Me.EditTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PreferenciasDoDWSIMToolStripMenuItem})
+        Me.EditTSMI.Name = "EditTSMI"
+        Me.EditTSMI.Overflow = System.Windows.Forms.ToolStripItemOverflow.AsNeeded
         '
         'PreferenciasDoDWSIMToolStripMenuItem
         '
@@ -244,11 +244,11 @@ Partial Class FormMain
         Me.PreferenciasDoDWSIMToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.application_edit
         Me.PreferenciasDoDWSIMToolStripMenuItem.Name = "PreferenciasDoDWSIMToolStripMenuItem"
         '
-        'FerramentasToolStripMenuItem
+        'ToolsTSMI
         '
-        resources.ApplyResources(Me.FerramentasToolStripMenuItem, "FerramentasToolStripMenuItem")
-        Me.FerramentasToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DatabaseManagerToolStripMenuItem, Me.RegistroCAPEOPENToolStripMenuItem})
-        Me.FerramentasToolStripMenuItem.Name = "FerramentasToolStripMenuItem"
+        resources.ApplyResources(Me.ToolsTSMI, "ToolsTSMI")
+        Me.ToolsTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DatabaseManagerToolStripMenuItem, Me.RegistroCAPEOPENToolStripMenuItem})
+        Me.ToolsTSMI.Name = "ToolsTSMI"
         '
         'DatabaseManagerToolStripMenuItem
         '
@@ -294,11 +294,11 @@ Partial Class FormMain
         Me.TileHorizontalToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.application_tile_vertical
         Me.TileHorizontalToolStripMenuItem.Name = "TileHorizontalToolStripMenuItem"
         '
-        'VerToolStripMenuItem1
+        'ViewTSMI
         '
-        resources.ApplyResources(Me.VerToolStripMenuItem1, "VerToolStripMenuItem1")
-        Me.VerToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MostrarBarraDeFerramentasToolStripMenuItem, Me.PainelDeBoasvindasToolStripMenuItem})
-        Me.VerToolStripMenuItem1.Name = "VerToolStripMenuItem1"
+        resources.ApplyResources(Me.ViewTSMI, "ViewTSMI")
+        Me.ViewTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MostrarBarraDeFerramentasToolStripMenuItem, Me.PainelDeBoasvindasToolStripMenuItem})
+        Me.ViewTSMI.Name = "ViewTSMI"
         '
         'MostrarBarraDeFerramentasToolStripMenuItem
         '
@@ -316,13 +316,13 @@ Partial Class FormMain
         Me.PainelDeBoasvindasToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked
         Me.PainelDeBoasvindasToolStripMenuItem.Name = "PainelDeBoasvindasToolStripMenuItem"
         '
-        'HelpToolStripMenuItem
+        'HelpTSMI
         '
-        resources.ApplyResources(Me.HelpToolStripMenuItem, "HelpToolStripMenuItem")
-        Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ContentsToolStripMenuItem, Me.DocumentacaoToolStripMenuItem, Me.toolStripSeparator5, Me.DWSIMNaInternetToolStripMenuItem, Me.PatronToolStripMenuItem, Me.AboutToolStripMenuItem})
-        Me.HelpToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
-        Me.HelpToolStripMenuItem.MergeIndex = 102
-        Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
+        resources.ApplyResources(Me.HelpTSMI, "HelpTSMI")
+        Me.HelpTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ContentsToolStripMenuItem, Me.DocumentacaoToolStripMenuItem, Me.toolStripSeparator5, Me.DWSIMNaInternetToolStripMenuItem, Me.PatronToolStripMenuItem, Me.AboutToolStripMenuItem})
+        Me.HelpTSMI.MergeAction = System.Windows.Forms.MergeAction.Insert
+        Me.HelpTSMI.MergeIndex = 102
+        Me.HelpTSMI.Name = "HelpTSMI"
         '
         'ContentsToolStripMenuItem
         '
@@ -643,14 +643,14 @@ Partial Class FormMain
     End Sub
 
     Public WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
-    Public WithEvents FileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Public WithEvents FileTSMI As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents OpenToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents toolStripSeparator As System.Windows.Forms.ToolStripSeparator
     Public WithEvents SaveToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents SaveAsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents toolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
     Public WithEvents ExitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents HelpToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Public WithEvents HelpTSMI As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents ContentsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents toolStripSeparator5 As System.Windows.Forms.ToolStripSeparator
     Public WithEvents AboutToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -671,7 +671,7 @@ Partial Class FormMain
     Public WithEvents CascadeToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents TileVerticalToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents TileHorizontalToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents VerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Public WithEvents EditTSMI As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents bgLoadNews As System.ComponentModel.BackgroundWorker
 
     Public WithEvents PreferenciasDoDWSIMToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -683,6 +683,8 @@ Partial Class FormMain
     Public WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
 
     Public Sub New()
+
+        My.Application.MainWindowForm = Me
 
         If DWSIM.App.IsRunningOnMono Or GlobalSettings.Settings.AutomationMode Then
 
@@ -878,9 +880,9 @@ Partial Class FormMain
     Friend WithEvents GuiaDoUsuarioToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SettingsPanel As System.Windows.Forms.Panel
     Friend WithEvents ButtonClose As System.Windows.Forms.Button
-    Friend WithEvents VerToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ViewTSMI As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents MostrarBarraDeFerramentasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents FerramentasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolsTSMI As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents DatabaseManagerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents RegistroCAPEOPENToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator7 As System.Windows.Forms.ToolStripSeparator
@@ -888,8 +890,7 @@ Partial Class FormMain
     Friend WithEvents ToolStripSeparator8 As ToolStripSeparator
     Friend WithEvents tsmiFOSSEE As ToolStripMenuItem
     Public WithEvents PatronToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents WelcomePanel As Panel
-    Friend WithEvents PainelDeBoasvindasToolStripMenuItem As ToolStripMenuItem
+    Public WithEvents WelcomePanel As Panel
     Friend WithEvents tsbInspector As ToolStripButton
     Friend WithEvents tsFileSeparator As ToolStripSeparator
     Friend WithEvents tsFolderSeparator As ToolStripSeparator
@@ -900,4 +901,5 @@ Partial Class FormMain
     Friend WithEvents CapitalCostToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents OPCPluginToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DTLToolStripMenuItem As ToolStripMenuItem
+    Public WithEvents PainelDeBoasvindasToolStripMenuItem As ToolStripMenuItem
 End Class

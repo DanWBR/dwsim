@@ -37,13 +37,13 @@ Namespace PropertyPackages
 
         Inherits PropertyPackages.PropertyPackage
 
-        <System.NonSerialized()> Private _copp, _pptpl As Object 'CAPE-OPEN Property Package & Manager
+        <System.NonSerialized()> Public _copp, _pptpl As Object 'CAPE-OPEN Property Package & Manager
 
-        Private _selts As CapeOpenObjInfo
-        Private _istrpp, _istrts As ComIStreamWrapper
-        Private _ppname As String = ""
+        Public _selts As CapeOpenObjInfo
+        Public _istrpp, _istrts As ComIStreamWrapper
+        Public _ppname As String = ""
 
-        Private _coversion As String = "1.0"
+        Public _coversion As String = "1.0"
 
         Private m_props As New PropertyPackages.Auxiliary.PROPS
 
@@ -95,33 +95,16 @@ Namespace PropertyPackages
 
             If Me._phasemappings Is Nothing Then CreatePhaseMappings()
 
-            Dim f As New FormConfigCAPEOPENPPSocket
-
-            f._copp = Me._copp
-            f._pptpl = Me._pptpl
-            f._coversion = Me._coversion
-            f._selts = Me._selts
-            f._ppname = Me._ppname
-            f._mappings = Me._mappings
-            f._phasemappings = Me._phasemappings
-            f._form = Me.Flowsheet
-
-            f.ShowDialog()
-
-            If f.DialogResult = DialogResult.OK Then
-                Me._copp = f._copp
-                Me._pptpl = f._pptpl
-                Me._coversion = f._coversion
-                Me._selts = f._selts
-                Me._ppname = f._ppname
-                Me._mappings = f._mappings
-                Me._phasemappings = f._phasemappings
-            End If
-
-            f.Dispose()
-            f = Nothing
+            Dim f As New FormConfigCAPEOPENPPSocket With {.pp = Me, ._form = Flowsheet}
+            f.Show()
 
         End Sub
+
+        Public Overrides Function GetEditingForm() As Form
+
+            Return New FormConfigCAPEOPENPPSocket() With {.pp = Me, ._form = Flowsheet}
+
+        End Function
 
         Public Overrides Sub DW_CalcProp(ByVal [property] As String, ByVal phase As Phase)
             'do nothing
@@ -1178,6 +1161,7 @@ Namespace PropertyPackages
             For i = 0 To Vz.Length - 1
                 mw2.Add(complist(i), mw(i))
             Next
+            i = 0
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 val += Vz(i) * mw2(_mappings(subst.Name))
                 i += 1

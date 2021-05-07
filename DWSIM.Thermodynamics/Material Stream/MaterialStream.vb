@@ -364,7 +364,8 @@ Namespace Streams
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
             If FlowSheet IsNot Nothing Then
                 If AtEquilibrium And Not FlowSheet.DynamicMode And
-                    FlowSheet.FlowsheetOptions.SkipEquilibriumCalculationOnDefinedStreams Then
+                    FlowSheet.FlowsheetOptions.SkipEquilibriumCalculationOnDefinedStreams And
+                    Not TypeOf PropertyPackage Is CAPEOPENPropertyPackage Then
                     Calculate(False, True)
                 Else
                     Calculate(True, True)
@@ -564,72 +565,60 @@ Namespace Streams
 
                     If doparallel Then
 
-                        Dim task1 = Task.Factory.StartNew(Sub()
-                                                              If Me.Phases(3).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                                                  IObj?.Paragraphs.Add("Calculating properties of Phase 'Liquid 1'...")
-                                                                  .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid1)
-                                                              Else
-                                                                  .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid1)
-                                                              End If
-                                                          End Sub,
-                                                  Settings.TaskCancellationTokenSource.Token,
-                                                  TaskCreationOptions.None,
-                                                 Settings.AppTaskScheduler)
-                        Dim task2 = Task.Factory.StartNew(Sub()
-                                                              If Me.Phases(4).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                                                  IObj?.Paragraphs.Add("Calculating properties of Phase 'Liquid 2'...")
-                                                                  .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid2)
-                                                              Else
-                                                                  .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid2)
-                                                              End If
-                                                          End Sub,
-                                                     Settings.TaskCancellationTokenSource.Token,
-                                                  TaskCreationOptions.None,
-                                                 Settings.AppTaskScheduler)
-                        Dim task3 = Task.Factory.StartNew(Sub()
-                                                              If Me.Phases(5).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                                                  IObj?.Paragraphs.Add("Calculating properties of Phase 'Liquid 3'...")
-                                                                  .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid3)
-                                                              Else
-                                                                  .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid3)
-                                                              End If
-                                                          End Sub,
-                                                  Settings.TaskCancellationTokenSource.Token,
-                                                  TaskCreationOptions.None,
-                                                 Settings.AppTaskScheduler)
-                        Dim task4 = Task.Factory.StartNew(Sub()
-                                                              If Me.Phases(6).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                                                  IObj?.Paragraphs.Add("Calculating properties of Phase 'Aqueous'...")
-                                                                  .DW_CalcPhaseProps(PropertyPackages.Phase.Aqueous)
-                                                              Else
-                                                                  .DW_ZerarPhaseProps(PropertyPackages.Phase.Aqueous)
-                                                              End If
-                                                          End Sub,
-                                                  Settings.TaskCancellationTokenSource.Token,
-                                                  TaskCreationOptions.None,
-                                                 Settings.AppTaskScheduler)
-                        Dim task5 = Task.Factory.StartNew(Sub()
-                                                              If Me.Phases(7).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                                                  IObj?.Paragraphs.Add("Calculating properties of Phase 'Solid'...")
-                                                                  .DW_CalcSolidPhaseProps()
-                                                              Else
-                                                                  .DW_ZerarPhaseProps(PropertyPackages.Phase.Solid)
-                                                              End If
-                                                          End Sub,
-                                                  Settings.TaskCancellationTokenSource.Token,
-                                                  TaskCreationOptions.None,
-                                                 Settings.AppTaskScheduler)
-                        Dim task6 = Task.Factory.StartNew(Sub()
-                                                              If Me.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                                                  IObj?.Paragraphs.Add("Calculating properties of Phase 'Vapor'...")
-                                                                  .DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
-                                                              Else
-                                                                  .DW_ZerarPhaseProps(PropertyPackages.Phase.Vapor)
-                                                              End If
-                                                          End Sub,
-                                                  Settings.TaskCancellationTokenSource.Token,
-                                                  TaskCreationOptions.None,
-                                                 Settings.AppTaskScheduler)
+                        Dim task1 = TaskHelper.Run(Sub()
+                                                       If Me.Phases(3).Properties.molarfraction.GetValueOrDefault > 0 Then
+                                                           IObj?.Paragraphs.Add("Calculating properties of Phase 'Liquid 1'...")
+                                                           .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid1)
+                                                       Else
+                                                           .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid1)
+                                                       End If
+                                                   End Sub,
+                                                  Settings.TaskCancellationTokenSource.Token)
+                        Dim task2 = TaskHelper.Run(Sub()
+                                                       If Me.Phases(4).Properties.molarfraction.GetValueOrDefault > 0 Then
+                                                           IObj?.Paragraphs.Add("Calculating properties of Phase 'Liquid 2'...")
+                                                           .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid2)
+                                                       Else
+                                                           .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid2)
+                                                       End If
+                                                   End Sub,
+                                                     Settings.TaskCancellationTokenSource.Token)
+                        Dim task3 = TaskHelper.Run(Sub()
+                                                       If Me.Phases(5).Properties.molarfraction.GetValueOrDefault > 0 Then
+                                                           IObj?.Paragraphs.Add("Calculating properties of Phase 'Liquid 3'...")
+                                                           .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid3)
+                                                       Else
+                                                           .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid3)
+                                                       End If
+                                                   End Sub,
+                                                  Settings.TaskCancellationTokenSource.Token)
+                        Dim task4 = TaskHelper.Run(Sub()
+                                                       If Me.Phases(6).Properties.molarfraction.GetValueOrDefault > 0 Then
+                                                           IObj?.Paragraphs.Add("Calculating properties of Phase 'Aqueous'...")
+                                                           .DW_CalcPhaseProps(PropertyPackages.Phase.Aqueous)
+                                                       Else
+                                                           .DW_ZerarPhaseProps(PropertyPackages.Phase.Aqueous)
+                                                       End If
+                                                   End Sub,
+                                                  Settings.TaskCancellationTokenSource.Token)
+                        Dim task5 = TaskHelper.Run(Sub()
+                                                       If Me.Phases(7).Properties.molarfraction.GetValueOrDefault > 0 Then
+                                                           IObj?.Paragraphs.Add("Calculating properties of Phase 'Solid'...")
+                                                           .DW_CalcSolidPhaseProps()
+                                                       Else
+                                                           .DW_ZerarPhaseProps(PropertyPackages.Phase.Solid)
+                                                       End If
+                                                   End Sub,
+                                                  Settings.TaskCancellationTokenSource.Token)
+                        Dim task6 = TaskHelper.Run(Sub()
+                                                       If Me.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
+                                                           IObj?.Paragraphs.Add("Calculating properties of Phase 'Vapor'...")
+                                                           .DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
+                                                       Else
+                                                           .DW_ZerarPhaseProps(PropertyPackages.Phase.Vapor)
+                                                       End If
+                                                   End Sub,
+                                                  Settings.TaskCancellationTokenSource.Token)
                         Task.WaitAll(task1, task2, task3, task4, task5, task6)
 
                     Else
@@ -4547,11 +4536,8 @@ Namespace Streams
                     Select Case basis
                         Case "Molar", "molar", "mole", "Mole"
                             Dim val = Me.Phases(f).Properties.molecularWeight.GetValueOrDefault
-                            If val = 0.0# Then
-                                res.Add(Me.Phases(f).Properties.molar_enthalpy.GetValueOrDefault)
-                            Else
-                                res.Add(Me.Phases(f).Properties.enthalpy.GetValueOrDefault * val)
-                            End If
+                            If val = 0.0# Then val = Me.PropertyPackage.AUX_MMM(phs)
+                            res.Add(Me.Phases(f).Properties.enthalpy.GetValueOrDefault * val)
                         Case "Mass", "mass"
                             res.Add(Me.Phases(f).Properties.enthalpy.GetValueOrDefault * 1000)
                     End Select
@@ -4559,11 +4545,8 @@ Namespace Streams
                     Select Case basis
                         Case "Molar", "molar", "mole", "Mole"
                             Dim val = Me.Phases(f).Properties.molecularWeight.GetValueOrDefault
-                            If val = 0.0# Then
-                                res.Add(Me.Phases(f).Properties.molar_entropy.GetValueOrDefault)
-                            Else
-                                res.Add(Me.Phases(f).Properties.entropy.GetValueOrDefault * val)
-                            End If
+                            If val = 0.0# Then val = Me.PropertyPackage.AUX_MMM(phs)
+                            res.Add(Me.Phases(f).Properties.entropy.GetValueOrDefault * val)
                         Case "Mass", "mass"
                             res.Add(Me.Phases(f).Properties.entropy.GetValueOrDefault * 1000)
                     End Select
@@ -4571,11 +4554,8 @@ Namespace Streams
                     Select Case basis
                         Case "Molar", "molar", "mole", "Mole"
                             Dim val = Me.Phases(f).Properties.molecularWeight.GetValueOrDefault
-                            If val = 0.0# Then
-                                res.Add(Me.Phases(f).Properties.molar_enthalpyF.GetValueOrDefault)
-                            Else
-                                res.Add(Me.Phases(f).Properties.enthalpyF.GetValueOrDefault * val)
-                            End If
+                            If val = 0.0# Then val = Me.PropertyPackage.AUX_MMM(phs)
+                            res.Add(Me.Phases(f).Properties.enthalpyF.GetValueOrDefault * val)
                         Case "Mass", "mass"
                             res.Add(Me.Phases(f).Properties.enthalpyF.GetValueOrDefault * 1000)
                     End Select
@@ -4583,11 +4563,8 @@ Namespace Streams
                     Select Case basis
                         Case "Molar", "molar", "mole", "Mole"
                             Dim val = Me.Phases(f).Properties.molecularWeight.GetValueOrDefault
-                            If val = 0.0# Then
-                                res.Add(Me.Phases(f).Properties.molar_entropyF.GetValueOrDefault)
-                            Else
-                                res.Add(Me.Phases(f).Properties.entropyF.GetValueOrDefault * val)
-                            End If
+                            If val = 0.0# Then val = Me.PropertyPackage.AUX_MMM(phs)
+                            res.Add(Me.Phases(f).Properties.entropyF.GetValueOrDefault * val)
                         Case "Mass", "mass"
                             res.Add(Me.Phases(f).Properties.entropyF.GetValueOrDefault * 1000)
                     End Select
@@ -4595,11 +4572,8 @@ Namespace Streams
                     Select Case basis
                         Case "Molar", "molar", "mole", "Mole"
                             Dim val As Double = Me.Phases(f).Properties.molecularWeight.GetValueOrDefault
-                            If val = 0.0# Then
-                                res.Add(Me.Phases(f).Properties.molar_internal_energy.GetValueOrDefault)
-                            Else
-                                res.Add(Me.Phases(f).Properties.internal_energy.GetValueOrDefault * val)
-                            End If
+                            If val = 0.0# Then val = Me.PropertyPackage.AUX_MMM(phs)
+                            res.Add(Me.Phases(f).Properties.internal_energy.GetValueOrDefault * val)
                         Case "Mass", "mass"
                             res.Add(Me.Phases(f).Properties.internal_energy.GetValueOrDefault * 1000)
                     End Select
@@ -4607,11 +4581,8 @@ Namespace Streams
                     Select Case basis
                         Case "Molar", "molar", "mole", "Mole"
                             Dim val As Double = Me.Phases(f).Properties.molecularWeight.GetValueOrDefault
-                            If val = 0.0# Then
-                                res.Add(Me.Phases(f).Properties.molar_gibbs_free_energy.GetValueOrDefault)
-                            Else
-                                res.Add(Me.Phases(f).Properties.gibbs_free_energy.GetValueOrDefault * val)
-                            End If
+                            If val = 0.0# Then val = Me.PropertyPackage.AUX_MMM(phs)
+                            res.Add(Me.Phases(f).Properties.gibbs_free_energy.GetValueOrDefault * val)
                         Case "Mass", "mass"
                             res.Add(Me.Phases(f).Properties.gibbs_free_energy.GetValueOrDefault * 1000)
                     End Select
@@ -4619,11 +4590,8 @@ Namespace Streams
                     Select Case basis
                         Case "Molar", "molar", "mole", "Mole"
                             Dim val As Double = Me.Phases(f).Properties.molecularWeight.GetValueOrDefault
-                            If val = 0.0# Then
-                                res.Add(Me.Phases(f).Properties.molar_helmholtz_energy.GetValueOrDefault)
-                            Else
-                                res.Add(Me.Phases(f).Properties.helmholtz_energy.GetValueOrDefault * val)
-                            End If
+                            If val = 0.0# Then val = Me.PropertyPackage.AUX_MMM(phs)
+                            res.Add(Me.Phases(f).Properties.helmholtz_energy.GetValueOrDefault * val)
                         Case "Mass", "mass"
                             res.Add(Me.Phases(f).Properties.helmholtz_energy.GetValueOrDefault * 1000)
                     End Select
@@ -7877,7 +7845,6 @@ Namespace Streams
                         sub1.MoleFraction = 0.0#
                     End If
                 Next
-                Me.PropertyPackage.CurrentMaterialStream = Me.FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
                 .Phases(0).Properties.temperature = (W0 * T0 + W1 * T1) / (W0 + W1)
                 .SpecType = StreamSpec.Pressure_and_Enthalpy
                 .PropertyPackage.CurrentMaterialStream = Me

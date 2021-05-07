@@ -1,9 +1,8 @@
-Imports Cudafy
-Imports System.Linq
 Imports System.IO
-Imports System.Runtime.Serialization.Formatters.Binary
-Imports System.Threading
 Imports System.Runtime.InteropServices
+Imports System.Reflection
+Imports System.Linq
+Imports DWSIM.Interfaces
 
 Namespace My
 
@@ -41,38 +40,23 @@ Namespace My
 
         Public Property ActiveSimulation As FormFlowsheet
 
+        Public Property MainWindowForm As FormMain
+
         Public Property UserUnitSystems As Dictionary(Of String, SystemsOfUnits.Units)
 
-        Private Sub MyApplication_Shutdown(sender As Object, e As EventArgs) Handles Me.Shutdown
-
-            'save user unit systems
-
-            Dim xdoc As New XDocument()
-            Dim xel As XElement
-
-            xdoc = New XDocument
-            xdoc.Add(New XElement("Units"))
-
-            For Each su2 As SystemsOfUnits.Units In UserUnitSystems.Values
-                xdoc.Element("Units").Add(New XElement(XmlConvert.EncodeName(su2.Name)))
-                xel = xdoc.Element("Units").Element(XmlConvert.EncodeName(su2.Name))
-                xel.Add(su2.SaveData())
-            Next
-
-            Using sw As New StringWriter()
-                Using xw As New XmlTextWriter(sw)
-                    xdoc.Save(xw)
-                    My.Settings.UserUnits = sw.ToString
-                End Using
-            End Using
-
-            If Not DWSIM.App.IsRunningOnMono Then
-                My.Settings.Save()
-            End If
-
-        End Sub
-
         Private Sub MyApplication_Startup(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.StartupEventArgs) Handles Me.Startup
+
+            If Environment.OSVersion.Version >= New Version(6, 3, 0) Then
+                'win 8.1 added support for per monitor dpi
+                If (Environment.OSVersion.Version >= New Version(10, 0, 15063)) Then
+                    'creators update added support For per monitor v2
+                    NativeMethods.SetProcessDpiAwarenessContext(NativeMethods.DPI_AWARENESS_CONTEXT.DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2)
+                Else
+                    NativeMethods.SetProcessDpiAwareness(NativeMethods.PROCESS_DPI_AWARENESS.Process_Per_Monitor_DPI_Aware)
+                End If
+            Else
+                NativeMethods.SetProcessDPIAware()
+            End If
 
             Directory.SetCurrentDirectory(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location))
 
@@ -141,11 +125,39 @@ Namespace My
 
         End Sub
 
+        Private Sub MyApplication_Shutdown(sender As Object, e As EventArgs) Handles Me.Shutdown
+
+            'save user unit systems
+
+            Dim xdoc As New XDocument()
+            Dim xel As XElement
+
+            xdoc = New XDocument
+            xdoc.Add(New XElement("Units"))
+
+            For Each su2 As SystemsOfUnits.Units In UserUnitSystems.Values
+                xdoc.Element("Units").Add(New XElement(XmlConvert.EncodeName(su2.Name)))
+                xel = xdoc.Element("Units").Element(XmlConvert.EncodeName(su2.Name))
+                xel.Add(su2.SaveData())
+            Next
+
+            Using sw As New StringWriter()
+                Using xw As New XmlTextWriter(sw)
+                    xdoc.Save(xw)
+                    My.Settings.UserUnits = sw.ToString
+                End Using
+            End Using
+
+            If Not DWSIM.App.IsRunningOnMono Then
+                My.Settings.Save()
+            End If
+
+        End Sub
+
         Private Sub MyApplication_UnhandledException(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.UnhandledExceptionEventArgs) Handles Me.UnhandledException
             If Not CommandLineMode Then
                 If Not GlobalSettings.Settings.AutomationMode Then
                     Dim frmEx As New FormUnhandledException
-                    frmEx.TextBox1.Text = e.Exception.ToString
                     frmEx.ex = e.Exception
                     frmEx.ShowDialog()
                     e.ExitApplication = False
@@ -158,9 +170,32 @@ Namespace My
             End If
         End Sub
 
+        Private Function GetSplashScreen() As Form
+
+            Dim splfile = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "extenders", "SplashScreen.dll")
+
+            If File.Exists(splfile) Then
+
+                Dim types = Assembly.LoadFrom(splfile).GetExportedTypes()
+
+                Dim tList As List(Of Type) = types.ToList().FindAll(Function(t) t.GetInterfaces().Contains(GetType(ISplashScreen)))
+
+                Dim lst = tList.ConvertAll(Function(t As Type) TryCast(Activator.CreateInstance(t), ISplashScreen))
+
+                Return lst(0).GetSplashScreen()
+
+            Else
+
+                Return Global.DWSIM.SplashScreen
+
+            End If
+
+        End Function
+
         <System.Runtime.InteropServices.DllImport("kernel32.dll")>
         Private Shared Function AttachConsole(dwProcessId As Integer) As Boolean
         End Function
+
         Private Const ATTACH_PARENT_PROCESS As Integer = -1
 
         <System.Runtime.InteropServices.DllImport("kernel32.dll", SetLastError:=True)>

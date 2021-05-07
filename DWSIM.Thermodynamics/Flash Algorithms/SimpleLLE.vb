@@ -24,6 +24,7 @@ Imports DWSIM.MathOps.MathEx.Common
 
 Imports System.Threading.Tasks
 Imports System.Linq
+Imports DWSIM.SharedClasses
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
@@ -39,6 +40,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Dim Sv0, Svid, Slid, Sf, Sv, Sl As Double
 
         Public Property InitialEstimatesForPhase1 As Double()
+        Public Property InitialEstimateForPhase1Amount As Double?
         Public Property UseInitialEstimatesForPhase1 As Boolean = False
 
         Public Property InitialEstimatesForPhase2 As Double()
@@ -113,23 +115,28 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
 
             If UseInitialEstimatesForPhase1 And UseInitialEstimatesForPhase2 Then
-                L1 = 0
-                L2 = 0
-                For i = 0 To n
-                    If Vz(i) > 0 Then
-                        j += 1
-                        If InitialEstimatesForPhase1(i) = InitialEstimatesForPhase2(i) Then
-                            L1 += 0.5
-                        Else
-                            Dim diff As Double = (InitialEstimatesForPhase1(i) - InitialEstimatesForPhase2(i))
-                            If diff > 0.0# Then L1 += Abs((Vz(i) - InitialEstimatesForPhase2(i)) / diff)
+                If InitialEstimateForPhase1Amount.HasValue Then
+                    L1 = InitialEstimateForPhase1Amount.Value
+                    L2 = 1 - L1
+                Else
+                    L1 = 0
+                    L2 = 0
+                    For i = 0 To n
+                        If Vz(i) > 0 Then
+                            j += 1
+                            If InitialEstimatesForPhase1(i) = InitialEstimatesForPhase2(i) Then
+                                L1 += 0.5
+                            Else
+                                Dim diff As Double = (InitialEstimatesForPhase1(i) - InitialEstimatesForPhase2(i))
+                                If diff > 0.0# Then L1 += Abs((Vz(i) - InitialEstimatesForPhase2(i)) / diff)
+                            End If
                         End If
-                    End If
-                Next
-                L1 = L1 / j
-                If L1 > 0.99 Then L1 = 0.99
-                If L1 < 0.01 Then L1 = 0.01
-                L2 = 1 - L1
+                    Next
+                    L1 = L1 / j
+                    If L1 > 0.99 Then L1 = 0.99
+                    If L1 < 0.01 Then L1 = 0.01
+                    L2 = 1 - L1
+                End If
             Else
                 Dim minn As Double = Vz(0)
                 j = 0
@@ -371,16 +378,13 @@ out:        d2 = Date.Now
             Do
                 If Settings.EnableParallelProcessing Then
 
-                    Dim task1 As Task = New Task(Sub()
-                                                     fx = Herror(x1, {P, Vz, PP})
-                                                 End Sub)
-                    Dim task2 As Task = New Task(Sub()
-                                                     fx2 = Herror(x1 + 1, {P, Vz, PP})
-                                                 End Sub)
-                    task1.Start()
-                    task2.Start()
+                    Dim task1 As Task = TaskHelper.Run(Sub()
+                                                           fx = Herror(x1, {P, Vz, PP})
+                                                       End Sub)
+                    Dim task2 As Task = TaskHelper.Run(Sub()
+                                                           fx2 = Herror(x1 + 1, {P, Vz, PP})
+                                                       End Sub)
                     Task.WaitAll(task1, task2)
-
                 Else
                     fx = Herror(x1, {P, Vz, PP})
                     fx2 = Herror(x1 + 1, {P, Vz, PP})
@@ -471,14 +475,12 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
             Do
                 If Settings.EnableParallelProcessing Then
 
-                    Dim task1 As Task = New Task(Sub()
-                                                     fx = Serror(x1, {P, Vz, PP})
-                                                 End Sub)
-                    Dim task2 As Task = New Task(Sub()
-                                                     fx2 = Serror(x1 + 1, {P, Vz, PP})
-                                                 End Sub)
-                    task1.Start()
-                    task2.Start()
+                    Dim task1 As Task = TaskHelper.Run(Sub()
+                                                           fx = Serror(x1, {P, Vz, PP})
+                                                       End Sub)
+                    Dim task2 As Task = TaskHelper.Run(Sub()
+                                                           fx2 = Serror(x1 + 1, {P, Vz, PP})
+                                                       End Sub)
                     Task.WaitAll(task1, task2)
 
                 Else

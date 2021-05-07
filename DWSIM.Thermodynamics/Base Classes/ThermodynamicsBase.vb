@@ -1613,6 +1613,526 @@ Namespace BaseClasses
 
         End Function
 
+        Public Function ExportToJSON() As String Implements ICompoundConstantProperties.ExportToJSON
+
+            Return Newtonsoft.Json.JsonConvert.SerializeObject(Me, Newtonsoft.Json.Formatting.Indented)
+
+        End Function
+
+        Public Sub ImportFromJSON(data As String) Implements ICompoundConstantProperties.ImportFromJSON
+
+            Dim obj = Newtonsoft.Json.JsonConvert.DeserializeObject(Of ConstantProperties)(data)
+
+            Me.LoadData(obj.SaveData())
+
+        End Sub
+
+        Public Function GetVaporPressure(T As Double, Optional ByRef message As String = "") As Double Implements ICompoundConstantProperties.GetVaporPressure
+
+            If IsPF = 1 Then
+                message = "Estimated using Lee-Kesler correlation."
+                Return PropertyPackages.Auxiliary.PROPS.Pvp_leekesler(T, Critical_Temperature, Critical_Pressure, Acentric_Factor)
+            Else
+                If OriginalDB = "DWSIM" Or
+                    OriginalDB = "" Then
+                    Dim A, B, C, D, E, result As Double
+                    A = Vapor_Pressure_Constant_A
+                    B = Vapor_Pressure_Constant_B
+                    C = Vapor_Pressure_Constant_C
+                    D = Vapor_Pressure_Constant_D
+                    E = Vapor_Pressure_Constant_E
+                    message = "Calculated using Experimental/Regressed data."
+                    result = Math.Exp(A + B / T + C * Math.Log(T) + D * T ^ E)
+                    Return result
+                ElseIf OriginalDB = "CheResources" Then
+                    Dim A, B, C, result As Double
+                    A = Vapor_Pressure_Constant_A
+                    B = Vapor_Pressure_Constant_B
+                    C = Vapor_Pressure_Constant_C
+                    '[LN(P)=A-B/(T+C), P(mmHG) T(K)]
+                    message = "Calculated using Experimental/Regressed data."
+                    result = Math.Exp(A - B / (T + C)) * 133.322368 'mmHg to Pascal
+                    Return result
+                ElseIf OriginalDB = "ChemSep" Or
+                OriginalDB = "CoolProp" Or
+                OriginalDB = "User" Or
+                OriginalDB = "ChEDL Thermo" Or
+                OriginalDB = "KDB" Then
+                    Dim A, B, C, D, E, result As Double
+                    Dim eqno As String = VaporPressureEquation
+                    Dim mw As Double = Molar_Weight
+                    A = Vapor_Pressure_Constant_A
+                    B = Vapor_Pressure_Constant_B
+                    C = Vapor_Pressure_Constant_C
+                    D = Vapor_Pressure_Constant_D
+                    E = Vapor_Pressure_Constant_E
+                    '<vp_c name="Vapour pressure"  units="Pa" >
+                    If eqno = "0" Then
+                        message = "Estimated using Lee-Kesler correlation."
+                        Return PropertyPackages.Auxiliary.PROPS.Pvp_leekesler(T, Critical_Temperature, Critical_Pressure, Acentric_Factor)
+                    Else
+                        If Integer.TryParse(eqno, New Integer) Then
+                            message = "Calculated using Experimental/Regressed data."
+                            result = PropertyPackages.PropertyPackage.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'Pa
+                        Else
+                            If eqno = "" Then
+                                message = "Estimated using Lee-Kesler correlation."
+                                Return PropertyPackages.Auxiliary.PROPS.Pvp_leekesler(T, Critical_Temperature, Critical_Pressure, Acentric_Factor)
+                            Else
+                                message = "Calculated using Experimental/Regressed data."
+                                result = PropertyPackages.PropertyPackage.ParseEquation(eqno, A, B, C, D, E, T) 'Pa
+                            End If
+                        End If
+                    End If
+                    Return result
+                ElseIf OriginalDB = "Biodiesel" Then
+                    Dim A, B, C, D, E, result As Double
+                    Dim eqno As String = VaporPressureEquation
+                    A = Vapor_Pressure_Constant_A
+                    B = Vapor_Pressure_Constant_B
+                    C = Vapor_Pressure_Constant_C
+                    D = Vapor_Pressure_Constant_D
+                    E = Vapor_Pressure_Constant_E
+                    result = PropertyPackages.PropertyPackage.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kPa
+                    message = "Calculated using Experimental/Regressed data."
+                    Return result * 1000
+                Else
+                    message = "Estimated using Lee-Kesler correlation."
+                    Return PropertyPackages.Auxiliary.PROPS.Pvp_leekesler(T, Critical_Temperature, Critical_Pressure, Acentric_Factor)
+                End If
+            End If
+
+        End Function
+
+        Public Function GetIdealGasHeatCapacity(T As Double, Optional ByRef message As String = "") As Double Implements ICompoundConstantProperties.GetIdealGasHeatCapacity
+
+            Dim db As String = OriginalDB
+
+            If IsPF = 1 Then
+
+                message = "Estimated using Lee-Kesler correlation."
+                Return PropertyPackages.Auxiliary.PROPS.Cpig_lk(PF_Watson_K, Acentric_Factor, T) '* .Molar_Weight
+
+            Else
+
+                If db = "DWSIM" Or db = "" Then
+                    Dim A, B, C, D, E, result As Double
+                    A = Ideal_Gas_Heat_Capacity_Const_A
+                    B = Ideal_Gas_Heat_Capacity_Const_B
+                    C = Ideal_Gas_Heat_Capacity_Const_C
+                    D = Ideal_Gas_Heat_Capacity_Const_D
+                    E = Ideal_Gas_Heat_Capacity_Const_E
+                    'Cp = A + B*T + C*T^2 + D*T^3 + E*T^4 where Cp in kJ/kg-mol , T in K 
+                    message = "Calculated using Experimental/Regressed data."
+                    result = A + B * T + C * T ^ 2 + D * T ^ 3 + E * T ^ 4
+                    Return result / Molar_Weight 'kJ/kg.K
+                ElseIf db = "CheResources" Then
+                    Dim A, B, C, D, E, result As Double
+                    A = Ideal_Gas_Heat_Capacity_Const_A
+                    B = Ideal_Gas_Heat_Capacity_Const_B
+                    C = Ideal_Gas_Heat_Capacity_Const_C
+                    D = Ideal_Gas_Heat_Capacity_Const_D
+                    E = Ideal_Gas_Heat_Capacity_Const_E
+                    'CAL/MOL.K [CP=A+(B*T)+(C*T^2)+(D*T^3)], T in K
+                    message = "Calculated using Experimental/Regressed data."
+                    result = A + B * T + C * T ^ 2 + D * T ^ 3
+                    Return result / Molar_Weight * 4.1868 'kJ/kg.K
+                ElseIf db = "ChemSep" Or db = "ChEDL Thermo" Or db = "User" Then
+                    Dim A, B, C, D, E, result As Double
+                    Dim eqno As String = IdealgasCpEquation
+                    Dim mw As Double = Molar_Weight
+                    A = Ideal_Gas_Heat_Capacity_Const_A
+                    B = Ideal_Gas_Heat_Capacity_Const_B
+                    C = Ideal_Gas_Heat_Capacity_Const_C
+                    D = Ideal_Gas_Heat_Capacity_Const_D
+                    E = Ideal_Gas_Heat_Capacity_Const_E
+                    message = "Calculated using Experimental/Regressed data."
+                    If Integer.TryParse(eqno, New Integer) Then
+                        result = PropertyPackages.PropertyPackage.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) / 1000 / mw 'kJ/kg.K
+                    Else
+                        result = PropertyPackages.PropertyPackage.ParseEquation(eqno, A, B, C, D, E, T) / mw
+                    End If
+                    If result = 0.0 Then
+                        message = "Couldn't calculate Ideal Gas Cp."
+                    End If
+                    Return result
+                ElseIf db = "ChEDL Thermo" Then
+                    Dim A, B, C, D, E, result As Double
+                    Dim eqno As String = IdealgasCpEquation
+                    A = Ideal_Gas_Heat_Capacity_Const_A
+                    B = Ideal_Gas_Heat_Capacity_Const_B
+                    C = Ideal_Gas_Heat_Capacity_Const_C
+                    D = Ideal_Gas_Heat_Capacity_Const_D
+                    E = Ideal_Gas_Heat_Capacity_Const_E
+                    message = "Calculated using Experimental/Regressed data."
+                    result = PropertyPackages.PropertyPackage.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kJ/kg.K
+                    Return result
+                ElseIf db = "CoolProp" Then
+                    Dim A, B, C, D, E, result As Double
+                    Dim eqno As String = IdealgasCpEquation
+                    Dim mw As Double = Molar_Weight
+                    A = Ideal_Gas_Heat_Capacity_Const_A
+                    B = Ideal_Gas_Heat_Capacity_Const_B
+                    C = Ideal_Gas_Heat_Capacity_Const_C
+                    D = Ideal_Gas_Heat_Capacity_Const_D
+                    E = Ideal_Gas_Heat_Capacity_Const_E
+                    message = "Calculated using Experimental/Regressed data."
+                    result = PropertyPackages.PropertyPackage.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kJ/kg.K
+                    Return result
+                ElseIf db = "Biodiesel" Then
+                    Dim A, B, C, D, E, result As Double
+                    Dim eqno As String = IdealgasCpEquation
+                    A = Ideal_Gas_Heat_Capacity_Const_A
+                    B = Ideal_Gas_Heat_Capacity_Const_B
+                    C = Ideal_Gas_Heat_Capacity_Const_C
+                    D = Ideal_Gas_Heat_Capacity_Const_D
+                    E = Ideal_Gas_Heat_Capacity_Const_E
+                    message = "Calculated using Experimental/Regressed data."
+                    result = PropertyPackages.PropertyPackage.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kJ/kg.K
+                    Return result
+                ElseIf db = "KDB" Then
+                    Dim A, B, C, D, E As Double
+                    Dim eqno As String = IdealgasCpEquation
+                    A = Ideal_Gas_Heat_Capacity_Const_A
+                    B = Ideal_Gas_Heat_Capacity_Const_B
+                    C = Ideal_Gas_Heat_Capacity_Const_C
+                    D = Ideal_Gas_Heat_Capacity_Const_D
+                    E = Ideal_Gas_Heat_Capacity_Const_E
+                    Dim mw As Double = Molar_Weight
+                    message = "Calculated using Experimental/Regressed data."
+                    Return PropertyPackages.PropertyPackage.ParseEquation(eqno, A, B, C, D, E, T) / mw
+                Else
+                    message = "Couldn't calculate Ideal Gas Cp."
+                    Return 0.0
+                End If
+
+            End If
+
+
+        End Function
+
+        Public Function GetEnthalpyOfVaporization(T As Double, Optional ByRef message As String = "") As Double Implements ICompoundConstantProperties.GetEnthalpyOfVaporization
+
+            Dim A, B, C, D, E, Tr, result As Double
+            A = HVap_A
+            B = HVap_B
+            C = HVap_C
+            D = HVap_D
+            E = HVap_E
+
+            Tr = T / Critical_Temperature
+
+            If Tr >= 1 Then Return 0.0#
+
+            If OriginalDB = "DWSIM" Or OriginalDB = "" Then
+                message = "Calculated using Experimental/Regressed data."
+                If IsHYPO = 1 Or
+                IsPF = 1 Then
+                    Dim tr1 As Double
+                    tr1 = Normal_Boiling_Point / Critical_Temperature
+                    result = HVap_A * ((1 - Tr) / (1 - tr1)) ^ 0.375
+                    Return result 'kJ/kg
+                Else
+                    result = A * (1 - Tr) ^ (B + C * Tr + D * Tr ^ 2)
+                    Return result / Molar_Weight / 1000 'kJ/kg
+                End If
+            ElseIf OriginalDB = "CheResources" Or OriginalDB = "CoolProp" Or OriginalDB = "User" Or OriginalDB = "KDB" Then
+                Dim tr1 As Double
+                If OriginalDB = "KDB" Then
+                    tr1 = HVap_B / Critical_Temperature
+                Else
+                    tr1 = Normal_Boiling_Point / Critical_Temperature
+                End If
+                If HVap_A = 0.0# Then
+                    message = "Estimated using Vetere correlation."
+                    HVap_A = New Utilities.Hypos.Methods.HYP().DHvb_Vetere(Critical_Temperature, Critical_Pressure, Normal_Boiling_Point)
+                    HVap_A /= Molar_Weight
+                End If
+                result = HVap_A * ((1 - Tr) / (1 - tr1)) ^ 0.375
+                Return result 'kJ/kg
+            ElseIf OriginalDB = "ChemSep" Then
+                Dim eqno As String = VaporizationEnthalpyEquation
+                message = "Calculated using Experimental/Regressed data."
+                result = PropertyPackages.PropertyPackage.CalcCSTDepProp(eqno, A, B, C, D, E, T, T / Tr) / Molar_Weight / 1000 'kJ/kg
+                Return result
+            ElseIf OriginalDB = "ChEDL Thermo" Then
+                Dim eqno As String = VaporizationEnthalpyEquation
+                message = "Calculated using Experimental/Regressed data."
+                result = PropertyPackages.PropertyPackage.CalcCSTDepProp(eqno, A, B, C, D, E, T, T / Tr) 'kJ/kg
+                Return result
+            Else
+
+            End If
+
+        End Function
+
+        Public Function GetVaporViscosity(T As Double, Optional ByRef message As String = "") As Double Implements ICompoundConstantProperties.GetVaporViscosity
+
+            Dim val As Double
+
+            If VaporViscosityEquation <> "" And VaporViscosityEquation <> "0" And Not IsIon And Not IsSalt Then
+                message = "Calculated using Experimental/Regressed data."
+                If Integer.TryParse(VaporViscosityEquation, New Integer) Then
+                    val = PropertyPackages.PropertyPackage.CalcCSTDepProp(VaporViscosityEquation, Vapor_Viscosity_Const_A, Vapor_Viscosity_Const_B, Vapor_Viscosity_Const_C, Vapor_Viscosity_Const_D, Vapor_Viscosity_Const_E, T, Critical_Temperature)
+                Else
+                    val = PropertyPackages.PropertyPackage.ParseEquation(VaporViscosityEquation, Vapor_Viscosity_Const_A, Vapor_Viscosity_Const_B, Vapor_Viscosity_Const_C, Vapor_Viscosity_Const_D, Vapor_Viscosity_Const_E, T)
+                End If
+            ElseIf IsIon Or IsSalt Then
+                val = 0.0#
+            Else
+                If Critical_Temperature > 0.0# Then
+                    message = "Estimated using Lucas correlation."
+                    val = PropertyPackages.Auxiliary.PROPS.viscg_lucas(T, Critical_Temperature, Critical_Pressure, Acentric_Factor, Molar_Weight)
+                Else
+                    val = 0.0#
+                End If
+            End If
+
+            Return val
+
+        End Function
+
+        Public Function GetVaporThermalConductivity(T As Double, Optional ByRef message As String = "") As Double Implements ICompoundConstantProperties.GetVaporThermalConductivity
+
+            Dim val As Double
+
+            If VaporThermalConductivityEquation <> "" And VaporThermalConductivityEquation <> "0" And Not IsIon And Not IsSalt Then
+                message = "Calculated using Experimental/Regressed data."
+                val = PropertyPackages.PropertyPackage.CalcCSTDepProp(VaporThermalConductivityEquation, Vapor_Thermal_Conductivity_Const_A, Vapor_Thermal_Conductivity_Const_B, Vapor_Thermal_Conductivity_Const_C, Vapor_Thermal_Conductivity_Const_D, Vapor_Thermal_Conductivity_Const_E, T, Critical_Temperature)
+            ElseIf IsIon Or IsSalt Then
+                val = 0.0#
+            Else
+                message = "Estimated using Ely-Hanley correlation."
+                val = PropertyPackages.Auxiliary.PROPS.condtg_elyhanley(T, Critical_Temperature, Critical_Volume / 1000, Critical_Compressibility, Acentric_Factor, Molar_Weight, GetIdealGasHeatCapacity(T) * Molar_Weight - 8.314)
+            End If
+
+            Return val
+
+        End Function
+
+        Public Function GetLiquidViscosity(T As Double, Optional ByRef message As String = "") As Double Implements ICompoundConstantProperties.GetLiquidViscosity
+
+            If IsPF = 1 Then
+                Dim dens = GetLiquidDensity(T)
+                Dim visc = PropertyPackages.Auxiliary.PROPS.oilvisc_twu(T, PF_Tv1, PF_Tv2, PF_v1, PF_v2)
+                If Double.IsNaN(visc) Then
+                    Dim Tc, Pc, w, Mw As Double
+                    Tc = Critical_Temperature
+                    Pc = Critical_Pressure
+                    w = Acentric_Factor
+                    Mw = Molar_Weight
+                    visc = PropertyPackages.Auxiliary.PROPS.viscl_letsti(T, Tc, Pc, w, Mw)
+                End If
+                message = "Estimated using Twu correlation."
+                Return visc * dens
+            Else
+                If OriginalDB = "DWSIM" Or
+                    OriginalDB = "" Then
+                    Dim A, B, C, D, E, result As Double
+                    A = Liquid_Viscosity_Const_A
+                    B = Liquid_Viscosity_Const_B
+                    C = Liquid_Viscosity_Const_C
+                    D = Liquid_Viscosity_Const_D
+                    E = Liquid_Viscosity_Const_E
+                    message = "Calculated using Experimental/Regressed data."
+                    result = Math.Exp(A + B / T + C * Math.Log(T) + D * T ^ E)
+                    Return result
+                ElseIf OriginalDB = "CheResources" Then
+                    Dim B, C, result As Double
+                    B = Liquid_Viscosity_Const_B
+                    C = Liquid_Viscosity_Const_C
+                    '[LOG(V)=B*(1/T-1/C), T(K) V(CP)]
+                    message = "Calculated using Experimental/Regressed data."
+                    result = Math.Exp(B * (1 / T - 1 / C)) * 0.001
+                    Return result
+                ElseIf OriginalDB = "ChemSep" Or
+                    OriginalDB = "CoolProp" Or
+                    OriginalDB = "User" Or
+                    OriginalDB = "ChEDL Thermo" Or
+                    OriginalDB = "KDB" Then
+                    Dim A, B, C, D, E, result As Double
+                    Dim eqno As String = LiquidViscosityEquation
+                    Dim mw As Double = Molar_Weight
+                    A = Liquid_Viscosity_Const_A
+                    B = Liquid_Viscosity_Const_B
+                    C = Liquid_Viscosity_Const_C
+                    D = Liquid_Viscosity_Const_D
+                    E = Liquid_Viscosity_Const_E
+                    '<lvsc name="Liquid viscosity"  units="Pa.s" >
+                    If eqno = "0" Or eqno = "" Then
+                        Dim Tc, Pc, w As Double
+                        Tc = Critical_Temperature
+                        Pc = Critical_Pressure
+                        w = Acentric_Factor
+                        mw = Molar_Weight
+                        message = "Estimated using Lestou-Stiel correlation."
+                        result = PropertyPackages.Auxiliary.PROPS.viscl_letsti(T, Tc, Pc, w, mw)
+                    Else
+                        message = "Calculated using Experimental/Regressed data."
+                        If Integer.TryParse(eqno, New Integer) Then
+                            result = PropertyPackages.PropertyPackage.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'Pa.s
+                        Else
+                            result = PropertyPackages.PropertyPackage.ParseEquation(eqno, A, B, C, D, E, T) 'Pa.s
+                        End If
+                    End If
+                    Return result
+                ElseIf OriginalDB = "Biodiesel" Then
+                    Dim result As Double
+                    Dim Tc, Pc, w, Mw As Double
+                    Tc = Critical_Temperature
+                    Pc = Critical_Pressure
+                    w = Acentric_Factor
+                    Mw = Molar_Weight
+                    message = "Estimated using Lestou-Stiel correlation."
+                    result = PropertyPackages.Auxiliary.PROPS.viscl_letsti(T, Tc, Pc, w, Mw)
+                    Return result
+                End If
+            End If
+
+        End Function
+
+        Public Function GetLiquidThermalConductivity(T As Double, Optional ByRef message As String = "") As Double Implements ICompoundConstantProperties.GetLiquidThermalConductivity
+
+            Dim val As Double
+
+            If LiquidThermalConductivityEquation <> "" And LiquidThermalConductivityEquation <> "0" And Not IsIon And Not IsSalt Then
+                message = "Calculated using Experimental/Regressed data."
+                val = PropertyPackages.PropertyPackage.CalcCSTDepProp(LiquidThermalConductivityEquation, Liquid_Thermal_Conductivity_Const_A, Liquid_Thermal_Conductivity_Const_B, Liquid_Thermal_Conductivity_Const_C, Liquid_Thermal_Conductivity_Const_D, Liquid_Thermal_Conductivity_Const_E, T, Critical_Temperature)
+            ElseIf IsIon Or IsSalt Then
+                val = 0.0#
+            Else
+                message = "Estimated using Latini correlation."
+                val = PropertyPackages.Auxiliary.PROPS.condl_latini(T, Normal_Boiling_Point, Critical_Temperature, Molar_Weight, "")
+            End If
+
+            Return val
+
+        End Function
+
+        Public Function GetLiquidHeatCapacity(T As Double, Optional ByRef message As String = "") As Double Implements ICompoundConstantProperties.GetLiquidHeatCapacity
+
+            Dim val As Double
+            If T >= Critical_Temperature Then
+                'surrogate for supercritical gases solved in liquid
+                message = "Calculated using Experimental/Regressed data."
+                val = PropertyPackages.PropertyPackage.CalcCSTDepProp(IdealgasCpEquation, Ideal_Gas_Heat_Capacity_Const_A, Ideal_Gas_Heat_Capacity_Const_B, Ideal_Gas_Heat_Capacity_Const_C, Ideal_Gas_Heat_Capacity_Const_D, Ideal_Gas_Heat_Capacity_Const_E, T, Critical_Temperature)
+                If OriginalDB <> "CoolProp" Then val = val / 1000 / Molar_Weight 'kJ/kg.K
+            Else
+                If LiquidHeatCapacityEquation <> "" And LiquidHeatCapacityEquation <> "0" And Not IsIon And Not IsSalt Then
+                    message = "Calculated using Experimental/Regressed data."
+                    If Integer.TryParse(LiquidHeatCapacityEquation, New Integer) Then
+                        val = PropertyPackages.PropertyPackage.CalcCSTDepProp(LiquidHeatCapacityEquation, Liquid_Heat_Capacity_Const_A, Liquid_Heat_Capacity_Const_B, Liquid_Heat_Capacity_Const_C, Liquid_Heat_Capacity_Const_D, Liquid_Heat_Capacity_Const_E, T, Critical_Temperature)
+                    Else
+                        val = PropertyPackages.PropertyPackage.ParseEquation(LiquidHeatCapacityEquation, Liquid_Heat_Capacity_Const_A, Liquid_Heat_Capacity_Const_B, Liquid_Heat_Capacity_Const_C, Liquid_Heat_Capacity_Const_D, Liquid_Heat_Capacity_Const_E, T) / Molar_Weight
+                    End If
+                    If OriginalDB <> "CoolProp" And OriginalDB <> "ChEDL Thermo" Then val = val / 1000 / Molar_Weight 'kJ/kg.K
+                Else
+                    'estimate using Rownlinson/Bondi correlation
+                    message = "Estimated using Rowlinson/Bondi correlation."
+                    val = PropertyPackages.Auxiliary.PROPS.Cpl_rb(GetIdealGasHeatCapacity(T), T, Critical_Temperature, Acentric_Factor, Molar_Weight) 'kJ/kg.K
+                End If
+            End If
+
+            Return val
+
+        End Function
+
+        Public Function GetLiquidDensity(T As Double, Optional ByRef message As String = "") As Double Implements ICompoundConstantProperties.GetLiquidDensity
+
+            Dim val As Double
+
+            If LiquidDensityEquation <> "" And LiquidDensityEquation <> "0" And Not IsIon And Not IsSalt Then
+                message = "Calculated using Experimental/Regressed data."
+                If Integer.TryParse(LiquidDensityEquation, New Integer) Then
+                    val = PropertyPackages.PropertyPackage.CalcCSTDepProp(LiquidDensityEquation, Liquid_Density_Const_A, Liquid_Density_Const_B, Liquid_Density_Const_C, Liquid_Density_Const_D, Liquid_Density_Const_E, T, Critical_Temperature)
+                Else
+                    val = PropertyPackages.PropertyPackage.ParseEquation(LiquidDensityEquation, Liquid_Density_Const_A, Liquid_Density_Const_B, Liquid_Density_Const_C, Liquid_Density_Const_D, Liquid_Density_Const_E, T)
+                End If
+                If OriginalDB <> "CoolProp" And OriginalDB <> "User" And OriginalDB <> "ChEDL Thermo" Then val = Molar_Weight * val
+            Else
+                message = "Estimated using Rackett correlation."
+                val = PropertyPackages.Auxiliary.PROPS.liq_dens_rackett(T, Critical_Temperature, Critical_Pressure, Acentric_Factor, Molar_Weight, Z_Rackett)
+            End If
+
+            Return val 'kg/m3
+
+        End Function
+
+        Public Function GetSolidDensity(T As Double, Optional ByRef message As String = "") As Double Implements ICompoundConstantProperties.GetSolidDensity
+
+            Dim val As Double
+
+            If OriginalDB = "ChemSep" Or (OriginalDB = "User" And SolidDensityEquation <> "") Then
+                Dim A, B, C, D, E, result As Double
+                Dim eqno As String = SolidDensityEquation
+                Dim mw As Double = Molar_Weight
+                A = Solid_Density_Const_A
+                B = Solid_Density_Const_B
+                C = Solid_Density_Const_C
+                D = Solid_Density_Const_D
+                E = Solid_Density_Const_E
+                message = "Calculated using Experimental/Regressed data."
+                If eqno <> "" Then result = PropertyPackages.PropertyPackage.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kmol/m3
+                val = 1 / (result * mw)
+            ElseIf OriginalDB = "ChEDL Thermo" Then
+                Dim A, B, C, D, E, result As Double
+                Dim eqno As String = SolidDensityEquation
+                A = Solid_Density_Const_A
+                B = Solid_Density_Const_B
+                C = Solid_Density_Const_C
+                D = Solid_Density_Const_D
+                E = Solid_Density_Const_E
+                message = "Calculated using Experimental/Regressed data."
+                If eqno <> "" Then result = result = PropertyPackages.PropertyPackage.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kg/m3
+                val = 1 / (result)
+            Else
+                message = "Using stored value at Ts."
+                If SolidDensityAtTs <> 0.0# Then
+                    val = 1 / SolidDensityAtTs
+                Else
+                    val = 1.0E+20
+                End If
+            End If
+
+            Return 1 / val
+
+        End Function
+
+        Public Function GetSolidHeatCapacity(T As Double, Optional ByRef message As String = "") As Double Implements ICompoundConstantProperties.GetSolidHeatCapacity
+
+            Dim val As Double
+
+            If OriginalDB = "ChemSep" Or (OriginalDB = "User" And SolidHeatCapacityEquation <> "") Then
+                Dim A, B, C, D, E, result As Double
+                Dim eqno As String = SolidHeatCapacityEquation
+                Dim mw As Double = Molar_Weight
+                A = Solid_Heat_Capacity_Const_A
+                B = Solid_Heat_Capacity_Const_B
+                C = Solid_Heat_Capacity_Const_C
+                D = Solid_Heat_Capacity_Const_D
+                E = Solid_Heat_Capacity_Const_E
+                message = "Calculated using Experimental/Regressed data."
+                result = PropertyPackages.PropertyPackage.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'J/kmol/K
+                val = result / 1000 / mw 'kJ/kg.K
+            ElseIf OriginalDB = "ChEDL Thermo" Then
+                Dim A, B, C, D, E As Double
+                Dim eqno As String = SolidHeatCapacityEquation
+                A = Solid_Heat_Capacity_Const_A
+                B = Solid_Heat_Capacity_Const_B
+                C = Solid_Heat_Capacity_Const_C
+                D = Solid_Heat_Capacity_Const_D
+                E = Solid_Heat_Capacity_Const_E
+                message = "Calculated using Experimental/Regressed data."
+                val = PropertyPackages.PropertyPackage.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kJ/kg/K
+            Else
+                message = "Using default value when no data is available."
+                val = 3 ' replacement if no params available
+            End If
+
+            Return val
+
+        End Function
+
         Public Property Acentric_Factor As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Acentric_Factor
 
         Public Property BO_BSW As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.BO_BSW

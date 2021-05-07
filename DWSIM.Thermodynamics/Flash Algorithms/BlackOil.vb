@@ -23,6 +23,7 @@ Imports DWSIM.MathOps.MathEx.Common
 
 Imports System.Threading.Tasks
 Imports System.Linq
+Imports DWSIM.SharedClasses
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
@@ -144,18 +145,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     If Settings.EnableParallelProcessing Then
 
-                        Dim task1 = Task.Factory.StartNew(Sub()
-                                                              fx = Herror("PT", x1, P, Vz, PP)(0)
-                                                          End Sub,
-                                                              Settings.TaskCancellationTokenSource.Token,
-                                                              TaskCreationOptions.None,
-                                                              Settings.AppTaskScheduler)
-                        Dim task2 = Task.Factory.StartNew(Sub()
-                                                              fx2 = Herror("PT", x1 + epsilon(j), P, Vz, PP)(0)
-                                                          End Sub,
-                                                          Settings.TaskCancellationTokenSource.Token,
-                                                          TaskCreationOptions.None,
-                                                          Settings.AppTaskScheduler)
+                        Dim task1 = TaskHelper.Run(Sub()
+                                                       fx = Herror("PT", x1, P, Vz, PP)(0)
+                                                   End Sub, Settings.TaskCancellationTokenSource.Token)
+                        Dim task2 = TaskHelper.Run(Sub()
+                                                       fx2 = Herror("PT", x1 + epsilon(j), P, Vz, PP)(0)
+                                                   End Sub, Settings.TaskCancellationTokenSource.Token)
                         Task.WaitAll(task1, task2)
 
                     Else
@@ -261,18 +256,14 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     If Settings.EnableParallelProcessing Then
 
-                        Dim task1 = Task.Factory.StartNew(Sub()
-                                                              fx = Serror("PT", x1, P, Vz, PP)(0)
-                                                          End Sub,
-                                                              Settings.TaskCancellationTokenSource.Token,
-                                                              TaskCreationOptions.None,
-                                                              Settings.AppTaskScheduler)
-                        Dim task2 = Task.Factory.StartNew(Sub()
-                                                              fx2 = Serror("PT", x1 + epsilon(j), P, Vz, PP)(0)
-                                                          End Sub,
-                                                          Settings.TaskCancellationTokenSource.Token,
-                                                          TaskCreationOptions.None,
-                                                          Settings.AppTaskScheduler)
+                        Dim task1 = TaskHelper.Run(Sub()
+                                                       fx = Serror("PT", x1, P, Vz, PP)(0)
+                                                   End Sub,
+                                                              Settings.TaskCancellationTokenSource.Token)
+                        Dim task2 = TaskHelper.Run(Sub()
+                                                       fx2 = Serror("PT", x1 + epsilon(j), P, Vz, PP)(0)
+                                                   End Sub,
+                                                          Settings.TaskCancellationTokenSource.Token)
                         Task.WaitAll(task1, task2)
 
                     Else

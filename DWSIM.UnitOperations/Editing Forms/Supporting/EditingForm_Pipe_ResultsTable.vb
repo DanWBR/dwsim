@@ -25,6 +25,7 @@ Public Class EditingForm_Pipe_ResultsTable
             .Item(11).HeaderText += " (" & su.heat_transf_coeff & ")"
             .Item(12).HeaderText += " (" & su.heat_transf_coeff & ")"
             .Item(13).HeaderText += " (" & su.heat_transf_coeff & ")"
+            .Item(14).HeaderText += " (" & su.temperature & ")"
         End With
 
         Dim nf As String = PipeOp.FlowSheet.FlowsheetOptions.NumberFormat
@@ -37,7 +38,7 @@ Public Class EditingForm_Pipe_ResultsTable
             For Each ps In .Sections.Values
                 If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "Straight Tube Section" Then
                     For Each res In ps.Results
-                        Me.DataGridView1.Rows.Add(New Object() {cv.ConvertFromSI(su.distance, comp_ant).ToString(nf), (Math.Atan(ps.Elevacao / (ps.Comprimento ^ 2 - ps.Elevacao ^ 2) ^ 0.5) * 180 / Math.PI).ToString(nf), cv.ConvertFromSI(su.pressure, res.Pressure_Initial.GetValueOrDefault).ToString(nf), cv.ConvertFromSI(su.temperature, res.Temperature_Initial.GetValueOrDefault).ToString(nf), cv.ConvertFromSI(su.velocity, res.LiqVel).ToString(nf), cv.ConvertFromSI(su.velocity, res.VapVel).ToString(nf), cv.ConvertFromSI(su.heatflow, res.HeatTransferred).ToString(nf), res.LiquidHoldup.GetValueOrDefault.ToString(nf), res.FlowRegime, cv.ConvertFromSI(su.heat_transf_coeff, res.HTC).ToString(nf), cv.ConvertFromSI(su.heat_transf_coeff, res.HTC_internal).ToString(nf), cv.ConvertFromSI(su.heat_transf_coeff, res.HTC_pipewall).ToString(nf), cv.ConvertFromSI(su.heat_transf_coeff, res.HTC_insulation).ToString(nf), cv.ConvertFromSI(su.heat_transf_coeff, res.HTC_external).ToString(nf)})
+                        Me.DataGridView1.Rows.Add(New Object() {cv.ConvertFromSI(su.distance, comp_ant).ToString(nf), (Math.Atan(ps.Elevacao / (ps.Comprimento ^ 2 - ps.Elevacao ^ 2) ^ 0.5) * 180 / Math.PI).ToString(nf), cv.ConvertFromSI(su.pressure, res.Pressure_Initial.GetValueOrDefault).ToString(nf), cv.ConvertFromSI(su.temperature, res.Temperature_Initial.GetValueOrDefault).ToString(nf), cv.ConvertFromSI(su.velocity, res.LiqVel).ToString(nf), cv.ConvertFromSI(su.velocity, res.VapVel).ToString(nf), cv.ConvertFromSI(su.heatflow, res.HeatTransferred).ToString(nf), res.LiquidHoldup.GetValueOrDefault.ToString(nf), res.FlowRegime, cv.ConvertFromSI(su.heat_transf_coeff, res.HTC).ToString(nf), cv.ConvertFromSI(su.heat_transf_coeff, res.HTC_internal).ToString(nf), cv.ConvertFromSI(su.heat_transf_coeff, res.HTC_pipewall).ToString(nf), cv.ConvertFromSI(su.heat_transf_coeff, res.HTC_insulation).ToString(nf), cv.ConvertFromSI(su.heat_transf_coeff, res.HTC_external).ToString(nf), res.External_Temperature.ConvertFromSI(su.temperature).ToString(nf)})
                         comp_ant += ps.Comprimento / ps.Incrementos
                     Next
                 Else

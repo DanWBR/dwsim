@@ -10,37 +10,35 @@ Amir Mehrkesh
 Anders Andreasen
 Andras Nady
 Andrew Dickson
+Bill Byers
 Bo Tjernberg
-Bruce
+Bruce Rising
 Bruce Logue
 Carlos G. C. Reetz
 Casey Houston
 Christian Hornhofer
 Christian Jordan
-Daniela Barajas Ivey
 David 
+David Whitlock
+Deryck Coetzer
 Diego A. Acosta
 Domenico Marchese
 Don Harrold
 Dorivaldo Junior
 Doug Palfreyman
-Duncan Nowicki
-Emanuel Cardoso Santos
-F An
+Emanuel Santos
+Fatma Alnuaimi
 Filippo Borroni
 Gerry Agnew
 Gokhan Candan 
 Guenther Holzer
-Guha Industries
 Henar González
 Henk Fikkert
 Hep Ingham
 Hugo Burbach
-Hugo Gonzalez
 Hurudza
-Ivagner Ferreira
 Jan Boshoff
-Javier Fontalvo Alzate
+Javier Alzate
 Jens Greimeier
 Jeremiah McAfoose
 Joe Rhodes
@@ -48,21 +46,21 @@ John Gorke
 John Herring
 John Kossik
 Jonathan
+Jose Zamora
 Joseph Attia
 Karen Elrington
 Khairul Anam
-Korsol
 Laércio Antonio Piva
 Lauterbach Verfahrenstechnik Gmbh
 Les Waymont
 Lewis Estall
-Li Tang
 Louis Wibberley
 Luis M. Góngora
 Luiza Martins
-Marcelo Accorsi Miranda
-Marcos A F Silva
+Marcelo Miranda
+Marcos Silva
 Martin Heiser
+Matt Hogg
 Michael Papantoniou
 Mikhail Evtushenko
 Nikita Petrosyan
@@ -70,16 +68,14 @@ Ozmeister
 Parthib Rao
 Petroconsulting Llc
 Philippe Wesel
-Rajesh S Kempegowda
+Rajesh Kempegowda
 Richard Huntington
+Roberto Bianchini
 Roland Berger
+Rupert Easter
 Ryszard
-Samuel Levinson
-Steven Baltakatei Sandoval
+Steven Sandoval
 Sukin Oh 
 Tayeong Lee
-Tibor Lányi
-Václav Babuka
 Will Flores
 Yoshihide Watabe
-Zos Team

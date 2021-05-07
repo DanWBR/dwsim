@@ -157,6 +157,59 @@ Namespace UnitOperations
 
         End Sub
 
+        Public Overrides Sub DisplayDynamicsEditForm()
+
+            If fd Is Nothing Then
+                fd = New DynamicsPropertyEditor With {.SimObject = Me}
+                fd.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockRight
+                fd.Tag = "ObjectEditor"
+                fd.UpdateCallBack = Sub(table)
+                                        AddButtonsToDynEditor(table)
+                                    End Sub
+                Me.FlowSheet.DisplayForm(fd)
+            Else
+                If fd.IsDisposed Then
+                    fd = New DynamicsPropertyEditor With {.SimObject = Me}
+                    fd.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockRight
+                    fd.Tag = "ObjectEditor"
+                    fd.UpdateCallBack = Sub(table)
+                                            AddButtonsToDynEditor(table)
+                                        End Sub
+                    Me.FlowSheet.DisplayForm(fd)
+                Else
+                    fd.Activate()
+                End If
+            End If
+
+        End Sub
+
+        Private Sub AddButtonsToDynEditor(table As TableLayoutPanel)
+
+            Dim button1 As New Button With {.Text = FlowSheet.GetTranslatedString("ViewAccumulationStream"),
+                .Dock = DockStyle.Bottom, .AutoSize = True, .AutoSizeMode = AutoSizeMode.GrowAndShrink}
+            AddHandler button1.Click, Sub(s, e)
+                                          AccumulationStream.SetFlowsheet(FlowSheet)
+                                          Dim fms As New MaterialStreamEditor With {
+                                          .MatStream = AccumulationStream,
+                                          .IsAccumulationStream = True,
+                                          .Text = Me.GraphicObject.Tag + ": " + FlowSheet.GetTranslatedString("AccumulationStream")}
+                                          FlowSheet.DisplayForm(fms)
+                                      End Sub
+
+            Dim button2 As New Button With {.Text = FlowSheet.GetTranslatedString("FillWithStream"),
+                .Dock = DockStyle.Bottom, .AutoSize = True, .AutoSizeMode = AutoSizeMode.GrowAndShrink}
+            AddHandler button2.Click, Sub(s, e)
+                                          AccumulationStream.SetFlowsheet(FlowSheet)
+                                          Dim fms As New EditingForm_SeparatorFiller With {.Separator = Me}
+                                          fms.ShowDialog()
+                                      End Sub
+
+            table.Controls.Add(button1)
+            table.Controls.Add(button2)
+            table.Controls.Add(New Panel())
+
+        End Sub
+
         Private prevM, currentM As Double
 
         Public Overrides Sub RunDynamicModel()
@@ -225,7 +278,9 @@ Namespace UnitOperations
             Else
 
                 AccumulationStream.SetFlowsheet(FlowSheet)
-                If imsmix.GetMassFlow() > 0 Then AccumulationStream = AccumulationStream.Add(imsmix, timestep)
+                If imsmix.GetMassFlow() > 0 Then
+                    AccumulationStream = AccumulationStream.Add(imsmix, timestep)
+                End If
                 AccumulationStream.PropertyPackage.CurrentMaterialStream = AccumulationStream
                 AccumulationStream.Calculate()
                 If oms1.GetMassFlow() > 0 Then AccumulationStream = AccumulationStream.Subtract(oms1, timestep)
@@ -643,6 +698,9 @@ Namespace UnitOperations
 
             If VnL2.Sum > 0 Then dens2 = DirectCast(PropertyPackage, PropertyPackages.PropertyPackage).AUX_LIQDENS(T, VnL2, P)
 
+            If Double.IsNaN(dens1) Then dens1 = 0.0
+            If Double.IsNaN(dens2) Then dens2 = 0.0
+
             If dens1 <= dens2 Then
 
                 cp = Me.GraphicObject.OutputConnectors(1) 'liquid 1
@@ -654,14 +712,22 @@ Namespace UnitOperations
                         .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
                         .Phases(0).Properties.temperature = T
                         .Phases(0).Properties.pressure = P
-                        .Phases(0).Properties.enthalpy = MixedStream.Phases(3).Properties.enthalpy.GetValueOrDefault
-                        If W1 > 0.0# Then .Phases(0).Properties.massflow = W1 Else .Phases(0).Properties.molarflow = 0.0#
+                        If W1 > 0.0# Then
+                            .Phases(0).Properties.massflow = W1
+                        Else
+                            .Phases(0).Properties.molarflow = 0.0#
+                        End If
                         .Phases(0).Properties.enthalpy = HL1
                         Dim comp As BaseClasses.Compound
                         i = 0
                         For Each comp In .Phases(0).Compounds.Values
-                            comp.MoleFraction = VnL1(Vids.IndexOf(comp.Name))
-                            comp.MassFraction = VmL1(Vids.IndexOf(comp.Name))
+                            If W1 > 0 Then
+                                comp.MoleFraction = VnL1(Vids.IndexOf(comp.Name))
+                                comp.MassFraction = VmL1(Vids.IndexOf(comp.Name))
+                            Else
+                                comp.MoleFraction = MixedStream.Phases(3).Compounds(comp.Name).MoleFraction.GetValueOrDefault
+                                comp.MassFraction = MixedStream.Phases(3).Compounds(comp.Name).MassFraction.GetValueOrDefault
+                            End If
                             i += 1
                         Next
                         If WS = 0.0 Then
@@ -682,13 +748,22 @@ Namespace UnitOperations
                         .Phases(0).Properties.temperature = T
                         .Phases(0).Properties.pressure = P
                         .Phases(0).Properties.enthalpy = MixedStream.Phases(4).Properties.enthalpy.GetValueOrDefault
-                        If W2 > 0.0# Then .Phases(0).Properties.massflow = W2 Else .Phases(0).Properties.molarflow = 0.0#
+                        If W2 > 0.0# Then
+                            .Phases(0).Properties.massflow = W2
+                        Else
+                            .Phases(0).Properties.molarflow = 0.0#
+                        End If
                         .Phases(0).Properties.enthalpy = HL2
                         Dim comp As BaseClasses.Compound
                         i = 0
                         For Each comp In .Phases(0).Compounds.Values
-                            comp.MoleFraction = VnL2(Vids.IndexOf(comp.Name))
-                            comp.MassFraction = VmL2(Vids.IndexOf(comp.Name))
+                            If W2 > 0 Then
+                                comp.MoleFraction = VnL2(Vids.IndexOf(comp.Name))
+                                comp.MassFraction = VmL2(Vids.IndexOf(comp.Name))
+                            Else
+                                comp.MoleFraction = MixedStream.Phases(4).Compounds(comp.Name).MoleFraction.GetValueOrDefault
+                                comp.MassFraction = MixedStream.Phases(4).Compounds(comp.Name).MassFraction.GetValueOrDefault
+                            End If
                             i += 1
                         Next
                         If WS = 0.0 Then
@@ -712,7 +787,6 @@ Namespace UnitOperations
                         .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
                         .Phases(0).Properties.temperature = T
                         .Phases(0).Properties.pressure = P
-                        .Phases(0).Properties.enthalpy = MixedStream.Phases(4).Properties.enthalpy.GetValueOrDefault
                         If W2 > 0.0# Then .Phases(0).Properties.massflow = W2 Else .Phases(0).Properties.molarflow = 0.0#
                         .Phases(0).Properties.enthalpy = HL2
                         Dim comp As BaseClasses.Compound
@@ -739,7 +813,6 @@ Namespace UnitOperations
                         .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
                         .Phases(0).Properties.temperature = T
                         .Phases(0).Properties.pressure = P
-                        .Phases(0).Properties.enthalpy = MixedStream.Phases(3).Properties.enthalpy.GetValueOrDefault
                         If W1 > 0.0# Then .Phases(0).Properties.massflow = W1 Else .Phases(0).Properties.molarflow = 0.0#
                         .Phases(0).Properties.enthalpy = HL1
                         Dim comp As BaseClasses.Compound

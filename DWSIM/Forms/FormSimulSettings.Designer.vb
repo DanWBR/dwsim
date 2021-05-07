@@ -24,14 +24,15 @@ Partial Class FormSimulSettings
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormSimulSettings))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Button9 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ComboBox3 = New System.Windows.Forms.ComboBox()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
@@ -59,6 +60,7 @@ Partial Class FormSimulSettings
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.Button3 = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Button5 = New System.Windows.Forms.Button()
         Me.cbOrderCompoundsBy = New System.Windows.Forms.ComboBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.btnInfoLeft = New System.Windows.Forms.Button()
@@ -95,11 +97,9 @@ Partial Class FormSimulSettings
         Me.PanelPP = New System.Windows.Forms.Panel()
         Me.GroupBox12 = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.btnConfigFlash = New System.Windows.Forms.Button()
         Me.btnConfigPP = New System.Windows.Forms.Button()
         Me.btnDeletePP = New System.Windows.Forms.Button()
         Me.btnCopyPP = New System.Windows.Forms.Button()
-        Me.btnConfigPPAdv = New System.Windows.Forms.Button()
         Me.dgvpp = New System.Windows.Forms.DataGridView()
         Me.Column18 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column16 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -199,6 +199,7 @@ Partial Class FormSimulSettings
         'GroupBox1
         '
         resources.ApplyResources(Me.GroupBox1, "GroupBox1")
+        Me.GroupBox1.Controls.Add(Me.LinkLabel1)
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Controls.Add(Me.ComboBox3)
         Me.GroupBox1.Controls.Add(Me.ComboBox1)
@@ -206,6 +207,13 @@ Partial Class FormSimulSettings
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
         Me.ToolTip1.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
+        '
+        'LinkLabel1
+        '
+        resources.ApplyResources(Me.LinkLabel1, "LinkLabel1")
+        Me.LinkLabel1.Name = "LinkLabel1"
+        Me.LinkLabel1.TabStop = True
+        Me.ToolTip1.SetToolTip(Me.LinkLabel1, resources.GetString("LinkLabel1.ToolTip"))
         '
         'Label1
         '
@@ -343,8 +351,8 @@ Partial Class FormSimulSettings
         '
         'Column1
         '
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.Gainsboro
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.Gainsboro
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle6
         resources.ApplyResources(Me.Column1, "Column1")
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
@@ -357,8 +365,8 @@ Partial Class FormSimulSettings
         '
         'Column3
         '
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.Gainsboro
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.Gainsboro
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle7
         resources.ApplyResources(Me.Column3, "Column3")
         Me.Column3.Name = "Column3"
         Me.Column3.ReadOnly = True
@@ -407,6 +415,7 @@ Partial Class FormSimulSettings
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.Button5)
         Me.GroupBox2.Controls.Add(Me.cbOrderCompoundsBy)
         Me.GroupBox2.Controls.Add(Me.Label12)
         Me.GroupBox2.Controls.Add(Me.btnInfoLeft)
@@ -418,6 +427,14 @@ Partial Class FormSimulSettings
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
         Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
+        '
+        'Button5
+        '
+        resources.ApplyResources(Me.Button5, "Button5")
+        Me.Button5.Image = Global.DWSIM.My.Resources.Resources.cross
+        Me.Button5.Name = "Button5"
+        Me.ToolTip1.SetToolTip(Me.Button5, resources.GetString("Button5.ToolTip"))
+        Me.Button5.UseVisualStyleBackColor = True
         '
         'cbOrderCompoundsBy
         '
@@ -478,8 +495,8 @@ Partial Class FormSimulSettings
         Me.ogc1.AllowUserToAddRows = False
         Me.ogc1.AllowUserToDeleteRows = False
         Me.ogc1.AllowUserToResizeRows = False
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
-        Me.ogc1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
+        Me.ogc1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle8
         Me.ogc1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.ogc1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column11, Me.colAdd, Me.Column6, Me.colTag, Me.casno, Me.Column8, Me.Column9, Me.Column7, Me.Column5})
         Me.ogc1.Name = "ogc1"
@@ -690,20 +707,11 @@ Partial Class FormSimulSettings
         'TableLayoutPanel1
         '
         resources.ApplyResources(Me.TableLayoutPanel1, "TableLayoutPanel1")
-        Me.TableLayoutPanel1.Controls.Add(Me.btnConfigFlash, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.btnConfigPP, 0, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.btnDeletePP, 4, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.btnCopyPP, 3, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.btnConfigPPAdv, 2, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.btnDeletePP, 2, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.btnCopyPP, 1, 0)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.ToolTip1.SetToolTip(Me.TableLayoutPanel1, resources.GetString("TableLayoutPanel1.ToolTip"))
-        '
-        'btnConfigFlash
-        '
-        resources.ApplyResources(Me.btnConfigFlash, "btnConfigFlash")
-        Me.btnConfigFlash.Image = Global.DWSIM.My.Resources.Resources.cog
-        Me.btnConfigFlash.Name = "btnConfigFlash"
-        Me.ToolTip1.SetToolTip(Me.btnConfigFlash, resources.GetString("btnConfigFlash.ToolTip"))
         '
         'btnConfigPP
         '
@@ -725,13 +733,6 @@ Partial Class FormSimulSettings
         Me.btnCopyPP.Image = Global.DWSIM.My.Resources.Resources.copy
         Me.btnCopyPP.Name = "btnCopyPP"
         Me.ToolTip1.SetToolTip(Me.btnCopyPP, resources.GetString("btnCopyPP.ToolTip"))
-        '
-        'btnConfigPPAdv
-        '
-        resources.ApplyResources(Me.btnConfigPPAdv, "btnConfigPPAdv")
-        Me.btnConfigPPAdv.Image = Global.DWSIM.My.Resources.Resources.cog
-        Me.btnConfigPPAdv.Name = "btnConfigPPAdv"
-        Me.ToolTip1.SetToolTip(Me.btnConfigPPAdv, resources.GetString("btnConfigPPAdv.ToolTip"))
         '
         'dgvpp
         '
@@ -805,9 +806,9 @@ Partial Class FormSimulSettings
         'DataGridViewTextBoxColumn2
         '
         Me.DataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle9
         Me.DataGridViewTextBoxColumn2.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
@@ -815,9 +816,9 @@ Partial Class FormSimulSettings
         '
         'DataGridViewTextBoxColumn3
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewTextBoxColumn3.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewTextBoxColumn3.DefaultCellStyle = DataGridViewCellStyle10
         resources.ApplyResources(Me.DataGridViewTextBoxColumn3, "DataGridViewTextBoxColumn3")
         Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
         Me.DataGridViewTextBoxColumn3.ReadOnly = True
@@ -1322,7 +1323,6 @@ Partial Class FormSimulSettings
     Friend WithEvents chkShowFloatingTables As System.Windows.Forms.CheckBox
     Friend WithEvents Button4 As System.Windows.Forms.Button
     Friend WithEvents FontDialog1 As System.Windows.Forms.FontDialog
-    Public WithEvents btnConfigPPAdv As System.Windows.Forms.Button
     Public WithEvents lblsla As Label
     Public WithEvents cbDefaultFloatingTableCompoundAmountBasis As ComboBox
     Friend WithEvents chkDisplayFloatingTableCompoundAmounts As CheckBox
@@ -1340,7 +1340,8 @@ Partial Class FormSimulSettings
     Friend WithEvents Column7 As DataGridViewTextBoxColumn
     Friend WithEvents Column5 As DataGridViewCheckBoxColumn
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
-    Public WithEvents btnConfigFlash As Button
     Friend WithEvents GroupBox4 As GroupBox
     Friend WithEvents chkSkipEqCalcs As CheckBox
+    Friend WithEvents Button5 As Button
+    Friend WithEvents LinkLabel1 As LinkLabel
 End Class

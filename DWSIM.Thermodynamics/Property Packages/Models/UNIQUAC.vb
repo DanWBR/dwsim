@@ -310,7 +310,6 @@ Namespace PropertyPackages.Auxiliary
             IObj?.Paragraphs.Add(String.Format("<h2>Calculated Intermediate Parameters</h2>"))
 
             Dim doparallel As Boolean = Settings.EnableParallelProcessing
-            Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism, .TaskScheduler = Settings.AppTaskScheduler}
 
             Dim n As Integer = Vx.Length - 1
 
@@ -362,10 +361,10 @@ Namespace PropertyPackages.Auxiliary
             Loop Until i = n + 1
 
             If doparallel And n > 10 Then
-                Parallel.For(0, n + 1, poptions, Sub(ip)
-                                                     tau_ij(ip) = a12(ip).NegateY.AddY(b12(ip).MultiplyConstY(T).AddY(c12(ip).MultiplyConstY(T ^ 2))).MultiplyConstY(1 / (1.98721 * T)).ExpY
-                                                     tau_ji(ip) = a21(ip).NegateY.AddY(b21(ip).MultiplyConstY(T).AddY(c21(ip).MultiplyConstY(T ^ 2))).MultiplyConstY(1 / (1.98721 * T)).ExpY
-                                                 End Sub)
+                Parallel.For(0, n + 1, Sub(ip)
+                                           tau_ij(ip) = a12(ip).NegateY.AddY(b12(ip).MultiplyConstY(T).AddY(c12(ip).MultiplyConstY(T ^ 2))).MultiplyConstY(1 / (1.98721 * T)).ExpY
+                                           tau_ji(ip) = a21(ip).NegateY.AddY(b21(ip).MultiplyConstY(T).AddY(c21(ip).MultiplyConstY(T ^ 2))).MultiplyConstY(1 / (1.98721 * T)).ExpY
+                                       End Sub)
             Else
                 For i = 0 To n
                     tau_ij(i) = a12(i).NegateY.AddY(b12(i).MultiplyConstY(T).AddY(c12(i).MultiplyConstY(T ^ 2))).MultiplyConstY(1 / (1.98721 * T)).ExpY
@@ -384,9 +383,9 @@ Namespace PropertyPackages.Auxiliary
             l = VR.SubtractY(VQ).MultiplyConstY(z / 2).SubtractY(VR.AddConstY(-1))
 
             If doparallel And n > 10 Then
-                Parallel.For(0, n + 1, poptions, Sub(ip)
-                                                     S(ip) = teta.MultiplyY(tau_ij(ip)).SumY
-                                                 End Sub)
+                Parallel.For(0, n + 1, Sub(ip)
+                                           S(ip) = teta.MultiplyY(tau_ij(ip)).SumY
+                                       End Sub)
             Else
                 For i = 0 To n
                     S(i) = teta.MultiplyY(tau_ij(i)).SumY
@@ -394,9 +393,9 @@ Namespace PropertyPackages.Auxiliary
             End If
 
             If doparallel And n > 10 Then
-                Parallel.For(0, n + 1, poptions, Sub(ip)
-                                                     sum1(ip) = teta.MultiplyY(tau_ij(ip).DivideY(S)).SumY
-                                                 End Sub)
+                Parallel.For(0, n + 1, Sub(ip)
+                                           sum1(ip) = teta.MultiplyY(tau_ij(ip).DivideY(S)).SumY
+                                       End Sub)
             Else
                 For i = 0 To n
                     sum1(i) = teta.MultiplyY(tau_ij(i).DivideY(S)).SumY
