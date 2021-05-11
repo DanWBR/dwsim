@@ -194,6 +194,7 @@ Public Class FormPCBulk
                 End If
 
             End If
+            dMF(1) = 1.0
         Else
             ' For more than 1 pseudo component 
             If MW <> 0 Then
