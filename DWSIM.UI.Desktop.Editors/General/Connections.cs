@@ -33,14 +33,26 @@ namespace DWSIM.UI.Desktop.Editors
             var mslist = SimObject.GetFlowsheet().GraphicObjects.Values.Where((x) => x.ObjectType == ObjectType.MaterialStream).Select((m) => m.Tag).ToList();
             var eslist = SimObject.GetFlowsheet().GraphicObjects.Values.Where((x) => x.ObjectType == ObjectType.EnergyStream).Select((m) => m.Tag).ToList();
 
+            var mslist_in = SimObject.GetFlowsheet().GraphicObjects.Values.Where((x) => x.ObjectType == ObjectType.MaterialStream && !x.OutputConnectors[0].IsAttached).Select((m) => m.Tag).ToList();
+            var eslist_in = SimObject.GetFlowsheet().GraphicObjects.Values.Where((x) => x.ObjectType == ObjectType.EnergyStream && !x.OutputConnectors[0].IsAttached).Select((m) => m.Tag).ToList();
+
+            var mslist_out = SimObject.GetFlowsheet().GraphicObjects.Values.Where((x) => x.ObjectType == ObjectType.MaterialStream && !x.InputConnectors[0].IsAttached).Select((m) => m.Tag).ToList();
+            var eslist_out = SimObject.GetFlowsheet().GraphicObjects.Values.Where((x) => x.ObjectType == ObjectType.EnergyStream && !x.InputConnectors[0].IsAttached).Select((m) => m.Tag).ToList();
+
             mslist.Insert(0, "");
             eslist.Insert(0, "");
 
+            mslist_in.Insert(0, "");
+            eslist_in.Insert(0, "");
+
+            mslist_out.Insert(0, "");
+            eslist_out.Insert(0, "");
+
             foreach (var cp in SimObject.GraphicObject.InputConnectors)
             {
                 if (cp.Type != ConType.ConEn)
                 {
-                    CreateAndAddRow("In", cp, mslist);
+                    CreateAndAddRow("In", cp, mslist_in);
                 }
             }
 
@@ -48,7 +60,7 @@ namespace DWSIM.UI.Desktop.Editors
             {
                 if (cp.Type != ConType.ConEn)
                 {
-                    CreateAndAddRow("Out", cp, mslist);
+                    CreateAndAddRow("Out", cp, mslist_out);
                 }
             }
 
@@ -56,7 +68,7 @@ namespace DWSIM.UI.Desktop.Editors
             {
                 if (cp.Type == ConType.ConEn)
                 {
-                    CreateAndAddRow("In", cp, eslist);
+                    CreateAndAddRow("In", cp, eslist_in);
                 }
             }
 
@@ -64,15 +76,15 @@ namespace DWSIM.UI.Desktop.Editors
             {
                 if (cp.Type == ConType.ConEn)
                 {
-                    CreateAndAddRow("Out", cp, eslist);
+                    CreateAndAddRow("Out", cp, eslist_out);
                 }
             }
 
-            if (SimObject.GraphicObject.EnergyConnector.Active) { CreateAndAddRow("Out", SimObject.GraphicObject.EnergyConnector, eslist); }
+            if (SimObject.GraphicObject.EnergyConnector.Active) { CreateAndAddRow("Out", SimObject.GraphicObject.EnergyConnector, eslist_out); }
 
         }
 
-        void CreateAndAddRow(string direction, IConnectionPoint connector, IEnumerable<String> options)
+        void CreateAndAddRow(string direction, IConnectionPoint connector, List<string> options)
         {
 
             DynamicLayout cont1 = new DynamicLayout();
@@ -87,6 +99,11 @@ namespace DWSIM.UI.Desktop.Editors
                     {
                         if (connector.IsEnergyConnector)
                         {
+                            if (!options.Contains(connector.AttachedConnector.AttachedTo.Tag))
+                            {
+                                options.Add(connector.AttachedConnector.AttachedTo.Tag);
+                                cbConnection.Items.Add(connector.AttachedConnector.AttachedTo.Tag);
+                            }
                             if (options.Contains(connector.AttachedConnector.AttachedTo.Tag))
                             {
                                 cbConnection.SelectedIndex = Array.IndexOf(options.ToArray(), connector.AttachedConnector.AttachedTo.Tag);
@@ -94,6 +111,11 @@ namespace DWSIM.UI.Desktop.Editors
                         }
                         else
                         {
+                            if (!options.Contains(connector.AttachedConnector.AttachedFrom.Tag))
+                            {
+                                options.Add(connector.AttachedConnector.AttachedFrom.Tag);
+                                cbConnection.Items.Add(connector.AttachedConnector.AttachedFrom.Tag);
+                            }
                             if (options.Contains(connector.AttachedConnector.AttachedFrom.Tag))
                             {
                                 cbConnection.SelectedIndex = Array.IndexOf(options.ToArray(), connector.AttachedConnector.AttachedFrom.Tag);
@@ -102,6 +124,11 @@ namespace DWSIM.UI.Desktop.Editors
                     }
                     else if (connector.Type == ConType.ConOut | connector.Type == ConType.ConEn)
                     {
+                        if (!options.Contains(connector.AttachedConnector.AttachedTo.Tag))
+                        {
+                            options.Add(connector.AttachedConnector.AttachedTo.Tag);
+                            cbConnection.Items.Add(connector.AttachedConnector.AttachedTo.Tag);
+                        }
                         if (options.Contains(connector.AttachedConnector.AttachedTo.Tag))
                         {
                             cbConnection.SelectedIndex = Array.IndexOf(options.ToArray(), connector.AttachedConnector.AttachedTo.Tag);
