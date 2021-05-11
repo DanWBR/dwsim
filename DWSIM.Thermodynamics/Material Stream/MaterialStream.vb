@@ -1,5 +1,5 @@
-﻿'    Stream Classes
-'    Copyright 2008-2011 Daniel Wagner O. de Medeiros
+﻿'    Material Stream Implementation
+'    Copyright 2008-2021 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -71,6 +71,12 @@ Namespace Streams
         ''' </summary>
         ''' <returns></returns>
         Public Property OverrideSingleCompoundFlashBehavior As Boolean = False
+
+        Public Property FloatingTableAmountBasis As CompositionBasis = CompositionBasis.DefaultBasis Implements IMaterialStream.FloatingTableAmountBasis
+
+        Public Property DefinedFlow As FlowSpec = FlowSpec.Mass Implements IMaterialStream.DefinedFlow
+
+        Public Property ForcePhase As ForcedPhase = ForcedPhase.None Implements IMaterialStream.ForcePhase
 
 #Region "    XML serialization"
 
@@ -502,7 +508,9 @@ Namespace Streams
                                     .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.VAP)
                             End Select
                         End If
+
                     Else
+
                         Select Case Me.SpecType
                             Case StreamSpec.Temperature_and_Pressure
                                 .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
@@ -515,6 +523,7 @@ Namespace Streams
                             Case StreamSpec.Temperature_and_VaporFraction
                                 .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.VAP)
                         End Select
+
                     End If
 
                     If DebugMode Then AppendDebugLine(String.Format("Phase equilibria calculated succesfully."))
@@ -6245,10 +6254,6 @@ Namespace Streams
                 Return Phases.Values.ToArray
             End Get
         End Property
-
-        Public Property FloatingTableAmountBasis As CompositionBasis = CompositionBasis.DefaultBasis Implements IMaterialStream.FloatingTableAmountBasis
-
-        Public Property DefinedFlow As FlowSpec = FlowSpec.Mass Implements IMaterialStream.DefinedFlow
 
         Public Overrides Function GetReport(su As IUnitsOfMeasure, ci As Globalization.CultureInfo, numberformat As String) As String
 

@@ -494,7 +494,16 @@ Namespace PropertyPackages
         <XmlIgnore> Public Overridable ReadOnly Property FlashBase() As Auxiliary.FlashAlgorithms.FlashAlgorithm
 
             Get
-                Return New UniversalFlash() With {.FlashSettings = FlashSettings}
+                If CurrentMaterialStream IsNot Nothing Then
+                    Select Case CurrentMaterialStream.ForcePhase
+                        Case ForcedPhase.None
+                            Return New UniversalFlash() With {.FlashSettings = FlashSettings}
+                        Case Else
+                            Return New ForcedPhaseFlash() With {.ForcePhase = CurrentMaterialStream.ForcePhase}
+                    End Select
+                Else
+                    Return New UniversalFlash() With {.FlashSettings = FlashSettings}
+                End If
             End Get
 
         End Property

@@ -142,34 +142,6 @@
   <data name="Button1.Text" xml:space="preserve">
     <value>Next &gt;</value>
   </data>
-  <data name="Button27.Text" xml:space="preserve">
-    <value>Load Assay Data</value>
-  </data>
-  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 13</value>
-  </data>
-  <data name="Label4.Text" xml:space="preserve">
-    <value>Click 'Next' to continue.</value>
-  </data>
-  <data name="Label5.Text" xml:space="preserve">
-    <value>Check items where experimental data are available. At least the distillation curve in one of the forms listed in the box is required.
-If you have bulk sample data like Specific Gravity and/or Molar Weight, inform them in the corresponding textboxes. Leave them blank otherwise.</value>
-  </data>
-  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 16</value>
-  </data>
-  <data name="Label6.Text" xml:space="preserve">
-    <value>Step 1 - Available Curves</value>
-  </data>
-  <data name="Button4.Text" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="Button5.Text" xml:space="preserve">
-    <value>&lt; Previous</value>
-  </data>
-  <data name="Button6.Text" xml:space="preserve">
-    <value>Next &gt;</value>
-  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="TextBoxKAPI.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -178,13 +150,25 @@ If you have bulk sample data like Specific Gravity and/or Molar Weight, inform t
     <value>537, 38</value>
   </data>
   <data name="TextBoxKAPI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 20</value>
+    <value>47, 20</value>
   </data>
   <data name="TextBoxKAPI.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
   <data name="TextBoxKAPI.Text" xml:space="preserve">
     <value>12</value>
+  </data>
+  <data name="TextBoxBulkMW.Location" type="System.Drawing.Point, System.Drawing">
+    <value>141, 248</value>
+  </data>
+  <data name="TextBoxBulkMW.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 20</value>
+  </data>
+  <data name="TextBoxBulkD.Location" type="System.Drawing.Point, System.Drawing">
+    <value>141, 222</value>
+  </data>
+  <data name="TextBoxBulkD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 20</value>
   </data>
   <data name="Label44.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 251</value>
@@ -229,22 +213,35 @@ If you have bulk sample data like Specific Gravity and/or Molar Weight, inform t
     <value>Curve Basis</value>
   </data>
   <data name="RadioButtonD20.Location" type="System.Drawing.Point, System.Drawing">
-    <value>188, 100</value>
+    <value>208, 100</value>
   </data>
   <data name="RadioButtonD60.Location" type="System.Drawing.Point, System.Drawing">
-    <value>121, 100</value>
+    <value>141, 100</value>
   </data>
   <data name="Label41.Location" type="System.Drawing.Point, System.Drawing">
-    <value>275, 133</value>
+    <value>317, 133</value>
   </data>
   <data name="TextBoxVT2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>233, 130</value>
+    <value>257, 130</value>
+  </data>
+  <data name="TextBoxVT2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 20</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="TextBoxVT2.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="Label40.Location" type="System.Drawing.Point, System.Drawing">
-    <value>207, 133</value>
+    <value>231, 133</value>
   </data>
   <data name="TextBoxVT1.Location" type="System.Drawing.Point, System.Drawing">
     <value>165, 130</value>
+  </data>
+  <data name="TextBoxVT1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 20</value>
+  </data>
+  <data name="TextBoxVT1.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="Label39.Location" type="System.Drawing.Point, System.Drawing">
     <value>139, 133</value>
@@ -296,6 +293,34 @@ If you have bulk sample data like Specific Gravity and/or Molar Weight, inform t
   </data>
   <data name="CheckBox1.Text" xml:space="preserve">
     <value>Boiling Point</value>
+  </data>
+  <data name="Button27.Text" xml:space="preserve">
+    <value>Load Assay Data</value>
+  </data>
+  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 13</value>
+  </data>
+  <data name="Label4.Text" xml:space="preserve">
+    <value>Click 'Next' to continue.</value>
+  </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Check items where experimental data are available. At least the distillation curve in one of the forms listed in the box is required.
+If you have bulk sample data like Specific Gravity and/or Molar Weight, inform them in the corresponding textboxes. Leave them blank otherwise.</value>
+  </data>
+  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>183, 16</value>
+  </data>
+  <data name="Label6.Text" xml:space="preserve">
+    <value>Step 1 - Available Curves</value>
+  </data>
+  <data name="Button4.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Button5.Text" xml:space="preserve">
+    <value>&lt; Previous</value>
+  </data>
+  <data name="Button6.Text" xml:space="preserve">
+    <value>Next &gt;</value>
   </data>
   <data name="Button26.Location" type="System.Drawing.Point, System.Drawing">
     <value>262, 84</value>
@@ -596,10 +621,6 @@ If you have bulk sample data like Specific Gravity and/or Molar Weight, inform t
   </data>
   <data name="Button24.Text" xml:space="preserve">
     <value>Finalize</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Inherit</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>DWSIM - Petroleum Characterization</value>

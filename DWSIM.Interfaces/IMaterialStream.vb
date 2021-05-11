@@ -21,6 +21,8 @@
 ''' </summary>
 <InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IMaterialStream
 
+    Property ForcePhase As Enums.ForcedPhase
+
     Property SpecType As Enums.StreamSpec
 
     Property DefinedFlow As Enums.FlowSpec

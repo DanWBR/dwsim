@@ -233,6 +233,7 @@ Namespace Enums
         UserDefined = 20
         Gibbs_Minimization_Multiphase = 21
         Universal = 22
+        Custom = 23
     End Enum
 
     Public Enum FlashSetting
@@ -366,6 +367,13 @@ Namespace Enums
         Liquid
         Vapor
         Mixture
+        Solid
+    End Enum
+
+    Public Enum ForcedPhase
+        None
+        Vapor
+        Liquid
         Solid
     End Enum
 

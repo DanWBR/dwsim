@@ -211,6 +211,7 @@
     <Compile Include="Editing Forms\Property Packages\WilsonPPEditor.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Flash Algorithms\ForcedPhaseFlash.vb" />
     <Compile Include="Helper Classes\SerializationBinder.vb" />
     <Compile Include="Interfaces\IActivityCoefficientBase.vb" />
     <Compile Include="Base Classes\ThermodynamicsBase.vb" />
