@@ -375,6 +375,7 @@ Namespace Enums
         Vapor
         Liquid
         Solid
+        GlobalDef
     End Enum
 
     Public Enum ReactionType

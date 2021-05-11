@@ -252,6 +252,17 @@ Public Class FormSimulSettings
 
         chkSkipEqCalcs.Checked = CurrentFlowsheet.Options.SkipEquilibriumCalculationOnDefinedStreams
 
+        Select Case CurrentFlowsheet.Options.ForceStreamPhase
+            Case ForcedPhase.None
+                cbForcePhase.SelectedIndex = 0
+            Case ForcedPhase.Vapor
+                cbForcePhase.SelectedIndex = 1
+            Case ForcedPhase.Liquid
+                cbForcePhase.SelectedIndex = 2
+            Case ForcedPhase.Solid
+                cbForcePhase.SelectedIndex = 3
+        End Select
+
         Me.loaded = True
 
     End Sub
@@ -1602,6 +1613,21 @@ Public Class FormSimulSettings
 
     Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
         Process.Start("https://docs.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings")
+    End Sub
+
+    Private Sub cbForcePhase_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbForcePhase.SelectedIndexChanged
+        If loaded Then
+            Select Case cbForcePhase.SelectedIndex
+                Case 0
+                    CurrentFlowsheet.Options.ForceStreamPhase = ForcedPhase.None
+                Case 1
+                    CurrentFlowsheet.Options.ForceStreamPhase = ForcedPhase.Vapor
+                Case 2
+                    CurrentFlowsheet.Options.ForceStreamPhase = ForcedPhase.Liquid
+                Case 3
+                    CurrentFlowsheet.Options.ForceStreamPhase = ForcedPhase.Solid
+            End Select
+        End If
     End Sub
 
     Private Sub FormSimulSettings_Shown(sender As Object, e As EventArgs) Handles Me.Shown

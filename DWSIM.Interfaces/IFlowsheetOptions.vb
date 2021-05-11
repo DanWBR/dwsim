@@ -91,4 +91,6 @@
 
     Property SkipEquilibriumCalculationOnDefinedStreams As Boolean
 
+    Property ForceStreamPhase As Enums.ForcedPhase
+
 End Interface

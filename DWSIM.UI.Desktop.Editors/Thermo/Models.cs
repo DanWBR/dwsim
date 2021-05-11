@@ -75,6 +75,42 @@ namespace DWSIM.UI.Desktop.Editors
 
             s.CreateAndAddDescriptionRow(container, "Prevents DWSIM from recalculating the equilibrium phase distribution in some well-defined material streams, i.e. separator vessel outlets, distillation column products, etc.");
 
+            int fp = 0;
+            switch (flowsheet.Options.ForceStreamPhase)
+            {
+                case Interfaces.Enums.ForcedPhase.None:
+                    fp = 0;
+                    break;
+                case Interfaces.Enums.ForcedPhase.Vapor:
+                    fp = 1;
+                    break;
+                case Interfaces.Enums.ForcedPhase.Liquid:
+                    fp = 2;
+                    break;
+                case Interfaces.Enums.ForcedPhase.Solid:
+                    fp = 3;
+                    break;
+            }
+
+            s.CreateAndAddDropDownRow(container, "Force Phase in Material Streams",
+                new System.Collections.Generic.List<string>{ "Do Not Force", "Vapor", "Liquid", "Solid" }, fp, (dd, e) => {
+                    switch (dd.SelectedIndex)
+                    {
+                        case 0:
+                            flowsheet.Options.ForceStreamPhase = Interfaces.Enums.ForcedPhase.None;
+                            break;
+                        case 1:
+                            flowsheet.Options.ForceStreamPhase = Interfaces.Enums.ForcedPhase.Vapor;
+                            break;
+                        case 2:
+                            flowsheet.Options.ForceStreamPhase = Interfaces.Enums.ForcedPhase.Liquid;
+                            break;
+                        case 3:
+                            flowsheet.Options.ForceStreamPhase = Interfaces.Enums.ForcedPhase.Solid;
+                            break;
+                    }
+                });
+
         }
 
         void AddPropPackItem(PropertyPackage pp)

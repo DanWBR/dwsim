@@ -76,7 +76,7 @@ Namespace Streams
 
         Public Property DefinedFlow As FlowSpec = FlowSpec.Mass Implements IMaterialStream.DefinedFlow
 
-        Public Property ForcePhase As ForcedPhase = ForcedPhase.None Implements IMaterialStream.ForcePhase
+        Public Property ForcePhase As ForcedPhase = ForcedPhase.GlobalDef Implements IMaterialStream.ForcePhase
 
 #Region "    XML serialization"
 

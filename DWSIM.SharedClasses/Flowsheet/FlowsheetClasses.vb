@@ -233,6 +233,8 @@ Namespace DWSIM.Flowsheet
 
         Public Property SkipEquilibriumCalculationOnDefinedStreams As Boolean = True Implements IFlowsheetOptions.SkipEquilibriumCalculationOnDefinedStreams
 
+        Public Property ForceStreamPhase As ForcedPhase = ForcedPhase.None Implements IFlowsheetOptions.ForceStreamPhase
+
     End Class
 
 End Namespace

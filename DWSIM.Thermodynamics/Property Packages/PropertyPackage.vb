@@ -498,6 +498,12 @@ Namespace PropertyPackages
                     Select Case CurrentMaterialStream.ForcePhase
                         Case ForcedPhase.None
                             Return New UniversalFlash() With {.FlashSettings = FlashSettings}
+                        Case ForcedPhase.GlobalDef
+                            If CurrentMaterialStream.Flowsheet.FlowsheetOptions.ForceStreamPhase = ForcedPhase.None Then
+                                Return New UniversalFlash() With {.FlashSettings = FlashSettings}
+                            Else
+                                Return New ForcedPhaseFlash() With {.ForcePhase = CurrentMaterialStream.Flowsheet.FlowsheetOptions.ForceStreamPhase}
+                            End If
                         Case Else
                             Return New ForcedPhaseFlash() With {.ForcePhase = CurrentMaterialStream.ForcePhase}
                     End Select

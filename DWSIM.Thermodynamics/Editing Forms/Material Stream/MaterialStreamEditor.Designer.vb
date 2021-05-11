@@ -47,6 +47,8 @@ Partial Class MaterialStreamEditor
         Me.TabPageInputPane = New System.Windows.Forms.TabPage()
         Me.TabControl2 = New System.Windows.Forms.TabControl()
         Me.TabPageInputConditions = New System.Windows.Forms.TabPage()
+        Me.cbForcePhase = New System.Windows.Forms.ComboBox()
+        Me.Label10 = New System.Windows.Forms.Label()
         Me.tbFracSpec = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.cbUnitsM = New System.Windows.Forms.ComboBox()
@@ -332,6 +334,8 @@ Partial Class MaterialStreamEditor
         'TabPageInputConditions
         '
         resources.ApplyResources(Me.TabPageInputConditions, "TabPageInputConditions")
+        Me.TabPageInputConditions.Controls.Add(Me.cbForcePhase)
+        Me.TabPageInputConditions.Controls.Add(Me.Label10)
         Me.TabPageInputConditions.Controls.Add(Me.tbFracSpec)
         Me.TabPageInputConditions.Controls.Add(Me.Label8)
         Me.TabPageInputConditions.Controls.Add(Me.cbUnitsM)
@@ -361,6 +365,23 @@ Partial Class MaterialStreamEditor
         Me.ToolTipChangeTag.SetToolTip(Me.TabPageInputConditions, resources.GetString("TabPageInputConditions.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.TabPageInputConditions, resources.GetString("TabPageInputConditions.ToolTip1"))
         Me.TabPageInputConditions.UseVisualStyleBackColor = True
+        '
+        'cbForcePhase
+        '
+        resources.ApplyResources(Me.cbForcePhase, "cbForcePhase")
+        Me.cbForcePhase.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbForcePhase.FormattingEnabled = True
+        Me.cbForcePhase.Items.AddRange(New Object() {resources.GetString("cbForcePhase.Items"), resources.GetString("cbForcePhase.Items1"), resources.GetString("cbForcePhase.Items2"), resources.GetString("cbForcePhase.Items3")})
+        Me.cbForcePhase.Name = "cbForcePhase"
+        Me.ToolTipChangeTag.SetToolTip(Me.cbForcePhase, resources.GetString("cbForcePhase.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbForcePhase, resources.GetString("cbForcePhase.ToolTip1"))
+        '
+        'Label10
+        '
+        resources.ApplyResources(Me.Label10, "Label10")
+        Me.Label10.Name = "Label10"
+        Me.ToolTipValues.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip1"))
         '
         'tbFracSpec
         '
@@ -1448,7 +1469,7 @@ Partial Class MaterialStreamEditor
         resources.ApplyResources(Me.rtbAnnotations, "rtbAnnotations")
         Me.rtbAnnotations.Name = "rtbAnnotations"
         Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1046{\fonttbl{\f0\fnil Microsoft " &
-    "Sans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{\*\generator Riched20 10.0.18362}\viewkind4\uc1 " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\pard\f0\fs17\" &
+    "Sans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{\*\generator Riched20 10.0.19041}\viewkind4\uc1 " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\pard\f0\fs17\" &
     "par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rtbAnnotations.ShowOpen = False
         Me.rtbAnnotations.ShowSave = False
@@ -2036,4 +2057,6 @@ Partial Class MaterialStreamEditor
     Public WithEvents Label21 As Label
     Public WithEvents cbDynSpec As ComboBox
     Friend WithEvents SplitContainer1 As SplitContainer
+    Friend WithEvents cbForcePhase As ComboBox
+    Friend WithEvents Label10 As Label
 End Class

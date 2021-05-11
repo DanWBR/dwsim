@@ -231,6 +231,44 @@ namespace DWSIM.UI.Desktop.Editors
 
                     s.CreateAndAddDescriptionRow(container2, ms.GetPropertyDescription("Vapor Phase Mole Fraction (spec)"));
 
+
+                    int fp = 0;
+                    switch (MatStream.ForcePhase)
+                    {
+                        case Interfaces.Enums.ForcedPhase.GlobalDef:
+                            fp = 0;
+                            break;
+                        case Interfaces.Enums.ForcedPhase.Vapor:
+                            fp = 1;
+                            break;
+                        case Interfaces.Enums.ForcedPhase.Liquid:
+                            fp = 2;
+                            break;
+                        case Interfaces.Enums.ForcedPhase.Solid:
+                            fp = 3;
+                            break;
+                    }
+
+                    s.CreateAndAddDropDownRow(container, "Force Phase",
+                        new System.Collections.Generic.List<string> { "Global Definition", "Vapor", "Liquid", "Solid" }, fp, (dd, e) => {
+                            switch (dd.SelectedIndex)
+                            {
+                                case 0:
+                                    MatStream.ForcePhase = Interfaces.Enums.ForcedPhase.GlobalDef;
+                                    break;
+                                case 1:
+                                    MatStream.ForcePhase = Interfaces.Enums.ForcedPhase.Vapor;
+                                    break;
+                                case 2:
+                                    MatStream.ForcePhase = Interfaces.Enums.ForcedPhase.Liquid;
+                                    break;
+                                case 3:
+                                    MatStream.ForcePhase = Interfaces.Enums.ForcedPhase.Solid;
+                                    break;
+                            }
+                        });
+
+
                     s.CreateAndAddLabelRow(container2, "Flow Specification");
 
                     var txtW = s.CreateAndAddTextBoxRow(container2, nf, "Mass Flow (" + su.massflow + ")", cv.ConvertFromSI(su.massflow, ms.Phases[0].Properties.massflow.GetValueOrDefault()),

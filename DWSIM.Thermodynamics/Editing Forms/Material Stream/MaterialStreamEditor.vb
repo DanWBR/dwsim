@@ -215,6 +215,17 @@ Public Class MaterialStreamEditor
                     tbVolFlow.BackColor = System.Drawing.Color.LightBlue
             End Select
 
+            Select Case .ForcePhase
+                Case Interfaces.Enums.ForcedPhase.GlobalDef
+                    cbForcePhase.SelectedIndex = 0
+                Case Interfaces.Enums.ForcedPhase.Vapor
+                    cbForcePhase.SelectedIndex = 1
+                Case Interfaces.Enums.ForcedPhase.Liquid
+                    cbForcePhase.SelectedIndex = 2
+                Case Interfaces.Enums.ForcedPhase.Solid
+                    cbForcePhase.SelectedIndex = 3
+            End Select
+
             'reference solvent
 
             Dim complist As List(Of String) = .FlowSheet.SelectedCompounds.Values.Select(Function(x) x.Name).ToList
@@ -1642,6 +1653,21 @@ Public Class MaterialStreamEditor
         If Loaded Then
             MatStream.DynamicsSpec = cbDynSpec.SelectedIndex
             MatStream.FlowSheet.UpdateInterface()
+        End If
+    End Sub
+
+    Private Sub cbForcePhase_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbForcePhase.SelectedIndexChanged
+        If Loaded Then
+            Select Case cbForcePhase.SelectedIndex
+                Case 0
+                    MatStream.ForcePhase = Interfaces.Enums.ForcedPhase.GlobalDef
+                Case 1
+                    MatStream.ForcePhase = Interfaces.Enums.ForcedPhase.Vapor
+                Case 2
+                    MatStream.ForcePhase = Interfaces.Enums.ForcedPhase.Liquid
+                Case 3
+                    MatStream.ForcePhase = Interfaces.Enums.ForcedPhase.Solid
+            End Select
         End If
     End Sub
 
