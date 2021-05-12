@@ -1899,7 +1899,7 @@ namespace DWSIM.UI.Forms
             };
 
             var item3 = new ButtonMenuItem { Text = "Calculate", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")) };
-            item3.Click += (sender, e) => FlowsheetObject.SolveFlowsheet(false, obj);
+            item3.Click += (sender, e) => FlowsheetObject.RequestCalculation(obj, false);
 
             var item4 = new ButtonMenuItem { Text = "Debug", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Console_96px.png")) };
             item4.Click += (sender, e) =>

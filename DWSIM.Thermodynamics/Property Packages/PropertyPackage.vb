@@ -514,6 +514,27 @@ Namespace PropertyPackages
 
         End Property
 
+        Public Function ShouldBypassEquilibriumCalculation() As Boolean
+
+            If CurrentMaterialStream IsNot Nothing Then
+                Select Case CurrentMaterialStream.ForcePhase
+                    Case ForcedPhase.None
+                        Return False
+                    Case ForcedPhase.GlobalDef
+                        If CurrentMaterialStream.Flowsheet.FlowsheetOptions.ForceStreamPhase = ForcedPhase.None Then
+                            Return False
+                        Else
+                            Return True
+                        End If
+                    Case Else
+                        Return True
+                End Select
+            Else
+                Return False
+            End If
+
+        End Function
+
         Public Property UniqueID() As String = "" Implements IPropertyPackage.UniqueID
 
         Public Property Tag() As String Implements IPropertyPackage.Tag
@@ -2581,7 +2602,7 @@ Namespace PropertyPackages
 
                             Dim Vx, Vx2, Vy, Vs As Double()
 
-                            If Me.AUX_IS_SINGLECOMP(Phase.Mixture) Then
+                            If Me.AUX_IS_SINGLECOMP(Phase.Mixture) And Not ShouldBypassEquilibriumCalculation() Then
 
                                 Dim Psat As Double
                                 Dim vz As Object = Me.RET_VMOL(Phase.Mixture)
@@ -2766,7 +2787,10 @@ Namespace PropertyPackages
                             If Not T.IsValid Or Not H.IsValid Then Throw New ArgumentException("PH Flash: " & Calculator.GetLocalString("ErrorInvalidFlashSpecValue"))
                             'If Not T.IsPositive Then Throw New ArgumentException("PH Flash: " & Calculator.GetLocalString("ErrorInvalidFlashSpecValue"))
 
-                            If Me.AUX_IS_SINGLECOMP(Phase.Mixture) And Not Me.ComponentName.Contains("Incompressible") And Not Me.ComponentName.Contains("Black Oil") Then
+                            If Me.AUX_IS_SINGLECOMP(Phase.Mixture) And
+                                Not ShouldBypassEquilibriumCalculation() And
+                                Not Me.ComponentName.Contains("Incompressible") And
+                                Not Me.ComponentName.Contains("Black Oil") Then
 
                                 Dim brentsolverT As New BrentOpt.Brent
                                 brentsolverT.DefineFuncDelegate(AddressOf EnthalpyTx)
@@ -3028,7 +3052,10 @@ redirect:                       IObj?.SetCurrent()
                             If Not T.IsValid Or Not S.IsValid Then Throw New ArgumentException("PS Flash: " & Calculator.GetLocalString("ErrorInvalidFlashSpecValue"))
                             'If Not T.IsPositive Then Throw New ArgumentException("PS Flash: " & Calculator.GetLocalString("ErrorInvalidFlashSpecValue"))
 
-                            If Me.AUX_IS_SINGLECOMP(Phase.Mixture) And Not Me.ComponentName.Contains("Incompressible") And Not Me.ComponentName.Contains("Black Oil") Then
+                            If Me.AUX_IS_SINGLECOMP(Phase.Mixture) And
+                                Not ShouldBypassEquilibriumCalculation() And
+                                Not Me.ComponentName.Contains("Incompressible") And
+                                Not Me.ComponentName.Contains("Black Oil") Then
 
                                 Dim brentsolverT As New BrentOpt.Brent
                                 brentsolverT.DefineFuncDelegate(AddressOf EntropyTx)

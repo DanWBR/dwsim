@@ -195,7 +195,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     IObj2?.Close()
 
-                Loop Until cnt > 0.000001 Or Double.IsNaN(x1) Or x1 < 0.0#
+                Loop Until cnt > 100 Or Double.IsNaN(x1) Or x1 < 0.0#
 
                 T = x1
 
@@ -353,7 +353,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     IObj2?.Close()
 
-                Loop Until cnt > 0.000001 Or Double.IsNaN(x1)
+                Loop Until cnt > 100 Or Double.IsNaN(x1)
 
                 T = x1
 

@@ -268,6 +268,7 @@ namespace DWSIM.UI.Desktop.Editors
                             }
                         });
 
+                    s.CreateAndAddDescriptionRow(container2, "Forces the fluid in this Material Stream to stay in the specified phase.");
 
                     s.CreateAndAddLabelRow(container2, "Flow Specification");
 

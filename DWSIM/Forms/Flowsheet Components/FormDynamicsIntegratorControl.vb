@@ -473,12 +473,21 @@ Public Class FormDynamicsIntegratorControl
             i += 1
         Next
 
+#If LINUX Then
+        'sheet.SetRangeDataFormat(New unvell.ReoGrid.RangePosition(
+        '                         New unvell.ReoGrid.CellPosition(1, 1),
+        '                         New unvell.ReoGrid.CellPosition(i - 1, j - 1)),
+        '                         unvell.ReoGrid.DataFormat.CellDataFormatFlag.Number,
+        '                         New unvell.ReoGrid.DataFormat.NumberDataFormatter.NumberFormatArgs With {
+        '                            .DecimalPlaces = 4, .UseSeparator = False})
+#Else
         sheet.SetRangeDataFormat(New unvell.ReoGrid.RangePosition(
                                  New unvell.ReoGrid.CellPosition(1, 1),
                                  New unvell.ReoGrid.CellPosition(i - 1, j - 1)),
                                  unvell.ReoGrid.DataFormat.CellDataFormatFlag.Number,
                                  New unvell.ReoGrid.DataFormat.NumberDataFormatter.NumberFormatArgs With {
                                     .DecimalPlaces = 4, .UseSeparator = False})
+#End If
 
         Flowsheet.FormSpreadsheet.Activate()
 

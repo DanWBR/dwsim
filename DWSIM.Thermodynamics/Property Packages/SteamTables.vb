@@ -59,8 +59,22 @@ Namespace PropertyPackages
 
         Public Overrides ReadOnly Property FlashBase() As Auxiliary.FlashAlgorithms.FlashAlgorithm
             Get
-                FlashAlgorithm = New Auxiliary.FlashAlgorithms.SteamTables
-                Return FlashAlgorithm
+                If CurrentMaterialStream IsNot Nothing Then
+                    Select Case CurrentMaterialStream.ForcePhase
+                        Case ForcedPhase.None
+                            Return New Auxiliary.FlashAlgorithms.SteamTables
+                        Case ForcedPhase.GlobalDef
+                            If CurrentMaterialStream.Flowsheet.FlowsheetOptions.ForceStreamPhase = ForcedPhase.None Then
+                                Return New Auxiliary.FlashAlgorithms.UniversalFlash() With {.FlashSettings = FlashSettings}
+                            Else
+                                Return New Auxiliary.FlashAlgorithms.ForcedPhaseFlash() With {.ForcePhase = CurrentMaterialStream.Flowsheet.FlowsheetOptions.ForceStreamPhase}
+                            End If
+                        Case Else
+                            Return New Auxiliary.FlashAlgorithms.ForcedPhaseFlash() With {.ForcePhase = CurrentMaterialStream.ForcePhase}
+                    End Select
+                Else
+                    Return New Auxiliary.FlashAlgorithms.SteamTables
+                End If
             End Get
         End Property
 
@@ -76,6 +90,11 @@ Namespace PropertyPackages
         End Function
 
         Public Overrides Sub DW_CalcEquilibrium(ByVal spec1 As FlashSpec, ByVal spec2 As FlashSpec)
+
+            If ShouldBypassEquilibriumCalculation() Then
+                MyBase.DW_CalcEquilibrium(spec1, spec2)
+                Exit Sub
+            End If
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 

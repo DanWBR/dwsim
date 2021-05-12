@@ -338,9 +338,27 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
     Public Sub RequestCalculation(Optional sender As ISimulationObject = Nothing, Optional ChangeCalculationOrder As Boolean = False) Implements IFlowsheet.RequestCalculation
 
         If Not sender Is Nothing Then
-            FlowsheetSolver.FlowsheetSolver.CalculateObject(Me, sender.Name)
+
+            'Call function to calculate flowsheet
+            Dim objargs As New CalculationArgs
+            With objargs
+                .Calculated = False
+                .Tag = sender.GraphicObject.Tag
+                .Name = sender.Name
+                .ObjectType = sender.GraphicObject.ObjectType
+                .Sender = "PropertyGrid"
+            End With
+
+            CalculationQueue.Enqueue(objargs)
+
+            Task.Factory.StartNew(Sub()
+                                      FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, GlobalSettings.Settings.SolverMode, , True)
+                                  End Sub)
+
         Else
+
             FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, GlobalSettings.Settings.SolverMode, ChangeCalcOrder:=ChangeCalculationOrder)
+
         End If
 
     End Sub

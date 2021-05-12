@@ -111,6 +111,8 @@ namespace DWSIM.UI.Desktop.Editors
                     }
                 });
 
+            s.CreateAndAddDescriptionRow(container, "Forces the fluid in all Material Streams in this Flowsheet to stay in the specified phase.");
+
         }
 
         void AddPropPackItem(PropertyPackage pp)
