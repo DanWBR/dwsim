@@ -81,6 +81,7 @@ Imports System.Drawing
     Private NumberFormat As String = ""
 
     Dim px, py As New ArrayList
+    Friend WithEvents ToolTip1 As ToolTip
     Dim loaded As Boolean = False
 
     Private Sub Button8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton1.Click
@@ -128,6 +129,10 @@ Imports System.Drawing
             .Style.BackColor = System.Drawing.Color.LightGray
             .Style.Alignment = DataGridViewContentAlignment.MiddleCenter
         End With
+
+        Me.GridMalha.Rows(9).Cells(GridMalha.Columns.Count - 1).ToolTipText = PipeOp.FlowSheet.GetTranslatedString("StandardPipeSizes")
+        Me.GridMalha.Rows(10).Cells(GridMalha.Columns.Count - 1).ToolTipText = PipeOp.FlowSheet.GetTranslatedString("StandardPipeSizes")
+
 
 
     End Sub
@@ -337,6 +342,7 @@ Imports System.Drawing
         Me.KryptonRadioButton2 = New System.Windows.Forms.RadioButton()
         Me.KryptonRadioButton1 = New System.Windows.Forms.RadioButton()
         Me.GraphControl = New ZedGraph.ZedGraphControl()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.GridMalha, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.CMenu1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
@@ -795,7 +801,7 @@ Imports System.Drawing
 
     Private Sub GridMalha_MouseDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles GridMalha.MouseDoubleClick
 
-        If GridMalha.CurrentCell.RowIndex = 9 And GridMalha.CurrentCell.ReadOnly = False Then
+        If GridMalha.CurrentCell.RowIndex >= 9 And GridMalha.CurrentCell.ReadOnly = False Then
 
             CMenu1.Show(MousePosition.X, MousePosition.Y)
             CMenu1.SetBounds(MousePosition.X, MousePosition.Y, 256, 20)
@@ -809,8 +815,9 @@ Imports System.Drawing
         Dim idx = ToolStripMenuItem2.DropDownItems.IndexOf(e.ClickedItem)
 
         Dim r = idx + 25 - 4
-        GridMalha.CurrentCell.Value = Format(cv.Convert("in", Units.diameter, DN(r, 1)), NumberFormat)
-        GridMalha.Rows(GridMalha.CurrentRow.Index + 1).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(cv.Convert("in", Units.diameter, DN(r, 6)), NumberFormat)
+        GridMalha.Rows(9).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(cv.Convert("in", Units.diameter, DN(r, 1)), NumberFormat)
+        GridMalha.Rows(10).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(cv.Convert("in", Units.diameter, DN(r, 6)), NumberFormat)
+        GridMalha.EndEdit()
 
     End Sub
 
@@ -819,8 +826,9 @@ Imports System.Drawing
         Dim idx = ToolStripMenuItem3.DropDownItems.IndexOf(e.ClickedItem)
 
         Dim r = idx + 43 - 4
-        GridMalha.CurrentCell.Value = Format(cv.Convert("in", Units.diameter, DN(r, 1)), NumberFormat)
-        GridMalha.Rows(GridMalha.CurrentRow.Index + 1).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(cv.Convert("in", Units.diameter, DN(r, 6)), NumberFormat)
+        GridMalha.Rows(9).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(cv.Convert("in", Units.diameter, DN(r, 1)), NumberFormat)
+        GridMalha.Rows(10).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(cv.Convert("in", Units.diameter, DN(r, 6)), NumberFormat)
+        GridMalha.EndEdit()
 
     End Sub
 
@@ -829,8 +837,9 @@ Imports System.Drawing
         Dim idx = ToolStripMenuItem4.DropDownItems.IndexOf(e.ClickedItem)
 
         Dim r = idx + 55 - 4
-        GridMalha.CurrentCell.Value = Format(cv.Convert("in", Units.diameter, DN(r, 1)), NumberFormat)
-        GridMalha.Rows(GridMalha.CurrentRow.Index + 1).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(cv.Convert("in", Units.diameter, DN(r, 6)), NumberFormat)
+        GridMalha.Rows(9).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(cv.Convert("in", Units.diameter, DN(r, 1)), NumberFormat)
+        GridMalha.Rows(10).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(cv.Convert("in", Units.diameter, DN(r, 6)), NumberFormat)
+        GridMalha.EndEdit()
 
     End Sub
 
@@ -839,8 +848,9 @@ Imports System.Drawing
         Dim idx = ToolStripMenuItem5.DropDownItems.IndexOf(e.ClickedItem)
 
         Dim r = idx + 65 - 4
-        GridMalha.CurrentCell.Value = Format(cv.Convert("in", Units.diameter, DN(r, 1)), NumberFormat)
-        GridMalha.Rows(GridMalha.CurrentRow.Index + 1).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(cv.Convert("in", Units.diameter, DN(r, 6)), NumberFormat)
+        GridMalha.Rows(9).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(cv.Convert("in", Units.diameter, DN(r, 1)), NumberFormat)
+        GridMalha.Rows(10).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(cv.Convert("in", Units.diameter, DN(r, 6)), NumberFormat)
+        GridMalha.EndEdit()
 
     End Sub
 
@@ -859,8 +869,9 @@ Imports System.Drawing
         Dim idx = ToolStripMenuItem7.DropDownItems.IndexOf(e.ClickedItem)
 
         Dim r = idx + 86 - 4
-        GridMalha.CurrentCell.Value = Format(cv.Convert("in", Units.diameter, Double.Parse(DN(r, 1), System.Globalization.CultureInfo.InvariantCulture)), NumberFormat)
-        GridMalha.Rows(GridMalha.CurrentRow.Index + 1).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(cv.Convert("in", Units.diameter, Double.Parse(DN(r, 6), System.Globalization.CultureInfo.InvariantCulture)), NumberFormat)
+        GridMalha.Rows(9).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(cv.Convert("in", Units.diameter, DN(r, 1)), NumberFormat)
+        GridMalha.Rows(10).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(cv.Convert("in", Units.diameter, DN(r, 6)), NumberFormat)
+        GridMalha.EndEdit()
 
     End Sub
 
@@ -869,8 +880,9 @@ Imports System.Drawing
         Dim idx = ToolStripMenuItem8.DropDownItems.IndexOf(e.ClickedItem)
 
         Dim r = idx + 98 - 4
-        GridMalha.CurrentCell.Value = Format(cv.Convert("in", Units.diameter, DN(r, 1)), NumberFormat)
-        GridMalha.Rows(GridMalha.CurrentRow.Index + 1).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(cv.Convert("in", Units.diameter, DN(r, 6)), NumberFormat)
+        GridMalha.Rows(9).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(cv.Convert("in", Units.diameter, DN(r, 1)), NumberFormat)
+        GridMalha.Rows(10).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(cv.Convert("in", Units.diameter, DN(r, 6)), NumberFormat)
+        GridMalha.EndEdit()
 
     End Sub
 
@@ -879,8 +891,9 @@ Imports System.Drawing
         Dim idx = ToolStripMenuItem9.DropDownItems.IndexOf(e.ClickedItem)
 
         Dim r = idx + 109 - 4
-        GridMalha.CurrentCell.Value = Format(cv.Convert("in", Units.diameter, DN(r, 1)), NumberFormat)
-        GridMalha.Rows(GridMalha.CurrentRow.Index + 1).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(cv.Convert("in", Units.diameter, DN(r, 6)), NumberFormat)
+        GridMalha.Rows(9).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(cv.Convert("in", Units.diameter, DN(r, 1)), NumberFormat)
+        GridMalha.Rows(10).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(cv.Convert("in", Units.diameter, DN(r, 6)), NumberFormat)
+        GridMalha.EndEdit()
 
     End Sub
 
@@ -899,8 +912,9 @@ Imports System.Drawing
         Dim idx = ToolStripMenuItem11.DropDownItems.IndexOf(e.ClickedItem)
 
         Dim r = idx + 135 - 4
-        GridMalha.CurrentCell.Value = Format(cv.Convert("in", Units.diameter, DN(r, 1)), NumberFormat)
-        GridMalha.Rows(GridMalha.CurrentRow.Index + 1).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(cv.Convert("in", Units.diameter, DN(r, 6)), NumberFormat)
+        GridMalha.Rows(9).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(cv.Convert("in", Units.diameter, DN(r, 1)), NumberFormat)
+        GridMalha.Rows(10).Cells(GridMalha.CurrentCell.ColumnIndex).Value = Format(cv.Convert("in", Units.diameter, DN(r, 6)), NumberFormat)
+        GridMalha.EndEdit()
 
     End Sub
 
@@ -1040,6 +1054,8 @@ Imports System.Drawing
             Me.GridMalha.Rows(8).Cells(psec.Indice - 1).Value = Format(cv.Convert("m", Me.Units.distance, psec.Elevacao), NumberFormat)
             Me.GridMalha.Rows(9).Cells(psec.Indice - 1).Value = Format(cv.Convert("in", Me.Units.diameter, psec.DE), NumberFormat)
             Me.GridMalha.Rows(10).Cells(psec.Indice - 1).Value = Format(cv.Convert("in", Me.Units.diameter, psec.DI), NumberFormat)
+            Me.GridMalha.Rows(9).Cells(psec.Indice - 1).ToolTipText = PipeOp.FlowSheet.GetTranslatedString("StandardPipeSizes")
+            Me.GridMalha.Rows(10).Cells(psec.Indice - 1).ToolTipText = PipeOp.FlowSheet.GetTranslatedString("StandardPipeSizes")
         Next
         psec = Nothing
 
@@ -1281,6 +1297,9 @@ Imports System.Drawing
             .Style.BackColor = System.Drawing.Color.LightGray
             .Style.Alignment = DataGridViewContentAlignment.MiddleCenter
         End With
+
+        Me.GridMalha.Rows(9).Cells(0).ToolTipText = PipeOp.FlowSheet.GetTranslatedString("StandardPipeSizes")
+        Me.GridMalha.Rows(10).Cells(0).ToolTipText = PipeOp.FlowSheet.GetTranslatedString("StandardPipeSizes")
 
         Units = PipeOp.FlowSheet.FlowsheetOptions.SelectedUnitSystem
         NumberFormat = PipeOp.FlowSheet.FlowsheetOptions.NumberFormat

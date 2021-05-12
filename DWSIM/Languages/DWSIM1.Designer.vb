@@ -14500,6 +14500,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Dê um duplo clique para inserir tamanhos padrão..
+        '''</summary>
+        Friend Shared ReadOnly Property StandardPipeSizes() As String
+            Get
+                Return ResourceManager.GetString("StandardPipeSizes", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Status: Ocioso.
         '''</summary>
         Friend Shared ReadOnly Property StatusOcioso() As String

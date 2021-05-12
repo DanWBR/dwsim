@@ -5712,4 +5712,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="ViewAccumulationStream" xml:space="preserve">
     <value>Ver Corrente de Acúmulo</value>
   </data>
+  <data name="StandardPipeSizes" xml:space="preserve">
+    <value>Dê um duplo clique para inserir tamanhos padrão.</value>
+  </data>
 </root>
