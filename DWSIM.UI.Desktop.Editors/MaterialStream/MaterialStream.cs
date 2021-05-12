@@ -249,7 +249,7 @@ namespace DWSIM.UI.Desktop.Editors
                             break;
                     }
 
-                    s.CreateAndAddDropDownRow(container, "Force Phase",
+                    s.CreateAndAddDropDownRow(container2, "Force Phase",
                         new System.Collections.Generic.List<string> { "Global Definition", "Vapor", "Liquid", "Solid" }, fp, (dd, e) => {
                             switch (dd.SelectedIndex)
                             {

@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 6.4.9
+Version 6.5.0
 Copyright (c) 2017-2021 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,19 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim6/commits/windows
+
+Version 6.5.0
+
+Author				Description
+Daniel Medeiros		Feature Request 134: Force Material Stream Phase (Vapor, Liquid or Solid)
+Daniel Medeiros		Feature Request 57: Edit properties of generated petroleum fractions (Classic UI)
+Daniel Medeiros		Feature Request 63: Display only streams allowable to connect in connections panel (Cross-Platform UI)
+Daniel Medeiros		Feature Request 65: Insert standard pipe sizes in Pipe Hydraulic Profile editor
+Daniel Medeiros		Fixed Classic UI unresponsiveness
+Daniel Medeiros		Fixed issues with Compound Creator (Classic UI)
+Daniel Medeiros		Fixed loading of external PPs/UOs
+Anders Andreasen	Fixed single compound issue with Bulk C7+ characterization utility (Classic UI)
+Daniel Medeiros		Ohter bug fixes and enhancements
 
 Version 6.4.9
 

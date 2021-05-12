@@ -1,15 +1,11 @@
-Version 6.4.9
+Version 6.5.0
 
-Implemented feature request #126: Dymamics Integrator pause and resume (Classic UI)
-New Separator Filler Utility (Dynamics)
-Fixed issue #138: Flowsheet can't be saved
-Fixed issue #137: Estimate Pipe Overall Heat Transfer Coefficient
-Fixed issue #130: Stream Enthalpy not being correctly set by CAPE-OPEN Property Packages
-Fixed issues with Seawater Property Package 
-Fixed drawing of some PFD Objects
-Fixed Switch logical block behavior
-Fixed active/inactive buttons not updating status in object editors (Classic UI)
-Fixed Integrator results sheet formatting
-Dynamics Volume-Temperature (VT) Flash fixes
-Fixed distance units handling (Classic UI)
-Fixed Liquid-Liquid Extraction column not working
+- Feature Request 134: Force Material Stream Phase (Vapor, Liquid or Solid)
+- Feature Request 57: Edit properties of generated petroleum fractions (Classic UI)
+- Feature Request 63: Display only streams allowable to connect in connections panel (Cross-Platform UI)
+- Feature Request 65: Insert standard pipe sizes in Pipe Hydraulic Profile editor
+- Fixed Classic UI unresponsiveness
+- Fixed issues with Compound Creator (Classic UI)
+- Fixed loading of external PPs/UOs
+- Fixed single compound issue with Bulk C7+ characterization utility (Classic UI)
+- Ohter bug fixes and enhancements
