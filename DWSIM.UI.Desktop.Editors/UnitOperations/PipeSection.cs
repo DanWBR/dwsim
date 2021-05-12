@@ -86,13 +86,47 @@ namespace DWSIM.UI.Desktop.Editors
             var cbm = container.CreateAndAddDropDownRow("Material", materials, Array.IndexOf(materials.ToArray(), section.Material), (sender, e) => section.Material = materials[sender.SelectedIndex]);
             var tbr = container.CreateAndAddTextBoxRow("G8", "Rugosity " + " (" + su.distance + ") *", cv.ConvertFromSI(su.distance, section.PipeWallRugosity), (sender, e) => { if (sender.Text.IsValidDoubleExpression()) section.PipeWallRugosity = cv.ConvertToSI(su.distance, sender.Text.ParseExpressionToDouble()); });
             var tbtc = container.CreateAndAddStringEditorRow("Thermal Conductivity " + " (" + su.thermalConductivity + ") *", section.PipeWallThermalConductivityExpression, (sender, e) => { section.PipeWallThermalConductivityExpression = sender.Text.ToString(); });
+            container.CreateAndAddDescriptionRow("* Fields required/used only for User-Defined materials");
             container.CreateAndAddTextBoxRow("N0", "Increments", section.Incrementos, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) section.Incrementos = int.Parse(sender.Text.ToString()); });
             container.CreateAndAddTextBoxRow("N0", "Quantity", section.Quantidade, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) section.Quantidade = int.Parse(sender.Text.ToString()); });
             container.CreateAndAddTextBoxRow(nf, "Length" + " (" + su.distance + ")", cv.ConvertFromSI(su.distance, section.Comprimento), (sender, e) => { if (sender.Text.IsValidDoubleExpression()) section.Comprimento = cv.ConvertToSI(su.distance, sender.Text.ParseExpressionToDouble()); });
             container.CreateAndAddTextBoxRow(nf, "Elevation" + " (" + su.distance + ")", cv.ConvertFromSI(su.distance, section.Elevacao), (sender, e) => { if (sender.Text.IsValidDoubleExpression()) section.Elevacao = cv.ConvertToSI(su.distance, sender.Text.ParseExpressionToDouble()); });
-            container.CreateAndAddTextBoxRow(nf, "External Diameter" + " (" + su.diameter + ")", cv.Convert("in", su.diameter, section.DE), (sender, e) => { if (sender.Text.IsValidDoubleExpression()) section.DE = cv.Convert(su.diameter, "in", sender.Text.ParseExpressionToDouble()); });
-            container.CreateAndAddTextBoxRow(nf, "Internal Diameter" + " (" + su.diameter + ")", cv.Convert("in", su.diameter, section.DI), (sender, e) => { if (sender.Text.IsValidDoubleExpression()) section.DI = cv.Convert(su.diameter, "in", sender.Text.ParseExpressionToDouble()); });
-            container.CreateAndAddDescriptionRow("* Fields required/used only for User-Defined materials");
+            var edtb = container.CreateAndAddTextBoxRow(nf, "External Diameter" + " (" + su.diameter + ")", cv.Convert("in", su.diameter, section.DE), (sender, e) => { if (sender.Text.IsValidDoubleExpression()) section.DE = cv.Convert(su.diameter, "in", sender.Text.ParseExpressionToDouble()); });
+            var idtb = container.CreateAndAddTextBoxRow(nf, "Internal Diameter" + " (" + su.diameter + ")", cv.Convert("in", su.diameter, section.DI), (sender, e) => { if (sender.Text.IsValidDoubleExpression()) section.DI = cv.Convert(su.diameter, "in", sender.Text.ParseExpressionToDouble()); });
+
+            var ssizes = Pipe.GetStandardPipeSizes();
+
+            var cmenussizes = new ContextMenu();
+
+            foreach (var key in ssizes.Keys)
+            {
+                var mi = new ButtonMenuItem { Text = key };
+                foreach (var item in ssizes[key])
+                {
+                    var mi2 = new ButtonMenuItem
+                    {
+                        Text = item.StandardSizeDescription + " (OD = " +
+                        item.ExternalDiameter_Inches + " in., ID = " +
+                        item.InternalDiameter_Inches + " in.)"
+                    };
+                    mi2.Click += (s, e) =>
+                    {
+                        flowsheet.RunCodeOnUIThread(() =>
+                        {
+                            edtb.Text = item.ExternalDiameter_Inches.ConvertUnits("in", su.diameter).ToString(nf);
+                            idtb.Text = item.InternalDiameter_Inches.ConvertUnits("in", su.diameter).ToString(nf);
+                        });
+                    };
+                    mi.Items.Add(mi2);
+                }
+                cmenussizes.Items.Add(mi);
+            }
+
+            container.CreateAndAddButtonRow("Standard Pipe Sizes...", null, (btn, ev) =>
+            {
+                cmenussizes.Show(btn);
+            });
+
             tbr.ReadOnly = section.Material != flowsheet.GetTranslatedString("UserDefined");
             tbtc.ReadOnly = tbr.ReadOnly;
             if (tbr.ReadOnly)

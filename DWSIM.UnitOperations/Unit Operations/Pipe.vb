@@ -30,13 +30,24 @@ Imports OxyPlot
 Imports OxyPlot.Axes
 
 Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
+Imports System.IO
 
 Namespace UnitOperations
+
     Public Enum FlowPackage
         Beggs_Brill
         Lockhart_Martinelli
         Petalas_Aziz
     End Enum
+
+    Public Class StandardPipeDiameter
+
+        Public Property NominalDiameter As String = ""
+        Public Property StandardSizeDescription As String = ""
+        Public Property InternalDiameter_Inches As Double = 0.0
+        Public Property ExternalDiameter_Inches As Double = 0.0
+
+    End Class
 
     <System.Serializable()> Public Class Pipe
 
@@ -156,10 +167,10 @@ Namespace UnitOperations
 
         Public Property DeltaQ() As Nullable(Of Double)
             Get
-                Return m_DQ
+                Return m_dq
             End Get
             Set(ByVal value As Nullable(Of Double))
-                m_DQ = value
+                m_dq = value
             End Set
         End Property
 
@@ -210,6 +221,34 @@ Namespace UnitOperations
 
         Public Overrides Function CloneJSON() As Object
             Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of Pipe)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
+        End Function
+
+        Public Shared Function GetStandardPipeSizes() As Dictionary(Of String, List(Of StandardPipeDiameter))
+
+            Dim sizes As New Dictionary(Of String, List(Of StandardPipeDiameter))
+            Dim line As String = ""
+
+            Using filestr = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("DWSIM.UnitOperations.pipes.dat")
+                Using reader As New StreamReader(filestr)
+                    reader.ReadLine()
+                    While Not reader.EndOfStream
+                        line = reader.ReadLine()
+                        Dim ssize As New StandardPipeDiameter With {
+                            .NominalDiameter = line.Split(";")(0) + " in.",
+                                                    .ExternalDiameter_Inches = line.Split(";")(1).ToDoubleFromInvariant(),
+                                                    .InternalDiameter_Inches = line.Split(";")(6).ToDoubleFromInvariant(),
+                                                    .StandardSizeDescription = line.Split(";")(2) + "/" + line.Split(";")(3) + "/" + line.Split(";")(4)
+                                                    }
+                        If Not sizes.ContainsKey(ssize.NominalDiameter) Then
+                            sizes.Add(ssize.NominalDiameter, New List(Of StandardPipeDiameter))
+                        End If
+                        sizes(ssize.NominalDiameter).Add(ssize)
+                    End While
+                End Using
+            End Using
+
+            Return sizes
+
         End Function
 
         Public Function EmulsionViscosity(ms As MaterialStream) As Double
