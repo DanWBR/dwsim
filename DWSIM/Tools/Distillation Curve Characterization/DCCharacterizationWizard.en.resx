@@ -559,6 +559,12 @@ If you have bulk sample data like Specific Gravity and/or Molar Weight, inform t
   <data name="Label27.Text" xml:space="preserve">
     <value>Methods and Correlations</value>
   </data>
+  <data name="Label46.Size" type="System.Drawing.Size, System.Drawing">
+    <value>391, 13</value>
+  </data>
+  <data name="Label46.Text" xml:space="preserve">
+    <value>You can edit/update the values on the above table before creating the oil stream.</value>
+  </data>
   <data name="DataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
     <value>Name</value>
   </data>
@@ -621,6 +627,9 @@ If you have bulk sample data like Specific Gravity and/or Molar Weight, inform t
   </data>
   <data name="Button24.Text" xml:space="preserve">
     <value>Finalize</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>DWSIM - Petroleum Characterization</value>

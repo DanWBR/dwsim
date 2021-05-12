@@ -47,6 +47,20 @@ Public Class FormPCBulk
     Dim ccol As Dictionary(Of String, Compound)
 
     Dim MW0, SG0, TB0, V10, V20, A_MW, B_MW, A_SG, B_SG, A_TB, B_TB, A_V, B_V, SGav_, MWav_, TBav_, V1av_, V2av_, SGav, MWav, TBav, V1av, V2av As Double
+
+    Dim TableChanged As Boolean = False
+    Dim Populated As Boolean = False
+
+    Private Sub DataGridView2_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView2.CellValueChanged
+
+        If Populated Then
+
+            TableChanged = True
+
+        End If
+
+    End Sub
+
     Dim dMF, dMW, dSG, dTB, dMW_, dSG_, dTB_, dVA, dVB, dV1, dV2, dV1_, dV2_, q As Double()
     Dim _MW(1000), _SG(1000), _TB(1000), _V1(1000), _V2(1000), x(1000), val1, val2 As Double
     Dim MW, SG, TB, V1, V2, T1, T2 As Double
@@ -59,6 +73,8 @@ Public Class FormPCBulk
     Public m_comps As New System.Collections.Generic.Dictionary(Of String, BaseClasses.Compound)
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KButton1.Click
+
+        TableChanged = False
 
         n = Me.ComboBox1.SelectedItem
 
@@ -597,6 +613,8 @@ Public Class FormPCBulk
 
         Dim nm, fm, nbp, sgi, mm, ct, cp, af, visc1, visc2, prvs, srkvs As String
 
+        Populated = False
+
         Me.DataGridView2.Rows.Clear()
         For Each subst As Compound In ccol.Values
             With subst
@@ -615,6 +633,8 @@ Public Class FormPCBulk
             End With
             Me.DataGridView2.Rows.Add(New Object() {nm, fm, nbp, sgi, mm, ct, cp, af, visc1, visc2, prvs, srkvs})
         Next
+
+        Populated = True
 
     End Sub
 
@@ -824,6 +844,8 @@ Public Class FormPCBulk
 
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KButton3.Click
 
+        If TableChanged Then ReadFromTable()
+
         'finalize button
 
         Dim corr As String = Me.TextBox1.Text
@@ -921,9 +943,34 @@ Public Class FormPCBulk
 
     End Sub
 
+    Private Sub ReadFromTable()
+
+        For Each row As DataGridViewRow In DataGridView2.Rows
+            Dim subst = ccol(row.Cells(0).Value)
+            With subst
+                .MoleFraction = row.Cells(1).Value.ToString().ToDoubleFromCurrent()
+                .ConstantProperties.NBP = row.Cells(2).Value.ToString().ToDoubleFromCurrent().ConvertToSI(su.temperature)
+                .ConstantProperties.Normal_Boiling_Point = row.Cells(2).Value.ToString().ToDoubleFromCurrent().ConvertToSI(su.temperature)
+                .ConstantProperties.PF_SG = row.Cells(3).Value.ToString().ToDoubleFromCurrent()
+                .ConstantProperties.PF_MM = row.Cells(4).Value.ToString().ToDoubleFromCurrent()
+                .ConstantProperties.Molar_Weight = row.Cells(4).Value.ToString().ToDoubleFromCurrent()
+                .ConstantProperties.Critical_Temperature = row.Cells(5).Value.ToString().ToDoubleFromCurrent().ConvertToSI(su.temperature)
+                .ConstantProperties.Critical_Pressure = row.Cells(6).Value.ToString().ToDoubleFromCurrent().ConvertToSI(su.pressure)
+                .ConstantProperties.Acentric_Factor = row.Cells(7).Value.ToString().ToDoubleFromCurrent()
+                .ConstantProperties.PF_v1 = row.Cells(8).Value.ToString().ToDoubleFromCurrent().ConvertToSI(su.cinematic_viscosity)
+                .ConstantProperties.PF_v2 = row.Cells(9).Value.ToString().ToDoubleFromCurrent().ConvertToSI(su.cinematic_viscosity)
+                .ConstantProperties.PR_Volume_Translation_Coefficient = row.Cells(10).Value.ToString().ToDoubleFromCurrent()
+                .ConstantProperties.SRK_Volume_Translation_Coefficient = row.Cells(11).Value.ToString().ToDoubleFromCurrent()
+            End With
+        Next
+
+    End Sub
+
     Private Sub FormPCBulk_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
+
         Me.su = frm.Options.SelectedUnitSystem
         Me.nf = frm.Options.NumberFormat
+
     End Sub
 
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click

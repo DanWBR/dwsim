@@ -48,6 +48,9 @@ Public Class DCCharacterizationWizard
 
     Public frmwizard As FormSimulWizard
 
+    Dim TableChanged As Boolean = False
+    Dim Populated As Boolean = False
+
     Private Sub DCCharacterizationWizard_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         form = My.Application.ActiveSimulation
@@ -87,6 +90,16 @@ Public Class DCCharacterizationWizard
         Label41.Text = su.temperature
 
         P0.BringToFront()
+
+    End Sub
+
+    Private Sub DataGridView2_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView2.CellValueChanged
+
+        If Populated Then
+
+            TableChanged = True
+
+        End If
 
     End Sub
 
@@ -382,6 +395,8 @@ Public Class DCCharacterizationWizard
     End Sub
 
     Private Sub Button21_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button21.Click
+
+        TableChanged = False
 
         'calculate all properties and display in the datagrid
 
@@ -698,6 +713,8 @@ Public Class DCCharacterizationWizard
 
         Me.DataGridView2.Rows.Clear()
 
+        Populated = False
+
         For Each subst As Compound In ccol.Values
             With subst
                 nm = .Name
@@ -716,6 +733,8 @@ Public Class DCCharacterizationWizard
             Me.DataGridView2.Rows.Add(New Object() {nm, fm, nbp, sg, mm, ct, cp, af, visc1, visc2, prvs, srkvs})
         Next
 
+        Populated = True
+
         P7.BringToFront()
 
     End Sub
@@ -725,6 +744,8 @@ Public Class DCCharacterizationWizard
     End Sub
 
     Private Sub Button24_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button24.Click
+
+        If TableChanged Then ReadFromTable()
 
         'finalize button
 
@@ -1288,5 +1309,27 @@ Public Class DCCharacterizationWizard
 
     End Function
 
+    Private Sub ReadFromTable()
+
+        For Each row As DataGridViewRow In DataGridView2.Rows
+            Dim subst = ccol(row.Cells(0).Value)
+            With subst
+                .MoleFraction = row.Cells(1).Value.ToString().ToDoubleFromCurrent()
+                .ConstantProperties.NBP = row.Cells(2).Value.ToString().ToDoubleFromCurrent().ConvertToSI(su.temperature)
+                .ConstantProperties.Normal_Boiling_Point = row.Cells(2).Value.ToString().ToDoubleFromCurrent().ConvertToSI(su.temperature)
+                .ConstantProperties.PF_SG = row.Cells(3).Value.ToString().ToDoubleFromCurrent()
+                .ConstantProperties.PF_MM = row.Cells(4).Value.ToString().ToDoubleFromCurrent()
+                .ConstantProperties.Molar_Weight = row.Cells(4).Value.ToString().ToDoubleFromCurrent()
+                .ConstantProperties.Critical_Temperature = row.Cells(5).Value.ToString().ToDoubleFromCurrent().ConvertToSI(su.temperature)
+                .ConstantProperties.Critical_Pressure = row.Cells(6).Value.ToString().ToDoubleFromCurrent().ConvertToSI(su.pressure)
+                .ConstantProperties.Acentric_Factor = row.Cells(7).Value.ToString().ToDoubleFromCurrent()
+                .ConstantProperties.PF_v1 = row.Cells(8).Value.ToString().ToDoubleFromCurrent().ConvertToSI(su.cinematic_viscosity)
+                .ConstantProperties.PF_v2 = row.Cells(9).Value.ToString().ToDoubleFromCurrent().ConvertToSI(su.cinematic_viscosity)
+                .ConstantProperties.PR_Volume_Translation_Coefficient = row.Cells(10).Value.ToString().ToDoubleFromCurrent()
+                .ConstantProperties.SRK_Volume_Translation_Coefficient = row.Cells(11).Value.ToString().ToDoubleFromCurrent()
+            End With
+        Next
+
+    End Sub
 
 End Class
