@@ -64,87 +64,87 @@ The full changelog including souce code changes can be viewed at https://github.
 
 Version 6.5.0
 
-Author				Description
-Daniel Medeiros		Feature Request 134: Force Material Stream Phase (Vapor, Liquid or Solid)
-Daniel Medeiros		Feature Request 57: Edit properties of generated petroleum fractions (Classic UI)
-Daniel Medeiros		Feature Request 63: Display only streams allowable to connect in connections panel (Cross-Platform UI)
-Daniel Medeiros		Feature Request 65: Insert standard pipe sizes in Pipe Hydraulic Profile editor
-Daniel Medeiros		Fixed Classic UI unresponsiveness
-Daniel Medeiros		Fixed issues with Compound Creator (Classic UI)
-Daniel Medeiros		Fixed loading of external PPs/UOs
-Anders Andreasen	Fixed single compound issue with Bulk C7+ characterization utility (Classic UI)
-Daniel Medeiros		Ohter bug fixes and enhancements
+Author              Description
+Daniel Medeiros     Feature Request 134: Force Material Stream Phase (Vapor, Liquid or Solid)
+Daniel Medeiros     Feature Request 57: Edit properties of generated petroleum fractions (Classic UI)
+Daniel Medeiros     Feature Request 63: Display only streams allowable to connect in connections panel (Cross-Platform UI)
+Daniel Medeiros     Feature Request 65: Insert standard pipe sizes in Pipe Hydraulic Profile editor
+Daniel Medeiros     Fixed Classic UI unresponsiveness
+Daniel Medeiros     Fixed issues with Compound Creator (Classic UI)
+Daniel Medeiros     Fixed loading of external PPs/UOs
+Anders Andreasen    Fixed single compound issue with Bulk C7+ characterization utility (Classic UI)
+Daniel Medeiros     Other bug fixes and enhancements
 
 Version 6.4.9
 
-Author				Description
-Daniel Medeiros		Implemented feature request #126: Dynamics Integrator pause and resume (Classic UI)
-Daniel Medeiros		New Separator Filler Utility (Dynamics)
-Daniel Medeiros		Fixed issue #138: Flowsheet can't be saved
-Daniel Medeiros		Fixed issue #137: Estimate Pipe Overall Heat Transfer Coefficient
-Daniel Medeiros		Fixed issue #130: Stream Enthalpy not being correctly set by CAPE-OPEN Property Packages
-Daniel Medeiros		Fixed issues with Seawater Property Package 
-Daniel Medeiros		Fixed drawing of some PFD Objects
-Daniel Medeiros		Fixed Switch logical block behavior
-Daniel Medeiros		Fixed active/inactive buttons not updating status in object editors (Classic UI)
-Daniel Medeiros		Fixed Integrator results sheet formatting
-Daniel Medeiros		Dynamics Volume-Temperature (VT) Flash fixes
-Daniel Medeiros		Fixed distance units handling (Classic UI)
-Daniel Medeiros		Fixed Liquid-Liquid Extraction column not working
+Author              Description
+Daniel Medeiros     Implemented feature request #126: Dynamics Integrator pause and resume (Classic UI)
+Daniel Medeiros     New Separator Filler Utility (Dynamics)
+Daniel Medeiros     Fixed issue #138: Flowsheet can't be saved
+Daniel Medeiros     Fixed issue #137: Estimate Pipe Overall Heat Transfer Coefficient
+Daniel Medeiros     Fixed issue #130: Stream Enthalpy not being correctly set by CAPE-OPEN Property Packages
+Daniel Medeiros     Fixed issues with Seawater Property Package 
+Daniel Medeiros     Fixed drawing of some PFD Objects
+Daniel Medeiros     Fixed Switch logical block behavior
+Daniel Medeiros     Fixed active/inactive buttons not updating status in object editors (Classic UI)
+Daniel Medeiros     Fixed Integrator results sheet formatting
+Daniel Medeiros     Dynamics Volume-Temperature (VT) Flash fixes
+Daniel Medeiros     Fixed distance units handling (Classic UI)
+Daniel Medeiros     Fixed Liquid-Liquid Extraction column not working
 
 Version 6.4.8
 
-Author				Description
-Daniel Medeiros		Updated User's Guide
-Daniel Medeiros		Added Model Customization samples
-Daniel Medeiros		Enhanced reliability of the Rigorous Column model solvers
-Daniel Medeiros		Fixed issue 129 - CAPE-OPEN Thermodynamic Package configure failed
-Daniel Medeiros		Fixed External Temperature gradient calculation in Pipe Segment model
-Daniel Medeiros		Added visualization of External Temperature to Pipe Segment model
-Daniel Medeiros		Fixed infinite loop in Electrolyte Property Packages
-Daniel Medeiros		Fixed Adjust/Set not being inactive when they should
-Daniel Medeiros		Fixed a bug with NL VLLE flash algorithm
-Daniel Medeiros		Other minor fixes and enhancements
+Author              Description
+Daniel Medeiros     Updated User's Guide
+Daniel Medeiros     Added Model Customization samples
+Daniel Medeiros     Enhanced reliability of the Rigorous Column model solvers
+Daniel Medeiros     Fixed issue 129 - CAPE-OPEN Thermodynamic Package configure failed
+Daniel Medeiros     Fixed External Temperature gradient calculation in Pipe Segment model
+Daniel Medeiros     Added visualization of External Temperature to Pipe Segment model
+Daniel Medeiros     Fixed infinite loop in Electrolyte Property Packages
+Daniel Medeiros     Fixed Adjust/Set not being inactive when they should
+Daniel Medeiros     Fixed a bug with NL VLLE flash algorithm
+Daniel Medeiros     Other minor fixes and enhancements
 
 Version 6.4.7
 
-Author				Description
-Daniel Medeiros		New Database with Food Compounds (https://github.com/Spogis/DWSIMFoodProp)
-Daniel Medeiros		Updated CoolProp libraries to v6.4.1
-Daniel Medeiros		Grouped all Property Package editors in a single window (Classic UI)
-Daniel Medeiros		Exposed CSTR's Vapor Residence Time and Headspace
-Daniel Medeiros		Added an option to import compound data into Compound Creator from JSON files
-Daniel Medeiros		Fixed issues with some flash algorithms
-Daniel Medeiros		Fixed issues with Compound Creator
-Daniel Medeiros		Fixed Gibbs/Equilibrium/Conversion Reactor mixed-phase product enthalpies
-Daniel Medeiros		Fixed a bug with solids handling
-Daniel Medeiros		Fixed a bug in Seawater Property Package 
-Daniel Medeiros		General UI Fixes
+Author              Description
+Daniel Medeiros     New Database with Food Compounds (https://github.com/Spogis/DWSIMFoodProp)
+Daniel Medeiros     Updated CoolProp libraries to v6.4.1
+Daniel Medeiros     Grouped all Property Package editors in a single window (Classic UI)
+Daniel Medeiros     Exposed CSTR's Vapor Residence Time and Headspace
+Daniel Medeiros     Added an option to import compound data into Compound Creator from JSON files
+Daniel Medeiros     Fixed issues with some flash algorithms
+Daniel Medeiros     Fixed issues with Compound Creator
+Daniel Medeiros     Fixed Gibbs/Equilibrium/Conversion Reactor mixed-phase product enthalpies
+Daniel Medeiros     Fixed a bug with solids handling
+Daniel Medeiros     Fixed a bug in Seawater Property Package 
+Daniel Medeiros     General UI Fixes
 
 Version 6.4.6
 
-Author				Description
-Daniel Medeiros		Added Wilson Activity Coefficient Property Package
-Daniel Medeiros		Updated/Redesigned Compound Creator (Classic UI)
-Daniel Medeiros		Added Compound Creator Wizard to Welcome Screen (Classic UI)
-Daniel Medeiros		Smoother compound search (Classic UI)
-Daniel Medeiros		Updated Automation interface
-Daniel Medeiros		Added PID Controller Setpoint property
-Daniel Medeiros		Added Dynamic Integrator scripting events
-Daniel Medeiros		Decreased Auto-Layout distance between objects
+Author              Description
+Daniel Medeiros     Added Wilson Activity Coefficient Property Package
+Daniel Medeiros     Updated/Redesigned Compound Creator (Classic UI)
+Daniel Medeiros     Added Compound Creator Wizard to Welcome Screen (Classic UI)
+Daniel Medeiros     Smoother compound search (Classic UI)
+Daniel Medeiros     Updated Automation interface
+Daniel Medeiros     Added PID Controller Setpoint property
+Daniel Medeiros     Added Dynamic Integrator scripting events
+Daniel Medeiros     Decreased Auto-Layout distance between objects
 
 Version 6.4.5
 
-Author				Description
-Daniel Medeiros		Fixed Compressor/Expander power calculation in Polytropic mode
-Daniel Medeiros		Fixed Gibbs Reactor in Adiabatic mode
-Daniel Medeiros		Fixed issue with VLLE Flash
-Daniel Medeiros		Steady-State Adjust/Controller enhancements
-Daniel Medeiros		Fixed UNIFAC-LL (issue 118)
-Daniel Medeiros		Fixed Condenser/Reboiler pressure editing (Cross-Platform UI)
-Daniel Medeiros		Fixed editors not updating after flowsheet solve (Cross-Platform UI)
-Daniel Medeiros		Fixed issue in Advanced Kinetics expression parser
-Daniel Medeiros		Fixed Solids Separator energy balance warning
+Author              Description
+Daniel Medeiros     Fixed Compressor/Expander power calculation in Polytropic mode
+Daniel Medeiros     Fixed Gibbs Reactor in Adiabatic mode
+Daniel Medeiros     Fixed issue with VLLE Flash
+Daniel Medeiros     Steady-State Adjust/Controller enhancements
+Daniel Medeiros     Fixed UNIFAC-LL (issue 118)
+Daniel Medeiros     Fixed Condenser/Reboiler pressure editing (Cross-Platform UI)
+Daniel Medeiros     Fixed editors not updating after flowsheet solve (Cross-Platform UI)
+Daniel Medeiros     Fixed issue in Advanced Kinetics expression parser
+Daniel Medeiros     Fixed Solids Separator energy balance warning
 
 Version 6.4.4
 
