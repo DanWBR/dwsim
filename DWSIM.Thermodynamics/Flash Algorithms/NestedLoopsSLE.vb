@@ -914,20 +914,24 @@ out2:           If (Math.Abs(GL_old - L) < 0.0000005) And (Math.Abs(GV_old - V) 
             If SVE Then
 
                 'solid-vapor equilibria
+                Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+                IObj2?.SetCurrent
+                Inspector.Host.CheckAndAdd(IObj2, "", "Flash_PT", "PT SVLE Internal Loop Iteration", "Solid-Vapor Equilibrium calculation", True)
 
-                Dim result = New NestedLoops().Flash_PT(Vz0, P, T, PP)
-
+                IObj2?.Paragraphs.Add("Executing SVE-Flash")
+                Dim result = New NestedLoops().Flash_PT(Vz0, P, T, PP) 'liquid phase from flash is taken as a solid phase here
+                S = result(0)
                 V = result(1)
+                Vs = result(2)
                 Vy = result(3)
+                L = 0
+                Vx = PP.RET_NullVector
+                IObj2?.Paragraphs.Add(String.Format("Solid phase composition: {0}", Vs.ToMathArrayString))
+                IObj2?.Paragraphs.Add(String.Format("Vapor phase composition: {0}", Vy.ToMathArrayString))
+                IObj2?.Paragraphs.Add(String.Format("Solid phase mole fraction: {0}", S))
+                IObj2?.Paragraphs.Add(String.Format("Vapor phase mole fraction: {0}", V))
 
-                Dim SL_Result = Flash_SL(result(2), P, T, PP)
-
-                Vx = SL_Result(3)
-                Vs = SL_Result(4)
-
-                L = SL_Result(0) * (1 - V)
-                S = SL_Result(1) * (1 - V)
-
+                IObj2?.Close()
             End If
 
             IObj?.Paragraphs.Add("The algorithm converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")

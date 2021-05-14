@@ -6357,18 +6357,56 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
         End Function
 
+        Public Overridable Function AUX_PSUBLi(sub1 As String, ByVal T As Double) As Double
+            'Calculate sublimation vapor pressure 
+            'Calculation is done by Clausius-Clapeyron
+            'ln(P2/P1) = -dH/R * (1/T2- 1/T1)
+            'with T1/P1 -> triple point -> Tfus/Pt
+
+            Dim ID = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.ID
+
+            Dim Tf As Double = CompoundPropCache(ID).TemperatureOfFusion 'K
+            Dim Hf As Double = CompoundPropCache(ID).EnthalpyOfFusionAtTf * 1000 'J/mol
+            Dim Hv As Double = AUX_HVAPi(sub1, T) * CompoundPropCache(ID).Molar_Weight 'enthalpy of evaporation at T -> j/mol
+            Dim dH As Double = Hf + Hv 'enthalpy of sublimation
+            Dim Pt As Double 'triple point
+
+            Dim a, b, P As Double
+
+            Pt = AUX_PVAPi(sub1, Tf) 'vapor pressure at melting point -> triple point
+
+            a = -dH / 8.314
+            b = dH / 8.314 / Tf + Math.Log(Pt)
+
+            P = Math.Exp(a / T + b)
+            Return P
+
+
+        End Function
+
         Public Overridable Function AUX_PVAPi(ByVal index As Integer, ByVal T As Double) As Double
 
             Dim subst As Interfaces.ICompound
             Dim nome As String = ""
             Dim i As Integer = 0
+            Dim Tf As Double = -1
 
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                If i = index Then nome = subst.Name
+                If i = index Then
+                    nome = subst.Name
+                    Tf = subst.ConstantProperties.TemperatureOfFusion
+                    Exit For
+                End If
+
                 i += 1
             Next
 
-            Return AUX_PVAPi(nome, T)
+            If T < Tf Then
+                Return AUX_PSUBLi(nome, T)
+            Else
+                Return AUX_PVAPi(nome, T)
+            End If
+
 
         End Function
 
