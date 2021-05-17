@@ -36,9 +36,6 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
                 KijExpressions.Add(items(0) + "/" + items(1), items(2))
             Next
 
-            ec.Imports.AddType(GetType(System.Math))
-            ec.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
-
         End Sub
 
         Public Overrides Function ReturnInstance(typename As String) As Object

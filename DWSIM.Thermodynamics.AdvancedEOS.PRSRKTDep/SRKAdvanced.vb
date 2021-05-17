@@ -78,28 +78,32 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
         Public Function KIJ2(id1 As String, id2 As String) As Double
 
-            ec.Variables.Clear()
-            ec.Variables.Add("P", PInternal)
-            ec.Variables.Add("T", TInternal)
+            SyncLock ec
 
-            Dim result As Double = 0.0
+                ec.Variables.Clear()
+                ec.Variables.Add("P", PInternal)
+                ec.Variables.Add("T", TInternal)
 
-            Dim pair = id1 + "/" + id2
-            Dim pair2 = id2 + "/" + id1
+                Dim result As Double = 0.0
 
-            Try
-                If KijExpressions.ContainsKey(pair) Then
-                    result = ec.CompileGeneric(Of Double)(KijExpressions(pair)).Evaluate()
-                ElseIf KijExpressions.ContainsKey(pair2) Then
-                    result = ec.CompileGeneric(Of Double)(KijExpressions(pair2)).Evaluate()
-                Else
+                Dim pair As String = id1 + "/" + id2
+                Dim pair2 As String = id2 + "/" + id1
+
+                Try
+                    If KijExpressions.ContainsKey(pair) Then
+                        result = ec.CompileGeneric(Of Double)(KijExpressions(pair)).Evaluate()
+                    ElseIf KijExpressions.ContainsKey(pair2) Then
+                        result = ec.CompileGeneric(Of Double)(KijExpressions(pair2)).Evaluate()
+                    Else
+                        Return 0.0
+                    End If
+                    Return result
+                Catch ex As Exception
+                    Flowsheet?.ShowMessage(String.Format("PR/SRK Adv: Error evaluating kij expression for {0}/{1}: {2}", id1, id2, ex.Message), IFlowsheet.MessageType.GeneralError)
                     Return 0.0
-                End If
-                Return result
-            Catch ex As Exception
-                Flowsheet?.ShowMessage(String.Format("PR/SRK Adv: Error evaluating kij expression for {0}/{1}: {2}", id1, id2, ex.Message), IFlowsheet.MessageType.GeneralError)
-                Return 0.0
-            End Try
+                End Try
+
+            End SyncLock
 
         End Function
 
