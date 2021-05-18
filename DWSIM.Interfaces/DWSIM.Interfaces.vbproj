@@ -92,6 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums.vb" />
+    <Compile Include="IAnalyticsProvider.vb" />
     <Compile Include="IAttachedUtility.vb" />
     <Compile Include="IChart.vb" />
     <Compile Include="ICompound.vb" />

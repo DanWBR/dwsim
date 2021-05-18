@@ -161,6 +161,9 @@ Namespace My
                     frmEx.ex = e.Exception
                     frmEx.ShowDialog()
                     e.ExitApplication = False
+                    If FormMain.AnalyticsProvider IsNot Nothing Then
+                        FormMain.AnalyticsProvider.RegisterError("Unhandled Exception", "", e.Exception, Nothing)
+                    End If
                 End If
             Else
                 If Not GlobalSettings.Settings.AutomationMode Then

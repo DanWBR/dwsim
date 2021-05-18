@@ -144,6 +144,12 @@ Public Class FormFlowsheet
 
         Options.ReactionSets.Add("DefaultSet", New ReactionSet("DefaultSet", DWSIM.App.GetLocalString("Rxn_DefaultSetName"), DWSIM.App.GetLocalString("Rxn_DefaultSetDesc")))
 
+        If FormMain.AnalyticsProvider IsNot Nothing Then
+            AddHandler Me.ToolOpened, Sub(sender, e)
+                                          FormMain.AnalyticsProvider.RegisterEvent(sender.ToString(), "", Nothing)
+                                      End Sub
+        End If
+
     End Sub
 
     Public Sub SetActive()

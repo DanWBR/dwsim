@@ -1356,7 +1356,7 @@ Public Class FormSimulSettings
     End Sub
 
     Private Sub btnInfoLeft_Click(sender As Object, e As EventArgs) Handles btnInfoLeft.Click
-
+        FormMain.AnalyticsProvider?.RegisterEvent("Viewing Selected Compound", "", Nothing)
         Dim compound As Interfaces.ICompoundConstantProperties
         Dim compID As String = ""
         If DWSIM.App.IsRunningOnMono Then
@@ -1390,7 +1390,7 @@ Public Class FormSimulSettings
     End Sub
 
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
-
+        FormMain.AnalyticsProvider?.RegisterEvent("Importing Compounds from JSON Files", "", Nothing)
         If Me.OpenFileDialog3.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
             For Each fn In Me.OpenFileDialog3.FileNames
                 Try
@@ -1434,6 +1434,7 @@ Public Class FormSimulSettings
     End Sub
 
     Private Sub Button13_Click(sender As Object, e As EventArgs) Handles Button13.Click
+        FormMain.AnalyticsProvider?.RegisterEvent("Importing Compounds from Online Sources", "", Nothing)
         Dim f As New FormImportCompoundOnline
         If f.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
             Try

@@ -87,6 +87,8 @@ Public Class FormMain
 
     Public Property MostRecentFiles As Specialized.StringCollection
 
+    Public Shared AnalyticsProvider As IAnalyticsProvider
+
 #Region "    Form Events"
 
     Public Event ToolOpened(sender As Object, e As EventArgs)
@@ -504,9 +506,22 @@ Public Class FormMain
             Try
                 availableTypes.AddRange(currentAssembly.GetExportedTypes())
             Catch ex As Exception
-                MessageBox.Show(ex.Message, "Error loading Extender", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show(ex.Message, "Error Loading Extender", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         Next
+
+        'analytics provider
+
+        Dim aprov As List(Of Type) = availableTypes.FindAll(Function(t) t.GetInterfaces().Contains(GetType(Interfaces.IAnalyticsProvider)))
+
+        Dim aprovinst = aprov.ConvertAll(Of IAnalyticsProvider)(Function(t As Type) TryCast(Activator.CreateInstance(t), IAnalyticsProvider))
+
+        If aprovinst.Count > 0 Then
+            AnalyticsProvider = aprovinst(0)
+            AnalyticsProvider.Initialize()
+        End If
+
+        'extenders
 
         Dim extList As List(Of Type) = availableTypes.FindAll(Function(t) t.GetInterfaces().Contains(GetType(Interfaces.IExtenderCollection)))
 
