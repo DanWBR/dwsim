@@ -1,5 +1,5 @@
 '    Basic Thermodynamic Classes for DWSIM
-'    Copyright 2008 Daniel Wagner O. de Medeiros
+'    Copyright 2008-2021 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -2532,6 +2532,615 @@ Namespace BaseClasses
                 _ep = value
             End Set
         End Property
+
+        Public Sub ExportToXLSX(filepath As String) Implements ICompoundConstantProperties.ExportToXLSX
+
+            Using xcl As New OfficeOpenXml.ExcelPackage()
+
+                Dim mybook As OfficeOpenXml.ExcelWorkbook = xcl.Workbook
+
+                Dim mysheet As OfficeOpenXml.ExcelWorksheet = mybook.Worksheets.Add("Constant Properties")
+
+                With mysheet
+
+                    .Cells(1, 1).Value = "BASIC PROPERTIES"
+                    .Cells(2, 1).Value = "Name"
+                    .Cells(3, 1).Value = "Database"
+                    .Cells(4, 1).Value = "Type"
+                    .Cells(5, 1).Value = "CAS ID"
+                    .Cells(6, 1).Value = "Molecular Weight"
+                    .Cells(7, 1).Value = "Critical Temperature"
+                    .Cells(8, 1).Value = "Critical Pressure"
+                    .Cells(9, 1).Value = "Critical Volume"
+                    .Cells(10, 1).Value = "Critical Compressibility"
+                    .Cells(11, 1).Value = "Acentric Factor"
+                    .Cells(12, 1).Value = "Gibbs Energy of Formation (Ideal Gas at 298.15 K)"
+                    .Cells(13, 1).Value = "Enthalpy of Formation (Ideal Gas at 298.15 K)"
+                    .Cells(14, 1).Value = "Normal Boiling Point"
+                    .Cells(15, 1).Value = "Temperature of Fusion"
+                    .Cells(16, 1).Value = "Enthalpy of Fusion @ Tf"
+                    .Cells(17, 1).Value = "Reference Temperature for Solid Density"
+                    .Cells(18, 1).Value = "Solid Density @ Tref"
+
+                    .Cells(20, 1).Value = "MODEL-SPECIFIC PROPERTIES"
+                    .Cells(21, 1).Value = "Chao Seader Acentric Factor"
+                    .Cells(22, 1).Value = "Chao Seader Solubility Parameter"
+                    .Cells(23, 1).Value = "Chao Seader Liquid Molar Volume"
+                    .Cells(24, 1).Value = "Rackett Compressibility"
+                    .Cells(25, 1).Value = "PR Volume Translation Coefficient"
+                    .Cells(26, 1).Value = "SRK Volume Translation Coefficient"
+                    .Cells(27, 1).Value = "UNIQUAC R"
+                    .Cells(28, 1).Value = "UNIQUAC Q"
+
+                    .Cells(30, 1).Value = "ELECTROLYTE-RELATED PROPERTIES"
+                    .Cells(31, 1).Value = "Charge"
+                    .Cells(32, 1).Value = "Hydration Number"
+                    .Cells(33, 1).Value = "Positive Ion"
+                    .Cells(34, 1).Value = "Negative Ion"
+                    .Cells(35, 1).Value = "Electrolyte Gibbs Energy of Formation"
+                    .Cells(36, 1).Value = "Electrolyte Enthalpy of Formation"
+                    .Cells(37, 1).Value = "Standard State Heat Capacity"
+                    .Cells(38, 1).Value = "Standard State Molar Volume"
+
+                    .Cells(40, 1).Value = "BLACK-OIL-RELATED PROPERTIES"
+                    .Cells(41, 1).Value = "Specific Gravity (Gas)"
+                    .Cells(42, 1).Value = "Specific Gravity (Oil)"
+                    .Cells(43, 1).Value = "Gas-Oil Ratio"
+                    .Cells(44, 1).Value = "Basic Sediments and Water"
+                    .Cells(45, 1).Value = "Temperature for Viscosity Data Point 1"
+                    .Cells(46, 1).Value = "Viscosity @ T1"
+                    .Cells(47, 1).Value = "Temperature for Viscosity Data Point 2"
+                    .Cells(48, 1).Value = "Viscosity @ T2"
+                    .Cells(49, 1).Value = "PNA - Paraffins"
+                    .Cells(50, 1).Value = "PNA - Napthenes"
+                    .Cells(51, 1).Value = "PNA - Aromatics"
+
+                    .Cells(53, 1).Value = "PSEUDOCOMPOUND (PETROLEUM FRACTION)-RELATED PROPERTIES"
+                    .Cells(54, 1).Value = "Specific Gravity"
+                    .Cells(55, 1).Value = "Watson K"
+                    .Cells(56, 1).Value = "Temperature for Viscosity Data Point 1"
+                    .Cells(57, 1).Value = "Viscosity @ T1"
+                    .Cells(58, 1).Value = "Temperature for Viscosity Data Point 2"
+                    .Cells(59, 1).Value = "Viscosity @ T2"
+
+                    .Cells(2, 2).Value = Name
+                    .Cells(3, 2).Value = OriginalDB
+
+                    If IsBlackOil Then
+                        .Cells(4, 2).Value = "Black-Oil"
+                    ElseIf IsPF Then
+                        .Cells(4, 2).Value = "Petroleum Fraction (Pseudocompound)"
+                    ElseIf IsIon Then
+                        .Cells(4, 2).Value = "Ion"
+                    ElseIf IsSalt Then
+                        .Cells(4, 2).Value = "Salt"
+                    ElseIf IsHydratedSalt Then
+                        .Cells(4, 2).Value = "Hydrated Salt"
+                    ElseIf IsHydratedSalt Then
+                        .Cells(4, 2).Value = "Default"
+                    End If
+
+                    .Cells(5, 2).Value = CAS_Number
+                    .Cells(6, 2).Value = Molar_Weight
+                    .Cells(7, 2).Value = Critical_Temperature
+                    .Cells(8, 2).Value = Critical_Pressure
+                    .Cells(9, 2).Value = Critical_Volume
+                    .Cells(10, 2).Value = Critical_Compressibility
+                    .Cells(11, 2).Value = Acentric_Factor
+                    .Cells(12, 2).Value = IG_Gibbs_Energy_of_Formation_25C
+                    .Cells(13, 2).Value = IG_Enthalpy_of_Formation_25C
+                    .Cells(14, 2).Value = Normal_Boiling_Point
+                    .Cells(15, 2).Value = TemperatureOfFusion
+                    .Cells(16, 2).Value = EnthalpyOfFusionAtTf
+                    .Cells(17, 2).Value = SolidTs
+                    .Cells(18, 2).Value = SolidDensityAtTs
+
+                    .Cells(21, 2).Value = Chao_Seader_Acentricity
+                    .Cells(22, 2).Value = Chao_Seader_Solubility_Parameter
+                    .Cells(23, 2).Value = Chao_Seader_Liquid_Molar_Volume
+                    .Cells(24, 2).Value = Z_Rackett
+                    .Cells(25, 2).Value = PR_Volume_Translation_Coefficient
+                    .Cells(26, 2).Value = SRK_Volume_Translation_Coefficient
+                    .Cells(27, 2).Value = UNIQUAC_R
+                    .Cells(28, 2).Value = UNIQUAC_Q
+
+                    .Cells(31, 2).Value = Charge
+                    .Cells(32, 2).Value = HydrationNumber
+                    .Cells(33, 2).Value = PositiveIon
+                    .Cells(34, 2).Value = NegativeIon
+                    .Cells(35, 2).Value = Electrolyte_DelGF
+                    .Cells(36, 2).Value = Electrolyte_DelHF
+                    .Cells(37, 2).Value = Electrolyte_Cp0
+                    .Cells(38, 2).Value = StandardStateMolarVolume
+
+                    .Cells(41, 2).Value = BO_SGG
+                    .Cells(42, 2).Value = BO_SGO
+                    .Cells(43, 2).Value = BO_GOR
+                    .Cells(44, 2).Value = BO_BSW
+                    .Cells(45, 2).Value = BO_OilViscTemp1
+                    .Cells(46, 2).Value = BO_OilVisc1
+                    .Cells(47, 2).Value = BO_OilViscTemp2
+                    .Cells(48, 2).Value = BO_OilVisc2
+                    .Cells(49, 2).Value = BO_PNA_P
+                    .Cells(50, 2).Value = BO_PNA_N
+                    .Cells(51, 2).Value = BO_PNA_A
+
+                    .Cells(54, 2).Value = PF_SG
+                    .Cells(55, 2).Value = PF_Watson_K
+                    .Cells(56, 2).Value = PF_Tv1
+                    .Cells(57, 2).Value = PF_v1
+                    .Cells(58, 2).Value = PF_Tv2
+                    .Cells(59, 2).Value = PF_v2
+
+                    .Cells(7, 3).Value = "K"
+                    .Cells(8, 3).Value = "Pa"
+                    .Cells(9, 3).Value = "m3/kmol"
+                    .Cells(12, 3).Value = "kJ/kg"
+                    .Cells(13, 3).Value = "kJ/kg"
+                    .Cells(14, 3).Value = "K"
+                    .Cells(15, 3).Value = "K"
+                    .Cells(16, 3).Value = "kJ/mol"
+                    .Cells(17, 3).Value = "K"
+                    .Cells(18, 3).Value = "kg/m3"
+
+                    .Cells(35, 3).Value = "kJ/mol"
+                    .Cells(36, 3).Value = "kJ/mol"
+                    .Cells(37, 3).Value = "kJ/[mol.K]"
+                    .Cells(38, 3).Value = "cm3/mol"
+
+                    .Cells(43, 3).Value = "m3/m3"
+                    .Cells(44, 3).Value = "%"
+                    .Cells(45, 3).Value = "K"
+                    .Cells(46, 3).Value = "Pa.s"
+                    .Cells(47, 3).Value = "K"
+                    .Cells(48, 3).Value = "Pa.s"
+                    .Cells(49, 3).Value = "%"
+                    .Cells(50, 3).Value = "%"
+                    .Cells(51, 3).Value = "%"
+
+                    .Cells(56, 3).Value = "K"
+                    .Cells(57, 3).Value = "Pa.s"
+                    .Cells(58, 3).Value = "K"
+                    .Cells(59, 3).Value = "Pa.s"
+
+                End With
+
+
+                mysheet = mybook.Worksheets.Add("T-Dep Properties")
+
+                With mysheet
+
+                    'igcp
+
+                    .Cells(1, 1).Value = "IDEAL GAS HEAT CAPACITY"
+                    .Cells(2, 1).Value = "Equation ID"
+                    .Cells(3, 1).Value = "Equation String"
+                    .Cells(4, 1).Value = "Temperature Units"
+                    .Cells(5, 1).Value = "Heat Capacity Units"
+                    .Cells(6, 1).Value = "A"
+                    .Cells(7, 1).Value = "B"
+                    .Cells(8, 1).Value = "C"
+                    .Cells(9, 1).Value = "D"
+                    .Cells(10, 1).Value = "E"
+                    .Cells(11, 1).Value = "Tmin"
+                    .Cells(12, 1).Value = "Tmax"
+
+                    If Integer.TryParse(IdealgasCpEquation, New Integer) Then
+                        .Cells(2, 2).Value = IdealgasCpEquation
+                        .Cells(3, 2).Value = PropertyPackages.PropertyPackage.GetEquationString(IdealgasCpEquation)
+                    ElseIf IdealgasCpEquation = "" Then
+                        .Cells(2, 2).Value = "Estimated"
+                        .Cells(3, 2).Value = ""
+                    Else
+                        .Cells(2, 2).Value = "User-Defined"
+                        .Cells(3, 2).Value = IdealgasCpEquation
+                    End If
+                    .Cells(4, 2).Value = "K"
+                    Select Case OriginalDB
+                        Case "DWSIM"
+                            .Cells(5, 2).Value = "kJ/[kmol.K]"
+                        Case "ChemSep", "ChEDL Thermo", "User"
+                            .Cells(5, 2).Value = "J/[kmol.K]"
+                    End Select
+                    .Cells(6, 2).Value = Ideal_Gas_Heat_Capacity_Const_A
+                    .Cells(7, 2).Value = Ideal_Gas_Heat_Capacity_Const_B
+                    .Cells(8, 2).Value = Ideal_Gas_Heat_Capacity_Const_C
+                    .Cells(9, 2).Value = Ideal_Gas_Heat_Capacity_Const_D
+                    .Cells(10, 2).Value = Ideal_Gas_Heat_Capacity_Const_E
+                    .Cells(11, 2).Value = "N/A"
+                    .Cells(12, 2).Value = "N/A"
+
+                    .Cells(14, 1).Value = "TABULATED DATA"
+                    .Cells(15, 1).Value = "T (K)"
+                    .Cells(15, 2).Value = "IG Cp (kJ/[kg.K])"
+
+                    Dim Tmin, Tmax, Tit As Double
+                    If TemperatureOfFusion > 0 Then Tmin = TemperatureOfFusion Else Tmin = 0.3 * Normal_Boiling_Point
+                    Tmax = 2 * Critical_Temperature
+
+                    Tit = Tmin
+                    Dim i As Integer = 1
+                    While Tit <= Tmax
+                        .Cells(15 + i, 1).Value = Tit
+                        .Cells(15 + i, 2).Value = GetIdealGasHeatCapacity(Tit)
+                        Tit += (Tmax - Tmin) / 50.0
+                        i += 1
+                    End While
+
+                    'vapor pressure
+
+                    .Cells(1, 4).Value = "VAPOR PRESSURE"
+                    .Cells(2, 4).Value = "Equation ID"
+                    .Cells(3, 4).Value = "Equation String"
+                    .Cells(4, 4).Value = "Temperature Units"
+                    .Cells(5, 4).Value = "Vapor Pressure Units"
+                    .Cells(6, 4).Value = "A"
+                    .Cells(7, 4).Value = "B"
+                    .Cells(8, 4).Value = "C"
+                    .Cells(9, 4).Value = "D"
+                    .Cells(10, 4).Value = "E"
+                    .Cells(11, 4).Value = "Tmin"
+                    .Cells(12, 4).Value = "Tmax"
+
+                    If Integer.TryParse(VaporPressureEquation, New Integer) Then
+                        .Cells(2, 5).Value = VaporPressureEquation
+                        .Cells(3, 5).Value = PropertyPackages.PropertyPackage.GetEquationString(VaporPressureEquation)
+                    ElseIf VaporPressureEquation = "" Then
+                        .Cells(2, 5).Value = "Estimated"
+                        .Cells(3, 5).Value = "Lee-Kesler Vapor Pressure Correlation"
+                    Else
+                        .Cells(2, 5).Value = "User-Defined"
+                        .Cells(3, 5).Value = VaporPressureEquation
+                    End If
+                    .Cells(4, 5).Value = "K"
+                    .Cells(5, 5).Value = "Pa"
+                    .Cells(6, 5).Value = Vapor_Pressure_Constant_A
+                    .Cells(7, 5).Value = Vapor_Pressure_Constant_B
+                    .Cells(8, 5).Value = Vapor_Pressure_Constant_C
+                    .Cells(9, 5).Value = Vapor_Pressure_Constant_D
+                    .Cells(10, 5).Value = Vapor_Pressure_Constant_E
+                    .Cells(11, 5).Value = Vapor_Pressure_TMIN
+                    .Cells(12, 5).Value = Vapor_Pressure_TMAX
+
+                    .Cells(14, 4).Value = "TABULATED DATA"
+                    .Cells(15, 4).Value = "T (K)"
+                    .Cells(15, 5).Value = "Vapor Pressure (Pa)"
+
+                    If TemperatureOfFusion > 0 Then Tmin = TemperatureOfFusion Else Tmin = 0.3 * Normal_Boiling_Point
+                    Tmax = Critical_Temperature
+
+                    Tit = Tmin
+                    i = 1
+                    While Tit <= Tmax
+                        .Cells(15 + i, 4).Value = Tit
+                        .Cells(15 + i, 5).Value = GetVaporPressure(Tit)
+                        Tit += (Tmax - Tmin) / 50.0
+                        i += 1
+                    End While
+
+                    'liquid density
+
+                    .Cells(1, 7).Value = "LIQUID DENSITY"
+                    .Cells(2, 7).Value = "Equation ID"
+                    .Cells(3, 7).Value = "Equation String"
+                    .Cells(4, 7).Value = "Temperature Units"
+                    .Cells(5, 7).Value = "Liquid Density Units"
+                    .Cells(6, 7).Value = "A"
+                    .Cells(7, 7).Value = "B"
+                    .Cells(8, 7).Value = "C"
+                    .Cells(9, 7).Value = "D"
+                    .Cells(10, 7).Value = "E"
+                    .Cells(11, 7).Value = "Tmin"
+                    .Cells(12, 7).Value = "Tmax"
+
+                    If Integer.TryParse(LiquidDensityEquation, New Integer) Then
+                        .Cells(2, 8).Value = LiquidDensityEquation
+                        .Cells(3, 8).Value = PropertyPackages.PropertyPackage.GetEquationString(LiquidDensityEquation)
+                    ElseIf LiquidDensityEquation = "" Then
+                        .Cells(2, 8).Value = "Estimated"
+                        .Cells(3, 8).Value = "Rackett Correlation"
+                    Else
+                        .Cells(2, 8).Value = "User-Defined"
+                        .Cells(3, 8).Value = LiquidDensityEquation
+                    End If
+                    .Cells(4, 8).Value = "K"
+                    .Cells(5, 8).Value = "kg/m3"
+                    .Cells(6, 8).Value = Liquid_Density_Const_A
+                    .Cells(7, 8).Value = Liquid_Density_Const_B
+                    .Cells(8, 8).Value = Liquid_Density_Const_C
+                    .Cells(9, 8).Value = Liquid_Density_Const_D
+                    .Cells(10, 8).Value = Liquid_Density_Const_E
+                    .Cells(11, 8).Value = Liquid_Density_Tmin
+                    .Cells(12, 8).Value = Liquid_Density_Tmax
+
+                    .Cells(14, 7).Value = "TABULATED DATA"
+                    .Cells(15, 7).Value = "T (K)"
+                    .Cells(15, 8).Value = "Liquid Density (kg/m3)"
+
+                    If TemperatureOfFusion > 0 Then Tmin = TemperatureOfFusion Else Tmin = 0.3 * Normal_Boiling_Point
+                    Tmax = Critical_Temperature
+
+                    Tit = Tmin
+                    i = 1
+                    While Tit <= Tmax
+                        .Cells(15 + i, 7).Value = Tit
+                        .Cells(15 + i, 8).Value = GetLiquidDensity(Tit)
+                        Tit += (Tmax - Tmin) / 50.0
+                        i += 1
+                    End While
+
+                    'liquid viscosity
+
+                    .Cells(1, 10).Value = "LIQUID VISCOSITY"
+                    .Cells(2, 10).Value = "Equation ID"
+                    .Cells(3, 10).Value = "Equation String"
+                    .Cells(4, 10).Value = "Temperature Units"
+                    .Cells(5, 10).Value = "Liquid Viscosity Units"
+                    .Cells(6, 10).Value = "A"
+                    .Cells(7, 10).Value = "B"
+                    .Cells(8, 10).Value = "C"
+                    .Cells(9, 10).Value = "D"
+                    .Cells(10, 10).Value = "E"
+                    .Cells(11, 10).Value = "Tmin"
+                    .Cells(12, 10).Value = "Tmax"
+
+                    If Integer.TryParse(LiquidViscosityEquation, New Integer) Then
+                        .Cells(2, 11).Value = LiquidViscosityEquation
+                        .Cells(3, 11).Value = PropertyPackages.PropertyPackage.GetEquationString(LiquidViscosityEquation)
+                    ElseIf LiquidViscosityEquation = "" Then
+                        .Cells(2, 11).Value = "Estimated"
+                        .Cells(3, 11).Value = "Letsou-Stiel Correlation"
+                    Else
+                        .Cells(2, 11).Value = "User-Defined"
+                        .Cells(3, 11).Value = LiquidViscosityEquation
+                    End If
+                    .Cells(4, 11).Value = "K"
+                    .Cells(5, 11).Value = "Pa.s"
+                    .Cells(6, 11).Value = Liquid_Viscosity_Const_A
+                    .Cells(7, 11).Value = Liquid_Viscosity_Const_B
+                    .Cells(8, 11).Value = Liquid_Viscosity_Const_C
+                    .Cells(9, 11).Value = Liquid_Viscosity_Const_D
+                    .Cells(10, 11).Value = Liquid_Viscosity_Const_E
+                    .Cells(11, 11).Value = "N/A"
+                    .Cells(12, 11).Value = "N/A"
+
+                    .Cells(14, 10).Value = "TABULATED DATA"
+                    .Cells(15, 10).Value = "T (K)"
+                    .Cells(15, 11).Value = "Liquid Viscosity (Pa.s)"
+
+                    If TemperatureOfFusion > 0 Then Tmin = TemperatureOfFusion Else Tmin = 0.3 * Normal_Boiling_Point
+                    Tmax = Critical_Temperature
+
+                    Tit = Tmin
+                    i = 1
+                    While Tit <= Tmax
+                        .Cells(15 + i, 10).Value = Tit
+                        .Cells(15 + i, 11).Value = GetLiquidViscosity(Tit)
+                        Tit += (Tmax - Tmin) / 50.0
+                        i += 1
+                    End While
+
+                    'liquid heat capacity
+
+                    .Cells(1, 13).Value = "LIQUID HEAT CAPACITY"
+                    .Cells(2, 13).Value = "Equation ID"
+                    .Cells(3, 13).Value = "Equation String"
+                    .Cells(4, 13).Value = "Temperature Units"
+                    .Cells(5, 13).Value = "Heat Capacity Units"
+                    .Cells(6, 13).Value = "A"
+                    .Cells(7, 13).Value = "B"
+                    .Cells(8, 13).Value = "C"
+                    .Cells(9, 13).Value = "D"
+                    .Cells(10, 13).Value = "E"
+                    .Cells(11, 13).Value = "Tmin"
+                    .Cells(12, 13).Value = "Tmax"
+
+                    If Integer.TryParse(LiquidHeatCapacityEquation, New Integer) Then
+                        .Cells(2, 14).Value = LiquidHeatCapacityEquation
+                        .Cells(3, 14).Value = PropertyPackages.PropertyPackage.GetEquationString(LiquidHeatCapacityEquation)
+                    ElseIf LiquidHeatCapacityEquation = "" Then
+                        .Cells(2, 14).Value = "Unavailable"
+                        .Cells(3, 14).Value = ""
+                    Else
+                        .Cells(2, 14).Value = "User-Defined"
+                        .Cells(3, 14).Value = LiquidHeatCapacityEquation
+                    End If
+                    .Cells(4, 14).Value = "K"
+                    Select Case OriginalDB
+                        Case "DWSIM"
+                            .Cells(5, 14).Value = "kJ/[kmol.K]"
+                        Case "ChemSep", "ChEDL Thermo", "User"
+                            .Cells(5, 14).Value = "J/[kmol.K]"
+                    End Select
+                    .Cells(6, 14).Value = Liquid_Heat_Capacity_Const_A
+                    .Cells(7, 14).Value = Liquid_Heat_Capacity_Const_B
+                    .Cells(8, 14).Value = Liquid_Heat_Capacity_Const_C
+                    .Cells(9, 14).Value = Liquid_Heat_Capacity_Const_D
+                    .Cells(10, 14).Value = Liquid_Heat_Capacity_Const_E
+                    .Cells(11, 14).Value = "N/A"
+                    .Cells(12, 14).Value = "N/A"
+
+                    .Cells(14, 13).Value = "TABULATED DATA"
+                    .Cells(15, 13).Value = "T (K)"
+                    .Cells(15, 14).Value = "Liquid Cp (kJ/[kg.K])"
+
+                    If TemperatureOfFusion > 0 Then Tmin = TemperatureOfFusion Else Tmin = 0.3 * Normal_Boiling_Point
+                    Tmax = 2 * Critical_Temperature
+
+                    Tit = Tmin
+                    i = 1
+                    While Tit <= Tmax
+                        .Cells(15 + i, 13).Value = Tit
+                        .Cells(15 + i, 14).Value = GetLiquidHeatCapacity(Tit)
+                        Tit += (Tmax - Tmin) / 50.0
+                        i += 1
+                    End While
+
+                    'liquid thermal conductivity
+
+                    .Cells(1, 16).Value = "LIQUID THERMAL CONDUCTIVITY"
+                    .Cells(2, 16).Value = "Equation ID"
+                    .Cells(3, 16).Value = "Equation String"
+                    .Cells(4, 16).Value = "Temperature Units"
+                    .Cells(5, 16).Value = "Thermal Conductivity Units"
+                    .Cells(6, 16).Value = "A"
+                    .Cells(7, 16).Value = "B"
+                    .Cells(8, 16).Value = "C"
+                    .Cells(9, 16).Value = "D"
+                    .Cells(10, 16).Value = "E"
+                    .Cells(11, 16).Value = "Tmin"
+                    .Cells(12, 16).Value = "Tmax"
+
+                    If Integer.TryParse(LiquidThermalConductivityEquation, New Integer) Then
+                        .Cells(2, 17).Value = LiquidThermalConductivityEquation
+                        .Cells(3, 17).Value = PropertyPackages.PropertyPackage.GetEquationString(LiquidThermalConductivityEquation)
+                    ElseIf LiquidThermalConductivityEquation = "" Then
+                        .Cells(2, 17).Value = "Estimated"
+                        .Cells(3, 17).Value = "Latini Correlation"
+                    Else
+                        .Cells(2, 17).Value = "User-Defined"
+                        .Cells(3, 17).Value = LiquidThermalConductivityEquation
+                    End If
+                    .Cells(4, 17).Value = "K"
+                    .Cells(5, 17).Value = "W/[m.K]"
+                    .Cells(6, 17).Value = Liquid_Thermal_Conductivity_Const_A
+                    .Cells(7, 17).Value = Liquid_Thermal_Conductivity_Const_B
+                    .Cells(8, 17).Value = Liquid_Thermal_Conductivity_Const_C
+                    .Cells(9, 17).Value = Liquid_Thermal_Conductivity_Const_D
+                    .Cells(10, 17).Value = Liquid_Thermal_Conductivity_Const_E
+                    .Cells(11, 17).Value = Liquid_Thermal_Conductivity_Tmin
+                    .Cells(12, 17).Value = Liquid_Thermal_Conductivity_Tmax
+
+                    .Cells(14, 16).Value = "TABULATED DATA"
+                    .Cells(15, 16).Value = "T (K)"
+                    .Cells(15, 17).Value = "Liquid Thermal Conductivity (W/[m.K])"
+
+                    If TemperatureOfFusion > 0 Then Tmin = TemperatureOfFusion Else Tmin = 0.3 * Normal_Boiling_Point
+                    Tmax = 2 * Critical_Temperature
+
+                    Tit = Tmin
+                    i = 1
+                    While Tit <= Tmax
+                        .Cells(15 + i, 16).Value = Tit
+                        .Cells(15 + i, 17).Value = GetLiquidThermalConductivity(Tit)
+                        Tit += (Tmax - Tmin) / 50.0
+                        i += 1
+                    End While
+
+                    'solid density
+
+                    .Cells(1, 19).Value = "SOLID DENSITY"
+                    .Cells(2, 19).Value = "Equation ID"
+                    .Cells(3, 19).Value = "Equation String"
+                    .Cells(4, 19).Value = "Temperature Units"
+                    .Cells(5, 19).Value = "Solid Density Units"
+                    .Cells(6, 19).Value = "A"
+                    .Cells(7, 19).Value = "B"
+                    .Cells(8, 19).Value = "C"
+                    .Cells(9, 19).Value = "D"
+                    .Cells(10, 19).Value = "E"
+                    .Cells(11, 19).Value = "Tmin"
+                    .Cells(12, 19).Value = "Tmax"
+
+                    If Integer.TryParse(SolidDensityEquation, New Integer) Then
+                        .Cells(2, 20).Value = SolidDensityEquation
+                        .Cells(3, 20).Value = PropertyPackages.PropertyPackage.GetEquationString(SolidDensityEquation)
+                    ElseIf SolidDensityEquation = "" Then
+                        .Cells(2, 20).Value = "Estimated"
+                        .Cells(3, 20).Value = ""
+                    Else
+                        .Cells(2, 20).Value = "User-Defined"
+                        .Cells(3, 20).Value = SolidDensityEquation
+                    End If
+                    .Cells(4, 20).Value = "K"
+                    .Cells(5, 20).Value = "kg/m3"
+                    .Cells(6, 20).Value = Solid_Density_Const_A
+                    .Cells(7, 20).Value = Solid_Density_Const_B
+                    .Cells(8, 20).Value = Solid_Density_Const_C
+                    .Cells(9, 20).Value = Solid_Density_Const_D
+                    .Cells(10, 20).Value = Solid_Density_Const_E
+                    .Cells(11, 20).Value = Solid_Density_Tmin
+                    .Cells(12, 20).Value = Solid_Density_Tmax
+
+                    .Cells(14, 19).Value = "TABULATED DATA"
+                    .Cells(15, 19).Value = "T (K)"
+                    .Cells(15, 20).Value = "Solid Density (kg/m3)"
+
+                    If TemperatureOfFusion > 0 Then Tmax = TemperatureOfFusion Else Tmax = 0.3 * Normal_Boiling_Point
+                    Tmin = Tmax * 0.2
+
+                    Tit = Tmin
+                    i = 1
+                    While Tit <= Tmax
+                        .Cells(15 + i, 19).Value = Tit
+                        .Cells(15 + i, 20).Value = GetSolidDensity(Tit)
+                        Tit += (Tmax - Tmin) / 50.0
+                        i += 1
+                    End While
+
+                    'solid heat capacity
+
+                    .Cells(1, 22).Value = "SOLID HEAT CAPACITY"
+                    .Cells(2, 22).Value = "Equation ID"
+                    .Cells(3, 22).Value = "Equation String"
+                    .Cells(4, 22).Value = "Temperature Units"
+                    .Cells(5, 22).Value = "Heat Capacity Units"
+                    .Cells(6, 22).Value = "A"
+                    .Cells(7, 22).Value = "B"
+                    .Cells(8, 22).Value = "C"
+                    .Cells(9, 22).Value = "D"
+                    .Cells(10, 22).Value = "E"
+                    .Cells(11, 22).Value = "Tmin"
+                    .Cells(12, 22).Value = "Tmax"
+
+                    If Integer.TryParse(SolidHeatCapacityEquation, New Integer) Then
+                        .Cells(2, 23).Value = SolidHeatCapacityEquation
+                        .Cells(3, 23).Value = PropertyPackages.PropertyPackage.GetEquationString(SolidHeatCapacityEquation)
+                    ElseIf SolidHeatCapacityEquation = "" Then
+                        .Cells(2, 23).Value = "Estimated"
+                        .Cells(3, 23).Value = ""
+                    Else
+                        .Cells(2, 23).Value = "User-Defined"
+                        .Cells(3, 23).Value = SolidHeatCapacityEquation
+                    End If
+                    .Cells(4, 23).Value = "K"
+                    Select Case OriginalDB
+                        Case "ChemSep", "User"
+                            .Cells(5, 23).Value = "J/[kmol.K]"
+                        Case "ChEDL Thermo"
+                            .Cells(5, 23).Value = "kJ/[kg.K]"
+                    End Select
+                    .Cells(6, 23).Value = Solid_Heat_Capacity_Const_A
+                    .Cells(7, 23).Value = Solid_Heat_Capacity_Const_B
+                    .Cells(8, 23).Value = Solid_Heat_Capacity_Const_C
+                    .Cells(9, 23).Value = Solid_Heat_Capacity_Const_D
+                    .Cells(10, 23).Value = Solid_Heat_Capacity_Const_E
+                    .Cells(11, 23).Value = Solid_Heat_Capacity_Tmin
+                    .Cells(12, 23).Value = Solid_Heat_Capacity_Tmax
+
+                    .Cells(14, 22).Value = "TABULATED DATA"
+                    .Cells(15, 22).Value = "T (K)"
+                    .Cells(15, 23).Value = "Solid Cp (kJ/[kg.K])"
+
+                    If TemperatureOfFusion > 0 Then Tmax = TemperatureOfFusion Else Tmax = 0.3 * Normal_Boiling_Point
+                    Tmin = Tmax * 0.2
+
+                    Tit = Tmin
+                    i = 1
+                    While Tit <= Tmax
+                        .Cells(15 + i, 22).Value = Tit
+                        .Cells(15 + i, 23).Value = GetSolidHeatCapacity(Tit)
+                        Tit += (Tmax - Tmin) / 50.0
+                        i += 1
+                    End While
+
+                End With
+
+                xcl.SaveAs(New FileInfo(filepath))
+
+            End Using
+
+        End Sub
 
     End Class
 

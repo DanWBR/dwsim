@@ -8971,6 +8971,98 @@ Final3:
 
         End Function
 
+        Public Shared Function GetEquationString(ByVal eqno As String) As String
+
+            If eqno = "" Then Return "Not Defined"
+
+            Dim eq = Integer.Parse(eqno)
+
+            Select Case eq
+                Case 1
+                    Return "A"
+                Case 2
+                    Return "A + B * T"
+                Case 3
+                    Return "A + B * T + C * T ^ 2"
+                Case 4
+                    Return "A + B * T + C * T ^ 2 + D * T ^ 3"
+                Case 5
+                    Return "A + B * T + C * T ^ 2 + D * T ^ 3 + E * T ^ 4"
+                Case 6
+                    Return "A + B * T + C * T ^ 2 + D * T ^ 3 + E / T ^ 2"
+                Case 10
+                    Return "Exp(A - B / (T + C))"
+                Case 11
+                    Return "Exp(A)"
+                Case 12
+                    Return "Exp(A + B * T)"
+                Case 13
+                    Return "Exp(A + B * T + C * T ^ 2)"
+                Case 14
+                    Return "Exp(A + B * T + C * T ^ 2 + D * T ^ 3)"
+                Case 15
+                    Return "Exp(A + B * T + C * T ^ 2 + D * T ^ 3 + E * T ^ 4)"
+                Case 16
+                    Return "A + Exp(B / T + C + D * T + E * T ^ 2)"
+                Case 17
+                    Return "A + Exp(B + C * T + D * T ^ 2 + E * T ^ 3)"
+                Case 45
+                    Return "A * T + B * T ^ 2 / 2 + C * T ^ 3 / 3 + D * T ^ 4 / 4 + E * T ^ 5 / 5"
+                Case 75
+                    Return "B + 2 * C * T + 3 * D * T ^ 2 + 4 * E * T ^ 3"
+                Case 100
+                    Return "A + B * T + C * T ^ 2 + D * T ^ 3 + E * T ^ 4"
+                Case 101
+                    Return "Exp(A + B / T + C * Log(T) + D * T ^ E)"
+                Case 102
+                    Return "A * T ^ B / (1 + C / T + D / T ^ 2)"
+                Case 103
+                    Return "A + B * Exp(-C / (T ^ D))"
+                Case 104
+                    Return "A + B / T + C / T ^ 2 + D / T ^ 8 + E / T ^ 9"
+                Case 105
+                    Return "A / (B ^ (1 + (1 - T / C) ^ D))"
+                Case 106
+                    Return "A * (1 - Tr) ^ (B + C * Tr + D * Tr ^ 2 + E * Tr ^ 3)"
+                Case 107
+                    Return "A + B * (C / T / Sinh(C / T)) ^ 2 + D * (E / T / Cosh(E / T)) ^ 2"
+                Case 114
+                    Return "A * T + B * T ^ 2 / 2 + C * T ^ 3 / 3 + D * T ^ 4 / 4"
+                Case 115
+                    Return "Exp(A + B / T + C * Log(T) + D * T ^ 2 + E / T ^ 2)"
+                Case 116
+                    Return "A + B * (1 - Tr) ^ 0.35 + C * (1 - Tr) ^ (2 / 3) + D * (1 - Tr) + E * (1 - Tr) ^ (4 / 3)"
+                Case 117
+                    Return "A * T + B * (C / T) / Tanh(C / T) - D * (E / T) / Tanh(E / T)"
+                Case 119
+                    Return "Exp(A / T + B + C * T + D * T ^ 2 + E * Log(T))"
+                Case 207
+                    Return "Exp(A - B / (T + C))"
+                Case 208
+                    Return "10 ^ (A - B / (T + C))"
+                Case 209
+                    Return "10 ^ (A * (1 / T - 1 / B))"
+                Case 210
+                    Return "10 ^ (A + B / T + C * T + D * T ^ 2)"
+                Case 211
+                    Return "A * ((B - T) / (B - C)) ^ D"
+                Case 212
+                    Return "Exp((E / T) * (A * (1 - T / E) + B * (1 - T / E) ^ 1.5 + C * (1 - T / E) ^ 3 + D * (1 - T / E) ^ 6))"
+                Case 213
+                    Return "(E / T) * (A * (1 - T / E) + B * (1 - T / E) ^ 1.5 + C * (1 - T / E) ^ 3 + D * (1 - T / E) ^ 6)"
+                Case 221
+                    Return "-B / T ^ 2 + C / T + D * E * T ^ (E - 1)"
+                Case 230
+                    Return "-B / T ^ 2 + C / T + D - 2 * E / T ^ 3"
+                Case 231
+                    Return "B - C / (T - D) ^ 2"
+                Case Else
+                    Return "Not Defined"
+            End Select
+
+        End Function
+
+
         Public Shared Function ParseEquation(ByVal expression As String, ByVal A As Double, ByVal B As Double, ByVal C As Double, ByVal D As Double, ByVal E As Double, ByVal T As Double) As Double
 
             If expression = "" Then Return 0.0
@@ -8994,14 +9086,14 @@ Final3:
                 If expression.Contains("where") Then
                     numexp = rterm.Split("where")(0).Replace(" ", "").Replace("ln", "log")
                     Dim unit1, unit2 As String
-                    unit1 = rterm.Split(New String() {"where"}, StringSplitOptions.RemoveEmptyEntries)(1).Split(New String() {"and", ","}, StringSplitOptions.RemoveEmptyEntries)(0).Trim
-                    unit2 = rterm.Split(New String() {"where"}, StringSplitOptions.RemoveEmptyEntries)(1).Split(New String() {"and", ","}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
-                    If unit1.Contains("T in") Then
-                        xunit = unit1.Split(New String() {"in"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
-                        yunit = unit2.Split(New String() {"in"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
+                    unit1 = rterm.Split(New String() {"where"}, StringSplitOptions.RemoveEmptyEntries)(1).Split(New String() {"And", ","}, StringSplitOptions.RemoveEmptyEntries)(0).Trim
+                    unit2 = rterm.Split(New String() {"where"}, StringSplitOptions.RemoveEmptyEntries)(1).Split(New String() {"And", ","}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
+                    If unit1.Contains("T In") Then
+                        xunit = unit1.Split(New String() {"In"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
+                        yunit = unit2.Split(New String() {"In"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
                     Else
-                        xunit = unit2.Split(New String() {"in"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
-                        yunit = unit1.Split(New String() {"in"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
+                        xunit = unit2.Split(New String() {"In"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
+                        yunit = unit1.Split(New String() {"In"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
                     End If
                 Else
                     numexp = rterm.Replace(" ", "").Replace("ln", "log")
@@ -9032,7 +9124,7 @@ Final3:
 
             Catch ex As Exception
 
-                Throw New Exception("Error parsing string for numerical expression: '" + expression + "'. Check temperature-dependent property expressions for the selected compounds and try again.")
+                Throw New Exception("Error parsing String For numerical expression:             '" + expression + "'. Check temperature-dependent property expressions for the selected compounds and try again.")
 
             End Try
 

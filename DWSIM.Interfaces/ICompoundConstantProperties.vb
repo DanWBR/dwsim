@@ -1264,4 +1264,10 @@
     ''' <returns></returns>
     Function GetSolidHeatCapacity(T As Double, Optional ByRef message As String = "") As Double
 
+    ''' <summary>
+    ''' exports compound data to a XLSX file.
+    ''' </summary>
+    ''' <returns></returns>
+    Sub ExportToXLSX(filepath As String)
+
 End Interface

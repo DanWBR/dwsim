@@ -43,6 +43,19 @@ Public Class FormPureComp
 
     Dim vxCp, vyCp, vxPvap, vyPvap, vxVisc, vyVisc, vxDHvap, vyDHvap, vxLD, vyLD, vxSD, vySD, vxSCP, vySCP, vxVapVisc,
         vyVapVisc, vxVapThCond, vyVapThCond, vxLiqThCond, vyLiqThCond, vxSurfTens, vySurfTens, vxLiqCp, vyLiqCp As New ArrayList
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        SaveFileDialog2.FileName = MyCompound.Name
+        If Me.SaveFileDialog2.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+            Try
+                MyCompound.ExportToXLSX(SaveFileDialog2.FileName)
+                MessageBox.Show(DWSIM.App.GetLocalString("FileSaved"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Catch ex As Exception
+                MessageBox.Show(DWSIM.App.GetLocalString("Erroaosalvararquivo") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End If
+    End Sub
+
     Public constprop As BaseClasses.ConstantProperties
 
     Private Sub FormPureComp_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load

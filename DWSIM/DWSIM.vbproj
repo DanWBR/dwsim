@@ -3107,6 +3107,7 @@
     <None Include="Resources\icons8-new_file.png" />
     <None Include="Resources\icons8-compress.png" />
     <None Include="Resources\icons8-improvement.png" />
+    <None Include="Resources\icons8-microsoft_excel.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />

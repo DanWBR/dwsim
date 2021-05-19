@@ -118,8 +118,17 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="Button3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>460, 437</value>
+  </data>
+  <data name="Button3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 23</value>
+  </data>
+  <data name="Button3.Text" xml:space="preserve">
+    <value>Export to XLSX</value>
+  </data>
   <data name="Button2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>556, 431</value>
+    <value>574, 437</value>
   </data>
   <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 23</value>
@@ -136,22 +145,22 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>710, 431</value>
+    <value>728, 437</value>
   </data>
   <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 23</value>
+    <value>109, 23</value>
   </data>
   <data name="Button1.Text" xml:space="preserve">
     <value>Export to JSON File</value>
   </data>
   <data name="BtnRestaurar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>199, 431</value>
+    <value>194, 437</value>
   </data>
   <data name="BtnRestaurar.Text" xml:space="preserve">
     <value>Restore Defaults</value>
   </data>
   <data name="chkEnableEdit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 435</value>
+    <value>7, 441</value>
   </data>
   <data name="chkEnableEdit.Size" type="System.Drawing.Size, System.Drawing">
     <value>181, 17</value>
@@ -175,10 +184,10 @@
     <value>Unit</value>
   </data>
   <data name="GridProps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>830, 364</value>
+    <value>837, 367</value>
   </data>
   <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>830, 364</value>
+    <value>837, 367</value>
   </data>
   <data name="FaTabStripItem1.Title" xml:space="preserve">
     <value>Constants</value>
@@ -358,10 +367,10 @@
     <value>Comments</value>
   </data>
   <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>832, 385</value>
+    <value>839, 388</value>
   </data>
   <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>839, 458</value>
+    <value>846, 470</value>
   </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>View</value>
@@ -378,8 +387,17 @@
   <data name="sfdxml1.Title" xml:space="preserve">
     <value>Export Compound to XML Database</value>
   </data>
+  <data name="SaveFileDialog2.Filter" xml:space="preserve">
+    <value>XLSX Files|*.xlsx</value>
+  </data>
+  <data name="SaveFileDialog2.Title" xml:space="preserve">
+    <value>Export Data to XLSX</value>
+  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>839, 458</value>
+    <value>846, 470</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Inherit</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Pure Compound Properties</value>

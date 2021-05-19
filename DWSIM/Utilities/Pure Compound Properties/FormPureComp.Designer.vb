@@ -48,6 +48,7 @@ Partial Class FormPureComp
         Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Button3 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.LblModified = New System.Windows.Forms.Label()
@@ -144,6 +145,7 @@ Partial Class FormPureComp
         Me.TextBoxComments = New System.Windows.Forms.TextBox()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.sfdxml1 = New System.Windows.Forms.SaveFileDialog()
+        Me.SaveFileDialog2 = New System.Windows.Forms.SaveFileDialog()
         Me.GroupBox1.SuspendLayout()
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStrip1.SuspendLayout()
@@ -187,6 +189,7 @@ Partial Class FormPureComp
         'GroupBox1
         '
         resources.ApplyResources(Me.GroupBox1, "GroupBox1")
+        Me.GroupBox1.Controls.Add(Me.Button3)
         Me.GroupBox1.Controls.Add(Me.Button2)
         Me.GroupBox1.Controls.Add(Me.Button1)
         Me.GroupBox1.Controls.Add(Me.LblModified)
@@ -198,17 +201,22 @@ Partial Class FormPureComp
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
         '
+        'Button3
+        '
+        resources.ApplyResources(Me.Button3, "Button3")
+        Me.Button3.Cursor = System.Windows.Forms.Cursors.Default
+        Me.Button3.Name = "Button3"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
         'Button2
         '
         resources.ApplyResources(Me.Button2, "Button2")
-        Me.Button2.Image = Global.DWSIM.My.Resources.Resources.database_save1
         Me.Button2.Name = "Button2"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Button1
         '
         resources.ApplyResources(Me.Button1, "Button1")
-        Me.Button1.Image = Global.DWSIM.My.Resources.Resources.card_export
         Me.Button1.Name = "Button1"
         Me.Button1.UseVisualStyleBackColor = True
         '
@@ -1132,6 +1140,11 @@ Partial Class FormPureComp
         resources.ApplyResources(Me.sfdxml1, "sfdxml1")
         Me.sfdxml1.RestoreDirectory = True
         '
+        'SaveFileDialog2
+        '
+        resources.ApplyResources(Me.SaveFileDialog2, "SaveFileDialog2")
+        Me.SaveFileDialog2.RestoreDirectory = True
+        '
         'FormPureComp
         '
         resources.ApplyResources(Me, "$this")
@@ -1282,4 +1295,6 @@ Partial Class FormPureComp
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents tbElements As TextBox
     Friend WithEvents Label8 As Label
+    Friend WithEvents Button3 As Button
+    Friend WithEvents SaveFileDialog2 As SaveFileDialog
 End Class
