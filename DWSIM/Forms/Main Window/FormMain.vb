@@ -518,7 +518,6 @@ Public Class FormMain
 
         If aprovinst.Count > 0 Then
             AnalyticsProvider = aprovinst(0)
-            AnalyticsProvider.Initialize()
         End If
 
         'extenders
@@ -881,6 +880,8 @@ Public Class FormMain
             OpenWelcomeScreen()
 
         End If
+
+        AnalyticsProvider?.Initialize()
 
     End Sub
 
