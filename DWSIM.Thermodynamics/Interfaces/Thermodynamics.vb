@@ -2571,6 +2571,8 @@ Namespace CalculatorInterface
                     results.ResultException = New NotImplementedException("Flash type not yet supported.")
             End Select
 
+            If results.ResultException IsNot Nothing Then Throw results.ResultException
+
             Return results
 
         End Function

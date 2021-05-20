@@ -336,7 +336,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 calcresult.ResultException = ex
 
-                Throw ex
+                'Throw ex
 
             End Try
 

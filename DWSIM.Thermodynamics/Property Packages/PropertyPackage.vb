@@ -2205,36 +2205,42 @@ Namespace PropertyPackages
 
         Public Overridable Function CalculateEquilibrium(calctype As Interfaces.Enums.FlashCalculationType, val1 As Double, val2 As Double, mixmolefrac() As Double, initialKval() As Double, initialestimate As Double) As Interfaces.IFlashCalculationResult Implements Interfaces.IPropertyPackage.CalculateEquilibrium
 
+            Dim result As IFlashCalculationResult
+
             Select Case calctype
                 Case Interfaces.Enums.FlashCalculationType.PressureTemperature
-                    Return Me.FlashBase.CalculateEquilibrium(FlashSpec.P, FlashSpec.T, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
+                    result = Me.FlashBase.CalculateEquilibrium(FlashSpec.P, FlashSpec.T, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
                 Case Interfaces.Enums.FlashCalculationType.PressureEnthalpy
-                    Return Me.FlashBase.CalculateEquilibrium(FlashSpec.P, FlashSpec.H, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
+                    result = Me.FlashBase.CalculateEquilibrium(FlashSpec.P, FlashSpec.H, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
                 Case Interfaces.Enums.FlashCalculationType.PressureEntropy
-                    Return Me.FlashBase.CalculateEquilibrium(FlashSpec.P, FlashSpec.S, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
+                    result = Me.FlashBase.CalculateEquilibrium(FlashSpec.P, FlashSpec.S, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
                 Case Interfaces.Enums.FlashCalculationType.PressureSolidFraction
-                    Return Me.FlashBase.CalculateEquilibrium(FlashSpec.P, FlashSpec.SF, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
+                    result = Me.FlashBase.CalculateEquilibrium(FlashSpec.P, FlashSpec.SF, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
                 Case Interfaces.Enums.FlashCalculationType.PressureVaporFraction
-                    Return Me.FlashBase.CalculateEquilibrium(FlashSpec.P, FlashSpec.VAP, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
+                    result = Me.FlashBase.CalculateEquilibrium(FlashSpec.P, FlashSpec.VAP, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
                 Case Interfaces.Enums.FlashCalculationType.TemperatureEnthalpy
-                    Return Me.FlashBase.CalculateEquilibrium(FlashSpec.T, FlashSpec.H, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
+                    result = Me.FlashBase.CalculateEquilibrium(FlashSpec.T, FlashSpec.H, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
                 Case Interfaces.Enums.FlashCalculationType.TemperatureEntropy
-                    Return Me.FlashBase.CalculateEquilibrium(FlashSpec.T, FlashSpec.S, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
+                    result = Me.FlashBase.CalculateEquilibrium(FlashSpec.T, FlashSpec.S, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
                 Case Interfaces.Enums.FlashCalculationType.TemperatureSolidFraction
-                    Return Me.FlashBase.CalculateEquilibrium(FlashSpec.T, FlashSpec.SF, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
+                    result = Me.FlashBase.CalculateEquilibrium(FlashSpec.T, FlashSpec.SF, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
                 Case Interfaces.Enums.FlashCalculationType.TemperatureVaporFraction
-                    Return Me.FlashBase.CalculateEquilibrium(FlashSpec.T, FlashSpec.VAP, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
+                    result = Me.FlashBase.CalculateEquilibrium(FlashSpec.T, FlashSpec.VAP, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
                 Case Interfaces.Enums.FlashCalculationType.VolumeTemperature
-                    Return Me.FlashBase.CalculateEquilibrium(FlashSpec.V, FlashSpec.T, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
+                    result = Me.FlashBase.CalculateEquilibrium(FlashSpec.V, FlashSpec.T, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
                 Case Interfaces.Enums.FlashCalculationType.VolumePressure
-                    Return Me.FlashBase.CalculateEquilibrium(FlashSpec.V, FlashSpec.P, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
+                    result = Me.FlashBase.CalculateEquilibrium(FlashSpec.V, FlashSpec.P, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
                 Case Interfaces.Enums.FlashCalculationType.VolumeEnthalpy
-                    Return Me.FlashBase.CalculateEquilibrium(FlashSpec.V, FlashSpec.H, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
+                    result = Me.FlashBase.CalculateEquilibrium(FlashSpec.V, FlashSpec.H, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
                 Case Interfaces.Enums.FlashCalculationType.PressureEntropy
-                    Return Me.FlashBase.CalculateEquilibrium(FlashSpec.V, FlashSpec.S, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
+                    result = Me.FlashBase.CalculateEquilibrium(FlashSpec.V, FlashSpec.S, val1, val2, Me, mixmolefrac, initialKval, initialestimate)
                 Case Else
                     Throw New NotImplementedException
             End Select
+
+            If result.ResultException IsNot Nothing Then Throw result.ResultException
+
+            Return result
 
         End Function
 
@@ -4217,6 +4223,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 Catch ex As Exception
                                 End Try
                             End If
+                        Else
+                            Throw result.ResultException
                         End If
 
                     End If
@@ -4288,6 +4296,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 Catch ex As Exception
                                 End Try
                             End If
+                        Else
+                            Throw result.ResultException
                         End If
 
                     End If

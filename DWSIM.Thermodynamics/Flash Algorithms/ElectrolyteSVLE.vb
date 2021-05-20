@@ -874,8 +874,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim nl As New NestedLoops
             Dim flashresult = nl.CalculateEquilibrium(FlashSpec.T, FlashSpec.VAP, T, 0.0#, proppack, Vz, Nothing, Pref)
+            If flashresult.ResultException IsNot Nothing Then Throw flashresult.ResultException
             Pmax = flashresult.CalculatedPressure
             flashresult = nl.CalculateEquilibrium(FlashSpec.T, FlashSpec.VAP, T, 1.0#, proppack, Vz, Nothing, Pref)
+            If flashresult.ResultException IsNot Nothing Then Throw flashresult.ResultException
             Pmin = flashresult.CalculatedPressure
 
             P = Pmin + (1 - V) * (Pmax - Pmin)

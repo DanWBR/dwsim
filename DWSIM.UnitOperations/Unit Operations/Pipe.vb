@@ -728,7 +728,10 @@ Namespace UnitOperations
 
                                 Tout_ant = Tout
                                 IObj5?.SetCurrent()
-                                Tout = oms.PropertyPackage.FlashBase.CalculateEquilibrium(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.H, Pout, Hout, oms.PropertyPackage, oms.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Mixture), Nothing, Tout).CalculatedTemperature
+                                Dim flashresult = oms.PropertyPackage.FlashBase.CalculateEquilibrium(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.H, Pout, Hout, oms.PropertyPackage, oms.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Mixture), Nothing, Tout)
+                                If flashresult.ResultException IsNot Nothing Then Throw flashresult.ResultException
+                                Tout = flashresult.CalculatedTemperature
+
                                 'Tout = 0.7 * Tout_ant + 0.3 * Tout
                                 If U = 0 Or DQ = 0 Then
                                     Tout_ant = Tout
