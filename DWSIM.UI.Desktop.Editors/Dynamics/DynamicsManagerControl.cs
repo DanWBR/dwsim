@@ -138,7 +138,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             btnRemoveEventSet.Click += (s, e) =>
             {
-                var result = MessageBox.Show("Confirm?", "Remove Event Set", MessageBoxType.Question);
+                var result = MessageBox.Show("Confirm?", "Remove Event Set", MessageBoxButtons.YesNo, MessageBoxType.Question);
                 if (result == DialogResult.Yes)
                 {
                     try
@@ -212,7 +212,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             btnRemoveEvent.Click += (s, e) =>
             {
-                var result = MessageBox.Show("Confirm?", "Remove Event", MessageBoxType.Question);
+                var result = MessageBox.Show("Confirm?", "Remove Event", MessageBoxButtons.YesNo, MessageBoxType.Question);
                 if (result == DialogResult.Yes)
                 {
                     try
@@ -301,7 +301,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             btnRemoveCEM.Click += (s, e) =>
             {
-                var result = MessageBox.Show("Confirm?", "Remove Cause-and-Effect Matrix", MessageBoxType.Question);
+                var result = MessageBox.Show("Confirm?", "Remove Cause-and-Effect Matrix", MessageBoxButtons.YesNo, MessageBoxType.Question);
                 if (result == DialogResult.Yes)
                 {
                     try
@@ -369,7 +369,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             btnRemoveCEI.Click += (s, e) =>
             {
-                var result = MessageBox.Show("Confirm?", "Remove Cause-and-Effect Item", MessageBoxType.Question);
+                var result = MessageBox.Show("Confirm?", "Remove Cause-and-Effect Item", MessageBoxButtons.YesNo, MessageBoxType.Question);
                 if (result == DialogResult.Yes)
                 {
                     try
@@ -457,7 +457,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             btnRemoveI.Click += (s, e) =>
             {
-                var result = MessageBox.Show("Confirm?", "Remove Integrator", MessageBoxType.Question);
+                var result = MessageBox.Show("Confirm?", "Remove Integrator", MessageBoxButtons.YesNo, MessageBoxType.Question);
                 if (result == DialogResult.Yes)
                 {
                     try
@@ -536,7 +536,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             btnRemoveVar.Click += (s, e) =>
             {
-                var result = MessageBox.Show("Confirm?", "Remove Variable", MessageBoxType.Question);
+                var result = MessageBox.Show("Confirm?", "Remove Variable", MessageBoxButtons.YesNo, MessageBoxType.Question);
                 if (result == DialogResult.Yes)
                 {
                     try
@@ -635,7 +635,7 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
 
             btnRemoveS.Click += (s, e) =>
             {
-                var result = MessageBox.Show("Confirm?", "Remove Schedule", MessageBoxType.Question);
+                var result = MessageBox.Show("Confirm?", "Remove Schedule", MessageBoxButtons.YesNo, MessageBoxType.Question);
                 if (result == DialogResult.Yes)
                 {
                     try
