@@ -653,11 +653,11 @@ Public Class FormReportConfig
 
     Sub CreateAndSaveExcelFile()
 
-        Dim xcl As New Excel.Application()
-        Dim mybook As Excel.Workbook = xcl.Workbooks.Add()
-        Dim mysheet As Excel.Worksheet = mybook.Worksheets.Add()
 
-        xcl.Calculation = XlCalculation.xlCalculationManual
+        Dim xcl As New OfficeOpenXml.ExcelPackage()
+        Dim mybook As OfficeOpenXml.ExcelWorkbook = xcl.Workbook
+
+        Dim mysheet As OfficeOpenXml.ExcelWorksheet = mybook.Worksheets.Add("DWSIM_Report")
 
         Try
             With mysheet
@@ -681,13 +681,11 @@ Public Class FormReportConfig
                     j = j + 2
                 Loop Until i >= DT.Rows.Count
             End With
-            mybook.SaveAs(filename:=Me.filename, fileFormat:=XlFileFormat.xlWorkbookNormal)
+            xcl.SaveAs(New FileInfo(filename))
             MsgBox(DWSIM.App.GetLocalString("XLFileSaved"), MsgBoxStyle.Information, "DWSIM")
         Catch ex As Exception
             MsgBox(ex.ToString, MsgBoxStyle.Exclamation, DWSIM.App.GetLocalString("Erro"))
         Finally
-            mybook.Close(saveChanges:=False)
-            xcl.Quit()
             xcl.Dispose()
         End Try
 

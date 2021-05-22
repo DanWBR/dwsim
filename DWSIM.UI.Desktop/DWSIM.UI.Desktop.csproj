@@ -400,8 +400,6 @@ erase /S /Q "$(SolutionDir)DistPackages\Linux\*vshost*.*" 2&gt;nul 1&gt;nul 4&gt
 erase /S /Q "$(SolutionDir)DistPackages\Raspberry\*vshost*.*" 2&gt;nul 1&gt;nul 4&gt;nul
 erase /S /Q "$(SolutionDir)DistPackages\macOS\*vshost*.*" 2&gt;nul 1&gt;nul 4&gt;nul
 
-erase /S "$(SolutionDir)DistPackages\Linux\*-sharp.*" 2&gt;nul 1&gt;nul 4&gt;nul
-
 ) else if "$(PlatformName)" == "x86" (
 
 xcopy "$(TargetDir)*" "$(SolutionDir)DistPackages\Windows_32\" /E /Y /F /D
