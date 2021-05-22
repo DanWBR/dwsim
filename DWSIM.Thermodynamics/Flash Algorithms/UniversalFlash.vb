@@ -174,7 +174,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             IObj?.Paragraphs.Add(String.Format("<h2>Input Parameters</h2>"))
             IObj?.Paragraphs.Add(String.Format("Pressure: {0} Pa", P))
-            IObj?.Paragraphs.Add(String.Format("Enthalpy: {0} KJ/Kg", H))
+            IObj?.Paragraphs.Add(String.Format("Enthalpy: {0} kJ/kg", H))
             IObj?.Paragraphs.Add(String.Format("Components: {0}", PP.RET_VNAMES.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Flash Settings: {0}", Flashtype))
