@@ -414,7 +414,7 @@ Public Class Settings
 
         SaveExistingFile = source.Configs("Misc").GetBoolean("SaveBackupFile", True)
         MaxThreadMultiplier = source.Configs("Misc").GetInt("MaxThreadMultiplier", 8)
-        UseSIMDExtensions = source.Configs("Misc").GetBoolean("UseSIMDExtensions", True)
+        UseSIMDExtensions = source.Configs("Misc").GetBoolean("UseSIMDExtensions", False)
 
         CurrentVersion = source.Configs("Misc").Get("CurrentVersion", "")
 
