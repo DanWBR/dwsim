@@ -494,21 +494,25 @@ Namespace PropertyPackages
         <XmlIgnore> Public Overridable ReadOnly Property FlashBase() As Auxiliary.FlashAlgorithms.FlashAlgorithm
 
             Get
-                If CurrentMaterialStream IsNot Nothing Then
-                    Select Case CurrentMaterialStream.ForcePhase
-                        Case ForcedPhase.None
-                            Return New UniversalFlash() With {.FlashSettings = FlashSettings}
-                        Case ForcedPhase.GlobalDef
-                            If CurrentMaterialStream.Flowsheet.FlowsheetOptions.ForceStreamPhase = ForcedPhase.None Then
-                                Return New UniversalFlash() With {.FlashSettings = FlashSettings}
-                            Else
-                                Return New ForcedPhaseFlash() With {.ForcePhase = CurrentMaterialStream.Flowsheet.FlowsheetOptions.ForceStreamPhase}
-                            End If
-                        Case Else
-                            Return New ForcedPhaseFlash() With {.ForcePhase = CurrentMaterialStream.ForcePhase}
-                    End Select
-                Else
+                If GlobalSettings.Settings.CAPEOPENMode Then
                     Return New UniversalFlash() With {.FlashSettings = FlashSettings}
+                Else
+                    If CurrentMaterialStream IsNot Nothing Then
+                        Select Case CurrentMaterialStream.ForcePhase
+                            Case ForcedPhase.None
+                                Return New UniversalFlash() With {.FlashSettings = FlashSettings}
+                            Case ForcedPhase.GlobalDef
+                                If CurrentMaterialStream.Flowsheet.FlowsheetOptions.ForceStreamPhase = ForcedPhase.None Then
+                                    Return New UniversalFlash() With {.FlashSettings = FlashSettings}
+                                Else
+                                    Return New ForcedPhaseFlash() With {.ForcePhase = CurrentMaterialStream.Flowsheet.FlowsheetOptions.ForceStreamPhase}
+                                End If
+                            Case Else
+                                Return New ForcedPhaseFlash() With {.ForcePhase = CurrentMaterialStream.ForcePhase}
+                        End Select
+                    Else
+                        Return New UniversalFlash() With {.FlashSettings = FlashSettings}
+                    End If
                 End If
             End Get
 
