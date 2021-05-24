@@ -47,6 +47,7 @@ Partial Class MaterialStreamEditor
         Me.TabPageInputPane = New System.Windows.Forms.TabPage()
         Me.TabControl2 = New System.Windows.Forms.TabControl()
         Me.TabPageInputConditions = New System.Windows.Forms.TabPage()
+        Me.Label22 = New System.Windows.Forms.Label()
         Me.cbForcePhase = New System.Windows.Forms.ComboBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.tbFracSpec = New System.Windows.Forms.TextBox()
@@ -334,6 +335,7 @@ Partial Class MaterialStreamEditor
         'TabPageInputConditions
         '
         resources.ApplyResources(Me.TabPageInputConditions, "TabPageInputConditions")
+        Me.TabPageInputConditions.Controls.Add(Me.Label22)
         Me.TabPageInputConditions.Controls.Add(Me.cbForcePhase)
         Me.TabPageInputConditions.Controls.Add(Me.Label10)
         Me.TabPageInputConditions.Controls.Add(Me.tbFracSpec)
@@ -365,6 +367,13 @@ Partial Class MaterialStreamEditor
         Me.ToolTipChangeTag.SetToolTip(Me.TabPageInputConditions, resources.GetString("TabPageInputConditions.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.TabPageInputConditions, resources.GetString("TabPageInputConditions.ToolTip1"))
         Me.TabPageInputConditions.UseVisualStyleBackColor = True
+        '
+        'Label22
+        '
+        resources.ApplyResources(Me.Label22, "Label22")
+        Me.Label22.Name = "Label22"
+        Me.ToolTipValues.SetToolTip(Me.Label22, resources.GetString("Label22.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label22, resources.GetString("Label22.ToolTip1"))
         '
         'cbForcePhase
         '
@@ -2059,4 +2068,5 @@ Partial Class MaterialStreamEditor
     Friend WithEvents SplitContainer1 As SplitContainer
     Friend WithEvents cbForcePhase As ComboBox
     Friend WithEvents Label10 As Label
+    Friend WithEvents Label22 As Label
 End Class

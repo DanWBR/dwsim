@@ -316,31 +316,18 @@ Namespace PropertyPackages.Auxiliary
 
             Dim MMm As Double = Vz.MultiplyY(VMM).SumY
 
-            If Settings.EnableParallelProcessing Then
-                Parallel.For(0, n + 1, Sub(ii)
-                                           alpha(ii) = (1 + (0.37464 + 1.54226 * w(ii) - 0.26992 * w(ii) ^ 2) * (1 - (T / Tc(ii)) ^ 0.5)) ^ 2
-                                           ai(ii) = 0.45724 * alpha(ii) * R ^ 2 * Tc(ii) ^ 2 / Pc(ii)
-                                           bi(ii) = 0.0778 * R * Tc(ii) / Pc(ii)
-                                           If w(ii) <= 0.491 Then
-                                               ci(ii) = 0.37464 + 1.5422 * w(ii) - 0.26992 * w(ii) ^ 2
-                                           Else
-                                               ci(ii) = 0.379642 + 1.48503 * w(ii) - 0.164423 * w(ii) ^ 2 + 0.016666 * w(ii) ^ 3
-                                           End If
-                                       End Sub)
-            Else
-                i = 0
-                Do
-                    alpha(i) = (1 + (0.37464 + 1.54226 * w(i) - 0.26992 * w(i) ^ 2) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
-                    ai(i) = 0.45724 * alpha(i) * R ^ 2 * Tc(i) ^ 2 / Pc(i)
-                    bi(i) = 0.0778 * R * Tc(i) / Pc(i)
-                    If w(i) <= 0.491 Then
-                        ci(i) = 0.37464 + 1.5422 * w(i) - 0.26992 * w(i) ^ 2
-                    Else
-                        ci(i) = 0.379642 + 1.48503 * w(i) - 0.164423 * w(i) ^ 2 + 0.016666 * w(i) ^ 3
-                    End If
-                    i = i + 1
-                Loop Until i = n + 1
-            End If
+            i = 0
+            Do
+                alpha(i) = (1 + (0.37464 + 1.54226 * w(i) - 0.26992 * w(i) ^ 2) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
+                ai(i) = 0.45724 * alpha(i) * R ^ 2 * Tc(i) ^ 2 / Pc(i)
+                bi(i) = 0.0778 * R * Tc(i) / Pc(i)
+                If w(i) <= 0.491 Then
+                    ci(i) = 0.37464 + 1.5422 * w(i) - 0.26992 * w(i) ^ 2
+                Else
+                    ci(i) = 0.379642 + 1.48503 * w(i) - 0.164423 * w(i) ^ 2 + 0.016666 * w(i) ^ 3
+                End If
+                i = i + 1
+            Loop Until i = n + 1
 
             a = Calc_SUM1(n, ai, VKij)
 
@@ -711,25 +698,16 @@ Namespace PropertyPackages.ThermoPlugs
             Dim aux1, aux2, auxtmp(n) As Double
             aux1 = -8.314 / 2 * (0.45724 / T) ^ 0.5
 
-            If Settings.EnableParallelProcessing Then
-                Parallel.For(0, n + 1, Sub(k)
-                                           For l As Integer = 0 To n
-                                               auxtmp(k) += Vz(k) * Vz(l) * (1 - VKij(k, l)) * (ci(l) * (ai(k) * Tc(l) / Pc(l)) ^ 0.5 + ci(k) * (ai(l) * Tc(k) / Pc(k)) ^ 0.5)
-                                           Next
-                                       End Sub)
-                aux2 = auxtmp.SumY
-            Else
-                Dim i, j As Integer
+            Dim i, j As Integer
                 aux2 = 0.0#
+            Do
+                j = 0
                 Do
-                    j = 0
-                    Do
-                        aux2 += Vz(i) * Vz(j) * (1 - VKij(i, j)) * (ci(j) * (ai(i) * Tc(j) / Pc(j)) ^ 0.5 + ci(i) * (ai(j) * Tc(i) / Pc(i)) ^ 0.5)
-                        j = j + 1
-                    Loop Until j = n + 1
-                    i = i + 1
-                Loop Until i = n + 1
-            End If
+                    aux2 += Vz(i) * Vz(j) * (1 - VKij(i, j)) * (ci(j) * (ai(i) * Tc(j) / Pc(j)) ^ 0.5 + ci(i) * (ai(j) * Tc(i) / Pc(i)) ^ 0.5)
+                    j = j + 1
+                Loop Until j = n + 1
+                i = i + 1
+            Loop Until i = n + 1
 
             Return aux1 * aux2
 
@@ -766,16 +744,7 @@ Namespace PropertyPackages.ThermoPlugs
 
             Dim saml, aml(n), aml2(n) As Double
 
-            If Settings.EnableParallelProcessing Then
-                Parallel.For(0, n + 1, Sub(k)
-                                           For j As Integer = 0 To n
-                                               aml(k) += Vx(k) * Vx(j) * a(k, j)
-                                               aml2(k) += Vx(j) * a(j, k)
-                                           Next
-                                       End Sub)
-                saml = aml.SumY
-            Else
-                Dim i, j As Integer
+            Dim i, j As Integer
                 i = 0
                 Do
                     j = 0
@@ -786,7 +755,6 @@ Namespace PropertyPackages.ThermoPlugs
                     Loop Until j = n + 1
                     i = i + 1
                 Loop Until i = n + 1
-            End If
 
             Return {aml2, saml}
 
@@ -918,19 +886,7 @@ Namespace PropertyPackages.ThermoPlugs
                 i = i + 1
             Loop Until i = n + 1
 
-            If Settings.EnableParallelProcessing Then
-                Parallel.For(0, n + 1, Sub(ii)
-                                           alpha(ii) = (1 + (0.37464 + 1.54226 * w(ii) - 0.26992 * w(ii) ^ 2) * (1 - (T / Tc(ii)) ^ 0.5)) ^ 2
-                                           ai(ii) = 0.45724 * alpha(ii) * R ^ 2 * Tc(ii) ^ 2 / Pc(ii)
-                                           bi(ii) = 0.0778 * R * Tc(ii) / Pc(ii)
-                                           If w(ii) <= 0.491 Then
-                                               ci(ii) = 0.37464 + 1.5422 * w(ii) - 0.26992 * w(ii) ^ 2
-                                           Else
-                                               ci(ii) = 0.379642 + 1.48503 * w(ii) - 0.164423 * w(ii) ^ 2 + 0.016666 * w(ii) ^ 3
-                                           End If
-                                       End Sub)
-            Else
-                i = 0
+            i = 0
                 Do
                     alpha(i) = (1 + (0.37464 + 1.54226 * w(i) - 0.26992 * w(i) ^ 2) * (1 - (T / Tc(i)) ^ 0.5)) ^ 2
                     ai(i) = 0.45724 * alpha(i) * R ^ 2 * Tc(i) ^ 2 / Pc(i)
@@ -942,7 +898,6 @@ Namespace PropertyPackages.ThermoPlugs
                     End If
                     i = i + 1
                 Loop Until i = n + 1
-            End If
 
             a = Calc_SUM1(n, ai, VKij)
 
@@ -1106,20 +1061,7 @@ Namespace PropertyPackages.ThermoPlugs
                 i = i + 1
             Loop Until i = n + 1
 
-
-            If Settings.EnableParallelProcessing Then
-                Parallel.For(0, n + 1, Sub(ii)
-                                           If w(ii) <= 0.491 Then
-                                               ci(ii) = 0.37464 + 1.5422 * w(ii) - 0.26992 * w(ii) ^ 2
-                                           Else
-                                               ci(ii) = 0.379642 + 1.48503 * w(ii) - 0.164423 * w(ii) ^ 2 + 0.016666 * w(ii) ^ 3
-                                           End If
-                                           alpha(ii) = (1 + ci(ii) * (1 - (T / Tc(ii)) ^ 0.5)) ^ 2
-                                           ai(ii) = 0.45724 * alpha(ii) * R ^ 2 * Tc(ii) ^ 2 / Pc(ii)
-                                           bi(ii) = 0.0778 * R * Tc(ii) / Pc(ii)
-                                       End Sub)
-            Else
-                i = 0
+            i = 0
                 Do
                     If w(i) <= 0.491 Then
                         ci(i) = 0.37464 + 1.5422 * w(i) - 0.26992 * w(i) ^ 2
@@ -1131,7 +1073,6 @@ Namespace PropertyPackages.ThermoPlugs
                     bi(i) = 0.0778 * R * Tc(i) / Pc(i)
                     i = i + 1
                 Loop Until i = n + 1
-            End If
 
             a = Calc_SUM1(n, ai, VKij)
 
@@ -1185,19 +1126,7 @@ Namespace PropertyPackages.ThermoPlugs
             'Z = ZP(0)
             'Pcorr = ZP(1)
 
-            If Settings.EnableParallelProcessing Then
-                Parallel.For(0, n + 1, Sub(ii)
-                                           Dim t1, t2, t3, t4, t5 As Double
-                                           t1 = bi(ii) * (Z - 1) / bml
-                                           t2 = -Math.Log(Z - BG)
-                                           t3 = AG * (2 * aml2(ii) / aml - bi(ii) / bml)
-                                           t4 = Math.Log((Z + (1 + 2 ^ 0.5) * BG) / (Z + (1 - 2 ^ 0.5) * BG))
-                                           t5 = 2 * 2 ^ 0.5 * BG
-                                           LN_CF(ii) = t1 + t2 - (t3 * t4 / t5)
-                                           LN_CF(ii) = LN_CF(ii) + Math.Log(Pcorr / P)
-                                       End Sub)
-            Else
-                Dim t1, t2, t3, t4, t5 As Double
+            Dim t1, t2, t3, t4, t5 As Double
                 i = 0
                 Do
                     t1 = bi(i) * (Z - 1) / bml
@@ -1209,7 +1138,6 @@ Namespace PropertyPackages.ThermoPlugs
                     LN_CF(i) = LN_CF(i) + Math.Log(Pcorr / P)
                     i = i + 1
                 Loop Until i = n + 1
-            End If
 
             IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
 
@@ -1469,19 +1397,7 @@ Namespace PropertyPackages.ThermoPlugs
                 i = i + 1
             Loop Until i = n + 1
 
-            If Settings.EnableParallelProcessing Then
-                Parallel.For(0, n + 1, Sub(ii)
-                                           If W(ii) <= 0.491 Then
-                                               ci(ii) = 0.37464 + 1.5422 * W(ii) - 0.26992 * W(ii) ^ 2
-                                           Else
-                                               ci(ii) = 0.379642 + 1.48503 * W(ii) - 0.164423 * W(ii) ^ 2 + 0.016666 * W(ii) ^ 3
-                                           End If
-                                           alpha(ii) = (1 + ci(ii) * (1 - (T / Tc(ii)) ^ 0.5)) ^ 2
-                                           ai(ii) = 0.45724 * alpha(ii) * R ^ 2 * Tc(ii) ^ 2 / Pc(ii)
-                                           bi(ii) = 0.0778 * R * Tc(ii) / Pc(ii)
-                                       End Sub)
-            Else
-                i = 0
+            i = 0
                 Do
                     If W(i) <= 0.491 Then
                         ci(i) = 0.37464 + 1.5422 * W(i) - 0.26992 * W(i) ^ 2
@@ -1493,7 +1409,6 @@ Namespace PropertyPackages.ThermoPlugs
                     bi(i) = 0.0778 * R * Tc(i) / Pc(i)
                     i = i + 1
                 Loop Until i = n + 1
-            End If
 
             a = Calc_SUM1(n, ai, VKij)
 

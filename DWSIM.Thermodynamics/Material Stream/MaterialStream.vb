@@ -453,23 +453,24 @@ Namespace Streams
 
                 .CurrentMaterialStream = Me
 
-                If W.HasValue Then
-                    If DebugMode Then AppendDebugLine(String.Format("Checking flow definition. Mass flow specified, will calculate molar and volumetric flow."))
-                    IObj?.Paragraphs.Add("Checking flow definition... Mass Flow specified, will calculate Molar and Volumetric Flows.")
-                    foption = 0
-                    .DW_CalcVazaoMolar()
-                ElseIf Q.HasValue Then
-                    If DebugMode Then AppendDebugLine(String.Format("Checking flow definition. Molar flow specified, will calculate mass and volumetric flow."))
-                    IObj?.Paragraphs.Add("Checking flow definition... Molar Flow specified, will calculate Mass and Volumetric Flows.")
-                    foption = 1
-                    .DW_CalcVazaoMassica()
-                ElseIf QV.HasValue Then
-                    If DebugMode Then AppendDebugLine(String.Format("Checking flow definition. Volumetric flow specified, will calculate mass and molar flow."))
-                    IObj?.Paragraphs.Add("Checking flow definition... Volumetric Flow specified, will calculate Mass and Mole Flows.")
-                    foption = 2
-                    Me.Phases(0).Properties.molarflow = 1.0#
-                    Me.Phases(0).Properties.massflow = 1.0#
-                End If
+                Select Case DefinedFlow
+                    Case FlowSpec.Mass
+                        If DebugMode Then AppendDebugLine(String.Format("Checking flow definition. Mass flow specified, will calculate molar and volumetric flow."))
+                        IObj?.Paragraphs.Add("Checking flow definition... Mass Flow specified, will calculate Molar and Volumetric Flows.")
+                        foption = 0
+                        .DW_CalcVazaoMolar()
+                    Case FlowSpec.Mole
+                        If DebugMode Then AppendDebugLine(String.Format("Checking flow definition. Molar flow specified, will calculate mass and volumetric flow."))
+                        IObj?.Paragraphs.Add("Checking flow definition... Molar Flow specified, will calculate Mass and Volumetric Flows.")
+                        foption = 1
+                        .DW_CalcVazaoMassica()
+                    Case FlowSpec.Volumetric
+                        If DebugMode Then AppendDebugLine(String.Format("Checking flow definition. Volumetric flow specified, will calculate mass and molar flow."))
+                        IObj?.Paragraphs.Add("Checking flow definition... Volumetric Flow specified, will calculate Mass and Mole Flows.")
+                        foption = 2
+                        Me.Phases(0).Properties.molarflow = 1.0#
+                        Me.Phases(0).Properties.massflow = 1.0#
+                End Select
 
                 If DebugMode Then AppendDebugLine(String.Format("Property Package: {0}", Me.PropertyPackage.ComponentName))
                 If DebugMode Then AppendDebugLine(String.Format("Flash Algorithm: {0}", Me.PropertyPackage.FlashBase.GetType.Name))
