@@ -4,7 +4,7 @@ Imports System.Net.Http
 Imports System.Text
 Imports System.Threading
 Imports HtmlAgilityPack
-Imports ICSharpCode.SharpZipLib.Zip
+Imports System.IO.Compression
 
 Public Class FOSSEEFlowsheet
 
@@ -134,34 +134,15 @@ Public Class FOSSEEFlowsheets
         Dim abstractfile As String = ""
         Dim abstractfile0 As String = ""
 
-        Using stream As ZipInputStream = New ZipInputStream(File.OpenRead(fpath))
-            stream.Password = Nothing
-            Dim entry As ZipEntry
-label0:
-            entry = stream.GetNextEntry()
-            Do While (Not entry Is Nothing)
-                Dim fileName As String = Path.GetFileName(entry.Name)
-                If (fileName <> String.Empty) Then
-                    Using stream2 As FileStream = File.Create(Path.Combine(fpath2, Path.GetFileName(entry.Name)))
-                        Dim count As Integer = 2048
-                        Dim buffer As Byte() = New Byte(2048) {}
-                        Do While True
-                            count = stream.Read(buffer, 0, buffer.Length)
-                            If (count <= 0) Then
-                                If Path.GetExtension(entry.Name).ToLower = ".dwxmz" Or Path.GetExtension(entry.Name).ToLower = ".dwxml" Then
-                                    simname = Path.Combine(fpath2, Path.GetFileName(entry.Name))
-                                ElseIf Path.GetExtension(entry.Name).ToLower = ".pdf" Then
-                                    abstractfile0 = Path.Combine(fpath2, Path.GetFileName(entry.Name))
-                                End If
-                                GoTo label0
-                            End If
-                            stream2.Write(buffer, 0, count)
-                        Loop
-                    End Using
-                End If
-                entry = stream.GetNextEntry
-            Loop
-        End Using
+        ZipFile.ExtractToDirectory(fpath, fpath2)
+
+        For Each file In Directory.GetFiles(fpath2)
+            If Path.GetExtension(file).ToLower = ".dwxmz" Or Path.GetExtension(file).ToLower = ".dwxml" Then
+                simname = file
+            ElseIf Path.GetExtension(file).ToLower = ".pdf" Then
+                abstractfile0 = file
+            End If
+        Next
 
         Dim xdoc As XDocument = Nothing
 
@@ -244,33 +225,17 @@ label0:
         Dim pathtosave As String = Path.GetTempPath()
         Dim fullname As String = ""
 
-        Using stream As ZipInputStream = New ZipInputStream(File.OpenRead(pathtofile))
-            stream.Password = Nothing
-            Dim entry As ZipEntry
-label2:
-            entry = stream.GetNextEntry()
-            Do While (Not entry Is Nothing)
-                Dim fileName As String = Path.GetFileName(entry.Name)
-                If (fileName <> String.Empty) Then
-                    Using stream2 As FileStream = File.Create(pathtosave + Path.GetFileName(entry.Name))
-                        Dim count As Integer = 2048
-                        Dim buffer As Byte() = New Byte(2048) {}
-                        Do While True
-                            count = stream.Read(buffer, 0, buffer.Length)
-                            If (count <= 0) Then
-                                fullname = pathtosave + Path.GetFileName(entry.Name)
-                                GoTo label2
-                            End If
-                            stream2.Write(buffer, 0, count)
-                        Loop
-                    End Using
-                End If
-                entry = stream.GetNextEntry
-            Loop
-        End Using
+        ZipFile.ExtractToDirectory(pathtofile, pathtosave)
+
+        For Each file In Directory.GetFiles(pathtosave)
+            If Path.GetExtension(file).ToLower = ".xml" Or Path.GetExtension(file).ToLower = ".dwxml" Then
+                fullname = file
+            End If
+        Next
 
         Dim xdoc = XDocument.Load(fullname)
         File.Delete(fullname)
+        Directory.Delete(pathtosave)
 
         Return xdoc
 
