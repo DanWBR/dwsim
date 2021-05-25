@@ -5750,6 +5750,97 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             'Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ic, t_error}
 
+            T = result(0)
+            V = result(1)
+            L = result(2)
+            VSS = result(3)
+            LSS = result(4)
+            y = result(5)
+            x = result(6)
+            Kval = result(7)
+            Q = result(8)
+
+            Dim spci1 = col.Specs("C").ComponentID
+            Dim spci2 = col.Specs("R").ComponentID
+
+            Select Case col.Specs("C").SType
+                Case ColumnSpec.SpecType.Component_Fraction
+                    If col.CondenserType <> Column.condtype.Full_Reflux Then
+                        If col.Specs("C").SpecUnit = "M" Or col.Specs("C").SpecUnit = "Molar" Then
+                            col.Specs("C").CalculatedValue = x(0)(spci1)
+                        Else 'W
+                            col.Specs("C").CalculatedValue = col.PropertyPackage.AUX_CONVERT_MOL_TO_MASS(x(0))(spci1)
+                        End If
+                    Else
+                        If col.Specs("C").SpecUnit = "M" Or col.Specs("C").SpecUnit = "Molar" Then
+                            col.Specs("C").CalculatedValue = y(0)(spci1)
+                        Else 'W
+                            col.Specs("C").CalculatedValue = col.PropertyPackage.AUX_CONVERT_MOL_TO_MASS(y(0))(spci1)
+                        End If
+                    End If
+                Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
+                    If col.CondenserType <> Column.condtype.Full_Reflux Then
+                        col.Specs("C").CalculatedValue = LSS(0) * x(0)(spci1) * col.PropertyPackage.RET_VMM()(spci1) / 1000
+                    Else
+                        col.Specs("C").CalculatedValue = V(0) * y(0)(spci1) * col.PropertyPackage.RET_VMM()(spci1) / 1000
+                    End If
+                Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
+                    If col.CondenserType <> Column.condtype.Full_Reflux Then
+                        col.Specs("C").CalculatedValue = LSS(0) * x(0)(spci1)
+                    Else
+                        col.Specs("C").CalculatedValue = V(0) * y(0)(spci1)
+                    End If
+                Case ColumnSpec.SpecType.Component_Recovery
+                    Dim sumc As Double = 0
+                    For j = 0 To ns
+                        sumc += z(j)(spci1) * F(j)
+                    Next
+                    If col.CondenserType <> Column.condtype.Full_Reflux Then
+                        col.Specs("C").CalculatedValue = LSS(0) * x(0)(spci1) / sumc * 100
+                    Else
+                        col.Specs("C").CalculatedValue = V(0) * y(0)(spci1) / sumc * 100
+                    End If
+                Case ColumnSpec.SpecType.Temperature
+                    col.Specs("C").CalculatedValue = T(0)
+                Case ColumnSpec.SpecType.Stream_Ratio
+                    col.Specs("C").CalculatedValue = L(0) / LSS(0)
+                Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
+                    col.Specs("C").CalculatedValue = LSS(0) * DirectCast(col.PropertyPackage, PropertyPackages.PropertyPackage).AUX_MMM(x(0)) / 1000
+                Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
+                    col.Specs("C").CalculatedValue = LSS(0)
+                Case ColumnSpec.SpecType.Heat_Duty
+                    col.Specs("C").CalculatedValue = Q(0)
+            End Select
+
+            Select Case col.Specs("R").SType
+                Case ColumnSpec.SpecType.Component_Fraction
+                    If col.Specs("R").SpecUnit = "M" Or col.Specs("R").SpecUnit = "Molar" Then
+                        col.Specs("R").CalculatedValue = x(ns)(spci1)
+                    Else 'W
+                        col.Specs("R").CalculatedValue = col.PropertyPackage.AUX_CONVERT_MOL_TO_MASS(x(ns))(spci2)
+                    End If
+                Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
+                    col.Specs("R").CalculatedValue = L(ns) * x(ns)(spci2) * col.PropertyPackage.RET_VMM()(spci2) / 1000
+                Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
+                    col.Specs("R").CalculatedValue = L(ns) * x(ns)(spci2)
+                Case ColumnSpec.SpecType.Component_Recovery
+                    Dim sumc As Double = 0
+                    For j = 0 To ns
+                        sumc += z(j)(spci2) * F(j)
+                    Next
+                    col.Specs("R").CalculatedValue = L(ns) * x(ns)(spci2) / sumc * 100
+                Case ColumnSpec.SpecType.Temperature
+                    col.Specs("R").CalculatedValue = T(ns)
+                Case ColumnSpec.SpecType.Stream_Ratio
+                    col.Specs("R").CalculatedValue = V(ns) / L(ns)
+                Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
+                    col.Specs("R").CalculatedValue = L(ns) * DirectCast(col.PropertyPackage, PropertyPackages.PropertyPackage).AUX_MMM(x(ns)) / 1000
+                Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
+                    col.Specs("R").CalculatedValue = L(ns)
+                Case ColumnSpec.SpecType.Heat_Duty
+                    col.Specs("R").CalculatedValue = Q(ns)
+            End Select
+
             With output
                 .FinalError = result(10)
                 .IterationsTaken = result(9)
@@ -7457,6 +7548,96 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Dim output As New ColumnSolverOutputData
 
             'Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ec, il_err, ic, el_err, dFdXvar}
+
+            T = result(0)
+            V = result(1)
+            L = result(2)
+            VSS = result(3)
+            LSS = result(4)
+            y = result(5)
+            x = result(6)
+            Kval = result(7)
+            Q = result(8)
+
+            Dim spci1 = col.Specs("C").ComponentID
+            Dim spci2 = col.Specs("R").ComponentID
+            Select Case col.Specs("C").SType
+                Case ColumnSpec.SpecType.Component_Fraction
+                    If col.CondenserType <> Column.condtype.Full_Reflux Then
+                        If col.Specs("C").SpecUnit = "M" Or col.Specs("C").SpecUnit = "Molar" Then
+                            col.Specs("C").CalculatedValue = x(0)(spci1)
+                        Else 'W
+                            col.Specs("C").CalculatedValue = col.PropertyPackage.AUX_CONVERT_MOL_TO_MASS(x(0))(spci1)
+                        End If
+                    Else
+                        If col.Specs("C").SpecUnit = "M" Or col.Specs("C").SpecUnit = "Molar" Then
+                            col.Specs("C").CalculatedValue = y(0)(spci1)
+                        Else 'W
+                            col.Specs("C").CalculatedValue = col.PropertyPackage.AUX_CONVERT_MOL_TO_MASS(y(0))(spci1)
+                        End If
+                    End If
+                Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
+                    If col.CondenserType <> Column.condtype.Full_Reflux Then
+                        col.Specs("C").CalculatedValue = LSS(0) * x(0)(spci1) * col.PropertyPackage.RET_VMM()(spci1) / 1000
+                    Else
+                        col.Specs("C").CalculatedValue = V(0) * y(0)(spci1) * col.PropertyPackage.RET_VMM()(spci1) / 1000
+                    End If
+                Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
+                    If col.CondenserType <> Column.condtype.Full_Reflux Then
+                        col.Specs("C").CalculatedValue = LSS(0) * x(0)(spci1)
+                    Else
+                        col.Specs("C").CalculatedValue = V(0) * y(0)(spci1)
+                    End If
+                Case ColumnSpec.SpecType.Component_Recovery
+                    Dim sumc As Double = 0
+                    For j = 0 To ns
+                        sumc += z(j)(spci1) * F(j)
+                    Next
+                    If col.CondenserType <> Column.condtype.Full_Reflux Then
+                        col.Specs("C").CalculatedValue = LSS(0) * x(0)(spci1) / sumc * 100
+                    Else
+                        col.Specs("C").CalculatedValue = V(0) * y(0)(spci1) / sumc * 100
+                    End If
+                Case ColumnSpec.SpecType.Temperature
+                    col.Specs("C").CalculatedValue = T(0)
+                Case ColumnSpec.SpecType.Stream_Ratio
+                    col.Specs("C").CalculatedValue = L(0) / LSS(0)
+                Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
+                    col.Specs("C").CalculatedValue = LSS(0) * DirectCast(col.PropertyPackage, PropertyPackages.PropertyPackage).AUX_MMM(x(0)) / 1000
+                Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
+                    col.Specs("C").CalculatedValue = LSS(0)
+                Case ColumnSpec.SpecType.Heat_Duty
+                    col.Specs("C").CalculatedValue = Q(0)
+            End Select
+
+            Select Case col.Specs("R").SType
+                Case ColumnSpec.SpecType.Component_Fraction
+                    If col.Specs("R").SpecUnit = "M" Or col.Specs("R").SpecUnit = "Molar" Then
+                        col.Specs("R").CalculatedValue = x(ns)(spci1)
+                    Else 'W
+                        col.Specs("R").CalculatedValue = col.PropertyPackage.AUX_CONVERT_MOL_TO_MASS(x(ns))(spci2)
+                    End If
+                Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
+                    col.Specs("R").CalculatedValue = L(ns) * x(ns)(spci2) * col.PropertyPackage.RET_VMM()(spci2) / 1000
+                Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
+                    col.Specs("R").CalculatedValue = L(ns) * x(ns)(spci2)
+                Case ColumnSpec.SpecType.Component_Recovery
+                    Dim sumc As Double = 0
+                    For j = 0 To ns
+                        sumc += z(j)(spci2) * F(j)
+                    Next
+                    col.Specs("R").CalculatedValue = L(ns) * x(ns)(spci2) / sumc * 100
+                Case ColumnSpec.SpecType.Temperature
+                    col.Specs("R").CalculatedValue = T(ns)
+                Case ColumnSpec.SpecType.Stream_Ratio
+                    col.Specs("R").CalculatedValue = V(ns) / L(ns)
+                Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
+                    col.Specs("R").CalculatedValue = L(ns) * DirectCast(col.PropertyPackage, PropertyPackages.PropertyPackage).AUX_MMM(x(ns)) / 1000
+                Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
+                    col.Specs("R").CalculatedValue = L(ns)
+                Case ColumnSpec.SpecType.Heat_Duty
+                    col.Specs("R").CalculatedValue = Q(ns)
+            End Select
 
             With output
                 .FinalError = DirectCast(result(10), Double()).AbsSqrSumY + result(12)

@@ -7663,6 +7663,8 @@ Final3:
 
             Dim nsteps As Integer = Math.Abs(T2 - T1) / 10
 
+            If nsteps > 100 Then nsteps = 100
+
             If nsteps < 10 Then
                 If Math.Abs(T2 - T1) < 1 Then
                     nsteps = 2
