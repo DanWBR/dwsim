@@ -15,7 +15,6 @@ namespace DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
 
         private Renderers.SKCanvasRenderContext renderer = new Renderers.SKCanvasRenderContext(1.0);
 
-
         public string ClipboardData { get; set; } = "";
 
         #region "Constructors"
@@ -122,7 +121,6 @@ namespace DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
                 {
                     if (Flowsheet.SimulationObjects.ContainsKey(OwnerID))
                     {
-
                         var obj = Flowsheet.SimulationObjects[OwnerID];
 
                         try
@@ -134,11 +132,9 @@ namespace DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
                             PaintInstructions(canvas, "Chart model not found.");
                             return;
                         }
-
                     }
                     else if (OwnerID == "Dynamic Mode Integrators")
                     {
-
                         var obj = Flowsheet.DynamicsManager.IntegratorList.Where(x => x.Value.Description == ModelName).FirstOrDefault();
 
                         try
@@ -150,7 +146,20 @@ namespace DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
                             PaintInstructions(canvas, "Chart model not found.");
                             return;
                         }
+                    }
+                    else if (OwnerID == "Chart Objects")
+                    {
+                        var obj = Flowsheet.Charts.Values.Where(x => x.DisplayName == ModelName).FirstOrDefault();
 
+                        try
+                        {
+                            model = (IPlotModel)obj.PlotModel;
+                        }
+                        catch
+                        {
+                            PaintInstructions(canvas, "Chart model not found.");
+                            return;
+                        }
                     }
                     else
                     {

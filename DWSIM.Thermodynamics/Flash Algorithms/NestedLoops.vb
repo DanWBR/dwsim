@@ -870,6 +870,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 Task.WaitAll(task1, task2)
 
             Else
+
                 IObj?.SetCurrent()
                 ErrRes = Herror("PV", 0, P, Vz, PP, False, Nothing)
                 Hb = ErrRes(0)
@@ -878,6 +879,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                 ErrRes = Herror("PV", 1, P, Vz, PP, False, Nothing)
                 Hd = ErrRes(0)
                 Td = ErrRes(1)
+
             End If
 
             IObj?.Paragraphs.Add(String.Format("Calculated Bubble Temperature: {0} K", Tb))
@@ -990,7 +992,12 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                 Dim H1, H2, T1, T2 As Double
                 ecount = 0
-                T = Tb
+                Dim hres = PerformHeuristicsTest(Vz, Tref, P, PP)
+                If hres.SolidPhase Then
+                    T = Tref
+                Else
+                    T = Tb
+                End If
                 H1 = Hb
                 Do
                     ecount += 1

@@ -11,10 +11,11 @@ Public Class FormConfigureChartObject
     Private Sub FormConfigureChartObject_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         cbFlowsheetObject.Items.Clear()
+        cbFlowsheetObject.Items.Add("Dynamic Mode Integrators")
+        cbFlowsheetObject.Items.Add("Chart Objects")
         For Each obj In Chart.Flowsheet.SimulationObjects.Values
             cbFlowsheetObject.Items.Add(obj.GraphicObject.Tag)
         Next
-        cbFlowsheetObject.Items.Add("Dynamic Mode Integrators")
 
         If Chart.OwnerID <> "" Then
 
@@ -35,13 +36,29 @@ Public Class FormConfigureChartObject
                     cbChartSelector.SelectedItem = Chart.ModelName
                 End If
 
-            ElseIf cbFlowsheetObject.SelectedIndex = cbFlowsheetObject.Items.Count - 1 Then
+            ElseIf Chart.OwnerID = "Dynamic Mode Integrators" Then
+
+                cbFlowsheetObject.SelectedIndex = 0
 
                 cbChartSelector.Items.Clear()
 
                 For Each item In Chart.Flowsheet.DynamicsManager.IntegratorList
                     cbChartSelector.Items.Add(item.Value.Description)
                 Next
+
+                cbChartSelector.SelectedItem = Chart.ModelName
+
+            ElseIf Chart.OwnerID = "Chart Objects" Then
+
+                cbFlowsheetObject.SelectedIndex = 1
+
+                cbChartSelector.Items.Clear()
+
+                For Each item In Chart.Flowsheet.Charts.Values
+                    cbChartSelector.Items.Add(item.DisplayName)
+                Next
+
+                cbChartSelector.SelectedItem = Chart.ModelName
 
             End If
 
@@ -58,7 +75,7 @@ Public Class FormConfigureChartObject
 
         If Loaded Then
 
-            If cbFlowsheetObject.SelectedIndex < cbFlowsheetObject.Items.Count - 1 Then
+            If cbFlowsheetObject.SelectedIndex > 1 Then
                 Dim obj = Chart.Flowsheet.GetFlowsheetSimulationObject(cbFlowsheetObject.SelectedItem.ToString())
                 Chart.OwnerID = obj.Name
                 cbChartSelector.Items.Clear()
@@ -66,11 +83,17 @@ Public Class FormConfigureChartObject
                 For Each m In models
                     cbChartSelector.Items.Add(m)
                 Next
-            Else
+            ElseIf cbFlowsheetObject.SelectedIndex = 0 Then
                 Chart.OwnerID = cbFlowsheetObject.SelectedItem.ToString
                 cbChartSelector.Items.Clear()
                 For Each item In Chart.Flowsheet.DynamicsManager.IntegratorList
                     cbChartSelector.Items.Add(item.Value.Description)
+                Next
+            Else
+                Chart.OwnerID = cbFlowsheetObject.SelectedItem.ToString
+                cbChartSelector.Items.Clear()
+                For Each item In Chart.Flowsheet.Charts.Values
+                    cbChartSelector.Items.Add(item.DisplayName)
                 Next
             End If
 

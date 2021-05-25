@@ -19,7 +19,6 @@
 Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.Runtime.Serialization
 Imports System.IO
-Imports System.Linq
 Imports System.Math
 Imports CapeOpen
 Imports System.Runtime.InteropServices.ComTypes
@@ -6804,12 +6803,11 @@ Final3:
 
             'return DHfus in kJ/kg
             Dim cpc = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties
+            Dim Tfus = cpc.TemperatureOfFusion
 
-            If cpc.TemperatureOfFusion <= T Then
-                Return cpc.EnthalpyOfFusionAtTf * 1000 / cpc.Molar_Weight
-            Else
-                Return 0
-            End If
+            Dim cpterm = cpc.GetSolidHeatCapacity(T) * (T - Tfus)
+
+            Return cpc.EnthalpyOfFusionAtTf * 1000 / cpc.Molar_Weight + cpterm
 
         End Function
 

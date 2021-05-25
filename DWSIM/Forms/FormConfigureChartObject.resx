@@ -118,14 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Label4.Text" xml:space="preserve">
-    <value>Altura</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="txtWidth.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>Altura (pixels)</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
-    <value>Comprimento</value>
+    <value>Comprimento (pixels)</value>
   </data>
   <data name="&gt;&gt;txtHeight.Name" xml:space="preserve">
     <value>txtHeight</value>
@@ -140,29 +136,33 @@
   <data name="&gt;&gt;Label2.Name" xml:space="preserve">
     <value>Label2</value>
   </data>
+  <data name="cbFlowsheetObject.Location" type="System.Drawing.Point, System.Drawing">
+    <value>166, 11</value>
+  </data>
   <data name="cbFlowsheetObject.Size" type="System.Drawing.Size, System.Drawing">
     <value>163, 21</value>
   </data>
   <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="cbChartSelector.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 68</value>
   </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
   <data name="Label1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;cbChartSelector.Name" xml:space="preserve">
+    <value>cbChartSelector</value>
   </data>
-  <data name="Label2.Text" xml:space="preserve">
-    <value>Tipo do Gráfico</value>
-  </data>
-  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 13</value>
+  <data name="Label3.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="cbFlowsheetObject.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -173,20 +173,20 @@
   <data name="&gt;&gt;Label1.Name" xml:space="preserve">
     <value>Label1</value>
   </data>
-  <data name="&gt;&gt;cbChartSelector.Name" xml:space="preserve">
-    <value>cbChartSelector</value>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Tipo do Gráfico</value>
   </data>
-  <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="txtWidth.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;txtHeight.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="txtHeight.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+  <data name="&gt;&gt;txtHeight.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 13</value>
+    <value>69, 13</value>
   </data>
   <data name="&gt;&gt;Label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -194,8 +194,8 @@
   <data name="cbChartSelector.Size" type="System.Drawing.Size, System.Drawing">
     <value>163, 21</value>
   </data>
-  <data name="&gt;&gt;cbFlowsheetObject.Name" xml:space="preserve">
-    <value>cbFlowsheetObject</value>
+  <data name="&gt;&gt;Label3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
     <value>$this</value>
@@ -206,20 +206,20 @@
   <data name="&gt;&gt;txtWidth.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;Label3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;txtHeight.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label3.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="cbFlowsheetObject.Location" type="System.Drawing.Point, System.Drawing">
-    <value>166, 11</value>
+  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
-    <value>Objeto do Fluxograma</value>
+    <value>Fonte do Gráfico</value>
   </data>
   <data name="&gt;&gt;cbChartSelector.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label2.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -242,14 +242,14 @@
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 14</value>
   </data>
-  <data name="&gt;&gt;txtHeight.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;cbFlowsheetObject.Name" xml:space="preserve">
+    <value>cbFlowsheetObject</value>
   </data>
   <data name="&gt;&gt;Label4.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cbChartSelector.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -257,8 +257,8 @@
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 41</value>
   </data>
-  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 94</value>
@@ -266,8 +266,8 @@
   <data name="txtHeight.Location" type="System.Drawing.Point, System.Drawing">
     <value>229, 91</value>
   </data>
-  <data name="&gt;&gt;txtHeight.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;cbChartSelector.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FormConfigureChartObject</value>
@@ -285,7 +285,7 @@
     <value>5</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 13</value>
+    <value>86, 13</value>
   </data>
   <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
     <value>$this</value>
@@ -295,6 +295,9 @@
   </data>
   <data name="&gt;&gt;Label4.Name" xml:space="preserve">
     <value>Label4</value>
+  </data>
+  <data name="txtHeight.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
   </data>
   <data name="cbChartSelector.Location" type="System.Drawing.Point, System.Drawing">
     <value>166, 38</value>
@@ -308,8 +311,8 @@
   <data name="&gt;&gt;cbFlowsheetObject.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 13</value>
   </data>
   <data name="&gt;&gt;txtWidth.Name" xml:space="preserve">
     <value>txtWidth</value>
@@ -318,15 +321,15 @@
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 13</value>
+    <value>103, 13</value>
   </data>
   <data name="Label4.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="$this.Localizable" type="System.Boolean, mscorlib">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
-  <data name="$this.Language" type="System.Globalization.CultureInfo, mscorlib">
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>en</value>
-  </data>
+  </metadata>
 </root>
