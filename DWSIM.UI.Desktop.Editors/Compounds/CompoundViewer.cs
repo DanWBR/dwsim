@@ -231,8 +231,8 @@ namespace DWSIM.UI.Desktop.Editors
             container.CreateAndAddTwoLabelsRow(flowsheet.GetTranslatedString("NegativeIon"), compound.NegativeIon);
             container.CreateAndAddTwoLabelsRow(flowsheet.GetTranslatedString("TemperatureOfSolidDensity_Ts") + " (" + su.temperature + ")", cv.ConvertFromSI(su.temperature, compound.SolidTs).ToString(nf));
             container.CreateAndAddTwoLabelsRow(flowsheet.GetTranslatedString("SolidDensityAtTs") + " (" + su.density + ")", cv.ConvertFromSI(su.density, compound.SolidDensityAtTs).ToString(nf));
-            container.CreateAndAddTwoLabelsRow(flowsheet.GetTranslatedString("Electrolyte_DelGF") + " (" + su.enthalpy + ")", cv.ConvertFromSI(su.enthalpy, compound.Electrolyte_DelGF).ToString(nf));
-            container.CreateAndAddTwoLabelsRow(flowsheet.GetTranslatedString("Electrolyte_DelHF") + " (" + su.enthalpy + ")", cv.ConvertFromSI(su.enthalpy, compound.Electrolyte_DelHF).ToString(nf));
+            container.CreateAndAddTwoLabelsRow(flowsheet.GetTranslatedString("Electrolyte_DelGF") + " (kJ/mol)", compound.Electrolyte_DelGF.ToString(nf));
+            container.CreateAndAddTwoLabelsRow(flowsheet.GetTranslatedString("Electrolyte_DelHF") + " (kJ/mol)", compound.Electrolyte_DelHF.ToString(nf));
             container.CreateAndAddTwoLabelsRow(flowsheet.GetTranslatedString("Electrolyte_Cp0") + " (kJ/[mol.K])", compound.Electrolyte_Cp0.ToString(nf));
             container.CreateAndAddTwoLabelsRow(flowsheet.GetTranslatedString("Electrolyte_StdStateMolVol") + " (cm3/mol)", compound.StandardStateMolarVolume.ToString(nf));
             container.CreateAndAddTwoLabelsRow(flowsheet.GetTranslatedString("BlackOil_SGG"), compound.BO_SGG.ToString(nf));
