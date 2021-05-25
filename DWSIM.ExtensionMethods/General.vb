@@ -314,7 +314,7 @@ Public Module General
         End If
     End Sub
 
-    <System.Runtime.CompilerServices.Extension()> _
+    <System.Runtime.CompilerServices.Extension()>
     Public Sub UIThreadInvoke(control As Control, code As Action)
         If control.InvokeRequired Then
             control.Invoke(code)

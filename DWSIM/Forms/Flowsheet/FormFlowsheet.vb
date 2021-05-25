@@ -739,61 +739,61 @@ Public Class FormFlowsheet
 
                 Message = texto
 
-                frsht.UIThreadInvoke(New System.Action(Sub()
-                                                           RaiseEvent NewMessageSent(texto)
-                                                       End Sub))
+                frsht.UIThread(New System.Action(Sub()
+                                                     RaiseEvent NewMessageSent(texto)
+                                                 End Sub))
 
-                frsht.UIThreadInvoke(New System.Action(Sub()
+                frsht.UIThread(New System.Action(Sub()
 
-                                                           If frsht.Visible Then
+                                                     If frsht.Visible Then
 
-                                                               Dim showtips As Boolean = True
-                                                               If GlobalSettings.Settings.OldUI Then
-                                                                   showtips = My.Settings.ShowTips
-                                                               End If
+                                                         Dim showtips As Boolean = True
+                                                         If GlobalSettings.Settings.OldUI Then
+                                                             showtips = My.Settings.ShowTips
+                                                         End If
 
-                                                               If Not My.Application.CommandLineMode Then
+                                                         If Not My.Application.CommandLineMode Then
 
-                                                                   Dim frlog = frsht.FormLog
+                                                             Dim frlog = frsht.FormLog
 
-                                                                   Dim img As Bitmap
-                                                                   Dim strtipo As String
-                                                                   Select Case tipo
-                                                                       Case SharedClasses.DWSIM.Flowsheet.MessageType.Warning
-                                                                           img = My.Resources._error
-                                                                           strtipo = DWSIM.App.GetLocalString("Aviso")
-                                                                       Case SharedClasses.DWSIM.Flowsheet.MessageType.GeneralError
-                                                                           img = My.Resources.exclamation
-                                                                           strtipo = DWSIM.App.GetLocalString("Erro")
-                                                                       Case SharedClasses.DWSIM.Flowsheet.MessageType.Tip
-                                                                           If Not showtips Then Exit Sub
-                                                                           img = My.Resources.lightbulb
-                                                                           strtipo = DWSIM.App.GetLocalString("Dica")
-                                                                       Case Else
-                                                                           img = My.Resources.information
-                                                                           strtipo = DWSIM.App.GetLocalString("Mensagem")
-                                                                   End Select
+                                                             Dim img As Bitmap
+                                                             Dim strtipo As String
+                                                             Select Case tipo
+                                                                 Case SharedClasses.DWSIM.Flowsheet.MessageType.Warning
+                                                                     img = My.Resources._error
+                                                                     strtipo = DWSIM.App.GetLocalString("Aviso")
+                                                                 Case SharedClasses.DWSIM.Flowsheet.MessageType.GeneralError
+                                                                     img = My.Resources.exclamation
+                                                                     strtipo = DWSIM.App.GetLocalString("Erro")
+                                                                 Case SharedClasses.DWSIM.Flowsheet.MessageType.Tip
+                                                                     If Not showtips Then Exit Sub
+                                                                     img = My.Resources.lightbulb
+                                                                     strtipo = DWSIM.App.GetLocalString("Dica")
+                                                                 Case Else
+                                                                     img = My.Resources.information
+                                                                     strtipo = DWSIM.App.GetLocalString("Mensagem")
+                                                             End Select
 
-                                                                   If frlog.Grid1.Rows.Count > 1500 Then
-                                                                       frlog.Grid1.Rows.Clear()
-                                                                   End If
+                                                             If frlog.Grid1.Rows.Count > 1500 Then
+                                                                 frlog.Grid1.Rows.Clear()
+                                                             End If
 
-                                                                   frlog.Grid1.Rows.Add(New Object() {img, frlog.Grid1.Rows.Count, Date.Now, strtipo, texto})
+                                                             frlog.Grid1.Rows.Add(New Object() {img, frlog.Grid1.Rows.Count, Date.Now, strtipo, texto})
 
-                                                                   frlog.Grid1.Sort(frlog.Grid1.Columns(1), ListSortDirection.Descending)
+                                                             frlog.Grid1.Sort(frlog.Grid1.Columns(1), ListSortDirection.Descending)
 
-                                                                   If frlog.Grid1.Rows.Count > 0 Then
-                                                                       frlog.Grid1.Rows(0).Cells("Info").Tag = exceptionID
-                                                                       frlog.Grid1.Rows(0).Cells("Mensagem").Style.ForeColor = cor
-                                                                       frlog.Grid1.ClearSelection()
-                                                                       frlog.Grid1.Rows(0).Selected = True
-                                                                   End If
+                                                             If frlog.Grid1.Rows.Count > 0 Then
+                                                                 frlog.Grid1.Rows(0).Cells("Info").Tag = exceptionID
+                                                                 frlog.Grid1.Rows(0).Cells("Mensagem").Style.ForeColor = cor
+                                                                 frlog.Grid1.ClearSelection()
+                                                                 frlog.Grid1.Rows(0).Selected = True
+                                                             End If
 
-                                                               End If
+                                                         End If
 
-                                                           End If
+                                                     End If
 
-                                                       End Sub))
+                                                 End Sub))
 
             End If
 

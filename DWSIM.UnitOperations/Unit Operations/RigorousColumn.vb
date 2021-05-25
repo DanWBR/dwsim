@@ -5760,8 +5760,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Kval = result(7)
             Q = result(8)
 
-            Dim spci1 = col.Specs("C").ComponentID
-            Dim spci2 = col.Specs("R").ComponentID
+            Dim spci1 = col.Specs("C").ComponentIndex
+            Dim spci2 = col.Specs("R").ComponentIndex
 
             Select Case col.Specs("C").SType
                 Case ColumnSpec.SpecType.Component_Fraction
@@ -7559,8 +7559,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Kval = result(7)
             Q = result(8)
 
-            Dim spci1 = col.Specs("C").ComponentID
-            Dim spci2 = col.Specs("R").ComponentID
+            Dim spci1 = col.Specs("C").ComponentIndex
+            Dim spci2 = col.Specs("R").ComponentIndex
             Select Case col.Specs("C").SType
                 Case ColumnSpec.SpecType.Component_Fraction
                     If col.CondenserType <> Column.condtype.Full_Reflux Then
