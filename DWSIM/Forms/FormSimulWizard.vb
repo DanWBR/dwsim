@@ -224,7 +224,7 @@ Public Class FormSimulWizard
         If TypingTimer Is Nothing Then
             TypingTimer = New Timer()
         End If
-        TypingTimer.Interval = 750
+        TypingTimer.Interval = 500
         TypingTimer.Stop()
         TypingTimer.Start()
 
@@ -276,6 +276,7 @@ Public Class FormSimulWizard
     End Sub
 
     Private Sub Button8_Click(sender As System.Object, e As System.EventArgs) Handles Button8.Click
+        PanelSolids.Enabled = True
         Dim pp As PropertyPackages.PropertyPackage
         pp = FormMain.PropertyPackages(ListViewPP.SelectedItems(0)).Clone
         With pp
@@ -1151,4 +1152,17 @@ Public Class FormSimulWizard
         TextBox1.Text = ""
     End Sub
 
+    Private Sub rbSYes_CheckedChanged(sender As Object, e As EventArgs) Handles rbSYes.CheckedChanged, rbSNo.CheckedChanged, rbSDN.CheckedChanged
+        If loaded Then
+            If rbSYes.Checked Then
+                For Each pp In CurrentFlowsheet.PropertyPackages.Values
+                    DirectCast(pp, PropertyPackage).FlashSettings(FlashSetting.HandleSolidsInDefaultEqCalcMode) = True
+                Next
+            Else
+                For Each pp In CurrentFlowsheet.PropertyPackages.Values
+                    DirectCast(pp, PropertyPackage).FlashSettings(FlashSetting.HandleSolidsInDefaultEqCalcMode) = False
+                Next
+            End If
+        End If
+    End Sub
 End Class

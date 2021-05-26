@@ -1032,7 +1032,7 @@ Public Class FormSimulSettings
         If TypingTimer Is Nothing Then
             TypingTimer = New Timer()
         End If
-        TypingTimer.Interval = 750
+        TypingTimer.Interval = 500
         TypingTimer.Stop()
         TypingTimer.Start()
 

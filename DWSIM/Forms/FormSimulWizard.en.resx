@@ -177,6 +177,42 @@ Click "Next" to continue.</value>
   <data name="Column7.HeaderText" xml:space="preserve">
     <value>Source Database</value>
   </data>
+  <data name="rbSDN.Location" type="System.Drawing.Point, System.Drawing">
+    <value>319, 3</value>
+  </data>
+  <data name="rbSDN.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 19</value>
+  </data>
+  <data name="rbSDN.Text" xml:space="preserve">
+    <value>Don't know</value>
+  </data>
+  <data name="rbSNo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>266, 3</value>
+  </data>
+  <data name="rbSNo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 19</value>
+  </data>
+  <data name="rbSNo.Text" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="rbSYes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>215, 3</value>
+  </data>
+  <data name="rbSYes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 19</value>
+  </data>
+  <data name="rbSYes.Text" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>203, 15</value>
+  </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Does this simulation deal with solids?</value>
+  </data>
+  <data name="PanelSolids.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 324</value>
+  </data>
   <data name="LinkLabel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>543, 15</value>
   </data>

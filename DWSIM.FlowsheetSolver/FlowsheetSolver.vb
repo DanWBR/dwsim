@@ -981,6 +981,8 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
             Dim fs As IFlowsheet = TryCast(fobj, IFlowsheet)
 
             If fs.MasterFlowsheet Is Nothing And GlobalSettings.Settings.CalculatorBusy And Not Adjusting Then
+                FinishAny?.Invoke()
+                GlobalSettings.Settings.CalculatorBusy = False
                 Return New List(Of Exception)
             End If
 
@@ -1020,6 +1022,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
             If Not fs Is Nothing Then
                 If fs.MasterFlowsheet Is Nothing And Not Adjusting And GlobalSettings.Settings.CalculatorBusy Then
                     FinishAny?.Invoke()
+                    GlobalSettings.Settings.CalculatorBusy = False
                     Return New List(Of Exception)
                 End If
             End If
@@ -1054,7 +1057,14 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
             'gets a list of objects to be solved in the flowsheet
 
-            Dim objl As Object() = GetSolvingList(fobj, frompgrid)
+            Dim objl As Object()
+            Try
+                objl = GetSolvingList(fobj, frompgrid)
+            Catch ex As Exception
+                FinishAny?.Invoke()
+                GlobalSettings.Settings.CalculatorBusy = False
+                Return New List(Of Exception)({ex})
+            End Try
 
             'declare a filteredlist dictionary. this will hold the sequence of grouped objects that can be calculated 
             'this way if the user selects the background parallel threads solver option

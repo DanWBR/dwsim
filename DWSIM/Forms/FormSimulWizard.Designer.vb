@@ -48,6 +48,11 @@ Partial Class FormSimulWizard
         Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column5 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.WizardPage3 = New AeroWizard.WizardPage()
+        Me.PanelSolids = New System.Windows.Forms.Panel()
+        Me.rbSDN = New System.Windows.Forms.RadioButton()
+        Me.rbSNo = New System.Windows.Forms.RadioButton()
+        Me.rbSYes = New System.Windows.Forms.RadioButton()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
         Me.LinkLabelPropertyMethods = New System.Windows.Forms.LinkLabel()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
@@ -84,6 +89,7 @@ Partial Class FormSimulWizard
         Me.WizardPage2.SuspendLayout()
         CType(Me.ogc1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.WizardPage3.SuspendLayout()
+        Me.PanelSolids.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.GroupBox12.SuspendLayout()
         CType(Me.dgvpp, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -267,6 +273,7 @@ Partial Class FormSimulWizard
         'WizardPage3
         '
         resources.ApplyResources(Me.WizardPage3, "WizardPage3")
+        Me.WizardPage3.Controls.Add(Me.PanelSolids)
         Me.WizardPage3.Controls.Add(Me.LinkLabel2)
         Me.WizardPage3.Controls.Add(Me.LinkLabelPropertyMethods)
         Me.WizardPage3.Controls.Add(Me.GroupBox6)
@@ -274,6 +281,45 @@ Partial Class FormSimulWizard
         Me.WizardPage3.Controls.Add(Me.Label4)
         Me.WizardPage3.Name = "WizardPage3"
         Me.ToolTip1.SetToolTip(Me.WizardPage3, resources.GetString("WizardPage3.ToolTip"))
+        '
+        'PanelSolids
+        '
+        resources.ApplyResources(Me.PanelSolids, "PanelSolids")
+        Me.PanelSolids.Controls.Add(Me.rbSDN)
+        Me.PanelSolids.Controls.Add(Me.rbSNo)
+        Me.PanelSolids.Controls.Add(Me.rbSYes)
+        Me.PanelSolids.Controls.Add(Me.Label5)
+        Me.PanelSolids.Name = "PanelSolids"
+        Me.ToolTip1.SetToolTip(Me.PanelSolids, resources.GetString("PanelSolids.ToolTip"))
+        '
+        'rbSDN
+        '
+        resources.ApplyResources(Me.rbSDN, "rbSDN")
+        Me.rbSDN.Checked = True
+        Me.rbSDN.Name = "rbSDN"
+        Me.rbSDN.TabStop = True
+        Me.ToolTip1.SetToolTip(Me.rbSDN, resources.GetString("rbSDN.ToolTip"))
+        Me.rbSDN.UseVisualStyleBackColor = True
+        '
+        'rbSNo
+        '
+        resources.ApplyResources(Me.rbSNo, "rbSNo")
+        Me.rbSNo.Name = "rbSNo"
+        Me.ToolTip1.SetToolTip(Me.rbSNo, resources.GetString("rbSNo.ToolTip"))
+        Me.rbSNo.UseVisualStyleBackColor = True
+        '
+        'rbSYes
+        '
+        resources.ApplyResources(Me.rbSYes, "rbSYes")
+        Me.rbSYes.Name = "rbSYes"
+        Me.ToolTip1.SetToolTip(Me.rbSYes, resources.GetString("rbSYes.ToolTip"))
+        Me.rbSYes.UseVisualStyleBackColor = True
+        '
+        'Label5
+        '
+        resources.ApplyResources(Me.Label5, "Label5")
+        Me.Label5.Name = "Label5"
+        Me.ToolTip1.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip"))
         '
         'LinkLabel2
         '
@@ -533,6 +579,8 @@ Partial Class FormSimulWizard
         CType(Me.ogc1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.WizardPage3.ResumeLayout(False)
         Me.WizardPage3.PerformLayout()
+        Me.PanelSolids.ResumeLayout(False)
+        Me.PanelSolids.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox6.PerformLayout()
         Me.GroupBox12.ResumeLayout(False)
@@ -596,4 +644,9 @@ Partial Class FormSimulWizard
     Friend WithEvents ListViewPP As ListBox
     Friend WithEvents CriarAPartirDeEstruturaUNIFACToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Button5 As Button
+    Friend WithEvents PanelSolids As Panel
+    Friend WithEvents rbSDN As RadioButton
+    Friend WithEvents rbSNo As RadioButton
+    Friend WithEvents rbSYes As RadioButton
+    Friend WithEvents Label5 As Label
 End Class

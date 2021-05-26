@@ -970,8 +970,8 @@ Public Class FormFlowsheet
             Settings.TaskCancellationTokenSource = Nothing
             My.Application.ActiveSimulation = Me
             If My.Computer.Keyboard.ShiftKeyDown Then GlobalSettings.Settings.CalculatorBusy = False
-            TaskHelper.Run(Sub()
-                               FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, Settings.TaskCancellationTokenSource, False, False, Nothing, Nothing,
+            Dim t As New Task(Of List(Of Exception))(Function()
+                                                         Return FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode, Settings.TaskCancellationTokenSource, False, False, Nothing, Nothing,
                                                         Sub()
                                                             If My.Settings.ObjectEditor = 1 Then
                                                                 Me.UIThread(Sub()
@@ -980,7 +980,13 @@ Public Class FormFlowsheet
                                                                             End Sub)
                                                             End If
                                                         End Sub, My.Computer.Keyboard.CtrlKeyDown And My.Computer.Keyboard.AltKeyDown)
+                                                     End Function)
+            t.ContinueWith(Sub(tres)
+                               For Each item In tres.Result
+                                   ShowMessage(item.Message, IFlowsheet.MessageType.GeneralError)
+                               Next
                            End Sub)
+            t.Start()
         Else
             ShowMessage(DWSIM.App.GetLocalString("DynEnabled"), IFlowsheet.MessageType.Warning)
         End If
