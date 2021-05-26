@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 6.5.0
+Version 6.5.1
 Copyright (c) 2017-2021 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,21 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim6/commits/windows
+
+Version 6.5.1
+
+Author              Description
+Daniel Medeiros     New Feature: Add Chart Objects from Charts collection to the Flowsheet
+Daniel Medeiros     New Feature: Export compound data to Excel file
+Daniel Medeiros     Updated IronPython+Libs to v2.7.11
+Daniel Medeiros     Fixed issue 146: Dynamics Manager remove button not working (Cross-Platform UI)
+Daniel Medeiros     Fixed issue 147: Inspector could not be started (Linux)
+Daniel Medeiros     Fixed issue 151: Wrong units for formation terms of electrolytes
+Daniel Medeiros     Fixed issue 152: Error on viewing sub flowsheet
+Daniel Medeiros     Added an option to define solids handling in the Simulation Wizard (Classic UI)
+Daniel Medeiros     Fixed issue with Rigorous Column
+Daniel Medeiros     Fixed solver freezing in certain situations
+Daniel Medeiros     Fixed a bug with the SRK Adv Property Package
 
 Version 6.5.0
 

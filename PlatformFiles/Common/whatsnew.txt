@@ -1,11 +1,13 @@
-Version 6.5.0
+Version 6.5.1
 
-- Feature Request 134: Force Material Stream Phase (Vapor, Liquid or Solid)
-- Feature Request 57: Edit properties of generated petroleum fractions (Classic UI)
-- Feature Request 63: Display only streams allowable to connect in connections panel (Cross-Platform UI)
-- Feature Request 65: Insert standard pipe sizes in Pipe Hydraulic Profile editor
-- Fixed Classic UI unresponsiveness
-- Fixed issues with Compound Creator (Classic UI)
-- Fixed loading of external PPs/UOs
-- Fixed single compound issue with Bulk C7+ characterization utility (Classic UI)
-- Ohter bug fixes and enhancements
+- New Feature: Add Chart Objects from Charts collection to the Flowsheet
+- New Feature: Export compound data to Excel file
+- Updated IronPython+Libs to v2.7.11
+- Fixed issue 146: Dynamics Manager remove button not working (Cross-Platform UI)
+- Fixed issue 147: Inspector could not be started (Linux)
+- Fixed issue 151: Wrong units for formation terms of electrolytes
+- Fixed issue 152: Error on viewing sub flowsheet
+- Added an option to define solids handling in the Simulation Wizard (Classic UI)
+- Fixed issue with Rigorous Column
+- Fixed solver freezing in certain situations
+- Fixed a bug with the SRK Adv Property Package
