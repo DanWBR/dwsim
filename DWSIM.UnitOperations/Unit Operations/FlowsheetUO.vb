@@ -800,12 +800,16 @@ Label_00CC:
             Fsheet.MasterFlowsheet = Me.FlowSheet
             Fsheet.RedirectMessages = Me.RedirectOutput
 
+            Dim exclist As List(Of Exception)
+
+            'GlobalSettings.Settings.CalculatorBusy = False
+
             IObj?.SetCurrent()
             Select Case Settings.SolverMode
                 Case 0, 3, 4
-                    DWSIM.FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Fsheet, 0, Settings.TaskCancellationTokenSource)
+                   exclist= DWSIM.FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Fsheet, 0, Settings.TaskCancellationTokenSource)
                 Case 1, 2
-                    DWSIM.FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Fsheet, 1, Settings.TaskCancellationTokenSource)
+                    exclist = DWSIM.FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Fsheet, 1, Settings.TaskCancellationTokenSource)
             End Select
 
             wout = 0.0#

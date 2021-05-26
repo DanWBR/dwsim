@@ -2992,6 +2992,10 @@ Public Class FormFlowsheet
         Return Me.FormSurface.FlowsheetSurface
     End Function
 
+    Public Function GetSurfaceControl() As Object Implements IFlowsheet.GetSurfaceControl
+        Return Me.FormSurface
+    End Function
+
     Public Function GetNewInstance() As IFlowsheet Implements IFlowsheet.GetNewInstance
         Dim fs As New FormFlowsheet()
         fs.Options.VisibleProperties = Me.Options.VisibleProperties

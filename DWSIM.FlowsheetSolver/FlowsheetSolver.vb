@@ -978,7 +978,9 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
         If GlobalSettings.Settings.CalculatorActivated Then
 
-            If GlobalSettings.Settings.CalculatorBusy And Not Adjusting Then
+            Dim fs As IFlowsheet = TryCast(fobj, IFlowsheet)
+
+            If fs.MasterFlowsheet Is Nothing And GlobalSettings.Settings.CalculatorBusy And Not Adjusting Then
                 Return New List(Of Exception)
             End If
 
@@ -1000,8 +1002,6 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
             IObj?.Paragraphs.Add("The Flowsheet Solver controls the calculation of the entire flowsheet.")
 
             IObj?.Paragraphs.Add("When the user requests a flowsheet calculation, it tries to determine the order of the objects to be calculated.")
-
-            Dim fs As IFlowsheet = TryCast(fobj, IFlowsheet)
 
             If fs.PropertyPackages.Count = 0 Then
                 Dim el = New List(Of Exception)

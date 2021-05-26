@@ -122,6 +122,8 @@
 
     Function GetSurface() As Object
 
+    Function GetSurfaceControl() As Object
+
     Function GetNewInstance() As IFlowsheet
 
     Sub AddPropertyPackage(obj As IPropertyPackage)

@@ -266,6 +266,10 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
         Return FlowsheetSurface
     End Function
 
+    Public Function GetSurfaceControl() As Object Implements IFlowsheet.GetSurfaceControl
+        Return Nothing
+    End Function
+
     Public Function GetTranslatedString(text As String) As String Implements IFlowsheet.GetTranslatedString
 
         If _translatefunction IsNot Nothing Then
