@@ -136,7 +136,11 @@ Public Class FOSSEEFlowsheets
 
         ZipFile.ExtractToDirectory(fpath, fpath2)
 
-        For Each file In Directory.GetFiles(fpath2)
+        Dim subdirs = Directory.GetDirectories(fpath2)
+        Dim rootdir = fpath2
+        If subdirs.Count > 0 Then rootdir = subdirs(0)
+
+        For Each file In Directory.GetFiles(rootdir)
             If Path.GetExtension(file).ToLower = ".dwxmz" Or Path.GetExtension(file).ToLower = ".dwxml" Then
                 simname = file
             ElseIf Path.GetExtension(file).ToLower = ".pdf" Then
@@ -222,7 +226,8 @@ Public Class FOSSEEFlowsheets
 
     Private Shared Function LoadZippedXML(pathtofile As String) As XDocument
 
-        Dim pathtosave As String = Path.GetTempPath()
+        Dim pathtosave As String = Path.Combine(Path.GetTempPath(), "FOSSEE_DWSIM_TEMP_EXTRACT")
+        Directory.CreateDirectory(pathtosave)
         Dim fullname As String = ""
 
         ZipFile.ExtractToDirectory(pathtofile, pathtosave)
@@ -234,8 +239,14 @@ Public Class FOSSEEFlowsheets
         Next
 
         Dim xdoc = XDocument.Load(fullname)
-        File.Delete(fullname)
-        Directory.Delete(pathtosave)
+        Try
+            File.Delete(fullname)
+        Catch ex As Exception
+        End Try
+        Try
+            Directory.Delete(pathtosave)
+        Catch ex As Exception
+        End Try
 
         Return xdoc
 
