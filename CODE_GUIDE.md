@@ -141,7 +141,7 @@ The objects are interconnected in many ways:
 
 * Every Simulation Object has an associated graphical representation (= a ShapeGraphic object). They know each other too!
 
-* Every Simulation Object also holds a reference to the parent **Flowsheet** object, and it is through this reference that it can access the Reactions Reaction Sets, Systems of Units and other information.
+* Every Simulation Object also holds a reference to the parent **Flowsheet** object, and it is through this reference that it can access the Reactions, Reaction Sets, Systems of Units and other information.
 
 <img width="973" alt="flowsheet_structure" src="https://user-images.githubusercontent.com/2669419/113356315-09511280-9310-11eb-9b18-b2cb2706fedf.png">
 
