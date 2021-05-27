@@ -2149,16 +2149,19 @@ Namespace Streams
                         Me.Phases(0).Properties.pressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
                     Case 2
                         'PROP_MS_2	Mass Flow
+                        DefinedFlow = FlowSpec.Mass
                         Me.Phases(0).Properties.massflow = SystemsOfUnits.Converter.ConvertToSI(su.massflow, propval)
                         Me.PropertyPackage.DW_CalcVazaoMolar()
                         Me.PropertyPackage.DW_CalcVazaoVolumetrica()
                     Case 3
                         'PROP_MS_3	Molar Flow
+                        DefinedFlow = FlowSpec.Mole
                         Me.Phases(0).Properties.molarflow = SystemsOfUnits.Converter.ConvertToSI(su.molarflow, propval)
                         Me.PropertyPackage.DW_CalcVazaoMassica()
                         Me.PropertyPackage.DW_CalcVazaoVolumetrica()
                     Case 4
                         'PROP_MS_4	Volumetric Flow
+                        DefinedFlow = FlowSpec.Volumetric
                         Me.Phases(0).Properties.volumetric_flow = SystemsOfUnits.Converter.ConvertToSI(su.volumetricFlow, propval)
                         Me.Phases(0).Properties.massflow = Me.Phases(0).Properties.volumetric_flow * Me.Phases(0).Properties.density.GetValueOrDefault
                         Me.PropertyPackage.DW_CalcVazaoMolar()
@@ -5223,8 +5226,10 @@ Namespace Streams
                             Me.Phases(f).Properties.molar_helmholtz_energy = values(0) * Me.PropertyPackage.AUX_MMM(phs)
                     End Select
                 Case "moles"
+                    DefinedFlow = FlowSpec.Mole
                     Me.Phases(f).Properties.molarflow = values(0)
                 Case "Mass"
+                    DefinedFlow = FlowSpec.Mass
                     Me.Phases(f).Properties.massflow = values(0)
                 Case "molecularweight"
                     Me.Phases(f).Properties.molecularWeight = values(0)
@@ -5278,9 +5283,11 @@ Namespace Streams
                 Case "totalflow"
                     Select Case basis
                         Case "Molar", "molar", "mole", "Mole"
+                            DefinedFlow = FlowSpec.Mole
                             Me.Phases(f).Properties.molarflow = values(0)
                             'Me.Phases(f).Properties.massflow = values(0) / 1000 * Me.PropertyPackage.AUX_MMM(phs)
                         Case "Mass", "mass"
+                            DefinedFlow = FlowSpec.Mass
                             Me.Phases(f).Properties.massflow = values(0)
                             'Me.Phases(f).Properties.molarflow = values(0)
                     End Select
