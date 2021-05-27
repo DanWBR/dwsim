@@ -526,6 +526,15 @@ Namespace Enums
 
     End Enum
 
+    Public Enum ExternalSolverCategory
+
+        LinearSystem = 0
+        NonLinearSystem = 1
+        NonLinearMinimization = 2
+        OrdinaryDifferentialEquations = 3
+
+    End Enum
+
 End Namespace
 
 Namespace Enums.GraphicObjects
