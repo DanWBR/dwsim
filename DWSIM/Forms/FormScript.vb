@@ -271,6 +271,9 @@ Imports IronPython.Hosting
             Dim t As Task = TaskHelper.Run(Sub()
                                                fsheet.UIThread(Sub()
                                                                    If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                                                                       If Not GlobalSettings.Settings.PythonPathIsSet Then
+                                                                           GlobalSettings.Settings.SetPythonPath()
+                                                                       End If
                                                                        PythonEngine.PythonHome = GlobalSettings.Settings.PythonPath
                                                                    End If
                                                                    PythonEngine.Initialize()

@@ -838,69 +838,6 @@ Namespace My
                 Me("DoubleClickToEdit") = value
             End Set
         End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property SendCrashAndUsageAnalytics() As Boolean
-            Get
-                Return CType(Me("SendCrashAndUsageAnalytics"),Boolean)
-            End Get
-            Set
-                Me("SendCrashAndUsageAnalytics") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property UserEmail() As String
-            Get
-                Return CType(Me("UserEmail"),String)
-            End Get
-            Set
-                Me("UserEmail") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
-        Public Property ShowDataCollectionForm() As Boolean
-            Get
-                Return CType(Me("ShowDataCollectionForm"),Boolean)
-            End Get
-            Set
-                Me("ShowDataCollectionForm") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("51d86903-c99d-4710-a7f0-a38a447e436a")>  _
-        Public ReadOnly Property Key1() As String
-            Get
-                Return CType(Me("Key1"),String)
-            End Get
-        End Property
-        
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("c9c40f22-ee70-44bb-8654-b177db105878"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10))>  _
-        Public ReadOnly Property Key2() As String
-            Get
-                Return CType(Me("Key2"),String)
-            End Get
-        End Property
-        
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("8a912ddd-956c-43d9-86bc-e372d90b3ae8")>  _
-        Public ReadOnly Property Key3() As String
-            Get
-                Return CType(Me("Key3"),String)
-            End Get
-        End Property
     End Class
 End Namespace
 

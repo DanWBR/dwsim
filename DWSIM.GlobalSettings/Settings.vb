@@ -2,6 +2,7 @@
 Imports System.Threading
 Imports Nini.Config
 Imports System.IO
+Imports System.Runtime.InteropServices
 
 Public Class Settings
 
@@ -166,6 +167,41 @@ Public Class Settings
     Public Shared Property CrossPlatformUIItemSpacing As Integer = 5
 
     Public Shared Property EnableCustomTouchBar As Boolean = True
+
+    Public Shared Property PythonPathIsSet As Boolean = False
+
+    <DllImport("kernel32.dll", SetLastError:=True)> Public Shared Function AddDllDirectory(lpPathName As String) As Boolean
+
+    End Function
+
+    Shared Sub SetPythonPath()
+
+        If RunningPlatform() = Platform.Windows Then
+
+            Dim ppath As String = GlobalSettings.Settings.PythonPath
+
+            If ppath = "" Then
+                Throw New Exception("Python Binaries Path is not defined correctly.")
+            End If
+
+            Dim append As String = ppath + ";" + Path.Combine(ppath, "Library", "bin") + ";"
+
+            Dim p1 As String = append + Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.Machine)
+            ' Set Path
+            Environment.SetEnvironmentVariable("PATH", p1, EnvironmentVariableTarget.Process)
+            ' Set PythonHome
+            Environment.SetEnvironmentVariable("PYTHONHOME", ppath, EnvironmentVariableTarget.Process)
+            ' Set PythonPath
+            Environment.SetEnvironmentVariable("PYTHONPATH", Path.Combine(p1, "Lib"), EnvironmentVariableTarget.Process)
+
+            GlobalSettings.Settings.PythonPathIsSet = True
+
+            AddDllDirectory(ppath)
+            AddDllDirectory(Path.Combine(ppath, "Library", "bin"))
+
+        End If
+
+    End Sub
 
     Shared Sub LoadExcelSettings(Optional ByVal configfile As String = "")
 

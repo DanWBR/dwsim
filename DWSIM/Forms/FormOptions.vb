@@ -88,8 +88,6 @@ Public Class FormOptions
         chkEnableMultipleEditors.Checked = My.Settings.EnableMultipleObjectEditors
         chkEditorDoubleClick.Checked = My.Settings.DoubleClickToEdit
 
-        chkShareData.Checked = My.Settings.SendCrashAndUsageAnalytics
-
         'databases
 
         Me.PopulateDBGrid()
@@ -642,9 +640,5 @@ Public Class FormOptions
     Private Sub tbPythonPath_TextChanged(sender As Object, e As EventArgs) Handles tbPythonPath.TextChanged
         My.Settings.PythonPath = tbPythonPath.Text
         GlobalSettings.Settings.PythonPath = tbPythonPath.Text
-    End Sub
-
-    Private Sub chkShareData_CheckedChanged(sender As Object, e As EventArgs) Handles chkShareData.CheckedChanged
-        My.Settings.SendCrashAndUsageAnalytics = chkShareData.Checked
     End Sub
 End Class
