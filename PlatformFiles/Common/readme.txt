@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 6.5.1
+Version 6.5.2
 Copyright (c) 2017-2021 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,13 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim6/commits/windows
+
+Version 6.5.2
+
+Author              Description
+Daniel Medeiros     Fixed issues with Python.NET Interpreter, which now defaults to Python 3.8
+Daniel Medeiros     Fixed issues with Excel Unit Operation
+Daniel Medeiros     Other bug fixes
 
 Version 6.5.1
 

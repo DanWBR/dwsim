@@ -1,4 +1,4 @@
-Version 6.5.1
+Version 6.5.2
 
 - New Feature: Add Chart Objects from Charts collection to the Flowsheet
 - New Feature: Export compound data to Excel file

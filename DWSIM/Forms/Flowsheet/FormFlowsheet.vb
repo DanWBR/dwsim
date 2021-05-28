@@ -464,8 +464,6 @@ Public Class FormFlowsheet
             My.Application.MainWindowForm.CloseAllToolstripMenuItem.Enabled = True
         End If
 
-        Me.ProcessScripts(Enums.Scripts.EventType.SimulationOpened, Enums.Scripts.ObjectType.Simulation, "")
-
         WriteToLog(DWSIM.App.GetLocalTipString("FLSH003"), Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)
         WriteToLog(DWSIM.App.GetLocalTipString("FLSH001"), Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)
         WriteToLog(DWSIM.App.GetLocalTipString("FLSH002"), Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)

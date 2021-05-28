@@ -33,12 +33,14 @@ namespace DWSIM.Tests
 
             RunTests(samples, interf);
 
-            Console.WriteLine();
-            Console.WriteLine("[SET 3/3] Testing FOSSEE Flowsheets...");
-            Console.WriteLine();
+            //Console.WriteLine();
+            //Console.WriteLine("[SET 3/3] Testing FOSSEE Flowsheets...");
+            //Console.WriteLine();
 
-            RunTests(fossee, interf);
+            //RunTests(fossee, interf);
 
+            Console.WriteLine("Finished. Press Any Key to Continue...");
+            Console.ReadKey();
         }
 
         static void RunTests(List<string> filelist, DWSIM.Automation.Automation interf)
@@ -51,7 +53,6 @@ namespace DWSIM.Tests
             dt0 = DateTime.Now;
 
             System.IO.Directory.SetCurrentDirectory(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
-
 
             DWSIM.Interfaces.IFlowsheet sim;
 
@@ -89,6 +90,10 @@ namespace DWSIM.Tests
                     {
                         status = "FAILED";
                         failed.Add(Path.GetFileNameWithoutExtension(s));
+                        foreach (var error in errors)
+                        {
+                            Console.WriteLine(error.ToString());
+                        }
                     }
                     else { passedtests += 1; }
 
@@ -100,9 +105,7 @@ namespace DWSIM.Tests
                     Console.WriteLine("[" + i + "/" + totaltests + "] ERROR: " + ex.Message);
                 }
                 finally {
-
                     dpf = DateTime.Now;
-
                 }
 
                 partials.Add(dpf - dp0);

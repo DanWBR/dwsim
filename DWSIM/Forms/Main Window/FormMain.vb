@@ -2227,6 +2227,8 @@ Public Class FormMain
 
         Application.DoEvents()
 
+        form.ProcessScripts(Enums.Scripts.EventType.SimulationOpened, Enums.Scripts.ObjectType.Simulation, "")
+
         Return form
 
     End Function

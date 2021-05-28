@@ -455,10 +455,17 @@ Namespace Streams
 
                 Select Case DefinedFlow
                     Case FlowSpec.Mass
-                        If DebugMode Then AppendDebugLine(String.Format("Checking flow definition. Mass flow specified, will calculate molar and volumetric flow."))
-                        IObj?.Paragraphs.Add("Checking flow definition... Mass Flow specified, will calculate Molar and Volumetric Flows.")
-                        foption = 0
-                        .DW_CalcVazaoMolar()
+                        If W.HasValue Then
+                            If DebugMode Then AppendDebugLine(String.Format("Checking flow definition. Mass flow specified, will calculate molar and volumetric flow."))
+                            IObj?.Paragraphs.Add("Checking flow definition... Mass Flow specified, will calculate Molar and Volumetric Flows.")
+                            foption = 0
+                            .DW_CalcVazaoMolar()
+                        ElseIf Q.HasValue Then
+                            If DebugMode Then AppendDebugLine(String.Format("Checking flow definition. Molar flow specified, will calculate mass and volumetric flow."))
+                            IObj?.Paragraphs.Add("Checking flow definition... Molar Flow specified, will calculate Mass and Volumetric Flows.")
+                            foption = 1
+                            .DW_CalcVazaoMassica()
+                        End If
                     Case FlowSpec.Mole
                         If DebugMode Then AppendDebugLine(String.Format("Checking flow definition. Molar flow specified, will calculate mass and volumetric flow."))
                         IObj?.Paragraphs.Add("Checking flow definition... Molar Flow specified, will calculate Mass and Volumetric Flows.")
