@@ -133,15 +133,15 @@ The Flowsheet Object contains lists for all modeling and simulation-related obje
 
 The objects are interconnected in many ways:
 
-* A Material Stream object holds a reference to a Property Package and for the list of Compounds added to the Flowsheet. Each Phase in the Material Stream has a list of **ICompound** objects, and each of these **ICompound** objects holds a reference to a **ICompoundConstantProperties** object stored in the **SelectedCompounds** list of the Flowsheet object.
+* A Material Stream object holds a reference to a Property Package and to the list of Compounds added to the Flowsheet. Each Phase in the Material Stream has a list of **ICompound** objects, and each of these **ICompound** objects holds a reference to a **ICompoundConstantProperties** object stored in the **SelectedCompounds** list of the Flowsheet object.
 
-* A **Unit Operation** also hols a reference to a Property Package. The Unit Operation also know which streams are connected to it, and can create clones of these streams. Since the Property Package always performs calculations in a Material Stream, these clones can be used to perform intermediate calculations, and the results of these calculations will then be written to the streams connected to the outlet ports.
+* A **Unit Operation** also holds a reference to a Property Package. The Unit Operation also knows which streams are connected to it, and can create clones of these streams. Since the Property Package always performs calculations in a Material Stream, these clones can be used to perform intermediate calculations, and the results of these calculations will then be written to the streams connected to the outlet ports.
 
 * The Property Package gets information about the compounds through the Material Stream associated to it, but can also access the Constant Properties of these compounds through a reference to the Flowsheet itself.
 
 * Every Simulation Object has an associated graphical representation (= a ShapeGraphic object). They know each other too!
 
-* Every Simulation Object also holds a reference to the parent **Flowsheet** object, and it is through this reference that it can access the Reactions Reaction Sets, Systems of Units and other information.
+* Every Simulation Object also holds a reference to the parent **Flowsheet** object, and it is through this reference that it can access the Reactions, Reaction Sets, Systems of Units and other information.
 
 <img width="973" alt="flowsheet_structure" src="https://user-images.githubusercontent.com/2669419/113356315-09511280-9310-11eb-9b18-b2cb2706fedf.png">
 
