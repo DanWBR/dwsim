@@ -21,6 +21,7 @@ Imports Microsoft.VisualBasic.Strings
 Imports NetOffice
 Imports Excel = NetOffice.ExcelApi
 Imports NetOffice.ExcelApi.Enums
+Imports System.IO
 
 Public Class ExcelUOEditorForm
     Public FilePath As String
@@ -62,16 +63,16 @@ Public Class ExcelUOEditorForm
         OpenFileDialog1.ValidateNames = False
         OpenFileDialog1.CheckFileExists = False
         OpenFileDialog1.CheckPathExists = True
-        OpenFileDialog1.InitialDirectory = IO.Path.GetDirectoryName(FileName)
+        OpenFileDialog1.InitialDirectory = Path.GetDirectoryName(FileName)
 
         If OpenFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
             Dim s As String = OpenFileDialog1.FileName
-            If IO.Path.GetExtension(s).ToLower = ".ods" Then
-                FileCopy(My.Application.Info.DirectoryPath & IO.Path.DirectorySeparatorChar & "TemplateExcelUO.ods", s)
-            ElseIf IO.Path.GetExtension(s).ToLower = ".xls" Then
-                FileCopy(My.Application.Info.DirectoryPath & IO.Path.DirectorySeparatorChar & "TemplateExcelUO.xls", s)
+            If Path.GetExtension(s).ToLower = ".ods" Then
+                FileCopy(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "TemplateExcelUO.ods", s)
+            ElseIf Path.GetExtension(s).ToLower = ".xls" Then
+                FileCopy(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "TemplateExcelUO.xls", s)
             Else
-                FileCopy(My.Application.Info.DirectoryPath & IO.Path.DirectorySeparatorChar & "TemplateExcelUO.xlsx", s)
+                FileCopy(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "TemplateExcelUO.xlsx", s)
             End If
             TbFileName.Text = s
         End If

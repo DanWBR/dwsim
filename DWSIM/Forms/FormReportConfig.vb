@@ -320,11 +320,11 @@ Public Class FormReportConfig
         Dim MyReport As New NeoDataType.MyNeoReport.Report
         Select Case My.Settings.CultureInfo
             Case "pt-BR"
-                Using filestr As IO.Stream = Reflection.Assembly.GetExecutingAssembly.GetManifestResourceStream("DWSIM.report_pt-BR.mr6")
+                Using filestr As Stream = Reflection.Assembly.GetExecutingAssembly.GetManifestResourceStream("DWSIM.report_pt-BR.mr6")
                     MyReport.LoadFrom(filestr)
                 End Using
             Case Else
-                Using filestr As IO.Stream = Reflection.Assembly.GetExecutingAssembly.GetManifestResourceStream("DWSIM.report_en-US.mr6")
+                Using filestr As Stream = Reflection.Assembly.GetExecutingAssembly.GetManifestResourceStream("DWSIM.report_en-US.mr6")
                     MyReport.LoadFrom(filestr)
                 End Using
         End Select
@@ -355,11 +355,11 @@ Public Class FormReportConfig
         Dim MyReport As New NeoDataType.MyNeoReport.Report
         Select Case My.Settings.CultureInfo
             Case "pt-BR"
-                Using filestr As IO.Stream = Reflection.Assembly.GetExecutingAssembly.GetManifestResourceStream("DWSIM.report_pt-BR.mr6")
+                Using filestr As Stream = Reflection.Assembly.GetExecutingAssembly.GetManifestResourceStream("DWSIM.report_pt-BR.mr6")
                     MyReport.LoadFrom(filestr)
                 End Using
             Case Else
-                Using filestr As IO.Stream = Reflection.Assembly.GetExecutingAssembly.GetManifestResourceStream("DWSIM.report_en-US.mr6")
+                Using filestr As Stream = Reflection.Assembly.GetExecutingAssembly.GetManifestResourceStream("DWSIM.report_en-US.mr6")
                     MyReport.LoadFrom(filestr)
                 End Using
         End Select
@@ -397,7 +397,7 @@ Public Class FormReportConfig
                         Me.DT.WriteXml(sri)
                         sri.Position = 0
                         ' xslInput is a string that contains xsl
-                        Using filestr As IO.Stream = Reflection.Assembly.GetExecutingAssembly.GetManifestResourceStream("DWSIM.report_transform.xsl")
+                        Using filestr As Stream = Reflection.Assembly.GetExecutingAssembly.GetManifestResourceStream("DWSIM.report_transform.xsl")
                             Using xrt As XmlReader = XmlReader.Create(filestr)
                                 Using xri As XmlReader = XmlReader.Create(sri)
                                     Dim xslt As New XslCompiledTransform()
@@ -709,7 +709,7 @@ Public Class FormReportConfig
             csvtext.AppendLine()
         Loop Until i >= DT.Rows.Count
 
-        IO.File.WriteAllText(Me.filename, csvtext.ToString)
+        File.WriteAllText(Me.filename, csvtext.ToString)
 
     End Sub
 

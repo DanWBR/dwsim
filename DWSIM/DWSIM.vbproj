@@ -316,8 +316,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Eto.Forms\Release\net45\Eto.Wpf.dll</HintPath>
     </Reference>
-    <Reference Include="ExcelApi">
-      <HintPath>References\ExcelApi.dll</HintPath>
+    <Reference Include="ExcelApi, Version=1.8.1.0, Culture=neutral, PublicKeyToken=9084b9221296229e, processorArchitecture=MSIL">
+      <HintPath>..\packages\NetOfficeFw.Excel.1.8.1\lib\net40\ExcelApi.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="GenericDictionaryEditor">
@@ -379,8 +379,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\NeoDataType.MyNeoReport.dll</HintPath>
     </Reference>
-    <Reference Include="NetOffice">
-      <HintPath>References\NetOffice.dll</HintPath>
+    <Reference Include="NetOffice, Version=1.8.1.0, Culture=neutral, PublicKeyToken=297f57b43ae7c1de, processorArchitecture=MSIL">
+      <HintPath>..\packages\NetOfficeFw.Core.1.8.1\lib\net40\NetOffice.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -389,6 +389,10 @@
     <Reference Include="Nini, Version=1.1.0.0, Culture=neutral, PublicKeyToken=691faec150a7fa7b, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Nini.dll</HintPath>
+    </Reference>
+    <Reference Include="OfficeApi, Version=1.8.1.0, Culture=neutral, PublicKeyToken=a39beb0835c43c8e, processorArchitecture=MSIL">
+      <HintPath>..\packages\NetOfficeFw.Core.1.8.1\lib\net40\OfficeApi.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="OpenTK, Version=3.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
       <HintPath>..\packages\OpenTK.3.1.0\lib\net20\OpenTK.dll</HintPath>
@@ -480,6 +484,10 @@
     </Reference>
     <Reference Include="unvell.ReoScript.EditorLib">
       <HintPath>References\ReoGrid.WinForms\unvell.ReoScript.EditorLib.dll</HintPath>
+    </Reference>
+    <Reference Include="VBIDEApi, Version=1.8.1.0, Culture=neutral, PublicKeyToken=931cec8882205047, processorArchitecture=MSIL">
+      <HintPath>..\packages\NetOfficeFw.Core.1.8.1\lib\net40\VBIDEApi.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="Yeppp.CLR.Bundle">
