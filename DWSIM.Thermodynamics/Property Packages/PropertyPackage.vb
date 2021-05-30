@@ -12045,9 +12045,12 @@ Final3:
                     VaporPhaseFugacityCalculationMode = [Enum].Parse(VaporPhaseFugacityCalculationMode.GetType, (From el As XElement In data Select el Where el.Name = "VaporPhaseFugacityCalculationMode").FirstOrDefault.Value)
                     SolidPhaseFugacityCalculationMethod = [Enum].Parse(SolidPhaseFugacityCalculationMethod.GetType, (From el As XElement In data Select el Where el.Name = "SolidPhaseFugacityCalculationMethod").FirstOrDefault.Value)
                     EnthalpyEntropyCpCvCalculationMode = [Enum].Parse(EnthalpyEntropyCpCvCalculationMode.GetType, (From el As XElement In data Select el Where el.Name = "EnthalpyEntropyCpCvCalculationMode").FirstOrDefault.Value)
-                    FlashCalculationApproach = [Enum].Parse(FlashCalculationApproach.GetType, (From el As XElement In data Select el Where el.Name = "FlashCalculationApproach").FirstOrDefault.Value)
                 Catch ex As Exception
                 End Try
+            End If
+
+            If (From el As XElement In data Select el Where el.Name = "FlashCalculationApproach").FirstOrDefault IsNot Nothing Then
+                FlashCalculationApproach = [Enum].Parse(FlashCalculationApproach.GetType, (From el As XElement In data Select el Where el.Name = "FlashCalculationApproach").FirstOrDefault.Value)
             End If
 
             Dim jsonoptions As New JsonSerializerSettings With {.StringEscapeHandling = StringEscapeHandling.EscapeHtml, .Formatting = Formatting.Indented}

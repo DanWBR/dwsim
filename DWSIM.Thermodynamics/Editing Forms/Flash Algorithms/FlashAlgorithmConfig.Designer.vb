@@ -37,17 +37,14 @@ Partial Class FlashAlgorithmConfig
         Me.cbFlashType = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.tbPT_DampingFactor = New System.Windows.Forms.TextBox()
-        Me.Label13 = New System.Windows.Forms.Label()
         Me.Label30 = New System.Windows.Forms.Label()
         Me.tbPH_MaxDT = New System.Windows.Forms.TextBox()
         Me.Label29 = New System.Windows.Forms.Label()
         Me.Label26 = New System.Windows.Forms.Label()
-        Me.tbFlashValidationTolerance = New System.Windows.Forms.TextBox()
         Me.tbPV_EpsilonT = New System.Windows.Forms.TextBox()
         Me.tbPV_DampingFactor = New System.Windows.Forms.TextBox()
         Me.chkValidateEqCalc = New System.Windows.Forms.CheckBox()
         Me.Label25 = New System.Windows.Forms.Label()
-        Me.Label12 = New System.Windows.Forms.Label()
         Me.tbPV_MaxDT = New System.Windows.Forms.TextBox()
         Me.Label24 = New System.Windows.Forms.Label()
         Me.TabPageConvPars = New System.Windows.Forms.TabPage()
@@ -102,17 +99,14 @@ Partial Class FlashAlgorithmConfig
         Me.GroupBox4.Controls.Add(Me.cbFlashType)
         Me.GroupBox4.Controls.Add(Me.Label9)
         Me.GroupBox4.Controls.Add(Me.tbPT_DampingFactor)
-        Me.GroupBox4.Controls.Add(Me.Label13)
         Me.GroupBox4.Controls.Add(Me.Label30)
         Me.GroupBox4.Controls.Add(Me.tbPH_MaxDT)
         Me.GroupBox4.Controls.Add(Me.Label29)
         Me.GroupBox4.Controls.Add(Me.Label26)
-        Me.GroupBox4.Controls.Add(Me.tbFlashValidationTolerance)
         Me.GroupBox4.Controls.Add(Me.tbPV_EpsilonT)
         Me.GroupBox4.Controls.Add(Me.tbPV_DampingFactor)
         Me.GroupBox4.Controls.Add(Me.chkValidateEqCalc)
         Me.GroupBox4.Controls.Add(Me.Label25)
-        Me.GroupBox4.Controls.Add(Me.Label12)
         Me.GroupBox4.Controls.Add(Me.tbPV_MaxDT)
         Me.GroupBox4.Controls.Add(Me.Label24)
         Me.GroupBox4.Name = "GroupBox4"
@@ -184,11 +178,6 @@ Partial Class FlashAlgorithmConfig
         resources.ApplyResources(Me.tbPT_DampingFactor, "tbPT_DampingFactor")
         Me.tbPT_DampingFactor.Name = "tbPT_DampingFactor"
         '
-        'Label13
-        '
-        resources.ApplyResources(Me.Label13, "Label13")
-        Me.Label13.Name = "Label13"
-        '
         'Label30
         '
         resources.ApplyResources(Me.Label30, "Label30")
@@ -209,11 +198,6 @@ Partial Class FlashAlgorithmConfig
         resources.ApplyResources(Me.Label26, "Label26")
         Me.Label26.Name = "Label26"
         '
-        'tbFlashValidationTolerance
-        '
-        resources.ApplyResources(Me.tbFlashValidationTolerance, "tbFlashValidationTolerance")
-        Me.tbFlashValidationTolerance.Name = "tbFlashValidationTolerance"
-        '
         'tbPV_EpsilonT
         '
         resources.ApplyResources(Me.tbPV_EpsilonT, "tbPV_EpsilonT")
@@ -233,11 +217,6 @@ Partial Class FlashAlgorithmConfig
         '
         resources.ApplyResources(Me.Label25, "Label25")
         Me.Label25.Name = "Label25"
-        '
-        'Label12
-        '
-        resources.ApplyResources(Me.Label12, "Label12")
-        Me.Label12.Name = "Label12"
         '
         'tbPV_MaxDT
         '
@@ -400,10 +379,7 @@ Partial Class FlashAlgorithmConfig
     Friend WithEvents chkFastModeNL As System.Windows.Forms.CheckBox
     Friend WithEvents TabPageGeneral As System.Windows.Forms.TabPage
     Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
-    Friend WithEvents Label13 As System.Windows.Forms.Label
-    Friend WithEvents tbFlashValidationTolerance As System.Windows.Forms.TextBox
     Public WithEvents chkValidateEqCalc As System.Windows.Forms.CheckBox
-    Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents tbPV_DampingFactor As TextBox
     Friend WithEvents tbPV_MaxDT As TextBox
     Friend WithEvents Label24 As Label

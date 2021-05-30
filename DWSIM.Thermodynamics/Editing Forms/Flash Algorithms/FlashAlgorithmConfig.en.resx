@@ -227,12 +227,6 @@
   <data name="tbPT_DampingFactor.Size" type="System.Drawing.Size, System.Drawing">
     <value>205, 20</value>
   </data>
-  <data name="Label13.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="Label13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>571, 129</value>
-  </data>
   <data name="Label30.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 328</value>
   </data>
@@ -269,15 +263,6 @@
   <data name="Label26.Text" xml:space="preserve">
     <value>PV Flash - Temperature Delta for K-value Numerical Derivative Calculation</value>
   </data>
-  <data name="tbFlashValidationTolerance.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="tbFlashValidationTolerance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>448, 126</value>
-  </data>
-  <data name="tbFlashValidationTolerance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 20</value>
-  </data>
   <data name="tbPV_EpsilonT.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
@@ -313,18 +298,6 @@
   </data>
   <data name="Label25.Text" xml:space="preserve">
     <value>PV Flash - Maximum Temperature Update Delta (K) (1.0 - 50.0)</value>
-  </data>
-  <data name="Label12.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>383, 129</value>
-  </data>
-  <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 13</value>
-  </data>
-  <data name="Label12.Text" xml:space="preserve">
-    <value>Tolerance</value>
   </data>
   <data name="tbPV_MaxDT.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
