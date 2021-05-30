@@ -8,6 +8,8 @@ Public Class FlashAlgorithmConfig
 
     Public Property Settings As Dictionary(Of Interfaces.Enums.FlashSetting, String)
 
+    Public Property PropPack As PropertyPackages.PropertyPackage
+
     Dim ci As Globalization.CultureInfo
 
     Private _loaded As Boolean = False
@@ -53,8 +55,6 @@ Public Class FlashAlgorithmConfig
 
         chkHandleSolids.Checked = Settings(Interfaces.Enums.FlashSetting.HandleSolidsInDefaultEqCalcMode)
 
-        chkUseIOFlash.Checked = Settings(Interfaces.Enums.FlashSetting.UseIOFlash)
-
         chkDoPhaseId.Checked = Settings(Interfaces.Enums.FlashSetting.UsePhaseIdentificationAlgorithm)
 
         chkCalcBubbleDew.Checked = Settings(Interfaces.Enums.FlashSetting.CalculateBubbleAndDewPoints)
@@ -71,6 +71,8 @@ Public Class FlashAlgorithmConfig
             Case "SVLLE"
                 cbFlashType.SelectedIndex = 4
         End Select
+
+        cbFlashApproach.SelectedIndex = PropPack.FlashCalculationApproach
 
         _loaded = True
 
@@ -124,11 +126,11 @@ Public Class FlashAlgorithmConfig
 
             Settings(Interfaces.Enums.FlashSetting.HandleSolidsInDefaultEqCalcMode) = chkHandleSolids.Checked
 
-            Settings(Interfaces.Enums.FlashSetting.UseIOFlash) = chkUseIOFlash.Checked
-
             Settings(Interfaces.Enums.FlashSetting.UsePhaseIdentificationAlgorithm) = chkDoPhaseId.Checked
 
             Settings(Interfaces.Enums.FlashSetting.CalculateBubbleAndDewPoints) = chkCalcBubbleDew.Checked
+
+            PropPack.FlashCalculationApproach = cbFlashApproach.SelectedIndex
 
         Catch ex As Exception
 
@@ -149,10 +151,32 @@ Public Class FlashAlgorithmConfig
         Else
             chkHandleSolids.Enabled = False
         End If
-        If cbFlashType.SelectedIndex < 3 Then
-            chkUseIOFlash.Enabled = True
+        If cbFlashApproach.SelectedIndex = 0 Then
+            gpNL.Enabled = True
         Else
-            chkUseIOFlash.Enabled = False
+            gpNL.Enabled = False
+        End If
+        If cbFlashApproach.SelectedIndex = 1 Then
+            Select Case cbFlashType.SelectedIndex
+                Case 3, 4
+                    MessageBox.Show("Inside-Out doesn't support solid calculations. Please select another method.", "Error")
+                    cbFlashApproach.SelectedIndex = 0
+            End Select
+        End If
+    End Sub
+
+    Private Sub cbFlashApproach_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbFlashApproach.SelectedIndexChanged
+        If cbFlashApproach.SelectedIndex = 0 Then
+            gpNL.Enabled = True
+        Else
+            gpNL.Enabled = False
+        End If
+        If cbFlashApproach.SelectedIndex = 1 Then
+            Select Case cbFlashType.SelectedIndex
+                Case 3, 4
+                    MessageBox.Show("Inside-Out doesn't support solid calculations. Please select another method.", "Error")
+                    cbFlashApproach.SelectedIndex = 0
+            End Select
         End If
     End Sub
 

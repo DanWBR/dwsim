@@ -194,6 +194,12 @@ Namespace PropertyPackages
             Ideal = 1
         End Enum
 
+        Public Enum FlashCalculationApproachType
+            NestedLoops = 0
+            InsideOut = 1
+            GibbsMinimization = 2
+        End Enum
+
 #End Region
 
 #Region "   Property Calculation Settings"
@@ -233,6 +239,8 @@ Namespace PropertyPackages
         Public Property IgnoreSalinityLimit As Boolean = False
 
         Public Property CalculateAdditionalMaterialStreamProperties As Boolean = True
+
+        Public Property FlashCalculationApproach As FlashCalculationApproachType = FlashCalculationApproachType.NestedLoops
 
         ''' <summary>
         ''' ' For mobile compatibility only.
@@ -484,6 +492,20 @@ Namespace PropertyPackages
             End Get
         End Property
 
+        Private Function GetFlash() As Auxiliary.FlashAlgorithms.FlashAlgorithm
+            If FlashCalculationApproach = FlashCalculationApproachType.GibbsMinimization Then
+                Return New GibbsMinimizationMulti() With {.FlashSettings = FlashSettings}
+            Else
+                If FlashCalculationApproach = FlashCalculationApproachType.InsideOut Then
+                    FlashSettings(FlashSetting.UseIOFlash) = True
+                Else
+                    FlashSettings(FlashSetting.UseIOFlash) = False
+                End If
+                Return New UniversalFlash() With {.FlashSettings = FlashSettings}
+            End If
+        End Function
+
+
         ''' <summary>
         ''' Returns the FlashAlgorithm object instance for this property package.
         ''' </summary>
@@ -494,15 +516,15 @@ Namespace PropertyPackages
 
             Get
                 If GlobalSettings.Settings.CAPEOPENMode Then
-                    Return New UniversalFlash() With {.FlashSettings = FlashSettings}
+                    Return GetFlash()
                 Else
                     If CurrentMaterialStream IsNot Nothing Then
                         Select Case CurrentMaterialStream.ForcePhase
                             Case ForcedPhase.None
-                                Return New UniversalFlash() With {.FlashSettings = FlashSettings}
+                                Return GetFlash()
                             Case ForcedPhase.GlobalDef
                                 If CurrentMaterialStream.Flowsheet.FlowsheetOptions.ForceStreamPhase = ForcedPhase.None Then
-                                    Return New UniversalFlash() With {.FlashSettings = FlashSettings}
+                                    Return GetFlash()
                                 Else
                                     Return New ForcedPhaseFlash() With {.ForcePhase = CurrentMaterialStream.Flowsheet.FlowsheetOptions.ForceStreamPhase}
                                 End If
@@ -510,7 +532,7 @@ Namespace PropertyPackages
                                 Return New ForcedPhaseFlash() With {.ForcePhase = CurrentMaterialStream.ForcePhase}
                         End Select
                     Else
-                        Return New UniversalFlash() With {.FlashSettings = FlashSettings}
+                        Return GetFlash()
                     End If
                 End If
             End Get
@@ -7251,7 +7273,7 @@ Final3:
 
             IObj?.Paragraphs.Add("<mi>T_{c},P_{c}</mi> Component critical properties")
 
-            IObj?.Paragraphs.Add("<mi>\rho_{r}</mi> Reduced density, <mi>\rho/\rho_{c}=V/V_{c}</mi>")
+            IObj?.Paragraphs.Add("<mi>\rho_{r}</mi> Reduced density, <mi>\rho/\rho_{c}=V_{c}/V</mi>")
 
             IObj?.Paragraphs.Add("`MM` Molecular weight (kg/kmol)")
 
@@ -12023,6 +12045,7 @@ Final3:
                     VaporPhaseFugacityCalculationMode = [Enum].Parse(VaporPhaseFugacityCalculationMode.GetType, (From el As XElement In data Select el Where el.Name = "VaporPhaseFugacityCalculationMode").FirstOrDefault.Value)
                     SolidPhaseFugacityCalculationMethod = [Enum].Parse(SolidPhaseFugacityCalculationMethod.GetType, (From el As XElement In data Select el Where el.Name = "SolidPhaseFugacityCalculationMethod").FirstOrDefault.Value)
                     EnthalpyEntropyCpCvCalculationMode = [Enum].Parse(EnthalpyEntropyCpCvCalculationMode.GetType, (From el As XElement In data Select el Where el.Name = "EnthalpyEntropyCpCvCalculationMode").FirstOrDefault.Value)
+                    FlashCalculationApproach = [Enum].Parse(FlashCalculationApproach.GetType, (From el As XElement In data Select el Where el.Name = "FlashCalculationApproach").FirstOrDefault.Value)
                 Catch ex As Exception
                 End Try
             End If
@@ -12513,6 +12536,7 @@ Final3:
                 .Add(New XElement("IgnoreVaporFractionLimit", IgnoreVaporFractionLimit))
                 .Add(New XElement("IgnoreSalinityLimit", IgnoreSalinityLimit))
                 .Add(New XElement("CalculateAdditionalMaterialStreamProperties", CalculateAdditionalMaterialStreamProperties))
+                .Add(New XElement("FlashCalculationApproach", FlashCalculationApproach))
 
                 Dim jsonoptions As New JsonSerializerSettings With {.StringEscapeHandling = StringEscapeHandling.EscapeHtml, .Formatting = Formatting.Indented}
 
@@ -12839,6 +12863,7 @@ Final3:
         Public Sub DisplayFlashConfigForm()
             Dim fset As New FlashAlgorithmConfig
             fset.Settings = FlashSettings
+            fset.PropPack = Me
             If Settings.IsRunningOnMono() Then
                 fset.ShowDialog()
             Else
@@ -12862,6 +12887,7 @@ Final3:
 
                 Dim fset As New FlashAlgorithmConfig
                 fset.Settings = FlashSettings
+                fset.PropPack = Me
                 fset.TopLevel = False
                 fset.FormBorderStyle = FormBorderStyle.None
                 fset.Dock = DockStyle.Fill

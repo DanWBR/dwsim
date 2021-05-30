@@ -96,9 +96,8 @@ Partial Class FormSimulSettings
         Me.chkUsePassword = New System.Windows.Forms.CheckBox()
         Me.PanelPP = New System.Windows.Forms.Panel()
         Me.GroupBox12 = New System.Windows.Forms.GroupBox()
-        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.btnConfigPP = New System.Windows.Forms.Button()
         Me.btnDeletePP = New System.Windows.Forms.Button()
+        Me.btnConfigPP = New System.Windows.Forms.Button()
         Me.btnCopyPP = New System.Windows.Forms.Button()
         Me.dgvpp = New System.Windows.Forms.DataGridView()
         Me.Column18 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -166,7 +165,6 @@ Partial Class FormSimulSettings
         Me.GroupBox9.SuspendLayout()
         Me.PanelPP.SuspendLayout()
         Me.GroupBox12.SuspendLayout()
-        Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.dgvpp, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox6.SuspendLayout()
         CType(Me.DataGridViewPP, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -700,27 +698,13 @@ Partial Class FormSimulSettings
         'GroupBox12
         '
         resources.ApplyResources(Me.GroupBox12, "GroupBox12")
-        Me.GroupBox12.Controls.Add(Me.TableLayoutPanel1)
+        Me.GroupBox12.Controls.Add(Me.btnDeletePP)
+        Me.GroupBox12.Controls.Add(Me.btnConfigPP)
+        Me.GroupBox12.Controls.Add(Me.btnCopyPP)
         Me.GroupBox12.Controls.Add(Me.dgvpp)
         Me.GroupBox12.Name = "GroupBox12"
         Me.GroupBox12.TabStop = False
         Me.ToolTip1.SetToolTip(Me.GroupBox12, resources.GetString("GroupBox12.ToolTip"))
-        '
-        'TableLayoutPanel1
-        '
-        resources.ApplyResources(Me.TableLayoutPanel1, "TableLayoutPanel1")
-        Me.TableLayoutPanel1.Controls.Add(Me.btnConfigPP, 0, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.btnDeletePP, 2, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.btnCopyPP, 1, 0)
-        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-        Me.ToolTip1.SetToolTip(Me.TableLayoutPanel1, resources.GetString("TableLayoutPanel1.ToolTip"))
-        '
-        'btnConfigPP
-        '
-        resources.ApplyResources(Me.btnConfigPP, "btnConfigPP")
-        Me.btnConfigPP.Image = Global.DWSIM.My.Resources.Resources.cog
-        Me.btnConfigPP.Name = "btnConfigPP"
-        Me.ToolTip1.SetToolTip(Me.btnConfigPP, resources.GetString("btnConfigPP.ToolTip"))
         '
         'btnDeletePP
         '
@@ -728,6 +712,13 @@ Partial Class FormSimulSettings
         Me.btnDeletePP.Image = Global.DWSIM.My.Resources.Resources.cross
         Me.btnDeletePP.Name = "btnDeletePP"
         Me.ToolTip1.SetToolTip(Me.btnDeletePP, resources.GetString("btnDeletePP.ToolTip"))
+        '
+        'btnConfigPP
+        '
+        resources.ApplyResources(Me.btnConfigPP, "btnConfigPP")
+        Me.btnConfigPP.Image = Global.DWSIM.My.Resources.Resources.cog
+        Me.btnConfigPP.Name = "btnConfigPP"
+        Me.ToolTip1.SetToolTip(Me.btnConfigPP, resources.GetString("btnConfigPP.ToolTip"))
         '
         'btnCopyPP
         '
@@ -828,7 +819,7 @@ Partial Class FormSimulSettings
         'Button8
         '
         resources.ApplyResources(Me.Button8, "Button8")
-        Me.Button8.Image = Global.DWSIM.My.Resources.Resources.add
+        Me.Button8.Image = Global.DWSIM.My.Resources.Resources.arrow_right
         Me.Button8.Name = "Button8"
         Me.ToolTip1.SetToolTip(Me.Button8, resources.GetString("Button8.ToolTip"))
         '
@@ -1212,8 +1203,7 @@ Partial Class FormSimulSettings
         Me.GroupBox9.ResumeLayout(False)
         Me.PanelPP.ResumeLayout(False)
         Me.GroupBox12.ResumeLayout(False)
-        Me.TableLayoutPanel1.ResumeLayout(False)
-        Me.TableLayoutPanel1.PerformLayout()
+        Me.GroupBox12.PerformLayout()
         CType(Me.dgvpp, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox6.ResumeLayout(False)
         CType(Me.DataGridViewPP, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1358,7 +1348,6 @@ Partial Class FormSimulSettings
     Friend WithEvents Column9 As DataGridViewTextBoxColumn
     Friend WithEvents Column7 As DataGridViewTextBoxColumn
     Friend WithEvents Column5 As DataGridViewCheckBoxColumn
-    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents GroupBox4 As GroupBox
     Friend WithEvents chkSkipEqCalcs As CheckBox
     Friend WithEvents Button5 As Button

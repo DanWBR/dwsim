@@ -327,7 +327,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABo
-        MQAAAk1TRnQBSQFMAgEBCgEAAZQBDAGUAQwBEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        MQAAAk1TRnQBSQFMAgEBCgEAAaQBDAGkAQwBEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABMAMAAQEBAAEgBgABMDEAAQEDOwFkAWUCUgH0AbICgQH/Aa8CgQH/AWICSAH2AUICQQFzIAADLQFG
         AVkCVgG+AVsCWQHEATECMAFNAWACWQHrAQABgQEAAf8DAwEEpAADKAE9AWQCXAHnAbICgQH/AcsBqwGJ
         Af8B0QG0AZUB/wG7AY4BgQH/AbUBhwGBAf8BqwKBAf8BYAJZAesDLQFGEAADHgErAVECTwGlA38B/gGP
@@ -799,20 +799,11 @@
   <data name="chkUsePassword.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="btnConfigPP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 23</value>
-  </data>
-  <data name="btnConfigPP.Text" xml:space="preserve">
-    <value>Configure</value>
-  </data>
-  <data name="btnConfigPP.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="btnDeletePP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>275, 3</value>
+    <value>353, 112</value>
   </data>
   <data name="btnDeletePP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 23</value>
+    <value>62, 41</value>
   </data>
   <data name="btnDeletePP.Text" xml:space="preserve">
     <value>Delete</value>
@@ -820,25 +811,28 @@
   <data name="btnDeletePP.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="btnConfigPP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>353, 16</value>
+  </data>
+  <data name="btnConfigPP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 41</value>
+  </data>
+  <data name="btnConfigPP.Text" xml:space="preserve">
+    <value>Configure</value>
+  </data>
+  <data name="btnConfigPP.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="btnCopyPP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>139, 3</value>
+    <value>353, 65</value>
   </data>
   <data name="btnCopyPP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 23</value>
+    <value>62, 41</value>
   </data>
   <data name="btnCopyPP.Text" xml:space="preserve">
     <value>Copy</value>
   </data>
   <data name="btnCopyPP.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="TableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 342</value>
-  </data>
-  <data name="TableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>415, 29</value>
-  </data>
-  <data name="TableLayoutPanel1.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="Column16.HeaderText" xml:space="preserve">
@@ -848,7 +842,7 @@
     <value>Type</value>
   </data>
   <data name="dgvpp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>415, 323</value>
+    <value>344, 352</value>
   </data>
   <data name="dgvpp.ToolTip" xml:space="preserve">
     <value />
@@ -876,22 +870,19 @@
     <value>85</value>
   </data>
   <data name="DataGridViewPP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>397, 323</value>
+    <value>341, 352</value>
   </data>
   <data name="DataGridViewPP.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="Button8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 345</value>
+    <value>350, 16</value>
   </data>
   <data name="Button8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>400, 23</value>
+    <value>50, 41</value>
   </data>
   <data name="Button8.Text" xml:space="preserve">
     <value>Add</value>
-  </data>
-  <data name="Button8.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
   </data>
   <data name="Button8.ToolTip" xml:space="preserve">
     <value />
