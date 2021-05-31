@@ -49,6 +49,7 @@ Partial Class FormOptions
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.chkEnableSIMD = New System.Windows.Forms.CheckBox()
         Me.GroupBox8 = New System.Windows.Forms.GroupBox()
@@ -295,6 +296,7 @@ Partial Class FormOptions
         'GroupBox7
         '
         resources.ApplyResources(Me.GroupBox7, "GroupBox7")
+        Me.GroupBox7.Controls.Add(Me.Button1)
         Me.GroupBox7.Controls.Add(Me.Label4)
         Me.GroupBox7.Controls.Add(Me.chkEnableSIMD)
         Me.GroupBox7.Controls.Add(Me.GroupBox8)
@@ -303,6 +305,12 @@ Partial Class FormOptions
         Me.GroupBox7.Controls.Add(Me.chkEnableParallelCalcs)
         Me.GroupBox7.Name = "GroupBox7"
         Me.GroupBox7.TabStop = False
+        '
+        'Button1
+        '
+        resources.ApplyResources(Me.Button1, "Button1")
+        Me.Button1.Name = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'Label4
         '
@@ -1023,4 +1031,5 @@ Partial Class FormOptions
     Friend WithEvents ComboBoxUILanguage As ComboBox
     Friend WithEvents Label22 As Label
     Public WithEvents chkEditorDoubleClick As CheckBox
+    Friend WithEvents Button1 As Button
 End Class

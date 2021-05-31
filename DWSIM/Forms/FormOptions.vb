@@ -111,44 +111,6 @@ Public Class FormOptions
                 Me.ComboBoxUILanguage.SelectedIndex = 1
         End Select
 
-        Me.cbGPU.Items.Clear()
-
-        Task.Factory.StartNew(Function()
-                                  Dim list As New List(Of String)
-                                  Try
-                                      CudafyModes.Target = eGPUType.Cuda
-                                      For Each prop As GPGPUProperties In CudafyHost.GetDeviceProperties(CudafyModes.Target, False)
-                                          list.Add("CUDA | " & prop.Name & " (" & prop.DeviceId & ")")
-                                      Next
-                                  Catch ex As Exception
-
-                                  End Try
-                                  Try
-                                      CudafyModes.Target = eGPUType.OpenCL
-                                      For Each prop As GPGPUProperties In CudafyHost.GetDeviceProperties(CudafyModes.Target, False)
-                                          list.Add("OpenCL | " & prop.Name & " (" & prop.DeviceId & ")")
-                                      Next
-                                  Catch ex As Exception
-
-                                  End Try
-                                  Return list
-                              End Function).ContinueWith(Sub(t)
-                                                             Me.chkEnableGPUProcessing.Enabled = t.Result.Count > 0
-                                                             Me.cbGPU.Items.AddRange(t.Result.ToArray)
-                                                             CudafyModes.Target = My.Settings.CudafyTarget
-                                                             If My.Settings.SelectedGPU <> "" Then
-                                                                 For Each s As String In Me.cbGPU.Items
-                                                                     If s = My.Settings.SelectedGPU Then
-                                                                         Me.cbGPU.SelectedItem = s
-                                                                         Exit For
-                                                                     End If
-                                                                 Next
-                                                             Else
-                                                                 'If Me.cbGPU.Items.Count > 0 Then Me.cbGPU.SelectedIndex = 0
-                                                             End If
-                                                             loaded = True
-                                                         End Sub, TaskScheduler.FromCurrentSynchronizationContext)
-
     End Sub
 
     Public Sub GetCUDACaps(prop As GPGPUProperties)
@@ -641,4 +603,47 @@ Public Class FormOptions
         My.Settings.PythonPath = tbPythonPath.Text
         GlobalSettings.Settings.PythonPath = tbPythonPath.Text
     End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        Me.cbGPU.Items.Clear()
+
+        Task.Factory.StartNew(Function()
+                                  Dim list As New List(Of String)
+                                  Try
+                                      CudafyModes.Target = eGPUType.Cuda
+                                      For Each prop As GPGPUProperties In CudafyHost.GetDeviceProperties(CudafyModes.Target, False)
+                                          list.Add("CUDA | " & prop.Name & " (" & prop.DeviceId & ")")
+                                      Next
+                                  Catch ex As Exception
+
+                                  End Try
+                                  Try
+                                      CudafyModes.Target = eGPUType.OpenCL
+                                      For Each prop As GPGPUProperties In CudafyHost.GetDeviceProperties(CudafyModes.Target, False)
+                                          list.Add("OpenCL | " & prop.Name & " (" & prop.DeviceId & ")")
+                                      Next
+                                  Catch ex As Exception
+
+                                  End Try
+                                  Return list
+                              End Function).ContinueWith(Sub(t)
+                                                             Me.chkEnableGPUProcessing.Enabled = t.Result.Count > 0
+                                                             Me.cbGPU.Items.AddRange(t.Result.ToArray)
+                                                             CudafyModes.Target = My.Settings.CudafyTarget
+                                                             If My.Settings.SelectedGPU <> "" Then
+                                                                 For Each s As String In Me.cbGPU.Items
+                                                                     If s = My.Settings.SelectedGPU Then
+                                                                         Me.cbGPU.SelectedItem = s
+                                                                         Exit For
+                                                                     End If
+                                                                 Next
+                                                             Else
+                                                                 'If Me.cbGPU.Items.Count > 0 Then Me.cbGPU.SelectedIndex = 0
+                                                             End If
+                                                             loaded = True
+                                                         End Sub, TaskScheduler.FromCurrentSynchronizationContext)
+
+    End Sub
+
 End Class
