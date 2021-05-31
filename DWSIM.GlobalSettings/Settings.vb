@@ -174,11 +174,12 @@ Public Class Settings
 
     End Function
 
-    Shared Sub SetPythonPath()
+    Shared Sub SetPythonPath(Optional ByVal pythonpath As String = "")
 
         If RunningPlatform() = Platform.Windows Then
 
             Dim ppath As String = GlobalSettings.Settings.PythonPath
+            If pythonpath <> "" Then ppath = pythonpath
 
             If ppath = "" Then
                 Throw New Exception("Python Binaries Path is not defined correctly.")

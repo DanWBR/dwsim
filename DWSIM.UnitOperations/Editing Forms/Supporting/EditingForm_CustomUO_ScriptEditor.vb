@@ -35,6 +35,9 @@ Imports System.Drawing
     Public includes As String()
     Public scripttext As String = ""
 
+    Public interpreter As String = "IronPython"
+    Public pythonpath As String = ""
+
     Public FontSize As Integer = 10
     Public FontName As String = ""
 
@@ -51,7 +54,11 @@ Imports System.Drawing
 
         If CAPEOPEN Then
             Me.Text = "Script Editor"
+            Width = 1024
+            Height = 600
+            ToolStrip2.Visible = True
         Else
+            ToolStrip2.Visible = False
             Me.Text = ScriptUO.GraphicObject.Tag & " - " & Me.Text
         End If
 
@@ -312,5 +319,33 @@ Imports System.Drawing
 
     Private Sub ToolStripButton1_Click_1(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
         Process.Start("https://dwsim.fossee.in/custom-model")
+    End Sub
+
+    Private Sub ToolStripButton4_Click_1(sender As Object, e As EventArgs) Handles ToolStripButton4.Click
+        FolderBrowserDialog1.SelectedPath = pythonpath
+        If FolderBrowserDialog1.ShowDialog() = DialogResult.OK Then
+            pythonpath = FolderBrowserDialog1.SelectedPath
+            ToolStripTextBox1.Text = pythonpath
+        End If
+    End Sub
+
+    Private Sub ToolStripComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ToolStripComboBox1.SelectedIndexChanged
+        interpreter = ToolStripComboBox1.SelectedItem.ToString()
+        If ToolStripComboBox1.SelectedIndex = 0 Then
+            ToolStripLabel2.Enabled = False
+            ToolStripTextBox1.Enabled = False
+            ToolStripButton4.Enabled = False
+        Else
+            ToolStripLabel2.Enabled = True
+            ToolStripTextBox1.Enabled = True
+            ToolStripButton4.Enabled = True
+        End If
+    End Sub
+
+    Private Sub EditingForm_CustomUO_ScriptEditor_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        If CAPEOPEN Then
+            ToolStripTextBox1.Text = pythonpath
+            ToolStripComboBox1.SelectedItem = interpreter
+        End If
     End Sub
 End Class

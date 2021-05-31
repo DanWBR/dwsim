@@ -1,5 +1,5 @@
-﻿'    IronPython Script Unit Operation CAPE-OPEN Wrapper
-'    Copyright 2016 Daniel Wagner O. de Medeiros
+﻿'    Python Script Unit Operation CAPE-OPEN Wrapper
+'    Copyright 2016-2021 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -35,12 +35,16 @@ Imports Microsoft.Scripting.Hosting
 Imports System.Drawing.Text
 Imports System.Drawing
 Imports DWSIM.Interfaces.Interfaces2
+Imports Python.Runtime
 
 Namespace UnitOperations.CAPEOPENWrappers
 
     <Guid(CO_CustomUO.ClassId)> <System.Serializable()> <ComVisible(True)> Public Class CO_CustomUO
 
         Inherits CapeOpenBase
+
+        Private _interpreter As String = "IronPython"
+        Private _pythonpath As String = ""
 
         Private _scripttext As String = ""
         Private _fontname As String = "Consolas"
@@ -63,8 +67,8 @@ Namespace UnitOperations.CAPEOPENWrappers
 
             MyBase.Initialize()
 
-            Me.ComponentName = "Scripting Unit Operation"
-            Me.ComponentDescription = "IronPython Scripting Unit Operation"
+            Me.ComponentName = "Python Script Unit Operation"
+            Me.ComponentDescription = "Python Script Unit Operation"
 
             'parameters
 
@@ -99,6 +103,8 @@ Namespace UnitOperations.CAPEOPENWrappers
                 .Add(New CapeOpen.IntegerParameter("OutletMaterialPorts", "Number of Outlet Material Object Ports", _outletmaterialports, 1, 0, 10, CapeParamMode.CAPE_INPUT))
                 .Add(New CapeOpen.IntegerParameter("InletEnergyPorts", "Number of Inlet Energy Ports", _inletenergyports, 1, 0, 1, CapeParamMode.CAPE_INPUT))
                 .Add(New CapeOpen.IntegerParameter("OutletEnergyPorts", "Number of Outlet Energy Ports", _outletenergyports, 1, 0, 1, CapeParamMode.CAPE_INPUT))
+                .Add(New CapeOpen.OptionParameter("PythonInterpreter", "Python Language Interpreter", _interpreter, "IronPython", New String() {"IronPython", "Python.NET"}, False, CapeParamMode.CAPE_INPUT))
+                .Add(New CapeOpen.OptionParameter("PythonPath", _pythonpath))
             End With
 
         End Sub
@@ -159,57 +165,167 @@ Namespace UnitOperations.CAPEOPENWrappers
                 Case "OutletEnergyPorts"
                     _outletenergyports = DirectCast(Me.Parameters(7), IntegerParameter).Value
                     CreatePorts()
+                Case "PythonInterpreter"
+                    _interpreter = DirectCast(Me.Parameters(8), OptionParameter).Value
+                Case "PythonPath"
+                    _pythonpath = DirectCast(Me.Parameters(9), OptionParameter).Value
             End Select
 
         End Sub
 
         Public Overrides Sub Calculate()
 
-            Dim source As Microsoft.Scripting.Hosting.ScriptSource
-            Try
-                engine = IronPython.Hosting.Python.CreateEngine()
-                engine.Runtime.LoadAssembly(GetType(System.String).Assembly)
-                engine.Runtime.LoadAssembly(GetType(CAPEOPEN110.ICapeIdentification).Assembly)
-                engine.Runtime.LoadAssembly(GetType(CapeOpen.ICapeIdentification).Assembly)
-                engine.Runtime.LoadAssembly(Reflection.Assembly.GetExecutingAssembly)
-                scope = engine.CreateScope()
-                scope.SetVariable("pme", Me._sctxt)
-                scope.SetVariable("this", Me)
-                Dim ocount As Integer = 0
-                For i As Integer = 1 To _inletmaterialports
-                    scope.SetVariable("ims" & i, TryCast(Me.Ports(ocount).connectedObject, ICapeThermoMaterialObject))
-                    ocount += 1
-                Next
-                For i As Integer = 1 To _inletenergyports
-                    scope.SetVariable("ies" & i, TryCast(Me.Ports(ocount).connectedObject, ICapeCollection))
-                    ocount += 1
-                Next
-                For i As Integer = 1 To _outletmaterialports
-                    scope.SetVariable("oms" & i, TryCast(Me.Ports(ocount).connectedObject, ICapeThermoMaterialObject))
-                    ocount += 1
-                Next
-                For i As Integer = 1 To _outletenergyports
-                    scope.SetVariable("oes" & i, TryCast(Me.Ports(ocount).connectedObject, ICapeCollection))
-                    ocount += 1
-                Next
-                Dim txtcode As String = ""
-                txtcode += DirectCast(Me.Parameters(0), OptionParameter).Value
-                source = Me.engine.CreateScriptSourceFromString(txtcode, Microsoft.Scripting.SourceCodeKind.Statements)
-                source.Execute(Me.scope)
-                _lastrun = "Script executed succesfully."
-            Catch ex As Exception
-                Dim ops As ExceptionOperations = engine.GetService(Of ExceptionOperations)()
-                engine = Nothing
-                scope = Nothing
-                source = Nothing
-                _lastrun = "Error executing script: " & ops.FormatException(ex).ToString
-                MessageBox.Show(_lastrun, Me.ComponentName)
-                Throw New CapeOpen.CapeSolvingErrorException(_lastrun, ex)
-            Finally
-                engine = Nothing
-                scope = Nothing
-                source = Nothing
-            End Try
+            _interpreter = DirectCast(Me.Parameters(8), OptionParameter).Value
+            _pythonpath = DirectCast(Me.Parameters(9), OptionParameter).Value
+
+            If _interpreter = "IronPython" Then
+
+                Dim source As Microsoft.Scripting.Hosting.ScriptSource
+
+                Try
+
+                    engine = IronPython.Hosting.Python.CreateEngine()
+                    engine.Runtime.LoadAssembly(GetType(System.String).Assembly)
+                    engine.Runtime.LoadAssembly(GetType(CAPEOPEN110.ICapeIdentification).Assembly)
+                    engine.Runtime.LoadAssembly(GetType(CapeOpen.ICapeIdentification).Assembly)
+                    engine.Runtime.LoadAssembly(Reflection.Assembly.GetExecutingAssembly)
+                    scope = engine.CreateScope()
+                    scope.SetVariable("pme", Me._sctxt)
+                    scope.SetVariable("this", Me)
+                    Dim ocount As Integer = 0
+                    For i As Integer = 1 To _inletmaterialports
+                        scope.SetVariable("ims" & i, TryCast(Me.Ports(ocount).connectedObject, ICapeThermoMaterialObject))
+                        ocount += 1
+                    Next
+                    For i As Integer = 1 To _inletenergyports
+                        scope.SetVariable("ies" & i, TryCast(Me.Ports(ocount).connectedObject, ICapeCollection))
+                        ocount += 1
+                    Next
+                    For i As Integer = 1 To _outletmaterialports
+                        scope.SetVariable("oms" & i, TryCast(Me.Ports(ocount).connectedObject, ICapeThermoMaterialObject))
+                        ocount += 1
+                    Next
+                    For i As Integer = 1 To _outletenergyports
+                        scope.SetVariable("oes" & i, TryCast(Me.Ports(ocount).connectedObject, ICapeCollection))
+                        ocount += 1
+                    Next
+                    Dim txtcode As String = ""
+                    txtcode += DirectCast(Me.Parameters(0), OptionParameter).Value
+                    source = Me.engine.CreateScriptSourceFromString(txtcode, Microsoft.Scripting.SourceCodeKind.Statements)
+                    source.Execute(Me.scope)
+                    _lastrun = "Script executed succesfully."
+
+                Catch ex As Exception
+
+                    Dim ops As ExceptionOperations = engine.GetService(Of ExceptionOperations)()
+                    engine = Nothing
+                    scope = Nothing
+                    source = Nothing
+                    _lastrun = "Error executing script: " & ops.FormatException(ex).ToString
+                    MessageBox.Show(_lastrun, Me.ComponentName)
+                    Throw New CapeOpen.CapeSolvingErrorException(_lastrun, ex)
+
+                Finally
+
+                    scope.RemoveVariable("pme")
+                    For i As Integer = 1 To _inletmaterialports
+                        scope.RemoveVariable("ims")
+                    Next
+                    For i As Integer = 1 To _inletenergyports
+                        scope.RemoveVariable("ies")
+                    Next
+                    For i As Integer = 1 To _outletmaterialports
+                        scope.RemoveVariable("oms")
+                    Next
+                    For i As Integer = 1 To _outletenergyports
+                        scope.RemoveVariable("oes")
+                    Next
+                    engine = Nothing
+                    scope = Nothing
+                    source = Nothing
+
+                    TryCast(_sctxt, IDisposable)?.Dispose()
+                    _sctxt = Nothing
+
+                End Try
+
+            Else
+
+                Try
+
+                    If Not Settings.PythonInitialized Then
+
+                        If Not GlobalSettings.Settings.PythonPathIsSet Then
+                            GlobalSettings.Settings.SetPythonPath(_pythonpath)
+                        End If
+                        PythonEngine.PythonHome = _pythonpath
+                        PythonEngine.Initialize()
+                        Settings.PythonInitialized = True
+
+                        PythonEngine.BeginAllowThreads()
+
+                    End If
+
+                Catch ex As Exception
+
+                    _lastrun = "Error executing script: " & ex.ToString()
+                    MessageBox.Show(_lastrun, Me.ComponentName)
+                    Throw New CapeOpen.CapeSolvingErrorException(_lastrun, ex)
+
+                End Try
+
+                Using Py.GIL
+
+                    Try
+
+                        Dim locals As New PyDict()
+
+                        Dim sys As Object = PythonEngine.ImportModule("sys")
+
+                        Dim codeToRedirectOutput As String = "import sys" & vbCrLf + "from io import BytesIO as StringIO" & vbCrLf + "sys.stdout = mystdout = StringIO()" & vbCrLf + "sys.stdout.flush()" & vbCrLf + "sys.stderr = mystderr = StringIO()" & vbCrLf + "sys.stderr.flush()"
+                        PythonEngine.RunSimpleString(codeToRedirectOutput)
+
+                        locals.SetItem("pme", TryCast(_sctxt, ICapeSimulationContext).ToPython())
+                        locals.SetItem("this", Me.ToPython())
+                        Dim ocount As Integer = 0
+                        For i As Integer = 1 To _inletmaterialports
+                            locals.SetItem("ims" & i, TryCast(Me.Ports(ocount).connectedObject, ICapeThermoMaterialObject).ToPython())
+                            ocount += 1
+                        Next
+                        For i As Integer = 1 To _inletenergyports
+                            locals.SetItem("ies" & i, TryCast(Me.Ports(ocount).connectedObject, ICapeCollection).ToPython())
+                            ocount += 1
+                        Next
+                        For i As Integer = 1 To _outletmaterialports
+                            locals.SetItem("oms" & i, TryCast(Me.Ports(ocount).connectedObject, ICapeThermoMaterialObject).ToPython())
+                            ocount += 1
+                        Next
+                        For i As Integer = 1 To _outletenergyports
+                            locals.SetItem("oes" & i, TryCast(Me.Ports(ocount).connectedObject, ICapeCollection).ToPython())
+                            ocount += 1
+                        Next
+
+                        Dim txtcode As String = ""
+                        txtcode += DirectCast(Me.Parameters(0), OptionParameter).Value
+                        PythonEngine.Exec(txtcode, Nothing, locals.Handle)
+
+                    Catch ex As Exception
+
+                        _lastrun = "Error executing script: " & ex.ToString()
+                        MessageBox.Show(_lastrun, Me.ComponentName)
+                        Throw New CapeOpen.CapeSolvingErrorException(_lastrun, ex)
+
+                    Finally
+
+                        TryCast(_sctxt, IDisposable)?.Dispose()
+                        _sctxt = Nothing
+
+                    End Try
+
+                End Using
+
+
+            End If
 
         End Sub
 
@@ -220,17 +336,23 @@ Namespace UnitOperations.CAPEOPENWrappers
                 .CAPEOPEN = True
                 _fontname = DirectCast(Me.Parameters(1), OptionParameter).Value
                 _fontsize = DirectCast(Me.Parameters(2), OptionParameter).Value
+                _interpreter = DirectCast(Me.Parameters(8), OptionParameter).Value
+                _pythonpath = DirectCast(Me.Parameters(9), OptionParameter).Value
                 .FontName = _fontname
                 .FontSize = _fontsize
                 .txtScript.Text = DirectCast(Me.Parameters(0), OptionParameter).Value
-                '.highlightspaces = DirectCast(Me.Parameters(3), BooleanParameter).Value
+                .interpreter = _interpreter
+                .pythonpath = _pythonpath
                 .ShowDialog()
                 _fontname = .FontName
                 _fontsize = .FontSize
+                _interpreter = .interpreter
+                _pythonpath = .pythonpath
                 DirectCast(Me.Parameters(1), OptionParameter).Value = _fontname
                 DirectCast(Me.Parameters(2), OptionParameter).Value = _fontsize
                 DirectCast(Me.Parameters(0), OptionParameter).Value = .scripttext
-                'DirectCast(Me.Parameters(3), BooleanParameter).Value = .highlightspaces
+                DirectCast(Me.Parameters(8), OptionParameter).Value = .interpreter
+                DirectCast(Me.Parameters(9), OptionParameter).Value = .pythonpath
             End With
             edform.Dispose()
             edform = Nothing
