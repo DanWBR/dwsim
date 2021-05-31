@@ -1128,7 +1128,10 @@ Public Class FormCompoundCreator
 
 
                 If CheckBoxMeltingTemp.Checked Then Me.TextBoxMeltingTemp.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, jb.CalcTf(JGD)), "N") 'melting temperature - temperature of fusion
-                If CheckBoxEnthOfFusion.Checked Then Me.TextBoxEnthOfFusion.Text = Format(jb.CalcHf(JGD), "N") 'enthalpy of fusion - KJ/mol
+                If CheckBoxEnthOfFusion.Checked Then
+                    Me.TextBoxEnthOfFusion.Text = Format(jb.CalcHf(JGD), "N") 'enthalpy of fusion - KJ/mol
+                    Me.TextBoxEnthOfFusion2.Text = (jb.CalcHf(JGD) * 1000 / MM).ToString("N") 'enthalpy of fusion - KJ/mol
+                End If
                 If CheckValidDF(Me.TextBoxPc.Text) Then
                     Tf = SystemsOfUnits.Converter.ConvertToSI(su.temperature, Me.TextBoxMeltingTemp.Text)
                 Else : Tf = -1
@@ -2000,7 +2003,7 @@ Public Class FormCompoundCreator
                     .ycurvetypes = New ArrayList(New Integer() {LT(0), LT(1), LT(2)})
             End Select
 
-            .title = "Vapour Pressure Results"
+            .title = "Vapor Pressure"
             .tbtext = mytext.ToString
             .px = px
             .xformat = 1
@@ -2068,7 +2071,7 @@ Public Class FormCompoundCreator
                 .ycurvetypes = New ArrayList(New Integer() {1, 3})
                 .y1ctitle = "Experimental Data"
                 .y2ctitle = "Regressed/Input Equation"
-                .title = "Ideal Gas Heat Capacity Calculation Results"
+                .title = "Ideal Gas Heat Capacity"
             End With
         End If
 
@@ -2199,7 +2202,7 @@ Public Class FormCompoundCreator
                     .ycurvetypes = New ArrayList(New Integer() {LT(0), LT(1), LT(2)})
             End Select
 
-            .title = "Liquid Density Results"
+            .title = "Liquid Density"
             .tbtext = mytext.ToString
             .px = px
             .xformat = 1
@@ -2248,7 +2251,7 @@ Public Class FormCompoundCreator
                 .py1 = py1
                 .ycurvetypes = New ArrayList(New Integer() {3})
                 .y1ctitle = "Regressed/Input Equation"
-                .title = "Solid Heat Capacity estimation"
+                .title = "Solid Heat Capacity"
             End With
         Else
             mytext.AppendLine("T" & vbTab & "yEXP" & vbTab & vbTab & "yCALC")
@@ -2344,7 +2347,7 @@ Public Class FormCompoundCreator
                 .y1ctitle = "Experimental Data"
                 .y2ctitle = "Regressed/Input Equation"
                 .ycurvetypes = New ArrayList(New Integer() {1, 3})
-                .title = "Solid Density Fitting Results"
+                .title = "Solid Density"
             End With
         End If
 
@@ -2468,7 +2471,7 @@ Public Class FormCompoundCreator
                     .ycurvetypes = New ArrayList(New Integer() {LT(0), LT(1), LT(2)})
             End Select
 
-            .title = "Liquid Viscosity Results"
+            .title = "Liquid Viscosity"
             .tbtext = mytext.ToString
             .px = px
             .xformat = 1
@@ -2945,7 +2948,7 @@ Public Class FormCompoundCreator
                 .py1 = py1
                 .ycurvetypes = New ArrayList(New Integer() {3})
                 .y1ctitle = "Regressed/Input Equation"
-                .title = "Liquid Heat Capacity Estimation Results"
+                .title = "Liquid Heat Capacity"
             End With
         Else
             mytext.AppendLine("T" & vbTab & "yEXP" & vbTab & vbTab & "yCALC")
@@ -2999,10 +3002,15 @@ Public Class FormCompoundCreator
         If mycase.DataLTC.Count = 0 Then
             mytext.AppendLine("T" & vbTab & "yCALC")
             mytext.AppendLine("[" & su.temperature & "]" & vbTab & "[" & su.thermalConductivity & "]")
-            For T = 200 To 1500 Step 25
+            Dim t0 As Integer = mycase.cp.Normal_Boiling_Point * 0.3
+            Dim t1 As Integer = mycase.cp.Normal_Boiling_Point
+            Dim stp As Integer = (t1 - t0) / 50
+            For T = t0 To t1 Step stp
                 x = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T)
                 px.Add(x)
-                y1 = SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, pp.CalcCSTDepProp(cbEqTCLiquid.SelectedItem.Split(":")(0), tbTCLiquid_A.Text, tbTCLiquid_B.Text, tbTCLiquid_C.Text, tbTCLiquid_D.Text, tbTCLiquid_E.Text, T, 0))
+                y1 = SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, PROPS.condl_latini(T, mycase.cp.Normal_Boiling_Point,
+                                                                                                       mycase.cp.Critical_Temperature,
+                                                                                                        mycase.cp.Molar_Weight, "X"))
                 py1.Add(y1)
                 mytext.AppendLine(FormatNumber(x, 2) & vbTab & FormatNumber(y1, 2))
             Next
@@ -3012,7 +3020,7 @@ Public Class FormCompoundCreator
                 .py1 = py1
                 .ycurvetypes = New ArrayList(New Integer() {3})
                 .y1ctitle = "Regressed/Input Equation"
-                .title = "Liquid Thermal Conductivity Estimation Results"
+                .title = "Liquid Thermal Conductivity"
             End With
         Else
             mytext.AppendLine("T" & vbTab & "yEXP" & vbTab & vbTab & "yCALC")
@@ -3309,6 +3317,7 @@ Public Class FormCompoundCreator
 
     Private Sub TextBoxDHF_TextChanged(sender As Object, e As EventArgs) Handles TextBoxTc.TextChanged, TextBoxPc.TextChanged, TextBoxNBP.TextChanged, TextBoxMeltingTemp.TextChanged, TextBoxEnthOfFusion.TextChanged, TextBoxDHF.TextChanged, TextBoxDGF.TextChanged, TextBoxAF.TextChanged
         CheckDataStatus()
+        TextBoxEnthOfFusion2.Text = (mycase.cp.EnthalpyOfFusionAtTf * 1000 / mycase.cp.Molar_Weight).ToString("N2")
     End Sub
 
     Private Sub TextBoxUNIQUAC_Q_TextChanged(sender As Object, e As EventArgs) Handles TextBoxUNIQUAC_R.TextChanged, TextBoxUNIQUAC_Q.TextChanged
@@ -3364,6 +3373,8 @@ Public Class FormCompoundCreator
         f.BaseCompound = mycase.cp
         f.tbSearchString.Text = TextBoxCAS.Text
         If f.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+            CalcJobackParams()
+            StoreData()
             loaded = False
             WriteData()
             loaded = True
