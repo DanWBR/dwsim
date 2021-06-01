@@ -1,13 +1,7 @@
-Version 6.5.2
+Version 6.5.3
 
-- New Feature: Add Chart Objects from Charts collection to the Flowsheet
-- New Feature: Export compound data to Excel file
-- Updated IronPython+Libs to v2.7.11
-- Fixed issue 146: Dynamics Manager remove button not working (Cross-Platform UI)
-- Fixed issue 147: Inspector could not be started (Linux)
-- Fixed issue 151: Wrong units for formation terms of electrolytes
-- Fixed issue 152: Error on viewing sub flowsheet
-- Added an option to define solids handling in the Simulation Wizard (Classic UI)
-- Fixed issue with Rigorous Column
-- Fixed solver freezing in certain situations
-- Fixed a bug with the SRK Adv Property Package
+- Fixed crashes when opening the General Settings window (Classic UI)
+- Added a Numerical Method setting to Equilibrium Calculations
+- Python Script UO CAPE-OPEN Wrapper now supports Python.NET
+- Fixed issues with Compound Creator (Classic UI)
+- Other minor fixes and enhancements

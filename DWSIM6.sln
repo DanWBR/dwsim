@@ -189,12 +189,6 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Thermodynamics.Standa
 		{CE1B1451-22A9-4CF3-A0FF-821B9E629696} = {CE1B1451-22A9-4CF3-A0FF-821B9E629696}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DTL", "DTL", "{40E0E548-532F-4C7F-B1E7-2CAED88D5552}"
-	ProjectSection(SolutionItems) = preProject
-		PlatformFiles\DTL\CHANGELOG.txt = PlatformFiles\DTL\CHANGELOG.txt
-		PlatformFiles\DTL\README.txt = PlatformFiles\DTL\README.txt
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.SkiaSharp.Views.Desktop", "DWSIM.SkiaSharp.Views.Desktop\DWSIM.SkiaSharp.Views.Desktop.csproj", "{F4E6F3E7-532C-4091-A82F-1DD7D191A13B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.Automation.Tests.CSharp", "DWSIM.Automation.Tests.CSharp\DWSIM.Automation.Tests.CSharp.csproj", "{4FD11110-5C50-4069-B3DA-A5FE1D2417C5}"
@@ -1993,7 +1987,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A8AF483A-90B4-437C-A8BA-DF597F01441E} = {59BD7344-FE2F-4A7F-A309-FE7E090C6342}
-		{40E0E548-532F-4C7F-B1E7-2CAED88D5552} = {59BD7344-FE2F-4A7F-A309-FE7E090C6342}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {01DC0FFB-80E7-4B74-BA4D-9137B9F4476F}

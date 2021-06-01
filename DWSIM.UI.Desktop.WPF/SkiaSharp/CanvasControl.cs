@@ -88,6 +88,7 @@ namespace DWSIM.UI.Desktop.WPF
         public FlowsheetSurface_WPF()
         {
             _gestureDetector = new GestureDetector(this);
+            this.AllowDrop = true;
         }
 
         protected override void OnRender(DrawingContext drawingContext)

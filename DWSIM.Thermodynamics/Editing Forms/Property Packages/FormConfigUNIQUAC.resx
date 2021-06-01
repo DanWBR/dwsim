@@ -787,6 +787,6 @@
     <value>FormConfigUNIQUAC</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>DWSIM.Thermodynamics.FormConfigPropertyPackageBase, DWSIM.Thermodynamics, Version=6.5.2.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>DWSIM.Thermodynamics.FormConfigPropertyPackageBase, DWSIM.Thermodynamics, Version=6.5.3.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

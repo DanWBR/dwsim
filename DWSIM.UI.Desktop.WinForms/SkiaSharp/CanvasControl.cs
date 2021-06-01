@@ -82,6 +82,13 @@ namespace DWSIM.UI.Desktop.WinForms
         
         public FlowsheetSurface_WinForms()
         {
+            this.AllowDrop = true;
+        }
+
+        protected override void OnDragEnter(DragEventArgs drgevent)
+        {
+            drgevent.Effect = DragDropEffects.All;
+            base.OnDragEnter(drgevent);
         }
 
         protected override void OnPaint(PaintEventArgs e)
