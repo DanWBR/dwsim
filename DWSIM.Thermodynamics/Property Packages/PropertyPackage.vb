@@ -6734,6 +6734,32 @@ Final3:
 
         End Function
 
+        Public Overridable Function AUX_PSUBLi(index As Integer, T As Double) As Double
+
+            Dim Tf = RET_VTF()(0)
+            Dim Hf = RET_VHF()(0)
+
+            Dim Pvapl = AUX_PVAPi(index, T)
+            Dim Pvaps = Math.Exp(Math.Log(Pvapl) - Hf * 1000 / 8.314 * (1 / T - 1 / Tf))
+
+            Return Pvaps
+
+        End Function
+
+        Public Function AUX_TSUBLi(ByVal index As Integer, ByVal PVAP As Double) As Double
+
+            Dim pvapt As Double
+            Return MathNet.Numerics.RootFinding.Brent.FindRoot(Function(T)
+                                                                   pvapt = AUX_PSUBLi(index, T)
+                                                                   If Double.IsNaN(pvapt) Or Double.IsNaN(PVAP) Then
+                                                                       Throw New Exception(String.Format("Error calculation sublimation pressure for {0} at {1} K.", "", T))
+                                                                   End If
+                                                                   Return pvapt - PVAP
+                                                               End Function, 1.0, 2000.0)
+
+        End Function
+
+
         Public Function RET_HVAPM(ByVal Vxw As Array, ByVal T As Double) As Double
 
             Dim val As Double = 0.0#

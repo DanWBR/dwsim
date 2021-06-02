@@ -380,8 +380,8 @@ Public Class FormCompoundCreator
             TextBoxCSAF.Text = .cp.Chao_Seader_Acentricity
             TextBoxCSLV.Text = .cp.Chao_Seader_Liquid_Molar_Volume
             TextBoxCSSP.Text = .cp.Chao_Seader_Solubility_Parameter
-            TextBoxDGF.Text = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, .cp.IG_Gibbs_Energy_of_Formation_25C)
-            TextBoxDHF.Text = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, .cp.IG_Enthalpy_of_Formation_25C)
+            TextBoxDGF.Text = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, .cp.IG_Gibbs_Energy_of_Formation_25C).ToString("N2")
+            TextBoxDHF.Text = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, .cp.IG_Enthalpy_of_Formation_25C).ToString("N2")
             TextBoxFormula.Text = .cp.Formula
             TextBoxMW.Text = .cp.Molar_Weight
             TextBoxNBP.Text = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, .cp.Normal_Boiling_Point)
@@ -1107,8 +1107,8 @@ Public Class FormCompoundCreator
                 End If
 
 
-                If CheckBoxDHF.Checked Then Me.TextBoxDHF.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, jb.CalcDHf(JGD) / MM), "N")
-                If CheckBoxDGF.Checked Then Me.TextBoxDGF.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, jb.CalcDGf(JGD) / MM), "N")
+                If CheckBoxDHF.Checked Then Me.TextBoxDHF.Text = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, jb.CalcDHf(JGD) / MM).ToString("N")
+                If CheckBoxDGF.Checked Then Me.TextBoxDGF.Text = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, jb.CalcDGf(JGD) / MM).ToString("N")
                 If CheckBoxCSAF.Checked Then
                     If w > 0 Then
                         Me.TextBoxCSAF.Text = w
@@ -3373,11 +3373,10 @@ Public Class FormCompoundCreator
         f.BaseCompound = mycase.cp
         f.tbSearchString.Text = TextBoxCAS.Text
         If f.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-            CalcJobackParams()
-            StoreData()
             loaded = False
             WriteData()
             loaded = True
+            CalcJobackParams()
         End If
     End Sub
 
