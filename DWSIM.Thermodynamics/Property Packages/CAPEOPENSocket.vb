@@ -497,8 +497,9 @@ Namespace PropertyPackages
 
             For Each pi As PhaseInfo In Me.PhaseMappings.Values
                 If Not pi.PhaseLabel = "Disabled" Then
-                    Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.molecularWeight = Me.AUX_MMM(pi.DWPhaseID)
-                    DW_CalcPhaseProps(pi.DWPhaseID)
+                    Dim mw = Me.AUX_MMM(pi.DWPhaseID)
+                    Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.molecularWeight = mw
+                    If mw > 0.0 Then DW_CalcPhaseProps(pi.DWPhaseID)
                 End If
             Next
 
@@ -519,6 +520,7 @@ Namespace PropertyPackages
             End With
 
             Me.CurrentMaterialStream = pstr
+
             tstr = Nothing
 
             Return calcresult
@@ -802,8 +804,10 @@ Namespace PropertyPackages
                 result = overallmolarflow * phasemolarfrac
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.molarflow = result
                 result = result * Me.AUX_MMM(myphase) / 1000
+                If Double.IsNaN(result) Then result = 0.0
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.massflow = result
                 result = phasemolarfrac * overallmolarflow * Me.AUX_MMM(myphase) / 1000 / Me.CurrentMaterialStream.Phases(0).Properties.massflow.GetValueOrDefault
+                If Double.IsNaN(result) Then result = 0.0
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.massfraction = result
                 Me.DW_CalcCompVolFlow(phaseID)
             End If
@@ -845,6 +849,7 @@ Namespace PropertyPackages
                         End If
                     Next
                     result = overallmolarflow * phasemolarfrac * Me.AUX_MMM(myphase) / 1000 / Me.CurrentMaterialStream.Phases(phaseID).Properties.density.GetValueOrDefault
+                    If Double.IsNaN(result) Then result = 0.0
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.volumetric_flow = result
                 End If
             End If

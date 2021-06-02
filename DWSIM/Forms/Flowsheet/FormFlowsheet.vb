@@ -749,73 +749,77 @@ Public Class FormFlowsheet
 
         If Not SupressMessages Then
 
-            If texto.Trim <> "" Then
+            RunCodeOnUIThread(Sub()
 
-                Dim frsht As FormFlowsheet
-                If Not Me.MasterFlowsheet Is Nothing And Me.RedirectMessages Then
-                    frsht = Me.MasterFlowsheet
-                    texto = "[" & Me.MasterUnitOp.GraphicObject.Tag & "] " & texto
-                Else
-                    frsht = Me
-                End If
+                                  If texto.Trim <> "" Then
 
-                If listeningaction IsNot Nothing Then
-                    listeningaction(texto, tipo)
-                End If
+                                      Dim frsht As FormFlowsheet
+                                      If Not Me.MasterFlowsheet Is Nothing And Me.RedirectMessages Then
+                                          frsht = Me.MasterFlowsheet
+                                          texto = "[" & Me.MasterUnitOp.GraphicObject.Tag & "] " & texto
+                                      Else
+                                          frsht = Me
+                                      End If
 
-                Message = texto
+                                      If listeningaction IsNot Nothing Then
+                                          listeningaction(texto, tipo)
+                                      End If
 
-                RaiseEvent NewMessageSent(texto)
+                                      Message = texto
 
-                If frsht.Visible Then
+                                      RaiseEvent NewMessageSent(texto)
 
-                    Dim showtips As Boolean = True
-                    If GlobalSettings.Settings.OldUI Then
-                        showtips = My.Settings.ShowTips
-                    End If
+                                      If frsht.Visible Then
 
-                    If Not My.Application.CommandLineMode Then
+                                          Dim showtips As Boolean = True
+                                          If GlobalSettings.Settings.OldUI Then
+                                              showtips = My.Settings.ShowTips
+                                          End If
 
-                        Dim frlog = frsht.FormLog
+                                          If Not My.Application.CommandLineMode Then
 
-                        Dim img As Bitmap
-                        Dim strtipo As String
-                        Select Case tipo
-                            Case SharedClasses.DWSIM.Flowsheet.MessageType.Warning
-                                img = My.Resources._error
-                                strtipo = DWSIM.App.GetLocalString("Aviso")
-                            Case SharedClasses.DWSIM.Flowsheet.MessageType.GeneralError
-                                img = My.Resources.exclamation
-                                strtipo = DWSIM.App.GetLocalString("Erro")
-                            Case SharedClasses.DWSIM.Flowsheet.MessageType.Tip
-                                If Not showtips Then Exit Sub
-                                img = My.Resources.lightbulb
-                                strtipo = DWSIM.App.GetLocalString("Dica")
-                            Case Else
-                                img = My.Resources.information
-                                strtipo = DWSIM.App.GetLocalString("Mensagem")
-                        End Select
+                                              Dim frlog = frsht.FormLog
 
-                        If frlog.Grid1.Rows.Count > 1500 Then
-                            frlog.Grid1.Rows.Clear()
-                        End If
+                                              Dim img As Bitmap
+                                              Dim strtipo As String
+                                              Select Case tipo
+                                                  Case SharedClasses.DWSIM.Flowsheet.MessageType.Warning
+                                                      img = My.Resources._error
+                                                      strtipo = DWSIM.App.GetLocalString("Aviso")
+                                                  Case SharedClasses.DWSIM.Flowsheet.MessageType.GeneralError
+                                                      img = My.Resources.exclamation
+                                                      strtipo = DWSIM.App.GetLocalString("Erro")
+                                                  Case SharedClasses.DWSIM.Flowsheet.MessageType.Tip
+                                                      If Not showtips Then Exit Sub
+                                                      img = My.Resources.lightbulb
+                                                      strtipo = DWSIM.App.GetLocalString("Dica")
+                                                  Case Else
+                                                      img = My.Resources.information
+                                                      strtipo = DWSIM.App.GetLocalString("Mensagem")
+                                              End Select
 
-                        frlog.Grid1.Rows.Add(New Object() {img, frlog.Grid1.Rows.Count, Date.Now, strtipo, texto})
+                                              If frlog.Grid1.Rows.Count > 1500 Then
+                                                  frlog.Grid1.Rows.Clear()
+                                              End If
 
-                        frlog.Grid1.Sort(frlog.Grid1.Columns(1), ListSortDirection.Descending)
+                                              frlog.Grid1.Rows.Add(New Object() {img, frlog.Grid1.Rows.Count, Date.Now, strtipo, texto})
 
-                        If frlog.Grid1.Rows.Count > 0 Then
-                            frlog.Grid1.Rows(0).Cells("Info").Tag = exceptionID
-                            frlog.Grid1.Rows(0).Cells("Mensagem").Style.ForeColor = cor
-                            frlog.Grid1.ClearSelection()
-                            frlog.Grid1.Rows(0).Selected = True
-                        End If
+                                              frlog.Grid1.Sort(frlog.Grid1.Columns(1), ListSortDirection.Descending)
 
-                    End If
+                                              If frlog.Grid1.Rows.Count > 0 Then
+                                                  frlog.Grid1.Rows(0).Cells("Info").Tag = exceptionID
+                                                  frlog.Grid1.Rows(0).Cells("Mensagem").Style.ForeColor = cor
+                                                  frlog.Grid1.ClearSelection()
+                                                  frlog.Grid1.Rows(0).Selected = True
+                                              End If
 
-                End If
+                                          End If
 
-            End If
+                                      End If
+
+                                  End If
+
+                              End Sub)
 
         End If
 
@@ -3201,7 +3205,7 @@ Public Class FormFlowsheet
     Public Property ErrorMessage As String = "" Implements IFlowsheet.ErrorMessage
 
     Public Sub RunCodeOnUIThread(act As Action) Implements IFlowsheet.RunCodeOnUIThread
-        Invoke(act)
+        UIThreadInvoke(act)
     End Sub
 
     Public Property AvailableCompounds As Dictionary(Of String, ICompoundConstantProperties) Implements IFlowsheet.AvailableCompounds
