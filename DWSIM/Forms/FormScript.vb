@@ -311,7 +311,7 @@ Imports IronPython.Hosting
                     Console.WriteLine("Error running script: " & ex.ToString)
                     Console.WriteLine()
                 Else
-                    fsheet.WriteToLog("Error running script: " & ex.Message.ToString, Color.Red, MessageType.GeneralError)
+                    fsheet.WriteToLog("Error running script: " & ex.ToString, Color.Red, MessageType.GeneralError)
                 End If
 
             Finally

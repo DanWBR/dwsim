@@ -84,8 +84,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Shared Function GetDefaultSettings() As Dictionary(Of Interfaces.Enums.FlashSetting, String)
 
-            Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
-
             Dim settings As New Dictionary(Of Interfaces.Enums.FlashSetting, String)
 
             settings(Interfaces.Enums.FlashSetting.Replace_PTFlash) = False
@@ -93,16 +91,16 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             settings(Interfaces.Enums.FlashSetting.UsePhaseIdentificationAlgorithm) = False
             settings(Interfaces.Enums.FlashSetting.CalculateBubbleAndDewPoints) = False
 
-            settings(Interfaces.Enums.FlashSetting.ValidationGibbsTolerance) = (0.01).ToString(ci)
+            settings(Interfaces.Enums.FlashSetting.ValidationGibbsTolerance) = "0.01"
 
-            settings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_External_Iterations) = Integer.Parse(100).ToString(ci)
-            settings(Interfaces.Enums.FlashSetting.PHFlash_External_Loop_Tolerance) = Double.Parse(0.0001).ToString(ci)
-            settings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_Internal_Iterations) = Double.Parse(100).ToString(ci)
-            settings(Interfaces.Enums.FlashSetting.PHFlash_Internal_Loop_Tolerance) = Double.Parse(0.0001).ToString(ci)
-            settings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_External_Iterations) = Double.Parse(100).ToString(ci)
-            settings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance) = Double.Parse(0.0001).ToString(ci)
-            settings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations) = Double.Parse(100).ToString(ci)
-            settings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance) = Double.Parse(0.0001).ToString(ci)
+            settings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_External_Iterations) = "100"
+            settings(Interfaces.Enums.FlashSetting.PHFlash_External_Loop_Tolerance) = "0.0001"
+            settings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_Internal_Iterations) = "100"
+            settings(Interfaces.Enums.FlashSetting.PHFlash_Internal_Loop_Tolerance) = "0.0001"
+            settings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_External_Iterations) = "100"
+            settings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance) = "0.0001"
+            settings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations) = "100"
+            settings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance) = "0.0001"
 
             settings(Interfaces.Enums.FlashSetting.NL_FastMode) = True
 
@@ -110,21 +108,21 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             settings(Interfaces.Enums.FlashSetting.GM_OptimizationMethod) = "IPOPT"
 
-            settings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestSeverity) = 0
+            settings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestSeverity) = "0"
 
             settings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestCompIds) = ""
 
-            settings(Interfaces.Enums.FlashSetting.PVFlash_FixedDampingFactor) = 1.0.ToString(ci)
-            settings(Interfaces.Enums.FlashSetting.PVFlash_MaximumTemperatureChange) = 10.0.ToString(ci)
-            settings(Interfaces.Enums.FlashSetting.PVFlash_TemperatureDerivativeEpsilon) = 0.1.ToString(ci)
+            settings(Interfaces.Enums.FlashSetting.PVFlash_FixedDampingFactor) = "1.0"
+            settings(Interfaces.Enums.FlashSetting.PVFlash_MaximumTemperatureChange) = "10.0"
+            settings(Interfaces.Enums.FlashSetting.PVFlash_TemperatureDerivativeEpsilon) = "0.1"
 
-            settings(Interfaces.Enums.FlashSetting.ST_Number_of_Random_Tries) = 20
+            settings(Interfaces.Enums.FlashSetting.ST_Number_of_Random_Tries) = "20"
 
             settings(Interfaces.Enums.FlashSetting.CheckIncipientLiquidForStability) = False
 
-            settings(Interfaces.Enums.FlashSetting.PHFlash_MaximumTemperatureChange) = 30.0.ToString(ci)
+            settings(Interfaces.Enums.FlashSetting.PHFlash_MaximumTemperatureChange) = "30.0"
 
-            settings(Interfaces.Enums.FlashSetting.PTFlash_DampingFactor) = 1.0.ToString(ci)
+            settings(Interfaces.Enums.FlashSetting.PTFlash_DampingFactor) = "1.0"
 
             settings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType) = "Default"
 
