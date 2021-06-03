@@ -553,7 +553,7 @@ Public Class FormSensAnalysis
                 With var
                     .id = dgrow.Cells(0).Value
                     .name = dgrow.Cells(1).Value
-                    If dgrow.Cells(1).Value <> DWSIM.App.GetLocalString("SpreadsheetCell") Then
+                    If dgrow.Cells(2).Value <> DWSIM.App.GetLocalString("SpreadsheetCell") Then
                         .objectTAG = dgrow.Cells(2).Value
                         .objectID = Me.ReturnObject(dgrow.Cells(2).Value).Name
                     Else
@@ -885,9 +885,9 @@ Public Class FormSensAnalysis
                     End With
                 Case 3
                     If Not Me.dgVariables.Rows(e.RowIndex).Cells(e.ColumnIndex).Value Is Nothing Then
+                        Dim tbc0 As DataGridViewTextBoxCell = Me.dgVariables.Rows(e.RowIndex).Cells(4)
+                        Dim tbc1 As DataGridViewTextBoxCell = Me.dgVariables.Rows(e.RowIndex).Cells(5)
                         If Me.dgVariables.Rows(e.RowIndex).Cells(2).Value <> DWSIM.App.GetLocalString("SpreadsheetCell") Then
-                            Dim tbc0 As DataGridViewTextBoxCell = Me.dgVariables.Rows(e.RowIndex).Cells(4)
-                            Dim tbc1 As DataGridViewTextBoxCell = Me.dgVariables.Rows(e.RowIndex).Cells(5)
                             Dim props As String() = Me.ReturnProperties(Me.dgVariables.Rows(e.RowIndex).Cells(2).Value, True)
                             For Each prop As String In props
                                 If form.GetTranslatedString1(prop) = Me.dgVariables.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString Then
@@ -897,6 +897,8 @@ Public Class FormSensAnalysis
                                     Exit For
                                 End If
                             Next
+                        Else
+                            tbc0.Value = form.FormSpreadsheet.GetCellValue(Me.dgVariables.Rows(e.RowIndex).Cells(3).Value).Data
                         End If
                     End If
                     If EnableAutoSave Then SaveForm(selectedsacase)

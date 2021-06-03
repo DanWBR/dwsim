@@ -931,11 +931,25 @@ Public Class FormOptimization
             .Imports.AddType(GetType(System.Math))
             For i = 0 To Me.keysind.Count - 1
                 .Variables.DefineVariable(objName(i), GetType(Double))
-                .Variables(objName(i)) = SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(varID(i)).unit, x(i))
+                If objID(i) <> "SpreadsheetCell" And objID(i) <> "ReactionProperty" Then
+                    .Variables(objName(i)) = SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(varID(i)).unit, x(i))
+                ElseIf objID(i) = "ReactionProperty" Then
+                    Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = objProp(i).Split("|")(0)).FirstOrDefault
+                    .Variables(objName(i)) = rx.GetPropertyValue(objProp(i).Split("|")(1))
+                Else
+                    .Variables(objName(i)) = form.FormSpreadsheet.GetCellValue(objProp(i)).Data
+                End If
             Next
             For i = 0 To Me.keysaux.Count - 1
                 .Variables.DefineVariable(AobjName(i), GetType(Double))
-                .Variables(AobjName(i)) = SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(i)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(i)).objectID).GetPropertyValue(AobjProp(i)))
+                If AobjID(i) <> "SpreadsheetCell" And AobjID(i) <> "ReactionProperty" Then
+                    .Variables(AobjName(i)) = SystemsOfUnits.Converter.ConvertFromSI(Me.selectedoptcase.variables(AvarID(i)).unit, form.Collections.FlowsheetObjectCollection(Me.selectedoptcase.variables(Me.keysaux(i)).objectID).GetPropertyValue(AobjProp(i)))
+                ElseIf AobjID(i) = "ReactionProperty" Then
+                    Dim rx = form.Reactions.Values.Where(Function(x_) x_.Name = AobjProp(i).Split("|")(0)).FirstOrDefault
+                    .Variables(AobjName(i)) = rx.GetPropertyValue(AobjProp(i).Split("|")(1))
+                Else
+                    .Variables(AobjName(i)) = form.FormSpreadsheet.GetCellValue(AobjProp(i)).Data
+                End If
             Next
         End With
 
