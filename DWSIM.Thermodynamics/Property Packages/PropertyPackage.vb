@@ -1005,20 +1005,20 @@ Namespace PropertyPackages
 
             Dim H, P0, V, T, Z, MW, U As Double
 
-            H = p.Properties.enthalpy.GetValueOrDefault
-            P0 = CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
-            T = CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
+            H = p.Properties.enthalpy.GetValueOrDefault 'kJ/kg
+            P0 = CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault 'Pa
+            T = CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault 'K
             Z = p.Properties.compressibilityFactor.GetValueOrDefault
-            MW = p.Properties.molecularWeight.GetValueOrDefault
+            MW = p.Properties.molecularWeight.GetValueOrDefault 'kg/kmol
 
-            V = Z * 8314 * T / P0
+            V = Z * 8.314 * T / P0 'm3/mol
 
-            U = H - P0 * V / MW
+            U = H - P0 * V / MW 'kJ/kg
 
             If Double.IsNaN(U) Then U = 0.0#
 
-            p.Properties.internal_energy = U
-            p.Properties.molar_internal_energy = U * MW
+            p.Properties.internal_energy = U 'kJ/kg
+            p.Properties.molar_internal_energy = U * MW 'kJ/kmol
 
         End Sub
 
