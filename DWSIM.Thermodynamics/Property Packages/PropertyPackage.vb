@@ -12480,7 +12480,11 @@ Final3:
                 For Each xel3 In elf.Elements
                     Try
                         Dim esname = [Enum].Parse(Interfaces.Enums.Helpers.GetEnumType("DWSIM.Interfaces.Enums.FlashSetting"), xel3.@Name)
-                        FlashSettings.Add(esname, xel3.@Value)
+                        If xel3.@Value = "0" And esname.ToString().Contains("tolerance") Then
+                            FlashSettings.Add(esname, "0.0001")
+                        Else
+                            FlashSettings.Add(esname, xel3.@Value)
+                        End If
                     Catch ex As Exception
                     End Try
                 Next
