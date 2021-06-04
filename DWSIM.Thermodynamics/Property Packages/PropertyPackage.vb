@@ -2119,7 +2119,7 @@ Namespace PropertyPackages
             ul3 = Me.CurrentMaterialStream.Phases(5).Properties.internal_energy.GetValueOrDefault
             uw = Me.CurrentMaterialStream.Phases(6).Properties.internal_energy.GetValueOrDefault
 
-            ul = ul1 * wl1 + ul2 * ul2 + ul3 * ul3 + uw * ww
+            ul = ul1 * wl1 + ul2 * wl2 + ul3 * wl3 + uw * ww
 
             If Double.IsNaN(ul) Then ul = 0.0
 
