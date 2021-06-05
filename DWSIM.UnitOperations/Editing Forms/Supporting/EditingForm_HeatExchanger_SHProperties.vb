@@ -12,21 +12,21 @@ Public Class EditingForm_HeatExchanger_SHProperties
 
         With hx.STProperties
 
-            .Shell_BaffleCut = tbBaffleCut.Text.ParseExpressionToDouble
-            .Shell_BaffleSpacing = cv.ConvertToSI(su.thickness, tbBaffleSpacing.Text.ParseExpressionToDouble) * 1000
-            .Shell_NumberOfPasses = tbNumberOfShellPasses.Text.ParseExpressionToDouble
-            .Tube_NumberPerShell = tbNumberOfTubesPerShell.Text.ParseExpressionToDouble
-            .Shell_Di = cv.ConvertToSI(su.diameter, tbShellDi.Text.ParseExpressionToDouble) * 1000
-            .Shell_Fouling = cv.ConvertToSI(su.foulingfactor, tbShellFoulingFactor.Text.ParseExpressionToDouble) * 1000
-            .Shell_NumberOfShellsInSeries = tbShellsInSeries.Text.ParseExpressionToDouble
-            .Tube_De = cv.ConvertToSI(su.diameter, tbTubeDe.Text.ParseExpressionToDouble) * 1000
-            .Tube_Di = cv.ConvertToSI(su.diameter, tbTubeDi.Text.ParseExpressionToDouble) * 1000
-            .Tube_Roughness = cv.ConvertToSI(su.diameter, tbTubeRoughness.Text.ParseExpressionToDouble) * 1000
-            .Tube_Fouling = cv.ConvertToSI(su.foulingfactor, tbTubeFoulingFactor.Text.ParseExpressionToDouble)
-            .Tube_Length = cv.ConvertToSI(su.distance, tbTubeLength.Text.ParseExpressionToDouble)
-            .Tube_PassesPerShell = tbTubePassesPerShell.Text.ParseExpressionToDouble
-            .Tube_Pitch = cv.ConvertToSI(su.thickness, tbTubePitch.Text.ParseExpressionToDouble) * 1000
-            .Tube_ThermalConductivity = cv.ConvertToSI(su.thermalConductivity, tbTubeThermalCond.Text.ParseExpressionToDouble)
+            .Shell_BaffleCut = tbBaffleCut.Text.ToDoubleFromCurrent()
+            .Shell_BaffleSpacing = cv.ConvertToSI(su.thickness, tbBaffleSpacing.Text.ToDoubleFromCurrent) * 1000
+            .Shell_NumberOfPasses = tbNumberOfShellPasses.Text.ToDoubleFromCurrent
+            .Tube_NumberPerShell = tbNumberOfTubesPerShell.Text.ToDoubleFromCurrent
+            .Shell_Di = cv.ConvertToSI(su.diameter, tbShellDi.Text.ToDoubleFromCurrent) * 1000
+            .Shell_Fouling = cv.ConvertToSI(su.foulingfactor, tbShellFoulingFactor.Text.ToDoubleFromCurrent)
+            .Shell_NumberOfShellsInSeries = tbShellsInSeries.Text.ToDoubleFromCurrent
+            .Tube_De = cv.ConvertToSI(su.diameter, tbTubeDe.Text.ToDoubleFromCurrent) * 1000
+            .Tube_Di = cv.ConvertToSI(su.diameter, tbTubeDi.Text.ToDoubleFromCurrent) * 1000
+            .Tube_Roughness = cv.ConvertToSI(su.diameter, tbTubeRoughness.Text.ToDoubleFromCurrent) * 1000
+            .Tube_Fouling = cv.ConvertToSI(su.foulingfactor, tbTubeFoulingFactor.Text.ToDoubleFromCurrent)
+            .Tube_Length = cv.ConvertToSI(su.distance, tbTubeLength.Text.ToDoubleFromCurrent)
+            .Tube_PassesPerShell = tbTubePassesPerShell.Text.ToDoubleFromCurrent
+            .Tube_Pitch = cv.ConvertToSI(su.thickness, tbTubePitch.Text.ToDoubleFromCurrent) * 1000
+            .Tube_ThermalConductivity = cv.ConvertToSI(su.thermalConductivity, tbTubeThermalCond.Text.ToDoubleFromCurrent)
             .Shell_BaffleOrientation = cbBaffleOrientation.SelectedIndex
             .Shell_BaffleType = cbBaffleType.SelectedIndex
             .Tube_Layout = cbTubeLayout.SelectedIndex
