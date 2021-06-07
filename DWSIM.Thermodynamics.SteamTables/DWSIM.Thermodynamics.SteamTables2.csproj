@@ -7,8 +7,8 @@
     <ProjectGuid>{B078232E-CAD6-464D-8426-9833E7E612D6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DWSIM.Thermodynamics.SteamTables</RootNamespace>
-    <AssemblyName>DWSIM.Thermodynamics.SteamTables</AssemblyName>
+    <RootNamespace>DWSIM.Thermodynamics.SteamTables2</RootNamespace>
+    <AssemblyName>DWSIM.Thermodynamics.SteamTables2</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

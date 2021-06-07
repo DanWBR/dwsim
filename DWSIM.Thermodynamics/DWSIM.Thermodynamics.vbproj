@@ -789,9 +789,9 @@
       <Project>{F929CA6A-87BD-42C8-8D0A-6455DB6F55DC}</Project>
       <Name>DWSIM.Controls.TabStrip</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DWSIM.Thermodynamics.SteamTables\DWSIM.Thermodynamics.SteamTables.csproj">
+    <ProjectReference Include="..\DWSIM.Thermodynamics.SteamTables\DWSIM.Thermodynamics.SteamTables2.csproj">
       <Project>{b078232e-cad6-464d-8426-9833e7e612d6}</Project>
-      <Name>DWSIM.Thermodynamics.SteamTables</Name>
+      <Name>DWSIM.Thermodynamics.SteamTables2</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

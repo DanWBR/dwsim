@@ -209,7 +209,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.Tests", "DWSIM.Tests\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.AutomaticTranslation", "DWSIM.AutomaticTranslation\DWSIM.AutomaticTranslation.csproj", "{63B6A888-5D27-4241-B7C6-7A24971596FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.Thermodynamics.SteamTables", "DWSIM.Thermodynamics.SteamTables\DWSIM.Thermodynamics.SteamTables.csproj", "{B078232E-CAD6-464D-8426-9833E7E612D6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.Thermodynamics.SteamTables2", "DWSIM.Thermodynamics.SteamTables\DWSIM.Thermodynamics.SteamTables2.csproj", "{B078232E-CAD6-464D-8426-9833E7E612D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
