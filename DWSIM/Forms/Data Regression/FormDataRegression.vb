@@ -922,10 +922,6 @@ Public Class FormDataRegression
                         End Select
                     Next
                 Case DataType.TPxx
-                    With proppack
-                        ._tpseverity = 0
-                        ._tpcompids = New String() {currcase.comp2}
-                    End With
                     Select Case currcase.model
                         Case "PRSV2-M"
                             For i = 0 To np - 1

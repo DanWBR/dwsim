@@ -4046,14 +4046,12 @@ Namespace ExcelAddIn
                 End Select
 
 
-                pp._tpseverity = 2
                 Dim comps(compounds.Length - 1) As String
                 Dim k As Integer
                 For Each c As String In compounds
                     comps(k) = c
                     k += 1
                 Next
-                pp._tpcompids = comps
 
                 If GlobalSettings.Settings.EnableGPUProcessing Then
                     Calculator.InitComputeDevice()
@@ -4180,15 +4178,12 @@ Namespace ExcelAddIn
                         pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.SimpleLLE
                 End Select
 
-
-                pp._tpseverity = 2
                 Dim comps(compounds.Length - 1) As String
                 Dim k As Integer
                 For Each c As String In compounds
                     comps(k) = c
                     k += 1
                 Next
-                pp._tpcompids = comps
 
                 If GlobalSettings.Settings.EnableGPUProcessing Then
                     Calculator.InitComputeDevice()
@@ -4317,15 +4312,12 @@ Namespace ExcelAddIn
                         pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.SimpleLLE
                 End Select
 
-
-                pp._tpseverity = 2
                 Dim comps(compounds.Length - 1) As String
                 Dim k As Integer
                 For Each c As String In compounds
                     comps(k) = c
                     k += 1
                 Next
-                pp._tpcompids = comps
 
                 If GlobalSettings.Settings.EnableGPUProcessing Then
                     Calculator.InitComputeDevice()
@@ -4454,15 +4446,12 @@ Namespace ExcelAddIn
                         pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.SimpleLLE
                 End Select
 
-
-                pp._tpseverity = 2
                 Dim comps(compounds.Length - 1) As String
                 Dim k As Integer
                 For Each c As String In compounds
                     comps(k) = c
                     k += 1
                 Next
-                pp._tpcompids = comps
 
                 If GlobalSettings.Settings.EnableGPUProcessing Then
                     Calculator.InitComputeDevice()
@@ -4591,15 +4580,12 @@ Namespace ExcelAddIn
                         pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.SimpleLLE
                 End Select
 
-
-                pp._tpseverity = 2
                 Dim comps(compounds.Length - 1) As String
                 Dim k As Integer
                 For Each c As String In compounds
                     comps(k) = c
                     k += 1
                 Next
-                pp._tpcompids = comps
 
                 If GlobalSettings.Settings.EnableGPUProcessing Then
                     Calculator.InitComputeDevice()

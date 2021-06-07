@@ -27,8 +27,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Inherits FlashAlgorithm
 
-        Dim Hf, Sf As Double
-
         Sub New()
             MyBase.New()
             Order = 1
@@ -53,7 +51,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 If Pvap > P Then
                     Return New Object() {0.0, 1.0, Vz, Vz, 0, 0.0#, PP.RET_NullVector, 0.0, Vz, Vz}
                 Else
-                    Return New Object() {1.0, 0.0, Vz, Vz, 0, 0.0#, PP.RET_NullVector, 1.0, Vz, Vz}
+                    Return New Object() {1.0, 0.0, Vz, Vz, 0, 0.0#, PP.RET_NullVector, 0.0, Vz, Vz}
                 End If
             End If
 
@@ -61,42 +59,127 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_PH(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
+            Dim T, V, S As Double
+
             Dim Tsat = PP.AUX_TSATi(P, 0)
             Dim Tsub = PP.AUX_TSUBLi(0, P)
             Dim Tfus = PP.RET_VTF(0)
 
             Dim HsatV = PP.DW_CalcEnthalpy(Vz, Tsat, P, State.Vapor)
             Dim HsatL = PP.DW_CalcEnthalpy(Vz, Tsat, P, State.Liquid)
+            Dim Hls = PP.DW_CalcEnthalpy(Vz, Tfus, P, State.Liquid)
+            Dim Hs = PP.DW_CalcEnthalpy(Vz, Tfus, P, State.Solid)
 
+            If H >= HsatV Then
+                'pure vapor
+                V = 1.0
+                S = 0.0
+                T = New Brent().BrentOpt2(Tsat * 0.9, 2000, 10, 0.000001, 100,
+                                          Function(Tx)
+                                              Return OBJ_FUNC_PH_FLASH(H, "PT", Tx, P, Vz, PP, False, Nothing)(0)
+                                          End Function)
+            ElseIf H >= HsatL Then
+                'partial vaporization
+                V = (H - HsatL) / (HsatV - HsatL)
+                S = 0.0
+                T = Tsat
+            ElseIf H >= Hls Then
+                'pure liquid
+                V = 0.0
+                S = 0.0
+                T = New Brent().BrentOpt2(Tfus * 0.9, Tsat, 10, 0.000001, 100,
+                                          Function(Tx)
+                                              Return OBJ_FUNC_PH_FLASH(H, "PT", Tx, P, Vz, PP, False, Nothing)(0)
+                                          End Function)
+            ElseIf H < Hls And H >= Hs Then
+                'partial liquefaction
+                V = 0.0
+                S = (H - Hs) / (Hls - Hs)
+                T = Tfus
+            Else
+                'pure solid
+                V = 0.0
+                S = 1.0
+                T = New Brent().BrentOpt2(10, Tfus, 10, 0.000001, 100,
+                                          Function(Tx)
+                                              Return OBJ_FUNC_PH_FLASH(H, "PT", Tx, P, Vz, PP, False, Nothing)(0)
+                                          End Function)
+            End If
 
-
-
-
-            'Return New Object() {L1, V, Vx1, Vy, T, ecount, Ki, L2, Vx2, Sx, Vs}
+            Return New Object() {1.0 - V - S, V, Vz, Vz, T, 0.0, New Double() {1.0}, 0.0, Vz, S, Vz}
 
         End Function
 
         Public Overrides Function Flash_PS(ByVal Vz As Double(), ByVal P As Double, ByVal S As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
+            Dim T, V, Sx As Double
 
+            Dim Tsat = PP.AUX_TSATi(P, 0)
+            Dim Tsub = PP.AUX_TSUBLi(0, P)
+            Dim Tfus = PP.RET_VTF(0)
 
-            'Return New Object() {L1, V, Vx1, Vy, T, ecount, Ki, L2, Vx2, Sx, Vs}
+            Dim SsatV = PP.DW_CalcEntropy(Vz, Tsat, P, State.Vapor)
+            Dim SsatL = PP.DW_CalcEntropy(Vz, Tsat, P, State.Liquid)
+            Dim Sls = PP.DW_CalcEntropy(Vz, Tfus, P, State.Liquid)
+            Dim Ss = PP.DW_CalcEntropy(Vz, Tfus, P, State.Solid)
+
+            If S >= SsatV Then
+                'pure vapor
+                V = 1.0
+                Sx = 0.0
+                T = New Brent().BrentOpt2(Tsat * 0.9, 2000, 10, 0.000001, 100,
+                                          Function(Tx)
+                                              Return OBJ_FUNC_PS_FLASH(S, "PT", Tx, P, Vz, PP, False, Nothing)(0)
+                                          End Function)
+            ElseIf S >= SsatL Then
+                'partial vaporization
+                V = (S - SsatL) / (SsatV - SsatL)
+                Sx = 0.0
+                T = Tsat
+            ElseIf S >= Sls Then
+                'pure liquid
+                V = 0.0
+                Sx = 0.0
+                T = New Brent().BrentOpt2(Tfus * 0.9, Tsat, 10, 0.000001, 100,
+                                          Function(Tx)
+                                              Return OBJ_FUNC_PS_FLASH(S, "PT", Tx, P, Vz, PP, False, Nothing)(0)
+                                          End Function)
+            ElseIf S < Sls And S >= Ss Then
+                'partial liquefaction
+                V = 0.0
+                Sx = (S - Ss) / (Sls - Ss)
+                T = Tfus
+            Else
+                'pure solid
+                V = 0.0
+                Sx = 1.0
+                T = New Brent().BrentOpt2(10, Tfus, 10, 0.000001, 100,
+                                          Function(Tx)
+                                              Return OBJ_FUNC_PS_FLASH(S, "PT", Tx, P, Vz, PP, False, Nothing)(0)
+                                          End Function)
+            End If
+
+            Return New Object() {1.0 - V - Sx, V, Vz, Vz, T, 0.0, New Double() {1.0}, 0.0, Vz, Sx, Vz}
 
         End Function
 
         Public Overrides Function Flash_TV(ByVal Vz As Double(), ByVal T As Double, ByVal V As Double, ByVal Pref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Throw New Exception("Unsupported Flash Specification (TVF)")
+            Dim Psat = PP.AUX_PVAPi(0, T)
+
+            Return New Object() {1.0 - V, V, Vz, Vz, Psat, 0, New Double() {1.0}, 0.0, Vz, 0.0, Vz}
 
         End Function
 
         Public Overrides Function Flash_PV(ByVal Vz As Double(), ByVal P As Double, ByVal V As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Throw New Exception("Unsupported Flash Specification (PVF)")
+            Dim Tsat = PP.AUX_TSATi(P, 0)
+
+            Return New Object() {1.0 - V, V, Vz, Vz, Tsat, 0, New Double() {1.0}, 0.0, Vz, 0.0, Vz}
 
         End Function
 
-        Function OBJ_FUNC_PH_FLASH(ByVal Type As String, ByVal X As Double, ByVal P As Double, ByVal Vz() As Double, ByVal PP As PropertyPackages.PropertyPackage, ByVal ReuseKi As Boolean, ByVal Ki() As Double) As Object
+        Function OBJ_FUNC_PH_FLASH(Hf As Double, ByVal Type As String, ByVal X As Double, ByVal P As Double, ByVal Vz() As Double, ByVal PP As PropertyPackages.PropertyPackage, ByVal ReuseKi As Boolean, ByVal Ki() As Double) As Object
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -157,7 +240,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Function
 
-        Function OBJ_FUNC_PS_FLASH(ByVal Type As String, ByVal X As Double, ByVal P As Double, ByVal Vz() As Double, ByVal PP As PropertyPackages.PropertyPackage, ByVal ReuseKi As Boolean, ByVal Ki() As Double) As Object
+        Function OBJ_FUNC_PS_FLASH(Sf As Double, Type As String, ByVal X As Double, ByVal P As Double, ByVal Vz() As Double, ByVal PP As PropertyPackages.PropertyPackage, ByVal ReuseKi As Boolean, ByVal Ki() As Double) As Object
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -217,14 +300,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
-        End Function
-
-        Function Herror(ByVal type As String, ByVal X As Double, ByVal P As Double, ByVal Vz() As Double, ByVal PP As PropertyPackages.PropertyPackage, ByVal ReuseKi As Boolean, ByVal Ki() As Double) As Object
-            Return OBJ_FUNC_PH_FLASH(type, X, P, Vz, PP, ReuseKi, Ki)
-        End Function
-
-        Function Serror(ByVal type As String, ByVal X As Double, ByVal P As Double, ByVal Vz() As Double, ByVal PP As PropertyPackages.PropertyPackage, ByVal ReuseKi As Boolean, ByVal Ki() As Double) As Object
-            Return OBJ_FUNC_PS_FLASH(type, X, P, Vz, PP, ReuseKi, Ki)
         End Function
 
         Public Overrides ReadOnly Property MobileCompatible As Boolean
