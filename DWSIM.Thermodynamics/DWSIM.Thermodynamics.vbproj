@@ -464,6 +464,7 @@
     <Compile Include="Property Packages\Models\Steam67.vb" />
     <Compile Include="Property Packages\SteamTables.vb" />
     <Compile Include="Property Packages\Models\UNIFAC.vb" />
+    <Compile Include="Property Packages\SteamTables2.vb" />
     <Compile Include="Property Packages\UNIFACLL.vb" />
     <Compile Include="Property Packages\UNIFAC.vb" />
     <Compile Include="Property Packages\Models\UNIQUAC.vb" />
@@ -787,6 +788,10 @@
     <ProjectReference Include="..\DWSIM.Controls.TabStrip\DWSIM.Controls.TabStrip.csproj">
       <Project>{F929CA6A-87BD-42C8-8D0A-6455DB6F55DC}</Project>
       <Name>DWSIM.Controls.TabStrip</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Thermodynamics.SteamTables\DWSIM.Thermodynamics.SteamTables.csproj">
+      <Project>{b078232e-cad6-464d-8426-9833e7e612d6}</Project>
+      <Name>DWSIM.Thermodynamics.SteamTables</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

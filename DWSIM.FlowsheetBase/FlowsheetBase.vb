@@ -2264,6 +2264,10 @@ Label_00CC:
                                     STPP.ComponentName = "Steam Tables (IAPWS-IF97)"
                                     plist.Add(STPP)
 
+                                    Dim ST2PP As SteamTables2PropertyPackage = New SteamTables2PropertyPackage()
+                                    ST2PP.ComponentName = "Steam Tables (IAPWS-IF97) v2"
+                                    plist.Add(ST2PP)
+
                                     Dim SEAPP As SeawaterPropertyPackage = New SeawaterPropertyPackage()
                                     SEAPP.ComponentName = "Seawater IAPWS-08"
                                     plist.Add(SEAPP)

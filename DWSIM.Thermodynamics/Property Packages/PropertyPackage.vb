@@ -943,7 +943,6 @@ Namespace PropertyPackages
 
         End Function
 
-
         Public Overridable Function CalcSpeedOfSound(p As IPhase) As Double
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
@@ -3285,456 +3284,56 @@ redirect2:                  IObj?.SetCurrent()
             End With
         End Sub
 
-        Public MustOverride Function DW_CalcMassaEspecifica_ISOL(ByVal Phase1 As Phase, ByVal T As Double, ByVal P As Double, Optional ByVal Pvp As Double = 0) As Double
+        <System.Obsolete>
+        Public Overridable Function DW_CalcMassaEspecifica_ISOL(ByVal Phase1 As Phase, ByVal T As Double, ByVal P As Double, Optional ByVal Pvp As Double = 0) As Double
+            Throw New Exception("Obsolete function")
+        End Function
+
+        <System.Obsolete>
+        Public Overridable Function DW_CalcViscosidadeDinamica_ISOL(ByVal Phase1 As Phase, ByVal T As Double, ByVal P As Double) As Double
+            Throw New Exception("Obsolete function")
+        End Function
+
+        <System.Obsolete>
+        Public Overridable Function DW_CalcTensaoSuperficial_ISOL(ByVal Phase1 As Phase, ByVal T As Double, ByVal P As Double) As Double
+            Throw New Exception("Obsolete function")
+        End Function
+
+        <System.Obsolete>
+        Public Overridable Function DW_CalcEquilibrio_ISOL(ByVal spec1 As FlashSpec, ByVal spec2 As FlashSpec, ByVal val1 As Double, ByVal val2 As Double, ByVal estimate As Double) As Object
+            Throw New Exception("Obsolete function")
+        End Function
+
+        <System.Obsolete>
+        Public Overridable Function DW_CalcEnergyFlowMistura_ISOL(ByVal T As Double, ByVal P As Double) As Double
+            Throw New Exception("Obsolete function")
+        End Function
+
+        <System.Obsolete>
+        Public Overridable Function DW_CalcCp_ISOL(ByVal Phase1 As PropertyPackages.Phase, ByVal T As Double, ByVal P As Double) As Double
+            Throw New Exception("Obsolete function")
+        End Function
+
+        <System.Obsolete>
+        Public Overridable Function DW_CalcCv_ISOL(ByVal Phase1 As PropertyPackages.Phase, ByVal T As Double, ByVal P As Double) As Double
+            Throw New Exception("Obsolete function")
+        End Function
+
+        <System.Obsolete>
+        Public Overridable Function DW_CalcK_ISOL(ByVal Phase1 As PropertyPackages.Phase, ByVal T As Double, ByVal P As Double) As Double
+            Throw New Exception("Obsolete function")
+        End Function
+
+        <System.Obsolete>
+        Public Overridable Function DW_CalcMM_ISOL(ByVal Phase1 As PropertyPackages.Phase, ByVal T As Double, ByVal P As Double) As Double
+            Throw New Exception("Obsolete function")
+        End Function
+
+        <System.Obsolete>
+        Public Overridable Function DW_CalcPVAP_ISOL(ByVal T As Double) As Double
+            Throw New Exception("Obsolete function")
+        End Function
 
-        Public MustOverride Function DW_CalcViscosidadeDinamica_ISOL(ByVal Phase1 As Phase, ByVal T As Double, ByVal P As Double) As Double
-
-        Public MustOverride Function DW_CalcTensaoSuperficial_ISOL(ByVal Phase1 As Phase, ByVal T As Double, ByVal P As Double) As Double
-
-        '        ''' <summary>
-        '        ''' Calculates thermodynamic equilibrium for the current material stream without updating results, returning them as an object.
-        '        ''' </summary>
-        '        ''' <param name="spec1">P, T, H or S</param>
-        '        ''' <param name="spec2">P, T, H or S</param>
-        '        ''' <param name="val1">spec1 value</param>
-        '        ''' <param name="val2">spec2 value</param>
-        '        ''' <param name="estimate"></param>
-        '        ''' <returns>A vector containing compositions and state variables.</returns>
-        '        ''' <remarks></remarks>
-        '        Public Overridable Function DW_CalcEquilibrio_ISOL(ByVal spec1 As FlashSpec, ByVal spec2 As FlashSpec, ByVal val1 As Double, ByVal val2 As Double, ByVal estimate As Double) As Object
-
-        '            Try
-        '                Me._tpseverity = Me.FlashBase.FlashSettings(Enums.FlashSetting.ThreePhaseFlashStabTestSeverity)
-        '                Me._tpcompids = Me.FlashBase.FlashSettings(Enums.FlashSetting.ThreePhaseFlashStabTestCompIds).ToArray(Globalization.CultureInfo.CurrentCulture, Type.GetType("System.String"))
-        '            Catch ex As Exception
-        '                Me._tpseverity = 0
-        '                Me._tpcompids = New String() {}
-        '            End Try
-
-        '            Dim P, T, H, S, xv, xl, xl2, xs As Double
-        '            Dim result As Object = Nothing
-        '            Dim n As Integer = Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1
-        '            Dim Vx2(n), Vx(n), Vy(n), Vs(n) As Double
-        '            Dim i As Integer = 0
-
-        '            Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
-        '            For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-        '                constprops.Add(su.ConstantProperties)
-        '            Next
-
-        '            Select Case spec1
-
-        '                Case FlashSpec.T
-
-        '                    Select Case spec2
-
-        '                        Case FlashSpec.P
-
-        '                            T = val1
-        '                            P = val2
-
-        '                            Dim ige As Double = 0.0#
-        '                            Dim fge As Double = 0.0#
-        '                            Dim dge As Double = 0.0#
-
-        '                            If Me.FlashBase.FlashSettings(Enums.FlashSetting.ValidateEquilibriumCalc) Then
-
-        '                                ige = Me.DW_CalcGibbsEnergy(RET_VMOL(Phase.Mixture), T, P)
-
-        '                            End If
-
-        '                            result = Me.FlashBase.Flash_PT(RET_VMOL(Phase.Mixture), P, T, Me)
-
-        '                            xl = result(0)
-        '                            xv = result(1)
-        '                            xl2 = result(5)
-        '                            xs = result(7)
-
-        '                            Vx = result(2)
-        '                            Vy = result(3)
-        '                            Vx2 = result(6)
-        '                            Vs = result(8)
-
-        '                            If Not Settings.CAPEOPENMode Then
-        '                                If Me.FlashBase.FlashSettings(Enums.FlashSetting.ValidateEquilibriumCalc) Then
-
-        '                                    fge = xl * Me.DW_CalcGibbsEnergy(Vx, T, P)
-        '                                    fge += xl2 * Me.DW_CalcGibbsEnergy(Vx2, T, P)
-        '                                    fge += xv * Me.DW_CalcGibbsEnergy(Vy, T, P)
-
-        '                                    dge = fge - ige
-
-        '                                    Dim dgtol As Double = Me.FlashBase.FlashSettings(Enums.FlashSetting.ValidationGibbsTolerance)
-
-        '                                    If dge > 0.0# And Math.Abs(dge / ige * 100) > Math.Abs(dgtol) Then
-        '                                        Throw New Exception(Calculator.GetLocalString("InvalidFlashResult") & "(DGE = " & dge & " kJ/kg, " & Format(dge / ige * 100, "0.00") & "%)")
-        '                                    End If
-
-        '                                End If
-        '                            End If
-
-        '                            Dim MWM As Double = xl * Me.AUX_MMM(Vx, "L") + xl2 * Me.AUX_MMM(Vx2, "L") + xv * Me.AUX_MMM(Vy, "V") + xs * Me.AUX_MMM(Vs, "S")
-
-        '                            Dim HM, HV, HL1, HL2, HS As Double
-
-        '                            If xl <> 0 Then HL1 = Me.DW_CalcEnthalpy(Vx, T, P, State.Liquid) * Me.AUX_MMM(Vx, "L")
-        '                            If xl2 <> 0 Then HL2 = Me.DW_CalcEnthalpy(Vx2, T, P, State.Liquid) * Me.AUX_MMM(Vx2, "L")
-        '                            If xv <> 0 Then HV = Me.DW_CalcEnthalpy(Vy, T, P, State.Vapor) * Me.AUX_MMM(Vy, "V")
-        '                            If xs <> 0 Then HS = Me.DW_CalcSolidEnthalpy(T, Vs, constprops) * Me.AUX_MMM(Vs, "S")
-        '                            HM = (xl * HL1 + xl2 * HL2 + xv * HV + xs * HS) / MWM
-
-        '                            H = HM
-
-        '                            Dim SM, SV, SL1, SL2, SS As Double
-
-        '                            If xl <> 0 Then SL1 = Me.DW_CalcEntropy(Vx, T, P, State.Liquid) * Me.AUX_MMM(Vx, "L")
-        '                            If xl2 <> 0 Then SL2 = Me.DW_CalcEntropy(Vx2, T, P, State.Liquid) * Me.AUX_MMM(Vx2, "L")
-        '                            If xv <> 0 Then SV = Me.DW_CalcEntropy(Vy, T, P, State.Vapor) * Me.AUX_MMM(Vy, "V")
-        '                            If xs <> 0 And T <> 298.15 Then If xs <> 0 Then SS = Me.DW_CalcSolidEnthalpy(T, Vs, constprops) / (T - 298.15) * Me.AUX_MMM(Vs, "S")
-
-        '                            SM = (xl * SL1 + xl2 * SL2 + xv * SV + xs * SS) / MWM
-
-        '                            S = SM
-
-        '                        Case FlashSpec.H
-
-        '                            Throw New Exception(Calculator.GetLocalString("PropPack_FlashTHNotSupported"))
-
-        '                        Case FlashSpec.S
-
-        '                            Throw New Exception(Calculator.GetLocalString("PropPack_FlashTSNotSupported"))
-
-        '                        Case FlashSpec.VAP
-
-        '                            Dim KI(n) As Double
-
-        '                            i = 0
-        '                            Do
-        '                                KI(i) = 0
-        '                                i = i + 1
-        '                            Loop Until i = n + 1
-
-        '                            If estimate <> 0 Then
-        '                                P = estimate
-        '                            Else
-        '                                P = 0
-        '                            End If
-        '                            T = val1
-        '                            xv = val2
-
-        '                            result = Me.FlashBase.Flash_TV(RET_VMOL(Phase.Mixture), T, xv, P, Me)
-
-        '                            P = result(4)
-        '                            Vx = result(2)
-        '                            Vx2 = result(8)
-        '                            Vy = result(3)
-        '                            Vs = result(10)
-        '                            xl = result(0)
-        '                            xl2 = result(7)
-        '                            xs = result(9)
-
-        '                            Dim HM, HV, HL1, HL2, HS As Double
-
-        '                            Dim MWM As Double = xl * Me.AUX_MMM(Vx, "L") + xl2 * Me.AUX_MMM(Vx2, "L") + xv * Me.AUX_MMM(Vy, "V") + xs * Me.AUX_MMM(Vs, "S")
-
-        '                            If xl <> 0 Then HL1 = Me.DW_CalcEnthalpy(Vx, T, P, State.Liquid) * Me.AUX_MMM(Vx, "L")
-        '                            If xl2 <> 0 Then HL2 = Me.DW_CalcEnthalpy(Vx2, T, P, State.Liquid) * Me.AUX_MMM(Vx2, "L")
-        '                            If xv <> 0 Then HV = Me.DW_CalcEnthalpy(Vy, T, P, State.Vapor) * Me.AUX_MMM(Vy, "V")
-        '                            If xs <> 0 Then HS = Me.DW_CalcSolidEnthalpy(T, Vs, constprops) * Me.AUX_MMM(Vs, "S")
-        '                            HM = (xl * HL1 + xl2 * HL2 + xv * HV + xs * HS) / MWM
-
-        '                            H = HM
-
-        '                            Dim SM, SV, SL1, SL2, SS As Double
-
-        '                            If xl <> 0 Then SL1 = Me.DW_CalcEntropy(Vx, T, P, State.Liquid) * Me.AUX_MMM(Vx, "L")
-        '                            If xl2 <> 0 Then SL2 = Me.DW_CalcEntropy(Vx2, T, P, State.Liquid) * Me.AUX_MMM(Vx2, "L")
-        '                            If xv <> 0 Then SV = Me.DW_CalcEntropy(Vy, T, P, State.Vapor) * Me.AUX_MMM(Vy, "V")
-        '                            If xs <> 0 And T <> 298.15 Then If xs <> 0 Then SS = Me.DW_CalcSolidEnthalpy(T, Vs, constprops) / (T - 298.15) * Me.AUX_MMM(Vs, "S")
-
-        '                            SM = (xl * SL1 + xl2 * SL2 + xv * SV + xs * SS) / MWM
-
-        '                            S = SM
-
-        '                    End Select
-
-        '                Case FlashSpec.P
-
-        '                    Select Case spec2
-
-        '                        Case FlashSpec.H
-
-        '                            If estimate <> 0 Then
-        '                                T = estimate
-        '                            Else
-        '                                T = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
-        '                            End If
-        '                            P = val1
-        '                            H = val2
-
-        '                            If Me.AUX_IS_SINGLECOMP(Phase.Mixture) And Me.ComponentName <> "FPROPS" Then
-
-        '                                Dim brentsolverT As New BrentOpt.Brent
-        '                                brentsolverT.DefineFuncDelegate(AddressOf EnthalpyTx)
-
-        '                                Dim hl, hv, sl, sv, Tsat As Double
-        '                                Dim vz As Object = Me.RET_VMOL(Phase.Mixture)
-
-        '                                Tsat = 0.0#
-        '                                For i = 0 To n
-        '                                    Tsat += vz(i) * Me.AUX_TSATi(P, i)
-        '                                Next
-
-        '                                Dim Tf As Double = AUX_TFM(Phase.Mixture)
-
-        '                                If Tsat < Tf Then Tsat = Tf + 0.1
-
-        '                                hl = Me.DW_CalcEnthalpy(vz, Tsat, P, State.Liquid)
-        '                                hv = Me.DW_CalcEnthalpy(vz, Tsat, P, State.Vapor)
-        '                                sl = Me.DW_CalcEntropy(vz, Tsat, P, State.Liquid)
-        '                                sv = Me.DW_CalcEntropy(vz, Tsat, P, State.Vapor)
-        '                                If H <= hl Then
-        '                                    xv = 0
-        '                                    LoopVarState = State.Liquid
-        '                                ElseIf H >= hv Then
-        '                                    xv = 1
-        '                                    LoopVarState = State.Vapor
-        '                                Else
-        '                                    xv = (H - hl) / (hv - hl)
-        '                                End If
-        '                                If Tsat > Me.AUX_TCM(Phase.Mixture) Then
-        '                                    xv = 1.0#
-        '                                    LoopVarState = State.Vapor
-        '                                End If
-        '                                xl = 1 - xv
-
-        '                                If xv <> 0.0# And xv <> 1.0# Then
-        '                                    T = Tsat
-        '                                    S = xv * sv + (1 - xv) * sl
-        '                                Else
-        '                                    LoopVarF = H
-        '                                    LoopVarX = P
-        '                                    T = brentsolverT.BrentOpt(Me.AUX_TFM(Phase.Mixture), 2000, 20, 0.000000000001, 1000, Nothing)
-        '                                    If xv = 0.0# Then
-        '                                        S = Me.DW_CalcEntropy(vz, T, P, State.Liquid)
-        '                                    Else
-        '                                        S = Me.DW_CalcEntropy(vz, T, P, State.Vapor)
-        '                                    End If
-        '                                End If
-
-        '                                Vx = vz
-        '                                Vy = vz
-
-        '                            Else
-
-        'redirect:                       result = Me.FlashBase.Flash_PH(RET_VMOL(Phase.Mixture), P, H, T, Me)
-
-        '                                T = result(4)
-        '                                xl = result(0)
-        '                                xv = result(1)
-        '                                xl2 = result(7)
-        '                                xs = result(9)
-
-        '                                Vx = result(2)
-        '                                Vy = result(3)
-        '                                Vx2 = result(8)
-        '                                Vs = result(10)
-
-        '                                Dim MWM As Double = xl * Me.AUX_MMM(Vx, "L") + xl2 * Me.AUX_MMM(Vx2, "L") + xv * Me.AUX_MMM(Vy, "V") + xs * Me.AUX_MMM(Vs, "S")
-
-        '                                'Dim HM, HV, HL1, HL2, HS As Double
-
-        '                                'If xl <> 0 Then HL1 = Me.DW_CalcEnthalpy(Vx, T, P, State.Liquid) * Me.AUX_MMM(Vx, "L")
-        '                                'If xl2 <> 0 Then HL2 = Me.DW_CalcEnthalpy(Vx2, T, P, State.Liquid) * Me.AUX_MMM(Vx2, "L")
-        '                                'If xv <> 0 Then HV = Me.DW_CalcEnthalpy(Vy, T, P, State.Vapor) * Me.AUX_MMM(Vy, "V")
-        '                                'If xs <> 0 Then HS = Me.DW_CalcSolidEnthalpy(T, Vs, constprops) * Me.AUX_MMM(Vs, "S")
-        '                                'HM = (xl * HL1 + xl2 * HL2 + xv * HV + xs * HS) / MWM
-
-        '                                'H = HM
-
-        '                                Dim SM, SV, SL1, SL2, SS As Double
-
-        '                                If xl <> 0 Then SL1 = Me.DW_CalcEntropy(Vx, T, P, State.Liquid) * Me.AUX_MMM(Vx, "L")
-        '                                If xl2 <> 0 Then SL2 = Me.DW_CalcEntropy(Vx2, T, P, State.Liquid) * Me.AUX_MMM(Vx2, "L")
-        '                                If xv <> 0 Then SV = Me.DW_CalcEntropy(Vy, T, P, State.Vapor) * Me.AUX_MMM(Vy, "V")
-        '                                If xs <> 0 And T <> 298.15 Then If xs <> 0 Then SS = Me.DW_CalcSolidEnthalpy(T, Vs, constprops) / (T - 298.15) * Me.AUX_MMM(Vs, "S")
-
-        '                                SM = (xl * SL1 + xl2 * SL2 + xv * SV + xs * SS) / MWM
-
-        '                                S = SM
-
-        '                            End If
-
-        '                        Case FlashSpec.S
-
-        '                            If estimate <> 0 Then
-        '                                T = estimate
-        '                            Else
-        '                                T = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
-        '                            End If
-        '                            P = val1
-        '                            S = val2
-
-        '                            If Me.AUX_IS_SINGLECOMP(Phase.Mixture) And Me.ComponentName <> "FPROPS" And Me.ComponentName <> "CoolProp" Then
-
-        '                                Dim brentsolverT As New BrentOpt.Brent
-        '                                brentsolverT.DefineFuncDelegate(AddressOf EntropyTx)
-
-        '                                Dim hl, hv, sl, sv, Tsat As Double
-        '                                Dim vz As Object = Me.RET_VMOL(Phase.Mixture)
-
-        '                                Tsat = 0.0#
-        '                                For i = 0 To n
-        '                                    Tsat += vz(i) * Me.AUX_TSATi(P, i)
-        '                                Next
-
-        '                                hl = Me.DW_CalcEnthalpy(vz, Tsat, P, State.Liquid)
-        '                                hv = Me.DW_CalcEnthalpy(vz, Tsat, P, State.Vapor)
-        '                                sl = Me.DW_CalcEntropy(vz, Tsat, P, State.Liquid)
-        '                                sv = Me.DW_CalcEntropy(vz, Tsat, P, State.Vapor)
-        '                                If S <= sl Then
-        '                                    xv = 0
-        '                                    LoopVarState = State.Liquid
-        '                                ElseIf S >= sv Then
-        '                                    xv = 1
-        '                                    LoopVarState = State.Vapor
-        '                                Else
-        '                                    xv = (S - sl) / (sv - sl)
-        '                                End If
-        '                                If Tsat > Me.AUX_TCM(Phase.Mixture) Then
-        '                                    xv = 1.0#
-        '                                    LoopVarState = State.Vapor
-        '                                End If
-        '                                xl = 1 - xv
-
-        '                                If xv <> 0.0# And xv <> 1.0# Then
-        '                                    T = Tsat
-        '                                    H = xv * hv + (1 - xv) * hl
-        '                                Else
-        '                                    LoopVarF = S
-        '                                    LoopVarX = P
-        '                                    T = brentsolverT.BrentOpt(Me.AUX_TFM(Phase.Mixture), 2000, 20, 0.000000000001, 1000, Nothing)
-        '                                    If xv = 0.0# Then
-        '                                        H = Me.DW_CalcEnthalpy(vz, T, P, State.Liquid)
-        '                                    Else
-        '                                        H = Me.DW_CalcEnthalpy(vz, T, P, State.Vapor)
-        '                                    End If
-        '                                End If
-
-        '                                Vx = vz
-        '                                Vy = vz
-
-        '                            Else
-
-        'redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mixture), P, S, T, Me)
-
-        '                                T = result(4)
-        '                                xl = result(0)
-        '                                xv = result(1)
-        '                                xl2 = result(7)
-        '                                xs = result(9)
-
-        '                                Vx = result(2)
-        '                                Vy = result(3)
-        '                                Vx2 = result(8)
-        '                                Vs = result(10)
-
-        '                                Dim MWM As Double = xl * Me.AUX_MMM(Vx, "L") + xl2 * Me.AUX_MMM(Vx2, "L") + xv * Me.AUX_MMM(Vy, "V") + xs * Me.AUX_MMM(Vs, "S")
-
-        '                                Dim HM, HV, HL1, HL2, HS As Double
-
-        '                                If xl <> 0 Then HL1 = Me.DW_CalcEnthalpy(Vx, T, P, State.Liquid) * Me.AUX_MMM(Vx, "L")
-        '                                If xl2 <> 0 Then HL2 = Me.DW_CalcEnthalpy(Vx2, T, P, State.Liquid) * Me.AUX_MMM(Vx2, "L")
-        '                                If xv <> 0 Then HV = Me.DW_CalcEnthalpy(Vy, T, P, State.Vapor) * Me.AUX_MMM(Vy, "V")
-        '                                If xs <> 0 Then HS = Me.DW_CalcSolidEnthalpy(T, Vs, constprops) * Me.AUX_MMM(Vs, "S")
-        '                                HM = (xl * HL1 + xl2 * HL2 + xv * HV + xs * HS) / MWM
-
-        '                                H = HM
-
-        '                                'Dim SM, SV, SL1, SL2, SS As Double
-
-        '                                'If xl <> 0 Then SL1 = Me.DW_CalcEntropy(Vx, T, P, State.Liquid) * Me.AUX_MMM(Vx, "L")
-        '                                'If xl2 <> 0 Then SL2 = Me.DW_CalcEntropy(Vx2, T, P, State.Liquid) * Me.AUX_MMM(Vx2, "L")
-        '                                'If xv <> 0 Then SV = Me.DW_CalcEntropy(Vy, T, P, State.Vapor) * Me.AUX_MMM(Vy, "V")
-        '                                'If xs <> 0 And T <> 298.15 Then If xs <> 0 Then SS = Me.DW_CalcSolidEnthalpy(T, Vs, constprops) / (T - 298.15) * Me.AUX_MMM(Vs, "S")
-
-        '                                'SM = (xl * SL1 + xl2 * SL2 + xv * SV + xs * SS) / MWM
-
-        '                                'S = SM
-
-        '                            End If
-
-        '                        Case FlashSpec.VAP
-
-        '                            Dim KI(n) As Double
-
-        '                            i = 0
-        '                            Do
-        '                                KI(i) = 0
-        '                                i = i + 1
-        '                            Loop Until i = n + 1
-
-        '                            If estimate <> 0 Then
-        '                                T = estimate
-        '                            Else
-        '                                T = 0
-        '                            End If
-        '                            P = val1
-        '                            xv = val2
-
-        '                            result = Me.FlashBase.Flash_PV(RET_VMOL(Phase.Mixture), P, xv, 0, Me)
-
-        '                            T = result(4)
-        '                            Vx = result(2)
-        '                            Vx2 = result(8)
-        '                            Vy = result(3)
-        '                            Vs = result(10)
-        '                            xl = result(0)
-        '                            xl2 = result(7)
-        '                            xs = result(9)
-
-        '                            Dim HM, HV, HL1, HL2, HS As Double
-
-        '                            Dim MWM As Double = xl * Me.AUX_MMM(Vx, "L") + xl2 * Me.AUX_MMM(Vx2, "L") + xv * Me.AUX_MMM(Vy, "V") + xs * Me.AUX_MMM(Vs, "S")
-
-        '                            If xl <> 0 Then HL1 = Me.DW_CalcEnthalpy(Vx, T, P, State.Liquid) * Me.AUX_MMM(Vx, "L")
-        '                            If xl2 <> 0 Then HL2 = Me.DW_CalcEnthalpy(Vx2, T, P, State.Liquid) * Me.AUX_MMM(Vx2, "L")
-        '                            If xv <> 0 Then HV = Me.DW_CalcEnthalpy(Vy, T, P, State.Vapor) * Me.AUX_MMM(Vy, "V")
-        '                            If xs <> 0 Then HS = Me.DW_CalcSolidEnthalpy(T, Vs, constprops) * Me.AUX_MMM(Vs, "S")
-        '                            HM = (xl * HL1 + xl2 * HL2 + xv * HV + xs * HS) / MWM
-
-        '                            H = HM
-
-        '                            Dim SM, SV, SL1, SL2, SS As Double
-
-        '                            If xl <> 0 Then SL1 = Me.DW_CalcEntropy(Vx, T, P, State.Liquid) * Me.AUX_MMM(Vx, "L")
-        '                            If xl2 <> 0 Then SL2 = Me.DW_CalcEntropy(Vx2, T, P, State.Liquid) * Me.AUX_MMM(Vx2, "L")
-        '                            If xv <> 0 Then SV = Me.DW_CalcEntropy(Vy, T, P, State.Vapor) * Me.AUX_MMM(Vy, "V")
-        '                            If xs <> 0 And T <> 298.15 Then If xs <> 0 Then SS = Me.DW_CalcSolidEnthalpy(T, Vs, constprops) / (T - 298.15) * Me.AUX_MMM(Vs, "S")
-
-        '                            SM = (xl * SL1 + xl2 * SL2 + xv * SV + xs * SS) / MWM
-
-        '                            S = SM
-
-        '                    End Select
-
-        '            End Select
-
-        '            Return New Object() {xl, xv, T, P, H, S, 1, 1, Vx, Vy, result, xl2, Vx2, xs, Vs}
-
-        '        End Function
-
-        Public MustOverride Function DW_CalcEnergyFlowMistura_ISOL(ByVal T As Double, ByVal P As Double) As Double
-
-        Public MustOverride Function DW_CalcCp_ISOL(ByVal Phase1 As PropertyPackages.Phase, ByVal T As Double, ByVal P As Double) As Double
-
-        Public MustOverride Function DW_CalcCv_ISOL(ByVal Phase1 As PropertyPackages.Phase, ByVal T As Double, ByVal P As Double) As Double
-
-        Public MustOverride Function DW_CalcK_ISOL(ByVal Phase1 As PropertyPackages.Phase, ByVal T As Double, ByVal P As Double) As Double
-
-        Public MustOverride Function DW_CalcMM_ISOL(ByVal Phase1 As PropertyPackages.Phase, ByVal T As Double, ByVal P As Double) As Double
-
-        Public MustOverride Function DW_CalcPVAP_ISOL(ByVal T As Double) As Double
 
         ''' <summary>
         ''' This function returns points to build the phase envelope.

@@ -5771,4 +5771,10 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="StandardPipeSizes" xml:space="preserve">
     <value>Double-click to insert standard pipe sizes.</value>
   </data>
+  <data name="SteamTablesv2" xml:space="preserve">
+    <value>Steam Tables (IAPWS-IF97) v2</value>
+  </data>
+  <data name="SteamTablesv2Desc" xml:space="preserve">
+    <value>An Implementation of IAPWS-IF97 Steam Tables containing Regions 1 to 5.</value>
+  </data>
 </root>

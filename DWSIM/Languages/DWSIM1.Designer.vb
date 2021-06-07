@@ -14518,6 +14518,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Tabelas de Vapor (IAPWS-IF97) v2.
+        '''</summary>
+        Friend Shared ReadOnly Property SteamTablesv2() As String
+            Get
+                Return ResourceManager.GetString("SteamTablesv2", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to An Implementation of IAPWS-IF97 Steam Tables containing Regions 1 to 5..
+        '''</summary>
+        Friend Shared ReadOnly Property SteamTablesv2Desc() As String
+            Get
+                Return ResourceManager.GetString("SteamTablesv2Desc", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Propriedades do Casco e dos Tubos.
         '''</summary>
         Friend Shared ReadOnly Property STHXProperties() As String
