@@ -22,6 +22,7 @@ Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
 Imports DWSIM.MathOps.MathEx
 Imports System.Linq
 Imports DWSIM.Interfaces.Enums
+Imports DWSIM.Interfaces
 
 Namespace PropertyPackages
 
@@ -32,7 +33,6 @@ Namespace PropertyPackages
 
         Public Shadows Const ClassId As String = "170D6E8A-8890-4bf9-B7A0-E4A3FDBFD589"
 
-        Private steam As New SteamProperties.StmProp
         Private stat As Integer
 
         Public Sub New(ByVal comode As Boolean)
@@ -50,7 +50,7 @@ Namespace PropertyPackages
 
         Public Overrides Function GetModel() As Object
 
-            Return steam
+            Return New SteamProperties.StmProp()
 
         End Function
 
@@ -83,6 +83,8 @@ Namespace PropertyPackages
 
         Public Overrides Function AUX_VAPDENS(ByVal T As Double, ByVal P As Double) As Double
 
+            Dim steam As New SteamProperties.StmProp
+
             Dim Tsat As Double = steam.Tsat(P / 1000, stat, 0)
             If T < Tsat Then
                 Return 1 / steam.vgt(T, stat, 0)
@@ -94,6 +96,8 @@ Namespace PropertyPackages
 
         Public Overrides Sub DW_CalcProp(ByVal [property] As String, ByVal phase As Phase)
 
+            Dim steam As New SteamProperties.StmProp
+
             Dim water As Interfaces.ICompound = (From subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
 
             If water Is Nothing Then
@@ -103,7 +107,7 @@ Namespace PropertyPackages
             Dim result As Double = 0.0#
             Dim resultObj As Object = Nothing
             Dim phaseID As Integer = -1
-            Dim state As String = ""
+            Dim sta As State = State.Vapor
 
             Dim T, P As Double
             T = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
@@ -111,9 +115,9 @@ Namespace PropertyPackages
 
             Select Case phase
                 Case Phase.Vapor
-                    state = "V"
+                    sta = State.Vapor
                 Case Phase.Liquid, Phase.Liquid1, Phase.Liquid2, Phase.Liquid3
-                    state = "L"
+                    sta = State.Liquid
             End Select
 
             Select Case phase
@@ -144,10 +148,10 @@ Namespace PropertyPackages
                     result = 1 / (1 / steam.vpt(P / 1000, T, stat, 0) * 1000 / Me.AUX_MMM(PropertyPackages.Phase.Mixture)) / 8.314 / T * P
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = result
                 Case "heatcapacity", "heatcapacitycp"
-                    result = steam.cppt(P / 1000, T, stat, 0)
+                    result = GetCp(P, T, sta)
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCp = result
                 Case "heatcapacitycv"
-                    result = steam.cppt(P / 1000, T, stat, 0)
+                    result = GetCv(P, T, sta)
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCv = result
                 Case "enthalpy", "enthalpynf"
                     result = steam.hpt(P / 1000, T, stat, 0)
@@ -196,6 +200,8 @@ Namespace PropertyPackages
         End Sub
 
         Public Overrides Sub DW_CalcPhaseProps(ByVal Phase As PropertyPackages.Phase)
+
+            Dim steam As New SteamProperties.StmProp
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
             Inspector.Host.CheckAndAdd(IObj, "", "DW_CalcPhaseProps", ComponentName & String.Format(" (Phase Properties - {0})", [Enum].GetName(Phase.GetType, Phase)), "Property Package Phase Properties Calculation Routine")
@@ -259,9 +265,9 @@ Namespace PropertyPackages
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result
                     result = 1 / ((1 / steam.vft(T, stat, 0)) * 1000 / Me.AUX_MMM(PropertyPackages.Phase.Mixture)) / 8.314 / T * P
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = result
-                    result = steam.cppt(P / 1000, T, stat, 0)
+                    result = GetCp(P, T, State.Liquid)
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCp = result
-                    result = steam.cppt(P / 1000, T, stat, 0)
+                    result = GetCv(P, T, State.Liquid)
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCv = result
                     result = Me.AUX_MMM(PropertyPackages.Phase.Mixture)
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight = result
@@ -285,9 +291,9 @@ Namespace PropertyPackages
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result
                     result = 1 / (1 / steam.vpt(P / 1000, T, stat, 0) * 1000 / Me.AUX_MMM(PropertyPackages.Phase.Mixture)) / 8.314 / T * P
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = result
-                    result = steam.cppt(P / 1000, T, stat, 0)
+                    result = GetCp(P, T, State.Liquid)
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCp = result
-                    result = steam.cppt(P / 1000, T, stat, 0)
+                    result = GetCv(P, T, State.Liquid)
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCv = result
                     result = Me.AUX_MMM(PropertyPackages.Phase.Mixture)
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight = result
@@ -315,9 +321,9 @@ Namespace PropertyPackages
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result
                     result = 1 / (1 / steam.vgt(T, stat, 0) * 1000 / Me.AUX_MMM(PropertyPackages.Phase.Mixture)) / 8.314 / T * P
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = result
-                    result = steam.cppt(P / 1000, T, stat, 0)
+                    result = GetCp(P, T, State.Vapor)
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCp = result
-                    result = steam.cppt(P / 1000, T, stat, 0)
+                    result = GetCv(P, T, State.Vapor)
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCv = result
                     result = Me.AUX_MMM(PropertyPackages.Phase.Mixture)
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight = result
@@ -341,9 +347,9 @@ Namespace PropertyPackages
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result
                     result = 1 / (1 / steam.vpt(P / 1000, T, stat, 0) * 1000 / Me.AUX_MMM(PropertyPackages.Phase.Mixture)) / 8.314 / T * P
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = result
-                    result = steam.cppt(P / 1000, T, stat, 0)
+                    result = GetCp(P, T, State.Vapor)
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCp = result
-                    result = steam.cppt(P / 1000, T, stat, 0)
+                    result = GetCv(P, T, State.Vapor)
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCv = result
                     result = Me.AUX_MMM(PropertyPackages.Phase.Mixture)
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight = result
@@ -412,6 +418,8 @@ Namespace PropertyPackages
         End Function
 
         Public Overrides Function DW_CalcEnthalpy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
+
+            Dim steam As New SteamProperties.StmProp
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -482,6 +490,7 @@ Namespace PropertyPackages
         End Function
 
         Public Overrides Function DW_CalcEnthalpyDeparture(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
+            Dim steam As New SteamProperties.StmProp
             Return steam.hpt(P / 1000, T, stat, 0) - Me.RET_Hid(298.15, T, Vx)
         End Function
 
@@ -490,6 +499,8 @@ Namespace PropertyPackages
         End Sub
 
         Public Overrides Function DW_CalcEntropy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
+
+            Dim steam As New SteamProperties.StmProp
 
             Dim Tsat As Double = steam.Tsat(P / 1000, stat, 0)
             Dim Tcrit As Double = 374.0 + 273.15
@@ -554,6 +565,7 @@ Namespace PropertyPackages
         End Function
 
         Public Overrides Function DW_CalcEntropyDeparture(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
+            Dim steam As New SteamProperties.StmProp
             Return steam.spt(P / 1000, T, stat, 0) - Me.RET_Sid(298.15, T, P, Vx)
         End Function
 
@@ -582,7 +594,108 @@ Namespace PropertyPackages
 
         Public Overrides Function AUX_Z(Vx() As Double, T As Double, P As Double, state As PhaseName) As Double
 
+            Dim steam As New SteamProperties.StmProp
             Return 1 / ((1 / steam.vpt(P / 1000, T, stat, 0)) * 1000 / Me.AUX_MMM(PropertyPackages.Phase.Mixture)) / 8.314 / T * P
+
+        End Function
+
+        Public Overrides Function AUX_PVAPi(index As Integer, T As Double) As Double
+            Dim steam As New SteamProperties.StmProp
+            Return steam.Psat(T, stat, 0) * 1000
+        End Function
+
+        Public Overrides Function AUX_PVAPi(sub1 As ICompoundConstantProperties, T As Double) As Object
+            Dim steam As New SteamProperties.StmProp
+            Return steam.Psat(T, stat, 0) * 1000
+        End Function
+
+        Public Overrides Function AUX_PVAPi(sub1 As String, T As Double) As Object
+            Dim steam As New SteamProperties.StmProp
+            Return steam.Psat(T, stat, 0) * 1000
+        End Function
+
+        Public Overrides Function AUX_TSATi(PVAP As Double, index As Integer) As Double
+            Dim steam As New SteamProperties.StmProp
+            Return steam.Tsat(PVAP / 1000, stat, 0)
+        End Function
+
+        Public Overrides Function AUX_TSATi(PVAP As Double, subst As ICompoundConstantProperties) As Double
+            Dim steam As New SteamProperties.StmProp
+            Return steam.Tsat(PVAP / 1000, stat, 0)
+        End Function
+
+        Public Overrides Function AUX_TSATi(PVAP As Double, subst As String) As Double
+            Dim steam As New SteamProperties.StmProp
+            Return steam.Tsat(PVAP / 1000, stat, 0)
+        End Function
+
+        Private Function GetCp(P As Double, T As Double, st As State) As Double
+
+            Dim steam As New SteamProperties.StmProp
+            Dim region = steam.SubRegion(P / 1000, T)
+            If region > 3 Then
+                Return steam.cppt(P / 1000, T, stat, 0)
+            Else
+                Dim steam0 As New IAPWS_IF97()
+                Dim Tsat = steam.Tsat(P / 1000, stat, 0)
+                If Math.Abs(T - Tsat) < 0.01 Then
+                    Select Case st
+                        Case State.Liquid
+                            Return steam0.cpSatLiqTW(T)
+                        Case State.Vapor
+                            Return steam0.cpSatVapTW(T)
+                    End Select
+                ElseIf T > Tsat Then
+                    Select Case st
+                        Case State.Liquid
+                            Return steam0.cpSatLiqTW(T)
+                        Case State.Vapor
+                            Return steam0.cpW(T, P / 100000)
+                    End Select
+                Else
+                    Select Case st
+                        Case State.Liquid
+                            Return steam0.cpW(T, P / 100000)
+                        Case State.Vapor
+                            Return steam0.cpSatVapTW(T)
+                    End Select
+                End If
+            End If
+
+        End Function
+
+        Private Function GetCv(P As Double, T As Double, st As State) As Double
+
+            Dim steam As New SteamProperties.StmProp
+            Dim region = steam.SubRegion(P / 1000, T)
+            If region > 3 Then
+                Return steam.cppt(P / 1000, T, stat, 0)
+            Else
+                Dim steam0 As New IAPWS_IF97()
+                Dim Tsat = steam.Tsat(P / 1000, stat, 0)
+                If Math.Abs(T - Tsat) < 0.01 Then
+                    Select Case st
+                        Case State.Liquid
+                            Return steam0.cvSatLiqTW(T)
+                        Case State.Vapor
+                            Return steam0.cvSatVapTW(T)
+                    End Select
+                ElseIf T > Tsat Then
+                    Select Case st
+                        Case State.Liquid
+                            Return steam0.cvSatLiqTW(T)
+                        Case State.Vapor
+                            Return steam0.cvW(T, P / 100000)
+                    End Select
+                Else
+                    Select Case st
+                        Case State.Liquid
+                            Return steam0.cvW(T, P / 100000)
+                        Case State.Vapor
+                            Return steam0.cvSatVapTW(T)
+                    End Select
+                End If
+            End If
 
         End Function
 

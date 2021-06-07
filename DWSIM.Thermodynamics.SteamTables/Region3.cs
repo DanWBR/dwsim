@@ -100,8 +100,8 @@ namespace SteamProperties
 
             double p, tau, delta;
 
-            delta = r/rStar;
-            tau = tStar/t;
+            delta = r / rStar;
+            tau = tStar / t;
 
             CheckState(delta, tau);
 
@@ -122,14 +122,14 @@ namespace SteamProperties
 
             double v;
 
-            if (state.pkPa == p && state.tK == t && state.phase == phase)
-            {
-                if (state.r != double.MinValue)
-                    return state.r;
-            }
-            else
-                ClearState();
-                
+            //if (state.pkPa == p && state.tK == t && state.phase == phase)
+            //{
+            //    if (state.r != double.MinValue)
+            //        return state.r;
+            //}
+            //else
+            ClearState();
+
 
             // set the region
 
@@ -299,10 +299,10 @@ namespace SteamProperties
             }
             */
 
-            if ( r == 0.0) 
-                r = Rho(p,t,phase);
+            if (r == 0.0)
+                r = Rho(p, t, phase);
 
-            return Hrt(r,t);
+            return Hrt(r, t);
         }
 
         public double S(double p, double t, int phase)
@@ -325,7 +325,7 @@ namespace SteamProperties
             if (r == 0.0)
                 r = Rho(p, t, phase);
 
-            return Srt(r,t);
+            return Srt(r, t);
         }
 
         public double CP(double p, double t, int phase)
@@ -380,7 +380,7 @@ namespace SteamProperties
 
             CheckState(delta, tau);
 
-            s = tau * Phi_t(delta, tau) - Phi(delta,tau);
+            s = tau * Phi_t(delta, tau) - Phi(delta, tau);
 
             return s;
         }
@@ -430,8 +430,8 @@ namespace SteamProperties
             if (state.Phi != double.MinValue)
                 return state.Phi;
 
-            double h = n[1]*Math.Log(r);
-            for(int i=2; i<=40; i++)
+            double h = n[1] * Math.Log(r);
+            for (int i = 2; i <= 40; i++)
                 h += n[i] * Math.Pow(r, I[i]) * Math.Pow(t, J[i]);
 
             state.Phi = h;
@@ -511,7 +511,7 @@ namespace SteamProperties
             // t is temperature in K
             // returns specific volume in Region 3a in m3/kg
 
-            double v=0.0;
+            double v = 0.0;
             const double vStar = 0.0024;
             const int N = 30;
             const double a = 0.085;
@@ -520,8 +520,8 @@ namespace SteamProperties
             const double d = 1.0;
             const double e = 1.0;
 
-            p = Math.Pow(p/100000.0 - a,c);
-            t = Math.Pow(t/760.0 - b, d);
+            p = Math.Pow(p / 100000.0 - a, c);
+            t = Math.Pow(t / 760.0 - b, d);
 
 
             int[] I = {  0,-12,-12,-12,-10,-10,-10, -8, -8, -8,
@@ -545,7 +545,7 @@ namespace SteamProperties
             for (int i = 1; i <= N; i++)
                 v += n[i] * Math.Pow(p, I[i]) * Math.Pow(t, J[i]);
 
-            return Math.Pow(v,e) * vStar;
+            return Math.Pow(v, e) * vStar;
         }
 
         double Vpt_3b(double p, double t)
@@ -554,7 +554,7 @@ namespace SteamProperties
             // t is temperature in K
             // returns specific volume in Region 3b in m3/kg
 
-            double v=0.0;
+            double v = 0.0;
             const double vStar = 0.0041;
             const int N = 32;
             const double a = 0.280;
@@ -598,7 +598,7 @@ namespace SteamProperties
             // t is temperature in K
             // returns specific volume in Region 3c in m3/kg
 
-            double v=0.0;
+            double v = 0.0;
             const double vStar = 0.0022;
             const int N = 35;
             const double a = 0.259;
@@ -634,7 +634,7 @@ namespace SteamProperties
             for (int i = 1; i <= N; i++)
                 v += n[i] * Math.Pow(p, I[i]) * Math.Pow(t, J[i]);
 
-            return Math.Pow(v, e)*vStar;
+            return Math.Pow(v, e) * vStar;
         }
 
         double Vpt_3d(double p, double t)
@@ -643,7 +643,7 @@ namespace SteamProperties
             // t is temperature in K
             // returns specific volume in Region 3d in m3/kg
 
-            double v=0.0;
+            double v = 0.0;
             const double vStar = 0.0029;
             const int N = 38;
             const double a = 0.559;
@@ -679,7 +679,7 @@ namespace SteamProperties
             for (int i = 1; i <= N; i++)
                 v += n[i] * Math.Pow(p, I[i]) * Math.Pow(t, J[i]);
 
-            return Math.Pow(v, e)*vStar;
+            return Math.Pow(v, e) * vStar;
         }
 
         double Vpt_3e(double p, double t)
@@ -688,7 +688,7 @@ namespace SteamProperties
             // t is temperature in K
             // returns specific volume in Region 3e in m3/kg
 
-            double v=0.0;
+            double v = 0.0;
             const double vStar = 0.0032;
             const int N = 29;
             const double a = 0.587;
@@ -721,7 +721,7 @@ namespace SteamProperties
             for (int i = 1; i <= N; i++)
                 v += n[i] * Math.Pow(p, I[i]) * Math.Pow(t, J[i]);
 
-            return Math.Pow(v, e)*vStar;
+            return Math.Pow(v, e) * vStar;
         }
 
         double Vpt_3f(double p, double t)
@@ -770,7 +770,7 @@ namespace SteamProperties
             for (int i = 1; i <= N; i++)
                 v += n[i] * Math.Pow(p, I[i]) * Math.Pow(t, J[i]);
 
-            return Math.Pow(v, e)*vStar;
+            return Math.Pow(v, e) * vStar;
         }
 
         double Vpt_3g(double p, double t)
@@ -816,7 +816,7 @@ namespace SteamProperties
             for (int i = 1; i <= N; i++)
                 v += n[i] * Math.Pow(p, I[i]) * Math.Pow(t, J[i]);
 
-            return Math.Pow(v, e)*vStar;
+            return Math.Pow(v, e) * vStar;
         }
 
         double Vpt_3h(double p, double t)
@@ -858,7 +858,7 @@ namespace SteamProperties
             for (int i = 1; i <= N; i++)
                 v += n[i] * Math.Pow(p, I[i]) * Math.Pow(t, J[i]);
 
-            return Math.Pow(v, e)*vStar;
+            return Math.Pow(v, e) * vStar;
         }
 
         double Vpt_3i(double p, double t)
@@ -907,7 +907,7 @@ namespace SteamProperties
             for (int i = 1; i <= N; i++)
                 v += n[i] * Math.Pow(p, I[i]) * Math.Pow(t, J[i]);
 
-            return Math.Pow(v, e)*vStar;
+            return Math.Pow(v, e) * vStar;
         }
 
         double Vpt_3j(double p, double t)
@@ -994,7 +994,7 @@ namespace SteamProperties
             for (int i = 1; i <= N; i++)
                 v += n[i] * Math.Pow(p, I[i]) * Math.Pow(t, J[i]);
 
-            return Math.Pow(v, e)*vStar;
+            return Math.Pow(v, e) * vStar;
         }
 
         double Vpt_3l(double p, double t)
@@ -1043,7 +1043,7 @@ namespace SteamProperties
             for (int i = 1; i <= N; i++)
                 v += n[i] * Math.Pow(p, I[i]) * Math.Pow(t, J[i]);
 
-            return Math.Pow(v, e)*vStar;
+            return Math.Pow(v, e) * vStar;
         }
 
         double Vpt_3m(double p, double t)
@@ -1217,7 +1217,7 @@ namespace SteamProperties
             for (int i = 1; i <= N; i++)
                 v += n[i] * Math.Pow(p, I[i]) * Math.Pow(t, J[i]);
 
-            return Math.Pow(v, e)*vStar;
+            return Math.Pow(v, e) * vStar;
         }
 
         double Vpt_3q(double p, double t)
@@ -1226,7 +1226,7 @@ namespace SteamProperties
             // t is temperature in K
             // returns specific volume in Region 3q in m3/kg
 
-            double v=0.0;
+            double v = 0.0;
             const double vStar = 0.0022;
             const int N = 24;
             const double a = 0.848;
@@ -1839,13 +1839,13 @@ namespace SteamProperties
 
                     }
 
-                    
+
                 }
                 else if (p > 20500.0)
                 {
                     double tBcd = T_atRegionBoundary(p, "3cd");
                     double tBjk = T_atRegionBoundary(p, "3jk");
-                    double tSat = daddy.Theta_4 (p);
+                    double tSat = daddy.Theta_4(p);
 
                     if (t <= tBcd)
                         state.subRegion = "3c";
@@ -1868,9 +1868,9 @@ namespace SteamProperties
                     else
                         state.subRegion = "3t";
                 }
-                else 
+                else
                 {
-                    double tSat = daddy.Theta_4 (p);
+                    double tSat = daddy.Theta_4(p);
                     if (t <= tSat)
                         state.subRegion = "3c";
                     else
@@ -1890,33 +1890,33 @@ namespace SteamProperties
             p /= 1000.0;
             double t = 0.0;       // temperature at the boundary in K
 
-            int[] I3ab = { 0, 0, 1, 2,-1,-2 };
-            int[] I3cd = { 0, 0, 1, 2, 3};
-            int[] I3gh = { 0, 0, 1, 2, 3, 4};
-            int[] I3ij = { 0, 0, 1, 2, 3, 4};
-            int[] I3jk = { 0, 0, 1, 2, 3, 4};
-            int[] I3mn = { 0, 0, 1, 2, 3};
-            int[] I3op = { 0, 0, 1, 2, -1, -2};
-            int[] I3qu = { 0, 0, 1, 2, 3};
-            int[] I3rx = { 0, 0, 1, 2, 3};
+            int[] I3ab = { 0, 0, 1, 2, -1, -2 };
+            int[] I3cd = { 0, 0, 1, 2, 3 };
+            int[] I3gh = { 0, 0, 1, 2, 3, 4 };
+            int[] I3ij = { 0, 0, 1, 2, 3, 4 };
+            int[] I3jk = { 0, 0, 1, 2, 3, 4 };
+            int[] I3mn = { 0, 0, 1, 2, 3 };
+            int[] I3op = { 0, 0, 1, 2, -1, -2 };
+            int[] I3qu = { 0, 0, 1, 2, 3 };
+            int[] I3rx = { 0, 0, 1, 2, 3 };
             int[] I3uv = { 0, 0, 1, 2, 3 };
             int[] I3wx = { 0, 0, 1, 2, -1, -2 };
 
-            double[] n3ab= {0.0                 ,0.154793642129415e4 ,-0.187661219490113e3,0.213144632222113e2 ,
+            double[] n3ab = {0.0                 ,0.154793642129415e4 ,-0.187661219490113e3,0.213144632222113e2 ,
                             -0.191887498864292e4,0.918419702359447e3};
-            double[] n3cd= {0.0                  ,0.585276966696349e3  ,0.278233532206915e1  ,-0.127283549295878e-1,
+            double[] n3cd = {0.0                  ,0.585276966696349e3  ,0.278233532206915e1  ,-0.127283549295878e-1,
                             0.159090746562729e-3 };
-            double[] n3gh= {0.0                  ,-0.249284240900418e5 ,0.428143584791546e4  ,-0.269029173140130e3 ,
+            double[] n3gh = {0.0                  ,-0.249284240900418e5 ,0.428143584791546e4  ,-0.269029173140130e3 ,
                             0.751608051114157e1  ,-0.787105249910383e-1};
-            double[] n3ij= {0.0                  ,0.584814781649163e3  ,-0.616179320924617   ,0.260763050899562    ,
+            double[] n3ij = {0.0                  ,0.584814781649163e3  ,-0.616179320924617   ,0.260763050899562    ,
                             -0.587071076864459e-2,0.515308185433082e-4};
-            double[] n3jk= {0.0                  ,0.617229772068439e3  ,-0.770600270141675e1 ,0.697072596851896    ,
+            double[] n3jk = {0.0                  ,0.617229772068439e3  ,-0.770600270141675e1 ,0.697072596851896    ,
                             -0.157391839848015e-1,0.137897492684194e-3};
-            double[] n3mn= {0.0                 ,0.535339483742384e3 ,0.761978122720128e1 ,-0.158365725441648  ,
+            double[] n3mn = {0.0                 ,0.535339483742384e3 ,0.761978122720128e1 ,-0.158365725441648  ,
                             0.192871054508108e-2 };
-            double[] n3op= {0.0                 ,0.969461372400213e3 ,-0.332500170441278e3,0.642859598466067e2 ,
+            double[] n3op = {0.0                 ,0.969461372400213e3 ,-0.332500170441278e3,0.642859598466067e2 ,
                             0.773845935768222e3 ,-0.152313732937084e4};
-            double[] n3qu= {0.0                 ,0.565603648239126e3 ,0.529062258221222e1 ,-0.102020639611016  ,
+            double[] n3qu = {0.0                 ,0.565603648239126e3 ,0.529062258221222e1 ,-0.102020639611016  ,
                             0.122240301070145e-2};
             double[] n3rx = {0.0                  ,0.584561202520006e3  ,-0.102961025163669e1 ,0.243293362700452    ,
                             -0.294905044740799e-2 };
@@ -1998,12 +1998,11 @@ namespace SteamProperties
             }
         }
 
-        void ClearState()
+        public void ClearState()
         {
-            state.r = double.MinValue; 
-            state.t = double.MinValue; 
+            state.r = double.MinValue;
+            state.t = double.MinValue;
             state.phase = 0;
-            // state.subRegion = "";
             state.p = double.MinValue;
             state.Phi = double.MinValue;
             state.Phi_r = double.MinValue;
@@ -2180,7 +2179,7 @@ namespace SteamProperties
                            -0.359344365571848e-2,-0.735196448821653   , 0.188367048396131   , 0.141064266818704e-3,
                            -0.257418501496337e-2, 0.123220024851555e-2 };
 
-                        for (int i = 1; i <= 33; i++)
+            for (int i = 1; i <= 33; i++)
                 t += ns[i] * Math.Pow(p + 0.240, Is[i]) * Math.Pow(s - 0.703, Js[i]);
 
             return t * 760.0;
@@ -2215,7 +2214,7 @@ namespace SteamProperties
 
 
             for (int i = 1; i <= 28; i++)
-                t += ns[i] * Math.Pow(p+0.760, Is[i]) * Math.Pow(s - 0.818, Js[i]);
+                t += ns[i] * Math.Pow(p + 0.760, Is[i]) * Math.Pow(s - 0.818, Js[i]);
 
             return t * 860.0;
         }
