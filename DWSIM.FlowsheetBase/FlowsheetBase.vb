@@ -2549,6 +2549,8 @@ Label_00CC:
 
     Public Property StoredSolutions As Dictionary(Of String, List(Of XElement)) = New Dictionary(Of String, List(Of XElement)) Implements IFlowsheet.StoredSolutions
 
+    Public Property ExternalSolvers As Dictionary(Of String, IExternalSolverIdentification) = New Dictionary(Of String, IExternalSolverIdentification) Implements IFlowsheet.ExternalSolvers
+
     Public Sub RunScript(ScriptID As String)
         Dim script = Scripts(ScriptID)
         If script.PythonInterpreter = Enums.Scripts.Interpreter.IronPython Then

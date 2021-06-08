@@ -951,6 +951,12 @@ Namespace Reactors
 
                     Dim odesolver = New DotNumerics.ODE.OdeImplicitRungeKutta5()
 
+                    Dim esolv As IExternalODESolver = Nothing
+                    If FlowSheet.ExternalSolvers.ContainsKey(ExternalSolverID) Then
+                        esolv = FlowSheet.ExternalSolvers(ExternalSolverID)
+                    End If
+
+
                     Do
 
                         deltaV = deltaV0
@@ -961,16 +967,33 @@ Namespace Reactors
 
                             For nncounter = 1 To 30
 
-                                odesolver.InitializeODEs(AddressOf ODEFunc, N.Count, 0.0, vc0)
-                                IObj2?.SetCurrent
-                                If dynamics Then
-                                    odesolver.Solve(vc0, 0.0#, 0.01 * deltaV * Volume, deltaV * Volume, Sub(x As Double, y As Double())
+                                If esolv IsNot Nothing Then
+                                    esolv.InitializeODEs(Function(x, y)
+                                                             Dim dy = ODEFunc(x, y)
+                                                             Return dy
+                                                         End Function, N.Count, 0.0, vc0)
+                                    IObj2?.SetCurrent
+                                    If dynamics Then
+                                        esolv.Solve(vc0, 0.0#, 0.01 * deltaV * Volume, deltaV * Volume, Sub(x As Double, y As Double())
                                                                                                             vc = y
-                                                                                                        End Sub)
+                                                                                                        End Sub, 0.00000001)
+                                    Else
+                                        esolv.Solve(vc0, 0.0#, 0.01 * deltaV * Volume, deltaV * Volume, Sub(x As Double, y As Double())
+                                                                                                            vc = y
+                                                                                                        End Sub, 0.00000001)
+                                    End If
                                 Else
-                                    odesolver.Solve(vc0, 0.0#, 0.01 * deltaV * Volume, deltaV * Volume, Sub(x As Double, y As Double())
-                                                                                                            vc = y
-                                                                                                        End Sub)
+                                    odesolver.InitializeODEs(AddressOf ODEFunc, N.Count, 0.0, vc0)
+                                    IObj2?.SetCurrent
+                                    If dynamics Then
+                                        odesolver.Solve(vc0, 0.0#, 0.01 * deltaV * Volume, deltaV * Volume, Sub(x As Double, y As Double())
+                                                                                                                vc = y
+                                                                                                            End Sub)
+                                    Else
+                                        odesolver.Solve(vc0, 0.0#, 0.01 * deltaV * Volume, deltaV * Volume, Sub(x As Double, y As Double())
+                                                                                                                vc = y
+                                                                                                            End Sub)
+                                    End If
                                 End If
 
                                 ODEFunc(0, vc)

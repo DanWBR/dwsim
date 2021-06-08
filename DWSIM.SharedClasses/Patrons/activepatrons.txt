@@ -65,6 +65,7 @@ Masahiro Sakai
 Matt Hogg
 Michael Papantoniou
 Mikhail Evtushenko
+Nicolas Spogis
 Nikita Petrosyan
 Petroconsulting Llc
 Philippe Wesel

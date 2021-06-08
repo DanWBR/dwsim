@@ -382,6 +382,11 @@ Public Class FormFlowsheet
             End Try
         Next
 
+        'external solvers
+        For Each es In FormMain.ExternalSolvers.Values
+            ExternalSolvers.Add(es.ID, es)
+        Next
+
         loaded = True
 
         If My.Settings.ObjectEditor = 0 Then FormProps.Hide()
@@ -3228,6 +3233,8 @@ Public Class FormFlowsheet
     End Property
 
     Public Property DynamicsManager As IDynamicsManager = New DynamicsManager.Manager Implements IFlowsheet.DynamicsManager
+
+    Public Property ExternalSolvers As Dictionary(Of String, IExternalSolverIdentification) = New Dictionary(Of String, IExternalSolverIdentification) Implements IFlowsheet.ExternalSolvers
 
     Public Sub DeleteSelectedObject1(sender As Object, e As EventArgs, gobj As IGraphicObject, Optional confirmation As Boolean = True, Optional triggercalc As Boolean = False) Implements IFlowsheet.DeleteSelectedObject
         DeleteSelectedObject(sender, e, gobj, confirmation, triggercalc)

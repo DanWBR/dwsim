@@ -174,6 +174,9 @@ Public Class EditingForm_ReactorConvEqGibbs
 
                 TabControlParameters.TabPages.Remove(TabPageEqParams)
 
+                LabelExternalSolver.Enabled = True
+                cbExternalSolver.Enabled = True
+
             ElseIf TypeOf SimObject Is Reactors.Reactor_Equilibrium Then
 
                 TabControlParameters.TabPages.Remove(TabPageCompounds)
@@ -188,12 +191,18 @@ Public Class EditingForm_ReactorConvEqGibbs
                 tbExtLoopTolEq.Text = DirectCast(SimObject, Reactors.Reactor_Equilibrium).ExternalLoopTolerance
                 tbIntLoopTolEq.Text = DirectCast(SimObject, Reactors.Reactor_Equilibrium).InternalLoopTolerance
 
+                LabelExternalSolver.Enabled = False
+                cbExternalSolver.Enabled = False
+
             Else
 
                 TabControlParameters.TabPages.Remove(TabPageCompounds)
                 TabControlParameters.TabPages.Remove(TabPageElements)
                 TabControlParameters.TabPages.Remove(TabPageGibbsParams)
                 TabControlParameters.TabPages.Remove(TabPageEqParams)
+
+                LabelExternalSolver.Enabled = False
+                cbExternalSolver.Enabled = False
 
             End If
 
@@ -284,6 +293,22 @@ Public Class EditingForm_ReactorConvEqGibbs
             Catch ex As Exception
 
             End Try
+
+            'external solvers
+
+            cbExternalSolver.Items.Clear()
+            cbExternalSolver.Items.Add("")
+            For Each solver In .FlowSheet.ExternalSolvers.Values
+                If solver.Category = Enums.ExternalSolverCategory.NonLinearMinimization Then
+                    cbExternalSolver.Items.Add(solver.DisplayText)
+                End If
+            Next
+            Dim selectedsolver = .FlowSheet.ExternalSolvers.Values.Where(Function(s) s.ID = .ExternalSolverID).FirstOrDefault()
+            If selectedsolver IsNot Nothing Then
+                cbExternalSolver.SelectedItem = selectedsolver.DisplayText
+            Else
+                cbExternalSolver.SelectedIndex = 0
+            End If
 
         End With
 
@@ -640,4 +665,15 @@ Public Class EditingForm_ReactorConvEqGibbs
         End If
     End Sub
 
+    Private Sub cbExternalSolver_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbExternalSolver.SelectedIndexChanged
+        If Loaded Then
+            Dim selectedsolver = SimObject.FlowSheet.ExternalSolvers.Values.Where(
+                Function(s) s.DisplayText = cbExternalSolver.SelectedItem.ToString()).FirstOrDefault()
+            If selectedsolver IsNot Nothing Then
+                SimObject.ExternalSolverID = selectedsolver.ID
+            Else
+                SimObject.ExternalSolverID = ""
+            End If
+        End If
+    End Sub
 End Class

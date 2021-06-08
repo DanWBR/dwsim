@@ -205,6 +205,22 @@ Public Class EditingForm_ReactorPFR
 
             End Try
 
+            'external solvers
+
+            cbExternalSolver.Items.Clear()
+            cbExternalSolver.Items.Add("")
+            For Each solver In .FlowSheet.ExternalSolvers.Values
+                If solver.Category = Enums.ExternalSolverCategory.OrdinaryDifferentialEquations Then
+                    cbExternalSolver.Items.Add(solver.DisplayText)
+                End If
+            Next
+            Dim selectedsolver = .FlowSheet.ExternalSolvers.Values.Where(Function(s) s.ID = .ExternalSolverID).FirstOrDefault()
+            If selectedsolver IsNot Nothing Then
+                cbExternalSolver.SelectedItem = selectedsolver.DisplayText
+            Else
+                cbExternalSolver.SelectedIndex = 0
+            End If
+
         End With
 
         Loaded = True
@@ -467,6 +483,8 @@ Public Class EditingForm_ReactorPFR
 
     Private Sub UpdateGraph()
 
+        If SimObject.points Is Nothing Then Exit Sub
+
         vya = New ArrayList
         ReDim vx(Me.SimObject.points.Count - 1)
         ReDim vy(Me.SimObject.points.Count - 1)
@@ -616,6 +634,18 @@ Public Class EditingForm_ReactorPFR
 
         End If
 
+    End Sub
+
+    Private Sub cbExternalSolver_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbExternalSolver.SelectedIndexChanged
+        If Loaded Then
+            Dim selectedsolver = SimObject.FlowSheet.ExternalSolvers.Values.Where(
+                Function(s) s.DisplayText = cbExternalSolver.SelectedItem.ToString()).FirstOrDefault()
+            If selectedsolver IsNot Nothing Then
+                SimObject.ExternalSolverID = selectedsolver.ID
+            Else
+                SimObject.ExternalSolverID = ""
+            End If
+        End If
     End Sub
 
 End Class

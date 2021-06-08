@@ -89,6 +89,8 @@ Public Class FormMain
 
     Public Shared AnalyticsProvider As IAnalyticsProvider
 
+    Public Shared ExternalSolvers As New Dictionary(Of String, Interfaces.IExternalSolverIdentification)
+
 #Region "    Form Events"
 
     Public Event ToolOpened(sender As Object, e As EventArgs)
@@ -519,6 +521,16 @@ Public Class FormMain
         If aprovinst.Count > 0 Then
             AnalyticsProvider = aprovinst(0)
         End If
+
+        'external solvers
+
+        Dim eslist As List(Of Type) = availableTypes.FindAll(Function(t) t.GetInterfaces().Contains(GetType(Interfaces.IExternalSolverIdentification)))
+
+        Dim esinstances = eslist.ConvertAll(Of IExternalSolverIdentification)(Function(t As Type) TryCast(Activator.CreateInstance(t), IExternalSolverIdentification))
+
+        For Each es In esinstances
+            ExternalSolvers.Add(es.ID, es)
+        Next
 
         'extenders
 

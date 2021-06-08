@@ -40,6 +40,8 @@
 
     Property AvailableCompounds As Dictionary(Of String, ICompoundConstantProperties)
 
+    Property ExternalSolvers As Dictionary(Of String, IExternalSolverIdentification)
+
     Function SaveToXML() As XDocument
 
     Property FilePath As String

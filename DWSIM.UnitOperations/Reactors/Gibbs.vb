@@ -744,6 +744,11 @@ Namespace Reactors
             ipo.Tolerance = 0.0000000000001
             ipo.ReturnLowestObjFuncValue = False
 
+            Dim esolv As IExternalNonLinearMinimizationSolver = Nothing
+            If FlowSheet.ExternalSolvers.ContainsKey(ExternalSolverID) Then
+                esolv = FlowSheet.ExternalSolvers(ExternalSolverID)
+            End If
+
             Dim g0 = FunctionValue2G(N.Values.ToArray)
 
             Me.InitialGibbsEnergy = g0
@@ -769,22 +774,47 @@ Namespace Reactors
 
                             Dim icount As Integer = 0
 
-                            NFv = ipo.Solve(Function(xn)
-                                                Dim gval = FunctionValue2G2(xn, T)
-                                                Dim ebal_i As Double
-                                                ebal = 0.0
-                                                For i = 0 To els
-                                                    ebal_i = 0
-                                                    For j = 0 To c
-                                                        ebal_i += xn(j) * Me.ElementMatrix(i, j)
+                            If esolv IsNot Nothing Then
+
+                                NFv = esolv.Solve(Function(xn)
+                                                      Dim gval = FunctionValue2G2(xn, T)
+                                                      Dim ebal_i As Double
+                                                      ebal = 0.0
+                                                      For i = 0 To els
+                                                          ebal_i = 0
+                                                          For j = 0 To c
+                                                              ebal_i += xn(j) * Me.ElementMatrix(i, j)
+                                                          Next
+                                                          ebal += ((TotalElements(i) - ebal_i) / TotalElements(i)) ^ 2
+                                                      Next
+                                                      icount += 1
+                                                      wbal = ((tms.GetMassFlow() - W0tot) / W0tot) ^ 2
+                                                      errval = Exp(gval) + wbal * 100 + ebal * 100
+                                                      Return errval
+                                                  End Function, Nothing, Nothing,
+                                                          ival, lbo, ubo, 1000, 0.0000000001)
+
+                            Else
+
+                                NFv = ipo.Solve(Function(xn)
+                                                    Dim gval = FunctionValue2G2(xn, T)
+                                                    Dim ebal_i As Double
+                                                    ebal = 0.0
+                                                    For i = 0 To els
+                                                        ebal_i = 0
+                                                        For j = 0 To c
+                                                            ebal_i += xn(j) * Me.ElementMatrix(i, j)
+                                                        Next
+                                                        ebal += ((TotalElements(i) - ebal_i) / TotalElements(i)) ^ 2
                                                     Next
-                                                    ebal += ((TotalElements(i) - ebal_i) / TotalElements(i)) ^ 2
-                                                Next
-                                                icount += 1
-                                                wbal = ((tms.GetMassFlow() - W0tot) / W0tot) ^ 2
-                                                errval = Exp(gval) + wbal * 100 + ebal * 100
-                                                Return errval
-                                            End Function, Nothing, ival, lbo, ubo)
+                                                    icount += 1
+                                                    wbal = ((tms.GetMassFlow() - W0tot) / W0tot) ^ 2
+                                                    errval = Exp(gval) + wbal * 100 + ebal * 100
+                                                    Return errval
+                                                End Function, Nothing, ival, lbo, ubo)
+
+                            End If
+
 
                             For i = 0 To N.Count - 1
                                 N(keys(i)) = NFv(i)

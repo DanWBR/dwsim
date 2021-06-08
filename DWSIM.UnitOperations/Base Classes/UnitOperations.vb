@@ -39,6 +39,8 @@ Namespace UnitOperations
 
         Public AccumulationStream As Thermodynamics.Streams.MaterialStream
 
+        Public Property ExternalSolverID As String = ""
+
         Public Sub New()
             MyBase.CreateNew()
         End Sub

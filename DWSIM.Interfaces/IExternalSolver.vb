@@ -1,14 +1,20 @@
-﻿Public Interface IExternalSolverCollection
-
-    ReadOnly Property ID As String
-
-    ReadOnly Property Description As String
-
-    ReadOnly Property DisplayText As String
-
-    ReadOnly Property Collection As List(Of IExternalSolverIdentification)
-
-End Interface
+﻿'    DWSIM Interface definitions
+'    Copyright 2020-2021 Daniel Wagner O. de Medeiros
+'
+'    This file is part of DWSIM.
+'
+'    DWSIM is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 3 of the License, or
+'    (at your option) any later version.
+'
+'    DWSIM is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+'
+'    You should have received a copy of the GNU General Public License
+'    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Interface IExternalSolverIdentification
 
@@ -19,6 +25,8 @@ Public Interface IExternalSolverIdentification
     ReadOnly Property DisplayText As String
 
     ReadOnly Property Category As Enums.ExternalSolverCategory
+
+    ReadOnly Property SupportsMultiThreading As Boolean
 
 End Interface
 
@@ -55,8 +63,13 @@ Public Interface IExternalNonLinearSystemSolver
 
 End Interface
 
-
 Public Interface IExternalNonLinearMinimizationSolver
+
+    ReadOnly Property SupportsBoundedVariables As Boolean
+
+    ReadOnly Property IterationsTaken As Integer
+
+    ReadOnly Property FinalValue As Double
 
     ''' <summary>
     ''' Minimizes a black-box non-linear equation.
@@ -90,8 +103,7 @@ Public Interface IExternalODESolver
     ''' <param name="n">The number of differential equations.</param>
     ''' <param name="x0">The initial value for the independent variable.</param>
     ''' <param name="y0">A vector of size N containing the initial conditions. N is the number of differential equations.</param>
-    ''' <returns></returns>
-    Function InitializeODEs(odefunc As Func(Of Double, Double(), Double()), n As Integer, x0 As Double, y0 As Double)
+    Sub InitializeODEs(odefunc As Func(Of Double, Double(), Double()), n As Integer, x0 As Double, y0 As Double())
 
     ''' <summary>
     ''' Computes the solution of the ordinary differential equations.
@@ -102,7 +114,6 @@ Public Interface IExternalODESolver
     ''' <param name="xf">The final independent variable value.</param>
     ''' <param name="odesolution">A delegate where to return the solution.</param>
     ''' <param name="tolerance">Tolerance for solution.</param>
-    ''' <returns></returns>
-    Function Solve(y0 As Double(), x0 As Double, deltax As Double, xf As Double, odesolution As Action(Of Double, Double()), tolerance As Double)
+    Sub Solve(y0 As Double(), x0 As Double, deltax As Double, xf As Double, odesolution As Action(Of Double, Double()), tolerance As Double)
 
 End Interface
