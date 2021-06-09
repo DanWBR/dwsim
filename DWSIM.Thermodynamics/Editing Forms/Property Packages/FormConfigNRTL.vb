@@ -400,9 +400,6 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
                         Dim task3 As Task = TaskHelper.Run(Sub()
                                                                a3 = unifac.GAMMA_MR(T1, New Double() {0.75, 0.25}, ppu.RET_VQ(), ppu.RET_VR, ppu.RET_VEKI)
                                                            End Sub)
-                        task1.Start()
-                        task2.Start()
-                        task3.Start()
                         Task.WaitAll(task1, task2, task3)
                     Catch ae As AggregateException
                         Throw ae.Flatten().InnerException
@@ -436,29 +433,15 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
                 Dim uconstr2() As Double = New Double() {+10000.0#, +10000.0#}
                 Dim finalval2() As Double = Nothing
 
-                Dim variables(1) As Optimization.OptBoundVariable
-                For i As Integer = 0 To 1
-                    variables(i) = New Optimization.OptBoundVariable("x" & CStr(i + 1), initval2(i), False, lconstr2(i), uconstr2(i))
-                Next
-                Dim solver As New Optimization.Simplex
+                Dim solver As New MathEx.Optimization.IPOPTSolver
+                solver.MaxIterations = 100
                 solver.Tolerance = 0.000001
-                solver.MaxFunEvaluations = 5000
-                finalval2 = solver.ComputeMin(AddressOf FunctionValue, variables)
+                finalval2 = solver.Solve(AddressOf FunctionValue, Nothing, initval2, lconstr2, uconstr2)
 
                 Dim avgerr As Double = 0.0#
                 For i As Integer = 0 To 5
                     avgerr += (actn(i) - actu(i)) / actu(i) * 100 / 6
                 Next
-
-                'If sender.Name = "Button1" Then
-                '    ppu.CurrentMaterialStream.Flowsheet.WriteToLog("NRTL interaction parameter estimation @ T = " & Format(T1, "N2") & " K using UNIFAC finished, average activity coefficient error = " & Format(avgerr, "N2") & "%.", Color.Blue, DWSIM.FormClasses.TipoAviso.Informacao)
-                'ElseIf sender.Name = "Button5" Then
-                '    ppu.CurrentMaterialStream.Flowsheet.WriteToLog("NRTL interaction parameter estimation @ T = " & Format(T1, "N2") & " K using UNIFAC-LL finished, average activity coefficient error = " & Format(avgerr, "N2") & "%.", Color.Blue, DWSIM.FormClasses.TipoAviso.Informacao)
-                'ElseIf sender.Name = "Button6" Then
-                '    ppu.CurrentMaterialStream.Flowsheet.WriteToLog("NRTL interaction parameter estimation @ T = " & Format(T1, "N2") & " K using NIST-MODFAC finished, average activity coefficient error = " & Format(avgerr, "N2") & "%.", Color.Blue, DWSIM.FormClasses.TipoAviso.Informacao)
-                'Else
-                '    ppu.CurrentMaterialStream.Flowsheet.WriteToLog("NRTL interaction parameter estimation @ T = " & Format(T1, "N2") & " K using MODFAC finished, average activity coefficient error = " & Format(avgerr, "N2") & "%.", Color.Blue, DWSIM.FormClasses.TipoAviso.Informacao)
-                'End If
 
                 dgvu1.Rows(row).Cells(3).Value = finalval2(0)
                 dgvu1.Rows(row).Cells(4).Value = finalval2(1)

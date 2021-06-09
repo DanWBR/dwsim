@@ -384,11 +384,11 @@ Namespace PropertyPackages.Auxiliary
 
             If doparallel And n > 10 Then
                 Parallel.For(0, n + 1, Sub(ip)
-                                           S(ip) = teta.MultiplyY(tau_ij(ip)).SumY
+                                           S(ip) = teta.MultiplyY(tau_ji(ip)).SumY
                                        End Sub)
             Else
                 For i = 0 To n
-                    S(i) = teta.MultiplyY(tau_ij(i)).SumY
+                    S(i) = teta.MultiplyY(tau_ji(i)).SumY
                 Next
             End If
 

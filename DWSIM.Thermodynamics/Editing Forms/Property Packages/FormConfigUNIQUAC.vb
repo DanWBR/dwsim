@@ -310,6 +310,10 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
         uniquac.InteractionParameters(ppu.RET_VIDS()(0)).Add(ppu.RET_VIDS()(1), New PropertyPackages.Auxiliary.UNIQUAC_IPData())
         uniquac.InteractionParameters(ppu.RET_VIDS()(0))(ppu.RET_VIDS()(1)).A12 = x(0)
         uniquac.InteractionParameters(ppu.RET_VIDS()(0))(ppu.RET_VIDS()(1)).A21 = x(1)
+        uniquac.InteractionParameters.Add(ppu.RET_VIDS()(1), New Dictionary(Of String, PropertyPackages.Auxiliary.UNIQUAC_IPData))
+        uniquac.InteractionParameters(ppu.RET_VIDS()(1)).Add(ppu.RET_VIDS()(0), New PropertyPackages.Auxiliary.UNIQUAC_IPData())
+        uniquac.InteractionParameters(ppu.RET_VIDS()(1))(ppu.RET_VIDS()(0)).A12 = x(1)
+        uniquac.InteractionParameters(ppu.RET_VIDS()(1))(ppu.RET_VIDS()(0)).A21 = x(0)
 
         If GlobalSettings.Settings.EnableParallelProcessing Then
             Try
@@ -451,14 +455,10 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
                 Dim uconstr2() As Double = New Double() {+10000.0#, +10000.0#}
                 Dim finalval2() As Double = Nothing
 
-                Dim variables(1) As Optimization.OptBoundVariable
-                For i As Integer = 0 To 1
-                    variables(i) = New Optimization.OptBoundVariable("x" & CStr(i + 1), initval2(i), False, lconstr2(i), uconstr2(i))
-                Next
-                Dim solver As New Optimization.Simplex
+                Dim solver As New MathEx.Optimization.IPOPTSolver
+                solver.MaxIterations = 100
                 solver.Tolerance = 0.000001
-                solver.MaxFunEvaluations = 5000
-                finalval2 = solver.ComputeMin(AddressOf FunctionValue, variables)
+                finalval2 = solver.Solve(AddressOf FunctionValue, Nothing, initval2, lconstr2, uconstr2)
 
                 Dim avgerr As Double = 0.0#
                 For i As Integer = 0 To 5
