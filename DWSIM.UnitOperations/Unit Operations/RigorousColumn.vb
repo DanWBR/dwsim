@@ -1690,6 +1690,8 @@ Namespace UnitOperations
             Direct = 3
         End Enum
 
+        Public Property SolvingMethodName As String = "Wang-Henke (Bubble Point)"
+
         'column type
         Private _type As ColType = Column.ColType.DistillationColumn
 
@@ -3490,13 +3492,28 @@ Namespace UnitOperations
 
             If TypeOf Me Is DistillationColumn Then
                 Dim solvererror = True
-                Try
-                    SetColumnSolver(New SolvingMethods.WangHenkeMethod())
-                    so = Solver.SolveColumn(inputdata)
-                    solvererror = False
-                Catch ex As Exception
-                End Try
-                If solvererror Then
+                If SolvingMethodName.Contains("Bubble") Then
+                    Try
+                        SetColumnSolver(New SolvingMethods.WangHenkeMethod())
+                        so = Solver.SolveColumn(inputdata)
+                        solvererror = False
+                    Catch ex As Exception
+                    End Try
+                    If solvererror Then
+                        Try
+                            inputdata.CalculationMode = 0
+                            SetColumnSolver(New SolvingMethods.NaphtaliSandholmMethod())
+                            so = Solver.SolveColumn(inputdata)
+                            solvererror = False
+                        Catch ex As Exception
+                        End Try
+                        If solvererror Then
+                            inputdata.CalculationMode = 1
+                            SetColumnSolver(New SolvingMethods.NaphtaliSandholmMethod())
+                            so = Solver.SolveColumn(inputdata)
+                        End If
+                    End If
+                Else
                     Try
                         inputdata.CalculationMode = 0
                         SetColumnSolver(New SolvingMethods.NaphtaliSandholmMethod())
@@ -7382,9 +7399,20 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             il_err_ant = FunctionValue(xvar)
 
-            xvar = MathNet.Numerics.RootFinding.Broyden.FindRoot(Function(xvars)
-                                                                     Return FunctionValue(xvars)
-                                                                 End Function, xvar, tol(0), maxits)
+            Dim esolv As IExternalNonLinearSystemSolver = Nothing
+            If dc.FlowSheet.ExternalSolvers.ContainsKey(dc.ExternalSolverID) Then
+                esolv = dc.FlowSheet.ExternalSolvers(dc.ExternalSolverID)
+            End If
+
+            If esolv IsNot Nothing Then
+                xvar = esolv.Solve(Function(xvars)
+                                       Return FunctionValue(xvars)
+                                   End Function, Nothing, Nothing, xvar, maxits, tol(0))
+            Else
+                xvar = MathNet.Numerics.RootFinding.Broyden.FindRoot(Function(xvars)
+                                                                         Return FunctionValue(xvars)
+                                                                     End Function, xvar, tol(0), maxits)
+            End If
 
             IObj?.Paragraphs.Add(String.Format("Final Variable Values: {0}", xvar.ToMathArrayString))
 

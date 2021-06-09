@@ -90,7 +90,6 @@ Namespace GraphicObjects.Shapes
 
             MyBase.Draw(g)
 
-
             Dim myPen As New SKPaint()
             With myPen
                 .Color = LineColor

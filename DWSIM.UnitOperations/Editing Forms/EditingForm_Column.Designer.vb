@@ -93,6 +93,10 @@ Partial Class EditingForm_Column
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabContainerAll = New System.Windows.Forms.TabControl()
         Me.TabPage6 = New System.Windows.Forms.TabPage()
+        Me.cbExternalSolver = New System.Windows.Forms.ComboBox()
+        Me.LabelES = New System.Windows.Forms.Label()
+        Me.cbSolvingMethod = New System.Windows.Forms.ComboBox()
+        Me.LabelSM = New System.Windows.Forms.Label()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.TabStages = New System.Windows.Forms.TabPage()
         Me.TabConnections = New System.Windows.Forms.TabPage()
@@ -734,6 +738,10 @@ Partial Class EditingForm_Column
         'TabPage6
         '
         resources.ApplyResources(Me.TabPage6, "TabPage6")
+        Me.TabPage6.Controls.Add(Me.cbExternalSolver)
+        Me.TabPage6.Controls.Add(Me.LabelES)
+        Me.TabPage6.Controls.Add(Me.cbSolvingMethod)
+        Me.TabPage6.Controls.Add(Me.LabelSM)
         Me.TabPage6.Controls.Add(Me.Label16)
         Me.TabPage6.Controls.Add(Me.Label6)
         Me.TabPage6.Controls.Add(Me.cbPropPack)
@@ -750,6 +758,43 @@ Partial Class EditingForm_Column
         Me.ToolTipValues.SetToolTip(Me.TabPage6, resources.GetString("TabPage6.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.TabPage6, resources.GetString("TabPage6.ToolTip2"))
         Me.TabPage6.UseVisualStyleBackColor = True
+        '
+        'cbExternalSolver
+        '
+        resources.ApplyResources(Me.cbExternalSolver, "cbExternalSolver")
+        Me.cbExternalSolver.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbExternalSolver.FormattingEnabled = True
+        Me.cbExternalSolver.Name = "cbExternalSolver"
+        Me.ToolTip1.SetToolTip(Me.cbExternalSolver, resources.GetString("cbExternalSolver.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbExternalSolver, resources.GetString("cbExternalSolver.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbExternalSolver, resources.GetString("cbExternalSolver.ToolTip2"))
+        '
+        'LabelES
+        '
+        resources.ApplyResources(Me.LabelES, "LabelES")
+        Me.LabelES.Name = "LabelES"
+        Me.ToolTip1.SetToolTip(Me.LabelES, resources.GetString("LabelES.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.LabelES, resources.GetString("LabelES.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.LabelES, resources.GetString("LabelES.ToolTip2"))
+        '
+        'cbSolvingMethod
+        '
+        resources.ApplyResources(Me.cbSolvingMethod, "cbSolvingMethod")
+        Me.cbSolvingMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbSolvingMethod.FormattingEnabled = True
+        Me.cbSolvingMethod.Items.AddRange(New Object() {resources.GetString("cbSolvingMethod.Items"), resources.GetString("cbSolvingMethod.Items1")})
+        Me.cbSolvingMethod.Name = "cbSolvingMethod"
+        Me.ToolTip1.SetToolTip(Me.cbSolvingMethod, resources.GetString("cbSolvingMethod.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbSolvingMethod, resources.GetString("cbSolvingMethod.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbSolvingMethod, resources.GetString("cbSolvingMethod.ToolTip2"))
+        '
+        'LabelSM
+        '
+        resources.ApplyResources(Me.LabelSM, "LabelSM")
+        Me.LabelSM.Name = "LabelSM"
+        Me.ToolTip1.SetToolTip(Me.LabelSM, resources.GetString("LabelSM.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.LabelSM, resources.GetString("LabelSM.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.LabelSM, resources.GetString("LabelSM.ToolTip2"))
         '
         'TabPage2
         '
@@ -922,4 +967,8 @@ Partial Class EditingForm_Column
     Friend WithEvents TabStages As TabPage
     Friend WithEvents TabPage5 As TabPage
     Friend WithEvents Label3 As Label
+    Public WithEvents cbExternalSolver As ComboBox
+    Public WithEvents LabelES As Label
+    Public WithEvents cbSolvingMethod As ComboBox
+    Public WithEvents LabelSM As Label
 End Class

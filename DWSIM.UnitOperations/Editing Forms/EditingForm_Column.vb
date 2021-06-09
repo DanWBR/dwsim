@@ -86,9 +86,32 @@ Public Class EditingForm_Column
             If .IsSpecAttached Then lblConnectedTo.Text = .FlowSheet.SimulationObjects(.AttachedSpecId).GraphicObject.Tag
             If .IsAdjustAttached Then lblConnectedTo.Text = .FlowSheet.SimulationObjects(.AttachedAdjustId).GraphicObject.Tag
 
+            'solving method
+
+            cbSolvingMethod.SelectedItem = .SolvingMethodName
+
+            'external solvers
+
+            cbExternalSolver.Items.Clear()
+            cbExternalSolver.Items.Add("")
+            For Each sv In .FlowSheet.ExternalSolvers.Values
+                If sv.Category = Enums.ExternalSolverCategory.NonLinearSystem Then
+                    cbExternalSolver.Items.Add(sv.DisplayText)
+                End If
+            Next
+
+            Dim selectedsolver = .FlowSheet.ExternalSolvers.Values.Where(Function(s) s.ID = .ExternalSolverID).FirstOrDefault()
+            If selectedsolver IsNot Nothing Then
+                cbExternalSolver.SelectedItem = selectedsolver.DisplayText
+            Else
+                cbExternalSolver.SelectedIndex = 0
+            End If
+
             If TypeOf SimObject Is DistillationColumn Then
                 chkNoCondenser.Checked = DirectCast(SimObject, DistillationColumn).ReboiledAbsorber
                 chkNoReboiler.Checked = DirectCast(SimObject, DistillationColumn).RefluxedAbsorber
+                cbSolvingMethod.Enabled = True
+                LabelSM.Enabled = True
             ElseIf TypeOf SimObject Is AbsorptionColumn Then
                 TabContainerSpecification.TabPages.Remove(TabCondenser)
                 TabContainerSpecification.TabPages.Remove(TabReboiler)
@@ -666,6 +689,29 @@ Public Class EditingForm_Column
         PanelReboiler.Enabled = Not chkNoReboiler.Checked
         If TypeOf SimObject Is DistillationColumn Then
             DirectCast(SimObject, DistillationColumn).RefluxedAbsorber = chkNoReboiler.Checked
+        End If
+    End Sub
+
+    Private Sub cbExternalSolver_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbExternalSolver.SelectedIndexChanged
+        If Loaded Then
+            Dim selectedsolver = SimObject.FlowSheet.ExternalSolvers.Values.Where(
+                Function(s) s.DisplayText = cbExternalSolver.SelectedItem.ToString()).FirstOrDefault()
+            If selectedsolver IsNot Nothing Then
+                SimObject.ExternalSolverID = selectedsolver.ID
+            Else
+                SimObject.ExternalSolverID = ""
+            End If
+        End If
+    End Sub
+
+    Private Sub cbSolvingMethod_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSolvingMethod.SelectedIndexChanged
+        SimObject.SolvingMethodName = cbSolvingMethod.SelectedItem.ToString()
+        If cbSolvingMethod.SelectedIndex = 1 Then
+            cbExternalSolver.Enabled = True
+            LabelES.Enabled = True
+        Else
+            cbExternalSolver.Enabled = False
+            LabelES.Enabled = False
         End If
     End Sub
 
