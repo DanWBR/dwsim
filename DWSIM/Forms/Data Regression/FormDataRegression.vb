@@ -3506,6 +3506,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
             Next
 
             proppack.VaporPhaseFugacityCalculationMode = Not chkIdealVaporPhase.Checked
+            proppack.ActivityCoefficientModels_IgnoreMissingInteractionParameters = True
 
             FunctionValue(initval2)
 
@@ -3608,6 +3609,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
         Next
 
         proppack.VaporPhaseFugacityCalculationMode = Not chkIdealVaporPhase.Checked
+        proppack.ActivityCoefficientModels_IgnoreMissingInteractionParameters = True
 
         Select Case currcase.method
             Case "Limited Memory BFGS"
