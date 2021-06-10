@@ -170,7 +170,7 @@ Namespace UnitOperations
 
         End Sub
 
-        Public Function SetDynamicProperty(id As String, value As Object) As Boolean
+        Public Function SetDynamicProperty(id As String, value As Object) As Boolean Implements ISimulationObject.AddDynamicProperty
 
             Dim col1 = DirectCast(ExtraProperties, IDictionary(Of String, Object))
 
@@ -180,7 +180,7 @@ Namespace UnitOperations
 
         End Function
 
-        Public Function GetDynamicProperty(id As String) As Object
+        Public Function GetDynamicProperty(id As String) As Object Implements ISimulationObject.GetDynamicProperty
 
             Dim col1 = DirectCast(ExtraProperties, IDictionary(Of String, Object))
 
@@ -188,7 +188,7 @@ Namespace UnitOperations
 
         End Function
 
-        Public Function GetDynamicPropertyUnitType(id As String) As Enums.UnitOfMeasure
+        Public Function GetDynamicPropertyUnitType(id As String) As Enums.UnitOfMeasure Implements ISimulationObject.GetDynamicPropertyUnitType
 
             Dim col1 = DirectCast(ExtraPropertiesUnitTypes, IDictionary(Of String, Object))
 
@@ -211,6 +211,14 @@ Namespace UnitOperations
             End If
 
         End Sub
+
+        Public Function IsDynamicProperty(pname As String) As Boolean Implements ISimulationObject.IsDynamicProperty
+
+            Dim col1 = DirectCast(ExtraPropertiesDescriptions, IDictionary(Of String, Object))
+
+            Return col1.ContainsKey(pname)
+
+        End Function
 
         Public Overridable Function GetChartModel(name As String) As Object Implements ISimulationObject.GetChartModel
             Return Nothing

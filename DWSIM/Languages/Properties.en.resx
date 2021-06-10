@@ -399,6 +399,12 @@
   <data name="PROP_HX_31" xml:space="preserve">
     <value>Outlet Vapor Fraction (Stream 2)</value>
   </data>
+  <data name="PROP_HX_32" xml:space="preserve">
+    <value>Pressure Drop (Cold Side)</value>
+  </data>
+  <data name="PROP_HX_33" xml:space="preserve">
+    <value>Pressure Drop (Hot Side)</value>
+  </data>
   <data name="PROP_HX_4" xml:space="preserve">
     <value>Hot fluid outlet temperature</value>
   </data>

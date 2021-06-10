@@ -412,12 +412,16 @@ Public Class FormMain
 
             Me.WelcomePanel.Controls.Add(ucontrol)
 
+            My.Settings.CheckForUpdates = False
+
         Else
 
             Me.FrmWelcome = New FormWelcome
             Me.FrmWelcome.Owner = Me
             Me.FrmWelcome.Dock = DockStyle.Fill
             Me.WelcomePanel.Controls.Add(Me.FrmWelcome)
+
+            My.Settings.CheckForUpdates = True
 
         End If
 
@@ -934,7 +938,7 @@ Public Class FormMain
 
         UpdateFlowsheetLinks()
 
-        CheckForUpdates()
+        If My.Settings.CheckForUpdates Then CheckForUpdates()
 
     End Sub
 

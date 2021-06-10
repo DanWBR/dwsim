@@ -2566,7 +2566,7 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function GetDefaultProperties() As String()
-            Return New String() {"PROP_HX_0", "PROP_HX_1", "PROP_HX_2", "PROP_HX_3", "PROP_HX_4", "PROP_HX_25", "PROP_HX_26", "PROP_HX_27", "PROP_HX_28"}
+            Return New String() {"PROP_HX_0", "PROP_HX_1", "PROP_HX_2", "PROP_HX_3", "PROP_HX_4", "PROP_HX_25", "PROP_HX_26", "PROP_HX_27", "PROP_HX_28", "PROP_HX_32", "PROP_HX_33"}
         End Function
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
@@ -2652,6 +2652,10 @@ Namespace UnitOperations
                         value = OutletVaporFraction1
                     Case 21
                         value = OutletVaporFraction2
+                    Case 32
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, ColdSidePressureDrop)
+                    Case 33
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, HotSidePressureDrop)
                 End Select
 
                 Return value
@@ -2675,7 +2679,7 @@ Namespace UnitOperations
                         proplist.Add("PROP_HX_" + CStr(i))
                     Next
                 Case PropertyType.RW
-                    For i = 0 To 29
+                    For i = 0 To 33
                         proplist.Add("PROP_HX_" + CStr(i))
                     Next
                 Case PropertyType.WR
@@ -2687,8 +2691,10 @@ Namespace UnitOperations
                     proplist.Add("PROP_HX_29")
                     proplist.Add("PROP_HX_30")
                     proplist.Add("PROP_HX_31")
+                    proplist.Add("PROP_HX_32")
+                    proplist.Add("PROP_HX_33")
                 Case PropertyType.ALL
-                    For i = 0 To 31
+                    For i = 0 To 33
                         proplist.Add("PROP_HX_" + CStr(i))
                     Next
             End Select
@@ -2755,6 +2761,10 @@ Namespace UnitOperations
                     OutletVaporFraction1 = propval
                 Case 31
                     OutletVaporFraction2 = propval
+                Case 32
+                    ColdSidePressureDrop = SystemsOfUnits.Converter.ConvertToSI(su.deltaP, propval)
+                Case 33
+                    HotSidePressureDrop = SystemsOfUnits.Converter.ConvertToSI(su.deltaP, propval)
             End Select
             Return 1
         End Function
@@ -2825,6 +2835,8 @@ Namespace UnitOperations
                         value = "%"
                     Case 26
                         value = su.heatflow
+                    Case 32, 33
+                        value = su.deltaP
                 End Select
 
                 Return value

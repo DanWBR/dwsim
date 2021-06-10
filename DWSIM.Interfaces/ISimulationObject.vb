@@ -166,6 +166,7 @@ Imports DWSIM.Interfaces.Enums
     ''' <returns></returns>
     ''' <remarks></remarks>
     Property AttachedSpecId() As String
+    Function AddDynamicProperty(id As String, value As Object) As Boolean
 
     ''' <summary>
     ''' If an Specification object is attached to this object, returns a variable describing how this object is used by it (target or source).
@@ -181,6 +182,8 @@ Imports DWSIM.Interfaces.Enums
 
     Sub Calculate(Optional ByVal args As Object = Nothing)
 
+    Function GetDynamicProperty(id As String) As Object
+
     Sub DeCalculate(Optional ByVal args As Object = Nothing)
 
     Sub Solve()
@@ -188,6 +191,8 @@ Imports DWSIM.Interfaces.Enums
     Sub PerformPostCalcValidation()
 
     Property PropertyPackage As IPropertyPackage
+
+    Function GetDynamicPropertyUnitType(id As String) As UnitOfMeasure
 
     Sub SetFlowsheet(fobj As Object)
 
@@ -216,5 +221,7 @@ Imports DWSIM.Interfaces.Enums
     Function GetChartModel(name As String) As Object
 
     Function GetChartModelNames() As List(Of String)
+
+    Function IsDynamicProperty(pname As String) As Boolean
 
 End Interface

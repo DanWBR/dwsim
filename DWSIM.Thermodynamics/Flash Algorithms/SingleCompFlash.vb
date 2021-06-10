@@ -42,12 +42,28 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides ReadOnly Property Name As String = "Single Compound Flash"
 
+        Private Function GetIndex(Vz As Double()) As Integer
+
+            Dim idx As Integer
+            For i = 0 To Vz.Length - 1
+                If Vz(i) > 0.9 Then
+                    idx = i
+                    Exit For
+                End If
+            Next
+
+            Return idx
+
+        End Function
+
         Public Overrides Function Flash_PT(ByVal Vz As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            If T < PP.RET_VTF(0) Then
+            Dim idx = GetIndex(Vz)
+
+            If T < PP.RET_VTF(idx) Then
                 Return New Object() {0.0, 0.0, Vz, Vz, 0, 0.0#, PP.RET_NullVector, 1.0, Vz, Vz}
             Else
-                Dim Pvap = PP.AUX_PVAPi(0, T)
+                Dim Pvap = PP.AUX_PVAPi(idx, T)
                 If Pvap > P Then
                     Return New Object() {0.0, 1.0, Vz, Vz, 0, 0.0#, PP.RET_NullVector, 0.0, Vz, Vz}
                 Else
@@ -59,11 +75,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_PH(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim T, V, S As Double
+            Dim idx = GetIndex(Vz)
 
-            Dim Tsat = PP.AUX_TSATi(P, 0)
-            Dim Tsub = PP.AUX_TSUBLi(0, P)
-            Dim Tfus = PP.RET_VTF(0)
+            Dim T, V, S, Tsat, Tfus As Double
+
+            Tsat = PP.AUX_TSATi(P, idx)
+            Tfus = PP.RET_VTF(idx)
 
             Dim HsatV = PP.DW_CalcEnthalpy(Vz, Tsat, P, State.Vapor)
             Dim HsatL = PP.DW_CalcEnthalpy(Vz, Tsat, P, State.Liquid)
@@ -83,7 +100,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 V = (H - HsatL) / (HsatV - HsatL)
                 S = 0.0
                 T = Tsat
-            ElseIf H >= Hls Then
+            ElseIf H >= Hls And Tfus > 0 Then
                 'pure liquid
                 V = 0.0
                 S = 0.0
@@ -91,16 +108,24 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                           Function(Tx)
                                               Return OBJ_FUNC_PH_FLASH(H, "PT", Tx, P, Vz, PP, False, Nothing)(0)
                                           End Function)
-            ElseIf H < Hls And H >= Hs Then
+            ElseIf H < Hls And H >= Hs And Tfus > 0 Then
                 'partial liquefaction
                 V = 0.0
                 S = (H - Hs) / (Hls - Hs)
                 T = Tfus
-            Else
+            ElseIf Tfus > 0 Then
                 'pure solid
                 V = 0.0
                 S = 1.0
                 T = New Brent().BrentOpt2(10, Tfus, 10, 0.000001, 100,
+                                          Function(Tx)
+                                              Return OBJ_FUNC_PH_FLASH(H, "PT", Tx, P, Vz, PP, False, Nothing)(0)
+                                          End Function)
+            Else
+                'pure liquid
+                V = 0.0
+                S = 0.0
+                T = New Brent().BrentOpt2(Tsat * 0.3, Tsat, 10, 0.000001, 100,
                                           Function(Tx)
                                               Return OBJ_FUNC_PH_FLASH(H, "PT", Tx, P, Vz, PP, False, Nothing)(0)
                                           End Function)
@@ -112,11 +137,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_PS(ByVal Vz As Double(), ByVal P As Double, ByVal S As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
+            Dim idx = GetIndex(Vz)
+
             Dim T, V, Sx As Double
 
-            Dim Tsat = PP.AUX_TSATi(P, 0)
-            Dim Tsub = PP.AUX_TSUBLi(0, P)
-            Dim Tfus = PP.RET_VTF(0)
+            Dim Tsat = PP.AUX_TSATi(P, idx)
+            Dim Tfus = PP.RET_VTF(idx)
 
             Dim SsatV = PP.DW_CalcEntropy(Vz, Tsat, P, State.Vapor)
             Dim SsatL = PP.DW_CalcEntropy(Vz, Tsat, P, State.Liquid)
@@ -136,7 +162,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 V = (S - SsatL) / (SsatV - SsatL)
                 Sx = 0.0
                 T = Tsat
-            ElseIf S >= Sls Then
+            ElseIf S >= Sls And Tfus > 0 Then
                 'pure liquid
                 V = 0.0
                 Sx = 0.0
@@ -144,16 +170,24 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                           Function(Tx)
                                               Return OBJ_FUNC_PS_FLASH(S, "PT", Tx, P, Vz, PP, False, Nothing)(0)
                                           End Function)
-            ElseIf S < Sls And S >= Ss Then
+            ElseIf S < Sls And S >= Ss And Tfus > 0 Then
                 'partial liquefaction
                 V = 0.0
                 Sx = (S - Ss) / (Sls - Ss)
                 T = Tfus
-            Else
+            ElseIf Tfus > 0 Then
                 'pure solid
                 V = 0.0
                 Sx = 1.0
                 T = New Brent().BrentOpt2(10, Tfus, 10, 0.000001, 100,
+                                          Function(Tx)
+                                              Return OBJ_FUNC_PS_FLASH(S, "PT", Tx, P, Vz, PP, False, Nothing)(0)
+                                          End Function)
+            Else
+                'pure liquid
+                V = 0.0
+                Sx = 0.0
+                T = New Brent().BrentOpt2(Tsat * 0.3, Tsat, 10, 0.000001, 100,
                                           Function(Tx)
                                               Return OBJ_FUNC_PS_FLASH(S, "PT", Tx, P, Vz, PP, False, Nothing)(0)
                                           End Function)
@@ -165,7 +199,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_TV(ByVal Vz As Double(), ByVal T As Double, ByVal V As Double, ByVal Pref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim Psat = PP.AUX_PVAPi(0, T)
+            Dim idx = GetIndex(Vz)
+
+            Dim Psat = PP.AUX_PVAPi(idx, T)
 
             Return New Object() {1.0 - V, V, Vz, Vz, Psat, 0, New Double() {1.0}, 0.0, Vz, 0.0, Vz}
 
@@ -173,7 +209,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_PV(ByVal Vz As Double(), ByVal P As Double, ByVal V As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim Tsat = PP.AUX_TSATi(P, 0)
+            Dim idx = GetIndex(Vz)
+
+            Dim Tsat = PP.AUX_TSATi(P, idx)
 
             Return New Object() {1.0 - V, V, Vz, Vz, Tsat, 0, New Double() {1.0}, 0.0, Vz, 0.0, Vz}
 

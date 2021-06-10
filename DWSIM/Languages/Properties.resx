@@ -1608,4 +1608,10 @@
   <data name="PROP_CS_7" xml:space="preserve">
     <value>Tempo de residência do vapor</value>
   </data>
+  <data name="PROP_HX_32" xml:space="preserve">
+    <value>Perda de Carga (Lado Frio)</value>
+  </data>
+  <data name="PROP_HX_33" xml:space="preserve">
+    <value>Perda de Carga (Lado Quente)</value>
+  </data>
 </root>

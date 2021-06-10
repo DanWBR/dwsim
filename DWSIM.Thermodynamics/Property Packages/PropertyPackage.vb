@@ -6040,8 +6040,8 @@ Final3:
 
         Public Overridable Function AUX_PSUBLi(index As Integer, T As Double) As Double
 
-            Dim Tf = RET_VTF()(0)
-            Dim Hf = RET_VHF()(0)
+            Dim Tf = RET_VTF()(index)
+            Dim Hf = RET_VHF()(index)
 
             Dim Pvapl = AUX_PVAPi(index, T)
             Dim Pvaps = Math.Exp(Math.Log(Pvapl) - Hf * 1000 / 8.314 * (1 / T - 1 / Tf))
@@ -6052,6 +6052,8 @@ Final3:
 
         Public Function AUX_TSUBLi(ByVal index As Integer, ByVal PVAP As Double) As Double
 
+            Dim Tmin = RET_VTF()(index) * 0.3
+            Dim Tmax = RET_VTB()(index)
             Dim pvapt As Double
             Return MathNet.Numerics.RootFinding.Brent.FindRoot(Function(T)
                                                                    pvapt = AUX_PSUBLi(index, T)
@@ -6059,7 +6061,7 @@ Final3:
                                                                        Throw New Exception(String.Format("Error calculation sublimation pressure for {0} at {1} K.", "", T))
                                                                    End If
                                                                    Return pvapt - PVAP
-                                                               End Function, 1.0, 2000.0)
+                                                               End Function, Tmin, Tmax)
 
         End Function
 
