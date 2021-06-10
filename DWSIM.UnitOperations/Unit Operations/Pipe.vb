@@ -2053,15 +2053,16 @@ Final3:     T = bbb
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As String
+
             Dim u0 As String = MyBase.GetPropertyUnit(prop, su)
+
+            If su Is Nothing Then su = New SystemsOfUnits.SI
 
             If u0 <> "NF" Then
                 Return u0
             ElseIf prop.Contains("_") Then
-                If su Is Nothing Then su = New SystemsOfUnits.SI
                 Dim value As String = ""
                 Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
-
                 Select Case propidx
                     Case 0
                         value = su.deltaP
