@@ -792,7 +792,7 @@ Namespace Reactors
                                                       errval = Exp(gval) + wbal * 100 + ebal * 100
                                                       Return errval
                                                   End Function, Nothing, Nothing,
-                                                          ival, lbo, ubo, 1000, 0.0000000001)
+                                                          ival, lbo, ubo, 1000, 1.0E-20)
 
                             Else
 
