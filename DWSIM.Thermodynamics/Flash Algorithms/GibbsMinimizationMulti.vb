@@ -1,5 +1,5 @@
 ﻿'    Multiphase Gibbs Minimization Flash Algorithms
-'    Copyright 2012-2020 Daniel Wagner O. de Medeiros
+'    Copyright 2012-2021 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -18,6 +18,7 @@
 
 Imports System.Math
 Imports Cureos.Numerics
+Imports DWSIM.Interfaces
 Imports DWSIM.Interfaces.Enums
 Imports DWSIM.SharedClasses
 
@@ -469,51 +470,68 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             End If
 
-            Dim IPOPT_Failure As Boolean = True
+            Dim esolvID = FlashSettings(Interfaces.Enums.FlashSetting.GibbsMinimizationExternalSolver)
+            Dim esolv As IExternalNonLinearMinimizationSolver = Nothing
+            If proppack.Flowsheet IsNot Nothing Then
+                If proppack.Flowsheet.ExternalSolvers.ContainsKey(esolvID) Then
+                    esolv = proppack.Flowsheet.ExternalSolvers(esolvID)
+                End If
+            End If
 
-            Dim problem As Ipopt = Nothing
-            Dim ex0 As New Exception
+            If esolv Is Nothing Then
 
-            Try
-                problem = New Ipopt(initval.Length, lconstr, uconstr, 0, Nothing, Nothing, 0, 0,
+                Dim IPOPT_Failure As Boolean = True
+
+                Dim problem As Ipopt = Nothing
+                Dim ex0 As New Exception
+
+                Try
+                    problem = New Ipopt(initval.Length, lconstr, uconstr, 0, Nothing, Nothing, 0, 0,
                            AddressOf eval_f, AddressOf eval_g,
                            AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
-                problem.AddOption("print_level", 1)
-                problem.AddOption("tol", etol)
-                problem.AddOption("max_iter", maxit_e * 10)
-                problem.AddOption("mu_strategy", "adaptive")
-                problem.AddOption("expect_infeasible_problem", "yes")
-                problem.AddOption("hessian_approximation", "limited-memory")
-                problem.SetIntermediateCallback(AddressOf intermediate)
-                'solve the problem 
-                status = problem.SolveProblem(initval, obj, Nothing, Nothing, Nothing, Nothing)
-                IPOPT_Failure = False
-            Catch ex As Exception
-                ex0 = ex
-            Finally
-                problem?.Dispose()
-                problem = Nothing
-            End Try
+                    problem.AddOption("print_level", 1)
+                    problem.AddOption("tol", etol)
+                    problem.AddOption("max_iter", maxit_e * 10)
+                    problem.AddOption("mu_strategy", "adaptive")
+                    problem.AddOption("expect_infeasible_problem", "yes")
+                    problem.AddOption("hessian_approximation", "limited-memory")
+                    problem.SetIntermediateCallback(AddressOf intermediate)
+                    'solve the problem 
+                    status = problem.SolveProblem(initval, obj, Nothing, Nothing, Nothing, Nothing)
+                    IPOPT_Failure = False
+                Catch ex As Exception
+                    ex0 = ex
+                Finally
+                    problem?.Dispose()
+                    problem = Nothing
+                End Try
 
-            If IPOPT_Failure Then Throw New Exception("Failed to load IPOPT library: " + ex0.Message)
+                If IPOPT_Failure Then Throw New Exception("Failed to load IPOPT library: " + ex0.Message)
 
-            Select Case status
-                Case IpoptReturnCode.Infeasible_Problem_Detected,
+                Select Case status
+                    Case IpoptReturnCode.Infeasible_Problem_Detected,
                         IpoptReturnCode.Maximum_Iterations_Exceeded,
                         IpoptReturnCode.User_Requested_Stop,
                         IpoptReturnCode.Solve_Succeeded,
                         IpoptReturnCode.Solved_To_Acceptable_Level
-                    'get solution with lowest gibbs energy
-                    initval = Solutions(GibbsEnergyValues.IndexOf(GibbsEnergyValues.Min))
-                Case IpoptReturnCode.Diverging_Iterates,
+                        'get solution with lowest gibbs energy
+                        initval = Solutions(GibbsEnergyValues.IndexOf(GibbsEnergyValues.Min))
+                    Case IpoptReturnCode.Diverging_Iterates,
                           IpoptReturnCode.Error_In_Step_Computation,
                           IpoptReturnCode.Internal_Error,
                           IpoptReturnCode.Invalid_Number_Detected,
                           IpoptReturnCode.Invalid_Option,
                           IpoptReturnCode.NonIpopt_Exception_Thrown,
                           IpoptReturnCode.Unrecoverable_Exception
-                    Throw New Exception("PT Flash: IPOPT failed to converge.")
-            End Select
+                        Throw New Exception("PT Flash: IPOPT failed to converge.")
+                End Select
+
+            Else
+
+                initval = esolv.Solve(AddressOf FunctionValue, AddressOf FunctionGradient, Nothing,
+                                        initval, lconstr, uconstr, maxit_e * 10, etol)
+
+            End If
 
             For i = 0 To initval.Length - 1
                 If Double.IsNaN(initval(i)) Then initval(i) = 0.0#

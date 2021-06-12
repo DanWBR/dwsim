@@ -286,6 +286,8 @@ Namespace Enums
 
         UseIOFlash = 28
 
+        GibbsMinimizationExternalSolver = 29
+
     End Enum
 
     Public Enum FlashCalculationType

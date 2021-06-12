@@ -11819,6 +11819,9 @@ Final3:
                 If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.UseIOFlash) Then
                     FlashSettings.Add(Interfaces.Enums.FlashSetting.UseIOFlash, False)
                 End If
+                If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.GibbsMinimizationExternalSolver) Then
+                    FlashSettings.Add(Interfaces.Enums.FlashSetting.GibbsMinimizationExternalSolver, False)
+                End If
             End If
 
         End Function

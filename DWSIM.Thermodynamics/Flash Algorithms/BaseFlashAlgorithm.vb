@@ -1,5 +1,5 @@
 '    Flash Algorithm Abstract Base Class
-'    Copyright 2010-2015 Daniel Wagner O. de Medeiros
+'    Copyright 2010-2021 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -131,6 +131,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             settings(Interfaces.Enums.FlashSetting.HandleSolidsInDefaultEqCalcMode) = False
 
             settings(Interfaces.Enums.FlashSetting.UseIOFlash) = False
+
+            settings(Interfaces.Enums.FlashSetting.GibbsMinimizationExternalSolver) = ""
 
             Return settings
 

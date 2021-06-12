@@ -73,6 +73,40 @@ Public Class FlashAlgorithmConfig
 
         cbFlashApproach.SelectedIndex = PropPack.FlashCalculationApproach
 
+
+        'external solvers
+
+        If PropPack.Flowsheet IsNot Nothing Then
+
+            cbExternalSolver.Items.Clear()
+            cbExternalSolver.Items.Add("")
+            For Each solver In PropPack.Flowsheet.ExternalSolvers.Values
+                If solver.Category = Interfaces.Enums.ExternalSolverCategory.NonLinearMinimization Then
+                    cbExternalSolver.Items.Add(solver.DisplayText)
+                End If
+            Next
+            Dim esolver = Settings(Interfaces.Enums.FlashSetting.GibbsMinimizationExternalSolver)
+            Dim selectedsolver = PropPack.Flowsheet.ExternalSolvers.Values.Where(Function(s) s.ID = esolver).FirstOrDefault()
+            If selectedsolver IsNot Nothing Then
+                cbExternalSolver.SelectedItem = selectedsolver.DisplayText
+            Else
+                cbExternalSolver.SelectedIndex = 0
+            End If
+
+            If PropPack.FlashCalculationApproach = PropertyPackages.PropertyPackage.FlashCalculationApproachType.GibbsMinimization Then
+                cbExternalSolver.Enabled = True
+            Else
+                cbExternalSolver.Enabled = False
+            End If
+
+        Else
+
+            cbExternalSolver.Enabled = False
+
+        End If
+
+
+
         _loaded = True
 
     End Sub
@@ -129,6 +163,16 @@ Public Class FlashAlgorithmConfig
 
             PropPack.FlashCalculationApproach = cbFlashApproach.SelectedIndex
 
+            If cbExternalSolver.Enabled And PropPack.Flowsheet IsNot Nothing Then
+                Dim selectedsolver = PropPack.Flowsheet.ExternalSolvers.Values.Where(
+              Function(s) s.DisplayText = cbExternalSolver.SelectedItem.ToString()).FirstOrDefault()
+                If selectedsolver IsNot Nothing Then
+                    Settings(Interfaces.Enums.FlashSetting.GibbsMinimizationExternalSolver) = selectedsolver.ID
+                Else
+                    Settings(Interfaces.Enums.FlashSetting.GibbsMinimizationExternalSolver) = ""
+                End If
+            End If
+
         Catch ex As Exception
 
             MessageBox.Show("Error parsing input. Some settings may not have been updated.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -175,6 +219,12 @@ Public Class FlashAlgorithmConfig
                     cbFlashApproach.SelectedIndex = 0
             End Select
         End If
+        If cbFlashApproach.SelectedIndex = 2 Then
+            cbExternalSolver.Enabled = True
+        Else
+            cbExternalSolver.Enabled = False
+        End If
+
     End Sub
 
 End Class

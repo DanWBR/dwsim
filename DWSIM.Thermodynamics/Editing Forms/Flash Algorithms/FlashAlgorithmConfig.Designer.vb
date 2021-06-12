@@ -26,6 +26,8 @@ Partial Class FlashAlgorithmConfig
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPageGeneral = New System.Windows.Forms.TabPage()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.cbExternalSolver = New System.Windows.Forms.ComboBox()
+        Me.Label11 = New System.Windows.Forms.Label()
         Me.gpNL = New System.Windows.Forms.GroupBox()
         Me.chkHandleSolids = New System.Windows.Forms.CheckBox()
         Me.chkImmiscible = New System.Windows.Forms.CheckBox()
@@ -91,6 +93,8 @@ Partial Class FlashAlgorithmConfig
         'GroupBox4
         '
         resources.ApplyResources(Me.GroupBox4, "GroupBox4")
+        Me.GroupBox4.Controls.Add(Me.cbExternalSolver)
+        Me.GroupBox4.Controls.Add(Me.Label11)
         Me.GroupBox4.Controls.Add(Me.gpNL)
         Me.GroupBox4.Controls.Add(Me.cbFlashApproach)
         Me.GroupBox4.Controls.Add(Me.Label10)
@@ -111,6 +115,18 @@ Partial Class FlashAlgorithmConfig
         Me.GroupBox4.Controls.Add(Me.Label24)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.TabStop = False
+        '
+        'cbExternalSolver
+        '
+        resources.ApplyResources(Me.cbExternalSolver, "cbExternalSolver")
+        Me.cbExternalSolver.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbExternalSolver.FormattingEnabled = True
+        Me.cbExternalSolver.Name = "cbExternalSolver"
+        '
+        'Label11
+        '
+        resources.ApplyResources(Me.Label11, "Label11")
+        Me.Label11.Name = "Label11"
         '
         'gpNL
         '
@@ -399,4 +415,6 @@ Partial Class FlashAlgorithmConfig
     Friend WithEvents cbFlashApproach As ComboBox
     Friend WithEvents Label10 As Label
     Friend WithEvents gpNL As GroupBox
+    Friend WithEvents cbExternalSolver As ComboBox
+    Friend WithEvents Label11 As Label
 End Class
