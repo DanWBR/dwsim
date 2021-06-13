@@ -59,16 +59,14 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Public Overrides Function Flash_PT(ByVal Vz As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
             Dim idx = GetIndex(Vz)
+            Dim Pvap = PP.AUX_PVAPi(idx, T)
 
-            If T < PP.RET_VTF(idx) Then
-                Return New Object() {0.0, 0.0, Vz, Vz, 0, 0.0#, PP.RET_NullVector, 1.0, Vz, Vz}
+            If Pvap > P Then
+                Return New Object() {0.0, 1.0, Vz, Vz, 0, 0.0#, PP.RET_NullVector, 0.0, Vz, Vz} 'vapor
+            ElseIf T < PP.RET_VTF(idx) Then
+                Return New Object() {0.0, 0.0, Vz, Vz, 0, 0.0#, PP.RET_NullVector, 1.0, Vz, Vz} 'solid
             Else
-                Dim Pvap = PP.AUX_PVAPi(idx, T)
-                If Pvap > P Then
-                    Return New Object() {0.0, 1.0, Vz, Vz, 0, 0.0#, PP.RET_NullVector, 0.0, Vz, Vz}
-                Else
-                    Return New Object() {1.0, 0.0, Vz, Vz, 0, 0.0#, PP.RET_NullVector, 0.0, Vz, Vz}
-                End If
+                Return New Object() {1.0, 0.0, Vz, Vz, 0, 0.0#, PP.RET_NullVector, 0.0, Vz, Vz} 'liquid
             End If
 
         End Function
@@ -77,15 +75,17 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim idx = GetIndex(Vz)
 
-            Dim T, V, S, Tsat, Tfus As Double
+            Dim T, V, S, Tsat, Tfus, Pfus As Double
 
             Tsat = PP.AUX_TSATi(P, idx)
             Tfus = PP.RET_VTF(idx)
+            Pfus = PP.AUX_PVAPi(idx, Tfus)
 
             Dim HsatV = PP.DW_CalcEnthalpy(Vz, Tsat, P, State.Vapor)
             Dim HsatL = PP.DW_CalcEnthalpy(Vz, Tsat, P, State.Liquid)
-            Dim Hls = PP.DW_CalcEnthalpy(Vz, Tfus, P, State.Liquid)
-            Dim Hs = PP.DW_CalcEnthalpy(Vz, Tfus, P, State.Solid)
+            Dim HsatS = PP.DW_CalcEnthalpy(Vz, Tsat, P, State.Solid)
+            Dim HfusL = PP.DW_CalcEnthalpy(Vz, Tfus, P, State.Liquid)
+            Dim HfusS = PP.DW_CalcEnthalpy(Vz, Tfus, P, State.Solid)
 
             If H >= HsatV Then
                 'pure vapor
@@ -95,12 +95,17 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                           Function(Tx)
                                               Return OBJ_FUNC_PH_FLASH(H, "PT", Tx, P, Vz, PP, False, Nothing)(0)
                                           End Function)
-            ElseIf H >= HsatL Then
-                'partial vaporization
+            ElseIf H >= HsatL And P > Pfus Then
+                'partial vaporization from liquid
                 V = (H - HsatL) / (HsatV - HsatL)
                 S = 0.0
                 T = Tsat
-            ElseIf H >= Hls And Tfus > 0 Then
+            ElseIf H > HsatS And P <= Pfus Then
+                'partial sublimation from solid
+                V = (H - HsatS) / (HsatV - HsatS)
+                S = 1 - V
+                T = Tsat
+            ElseIf H >= HfusL And Tfus > 0 Then
                 'pure liquid
                 V = 0.0
                 S = 0.0
@@ -108,10 +113,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                           Function(Tx)
                                               Return OBJ_FUNC_PH_FLASH(H, "PT", Tx, P, Vz, PP, False, Nothing)(0)
                                           End Function)
-            ElseIf H < Hls And H >= Hs And Tfus > 0 Then
-                'partial liquefaction
+            ElseIf H < HfusL And H >= HfusS And Tfus > 0 Then
+                'partial freezing from liquid
                 V = 0.0
-                S = (H - Hs) / (Hls - Hs)
+                S = 1 - (H - HfusS) / (HfusL - HfusS)
                 T = Tfus
             ElseIf Tfus > 0 Then
                 'pure solid
@@ -143,11 +148,13 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim Tsat = PP.AUX_TSATi(P, idx)
             Dim Tfus = PP.RET_VTF(idx)
+            Dim Pfus = PP.AUX_PVAPi(idx, Tfus)
 
             Dim SsatV = PP.DW_CalcEntropy(Vz, Tsat, P, State.Vapor)
             Dim SsatL = PP.DW_CalcEntropy(Vz, Tsat, P, State.Liquid)
-            Dim Sls = PP.DW_CalcEntropy(Vz, Tfus, P, State.Liquid)
-            Dim Ss = PP.DW_CalcEntropy(Vz, Tfus, P, State.Solid)
+            Dim SsatS = PP.DW_CalcEntropy(Vz, Tsat, P, State.Solid)
+            Dim SfusL = PP.DW_CalcEntropy(Vz, Tfus, P, State.Liquid)
+            Dim SfusS = PP.DW_CalcEntropy(Vz, Tfus, P, State.Solid)
 
             If S >= SsatV Then
                 'pure vapor
@@ -157,12 +164,17 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                           Function(Tx)
                                               Return OBJ_FUNC_PS_FLASH(S, "PT", Tx, P, Vz, PP, False, Nothing)(0)
                                           End Function)
-            ElseIf S >= SsatL Then
-                'partial vaporization
+            ElseIf S >= SsatL And P > Pfus Then
+                'partial vaporization from liquid
                 V = (S - SsatL) / (SsatV - SsatL)
                 Sx = 0.0
                 T = Tsat
-            ElseIf S >= Sls And Tfus > 0 Then
+            ElseIf s > SsatS And P <= Pfus Then
+                'partial sublimation from solid
+                V = (S - SsatS) / (SsatV - SsatS)
+                Sx = 1 - V
+                T = Tsat
+            ElseIf S >= SfusL And Tfus > 0 Then
                 'pure liquid
                 V = 0.0
                 Sx = 0.0
@@ -170,10 +182,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                           Function(Tx)
                                               Return OBJ_FUNC_PS_FLASH(S, "PT", Tx, P, Vz, PP, False, Nothing)(0)
                                           End Function)
-            ElseIf S < Sls And S >= Ss And Tfus > 0 Then
-                'partial liquefaction
+            ElseIf S < SfusL And S >= SfusS And Tfus > 0 Then
+                'partial freezing from liquid
                 V = 0.0
-                Sx = (S - Ss) / (Sls - Ss)
+                Sx = 1 - (S - SfusS) / (SfusL - SfusS)
                 T = Tfus
             ElseIf Tfus > 0 Then
                 'pure solid
@@ -202,8 +214,14 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim idx = GetIndex(Vz)
 
             Dim Psat = PP.AUX_PVAPi(idx, T)
+            Dim Tfus = PP.RET_VTF(idx)
 
-            Return New Object() {1.0 - V, V, Vz, Vz, Psat, 0, New Double() {1.0}, 0.0, Vz, 0.0, Vz}
+            If T > Tfus Then
+                Return New Object() {1.0 - V, V, Vz, Vz, Psat, 0, New Double() {1.0}, 0.0, Vz, 0.0, Vz} 'liquid + vapor
+            Else
+                Return New Object() {0.0, V, Vz, Vz, Psat, 0, New Double() {1.0}, 0.0, Vz, 1.0 - V, Vz} 'solid + vapor
+            End If
+
 
         End Function
 
@@ -212,8 +230,15 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim idx = GetIndex(Vz)
 
             Dim Tsat = PP.AUX_TSATi(P, idx)
+            Dim Tfus = PP.RET_VTF(idx)
 
-            Return New Object() {1.0 - V, V, Vz, Vz, Tsat, 0, New Double() {1.0}, 0.0, Vz, 0.0, Vz}
+            If Tsat > Tfus Then
+                Return New Object() {1.0 - V, V, Vz, Vz, Tsat, 0, New Double() {1.0}, 0.0, Vz, 0.0, Vz} 'liquid + vapor
+            Else
+                Return New Object() {0.0, V, Vz, Vz, Tsat, 0.0, New Double() {1.0}, 0.0, Vz, 1.0 - V, Vz} 'solid + vapor
+            End If
+
+
 
         End Function
 
