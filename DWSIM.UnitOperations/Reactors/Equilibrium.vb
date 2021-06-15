@@ -729,6 +729,11 @@ Namespace Reactors
             solver3.MaxIterations = InternalLoopMaximumIterations
             solver3.Tolerance = InternalLoopTolerance
 
+            Dim esolv As IExternalNonLinearSystemSolver = Nothing
+            If FlowSheet.ExternalSolvers.ContainsKey(ExternalSolverID) Then
+                esolv = FlowSheet.ExternalSolvers(ExternalSolverID)
+            End If
+
             ' check equilibrium constants to define objective function form
 
             Dim Keq As New List(Of Double)
@@ -816,10 +821,22 @@ Namespace Reactors
 
                                 Else
 
-                                    newx = solver3.Solve(Function(x1)
-                                                             FlowSheet.CheckStatus()
-                                                             Return FunctionValue2N(x1)
-                                                         End Function, variables.ToArray())
+                                    If esolv IsNot Nothing Then
+
+                                        newx = esolv.Solve(Function(x1)
+                                                               FlowSheet.CheckStatus()
+                                                               Return FunctionValue2N(x1)
+                                                           End Function, Nothing, Nothing, variables.ToArray(),
+                                                            InternalLoopMaximumIterations, InternalLoopTolerance)
+
+                                    Else
+
+                                        newx = solver3.Solve(Function(x1)
+                                                                 FlowSheet.CheckStatus()
+                                                                 Return FunctionValue2N(x1)
+                                                             End Function, variables.ToArray())
+
+                                    End If
 
                                     FlowSheet.CheckStatus()
 

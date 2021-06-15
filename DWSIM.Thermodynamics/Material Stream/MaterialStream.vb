@@ -7742,6 +7742,10 @@ Namespace Streams
             Return Phases(0).Properties.enthalpy.GetValueOrDefault
         End Function
 
+        Public Function GetMassEntropy() As Double
+            Return Phases(0).Properties.entropy.GetValueOrDefault
+        End Function
+
         Public Function GetTemperature() As Double
             Return Phases(0).Properties.temperature.GetValueOrDefault
         End Function

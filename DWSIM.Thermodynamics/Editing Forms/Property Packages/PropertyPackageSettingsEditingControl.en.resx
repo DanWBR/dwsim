@@ -124,11 +124,23 @@
     <value>Equation of State</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="cbLiqDens.Location" type="System.Drawing.Point, System.Drawing">
+    <value>206, 43</value>
+  </data>
+  <data name="cbLiqDens.Size" type="System.Drawing.Size, System.Drawing">
+    <value>367, 21</value>
+  </data>
+  <data name="chkLiqDensPCorr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 78</value>
+  </data>
   <data name="chkLiqDensPCorr.Size" type="System.Drawing.Size, System.Drawing">
     <value>238, 17</value>
   </data>
   <data name="chkLiqDensPCorr.Text" xml:space="preserve">
     <value>Correct Experimental Data for High Pressures</value>
+  </data>
+  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 18</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 13</value>
@@ -136,11 +148,17 @@
   <data name="Label2.Text" xml:space="preserve">
     <value>Liquid Phase Density</value>
   </data>
+  <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 144</value>
+  </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>134, 13</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Liquid Phase Viscosity</value>
+  </data>
+  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 264</value>
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>122, 13</value>
@@ -149,7 +167,7 @@
     <value>Fugacity Calculation</value>
   </data>
   <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 413</value>
+    <value>15, 19</value>
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>174, 13</value>
@@ -157,11 +175,17 @@
   <data name="Label5.Text" xml:space="preserve">
     <value>Enthalpy, Entropy, Cp and Cv</value>
   </data>
+  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 49</value>
+  </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 13</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
     <value>Calculation Method</value>
+  </data>
+  <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 173</value>
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 13</value>
@@ -170,7 +194,7 @@
     <value>Calculation Method</value>
   </data>
   <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 444</value>
+    <value>15, 50</value>
   </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 13</value>
@@ -178,11 +202,17 @@
   <data name="Label8.Text" xml:space="preserve">
     <value>Calculation Method</value>
   </data>
+  <data name="chkLiqViscPCorr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 231</value>
+  </data>
   <data name="chkLiqViscPCorr.Size" type="System.Drawing.Size, System.Drawing">
     <value>238, 17</value>
   </data>
   <data name="chkLiqViscPCorr.Text" xml:space="preserve">
     <value>Correct Experimental Data for High Pressures</value>
+  </data>
+  <data name="chkLiqDensPeneloux.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 111</value>
   </data>
   <data name="chkLiqDensPeneloux.Size" type="System.Drawing.Size, System.Drawing">
     <value>336, 17</value>
@@ -193,6 +223,12 @@
   <data name="cbLiqVisc.Items1" xml:space="preserve">
     <value>Letsou-Stiel + Experimental Data (if available)</value>
   </data>
+  <data name="cbLiqVisc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>206, 170</value>
+  </data>
+  <data name="cbLiqVisc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>367, 21</value>
+  </data>
   <data name="cbHSCpCalcMode.Items2" xml:space="preserve">
     <value>Excess Properties</value>
   </data>
@@ -200,7 +236,10 @@
     <value>Experimental Data</value>
   </data>
   <data name="cbHSCpCalcMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>200, 439</value>
+    <value>203, 45</value>
+  </data>
+  <data name="cbHSCpCalcMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>431, 21</value>
   </data>
   <data name="cbLiqVIscMixRule.Items" xml:space="preserve">
     <value>Molar Average</value>
@@ -214,11 +253,23 @@
   <data name="cbLiqVIscMixRule.Items3" xml:space="preserve">
     <value>Inverse Log Mass Average</value>
   </data>
+  <data name="cbLiqVIscMixRule.Location" type="System.Drawing.Point, System.Drawing">
+    <value>206, 197</value>
+  </data>
+  <data name="cbLiqVIscMixRule.Size" type="System.Drawing.Size, System.Drawing">
+    <value>367, 21</value>
+  </data>
+  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 202</value>
+  </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 13</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Mixing Rule</value>
+  </data>
+  <data name="chkLiqFugPoynt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 293</value>
   </data>
   <data name="chkLiqFugPoynt.Size" type="System.Drawing.Size, System.Drawing">
     <value>240, 17</value>
@@ -226,23 +277,17 @@
   <data name="chkLiqFugPoynt.Text" xml:space="preserve">
     <value>Liquid Phase: Use Poynting Correction Factor</value>
   </data>
+  <data name="chkVapFugIdeal.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 326</value>
+  </data>
   <data name="chkVapFugIdeal.Size" type="System.Drawing.Size, System.Drawing">
     <value>113, 17</value>
   </data>
   <data name="chkVapFugIdeal.Text" xml:space="preserve">
     <value>Ideal Vapor Phase</value>
   </data>
-  <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 510</value>
-  </data>
-  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>38, 13</value>
-  </data>
-  <data name="Label9.Text" xml:space="preserve">
-    <value>Other</value>
-  </data>
   <data name="chkIgnoreSalLim.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 572</value>
+    <value>19, 78</value>
   </data>
   <data name="chkIgnoreSalLim.Size" type="System.Drawing.Size, System.Drawing">
     <value>271, 17</value>
@@ -251,7 +296,7 @@
     <value>Ignore Maximum Salinity Limit (Seawater Model only)</value>
   </data>
   <data name="chkIgnoreVapFracLim.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 605</value>
+    <value>19, 111</value>
   </data>
   <data name="chkIgnoreVapFracLim.Size" type="System.Drawing.Size, System.Drawing">
     <value>284, 17</value>
@@ -260,7 +305,7 @@
     <value>Ignore Vapor Fraction Bounds (Sour Water Model only)</value>
   </data>
   <data name="chkIgnoreIPs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 539</value>
+    <value>19, 45</value>
   </data>
   <data name="chkIgnoreIPs.Size" type="System.Drawing.Size, System.Drawing">
     <value>289, 17</value>
@@ -273,29 +318,13 @@
     <value>NoControl</value>
   </data>
   <data name="chkUseSolidCp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 477</value>
+    <value>15, 83</value>
   </data>
   <data name="chkUseSolidCp.Size" type="System.Drawing.Size, System.Drawing">
     <value>332, 17</value>
   </data>
   <data name="chkUseSolidCp.Text" xml:space="preserve">
     <value>Solid Phase: Use Heat Capacity for Enthalpy/Entropy Calculation</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Label10.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label10.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="Label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 636</value>
-  </data>
-  <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 13</value>
   </data>
   <data name="chkCalcAdditionalProps.Size" type="System.Drawing.Size, System.Drawing">
     <value>437, 17</value>
@@ -309,7 +338,43 @@
   <data name="Label11.Text" xml:space="preserve">
     <value>Material Streams</value>
   </data>
+  <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>668, 402</value>
+  </data>
+  <data name="TabPage1.Text" xml:space="preserve">
+    <value>Material Streams</value>
+  </data>
+  <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>668, 402</value>
+  </data>
+  <data name="TabPage2.Text" xml:space="preserve">
+    <value>Caloric Properties</value>
+  </data>
+  <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>668, 402</value>
+  </data>
+  <data name="TabPage3.Text" xml:space="preserve">
+    <value>Other Properties</value>
+  </data>
+  <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 16</value>
+  </data>
+  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>38, 13</value>
+  </data>
+  <data name="Label9.Text" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="TabPage4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>668, 402</value>
+  </data>
+  <data name="TabPage4.Text" xml:space="preserve">
+    <value>Misc Settings</value>
+  </data>
+  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>676, 428</value>
+  </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>502, 664</value>
+    <value>676, 428</value>
   </data>
 </root>

@@ -40,14 +40,23 @@ Partial Class PropertyPackageSettingsEditingControl
         Me.Label1 = New System.Windows.Forms.Label()
         Me.chkLiqFugPoynt = New System.Windows.Forms.CheckBox()
         Me.chkVapFugIdeal = New System.Windows.Forms.CheckBox()
-        Me.Label9 = New System.Windows.Forms.Label()
         Me.chkIgnoreSalLim = New System.Windows.Forms.CheckBox()
         Me.chkIgnoreVapFracLim = New System.Windows.Forms.CheckBox()
         Me.chkIgnoreIPs = New System.Windows.Forms.CheckBox()
         Me.chkUseSolidCp = New System.Windows.Forms.CheckBox()
-        Me.Label10 = New System.Windows.Forms.Label()
         Me.chkCalcAdditionalProps = New System.Windows.Forms.CheckBox()
         Me.Label11 = New System.Windows.Forms.Label()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.TabControl1.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
+        Me.TabPage3.SuspendLayout()
+        Me.TabPage4.SuspendLayout()
         Me.SuspendLayout()
         '
         'cbLiqDens
@@ -152,11 +161,6 @@ Partial Class PropertyPackageSettingsEditingControl
         Me.chkVapFugIdeal.Name = "chkVapFugIdeal"
         Me.chkVapFugIdeal.UseVisualStyleBackColor = True
         '
-        'Label9
-        '
-        resources.ApplyResources(Me.Label9, "Label9")
-        Me.Label9.Name = "Label9"
-        '
         'chkIgnoreSalLim
         '
         resources.ApplyResources(Me.chkIgnoreSalLim, "chkIgnoreSalLim")
@@ -181,11 +185,6 @@ Partial Class PropertyPackageSettingsEditingControl
         Me.chkUseSolidCp.Name = "chkUseSolidCp"
         Me.chkUseSolidCp.UseVisualStyleBackColor = True
         '
-        'Label10
-        '
-        resources.ApplyResources(Me.Label10, "Label10")
-        Me.Label10.Name = "Label10"
-        '
         'chkCalcAdditionalProps
         '
         resources.ApplyResources(Me.chkCalcAdditionalProps, "chkCalcAdditionalProps")
@@ -197,39 +196,86 @@ Partial Class PropertyPackageSettingsEditingControl
         resources.ApplyResources(Me.Label11, "Label11")
         Me.Label11.Name = "Label11"
         '
+        'TabControl1
+        '
+        resources.ApplyResources(Me.TabControl1, "TabControl1")
+        Me.TabControl1.Controls.Add(Me.TabPage1)
+        Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Controls.Add(Me.TabPage3)
+        Me.TabControl1.Controls.Add(Me.TabPage4)
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        '
+        'TabPage1
+        '
+        resources.ApplyResources(Me.TabPage1, "TabPage1")
+        Me.TabPage1.Controls.Add(Me.Label11)
+        Me.TabPage1.Controls.Add(Me.chkCalcAdditionalProps)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'TabPage2
+        '
+        resources.ApplyResources(Me.TabPage2, "TabPage2")
+        Me.TabPage2.Controls.Add(Me.Label5)
+        Me.TabPage2.Controls.Add(Me.Label8)
+        Me.TabPage2.Controls.Add(Me.chkUseSolidCp)
+        Me.TabPage2.Controls.Add(Me.cbHSCpCalcMode)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'TabPage3
+        '
+        resources.ApplyResources(Me.TabPage3, "TabPage3")
+        Me.TabPage3.Controls.Add(Me.Label2)
+        Me.TabPage3.Controls.Add(Me.cbLiqDens)
+        Me.TabPage3.Controls.Add(Me.chkLiqDensPCorr)
+        Me.TabPage3.Controls.Add(Me.Label3)
+        Me.TabPage3.Controls.Add(Me.Label4)
+        Me.TabPage3.Controls.Add(Me.Label6)
+        Me.TabPage3.Controls.Add(Me.chkVapFugIdeal)
+        Me.TabPage3.Controls.Add(Me.Label7)
+        Me.TabPage3.Controls.Add(Me.chkLiqFugPoynt)
+        Me.TabPage3.Controls.Add(Me.chkLiqViscPCorr)
+        Me.TabPage3.Controls.Add(Me.cbLiqVIscMixRule)
+        Me.TabPage3.Controls.Add(Me.chkLiqDensPeneloux)
+        Me.TabPage3.Controls.Add(Me.Label1)
+        Me.TabPage3.Controls.Add(Me.cbLiqVisc)
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.UseVisualStyleBackColor = True
+        '
+        'TabPage4
+        '
+        resources.ApplyResources(Me.TabPage4, "TabPage4")
+        Me.TabPage4.Controls.Add(Me.Label9)
+        Me.TabPage4.Controls.Add(Me.chkIgnoreSalLim)
+        Me.TabPage4.Controls.Add(Me.chkIgnoreIPs)
+        Me.TabPage4.Controls.Add(Me.chkIgnoreVapFracLim)
+        Me.TabPage4.Name = "TabPage4"
+        Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'Label9
+        '
+        resources.ApplyResources(Me.Label9, "Label9")
+        Me.Label9.Name = "Label9"
+        '
         'PropertyPackageSettingsEditingControl
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Window
-        Me.Controls.Add(Me.chkCalcAdditionalProps)
-        Me.Controls.Add(Me.Label11)
-        Me.Controls.Add(Me.Label10)
-        Me.Controls.Add(Me.chkUseSolidCp)
-        Me.Controls.Add(Me.chkIgnoreIPs)
-        Me.Controls.Add(Me.chkIgnoreVapFracLim)
-        Me.Controls.Add(Me.chkIgnoreSalLim)
-        Me.Controls.Add(Me.Label9)
-        Me.Controls.Add(Me.chkVapFugIdeal)
-        Me.Controls.Add(Me.chkLiqFugPoynt)
-        Me.Controls.Add(Me.cbLiqVIscMixRule)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.cbHSCpCalcMode)
-        Me.Controls.Add(Me.cbLiqVisc)
-        Me.Controls.Add(Me.chkLiqDensPeneloux)
-        Me.Controls.Add(Me.chkLiqViscPCorr)
-        Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.Label7)
-        Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.chkLiqDensPCorr)
-        Me.Controls.Add(Me.cbLiqDens)
+        Me.Controls.Add(Me.TabControl1)
         Me.Name = "PropertyPackageSettingsEditingControl"
+        Me.TabControl1.ResumeLayout(False)
+        Me.TabPage1.ResumeLayout(False)
+        Me.TabPage1.PerformLayout()
+        Me.TabPage2.ResumeLayout(False)
+        Me.TabPage2.PerformLayout()
+        Me.TabPage3.ResumeLayout(False)
+        Me.TabPage3.PerformLayout()
+        Me.TabPage4.ResumeLayout(False)
+        Me.TabPage4.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Friend WithEvents cbLiqDens As ComboBox
@@ -249,12 +295,16 @@ Partial Class PropertyPackageSettingsEditingControl
     Friend WithEvents Label1 As Label
     Friend WithEvents chkLiqFugPoynt As CheckBox
     Friend WithEvents chkVapFugIdeal As CheckBox
-    Friend WithEvents Label9 As Label
     Friend WithEvents chkIgnoreSalLim As CheckBox
     Friend WithEvents chkIgnoreVapFracLim As CheckBox
     Friend WithEvents chkIgnoreIPs As CheckBox
     Friend WithEvents chkUseSolidCp As CheckBox
-    Friend WithEvents Label10 As Label
     Friend WithEvents chkCalcAdditionalProps As CheckBox
     Friend WithEvents Label11 As Label
+    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents TabPage1 As TabPage
+    Friend WithEvents TabPage2 As TabPage
+    Friend WithEvents TabPage3 As TabPage
+    Friend WithEvents TabPage4 As TabPage
+    Friend WithEvents Label9 As Label
 End Class

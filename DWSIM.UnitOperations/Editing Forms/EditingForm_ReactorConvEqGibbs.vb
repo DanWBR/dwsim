@@ -177,6 +177,22 @@ Public Class EditingForm_ReactorConvEqGibbs
                 LabelExternalSolver.Enabled = True
                 cbExternalSolver.Enabled = True
 
+                'external solvers
+
+                cbExternalSolver.Items.Clear()
+                cbExternalSolver.Items.Add("")
+                For Each solver In .FlowSheet.ExternalSolvers.Values
+                    If solver.Category = Enums.ExternalSolverCategory.NonLinearMinimization Then
+                        cbExternalSolver.Items.Add(solver.DisplayText)
+                    End If
+                Next
+                Dim selectedsolver = .FlowSheet.ExternalSolvers.Values.Where(Function(s) s.ID = .ExternalSolverID).FirstOrDefault()
+                If selectedsolver IsNot Nothing Then
+                    cbExternalSolver.SelectedItem = selectedsolver.DisplayText
+                Else
+                    cbExternalSolver.SelectedIndex = 0
+                End If
+
             ElseIf TypeOf SimObject Is Reactors.Reactor_Equilibrium Then
 
                 TabControlParameters.TabPages.Remove(TabPageCompounds)
@@ -192,7 +208,25 @@ Public Class EditingForm_ReactorConvEqGibbs
                 tbIntLoopTolEq.Text = DirectCast(SimObject, Reactors.Reactor_Equilibrium).InternalLoopTolerance
 
                 LabelExternalSolver.Enabled = False
-                cbExternalSolver.Enabled = False
+
+                LabelExternalSolver.Enabled = Not chkUseIPOPT.Checked
+                cbExternalSolver.Enabled = Not chkUseIPOPT.Checked
+
+                'external solvers
+
+                cbExternalSolver.Items.Clear()
+                cbExternalSolver.Items.Add("")
+                For Each solver In .FlowSheet.ExternalSolvers.Values
+                    If solver.Category = Enums.ExternalSolverCategory.NonLinearSystem Then
+                        cbExternalSolver.Items.Add(solver.DisplayText)
+                    End If
+                Next
+                Dim selectedsolver = .FlowSheet.ExternalSolvers.Values.Where(Function(s) s.ID = .ExternalSolverID).FirstOrDefault()
+                If selectedsolver IsNot Nothing Then
+                    cbExternalSolver.SelectedItem = selectedsolver.DisplayText
+                Else
+                    cbExternalSolver.SelectedIndex = 0
+                End If
 
             Else
 
@@ -293,22 +327,6 @@ Public Class EditingForm_ReactorConvEqGibbs
             Catch ex As Exception
 
             End Try
-
-            'external solvers
-
-            cbExternalSolver.Items.Clear()
-            cbExternalSolver.Items.Add("")
-            For Each solver In .FlowSheet.ExternalSolvers.Values
-                If solver.Category = Enums.ExternalSolverCategory.NonLinearMinimization Then
-                    cbExternalSolver.Items.Add(solver.DisplayText)
-                End If
-            Next
-            Dim selectedsolver = .FlowSheet.ExternalSolvers.Values.Where(Function(s) s.ID = .ExternalSolverID).FirstOrDefault()
-            If selectedsolver IsNot Nothing Then
-                cbExternalSolver.SelectedItem = selectedsolver.DisplayText
-            Else
-                cbExternalSolver.SelectedIndex = 0
-            End If
 
         End With
 
@@ -654,6 +672,8 @@ Public Class EditingForm_ReactorConvEqGibbs
 
     Private Sub chkUseIPOPT_CheckedChanged(sender As Object, e As EventArgs) Handles chkUseIPOPT.CheckedChanged
         If TypeOf SimObject Is Reactors.Reactor_Equilibrium And Loaded Then
+            cbExternalSolver.Enabled = Not chkUseIPOPT.Checked
+            LabelExternalSolver.Enabled = Not chkUseIPOPT.Checked
             DirectCast(SimObject, Reactors.Reactor_Equilibrium).UseIPOPTSolver = chkUseIPOPT.Checked
         End If
     End Sub
