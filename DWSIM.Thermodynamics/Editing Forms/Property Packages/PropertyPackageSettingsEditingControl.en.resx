@@ -128,7 +128,7 @@
     <value>206, 43</value>
   </data>
   <data name="cbLiqDens.Size" type="System.Drawing.Size, System.Drawing">
-    <value>367, 21</value>
+    <value>290, 21</value>
   </data>
   <data name="chkLiqDensPCorr.Location" type="System.Drawing.Point, System.Drawing">
     <value>18, 78</value>
@@ -227,7 +227,7 @@
     <value>206, 170</value>
   </data>
   <data name="cbLiqVisc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>367, 21</value>
+    <value>290, 21</value>
   </data>
   <data name="cbHSCpCalcMode.Items2" xml:space="preserve">
     <value>Excess Properties</value>
@@ -239,7 +239,7 @@
     <value>203, 45</value>
   </data>
   <data name="cbHSCpCalcMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>431, 21</value>
+    <value>292, 21</value>
   </data>
   <data name="cbLiqVIscMixRule.Items" xml:space="preserve">
     <value>Molar Average</value>
@@ -257,7 +257,7 @@
     <value>206, 197</value>
   </data>
   <data name="cbLiqVIscMixRule.Size" type="System.Drawing.Size, System.Drawing">
-    <value>367, 21</value>
+    <value>290, 21</value>
   </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>18, 202</value>
