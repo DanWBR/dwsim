@@ -189,13 +189,9 @@ Namespace Reactors
 
         Public Property DerivativePerturbation As Double = 0.0001
 
-        Public MaximumInternalIterations As Integer = 20000
+        Public MaximumInternalIterations As Integer = 1000
 
-        Public MaximumExternalIterations As Integer = 50
-
-        Public InternalTolerance As Double = 0.000001
-
-        Public ExternalTolerance As Double = 0.001
+        Public InternalTolerance As Double = 1.0E-20
 
         Public Property LagrangeCoeffsEstimationTemperature As Double = 1000.0
 
@@ -735,13 +731,22 @@ Namespace Reactors
             For i = 0 To N.Count - 1
                 lbo(i) = 0.0000000001
                 ubo(i) = W0tot / CProps(i).Molar_Weight * 1000
-                ival(i) = N0(Me.ComponentIDs(i))
-                If ival(i) < 0.0000000001 Then ival(i) = 0.0000000001
+                If InitializeFromPreviousSolution Then
+                    Try
+                        ival(i) = InitialEstimates(i)
+                    Catch ex As Exception
+                        InitializeFromPreviousSolution = False
+                        Throw New Exception("invalid initial estimates.")
+                    End Try
+                Else
+                    ival(i) = N0(Me.ComponentIDs(i))
+                End If
+                If ival(i) < 0.000000001 Then ival(i) = 0.000000001
             Next
 
             Dim ipo As New Optimization.IPOPTSolver
-            ipo.MaxIterations = 1000
-            ipo.Tolerance = 0.0000000000001
+            ipo.MaxIterations = MaximumInternalIterations
+            ipo.Tolerance = InternalTolerance
             ipo.ReturnLowestObjFuncValue = False
 
             Dim esolv As IExternalNonLinearMinimizationSolver = Nothing
@@ -792,7 +797,7 @@ Namespace Reactors
                                                       errval = Exp(gval) + wbal * 100 + ebal * 100
                                                       Return errval
                                                   End Function, Nothing, Nothing,
-                                                          ival, lbo, ubo, 1000, 1.0E-20)
+                                                          ival, lbo, ubo, MaximumInternalIterations, InternalTolerance)
 
                             Else
 
@@ -815,6 +820,7 @@ Namespace Reactors
 
                             End If
 
+                            InitialEstimates = NFv.ToList()
 
                             For i = 0 To N.Count - 1
                                 N(keys(i)) = NFv(i)

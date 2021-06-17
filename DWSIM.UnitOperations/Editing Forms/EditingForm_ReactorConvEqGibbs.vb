@@ -3,6 +3,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.SharedClasses.UnitOperations
 Imports su = DWSIM.SharedClasses.SystemsOfUnits
 Imports DWSIM.UnitOperations.UnitOperations
+Imports DWSIM.ExtensionMethods
 
 Public Class EditingForm_ReactorConvEqGibbs
 
@@ -140,9 +141,7 @@ Public Class EditingForm_ReactorConvEqGibbs
 
                 chkGibbsUsePreviousSolution.Checked = DirectCast(SimObject, Reactors.Reactor_Gibbs).InitializeFromPreviousSolution
 
-                tbExtLoopMaxIts.Text = DirectCast(SimObject, Reactors.Reactor_Gibbs).MaximumExternalIterations
                 tbIntLoopMaxIts.Text = DirectCast(SimObject, Reactors.Reactor_Gibbs).MaximumInternalIterations
-                tbExtLoopTol.Text = DirectCast(SimObject, Reactors.Reactor_Gibbs).ExternalTolerance
                 tbIntLoopTol.Text = DirectCast(SimObject, Reactors.Reactor_Gibbs).InternalTolerance
 
                 'tbNumDeriv.Text = DirectCast(SimObject, Reactors.Reactor_Gibbs).DerivativePerturbation
@@ -329,6 +328,8 @@ Public Class EditingForm_ReactorConvEqGibbs
             End Try
 
         End With
+
+        cbExternalSolver.SetDropDownMaxWidth()
 
         Loaded = True
 
@@ -532,8 +533,7 @@ Public Class EditingForm_ReactorConvEqGibbs
     End Sub
 
 
-    Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbOutletTemperature.TextChanged, tbPDrop.TextChanged, tbExtLoopMaxIts.TextChanged, tbIntLoopMaxIts.TextChanged,
-        tbExtLoopTol.TextChanged, tbIntLoopTol.TextChanged, tbExtLoopMaxItsEq.TextChanged, tbIntLoopMaxItsEq.TextChanged,
+    Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbOutletTemperature.TextChanged, tbPDrop.TextChanged, tbIntLoopMaxIts.TextChanged, tbIntLoopTol.TextChanged, tbExtLoopMaxItsEq.TextChanged, tbIntLoopMaxItsEq.TextChanged,
         tbExtLoopTolEq.TextChanged, tbIntLoopTolEq.TextChanged
 
         Dim tbox = DirectCast(sender, TextBox)
@@ -546,8 +546,7 @@ Public Class EditingForm_ReactorConvEqGibbs
 
     End Sub
 
-    Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbOutletTemperature.KeyDown, tbPDrop.KeyDown, tbExtLoopMaxIts.KeyDown, tbIntLoopMaxIts.KeyDown,
-        tbExtLoopTol.KeyDown, tbIntLoopTol.KeyDown, tbExtLoopMaxItsEq.KeyDown, tbIntLoopMaxItsEq.KeyDown,
+    Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbOutletTemperature.KeyDown, tbPDrop.KeyDown, tbIntLoopMaxIts.KeyDown, tbIntLoopTol.KeyDown, tbExtLoopMaxItsEq.KeyDown, tbIntLoopMaxItsEq.KeyDown,
         tbExtLoopTolEq.KeyDown, tbIntLoopTolEq.KeyDown
 
 
@@ -565,9 +564,7 @@ Public Class EditingForm_ReactorConvEqGibbs
 
         If sender Is tbOutletTemperature Then SimObject.OutletTemperature = su.Converter.ConvertToSI(cbTemp.SelectedItem.ToString, tbOutletTemperature.Text.ParseExpressionToDouble)
         If sender Is tbPDrop Then SimObject.DeltaP = su.Converter.ConvertToSI(cbPDrop.SelectedItem.ToString, tbPDrop.Text.ParseExpressionToDouble)
-        If sender Is tbExtLoopMaxIts Then DirectCast(SimObject, Reactors.Reactor_Gibbs).MaximumExternalIterations = tbExtLoopMaxIts.Text.ParseExpressionToDouble
         If sender Is tbIntLoopMaxIts Then DirectCast(SimObject, Reactors.Reactor_Gibbs).MaximumInternalIterations = tbIntLoopMaxIts.Text.ParseExpressionToDouble
-        If sender Is tbExtLoopTol Then DirectCast(SimObject, Reactors.Reactor_Gibbs).ExternalTolerance = tbExtLoopTol.Text.ParseExpressionToDouble
         If sender Is tbIntLoopTol Then DirectCast(SimObject, Reactors.Reactor_Gibbs).InternalTolerance = tbIntLoopTol.Text.ParseExpressionToDouble
         If sender Is tbExtLoopMaxItsEq Then DirectCast(SimObject, Reactors.Reactor_Equilibrium).ExternalLoopMaximumIterations = tbExtLoopMaxItsEq.Text.ParseExpressionToDouble
         If sender Is tbIntLoopMaxItsEq Then DirectCast(SimObject, Reactors.Reactor_Equilibrium).InternalLoopMaximumIterations = tbIntLoopMaxItsEq.Text.ParseExpressionToDouble

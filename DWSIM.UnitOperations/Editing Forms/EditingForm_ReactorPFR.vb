@@ -155,23 +155,23 @@ Public Class EditingForm_ReactorPFR
             gridResults.Rows.Clear()
             gridReactions.Rows.Clear()
 
-            gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("DeltaT"), su.Converter.ConvertFromSI(units.deltaT, .DeltaT.GetValueOrDefault).ToString(nf), units.deltaT})
-            gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("RConvPGridItem3"), su.Converter.ConvertFromSI(units.heatflow, .DeltaQ.GetValueOrDefault).ToString(nf), units.heatflow})
-            gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("TKResTime"), su.Converter.ConvertFromSI(units.time, .ResidenceTime).ToString(nf), units.time})
-            gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("Quedadepresso"), su.Converter.ConvertFromSI(units.deltaP, .DeltaP.GetValueOrDefault).ToString(nf), units.deltaP})
-     
+            gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("DeltaT"), su.Converter.ConvertFromSI(units.deltaT, .DeltaT.GetValueOrDefault).ToString(nf), units.deltaT})
+            gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("RConvPGridItem3"), su.Converter.ConvertFromSI(units.heatflow, .DeltaQ.GetValueOrDefault).ToString(nf), units.heatflow})
+            gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("TKResTime"), su.Converter.ConvertFromSI(units.time, .ResidenceTime).ToString(nf), units.time})
+            gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("Quedadepresso"), su.Converter.ConvertFromSI(units.deltaP, .DeltaP.GetValueOrDefault).ToString(nf), units.deltaP})
+
             'reaction props
 
             For Each dbl As KeyValuePair(Of String, Double) In .RxiT
-                gridReactions.Rows.Add(New Object() {.FlowSheet.Reactions(dbl.Key).Name, .FlowSheet.GetTranslatedString("ReactionExtent"), su.Converter.ConvertFromSI(units.molarflow, dbl.Value).ToString(nf), units.molarflow})
+                gridReactions.Rows.Add(New Object() { .FlowSheet.Reactions(dbl.Key).Name, .FlowSheet.GetTranslatedString("ReactionExtent"), su.Converter.ConvertFromSI(units.molarflow, dbl.Value).ToString(nf), units.molarflow})
             Next
 
             For Each dbl As KeyValuePair(Of String, Double) In .RxiT
-                gridReactions.Rows.Add(New Object() {.FlowSheet.Reactions(dbl.Key).Name, .FlowSheet.GetTranslatedString("ReactionRate"), su.Converter.ConvertFromSI(units.reac_rate, (dbl.Value / .Volume)).ToString(nf), units.reac_rate})
+                gridReactions.Rows.Add(New Object() { .FlowSheet.Reactions(dbl.Key).Name, .FlowSheet.GetTranslatedString("ReactionRate"), su.Converter.ConvertFromSI(units.reac_rate, (dbl.Value / .Volume)).ToString(nf), units.reac_rate})
             Next
 
             For Each dbl As KeyValuePair(Of String, Double) In .DHRi
-                gridReactions.Rows.Add(New Object() {.FlowSheet.Reactions(dbl.Key).Name, .FlowSheet.GetTranslatedString("ReactionHeat"), su.Converter.ConvertFromSI(units.heatflow, dbl.Value).ToString(nf), units.heatflow})
+                gridReactions.Rows.Add(New Object() { .FlowSheet.Reactions(dbl.Key).Name, .FlowSheet.GetTranslatedString("ReactionHeat"), su.Converter.ConvertFromSI(units.heatflow, dbl.Value).ToString(nf), units.heatflow})
             Next
 
             If .Calculated Then
@@ -222,6 +222,8 @@ Public Class EditingForm_ReactorPFR
             End If
 
         End With
+
+        cbExternalSolver.SetDropDownMaxWidth()
 
         Loaded = True
 

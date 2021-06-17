@@ -41,8 +41,12 @@ Namespace UnitOperations
 
         Public Property ExternalSolverID As String = ""
 
+        Public Property ExternalSolverConfigData As String = ""
+
         Public Sub New()
+
             MyBase.CreateNew()
+
         End Sub
 
         Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean

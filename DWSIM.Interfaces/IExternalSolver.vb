@@ -30,6 +30,16 @@ Public Interface IExternalSolverIdentification
 
 End Interface
 
+Public Interface IExternalSolverConfiguration
+
+    Sub Edit()
+
+    Sub LoadSettingsFromJSON(jsonstring As String)
+
+    Function SaveSettingsToJSON() As String
+
+End Interface
+
 Public Interface IExternalLinearSystemSolver
 
     ''' <summary>

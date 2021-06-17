@@ -41,8 +41,6 @@ Partial Class AboutBox
         Me.FaTabStripItem1 = New FarsiLibrary.Win.FATabStripItem()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.lblGPGPUinfo = New System.Windows.Forms.Label()
-        Me.Label14 = New System.Windows.Forms.Label()
         Me.Lblcpusimd = New System.Windows.Forms.Label()
         Me.Lblcpuinfo = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -195,8 +193,6 @@ Partial Class AboutBox
         '
         Me.FaTabStripItem1.CanClose = False
         Me.FaTabStripItem1.Controls.Add(Me.TabControl1)
-        Me.FaTabStripItem1.Controls.Add(Me.lblGPGPUinfo)
-        Me.FaTabStripItem1.Controls.Add(Me.Label14)
         Me.FaTabStripItem1.Controls.Add(Me.Lblcpusimd)
         Me.FaTabStripItem1.Controls.Add(Me.Lblcpuinfo)
         Me.FaTabStripItem1.Controls.Add(Me.Label13)
@@ -229,18 +225,6 @@ Partial Class AboutBox
         resources.ApplyResources(Me.TabPage1, "TabPage1")
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.UseVisualStyleBackColor = True
-        '
-        'lblGPGPUinfo
-        '
-        Me.lblGPGPUinfo.BackColor = System.Drawing.Color.Transparent
-        resources.ApplyResources(Me.lblGPGPUinfo, "lblGPGPUinfo")
-        Me.lblGPGPUinfo.Name = "lblGPGPUinfo"
-        '
-        'Label14
-        '
-        resources.ApplyResources(Me.Label14, "Label14")
-        Me.Label14.BackColor = System.Drawing.Color.Transparent
-        Me.Label14.Name = "Label14"
         '
         'Lblcpusimd
         '
@@ -618,8 +602,6 @@ Partial Class AboutBox
     Public WithEvents Lblcpuinfo As System.Windows.Forms.Label
     Public WithEvents Label13 As System.Windows.Forms.Label
     Public WithEvents Label12 As System.Windows.Forms.Label
-    Public WithEvents lblGPGPUinfo As System.Windows.Forms.Label
-    Public WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
     Friend WithEvents FaTabStripItem5 As FarsiLibrary.Win.FATabStripItem
     Friend WithEvents dgvDWSIMComponents As System.Windows.Forms.DataGridView

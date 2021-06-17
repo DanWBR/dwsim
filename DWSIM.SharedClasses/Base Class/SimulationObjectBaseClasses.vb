@@ -368,6 +368,14 @@ Namespace UnitOperations
 
                 ebe = Math.Abs(eb / ebt)
 
+                If FlowSheet.FlowsheetOptions.MassBalanceRelativeTolerance = 0.0 Then
+                    FlowSheet.FlowsheetOptions.MassBalanceRelativeTolerance = 0.01
+                End If
+
+                If FlowSheet.FlowsheetOptions.EnergyBalanceRelativeTolerance = 0.0 Then
+                    FlowSheet.FlowsheetOptions.EnergyBalanceRelativeTolerance = 0.01
+                End If
+
                 If mbe > FlowSheet.FlowsheetOptions.MassBalanceRelativeTolerance Then
                     If FlowSheet.FlowsheetOptions.MassBalanceCheck = WarningType.RaiseError Then
                         Throw New Exception(GraphicObject.Tag + ": " + FlowSheet.GetTranslatedString("MassBalanceMessage") + " (" + mbe.ToString() + " > " + FlowSheet.FlowsheetOptions.MassBalanceRelativeTolerance.ToString + ")")
