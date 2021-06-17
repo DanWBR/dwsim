@@ -32,11 +32,7 @@ End Interface
 
 Public Interface IExternalSolverConfiguration
 
-    Sub Edit()
-
-    Sub LoadSettingsFromJSON(jsonstring As String)
-
-    Function SaveSettingsToJSON() As String
+    Function Edit(jsonstring As String) As String
 
 End Interface
 

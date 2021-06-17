@@ -1,6 +1,7 @@
 ﻿Imports DWSIM.SharedClasses
 Imports Microsoft.Win32
 Imports CapeOpen
+Imports DWSIM.Interfaces
 
 Public Class FlashAlgorithmConfig
 
@@ -99,12 +100,21 @@ Public Class FlashAlgorithmConfig
                 cbExternalSolver.Enabled = False
             End If
 
+            If selectedsolver IsNot Nothing Then
+                If TryCast(selectedsolver, IExternalSolverConfiguration) IsNot Nothing Then
+                    btnConfigExtSolver.Enabled = True
+                Else
+                    btnConfigExtSolver.Enabled = False
+                End If
+            End If
+
         Else
 
             cbExternalSolver.Enabled = False
 
         End If
 
+        cbExternalSolver.SetDropDownMaxWidth()
 
 
         _loaded = True
@@ -225,6 +235,31 @@ Public Class FlashAlgorithmConfig
             cbExternalSolver.Enabled = False
         End If
 
+    End Sub
+
+    Private Sub cbExternalSolver_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbExternalSolver.SelectedIndexChanged
+        If cbExternalSolver.Enabled And PropPack.Flowsheet IsNot Nothing Then
+            Dim selectedsolver = PropPack.Flowsheet.ExternalSolvers.Values.Where(
+          Function(s) s.DisplayText = cbExternalSolver.SelectedItem.ToString()).FirstOrDefault()
+            If selectedsolver IsNot Nothing Then
+                If TryCast(selectedsolver, IExternalSolverConfiguration) IsNot Nothing Then
+                    btnConfigExtSolver.Enabled = True
+                Else
+                    btnConfigExtSolver.Enabled = False
+                End If
+            Else
+                btnConfigExtSolver.Enabled = False
+            End If
+        End If
+    End Sub
+
+    Private Sub btnConfigExtSolver_Click(sender As Object, e As EventArgs) Handles btnConfigExtSolver.Click
+        Dim selectedsolver = PropPack.Flowsheet.ExternalSolvers.Values.Where(
+          Function(s) s.DisplayText = cbExternalSolver.SelectedItem.ToString()).FirstOrDefault()
+        If TryCast(selectedsolver, IExternalSolverConfiguration) IsNot Nothing Then
+            Settings(Interfaces.Enums.FlashSetting.GibbsMinimizationExternalSolverConfigData) =
+                DirectCast(selectedsolver, IExternalSolverConfiguration).Edit(Settings(Interfaces.Enums.FlashSetting.GibbsMinimizationExternalSolverConfigData))
+        End If
     End Sub
 
 End Class

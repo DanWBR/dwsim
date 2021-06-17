@@ -286,6 +286,15 @@ Public Class EditingForm_Column
 
         cbExternalSolver.SetDropDownMaxWidth()
 
+        Dim ssolver = SimObject.FlowSheet.ExternalSolvers.Values.Where(Function(s) s.ID = SimObject.ExternalSolverID).FirstOrDefault()
+        If ssolver IsNot Nothing Then
+            If TryCast(ssolver, IExternalSolverConfiguration) IsNot Nothing Then
+                btnConfigExtSolver.Enabled = True
+            Else
+                btnConfigExtSolver.Enabled = False
+            End If
+        End If
+
         Loaded = True
 
     End Sub
@@ -700,9 +709,23 @@ Public Class EditingForm_Column
                 Function(s) s.DisplayText = cbExternalSolver.SelectedItem.ToString()).FirstOrDefault()
             If selectedsolver IsNot Nothing Then
                 SimObject.ExternalSolverID = selectedsolver.ID
+                If TryCast(selectedsolver, IExternalSolverConfiguration) IsNot Nothing Then
+                    btnConfigExtSolver.Enabled = True
+                Else
+                    btnConfigExtSolver.Enabled = False
+                End If
             Else
                 SimObject.ExternalSolverID = ""
+                btnConfigExtSolver.Enabled = False
             End If
+        End If
+    End Sub
+
+    Private Sub btnConfigExtSolver_Click(sender As Object, e As EventArgs) Handles btnConfigExtSolver.Click
+        Dim selectedsolver = SimObject.FlowSheet.ExternalSolvers.Values.Where(
+                Function(s) s.DisplayText = cbExternalSolver.SelectedItem.ToString()).FirstOrDefault()
+        If TryCast(selectedsolver, IExternalSolverConfiguration) IsNot Nothing Then
+            SimObject.ExternalSolverConfigData = DirectCast(selectedsolver, IExternalSolverConfiguration).Edit(SimObject.ExternalSolverConfigData)
         End If
     End Sub
 

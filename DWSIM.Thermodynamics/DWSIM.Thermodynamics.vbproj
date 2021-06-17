@@ -882,7 +882,9 @@
   <ItemGroup>
     <None Include="Resources\bullet_green.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\cog1.png" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\Databases\FoodProp\FoodProp.xml" />
   </ItemGroup>

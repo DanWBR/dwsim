@@ -998,6 +998,9 @@
   <data name="chkUseIE_T.ToolTip1" xml:space="preserve">
     <value />
   </data>
+  <data name="btnConfigExtSolver.Location" type="System.Drawing.Point, System.Drawing">
+    <value>357, 216</value>
+  </data>
   <data name="btnResults.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 369</value>
   </data>
@@ -1041,7 +1044,7 @@
     <value>142, 216</value>
   </data>
   <data name="cbExternalSolver.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 21</value>
+    <value>209, 21</value>
   </data>
   <data name="cbExternalSolver.ToolTip" xml:space="preserve">
     <value />

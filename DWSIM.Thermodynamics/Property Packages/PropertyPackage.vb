@@ -11857,7 +11857,10 @@ Final3:
                     FlashSettings.Add(Interfaces.Enums.FlashSetting.UseIOFlash, False)
                 End If
                 If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.GibbsMinimizationExternalSolver) Then
-                    FlashSettings.Add(Interfaces.Enums.FlashSetting.GibbsMinimizationExternalSolver, False)
+                    FlashSettings.Add(Interfaces.Enums.FlashSetting.GibbsMinimizationExternalSolver, "")
+                End If
+                If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.GibbsMinimizationExternalSolverConfigData) Then
+                    FlashSettings.Add(Interfaces.Enums.FlashSetting.GibbsMinimizationExternalSolverConfigData, "")
                 End If
             End If
 

@@ -26,6 +26,7 @@ Partial Class FlashAlgorithmConfig
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPageGeneral = New System.Windows.Forms.TabPage()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.btnConfigExtSolver = New System.Windows.Forms.Button()
         Me.cbExternalSolver = New System.Windows.Forms.ComboBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.gpNL = New System.Windows.Forms.GroupBox()
@@ -93,6 +94,7 @@ Partial Class FlashAlgorithmConfig
         'GroupBox4
         '
         resources.ApplyResources(Me.GroupBox4, "GroupBox4")
+        Me.GroupBox4.Controls.Add(Me.btnConfigExtSolver)
         Me.GroupBox4.Controls.Add(Me.cbExternalSolver)
         Me.GroupBox4.Controls.Add(Me.Label11)
         Me.GroupBox4.Controls.Add(Me.gpNL)
@@ -115,6 +117,13 @@ Partial Class FlashAlgorithmConfig
         Me.GroupBox4.Controls.Add(Me.Label24)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.TabStop = False
+        '
+        'btnConfigExtSolver
+        '
+        resources.ApplyResources(Me.btnConfigExtSolver, "btnConfigExtSolver")
+        Me.btnConfigExtSolver.BackgroundImage = Global.DWSIM.Thermodynamics.My.Resources.Resources.cog1
+        Me.btnConfigExtSolver.Name = "btnConfigExtSolver"
+        Me.btnConfigExtSolver.UseVisualStyleBackColor = True
         '
         'cbExternalSolver
         '
@@ -417,4 +426,5 @@ Partial Class FlashAlgorithmConfig
     Friend WithEvents gpNL As GroupBox
     Friend WithEvents cbExternalSolver As ComboBox
     Friend WithEvents Label11 As Label
+    Public WithEvents btnConfigExtSolver As Button
 End Class

@@ -134,6 +134,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             settings(Interfaces.Enums.FlashSetting.GibbsMinimizationExternalSolver) = ""
 
+            settings(Interfaces.Enums.FlashSetting.GibbsMinimizationExternalSolverConfigData) = ""
+
             Return settings
 
         End Function

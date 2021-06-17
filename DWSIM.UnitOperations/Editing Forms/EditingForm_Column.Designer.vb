@@ -86,6 +86,7 @@ Partial Class EditingForm_Column
         Me.chkUseIE_LF = New System.Windows.Forms.CheckBox()
         Me.chkUseIE_T = New System.Windows.Forms.CheckBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.btnConfigExtSolver = New System.Windows.Forms.Button()
         Me.btnResults = New System.Windows.Forms.Button()
         Me.gridResults = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -669,6 +670,16 @@ Partial Class EditingForm_Column
         Me.ToolTipValues.SetToolTip(Me.chkUseIE_T, resources.GetString("chkUseIE_T.ToolTip2"))
         Me.chkUseIE_T.UseVisualStyleBackColor = True
         '
+        'btnConfigExtSolver
+        '
+        resources.ApplyResources(Me.btnConfigExtSolver, "btnConfigExtSolver")
+        Me.btnConfigExtSolver.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
+        Me.btnConfigExtSolver.Name = "btnConfigExtSolver"
+        Me.ToolTip1.SetToolTip(Me.btnConfigExtSolver, resources.GetString("btnConfigExtSolver.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.btnConfigExtSolver, resources.GetString("btnConfigExtSolver.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.btnConfigExtSolver, resources.GetString("btnConfigExtSolver.ToolTip2"))
+        Me.btnConfigExtSolver.UseVisualStyleBackColor = True
+        '
         'btnResults
         '
         resources.ApplyResources(Me.btnResults, "btnResults")
@@ -738,6 +749,7 @@ Partial Class EditingForm_Column
         'TabPage6
         '
         resources.ApplyResources(Me.TabPage6, "TabPage6")
+        Me.TabPage6.Controls.Add(Me.btnConfigExtSolver)
         Me.TabPage6.Controls.Add(Me.cbExternalSolver)
         Me.TabPage6.Controls.Add(Me.LabelES)
         Me.TabPage6.Controls.Add(Me.cbSolvingMethod)
@@ -971,4 +983,5 @@ Partial Class EditingForm_Column
     Public WithEvents LabelES As Label
     Public WithEvents cbSolvingMethod As ComboBox
     Public WithEvents LabelSM As Label
+    Public WithEvents btnConfigExtSolver As Button
 End Class

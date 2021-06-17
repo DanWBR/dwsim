@@ -288,6 +288,8 @@ Namespace Enums
 
         GibbsMinimizationExternalSolver = 29
 
+        GibbsMinimizationExternalSolverConfigData = 30
+
     End Enum
 
     Public Enum FlashCalculationType

@@ -118,32 +118,14 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="TabPageGeneral.Size" type="System.Drawing.Size, System.Drawing">
-    <value>621, 391</value>
-  </data>
-  <data name="TabPageGeneral.Text" xml:space="preserve">
-    <value>General</value>
-  </data>
-  <data name="TabPageConvPars.Size" type="System.Drawing.Size, System.Drawing">
-    <value>621, 391</value>
-  </data>
-  <data name="TabPageConvPars.Text" xml:space="preserve">
-    <value>Convergence</value>
-  </data>
-  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>629, 417</value>
-  </data>
-  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>605, 377</value>
-  </data>
-  <data name="GroupBox4.Text" xml:space="preserve">
-    <value>General</value>
+  <data name="btnConfigExtSolver.Location" type="System.Drawing.Point, System.Drawing">
+    <value>356, 73</value>
   </data>
   <data name="cbExternalSolver.Location" type="System.Drawing.Point, System.Drawing">
     <value>193, 73</value>
   </data>
   <data name="cbExternalSolver.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 21</value>
+    <value>158, 21</value>
   </data>
   <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 77</value>
@@ -157,12 +139,6 @@
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="gpNL.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
-  </data>
-  <data name="gpNL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 90</value>
-  </data>
-  <data name="gpNL.Text" xml:space="preserve">
-    <value>Nested Loops Options</value>
   </data>
   <data name="chkHandleSolids.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 20</value>
@@ -190,6 +166,12 @@
   </data>
   <data name="chkFastModeNL.Text" xml:space="preserve">
     <value>Enable Fast Mode for PH/PS Flash</value>
+  </data>
+  <data name="gpNL.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 90</value>
+  </data>
+  <data name="gpNL.Text" xml:space="preserve">
+    <value>Nested Loops Options</value>
   </data>
   <data name="cbFlashApproach.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -359,11 +341,17 @@
   <data name="Label24.Text" xml:space="preserve">
     <value>PV Flash - Fixed Damping Factor Value (0.0 - 2.0)</value>
   </data>
-  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
     <value>605, 377</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Convergence Parameters</value>
+  <data name="GroupBox4.Text" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="TabPageGeneral.Size" type="System.Drawing.Size, System.Drawing">
+    <value>621, 391</value>
+  </data>
+  <data name="TabPageGeneral.Text" xml:space="preserve">
+    <value>General</value>
   </data>
   <data name="tbPHExtMaxIt.Location" type="System.Drawing.Point, System.Drawing">
     <value>421, 219</value>
@@ -484,6 +472,21 @@
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Flash PT/PV - internal loop convergence tolerance (absolute)</value>
+  </data>
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>605, 377</value>
+  </data>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Convergence Parameters</value>
+  </data>
+  <data name="TabPageConvPars.Size" type="System.Drawing.Size, System.Drawing">
+    <value>621, 391</value>
+  </data>
+  <data name="TabPageConvPars.Text" xml:space="preserve">
+    <value>Convergence</value>
+  </data>
+  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>629, 417</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>629, 417</value>
