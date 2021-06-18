@@ -490,8 +490,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                            AddressOf eval_f, AddressOf eval_g,
                            AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
                     problem.AddOption("print_level", 1)
-                    problem.AddOption("tol", etol)
-                    problem.AddOption("max_iter", maxit_e * 10)
+                    problem.AddOption("tol", 0.0000000001)
+                    problem.AddOption("max_iter", 100)
                     problem.AddOption("mu_strategy", "adaptive")
                     problem.AddOption("expect_infeasible_problem", "yes")
                     problem.AddOption("hessian_approximation", "limited-memory")
@@ -529,7 +529,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Else
 
                 initval = esolv.Solve(AddressOf FunctionValue, AddressOf FunctionGradient, Nothing,
-                                        initval, lconstr, uconstr, maxit_e * 10, etol)
+                                        initval, lconstr, uconstr, 100, 0.0000000001)
 
             End If
 
