@@ -359,27 +359,6 @@ Imports IronPython.Hosting
         End If
     End Sub
 
-    Private Sub ToolStripButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        If Me.ofd1.ShowDialog = Windows.Forms.DialogResult.OK Then
-            For Each fname As String In Me.ofd1.FileNames
-                Me.ListBox1.Items.Add(fname)
-            Next
-        End If
-    End Sub
-
-    Private Sub ToolStripButton3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        If Me.ListBox1.SelectedItems.Count > 0 Then
-            Dim names As New ArrayList
-            For Each fname As Object In Me.ListBox1.SelectedItems
-                names.Add(fname)
-            Next
-            For Each fname As String In names
-                Me.ListBox1.Items.Remove(fname)
-            Next
-            names = Nothing
-        End If
-    End Sub
-
     Private Sub SaveToolStripButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SaveToolStripButton.Click
 
         UpdateScripts()
@@ -1521,6 +1500,29 @@ Imports IronPython.Hosting
 
     End Sub
 
+    Private Sub ToolStripButton1_Click_1(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
+        If Me.sfd1.ShowDialog = Windows.Forms.DialogResult.OK Then
+            If Not DWSIM.App.IsRunningOnMono Then
+                Dim scontrol As ScriptEditorControl = DirectCast(TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControl)
+                My.Computer.FileSystem.WriteAllText(Me.sfd1.FileName, scontrol.txtScript.Text, False)
+            Else
+                Dim scontrol As ScriptEditorControlMono = DirectCast(TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControlMono)
+                My.Computer.FileSystem.WriteAllText(Me.sfd1.FileName, scontrol.txtScript.Text, False)
+            End If
+        End If
+    End Sub
+
+    Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
+        If Me.ofd2.ShowDialog = Windows.Forms.DialogResult.OK Then
+            If Not DWSIM.App.IsRunningOnMono Then
+                Dim scontrol As ScriptEditorControl = DirectCast(TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControl)
+                scontrol.txtScript.Text = File.ReadAllText(ofd2.FileName) & vbCrLf
+            Else
+                Dim scontrol As ScriptEditorControlMono = DirectCast(TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControlMono)
+                scontrol.txtScript.Text = File.ReadAllText(ofd2.FileName) & vbCrLf
+            End If
+        End If
+    End Sub
 End Class
 
 Public Class DataGridViewTextStream

@@ -26,6 +26,8 @@
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.NewToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.SaveToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.PrintToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.toolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
         Me.CutToolStripButton = New System.Windows.Forms.ToolStripButton()
@@ -56,7 +58,6 @@
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.tsTextBoxRename = New System.Windows.Forms.ToolStripTextBox()
-        Me.ofd1 = New System.Windows.Forms.OpenFileDialog()
         Me.sfd1 = New System.Windows.Forms.SaveFileDialog()
         Me.TabStripScripts = New FarsiLibrary.Win.FATabStrip()
         Me.FaTabStripItem3 = New FarsiLibrary.Win.FATabStripItem()
@@ -88,7 +89,7 @@
         'ToolStrip1
         '
         resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripButton, Me.SaveToolStripButton, Me.PrintToolStripButton, Me.toolStripSeparator, Me.CutToolStripButton, Me.CopyToolStripButton, Me.PasteToolStripButton, Me.toolStripSeparator1, Me.btnUndo, Me.btnRedo, Me.btnComment, Me.btnUncomment, Me.ToolStripSeparator4, Me.btnIdent, Me.btnIdentRemove, Me.ToolStripSeparator6, Me.tscb1, Me.tscb2, Me.ToolStripSeparator2, Me.tsbInsertSnippet, Me.ToolStripSeparator7, Me.btnRun, Me.btnRunAsync, Me.btnRunDebug, Me.btnStopDebug, Me.toolStripSeparator5, Me.APIHelptsbutton, Me.ToolStripSeparator3, Me.ToolStripLabel1, Me.tsTextBoxRename})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripButton, Me.SaveToolStripButton, Me.ToolStripButton2, Me.ToolStripButton1, Me.PrintToolStripButton, Me.toolStripSeparator, Me.CutToolStripButton, Me.CopyToolStripButton, Me.PasteToolStripButton, Me.toolStripSeparator1, Me.btnUndo, Me.btnRedo, Me.btnComment, Me.btnUncomment, Me.ToolStripSeparator4, Me.btnIdent, Me.btnIdentRemove, Me.ToolStripSeparator6, Me.tscb1, Me.tscb2, Me.ToolStripSeparator2, Me.tsbInsertSnippet, Me.ToolStripSeparator7, Me.btnRun, Me.btnRunAsync, Me.btnRunDebug, Me.btnStopDebug, Me.toolStripSeparator5, Me.APIHelptsbutton, Me.ToolStripSeparator3, Me.ToolStripLabel1, Me.tsTextBoxRename})
         Me.ToolStrip1.Name = "ToolStrip1"
         '
         'NewToolStripButton
@@ -103,6 +104,20 @@
         Me.SaveToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.SaveToolStripButton.Image = Global.DWSIM.My.Resources.Resources.tick
         Me.SaveToolStripButton.Name = "SaveToolStripButton"
+        '
+        'ToolStripButton2
+        '
+        resources.ApplyResources(Me.ToolStripButton2, "ToolStripButton2")
+        Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton2.Image = Global.DWSIM.My.Resources.Resources.arrow_down
+        Me.ToolStripButton2.Name = "ToolStripButton2"
+        '
+        'ToolStripButton1
+        '
+        resources.ApplyResources(Me.ToolStripButton1, "ToolStripButton1")
+        Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton1.Image = Global.DWSIM.My.Resources.Resources.arrow_up1
+        Me.ToolStripButton1.Name = "ToolStripButton1"
         '
         'PrintToolStripButton
         '
@@ -287,13 +302,6 @@
         Me.tsTextBoxRename.Margin = New System.Windows.Forms.Padding(1, 2, 1, 0)
         Me.tsTextBoxRename.Name = "tsTextBoxRename"
         '
-        'ofd1
-        '
-        Me.ofd1.FileName = "OpenFileDialog1"
-        resources.ApplyResources(Me.ofd1, "ofd1")
-        Me.ofd1.Multiselect = True
-        Me.ofd1.SupportMultiDottedExtensions = True
-        '
         'sfd1
         '
         resources.ApplyResources(Me.sfd1, "sfd1")
@@ -453,7 +461,6 @@
     Public WithEvents toolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
     Public WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
     Public WithEvents btnRun As System.Windows.Forms.ToolStripButton
-    Public WithEvents ofd1 As System.Windows.Forms.OpenFileDialog
     Public WithEvents sfd1 As System.Windows.Forms.SaveFileDialog
     Public WithEvents TabStripScripts As FarsiLibrary.Win.FATabStrip
     Public WithEvents ofd2 As System.Windows.Forms.OpenFileDialog
@@ -498,4 +505,6 @@
     Friend WithEvents ToolStripSeparator7 As ToolStripSeparator
     Friend WithEvents GetPropertyTSMI As ToolStripMenuItem
     Friend WithEvents SetPropertyTSMI As ToolStripMenuItem
+    Friend WithEvents ToolStripButton1 As ToolStripButton
+    Friend WithEvents ToolStripButton2 As ToolStripButton
 End Class
