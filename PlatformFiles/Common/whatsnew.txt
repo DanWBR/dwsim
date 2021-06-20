@@ -1,7 +1,5 @@
-Version 6.5.3
+Version 6.5.4
 
-- Fixed crashes when opening the General Settings window (Classic UI)
-- Added a Numerical Method setting to Equilibrium Calculations
-- Python Script UO CAPE-OPEN Wrapper now supports Python.NET
-- Fixed issues with Compound Creator (Classic UI)
-- Other minor fixes and enhancements
+- New Steam Tables (v2) Property Package supporting regions 4 and 5
+- Rewritten Flash Algorithm for single compounds
+- Bug fixes and enhancements

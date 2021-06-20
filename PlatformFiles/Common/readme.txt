@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 6.5.3
+Version 6.5.4
 Copyright (c) 2017-2021 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,27 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim6/commits/windows
+
+Version 6.5.4
+
+Author              Description
+Daniel Medeiros     New Steam Tables (v2) Property Package supporting regions 4 and 5
+Daniel/Gregor       Rewritten Flash Algorithm for single compounds
+Daniel Medeiros     New Interface for External Solvers
+Daniel Medeiros     Import/Export Scripts in Script Manager (Classic UI)
+Daniel Medeiros     Python.NET defaults to Python 3.9 on Windows OS
+Daniel Medeiros     Fixed an issue with the Python Script runner
+Daniel Medeiros     Fixed an issue with the Compound Creator
+Daniel Medeiros     Fixed an issue with text-to-number conversion in some regions
+Daniel Medeiros     Fixed Heat Exchanger Shell-and-Tube editor fouling units
+Daniel Medeiros     Fixed issues with UNIQUAC model and UNIQUAC/NRTL parameter estimation
+Daniel Medeiros     Fixed NRTL/UNIQUAC parameter estimation in Data Regression utility
+Daniel Medeiros     Do not display dynamic properties in steady-state mode
+Daniel Medeiros     Added Pressure Drops to listed Heat Exchanger properties
+Daniel Medeiros     Fixed an issue with Pipe Segment's property retrieval
+Daniel Medeiros     Fixed issue #155: Pressure-Enthalpy Flash with CAPE-OPEN Property Package fail for some Operation Units
+Anders Andreasen    Fixed issue #156: Bug in calculation of internal energy and Helmholtz energy
+Daniel Medeiros     Fixed issue #157: Multivariable Optimization and Sensitivity Analysis cannot use Spreadsheet variables
 
 Version 6.5.3
 
