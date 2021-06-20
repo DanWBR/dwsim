@@ -5,7 +5,8 @@ Public Module DropDownWidth
     <System.Runtime.CompilerServices.Extension()>
     Public Sub SetDropDownMaxWidth(ByVal myCombo As ComboBox)
 
-        Dim maxWidth As Integer = 0, temp As Integer = 0
+        Dim maxWidth As Integer, temp As Integer = 0
+        maxWidth = myCombo.Width
 
         Try
             For Each obj In myCombo.Items
