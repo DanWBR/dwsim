@@ -372,7 +372,6 @@ Imports System.Drawing
         Me.GridMalha.DefaultCellStyle = DataGridViewCellStyle2
         resources.ApplyResources(Me.GridMalha, "GridMalha")
         Me.GridMalha.GridColor = System.Drawing.SystemColors.Control
-        Me.GridMalha.MultiSelect = False
         Me.GridMalha.Name = "GridMalha"
         Me.GridMalha.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -391,7 +390,6 @@ Imports System.Drawing
         Me.GridMalha.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GridMalha.RowTemplate.DefaultCellStyle.FormatProvider = New System.Globalization.CultureInfo("pt-BR")
         Me.GridMalha.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.GridMalha.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         '
         'ColBase
         '
@@ -1425,38 +1423,51 @@ Imports System.Drawing
 
     End Sub
 
+    Private Sub GridMalha_KeyDown(sender As Object, e As KeyEventArgs) Handles GridMalha.KeyDown
+        If e.KeyCode = Keys.V And e.Modifiers = Keys.Control Then
+            PasteData(sender)
+        ElseIf e.KeyCode = Keys.Delete Then
+            For Each c As DataGridViewCell In CType(sender, DataGridView).SelectedCells
+                c.Value = Nothing
+            Next
+        End If
+    End Sub
 
     Private Sub GridMalha_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles GridMalha.CellValueChanged
 
         If loaded Then
-            ToolStripLabel2.Text = PipeOp.FlowSheet.GetTranslatedString("Modified")
-            ToolStripLabel2.ForeColor = Color.DarkOrange
+            Try
+                ToolStripLabel2.Text = PipeOp.FlowSheet.GetTranslatedString("Modified")
+                ToolStripLabel2.ForeColor = Color.DarkOrange
 
-            If e.RowIndex = 4 Then
-                Dim material = GridMalha.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
-                If material IsNot Nothing Then
-                    If material.ToString <> PipeOp.FlowSheet.GetTranslatedString("UserDefined") Then
-                        GridMalha.Rows(e.RowIndex + 1).Cells(e.ColumnIndex).ReadOnly = True
-                        GridMalha.Rows(e.RowIndex + 2).Cells(e.ColumnIndex).ReadOnly = True
-                        GridMalha.Rows(e.RowIndex + 1).Cells(e.ColumnIndex).Value = PipeOp.rugosidade(material.ToString, Nothing)
-                        GridMalha.Rows(e.RowIndex + 2).Cells(e.ColumnIndex).Value = "T-Dep"
-                        GridMalha.Rows(e.RowIndex + 1).Cells(e.ColumnIndex).Style.BackColor = System.Drawing.Color.LightGray
-                        GridMalha.Rows(e.RowIndex + 2).Cells(e.ColumnIndex).Style.BackColor = System.Drawing.Color.LightGray
-                    Else
-                        GridMalha.Rows(e.RowIndex + 1).Cells(e.ColumnIndex).ReadOnly = False
-                        GridMalha.Rows(e.RowIndex + 2).Cells(e.ColumnIndex).ReadOnly = False
-                        If PipeOp.Profile.Sections.ContainsKey(e.ColumnIndex + 1) Then
-                            GridMalha.Rows(e.RowIndex + 1).Cells(e.ColumnIndex).Value = PipeOp.Profile.Sections(e.ColumnIndex + 1).PipeWallRugosity
-                            GridMalha.Rows(e.RowIndex + 2).Cells(e.ColumnIndex).Value = PipeOp.Profile.Sections(e.ColumnIndex + 1).PipeWallThermalConductivityExpression
+                If e.RowIndex = 4 Then
+                    Dim material = GridMalha.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
+                    If material IsNot Nothing Then
+                        If material.ToString <> PipeOp.FlowSheet.GetTranslatedString("UserDefined") Then
+                            GridMalha.Rows(e.RowIndex + 1).Cells(e.ColumnIndex).ReadOnly = True
+                            GridMalha.Rows(e.RowIndex + 2).Cells(e.ColumnIndex).ReadOnly = True
+                            GridMalha.Rows(e.RowIndex + 1).Cells(e.ColumnIndex).Value = PipeOp.rugosidade(material.ToString, Nothing)
+                            GridMalha.Rows(e.RowIndex + 2).Cells(e.ColumnIndex).Value = "T-Dep"
+                            GridMalha.Rows(e.RowIndex + 1).Cells(e.ColumnIndex).Style.BackColor = System.Drawing.Color.LightGray
+                            GridMalha.Rows(e.RowIndex + 2).Cells(e.ColumnIndex).Style.BackColor = System.Drawing.Color.LightGray
                         Else
-                            GridMalha.Rows(e.RowIndex + 1).Cells(e.ColumnIndex).Value = 0.00001
-                            GridMalha.Rows(e.RowIndex + 2).Cells(e.ColumnIndex).Value = ""
+                            GridMalha.Rows(e.RowIndex + 1).Cells(e.ColumnIndex).ReadOnly = False
+                            GridMalha.Rows(e.RowIndex + 2).Cells(e.ColumnIndex).ReadOnly = False
+                            If PipeOp.Profile.Sections.ContainsKey(e.ColumnIndex + 1) Then
+                                GridMalha.Rows(e.RowIndex + 1).Cells(e.ColumnIndex).Value = PipeOp.Profile.Sections(e.ColumnIndex + 1).PipeWallRugosity
+                                GridMalha.Rows(e.RowIndex + 2).Cells(e.ColumnIndex).Value = PipeOp.Profile.Sections(e.ColumnIndex + 1).PipeWallThermalConductivityExpression
+                            Else
+                                GridMalha.Rows(e.RowIndex + 1).Cells(e.ColumnIndex).Value = 0.00001
+                                GridMalha.Rows(e.RowIndex + 2).Cells(e.ColumnIndex).Value = ""
+                            End If
+                            GridMalha.Rows(e.RowIndex + 1).Cells(e.ColumnIndex).Style.BackColor = Nothing
+                            GridMalha.Rows(e.RowIndex + 2).Cells(e.ColumnIndex).Style.BackColor = Nothing
                         End If
-                        GridMalha.Rows(e.RowIndex + 1).Cells(e.ColumnIndex).Style.BackColor = Nothing
-                        GridMalha.Rows(e.RowIndex + 2).Cells(e.ColumnIndex).Style.BackColor = Nothing
                     End If
                 End If
-            End If
+            Catch ex As Exception
+
+            End Try
 
         End If
 
