@@ -48,6 +48,7 @@ John Herring
 John Kossik
 Jonathan
 Jose Zamora
+Joseph Albert Mendoza
 Joseph Attia
 Karen Elrington
 Khairul Anam
@@ -68,7 +69,7 @@ Michael Papantoniou
 Mikhail Evtushenko
 Nicolas Spogis
 Nikita Petrosyan
-Petroconsulting Llc
+Petroconsulting LLC
 Philippe Wesel
 Protherm Systems
 Rajesh Kempegowda

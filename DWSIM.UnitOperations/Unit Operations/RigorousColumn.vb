@@ -7122,7 +7122,12 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                               ByVal CalcMode As Integer,
                               Optional ByVal LLEX As Boolean = False) As Object
 
-            If CalcMode = 0 Then
+            Dim esolv As IExternalNonLinearSystemSolver = Nothing
+            If dc.FlowSheet.ExternalSolvers.ContainsKey(dc.ExternalSolverID) Then
+                esolv = dc.FlowSheet.ExternalSolvers(dc.ExternalSolverID)
+            End If
+
+            If CalcMode = 0 And esolv Is Nothing Then
                 Try
                     'run 4 iterations of the bubble point method to enhance the initial estimates.
                     'if it doesn't suceeed, go on with the original estimates.
@@ -7398,11 +7403,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Dim n As Integer = xvar.Length - 1
 
             il_err_ant = FunctionValue(xvar)
-
-            Dim esolv As IExternalNonLinearSystemSolver = Nothing
-            If dc.FlowSheet.ExternalSolvers.ContainsKey(dc.ExternalSolverID) Then
-                esolv = dc.FlowSheet.ExternalSolvers(dc.ExternalSolverID)
-            End If
 
             If esolv IsNot Nothing Then
                 xvar = esolv.Solve(Function(xvars)

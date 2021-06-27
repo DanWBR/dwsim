@@ -195,6 +195,14 @@ Public Class Settings
             ' Set PythonPath
             Environment.SetEnvironmentVariable("PYTHONPATH", Path.Combine(p1, "Lib"), EnvironmentVariableTarget.Process)
 
+            'set PYDLL
+            Dim pydll = Directory.GetFiles(ppath, "python3*.dll")
+            If pydll.Count > 0 Then
+                Environment.SetEnvironmentVariable("PYTHONNET_PYDLL", pydll(1), EnvironmentVariableTarget.Process)
+            Else
+                Throw New Exception("Could not find Python DLL in the defined Python path.")
+            End If
+
             GlobalSettings.Settings.PythonPathIsSet = True
 
             AddDllDirectory(ppath)
