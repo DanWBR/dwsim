@@ -68,10 +68,10 @@ Public Class EditingForm_Column_InitialEstimates
         Next
 
         If dc.InitialEstimates.LiqCompositions.Count = 0 Then
-            dc.RebuildEstimates()
+            dc.InitialEstimates = dc.RebuildEstimates()
         Else
             If form.SelectedCompounds.Count <> dc.InitialEstimates.LiqCompositions(0).Count Then
-                dc.RebuildEstimates()
+                dc.InitialEstimates = dc.RebuildEstimates()
             End If
         End If
 

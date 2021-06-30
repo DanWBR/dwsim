@@ -622,7 +622,11 @@ Public Class FormMain
         Dim otheruos = SharedClasses.Utility.LoadAdditionalUnitOperations()
 
         For Each uo In otheruos
-            ExternalUnitOperations.Add(uo.Description, uo)
+            If Not ExternalUnitOperations.ContainsKey(uo.Description) Then
+                ExternalUnitOperations.Add(uo.Description, uo)
+            Else
+                Console.WriteLine(String.Format("Error adding External Unit Operation '{0}'. Check the 'unitops' and 'extenders' folders for duplicate items.", uo.Description))
+            End If
         Next
 
     End Sub
@@ -802,6 +806,8 @@ Public Class FormMain
         For Each pp In otherpps
             If Not PropertyPackages.ContainsKey(DirectCast(pp, CapeOpen.ICapeIdentification).ComponentName) Then
                 PropertyPackages.Add(DirectCast(pp, CapeOpen.ICapeIdentification).ComponentName, pp)
+            Else
+                Console.WriteLine(String.Format("Error adding External Property Package '{0}'. Check the 'ppacks' and 'extenders' folders for duplicate items.", pp.ComponentName))
             End If
         Next
 

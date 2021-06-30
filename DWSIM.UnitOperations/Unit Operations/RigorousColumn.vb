@@ -2061,32 +2061,47 @@ Namespace UnitOperations
                 End Select
             Next
 
-            RebuildEstimates()
+            InitialEstimates = RebuildEstimates()
 
         End Sub
 
-        Public Sub RebuildEstimates()
+        Public Function GetLastSolution() As InitialEstimates
 
-            _ie = New InitialEstimates
+            Return LastSolution
+
+        End Function
+
+        Public Sub SetInitialEstimates(ie As InitialEstimates)
+
+            InitialEstimates = New InitialEstimates()
+            InitialEstimates.LoadData(ie.SaveData())
+
+        End Sub
+
+        Public Function RebuildEstimates() As InitialEstimates
+
+            Dim iest As New InitialEstimates
 
             Dim i As Integer
             For i = 0 To Me.NumberOfStages - 1
-                _ie.LiqMolarFlows.Add(New Parameter())
-                _ie.VapMolarFlows.Add(New Parameter())
-                _ie.StageTemps.Add(New Parameter())
+                iest.LiqMolarFlows.Add(New Parameter())
+                iest.VapMolarFlows.Add(New Parameter())
+                iest.StageTemps.Add(New Parameter())
                 Dim d As New Dictionary(Of String, Parameter)
                 For Each cp As BaseClasses.ConstantProperties In Me.FlowSheet.SelectedCompounds.Values
                     d.Add(cp.Name, New Parameter)
                 Next
-                _ie.LiqCompositions.Add(d)
+                iest.LiqCompositions.Add(d)
                 Dim d2 As New Dictionary(Of String, Parameter)
                 For Each cp As BaseClasses.ConstantProperties In Me.FlowSheet.SelectedCompounds.Values
                     d2.Add(cp.Name, New Parameter)
                 Next
-                _ie.VapCompositions.Add(d2)
+                iest.VapCompositions.Add(d2)
             Next
 
-        End Sub
+            Return iest
+
+        End Function
 
         Public Property ColumnType() As ColType
             Get
@@ -2338,6 +2353,8 @@ Namespace UnitOperations
                 _ie = value
             End Set
         End Property
+
+        Private Property LastSolution As InitialEstimates
 
         Public Property UseBroydenAcceleration As Boolean = True
 
@@ -3514,18 +3531,18 @@ Namespace UnitOperations
                         End If
                     End If
                 Else
-                    Try
-                        inputdata.CalculationMode = 0
-                        SetColumnSolver(New SolvingMethods.NaphtaliSandholmMethod())
-                        so = Solver.SolveColumn(inputdata)
-                        solvererror = False
-                    Catch ex As Exception
-                    End Try
-                    If solvererror Then
-                        inputdata.CalculationMode = 1
-                        SetColumnSolver(New SolvingMethods.NaphtaliSandholmMethod())
-                        so = Solver.SolveColumn(inputdata)
-                    End If
+                    'Try
+                    inputdata.CalculationMode = 0
+                    SetColumnSolver(New SolvingMethods.NaphtaliSandholmMethod())
+                    so = Solver.SolveColumn(inputdata)
+                    'solvererror = False
+                    'Catch ex As Exception
+                    'End Try
+                    'If solvererror Then
+                    '    inputdata.CalculationMode = 1
+                    '    SetColumnSolver(New SolvingMethods.NaphtaliSandholmMethod())
+                    '    so = Solver.SolveColumn(inputdata)
+                    'End If
                 End If
             ElseIf TypeOf Me Is AbsorptionColumn Then
                 SetColumnSolver(New SolvingMethods.BurninghamOttoMethod())
@@ -3610,8 +3627,34 @@ Namespace UnitOperations
                             j = j + 1
                         Next
                     Next
+                    LastSolution = RebuildEstimates()
+                    LastSolution.LoadData(InitialEstimates.SaveData())
+                End If
+            Else
+                If Vf.IsValid And Lf.IsValid And LSSf.IsValid And Tf.IsValid Then
+                    LastSolution = RebuildEstimates()
+                    LastSolution.VaporProductFlowRate = Vf(0)
+                    LastSolution.DistillateFlowRate = LSSf(0)
+                    LastSolution.BottomsFlowRate = Lf(0)
+                    For i = 0 To Me.Stages.Count - 1
+                        Me.LastSolution.StageTemps(i).Value = Tf(i)
+                        Me.LastSolution.VapMolarFlows(i).Value = Vf(i)
+                        Me.LastSolution.LiqMolarFlows(i).Value = Lf(i)
+                        j = 0
+                        For Each par As Parameter In Me.LastSolution.LiqCompositions(i).Values
+                            par.Value = xf(i)(j)
+                            j = j + 1
+                        Next
+                        j = 0
+                        For Each par As Parameter In Me.LastSolution.VapCompositions(i).Values
+                            par.Value = yf(i)(j)
+                            j = j + 1
+                        Next
+                    Next
                 End If
             End If
+
+
 
             'update stage temperatures
 
@@ -5279,16 +5322,16 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Next
                 End If
 
-                For i = 0 To ns
-                    Lj(i) = 0
-                    For j = 0 To nc - 1
-                        lc(i)(j) = xt(j)(i)
-                        Lj(i) += lc(i)(j)
-                    Next
-                    If Lj(i) < 0.0# Then
-                        Lj(i) = -Lj(i)
-                    End If
-                Next
+                'For i = 0 To ns
+                '    Lj(i) = 0
+                '    For j = 0 To nc - 1
+                '        lc(i)(j) = xt(j)(i)
+                '        Lj(i) += lc(i)(j)
+                '    Next
+                '    If Lj(i) < 0.0# Then
+                '        Lj(i) = -Lj(i)
+                '    End If
+                'Next
 
                 IObj2?.Paragraphs.Add(String.Format("l: {0}", lc.ToMathArrayString))
 
@@ -7035,8 +7078,11 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         M(i, j) = lc(i)(j) * (1 + Sl(i)) + vc(i)(j) * (1 + Sv(i)) - vc(i + 1)(j) - fc(i)(j)
                         If _condtype = Column.condtype.Full_Reflux Then
                             E(i, j) = -vc(i)(j) + (1 - eff(i)) * vc(i + 1)(j) * sumvkj(i) / sumvkj(i + 1)
-                        Else
+                        ElseIf _condtype = condtype.Partial_Condenser Then
                             E(i, j) = eff(i) * Kval(i)(j) * lc(i)(j) * sumvkj(i) / sumlkj(i) - vc(i)(j) + (1 - eff(i)) * vc(i + 1)(j) * sumvkj(i) / sumvkj(i + 1)
+                        Else
+                            'total condenser
+                            E(i, j) = 0.0 'Kval(i)(j) * xc(i)(j) - yc(i)(j) * (1 - eff(i))
                         End If
                     ElseIf i = ns Then
                         M(i, j) = lc(i)(j) * (1 + Sl(i)) + vc(i)(j) * (1 + Sv(i)) - lc(i - 1)(j) - fc(i)(j)
@@ -7076,7 +7122,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     If j = 0 Then
                         E(0, j) = 1 - sum1
                     Else
-                        E(0, j) = lc(0)(j) - Lj(0) * vc(0)(j) / Vj(0)
+                        E(0, j) = yc(0)(j) - Kval(0)(j) * xc(0)(j)
                     End If
                 Next
             End If
@@ -7103,6 +7149,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             IObj?.Close()
 
+            Dim ersum = errors.AbsSqrSumY
+
             Return errors
 
         End Function
@@ -7127,26 +7175,26 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 esolv = dc.FlowSheet.ExternalSolvers(dc.ExternalSolverID)
             End If
 
-            If CalcMode = 0 And esolv Is Nothing Then
-                Try
-                    'run 4 iterations of the bubble point method to enhance the initial estimates.
-                    'if it doesn't suceeed, go on with the original estimates.
+            'If CalcMode = 0 And esolv Is Nothing Then
+            '    Try
+            '        'run 4 iterations of the bubble point method to enhance the initial estimates.
+            '        'if it doesn't suceeed, go on with the original estimates.
 
-                    Dim result = WangHenkeMethod.Solve(dc, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval,
-                                               x, y, z, fc, HF, T, P, condt, 4, eff,
-                                               coltype, pp, specs, False, False)
-                    T = result(0)
-                    V = result(1)
-                    L = result(2)
-                    VSS = result(3)
-                    LSS = result(4)
-                    y = result(5)
-                    x = result(6)
-                    Kval = result(7)
-                    Q = result(8)
-                Catch ex As Exception
-                End Try
-            End If
+            '        Dim result = WangHenkeMethod.Solve(dc, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval,
+            '                                   x, y, z, fc, HF, T, P, condt, 4, eff,
+            '                                   coltype, pp, specs, False, False)
+            '        T = result(0)
+            '        V = result(1)
+            '        L = result(2)
+            '        VSS = result(3)
+            '        LSS = result(4)
+            '        y = result(5)
+            '        x = result(6)
+            '        Kval = result(7)
+            '        Q = result(8)
+            '    Catch ex As Exception
+            '    End Try
+            'End If
 
             _Tj_ant = T.Clone
 
