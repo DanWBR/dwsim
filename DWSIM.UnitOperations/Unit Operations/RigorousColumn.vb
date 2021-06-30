@@ -3654,8 +3654,6 @@ Namespace UnitOperations
                 End If
             End If
 
-
-
             'update stage temperatures
 
             For i = 0 To Me.Stages.Count - 1
@@ -6711,7 +6709,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
-            Inspector.Host.CheckAndAdd(IObj, "", "FunctionValue", "Simultaneous Correction (SC) Method MEH Equations Calculator", "Naphtali-Sandholm Simultaneous Correction (SC) Method for Distillation, Absorption and Stripping", True)
+            Inspector.Host.CheckAndAdd(IObj, "", "FunctionValue", "Simultaneous Correction (SC) Method MESH Equations Calculator", "Naphtali-Sandholm Simultaneous Correction (SC) Method for Distillation, Absorption and Stripping", True)
 
             IObj?.SetCurrent()
 
@@ -7082,7 +7080,15 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                             E(i, j) = eff(i) * Kval(i)(j) * lc(i)(j) * sumvkj(i) / sumlkj(i) - vc(i)(j) + (1 - eff(i)) * vc(i + 1)(j) * sumvkj(i) / sumvkj(i + 1)
                         Else
                             'total condenser
-                            E(i, j) = 0.0 'Kval(i)(j) * xc(i)(j) - yc(i)(j) * (1 - eff(i))
+                            Dim sum1 As Double = 0
+                            For k = 0 To nc - 1
+                                sum1 += Kval(i)(k) * xc(i)(k)
+                            Next
+                            If j = 0 Then
+                                E(i, j) = 1 - sum1
+                            Else
+                                E(i, j) = yc(i)(j) - Kval(i)(j) * xc(i)(j)
+                            End If
                         End If
                     ElseIf i = ns Then
                         M(i, j) = lc(i)(j) * (1 + Sl(i)) + vc(i)(j) * (1 + Sv(i)) - lc(i - 1)(j) - fc(i)(j)
@@ -7112,20 +7118,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         H(0) = spfval1 / spval1
                 End Select
             Next
-
-            If _condtype = Column.condtype.Total_Condenser Then
-                Dim sum1 As Double = 0
-                For j = 0 To nc - 1
-                    sum1 += Kval(0)(j) * xc(0)(j)
-                Next
-                For j = 0 To nc - 1
-                    If j = 0 Then
-                        E(0, j) = 1 - sum1
-                    Else
-                        E(0, j) = yc(0)(j) - Kval(0)(j) * xc(0)(j)
-                    End If
-                Next
-            End If
 
             Dim errors(x.Length - 1) As Double
 
@@ -7455,11 +7447,11 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             If esolv IsNot Nothing Then
                 xvar = esolv.Solve(Function(xvars)
                                        Return FunctionValue(xvars)
-                                   End Function, Nothing, Nothing, xvar, maxits, tol(0))
+                                   End Function, Nothing, Nothing, xvar, maxits, tol.MinY_NonZero())
             Else
                 xvar = MathNet.Numerics.RootFinding.Broyden.FindRoot(Function(xvars)
                                                                          Return FunctionValue(xvars)
-                                                                     End Function, xvar, tol(0), maxits)
+                                                                     End Function, xvar, tol.MinY_NonZero(), maxits)
             End If
 
             IObj?.Paragraphs.Add(String.Format("Final Variable Values: {0}", xvar.ToMathArrayString))
@@ -7468,7 +7460,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             pp.CurrentMaterialStream.Flowsheet.ShowMessage("Naphtali-Sandholm solver: final objective function (error) value = " & il_err.AbsSqrSumY, IFlowsheet.MessageType.Information)
 
-            If Abs(il_err.AbsSqrSumY) > tol(1) Then
+            If Abs(il_err.AbsSqrSumY) > tol.MinY_NonZero() Then
                 Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCErrorStillHigh"))
             End If
 
