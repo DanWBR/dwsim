@@ -7276,9 +7276,23 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Dim spval1, spval2 As Double
             Dim spci1, spci2 As Integer
 
-            spval1 = SystemsOfUnits.Converter.ConvertToSI(specs("C").SpecUnit, specs("C").SpecValue)
+            Select Case specs("C").SType
+                Case ColumnSpec.SpecType.Component_Fraction,
+                      ColumnSpec.SpecType.Stream_Ratio,
+                      ColumnSpec.SpecType.Component_Recovery
+                    spval1 = specs("C").SpecValue
+                Case Else
+                    spval1 = SystemsOfUnits.Converter.ConvertToSI(specs("C").SpecUnit, specs("C").SpecValue)
+            End Select
             spci1 = specs("C").ComponentIndex
-            spval2 = SystemsOfUnits.Converter.ConvertToSI(specs("R").SpecUnit, specs("R").SpecValue)
+            Select Case specs("C").SType
+                Case ColumnSpec.SpecType.Component_Fraction,
+                      ColumnSpec.SpecType.Stream_Ratio,
+                      ColumnSpec.SpecType.Component_Recovery
+                    spval2 = specs("R").SpecValue
+                Case Else
+                    spval2 = SystemsOfUnits.Converter.ConvertToSI(specs("R").SpecUnit, specs("R").SpecValue)
+            End Select
             spci2 = specs("R").ComponentIndex
 
             Dim ic, ec As Integer
