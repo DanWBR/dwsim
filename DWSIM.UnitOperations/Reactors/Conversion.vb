@@ -293,7 +293,11 @@ Namespace Reactors
                     rxn.ExpContext.Imports.AddType(GetType(System.Math))
                     rxn.ExpContext.Variables.Clear()
                     rxn.ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
-                    rxn.ExpContext.Variables.Add("T", ims.Phases(0).Properties.temperature.GetValueOrDefault)
+                    If ReactorOperationMode = OperationMode.OutletTemperature Then
+                        rxn.ExpContext.Variables.Add("T", OutletTemperature)
+                    Else
+                        rxn.ExpContext.Variables.Add("T", ims.Phases(0).Properties.temperature.GetValueOrDefault)
+                    End If
 
                     rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.Expression)
                     X = rxn.Expr.Evaluate / 100
