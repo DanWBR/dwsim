@@ -222,6 +222,14 @@ Public Class FormFlowsheet
 
         If Not Me.m_IsLoadedFromFile Then
 
+            Dim sacase As New SharedClasses.Flowsheet.Optimization.SensitivityAnalysisCase
+            sacase.name = "SACase0"
+            Collections.OPT_SensAnalysisCollection.Add(sacase)
+
+            Dim optcase As New SharedClasses.Flowsheet.Optimization.OptimizationCase
+            optcase.name = "optcase0"
+            Collections.OPT_OptimizationCollection.Add(optcase)
+
             For Each item In My.Application.MainWindowForm.aTypeList.OrderBy(Function(x) x.Name)
                 If Not item.IsAbstract Then
                     Dim obj = DirectCast(Activator.CreateInstance(item), Interfaces.ISimulationObject)
