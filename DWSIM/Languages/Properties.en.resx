@@ -246,6 +246,9 @@
     <value>Pressure Drop</value>
     <comment>1</comment>
   </data>
+  <data name="PROP_EQ_1" xml:space="preserve">
+    <value>Outlet Temperature</value>
+  </data>
   <data name="PROP_ER_0" xml:space="preserve">
     <value>Maximum Iterations</value>
     <comment>1</comment>

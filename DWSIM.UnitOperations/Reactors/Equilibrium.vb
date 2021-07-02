@@ -1223,9 +1223,11 @@ Namespace Reactors
                     Select Case propidx
 
                         Case 0
-                            'PROP_HT_0	Pressure Drop
+                            'PROP_EQ_0	Pressure Drop
                             value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault)
-
+                        Case 1
+                            'PROP_EQ_1	Outlet Temperature
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.OutletTemperature)
                     End Select
 
                 Else
@@ -1279,15 +1281,15 @@ Namespace Reactors
             If basecol.Length > 0 Then proplist.AddRange(basecol)
             Select Case proptype
                 Case PropertyType.RW
-                    For i = 0 To 0
+                    For i = 0 To 1
                         proplist.Add("PROP_EQ_" + CStr(i))
                     Next
                 Case PropertyType.WR
-                    For i = 0 To 0
+                    For i = 0 To 1
                         proplist.Add("PROP_EQ_" + CStr(i))
                     Next
                 Case PropertyType.ALL
-                    For i = 0 To 0
+                    For i = 0 To 1
                         proplist.Add("PROP_EQ_" + CStr(i))
                     Next
                     proplist.Add("Calculation Mode")
@@ -1318,9 +1320,13 @@ Namespace Reactors
                 Case 0
                     'PROP_HT_0	Pressure Drop
                     Me.DeltaP = SystemsOfUnits.Converter.ConvertToSI(su.deltaP, propval)
-
+                Case 1
+                    'PROP_EQ_1	Outlet Temperature
+                    Me.OutletTemperature = SystemsOfUnits.Converter.ConvertToSI(su.temperature, propval)
             End Select
+
             Return 1
+
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As String
@@ -1344,7 +1350,9 @@ Namespace Reactors
                             Case 0
                                 'PROP_HT_0	Pressure Drop
                                 value = su.deltaP
-
+                            Case 1
+                                'PROP_EQ_1	Outlet Temperature
+                                value = su.temperature
                         End Select
 
                         Return value

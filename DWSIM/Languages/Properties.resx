@@ -1614,4 +1614,7 @@
   <data name="PROP_HX_33" xml:space="preserve">
     <value>Perda de Carga (Lado Quente)</value>
   </data>
+  <data name="PROP_EQ_1" xml:space="preserve">
+    <value>Temperatura de Saída</value>
+  </data>
 </root>
