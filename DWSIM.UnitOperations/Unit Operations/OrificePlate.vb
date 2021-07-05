@@ -50,14 +50,14 @@ Namespace UnitOperations
         End Enum
 
         Protected m_dt As Nullable(Of Double)
-        Protected _orificeDP As Double = 0
-        Protected _fluidDP As Double = 0
+        Protected _orificeDP As Double = 0.0
+        Protected _fluidDP As Double = 0.0
         Protected _beta As Double = 0.5
         Protected _orificediameter As Double = 100.0# / 1000.0
         Protected _internaldiameter As Double = 200.0# / 1000.0
         Protected _orificetype As OrificeType = OrificeType.FlangeTaps
         Protected _calcmethod As CalcMethod
-        Protected _corrfactor As Double = 1
+        Protected _corrfactor As Double = 1.0
 
         Public Sub New(ByVal name As String, ByVal description As String)
 

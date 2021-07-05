@@ -2471,7 +2471,7 @@ Namespace UnitOperations
 
         End Sub
 
-        Public Overridable Function GetSolverInputData() As ColumnSolverInputData
+        Public Overridable Function GetSolverInputData(Optional ByVal ignoreuserestimates As Boolean = False) As ColumnSolverInputData
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
@@ -2797,16 +2797,15 @@ Namespace UnitOperations
                     End If
             End Select
 
-            If InitialEstimates.VaporProductFlowRate IsNot Nothing And UseVaporFlowEstimates Then
+            If InitialEstimates.VaporProductFlowRate IsNot Nothing And UseVaporFlowEstimates And Not ignoreuserestimates Then
                 vaprate = InitialEstimates.VaporProductFlowRate
             End If
-            If InitialEstimates.DistillateFlowRate IsNot Nothing And UseLiquidFlowEstimates Then
+            If InitialEstimates.DistillateFlowRate IsNot Nothing And UseLiquidFlowEstimates And Not ignoreuserestimates Then
                 distrate = InitialEstimates.DistillateFlowRate
             End If
 
             If TypeOf Me Is DistillationColumn AndAlso DirectCast(Me, DistillationColumn).ReboiledAbsorber Then
                 distrate = 0.0
-
             Else
                 If Me.CondenserType = condtype.Full_Reflux Then
                     distrate = 0.0
@@ -2841,10 +2840,10 @@ Namespace UnitOperations
                     End If
             End Select
 
-            If InitialEstimates.VaporProductFlowRate IsNot Nothing And UseVaporFlowEstimates Then
+            If InitialEstimates.VaporProductFlowRate IsNot Nothing And UseVaporFlowEstimates And Not ignoreuserestimates Then
                 vaprate = InitialEstimates.VaporProductFlowRate
             End If
-            If InitialEstimates.DistillateFlowRate IsNot Nothing And UseLiquidFlowEstimates Then
+            If InitialEstimates.DistillateFlowRate IsNot Nothing And UseLiquidFlowEstimates And Not ignoreuserestimates Then
                 distrate = InitialEstimates.DistillateFlowRate
             End If
 
@@ -3032,12 +3031,12 @@ Namespace UnitOperations
             For Each st As Stage In Me.Stages
                 P(i) = st.P
                 eff(i) = st.Efficiency
-                If Me.UseTemperatureEstimates And InitialEstimates.ValidateTemperatures() Then
+                If Me.UseTemperatureEstimates And InitialEstimates.ValidateTemperatures() And Not ignoreuserestimates Then
                     T(i) = Me.InitialEstimates.StageTemps(i).Value
                 Else
                     T(i) = (T2 - T1) * (i) / ns + T1
                 End If
-                If Me.UseVaporFlowEstimates And InitialEstimates.ValidateVaporFlows() Then
+                If Me.UseVaporFlowEstimates And InitialEstimates.ValidateVaporFlows() And Not ignoreuserestimates Then
                     V(i) = Me.InitialEstimates.VapMolarFlows(i).Value
                 Else
                     If i = 0 Then
@@ -3084,7 +3083,7 @@ Namespace UnitOperations
                         End Select
                     End If
                 End If
-                If Me.UseLiquidFlowEstimates And InitialEstimates.ValidateLiquidFlows() Then
+                If Me.UseLiquidFlowEstimates And InitialEstimates.ValidateLiquidFlows() And Not ignoreuserestimates Then
                     L(i) = Me.InitialEstimates.LiqMolarFlows(i).Value
                 Else
                     If i = 0 Then
@@ -3122,7 +3121,7 @@ Namespace UnitOperations
                         If L(i) = 0 Then L(i) = 0.00001
                     End If
                 End If
-                If Me.UseCompositionEstimates And InitialEstimates.ValidateCompositions() Then
+                If Me.UseCompositionEstimates And InitialEstimates.ValidateCompositions() And Not ignoreuserestimates Then
                     j = 0
                     For Each par As Parameter In Me.InitialEstimates.LiqCompositions(i).Values
                         x(i)(j) = par.Value
@@ -3517,32 +3516,25 @@ Namespace UnitOperations
                     Catch ex As Exception
                     End Try
                     If solvererror Then
-                        Try
-                            inputdata.CalculationMode = 0
-                            SetColumnSolver(New SolvingMethods.NaphtaliSandholmMethod())
-                            so = Solver.SolveColumn(inputdata)
-                            solvererror = False
-                        Catch ex As Exception
-                        End Try
-                        If solvererror Then
-                            inputdata.CalculationMode = 1
-                            SetColumnSolver(New SolvingMethods.NaphtaliSandholmMethod())
-                            so = Solver.SolveColumn(inputdata)
-                        End If
+                        FlowSheet.ShowMessage(GraphicObject.Tag + ": Column Solver did not converge. Will reset some parameters and try again shortly...", IFlowsheet.MessageType.Warning)
+                        'try to solve with auto-generated initial estimates.
+                        SetColumnSolver(New SolvingMethods.WangHenkeMethod())
+                        so = Solver.SolveColumn(GetSolverInputData(True))
                     End If
                 Else
-                    'Try
-                    inputdata.CalculationMode = 0
-                    SetColumnSolver(New SolvingMethods.NaphtaliSandholmMethod())
-                    so = Solver.SolveColumn(inputdata)
-                    'solvererror = False
-                    'Catch ex As Exception
-                    'End Try
-                    'If solvererror Then
-                    '    inputdata.CalculationMode = 1
-                    '    SetColumnSolver(New SolvingMethods.NaphtaliSandholmMethod())
-                    '    so = Solver.SolveColumn(inputdata)
-                    'End If
+                    Try
+                        inputdata.CalculationMode = 0
+                        SetColumnSolver(New SolvingMethods.NaphtaliSandholmMethod())
+                        so = Solver.SolveColumn(inputdata)
+                    Catch ex As Exception
+                    End Try
+                    If solvererror Then
+                        FlowSheet.ShowMessage(GraphicObject.Tag + ": Column Solver did not converge. Will reset some parameters and try again shortly...", IFlowsheet.MessageType.Warning)
+                        'try to solve with auto-generated initial estimates.
+                        inputdata.CalculationMode = 0
+                        SetColumnSolver(New SolvingMethods.NaphtaliSandholmMethod())
+                        so = Solver.SolveColumn(GetSolverInputData(True))
+                    End If
                 End If
             ElseIf TypeOf Me Is AbsorptionColumn Then
                 SetColumnSolver(New SolvingMethods.BurninghamOttoMethod())
