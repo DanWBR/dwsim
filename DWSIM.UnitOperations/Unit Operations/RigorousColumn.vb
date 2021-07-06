@@ -4451,7 +4451,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         counter += 1
 
                         If Math.IEEERemainder(counter, 10) = 0.0 Then
-                            pp.Flowsheet?.ShowMessage(String.Format("BP solver: external iteration #{0}, current objective function (error) value = {1}", counter, (errfunc1 + errfunc2) ^ 2), IFlowsheet.MessageType.Information)
+                            pp.Flowsheet?.ShowMessage(String.Format(rc.GraphicObject.Tag + ": [BP Solver] external iteration #{0}, current objective function (error) value = {1}", counter, (errfunc1 + errfunc2) ^ 2), IFlowsheet.MessageType.Information)
                         End If
 
                         ResultsVector.Add(result)
@@ -4470,9 +4470,16 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                                                             End Function,
                                                                        New Double() {refluxratio, bottomsrate}, tolerance, maxits)
 
+                'Dim newton As New NewtonSolver
+                'newton.Tolerance = tolerance
+                'newton.MaxIterations = maxits
+                'newton.Solve(Function(xv0)
+                '                 Return fbody.Invoke(xv0, 0, tolerance, stopatitnumber)
+                '             End Function, New Double() {refluxratio, bottomsrate})
+
                 result = ResultsVector(ObjFunctionValues.IndexOf(ObjFunctionValues.Min))
 
-                pp.Flowsheet?.ShowMessage(String.Format("BP solver: converged at external iteration #{0}, final objective function (error) value = {1}", counter, (errfunc1 + errfunc2) ^ 2), IFlowsheet.MessageType.Information)
+                pp.Flowsheet?.ShowMessage(String.Format(rc.GraphicObject.Tag + ": [BP Solver] converged at external iteration #{0}, final objective function (error) value = {1}", counter, (errfunc1 + errfunc2) ^ 2), IFlowsheet.MessageType.Information)
 
                 Return result
 
@@ -4643,7 +4650,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         counter += 1
 
                         If Math.IEEERemainder(counter, 10) = 0.0 Then
-                            pp.Flowsheet?.ShowMessage(String.Format("BP solver: external iteration #{0}, current objective function (error) value = {1}", counter, errfunc), IFlowsheet.MessageType.Information)
+                            pp.Flowsheet?.ShowMessage(String.Format(rc.GraphicObject.Tag + ": [BP Solver] external iteration #{0}, current objective function (error) value = {1}", counter, errfunc), IFlowsheet.MessageType.Information)
                         End If
 
                         ResultsVector.Add(result)
@@ -4657,7 +4664,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 result = ResultsVector(ObjFunctionValues.IndexOf(ObjFunctionValues.Min))
 
-                pp.Flowsheet?.ShowMessage(String.Format("BP solver: converged at external iteration #{0}, final objective function (error) value = {1}", counter, errfunc ^ 2), IFlowsheet.MessageType.Information)
+                pp.Flowsheet?.ShowMessage(String.Format(rc.GraphicObject.Tag + ": [BP Solver] converged at external iteration #{0}, final objective function (error) value = {1}", counter, errfunc ^ 2), IFlowsheet.MessageType.Information)
 
                 Return result
 
@@ -4812,7 +4819,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     counter += 1
 
                     If Math.IEEERemainder(counter, 10) = 0.0 Then
-                        pp.Flowsheet?.ShowMessage(String.Format("BP solver: external iteration #{0}, current objective function (error) value = {1}", counter, errfunc), IFlowsheet.MessageType.Information)
+                        pp.Flowsheet?.ShowMessage(String.Format(rc.GraphicObject.Tag + ": [BP Solver] external iteration #{0}, current objective function (error) value = {1}", counter, errfunc), IFlowsheet.MessageType.Information)
                     End If
 
                     ResultsVector.Add(result)
@@ -4882,7 +4889,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 result = ResultsVector(ObjFunctionValues.IndexOf(ObjFunctionValues.Min))
 
-                pp.Flowsheet?.ShowMessage(String.Format("BP solver: converged at external iteration #{0}, final objective function (error) value = {1}", counter, errfunc ^ 2), IFlowsheet.MessageType.Information)
+                pp.Flowsheet?.ShowMessage(String.Format(rc.GraphicObject.Tag + ": [BP Solver] converged at external iteration #{0}, final objective function (error) value = {1}", counter, errfunc ^ 2), IFlowsheet.MessageType.Information)
 
                 Return result
 
@@ -7464,7 +7471,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             il_err = FunctionValue(xvar)
 
-            pp.CurrentMaterialStream.Flowsheet.ShowMessage("Naphtali-Sandholm solver: final objective function (error) value = " & il_err.AbsSqrSumY, IFlowsheet.MessageType.Information)
+            pp.CurrentMaterialStream.Flowsheet.ShowMessage(dc.GraphicObject.Tag + ": [NS Solver] Final objective function (error) value = " & il_err.AbsSqrSumY, IFlowsheet.MessageType.Information)
 
             If Abs(il_err.AbsSqrSumY) > tol.MinY_NonZero() Then
                 Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCErrorStillHigh"))
