@@ -416,6 +416,8 @@ Namespace GraphicObjects
 
         Public Property ControlPanelModeEditorDisplayDelegate As Action Implements IGraphicObject.ControlPanelModeEditorDisplayDelegate
 
+        Public Property DoubleClickAction As Action(Of Object) Implements IGraphicObject.DoubleClickAction
+
         Public Function GetForeColor() As SKColor
 
             Return Drawing.SkiaSharp.GraphicsSurface.ForegroundColor

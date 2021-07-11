@@ -23,6 +23,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 ''' </summary>
 <InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IGraphicObject
 
+    Property DoubleClickAction As Action(Of Object)
+
     Property DrawOverride As Action(Of Object)
 
     Sub PositionConnectors()

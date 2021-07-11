@@ -138,9 +138,9 @@ Public Class FlowsheetSurfaceControl
 
             If My.Settings.DoubleClickToEdit Then
                 If Not My.Settings.EnableMultipleObjectEditors Then
-                    For Each obj In FlowsheetObject.SimulationObjects.Values
-                        obj.CloseEditForm()
-                        If FlowsheetObject.DynamicMode Then obj.CloseDynamicsEditForm()
+                    For Each sobj In FlowsheetObject.SimulationObjects.Values
+                        sobj.CloseEditForm()
+                        If FlowsheetObject.DynamicMode Then sobj.CloseDynamicsEditForm()
                     Next
                 End If
                 FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayEditForm()
@@ -150,6 +150,8 @@ Public Class FlowsheetSurfaceControl
                 EditorTooltips.Update(FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name), FlowsheetObject)
                 FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayExtraPropertiesEditForm()
             End If
+
+            obj.DoubleClickAction?.Invoke(obj)
 
         End If
 

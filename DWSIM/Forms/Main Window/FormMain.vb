@@ -3140,6 +3140,11 @@ Public Class FormMain
 
         xdoc.Save(path)
 
+        'Dim doc = New XmlDocument()
+        'doc.Load(path)
+        'Dim jsonstring = Newtonsoft.Json.JsonConvert.SerializeXmlNode(doc)
+        'File.WriteAllText(IO.Path.ChangeExtension(simulationfilename, "json"), jsonstring)
+
         If IO.Path.GetExtension(simulationfilename).ToLower.Contains("dwxml") Or IO.Path.GetExtension(simulationfilename).ToLower.Contains("dwxmz") Then
             If Visible Then
                 Dim mypath As String = simulationfilename
