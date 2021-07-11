@@ -631,6 +631,10 @@ namespace DWSIM.UI.Forms
                     FlowsheetControl.FlowsheetSurface.ZoomAll((int)(FlowsheetControl.Width * GlobalSettings.Settings.DpiScale), (int)(FlowsheetControl.Height * GlobalSettings.Settings.DpiScale));
                     FlowsheetControl.Invalidate();
                 }
+                else
+                {
+                    obj.DoubleClickAction?.Invoke(obj);
+                }
                 if (e.Modifiers == Keys.Shift)
                 {
                     if (obj == null) return;
