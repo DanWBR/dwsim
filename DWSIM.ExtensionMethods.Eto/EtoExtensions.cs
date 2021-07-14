@@ -46,6 +46,14 @@ namespace DWSIM.UI.Shared
             return GlobalSettings.Settings.EditorFontSize;
         }
 
+        public static void Center(this Form form)
+        {
+            var center = Screen.PrimaryScreen.WorkingArea.Center;
+            center.X -= form.Width / 2;
+            center.Y -= form.Height / 2;
+            form.Location = new Point(center);
+        }
+
         public static Form GetDefaultEditorForm(string title, int width, int height, DynamicLayout content)
         {
             //content.CreateAndAddEmptySpace();

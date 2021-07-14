@@ -235,6 +235,8 @@ Namespace DWSIM.Flowsheet
 
         Public Property ForceStreamPhase As ForcedPhase = ForcedPhase.None Implements IFlowsheetOptions.ForceStreamPhase
 
+        Public Property DisplayUserDefinedPropertiesEditor As Boolean = False Implements IFlowsheetOptions.DisplayUserDefinedPropertiesEditor
+
     End Class
 
 End Namespace

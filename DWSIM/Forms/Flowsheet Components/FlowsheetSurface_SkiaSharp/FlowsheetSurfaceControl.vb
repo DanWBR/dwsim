@@ -148,7 +148,9 @@ Public Class FlowsheetSurfaceControl
                     FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayDynamicsEditForm()
                 End If
                 EditorTooltips.Update(FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name), FlowsheetObject)
-                FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayExtraPropertiesEditForm()
+                If FlowsheetObject.Options.DisplayUserDefinedPropertiesEditor Then
+                    FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayExtraPropertiesEditForm()
+                End If
             End If
 
             obj.DoubleClickAction?.Invoke(obj)
@@ -197,7 +199,9 @@ Public Class FlowsheetSurfaceControl
                                 FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayDynamicsEditForm()
                             End If
                             EditorTooltips.Update(FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name), FlowsheetObject)
-                            FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayExtraPropertiesEditForm()
+                            If FlowsheetObject.Options.DisplayUserDefinedPropertiesEditor Then
+                                FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayExtraPropertiesEditForm()
+                            End If
                         End If
                     End If
 

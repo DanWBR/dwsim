@@ -93,4 +93,6 @@
 
     Property ForceStreamPhase As Enums.ForcedPhase
 
+    Property DisplayUserDefinedPropertiesEditor As Boolean
+
 End Interface

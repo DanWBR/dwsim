@@ -252,6 +252,8 @@ Public Class FormSimulSettings
 
         chkSkipEqCalcs.Checked = CurrentFlowsheet.Options.SkipEquilibriumCalculationOnDefinedStreams
 
+        chkShowExtraPropertiesEditor.Checked = CurrentFlowsheet.Options.DisplayUserDefinedPropertiesEditor
+
         Select Case CurrentFlowsheet.Options.ForceStreamPhase
             Case ForcedPhase.None
                 cbForcePhase.SelectedIndex = 0
@@ -1629,6 +1631,10 @@ Public Class FormSimulSettings
                     CurrentFlowsheet.Options.ForceStreamPhase = ForcedPhase.Solid
             End Select
         End If
+    End Sub
+
+    Private Sub chkShowExtraPropertiesEditor_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowExtraPropertiesEditor.CheckedChanged
+        CurrentFlowsheet.Options.DisplayUserDefinedPropertiesEditor = chkShowExtraPropertiesEditor.Checked
     End Sub
 
     Private Sub FormSimulSettings_Shown(sender As Object, e As EventArgs) Handles Me.Shown
