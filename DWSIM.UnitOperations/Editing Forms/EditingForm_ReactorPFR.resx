@@ -2665,6 +2665,6 @@
     <value>EditingForm_ReactorPFR</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=6.5.4.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=6.5.5.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

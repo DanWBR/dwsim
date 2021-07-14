@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 6.5.4
+Version 6.5.5
 Copyright (c) 2017-2021 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,17 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim6/commits/windows
+
+Version 6.5.5
+
+Author              Description
+Daniel Medeiros     Python.NET Runtime now works with any Python 3.x distro
+Daniel Medeiros     Fixed issues with Rigorous Column solvers
+Daniel Medeiros     Pipe Segment UO's Hydraulic Profile editor now allows pasting from clipboard (Classic UI)
+Daniel Medeiros     Fixed error on duplicate external components
+Daniel Medeiros     Fixed an issue with Conversion Reactor UO
+Daniel Medeiros     Custom Actions for Flowsheet Object's Double Click event
+Daniel Medeiros     Other minor fixes and enhancements
 
 Version 6.5.4
 
