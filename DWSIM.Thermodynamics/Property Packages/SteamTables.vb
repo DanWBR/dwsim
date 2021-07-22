@@ -65,7 +65,7 @@ Namespace PropertyPackages
                             Return New Auxiliary.FlashAlgorithms.SteamTables
                         Case ForcedPhase.GlobalDef
                             If CurrentMaterialStream.Flowsheet.FlowsheetOptions.ForceStreamPhase = ForcedPhase.None Then
-                                Return New Auxiliary.FlashAlgorithms.UniversalFlash() With {.FlashSettings = FlashSettings}
+                                Return New Auxiliary.FlashAlgorithms.SteamTables
                             Else
                                 Return New Auxiliary.FlashAlgorithms.ForcedPhaseFlash() With {.ForcePhase = CurrentMaterialStream.Flowsheet.FlowsheetOptions.ForceStreamPhase}
                             End If
