@@ -462,9 +462,134 @@ Namespace UnitOperations
 
                     IObj?.SetCurrent()
 
-                Case CalculationMode.PowerGenerated, CalculationMode.Head
+                Case CalculationMode.PowerGenerated, CalculationMode.Head, CalculationMode.Curves
 
-Curves:             If CalcMode = CalculationMode.Head Then
+                    If CalcMode = CalculationMode.Curves Then
+
+
+                        Dim chead, ceff, cpower As PumpOps.Curve
+
+                        If DebugMode Then AppendDebugLine(String.Format("Creating curves..."))
+
+                        If Me.Curves.Count = 0 Then Me.Curves.Add(Speed, CreateCurves())
+
+                        Dim LHeadSpeed, LHead, LPowerSpeed, LPower, LEffSpeed, LEff As New List(Of Double)
+
+                        For Each datapair In Me.Curves
+
+                            chead = datapair.Value("HEAD")
+                            ceff = datapair.Value("EFF")
+                            cpower = datapair.Value("POWER")
+
+                            Dim xhead, yhead, xeff, yeff, xpower, ypower As New ArrayList
+
+                            Dim qint As Double
+
+                            If chead.xunit.Contains("@ P,T") Then
+                                'actual flow
+                                qint = ims.Phases(0).Properties.volumetric_flow
+                            Else
+                                ' molar flow
+                                qint = ims.Phases(0).Properties.molarflow
+                            End If
+
+                            Dim i As Integer
+
+                            For i = 0 To chead.x.Count - 1
+                                If Double.TryParse(chead.x(i), New Double) And Double.TryParse(chead.y(i), New Double) Then
+                                    xhead.Add(SystemsOfUnits.Converter.ConvertToSI(chead.xunit.Replace(" @ P,T", ""), chead.x(i)))
+                                    yhead.Add(SystemsOfUnits.Converter.ConvertToSI(chead.yunit, chead.y(i)))
+                                End If
+                            Next
+                            For i = 0 To cpower.x.Count - 1
+                                If Double.TryParse(cpower.x(i), New Double) And Double.TryParse(cpower.y(i), New Double) Then
+                                    xpower.Add(SystemsOfUnits.Converter.ConvertToSI(cpower.xunit.Replace(" @ P,T", ""), cpower.x(i)))
+                                    ypower.Add(SystemsOfUnits.Converter.ConvertToSI(cpower.yunit, cpower.y(i)))
+                                End If
+                            Next
+                            For i = 0 To ceff.x.Count - 1
+                                If Double.TryParse(ceff.x(i), New Double) And Double.TryParse(ceff.y(i), New Double) Then
+                                    xeff.Add(SystemsOfUnits.Converter.ConvertToSI(ceff.xunit.Replace(" @ P,T", ""), ceff.x(i)))
+                                    If ceff.yunit = "%" Then
+                                        yeff.Add(ceff.y(i) / 100)
+                                    Else
+                                        yeff.Add(ceff.y(i))
+                                    End If
+                                End If
+                            Next
+
+                            'get operating points
+                            Dim head, eff, power As Double
+
+                            If datapair.Value("HEAD").Enabled And datapair.Value("HEAD").x.Count > 0 Then
+                                head = Interpolation.Interpolate(xhead.ToArray(GetType(Double)), yhead.ToArray(GetType(Double)), qint)
+                                LHeadSpeed.Add(datapair.Key)
+                                LHead.Add(head)
+                            End If
+
+                            If datapair.Value("POWER").Enabled And datapair.Value("POWER").x.Count > 0 Then
+                                power = Interpolation.Interpolate(xpower.ToArray(GetType(Double)), ypower.ToArray(GetType(Double)), qint)
+                                LPowerSpeed.Add(datapair.Key)
+                                LPower.Add(power)
+                            End If
+
+                            If datapair.Value("EFF").Enabled And datapair.Value("EFF").x.Count > 0 Then
+                                eff = Interpolation.Interpolate(xeff.ToArray(GetType(Double)), yeff.ToArray(GetType(Double)), qint)
+                                LEffSpeed.Add(datapair.Key)
+                                LEff.Add(eff)
+                            End If
+
+                        Next
+
+                        Dim ires As Double
+
+                        If LHead.Count > 0 Then
+                            ' head has priority over power
+                            ires = Interpolation.Interpolate(LHeadSpeed.ToArray, LHead.ToArray(), Speed)
+                            Me.CurvePower = Double.NegativeInfinity
+                            Me.CurveHead = ires
+                        Else
+                            'power
+                            ires = Interpolation.Interpolate(LPowerSpeed.ToArray, LPower.ToArray(), Speed)
+                            Me.CurveHead = Double.NegativeInfinity
+                            Me.CurvePower = ires
+                        End If
+
+                        If LEff.Count > 0 Then
+                            'efficiency
+                            ires = Interpolation.Interpolate(LEffSpeed.ToArray, LEff.ToArray(), Speed)
+                            Me.CurveEff = ires * 100
+                        Else
+                            Me.CurveEff = Double.NegativeInfinity
+                        End If
+
+                        Wi = ims.Phases(0).Properties.massflow.GetValueOrDefault
+
+                        If CurvePower = Double.NegativeInfinity Then
+                            If ProcessPath = ProcessPathType.Adiabatic Then
+                                AdiabaticHead = CurveHead
+                            Else
+                                PolytropicHead = CurveHead
+                            End If
+                        Else
+                            If ProcessPath = ProcessPathType.Adiabatic Then
+                                AdiabaticHead = CurvePower * 1000 / Wi / 9.8
+                            Else
+                                PolytropicHead = CurvePower * 1000 / Wi / 9.8
+                            End If
+                        End If
+
+                        If Not CurveEff = Double.NegativeInfinity Then
+                            If ProcessPath = ProcessPathType.Adiabatic Then
+                                AdiabaticEfficiency = CurveEff
+                            Else
+                                PolytropicEfficiency = CurveEff
+                            End If
+                        End If
+
+                    End If
+
+                    If CalcMode = CalculationMode.Head Then
                         DeltaQ = AdiabaticHead / 1000 * Wi * 9.8 * (Me.AdiabaticEfficiency / 100)
                     End If
 
@@ -482,23 +607,78 @@ Curves:             If CalcMode = CalculationMode.Head Then
 
                     'recalculate Q with P2i
 
-                    Do
+                    Dim PFunction As Func(Of Double, Double) =
+                        Function(Ploop)
 
-                        P2 = P2i
+                            P2 = Ploop
 
-                        IObj?.SetCurrent()
-                        PropertyPackage.CurrentMaterialStream = ims
-                        tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2, Si, Ti)
-                        T2s = tmp.CalculatedTemperature
-                        H2s = tmp.CalculatedEnthalpy
+                            IObj?.SetCurrent()
+                            PropertyPackage.CurrentMaterialStream = ims
+                            tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEntropy, P2, Si, Ti)
+                            T2s = tmp.CalculatedTemperature
+                            H2s = tmp.CalculatedEnthalpy
 
-                        If ProcessPath = ProcessPathType.Polytropic Then
+                            If ProcessPath = ProcessPathType.Polytropic Then
 
-                            AdiabaticEfficiency = PolytropicEfficiency
+                                AdiabaticEfficiency = PolytropicEfficiency
 
-                            Dim ef0, ef1 As Double
+                                Dim ef0, ef1 As Double
 
-                            Do
+                                Do
+
+                                    IObj?.SetCurrent()
+                                    PropertyPackage.CurrentMaterialStream = ims
+                                    tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, Hi - Me.DeltaQ / Wi, T2)
+                                    T2 = tmp.CalculatedTemperature
+                                    Me.DeltaT = T2 - Ti
+
+                                    CheckSpec(T2, True, "outlet temperature")
+
+                                    H2 = Hi - Me.DeltaQ / Wi
+
+                                    OutletTemperature = T2
+
+                                    rho1 = ims.GetPhase("Mixture").Properties.density.GetValueOrDefault
+
+                                    tms.PropertyPackage = PropertyPackage
+                                    PropertyPackage.CurrentMaterialStream = tms
+                                    tms.Phases(0).Properties.temperature = T2s
+                                    tms.Phases(0).Properties.pressure = P2
+                                    tms.Phases(0).Properties.enthalpy = H2s
+                                    tms.Calculate()
+
+                                    rho2i = tms.GetPhase("Mixture").Properties.density.GetValueOrDefault
+
+                                    tms.PropertyPackage = PropertyPackage
+                                    PropertyPackage.CurrentMaterialStream = tms
+                                    tms.Phases(0).Properties.temperature = T2
+                                    tms.Phases(0).Properties.pressure = P2
+                                    tms.Phases(0).Properties.enthalpy = H2
+                                    tms.Calculate()
+
+                                    rho2 = tms.GetPhase("Mixture").Properties.density.GetValueOrDefault
+
+                                    ' volume exponent (isent)
+
+                                    n_isent = Math.Log(P2 / Pi) / Math.Log(rho2i / rho1)
+
+                                    ' volume exponent (polyt)
+
+                                    n_poly = Math.Log(P2 / Pi) / Math.Log(rho2 / rho1)
+
+                                    fce = ((P2 / Pi) ^ ((n_poly - 1) / n_poly) - 1) * ((n_poly / (n_poly - 1)) * (n_isent - 1) / n_isent) / ((P2 / Pi) ^ ((n_isent - 1) / n_isent) - 1)
+
+                                    ' real work
+
+                                    ef0 = AdiabaticEfficiency
+
+                                    AdiabaticEfficiency = PolytropicEfficiency / fce
+
+                                    ef1 = AdiabaticEfficiency
+
+                                Loop Until Math.Abs(ef1 - ef0) < 0.00001
+
+                            Else
 
                                 IObj?.SetCurrent()
                                 PropertyPackage.CurrentMaterialStream = ims
@@ -542,88 +722,23 @@ Curves:             If CalcMode = CalculationMode.Head Then
 
                                 fce = ((P2 / Pi) ^ ((n_poly - 1) / n_poly) - 1) * ((n_poly / (n_poly - 1)) * (n_isent - 1) / n_isent) / ((P2 / Pi) ^ ((n_isent - 1) / n_isent) - 1)
 
-                                ' real work
+                                PolytropicEfficiency = AdiabaticEfficiency * fce
 
-                                ef0 = AdiabaticEfficiency
+                            End If
 
-                                AdiabaticEfficiency = PolytropicEfficiency / fce
+                            Qloop = -Wi * (H2s - Hi) * (Me.AdiabaticEfficiency / 100)
 
-                                ef1 = AdiabaticEfficiency
+                            If DebugMode Then AppendDebugLine(String.Format("Qi: {0}", Qi))
 
-                            Loop Until Math.Abs(ef1 - ef0) < 0.00001
+                            fx00 = fx0
+                            fx0 = fx
+                            fx = Qloop - DeltaQ
 
-                        Else
+                            Return fx
 
-                            IObj?.SetCurrent()
-                            PropertyPackage.CurrentMaterialStream = ims
-                            tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, Hi - Me.DeltaQ / Wi, T2)
-                            T2 = tmp.CalculatedTemperature
-                            Me.DeltaT = T2 - Ti
+                        End Function
 
-                            CheckSpec(T2, True, "outlet temperature")
-
-                            H2 = Hi - Me.DeltaQ / Wi
-
-                            OutletTemperature = T2
-
-                            rho1 = ims.GetPhase("Mixture").Properties.density.GetValueOrDefault
-
-                            tms.PropertyPackage = PropertyPackage
-                            PropertyPackage.CurrentMaterialStream = tms
-                            tms.Phases(0).Properties.temperature = T2s
-                            tms.Phases(0).Properties.pressure = P2
-                            tms.Phases(0).Properties.enthalpy = H2s
-                            tms.Calculate()
-
-                            rho2i = tms.GetPhase("Mixture").Properties.density.GetValueOrDefault
-
-                            tms.PropertyPackage = PropertyPackage
-                            PropertyPackage.CurrentMaterialStream = tms
-                            tms.Phases(0).Properties.temperature = T2
-                            tms.Phases(0).Properties.pressure = P2
-                            tms.Phases(0).Properties.enthalpy = H2
-                            tms.Calculate()
-
-                            rho2 = tms.GetPhase("Mixture").Properties.density.GetValueOrDefault
-
-                            ' volume exponent (isent)
-
-                            n_isent = Math.Log(P2 / Pi) / Math.Log(rho2i / rho1)
-
-                            ' volume exponent (polyt)
-
-                            n_poly = Math.Log(P2 / Pi) / Math.Log(rho2 / rho1)
-
-                            fce = ((P2 / Pi) ^ ((n_poly - 1) / n_poly) - 1) * ((n_poly / (n_poly - 1)) * (n_isent - 1) / n_isent) / ((P2 / Pi) ^ ((n_isent - 1) / n_isent) - 1)
-
-                            PolytropicEfficiency = AdiabaticEfficiency * fce
-
-                        End If
-
-                        Qloop = -Wi * (H2s - Hi) * (Me.AdiabaticEfficiency / 100)
-
-                        If DebugMode Then AppendDebugLine(String.Format("Qi: {0}", Qi))
-
-                        fx00 = fx0
-                        fx0 = fx
-                        fx = Qloop - DeltaQ
-
-                        P2i00 = P2i0
-                        P2i0 = P2i
-
-                        If icnt <= 2 Then
-                            P2i *= 1.01
-                        Else
-                            P2i = P2i - 0.7 * fx / ((fx - fx00) / (P2i - P2i00))
-                        End If
-
-                        If DebugMode Then AppendDebugLine(String.Format("P2i: {0}", P2i))
-
-                        icnt += 1
-
-                    Loop Until Math.Abs((DeltaQ - Qloop) / DeltaQ) < 0.001
-
-                    P2 = P2i
+                    P2 = MathNet.Numerics.RootFinding.Brent.FindRootExpand(PFunction, P2i, Pi, 0.00001, 100)
 
                     POut = P2
                     DeltaP = Pi - P2
@@ -631,130 +746,6 @@ Curves:             If CalcMode = CalculationMode.Head Then
                     IObj?.Paragraphs.Add("<h3>Results</h3>")
 
                     IObj?.Paragraphs.Add(String.Format("<mi>S_2</mi>: {0} kJ/[kg.K]", tmp.CalculatedEntropy))
-
-                Case CalculationMode.Curves
-
-                    Dim chead, ceff, cpower As PumpOps.Curve
-
-                    If DebugMode Then AppendDebugLine(String.Format("Creating curves..."))
-
-                    If Me.Curves.Count = 0 Then Me.Curves.Add(Speed, CreateCurves())
-
-                    Dim LHeadSpeed, LHead, LPowerSpeed, LPower, LEffSpeed, LEff As New List(Of Double)
-
-                    For Each datapair In Me.Curves
-
-                        chead = datapair.Value("HEAD")
-                        ceff = datapair.Value("EFF")
-                        cpower = datapair.Value("POWER")
-
-                        Dim xhead, yhead, xeff, yeff, xpower, ypower As New ArrayList
-
-                        Dim qint As Double
-
-                        If chead.xunit.Contains("@ P,T") Then
-                            'actual flow
-                            qint = ims.Phases(0).Properties.volumetric_flow
-                        Else
-                            ' molar flow
-                            qint = ims.Phases(0).Properties.molarflow
-                        End If
-
-                        Dim i As Integer
-
-                        For i = 0 To chead.x.Count - 1
-                            If Double.TryParse(chead.x(i), New Double) And Double.TryParse(chead.y(i), New Double) Then
-                                xhead.Add(SystemsOfUnits.Converter.ConvertToSI(chead.xunit.Replace(" @ P,T", ""), chead.x(i)))
-                                yhead.Add(SystemsOfUnits.Converter.ConvertToSI(chead.yunit, chead.y(i)))
-                            End If
-                        Next
-                        For i = 0 To cpower.x.Count - 1
-                            If Double.TryParse(cpower.x(i), New Double) And Double.TryParse(cpower.y(i), New Double) Then
-                                xpower.Add(SystemsOfUnits.Converter.ConvertToSI(cpower.xunit.Replace(" @ P,T", ""), cpower.x(i)))
-                                ypower.Add(SystemsOfUnits.Converter.ConvertToSI(cpower.yunit, cpower.y(i)))
-                            End If
-                        Next
-                        For i = 0 To ceff.x.Count - 1
-                            If Double.TryParse(ceff.x(i), New Double) And Double.TryParse(ceff.y(i), New Double) Then
-                                xeff.Add(SystemsOfUnits.Converter.ConvertToSI(ceff.xunit.Replace(" @ P,T", ""), ceff.x(i)))
-                                If ceff.yunit = "%" Then
-                                    yeff.Add(ceff.y(i) / 100)
-                                Else
-                                    yeff.Add(ceff.y(i))
-                                End If
-                            End If
-                        Next
-
-                        'get operating points
-                        Dim head, eff, power As Double
-
-                        If datapair.Value("HEAD").Enabled And datapair.Value("HEAD").x.Count > 0 Then
-                            head = Interpolation.Interpolate(xhead.ToArray(GetType(Double)), yhead.ToArray(GetType(Double)), qint)
-                            LHeadSpeed.Add(datapair.Key)
-                            LHead.Add(head)
-                        End If
-
-                        If datapair.Value("POWER").Enabled And datapair.Value("POWER").x.Count > 0 Then
-                            power = Interpolation.Interpolate(xpower.ToArray(GetType(Double)), ypower.ToArray(GetType(Double)), qint)
-                            LPowerSpeed.Add(datapair.Key)
-                            LPower.Add(power)
-                        End If
-
-                        If datapair.Value("EFF").Enabled And datapair.Value("EFF").x.Count > 0 Then
-                            eff = Interpolation.Interpolate(xeff.ToArray(GetType(Double)), yeff.ToArray(GetType(Double)), qint)
-                            LEffSpeed.Add(datapair.Key)
-                            LEff.Add(eff)
-                        End If
-
-                    Next
-
-                    Dim ires As Double
-
-                    If LHead.Count > 0 Then
-                        ' head has priority over power
-                        ires = Interpolation.Interpolate(LHeadSpeed.ToArray, LHead.ToArray(), Speed)
-                        Me.CurvePower = Double.NegativeInfinity
-                        Me.CurveHead = ires
-                    Else
-                        'power
-                        ires = Interpolation.Interpolate(LPowerSpeed.ToArray, LPower.ToArray(), Speed)
-                        Me.CurveHead = Double.NegativeInfinity
-                        Me.CurvePower = ires
-                    End If
-
-                    If LEff.Count > 0 Then
-                        'efficiency
-                        ires = Interpolation.Interpolate(LEffSpeed.ToArray, LEff.ToArray(), Speed)
-                        Me.CurveEff = ires * 100
-                    Else
-                        Me.CurveEff = Double.NegativeInfinity
-                    End If
-
-                    Wi = ims.Phases(0).Properties.massflow.GetValueOrDefault
-
-                    If CurvePower = Double.NegativeInfinity Then
-                        If ProcessPath = ProcessPathType.Adiabatic Then
-                            AdiabaticHead = CurveHead
-                        Else
-                            PolytropicHead = CurveHead
-                        End If
-                    Else
-                        If ProcessPath = ProcessPathType.Adiabatic Then
-                            AdiabaticHead = CurvePower * 1000 / Wi / 9.8
-                        Else
-                            PolytropicHead = CurvePower * 1000 / Wi / 9.8
-                        End If
-                    End If
-
-                    If Not CurveEff = Double.NegativeInfinity Then
-                        If ProcessPath = ProcessPathType.Adiabatic Then
-                            AdiabaticEfficiency = CurveEff
-                        Else
-                            PolytropicEfficiency = CurveEff
-                        End If
-                    End If
-
-                    GoTo Curves
 
             End Select
 
