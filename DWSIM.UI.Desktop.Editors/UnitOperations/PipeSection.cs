@@ -158,7 +158,7 @@ namespace DWSIM.UI.Desktop.Editors
                     tbr.BackgroundColor = Eto.Drawing.Colors.LightGrey;
                     tbtc.BackgroundColor = Eto.Drawing.Colors.LightGrey;
                     tbr.Text = pipe.rugosidade(cbm.SelectedValue.ToString(), section).ConvertFromSI(su.distance).ToString(nf);
-                    if (pipe.GraphicObject.InputConnectors[0].IsAttached)
+                    if (pipe.GraphicObject != null && pipe.GraphicObject.InputConnectors[0].IsAttached)
                     {
                         var stream = (MaterialStream)flowsheet.SimulationObjects[pipe.GraphicObject.InputConnectors[0].AttachedConnector.AttachedFrom.Name];
                         tbtc.Text = pipe.k_parede(cbm.SelectedValue.ToString(), stream.GetTemperature(), section).ConvertFromSI(su.thermalConductivity).ToString(nf);
