@@ -360,7 +360,7 @@ namespace DWSIM.UI.Shared
                 {
                     Text = text,
                     ReadOnly = true,
-                    Font = SystemFonts.Label(SystemFonts.Default().Size - 0.5f),
+                    Font = new Font(SystemFont.Default, GetEditorFontSize() - 2),
                     BackgroundColor = container.BackgroundColor,
                     TextAlignment = Eto.Forms.TextAlignment.Left,
                     Wrap = true
@@ -371,7 +371,7 @@ namespace DWSIM.UI.Shared
             else
             {
                 label = new Label { Text = text, Wrap = WrapMode.Word };
-                label.Font = new Font(SystemFont.Default, GetEditorFontSize() - 2);
+                label.Font = new Font(SystemFont.Default, GetEditorFontSize() - 1);
                 label.TextColor = Color.FromArgb(SystemColors.ControlText.Rb, SystemColors.ControlText.Gb, SystemColors.ControlText.Bb, 180);
                 container.AddRow(new TableRow(label));
             }
@@ -389,7 +389,7 @@ namespace DWSIM.UI.Shared
                 {
                     Text = text,
                     ReadOnly = true,
-                    Font = SystemFonts.Label(SystemFonts.Default().Size - 0.5f),
+                    Font = new Font(SystemFont.Default, GetEditorFontSize() - 1),
                     BackgroundColor = container.BackgroundColor,
                     TextAlignment = Eto.Forms.TextAlignment.Left,
                     Wrap = true
