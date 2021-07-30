@@ -1,9 +1,5 @@
-Version 6.5.5
+Version 6.5.6
 
-- Python.NET Runtime now works with any Python 3.x distro
-- Fixed issues with Rigorous Column solvers
-- Pipe Segment UO's Hydraulic Profile editor now allows pasting from clipboard (Classic UI)
-- Fixed error on duplicate external components
-- Fixed an issue with Conversion Reactor UO
-- Custom Actions for Flowsheet Object's Double Click event
-- Other minor fixes and enhancements
+- Fixed an issue with Compressor/Expander calculation
+- Fixed an issue with Steam Tables Property Package
+- Fixed an issue with the Pipe Segment properties editor (Cross-Platform UI)

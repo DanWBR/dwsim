@@ -34,18 +34,31 @@ namespace DWSIM.UI.Shared
                 elements.Skip(i + 1).DifferentCombinations(k - 1).Select(c => (new[] { e }).Concat(c)));
         }
 
+        /// <summary>
+        /// checks if the string is a valid double-precision number.
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns>true/false</returns>
         public static bool IsValidDouble(string s)
         {
             double d = 0;
             return double.TryParse(s, NumberStyles.Any & ~NumberStyles.AllowThousands, CultureInfo.InstalledUICulture, out d);
         }
 
+        /// <summary>
+        /// returns the size of the font for Cross-Platform UI editors.
+        /// </summary>
+        /// <returns></returns>
         public static int GetEditorFontSize()
         {
             if (GlobalSettings.Settings.EditorFontSize == -1) GlobalSettings.Settings.EditorFontSize = (int)(new Eto.Drawing.Font(Eto.Drawing.SystemFont.Label).Size);
             return GlobalSettings.Settings.EditorFontSize;
         }
 
+        /// <summary>
+        /// centers the form on the current screen.
+        /// </summary>
+        /// <param name="form"></param>
         public static void Center(this Form form)
         {
             var center = Screen.PrimaryScreen.WorkingArea.Center;
@@ -54,6 +67,14 @@ namespace DWSIM.UI.Shared
             form.Location = new Point(center);
         }
 
+        /// <summary>
+        /// returns a form whose contents are defined by the content argument (Dynamic Layout)
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="content"></param>
+        /// <returns></returns>
         public static Form GetDefaultEditorForm(string title, int width, int height, DynamicLayout content)
         {
             //content.CreateAndAddEmptySpace();
@@ -78,6 +99,15 @@ namespace DWSIM.UI.Shared
             };
         }
 
+        /// <summary>
+        /// returns a form whose contents are defined by the TableLayout argument
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="content"></param>
+        /// <param name="scrollable"></param>
+        /// <returns></returns>
         public static Form GetDefaultEditorForm(string title, int width, int height, TableLayout content, bool scrollable)
         {
             var form = new Form()

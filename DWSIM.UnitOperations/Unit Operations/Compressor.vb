@@ -666,6 +666,9 @@ Namespace UnitOperations
 
                     End If
 
+                    POut = P2
+                    DeltaP = P2 - Pi
+
                 Case CalculationMode.Delta_P, CalculationMode.OutletPressure
 
                     Me.PropertyPackage.CurrentMaterialStream = msin
@@ -872,6 +875,9 @@ Namespace UnitOperations
                     IObj?.Paragraphs.Add(String.Format("<mi>\eta_i</mi>: {0} ", AdiabaticEfficiency / 100))
 
                     IObj?.Paragraphs.Add(String.Format("<mi>\eta_p</mi>: {0} ", PolytropicEfficiency / 100))
+
+                    POut = P2
+                    DeltaP = P2 - Pi
 
                     If Not DebugMode Then
 

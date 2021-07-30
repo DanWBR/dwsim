@@ -462,6 +462,9 @@ Namespace UnitOperations
 
                     IObj?.SetCurrent()
 
+                    POut = P2
+                    DeltaP = Pi - P2
+
                 Case CalculationMode.PowerGenerated, CalculationMode.Head, CalculationMode.Curves
 
                     If CalcMode = CalculationMode.Curves Then
