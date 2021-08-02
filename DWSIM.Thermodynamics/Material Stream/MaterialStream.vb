@@ -7766,6 +7766,10 @@ Namespace Streams
             Return Phases(0).Properties.volumetric_flow.GetValueOrDefault
         End Function
 
+        Public Function GetOverallMolecularWeight() As Double
+            Return Phases(0).Properties.molecularWeight.GetValueOrDefault
+        End Function
+
         ''' <summary>
         ''' Sets stream molar flow.
         ''' </summary>

@@ -7266,6 +7266,20 @@ Final3:
 
         End Function
 
+        Public Function AUX_DELGFM_T(Vx() As Double, T As Double) As Double
+
+            Dim val As Double
+            Dim subst As Interfaces.ICompound
+            Dim i As Integer = 0
+            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                val += Vx(i) * AUX_DELGF_T(298.15, T, subst.Name, False)
+                i += 1
+            Next
+
+            Return val
+
+        End Function
+
         Public Function AUX_DELGF_T(ByVal T1 As Double, ByVal T2 As Double, ByVal id As String, Optional ByVal mode2 As Boolean = False) As Double
 
             Dim dA As Double = 0

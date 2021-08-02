@@ -477,7 +477,10 @@ Namespace Reactors
             tms.Calculate(True, True)
             pp.CurrentMaterialStream = tms
 
-            Return tms.Phases(0).Properties.gibbs_free_energy.GetValueOrDefault * tms.Phases(0).Properties.molecularWeight.GetValueOrDefault * tms.Phases(0).Properties.molarflow.GetValueOrDefault / 1000
+            Dim G = tms.Phases(0).Properties.gibbs_free_energy.GetValueOrDefault * tms.Phases(0).Properties.molecularWeight.GetValueOrDefault * tms.Phases(0).Properties.molarflow.GetValueOrDefault / 1000
+            Dim Gf = pp.AUX_DELGFM_T(tms.GetOverallComposition(), tms.GetTemperature()) * tms.GetOverallMolecularWeight() * 8.314 * tms.GetTemperature() * tms.Phases(0).Properties.molarflow.GetValueOrDefault / 1000
+
+            Return Gf + G
 
         End Function
 
@@ -591,6 +594,54 @@ Namespace Reactors
 
             Me.Validate()
 
+            Dim IObj As InspectorItem = Host.GetNewInspectorItem()
+
+            Host.CheckAndAdd(IObj, "", "Calculate", If(GraphicObject IsNot Nothing, GraphicObject.Tag, "Temporary Object") & " (" & GetDisplayName() & ")", GetDisplayName() & " Calculation Routine", True)
+
+            IObj?.SetCurrent
+
+            IObj?.Paragraphs.Add("The calculation of chemical equilibrium at specified temperature and pressure is in many ways similar to the calculation of phase equilibrium. In both cases the equilibrium state corresponds to a global minimum of the Gibbs energy subject to a set of material balance constraints.")
+
+            IObj?.Paragraphs.Add("<h3>Chemical reaction equilibrium</h3>")
+
+            IObj?.Paragraphs.Add("In phase equilibrium calculations for a given feed at specified temperature and pressure a material balance must be satisfied for each component in the mixture, the total amount in the combined product phases being identical to that in the feed. When chemical reactions occur, additional degrees of freedom are available, resulting in a set of material balance constraints, which is smaller than the number of components in the mixture.")
+
+            IObj?.Paragraphs.Add("The mixture composition at chemical equilibrium at constant T and p satisfies the condition of minimum Gibbs energy,")
+
+            IObj?.Paragraphs.Add("<m>\min G = \min \sum\limits_{i=1}^{C}{n_i\mu _i} </m>")
+
+            IObj?.Paragraphs.Add("subject to a set of M < C material balance constraints. In addition we must require that")
+
+            IObj?.Paragraphs.Add("<m>n_i \geq 0, i=1,2,...,C</m>")
+
+            IObj?.Paragraphs.Add("The alternative formulation of the constraints Is based on the requirement of conservation 
+                                of chemical elements. A key concept in this approach is the formula matrix for the reaction 
+                                components. In this matrix, <mi>A_{ji}</mi> Is the formula content of element <mi>j</mi> in component <mi>i</mi>.")
+
+            IObj?.Paragraphs.Add("The element conservation constraints can be written")
+
+            IObj?.Paragraphs.Add("<m>An = b</m>")
+
+            IObj?.Paragraphs.Add("where <mi>b_k</mi> is the total amount of element <mi>k</mi> in the reaction mixture.")
+
+            IObj?.Paragraphs.Add("<h2>Solving Method</h2>")
+
+            IObj?.Paragraphs.Add("DWSIM solves the multiphase Gibbs minimization problem,")
+
+            IObj?.Paragraphs.Add("<m>\min G = \min \sum\limits_{i=1}^{C}{n_i\mu _i}</m>")
+
+            IObj?.Paragraphs.Add("using the reactive compound overall molar fractions as the minimization variables,
+                                while obeying the element and mass conservation constraints.")
+
+            IObj?.Paragraphs.Add("IPOPT (or an external solver) is used to minimize <mi>G</mi>. For each solver iteration, a multiphase flash calculation is performed
+                                using the current tentative molar fractions, and the <mi>G</mi> for each phase is calculated using the
+                                compound fugacities as provided by the currently selected Property Package. Total <mi>G</mi> is calculated
+                                as the sum of the phase <mi>G</mi>s multiplied by their amounts.")
+
+            IObj?.Paragraphs.Add("Chemical potentials are calculated from fugacities using the following relationship:")
+
+            IObj?.Paragraphs.Add("<m>\mu _{ik} = \mu _0+RT\ln {f_{ik}}+RT\ln {x_{ik}}</m>")
+
             Dim i, j As Integer
 
             If Me.Conversions Is Nothing Then Me.m_conversions = New Dictionary(Of String, Double)
@@ -619,7 +670,7 @@ Namespace Reactors
                 If comp.ConstantProperties.IG_Enthalpy_of_Formation_25C = 0.0 And comp.ConstantProperties.OriginalDB <> "ChemSep" Then
                     If Me.ComponentIDs.Contains(comp.Name) Then
                         FlowSheet.ShowMessage(String.Format("Enthalpy of Formation data for compound '{0}' is missing or equal to 0. It will be removed from the reactive compounds list.", comp.Name), IFlowsheet.MessageType.Warning)
-                        Me.ComponentIDs.Remove(comp.Name)
+            Me.ComponentIDs.Remove(comp.Name)
                         compremoved = True
                     End If
                 End If
@@ -758,9 +809,22 @@ Namespace Reactors
 
             Me.InitialGibbsEnergy = g0
 
+            IObj?.Paragraphs.Add(String.Format("Initial Gibbs Energy (kW): {0}", g0))
+
+            IObj?.Paragraphs.Add(String.Format("Initial Overall Composition: {0}", ival.NormalizeY().ToMathArrayString()))
+
             Dim CalcFinished As Boolean = False
 
             cnt = 0
+
+            IObj?.Paragraphs.Add("<h2>Iteration History</h2>")
+
+            IObj?.Paragraphs.Add("<table style='width:100%'><tr>
+                                <th>Iteration</th>
+                                <th>Objective Function Value</th>
+                                <th>Element Balance Residue</th>
+                                <th>Mass Balance Residue</th>
+                              </tr>")
 
             Dim gfunc = Function(Tx)
 
@@ -795,6 +859,9 @@ Namespace Reactors
                                                       icount += 1
                                                       wbal = ((tms.GetMassFlow() - W0tot) / W0tot) ^ 2
                                                       errval = Exp(gval) + wbal * 100 + ebal * 100
+                                                      IObj?.SetCurrent()
+                                                      IObj?.Paragraphs.Add(String.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td></tr>",
+                                                                            icount, errval, ebal, wbal))
                                                       Return errval
                                                   End Function, Nothing, Nothing,
                                                           ival, lbo, ubo, MaximumInternalIterations, InternalTolerance)
@@ -815,10 +882,15 @@ Namespace Reactors
                                                     icount += 1
                                                     wbal = ((tms.GetMassFlow() - W0tot) / W0tot) ^ 2
                                                     errval = Exp(gval) + wbal * 100 + ebal * 100
+                                                    IObj?.SetCurrent()
+                                                    IObj?.Paragraphs.Add(String.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td></tr>",
+                                                                            icount, errval, ebal, wbal))
                                                     Return errval
                                                 End Function, Nothing, ival, lbo, ubo)
 
                             End If
+
+                            IObj?.Paragraphs.Add("</table>")
 
                             InitialEstimates = NFv.ToList()
 
@@ -957,6 +1029,10 @@ Namespace Reactors
             Dim g1 = FunctionValue2G(N.Values.ToArray)
 
             Me.FinalGibbsEnergy = g1
+
+            IObj?.Paragraphs.Add(String.Format("Final Gibbs Energy (kW): {0}", g1))
+
+            IObj?.Paragraphs.Add(String.Format("Final Overall Composition: {0}", ims.GetOverallComposition().ToMathArrayString()))
 
             Dim W As Double = ims.Phases(0).Properties.massflow.GetValueOrDefault
 
