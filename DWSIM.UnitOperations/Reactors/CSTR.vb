@@ -368,7 +368,7 @@ Namespace Reactors
                                 by the Conversion reactor.<br><br><span style='font-weight bold; font-style: italic;'>Kinetic</span> reactions are reactions defined by a kinetic expression. These reactions are supported by the PFR and CSTR reactors. <br><br><span style='font-weight: bold; font-style: italic;'>Heterogeneous Catalytic</span> reactions&nbsp;in DWSIM must obey the <span style='font-style: italic;'>Langmuir&#8211;Hinshelwood</span> 
                                             mechanism, where compounds react over a solid catalyst surface. In this 
                                 model, Reaction rates are a function of catalyst amount (i.e. mol/kg 
-                                cat.s). These Reactions are supported by the PFR And CStr reactors.<p>")
+                                cat.s). These Reactions are supported by the PFR And CSTR reactors.<p>")
 
             'ims-stream (internal material stream) to be used during internal calculations
 

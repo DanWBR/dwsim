@@ -133,12 +133,12 @@ Namespace Reactors
             IObj?.SetCurrent()
 
             IObj?.Paragraphs.Add("To run a simulation of a reactor, the user needs to define the chemical reactions which will take place in the reactor.</p>
-                                This Is done through the&nbsp;<span style='font-weight bold;'>Reactions Manager, </span>accessible through <span style='font-weight: bold;'>Simulation Settings &gt; Basis &gt; Open Chemical Reactions Manager</span> or <span style='font-weight: bold;'>Tools &gt; Reactions Manager</span> menus (see separate documentation).<br><br>Reactions can be of&nbsp;<span style='font-weight: bold;'>Equilibrium</span>,<span style='font-weight: bold;'>&nbsp;Conversion</span>,<span style='font-weight: bold;'>&nbsp;Kinetic</span> or&nbsp;<span style='font-weight: bold;'>Heterogeneous Catalytic</span> types. One or more reactions can be&nbsp;combined to define
+                                This is done through the&nbsp;<span style='font-weight bold;'>Reactions Manager, </span>accessible through <span style='font-weight: bold;'>Simulation Settings &gt; Basis &gt; Open Chemical Reactions Manager</span> or <span style='font-weight: bold;'>Tools &gt; Reactions Manager</span> menus (see separate documentation).<br><br>Reactions can be of&nbsp;<span style='font-weight: bold;'>Equilibrium</span>,<span style='font-weight: bold;'>&nbsp;Conversion</span>,<span style='font-weight: bold;'>&nbsp;Kinetic</span> or&nbsp;<span style='font-weight: bold;'>Heterogeneous Catalytic</span> types. One or more reactions can be&nbsp;combined to define
                                             a&nbsp;<span style='font-weight bold;'>Reaction Set</span>. The reactors then 'see' the reactions through the reaction sets.
                                 <br><br><span style ='font-weight bold; font-style: italic;'>Equilibrium</span>
                                 Reactions are defined by an equilibrium constant (K). The source Of
                                 Information for the equilibrium constant can be a direct gibbs energy
-                                calculation, an expression defined by the user Or a constant value.
+                                calculation, an expression defined by the user or a constant value.
                                 Equilibrium Reactions can be used in Equilibrium And Gibbs reactors.<br><br><span style='font-weight bold; font-style: italic;'>Conversion</span>
                                             Reactions are defined by the amount of a base compound which Is
                                 consumed in the reaction. This amount can be a fixed value Or a
@@ -146,7 +146,7 @@ Namespace Reactors
                                 by the Conversion reactor.<br><br><span style='font-weight bold; font-style: italic;'>Kinetic</span> reactions are reactions defined by a kinetic expression. These reactions are supported by the PFR and CSTR reactors. <br><br><span style='font-weight: bold; font-style: italic;'>Heterogeneous Catalytic</span> reactions&nbsp;in DWSIM must obey the <span style='font-style: italic;'>Langmuir&#8211;Hinshelwood</span> 
                                             mechanism, where compounds react over a solid catalyst surface. In this 
                                 model, Reaction rates are a function of catalyst amount (i.e. mol/kg 
-                                cat.s). These Reactions are supported by the PFR And CStr reactors.<p>")
+                                cat.s). These Reactions are supported by the PFR And CSTR reactors.<p>")
 
             Validate()
 
