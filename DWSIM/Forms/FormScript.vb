@@ -265,19 +265,7 @@ Imports IronPython.Hosting
 
     Public Shared Sub RunScript_PythonNET(scripttext As String, fsheet As FormFlowsheet)
 
-        If Not Settings.PythonInitialized Then
-
-            If Not GlobalSettings.Settings.IsRunningOnMono() Then
-                If Not GlobalSettings.Settings.PythonPathIsSet Then
-                    GlobalSettings.Settings.SetPythonPath()
-                End If
-                PythonEngine.PythonHome = GlobalSettings.Settings.PythonPath
-            End If
-            PythonEngine.Initialize()
-            Settings.PythonInitialized = True
-            PythonEngine.BeginAllowThreads()
-
-        End If
+        GlobalSettings.Settings.InitializePythonEnvironment()
 
         Using Py.GIL
 

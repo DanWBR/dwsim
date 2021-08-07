@@ -2660,20 +2660,7 @@ Label_00CC:
 
         Else
 
-            If Not GlobalSettings.Settings.PythonInitialized Then
-
-                If Not GlobalSettings.Settings.IsRunningOnMono() Then
-                    If Not GlobalSettings.Settings.PythonPathIsSet Then
-                        GlobalSettings.Settings.SetPythonPath()
-                    End If
-                    PythonEngine.PythonHome = GlobalSettings.Settings.PythonPath
-                End If
-                PythonEngine.Initialize()
-
-                PythonEngine.BeginAllowThreads()
-
-
-            End If
+            GlobalSettings.Settings.InitializePythonEnvironment()
 
             Using Py.GIL
 

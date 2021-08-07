@@ -253,18 +253,7 @@ Namespace UnitOperations.CAPEOPENWrappers
 
                 Try
 
-                    If Not Settings.PythonInitialized Then
-
-                        If Not GlobalSettings.Settings.PythonPathIsSet Then
-                            GlobalSettings.Settings.SetPythonPath(_pythonpath)
-                        End If
-                        PythonEngine.PythonHome = _pythonpath
-                        PythonEngine.Initialize()
-                        Settings.PythonInitialized = True
-
-                        PythonEngine.BeginAllowThreads()
-
-                    End If
+                    GlobalSettings.Settings.InitializePythonEnvironment()
 
                 Catch ex As Exception
 

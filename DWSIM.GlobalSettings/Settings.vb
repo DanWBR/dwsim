@@ -3,6 +3,7 @@ Imports System.Threading
 Imports Nini.Config
 Imports System.IO
 Imports System.Runtime.InteropServices
+Imports Python.Runtime
 
 Public Class Settings
 
@@ -174,7 +175,41 @@ Public Class Settings
 
     End Function
 
-    Shared Sub SetPythonPath(Optional ByVal pythonpath As String = "")
+    Public Shared Sub InitializePythonEnvironment(Optional ByVal pythonpath As String = "")
+
+        If Not Settings.PythonInitialized Then
+
+            If Not IsRunningOnMono() Then
+                If Not Directory.Exists(GlobalSettings.Settings.PythonPath) Then
+                    Throw New Exception("Python Binaries Path is not defined correctly.")
+                End If
+            End If
+
+            If Not IsRunningOnMono() Then
+                If Not PythonPathIsSet Then
+                    SetPythonPath()
+                End If
+                PythonEngine.PythonHome = Settings.PythonPath
+            End If
+            PythonEngine.Initialize()
+
+            PythonEngine.BeginAllowThreads()
+
+            PythonInitialized = True
+
+        End If
+
+    End Sub
+
+    Public Shared Sub ShutdownPythonEnvironment()
+
+        If PythonInitialized Then
+            PythonEngine.Shutdown()
+        End If
+
+    End Sub
+
+    Private Shared Sub SetPythonPath(Optional ByVal pythonpath As String = "")
 
         If RunningPlatform() = Platform.Windows Then
 
