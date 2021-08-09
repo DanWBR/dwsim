@@ -242,6 +242,12 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
         End Get
     End Property
 
+    Public Function GetFlowsheetGraphicObject(tag As String) As IGraphicObject
+
+        Return SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = tag).FirstOrDefault?.GraphicObject
+
+    End Function
+
     Public Function GetFlowsheetSimulationObject(tag As String) As ISimulationObject Implements IFlowsheet.GetFlowsheetSimulationObject
 
         Return SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = tag).FirstOrDefault
