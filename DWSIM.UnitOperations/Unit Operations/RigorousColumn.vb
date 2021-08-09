@@ -3324,18 +3324,18 @@ Namespace UnitOperations
                             Dim xt1, xt2 As New List(Of Double())
                             For i = 0 To Stages.Count - 1
                                 If UseLiquidFlowEstimates Then
-                                    L1t.Add(L.Clone)
+                                    L1t.Add(L(i))
                                 Else
                                     L1t.Add(F.Sum * L1)
                                 End If
                                 If UseVaporFlowEstimates Then
-                                    L2t.Add(V.Clone)
+                                    L2t.Add(V(i))
                                 Else
                                     L2t.Add(F.Sum * L2)
                                 End If
                                 If UseCompositionEstimates Then
-                                    xt1.Add(x(i).Clone)
-                                    xt2.Add(y(i).Clone)
+                                    xt1.Add(x(i))
+                                    xt2.Add(y(i))
                                 Else
                                     xt1.Add(Vx1)
                                     xt2.Add(Vx2)

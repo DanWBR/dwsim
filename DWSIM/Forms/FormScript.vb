@@ -1489,6 +1489,7 @@ Imports IronPython.Hosting
     End Sub
 
     Private Sub ToolStripButton1_Click_1(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
+        Me.sfd1.FileName = TabStripScripts.SelectedItem.Title
         If Me.sfd1.ShowDialog = Windows.Forms.DialogResult.OK Then
             If Not DWSIM.App.IsRunningOnMono Then
                 Dim scontrol As ScriptEditorControl = DirectCast(TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControl)
@@ -1502,13 +1503,15 @@ Imports IronPython.Hosting
 
     Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
         If Me.ofd2.ShowDialog = Windows.Forms.DialogResult.OK Then
-            If Not DWSIM.App.IsRunningOnMono Then
-                Dim scontrol As ScriptEditorControl = DirectCast(TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControl)
-                scontrol.txtScript.Text = File.ReadAllText(ofd2.FileName) & vbCrLf
-            Else
-                Dim scontrol As ScriptEditorControlMono = DirectCast(TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControlMono)
-                scontrol.txtScript.Text = File.ReadAllText(ofd2.FileName) & vbCrLf
-            End If
+            Dim scripttext = File.ReadAllText(ofd2.FileName)
+            Dim scr As New Script() With
+                                                {.ID = Guid.NewGuid().ToString,
+                                                 .Title = Path.GetFileNameWithoutExtension(ofd2.FileName),
+                                                 .Linked = False,
+                                                 .ScriptText = scripttext,
+                                                 .PythonInterpreter = Scripts.Interpreter.IronPython}
+
+            InsertScriptTab(scr)
         End If
     End Sub
 End Class
