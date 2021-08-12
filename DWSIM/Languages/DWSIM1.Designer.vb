@@ -3503,6 +3503,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Tamanho do Banco de Dados: {0} KB.
+        '''</summary>
+        Friend Shared ReadOnly Property DBSize() As String
+            Get
+                Return ResourceManager.GetString("DBSize", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Fator máximo p/ atualização de variáveis.
         '''</summary>
         Friend Shared ReadOnly Property DC_IO_MaxVarChgFac() As String

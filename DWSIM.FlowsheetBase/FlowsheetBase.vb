@@ -2563,6 +2563,8 @@ Label_00CC:
 
     Public Property ExternalSolvers As Dictionary(Of String, IExternalSolverIdentification) = New Dictionary(Of String, IExternalSolverIdentification) Implements IFlowsheet.ExternalSolvers
 
+    Public Property FileDatabaseProvider As IFileDatabaseProvider = New FileStorage.FileDatabaseProvider Implements IFlowsheet.FileDatabaseProvider
+
     Public Sub RunScript(ScriptID As String)
         Dim script = Scripts(ScriptID)
         If script.PythonInterpreter = Enums.Scripts.Interpreter.IronPython Then

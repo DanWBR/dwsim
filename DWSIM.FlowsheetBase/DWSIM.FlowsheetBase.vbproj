@@ -231,6 +231,10 @@
       <Project>{1e12c010-2661-4896-9c00-90f8b41ed10a}</Project>
       <Name>DWSIM.ExtensionMethods</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.FileStorage\DWSIM.FileStorage.csproj">
+      <Project>{13823753-2284-4d3e-aeb4-ca72118ef094}</Project>
+      <Name>DWSIM.FileStorage</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Serializers.XML\DWSIM.XMLSerializer.vbproj">
       <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
       <Name>DWSIM.XMLSerializer</Name>

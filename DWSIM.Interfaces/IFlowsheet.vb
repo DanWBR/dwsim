@@ -32,6 +32,8 @@
 
     Property DynamicMode As Boolean
 
+    Property FileDatabaseProvider As IFileDatabaseProvider
+
     Property DynamicsManager As IDynamicsManager
 
     Property ExtraProperties As Dynamic.ExpandoObject

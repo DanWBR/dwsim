@@ -177,39 +177,27 @@ Public Class EditingForm_Column_InitialEstimates
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-        Dim myStream As System.IO.FileStream
         If Me.ofd1.ShowDialog() = Windows.Forms.DialogResult.OK Then
-            myStream = Me.ofd1.OpenFile()
-            If Not (myStream Is Nothing) Then
-                Dim mySerializer As BinaryFormatter = New BinaryFormatter(Nothing, New System.Runtime.Serialization.StreamingContext())
-                Try
-                    _ies = DirectCast(mySerializer.Deserialize(myStream), InitialEstimates)
-                    Me.TextBox1.Text = Me.ofd1.FileName.ToString
-                Catch ex As System.Runtime.Serialization.SerializationException
-                    MessageBox.Show(ex.Message)
-                Finally
-                    myStream.Close()
-                End Try
-            End If
+            Try
+                Dim jsondata = File.ReadAllText(ofd1.FileName)
+                _ies = Newtonsoft.Json.JsonConvert.DeserializeObject(Of InitialEstimates)(jsondata)
+                Me.TextBox1.Text = Me.ofd1.FileName.ToString
+            Catch ex As Exception
+                MessageBox.Show(ex.Message)
+            End Try
         End If
     End Sub
 
     Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
 
-        Dim myStream As System.IO.FileStream
         If Me.sfd1.ShowDialog() = Windows.Forms.DialogResult.OK Then
-            myStream = Me.sfd1.OpenFile()
-            If Not (myStream Is Nothing) Then
-                Dim mySerializer As BinaryFormatter = New BinaryFormatter(Nothing, New System.Runtime.Serialization.StreamingContext())
-                Try
-                    mySerializer.Serialize(myStream, dc.InitialEstimates)
-                    Me.TextBox1.Text = Me.sfd1.FileName.ToString
-                Catch ex As System.Runtime.Serialization.SerializationException
-                    MessageBox.Show(ex.Message)
-                Finally
-                    myStream.Close()
-                End Try
-            End If
+            Try
+                Dim data = Newtonsoft.Json.JsonConvert.SerializeObject(dc.InitialEstimates, Newtonsoft.Json.Formatting.Indented)
+                File.WriteAllText(sfd1.FileName, data)
+                Me.TextBox1.Text = Me.sfd1.FileName.ToString
+            Catch ex As Exception
+                MessageBox.Show(ex.Message)
+            End Try
         End If
 
     End Sub
@@ -314,64 +302,8 @@ Public Class EditingForm_Column_InitialEstimates
 
         loaded = False
 
-        form = dc.FlowSheet
-        nf = form.FlowsheetOptions.NumberFormat
-        su = form.FlowsheetOptions.SelectedUnitSystem
-
-        'dgvv.Columns(1).HeaderText += " (" & form.FlowsheetOptions.SelectedUnitSystem.temperature & ")"
-        'dgvv.Columns(2).HeaderText += " (" & form.FlowsheetOptions.SelectedUnitSystem.molarflow & ")"
-
-        dgvv.Rows.Clear()
-        Dim i As Integer = 0
-        Dim count As Integer = dc.Stages.Count
-        For Each st As Stage In dc.Stages
-            dgvv.Rows.Add(New Object() {dc.Stages(i).Name, Format(cv.ConvertFromSI(su.temperature, _ies.StageTemps(i).Value), nf), Format(cv.ConvertFromSI(su.molarflow, _ies.VapMolarFlows(i).Value), nf), Format(cv.ConvertFromSI(su.molarflow, _ies.LiqMolarFlows(i).Value), nf)})
-            dgvv.Rows(dgvv.Rows.Count - 1).HeaderCell.Value = i
-            dgvv_CellValueChanged(Me, New DataGridViewCellEventArgs(1, dgvcv.Rows.Count - 1))
-            dgvv_CellValueChanged(Me, New DataGridViewCellEventArgs(2, dgvcv.Rows.Count - 1))
-            dgvv_CellValueChanged(Me, New DataGridViewCellEventArgs(3, dgvcv.Rows.Count - 1))
-            i += 1
-        Next
-
-        Dim j As Integer = 0
-        For Each cp As Thermodynamics.BaseClasses.ConstantProperties In form.SelectedCompounds.Values
-            dgvcl.Columns.Add(cp.Name, (cp.Name))
-            dgvcv.Columns.Add(cp.Name, (cp.Name))
-            j = j + 1
-        Next
-
-        i = 0
-        Dim ob(CInt(j.ToString)) As Object
-        For Each st As Stage In dc.Stages
-            j = 1
-            ob(0) = dc.Stages(i).Name
-            For Each cp As Thermodynamics.BaseClasses.ConstantProperties In form.SelectedCompounds.Values
-                ob(j) = Format(_ies.LiqCompositions(i)(cp.Name).Value, nf)
-                j = j + 1
-            Next
-            dgvcl.Rows.Add(ob)
-            For j = 1 To form.SelectedCompounds.Count
-                dgvc_CellValueChanged(Me, New DataGridViewCellEventArgs(j, dgvcl.Rows.Count - 1))
-            Next
-            dgvcl.Rows(dgvcl.Rows.Count - 1).HeaderCell.Value = i
-            i += 1
-        Next
-
-        i = 0
-        For Each st As Stage In dc.Stages
-            j = 1
-            ob(0) = dc.Stages(i).Name
-            For Each cp As Thermodynamics.BaseClasses.ConstantProperties In form.SelectedCompounds.Values
-                ob(j) = Format(_ies.VapCompositions(i)(cp.Name).Value, nf)
-                j = j + 1
-            Next
-            dgvcv.Rows.Add(ob)
-            For j = 1 To form.SelectedCompounds.Count
-                dgvcv_CellValueChanged(Me, New DataGridViewCellEventArgs(j, dgvcv.Rows.Count - 1))
-            Next
-            dgvcv.Rows(dgvcv.Rows.Count - 1).HeaderCell.Value = i
-            i += 1
-        Next
+        dc.InitialEstimates = _ies
+        dc.UpdateEditForm()
 
         loaded = True
 
@@ -422,6 +354,12 @@ Public Class EditingForm_Column_InitialEstimates
     Private Sub ToolStripButton29_CheckedChanged(sender As Object, e As EventArgs) Handles ToolStripButton29.CheckedChanged
         If loaded Then
             dc.AutoUpdateInitialEstimates = ToolStripButton29.Checked
+        End If
+    End Sub
+
+    Private Sub dgvv_KeyDown(sender As Object, e As KeyEventArgs) Handles dgvv.KeyDown, dgvcl.KeyDown, dgvcv.KeyDown
+        If e.KeyCode = Keys.V And e.Modifiers = Keys.Control Then
+            PasteData(sender)
         End If
     End Sub
 

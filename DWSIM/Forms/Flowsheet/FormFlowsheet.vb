@@ -53,6 +53,8 @@ Public Class FormFlowsheet
 
 #Region "    Variable Declarations "
 
+    Public Property FileDatabaseProvider As IFileDatabaseProvider = New FileStorage.FileDatabaseProvider Implements IFlowsheet.FileDatabaseProvider
+
     Public Property DynamicMode As Boolean = False Implements IFlowsheet.DynamicMode
 
     Public Property ExtraProperties As New ExpandoObject Implements IFlowsheet.ExtraProperties
@@ -81,6 +83,7 @@ Public Class FormFlowsheet
     Public FormCharts As New FormCharts
     Public FormDynamics As New FormDynamicsManager
     Public FormIntegratorControls As New FormDynamicsIntegratorControl
+    Public FormFilesExplorer As New FormFileExplorer
 
     Public FormProps As New frmProps
 
@@ -154,6 +157,10 @@ Public Class FormFlowsheet
                                       End Sub
         End If
 
+        'file database
+
+        FileDatabaseProvider.CreateDatabase()
+
     End Sub
 
     Public Sub SetActive()
@@ -174,6 +181,7 @@ Public Class FormFlowsheet
         FormSpreadsheet.Flowsheet = Me
         FormDynamics.Flowsheet = Me
         FormIntegratorControls.Flowsheet = Me
+        FormFilesExplorer.Flowsheet = Me
 
         Me.MdiParent = My.Application.MainWindowForm
 
@@ -277,6 +285,7 @@ Public Class FormFlowsheet
             FormCharts.DockPanel = Nothing
             FormDynamics.DockPanel = Nothing
             FormIntegratorControls.DockPanel = Nothing
+            FormFilesExplorer.DockPanel = Nothing
 
             Dim myfile As String = Path.Combine(My.Application.Info.DirectoryPath, "layout.xml")
             dckPanel.LoadFromXml(myfile, New DeserializeDockContent(AddressOf ReturnForm))
@@ -289,6 +298,7 @@ Public Class FormFlowsheet
             FormCharts.Show(FormSurface.Pane, Nothing)
             FormWatch.Show(dckPanel)
             FormIntegratorControls.Show(dckPanel)
+            FormFilesExplorer.Show(dckPanel)
             FormProps.Show(dckPanel, DockState.DockLeft)
 
             FormSurface.Activate()
@@ -450,6 +460,8 @@ Public Class FormFlowsheet
                 Return Me.FormDynamics
             Case "DWSIM.FormDynamicsIntegratorControl"
                 Return Me.FormIntegratorControls
+            Case "DWSIM.FormFileExplorer"
+                Return Me.FormFilesExplorer
         End Select
         Return Nothing
     End Function
@@ -536,6 +548,9 @@ Public Class FormFlowsheet
         End If
 
         'dispose objects
+
+        FileDatabaseProvider.ReleaseDatabase()
+
         For Each obj As SharedClasses.UnitOperations.BaseClass In Me.Collections.FlowsheetObjectCollection.Values
             If obj.disposedValue = False Then obj.Dispose()
         Next

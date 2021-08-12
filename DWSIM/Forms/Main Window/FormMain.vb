@@ -2157,6 +2157,8 @@ Public Class FormMain
 
             form.FormDynamics.Flowsheet = form
 
+            form.FormFilesExplorer.Flowsheet = form
+
             ' Set DockPanel properties
             form.dckPanel.ActiveAutoHideContent = Nothing
             form.dckPanel.Parent = form
@@ -2172,6 +2174,7 @@ Public Class FormMain
             form.FormDynamics.DockPanel = Nothing
             form.FormProps.DockPanel = Nothing
             form.FormCharts.DockPanel = Nothing
+            form.FormFilesExplorer.DockPanel = Nothing
 
             If Not DWSIM.App.IsRunningOnMono Then
                 If Not My.Computer.Keyboard.ShiftKeyDown Then
@@ -2199,6 +2202,7 @@ Public Class FormMain
                 form.FormMatList.Show(form.dckPanel)
                 form.FormSurface.Show(form.dckPanel)
                 form.FormDynamics.Show(form.dckPanel)
+                form.FormFilesExplorer.Show(form.dckPanel)
                 form.FormProps.Show(form.dckPanel)
                 form.dckPanel.BringToFront()
                 form.dckPanel.UpdateDockWindowZOrder(DockStyle.Fill, True)
@@ -2704,6 +2708,8 @@ Public Class FormMain
 
             form.FormDynamics.Flowsheet = form
 
+            form.FormFilesExplorer.Flowsheet = form
+
             ' Set DockPanel properties
             form.dckPanel.ActiveAutoHideContent = Nothing
             form.dckPanel.Parent = form
@@ -2718,6 +2724,7 @@ Public Class FormMain
             form.FormWatch.DockPanel = Nothing
             form.FormSurface.DockPanel = Nothing
             form.FormDynamics.DockPanel = Nothing
+            form.FormFilesExplorer.DockPanel = Nothing
 
             If Not My.Computer.Keyboard.ShiftKeyDown Then
                 Dim myfile As String = My.Computer.FileSystem.GetTempFileName()
@@ -2739,6 +2746,7 @@ Public Class FormMain
                 form.FormMatList.Show(form.dckPanel)
                 form.FormSurface.Show(form.dckPanel)
                 form.FormDynamics.Show(form.dckPanel)
+                form.FormFilesExplorer.Show(form.dckPanel)
                 form.dckPanel.BringToFront()
                 form.dckPanel.UpdateDockWindowZOrder(DockStyle.Fill, True)
             Catch ex As Exception
@@ -3192,6 +3200,8 @@ Public Class FormMain
             End If
         End If
 
+        Dim dbfile As String = ""
+
         Try
             Using stream As ZipInputStream = New ZipInputStream(File.OpenRead(caminho))
                 stream.Password = pwd
@@ -3207,7 +3217,12 @@ Label_00CC:
                             Do While True
                                 count = stream.Read(buffer, 0, buffer.Length)
                                 If (count <= 0) Then
-                                    fullname = pathtosave + Path.GetFileName(entry.Name)
+                                    Dim extension = Path.GetExtension(entry.Name).ToLower()
+                                    If extension = ".xml" Then
+                                        fullname = pathtosave + Path.GetFileName(entry.Name)
+                                    ElseIf extension = ".db" Then
+                                        dbfile = pathtosave + Path.GetFileName(entry.Name)
+                                    End If
                                     GoTo Label_00CC
                                 End If
                                 stream2.Write(buffer, 0, count)
@@ -3221,6 +3236,14 @@ Label_00CC:
             fs = LoadXML(fullname, ProgressFeedBack, caminho, forcommandline)
             fs.FilePath = caminho
             fs.Options.FilePath = caminho
+            If File.Exists(dbfile) Then
+                Try
+                    fs.FileDatabaseProvider.LoadDatabase(dbfile)
+                Catch ex As Exception
+                Finally
+                    File.Delete(dbfile)
+                End Try
+            End If
             File.Delete(fullname)
             Return fs
         Catch ex As Exception
@@ -3237,6 +3260,12 @@ Label_00CC:
 
         Dim i_Files As ArrayList = New ArrayList()
         If File.Exists(xmlfile) Then i_Files.Add(xmlfile)
+
+        Dim dbfile As String = Path.ChangeExtension(My.Computer.FileSystem.GetTempFileName, "db")
+
+        form.FileDatabaseProvider.ExportDatabase(dbfile)
+
+        If File.Exists(dbfile) Then i_Files.Add(dbfile)
 
         Dim astrFileNames() As String = i_Files.ToArray(GetType(String))
         Dim strmZipOutputStream As ZipOutputStream
@@ -3273,6 +3302,7 @@ Label_00CC:
         strmZipOutputStream.Close()
 
         File.Delete(xmlfile)
+        File.Delete(dbfile)
 
     End Sub
 

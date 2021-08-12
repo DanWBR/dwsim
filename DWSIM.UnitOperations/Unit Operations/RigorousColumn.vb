@@ -3273,7 +3273,7 @@ Namespace UnitOperations
                     'll extractor
                     Dim L1, L2, Vx1(), Vx2() As Double
                     Dim trialcomp As Double() = zm.Clone
-                    For counter As Integer = 0 To 30
+                    For counter As Integer = 0 To 100
                         Dim flashresult = pp.FlashBase.Flash_PT(trialcomp, P.Average, T.Average, pp)
                         L1 = flashresult(0)
                         L2 = flashresult(5)
@@ -3313,13 +3313,13 @@ Namespace UnitOperations
 
                     trialcomp = zm.Clone
                     Dim lle As New PropertyPackages.Auxiliary.FlashAlgorithms.SimpleLLE()
-                    For counter As Integer = 0 To 20
+                    For counter As Integer = 0 To 100
                         Dim flashresult = lle.Flash_PT(trialcomp, P.Average, T.Average, pp)
                         L1 = flashresult(0)
                         L2 = flashresult(5)
                         Vx1 = flashresult(2)
                         Vx2 = flashresult(6)
-                        If L2 > 0.0 Then
+                        If L2 > 0.0 And Vx1.SubtractY(Vx2).AbsSqrSumY > 0.001 Then
                             Dim L1t, L2t As New List(Of Double)
                             Dim xt1, xt2 As New List(Of Double())
                             For i = 0 To Stages.Count - 1
@@ -3539,6 +3539,9 @@ Namespace UnitOperations
             ElseIf TypeOf Me Is AbsorptionColumn Then
                 SetColumnSolver(New SolvingMethods.BurninghamOttoMethod())
                 If llextractor Then
+                    If L1trials.Count = 0 Then
+                        Throw New Exception("Unable to find a initial LLE estimate to solve the column.")
+                    End If
                     'run all trial compositions until it solves
                     Dim ntrials = L1trials.Count
                     Dim ex0 As Exception = Nothing
@@ -6348,7 +6351,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 End If
 
                 IObj2?.Paragraphs.Add(String.Format("HL: {0}", Hl.ToMathArrayString))
-                IObj2?.Paragraphs.Add(String.Format("HV: {0}", Hl.ToMathArrayString))
+                IObj2?.Paragraphs.Add(String.Format("HV: {0}", Hv.ToMathArrayString))
 
                 For i = 0 To ns
                     If i = 0 Then
@@ -6404,8 +6407,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 comperror = 0.0#
                 For i = 0 To ns
                     Tj_ant(i) = Tj(i)
-                    If Math.Abs(deltat(i)) > 20.0 Then
-                        Tj(i) = Tj(i) + Math.Sign(deltat(i)) * 20.0
+                    If Math.Abs(deltat(i)) > 3 Then
+                        Tj(i) = Tj(i) + Math.Sign(deltat(i)) * 3
                     Else
                         Tj(i) = Tj(i) + deltat(i)
                     End If

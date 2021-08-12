@@ -109,6 +109,7 @@
     <Compile Include="IDynamicsMonitoredVariable.vb" />
     <Compile Include="IDynamicsSchedule.vb" />
     <Compile Include="IExternalSolver.vb" />
+    <Compile Include="IFileDatabaseProvider.vb" />
     <Compile Include="IFlashAlgorithm.vb" />
     <Compile Include="IFlowsheet.vb" />
     <Compile Include="IFlowsheetEvents.vb" />

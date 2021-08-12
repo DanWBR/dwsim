@@ -135,4 +135,10 @@ Public Class EditingForm_Column_Stages
     Private Sub dgv1_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles dgv1.CellValidating
         If e.ColumnIndex > 1 Then DirectCast(sender, DataGridView).ValidateCellForDouble(e)
     End Sub
+
+    Private Sub dgv1_KeyDown(sender As Object, e As KeyEventArgs) Handles dgv1.KeyDown
+        If e.KeyCode = Keys.V And e.Modifiers = Keys.Control Then
+            PasteData(sender)
+        End If
+    End Sub
 End Class
