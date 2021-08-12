@@ -179,17 +179,22 @@ Public Class Settings
 
         If Not Settings.PythonInitialized Then
 
+            If pythonpath = "" Then
+                pythonpath = Settings.PythonPath
+            End If
+
             If Not IsRunningOnMono() Then
-                If Not Directory.Exists(GlobalSettings.Settings.PythonPath) Then
-                    Throw New Exception("Python Binaries Path is not defined correctly.")
+                If Not Directory.Exists(pythonpath) Then
+                    'Throw New Exception("Python Binaries Path is not defined correctly.")
+                    Exit Sub
                 End If
             End If
 
             If Not IsRunningOnMono() Then
                 If Not PythonPathIsSet Then
-                    SetPythonPath()
+                    SetPythonPath(pythonpath)
                 End If
-                PythonEngine.PythonHome = Settings.PythonPath
+                PythonEngine.PythonHome = pythonpath
             End If
             PythonEngine.Initialize()
 

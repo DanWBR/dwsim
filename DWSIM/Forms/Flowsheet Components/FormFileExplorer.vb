@@ -52,6 +52,7 @@ Public Class FormFileExplorer
     Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox1.SelectedIndexChanged
 
         If Loaded Then
+            If ListBox1.SelectedIndex < 0 Then Exit Sub
             Dim provider = Flowsheet.FileDatabaseProvider
             If provider.CheckIfExists(ListBox1.SelectedItem) Then
                 Dim TempFilePath As String = Path.Combine(TempDir, ListBox1.SelectedItem)

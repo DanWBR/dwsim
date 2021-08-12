@@ -10,19 +10,9 @@ namespace DWSIM.FileStorage
     public class FileDatabaseProvider : IFileDatabaseProvider
     {
 
-        private MemoryStream DBMem;
+        private string tmpdb = "";
         private LiteDatabase DB;
         
-        private static MemoryStream ReadStream(string path)
-        {
-            using (var temp = new MemoryStream(File.ReadAllBytes(path)))
-            {
-                var ms = new MemoryStream();
-                temp.CopyTo(ms);
-                return ms;
-            }
-        }
-
         private bool IsDBLoaded = false;
 
         public bool IsDatabaseLoaded { get { return IsDBLoaded; } }
@@ -35,8 +25,7 @@ namespace DWSIM.FileStorage
 
         public void ExportDatabase(string filepath)
         {
-            DB.Commit();
-            File.WriteAllBytes(filepath, DBMem.ToArray());
+            File.Copy(tmpdb, filepath, true);
         }
 
         public void ExportFile(string filename, string exportpath)
@@ -110,21 +99,24 @@ namespace DWSIM.FileStorage
         public void LoadDatabase(string dbpath)
         {
             ReleaseDatabase();
-            DBMem = ReadStream(dbpath);
-            DB = new LiteDatabase(DBMem);
+            tmpdb = Path.GetTempFileName();
+            File.Copy(dbpath, tmpdb, true);
+            DB = new LiteDatabase(tmpdb);
             IsDBLoaded = true;
         }
 
         public void PutFile(string filepath)
         {
             DB.FileStorage.Upload(Path.GetFileName(filepath), filepath);
-            DB.Commit();
         }
 
         public void ReleaseDatabase()
         {
-            DB?.Dispose();
-            DBMem?.Dispose();
+            if (DB != null)
+            {
+                DB.Dispose();
+                if (File.Exists(tmpdb)) File.Delete(tmpdb);
+            }
             IsDBLoaded = false;
         }
 
@@ -134,9 +126,6 @@ namespace DWSIM.FileStorage
             if (file != null)
             {
                 DB.FileStorage.Delete(file.Id);
-                DB.Commit();
-                DB.Rebuild();
-                DB.Commit();
             }
             else
             {
@@ -147,15 +136,14 @@ namespace DWSIM.FileStorage
         public void CreateDatabase()
         {
             ReleaseDatabase();
-            DBMem = new MemoryStream();
-            DB = new LiteDatabase(DBMem);
+            tmpdb = Path.GetTempFileName();
+            DB = new LiteDatabase(tmpdb);
             IsDBLoaded = true;
         }
 
         public int GetSizeinKB()
         {
-            DB.Commit();
-            return (int)DBMem.Length / 1024;
+            return (int)new FileInfo(tmpdb).Length / 1024;
         }
     }
 }

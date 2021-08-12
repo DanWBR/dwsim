@@ -116,6 +116,7 @@
     <Compile Include="Dynamics\DynamicsManagerControl.cs" />
     <Compile Include="Dynamics\PIDTuningTool.cs" />
     <Compile Include="Dynamics\PropertiesEditor.cs" />
+    <Compile Include="FileProvider\FileProvider.cs" />
     <Compile Include="FlowsheetAnalysis\Optimization.cs" />
     <Compile Include="FlowsheetAnalysis\SensitivityAnalysis.cs" />
     <Compile Include="General\CustomProperties.cs" />
@@ -298,6 +299,11 @@
     <EmbeddedResource Include="Resources\Icons\icons8-add.png" />
     <EmbeddedResource Include="Resources\Icons\icons8-delete.png" />
     <EmbeddedResource Include="Resources\Icons\icons8-plus_math.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Icons\icons8-delete2.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-export.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-import.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

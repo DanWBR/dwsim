@@ -4213,6 +4213,10 @@ Label_00CC:
         Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=DTL")
     End Sub
 
+    Private Sub PsycrometrySimulationTemplateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PsycrometrySimulationTemplateToolStripMenuItem.Click
+        Process.Start("https://github.com/Spogis/Psychrometry")
+    End Sub
+
     Private Sub tsbInspector_CheckedChanged(sender As Object, e As EventArgs) Handles tsbInspector.CheckedChanged
         GlobalSettings.Settings.InspectorEnabled = tsbInspector.Checked
         FrmOptions.chkEnableInspector.Checked = tsbInspector.Checked

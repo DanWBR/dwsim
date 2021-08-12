@@ -159,7 +159,7 @@
     <value>Export File</value>
   </data>
   <data name="ofd1.Filter" xml:space="preserve">
-    <value>All Files|*.*</value>
+    <value>All Supported Files|*.pdf;*.jpg;*.png;*.txt;*.py;*.html;*.dwxmz;*.dwxml;*.xml;*.json;*.dwcsd2;*.dwrsd2</value>
   </data>
   <data name="ofd1.Title" xml:space="preserve">
     <value>Import File</value>

@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 6.5.6
+Version 6.6.0
 Copyright (c) 2017-2021 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,15 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim6/commits/windows
+
+Version 6.6.0
+
+Author              Description
+Daniel Medeiros     New 'Files' feature enables adding external files to the flowsheet
+Daniel Medeiros     Updated User Guide
+Daniel Medeiros     Added Inspector Report for Gibbs/Equilibrium Reactors
+Daniel Medeiros     Fixed Python Script Import/Export (Classic UI)
+Daniel Medeiros     Fixed async script execution
 
 Version 6.5.6
 

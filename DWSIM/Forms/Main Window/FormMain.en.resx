@@ -272,7 +272,7 @@
     <value>&amp;View</value>
   </data>
   <data name="ContentsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="ContentsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Show Help</value>
@@ -284,13 +284,13 @@
     <value>User Guide (PDF)</value>
   </data>
   <data name="DocumentacaoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="DocumentacaoToolStripMenuItem.Text" xml:space="preserve">
     <value>Documentation</value>
   </data>
   <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 6</value>
+    <value>177, 6</value>
   </data>
   <data name="WikiToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -353,25 +353,31 @@
     <value>Inform a Bug</value>
   </data>
   <data name="DWSIMNaInternetToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="DWSIMNaInternetToolStripMenuItem.Text" xml:space="preserve">
     <value>Support</value>
   </data>
   <data name="PatronToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="PatronToolStripMenuItem.Text" xml:space="preserve">
     <value>Become a Patron</value>
   </data>
   <data name="AboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="AboutToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;About DWSIM</value>
   </data>
   <data name="HelpTSMI.Text" xml:space="preserve">
     <value>&amp;Help</value>
+  </data>
+  <data name="PsycrometrySimulationTemplateToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>297, 22</value>
+  </data>
+  <data name="PsycrometrySimulationTemplateToolStripMenuItem.Text" xml:space="preserve">
+    <value>Psycrometry Simulation Template</value>
   </data>
   <data name="DownloadSupplementarySoftwareToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>203, 19</value>

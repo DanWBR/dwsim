@@ -50,6 +50,8 @@ namespace DWSIM.UI.Forms
 
         private DynamicsIntegratorControl DynIntegratorControl;
 
+        private FileExplorerControl FileExplControl;
+
         public ChartManager ChartsControl;
 
         private DWSIM.UI.Desktop.Editors.MaterialStreamListViewer MaterialStreamListControl;
@@ -109,6 +111,12 @@ namespace DWSIM.UI.Forms
                 {
                     ChartsControl?.Dispose();
                     ChartsControl = null;
+                }
+                if (!FileExplControl.IsDisposed)
+                {
+                    FileExplControl?.Dispose();
+                    FileExplControl = null;
+                    FlowsheetObject.FileDatabaseProvider.ReleaseDatabase();
                 }
                 if (!FlowsheetControl.IsDisposed)
                 {
@@ -270,6 +278,8 @@ namespace DWSIM.UI.Forms
             DynManagerControl = new DynamicsManagerControl(FlowsheetObject);
 
             DynIntegratorControl = new DynamicsIntegratorControl(FlowsheetObject);
+
+            FileExplControl = new FileExplorerControl(FlowsheetObject);
 
             // if automation then stop loadning UI controls
 
@@ -1314,20 +1324,30 @@ namespace DWSIM.UI.Forms
             DocumentContainer.Pages.Add(new DocumentPage { Content = MaterialStreamListControl, Text = "Material Streams", Closable = false });
             DocumentContainer.Pages.Add(DocumentPageSpreadsheet);
             DocumentContainer.Pages.Add(new DocumentPage { Content = ChartsControl, Text = "Charts", Closable = false });
+            DocumentContainer.Pages.Add(new DocumentPage { Content = FileExplControl, Text = "Files", Closable = false });
             DocumentContainer.Pages.Add(new DocumentPage { Content = ScriptListControl, Text = "Script Manager", Closable = false });
             DocumentContainer.Pages.Add(new DocumentPage { Content = DynManagerControl, Text = "Dynamics Manager", Closable = false });
             DocumentContainer.Pages.Add(new DocumentPage { Content = ResultsControl, Text = "Results", Closable = false });
+
+            DocumentContainer.SelectedIndexChanged += (s, e) =>
+            {
+                if (DocumentContainer.SelectedIndex == 4)
+                {
+                    FileExplControl.ListFiles();
+                    FileExplControl.UpdateSize();
+                }
+            };
 
             Split3.Panel1 = DocumentContainer;
 
             btnDynManager.Click += (s, e) =>
             {
-                DocumentContainer.SelectedIndex = 5;
+                DocumentContainer.SelectedIndex = 6;
             };
 
             btnmDynManager.Click += (s, e) =>
             {
-                DocumentContainer.SelectedIndex = 5;
+                DocumentContainer.SelectedIndex = 6;
             };
 
             chkmDynamics.CheckedChanged += (s, e) =>
@@ -1482,6 +1502,8 @@ namespace DWSIM.UI.Forms
 
             DynManagerControl.Init();
 
+            FileExplControl.Init();
+
         }
 
         public void SolveFlowsheet(bool changecalcorder)
@@ -1610,9 +1632,15 @@ namespace DWSIM.UI.Forms
 
                 FlowsheetObject.SaveToXML().Save(xmlfile);
 
+                var dbfile = Path.ChangeExtension(xmlfile, "db");
+
+                FlowsheetObject.FileDatabaseProvider.ExportDatabase(dbfile);
+
                 var i_Files = new List<string>();
                 if (File.Exists(xmlfile))
                     i_Files.Add(xmlfile);
+                if (File.Exists(dbfile))
+                    i_Files.Add(dbfile);
 
                 ZipOutputStream strmZipOutputStream = default(ZipOutputStream);
 

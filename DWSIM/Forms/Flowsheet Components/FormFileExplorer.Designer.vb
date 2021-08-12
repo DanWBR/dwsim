@@ -129,7 +129,9 @@ Partial Class FormFileExplorer
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.CloseButton = False
         Me.Controls.Add(Me.SplitContainer1)
+        Me.HideOnClose = True
         Me.Name = "FormFileExplorer"
         Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document
         Me.SplitContainer1.Panel1.ResumeLayout(False)

@@ -1994,6 +1994,8 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
     Public Sub Initialize() Implements IFlowsheet.Initialize
 
+        FileDatabaseProvider.CreateDatabase()
+
         FlowsheetSurface.DrawPropertyList = Options.DisplayCornerPropertyList
         FlowsheetSurface.DrawFloatingTable = Options.DisplayFloatingPropertyTables
 
@@ -2153,6 +2155,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
         Dim pathtosave As String = My.Computer.FileSystem.SpecialDirectories.Temp + Path.DirectorySeparatorChar
         Dim fullname As String = ""
+        Dim dbfile As String = ""
 
         'Dim pwd As String = Nothing
         'If IsZipFilePasswordProtected(caminho) Then
@@ -2176,7 +2179,12 @@ Label_00CC:
                         Do While True
                             count = stream.Read(buffer, 0, buffer.Length)
                             If (count <= 0) Then
-                                fullname = pathtosave + Path.GetFileName(entry.Name)
+                                Dim extension = Path.GetExtension(entry.Name).ToLower()
+                                If extension = ".xml" Then
+                                    fullname = pathtosave + Path.GetFileName(entry.Name)
+                                ElseIf extension = ".db" Then
+                                    dbfile = pathtosave + Path.GetFileName(entry.Name)
+                                End If
                                 GoTo Label_00CC
                             End If
                             stream2.Write(buffer, 0, count)
@@ -2191,6 +2199,14 @@ Label_00CC:
         LoadFromXML(xdoc)
         FilePath = pathtofile
         Options.FilePath = pathtofile
+        If File.Exists(dbfile) Then
+            Try
+                FileDatabaseProvider.LoadDatabase(dbfile)
+            Catch ex As Exception
+            Finally
+                File.Delete(dbfile)
+            End Try
+        End If
         File.Delete(fullname)
 
         Return xdoc
@@ -2216,7 +2232,10 @@ Label_00CC:
                         Do While True
                             count = stream.Read(buffer, 0, buffer.Length)
                             If (count <= 0) Then
-                                fullname = pathtosave + Path.GetFileName(entry.Name)
+                                Dim extension = Path.GetExtension(entry.Name).ToLower()
+                                If extension = ".xml" Then
+                                    fullname = pathtosave + Path.GetFileName(entry.Name)
+                                End If
                                 GoTo Label_00CC
                             End If
                             stream2.Write(buffer, 0, count)

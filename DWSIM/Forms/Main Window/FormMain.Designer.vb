@@ -113,6 +113,7 @@ Partial Class FormMain
         Me.SettingsPanel = New System.Windows.Forms.Panel()
         Me.ButtonClose = New System.Windows.Forms.Button()
         Me.WelcomePanel = New System.Windows.Forms.Panel()
+        Me.PsycrometrySimulationTemplateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.SettingsPanel.SuspendLayout()
@@ -385,7 +386,7 @@ Partial Class FormMain
         '
         resources.ApplyResources(Me.DownloadSupplementarySoftwareToolStripMenuItem, "DownloadSupplementarySoftwareToolStripMenuItem")
         Me.DownloadSupplementarySoftwareToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.DownloadSupplementarySoftwareToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReaktoroToolStripMenuItem, Me.NNUOToolStripMenuItem, Me.PNUOToolStripMenuItem, Me.CapitalCostToolStripMenuItem, Me.OPCPluginToolStripMenuItem, Me.DTLToolStripMenuItem})
+        Me.DownloadSupplementarySoftwareToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReaktoroToolStripMenuItem, Me.NNUOToolStripMenuItem, Me.PNUOToolStripMenuItem, Me.CapitalCostToolStripMenuItem, Me.OPCPluginToolStripMenuItem, Me.DTLToolStripMenuItem, Me.PsycrometrySimulationTemplateToolStripMenuItem})
         Me.DownloadSupplementarySoftwareToolStripMenuItem.Name = "DownloadSupplementarySoftwareToolStripMenuItem"
         '
         'ReaktoroToolStripMenuItem
@@ -617,6 +618,11 @@ Partial Class FormMain
         '
         resources.ApplyResources(Me.WelcomePanel, "WelcomePanel")
         Me.WelcomePanel.Name = "WelcomePanel"
+        '
+        'PsycrometrySimulationTemplateToolStripMenuItem
+        '
+        resources.ApplyResources(Me.PsycrometrySimulationTemplateToolStripMenuItem, "PsycrometrySimulationTemplateToolStripMenuItem")
+        Me.PsycrometrySimulationTemplateToolStripMenuItem.Name = "PsycrometrySimulationTemplateToolStripMenuItem"
         '
         'FormMain
         '
@@ -902,4 +908,5 @@ Partial Class FormMain
     Friend WithEvents OPCPluginToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DTLToolStripMenuItem As ToolStripMenuItem
     Public WithEvents PainelDeBoasvindasToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PsycrometrySimulationTemplateToolStripMenuItem As ToolStripMenuItem
 End Class

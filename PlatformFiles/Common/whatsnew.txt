@@ -1,5 +1,7 @@
-Version 6.5.6
+Version 6.6.0
 
-- Fixed an issue with Compressor/Expander calculation
-- Fixed an issue with Steam Tables Property Package
-- Fixed an issue with the Pipe Segment properties editor (Cross-Platform UI)
+- New 'Files' feature enables adding external files to the flowsheet
+- Updated User Guide
+- Added Inspector Report for Gibbs/Equilibrium Reactors
+- Fixed Python Script Import/Export (Classic UI)
+- Fixed async script execution
