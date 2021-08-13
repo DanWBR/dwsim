@@ -15,6 +15,7 @@ namespace DWSIM.UI.Desktop.Editors
 
         private WebView Viewer;
         private ListBox ListBox1;
+        private Label LabelSize;
         private Button btnImport, btnExport, btnDelete;
 
         private Shared.Flowsheet Flowsheet;
@@ -71,7 +72,12 @@ namespace DWSIM.UI.Desktop.Editors
             };
             tl2.Rows.Add(new TableRow(menu1));
 
-            tl2.Rows.Add(new TableRow(ListBox1));
+            tl2.Rows.Add(new TableRow(ListBox1) { ScaleHeight = true });
+
+            LabelSize = new Label();
+
+            tl2.Rows.Add(new TableRow(LabelSize));
+
             tl2.Padding = new Padding(5, 5, 5, 5);
             tl2.Spacing = new Size(0, 0);
 
@@ -97,9 +103,17 @@ namespace DWSIM.UI.Desktop.Editors
                         var provider = Flowsheet.FileDatabaseProvider;
                         if (provider.CheckIfExists(ListBox1.SelectedValue.ToString()))
                         {
-                            string TempFilePath = Path.Combine(TempDir, ListBox1.SelectedValue.ToString());
-                            provider.ExportFile(ListBox1.SelectedValue.ToString(), TempFilePath);
-                            Viewer.Url = new Uri(TempFilePath);
+                            try
+                            {
+                                string TempFilePath = Path.Combine(TempDir, ListBox1.SelectedValue.ToString());
+                                provider.ExportFile(ListBox1.SelectedValue.ToString(), TempFilePath);
+                                Viewer.Url = new Uri(TempFilePath);
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ListBox1.SelectedValue.ToString() + ": " + ex.Message, "Error",
+                                    MessageBoxButtons.OK, MessageBoxType.Error);
+                            }
                         }
                     }
                 });
@@ -191,7 +205,10 @@ namespace DWSIM.UI.Desktop.Editors
 
         public void UpdateSize()
         {
-            //lblSize.Text = string.Format(Flowsheet.GetTranslatedString1("DBSize"), Flowsheet.FileDatabaseProvider.GetSizeinKB());
+            Flowsheet.RunCodeOnUIThread(() =>
+            {
+                LabelSize.Text = string.Format("File Database Size: {0} KB", Flowsheet.FileDatabaseProvider.GetSizeinKB());
+            });
         }
 
         public void ListFiles()

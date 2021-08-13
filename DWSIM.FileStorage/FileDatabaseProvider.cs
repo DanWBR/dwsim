@@ -12,7 +12,7 @@ namespace DWSIM.FileStorage
 
         private string tmpdb = "";
         private LiteDatabase DB;
-        
+
         private bool IsDBLoaded = false;
 
         public bool IsDatabaseLoaded { get { return IsDBLoaded; } }
@@ -25,6 +25,7 @@ namespace DWSIM.FileStorage
 
         public void ExportDatabase(string filepath)
         {
+            DB.Checkpoint();
             File.Copy(tmpdb, filepath, true);
         }
 
@@ -43,14 +44,17 @@ namespace DWSIM.FileStorage
 
         public System.Drawing.Image GetFileAsImage(string filename)
         {
-            var file = DB.FileStorage.FindById(Path.GetFileName(filename));
+            var fname = Path.GetFileName(filename);
+            var file = DB.FileStorage.FindById(fname);
             if (file != null)
             {
-                var ms = new MemoryStream();
-                file.CopyTo(ms);
-                ms.Position = 0;
-                var image = System.Drawing.Image.FromStream(ms);
-                return image;
+                using (var ms = new MemoryStream())
+                {
+                    file.CopyTo(ms);
+                    ms.Position = 0;
+                    var image = System.Drawing.Image.FromStream(ms);
+                    return image;
+                }
             }
             else
             {
@@ -91,8 +95,9 @@ namespace DWSIM.FileStorage
                 ms.Position = 0;
                 return ms;
             }
-            else {
-                return null;            
+            else
+            {
+                return null;
             }
         }
 
@@ -108,6 +113,7 @@ namespace DWSIM.FileStorage
         public void PutFile(string filepath)
         {
             DB.FileStorage.Upload(Path.GetFileName(filepath), filepath);
+            DB.Checkpoint();
         }
 
         public void ReleaseDatabase()
@@ -126,6 +132,8 @@ namespace DWSIM.FileStorage
             if (file != null)
             {
                 DB.FileStorage.Delete(file.Id);
+                DB.Rebuild();
+                DB.Checkpoint();
             }
             else
             {
