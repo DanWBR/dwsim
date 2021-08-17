@@ -3142,6 +3142,9 @@
     <None Include="Resources\icons8-import.png" />
     <None Include="Resources\icons8-export.png" />
     <None Include="Resources\icons8-delete.png" />
+    <None Include="Resources\icons8-import1.png" />
+    <None Include="Resources\icons8-export1.png" />
+    <None Include="Resources\icons8-delete1.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />

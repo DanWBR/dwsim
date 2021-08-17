@@ -34,9 +34,9 @@ Public Class FormFileExplorer
 
         Dim provider = Flowsheet.FileDatabaseProvider
         Dim files = provider.GetFiles()
-        ListBox1.Items.Clear()
+        ListView1.Items.Clear()
         For Each item In files
-            ListBox1.Items.Add(item)
+            ListView1.Items.Add(item)
         Next
 
     End Sub
@@ -50,14 +50,14 @@ Public Class FormFileExplorer
 
     End Sub
 
-    Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox1.SelectedIndexChanged
+    Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListView1.SelectedIndexChanged
 
         If Loaded Then
-            If ListBox1.SelectedIndex < 0 Then Exit Sub
+            If ListView1.SelectedItems.Count <= 0 Then Exit Sub
             Dim provider = Flowsheet.FileDatabaseProvider
-            If provider.CheckIfExists(ListBox1.SelectedItem) Then
-                Dim TempFilePath As String = Path.Combine(TempDir, ListBox1.SelectedItem)
-                provider.ExportFile(ListBox1.SelectedItem, TempFilePath)
+            If provider.CheckIfExists(ListView1.SelectedItems(0).Text) Then
+                Dim TempFilePath As String = Path.Combine(TempDir, ListView1.SelectedItems(0).Text)
+                provider.ExportFile(ListView1.SelectedItems(0).Text, TempFilePath)
                 Viewer.Source = New Uri(TempFilePath)
             End If
 
@@ -83,30 +83,30 @@ Public Class FormFileExplorer
     End Sub
 
     Private Sub btnExport_Click(sender As Object, e As EventArgs) Handles btnExport.Click
-        If ListBox1.SelectedItem IsNot Nothing Then
-            sfd1.FileName = ListBox1.SelectedItem
+        If ListView1.SelectedItems.Count > 0 Then
+            sfd1.FileName = ListView1.SelectedItems(0).Text
             If Me.sfd1.ShowDialog() = Windows.Forms.DialogResult.OK Then
                 Dim provider = Flowsheet.FileDatabaseProvider
                 Try
-                    provider.ExportFile(ListBox1.SelectedItem, sfd1.FileName)
+                    provider.ExportFile(ListView1.SelectedItems(0).Text, sfd1.FileName)
                 Catch ex As Exception
-                    MessageBox.Show(ListBox1.SelectedItem + ":" + ex.Message, Flowsheet.GetTranslatedString1("Erro"))
+                    MessageBox.Show(ListView1.SelectedItems(0).Text + ":" + ex.Message, Flowsheet.GetTranslatedString1("Erro"))
                 End Try
             End If
         End If
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
-        If ListBox1.SelectedItem IsNot Nothing Then
+        If ListView1.SelectedItems.Count > 0 Then
             If MessageBox.Show(DWSIM.App.GetLocalString("ConfirmOperation"),
                                           DWSIM.App.GetLocalString("Ateno2"),
                                           MessageBoxButtons.YesNo,
                                           MessageBoxIcon.Question) = DialogResult.Yes Then
                 Dim provider = Flowsheet.FileDatabaseProvider
                 Try
-                    provider.DeleteFile(ListBox1.SelectedItem)
+                    provider.DeleteFile(ListView1.SelectedItems(0).Text)
                 Catch ex As Exception
-                    MessageBox.Show(ListBox1.SelectedItem + ":" + ex.Message, Flowsheet.GetTranslatedString1("Erro"))
+                    MessageBox.Show(ListView1.SelectedItems(0).Text + ":" + ex.Message, Flowsheet.GetTranslatedString1("Erro"))
                 End Try
                 ListFiles()
                 UpdateSize()

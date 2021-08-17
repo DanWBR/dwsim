@@ -121,8 +121,28 @@
   <data name="Viewer.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;SplitContainer1.Panel1.Parent" xml:space="preserve">
-    <value>SplitContainer1</value>
+  <data name="&gt;&gt;ListView1.Name" xml:space="preserve">
+    <value>ListView1</value>
+  </data>
+  <data name="ToolStripLabel1.Text" xml:space="preserve">
+    <value>Arquivos</value>
+  </data>
+  <data name="&gt;&gt;ToolStripLabel1.Name" xml:space="preserve">
+    <value>ToolStripLabel1</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ListView1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 25</value>
+  </data>
+  <data name="btnExport.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="&gt;&gt;ListView1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="SplitContainer1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="&gt;&gt;btnDelete.Name" xml:space="preserve">
     <value>btnDelete</value>
@@ -148,17 +168,14 @@
   <data name="&gt;&gt;SplitContainer1.Panel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ListBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
   <data name="&gt;&gt;btnExport.Name" xml:space="preserve">
     <value>btnExport</value>
   </data>
   <data name="&gt;&gt;btnImport.Name" xml:space="preserve">
     <value>btnImport</value>
   </data>
-  <data name="&gt;&gt;sfd1.Name" xml:space="preserve">
-    <value>sfd1</value>
+  <data name="btnDelete.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
   </data>
   <data name="&gt;&gt;SplitContainer1.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -166,15 +183,11 @@
   <data name="&gt;&gt;Viewer.Parent" xml:space="preserve">
     <value>SplitContainer1.Panel2</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
-  <data name="&gt;&gt;Viewer.Type" xml:space="preserve">
-    <value>Microsoft.Web.WebView2.WinForms.WebView2, Microsoft.Web.WebView2.WinForms, Version=1.0.902.49, Culture=neutral, PublicKeyToken=2a8ab48044d2601e</value>
-  </data>
-  <data name="btnExport.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
+  <data name="Label1.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="ToolStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -182,17 +195,20 @@
   <data name="SplitContainer1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="$this.TabText" xml:space="preserve">
-    <value>Arquivos</value>
+  <data name="&gt;&gt;StatusStrip1.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="ofd1.Filter" xml:space="preserve">
     <value>Todos os Arquivos|*.*</value>
   </data>
-  <data name="ListBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 25</value>
+  <data name="sfd1.Filter" xml:space="preserve">
+    <value>Todos os Arquivos|*.*</value>
   </data>
-  <data name="SplitContainer1.SplitterDistance" type="System.Int32, mscorlib">
-    <value>266</value>
+  <data name="&gt;&gt;SplitContainer1.Panel1.Name" xml:space="preserve">
+    <value>SplitContainer1.Panel1</value>
+  </data>
+  <data name="&gt;&gt;Label1.Name" xml:space="preserve">
+    <value>Label1</value>
   </data>
   <data name="ToolStrip1.Text" xml:space="preserve">
     <value>ToolStrip1</value>
@@ -206,12 +222,8 @@
   <data name="btnDelete.Text" xml:space="preserve">
     <value>Excluir Selecionados</value>
   </data>
-  <data name="btnDelete.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ListBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="&gt;&gt;Label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Viewer.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -222,11 +234,14 @@
   <data name="btnImport.Text" xml:space="preserve">
     <value>Importar Arquivos</value>
   </data>
-  <data name="&gt;&gt;ListBox1.Name" xml:space="preserve">
-    <value>ListBox1</value>
+  <data name="Label1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;ListBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;SplitContainer1.Panel1.Parent" xml:space="preserve">
+    <value>SplitContainer1</value>
+  </data>
+  <data name="btnExport.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
   </data>
   <data name="btnImport.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -234,20 +249,32 @@
   <data name="&gt;&gt;ToolStrip1.Name" xml:space="preserve">
     <value>ToolStrip1</value>
   </data>
+  <data name="Label1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
   <data name="&gt;&gt;StatusStrip1.Parent" xml:space="preserve">
     <value>SplitContainer1.Panel1</value>
   </data>
   <data name="&gt;&gt;Viewer.Name" xml:space="preserve">
     <value>Viewer</value>
   </data>
-  <data name="ListBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 425</value>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
-  <data name="&gt;&gt;StatusStrip1.ZOrder" xml:space="preserve">
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Visualizador</value>
+  </data>
+  <data name="&gt;&gt;ListView1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="btnExport.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+  <data name="&gt;&gt;ToolStripLabel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;sfd1.Name" xml:space="preserve">
+    <value>sfd1</value>
+  </data>
+  <data name="&gt;&gt;ListView1.Parent" xml:space="preserve">
+    <value>SplitContainer1.Panel1</value>
   </data>
   <data name="ToolStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -258,26 +285,29 @@
   <data name="&gt;&gt;lblSize.Name" xml:space="preserve">
     <value>lblSize</value>
   </data>
-  <data name="SplitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>800, 450</value>
+  <data name="lblSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>251, 17</value>
   </data>
   <data name="btnExport.Text" xml:space="preserve">
     <value>Exportar Arquivo Selecionado</value>
   </data>
-  <data name="&gt;&gt;ListBox1.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="btnImport.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
-  <data name="lblSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>251, 17</value>
+  <data name="&gt;&gt;Viewer.Type" xml:space="preserve">
+    <value>Microsoft.Web.WebView2.WinForms.WebView2, Microsoft.Web.WebView2.WinForms, Version=1.0.902.49, Culture=neutral, PublicKeyToken=2a8ab48044d2601e</value>
   </data>
   <data name="lblSize.Text" xml:space="preserve">
     <value>Tamanho do Banco de Dados: XX MB</value>
   </data>
   <data name="&gt;&gt;StatusStrip1.Name" xml:space="preserve">
     <value>StatusStrip1</value>
+  </data>
+  <data name="$this.TabText" xml:space="preserve">
+    <value>Arquivos</value>
+  </data>
+  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
   <data name="&gt;&gt;SplitContainer1.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -286,7 +316,7 @@
     <value>System.Windows.Forms.StatusStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Viewer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>530, 450</value>
+    <value>530, 426</value>
   </data>
   <data name="Viewer.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -1150,8 +1180,14 @@
         /////////////////////////////w==
 </value>
   </data>
-  <data name="&gt;&gt;ListBox1.Parent" xml:space="preserve">
-    <value>SplitContainer1.Panel1</value>
+  <data name="SplitContainer1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>800, 450</value>
+  </data>
+  <data name="Label1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
+    <value>SplitContainer1.Panel2</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>WeifenLuo.WinFormsUI.Docking.DockContent, WeifenLuo.WinFormsUI.Docking, Version=2.9.0.0, Culture=neutral, PublicKeyToken=null</value>
@@ -1165,26 +1201,29 @@
   <data name="&gt;&gt;SplitContainer1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="SplitContainer1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Arquivos</value>
   </data>
   <data name="Viewer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+    <value>0, 24</value>
   </data>
-  <data name="&gt;&gt;SplitContainer1.Panel1.Name" xml:space="preserve">
-    <value>SplitContainer1.Panel1</value>
+  <data name="ListView1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="&gt;&gt;SplitContainer1.Panel2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="sfd1.Filter" xml:space="preserve">
-    <value>Todos os Arquivos|*.*</value>
+  <data name="ListView1.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;btnExport.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>530, 24</value>
   </data>
   <data name="&gt;&gt;ofd1.Name" xml:space="preserve">
     <value>ofd1</value>
@@ -1192,14 +1231,17 @@
   <data name="&gt;&gt;SplitContainer1.Name" xml:space="preserve">
     <value>SplitContainer1</value>
   </data>
+  <data name="ListView1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>266, 403</value>
+  </data>
   <data name="ofd1.Title" xml:space="preserve">
     <value>Importar Arquivos</value>
   </data>
   <data name="btnDelete.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
+  <data name="ToolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 22</value>
   </data>
   <data name="&gt;&gt;ToolStrip1.Parent" xml:space="preserve">
     <value>SplitContainer1.Panel1</value>
@@ -1224,6 +1266,9 @@
   </data>
   <data name="StatusStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
+  </data>
+  <data name="SplitContainer1.SplitterDistance" type="System.Int32, mscorlib">
+    <value>266</value>
   </data>
   <data name="&gt;&gt;ToolStrip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

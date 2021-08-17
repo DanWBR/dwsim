@@ -1614,7 +1614,8 @@ Public Class FormOptimization
             End If
         End If
 
-        form.WriteToLog("Optimization iteration #" & Me.selectedoptcase.results.Count & ", objective function value = " & Me.selectedoptcase.results(Me.selectedoptcase.results.Count - 1), Color.SeaGreen, MessageType.Information)
+        form.FormLog.Grid1.Rows.Clear()
+        form.WriteToLog("Optimization Iteration #" & Me.selectedoptcase.results.Count & ", Objective Function Value: " & Me.selectedoptcase.results(Me.selectedoptcase.results.Count - 1), Color.SeaGreen, MessageType.Information)
 
         Dim curve As LineItem = Me.grProgress.GraphPane.CurveList(0)
         Dim list As IPointListEdit = curve.Points
