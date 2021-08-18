@@ -32,6 +32,7 @@ Module scintillaExtender
     Public readerU As Jolt.XmlDocCommentReader
     Public readerT As Jolt.XmlDocCommentReader
     Public readerE As Jolt.XmlDocCommentReader
+    Public readerDB As Jolt.XmlDocCommentReader
 
     <System.Runtime.CompilerServices.Extension()> Function GetBookmarks(scintilla As ScintillaNET.Scintilla) As List(Of Integer)
 
@@ -316,6 +317,7 @@ Module scintillaExtender
         Dim fsolverassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.FlowsheetSolver,")).FirstOrDefault
         Dim extensionsassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.ExtensionMethods.Eto,")).FirstOrDefault
         Dim etoassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.StartsWith("Eto,")).FirstOrDefault
+        Dim dbassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.StartsWith("DWSIM.FileStorage,")).FirstOrDefault
 
         If text.Length >= 1 Then
             Dim lastkeyword As String = ""
@@ -393,6 +395,11 @@ Module scintillaExtender
                     For Each m In methods
                         suggestions += (m.Name) + " "
                     Next
+                Case "FileDatabaseProvider", "db", "database", "filedb", "fdb"
+                    Dim methods = dbassembly.GetType("DWSIM.FileStorage.FileDatabaseProvider").GetMethods()
+                    For Each m In methods
+                        suggestions += (m.Name) + " "
+                    Next
                 Case Else
                     If scintilla.Tag = 1 Then
                         suggestions = "MaterialStream EnergyStream PropertyPackage UnitOp Flowsheet Spreadsheet Plugins Solver DWSIM"
@@ -436,6 +443,7 @@ Module scintillaExtender
         Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations,")).FirstOrDefault
         Dim fsolverassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.FlowsheetSolver,")).FirstOrDefault
         Dim extensionsassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.ExtensionMethods.Eto,")).FirstOrDefault
+        Dim dbassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.StartsWith("DWSIM.FileStorage,")).FirstOrDefault
 
         If readerD Is Nothing Then
             Try
@@ -444,6 +452,7 @@ Module scintillaExtender
                 readerT = New Jolt.XmlDocCommentReader(calculatorassembly)
                 readerU = New Jolt.XmlDocCommentReader(unitopassembly)
                 readerE = New Jolt.XmlDocCommentReader(extensionsassembly)
+                readerDB = New Jolt.XmlDocCommentReader(dbassembly)
             Catch ex As Exception
             End Try
         End If
@@ -485,6 +494,9 @@ Module scintillaExtender
                 Case "DynamicLayout", "layout", "container", "Layout", "Container", "contents"
                     Dim prop = extensionsassembly.GetType("DWSIM.ExtensionMethods.Eto.Extensions2").GetMember(lastkeyword)
                     If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), readerE)
+                Case "FileDatabaseProvider", "db", "database", "filedb", "fdb"
+                    Dim prop = dbassembly.GetType("DWSIM.FileStorage.FileDatabaseProvider").GetMember(lastkeyword)
+                    If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), readerDB)
             End Select
 
             'shows the tooltip

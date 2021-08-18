@@ -7,6 +7,9 @@ using LiteDB;
 
 namespace DWSIM.FileStorage
 {
+    /// <summary>
+    /// File Database Provider for DWSIM, based on LiteDB.
+    /// </summary>
     public class FileDatabaseProvider : IFileDatabaseProvider
     {
 
@@ -15,20 +18,37 @@ namespace DWSIM.FileStorage
 
         private bool IsDBLoaded = false;
 
+        /// <summary>
+        /// Checks if the database is loaded.
+        /// </summary>
         public bool IsDatabaseLoaded { get { return IsDBLoaded; } }
 
+        /// <summary>
+        /// Checks if the given file exists in the database.
+        /// </summary>
+        /// <param name="filename">Filename to search.</param>
+        /// <returns>True if the file exists.</returns>
         public bool CheckIfExists(string filename)
         {
             var file = DB.FileStorage.FindById(Path.GetFileName(filename));
             return file != null;
         }
 
+        /// <summary>
+        /// Exports the embedded database to a file.
+        /// </summary>
+        /// <param name="filepath">Filename to export the database to.</param>
         public void ExportDatabase(string filepath)
         {
             DB.Checkpoint();
             File.Copy(tmpdb, filepath, true);
         }
 
+        /// <summary>
+        /// Exports a file/item from the database to a file in the filesystem.
+        /// </summary>
+        /// <param name="filename">file item to export.</param>
+        /// <param name="exportpath">Path with filename to save the item to.</param>
         public void ExportFile(string filename, string exportpath)
         {
             var file = DB.FileStorage.FindById(Path.GetFileName(filename));
@@ -42,6 +62,11 @@ namespace DWSIM.FileStorage
             }
         }
 
+        /// <summary>
+        /// Returns a stored image file as a System.Drawing.Image object.
+        /// </summary>
+        /// <param name="filename">Image file name in the database.</param>
+        /// <returns>A System.Drawing.Image object.</returns>
         public System.Drawing.Image GetFileAsImage(string filename)
         {
             var fname = Path.GetFileName(filename);
@@ -62,6 +87,36 @@ namespace DWSIM.FileStorage
             }
         }
 
+        /// <summary>
+        /// Returns a stored image file as an Eto.Drawing.Bitmap object.
+        /// </summary>
+        /// <param name="filename">Image file name in the database.</param>
+        /// <returns>An Eto.Drawing.Bitmap object.</returns>
+        public Eto.Drawing.Bitmap GetFileAsEtoBitmap(string filename)
+        {
+            var fname = Path.GetFileName(filename);
+            var file = DB.FileStorage.FindById(fname);
+            if (file != null)
+            {
+                using (var ms = new MemoryStream())
+                {
+                    file.CopyTo(ms);
+                    ms.Position = 0;
+                    var image = new Eto.Drawing.Bitmap(ms);
+                    return image;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Returns the file contents as plain text.
+        /// </summary>
+        /// <param name="filename">File/Item name in the database.</param>
+        /// <returns>The file contents as plain text.</returns>
         public string GetFileAsText(string filename)
         {
             var file = DB.FileStorage.FindById(Path.GetFileName(filename));
@@ -79,12 +134,21 @@ namespace DWSIM.FileStorage
             }
         }
 
+        /// <summary>
+        /// Gets a list of all files in the database.
+        /// </summary>
+        /// <returns></returns>
         public List<string> GetFiles()
         {
             var files = DB.FileStorage.FindAll();
             return files.Select(f => f.Filename).ToList();
         }
 
+        /// <summary>
+        /// Gets the contents of a file as a memory stream.
+        /// </summary>
+        /// <param name="filename">File/Item name</param>
+        /// <returns>A MemoryStream object containing the item.</returns>
         public MemoryStream GetFileStream(string filename)
         {
             var file = DB.FileStorage.FindById(Path.GetFileName(filename));
@@ -101,6 +165,10 @@ namespace DWSIM.FileStorage
             }
         }
 
+        /// <summary>
+        /// For internal use only.
+        /// </summary>
+        /// <param name="dbpath"></param>
         public void LoadDatabase(string dbpath)
         {
             ReleaseDatabase();
@@ -110,12 +178,19 @@ namespace DWSIM.FileStorage
             IsDBLoaded = true;
         }
 
+        /// <summary>
+        /// Stores a file in the database.
+        /// </summary>
+        /// <param name="filepath">Path of the file to import.</param>
         public void PutFile(string filepath)
         {
             DB.FileStorage.Upload(Path.GetFileName(filepath), filepath);
             DB.Checkpoint();
         }
 
+        /// <summary>
+        /// For internal use only.
+        /// </summary>
         public void ReleaseDatabase()
         {
             if (DB != null)
@@ -126,6 +201,10 @@ namespace DWSIM.FileStorage
             IsDBLoaded = false;
         }
 
+        /// <summary>
+        /// Removes a file from the database.
+        /// </summary>
+        /// <param name="filename">File/Item name.</param>
         public void DeleteFile(string filename)
         {
             var file = DB.FileStorage.FindById(Path.GetFileName(filename));
@@ -141,6 +220,9 @@ namespace DWSIM.FileStorage
             }
         }
 
+        /// <summary>
+        /// For internal use only.
+        /// </summary>
         public void CreateDatabase()
         {
             ReleaseDatabase();
@@ -149,6 +231,10 @@ namespace DWSIM.FileStorage
             IsDBLoaded = true;
         }
 
+        /// <summary>
+        /// Gets the database size in kilobytes.
+        /// </summary>
+        /// <returns>DB size in KB.</returns>
         public int GetSizeinKB()
         {
             return (int)new FileInfo(tmpdb).Length / 1024;
