@@ -215,6 +215,9 @@ Module scintillaExtender
         Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
         Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations,")).FirstOrDefault
         Dim fsolverassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.FlowsheetSolver,")).FirstOrDefault
+        Dim extensionsassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.ExtensionMethods.Eto,")).FirstOrDefault
+        Dim etoassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.StartsWith("Eto,")).FirstOrDefault
+        Dim dbassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.StartsWith("DWSIM.FileStorage,")).FirstOrDefault
 
         Dim props = calculatorassembly.GetType("DWSIM.Thermodynamics.Streams.MaterialStream").GetProperties()
         For Each p In props
@@ -269,6 +272,14 @@ Module scintillaExtender
             For Each m In methods
                 netprops += m.Name + " "
             Next
+            methods = extensionsassembly.GetType("DWSIM.ExtensionMethods.Eto.Extensions2").GetMethods()
+            For Each m In methods
+                netprops += m.Name + " "
+            Next
+            methods = dbassembly.GetType("DWSIM.FileStorage.FileDatabaseProvider").GetMethods()
+            For Each m In methods
+                netprops += m.Name + " "
+            Next
             objects = "MaterialStream EnergyStream PropertyPackage UnitOp Flowsheet Spreadsheet Plugins Solver DWSIM"
         Else
             'editor is being used at script unit operation level
@@ -316,7 +327,6 @@ Module scintillaExtender
         Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations,")).FirstOrDefault
         Dim fsolverassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.FlowsheetSolver,")).FirstOrDefault
         Dim extensionsassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.ExtensionMethods.Eto,")).FirstOrDefault
-        Dim etoassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.StartsWith("Eto,")).FirstOrDefault
         Dim dbassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.StartsWith("DWSIM.FileStorage,")).FirstOrDefault
 
         If text.Length >= 1 Then
@@ -388,10 +398,6 @@ Module scintillaExtender
                     Next
                 Case "DynamicLayout", "layout", "container", "Layout", "Container"
                     Dim methods = extensionsassembly.GetType("DWSIM.ExtensionMethods.Eto.Extensions2").GetMethods()
-                    For Each m In methods
-                        suggestions += (m.Name) + " "
-                    Next
-                    methods = etoassembly.GetType("Eto.Forms.DynamicLayout").GetMethods()
                     For Each m In methods
                         suggestions += (m.Name) + " "
                     Next
