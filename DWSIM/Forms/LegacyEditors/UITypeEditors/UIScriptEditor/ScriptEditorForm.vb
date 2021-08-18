@@ -200,7 +200,7 @@ Imports System.Linq
 
         txtScript.ShowAutoComplete()
 
-        txtScript.ShowToolTip(reader)
+        txtScript.ShowToolTip()
 
     End Sub
 

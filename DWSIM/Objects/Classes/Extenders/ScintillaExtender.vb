@@ -27,6 +27,12 @@ Imports System.Linq
 ''' <remarks>(c) 2015 Daniel Medeiros</remarks>
 Module scintillaExtender
 
+    Public readerD As Jolt.XmlDocCommentReader
+    Public readerFS As Jolt.XmlDocCommentReader
+    Public readerU As Jolt.XmlDocCommentReader
+    Public readerT As Jolt.XmlDocCommentReader
+    Public readerE As Jolt.XmlDocCommentReader
+
     <System.Runtime.CompilerServices.Extension()> Function GetBookmarks(scintilla As ScintillaNET.Scintilla) As List(Of Integer)
 
         Dim bookmarks As New List(Of Integer)
@@ -417,14 +423,25 @@ Module scintillaExtender
     ''' Show a tooltip with information about the entered object method or property.
     ''' </summary>
     ''' <param name="scintilla"></param>
-    ''' <param name="reader">Jolt's XmlDocCommentReader instance, to get and display comments from assembly-generated XML file.</param>
     ''' <remarks></remarks>
-    <System.Runtime.CompilerServices.Extension()> Sub ShowToolTip(scintilla As scintillaNET.scintilla, reader As Jolt.XmlDocCommentReader)
+    <System.Runtime.CompilerServices.Extension()> Sub ShowToolTip(scintilla As ScintillaNET.Scintilla)
 
+        Dim dwsimassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM,")).FirstOrDefault
         Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
         Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations,")).FirstOrDefault
         Dim fsolverassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.FlowsheetSolver,")).FirstOrDefault
         Dim extensionsassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.ExtensionMethods.Eto,")).FirstOrDefault
+
+        If readerD Is Nothing Then
+            Try
+                readerD = New Jolt.XmlDocCommentReader(dwsimassembly)
+                readerFS = New Jolt.XmlDocCommentReader(fsolverassembly)
+                readerT = New Jolt.XmlDocCommentReader(calculatorassembly)
+                readerU = New Jolt.XmlDocCommentReader(unitopassembly)
+                readerE = New Jolt.XmlDocCommentReader(extensionsassembly)
+            Catch ex As Exception
+            End Try
+        End If
 
         'parses the last keyword (object) (before the ".") and get suggestions for the autocomplete box from its properties and methods
 
@@ -439,28 +456,30 @@ Module scintillaExtender
             Select Case lastobj
                 Case "ms", "ims1", "ims2", "ims3", "ims4", "ims5", "ims6", "oms1", "oms2", "oms3", "oms4", "oms5", "MaterialStream"
                     Dim prop = calculatorassembly.GetType("DWSIM.Thermodynamics.Streams.MaterialStream").GetMember(lastkeyword)
-                    If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), reader)
+                    If prop.Length > 0 Then
+                        helptext = scintilla.FormatHelpTip(prop(0), readerT)
+                    End If
                 Case "ies1", "oes1", "EnergyStream", "es"
                     Dim prop = unitopassembly.GetType("DWSIM.UnitOperations.Streams.EnergyStream").GetMember(lastkeyword)
-                    If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), reader)
+                    If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), readerU)
                 Case "Flowsheet", "Flowsheet", "fs"
                     Dim prop = Type.GetType("DWSIM.FormFlowsheet").GetMember(lastkeyword)
-                    If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), reader)
+                    If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), readerD)
                 Case "Spreadsheet"
                     Dim prop = Type.GetType("DWSIM.SpreadsheetForm").GetMember(lastkeyword)
-                    If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), reader)
+                    If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), readerD)
                 Case "PropertyPackage"
                     Dim prop = calculatorassembly.GetType("DWSIM.Thermodynamics.PropertyPackages.PropertyPackage").GetMember(lastkeyword)
-                    If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), reader)
+                    If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), readerT)
                 Case "UnitOp", "Me", "uo"
                     Dim prop = unitopassembly.GetType("DWSIM.SharedClasses.UnitOperations.BaseClass").GetMember(lastkeyword)
-                    If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), reader)
+                    If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), readerU)
                 Case "Solver"
                     Dim prop = fsolverassembly.GetType("DWSIM.FlowsheetSolver.FlowsheetSolver").GetMember(lastkeyword)
-                    If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), reader)
+                    If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), readerFS)
                 Case "DynamicLayout", "layout", "container", "Layout", "Container"
                     Dim prop = extensionsassembly.GetType("DWSIM.ExtensionMethods.Eto.Extensions2").GetMember(lastkeyword)
-                    If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), reader)
+                    If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), readerE)
             End Select
 
             'shows the tooltip
@@ -595,6 +614,49 @@ Module scintillaExtender
         End Select
 
     End Function
+
+    <System.Runtime.CompilerServices.Extension()> Private Function HasComment(member As MemberInfo, reader As Jolt.XmlDocCommentReader) As Boolean
+
+        Select Case member.MemberType
+
+            Case MemberTypes.Method
+
+                Dim methods = member.DeclaringType.GetMethods().Where(Function(m) m.Name = member.Name).ToList
+                Dim method = methods(0)
+
+                If Not reader Is Nothing Then
+
+                    Return reader.GetComments(method) IsNot Nothing
+
+                Else
+
+                    Return False
+
+                End If
+
+            Case MemberTypes.Property
+
+                Dim props = member.DeclaringType.GetProperties().Where(Function(p) p.Name = member.Name).ToList
+                Dim prop = props(0)
+
+                If Not reader Is Nothing Then
+
+                    Return reader.GetComments(prop) IsNot Nothing
+
+                Else
+
+                    Return False
+
+                End If
+
+            Case Else
+
+                Return False
+
+        End Select
+
+    End Function
+
 
     ''' <summary>
     ''' Returns the last typed word in the editor.

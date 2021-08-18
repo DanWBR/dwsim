@@ -13,7 +13,6 @@ Imports System.Net
 Public Class ScriptEditorControl
 
     Public form As FormFlowsheet
-    Public reader As Jolt.XmlDocCommentReader
 
     Private linkAPI As String = ""
     Private linkSC As String = ""
@@ -81,7 +80,7 @@ Public Class ScriptEditorControl
 
         ShowAutoComplete(txtScript)
 
-        ShowToolTip(txtScript, reader)
+        ShowToolTip(txtScript)
 
     End Sub
 

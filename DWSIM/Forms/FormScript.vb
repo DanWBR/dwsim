@@ -17,7 +17,6 @@ Imports IronPython.Hosting
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
     Public fc As FormFlowsheet
-    Private reader As Jolt.XmlDocCommentReader
 
     Private CurrentlyDebugging As Boolean = False
     Private DebuggingPaused As Boolean = False
@@ -29,13 +28,6 @@ Imports IronPython.Hosting
         AddHandler fc.FormSurface.FlowsheetSurface.StatusUpdate, Sub(sender2, e2)
                                                                      ShouldUpdateSnippets = True
                                                                  End Sub
-
-        If Not DWSIM.App.IsRunningOnMono Then
-            Try
-                reader = New Jolt.XmlDocCommentReader(Me.GetType.Assembly)
-            Catch ex As Exception
-            End Try
-        End If
 
         ' Get the installed fonts collection.
         Dim installed_fonts As New InstalledFontCollection
@@ -537,7 +529,6 @@ Imports IronPython.Hosting
                 .txtScript.SetEditorStyle(tscb1.SelectedItem.ToString, tscb2.SelectedItem.ToString, False)
 
                 .form = fc
-                .reader = reader
 
                 .chkLink.Checked = scriptdata.Linked
 

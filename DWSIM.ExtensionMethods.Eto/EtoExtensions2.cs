@@ -9,6 +9,9 @@ using Eto.Drawing;
 
 namespace DWSIM.ExtensionMethods.Eto
 {
+    /// <summary>
+    /// Eto.Forms extension methods
+    /// </summary>
     public static class Extensions2
     {
 
@@ -45,7 +48,7 @@ namespace DWSIM.ExtensionMethods.Eto
         /// <param name="title">Title of the form</param>
         /// <param name="width">Width in pixels</param>
         /// <param name="height">Height in pixels</param>
-        /// <param name="content">List of controls to display in the tabs. Set the Tag property of the control to display as the tab text.</param>
+        /// <param name="contents">List of controls to display in the tabs. Set the Tag property of the control to display as the tab text.</param>
         /// <returns></returns>
         public static Form GetTabbedForm(string title, int width, int height, Control[] contents)
         {
@@ -55,7 +58,7 @@ namespace DWSIM.ExtensionMethods.Eto
         /// <summary>
         /// Centers the form on the screen.
         /// </summary>
-        /// <param name="form"></param>
+        /// <param name="form">Form (window)</param>
         public static void Center(this Form form)
         {
             Common.Center(form);
@@ -86,8 +89,8 @@ namespace DWSIM.ExtensionMethods.Eto
         /// <summary>
         /// Adds a header text to the container.
         /// </summary>
-        /// <param name="container"></param>
-        /// <param name="text"></param>
+        /// <param name="container">Layout container</param>
+        /// <param name="text">Label text</param>
         /// <returns></returns>
         public static Label AddHeader(DynamicLayout container, string text)
         {
@@ -97,8 +100,8 @@ namespace DWSIM.ExtensionMethods.Eto
         /// <summary>
         /// Adds a description row to the container.
         /// </summary>
-        /// <param name="container"></param>
-        /// <param name="text"></param>
+        /// <param name="container">Layout container</param>
+        /// <param name="text">Description text</param>
         /// <returns></returns>
         public static Label AddDescription(DynamicLayout container, string text)
         {
@@ -108,7 +111,7 @@ namespace DWSIM.ExtensionMethods.Eto
         /// <summary>
         /// Adds a textbox for editing a double (numeric) value.
         /// </summary>
-        /// <param name="container"></param>
+        /// <param name="container">Layout container</param>
         /// <param name="text">Text (description)</param>
         /// <param name="currentvalue">Current value to display on the textbox</param>
         /// <param name="numberformat">Number format (i.e. 'N2')</param>
@@ -124,7 +127,7 @@ namespace DWSIM.ExtensionMethods.Eto
         /// <summary>
         /// Adds a DropDown with selectable items
         /// </summary>
-        /// <param name="container"></param>
+        /// <param name="container"Layout container></param>
         /// <param name="text">Text (description)</param>
         /// <param name="options">Selectable items</param>
         /// <param name="selected">Index of the currently selected item (zero-based)</param>
@@ -139,7 +142,7 @@ namespace DWSIM.ExtensionMethods.Eto
         /// <summary>
         /// Adds a CheckBox
         /// </summary>
-        /// <param name="container"></param>
+        /// <param name="container">Layout container</param>
         /// <param name="text">Text (description)</param>
         /// <param name="ischecked"></param>
         /// <param name="checkedchangedhandler">Handler for the CheckedChanged event.</param>
@@ -153,7 +156,7 @@ namespace DWSIM.ExtensionMethods.Eto
         /// <summary>
         /// Adds a numeric stepper (selector)
         /// </summary>
-        /// <param name="container"></param>
+        /// <param name="container">Layout container</param>
         /// <param name="text">Text (description)</param>
         /// <param name="value">The current value of the stepper</param>
         /// <param name="minvalue">Maximum selectable value</param>
@@ -170,7 +173,7 @@ namespace DWSIM.ExtensionMethods.Eto
         /// <summary>
         /// Adds a button with a label.
         /// </summary>
-        /// <param name="container"></param>
+        /// <param name="container">Layout container</param>
         /// <param name="text">Text (description)</param>
         /// <param name="buttontext">Text to be displayed in the button</param>
         /// <param name="clickhandler">Handler for the Click event.</param>
@@ -183,7 +186,7 @@ namespace DWSIM.ExtensionMethods.Eto
         /// <summary>
         /// Adds a button
         /// </summary>
-        /// <param name="container"></param>
+        /// <param name="container">Layout container</param>
         /// <param name="buttontext">Text to be displayed in the button</param>
         /// <param name="clickhandler">Handler for the Click event.</param>
         /// <returns></returns>
@@ -195,17 +198,17 @@ namespace DWSIM.ExtensionMethods.Eto
         /// <summary>
         /// Adds a control to the container.
         /// </summary>
-        /// <param name="container"></param>
-        /// <param name="control"></param>
+        /// <param name="container">Layout container</param>
+        /// <param name="control">Control to add</param>
         public static void AddControl(DynamicLayout container, Control control)
         {
             Common.CreateAndAddControlRow(container, control);
         }
 
         /// <summary>
-        /// Adds an empty space to the container.
+        /// Adds an empty row to the container for spacing purposes.
         /// </summary>
-        /// <param name="container"></param>
+        /// <param name="container">Layout container</param>
         public static void AddEmptySpace(DynamicLayout container)
         {
             Common.CreateAndAddEmptySpace(container);
