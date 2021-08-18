@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="BorderControl.cs" />
     <Compile Include="EtoExtensions.cs" />
+    <Compile Include="EtoExtensions2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

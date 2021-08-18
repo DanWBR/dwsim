@@ -308,6 +308,7 @@ Module scintillaExtender
         Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
         Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations,")).FirstOrDefault
         Dim fsolverassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.FlowsheetSolver,")).FirstOrDefault
+        Dim extensionsassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.ExtensionMethods.Eto,")).FirstOrDefault
 
         If text.Length >= 1 Then
             Dim lastkeyword As String = ""
@@ -317,7 +318,7 @@ Module scintillaExtender
                 lastkeyword = text(text.Length - 1).Trim
             End If
             Select Case lastkeyword
-                Case "ims1", "ims2", "ims3", "ims4", "ims5", "ims6", "oms1", "oms2", "oms3", "oms4", "oms5", "MaterialStream"
+                Case "ms", "ims1", "ims2", "ims3", "ims4", "ims5", "ims6", "oms1", "oms2", "oms3", "oms4", "oms5", "MaterialStream"
                     Dim props = calculatorassembly.GetType("DWSIM.Thermodynamics.Streams.MaterialStream").GetProperties()
                     For Each p In props
                         suggestions += (p.Name) + " "
@@ -326,7 +327,7 @@ Module scintillaExtender
                     For Each m In methods
                         suggestions += (m.Name) + " "
                     Next
-                Case "ies1", "oes1", "EnergyStream"
+                Case "es", "ies1", "oes1", "EnergyStream"
                     Dim props = unitopassembly.GetType("DWSIM.UnitOperations.Streams.EnergyStream").GetProperties()
                     For Each p In props
                         suggestions += (p.Name) + " "
@@ -335,7 +336,7 @@ Module scintillaExtender
                     For Each m In methods
                         suggestions += (m.Name) + " "
                     Next
-                Case "Flowsheet"
+                Case "Flowsheet", "flowsheet", "fs", "FlowSheet"
                     Dim props = Type.GetType("DWSIM.FormFlowsheet").GetProperties()
                     For Each p In props
                         If p.PropertyType.Namespace <> "System.Windows.Forms" Then suggestions += (p.Name) + " "
@@ -353,7 +354,7 @@ Module scintillaExtender
                     For Each m In methods
                         suggestions += (m.Name) + " "
                     Next
-                Case "PropertyPackage"
+                Case "PropertyPackage", "pp", "pp1"
                     Dim props = calculatorassembly.GetType("DWSIM.Thermodynamics.PropertyPackages.PropertyPackage").GetProperties()
                     For Each p In props
                         suggestions += (p.Name) + " "
@@ -362,7 +363,7 @@ Module scintillaExtender
                     For Each m In methods
                         suggestions += (m.Name) + " "
                     Next
-                Case "UnitOp", "Me"
+                Case "UnitOp", "Me", "uo"
                     Dim props = unitopassembly.GetType("DWSIM.SharedClasses.UnitOperations.BaseClass").GetProperties()
                     For Each p In props
                         suggestions += (p.Name) + " "
@@ -373,6 +374,11 @@ Module scintillaExtender
                     Next
                 Case "Solver"
                     Dim methods = fsolverassembly.GetType("DWSIM.FlowsheetSolver.FlowsheetSolver").GetMethods()
+                    For Each m In methods
+                        suggestions += (m.Name) + " "
+                    Next
+                Case "DynamicLayout", "layout", "container", "Layout", "Container"
+                    Dim methods = extensionsassembly.GetType("DWSIM.ExtensionMethods.Eto.Extensions2").GetMethods()
                     For Each m In methods
                         suggestions += (m.Name) + " "
                     Next
@@ -418,6 +424,7 @@ Module scintillaExtender
         Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
         Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations,")).FirstOrDefault
         Dim fsolverassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.FlowsheetSolver,")).FirstOrDefault
+        Dim extensionsassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.ExtensionMethods.Eto,")).FirstOrDefault
 
         'parses the last keyword (object) (before the ".") and get suggestions for the autocomplete box from its properties and methods
 
@@ -430,13 +437,13 @@ Module scintillaExtender
             Dim lastkeyword = text(text.Length - 1)
             Dim lastobj = text(text.Length - 2).Trim()
             Select Case lastobj
-                Case "ims1", "ims2", "ims3", "ims4", "ims5", "ims6", "oms1", "oms2", "oms3", "oms4", "oms5", "MaterialStream"
+                Case "ms", "ims1", "ims2", "ims3", "ims4", "ims5", "ims6", "oms1", "oms2", "oms3", "oms4", "oms5", "MaterialStream"
                     Dim prop = calculatorassembly.GetType("DWSIM.Thermodynamics.Streams.MaterialStream").GetMember(lastkeyword)
                     If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), reader)
-                Case "ies1", "oes1", "EnergyStream"
+                Case "ies1", "oes1", "EnergyStream", "es"
                     Dim prop = unitopassembly.GetType("DWSIM.UnitOperations.Streams.EnergyStream").GetMember(lastkeyword)
                     If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), reader)
-                Case "Flowsheet"
+                Case "Flowsheet", "Flowsheet", "fs"
                     Dim prop = Type.GetType("DWSIM.FormFlowsheet").GetMember(lastkeyword)
                     If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), reader)
                 Case "Spreadsheet"
@@ -445,11 +452,14 @@ Module scintillaExtender
                 Case "PropertyPackage"
                     Dim prop = calculatorassembly.GetType("DWSIM.Thermodynamics.PropertyPackages.PropertyPackage").GetMember(lastkeyword)
                     If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), reader)
-                Case "UnitOp", "Me"
+                Case "UnitOp", "Me", "uo"
                     Dim prop = unitopassembly.GetType("DWSIM.SharedClasses.UnitOperations.BaseClass").GetMember(lastkeyword)
                     If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), reader)
                 Case "Solver"
                     Dim prop = fsolverassembly.GetType("DWSIM.FlowsheetSolver.FlowsheetSolver").GetMember(lastkeyword)
+                    If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), reader)
+                Case "DynamicLayout", "layout", "container", "Layout", "Container"
+                    Dim prop = extensionsassembly.GetType("DWSIM.ExtensionMethods.Eto.Extensions2").GetMember(lastkeyword)
                     If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), reader)
             End Select
 
