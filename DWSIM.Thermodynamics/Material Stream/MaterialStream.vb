@@ -1028,12 +1028,21 @@ Namespace Streams
 
         End Sub
 
+        ''' <summary>
+        ''' Returns the molar composition of a phase.
+        ''' </summary>
+        ''' <param name="phs">Phase code (0 = mixture, 1 = overall liquid, 2 = vapor, 3 = liquid1, 4 = liquid2, 7 = solid</param>
+        ''' <returns></returns>
         Public Function GetPhaseComposition(phs As Integer) As Double() Implements IMaterialStream.GetPhaseComposition
 
             Return Phases(phs).Compounds.Values.Select(Function(x) x.MoleFraction.GetValueOrDefault).ToArray
 
         End Function
 
+        ''' <summary>
+        ''' Returns an array with the overall molar composition.
+        ''' </summary>
+        ''' <returns>Array with mole fractions.</returns>
         Public Function GetOverallComposition() As Double() Implements IMaterialStream.GetOverallComposition
 
             Return Phases(0).Compounds.Values.Select(Function(x) x.MoleFraction.GetValueOrDefault).ToArray
@@ -7737,35 +7746,66 @@ Namespace Streams
 
         End Function
 
-
+        ''' <summary>
+        ''' Returns the overall mass enthalpy.
+        ''' </summary>
+        ''' <returns>Mass enthalpy in kJ/kg.</returns>
         Public Function GetMassEnthalpy() As Double
             Return Phases(0).Properties.enthalpy.GetValueOrDefault
         End Function
 
+        ''' <summary>
+        ''' Returns the overall mass entropy.
+        ''' </summary>
+        ''' <returns>Mass entropy in kJ/[kg.K].</returns>
         Public Function GetMassEntropy() As Double
             Return Phases(0).Properties.entropy.GetValueOrDefault
         End Function
 
+        ''' <summary>
+        ''' Returns the stream temperature.
+        ''' </summary>
+        ''' <returns>Temperature in K.</returns>
         Public Function GetTemperature() As Double
             Return Phases(0).Properties.temperature.GetValueOrDefault
         End Function
 
+        ''' <summary>
+        ''' Returns the stream pressure.
+        ''' </summary>
+        ''' <returns>Pressure in Pa.</returns>
         Public Function GetPressure() As Double
             Return Phases(0).Properties.pressure.GetValueOrDefault
         End Function
 
+        ''' <summary>
+        ''' Returns the stream mass flow.
+        ''' </summary>
+        ''' <returns>Mass flow in kg/s.</returns>
         Public Function GetMassFlow() As Double
             Return Phases(0).Properties.massflow.GetValueOrDefault
         End Function
 
+        ''' <summary>
+        ''' Returns the stream molar flow.
+        ''' </summary>
+        ''' <returns>Molar flow in mol/s.</returns>
         Public Function GetMolarFlow() As Double
             Return Phases(0).Properties.molarflow.GetValueOrDefault
         End Function
 
+        ''' <summary>
+        ''' Returns the stream volumetric flow.
+        ''' </summary>
+        ''' <returns>Volumetric flow in m3/s.</returns>
         Public Function GetVolumetricFlow() As Double
             Return Phases(0).Properties.volumetric_flow.GetValueOrDefault
         End Function
 
+        ''' <summary>
+        ''' Returns the molecular weight of the overall mixture.
+        ''' </summary>
+        ''' <returns>Molecular weight in kg/kmol.</returns>
         Public Function GetOverallMolecularWeight() As Double
             Return Phases(0).Properties.molecularWeight.GetValueOrDefault
         End Function
@@ -7797,7 +7837,7 @@ Namespace Streams
         ''' <summary>
         ''' Sets stream flash spec.
         ''' </summary>
-        ''' <param name="value">Flash spec (PT, PH, PS, PVF, TVF, PSF, VT, VH or VS).</param>
+        ''' <param name="value">Flash Specification (PT, PH, PS, PVF, TVF, PSF, VT, VH or VS).</param>
         Public Sub SetFlashSpec(value As String)
             Select Case value.ToLower
                 Case "pt", "tp"
@@ -7822,6 +7862,10 @@ Namespace Streams
             AtEquilibrium = False
         End Sub
 
+        ''' <summary>
+        ''' Mixes this stream with another one.  
+        ''' </summary>
+        ''' <param name="withstream">Stream to mix this one with.</param>
         Public Sub Mix(withstream As MaterialStream)
 
             Dim Vw As New Dictionary(Of String, Double)
@@ -7881,6 +7925,12 @@ Namespace Streams
 
         End Sub
 
+        ''' <summary>
+        ''' Adds a material stream to this one, returning the resulting mixed stream, leaving this instance unmodifed.
+        ''' </summary>
+        ''' <param name="stream">Stream to be mixed with this one.</param>
+        ''' <param name="Factor">Flow multiplier for the stream to be mixed with this one. Default is 1.0.</param>
+        ''' <returns>The mixed stream.</returns>
         Public Function Add(stream As MaterialStream, Optional ByVal Factor As Double = 1.0) As MaterialStream
 
             Dim newstream = DirectCast(CloneXML(), MaterialStream)
@@ -7956,6 +8006,12 @@ Namespace Streams
 
         End Function
 
+        ''' <summary>
+        ''' Subtracts a material stream contents from this one, returning a new stream object, leaving this instance unmodified.
+        ''' </summary>
+        ''' <param name="stream">Stream to subtract this one from.</param>
+        ''' <param name="Factor">Flow multiplier for the stream to subtract from this one. Default is 1.0.</param>
+        ''' <returns></returns>
         Public Function Subtract(stream As MaterialStream, Optional ByVal Factor As Double = 1.0) As MaterialStream
 
             Dim newstream = DirectCast(CloneXML(), MaterialStream)
@@ -8032,6 +8088,12 @@ Namespace Streams
 
         End Function
 
+        ''' <summary>
+        ''' Assign properties from another phase in another stream.
+        ''' </summary>
+        ''' <param name="phase">Phase to assign proeprties from.</param>
+        ''' <param name="stream">Stream to read phase properties from.</param>
+        ''' <param name="SetW">True to set the overall mass flow from the other stream phase.</param>
         Public Sub AssignFromPhase(phase As Enums.PhaseLabel, stream As MaterialStream, SetW As Boolean)
 
             Dim prevW As Double = GetMassFlow()
@@ -8164,16 +8226,11 @@ Namespace Streams
 
         End Function
 
-        Public Overrides Function ToString() As String
-
-            If GraphicObject IsNot Nothing Then
-                Return GraphicObject.Tag + String.Format(": T = {0} K, P = {1} Pa, W = {2} kg/s, M = {3} mol/s, Q = {4} m3/s", GetTemperature, GetPressure, GetMassFlow, GetMolarFlow, GetVolumetricFlow)
-            Else
-                Return String.Format("Material Stream: T = {0} K, P = {1} Pa, W = {2} kg/s, M = {3} mol/s, Q = {4} m3/s", GetTemperature, GetPressure, GetMassFlow, GetMolarFlow, GetVolumetricFlow)
-            End If
-
-        End Function
-
+        ''' <summary>
+        ''' Copy mass/mole fractions from one phase to another.
+        ''' </summary>
+        ''' <param name="fromphase">Phase to copy compositions from</param>
+        ''' <param name="tophase">Phase to copy compositions to</param>
         Public Sub CopyCompositions(fromphase As PhaseLabel, tophase As PhaseLabel)
 
             Dim fromp, top As Integer
@@ -8218,6 +8275,26 @@ Namespace Streams
             Next
 
         End Sub
+
+        ''' <summary>
+        ''' Clears all phase properties, including temperature, pressure and overall composition.
+        ''' </summary>
+        Public Sub Empty()
+
+            Clear()
+            ClearAllProps()
+
+        End Sub
+
+        Public Overrides Function ToString() As String
+
+            If GraphicObject IsNot Nothing Then
+                Return GraphicObject.Tag + String.Format(": T = {0} K, P = {1} Pa, W = {2} kg/s, M = {3} mol/s, Q = {4} m3/s", GetTemperature, GetPressure, GetMassFlow, GetMolarFlow, GetVolumetricFlow)
+            Else
+                Return String.Format("Material Stream: T = {0} K, P = {1} Pa, W = {2} kg/s, M = {3} mol/s, Q = {4} m3/s", GetTemperature, GetPressure, GetMassFlow, GetMolarFlow, GetVolumetricFlow)
+            End If
+
+        End Function
 
     End Class
 

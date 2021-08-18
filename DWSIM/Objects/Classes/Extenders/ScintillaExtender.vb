@@ -315,6 +315,7 @@ Module scintillaExtender
         Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations,")).FirstOrDefault
         Dim fsolverassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.FlowsheetSolver,")).FirstOrDefault
         Dim extensionsassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.ExtensionMethods.Eto,")).FirstOrDefault
+        Dim etoassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.StartsWith("Eto,")).FirstOrDefault
 
         If text.Length >= 1 Then
             Dim lastkeyword As String = ""
@@ -388,6 +389,10 @@ Module scintillaExtender
                     For Each m In methods
                         suggestions += (m.Name) + " "
                     Next
+                    methods = etoassembly.GetType("Eto.Forms.DynamicLayout").GetMethods()
+                    For Each m In methods
+                        suggestions += (m.Name) + " "
+                    Next
                 Case Else
                     If scintilla.Tag = 1 Then
                         suggestions = "MaterialStream EnergyStream PropertyPackage UnitOp Flowsheet Spreadsheet Plugins Solver DWSIM"
@@ -454,30 +459,30 @@ Module scintillaExtender
             Dim lastkeyword = text(text.Length - 1)
             Dim lastobj = text(text.Length - 2).Trim()
             Select Case lastobj
-                Case "ms", "ims1", "ims2", "ims3", "ims4", "ims5", "ims6", "oms1", "oms2", "oms3", "oms4", "oms5", "MaterialStream"
+                Case "stream", "mstr", "ms", "ims1", "ims2", "ims3", "ims4", "ims5", "ims6", "oms1", "oms2", "oms3", "oms4", "oms5", "MaterialStream"
                     Dim prop = calculatorassembly.GetType("DWSIM.Thermodynamics.Streams.MaterialStream").GetMember(lastkeyword)
                     If prop.Length > 0 Then
                         helptext = scintilla.FormatHelpTip(prop(0), readerT)
                     End If
-                Case "ies1", "oes1", "EnergyStream", "es"
+                Case "ies1", "oes1", "EnergyStream", "es", "estream"
                     Dim prop = unitopassembly.GetType("DWSIM.UnitOperations.Streams.EnergyStream").GetMember(lastkeyword)
                     If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), readerU)
                 Case "Flowsheet", "Flowsheet", "fs"
                     Dim prop = Type.GetType("DWSIM.FormFlowsheet").GetMember(lastkeyword)
                     If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), readerD)
-                Case "Spreadsheet"
+                Case "Spreadsheet", "spreadsheet", "ssheet"
                     Dim prop = Type.GetType("DWSIM.SpreadsheetForm").GetMember(lastkeyword)
                     If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), readerD)
-                Case "PropertyPackage"
+                Case "PropertyPackage", "pp", "proppack", "ppack"
                     Dim prop = calculatorassembly.GetType("DWSIM.Thermodynamics.PropertyPackages.PropertyPackage").GetMember(lastkeyword)
                     If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), readerT)
-                Case "UnitOp", "Me", "uo"
+                Case "UnitOp", "this", "Me", "uo", "unitop"
                     Dim prop = unitopassembly.GetType("DWSIM.SharedClasses.UnitOperations.BaseClass").GetMember(lastkeyword)
                     If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), readerU)
                 Case "Solver"
                     Dim prop = fsolverassembly.GetType("DWSIM.FlowsheetSolver.FlowsheetSolver").GetMember(lastkeyword)
                     If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), readerFS)
-                Case "DynamicLayout", "layout", "container", "Layout", "Container"
+                Case "DynamicLayout", "layout", "container", "Layout", "Container", "contents"
                     Dim prop = extensionsassembly.GetType("DWSIM.ExtensionMethods.Eto.Extensions2").GetMember(lastkeyword)
                     If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), readerE)
             End Select

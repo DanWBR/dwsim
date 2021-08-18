@@ -127,7 +127,7 @@ namespace DWSIM.ExtensionMethods.Eto
         /// <summary>
         /// Adds a DropDown with selectable items
         /// </summary>
-        /// <param name="container"Layout container></param>
+        /// <param name="container">Layout container</param>
         /// <param name="text">Text (description)</param>
         /// <param name="options">Selectable items</param>
         /// <param name="selected">Index of the currently selected item (zero-based)</param>
