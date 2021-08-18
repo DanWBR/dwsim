@@ -150,6 +150,17 @@ namespace DWSIM.ExtensionMethods.Eto
             return Common.CreateAndAddCheckBoxRow(container, text, ischecked, checkedchangedhandler);
         }
 
+        /// <summary>
+        /// Adds a numeric stepper (selector)
+        /// </summary>
+        /// <param name="container"></param>
+        /// <param name="text">Text (description)</param>
+        /// <param name="value">The current value of the stepper</param>
+        /// <param name="minvalue">Maximum selectable value</param>
+        /// <param name="maxvalue">Minimum selectable value</param>
+        /// <param name="decimalplaces">Decimal places</param>
+        /// <param name="valuechangedhandler">Handler for the ValueChanged event</param>
+        /// <returns></returns>
         public static NumericStepper AddNumericStepper(DynamicLayout container, string text, double value,
             double minvalue, double maxvalue, int decimalplaces, Action<NumericStepper, EventArgs> valuechangedhandler = null)
         {
