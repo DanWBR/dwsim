@@ -13,8 +13,18 @@ namespace DWSIM.FileStorage
     public class FileDatabaseProvider : IFileDatabaseProvider
     {
 
-        private string tmpdb = "";
+        private MemoryStream DBMem;
         private LiteDatabase DB;
+
+        private static MemoryStream ReadStream(string path)
+        {
+            using (var temp = new MemoryStream(File.ReadAllBytes(path)))
+            {
+                var ms = new MemoryStream();
+                temp.CopyTo(ms);
+                return ms;
+            }
+        }
 
         private bool IsDBLoaded = false;
 
@@ -41,7 +51,7 @@ namespace DWSIM.FileStorage
         public void ExportDatabase(string filepath)
         {
             DB.Checkpoint();
-            File.Copy(tmpdb, filepath, true);
+            File.WriteAllBytes(filepath, DBMem.ToArray());
         }
 
         /// <summary>
@@ -172,9 +182,8 @@ namespace DWSIM.FileStorage
         public void LoadDatabase(string dbpath)
         {
             ReleaseDatabase();
-            tmpdb = Path.GetTempFileName();
-            File.Copy(dbpath, tmpdb, true);
-            DB = new LiteDatabase(tmpdb);
+            DBMem = ReadStream(dbpath);
+            DB = new LiteDatabase(DBMem);
             IsDBLoaded = true;
         }
 
@@ -193,11 +202,8 @@ namespace DWSIM.FileStorage
         /// </summary>
         public void ReleaseDatabase()
         {
-            if (DB != null)
-            {
-                DB.Dispose();
-                if (File.Exists(tmpdb)) File.Delete(tmpdb);
-            }
+            if (DB != null) DB?.Dispose();
+            if (DBMem != null) DBMem?.Dispose();
             IsDBLoaded = false;
         }
 
@@ -226,8 +232,8 @@ namespace DWSIM.FileStorage
         public void CreateDatabase()
         {
             ReleaseDatabase();
-            tmpdb = Path.GetTempFileName();
-            DB = new LiteDatabase(tmpdb);
+            DBMem = new MemoryStream();
+            DB = new LiteDatabase(DBMem);
             IsDBLoaded = true;
         }
 
@@ -237,7 +243,7 @@ namespace DWSIM.FileStorage
         /// <returns>DB size in KB.</returns>
         public int GetSizeinKB()
         {
-            return (int)new FileInfo(tmpdb).Length / 1024;
+            return (int)DBMem.Length / 1024;
         }
     }
 }

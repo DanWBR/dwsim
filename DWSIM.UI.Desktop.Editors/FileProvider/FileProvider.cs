@@ -85,9 +85,12 @@ namespace DWSIM.UI.Desktop.Editors
 
             splitpanel.Panel1 = tl2;
 
-            Viewer = new WebView();
+            if (!Application.Instance.Platform.IsGtk)
+            {
+                Viewer = new WebView();
+                splitpanel.Panel2 = Viewer;
+            }
 
-            splitpanel.Panel2 = Viewer;
             splitpanel.FixedPanel = SplitterFixedPanel.Panel1;
             splitpanel.Panel1.Width = 300;
 
@@ -107,7 +110,7 @@ namespace DWSIM.UI.Desktop.Editors
                             {
                                 string TempFilePath = Path.Combine(TempDir, ListBox1.SelectedValue.ToString());
                                 provider.ExportFile(ListBox1.SelectedValue.ToString(), TempFilePath);
-                                Viewer.Url = new Uri(TempFilePath);
+                                if (Viewer != null) Viewer.Url = new Uri(TempFilePath);
                             }
                             catch (Exception ex)
                             {
