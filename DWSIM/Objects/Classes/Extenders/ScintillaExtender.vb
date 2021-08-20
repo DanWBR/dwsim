@@ -215,9 +215,12 @@ Module scintillaExtender
         Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
         Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations,")).FirstOrDefault
         Dim fsolverassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.FlowsheetSolver,")).FirstOrDefault
-        Dim extensionsassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.ExtensionMethods.Eto,")).FirstOrDefault
         Dim etoassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.StartsWith("Eto,")).FirstOrDefault
         Dim dbassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.StartsWith("DWSIM.FileStorage,")).FirstOrDefault
+        Dim extensionsassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.ExtensionMethods.Eto,")).FirstOrDefault
+        If extensionsassembly Is Nothing Then
+            Assembly.LoadFile(IO.Path.Combine(IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "DWSIM.ExtensionMethods.Eto.dll"))
+        End If
 
         Dim props = calculatorassembly.GetType("DWSIM.Thermodynamics.Streams.MaterialStream").GetProperties()
         For Each p In props
@@ -328,6 +331,9 @@ Module scintillaExtender
         Dim fsolverassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.FlowsheetSolver,")).FirstOrDefault
         Dim extensionsassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.ExtensionMethods.Eto,")).FirstOrDefault
         Dim dbassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.StartsWith("DWSIM.FileStorage,")).FirstOrDefault
+        If extensionsassembly Is Nothing Then
+            Assembly.LoadFile(IO.Path.Combine(IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "DWSIM.ExtensionMethods.Eto.dll"))
+        End If
 
         If text.Length >= 1 Then
             Dim lastkeyword As String = ""
@@ -450,6 +456,9 @@ Module scintillaExtender
         Dim fsolverassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.FlowsheetSolver,")).FirstOrDefault
         Dim extensionsassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.ExtensionMethods.Eto,")).FirstOrDefault
         Dim dbassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.StartsWith("DWSIM.FileStorage,")).FirstOrDefault
+        If extensionsassembly Is Nothing Then
+            Assembly.LoadFile(IO.Path.Combine(IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "DWSIM.ExtensionMethods.Eto.dll"))
+        End If
 
         If readerD Is Nothing Then
             Try
