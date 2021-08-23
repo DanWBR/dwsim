@@ -32,6 +32,7 @@ Gokhan Candan
 Gerry Agnew
 Guenther Holzer
 H-Tec Systems GmbH
+Hardy Kliemke
 Harry L Levinson
 Henar Portero
 Henk Fikkert
@@ -57,6 +58,7 @@ Leonard Seed
 Les Waymont
 Lewis Estall
 Louis Wibberley
+Luca Finardi
 Luiza Martins
 Marcelo Miranda
 Marcos Silva

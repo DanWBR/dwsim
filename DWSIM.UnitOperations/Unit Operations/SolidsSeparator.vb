@@ -167,6 +167,9 @@ Namespace UnitOperations
             outstr2.Phases(0).Properties.temperature = instr.Phases(0).Properties.temperature.GetValueOrDefault
             outstr2.Phases(0).Properties.pressure = instr.Phases(0).Properties.pressure.GetValueOrDefault
 
+            outstr1.OverrideSingleCompoundFlashBehavior = True
+            outstr2.OverrideSingleCompoundFlashBehavior = True
+
             IObj?.Close()
 
         End Sub
