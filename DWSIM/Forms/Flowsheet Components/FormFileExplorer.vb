@@ -55,13 +55,28 @@ Public Class FormFileExplorer
         If Loaded Then
             If ListView1.SelectedItems.Count <= 0 Then Exit Sub
             Dim provider = Flowsheet.FileDatabaseProvider
-            If provider.CheckIfExists(ListView1.SelectedItems(0).Text) Then
-                Dim TempFilePath As String = Path.Combine(TempDir, ListView1.SelectedItems(0).Text)
-                provider.ExportFile(ListView1.SelectedItems(0).Text, TempFilePath)
-                Viewer.Source = New Uri(TempFilePath)
-            End If
-
+            DisplayFileInViewer(ListView1.SelectedItems(0).Text)
         End If
+
+    End Sub
+
+    Public Sub DisplayFileInViewer(filename As String)
+
+        Dim provider = Flowsheet.FileDatabaseProvider
+        If provider.CheckIfExists(filename) Then
+            Dim TempFilePath As String = Path.Combine(TempDir, filename)
+            provider.ExportFile(filename, TempFilePath)
+            Viewer.Source = New Uri(TempFilePath)
+        End If
+        Me.Activate()
+
+    End Sub
+
+
+    Public Sub SetViewerURL(url As String)
+
+        Viewer.Source = New Uri(url)
+        Me.Activate()
 
     End Sub
 

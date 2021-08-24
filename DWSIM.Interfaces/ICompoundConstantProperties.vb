@@ -1270,4 +1270,6 @@
     ''' <returns></returns>
     Sub ExportToXLSX(filepath As String)
 
+    Function GetLiquidSurfaceTension(T As Double, ByRef Optional message As String = "") As Double
+
 End Interface

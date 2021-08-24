@@ -2058,6 +2058,27 @@ Namespace BaseClasses
 
         End Function
 
+        Public Function GetLiquidSurfaceTension(T As Double, Optional ByRef message As String = "") As Double Implements ICompoundConstantProperties.GetLiquidSurfaceTension
+
+            Dim val As Double
+
+            If SurfaceTensionEquation <> "" And SurfaceTensionEquation <> "0" And Not IsIon And Not IsSalt Then
+                message = "Calculated using Experimental/Regressed data."
+                If Integer.TryParse(SurfaceTensionEquation, New Integer) Then
+                    val = PropertyPackages.PropertyPackage.CalcCSTDepProp(SurfaceTensionEquation, Surface_Tension_Const_A, Surface_Tension_Const_B, Surface_Tension_Const_C, Surface_Tension_Const_D, Surface_Tension_Const_E, T, Critical_Temperature)
+                Else
+                    val = PropertyPackages.PropertyPackage.ParseEquation(SurfaceTensionEquation, Surface_Tension_Const_A, Surface_Tension_Const_B, Surface_Tension_Const_C, Surface_Tension_Const_D, Surface_Tension_Const_E, T)
+                End If
+                If OriginalDB <> "CoolProp" And OriginalDB <> "User" And OriginalDB <> "ChEDL Thermo" Then val = Molar_Weight * val
+            Else
+                message = "Estimated using Rackett correlation."
+                val = PropertyPackages.Auxiliary.PROPS.sigma_bb(T, Normal_Boiling_Point, Critical_Temperature, Critical_Pressure)
+            End If
+
+            Return val 'N/m
+
+        End Function
+
         Public Function GetSolidDensity(T As Double, Optional ByRef message As String = "") As Double Implements ICompoundConstantProperties.GetSolidDensity
 
             Dim val As Double
