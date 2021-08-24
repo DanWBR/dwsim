@@ -2069,7 +2069,6 @@ Namespace BaseClasses
                 Else
                     val = PropertyPackages.PropertyPackage.ParseEquation(SurfaceTensionEquation, Surface_Tension_Const_A, Surface_Tension_Const_B, Surface_Tension_Const_C, Surface_Tension_Const_D, Surface_Tension_Const_E, T)
                 End If
-                If OriginalDB <> "CoolProp" And OriginalDB <> "User" And OriginalDB <> "ChEDL Thermo" Then val = Molar_Weight * val
             Else
                 message = "Estimated using Rackett correlation."
                 val = PropertyPackages.Auxiliary.PROPS.sigma_bb(T, Normal_Boiling_Point, Critical_Temperature, Critical_Pressure)

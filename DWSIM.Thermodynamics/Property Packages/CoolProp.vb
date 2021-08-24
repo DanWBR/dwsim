@@ -1058,7 +1058,11 @@ Namespace PropertyPackages
                             If T > Tmin And T < Tmax And P > Pmin And P < Pmax And T <= Tc Then
                                 If T < Tc Then Tb = CoolProp.PropsSI("T", "P", P, "Q", 1, GetCoolPropName(sub1)) Else Tb = Tc
                                 If T < Tb And Abs(T - Tb) > 0.01 And T > Tmin Then
-                                    vk(i) = CoolProp.PropsSI("C", "T", T, "P", P, GetCoolPropName(sub1)) / 1000
+                                    Try
+                                        vk(i) = CoolProp.PropsSI("C", "T", T, "P", P, GetCoolPropName(sub1)) / 1000
+                                    Catch ex As Exception
+                                        vk(i) = CoolProp.PropsSI("C", "T", T, "Q", 0, GetCoolPropName(sub1)) / 1000
+                                    End Try
                                 Else
                                     WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Liquid Cp, compound " &
                                                            subst.ConstantProperties.Name & ". Extrapolating curve to obtain a value...")
@@ -1097,9 +1101,13 @@ Namespace PropertyPackages
                             Pmin = CoolProp.Props1SI(GetCoolPropName(sub1), "PMIN")
                             Pmax = CoolProp.Props1SI(GetCoolPropName(sub1), "PMAX")
                             If T > Tmin And T < Tmax And P > Pmin And P < Pmax Then
-                                If T < Tc Then Tb = CoolProp.PropsSI("T", "P", P, "Q", 1, GetCoolPropName(sub1)) Else Tb = Tc
+                                Tb = subst.ConstantProperties.Normal_Boiling_Point
                                 If T > Tb And Abs(T - Tb) > 0.01 Then
-                                    vk(i) = CoolProp.PropsSI("C", "T", T, "P", P, GetCoolPropName(sub1)) / 1000
+                                    Try
+                                        vk(i) = CoolProp.PropsSI("C", "T", T, "P", P, GetCoolPropName(sub1)) / 1000
+                                    Catch ex As Exception
+                                        vk(i) = CoolProp.PropsSI("C", "T", T, "Q", 1, GetCoolPropName(sub1)) / 1000
+                                    End Try
                                 Else
                                     WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Vapor Cp, compound " &
                                                         subst.ConstantProperties.Name & ". Extrapolating curve to obtain a value...")
@@ -1176,7 +1184,11 @@ Namespace PropertyPackages
                             If T > Tmin And T < Tmax And P > Pmin And P < Pmax And T <= Tc Then
                                 Tb = Me.AUX_TSATi(P, i)
                                 If T < Tb And Abs(T - Tb) > 0.01 And T > Tmin Then
-                                    vk(i) = CoolProp.PropsSI("O", "T", T, "P", P, GetCoolPropName(sub1)) / 1000
+                                    Try
+                                        vk(i) = CoolProp.PropsSI("O", "T", T, "P", P, GetCoolPropName(sub1)) / 1000
+                                    Catch ex As Exception
+                                        vk(i) = CoolProp.PropsSI("O", "T", T, "Q", 0, GetCoolPropName(sub1)) / 1000
+                                    End Try
                                 Else
                                     WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Liquid Cv, compound " &
                                                          subst.ConstantProperties.Name & ". Extrapolating curve to obtain a value...")
@@ -1217,7 +1229,11 @@ Namespace PropertyPackages
                             If T > Tmin And T < Tmax And P > Pmin And P < Pmax Then
                                 Tb = Me.AUX_TSATi(P, i)
                                 If T > Tb And Abs(T - Tb) > 0.01 Then
-                                    vk(i) = CoolProp.PropsSI("O", "T", T, "P", P, GetCoolPropName(sub1)) / 1000
+                                    Try
+                                        vk(i) = CoolProp.PropsSI("O", "T", T, "P", P, GetCoolPropName(sub1)) / 1000
+                                    Catch ex As Exception
+                                        vk(i) = CoolProp.PropsSI("O", "T", T, "Q", 1, GetCoolPropName(sub1)) / 1000
+                                    End Try
                                 Else
                                     WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Vapor Cv, compound " &
                                                          subst.ConstantProperties.Name & ". Extrapolating curve to obtain a value...")
