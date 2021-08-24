@@ -62,8 +62,8 @@ namespace DWSIM.FileStorage
         public void ExportFile(string filename, string exportpath)
         {
             var file = DB.FileStorage.FindById(Path.GetFileName(filename));
-            if (file != null)
-            {
+            if (file != null && !File.Exists(exportpath))
+            {                
                 file.SaveAs(exportpath);
             }
             else

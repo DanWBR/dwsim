@@ -25,16 +25,16 @@ Partial Class FormFileExplorer
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.ListView1 = New System.Windows.Forms.ListView()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.lblSize = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
+        Me.btnImport = New System.Windows.Forms.ToolStripButton()
+        Me.btnExport = New System.Windows.Forms.ToolStripButton()
+        Me.btnDelete = New System.Windows.Forms.ToolStripButton()
         Me.Viewer = New Microsoft.Web.WebView2.WinForms.WebView2()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.sfd1 = New System.Windows.Forms.SaveFileDialog()
         Me.ofd1 = New System.Windows.Forms.OpenFileDialog()
-        Me.lblSize = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.btnImport = New System.Windows.Forms.ToolStripButton()
-        Me.btnExport = New System.Windows.Forms.ToolStripButton()
-        Me.btnDelete = New System.Windows.Forms.ToolStripButton()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -82,6 +82,13 @@ Partial Class FormFileExplorer
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblSize})
         Me.StatusStrip1.Name = "StatusStrip1"
         '
+        'lblSize
+        '
+        resources.ApplyResources(Me.lblSize, "lblSize")
+        Me.lblSize.Image = Global.DWSIM.My.Resources.Resources.database_save1
+        Me.lblSize.Name = "lblSize"
+        Me.lblSize.Spring = True
+        '
         'ToolStrip1
         '
         resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
@@ -92,6 +99,27 @@ Partial Class FormFileExplorer
         '
         resources.ApplyResources(Me.ToolStripLabel1, "ToolStripLabel1")
         Me.ToolStripLabel1.Name = "ToolStripLabel1"
+        '
+        'btnImport
+        '
+        resources.ApplyResources(Me.btnImport, "btnImport")
+        Me.btnImport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.btnImport.Image = Global.DWSIM.My.Resources.Resources.icons8_import1
+        Me.btnImport.Name = "btnImport"
+        '
+        'btnExport
+        '
+        resources.ApplyResources(Me.btnExport, "btnExport")
+        Me.btnExport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.btnExport.Image = Global.DWSIM.My.Resources.Resources.icons8_export1
+        Me.btnExport.Name = "btnExport"
+        '
+        'btnDelete
+        '
+        resources.ApplyResources(Me.btnDelete, "btnDelete")
+        Me.btnDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.btnDelete.Image = Global.DWSIM.My.Resources.Resources.icons8_delete1
+        Me.btnDelete.Name = "btnDelete"
         '
         'Viewer
         '
@@ -118,34 +146,6 @@ Partial Class FormFileExplorer
         resources.ApplyResources(Me.ofd1, "ofd1")
         Me.ofd1.Multiselect = True
         Me.ofd1.SupportMultiDottedExtensions = True
-        '
-        'lblSize
-        '
-        resources.ApplyResources(Me.lblSize, "lblSize")
-        Me.lblSize.Image = Global.DWSIM.My.Resources.Resources.database_save1
-        Me.lblSize.Name = "lblSize"
-        Me.lblSize.Spring = True
-        '
-        'btnImport
-        '
-        resources.ApplyResources(Me.btnImport, "btnImport")
-        Me.btnImport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.btnImport.Image = Global.DWSIM.My.Resources.Resources.icons8_import1
-        Me.btnImport.Name = "btnImport"
-        '
-        'btnExport
-        '
-        resources.ApplyResources(Me.btnExport, "btnExport")
-        Me.btnExport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.btnExport.Image = Global.DWSIM.My.Resources.Resources.icons8_export1
-        Me.btnExport.Name = "btnExport"
-        '
-        'btnDelete
-        '
-        resources.ApplyResources(Me.btnDelete, "btnDelete")
-        Me.btnDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.btnDelete.Image = Global.DWSIM.My.Resources.Resources.icons8_delete1
-        Me.btnDelete.Name = "btnDelete"
         '
         'FormFileExplorer
         '
