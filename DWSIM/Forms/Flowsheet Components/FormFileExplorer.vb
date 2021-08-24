@@ -41,15 +41,6 @@ Public Class FormFileExplorer
 
     End Sub
 
-    Private Sub FormFileExplorer_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-
-        Try
-            Directory.Delete(TempDir, True)
-        Catch ex As Exception
-        End Try
-
-    End Sub
-
     Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListView1.SelectedIndexChanged
 
         If Loaded Then
@@ -62,21 +53,25 @@ Public Class FormFileExplorer
 
     Public Sub DisplayFileInViewer(filename As String)
 
-        Dim provider = Flowsheet.FileDatabaseProvider
-        If provider.CheckIfExists(filename) Then
-            Dim TempFilePath As String = Path.Combine(TempDir, filename)
-            provider.ExportFile(filename, TempFilePath)
-            Viewer.Source = New Uri(TempFilePath)
-        End If
-        Me.Activate()
+        UIThread(Sub()
+                     Dim provider = Flowsheet.FileDatabaseProvider
+                     If provider.CheckIfExists(filename) Then
+                         Dim TempFilePath As String = Path.Combine(TempDir, filename)
+                         provider.ExportFile(filename, TempFilePath)
+                         Viewer.Source = New Uri(TempFilePath)
+                     End If
+                     Me.Activate()
+                 End Sub)
+
 
     End Sub
 
-
     Public Sub SetViewerURL(url As String)
 
-        Viewer.Source = New Uri(url)
-        Me.Activate()
+        UIThread(Sub()
+                     Viewer.Source = New Uri(url)
+                     Me.Activate()
+                 End Sub)
 
     End Sub
 
@@ -133,6 +128,15 @@ Public Class FormFileExplorer
 
         ListFiles()
         UpdateSize()
+
+    End Sub
+
+    Private Sub FormFileExplorer_Disposed(sender As Object, e As EventArgs) Handles Me.Disposed
+
+        Try
+            Directory.Delete(TempDir, True)
+        Catch ex As Exception
+        End Try
 
     End Sub
 

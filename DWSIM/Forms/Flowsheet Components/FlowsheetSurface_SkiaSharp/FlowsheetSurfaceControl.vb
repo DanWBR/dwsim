@@ -137,19 +137,21 @@ Public Class FlowsheetSurfaceControl
             End Select
 
             If My.Settings.DoubleClickToEdit Then
-                If Not My.Settings.EnableMultipleObjectEditors Then
-                    For Each sobj In FlowsheetObject.SimulationObjects.Values
-                        sobj.CloseEditForm()
-                        If FlowsheetObject.DynamicMode Then sobj.CloseDynamicsEditForm()
-                    Next
-                End If
-                FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayEditForm()
-                If FlowsheetObject.DynamicMode And FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).HasPropertiesForDynamicMode Then
-                    FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayDynamicsEditForm()
-                End If
-                EditorTooltips.Update(FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name), FlowsheetObject)
-                If FlowsheetObject.Options.DisplayUserDefinedPropertiesEditor Then
-                    FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayExtraPropertiesEditForm()
+                If FlowsheetObject.SimulationObjects.ContainsKey(FlowsheetSurface.SelectedObject.Name) Then
+                    If Not My.Settings.EnableMultipleObjectEditors Then
+                        For Each sobj In FlowsheetObject.SimulationObjects.Values
+                            sobj.CloseEditForm()
+                            If FlowsheetObject.DynamicMode Then sobj.CloseDynamicsEditForm()
+                        Next
+                    End If
+                    FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayEditForm()
+                    If FlowsheetObject.DynamicMode And FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).HasPropertiesForDynamicMode Then
+                        FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayDynamicsEditForm()
+                    End If
+                    EditorTooltips.Update(FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name), FlowsheetObject)
+                    If FlowsheetObject.Options.DisplayUserDefinedPropertiesEditor Then
+                        FlowsheetObject.SimulationObjects(FlowsheetSurface.SelectedObject.Name).DisplayExtraPropertiesEditForm()
+                    End If
                 End If
             End If
 
