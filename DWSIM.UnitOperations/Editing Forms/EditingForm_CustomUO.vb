@@ -550,13 +550,7 @@ Public Class EditingForm_CustomUO
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        If Thermodynamics.Calculator.IsRunningOnMono Then
-            Dim f As New EditingForm_CustomUO_ScriptEditor_Mono With {.ScriptUO = SimObject}
-            SimObject.FlowSheet.DisplayForm(f)
-        Else
-            Dim f As New EditingForm_CustomUO_ScriptEditor With {.ScriptUO = SimObject}
-            SimObject.FlowSheet.DisplayForm(f)
-        End If
+        SimObject.DisplayScriptEditorForm()
     End Sub
 
     Private Sub btnAddInputStringVar_Click(sender As Object, e As EventArgs) Handles btnAddInputStringVar.Click

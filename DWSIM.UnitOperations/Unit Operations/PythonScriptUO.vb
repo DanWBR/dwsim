@@ -54,6 +54,9 @@ Namespace UnitOperations
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_CustomUO
 
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public fs As EditingForm_CustomUO_ScriptEditor
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public fsmono As EditingForm_CustomUO_ScriptEditor_Mono
+
         <NonSerialized> <Xml.Serialization.XmlIgnore> Private engine As ScriptEngine
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Private scope As ScriptScope
@@ -505,6 +508,36 @@ Namespace UnitOperations
                     Me.FlowSheet.DisplayForm(f)
                 Else
                     f.Activate()
+                End If
+            End If
+
+        End Sub
+
+        Public Sub DisplayScriptEditorForm()
+
+            If Thermodynamics.Calculator.IsRunningOnMono Then
+                If fsmono Is Nothing Then
+                    fsmono = New EditingForm_CustomUO_ScriptEditor_Mono With {.ScriptUO = Me}
+                    Me.FlowSheet.DisplayForm(fsmono)
+                Else
+                    If fsmono.IsDisposed Then
+                        fsmono = New EditingForm_CustomUO_ScriptEditor_Mono With {.ScriptUO = Me}
+                        Me.FlowSheet.DisplayForm(fsmono)
+                    Else
+                        fsmono.Activate()
+                    End If
+                End If
+            Else
+                If fs Is Nothing Then
+                    fs = New EditingForm_CustomUO_ScriptEditor With {.ScriptUO = Me}
+                    Me.FlowSheet.DisplayForm(fs)
+                Else
+                    If fs.IsDisposed Then
+                        fs = New EditingForm_CustomUO_ScriptEditor With {.ScriptUO = Me}
+                        Me.FlowSheet.DisplayForm(fs)
+                    Else
+                        fs.Activate()
+                    End If
                 End If
             End If
 
