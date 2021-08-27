@@ -2816,5 +2816,24 @@ Label_00CC:
     Public Sub SetTranslateTextExternalFunction(act As Func(Of String, String)) Implements IFlowsheet.SetTranslateTextExternalFunction
         _translatefunction = act
     End Sub
+
+    Public Function GetScriptText(name As String) As String Implements IFlowsheet.GetScriptText
+
+        Return Scripts.Values.Where(Function(x) x.Title = name).FirstOrDefault().ScriptText
+
+    End Function
+
+    Public Function GetSimulationFilePath() As String Implements IFlowsheet.GetSimulationFilePath
+
+        Return FlowsheetOptions.FilePath
+
+    End Function
+
+    Public Function GetSimulationFileDirectory() As String Implements IFlowsheet.GetSimulationFileDirectory
+
+        Return Path.GetDirectoryName(FlowsheetOptions.FilePath)
+
+    End Function
+
 End Class
 

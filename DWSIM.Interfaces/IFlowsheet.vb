@@ -188,6 +188,12 @@
 
     Sub SetTranslateTextExternalFunction(act As Func(Of String, String))
 
+    Function GetScriptText(name As String) As String
+
+    Function GetSimulationFilePath() As String
+
+    Function GetSimulationFileDirectory() As String
+
 End Interface
 
 ''' <summary>

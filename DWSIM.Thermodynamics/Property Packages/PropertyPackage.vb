@@ -6064,14 +6064,30 @@ Final3:
 
         Public Function AUX_TSATi(ByVal PVAP As Double, ByVal comp As ICompoundConstantProperties, ByVal Tguess As Double) As Double
 
-            Dim pvapt As Double
-            Return MathNet.Numerics.RootFinding.Brent.FindRoot(Function(T)
-                                                                   pvapt = AUX_PVAPi(comp, T)
-                                                                   If Double.IsNaN(pvapt) Or Double.IsNaN(PVAP) Then
-                                                                       Throw New Exception(String.Format("Error calculation vapor pressure for {0} at {1} K.", comp.Name, T))
-                                                                   End If
-                                                                   Return pvapt - PVAP
-                                                               End Function, 1.0, 2000.0)
+            Dim pvapt, result As Double, err0 As Integer
+            Try
+                result = MathNet.Numerics.RootFinding.Brent.FindRoot(Function(T)
+                                                                         pvapt = AUX_PVAPi(comp, T)
+                                                                         If Double.IsNaN(pvapt) Or Double.IsNaN(PVAP) Then
+                                                                             Throw New Exception(String.Format("Error calculation vapor pressure for {0} at {1} K.", comp.Name, T))
+                                                                         End If
+                                                                         Return pvapt - PVAP
+                                                                     End Function, 1.0, 2000.0, 1, 1000)
+                Return result
+            Catch ex As Exception
+                err0 = 1
+            End Try
+            If err0 = 1 Then
+                Dim brent As New MathEx.BrentOpt.Brent
+                result = brent.BrentOpt2(1.0, 2000.0, 100, 1, 1000, Function(T)
+                                                                        pvapt = AUX_PVAPi(comp, T)
+                                                                        If Double.IsNaN(pvapt) Or Double.IsNaN(PVAP) Then
+                                                                            Throw New Exception(String.Format("Error calculation vapor pressure for {0} at {1} K.", comp.Name, T))
+                                                                        End If
+                                                                        Return pvapt - PVAP
+                                                                    End Function)
+                Return result
+            End If
 
         End Function
 
