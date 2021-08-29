@@ -182,7 +182,7 @@ Public Class EditingForm_ReactorCSTR
 
             gridConversions.Rows.Clear()
             For Each dbl As KeyValuePair(Of String, Double) In .ComponentConversions
-                If dbl.Value >= 0.0# Then
+                If dbl.Value >= 0.0# And dbl.Value <= 1.0 Then
                     gridConversions.Rows.Add(New Object() {dbl.Key, Format(dbl.Value * 100, nf)})
                 End If
             Next
