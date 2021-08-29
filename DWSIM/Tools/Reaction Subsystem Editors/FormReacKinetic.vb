@@ -437,14 +437,20 @@ Public Class FormReacKinetic
         tbRevE.Enabled = rdRevArr.Checked
         tbRevUE.Enabled = Not rdRevArr.Checked
 
+        Column7.Visible = rdRevArr.Checked
+        Column7.Visible = rdRevArr.Checked
+
     End Sub
 
-    Private Sub rbBasicKin_CheckedChanged(sender As Object, e As EventArgs) Handles rbBasicKin.CheckedChanged
+    Private Sub rbBasicKin_CheckedChanged(sender As Object, e As EventArgs) Handles rbBasicKin.CheckedChanged, rbAdvKin.CheckedChanged
 
         gbKinetics.Enabled = rbBasicKin.Checked
         Label2.Enabled = rbAdvKin.Checked
         cbScripts.Enabled = rbAdvKin.Checked
         btnScriptHelp.Enabled = rbAdvKin.Checked
+
+        Column7.Visible = rbBasicKin.Checked
+        Column8.Visible = rbBasicKin.Checked
 
     End Sub
 
