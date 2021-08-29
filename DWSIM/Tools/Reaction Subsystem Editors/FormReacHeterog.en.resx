@@ -187,17 +187,20 @@
   <data name="tbTmax.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 20</value>
   </data>
+  <data name="KryptonLabel11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 211</value>
+  </data>
   <data name="KryptonLabel11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 13</value>
+    <value>70, 13</value>
   </data>
   <data name="KryptonLabel11.Text" xml:space="preserve">
-    <value>Amount Unit</value>
+    <value>Amount Units</value>
   </data>
   <data name="cbConcUnit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>83, 207</value>
+    <value>91, 207</value>
   </data>
   <data name="cbConcUnit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 21</value>
+    <value>210, 21</value>
   </data>
   <data name="tbTmin.Location" type="System.Drawing.Point, System.Drawing">
     <value>452, 19</value>
@@ -205,11 +208,14 @@
   <data name="tbTmin.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 20</value>
   </data>
+  <data name="KryptonLabel12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>316, 211</value>
+  </data>
   <data name="KryptonLabel12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 13</value>
+    <value>57, 13</value>
   </data>
   <data name="KryptonLabel12.Text" xml:space="preserve">
-    <value>Velocity Unit</value>
+    <value>Rate Units</value>
   </data>
   <data name="KryptonLabel8.Location" type="System.Drawing.Point, System.Drawing">
     <value>509, 23</value>
