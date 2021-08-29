@@ -48,6 +48,8 @@ Public Class MaterialStreamPanel
 
         UpdateTable()
 
+        If DataGridView1.RowCount > 0 Then ToolStripButton2.Enabled = True
+
     End Sub
 
 

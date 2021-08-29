@@ -121,8 +121,8 @@ Partial Class MaterialStreamPanel
         '
         'ToolStripButton2
         '
-        Me.ToolStripButton2.Image = Global.DWSIM.My.Resources.Resources.page_copy
         resources.ApplyResources(Me.ToolStripButton2, "ToolStripButton2")
+        Me.ToolStripButton2.Image = Global.DWSIM.My.Resources.Resources.page_copy
         Me.ToolStripButton2.Name = "ToolStripButton2"
         '
         'DataGridView1
