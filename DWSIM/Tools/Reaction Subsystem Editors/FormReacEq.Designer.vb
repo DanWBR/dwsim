@@ -55,13 +55,6 @@ Partial Class FormReacEq
         Me.KryptonLabel2 = New System.Windows.Forms.Label()
         Me.tbStoich = New System.Windows.Forms.TextBox()
         Me.KryptonDataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column4 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.Column5 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.KryptonLabel1 = New System.Windows.Forms.Label()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.KryptonLabel10 = New System.Windows.Forms.Label()
@@ -69,6 +62,14 @@ Partial Class FormReacEq
         Me.tbName = New System.Windows.Forms.TextBox()
         Me.tbDesc = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column4 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.Column5 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CheckID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -285,11 +286,51 @@ Partial Class FormReacEq
         Me.KryptonDataGridView1.AllowUserToResizeRows = False
         Me.KryptonDataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.KryptonDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.KryptonDataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column2, Me.Column3, Me.Column7, Me.Column4, Me.Column5, Me.Column6, Me.Column1})
+        Me.KryptonDataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column2, Me.Column3, Me.Column7, Me.Column4, Me.Column5, Me.Column6, Me.Column1, Me.CheckID})
         Me.KryptonDataGridView1.MultiSelect = False
         Me.KryptonDataGridView1.Name = "KryptonDataGridView1"
         Me.KryptonDataGridView1.RowHeadersVisible = False
         Me.KryptonDataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
+        '
+        'KryptonLabel1
+        '
+        resources.ApplyResources(Me.KryptonLabel1, "KryptonLabel1")
+        Me.KryptonLabel1.Name = "KryptonLabel1"
+        '
+        'GroupBox4
+        '
+        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
+        Me.GroupBox4.Controls.Add(Me.KryptonLabel10)
+        Me.GroupBox4.Controls.Add(Me.KryptonLabel11)
+        Me.GroupBox4.Controls.Add(Me.tbName)
+        Me.GroupBox4.Controls.Add(Me.tbDesc)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.TabStop = False
+        '
+        'KryptonLabel10
+        '
+        resources.ApplyResources(Me.KryptonLabel10, "KryptonLabel10")
+        Me.KryptonLabel10.Name = "KryptonLabel10"
+        '
+        'KryptonLabel11
+        '
+        resources.ApplyResources(Me.KryptonLabel11, "KryptonLabel11")
+        Me.KryptonLabel11.Name = "KryptonLabel11"
+        '
+        'tbName
+        '
+        resources.ApplyResources(Me.tbName, "tbName")
+        Me.tbName.Name = "tbName"
+        '
+        'tbDesc
+        '
+        resources.ApplyResources(Me.tbDesc, "tbDesc")
+        Me.tbDesc.Name = "tbDesc"
+        '
+        'Label1
+        '
+        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.Name = "Label1"
         '
         'Column2
         '
@@ -336,45 +377,10 @@ Partial Class FormReacEq
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
         '
-        'KryptonLabel1
+        'CheckID
         '
-        resources.ApplyResources(Me.KryptonLabel1, "KryptonLabel1")
-        Me.KryptonLabel1.Name = "KryptonLabel1"
-        '
-        'GroupBox4
-        '
-        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
-        Me.GroupBox4.Controls.Add(Me.KryptonLabel10)
-        Me.GroupBox4.Controls.Add(Me.KryptonLabel11)
-        Me.GroupBox4.Controls.Add(Me.tbName)
-        Me.GroupBox4.Controls.Add(Me.tbDesc)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.TabStop = False
-        '
-        'KryptonLabel10
-        '
-        resources.ApplyResources(Me.KryptonLabel10, "KryptonLabel10")
-        Me.KryptonLabel10.Name = "KryptonLabel10"
-        '
-        'KryptonLabel11
-        '
-        resources.ApplyResources(Me.KryptonLabel11, "KryptonLabel11")
-        Me.KryptonLabel11.Name = "KryptonLabel11"
-        '
-        'tbName
-        '
-        resources.ApplyResources(Me.tbName, "tbName")
-        Me.tbName.Name = "tbName"
-        '
-        'tbDesc
-        '
-        resources.ApplyResources(Me.tbDesc, "tbDesc")
-        Me.tbDesc.Name = "tbDesc"
-        '
-        'Label1
-        '
-        resources.ApplyResources(Me.Label1, "Label1")
-        Me.Label1.Name = "Label1"
+        resources.ApplyResources(Me.CheckID, "CheckID")
+        Me.CheckID.Name = "CheckID"
         '
         'FormReacEq
         '
@@ -440,6 +446,8 @@ Partial Class FormReacEq
     Public WithEvents KryptonLabel12 As System.Windows.Forms.Label
     Public WithEvents tbDelG As System.Windows.Forms.TextBox
     Public WithEvents Label1 As System.Windows.Forms.Label
+    Public WithEvents Label2 As Label
+    Public WithEvents cbUnits As ComboBox
     Friend WithEvents Column2 As DataGridViewTextBoxColumn
     Friend WithEvents Column3 As DataGridViewTextBoxColumn
     Friend WithEvents Column7 As DataGridViewTextBoxColumn
@@ -447,6 +455,5 @@ Partial Class FormReacEq
     Friend WithEvents Column5 As DataGridViewCheckBoxColumn
     Friend WithEvents Column6 As DataGridViewTextBoxColumn
     Friend WithEvents Column1 As DataGridViewTextBoxColumn
-    Public WithEvents Label2 As Label
-    Public WithEvents cbUnits As ComboBox
+    Friend WithEvents CheckID As DataGridViewTextBoxColumn
 End Class

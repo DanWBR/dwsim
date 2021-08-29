@@ -120,6 +120,9 @@
   <data name="KryptonButton3.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Heterogeneous Kinetic Reaction Parameters</value>
+  </data>
   <data name="btnScriptHelp.Text" xml:space="preserve">
     <value>Help</value>
   </data>
@@ -157,6 +160,12 @@
   <data name="Label4.Text" xml:space="preserve">
     <value>Kinetics Specification</value>
   </data>
+  <data name="gbExpression.Size" type="System.Drawing.Size, System.Drawing">
+    <value>615, 119</value>
+  </data>
+  <data name="gbExpression.Text" xml:space="preserve">
+    <value>Reaction Rate (Base Component) = Numerator / Denominator</value>
+  </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 77</value>
   </data>
@@ -174,12 +183,6 @@
   </data>
   <data name="KryptonLabel5.Text" xml:space="preserve">
     <value>Numerator</value>
-  </data>
-  <data name="gbExpression.Size" type="System.Drawing.Size, System.Drawing">
-    <value>615, 119</value>
-  </data>
-  <data name="gbExpression.Text" xml:space="preserve">
-    <value>Reaction Rate (Base Component) = Numerator / Denominator</value>
   </data>
   <data name="tbTmax.Location" type="System.Drawing.Point, System.Drawing">
     <value>564, 19</value>
@@ -283,9 +286,6 @@
   <data name="tbPhase.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 21</value>
   </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Heterogeneous Kinetic Reaction Parameters</value>
-  </data>
   <data name="KryptonLabel3.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 13</value>
   </data>
@@ -328,6 +328,10 @@
   <data name="Column6.ToolTipText" xml:space="preserve">
     <value>Stoichiometric Coefficient</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="CheckID.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="KryptonLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>70, 13</value>
   </data>
@@ -337,7 +341,9 @@
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Components and Stoichiometry</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="GroupBox4.Text" xml:space="preserve">
+    <value>Identification</value>
+  </data>
   <data name="KryptonLabel19.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -355,9 +361,6 @@
   </data>
   <data name="tbDesc.Size" type="System.Drawing.Size, System.Drawing">
     <value>553, 50</value>
-  </data>
-  <data name="GroupBox4.Text" xml:space="preserve">
-    <value>Identification</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>256, 13</value>

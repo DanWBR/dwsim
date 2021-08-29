@@ -42,7 +42,7 @@ Public Class FormReacConv
         'populate datagrid
         For Each subs As ConstantProperties In fc.Options.SelectedComponents.Values
             With Me.KryptonDataGridView1
-                .Rows.Add(New Object() {subs.Name, Format(subs.Molar_Weight, nf), Format(subs.IG_Enthalpy_of_Formation_25C, nf), False, False, 0, subs.Name})
+                .Rows.Add(New Object() {subs.Name, Format(subs.Molar_Weight, nf), Format(subs.IG_Enthalpy_of_Formation_25C, nf), False, False, 0, subs.Name, 0})
             End With
         Next
 
@@ -274,4 +274,37 @@ Public Class FormReacConv
 
     End Sub
 
+    Private Sub KryptonDataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles KryptonDataGridView1.CellContentClick
+        If e.ColumnIndex = 3 Or e.ColumnIndex = 4 Then
+            If e.ColumnIndex = 4 Then
+                Dim state As Boolean = Convert.ToBoolean((CType(KryptonDataGridView1.Rows(e.RowIndex).Cells(e.ColumnIndex), DataGridViewCheckBoxCell)).EditingCellFormattedValue)
+                Dim intDemarcationSetID As Integer = Convert.ToInt32((CType(KryptonDataGridView1.Rows(e.RowIndex).Cells(7), DataGridViewTextBoxCell)).EditedFormattedValue)
+                If state Then
+                    For Each dgvr As DataGridViewRow In KryptonDataGridView1.Rows
+                        If Convert.ToInt32(dgvr.Cells(4).Value) <> intDemarcationSetID Then
+                            DirectCast(dgvr.Cells(e.ColumnIndex), DataGridViewCheckBoxCell).Value = False
+                        End If
+                    Next
+                End If
+            End If
+            KryptonDataGridView1.CommitEdit(DataGridViewDataErrorContexts.Commit)
+        End If
+    End Sub
+
+    Private Sub KryptonDataGridView1_CellContentDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles KryptonDataGridView1.CellContentDoubleClick
+        If e.ColumnIndex = 3 Or e.ColumnIndex = 4 Then
+            If e.ColumnIndex = 4 Then
+                Dim state As Boolean = Convert.ToBoolean((CType(KryptonDataGridView1.Rows(e.RowIndex).Cells(e.ColumnIndex), DataGridViewCheckBoxCell)).EditingCellFormattedValue)
+                Dim intDemarcationSetID As Integer = Convert.ToInt32((CType(KryptonDataGridView1.Rows(e.RowIndex).Cells(7), DataGridViewTextBoxCell)).EditedFormattedValue)
+                If state Then
+                    For Each dgvr As DataGridViewRow In KryptonDataGridView1.Rows
+                        If Convert.ToInt32(dgvr.Cells(4).Value) <> intDemarcationSetID Then
+                            DirectCast(dgvr.Cells(e.ColumnIndex), DataGridViewCheckBoxCell).Value = False
+                        End If
+                    Next
+                End If
+            End If
+            KryptonDataGridView1.CommitEdit(DataGridViewDataErrorContexts.Commit)
+        End If
+    End Sub
 End Class

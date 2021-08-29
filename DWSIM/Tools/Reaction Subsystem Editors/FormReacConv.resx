@@ -166,6 +166,15 @@
   <data name="Column1.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <metadata name="CheckID.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="CheckID.HeaderText" xml:space="preserve">
+    <value>Column8</value>
+  </data>
+  <data name="CheckID.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="KryptonDataGridView1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -453,6 +462,78 @@
   <data name="&gt;&gt;KryptonLabel4.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="&gt;&gt;KryptonLabel7.Name" xml:space="preserve">
+    <value>KryptonLabel7</value>
+  </data>
+  <data name="&gt;&gt;KryptonLabel7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;KryptonLabel7.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
+  </data>
+  <data name="&gt;&gt;KryptonLabel7.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tbExp.Name" xml:space="preserve">
+    <value>tbExp</value>
+  </data>
+  <data name="&gt;&gt;tbExp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbExp.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
+  </data>
+  <data name="&gt;&gt;tbExp.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;KryptonLabel6.Name" xml:space="preserve">
+    <value>KryptonLabel6</value>
+  </data>
+  <data name="&gt;&gt;KryptonLabel6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;KryptonLabel6.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
+  </data>
+  <data name="&gt;&gt;KryptonLabel6.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;KryptonLabel5.Name" xml:space="preserve">
+    <value>KryptonLabel5</value>
+  </data>
+  <data name="&gt;&gt;KryptonLabel5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;KryptonLabel5.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
+  </data>
+  <data name="&gt;&gt;KryptonLabel5.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 319</value>
+  </data>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>591, 72</value>
+  </data>
+  <data name="GroupBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Parâmetros da Reação de Conversão</value>
+  </data>
+  <data name="&gt;&gt;GroupBox2.Name" xml:space="preserve">
+    <value>GroupBox2</value>
+  </data>
+  <data name="&gt;&gt;GroupBox2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;GroupBox2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;GroupBox2.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <data name="KryptonLabel7.Location" type="System.Drawing.Point, System.Drawing">
     <value>543, 46</value>
   </data>
@@ -549,30 +630,6 @@
   <data name="&gt;&gt;KryptonLabel5.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 319</value>
-  </data>
-  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>591, 72</value>
-  </data>
-  <data name="GroupBox2.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Parâmetros da Reação de Conversão</value>
-  </data>
-  <data name="&gt;&gt;GroupBox2.Name" xml:space="preserve">
-    <value>GroupBox2</value>
-  </data>
-  <data name="&gt;&gt;GroupBox2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;GroupBox2.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;GroupBox2.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
   <data name="KryptonButton3.Location" type="System.Drawing.Point, System.Drawing">
     <value>412, 397</value>
   </data>
@@ -620,6 +677,78 @@
   </data>
   <data name="&gt;&gt;KryptonButton4.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="&gt;&gt;KryptonLabel8.Name" xml:space="preserve">
+    <value>KryptonLabel8</value>
+  </data>
+  <data name="&gt;&gt;KryptonLabel8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;KryptonLabel8.Parent" xml:space="preserve">
+    <value>GroupBox3</value>
+  </data>
+  <data name="&gt;&gt;KryptonLabel8.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;KryptonLabel9.Name" xml:space="preserve">
+    <value>KryptonLabel9</value>
+  </data>
+  <data name="&gt;&gt;KryptonLabel9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;KryptonLabel9.Parent" xml:space="preserve">
+    <value>GroupBox3</value>
+  </data>
+  <data name="&gt;&gt;KryptonLabel9.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tbName.Name" xml:space="preserve">
+    <value>tbName</value>
+  </data>
+  <data name="&gt;&gt;tbName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbName.Parent" xml:space="preserve">
+    <value>GroupBox3</value>
+  </data>
+  <data name="&gt;&gt;tbName.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;tbDesc.Name" xml:space="preserve">
+    <value>tbDesc</value>
+  </data>
+  <data name="&gt;&gt;tbDesc.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbDesc.Parent" xml:space="preserve">
+    <value>GroupBox3</value>
+  </data>
+  <data name="&gt;&gt;tbDesc.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="GroupBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 2</value>
+  </data>
+  <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>591, 100</value>
+  </data>
+  <data name="GroupBox3.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="GroupBox3.Text" xml:space="preserve">
+    <value>Identificação</value>
+  </data>
+  <data name="&gt;&gt;GroupBox3.Name" xml:space="preserve">
+    <value>GroupBox3</value>
+  </data>
+  <data name="&gt;&gt;GroupBox3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;GroupBox3.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;GroupBox3.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="KryptonLabel8.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 44</value>
@@ -714,30 +843,6 @@
   <data name="&gt;&gt;tbDesc.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="GroupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 2</value>
-  </data>
-  <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>591, 100</value>
-  </data>
-  <data name="GroupBox3.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="GroupBox3.Text" xml:space="preserve">
-    <value>Identificação</value>
-  </data>
-  <data name="&gt;&gt;GroupBox3.Name" xml:space="preserve">
-    <value>GroupBox3</value>
-  </data>
-  <data name="&gt;&gt;GroupBox3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;GroupBox3.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;GroupBox3.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -826,6 +931,12 @@
     <value>Column1</value>
   </data>
   <data name="&gt;&gt;Column1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CheckID.Name" xml:space="preserve">
+    <value>CheckID</value>
+  </data>
+  <data name="&gt;&gt;CheckID.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
