@@ -1,5 +1,6 @@
 ﻿'    Solids Separator Calculation Routines 
 '    Copyright 2013 Daniel Wagner O. de Medeiros
+'    Copyright 2021 Gregor Reichert
 '
 '    This file is part of DWSIM.
 '
@@ -84,7 +85,9 @@ Namespace UnitOperations
 
             IObj?.SetCurrent()
 
-            IObj?.Paragraphs.Add("The solids separator is used to separate solids from a liquid phase in a mixed material stream.")
+            IObj?.Paragraphs.Add("The solids separator is used to separate solids from a liquid phase in a mixed material stream. 
+                                  <br><br>Liquid and vapor phases are sent into outlet 1 and solid phase into outlet 2. 
+                                  <br>The solid and liquid phases are split between both outlets according to specified efficiencies. The vapor phase is always sent to outlet 1 completely.")
 
             If Not Me.GraphicObject.InputConnectors(0).IsAttached Then
                 Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
@@ -103,11 +106,21 @@ Namespace UnitOperations
             Dim Wsin As Double = instr.Phases(7).Properties.massflow.GetValueOrDefault
             Dim Wlin As Double = instr.Phases(1).Properties.massflow.GetValueOrDefault
             Dim Wvin As Double = instr.Phases(2).Properties.massflow.GetValueOrDefault
+            Dim HVin As Double = instr.Phases(2).Properties.enthalpy.GetValueOrDefault
+            Dim HLin As Double = instr.Phases(1).Properties.enthalpy.GetValueOrDefault
+            Dim HSin As Double = instr.Phases(7).Properties.enthalpy.GetValueOrDefault
+
             Dim sse, lse As Double
             sse = Me.SeparationEfficiency / 100
             lse = Me.LiquidSeparationEfficiency / 100
             Dim Wsout As Double = sse * Wsin + (1 - lse) * Wlin
             Dim Wlvout As Double = (1 - sse) * Wsin + lse * Wlin + Wvin
+
+            IObj?.Paragraphs.Add("<hr><h3>Input Variables</h3>")
+            IObj?.Paragraphs.Add(String.Format("<b><i>Solid separation efficiency:</i></b> {0} <br><b><i>Liquid separation efficiency:</i></b> {1}", sse, lse))
+            IObj?.Paragraphs.Add(String.Format("<b><i>Solid mass flow:</i></b> {0} Kg/s <br><b><i>Solid phase enthalpy:</i></b> {1} KJ/Kg", Wsin, HSin))
+            IObj?.Paragraphs.Add(String.Format("<b><i>Liquid mass flow:</i></b> {0} Kg/s <br><b><i>Liquid phase enthalpy:</i></b> {1} KJ/Kg", Wlin, HLin))
+            IObj?.Paragraphs.Add(String.Format("<b><i>Vapor mass flow:</i></b> {0} Kg/s <br><b><i>Vapor phase enthalpy:</i></b> {1} KJ/Kg", Wvin, HVin))
 
             Dim mw As Double
 
@@ -167,8 +180,15 @@ Namespace UnitOperations
             outstr2.Phases(0).Properties.temperature = instr.Phases(0).Properties.temperature.GetValueOrDefault
             outstr2.Phases(0).Properties.pressure = instr.Phases(0).Properties.pressure.GetValueOrDefault
 
-            outstr1.OverrideSingleCompoundFlashBehavior = True
-            outstr2.OverrideSingleCompoundFlashBehavior = True
+            outstr1.Phases(0).Properties.enthalpy = (HVin * Wvin + HLin * Wlin * lse + HSin * Wsin * (1 - sse)) / Wlvout
+            outstr2.Phases(0).Properties.enthalpy = (HSin * Wsin * sse + HLin * Wlin * (1 - lse)) / Wsout
+            outstr1.SpecType = StreamSpec.Pressure_and_Enthalpy
+            outstr2.SpecType = StreamSpec.Pressure_and_Enthalpy
+
+            IObj?.Paragraphs.Add("<hr><h3>Results</h3>")
+            IObj?.Paragraphs.Add(String.Format("Flash specs of outlet streams are set to PH. Enthalpies are defined to maintain phase fractions."))
+            IObj?.Paragraphs.Add(String.Format("<b><i>Massflow Outlet 1</i></b>: {0} Kg/s <br><b><i>Enthalpy Outlet 1</i></b>: {1} KJ/Kg", Wlvout, outstr1.Phases(0).Properties.enthalpy))
+            IObj?.Paragraphs.Add(String.Format("<b><i>Massflow Outlet 2</i></b>: {0} Kg/s <br><b><i>Enthalpy Outlet 2</i></b>: {1} KJ/Kg", Wsout, outstr2.Phases(0).Properties.enthalpy))
 
             IObj?.Close()
 
