@@ -433,7 +433,7 @@
     <value>561, 346</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterParent</value>
+    <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>DWSIM - Editor de Conjuntos de Reações</value>

@@ -367,9 +367,6 @@
   <data name="Column8.ToolTipText" xml:space="preserve">
     <value>Reverse Order</value>
   </data>
-  <data name="Column10.HeaderText" xml:space="preserve">
-    <value>Column10</value>
-  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Column10.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -391,5 +388,9 @@
   </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Identification</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
   </data>
 </root>

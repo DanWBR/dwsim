@@ -61,13 +61,6 @@ Partial Class FormReacHeterog
         Me.KryptonLabel2 = New System.Windows.Forms.Label()
         Me.tbStoich = New System.Windows.Forms.TextBox()
         Me.KryptonDataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.KryptonLabel1 = New System.Windows.Forms.Label()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.KryptonLabel19 = New System.Windows.Forms.Label()
-        Me.KryptonLabel20 = New System.Windows.Forms.Label()
-        Me.tbName = New System.Windows.Forms.TextBox()
-        Me.tbDesc = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -76,6 +69,13 @@ Partial Class FormReacHeterog
         Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CheckID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.KryptonLabel1 = New System.Windows.Forms.Label()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.KryptonLabel19 = New System.Windows.Forms.Label()
+        Me.KryptonLabel20 = New System.Windows.Forms.Label()
+        Me.tbName = New System.Windows.Forms.TextBox()
+        Me.tbDesc = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.GroupBox2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.gbExpression.SuspendLayout()
@@ -360,49 +360,6 @@ Partial Class FormReacHeterog
         Me.KryptonDataGridView1.RowHeadersVisible = False
         Me.KryptonDataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         '
-        'KryptonLabel1
-        '
-        resources.ApplyResources(Me.KryptonLabel1, "KryptonLabel1")
-        Me.KryptonLabel1.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
-        Me.KryptonLabel1.Name = "KryptonLabel1"
-        '
-        'GroupBox4
-        '
-        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
-        Me.GroupBox4.Controls.Add(Me.KryptonLabel19)
-        Me.GroupBox4.Controls.Add(Me.KryptonLabel20)
-        Me.GroupBox4.Controls.Add(Me.tbName)
-        Me.GroupBox4.Controls.Add(Me.tbDesc)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.TabStop = False
-        '
-        'KryptonLabel19
-        '
-        resources.ApplyResources(Me.KryptonLabel19, "KryptonLabel19")
-        Me.KryptonLabel19.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
-        Me.KryptonLabel19.Name = "KryptonLabel19"
-        '
-        'KryptonLabel20
-        '
-        resources.ApplyResources(Me.KryptonLabel20, "KryptonLabel20")
-        Me.KryptonLabel20.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
-        Me.KryptonLabel20.Name = "KryptonLabel20"
-        '
-        'tbName
-        '
-        resources.ApplyResources(Me.tbName, "tbName")
-        Me.tbName.Name = "tbName"
-        '
-        'tbDesc
-        '
-        resources.ApplyResources(Me.tbDesc, "tbDesc")
-        Me.tbDesc.Name = "tbDesc"
-        '
-        'Label2
-        '
-        resources.ApplyResources(Me.Label2, "Label2")
-        Me.Label2.Name = "Label2"
-        '
         'Column2
         '
         Me.Column2.FillWeight = 40.0!
@@ -453,6 +410,49 @@ Partial Class FormReacHeterog
         '
         resources.ApplyResources(Me.CheckID, "CheckID")
         Me.CheckID.Name = "CheckID"
+        '
+        'KryptonLabel1
+        '
+        resources.ApplyResources(Me.KryptonLabel1, "KryptonLabel1")
+        Me.KryptonLabel1.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
+        Me.KryptonLabel1.Name = "KryptonLabel1"
+        '
+        'GroupBox4
+        '
+        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
+        Me.GroupBox4.Controls.Add(Me.KryptonLabel19)
+        Me.GroupBox4.Controls.Add(Me.KryptonLabel20)
+        Me.GroupBox4.Controls.Add(Me.tbName)
+        Me.GroupBox4.Controls.Add(Me.tbDesc)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.TabStop = False
+        '
+        'KryptonLabel19
+        '
+        resources.ApplyResources(Me.KryptonLabel19, "KryptonLabel19")
+        Me.KryptonLabel19.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
+        Me.KryptonLabel19.Name = "KryptonLabel19"
+        '
+        'KryptonLabel20
+        '
+        resources.ApplyResources(Me.KryptonLabel20, "KryptonLabel20")
+        Me.KryptonLabel20.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
+        Me.KryptonLabel20.Name = "KryptonLabel20"
+        '
+        'tbName
+        '
+        resources.ApplyResources(Me.tbName, "tbName")
+        Me.tbName.Name = "tbName"
+        '
+        'tbDesc
+        '
+        resources.ApplyResources(Me.tbDesc, "tbDesc")
+        Me.tbDesc.Name = "tbDesc"
+        '
+        'Label2
+        '
+        resources.ApplyResources(Me.Label2, "Label2")
+        Me.Label2.Name = "Label2"
         '
         'FormReacHeterog
         '
