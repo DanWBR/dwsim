@@ -352,6 +352,10 @@ Public Class FormReacKinetic
             For Each row As DataGridViewRow In Me.KryptonDataGridView1.Rows
                 If row.Cells(4).Value = True Then
                     rc.BaseReactant = row.Cells(8).Value
+                    If rc.Components(rc.BaseReactant).StoichCoeff >= 0 Then
+                        MessageBox.Show(fc.GetTranslatedString1("ReactantAsBaseComp"), fc.GetTranslatedString1("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Exit Sub
+                    End If
                     Exit For
                 End If
             Next

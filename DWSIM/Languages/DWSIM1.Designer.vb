@@ -12664,6 +12664,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Por favor selecione um reagente como componente-base..
+        '''</summary>
+        Friend Shared ReadOnly Property ReactantAsBaseComp() As String
+            Get
+                Return ResourceManager.GetString("ReactantAsBaseComp", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Conversão.
         '''</summary>
         Friend Shared ReadOnly Property ReactionConversion() As String

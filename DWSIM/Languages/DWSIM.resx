@@ -5724,4 +5724,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="DBSize" xml:space="preserve">
     <value>Tamanho do Banco de Dados: {0} KB</value>
   </data>
+  <data name="ReactantAsBaseComp" xml:space="preserve">
+    <value>Por favor selecione um reagente como componente-base.</value>
+  </data>
 </root>
