@@ -199,166 +199,166 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Editing Forms\Property Packages\FormConfigLIQUAC.Designer.vb">
+    <Compile Include="EditingForms\PropertyPackages\FormConfigLIQUAC.Designer.vb">
       <DependentUpon>FormConfigLIQUAC.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigLIQUAC.vb">
+    <Compile Include="EditingForms\PropertyPackages\FormConfigLIQUAC.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormGroupedPPConfigWindows.Designer.vb">
+    <Compile Include="EditingForms\PropertyPackages\FormGroupedPPConfigWindows.Designer.vb">
       <DependentUpon>FormGroupedPPConfigWindows.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormGroupedPPConfigWindows.vb">
+    <Compile Include="EditingForms\PropertyPackages\FormGroupedPPConfigWindows.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\WilsonPPEditor.designer.vb">
+    <Compile Include="EditingForms\PropertyPackages\WilsonPPEditor.designer.vb">
       <DependentUpon>WilsonPPEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\WilsonPPEditor.vb">
+    <Compile Include="EditingForms\PropertyPackages\WilsonPPEditor.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Flash Algorithms\ForcedPhaseFlash.vb" />
-    <Compile Include="Flash Algorithms\SingleCompFlash.vb" />
-    <Compile Include="Helper Classes\SerializationBinder.vb" />
+    <Compile Include="FlashAlgorithms\ForcedPhaseFlash.vb" />
+    <Compile Include="FlashAlgorithms\SingleCompFlash.vb" />
+    <Compile Include="HelperClasses\SerializationBinder.vb" />
     <Compile Include="Interfaces\IActivityCoefficientBase.vb" />
-    <Compile Include="Base Classes\ThermodynamicsBase.vb" />
+    <Compile Include="BaseClasses\ThermodynamicsBase.vb" />
     <Compile Include="Databases\Databases.vb" />
-    <Compile Include="Editing Forms\Excel Interface\AboutForm.Designer.vb">
+    <Compile Include="EditingForms\ExcelInterface\AboutForm.Designer.vb">
       <DependentUpon>AboutForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Excel Interface\AboutForm.vb">
+    <Compile Include="EditingForms\ExcelInterface\AboutForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Excel Interface\LogForm.Designer.vb">
+    <Compile Include="EditingForms\ExcelInterface\LogForm.Designer.vb">
       <DependentUpon>LogForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Excel Interface\LogForm.vb">
+    <Compile Include="EditingForms\ExcelInterface\LogForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Excel Interface\SettingsForm.Designer.vb">
+    <Compile Include="EditingForms\ExcelInterface\SettingsForm.Designer.vb">
       <DependentUpon>SettingsForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Excel Interface\SettingsForm.vb">
+    <Compile Include="EditingForms\ExcelInterface\SettingsForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Flash Algorithms\FlashAlgorithmConfig.Designer.vb">
+    <Compile Include="EditingForms\FlashAlgorithms\FlashAlgorithmConfig.Designer.vb">
       <DependentUpon>FlashAlgorithmConfig.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Flash Algorithms\FlashAlgorithmConfig.vb">
+    <Compile Include="EditingForms\FlashAlgorithms\FlashAlgorithmConfig.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Flash Algorithms\FormSelectCOPP.Designer.vb">
+    <Compile Include="EditingForms\FlashAlgorithms\FormSelectCOPP.Designer.vb">
       <DependentUpon>FormSelectCOPP.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Flash Algorithms\FormSelectCOPP.vb">
+    <Compile Include="EditingForms\FlashAlgorithms\FormSelectCOPP.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Flash Algorithms\FormSelectCOPPM.Designer.vb">
+    <Compile Include="EditingForms\FlashAlgorithms\FormSelectCOPPM.Designer.vb">
       <DependentUpon>FormSelectCOPPM.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Flash Algorithms\FormSelectCOPPM.vb">
+    <Compile Include="EditingForms\FlashAlgorithms\FormSelectCOPPM.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Material Stream\MaterialStreamEditor.Designer.vb">
+    <Compile Include="EditingForms\MaterialStream\MaterialStreamEditor.Designer.vb">
       <DependentUpon>MaterialStreamEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Material Stream\MaterialStreamEditor.vb">
+    <Compile Include="EditingForms\MaterialStream\MaterialStreamEditor.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPSocket.designer.vb">
+    <Compile Include="EditingForms\PropertyPackages\FormConfigCAPEOPENPPSocket.designer.vb">
       <DependentUpon>FormConfigCAPEOPENPPSocket.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPSocket.vb">
+    <Compile Include="EditingForms\PropertyPackages\FormConfigCAPEOPENPPSocket.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPackage.designer.vb">
+    <Compile Include="EditingForms\PropertyPackages\FormConfigCAPEOPENPPackage.designer.vb">
       <DependentUpon>FormConfigCAPEOPENPPackage.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPackage.vb">
+    <Compile Include="EditingForms\PropertyPackages\FormConfigCAPEOPENPPackage.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigCoolPropIncompMixture.Designer.vb">
+    <Compile Include="EditingForms\PropertyPackages\FormConfigCoolPropIncompMixture.Designer.vb">
       <DependentUpon>FormConfigCoolPropIncompMixture.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigCoolPropIncompMixture.vb">
+    <Compile Include="EditingForms\PropertyPackages\FormConfigCoolPropIncompMixture.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigCoolPropIncompFluid.Designer.vb">
+    <Compile Include="EditingForms\PropertyPackages\FormConfigCoolPropIncompFluid.Designer.vb">
       <DependentUpon>FormConfigCoolPropIncompFluid.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigCoolPropIncompFluid.vb">
+    <Compile Include="EditingForms\PropertyPackages\FormConfigCoolPropIncompFluid.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigENRTL.designer.vb">
+    <Compile Include="EditingForms\PropertyPackages\FormConfigENRTL.designer.vb">
       <DependentUpon>FormConfigENRTL.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigENRTL.vb">
+    <Compile Include="EditingForms\PropertyPackages\FormConfigENRTL.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigExUNIQUAC.designer.vb">
+    <Compile Include="EditingForms\PropertyPackages\FormConfigExUNIQUAC.designer.vb">
       <DependentUpon>FormConfigExUNIQUAC.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigExUNIQUAC.vb">
+    <Compile Include="EditingForms\PropertyPackages\FormConfigExUNIQUAC.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigLKP.designer.vb">
+    <Compile Include="EditingForms\PropertyPackages\FormConfigLKP.designer.vb">
       <DependentUpon>FormConfigLKP.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigLKP.vb">
+    <Compile Include="EditingForms\PropertyPackages\FormConfigLKP.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigNRTL.designer.vb">
+    <Compile Include="EditingForms\PropertyPackages\FormConfigNRTL.designer.vb">
       <DependentUpon>FormConfigNRTL.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigNRTL.vb">
+    <Compile Include="EditingForms\PropertyPackages\FormConfigNRTL.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigPropertyPackageBase.designer.vb">
+    <Compile Include="EditingForms\PropertyPackages\FormConfigPropertyPackageBase.designer.vb">
       <DependentUpon>FormConfigPropertyPackageBase.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigPropertyPackageBase.vb">
+    <Compile Include="EditingForms\PropertyPackages\FormConfigPropertyPackageBase.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigPropertyPackage.designer.vb">
+    <Compile Include="EditingForms\PropertyPackages\FormConfigPropertyPackage.designer.vb">
       <DependentUpon>FormConfigPropertyPackage.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigPropertyPackage.vb">
+    <Compile Include="EditingForms\PropertyPackages\FormConfigPropertyPackage.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigPRSV2.designer.vb">
+    <Compile Include="EditingForms\PropertyPackages\FormConfigPRSV2.designer.vb">
       <DependentUpon>FormConfigPRSV2.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigPRSV2.vb">
+    <Compile Include="EditingForms\PropertyPackages\FormConfigPRSV2.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigUNIQUAC.designer.vb">
+    <Compile Include="EditingForms\PropertyPackages\FormConfigUNIQUAC.designer.vb">
       <DependentUpon>FormConfigUNIQUAC.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigUNIQUAC.vb">
+    <Compile Include="EditingForms\PropertyPackages\FormConfigUNIQUAC.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\PropertyPackageSettingsEditingControl.Designer.vb">
+    <Compile Include="EditingForms\PropertyPackages\PropertyPackageSettingsEditingControl.Designer.vb">
       <DependentUpon>PropertyPackageSettingsEditingControl.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\PropertyPackageSettingsEditingControl.vb">
+    <Compile Include="EditingForms\PropertyPackages\PropertyPackageSettingsEditingControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Unhandled Exceptions\FormUnhandledException.designer.vb">
+    <Compile Include="EditingForms\UnhandledExceptions\FormUnhandledException.designer.vb">
       <DependentUpon>FormUnhandledException.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Unhandled Exceptions\FormUnhandledException.vb">
+    <Compile Include="EditingForms\UnhandledExceptions\FormUnhandledException.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Flash Algorithms\CAPEOPEN_Equilibrium_Server.vb" />
-    <Compile Include="Flash Algorithms\CoolPropIncompressibleMixture.vb" />
-    <Compile Include="Flash Algorithms\CoolPropIncompressiblePure.vb" />
-    <Compile Include="Flash Algorithms\GibbsMinimizationMulti.vb" />
-    <Compile Include="Flash Algorithms\NestedLoopsSVLLE.vb" />
-    <Compile Include="Flash Algorithms\SteamTables.vb" />
-    <Compile Include="Flash Algorithms\UniversalFlash.vb" />
-    <Compile Include="Flash Algorithms\UserDefined.vb" />
-    <Compile Include="Helper Classes\ConsoleRedirection.vb" />
-    <Compile Include="Helper Classes\PhaseEnvelopeSettings.vb" />
+    <Compile Include="FlashAlgorithms\CAPEOPEN_Equilibrium_Server.vb" />
+    <Compile Include="FlashAlgorithms\CoolPropIncompressibleMixture.vb" />
+    <Compile Include="FlashAlgorithms\CoolPropIncompressiblePure.vb" />
+    <Compile Include="FlashAlgorithms\GibbsMinimizationMulti.vb" />
+    <Compile Include="FlashAlgorithms\NestedLoopsSVLLE.vb" />
+    <Compile Include="FlashAlgorithms\SteamTables.vb" />
+    <Compile Include="FlashAlgorithms\UniversalFlash.vb" />
+    <Compile Include="FlashAlgorithms\UserDefined.vb" />
+    <Compile Include="HelperClasses\ConsoleRedirection.vb" />
+    <Compile Include="HelperClasses\PhaseEnvelopeSettings.vb" />
     <Compile Include="Interfaces\IPOPTLoader.vb" />
     <Compile Include="Interfaces\ShortcutUtilities.vb" />
     <Compile Include="Interfaces\Excel.vb" />
@@ -368,36 +368,36 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
-    <Compile Include="Material Stream\MaterialStream.vb" />
-    <Compile Include="Property Packages\LIQUAC2PropertyPackage.vb" />
-    <Compile Include="Property Packages\Models\ElectrolyteNRTL.vb" />
-    <Compile Include="Property Packages\Models\PengRobinson78.vb" />
-    <Compile Include="Property Packages\Models\TrueCriticalPoint.vb" />
-    <Compile Include="Base Classes\PropertyMethods.vb" />
+    <Compile Include="MaterialStream\MaterialStream.vb" />
+    <Compile Include="PropertyPackages\LIQUAC2PropertyPackage.vb" />
+    <Compile Include="PropertyPackages\Models\ElectrolyteNRTL.vb" />
+    <Compile Include="PropertyPackages\Models\PengRobinson78.vb" />
+    <Compile Include="PropertyPackages\Models\TrueCriticalPoint.vb" />
+    <Compile Include="BaseClasses\PropertyMethods.vb" />
     <Compile Include="Main\Calculator.vb" />
-    <Compile Include="Helper Classes\ChemSepIDConverter.vb" />
-    <Compile Include="Property Packages\ActivityCoefficientBase.vb" />
-    <Compile Include="Property Packages\Models\ElectrolyteProperties.vb" />
-    <Compile Include="Property Packages\ElectrolyteBase.vb" />
-    <Compile Include="Property Packages\Models\Hypotheticals.vb" />
-    <Compile Include="Base Classes\MichelsenBase.vb" />
-    <Compile Include="Property Packages\Models\WilsonModel.vb" />
-    <Compile Include="Property Packages\PengRobinson78.vb" />
-    <Compile Include="Property Packages\PropertyPackage.vb" />
-    <Compile Include="Property Packages\Models\FluidProperties.vb" />
-    <Compile Include="Flash Algorithms\BaseFlashAlgorithm.vb" />
-    <Compile Include="Flash Algorithms\BlackOil.vb" />
-    <Compile Include="Flash Algorithms\BostonBrittInsideOut.vb" />
-    <Compile Include="Flash Algorithms\BostonFournierInsideOut3P.vb" />
-    <Compile Include="Flash Algorithms\ElectrolyteSVLE.vb" />
-    <Compile Include="Flash Algorithms\GibbsMinimization3P.vb" />
-    <Compile Include="Flash Algorithms\NestedLoops.vb" />
-    <Compile Include="Flash Algorithms\NestedLoops3PV3.vb" />
-    <Compile Include="Flash Algorithms\NestedLoopsImmiscible.vb" />
-    <Compile Include="Flash Algorithms\NestedLoopsSLE.vb" />
-    <Compile Include="Flash Algorithms\Seawater.vb" />
-    <Compile Include="Flash Algorithms\SimpleLLE.vb" />
-    <Compile Include="Flash Algorithms\SourWater.vb" />
+    <Compile Include="HelperClasses\ChemSepIDConverter.vb" />
+    <Compile Include="PropertyPackages\ActivityCoefficientBase.vb" />
+    <Compile Include="PropertyPackages\Models\ElectrolyteProperties.vb" />
+    <Compile Include="PropertyPackages\ElectrolyteBase.vb" />
+    <Compile Include="PropertyPackages\Models\Hypotheticals.vb" />
+    <Compile Include="BaseClasses\MichelsenBase.vb" />
+    <Compile Include="PropertyPackages\Models\WilsonModel.vb" />
+    <Compile Include="PropertyPackages\PengRobinson78.vb" />
+    <Compile Include="PropertyPackages\PropertyPackage.vb" />
+    <Compile Include="PropertyPackages\Models\FluidProperties.vb" />
+    <Compile Include="FlashAlgorithms\BaseFlashAlgorithm.vb" />
+    <Compile Include="FlashAlgorithms\BlackOil.vb" />
+    <Compile Include="FlashAlgorithms\BostonBrittInsideOut.vb" />
+    <Compile Include="FlashAlgorithms\BostonFournierInsideOut3P.vb" />
+    <Compile Include="FlashAlgorithms\ElectrolyteSVLE.vb" />
+    <Compile Include="FlashAlgorithms\GibbsMinimization3P.vb" />
+    <Compile Include="FlashAlgorithms\NestedLoops.vb" />
+    <Compile Include="FlashAlgorithms\NestedLoops3PV3.vb" />
+    <Compile Include="FlashAlgorithms\NestedLoopsImmiscible.vb" />
+    <Compile Include="FlashAlgorithms\NestedLoopsSLE.vb" />
+    <Compile Include="FlashAlgorithms\Seawater.vb" />
+    <Compile Include="FlashAlgorithms\SimpleLLE.vb" />
+    <Compile Include="FlashAlgorithms\SourWater.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -413,7 +413,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Property Packages\Models\BlackOilProperties.vb" />
+    <Compile Include="PropertyPackages\Models\BlackOilProperties.vb" />
     <Compile Include="PetroleumCharacterization\CurveConversion.vb" />
     <Compile Include="PetroleumCharacterization\Fitting.vb" />
     <Compile Include="PetroleumCharacterization\GenerateCompounds.vb" />
@@ -422,249 +422,249 @@
     <Compile Include="PetroleumCharacterization\PropertyMethods.vb" />
     <Compile Include="PetroleumCharacterization\QualityCheck.vb" />
     <Compile Include="PetroleumCharacterization\Riazi.vb" />
-    <Compile Include="Property Packages\BlackOil.vb" />
+    <Compile Include="PropertyPackages\BlackOil.vb" />
     <Compile Include="Interfaces\CAPE-OPEN.vb" />
-    <Compile Include="Property Packages\CAPEOPENSocket.vb" />
-    <Compile Include="Property Packages\ChaoSeader.vb" />
-    <Compile Include="Property Packages\CoolProp.vb" />
-    <Compile Include="Property Packages\Models\ChaoSeader.vb" />
-    <Compile Include="Property Packages\Models\ExtendedUNIQUAC.vb" />
-    <Compile Include="Property Packages\CoolPropIncompressibleMixture.vb" />
-    <Compile Include="Property Packages\CoolPropIncompressiblePure.vb" />
-    <Compile Include="Property Packages\ElectrolyteNRTL.vb" />
-    <Compile Include="Property Packages\ExtendedUNIQUAC.vb" />
-    <Compile Include="Property Packages\GraysonStreed.vb" />
-    <Compile Include="Property Packages\Models\GraysonStreed.vb" />
-    <Compile Include="Property Packages\Models\SteamTables_IAPWS_IF97.vb" />
-    <Compile Include="Property Packages\Models\Ideal.vb" />
-    <Compile Include="Property Packages\Models\LIQUAC2.vb" />
-    <Compile Include="Property Packages\Models\LeeKesler.vb" />
-    <Compile Include="Property Packages\Models\LeeKeslerPlocker.vb" />
-    <Compile Include="Property Packages\LeeKeslerPlocker.vb" />
-    <Compile Include="Property Packages\Models\MODFAC.vb" />
-    <Compile Include="Property Packages\MODFAC.vb" />
-    <Compile Include="Property Packages\Models\NISTMFAC.vb" />
-    <Compile Include="Property Packages\NISTMFAC.vb" />
-    <Compile Include="Property Packages\Models\NRTL.vb" />
-    <Compile Include="Property Packages\NRTL.vb" />
-    <Compile Include="Property Packages\Models\PengRobinson.vb" />
-    <Compile Include="Property Packages\PengRobinson.vb" />
-    <Compile Include="Property Packages\PengRobinsonLeeKesler.vb" />
-    <Compile Include="Property Packages\Models\PRSV2-VL.vb" />
-    <Compile Include="Property Packages\Models\PRSV2.vb" />
-    <Compile Include="Property Packages\PengRobinsonStryjekVera2.vb" />
-    <Compile Include="Property Packages\PengRobinsonStryjekVera2VL.vb" />
-    <Compile Include="Property Packages\Ideal.vb" />
-    <Compile Include="Property Packages\Models\Seawater.vb" />
-    <Compile Include="Property Packages\SeaWater.vb" />
-    <Compile Include="Property Packages\SourWater.vb" />
-    <Compile Include="Property Packages\Models\SoaveRedlichKwong.vb" />
-    <Compile Include="Property Packages\Models\SoaveRedlichKwong2.vb" />
-    <Compile Include="Property Packages\SoaveRedlichKwong.vb" />
-    <Compile Include="Property Packages\Models\Steam67.vb" />
-    <Compile Include="Property Packages\SteamTables.vb" />
-    <Compile Include="Property Packages\Models\UNIFAC.vb" />
-    <Compile Include="Property Packages\SteamTables2.vb" />
-    <Compile Include="Property Packages\UNIFACLL.vb" />
-    <Compile Include="Property Packages\UNIFAC.vb" />
-    <Compile Include="Property Packages\Models\UNIQUAC.vb" />
-    <Compile Include="Property Packages\UNIQUAC.vb" />
-    <Compile Include="Property Packages\WilsonPropertyPackage.vb" />
+    <Compile Include="PropertyPackages\CAPEOPENSocket.vb" />
+    <Compile Include="PropertyPackages\ChaoSeader.vb" />
+    <Compile Include="PropertyPackages\CoolProp.vb" />
+    <Compile Include="PropertyPackages\Models\ChaoSeader.vb" />
+    <Compile Include="PropertyPackages\Models\ExtendedUNIQUAC.vb" />
+    <Compile Include="PropertyPackages\CoolPropIncompressibleMixture.vb" />
+    <Compile Include="PropertyPackages\CoolPropIncompressiblePure.vb" />
+    <Compile Include="PropertyPackages\ElectrolyteNRTL.vb" />
+    <Compile Include="PropertyPackages\ExtendedUNIQUAC.vb" />
+    <Compile Include="PropertyPackages\GraysonStreed.vb" />
+    <Compile Include="PropertyPackages\Models\GraysonStreed.vb" />
+    <Compile Include="PropertyPackages\Models\SteamTables_IAPWS_IF97.vb" />
+    <Compile Include="PropertyPackages\Models\Ideal.vb" />
+    <Compile Include="PropertyPackages\Models\LIQUAC2.vb" />
+    <Compile Include="PropertyPackages\Models\LeeKesler.vb" />
+    <Compile Include="PropertyPackages\Models\LeeKeslerPlocker.vb" />
+    <Compile Include="PropertyPackages\LeeKeslerPlocker.vb" />
+    <Compile Include="PropertyPackages\Models\MODFAC.vb" />
+    <Compile Include="PropertyPackages\MODFAC.vb" />
+    <Compile Include="PropertyPackages\Models\NISTMFAC.vb" />
+    <Compile Include="PropertyPackages\NISTMFAC.vb" />
+    <Compile Include="PropertyPackages\Models\NRTL.vb" />
+    <Compile Include="PropertyPackages\NRTL.vb" />
+    <Compile Include="PropertyPackages\Models\PengRobinson.vb" />
+    <Compile Include="PropertyPackages\PengRobinson.vb" />
+    <Compile Include="PropertyPackages\PengRobinsonLeeKesler.vb" />
+    <Compile Include="PropertyPackages\Models\PRSV2-VL.vb" />
+    <Compile Include="PropertyPackages\Models\PRSV2.vb" />
+    <Compile Include="PropertyPackages\PengRobinsonStryjekVera2.vb" />
+    <Compile Include="PropertyPackages\PengRobinsonStryjekVera2VL.vb" />
+    <Compile Include="PropertyPackages\Ideal.vb" />
+    <Compile Include="PropertyPackages\Models\Seawater.vb" />
+    <Compile Include="PropertyPackages\SeaWater.vb" />
+    <Compile Include="PropertyPackages\SourWater.vb" />
+    <Compile Include="PropertyPackages\Models\SoaveRedlichKwong.vb" />
+    <Compile Include="PropertyPackages\Models\SoaveRedlichKwong2.vb" />
+    <Compile Include="PropertyPackages\SoaveRedlichKwong.vb" />
+    <Compile Include="PropertyPackages\Models\Steam67.vb" />
+    <Compile Include="PropertyPackages\SteamTables.vb" />
+    <Compile Include="PropertyPackages\Models\UNIFAC.vb" />
+    <Compile Include="PropertyPackages\SteamTables2.vb" />
+    <Compile Include="PropertyPackages\UNIFACLL.vb" />
+    <Compile Include="PropertyPackages\UNIFAC.vb" />
+    <Compile Include="PropertyPackages\Models\UNIQUAC.vb" />
+    <Compile Include="PropertyPackages\UNIQUAC.vb" />
+    <Compile Include="PropertyPackages\WilsonPropertyPackage.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Editing Forms\Excel Interface\AboutForm.de.resx">
+    <EmbeddedResource Include="EditingForms\ExcelInterface\AboutForm.de.resx">
       <DependentUpon>AboutForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Excel Interface\AboutForm.resx">
+    <EmbeddedResource Include="EditingForms\ExcelInterface\AboutForm.resx">
       <DependentUpon>AboutForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Excel Interface\LogForm.resx">
+    <EmbeddedResource Include="EditingForms\ExcelInterface\LogForm.resx">
       <DependentUpon>LogForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Excel Interface\SettingsForm.resx">
+    <EmbeddedResource Include="EditingForms\ExcelInterface\SettingsForm.resx">
       <DependentUpon>SettingsForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Flash Algorithms\FlashAlgorithmConfig.de.resx">
+    <EmbeddedResource Include="EditingForms\FlashAlgorithms\FlashAlgorithmConfig.de.resx">
       <DependentUpon>FlashAlgorithmConfig.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Flash Algorithms\FlashAlgorithmConfig.en.resx">
+    <EmbeddedResource Include="EditingForms\FlashAlgorithms\FlashAlgorithmConfig.en.resx">
       <DependentUpon>FlashAlgorithmConfig.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Flash Algorithms\FlashAlgorithmConfig.resx">
+    <EmbeddedResource Include="EditingForms\FlashAlgorithms\FlashAlgorithmConfig.resx">
       <DependentUpon>FlashAlgorithmConfig.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Flash Algorithms\FormSelectCOPP.de.resx">
+    <EmbeddedResource Include="EditingForms\FlashAlgorithms\FormSelectCOPP.de.resx">
       <DependentUpon>FormSelectCOPP.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Flash Algorithms\FormSelectCOPP.en.resx">
+    <EmbeddedResource Include="EditingForms\FlashAlgorithms\FormSelectCOPP.en.resx">
       <DependentUpon>FormSelectCOPP.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Flash Algorithms\FormSelectCOPP.resx">
+    <EmbeddedResource Include="EditingForms\FlashAlgorithms\FormSelectCOPP.resx">
       <DependentUpon>FormSelectCOPP.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Flash Algorithms\FormSelectCOPPM.de.resx">
+    <EmbeddedResource Include="EditingForms\FlashAlgorithms\FormSelectCOPPM.de.resx">
       <DependentUpon>FormSelectCOPPM.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Flash Algorithms\FormSelectCOPPM.en.resx">
+    <EmbeddedResource Include="EditingForms\FlashAlgorithms\FormSelectCOPPM.en.resx">
       <DependentUpon>FormSelectCOPPM.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Flash Algorithms\FormSelectCOPPM.resx">
+    <EmbeddedResource Include="EditingForms\FlashAlgorithms\FormSelectCOPPM.resx">
       <DependentUpon>FormSelectCOPPM.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Material Stream\MaterialStreamEditor.en.resx">
+    <EmbeddedResource Include="EditingForms\MaterialStream\MaterialStreamEditor.en.resx">
       <DependentUpon>MaterialStreamEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Material Stream\MaterialStreamEditor.resx">
+    <EmbeddedResource Include="EditingForms\MaterialStream\MaterialStreamEditor.resx">
       <DependentUpon>MaterialStreamEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPackage.de.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigCAPEOPENPPackage.de.resx">
       <DependentUpon>FormConfigCAPEOPENPPackage.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPSocket.de.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigCAPEOPENPPSocket.de.resx">
       <DependentUpon>FormConfigCAPEOPENPPSocket.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPSocket.en.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigCAPEOPENPPSocket.en.resx">
       <DependentUpon>FormConfigCAPEOPENPPSocket.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPSocket.es.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigCAPEOPENPPSocket.es.resx">
       <DependentUpon>FormConfigCAPEOPENPPSocket.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPSocket.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigCAPEOPENPPSocket.resx">
       <DependentUpon>FormConfigCAPEOPENPPSocket.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPackage.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigCAPEOPENPPackage.resx">
       <DependentUpon>FormConfigCAPEOPENPPackage.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCoolPropIncompMixture.en.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigCoolPropIncompMixture.en.resx">
       <DependentUpon>FormConfigCoolPropIncompMixture.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCoolPropIncompMixture.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigCoolPropIncompMixture.resx">
       <DependentUpon>FormConfigCoolPropIncompMixture.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCoolPropIncompFluid.en.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigCoolPropIncompFluid.en.resx">
       <DependentUpon>FormConfigCoolPropIncompFluid.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCoolPropIncompFluid.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigCoolPropIncompFluid.resx">
       <DependentUpon>FormConfigCoolPropIncompFluid.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigENRTL.de.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigENRTL.de.resx">
       <DependentUpon>FormConfigENRTL.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigENRTL.en.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigENRTL.en.resx">
       <DependentUpon>FormConfigENRTL.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigENRTL.es.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigENRTL.es.resx">
       <DependentUpon>FormConfigENRTL.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigENRTL.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigENRTL.resx">
       <DependentUpon>FormConfigENRTL.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigLIQUAC.en.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigLIQUAC.en.resx">
       <DependentUpon>FormConfigLIQUAC.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigLIQUAC.es.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigLIQUAC.es.resx">
       <DependentUpon>FormConfigLIQUAC.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigLIQUAC.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigLIQUAC.resx">
       <DependentUpon>FormConfigLIQUAC.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigExUNIQUAC.de.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigExUNIQUAC.de.resx">
       <DependentUpon>FormConfigExUNIQUAC.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigExUNIQUAC.en.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigExUNIQUAC.en.resx">
       <DependentUpon>FormConfigExUNIQUAC.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigExUNIQUAC.es.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigExUNIQUAC.es.resx">
       <DependentUpon>FormConfigExUNIQUAC.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigExUNIQUAC.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigExUNIQUAC.resx">
       <DependentUpon>FormConfigExUNIQUAC.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigLKP.de.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigLKP.de.resx">
       <DependentUpon>FormConfigLKP.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigLKP.en.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigLKP.en.resx">
       <DependentUpon>FormConfigLKP.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigLKP.es.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigLKP.es.resx">
       <DependentUpon>FormConfigLKP.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigLKP.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigLKP.resx">
       <DependentUpon>FormConfigLKP.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigNRTL.de.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigNRTL.de.resx">
       <DependentUpon>FormConfigNRTL.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigNRTL.en.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigNRTL.en.resx">
       <DependentUpon>FormConfigNRTL.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigNRTL.es.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigNRTL.es.resx">
       <DependentUpon>FormConfigNRTL.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigNRTL.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigNRTL.resx">
       <DependentUpon>FormConfigNRTL.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigPropertyPackage.de.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigPropertyPackage.de.resx">
       <DependentUpon>FormConfigPropertyPackage.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigPropertyPackage.en.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigPropertyPackage.en.resx">
       <DependentUpon>FormConfigPropertyPackage.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigPropertyPackage.es.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigPropertyPackage.es.resx">
       <DependentUpon>FormConfigPropertyPackage.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigPropertyPackage.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigPropertyPackage.resx">
       <DependentUpon>FormConfigPropertyPackage.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigPropertyPackageBase.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigPropertyPackageBase.resx">
       <DependentUpon>FormConfigPropertyPackageBase.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigPRSV2.de.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigPRSV2.de.resx">
       <DependentUpon>FormConfigPRSV2.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigPRSV2.en.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigPRSV2.en.resx">
       <DependentUpon>FormConfigPRSV2.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigPRSV2.es.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigPRSV2.es.resx">
       <DependentUpon>FormConfigPRSV2.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigPRSV2.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigPRSV2.resx">
       <DependentUpon>FormConfigPRSV2.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigUNIQUAC.de.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigUNIQUAC.de.resx">
       <DependentUpon>FormConfigUNIQUAC.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigUNIQUAC.en.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigUNIQUAC.en.resx">
       <DependentUpon>FormConfigUNIQUAC.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigUNIQUAC.es.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigUNIQUAC.es.resx">
       <DependentUpon>FormConfigUNIQUAC.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigUNIQUAC.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigUNIQUAC.resx">
       <DependentUpon>FormConfigUNIQUAC.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormGroupedPPConfigWindows.en.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormGroupedPPConfigWindows.en.resx">
       <DependentUpon>FormGroupedPPConfigWindows.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormGroupedPPConfigWindows.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormGroupedPPConfigWindows.resx">
       <DependentUpon>FormGroupedPPConfigWindows.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\PropertyPackageSettingsEditingControl.en.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\PropertyPackageSettingsEditingControl.en.resx">
       <DependentUpon>PropertyPackageSettingsEditingControl.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\PropertyPackageSettingsEditingControl.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\PropertyPackageSettingsEditingControl.resx">
       <DependentUpon>PropertyPackageSettingsEditingControl.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\WilsonPPEditor.resx">
+    <EmbeddedResource Include="EditingForms\PropertyPackages\WilsonPPEditor.resx">
       <DependentUpon>WilsonPPEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Unhandled Exceptions\FormUnhandledException.de.resx">
+    <EmbeddedResource Include="EditingForms\UnhandledExceptions\FormUnhandledException.de.resx">
       <DependentUpon>FormUnhandledException.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Unhandled Exceptions\FormUnhandledException.en.resx">
+    <EmbeddedResource Include="EditingForms\UnhandledExceptions\FormUnhandledException.en.resx">
       <DependentUpon>FormUnhandledException.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Unhandled Exceptions\FormUnhandledException.resx">
+    <EmbeddedResource Include="EditingForms\UnhandledExceptions\FormUnhandledException.resx">
       <DependentUpon>FormUnhandledException.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Languages\Strings.de.resx" />

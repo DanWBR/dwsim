@@ -216,356 +216,356 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base Classes\CapeOpen.vb" />
-    <Compile Include="Base Classes\UnitOperations.vb" />
+    <Compile Include="BaseClasses\CapeOpen.vb" />
+    <Compile Include="BaseClasses\UnitOperations.vb" />
     <Compile Include="Controllers\PIDController.vb" />
     <Compile Include="Databases\PumpDatabase.vb" />
-    <Compile Include="Editing Forms\Dynamics\EditingForm_SeparatorFiller.Designer.vb">
+    <Compile Include="EditingForms\Dynamics\EditingForm_SeparatorFiller.Designer.vb">
       <DependentUpon>EditingForm_SeparatorFiller.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Dynamics\EditingForm_SeparatorFiller.vb">
+    <Compile Include="EditingForms\Dynamics\EditingForm_SeparatorFiller.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_AnalogGauge.Designer.vb">
+    <Compile Include="EditingForms\EditingForm_AnalogGauge.Designer.vb">
       <DependentUpon>EditingForm_AnalogGauge.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_AnalogGauge.vb">
+    <Compile Include="EditingForms\EditingForm_AnalogGauge.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_CAPEOPENUO.Designer.vb">
+    <Compile Include="EditingForms\EditingForm_CAPEOPENUO.Designer.vb">
       <DependentUpon>EditingForm_CAPEOPENUO.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_CAPEOPENUO.vb">
+    <Compile Include="EditingForms\EditingForm_CAPEOPENUO.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_Switch.Designer.vb">
+    <Compile Include="EditingForms\EditingForm_Switch.Designer.vb">
       <DependentUpon>EditingForm_Switch.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_Switch.vb">
+    <Compile Include="EditingForms\EditingForm_Switch.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_Input.Designer.vb">
+    <Compile Include="EditingForms\EditingForm_Input.Designer.vb">
       <DependentUpon>EditingForm_Input.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_Input.vb">
+    <Compile Include="EditingForms\EditingForm_Input.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_DigitalGauge.Designer.vb">
+    <Compile Include="EditingForms\EditingForm_DigitalGauge.Designer.vb">
       <DependentUpon>EditingForm_DigitalGauge.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_DigitalGauge.vb">
+    <Compile Include="EditingForms\EditingForm_DigitalGauge.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_Filter.Designer.vb">
+    <Compile Include="EditingForms\EditingForm_Filter.Designer.vb">
       <DependentUpon>EditingForm_Filter.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_Filter.vb">
+    <Compile Include="EditingForms\EditingForm_Filter.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_Flowsheet.Designer.vb">
+    <Compile Include="EditingForms\EditingForm_Flowsheet.Designer.vb">
       <DependentUpon>EditingForm_Flowsheet.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_Flowsheet.vb">
+    <Compile Include="EditingForms\EditingForm_Flowsheet.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_Column.Designer.vb">
+    <Compile Include="EditingForms\EditingForm_Column.Designer.vb">
       <DependentUpon>EditingForm_Column.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_Column.vb">
+    <Compile Include="EditingForms\EditingForm_Column.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_LevelGauge.Designer.vb">
+    <Compile Include="EditingForms\EditingForm_LevelGauge.Designer.vb">
       <DependentUpon>EditingForm_LevelGauge.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_LevelGauge.vb">
+    <Compile Include="EditingForms\EditingForm_LevelGauge.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_PIDController.Designer.vb">
+    <Compile Include="EditingForms\EditingForm_PIDController.Designer.vb">
       <DependentUpon>EditingForm_PIDController.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_PIDController.vb">
+    <Compile Include="EditingForms\EditingForm_PIDController.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_ShortcutColumn.Designer.vb">
+    <Compile Include="EditingForms\EditingForm_ShortcutColumn.Designer.vb">
       <DependentUpon>EditingForm_ShortcutColumn.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_ShortcutColumn.vb">
+    <Compile Include="EditingForms\EditingForm_ShortcutColumn.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_Pipe.Designer.vb">
+    <Compile Include="EditingForms\EditingForm_Pipe.Designer.vb">
       <DependentUpon>EditingForm_Pipe.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_Pipe.vb">
+    <Compile Include="EditingForms\EditingForm_Pipe.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_ReactorCSTR.Designer.vb">
+    <Compile Include="EditingForms\EditingForm_ReactorCSTR.Designer.vb">
       <DependentUpon>EditingForm_ReactorCSTR.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_ReactorCSTR.vb">
+    <Compile Include="EditingForms\EditingForm_ReactorCSTR.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_ReactorPFR.Designer.vb">
+    <Compile Include="EditingForms\EditingForm_ReactorPFR.Designer.vb">
       <DependentUpon>EditingForm_ReactorPFR.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_ReactorPFR.vb">
+    <Compile Include="EditingForms\EditingForm_ReactorPFR.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_EnergyRecycle.Designer.vb">
+    <Compile Include="EditingForms\EditingForm_EnergyRecycle.Designer.vb">
       <DependentUpon>EditingForm_EnergyRecycle.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_EnergyRecycle.vb">
+    <Compile Include="EditingForms\EditingForm_EnergyRecycle.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_Adjust.Designer.vb">
+    <Compile Include="EditingForms\EditingForm_Adjust.Designer.vb">
       <DependentUpon>EditingForm_Adjust.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_Adjust.vb">
+    <Compile Include="EditingForms\EditingForm_Adjust.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_Spec.Designer.vb">
+    <Compile Include="EditingForms\EditingForm_Spec.Designer.vb">
       <DependentUpon>EditingForm_Spec.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_Spec.vb">
+    <Compile Include="EditingForms\EditingForm_Spec.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_Spreadsheet.Designer.vb">
+    <Compile Include="EditingForms\EditingForm_Spreadsheet.Designer.vb">
       <DependentUpon>EditingForm_Spreadsheet.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_Spreadsheet.vb">
+    <Compile Include="EditingForms\EditingForm_Spreadsheet.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_CustomUO.Designer.vb">
+    <Compile Include="EditingForms\EditingForm_CustomUO.Designer.vb">
       <DependentUpon>EditingForm_CustomUO.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_CustomUO.vb">
+    <Compile Include="EditingForms\EditingForm_CustomUO.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_ReactorConvEqGibbs.Designer.vb">
+    <Compile Include="EditingForms\EditingForm_ReactorConvEqGibbs.Designer.vb">
       <DependentUpon>EditingForm_ReactorConvEqGibbs.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_ReactorConvEqGibbs.vb">
+    <Compile Include="EditingForms\EditingForm_ReactorConvEqGibbs.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_CompoundSeparator.Designer.vb">
+    <Compile Include="EditingForms\EditingForm_CompoundSeparator.Designer.vb">
       <DependentUpon>EditingForm_CompoundSeparator.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_CompoundSeparator.vb">
+    <Compile Include="EditingForms\EditingForm_CompoundSeparator.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_Pump.Designer.vb">
+    <Compile Include="EditingForms\EditingForm_Pump.Designer.vb">
       <DependentUpon>EditingForm_Pump.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_Pump.vb">
+    <Compile Include="EditingForms\EditingForm_Pump.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_Vessel.Designer.vb">
+    <Compile Include="EditingForms\EditingForm_Vessel.Designer.vb">
       <DependentUpon>EditingForm_Vessel.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_Vessel.vb">
+    <Compile Include="EditingForms\EditingForm_Vessel.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_EnergyStream.Designer.vb">
+    <Compile Include="EditingForms\EditingForm_EnergyStream.Designer.vb">
       <DependentUpon>EditingForm_EnergyStream.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_EnergyStream.vb">
+    <Compile Include="EditingForms\EditingForm_EnergyStream.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_SolidsSep.Designer.vb">
+    <Compile Include="EditingForms\EditingForm_SolidsSep.Designer.vb">
       <DependentUpon>EditingForm_SolidsSep.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_SolidsSep.vb">
+    <Compile Include="EditingForms\EditingForm_SolidsSep.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_Tank.Designer.vb">
+    <Compile Include="EditingForms\EditingForm_Tank.Designer.vb">
       <DependentUpon>EditingForm_Tank.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_Tank.vb">
+    <Compile Include="EditingForms\EditingForm_Tank.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_Splitter.Designer.vb">
+    <Compile Include="EditingForms\EditingForm_Splitter.Designer.vb">
       <DependentUpon>EditingForm_Splitter.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_Splitter.vb">
+    <Compile Include="EditingForms\EditingForm_Splitter.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_OrificePlate.Designer.vb">
+    <Compile Include="EditingForms\EditingForm_OrificePlate.Designer.vb">
       <DependentUpon>EditingForm_OrificePlate.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_OrificePlate.vb">
+    <Compile Include="EditingForms\EditingForm_OrificePlate.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_Recycle.Designer.vb">
+    <Compile Include="EditingForms\EditingForm_Recycle.Designer.vb">
       <DependentUpon>EditingForm_Recycle.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_Recycle.vb">
+    <Compile Include="EditingForms\EditingForm_Recycle.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_HeatExchanger.Designer.vb">
+    <Compile Include="EditingForms\EditingForm_HeatExchanger.Designer.vb">
       <DependentUpon>EditingForm_HeatExchanger.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_HeatExchanger.vb">
+    <Compile Include="EditingForms\EditingForm_HeatExchanger.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_Valve.Designer.vb">
+    <Compile Include="EditingForms\EditingForm_Valve.Designer.vb">
       <DependentUpon>EditingForm_Valve.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_Valve.vb">
+    <Compile Include="EditingForms\EditingForm_Valve.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_HeaterCooler.Designer.vb">
+    <Compile Include="EditingForms\EditingForm_HeaterCooler.Designer.vb">
       <DependentUpon>EditingForm_HeaterCooler.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_HeaterCooler.vb">
+    <Compile Include="EditingForms\EditingForm_HeaterCooler.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_Mixer.Designer.vb">
+    <Compile Include="EditingForms\EditingForm_Mixer.Designer.vb">
       <DependentUpon>EditingForm_Mixer.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_Mixer.vb">
+    <Compile Include="EditingForms\EditingForm_Mixer.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_ComprExpndr.Designer.vb">
+    <Compile Include="EditingForms\EditingForm_ComprExpndr.Designer.vb">
       <DependentUpon>EditingForm_ComprExpndr.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_ComprExpndr.vb">
+    <Compile Include="EditingForms\EditingForm_ComprExpndr.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Other\Form_CapeOpenSelector.designer.vb">
+    <Compile Include="EditingForms\Other\Form_CapeOpenSelector.designer.vb">
       <DependentUpon>Form_CapeOpenSelector.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Other\Form_CapeOpenSelector.vb">
+    <Compile Include="EditingForms\Other\Form_CapeOpenSelector.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Other\Form_LoadSave.designer.vb">
+    <Compile Include="EditingForms\Other\Form_LoadSave.designer.vb">
       <DependentUpon>Form_LoadSave.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Other\Form_LoadSave.vb">
+    <Compile Include="EditingForms\Other\Form_LoadSave.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\ComprExprCurveSet.Designer.vb">
+    <Compile Include="EditingForms\Supporting\ComprExprCurveSet.Designer.vb">
       <DependentUpon>ComprExprCurveSet.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\ComprExprCurveSet.vb">
+    <Compile Include="EditingForms\Supporting\ComprExprCurveSet.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_Column_Connections_New.designer.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_Column_Connections_New.designer.vb">
       <DependentUpon>EditingForm_Column_Connections_New.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_Column_Connections_New.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_Column_Connections_New.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_Compr_Curves.designer.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_Compr_Curves.designer.vb">
       <DependentUpon>EditingForm_Compr_Curves.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_Compr_Curves.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_Compr_Curves.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_HeatExchanger_ViewProfile.Designer.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_HeatExchanger_ViewProfile.Designer.vb">
       <DependentUpon>EditingForm_HeatExchanger_ViewProfile.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_HeatExchanger_ViewProfile.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_HeatExchanger_ViewProfile.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_Pipe_HydraulicProfileEditor.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_Pipe_HydraulicProfileEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_Pump_Curves.designer.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_Pump_Curves.designer.vb">
       <DependentUpon>EditingForm_Pump_Curves.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_Pump_Curves.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_Pump_Curves.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_CustomUO_ScriptEditor.designer.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_CustomUO_ScriptEditor.designer.vb">
       <DependentUpon>EditingForm_CustomUO_ScriptEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_CustomUO_ScriptEditor.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_CustomUO_ScriptEditor.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_CustomUO_ScriptEditor_Mono.designer.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_CustomUO_ScriptEditor_Mono.designer.vb">
       <DependentUpon>EditingForm_CustomUO_ScriptEditor_Mono.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_CustomUO_ScriptEditor_Mono.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_CustomUO_ScriptEditor_Mono.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_Flowsheet_Editor.designer.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_Flowsheet_Editor.designer.vb">
       <DependentUpon>EditingForm_Flowsheet_Editor.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_Flowsheet_Editor.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_Flowsheet_Editor.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_Flowsheet_Viewer.designer.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_Flowsheet_Viewer.designer.vb">
       <DependentUpon>EditingForm_Flowsheet_Viewer.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_Flowsheet_Viewer.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_Flowsheet_Viewer.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_Adjust_ControlPanel.designer.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_Adjust_ControlPanel.designer.vb">
       <DependentUpon>EditingForm_Adjust_ControlPanel.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_Adjust_ControlPanel.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_Adjust_ControlPanel.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_Pipe_ThermalProfileEditor.designer.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_Pipe_ThermalProfileEditor.designer.vb">
       <DependentUpon>EditingForm_Pipe_ThermalProfileEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_Pipe_ThermalProfileEditor.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_Pipe_ThermalProfileEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_Pipe_ResultsChart.designer.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_Pipe_ResultsChart.designer.vb">
       <DependentUpon>EditingForm_Pipe_ResultsChart.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_Pipe_ResultsChart.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_Pipe_ResultsChart.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_Pipe_ResultsTable.designer.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_Pipe_ResultsTable.designer.vb">
       <DependentUpon>EditingForm_Pipe_ResultsTable.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_Pipe_ResultsTable.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_Pipe_ResultsTable.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_Column_Connections.designer.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_Column_Connections.designer.vb">
       <DependentUpon>EditingForm_Column_Connections.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_Column_Connections.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_Column_Connections.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_Column_InitialEstimates.designer.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_Column_InitialEstimates.designer.vb">
       <DependentUpon>EditingForm_Column_InitialEstimates.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_Column_InitialEstimates.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_Column_InitialEstimates.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_Column_Results.designer.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_Column_Results.designer.vb">
       <DependentUpon>EditingForm_Column_Results.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_Column_Results.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_Column_Results.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_Column_Stages.designer.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_Column_Stages.designer.vb">
       <DependentUpon>EditingForm_Column_Stages.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_Column_Stages.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_Column_Stages.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_HeatExchanger_SHProperties.designer.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_HeatExchanger_SHProperties.designer.vb">
       <DependentUpon>EditingForm_HeatExchanger_SHProperties.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_HeatExchanger_SHProperties.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_HeatExchanger_SHProperties.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_Gibbs_ElementMatrixEditor.designer.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_Gibbs_ElementMatrixEditor.designer.vb">
       <DependentUpon>EditingForm_Gibbs_ElementMatrixEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_Gibbs_ElementMatrixEditor.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_Gibbs_ElementMatrixEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_Gibbs_InitialEstimatesEditor.designer.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_Gibbs_InitialEstimatesEditor.designer.vb">
       <DependentUpon>EditingForm_Gibbs_InitialEstimatesEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Supporting\EditingForm_Gibbs_InitialEstimatesEditor.vb">
+    <Compile Include="EditingForms\Supporting\EditingForm_Gibbs_InitialEstimatesEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Energy Stream\Streams.vb" />
+    <Compile Include="EnergyStream\Streams.vb" />
     <Compile Include="Extenders\ExtensionMethods.vb" />
     <Compile Include="Extenders\ScintillaExtender.vb" />
     <Compile Include="Extenders\StreamListExtender.vb" />
@@ -599,10 +599,10 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Logical Blocks\Adjust.vb" />
-    <Compile Include="Logical Blocks\EnergyRecycle.vb" />
-    <Compile Include="Logical Blocks\Recycle.vb" />
-    <Compile Include="Logical Blocks\Spec.vb" />
+    <Compile Include="LogicalBlocks\Adjust.vb" />
+    <Compile Include="LogicalBlocks\EnergyRecycle.vb" />
+    <Compile Include="LogicalBlocks\Recycle.vb" />
+    <Compile Include="LogicalBlocks\Spec.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -624,576 +624,576 @@
     <Compile Include="Reactors\Equilibrium.vb" />
     <Compile Include="Reactors\Gibbs.vb" />
     <Compile Include="Reactors\PFR.vb" />
-    <Compile Include="Resource Manager\ResMan.vb" />
-    <Compile Include="Support Classes\PipeThermalProfile.vb" />
-    <Compile Include="Support Classes\ComboBoxColumnTemplates.vb" />
-    <Compile Include="Type Resolver\Resolver.vb" />
+    <Compile Include="ResourceManager\ResMan.vb" />
+    <Compile Include="SupportClasses\PipeThermalProfile.vb" />
+    <Compile Include="SupportClasses\ComboBoxColumnTemplates.vb" />
+    <Compile Include="TypeResolver\Resolver.vb" />
     <Compile Include="CAPE-OPEN\CustomUO_CO.vb" />
-    <Compile Include="Unit Operations\DummyUO.vb" />
-    <Compile Include="Unit Operations\PythonScriptUO.vb" />
-    <Compile Include="Unit Operations\FlowsheetUO.vb" />
-    <Compile Include="Unit Operations\OrificePlate.vb" />
-    <Compile Include="Fluid Flow Correlations\FlowPackageBaseClass.vb" />
-    <Compile Include="Fluid Flow Correlations\BeggsBrill.vb" />
-    <Compile Include="Fluid Flow Correlations\LockhartMartinelli.vb" />
-    <Compile Include="Fluid Flow Correlations\PetalasAziz.vb" />
-    <Compile Include="Support Classes\PipeHydraulicProfile.vb" />
-    <Compile Include="Unit Operations\CapeOpenUO.vb" />
-    <Compile Include="Unit Operations\ComponentSeparator.vb" />
-    <Compile Include="Unit Operations\Compressor.vb" />
-    <Compile Include="Unit Operations\Cooler.vb" />
-    <Compile Include="Unit Operations\RigorousColumn.vb" />
-    <Compile Include="Unit Operations\ShortcutColumn.vb" />
-    <Compile Include="Unit Operations\Spreadsheet.vb" />
-    <Compile Include="Unit Operations\Filter.vb" />
-    <Compile Include="Unit Operations\Heater.vb" />
-    <Compile Include="Unit Operations\HeatExchanger.vb" />
-    <Compile Include="Unit Operations\Mixer.vb" />
-    <Compile Include="Unit Operations\Pipe.vb" />
-    <Compile Include="Unit Operations\Pump.vb" />
-    <Compile Include="Unit Operations\SolidsSeparator.vb" />
-    <Compile Include="Unit Operations\Splitter.vb" />
-    <Compile Include="Unit Operations\Expander.vb" />
-    <Compile Include="Unit Operations\Tank.vb" />
-    <Compile Include="Unit Operations\Valve.vb" />
-    <Compile Include="Unit Operations\Vessel.vb" />
+    <Compile Include="UnitOperations\DummyUO.vb" />
+    <Compile Include="UnitOperations\PythonScriptUO.vb" />
+    <Compile Include="UnitOperations\FlowsheetUO.vb" />
+    <Compile Include="UnitOperations\OrificePlate.vb" />
+    <Compile Include="FluidFlowCorrelations\FlowPackageBaseClass.vb" />
+    <Compile Include="FluidFlowCorrelations\BeggsBrill.vb" />
+    <Compile Include="FluidFlowCorrelations\LockhartMartinelli.vb" />
+    <Compile Include="FluidFlowCorrelations\PetalasAziz.vb" />
+    <Compile Include="SupportClasses\PipeHydraulicProfile.vb" />
+    <Compile Include="UnitOperations\CapeOpenUO.vb" />
+    <Compile Include="UnitOperations\ComponentSeparator.vb" />
+    <Compile Include="UnitOperations\Compressor.vb" />
+    <Compile Include="UnitOperations\Cooler.vb" />
+    <Compile Include="UnitOperations\RigorousColumn.vb" />
+    <Compile Include="UnitOperations\ShortcutColumn.vb" />
+    <Compile Include="UnitOperations\Spreadsheet.vb" />
+    <Compile Include="UnitOperations\Filter.vb" />
+    <Compile Include="UnitOperations\Heater.vb" />
+    <Compile Include="UnitOperations\HeatExchanger.vb" />
+    <Compile Include="UnitOperations\Mixer.vb" />
+    <Compile Include="UnitOperations\Pipe.vb" />
+    <Compile Include="UnitOperations\Pump.vb" />
+    <Compile Include="UnitOperations\SolidsSeparator.vb" />
+    <Compile Include="UnitOperations\Splitter.vb" />
+    <Compile Include="UnitOperations\Expander.vb" />
+    <Compile Include="UnitOperations\Tank.vb" />
+    <Compile Include="UnitOperations\Valve.vb" />
+    <Compile Include="UnitOperations\Vessel.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Editing Forms\Dynamics\EditingForm_SeparatorFiller.en.resx">
+    <EmbeddedResource Include="EditingForms\Dynamics\EditingForm_SeparatorFiller.en.resx">
       <DependentUpon>EditingForm_SeparatorFiller.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Dynamics\EditingForm_SeparatorFiller.resx">
+    <EmbeddedResource Include="EditingForms\Dynamics\EditingForm_SeparatorFiller.resx">
       <DependentUpon>EditingForm_SeparatorFiller.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Adjust.de.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Adjust.de.resx">
       <DependentUpon>EditingForm_Adjust.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_AnalogGauge.en.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_AnalogGauge.en.resx">
       <DependentUpon>EditingForm_AnalogGauge.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_AnalogGauge.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_AnalogGauge.resx">
       <DependentUpon>EditingForm_AnalogGauge.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_CAPEOPENUO.de.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_CAPEOPENUO.de.resx">
       <DependentUpon>EditingForm_CAPEOPENUO.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_CAPEOPENUO.en.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_CAPEOPENUO.en.resx">
       <DependentUpon>EditingForm_CAPEOPENUO.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_CAPEOPENUO.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_CAPEOPENUO.resx">
       <DependentUpon>EditingForm_CAPEOPENUO.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Column.de.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Column.de.resx">
       <DependentUpon>EditingForm_Column.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_ComprExpndr.de.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_ComprExpndr.de.resx">
       <DependentUpon>EditingForm_ComprExpndr.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_CustomUO.de.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_CustomUO.de.resx">
       <DependentUpon>EditingForm_CustomUO.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Switch.en.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Switch.en.resx">
       <DependentUpon>EditingForm_Switch.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Switch.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Switch.resx">
       <DependentUpon>EditingForm_Switch.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Input.en.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Input.en.resx">
       <DependentUpon>EditingForm_Input.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Input.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Input.resx">
       <DependentUpon>EditingForm_Input.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_DigitalGauge.en.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_DigitalGauge.en.resx">
       <DependentUpon>EditingForm_DigitalGauge.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_DigitalGauge.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_DigitalGauge.resx">
       <DependentUpon>EditingForm_DigitalGauge.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_EnergyRecycle.de.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_EnergyRecycle.de.resx">
       <DependentUpon>EditingForm_EnergyRecycle.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_EnergyStream.de.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_EnergyStream.de.resx">
       <DependentUpon>EditingForm_EnergyStream.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Filter.de.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Filter.de.resx">
       <DependentUpon>EditingForm_Filter.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Filter.en.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Filter.en.resx">
       <DependentUpon>EditingForm_Filter.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Filter.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Filter.resx">
       <DependentUpon>EditingForm_Filter.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Flowsheet.en.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Flowsheet.en.resx">
       <DependentUpon>EditingForm_Flowsheet.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Flowsheet.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Flowsheet.resx">
       <DependentUpon>EditingForm_Flowsheet.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Column.en.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Column.en.resx">
       <DependentUpon>EditingForm_Column.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Column.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Column.resx">
       <DependentUpon>EditingForm_Column.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_HeaterCooler.de.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_HeaterCooler.de.resx">
       <DependentUpon>EditingForm_HeaterCooler.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_HeatExchanger.de.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_HeatExchanger.de.resx">
       <DependentUpon>EditingForm_HeatExchanger.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_LevelGauge.en.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_LevelGauge.en.resx">
       <DependentUpon>EditingForm_LevelGauge.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_LevelGauge.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_LevelGauge.resx">
       <DependentUpon>EditingForm_LevelGauge.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Mixer.de.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Mixer.de.resx">
       <DependentUpon>EditingForm_Mixer.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_OrificePlate.de.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_OrificePlate.de.resx">
       <DependentUpon>EditingForm_OrificePlate.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_OrificePlate.es.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_OrificePlate.es.resx">
       <DependentUpon>EditingForm_OrificePlate.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_PIDController.en.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_PIDController.en.resx">
       <DependentUpon>EditingForm_PIDController.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_PIDController.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_PIDController.resx">
       <DependentUpon>EditingForm_PIDController.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Pipe.de.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Pipe.de.resx">
       <DependentUpon>EditingForm_Pipe.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Pump.de.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Pump.de.resx">
       <DependentUpon>EditingForm_Pump.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_ReactorConvEqGibbs.de.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_ReactorConvEqGibbs.de.resx">
       <DependentUpon>EditingForm_ReactorConvEqGibbs.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_ReactorCSTR.de.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_ReactorCSTR.de.resx">
       <DependentUpon>EditingForm_ReactorCSTR.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_ReactorCSTR.es.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_ReactorCSTR.es.resx">
       <DependentUpon>EditingForm_ReactorCSTR.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_ReactorPFR.de.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_ReactorPFR.de.resx">
       <DependentUpon>EditingForm_ReactorPFR.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Recycle.de.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Recycle.de.resx">
       <DependentUpon>EditingForm_Recycle.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_ShortcutColumn.de.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_ShortcutColumn.de.resx">
       <DependentUpon>EditingForm_ShortcutColumn.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_ShortcutColumn.en.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_ShortcutColumn.en.resx">
       <DependentUpon>EditingForm_ShortcutColumn.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_ShortcutColumn.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_ShortcutColumn.resx">
       <DependentUpon>EditingForm_ShortcutColumn.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Pipe.en.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Pipe.en.resx">
       <DependentUpon>EditingForm_Pipe.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Pipe.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Pipe.resx">
       <DependentUpon>EditingForm_Pipe.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_ReactorCSTR.en.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_ReactorCSTR.en.resx">
       <DependentUpon>EditingForm_ReactorCSTR.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_ReactorCSTR.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_ReactorCSTR.resx">
       <DependentUpon>EditingForm_ReactorCSTR.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_ReactorPFR.en.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_ReactorPFR.en.resx">
       <DependentUpon>EditingForm_ReactorPFR.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_ReactorPFR.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_ReactorPFR.resx">
       <DependentUpon>EditingForm_ReactorPFR.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_EnergyRecycle.en.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_EnergyRecycle.en.resx">
       <DependentUpon>EditingForm_EnergyRecycle.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_EnergyRecycle.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_EnergyRecycle.resx">
       <DependentUpon>EditingForm_EnergyRecycle.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Adjust.en.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Adjust.en.resx">
       <DependentUpon>EditingForm_Adjust.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Adjust.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Adjust.resx">
       <DependentUpon>EditingForm_Adjust.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_SolidsSep.de.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_SolidsSep.de.resx">
       <DependentUpon>EditingForm_SolidsSep.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Spec.de.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Spec.de.resx">
       <DependentUpon>EditingForm_Spec.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Spec.en.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Spec.en.resx">
       <DependentUpon>EditingForm_Spec.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Spec.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Spec.resx">
       <DependentUpon>EditingForm_Spec.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Splitter.de.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Splitter.de.resx">
       <DependentUpon>EditingForm_Splitter.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Spreadsheet.de.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Spreadsheet.de.resx">
       <DependentUpon>EditingForm_Spreadsheet.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Spreadsheet.en.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Spreadsheet.en.resx">
       <DependentUpon>EditingForm_Spreadsheet.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Spreadsheet.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Spreadsheet.resx">
       <DependentUpon>EditingForm_Spreadsheet.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_CustomUO.en.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_CustomUO.en.resx">
       <DependentUpon>EditingForm_CustomUO.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_CustomUO.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_CustomUO.resx">
       <DependentUpon>EditingForm_CustomUO.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_ReactorConvEqGibbs.en.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_ReactorConvEqGibbs.en.resx">
       <DependentUpon>EditingForm_ReactorConvEqGibbs.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_ReactorConvEqGibbs.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_ReactorConvEqGibbs.resx">
       <DependentUpon>EditingForm_ReactorConvEqGibbs.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_CompoundSeparator.en.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_CompoundSeparator.en.resx">
       <DependentUpon>EditingForm_CompoundSeparator.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_CompoundSeparator.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_CompoundSeparator.resx">
       <DependentUpon>EditingForm_CompoundSeparator.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Pump.en.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Pump.en.resx">
       <DependentUpon>EditingForm_Pump.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Pump.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Pump.resx">
       <DependentUpon>EditingForm_Pump.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Tank.de.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Tank.de.resx">
       <DependentUpon>EditingForm_Tank.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Valve.de.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Valve.de.resx">
       <DependentUpon>EditingForm_Valve.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Vessel.de.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Vessel.de.resx">
       <DependentUpon>EditingForm_Vessel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Vessel.en.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Vessel.en.resx">
       <DependentUpon>EditingForm_Vessel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Vessel.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Vessel.resx">
       <DependentUpon>EditingForm_Vessel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_EnergyStream.en.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_EnergyStream.en.resx">
       <DependentUpon>EditingForm_EnergyStream.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_EnergyStream.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_EnergyStream.resx">
       <DependentUpon>EditingForm_EnergyStream.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_SolidsSep.en.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_SolidsSep.en.resx">
       <DependentUpon>EditingForm_SolidsSep.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_SolidsSep.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_SolidsSep.resx">
       <DependentUpon>EditingForm_SolidsSep.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Tank.en.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Tank.en.resx">
       <DependentUpon>EditingForm_Tank.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Tank.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Tank.resx">
       <DependentUpon>EditingForm_Tank.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Splitter.en.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Splitter.en.resx">
       <DependentUpon>EditingForm_Splitter.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Splitter.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Splitter.resx">
       <DependentUpon>EditingForm_Splitter.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_OrificePlate.en.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_OrificePlate.en.resx">
       <DependentUpon>EditingForm_OrificePlate.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_OrificePlate.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_OrificePlate.resx">
       <DependentUpon>EditingForm_OrificePlate.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Recycle.en.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Recycle.en.resx">
       <DependentUpon>EditingForm_Recycle.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Recycle.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Recycle.resx">
       <DependentUpon>EditingForm_Recycle.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_HeatExchanger.en.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_HeatExchanger.en.resx">
       <DependentUpon>EditingForm_HeatExchanger.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_HeatExchanger.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_HeatExchanger.resx">
       <DependentUpon>EditingForm_HeatExchanger.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Valve.en.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Valve.en.resx">
       <DependentUpon>EditingForm_Valve.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Valve.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Valve.resx">
       <DependentUpon>EditingForm_Valve.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_HeaterCooler.en.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_HeaterCooler.en.resx">
       <DependentUpon>EditingForm_HeaterCooler.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_HeaterCooler.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_HeaterCooler.resx">
       <DependentUpon>EditingForm_HeaterCooler.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Mixer.en.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Mixer.en.resx">
       <DependentUpon>EditingForm_Mixer.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Mixer.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_Mixer.resx">
       <DependentUpon>EditingForm_Mixer.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_ComprExpndr.en.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_ComprExpndr.en.resx">
       <DependentUpon>EditingForm_ComprExpndr.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_ComprExpndr.resx">
+    <EmbeddedResource Include="EditingForms\EditingForm_ComprExpndr.resx">
       <DependentUpon>EditingForm_ComprExpndr.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Other\Form_CapeOpenSelector.de.resx">
+    <EmbeddedResource Include="EditingForms\Other\Form_CapeOpenSelector.de.resx">
       <DependentUpon>Form_CapeOpenSelector.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Other\Form_CapeOpenSelector.en.resx">
+    <EmbeddedResource Include="EditingForms\Other\Form_CapeOpenSelector.en.resx">
       <DependentUpon>Form_CapeOpenSelector.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Other\Form_CapeOpenSelector.es.resx">
+    <EmbeddedResource Include="EditingForms\Other\Form_CapeOpenSelector.es.resx">
       <DependentUpon>Form_CapeOpenSelector.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Other\Form_CapeOpenSelector.resx">
+    <EmbeddedResource Include="EditingForms\Other\Form_CapeOpenSelector.resx">
       <DependentUpon>Form_CapeOpenSelector.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Other\Form_LoadSave.de.resx">
+    <EmbeddedResource Include="EditingForms\Other\Form_LoadSave.de.resx">
       <DependentUpon>Form_LoadSave.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Other\Form_LoadSave.en.resx">
+    <EmbeddedResource Include="EditingForms\Other\Form_LoadSave.en.resx">
       <DependentUpon>Form_LoadSave.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Other\Form_LoadSave.es.resx">
+    <EmbeddedResource Include="EditingForms\Other\Form_LoadSave.es.resx">
       <DependentUpon>Form_LoadSave.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Other\Form_LoadSave.resx">
+    <EmbeddedResource Include="EditingForms\Other\Form_LoadSave.resx">
       <DependentUpon>Form_LoadSave.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\ComprExprCurveSet.en.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\ComprExprCurveSet.en.resx">
       <DependentUpon>ComprExprCurveSet.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\ComprExprCurveSet.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\ComprExprCurveSet.resx">
       <DependentUpon>ComprExprCurveSet.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Adjust_ControlPanel.de.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Adjust_ControlPanel.de.resx">
       <DependentUpon>EditingForm_Adjust_ControlPanel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_Connections.de.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Column_Connections.de.resx">
       <DependentUpon>EditingForm_Column_Connections.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_Connections_New.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Column_Connections_New.resx">
       <DependentUpon>EditingForm_Column_Connections_New.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Compr_Curves.en.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Compr_Curves.en.resx">
       <DependentUpon>EditingForm_Compr_Curves.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Compr_Curves.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Compr_Curves.resx">
       <DependentUpon>EditingForm_Compr_Curves.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Flowsheet_Viewer.de.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Flowsheet_Viewer.de.resx">
       <DependentUpon>EditingForm_Flowsheet_Viewer.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Flowsheet_Viewer.en.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Flowsheet_Viewer.en.resx">
       <DependentUpon>EditingForm_Flowsheet_Viewer.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Gibbs_ElementMatrixEditor.de.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Gibbs_ElementMatrixEditor.de.resx">
       <DependentUpon>EditingForm_Gibbs_ElementMatrixEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Gibbs_InitialEstimatesEditor.de.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Gibbs_InitialEstimatesEditor.de.resx">
       <DependentUpon>EditingForm_Gibbs_InitialEstimatesEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_HeatExchanger_ViewProfile.de.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_HeatExchanger_ViewProfile.de.resx">
       <DependentUpon>EditingForm_HeatExchanger_ViewProfile.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_HeatExchanger_ViewProfile.en.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_HeatExchanger_ViewProfile.en.resx">
       <DependentUpon>EditingForm_HeatExchanger_ViewProfile.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_HeatExchanger_ViewProfile.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_HeatExchanger_ViewProfile.resx">
       <DependentUpon>EditingForm_HeatExchanger_ViewProfile.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_HydraulicProfileEditor.de.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Pipe_HydraulicProfileEditor.de.resx">
       <DependentUpon>EditingForm_Pipe_HydraulicProfileEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_HydraulicProfileEditor.en.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Pipe_HydraulicProfileEditor.en.resx">
       <DependentUpon>EditingForm_Pipe_HydraulicProfileEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_HydraulicProfileEditor.es.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Pipe_HydraulicProfileEditor.es.resx">
       <DependentUpon>EditingForm_Pipe_HydraulicProfileEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_HydraulicProfileEditor.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Pipe_HydraulicProfileEditor.resx">
       <DependentUpon>EditingForm_Pipe_HydraulicProfileEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pump_Curves.de.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Pump_Curves.de.resx">
       <DependentUpon>EditingForm_Pump_Curves.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pump_Curves.en.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Pump_Curves.en.resx">
       <DependentUpon>EditingForm_Pump_Curves.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pump_Curves.es.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Pump_Curves.es.resx">
       <DependentUpon>EditingForm_Pump_Curves.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pump_Curves.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Pump_Curves.resx">
       <DependentUpon>EditingForm_Pump_Curves.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_CustomUO_ScriptEditor.de.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_CustomUO_ScriptEditor.de.resx">
       <DependentUpon>EditingForm_CustomUO_ScriptEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_CustomUO_ScriptEditor.en.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_CustomUO_ScriptEditor.en.resx">
       <DependentUpon>EditingForm_CustomUO_ScriptEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_CustomUO_ScriptEditor.es.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_CustomUO_ScriptEditor.es.resx">
       <DependentUpon>EditingForm_CustomUO_ScriptEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_CustomUO_ScriptEditor.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_CustomUO_ScriptEditor.resx">
       <DependentUpon>EditingForm_CustomUO_ScriptEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_CustomUO_ScriptEditor_Mono.de.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_CustomUO_ScriptEditor_Mono.de.resx">
       <DependentUpon>EditingForm_CustomUO_ScriptEditor_Mono.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_CustomUO_ScriptEditor_Mono.en.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_CustomUO_ScriptEditor_Mono.en.resx">
       <DependentUpon>EditingForm_CustomUO_ScriptEditor_Mono.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_CustomUO_ScriptEditor_Mono.es.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_CustomUO_ScriptEditor_Mono.es.resx">
       <DependentUpon>EditingForm_CustomUO_ScriptEditor_Mono.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_CustomUO_ScriptEditor_Mono.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_CustomUO_ScriptEditor_Mono.resx">
       <DependentUpon>EditingForm_CustomUO_ScriptEditor_Mono.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Flowsheet_Editor.de.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Flowsheet_Editor.de.resx">
       <DependentUpon>EditingForm_Flowsheet_Editor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Flowsheet_Editor.en.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Flowsheet_Editor.en.resx">
       <DependentUpon>EditingForm_Flowsheet_Editor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Flowsheet_Editor.es.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Flowsheet_Editor.es.resx">
       <DependentUpon>EditingForm_Flowsheet_Editor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Flowsheet_Editor.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Flowsheet_Editor.resx">
       <DependentUpon>EditingForm_Flowsheet_Editor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Flowsheet_Viewer.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Flowsheet_Viewer.resx">
       <DependentUpon>EditingForm_Flowsheet_Viewer.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Adjust_ControlPanel.en.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Adjust_ControlPanel.en.resx">
       <DependentUpon>EditingForm_Adjust_ControlPanel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Adjust_ControlPanel.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Adjust_ControlPanel.resx">
       <DependentUpon>EditingForm_Adjust_ControlPanel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_ThermalProfileEditor.de.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Pipe_ThermalProfileEditor.de.resx">
       <DependentUpon>EditingForm_Pipe_ThermalProfileEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_ThermalProfileEditor.en.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Pipe_ThermalProfileEditor.en.resx">
       <DependentUpon>EditingForm_Pipe_ThermalProfileEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_ThermalProfileEditor.es.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Pipe_ThermalProfileEditor.es.resx">
       <DependentUpon>EditingForm_Pipe_ThermalProfileEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_ThermalProfileEditor.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Pipe_ThermalProfileEditor.resx">
       <DependentUpon>EditingForm_Pipe_ThermalProfileEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_ResultsChart.de.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Pipe_ResultsChart.de.resx">
       <DependentUpon>EditingForm_Pipe_ResultsChart.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_ResultsChart.en.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Pipe_ResultsChart.en.resx">
       <DependentUpon>EditingForm_Pipe_ResultsChart.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_ResultsChart.es.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Pipe_ResultsChart.es.resx">
       <DependentUpon>EditingForm_Pipe_ResultsChart.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_ResultsChart.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Pipe_ResultsChart.resx">
       <DependentUpon>EditingForm_Pipe_ResultsChart.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_ResultsTable.de.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Pipe_ResultsTable.de.resx">
       <DependentUpon>EditingForm_Pipe_ResultsTable.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_ResultsTable.en.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Pipe_ResultsTable.en.resx">
       <DependentUpon>EditingForm_Pipe_ResultsTable.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_ResultsTable.es.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Pipe_ResultsTable.es.resx">
       <DependentUpon>EditingForm_Pipe_ResultsTable.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_ResultsTable.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Pipe_ResultsTable.resx">
       <DependentUpon>EditingForm_Pipe_ResultsTable.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_Connections.en.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Column_Connections.en.resx">
       <DependentUpon>EditingForm_Column_Connections.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_Connections.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Column_Connections.resx">
       <DependentUpon>EditingForm_Column_Connections.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_InitialEstimates.de.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Column_InitialEstimates.de.resx">
       <DependentUpon>EditingForm_Column_InitialEstimates.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_InitialEstimates.en.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Column_InitialEstimates.en.resx">
       <DependentUpon>EditingForm_Column_InitialEstimates.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_InitialEstimates.es.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Column_InitialEstimates.es.resx">
       <DependentUpon>EditingForm_Column_InitialEstimates.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_InitialEstimates.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Column_InitialEstimates.resx">
       <DependentUpon>EditingForm_Column_InitialEstimates.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_Results.de.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Column_Results.de.resx">
       <DependentUpon>EditingForm_Column_Results.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_Results.en.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Column_Results.en.resx">
       <DependentUpon>EditingForm_Column_Results.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_Results.es.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Column_Results.es.resx">
       <DependentUpon>EditingForm_Column_Results.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_Results.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Column_Results.resx">
       <DependentUpon>EditingForm_Column_Results.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_Stages.de.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Column_Stages.de.resx">
       <DependentUpon>EditingForm_Column_Stages.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_Stages.en.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Column_Stages.en.resx">
       <DependentUpon>EditingForm_Column_Stages.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_Stages.es.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Column_Stages.es.resx">
       <DependentUpon>EditingForm_Column_Stages.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_Stages.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Column_Stages.resx">
       <DependentUpon>EditingForm_Column_Stages.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_HeatExchanger_SHProperties.de.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_HeatExchanger_SHProperties.de.resx">
       <DependentUpon>EditingForm_HeatExchanger_SHProperties.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_HeatExchanger_SHProperties.en.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_HeatExchanger_SHProperties.en.resx">
       <DependentUpon>EditingForm_HeatExchanger_SHProperties.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_HeatExchanger_SHProperties.es.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_HeatExchanger_SHProperties.es.resx">
       <DependentUpon>EditingForm_HeatExchanger_SHProperties.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_HeatExchanger_SHProperties.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_HeatExchanger_SHProperties.resx">
       <DependentUpon>EditingForm_HeatExchanger_SHProperties.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Gibbs_ElementMatrixEditor.en.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Gibbs_ElementMatrixEditor.en.resx">
       <DependentUpon>EditingForm_Gibbs_ElementMatrixEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Gibbs_ElementMatrixEditor.es.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Gibbs_ElementMatrixEditor.es.resx">
       <DependentUpon>EditingForm_Gibbs_ElementMatrixEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Gibbs_ElementMatrixEditor.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Gibbs_ElementMatrixEditor.resx">
       <DependentUpon>EditingForm_Gibbs_ElementMatrixEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Gibbs_InitialEstimatesEditor.en.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Gibbs_InitialEstimatesEditor.en.resx">
       <DependentUpon>EditingForm_Gibbs_InitialEstimatesEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Gibbs_InitialEstimatesEditor.es.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Gibbs_InitialEstimatesEditor.es.resx">
       <DependentUpon>EditingForm_Gibbs_InitialEstimatesEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Gibbs_InitialEstimatesEditor.resx">
+    <EmbeddedResource Include="EditingForms\Supporting\EditingForm_Gibbs_InitialEstimatesEditor.resx">
       <DependentUpon>EditingForm_Gibbs_InitialEstimatesEditor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Languages\Strings.de.resx">

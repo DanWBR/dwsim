@@ -1,0 +1,376 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblTag.Size" type="System.Drawing.Size, System.Drawing">
+    <value>378, 20</value>
+  </data>
+  <data name="chkActive.Location" type="System.Drawing.Point, System.Drawing">
+    <value>452, 43</value>
+  </data>
+  <data name="chkActive.ToolTip" xml:space="preserve">
+    <value>Active/Inactive</value>
+  </data>
+  <data name="chkActive.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblConnectedTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>123, 89</value>
+  </data>
+  <data name="Label13.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 89</value>
+  </data>
+  <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 13</value>
+  </data>
+  <data name="Label13.Text" xml:space="preserve">
+    <value>Linked to</value>
+  </data>
+  <data name="Label11.Text" xml:space="preserve">
+    <value>Object</value>
+  </data>
+  <data name="GroupBox5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 4</value>
+  </data>
+  <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>487, 73</value>
+  </data>
+  <data name="GroupBox5.Text" xml:space="preserve">
+    <value>General Info</value>
+  </data>
+  <data name="btnConfigurePP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>450, 22</value>
+  </data>
+  <data name="btnConfigurePP.ToolTip" xml:space="preserve">
+    <value>Configure</value>
+  </data>
+  <data name="btnConfigurePP.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cbPropPack.Location" type="System.Drawing.Point, System.Drawing">
+    <value>147, 22</value>
+  </data>
+  <data name="cbPropPack.Size" type="System.Drawing.Size, System.Drawing">
+    <value>297, 21</value>
+  </data>
+  <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 25</value>
+  </data>
+  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 13</value>
+  </data>
+  <data name="Label9.Text" xml:space="preserve">
+    <value>Property Package</value>
+  </data>
+  <data name="GroupBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 813</value>
+  </data>
+  <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>485, 57</value>
+  </data>
+  <data name="GroupBox3.Text" xml:space="preserve">
+    <value>Property Package Settings</value>
+  </data>
+  <data name="Column3.HeaderText" xml:space="preserve">
+    <value>Variable</value>
+  </data>
+  <data name="Column5.HeaderText" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="dgvinputvars.Size" type="System.Drawing.Size, System.Drawing">
+    <value>465, 238</value>
+  </data>
+  <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>471, 244</value>
+  </data>
+  <data name="TabPage1.Text" xml:space="preserve">
+    <value>Input</value>
+  </data>
+  <data name="DataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
+    <value>Variable</value>
+  </data>
+  <data name="DataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="dgvoutputvars.Size" type="System.Drawing.Size, System.Drawing">
+    <value>452, 267</value>
+  </data>
+  <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>458, 273</value>
+  </data>
+  <data name="TabPage2.Text" xml:space="preserve">
+    <value>Output</value>
+  </data>
+  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>479, 270</value>
+  </data>
+  <data name="GroupBox6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 521</value>
+  </data>
+  <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>485, 289</value>
+  </data>
+  <data name="GroupBox6.Text" xml:space="preserve">
+    <value>CAPE-OPEN Variables</value>
+  </data>
+  <data name="DataGridViewTextBoxColumn3.HeaderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="DataGridViewTextBoxColumn4.HeaderText" xml:space="preserve">
+    <value>Stream</value>
+  </data>
+  <data name="Column1.ToolTipText" xml:space="preserve">
+    <value>Create and Connect</value>
+  </data>
+  <data name="Column2.ToolTipText" xml:space="preserve">
+    <value>Disconnect</value>
+  </data>
+  <data name="dginlets.Size" type="System.Drawing.Size, System.Drawing">
+    <value>465, 144</value>
+  </data>
+  <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>471, 150</value>
+  </data>
+  <data name="TabPage3.Text" xml:space="preserve">
+    <value>Inlet</value>
+  </data>
+  <data name="DataGridViewTextBoxColumn5.HeaderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="DataGridViewComboBoxColumn1.HeaderText" xml:space="preserve">
+    <value>Stream</value>
+  </data>
+  <data name="DataGridViewButtonColumn1.ToolTipText" xml:space="preserve">
+    <value>Create and Connect</value>
+  </data>
+  <data name="DataGridViewButtonColumn2.ToolTipText" xml:space="preserve">
+    <value>Disconnect</value>
+  </data>
+  <data name="dgoutlets.Size" type="System.Drawing.Size, System.Drawing">
+    <value>453, 144</value>
+  </data>
+  <data name="TabPage4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>459, 150</value>
+  </data>
+  <data name="TabPage4.Text" xml:space="preserve">
+    <value>Outlet</value>
+  </data>
+  <data name="DataGridViewTextBoxColumn6.HeaderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="DataGridViewComboBoxColumn2.HeaderText" xml:space="preserve">
+    <value>Stream</value>
+  </data>
+  <data name="DataGridViewButtonColumn3.ToolTipText" xml:space="preserve">
+    <value>Create and Connect</value>
+  </data>
+  <data name="DataGridViewButtonColumn4.ToolTipText" xml:space="preserve">
+    <value>Disconnect</value>
+  </data>
+  <data name="dgenergy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>453, 144</value>
+  </data>
+  <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>459, 150</value>
+  </data>
+  <data name="TabPage5.Text" xml:space="preserve">
+    <value>Energy</value>
+  </data>
+  <data name="TabControl2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>479, 176</value>
+  </data>
+  <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 231</value>
+  </data>
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>485, 195</value>
+  </data>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Connections</value>
+  </data>
+  <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>481, 26</value>
+  </data>
+  <data name="Button1.Text" xml:space="preserve">
+    <value>Open CAPE-OPEN Object Editor</value>
+  </data>
+  <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 184</value>
+  </data>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>487, 45</value>
+  </data>
+  <data name="lblCOVer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>163, 73</value>
+  </data>
+  <data name="lblCODesc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>91, 48</value>
+  </data>
+  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 73</value>
+  </data>
+  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 13</value>
+  </data>
+  <data name="Label4.Text" xml:space="preserve">
+    <value>Object / CAPE-OPEN Version</value>
+  </data>
+  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 47</value>
+  </data>
+  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 13</value>
+  </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Label6.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="GroupBox7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 83</value>
+  </data>
+  <data name="GroupBox7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>487, 97</value>
+  </data>
+  <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>466, 23</value>
+  </data>
+  <data name="Button2.Text" xml:space="preserve">
+    <value>Select Image</value>
+  </data>
+  <data name="chkUseEmbeddedImage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 17</value>
+  </data>
+  <data name="chkUseEmbeddedImage.Text" xml:space="preserve">
+    <value>Use Embedded Image Icon</value>
+  </data>
+  <data name="GroupBox4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 429</value>
+  </data>
+  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>485, 88</value>
+  </data>
+  <data name="GroupBox4.Text" xml:space="preserve">
+    <value>Flowsheet Object Icon</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>501, 881</value>
+  </data>
+</root>

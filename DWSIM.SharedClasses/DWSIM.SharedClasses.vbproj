@@ -123,8 +123,8 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base Class\FlowsheetBag.vb" />
-    <Compile Include="Base Class\SimulationObjectBaseClasses.vb" />
+    <Compile Include="BaseClass\FlowsheetBag.vb" />
+    <Compile Include="BaseClass\SimulationObjectBaseClasses.vb" />
     <Compile Include="Editor\DynamicsPropertyEditor.Designer.vb">
       <DependentUpon>DynamicsPropertyEditor.vb</DependentUpon>
     </Compile>
