@@ -3984,7 +3984,7 @@ Label_00CC:
         End If
     End Sub
 
-    Private Sub WikiToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles WikiToolStripMenuItem.Click
+    Private Sub WikiToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WikiToolStripMenuItem.Click
         System.Diagnostics.Process.Start("http://dwsim.inforside.com.br")
     End Sub
 

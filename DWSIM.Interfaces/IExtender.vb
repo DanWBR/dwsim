@@ -1,4 +1,4 @@
-﻿'    DWSIM Interface definitions
+﻿'    DWSIM - Extender Interface definitions
 '    Copyright 2020-2021 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
@@ -16,6 +16,9 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
+''' <summary>
+''' 
+''' </summary>
 Public Interface IExtenderCollection
 
     ReadOnly Property ID As String
