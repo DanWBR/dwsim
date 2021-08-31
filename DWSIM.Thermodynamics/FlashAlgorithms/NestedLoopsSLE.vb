@@ -583,8 +583,6 @@ out:        d2 = Date.Now
             Dim GL_old, GS_old, GV_old As Double
             Dim GlobalConv As Boolean = False
 
-            Dim SVE As Boolean = False
-
             d1 = Date.Now
 
             etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance).ToDoubleFromInvariant
@@ -674,13 +672,7 @@ out:        d2 = Date.Now
                 End If
 
                 'only solids and/or vapour left
-
-                If L = 0.0 Then
-                    SVE = True
-                    GoTo out2
-                Else
-                    SVE = False
-                End If
+                If L = 0.0 Then GoTo out2
 
                 '================================================
                 '== mix vapour and liquid phase =================
@@ -910,25 +902,6 @@ out2:           If (Math.Abs(GL_old - L) < 0.0000005) And (Math.Abs(GV_old - V) 
                 IObj2?.Close()
 
             Loop Until GlobalConv
-
-            If SVE Then
-
-                'solid-vapor equilibria
-
-                Dim result = New NestedLoops().Flash_PT(Vz0, P, T, PP)
-
-                V = result(1)
-                Vy = result(3)
-
-                Dim SL_Result = Flash_SL(result(2), P, T, PP)
-
-                Vx = SL_Result(3)
-                Vs = SL_Result(4)
-
-                L = SL_Result(0) * (1 - V)
-                S = SL_Result(1) * (1 - V)
-
-            End If
 
             IObj?.Paragraphs.Add("The algorithm converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
 
