@@ -286,8 +286,7 @@ Module scintillaExtender
             objects = "MaterialStream EnergyStream PropertyPackage UnitOp Flowsheet Spreadsheet Plugins Solver DWSIM"
         Else
             'editor is being used at script unit operation level
-            objects = "ims1 ims2 ims3 ims4 ims5 ims6 ies1 oms1 oms2 oms3 oms4 oms5 oms6 oes1 Flowsheet Spreadsheet Plugins Solver Me DWSIM"
-
+            objects = "inlet1 inlet outlet1 outlet inlet2 inlet3 inlet4 outlet2 outlet3 outlet4 ims1 ims2 ims3 ims4 ims5 ims6 ies1 oms1 oms2 oms3 oms4 oms5 oms6 oes1 Flowsheet Spreadsheet Plugins Solver Me DWSIM"
         End If
 
 
@@ -343,7 +342,8 @@ Module scintillaExtender
                 lastkeyword = text(text.Length - 1).Trim
             End If
             Select Case lastkeyword
-                Case "ms", "ims1", "ims2", "ims3", "ims4", "ims5", "ims6", "oms1", "oms2", "oms3", "oms4", "oms5", "MaterialStream"
+                Case "ms", "ims1", "ims2", "ims3", "ims4", "ims5", "ims6", "oms1", "oms2", "oms3", "oms4", "oms5", "MaterialStream",
+                     "inlet", "outlet", "inlet1", "inlet2", "inlet3", "outlet1", "outlet2", "outlet3"
                     Dim props = calculatorassembly.GetType("DWSIM.Thermodynamics.Streams.MaterialStream").GetProperties()
                     For Each p In props
                         suggestions += (p.Name) + " "
@@ -379,7 +379,7 @@ Module scintillaExtender
                     For Each m In methods
                         suggestions += (m.Name) + " "
                     Next
-                Case "PropertyPackage", "pp", "pp1"
+                Case "PropertyPackage", "pp", "pp1", "ppack"
                     Dim props = calculatorassembly.GetType("DWSIM.Thermodynamics.PropertyPackages.PropertyPackage").GetProperties()
                     For Each p In props
                         suggestions += (p.Name) + " "
@@ -388,7 +388,7 @@ Module scintillaExtender
                     For Each m In methods
                         suggestions += (m.Name) + " "
                     Next
-                Case "UnitOp", "Me", "uo"
+                Case "UnitOp", "Me", "uo", "this"
                     Dim props = unitopassembly.GetType("DWSIM.SharedClasses.UnitOperations.BaseClass").GetProperties()
                     For Each p In props
                         suggestions += (p.Name) + " "

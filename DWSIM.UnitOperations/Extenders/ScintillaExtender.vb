@@ -294,7 +294,8 @@ Public Module scintillaExtender
                 Dim interfaceassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Interfaces,")).FirstOrDefault
 
                 Select Case lastkeyword
-                    Case "ims1", "ims2", "ims3", "ims4", "ims5", "ims6", "oms1", "oms2", "oms3", "oms4", "oms5", "MaterialStream"
+                    Case "ms", "ims1", "ims2", "ims3", "ims4", "ims5", "ims6", "oms1", "oms2", "oms3", "oms4", "oms5", "MaterialStream",
+                     "inlet", "outlet", "inlet1", "inlet2", "inlet3", "outlet1", "outlet2", "outlet3"
                         Dim props = calculatorassembly.GetType("DWSIM.Thermodynamics.Streams.MaterialStream").GetProperties()
                         For Each p In props
                             suggestions += (p.Name) + " "
@@ -303,7 +304,7 @@ Public Module scintillaExtender
                         For Each m In methods
                             suggestions += (m.Name) + " "
                         Next
-                    Case "ies1", "oes1", "EnergyStream"
+                    Case "es", "ies1", "oes1", "EnergyStream"
                         Dim props = unitopassembly.GetType("DWSIM.UnitOperations.Streams.EnergyStream").GetProperties()
                         For Each p In props
                             suggestions += (p.Name) + " "
@@ -312,7 +313,7 @@ Public Module scintillaExtender
                         For Each m In methods
                             suggestions += (m.Name) + " "
                         Next
-                    Case "Flowsheet"
+                    Case "Flowsheet", "flowsheet", "fs", "FlowSheet"
                         Dim props = interfaceassembly.GetType("DWSIM.Interfaces.IFlowsheet").GetProperties()
                         For Each p In props
                             suggestions += (p.Name) + " "
@@ -321,7 +322,7 @@ Public Module scintillaExtender
                         For Each m In methods
                             suggestions += (m.Name) + " "
                         Next
-                    Case "PropertyPackage"
+                    Case "PropertyPackage", "pp", "pp1", "ppack"
                         Dim props = calculatorassembly.GetType("DWSIM.Thermodynamics.PropertyPackages.PropertyPackage").GetProperties()
                         For Each p In props
                             suggestions += (p.Name) + " "
