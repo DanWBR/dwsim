@@ -6206,7 +6206,7 @@ Final3:
 
         End Function
 
-        Public Function AUX_HFUSi(ByVal sub1 As String, ByVal T As Double)
+        Public Overridable Function AUX_HFUSi(ByVal sub1 As String, ByVal T As Double)
 
             'return DHfus in kJ/kg
             Dim cpc = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties

@@ -87,6 +87,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim HfusL = PP.DW_CalcEnthalpy(Vz, Tfus, P, State.Liquid)
             Dim HfusS = PP.DW_CalcEnthalpy(Vz, Tfus, P, State.Solid)
 
+            Dim Hfus = PP.RET_HFUSM(Vz, T)
+
             If H >= HsatV Then
                 'pure vapor
                 V = 1.0
@@ -100,12 +102,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 V = (H - HsatL) / (HsatV - HsatL)
                 S = 0.0
                 T = Tsat
-            ElseIf H > HsatS And P <= Pfus Then
+            ElseIf H > HsatS And P <= Pfus And Abs(Hfus) > 0.0001 Then
                 'partial sublimation from solid
                 V = (H - HsatS) / (HsatV - HsatS)
                 S = 1 - V
                 T = Tsat
-            ElseIf H >= HfusL And Tfus > 0 Then
+            ElseIf H >= HfusL And Tfus > 0 And Abs(Hfus) > 0.0001 Then
                 'pure liquid
                 V = 0.0
                 S = 0.0
@@ -113,12 +115,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                           Function(Tx)
                                               Return OBJ_FUNC_PH_FLASH(H, "PT", Tx, P, Vz, PP, False, Nothing)(0)
                                           End Function)
-            ElseIf H < HfusL And H >= HfusS And Tfus > 0 Then
+            ElseIf H < HfusL And H >= HfusS And Tfus > 0 And Abs(Hfus) > 0.0001 Then
                 'partial freezing from liquid
                 V = 0.0
                 S = 1 - (H - HfusS) / (HfusL - HfusS)
                 T = Tfus
-            ElseIf Tfus > 0 Then
+            ElseIf Tfus > 0 And Abs(Hfus) > 0.0001 Then
                 'pure solid
                 V = 0.0
                 S = 1.0
@@ -130,10 +132,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 'pure liquid
                 V = 0.0
                 S = 0.0
-                T = New Brent().BrentOpt2(Tsat * 0.3, Tsat, 10, 0.000001, 100,
-                                          Function(Tx)
-                                              Return OBJ_FUNC_PH_FLASH(H, "PT", Tx, P, Vz, PP, False, Nothing)(0)
-                                          End Function)
+                T = RootFinding.Brent.FindRootExpand(Function(Tx)
+                                                         Return OBJ_FUNC_PH_FLASH(H, "PT", Tx, P, Vz, PP, False, Nothing)(0)
+                                                     End Function, Tsat * 0.5, Tsat, 0.00001, 100)
+
             End If
 
             Return New Object() {1.0 - V - S, V, Vz, Vz, T, 0.0, New Double() {1.0}, 0.0, Vz, S, Vz}

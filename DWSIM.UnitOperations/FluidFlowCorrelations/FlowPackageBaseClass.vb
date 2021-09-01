@@ -24,9 +24,10 @@ Namespace FlowPackages
 
         End Sub
 
-        Public MustOverride Function CalculateDeltaP(ByVal D As Double, ByVal L As Double, ByVal deltaz As Double, ByVal k As Double, ByVal qv As Double, ByVal ql As Double, ByVal muv As Double, ByVal mul As Double, ByVal rhov As Double, ByVal rhol As Double, ByVal surft As Double) As Object
+        Public MustOverride Function CalculateDeltaP(ByVal D As Double, ByVal L As Double, ByVal deltaz As Double, ByVal k As Double, ByVal qv As Double, ByVal ql As Double, ByVal muv As Double, ByVal mul As Double, ByVal rhov As Double, ByVal rhol As Double, ByVal surft As Double) As Object()
 
-        Public Function CalculateDeltaPLiquid(ByVal D As Double, ByVal L As Double, ByVal deltaz As Double, ByVal k As Double, ByVal ql As Double, ByVal mul As Double, ByVal rhol As Double) As Object
+        Public Function CalculateDeltaPLiquid(ByVal D As Double, ByVal L As Double, ByVal deltaz As Double, ByVal k As Double, ByVal ql As Double, ByVal mul As Double, ByVal rhol As Double) As Object()
+
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
             Inspector.Host.CheckAndAdd(IObj, "", "CalculateDeltaPLiquid", "Liquid Pressure Drop", "Liquid Pressure Drop Calculation Routine", True)
@@ -59,9 +60,11 @@ Namespace FlowPackages
             IObj?.Close()
 
             CalculateDeltaPLiquid = ResVector
+
         End Function
 
-        Public Function CalculateDeltaPGas(ByVal D As Double, ByVal L As Double, ByVal deltaz As Double, ByVal k As Double, ByVal qv As Double, ByVal muv As Double, ByVal rhov As Double) As Object
+        Public Function CalculateDeltaPGas(ByVal D As Double, ByVal L As Double, ByVal deltaz As Double, ByVal k As Double, ByVal qv As Double, ByVal muv As Double, ByVal rhov As Double) As Object()
+
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
             Inspector.Host.CheckAndAdd(IObj, "", "CalculateDeltaPGas", "Gas Pressure Drop", "Gas Pressure Drop Calculation Routine", True)
@@ -93,6 +96,7 @@ Namespace FlowPackages
             IObj?.Close()
 
             CalculateDeltaPGas = ResVector
+
         End Function
 
 

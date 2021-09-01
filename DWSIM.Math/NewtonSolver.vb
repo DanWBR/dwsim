@@ -51,6 +51,17 @@ Namespace MathEx.Optimization
 
         End Sub
 
+        Public Shared Function FindRoots(functionbody As Func(Of Double(), Double()), vars As Double(),
+                                         maxits As Integer, tol As Double) As Double()
+
+            Dim newton As New NewtonSolver
+            newton.Tolerance = tol
+            newton.MaxIterations = maxits
+
+            Return newton.Solve(functionbody, vars)
+
+        End Function
+
         ''' <summary>
         ''' Solves a system of non-linear equations [f(x) = 0] using newton's method.
         ''' </summary>

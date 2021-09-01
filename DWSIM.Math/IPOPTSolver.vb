@@ -51,6 +51,18 @@ Namespace MathEx.Optimization
 
         End Sub
 
+        Public Shared Function FindRoots(functionbody As Func(Of Double(), Double), vars As Double(), maxits As Integer, tol As Double,
+                                         Optional lbounds As Double() = Nothing, Optional ubounds As Double() = Nothing) As Double()
+
+            Dim ipopt As New IPOPTSolver
+            ipopt.Tolerance = tol
+            ipopt.MaxIterations = maxits
+
+            Return ipopt.Solve(functionbody, Nothing, vars, lbounds, ubounds)
+
+        End Function
+
+
         ''' <summary>
         ''' Minimizes a function value using IPOPT solver.
         ''' </summary>
