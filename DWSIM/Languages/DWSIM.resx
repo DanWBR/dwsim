@@ -5727,4 +5727,10 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="ReactantAsBaseComp" xml:space="preserve">
     <value>Por favor selecione um reagente como componente-base.</value>
   </data>
+  <data name="NoControlledObject" xml:space="preserve">
+    <value>Não há um objeto controlável selecionado.</value>
+  </data>
+  <data name="NoManipulatedObject" xml:space="preserve">
+    <value>Não há um objeto manipulável selecionado.</value>
+  </data>
 </root>

@@ -133,13 +133,6 @@
   <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
-  <data name="&gt;&gt;Label8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="btnIniciar.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -162,11 +155,12 @@
   <data name="tbMin.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="GroupBox3.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
   <data name="&gt;&gt;GroupBox3.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="tbStep.Location" type="System.Drawing.Point, System.Drawing">
     <value>196, 76</value>
@@ -177,8 +171,8 @@
   <data name="&gt;&gt;Label4.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>500, 246</value>
+  <data name="btnIniciar.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
   <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -191,9 +185,6 @@
   </data>
   <data name="Label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
-  </data>
-  <data name="tbTol.Text" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="&gt;&gt;Label8.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -214,7 +205,7 @@
     <value>10</value>
   </data>
   <data name="btnParar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>444, 98</value>
+    <value>445, 98</value>
   </data>
   <data name="tbMaxIt.Text" xml:space="preserve">
     <value>3</value>
@@ -222,8 +213,8 @@
   <data name="Label3.Text" xml:space="preserve">
     <value>Delta inicial (Step size)</value>
   </data>
-  <data name="Label8.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+  <data name="&gt;&gt;Panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;lblStatus.Name" xml:space="preserve">
     <value>lblStatus</value>
@@ -232,16 +223,16 @@
     <value>Número máximo de iterações</value>
   </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>441, 26</value>
+    <value>442, 26</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>UI_AdjControlPanelForm</value>
+  <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>500, 246</value>
   </data>
   <data name="btnIniciar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>444, 50</value>
+    <value>445, 50</value>
   </data>
   <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>649, 350</value>
+    <value>650, 351</value>
   </data>
   <data name="&gt;&gt;tbStep.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -256,7 +247,7 @@
     <value>12</value>
   </data>
   <data name="GraphControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>647, 329</value>
+    <value>648, 330</value>
   </data>
   <data name="rbBrent.Text" xml:space="preserve">
     <value>Brent</value>
@@ -264,8 +255,11 @@
   <data name="tbMaxIt.Location" type="System.Drawing.Point, System.Drawing">
     <value>196, 50</value>
   </data>
+  <data name="&gt;&gt;tbTol.Name" xml:space="preserve">
+    <value>tbTol</value>
+  </data>
   <data name="&gt;&gt;GroupBox2.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>Panel1</value>
   </data>
   <data name="&gt;&gt;Label1.Name" xml:space="preserve">
     <value>Label1</value>
@@ -276,17 +270,14 @@
   <data name="Grid1.Size" type="System.Drawing.Size, System.Drawing">
     <value>500, 246</value>
   </data>
-  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 13</value>
+  <data name="&gt;&gt;GroupBox3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="FaTabStripItem1.Title" xml:space="preserve">
     <value>Gráfico</value>
   </data>
   <data name="&gt;&gt;GroupBox3.Name" xml:space="preserve">
     <value>GroupBox3</value>
-  </data>
-  <data name="KryptonLabel1.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
   </data>
   <data name="FaTabStrip1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8.25pt</value>
@@ -297,6 +288,9 @@
   <data name="Grid1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
+  <data name="&gt;&gt;tbStep.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
   <data name="tbTol.Location" type="System.Drawing.Point, System.Drawing">
     <value>196, 102</value>
   </data>
@@ -305,6 +299,9 @@
   </data>
   <data name="&gt;&gt;rbBrent.ZOrder" xml:space="preserve">
     <value>6</value>
+  </data>
+  <data name="KryptonLabel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 26</value>
   </data>
   <data name="&gt;&gt;rbIPOPT.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -321,8 +318,11 @@
   <data name="tbStep.Text" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;tbAjuste.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="tbMin.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="Panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="tbAjuste.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 20</value>
@@ -334,7 +334,7 @@
     <value>1</value>
   </data>
   <data name="tbMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>596, 23</value>
+    <value>597, 23</value>
   </data>
   <data name="&gt;&gt;tbMaxIt.Name" xml:space="preserve">
     <value>tbMaxIt</value>
@@ -364,7 +364,7 @@
     <value>FaTabStrip1</value>
   </data>
   <data name="&gt;&gt;GroupBox2.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="rbIPOPT.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 17</value>
@@ -382,7 +382,10 @@
     <value>rbIPOPT</value>
   </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>663, 135</value>
+    <value>664, 135</value>
+  </data>
+  <data name="&gt;&gt;lblStatus.Parent" xml:space="preserve">
+    <value>GroupBox3</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem1.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -398,9 +401,6 @@
   </data>
   <data name="btnParar.Size" type="System.Drawing.Size, System.Drawing">
     <value>208, 25</value>
-  </data>
-  <data name="tbAjuste.Location" type="System.Drawing.Point, System.Drawing">
-    <value>531, 22</value>
   </data>
   <data name="btnIniciar.Size" type="System.Drawing.Size, System.Drawing">
     <value>208, 42</value>
@@ -438,6 +438,12 @@
   <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="rbSecante.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rbIPOPT.Location" type="System.Drawing.Point, System.Drawing">
+    <value>345, 24</value>
+  </data>
   <data name="tbAjuste.Text" xml:space="preserve">
     <value>1</value>
   </data>
@@ -468,11 +474,14 @@
   <data name="Label2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;btnIniciar.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
+  <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;btnParar.Parent" xml:space="preserve">
     <value>GroupBox2</value>
+  </data>
+  <data name="rbSecante.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 17</value>
   </data>
   <data name="rbBrent.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 17</value>
@@ -484,28 +493,43 @@
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tbErro.Location" type="System.Drawing.Point, System.Drawing">
-    <value>531, 48</value>
+    <value>532, 48</value>
+  </data>
+  <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>679, 587</value>
+  </data>
+  <data name="&gt;&gt;lblItXdeY.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="&gt;&gt;lblStatus.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;tbTol.Name" xml:space="preserve">
-    <value>tbTol</value>
+  <data name="Label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
-  <data name="FaTabStrip1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+  <data name="Label8.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 13</value>
   </data>
   <data name="Grid1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
   <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>663, 430</value>
+    <value>664, 431</value>
+  </data>
+  <data name="rbNewton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="tbMin.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
+  </data>
+  <data name="Label4.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;Grid1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -540,8 +564,8 @@
   <data name="lblStatus.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;lblItXdeY.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>447, 25</value>
   </data>
   <data name="&gt;&gt;lblItXdeY.Name" xml:space="preserve">
     <value>lblItXdeY</value>
@@ -579,9 +603,6 @@
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Resultados</value>
   </data>
-  <data name="tbErro.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
   <data name="lblItXdeY.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -600,8 +621,11 @@
   <data name="&gt;&gt;FaTabStripItem1.Name" xml:space="preserve">
     <value>FaTabStripItem1</value>
   </data>
-  <data name="Label8.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>UI_AdjControlPanelForm</value>
+  </data>
+  <data name="&gt;&gt;FaTabStripItem2.Name" xml:space="preserve">
+    <value>FaTabStripItem2</value>
   </data>
   <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -612,8 +636,8 @@
   <data name="Label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="&gt;&gt;GroupBox3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="lblStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>163, 13</value>
   </data>
   <data name="tbMin.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 20</value>
@@ -624,8 +648,8 @@
   <data name="tbTol.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name="rbNewton.Text" xml:space="preserve">
-    <value>Newton</value>
+  <data name="&gt;&gt;Panel1.Name" xml:space="preserve">
+    <value>Panel1</value>
   </data>
   <data name="tbMin.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -651,8 +675,8 @@
   <data name="FaTabStripItem2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>446, 25</value>
+  <data name="&gt;&gt;rbSecante.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lblStatus.Text" xml:space="preserve">
     <value>&lt;ajuste trabalhando ou parado?&gt;</value>
@@ -669,23 +693,20 @@
   <data name="&gt;&gt;Label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="rbIPOPT.Location" type="System.Drawing.Point, System.Drawing">
-    <value>345, 24</value>
+  <data name="&gt;&gt;rbBrent.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnParar.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;FaTabStripItem2.Name" xml:space="preserve">
-    <value>FaTabStripItem2</value>
+  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 13</value>
   </data>
   <data name="tbMaxIt.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 13</value>
+  <data name="&gt;&gt;tbAjuste.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>EditingForm_Adjust_ControlPanel</value>
@@ -693,26 +714,23 @@
   <data name="&gt;&gt;rbBrent.Parent" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
-  <data name="rbSecante.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 17</value>
+  <data name="&gt;&gt;rbNewton.Name" xml:space="preserve">
+    <value>rbNewton</value>
   </data>
-  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 13</value>
+  <data name="&gt;&gt;tbMaxIt.ZOrder" xml:space="preserve">
+    <value>10</value>
   </data>
-  <data name="lblStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>163, 13</value>
+  <data name="&gt;&gt;Label8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tbStep.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;rbBrent.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Limites Min/Max</value>
   </data>
   <data name="&gt;&gt;tbAjuste.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="KryptonLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 26</value>
+  <data name="Label8.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="tbMax.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -730,19 +748,25 @@
     <value>9, 105</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>WeifenLuo.WinFormsUI.Docking.DockContent, WeifenLuo.WinFormsUI.Docking, Version=2.9.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;GroupBox2.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Grid1.TabIndex" type="System.Int32, mscorlib">
+  <data name="Panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="rbNewton.Text" xml:space="preserve">
+    <value>Newton</value>
+  </data>
+  <data name="Panel1.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
   <data name="&gt;&gt;Grid1.Parent" xml:space="preserve">
     <value>FaTabStripItem2</value>
   </data>
-  <data name="&gt;&gt;tbMaxIt.ZOrder" xml:space="preserve">
-    <value>10</value>
+  <data name="lblStatus.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="tbAjuste.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -756,14 +780,11 @@
   <data name="btnIniciar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="&gt;&gt;rbNewton.Name" xml:space="preserve">
-    <value>rbNewton</value>
-  </data>
-  <data name="tbMin.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="lblItXdeY.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>446, 51</value>
+    <value>447, 51</value>
   </data>
   <data name="&gt;&gt;btnParar.ZOrder" xml:space="preserve">
     <value>9</value>
@@ -775,10 +796,10 @@
     <value>6, 49</value>
   </data>
   <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>647, 329</value>
+    <value>648, 330</value>
   </data>
-  <data name="&gt;&gt;GraphControl.Type" xml:space="preserve">
-    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="KryptonLabel1.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="&gt;&gt;Label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -816,11 +837,14 @@
   <data name="&gt;&gt;tbAjuste.Parent" xml:space="preserve">
     <value>GroupBox3</value>
   </data>
+  <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
+  </data>
   <data name="&gt;&gt;GroupBox2.Name" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
-  <data name="Label4.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="tbAjuste.Location" type="System.Drawing.Point, System.Drawing">
+    <value>532, 22</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -837,11 +861,14 @@
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>77, 13</value>
   </data>
-  <data name="&gt;&gt;lblStatus.Parent" xml:space="preserve">
-    <value>GroupBox3</value>
+  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 13</value>
   </data>
   <data name="tbMin.Text" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
+    <value>13</value>
   </data>
   <data name="tbErro.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -864,8 +891,8 @@
   <data name="&gt;&gt;tbMin.Name" xml:space="preserve">
     <value>tbMin</value>
   </data>
-  <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
+  <data name="&gt;&gt;Panel1.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>679, 587</value>
@@ -873,17 +900,17 @@
   <data name="&gt;&gt;lblItXdeY.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="lblItXdeY.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;Panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tbMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>531, 23</value>
+    <value>532, 23</value>
   </data>
   <data name="&gt;&gt;KryptonLabel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label1.Text" xml:space="preserve">
-    <value>Limites Min/Max</value>
+  <data name="tbErro.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Tolerância</value>
@@ -897,23 +924,23 @@
   <data name="rbSecante.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="rbNewton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="Grid1.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
   </data>
   <data name="&gt;&gt;btnIniciar.Name" xml:space="preserve">
     <value>btnIniciar</value>
   </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 13</value>
+  <data name="&gt;&gt;btnIniciar.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
   </data>
   <data name="GroupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 150</value>
+    <value>3, 144</value>
   </data>
   <data name="tbMax.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 20</value>
   </data>
-  <data name="rbSecante.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 13</value>
   </data>
   <data name="rbBrent.Location" type="System.Drawing.Point, System.Drawing">
     <value>221, 24</value>
@@ -921,11 +948,11 @@
   <data name="&gt;&gt;GraphControl.Name" xml:space="preserve">
     <value>GraphControl</value>
   </data>
-  <data name="Label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="tbTol.Text" xml:space="preserve">
+    <value>2</value>
   </data>
-  <data name="lblStatus.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="&gt;&gt;GraphControl.Type" xml:space="preserve">
+    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="lblItXdeY.Text" xml:space="preserve">
     <value>&lt;Iteração x de y...&gt;</value>
@@ -945,23 +972,23 @@
   <data name="&gt;&gt;FaTabStrip1.Name" xml:space="preserve">
     <value>FaTabStrip1</value>
   </data>
-  <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
+  <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="tbStep.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
   <data name="&gt;&gt;GroupBox3.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>Panel1</value>
   </data>
-  <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
-    <value>13</value>
+  <data name="rbBrent.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;FaTabStrip1.Parent" xml:space="preserve">
     <value>GroupBox3</value>
   </data>
   <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 9</value>
+    <value>3, 3</value>
   </data>
   <data name="btnParar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -972,20 +999,17 @@
   <data name="&gt;&gt;KryptonLabel1.Parent" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
+  <data name="FaTabStrip1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
   <data name="Label3.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
-  </data>
-  <data name="rbBrent.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="Label5.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="&gt;&gt;Grid1.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="&gt;&gt;rbSecante.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

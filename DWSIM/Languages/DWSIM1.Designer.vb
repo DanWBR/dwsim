@@ -9991,6 +9991,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Não há um objeto controlável selecionado..
+        '''</summary>
+        Friend Shared ReadOnly Property NoControlledObject() As String
+            Get
+                Return ResourceManager.GetString("NoControlledObject", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Nenhum banco de dados definido!.
         '''</summary>
         Friend Shared ReadOnly Property NoDatabaseDefined() As String
@@ -10248,6 +10257,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property Nohobjetosaseremdesc() As String
             Get
                 Return ResourceManager.GetString("Nohobjetosaseremdesc", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Não há um objeto manipulável selecionado..
+        '''</summary>
+        Friend Shared ReadOnly Property NoManipulatedObject() As String
+            Get
+                Return ResourceManager.GetString("NoManipulatedObject", resourceCulture)
             End Get
         End Property
         

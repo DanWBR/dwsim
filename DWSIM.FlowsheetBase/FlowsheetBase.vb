@@ -694,7 +694,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             Case ObjectType.OT_Adjust
 
                 Dim myNode As New AdjustGraphic(mpx, mpy, 40, 40)
-                myNode.Tag = "ADJ-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myNode.Tag = "CTRL-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
                 gObj.Name = Guid.NewGuid.ToString

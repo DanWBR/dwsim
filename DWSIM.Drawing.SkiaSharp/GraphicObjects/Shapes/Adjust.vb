@@ -40,7 +40,7 @@ Namespace GraphicObjects.Shapes
 
         Public Sub New()
             Me.ObjectType = DWSIM.Interfaces.Enums.GraphicObjects.ObjectType.OT_Adjust
-            Me.Description = "Adjust Logical Op"
+            Me.Description = "Steady-State Controller Block"
         End Sub
 
         Public Sub New(ByVal graphicPosition As SKPoint)
@@ -155,11 +155,11 @@ Namespace GraphicObjects.Shapes
             End With
 
             Dim trect As New SKRect(0, 0, 2, 2)
-            tpaint.GetTextPath("A", 0, 0).GetBounds(trect)
+            tpaint.GetTextPath("C", 0, 0).GetBounds(trect)
 
             Dim ax, ay As Integer
-            ax = Me.X + (Me.Width - (trect.Right - trect.Left)) / 2
-            ay = Me.Y + (Me.Height - (trect.Top - trect.Bottom)) / 2
+            ax = Me.X + (Me.Width - (trect.Right - trect.Left)) / 2 - 2
+            ay = Me.Y + (Me.Height - (trect.Top - trect.Bottom)) / 2 - 1
 
             If FlippedH Or FlippedV Or Rotation <> 0 Then
 
@@ -177,13 +177,13 @@ Namespace GraphicObjects.Shapes
 
                 If Rotation <> 0.0 Then canvas.RotateDegrees(Rotation, X + Width / 2, Y + Height / 2)
 
-                canvas.DrawText("A", ax, ay, tpaint)
+                canvas.DrawText("C", ax, ay, tpaint)
 
                 canvas.SetMatrix(currmat)
 
             Else
 
-                canvas.DrawText("A", ax, ay, tpaint)
+                canvas.DrawText("C", ax, ay, tpaint)
 
             End If
 

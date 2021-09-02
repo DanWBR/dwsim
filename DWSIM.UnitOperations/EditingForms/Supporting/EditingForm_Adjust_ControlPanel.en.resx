@@ -119,13 +119,13 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnParar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>499, 98</value>
+    <value>494, 98</value>
   </data>
   <data name="btnParar.Text" xml:space="preserve">
     <value>Stop</value>
   </data>
   <data name="btnIniciar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>499, 50</value>
+    <value>494, 50</value>
   </data>
   <data name="btnIniciar.Text" xml:space="preserve">
     <value>Start Adjust</value>
@@ -140,13 +140,13 @@
     <value>Secant</value>
   </data>
   <data name="tbMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>651, 23</value>
+    <value>646, 23</value>
   </data>
   <data name="tbMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>586, 23</value>
+    <value>581, 23</value>
   </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>496, 26</value>
+    <value>491, 26</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 13</value>
@@ -197,16 +197,13 @@
     <value>Step size</value>
   </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>718, 135</value>
+    <value>713, 135</value>
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Parameters</value>
   </data>
-  <data name="GraphControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>702, 343</value>
-  </data>
   <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>702, 343</value>
+    <value>697, 330</value>
   </data>
   <data name="FaTabStripItem1.Title" xml:space="preserve">
     <value>Graph</value>
@@ -215,13 +212,20 @@
     <value>Table</value>
   </data>
   <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>704, 364</value>
+    <value>699, 351</value>
+  </data>
+  <data name="GraphControl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>697, 330</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="GroupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="tbErro.Location" type="System.Drawing.Point, System.Drawing">
-    <value>581, 48</value>
+    <value>576, 48</value>
   </data>
   <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>496, 51</value>
+    <value>491, 51</value>
   </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 13</value>
@@ -230,10 +234,10 @@
     <value>Current error</value>
   </data>
   <data name="tbAjuste.Location" type="System.Drawing.Point, System.Drawing">
-    <value>581, 22</value>
+    <value>576, 22</value>
   </data>
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>496, 25</value>
+    <value>491, 25</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 13</value>
@@ -242,15 +246,21 @@
     <value>Adjust value</value>
   </data>
   <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>718, 448</value>
+    <value>713, 435</value>
   </data>
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Results</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>734, 610</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Panel1.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>725, 586</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>725, 586</value>
+  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>

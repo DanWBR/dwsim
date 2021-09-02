@@ -401,6 +401,8 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
 
             s.CreateAndAddButtonRow(container, "Open Control Panel", null, (btn, e) =>
             {
+                if (adjust.ControlledObject == null) return;
+                if (adjust.ManipulatedObject == null) return;
                 var fcp = new UnitOperations.EditingForm_Adjust_ControlPanel();
                 fcp.myADJ = adjust;
                 fcp.Show();

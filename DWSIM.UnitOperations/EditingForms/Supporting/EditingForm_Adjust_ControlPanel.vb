@@ -5,6 +5,8 @@ Imports DWSIM.ExtensionMethods
 
 Public Class EditingForm_Adjust_ControlPanel
 
+    Inherits WeifenLuo.WinFormsUI.Docking.DockContent
+
     Private formC As IFlowsheet
     Public status As String = ""
     Public cancelar As Boolean = False
@@ -56,7 +58,20 @@ Public Class EditingForm_Adjust_ControlPanel
         py2 = New List(Of Double)
         px = New List(Of Double)
 
-        Me.Text = myADJ.GraphicObject.Tag & " - " & formC.GetTranslatedString("PaineldeControle")
+        Text = myADJ.GraphicObject.Tag & " - " & formC.GetTranslatedString("PaineldeControle")
+
+        TabText = Text
+
+        Select Case myADJ.SolvingMethodSelf
+            Case 0
+                rbSecante.Checked = True
+            Case 1
+                rbBrent.Checked = True
+            Case 2
+                rbNewton.Checked = True
+            Case 3
+                rbIPOPT.Checked = True
+        End Select
 
         loaded = True
 
@@ -481,6 +496,10 @@ Public Class EditingForm_Adjust_ControlPanel
             Else
                 Me.usemaxmin = True
             End If
+            If rbSecante.Checked Then myADJ.SolvingMethodSelf = 0
+            If rbBrent.Checked Then myADJ.SolvingMethodSelf = 1
+            If rbNewton.Checked Then myADJ.SolvingMethodSelf = 2
+            If rbIPOPT.Checked Then myADJ.SolvingMethodSelf = 3
         End If
     End Sub
 End Class

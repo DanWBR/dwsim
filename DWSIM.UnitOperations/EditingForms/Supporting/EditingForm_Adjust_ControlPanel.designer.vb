@@ -1,6 +1,5 @@
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class EditingForm_Adjust_ControlPanel
-    Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()>
@@ -24,7 +23,7 @@ Partial Class EditingForm_Adjust_ControlPanel
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_Adjust_ControlPanel))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.btnParar = New System.Windows.Forms.Button()
         Me.btnIniciar = New System.Windows.Forms.Button()
         Me.rbBrent = New System.Windows.Forms.RadioButton()
@@ -54,6 +53,7 @@ Partial Class EditingForm_Adjust_ControlPanel
         Me.lblStatus = New System.Windows.Forms.Label()
         Me.lblItXdeY = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.GroupBox2.SuspendLayout()
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStrip1.SuspendLayout()
@@ -61,6 +61,7 @@ Partial Class EditingForm_Adjust_ControlPanel
         Me.FaTabStripItem2.SuspendLayout()
         CType(Me.Grid1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox3.SuspendLayout()
+        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnParar
@@ -216,8 +217,8 @@ Partial Class EditingForm_Adjust_ControlPanel
         Me.Grid1.AllowUserToDeleteRows = False
         Me.Grid1.AllowUserToOrderColumns = True
         Me.Grid1.AllowUserToResizeRows = False
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.Grid1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.Grid1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle2
         Me.Grid1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.Grid1.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
         Me.Grid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -271,14 +272,21 @@ Partial Class EditingForm_Adjust_ControlPanel
         resources.ApplyResources(Me.Label2, "Label2")
         Me.Label2.Name = "Label2"
         '
+        'Panel1
+        '
+        resources.ApplyResources(Me.Panel1, "Panel1")
+        Me.Panel1.Controls.Add(Me.GroupBox2)
+        Me.Panel1.Controls.Add(Me.GroupBox3)
+        Me.Panel1.Name = "Panel1"
+        '
         'EditingForm_Adjust_ControlPanel
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.GroupBox3)
-        Me.Controls.Add(Me.GroupBox2)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
+        Me.Controls.Add(Me.Panel1)
+        Me.DoubleBuffered = True
         Me.Name = "EditingForm_Adjust_ControlPanel"
+        Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockBottom
         Me.ShowIcon = False
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
@@ -289,6 +297,7 @@ Partial Class EditingForm_Adjust_ControlPanel
         CType(Me.Grid1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
+        Me.Panel1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -321,4 +330,5 @@ Partial Class EditingForm_Adjust_ControlPanel
     Public WithEvents KryptonLabel1 As System.Windows.Forms.Label
     Public WithEvents rbIPOPT As RadioButton
     Public WithEvents rbNewton As RadioButton
+    Friend WithEvents Panel1 As Panel
 End Class

@@ -1695,7 +1695,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myNode.Fill = True
                 myNode.FillColor = fillclr
                 myNode.LineColor = lineclr
-                myNode.Tag = "ADJ-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myNode.Tag = "CTRL-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
                 gObj.Name = DWSIM.App.GetLocalString("AJ") & Guid.NewGuid.ToString

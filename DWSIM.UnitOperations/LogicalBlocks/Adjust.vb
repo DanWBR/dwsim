@@ -66,6 +66,8 @@ Namespace SpecialOps
         Protected m_maxVal As Nullable(Of Double) = Nothing
         Protected m_initialEstimate As Nullable(Of Double) = Nothing
 
+        Public Property SolvingMethodSelf As Integer = 0
+
         Public Overrides Function CloneXML() As Object
             Dim obj As ICustomXMLSerialization = New Adjust()
             obj.LoadData(Me.SaveData)

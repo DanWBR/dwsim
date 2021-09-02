@@ -157,19 +157,19 @@
     <value>Add objects to the flowsheet</value>
   </data>
   <data name="AdjustValue" xml:space="preserve">
-    <value>Adjust Value</value>
+    <value>Set-Point</value>
   </data>
   <data name="AF" xml:space="preserve">
     <value>Acentric Factor</value>
   </data>
   <data name="Ajustando" xml:space="preserve">
-    <value>Adjusting ...</value>
+    <value>Working...</value>
   </data>
   <data name="Ajuste" xml:space="preserve">
-    <value>Adjust</value>
+    <value>Steady-State Controller</value>
   </data>
   <data name="Ajustecanceladopelou" xml:space="preserve">
-    <value>Adjustment process cancelled by the user.</value>
+    <value>Variable adjustment cancelled by the user.</value>
   </data>
   <data name="Altereasconfiguraesd" xml:space="preserve">
     <value>Change the number format settings and try again.</value>
@@ -3529,7 +3529,7 @@
     <value>Value adjusted successfully.</value>
   </data>
   <data name="ValordeAjusteouOffse" xml:space="preserve">
-    <value>Adjust Property Value (or Offset)</value>
+    <value>Set-Point (or Offset)</value>
   </data>
   <data name="Valormnimoopcional" xml:space="preserve">
     <value>Minimum value (optional)</value>

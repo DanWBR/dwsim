@@ -282,6 +282,20 @@ Public Class EditingForm_Adjust
 
     Private Sub btnOpenControlPanel_Click(sender As Object, e As EventArgs) Handles btnOpenControlPanel.Click
 
+        If SimObject.ControlledObject Is Nothing Then
+            MessageBox.Show(SimObject.FlowSheet.GetTranslatedString("NoControlledObject"),
+                            SimObject.FlowSheet.GetTranslatedString("Erro"),
+                            MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
+        If SimObject.ManipulatedObject Is Nothing Then
+            MessageBox.Show(SimObject.FlowSheet.GetTranslatedString("NoManipulatedObject"),
+                            SimObject.FlowSheet.GetTranslatedString("Erro"),
+                            MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+
         Dim f As New EditingForm_Adjust_ControlPanel() With {.myADJ = SimObject}
         SimObject.FlowSheet.DisplayForm(f)
 

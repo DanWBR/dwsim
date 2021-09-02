@@ -894,7 +894,7 @@ namespace DWSIM.UI.Forms
             objcontainer.Pages.Add(new DocumentPage(panelreactors) { Closable = false, Text = "Reactors" });
             objcontainer.Pages.Add(new DocumentPage(panelsolids) { Closable = false, Text = "Solids" });
             objcontainer.Pages.Add(new DocumentPage(paneluser) { Closable = false, Text = "User Models" });
-            objcontainer.Pages.Add(new DocumentPage(panellogical) { Closable = false, Text = "Logical Ops" });
+            objcontainer.Pages.Add(new DocumentPage(panellogical) { Closable = false, Text = "Logical Blocks" });
             objcontainer.Pages.Add(new DocumentPage(panelcontrollers) { Closable = false, Text = "Controllers" });
             objcontainer.Pages.Add(new DocumentPage(panelindicators) { Closable = false, Text = "Indicators" });
             objcontainer.Pages.Add(new DocumentPage(panelother) { Closable = false, Text = "Other" });
