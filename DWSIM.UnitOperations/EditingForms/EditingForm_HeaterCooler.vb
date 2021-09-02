@@ -54,8 +54,6 @@ Public Class EditingForm_HeaterCooler
 
             chkActive.Checked = .GraphicObject.Active
 
-            ToolTip1.SetToolTip(chkActive, .FlowSheet.GetTranslatedString("AtivoInativo"))
-
             Me.Text = .GraphicObject.Tag & " (" & .GetDisplayName() & ")"
 
             lblTag.Text = .GraphicObject.Tag
@@ -98,10 +96,15 @@ Public Class EditingForm_HeaterCooler
             cbEnergy.Items.Clear()
             cbEnergy.Items.AddRange(eslist)
 
+            cbEnergy2.Items.Clear()
+            cbEnergy2.Items.AddRange(eslist)
+
             If TypeOf SimObject Is UnitOperations.Heater Then
                 If .GraphicObject.InputConnectors(1).IsAttached Then cbEnergy.SelectedItem = .GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Tag
+                If .GraphicObject.EnergyConnector.IsAttached Then cbEnergy2.SelectedItem = .GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Tag
             Else
                 If .GraphicObject.EnergyConnector.IsAttached Then cbEnergy.SelectedItem = .GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Tag
+                If .GraphicObject.InputConnectors(1).IsAttached Then cbEnergy2.SelectedItem = .GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Tag
             End If
 
             'property package
@@ -284,9 +287,8 @@ Public Class EditingForm_HeaterCooler
                 If TypeOf SimObject Is UnitOperations.Heater Then
                     DirectCast(SimObject, UnitOperations.Heater).CalcMode = UnitOperations.Heater.CalculationMode.EnergyStream
                 Else
-                    DirectCast(SimObject, UnitOperations.Cooler).CalcMode = UnitOperations.Cooler.CalculationMode.HeatRemoved
+                    DirectCast(SimObject, UnitOperations.Cooler).CalcMode = UnitOperations.Cooler.CalculationMode.EnergyStream
                 End If
-                If TypeOf SimObject Is UnitOperations.Cooler Then cbCalcMode.SelectedIndex = 0
         End Select
     End Sub
 
@@ -538,7 +540,7 @@ Public Class EditingForm_HeaterCooler
         End If
     End Sub
 
-    Private Sub btnCreateAndConnectInlet1_Click(sender As Object, e As EventArgs) Handles btnCreateAndConnectInlet1.Click, btnCreateAndConnectOutlet1.Click, btnCreateAndConnectEnergy.Click
+    Private Sub btnCreateAndConnectInlet1_Click(sender As Object, e As EventArgs) Handles btnCreateAndConnectInlet1.Click, btnCreateAndConnectOutlet1.Click, btnCreateAndConnectEnergy.Click, btnCreateAndConnectEnergy2.Click
 
         Dim sgobj = SimObject.GraphicObject
         Dim fs = SimObject.FlowSheet
@@ -561,13 +563,29 @@ Public Class EditingForm_HeaterCooler
 
 
             If TypeOf SimObject Is UnitOperations.Heater Then
-                Dim obj = fs.AddObject(ObjectType.EnergyStream, sgobj.EnergyConnector.Position.X - 50, sgobj.EnergyConnector.Position.Y + 30, "")
+                Dim obj = fs.AddObject(ObjectType.EnergyStream, sgobj.InputConnectors(1).Position.X - 50, sgobj.InputConnectors(1).Position.Y + 30, "")
 
                 If sgobj.InputConnectors(1).IsAttached Then fs.DisconnectObjects(sgobj.InputConnectors(1).AttachedConnector.AttachedFrom, sgobj)
                 fs.ConnectObjects(obj.GraphicObject, sgobj, 0, 1)
 
             Else
                 Dim obj = fs.AddObject(ObjectType.EnergyStream, sgobj.EnergyConnector.Position.X + 30, sgobj.EnergyConnector.Position.Y + 30, "")
+
+                If sgobj.EnergyConnector.IsAttached Then fs.DisconnectObjects(sgobj, sgobj.EnergyConnector.AttachedConnector.AttachedTo)
+                fs.ConnectObjects(sgobj, obj.GraphicObject, 0, 0)
+
+            End If
+
+        ElseIf sender Is btnCreateAndConnectEnergy2 Then
+
+            If TypeOf SimObject Is UnitOperations.Cooler Then
+                Dim obj = fs.AddObject(ObjectType.EnergyStream, sgobj.InputConnectors(1).Position.X - 50, sgobj.InputConnectors(1).Position.Y - 30, "")
+
+                If sgobj.InputConnectors(1).IsAttached Then fs.DisconnectObjects(sgobj.InputConnectors(1).AttachedConnector.AttachedFrom, sgobj)
+                fs.ConnectObjects(obj.GraphicObject, sgobj, 0, 1)
+
+            Else
+                Dim obj = fs.AddObject(ObjectType.EnergyStream, sgobj.EnergyConnector.Position.X + 30, sgobj.EnergyConnector.Position.Y - 30, "")
 
                 If sgobj.EnergyConnector.IsAttached Then fs.DisconnectObjects(sgobj, sgobj.EnergyConnector.AttachedConnector.AttachedTo)
                 fs.ConnectObjects(sgobj, obj.GraphicObject, 0, 0)
@@ -598,4 +616,70 @@ Public Class EditingForm_HeaterCooler
 
     End Sub
 
+    Private Sub btnDisconnectEnergy2_Click(sender As Object, e As EventArgs) Handles btnDisconnectEnergy2.Click
+        If TypeOf SimObject Is UnitOperations.Cooler Then
+            If cbEnergy.SelectedItem IsNot Nothing Then
+                SimObject.FlowSheet.DisconnectObjects(SimObject.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom, SimObject.GraphicObject)
+                cbEnergy.SelectedItem = Nothing
+            End If
+        Else
+            If cbEnergy.SelectedItem IsNot Nothing Then
+                SimObject.FlowSheet.DisconnectObjects(SimObject.GraphicObject, SimObject.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo)
+                cbEnergy.SelectedItem = Nothing
+            End If
+        End If
+    End Sub
+
+    Private Sub cbEnergy2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbEnergy2.SelectedIndexChanged
+
+        If Loaded Then
+
+            Dim text As String = cbEnergy2.Text
+
+            If TypeOf SimObject Is UnitOperations.Cooler Then
+
+                If text <> "" Then
+
+                    Dim index As Integer = 1
+
+                    Dim gobj = SimObject.GraphicObject
+                    Dim flowsheet = SimObject.FlowSheet
+
+                    If flowsheet.GetFlowsheetSimulationObject(text).GraphicObject.OutputConnectors(0).IsAttached Then
+                        MessageBox.Show(flowsheet.GetTranslatedString("Todasasconexespossve"), flowsheet.GetTranslatedString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Else
+                        Try
+                            If gobj.InputConnectors(index).IsAttached Then flowsheet.DisconnectObjects(gobj.InputConnectors(index).AttachedConnector.AttachedFrom, gobj)
+                            flowsheet.ConnectObjects(flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, gobj, 0, index)
+                        Catch ex As Exception
+                            MessageBox.Show(ex.Message, flowsheet.GetTranslatedString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        End Try
+                    End If
+                    UpdateInfo()
+                End If
+
+            Else
+
+                If text <> "" Then
+
+                    Dim index As Integer = 0
+
+                    Dim gobj = SimObject.GraphicObject
+                    Dim flowsheet = SimObject.FlowSheet
+
+                    If flowsheet.GetFlowsheetSimulationObject(text).GraphicObject.InputConnectors(0).IsAttached Then
+                        MessageBox.Show(flowsheet.GetTranslatedString("Todasasconexespossve"), flowsheet.GetTranslatedString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Exit Sub
+                    End If
+
+                    If gobj.EnergyConnector.IsAttached Then flowsheet.DisconnectObjects(gobj, gobj.EnergyConnector.AttachedConnector.AttachedTo)
+                    flowsheet.ConnectObjects(gobj, flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, 0, 0)
+
+                End If
+
+            End If
+
+        End If
+
+    End Sub
 End Class

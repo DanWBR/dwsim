@@ -53,6 +53,7 @@ Namespace UnitOperations
             OutletTemperature = 1
             OutletVaporFraction = 2
             TemperatureChange = 3
+            EnergyStream = 4
         End Enum
 
         Public Property OutletTemperature() As Nullable(Of Double)
@@ -333,15 +334,15 @@ Namespace UnitOperations
                                 were the outlet stream enthalpy is calculated by an energy balance 
                                 through the cooler.")
 
-            If Not Me.GraphicObject.EnergyConnector.IsAttached Then
-                Throw New Exception(FlowSheet.GetTranslatedString("NohcorrentedeEnergyFlow2"))
+            If Not Me.GraphicObject.EnergyConnector.IsAttached And CalcMode <> CalculationMode.EnergyStream Then
+                Throw New Exception(FlowSheet.GetTranslatedString("PrimaryEnergyStreamRequired"))
             ElseIf Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
                 Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
             ElseIf Not Me.GraphicObject.InputConnectors(0).IsAttached Then
                 Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
             End If
 
-            Dim msin As MaterialStream, esout As Streams.EnergyStream
+            Dim msin As MaterialStream = Nothing, esout As Streams.EnergyStream = Nothing
 
             msin = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
             msin.Validate()
@@ -356,7 +357,9 @@ Namespace UnitOperations
             ei = Hi * Wi
             ein = ei
 
-            esout = FlowSheet.SimulationObjects(Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
+            If CalcMode <> CalculationMode.EnergyStream Then
+                esout = FlowSheet.SimulationObjects(Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
+            End If
 
             P2 = Pi - Me.DeltaP.GetValueOrDefault
 
@@ -366,6 +369,51 @@ Namespace UnitOperations
             If DebugMode Then AppendDebugLine("Calculation mode: " & CalcMode.ToString)
 
             Select Case Me.CalcMode
+
+                Case CalculationMode.EnergyStream
+
+                    Dim esin = GetInletEnergyStream(1)
+
+                    If esin Is Nothing Then
+                        Throw New Exception(FlowSheet.GetTranslatedString("SecondaryEnergyStreamRequired"))
+                    End If
+
+                    IObj?.Paragraphs.Add("Calculation Mode: Energy Stream")
+
+                    IObj?.Paragraphs.Add("Outlet Stream will be specified with Pressure and Enthalpy. Temperature will be calculated through a PH Flash call.")
+
+                    IObj?.Paragraphs.Add("<m>H_2 = \frac{Q}{W}\frac{\eta}{100}+H_1</m>")
+
+                    Me.DeltaQ = esin.EnergyFlow.GetValueOrDefault
+                    H2 = Me.DeltaQ.GetValueOrDefault * (Me.Eficiencia.GetValueOrDefault / 100) / Wi + Hi
+
+                    IObj?.Paragraphs.Add("<h3>Input Variables</h3>")
+
+                    IObj?.Paragraphs.Add(String.Format("<mi>Q</mi>: {0} kW", DeltaQ.GetValueOrDefault))
+                    IObj?.Paragraphs.Add(String.Format("<mi>\eta</mi>: {0} %", Eficiencia.GetValueOrDefault))
+                    IObj?.Paragraphs.Add(String.Format("<mi>W</mi>: {0} kg/s", Wi))
+                    IObj?.Paragraphs.Add(String.Format("<mi>H_1</mi>: {0} kJ/kg", Hi))
+
+                    IObj?.Paragraphs.Add("<h3>Results</h3>")
+
+                    IObj?.Paragraphs.Add(String.Format("<mi>H_2</mi>: {0} kJ/kg", H2))
+
+                    If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", P2, H2))
+
+                    IObj?.SetCurrent()
+                    Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, Ti)
+                    T2 = tmp.CalculatedTemperature
+                    CheckSpec(T2, True, "outlet temperature")
+                    Me.DeltaT = T2 - Ti
+
+                    IObj?.Paragraphs.Add(String.Format("<mi>T_2</mi>: {0} K", T2))
+                    IObj?.Paragraphs.Add(String.Format("<mi>\Delta T</mi>: {0} K", DeltaT))
+
+                    OutletTemperature = T2
+
+                    OutletVaporFraction = tmp.GetVaporPhaseMoleFraction
+
+                    If DebugMode Then AppendDebugLine(String.Format("Calculated outlet temperature T2 = {0} K", T2))
 
                 Case CalculationMode.HeatRemoved
 

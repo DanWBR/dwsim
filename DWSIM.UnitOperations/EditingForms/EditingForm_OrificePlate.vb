@@ -193,19 +193,21 @@ Public Class EditingForm_OrificePlate
         End If
 
     End Sub
+
     Private Sub cbIntPipeDiam_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbIntPipeDiam.SelectedIndexChanged
         If Loaded Then
             Try
                 If sender Is cbIntPipeDiam Then
                     tbIntPipeDiameter.Text = su.Converter.Convert(cbIntPipeDiam.SelectedItem.ToString, units.diameter, Double.Parse(tbIntPipeDiameter.Text)).ToString(nf)
                     cbIntPipeDiam.SelectedItem = units.diameter
-                    UpdateProps(tbOrificeDiameter)
+                    UpdateProps(tbIntPipeDiameter)
                 End If
             Catch ex As Exception
                 SimObject.FlowSheet.ShowMessage(ex.Message.ToString, Interfaces.IFlowsheet.MessageType.GeneralError)
             End Try
         End If
     End Sub
+
     Sub UpdateProps(sender As Object)
 
         'Pressão na Saída

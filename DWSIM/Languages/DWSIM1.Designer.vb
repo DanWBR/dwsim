@@ -11998,6 +11998,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Este modo de cálculo requer uma corrente de energia conectada à porta primária..
+        '''</summary>
+        Friend Shared ReadOnly Property PrimaryEnergyStreamRequired() As String
+            Get
+                Return ResourceManager.GetString("PrimaryEnergyStreamRequired", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Peng-Robinson (Água Imiscível e Translação de Volume).
         '''</summary>
         Friend Shared ReadOnly Property PRIWVT() As String
@@ -13839,6 +13848,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property SEAPP() As String
             Get
                 Return ResourceManager.GetString("SEAPP", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to É necessário uma corrente de energia conectada à porta secundária..
+        '''</summary>
+        Friend Shared ReadOnly Property SecondaryEnergyStreamRequired() As String
+            Get
+                Return ResourceManager.GetString("SecondaryEnergyStreamRequired", resourceCulture)
             End Get
         End Property
         

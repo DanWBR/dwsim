@@ -50,6 +50,11 @@ Namespace GraphicObjects.Shapes
             myIC1.Position = New Point(X, Y + 0.5 * Height)
             myIC1.Type = ConType.ConIn
 
+            Dim myIC2 As New ConnectionPoint
+            myIC2.Position = New Point(X + 0.5 * Width, Y)
+            myIC2.Type = ConType.ConEn
+            myIC2.Direction = ConDir.Up
+
             Dim myOC1 As New ConnectionPoint
             myOC1.Position = New Point(X + Width, Y + 0.5 * Height)
             myOC1.Type = ConType.ConOut
@@ -57,18 +62,21 @@ Namespace GraphicObjects.Shapes
             Me.EnergyConnector.Position = New Point(X + 0.5 * Width, Y + Height)
             Me.EnergyConnector.Type = ConType.ConEn
             Me.EnergyConnector.Direction = ConDir.Down
-            Me.EnergyConnector.ConnectorName = "Energy Stream"
+            Me.EnergyConnector.ConnectorName = "Energy Stream (Primary)"
             Me.EnergyConnector.Active = True
 
             With InputConnectors
 
-                If .Count = 1 Then
+                If .Count = 1 Or .Count = 2 Then
                     .Item(0).Position = New Point(X, Y + 0.5 * Height)
+                    .Item(1).Position = New Point(X + 0.5 * Width, Y)
                 Else
                     .Add(myIC1)
+                    .Add(myIC2)
                 End If
 
                 .Item(0).ConnectorName = "Inlet"
+                .Item(1).ConnectorName = "Energy Stream (Secondary)"
 
             End With
 

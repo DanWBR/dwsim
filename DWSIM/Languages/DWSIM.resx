@@ -5733,4 +5733,10 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="NoManipulatedObject" xml:space="preserve">
     <value>Não há um objeto manipulável selecionado.</value>
   </data>
+  <data name="SecondaryEnergyStreamRequired" xml:space="preserve">
+    <value>É necessário uma corrente de energia conectada à porta secundária.</value>
+  </data>
+  <data name="PrimaryEnergyStreamRequired" xml:space="preserve">
+    <value>Este modo de cálculo requer uma corrente de energia conectada à porta primária.</value>
+  </data>
 </root>
