@@ -652,29 +652,29 @@ Public Class FormFlowsheet
 
         'Me.UIThread(Sub()
         If Not Me.ScriptCollection Is Nothing Then
-                            For Each scr As Script In Me.ScriptCollection.Values
-                                If scr.Linked And scr.LinkedEventType = sourceevent And scr.LinkedObjectType = sourceobj And scr.LinkedObjectName = sourceobjname Then
-                                    If My.Application.CommandLineMode Then
-                                        Console.WriteLine()
-                                        Console.WriteLine("Running script '" & scr.Title & "' for event '" & scr.LinkedEventType.ToString & "', linked to '" & Me.Collections.FlowsheetObjectCollection(scr.LinkedObjectName).GraphicObject.Tag & "'...")
-                                        Console.WriteLine()
-                                    Else
-                                        If scr.LinkedObjectName <> "" Then
-                                            Me.WriteToLog("Running script '" & scr.Title & "' for event '" & scr.LinkedEventType.ToString & "', linked to '" & Me.Collections.FlowsheetObjectCollection(scr.LinkedObjectName).GraphicObject.Tag & "'...", Color.Blue, SharedClasses.DWSIM.Flowsheet.MessageType.Information)
-                                        Else
-                                            Me.WriteToLog("Running script '" & scr.Title & "' for event '" & scr.LinkedEventType.ToString & "'", Color.Blue, SharedClasses.DWSIM.Flowsheet.MessageType.Information)
-                                        End If
-                                    End If
-                                    If scr.PythonInterpreter = Enums.Scripts.Interpreter.IronPython Then
-                                        FormScript.RunScript_IronPython(scr.ScriptText, Me, Nothing)
-                                    Else
-                                        FormScript.RunScript_PythonNET(scr.ScriptText, Me)
-                                    End If
-                                End If
-                            Next
+            For Each scr As Script In Me.ScriptCollection.Values
+                If scr.Linked And scr.LinkedEventType = sourceevent And scr.LinkedObjectType = sourceobj And scr.LinkedObjectName = sourceobjname Then
+                    If My.Application.CommandLineMode Then
+                        Console.WriteLine()
+                        Console.WriteLine("Running script '" & scr.Title & "' for event '" & scr.LinkedEventType.ToString & "', linked to '" & Me.Collections.FlowsheetObjectCollection(scr.LinkedObjectName).GraphicObject.Tag & "'...")
+                        Console.WriteLine()
+                    Else
+                        If scr.LinkedObjectName <> "" Then
+                            ShowMessage("Running script '" & scr.Title & "' for event '" & scr.LinkedEventType.ToString & "', linked to '" & Me.Collections.FlowsheetObjectCollection(scr.LinkedObjectName).GraphicObject.Tag & "'...", IFlowsheet.MessageType.Information)
                         Else
-                            Me.ScriptCollection = New Dictionary(Of String, Interfaces.IScript)
+                            ShowMessage("Running script '" & scr.Title & "' for event '" & scr.LinkedEventType.ToString & "'", IFlowsheet.MessageType.Information)
                         End If
+                    End If
+                    If scr.PythonInterpreter = Enums.Scripts.Interpreter.IronPython Then
+                        FormScript.RunScript_IronPython(scr.ScriptText, Me, Nothing)
+                    Else
+                        FormScript.RunScript_PythonNET(scr.ScriptText, Me)
+                    End If
+                End If
+            Next
+        Else
+            Me.ScriptCollection = New Dictionary(Of String, Interfaces.IScript)
+        End If
         'End Sub)
 
     End Sub

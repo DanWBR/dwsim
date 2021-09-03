@@ -552,6 +552,9 @@ namespace DWSIM.UI.Desktop.Editors
                         case Heater.CalculationMode.OutletVaporFraction:
                             pos3 = 2;
                             break;
+                        case Heater.CalculationMode.EnergyStream:
+                            pos3 = 3;
+                            break;
                     }
                     s.CreateAndAddDropDownRow(container, "Calculation Mode", StringResources.heatercalcmode().ToList(), pos3, (DropDown arg3, EventArgs ev) =>
                     {
@@ -565,6 +568,9 @@ namespace DWSIM.UI.Desktop.Editors
                                 break;
                             case 2:
                                 hc.CalcMode = Heater.CalculationMode.OutletVaporFraction;
+                                break;
+                            case 3:
+                                hc.CalcMode = Heater.CalculationMode.EnergyStream;
                                 break;
                         }
                     }, () => CallSolverIfNeeded());
@@ -660,6 +666,9 @@ namespace DWSIM.UI.Desktop.Editors
                         case Cooler.CalculationMode.OutletVaporFraction:
                             pos3c = 2;
                             break;
+                        case Cooler.CalculationMode.EnergyStream:
+                            pos3c = 3;
+                            break;
                     }
                     s.CreateAndAddDropDownRow(container, "Calculation Mode", StringResources.heatercalcmode().ToList(), pos3c, (DropDown arg3, EventArgs ev) =>
                     {
@@ -673,6 +682,9 @@ namespace DWSIM.UI.Desktop.Editors
                                 break;
                             case 2:
                                 cc.CalcMode = Cooler.CalculationMode.OutletVaporFraction;
+                                break;
+                            case 3:
+                                cc.CalcMode = Cooler.CalculationMode.EnergyStream;
                                 break;
                         }
                     }, () => CallSolverIfNeeded());
