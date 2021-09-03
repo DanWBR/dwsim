@@ -208,10 +208,16 @@
   <data name="btnDisconnectOutlet1.ToolTip1" xml:space="preserve">
     <value />
   </data>
+  <data name="btnDisconnectOutlet1.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="btnDisconnect1.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
   <data name="btnDisconnect1.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="btnDisconnect1.ToolTip2" xml:space="preserve">
     <value />
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">

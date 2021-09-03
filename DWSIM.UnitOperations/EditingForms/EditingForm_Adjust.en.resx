@@ -123,6 +123,9 @@
   <data name="chkActive.ToolTip1" xml:space="preserve">
     <value />
   </data>
+  <data name="chkActive.ToolTip2" xml:space="preserve">
+    <value />
+  </data>
   <data name="Label11.Text" xml:space="preserve">
     <value>Object</value>
   </data>

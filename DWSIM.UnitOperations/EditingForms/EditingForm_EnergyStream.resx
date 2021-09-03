@@ -559,10 +559,7 @@
     <value>20</value>
   </data>
   <data name="btnDisconnectOutlet1.ToolTip" xml:space="preserve">
-    <value>Desconectar</value>
-  </data>
-  <data name="btnDisconnectOutlet1.ToolTip1" xml:space="preserve">
-    <value>Desconectar</value>
+    <value>Disconnect</value>
   </data>
   <data name="&gt;&gt;btnDisconnectOutlet1.Name" xml:space="preserve">
     <value>btnDisconnectOutlet1</value>
@@ -592,10 +589,7 @@
     <value>14</value>
   </data>
   <data name="btnDisconnect1.ToolTip" xml:space="preserve">
-    <value>Desconectar</value>
-  </data>
-  <data name="btnDisconnect1.ToolTip1" xml:space="preserve">
-    <value>Desconectar</value>
+    <value>Disconnect</value>
   </data>
   <data name="&gt;&gt;btnDisconnect1.Name" xml:space="preserve">
     <value>btnDisconnect1</value>
@@ -787,6 +781,6 @@
     <value>EditingForm_EnergyStream</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=6.0.7491.27386, Culture=neutral, PublicKeyToken=null</value>
+    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=6.6.1.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

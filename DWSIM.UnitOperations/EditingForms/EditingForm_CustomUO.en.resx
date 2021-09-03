@@ -184,6 +184,9 @@
   <data name="btnDisconnectEnergyS.Location" type="System.Drawing.Point, System.Drawing">
     <value>405, 372</value>
   </data>
+  <data name="btnDisconnectEnergyS.ToolTip" xml:space="preserve">
+    <value>Disconnect</value>
+  </data>
   <data name="btnCreateAndConnectOutlet6.Location" type="System.Drawing.Point, System.Drawing">
     <value>378, 314</value>
   </data>
@@ -205,11 +208,20 @@
   <data name="btnDisconnectOutlet6.Location" type="System.Drawing.Point, System.Drawing">
     <value>405, 314</value>
   </data>
+  <data name="btnDisconnectOutlet6.ToolTip" xml:space="preserve">
+    <value>Disconnect</value>
+  </data>
   <data name="btnDisconnectOutlet5.Location" type="System.Drawing.Point, System.Drawing">
     <value>405, 287</value>
   </data>
+  <data name="btnDisconnectOutlet5.ToolTip" xml:space="preserve">
+    <value>Disconnect</value>
+  </data>
   <data name="btnDisconnectOutlet4.Location" type="System.Drawing.Point, System.Drawing">
     <value>405, 261</value>
+  </data>
+  <data name="btnDisconnectOutlet4.ToolTip" xml:space="preserve">
+    <value>Disconnect</value>
   </data>
   <data name="btnCreateAndConnectEnergy.Location" type="System.Drawing.Point, System.Drawing">
     <value>378, 346</value>
@@ -274,8 +286,14 @@
   <data name="btnDisconnectEnergyE.Location" type="System.Drawing.Point, System.Drawing">
     <value>405, 346</value>
   </data>
+  <data name="btnDisconnectEnergyE.ToolTip" xml:space="preserve">
+    <value>Disconnect</value>
+  </data>
   <data name="btnDisconnectOutlet3.Location" type="System.Drawing.Point, System.Drawing">
     <value>405, 235</value>
+  </data>
+  <data name="btnDisconnectOutlet3.ToolTip" xml:space="preserve">
+    <value>Disconnect</value>
   </data>
   <data name="btnDisconnectOutlet2.Location" type="System.Drawing.Point, System.Drawing">
     <value>405, 208</value>
@@ -292,17 +310,32 @@
   <data name="btnDisconnect6.Location" type="System.Drawing.Point, System.Drawing">
     <value>405, 148</value>
   </data>
+  <data name="btnDisconnect6.ToolTip" xml:space="preserve">
+    <value>Disconnect</value>
+  </data>
   <data name="btnDisconnect5.Location" type="System.Drawing.Point, System.Drawing">
     <value>405, 122</value>
+  </data>
+  <data name="btnDisconnect5.ToolTip" xml:space="preserve">
+    <value>Disconnect</value>
   </data>
   <data name="btnDisconnect4.Location" type="System.Drawing.Point, System.Drawing">
     <value>405, 96</value>
   </data>
+  <data name="btnDisconnect4.ToolTip" xml:space="preserve">
+    <value>Disconnect</value>
+  </data>
   <data name="btnDisconnect3.Location" type="System.Drawing.Point, System.Drawing">
     <value>405, 70</value>
   </data>
+  <data name="btnDisconnect3.ToolTip" xml:space="preserve">
+    <value>Disconnect</value>
+  </data>
   <data name="btnDisconnect2.Location" type="System.Drawing.Point, System.Drawing">
     <value>405, 44</value>
+  </data>
+  <data name="btnDisconnect2.ToolTip" xml:space="preserve">
+    <value>Disconnect</value>
   </data>
   <data name="btnDisconnect1.Location" type="System.Drawing.Point, System.Drawing">
     <value>405, 18</value>
@@ -353,7 +386,7 @@
     <value>0, 25</value>
   </data>
   <data name="dgvinputstringvars.Size" type="System.Drawing.Size, System.Drawing">
-    <value>425, 102</value>
+    <value>426, 102</value>
   </data>
   <data name="btnAddInputStringVar.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
@@ -368,10 +401,10 @@
     <value>Remove</value>
   </data>
   <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>425, 25</value>
+    <value>426, 25</value>
   </data>
   <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>425, 127</value>
+    <value>426, 127</value>
   </data>
   <data name="TabPage3.Text" xml:space="preserve">
     <value>Input (Text)</value>
@@ -383,10 +416,10 @@
     <value>Value</value>
   </data>
   <data name="dgvoutputvars.Size" type="System.Drawing.Size, System.Drawing">
-    <value>419, 121</value>
+    <value>420, 121</value>
   </data>
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>425, 127</value>
+    <value>426, 127</value>
   </data>
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Output</value>

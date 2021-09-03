@@ -136,6 +136,12 @@
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Case Manager</value>
   </data>
+  <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>509, 120</value>
+  </data>
+  <data name="GroupBox3.Text" xml:space="preserve">
+    <value>Name and Description</value>
+  </data>
   <data name="tbCaseDesc.Size" type="System.Drawing.Size, System.Drawing">
     <value>433, 61</value>
   </data>
@@ -151,11 +157,11 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>509, 120</value>
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>867, 309</value>
   </data>
-  <data name="GroupBox3.Text" xml:space="preserve">
-    <value>Name and Description</value>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Variables</value>
   </data>
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Name</value>
@@ -187,6 +193,9 @@
   <data name="dgVariables.Size" type="System.Drawing.Size, System.Drawing">
     <value>861, 265</value>
   </data>
+  <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>861, 25</value>
+  </data>
   <data name="tsbAddVar.ToolTipText" xml:space="preserve">
     <value>Add</value>
   </data>
@@ -196,14 +205,14 @@
   <data name="ToolStripButton1.Text" xml:space="preserve">
     <value>Update</value>
   </data>
-  <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>861, 25</value>
+  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>867, 72</value>
   </data>
-  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>867, 309</value>
+  <data name="GroupBox4.Text" xml:space="preserve">
+    <value>Configuration</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Variables</value>
+  <data name="FlowLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>151, 23</value>
   </data>
   <data name="rbVariable.Text" xml:space="preserve">
     <value>Variable</value>
@@ -213,9 +222,6 @@
   </data>
   <data name="rbExpression.Text" xml:space="preserve">
     <value>Expression</value>
-  </data>
-  <data name="FlowLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>151, 23</value>
   </data>
   <data name="rbMinimize.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 17</value>
@@ -256,11 +262,14 @@
   <data name="Label2.Text" xml:space="preserve">
     <value>Optimization Type</value>
   </data>
-  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>867, 72</value>
+  <data name="GroupBox6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 512</value>
   </data>
-  <data name="GroupBox4.Text" xml:space="preserve">
-    <value>Configuration</value>
+  <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>367, 109</value>
+  </data>
+  <data name="GroupBox6.Text" xml:space="preserve">
+    <value>Expression</value>
   </data>
   <data name="btnClear.Location" type="System.Drawing.Point, System.Drawing">
     <value>281, 50</value>
@@ -301,14 +310,17 @@
   <data name="Label7.Text" xml:space="preserve">
     <value>Expression</value>
   </data>
-  <data name="GroupBox6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 512</value>
+  <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>882, 760</value>
   </data>
-  <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>367, 109</value>
+  <data name="GroupBox8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 623</value>
   </data>
-  <data name="GroupBox6.Text" xml:space="preserve">
-    <value>Expression</value>
+  <data name="GroupBox8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>367, 129</value>
+  </data>
+  <data name="GroupBox8.Text" xml:space="preserve">
+    <value>Optimization Control</value>
   </data>
   <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
     <value>276, 47</value>
@@ -394,18 +406,6 @@
   <data name="btnRestore.Text" xml:space="preserve">
     <value>Restore Simulation</value>
   </data>
-  <data name="GroupBox8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 623</value>
-  </data>
-  <data name="GroupBox8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>367, 129</value>
-  </data>
-  <data name="GroupBox8.Text" xml:space="preserve">
-    <value>Optimization Control</value>
-  </data>
-  <data name="grProgress.Size" type="System.Drawing.Size, System.Drawing">
-    <value>491, 221</value>
-  </data>
   <data name="GroupBox7.Location" type="System.Drawing.Point, System.Drawing">
     <value>375, 512</value>
   </data>
@@ -415,16 +415,16 @@
   <data name="GroupBox7.Text" xml:space="preserve">
     <value>Optimization Progress</value>
   </data>
-  <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>882, 760</value>
+  <data name="grProgress.Size" type="System.Drawing.Size, System.Drawing">
+    <value>491, 221</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>882, 760</value>
   </data>
   <data name="$this.TabText" xml:space="preserve">
-    <value>Optimizer</value>
+    <value />
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>DWSIM - Multivariate Optimizer</value>
+    <value>Multivariate Optimization</value>
   </data>
 </root>

@@ -150,6 +150,9 @@
   <data name="btnCreateAndConnectOutlet1.ToolTip" xml:space="preserve">
     <value>Criar e Conectar</value>
   </data>
+  <data name="btnCreateAndConnectOutlet1.ToolTip1" xml:space="preserve">
+    <value>Criar e Conectar</value>
+  </data>
   <data name="&gt;&gt;btnCreateAndConnectOutlet1.Name" xml:space="preserve">
     <value>btnCreateAndConnectOutlet1</value>
   </data>
@@ -181,6 +184,9 @@
     <value>46</value>
   </data>
   <data name="btnCreateAndConnectInlet6.ToolTip" xml:space="preserve">
+    <value>Criar e Conectar</value>
+  </data>
+  <data name="btnCreateAndConnectInlet6.ToolTip1" xml:space="preserve">
     <value>Criar e Conectar</value>
   </data>
   <data name="&gt;&gt;btnCreateAndConnectInlet6.Name" xml:space="preserve">
@@ -216,6 +222,9 @@
   <data name="btnCreateAndConnectInlet5.ToolTip" xml:space="preserve">
     <value>Criar e Conectar</value>
   </data>
+  <data name="btnCreateAndConnectInlet5.ToolTip1" xml:space="preserve">
+    <value>Criar e Conectar</value>
+  </data>
   <data name="&gt;&gt;btnCreateAndConnectInlet5.Name" xml:space="preserve">
     <value>btnCreateAndConnectInlet5</value>
   </data>
@@ -247,6 +256,9 @@
     <value>44</value>
   </data>
   <data name="btnCreateAndConnectInlet4.ToolTip" xml:space="preserve">
+    <value>Criar e Conectar</value>
+  </data>
+  <data name="btnCreateAndConnectInlet4.ToolTip1" xml:space="preserve">
     <value>Criar e Conectar</value>
   </data>
   <data name="&gt;&gt;btnCreateAndConnectInlet4.Name" xml:space="preserve">
@@ -282,6 +294,9 @@
   <data name="btnCreateAndConnectInlet3.ToolTip" xml:space="preserve">
     <value>Criar e Conectar</value>
   </data>
+  <data name="btnCreateAndConnectInlet3.ToolTip1" xml:space="preserve">
+    <value>Criar e Conectar</value>
+  </data>
   <data name="&gt;&gt;btnCreateAndConnectInlet3.Name" xml:space="preserve">
     <value>btnCreateAndConnectInlet3</value>
   </data>
@@ -313,6 +328,9 @@
     <value>42</value>
   </data>
   <data name="btnCreateAndConnectInlet2.ToolTip" xml:space="preserve">
+    <value>Criar e Conectar</value>
+  </data>
+  <data name="btnCreateAndConnectInlet2.ToolTip1" xml:space="preserve">
     <value>Criar e Conectar</value>
   </data>
   <data name="&gt;&gt;btnCreateAndConnectInlet2.Name" xml:space="preserve">
@@ -348,6 +366,9 @@
   <data name="btnCreateAndConnectInlet1.ToolTip" xml:space="preserve">
     <value>Criar e Conectar</value>
   </data>
+  <data name="btnCreateAndConnectInlet1.ToolTip1" xml:space="preserve">
+    <value>Criar e Conectar</value>
+  </data>
   <data name="&gt;&gt;btnCreateAndConnectInlet1.Name" xml:space="preserve">
     <value>btnCreateAndConnectInlet1</value>
   </data>
@@ -376,10 +397,7 @@
     <value>20</value>
   </data>
   <data name="btnDisconnectOutlet1.ToolTip" xml:space="preserve">
-    <value>Desconectar</value>
-  </data>
-  <data name="btnDisconnectOutlet1.ToolTip1" xml:space="preserve">
-    <value>Desconectar</value>
+    <value>Disconnect</value>
   </data>
   <data name="&gt;&gt;btnDisconnectOutlet1.Name" xml:space="preserve">
     <value>btnDisconnectOutlet1</value>
@@ -409,10 +427,7 @@
     <value>19</value>
   </data>
   <data name="btnDisconnect6.ToolTip" xml:space="preserve">
-    <value>Desconectar</value>
-  </data>
-  <data name="btnDisconnect6.ToolTip1" xml:space="preserve">
-    <value>Desconectar</value>
+    <value>Disconnect</value>
   </data>
   <data name="&gt;&gt;btnDisconnect6.Name" xml:space="preserve">
     <value>btnDisconnect6</value>
@@ -442,10 +457,7 @@
     <value>18</value>
   </data>
   <data name="btnDisconnect5.ToolTip" xml:space="preserve">
-    <value>Desconectar</value>
-  </data>
-  <data name="btnDisconnect5.ToolTip1" xml:space="preserve">
-    <value>Desconectar</value>
+    <value>Disconnect</value>
   </data>
   <data name="&gt;&gt;btnDisconnect5.Name" xml:space="preserve">
     <value>btnDisconnect5</value>
@@ -475,10 +487,7 @@
     <value>17</value>
   </data>
   <data name="btnDisconnect4.ToolTip" xml:space="preserve">
-    <value>Desconectar</value>
-  </data>
-  <data name="btnDisconnect4.ToolTip1" xml:space="preserve">
-    <value>Desconectar</value>
+    <value>Disconnect</value>
   </data>
   <data name="&gt;&gt;btnDisconnect4.Name" xml:space="preserve">
     <value>btnDisconnect4</value>
@@ -508,10 +517,7 @@
     <value>16</value>
   </data>
   <data name="btnDisconnect3.ToolTip" xml:space="preserve">
-    <value>Desconectar</value>
-  </data>
-  <data name="btnDisconnect3.ToolTip1" xml:space="preserve">
-    <value>Desconectar</value>
+    <value>Disconnect</value>
   </data>
   <data name="&gt;&gt;btnDisconnect3.Name" xml:space="preserve">
     <value>btnDisconnect3</value>
@@ -541,10 +547,7 @@
     <value>15</value>
   </data>
   <data name="btnDisconnect2.ToolTip" xml:space="preserve">
-    <value>Desconectar</value>
-  </data>
-  <data name="btnDisconnect2.ToolTip1" xml:space="preserve">
-    <value>Desconectar</value>
+    <value>Disconnect</value>
   </data>
   <data name="&gt;&gt;btnDisconnect2.Name" xml:space="preserve">
     <value>btnDisconnect2</value>
@@ -574,10 +577,7 @@
     <value>14</value>
   </data>
   <data name="btnDisconnect1.ToolTip" xml:space="preserve">
-    <value>Desconectar</value>
-  </data>
-  <data name="btnDisconnect1.ToolTip1" xml:space="preserve">
-    <value>Desconectar</value>
+    <value>Disconnect</value>
   </data>
   <data name="&gt;&gt;btnDisconnect1.Name" xml:space="preserve">
     <value>btnDisconnect1</value>
