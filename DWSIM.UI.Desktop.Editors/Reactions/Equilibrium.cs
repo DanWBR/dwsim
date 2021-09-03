@@ -141,7 +141,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             container.CreateAndAddTextBoxRow(nf, "Minimum Temperature (" + su.temperature + ")", rx.Tmin.ConvertFromSI(su.temperature), (sender, e) => { if (sender.Text.IsValidDouble()) rx.Tmin = sender.Text.ToDoubleFromCurrent().ConvertToSI(su.temperature); });
             container.CreateAndAddTextBoxRow(nf, "Maximum Temperature (" + su.temperature + ")", rx.Tmax.ConvertFromSI(su.temperature), (sender, e) => { if (sender.Text.IsValidDouble()) rx.Tmax = sender.Text.ToDoubleFromCurrent().ConvertToSI(su.temperature); });
-
+            container.CreateAndAddTextBoxRow(nf, "Approach (" + su.temperature + ")", rx.Approach.ConvertFromSI(su.temperature), (sender, e) => { if (sender.Text.IsValidDouble()) rx.Approach = sender.Text.ToDoubleFromCurrent().ConvertToSI(su.temperature); });
 
             container.CreateAndAddLabelRow("Reaction Basis");
 
