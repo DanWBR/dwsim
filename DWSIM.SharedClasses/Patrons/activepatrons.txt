@@ -22,7 +22,6 @@ David Miller
 David Whitlock
 Deryck Coetzer
 Diego A. Acosta
-Domenico Marchese
 Don Harrold
 Dorivaldo Junior
 Doug Palfreyman
@@ -51,7 +50,6 @@ Jonathan
 Joseph Mendoza
 Joseph Attia
 Karen Elrington
-Khairul Anam
 Laércio Piva
 Lauterbach Verfahrenstechnik GmbH
 Leonard Seed
@@ -80,6 +78,5 @@ Steven Sandoval
 Tayeong Lee
 Tibor Lányi
 Tony Diocee
-Vignesh Viswanathan
 Will Flores
 Yoshihide Watabe

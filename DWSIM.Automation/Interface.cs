@@ -121,7 +121,11 @@ namespace DWSIM.Automation
 
         public void ReleaseResources()
         {
-            //
+            if (fm != null && !fm.IsDisposed)
+            {
+                fm.Dispose();
+                fm = null;
+            }
         }
 
         public object GetMainWindow()
