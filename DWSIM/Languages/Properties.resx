@@ -1617,4 +1617,7 @@
   <data name="PROP_EQ_1" xml:space="preserve">
     <value>Temperatura de Saída</value>
   </data>
+  <data name="PROP_PF_9" xml:space="preserve">
+    <value>Diâmetro</value>
+  </data>
 </root>

@@ -124,6 +124,10 @@ Public Class EditingForm_ReactorPFR
             cbLength.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.distance).ToArray)
             cbLength.SelectedItem = units.distance
 
+            cbDiam.Items.Clear()
+            cbDiam.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.diameter).ToArray)
+            cbDiam.SelectedItem = units.diameter
+
             Select Case .ReactorOperationMode
                 Case Reactors.OperationMode.Isothermic
                     cbCalcMode.SelectedIndex = 0
@@ -139,6 +143,22 @@ Public Class EditingForm_ReactorPFR
             tbCatLoad.Text = su.Converter.ConvertFromSI(units.density, .CatalystLoading).ToString(nf)
             tbCatDiam.Text = su.Converter.ConvertFromSI(units.diameter, .CatalystParticleDiameter).ToString(nf)
             tbCatVoidFrac.Text = .CatalystVoidFraction.ToString(nf)
+            tbDiam.Text = su.Converter.ConvertFromSI(units.diameter, .Diameter).ToString(nf)
+
+            Select Case .ReactorSizingType
+                Case Reactors.Reactor_PFR.SizingType.Diameter
+                    rbDiameter.Checked = True
+                    cbDiam.Enabled = True
+                    tbDiam.Enabled = True
+                    cbLength.Enabled = False
+                    tbLength.Enabled = False
+                Case Reactors.Reactor_PFR.SizingType.Length
+                    rbLength.Checked = True
+                    cbDiam.Enabled = False
+                    tbDiam.Enabled = False
+                    cbLength.Enabled = True
+                    tbLength.Enabled = True
+            End Select
 
             Dim rsets As String() = .FlowSheet.ReactionSets.Values.Select(Function(m) m.Name).ToArray
             cbReacSet.Items.Clear()
@@ -147,6 +167,22 @@ Public Class EditingForm_ReactorPFR
             Try
                 If Not .FlowSheet.ReactionSets.ContainsKey(.ReactionSetID) Then .ReactionSetID = "DefaultSet"
                 cbReacSet.SelectedItem = .FlowSheet.ReactionSets(.ReactionSetID).Name
+                Dim reactions = .FlowSheet.ReactionSets(.ReactionSetID).Reactions.Values.Select(Function(r) r.ReactionID).ToArray()
+                tbCatDiam.Enabled = False
+                tbCatLoad.Enabled = False
+                tbCatVoidFrac.Enabled = False
+                cbCatDiam.Enabled = False
+                cbCatLoad.Enabled = False
+                For Each r In reactions
+                    If .FlowSheet.Reactions(r).ReactionType = Enums.ReactionType.Heterogeneous_Catalytic Then
+                        tbCatDiam.Enabled = True
+                        tbCatLoad.Enabled = True
+                        tbCatVoidFrac.Enabled = True
+                        cbCatDiam.Enabled = True
+                        cbCatLoad.Enabled = True
+                        Exit For
+                    End If
+                Next
             Catch ex As Exception
             End Try
 
@@ -400,7 +436,7 @@ Public Class EditingForm_ReactorPFR
 
     End Sub
 
-    Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbOutletTemperature.KeyDown, tbCatDiam.KeyDown, tbCatLoad.KeyDown, tbCatVoidFrac.KeyDown, tbLength.KeyDown, tbVol.KeyDown
+    Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbOutletTemperature.KeyDown, tbCatDiam.KeyDown, tbCatLoad.KeyDown, tbCatVoidFrac.KeyDown, tbLength.KeyDown, tbVol.KeyDown, tbDiam.KeyDown
 
         If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = System.Drawing.Color.Blue Then
 
@@ -420,6 +456,7 @@ Public Class EditingForm_ReactorPFR
         If sender Is tbCatDiam Then SimObject.CatalystParticleDiameter = su.Converter.ConvertToSI(cbCatDiam.SelectedItem.ToString, tbCatDiam.Text.ParseExpressionToDouble)
         If sender Is tbCatLoad Then SimObject.CatalystLoading = su.Converter.ConvertToSI(cbCatLoad.SelectedItem.ToString, tbCatLoad.Text.ParseExpressionToDouble)
         If sender Is tbCatVoidFrac Then SimObject.CatalystVoidFraction = tbCatVoidFrac.Text.ParseExpressionToDouble
+        If sender Is tbDiam Then SimObject.Diameter = su.Converter.ConvertToSI(cbDiam.SelectedItem.ToString, tbDiam.Text.ParseExpressionToDouble)
 
         RequestCalc()
 
@@ -428,6 +465,22 @@ Public Class EditingForm_ReactorPFR
     Private Sub cbReacSet_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbReacSet.SelectedIndexChanged
         If Loaded Then
             SimObject.ReactionSetID = SimObject.FlowSheet.ReactionSets.Values.Where(Function(x) x.Name = cbReacSet.SelectedItem.ToString).FirstOrDefault.ID
+            Dim reactions = SimObject.FlowSheet.ReactionSets(SimObject.ReactionSetID).Reactions.Values.Select(Function(r) r.ReactionID).ToArray()
+            tbCatDiam.Enabled = False
+            tbCatLoad.Enabled = False
+            tbCatVoidFrac.Enabled = False
+            cbCatDiam.Enabled = False
+            cbCatLoad.Enabled = False
+            For Each r In reactions
+                If SimObject.FlowSheet.Reactions(r).ReactionType = Enums.ReactionType.Heterogeneous_Catalytic Then
+                    tbCatDiam.Enabled = True
+                    tbCatLoad.Enabled = True
+                    tbCatVoidFrac.Enabled = True
+                    cbCatDiam.Enabled = True
+                    cbCatLoad.Enabled = True
+                    Exit For
+                End If
+            Next
             RequestCalc()
         End If
     End Sub
@@ -671,6 +724,19 @@ Public Class EditingForm_ReactorPFR
         If TryCast(selectedsolver, IExternalSolverConfiguration) IsNot Nothing Then
             SimObject.ExternalSolverConfigData = DirectCast(selectedsolver, IExternalSolverConfiguration).Edit(SimObject.ExternalSolverConfigData)
         End If
+    End Sub
+
+    Private Sub rbLength_CheckedChanged(sender As Object, e As EventArgs) Handles rbLength.CheckedChanged, rbDiameter.CheckedChanged
+
+        tbDiam.Enabled = rbDiameter.Checked
+        tbLength.Enabled = rbLength.Checked
+
+        If rbDiameter.Checked Then
+            SimObject.ReactorSizingType = Reactors.Reactor_PFR.SizingType.Diameter
+        Else
+            SimObject.ReactorSizingType = Reactors.Reactor_PFR.SizingType.Length
+        End If
+
     End Sub
 
 End Class

@@ -1906,6 +1906,7 @@ namespace DWSIM.UI.Desktop.Editors
                        }, () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Outlet Temperature"));
+                    s.CreateAndAddLabelRow(container, "Sizing Information");
                     s.CreateAndAddTextBoxRow(container, nf, "Reactor Volume (" + su.volume + ")", cv.ConvertFromSI(su.volume, reactor4.Volume),
                                (TextBox arg3, EventArgs ev) =>
                                {
@@ -1921,6 +1922,9 @@ namespace DWSIM.UI.Desktop.Editors
                                }, () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Reactor Volume"));
+                    s.CreateAndAddDropDownRow(container, "Sizing Information", new List<string> { "Length", "Diameter" },
+                        reactor4.ReactorSizingType == Reactor_PFR.SizingType.Length ? 0 : 1,
+                         (dd, e) => reactor4.ReactorSizingType = dd.SelectedIndex.ToEnum<Reactor_PFR.SizingType>());
                     s.CreateAndAddTextBoxRow(container, nf, "Reactor Length (" + su.distance + ")", cv.ConvertFromSI(su.distance, reactor4.Length),
                                (TextBox arg3, EventArgs ev) =>
                                {
@@ -1934,8 +1938,23 @@ namespace DWSIM.UI.Desktop.Editors
                                        arg3.TextColor = (Colors.Red);
                                    }
                                }, () => CallSolverIfNeeded());
+                    s.CreateAndAddTextBoxRow(container, nf, "Reactor Diameter (" + su.diameter + ")", cv.ConvertFromSI(su.diameter, reactor4.Diameter),
+                               (TextBox arg3, EventArgs ev) =>
+                               {
+                                   if (arg3.Text.IsValidDoubleExpression())
+                                   {
+                                       arg3.TextColor = (SystemColors.ControlText);
+                                       reactor4.Diameter = cv.ConvertToSI(su.diameter, arg3.Text.ToString().ParseExpressionToDouble());
+                                   }
+                                   else
+                                   {
+                                       arg3.TextColor = (Colors.Red);
+                                   }
+                               }, () => CallSolverIfNeeded());
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Reactor Length"));
+                    s.CreateAndAddLabelRow(container, "Catalyst Loading");
+                    s.CreateAndAddDescriptionRow(container, "Catalyst Loading information is required when dealing with Heterogeneous Catalytic reactions.");
                     s.CreateAndAddTextBoxRow(container, nf, "Catalyst Loading (" + su.density + ")", cv.ConvertFromSI(su.volume, reactor4.CatalystLoading),
                                (TextBox arg3, EventArgs ev) =>
                                {

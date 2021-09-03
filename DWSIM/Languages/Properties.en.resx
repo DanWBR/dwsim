@@ -1360,6 +1360,9 @@
   <data name="PROP_PF_8" xml:space="preserve">
     <value>Heat load</value>
   </data>
+  <data name="PROP_PF_9" xml:space="preserve">
+    <value>Diameter</value>
+  </data>
   <data name="PROP_PS_0" xml:space="preserve">
     <value>Pressure Drop</value>
     <comment>0</comment>
