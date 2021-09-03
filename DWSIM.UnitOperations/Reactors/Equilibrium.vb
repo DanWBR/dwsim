@@ -212,8 +212,11 @@ Namespace Reactors
             ktot = 1.0
             prodtot = 1.0
 
+            Dim reaction As IReaction
+
             For i = 0 To Me.Reactions.Count - 1
-                kr = FlowSheet.Reactions(Me.Reactions(i)).EvaluateK(T, pp)
+                reaction = FlowSheet.Reactions(Me.Reactions(i))
+                kr = reaction.EvaluateK(T + reaction.Approach, pp)
                 ktot *= kr
                 prodtot *= Math.Abs(prod(i))
                 f(i) = Math.Log(Math.Abs(prod(i)) / kr) + penval ^ 2
