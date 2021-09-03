@@ -194,6 +194,8 @@
 
     Function GetSimulationFileDirectory() As String
 
+    Sub ClearLog()
+
 End Interface
 
 ''' <summary>

@@ -3478,6 +3478,12 @@ Public Class FormFlowsheet
 
     End Function
 
+    Public Sub ClearLog() Implements IFlowsheet.ClearLog
+
+        FormLog.Grid1.Rows.Clear()
+
+    End Sub
+
 #End Region
 
 End Class

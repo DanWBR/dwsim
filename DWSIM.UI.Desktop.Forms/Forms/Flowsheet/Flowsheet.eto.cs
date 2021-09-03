@@ -1823,6 +1823,13 @@ namespace DWSIM.UI.Forms
             outtxt.ReadOnly = true;
             outtxt.SelectionBold = true;
 
+            FlowsheetObject.ActClearLog = () => {
+                Application.Instance.AsyncInvoke(() =>
+                {
+                    outtxt.Text = "";
+                });
+            };
+
             var container = new DocumentControl() { DisplayArrows = false };
 
             container.Pages.Add(new DocumentPage(outtxt) { Text = "Log Panel", Closable = false });

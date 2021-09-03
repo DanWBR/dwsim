@@ -2835,5 +2835,10 @@ Label_00CC:
 
     End Function
 
+    Public Overridable Sub ClearLog() Implements IFlowsheet.ClearLog
+
+
+    End Sub
+
 End Class
 

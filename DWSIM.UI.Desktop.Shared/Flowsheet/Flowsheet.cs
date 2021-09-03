@@ -22,6 +22,8 @@ namespace DWSIM.UI.Desktop.Shared
 
         public Action UpdateEditorPanels;
 
+        public Action ActClearLog;
+
         public bool optimizing = false;
         public bool SupressMessages = false;
         private bool eventattached = false;
@@ -66,6 +68,12 @@ namespace DWSIM.UI.Desktop.Shared
                 });
             }
         }
+
+        public override void ClearLog()
+        {
+            ActClearLog?.Invoke();
+        }
+
         public override void ShowDebugInfo(string text, int level)
         {
             Console.WriteLine(text);
