@@ -72,14 +72,14 @@ Public Class FormReacKinetic
         Me.tbDesc.Text = rc.Description
         Me.tbCompBase.Text = rc.BaseReactant
         Me.tbEquation.Text = rc.Equation
-        Me.tbReacHeat.Text = rc.ReactionHeat
-        Me.tbStoich.Text = rc.StoichBalance
+        Me.tbReacHeat.Text = rc.ReactionHeat.ToString(nf)
+        Me.tbStoich.Text = rc.StoichBalance.ToString(nf)
         Me.tbTmin.Text = rc.Tmin
         Me.tbTmax.Text = rc.Tmax
-        Me.tbFwdA.Text = rc.A_Forward
-        Me.tbFwdE.Text = rc.E_Forward
-        Me.tbRevA.Text = rc.A_Reverse
-        Me.tbRevE.Text = rc.E_Reverse
+        Me.tbFwdA.Text = rc.A_Forward.ToString(nf)
+        Me.tbFwdE.Text = rc.E_Forward.ToString(nf)
+        Me.tbRevA.Text = rc.A_Reverse.ToString(nf)
+        Me.tbRevE.Text = rc.E_Reverse.ToString(nf)
 
         If rc.ReactionKinFwdType = ReactionKineticType.Arrhenius Then
             rdFwdArr.Checked = True
