@@ -404,7 +404,10 @@ Imports IronPython.Hosting
                                     Case Else
                                         If seditor.chkLink.Checked Then
                                             scr.LinkedObjectType = Scripts.ObjectType.FlowsheetObject
-                                            scr.LinkedObjectName = fc.GetFlowsheetGraphicObject(seditor.cbLinkedObject.SelectedItem.ToString).Name
+                                            Try
+                                                scr.LinkedObjectName = fc.GetFlowsheetGraphicObject(seditor.cbLinkedObject.SelectedItem.ToString).Name
+                                            Catch ex As Exception
+                                            End Try
                                         End If
                                         If seditor.cbLinkedEvent.SelectedIndex = 0 Then
                                             scr.LinkedEventType = Scripts.EventType.ObjectCalculationStarted
