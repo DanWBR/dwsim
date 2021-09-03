@@ -65,6 +65,31 @@ The full changelog including souce code changes can be viewed at https://github.
 Version 6.6.1
 
 Author              Description
+Daniel Medeiros     Updated User's guide
+Daniel Medeiros     Updated tooltips for Script Editor in Classic UI
+Daniel Medeiros     Fixed issues with File Provider
+Daniel Medeiros     Fixed issues with CoolProp Property Package
+Daniel Medeiros     Improved Pipe Segment UO calculation stability
+Daniel Medeiros     Steady-State Controller Control Panel is now dockable (Classic UI)
+Daniel Medeiros     Added energy stream calculation mode to cooler
+Daniel Medeiros     Added Diameter as an editable property for PFR
+Daniel Medeiros     Added Flowsheet.ClearLog() function
+Daniel Medeiros     Implemented Temperature Approach for Equilibrium reactions
+Gregor Reichert     Fixed an issue with SVE calculation
+Gregor Reichert     Fixed an issue with Solids Separator UO
+Daniel Medeiros     Other minor fixes and enhancements
+
+Fixed issues from GitHub issue tracker (https://github.com/DanWBR/dwsim6/issues/):
+
+Daniel Medeiros     [Enhancement] Format Number in the Reaction Interface Support Engineering Notation #185
+Daniel Medeiros     [Bug] Script Manager: Click on API Help Button Opens Explorer with Page Not found #178
+Daniel Medeiros     [Bug] Copy Data to Clipboard in Material Streams Interface #176
+Daniel Medeiros     [Bug] Kinetic with Python Script the DO RO Shall be Hidden #175
+Daniel Medeiros     [Bug] Clicking on Open Python Script Editor Several Times Create Several Script Windows #174
+Daniel Medeiros     [Bug] A Product as a Base Component #172
+Daniel Medeiros     [Enhancement] Use Rate instead of Velocity in Reaction Interface #171
+Daniel Medeiros     [Bug] Basis Component in Reaction Interface #170
+Daniel Medeiros     [Bug] DWSIM Calculate conversions for Products #169
 
 Version 6.6.0
 
