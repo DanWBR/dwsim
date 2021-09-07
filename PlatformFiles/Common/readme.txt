@@ -69,6 +69,7 @@ Daniel Medeiros     DWSIM now uses the System Font in Classic UI
 Daniel Medeiros     Enhanced stability of Equilibrium Reactor calculation in Adiabatic mode
 Daniel Medeiros     Fixed a regression in Pipe Segment UO
 Daniel Medeiros     Fixed Classic UI layout in High-DPI displays
+Daniel Medeiros     Input Boxes can now be used in Steady-State mode
 
 Version 6.6.1
 

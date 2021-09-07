@@ -350,6 +350,10 @@
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Caloric Properties</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="TabPage3.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
     <value>668, 402</value>
   </data>

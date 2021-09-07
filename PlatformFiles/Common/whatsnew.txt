@@ -4,3 +4,4 @@ Version 6.6.2
 - Enhanced stability of Equilibrium Reactor calculation in Adiabatic mode
 - Fixed a regression in Pipe Segment UO
 - Fixed Classic UI layout in High-DPI displays
+- Input Boxes can now be used in Steady-State mode

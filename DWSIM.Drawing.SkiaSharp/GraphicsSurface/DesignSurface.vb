@@ -848,6 +848,10 @@ Public Class GraphicsSurface
                 selectionDragging = False
                 justselected = True
 
+            Else
+
+                SelectedObject?.DisplayControlPanelModeEditor()
+
             End If
 
         Else
