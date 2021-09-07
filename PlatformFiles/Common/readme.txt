@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 6.6.1
+Version 6.6.2
 Copyright (c) 2017-2021 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,14 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim6/commits/windows
+
+Version 6.6.2
+
+Author              Description
+Daniel Medeiros     DWSIM now uses the System Font in Classic UI
+Daniel Medeiros     Enhanced stability of Equilibrium Reactor calculation in Adiabatic mode
+Daniel Medeiros     Fixed a regression in Pipe Segment UO
+Daniel Medeiros     Fixed Classic UI layout in High-DPI displays
 
 Version 6.6.1
 

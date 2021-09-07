@@ -2548,7 +2548,7 @@
     <value>0</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=6.6.1.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=6.6.2.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="Label15.ToolTip2" xml:space="preserve">
     <value />

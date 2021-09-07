@@ -1,27 +1,6 @@
-Version 6.6.1
+Version 6.6.2
 
-- Updated User's guide
-- Updated tooltips for Script Editor in Classic UI
-- Fixed issues with File Provider
-- Fixed issues with CoolProp Property Package
-- Improved Pipe Segment UO calculation stability
-- Steady-State Controller Control Panel is now dockable (Classic UI)
-- Added energy stream calculation mode to cooler
-- Added Diameter as an editable property for PFR
-- Added Flowsheet.ClearLog() function
-- Implemented Temperature Approach for Equilibrium reactions
-- Fixed an issue with SVE calculation
-- Fixed an issue with Solids Separator UO
-- Other minor fixes and enhancements
-
-Fixed issues from GitHub issue tracker (https://github.com/DanWBR/dwsim6/issues/):
-
-- [Enhancement] Format Number in the Reaction Interface Support Engineering Notation #185
-- [Bug] Script Manager: Click on API Help Button Opens Explorer with Page Not found #178
-- [Bug] Copy Data to Clipboard in Material Streams Interface #176
-- [Bug] Kinetic with Python Script the DO RO Shall be Hidden #175
-- [Bug] Clicking on Open Python Script Editor Several Times Create Several Script Windows #174
-- [Bug] A Product as a Base Component #172
-- [Enhancement] Use Rate instead of Velocity in Reaction Interface #171
-- [Bug] Basis Component in Reaction Interface #170
-- [Bug] DWSIM Calculate conversions for Products #169
+- DWSIM now uses the System Font in Classic UI
+- Enhanced stability of Equilibrium Reactor calculation in Adiabatic mode
+- Fixed a regression in Pipe Segment UO
+- Fixed Classic UI layout in High-DPI displays
