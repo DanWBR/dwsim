@@ -11,6 +11,8 @@ Public Class SimulationObjectsPanel
 
     Private Sub Simulation_Objects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         Dim add As Boolean = True
 
         Dim litems As New List(Of ListItem)
@@ -24,6 +26,7 @@ Public Class SimulationObjectsPanel
         If Not Flowsheet.MobileCompatibilityMode Then
             Dim li As New ListItem
             li.lblName.Text = "ChemSep Column"
+            li.lblName.Font = New Font(SystemFonts.MessageBoxFont.FontFamily, 7.0, FontStyle.Bold)
             li.ToolTip1.SetToolTip(li.lblName, "ChemSep Rigorous Separation Column (CAPE-OPEN)")
             li.Image.Image = csobj.GetIconBitmap
             li.ToolTip1.SetToolTip(li.Image, "ChemSep Rigorous Separation Column (CAPE-OPEN)")
@@ -48,6 +51,7 @@ Public Class SimulationObjectsPanel
                     obj.SetFlowsheet(Flowsheet)
                     Dim li As New ListItem
                     li.lblName.Text = obj.GetDisplayName
+                    li.lblName.Font = New Font(SystemFonts.MessageBoxFont.FontFamily, 7.0, FontStyle.Bold)
                     li.ToolTip1.SetToolTip(li.lblName, obj.GetDisplayDescription)
                     li.Image.Image = obj.GetIconBitmap
                     li.ToolTip1.SetToolTip(li.Image, obj.GetDisplayDescription)
@@ -70,6 +74,7 @@ Public Class SimulationObjectsPanel
                 obj.SetFlowsheet(Flowsheet)
                 Dim li As New ListItem
                 li.lblName.Text = obj.GetDisplayName
+                li.lblName.Font = New Font(SystemFonts.MessageBoxFont.FontFamily, 7.0, FontStyle.Bold)
                 li.ToolTip1.SetToolTip(li.lblName, obj.GetDisplayDescription)
                 li.Image.Image = obj.GetIconBitmap
                 li.ToolTip1.SetToolTip(li.Image, obj.GetDisplayDescription)

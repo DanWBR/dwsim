@@ -14,6 +14,8 @@ Public Class FormFileExplorer
 
     Private Sub FormFileExplorer_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         TempDir = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName())
         Directory.CreateDirectory(TempDir)
 

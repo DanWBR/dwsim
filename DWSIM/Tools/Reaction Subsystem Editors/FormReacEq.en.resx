@@ -183,10 +183,10 @@
     <value>Equilibrium Constant (Keq)</value>
   </data>
   <data name="tbApproach.Location" type="System.Drawing.Point, System.Drawing">
-    <value>329, 45</value>
+    <value>346, 45</value>
   </data>
   <data name="tbApproach.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 20</value>
+    <value>135, 20</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tbApproach.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
@@ -311,6 +311,18 @@
   </data>
   <data name="KryptonLabel11.Text" xml:space="preserve">
     <value>Name</value>
+  </data>
+  <data name="tbName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>81, 17</value>
+  </data>
+  <data name="tbName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>504, 20</value>
+  </data>
+  <data name="tbDesc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>81, 44</value>
+  </data>
+  <data name="tbDesc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>504, 50</value>
   </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Identification</value>

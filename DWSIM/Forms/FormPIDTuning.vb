@@ -14,6 +14,8 @@ Public Class FormPIDTuning
 
     Private Sub FormPIDTuning_Load(sender As Object, e As EventArgs) Handles Me.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         lbControllers.Items.Clear()
 
         Dim Controllers = Flowsheet.SimulationObjects.Values.Where(Function(x) x.ObjectClass = SimulationObjectClass.Controllers).ToList

@@ -168,10 +168,10 @@
     <value>1</value>
   </data>
   <data name="tbName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>68, 16</value>
+    <value>79, 16</value>
   </data>
   <data name="tbName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>473, 20</value>
+    <value>462, 20</value>
   </data>
   <data name="tbName.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -189,13 +189,13 @@
     <value>2</value>
   </data>
   <data name="KryptonTextBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>68, 44</value>
+    <value>79, 44</value>
   </data>
   <data name="KryptonTextBox1.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="KryptonTextBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>473, 50</value>
+    <value>462, 50</value>
   </data>
   <data name="KryptonTextBox1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>

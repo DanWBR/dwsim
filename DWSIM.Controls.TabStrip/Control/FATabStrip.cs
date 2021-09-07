@@ -50,7 +50,7 @@ namespace FarsiLibrary.Win
         private FATabStripCloseButton closeButton = null;
         private FATabStripItemCollection items;
         private StringFormat sf = null;
-        private static Font defaultFont = new Font("Tahoma", 8.25f, FontStyle.Regular);
+        private static Font defaultFont = SystemFonts.MessageBoxFont;
 
         private bool alwaysShowClose = true;
         private bool isIniting = false;
@@ -572,7 +572,7 @@ namespace FarsiLibrary.Win
             if (currentItem == SelectedItem)
                 currentFont = new Font(Font, FontStyle.Bold);
 
-            SizeF textSize = g.MeasureString(currentItem.Title, SystemFonts.DefaultFont, new SizeF(200, 10), sf);
+            SizeF textSize = g.MeasureString(currentItem.Title, SystemFonts.MessageBoxFont, new SizeF(200, 10), sf);
             textSize.Width += 20;
             RectangleF buttonRect = currentItem.StripRect;
 
@@ -635,11 +635,11 @@ namespace FarsiLibrary.Win
                 if (currentItem == SelectedItem)
                 {
                     //textRect.Y -= 2;
-                    g.DrawString(currentItem.Title, SystemFonts.DefaultFont, new SolidBrush(SystemColors.ActiveCaptionText), textRect, sf);
+                    g.DrawString(currentItem.Title, SystemFonts.MessageBoxFont, new SolidBrush(SystemColors.ActiveCaptionText), textRect, sf);
                 }
                 else
                 {
-                    g.DrawString(currentItem.Title, SystemFonts.DefaultFont, new SolidBrush(SystemColors.ActiveCaptionText), textRect, sf);
+                    g.DrawString(currentItem.Title, SystemFonts.MessageBoxFont, new SolidBrush(SystemColors.ActiveCaptionText), textRect, sf);
                 }
             }
 

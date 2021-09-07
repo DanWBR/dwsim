@@ -50,6 +50,8 @@ Public Class FormUNIFACRegression
     Dim GN1, GN2, Comp1, Comp2 As String
 
     Private Sub FormUNIFACRegression_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        ExtensionMethods.ChangeDefaultFont(Me)
         cv = New SystemsOfUnits.Converter
         mat = New MaterialStream("", "")
         Comp1 = ""

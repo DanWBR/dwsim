@@ -15,6 +15,8 @@ Public Class FormPropSelection
 
     Private Sub UICVSelectorForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         formC = My.Application.ActiveSimulation
 
         lvType.Items.AddRange(FormMain.ObjectList.Keys.Select(Function(x) New ListViewItem(x)).ToArray())

@@ -2500,7 +2500,6 @@ Partial Class FormCompoundCreator
         'MenuStrip1
         '
         resources.ApplyResources(Me.MenuStrip1, "MenuStrip1")
-        Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ComponenteToolStripMenuItem, Me.SistemasDeUnidadesToolStripMenuItem, Me.OptionsToolStripMenuItem})
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.ToolTip1.SetToolTip(Me.MenuStrip1, resources.GetString("MenuStrip1.ToolTip"))

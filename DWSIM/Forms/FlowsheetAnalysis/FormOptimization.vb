@@ -58,6 +58,8 @@ Public Class FormOptimization
 
     Private Sub FormOptimization_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         TabText = Text
 
         If Not Me.DockHandler Is Nothing OrElse Not Me.DockHandler.FloatPane Is Nothing Then

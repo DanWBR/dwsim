@@ -679,10 +679,10 @@
     <value>1</value>
   </data>
   <data name="tbName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>68, 17</value>
+    <value>78, 17</value>
   </data>
   <data name="tbName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>517, 20</value>
+    <value>507, 20</value>
   </data>
   <data name="tbName.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -700,13 +700,13 @@
     <value>2</value>
   </data>
   <data name="tbDesc.Location" type="System.Drawing.Point, System.Drawing">
-    <value>68, 44</value>
+    <value>78, 44</value>
   </data>
   <data name="tbDesc.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="tbDesc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>517, 50</value>
+    <value>507, 50</value>
   </data>
   <data name="tbDesc.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>

@@ -18,6 +18,8 @@ Public Class FormImportCompoundOnline
     End Sub
 
     Private Sub FormImportCompoundDataKDB_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        ExtensionMethods.ChangeDefaultFont(Me)
         CurrentPanel = "Panel1"
     End Sub
 

@@ -12,6 +12,8 @@ Public Class FormConfig
 
     Private Sub FormConfig_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         Loaded = False
 
         chkUsePRH.Checked = PP.UseLeeKeslerEnthalpy

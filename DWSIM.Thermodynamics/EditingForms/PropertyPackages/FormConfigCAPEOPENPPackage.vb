@@ -26,6 +26,8 @@ Public Class FormConfigCAPEOPENPPackage
 
     Private Sub FormConfigCAPEOPEN2_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         Me.TopMost = True
 
         Application.DoEvents()

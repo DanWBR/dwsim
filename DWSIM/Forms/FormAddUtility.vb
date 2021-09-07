@@ -147,5 +147,7 @@ Public Class FormAddUtility
 
     Private Sub FormAddUtility_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
     End Sub
 End Class

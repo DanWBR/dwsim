@@ -20,6 +20,8 @@ Public Class FormConfigureMasterTable
 
     Private Sub FormConfigureMasterTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         cbObjectType.Items.AddRange([Enum].GetNames(Table.ObjectType.GetType))
         cbOrderBy.Items.AddRange(Table.SortableItems)
 

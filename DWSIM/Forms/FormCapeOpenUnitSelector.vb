@@ -7,6 +7,8 @@ Public Class FormCapeOpenUnitSelector
 
     Private Sub FormCapeOpenUnitSelector_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         Me.BackgroundWorker1.RunWorkerAsync()
 
         Me.Enabled = False

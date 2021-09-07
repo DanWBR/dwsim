@@ -60,6 +60,8 @@ Public Class FormDataRegression
 
     Public Sub FormDataRegression_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         Me.MenuStrip1.Visible = Not GlobalSettings.Settings.OldUI
 
         IP = New InteractionParameter

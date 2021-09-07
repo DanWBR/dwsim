@@ -16,6 +16,8 @@ Public Class FormDynamicsManager
 
     Private Sub FormDynamicsManager_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         Manager = Flowsheet.DynamicsManager
 
         Dim dpi = Settings.DpiScale

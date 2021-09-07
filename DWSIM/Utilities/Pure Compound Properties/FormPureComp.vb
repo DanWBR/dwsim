@@ -60,6 +60,8 @@ Public Class FormPureComp
 
     Private Sub FormPureComp_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         If Not MyCompound Is Nothing Then Me.Text = Me.Text & " - " & MyCompound.Name
 
     End Sub

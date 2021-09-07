@@ -9,6 +9,8 @@ Public Class FormConfigurePropertyTable
 
     Private Sub FormSelectProperties_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         TextBox1.Text = Table.HeaderText
 
         lvObjects.Items.Clear()

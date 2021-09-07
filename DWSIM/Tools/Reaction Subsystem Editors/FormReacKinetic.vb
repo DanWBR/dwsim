@@ -34,6 +34,8 @@ Public Class FormReacKinetic
 
     Private Sub FormReacKinetic_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         Me.cbBase.Enabled = True
 
         tbName.Focus()

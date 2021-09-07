@@ -30,6 +30,8 @@ Public Class FormUnitGen
 
     Private Sub FormUnitGen_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         frm = My.Application.ActiveSimulation
 
         Dim currentset As SystemsOfUnits.Units = frm.Options.SelectedUnitSystem

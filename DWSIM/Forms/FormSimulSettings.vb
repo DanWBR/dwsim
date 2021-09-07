@@ -69,6 +69,7 @@ Public Class FormSimulSettings
 
     Private Sub FormStSim_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Me.Load
 
+
         Me.TabText = Me.Text
 
         initialized = True
@@ -107,25 +108,27 @@ Public Class FormSimulSettings
 
     Sub Init(Optional ByVal reset As Boolean = False)
 
-        If Not SetHeights Then
+        'If Not SetHeights Then
 
-            ogc1.RowTemplate.Height = 23 * Settings.DpiScale
-            DataGridViewPP.RowTemplate.Height = 23 * Settings.DpiScale
-            dgvpp.RowTemplate.Height = 23 * Settings.DpiScale
+        '    ogc1.RowTemplate.Height = 23 * Settings.DpiScale
+        '    DataGridViewPP.RowTemplate.Height = 23 * Settings.DpiScale
+        '    dgvpp.RowTemplate.Height = 23 * Settings.DpiScale
 
-            ogc1.ColumnHeadersHeight *= Settings.DpiScale
-            DataGridViewPP.ColumnHeadersHeight *= Settings.DpiScale
-            dgvpp.ColumnHeadersHeight *= Settings.DpiScale
+        '    ogc1.ColumnHeadersHeight *= Settings.DpiScale
+        '    DataGridViewPP.ColumnHeadersHeight *= Settings.DpiScale
+        '    dgvpp.ColumnHeadersHeight *= Settings.DpiScale
 
-            SetHeights = True
+        '    SetHeights = True
 
-        End If
+        'End If
 
         Dim pathsep As Char = Path.DirectorySeparatorChar
 
         Dim comp As BaseClasses.ConstantProperties
 
         If Not loaded Or reset Then
+
+            ExtensionMethods.ChangeDefaultFont(Me)
 
             colAdd.ValueType = True.GetType()
             colAdd.FalseValue = False
@@ -266,6 +269,8 @@ Public Class FormSimulSettings
         End Select
 
         Me.loaded = True
+
+        ExtensionMethods.ChangeDefaultFont(Me)
 
     End Sub
 

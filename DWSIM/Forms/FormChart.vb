@@ -25,6 +25,8 @@
 
     Private Sub FormChart_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         DrawChart()
 
         Me.tbinfo.Text = tbtext

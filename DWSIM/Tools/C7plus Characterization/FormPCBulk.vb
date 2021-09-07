@@ -793,6 +793,8 @@ Public Class FormPCBulk
 
     Private Sub Form8_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         Me.frm = My.Application.ActiveSimulation
 
         Me.su = frm.Options.SelectedUnitSystem

@@ -177,6 +177,8 @@ Public Class FormFlowsheet
 
     Private Sub FormChild_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         FormCharts.Flowsheet = Me
         FormSpreadsheet.Flowsheet = Me
         FormDynamics.Flowsheet = Me

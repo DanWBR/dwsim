@@ -26,6 +26,8 @@ Imports DWSIM.Interfaces.Interfaces2
 
     Private Sub FormConfigCAPEOPEN_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         _coobjects.Clear()
 
         If pp._coversion = "1.0" Then

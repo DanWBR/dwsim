@@ -9,6 +9,8 @@ Public Class FormConfigCoolPropIncompFluid
 
     Private Sub FormConfigCoolPropIncompFluid_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         Dim contents As String = ""
         Using filestr As Stream = Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.CoolPropIncompPure.txt")
             Using t As New StreamReader(filestr)

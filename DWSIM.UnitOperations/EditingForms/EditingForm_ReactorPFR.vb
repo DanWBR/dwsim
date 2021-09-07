@@ -424,7 +424,8 @@ Public Class EditingForm_ReactorPFR
         End If
     End Sub
 
-    Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbOutletTemperature.TextChanged, tbOutletTemperature.TextChanged, tbCatDiam.TextChanged, tbCatLoad.TextChanged, tbCatVoidFrac.TextChanged, tbLength.TextChanged, tbVol.TextChanged
+    Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbOutletTemperature.TextChanged, tbOutletTemperature.TextChanged, tbCatDiam.TextChanged,
+                                                                        tbCatLoad.TextChanged, tbCatVoidFrac.TextChanged, tbLength.TextChanged, tbVol.TextChanged, tbDiam.TextChanged
 
         Dim tbox = DirectCast(sender, TextBox)
 
@@ -436,7 +437,8 @@ Public Class EditingForm_ReactorPFR
 
     End Sub
 
-    Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbOutletTemperature.KeyDown, tbCatDiam.KeyDown, tbCatLoad.KeyDown, tbCatVoidFrac.KeyDown, tbLength.KeyDown, tbVol.KeyDown, tbDiam.KeyDown
+    Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbOutletTemperature.KeyDown, tbCatDiam.KeyDown, tbCatLoad.KeyDown, tbCatVoidFrac.KeyDown, tbLength.KeyDown,
+                                                                            tbVol.KeyDown, tbDiam.KeyDown, tbDiam.KeyDown
 
         If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = System.Drawing.Color.Blue Then
 
@@ -655,7 +657,7 @@ Public Class EditingForm_ReactorPFR
 
     End Sub
 
-    Private Sub cbTemp_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbTemp.SelectedIndexChanged, cbCatDiam.SelectedIndexChanged, cbCatLoad.SelectedIndexChanged, cbVol.SelectedIndexChanged, cbLength.SelectedIndexChanged
+    Private Sub cbTemp_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbTemp.SelectedIndexChanged, cbCatDiam.SelectedIndexChanged, cbCatLoad.SelectedIndexChanged, cbVol.SelectedIndexChanged, cbLength.SelectedIndexChanged, cbDiam.SelectedIndexChanged
 
         If Loaded Then
             Try
@@ -675,6 +677,10 @@ Public Class EditingForm_ReactorPFR
                     tbCatDiam.Text = su.Converter.Convert(cbCatDiam.SelectedItem.ToString, units.diameter, Double.Parse(tbCatDiam.Text)).ToString(nf)
                     cbCatDiam.SelectedItem = units.diameter
                     UpdateProps(tbCatDiam)
+                ElseIf sender Is cbDiam Then
+                    tbDiam.Text = su.Converter.Convert(cbDiam.SelectedItem.ToString, units.diameter, Double.Parse(tbDiam.Text)).ToString(nf)
+                    cbDiam.SelectedItem = units.diameter
+                    UpdateProps(tbDiam)
                 ElseIf sender Is cbCatLoad Then
                     tbCatLoad.Text = su.Converter.Convert(cbCatLoad.SelectedItem.ToString, units.density, Double.Parse(tbCatLoad.Text)).ToString(nf)
                     cbCatLoad.SelectedItem = units.density

@@ -10,6 +10,8 @@ Public Class FormConfigureChartObject
 
     Private Sub FormConfigureChartObject_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         cbFlowsheetObject.Items.Clear()
         cbFlowsheetObject.Items.Add("Dynamic Mode Integrators")
         cbFlowsheetObject.Items.Add("Chart Objects")

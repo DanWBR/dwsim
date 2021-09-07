@@ -6,6 +6,8 @@
 
     Private Sub FormCharts_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         If Flowsheet.ChartCollection.Count > 0 Then
             For Each item In Flowsheet.ChartCollection
                 Dim tabpage As New TabPage

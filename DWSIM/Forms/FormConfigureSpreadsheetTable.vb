@@ -6,6 +6,8 @@ Public Class FormConfigureSpreadsheetTable
 
     Private Sub FormConfigureSpreadsheetTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         TextBox1.Text = Table.SpreadsheetCellRange
 
     End Sub

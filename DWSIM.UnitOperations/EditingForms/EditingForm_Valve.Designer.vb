@@ -486,7 +486,6 @@ Partial Class EditingForm_Valve
         'UtilitiesCtxMenu
         '
         resources.ApplyResources(Me.UtilitiesCtxMenu, "UtilitiesCtxMenu")
-        Me.UtilitiesCtxMenu.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.UtilitiesCtxMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddUtilityTSMI})
         Me.UtilitiesCtxMenu.Name = "ContextMenuStrip1"
         Me.ToolTip1.SetToolTip(Me.UtilitiesCtxMenu, resources.GetString("UtilitiesCtxMenu.ToolTip"))

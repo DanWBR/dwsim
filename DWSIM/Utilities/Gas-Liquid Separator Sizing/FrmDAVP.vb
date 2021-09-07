@@ -16,6 +16,8 @@
 
     Public Sub Initialize() Implements Interfaces.IAttachedUtility.Initialize
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         Me.Frm = AttachedTo.GetFlowsheet
 
         Me.ComboBox1.Items.Clear()

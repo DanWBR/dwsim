@@ -21,6 +21,8 @@ Public Class FrmPsvSize
 
     Private Sub Form4_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         Me.Frm = AttachedTo.GetFlowsheet
 
         Me.sz = New DWSIM.Utilities.PSV.Sizing

@@ -50,7 +50,7 @@ Namespace Reactors
         Dim DN As New Dictionary(Of String, Double)
         Dim N As New Dictionary(Of String, Double)
 
-        Dim T, T0, P, P0, Ninerts, Winerts, E(,) As Double
+        Dim T, T0, P, P0, Ninerts, Winerts, E(,), TAdb As Double
 
         Dim r, c, els, comps As Integer
 
@@ -207,7 +207,7 @@ Namespace Reactors
                 Next
             Next
 
-            Dim kr, ktot, prodtot, f1 As Double
+            Dim kr, ktot, prodtot As Double
 
             ktot = 1.0
             prodtot = 1.0
@@ -219,10 +219,12 @@ Namespace Reactors
                 kr = reaction.EvaluateK(T + reaction.Approach, pp)
                 ktot *= kr
                 prodtot *= Math.Abs(prod(i))
-                f(i) = Math.Log(Math.Abs(prod(i)) / kr) + penval ^ 2
+                If ReactorOperationMode <> OperationMode.Adiabatic Then
+                    f(i) = Math.Log(Math.Abs(prod(i)) / kr) + penval ^ 2
+                Else
+                    f(i) = Math.Log(Math.Abs(prod(i)) / kr)
+                End If
             Next
-
-            f1 = Math.Log(prodtot / ktot) ^ 2 + penval ^ 2
 
             FlowSheet.CheckStatus()
 
@@ -575,7 +577,10 @@ Namespace Reactors
             P0 = 101325
 
             Select Case Me.ReactorOperationMode
-                Case OperationMode.Adiabatic, OperationMode.Isothermic
+                Case OperationMode.Adiabatic
+                    T = TAdb
+                    If T < 1.0 Then T = T0
+                Case OperationMode.Isothermic
                     T = T0
                 Case OperationMode.OutletTemperature
                     T = OutletTemperature
@@ -1041,12 +1046,14 @@ Namespace Reactors
 
             If ReactorOperationMode = OperationMode.Adiabatic Then
                 Dim newton As New Optimization.NewtonSolver
-                newton.MaxIterations = 50
-                newton.Tolerance = 0.0001
-                newton.EnableDamping = True
+                newton.MaxIterations = ExternalLoopMaximumIterations
+                newton.Tolerance = ExternalLoopTolerance
+                newton.EnableDamping = False
+                newton.UseBroydenApproximation = False
                 newton.Solve(Function(Tx)
                                  Return New Double() {efunc.Invoke(Tx(0))}
                              End Function, New Double() {T})
+                TAdb = T
             Else
                 efunc.Invoke(T)
             End If

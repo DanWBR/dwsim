@@ -25,6 +25,8 @@ Public NotInheritable Class SplashScreen
 
     Private Sub SplashScreen_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         lblVersion.Text = "Version " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build
 
 #If DEBUG Then

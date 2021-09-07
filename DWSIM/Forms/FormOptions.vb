@@ -32,6 +32,8 @@ Public Class FormOptions
 
     Private Sub FormOptions_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         Dim i As Integer = 0
 
         Me.chkEnableParallelCalcs.Checked = My.Settings.EnableParallelProcessing
@@ -110,6 +112,8 @@ Public Class FormOptions
             Case "en"
                 Me.ComboBoxUILanguage.SelectedIndex = 1
         End Select
+
+        loaded = True
 
     End Sub
 

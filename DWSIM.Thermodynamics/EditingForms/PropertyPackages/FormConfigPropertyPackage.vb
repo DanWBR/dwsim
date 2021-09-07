@@ -199,6 +199,8 @@ Public Class FormConfigPropertyPackage
 
     Private Sub FormConfigPR_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         Me.Text += " (" & _pp.Tag & ") [" + _pp.ComponentName + "]"
 
         Me.KryptonDataGridView2.DataSource = Nothing

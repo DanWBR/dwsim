@@ -28,6 +28,8 @@ Public Class FormDBManager
     Public DBPath As String
 
     Private Sub FormDBManager_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+
+        ExtensionMethods.ChangeDefaultFont(Me)
         Dim i As Integer
         LblDBPath.Text = DBPath
 

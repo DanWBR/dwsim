@@ -2,6 +2,7 @@
 
 Module DataGridViewExtensions
 
+    <System.Runtime.CompilerServices.Extension()>
     Public Sub ChangeEditModeToOnPropertyChanged(gv As DataGridView)
         AddHandler gv.CurrentCellDirtyStateChanged, Function(sender, args)
                                                         gv.CommitEdit(DataGridViewDataErrorContexts.Commit)

@@ -50,6 +50,8 @@ Public Class FormCompoundCreator
 
     Private Sub FormCompoundCreator_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         Me.MenuStrip1.Visible = False
 
         graphCPIG.GraphPane.Border.IsVisible = False

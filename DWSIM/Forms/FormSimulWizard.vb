@@ -36,6 +36,8 @@ Public Class FormSimulWizard
 
     Private Sub FormConfigWizard_Load(sender As Object, e As System.EventArgs) Handles Me.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         Me.StepWizardControl1.FinishButtonText = DWSIM.App.GetLocalString("FinishText")
         Me.StepWizardControl1.CancelButtonText = DWSIM.App.GetLocalString("CancelText")
         Me.StepWizardControl1.NextButtonText = DWSIM.App.GetLocalString("NextText") & " >"

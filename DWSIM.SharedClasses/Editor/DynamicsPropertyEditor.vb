@@ -15,6 +15,12 @@ Public Class DynamicsPropertyEditor
 
     Private Sub DynamicsPropertyEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Shown
 
+        Me.AutoScaleMode = AutoScaleMode.Font
+
+        For Each control As Control In Me.Controls
+            control.Font = Drawing.SystemFonts.MessageBoxFont
+        Next
+
         UpdateInfo()
 
     End Sub

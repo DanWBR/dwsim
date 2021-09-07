@@ -39,6 +39,8 @@ Public Class FrmColdProperties
 
     Private Sub FrmColdProperties_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         frm = AttachedTo.GetFlowsheet
 
         Me.ComboBox3.Items.Clear()

@@ -153,14 +153,22 @@ Public Class FormWelcome
                     Application.DoEvents()
                     Application.DoEvents()
                     My.Application.MainWindowForm.LoadXML(lview.SelectedItems(0).Tag, Sub(x)
-                                                                                          Me.Invoke(Sub() floading.ProgressBar1.Value = x)
+                                                                                          Me.Invoke(Sub()
+                                                                                                        floading.ProgressBar1.Value = x
+                                                                                                        floading.Label2.Text = x.ToString("N0") + "%"
+                                                                                                        floading.Refresh()
+                                                                                                    End Sub)
                                                                                       End Sub)
                 Case ".dwxmz"
                     'My.Application.MainWindowForm.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + lview.SelectedItems(0).Tag + "..."
                     Application.DoEvents()
                     Application.DoEvents()
                     My.Application.MainWindowForm.LoadAndExtractXMLZIP(lview.SelectedItems(0).Tag, Sub(x)
-                                                                                                       Me.Invoke(Sub() floading.ProgressBar1.Value = x)
+                                                                                                       Me.Invoke(Sub()
+                                                                                                                     floading.ProgressBar1.Value = x
+                                                                                                                     floading.Label2.Text = x.ToString("N0") + "%"
+                                                                                                                     floading.Refresh()
+                                                                                                                 End Sub)
                                                                                                    End Sub)
                 Case ".dwsim"
                     'My.Application.MainWindowForm.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + lview.SelectedItems(0).Tag + "..."
@@ -329,6 +337,8 @@ Public Class FormWelcome
                                                                                                                              Me.UIThread(Sub()
                                                                                                                                              fdlding.Label1.Text = "Downloading file... (" & px & "%)" & vbCrLf & "(" & item.Title & ")"
                                                                                                                                              fdlding.ProgressBar1.Value = px
+                                                                                                                                             fdlding.Label2.Text = px.ToString("N0") + "%"
+                                                                                                                                             fdlding.Refresh()
                                                                                                                                          End Sub)
                                                                                                                          End Sub)
                                           End Function).ContinueWith(Sub(tk)
@@ -345,7 +355,11 @@ Public Class FormWelcome
                                                                                              Application.DoEvents()
                                                                                              Try
                                                                                                  My.Application.MainWindowForm.LoadXML2(xdoc, Sub(x)
-                                                                                                                                                  Me.Invoke(Sub() floading.ProgressBar1.Value = x)
+                                                                                                                                                  Me.Invoke(Sub()
+                                                                                                                                                                floading.ProgressBar1.Value = x
+                                                                                                                                                                fdlding.Label2.Text = x.ToString("N0") + "%"
+                                                                                                                                                                fdlding.Refresh()
+                                                                                                                                                            End Sub)
                                                                                                                                               End Sub)
                                                                                              Catch ex As Exception
                                                                                                  MessageBox.Show(tk.Exception, "Error loading file", MessageBoxButtons.OK, MessageBoxIcon.Error)

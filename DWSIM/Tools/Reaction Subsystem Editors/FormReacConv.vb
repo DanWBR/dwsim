@@ -35,6 +35,8 @@ Public Class FormReacConv
 
     Private Sub FormReacConv_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         fc = My.Application.ActiveSimulation
         su = fc.Options.SelectedUnitSystem
         nf = fc.Options.NumberFormat

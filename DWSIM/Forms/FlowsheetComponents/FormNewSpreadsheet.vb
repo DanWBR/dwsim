@@ -96,6 +96,8 @@ Public Class FormNewSpreadsheet
 
         Loaded = True
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
     End Sub
 
     Sub CreateChartFromRange(sender As Object, e As EventArgs)

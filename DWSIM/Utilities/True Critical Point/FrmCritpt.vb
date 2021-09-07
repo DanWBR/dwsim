@@ -288,6 +288,8 @@ Public Class FrmCritpt
 
     Public Sub Initialize() Implements Interfaces.IAttachedUtility.Initialize
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
     End Sub
 
     Public Sub Populate() Implements Interfaces.IAttachedUtility.Populate

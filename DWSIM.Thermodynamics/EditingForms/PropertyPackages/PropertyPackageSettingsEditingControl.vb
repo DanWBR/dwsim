@@ -16,6 +16,8 @@ Public Class PropertyPackageSettingsEditingControl
 
     Private Sub PropertyPackageSettingsEditingControl_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         chkIgnoreIPs.Enabled = TypeOf PropPack Is NRTLPropertyPackage Or TypeOf PropPack Is UNIQUACPropertyPackage
 
         chkIgnoreSalLim.Enabled = TypeOf PropPack Is SeawaterPropertyPackage

@@ -219,6 +219,8 @@ Public Class FormReportConfig
 
     Private Sub FormReportConfig_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         frm = My.Application.ActiveSimulation
         Me.Text = DWSIM.App.GetLocalString("RelatoriodaSimulacao")
 

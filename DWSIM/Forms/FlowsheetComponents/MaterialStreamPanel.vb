@@ -55,6 +55,8 @@ Public Class MaterialStreamPanel
 
     Private Sub frmMatList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         Me.Flowsheet = My.Application.ActiveSimulation
 
     End Sub

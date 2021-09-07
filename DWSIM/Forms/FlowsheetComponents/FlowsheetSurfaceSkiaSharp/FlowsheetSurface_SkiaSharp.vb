@@ -49,6 +49,8 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Private Sub frmSurface_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         If TypeOf Me.ParentForm Is FormFlowsheet Then
             Flowsheet = Me.ParentForm
         ElseIf Flowsheet Is Nothing Then
@@ -75,9 +77,13 @@ Public Class FlowsheetSurface_SkiaSharp
 
         SplitContainerHorizontal.Panel2.Controls.Add(SimObjPanel)
 
-        SplitContainerHorizontal.Panel2MinSize *= GlobalSettings.Settings.DpiScale
+        If GlobalSettings.Settings.DpiScale > 1.0 Then
 
-        SplitContainerVertical.Panel2MinSize *= GlobalSettings.Settings.DpiScale
+            SplitContainerHorizontal.Panel2MinSize *= GlobalSettings.Settings.DpiScale
+
+            SplitContainerVertical.Panel2MinSize *= GlobalSettings.Settings.DpiScale
+
+        End If
 
         AddHandler CopyFromTSMI.DropDownItemClicked, AddressOf MaterialStreamClickHandler
 

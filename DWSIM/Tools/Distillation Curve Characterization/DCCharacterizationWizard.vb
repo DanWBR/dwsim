@@ -53,6 +53,8 @@ Public Class DCCharacterizationWizard
 
     Private Sub DCCharacterizationWizard_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         form = My.Application.ActiveSimulation
         su = form.Options.SelectedUnitSystem
         nf = form.Options.NumberFormat

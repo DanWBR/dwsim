@@ -33,6 +33,8 @@ Public Class TwoDimChartControl
             ColorChoices.Add(c.Name)
         Next
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
     End Sub
 
     Sub UpdatePlotModelData()

@@ -21,6 +21,8 @@ Public Class MaterialStreamEditor
 
     Private Sub MaterialStreamEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         UpdateInfo()
 
         'restore view state

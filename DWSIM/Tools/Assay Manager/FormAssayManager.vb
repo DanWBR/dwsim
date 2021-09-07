@@ -33,6 +33,8 @@ Public Class FormAssayManager
 
     Private Sub FormAssayManager_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         loaded = False
 
         pfd = My.Application.ActiveSimulation

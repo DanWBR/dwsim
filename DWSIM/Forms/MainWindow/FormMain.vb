@@ -97,6 +97,8 @@ Public Class FormMain
 
     Public Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         MostRecentFiles = My.Settings.MostRecentFiles
 
         If GlobalSettings.Settings.OldUI Then
@@ -996,6 +998,8 @@ Public Class FormMain
                                                                                                                                                     Me.UIThread(Sub()
                                                                                                                                                                     fdlding.Label1.Text = "Downloading file... (" & px & "%)" & vbCrLf & "(" & item.Title & ")"
                                                                                                                                                                     fdlding.ProgressBar1.Value = px
+                                                                                                                                                                    fdlding.Label2.Text = px.ToString("N0") + "%"
+                                                                                                                                                                    fdlding.Refresh()
                                                                                                                                                                 End Sub)
                                                                                                                                                 End Sub)
                                                                  End Function).ContinueWith(Sub(tk)
@@ -1010,7 +1014,11 @@ Public Class FormMain
                                                                                                                     Application.DoEvents()
                                                                                                                     Try
                                                                                                                         LoadXML2(xdoc, Sub(x)
-                                                                                                                                           Me.Invoke(Sub() floading.ProgressBar1.Value = x)
+                                                                                                                                           Me.Invoke(Sub()
+                                                                                                                                                         floading.ProgressBar1.Value = x
+                                                                                                                                                         floading.Label2.Text = x.ToString("N0") + "%"
+                                                                                                                                                         floading.Refresh()
+                                                                                                                                                     End Sub)
                                                                                                                                        End Sub)
                                                                                                                     Catch ex As Exception
                                                                                                                         MessageBox.Show(tk.Exception, "Error loading file", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -3340,7 +3348,11 @@ Label_00CC:
                     Application.DoEvents()
                     Application.DoEvents()
                     Me.LoadXML(Me.filename, Sub(x)
-                                                Me.Invoke(Sub() floading.ProgressBar1.Value = x)
+                                                Me.Invoke(Sub()
+                                                              floading.ProgressBar1.Value = x
+                                                              floading.Label2.Text = x.ToString("N") + "%"
+                                                              floading.Refresh()
+                                                          End Sub)
                                             End Sub)
                 End If
             Case ".dwxmz"
@@ -3679,11 +3691,19 @@ Label_00CC:
                     Select Case Path.GetExtension(nome).ToLower()
                         Case ".dwxml"
                             LoadXML(nome, Sub(x)
-                                              Me.Invoke(Sub() floading.ProgressBar1.Value = x)
+                                              Me.Invoke(Sub()
+                                                            floading.ProgressBar1.Value = x
+                                                            floading.Label2.Text = x.ToString("N") + "%"
+                                                            floading.Refresh()
+                                                        End Sub)
                                           End Sub)
                         Case ".dwxmz"
                             LoadAndExtractXMLZIP(nome, Sub(x)
-                                                           Me.Invoke(Sub() floading.ProgressBar1.Value = x)
+                                                           Me.Invoke(Sub()
+                                                                         floading.ProgressBar1.Value = x
+                                                                         floading.Label2.Text = x.ToString("N") + "%"
+                                                                         floading.Refresh()
+                                                                     End Sub)
                                                        End Sub)
                         Case ".dwsim"
                             ' Me.LoadF(nome)

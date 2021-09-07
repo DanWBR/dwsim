@@ -539,6 +539,8 @@ Public Class FormLLEDiagram
 
     Public Sub Initialize() Implements Interfaces.IAttachedUtility.Initialize
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         Frm = AttachedTo.GetFlowsheet
         mat = New MaterialStream("", "", Frm, Nothing)
 

@@ -1475,7 +1475,6 @@ Partial Class MaterialStreamEditor
         '
         'UtilitiesCtxMenu
         '
-        Me.UtilitiesCtxMenu.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.UtilitiesCtxMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddUtilityTSMI})
         Me.UtilitiesCtxMenu.Name = "ContextMenuStrip1"
         resources.ApplyResources(Me.UtilitiesCtxMenu, "UtilitiesCtxMenu")

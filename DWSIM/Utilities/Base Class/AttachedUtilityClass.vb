@@ -77,6 +77,8 @@
 
     Private Sub AttachedUtilityClass_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         tbName.Text = UtilityName
         tbAttachedTo.Text = AttachedTo.GraphicObject.Tag
         InternalUtility.AttachedTo = AttachedTo

@@ -4,6 +4,8 @@
 
     Private Sub FormPIDCPEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         Text = PID.GraphicObject.Tag
 
         chkActive.Checked = PID.Active

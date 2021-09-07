@@ -28,6 +28,8 @@ Public Class ScriptEditorControlMono
 
     Private Sub cbLinkedObject_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbLinkedObject.SelectedIndexChanged
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         Select Case cbLinkedObject.SelectedIndex
             Case 0
                 cbLinkedEvent.Items.Clear()

@@ -25,6 +25,8 @@ Imports IronPython.Hosting
 
     Private Sub FormVBScript_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         AddHandler fc.FormSurface.FlowsheetSurface.StatusUpdate, Sub(sender2, e2)
                                                                      ShouldUpdateSnippets = True
                                                                  End Sub

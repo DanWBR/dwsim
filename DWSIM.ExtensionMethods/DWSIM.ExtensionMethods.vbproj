@@ -129,6 +129,7 @@
   <ItemGroup>
     <Compile Include="DataGridView.vb" />
     <Compile Include="DropDownWidth.vb" />
+    <Compile Include="Form.vb" />
     <Compile Include="General.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

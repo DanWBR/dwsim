@@ -10,10 +10,9 @@
 
     Private Sub frmWatch_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        If items Is Nothing Then items = New Dictionary(Of Integer, Extras.WatchItem)
+        ExtensionMethods.ChangeDefaultFont(Me)
 
-        Dim dpi = Settings.DpiScale
-        dgv.ColumnHeadersHeight *= dpi
+        If items Is Nothing Then items = New Dictionary(Of Integer, Extras.WatchItem)
 
     End Sub
 

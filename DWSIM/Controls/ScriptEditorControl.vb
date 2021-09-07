@@ -30,6 +30,8 @@ Public Class ScriptEditorControl
 
     Private Sub ScriptEditorControl_Load(sender As Object, e As EventArgs) Handles Me.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         Me.txtScript.Tag = 1
 
         cbLinkedObject.Items.AddRange(New String() {"Simulation", "Solver", "Integrator"})

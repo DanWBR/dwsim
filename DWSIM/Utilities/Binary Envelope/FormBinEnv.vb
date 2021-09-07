@@ -45,6 +45,8 @@ Public Class FormBinEnv
 
     Private Sub FormBinEnv_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         If Not loaded Then Initialize()
 
     End Sub

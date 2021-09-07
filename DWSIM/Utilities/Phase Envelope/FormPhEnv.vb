@@ -63,6 +63,8 @@ Public Class FormPhEnv
 
     Public Sub Initialize() Implements Interfaces.IAttachedUtility.Initialize
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         Me.ComboBox1.SelectedIndex = 4
         Me.cbhydmodel.SelectedIndex = 0
 

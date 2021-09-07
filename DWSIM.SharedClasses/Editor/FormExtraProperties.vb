@@ -12,6 +12,21 @@ Public Class FormExtraProperties
 
     Private Sub FormExtraProperties_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        Me.AutoScaleMode = AutoScaleMode.Font
+
+        For Each control As Control In Me.Controls
+            control.Font = Drawing.SystemFonts.MessageBoxFont
+            If GlobalSettings.Settings.DpiScale > 1.0 Then
+                If TypeOf control Is DataGridView Then
+                    Dim dgv = DirectCast(control, DataGridView)
+                    dgv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None
+                    dgv.AllowUserToResizeRows = False
+                    dgv.RowTemplate.Height = 23 * GlobalSettings.Settings.DpiScale
+                    dgv.ColumnHeadersHeight *= GlobalSettings.Settings.DpiScale
+                End If
+            End If
+        Next
+
         UpdateValues()
 
     End Sub
@@ -38,12 +53,6 @@ Public Class FormExtraProperties
 
     End Sub
 
-    Private Sub PGEx1_PropertyValueChanged(s As Object, e As PropertyValueChangedEventArgs)
-
-        SimObject.GetFlowsheet().RequestCalculation(SimObject)
-
-    End Sub
-
     Private Sub grid1_KeyDown(sender As Object, e As KeyEventArgs) Handles grid1.KeyDown
         If e.KeyCode = Keys.V And e.Modifiers = Keys.Control Then PasteData(grid1)
     End Sub
@@ -65,7 +74,11 @@ Public Class FormExtraProperties
 
                 Try
 
-                    col1(id) = value
+                    If TypeOf col1(id) Is Double Then
+                        col1(id) = Double.Parse(value.ToString())
+                    Else
+                        col1(id) = value
+                    End If
 
                     SimObject.GetFlowsheet().RequestCalculation(SimObject)
 

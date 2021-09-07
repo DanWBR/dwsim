@@ -7,6 +7,8 @@
 
     Private Sub FormGroupedPPConfigWindows_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         Loaded = False
 
         For Each comp In Flowsheet.SelectedCompounds.Values

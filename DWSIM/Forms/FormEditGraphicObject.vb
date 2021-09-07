@@ -24,6 +24,8 @@ Public Class FormEditGraphicObject
 
     Private Sub FormEditGraphicObject_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         _origtext = Me.Text
 
         If Not gobj Is Nothing Then Me.Text = gobj.Tag + " - " + _origtext

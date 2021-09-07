@@ -7,6 +7,12 @@
 
     Private Sub FormCustomCalcOrder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        Me.AutoScaleMode = AutoScaleMode.Font
+
+        For Each control As Control In Me.Controls
+            control.Font = Drawing.SystemFonts.MessageBoxFont
+        Next
+
         ListView1.Items.Clear()
 
         For Each item In ItemList

@@ -38,6 +38,8 @@ Public Class FormReacManager
 
     Private Sub FormReacManager_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         With Me.GridRSets.Rows
             For Each rxnset As ReactionSet In CurrentFlowsheet.Options.ReactionSets.Values
                 .Add(New Object() {rxnset.Name, rxnset.Description, rxnset.ID})

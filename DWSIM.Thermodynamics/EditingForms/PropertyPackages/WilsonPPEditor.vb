@@ -9,6 +9,8 @@ Public Class WilsonPPEditor
 
     Private Sub WilsonPPEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         Loaded = False
 
         Dim id1, id2 As String

@@ -8,6 +8,8 @@
 
     Private Sub FormEventDescription_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
     End Sub
 
     Private Sub FormEventDescription_Shown(sender As Object, e As EventArgs) Handles Me.Shown

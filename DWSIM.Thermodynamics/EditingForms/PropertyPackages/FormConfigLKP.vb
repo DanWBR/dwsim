@@ -31,6 +31,8 @@ Public Class FormConfigLKP
 
     Private Sub FormConfigPR_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         Me.Text += " (" & _pp.Tag & ") [" + _pp.ComponentName + "]"
 
         FaTabStripItem1.Controls.Add(New PropertyPackageSettingsEditingControl(_pp) With {.Dock = DockStyle.Fill})

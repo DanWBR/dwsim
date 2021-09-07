@@ -18,9 +18,10 @@ Public Class LogPanel
 
     Private Sub frmLog_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
         Grid1.Sort(Grid1.Columns(1), System.ComponentModel.ListSortDirection.Descending)
-        Dim dpi = Settings.DpiScale
-        Grid1.ColumnHeadersHeight *= dpi
+        Grid1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
 
     End Sub
 
