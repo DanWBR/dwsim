@@ -650,7 +650,7 @@ Namespace Reactors
                 If ComponentConversions.ContainsKey(sb.Name) AndAlso N00(sb.Name) > 0 Then
                     Dim n0 = ims1.Phases(0).Compounds(sb.Name).MolarFlow.GetValueOrDefault()
                     Dim nf = AccumulationStreams.Last.Phases(0).Compounds(sb.Name).MolarFlow.GetValueOrDefault()
-                    ComponentConversions(sb.Name) = Abs(n0 - nf) / nf
+                    ComponentConversions(sb.Name) = Abs(n0 - nf) / n0
                 End If
             Next
 

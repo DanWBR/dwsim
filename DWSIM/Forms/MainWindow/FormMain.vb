@@ -3350,7 +3350,7 @@ Label_00CC:
                     Me.LoadXML(Me.filename, Sub(x)
                                                 Me.Invoke(Sub()
                                                               floading.ProgressBar1.Value = x
-                                                              floading.Label2.Text = x.ToString("N") + "%"
+                                                              floading.Label2.Text = x.ToString("N0") + "%"
                                                               floading.Refresh()
                                                           End Sub)
                                             End Sub)
@@ -3693,7 +3693,7 @@ Label_00CC:
                             LoadXML(nome, Sub(x)
                                               Me.Invoke(Sub()
                                                             floading.ProgressBar1.Value = x
-                                                            floading.Label2.Text = x.ToString("N") + "%"
+                                                            floading.Label2.Text = x.ToString("N0") + "%"
                                                             floading.Refresh()
                                                         End Sub)
                                           End Sub)
@@ -3701,7 +3701,7 @@ Label_00CC:
                             LoadAndExtractXMLZIP(nome, Sub(x)
                                                            Me.Invoke(Sub()
                                                                          floading.ProgressBar1.Value = x
-                                                                         floading.Label2.Text = x.ToString("N") + "%"
+                                                                         floading.Label2.Text = x.ToString("N0") + "%"
                                                                          floading.Refresh()
                                                                      End Sub)
                                                        End Sub)

@@ -2613,7 +2613,9 @@ Label_00CC:
         scope.SetVariable("Plugins", UtilityPlugins)
         scope.SetVariable("Flowsheet", Me)
         scope.SetVariable("Application", GetApplicationObject)
-        scope.SetVariable("Spreadsheet", GetSpreadsheetObjectFunc.Invoke())
+        If GetSpreadsheetObjectFunc IsNot Nothing Then
+            scope.SetVariable("Spreadsheet", GetSpreadsheetObjectFunc.Invoke())
+        End If
         Dim Solver As New FlowsheetSolver.FlowsheetSolver
         scope.SetVariable("Solver", Solver)
         For Each obj As ISimulationObject In SimulationObjects.Values
