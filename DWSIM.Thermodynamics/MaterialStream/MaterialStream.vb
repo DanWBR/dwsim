@@ -2130,7 +2130,7 @@ Namespace Streams
                     proplist.Add("PROP_MS_154")
             End Select
 
-            proplist.AddRange(MyBase.GetProperties(proptype))
+            'proplist.AddRange(MyBase.GetProperties(proptype))
 
             Return proplist.ToArray
 
