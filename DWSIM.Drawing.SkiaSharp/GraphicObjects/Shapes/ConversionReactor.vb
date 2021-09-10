@@ -54,6 +54,8 @@ Namespace GraphicObjects.Shapes
             Dim myIC2 As New ConnectionPoint
             myIC2.Position = New Point(X + 0.125 * Width, Y + 0.7 * Height)
             myIC2.Type = ConType.ConEn
+            myIC2.Direction = ConDir.Up
+
 
             Dim myOC1 As New ConnectionPoint
             myOC1.Position = New Point(X + 0.5 * Width, Y)
@@ -63,18 +65,23 @@ Namespace GraphicObjects.Shapes
             myOC2.Position = New Point(X + 0.5 * Width, Y + Height)
             myOC2.Type = ConType.ConOut
 
+            Dim myOC3 As New ConnectionPoint
+            myOC3.Position = New Point(X + 0.625 * Width, Y + 0.7 * Height)
+            myOC3.Type = ConType.ConEn
+            myOC3.Direction = ConDir.Down
+
             With InputConnectors
 
                 If .Count <> 0 Then
                     .Item(0).Position = New Point(X + (0.25 - 0.14) * Width, Y + 0.5 * Height)
-                    .Item(1).Position = New Point(X + (0.25 - 0.14) * Width, Y + 0.7 * Height)
+                    .Item(1).Position = New Point(X + 0.25 * Width, Y + Height)
                 Else
                     .Add(myIC1)
                     .Add(myIC2)
                 End If
 
                 .Item(0).ConnectorName = "Inlet"
-                .Item(1).ConnectorName = "Energy Stream"
+                .Item(1).ConnectorName = "Energy Stream (In)"
 
             End With
 
@@ -83,13 +90,16 @@ Namespace GraphicObjects.Shapes
                 If .Count <> 0 Then
                     .Item(0).Position = New Point(X + (0.75 + 0.14) * Width, Y + (0.1 + 0.14 / 2) * Height)
                     .Item(1).Position = New Point(X + (0.75 + 0.14) * Width, Y + (0.9 - 0.14 / 2) * Height)
+                    .Item(2).Position = New Point(X + 0.75 * Width, Y + Height)
                 Else
                     .Add(myOC1)
                     .Add(myOC2)
+                    .Add(myOC3)
                 End If
 
                 .Item(0).ConnectorName = "Vapor Outlet"
                 .Item(1).ConnectorName = "Liquid Outlet"
+                .Item(2).ConnectorName = "Energy Stream (Out)"
 
             End With
 

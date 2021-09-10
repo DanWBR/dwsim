@@ -74,6 +74,8 @@ Namespace Reactors
                 Throw New Exception(FlowSheet.GetTranslatedString("Nohcorrentedematriac15"))
             ElseIf Not Me.GraphicObject.InputConnectors(1).IsAttached Then
                 Throw New Exception(FlowSheet.GetTranslatedString("Nohcorrentedeenerg17"))
+            ElseIf Not Me.GraphicObject.outputConnectors(2).IsAttached Then
+                Throw New Exception(FlowSheet.GetTranslatedString("Nohcorrentedeenerg17"))
             End If
 
             If Conversions Is Nothing Then m_conversions = New Dictionary(Of String, Double)
@@ -670,8 +672,8 @@ Namespace Reactors
             End If
 
             'energy stream - update energy flow value (kW)
-            With GetInletEnergyStream(1)
-                .EnergyFlow = Me.DeltaQ.GetValueOrDefault
+            With GetOutletEnergyStream(2)
+                .EnergyFlow = -Me.DeltaQ.GetValueOrDefault
                 .GraphicObject.Calculated = True
             End With
 
