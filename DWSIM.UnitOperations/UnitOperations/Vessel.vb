@@ -674,10 +674,10 @@ Namespace UnitOperations
                     .Clear()
                     .ClearAllProps()
                     .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
-                    .Phases(0).Properties.temperature = T
-                    .Phases(0).Properties.pressure = P
-                    .Phases(0).Properties.enthalpy = MixedStream.Phases(2).Properties.enthalpy.GetValueOrDefault
-                    .Phases(0).Properties.massflow = MixedStream.Phases(2).Properties.massflow.GetValueOrDefault
+                    .SetTemperature(T)
+                    .SetPressure(P)
+                    .SetMassEnthalpy(MixedStream.Phases(2).Properties.enthalpy.GetValueOrDefault)
+                    .SetMassFlow(MixedStream.Phases(2).Properties.massflow.GetValueOrDefault)
                     Dim comp As BaseClasses.Compound
                     For Each comp In .Phases(0).Compounds.Values
                         comp.MoleFraction = MixedStream.Phases(2).Compounds(comp.Name).MoleFraction.GetValueOrDefault
@@ -710,14 +710,14 @@ Namespace UnitOperations
                         .Clear()
                         .ClearAllProps()
                         .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
-                        .Phases(0).Properties.temperature = T
-                        .Phases(0).Properties.pressure = P
+                        .SetTemperature(T)
+                        .SetPressure(P)
                         If W1 > 0.0# Then
-                            .Phases(0).Properties.massflow = W1
+                            .SetMassFlow(W1)
                         Else
-                            .Phases(0).Properties.molarflow = 0.0#
+                            .SetMassFlow(0.0)
                         End If
-                        .Phases(0).Properties.enthalpy = HL1
+                        .SetMassEnthalpy(HL1)
                         Dim comp As BaseClasses.Compound
                         i = 0
                         For Each comp In .Phases(0).Compounds.Values
@@ -745,15 +745,14 @@ Namespace UnitOperations
                         .Clear()
                         .ClearAllProps()
                         .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
-                        .Phases(0).Properties.temperature = T
-                        .Phases(0).Properties.pressure = P
-                        .Phases(0).Properties.enthalpy = MixedStream.Phases(4).Properties.enthalpy.GetValueOrDefault
+                        .SetTemperature(T)
+                        .SetPressure(P)
                         If W2 > 0.0# Then
-                            .Phases(0).Properties.massflow = W2
+                            .SetMassFlow(W2)
                         Else
-                            .Phases(0).Properties.molarflow = 0.0#
+                            .SetMassFlow(0.0)
                         End If
-                        .Phases(0).Properties.enthalpy = HL2
+                        .SetMassEnthalpy(HL2)
                         Dim comp As BaseClasses.Compound
                         i = 0
                         For Each comp In .Phases(0).Compounds.Values
