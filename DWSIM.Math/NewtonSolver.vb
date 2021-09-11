@@ -75,7 +75,7 @@ Namespace MathEx.Optimization
         Function Solve(functionbody As Func(Of Double(), Double()), vars As Double()) As Double()
 
             Dim dfacs As Double() = New Double() {0.1, 0.2, 0.4, 0.6, 0.8, 1.0}
-            Dim epsilons As Double() = New Double() {0.00000001, 0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1}
+            Dim epsilons As Double() = New Double() {0.000000000001, 0.00000001, 0.0001, 0.001, 0.01, 0.1}
 
             Dim leave As Boolean = False
             Dim finalx As Double() = vars
@@ -105,7 +105,7 @@ Namespace MathEx.Optimization
                 Next
             End If
 
-            If Not leave Then Throw New Exception("newton convergence error")
+            If Not leave Then Throw New Exception("Newton Convergence Error")
 
             Return finalx
 
@@ -137,7 +137,7 @@ Namespace MathEx.Optimization
                 _error = MathEx.Common.SumSqr(fx)
                 fxsum = _error
 
-                If Common.SumSqr(fx) < Tolerance Then
+                If fxsum < Tolerance Then
                     Exit Do
                 End If
 

@@ -157,8 +157,6 @@ Namespace Reactors
 
             Dim Vz As Double() = pp.RET_VMOL(PropertyPackages.Phase.Mixture)
 
-            Dim penval As Double = ReturnPenaltyValue()
-
             Dim fugv(tms.Phases(0).Compounds.Count - 1), fugl(tms.Phases(0).Compounds.Count - 1), prod(x.Length - 1) As Double
 
             If ideal Then
@@ -232,7 +230,7 @@ Namespace Reactors
                 kr = reaction.EvaluateK(T + reaction.Approach, pp)
                 ktot *= kr
                 prodtot *= Math.Abs(prod(i))
-                f(i) = Math.Log(Math.Abs(prod(i)) / kr) + penval ^ 2
+                f(i) = Math.Log(Math.Abs(prod(i)) / kr)
             Next
 
             FlowSheet.CheckStatus()
@@ -329,9 +327,9 @@ Namespace Reactors
                 delta1 = con_val(i) - con_lc(i)
                 delta2 = con_val(i) - con_uc(i)
                 If delta1 < 0 Then
-                    pen_val += delta1 * (i + 1) ^ 2
+                    pen_val += delta1 * 100 * (i + 1) ^ 2
                 ElseIf delta2 > 1 Then
-                    pen_val += delta2 * (i + 1) ^ 2
+                    pen_val += delta2 * 100 * (i + 1) ^ 2
                 Else
                     pen_val += 0.0#
                 End If
@@ -396,27 +394,6 @@ Namespace Reactors
         Private Mode As Integer = 1
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
-
-            Dim Success As Boolean = False
-            Dim Exc As Exception = Nothing
-            For i = 1 To 3
-                Try
-                    Calculate_Internal(args)
-                    Success = True
-                    Exit For
-                Catch ex As Exception
-                    Exc = ex
-                End Try
-                Mode = i + 1
-            Next
-            If Not Success Then
-                Mode = 1
-                Throw Exc
-            End If
-
-        End Sub
-
-        Public Sub Calculate_Internal(Optional ByVal args As Object = Nothing)
 
             Dim IObj As InspectorItem = Host.GetNewInspectorItem()
 
@@ -711,54 +688,13 @@ Namespace Reactors
 
             Me.InitialGibbsEnergy = g0
 
-            If Mode = 1 Then
-                MinVal = Math.Min(lbound.Min, REx.Min)
-                MaxVal = Math.Max(ubound.Max, REx.Max)
-            ElseIf Mode = 2 Then
-                MinVal = Math.Min(lbound.Min, REx.Min) * 10
-                MaxVal = Math.Max(ubound.Max, REx.Max) * 10
-            ElseIf Mode = 3 Then
-                MinVal = Math.Min(lbound.Min, REx.Min) * 100
-                MaxVal = Math.Max(ubound.Max, REx.Max) * 100
-            End If
+            MinVal = Math.Min(lbound.Min, REx.Min)
+            MaxVal = Math.Max(ubound.Max, REx.Max)
 
             Dim CalcFinished As Boolean = False
 
             Dim TLast As Double = T0 'remember T for iteration loops
             Dim cnt As Integer = 0
-
-            Dim solver2 As New Optimization.IPOPTSolver
-            solver2.MaxIterations = InternalLoopMaximumIterations
-            solver2.Tolerance = InternalLoopTolerance / 10
-
-            Dim solver3 As New Optimization.NewtonSolver
-            solver3.MaxIterations = InternalLoopMaximumIterations
-            solver3.Tolerance = InternalLoopTolerance
-            solver3.EnableDamping = True
-            'solver3.UseBroydenApproximation = True
-
-            Dim esolv As IExternalNonLinearSystemSolver = Nothing
-            If FlowSheet.ExternalSolvers.ContainsKey(ExternalSolverID) Then
-                esolv = FlowSheet.ExternalSolvers(ExternalSolverID)
-            End If
-
-            ' check equilibrium constants to define objective function form
-
-            Dim Keq As New List(Of Double)
-
-            For i = 0 To Me.Reactions.Count - 1
-                Keq.Add(Math.Abs(FlowSheet.Reactions(Me.Reactions(i)).EvaluateK(T, pp)))
-            Next
-
-            If Keq.Max > 1000000.0 Or Keq.Min < 0.000001 Then
-                LogErrorFunction = True
-            Else
-                If Mode < 3 Then
-                    LogErrorFunction = False
-                Else
-                    LogErrorFunction = True
-                End If
-            End If
 
             Dim errval, sumerr As Double
 
@@ -803,74 +739,43 @@ Namespace Reactors
                         Dim xs As Double
 
                         Dim variables As New List(Of Double)
-                        Dim lbounds As New List(Of Double)
-                        Dim ubounds As New List(Of Double)
                         For i = 0 To r
                             xs = Scaler.Scale(x(i), MinVal, MaxVal, 0.0, 1.0)
                             variables.Add(Math.Log(xs))
-                            lbounds.Add(Math.Log(1.0E-20))
-                            ubounds.Add(Math.Log(1.0))
                         Next
 
-                        Dim VariableValues As New List(Of Double())
-                        Dim FunctionValues As New List(Of Double)
-                        Dim result As Double
+                        Dim solver3 As New Optimization.NewtonSolver
+                        solver3.MaxIterations = InternalLoopMaximumIterations
+                        solver3.Tolerance = InternalLoopTolerance
+                        solver3.EnableDamping = True
+
+                        Dim esolv As IExternalNonLinearSystemSolver = Nothing
+                        If FlowSheet.ExternalSolvers.ContainsKey(ExternalSolverID) Then
+                            esolv = FlowSheet.ExternalSolvers(ExternalSolverID)
+                        End If
 
                         errval = 0.0
                         sumerr = 0.0
 
-                        If UseIPOPTSolver Then
-
-                            newx = solver2.Solve(Function(x1)
-                                                     FlowSheet.CheckStatus()
-                                                     VariableValues.Add(x1.Clone)
-                                                     result = FunctionValue2N(x1, False).AbsSqrSumY() + ReturnPenaltyValue() ^ 2
-                                                     FunctionValues.Add(result)
-                                                     Return result
-                                                 End Function, Nothing,
-                                                                   variables.ToArray, lbounds.ToArray, ubounds.ToArray)
-
-                            FlowSheet.CheckStatus()
+                        If esolv IsNot Nothing Then
+                            newx = esolv.Solve(Function(x1)
+                                                   FlowSheet.CheckStatus()
+                                                   Return FunctionValue2N(x1, False)
+                                               End Function, Nothing, Nothing, variables.ToArray(),
+                                                        InternalLoopMaximumIterations, InternalLoopTolerance)
 
                         Else
-
-                            If esolv IsNot Nothing Then
-
-                                newx = esolv.Solve(Function(x1)
-                                                       FlowSheet.CheckStatus()
-                                                       Return FunctionValue2N(x1, False)
-                                                   End Function, Nothing, Nothing, variables.ToArray(),
-                                                            InternalLoopMaximumIterations, InternalLoopTolerance)
-
-                            Else
-
-                                Dim haderror As Boolean = True
-                                Try
-                                    newx = solver3.Solve(Function(x1)
-                                                             FlowSheet.CheckStatus()
-                                                             Return FunctionValue2N(x1, True)
-                                                         End Function, variables.ToArray())
-                                    newx = solver3.Solve(Function(x1)
-                                                             FlowSheet.CheckStatus()
-                                                             Return FunctionValue2N(x1, False)
-                                                         End Function, newx)
-                                    haderror = False
-                                Catch ex As Exception
-                                End Try
-                                If haderror Then
-                                    newx = MathNet.Numerics.RootFinding.Broyden.FindRoot(Function(x1)
-                                                                                             FlowSheet.CheckStatus()
-                                                                                             Return FunctionValue2N(x1, False)
-                                                                                         End Function,
-                                                                                          variables.ToArray(),
-                                                                                          InternalLoopTolerance, InternalLoopMaximumIterations, 1)
-                                End If
-
-                            End If
-
-                            FlowSheet.CheckStatus()
-
+                            newx = solver3.Solve(Function(x1)
+                                                     FlowSheet.CheckStatus()
+                                                     Return FunctionValue2N(x1, True)
+                                                 End Function, variables.ToArray())
+                            newx = solver3.Solve(Function(x1)
+                                                         FlowSheet.CheckStatus()
+                                                         Return FunctionValue2N(x1, False)
+                                                     End Function, newx)
                         End If
+
+                        FlowSheet.CheckStatus()
 
                         errval = FunctionValue2N(newx, False).AbsSqrSumY()
 
@@ -892,7 +797,7 @@ Namespace Reactors
 
                     Dim penval = Math.Abs(ReturnPenaltyValue())
 
-                    If penval > 0.1 Then
+                    If penval > 0.1 And ReactorOperationMode <> OperationMode.Adiabatic Then
 
                         Throw New Exception("Invalid solution: mass balance residue > 0. Are all possible reactions defined?")
 
@@ -1003,7 +908,7 @@ Namespace Reactors
 
                             Me.DeltaQ = 0
 
-                            T = (T * 0.7 + ims.GetTemperature() * 0.3)
+                            T = (T * 0.5 + ims.GetTemperature() * 0.5)
 
                             erfunc = Math.Abs(OutletTemperature - T)
 
@@ -1058,14 +963,13 @@ Namespace Reactors
 
             If ReactorOperationMode = OperationMode.Adiabatic Then
                 Dim adberror As Double
-                Dim acount = 0
                 Do
                     adberror = efunc.Invoke(T)
-                    acount += 1
-                    If acount >= InternalLoopMaximumIterations Then
-                        Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
-                    End If
                 Loop Until adberror <= 0.1
+                Dim penval = Math.Abs(ReturnPenaltyValue())
+                If penval > 0.1 Then
+                    Throw New Exception("Invalid solution: mass balance residue > 0. Are all possible reactions defined?")
+                End If
                 TAdb = T
             Else
                 efunc.Invoke(T)

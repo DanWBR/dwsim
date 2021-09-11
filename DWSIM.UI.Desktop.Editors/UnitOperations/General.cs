@@ -1616,7 +1616,6 @@ namespace DWSIM.UI.Desktop.Editors
                     s.CreateAndAddTextBoxRow(container, nf, "Maximum External Iterations", reactor2.ExternalLoopMaximumIterations, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2.ExternalLoopMaximumIterations = int.Parse(sender.Text); }, () => CallSolverIfNeeded());
                     s.CreateAndAddTextBoxRow(container, nf, "Minimum Internal Error", reactor2.InternalLoopTolerance, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2.InternalLoopTolerance = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
                     s.CreateAndAddTextBoxRow(container, nf, "Minimum External Error", reactor2.ExternalLoopTolerance, (sender, e) => { if (sender.Text.IsValidDoubleExpression()) reactor2.ExternalLoopTolerance = sender.Text.ParseExpressionToDouble(); }, () => CallSolverIfNeeded());
-                    s.CreateAndAddCheckBoxRow(container, "Use IPOPT Solver", reactor2.UseIPOPTSolver, (sender, e) => reactor2.UseIPOPTSolver = sender.Checked.GetValueOrDefault(), () => CallSolverIfNeeded());
                     break;
                 case ObjectType.RCT_Gibbs:
                     var reactor2g = (Reactor_Gibbs)SimObject;

@@ -73,7 +73,6 @@ Partial Class EditingForm_ReactorConvEqGibbs
         Me.tbIntLoopMaxIts = New System.Windows.Forms.TextBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.TabPageEqParams = New System.Windows.Forms.TabPage()
-        Me.chkUseIPOPT = New System.Windows.Forms.CheckBox()
         Me.tbExtLoopTolEq = New System.Windows.Forms.TextBox()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.tbIntLoopTolEq = New System.Windows.Forms.TextBox()
@@ -521,7 +520,6 @@ Partial Class EditingForm_ReactorConvEqGibbs
         'TabPageEqParams
         '
         resources.ApplyResources(Me.TabPageEqParams, "TabPageEqParams")
-        Me.TabPageEqParams.Controls.Add(Me.chkUseIPOPT)
         Me.TabPageEqParams.Controls.Add(Me.tbExtLoopTolEq)
         Me.TabPageEqParams.Controls.Add(Me.Label21)
         Me.TabPageEqParams.Controls.Add(Me.tbIntLoopTolEq)
@@ -536,15 +534,6 @@ Partial Class EditingForm_ReactorConvEqGibbs
         Me.ToolTipValues.SetToolTip(Me.TabPageEqParams, resources.GetString("TabPageEqParams.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.TabPageEqParams, resources.GetString("TabPageEqParams.ToolTip2"))
         Me.TabPageEqParams.UseVisualStyleBackColor = True
-        '
-        'chkUseIPOPT
-        '
-        resources.ApplyResources(Me.chkUseIPOPT, "chkUseIPOPT")
-        Me.chkUseIPOPT.Name = "chkUseIPOPT"
-        Me.ToolTip1.SetToolTip(Me.chkUseIPOPT, resources.GetString("chkUseIPOPT.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.chkUseIPOPT, resources.GetString("chkUseIPOPT.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.chkUseIPOPT, resources.GetString("chkUseIPOPT.ToolTip2"))
-        Me.chkUseIPOPT.UseVisualStyleBackColor = True
         '
         'tbExtLoopTolEq
         '
@@ -1095,7 +1084,6 @@ Partial Class EditingForm_ReactorConvEqGibbs
     Public WithEvents chkInitializeExtents As CheckBox
     Friend WithEvents ToolTipChangeTag As ToolTip
     Public WithEvents chkGibbsUsePreviousSolution As CheckBox
-    Public WithEvents chkUseIPOPT As CheckBox
     Public WithEvents cbExternalSolver As ComboBox
     Public WithEvents LabelExternalSolver As Label
     Public WithEvents btnConfigExtSolver As Button

@@ -199,17 +199,11 @@ Public Class EditingForm_ReactorConvEqGibbs
                 TabControlParameters.TabPages.Remove(TabPageGibbsParams)
 
                 chkInitializeExtents.Checked = DirectCast(SimObject, Reactors.Reactor_Equilibrium).UsePreviousSolution
-                chkUseIPOPT.Checked = DirectCast(SimObject, Reactors.Reactor_Equilibrium).UseIPOPTSolver
 
                 tbExtLoopMaxItsEq.Text = DirectCast(SimObject, Reactors.Reactor_Equilibrium).ExternalLoopMaximumIterations
                 tbIntLoopMaxItsEq.Text = DirectCast(SimObject, Reactors.Reactor_Equilibrium).InternalLoopMaximumIterations
                 tbExtLoopTolEq.Text = DirectCast(SimObject, Reactors.Reactor_Equilibrium).ExternalLoopTolerance
                 tbIntLoopTolEq.Text = DirectCast(SimObject, Reactors.Reactor_Equilibrium).InternalLoopTolerance
-
-                LabelExternalSolver.Enabled = False
-
-                LabelExternalSolver.Enabled = Not chkUseIPOPT.Checked
-                cbExternalSolver.Enabled = Not chkUseIPOPT.Checked
 
                 'external solvers
 
@@ -673,14 +667,6 @@ Public Class EditingForm_ReactorConvEqGibbs
     Private Sub chkGibbsUsePreviousSolution_CheckedChanged(sender As Object, e As EventArgs) Handles chkGibbsUsePreviousSolution.CheckedChanged
         If TypeOf SimObject Is Reactors.Reactor_Gibbs And Loaded Then
             DirectCast(SimObject, Reactors.Reactor_Gibbs).InitializeFromPreviousSolution = chkGibbsUsePreviousSolution.Checked
-        End If
-    End Sub
-
-    Private Sub chkUseIPOPT_CheckedChanged(sender As Object, e As EventArgs) Handles chkUseIPOPT.CheckedChanged
-        If TypeOf SimObject Is Reactors.Reactor_Equilibrium And Loaded Then
-            cbExternalSolver.Enabled = Not chkUseIPOPT.Checked
-            LabelExternalSolver.Enabled = Not chkUseIPOPT.Checked
-            DirectCast(SimObject, Reactors.Reactor_Equilibrium).UseIPOPTSolver = chkUseIPOPT.Checked
         End If
     End Sub
 
