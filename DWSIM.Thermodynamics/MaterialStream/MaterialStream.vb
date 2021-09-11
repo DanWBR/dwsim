@@ -78,6 +78,8 @@ Namespace Streams
 
         Public Property ForcePhase As ForcedPhase = ForcedPhase.GlobalDef Implements IMaterialStream.ForcePhase
 
+        Public Property TotalEnergyFlow As Double = 0.0
+
 #Region "    XML serialization"
 
         Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean
@@ -757,6 +759,11 @@ Namespace Streams
 
                     'calculate molar concentrations
                     .DW_CalcConcentrations()
+
+                    'calculate total energy flow
+
+                    Dim hf = GetMassFlow() * PropertyPackage.RET_VMAS(PropertyPackages.Phase.Mixture).MultiplyY(PropertyPackage.RET_VDHF).SumY()
+                    TotalEnergyFlow = hf + GetMassEnthalpy() * GetMassFlow() 'kW
 
                     If DebugMode Then AppendDebugLine(String.Format("Material Stream calculated successfully."))
 
@@ -1672,7 +1679,7 @@ Namespace Streams
                             value = Me.Phases(3).Properties.pH.GetValueOrDefault
                         Case 154
                             'total energy flow
-                            value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Phases(0).Properties.enthalpy.GetValueOrDefault * Phases(0).Properties.massflow.GetValueOrDefault)
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, TotalEnergyFlow)
                         Case 155
                             'PROP_MS_155	Isothermal Compressibility (Vapor)	
                             value = cv.ConvertFromSI(su.compressibility, Phases(2).Properties.isothermal_compressibility.GetValueOrDefault)

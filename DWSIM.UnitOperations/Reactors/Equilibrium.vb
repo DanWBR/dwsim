@@ -1,5 +1,5 @@
 ﻿'    Equilibrium Reactor Calculation Routines 
-'    Copyright 2008-2010 Daniel Wagner O. de Medeiros
+'    Copyright 2008-2021 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -54,6 +54,7 @@ Namespace Reactors
 
         Dim r, c, els, comps As Integer
 
+        Private rv, rl As Integer
 
 #Region "Properties"
 
@@ -89,11 +90,18 @@ Namespace Reactors
 
 #Region "Auxiliary Functions"
 
-        Private Function FunctionValue2N(ByVal x() As Double) As Double()
+        Private Function FunctionValue2N(x() As Double, ideal As Boolean) As Double()
 
             If Double.IsNaN(x.Sum) Then Throw New Exception("Convergence Error")
 
             Dim i, j As Integer
+
+            Dim unscaled_extents(r) As Double
+
+            For i = 0 To r
+                Dim val0 = Math.Pow(Math.E, x(i))
+                unscaled_extents(i) = Scaler.UnScale(val0, MinVal, MaxVal, 0.0, 1.0)
+            Next
 
             Dim pp As PropertyPackages.PropertyPackage = Me.PropertyPackage
 
@@ -101,7 +109,7 @@ Namespace Reactors
             For Each s As String In N.Keys
                 DN(s) = 0
                 For j = 0 To r
-                    DN(s) += E(i, j) * Scaler.UnScale(x(j), MinVal, MaxVal, 0, 100)
+                    DN(s) += E(i, j) * unscaled_extents(j)
                 Next
                 i += 1
             Next
@@ -153,8 +161,13 @@ Namespace Reactors
 
             Dim fugv(tms.Phases(0).Compounds.Count - 1), fugl(tms.Phases(0).Compounds.Count - 1), prod(x.Length - 1) As Double
 
-            fugv = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Vapor)
-            fugl = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Liquid)
+            If ideal Then
+                If rv > 0 Then fugv = pp.RET_UnitaryVector()
+                If rl > 0 Then fugl = pp.RET_UnitaryVector().MultiplyY(pp.RET_VPVAP(T))
+            Else
+                If rv > 0 Then fugv = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Vapor)
+                If rl > 0 Then fugl = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Liquid)
+            End If
 
             i = 0
             For Each s As Compound In tms.Phases(0).Compounds.Values
@@ -219,11 +232,7 @@ Namespace Reactors
                 kr = reaction.EvaluateK(T + reaction.Approach, pp)
                 ktot *= kr
                 prodtot *= Math.Abs(prod(i))
-                If ReactorOperationMode <> OperationMode.Adiabatic Then
-                    f(i) = Math.Log(Math.Abs(prod(i)) / kr) + penval ^ 2
-                Else
-                    f(i) = Math.Log(Math.Abs(prod(i)) / kr)
-                End If
+                f(i) = Math.Log(Math.Abs(prod(i)) / kr) + penval ^ 2
             Next
 
             FlowSheet.CheckStatus()
@@ -320,9 +329,9 @@ Namespace Reactors
                 delta1 = con_val(i) - con_lc(i)
                 delta2 = con_val(i) - con_uc(i)
                 If delta1 < 0 Then
-                    pen_val += delta1 * 1000000.0# * (i + 1) ^ 2
+                    pen_val += delta1 * (i + 1) ^ 2
                 ElseIf delta2 > 1 Then
-                    pen_val += delta2 * 1000000.0# * (i + 1) ^ 2
+                    pen_val += delta2 * (i + 1) ^ 2
                 Else
                     pen_val += 0.0#
                 End If
@@ -390,7 +399,7 @@ Namespace Reactors
 
             Dim Success As Boolean = False
             Dim Exc As Exception = Nothing
-            For i = 1 To 4
+            For i = 1 To 3
                 Try
                     Calculate_Internal(args)
                     Success = True
@@ -400,19 +409,6 @@ Namespace Reactors
                 End Try
                 Mode = i + 1
             Next
-            If Not Success Then
-                UseIPOPTSolver = Not UseIPOPTSolver
-                For i = 1 To 4
-                    Try
-                        Calculate_Internal(args)
-                        Success = True
-                        Exit For
-                    Catch ex As Exception
-                        Exc = ex
-                    End Try
-                    Mode = i + 1
-                Next
-            End If
             If Not Success Then
                 Mode = 1
                 Throw Exc
@@ -715,13 +711,13 @@ Namespace Reactors
 
             Me.InitialGibbsEnergy = g0
 
-            If Mode < 3 Then
+            If Mode = 1 Then
                 MinVal = Math.Min(lbound.Min, REx.Min)
                 MaxVal = Math.Max(ubound.Max, REx.Max)
-            ElseIf Mode = 3 Then
+            ElseIf Mode = 2 Then
                 MinVal = Math.Min(lbound.Min, REx.Min) * 10
                 MaxVal = Math.Max(ubound.Max, REx.Max) * 10
-            ElseIf Mode = 4 Then
+            ElseIf Mode = 3 Then
                 MinVal = Math.Min(lbound.Min, REx.Min) * 100
                 MaxVal = Math.Max(ubound.Max, REx.Max) * 100
             End If
@@ -733,11 +729,13 @@ Namespace Reactors
 
             Dim solver2 As New Optimization.IPOPTSolver
             solver2.MaxIterations = InternalLoopMaximumIterations
-            solver2.Tolerance = InternalLoopTolerance
+            solver2.Tolerance = InternalLoopTolerance / 10
 
             Dim solver3 As New Optimization.NewtonSolver
             solver3.MaxIterations = InternalLoopMaximumIterations
             solver3.Tolerance = InternalLoopTolerance
+            solver3.EnableDamping = True
+            'solver3.UseBroydenApproximation = True
 
             Dim esolv As IExternalNonLinearSystemSolver = Nothing
             If FlowSheet.ExternalSolvers.ContainsKey(ExternalSolverID) Then
@@ -762,6 +760,11 @@ Namespace Reactors
                 End If
             End If
 
+            Dim errval, sumerr As Double
+
+            rv = Reactions.Where(Function(rx0) FlowSheet.Reactions(rx0).ReactionPhase = PhaseName.Vapor).Count
+            rl = Reactions.Where(Function(rx0) FlowSheet.Reactions(rx0).ReactionPhase = PhaseName.Liquid).Count
+
             Dim efunc As Func(Of Double, Double) =
                 Function(Tx)
 
@@ -775,7 +778,7 @@ Namespace Reactors
 
                     'solve using newton's method
 
-                    Dim x(r), newx(r), errval, sumerr As Double
+                    Dim x(r), newx(r) As Double
 
                     Dim niter As Integer
 
@@ -799,28 +802,29 @@ Namespace Reactors
 
                         Dim xs As Double
 
-                        Dim variables2 As New List(Of OptBoundVariable)
                         Dim variables As New List(Of Double)
                         Dim lbounds As New List(Of Double)
                         Dim ubounds As New List(Of Double)
                         For i = 0 To r
-                            xs = Scaler.Scale(x(i), MinVal, MaxVal, 0, 100)
-                            variables.Add(xs)
-                            variables2.Add(New OptBoundVariable(xs, 0, 100))
-                            lbounds.Add(0)
-                            ubounds.Add(100)
+                            xs = Scaler.Scale(x(i), MinVal, MaxVal, 0.0, 1.0)
+                            variables.Add(Math.Log(xs))
+                            lbounds.Add(Math.Log(1.0E-20))
+                            ubounds.Add(Math.Log(1.0))
                         Next
 
                         Dim VariableValues As New List(Of Double())
                         Dim FunctionValues As New List(Of Double)
                         Dim result As Double
 
+                        errval = 0.0
+                        sumerr = 0.0
+
                         If UseIPOPTSolver Then
 
                             newx = solver2.Solve(Function(x1)
                                                      FlowSheet.CheckStatus()
                                                      VariableValues.Add(x1.Clone)
-                                                     result = FunctionValue2N(x1).AbsSqrSumY() + ReturnPenaltyValue() ^ 2
+                                                     result = FunctionValue2N(x1, False).AbsSqrSumY() + ReturnPenaltyValue() ^ 2
                                                      FunctionValues.Add(result)
                                                      Return result
                                                  End Function, Nothing,
@@ -828,15 +832,13 @@ Namespace Reactors
 
                             FlowSheet.CheckStatus()
 
-                            newx = VariableValues(FunctionValues.IndexOf(FunctionValues.Min))
-
                         Else
 
                             If esolv IsNot Nothing Then
 
                                 newx = esolv.Solve(Function(x1)
                                                        FlowSheet.CheckStatus()
-                                                       Return FunctionValue2N(x1)
+                                                       Return FunctionValue2N(x1, False)
                                                    End Function, Nothing, Nothing, variables.ToArray(),
                                                             InternalLoopMaximumIterations, InternalLoopTolerance)
 
@@ -846,15 +848,19 @@ Namespace Reactors
                                 Try
                                     newx = solver3.Solve(Function(x1)
                                                              FlowSheet.CheckStatus()
-                                                             Return FunctionValue2N(x1)
+                                                             Return FunctionValue2N(x1, True)
                                                          End Function, variables.ToArray())
+                                    newx = solver3.Solve(Function(x1)
+                                                             FlowSheet.CheckStatus()
+                                                             Return FunctionValue2N(x1, False)
+                                                         End Function, newx)
                                     haderror = False
                                 Catch ex As Exception
                                 End Try
                                 If haderror Then
                                     newx = MathNet.Numerics.RootFinding.Broyden.FindRoot(Function(x1)
                                                                                              FlowSheet.CheckStatus()
-                                                                                             Return FunctionValue2N(x1)
+                                                                                             Return FunctionValue2N(x1, False)
                                                                                          End Function,
                                                                                           variables.ToArray(),
                                                                                           InternalLoopTolerance, InternalLoopMaximumIterations, 1)
@@ -866,9 +872,9 @@ Namespace Reactors
 
                         End If
 
-                        errval = FunctionValue2N(newx).AbsSqrSumY()
+                        errval = FunctionValue2N(newx, False).AbsSqrSumY()
 
-                        newx = newx.Select(Function(xi) Scaler.UnScale(xi, MinVal, MaxVal, 0, 100)).ToArray
+                        newx = newx.Select(Function(xi) Scaler.UnScale(Math.Exp(xi), MinVal, MaxVal, 0.0, 1.0)).ToArray
 
                         sumerr = x.SubtractY(newx).AbsSqrSumY
 
@@ -880,7 +886,7 @@ Namespace Reactors
 
                         IObj3?.Close()
 
-                    Loop Until errval < InternalLoopTolerance Or (sumerr < InternalLoopTolerance) Or niter >= InternalLoopMaximumIterations
+                    Loop Until errval < InternalLoopTolerance Or niter >= InternalLoopMaximumIterations
 
                     If niter >= InternalLoopMaximumIterations Then Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
 
@@ -983,17 +989,23 @@ Namespace Reactors
 
                         Case OperationMode.Adiabatic
 
-                            ims.SetTemperature(T)
-                            ims.SpecType = StreamSpec.Temperature_and_Pressure
-                            ims.Calculate(True, True)
+                            ims.SpecType = StreamSpec.Pressure_and_Enthalpy
 
                             'Products Enthalpy (kJ/kg * kg/s = kW)
-                            Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
+
+                            Hp = (Hr0 + DHr) / ims.GetMassFlow()
+
+                            ims.SetMassEnthalpy(Hp)
+
+                            ims.Calculate(True, True)
 
                             'Heat (kW)
-                            erfunc = Hp - Hr0 - DHr
 
                             Me.DeltaQ = 0
+
+                            T = (T * 0.7 + ims.GetTemperature() * 0.3)
+
+                            erfunc = Math.Abs(OutletTemperature - T)
 
                             OutletTemperature = T
 
@@ -1045,17 +1057,22 @@ Namespace Reactors
                 End Function
 
             If ReactorOperationMode = OperationMode.Adiabatic Then
-                Dim newton As New Optimization.NewtonSolver
-                newton.MaxIterations = ExternalLoopMaximumIterations
-                newton.Tolerance = ExternalLoopTolerance
-                newton.EnableDamping = False
-                newton.UseBroydenApproximation = False
-                newton.Solve(Function(Tx)
-                                 Return New Double() {efunc.Invoke(Tx(0))}
-                             End Function, New Double() {T})
+                Dim adberror As Double
+                Dim acount = 0
+                Do
+                    adberror = efunc.Invoke(T)
+                    acount += 1
+                    If acount >= InternalLoopMaximumIterations Then
+                        Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
+                    End If
+                Loop Until adberror <= 0.1
                 TAdb = T
             Else
                 efunc.Invoke(T)
+            End If
+
+            If errval > InternalLoopTolerance Then
+                Throw New Exception("Invalid solution")
             End If
 
             'reevaluate function
@@ -1394,9 +1411,7 @@ Namespace Reactors
                     Select Case prop
                         Case "Calculation Mode"
                             Return ""
-                        Case "Initial Gibbs Energy"
-                            value = su.heatflow
-                        Case "Final Gibbs Energy"
+                        Case "Initial Gibbs Energy", "Final Gibbs Energy"
                             value = su.heatflow
                         Case Else
                             If prop.Contains("Conversion") Then value = "%"

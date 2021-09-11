@@ -74,6 +74,8 @@ Namespace MathEx.Optimization
         ''' <returns>vector of variables corresponding to the function's minimum value.</returns>
         Public Function Solve(functionbody As Func(Of Double(), Double), functiongradient As Func(Of Double(), Double()), vars As Double(), Optional lbounds As Double() = Nothing, Optional ubounds As Double() = Nothing) As Double()
 
+            _Iterations = 0
+
             Dim obj As Double = 0.0#
             Dim status As IpoptReturnCode = IpoptReturnCode.Feasible_Point_Found
 
@@ -105,7 +107,7 @@ Namespace MathEx.Optimization
                 problem.AddOption("max_iter", MaxIterations)
                 problem.AddOption("mu_strategy", "adaptive")
                 problem.AddOption("hessian_approximation", "limited-memory")
-                problem.AddOption("expect_infeasible_problem", "yes")
+                'problem.AddOption("expect_infeasible_problem", "yes")
                 problem.SetIntermediateCallback(AddressOf intermediate)
                 status = problem.SolveProblem(vars, obj, Nothing, Nothing, Nothing, Nothing)
                 Select Case status
@@ -220,7 +222,7 @@ Namespace MathEx.Optimization
             objval0 = objval
             objval = obj_value
 
-            If Math.Abs(objval - objval0) <= Tolerance And _Iterations > 20 Then
+            If Math.Abs(objval - objval0) <= Tolerance / 1000.0 And _Iterations > MaxIterations / 2 Then
                 Return False
             Else
                 Return True

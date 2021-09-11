@@ -652,7 +652,6 @@ Public Class FormFlowsheet
 
     Public Sub ProcessScripts(ByVal sourceevent As Scripts.EventType, ByVal sourceobj As Scripts.ObjectType, ByVal sourceobjname As String) Implements IFlowsheetGUI.ProcessScripts, IFlowsheet.ProcessScripts
 
-        'Me.UIThread(Sub()
         If Not Me.ScriptCollection Is Nothing Then
             For Each scr As Script In Me.ScriptCollection.Values
                 If scr.Linked And scr.LinkedEventType = sourceevent And scr.LinkedObjectType = sourceobj And scr.LinkedObjectName = sourceobjname Then
@@ -668,16 +667,15 @@ Public Class FormFlowsheet
                         End If
                     End If
                     If scr.PythonInterpreter = Enums.Scripts.Interpreter.IronPython Then
-                        FormScript.RunScript_IronPython(scr.ScriptText, Me, Nothing)
+                        FormScript.RunScript_IronPython(scr.Title, scr.ScriptText, Me, Nothing)
                     Else
-                        FormScript.RunScript_PythonNET(scr.ScriptText, Me)
+                        FormScript.RunScript_PythonNET(scr.Title, scr.ScriptText, Me)
                     End If
                 End If
             Next
         Else
             Me.ScriptCollection = New Dictionary(Of String, Interfaces.IScript)
         End If
-        'End Sub)
 
     End Sub
 

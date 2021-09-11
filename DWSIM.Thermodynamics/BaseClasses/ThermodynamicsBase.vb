@@ -257,6 +257,7 @@ Namespace BaseClasses
             'equilibrium constant calculation
 
             Select Case KExprType
+
                 Case KOpt.Constant
 
                     Return ConstantKeqValue

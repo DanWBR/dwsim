@@ -27,6 +27,10 @@ Namespace MathEx.Optimization
 
         Public Property UseBroydenApproximation As Boolean = False
 
+        Public Property ExpandFactor As Double = 1.5
+
+        Public Property MaximumDelta As Double = 0.5
+
         Private _Iterations As Integer = 0
 
         Private fxb As Func(Of Double(), Double())
@@ -70,19 +74,19 @@ Namespace MathEx.Optimization
         ''' <returns>vector of variables which solve the equations according to the minimum allowable error value (tolerance).</returns>
         Function Solve(functionbody As Func(Of Double(), Double()), vars As Double()) As Double()
 
-            Dim minimaldampings As Double() = New Double() {0.001, 0.01, 0.1}
-            Dim epsilons As Double() = New Double() {0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1}
+            Dim dfacs As Double() = New Double() {0.1, 0.2, 0.4, 0.6, 0.8, 1.0}
+            Dim epsilons As Double() = New Double() {0.00000001, 0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1}
 
             Dim leave As Boolean = False
             Dim finalx As Double() = vars
 
             If EnableDamping Then
-                For Each mindamp In minimaldampings
+                For Each d In dfacs
                     If leave Then Exit For
                     For Each eps In epsilons
                         If leave Then Exit For
                         Try
-                            finalx = solve_internal(mindamp, eps, functionbody, vars)
+                            finalx = solve_internal(d, eps, functionbody, vars)
                             leave = True
                         Catch ex As ArgumentException
                             'try next parameters
@@ -133,7 +137,9 @@ Namespace MathEx.Optimization
                 _error = MathEx.Common.SumSqr(fx)
                 fxsum = _error
 
-                If Common.SumSqr(fx) < Tolerance Then Exit Do
+                If Common.SumSqr(fx) < Tolerance Then
+                    Exit Do
+                End If
 
                 dfdx = gradient(epsilon, x, fx)
 
@@ -141,24 +147,27 @@ Namespace MathEx.Optimization
 
                 If success Then
 
-                    'If Common.SumSqr(dx) < Tolerance Then Exit Do
-
-                    'this call to the brent solver calculates the damping factor which minimizes the error (fval).
+                    If Common.SumSqr(dx) < Tolerance And _Iterations > MaxIterations / 2 Then
+                        Exit Do
+                    End If
 
                     If EnableDamping Then
-
-                        tmpx = x.Clone
-                        tmpdx = dx.Clone
-                        brentsolver.brentoptimize(mindamp, 1.0, mindamp / 10.0#, df)
-
+                        If _Iterations > 5 Then
+                            df = df * ExpandFactor
+                            If df > 1.0 Then df = 1.0
+                        Else
+                            df = mindamp
+                        End If
                     Else
-
                         df = 1.0#
-
                     End If
 
                     For i = 0 To x.Length - 1
-                        x(i) -= dx(i) * df
+                        If Math.Abs(dx(i) / x(i)) > MaximumDelta Then
+                            x(i) -= Math.Sign(dx(i)) * MaximumDelta * df / ExpandFactor
+                        Else
+                            x(i) -= dx(i) * df
+                        End If
                     Next
 
                 Else
