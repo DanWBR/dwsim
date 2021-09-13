@@ -174,8 +174,8 @@
   <data name="TextBoxStreamName.Location" type="System.Drawing.Point, System.Drawing">
     <value>113, 87</value>
   </data>
-  <data name="Label15.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="DataGridViewTextBoxColumn1.Width" type="System.Int32, mscorlib">
+    <value>60</value>
   </data>
   <data name="&gt;&gt;LabelWithDivider6.Type" xml:space="preserve">
     <value>System.Windows.Forms.LabelWithDivider, LabelWithDivider, Version=1.1.0.1, Culture=neutral, PublicKeyToken=null</value>
@@ -186,17 +186,20 @@
   <data name="TextBoxVT1.Location" type="System.Drawing.Point, System.Drawing">
     <value>237, 130</value>
   </data>
-  <data name="&gt;&gt;Label39.Parent" xml:space="preserve">
-    <value>Panel4</value>
+  <data name="TextBoxTempCuts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 230</value>
   </data>
   <data name="Button8.Text" xml:space="preserve">
     <value>&lt; Anterior</value>
   </data>
+  <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
   <data name="Label44.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
   </data>
-  <data name="&gt;&gt;Label12.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;Label26.Name" xml:space="preserve">
+    <value>Label26</value>
   </data>
   <data name="&gt;&gt;Label31.ZOrder" xml:space="preserve">
     <value>9</value>
@@ -213,8 +216,8 @@
   <data name="&gt;&gt;Label9.Parent" xml:space="preserve">
     <value>Panel5</value>
   </data>
-  <data name="Label23.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 12</value>
+  <data name="LabelWithDivider7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Panel12.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -225,14 +228,14 @@
   <data name="&gt;&gt;Label17.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="CheckBoxSG.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="LabelWithDivider3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>614, 10</value>
   </data>
   <data name="&gt;&gt;Button6.Parent" xml:space="preserve">
     <value>Panel3</value>
   </data>
-  <data name="Button25.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 23</value>
+  <data name="Button20.Text" xml:space="preserve">
+    <value>&lt; Anterior</value>
   </data>
   <data name="RadioButtonGenOpt1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -243,20 +246,17 @@
   <data name="Panel7.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
   </data>
-  <data name="RadioButtonD60.Text" xml:space="preserve">
-    <value>d60/60</value>
+  <data name="&gt;&gt;TextBoxTempCuts.Parent" xml:space="preserve">
+    <value>Panel10</value>
   </data>
   <data name="Button2.Text" xml:space="preserve">
     <value>&lt; Anterior</value>
   </data>
-  <data name="Label41.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+  <data name="&gt;&gt;Button24.Parent" xml:space="preserve">
+    <value>Panel15</value>
   </data>
   <data name="&gt;&gt;Panel8.Name" xml:space="preserve">
     <value>Panel8</value>
-  </data>
-  <data name="Label21.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;Panel4.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -270,11 +270,11 @@
   <data name="&gt;&gt;Label36.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;Button5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label28.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 41</value>
   </data>
-  <data name="Label18.Text" xml:space="preserve">
-    <value>Passo 4 - Configurar Pseudocomponentes</value>
+  <data name="&gt;&gt;Label27.Name" xml:space="preserve">
+    <value>Label27</value>
   </data>
   <data name="Button27.Location" type="System.Drawing.Point, System.Drawing">
     <value>245, 84</value>
@@ -294,8 +294,8 @@
   <data name="&gt;&gt;Button26.Parent" xml:space="preserve">
     <value>Panel5</value>
   </data>
-  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 4</value>
+  <data name="&gt;&gt;Label40.Name" xml:space="preserve">
+    <value>Label40</value>
   </data>
   <data name="Panel3.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 357</value>
@@ -303,11 +303,8 @@
   <data name="CheckBoxADJZRA.Text" xml:space="preserve">
     <value>Ajustar Parâmetros de Rackett para equalizar densidades (entre Correlação e Equação de Rackett)</value>
   </data>
-  <data name="Label25.Size" type="System.Drawing.Size, System.Drawing">
-    <value>593, 57</value>
-  </data>
-  <data name="Button14.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="&gt;&gt;ComboBoxSG.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="&gt;&gt;Label24.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -324,36 +321,26 @@
   <data name="Label42.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="Button14.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="&gt;&gt;LabelWithDivider6.Name" xml:space="preserve">
+    <value>LabelWithDivider6</value>
+  </data>
+  <data name="&gt;&gt;Panel10.Name" xml:space="preserve">
+    <value>Panel10</value>
+  </data>
+  <data name="Button20.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="RadioButtonGenOpt2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 17</value>
-  </data>
-  <data name="Label6.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;Button10.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;Button6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ComboBoxAF.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="Label5.Text" xml:space="preserve">
-    <value>Marque os itens para os quais estão disponíveis dados experimentais. E necessário fornecer pelo menos a curva de destilação em uma das formas listadas na caixa de texto correspondente.
-Se você possui dados de densidade absoluta e/ou de massa molar da amostra como um todo, informe-os nas caixas de texto correspondentes. De outro modo, deixe-as em branco.</value>
-  </data>
-  <data name="LabelWithDivider7.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="Label15.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="Label40.Size" type="System.Drawing.Size, System.Drawing">
     <value>20, 13</value>
-  </data>
-  <data name="&gt;&gt;Button18.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;Button24.Parent" xml:space="preserve">
-    <value>Panel15</value>
   </data>
   <data name="LabelWithDivider5.Size" type="System.Drawing.Size, System.Drawing">
     <value>614, 10</value>
@@ -367,11 +354,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="vap.HeaderText" xml:space="preserve">
     <value>% VAP</value>
   </data>
-  <data name="ComboBoxAF.Items" xml:space="preserve">
-    <value>Lee-Kesler (1976)</value>
+  <data name="Label18.Text" xml:space="preserve">
+    <value>Passo 4 - Configurar Pseudocomponentes</value>
   </data>
-  <data name="&gt;&gt;Label24.Parent" xml:space="preserve">
-    <value>Panel13</value>
+  <data name="Label46.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
   </data>
   <data name="&gt;&gt;LabelWithDivider7.Type" xml:space="preserve">
     <value>System.Windows.Forms.LabelWithDivider, LabelWithDivider, Version=1.1.0.1, Culture=neutral, PublicKeyToken=null</value>
@@ -382,11 +369,15 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="RadioButtonD20.Location" type="System.Drawing.Point, System.Drawing">
     <value>164, 100</value>
   </data>
-  <data name="Panel0.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Marque os itens para os quais estão disponíveis dados experimentais. E necessário fornecer pelo menos a curva de destilação em uma das formas listadas na caixa de texto correspondente.
+Se você possui dados de densidade absoluta e/ou de massa molar da amostra como um todo, informe-os nas caixas de texto correspondentes. De outro modo, deixe-as em branco.</value>
   </data>
-  <data name="&gt;&gt;Label33.Parent" xml:space="preserve">
-    <value>Panel14</value>
+  <data name="&gt;&gt;P7.Name" xml:space="preserve">
+    <value>P7</value>
+  </data>
+  <data name="&gt;&gt;CheckBoxSG.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="LabelWithDivider8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -394,11 +385,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Label41.Parent" xml:space="preserve">
     <value>Panel4</value>
   </data>
-  <data name="Label30.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn1.Width" type="System.Int32, mscorlib">
-    <value>60</value>
+  <data name="&gt;&gt;Label7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button7.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -412,14 +400,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label14.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="Label19.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
   <data name="Label11.Text" xml:space="preserve">
     <value>Dados Experimentais</value>
   </data>
-  <data name="&gt;&gt;Label22.Parent" xml:space="preserve">
-    <value>Panel11</value>
+  <data name="CheckBoxSG.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;CheckBox1.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -436,8 +421,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Button9.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="Label33.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 13</value>
+  <data name="Button11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="Label36.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 4</value>
   </data>
   <data name="&gt;&gt;Panel13.Parent" xml:space="preserve">
     <value>P6</value>
@@ -448,14 +436,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
     <value>117, 13</value>
   </data>
-  <data name="Label46.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
   <data name="&gt;&gt;Label22.Name" xml:space="preserve">
     <value>Label22</value>
   </data>
-  <data name="&gt;&gt;CheckBoxADJZRA.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;Label46.Parent" xml:space="preserve">
+    <value>Panel16</value>
   </data>
   <data name="Column4.Width" type="System.Int32, mscorlib">
     <value>87</value>
@@ -466,14 +451,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Button24.Text" xml:space="preserve">
     <value>Finalizar</value>
   </data>
-  <data name="Label35.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="Button15.Location" type="System.Drawing.Point, System.Drawing">
     <value>530, 84</value>
   </data>
-  <data name="&gt;&gt;Label18.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="ComboBoxPC.Items" xml:space="preserve">
+    <value>Riazi-Daubert (1985)</value>
   </data>
   <data name="TextBoxKAPI.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -490,8 +472,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Label13.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;Label23.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="LabelWithDivider7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>614, 10</value>
   </data>
   <data name="ComboBoxMW.Location" type="System.Drawing.Point, System.Drawing">
     <value>119, 160</value>
@@ -499,11 +481,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Panel8.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="Label36.Text" xml:space="preserve">
-    <value>Passo 7 - Resultados</value>
-  </data>
   <data name="&gt;&gt;Label32.Parent" xml:space="preserve">
     <value>Panel14</value>
+  </data>
+  <data name="&gt;&gt;Button7.Name" xml:space="preserve">
+    <value>Button7</value>
   </data>
   <data name="&gt;&gt;Panel10.Parent" xml:space="preserve">
     <value>P4</value>
@@ -514,8 +496,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;RadioButtonD60.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label26.Name" xml:space="preserve">
-    <value>Label26</value>
+  <data name="ComboBoxBasis.Items1" xml:space="preserve">
+    <value>Molar</value>
+  </data>
+  <data name="&gt;&gt;ComboBoxPC.Name" xml:space="preserve">
+    <value>ComboBoxPC</value>
   </data>
   <data name="Label4.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -538,14 +523,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label8.Text" xml:space="preserve">
     <value>Clique em 'Próximo' para continuar.</value>
   </data>
-  <data name="&gt;&gt;Button1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Label19.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="CheckBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 39</value>
-  </data>
-  <data name="&gt;&gt;Label46.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label17.Text" xml:space="preserve">
     <value>Selecione o método para geração dos pseudocomponentes. Caso selecione a segunda opção, informe os valores na unidade de temperatura da simulação atual, sendo uma temperatura por linha apenas (use a tecla ENTER para posicionar o cursor na linha abaixo). Não inclua na lista as temperaturas máxima e mínima da curva informada.</value>
@@ -558,9 +540,6 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   </data>
   <data name="&gt;&gt;LabelWithDivider3.Parent" xml:space="preserve">
     <value>P2</value>
-  </data>
-  <data name="&gt;&gt;Label27.Name" xml:space="preserve">
-    <value>Label27</value>
   </data>
   <data name="&gt;&gt;Button3.Parent" xml:space="preserve">
     <value>Panel1</value>
@@ -583,11 +562,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Label28.Name" xml:space="preserve">
     <value>Label28</value>
   </data>
-  <data name="&gt;&gt;P5.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;Label23.Name" xml:space="preserve">
-    <value>Label23</value>
+  <data name="&gt;&gt;Label20.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label31.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -604,8 +580,14 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Button7.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="Label26.Text" xml:space="preserve">
+    <value>Passo 6 - Métodos e Correlações</value>
+  </data>
   <data name="&gt;&gt;Button2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ComboBoxPC.Items1" xml:space="preserve">
+    <value>Lee-Kesler (1976)</value>
   </data>
   <data name="&gt;&gt;TextBoxBulkD.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -613,11 +595,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="RadioButtonGenOpt2.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 62</value>
   </data>
-  <data name="&gt;&gt;ComboBoxTC.ZOrder" xml:space="preserve">
-    <value>12</value>
+  <data name="Panel0.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
   </data>
-  <data name="&gt;&gt;Button6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label34.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -628,14 +610,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
     <value>Panel3</value>
   </data>
-  <data name="Button12.Text" xml:space="preserve">
-    <value>Próximo &gt;</value>
+  <data name="Label33.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;Button14.Parent" xml:space="preserve">
-    <value>Panel9</value>
-  </data>
-  <data name="Button16.Text" xml:space="preserve">
-    <value>Cancelar</value>
+  <data name="CheckBoxADJZRA.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 263</value>
   </data>
   <data name="Button11.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -643,17 +622,20 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="LabelWithDivider1.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 350</value>
   </data>
-  <data name="&gt;&gt;Label19.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;Label29.Name" xml:space="preserve">
+    <value>Label29</value>
   </data>
   <data name="&gt;&gt;Label20.Parent" xml:space="preserve">
     <value>Panel11</value>
   </data>
-  <data name="TextBoxNumberOfPseudos.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;Label21.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="P1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="Label26.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
+  <data name="Button12.Text" xml:space="preserve">
+    <value>Próximo &gt;</value>
   </data>
   <data name="CheckBoxVISC.Size" type="System.Drawing.Size, System.Drawing">
     <value>190, 17</value>
@@ -673,23 +655,14 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Label38.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;Label45.Parent" xml:space="preserve">
-    <value>Panel4</value>
-  </data>
   <data name="Label42.Text" xml:space="preserve">
     <value>Base das Curvas</value>
   </data>
   <data name="&gt;&gt;Label42.Name" xml:space="preserve">
     <value>Label42</value>
   </data>
-  <data name="&gt;&gt;Label3.Name" xml:space="preserve">
-    <value>Label3</value>
-  </data>
-  <data name="Label32.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;Label21.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;TextBoxStreamName.Parent" xml:space="preserve">
+    <value>Panel15</value>
   </data>
   <data name="Button24.Location" type="System.Drawing.Point, System.Drawing">
     <value>530, 84</value>
@@ -697,14 +670,17 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Button6.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="&gt;&gt;Column3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ComboBoxViscM.Parent" xml:space="preserve">
-    <value>Panel14</value>
+  <data name="&gt;&gt;P1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Button15.Text" xml:space="preserve">
     <value>Próximo &gt;</value>
+  </data>
+  <data name="DataGridViewTextBoxColumn5.Width" type="System.Int32, mscorlib">
+    <value>45</value>
+  </data>
+  <data name="P7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
   <data name="Label27.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 13</value>
@@ -712,8 +688,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Label26.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Panel10.Name" xml:space="preserve">
-    <value>Panel10</value>
+  <data name="Label6.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="Label9.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -730,14 +706,17 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Label42.Parent" xml:space="preserve">
     <value>Panel4</value>
   </data>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn3.Name" xml:space="preserve">
+    <value>DataGridViewTextBoxColumn3</value>
+  </data>
+  <data name="Label33.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 13</value>
+  </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Assistente para Caracterização de Petróleos Através de Curvas de Destilação</value>
   </data>
   <data name="&gt;&gt;Label14.Name" xml:space="preserve">
     <value>Label14</value>
-  </data>
-  <data name="&gt;&gt;Label33.Name" xml:space="preserve">
-    <value>Label33</value>
   </data>
   <data name="Button17.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -748,8 +727,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label45.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;P0.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="RadioButtonGenOpt1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 17</value>
   </data>
   <data name="Label27.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -763,20 +742,20 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>224, 16</value>
   </data>
+  <data name="&gt;&gt;TextBoxKAPI.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="Label22.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;ComboBoxMW.Parent" xml:space="preserve">
-    <value>Panel14</value>
+  <data name="&gt;&gt;Label27.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel14.Parent" xml:space="preserve">
     <value>P6</value>
   </data>
-  <data name="P1.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;Label34.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Label26.Parent" xml:space="preserve">
+    <value>Panel13</value>
   </data>
   <data name="&gt;&gt;Label43.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -790,8 +769,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Button2.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;Label30.Parent" xml:space="preserve">
-    <value>Panel14</value>
+  <data name="TextBoxStreamName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>249, 20</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Clique em 'Próximo' para continuar.</value>
@@ -808,8 +787,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="RadioButtonD60.Location" type="System.Drawing.Point, System.Drawing">
     <value>97, 100</value>
   </data>
-  <data name="&gt;&gt;Button19.Name" xml:space="preserve">
-    <value>Button19</value>
+  <data name="Label37.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;Panel6.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -820,8 +799,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;vap.Name" xml:space="preserve">
     <value>vap</value>
   </data>
-  <data name="Label17.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 24</value>
+  <data name="&gt;&gt;Label22.Parent" xml:space="preserve">
+    <value>Panel11</value>
   </data>
   <data name="Label17.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -832,17 +811,29 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="GraphCurves.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
+  <data name="&gt;&gt;P7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="Label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="CheckBoxVISC.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="Panel6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="&gt;&gt;Label1.Name" xml:space="preserve">
+    <value>Label1</value>
   </data>
   <data name="&gt;&gt;P5.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>593, 57</value>
-  </data>
   <data name="&gt;&gt;Button3.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="&gt;&gt;Label9.Name" xml:space="preserve">
+    <value>Label9</value>
   </data>
   <data name="Button23.Location" type="System.Drawing.Point, System.Drawing">
     <value>449, 84</value>
@@ -850,8 +841,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;P0.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;TextBoxTempCuts.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label21.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 24</value>
   </data>
   <data name="&gt;&gt;LabelWithDivider6.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -871,17 +862,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Label10.Name" xml:space="preserve">
     <value>Label10</value>
   </data>
-  <data name="LabelWithDivider3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 10</value>
-  </data>
   <data name="Label27.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="Label35.Size" type="System.Drawing.Size, System.Drawing">
     <value>593, 57</value>
-  </data>
-  <data name="&gt;&gt;Label35.Parent" xml:space="preserve">
-    <value>Panel15</value>
   </data>
   <data name="&gt;&gt;Panel12.Parent" xml:space="preserve">
     <value>P5</value>
@@ -895,23 +880,20 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="ComboBoxSG.Items1" xml:space="preserve">
     <value>Viscosity Data</value>
   </data>
-  <data name="&gt;&gt;TextBoxTempCuts.Parent" xml:space="preserve">
-    <value>Panel10</value>
+  <data name="&gt;&gt;RadioButtonGenOpt1.Name" xml:space="preserve">
+    <value>RadioButtonGenOpt1</value>
   </data>
   <data name="&gt;&gt;Label7.ZOrder" xml:space="preserve">
     <value>20</value>
   </data>
-  <data name="Label16.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="TextBoxTempCuts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 230</value>
+  <data name="&gt;&gt;dens.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button13.Parent" xml:space="preserve">
     <value>Panel9</value>
   </data>
-  <data name="&gt;&gt;Panel7.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="Column6.Width" type="System.Int32, mscorlib">
+    <value>105</value>
   </data>
   <data name="Panel14.Size" type="System.Drawing.Size, System.Drawing">
     <value>614, 358</value>
@@ -925,6 +907,9 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="mm.HeaderText" xml:space="preserve">
     <value>Massa Molar</value>
   </data>
+  <data name="&gt;&gt;Label23.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="Button2.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -934,20 +919,14 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Button5.Name" xml:space="preserve">
     <value>Button5</value>
   </data>
-  <data name="Label33.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;Button9.Parent" xml:space="preserve">
-    <value>Panel5</value>
-  </data>
-  <data name="&gt;&gt;Label30.Name" xml:space="preserve">
-    <value>Label30</value>
+  <data name="LabelWithDivider7.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;ComboBoxViscM.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;P1.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;Label22.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Button19.Location" type="System.Drawing.Point, System.Drawing">
     <value>368, 84</value>
@@ -958,35 +937,29 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="GraphCurves.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 36</value>
   </data>
-  <data name="Label36.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 16</value>
-  </data>
   <data name="CheckBox1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="Label24.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="Label17.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 24</value>
+  </data>
+  <data name="&gt;&gt;Label35.Name" xml:space="preserve">
+    <value>Label35</value>
   </data>
   <data name="Label13.Text" xml:space="preserve">
     <value>O gráfico acima mostra os dados informados. No próximo passo você poderá definir as temperaturas de corte ou o número de pseudocomponentes desejado.</value>
   </data>
-  <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>593, 57</value>
-  </data>
   <data name="Button4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="CheckBoxADJAF.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
+  <data name="Label32.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="CheckBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="Button6.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
-  </data>
-  <data name="&gt;&gt;Button24.Name" xml:space="preserve">
-    <value>Button24</value>
   </data>
   <data name="Panel13.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 357</value>
@@ -997,8 +970,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Button6.Name" xml:space="preserve">
     <value>Button6</value>
   </data>
-  <data name="Label29.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 13</value>
+  <data name="&gt;&gt;ComboBoxViscM.Name" xml:space="preserve">
+    <value>ComboBoxViscM</value>
+  </data>
+  <data name="&gt;&gt;P0.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="TextBoxBulkMW.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -1012,8 +988,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label23.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="ComboBoxAF.Size" type="System.Drawing.Size, System.Drawing">
-    <value>217, 21</value>
+  <data name="Button23.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;Panel15.Name" xml:space="preserve">
     <value>Panel15</value>
@@ -1030,8 +1006,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="CheckBoxVISC.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="&gt;&gt;P5.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ComboBoxMW.Parent" xml:space="preserve">
+    <value>Panel14</value>
   </data>
   <data name="Label34.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1039,8 +1018,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Panel1.Parent" xml:space="preserve">
     <value>P0</value>
   </data>
-  <data name="&gt;&gt;Button14.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="RadioButtonGenOpt1.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="Label43.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1048,35 +1027,26 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="RadioButtonGenOpt1.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="LabelWithDivider8.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
-  <data name="&gt;&gt;Button7.Name" xml:space="preserve">
-    <value>Button7</value>
-  </data>
-  <data name="&gt;&gt;Label26.Parent" xml:space="preserve">
-    <value>Panel13</value>
-  </data>
-  <data name="&gt;&gt;Label34.Name" xml:space="preserve">
-    <value>Label34</value>
+  <data name="Button20.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Button4.Location" type="System.Drawing.Point, System.Drawing">
     <value>368, 84</value>
   </data>
-  <data name="&gt;&gt;P2.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="Button14.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;Label23.Parent" xml:space="preserve">
     <value>Panel12</value>
   </data>
-  <data name="Panel13.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Bottom</value>
+  <data name="DataGridViewTextBoxColumn3.HeaderText" xml:space="preserve">
+    <value>MM</value>
   </data>
-  <data name="RadioButtonGenOpt1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 17</value>
-  </data>
-  <data name="Label43.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 13</value>
+  <data name="&gt;&gt;CheckBoxMW.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label16.Name" xml:space="preserve">
     <value>Label16</value>
@@ -1084,17 +1054,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;CheckBoxVISC.Name" xml:space="preserve">
     <value>CheckBoxVISC</value>
   </data>
-  <data name="LabelWithDivider7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="ComboBoxDistMethod.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="&gt;&gt;Label28.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Label32.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
   </data>
   <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 12</value>
@@ -1117,17 +1081,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Label18.Name" xml:space="preserve">
     <value>Label18</value>
   </data>
-  <data name="Panel15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 119</value>
-  </data>
   <data name="Label45.Location" type="System.Drawing.Point, System.Drawing">
     <value>494, 41</value>
   </data>
-  <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="Panel12.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
+  <data name="&gt;&gt;RadioButtonD60.Name" xml:space="preserve">
+    <value>RadioButtonD60</value>
   </data>
   <data name="LabelWithDivider4.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 350</value>
@@ -1141,14 +1099,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
     <value>Panel1</value>
   </data>
-  <data name="Column4.HeaderText" xml:space="preserve">
-    <value>Fração Molar</value>
+  <data name="Button24.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;LabelWithDivider3.Type" xml:space="preserve">
     <value>System.Windows.Forms.LabelWithDivider, LabelWithDivider, Version=1.1.0.1, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 24</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1177,8 +1132,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="LabelWithDivider2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;Label8.Name" xml:space="preserve">
-    <value>Label8</value>
+  <data name="P6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="&gt;&gt;Label37.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="Label42.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 160</value>
@@ -1192,8 +1150,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Button1.Name" xml:space="preserve">
     <value>Button1</value>
   </data>
-  <data name="Label14.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;Panel10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ComboBoxMW.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1201,29 +1159,23 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Button19.Parent" xml:space="preserve">
     <value>Panel13</value>
   </data>
-  <data name="&gt;&gt;Label19.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;Button16.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="Label6.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
+  <data name="Column6.HeaderText" xml:space="preserve">
+    <value>SRK VShift (ci/bi)</value>
   </data>
-  <data name="Label16.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 89</value>
+  <data name="P5.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="&gt;&gt;Button11.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;RadioButtonGenOpt2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Panel11.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="Label24.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="P4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
   <data name="&gt;&gt;Label29.Parent" xml:space="preserve">
     <value>Panel14</value>
@@ -1249,8 +1201,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Button13.Location" type="System.Drawing.Point, System.Drawing">
     <value>368, 84</value>
   </data>
-  <data name="Column2.HeaderText" xml:space="preserve">
-    <value>Visc 2</value>
+  <data name="&gt;&gt;P3.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="Label39.Size" type="System.Drawing.Size, System.Drawing">
     <value>20, 13</value>
@@ -1258,26 +1210,17 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Button2.Name" xml:space="preserve">
     <value>Button2</value>
   </data>
-  <data name="P5.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn1.Name" xml:space="preserve">
+    <value>DataGridViewTextBoxColumn1</value>
   </data>
-  <data name="&gt;&gt;P7.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>DWSIM - Caracterização de Petróleos</value>
-  </data>
-  <data name="Label21.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 24</value>
-  </data>
-  <data name="&gt;&gt;Label22.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="P4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>614, 476</value>
   </data>
   <data name="P6.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="Column1.Width" type="System.Int32, mscorlib">
-    <value>57</value>
+  <data name="&gt;&gt;ComboBoxTC.ZOrder" xml:space="preserve">
+    <value>12</value>
   </data>
   <data name="&gt;&gt;Button21.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1291,23 +1234,20 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
     <value>530, 84</value>
   </data>
+  <data name="&gt;&gt;Label38.Name" xml:space="preserve">
+    <value>Label38</value>
+  </data>
   <data name="Label15.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="DataGridViewTextBoxColumn5.Width" type="System.Int32, mscorlib">
-    <value>45</value>
+  <data name="Panel15.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 357</value>
   </data>
-  <data name="Label38.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>DWSIM - Caracterização de Petróleos</value>
   </data>
   <data name="Label24.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
-  </data>
-  <data name="&gt;&gt;Label43.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;Button23.Parent" xml:space="preserve">
-    <value>Panel15</value>
   </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 4</value>
@@ -1330,8 +1270,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label40.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;TextBoxKAPI.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="DataGridViewTextBoxColumn3.Width" type="System.Int32, mscorlib">
+    <value>50</value>
   </data>
   <data name="&gt;&gt;GraphCurves.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -1341,9 +1281,6 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   </data>
   <data name="&gt;&gt;Label12.Name" xml:space="preserve">
     <value>Label12</value>
-  </data>
-  <data name="ComboBoxSG.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 128</value>
   </data>
   <data name="RadioButtonD20.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1366,8 +1303,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;CheckBoxADJAF.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;LabelWithDivider1.Parent" xml:space="preserve">
-    <value>P0</value>
+  <data name="Label23.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
   </data>
   <data name="LabelWithDivider7.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 350</value>
@@ -1378,11 +1315,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Button26.Name" xml:space="preserve">
     <value>Button26</value>
   </data>
-  <data name="Panel6.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="Panel12.Size" type="System.Drawing.Size, System.Drawing">
     <value>614, 358</value>
   </data>
-  <data name="LabelWithDivider8.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="Panel6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>614, 358</value>
   </data>
   <data name="&gt;&gt;visc2.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1390,17 +1327,17 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Button11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;RadioButtonD20.Parent" xml:space="preserve">
-    <value>Panel4</value>
+  <data name="&gt;&gt;P6.Name" xml:space="preserve">
+    <value>P6</value>
   </data>
-  <data name="Label26.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="&gt;&gt;ComboBoxSG.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="CheckBoxMW.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="CheckBoxMW.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 17</value>
-  </data>
-  <data name="&gt;&gt;P6.Parent" xml:space="preserve">
-    <value>$this</value>
   </data>
   <data name="Button21.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1414,8 +1351,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="ComboBoxTC.Location" type="System.Drawing.Point, System.Drawing">
     <value>119, 36</value>
   </data>
-  <data name="&gt;&gt;CheckBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Panel3.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;Label13.Name" xml:space="preserve">
     <value>Label13</value>
@@ -1432,20 +1369,17 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label46.Text" xml:space="preserve">
     <value>Você pode editar os valores da tabela acima antes de criar a corrente de óleo.</value>
   </data>
-  <data name="CheckBoxADJAF.Text" xml:space="preserve">
-    <value>Ajustar Fatores Acêntricos para equalizar PEVs (entre Correlação e Pacote de Propriedades)</value>
+  <data name="Label35.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 24</value>
   </data>
-  <data name="&gt;&gt;Panel3.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="Button21.Location" type="System.Drawing.Point, System.Drawing">
-    <value>530, 84</value>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn5.Name" xml:space="preserve">
+    <value>DataGridViewTextBoxColumn5</value>
   </data>
   <data name="Panel5.Size" type="System.Drawing.Size, System.Drawing">
     <value>614, 119</value>
   </data>
-  <data name="&gt;&gt;LabelWithDivider8.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;P7.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;CheckBoxMW.Name" xml:space="preserve">
     <value>CheckBoxMW</value>
@@ -1453,17 +1387,14 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label13.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 24</value>
   </data>
-  <data name="Button7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+  <data name="&gt;&gt;P6.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;Button20.Name" xml:space="preserve">
     <value>Button20</value>
   </data>
   <data name="&gt;&gt;LabelWithDivider8.Type" xml:space="preserve">
     <value>System.Windows.Forms.LabelWithDivider, LabelWithDivider, Version=1.1.0.1, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="Button20.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;Panel14.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1483,17 +1414,14 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Button10.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="Panel10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="DataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
+    <value>Nome</value>
   </data>
-  <data name="&gt;&gt;DataGridView2.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="LabelWithDivider8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 350</value>
   </data>
-  <data name="DataGridViewTextBoxColumn6.Width" type="System.Int32, mscorlib">
-    <value>56</value>
-  </data>
-  <data name="ComboBoxMW.Items1" xml:space="preserve">
-    <value>Riazi (1986)</value>
+  <data name="DataGridViewTextBoxColumn6.HeaderText" xml:space="preserve">
+    <value>F. Ac.</value>
   </data>
   <data name="&gt;&gt;Panel6.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1528,9 +1456,6 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;DataGridView2.Name" xml:space="preserve">
     <value>DataGridView2</value>
   </data>
-  <data name="Button16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
   <data name="Button26.Size" type="System.Drawing.Size, System.Drawing">
     <value>119, 23</value>
   </data>
@@ -1555,17 +1480,20 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;P1.Name" xml:space="preserve">
     <value>P1</value>
   </data>
-  <data name="Label12.Text" xml:space="preserve">
-    <value>Clique em 'Próximo' para continuar.</value>
+  <data name="Label46.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;LabelWithDivider7.Name" xml:space="preserve">
     <value>LabelWithDivider7</value>
   </data>
+  <data name="&gt;&gt;Label11.Parent" xml:space="preserve">
+    <value>Panel6</value>
+  </data>
   <data name="Button23.Text" xml:space="preserve">
     <value>&lt; Anterior</value>
   </data>
-  <data name="&gt;&gt;Label26.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="ComboBoxMW.Items1" xml:space="preserve">
+    <value>Riazi (1986)</value>
   </data>
   <data name="&gt;&gt;P5.Name" xml:space="preserve">
     <value>P5</value>
@@ -1588,17 +1516,14 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label22.Text" xml:space="preserve">
     <value>Passo 5 - Visualizar cortes</value>
   </data>
-  <data name="P4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 476</value>
+  <data name="Label19.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="&gt;&gt;ComboBoxBasis.Parent" xml:space="preserve">
     <value>Panel4</value>
   </data>
   <data name="&gt;&gt;Label45.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="P6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
   </data>
   <data name="P7.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -1609,11 +1534,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;TextBoxVT1.Parent" xml:space="preserve">
     <value>Panel4</value>
   </data>
-  <data name="&gt;&gt;P7.Name" xml:space="preserve">
-    <value>P7</value>
-  </data>
-  <data name="&gt;&gt;Label37.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Column4.HeaderText" xml:space="preserve">
+    <value>Fração Molar</value>
   </data>
   <data name="Label26.Size" type="System.Drawing.Size, System.Drawing">
     <value>239, 16</value>
@@ -1642,8 +1564,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Button13.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="Panel6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="Label21.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Button22.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -1660,14 +1582,14 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Column6.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="TextBoxStreamName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>249, 20</value>
+  <data name="CheckBoxADJAF.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
   </data>
   <data name="&gt;&gt;DataGridView2.Parent" xml:space="preserve">
     <value>Panel16</value>
   </data>
-  <data name="Button23.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="Button18.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="P7.Size" type="System.Drawing.Size, System.Drawing">
     <value>614, 476</value>
@@ -1678,8 +1600,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Button8.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;Column1.Name" xml:space="preserve">
-    <value>Column1</value>
+  <data name="Button27.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
   </data>
   <data name="Panel3.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1693,14 +1615,17 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Button21.Parent" xml:space="preserve">
     <value>Panel13</value>
   </data>
+  <data name="&gt;&gt;Label43.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="Label39.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopCenter</value>
   </data>
-  <data name="Label20.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 13</value>
+  <data name="Column5.HeaderText" xml:space="preserve">
+    <value>PR VShift (ci/bi)</value>
   </data>
-  <data name="CheckBoxADJZRA.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 263</value>
+  <data name="ComboBoxMW.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
   </data>
   <data name="&gt;&gt;Label8.Parent" xml:space="preserve">
     <value>Panel5</value>
@@ -1711,11 +1636,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label30.Text" xml:space="preserve">
     <value>Fator Acêntrico</value>
   </data>
-  <data name="Label36.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
+  <data name="Button21.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
   </data>
-  <data name="&gt;&gt;LabelWithDivider6.Name" xml:space="preserve">
-    <value>LabelWithDivider6</value>
+  <data name="&gt;&gt;Panel5.Parent" xml:space="preserve">
+    <value>P2</value>
   </data>
   <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 89</value>
@@ -1729,11 +1654,14 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Label14.Parent" xml:space="preserve">
     <value>Panel7</value>
   </data>
-  <data name="RadioButtonGenOpt2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;Button19.Name" xml:space="preserve">
+    <value>Button19</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn6.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn6</value>
+  </data>
+  <data name="P4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="Label15.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 12</value>
@@ -1747,8 +1675,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="TextBoxVT2.Location" type="System.Drawing.Point, System.Drawing">
     <value>305, 129</value>
   </data>
-  <data name="&gt;&gt;Label40.ZOrder" xml:space="preserve">
-    <value>13</value>
+  <data name="Button22.Text" xml:space="preserve">
+    <value>Cancelar</value>
   </data>
   <data name="&gt;&gt;TextBoxNumberOfPseudos.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1756,14 +1684,14 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Button1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="Button22.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
   <data name="ComboBoxViscM.Size" type="System.Drawing.Size, System.Drawing">
     <value>217, 21</value>
   </data>
   <data name="&gt;&gt;Button9.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Button17.Name" xml:space="preserve">
-    <value>Button17</value>
   </data>
   <data name="Button21.Text" xml:space="preserve">
     <value>Próximo &gt;</value>
@@ -1777,20 +1705,20 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Label46.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="Column5.HeaderText" xml:space="preserve">
-    <value>PR VShift (ci/bi)</value>
-  </data>
-  <data name="&gt;&gt;Label1.Name" xml:space="preserve">
-    <value>Label1</value>
+  <data name="Panel12.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
   </data>
   <data name="Button9.Location" type="System.Drawing.Point, System.Drawing">
     <value>530, 84</value>
   </data>
-  <data name="Label46.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
+  <data name="&gt;&gt;temp.Name" xml:space="preserve">
+    <value>temp</value>
   </data>
-  <data name="Label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;RadioButtonD20.Parent" xml:space="preserve">
+    <value>Panel4</value>
+  </data>
+  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 4</value>
   </data>
   <data name="Label21.Text" xml:space="preserve">
     <value>Estes são os cortes (pseudocomponentes) gerados de acordo com as informações coletadas. Se tudo estiver conforme o esperado, clique em 'Próximo' para selecionar os métodos de cálculo das propriedades dos cortes.</value>
@@ -1807,29 +1735,32 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label20.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 89</value>
   </data>
-  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 13</value>
+  <data name="TextBoxBulkD.Location" type="System.Drawing.Point, System.Drawing">
+    <value>164, 222</value>
+  </data>
+  <data name="Button4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
   </data>
   <data name="&gt;&gt;Label40.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label9.Name" xml:space="preserve">
-    <value>Label9</value>
+  <data name="&gt;&gt;Button18.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>614, 119</value>
   </data>
-  <data name="Panel11.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="Label46.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="Label33.Text" xml:space="preserve">
+    <value>Densidade</value>
   </data>
   <data name="Button4.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="Label36.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 4</value>
-  </data>
-  <data name="Label38.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 199</value>
+  <data name="&gt;&gt;Label39.Parent" xml:space="preserve">
+    <value>Panel4</value>
   </data>
   <data name="P5.Size" type="System.Drawing.Size, System.Drawing">
     <value>614, 476</value>
@@ -1837,14 +1768,20 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="Panel9.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
   <data name="Label33.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;CheckBoxSG.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Panel5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 357</value>
   </data>
   <data name="Button25.Text" xml:space="preserve">
     <value>Colar do Microsoft Excel</value>
+  </data>
+  <data name="RadioButtonD60.Text" xml:space="preserve">
+    <value>d60/60</value>
   </data>
   <data name="Label39.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -1852,14 +1789,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="RadioButtonD60.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="Button20.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+  <data name="&gt;&gt;Label40.ZOrder" xml:space="preserve">
+    <value>13</value>
   </data>
-  <data name="P0.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 476</value>
-  </data>
-  <data name="&gt;&gt;Button24.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;RadioButtonGenOpt2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label14.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1879,11 +1813,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Button17.Text" xml:space="preserve">
     <value>&lt; Anterior</value>
   </data>
-  <data name="TextBoxVT1.Text" xml:space="preserve">
-    <value>100</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn4.Name" xml:space="preserve">
-    <value>DataGridViewTextBoxColumn4</value>
+  <data name="&gt;&gt;RadioButtonGenOpt1.Parent" xml:space="preserve">
+    <value>Panel10</value>
   </data>
   <data name="TextBoxVT2.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1894,20 +1825,23 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label19.Text" xml:space="preserve">
     <value>Método de geração</value>
   </data>
-  <data name="&gt;&gt;ComboBoxAF.Name" xml:space="preserve">
-    <value>ComboBoxAF</value>
+  <data name="ComboBoxPC.Items2" xml:space="preserve">
+    <value>Farah (2006)</value>
   </data>
-  <data name="RadioButtonGenOpt1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="ComboBoxPC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>119, 66</value>
   </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Button26.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Button27.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="&gt;&gt;Button14.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Button4.Parent" xml:space="preserve">
+    <value>Panel3</value>
   </data>
   <data name="DataGridViewTextBoxColumn5.HeaderText" xml:space="preserve">
     <value>Pc</value>
@@ -1933,8 +1867,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
   </data>
-  <data name="ComboBoxPC.Items1" xml:space="preserve">
-    <value>Lee-Kesler (1976)</value>
+  <data name="&gt;&gt;Label46.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Panel9.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
@@ -1942,23 +1876,17 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;ComboBoxPC.Parent" xml:space="preserve">
     <value>Panel14</value>
   </data>
-  <data name="&gt;&gt;Label29.Name" xml:space="preserve">
-    <value>Label29</value>
+  <data name="Label16.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;CheckBoxMW.Parent" xml:space="preserve">
-    <value>Panel4</value>
-  </data>
-  <data name="Button20.Text" xml:space="preserve">
-    <value>&lt; Anterior</value>
+  <data name="&gt;&gt;Button1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label23.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="Label37.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="&gt;&gt;TextBoxBulkMW.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label38.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
   </data>
   <data name="CheckBox1.Text" xml:space="preserve">
     <value>Temperatura de Ebulição</value>
@@ -1972,23 +1900,17 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Button19.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="P5.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+  <data name="Label29.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
   <data name="&gt;&gt;Label8.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="Label32.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="Label34.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;Column2.Name" xml:space="preserve">
-    <value>Column2</value>
-  </data>
-  <data name="&gt;&gt;TextBoxStreamName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Button24.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button23.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1996,8 +1918,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Button13.Text" xml:space="preserve">
     <value>Cancelar</value>
   </data>
-  <data name="&gt;&gt;Button1.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="&gt;&gt;Column3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel3.Name" xml:space="preserve">
     <value>Panel3</value>
@@ -2014,26 +1936,20 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Label10.Parent" xml:space="preserve">
     <value>Panel5</value>
   </data>
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>550, 16</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Button25.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="Label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;RadioButtonGenOpt1.Parent" xml:space="preserve">
-    <value>Panel10</value>
-  </data>
   <data name="P3.Size" type="System.Drawing.Size, System.Drawing">
     <value>614, 476</value>
   </data>
-  <data name="dens.HeaderText" xml:space="preserve">
-    <value>Densidade</value>
+  <data name="&gt;&gt;LabelWithDivider1.Parent" xml:space="preserve">
+    <value>P0</value>
   </data>
-  <data name="ComboBoxMW.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+  <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 13</value>
   </data>
   <data name="RadioButtonGenOpt2.Text" xml:space="preserve">
     <value>Definir temperaturas de corte</value>
@@ -2043,9 +1959,6 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   </data>
   <data name="CheckBoxADJZRA.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="Label35.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 24</value>
   </data>
   <data name="RadioButtonD60.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2059,17 +1972,17 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;LabelWithDivider1.Name" xml:space="preserve">
     <value>LabelWithDivider1</value>
   </data>
-  <data name="Label29.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
   <data name="&gt;&gt;Label42.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="LabelWithDivider7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 10</value>
+  <data name="&gt;&gt;CheckBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Button27.Parent" xml:space="preserve">
-    <value>Panel3</value>
+  <data name="Label38.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="Button16.Text" xml:space="preserve">
+    <value>Cancelar</value>
   </data>
   <data name="&gt;&gt;Button13.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2080,8 +1993,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 13</value>
   </data>
-  <data name="&gt;&gt;Label11.Parent" xml:space="preserve">
-    <value>Panel6</value>
+  <data name="Label14.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label22.Size" type="System.Drawing.Size, System.Drawing">
     <value>192, 16</value>
@@ -2091,6 +2004,9 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   </data>
   <data name="CheckBoxVISC.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="DataGridViewTextBoxColumn4.Width" type="System.Int32, mscorlib">
+    <value>45</value>
   </data>
   <data name="Label18.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2104,26 +2020,23 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label11.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;temp.Name" xml:space="preserve">
-    <value>temp</value>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn4.Name" xml:space="preserve">
+    <value>DataGridViewTextBoxColumn4</value>
   </data>
   <data name="&gt;&gt;Button8.Name" xml:space="preserve">
     <value>Button8</value>
   </data>
-  <data name="&gt;&gt;TextBoxVT2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Label43.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="Label41.Text" xml:space="preserve">
     <value>°F</value>
   </data>
-  <data name="ComboBoxMW.Size" type="System.Drawing.Size, System.Drawing">
-    <value>217, 21</value>
-  </data>
-  <data name="&gt;&gt;Label20.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;P3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Panel10.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="Label39.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2131,8 +2044,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;ComboBoxBasis.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="Label23.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  <data name="CheckBoxVISC.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;Panel4.Parent" xml:space="preserve">
     <value>P1</value>
@@ -2140,8 +2053,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Label16.Parent" xml:space="preserve">
     <value>Panel9</value>
   </data>
-  <data name="Label13.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;Button14.Parent" xml:space="preserve">
+    <value>Panel9</value>
   </data>
   <data name="Label14.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
@@ -2149,14 +2062,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;RadioButtonGenOpt1.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn1.Name" xml:space="preserve">
-    <value>DataGridViewTextBoxColumn1</value>
-  </data>
   <data name="&gt;&gt;LabelWithDivider8.Parent" xml:space="preserve">
     <value>P7</value>
-  </data>
-  <data name="Label38.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
   </data>
   <data name="P4.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -2164,8 +2071,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;TextBoxTempCuts.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;CheckBoxMW.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Button18.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;CheckBoxADJAF.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -2182,8 +2089,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Panel13.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="Button8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+  <data name="&gt;&gt;Label30.Name" xml:space="preserve">
+    <value>Label30</value>
   </data>
   <data name="Panel16.Size" type="System.Drawing.Size, System.Drawing">
     <value>614, 358</value>
@@ -2191,17 +2098,20 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Label17.Parent" xml:space="preserve">
     <value>Panel9</value>
   </data>
-  <data name="&gt;&gt;P6.Name" xml:space="preserve">
-    <value>P6</value>
+  <data name="ComboBoxAF.Size" type="System.Drawing.Size, System.Drawing">
+    <value>217, 21</value>
   </data>
-  <data name="&gt;&gt;LabelWithDivider7.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;ComboBoxAF.Name" xml:space="preserve">
+    <value>ComboBoxAF</value>
+  </data>
+  <data name="&gt;&gt;Panel8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;CheckBoxADJZRA.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Panel5.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Bottom</value>
+  <data name="&gt;&gt;ComboBoxTC.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
     <value>Panel3</value>
@@ -2212,20 +2122,14 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Button19.Text" xml:space="preserve">
     <value>Cancelar</value>
   </data>
-  <data name="Column3.Width" type="System.Int32, mscorlib">
-    <value>79</value>
-  </data>
   <data name="&gt;&gt;Label7.Parent" xml:space="preserve">
     <value>Panel4</value>
   </data>
   <data name="&gt;&gt;Button21.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="Panel0.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 355</value>
-  </data>
-  <data name="&gt;&gt;Button18.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label23.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="&gt;&gt;Panel16.Parent" xml:space="preserve">
     <value>P7</value>
@@ -2233,11 +2137,14 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;P7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Panel5.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
   </data>
-  <data name="Button21.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;Button9.Parent" xml:space="preserve">
+    <value>Panel5</value>
+  </data>
+  <data name="CheckBoxADJAF.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;TextBoxNumberOfPseudos.Name" xml:space="preserve">
     <value>TextBoxNumberOfPseudos</value>
@@ -2248,17 +2155,17 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;ComboBoxAF.Parent" xml:space="preserve">
     <value>Panel14</value>
   </data>
+  <data name="Label12.Text" xml:space="preserve">
+    <value>Clique em 'Próximo' para continuar.</value>
+  </data>
   <data name="&gt;&gt;Label31.Name" xml:space="preserve">
     <value>Label31</value>
-  </data>
-  <data name="&gt;&gt;CheckBoxVISC.ZOrder" xml:space="preserve">
-    <value>17</value>
   </data>
   <data name="TextBoxVT1.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;Button13.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;Label37.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label24.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 13</value>
@@ -2272,14 +2179,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label20.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Button24.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
   <data name="Label39.Text" xml:space="preserve">
     <value>T1</value>
   </data>
-  <data name="&gt;&gt;Label43.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Button3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>368, 84</value>
   </data>
   <data name="Label21.Size" type="System.Drawing.Size, System.Drawing">
     <value>593, 57</value>
@@ -2296,6 +2200,9 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Label22.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="LabelWithDivider1.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
   <data name="Label43.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
   </data>
@@ -2311,14 +2218,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Button22.Location" type="System.Drawing.Point, System.Drawing">
     <value>368, 84</value>
   </data>
-  <data name="Panel16.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
   <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="Label37.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;Label36.Name" xml:space="preserve">
+    <value>Label36</value>
   </data>
   <data name="P2.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -2347,8 +2251,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Button6.Location" type="System.Drawing.Point, System.Drawing">
     <value>530, 84</value>
   </data>
-  <data name="&gt;&gt;Label12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label44.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;Label2.Name" xml:space="preserve">
     <value>Label2</value>
@@ -2356,14 +2260,14 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="TextBoxVT1.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 20</value>
   </data>
-  <data name="ComboBoxPC.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 66</value>
+  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 13</value>
   </data>
   <data name="Panel0.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;Label6.Name" xml:space="preserve">
-    <value>Label6</value>
+  <data name="&gt;&gt;Button17.Name" xml:space="preserve">
+    <value>Button17</value>
   </data>
   <data name="&gt;&gt;Label21.Parent" xml:space="preserve">
     <value>Panel11</value>
@@ -2377,8 +2281,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="DataGridView2.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 35</value>
   </data>
-  <data name="ComboBoxTC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>217, 21</value>
+  <data name="TextBoxStreamName.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="Label2.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -2392,11 +2296,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label23.Text" xml:space="preserve">
     <value>Pseudocomponentes</value>
   </data>
-  <data name="&gt;&gt;TextBoxTempCuts.Name" xml:space="preserve">
-    <value>TextBoxTempCuts</value>
+  <data name="&gt;&gt;Label37.Name" xml:space="preserve">
+    <value>Label37</value>
   </data>
-  <data name="Button27.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+  <data name="Button11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>449, 84</value>
   </data>
   <data name="&gt;&gt;Button27.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2404,7 +2308,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label40.Text" xml:space="preserve">
     <value>T2</value>
   </data>
-  <data name="&gt;&gt;Label36.Type" xml:space="preserve">
+  <data name="&gt;&gt;Label12.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label12.Parent" xml:space="preserve">
@@ -2416,8 +2320,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="CheckBoxVISC.Text" xml:space="preserve">
     <value>Viscosidade em duas temperaturas</value>
   </data>
-  <data name="&gt;&gt;P3.ZOrder" xml:space="preserve">
-    <value>7</value>
+  <data name="&gt;&gt;LabelWithDivider7.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="Label24.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 89</value>
@@ -2425,20 +2329,26 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Button14.Name" xml:space="preserve">
     <value>Button14</value>
   </data>
-  <data name="&gt;&gt;Button27.Name" xml:space="preserve">
-    <value>Button27</value>
-  </data>
-  <data name="&gt;&gt;TextBoxStreamName.Parent" xml:space="preserve">
-    <value>Panel15</value>
-  </data>
-  <data name="&gt;&gt;GraphComps.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="Panel8.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;P2.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;Label17.Name" xml:space="preserve">
-    <value>Label17</value>
+  <data name="&gt;&gt;Label34.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TextBoxTempCuts.Name" xml:space="preserve">
+    <value>TextBoxTempCuts</value>
+  </data>
+  <data name="&gt;&gt;Button18.Name" xml:space="preserve">
+    <value>Button18</value>
+  </data>
+  <data name="Column2.HeaderText" xml:space="preserve">
+    <value>Visc 2</value>
+  </data>
+  <data name="Label16.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 89</value>
   </data>
   <data name="Label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2446,11 +2356,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="RadioButtonGenOpt1.Text" xml:space="preserve">
     <value>Número de Pseudocomponentes</value>
   </data>
-  <data name="Column3.HeaderText" xml:space="preserve">
-    <value>Dens. 20/4</value>
-  </data>
-  <data name="&gt;&gt;Panel10.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="Label32.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Column2.Width" type="System.Int32, mscorlib">
     <value>57</value>
@@ -2476,17 +2383,26 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="Label24.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="Label22.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;Panel9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Label33.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Label20.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 13</value>
+  </data>
+  <data name="Label26.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;Button12.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label35.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Button24.Name" xml:space="preserve">
+    <value>Button24</value>
   </data>
   <data name="ComboBoxViscM.Items" xml:space="preserve">
     <value>Abbott (1971)</value>
@@ -2494,92 +2410,92 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label41.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="&gt;&gt;Panel5.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="Label41.Size" type="System.Drawing.Size, System.Drawing">
     <value>17, 13</value>
   </data>
   <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="Button23.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+  <data name="&gt;&gt;Label18.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="DataGridView1.Size" type="System.Drawing.Size, System.Drawing">
     <value>587, 305</value>
   </data>
-  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 24</value>
+  <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
+    <value>593, 57</value>
   </data>
   <data name="Label39.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="CheckBoxSG.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="&gt;&gt;Panel11.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;CheckBoxSG.Name" xml:space="preserve">
     <value>CheckBoxSG</value>
   </data>
-  <data name="&gt;&gt;Label14.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;DataGridView2.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="ComboBoxTC.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="Panel6.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
+  <data name="&gt;&gt;Label23.Name" xml:space="preserve">
+    <value>Label23</value>
   </data>
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 89</value>
   </data>
-  <data name="Label33.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 134</value>
+  <data name="Button6.Text" xml:space="preserve">
+    <value>Próximo &gt;</value>
   </data>
-  <data name="&gt;&gt;Column4.Name" xml:space="preserve">
-    <value>Column4</value>
+  <data name="ComboBoxBasis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
   </data>
   <data name="&gt;&gt;Label18.Parent" xml:space="preserve">
     <value>Panel9</value>
   </data>
-  <data name="&gt;&gt;Button17.Parent" xml:space="preserve">
-    <value>Panel11</value>
-  </data>
-  <data name="ComboBoxSG.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="ComboBoxAF.Items" xml:space="preserve">
+    <value>Lee-Kesler (1976)</value>
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>209, 16</value>
   </data>
-  <data name="ComboBoxBasis.Items1" xml:space="preserve">
-    <value>Molar</value>
+  <data name="Button21.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="TextBoxBulkD.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
+  <data name="&gt;&gt;ComboBoxViscM.Parent" xml:space="preserve">
+    <value>Panel14</value>
+  </data>
+  <data name="Label43.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 13</value>
   </data>
   <data name="&gt;&gt;ComboBoxTC.Parent" xml:space="preserve">
     <value>Panel14</value>
   </data>
-  <data name="Panel5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 357</value>
+  <data name="Label26.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
   </data>
   <data name="&gt;&gt;Label32.Name" xml:space="preserve">
     <value>Label32</value>
   </data>
-  <data name="Label44.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;Label3.Name" xml:space="preserve">
+    <value>Label3</value>
   </data>
   <data name="&gt;&gt;TextBoxStreamName.Name" xml:space="preserve">
     <value>TextBoxStreamName</value>
   </data>
+  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>550, 16</value>
+  </data>
   <data name="Label29.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 72</value>
   </data>
-  <data name="Label28.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 41</value>
-  </data>
-  <data name="LabelWithDivider8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 350</value>
+  <data name="&gt;&gt;Column4.Name" xml:space="preserve">
+    <value>Column4</value>
   </data>
   <data name="Panel1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -2590,14 +2506,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;ComboBoxBasis.Name" xml:space="preserve">
     <value>ComboBoxBasis</value>
   </data>
-  <data name="Button21.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
   <data name="Label30.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;Label37.Name" xml:space="preserve">
-    <value>Label37</value>
+  <data name="Label42.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="TextBoxBulkD.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 20</value>
@@ -2605,14 +2518,14 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Label19.Parent" xml:space="preserve">
     <value>Panel10</value>
   </data>
-  <data name="ComboBoxPC.Items2" xml:space="preserve">
-    <value>Farah (2006)</value>
+  <data name="Label36.Text" xml:space="preserve">
+    <value>Passo 7 - Resultados</value>
   </data>
   <data name="&gt;&gt;Label27.Parent" xml:space="preserve">
     <value>Panel14</value>
   </data>
-  <data name="&gt;&gt;Button4.Parent" xml:space="preserve">
-    <value>Panel3</value>
+  <data name="&gt;&gt;Button1.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="&gt;&gt;Button11.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -2632,11 +2545,14 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Panel0.Parent" xml:space="preserve">
     <value>P0</value>
   </data>
+  <data name="ComboBoxTC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>217, 21</value>
+  </data>
   <data name="ComboBoxPC.Size" type="System.Drawing.Size, System.Drawing">
     <value>217, 21</value>
   </data>
-  <data name="ComboBoxBasis.Items" xml:space="preserve">
-    <value>Liquid Volume</value>
+  <data name="&gt;&gt;Label33.Name" xml:space="preserve">
+    <value>Label33</value>
   </data>
   <data name="Column5.Width" type="System.Int32, mscorlib">
     <value>99</value>
@@ -2650,44 +2566,38 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Column5.Name" xml:space="preserve">
     <value>Column5</value>
   </data>
-  <data name="Panel9.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;Label19.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="RadioButtonGenOpt1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 39</value>
+  <data name="CheckBoxMW.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
-  <data name="LabelWithDivider8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 10</value>
-  </data>
-  <data name="&gt;&gt;Label36.Name" xml:space="preserve">
-    <value>Label36</value>
+  <data name="Panel15.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
   </data>
   <data name="&gt;&gt;ComboBoxAF.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ComboBoxViscM.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 191</value>
+  <data name="LabelWithDivider5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;Button12.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="&gt;&gt;P7.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
-  <data name="&gt;&gt;Label40.Name" xml:space="preserve">
-    <value>Label40</value>
+  <data name="TextBoxNumberOfPseudos.Text" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="Panel13.Size" type="System.Drawing.Size, System.Drawing">
     <value>614, 119</value>
   </data>
-  <data name="&gt;&gt;Label38.Name" xml:space="preserve">
-    <value>Label38</value>
+  <data name="Label18.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label43.Text" xml:space="preserve">
     <value>Grau API</value>
   </data>
   <data name="Label14.Text" xml:space="preserve">
     <value>Passo 3 - Gráfico</value>
-  </data>
-  <data name="Column6.HeaderText" xml:space="preserve">
-    <value>SRK VShift (ci/bi)</value>
   </data>
   <data name="ComboBoxBasis.Location" type="System.Drawing.Point, System.Drawing">
     <value>105, 157</value>
@@ -2704,8 +2614,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Button5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 13</value>
+  <data name="Button16.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
   </data>
   <data name="&gt;&gt;Panel0.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2719,11 +2629,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Column6.Name" xml:space="preserve">
     <value>Column6</value>
   </data>
-  <data name="Button3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>368, 84</value>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label37.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="dens.HeaderText" xml:space="preserve">
+    <value>Densidade</value>
   </data>
   <data name="Button18.Location" type="System.Drawing.Point, System.Drawing">
     <value>530, 84</value>
@@ -2740,8 +2650,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;LabelWithDivider2.Parent" xml:space="preserve">
     <value>P1</value>
   </data>
-  <data name="P4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="&gt;&gt;TextBoxTempCuts.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label39.Name" xml:space="preserve">
     <value>Label39</value>
@@ -2755,17 +2665,20 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Label31.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;Label25.Name" xml:space="preserve">
+    <value>Label25</value>
+  </data>
   <data name="TextBoxVT2.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 20</value>
   </data>
   <data name="DataGridView1.RowHeadersWidth" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
-  <data name="Panel14.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="CheckBoxSG.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
-  <data name="Button7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;Panel9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button22.Parent" xml:space="preserve">
     <value>Panel15</value>
@@ -2783,13 +2696,13 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>True</value>
   </data>
   <data name="&gt;&gt;Panel15.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
-  <data name="&gt;&gt;DataGridView1.Parent" xml:space="preserve">
-    <value>Panel6</value>
+  <data name="Button24.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
   </data>
-  <data name="Label10.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
+  <data name="ComboBoxViscM.Location" type="System.Drawing.Point, System.Drawing">
+    <value>119, 191</value>
   </data>
   <data name="&gt;&gt;Panel13.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -2797,20 +2710,23 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Button26.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;Panel10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Panel16.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
   </data>
-  <data name="&gt;&gt;Button26.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Button13.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>593, 57</value>
   </data>
   <data name="&gt;&gt;Panel11.Name" xml:space="preserve">
     <value>Panel11</value>
   </data>
-  <data name="Label43.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 225</value>
+  <data name="&gt;&gt;Label36.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Panel5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Panel7.Parent" xml:space="preserve">
+    <value>P3</value>
   </data>
   <data name="LabelWithDivider6.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -2818,8 +2734,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;visc1.Name" xml:space="preserve">
     <value>visc1</value>
   </data>
-  <data name="DataGridViewTextBoxColumn3.HeaderText" xml:space="preserve">
-    <value>MM</value>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn2.Name" xml:space="preserve">
+    <value>DataGridViewTextBoxColumn2</value>
   </data>
   <data name="DataGridView2.Size" type="System.Drawing.Size, System.Drawing">
     <value>587, 291</value>
@@ -2827,8 +2743,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;P3.Name" xml:space="preserve">
     <value>P3</value>
   </data>
-  <data name="&gt;&gt;ComboBoxPC.Name" xml:space="preserve">
-    <value>ComboBoxPC</value>
+  <data name="Label38.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 199</value>
   </data>
   <data name="&gt;&gt;TextBoxBulkMW.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -2860,17 +2776,23 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Label9.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="RadioButtonGenOpt1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="CheckBox1.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;Button19.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Button11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+  <data name="&gt;&gt;Button23.Parent" xml:space="preserve">
+    <value>Panel15</value>
   </data>
   <data name="&gt;&gt;Button18.Parent" xml:space="preserve">
     <value>Panel11</value>
   </data>
-  <data name="LabelWithDivider5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="DataGridViewTextBoxColumn6.Width" type="System.Int32, mscorlib">
+    <value>56</value>
   </data>
   <data name="Button7.Location" type="System.Drawing.Point, System.Drawing">
     <value>368, 84</value>
@@ -2884,35 +2806,32 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label25.Text" xml:space="preserve">
     <value>Selecione os métodos/correlações para o cálculo das propriedades dos pseudocomponentes.</value>
   </data>
-  <data name="Panel15.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 357</value>
-  </data>
   <data name="Button3.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 89</value>
+  <data name="LabelWithDivider8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>614, 10</value>
   </data>
   <data name="DataGridView1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="LabelWithDivider4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;Column1.Name" xml:space="preserve">
+    <value>Column1</value>
   </data>
   <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 13</value>
   </data>
-  <data name="Label41.Location" type="System.Drawing.Point, System.Drawing">
-    <value>347, 132</value>
+  <data name="LabelWithDivider1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>614, 10</value>
+  </data>
+  <data name="Panel14.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;Button20.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="TextBoxNumberOfPseudos.Text" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="Button27.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 23</value>
+  <data name="&gt;&gt;temp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Button8.Location" type="System.Drawing.Point, System.Drawing">
     <value>449, 84</value>
@@ -2929,35 +2848,44 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Button24.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="ComboBoxPC.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+  <data name="&gt;&gt;Panel9.Name" xml:space="preserve">
+    <value>Panel9</value>
   </data>
   <data name="Label41.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="Label41.Location" type="System.Drawing.Point, System.Drawing">
+    <value>347, 132</value>
+  </data>
   <data name="&gt;&gt;CheckBoxADJZRA.Name" xml:space="preserve">
     <value>CheckBoxADJZRA</value>
   </data>
-  <data name="&gt;&gt;ComboBoxTC.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Label46.Name" xml:space="preserve">
+    <value>Label46</value>
   </data>
-  <data name="ComboBoxSG.Items" xml:space="preserve">
-    <value>Riazi-Al-Sahhaf (1996)</value>
+  <data name="Label33.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 134</value>
   </data>
   <data name="&gt;&gt;Button10.Parent" xml:space="preserve">
     <value>Panel7</value>
   </data>
+  <data name="P5.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
   <data name="Label3.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="P7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="&gt;&gt;Panel7.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="Label37.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
     <value>593, 57</value>
   </data>
-  <data name="Button11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>449, 84</value>
+  <data name="Panel11.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
   <data name="ComboBoxDistMethod.Items2" xml:space="preserve">
     <value>Destilação diferencial sem refluxo a vácuo (ASTM D1160)</value>
@@ -2983,14 +2911,14 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label27.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;Button17.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button12.Name" xml:space="preserve">
     <value>Button12</value>
   </data>
-  <data name="ComboBoxTC.Items2" xml:space="preserve">
-    <value>Lee-Kesler (1976)</value>
+  <data name="TextBoxNumberOfPseudos.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
   <data name="Button20.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3000,6 +2928,9 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Clique em 'Próximo' para continuar.</value>
+  </data>
+  <data name="Panel8.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="Label15.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
@@ -3016,14 +2947,14 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label36.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 357</value>
+  <data name="Button23.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
   </data>
-  <data name="&gt;&gt;LabelWithDivider5.Parent" xml:space="preserve">
-    <value>P4</value>
+  <data name="ComboBoxPC.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
   </data>
-  <data name="Panel15.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="&gt;&gt;Label24.Parent" xml:space="preserve">
+    <value>Panel13</value>
   </data>
   <data name="Panel7.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 357</value>
@@ -3037,14 +2968,17 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Label20.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="&gt;&gt;Label17.Name" xml:space="preserve">
+    <value>Label17</value>
+  </data>
   <data name="&gt;&gt;Button22.Name" xml:space="preserve">
     <value>Button22</value>
   </data>
-  <data name="Button10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="RadioButtonGenOpt2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 4</value>
+  <data name="Button22.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label32.Text" xml:space="preserve">
     <value>Viscosidade</value>
@@ -3064,26 +2998,23 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label11.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;RadioButtonGenOpt1.Name" xml:space="preserve">
-    <value>RadioButtonGenOpt1</value>
-  </data>
-  <data name="CheckBoxMW.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="Panel15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>614, 119</value>
   </data>
   <data name="Panel16.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;Label32.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label36.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 16</value>
   </data>
   <data name="Label24.Text" xml:space="preserve">
     <value>Clique em 'Próximo' para continuar.</value>
   </data>
+  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 24</value>
+  </data>
   <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
     <value>Panel3</value>
-  </data>
-  <data name="Button22.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="Button18.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3100,8 +3031,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Button3.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="&gt;&gt;Label30.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="ComboBoxSG.Items" xml:space="preserve">
+    <value>Riazi-Al-Sahhaf (1996)</value>
   </data>
   <data name="LabelWithDivider2.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 350</value>
@@ -3110,7 +3041,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel16.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="Label38.Text" xml:space="preserve">
     <value>Propriedades da Amostra</value>
@@ -3121,17 +3052,17 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Button15.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;Label46.Parent" xml:space="preserve">
-    <value>Panel16</value>
+  <data name="Label35.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
-  <data name="Label26.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 4</value>
+  <data name="Button7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="ComboBoxTC.Items2" xml:space="preserve">
+    <value>Lee-Kesler (1976)</value>
   </data>
   <data name="&gt;&gt;Button27.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="Label37.Text" xml:space="preserve">
-    <value>Resultados</value>
   </data>
   <data name="&gt;&gt;DataGridView1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3139,14 +3070,14 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;LabelWithDivider4.Type" xml:space="preserve">
     <value>System.Windows.Forms.LabelWithDivider, LabelWithDivider, Version=1.1.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;Label33.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="ComboBoxSG.Location" type="System.Drawing.Point, System.Drawing">
+    <value>119, 128</value>
   </data>
   <data name="&gt;&gt;visc1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Button6.Text" xml:space="preserve">
-    <value>Próximo &gt;</value>
+  <data name="&gt;&gt;Panel10.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="TextBoxNumberOfPseudos.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -3154,8 +3085,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="CheckBoxMW.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 70</value>
   </data>
-  <data name="Label31.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 13</value>
+  <data name="&gt;&gt;RadioButtonD20.Name" xml:space="preserve">
+    <value>RadioButtonD20</value>
+  </data>
+  <data name="&gt;&gt;CheckBoxMW.Parent" xml:space="preserve">
+    <value>Panel4</value>
   </data>
   <data name="Label31.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3163,26 +3097,26 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Panel9.Parent" xml:space="preserve">
     <value>P4</value>
   </data>
-  <data name="Label20.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="Label35.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;Panel8.Parent" xml:space="preserve">
     <value>P3</value>
   </data>
-  <data name="ComboBoxBasis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 21</value>
+  <data name="RadioButtonGenOpt2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>161, 17</value>
   </data>
-  <data name="TextBoxVT2.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+  <data name="&gt;&gt;Label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;RadioButtonD60.Name" xml:space="preserve">
-    <value>RadioButtonD60</value>
+  <data name="CheckBoxADJZRA.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
   </data>
-  <data name="&gt;&gt;GraphCurves.Type" xml:space="preserve">
-    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="Panel0.Size" type="System.Drawing.Size, System.Drawing">
+    <value>614, 355</value>
   </data>
-  <data name="CheckBoxVISC.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;P0.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ComboBoxAF.Location" type="System.Drawing.Point, System.Drawing">
     <value>119, 97</value>
@@ -3199,8 +3133,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="GraphComps.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="RadioButtonD20.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+  <data name="&gt;&gt;LabelWithDivider8.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="Label38.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3220,26 +3154,29 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Label38.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Panel8.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="Column3.Width" type="System.Int32, mscorlib">
+    <value>79</value>
+  </data>
+  <data name="Label26.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 4</value>
+  </data>
+  <data name="Panel0.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
-  <data name="&gt;&gt;Label7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Button18.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="Panel14.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
   </data>
   <data name="&gt;&gt;DataGridView1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="Panel12.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="Label32.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
   </data>
   <data name="&gt;&gt;LabelWithDivider2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="Label27.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 12</value>
+  <data name="&gt;&gt;LabelWithDivider5.Parent" xml:space="preserve">
+    <value>P4</value>
   </data>
   <data name="Panel14.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -3247,20 +3184,17 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Button21.Name" xml:space="preserve">
     <value>Button21</value>
   </data>
-  <data name="&gt;&gt;ComboBoxSG.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="Button14.Text" xml:space="preserve">
     <value>&lt; Anterior</value>
   </data>
-  <data name="&gt;&gt;Panel1.Name" xml:space="preserve">
-    <value>Panel1</value>
+  <data name="Label43.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 225</value>
   </data>
   <data name="CheckBoxADJAF.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 231</value>
   </data>
-  <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+  <data name="Label37.Text" xml:space="preserve">
+    <value>Resultados</value>
   </data>
   <data name="Label38.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3271,17 +3205,23 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Label6.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 4</value>
+  </data>
   <data name="&gt;&gt;Panel5.Name" xml:space="preserve">
     <value>Panel5</value>
   </data>
-  <data name="Panel0.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Stretch</value>
+  <data name="&gt;&gt;TextBoxNumberOfPseudos.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;TextBoxStreamName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label34.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;Panel9.Name" xml:space="preserve">
-    <value>Panel9</value>
+  <data name="Column1.Width" type="System.Int32, mscorlib">
+    <value>57</value>
   </data>
   <data name="&gt;&gt;Label4.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -3289,11 +3229,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Label39.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Column6.Width" type="System.Int32, mscorlib">
-    <value>105</value>
-  </data>
   <data name="&gt;&gt;LabelWithDivider4.Name" xml:space="preserve">
     <value>LabelWithDivider4</value>
+  </data>
+  <data name="Panel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>614, 119</value>
   </data>
   <data name="&gt;&gt;Label39.ZOrder" xml:space="preserve">
     <value>15</value>
@@ -3304,17 +3244,17 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label33.Text" xml:space="preserve">
-    <value>Densidade</value>
+  <data name="Button27.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 23</value>
   </data>
-  <data name="&gt;&gt;P1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Label35.Parent" xml:space="preserve">
+    <value>Panel15</value>
   </data>
-  <data name="Label10.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;CheckBoxVISC.ZOrder" xml:space="preserve">
+    <value>17</value>
   </data>
-  <data name="&gt;&gt;Label46.Name" xml:space="preserve">
-    <value>Label46</value>
+  <data name="&gt;&gt;TextBoxBulkMW.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ComboBoxMW.Items2" xml:space="preserve">
     <value>Lee-Kesler (1974)</value>
@@ -3334,8 +3274,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;GraphCurves.Name" xml:space="preserve">
     <value>GraphCurves</value>
   </data>
-  <data name="&gt;&gt;P7.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;Label34.Name" xml:space="preserve">
+    <value>Label34</value>
   </data>
   <data name="&gt;&gt;Label8.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3345,6 +3285,9 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   </data>
   <data name="Panel7.Size" type="System.Drawing.Size, System.Drawing">
     <value>614, 119</value>
+  </data>
+  <data name="&gt;&gt;GraphCurves.Parent" xml:space="preserve">
+    <value>Panel8</value>
   </data>
   <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 89</value>
@@ -3361,14 +3304,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="Label46.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 335</value>
   </data>
-  <data name="&gt;&gt;Panel5.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="Label25.Size" type="System.Drawing.Size, System.Drawing">
+    <value>593, 57</value>
   </data>
   <data name="P7.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -3385,14 +3325,17 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="P2.Size" type="System.Drawing.Size, System.Drawing">
     <value>614, 476</value>
   </data>
-  <data name="LabelWithDivider1.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="&gt;&gt;Button22.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="Label44.Text" xml:space="preserve">
     <value>Massa Molar</value>
   </data>
   <data name="&gt;&gt;TextBoxBulkD.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="LabelWithDivider4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;Label19.Name" xml:space="preserve">
     <value>Label19</value>
@@ -3407,7 +3350,7 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;P6.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;P2.Parent" xml:space="preserve">
     <value>$this</value>
@@ -3436,35 +3379,35 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label44.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn2.Name" xml:space="preserve">
-    <value>DataGridViewTextBoxColumn2</value>
+  <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 24</value>
   </data>
-  <data name="Label37.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 12</value>
+  <data name="&gt;&gt;Label8.Name" xml:space="preserve">
+    <value>Label8</value>
   </data>
-  <data name="Panel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 119</value>
+  <data name="Label20.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
   <data name="&gt;&gt;TextBoxKAPI.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;Label35.Name" xml:space="preserve">
-    <value>Label35</value>
+  <data name="Label14.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 4</value>
   </data>
   <data name="&gt;&gt;Button4.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label7.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  <data name="Label36.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
   </data>
-  <data name="&gt;&gt;temp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Panel5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button11.Name" xml:space="preserve">
     <value>Button11</value>
   </data>
-  <data name="DataGridViewTextBoxColumn4.Width" type="System.Int32, mscorlib">
-    <value>45</value>
+  <data name="Panel6.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="P5.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -3474,6 +3417,9 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   </data>
   <data name="Button2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;mm.Name" xml:space="preserve">
     <value>mm</value>
@@ -3493,20 +3439,20 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
     <value>Panel1</value>
   </data>
-  <data name="&gt;&gt;ComboBoxViscM.Name" xml:space="preserve">
-    <value>ComboBoxViscM</value>
+  <data name="&gt;&gt;Label30.Parent" xml:space="preserve">
+    <value>Panel14</value>
   </data>
-  <data name="Button7.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="Label27.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
   </data>
   <data name="&gt;&gt;P5.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;Panel6.Parent" xml:space="preserve">
     <value>P2</value>
   </data>
-  <data name="&gt;&gt;Label9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label33.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label40.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -3514,11 +3460,14 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Button10.Location" type="System.Drawing.Point, System.Drawing">
     <value>368, 84</value>
   </data>
-  <data name="Panel10.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="ComboBoxBasis.Items" xml:space="preserve">
+    <value>Liquid Volume</value>
   </data>
   <data name="Button1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
+  </data>
+  <data name="&gt;&gt;Label30.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 13</value>
@@ -3556,11 +3505,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Panel7.Name" xml:space="preserve">
     <value>Panel7</value>
   </data>
-  <data name="DataGridViewTextBoxColumn3.Width" type="System.Int32, mscorlib">
-    <value>50</value>
+  <data name="&gt;&gt;Column2.Name" xml:space="preserve">
+    <value>Column2</value>
   </data>
-  <data name="Label35.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="Panel13.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
   </data>
   <data name="RadioButtonGenOpt2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3580,14 +3529,14 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label45.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
   </data>
-  <data name="Label18.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="RadioButtonGenOpt1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 39</value>
   </data>
   <data name="&gt;&gt;Label31.Parent" xml:space="preserve">
     <value>Panel14</value>
   </data>
-  <data name="Panel15.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Bottom</value>
+  <data name="&gt;&gt;Button10.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;Label28.ZOrder" xml:space="preserve">
     <value>13</value>
@@ -3598,17 +3547,23 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label45.Size" type="System.Drawing.Size, System.Drawing">
     <value>37, 13</value>
   </data>
-  <data name="Label37.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;Button17.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
     <value>Panel1</value>
   </data>
-  <data name="TextBoxStreamName.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="&gt;&gt;P1.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="Button26.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
+  </data>
+  <data name="&gt;&gt;Label9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;Label14.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3616,20 +3571,26 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="TextBoxTempCuts.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="Button4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+  <data name="&gt;&gt;Panel1.Name" xml:space="preserve">
+    <value>Panel1</value>
+  </data>
+  <data name="&gt;&gt;Label29.ZOrder" xml:space="preserve">
+    <value>11</value>
   </data>
   <data name="Label26.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;Panel7.Parent" xml:space="preserve">
-    <value>P3</value>
+  <data name="&gt;&gt;Button8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Visc 1</value>
   </data>
   <data name="P3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
+  </data>
+  <data name="TextBoxBulkD.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
   </data>
   <data name="Label37.Size" type="System.Drawing.Size, System.Drawing">
     <value>70, 13</value>
@@ -3640,11 +3601,14 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;GraphComps.Type" xml:space="preserve">
     <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
+  <data name="Button10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="&gt;&gt;Button24.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;Label29.ZOrder" xml:space="preserve">
-    <value>11</value>
+  <data name="&gt;&gt;DataGridView1.Parent" xml:space="preserve">
+    <value>Panel6</value>
   </data>
   <data name="LabelWithDivider3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3652,23 +3616,23 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="ComboBoxViscM.Items1" xml:space="preserve">
     <value>Beg-Amin (1979)</value>
   </data>
-  <data name="&gt;&gt;Label2.Type" xml:space="preserve">
+  <data name="&gt;&gt;Label15.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Button22.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="&gt;&gt;CheckBoxADJZRA.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>127, 16</value>
+  <data name="&gt;&gt;Button27.Parent" xml:space="preserve">
+    <value>Panel3</value>
   </data>
-  <data name="Label14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 4</value>
+  <data name="&gt;&gt;Label35.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="TextBoxBulkMW.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 20</value>
   </data>
-  <data name="&gt;&gt;GraphCurves.Parent" xml:space="preserve">
-    <value>Panel8</value>
+  <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
   </data>
   <data name="&gt;&gt;Button11.Parent" xml:space="preserve">
     <value>Panel7</value>
@@ -3676,8 +3640,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label28.Size" type="System.Drawing.Size, System.Drawing">
     <value>101, 13</value>
   </data>
-  <data name="Label26.Text" xml:space="preserve">
-    <value>Passo 6 - Métodos e Correlações</value>
+  <data name="RadioButtonD20.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>593, 57</value>
@@ -3685,11 +3649,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label42.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
-  <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;Label14.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
-  <data name="P4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="Panel12.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;Label37.Parent" xml:space="preserve">
     <value>Panel16</value>
@@ -3715,14 +3679,17 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Panel4.Name" xml:space="preserve">
     <value>Panel4</value>
   </data>
-  <data name="DataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
-    <value>Nome</value>
+  <data name="Label37.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
-  <data name="Button24.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;TextBoxVT2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Panel15.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="Button14.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>DCCharacterizationWizard</value>
@@ -3730,11 +3697,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Panel15.Parent" xml:space="preserve">
     <value>P7</value>
   </data>
-  <data name="CheckBoxADJAF.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="CheckBoxVISC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 131</value>
   </data>
-  <data name="ComboBoxPC.Items" xml:space="preserve">
-    <value>Riazi-Daubert (1985)</value>
+  <data name="Label31.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 13</value>
   </data>
   <data name="&gt;&gt;ComboBoxMW.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -3745,8 +3712,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;DataGridView1.Name" xml:space="preserve">
     <value>DataGridView1</value>
   </data>
-  <data name="TextBoxBulkD.Location" type="System.Drawing.Point, System.Drawing">
-    <value>164, 222</value>
+  <data name="Label7.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="&gt;&gt;Label24.Name" xml:space="preserve">
+    <value>Label24</value>
   </data>
   <data name="DataGridView2.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -3754,26 +3724,20 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;RadioButtonD60.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;mm.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;LabelWithDivider6.Parent" xml:space="preserve">
     <value>P5</value>
   </data>
   <data name="Button6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;Button18.Name" xml:space="preserve">
-    <value>Button18</value>
+  <data name="&gt;&gt;mm.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Button13.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Button22.Text" xml:space="preserve">
-    <value>Cancelar</value>
-  </data>
-  <data name="&gt;&gt;Label27.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Button27.Name" xml:space="preserve">
+    <value>Button27</value>
   </data>
   <data name="&gt;&gt;Column5.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3781,26 +3745,26 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Button3.Text" xml:space="preserve">
     <value>Cancelar</value>
   </data>
-  <data name="&gt;&gt;ComboBoxSG.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="Label30.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Button23.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;TextBoxNumberOfPseudos.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="Panel6.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 13</value>
   </data>
-  <data name="LabelWithDivider4.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="Panel8.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
   </data>
   <data name="&gt;&gt;Panel12.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Panel6.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3808,20 +3772,26 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Label21.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;P0.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 24</value>
   </data>
   <data name="P1.Size" type="System.Drawing.Size, System.Drawing">
     <value>614, 476</value>
   </data>
-  <data name="Label33.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;Button5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label25.Name" xml:space="preserve">
-    <value>Label25</value>
+  <data name="TextBoxKAPI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 20</value>
   </data>
-  <data name="Label46.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;Button14.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="Button8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="&gt;&gt;P4.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="&gt;&gt;LabelWithDivider4.Parent" xml:space="preserve">
     <value>P3</value>
@@ -3835,6 +3805,9 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label19.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 12</value>
   </data>
+  <data name="Button7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="Label32.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 13</value>
   </data>
@@ -3847,8 +3820,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Panel10.Size" type="System.Drawing.Size, System.Drawing">
     <value>614, 358</value>
   </data>
-  <data name="CheckBoxVISC.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 131</value>
+  <data name="&gt;&gt;GraphCurves.Type" xml:space="preserve">
+    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="Panel5.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -3856,8 +3829,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label36.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;P4.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="ComboBoxMW.Items3" xml:space="preserve">
+    <value>Farah (2006)</value>
+  </data>
+  <data name="Panel10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
   <data name="Label12.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3865,8 +3841,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Label35.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 24</value>
+  <data name="Label10.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
   </data>
   <data name="&gt;&gt;Panel6.Name" xml:space="preserve">
     <value>Panel6</value>
@@ -3880,20 +3856,29 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="ComboBoxMW.Items" xml:space="preserve">
     <value>Winn (1956)</value>
   </data>
-  <data name="&gt;&gt;Panel5.Parent" xml:space="preserve">
-    <value>P2</value>
+  <data name="Column3.HeaderText" xml:space="preserve">
+    <value>Dens. 20/4</value>
   </data>
-  <data name="CheckBox1.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="Button21.Location" type="System.Drawing.Point, System.Drawing">
+    <value>530, 84</value>
   </data>
   <data name="Label46.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="CheckBoxMW.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;Label32.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Label13.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;Label26.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="Label20.Text" xml:space="preserve">
     <value>Clique em 'Próximo' para continuar.</value>
+  </data>
+  <data name="Label41.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
   </data>
   <data name="Button8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3902,43 +3887,43 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
     <value>Panel12</value>
   </data>
   <data name="&gt;&gt;P1.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>0</value>
   </data>
-  <data name="Label30.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="Label6.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
   </data>
   <data name="LabelWithDivider3.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
+  <data name="Label10.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="Button16.Location" type="System.Drawing.Point, System.Drawing">
     <value>368, 84</value>
   </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn5.Name" xml:space="preserve">
-    <value>DataGridViewTextBoxColumn5</value>
+  <data name="Label37.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
   </data>
   <data name="Button9.Text" xml:space="preserve">
     <value>Próximo &gt;</value>
   </data>
-  <data name="ComboBoxMW.Items3" xml:space="preserve">
-    <value>Farah (2006)</value>
+  <data name="P0.Size" type="System.Drawing.Size, System.Drawing">
+    <value>614, 476</value>
   </data>
   <data name="Label31.Text" xml:space="preserve">
     <value>Massa Molar</value>
   </data>
-  <data name="&gt;&gt;Label24.Name" xml:space="preserve">
-    <value>Label24</value>
+  <data name="Label30.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
-  <data name="&gt;&gt;Panel8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Panel14.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
+  <data name="Label29.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 13</value>
   </data>
   <data name="&gt;&gt;Label11.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label42.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
+    <value>127, 16</value>
   </data>
   <data name="Button7.Text" xml:space="preserve">
     <value>Cancelar</value>
@@ -3946,14 +3931,14 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label19.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;Label15.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;GraphComps.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="P2.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="TextBoxKAPI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 20</value>
+  <data name="ComboBoxSG.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
   </data>
   <data name="&gt;&gt;Button26.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -3976,8 +3961,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;ComboBoxBasis.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Panel12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 358</value>
+  <data name="&gt;&gt;Label33.Parent" xml:space="preserve">
+    <value>Panel14</value>
   </data>
   <data name="Label19.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3985,17 +3970,20 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="DataGridViewTextBoxColumn2.Width" type="System.Int32, mscorlib">
     <value>51</value>
   </data>
+  <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 89</value>
+  </data>
   <data name="&gt;&gt;Panel12.Name" xml:space="preserve">
     <value>Panel12</value>
   </data>
-  <data name="&gt;&gt;Button8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Button25.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 23</value>
   </data>
   <data name="&gt;&gt;Label44.Name" xml:space="preserve">
     <value>Label44</value>
   </data>
-  <data name="CheckBoxADJZRA.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
+  <data name="ComboBoxMW.Size" type="System.Drawing.Size, System.Drawing">
+    <value>217, 21</value>
   </data>
   <data name="&gt;&gt;Label44.Parent" xml:space="preserve">
     <value>Panel4</value>
@@ -4009,8 +3997,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="LabelWithDivider6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;dens.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Button12.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="Label34.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 90</value>
@@ -4021,26 +4009,41 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 13</value>
   </data>
+  <data name="TextBoxVT1.Text" xml:space="preserve">
+    <value>100</value>
+  </data>
   <data name="&gt;&gt;Label20.Name" xml:space="preserve">
     <value>Label20</value>
   </data>
   <data name="Panel4.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="Panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 357</value>
+  </data>
   <data name="&gt;&gt;Button13.Name" xml:space="preserve">
     <value>Button13</value>
   </data>
-  <data name="LabelWithDivider1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>614, 10</value>
+  <data name="&gt;&gt;Label6.Name" xml:space="preserve">
+    <value>Label6</value>
   </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn3.Name" xml:space="preserve">
-    <value>DataGridViewTextBoxColumn3</value>
+  <data name="&gt;&gt;Label12.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="CheckBoxADJAF.Text" xml:space="preserve">
+    <value>Ajustar Fatores Acêntricos para equalizar PEVs (entre Correlação e Pacote de Propriedades)</value>
+  </data>
+  <data name="TextBoxVT2.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="LabelWithDivider4.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="Button7.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;Label11.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn6.HeaderText" xml:space="preserve">
-    <value>F. Ac.</value>
   </data>
   <data name="&gt;&gt;Button22.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -4051,14 +4054,11 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="TextBoxBulkMW.Location" type="System.Drawing.Point, System.Drawing">
     <value>164, 248</value>
   </data>
-  <data name="&gt;&gt;Button22.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
   <data name="&gt;&gt;Label38.Parent" xml:space="preserve">
     <value>Panel4</value>
   </data>
-  <data name="&gt;&gt;Button25.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;Button17.Parent" xml:space="preserve">
+    <value>Panel11</value>
   </data>
   <data name="&gt;&gt;Panel0.Name" xml:space="preserve">
     <value>Panel0</value>
@@ -4066,8 +4066,8 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="Label9.Text" xml:space="preserve">
     <value>Entre com os dados experimentais em função da fração volumétrica vaporizada. Para cada curva, são necessários dados em pelo menos cinco temperaturas diferentes.</value>
   </data>
-  <data name="&gt;&gt;RadioButtonD20.Name" xml:space="preserve">
-    <value>RadioButtonD20</value>
+  <data name="&gt;&gt;Label45.Parent" xml:space="preserve">
+    <value>Panel4</value>
   </data>
   <data name="&gt;&gt;Label27.ZOrder" xml:space="preserve">
     <value>14</value>
@@ -4075,9 +4075,6 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <data name="&gt;&gt;Label17.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>en</value>
-  </metadata>
   <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -4087,13 +4084,16 @@ Se você possui dados de densidade absoluta e/ou de massa molar da amostra como 
   <metadata name="Column2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="temp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="mm.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="mm.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>en</value>
+  </metadata>
+  <metadata name="temp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="Column6.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

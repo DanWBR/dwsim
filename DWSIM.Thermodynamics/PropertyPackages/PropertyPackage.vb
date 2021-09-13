@@ -537,8 +537,12 @@ Namespace PropertyPackages
                             Case ForcedPhase.None
                                 Return GetFlash()
                             Case ForcedPhase.GlobalDef
-                                If CurrentMaterialStream.Flowsheet.FlowsheetOptions.ForceStreamPhase = ForcedPhase.None Then
-                                    Return GetFlash()
+                                If CurrentMaterialStream.Flowsheet IsNot Nothing Then
+                                    If CurrentMaterialStream.Flowsheet.FlowsheetOptions.ForceStreamPhase = ForcedPhase.None Then
+                                        Return GetFlash()
+                                    Else
+                                        Return New ForcedPhaseFlash() With {.ForcePhase = CurrentMaterialStream.Flowsheet.FlowsheetOptions.ForceStreamPhase}
+                                    End If
                                 Else
                                     Return New ForcedPhaseFlash() With {.ForcePhase = CurrentMaterialStream.Flowsheet.FlowsheetOptions.ForceStreamPhase}
                                 End If

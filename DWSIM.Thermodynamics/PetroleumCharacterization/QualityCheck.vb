@@ -250,11 +250,13 @@ Public Class QualityCheck
         Dim co2 = UI.Shared.Common.GetDefaultContainer()
         co2.Tag = "Pseudocompound Properties"
 
-        Dim myform = UI.Shared.Common.GetDefaultTabbedForm("Petroleum Characterization Quality Check", 750, 575, {co1, co2})
+        Dim myform = UI.Shared.Common.GetDefaultTabbedForm("Petroleum Characterization Quality Check", 750, 600, {co1, co2})
 
         co1.CreateAndAddLabelRow("Quality Check Report")
         co1.CreateAndAddMultilineMonoSpaceTextBoxRow(_report.ToString, 400, True, Nothing)
-        co1.CreateAndAddLabelRow2("Analyze the report and the properties of the generated pseudocompounds. Click 'Yes' if you want to proceed adding the compounds to the simulation. If you're not satisfied with the generated properties, click 'No', select a different set of property methods and parameters and try again.")
+        co1.CreateAndAddLabelRow2("Analyze the report and the properties of the generated pseudocompounds.")
+        co1.CreateAndAddLabelRow2("Click 'Yes' if you want to proceed adding the compounds to the simulation.")
+        co1.CreateAndAddLabelRow2("If you're not satisfied with the generated properties, click 'No', select a different set of property methods and parameters and try again.")
         co1.CreateAndAddLabelAndTwoButtonsRow("", "No", Nothing, "Yes", Nothing,
                                               Sub()
                                                   _dlgresult = DialogResult.No
@@ -265,8 +267,7 @@ Public Class QualityCheck
                                                   myform.Close()
                                               End Sub)
 
-
-        co2.CreateAndAddLabelRow("Pseudocompounds")
+        co2.CreateAndAddLabelRow3("Pseudocompounds")
 
         For Each c In _compounds
             co2.CreateAndAddLabelAndButtonRow(c.Name, "View Properties",
@@ -276,10 +277,14 @@ Public Class QualityCheck
                                               End Sub)
         Next
 
+        _dlgresult = DialogResult.No
+
+        AddHandler myform.Closed, Sub()
+                                      If _dlgresult = DialogResult.Yes Then positiveanswer.Invoke
+                                  End Sub
+
         myform.Topmost = True
         myform.Show()
-
-        AddHandler myform.Closed, Sub() If _dlgresult = DialogResult.Yes Then positiveanswer.Invoke
 
     End Function
 

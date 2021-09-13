@@ -626,7 +626,7 @@ Public Class DCCharacterizationWizard
         Dim dfit As New Utilities.PetroleumCharacterization.Methods.DensityFitting
         Dim prvsfit As New Utilities.PetroleumCharacterization.Methods.PRVSFitting
         Dim srkvsfit As New Utilities.PetroleumCharacterization.Methods.SRKVSFitting
-        Dim nbpfit As New Utilities.PetroleumCharacterization.Methods.NBPFitting
+        Dim nbpfit As New Utilities.PetroleumCharacterization.Methods.NBPFitting With {.Flowsheet = form}
         Dim tms As New Streams.MaterialStream("", "")
         Dim pp As PropertyPackages.PropertyPackage
         Dim fzra, fw, fprvs, fsrkvs As Double
@@ -774,6 +774,11 @@ Public Class DCCharacterizationWizard
         ms.SetFlowsheet(form)
         If form.Options.PropertyPackages.Count > 0 Then
             ms.PropertyPackage = form.Options.SelectedPropertyPackage
+            If TypeOf ms.PropertyPackage Is PropertyPackages.PengRobinsonPropertyPackage Then
+                DirectCast(ms.PropertyPackage, PropertyPackages.PengRobinsonPropertyPackage).m_pr.BIPChanged = True
+            ElseIf TypeOf ms.PropertyPackage Is PropertyPackages.SRKPropertyPackage Then
+                DirectCast(ms.PropertyPackage, PropertyPackages.SRKPropertyPackage).m_pr.BIPChanged = True
+            End If
         Else
             ms.PropertyPackage = New PropertyPackages.PengRobinsonPropertyPackage()
         End If

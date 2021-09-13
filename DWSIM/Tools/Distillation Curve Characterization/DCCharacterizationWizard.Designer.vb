@@ -160,6 +160,15 @@ Partial Class DCCharacterizationWizard
         Me.Label28 = New System.Windows.Forms.Label()
         Me.Label27 = New System.Windows.Forms.Label()
         Me.P7 = New System.Windows.Forms.Panel()
+        Me.LabelWithDivider8 = New System.Windows.Forms.LabelWithDivider()
+        Me.Panel15 = New System.Windows.Forms.Panel()
+        Me.TextBoxStreamName = New System.Windows.Forms.TextBox()
+        Me.Label34 = New System.Windows.Forms.Label()
+        Me.Label35 = New System.Windows.Forms.Label()
+        Me.Label36 = New System.Windows.Forms.Label()
+        Me.Button22 = New System.Windows.Forms.Button()
+        Me.Button23 = New System.Windows.Forms.Button()
+        Me.Button24 = New System.Windows.Forms.Button()
         Me.Panel16 = New System.Windows.Forms.Panel()
         Me.Label46 = New System.Windows.Forms.Label()
         Me.DataGridView2 = New System.Windows.Forms.DataGridView()
@@ -176,15 +185,6 @@ Partial Class DCCharacterizationWizard
         Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label37 = New System.Windows.Forms.Label()
-        Me.LabelWithDivider8 = New System.Windows.Forms.LabelWithDivider()
-        Me.Panel15 = New System.Windows.Forms.Panel()
-        Me.TextBoxStreamName = New System.Windows.Forms.TextBox()
-        Me.Label34 = New System.Windows.Forms.Label()
-        Me.Label35 = New System.Windows.Forms.Label()
-        Me.Label36 = New System.Windows.Forms.Label()
-        Me.Button22 = New System.Windows.Forms.Button()
-        Me.Button23 = New System.Windows.Forms.Button()
-        Me.Button24 = New System.Windows.Forms.Button()
         Me.P0.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.P1.SuspendLayout()
@@ -207,9 +207,9 @@ Partial Class DCCharacterizationWizard
         Me.Panel13.SuspendLayout()
         Me.Panel14.SuspendLayout()
         Me.P7.SuspendLayout()
+        Me.Panel15.SuspendLayout()
         Me.Panel16.SuspendLayout()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel15.SuspendLayout()
         Me.SuspendLayout()
         '
         'P0
@@ -1097,10 +1097,67 @@ Partial Class DCCharacterizationWizard
         'P7
         '
         resources.ApplyResources(Me.P7, "P7")
-        Me.P7.Controls.Add(Me.Panel16)
         Me.P7.Controls.Add(Me.LabelWithDivider8)
         Me.P7.Controls.Add(Me.Panel15)
+        Me.P7.Controls.Add(Me.Panel16)
         Me.P7.Name = "P7"
+        '
+        'LabelWithDivider8
+        '
+        resources.ApplyResources(Me.LabelWithDivider8, "LabelWithDivider8")
+        Me.LabelWithDivider8.BackColor = System.Drawing.Color.White
+        Me.LabelWithDivider8.Name = "LabelWithDivider8"
+        '
+        'Panel15
+        '
+        resources.ApplyResources(Me.Panel15, "Panel15")
+        Me.Panel15.BackColor = System.Drawing.Color.White
+        Me.Panel15.Controls.Add(Me.TextBoxStreamName)
+        Me.Panel15.Controls.Add(Me.Label34)
+        Me.Panel15.Controls.Add(Me.Label35)
+        Me.Panel15.Controls.Add(Me.Label36)
+        Me.Panel15.Controls.Add(Me.Button22)
+        Me.Panel15.Controls.Add(Me.Button23)
+        Me.Panel15.Controls.Add(Me.Button24)
+        Me.Panel15.Name = "Panel15"
+        '
+        'TextBoxStreamName
+        '
+        resources.ApplyResources(Me.TextBoxStreamName, "TextBoxStreamName")
+        Me.TextBoxStreamName.Name = "TextBoxStreamName"
+        '
+        'Label34
+        '
+        resources.ApplyResources(Me.Label34, "Label34")
+        Me.Label34.Name = "Label34"
+        '
+        'Label35
+        '
+        resources.ApplyResources(Me.Label35, "Label35")
+        Me.Label35.Name = "Label35"
+        '
+        'Label36
+        '
+        resources.ApplyResources(Me.Label36, "Label36")
+        Me.Label36.Name = "Label36"
+        '
+        'Button22
+        '
+        resources.ApplyResources(Me.Button22, "Button22")
+        Me.Button22.Name = "Button22"
+        Me.Button22.UseVisualStyleBackColor = True
+        '
+        'Button23
+        '
+        resources.ApplyResources(Me.Button23, "Button23")
+        Me.Button23.Name = "Button23"
+        Me.Button23.UseVisualStyleBackColor = True
+        '
+        'Button24
+        '
+        resources.ApplyResources(Me.Button24, "Button24")
+        Me.Button24.Name = "Button24"
+        Me.Button24.UseVisualStyleBackColor = True
         '
         'Panel16
         '
@@ -1220,73 +1277,16 @@ Partial Class DCCharacterizationWizard
         resources.ApplyResources(Me.Label37, "Label37")
         Me.Label37.Name = "Label37"
         '
-        'LabelWithDivider8
-        '
-        resources.ApplyResources(Me.LabelWithDivider8, "LabelWithDivider8")
-        Me.LabelWithDivider8.BackColor = System.Drawing.Color.White
-        Me.LabelWithDivider8.Name = "LabelWithDivider8"
-        '
-        'Panel15
-        '
-        resources.ApplyResources(Me.Panel15, "Panel15")
-        Me.Panel15.BackColor = System.Drawing.Color.White
-        Me.Panel15.Controls.Add(Me.TextBoxStreamName)
-        Me.Panel15.Controls.Add(Me.Label34)
-        Me.Panel15.Controls.Add(Me.Label35)
-        Me.Panel15.Controls.Add(Me.Label36)
-        Me.Panel15.Controls.Add(Me.Button22)
-        Me.Panel15.Controls.Add(Me.Button23)
-        Me.Panel15.Controls.Add(Me.Button24)
-        Me.Panel15.Name = "Panel15"
-        '
-        'TextBoxStreamName
-        '
-        resources.ApplyResources(Me.TextBoxStreamName, "TextBoxStreamName")
-        Me.TextBoxStreamName.Name = "TextBoxStreamName"
-        '
-        'Label34
-        '
-        resources.ApplyResources(Me.Label34, "Label34")
-        Me.Label34.Name = "Label34"
-        '
-        'Label35
-        '
-        resources.ApplyResources(Me.Label35, "Label35")
-        Me.Label35.Name = "Label35"
-        '
-        'Label36
-        '
-        resources.ApplyResources(Me.Label36, "Label36")
-        Me.Label36.Name = "Label36"
-        '
-        'Button22
-        '
-        resources.ApplyResources(Me.Button22, "Button22")
-        Me.Button22.Name = "Button22"
-        Me.Button22.UseVisualStyleBackColor = True
-        '
-        'Button23
-        '
-        resources.ApplyResources(Me.Button23, "Button23")
-        Me.Button23.Name = "Button23"
-        Me.Button23.UseVisualStyleBackColor = True
-        '
-        'Button24
-        '
-        resources.ApplyResources(Me.Button24, "Button24")
-        Me.Button24.Name = "Button24"
-        Me.Button24.UseVisualStyleBackColor = True
-        '
         'DCCharacterizationWizard
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.P1)
         Me.Controls.Add(Me.P7)
+        Me.Controls.Add(Me.P2)
         Me.Controls.Add(Me.P5)
         Me.Controls.Add(Me.P6)
-        Me.Controls.Add(Me.P1)
         Me.Controls.Add(Me.P0)
-        Me.Controls.Add(Me.P2)
         Me.Controls.Add(Me.P4)
         Me.Controls.Add(Me.P3)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -1330,11 +1330,11 @@ Partial Class DCCharacterizationWizard
         Me.Panel14.ResumeLayout(False)
         Me.Panel14.PerformLayout()
         Me.P7.ResumeLayout(False)
+        Me.Panel15.ResumeLayout(False)
+        Me.Panel15.PerformLayout()
         Me.Panel16.ResumeLayout(False)
         Me.Panel16.PerformLayout()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel15.ResumeLayout(False)
-        Me.Panel15.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub

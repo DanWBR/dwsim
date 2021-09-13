@@ -74,13 +74,15 @@ Namespace Utilities.PetroleumCharacterization.Methods
         Public _pp As PropertyPackage
         Public _idx As Integer
 
+        Public Property Flowsheet As Interfaces.IFlowsheet
+
         Public Function FunctionValue(ByVal t As Double) As Double
             Dim result As Double = 0
             Dim i As Integer = 0
             For Each c As Compound In _ms.Phases(0).Compounds.Values
                 If i = _idx Then
                     c.ConstantProperties.Acentric_Factor *= t
-                    result = CalcNBPDiff(i, 101325, t, c) ^ 2
+                    result = CalcNBPDiff(Flowsheet, i, 101325, t, c) ^ 2
                 End If
                 i += 1
             Next
@@ -107,7 +109,7 @@ Namespace Utilities.PetroleumCharacterization.Methods
 
         End Function
 
-        Public Function CalcNBPDiff(ByVal index As Integer, ByVal P As Double, ByVal multipl As Double, ByVal comp As Compound) As Double
+        Public Function CalcNBPDiff(ByVal fs As Interfaces.IFlowsheet, ByVal index As Integer, ByVal P As Double, ByVal multipl As Double, ByVal comp As Compound) As Double
 
             Dim NBP1, NBP2 As Double
 
@@ -117,6 +119,7 @@ Namespace Utilities.PetroleumCharacterization.Methods
 
             NBP1 = comp.ConstantProperties.NBP
 
+            _ms.SetFlowsheet(fs)
             _pp.CurrentMaterialStream = _ms
 
             NBP2 = _pp.DW_CalcBubT(Vx, P)(4)

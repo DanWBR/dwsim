@@ -772,7 +772,7 @@ namespace DWSIM.UI.Desktop.Editors
             DensityFitting dfit = new DensityFitting();
             PRVSFitting prvsfit = new PRVSFitting();
             SRKVSFitting srkvsfit = new SRKVSFitting();
-            NBPFitting nbpfit = new NBPFitting();
+            NBPFitting nbpfit = new NBPFitting() { Flowsheet = flowsheet };
             MaterialStream tms = new MaterialStream("", "");
             PropertyPackage pp = default(PropertyPackage);
             double fzra = 0;
