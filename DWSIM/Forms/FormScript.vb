@@ -542,7 +542,12 @@ Imports IronPython.Hosting
                 Dim stab As New FATabStripItem()
                 stab.Controls.Add(p)
                 stab.Tag = scriptdata.ID
-                If scriptdata.Title = "" Then stab.Title = "Script" & TabStripScripts.Items.Count + 1 Else stab.Title = scriptdata.Title
+                If scriptdata.Title = "" Then
+                    stab.Title = "Script" & TabStripScripts.Items.Count + 1
+                    scriptdata.Title = stab.Title
+                Else
+                    stab.Title = scriptdata.Title
+                End If
 
                 AddHandler scontrol.tbName.TextChanged, Sub()
                                                             scriptdata.Title = scontrol.tbName.Text
