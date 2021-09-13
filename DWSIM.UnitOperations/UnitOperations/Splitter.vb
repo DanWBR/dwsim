@@ -348,7 +348,7 @@ Namespace UnitOperations
                                     comp.MassFraction = ems.Phases(0).Compounds(comp.Name).MassFraction.GetValueOrDefault
                                     j += 1
                                 Next
-                                .Phases(0).Properties.massflow = Nothing
+                                .Phases(0).Properties.massflow = .GetOverallMolecularWeight() * mn(i) / 1000.0
                                 .Phases(0).Properties.molarflow = mn(i)
                                 .Phases(0).Properties.massfraction = 1.0
                                 .Phases(0).Properties.molarfraction = 1.0

@@ -995,12 +995,12 @@ Namespace Reactors
 
             IObj?.Paragraphs.Add(String.Format("Final Gibbs Energy: {0}", g1))
 
-            Me.ReactionExtents.Clear()
+            'Me.ReactionExtents.Clear()
 
-            For Each rxid As String In Me.Reactions
-                rx = FlowSheet.Reactions(rxid)
-                ReactionExtents.Add(rx.ID, (N(rx.BaseReactant) - N0(rx.BaseReactant)) / rx.Components(rx.BaseReactant).StoichCoeff)
-            Next
+            'For Each rxid As String In Me.Reactions
+            '    rx = FlowSheet.Reactions(rxid)
+            '    ReactionExtents.Add(rx.ID, (N(rx.BaseReactant) - N0(rx.BaseReactant)) / rx.Components(rx.BaseReactant).StoichCoeff)
+            'Next
 
             Dim W As Double = ims.Phases(0).Properties.massflow.GetValueOrDefault
 
