@@ -42,6 +42,9 @@ Partial Class ScriptEditorControl
         Me.NodeTextBox2 = New Aga.Controls.Tree.NodeControls.NodeTextBox()
         Me.NodeTextBox3 = New Aga.Controls.Tree.NodeControls.NodeTextBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.tbName = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.btnDelete = New System.Windows.Forms.Button()
         Me.cbPythonEngine = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.cbLinkedEvent = New System.Windows.Forms.ComboBox()
@@ -66,21 +69,23 @@ Partial Class ScriptEditorControl
         '
         'SplitContainer1.Panel1
         '
+        resources.ApplyResources(Me.SplitContainer1.Panel1, "SplitContainer1.Panel1")
         Me.SplitContainer1.Panel1.Controls.Add(Me.txtScript)
         '
         'SplitContainer1.Panel2
         '
+        resources.ApplyResources(Me.SplitContainer1.Panel2, "SplitContainer1.Panel2")
         Me.SplitContainer1.Panel2.Controls.Add(Me.TableLayoutPanel1)
         Me.SplitContainer1.Panel2Collapsed = True
         '
         'txtScript
         '
+        resources.ApplyResources(Me.txtScript, "txtScript")
         Me.txtScript.AnnotationVisible = ScintillaNET.Annotation.Standard
         Me.txtScript.AutoCChooseSingle = True
         Me.txtScript.AutoCMaxHeight = 10
         Me.txtScript.AutoCOrder = ScintillaNET.Order.PerformSort
         Me.txtScript.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.txtScript, "txtScript")
         Me.txtScript.Lexer = ScintillaNET.Lexer.Python
         Me.txtScript.Name = "txtScript"
         '
@@ -93,13 +98,14 @@ Partial Class ScriptEditorControl
         '
         'Label4
         '
-        Me.Label4.BackColor = System.Drawing.Color.SteelBlue
         resources.ApplyResources(Me.Label4, "Label4")
+        Me.Label4.BackColor = System.Drawing.Color.SteelBlue
         Me.Label4.ForeColor = System.Drawing.Color.White
         Me.Label4.Name = "Label4"
         '
         'tvVariables
         '
+        resources.ApplyResources(Me.tvVariables, "tvVariables")
         Me.tvVariables.AsyncExpanding = True
         Me.tvVariables.AutoRowHeight = True
         Me.tvVariables.BackColor = System.Drawing.SystemColors.Window
@@ -113,7 +119,6 @@ Partial Class ScriptEditorControl
         Me.tvVariables.GridLineStyle = CType((Aga.Controls.Tree.GridLineStyle.Horizontal Or Aga.Controls.Tree.GridLineStyle.Vertical), Aga.Controls.Tree.GridLineStyle)
         Me.tvVariables.LineColor = System.Drawing.SystemColors.ControlDark
         Me.tvVariables.LoadOnDemand = True
-        resources.ApplyResources(Me.tvVariables, "tvVariables")
         Me.tvVariables.Model = Nothing
         Me.tvVariables.Name = "tvVariables"
         Me.tvVariables.NodeControls.Add(Me.NodeIcon1)
@@ -140,9 +145,9 @@ Partial Class ScriptEditorControl
         '
         'ContextMenuStrip1
         '
+        resources.ApplyResources(Me.ContextMenuStrip1, "ContextMenuStrip1")
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ItemToolStripMenuItem, Me.ToolStripSeparator1, Me.ViewAPIHelpTSMI, Me.ViewSourceCodeTSMI})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        resources.ApplyResources(Me.ContextMenuStrip1, "ContextMenuStrip1")
         '
         'ItemToolStripMenuItem
         '
@@ -151,20 +156,20 @@ Partial Class ScriptEditorControl
         '
         'ToolStripSeparator1
         '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
         resources.ApplyResources(Me.ToolStripSeparator1, "ToolStripSeparator1")
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
         '
         'ViewAPIHelpTSMI
         '
+        resources.ApplyResources(Me.ViewAPIHelpTSMI, "ViewAPIHelpTSMI")
         Me.ViewAPIHelpTSMI.Image = Global.DWSIM.My.Resources.Resources.help1
         Me.ViewAPIHelpTSMI.Name = "ViewAPIHelpTSMI"
-        resources.ApplyResources(Me.ViewAPIHelpTSMI, "ViewAPIHelpTSMI")
         '
         'ViewSourceCodeTSMI
         '
+        resources.ApplyResources(Me.ViewSourceCodeTSMI, "ViewSourceCodeTSMI")
         Me.ViewSourceCodeTSMI.Image = Global.DWSIM.My.Resources.Resources.tag
         Me.ViewSourceCodeTSMI.Name = "ViewSourceCodeTSMI"
-        resources.ApplyResources(Me.ViewSourceCodeTSMI, "ViewSourceCodeTSMI")
         '
         'NodeIcon1
         '
@@ -199,6 +204,10 @@ Partial Class ScriptEditorControl
         '
         'Panel1
         '
+        resources.ApplyResources(Me.Panel1, "Panel1")
+        Me.Panel1.Controls.Add(Me.tbName)
+        Me.Panel1.Controls.Add(Me.Label5)
+        Me.Panel1.Controls.Add(Me.btnDelete)
         Me.Panel1.Controls.Add(Me.cbPythonEngine)
         Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Controls.Add(Me.cbLinkedEvent)
@@ -206,8 +215,23 @@ Partial Class ScriptEditorControl
         Me.Panel1.Controls.Add(Me.cbLinkedObject)
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.chkLink)
-        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.Name = "Panel1"
+        '
+        'tbName
+        '
+        resources.ApplyResources(Me.tbName, "tbName")
+        Me.tbName.Name = "tbName"
+        '
+        'Label5
+        '
+        resources.ApplyResources(Me.Label5, "Label5")
+        Me.Label5.Name = "Label5"
+        '
+        'btnDelete
+        '
+        resources.ApplyResources(Me.btnDelete, "btnDelete")
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.UseVisualStyleBackColor = True
         '
         'cbPythonEngine
         '
@@ -224,8 +248,8 @@ Partial Class ScriptEditorControl
         '
         'cbLinkedEvent
         '
-        Me.cbLinkedEvent.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         resources.ApplyResources(Me.cbLinkedEvent, "cbLinkedEvent")
+        Me.cbLinkedEvent.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbLinkedEvent.FormattingEnabled = True
         Me.cbLinkedEvent.Name = "cbLinkedEvent"
         '
@@ -236,8 +260,8 @@ Partial Class ScriptEditorControl
         '
         'cbLinkedObject
         '
-        Me.cbLinkedObject.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         resources.ApplyResources(Me.cbLinkedObject, "cbLinkedObject")
+        Me.cbLinkedObject.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbLinkedObject.FormattingEnabled = True
         Me.cbLinkedObject.Name = "cbLinkedObject"
         '
@@ -254,8 +278,8 @@ Partial Class ScriptEditorControl
         '
         'treeViewItems
         '
-        Me.treeViewItems.LineColor = System.Drawing.Color.Empty
         resources.ApplyResources(Me.treeViewItems, "treeViewItems")
+        Me.treeViewItems.LineColor = System.Drawing.Color.Empty
         Me.treeViewItems.Name = "treeViewItems"
         Me.treeViewItems.PathSeparator = "."
         '
@@ -303,4 +327,7 @@ Partial Class ScriptEditorControl
     Friend WithEvents ViewSourceCodeTSMI As ToolStripMenuItem
     Friend WithEvents ItemToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents Label5 As Label
+    Public WithEvents btnDelete As Button
+    Public WithEvents tbName As TextBox
 End Class

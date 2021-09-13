@@ -1668,9 +1668,6 @@
     <EmbeddedResource Include="Forms\FormUpgradeWarning.resx">
       <DependentUpon>FormUpgradeWarning.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SplashScreen.de.resx">
-      <DependentUpon>SplashScreen.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Languages\Tips.de.resx" />
     <EmbeddedResource Include="Languages\Tips.en.resx" />
     <EmbeddedResource Include="Languages\Tips.es.resx">

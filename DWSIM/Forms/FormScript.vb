@@ -544,11 +544,22 @@ Imports IronPython.Hosting
                 stab.Tag = scriptdata.ID
                 If scriptdata.Title = "" Then stab.Title = "Script" & TabStripScripts.Items.Count + 1 Else stab.Title = scriptdata.Title
 
+                AddHandler scontrol.tbName.TextChanged, Sub()
+                                                            scriptdata.Title = scontrol.tbName.Text
+                                                            stab.Title = scriptdata.Title
+                                                        End Sub
+
+                AddHandler scontrol.btnDelete.Click, Sub()
+                                                         If MessageBox.Show(DWSIM.App.GetLocalString("RemoveScriptQuestion"), "DWSIM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
+                                                             TabStripScripts.RemoveTab(stab)
+                                                         End If
+                                                     End Sub
+
                 TabStripScripts.AddTab(stab, True)
 
                 TabStripScripts.SelectedItem = stab
 
-                Me.tsTextBoxRename.Text = stab.Title
+                .tbName.Text = scriptdata.Title
 
                 Me.Invalidate()
 
@@ -633,8 +644,6 @@ Imports IronPython.Hosting
 
                 TabStripScripts.SelectedItem = stab
 
-                Me.tsTextBoxRename.Text = stab.Title
-
                 Me.Invalidate()
 
                 If scriptdata.LinkedObjectName <> "" Then
@@ -693,16 +702,6 @@ Imports IronPython.Hosting
 
         End If
 
-    End Sub
-
-    Private Sub tsTextBoxRename_KeyDown(sender As Object, e As KeyEventArgs) Handles tsTextBoxRename.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            TabStripScripts.SelectedItem.Title = tsTextBoxRename.Text
-        End If
-    End Sub
-
-    Private Sub TabStripScripts_TabStripItemSelectionChanged(e As TabStripItemChangedEventArgs) Handles TabStripScripts.TabStripItemSelectionChanged
-        tsTextBoxRename.Text = TabStripScripts.SelectedItem.Title
     End Sub
 
     Private Sub TabStripScripts_TabStripItemClosing(e As TabStripItemClosingEventArgs) Handles TabStripScripts.TabStripItemClosing

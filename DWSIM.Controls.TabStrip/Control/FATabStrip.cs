@@ -24,8 +24,8 @@ namespace FarsiLibrary.Win
 
         #region Constants
 
-        private int DEF_HEADER_HEIGHT = 19;
-        private const int DEF_GLYPH_WIDTH = 40;
+        private int DEF_HEADER_HEIGHT = 24;
+        private const int DEF_GLYPH_WIDTH = 24;
 
         private int DEF_START_POS = 10;
 
@@ -547,18 +547,18 @@ namespace FarsiLibrary.Win
 
             double dpiscale = g.DpiX / 96.0;
 
-            SizeF textSize = g.MeasureString(currentItem.Title, SystemFonts.DefaultFont, new SizeF(300, 10), sf);
+            SizeF textSize = g.MeasureString(currentItem.Title, SystemFonts.MessageBoxFont, new SizeF(300, 10), sf);
             textSize.Width += 15 * (float)(dpiscale + 0.3);
 
             if (RightToLeft == RightToLeft.No)
             {
-                RectangleF buttonRect = new RectangleF(DEF_START_POS - 9, 1, textSize.Width, (int)(18 * dpiscale));
+                RectangleF buttonRect = new RectangleF(DEF_START_POS - 9, 1, textSize.Width, (int)(DEF_HEADER_HEIGHT));
                 currentItem.StripRect = buttonRect;
                 DEF_START_POS += (int)textSize.Width;
             }
             else
             {
-                RectangleF buttonRect = new RectangleF(DEF_START_POS - textSize.Width + 1, 3, textSize.Width - 1, (int)(18 * dpiscale));
+                RectangleF buttonRect = new RectangleF(DEF_START_POS - textSize.Width + 1, 3, textSize.Width - 1, (int)(DEF_HEADER_HEIGHT));
                 currentItem.StripRect = buttonRect;
                 DEF_START_POS -= (int)textSize.Width;
             }
@@ -566,19 +566,18 @@ namespace FarsiLibrary.Win
 
         private void OnDrawTabPage(Graphics g, FATabStripItem currentItem)
         {
+            double dpiscale = g.DpiX / 96.0;
+
             bool isFirstTab = Items.IndexOf(currentItem) == 0;
             Font currentFont = Font;
 
-            if (currentItem == SelectedItem)
-                currentFont = new Font(Font, FontStyle.Bold);
-
-            SizeF textSize = g.MeasureString(currentItem.Title, SystemFonts.MessageBoxFont, new SizeF(200, 10), sf);
-            textSize.Width += 20;
+            SizeF textSize = g.MeasureString(currentItem.Title, currentFont, new SizeF(400, 50), sf);
+            textSize.Width += 20 * (float)dpiscale;
             RectangleF buttonRect = currentItem.StripRect;
 
             GraphicsPath path = new GraphicsPath();
             LinearGradientBrush brush;
-            int mtop = 3;
+            int mtop = 6;
 
             #region Draw Not Right-To-Left Tab
 
@@ -621,12 +620,9 @@ namespace FarsiLibrary.Win
                 //               buttonRect.Left + buttonRect.Width, buttonRect.Height + 2);
                 //}
 
-                double dpiscale = g.DpiX / 96.0;
+                var tmargin = 15 * (float)(dpiscale + 0.3) / 2.0f;
 
-                var tmargin = 15 * (float)(dpiscale + 0.3) / 2;
-                var tmargin2 = -4 * (float)(dpiscale - 1.0);
-
-                PointF textLoc = new PointF(buttonRect.Left + tmargin, buttonRect.Top + tmargin2 + (buttonRect.Height / 2) - (textSize.Height / 2) - 2);
+                PointF textLoc = new PointF(buttonRect.Left + tmargin, buttonRect.Top + (buttonRect.Height - textSize.Height) / 2);
                 RectangleF textRect = buttonRect;
                 textRect.Location = textLoc;
                 //textRect.Width = buttonRect.Width - (textRect.Left - buttonRect.Left) - 4;
@@ -635,7 +631,7 @@ namespace FarsiLibrary.Win
                 if (currentItem == SelectedItem)
                 {
                     //textRect.Y -= 2;
-                    g.DrawString(currentItem.Title, SystemFonts.MessageBoxFont, new SolidBrush(SystemColors.ActiveCaptionText), textRect, sf);
+                    g.DrawString(currentItem.Title, currentFont, new SolidBrush(SystemColors.ActiveCaptionText), textRect, sf);
                 }
                 else
                 {
@@ -722,8 +718,8 @@ namespace FarsiLibrary.Win
                 sf.FormatFlags &= StringFormatFlags.DirectionRightToLeft;
 
                 stripButtonRect = new Rectangle(0, 0, ClientSize.Width - DEF_GLYPH_WIDTH - 2, 10);
-                menuGlyph.Bounds = new Rectangle(ClientSize.Width - DEF_GLYPH_WIDTH, 2, 16, 16);
-                closeButton.Bounds = new Rectangle(ClientSize.Width - 20, 2, 16, 16);
+                menuGlyph.Bounds = new Rectangle(ClientSize.Width - DEF_GLYPH_WIDTH * 2 - 2, 2, DEF_GLYPH_WIDTH, DEF_GLYPH_WIDTH);
+                closeButton.Bounds = new Rectangle(ClientSize.Width - DEF_GLYPH_WIDTH, 2, DEF_GLYPH_WIDTH, DEF_GLYPH_WIDTH);
             }
             else
             {
@@ -732,8 +728,8 @@ namespace FarsiLibrary.Win
                 sf.FormatFlags |= StringFormatFlags.DirectionRightToLeft;
 
                 stripButtonRect = new Rectangle(DEF_GLYPH_WIDTH + 2, 0, ClientSize.Width - DEF_GLYPH_WIDTH - 15, 10);
-                closeButton.Bounds = new Rectangle(4, 2, 16, 16); //ClientSize.Width - DEF_GLYPH_WIDTH, 2, 16, 16);
-                menuGlyph.Bounds = new Rectangle(20 + 4, 2, 16, 16); //this.ClientSize.Width - 20, 2, 16, 16);
+                closeButton.Bounds = new Rectangle(4, 2, DEF_HEADER_HEIGHT - 4, DEF_HEADER_HEIGHT - 4); //ClientSize.Width - DEF_GLYPH_WIDTH, 2, 16, 16);
+                menuGlyph.Bounds = new Rectangle(DEF_HEADER_HEIGHT + 4, 2, DEF_HEADER_HEIGHT - 4, DEF_HEADER_HEIGHT - 4); //this.ClientSize.Width - 20, 2, 16, 16);
             }
 
             DockPadding.Top = DEF_HEADER_HEIGHT + 1;
@@ -781,7 +777,7 @@ namespace FarsiLibrary.Win
                 dpiscale = g.DpiX / 96.0;
             }
 
-            DEF_HEADER_HEIGHT = (int)(19 * dpiscale);
+            DEF_HEADER_HEIGHT = (int)(24.0 * dpiscale);
 
             SetStyle(ControlStyles.ContainerControl, true);
             SetStyle(ControlStyles.UserPaint, true);

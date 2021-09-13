@@ -56,8 +56,6 @@
         Me.toolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.APIHelptsbutton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
-        Me.tsTextBoxRename = New System.Windows.Forms.ToolStripTextBox()
         Me.sfd1 = New System.Windows.Forms.SaveFileDialog()
         Me.TabStripScripts = New FarsiLibrary.Win.FATabStrip()
         Me.FaTabStripItem3 = New FarsiLibrary.Win.FATabStripItem()
@@ -89,7 +87,7 @@
         'ToolStrip1
         '
         resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripButton, Me.SaveToolStripButton, Me.ToolStripButton2, Me.ToolStripButton1, Me.PrintToolStripButton, Me.toolStripSeparator, Me.CutToolStripButton, Me.CopyToolStripButton, Me.PasteToolStripButton, Me.toolStripSeparator1, Me.btnUndo, Me.btnRedo, Me.btnComment, Me.btnUncomment, Me.ToolStripSeparator4, Me.btnIdent, Me.btnIdentRemove, Me.ToolStripSeparator6, Me.tscb1, Me.tscb2, Me.ToolStripSeparator2, Me.tsbInsertSnippet, Me.ToolStripSeparator7, Me.btnRun, Me.btnRunAsync, Me.btnRunDebug, Me.btnStopDebug, Me.toolStripSeparator5, Me.APIHelptsbutton, Me.ToolStripSeparator3, Me.ToolStripLabel1, Me.tsTextBoxRename})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripButton, Me.SaveToolStripButton, Me.ToolStripButton2, Me.ToolStripButton1, Me.PrintToolStripButton, Me.toolStripSeparator, Me.CutToolStripButton, Me.CopyToolStripButton, Me.PasteToolStripButton, Me.toolStripSeparator1, Me.btnUndo, Me.btnRedo, Me.btnComment, Me.btnUncomment, Me.ToolStripSeparator4, Me.btnIdent, Me.btnIdentRemove, Me.ToolStripSeparator6, Me.tscb1, Me.tscb2, Me.ToolStripSeparator2, Me.tsbInsertSnippet, Me.ToolStripSeparator7, Me.btnRun, Me.btnRunAsync, Me.btnRunDebug, Me.btnStopDebug, Me.toolStripSeparator5, Me.APIHelptsbutton, Me.ToolStripSeparator3})
         Me.ToolStrip1.Name = "ToolStrip1"
         '
         'NewToolStripButton
@@ -291,17 +289,6 @@
         resources.ApplyResources(Me.ToolStripSeparator3, "ToolStripSeparator3")
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
         '
-        'ToolStripLabel1
-        '
-        resources.ApplyResources(Me.ToolStripLabel1, "ToolStripLabel1")
-        Me.ToolStripLabel1.Name = "ToolStripLabel1"
-        '
-        'tsTextBoxRename
-        '
-        resources.ApplyResources(Me.tsTextBoxRename, "tsTextBoxRename")
-        Me.tsTextBoxRename.Margin = New System.Windows.Forms.Padding(1, 2, 1, 0)
-        Me.tsTextBoxRename.Name = "tsTextBoxRename"
-        '
         'sfd1
         '
         resources.ApplyResources(Me.sfd1, "sfd1")
@@ -476,8 +463,6 @@
     Friend WithEvents NewToolStripButton As System.Windows.Forms.ToolStripButton
     Friend WithEvents toolStripSeparator5 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents ToolStripSeparator3 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents ToolStripLabel1 As System.Windows.Forms.ToolStripLabel
-    Friend WithEvents tsTextBoxRename As System.Windows.Forms.ToolStripTextBox
     Friend WithEvents dckMenu As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents FloatToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents DockLeftToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
