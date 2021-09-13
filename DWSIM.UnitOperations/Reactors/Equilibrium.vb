@@ -852,9 +852,9 @@ Namespace Reactors
 
                         'Heat released (or absorbed) (kJ/s = kW) (Ideal Gas)
                         If rx.Components(rx.BaseReactant).StoichCoeff > 0 Then
-                            DHr += -rx.ReactionHeat * Me.ReactionExtents(Me.Reactions(i)) * rx.Components(rx.BaseReactant).StoichCoeff / 1000
+                            DHr += -rx.ReactionHeat * Me.ReactionExtents(Me.Reactions(i)) * rx.Components(rx.BaseReactant).StoichCoeff / 1000.0
                         Else
-                            DHr += rx.ReactionHeat * Me.ReactionExtents(Me.Reactions(i)) * rx.Components(rx.BaseReactant).StoichCoeff / 1000
+                            DHr += rx.ReactionHeat * Me.ReactionExtents(Me.Reactions(i)) * rx.Components(rx.BaseReactant).StoichCoeff / 1000.0
                         End If
 
                         i += 1

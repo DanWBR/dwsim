@@ -186,7 +186,7 @@ Namespace MathEx
             Dim sumv As Double = 0.0#
 
             For i = 0 To n
-                sumv += vx(i) ^ 2
+                sumv += Math.Pow(vx(i), 2)
             Next
 
             Return sumv

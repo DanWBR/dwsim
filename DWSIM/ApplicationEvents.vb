@@ -71,7 +71,7 @@ Namespace My
             'check if the user wants to reset settings.
             If My.Computer.Keyboard.ShiftKeyDown Then
                 My.Settings.Reset()
-                MessageBox.Show("The settings were reset successfully.")
+                'MessageBox.Show("The settings were reset successfully.")
             End If
 
             'loads the current language
