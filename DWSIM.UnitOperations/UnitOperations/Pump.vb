@@ -925,6 +925,7 @@ Namespace UnitOperations
                         i += 1
                     Next
                     .Phases(0).Properties.massflow = msin.Phases(0).Properties.massflow.GetValueOrDefault
+                    .DefinedFlow = FlowSpec.Mass
                     .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
                 End With
 

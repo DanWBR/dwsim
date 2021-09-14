@@ -620,6 +620,7 @@ Namespace UnitOperations
                         comp.MassFraction = msin.Phases(0).Compounds(comp.Name).MassFraction
                     Next
                     .Phases(0).Properties.massflow = msin.Phases(0).Properties.massflow.GetValueOrDefault
+                    .DefinedFlow = FlowSpec.Mass
                     Select Case CalcMode
                         Case CalculationMode.EnergyStream, CalculationMode.HeatAdded
                             .SpecType = StreamSpec.Pressure_and_Enthalpy

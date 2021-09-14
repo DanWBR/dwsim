@@ -183,6 +183,7 @@ Namespace UnitOperations
                 If W <> 0.0# Then .Phases(0).Properties.enthalpy = Hs
                 .Phases(0).Properties.pressure = P
                 .Phases(0).Properties.massflow = W
+                .DefinedFlow = FlowSpec.Mass
                 .Phases(0).Properties.molarfraction = 1
                 .Phases(0).Properties.massfraction = 1
                 Dim comp As BaseClasses.Compound

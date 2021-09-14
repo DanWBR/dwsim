@@ -588,6 +588,7 @@ Namespace UnitOperations
                                 comp.MassFraction = Vmol(comp.Name) * comp.ConstantProperties.Molar_Weight / SMass / 1000
                             Next
                             .Phases(0).Properties.massflow = SMass
+                            .DefinedFlow = FlowSpec.Mass
 
                             Try
                                 IObj?.SetCurrent()

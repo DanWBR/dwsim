@@ -307,6 +307,7 @@ Namespace UnitOperations
                     i += 1
                 Next
                 .Phases(0).Properties.massflow = ims.Phases(0).Properties.massflow.GetValueOrDefault
+                .DefinedFlow = FlowSpec.Mass
             End With
 
             Me.ResidenceTime = Me.Volume / Q

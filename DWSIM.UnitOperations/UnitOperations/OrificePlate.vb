@@ -298,6 +298,7 @@ Namespace UnitOperations
                     i += 1
                 Next
                 .Phases(0).Properties.massflow = instr.Phases(0).Properties.massflow.GetValueOrDefault
+                .DefinedFlow = FlowSpec.Mass
                 .SpecType = StreamSpec.Pressure_and_Enthalpy
             End With
 

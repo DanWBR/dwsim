@@ -892,6 +892,7 @@ Namespace UnitOperations
                                 comp.MassFraction = msin.Phases(0).Compounds(comp.Name).MassFraction.GetValueOrDefault
                             Next
                             .Phases(0).Properties.massflow = msin.Phases(0).Properties.massflow
+                            .DefinedFlow = FlowSpec.Mass
                         End With
 
                         'energy stream - update energy flow value (kW)

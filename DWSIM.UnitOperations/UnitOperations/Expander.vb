@@ -816,6 +816,7 @@ Namespace UnitOperations
                         i += 1
                     Next
                     .Phases(0).Properties.massflow = ims.Phases(0).Properties.massflow
+                    .DefinedFlow = FlowSpec.Mass
                 End With
 
                 'energy stream - update energy flow value (kW)

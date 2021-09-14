@@ -131,6 +131,7 @@ Namespace UnitOperations
                 With outstr1
                     .ClearAllProps()
                     .Phases(0).Properties.massflow = Wlvout
+                    .DefinedFlow = FlowSpec.Mass
                     Dim comp As BaseClasses.Compound
                     For Each comp In .Phases(0).Compounds.Values
                         comp.MassFlow = (1 - sse) * instr.Phases(7).Compounds(comp.Name).MassFlow + instr.Phases(2).Compounds(comp.Name).MassFlow
@@ -155,6 +156,7 @@ Namespace UnitOperations
                 With outstr2
                     .ClearAllProps()
                     .Phases(0).Properties.massflow = Wsout
+                    .DefinedFlow = FlowSpec.Mass
                     Dim comp As BaseClasses.Compound
                     For Each comp In .Phases(0).Compounds.Values
                         comp.MassFlow = sse * instr.Phases(7).Compounds(comp.Name).MassFlow.GetValueOrDefault + (1 - lse) * (instr.Phases(3).Compounds(comp.Name).MassFlow + instr.Phases(4).Compounds(comp.Name).MassFlow)

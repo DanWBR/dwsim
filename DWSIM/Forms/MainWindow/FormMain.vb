@@ -323,11 +323,6 @@ Public Class FormMain
             Catch ex As Exception
             End Try
 
-            Try
-                If Not DWSIM.App.IsRunningOnMono Then CefSharp.Cef.Shutdown()
-            Catch ex As Exception
-            End Try
-
         End If
 
     End Sub

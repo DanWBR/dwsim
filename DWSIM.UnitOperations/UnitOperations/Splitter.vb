@@ -238,6 +238,7 @@ Namespace UnitOperations
                                     j += 1
                                 Next
                                 .Phases(0).Properties.massflow = W * Me.Ratios(i)
+                                .DefinedFlow = FlowSpec.Mass
                                 .Phases(0).Properties.massfraction = 1
                                 .Phases(0).Properties.molarfraction = 1
                                 .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
@@ -293,6 +294,7 @@ Namespace UnitOperations
                                     j += 1
                                 Next
                                 .Phases(0).Properties.massflow = wn(i)
+                                .DefinedFlow = FlowSpec.Mass
                                 .Phases(0).Properties.massfraction = 1.0
                                 .Phases(0).Properties.molarfraction = 1.0
                                 .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
@@ -349,6 +351,7 @@ Namespace UnitOperations
                                     j += 1
                                 Next
                                 .Phases(0).Properties.massflow = .GetOverallMolecularWeight() * mn(i) / 1000.0
+                                .DefinedFlow = FlowSpec.Mass
                                 .Phases(0).Properties.molarflow = mn(i)
                                 .Phases(0).Properties.massfraction = 1.0
                                 .Phases(0).Properties.molarfraction = 1.0
