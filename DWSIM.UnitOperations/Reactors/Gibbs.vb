@@ -478,7 +478,7 @@ Namespace Reactors
             pp.CurrentMaterialStream = tms
 
             Dim G = tms.Phases(0).Properties.gibbs_free_energy.GetValueOrDefault * tms.Phases(0).Properties.molecularWeight.GetValueOrDefault * tms.Phases(0).Properties.molarflow.GetValueOrDefault / 1000
-            Dim Gf = pp.AUX_DELGFM_T(tms.GetOverallComposition(), tms.GetTemperature()) * tms.GetOverallMolecularWeight() * 8.314 * tms.GetTemperature() * tms.Phases(0).Properties.molarflow.GetValueOrDefault / 1000
+            Dim Gf = pp.AUX_DELGFM_T(pp.AUX_CONVERT_MOL_TO_MASS(tms.GetOverallComposition()), tms.GetTemperature()) * tms.GetOverallMolecularWeight() * 8.314 * tms.GetTemperature() * tms.Phases(0).Properties.molarflow.GetValueOrDefault / 1000
 
             Return Gf + G
 

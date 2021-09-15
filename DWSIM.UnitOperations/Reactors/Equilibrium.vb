@@ -297,7 +297,7 @@ Namespace Reactors
             pp.CurrentMaterialStream = tms
 
             Dim G = tms.Phases(0).Properties.gibbs_free_energy.GetValueOrDefault * tms.Phases(0).Properties.molecularWeight.GetValueOrDefault * tms.Phases(0).Properties.molarflow.GetValueOrDefault / 1000
-            Dim Gf = pp.AUX_DELGFM_T(tms.GetOverallComposition(), tms.GetTemperature()) * tms.GetOverallMolecularWeight() * 8.314 * tms.GetTemperature() * tms.Phases(0).Properties.molarflow.GetValueOrDefault / 1000
+            Dim Gf = pp.AUX_DELGFM_T(pp.AUX_CONVERT_MOL_TO_MASS(tms.GetOverallComposition()), tms.GetTemperature()) * tms.GetOverallMolecularWeight() * 8.314 * tms.GetTemperature() * tms.Phases(0).Properties.molarflow.GetValueOrDefault / 1000
 
             Return Gf + G
 
@@ -987,11 +987,11 @@ Namespace Reactors
 
             Me.FinalGibbsEnergy = g1
 
-            If g1 > g0 And ReactorOperationMode <> OperationMode.Adiabatic Then
+            'If g1 > g0 And ReactorOperationMode <> OperationMode.Adiabatic Then
 
-                Throw New Exception("Invalid solution (gf > g0)")
+            '    Throw New Exception("Invalid solution (gf > g0)")
 
-            End If
+            'End If
 
             IObj?.Paragraphs.Add(String.Format("Final Gibbs Energy: {0}", g1))
 
