@@ -202,11 +202,6 @@ Namespace UnitOperations
                         sub1.MoleFraction = 0.0#
                     End If
                 Next
-                Me.PropertyPackage.CurrentMaterialStream = Me.FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
-                'If W <> 0.0# Then
-                '    Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(Enums.FlashCalculationType.PressureEnthalpy, P, Hs, T)
-                '    T = tmp.CalculatedTemperature
-                'End If
                 .Phases(0).Properties.temperature = T
                 .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
             End With
