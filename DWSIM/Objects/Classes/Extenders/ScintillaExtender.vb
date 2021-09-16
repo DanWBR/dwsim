@@ -275,10 +275,12 @@ Module scintillaExtender
             For Each m In methods
                 netprops += m.Name + " "
             Next
-            methods = extensionsassembly.GetType("DWSIM.ExtensionMethods.Eto.Extensions2").GetMethods()
-            For Each m In methods
-                netprops += m.Name + " "
-            Next
+            If extensionsassembly IsNot Nothing Then
+                methods = extensionsassembly.GetType("DWSIM.ExtensionMethods.Eto.Extensions2").GetMethods()
+                For Each m In methods
+                    netprops += m.Name + " "
+                Next
+            End If
             methods = dbassembly.GetType("DWSIM.FileStorage.FileDatabaseProvider").GetMethods()
             For Each m In methods
                 netprops += m.Name + " "

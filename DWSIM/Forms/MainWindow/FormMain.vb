@@ -2968,11 +2968,6 @@ Public Class FormMain
 
         If simulationfilename = "" Then simulationfilename = path
 
-        If (From f As DockContent In form.dckPanel.Documents Select f Where f.Name = "FormScript").Count > 0 Then
-            Dim f As FormScript = (From fs As DockContent In form.dckPanel.Documents Select fs Where fs.Name = "FormScript").First
-            f.UpdateScripts()
-        End If
-
         Dim xdoc As New XDocument()
         Dim xel As XElement
 

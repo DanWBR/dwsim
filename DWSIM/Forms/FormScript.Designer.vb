@@ -25,7 +25,6 @@
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormScript))
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.NewToolStripButton = New System.Windows.Forms.ToolStripButton()
-        Me.SaveToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.PrintToolStripButton = New System.Windows.Forms.ToolStripButton()
@@ -87,7 +86,7 @@
         'ToolStrip1
         '
         resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripButton, Me.SaveToolStripButton, Me.ToolStripButton2, Me.ToolStripButton1, Me.PrintToolStripButton, Me.toolStripSeparator, Me.CutToolStripButton, Me.CopyToolStripButton, Me.PasteToolStripButton, Me.toolStripSeparator1, Me.btnUndo, Me.btnRedo, Me.btnComment, Me.btnUncomment, Me.ToolStripSeparator4, Me.btnIdent, Me.btnIdentRemove, Me.ToolStripSeparator6, Me.tscb1, Me.tscb2, Me.ToolStripSeparator2, Me.tsbInsertSnippet, Me.ToolStripSeparator7, Me.btnRun, Me.btnRunAsync, Me.btnRunDebug, Me.btnStopDebug, Me.toolStripSeparator5, Me.APIHelptsbutton, Me.ToolStripSeparator3})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripButton, Me.ToolStripButton2, Me.ToolStripButton1, Me.PrintToolStripButton, Me.toolStripSeparator, Me.CutToolStripButton, Me.CopyToolStripButton, Me.PasteToolStripButton, Me.toolStripSeparator1, Me.btnUndo, Me.btnRedo, Me.btnComment, Me.btnUncomment, Me.ToolStripSeparator4, Me.btnIdent, Me.btnIdentRemove, Me.ToolStripSeparator6, Me.tscb1, Me.tscb2, Me.ToolStripSeparator2, Me.tsbInsertSnippet, Me.ToolStripSeparator7, Me.btnRun, Me.btnRunAsync, Me.btnRunDebug, Me.btnStopDebug, Me.toolStripSeparator5, Me.APIHelptsbutton, Me.ToolStripSeparator3})
         Me.ToolStrip1.Name = "ToolStrip1"
         '
         'NewToolStripButton
@@ -95,13 +94,6 @@
         resources.ApplyResources(Me.NewToolStripButton, "NewToolStripButton")
         Me.NewToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.NewToolStripButton.Name = "NewToolStripButton"
-        '
-        'SaveToolStripButton
-        '
-        resources.ApplyResources(Me.SaveToolStripButton, "SaveToolStripButton")
-        Me.SaveToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.SaveToolStripButton.Image = Global.DWSIM.My.Resources.Resources.tick
-        Me.SaveToolStripButton.Name = "SaveToolStripButton"
         '
         'ToolStripButton2
         '
@@ -439,7 +431,6 @@
 
     End Sub
     Public WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
-    Public WithEvents SaveToolStripButton As System.Windows.Forms.ToolStripButton
     Public WithEvents PrintToolStripButton As System.Windows.Forms.ToolStripButton
     Public WithEvents toolStripSeparator As System.Windows.Forms.ToolStripSeparator
     Public WithEvents CutToolStripButton As System.Windows.Forms.ToolStripButton

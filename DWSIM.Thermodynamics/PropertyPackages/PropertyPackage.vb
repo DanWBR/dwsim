@@ -544,7 +544,7 @@ Namespace PropertyPackages
                                         Return New ForcedPhaseFlash() With {.ForcePhase = CurrentMaterialStream.Flowsheet.FlowsheetOptions.ForceStreamPhase}
                                     End If
                                 Else
-                                    Return New ForcedPhaseFlash() With {.ForcePhase = CurrentMaterialStream.Flowsheet.FlowsheetOptions.ForceStreamPhase}
+                                    Return GetFlash()
                                 End If
                             Case Else
                                 Return New ForcedPhaseFlash() With {.ForcePhase = CurrentMaterialStream.ForcePhase}

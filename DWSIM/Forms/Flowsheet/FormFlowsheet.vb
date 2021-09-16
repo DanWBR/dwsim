@@ -693,7 +693,7 @@ Public Class FormFlowsheet
 
     Public Sub AddComponentsRows(ByVal MaterialStream As IMaterialStream) Implements IFlowsheet.AddCompoundsToMaterialStream
         If Me.Options.SelectedComponents.Count = 0 Then
-            MessageBox.Show(DWSIM.App.GetLocalString("Nohcomponentesaadici"))
+            Exit Sub
         Else
             Dim comp As BaseClasses.ConstantProperties
             For Each phase As BaseClasses.Phase In MaterialStream.Phases.Values
