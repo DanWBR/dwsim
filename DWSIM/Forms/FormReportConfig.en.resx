@@ -188,7 +188,7 @@
     <value>Options - Material Streams</value>
   </data>
   <data name="SaveFileDialog1.Filter" xml:space="preserve">
-    <value>XML File (.xml)|*.xml|Text File (.txt)|*.txt|Microsoft Excel Spreadsheet (.xls)|*.xls|Open Document Spreadsheet (.ods)|*.ods|Open Document Text (.odt)|*.odt</value>
+    <value>XML File (.xml)|*.xml|Text File (.txt)|*.txt|Microsoft Excel Spreadsheet (.xlsx)|*.xlsx|Open Document Spreadsheet (.ods)|*.ods|Open Document Text (.odt)|*.odt</value>
   </data>
   <data name="SaveFileDialog1.Title" xml:space="preserve">
     <value>Save Report Data</value>

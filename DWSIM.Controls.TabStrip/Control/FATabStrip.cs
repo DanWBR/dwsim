@@ -25,7 +25,7 @@ namespace FarsiLibrary.Win
         #region Constants
 
         private int DEF_HEADER_HEIGHT = 24;
-        private const int DEF_GLYPH_WIDTH = 24;
+        private const int DEF_GLYPH_WIDTH = 16;
 
         private int DEF_START_POS = 10;
 
@@ -717,9 +717,11 @@ namespace FarsiLibrary.Win
                 sf.FormatFlags |= StringFormatFlags.NoWrap;
                 sf.FormatFlags &= StringFormatFlags.DirectionRightToLeft;
 
+                var dy = (DEF_HEADER_HEIGHT - DEF_GLYPH_WIDTH) / 2;
+
                 stripButtonRect = new Rectangle(0, 0, ClientSize.Width - DEF_GLYPH_WIDTH - 2, 10);
-                menuGlyph.Bounds = new Rectangle(ClientSize.Width - DEF_GLYPH_WIDTH * 2 - 2, 2, DEF_GLYPH_WIDTH, DEF_GLYPH_WIDTH);
-                closeButton.Bounds = new Rectangle(ClientSize.Width - DEF_GLYPH_WIDTH, 2, DEF_GLYPH_WIDTH, DEF_GLYPH_WIDTH);
+                menuGlyph.Bounds = new Rectangle(ClientSize.Width - DEF_GLYPH_WIDTH * 2 - 2, dy, DEF_GLYPH_WIDTH, DEF_GLYPH_WIDTH);
+                closeButton.Bounds = new Rectangle(ClientSize.Width - DEF_GLYPH_WIDTH, dy, DEF_GLYPH_WIDTH, DEF_GLYPH_WIDTH);
             }
             else
             {
