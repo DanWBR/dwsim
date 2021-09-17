@@ -60,6 +60,34 @@ Public Class Host
         End If
     End Sub
 
+    Public Shared Function GetItemAndChildren(ii As InspectorItem) As List(Of InspectorItem)
+
+        Return GetItems(ii).ToList()
+
+    End Function
+
+    Public Shared Function GetItems(ByVal iitem As InspectorItem) As List(Of InspectorItem)
+
+        Dim myItems As List(Of InspectorItem) = New List(Of InspectorItem)()
+
+        For Each i As InspectorItem In iitem.Items
+            GetInspectorItems(i, myItems)
+        Next
+
+        Return myItems
+
+    End Function
+
+    Private Shared Sub GetInspectorItems(ByVal item As InspectorItem, ByVal items As List(Of InspectorItem))
+
+        items.Add(item)
+
+        For Each i As InspectorItem In item.Items
+            GetInspectorItems(i, items)
+        Next
+
+    End Sub
+
 End Class
 
 Public Class InspectorItem

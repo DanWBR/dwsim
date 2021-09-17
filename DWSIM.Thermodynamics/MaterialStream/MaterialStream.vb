@@ -6113,6 +6113,7 @@ Namespace Streams
             End If
             ms.Assign(Me)
             ms.AssignProps(Me)
+            ms.TotalEnergyFlow = TotalEnergyFlow
 
             Return ms
 
@@ -8295,11 +8296,21 @@ Namespace Streams
 
         Public Overrides Function ToString() As String
 
+            Dim text As String
             If GraphicObject IsNot Nothing Then
-                Return GraphicObject.Tag + String.Format(": T = {0} K, P = {1} Pa, W = {2} kg/s, M = {3} mol/s, Q = {4} m3/s", GetTemperature, GetPressure, GetMassFlow, GetMolarFlow, GetVolumetricFlow)
+                text = GraphicObject.Tag + String.Format(": T = {0} K, P = {1} Pa, W = {2} kg/s, M = {3} mol/s, Q = {4} m3/s, EF = {5} kW", GetTemperature, GetPressure, GetMassFlow, GetMolarFlow, GetVolumetricFlow, TotalEnergyFlow)
             Else
-                Return String.Format("Material Stream: T = {0} K, P = {1} Pa, W = {2} kg/s, M = {3} mol/s, Q = {4} m3/s", GetTemperature, GetPressure, GetMassFlow, GetMolarFlow, GetVolumetricFlow)
+                text = String.Format("Material Stream: T = {0} K, P = {1} Pa, W = {2} kg/s, M = {3} mol/s, Q = {4} m3/s, EF = {5} kW", GetTemperature, GetPressure, GetMassFlow, GetMolarFlow, GetVolumetricFlow, TotalEnergyFlow)
             End If
+            If Phases.Count > 0 Then
+                text += vbCrLf + "Compound Mole Fractions:" + vbCrLf
+                For Each comp In Phases(0).Compounds.Values
+                    text += String.Format("{0}: {1}", comp.Name, comp.MoleFraction.GetValueOrDefault())
+                    text += vbCrLf
+                Next
+                text = text.TrimEnd(vbCrLf)
+            End If
+            Return text
 
         End Function
 

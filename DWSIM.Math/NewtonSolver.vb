@@ -43,7 +43,7 @@ Namespace MathEx.Optimization
 
         Private _error As Double
 
-        Public ReadOnly Property Iterations
+        Public ReadOnly Property Iterations As Integer
             Get
                 Return _Iterations
             End Get

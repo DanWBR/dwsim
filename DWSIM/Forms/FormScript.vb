@@ -341,150 +341,150 @@ Imports IronPython.Hosting
         End If
     End Sub
 
-    'Public Sub UpdateScripts()
+    Public Sub UpdateScripts()
 
-    '    fc.UIThread(Sub()
+        fc.UIThread(Sub()
 
-    '                    fc.ScriptCollection.Clear()
+                        fc.ScriptCollection.Clear()
 
-    '                    For Each tab As FATabStripItem In TabStripScripts.Items
-    '                        If Not DWSIM.App.IsRunningOnMono Then
-    '                            Dim seditor As ScriptEditorControl = DirectCast(tab.Controls(0).Controls(0), ScriptEditorControl)
-    '                            Dim scr As New Script() With
-    '                                            {.ID = Guid.NewGuid().ToString,
-    '                                             .Title = tab.Title,
-    '                                             .Linked = seditor.chkLink.Checked,
-    '                                             .ScriptText = seditor.txtScript.Text,
-    '                                             .PythonInterpreter = seditor.cbPythonEngine.SelectedIndex}
-    '                            Select Case seditor.cbLinkedObject.SelectedIndex
-    '                                Case 0
-    '                                    scr.LinkedObjectType = Scripts.ObjectType.Simulation
-    '                                    scr.LinkedObjectName = ""
-    '                                    If seditor.cbLinkedEvent.SelectedIndex = 0 Then
-    '                                        scr.LinkedEventType = Scripts.EventType.SimulationOpened
-    '                                    ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
-    '                                        scr.LinkedEventType = Scripts.EventType.SimulationSaved
-    '                                    ElseIf seditor.cbLinkedEvent.SelectedIndex = 2 Then
-    '                                        scr.LinkedEventType = Scripts.EventType.SimulationClosed
-    '                                    ElseIf seditor.cbLinkedEvent.SelectedIndex = 3 Then
-    '                                        scr.LinkedEventType = Scripts.EventType.SimulationTimer1
-    '                                    ElseIf seditor.cbLinkedEvent.SelectedIndex = 4 Then
-    '                                        scr.LinkedEventType = Scripts.EventType.SimulationTimer5
-    '                                    ElseIf seditor.cbLinkedEvent.SelectedIndex = 5 Then
-    '                                        scr.LinkedEventType = Scripts.EventType.SimulationTimer15
-    '                                    ElseIf seditor.cbLinkedEvent.SelectedIndex = 6 Then
-    '                                        scr.LinkedEventType = Scripts.EventType.SimulationTimer30
-    '                                    ElseIf seditor.cbLinkedEvent.SelectedIndex = 7 Then
-    '                                        scr.LinkedEventType = Scripts.EventType.SimulationTimer60
-    '                                    End If
-    '                                Case 1
-    '                                    scr.LinkedObjectType = Scripts.ObjectType.Solver
-    '                                    scr.LinkedObjectName = ""
-    '                                    If seditor.cbLinkedEvent.SelectedIndex = 0 Then
-    '                                        scr.LinkedEventType = Scripts.EventType.SolverStarted
-    '                                    ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
-    '                                        scr.LinkedEventType = Scripts.EventType.SolverFinished
-    '                                    Else
-    '                                        scr.LinkedEventType = Scripts.EventType.SolverRecycleLoop
-    '                                    End If
-    '                                Case 2
-    '                                    scr.LinkedObjectType = Scripts.ObjectType.Integrator
-    '                                    scr.LinkedObjectName = ""
-    '                                    If seditor.cbLinkedEvent.SelectedIndex = 0 Then
-    '                                        scr.LinkedEventType = Scripts.EventType.IntegratorStarted
-    '                                    ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
-    '                                        scr.LinkedEventType = Scripts.EventType.IntegratorFinished
-    '                                    Else
-    '                                        scr.LinkedEventType = Scripts.EventType.IntegratorError
-    '                                    End If
-    '                                Case Else
-    '                                    If seditor.chkLink.Checked Then
-    '                                        scr.LinkedObjectType = Scripts.ObjectType.FlowsheetObject
-    '                                        Try
-    '                                            scr.LinkedObjectName = fc.GetFlowsheetGraphicObject(seditor.cbLinkedObject.SelectedItem.ToString).Name
-    '                                        Catch ex As Exception
-    '                                        End Try
-    '                                    End If
-    '                                    If seditor.cbLinkedEvent.SelectedIndex = 0 Then
-    '                                        scr.LinkedEventType = Scripts.EventType.ObjectCalculationStarted
-    '                                    ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
-    '                                        scr.LinkedEventType = Scripts.EventType.ObjectCalculationFinished
-    '                                    Else
-    '                                        scr.LinkedEventType = Scripts.EventType.ObjectCalculationError
-    '                                    End If
-    '                            End Select
-    '                            fc.ScriptCollection.Add(scr.ID, scr)
-    '                        Else
-    '                            Dim seditor As ScriptEditorControlMono = DirectCast(tab.Controls(0).Controls(0), ScriptEditorControlMono)
-    '                            Dim scr As New Script() With
-    '                                            {.ID = Guid.NewGuid().ToString,
-    '                                             .Title = tab.Title,
-    '                                             .Linked = seditor.chkLink.Checked,
-    '                                             .ScriptText = seditor.txtScript.Text,
-    '                                             .PythonInterpreter = seditor.cbPythonEngine.SelectedIndex}
-    '                            Select Case seditor.cbLinkedObject.SelectedIndex
-    '                                Case 0
-    '                                    scr.LinkedObjectType = Scripts.ObjectType.Simulation
-    '                                    scr.LinkedObjectName = ""
-    '                                    If seditor.cbLinkedEvent.SelectedIndex = 0 Then
-    '                                        scr.LinkedEventType = Scripts.EventType.SimulationOpened
-    '                                    ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
-    '                                        scr.LinkedEventType = Scripts.EventType.SimulationSaved
-    '                                    ElseIf seditor.cbLinkedEvent.SelectedIndex = 2 Then
-    '                                        scr.LinkedEventType = Scripts.EventType.SimulationClosed
-    '                                    ElseIf seditor.cbLinkedEvent.SelectedIndex = 3 Then
-    '                                        scr.LinkedEventType = Scripts.EventType.SimulationTimer1
-    '                                    ElseIf seditor.cbLinkedEvent.SelectedIndex = 4 Then
-    '                                        scr.LinkedEventType = Scripts.EventType.SimulationTimer5
-    '                                    ElseIf seditor.cbLinkedEvent.SelectedIndex = 5 Then
-    '                                        scr.LinkedEventType = Scripts.EventType.SimulationTimer15
-    '                                    ElseIf seditor.cbLinkedEvent.SelectedIndex = 6 Then
-    '                                        scr.LinkedEventType = Scripts.EventType.SimulationTimer30
-    '                                    ElseIf seditor.cbLinkedEvent.SelectedIndex = 7 Then
-    '                                        scr.LinkedEventType = Scripts.EventType.SimulationTimer60
-    '                                    End If
-    '                                Case 1
-    '                                    scr.LinkedObjectType = Scripts.ObjectType.Solver
-    '                                    scr.LinkedObjectName = ""
-    '                                    If seditor.cbLinkedEvent.SelectedIndex = 0 Then
-    '                                        scr.LinkedEventType = Scripts.EventType.SolverStarted
-    '                                    ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
-    '                                        scr.LinkedEventType = Scripts.EventType.SolverFinished
-    '                                    Else
-    '                                        scr.LinkedEventType = Scripts.EventType.SolverRecycleLoop
-    '                                    End If
-    '                                Case 2
-    '                                    scr.LinkedObjectType = Scripts.ObjectType.Integrator
-    '                                    scr.LinkedObjectName = ""
-    '                                    If seditor.cbLinkedEvent.SelectedIndex = 0 Then
-    '                                        scr.LinkedEventType = Scripts.EventType.IntegratorStarted
-    '                                    ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
-    '                                        scr.LinkedEventType = Scripts.EventType.IntegratorFinished
-    '                                    Else
-    '                                        scr.LinkedEventType = Scripts.EventType.IntegratorError
-    '                                    End If
-    '                                Case Else
-    '                                    If seditor.chkLink.Checked Then
-    '                                        scr.LinkedObjectType = Scripts.ObjectType.FlowsheetObject
-    '                                        scr.LinkedObjectName = fc.GetFlowsheetGraphicObject(seditor.cbLinkedObject.SelectedItem.ToString).Name
-    '                                    End If
-    '                                    If seditor.cbLinkedEvent.SelectedIndex = 0 Then
-    '                                        scr.LinkedEventType = Scripts.EventType.ObjectCalculationStarted
-    '                                    ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
-    '                                        scr.LinkedEventType = Scripts.EventType.ObjectCalculationFinished
-    '                                    Else
-    '                                        scr.LinkedEventType = Scripts.EventType.ObjectCalculationError
-    '                                    End If
-    '                            End Select
-    '                            fc.ScriptCollection.Add(scr.ID, scr)
-    '                        End If
-    '                    Next
+                        For Each tab As FATabStripItem In TabStripScripts.Items
+                            If Not DWSIM.App.IsRunningOnMono Then
+                                Dim seditor As ScriptEditorControl = DirectCast(tab.Controls(0).Controls(0), ScriptEditorControl)
+                                Dim scr As New Script() With
+                                                {.ID = Guid.NewGuid().ToString,
+                                                 .Title = tab.Title,
+                                                 .Linked = seditor.chkLink.Checked,
+                                                 .ScriptText = seditor.txtScript.Text,
+                                                 .PythonInterpreter = seditor.cbPythonEngine.SelectedIndex}
+                                Select Case seditor.cbLinkedObject.SelectedIndex
+                                    Case 0
+                                        scr.LinkedObjectType = Scripts.ObjectType.Simulation
+                                        scr.LinkedObjectName = ""
+                                        If seditor.cbLinkedEvent.SelectedIndex = 0 Then
+                                            scr.LinkedEventType = Scripts.EventType.SimulationOpened
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
+                                            scr.LinkedEventType = Scripts.EventType.SimulationSaved
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 2 Then
+                                            scr.LinkedEventType = Scripts.EventType.SimulationClosed
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 3 Then
+                                            scr.LinkedEventType = Scripts.EventType.SimulationTimer1
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 4 Then
+                                            scr.LinkedEventType = Scripts.EventType.SimulationTimer5
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 5 Then
+                                            scr.LinkedEventType = Scripts.EventType.SimulationTimer15
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 6 Then
+                                            scr.LinkedEventType = Scripts.EventType.SimulationTimer30
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 7 Then
+                                            scr.LinkedEventType = Scripts.EventType.SimulationTimer60
+                                        End If
+                                    Case 1
+                                        scr.LinkedObjectType = Scripts.ObjectType.Solver
+                                        scr.LinkedObjectName = ""
+                                        If seditor.cbLinkedEvent.SelectedIndex = 0 Then
+                                            scr.LinkedEventType = Scripts.EventType.SolverStarted
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
+                                            scr.LinkedEventType = Scripts.EventType.SolverFinished
+                                        Else
+                                            scr.LinkedEventType = Scripts.EventType.SolverRecycleLoop
+                                        End If
+                                    Case 2
+                                        scr.LinkedObjectType = Scripts.ObjectType.Integrator
+                                        scr.LinkedObjectName = ""
+                                        If seditor.cbLinkedEvent.SelectedIndex = 0 Then
+                                            scr.LinkedEventType = Scripts.EventType.IntegratorStarted
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
+                                            scr.LinkedEventType = Scripts.EventType.IntegratorFinished
+                                        Else
+                                            scr.LinkedEventType = Scripts.EventType.IntegratorError
+                                        End If
+                                    Case Else
+                                        If seditor.chkLink.Checked Then
+                                            scr.LinkedObjectType = Scripts.ObjectType.FlowsheetObject
+                                            Try
+                                                scr.LinkedObjectName = fc.GetFlowsheetGraphicObject(seditor.cbLinkedObject.SelectedItem.ToString).Name
+                                            Catch ex As Exception
+                                            End Try
+                                        End If
+                                        If seditor.cbLinkedEvent.SelectedIndex = 0 Then
+                                            scr.LinkedEventType = Scripts.EventType.ObjectCalculationStarted
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
+                                            scr.LinkedEventType = Scripts.EventType.ObjectCalculationFinished
+                                        Else
+                                            scr.LinkedEventType = Scripts.EventType.ObjectCalculationError
+                                        End If
+                                End Select
+                                fc.ScriptCollection.Add(scr.ID, scr)
+                            Else
+                                Dim seditor As ScriptEditorControlMono = DirectCast(tab.Controls(0).Controls(0), ScriptEditorControlMono)
+                                Dim scr As New Script() With
+                                                {.ID = Guid.NewGuid().ToString,
+                                                 .Title = tab.Title,
+                                                 .Linked = seditor.chkLink.Checked,
+                                                 .ScriptText = seditor.txtScript.Text,
+                                                 .PythonInterpreter = seditor.cbPythonEngine.SelectedIndex}
+                                Select Case seditor.cbLinkedObject.SelectedIndex
+                                    Case 0
+                                        scr.LinkedObjectType = Scripts.ObjectType.Simulation
+                                        scr.LinkedObjectName = ""
+                                        If seditor.cbLinkedEvent.SelectedIndex = 0 Then
+                                            scr.LinkedEventType = Scripts.EventType.SimulationOpened
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
+                                            scr.LinkedEventType = Scripts.EventType.SimulationSaved
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 2 Then
+                                            scr.LinkedEventType = Scripts.EventType.SimulationClosed
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 3 Then
+                                            scr.LinkedEventType = Scripts.EventType.SimulationTimer1
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 4 Then
+                                            scr.LinkedEventType = Scripts.EventType.SimulationTimer5
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 5 Then
+                                            scr.LinkedEventType = Scripts.EventType.SimulationTimer15
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 6 Then
+                                            scr.LinkedEventType = Scripts.EventType.SimulationTimer30
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 7 Then
+                                            scr.LinkedEventType = Scripts.EventType.SimulationTimer60
+                                        End If
+                                    Case 1
+                                        scr.LinkedObjectType = Scripts.ObjectType.Solver
+                                        scr.LinkedObjectName = ""
+                                        If seditor.cbLinkedEvent.SelectedIndex = 0 Then
+                                            scr.LinkedEventType = Scripts.EventType.SolverStarted
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
+                                            scr.LinkedEventType = Scripts.EventType.SolverFinished
+                                        Else
+                                            scr.LinkedEventType = Scripts.EventType.SolverRecycleLoop
+                                        End If
+                                    Case 2
+                                        scr.LinkedObjectType = Scripts.ObjectType.Integrator
+                                        scr.LinkedObjectName = ""
+                                        If seditor.cbLinkedEvent.SelectedIndex = 0 Then
+                                            scr.LinkedEventType = Scripts.EventType.IntegratorStarted
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
+                                            scr.LinkedEventType = Scripts.EventType.IntegratorFinished
+                                        Else
+                                            scr.LinkedEventType = Scripts.EventType.IntegratorError
+                                        End If
+                                    Case Else
+                                        If seditor.chkLink.Checked Then
+                                            scr.LinkedObjectType = Scripts.ObjectType.FlowsheetObject
+                                            scr.LinkedObjectName = fc.GetFlowsheetGraphicObject(seditor.cbLinkedObject.SelectedItem.ToString).Name
+                                        End If
+                                        If seditor.cbLinkedEvent.SelectedIndex = 0 Then
+                                            scr.LinkedEventType = Scripts.EventType.ObjectCalculationStarted
+                                        ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
+                                            scr.LinkedEventType = Scripts.EventType.ObjectCalculationFinished
+                                        Else
+                                            scr.LinkedEventType = Scripts.EventType.ObjectCalculationError
+                                        End If
+                                End Select
+                                fc.ScriptCollection.Add(scr.ID, scr)
+                            End If
+                        Next
 
-    '                    fc.WriteToLog("Script Data updated sucessfully.", Color.Blue, MessageType.Information)
+                        fc.WriteToLog("Script Data updated sucessfully.", Color.Blue, MessageType.Information)
 
-    '                End Sub)
+                    End Sub)
 
-    'End Sub
+    End Sub
 
     Private Sub tscb1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles tscb1.SelectedIndexChanged
         For Each ft As FATabStripItem In TabStripScripts.Items
@@ -508,7 +508,9 @@ Imports IronPython.Hosting
 
     Private Sub NewToolStripButton_Click(sender As Object, e As EventArgs) Handles NewToolStripButton.Click
 
-        InsertScriptTab(New Script())
+        Dim newscript As New Script With {.ID = Guid.NewGuid().ToString()}
+        fc.ScriptCollection.Add(newscript.ID, newscript)
+        InsertScriptTab(newscript)
 
     End Sub
 
@@ -543,20 +545,24 @@ Imports IronPython.Hosting
                     stab.Title = scriptdata.Title
                 End If
 
-                AddHandler scontrol.txtScript.TextChanged, Sub()
-                                                               scriptdata.ScriptText = scontrol.txtScript.Text
-                                                           End Sub
+                AddHandler scontrol.txtScript.TextChanged,
+                    Sub()
+                        scriptdata.ScriptText = scontrol.txtScript.Text
+                    End Sub
 
-                AddHandler scontrol.tbName.TextChanged, Sub()
-                                                            scriptdata.Title = scontrol.tbName.Text
-                                                            stab.Title = scriptdata.Title
-                                                        End Sub
+                AddHandler scontrol.tbName.TextChanged,
+                    Sub()
+                        scriptdata.Title = scontrol.tbName.Text
+                        stab.Title = scriptdata.Title
+                    End Sub
 
-                AddHandler scontrol.btnDelete.Click, Sub()
-                                                         If MessageBox.Show(DWSIM.App.GetLocalString("RemoveScriptQuestion"), "DWSIM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
-                                                             TabStripScripts.RemoveTab(stab)
-                                                         End If
-                                                     End Sub
+                AddHandler scontrol.btnDelete.Click,
+                    Sub()
+                        If MessageBox.Show(DWSIM.App.GetLocalString("RemoveScriptQuestion"), "DWSIM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
+                            TabStripScripts.RemoveTab(stab)
+                            fc.ScriptCollection.Remove(scriptdata.ID)
+                        End If
+                    End Sub
 
                 TabStripScripts.AddTab(stab, True)
 
@@ -617,6 +623,83 @@ Imports IronPython.Hosting
                 End Select
 
                 .cbPythonEngine.SelectedIndex = scriptdata.PythonInterpreter
+
+
+                AddHandler scontrol.cbPythonEngine.SelectedIndexChanged,
+                    Sub()
+                        scriptdata.PythonInterpreter = scontrol.cbPythonEngine.SelectedIndex
+                    End Sub
+
+                Dim cbhandler = Sub()
+                                    Dim scr = scriptdata
+                                    Select Case scontrol.cbLinkedObject.SelectedIndex
+                                        Case 0
+                                            scr.LinkedObjectType = Scripts.ObjectType.Simulation
+                                            scr.LinkedObjectName = ""
+                                            If scontrol.cbLinkedEvent.SelectedIndex = 0 Then
+                                                scr.LinkedEventType = Scripts.EventType.SimulationOpened
+                                            ElseIf scontrol.cbLinkedEvent.SelectedIndex = 1 Then
+                                                scr.LinkedEventType = Scripts.EventType.SimulationSaved
+                                            ElseIf scontrol.cbLinkedEvent.SelectedIndex = 2 Then
+                                                scr.LinkedEventType = Scripts.EventType.SimulationClosed
+                                            ElseIf scontrol.cbLinkedEvent.SelectedIndex = 3 Then
+                                                scr.LinkedEventType = Scripts.EventType.SimulationTimer1
+                                            ElseIf scontrol.cbLinkedEvent.SelectedIndex = 4 Then
+                                                scr.LinkedEventType = Scripts.EventType.SimulationTimer5
+                                            ElseIf scontrol.cbLinkedEvent.SelectedIndex = 5 Then
+                                                scr.LinkedEventType = Scripts.EventType.SimulationTimer15
+                                            ElseIf scontrol.cbLinkedEvent.SelectedIndex = 6 Then
+                                                scr.LinkedEventType = Scripts.EventType.SimulationTimer30
+                                            ElseIf scontrol.cbLinkedEvent.SelectedIndex = 7 Then
+                                                scr.LinkedEventType = Scripts.EventType.SimulationTimer60
+                                            End If
+                                        Case 1
+                                            scr.LinkedObjectType = Scripts.ObjectType.Solver
+                                            scr.LinkedObjectName = ""
+                                            If scontrol.cbLinkedEvent.SelectedIndex = 0 Then
+                                                scr.LinkedEventType = Scripts.EventType.SolverStarted
+                                            ElseIf scontrol.cbLinkedEvent.SelectedIndex = 1 Then
+                                                scr.LinkedEventType = Scripts.EventType.SolverFinished
+                                            Else
+                                                scr.LinkedEventType = Scripts.EventType.SolverRecycleLoop
+                                            End If
+                                        Case 2
+                                            scr.LinkedObjectType = Scripts.ObjectType.Integrator
+                                            scr.LinkedObjectName = ""
+                                            If scontrol.cbLinkedEvent.SelectedIndex = 0 Then
+                                                scr.LinkedEventType = Scripts.EventType.IntegratorStarted
+                                            ElseIf scontrol.cbLinkedEvent.SelectedIndex = 1 Then
+                                                scr.LinkedEventType = Scripts.EventType.IntegratorFinished
+                                            Else
+                                                scr.LinkedEventType = Scripts.EventType.IntegratorError
+                                            End If
+                                        Case Else
+                                            If scontrol.chkLink.Checked Then
+                                                scr.LinkedObjectType = Scripts.ObjectType.FlowsheetObject
+                                                Try
+                                                    scr.LinkedObjectName = fc.GetFlowsheetGraphicObject(scontrol.cbLinkedObject.SelectedItem.ToString).Name
+                                                Catch ex As Exception
+                                                End Try
+                                            End If
+                                            If scontrol.cbLinkedEvent.SelectedIndex = 0 Then
+                                                scr.LinkedEventType = Scripts.EventType.ObjectCalculationStarted
+                                            ElseIf scontrol.cbLinkedEvent.SelectedIndex = 1 Then
+                                                scr.LinkedEventType = Scripts.EventType.ObjectCalculationFinished
+                                            Else
+                                                scr.LinkedEventType = Scripts.EventType.ObjectCalculationError
+                                            End If
+                                    End Select
+
+                                End Sub
+
+                AddHandler scontrol.cbLinkedObject.SelectedIndexChanged, cbhandler
+
+                AddHandler scontrol.cbLinkedEvent.SelectedIndexChanged, cbhandler
+
+                AddHandler scontrol.chkLink.CheckStateChanged,
+                    Sub()
+                        scriptdata.Linked = scontrol.chkLink.Checked
+                    End Sub
 
             End With
 
@@ -713,6 +796,8 @@ Imports IronPython.Hosting
     Private Sub TabStripScripts_TabStripItemClosing(e As TabStripItemClosingEventArgs) Handles TabStripScripts.TabStripItemClosing
         If MessageBox.Show(DWSIM.App.GetLocalString("RemoveScriptQuestion"), "DWSIM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.No Then
             e.Cancel = True
+        Else
+            fc.ScriptCollection.Remove(e.Item.Tag)
         End If
     End Sub
 

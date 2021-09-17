@@ -40,8 +40,6 @@ Namespace Reactors
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_ReactorConvEqGibbs
 
-        Private _IObj As InspectorItem
-
         Dim tmpx As Double(), tmpdx As Double()
 
         Dim tms As MaterialStream
@@ -90,7 +88,7 @@ Namespace Reactors
 
 #Region "Auxiliary Functions"
 
-        Private Function FunctionValue2N(x() As Double, ideal As Boolean) As Double()
+        Private Function FunctionValue2N(x() As Double, ideal As Boolean, IObj As InspectorItem) As Double()
 
             If Double.IsNaN(x.Sum) Then Throw New Exception("Convergence Error")
 
@@ -163,8 +161,11 @@ Namespace Reactors
                 If rv > 0 Then fugv = pp.RET_UnitaryVector()
                 If rl > 0 Then fugl = pp.RET_UnitaryVector().MultiplyY(pp.RET_VPVAP(T))
             Else
+                IObj?.SetCurrent()
                 If rv > 0 Then fugv = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Vapor)
+                IObj?.SetCurrent()
                 If rl > 0 Then fugl = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Liquid)
+                IObj?.SetCurrent()
             End If
 
             i = 0
@@ -292,7 +293,6 @@ Namespace Reactors
             tms.Phases(0).Properties.massflow = sumw
 
             pp.CurrentMaterialStream = tms
-            _IObj?.SetCurrent
             tms.Calculate(True, True)
             pp.CurrentMaterialStream = tms
 
@@ -395,6 +395,8 @@ Namespace Reactors
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
+            Dim DRW = GetDebugWriter()
+
             Dim IObj As InspectorItem = Host.GetNewInspectorItem()
 
             Host.CheckAndAdd(IObj, "", "Calculate", If(GraphicObject IsNot Nothing, GraphicObject.Tag, "Temporary Object") & " (" & GetDisplayName() & ")", GetDisplayName() & " Calculation Routine", True)
@@ -493,8 +495,6 @@ Namespace Reactors
 
             IObj?.Paragraphs.Add("<h2>Calculated Parameters</h2>")
 
-            _IObj = IObj
-
             Dim i, j As Integer
 
             If Me.Conversions Is Nothing Then Me.m_conversions = New Dictionary(Of String, Double)
@@ -511,9 +511,18 @@ Namespace Reactors
             Me.DeltaT = 0.0#
 
             Dim rx As Reaction
-            Dim ims As MaterialStream = GetInletMaterialStream(0).Clone
+            Dim ims As MaterialStream = GetInletMaterialStream(0).Clone()
             Dim pp As PropertyPackages.PropertyPackage = Me.PropertyPackage
             Dim ppr As New PropertyPackages.RaoultPropertyPackage()
+
+            DRW?.AppendLine(String.Format("Calculation Mode: {0}", ReactorOperationMode))
+            DRW?.AppendLine(String.Format("Defined Outlet Temperature: {0} K", OutletTemperature))
+            DRW?.AppendLine(String.Format("Defined Pressure Drop: {0} Pa", DeltaP.GetValueOrDefault()))
+            DRW?.AppendLine(String.Format("Initial Estimate for Adiabatic Temperature: {0} K", TAdb))
+            DRW?.AppendLine()
+
+            DRW?.AppendLine("Inlet Material Stream: " + GetInletMaterialStream(0).ToString())
+            DRW?.AppendLine()
 
             ims.SetFlowsheet(Me.FlowSheet)
             ims.PreferredFlashAlgorithmTag = Me.PreferredFlashAlgorithmTag
@@ -686,6 +695,11 @@ Namespace Reactors
 
             IObj?.Paragraphs.Add(String.Format("Initial Gibbs Energy: {0}", g0))
 
+            DRW?.AppendLine()
+            DRW?.AppendLine(String.Format("Initial Gibbs Energy: {0}", g0))
+            DRW?.AppendLine(String.Format("Initial Estimate for Reaction Extents: {0}", REx.ToArrayString()))
+            DRW?.AppendLine()
+
             Me.InitialGibbsEnergy = g0
 
             MinVal = Math.Min(lbound.Min, REx.Min)
@@ -706,9 +720,9 @@ Namespace Reactors
 
                     T = Tx
 
-                    Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
+                    DRW?.AppendLine(String.Format("[External Iteration {0}] Temperature Estimate: {1} K", cnt, T))
 
-                    _IObj = IObj2
+                    Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
                     Inspector.Host.CheckAndAdd(IObj2, "", "Calculate", "Equilibrium Reactor Convergence Temperature Loop Iteration #" & cnt, "", True)
 
@@ -728,13 +742,13 @@ Namespace Reactors
 
                         Dim IObj3 As InspectorItem = Host.GetNewInspectorItem()
 
-                        _IObj = IObj3
-
                         Inspector.Host.CheckAndAdd(IObj3, "", "Calculate", "Equilibrium Reactor Reaction Extents Convergence Loop Iteration #" & niter, "", True)
 
                         IObj3?.SetCurrent
 
-                        IObj3?.Paragraphs.Add(String.Format("Tentative Reaction Extents: {0}", x.ToMathArrayString))
+                        IObj3?.Paragraphs.Add(String.Format("Tentative Reaction Extents: {0}", x.ToMathArrayString()))
+
+                        DRW?.AppendLine(String.Format("[Internal Iteration {0}] Tentative Reaction Extents: {1}", niter, x.ToArrayString()))
 
                         Dim xs As Double
 
@@ -757,27 +771,37 @@ Namespace Reactors
                         errval = 0.0
                         sumerr = 0.0
 
+                        Dim fval As Double()
+
                         If esolv IsNot Nothing Then
+                            Dim iit As Integer = 0
                             newx = esolv.Solve(Function(x1)
                                                    FlowSheet.CheckStatus()
-                                                   Return FunctionValue2N(x1, False)
+                                                   fval = FunctionValue2N(x1, False, IObj3)
+                                                   IObj3?.Paragraphs.Add(String.Format("[Iteration {0}] Absolute Sum of Squared Error Functions: {1}", iit, fval.AbsSqrSumY()))
+                                                   iit += 1
+                                                   Return fval
                                                End Function, Nothing, Nothing, variables.ToArray(),
                                                         InternalLoopMaximumIterations, InternalLoopTolerance)
 
                         Else
                             newx = solver3.Solve(Function(x1)
                                                      FlowSheet.CheckStatus()
-                                                     Return FunctionValue2N(x1, True)
+                                                     fval = FunctionValue2N(x1, True, IObj3)
+                                                     IObj3?.Paragraphs.Add(String.Format("[Iteration {0} - Ideal] Absolute Sum of Squared Error Functions: {1}", solver3.Iterations, fval.AbsSqrSumY()))
+                                                     Return fval
                                                  End Function, variables.ToArray())
                             newx = solver3.Solve(Function(x1)
-                                                         FlowSheet.CheckStatus()
-                                                         Return FunctionValue2N(x1, False)
-                                                     End Function, newx)
+                                                     FlowSheet.CheckStatus()
+                                                     fval = FunctionValue2N(x1, False, IObj3)
+                                                     IObj3?.Paragraphs.Add(String.Format("[Iteration {0}] Absolute Sum of Squared Error Functions: {1}", solver3.Iterations, fval.AbsSqrSumY()))
+                                                     Return fval
+                                                 End Function, newx)
                         End If
 
                         FlowSheet.CheckStatus()
 
-                        errval = FunctionValue2N(newx, False).AbsSqrSumY()
+                        errval = FunctionValue2N(newx, False, IObj3).AbsSqrSumY()
 
                         newx = newx.Select(Function(xi) Scaler.UnScale(Math.Exp(xi), MinVal, MaxVal, 0.0, 1.0)).ToArray
 
@@ -786,6 +810,8 @@ Namespace Reactors
                         x = newx
 
                         IObj3?.Paragraphs.Add(String.Format("Updated Reaction Extents: {0}", newx.ToMathArrayString))
+
+                        DRW?.AppendLine(String.Format("[Internal Iteration {0}] Error: {1}, Updated Reaction Extents: {2}", niter, errval, newx.ToArrayString()))
 
                         niter += 1
 
@@ -797,6 +823,8 @@ Namespace Reactors
 
                     Dim penval = Math.Abs(ReturnPenaltyValue())
 
+                    DRW?.AppendLine(String.Format("[External Iteration {0}] Penalty Value: {1}", cnt, penval))
+
                     If penval > 0.1 And ReactorOperationMode <> OperationMode.Adiabatic Then
 
                         Throw New Exception("Invalid solution: mass balance residue > 0. Are all possible reactions defined?")
@@ -806,8 +834,6 @@ Namespace Reactors
                     REx = x
 
                     IObj2?.SetCurrent
-
-                    _IObj = IObj2
 
                     i = 0
                     For Each r As String In Me.Reactions
@@ -955,7 +981,13 @@ Namespace Reactors
 
                     If cnt >= ExternalLoopMaximumIterations Then Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
 
+                    IObj2?.Paragraphs.Add(String.Format("Temperature Loop Enthalpy Error: {0}", erfunc))
+
                     IObj2?.Close()
+
+                    DRW?.AppendLine(String.Format("[External Iteration {0}] Updated Temperature: {1}", cnt, T))
+
+                    DRW?.AppendLine(String.Format("[External Iteration {0}] Enthalpy Error: {1}", cnt, erfunc))
 
                     Return erfunc
 
@@ -987,20 +1019,14 @@ Namespace Reactors
 
             Me.FinalGibbsEnergy = g1
 
-            'If g1 > g0 And ReactorOperationMode <> OperationMode.Adiabatic Then
-
-            '    Throw New Exception("Invalid solution (gf > g0)")
-
-            'End If
-
             IObj?.Paragraphs.Add(String.Format("Final Gibbs Energy: {0}", g1))
 
-            'Me.ReactionExtents.Clear()
+            DRW?.AppendLine()
+            DRW?.AppendLine(String.Format("Final Gibbs Energy: {0}", g1))
 
-            'For Each rxid As String In Me.Reactions
-            '    rx = FlowSheet.Reactions(rxid)
-            '    ReactionExtents.Add(rx.ID, (N(rx.BaseReactant) - N0(rx.BaseReactant)) / rx.Components(rx.BaseReactant).StoichCoeff)
-            'Next
+            IObj?.Paragraphs.Add(String.Format("Final Reaction Extents: {0}", REx.ToMathArrayString()))
+
+            DRW?.AppendLine(String.Format("Final Reaction Extents: {0}", REx.ToArrayString()))
 
             Dim W As Double = ims.Phases(0).Properties.massflow.GetValueOrDefault
 
@@ -1067,6 +1093,11 @@ Namespace Reactors
                     .Phases(0).Properties.enthalpy = Hv
                     .Phases(0).Properties.massflow = W * wv
                 End With
+
+                DRW?.AppendLine()
+                DRW?.AppendLine("Outlet Vapor Material Stream: " + ms.ToString())
+                DRW?.AppendLine()
+
             End If
 
             cp = Me.GraphicObject.OutputConnectors(1)
@@ -1089,13 +1120,25 @@ Namespace Reactors
                     .Phases(0).Properties.enthalpy = (H - Hv * wv) / (1 - wv)
                     .Phases(0).Properties.massflow = W * (1 - wv)
                 End With
+
+                DRW?.AppendLine()
+                DRW?.AppendLine("Outlet Liquid Material Stream: " + ms.ToString())
+                DRW?.AppendLine()
+
             End If
 
             'energy stream - update energy flow value (kW)
             With GetInletEnergyStream(1)
                 .EnergyFlow = Me.DeltaQ.GetValueOrDefault
                 .GraphicObject.Calculated = True
+
+                DRW?.AppendLine()
+                DRW?.AppendLine(String.Format("Energy Stream: {0} kW", .EnergyFlow))
+                DRW?.AppendLine()
+
             End With
+
+            StoreDebugReport(DRW)
 
             IObj?.Close()
 

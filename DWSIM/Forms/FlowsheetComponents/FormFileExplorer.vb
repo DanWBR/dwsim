@@ -126,19 +126,19 @@ Public Class FormFileExplorer
         End If
     End Sub
 
-    Private Sub FormFileExplorer_GotFocus(sender As Object, e As EventArgs) Handles Me.GotFocus
-
-        ListFiles()
-        UpdateSize()
-
-    End Sub
-
     Private Sub FormFileExplorer_Disposed(sender As Object, e As EventArgs) Handles Me.Disposed
 
         Try
             Directory.Delete(TempDir, True)
         Catch ex As Exception
         End Try
+
+    End Sub
+
+    Private Sub FormFileExplorer_Activated(sender As Object, e As EventArgs) Handles Me.VisibleChanged
+
+        ListFiles()
+        UpdateSize()
 
     End Sub
 

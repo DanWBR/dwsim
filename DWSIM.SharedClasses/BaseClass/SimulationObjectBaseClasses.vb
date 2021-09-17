@@ -21,6 +21,7 @@ Imports System.Text
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.Interfaces.Enums
 Imports System.Dynamic
+Imports System.Reflection
 
 Namespace UnitOperations
 
@@ -54,19 +55,9 @@ Namespace UnitOperations
 
         <System.NonSerialized()> <Xml.Serialization.XmlIgnore> Public CalculationRoutineOverride As Action
 
-#Region "    Constructors"
+        Public Property StoreDetailedDebugReport As Boolean = False
 
-        Public Sub New()
-
-        End Sub
-
-        Sub CreateNew()
-
-            If ExtraProperties.Count = 0 Then CreateDynamicProperties()
-
-        End Sub
-
-#End Region
+        Public Property DetailedDebugReport As String
 
         Public Overridable Property ComponentDescription() As String = ""
 
@@ -81,6 +72,42 @@ Namespace UnitOperations
             End If
 
         End Function
+
+        ''' <summary>
+        ''' Gets the current flowsheet where this object is located.
+        ''' </summary>
+        ''' <value></value>
+        ''' <returns>Flowsheet instance.</returns>
+        ''' <remarks></remarks>
+        Public Overridable ReadOnly Property FlowSheet() As Interfaces.IFlowsheet
+            Get
+                If Not m_flowsheet Is Nothing Then
+                    Return m_flowsheet
+                Else
+                    Return Nothing
+                End If
+            End Get
+        End Property
+
+        Public Overridable Property ObjectClass As SimulationObjectClass = SimulationObjectClass.Other Implements ISimulationObject.ObjectClass
+
+        Public Overridable ReadOnly Property SupportsDynamicMode As Boolean = False Implements ISimulationObject.SupportsDynamicMode
+
+        Public Overridable ReadOnly Property HasPropertiesForDynamicMode As Boolean = False Implements ISimulationObject.HasPropertiesForDynamicMode
+
+#Region "    Constructors"
+
+        Public Sub New()
+
+        End Sub
+
+        Sub CreateNew()
+
+            If ExtraProperties.Count = 0 Then CreateDynamicProperties()
+
+        End Sub
+
+#End Region
 
 #Region "    ISimulationObject"
 
@@ -1128,27 +1155,63 @@ Namespace UnitOperations
 
         End Sub
 
-        ''' <summary>
-        ''' Gets the current flowsheet where this object is located.
-        ''' </summary>
-        ''' <value></value>
-        ''' <returns>Flowsheet instance.</returns>
-        ''' <remarks></remarks>
-        Public Overridable ReadOnly Property FlowSheet() As Interfaces.IFlowsheet
-            Get
-                If Not m_flowsheet Is Nothing Then
-                    Return m_flowsheet
+        Public Function GetDebugWriter() As StringBuilder
+
+            If StoreDetailedDebugReport Then
+                Dim drw As New Text.StringBuilder()
+                If GraphicObject IsNot Nothing Then
+                    drw?.AppendLine("Debug Report: " + GraphicObject.Tag)
                 Else
-                    Return Nothing
+                    drw?.AppendLine("Debug Report: " + ComponentName)
                 End If
-            End Get
-        End Property
+                drw?.AppendLine("Date: " + Date.Now.ToString())
+                drw?.AppendLine()
+                drw?.AppendLine("Application & System Info: ")
+                drw?.AppendLine()
 
-        Public Overridable Property ObjectClass As SimulationObjectClass = SimulationObjectClass.Other Implements ISimulationObject.ObjectClass
+                Dim version = My.Application.Info.Version.Major & "." &
+                    My.Application.Info.Version.Minor & "." &
+                    My.Application.Info.Version.Build & " (" &
+                    IO.File.GetLastWriteTimeUtc(Assembly.GetEntryAssembly().Location).ToString() + ")"
 
-        Public Overridable ReadOnly Property SupportsDynamicMode As Boolean = False Implements ISimulationObject.SupportsDynamicMode
+                drw?.AppendLine(String.Format("DWSIM Version: {0}", version))
+                drw?.AppendLine(String.Format("OS Version: {0}", My.Computer.Info.OSFullName & ", Version " & My.Computer.Info.OSVersion & ", " & My.Computer.Info.OSPlatform & " Platform"))
+                drw?.AppendLine(String.Format("Runtime Version: {0}", SharedClasses.Utility.GetRuntimeVersion()))
 
-        Public Overridable ReadOnly Property HasPropertiesForDynamicMode As Boolean = False Implements ISimulationObject.HasPropertiesForDynamicMode
+                Try
+                    Dim scrh As New System.Management.ManagementObjectSearcher("select * from Win32_Processor")
+                    Dim cpu As String = System.Environment.GetEnvironmentVariable("PROCESSOR_IDENTIFIER")
+                    For Each qinfo In scrh.Get()
+                        cpu += " / " & qinfo.Properties("Name").Value.ToString
+                    Next
+                    drw?.AppendLine(String.Format("CPU Info: {0}", cpu))
+                Catch ex As Exception
+                End Try
+
+                drw?.AppendLine()
+                drw?.AppendLine("Solver Settings: ")
+                drw?.AppendLine()
+                drw?.AppendLine(String.Format("Solver Option: {0}", GlobalSettings.Settings.SolverMode))
+                drw?.AppendLine(String.Format("Use Parallel CPU Acceleration: {0}", GlobalSettings.Settings.EnableParallelProcessing))
+                drw?.AppendLine(String.Format("Use Parallel GPU Acceleration: {0}", GlobalSettings.Settings.EnableGPUProcessing))
+                drw?.AppendLine(String.Format("Use CPU SIMD Extensions: {0}", GlobalSettings.Settings.UseSIMDExtensions))
+                drw?.AppendLine()
+                drw?.AppendLine("Calculation Report: ")
+                drw?.AppendLine()
+                Return drw
+            Else
+                Return Nothing
+            End If
+
+        End Function
+
+        Public Sub StoreDebugReport(DebugReportWriter As StringBuilder)
+
+            If DebugReportWriter IsNot Nothing Then
+                DetailedDebugReport = DebugReportWriter.ToString()
+            End If
+
+        End Sub
 
 #End Region
 
