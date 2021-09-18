@@ -280,6 +280,22 @@ Public Class FormUnitGen
             .Item(.Count - 1).Cells(1) = cb
 
         End With
+
+        AddHandler DataGridView1.EditingControlShowing, AddressOf Me.myDataGridView_EditingControlShowing
+
+    End Sub
+
+    Private Sub myDataGridView_EditingControlShowing(ByVal sender As Object, ByVal e As DataGridViewEditingControlShowingEventArgs)
+        If (e.Control.GetType = GetType(DataGridViewComboBoxEditingControl)) Then
+            Dim cmb As ComboBox = CType(e.Control, ComboBox)
+            RemoveHandler DataGridView1.EditingControlShowing, AddressOf Me.cmb_SelectionChangeCommitted
+            AddHandler cmb.SelectionChangeCommitted, AddressOf Me.cmb_SelectionChangeCommitted
+        End If
+
+    End Sub
+
+    Private Sub cmb_SelectionChangeCommitted(ByVal sender As Object, ByVal e As EventArgs)
+        DataGridView1.CurrentCell.Value = CType(sender, DataGridViewComboBoxEditingControl).EditingControlFormattedValue
     End Sub
 
     Private Sub KryptonButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonButton1.Click

@@ -670,10 +670,10 @@
     <value>Mass Concentration</value>
   </data>
   <data name="ConcMolar" xml:space="preserve">
-    <value>Molar Conc.</value>
+    <value>Molar Concentration</value>
   </data>
   <data name="ConcMssica" xml:space="preserve">
-    <value>Mass Conc.</value>
+    <value>Mass Concentration</value>
   </data>
   <data name="Concreto" xml:space="preserve">
     <value>Concrete</value>
@@ -1105,16 +1105,16 @@
     <value>Delta-G/RT</value>
   </data>
   <data name="DeltaP" xml:space="preserve">
-    <value>Delta-P</value>
+    <value>Pressure Difference</value>
   </data>
   <data name="DeltaStepsize" xml:space="preserve">
     <value>Step Size</value>
   </data>
   <data name="DeltaT" xml:space="preserve">
-    <value>Delta-T</value>
+    <value>Temperature Difference</value>
   </data>
   <data name="DeltaT2" xml:space="preserve">
-    <value>Delta-T</value>
+    <value>Temperature Difference</value>
   </data>
   <data name="DescCSLKPP" xml:space="preserve">
     <value>Uses the empirical model of Chao and Seader for the calculation of VLE K-values. All other thermodynamic properties are calculated by the Lee-Kesler model.</value>
@@ -4216,7 +4216,7 @@
     <value>Correction factor</value>
   </data>
   <data name="OPDeltaT" xml:space="preserve">
-    <value>Delta T</value>
+    <value>Temperature Difference</value>
   </data>
   <data name="OPOrificeDiameter" xml:space="preserve">
     <value>Orifice diameter</value>
@@ -5794,5 +5794,8 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   </data>
   <data name="PrimaryEnergyStreamRequired" xml:space="preserve">
     <value>This calculation mode requires a energy stream connected to the primary port.</value>
+  </data>
+  <data name="UserDefined" xml:space="preserve">
+    <value>User-defined</value>
   </data>
 </root>

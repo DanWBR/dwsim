@@ -150,7 +150,7 @@
     <comment>0</comment>
   </data>
   <data name="PROP_CL_5" xml:space="preserve">
-    <value>Delta-T</value>
+    <value>Temperature Difference</value>
     <comment>0</comment>
   </data>
   <data name="PROP_CO_0" xml:space="preserve">
@@ -162,7 +162,7 @@
     <comment>1</comment>
   </data>
   <data name="PROP_CO_2" xml:space="preserve">
-    <value>Delta-T</value>
+    <value>Temperature Difference</value>
     <comment>0</comment>
   </data>
   <data name="PROP_CO_3" xml:space="preserve">
@@ -318,7 +318,7 @@
     <comment>0</comment>
   </data>
   <data name="PROP_HT_5" xml:space="preserve">
-    <value>Delta-T</value>
+    <value>Temperature Difference</value>
     <comment>1</comment>
   </data>
   <data name="PROP_HX_0" xml:space="preserve">
@@ -1329,7 +1329,7 @@
     <comment>0</comment>
   </data>
   <data name="PROP_OP_7" xml:space="preserve">
-    <value>Delta T</value>
+    <value>Temperature Difference</value>
     <comment>0</comment>
   </data>
   <data name="PROP_PF_0" xml:space="preserve">
@@ -1405,7 +1405,7 @@
     <comment>1</comment>
   </data>
   <data name="PROP_PU_2" xml:space="preserve">
-    <value>Delta-T</value>
+    <value>Temperature Difference</value>
     <comment>0</comment>
   </data>
   <data name="PROP_PU_3" xml:space="preserve">
@@ -1596,7 +1596,7 @@
     <comment>1</comment>
   </data>
   <data name="PROP_TU_2" xml:space="preserve">
-    <value>Delta-T</value>
+    <value>Temperature Difference</value>
     <comment>0</comment>
   </data>
   <data name="PROP_TU_3" xml:space="preserve">

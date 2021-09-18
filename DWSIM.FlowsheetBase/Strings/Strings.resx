@@ -991,16 +991,16 @@
     <value>Delta-G/RT</value>
   </data>
   <data name="DeltaP" xml:space="preserve">
-    <value>Delta-P</value>
+    <value>Pressure Difference</value>
   </data>
   <data name="DeltaStepsize" xml:space="preserve">
     <value>Step Size</value>
   </data>
   <data name="DeltaT" xml:space="preserve">
-    <value>Delta-T</value>
+    <value>Temperature Difference</value>
   </data>
   <data name="DeltaT2" xml:space="preserve">
-    <value>Delta-T</value>
+    <value>Temperature Difference</value>
   </data>
   <data name="DescCSLKPP" xml:space="preserve">
     <value>Uses the empirical model of Chao and Seader for the calculation of VLE K-values. All other thermodynamic properties are calculated by the Lee-Kesler model.</value>

@@ -933,14 +933,15 @@ Imports System.Drawing
                 v3 = Me.GridMalha.Rows(2).Cells(column.Name).Value
                 v4 = Me.GridMalha.Rows(3).Cells(column.Name).Value
                 v5 = Me.GridMalha.Rows(4).Cells(column.Name).Value
+                If v5 = PipeOp.FlowSheet.GetTranslatedString("UserDefined") Then v5 = "UserDefined"
                 v6 = Me.GridMalha.Rows(7).Cells(column.Name).Value.ToString.ParseExpressionToDouble
                 v7 = Me.GridMalha.Rows(8).Cells(column.Name).Value.ToString.ParseExpressionToDouble
                 v8 = Me.GridMalha.Rows(9).Cells(column.Name).Value.ToString.ParseExpressionToDouble
                 v9 = Me.GridMalha.Rows(10).Cells(column.Name).Value.ToString.ParseExpressionToDouble
                 If v2 = PipeOp.FlowSheet.GetTranslatedString("Tubulaosimples") Then v2 = "Tubulaosimples"
                 Dim ps As New PipeSection(v1, v2, v3, v4, v5, cv.Convert(Me.Units.distance, "m", v6), cv.Convert(Me.Units.distance, "m", v7), cv.Convert(Me.Units.diameter, "in", v8), cv.Convert(Me.Units.diameter, "in", v9))
-                If ps.Material = PipeOp.FlowSheet.GetTranslatedString("UserDefined") Then
-                    ps.PipeWallRugosity = Me.GridMalha.Rows(5).Cells(column.Name).Value.ToString.ParseExpressionToDouble
+                If ps.Material = "UserDefined" Then
+                    ps.PipeWallRugosity = cv.ConvertToSI(Units.distance, Me.GridMalha.Rows(5).Cells(column.Name).Value.ToString.ParseExpressionToDouble())
                     ps.PipeWallThermalConductivityExpression = Me.GridMalha.Rows(6).Cells(column.Name).Value
                 End If
                 PipeOp.Profile.Sections.Add(column.Index + 1, ps)
@@ -1028,12 +1029,12 @@ Imports System.Drawing
             End If
             Me.GridMalha.Rows(2).Cells(psec.Indice - 1).Value = psec.Quantidade
             Me.GridMalha.Rows(3).Cells(psec.Indice - 1).Value = psec.Incrementos
-            If Not CBMat.Items.Contains(psec.Material) Then
+            If Not CBMat.Items.Contains(PipeOp.FlowSheet.GetTranslatedString(psec.Material)) Then
                 Me.GridMalha.Rows(4).Cells(psec.Indice - 1).Value = CBMat.Items(0)
             Else
-                Me.GridMalha.Rows(4).Cells(psec.Indice - 1).Value = psec.Material
+                Me.GridMalha.Rows(4).Cells(psec.Indice - 1).Value = PipeOp.FlowSheet.GetTranslatedString(psec.Material)
             End If
-            If psec.Material = PipeOp.FlowSheet.GetTranslatedString("UserDefined") Then
+            If psec.Material = "UserDefined" Then
                 Me.GridMalha.Rows(5).Cells(psec.Indice - 1).Value = cv.Convert("m", Me.Units.distance, psec.PipeWallRugosity)
                 Me.GridMalha.Rows(6).Cells(psec.Indice - 1).Value = psec.PipeWallThermalConductivityExpression
                 Me.GridMalha.Rows(5).Cells(psec.Indice - 1).Style.BackColor = Nothing
@@ -1041,7 +1042,7 @@ Imports System.Drawing
                 Me.GridMalha.Rows(5).Cells(psec.Indice - 1).ReadOnly = False
                 Me.GridMalha.Rows(6).Cells(psec.Indice - 1).ReadOnly = False
             Else
-                Me.GridMalha.Rows(5).Cells(psec.Indice - 1).Value = cv.ConvertFromSI(Me.Units.distance, PipeOp.rugosidade(psec.Material, Nothing))
+                Me.GridMalha.Rows(5).Cells(psec.Indice - 1).Value = cv.ConvertFromSI(Me.Units.distance, PipeOp.rugosidade(psec.Material, psec))
                 Me.GridMalha.Rows(6).Cells(psec.Indice - 1).Value = "T-Dep"
                 Me.GridMalha.Rows(5).Cells(psec.Indice - 1).Style.BackColor = Color.LightGray
                 Me.GridMalha.Rows(6).Cells(psec.Indice - 1).Style.BackColor = Color.LightGray
@@ -1319,8 +1320,23 @@ Imports System.Drawing
             Me.PipeEditor1_StatusChanged(e, PipeEditorStatus.OK)
         End If
 
+        AddHandler GridMalha.EditingControlShowing, AddressOf Me.myDataGridView_EditingControlShowing
+
         loaded = True
 
+    End Sub
+
+    Private Sub myDataGridView_EditingControlShowing(ByVal sender As Object, ByVal e As DataGridViewEditingControlShowingEventArgs)
+        If (e.Control.GetType = GetType(DataGridViewComboBoxEditingControl)) Then
+            Dim cmb As ComboBox = CType(e.Control, ComboBox)
+            RemoveHandler GridMalha.EditingControlShowing, AddressOf Me.cmb_SelectionChangeCommitted
+            AddHandler cmb.SelectionChangeCommitted, AddressOf Me.cmb_SelectionChangeCommitted
+        End If
+
+    End Sub
+
+    Private Sub cmb_SelectionChangeCommitted(ByVal sender As Object, ByVal e As EventArgs)
+        GridMalha.CurrentCell.Value = CType(sender, DataGridViewComboBoxEditingControl).EditingControlFormattedValue
     End Sub
 
     Private Sub KryptonRadioButton1_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles KryptonRadioButton1.CheckedChanged, KryptonRadioButton2.CheckedChanged
@@ -1441,12 +1457,15 @@ Imports System.Drawing
                 ToolStripLabel2.ForeColor = Color.DarkOrange
 
                 If e.RowIndex = 4 Then
-                    Dim material = GridMalha.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
+                    Dim material = GridMalha.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString()
                     If material IsNot Nothing Then
-                        If material.ToString <> PipeOp.FlowSheet.GetTranslatedString("UserDefined") Then
+                        If material.Contains("User") Or material.Contains("Usu") Then
+                            material = "UserDefined"
+                        End If
+                        If material.ToString <> "UserDefined" Then
                             GridMalha.Rows(e.RowIndex + 1).Cells(e.ColumnIndex).ReadOnly = True
                             GridMalha.Rows(e.RowIndex + 2).Cells(e.ColumnIndex).ReadOnly = True
-                            GridMalha.Rows(e.RowIndex + 1).Cells(e.ColumnIndex).Value = PipeOp.rugosidade(material.ToString, Nothing)
+                            GridMalha.Rows(e.RowIndex + 1).Cells(e.ColumnIndex).Value = PipeOp.rugosidade(material.ToString, PipeOp.Profile.Sections(e.ColumnIndex + 1))
                             GridMalha.Rows(e.RowIndex + 2).Cells(e.ColumnIndex).Value = "T-Dep"
                             GridMalha.Rows(e.RowIndex + 1).Cells(e.ColumnIndex).Style.BackColor = System.Drawing.Color.LightGray
                             GridMalha.Rows(e.RowIndex + 2).Cells(e.ColumnIndex).Style.BackColor = System.Drawing.Color.LightGray
