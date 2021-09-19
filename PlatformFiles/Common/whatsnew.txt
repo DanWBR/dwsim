@@ -1,7 +1,8 @@
-Version 6.6.2
+Version 6.6.3
 
-- DWSIM now uses the System Font in Classic UI
-- Enhanced stability of Equilibrium Reactor calculation in Adiabatic mode
-- Fixed a regression in Pipe Segment UO
-- Fixed Classic UI layout in High-DPI displays
-- Input Boxes can now be used in Steady-State mode
+- Fixed Equilibrium Reactor Adiabatic calculation mode
+- Fixed some Classic UI issues
+- Fixed issues with Pipe Segment editor (Classic UI)
+- Fixed an issue with Material Stream flow specification (#198)
+- Fixed issues with Petroleum Characterization utilities
+- Fixed Splitter balance check

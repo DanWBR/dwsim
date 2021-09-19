@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 6.6.2
+Version 6.6.3
 Copyright (c) 2017-2021 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,16 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim6/commits/windows
+
+Version 6.6.3
+
+Author              Description
+Daniel Medeiros     Fixed Equilibrium Reactor Adiabatic calculation mode
+Daniel Medeiros     Fixed some Classic UI issues
+Daniel Medeiros     Fixed issues with Pipe Segment editor (Classic UI)
+Daniel Medeiros     Fixed an issue with Material Stream flow specification (#198)
+Daniel Medeiros     Fixed issues with Petroleum Characterization utilities
+Daniel Medeiros     Fixed Splitter balance check
 
 Version 6.6.2
 
