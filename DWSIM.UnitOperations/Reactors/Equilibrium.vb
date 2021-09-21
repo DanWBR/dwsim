@@ -226,14 +226,17 @@ Namespace Reactors
 
             Dim reaction As IReaction
 
-            Dim penval = ReturnPenaltyValue()
+            Dim pval = ReturnPenaltyValue()
 
             For i = 0 To Me.Reactions.Count - 1
                 reaction = FlowSheet.Reactions(Me.Reactions(i))
                 kr = reaction.EvaluateK(T + reaction.Approach, pp)
                 ktot *= kr
                 prodtot *= Math.Abs(prod(i))
-                f(i) = Math.Log(Math.Abs(prod(i)) / kr) + penval ^ 2
+                f(i) = Math.Log(Math.Abs(prod(i)) / kr)
+                If pval > 0.01 Then
+                    f(i) *= pval
+                End If
             Next
 
             FlowSheet.CheckStatus()
@@ -712,7 +715,7 @@ Namespace Reactors
             Dim TLast As Double = T0 'remember T for iteration loops
             Dim cnt As Integer = 0
 
-            Dim errval, sumerr As Double
+            Dim errval, sumerr, penval As Double
 
             rv = Reactions.Where(Function(rx0) FlowSheet.Reactions(rx0).ReactionPhase = PhaseName.Vapor).Count
             rl = Reactions.Where(Function(rx0) FlowSheet.Reactions(rx0).ReactionPhase = PhaseName.Liquid).Count
@@ -823,14 +826,12 @@ Namespace Reactors
 
                     If niter >= InternalLoopMaximumIterations Then Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
 
-                    Dim penval = Math.Abs(ReturnPenaltyValue())
+                    penval = Math.Abs(ReturnPenaltyValue())
 
                     DRW?.AppendLine(String.Format("[External Iteration {0}] Penalty Value: {1}", cnt, penval))
 
-                    If penval > 0.01 Then
-
-                        Throw New Exception("Current solution led to negative mole fractions.")
-
+                    If penval > 0.01 And ReactorOperationMode <> OperationMode.Adiabatic Then
+                        Throw New Exception("Solution led to negative mole fractions.")
                     End If
 
                     REx = x
@@ -1000,9 +1001,8 @@ Namespace Reactors
                 Do
                     adberror = efunc.Invoke(T)
                 Loop Until adberror <= 0.1
-                Dim penval = Math.Abs(ReturnPenaltyValue())
-                If penval > 0.1 Then
-                    Throw New Exception("Invalid solution: mass balance residue > 0. Are all possible reactions defined?")
+                If penval > 0.01 Then
+                    Throw New Exception("Solution led to negative mole fractions.")
                 End If
                 TAdb = T
             Else
