@@ -121,6 +121,10 @@ Namespace UnitOperations
             MyBase.New()
         End Sub
 
+        Public Overrides Sub PerformPostCalcValidation(Optional MolarFlows As Boolean = False)
+            MyBase.PerformPostCalcValidation(True)
+        End Sub
+
         Public Overrides Sub RunDynamicModel()
 
             OutCount = 0

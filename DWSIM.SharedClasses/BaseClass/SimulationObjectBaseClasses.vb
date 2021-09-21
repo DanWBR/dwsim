@@ -310,7 +310,7 @@ Namespace UnitOperations
 
         End Sub
 
-        Public Overridable Sub PerformPostCalcValidation() Implements ISimulationObject.PerformPostCalcValidation
+        Public Overridable Sub PerformPostCalcValidation(Optional MolarFlows As Boolean = False) Implements ISimulationObject.PerformPostCalcValidation
 
             If GraphicObject.ObjectType <> ObjectType.MaterialStream And GraphicObject.ObjectType <> ObjectType.EnergyStream And
                 GraphicObject.ObjectType <> ObjectType.OT_Adjust And GraphicObject.ObjectType <> ObjectType.OT_Spec And
@@ -331,7 +331,11 @@ Namespace UnitOperations
 
                 For Each ims In imsc
                     If ims.GraphicObject.Active Then
-                        mi = Convert.ToDouble(ims.GetPropertyValue("PROP_MS_2"))
+                        If MolarFlows Then
+                            mi = Convert.ToDouble(ims.GetPropertyValue("PROP_MS_3")) / 1000.0 * Convert.ToDouble(ims.GetPropertyValue("PROP_MS_6"))
+                        Else
+                            mi = Convert.ToDouble(ims.GetPropertyValue("PROP_MS_2"))
+                        End If
                         mb += mi
                         mbt += mi
                         hi = Convert.ToDouble(ims.GetPropertyValue("PROP_MS_7"))
@@ -346,7 +350,11 @@ Namespace UnitOperations
 
                 For Each oms In omsc
                     If oms.GraphicObject.Active Then
-                        mi = Convert.ToDouble(oms.GetPropertyValue("PROP_MS_2"))
+                        If MolarFlows Then
+                            mi = Convert.ToDouble(oms.GetPropertyValue("PROP_MS_3")) / 1000.0 * Convert.ToDouble(oms.GetPropertyValue("PROP_MS_6"))
+                        Else
+                            mi = Convert.ToDouble(oms.GetPropertyValue("PROP_MS_2"))
+                        End If
                         mb -= mi
                         mbt += mi
                         hi = Convert.ToDouble(oms.GetPropertyValue("PROP_MS_7"))

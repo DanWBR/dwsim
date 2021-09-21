@@ -226,12 +226,14 @@ Namespace Reactors
 
             Dim reaction As IReaction
 
+            Dim penval = ReturnPenaltyValue()
+
             For i = 0 To Me.Reactions.Count - 1
                 reaction = FlowSheet.Reactions(Me.Reactions(i))
                 kr = reaction.EvaluateK(T + reaction.Approach, pp)
                 ktot *= kr
                 prodtot *= Math.Abs(prod(i))
-                f(i) = Math.Log(Math.Abs(prod(i)) / kr)
+                f(i) = Math.Log(Math.Abs(prod(i)) / kr) + penval ^ 2
             Next
 
             FlowSheet.CheckStatus()

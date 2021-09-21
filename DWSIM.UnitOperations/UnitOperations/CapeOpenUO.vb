@@ -1274,7 +1274,7 @@ Namespace UnitOperations
 
         End Function
 
-        Public Overrides Sub PerformPostCalcValidation()
+        Public Overrides Sub PerformPostCalcValidation(Optional MolarFlows As Boolean = False)
 
 
         End Sub
