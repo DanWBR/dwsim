@@ -827,9 +827,9 @@ Namespace Reactors
 
                     DRW?.AppendLine(String.Format("[External Iteration {0}] Penalty Value: {1}", cnt, penval))
 
-                    If penval > 0.1 And ReactorOperationMode <> OperationMode.Adiabatic Then
+                    If penval > 0.01 Then
 
-                        Throw New Exception("Invalid solution: mass balance residue > 0. Are all possible reactions defined?")
+                        Throw New Exception("Current solution led to negative mole fractions.")
 
                     End If
 

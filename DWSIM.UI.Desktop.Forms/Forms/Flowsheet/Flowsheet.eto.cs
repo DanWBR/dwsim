@@ -1695,7 +1695,7 @@ namespace DWSIM.UI.Forms
                 }
                 else
                 {
-                    FlowsheetObject.ShowMessage("Backup file successfully saved to '" + path + "'.", Interfaces.IFlowsheet.MessageType.Information);
+                    //FlowsheetObject.ShowMessage("Backup file successfully saved to '" + path + "'.", Interfaces.IFlowsheet.MessageType.Information);
                 }
             }
 
