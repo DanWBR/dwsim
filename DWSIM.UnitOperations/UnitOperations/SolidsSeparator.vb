@@ -51,7 +51,7 @@ Namespace UnitOperations
         Public Property SeparationEfficiency() As Double = 100.0#
         Public Property LiquidSeparationEfficiency() As Double = 100.0#
 
-        Public Overrides Sub PerformPostCalcValidation(Optional MolarFlows As Boolean = False)
+        Public Overrides Sub PerformPostCalcValidation()
 
         End Sub
 

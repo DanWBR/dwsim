@@ -188,7 +188,7 @@ Imports DWSIM.Interfaces.Enums
 
     Sub Solve()
 
-    Sub PerformPostCalcValidation(Optional MolarFlows As Boolean = False)
+    Sub PerformPostCalcValidation()
 
     Property PropertyPackage As IPropertyPackage
 

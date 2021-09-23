@@ -1673,7 +1673,16 @@ namespace DWSIM.UI.Forms
                 strmZipOutputStream.Finish();
                 strmZipOutputStream.Close();
 
-                File.Delete(xmlfile);
+                try
+                {
+                    File.Delete(xmlfile);
+                }
+                catch { }
+                try
+                {
+                    File.Delete(dbfile);
+                }
+                catch { }
             }
             else if (System.IO.Path.GetExtension(path).ToLower() == ".dwxml")
             {
@@ -1684,6 +1693,8 @@ namespace DWSIM.UI.Forms
                 FlowsheetObject.SaveToMXML().Save(path);
             }
 
+            FlowsheetObject.ProcessScripts(Interfaces.Enums.Scripts.EventType.SimulationSaved, Interfaces.Enums.Scripts.ObjectType.Simulation, "");
+
             if (!s.AutomationMode)
             {
                 if (!backup)
@@ -1691,7 +1702,6 @@ namespace DWSIM.UI.Forms
                     FlowsheetObject.Options.FilePath = path;
                     Title = FlowsheetObject.Options.SimulationName + " [" + FlowsheetObject.Options.FilePath + "]";
                     FlowsheetObject.ShowMessage("Simulation file successfully saved to '" + path + "'.", Interfaces.IFlowsheet.MessageType.Information);
-                    FlowsheetObject.ProcessScripts(Interfaces.Enums.Scripts.EventType.SimulationSaved, Interfaces.Enums.Scripts.ObjectType.Simulation, "");
                 }
                 else
                 {
