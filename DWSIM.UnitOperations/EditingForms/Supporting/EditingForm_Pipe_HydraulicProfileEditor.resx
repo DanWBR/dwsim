@@ -120,6 +120,10 @@
   <data name="ColBase.HeaderText" xml:space="preserve">
     <value>Column1</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ColBase.Width" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="GridMalha.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -128,7 +132,6 @@
   <data name="GridMalha.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="GridMalha.RowHeadersWidth" type="System.Int32, mscorlib">
     <value>100</value>
   </data>

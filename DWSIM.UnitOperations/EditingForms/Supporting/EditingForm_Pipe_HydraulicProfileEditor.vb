@@ -356,13 +356,14 @@ Imports System.Drawing
         Me.GridMalha.AllowUserToAddRows = False
         Me.GridMalha.AllowUserToOrderColumns = True
         Me.GridMalha.AllowUserToResizeRows = False
+        Me.GridMalha.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.GridMalha.BackgroundColor = System.Drawing.SystemColors.Control
         Me.GridMalha.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.GridMalha.ColumnHeadersVisible = False
         Me.GridMalha.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColBase})
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
         DataGridViewCellStyle2.FormatProvider = New System.Globalization.CultureInfo("pt-BR")
         DataGridViewCellStyle2.NullValue = "<empty>"
@@ -387,7 +388,7 @@ Imports System.Drawing
         DataGridViewCellStyle4.FormatProvider = New System.Globalization.CultureInfo("pt-BR")
         Me.GridMalha.RowsDefaultCellStyle = DataGridViewCellStyle4
         Me.GridMalha.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.GridMalha.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GridMalha.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.GridMalha.RowTemplate.DefaultCellStyle.FormatProvider = New System.Globalization.CultureInfo("pt-BR")
         Me.GridMalha.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         '
@@ -1061,6 +1062,8 @@ Imports System.Drawing
     End Sub
 
     Private Sub PipeEditor_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+        ExtensionMethods.ChangeDefaultFont(Me)
 
         Dim l, j As Integer
         Dim linha_atual As String() = New String() {}
