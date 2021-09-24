@@ -30,6 +30,8 @@ Imports DWSIM.Interfaces.Enums
 Imports DWSIM.Interfaces
 Imports System.Dynamic
 Imports System.Text.RegularExpressions
+Imports Mages.Core.EngineExtensions
+Imports Mages.Core.FunctionExtensions
 
 Namespace BaseClasses
 
@@ -250,6 +252,10 @@ Namespace BaseClasses
         <XmlIgnore> <NonSerialized> Public ExpContext As New Ciloci.Flee.ExpressionContext
         <XmlIgnore> <NonSerialized> Public Expr As Ciloci.Flee.IGenericExpression(Of Double)
 
+        <XmlIgnore> <NonSerialized> Private MEngine As Mages.Core.Engine
+        <XmlIgnore> <NonSerialized> Private KFunc As Mages.Core.Function
+        <XmlIgnore> <NonSerialized> Private _ExpressionChanged As Boolean = True
+
 #Region "    DWSIM Specific"
 
         Public Function EvaluateK(ByVal T As Double, ByVal pp As PropertyPackages.PropertyPackage) As Double
@@ -264,11 +270,16 @@ Namespace BaseClasses
 
                 Case KOpt.Expression
 
-                    ExpContext.Variables("T") = T
-                    ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
-                    Expr = ExpContext.CompileGeneric(Of Double)(Expression)
+                    If MEngine Is Nothing Then
+                        MEngine = New Mages.Core.Engine()
+                        KFunc = MEngine.Interpret("(T) => " + Expression)
+                    End If
+                    If _ExpressionChanged Then
+                        _ExpressionChanged = False
+                        KFunc = MEngine.Interpret("(T) => " + Expression)
+                    End If
 
-                    Return Math.Exp(Expr.Evaluate)
+                    Return Math.Exp(KFunc.Call(Of Double)(T))
 
                 Case KOpt.Gibbs
 
@@ -421,8 +432,17 @@ Namespace BaseClasses
 
         Public Property E_Reverse As Double Implements Interfaces.IReaction.E_Reverse
 
-        Public Property Expression As String = "" Implements Interfaces.IReaction.Expression
+        Private _Expression As String = ""
 
+        Public Property Expression As String Implements Interfaces.IReaction.Expression
+            Get
+                Return _Expression
+            End Get
+            Set(value As String)
+                _Expression = value
+                _ExpressionChanged = True
+            End Set
+        End Property
         Public Property KExprType As Interfaces.Enums.KOpt Implements Interfaces.IReaction.KExprType
 
         Public Property Kvalue As Double Implements Interfaces.IReaction.Kvalue

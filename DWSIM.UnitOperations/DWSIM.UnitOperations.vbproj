@@ -129,6 +129,9 @@
     <Reference Include="Jolt.Testing.GeneratedTypes">
       <HintPath>..\DWSIM\References\Jolt.Testing.GeneratedTypes.dll</HintPath>
     </Reference>
+    <Reference Include="Mages.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mages.2.0.0\lib\netstandard2.0\Mages.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Mapack">
       <HintPath>..\DWSIM\References\Mapack.dll</HintPath>
     </Reference>
