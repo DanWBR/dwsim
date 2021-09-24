@@ -174,8 +174,8 @@
   <data name="TabPageFlash.Size" type="System.Drawing.Size, System.Drawing">
     <value>636, 409</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+  <data name="InvalidAutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>1, 1</value>
   </data>
   <data name="Label1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>

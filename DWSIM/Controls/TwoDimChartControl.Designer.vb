@@ -134,7 +134,7 @@ Partial Class TwoDimChartControl
         'TwoDimChartControl
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.SplitContainer1)
         Me.Name = "TwoDimChartControl"
         Me.SplitContainer1.Panel1.ResumeLayout(False)

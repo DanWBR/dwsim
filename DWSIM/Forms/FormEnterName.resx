@@ -145,8 +145,8 @@
   <data name="tbName.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 15</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+  <data name="InvalidAutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>1, 1</value>
   </data>
   <data name="tbName.Size" type="System.Drawing.Size, System.Drawing">
     <value>189, 20</value>

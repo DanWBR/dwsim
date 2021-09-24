@@ -31,7 +31,7 @@ Partial Class FormTextBoxInput
         resources.ApplyResources(Me.TextBox1, "TextBox1")
         Me.TextBox1.Name = "TextBox1"
         '
-        'FormTextBox
+        'FormTextBoxInput
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
@@ -39,7 +39,7 @@ Partial Class FormTextBoxInput
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "FormTextBox"
+        Me.Name = "FormTextBoxInput"
         Me.ShowIcon = False
         Me.ResumeLayout(False)
         Me.PerformLayout()

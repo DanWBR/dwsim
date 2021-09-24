@@ -593,8 +593,8 @@
   <data name="&gt;&gt;FaTabStripItem4.Name" xml:space="preserve">
     <value>FaTabStripItem4</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+  <data name="InvalidAutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>1, 1</value>
   </data>
   <data name="txtScript.Font" type="System.Drawing.Font, System.Drawing">
     <value>Courier New, 9.75pt</value>

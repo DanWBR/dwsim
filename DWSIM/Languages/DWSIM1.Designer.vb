@@ -11989,6 +11989,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Perda de Carga por Fricção.
+        '''</summary>
+        Friend Shared ReadOnly Property PressureDropFriction() As String
+            Get
+                Return ResourceManager.GetString("PressureDropFriction", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Perda de Carga Hidrostática.
+        '''</summary>
+        Friend Shared ReadOnly Property PressureDropStatic() As String
+            Get
+                Return ResourceManager.GetString("PressureDropStatic", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Incremento de Pressão.
         '''</summary>
         Friend Shared ReadOnly Property PressureIncrease() As String

@@ -84,6 +84,9 @@ Namespace UnitOperations
         Public Property OutletPressure As Double = 101325
         Public Property OutletTemperature As Double = 298.15
 
+        Public Property PressureDrop_Static As Double = 0.0
+        Public Property PressureDrop_Friction As Double = 0.0
+
         Public Property IncludeEmulsion() As Boolean
             Get
                 Return m_includeemulsion
@@ -418,6 +421,9 @@ Namespace UnitOperations
             Tspec = Me.OutletTemperature
             Pspec = Me.OutletPressure
 
+            PressureDrop_Friction = 0.0
+            PressureDrop_Static = 0.0
+
             Dim countext As Integer = 0
 
             Dim currL As Double = 0.0#
@@ -594,7 +600,7 @@ Namespace UnitOperations
 
                                         IObj6?.SetCurrent()
                                         If segmento.TipoSegmento = "Tubulaosimples" Or segmento.TipoSegmento = "" Or segmento.TipoSegmento = "Straight Tube Section" Or segmento.TipoSegmento = "Straight Tube" Or segmento.TipoSegmento = "Tubulação Simples" Then
-                                            resv = fpp.CalculateDeltaP(.DI * 0.0254, .Comprimento / .Incrementos, .Elevacao / .Incrementos, Me.rugosidade(.Material, segmento), Qvin * 24 * 3600, Qlin * 24 * 3600, eta_v * 1000, eta_l * 1000, rho_v, rho_l, tens)
+                                            resv = fpp.CalculateDeltaP(.DI * 0.0254, .Comprimento / .Incrementos, .Elevacao / .Incrementos, Me.GetRugosity(.Material, segmento), Qvin * 24 * 3600, Qlin * 24 * 3600, eta_v * 1000, eta_l * 1000, rho_v, rho_l, tens)
                                         Else
                                             segmento.Comprimento = 0.1 '10 cm default
                                             segmento.Incrementos = 1 'only one increment
@@ -603,13 +609,13 @@ Namespace UnitOperations
                                             If resf(1) Then
                                                 Dim L_eq As Double
                                                 L_eq = resf(0) * 0.0254 * .DI
-                                                resv = fpp.CalculateDeltaP(.DI * 0.0254, L_eq, 0, Me.rugosidade(.Material, segmento), Qvin * 24 * 3600, Qlin * 24 * 3600, eta_v * 1000, eta_l * 1000, rho_v, rho_l, tens)
+                                                resv = fpp.CalculateDeltaP(.DI * 0.0254, L_eq, 0, Me.GetRugosity(.Material, segmento), Qvin * 24 * 3600, Qlin * 24 * 3600, eta_v * 1000, eta_l * 1000, rho_v, rho_l, tens)
                                             Else
                                                 mu_mix = Qlin / (Qvin + Qlin) * eta_l + Qvin / (Qvin + Qlin) * eta_v
                                                 rho_mix = Qlin / (Qvin + Qlin) * rho_l + Qvin / (Qvin + Qlin) * rho_v
                                                 vel_mix = (Qlin + Qvin) / ((.DI * 0.0254) ^ 2 * Math.PI / 4)
                                                 Re_mix = fpp.NRe(rho_mix, vel_mix, .DI * 0.0254, mu_mix)
-                                                Dim k = Me.rugosidade(.Material, segmento)
+                                                Dim k = Me.GetRugosity(.Material, segmento)
                                                 f_mix = fpp.FrictionFactor(Re_mix, .DI * 0.0254, k)
                                                 dph = 0
                                                 dpf = resf(0) * (Qlin / (Qvin + Qlin) * rho_l + Qvin / (Qvin + Qlin) * rho_v) * (results.LiqVel.GetValueOrDefault + results.VapVel.GetValueOrDefault) ^ 2 / 2
@@ -683,7 +689,7 @@ Namespace UnitOperations
                                             Tpe = Tin + (Tout - Tin) / 2
                                             IObj5?.SetCurrent
                                             Dim resultU As Double() = CalcOverallHeatTransferCoefficient(segmento, .Material, holdup, .Comprimento / .Incrementos,
-                                                                                .DI * 0.0254, .DE * 0.0254, Me.rugosidade(.Material, segmento), Tpe, results.External_Temperature,
+                                                                                .DI * 0.0254, .DE * 0.0254, Me.GetRugosity(.Material, segmento), Tpe, results.External_Temperature,
                                                                                 results.VapVel, results.LiqVel, results.Cpl, results.Cpv, results.Kl, results.Kv,
                                                                                 results.MUl, results.MUv, results.RHOl, results.RHOv,
                                                                                 Me.ThermalProfile.Incluir_cti, Me.ThermalProfile.Incluir_isolamento,
@@ -896,6 +902,9 @@ Namespace UnitOperations
                 IObj2?.Close()
 
             Loop
+
+            PressureDrop_Friction = Profile.Sections.Select(Function(s) s.Value.Results.Select(Function(r) r.DpFriction).Sum).Sum
+            PressureDrop_Static = Profile.Sections.Select(Function(s) s.Value.Results.Select(Function(r) r.DpStatic).Sum).Sum
 
             CheckSpec(Tout, True, "outlet temperature")
             CheckSpec(Pout, True, "outlet pressure")
@@ -1208,7 +1217,7 @@ Namespace UnitOperations
 
         End Function
 
-        Public Function rugosidade(ByVal material As String, section As PipeSection) As Double
+        Public Function GetRugosity(ByVal material As String, section As PipeSection) As Double
 
             Dim epsilon As Double
 
@@ -1233,7 +1242,7 @@ Namespace UnitOperations
                     epsilon = section.PipeWallRugosity
             End Select
 
-            rugosidade = epsilon
+            Return epsilon
 
         End Function
 
@@ -1342,7 +1351,7 @@ Namespace UnitOperations
                 'Internal Re calc
                 Dim Re_int = NRe(rho, vel, Dint, mu)
 
-                Dim epsilon = Me.rugosidade(materialparede, section)
+                Dim epsilon = Me.GetRugosity(materialparede, section)
                 Dim ffint = 0.0#
                 If Re_int > 3250 Then
                     Dim a1 = Math.Log(((epsilon / Dint) ^ 1.1096) / 2.8257 + (7.149 / Re_int) ^ 0.8961) / Math.Log(10.0#)
@@ -1885,8 +1894,10 @@ Final3:     T = bbb
                             Case Else
                                 Return 0.0
                         End Select
-                    Else
-                        Return 0.0#
+                    ElseIf prop.Equals("PressureDropStatic") Then
+                        Return cv.ConvertFromSI(su.deltaP, PressureDrop_Static)
+                    ElseIf prop.Equals("PressureDropFriction") Then
+                        Return cv.ConvertFromSI(su.deltaP, PressureDrop_Friction)
                     End If
                 Catch ex As Exception
                     Return "Error"
@@ -1896,7 +1907,9 @@ Final3:     T = bbb
         End Function
 
         Public Overrides Function GetDefaultProperties() As String()
-            Return New String() {"PROP_PS_0", "PROP_PS_1", "PROP_PS_2", "PROP_PS_8", "PROP_PS_9"}
+
+            Return New String() {"PROP_PS_0", "PressureDropStatic", "PressureDropFriction", "PROP_PS_1", "PROP_PS_2", "PROP_PS_8", "PROP_PS_9"}
+
         End Function
 
         Public Overloads Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
@@ -1907,6 +1920,8 @@ Final3:     T = bbb
             For i = 0 To 9
                 proplist.Add("PROP_PS_" + CStr(i))
             Next
+            proplist.Add("PressureDropStatic")
+            proplist.Add("PressureDropFriction")
             For Each ps In Profile.Sections
                 proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Length")
                 proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Elevation")
@@ -2203,6 +2218,10 @@ Final3:     T = bbb
                         Case Else
                             Return ""
                     End Select
+                ElseIf prop.Equals("PressureDropStatic") Then
+                    Return su.deltaP
+                ElseIf prop.Equals("PressureDropFriction") Then
+                    Return su.deltaP
                 Else
                     Return ""
                 End If

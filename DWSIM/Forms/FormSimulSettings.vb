@@ -192,6 +192,7 @@ Public Class FormSimulSettings
                 End If
             Next
             cbObjectType.SelectedIndex = 0
+            cbObjectType.Sorted = True
 
             With Me.dgvpp.Rows
                 .Clear()
@@ -1343,9 +1344,10 @@ Public Class FormSimulSettings
     End Sub
 
     Private Sub cbObjectType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbObjectType.SelectedIndexChanged
+        If Not loaded Then Exit Sub
         PropertyListView.Items.Clear()
         For Each item In availableproperties(cbObjectType.SelectedItem)
-            PropertyListView.Items.Add(item, DWSIM.App.GetPropertyName(item), 0).Tag = item
+            PropertyListView.Items.Add(item, CurrentFlowsheet.GetTranslatedString1(item), 0).Tag = item
         Next
 
         For Each item In availableproperties(cbObjectType.SelectedItem)

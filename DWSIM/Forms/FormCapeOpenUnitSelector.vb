@@ -28,6 +28,7 @@ Public Class FormCapeOpenUnitSelector
         End With
         If Me.ListBox1.Items.Count > 0 Then
             Me.ListBox1.SelectedIndex = 0
+            ListBox1.Sorted = True
         End If
 
     End Sub

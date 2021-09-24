@@ -1464,8 +1464,8 @@
   <data name="TrackBar2.Location" type="System.Drawing.Point, System.Drawing">
     <value>172, 75</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+  <data name="InvalidAutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>1, 1</value>
   </data>
   <data name="Label2.ToolTip" xml:space="preserve">
     <value />

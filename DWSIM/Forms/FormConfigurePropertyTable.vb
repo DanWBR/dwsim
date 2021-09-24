@@ -18,6 +18,9 @@ Public Class FormConfigurePropertyTable
             lvObjects.Items.Add(obj.GraphicObject.Tag).Tag = obj.Name
         Next
 
+        lvObjects.Sorting = SortOrder.Ascending
+        lvObjects.Sort()
+
         loaded = True
 
     End Sub

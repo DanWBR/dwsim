@@ -170,7 +170,7 @@
     <comment>0</comment>
   </data>
   <data name="PROP_CO_4" xml:space="preserve">
-    <value>Pressure</value>
+    <value>Outlet Pressure</value>
     <comment>1</comment>
   </data>
   <data name="PROP_CP_0" xml:space="preserve">
@@ -1364,11 +1364,11 @@
     <value>Diameter</value>
   </data>
   <data name="PROP_PS_0" xml:space="preserve">
-    <value>Pressure Drop</value>
+    <value>Pressure Drop (Total)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_PS_1" xml:space="preserve">
-    <value>Temperature Drop</value>
+    <value>Temperature Change</value>
     <comment>0</comment>
   </data>
   <data name="PROP_PS_2" xml:space="preserve">
@@ -1604,7 +1604,7 @@
     <comment>0</comment>
   </data>
   <data name="PROP_TU_4" xml:space="preserve">
-    <value>Pressure</value>
+    <value>Outlet Pressure</value>
     <comment>1</comment>
   </data>
   <data name="PROP_VA_0" xml:space="preserve">

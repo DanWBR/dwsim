@@ -196,7 +196,7 @@
     <value>Raw Steel</value>
   </data>
   <data name="AoInoxidvel" xml:space="preserve">
-    <value>Steel</value>
+    <value>Stainless Steel</value>
   </data>
   <data name="Aparncia2" xml:space="preserve">
     <value>2. Appearance</value>
@@ -1552,7 +1552,7 @@
     <value>Acceleration frequency</value>
   </data>
   <data name="FerroBottomido" xml:space="preserve">
-    <value>Cast iron</value>
+    <value>Cast Iron</value>
   </data>
   <data name="Fibradevidro" xml:space="preserve">
     <value>Fiberglass</value>
@@ -5386,5 +5386,125 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   </data>
   <data name="PrimaryEnergyStreamRequired" xml:space="preserve">
     <value>This calculation mode requires an energy stream connected to the primary port.</value>
+  </data>
+  <data name="PressureDropFriction" xml:space="preserve">
+    <value>Pressure Drop (Friction)</value>
+  </data>
+  <data name="PressureDropStatic" xml:space="preserve">
+    <value>Pressure Drop (Hydrostatic)</value>
+  </data>
+  <data name="AnalogGauge" xml:space="preserve">
+    <value>Analog Gauge</value>
+  </data>
+  <data name="CapeOpenUO" xml:space="preserve">
+    <value>CAPE-OPEN</value>
+  </data>
+  <data name="CompressorExpander" xml:space="preserve">
+    <value>Compressor/Expander (Mobile)</value>
+  </data>
+  <data name="Controller_PID" xml:space="preserve">
+    <value>PID Controller</value>
+  </data>
+  <data name="CustomUO" xml:space="preserve">
+    <value>Python Script</value>
+  </data>
+  <data name="DigitalGauge" xml:space="preserve">
+    <value>Digital Gauge</value>
+  </data>
+  <data name="EnergyStream" xml:space="preserve">
+    <value>Energy Stream</value>
+  </data>
+  <data name="ExcelUO" xml:space="preserve">
+    <value>Spreadsheet</value>
+  </data>
+  <data name="External" xml:space="preserve">
+    <value>External</value>
+  </data>
+  <data name="GO_Animation" xml:space="preserve">
+    <value>Flowsheet Animation</value>
+  </data>
+  <data name="GO_Chart" xml:space="preserve">
+    <value>Flowsheet Chart</value>
+  </data>
+  <data name="GO_FloatingTable" xml:space="preserve">
+    <value>Flowsheet Floating Table</value>
+  </data>
+  <data name="GO_Image" xml:space="preserve">
+    <value>Flowsheet Image</value>
+  </data>
+  <data name="GO_InputControl" xml:space="preserve">
+    <value>Flowsheet Input</value>
+  </data>
+  <data name="GO_MasterTable" xml:space="preserve">
+    <value>Flowsheet Master Property Table</value>
+  </data>
+  <data name="GO_Rectangle" xml:space="preserve">
+    <value>Flowsheet Rectangle</value>
+  </data>
+  <data name="GO_SpreadsheetTable" xml:space="preserve">
+    <value>Flowsheet Spreadsheet Table</value>
+  </data>
+  <data name="GO_Table" xml:space="preserve">
+    <value>Flowsheet Property Table</value>
+  </data>
+  <data name="GO_Text" xml:space="preserve">
+    <value>Flowsheet Text</value>
+  </data>
+  <data name="HeaterCooler" xml:space="preserve">
+    <value>Heater/Cooler (Mobile)</value>
+  </data>
+  <data name="LevelGauge" xml:space="preserve">
+    <value>Level Gauge</value>
+  </data>
+  <data name="MaterialStream" xml:space="preserve">
+    <value>Material Stream</value>
+  </data>
+  <data name="Nenhum" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="NodeEn" xml:space="preserve">
+    <value>Energy Mixer</value>
+  </data>
+  <data name="NodeIn" xml:space="preserve">
+    <value>Mixer</value>
+  </data>
+  <data name="NodeOut" xml:space="preserve">
+    <value>Splitter</value>
+  </data>
+  <data name="OT_Adjust" xml:space="preserve">
+    <value>Steady-State Controller</value>
+  </data>
+  <data name="OT_EnergyRecycle" xml:space="preserve">
+    <value>Energy Stream Recycle</value>
+  </data>
+  <data name="OT_Recycle" xml:space="preserve">
+    <value>Material Stream Recycle</value>
+  </data>
+  <data name="OT_Spec" xml:space="preserve">
+    <value>Specification</value>
+  </data>
+  <data name="Pipe" xml:space="preserve">
+    <value>Pipe Segment</value>
+  </data>
+  <data name="RCT_Conversion" xml:space="preserve">
+    <value>Conversion Reactor</value>
+  </data>
+  <data name="RCT_CSTR" xml:space="preserve">
+    <value>CSTR</value>
+  </data>
+  <data name="RCT_Equilibrium" xml:space="preserve">
+    <value>Equilibrium Reactor</value>
+  </data>
+  <data name="RCT_Gibbs" xml:space="preserve">
+    <value>Gibbs Reactor</value>
+  </data>
+  <data name="RCT_PFR" xml:space="preserve">
+    <value>PFR</value>
+  </data>
+  <data name="SolidSeparator" xml:space="preserve">
+    <value>Solids Separator</value>
+  </data>
+  <data name="TPVessel" xml:space="preserve">
+    <value>(Deprecated) Gas-Liquid Separator</value>
   </data>
 </root>

@@ -38,10 +38,13 @@ Public Class FormAddFlowsheetObject
         Next
 
         ListBox1.SelectedIndex = 0
+        ListBox1.Sorted = True
 
     End Sub
 
     Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox1.SelectedIndexChanged
+
+        If ListBox1.SelectedIndex < 0 Then Exit Sub
 
         Dim obj = objlist(ListBox1.SelectedItem.ToString)
 

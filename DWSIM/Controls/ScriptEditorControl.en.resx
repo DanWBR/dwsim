@@ -117,6 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="txtScript.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1059, 557</value>
+  </data>
+  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>325, 20</value>
+  </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Variables</value>
   </data>
@@ -133,7 +140,6 @@
   <data name="tc3.Width" type="System.Int32, mscorlib">
     <value>100</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ItemToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>218, 22</value>
   </data>
@@ -160,19 +166,34 @@
     <value>Fill</value>
   </data>
   <data name="tvVariables.Size" type="System.Drawing.Size, System.Drawing">
-    <value>285, 531</value>
+    <value>325, 531</value>
   </data>
   <data name="tvVariables.Text" xml:space="preserve">
     <value>TreeViewAdv1</value>
   </data>
+  <data name="TableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>331, 557</value>
+  </data>
+  <data name="SplitContainer1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1059, 557</value>
+  </data>
+  <data name="tbName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 20</value>
+  </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>Name</value>
+  </data>
+  <data name="btnDelete.Location" type="System.Drawing.Point, System.Drawing">
+    <value>974, 6</value>
   </data>
   <data name="btnDelete.Text" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="cbPythonEngine.Location" type="System.Drawing.Point, System.Drawing">
+    <value>824, 7</value>
+  </data>
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>671, 11</value>
+    <value>711, 11</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 13</value>
@@ -181,13 +202,13 @@
     <value>Python Interpreter</value>
   </data>
   <data name="cbLinkedEvent.Location" type="System.Drawing.Point, System.Drawing">
-    <value>466, 7</value>
+    <value>506, 7</value>
   </data>
   <data name="cbLinkedEvent.Size" type="System.Drawing.Size, System.Drawing">
     <value>187, 21</value>
   </data>
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>420, 11</value>
+    <value>460, 11</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 13</value>
@@ -196,21 +217,27 @@
     <value>Event</value>
   </data>
   <data name="cbLinkedObject.Location" type="System.Drawing.Point, System.Drawing">
-    <value>266, 7</value>
+    <value>306, 7</value>
   </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>216, 11</value>
+    <value>256, 11</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Object</value>
   </data>
   <data name="chkLink.Location" type="System.Drawing.Point, System.Drawing">
-    <value>163, 10</value>
+    <value>203, 10</value>
   </data>
   <data name="chkLink.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 17</value>
   </data>
   <data name="chkLink.Text" xml:space="preserve">
     <value>Link</value>
+  </data>
+  <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1059, 35</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1059, 592</value>
   </data>
 </root>

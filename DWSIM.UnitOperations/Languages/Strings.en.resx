@@ -142,7 +142,7 @@
     <value>Distillation Column</value>
   </data>
   <data name="COMP_Desc" xml:space="preserve">
-    <value>Model for a compressor</value>
+    <value>Adiabatic/Polytropic Compression Model</value>
   </data>
   <data name="COMP_Name" xml:space="preserve">
     <value>Compressor</value>
@@ -226,7 +226,7 @@
     <value>Spreadsheet</value>
   </data>
   <data name="EXP_Desc" xml:space="preserve">
-    <value>Model for an expander</value>
+    <value>Adiabatic/Polytropic Turbine Expansion Model</value>
   </data>
   <data name="EXP_Name" xml:space="preserve">
     <value>Expander (Turbine)</value>
@@ -313,7 +313,7 @@
     <value>Defines a piping segment for pressure drop calculations</value>
   </data>
   <data name="PIPE_Name" xml:space="preserve">
-    <value>Piping Segment</value>
+    <value>Pipe Segment</value>
   </data>
   <data name="PUMP_Desc" xml:space="preserve">
     <value>Pump model</value>

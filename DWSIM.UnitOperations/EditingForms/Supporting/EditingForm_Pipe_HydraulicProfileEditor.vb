@@ -1043,7 +1043,7 @@ Imports System.Drawing
                 Me.GridMalha.Rows(5).Cells(psec.Indice - 1).ReadOnly = False
                 Me.GridMalha.Rows(6).Cells(psec.Indice - 1).ReadOnly = False
             Else
-                Me.GridMalha.Rows(5).Cells(psec.Indice - 1).Value = cv.ConvertFromSI(Me.Units.distance, PipeOp.rugosidade(psec.Material, psec))
+                Me.GridMalha.Rows(5).Cells(psec.Indice - 1).Value = cv.ConvertFromSI(Me.Units.distance, PipeOp.GetRugosity(psec.Material, psec))
                 Me.GridMalha.Rows(6).Cells(psec.Indice - 1).Value = "T-Dep"
                 Me.GridMalha.Rows(5).Cells(psec.Indice - 1).Style.BackColor = Color.LightGray
                 Me.GridMalha.Rows(6).Cells(psec.Indice - 1).Style.BackColor = Color.LightGray
@@ -1468,7 +1468,7 @@ Imports System.Drawing
                         If material.ToString <> "UserDefined" Then
                             GridMalha.Rows(e.RowIndex + 1).Cells(e.ColumnIndex).ReadOnly = True
                             GridMalha.Rows(e.RowIndex + 2).Cells(e.ColumnIndex).ReadOnly = True
-                            GridMalha.Rows(e.RowIndex + 1).Cells(e.ColumnIndex).Value = PipeOp.rugosidade(material.ToString, PipeOp.Profile.Sections(e.ColumnIndex + 1))
+                            GridMalha.Rows(e.RowIndex + 1).Cells(e.ColumnIndex).Value = PipeOp.GetRugosity(material.ToString, PipeOp.Profile.Sections(e.ColumnIndex + 1))
                             GridMalha.Rows(e.RowIndex + 2).Cells(e.ColumnIndex).Value = "T-Dep"
                             GridMalha.Rows(e.RowIndex + 1).Cells(e.ColumnIndex).Style.BackColor = System.Drawing.Color.LightGray
                             GridMalha.Rows(e.RowIndex + 2).Cells(e.ColumnIndex).Style.BackColor = System.Drawing.Color.LightGray

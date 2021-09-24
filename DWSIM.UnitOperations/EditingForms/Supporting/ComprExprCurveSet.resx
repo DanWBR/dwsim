@@ -957,8 +957,8 @@
   <data name="cb3.Items17" xml:space="preserve">
     <value>m3/d @ 20 C, 1 atm</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+  <data name="InvalidAutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>1, 1</value>
   </data>
   <data name="dgv4.RowHeadersWidth" type="System.Int32, mscorlib">
     <value>30</value>

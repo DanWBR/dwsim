@@ -966,11 +966,11 @@
     <comment>1</comment>
   </data>
   <data name="PROP_PS_0" xml:space="preserve">
-    <value>Queda de Pressão</value>
+    <value>Perda de Carga (Total)</value>
     <comment>0</comment>
   </data>
   <data name="PROP_PS_1" xml:space="preserve">
-    <value>Queda de Temperatura</value>
+    <value>Diferença de Temperatura</value>
     <comment>0</comment>
   </data>
   <data name="PROP_PS_2" xml:space="preserve">

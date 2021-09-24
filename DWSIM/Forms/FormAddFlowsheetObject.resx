@@ -234,9 +234,6 @@
   <data name="&gt;&gt;Label8.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
   <data name="lblLibVersion.TabIndex" type="System.Int32, mscorlib">
     <value>40</value>
   </data>

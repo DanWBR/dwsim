@@ -7,6 +7,8 @@ Public Class FormConfigureMasterTable
 
     Private Loaded As Boolean = False
 
+    Private Translations As New Dictionary(Of String, String)
+
     Private Sub FormConfigureMasterTable_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
 
         Dim list As New List(Of String)
@@ -22,10 +24,20 @@ Public Class FormConfigureMasterTable
 
         ExtensionMethods.ChangeDefaultFont(Me)
 
-        cbObjectType.Items.AddRange([Enum].GetNames(Table.ObjectType.GetType))
+        Dim names = [Enum].GetNames(Table.ObjectType.GetType())
+        Dim translated = names.Select(Function(n) Table.Flowsheet.GetTranslatedString(n)).ToArray()
+
+        Translations = New Dictionary(Of String, String)
+        For i As Integer = 0 To names.Count - 1
+            Translations.Add(translated(i), names(i))
+        Next
+
+        cbObjectType.Items.AddRange(translated)
         cbOrderBy.Items.AddRange(Table.SortableItems)
 
-        cbObjectType.SelectedItem = Table.ObjectFamily.ToString
+        cbObjectType.Sorted = True
+
+        cbObjectType.SelectedItem = Table.Flowsheet.GetTranslatedString(Table.ObjectFamily.ToString)
         cbOrderBy.SelectedItem = Table.SortBy
 
         If Table.SortBy = "Custom" Then
@@ -43,6 +55,9 @@ Public Class FormConfigureMasterTable
         nupLines.Value = Table.NumberOfLines
 
         Populate()
+
+        lvObjects.Sorting = SortOrder.Ascending
+        lvObjects.Sort()
 
         Loaded = True
 
@@ -106,7 +121,8 @@ Public Class FormConfigureMasterTable
     Private Sub cbObjectType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbObjectType.SelectedIndexChanged
 
         If Loaded Then
-            Table.ObjectFamily = [Enum].Parse(Table.ObjectType.GetType, cbObjectType.SelectedItem.ToString)
+            Dim selected = Translations(cbObjectType.SelectedItem.ToString())
+            Table.ObjectFamily = [Enum].Parse(Table.ObjectType.GetType, selected)
             Table.ObjectList.Clear()
             Table.SortedList.Clear()
             Table.PropertyList.Clear()

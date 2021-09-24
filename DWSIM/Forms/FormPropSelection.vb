@@ -19,6 +19,9 @@ Public Class FormPropSelection
 
         formC = My.Application.ActiveSimulation
 
+        lvType.Sorting = SortOrder.Ascending
+        lvObject.Sorting = SortOrder.Ascending
+
         lvType.Items.AddRange(FormMain.ObjectList.Keys.Select(Function(x) New ListViewItem(x)).ToArray())
 
         lvUnits.Enabled = ssmode

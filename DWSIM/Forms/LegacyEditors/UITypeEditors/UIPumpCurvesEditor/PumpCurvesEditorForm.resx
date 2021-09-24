@@ -173,8 +173,8 @@
   <data name="&gt;&gt;cbpowerunit.Name" xml:space="preserve">
     <value>cbpowerunit</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+  <data name="InvalidAutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>1, 1</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>754, 439</value>

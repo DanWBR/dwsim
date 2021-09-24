@@ -2376,8 +2376,8 @@
   <data name="cb10.Items2" xml:space="preserve">
     <value>cm</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+  <data name="InvalidAutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>1, 1</value>
   </data>
   <data name="&gt;&gt;ch3.Parent" xml:space="preserve">
     <value>GroupBox3</value>

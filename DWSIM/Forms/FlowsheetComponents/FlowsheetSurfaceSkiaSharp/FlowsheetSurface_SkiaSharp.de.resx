@@ -777,7 +777,7 @@
   <data name="tsbAlignHorizontal.Text" xml:space="preserve">
     <value>Abstände horizontal gleichmäßig ausrichten</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+  <data name="InvalidAutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>8, 17</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">

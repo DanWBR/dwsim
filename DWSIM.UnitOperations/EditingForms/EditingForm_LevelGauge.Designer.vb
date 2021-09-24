@@ -103,6 +103,7 @@ Partial Class EditingForm_LevelGauge
         Me.cbSourceUnits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbSourceUnits.FormattingEnabled = True
         Me.cbSourceUnits.Name = "cbSourceUnits"
+        Me.cbSourceUnits.Sorted = True
         Me.ToolTipChangeTag.SetToolTip(Me.cbSourceUnits, resources.GetString("cbSourceUnits.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbSourceUnits, resources.GetString("cbSourceUnits.ToolTip1"))
         '
@@ -119,6 +120,7 @@ Partial Class EditingForm_LevelGauge
         Me.cbSourceUnitType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbSourceUnitType.FormattingEnabled = True
         Me.cbSourceUnitType.Name = "cbSourceUnitType"
+        Me.cbSourceUnitType.Sorted = True
         Me.ToolTipChangeTag.SetToolTip(Me.cbSourceUnitType, resources.GetString("cbSourceUnitType.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbSourceUnitType, resources.GetString("cbSourceUnitType.ToolTip1"))
         '
@@ -177,6 +179,7 @@ Partial Class EditingForm_LevelGauge
         Me.cbSourceProp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbSourceProp.FormattingEnabled = True
         Me.cbSourceProp.Name = "cbSourceProp"
+        Me.cbSourceProp.Sorted = True
         Me.ToolTipChangeTag.SetToolTip(Me.cbSourceProp, resources.GetString("cbSourceProp.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbSourceProp, resources.GetString("cbSourceProp.ToolTip1"))
         '
@@ -186,6 +189,7 @@ Partial Class EditingForm_LevelGauge
         Me.cbSourceObj.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbSourceObj.FormattingEnabled = True
         Me.cbSourceObj.Name = "cbSourceObj"
+        Me.cbSourceObj.Sorted = True
         Me.ToolTipChangeTag.SetToolTip(Me.cbSourceObj, resources.GetString("cbSourceObj.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbSourceObj, resources.GetString("cbSourceObj.ToolTip1"))
         '

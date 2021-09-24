@@ -8185,7 +8185,7 @@
   <data name="&gt;&gt;Label107.Name" xml:space="preserve">
     <value>Label107</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+  <data name="InvalidAutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>96, 96</value>
   </data>
   <data name="&gt;&gt;GridJoback.ZOrder" xml:space="preserve">

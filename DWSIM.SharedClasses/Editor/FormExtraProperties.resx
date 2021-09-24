@@ -159,7 +159,7 @@
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FormExtraProperties</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+  <data name="InvalidAutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>96, 96</value>
   </data>
   <data name="grid1.Location" type="System.Drawing.Point, System.Drawing">
