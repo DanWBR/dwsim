@@ -25,7 +25,7 @@ Namespace MathEx
 
         Shared Function Poly_Roots(ByVal Coeff As Double()) As Double(,)
 
-            Return CalcRoots(Coeff(3), Coeff(2), Coeff(1), Coeff(0))
+            Return CalcRoots2(Coeff(3), Coeff(2), Coeff(1), Coeff(0))
 
         End Function
 
@@ -99,7 +99,6 @@ Namespace MathEx
             Dim cnt As Integer = 0
             Dim r, rant, rant2, fi, fi_ant, fi_ant2, dfidr As Double
 
-            fi_ant2 = 0.0#
             fi_ant = 0.0#
             fi = 0.0#
 
@@ -108,9 +107,8 @@ Namespace MathEx
             Do
                 fi_ant2 = fi_ant
                 fi_ant = fi
-                fi = a * r ^ 3 + b * r ^ 2 + c * r + d
-                dfidr = 3 * a * r ^ 2 + 2 * b * r + c
-                rant2 = rant
+                fi = a * r * r * r + b * r * r + c * r + d
+                dfidr = 3 * a * r * r + 2 * b * r + c
                 rant = r
                 r = r - fi / dfidr
                 If Math.Abs(fi - fi_ant2) = 0.0# Then r = rant * 1.01
@@ -127,7 +125,6 @@ Namespace MathEx
                 i1 = 0
             End If
 
-            fi_ant2 = 0
             fi_ant = 0
             fi = 0
 
@@ -138,9 +135,8 @@ Namespace MathEx
             Do
                 fi_ant2 = fi_ant
                 fi_ant = fi
-                fi = a * r ^ 3 + b * r ^ 2 + c * r + d
-                dfidr = 3 * a * r ^ 2 + 2 * b * r + c
-                rant2 = rant
+                fi = a * r * r * r + b * r * r + c * r + d
+                dfidr = 3 * a * r * r + 2 * b * r + c
                 rant = r
                 r = r - fi / dfidr
                 If Math.Abs(fi - fi_ant2) = 0 Then r = rant * 0.999
@@ -155,7 +151,6 @@ Namespace MathEx
                 i2 = 0
             End If
 
-            fi_ant2 = 0
             fi_ant = 0
             fi = 0
 
@@ -166,9 +161,8 @@ Namespace MathEx
             Do
                 fi_ant2 = fi_ant
                 fi_ant = fi
-                fi = a * r ^ 3 + b * r ^ 2 + c * r + d
-                dfidr = 3 * a * r ^ 2 + 2 * b * r + c
-                rant2 = rant
+                fi = a * r * r * r + b * r * r + c * r + d
+                dfidr = 3 * a * r * r + 2 * b * r + c
                 rant = r
                 r = r - fi / dfidr
                 If Math.Abs(fi - fi_ant2) = 0 Then r = rant * 0.999
