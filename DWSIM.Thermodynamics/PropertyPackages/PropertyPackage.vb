@@ -7068,7 +7068,7 @@ Final3:
 
         Public MustOverride Function AUX_VAPDENS(ByVal T As Double, ByVal P As Double) As Double
 
-        Public Function AUX_INT_CPDTi(ByVal T1 As Double, ByVal T2 As Double, ByVal subst As String) As Double
+        Public Overridable Function AUX_INT_CPDTi(ByVal T1 As Double, ByVal T2 As Double, ByVal subst As String) As Double
 
             Dim nsteps As Integer = Math.Abs(T2 - T1) / 10
 
@@ -7104,7 +7104,7 @@ Final3:
 
         End Function
 
-        Public Function AUX_INT_CPDTi(ByVal T1 As Double, ByVal T2 As Double, ByVal ID As Integer) As Double
+        Public Overridable Function AUX_INT_CPDTi(ByVal T1 As Double, ByVal T2 As Double, ByVal ID As Integer) As Double
 
             Return AUX_INT_CPDTi(T1, T2, CompoundPropCache(ID).Name)
 
@@ -7169,7 +7169,6 @@ Final3:
         End Function
 
         Public Function AUX_INT_CPDT_Ti(ByVal T1 As Double, ByVal T2 As Double, ByVal subst As String) As Double
-
 
             Dim nsteps As Integer = Math.Abs(T2 - T1) / 10
 
