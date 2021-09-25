@@ -7603,19 +7603,19 @@ Final3:
 
         End Function
 
-        Public Function RET_VMOL(ByVal Phase As Phase) As Double()
+        Public Overridable Function RET_VMOL(ByVal Phase As Phase) As Double()
 
             Return CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values.Select(Function(x) x.MoleFraction.GetValueOrDefault).ToArray
 
         End Function
 
-        Public Function RET_VMM() As Double()
+        Public Overridable Function RET_VMM() As Double()
 
             Return CurrentMaterialStream.Phases(0).Compounds.Values.Select(Function(x) x.ConstantProperties.Molar_Weight).ToArray
 
         End Function
 
-        Public Function RET_VMAS(ByVal Phase As Phase) As Double()
+        Public Overridable Function RET_VMAS(ByVal Phase As Phase) As Double()
 
             Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             Dim subst As Interfaces.ICompound
@@ -7636,55 +7636,55 @@ Final3:
 
         End Function
 
-        Public Function RET_VTC() As Double()
+        Public Overridable Function RET_VTC() As Double()
 
             Return CurrentMaterialStream.Phases(0).Compounds.Values.Select(Function(x) x.ConstantProperties.Critical_Temperature).ToArray
 
         End Function
 
-        Public Function RET_VTF() As Double()
+        Public Overridable Function RET_VTF() As Double()
 
             Return CurrentMaterialStream.Phases(0).Compounds.Values.Select(Function(x) x.ConstantProperties.TemperatureOfFusion).ToArray
 
         End Function
 
-        Public Function RET_VHF() As Double()
+        Public Overridable Function RET_VHF() As Double()
 
             Return CurrentMaterialStream.Phases(0).Compounds.Values.Select(Function(x) x.ConstantProperties.EnthalpyOfFusionAtTf).ToArray
 
         End Function
 
-        Public Function RET_VDHF() As Double()
+        Public Overridable Function RET_VDHF() As Double()
 
             Return CurrentMaterialStream.Phases(0).Compounds.Values.Select(Function(x) x.ConstantProperties.IG_Enthalpy_of_Formation_25C).ToArray
 
         End Function
 
-        Public Function RET_VTB() As Double()
+        Public Overridable Function RET_VTB() As Double()
 
             Return CurrentMaterialStream.Phases(0).Compounds.Values.Select(Function(x) x.ConstantProperties.Normal_Boiling_Point).ToArray
 
         End Function
 
-        Public Function RET_VPC() As Double()
+        Public Overridable Function RET_VPC() As Double()
 
             Return CurrentMaterialStream.Phases(0).Compounds.Values.Select(Function(x) x.ConstantProperties.Critical_Pressure).ToArray
 
         End Function
 
-        Public Function RET_VZC() As Double()
+        Public Overridable Function RET_VZC() As Double()
 
             Return CurrentMaterialStream.Phases(0).Compounds.Values.Select(Function(x) x.ConstantProperties.Critical_Compressibility).ToArray
 
         End Function
 
-        Public Function RET_VZRa() As Double()
+        Public Overridable Function RET_VZRa() As Double()
 
             Return CurrentMaterialStream.Phases(0).Compounds.Values.Select(Function(x) x.ConstantProperties.Z_Rackett).ToArray
 
         End Function
 
-        Public Function RET_VVC() As Double()
+        Public Overridable Function RET_VVC() As Double()
 
             Dim vc, val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             Dim subst As Interfaces.ICompound
@@ -7703,13 +7703,13 @@ Final3:
 
         End Function
 
-        Public Function RET_VW() As Double()
+        Public Overridable Function RET_VW() As Double()
 
             Return CurrentMaterialStream.Phases(0).Compounds.Values.Select(Function(x) x.ConstantProperties.Acentric_Factor).ToArray
 
         End Function
 
-        Public Function RET_VCP(ByVal T As Double) As Double()
+        Public Overridable Function RET_VCP(ByVal T As Double) As Double()
 
             Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             Dim subst As Interfaces.ICompound
@@ -7724,7 +7724,7 @@ Final3:
 
         End Function
 
-        Public Function RET_VHVAP(ByVal T As Double) As Double()
+        Public Overridable Function RET_VHVAP(ByVal T As Double) As Double()
 
             Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             Dim subst As Interfaces.ICompound
@@ -7902,7 +7902,7 @@ Final3:
 
         End Function
 
-        Public Function RET_VIDS()
+        Public Overridable Function RET_VIDS()
 
             Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As String
             Dim subst As Interfaces.ICompound
@@ -7917,7 +7917,7 @@ Final3:
 
         End Function
 
-        Public Function RET_VCAS() As String()
+        Public Overridable Function RET_VCAS() As String()
 
             Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As String
             Dim subst As Interfaces.ICompound
@@ -8002,7 +8002,7 @@ Final3:
 
         End Function
 
-        Public Function RET_VNAMES() As String()
+        Public Overridable Function RET_VNAMES() As String()
 
             Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As String
             Dim subst As Interfaces.ICompound
