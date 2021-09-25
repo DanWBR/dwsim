@@ -7202,7 +7202,7 @@ Final3:
 
         End Function
 
-        Public Function AUX_INT_CPDTm(ByVal T1 As Double, ByVal T2 As Double, ByVal Phase As Phase) As Double
+        Public Overridable Function AUX_INT_CPDTm(ByVal T1 As Double, ByVal T2 As Double, ByVal Phase As Phase) As Double
 
             Dim val As Double = 0
             Dim subst As Interfaces.ICompound
@@ -7269,7 +7269,7 @@ Final3:
 
         End Function
 
-        Public Function AUX_INT_CPDT_Tm(ByVal T1 As Double, ByVal T2 As Double, ByVal Phase As Phase) As Double
+        Public Overridable Function AUX_INT_CPDT_Tm(ByVal T1 As Double, ByVal T2 As Double, ByVal Phase As Phase) As Double
 
             Dim val As Double
             Dim subst As Interfaces.ICompound
@@ -8212,7 +8212,7 @@ Final3:
 
         End Function
 
-        Public Function AUX_INT_CPDTm(ByVal T1 As Double, ByVal T2 As Double, ByVal Vw As Double()) As Double
+        Public Overridable Function AUX_INT_CPDTm(ByVal T1 As Double, ByVal T2 As Double, ByVal Vw As Double()) As Double
 
             Dim val As Double
             Dim i As Integer = 0
@@ -8242,7 +8242,7 @@ Final3:
 
         End Function
 
-        Public Function AUX_INT_CPDT_Tm(ByVal T1 As Double, ByVal T2 As Double, ByVal Vw As Double()) As Double
+        Public Overridable Function AUX_INT_CPDT_Tm(ByVal T1 As Double, ByVal T2 As Double, ByVal Vw As Double()) As Double
 
             Dim val As Double
             Dim i As Integer = 0
