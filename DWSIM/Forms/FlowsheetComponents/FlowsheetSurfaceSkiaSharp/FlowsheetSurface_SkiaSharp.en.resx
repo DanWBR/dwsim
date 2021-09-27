@@ -117,47 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnLeft.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 161</value>
-  </data>
-  <data name="btnUp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>794, 24</value>
-  </data>
-  <data name="btnDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>33, 200</value>
-  </data>
-  <data name="btnDown.Size" type="System.Drawing.Size, System.Drawing">
-    <value>794, 24</value>
-  </data>
-  <data name="btnRight.Location" type="System.Drawing.Point, System.Drawing">
-    <value>833, 33</value>
-  </data>
-  <data name="btnRight.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 161</value>
-  </data>
-  <data name="TableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>860, 227</value>
-  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="SplitContainerHorizontal.Panel2MinSize" type="System.Int32, mscorlib">
-    <value>120</value>
-  </data>
-  <data name="SplitContainerHorizontal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>860, 351</value>
-  </data>
-  <data name="SplitContainerHorizontal.SplitterDistance" type="System.Int32, mscorlib">
-    <value>227</value>
-  </data>
-  <data name="SplitContainerVertical.Panel2MinSize" type="System.Int32, mscorlib">
-    <value>120</value>
-  </data>
-  <data name="SplitContainerVertical.Size" type="System.Drawing.Size, System.Drawing">
-    <value>860, 351</value>
-  </data>
   <data name="SplitContainerVertical.SplitterDistance" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
     <value>200, 22</value>
   </data>
@@ -437,10 +401,6 @@
   <data name="CMS_Sel.Size" type="System.Drawing.Size, System.Drawing">
     <value>242, 420</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="PreviewDialog.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
   <data name="PreviewDialog.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAIAICAQAAAAAADoAgAAJgAAABAQEAAAAAAAKAEAAA4DAAAoAAAAIAAAAEAAAAABAAQAAAAAAIAC
@@ -463,6 +423,7 @@
         AABsAgAAbAIAAAACAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAfAAAAHwAAAB8AAAAAAAAAA==
 </value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="PreviewDialog.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Inherit</value>
   </data>
@@ -532,12 +493,6 @@
   <data name="ToolStripButton1.Text" xml:space="preserve">
     <value>Unzoom flowsheet</value>
   </data>
-  <data name="TSTBZoom.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 25</value>
-  </data>
-  <data name="TSTBZoom.TextBoxTextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Center</value>
-  </data>
   <data name="TSTBZoom.ToolTipText" xml:space="preserve">
     <value>Zoom level flowchart</value>
   </data>
@@ -556,17 +511,11 @@
   <data name="tsbResizeModeKeepAR.Text" xml:space="preserve">
     <value>Keep Aspect Ratio on Resizing</value>
   </data>
-  <data name="tsbDisplayGrid.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
   <data name="tsbDisplayGrid.Text" xml:space="preserve">
     <value>Snap Objects to Grid</value>
   </data>
   <data name="tsbDisplayGrid.ToolTipText" xml:space="preserve">
     <value>Display Snapping Grid</value>
-  </data>
-  <data name="tsbSnapObjectsToGrid.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
   </data>
   <data name="tsbSnapObjectsToGrid.Text" xml:space="preserve">
     <value>Snap Objects to Grid</value>
@@ -598,14 +547,8 @@
   <data name="tsbAlignCenters.Text" xml:space="preserve">
     <value>Align centers</value>
   </data>
-  <data name="tsbAlignRights.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
-  </data>
   <data name="tsbAlignRights.Text" xml:space="preserve">
     <value>Align rights</value>
-  </data>
-  <data name="tsbAlignTops.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
   </data>
   <data name="tsbAlignTops.Text" xml:space="preserve">
     <value>Align tops</value>
@@ -622,9 +565,6 @@
   <data name="tsbAlignHorizontal.Text" xml:space="preserve">
     <value>Make horizontal spacing equal</value>
   </data>
-  <data name="ToolStripFlowsheet.Size" type="System.Drawing.Size, System.Drawing">
-    <value>860, 25</value>
-  </data>
   <data name="ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>235, 22</value>
   </data>
@@ -633,9 +573,6 @@
   </data>
   <data name="CMS_Palette.Size" type="System.Drawing.Size, System.Drawing">
     <value>236, 26</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>860, 376</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

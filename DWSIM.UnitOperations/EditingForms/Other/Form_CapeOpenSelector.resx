@@ -237,7 +237,7 @@
   <data name="&gt;&gt;Label8.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="InvalidAutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>8, 16</value>
   </data>
   <data name="&gt;&gt;ListBox1.ZOrder" xml:space="preserve">

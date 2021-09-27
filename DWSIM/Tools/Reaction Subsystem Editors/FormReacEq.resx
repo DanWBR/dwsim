@@ -142,8 +142,8 @@
   <data name="tbEquation.Location" type="System.Drawing.Point, System.Drawing">
     <value>58, 186</value>
   </data>
-  <data name="InvalidAutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>1, 1</value>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>96, 96</value>
   </data>
   <data name="CheckID.HeaderText" xml:space="preserve">
     <value>Column8</value>

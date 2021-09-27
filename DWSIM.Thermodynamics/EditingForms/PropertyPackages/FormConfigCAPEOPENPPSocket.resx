@@ -324,8 +324,8 @@
   <data name="&gt;&gt;Label16.Name" xml:space="preserve">
     <value>Label16</value>
   </data>
-  <data name="InvalidAutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>1, 1</value>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>96, 96</value>
   </data>
   <data name="&gt;&gt;dgmap.Name" xml:space="preserve">
     <value>dgmap</value>

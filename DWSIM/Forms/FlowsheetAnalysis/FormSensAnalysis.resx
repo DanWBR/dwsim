@@ -2433,8 +2433,8 @@
   <data name="&gt;&gt;btnNewCase.Parent" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
-  <data name="InvalidAutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>1, 1</value>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>96, 96</value>
   </data>
   <data name="DockTopToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
     <value>False</value>

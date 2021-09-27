@@ -306,8 +306,8 @@
   <data name="PanelSolids.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="InvalidAutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>1, 1</value>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>96, 96</value>
   </data>
   <data name="PanelMixers.Size" type="System.Drawing.Size, System.Drawing">
     <value>903, 92</value>

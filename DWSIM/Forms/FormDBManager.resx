@@ -177,8 +177,8 @@
   <data name="StudyFile.HeaderText" xml:space="preserve">
     <value>CompCreator Study File</value>
   </data>
-  <data name="InvalidAutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>1, 1</value>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>96, 96</value>
   </data>
   <data name="Label1.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>

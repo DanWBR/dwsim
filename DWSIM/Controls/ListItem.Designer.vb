@@ -31,10 +31,10 @@ Partial Class ListItem
         '
         'Image
         '
-        Me.Image.Location = New System.Drawing.Point(64, 6)
-        Me.Image.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.Image.Location = New System.Drawing.Point(38, 6)
+        Me.Image.Margin = New System.Windows.Forms.Padding(6)
         Me.Image.Name = "Image"
-        Me.Image.Size = New System.Drawing.Size(64, 64)
+        Me.Image.Size = New System.Drawing.Size(32, 32)
         Me.Image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.Image.TabIndex = 0
         Me.Image.TabStop = False
@@ -44,25 +44,25 @@ Partial Class ListItem
         Me.lblName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblName.Font = New System.Drawing.Font("Arial", 6.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblName.Location = New System.Drawing.Point(12, 77)
+        Me.lblName.Location = New System.Drawing.Point(6, 44)
         Me.lblName.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.lblName.Name = "lblName"
-        Me.lblName.Size = New System.Drawing.Size(172, 46)
+        Me.lblName.Size = New System.Drawing.Size(92, 29)
         Me.lblName.TabIndex = 1
         Me.lblName.Text = "Label1"
-        Me.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblName.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'ListItem
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(12.0!, 25.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.BackColor = System.Drawing.Color.White
         Me.Controls.Add(Me.lblName)
         Me.Controls.Add(Me.Image)
         Me.DoubleBuffered = True
         Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "ListItem"
-        Me.Size = New System.Drawing.Size(190, 133)
+        Me.Size = New System.Drawing.Size(104, 82)
         CType(Me.Image, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 

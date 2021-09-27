@@ -65,6 +65,7 @@ Partial Class FormCharts
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.CloseButton = False
         Me.CloseButtonVisible = False
         Me.Controls.Add(Me.GroupBox1)

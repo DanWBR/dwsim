@@ -564,7 +564,8 @@ Partial Class FormSimulWizard
         'FormSimulWizard
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.ControlBox = False
         Me.Controls.Add(Me.StepWizardControl1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle

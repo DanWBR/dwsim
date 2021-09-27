@@ -174,7 +174,8 @@ Partial Class FormImportCompoundDataChemeo
         'FormImportCompoundDataChemeo
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.BackColor = System.Drawing.Color.White
         Me.Controls.Add(Me.btnNext)
         Me.Controls.Add(Me.btnPrev)

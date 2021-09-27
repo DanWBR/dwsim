@@ -551,6 +551,7 @@ Partial Class FormWelcome
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.BackColor = System.Drawing.Color.White
         Me.BackgroundImage = Global.DWSIM.My.Resources.Resources.background_welcome
         Me.Controls.Add(Me.Panel5)

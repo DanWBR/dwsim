@@ -7,7 +7,8 @@
 
     Private Sub FormCustomCalcOrder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        Me.AutoScaleMode = AutoScaleMode.Font
+        Me.AutoScaleMode = AutoScaleMode.Dpi
+Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
 
         For Each control As Control In Me.Controls
             control.Font = Drawing.SystemFonts.MessageBoxFont

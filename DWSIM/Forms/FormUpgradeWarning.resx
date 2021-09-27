@@ -258,8 +258,8 @@ O DWSIM só altera o arquivo de simulação ao salvar modificações. Não são 
   <data name="chkDoNotShowAgain.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="InvalidAutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>1, 1</value>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>96, 96</value>
   </data>
   <data name="Panel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>-9, 50</value>

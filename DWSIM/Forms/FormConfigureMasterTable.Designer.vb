@@ -189,6 +189,7 @@ Partial Class FormConfigureMasterTable
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.nupLines)
         Me.Controls.Add(Me.Label5)

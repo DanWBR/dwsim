@@ -67,7 +67,8 @@ Partial Class FormPassword
         '
         Me.AcceptButton = Me.btnOK
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.CancelButton = Me.btnCancel
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.btnOK)

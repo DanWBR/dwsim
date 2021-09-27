@@ -208,6 +208,7 @@ Partial Class LogPanel
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.CloseButtonVisible = False
         Me.Controls.Add(Me.Grid1)
         Me.HideOnClose = True

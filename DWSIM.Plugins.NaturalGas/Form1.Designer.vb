@@ -212,6 +212,7 @@ Partial Class Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.ClientSize = New System.Drawing.Size(320, 382)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.DoubleBuffered = True

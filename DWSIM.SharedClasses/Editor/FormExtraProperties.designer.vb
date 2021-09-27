@@ -63,6 +63,7 @@ Partial Class FormExtraProperties
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.Controls.Add(Me.grid1)
         Me.Name = "FormExtraProperties"
         Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockRight

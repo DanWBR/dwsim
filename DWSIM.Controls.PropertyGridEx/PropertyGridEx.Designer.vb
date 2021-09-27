@@ -21,7 +21,8 @@ Namespace PropertyGridEx
         <System.Diagnostics.DebuggerStepThrough()> _
         Private Sub InitializeComponent()
             components = New System.ComponentModel.Container()
-            Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+            Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         End Sub
 
     End Class

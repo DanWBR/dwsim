@@ -3585,6 +3585,7 @@ Partial Class FormCompoundCreator
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.tbStatus)
         Me.Controls.Add(Me.Label17)

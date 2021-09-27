@@ -412,8 +412,8 @@
   <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>316, 422</value>
   </data>
-  <data name="InvalidAutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>1, 1</value>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>96, 96</value>
   </data>
   <data name="&gt;&gt;NumericUpDown1.ZOrder" xml:space="preserve">
     <value>0</value>

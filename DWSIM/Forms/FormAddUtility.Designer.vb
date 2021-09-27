@@ -88,7 +88,8 @@ Partial Class FormAddUtility
         'FormAddUtility
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.Controls.Add(Me.ListBox3)
         Me.Controls.Add(Me.ListBox2)
         Me.Controls.Add(Me.Label4)

@@ -204,7 +204,8 @@ Partial Class FormConfig
         'FormConfig
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.ClientSize = New System.Drawing.Size(749, 393)
         Me.Controls.Add(Me.FaTabStrip1)
         Me.DoubleBuffered = True

@@ -105,7 +105,8 @@ Partial Class FormUnitGen
         'FormUnitGen
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.KryptonButton1)
         Me.Controls.Add(Me.GroupBox1)

@@ -178,7 +178,8 @@ Partial Class FormReacSetEditor
         'FormReacSetEditor
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.Controls.Add(Me.KryptonButton3)
         Me.Controls.Add(Me.KryptonButton2)
         Me.Controls.Add(Me.GroupBox2)

@@ -87,7 +87,8 @@ Partial Class FormEventDescription
         'FormEventDescription
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.Controls.Add(Me.tbEventActions)
         Me.Controls.Add(Me.tbEventLocation)
         Me.Controls.Add(Me.tbEventDescription)

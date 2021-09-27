@@ -101,7 +101,8 @@ Partial Class FormCustomCalcOrder
         '
         Me.AcceptButton = Me.Button1
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.CancelButton = Me.Button2
         Me.ClientSize = New System.Drawing.Size(367, 409)
         Me.Controls.Add(Me.Button4)

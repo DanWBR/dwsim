@@ -1249,9 +1249,6 @@
     <EmbeddedResource Include="Forms\FlowsheetComponents\FlowsheetSurfaceSkiaSharp\FlowsheetSurfaceControl.resx">
       <DependentUpon>FlowsheetSurfaceControl.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FlowsheetComponents\FlowsheetSurfaceSkiaSharp\FlowsheetSurface_SkiaSharp.de.resx">
-      <DependentUpon>FlowsheetSurface_SkiaSharp.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FlowsheetComponents\FlowsheetSurfaceSkiaSharp\FlowsheetSurface_SkiaSharp.en.resx">
       <DependentUpon>FlowsheetSurface_SkiaSharp.vb</DependentUpon>
     </EmbeddedResource>

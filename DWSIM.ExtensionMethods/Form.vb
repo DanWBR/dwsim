@@ -12,8 +12,6 @@ Public Module FormExtensions
     <System.Runtime.CompilerServices.Extension()>
     Public Sub ChangeDefaultFont(f As Form)
 
-        f.AutoScaleMode = AutoScaleMode.Dpi
-
         Dim controls = f.GetAllChildren()
 
         For Each control As Control In controls
@@ -34,8 +32,6 @@ Public Module FormExtensions
     End Sub
 
     Public Sub ChangeDefaultFont(c As UserControl)
-
-        c.AutoScaleMode = AutoScaleMode.Dpi
 
         Dim controls = c.GetAllChildren()
 

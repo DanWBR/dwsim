@@ -768,6 +768,7 @@ Partial Class FormFlowsheet
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.dckPanel)
         Me.Controls.Add(Me.MenuStrip1)

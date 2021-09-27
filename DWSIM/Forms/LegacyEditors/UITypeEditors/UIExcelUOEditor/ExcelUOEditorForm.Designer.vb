@@ -69,7 +69,8 @@ Partial Class ExcelUOEditorForm
         'ExcelUOEditorForm
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
+Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.Controls.Add(Me.BtnEdit)
         Me.Controls.Add(Me.BtnNew)
         Me.Controls.Add(Me.BtnSearch)

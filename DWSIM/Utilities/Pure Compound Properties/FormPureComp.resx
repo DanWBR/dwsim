@@ -672,8 +672,8 @@
   <data name="FaTabStripItemVAPVISC.Size" type="System.Drawing.Size, System.Drawing">
     <value>932, 529</value>
   </data>
-  <data name="InvalidAutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>1, 1</value>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>96, 96</value>
   </data>
   <data name="FaTabStripItemCPIG.Size" type="System.Drawing.Size, System.Drawing">
     <value>932, 529</value>
