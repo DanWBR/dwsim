@@ -97,7 +97,7 @@ Partial Class EditingForm_Spec
         resources.ApplyResources(Me.rtbAnnotations, "rtbAnnotations")
         Me.rtbAnnotations.Name = "rtbAnnotations"
         Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1046{\fonttbl{\f0\fnil Microsoft " &
-    "Sans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{\*\generator Riched20 10.0.19041}\viewkind4\uc1 " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\pard\f0\fs17\" &
+    "Sans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{\*\generator Riched20 10.0.18362}\viewkind4\uc1 " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\pard\f0\fs17\" &
     "par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rtbAnnotations.ShowRedo = False
         Me.rtbAnnotations.ShowUndo = False
@@ -181,7 +181,6 @@ Partial Class EditingForm_Spec
         Me.cbTargetProp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbTargetProp.FormattingEnabled = True
         Me.cbTargetProp.Name = "cbTargetProp"
-        Me.cbTargetProp.Sorted = True
         '
         'cbTargetObj
         '
@@ -189,7 +188,6 @@ Partial Class EditingForm_Spec
         Me.cbTargetObj.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbTargetObj.FormattingEnabled = True
         Me.cbTargetObj.Name = "cbTargetObj"
-        Me.cbTargetObj.Sorted = True
         '
         'Label4
         '
@@ -207,7 +205,6 @@ Partial Class EditingForm_Spec
         Me.cbSourceProp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbSourceProp.FormattingEnabled = True
         Me.cbSourceProp.Name = "cbSourceProp"
-        Me.cbSourceProp.Sorted = True
         '
         'cbSourceObj
         '
@@ -215,7 +212,6 @@ Partial Class EditingForm_Spec
         Me.cbSourceObj.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbSourceObj.FormattingEnabled = True
         Me.cbSourceObj.Name = "cbSourceObj"
-        Me.cbSourceObj.Sorted = True
         '
         'Label19
         '
@@ -230,8 +226,7 @@ Partial Class EditingForm_Spec
         'EditingForm_Spec
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox4)

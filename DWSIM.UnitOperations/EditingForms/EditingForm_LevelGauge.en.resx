@@ -211,9 +211,6 @@
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Alarms</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>EditingForm_LevelGauge2</value>
   </data>

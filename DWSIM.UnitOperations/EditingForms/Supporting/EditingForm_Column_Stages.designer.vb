@@ -136,8 +136,7 @@ Partial Class EditingForm_Column_Stages
         'EditingForm_Column_Stages
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.dgv1)
         Me.Name = "EditingForm_Column_Stages"

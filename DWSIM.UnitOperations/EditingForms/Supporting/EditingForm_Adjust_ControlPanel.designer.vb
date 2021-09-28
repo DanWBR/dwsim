@@ -282,8 +282,7 @@ Partial Class EditingForm_Adjust_ControlPanel
         'EditingForm_Adjust_ControlPanel
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.Panel1)
         Me.DoubleBuffered = True
         Me.Name = "EditingForm_Adjust_ControlPanel"

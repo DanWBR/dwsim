@@ -514,8 +514,7 @@ Partial Class EditingForm_CompoundSeparator
         'EditingForm_CompoundSeparator
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.Panel1)
         Me.Name = "EditingForm_CompoundSeparator"
         Me.ToolTipChangeTag.SetToolTip(Me, resources.GetString("$this.ToolTip"))

@@ -958,7 +958,7 @@
     <value>m3/d @ 20 C, 1 atm</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>96, 96</value>
+    <value>6, 13</value>
   </data>
   <data name="dgv4.RowHeadersWidth" type="System.Int32, mscorlib">
     <value>30</value>

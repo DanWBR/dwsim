@@ -117,7 +117,6 @@ Partial Class EditingForm_PIDController
         Me.cbTargetUnits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbTargetUnits.FormattingEnabled = True
         Me.cbTargetUnits.Name = "cbTargetUnits"
-        Me.cbTargetUnits.Sorted = True
         Me.ToolTipChangeTag.SetToolTip(Me.cbTargetUnits, resources.GetString("cbTargetUnits.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbTargetUnits, resources.GetString("cbTargetUnits.ToolTip1"))
         '
@@ -127,7 +126,6 @@ Partial Class EditingForm_PIDController
         Me.cbTargetType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbTargetType.FormattingEnabled = True
         Me.cbTargetType.Name = "cbTargetType"
-        Me.cbTargetType.Sorted = True
         Me.ToolTipChangeTag.SetToolTip(Me.cbTargetType, resources.GetString("cbTargetType.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbTargetType, resources.GetString("cbTargetType.ToolTip1"))
         '
@@ -151,7 +149,6 @@ Partial Class EditingForm_PIDController
         Me.cbSourceUnits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbSourceUnits.FormattingEnabled = True
         Me.cbSourceUnits.Name = "cbSourceUnits"
-        Me.cbSourceUnits.Sorted = True
         Me.ToolTipChangeTag.SetToolTip(Me.cbSourceUnits, resources.GetString("cbSourceUnits.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbSourceUnits, resources.GetString("cbSourceUnits.ToolTip1"))
         '
@@ -161,7 +158,6 @@ Partial Class EditingForm_PIDController
         Me.cbSourceType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbSourceType.FormattingEnabled = True
         Me.cbSourceType.Name = "cbSourceType"
-        Me.cbSourceType.Sorted = True
         Me.ToolTipChangeTag.SetToolTip(Me.cbSourceType, resources.GetString("cbSourceType.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbSourceType, resources.GetString("cbSourceType.ToolTip1"))
         '
@@ -213,7 +209,6 @@ Partial Class EditingForm_PIDController
         Me.cbTargetProp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbTargetProp.FormattingEnabled = True
         Me.cbTargetProp.Name = "cbTargetProp"
-        Me.cbTargetProp.Sorted = True
         Me.ToolTipChangeTag.SetToolTip(Me.cbTargetProp, resources.GetString("cbTargetProp.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbTargetProp, resources.GetString("cbTargetProp.ToolTip1"))
         '
@@ -223,7 +218,6 @@ Partial Class EditingForm_PIDController
         Me.cbTargetObj.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbTargetObj.FormattingEnabled = True
         Me.cbTargetObj.Name = "cbTargetObj"
-        Me.cbTargetObj.Sorted = True
         Me.ToolTipChangeTag.SetToolTip(Me.cbTargetObj, resources.GetString("cbTargetObj.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbTargetObj, resources.GetString("cbTargetObj.ToolTip1"))
         '
@@ -247,7 +241,6 @@ Partial Class EditingForm_PIDController
         Me.cbSourceProp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbSourceProp.FormattingEnabled = True
         Me.cbSourceProp.Name = "cbSourceProp"
-        Me.cbSourceProp.Sorted = True
         Me.ToolTipChangeTag.SetToolTip(Me.cbSourceProp, resources.GetString("cbSourceProp.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbSourceProp, resources.GetString("cbSourceProp.ToolTip1"))
         '
@@ -257,7 +250,6 @@ Partial Class EditingForm_PIDController
         Me.cbSourceObj.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbSourceObj.FormattingEnabled = True
         Me.cbSourceObj.Name = "cbSourceObj"
-        Me.cbSourceObj.Sorted = True
         Me.ToolTipChangeTag.SetToolTip(Me.cbSourceObj, resources.GetString("cbSourceObj.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbSourceObj, resources.GetString("cbSourceObj.ToolTip1"))
         '
@@ -316,7 +308,7 @@ Partial Class EditingForm_PIDController
         resources.ApplyResources(Me.rtbAnnotations, "rtbAnnotations")
         Me.rtbAnnotations.Name = "rtbAnnotations"
         Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1046{\fonttbl{\f0\fnil Microsoft " &
-    "Sans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{\*\generator Riched20 10.0.19041}\viewkind4\uc1 " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\pard\f0\fs17\" &
+    "Sans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "{\*\generator Riched20 10.0.18362}\viewkind4\uc1 " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\pard\f0\fs17\" &
     "par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rtbAnnotations.ShowRedo = False
         Me.rtbAnnotations.ShowUndo = False
@@ -486,7 +478,6 @@ Partial Class EditingForm_PIDController
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox4)

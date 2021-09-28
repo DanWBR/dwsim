@@ -1465,7 +1465,7 @@
     <value>172, 75</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>96, 96</value>
+    <value>6, 13</value>
   </data>
   <data name="Label2.ToolTip" xml:space="preserve">
     <value />

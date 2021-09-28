@@ -267,7 +267,6 @@ Partial Class EditingForm_Adjust
         Me.cbRefProp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbRefProp.FormattingEnabled = True
         Me.cbRefProp.Name = "cbRefProp"
-        Me.cbRefProp.Sorted = True
         Me.ToolTip1.SetToolTip(Me.cbRefProp, resources.GetString("cbRefProp.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbRefProp, resources.GetString("cbRefProp.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.cbRefProp, resources.GetString("cbRefProp.ToolTip2"))
@@ -278,7 +277,6 @@ Partial Class EditingForm_Adjust
         Me.cbRefObj.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbRefObj.FormattingEnabled = True
         Me.cbRefObj.Name = "cbRefObj"
-        Me.cbRefObj.Sorted = True
         Me.ToolTip1.SetToolTip(Me.cbRefObj, resources.GetString("cbRefObj.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbRefObj, resources.GetString("cbRefObj.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.cbRefObj, resources.GetString("cbRefObj.ToolTip2"))
@@ -329,7 +327,6 @@ Partial Class EditingForm_Adjust
         Me.cbTargetProp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbTargetProp.FormattingEnabled = True
         Me.cbTargetProp.Name = "cbTargetProp"
-        Me.cbTargetProp.Sorted = True
         Me.ToolTip1.SetToolTip(Me.cbTargetProp, resources.GetString("cbTargetProp.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbTargetProp, resources.GetString("cbTargetProp.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.cbTargetProp, resources.GetString("cbTargetProp.ToolTip2"))
@@ -340,7 +337,6 @@ Partial Class EditingForm_Adjust
         Me.cbTargetObj.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbTargetObj.FormattingEnabled = True
         Me.cbTargetObj.Name = "cbTargetObj"
-        Me.cbTargetObj.Sorted = True
         Me.ToolTip1.SetToolTip(Me.cbTargetObj, resources.GetString("cbTargetObj.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbTargetObj, resources.GetString("cbTargetObj.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.cbTargetObj, resources.GetString("cbTargetObj.ToolTip2"))
@@ -367,7 +363,6 @@ Partial Class EditingForm_Adjust
         Me.cbSourceProp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbSourceProp.FormattingEnabled = True
         Me.cbSourceProp.Name = "cbSourceProp"
-        Me.cbSourceProp.Sorted = True
         Me.ToolTip1.SetToolTip(Me.cbSourceProp, resources.GetString("cbSourceProp.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbSourceProp, resources.GetString("cbSourceProp.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.cbSourceProp, resources.GetString("cbSourceProp.ToolTip2"))
@@ -378,7 +373,6 @@ Partial Class EditingForm_Adjust
         Me.cbSourceObj.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbSourceObj.FormattingEnabled = True
         Me.cbSourceObj.Name = "cbSourceObj"
-        Me.cbSourceObj.Sorted = True
         Me.ToolTip1.SetToolTip(Me.cbSourceObj, resources.GetString("cbSourceObj.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.cbSourceObj, resources.GetString("cbSourceObj.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.cbSourceObj, resources.GetString("cbSourceObj.ToolTip2"))
@@ -399,8 +393,7 @@ Partial Class EditingForm_Adjust
         'EditingForm_Adjust
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox4)

@@ -217,8 +217,7 @@ Partial Class EditingForm_Pipe_ResultsTable
         'EditingForm_Pipe_ResultsTable
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.DataGridView1)
         Me.Name = "EditingForm_Pipe_ResultsTable"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()

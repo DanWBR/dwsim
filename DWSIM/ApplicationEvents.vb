@@ -44,12 +44,6 @@ Namespace My
 
         Public Property UserUnitSystems As Dictionary(Of String, SystemsOfUnits.Units)
 
-        Protected Overloads Shared ReadOnly Property UseCompatibleTextRendering() As Boolean
-            Get
-                Return False
-            End Get
-        End Property
-
         Private Sub MyApplication_Startup(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.StartupEventArgs) Handles Me.Startup
 
             If Environment.OSVersion.Version >= New Version(6, 3, 0) Then

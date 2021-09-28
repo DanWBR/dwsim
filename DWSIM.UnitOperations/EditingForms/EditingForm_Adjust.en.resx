@@ -292,7 +292,4 @@
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Linked Objects</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>96, 96</value>
-  </data>
 </root>

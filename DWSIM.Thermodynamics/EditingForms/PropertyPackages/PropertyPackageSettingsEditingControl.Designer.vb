@@ -262,8 +262,7 @@ Partial Class PropertyPackageSettingsEditingControl
         'PropertyPackageSettingsEditingControl
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Window
         Me.Controls.Add(Me.TabControl1)
         Me.Name = "PropertyPackageSettingsEditingControl"

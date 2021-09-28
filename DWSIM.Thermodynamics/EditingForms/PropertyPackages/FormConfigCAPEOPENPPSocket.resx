@@ -325,7 +325,7 @@
     <value>Label16</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>96, 96</value>
+    <value>6, 13</value>
   </data>
   <data name="&gt;&gt;dgmap.Name" xml:space="preserve">
     <value>dgmap</value>

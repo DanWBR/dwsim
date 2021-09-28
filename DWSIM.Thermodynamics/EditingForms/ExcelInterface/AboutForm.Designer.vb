@@ -188,8 +188,7 @@ Partial Class AboutForm
         'AboutForm
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.lblGPGPUinfo)
         Me.Controls.Add(Me.Label14)

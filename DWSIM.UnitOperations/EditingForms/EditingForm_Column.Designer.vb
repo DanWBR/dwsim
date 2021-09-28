@@ -683,8 +683,7 @@ Partial Class EditingForm_Column
         'EditingForm_Column
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.TabContainerAll)
         Me.Controls.Add(Me.GroupBox5)
         Me.Name = "EditingForm_Column"
