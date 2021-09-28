@@ -2099,6 +2099,14 @@ Namespace PropertyPackages
             If wl3 > 0 Then dl3 = Me.CurrentMaterialStream.Phases(5).Properties.density.GetValueOrDefault Else dl3 = 1
             If ww > 0 Then dw = Me.CurrentMaterialStream.Phases(6).Properties.density.GetValueOrDefault Else dw = 1
 
+            If wl1 > 0.0 And wl2 + wl3 + ww = 0.0 Then
+                CurrentMaterialStream.Phases(1).Properties.compressibilityFactor = CurrentMaterialStream.Phases(3).Properties.compressibilityFactor.GetValueOrDefault
+            ElseIf wl2 > 0.0 And wl1 + wl3 + ww = 0.0 Then
+                CurrentMaterialStream.Phases(1).Properties.compressibilityFactor = CurrentMaterialStream.Phases(4).Properties.compressibilityFactor.GetValueOrDefault
+            ElseIf ww > 0.0 And wl1 + wl2 + wl3 = 0.0 Then
+                CurrentMaterialStream.Phases(1).Properties.compressibilityFactor = CurrentMaterialStream.Phases(6).Properties.compressibilityFactor.GetValueOrDefault
+            End If
+
             dl = wl1 / dl1 + wl2 / dl2 + wl3 / dl3 + ww / dw
             dl = wl / dl
             Me.CurrentMaterialStream.Phases(1).Properties.density = dl
@@ -2227,7 +2235,7 @@ Namespace PropertyPackages
 
             If Double.IsNaN(kl) Then kl = 0.0
 
-            Me.CurrentMaterialStream.Phases(1).Properties.thermalConductivity = kl / wl
+            Me.CurrentMaterialStream.Phases(1).Properties.thermalConductivity = kl
 
             vil1 = Me.CurrentMaterialStream.Phases(3).Properties.viscosity.GetValueOrDefault
             vil2 = Me.CurrentMaterialStream.Phases(4).Properties.viscosity.GetValueOrDefault
@@ -2239,11 +2247,9 @@ Namespace PropertyPackages
 
             If Double.IsNaN(vil) Then vil = 0.0
 
-            Me.CurrentMaterialStream.Phases(1).Properties.viscosity = vil / wl
+            Me.CurrentMaterialStream.Phases(1).Properties.viscosity = vil
 
             Me.CurrentMaterialStream.Phases(1).Properties.kinematic_viscosity = vil / dl
-
-            Me.CurrentMaterialStream.Phases(1).Properties.compressibilityFactor = 0.0#
 
         End Sub
 
