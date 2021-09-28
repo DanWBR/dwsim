@@ -745,13 +745,13 @@
     <value>Fill</value>
   </data>
   <data name="WelcomePanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>371, 50</value>
+    <value>440, 50</value>
   </data>
   <data name="WelcomePanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>48, 22, 48, 22</value>
   </data>
   <data name="WelcomePanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>722, 577</value>
+    <value>653, 577</value>
   </data>
   <data name="WelcomePanel.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
@@ -784,7 +784,7 @@
     <value>NoControl</value>
   </data>
   <data name="ButtonClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>355, 0</value>
+    <value>424, 0</value>
   </data>
   <data name="ButtonClose.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -820,7 +820,7 @@
     <value>48, 22, 48, 22</value>
   </data>
   <data name="SettingsPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>371, 577</value>
+    <value>440, 577</value>
   </data>
   <data name="SettingsPanel.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>

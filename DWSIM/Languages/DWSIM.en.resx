@@ -5918,4 +5918,10 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="TPVessel" xml:space="preserve">
     <value>(Deprecated) Gas-Liquid Separator</value>
   </data>
+  <data name="CleanFailed" xml:space="preserve">
+    <value>Directory cleaning failed.</value>
+  </data>
+  <data name="CleanSuccessful" xml:space="preserve">
+    <value>Directory cleaned successfully.</value>
+  </data>
 </root>

@@ -32,6 +32,8 @@ Public Class EditingForm_Column_Stages
 
     Private Sub UIStagesEditorForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        ChangeDefaultFont(Me)
+
         Dim i As Integer = 0
 
         form = dc.FlowSheet

@@ -629,7 +629,6 @@ Partial Class FormMain
         Me.AllowDrop = True
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.Controls.Add(Me.WelcomePanel)
         Me.Controls.Add(Me.SettingsPanel)
         Me.Controls.Add(Me.ToolStrip1)

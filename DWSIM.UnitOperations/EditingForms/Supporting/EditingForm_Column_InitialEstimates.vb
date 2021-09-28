@@ -41,6 +41,8 @@ Public Class EditingForm_Column_InitialEstimates
 
     Private Sub UIInitialEstimatesEditorForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        ChangeDefaultFont(Me)
+
         pathsep = Path.DirectorySeparatorChar
 
         form = dc.FlowSheet

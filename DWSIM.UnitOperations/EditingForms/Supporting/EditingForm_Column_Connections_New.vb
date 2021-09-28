@@ -14,6 +14,8 @@ Public Class EditingForm_Column_Connections_New
 
     Sub UpdateInfo()
 
+        ChangeDefaultFont(Me)
+
         Dim i As Integer = 0
 
         Dim su = rc.GetFlowsheet().FlowsheetOptions.SelectedUnitSystem

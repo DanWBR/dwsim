@@ -1712,6 +1712,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Falha na limpeza do diretório..
+        '''</summary>
+        Friend Shared ReadOnly Property CleanFailed() As String
+            Get
+                Return ResourceManager.GetString("CleanFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Limpeza do diretório feita com sucesso..
+        '''</summary>
+        Friend Shared ReadOnly Property CleanSuccessful() As String
+            Get
+                Return ResourceManager.GetString("CleanSuccessful", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Conectado ao servidor na rede..
         '''</summary>
         Friend Shared ReadOnly Property ClientConnected() As String

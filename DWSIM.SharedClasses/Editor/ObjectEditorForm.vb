@@ -104,7 +104,6 @@ Public Class ObjectEditorForm
         Width = 400
 
         Me.AutoScaleMode = AutoScaleMode.Dpi
-Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
 
         Dim controls = GetAllChildren(Me)
 

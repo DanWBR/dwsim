@@ -4115,21 +4115,26 @@ Label_00CC:
         Me.ActivateMdiChild(NewMDIChild)
         NewMDIChild.Show()
         m_childcount += 1
+
     End Sub
+
     Private Sub DatabaseManagerToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles DatabaseManagerToolStripMenuItem.Click
+
         If My.Settings.UserDatabases.Count > 0 Then
             FormDBManager.DBPath = My.Settings.UserDatabases.Item(0)
             FormDBManager.ShowDialog()
         Else
             MessageBox.Show(DWSIM.App.GetLocalString("ErrorNoUserdatabase"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
+
     End Sub
+
     Private Sub PreferenciasDoDWSIMToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PreferenciasDoDWSIMToolStripMenuItem.Click
 
         RaiseEvent ToolOpened("View General Settings", New EventArgs())
 
         If Settings.DpiScale > 1.0 Then
-            Me.SettingsPanel.Width = 400 * Settings.DpiScale
+            Me.SettingsPanel.Width = 500 * Settings.DpiScale
         End If
         Me.SettingsPanel.Visible = True
 

@@ -5745,4 +5745,10 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="PressureDropStatic" xml:space="preserve">
     <value>Perda de Carga Hidrostática</value>
   </data>
+  <data name="CleanFailed" xml:space="preserve">
+    <value>Falha na limpeza do diretório.</value>
+  </data>
+  <data name="CleanSuccessful" xml:space="preserve">
+    <value>Limpeza do diretório feita com sucesso.</value>
+  </data>
 </root>

@@ -15,10 +15,7 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports System.Xml.Serialization
 Imports DWSIM.Thermodynamics.BaseClasses
-Imports System.Runtime.Serialization.Formatters.Binary
-Imports System.Runtime.Serialization.Formatters
 Imports System.IO
 Imports Cudafy
 Imports Cudafy.Host
@@ -110,6 +107,10 @@ Public Class FormOptions
 
         tbPythonPath.Text = My.Settings.PythonPath
         tbPythonTimeout.Text = My.Settings.PythonProcessTimeout
+
+        Dim configdir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "DWSIM_Project")
+
+        If Directory.Exists(configdir) Then tbConfigDir.Text = configdir Else tbConfigDir.Text = "N/A"
 
         Select Case My.Settings.CultureInfo
             Case "pt-BR"
@@ -388,9 +389,14 @@ Public Class FormOptions
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
         If MessageBox.Show(DWSIM.App.GetLocalString("AreYouSure"), "DWSIM", MessageBoxButtons.YesNo) = Windows.Forms.DialogResult.Yes Then
             If Directory.Exists(My.Settings.BackupFolder) Then
-                For Each f As String In Directory.GetFiles(My.Settings.BackupFolder, "*.dw*")
-                    File.Delete(f)
-                Next
+                Try
+                    For Each f As String In Directory.GetFiles(My.Settings.BackupFolder, "*.dw*")
+                        File.Delete(f)
+                    Next
+                    MessageBox.Show(DWSIM.App.GetLocalString("CleanSuccessful"), "DWSIM", MessageBoxButtons.OK)
+                Catch ex As Exception
+                    MessageBox.Show(DWSIM.App.GetLocalString("CleanFailed") + " " + ex.Message, "DWSIM", MessageBoxButtons.OK)
+                End Try
             End If
         End If
     End Sub
@@ -658,4 +664,17 @@ Public Class FormOptions
 
     End Sub
 
+    Private Sub btnClearDir_Click(sender As Object, e As EventArgs) Handles btnClearDir.Click
+        If MessageBox.Show(DWSIM.App.GetLocalString("AreYouSure"), "DWSIM", MessageBoxButtons.YesNo) = Windows.Forms.DialogResult.Yes Then
+            Dim configdir = tbConfigDir.Text
+            If Directory.Exists(configdir) Then
+                Try
+                    Directory.Delete(configdir, True)
+                    MessageBox.Show(DWSIM.App.GetLocalString("CleanSuccessful"), "DWSIM", MessageBoxButtons.OK)
+                Catch ex As Exception
+                    MessageBox.Show(DWSIM.App.GetLocalString("CleanFailed") + " " + ex.Message, "DWSIM", MessageBoxButtons.OK)
+                End Try
+            End If
+        End If
+    End Sub
 End Class
