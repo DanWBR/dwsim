@@ -123,11 +123,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             d1 = Date.Now
 
-            etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance).ToDoubleFromInvariant
+            etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance).ToDoubleFromInvariant()
             maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_External_Iterations)
-            itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance).ToDoubleFromInvariant
+            itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance).ToDoubleFromInvariant()
             maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
-            dampingfactor = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_DampingFactor)
+            dampingfactor = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_DampingFactor).ToDoubleFromInvariant()
 
             n = Vz.Length - 1
 
