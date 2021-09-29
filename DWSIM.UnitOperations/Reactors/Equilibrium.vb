@@ -236,7 +236,7 @@ Namespace Reactors
                 ktot *= kr
                 prodtot *= Math.Abs(prod(i))
                 f(i) = Math.Log(Math.Abs(prod(i)) / kr)
-                If pval > 0.01 Then
+                If Math.Abs(pval) > 0.01 Then
                     If PenaltyValueScheme = 0 Then
                     ElseIf PenaltyValueScheme = 1 Then
                         f(i) *= pval

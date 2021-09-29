@@ -28,6 +28,8 @@ public class Test3
 
         var errors = interf.CalculateFlowsheet3(sim, 3600);
 
+        interf.SaveFlowsheet2(sim, @"");
+
         Console.WriteLine("Solved.");
 
         Console.ReadLine();
