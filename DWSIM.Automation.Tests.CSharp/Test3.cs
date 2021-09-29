@@ -22,18 +22,11 @@ public class Test3
 
         var interf = new DWSIM.Automation.Automation2();
 
-        var sim = interf.LoadFlowsheet(@"C:\309829-342429-1.dwxmz");
+        var sim = interf.LoadFlowsheet(@"");
 
         sim.SetMessageListener((s, mt) => Console.WriteLine(s));
 
-        var t1 = (double)sim.GetFlowsheetSimulationObject("RE-01").GetPropertyValue("PROP_RE_1") - 273.15;
-
         var errors = interf.CalculateFlowsheet3(sim, 3600);
-
-        var t2 = (double)sim.GetFlowsheetSimulationObject("RE-01").GetPropertyValue("PROP_RE_1") - 273.15;
-
-        Console.WriteLine(t1);
-        Console.WriteLine(t2);
 
         Console.WriteLine("Solved.");
 
