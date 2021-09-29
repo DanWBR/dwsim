@@ -1177,9 +1177,7 @@ Namespace UnitOperations
                 drw?.AppendLine("Application & System Info: ")
                 drw?.AppendLine()
 
-                Dim version = My.Application.Info.Version.Major & "." &
-                    My.Application.Info.Version.Minor & "." &
-                    My.Application.Info.Version.Build & " (" &
+                Dim version = Assembly.GetExecutingAssembly().GetName().Version.ToString() & " (" &
                     IO.File.GetLastWriteTimeUtc(Assembly.GetExecutingAssembly().Location).ToString() + ")"
 
                 drw?.AppendLine(String.Format("Unit Operations Library Version: {0}", version))
