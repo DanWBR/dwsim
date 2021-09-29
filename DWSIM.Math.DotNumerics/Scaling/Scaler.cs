@@ -16,7 +16,7 @@ namespace DotNumerics.Scaling
             return scaled;
         }
 
-        public static double UnScale(float scaledvalue, double min, double max, double minScale, double maxScale)
+        public static double UnScale(double scaledvalue, double min, double max, double minScale, double maxScale)
         {
             double unscaled = min + (scaledvalue - minScale) * (max - min) / (maxScale - minScale);
             if (double.IsNaN(unscaled) || double.IsInfinity(unscaled)) unscaled = min;

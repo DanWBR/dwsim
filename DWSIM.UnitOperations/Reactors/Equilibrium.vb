@@ -48,7 +48,7 @@ Namespace Reactors
         Dim DN As New Dictionary(Of String, Double)
         Dim N As New Dictionary(Of String, Double)
 
-        Dim T, T0, P, P0, Ninerts, Winerts, E(,), TAdb As Double
+        Dim T, T0, P, P0, Ninerts, Winerts, E(,) As Double
 
         Dim r, c, els, comps As Integer
 
@@ -83,6 +83,8 @@ Namespace Reactors
         Private NoPenVal As Boolean = False
 
         Private MinVal, MaxVal As Double
+
+        Private PenaltyValueScheme As Integer = 0
 
 #End Region
 
@@ -235,7 +237,22 @@ Namespace Reactors
                 prodtot *= Math.Abs(prod(i))
                 f(i) = Math.Log(Math.Abs(prod(i)) / kr)
                 If pval > 0.01 Then
-                    f(i) *= pval
+                    If PenaltyValueScheme = 0 Then
+                    ElseIf PenaltyValueScheme = 1 Then
+                        f(i) *= pval
+                    ElseIf PenaltyValueScheme = 2 Then
+                        If Math.Abs(pval * f(i)) > 1.0 Then
+                            f(i) = pval * f(i)
+                        Else
+                            f(i) = pval / f(i)
+                        End If
+                    ElseIf PenaltyValueScheme = 3 Then
+                        If Math.Abs(f(i)) >= 0.0 And Math.Abs(f(i)) < 1.0 Then
+                            f(i) = pval / f(i)
+                        Else
+                            f(i) = pval * f(i)
+                        End If
+                    End If
                 End If
             Next
 
@@ -359,7 +376,11 @@ Namespace Reactors
         End Function
 
         Public Sub New()
+
             MyBase.New()
+
+            OutletTemperature = 0.0
+
         End Sub
 
         Public Sub New(ByVal name As String, ByVal description As String)
@@ -369,6 +390,8 @@ Namespace Reactors
             Me.ComponentDescription = description
 
             Me.ComponentIDs = New List(Of String)
+
+            OutletTemperature = 0.0
 
         End Sub
 
@@ -399,6 +422,41 @@ Namespace Reactors
         Private Mode As Integer = 1
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
+
+            Dim HasError As Boolean = True
+            Try
+                PenaltyValueScheme = 0
+                Calculate_Internal(args)
+                HasError = False
+            Catch ex As Exception
+                HasError = True
+            End Try
+            If HasError Then
+                Try
+                    PenaltyValueScheme = 1
+                    Calculate_Internal(args)
+                    HasError = False
+                Catch ex As Exception
+                    HasError = True
+                End Try
+                If HasError Then
+                    Try
+                        PenaltyValueScheme = 2
+                        Calculate_Internal(args)
+                        HasError = False
+                    Catch ex As Exception
+                        HasError = True
+                    End Try
+                    If HasError Then
+                        PenaltyValueScheme = 3
+                        Calculate_Internal(args)
+                    End If
+                End If
+            End If
+
+        End Sub
+
+        Public Sub Calculate_Internal(Optional ByVal args As Object = Nothing)
 
             Dim DRW = GetDebugWriter()
 
@@ -523,7 +581,6 @@ Namespace Reactors
             DRW?.AppendLine(String.Format("Calculation Mode: {0}", ReactorOperationMode))
             DRW?.AppendLine(String.Format("Defined Outlet Temperature: {0} K", OutletTemperature))
             DRW?.AppendLine(String.Format("Defined Pressure Drop: {0} Pa", DeltaP.GetValueOrDefault()))
-            DRW?.AppendLine(String.Format("Initial Estimate for Adiabatic Temperature: {0} K", TAdb))
             DRW?.AppendLine()
 
             DRW?.AppendLine("Inlet Material Stream: " + GetInletMaterialStream(0).ToString())
@@ -565,8 +622,8 @@ Namespace Reactors
 
             Select Case Me.ReactorOperationMode
                 Case OperationMode.Adiabatic
-                    T = TAdb
-                    If T < 1.0 Then T = T0
+                    T = OutletTemperature
+                    If Math.Abs(T - T0) > 100.0 Then T = T0
                 Case OperationMode.Isothermic
                     T = T0
                 Case OperationMode.OutletTemperature
@@ -680,21 +737,22 @@ Namespace Reactors
 
             Dim m As Integer = 0
 
-            Dim REx(r) As Double
+            Dim REx(r), REx0(r) As Double
 
             If UsePreviousSolution And PreviousReactionExtents.Count > 0 Then
                 REx = PreviousReactionExtents.Values.ToArray()
+                REx0 = PreviousReactionExtents.Values.ToArray()
             End If
 
             IObj?.Paragraphs.Add(String.Format("Initial Estimates for Reaction Extents: {0}", REx.ToMathArrayString))
 
             Dim g0, g1 As Double
 
-            Dim REx0(REx.Length - 1) As Double
+            Dim RExNR(REx.Length - 1) As Double
 
             IObj?.SetCurrent
 
-            g0 = FunctionValue2G(REx0)
+            g0 = FunctionValue2G(RExNR)
 
             IObj?.SetCurrent
 
@@ -1002,9 +1060,15 @@ Namespace Reactors
                     adberror = efunc.Invoke(T)
                 Loop Until adberror <= 0.1
                 If penval > 0.01 Then
+                    Dim keys = PreviousReactionExtents.Keys.ToArray()
+                    i = 0
+                    For Each key In keys
+                        PreviousReactionExtents(key) = REx0(i)
+                        ReactionExtents(key) = REx0(i)
+                        i += 1
+                    Next
                     Throw New Exception("Solution led to negative mole fractions.")
                 End If
-                TAdb = T
             Else
                 efunc.Invoke(T)
             End If
