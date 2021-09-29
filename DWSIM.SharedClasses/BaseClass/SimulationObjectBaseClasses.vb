@@ -1182,7 +1182,7 @@ Namespace UnitOperations
                     My.Application.Info.Version.Build & " (" &
                     IO.File.GetLastWriteTimeUtc(Assembly.GetExecutingAssembly().Location).ToString() + ")"
 
-                drw?.AppendLine(String.Format("DWSIM Version: {0}", version))
+                drw?.AppendLine(String.Format("Unit Operations Library Version: {0}", version))
                 drw?.AppendLine(String.Format("OS Version: {0}", My.Computer.Info.OSFullName & ", Version " & My.Computer.Info.OSVersion & ", " & My.Computer.Info.OSPlatform & " Platform"))
                 drw?.AppendLine(String.Format("Runtime Version: {0}", SharedClasses.Utility.GetRuntimeVersion()))
 
