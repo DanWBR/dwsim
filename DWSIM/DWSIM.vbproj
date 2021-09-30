@@ -304,6 +304,9 @@
     <Reference Include="HtmlAgilityPack, Version=1.11.23.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlAgilityPack.1.11.23\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.AvalonEdit, Version=6.1.2.30, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
+      <HintPath>..\packages\AvalonEdit.6.1.2.30\lib\net45\ICSharpCode.AvalonEdit.dll</HintPath>
+    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=1.3.1.9, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpZipLib.1.3.1\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
@@ -460,6 +463,7 @@
     <Reference Include="System.Xaml" />
     <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="UIAutomationProvider" />
     <Reference Include="unvell.ReoGrid">
       <HintPath>References\ReoGrid.WinForms\unvell.ReoGrid.dll</HintPath>
     </Reference>
@@ -477,6 +481,7 @@
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
     <Reference Include="Yeppp.CLR.Bundle">
       <HintPath>..\packages\Yeppp.CLR.Bundle.1.0.1-prerelease\lib\net20\Yeppp.CLR.Bundle.dll</HintPath>
     </Reference>
@@ -597,6 +602,12 @@
       <DependentUpon>FormFileExplorer.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\FlowsheetComponents\FormFileExplorer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FlowsheetComponents\FormInteractiveIronPythonConsole.Designer.vb">
+      <DependentUpon>FormInteractiveIronPythonConsole.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FlowsheetComponents\FormInteractiveIronPythonConsole.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FlowsheetComponents\FormNewSpreadsheet.Designer.vb">
@@ -1278,6 +1289,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FlowsheetComponents\FormFileExplorer.resx">
       <DependentUpon>FormFileExplorer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FlowsheetComponents\FormInteractiveIronPythonConsole.resx">
+      <DependentUpon>FormInteractiveIronPythonConsole.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FlowsheetComponents\FormNewSpreadsheet.en.resx">
       <DependentUpon>FormNewSpreadsheet.vb</DependentUpon>
@@ -2245,6 +2259,14 @@
     <ProjectReference Include="..\DWSIM.Controls.DockPanel\WinFormsUI\DWSIM.Controls.DockPanel.csproj">
       <Project>{c75532c4-765b-418e-b09b-46d36b2abdb1}</Project>
       <Name>DWSIM.Controls.DockPanel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Controls.IronPythonConsole\DWSIM.Controls.IronPythonConsole.csproj">
+      <Project>{8a19eaa5-44c5-41ec-a908-7f41792cf18b}</Project>
+      <Name>DWSIM.Controls.IronPythonConsole</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Controls.PythonConsoleControl\DWSIM.Controls.PythonConsoleControl.csproj">
+      <Project>{f1152d68-346b-4f48-8db7-be67b5cb1f49}</Project>
+      <Name>DWSIM.Controls.PythonConsoleControl</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Drawing.SkiaSharp\DWSIM.DrawingTools.SkiaSharp.vbproj">
       <Project>{77040ecc-07b9-4b21-8b1f-7e45764e35f0}</Project>

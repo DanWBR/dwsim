@@ -84,6 +84,7 @@ Public Class FormFlowsheet
     Public FormDynamics As New FormDynamicsManager
     Public FormIntegratorControls As New FormDynamicsIntegratorControl
     Public FormFilesExplorer As New FormFileExplorer
+    Public FormIPyConsole As New FormInteractiveIronPythonConsole
 
     Public FormProps As New frmProps
 
@@ -184,6 +185,7 @@ Public Class FormFlowsheet
         FormDynamics.Flowsheet = Me
         FormIntegratorControls.Flowsheet = Me
         FormFilesExplorer.Flowsheet = Me
+        FormIPyConsole.Flowsheet = Me
 
         Me.MdiParent = My.Application.MainWindowForm
 
@@ -288,6 +290,7 @@ Public Class FormFlowsheet
             FormDynamics.DockPanel = Nothing
             FormIntegratorControls.DockPanel = Nothing
             FormFilesExplorer.DockPanel = Nothing
+            FormIPyConsole.DockPanel = Nothing
 
             Dim myfile As String = Path.Combine(My.Application.Info.DirectoryPath, "layout.xml")
             dckPanel.LoadFromXml(myfile, New DeserializeDockContent(AddressOf ReturnForm))
@@ -302,6 +305,7 @@ Public Class FormFlowsheet
             FormIntegratorControls.Show(dckPanel)
             FormFilesExplorer.Show(dckPanel)
             FormProps.Show(dckPanel, DockState.DockLeft)
+            FormIPyConsole.Show(FormSurface.Pane, Nothing)
 
             FormSurface.Activate()
 
@@ -464,6 +468,8 @@ Public Class FormFlowsheet
                 Return Me.FormIntegratorControls
             Case "DWSIM.FormFileExplorer"
                 Return Me.FormFilesExplorer
+            Case "DWSIM.FormInteractiveIronPythonConsole"
+                Return Me.FormIPyConsole
         End Select
         Return Nothing
     End Function

@@ -2162,6 +2162,8 @@ Public Class FormMain
 
             form.FormFilesExplorer.Flowsheet = form
 
+            form.FormIPyConsole.Flowsheet = form
+
             ' Set DockPanel properties
             form.dckPanel.ActiveAutoHideContent = Nothing
             form.dckPanel.Parent = form
@@ -2178,6 +2180,7 @@ Public Class FormMain
             form.FormProps.DockPanel = Nothing
             form.FormCharts.DockPanel = Nothing
             form.FormFilesExplorer.DockPanel = Nothing
+            form.FormIPyConsole.DockPanel = Nothing
 
             If Not DWSIM.App.IsRunningOnMono Then
                 If Not My.Computer.Keyboard.ShiftKeyDown Then
@@ -2207,6 +2210,7 @@ Public Class FormMain
                 form.FormDynamics.Show(form.dckPanel)
                 form.FormFilesExplorer.Show(form.dckPanel)
                 form.FormProps.Show(form.dckPanel)
+                form.FormIPyConsole.Show(form.dckPanel)
                 form.dckPanel.BringToFront()
                 form.dckPanel.UpdateDockWindowZOrder(DockStyle.Fill, True)
             Catch ex As Exception
@@ -2713,6 +2717,8 @@ Public Class FormMain
 
             form.FormFilesExplorer.Flowsheet = form
 
+            form.FormIPyConsole.Flowsheet = form
+
             ' Set DockPanel properties
             form.dckPanel.ActiveAutoHideContent = Nothing
             form.dckPanel.Parent = form
@@ -2728,6 +2734,7 @@ Public Class FormMain
             form.FormSurface.DockPanel = Nothing
             form.FormDynamics.DockPanel = Nothing
             form.FormFilesExplorer.DockPanel = Nothing
+            form.FormIPyConsole.DockPanel = Nothing
 
             If Not My.Computer.Keyboard.ShiftKeyDown Then
                 Dim myfile As String = My.Computer.FileSystem.GetTempFileName()
@@ -2750,6 +2757,7 @@ Public Class FormMain
                 form.FormSurface.Show(form.dckPanel)
                 form.FormDynamics.Show(form.dckPanel)
                 form.FormFilesExplorer.Show(form.dckPanel)
+                form.FormIPyConsole.Show(form.dckPanel)
                 form.dckPanel.BringToFront()
                 form.dckPanel.UpdateDockWindowZOrder(DockStyle.Fill, True)
             Catch ex As Exception
