@@ -12,6 +12,10 @@ Public Class FormInteractiveIronPythonConsole
 
     Private Sub FormInteractiveIronPythonConsole_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        Width = 600
+
+        Me.AutoHidePortion = 600
+
         ExtensionMethods.ChangeDefaultFont(Me)
 
         Dim ctrlHost = New ElementHost()

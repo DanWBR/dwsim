@@ -171,9 +171,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DWSIM.Controls.PythonConsoleControl\DWSIM.Controls.PythonConsoleControl.csproj">
+    <ProjectReference Include="..\DWSIM.Controls.PythonConsoleControl\DWSIM.Controls.IronPythonConsoleControl.csproj">
       <Project>{f1152d68-346b-4f48-8db7-be67b5cb1f49}</Project>
-      <Name>DWSIM.Controls.PythonConsoleControl</Name>
+      <Name>DWSIM.Controls.IronPythonConsoleControl</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

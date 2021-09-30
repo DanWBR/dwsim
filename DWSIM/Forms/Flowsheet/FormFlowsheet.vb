@@ -305,7 +305,7 @@ Public Class FormFlowsheet
             FormIntegratorControls.Show(dckPanel)
             FormFilesExplorer.Show(dckPanel)
             FormProps.Show(dckPanel, DockState.DockLeft)
-            FormIPyConsole.Show(FormSurface.Pane, Nothing)
+            FormIPyConsole.Show(dckPanel)
 
             FormSurface.Activate()
 

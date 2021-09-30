@@ -215,7 +215,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.FileStorage", "DWSIM.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.Controls.IronPythonConsole", "DWSIM.Controls.IronPythonConsole\DWSIM.Controls.IronPythonConsole.csproj", "{8A19EAA5-44C5-41EC-A908-7F41792CF18B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.Controls.PythonConsoleControl", "DWSIM.Controls.PythonConsoleControl\DWSIM.Controls.PythonConsoleControl.csproj", "{F1152D68-346B-4F48-8DB7-BE67B5CB1F49}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.Controls.IronPythonConsoleControl", "DWSIM.Controls.PythonConsoleControl\DWSIM.Controls.IronPythonConsoleControl.csproj", "{F1152D68-346B-4F48-8DB7-BE67B5CB1F49}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

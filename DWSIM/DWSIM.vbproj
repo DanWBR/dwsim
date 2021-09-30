@@ -2264,9 +2264,9 @@
       <Project>{8a19eaa5-44c5-41ec-a908-7f41792cf18b}</Project>
       <Name>DWSIM.Controls.IronPythonConsole</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DWSIM.Controls.PythonConsoleControl\DWSIM.Controls.PythonConsoleControl.csproj">
+    <ProjectReference Include="..\DWSIM.Controls.PythonConsoleControl\DWSIM.Controls.IronPythonConsoleControl.csproj">
       <Project>{f1152d68-346b-4f48-8db7-be67b5cb1f49}</Project>
-      <Name>DWSIM.Controls.PythonConsoleControl</Name>
+      <Name>DWSIM.Controls.IronPythonConsoleControl</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Drawing.SkiaSharp\DWSIM.DrawingTools.SkiaSharp.vbproj">
       <Project>{77040ecc-07b9-4b21-8b1f-7e45764e35f0}</Project>

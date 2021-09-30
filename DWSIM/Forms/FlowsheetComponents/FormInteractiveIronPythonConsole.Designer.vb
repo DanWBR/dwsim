@@ -40,6 +40,7 @@ Partial Class FormInteractiveIronPythonConsole
         Me.Controls.Add(Me.Panel1)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Name = "FormInteractiveIronPythonConsole"
+        Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockRightAutoHide
         Me.TabText = "Interactive IronPython Console"
         Me.Text = "Interactive IronPython Console"
         Me.ResumeLayout(False)
