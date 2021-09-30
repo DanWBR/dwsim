@@ -970,10 +970,17 @@ namespace DWSIM.UI.Desktop.Editors.Dynamics
             layout.CreateAndAddLabelRow("Properties");
 
             var dtp = new DateTimePicker { Mode = DateTimePickerMode.Time, Value = new DateTime().Add(integ.Duration) };
+            dtp.MinDate = new DateTime();
+            dtp.MaxDate = new DateTime(2100, 12, 1);
             dtp.Font = new Font(SystemFont.Default, UI.Shared.Common.GetEditorFontSize());
             dtp.ValueChanged += (s, e) =>
             {
-                integ.Duration = dtp.Value.GetValueOrDefault().Subtract(new DateTime());
+                try {
+                    integ.Duration = dtp.Value.GetValueOrDefault().Subtract(new DateTime());
+                }
+                catch (Exception ex){
+                    MessageBox.Show("Error setting integrator duration: " + ex.Message, "Error", MessageBoxType.Error);
+                }
             };
 
             layout.CreateAndAddLabelAndControlRow("Duration", dtp);
