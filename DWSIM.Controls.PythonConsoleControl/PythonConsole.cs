@@ -72,6 +72,8 @@ namespace PythonConsoleControl
             get { return allowCtrlSpaceAutocompletion; }
             set { allowCtrlSpaceAutocompletion = value; }
         }
+
+        public Action<ScriptScope> UpdateVariables { get; set; }
         
         PythonTextEditor textEditor;
         int lineReceivedEventIndex = 0; // The index into the waitHandles array where the lineReceivedEvent is stored.
@@ -393,6 +395,7 @@ namespace PythonConsoleControl
         /// </summary>
         void ExecuteStatements(string scriptText)
         {
+            UpdateVariables?.Invoke(commandLine.ScriptScope);
             lock (scriptText)
             {
                 textEditor.Write("\r\n");
@@ -607,6 +610,7 @@ namespace PythonConsoleControl
             {
                 if (e.Text[0] == '\n')
                 {
+                    UpdateVariables?.Invoke(commandLine.ScriptScope);
                     OnEnterKeyPressed();
                 }
 
