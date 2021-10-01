@@ -2982,6 +2982,20 @@ Public Class FormFlowsheet
         My.Application.MainWindowForm.SaveXML(file, Me)
     End Sub
 
+    Public Function SaveToFile() As String
+        If Path.GetExtension(Options.FilePath).ToLower = ".dwxml" Then
+            FormMain.SaveXML(Options.FilePath, Me)
+            Return "simulation saved to '" + Options.FilePath + "'."
+        ElseIf Path.GetExtension(Options.FilePath).ToLower = ".xml" Then
+            Return "saving to mobile xml is not supported"
+        ElseIf Path.GetExtension(Options.FilePath).ToLower = ".dwxmz" Then
+            FormMain.SaveXMLZIP(Options.FilePath, Me)
+            Return "simulation saved to '" + Options.FilePath + "'."
+        Else
+            Return "simulation must be saved manually before trying it through here."
+        End If
+    End Function
+
     Public Sub UpdateProcessData(xdoc As XDocument) Implements IFlowsheetBag.UpdateProcessData
 
     End Sub

@@ -1,0 +1,12 @@
+import System
+from System.Diagnostics import Process
+
+def solve():
+	Flowsheet.RequestCalculation()
+	return 'solving flowsheet...'
+
+def save():
+	return Flowsheet.SaveToFile()
+
+def apihelp():
+	Process.Start('https://dwsim.inforside.com.br/api_help60/html/G_DWSIM.htm')

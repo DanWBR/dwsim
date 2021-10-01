@@ -7566,43 +7566,47 @@ Namespace Streams
         ''' Sets stream temperature.
         ''' </summary>
         ''' <param name="value">Temperature in K</param>
-        Public Sub SetTemperature(value As Double)
+        Public Function SetTemperature(value As Double) As String
             Phases(0).Properties.temperature = value
             AtEquilibrium = False
-        End Sub
+            Return String.Format("temperature set to {0} K", value)
+        End Function
 
         ''' <summary>
         ''' Sets stream pressure
         ''' </summary>
         ''' <param name="value">Pressure in Pa</param>
-        Public Sub SetPressure(value As Double)
+        Public Function SetPressure(value As Double) As String
             Phases(0).Properties.pressure = value
             AtEquilibrium = False
-        End Sub
+            Return String.Format("pressure set to {0} Pa", value)
+        End Function
 
         ''' <summary>
         ''' Sets stream enthalpy.
         ''' </summary>
         ''' <param name="value">Enthalpy in kJ/kg</param>
-        Public Sub SetMassEnthalpy(value As Double)
+        Public Function SetMassEnthalpy(value As Double) As String
             Phases(0).Properties.enthalpy = value
             AtEquilibrium = False
-        End Sub
+            Return String.Format("mass enthalpy set to {0} kJ/kg", value)
+        End Function
 
         ''' <summary>
         ''' Sets stream entropy.
         ''' </summary>
         ''' <param name="value">Entropy in kJ/[kg.K]</param>
-        Public Sub SetMassEntropy(value As Double)
+        Public Function SetMassEntropy(value As Double) As String
             Phases(0).Properties.entropy = value
             AtEquilibrium = False
-        End Sub
+            Return String.Format("mass entropy set to {0} kJ/[kg.K]", value)
+        End Function
 
         ''' <summary>
         ''' Sets stream mass flow.
         ''' </summary>
         ''' <param name="value">Flow in kg/s</param>
-        Public Sub SetMassFlow(value As Double)
+        Public Function SetMassFlow(value As Double) As String
 
             Phases(0).Properties.massflow = value
             Phases(0).Properties.molarflow = value / Phases(0).Properties.molecularWeight * 1000
@@ -7610,7 +7614,7 @@ Namespace Streams
             DefinedFlow = FlowSpec.Mass
             AtEquilibrium = False
 
-        End Sub
+        End Function
 
         ''' <summary>
         ''' Set the mass flow for a single compound and updates the overall mass flow and composition.
@@ -7822,31 +7826,33 @@ Namespace Streams
         ''' Sets stream molar flow.
         ''' </summary>
         ''' <param name="value">Flow in mol/s</param>
-        Public Sub SetMolarFlow(value As Double)
+        Public Function SetMolarFlow(value As Double) As String
             Phases(0).Properties.massflow = value * Phases(0).Properties.molecularWeight / 1000
             Phases(0).Properties.molarflow = value
             Phases(0).Properties.volumetric_flow = value * Phases(0).Properties.molecularWeight / 1000 / Phases(0).Properties.density.GetValueOrDefault
             DefinedFlow = FlowSpec.Mole
             AtEquilibrium = False
-        End Sub
+            Return String.Format("molar flow set to {0} mol/s", value)
+        End Function
 
         ''' <summary>
         ''' Sets stream volumetric flow.
         ''' </summary>
         ''' <param name="value">Flow in m3/s</param>
-        Public Sub SetVolumetricFlow(value As Double)
+        Public Function SetVolumetricFlow(value As Double) As String
             Phases(0).Properties.massflow = Nothing
             Phases(0).Properties.molarflow = Nothing
             Phases(0).Properties.volumetric_flow = value
             DefinedFlow = FlowSpec.Volumetric
             AtEquilibrium = False
-        End Sub
+            Return String.Format("volumetric flow set to {0} m3/s", value)
+        End Function
 
         ''' <summary>
         ''' Sets stream flash spec.
         ''' </summary>
         ''' <param name="value">Flash Specification (PT, PH, PS, PVF, TVF, PSF, VT, VH or VS).</param>
-        Public Sub SetFlashSpec(value As String)
+        Public Function SetFlashSpec(value As String) As String
             Select Case value.ToLower
                 Case "pt", "tp"
                     SpecType = StreamSpec.Temperature_and_Pressure
@@ -7868,7 +7874,8 @@ Namespace Streams
                     SpecType = StreamSpec.Volume_and_Entropy
             End Select
             AtEquilibrium = False
-        End Sub
+            Return String.Format("flash spec set to {0}", SpecType.ToString())
+        End Function
 
         ''' <summary>
         ''' Mixes this stream with another one.  

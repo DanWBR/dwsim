@@ -40,6 +40,9 @@ Public Class FormInteractiveIronPythonConsole
                                                                              LoadedAssemblies = True
                                                                          End If
 
+                                                                         Dim scriptSource = engine.CreateScriptSourceFromString(My.Resources.pythonfunctions, Microsoft.Scripting.SourceCodeKind.Statements)
+                                                                         scriptSource.Execute(scope)
+
                                                                          scope.SetVariable("Flowsheet", Flowsheet)
                                                                          scope.SetVariable("Spreadsheet", Flowsheet.FormSpreadsheet.Spreadsheet)
 
