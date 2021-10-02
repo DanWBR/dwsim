@@ -302,7 +302,7 @@ Public Class FormFlowsheet
             FormSpreadsheet.Show(FormSurface.Pane, Nothing)
             FormCharts.Show(FormSurface.Pane, Nothing)
             FormWatch.Show(dckPanel)
-            FormIntegratorControls.Show(dckPanel)
+            'FormIntegratorControls.Show(dckPanel)
             FormFilesExplorer.Show(dckPanel)
             FormProps.Show(dckPanel, DockState.DockLeft)
             FormIPyConsole.Show(dckPanel)

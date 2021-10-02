@@ -137,7 +137,7 @@ Partial Class FormDynamicsIntegratorControl
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormDynamicsIntegratorControl"
-        Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockBottom
+        Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockTop
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip"))

@@ -122,7 +122,7 @@
     <value>195, 86</value>
   </data>
   <data name="lblFinish.Location" type="System.Drawing.Point, System.Drawing">
-    <value>816, 86</value>
+    <value>765, 86</value>
   </data>
   <data name="lblFinish.Text" xml:space="preserve">
     <value>00:00:00</value>
@@ -137,7 +137,7 @@
     <value>Schedule</value>
   </data>
   <data name="cbScenario.Location" type="System.Drawing.Point, System.Drawing">
-    <value>74, 12</value>
+    <value>74, 13</value>
   </data>
   <data name="cbScenario.Size" type="System.Drawing.Size, System.Drawing">
     <value>226, 21</value>
@@ -146,7 +146,7 @@
     <value>244, 86</value>
   </data>
   <data name="lblCurrent.Size" type="System.Drawing.Size, System.Drawing">
-    <value>572, 13</value>
+    <value>521, 13</value>
   </data>
   <data name="lblCurrent.Text" xml:space="preserve">
     <value>00:00:00</value>
@@ -156,7 +156,7 @@
     <value>False</value>
   </data>
   <data name="btnViewResults.Location" type="System.Drawing.Point, System.Drawing">
-    <value>614, 12</value>
+    <value>563, 12</value>
   </data>
   <data name="btnViewResults.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 23</value>
@@ -183,16 +183,16 @@
     <value>Run Schedule</value>
   </data>
   <data name="ProgressBar1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>667, 23</value>
+    <value>616, 23</value>
   </data>
   <data name="btnLiveChart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>748, 12</value>
+    <value>697, 12</value>
   </data>
   <data name="btnLiveChart.Text" xml:space="preserve">
     <value>View Live Chart</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>877, 120</value>
+    <value>826, 120</value>
   </data>
   <data name="$this.TabText" xml:space="preserve">
     <value>Integrator Controls</value>
