@@ -34,6 +34,7 @@ Partial Class FormDynamicsIntegratorControl
         Me.btnRun = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
+        Me.btnLiveChart = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblStart
@@ -106,11 +107,18 @@ Partial Class FormDynamicsIntegratorControl
         Me.ProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous
         Me.ToolTip1.SetToolTip(Me.ProgressBar1, resources.GetString("ProgressBar1.ToolTip"))
         '
+        'btnLiveChart
+        '
+        resources.ApplyResources(Me.btnLiveChart, "btnLiveChart")
+        Me.btnLiveChart.Name = "btnLiveChart"
+        Me.ToolTip1.SetToolTip(Me.btnLiveChart, resources.GetString("btnLiveChart.ToolTip"))
+        Me.btnLiveChart.UseVisualStyleBackColor = True
+        '
         'FormDynamicsIntegratorControl
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
+        Me.Controls.Add(Me.btnLiveChart)
         Me.Controls.Add(Me.ProgressBar1)
         Me.Controls.Add(Me.btnRealtime)
         Me.Controls.Add(Me.btnViewResults)
@@ -149,4 +157,5 @@ Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
     Friend WithEvents btnRealtime As Button
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents ProgressBar1 As ProgressBar
+    Friend WithEvents btnLiveChart As Button
 End Class

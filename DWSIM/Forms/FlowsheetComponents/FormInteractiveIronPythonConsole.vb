@@ -47,7 +47,7 @@ Public Class FormInteractiveIronPythonConsole
                                                                          scope.SetVariable("Spreadsheet", Flowsheet.FormSpreadsheet.Spreadsheet)
 
                                                                          For Each obj As SharedClasses.UnitOperations.BaseClass In Flowsheet.Collections.FlowsheetObjectCollection.Values
-                                                                             scope.SetVariable(obj.GraphicObject.Tag.Replace("-", ""), obj)
+                                                                             scope.SetVariable(obj.GraphicObject.Tag.Replace("-", "").Replace(" ", "").Replace("_", ""), obj)
                                                                          Next
 
                                                                      End Sub

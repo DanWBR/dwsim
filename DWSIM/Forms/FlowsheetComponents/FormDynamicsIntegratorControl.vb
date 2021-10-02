@@ -2,6 +2,9 @@
 Imports System.Threading.Tasks
 Imports DWSIM.DynamicsManager
 Imports Eto.Threading
+Imports OxyPlot
+Imports OxyPlot.Axes
+Imports OxyPlot.Series
 Imports Python.Runtime
 
 Public Class FormDynamicsIntegratorControl
@@ -13,6 +16,10 @@ Public Class FormDynamicsIntegratorControl
     Public Busy As Boolean = False
 
     Public Abort As Boolean = False
+
+    Public LiveChart As New FormChart_OxyPlot
+
+    Private ChartIsSetup As Boolean = False
 
     Private Sub FormDynamicsIntegratorControl_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -62,6 +69,7 @@ Public Class FormDynamicsIntegratorControl
 
         If Flowsheet.DynamicMode Then
             If Not Running Then
+                ChartIsSetup = False
                 RunIntegrator(False, False, False)
             Else
                 If Not Paused Then
@@ -182,6 +190,8 @@ Public Class FormDynamicsIntegratorControl
     End Sub
 
     Public Function RunIntegrator(realtime As Boolean, waittofinish As Boolean, restarting As Boolean) As Task
+
+        ChartIsSetup = False
 
         btnRealtime.Enabled = False
 
@@ -382,6 +392,11 @@ Public Class FormDynamicsIntegratorControl
 
                                         i += interval
 
+                                        Flowsheet.RunCodeOnUIThread(Sub()
+                                                                        If Not ChartIsSetup Then SetupChart(integrator)
+                                                                        UpdateChart(integrator)
+                                                                    End Sub)
+
                                     End While
 
                                     If exceptions.Count > 0 Then Throw exceptions(0)
@@ -515,6 +530,100 @@ Public Class FormDynamicsIntegratorControl
             cbScenario.SelectedIndex = 0
 
         End If
+
+    End Sub
+
+    Private Sub btnLiveChart_Click(sender As Object, e As EventArgs) Handles btnLiveChart.Click
+
+        LiveChart.Text = "Live View - " + cbScenario.SelectedItem.ToString()
+        LiveChart.TabText = LiveChart.Text
+        LiveChart.Show(Flowsheet.GetDockPanel())
+
+    End Sub
+
+    Public Sub UpdateChart(integrator As Interfaces.IDynamicsIntegrator)
+
+        Dim i As Integer
+        Dim x, y As Double
+
+        Dim model = LiveChart.PlotView1.Model
+
+        Dim pointset = integrator.MonitoredVariableValues.Last
+
+        x = New TimeSpan(pointset.Key).TotalMilliseconds
+
+        i = 0
+        For Each var In pointset.Value
+            y = var.PropertyValue
+            Dim series = DirectCast(model.Series(i), LineSeries)
+            series.Points.Add(New DataPoint(x, y))
+            If series.Points.Count > 100 Then series.Points.RemoveAt(0)
+            i += 1
+        Next
+
+        LiveChart.PlotView1.InvalidatePlot(True)
+
+    End Sub
+
+    Public Sub SetupChart(integrator As Interfaces.IDynamicsIntegrator)
+
+        Dim model = New PlotModel() With {.Subtitle = "Live View", .Title = integrator.Description}
+
+        model.TitleFontSize = 16
+        model.SubtitleFontSize = 14
+        model.TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinPlotArea
+
+        model.Axes.Add(New LinearAxis() With {
+            .MajorGridlineStyle = LineStyle.Dash,
+            .MinorGridlineStyle = LineStyle.Dot,
+            .Position = AxisPosition.Bottom,
+            .FontSize = 14,
+            .Title = "Time (ms)"
+        })
+
+        model.LegendFontSize = 12
+        model.LegendPlacement = LegendPlacement.Outside
+        model.LegendOrientation = LegendOrientation.Horizontal
+        model.LegendPosition = LegendPosition.TopCenter
+        model.LegendBorderThickness = 0.0
+
+        Dim vx As New List(Of Double)(), vy As New List(Of Double)()
+        Dim vya As New List(Of List(Of Double))()
+        Dim vn As New List(Of String)()
+
+        Dim i As Integer
+
+        i = 0
+        For Each item In integrator.MonitoredVariables
+            model.Axes.Add(New LinearAxis() With {
+                .MajorGridlineStyle = LineStyle.Dash,
+                .MinorGridlineStyle = LineStyle.Dot,
+                .Position = AxisPosition.Left,
+                .FontSize = 14,
+                .Key = item.ID,
+                .Title = integrator.MonitoredVariables(i).Description + If(item.PropertyUnits <> "", " (" + item.PropertyUnits + ")", ""),
+                .PositionTier = i,
+                .AxislineStyle = LineStyle.Solid
+            })
+            i += 1
+        Next
+
+        Dim lastset = integrator.MonitoredVariableValues
+
+        i = 0
+        For Each item In lastset.Values(0)
+            model.AddLineSeries(New List(Of Double), New List(Of Double),
+                                integrator.MonitoredVariables(i).Description &
+                                If(integrator.MonitoredVariables(i).PropertyUnits <> "", " (" +
+                                integrator.MonitoredVariables(i).PropertyUnits + ")", ""))
+            DirectCast(model.Series(model.Series.Count - 1), LineSeries).Tag = integrator.MonitoredVariables(i).ID
+            DirectCast(model.Series(model.Series.Count - 1), LineSeries).YAxisKey = integrator.MonitoredVariables(i).ID
+            i += 1
+        Next
+
+        LiveChart.PlotView1.Model = model
+
+        ChartIsSetup = True
 
     End Sub
 

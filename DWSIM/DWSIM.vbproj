@@ -634,6 +634,12 @@
     <Compile Include="Forms\FormAddUtility.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\FormChart_OxyPlot.Designer.vb">
+      <DependentUpon>FormChart_OxyPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormChart_OxyPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormCLM.designer.vb">
       <DependentUpon>FormCLM.vb</DependentUpon>
     </Compile>
@@ -1344,6 +1350,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CompoundCreator\FormCompoundCreator.es.resx">
       <DependentUpon>FormCompoundCreator.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormChart_OxyPlot.resx">
+      <DependentUpon>FormChart_OxyPlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormCLM.de.resx">
       <DependentUpon>FormCLM.vb</DependentUpon>
