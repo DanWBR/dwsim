@@ -7465,9 +7465,26 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                        Return FunctionValue(xvars)
                                    End Function, Nothing, Nothing, xvar, maxits, tol.MinY_NonZero())
             Else
-                xvar = MathNet.Numerics.RootFinding.Broyden.FindRoot(Function(xvars)
-                                                                         Return FunctionValue(xvars)
-                                                                     End Function, xvar, tol.MinY_NonZero(), maxits)
+                Dim haderror As Boolean = True
+                Try
+                    xvar = MathNet.Numerics.RootFinding.Broyden.FindRoot(Function(xvars)
+                                                                             Return FunctionValue(xvars)
+                                                                         End Function, xvar, tol.MinY_NonZero(), maxits)
+                    haderror = False
+                Catch ex As Exception
+                End Try
+                If haderror Then
+                    Dim nsolv As New NewtonSolver()
+                    nsolv.EnableDamping = True
+                    nsolv.ExpandFactor = 1.6
+                    nsolv.MaximumDelta = 0.3
+                    nsolv.MaxIterations = maxits
+                    nsolv.Tolerance = tol.MinY_NonZero()
+                    nsolv.UseBroydenApproximation = True
+                    xvar = nsolv.Solve(Function(xvars)
+                                           Return FunctionValue(xvars)
+                                       End Function, xvar)
+                End If
             End If
 
             IObj?.Paragraphs.Add(String.Format("Final Variable Values: {0}", xvar.ToMathArrayString))
