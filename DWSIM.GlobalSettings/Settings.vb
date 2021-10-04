@@ -210,6 +210,7 @@ Public Class Settings
 
         If PythonInitialized Then
             PythonEngine.Shutdown()
+            PythonInitialized = False
         End If
 
     End Sub
