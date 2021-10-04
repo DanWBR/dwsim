@@ -211,6 +211,7 @@ Public Class Settings
         If PythonInitialized Then
             PythonEngine.Shutdown()
             PythonInitialized = False
+            PythonPathIsSet = False
         End If
 
     End Sub
