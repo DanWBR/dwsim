@@ -327,79 +327,87 @@ Public Class FormFlowsheet
             Try
                 If extender.Level = ExtenderLevel.FlowsheetWindow Then
                     Dim newmenuitem As ToolStripMenuItem = Nothing
-                    If extender.Category = ExtenderCategory.NewItem Then
-                        newmenuitem = New ToolStripMenuItem()
-                        newmenuitem.Text = extender.DisplayText
-                        newmenuitem.DisplayStyle = ToolStripItemDisplayStyle.Text
-                    End If
-                    For Each item In extender.Collection
-                        Dim exttsmi As New ToolStripMenuItem
-                        exttsmi.Text = item.DisplayText
-                        exttsmi.Image = item.DisplayImage
-                        AddHandler exttsmi.Click, Sub(s2, e2)
-                                                      item.SetMainWindow(My.Application.MainWindowForm)
-                                                      item.SetFlowsheet(Me)
-                                                      item.Run()
-                                                  End Sub
-                        Select Case extender.Category
-                            Case ExtenderCategory.File
-                                If item.InsertAtPosition >= 0 Then
-                                    FileTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
-                                Else
-                                    FileTSMI.DropDownItems.Add(exttsmi)
-                                End If
-                            Case ExtenderCategory.Edit
-                                If item.InsertAtPosition >= 0 Then
-                                    EditTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
-                                Else
-                                    EditTSMI.DropDownItems.Add(exttsmi)
-                                End If
-                            Case ExtenderCategory.Tools
-                                If item.InsertAtPosition >= 0 Then
-                                    ToolsTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
-                                Else
-                                    ToolsTSMI.DropDownItems.Add(exttsmi)
-                                End If
-                            Case ExtenderCategory.Dynamics
-                                If item.InsertAtPosition >= 0 Then
-                                    DynamicsTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
-                                Else
-                                    DynamicsTSMI.DropDownItems.Add(exttsmi)
-                                End If
-                            Case ExtenderCategory.Optimization
-                                If item.InsertAtPosition >= 0 Then
-                                    OptimizationTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
-                                Else
-                                    OptimizationTSMI.DropDownItems.Add(exttsmi)
-                                End If
-                            Case ExtenderCategory.Results
-                                If item.InsertAtPosition >= 0 Then
-                                    ResultsTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
-                                Else
-                                    ResultsTSMI.DropDownItems.Add(exttsmi)
-                                End If
-                            Case ExtenderCategory.Utilities
-                                If item.InsertAtPosition >= 0 Then
-                                    UtilitiesTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
-                                Else
-                                    UtilitiesTSMI.DropDownItems.Add(exttsmi)
-                                End If
-                            Case ExtenderCategory.NewItem
-                                newmenuitem?.DropDownItems.Add(exttsmi)
-                            Case ExtenderCategory.ToolStrip
-                                If item.InsertAtPosition >= 0 Then
-                                    ToolStrip1.Items.Insert(item.InsertAtPosition, exttsmi)
-                                Else
-                                    ToolStrip1.Items.Add(exttsmi)
-                                End If
-                            Case ExtenderCategory.InitializationScript
-                                item.SetMainWindow(My.Application.MainWindowForm)
-                                item.SetFlowsheet(Me)
-                                item.Run()
-                        End Select
-                    Next
-                    If newmenuitem IsNot Nothing Then
-                        MenuStrip1.Items.Add(newmenuitem)
+                    If extender.Category <> ExtenderCategory.InitializationScript Then
+                        If extender.Category = ExtenderCategory.NewItem Then
+                            newmenuitem = New ToolStripMenuItem()
+                            newmenuitem.Text = extender.DisplayText
+                            newmenuitem.DisplayStyle = ToolStripItemDisplayStyle.Text
+                        End If
+                        For Each item In extender.Collection
+                            Dim exttsmi As New ToolStripMenuItem
+                            exttsmi.Text = item.DisplayText
+                            exttsmi.Image = item.DisplayImage
+                            AddHandler exttsmi.Click, Sub(s2, e2)
+                                                          item.SetMainWindow(My.Application.MainWindowForm)
+                                                          item.SetFlowsheet(Me)
+                                                          item.Run()
+                                                      End Sub
+                            Select Case extender.Category
+                                Case ExtenderCategory.File
+                                    If item.InsertAtPosition >= 0 Then
+                                        FileTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
+                                    Else
+                                        FileTSMI.DropDownItems.Add(exttsmi)
+                                    End If
+                                Case ExtenderCategory.Edit
+                                    If item.InsertAtPosition >= 0 Then
+                                        EditTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
+                                    Else
+                                        EditTSMI.DropDownItems.Add(exttsmi)
+                                    End If
+                                Case ExtenderCategory.Tools
+                                    If item.InsertAtPosition >= 0 Then
+                                        ToolsTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
+                                    Else
+                                        ToolsTSMI.DropDownItems.Add(exttsmi)
+                                    End If
+                                Case ExtenderCategory.Dynamics
+                                    If item.InsertAtPosition >= 0 Then
+                                        DynamicsTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
+                                    Else
+                                        DynamicsTSMI.DropDownItems.Add(exttsmi)
+                                    End If
+                                Case ExtenderCategory.Optimization
+                                    If item.InsertAtPosition >= 0 Then
+                                        OptimizationTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
+                                    Else
+                                        OptimizationTSMI.DropDownItems.Add(exttsmi)
+                                    End If
+                                Case ExtenderCategory.Results
+                                    If item.InsertAtPosition >= 0 Then
+                                        ResultsTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
+                                    Else
+                                        ResultsTSMI.DropDownItems.Add(exttsmi)
+                                    End If
+                                Case ExtenderCategory.Utilities
+                                    If item.InsertAtPosition >= 0 Then
+                                        UtilitiesTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
+                                    Else
+                                        UtilitiesTSMI.DropDownItems.Add(exttsmi)
+                                    End If
+                                Case ExtenderCategory.NewItem
+                                    newmenuitem?.DropDownItems.Add(exttsmi)
+                                Case ExtenderCategory.ToolStrip
+                                    If item.InsertAtPosition >= 0 Then
+                                        ToolStrip1.Items.Insert(item.InsertAtPosition, exttsmi)
+                                    Else
+                                        ToolStrip1.Items.Add(exttsmi)
+                                    End If
+                                Case ExtenderCategory.InitializationScript
+                                    item.SetMainWindow(My.Application.MainWindowForm)
+                                    item.SetFlowsheet(Me)
+                                    item.Run()
+                            End Select
+                        Next
+                        If newmenuitem IsNot Nothing Then
+                            MenuStrip1.Items.Add(newmenuitem)
+                        End If
+                    Else
+                        For Each item In extender.Collection
+                            item.SetMainWindow(My.Application.MainWindowForm)
+                            item.SetFlowsheet(Me)
+                            item.Run()
+                        Next
                     End If
                 End If
             Catch ex As Exception
