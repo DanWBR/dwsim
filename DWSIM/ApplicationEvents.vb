@@ -155,6 +155,7 @@ Namespace My
         End Sub
 
         Private Sub MyApplication_UnhandledException(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.UnhandledExceptionEventArgs) Handles Me.UnhandledException
+            Logging.Logger.LogUnhandled("Unhandled Exception", e.Exception)
             If Not CommandLineMode Then
                 If Not GlobalSettings.Settings.AutomationMode Then
                     Dim frmEx As New FormUnhandledException

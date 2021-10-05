@@ -190,17 +190,20 @@ Public Class Settings
                 End If
             End If
 
-            If Not IsRunningOnMono() Then
-                If Not PythonPathIsSet Then
-                    SetPythonPath(pythonpath)
+            Try
+                If Not IsRunningOnMono() Then
+                    If Not PythonPathIsSet Then
+                        SetPythonPath(pythonpath)
+                    End If
+                    PythonEngine.PythonHome = pythonpath
                 End If
-                PythonEngine.PythonHome = pythonpath
-            End If
-            PythonEngine.Initialize()
-
-            PythonEngine.BeginAllowThreads()
-
-            PythonInitialized = True
+                PythonEngine.Initialize()
+                PythonEngine.BeginAllowThreads()
+                PythonInitialized = True
+            Catch ex As Exception
+                DWSIM.Logging.Logger.LogError("Python Initialization Error", ex)
+                Throw ex
+            End Try
 
         End If
 

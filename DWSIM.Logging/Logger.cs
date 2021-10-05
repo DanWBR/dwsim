@@ -1,24 +1,30 @@
-﻿using DWSIM.GlobalSettings;
-using NLog;
+﻿using NLog;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DWSIM.Logging
 {
     public class Logger
     {
 
+        private enum Platform
+        {
+            Windows,
+            Linux,
+            Mac,
+        }
+
         private static NLog.Logger logger;
 
-        public static void Initialize()
+        private static bool initialized = false;
+
+        private static void Initialize()
         {
 
+            if (initialized) return;
+
             var logfiledir = "";
-            if (GlobalSettings.Settings.RunningPlatform() == Settings.Platform.Mac)
+            if (RunningPlatform() == Platform.Mac)
             {
                 logfiledir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Documents", "DWSIM Application Data");
             }
@@ -41,23 +47,50 @@ namespace DWSIM.Logging
 
             logger = NLog.LogManager.GetCurrentClassLogger();
 
+            initialized = true;
+
         }
 
         public static void LogError(string message, Exception ex)
         {
+            Initialize();
             logger.Error(ex, message);
         }
 
         public static void LogUnhandled(string message, Exception ex)
         {
+            Initialize();
             logger.Fatal(ex, message);
         }
 
         public static void LogWarning(string message, Exception ex)
         {
+            Initialize();
             logger.Warn(ex, message);
         }
 
-
+        private static Platform RunningPlatform()
+        {
+            switch (Environment.OSVersion.Platform)
+            {
+                case PlatformID.Unix:
+                    //  Well, there are chances MacOSX is reported as Unix instead of MacOSX.
+                    //  Instead of platform check, we'll do a feature checks (Mac specific root folders)
+                    if ((Directory.Exists("/Applications")
+                                && (Directory.Exists("/System")
+                                && (Directory.Exists("/Users") && Directory.Exists("/Volumes")))))
+                    {
+                        return Platform.Mac;
+                    }
+                    else
+                    {
+                        return Platform.Linux;
+                    }
+                case PlatformID.MacOSX:
+                    return Platform.Mac;
+                default:
+                    return Platform.Windows;
+            }
+        }
     }
 }

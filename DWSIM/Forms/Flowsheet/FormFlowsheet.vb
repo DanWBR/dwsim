@@ -411,6 +411,7 @@ Public Class FormFlowsheet
                     End If
                 End If
             Catch ex As Exception
+                Logging.Logger.LogError("Extender Loading (Flowsheet)", ex)
             End Try
         Next
 

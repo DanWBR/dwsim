@@ -2495,6 +2495,7 @@ Label_00CC:
         Try
             availableTypes.AddRange(assmbly.GetTypes())
         Catch ex As Exception
+            Logging.Logger.LogError("Property Package Loading (CPUI)", ex)
         End Try
 
         Dim ppList As List(Of Type) = availableTypes.FindAll(Function(t) t.GetInterfaces().Contains(GetType(Interfaces.IPropertyPackage)) And Not t.IsAbstract)

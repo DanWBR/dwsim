@@ -221,6 +221,7 @@ namespace DWSIM.UI.Desktop
             }
             catch (Exception ex)
             {
+                Logging.Logger.LogError("CPUI Initialization Error", ex);
                 Console.WriteLine();
                 Console.WriteLine();
                 Console.WriteLine("APP CRASH!!!");

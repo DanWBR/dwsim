@@ -208,6 +208,7 @@ Public Class FormMain
                         End If
                     End If
                 Catch ex As Exception
+                    Logging.Logger.LogError("Extender Initialization", ex)
                 End Try
             Next
 
@@ -472,6 +473,7 @@ Public Class FormMain
                     errstr.AppendLine(lex.ToString)
                 Next
                 Console.WriteLine("Error loading plugin '" & currentAssembly.FullName & "': " & errstr.ToString)
+                Logging.Logger.LogError("Plugin Initialization", ex)
             End Try
         Next
 
@@ -516,7 +518,7 @@ Public Class FormMain
             Try
                 availableTypes.AddRange(currentAssembly.GetExportedTypes())
             Catch ex As Exception
-                MessageBox.Show(ex.Message, "Error Loading Extender", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Logging.Logger.LogError("Extender Loading (MainForm)", ex)
             End Try
         Next
 

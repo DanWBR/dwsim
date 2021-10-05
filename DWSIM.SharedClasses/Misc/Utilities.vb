@@ -520,7 +520,7 @@ Public Class Utility
                         euos.Add(pp)
                     Next
                 Catch ex As Exception
-                    Console.WriteLine("Error loading External Unit Operation: " + ex.ToString())
+                    Logging.Logger.LogError("Loading Additional Unit Operations", ex)
                 End Try
             Next
         End If
@@ -535,6 +535,7 @@ Public Class Utility
                         euos.Add(pp)
                     Next
                 Catch ex As Exception
+                    Logging.Logger.LogError("Loading Additional Unit Operations (Extenders)", ex)
                 End Try
             Next
         End If
@@ -567,7 +568,7 @@ Public Class Utility
                     Next
                 Next
             Catch ex As Exception
-                MessageBox.Show(ex.ToString)
+                Logging.Logger.LogError("Loading Additional Property Packages", ex)
             End Try
         End If
 
@@ -582,6 +583,7 @@ Public Class Utility
                     Next
                 Next
             Catch ex As Exception
+                Logging.Logger.LogError("Loading Additional Property Packages (Extenders)", ex)
             End Try
         End If
 
@@ -607,6 +609,7 @@ Public Class Utility
                     ppacks.Add(Assembly.LoadFile(fpath))
                 Next
             Catch ex As Exception
+                Logging.Logger.LogError("Loading Additional Property Package Assemblies", ex)
             End Try
         End If
 
@@ -622,6 +625,7 @@ Public Class Utility
             availableTypes.AddRange(assmbly.DefinedTypes())
         Catch ex As Exception
             Console.WriteLine("Error loading types from assembly '" + assmbly.FullName + "': " + ex.ToString)
+            Logging.Logger.LogError("Error loading types from assembly '" + assmbly.FullName, ex)
         End Try
 
         Dim ppList As List(Of TypeInfo) = availableTypes.FindAll(Function(t) t.GetInterfaces().Contains(GetType(Interfaces.IPropertyPackage)) And Not t.IsAbstract)

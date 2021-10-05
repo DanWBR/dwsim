@@ -248,6 +248,10 @@
       <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
       <Name>DWSIM.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Logging\DWSIM.Logging.csproj">
+      <Project>{b176a143-2822-4e7c-9280-cf4a615e1c35}</Project>
+      <Name>DWSIM.Logging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Serializers.XML\DWSIM.XMLSerializer.vbproj">
       <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
       <Name>DWSIM.XMLSerializer</Name>
