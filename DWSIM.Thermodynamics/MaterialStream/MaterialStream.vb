@@ -3116,7 +3116,7 @@ Namespace Streams
                     phs = PropertyPackages.Phase.Mixture
                 Case Else
                     For Each pi As PhaseInfo In Me.PropertyPackage.PhaseMappings.Values
-                        If phase = pi.PhaseLabel Then
+                        If phase.ToLower() = pi.PhaseLabel.ToLower() Then
                             f = pi.DWPhaseIndex
                             phs = pi.DWPhaseID
                             Exit For
@@ -8300,6 +8300,12 @@ Namespace Streams
             ClearAllProps()
 
         End Sub
+
+        Public Function GetProp(prop As String, phase As String) As Double
+
+            Return GetProp(prop, phase, Nothing, "Mixture", "Mass")(0)
+
+        End Function
 
         Public Overrides Function ToString() As String
 
