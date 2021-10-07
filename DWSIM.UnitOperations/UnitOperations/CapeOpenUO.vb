@@ -1279,6 +1279,79 @@ Namespace UnitOperations
 
         End Sub
 
+#Region "    IProductInformation"
+
+        Public Overrides ReadOnly Property ProductName As String
+            Get
+                If _seluo IsNot Nothing Then
+                    Return _seluo.Name
+                Else
+                    Return ComponentName
+                End If
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property ProductDescription As String
+            Get
+                If _seluo IsNot Nothing Then
+                    Return _seluo.Description
+                Else
+                    Return ComponentDescription
+                End If
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property ProductAuthor As String
+            Get
+                If _seluo IsNot Nothing Then
+                    Return _seluo.AboutInfo
+                Else
+                    Return "Daniel Medeiros"
+                End If
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property ProductContactInfo As String
+            Get
+                If _seluo IsNot Nothing Then
+                    Return _seluo.HelpURL
+                Else
+                    Return "https://dwsim.inforside.com.br"
+                End If
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property ProductPage As String
+            Get
+                If _seluo IsNot Nothing Then
+                    Return _seluo.VendorURL
+                Else
+                    Return "https://dwsim.inforside.com.br"
+                End If
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property ProductVersion As String
+            Get
+                If _seluo IsNot Nothing Then
+                    Return _seluo.Version
+                Else
+                    Return Assembly.GetExecutingAssembly().GetName().Version.ToString()
+                End If
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property ProductAssembly As String
+            Get
+                If _seluo IsNot Nothing Then
+                    Return _seluo.Location
+                Else
+                    Return Assembly.GetExecutingAssembly().GetName().Name
+                End If
+            End Get
+        End Property
+
+#End Region
 
     End Class
 
