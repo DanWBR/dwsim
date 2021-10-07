@@ -12,4 +12,6 @@
 
     ReadOnly Property ProductVersion As String
 
+    ReadOnly Property ProductAssembly As String
+
 End Interface

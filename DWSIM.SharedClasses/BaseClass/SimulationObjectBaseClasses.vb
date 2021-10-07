@@ -29,7 +29,7 @@ Namespace UnitOperations
 
         Implements ICloneable, IDisposable, Interfaces.ICustomXMLSerialization
 
-        Implements Interfaces.ISimulationObject
+        Implements Interfaces.ISimulationObject, Interfaces.IProductInformation
 
         Public Const ClassId As String = ""
 
@@ -1221,6 +1221,51 @@ Namespace UnitOperations
 
 #End Region
 
+#Region "    IProductInformation"
+
+        Public Overridable ReadOnly Property ProductName As String Implements IProductInformation.ProductName
+            Get
+                Return ComponentName
+            End Get
+        End Property
+
+        Public Overridable ReadOnly Property ProductDescription As String Implements IProductInformation.ProductDescription
+            Get
+                Return ComponentDescription
+            End Get
+        End Property
+
+        Public Overridable ReadOnly Property ProductAuthor As String Implements IProductInformation.ProductAuthor
+            Get
+                Return "Daniel Medeiros"
+            End Get
+        End Property
+
+        Public Overridable ReadOnly Property ProductContactInfo As String Implements IProductInformation.ProductContactInfo
+            Get
+                Return "https://dwsim.inforside.com.br"
+            End Get
+        End Property
+
+        Public Overridable ReadOnly Property ProductPage As String Implements IProductInformation.ProductPage
+            Get
+                Return "https://dwsim.inforside.com.br"
+            End Get
+        End Property
+
+        Public Overridable ReadOnly Property ProductVersion As String Implements IProductInformation.ProductVersion
+            Get
+                Return Assembly.GetExecutingAssembly().GetName().Version.ToString()
+            End Get
+        End Property
+
+        Public Overridable ReadOnly Property ProductAssembly As String Implements IProductInformation.ProductAssembly
+            Get
+                Return Assembly.GetExecutingAssembly().GetName().Name
+            End Get
+        End Property
+
+#End Region
 
     End Class
 
