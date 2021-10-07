@@ -159,6 +159,7 @@
     <Compile Include="Editor\ObjectEditorForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ExceptionProcessing\ComponentNotFoundException.vb" />
     <Compile Include="ExceptionProcessing\ExceptionProcessing.vb" />
     <Compile Include="Flowsheet\FlowsheetClasses.vb" />
     <Compile Include="Flowsheet\Optimization.vb" />

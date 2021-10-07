@@ -67,6 +67,8 @@ Public Class FormFlowsheet
 
     Public Property RedirectMessages As Boolean = False Implements IFlowsheet.RedirectMessages
 
+    Public Property LoaderExceptions As New List(Of Exception)
+
     Public FrmStSim1 As New FormSimulSettings
     Public FrmPCBulk As New FormPCBulk
     Public FrmReport As New FormReportConfig
@@ -519,6 +521,15 @@ Public Class FormFlowsheet
                     .StartPosition = FormStartPosition.CenterScreen
                     .ShowDialog(Me)
                 End With
+            End If
+
+        Else
+
+            If LoaderExceptions.Count > 0 Then
+
+                Dim fnlc As New FormComponentsNotFound With {.LoaderExceptions = LoaderExceptions}
+                fnlc.Show(Me)
+
             End If
 
         End If

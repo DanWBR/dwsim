@@ -1863,6 +1863,7 @@ Public Class FormMain
                     If PropertyPackages.ContainsKey(thermockey) Then
                         obj = PropertyPackages(thermockey).ReturnInstance(xel.Element("Type").Value)
                     Else
+                        form.LoaderExceptions.Add(PrepareExceptionInfo(xel))
                         Throw New Exception("The ThermoC bridge library was not found. Please download and install it in order to run this simulation.")
                     End If
                 Else
@@ -1873,6 +1874,7 @@ Public Class FormMain
                         If PropertyPackages.ContainsKey(ppkey) Then
                             obj = PropertyPackages(ppkey).ReturnInstance(xel.Element("Type").Value)
                         Else
+                            form.LoaderExceptions.Add(PrepareExceptionInfo(xel))
                             Throw New Exception("The " & ppkey & " Property Package library was not found. Please download and install it in order to run this simulation.")
                         End If
                     End If
@@ -1911,6 +1913,7 @@ Public Class FormMain
                         obj = UnitOperations.Resolver.ReturnInstance(xel.Element("Type").Value)
                     End If
                 End If
+                If obj Is Nothing Then form.LoaderExceptions.Add(PrepareExceptionInfo(xel))
                 Dim gobj As GraphicObject = (From go As GraphicObject In
                                     form.FormSurface.FlowsheetSurface.DrawingObjects Where go.Name = id).SingleOrDefault
                 obj.GraphicObject = gobj
@@ -2406,18 +2409,12 @@ Public Class FormMain
             Try
                 xel.Element("Type").Value = xel.Element("Type").Value.Replace("DWSIM.DWSIM.SimulationObjects", "DWSIM.Thermodynamics")
                 Dim obj As PropertyPackage = Nothing
-                If xel.Element("Type").Value.Contains("AdvancedEOS") Then
-                    Dim adveoskey As String = "PC-SAFT (with Association Support)"
-                    If PropertyPackages.ContainsKey(adveoskey) Then
-                        obj = PropertyPackages(adveoskey).ReturnInstance(xel.Element("Type").Value)
-                    Else
-                        Throw New Exception("Advanced EOS Property Package library not found. Please download and install it in order to run this simulation.")
-                    End If
-                ElseIf xel.Element("Type").Value.Contains("ThermoC") Then
+                If xel.Element("Type").Value.Contains("ThermoC") Then
                     Dim thermockey As String = "ThermoC Bridge"
                     If PropertyPackages.ContainsKey(thermockey) Then
                         obj = PropertyPackages(thermockey).ReturnInstance(xel.Element("Type").Value)
                     Else
+                        form.LoaderExceptions.Add(PrepareExceptionInfo(xel))
                         Throw New Exception("The ThermoC bridge library was not found. Please download and install it in order to run this simulation.")
                     End If
                 Else
@@ -2428,6 +2425,7 @@ Public Class FormMain
                         If PropertyPackages.ContainsKey(ppkey) Then
                             obj = PropertyPackages(ppkey).ReturnInstance(xel.Element("Type").Value)
                         Else
+                            form.LoaderExceptions.Add(PrepareExceptionInfo(xel))
                             Throw New Exception("The " & ppkey & " library was not found. Please download and install it in order to run this simulation.")
                         End If
                     End If
@@ -2466,6 +2464,7 @@ Public Class FormMain
                         obj = UnitOperations.Resolver.ReturnInstance(xel.Element("Type").Value)
                     End If
                 End If
+                If obj Is Nothing Then form.LoaderExceptions.Add(PrepareExceptionInfo(xel))
                 Dim gobj As GraphicObject = (From go As GraphicObject In
                                     form.FormSurface.FlowsheetSurface.DrawingObjects Where go.Name = id).SingleOrDefault
                 obj.GraphicObject = gobj
@@ -2821,6 +2820,38 @@ Public Class FormMain
         Application.DoEvents()
 
         Return form
+
+    End Function
+
+    Public Function PrepareExceptionInfo(xel As XElement, Optional base As Exception = Nothing) As ComponentNotFoundException
+
+        Dim ex As New ComponentNotFoundException()
+
+        With ex
+            .Base = base
+            .ProductName = xel.Element("ProductName")?.Value
+            .ProductAuthor = xel.Element("ProductAuthor")?.Value
+            .ProductContactInfo = xel.Element("ProductContactInfo")?.Value
+            .ProductDescription = xel.Element("ProductDescription")?.Value
+            .ProductAssembly = xel.Element("ProductAssembly")?.Value
+            .ProductPage = xel.Element("ProductPage")?.Value
+            .ProductVersion = xel.Element("ProductVersion")?.Value
+        End With
+
+        If ex.ProductName Is Nothing Then
+            With ex
+                .Base = base
+                .ProductName = xel.Element("ComponentName")?.Value
+                .ProductAuthor = ""
+                .ProductContactInfo = ""
+                .ProductDescription = xel.Element("ComponentDescription")?.Value
+                .ProductAssembly = ""
+                .ProductPage = ""
+                .ProductVersion = ""
+            End With
+        End If
+
+        Return ex
 
     End Function
 

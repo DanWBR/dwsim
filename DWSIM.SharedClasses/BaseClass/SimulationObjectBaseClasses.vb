@@ -1225,13 +1225,13 @@ Namespace UnitOperations
 
         Public Overridable ReadOnly Property ProductName As String Implements IProductInformation.ProductName
             Get
-                Return ComponentName
+                Return GetDisplayName()
             End Get
         End Property
 
         Public Overridable ReadOnly Property ProductDescription As String Implements IProductInformation.ProductDescription
             Get
-                Return ComponentDescription
+                Return GetDisplayDescription()
             End Get
         End Property
 
