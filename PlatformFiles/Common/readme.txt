@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 6.6.3
+Version 6.7.0
 Copyright (c) 2017-2021 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,18 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim6/commits/windows
+
+Version 6.7.0
+
+Author              Description
+Daniel Medeiros     IronPython Interactive Console (Classic UI)
+Daniel Medeiros     Live View for Dynamic Integrator (Classic UI)
+Daniel Medeiros     Fixed issues with Nested Loops Flash
+Daniel Medeiros     Fixed Equilibrium Reactor model
+Daniel Medeiros     Fixed issues with Pipe Hydraulic Profile editor (Classic UI)
+Daniel Medeiros     Fixed Classic UI HiDPI layout
+Daniel Medeiros     Fixed issue 207: Mix liquid and liquid1 properties different even for single liquid
+Daniel Medeiros     Fixed issue 199: Minor issue with Splitter object
 
 Version 6.6.3
 

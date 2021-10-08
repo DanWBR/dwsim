@@ -7569,7 +7569,28 @@ Namespace Streams
         Public Function SetTemperature(value As Double) As String
             Phases(0).Properties.temperature = value
             AtEquilibrium = False
-            Return String.Format("temperature set to {0} K", value)
+            If GraphicObject IsNot Nothing Then
+                Return String.Format("{0}: temperature set to {1} K", GraphicObject.Tag, value)
+            Else
+                Return String.Format("temperature set to {0} K", value)
+            End If
+        End Function
+
+        ''' <summary>
+        ''' Sets the temperature according to the specified units.
+        ''' </summary>
+        ''' <param name="valuestring">value + units, i.e. '100 C'</param>
+        ''' <returns></returns>
+        Public Function SetTemperature(valuestring As String) As String
+            Dim units As String = valuestring.Split(" ")(1)
+            Dim value As Double = Double.Parse(valuestring.Split(" ")(0)).ConvertToSI(units)
+            Phases(0).Properties.temperature = value
+            AtEquilibrium = False
+            If GraphicObject IsNot Nothing Then
+                Return String.Format("{0}: temperature set to {1} K", GraphicObject.Tag, value)
+            Else
+                Return String.Format("temperature set to {0} K", value)
+            End If
         End Function
 
         ''' <summary>
@@ -7579,7 +7600,28 @@ Namespace Streams
         Public Function SetPressure(value As Double) As String
             Phases(0).Properties.pressure = value
             AtEquilibrium = False
-            Return String.Format("pressure set to {0} Pa", value)
+            If GraphicObject IsNot Nothing Then
+                Return String.Format("{0}: pressure set to {1} Pa", GraphicObject.Tag, value)
+            Else
+                Return String.Format("pressure set to {0} Pa", value)
+            End If
+        End Function
+
+        ''' <summary>
+        ''' Sets the pressure according to the specified units.
+        ''' </summary>
+        ''' <param name="valuestring">value + units, i.e. '34 atm'</param>
+        ''' <returns></returns>
+        Public Function SetPressure(valuestring As String) As String
+            Dim units As String = valuestring.Split(" ")(1)
+            Dim value As Double = Double.Parse(valuestring.Split(" ")(0)).ConvertToSI(units)
+            Phases(0).Properties.pressure = value
+            AtEquilibrium = False
+            If GraphicObject IsNot Nothing Then
+                Return String.Format("{0}: pressure set to {1} Pa", GraphicObject.Tag, value)
+            Else
+                Return String.Format("pressure set to {0} Pa", value)
+            End If
         End Function
 
         ''' <summary>
@@ -7589,17 +7631,55 @@ Namespace Streams
         Public Function SetMassEnthalpy(value As Double) As String
             Phases(0).Properties.enthalpy = value
             AtEquilibrium = False
-            Return String.Format("mass enthalpy set to {0} kJ/kg", value)
+            If GraphicObject IsNot Nothing Then
+                Return String.Format("{0}: mass enthalpy set to {1} kJ/kg", GraphicObject.Tag, value)
+            Else
+                Return String.Format("mass enthalpy set to {0} kJ/kg", value)
+            End If
         End Function
 
         ''' <summary>
-        ''' Sets stream entropy.
+        ''' Sets the mass enthalpy according with the specified units.
         ''' </summary>
-        ''' <param name="value">Entropy in kJ/[kg.K]</param>
+        ''' <param name="valuestring">value + units, i.e. '2500 kJ/kg'</param>
+        ''' <returns></returns>
+        Public Function SetMassEnthalpy(valuestring As String) As String
+            Dim units As String = valuestring.Split(" ")(1)
+            Dim value As Double = Double.Parse(valuestring.Split(" ")(0)).ConvertToSI(units)
+            Phases(0).Properties.enthalpy = value
+            AtEquilibrium = False
+            If GraphicObject IsNot Nothing Then
+                Return String.Format("{0}: mass enthalpy set to {1} kJ/kg", GraphicObject.Tag, value)
+            Else
+                Return String.Format("mass enthalpy set to {0} kJ/kg", value)
+            End If
+        End Function
+
         Public Function SetMassEntropy(value As Double) As String
             Phases(0).Properties.entropy = value
             AtEquilibrium = False
-            Return String.Format("mass entropy set to {0} kJ/[kg.K]", value)
+            If GraphicObject IsNot Nothing Then
+                Return String.Format("{0}: mass entropy set to {1} kJ/[kg.K]", GraphicObject.Tag, value)
+            Else
+                Return String.Format("mass entropy set to {0} kJ/[kg.K]", value)
+            End If
+        End Function
+
+        ''' <summary>
+        ''' Sets the mass entropy according with the specified units.
+        ''' </summary>
+        ''' <param name="valuestring">value + units, i.e. '10 kJ/[kg.K]'</param>
+        ''' <returns></returns>
+        Public Function SetMassEntropy(valuestring As String) As String
+            Dim units As String = valuestring.Split(" ")(1)
+            Dim value As Double = Double.Parse(valuestring.Split(" ")(0)).ConvertToSI(units)
+            Phases(0).Properties.entropy = value
+            AtEquilibrium = False
+            If GraphicObject IsNot Nothing Then
+                Return String.Format("{0}: mass entropy set to {1} kJ/[kg.K]", GraphicObject.Tag, value)
+            Else
+                Return String.Format("mass entropy set to {0} kJ/[kg.K]", value)
+            End If
         End Function
 
         ''' <summary>
@@ -7607,13 +7687,36 @@ Namespace Streams
         ''' </summary>
         ''' <param name="value">Flow in kg/s</param>
         Public Function SetMassFlow(value As Double) As String
-
             Phases(0).Properties.massflow = value
             Phases(0).Properties.molarflow = value / Phases(0).Properties.molecularWeight * 1000
             Phases(0).Properties.volumetric_flow = value / Phases(0).Properties.density.GetValueOrDefault
             DefinedFlow = FlowSpec.Mass
             AtEquilibrium = False
+            If GraphicObject IsNot Nothing Then
+                Return String.Format("{0}: mass flow set to {1} kg/s", GraphicObject.Tag, value)
+            Else
+                Return String.Format("mass flow set to {0} kg/s", value)
+            End If
+        End Function
 
+        ''' <summary>
+        ''' Sets the mass flow according to the specified units.
+        ''' </summary>
+        ''' <param name="valuestring">value + units, i.e. '100 kg/h'</param>
+        ''' <returns></returns>
+        Public Function SetMassFlow(valuestring As String) As String
+            Dim units As String = valuestring.Split(" ")(1)
+            Dim value As Double = Double.Parse(valuestring.Split(" ")(0)).ConvertToSI(units)
+            Phases(0).Properties.massflow = value
+            Phases(0).Properties.molarflow = value / Phases(0).Properties.molecularWeight * 1000
+            Phases(0).Properties.volumetric_flow = value / Phases(0).Properties.density.GetValueOrDefault
+            DefinedFlow = FlowSpec.Mass
+            AtEquilibrium = False
+            If GraphicObject IsNot Nothing Then
+                Return String.Format("{0}: mass flow set to {1} kg/s", GraphicObject.Tag, value)
+            Else
+                Return String.Format("mass flow set to {0} kg/s", value)
+            End If
         End Function
 
         ''' <summary>
@@ -7832,7 +7935,31 @@ Namespace Streams
             Phases(0).Properties.volumetric_flow = value * Phases(0).Properties.molecularWeight / 1000 / Phases(0).Properties.density.GetValueOrDefault
             DefinedFlow = FlowSpec.Mole
             AtEquilibrium = False
-            Return String.Format("molar flow set to {0} mol/s", value)
+            If GraphicObject IsNot Nothing Then
+                Return String.Format("{0}: molar flow set to {1} mol/s", GraphicObject.Tag, value)
+            Else
+                Return String.Format("molar flow set to {0} mol/s", value)
+            End If
+        End Function
+
+        ''' <summary>
+        ''' Sets the molar flow according to the specified units.
+        ''' </summary>
+        ''' <param name="valuestring">value + units, i.e. '100 kmol/h'</param>
+        ''' <returns></returns>
+        Public Function SetMolarFlow(valuestring As String) As String
+            Dim units As String = valuestring.Split(" ")(1)
+            Dim value As Double = Double.Parse(valuestring.Split(" ")(0)).ConvertToSI(units)
+            Phases(0).Properties.massflow = value * Phases(0).Properties.molecularWeight / 1000
+            Phases(0).Properties.molarflow = value
+            Phases(0).Properties.volumetric_flow = value * Phases(0).Properties.molecularWeight / 1000 / Phases(0).Properties.density.GetValueOrDefault
+            DefinedFlow = FlowSpec.Mole
+            AtEquilibrium = False
+            If GraphicObject IsNot Nothing Then
+                Return String.Format("{0}: molar flow set to {1} mol/s", GraphicObject.Tag, value)
+            Else
+                Return String.Format("molar flow set to {0} mol/s", value)
+            End If
         End Function
 
         ''' <summary>
@@ -7845,7 +7972,31 @@ Namespace Streams
             Phases(0).Properties.volumetric_flow = value
             DefinedFlow = FlowSpec.Volumetric
             AtEquilibrium = False
-            Return String.Format("volumetric flow set to {0} m3/s", value)
+            If GraphicObject IsNot Nothing Then
+                Return String.Format("{0}: volumetric flow set to {1} m3/s", GraphicObject.Tag, value)
+            Else
+                Return String.Format("volumetric flow set to {0} m3/s", value)
+            End If
+        End Function
+
+        ''' <summary>
+        ''' Sets the volumetric flow according to the specified units.
+        ''' </summary>
+        ''' <param name="valuestring">value + units, i.e. '100 L/h'</param>
+        ''' <returns></returns>
+        Public Function SetVolumetricFlow(valuestring As String) As String
+            Dim value As Double = Double.Parse(valuestring.Split(" ")(0))
+            Dim units As String = valuestring.Split(" ")(1)
+            Phases(0).Properties.massflow = Nothing
+            Phases(0).Properties.molarflow = Nothing
+            Phases(0).Properties.volumetric_flow = value.ConvertToSI(units)
+            DefinedFlow = FlowSpec.Volumetric
+            AtEquilibrium = False
+            If GraphicObject IsNot Nothing Then
+                Return String.Format("{0}: volumetric flow set to {1} m3/s", GraphicObject.Tag, value)
+            Else
+                Return String.Format("volumetric flow set to {0} m3/s", value)
+            End If
         End Function
 
         ''' <summary>
