@@ -47,22 +47,22 @@ Partial Class ListItem
         Me.lblName.Location = New System.Drawing.Point(6, 44)
         Me.lblName.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.lblName.Name = "lblName"
-        Me.lblName.Size = New System.Drawing.Size(92, 29)
+        Me.lblName.Size = New System.Drawing.Size(92, 24)
         Me.lblName.TabIndex = 1
         Me.lblName.Text = "Label1"
         Me.lblName.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'ListItem
         '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.BackColor = System.Drawing.Color.White
         Me.Controls.Add(Me.lblName)
         Me.Controls.Add(Me.Image)
         Me.DoubleBuffered = True
         Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "ListItem"
-        Me.Size = New System.Drawing.Size(104, 82)
+        Me.Size = New System.Drawing.Size(104, 75)
         CType(Me.Image, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 

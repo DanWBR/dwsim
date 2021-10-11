@@ -414,6 +414,9 @@
   <data name="GraphControl.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 33</value>
   </data>
+  <data name="GraphControl.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>48, 22, 48, 22</value>
+  </data>
   <data name="GraphControl.Size" type="System.Drawing.Size, System.Drawing">
     <value>376, 240</value>
   </data>

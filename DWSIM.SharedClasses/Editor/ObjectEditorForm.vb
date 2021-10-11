@@ -101,7 +101,7 @@ Public Class ObjectEditorForm
 
     Private Sub ObjectEditorForm_Load(sender As Object, e As EventArgs) Handles Me.Load
 
-        Width = 400
+        Width = 500
 
         Me.AutoScaleMode = AutoScaleMode.Dpi
 

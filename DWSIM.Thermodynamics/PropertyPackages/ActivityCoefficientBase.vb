@@ -46,6 +46,7 @@ Namespace PropertyPackages
 
         Public Sub New(ByVal comode As Boolean)
             MyBase.New(comode)
+            EnthalpyEntropyCpCvCalculationMode = EnthalpyEntropyCpCvCalcMode.Excess
         End Sub
 
         Public Overrides Sub ConfigParameters()
