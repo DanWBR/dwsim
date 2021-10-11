@@ -205,14 +205,50 @@
   <data name="ToolStripButton1.Text" xml:space="preserve">
     <value>Update</value>
   </data>
+  <data name="FlowLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>151, 23</value>
+  </data>
+  <data name="tbToleranceValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>621, 42</value>
+  </data>
+  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>543, 45</value>
+  </data>
+  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 13</value>
+  </data>
+  <data name="Label6.Text" xml:space="preserve">
+    <value>Tolerance</value>
+  </data>
+  <data name="tbMaxIterations.Location" type="System.Drawing.Point, System.Drawing">
+    <value>467, 42</value>
+  </data>
+  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>289, 46</value>
+  </data>
+  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 13</value>
+  </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Maximum Number of Iterations</value>
+  </data>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 13</value>
+  </data>
+  <data name="Label3.Text" xml:space="preserve">
+    <value>Objective Function</value>
+  </data>
+  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 13</value>
+  </data>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Optimization Type</value>
+  </data>
   <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
     <value>867, 72</value>
   </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Configuration</value>
-  </data>
-  <data name="FlowLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>151, 23</value>
   </data>
   <data name="rbVariable.Text" xml:space="preserve">
     <value>Variable</value>
@@ -237,30 +273,6 @@
   </data>
   <data name="rbMaximize.Text" xml:space="preserve">
     <value>Maximization</value>
-  </data>
-  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 13</value>
-  </data>
-  <data name="Label6.Text" xml:space="preserve">
-    <value>Tolerance</value>
-  </data>
-  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 13</value>
-  </data>
-  <data name="Label5.Text" xml:space="preserve">
-    <value>Maximum Number of Iterations</value>
-  </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 13</value>
-  </data>
-  <data name="Label3.Text" xml:space="preserve">
-    <value>Objective Function</value>
-  </data>
-  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 13</value>
-  </data>
-  <data name="Label2.Text" xml:space="preserve">
-    <value>Optimization Type</value>
   </data>
   <data name="GroupBox6.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 512</value>
@@ -310,9 +322,6 @@
   <data name="Label7.Text" xml:space="preserve">
     <value>Expression</value>
   </data>
-  <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>882, 760</value>
-  </data>
   <data name="GroupBox8.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 623</value>
   </data>
@@ -322,6 +331,18 @@
   <data name="GroupBox8.Text" xml:space="preserve">
     <value>Optimization Control</value>
   </data>
+  <data name="GroupBox7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>375, 512</value>
+  </data>
+  <data name="GroupBox7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>497, 240</value>
+  </data>
+  <data name="GroupBox7.Text" xml:space="preserve">
+    <value>Optimization Progress</value>
+  </data>
+  <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>882, 760</value>
+  </data>
   <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
     <value>276, 47</value>
   </data>
@@ -329,10 +350,10 @@
     <value>295, 44</value>
   </data>
   <data name="tbBarrierMultiplier.Location" type="System.Drawing.Point, System.Drawing">
-    <value>120, 67</value>
+    <value>133, 67</value>
   </data>
   <data name="rb4PointDeriv.Location" type="System.Drawing.Point, System.Drawing">
-    <value>192, 45</value>
+    <value>210, 45</value>
   </data>
   <data name="rb4PointDeriv.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 17</value>
@@ -341,7 +362,7 @@
     <value>4-point</value>
   </data>
   <data name="rb2PointDeriv.Location" type="System.Drawing.Point, System.Drawing">
-    <value>120, 45</value>
+    <value>138, 45</value>
   </data>
   <data name="rb2PointDeriv.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 17</value>
@@ -368,10 +389,10 @@
     <value>Numerical Derivative</value>
   </data>
   <data name="ComboBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>120, 21</value>
+    <value>133, 21</value>
   </data>
   <data name="ComboBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>241, 21</value>
+    <value>228, 21</value>
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 13</value>
@@ -405,15 +426,6 @@
   </data>
   <data name="btnRestore.Text" xml:space="preserve">
     <value>Restore Simulation</value>
-  </data>
-  <data name="GroupBox7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>375, 512</value>
-  </data>
-  <data name="GroupBox7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>497, 240</value>
-  </data>
-  <data name="GroupBox7.Text" xml:space="preserve">
-    <value>Optimization Progress</value>
   </data>
   <data name="grProgress.Size" type="System.Drawing.Size, System.Drawing">
     <value>491, 221</value>

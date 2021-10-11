@@ -130,6 +130,10 @@
   <data name="$this.TabText" xml:space="preserve">
     <value>Otimizador Multivariável</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ToolStrip1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 13</value>
@@ -137,7 +141,6 @@
   <data name="DockRightAutoHideToolStripMenuItem.Text" xml:space="preserve">
     <value>Dock Right Auto-Hide</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="DockTopAutoHideToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -161,9 +164,6 @@
   </data>
   <data name="btnVerify.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageBeforeText</value>
-  </data>
-  <data name="btnVerify.Text" xml:space="preserve">
-    <value>Verificar</value>
   </data>
   <data name="&gt;&gt;Label4.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -207,9 +207,6 @@
   <data name="GroupBox4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="GroupBox8.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
-  </data>
   <data name="&gt;&gt;Label12.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
@@ -236,9 +233,6 @@
   </data>
   <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
     <value>GroupBox4</value>
-  </data>
-  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 13</value>
   </data>
   <data name="&gt;&gt;GroupBox4.ZOrder" xml:space="preserve">
     <value>6</value>
@@ -330,14 +324,14 @@
   <data name="tbExpression.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="&gt;&gt;btnVerify.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;Label5.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="DockBottomAutoHideToolStripMenuItem.Text" xml:space="preserve">
     <value>Dock Bottom Auto-Hide</value>
+  </data>
+  <data name="&gt;&gt;Panel1.Name" xml:space="preserve">
+    <value>Panel1</value>
   </data>
   <data name="&gt;&gt;tbToleranceValue.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -350,6 +344,9 @@
   </data>
   <data name="Column4.HeaderText" xml:space="preserve">
     <value>Propriedade</value>
+  </data>
+  <data name="&gt;&gt;GroupBox6.Name" xml:space="preserve">
+    <value>GroupBox6</value>
   </data>
   <data name="&gt;&gt;Label9.ZOrder" xml:space="preserve">
     <value>8</value>
@@ -402,8 +399,8 @@
   <data name="&gt;&gt;FlowLayoutPanel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ComboBox1.Name" xml:space="preserve">
-    <value>ComboBox1</value>
+  <data name="&gt;&gt;Label4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tbMaxIterations.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -443,9 +440,6 @@
   </data>
   <data name="grProgress.Size" type="System.Drawing.Size, System.Drawing">
     <value>381, 218</value>
-  </data>
-  <data name="ComboBox1.Items8" xml:space="preserve">
-    <value>Nelder-Mead Simplex Downhill (Constrained)</value>
   </data>
   <data name="&gt;&gt;rb2PointDeriv.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -567,14 +561,14 @@
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>WeifenLuo.WinFormsUI.Docking.DockContent, WeifenLuo.WinFormsUI.Docking, Version=2.9.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;btnDeleteCase.Name" xml:space="preserve">
-    <value>btnDeleteCase</value>
-  </data>
   <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 48</value>
   </data>
   <data name="GroupBox8.Text" xml:space="preserve">
     <value>Controle da Otimização</value>
+  </data>
+  <data name="tbBarrierMultiplier.Location" type="System.Drawing.Point, System.Drawing">
+    <value>143, 68</value>
   </data>
   <data name="tbMaxIterations.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 20</value>
@@ -603,11 +597,8 @@
   <data name="Label4.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="tbBarrierMultiplier.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="&gt;&gt;tsbAddVar.Name" xml:space="preserve">
-    <value>tsbAddVar</value>
+  <data name="btnAbort.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 23</value>
   </data>
   <data name="&gt;&gt;rbVariable.Name" xml:space="preserve">
     <value>rbVariable</value>
@@ -648,6 +639,9 @@
   <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
     <value>GroupBox4</value>
   </data>
+  <data name="rb2PointDeriv.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
   <data name="tbBarrierMultiplier.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
@@ -671,9 +665,6 @@
   </data>
   <data name="btnSaveCase.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 64</value>
-  </data>
-  <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 3</value>
   </data>
   <data name="Label7.Text" xml:space="preserve">
     <value>Expressão</value>
@@ -711,8 +702,8 @@
   <data name="&gt;&gt;rbMinimize.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ToolStrip1.Name" xml:space="preserve">
-    <value>ToolStrip1</value>
+  <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 45</value>
   </data>
   <data name="&gt;&gt;DockTopToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -723,20 +714,17 @@
   <data name="btnNewCase.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 45</value>
+  <data name="&gt;&gt;tbBarrierMultiplier.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="dgVariables.Size" type="System.Drawing.Size, System.Drawing">
     <value>782, 261</value>
   </data>
-  <data name="&gt;&gt;Column5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="tbBarrierMultiplier.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
   </data>
   <data name="&gt;&gt;tbCaseDesc.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="&gt;&gt;DockRightAutoHideToolStripMenuItem.Name" xml:space="preserve">
-    <value>DockRightAutoHideToolStripMenuItem</value>
   </data>
   <data name="btnAbort.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -747,8 +735,8 @@
   <data name="rb2PointDeriv.Text" xml:space="preserve">
     <value>2 pontos</value>
   </data>
-  <data name="&gt;&gt;tbBarrierMultiplier.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="DockTopToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 22</value>
   </data>
   <data name="grProgress.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -813,8 +801,8 @@
   <data name="rbExpression.Text" xml:space="preserve">
     <value>Expressão</value>
   </data>
-  <data name="DockLeftAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
+  <data name="DockRightToolStripMenuItem.Text" xml:space="preserve">
+    <value>Dock Right</value>
   </data>
   <data name="btnRun.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -843,8 +831,8 @@
   <data name="&gt;&gt;GroupBox2.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="DockTopToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
+  <data name="Label7.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;btnClear.Name" xml:space="preserve">
     <value>btnClear</value>
@@ -870,8 +858,8 @@
   <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;GroupBox6.Name" xml:space="preserve">
-    <value>GroupBox6</value>
+  <data name="&gt;&gt;btnVerify.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;rb2PointDeriv.Parent" xml:space="preserve">
     <value>GroupBox8</value>
@@ -879,11 +867,11 @@
   <data name="btnSaveCase.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="&gt;&gt;btnAbort.Parent" xml:space="preserve">
-    <value>GroupBox8</value>
+  <data name="ToolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 25</value>
   </data>
-  <data name="&gt;&gt;btnCopyCase.Name" xml:space="preserve">
-    <value>btnCopyCase</value>
+  <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 3</value>
   </data>
   <data name="rbExpression.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -939,11 +927,11 @@
   <data name="rbVariable.Text" xml:space="preserve">
     <value>Variável</value>
   </data>
-  <data name="Label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="ComboBox1.Items2" xml:space="preserve">
+    <value>Limited Memory BFGS 1 (Unconstrained)</value>
   </data>
-  <data name="&gt;&gt;Panel1.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;DockRightAutoHideToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;rbMinimize.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -984,6 +972,9 @@
   <data name="Column6.HeaderText" xml:space="preserve">
     <value>Limite Inferior</value>
   </data>
+  <data name="Label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="GroupBox7.Text" xml:space="preserve">
     <value>Progresso da Otimização</value>
   </data>
@@ -1002,8 +993,8 @@
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 13</value>
   </data>
-  <data name="ToolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+  <data name="&gt;&gt;ToolStrip1.Name" xml:space="preserve">
+    <value>ToolStrip1</value>
   </data>
   <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 200</value>
@@ -1022,6 +1013,9 @@
   </data>
   <data name="&gt;&gt;btnVerify.Parent" xml:space="preserve">
     <value>GroupBox6</value>
+  </data>
+  <data name="Label5.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
   </data>
   <data name="tbExpression.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1053,14 +1047,14 @@
   <data name="btnCopyCase.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="Label7.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="&gt;&gt;btnNewCase.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tbCaseDesc.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;tbMaxIterations.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="Label11.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -1074,8 +1068,8 @@
   <data name="btnClear.Location" type="System.Drawing.Point, System.Drawing">
     <value>309, 50</value>
   </data>
-  <data name="btnAbort.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 23</value>
+  <data name="&gt;&gt;Label10.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="tsbDelVar.Text" xml:space="preserve">
     <value>ToolStripButton2</value>
@@ -1109,6 +1103,9 @@
   </data>
   <data name="&gt;&gt;tbCaseName.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="&gt;&gt;btnCopyCase.Name" xml:space="preserve">
+    <value>btnCopyCase</value>
   </data>
   <data name="Label9.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1161,14 +1158,11 @@
   <data name="DockLeftAutoHideToolStripMenuItem.Text" xml:space="preserve">
     <value>Dock Left Auto-Hide</value>
   </data>
-  <data name="tbBarrierMultiplier.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 68</value>
+  <data name="&gt;&gt;tsbAddVar.Name" xml:space="preserve">
+    <value>tsbAddVar</value>
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Gerenciador de Casos</value>
-  </data>
-  <data name="&gt;&gt;GroupBox2.Name" xml:space="preserve">
-    <value>GroupBox2</value>
   </data>
   <data name="rbVariable.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1197,14 +1191,11 @@
   <data name="Label8.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="DockRightToolStripMenuItem.Text" xml:space="preserve">
-    <value>Dock Right</value>
+  <data name="&gt;&gt;btnRun.ZOrder" xml:space="preserve">
+    <value>9</value>
   </data>
   <data name="&gt;&gt;DockBottomToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="ComboBox1.Items7" xml:space="preserve">
-    <value>Truncated Newton (Constrained)</value>
   </data>
   <data name="ComboBox1.Items3" xml:space="preserve">
     <value>Limited Memory BFGS 1 (Constrained)</value>
@@ -1218,17 +1209,14 @@
   <data name="&gt;&gt;btnSaveCase.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ComboBox1.Items4" xml:space="preserve">
-    <value>Truncated Newton (Unconstrained)</value>
-  </data>
   <data name="&gt;&gt;DocumentToolStripMenuItem.Name" xml:space="preserve">
     <value>DocumentToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;Label4.Name" xml:space="preserve">
     <value>Label4</value>
   </data>
-  <data name="&gt;&gt;Panel1.Name" xml:space="preserve">
-    <value>Panel1</value>
+  <data name="&gt;&gt;ComboBox1.Name" xml:space="preserve">
+    <value>ComboBox1</value>
   </data>
   <data name="&gt;&gt;FloatToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1266,8 +1254,8 @@
   <data name="&gt;&gt;Column6.Name" xml:space="preserve">
     <value>Column6</value>
   </data>
-  <data name="ComboBox1.Items2" xml:space="preserve">
-    <value>Limited Memory BFGS 1 (Unconstrained)</value>
+  <data name="&gt;&gt;rbMaximize.Parent" xml:space="preserve">
+    <value>FlowLayoutPanel1</value>
   </data>
   <data name="FlowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>113, 15</value>
@@ -1299,8 +1287,11 @@
   <data name="&gt;&gt;grProgress.Type" xml:space="preserve">
     <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="rb2PointDeriv.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+  <data name="&gt;&gt;btnAbort.Parent" xml:space="preserve">
+    <value>GroupBox8</value>
+  </data>
+  <data name="&gt;&gt;Label12.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="dckMenu.Size" type="System.Drawing.Size, System.Drawing">
     <value>197, 224</value>
@@ -1320,8 +1311,8 @@
   <data name="Label6.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="dgVariables.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="Label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="btnCopyCase.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1347,8 +1338,8 @@
   <data name="&gt;&gt;rbMaximize.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;tbMaxIterations.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;Panel1.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1362,14 +1353,14 @@
   <data name="tbCurrentValue.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
+  <data name="dgVariables.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="rbExpression.Location" type="System.Drawing.Point, System.Drawing">
     <value>72, 3</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Tipo de Otimização</value>
-  </data>
-  <data name="&gt;&gt;Column7.Name" xml:space="preserve">
-    <value>Column7</value>
   </data>
   <data name="FloatToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1377,8 +1368,8 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Nome</value>
   </data>
-  <data name="ToolStrip1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="ComboBox1.Items4" xml:space="preserve">
+    <value>Truncated Newton (Unconstrained)</value>
   </data>
   <data name="&gt;&gt;Column4.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1392,8 +1383,8 @@
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 13</value>
   </data>
-  <data name="&gt;&gt;rbMaximize.Parent" xml:space="preserve">
-    <value>FlowLayoutPanel1</value>
+  <data name="&gt;&gt;DockRightAutoHideToolStripMenuItem.Name" xml:space="preserve">
+    <value>DockRightAutoHideToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;rbMaximize.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1455,6 +1446,9 @@
   <data name="btnVerify.Location" type="System.Drawing.Point, System.Drawing">
     <value>309, 18</value>
   </data>
+  <data name="rbMinimize.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="btnRestore.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
@@ -1509,6 +1503,9 @@
   <data name="btnSaveCase.Text" xml:space="preserve">
     <value>Salvar</value>
   </data>
+  <data name="lbCases.Location" type="System.Drawing.Point, System.Drawing">
+    <value>87, 17</value>
+  </data>
   <data name="grProgress.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9.75pt</value>
   </data>
@@ -1548,6 +1545,9 @@
   <data name="&gt;&gt;Label2.Name" xml:space="preserve">
     <value>Label2</value>
   </data>
+  <data name="Column10.HeaderText" xml:space="preserve">
+    <value>Valor Inicial</value>
+  </data>
   <data name="&gt;&gt;Column7.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -1557,8 +1557,8 @@
   <data name="FlowLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
     <value>113, 40</value>
   </data>
-  <data name="&gt;&gt;Label10.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="&gt;&gt;GroupBox8.Parent" xml:space="preserve">
+    <value>Panel1</value>
   </data>
   <data name="tsbDelVar.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
@@ -1572,8 +1572,8 @@
   <data name="DockLeftToolStripMenuItem.Text" xml:space="preserve">
     <value>Dock Left</value>
   </data>
-  <data name="DockLeftToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
+  <data name="&gt;&gt;Column7.Name" xml:space="preserve">
+    <value>Column7</value>
   </data>
   <data name="&gt;&gt;tbToleranceValue.Name" xml:space="preserve">
     <value>tbToleranceValue</value>
@@ -1584,17 +1584,14 @@
   <data name="DockTopAutoHideToolStripMenuItem.Text" xml:space="preserve">
     <value>Dock Top Auto-Hide</value>
   </data>
-  <data name="&gt;&gt;btnRun.ZOrder" xml:space="preserve">
-    <value>9</value>
+  <data name="DockLeftAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 22</value>
   </data>
   <data name="&gt;&gt;rb4PointDeriv.Parent" xml:space="preserve">
     <value>GroupBox8</value>
   </data>
-  <data name="Column10.HeaderText" xml:space="preserve">
-    <value>Valor Inicial</value>
-  </data>
-  <data name="&gt;&gt;Label4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;GroupBox2.Name" xml:space="preserve">
+    <value>GroupBox2</value>
   </data>
   <data name="Label8.Text" xml:space="preserve">
     <value>Valor Atual</value>
@@ -1650,8 +1647,8 @@
   <data name="&gt;&gt;tbCaseDesc.Name" xml:space="preserve">
     <value>tbCaseDesc</value>
   </data>
-  <data name="&gt;&gt;Label12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Label8.Parent" xml:space="preserve">
+    <value>GroupBox6</value>
   </data>
   <data name="Label10.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1677,9 +1674,6 @@
   <data name="DockRightToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;GroupBox7.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="tbBarrierMultiplier.Text" xml:space="preserve">
     <value>1E-4</value>
   </data>
@@ -1701,8 +1695,8 @@
   <data name="&gt;&gt;Label11.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="ComboBox1.Items7" xml:space="preserve">
+    <value>Truncated Newton (Constrained)</value>
   </data>
   <data name="&gt;&gt;Column1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1712,6 +1706,9 @@
   </data>
   <data name="tsbDelVar.ToolTipText" xml:space="preserve">
     <value>Remover</value>
+  </data>
+  <data name="DockLeftToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 22</value>
   </data>
   <data name="&gt;&gt;Column10.Name" xml:space="preserve">
     <value>Column10</value>
@@ -1743,11 +1740,11 @@
   <data name="&gt;&gt;Label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label8.Parent" xml:space="preserve">
-    <value>GroupBox6</value>
+  <data name="rb4PointDeriv.Location" type="System.Drawing.Point, System.Drawing">
+    <value>215, 46</value>
   </data>
-  <data name="Label5.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 13</value>
   </data>
   <data name="GroupBox6.Text" xml:space="preserve">
     <value>Expressão</value>
@@ -1758,8 +1755,8 @@
   <data name="btnRun.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 97</value>
   </data>
-  <data name="Label3.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="GroupBox8.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="btnNewCase.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -1767,11 +1764,11 @@
   <data name="Label10.Text" xml:space="preserve">
     <value>Derivadas Numéricas</value>
   </data>
-  <data name="rb4PointDeriv.Location" type="System.Drawing.Point, System.Drawing">
-    <value>215, 46</value>
+  <data name="&gt;&gt;btnDeleteCase.Name" xml:space="preserve">
+    <value>btnDeleteCase</value>
   </data>
-  <data name="lbCases.Location" type="System.Drawing.Point, System.Drawing">
-    <value>87, 17</value>
+  <data name="ComboBox1.Items8" xml:space="preserve">
+    <value>Nelder-Mead Simplex Downhill (Constrained)</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator1.Name" xml:space="preserve">
     <value>ToolStripSeparator1</value>
@@ -1779,8 +1776,8 @@
   <data name="&gt;&gt;tbMaxIterations.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;DockRightAutoHideToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="btnVerify.Text" xml:space="preserve">
+    <value>Verificar</value>
   </data>
   <data name="&gt;&gt;grProgress.Parent" xml:space="preserve">
     <value>GroupBox7</value>
@@ -1809,17 +1806,20 @@
   <data name="GroupBox4.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 126</value>
   </data>
+  <data name="Label3.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
   <data name="rb4PointDeriv.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 17</value>
   </data>
   <data name="&gt;&gt;tbMaxIterations.Name" xml:space="preserve">
     <value>tbMaxIterations</value>
   </data>
-  <data name="rbMinimize.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;Column5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;GroupBox8.Parent" xml:space="preserve">
-    <value>Panel1</value>
+  <data name="&gt;&gt;GroupBox7.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="tbToleranceValue.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
