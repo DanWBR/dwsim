@@ -242,6 +242,8 @@ Namespace PropertyPackages
 
         Public Property FlashCalculationApproach As FlashCalculationApproachType = FlashCalculationApproachType.NestedLoops
 
+        Public Property SingleCompoundCheckThreshold As Double = 0.99999
+
         ''' <summary>
         ''' ' For mobile compatibility only.
         ''' </summary>
@@ -8178,18 +8180,27 @@ Final3:
 
         Public Function AUX_IS_SINGLECOMP(ByVal Vx As Double()) As Boolean
 
-            Dim i, c, n As Integer, bo As Boolean
+            Dim i, n As Integer
+            Dim sc, bo As Boolean
 
             n = Vx.Length - 1
 
             bo = False
-            c = 0
             For i = 0 To n
-                If Vx(i) > 0.0# Then c += 1
-                If Me.DW_GetConstantProperties(i).IsBlackOil Then bo = True
+                If Me.DW_GetConstantProperties(i).IsBlackOil Then
+                    bo = True
+                    Exit For
+                End If
+            Next
+            sc = False
+            For i = 0 To n
+                If Vx(i) > SingleCompoundCheckThreshold Then
+                    sc = True
+                    Exit For
+                End If
             Next
 
-            If c = 1 And Not bo Then Return True Else Return False
+            If sc And Not bo Then Return True Else Return False
 
         End Function
 
@@ -8208,7 +8219,7 @@ Final3:
                 End If
             Next
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
-                If subst.MoleFraction.GetValueOrDefault > 0.999999 Then
+                If subst.MoleFraction.GetValueOrDefault > SingleCompoundCheckThreshold Then
                     sc = True
                     Exit For
                 End If

@@ -56,6 +56,17 @@ Public Class PropertyPackageSettingsEditingControl
 
         chkCalcAdditionalProps.Checked = PropPack.CalculateAdditionalMaterialStreamProperties
 
+        tbSPCheckThres.Text = PropPack.SingleCompoundCheckThreshold
+
+        AddHandler tbSPCheckThres.TextChanged, Sub()
+                                                   Try
+                                                       PropPack.SingleCompoundCheckThreshold = tbSPCheckThres.Text.ToDoubleFromCurrent()
+                                                       tbSPCheckThres.ForeColor = System.Drawing.Color.Blue
+                                                   Catch ex As Exception
+                                                       tbSPCheckThres.ForeColor = System.Drawing.Color.Red
+                                                   End Try
+                                               End Sub
+
         AddHandler cbLiqDens.SelectedIndexChanged, Sub()
                                                        PropPack.LiquidDensityCalculationMode_Subcritical = cbLiqDens.SelectedIndex
                                                        PropPack.LiquidDensityCalculationMode_Supercritical = cbLiqDens.SelectedIndex

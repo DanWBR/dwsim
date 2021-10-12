@@ -509,7 +509,7 @@ Namespace PropertyPackages.Auxiliary
                 Tsup = 10
                 nsub = 1000
             Else
-                Tinf = 1001
+                Tinf = 10000
                 Tsup = 0
                 nsub = 100
             End If

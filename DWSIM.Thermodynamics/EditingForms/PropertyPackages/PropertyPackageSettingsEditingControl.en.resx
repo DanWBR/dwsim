@@ -326,6 +326,9 @@
   <data name="chkUseSolidCp.Text" xml:space="preserve">
     <value>Solid Phase: Use Heat Capacity for Enthalpy/Entropy Calculation</value>
   </data>
+  <data name="chkCalcAdditionalProps.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 45</value>
+  </data>
   <data name="chkCalcAdditionalProps.Size" type="System.Drawing.Size, System.Drawing">
     <value>437, 17</value>
   </data>
@@ -337,6 +340,21 @@
   </data>
   <data name="Label11.Text" xml:space="preserve">
     <value>Material Streams</value>
+  </data>
+  <data name="tbSPCheckThres.Location" type="System.Drawing.Point, System.Drawing">
+    <value>302, 78</value>
+  </data>
+  <data name="tbSPCheckThres.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 81</value>
+  </data>
+  <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>244, 13</value>
+  </data>
+  <data name="Label10.Text" xml:space="preserve">
+    <value>Single Compound Check Molar Fraction Threshold</value>
   </data>
   <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
     <value>668, 402</value>

@@ -48,6 +48,8 @@ Partial Class PropertyPackageSettingsEditingControl
         Me.Label11 = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.tbSPCheckThres = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
@@ -209,10 +211,22 @@ Partial Class PropertyPackageSettingsEditingControl
         'TabPage1
         '
         resources.ApplyResources(Me.TabPage1, "TabPage1")
+        Me.TabPage1.Controls.Add(Me.tbSPCheckThres)
+        Me.TabPage1.Controls.Add(Me.Label10)
         Me.TabPage1.Controls.Add(Me.Label11)
         Me.TabPage1.Controls.Add(Me.chkCalcAdditionalProps)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'tbSPCheckThres
+        '
+        resources.ApplyResources(Me.tbSPCheckThres, "tbSPCheckThres")
+        Me.tbSPCheckThres.Name = "tbSPCheckThres"
+        '
+        'Label10
+        '
+        resources.ApplyResources(Me.Label10, "Label10")
+        Me.Label10.Name = "Label10"
         '
         'TabPage2
         '
@@ -307,4 +321,6 @@ Partial Class PropertyPackageSettingsEditingControl
     Friend WithEvents TabPage3 As TabPage
     Friend WithEvents TabPage4 As TabPage
     Friend WithEvents Label9 As Label
+    Friend WithEvents tbSPCheckThres As TextBox
+    Friend WithEvents Label10 As Label
 End Class
