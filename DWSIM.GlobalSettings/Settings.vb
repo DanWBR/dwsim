@@ -184,8 +184,7 @@ Public Class Settings
             End If
 
             If Not Directory.Exists(pythonpath) Then
-                'Throw New Exception("Python Binaries Path is not defined correctly.")
-                Exit Sub
+                Throw New Exception("Python binaries Path is not defined correctly.")
             End If
 
             Try

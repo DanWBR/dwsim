@@ -38,6 +38,8 @@ namespace DWSIM.Logging
 
             // Targets where to log to: File and Console
             var logfile = new NLog.Targets.FileTarget("logfile") { FileName = Path.Combine(logfiledir, "errors.log") };
+            var layout = NLog.Layouts.Layout.FromString("${longdate} ${message:exceptionSeparator=\r\n:withException=true}", throwConfigExceptions: true);
+            logfile.Layout = layout;
 
             // Rules for mapping loggers to targets            
             config.AddRule(LogLevel.Trace, LogLevel.Fatal, logfile);

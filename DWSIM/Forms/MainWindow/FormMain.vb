@@ -192,9 +192,6 @@ Public Class FormMain
                                         End If
                                     Case ExtenderCategory.NewItem
                                         newmenuitem?.DropDownItems.Add(exttsmi)
-                                    Case ExtenderCategory.InitializationScript
-                                        item.SetMainWindow(Me)
-                                        item.Run()
                                 End Select
                             Next
                             If newmenuitem IsNot Nothing Then
