@@ -1604,6 +1604,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myNode.Tag = uoobj.Prefix & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
+                CheckTag(gObj)
                 gObj.Name = Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 DirectCast(uoobj, Interfaces.ISimulationObject).Name = gObj.Name
@@ -1618,6 +1619,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myGobj.Tag = "SW-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
+                CheckTag(gObj)
                 gObj.Name = "SW-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myGobj)
@@ -1631,6 +1633,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myGobj.Tag = "IN-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
+                CheckTag(gObj)
                 gObj.Name = "IN-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myGobj)
@@ -1646,6 +1649,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myGobj.Tag = "PID-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
+                CheckTag(gObj)
                 gObj.Name = "PID-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myGobj)
@@ -1674,6 +1678,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myGobj.Tag = "DG-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
+                CheckTag(gObj)
                 gObj.Name = "DG-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myGobj)
@@ -1687,6 +1692,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myGobj.Tag = "AG-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
+                CheckTag(gObj)
                 gObj.Name = "AG-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myGobj)
@@ -1704,6 +1710,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myNode.Tag = "CTRL-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
+                CheckTag(gObj)
                 gObj.Name = DWSIM.App.GetLocalString("AJ") & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myNode)
@@ -1722,6 +1729,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myNode.Tag = "SPEC-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
+                CheckTag(gObj)
                 gObj.Name = "ES-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myNode)
@@ -1739,6 +1747,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myNode.Tag = "REC-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
+                CheckTag(gObj)
                 gObj.Name = "REC-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myNode)
@@ -1758,6 +1767,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myNode.Tag = "EREC-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
+                CheckTag(gObj)
                 gObj.Name = "EREC-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myNode)
@@ -1775,6 +1785,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myNode.Tag = "MIX-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
+                CheckTag(gObj)
                 gObj.Name = "MIST-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myNode)
@@ -1792,6 +1803,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myNodeo.Tag = "SPLT-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myNodeo.Tag = tag
                 gObj = myNodeo
+                CheckTag(gObj)
                 gObj.Name = "DIV-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myNodeo)
@@ -1810,6 +1822,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myPump.Tag = "PUMP-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myPump.Tag = tag
                 gObj = myPump
+                CheckTag(gObj)
                 gObj.Name = "BB-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myPump)
@@ -1828,6 +1841,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myTank.Tag = "TANK-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myTank.Tag = tag
                 gObj = myTank
+                CheckTag(gObj)
                 gObj.Name = "TQ-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myTank)
@@ -1846,6 +1860,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myVessel.Tag = "SEP-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myVessel.Tag = tag
                 gObj = myVessel
+                CheckTag(gObj)
                 gObj.Name = "SEP-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myVessel)
@@ -1864,6 +1879,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myMStr.Tag = "MSTR-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myMStr.Tag = tag
                 gObj = myMStr
+                CheckTag(gObj)
                 gObj.Name = "MAT-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myMStr)
@@ -1884,6 +1900,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myMStr.Tag = "ESTR-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myMStr.Tag = tag
                 gObj = myMStr
+                CheckTag(gObj)
                 gObj.Name = "EN-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myMStr)
@@ -1902,6 +1919,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myComp.Tag = "COMP-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myComp.Tag = tag
                 gObj = myComp
+                CheckTag(gObj)
                 gObj.Name = "COMP-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myComp)
@@ -1938,6 +1956,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myCool.Tag = "COOL-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myCool.Tag = tag
                 gObj = myCool
+                CheckTag(gObj)
                 gObj.Name = "RESF-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myCool)
@@ -1956,6 +1975,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myHeat.Tag = "HEAT-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myHeat.Tag = tag
                 gObj = myHeat
+                CheckTag(gObj)
                 gObj.Name = "AQ-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myHeat)
@@ -1974,6 +1994,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myPipe.Tag = "PIPE-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myPipe.Tag = tag
                 gObj = myPipe
+                CheckTag(gObj)
                 gObj.Name = "TUB-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myPipe)
@@ -1992,6 +2013,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myValve.Tag = "VALV-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myValve.Tag = tag
                 gObj = myValve
+                CheckTag(gObj)
                 gObj.Name = "VALV-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myValve)
@@ -2030,6 +2052,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myReq.Tag = "RE-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myReq.Tag = tag
                 gObj = myReq
+                CheckTag(gObj)
                 gObj.Name = "RE-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myReq)
@@ -2070,6 +2093,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myRcstr.Tag = "CSTR-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myRcstr.Tag = tag
                 gObj = myRcstr
+                CheckTag(gObj)
                 gObj.Name = "CSTR-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myRcstr)
@@ -2090,6 +2114,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myRpfr.Tag = "PFR-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myRpfr.Tag = tag
                 gObj = myRpfr
+                CheckTag(gObj)
                 gObj.Name = "PFR-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myRpfr)
@@ -2110,6 +2135,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myHeatExchanger.Tag = "HE-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myHeatExchanger.Tag = tag
                 gObj = myHeatExchanger
+                CheckTag(gObj)
                 gObj.Name = "HE-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myHeatExchanger)
@@ -2146,6 +2172,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 mySC.Tag = "DC-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then mySC.Tag = tag
                 gObj = mySC
+                CheckTag(gObj)
                 gObj.Name = "DC-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, mySC)
@@ -2190,6 +2217,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myCSep.Tag = "CS-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myCSep.Tag = tag
                 gObj = myCSep
+                CheckTag(gObj)
                 gObj.Name = "CS-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myCSep)
@@ -2226,6 +2254,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myCSep.Tag = "FT-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myCSep.Tag = tag
                 gObj = myCSep
+                CheckTag(gObj)
                 gObj.Name = "FT-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myCSep)
@@ -2244,6 +2273,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myOPL.Tag = "OP-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myOPL.Tag = tag
                 gObj = myOPL
+                CheckTag(gObj)
                 gObj.Name = "OP-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myOPL)
@@ -2262,6 +2292,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myCUO.Tag = "UO-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myCUO.Tag = tag
                 gObj = myCUO
+                CheckTag(gObj)
                 gObj.Name = "UO-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myCUO)
@@ -2282,6 +2313,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myEUO.Tag = "EXL-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myEUO.Tag = tag
                 gObj = myEUO
+                CheckTag(gObj)
                 gObj.Name = "EXL-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myEUO)
@@ -2300,6 +2332,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myEUO.Tag = "FS-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myEUO.Tag = tag
                 gObj = myEUO
+                CheckTag(gObj)
                 gObj.Name = "FS-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myEUO)
@@ -2318,6 +2351,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myCUO.Tag = "COUO-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myCUO.Tag = tag
                 gObj = myCUO
+                CheckTag(gObj)
                 gObj.Name = "COUO-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myCUO)
@@ -2363,6 +2397,14 @@ Public Class FlowsheetSurface_SkiaSharp
         Return gObj.Name
 
     End Function
+
+    Public Sub CheckTag(obj As Interfaces.IGraphicObject)
+
+        While Flowsheet.GetFlowsheetSimulationObject(obj.Tag) IsNot Nothing
+            obj.Tag += "-2"
+        End While
+
+    End Sub
 
     Sub AddObject(objname As String, x As Integer, y As Integer, Optional ByVal cl As Interfaces.Enums.SimulationObjectClass = SimulationObjectClass.Other)
 

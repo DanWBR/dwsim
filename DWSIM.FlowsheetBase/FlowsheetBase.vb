@@ -601,6 +601,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myNode.Tag = uoobj.Prefix & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
+                CheckTag(gObj)
                 gObj.Name = Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 DirectCast(uoobj, ISimulationObject).Name = gObj.Name
@@ -615,6 +616,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myGobj.Tag = "SW-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
+                CheckTag(gObj)
                 gObj.Name = "SW-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myGobj)
@@ -628,6 +630,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myGobj.Tag = "IN-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
+                CheckTag(gObj)
                 gObj.Name = "IN-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myGobj)
@@ -643,6 +646,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myGobj.Tag = "PID-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
+                CheckTag(gObj)
                 gObj.Name = "PID-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myGobj)
@@ -658,6 +662,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myGobj.Tag = "LG-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
+                CheckTag(gObj)
                 gObj.Name = "LG-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myGobj)
@@ -671,6 +676,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myGobj.Tag = "DG-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
+                CheckTag(gObj)
                 gObj.Name = "DG-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myGobj)
@@ -684,6 +690,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myGobj.Tag = "AG-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
+                CheckTag(gObj)
                 gObj.Name = "AG-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myGobj)
@@ -697,6 +704,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myNode.Tag = "CTRL-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
+                CheckTag(gObj)
                 gObj.Name = Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myNode)
@@ -710,6 +718,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myNode.Tag = "SPEC-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
+                CheckTag(gObj)
                 gObj.Name = "SPEC-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myNode)
@@ -723,6 +732,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myNode.Tag = "REC-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
+                CheckTag(gObj)
                 gObj.Name = "REC-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myNode)
@@ -736,6 +746,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myNode.Tag = "EREC-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
+                CheckTag(gObj)
                 gObj.Name = "EREC-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myNode)
@@ -749,6 +760,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myNode.Tag = "MIX-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
+                CheckTag(gObj)
                 gObj.Name = "MIX-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myNode)
@@ -762,6 +774,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myNodeo.Tag = "SPLT-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myNodeo.Tag = tag
                 gObj = myNodeo
+                CheckTag(gObj)
                 gObj.Name = "DIV-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myNodeo)
@@ -776,6 +789,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myPump.Tag = "PUMP-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myPump.Tag = tag
                 gObj = myPump
+                CheckTag(gObj)
                 gObj.Name = "PUMP-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myPump)
@@ -790,6 +804,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myTank.Tag = "TANK-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myTank.Tag = tag
                 gObj = myTank
+                CheckTag(gObj)
                 gObj.Name = "TANK-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myTank)
@@ -804,6 +819,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myVessel.Tag = "V-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myVessel.Tag = tag
                 gObj = myVessel
+                CheckTag(gObj)
                 gObj.Name = "V-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myVessel)
@@ -818,6 +834,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myMStr.Tag = "MSTR-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myMStr.Tag = tag
                 gObj = myMStr
+                CheckTag(gObj)
                 gObj.Name = "MSTR-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myMStr)
@@ -833,6 +850,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myMStr.Tag = "ESTR-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myMStr.Tag = tag
                 gObj = myMStr
+                CheckTag(gObj)
                 gObj.Name = "ESTR-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myMStr)
@@ -847,6 +865,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myComp.Tag = "CX-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myComp.Tag = tag
                 gObj = myComp
+                CheckTag(gObj)
                 gObj.Name = "CX-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myComp)
@@ -861,6 +880,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myComp.Tag = "C-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myComp.Tag = tag
                 gObj = myComp
+                CheckTag(gObj)
                 gObj.Name = "C-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myComp)
@@ -875,6 +895,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myComp.Tag = "X-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myComp.Tag = tag
                 gObj = myComp
+                CheckTag(gObj)
                 gObj.Name = "X-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myComp)
@@ -889,6 +910,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myCool.Tag = "HC-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myCool.Tag = tag
                 gObj = myCool
+                CheckTag(gObj)
                 gObj.Name = "HC-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myCool)
@@ -903,6 +925,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myCool.Tag = "HT-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myCool.Tag = tag
                 gObj = myCool
+                CheckTag(gObj)
                 gObj.Name = "HT-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myCool)
@@ -917,6 +940,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myCool.Tag = "CL-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myCool.Tag = tag
                 gObj = myCool
+                CheckTag(gObj)
                 gObj.Name = "CL-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myCool)
@@ -931,6 +955,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myPipe.Tag = "PIPE-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myPipe.Tag = tag
                 gObj = myPipe
+                CheckTag(gObj)
                 gObj.Name = "PIPE-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myPipe)
@@ -945,6 +970,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myValve.Tag = "VALVE-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myValve.Tag = tag
                 gObj = myValve
+                CheckTag(gObj)
                 gObj.Name = "VALVE-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myValve)
@@ -959,6 +985,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myRconv.Tag = "CR-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myRconv.Tag = tag
                 gObj = myRconv
+                CheckTag(gObj)
                 gObj.Name = "CR-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myRconv)
@@ -973,6 +1000,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myReq.Tag = "ER-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myReq.Tag = tag
                 gObj = myReq
+                CheckTag(gObj)
                 gObj.Name = "ER-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myReq)
@@ -987,6 +1015,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myRgibbs.Tag = "GR-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myRgibbs.Tag = tag
                 gObj = myRgibbs
+                CheckTag(gObj)
                 gObj.Name = "GR-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myRgibbs)
@@ -1001,6 +1030,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myRcstr.Tag = "CSTR-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myRcstr.Tag = tag
                 gObj = myRcstr
+                CheckTag(gObj)
                 gObj.Name = "CSTR-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myRcstr)
@@ -1015,6 +1045,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myRpfr.Tag = "PFR-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myRpfr.Tag = tag
                 gObj = myRpfr
+                CheckTag(gObj)
                 gObj.Name = "PFR-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myRpfr)
@@ -1029,6 +1060,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myHeatExchanger.Tag = "HX-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myHeatExchanger.Tag = tag
                 gObj = myHeatExchanger
+                CheckTag(gObj)
                 gObj.Name = "HX-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myHeatExchanger)
@@ -1043,6 +1075,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 mySC.Tag = "SC-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then mySC.Tag = tag
                 gObj = mySC
+                CheckTag(gObj)
                 gObj.Name = "SC-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, mySC)
@@ -1057,6 +1090,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myDC.Tag = "DC-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myDC.Tag = tag
                 gObj = myDC
+                CheckTag(gObj)
                 gObj.Name = "DC-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myDC)
@@ -1071,6 +1105,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myAC.Tag = "ABS-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myAC.Tag = tag
                 gObj = myAC
+                CheckTag(gObj)
                 gObj.Name = "ABS-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myAC)
@@ -1085,6 +1120,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myCSep.Tag = "CS-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myCSep.Tag = tag
                 gObj = myCSep
+                CheckTag(gObj)
                 gObj.Name = "CS-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myCSep)
@@ -1099,6 +1135,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myCSep.Tag = "SS-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myCSep.Tag = tag
                 gObj = myCSep
+                CheckTag(gObj)
                 gObj.Name = "SS-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myCSep)
@@ -1113,6 +1150,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myCSep.Tag = "FT-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myCSep.Tag = tag
                 gObj = myCSep
+                CheckTag(gObj)
                 gObj.Name = "FT-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myCSep)
@@ -1127,6 +1165,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myOPL.Tag = "OP-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myOPL.Tag = tag
                 gObj = myOPL
+                CheckTag(gObj)
                 gObj.Name = "OP-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myOPL)
@@ -1141,6 +1180,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myCUO.Tag = "UO-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myCUO.Tag = tag
                 gObj = myCUO
+                CheckTag(gObj)
                 gObj.Name = "UO-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myCUO)
@@ -1155,6 +1195,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myEUO.Tag = "EXL-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myEUO.Tag = tag
                 gObj = myEUO
+                CheckTag(gObj)
                 gObj.Name = "EXL-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myEUO)
@@ -1169,6 +1210,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myEUO.Tag = "FS-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myEUO.Tag = tag
                 gObj = myEUO
+                CheckTag(gObj)
                 gObj.Name = "FS-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myEUO)
@@ -1183,6 +1225,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                 myCUO.Tag = "COUO-" & (SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
                 If tag <> "" Then myCUO.Tag = tag
                 gObj = myCUO
+                CheckTag(gObj)
                 gObj.Name = "COUO-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myCUO)
@@ -1203,6 +1246,14 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
         Return gObj.Name
 
     End Function
+
+    Public Sub CheckTag(obj As IGraphicObject)
+
+        While GetFlowsheetSimulationObject(obj.Tag) IsNot Nothing
+            obj.Tag += "-2"
+        End While
+
+    End Sub
 
     Public Sub LoadFromMXML(xdoc As XDocument)
 

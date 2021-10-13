@@ -183,20 +183,16 @@ Public Class Settings
                 pythonpath = Settings.PythonPath
             End If
 
-            If Not IsRunningOnMono() Then
-                If Not Directory.Exists(pythonpath) Then
-                    'Throw New Exception("Python Binaries Path is not defined correctly.")
-                    Exit Sub
-                End If
+            If Not Directory.Exists(pythonpath) Then
+                'Throw New Exception("Python Binaries Path is not defined correctly.")
+                Exit Sub
             End If
 
             Try
-                If Not IsRunningOnMono() Then
-                    If Not PythonPathIsSet Then
-                        SetPythonPath(pythonpath)
-                    End If
-                    PythonEngine.PythonHome = pythonpath
+                If Not PythonPathIsSet Then
+                    SetPythonPath(pythonpath)
                 End If
+                PythonEngine.PythonHome = pythonpath
                 PythonEngine.Initialize()
                 PythonEngine.BeginAllowThreads()
                 PythonInitialized = True
