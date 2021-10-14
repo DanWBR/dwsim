@@ -69,9 +69,8 @@ Public Class DewPointFinder
         Catch ex As Exception
         End Try
 
-        idwdp = PP.AUX_TSATi(Vz(wid) * P, wid)
-
         Try
+            idwdp = PP.AUX_TSATi(Vz(wid) * P, wid)
             results = CType(PP.FlashBase.Flash_PV(Vz, P, 1.0, 300.0, PP), Object())
             Dim vx As Double() = CType(results(2), Double())
             If vx(wid) > 0.99 Then
