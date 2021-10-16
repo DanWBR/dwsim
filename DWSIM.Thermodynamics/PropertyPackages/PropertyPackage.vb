@@ -1361,35 +1361,19 @@ Namespace PropertyPackages
 
             Else
 
-                If Settings.EnableParallelProcessing Then
+                IObj?.SetCurrent()
 
-                    Dim task1 = TaskHelper.Run(Sub()
-                                                   fugliq = Me.DW_CalcFugCoeff(Vx, T, P, State.Liquid)
-                                               End Sub,
-                                                        Settings.TaskCancellationTokenSource.Token)
-                    Dim task2 = TaskHelper.Run(Sub()
-                                                   If type = "LV" Then
-                                                       fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Vapor)
-                                                   Else ' LL
-                                                       fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Liquid)
-                                                   End If
-                                               End Sub,
-                                                    Settings.TaskCancellationTokenSource.Token)
-                    Task.WaitAll(task1, task2)
+                fugliq = Me.DW_CalcFugCoeff(Vx, T, P, State.Liquid)
 
-                Else
-                    IObj?.SetCurrent()
-                    fugliq = Me.DW_CalcFugCoeff(Vx, T, P, State.Liquid)
-                    IObj?.SetCurrent()
-                    If type = "LV" Then
-                        fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Vapor)
-                    Else ' LL
-                        fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Liquid)
-                    End If
+                IObj?.SetCurrent()
+
+                If type = "LV" Then
+                    fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Vapor)
+                Else ' LL
+                    fugvap = Me.DW_CalcFugCoeff(Vy, T, P, State.Liquid)
                 End If
 
             End If
-
 
             IObj?.Paragraphs.Add(String.Format("<h2>Intermediate Calculated Parameters</h2>"))
 
@@ -1404,35 +1388,19 @@ Namespace PropertyPackages
 
             If Double.IsNaN(K.Sum) Or Double.IsInfinity(K.Sum) Or K.Sum = 0.0# Then
                 Dim cprops = DW_GetConstantProperties()
-                If Settings.EnableParallelProcessing Then
-                    Parallel.For(0, n + 1, Sub(ii)
-                                               Dim Pc, Tc, w As Double
-                                               If K(ii) = 0.0# Or Double.IsInfinity(K(ii)) Or Double.IsNaN(K(ii)) Then
-                                                   Pc = cprops(ii).Critical_Pressure
-                                                   Tc = cprops(ii).Critical_Temperature
-                                                   w = cprops(ii).Acentric_Factor
-                                                   If type = "LV" Then
-                                                       K(ii) = Pc / P * Math.Exp(5.373 * (1 + w) * (1 - Tc / T))
-                                                   Else
-                                                       K(ii) = 1.0#
-                                                   End If
-                                               End If
-                                           End Sub)
-                Else
-                    Dim Pc, Tc, w As Double
-                    For i = 0 To n
-                        If K(i) = 0.0# Or Double.IsInfinity(K(i)) Or Double.IsNaN(K(i)) Then
-                            Pc = cprops(i).Critical_Pressure
-                            Tc = cprops(i).Critical_Temperature
-                            w = cprops(i).Acentric_Factor
-                            If type = "LV" Then
-                                K(i) = Pc / P * Math.Exp(5.373 * (1 + w) * (1 - Tc / T))
-                            Else
-                                K(i) = 1.0#
-                            End If
+                Dim Pc, Tc, w As Double
+                For i = 0 To n
+                    If K(i) = 0.0# Or Double.IsInfinity(K(i)) Or Double.IsNaN(K(i)) Then
+                        Pc = cprops(i).Critical_Pressure
+                        Tc = cprops(i).Critical_Temperature
+                        w = cprops(i).Acentric_Factor
+                        If type = "LV" Then
+                            K(i) = Pc / P * Math.Exp(5.373 * (1 + w) * (1 - Tc / T))
+                        Else
+                            K(i) = 1.0#
                         End If
-                    Next
-                End If
+                    End If
+                Next
             End If
 
             IObj?.Paragraphs.Add(String.Format("Calculated K-values: {0}", K.ToMathArrayString()))

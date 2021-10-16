@@ -450,7 +450,13 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                 WriteDebugInfo("PT Flash [NL]: Iteration #" & ecount & ", VF = " & V)
 
-                If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
+                If Math.IEEERemainder(ecount, 5) > 0.0 Then
+                    If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then
+                        If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then
+                            PP.CurrentMaterialStream.Flowsheet.CheckStatus()
+                        End If
+                    End If
+                End If
 
                 IObj2?.Close()
 
