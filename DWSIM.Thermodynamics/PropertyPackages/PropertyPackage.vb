@@ -4092,10 +4092,17 @@ redirect2:                  IObj?.SetCurrent()
             Critical = parameters(6)
             SolidSolution = parameters(7)
 
-            StepCount = parameters(10)
-            MinX = parameters(11)
-            MaxX = parameters(12)
-            dx = (MaxX - MinX) / StepCount
+            Try
+                StepCount = parameters(10)
+                MinX = parameters(11)
+                MaxX = parameters(12)
+                dx = (MaxX - MinX) / StepCount
+            Catch ex As Exception
+                StepCount = 40
+                MinX = 0.0
+                MaxX = 1.0
+                dx = 1.0 / StepCount
+            End Try
 
             Dim MyFlash As IFlashAlgorithm = FlashBase.Clone
 

@@ -511,7 +511,7 @@ Namespace PropertyPackages.Auxiliary
             Else
                 Tinf = 10000
                 Tsup = 0
-                nsub = 100
+                nsub = 1000
             End If
 
             delta_T = (Tsup - Tinf) / nsub
