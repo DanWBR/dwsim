@@ -209,6 +209,13 @@ namespace DWSIM.UI.Desktop
                             }
                         }
                     };
+                    app.Terminating += (s, e) =>
+                    {
+                        if (MessageBox.Show("Do you want to close DWSIM?", "Close DWSIM", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.Yes) == DialogResult.No)
+                        {
+                            e.Cancel = true;
+                        }
+                    };
                     if (!GlobalSettings.Settings.AutomationMode)
                     {
                         app.Run(new MainForm());

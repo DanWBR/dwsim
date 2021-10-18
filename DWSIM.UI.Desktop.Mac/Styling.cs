@@ -13,6 +13,9 @@ namespace DWSIM.UI.Desktop.Mac
         public static void SetStyles()
         {
 
+            Eto.Style.Add<Eto.Mac.Forms.ApplicationHandler>(null, handler => handler.AllowClosingMainForm = true);
+            Eto.Style.Add<Eto.Forms.Form>("main", form => form.Closed += (sender, e) => Eto.Forms.Application.Instance.Quit());
+
             Eto.Style.Add<Eto.Forms.Panel>("transparent-form", control =>
             {
                 System.Console.WriteLine(control.ControlObject.GetType().ToString());
