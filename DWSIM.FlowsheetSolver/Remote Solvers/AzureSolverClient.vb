@@ -101,7 +101,7 @@ Public Class AzureSolverClient
 
             'send the flowsheet data to be calculated on the server.
 
-            Dim tmpfile As String = My.Computer.FileSystem.GetTempFileName
+            Dim tmpfile As String = SharedClasses.Utility.GetTempFileName()
             fgui.ShowMessage(fgui.GetTranslatedString("ClientSavingTempFile"), IFlowsheet.MessageType.Information)
             fbag.SaveToXML(tmpfile)
             Dim uncompressedbytes As Byte() = IO.File.ReadAllBytes(tmpfile)

@@ -205,7 +205,7 @@ namespace DWSIM.UI.Forms
                             Spreadsheet.Loaded = false;
                             foreach (var item in sdict)
                             {
-                                var tmpfile = System.IO.Path.GetTempFileName();
+                                var tmpfile = DWSIM.SharedClasses.Utility.GetTempFileName();
                                 var sheet = Spreadsheet.Sheet.NewWorksheet(item.Key);
                                 var xmldoc = Newtonsoft.Json.JsonConvert.DeserializeXmlNode(item.Value);
                                 xmldoc.Save(tmpfile);
@@ -235,13 +235,13 @@ namespace DWSIM.UI.Forms
             {
                 xdoc.Element("DWSIM_Simulation_Data").Add(new XElement("Spreadsheet"));
                 xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Add(new XElement("RGFData"));
-                var tmpfile = System.IO.Path.GetTempFileName();
+                var tmpfile = DWSIM.SharedClasses.Utility.GetTempFileName();
                 Application.Instance.Invoke(() =>
                 {
                     Dictionary<string, string> sdict = new Dictionary<string, string>();
                     foreach (var sheet in Spreadsheet.Sheet.Worksheets)
                     {
-                        var tmpfile2 = System.IO.Path.GetTempFileName();
+                        var tmpfile2 = DWSIM.SharedClasses.Utility.GetTempFileName();
                         sheet.SaveRGF(tmpfile2);
                         var xmldoc = new XmlDocument();
                         xmldoc.Load(tmpfile2);
@@ -1628,7 +1628,7 @@ namespace DWSIM.UI.Forms
 
                 path = Path.ChangeExtension(path, ".dwxmz");
 
-                string xmlfile = Path.ChangeExtension(Path.GetTempFileName(), "xml");
+                string xmlfile = Path.ChangeExtension(DWSIM.SharedClasses.Utility.GetTempFileName(), "xml");
 
                 FlowsheetObject.SaveToXML().Save(xmlfile);
 

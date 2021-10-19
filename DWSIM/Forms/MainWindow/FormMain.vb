@@ -2112,7 +2112,7 @@ Public Class FormMain
                     sdict = Newtonsoft.Json.JsonConvert.DeserializeObject(Of Dictionary(Of String, String))(rgfdata)
                     form.FormSpreadsheet.Spreadsheet.RemoveWorksheet(0)
                     For Each item In sdict
-                        Dim tmpfile = System.IO.Path.GetTempFileName
+                        Dim tmpfile = SharedClasses.Utility.GetTempFileName()
                         Dim sheet = form.FormSpreadsheet.Spreadsheet.NewWorksheet(item.Key)
                         Dim xmldoc = Newtonsoft.Json.JsonConvert.DeserializeXmlNode(item.Value)
                         xmldoc.Save(tmpfile)
@@ -2189,7 +2189,7 @@ Public Class FormMain
             If Not DWSIM.App.IsRunningOnMono Then
                 If Not My.Computer.Keyboard.ShiftKeyDown Then
                     If savedfromclui Then
-                        Dim myfile As String = My.Computer.FileSystem.GetTempFileName()
+                        Dim myfile As String = SharedClasses.Utility.GetTempFileName()
                         Try
                             Dim pnl As String = xdoc.Element("DWSIM_Simulation_Data").Element("PanelLayout").Value
                             File.WriteAllText(myfile, pnl)
@@ -2663,7 +2663,7 @@ Public Class FormMain
                     sdict = Newtonsoft.Json.JsonConvert.DeserializeObject(Of Dictionary(Of String, String))(rgfdata)
                     form.FormSpreadsheet.Spreadsheet.RemoveWorksheet(0)
                     For Each item In sdict
-                        Dim tmpfile = System.IO.Path.GetTempFileName
+                        Dim tmpfile = SharedClasses.Utility.GetTempFileName()
                         Dim sheet = form.FormSpreadsheet.Spreadsheet.NewWorksheet(item.Key)
                         Dim xmldoc = Newtonsoft.Json.JsonConvert.DeserializeXmlNode(item.Value)
                         xmldoc.Save(tmpfile)
@@ -2737,7 +2737,7 @@ Public Class FormMain
             form.FormIPyConsole.DockPanel = Nothing
 
             If Not My.Computer.Keyboard.ShiftKeyDown Then
-                Dim myfile As String = My.Computer.FileSystem.GetTempFileName()
+                Dim myfile As String = SharedClasses.Utility.GetTempFileName()
                 Try
                     Dim pnl As String = xdoc.Element("DWSIM_Simulation_Data").Element("PanelLayout").Value
                     File.WriteAllText(myfile, pnl)
@@ -3168,7 +3168,7 @@ Public Class FormMain
         xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Add(New XElement("RGFData"))
         Dim sdict As New Dictionary(Of String, String)
         For Each sheet In form.FormSpreadsheet.Spreadsheet.Worksheets
-            Dim tmpfile = System.IO.Path.GetTempFileName
+            Dim tmpfile = SharedClasses.Utility.GetTempFileName()
             sheet.SaveRGF(tmpfile)
             Dim xmldoc = New XmlDocument()
             xmldoc.Load(tmpfile)
@@ -3179,7 +3179,7 @@ Public Class FormMain
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("PanelLayout"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("PanelLayout")
 
-        Dim myfile As String = My.Computer.FileSystem.GetTempFileName()
+        Dim myfile As String = SharedClasses.Utility.GetTempFileName()
         form.dckPanel.SaveAsXml(myfile, Encoding.UTF8)
         xel.Add(File.ReadAllText(myfile).ToString)
         File.Delete(myfile)
@@ -3293,13 +3293,13 @@ Label_00CC:
 
     Sub SaveXMLZIP(ByVal zipfilename As String, ByVal form As FormFlowsheet)
 
-        Dim xmlfile As String = Path.ChangeExtension(My.Computer.FileSystem.GetTempFileName, "xml")
+        Dim xmlfile As String = Path.ChangeExtension(SharedClasses.Utility.GetTempFileName(), "xml")
         Me.SaveXML(xmlfile, form, zipfilename)
 
         Dim i_Files As ArrayList = New ArrayList()
         If File.Exists(xmlfile) Then i_Files.Add(xmlfile)
 
-        Dim dbfile As String = Path.ChangeExtension(My.Computer.FileSystem.GetTempFileName, "db")
+        Dim dbfile As String = Path.ChangeExtension(SharedClasses.Utility.GetTempFileName(), "db")
 
         form.FileDatabaseProvider.ExportDatabase(dbfile)
 

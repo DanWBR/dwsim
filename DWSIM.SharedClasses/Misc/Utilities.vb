@@ -683,6 +683,11 @@ Public Class Utility
 
         End If
 
+    End Function
+
+    Public Shared Function GetTempFileName() As String
+
+        Return Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString() + ".tmp")
 
     End Function
 

@@ -57,7 +57,7 @@ Public Class TCPSolverClient
 
             fgui.ShowMessage(fgui.GetTranslatedString("ClientConnected"), IFlowsheet.MessageType.Information)
 
-            Dim tmpfile As String = My.Computer.FileSystem.GetTempFileName
+            Dim tmpfile As String = SharedClasses.Utility.GetTempFileName()
 
             fgui.ShowMessage(fgui.GetTranslatedString("ClientSavingTempFile"), IFlowsheet.MessageType.Information)
 

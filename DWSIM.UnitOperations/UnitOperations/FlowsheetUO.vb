@@ -623,7 +623,7 @@ Label_00CC:
 
                     Else
 
-                        Dim xmlfile As String = IO.Path.ChangeExtension(My.Computer.FileSystem.GetTempFileName, "xml")
+                        Dim xmlfile As String = IO.Path.ChangeExtension(SharedClasses.Utility.GetTempFileName(), "xml")
 
                         xdoc.Save(xmlfile)
 

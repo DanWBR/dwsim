@@ -208,7 +208,7 @@ Public Class FOSSEEFlowsheets
             wc.Proxy = proxyObj
         End If
 
-        Dim fpath = Path.GetTempFileName()
+        Dim fpath = Utility.GetTempFileName()
 
         AddHandler wc.DownloadProgressChanged, Sub(sender, e)
                                                    If pa IsNot Nothing Then pa.Invoke(e.ProgressPercentage)

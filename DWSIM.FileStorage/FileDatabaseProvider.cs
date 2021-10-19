@@ -132,7 +132,7 @@ namespace DWSIM.FileStorage
             var file = DB.FileStorage.FindById(Path.GetFileName(filename));
             if (file != null)
             {
-                var tmpfile = Path.GetTempFileName();
+                var tmpfile = DWSIM.SharedClasses.Utility.GetTempFileName();
                 file.SaveAs(tmpfile);
                 var text = File.ReadAllText(tmpfile);
                 File.Delete(tmpfile);
