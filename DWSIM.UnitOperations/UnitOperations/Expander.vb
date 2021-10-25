@@ -280,8 +280,8 @@ Namespace UnitOperations
             Qi = ims.Phases(0).Properties.molarflow.GetValueOrDefault
             ei = Hi * Wi
             ein = ei
-            cp = ims.Phases(0).Properties.heatCapacityCp.GetValueOrDefault
-            cv = ims.Phases(0).Properties.heatCapacityCv.GetValueOrDefault
+            cp = ims.Phases(2).Properties.heatCapacityCp.GetValueOrDefault
+            cv = ims.Phases(2).Properties.heatCapacityCv.GetValueOrDefault
             mw = ims.Phases(0).Properties.molecularWeight.GetValueOrDefault
 
             IObj?.Paragraphs.Add("<h3>Input Variables</h3>")

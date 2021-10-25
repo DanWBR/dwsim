@@ -594,11 +594,14 @@ Public Class MaterialStreamEditor
             If refval.HasValue Then val = Converter.ConvertFromSI(units.density, refval)
             .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("Massaespecfica"), val, units.density})
 
-            refval = p.Properties.heatCapacityCp.GetValueOrDefault
-            If refval.HasValue Then val = Converter.ConvertFromSI(units.heatCapacityCp, refval)
-            .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("HeatCapacityCp"), val, units.heatCapacityCp})
-            refval = p.Properties.heatCapacityCp.GetValueOrDefault / p.Properties.heatCapacityCv.GetValueOrDefault
-            .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("HeatCapacityRatio"), refval.GetValueOrDefault})
+            If p.Name <> "Mixture" Then
+                refval = p.Properties.heatCapacityCp.GetValueOrDefault
+                If refval.HasValue Then val = Converter.ConvertFromSI(units.heatCapacityCp, refval)
+                .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("HeatCapacityCp"), val, units.heatCapacityCp})
+                refval = p.Properties.heatCapacityCp.GetValueOrDefault / p.Properties.heatCapacityCv.GetValueOrDefault
+                .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("HeatCapacityRatio"), refval.GetValueOrDefault})
+            End If
+
             refval = p.Properties.thermalConductivity.GetValueOrDefault
             If refval.HasValue Then val = Converter.ConvertFromSI(units.thermalConductivity, refval)
             .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("Condutividadetrmica"), val, units.thermalConductivity})

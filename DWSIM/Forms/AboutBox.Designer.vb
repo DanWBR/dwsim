@@ -187,7 +187,7 @@ Partial Class AboutBox
         resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem1, Me.FaTabStripItem5, Me.FaTabStripItem2, Me.FaTabStripItem6, Me.FaTabStripItem3, Me.FaTabStripItem4})
         Me.FaTabStrip1.Name = "FaTabStrip1"
-        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem5
+        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem1
         '
         'FaTabStripItem1
         '
@@ -209,6 +209,7 @@ Partial Class AboutBox
         Me.FaTabStripItem1.Controls.Add(Me.Label7)
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
+        Me.FaTabStripItem1.Selected = True
         resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         '
         'TabControl1
@@ -270,7 +271,6 @@ Partial Class AboutBox
         Me.FaTabStripItem5.Controls.Add(Me.Label15)
         Me.FaTabStripItem5.IsDrawn = True
         Me.FaTabStripItem5.Name = "FaTabStripItem5"
-        Me.FaTabStripItem5.Selected = True
         resources.ApplyResources(Me.FaTabStripItem5, "FaTabStripItem5")
         '
         'Button2

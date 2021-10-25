@@ -424,8 +424,8 @@ Namespace UnitOperations
                     rho_vi = msin.Phases(2).Properties.density.GetValueOrDefault
                     IObj?.SetCurrent()
                     cpig = Me.PropertyPackage.AUX_CPm(PhaseName.Vapor, Ti)
-                    cp = msin.Phases(0).Properties.heatCapacityCp.GetValueOrDefault
-                    cv = msin.Phases(0).Properties.heatCapacityCv.GetValueOrDefault
+                    cp = msin.Phases(2).Properties.heatCapacityCp.GetValueOrDefault
+                    cv = msin.Phases(2).Properties.heatCapacityCv.GetValueOrDefault
                     mw = msin.Phases(0).Properties.molecularWeight.GetValueOrDefault
                     qvi = msin.Phases(2).Properties.volumetric_flow.GetValueOrDefault
                     Hi = msin.Phases(0).Properties.enthalpy.GetValueOrDefault

@@ -1775,6 +1775,7 @@ Namespace PropertyPackages
             CPS = Me.CurrentMaterialStream.Phases(7).Properties.heatCapacityCp.GetValueOrDefault
 
             result = wl * CPL.GetValueOrDefault + wv * CPV.GetValueOrDefault + ws * CPS.GetValueOrDefault
+
             Me.CurrentMaterialStream.Phases(0).Properties.heatCapacityCp = result
 
             CVL = Me.CurrentMaterialStream.Phases(1).Properties.heatCapacityCv.GetValueOrDefault
@@ -1782,6 +1783,7 @@ Namespace PropertyPackages
             CSV = Me.CurrentMaterialStream.Phases(7).Properties.heatCapacityCv.GetValueOrDefault
 
             result = wl * CVL.GetValueOrDefault + wv * CVV.GetValueOrDefault + ws * CSV.GetValueOrDefault
+
             Me.CurrentMaterialStream.Phases(0).Properties.heatCapacityCv = result
 
             result = Me.AUX_MMM(Phase.Mixture)
