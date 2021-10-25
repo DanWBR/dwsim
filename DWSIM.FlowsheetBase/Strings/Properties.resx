@@ -976,6 +976,36 @@
     <value>Volumetric Flow (Vapor)</value>
     <comment>0</comment>
   </data>
+  <data name="PROP_MS_250" xml:space="preserve">
+    <value>Ideal Gas Heat Capacity Cp (Vapor)</value>
+  </data>
+  <data name="PROP_MS_251" xml:space="preserve">
+    <value>Ideal Gas Heat Capacity Cp (Liquid 1)</value>
+  </data>
+  <data name="PROP_MS_252" xml:space="preserve">
+    <value>Ideal Gas Heat Capacity Cp (Liquid 2)</value>
+  </data>
+  <data name="PROP_MS_253" xml:space="preserve">
+    <value>Ideal Gas Heat Capacity Cp (Overall Liquid)</value>
+  </data>
+  <data name="PROP_MS_254" xml:space="preserve">
+    <value>Ideal Gas Heat Capacity Cp (Solid)</value>
+  </data>
+  <data name="PROP_MS_255" xml:space="preserve">
+    <value>Ideal Gas Heat Capacity Ratio (Vapor)</value>
+  </data>
+  <data name="PROP_MS_256" xml:space="preserve">
+    <value>Ideal Gas Heat Capacity Ratio (Liquid 1)</value>
+  </data>
+  <data name="PROP_MS_257" xml:space="preserve">
+    <value>Ideal Gas Heat Capacity Ratio (Liquid 2)</value>
+  </data>
+  <data name="PROP_MS_258" xml:space="preserve">
+    <value>Ideal Gas Heat Capacity Ratio (Overall Liquid)</value>
+  </data>
+  <data name="PROP_MS_259" xml:space="preserve">
+    <value>Ideal Gas Heat Capacity Ratio (Solid)</value>
+  </data>
   <data name="PROP_MS_26" xml:space="preserve">
     <value>Compressibility Factor (Vapor)</value>
     <comment>0</comment>

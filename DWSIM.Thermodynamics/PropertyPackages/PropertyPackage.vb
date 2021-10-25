@@ -831,6 +831,8 @@ Namespace PropertyPackages
                     IObj?.Paragraphs.Add(String.Format("Speed of Sound: {0} m/s", p.Properties.speedOfSound))
                     IObj?.Paragraphs.Add(String.Format("Joule-Thomson Coefficient: {0} K/Pa", p.Properties.jouleThomsonCoefficient))
 
+                    CalcIdealGasCpCv(p, CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault)
+
                 End If
             Next
 
@@ -863,6 +865,7 @@ Namespace PropertyPackages
                 CalcGibbsFreeEnergy(p)
                 CalcHelmholtzEnergy(p)
                 CalcDiffusionCoefficients(p)
+                CalcIdealGasCpCv(p, CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault)
 
             End If
 
@@ -1138,6 +1141,16 @@ Namespace PropertyPackages
                 End If
 
             Next
+
+        End Sub
+
+        Public Sub CalcIdealGasCpCv(p As IPhase, T As Double)
+
+            Dim Cp = AUX_CPm(p, T)
+            Dim Cv = Cp - 8.314 / p.Properties.molecularWeight.GetValueOrDefault()
+
+            p.Properties.idealGasHeatCapacityCp = Cp
+            p.Properties.idealGasHeatCapacityRatio = Cp / Cv
 
         End Sub
 
@@ -5396,6 +5409,19 @@ redirect2:                  IObj?.SetCurrent()
             Dim subst As Interfaces.ICompound
 
             For Each subst In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
+                val += subst.MassFraction.GetValueOrDefault * Me.AUX_CPi(subst.Name, T)
+            Next
+
+            Return val 'KJ/Kg/K
+
+        End Function
+
+        Public Function AUX_CPm(ByVal Phase As IPhase, ByVal T As Double) As Double
+
+            Dim val As Double
+            Dim subst As Interfaces.ICompound
+
+            For Each subst In Phase.Compounds.Values
                 val += subst.MassFraction.GetValueOrDefault * Me.AUX_CPi(subst.Name, T)
             Next
 

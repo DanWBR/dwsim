@@ -8218,6 +8218,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Capacidade Calorífica (Gás Ideal).
+        '''</summary>
+        Friend Shared ReadOnly Property IdealGasHeatCapacityCp() As String
+            Get
+                Return ResourceManager.GetString("IdealGasHeatCapacityCp", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Cp/Cv (Gás Ideal).
+        '''</summary>
+        Friend Shared ReadOnly Property IdealGasHeatCapacityRatio() As String
+            Get
+                Return ResourceManager.GetString("IdealGasHeatCapacityRatio", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Ignorar Líquido na Entrada.
         '''</summary>
         Friend Shared ReadOnly Property IgnorarLquidonaEntra() As String

@@ -5751,4 +5751,10 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="CleanSuccessful" xml:space="preserve">
     <value>Limpeza do diretório feita com sucesso.</value>
   </data>
+  <data name="IdealGasHeatCapacityCp" xml:space="preserve">
+    <value>Capacidade Calorífica (Gás Ideal)</value>
+  </data>
+  <data name="IdealGasHeatCapacityRatio" xml:space="preserve">
+    <value>Cp/Cv (Gás Ideal)</value>
+  </data>
 </root>

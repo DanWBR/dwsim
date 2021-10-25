@@ -1358,6 +1358,9 @@ Namespace BaseClasses
 
         Public Property molar_internal_energy As Double? Implements Interfaces.IPhaseProperties.molar_internal_energy
 
+        Public Property idealGasHeatCapacityCp As Double? Implements IPhaseProperties.idealGasHeatCapacityCp
+
+        Public Property idealGasHeatCapacityRatio As Double? Implements IPhaseProperties.idealGasHeatCapacityRatio
 
     End Class
 

@@ -5507,4 +5507,10 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="TPVessel" xml:space="preserve">
     <value>(Deprecated) Gas-Liquid Separator</value>
   </data>
+  <data name="IdealGasHeatCapacityCp" xml:space="preserve">
+    <value>Ideal Gas Heat Capacity (Cp)</value>
+  </data>
+  <data name="IdealGasHeatCapacityRatio" xml:space="preserve">
+    <value>Ideal Gas Heat Capacity Ratio</value>
+  </data>
 </root>

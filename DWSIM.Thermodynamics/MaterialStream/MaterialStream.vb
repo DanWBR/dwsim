@@ -1997,6 +1997,26 @@ Namespace Streams
                             value = Phases(3).Properties.freezingPoint.GetValueOrDefault
                         Case 249
                             value = Phases(3).Properties.freezingPointDepression.GetValueOrDefault
+                        Case 250
+                            value = cv.ConvertFromSI(su.enthalpy, Phases(2).Properties.idealGasHeatCapacityCp.GetValueOrDefault)
+                        Case 251
+                            value = cv.ConvertFromSI(su.enthalpy, Phases(3).Properties.idealGasHeatCapacityCp.GetValueOrDefault)
+                        Case 252
+                            value = cv.ConvertFromSI(su.enthalpy, Phases(4).Properties.idealGasHeatCapacityCp.GetValueOrDefault)
+                        Case 253
+                            value = cv.ConvertFromSI(su.enthalpy, Phases(1).Properties.idealGasHeatCapacityCp.GetValueOrDefault)
+                        Case 254
+                            value = cv.ConvertFromSI(su.enthalpy, Phases(7).Properties.idealGasHeatCapacityCp.GetValueOrDefault)
+                        Case 255
+                            value = cv.ConvertFromSI(su.enthalpy, Phases(2).Properties.idealGasHeatCapacityRatio.GetValueOrDefault)
+                        Case 256
+                            value = cv.ConvertFromSI(su.enthalpy, Phases(3).Properties.idealGasHeatCapacityRatio.GetValueOrDefault)
+                        Case 257
+                            value = cv.ConvertFromSI(su.enthalpy, Phases(4).Properties.idealGasHeatCapacityRatio.GetValueOrDefault)
+                        Case 258
+                            value = cv.ConvertFromSI(su.enthalpy, Phases(1).Properties.idealGasHeatCapacityRatio.GetValueOrDefault)
+                        Case 259
+                            value = cv.ConvertFromSI(su.enthalpy, Phases(7).Properties.idealGasHeatCapacityRatio.GetValueOrDefault)
                     End Select
 
                     Return value
@@ -2108,6 +2128,9 @@ Namespace Streams
                         proplist.Add("Diffusion Coefficient, Liquid Phase 1 / " + subst.Name)
                         proplist.Add("Diffusion Coefficient, Liquid Phase 2 / " + subst.Name)
                     Next
+                    For i = 250 To 259
+                        proplist.Add("PROP_MS_" + CStr(i))
+                    Next
                 Case PropertyType.WR
                     For i = 0 To 4
                         proplist.Add("PROP_MS_" + CStr(i))
@@ -2193,6 +2216,9 @@ Namespace Streams
                         proplist.Add("Diffusion Coefficient, Vapor Phase / " + subst.Name)
                         proplist.Add("Diffusion Coefficient, Liquid Phase 1 / " + subst.Name)
                         proplist.Add("Diffusion Coefficient, Liquid Phase 2 / " + subst.Name)
+                    Next
+                    For i = 250 To 259
+                        proplist.Add("PROP_MS_" + CStr(i))
                     Next
             End Select
 
@@ -2940,8 +2966,10 @@ Namespace Streams
                             Case 248
                                 value = su.temperature
                             Case 249
-                                value = su.deltaT
-                            Case Else
+                            value = su.deltaT
+                        Case 250, 251, 252, 253, 254
+                            value = su.enthalpy
+                        Case Else
                                 value = ""
                         End Select
 
