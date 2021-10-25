@@ -4591,6 +4591,15 @@ Namespace Streams
                         Case "Mass", "mass"
                             res.Add(Me.Phases(f).Properties.heatCapacityCv.GetValueOrDefault * 1000)
                     End Select
+                Case "idealgasheatcapacitycp"
+                    Select Case basis
+                        Case "Molar", "molar", "mole", "Mole"
+                            res.Add(Me.Phases(f).Properties.idealGasHeatCapacityCp.GetValueOrDefault * Me.PropertyPackage.AUX_MMM(phs))
+                        Case "Mass", "mass"
+                            res.Add(Me.Phases(f).Properties.idealGasHeatCapacityCp.GetValueOrDefault * 1000)
+                    End Select
+                Case "idealgasheatcapacityratio"
+                    res.Add(Me.Phases(f).Properties.idealGasHeatCapacityRatio.GetValueOrDefault())
                 Case "idealgasheatcapacity"
                     If f = 1 Then
                         res.Add(Me.PropertyPackage.AUX_CPm(PropertyPackages.Phase.Liquid, Me.Phases(0).Properties.temperature * 1000))
@@ -4823,7 +4832,7 @@ Namespace Streams
                     units = "m/s"
                 Case "heatofvaporization"
                     units = "kJ/mol"
-                Case "heatcapacity", "heatcapacitycp", "heatcapacitycv", "idealgasheatcapacity",
+                Case "heatcapacity", "heatcapacitycp", "heatcapacitycv", "idealgasheatcapacity", "idealgasheatcapacitycp",
                      "excessentropy", "entropy", "entropyf", "entropynf"
                     Select Case basis
                         Case "Molar", "molar", "mole", "Mole"
@@ -6887,7 +6896,8 @@ Namespace Streams
                     Dim propname = TranslateString(p)
                     Dim propval = GetSinglePhaseProp2(p, "mass", "Overall")
                     If propval.Count = 1 Then
-                        If propname.ToLower.Contains("heat capacity") Or propname.ToLower.Contains("enthalpy") Or propname.ToLower.Contains("entropy") Then
+                        If propname.ToLower.StartsWith("heat capacity") Or propname.ToLower.Equals("ideal gas heat capacity cp") Or
+                            propname.ToLower.Contains("enthalpy") Or propname.ToLower.Contains("entropy") Then
                             propval(0) /= 1000
                         End If
                         list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
@@ -6983,7 +6993,8 @@ Namespace Streams
                     Dim propname = TranslateString(p)
                     Dim propval = GetSinglePhaseProp2(p, "mass", "Vapor")
                     If propval.Count = 1 Then
-                        If propname.ToLower.Contains("heat capacity") Or propname.ToLower.Contains("enthalpy") Or propname.ToLower.Contains("entropy") Then
+                        If propname.ToLower.StartsWith("heat capacity") Or propname.ToLower.Equals("ideal gas heat capacity cp") Or
+                            propname.ToLower.Contains("enthalpy") Or propname.ToLower.Contains("entropy") Then
                             propval(0) /= 1000
                         End If
                         list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
@@ -7080,7 +7091,8 @@ Namespace Streams
                     Dim propname = TranslateString(p)
                     Dim propval = GetSinglePhaseProp2(p, "mass", "Liquid")
                     If propval.Count = 1 Then
-                        If propname.ToLower.Contains("heat capacity") Or propname.ToLower.Contains("enthalpy") Or propname.ToLower.Contains("entropy") Then
+                        If propname.ToLower.StartsWith("heat capacity") Or propname.ToLower.Equals("ideal gas heat capacity cp") Or
+                            propname.ToLower.Contains("enthalpy") Or propname.ToLower.Contains("entropy") Then
                             propval(0) /= 1000
                         End If
                         list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
@@ -7177,7 +7189,8 @@ Namespace Streams
                     Dim propname = TranslateString(p)
                     Dim propval = GetSinglePhaseProp2(p, "mass", "Liquid2")
                     If propval.Count = 1 Then
-                        If propname.ToLower.Contains("heat capacity") Or propname.ToLower.Contains("enthalpy") Or propname.ToLower.Contains("entropy") Then
+                        If propname.ToLower.StartsWith("heat capacity") Or propname.ToLower.Equals("ideal gas heat capacity cp") Or
+                            propname.ToLower.Contains("enthalpy") Or propname.ToLower.Contains("entropy") Then
                             propval(0) /= 1000
                         End If
                         list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
@@ -7273,7 +7286,8 @@ Namespace Streams
                     Dim propname = TranslateString(p)
                     Dim propval = GetSinglePhaseProp2(p, "mass", "Solid")
                     If propval.Count = 1 Then
-                        If propname.ToLower.Contains("heat capacity") Or propname.ToLower.Contains("enthalpy") Or propname.ToLower.Contains("entropy") Then
+                        If propname.ToLower.StartsWith("heat capacity") Or propname.ToLower.Equals("ideal gas heat capacity cp") Or
+                            propname.ToLower.Contains("enthalpy") Or propname.ToLower.Contains("entropy") Then
                             propval(0) /= 1000
                         End If
                         list.Add(New Tuple(Of ReportItemType, String())(ReportItemType.TripleColumn,
@@ -7443,6 +7457,12 @@ Namespace Streams
                 Else
                     Return su.molar_entropy
                 End If
+            ElseIf prop.ToLower.Equals("idealgasheatcapacitycp") Then
+                If basis.ToLower.Equals("mass") Then
+                    Return su.entropy
+                Else
+                    Return su.molar_entropy
+                End If
             ElseIf prop.ToLower.Equals("heatcapacityofliquid") Then
                 If basis.ToLower.Equals("mass") Then
                     Return su.entropy
@@ -7543,6 +7563,8 @@ Namespace Streams
                 Return "Excess Enthalpy"
             ElseIf s.ToLower.Equals("enthalpy") Then
                 Return "Enthalpy"
+            ElseIf s.ToLower.Equals("enthalpyf") Then
+                Return "Enthalpy (w/ Formation Term)"
             ElseIf s.ToLower.Equals("heatofvaporization") Then
                 Return "Heat of Vaporization"
             ElseIf s.ToLower.Equals("idealgasenthalpy") Then
@@ -7555,12 +7577,18 @@ Namespace Streams
                 Return "Excess Entropy"
             ElseIf s.ToLower.Equals("entropy") Then
                 Return "Entropy"
+            ElseIf s.ToLower.Equals("entropyf") Then
+                Return "Entropy (w/ Formation Term)"
             ElseIf s.ToLower.Equals("idealgasentropy") Then
                 Return "Ideal Gas Entropy"
             ElseIf s.ToLower.Equals("heatcapacitycp") Then
                 Return "Heat Capacity Cp"
             ElseIf s.ToLower.Equals("idealgasheatcapacity") Then
                 Return "Ideal Gas Heat Capacity"
+            ElseIf s.ToLower.Equals("idealgasheatcapacitycp") Then
+                Return "Ideal Gas Heat Capacity Cp"
+            ElseIf s.ToLower.Equals("idealgasheatcapacityratio") Then
+                Return "Ideal Gas Heat Capacity Ratio"
             ElseIf s.ToLower.Equals("heatcapacityofliquid") Then
                 Return "Liquid Heat Capacity"
             ElseIf s.ToLower.Equals("heatcapacityofsolid") Then

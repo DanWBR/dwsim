@@ -832,6 +832,7 @@ Namespace PropertyPackages
                     IObj?.Paragraphs.Add(String.Format("Joule-Thomson Coefficient: {0} K/Pa", p.Properties.jouleThomsonCoefficient))
 
                     CalcIdealGasCpCv(p, CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault)
+                    CalcEnthalpyEntropyF(p)
 
                 End If
             Next
@@ -866,6 +867,7 @@ Namespace PropertyPackages
                 CalcHelmholtzEnergy(p)
                 CalcDiffusionCoefficients(p)
                 CalcIdealGasCpCv(p, CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault)
+                CalcEnthalpyEntropyF(p)
 
             End If
 
@@ -1151,6 +1153,16 @@ Namespace PropertyPackages
 
             p.Properties.idealGasHeatCapacityCp = Cp
             p.Properties.idealGasHeatCapacityRatio = Cp / Cv
+
+        End Sub
+
+        Public Sub CalcEnthalpyEntropyF(p As IPhase)
+
+            Dim Hf = Me.AUX_HFm25(p.Compounds.Select(Function(c) c.Value.MoleFraction.GetValueOrDefault).ToArray())
+            Dim Sf = Me.AUX_SFm25(p.Compounds.Select(Function(c) c.Value.MoleFraction.GetValueOrDefault).ToArray())
+
+            p.Properties.enthalpyF = p.Properties.enthalpy + Hf
+            p.Properties.entropyF = p.Properties.entropy + Sf
 
         End Sub
 
@@ -5473,7 +5485,6 @@ redirect2:                  IObj?.SetCurrent()
             If mw <> 0.0# Then Return val / mw Else Return 0.0#
 
         End Function
-
 
         Public Overridable Function AUX_GFm25(ByVal Vx As Double()) As Double
 
@@ -10203,6 +10214,8 @@ Final3:
                 .Add("thermalConductivity")
                 .Add("heatCapacityCp")
                 .Add("heatCapacityCv")
+                .Add("idealGasHeatCapacityCp")
+                .Add("idealGasHeatCapacityRatio")
                 .Add("enthalpy")
                 .Add("entropy")
                 .Add("enthalpyF")
