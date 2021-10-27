@@ -494,7 +494,7 @@ Namespace PropertyPackages
         Private Function GetFlash() As Auxiliary.FlashAlgorithms.FlashAlgorithm
             If CurrentMaterialStream IsNot Nothing Then
                 If AUX_IS_SINGLECOMP(Phase.Mixture) Then
-                    Return New SingleCompFlash()
+                    Return New SingleCompFlash() With {.FlashSettings = FlashSettings}
                 Else
                     If FlashCalculationApproach = FlashCalculationApproachType.GibbsMinimization Then
                         Return New GibbsMinimizationMulti() With {.FlashSettings = FlashSettings}
@@ -543,13 +543,13 @@ Namespace PropertyPackages
                                     If CurrentMaterialStream.Flowsheet.FlowsheetOptions.ForceStreamPhase = ForcedPhase.None Then
                                         Return GetFlash()
                                     Else
-                                        Return New ForcedPhaseFlash() With {.ForcePhase = CurrentMaterialStream.Flowsheet.FlowsheetOptions.ForceStreamPhase}
+                                        Return New ForcedPhaseFlash() With {.FlashSettings = FlashSettings, .ForcePhase = CurrentMaterialStream.Flowsheet.FlowsheetOptions.ForceStreamPhase}
                                     End If
                                 Else
                                     Return GetFlash()
                                 End If
                             Case Else
-                                Return New ForcedPhaseFlash() With {.ForcePhase = CurrentMaterialStream.ForcePhase}
+                                Return New ForcedPhaseFlash() With {.FlashSettings = FlashSettings, .ForcePhase = CurrentMaterialStream.ForcePhase}
                         End Select
                     Else
                         Return GetFlash()
