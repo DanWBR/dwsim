@@ -225,10 +225,9 @@
       <Name>DWSIM.Interfaces</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\DWSIM.Math\DWSIM.MathOps.vbproj">
-      <Project>{fdfb92de-d189-49dc-91cc-60ee78d1356c}</Project>
-      <Name>DWSIM.MathOps</Name>
-      <Private>False</Private>
+    <ProjectReference Include="..\DWSIM.Logging\DWSIM.Logging.csproj">
+      <Project>{b176a143-2822-4e7c-9280-cf4a615e1c35}</Project>
+      <Name>DWSIM.Logging</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.SharedClasses\DWSIM.SharedClasses.vbproj">
       <Project>{30e167d2-5b5a-453a-a92c-18ff3bbb6691}</Project>

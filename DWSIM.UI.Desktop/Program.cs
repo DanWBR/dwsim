@@ -228,7 +228,7 @@ namespace DWSIM.UI.Desktop
             }
             catch (Exception ex)
             {
-                Logging.Logger.LogError("CPUI Initialization Error", ex);
+                Logging.Logger.LogError("CPUI Error", ex);
                 Console.WriteLine();
                 Console.WriteLine();
                 Console.WriteLine("APP CRASH!!!");
@@ -244,7 +244,14 @@ namespace DWSIM.UI.Desktop
                     configfiledir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "DWSIM Application Data");
                 }
                 if (!Directory.Exists(configfiledir)) Directory.CreateDirectory(configfiledir);
-                File.WriteAllText(System.IO.Path.Combine(configfiledir, "lasterror.txt"), "Output from last app crash:\n\n" + ex.ToString());
+                if (ex.InnerException != null)
+                {
+                    File.WriteAllText(System.IO.Path.Combine(configfiledir, "lasterror.txt"), ex.InnerException.ToString());
+                }
+                else
+                {
+                    File.WriteAllText(System.IO.Path.Combine(configfiledir, "lasterror.txt"), ex.ToString());
+                }
             }
             return null;
         }

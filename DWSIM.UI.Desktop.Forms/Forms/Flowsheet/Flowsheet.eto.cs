@@ -1014,33 +1014,33 @@ namespace DWSIM.UI.Forms
             btnmSnapToGrid.CheckedChanged += (sender, e) => ActSnapToGrid.Invoke();
             btnmMultiSelect.CheckedChanged += (sender, e) => ActMultiSelect.Invoke();
 
-            var btnmZoomDefault = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Default Zoom", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-zoom_to_actual_size_filled.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var btnmAlignLefts = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Align Lefts", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_left.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var btnmAlignCenters = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Align Centers", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_center.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var btnmAlignRights = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Align Rights", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_right.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var btnmAlignTops = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Align Tops", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_top.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var btnmAlignMiddles = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Align Middles", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_middle.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var btnmAlignBottoms = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Align Bottoms", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_bottom.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var btnmEqHoriz = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Equalize Horizontally", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_middle1.png", this.GetType().Assembly)).WithSize(16, 16) };
-            var btnmEqVert = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, ToolTip = "Equalize Vertically", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_center1.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var btnmZoomDefault = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Tag = "Default Zoom", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-zoom_to_actual_size_filled.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var btnmAlignLefts = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Tag = "Align Lefts", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_left.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var btnmAlignCenters = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Tag = "Align Centers", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_center.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var btnmAlignRights = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Tag = "Align Rights", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_right.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var btnmAlignTops = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Tag = "Align Tops", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_top.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var btnmAlignMiddles = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Tag = "Align Middles", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_middle.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var btnmAlignBottoms = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Tag = "Align Bottoms", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_bottom.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var btnmEqHoriz = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Tag = "Equalize Horizontally", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_middle1.png", this.GetType().Assembly)).WithSize(16, 16) };
+            var btnmEqVert = new Eto.Forms.Button { ImagePosition = ButtonImagePosition.Overlay, Height = 24, Width = 24, Tag = "Equalize Vertically", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "shape_align_center1.png", this.GetType().Assembly)).WithSize(16, 16) };
 
-            ActAlignLefts = () => { AlignObjects(btnmAlignLefts); };
-            ActAlignCenters = () => { AlignObjects(btnmAlignCenters); };
-            ActAlignRights = () => { AlignObjects(btnmAlignRights); };
-            ActAlignTops = () => { AlignObjects(btnmAlignTops); };
-            ActAlignMiddles = () => { AlignObjects(btnmAlignMiddles); };
-            ActAlignBottoms = () => { AlignObjects(btnmAlignBottoms); };
-            ActVertAlign = () => { AlignObjects(btnmEqVert); };
-            ActHorizAlign = () => { AlignObjects(btnmEqHoriz); };
+            ActAlignLefts = () => { Application.Instance.Invoke(() => AlignObjects(btnmAlignLefts)); };
+            ActAlignCenters = () => { Application.Instance.Invoke(() => AlignObjects(btnmAlignCenters)); };
+            ActAlignRights = () => { Application.Instance.Invoke(() => AlignObjects(btnmAlignRights)); };
+            ActAlignTops = () => { Application.Instance.Invoke(() => AlignObjects(btnmAlignTops)); };
+            ActAlignMiddles = () => { Application.Instance.Invoke(() => AlignObjects(btnmAlignMiddles)); };
+            ActAlignBottoms = () => { Application.Instance.Invoke(() => AlignObjects(btnmAlignBottoms)); };
+            ActVertAlign = () => { Application.Instance.Invoke(() => AlignObjects(btnmEqVert)); };
+            ActHorizAlign = () => { Application.Instance.Invoke(() => AlignObjects(btnmEqHoriz)); };
 
-            ActAlignLefts = () => { AlignObjects(btnmAlignLefts); };
-            ActAlignCenters = () => { AlignObjects(btnmAlignCenters); };
-            ActAlignRights = () => { AlignObjects(btnmAlignRights); };
-            ActAlignTops = () => { AlignObjects(btnmAlignTops); };
-            ActAlignMiddles = () => { AlignObjects(btnmAlignMiddles); };
-            ActAlignBottoms = () => { AlignObjects(btnmAlignBottoms); };
-            ActVertAlign = () => { AlignObjects(btnmEqVert); };
-            ActHorizAlign = () => { AlignObjects(btnmEqHoriz); };
+            ActAlignLefts = () => { Application.Instance.Invoke(() => AlignObjects(btnmAlignLefts)); };
+            ActAlignCenters = () => { Application.Instance.Invoke(() => AlignObjects(btnmAlignCenters)); };
+            ActAlignRights = () => { Application.Instance.Invoke(() => AlignObjects(btnmAlignRights)); };
+            ActAlignTops = () => { Application.Instance.Invoke(() => AlignObjects(btnmAlignTops)); };
+            ActAlignMiddles = () => { Application.Instance.Invoke(() => AlignObjects(btnmAlignMiddles)); };
+            ActAlignBottoms = () => { Application.Instance.Invoke(() => AlignObjects(btnmAlignBottoms)); };
+            ActVertAlign = () => { Application.Instance.Invoke(() => AlignObjects(btnmEqVert)); };
+            ActHorizAlign = () => { Application.Instance.Invoke(() => AlignObjects(btnmEqHoriz)); };
 
             btnmZoomOut.Click += (sender, e) => ActZoomOut.Invoke();
             btnmZoomIn.Click += (sender, e) => ActZoomIn.Invoke();
@@ -2467,52 +2467,49 @@ namespace DWSIM.UI.Forms
 
         public void AlignObjects(Button tsb)
         {
-            Drawing.SkiaSharp.GraphicsSurface.AlignDirection direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.Centers;
-            string text = "";
-            if (GlobalSettings.Settings.RunningPlatform() == s.Platform.Mac)
+            try
             {
-                text = tsb.Text;
+                Drawing.SkiaSharp.GraphicsSurface.AlignDirection direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.Centers;
+                string text = tsb.Tag.ToString();
+                if (text.Contains("Lefts"))
+                {
+                    direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.Lefts;
+                }
+                else if (text.Contains("Centers"))
+                {
+                    direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.Centers;
+                }
+                else if (text.Contains("Rights"))
+                {
+                    direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.Rights;
+                }
+                else if (text.Contains("Tops"))
+                {
+                    direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.Tops;
+                }
+                else if (text.Contains("Middles"))
+                {
+                    direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.Middles;
+                }
+                else if (text.Contains("Bottoms"))
+                {
+                    direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.Bottoms;
+                }
+                else if (text.Contains("Vertical"))
+                {
+                    direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.EqualizeVertical;
+                }
+                else if (text.Contains("Horizontal"))
+                {
+                    direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.EqualizeHorizontal;
+                }
+                FlowsheetControl.FlowsheetSurface.AlignSelectedObjects(direction);
+                FlowsheetControl.Invalidate();
             }
-            else
+            catch (Exception ex)
             {
-                text = tsb.ToolTip;
+                Logging.Logger.LogError("Alignment Command Error", ex);
             }
-            if (text.Contains("Lefts"))
-            {
-                direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.Lefts;
-            }
-            else if (text.Contains("Centers"))
-            {
-                direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.Centers;
-            }
-            else if (text.Contains("Rights"))
-            {
-                direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.Rights;
-            }
-            else if (text.Contains("Tops"))
-            {
-                direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.Tops;
-            }
-            else if (text.Contains("Middles"))
-            {
-                direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.Middles;
-            }
-            else if (text.Contains("Bottoms"))
-            {
-                direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.Bottoms;
-            }
-            else if (text.Contains("Vertical"))
-            {
-                direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.EqualizeVertical;
-            }
-            else if (text.Contains("Horizontal"))
-            {
-                direction = Drawing.SkiaSharp.GraphicsSurface.AlignDirection.EqualizeHorizontal;
-            }
-
-            FlowsheetControl.FlowsheetSurface.AlignSelectedObjects(direction);
-            FlowsheetControl.Invalidate();
-
         }
 
     }
