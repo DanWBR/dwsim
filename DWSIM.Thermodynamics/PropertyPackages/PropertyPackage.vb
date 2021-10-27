@@ -1451,10 +1451,11 @@ Namespace PropertyPackages
 
             End If
 
-            'For i = 0 To n
-            '    If K(i) < 0.0000000001 Then K(i) = 0.0000000001
-            '    If K(i) > 1.0E+20 Then K(i) = 1.0E+20
-            'Next
+            For i = 0 To n
+                If K(i) = 0.0 Then K(i) = 1.0E-20
+                'If K(i) < 0.0000000001 Then K(i) = 0.0000000001
+                'If K(i) > 1.0E+20 Then K(i) = 1.0E+20
+            Next
 
             IObj?.Paragraphs.Add(String.Format("<h2>Results</h2>"))
 

@@ -602,6 +602,7 @@ out:        d2 = Date.Now
                 Do
                     Vp(i) = PP.AUX_PVAPi(i, T)
                     Ki(i) = Vp(i) / P
+                    If Ki(i) = 0.0 Then Ki(i) = 1.0E-20
                     i += 1
                 Loop Until i = n + 1
             Else

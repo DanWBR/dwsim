@@ -149,14 +149,14 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             If Not ReuseKI Then
                 Ki = Vp.MultiplyConstY(1 / P)
                 For i = 0 To n
-                    IObj?.SetCurrent()
                     If Double.IsNaN(Ki(i)) Or Double.IsInfinity(Ki(i)) Then Ki(i) = 1.0E+20
+                    If Ki(i) = 0.0 Then Ki(i) = 1.0E-20
                 Next
             Else
                 For i = 0 To n
-                    IObj?.SetCurrent()
                     Ki(i) = PrevKi(i)
                     If Double.IsNaN(Ki(i)) Or Double.IsInfinity(Ki(i)) Then Ki(i) = 1.0E+20
+                    If Ki(i) = 0.0 Then Ki(i) = 1.0E-20
                 Next
             End If
 
