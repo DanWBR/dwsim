@@ -900,7 +900,6 @@ Partial Class FormMain
     Friend WithEvents tsbInspector As ToolStripButton
     Friend WithEvents tsFileSeparator As ToolStripSeparator
     Friend WithEvents tsFolderSeparator As ToolStripSeparator
-    Friend WithEvents DownloadSupplementarySoftwareToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ReaktoroToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents NNUOToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PNUOToolStripMenuItem As ToolStripMenuItem
@@ -909,4 +908,5 @@ Partial Class FormMain
     Friend WithEvents DTLToolStripMenuItem As ToolStripMenuItem
     Public WithEvents PainelDeBoasvindasToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PsycrometrySimulationTemplateToolStripMenuItem As ToolStripMenuItem
+    Public WithEvents DownloadSupplementarySoftwareToolStripMenuItem As ToolStripMenuItem
 End Class
