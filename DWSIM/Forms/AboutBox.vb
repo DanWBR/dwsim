@@ -146,10 +146,10 @@ Public Class AboutBox
 
         'get DWSIM components' versions
 
-        Dim assnames = New String() {"DWSIM.exe", "DWSIM.Drawing.SkiaSharp.dll", "DWSIM.ExtensionMethods.dll",
-                                     "DWSIM.FlowsheetSolver.dll", "DWSIM.GlobalSettings.dll", "DWSIM.Interfaces.dll", "DWSIM.MathOps.dll",
-                                     "DWSIM.SharedClasses.dll", "DWSIM.Thermodynamics.dll",
-                                     "DWSIM.UnitOperations.dll", "DWSIM.XMLSerializer.dll"}
+        Dim assnames = New String() {"DWSIM.exe", "DWSIM.Drawing.SkiaSharp.dll", "DWSIM.DynamicsManager.dll",
+            "DWSIM.ExtensionMethods.dll", "DWSIM.FileStorage.dll", "DWSIM.FlowsheetSolver.dll", "DWSIM.GlobalSettings.dll",
+            "DWSIM.Interfaces.dll", "DWSIM.MathOps.dll", "DWSIM.SharedClasses.dll", "DWSIM.Thermodynamics.dll",
+            "DWSIM.UnitOperations.dll", "DWSIM.XMLSerializer.dll"}
 
         dgvDWSIMComponents.Rows.Clear()
         For Each assn In assnames

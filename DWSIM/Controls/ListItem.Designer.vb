@@ -31,7 +31,7 @@ Partial Class ListItem
         '
         'Image
         '
-        Me.Image.Location = New System.Drawing.Point(38, 6)
+        Me.Image.Location = New System.Drawing.Point(49, 6)
         Me.Image.Margin = New System.Windows.Forms.Padding(6)
         Me.Image.Name = "Image"
         Me.Image.Size = New System.Drawing.Size(32, 32)
@@ -47,7 +47,7 @@ Partial Class ListItem
         Me.lblName.Location = New System.Drawing.Point(6, 44)
         Me.lblName.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.lblName.Name = "lblName"
-        Me.lblName.Size = New System.Drawing.Size(92, 24)
+        Me.lblName.Size = New System.Drawing.Size(120, 24)
         Me.lblName.TabIndex = 1
         Me.lblName.Text = "Label1"
         Me.lblName.TextAlign = System.Drawing.ContentAlignment.TopCenter
@@ -62,7 +62,7 @@ Partial Class ListItem
         Me.DoubleBuffered = True
         Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "ListItem"
-        Me.Size = New System.Drawing.Size(104, 75)
+        Me.Size = New System.Drawing.Size(132, 75)
         CType(Me.Image, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 

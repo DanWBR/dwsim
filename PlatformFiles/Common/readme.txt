@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 6.7.0
+Version 6.7.1
 Copyright (c) 2017-2021 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,17 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim6/commits/windows
+
+Version 6.7.1
+
+Author              Description
+Daniel Medeiros     Exposing Activity/Fugacity/Diffusion coefficients from compounds in Material Streams
+Daniel Medeiros     Added Ideal Gas Heat Capacity as a Phase property
+Daniel Medeiros     Fixed issue 213: Mac OS - Binary Enveloppe failed
+Daniel Medeiros     Fixed issue 214: Mac OS - Objects Alignement button get crash
+Daniel Medeiros     Fixed issue 216: Carbon Combustion sample cannot be calculated
+Daniel Medeiros     Fixed issue with saturation condition calculations
+Daniel Medeiros     Fixed duplicate name when adding objects to the flowsheet
 
 Version 6.7.0
 

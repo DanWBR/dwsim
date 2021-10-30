@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("File Storage Library for DWSIM")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("File Storage Library for DWSIM")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("DWSIM.FileStorage")]
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("6.7.0.0")]
-[assembly: AssemblyFileVersion("6.7.0.0")]
+[assembly: AssemblyVersion("6.7.1.0")]
+[assembly: AssemblyFileVersion("6.7.1.0")]

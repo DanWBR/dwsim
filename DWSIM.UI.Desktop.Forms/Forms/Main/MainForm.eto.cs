@@ -151,7 +151,8 @@ namespace DWSIM.UI
             var link3 = new LinkButton { Text = "Create New", Width = (int)(140 * sf), Font = boldfont2 };
             pccreator.Add(link3, dx2, (int)(100 * sf - rfh - dy));
 
-            link3.Click += (sender, e) => {
+            link3.Click += (sender, e) =>
+            {
                 var form = new Desktop.Editors.CompoundCreatorWizard(null);
                 form.SetupAndDisplayPage(1);
             };
@@ -194,7 +195,8 @@ namespace DWSIM.UI
                 {
                     Process.Start(basepath + Path.DirectorySeparatorChar + "docs" + Path.DirectorySeparatorChar + "user_guide.pdf");
                 }
-                catch (Exception ex) {
+                catch (Exception ex)
+                {
                     MessageBox.Show(ex.Message, "Error opening User Guide", MessageBoxButtons.OK, MessageBoxType.Error, MessageBoxDefaultButton.OK);
                 }
             };
@@ -374,7 +376,7 @@ namespace DWSIM.UI
                     var si = (TreeGridItem)MostRecentList.SelectedItem;
                     var data = (Dictionary<string, string>)si.Tag;
                     LoadSimulation(data["Path"]);
-                    MostRecentList.UnselectAll();
+                    //MostRecentList.UnselectAll();
                 };
             };
 
@@ -383,7 +385,7 @@ namespace DWSIM.UI
                 if (SampleList.SelectedIndex >= 0)
                 {
                     LoadSimulation(SampleList.SelectedKey);
-                    SampleList.SelectedValue = null;
+                   // SampleList.SelectedValue = null;
                 };
             };
 
@@ -508,7 +510,7 @@ namespace DWSIM.UI
             var hitem4 = new ButtonMenuItem { Text = "Go to DWSIM Website".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png")) };
             hitem4.Click += (sender, e) =>
             {
-               "http://dwsim.inforside.com.br".OpenURL();
+                "http://dwsim.inforside.com.br".OpenURL();
             };
 
             // create menu
@@ -572,102 +574,115 @@ namespace DWSIM.UI
         void LoadSimulation(string path)
         {
 
-            Forms.Flowsheet form = null;
-
-            Application.Instance.Invoke(() =>
+            Task.Factory.StartNew(() => Task.Delay(1000).Wait()).ContinueWith((td) =>
             {
-                form = new Forms.Flowsheet();
-            });
 
-            OpenForms += 1;
-            form.Closed += (sender2, e2) =>
-            {
-                OpenForms -= 1;
-            };
+                Forms.Flowsheet form = null;
 
-            AddUserCompounds(form.FlowsheetObject);
+                LoadingData loadingdialog = null;
 
-            var loadingdialog = new LoadingData();
-            loadingdialog.loadingtext.Text = "Please wait, loading data...\n(" + Path.GetFileNameWithoutExtension(path) + ")";
-            loadingdialog.Show();
-
-            Task.Factory.StartNew(() =>
-            {
-                if (System.IO.Path.GetExtension(path).ToLower() == ".dwxmz")
-                {
-                    var xdoc = form.FlowsheetObject.LoadZippedXML(path);
-                }
-                else if (System.IO.Path.GetExtension(path).ToLower() == ".dwxml")
-                {
-                    form.FlowsheetObject.LoadFromXML(XDocument.Load(path));
-                }
-                else if (System.IO.Path.GetExtension(path).ToLower() == ".xml")
-                {
-                    form.FlowsheetObject.LoadFromMXML(XDocument.Load(path));
-                }
-                form.FlowsheetObject.FilePath = path;
-                form.FlowsheetObject.FlowsheetOptions.FilePath = path;
-            }).ContinueWith((t) =>
-            {
                 Application.Instance.Invoke(() =>
                 {
-                    loadingdialog.Close();
-                    var surface = (DWSIM.Drawing.SkiaSharp.GraphicsSurface)form.FlowsheetObject.GetSurface();
-                    surface.ZoomAll(ClientSize.Width, ClientSize.Height);
-                    surface.ZoomAll(ClientSize.Width, ClientSize.Height);
-                    form.FlowsheetObject.UpdateInterface();
-                    form.Title = form.FlowsheetObject.Options.SimulationName + " [" + form.FlowsheetObject.Options.FilePath + "]";
-                    form.Show();
-                    if (!GlobalSettings.Settings.MostRecentFiles.Contains(path))
+                    form = new Forms.Flowsheet();
+
+                    AddUserCompounds(form.FlowsheetObject);
+
+                    form.Closed += (sender2, e2) =>
                     {
-                        GlobalSettings.Settings.MostRecentFiles.Add(path);
-                        var ds = (TreeGridItemCollection)MostRecentList.DataStore;
-                        var li = new TreeGridItem();
-                        var data = new Dictionary<string, string>();
-                        if (Path.GetExtension(path).ToLower() == ".dwxmz")
+                        OpenForms -= 1;
+                    };
+
+                    OpenForms += 1;
+
+                    Task.Factory.StartNew(() =>
+                    {
+                        if (System.IO.Path.GetExtension(path).ToLower() == ".dwxmz")
                         {
-                            data = SharedClasses.Utility.GetSimulationFileDetails(FlowsheetBase.FlowsheetBase.LoadZippedXMLDoc(path));
+                            var xdoc = form.FlowsheetObject.LoadZippedXML(path);
                         }
-                        else
+                        else if (System.IO.Path.GetExtension(path).ToLower() == ".dwxml")
                         {
-                            data = SharedClasses.Utility.GetSimulationFileDetails(XDocument.Load(path));
+                            form.FlowsheetObject.LoadFromXML(XDocument.Load(path));
                         }
-                        li.Tag = data;
-                        data.Add("Path", path);
-                        DateTime dt;
-                        if (data.ContainsKey("SavedOn"))
+                        else if (System.IO.Path.GetExtension(path).ToLower() == ".xml")
                         {
-                            dt = DateTime.Parse(data["SavedOn"]);
+                            form.FlowsheetObject.LoadFromMXML(XDocument.Load(path));
                         }
-                        else
+                        form.FlowsheetObject.FilePath = path;
+                        form.FlowsheetObject.FlowsheetOptions.FilePath = path;
+                    }).ContinueWith((t) =>
+                    {
+                        Application.Instance.Invoke(() =>
                         {
-                            dt = File.GetLastWriteTime(path);
-                        }
-                        string dwsimver, osver;
-                        if (data.ContainsKey("DWSIMVersion"))
-                        {
-                            dwsimver = data["DWSIMVersion"];
-                        }
-                        else
-                        {
-                            dwsimver = "N/A";
-                        }
-                        if (data.ContainsKey("OSInfo"))
-                        {
-                            osver = data["OSInfo"];
-                        }
-                        else
-                        {
-                            osver = "N/A";
-                        }
-                        li.Values = new object[] {new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-workflow.png")).WithSize(16, 16),
+                            loadingdialog.Close();
+                            var surface = (DWSIM.Drawing.SkiaSharp.GraphicsSurface)form.FlowsheetObject.GetSurface();
+                            surface.ZoomAll(ClientSize.Width, ClientSize.Height);
+                            surface.ZoomAll(ClientSize.Width, ClientSize.Height);
+                            form.FlowsheetObject.UpdateInterface();
+                            form.Title = form.FlowsheetObject.Options.SimulationName + " [" + form.FlowsheetObject.Options.FilePath + "]";
+                            form.Show();
+                            if (!GlobalSettings.Settings.MostRecentFiles.Contains(path))
+                            {
+                                GlobalSettings.Settings.MostRecentFiles.Add(path);
+                                var ds = (TreeGridItemCollection)MostRecentList.DataStore;
+                                var li = new TreeGridItem();
+                                var data = new Dictionary<string, string>();
+                                if (Path.GetExtension(path).ToLower() == ".dwxmz")
+                                {
+                                    data = SharedClasses.Utility.GetSimulationFileDetails(FlowsheetBase.FlowsheetBase.LoadZippedXMLDoc(path));
+                                }
+                                else
+                                {
+                                    data = SharedClasses.Utility.GetSimulationFileDetails(XDocument.Load(path));
+                                }
+                                li.Tag = data;
+                                data.Add("Path", path);
+                                DateTime dt;
+                                if (data.ContainsKey("SavedOn"))
+                                {
+                                    dt = DateTime.Parse(data["SavedOn"]);
+                                }
+                                else
+                                {
+                                    dt = File.GetLastWriteTime(path);
+                                }
+                                string dwsimver, osver;
+                                if (data.ContainsKey("DWSIMVersion"))
+                                {
+                                    dwsimver = data["DWSIMVersion"];
+                                }
+                                else
+                                {
+                                    dwsimver = "N/A";
+                                }
+                                if (data.ContainsKey("OSInfo"))
+                                {
+                                    osver = data["OSInfo"];
+                                }
+                                else
+                                {
+                                    osver = "N/A";
+                                }
+                                li.Values = new object[] {new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-workflow.png")).WithSize(16, 16),
                             System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Path.GetFileNameWithoutExtension(path)),
                             dt, dwsimver, osver};
-                        ds.Add(li);
-                        MostRecentList.ReloadData();
-                    }
-                    form.FlowsheetObject.ProcessScripts(Interfaces.Enums.Scripts.EventType.SimulationOpened, Interfaces.Enums.Scripts.ObjectType.Simulation, "");
+                                ds.Add(li);
+                                MostRecentList.ReloadData();
+                            }
+                            form.FlowsheetObject.ProcessScripts(Interfaces.Enums.Scripts.EventType.SimulationOpened, Interfaces.Enums.Scripts.ObjectType.Simulation, "");
+                        });
+                    });
+
+                    loadingdialog = new LoadingData();
+                    loadingdialog.loadingtext.Text = "Please wait, loading data...\n(" + Path.GetFileNameWithoutExtension(path) + ")";
+                    loadingdialog.Show();
+
                 });
+
+                
+
+
+
             });
         }
 

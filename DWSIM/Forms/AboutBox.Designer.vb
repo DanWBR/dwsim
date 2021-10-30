@@ -271,6 +271,7 @@ Partial Class AboutBox
         Me.FaTabStripItem5.Controls.Add(Me.Label15)
         Me.FaTabStripItem5.IsDrawn = True
         Me.FaTabStripItem5.Name = "FaTabStripItem5"
+        Me.FaTabStripItem5.Selected = True
         resources.ApplyResources(Me.FaTabStripItem5, "FaTabStripItem5")
         '
         'Button2

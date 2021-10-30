@@ -1,10 +1,9 @@
-Version 6.7.0
+Version 6.7.1
 
-- IronPython Interactive Console (Classic UI)
-- Live View for Dynamic Integrator (Classic UI)
-- Fixed issues with Nested Loops Flash
-- Fixed Equilibrium Reactor model
-- Fixed issues with Pipe Hydraulic Profile editor (Classic UI)
-- Fixed Classic UI HiDPI layout
-- Fixed issue 207: Mix liquid and liquid1 properties different even for single liquid
-- Fixed issue 199: Minor issue with Splitter object
+- Exposing Activity/Fugacity/Diffusion coefficients from compounds in Material Streams
+- Added Ideal Gas Heat Capacity as a Phase property
+- Fixed issue 213: Mac OS - Binary Enveloppe failed
+- Fixed issue 214: Mac OS - Objects Alignement button get crash
+- Fixed issue 216: Carbon Combustion sample cannot be calculated
+- Fixed issue with saturation condition calculations
+- Fixed duplicate name when adding objects to the flowsheet
