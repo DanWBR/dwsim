@@ -72,7 +72,9 @@ Namespace Reactors
                 Throw New Exception(FlowSheet.GetTranslatedString("Nohcorrentedematriac15"))
             ElseIf Not Me.GraphicObject.OutputConnectors(1).IsAttached Then
                 Throw New Exception(FlowSheet.GetTranslatedString("Nohcorrentedematriac15"))
-            ElseIf Not Me.GraphicObject.InputConnectors(1).IsAttached Then
+                'ElseIf Not Me.GraphicObject.InputConnectors(1).IsAttached Then
+                '    Throw New Exception(FlowSheet.GetTranslatedString("Nohcorrentedeenerg17"))
+            ElseIf Not Me.GraphicObject.OutputConnectors(2).IsAttached Then
                 Throw New Exception(FlowSheet.GetTranslatedString("Nohcorrentedeenerg17"))
             End If
 
@@ -670,8 +672,8 @@ Namespace Reactors
             End If
 
             'energy stream - update energy flow value (kW)
-            With GetInletEnergyStream(1)
-                .EnergyFlow = Me.DeltaQ.GetValueOrDefault
+            With GetOutletEnergyStream(2)
+                .EnergyFlow = -Me.DeltaQ.GetValueOrDefault
                 .GraphicObject.Calculated = True
             End With
 
@@ -681,11 +683,6 @@ Namespace Reactors
 
         Public Overrides Sub DeCalculate()
 
-            'If Not Me.GraphicObject.InputConnectors(0).IsAttached Then Throw New Exception(Flowsheet.GetTranslatedString("Nohcorrentedematriac10"))
-            'If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then Throw New Exception(Flowsheet.GetTranslatedString("Nohcorrentedematriac11"))
-            'If Not Me.GraphicObject.OutputConnectors(1).IsAttached Then Throw New Exception(Flowsheet.GetTranslatedString("Nohcorrentedematriac11"))
-            'Dim ems As DWSIM.SimulationObjects.Streams.MaterialStream = form.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
-            'Dim W As Double = ems.Phases(0).Properties.massflow.GetValueOrDefault
             Dim j As Integer = 0
 
             Dim ms As MaterialStream
