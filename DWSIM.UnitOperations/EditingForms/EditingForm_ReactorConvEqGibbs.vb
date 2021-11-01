@@ -18,7 +18,7 @@ Public Class EditingForm_ReactorConvEqGibbs
 
     Dim eeditor As EditingForm_Gibbs_ElementMatrixEditor
 
-    Private Sub EditingForm_HeaterCooler_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub EditingForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Me.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
 
@@ -106,7 +106,12 @@ Public Class EditingForm_ReactorConvEqGibbs
             cbEnergy.Items.Clear()
             cbEnergy.Items.AddRange(eslist)
 
-            If .GraphicObject.InputConnectors(1).IsAttached Then cbEnergy.SelectedItem = .GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Tag
+            If TypeOf SimObject Is Reactors.Reactor_Conversion Then
+                If .GraphicObject.OutputConnectors(2).IsAttached Then cbEnergy.SelectedItem = .GraphicObject.OutputConnectors(2).AttachedConnector.AttachedTo.Tag
+            Else
+                If .GraphicObject.InputConnectors(1).IsAttached Then cbEnergy.SelectedItem = .GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Tag
+            End If
+
 
             'parameters
 
@@ -385,7 +390,12 @@ Public Class EditingForm_ReactorConvEqGibbs
 
     Private Sub btnDisconnectEnergy_Click(sender As Object, e As EventArgs) Handles btnDisconnectEnergy.Click
         If cbEnergy.SelectedItem IsNot Nothing Then
-            SimObject.FlowSheet.DisconnectObjects(SimObject.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom, SimObject.GraphicObject)
+            If TypeOf SimObject Is Reactors.Reactor_Conversion Then
+                SimObject.FlowSheet.DisconnectObjects(SimObject.GraphicObject, SimObject.GraphicObject.OutputConnectors(2).AttachedConnector.AttachedTo)
+            Else
+                SimObject.FlowSheet.DisconnectObjects(SimObject.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom, SimObject.GraphicObject)
+            End If
+
             cbEnergy.SelectedItem = Nothing
         End If
     End Sub
@@ -506,20 +516,35 @@ Public Class EditingForm_ReactorConvEqGibbs
                 Dim gobj = SimObject.GraphicObject
                 Dim flowsheet = SimObject.FlowSheet
 
-                If flowsheet.GetFlowsheetSimulationObject(text).GraphicObject.InputConnectors(0).IsAttached Then
-                    MessageBox.Show(flowsheet.GetTranslatedString("Todasasconexespossve"), flowsheet.GetTranslatedString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+                If TypeOf SimObject Is Reactors.Reactor_Conversion Then
+                    If flowsheet.GetFlowsheetSimulationObject(text).GraphicObject.InputConnectors(0).IsAttached Then
+                        MessageBox.Show(flowsheet.GetTranslatedString("Todasasconexespossve"), flowsheet.GetTranslatedString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Else
+                        Try
+                            If gobj.OutputConnectors(2).IsAttached Then flowsheet.DisconnectObjects(gobj, gobj.OutputConnectors(2).AttachedConnector.AttachedTo)
+                            flowsheet.ConnectObjects(gobj, flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, 2, 0)
+                        Catch ex As Exception
+                            MessageBox.Show(ex.Message, flowsheet.GetTranslatedString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        End Try
+                    End If
                 Else
-                    Try
-                        If gobj.InputConnectors(1).IsAttached Then flowsheet.DisconnectObjects(gobj, gobj.InputConnectors(1).AttachedConnector.AttachedTo)
-                        flowsheet.ConnectObjects(flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, gobj, 0, 1)
-                    Catch ex As Exception
-                        MessageBox.Show(ex.Message, flowsheet.GetTranslatedString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    End Try
+                    If flowsheet.GetFlowsheetSimulationObject(text).GraphicObject.InputConnectors(0).IsAttached Then
+                        MessageBox.Show(flowsheet.GetTranslatedString("Todasasconexespossve"), flowsheet.GetTranslatedString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Else
+                        Try
+                            If gobj.InputConnectors(1).IsAttached Then flowsheet.DisconnectObjects(gobj, gobj.InputConnectors(1).AttachedConnector.AttachedTo)
+                            flowsheet.ConnectObjects(flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, gobj, 0, 1)
+                        Catch ex As Exception
+                            MessageBox.Show(ex.Message, flowsheet.GetTranslatedString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        End Try
+                    End If
                 End If
                 UpdateInfo()
             End If
 
-        End If
+
+
+            End If
 
     End Sub
 
@@ -605,7 +630,7 @@ Public Class EditingForm_ReactorConvEqGibbs
 
     End Sub
 
-    Private Sub btnCreateAndConnectInlet1_Click(sender As Object, e As EventArgs) Handles btnCreateAndConnectInlet1.Click, btnCreateAndConnectOutlet1.Click, btnCreateAndConnectOutlet2.Click, btnCreateAndConnectEnergy.Click
+    Private Sub btnCreateAndConnect_Click(sender As Object, e As EventArgs) Handles btnCreateAndConnectInlet1.Click, btnCreateAndConnectOutlet1.Click, btnCreateAndConnectOutlet2.Click, btnCreateAndConnectEnergy.Click
 
         Dim sgobj = SimObject.GraphicObject
         Dim fs = SimObject.FlowSheet
@@ -626,17 +651,24 @@ Public Class EditingForm_ReactorConvEqGibbs
 
         ElseIf sender Is btnCreateAndConnectOutlet2 Then
 
-            Dim obj = fs.AddObject(ObjectType.MaterialStream, sgobj.OutputConnectors(1).Position.X + 30, sgobj.OutputConnectors(1).Position.Y, "")
+            Dim obj = fs.AddObject(ObjectType.MaterialStream, sgobj.OutputConnectors(0).Position.X + 30, sgobj.OutputConnectors(1).Position.Y, "")
 
             If sgobj.OutputConnectors(1).IsAttached Then fs.DisconnectObjects(sgobj, sgobj.OutputConnectors(1).AttachedConnector.AttachedTo)
             fs.ConnectObjects(sgobj, obj.GraphicObject, 1, 0)
 
         ElseIf sender Is btnCreateAndConnectEnergy Then
+            If TypeOf SimObject Is Reactors.Reactor_Conversion Then
+                Dim obj = fs.AddObject(ObjectType.EnergyStream, sgobj.OutputConnectors(0).Position.X + 30, sgobj.OutputConnectors(2).Position.Y + 40, "")
 
-            Dim obj = fs.AddObject(ObjectType.EnergyStream, sgobj.InputConnectors(1).Position.X - 30, sgobj.InputConnectors(1).Position.Y + 30, "")
+                If sgobj.OutputConnectors(2).IsAttached Then fs.DisconnectObjects(sgobj.OutputConnectors(2).AttachedConnector.AttachedFrom, sgobj)
+                fs.ConnectObjects(sgobj, obj.GraphicObject, 2, 0)
+            Else
+                Dim obj = fs.AddObject(ObjectType.EnergyStream, sgobj.InputConnectors(0).Position.X - 50, sgobj.InputConnectors(1).Position.Y + 40, "")
 
-            If sgobj.InputConnectors(1).IsAttached Then fs.DisconnectObjects(sgobj.InputConnectors(1).AttachedConnector.AttachedFrom, sgobj)
-            fs.ConnectObjects(obj.GraphicObject, sgobj, 0, 1)
+                If sgobj.InputConnectors(1).IsAttached Then fs.DisconnectObjects(sgobj.InputConnectors(1).AttachedConnector.AttachedFrom, sgobj)
+                fs.ConnectObjects(obj.GraphicObject, sgobj, 0, 1)
+            End If
+
 
         End If
 
