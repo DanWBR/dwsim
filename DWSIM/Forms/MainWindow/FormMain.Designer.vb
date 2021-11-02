@@ -99,6 +99,7 @@ Partial Class FormMain
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsbRegCO = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
+        Me.LoginToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.BgLoadComp = New System.ComponentModel.BackgroundWorker()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
@@ -114,7 +115,6 @@ Partial Class FormMain
         Me.SettingsPanel = New System.Windows.Forms.Panel()
         Me.ButtonClose = New System.Windows.Forms.Button()
         Me.WelcomePanel = New System.Windows.Forms.Panel()
-        Me.LoginToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.MenuStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.SettingsPanel.SuspendLayout()
@@ -557,6 +557,12 @@ Partial Class FormMain
         Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
         resources.ApplyResources(Me.ToolStripSeparator8, "ToolStripSeparator8")
         '
+        'LoginToolStripButton
+        '
+        Me.LoginToolStripButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        resources.ApplyResources(Me.LoginToolStripButton, "LoginToolStripButton")
+        Me.LoginToolStripButton.Name = "LoginToolStripButton"
+        '
         'BgLoadComp
         '
         Me.BgLoadComp.WorkerReportsProgress = True
@@ -624,12 +630,6 @@ Partial Class FormMain
         '
         resources.ApplyResources(Me.WelcomePanel, "WelcomePanel")
         Me.WelcomePanel.Name = "WelcomePanel"
-        '
-        'LoginToolStripButton
-        '
-        Me.LoginToolStripButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        resources.ApplyResources(Me.LoginToolStripButton, "LoginToolStripButton")
-        Me.LoginToolStripButton.Name = "LoginToolStripButton"
         '
         'FormMain
         '
