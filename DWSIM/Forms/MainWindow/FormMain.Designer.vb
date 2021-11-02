@@ -61,7 +61,7 @@ Partial Class FormMain
         Me.MostrarBarraDeFerramentasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PainelDeBoasvindasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpTSMI = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ContentsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DocumentacaoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GuiaDoUsuarioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
@@ -319,17 +319,17 @@ Partial Class FormMain
         '
         'HelpTSMI
         '
-        Me.HelpTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ContentsToolStripMenuItem, Me.DocumentacaoToolStripMenuItem, Me.toolStripSeparator5, Me.DWSIMNaInternetToolStripMenuItem, Me.PatronToolStripMenuItem, Me.AboutToolStripMenuItem})
+        Me.HelpTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HelpToolStripMenuItem, Me.DocumentacaoToolStripMenuItem, Me.toolStripSeparator5, Me.DWSIMNaInternetToolStripMenuItem, Me.PatronToolStripMenuItem, Me.AboutToolStripMenuItem})
         Me.HelpTSMI.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.HelpTSMI.MergeIndex = 102
         Me.HelpTSMI.Name = "HelpTSMI"
         resources.ApplyResources(Me.HelpTSMI, "HelpTSMI")
         '
-        'ContentsToolStripMenuItem
+        'HelpToolStripMenuItem
         '
-        Me.ContentsToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.help
-        Me.ContentsToolStripMenuItem.Name = "ContentsToolStripMenuItem"
-        resources.ApplyResources(Me.ContentsToolStripMenuItem, "ContentsToolStripMenuItem")
+        Me.HelpToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.help
+        Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
+        resources.ApplyResources(Me.HelpToolStripMenuItem, "HelpToolStripMenuItem")
         '
         'DocumentacaoToolStripMenuItem
         '
@@ -657,7 +657,7 @@ Partial Class FormMain
     Public WithEvents toolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
     Public WithEvents ExitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents HelpTSMI As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents ContentsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Public WithEvents HelpToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents toolStripSeparator5 As System.Windows.Forms.ToolStripSeparator
     Public WithEvents AboutToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
@@ -882,7 +882,6 @@ Partial Class FormMain
     Public WithEvents tsmiSamples As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents NovoRegressaoUNIFACIPs As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SaveUnifacIPRegrDlg As System.Windows.Forms.SaveFileDialog
-    Friend WithEvents DocumentacaoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents GuiaDoUsuarioToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SettingsPanel As System.Windows.Forms.Panel
     Friend WithEvents ButtonClose As System.Windows.Forms.Button
@@ -909,4 +908,5 @@ Partial Class FormMain
     Public WithEvents PainelDeBoasvindasToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PsycrometrySimulationTemplateToolStripMenuItem As ToolStripMenuItem
     Public WithEvents DownloadSupplementarySoftwareToolStripMenuItem As ToolStripMenuItem
+    Public WithEvents DocumentacaoToolStripMenuItem As ToolStripMenuItem
 End Class
