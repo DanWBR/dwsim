@@ -6618,7 +6618,12 @@ Final3:
             Dim val As Double
 
             If cprop.LiquidThermalConductivityEquation <> "" And cprop.LiquidThermalConductivityEquation <> "0" And Not cprop.IsIon And Not cprop.IsSalt Then
-                val = CalcCSTDepProp(cprop.LiquidThermalConductivityEquation, cprop.Liquid_Thermal_Conductivity_Const_A, cprop.Liquid_Thermal_Conductivity_Const_B, cprop.Liquid_Thermal_Conductivity_Const_C, cprop.Liquid_Thermal_Conductivity_Const_D, cprop.Liquid_Thermal_Conductivity_Const_E, T, cprop.Critical_Temperature)
+                If Integer.TryParse(cprop.VaporThermalConductivityEquation, New Integer) Then
+                    val = CalcCSTDepProp(cprop.LiquidThermalConductivityEquation, cprop.Liquid_Thermal_Conductivity_Const_A, cprop.Liquid_Thermal_Conductivity_Const_B, cprop.Liquid_Thermal_Conductivity_Const_C, cprop.Liquid_Thermal_Conductivity_Const_D, cprop.Liquid_Thermal_Conductivity_Const_E, T, cprop.Critical_Temperature)
+                Else
+                    val = ParseEquation(cprop.LiquidThermalConductivityEquation, cprop.Liquid_Thermal_Conductivity_Const_A, cprop.Liquid_Thermal_Conductivity_Const_B, cprop.Liquid_Thermal_Conductivity_Const_C, cprop.Liquid_Thermal_Conductivity_Const_D, cprop.Liquid_Thermal_Conductivity_Const_E, T)
+                End If
+
             ElseIf cprop.IsIon Or cprop.IsSalt Then
                 val = 0.0#
             Else
@@ -6634,7 +6639,11 @@ Final3:
             Dim val As Double
 
             If cprop.VaporThermalConductivityEquation <> "" And cprop.VaporThermalConductivityEquation <> "0" And Not cprop.IsIon And Not cprop.IsSalt Then
-                val = CalcCSTDepProp(cprop.VaporThermalConductivityEquation, cprop.Vapor_Thermal_Conductivity_Const_A, cprop.Vapor_Thermal_Conductivity_Const_B, cprop.Vapor_Thermal_Conductivity_Const_C, cprop.Vapor_Thermal_Conductivity_Const_D, cprop.Vapor_Thermal_Conductivity_Const_E, T, cprop.Critical_Temperature)
+                If Integer.TryParse(cprop.VaporThermalConductivityEquation, New Integer) Then
+                    val = CalcCSTDepProp(cprop.VaporThermalConductivityEquation, cprop.Vapor_Thermal_Conductivity_Const_A, cprop.Vapor_Thermal_Conductivity_Const_B, cprop.Vapor_Thermal_Conductivity_Const_C, cprop.Vapor_Thermal_Conductivity_Const_D, cprop.Vapor_Thermal_Conductivity_Const_E, T, cprop.Critical_Temperature)
+                Else
+                    val = ParseEquation(cprop.VaporThermalConductivityEquation, cprop.Vapor_Thermal_Conductivity_Const_A, cprop.Vapor_Thermal_Conductivity_Const_B, cprop.Vapor_Thermal_Conductivity_Const_C, cprop.Vapor_Thermal_Conductivity_Const_D, cprop.Vapor_Thermal_Conductivity_Const_E, T)
+                End If
             ElseIf cprop.IsIon Or cprop.IsSalt Then
                 val = 0.0#
             Else
@@ -8543,10 +8552,10 @@ Final3:
                 Dim rterm As String = ""
 
                 If expression.Contains("=") Then
-                    lterm = expression.Split("=")(0).Replace(" ", "")
-                    rterm = expression.Split("=")(1).TrimEnd(".")
+                    lterm = expression.Split("=")(0).Replace(" ", "").ToLower()
+                    rterm = expression.Split("=")(1).TrimEnd(".").ToLower()
                 Else
-                    rterm = expression.TrimEnd(".")
+                    rterm = expression.TrimEnd(".").ToLower()
                 End If
 
                 Dim numexp As String = ""
@@ -8556,14 +8565,14 @@ Final3:
                 If expression.Contains("where") Then
                     numexp = rterm.Split("where")(0).Replace(" ", "").Replace("ln", "log")
                     Dim unit1, unit2 As String
-                    unit1 = rterm.Split(New String() {"where"}, StringSplitOptions.RemoveEmptyEntries)(1).Split(New String() {"And", ","}, StringSplitOptions.RemoveEmptyEntries)(0).Trim
-                    unit2 = rterm.Split(New String() {"where"}, StringSplitOptions.RemoveEmptyEntries)(1).Split(New String() {"And", ","}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
+                    unit1 = rterm.Split(New String() {"where"}, StringSplitOptions.RemoveEmptyEntries)(1).Split(New String() {"and", ","}, StringSplitOptions.RemoveEmptyEntries)(0).Trim
+                    unit2 = rterm.Split(New String() {"where"}, StringSplitOptions.RemoveEmptyEntries)(1).Split(New String() {"and", ","}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
                     If unit1.Contains("T In") Then
-                        xunit = unit1.Split(New String() {"In"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
-                        yunit = unit2.Split(New String() {"In"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
+                        xunit = unit1.Split(New String() {"in"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
+                        yunit = unit2.Split(New String() {"in"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
                     Else
-                        xunit = unit2.Split(New String() {"In"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
-                        yunit = unit1.Split(New String() {"In"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
+                        xunit = unit2.Split(New String() {"in"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
+                        yunit = unit1.Split(New String() {"in"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
                     End If
                 Else
                     numexp = rterm.Replace(" ", "").Replace("ln", "log")

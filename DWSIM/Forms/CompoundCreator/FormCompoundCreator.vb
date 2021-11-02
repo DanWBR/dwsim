@@ -1923,7 +1923,7 @@ Public Class FormCompoundCreator
             Heading1 = "T"
             Heading2 = "[" & su.temperature & "]"
         Else
-            For Each d As Double() In mycase.DataPVAP
+            For Each d As Object In mycase.DataPVAP
                 x = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, d(0))
                 px.Add(x)
                 y = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, d(1))
@@ -2056,7 +2056,7 @@ Public Class FormCompoundCreator
         Else
             mytext.AppendLine("T" & vbTab & "yEXP" & vbTab & vbTab & "yCALC")
             mytext.AppendLine("[" & su.temperature & "]" & vbTab & "[" & su.heatCapacityCp & "]" & vbTab & "[" & su.heatCapacityCp & "]")
-            For Each d As Double() In mycase.DataCPIG
+            For Each d As Object In mycase.DataCPIG
                 x = d(0)
                 px.Add(x)
                 y1 = d(1)
@@ -2118,7 +2118,7 @@ Public Class FormCompoundCreator
             Heading1 = "T"
             Heading2 = "[" & su.temperature & "]"
         Else
-            For Each d As Double() In mycase.DataLDENS
+            For Each d As Object In mycase.DataLDENS
                 px.Add(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, d(0)))
                 py1.Add(SystemsOfUnits.Converter.ConvertFromSI(su.density, d(1)))
             Next
@@ -2258,7 +2258,7 @@ Public Class FormCompoundCreator
         Else
             mytext.AppendLine("T" & vbTab & "yEXP" & vbTab & vbTab & "yCALC")
             mytext.AppendLine("[" & su.temperature & "]" & vbTab & "[" & su.heatCapacityCp & "]" & vbTab & "[" & su.heatCapacityCp & "]")
-            For Each d As Double() In mycase.DataCpS
+            For Each d As Object In mycase.DataCpS
                 x = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, d(0))
                 px.Add(x)
                 y1 = SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, d(1)) / TextBoxMW.Text
@@ -2330,7 +2330,7 @@ Public Class FormCompoundCreator
         Else
             mytext.AppendLine("T" & vbTab & "yEXP" & vbTab & "  yCALC")
             mytext.AppendLine("[" & su.temperature & "]" & vbTab & "[" & su.density & "]" & vbTab & "  [" & su.density & "]")
-            For Each d As Double() In mycase.DataRoS
+            For Each d As Object In mycase.DataRoS
                 x = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, d(0))
                 px.Add(x)
                 y1 = SystemsOfUnits.Converter.ConvertFromSI(su.density, d(1)) * TextBoxMW.Text
@@ -2393,7 +2393,7 @@ Public Class FormCompoundCreator
             Heading1 = "T"
             Heading2 = "[" & su.temperature & "]"
         Else
-            For Each d As Double() In mycase.DataLVISC
+            For Each d As Object In mycase.DataLVISC
                 px.Add(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, d(0)))
                 py1.Add(SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, d(1)))
             Next
@@ -2955,7 +2955,7 @@ Public Class FormCompoundCreator
         Else
             mytext.AppendLine("T" & vbTab & "yEXP" & vbTab & vbTab & "yCALC")
             mytext.AppendLine("[" & su.temperature & "]" & vbTab & "[" & su.heatCapacityCp & "]" & vbTab & "[" & su.heatCapacityCp & "]")
-            For Each d As Double() In mycase.DataCPLiquid
+            For Each d As Object In mycase.DataCPLiquid
                 x = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, d(0))
                 px.Add(x)
                 y1 = SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, d(1))
@@ -3027,7 +3027,7 @@ Public Class FormCompoundCreator
         Else
             mytext.AppendLine("T" & vbTab & "yEXP" & vbTab & vbTab & "yCALC")
             mytext.AppendLine("[" & su.temperature & "]" & vbTab & "[" & su.thermalConductivity & "]" & vbTab & "[" & su.thermalConductivity & "]")
-            For Each d As Double() In mycase.DataLTC
+            For Each d As Object In mycase.DataLTC
                 x = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, d(0))
                 px.Add(x)
                 y1 = SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, d(1))
