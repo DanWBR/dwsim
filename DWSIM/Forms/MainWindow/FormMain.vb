@@ -40,6 +40,7 @@ Imports DWSIM.ExtensionMethods
 Imports DWSIM.Interfaces
 Imports DWSIM.Thermodynamics.AdvancedEOS
 Imports DWSIM.Thermodynamics.Databases
+Imports DWSIM.UI.Web
 
 Public Class FormMain
 
@@ -4270,6 +4271,14 @@ Label_00CC:
 
     Private Sub PsycrometrySimulationTemplateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PsycrometrySimulationTemplateToolStripMenuItem.Click
         Process.Start("https://github.com/Spogis/Psychrometry")
+    End Sub
+
+    Private Sub LoginToolStripButton_Click(sender As Object, e As EventArgs) Handles LoginToolStripButton.Click
+        Dim initialUrl As String = "https://login.microsoftonline.com/eb2542b8-5a5d-4f61-a9b5-6ce7dbc4ebfd/oauth2/authorize?client_id=d18e5f18-7709-4ef0-913e-3c8eeecd7d60&response_type=id_token"
+        Dim title As String = "Login page"
+        Dim WebUIForm As New WebUIForm(initialUrl, title)
+        WebUIForm.TopMost = True
+        webUiForm.ShowDialog()
     End Sub
 
     Private Sub tsbInspector_CheckedChanged(sender As Object, e As EventArgs) Handles tsbInspector.CheckedChanged

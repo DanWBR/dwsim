@@ -2409,6 +2409,10 @@
       <Project>{2fc4816c-796d-4366-98f6-c6e3d481e66d}</Project>
       <Name>DWSIM.UI.Desktop.WPF</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.UI.Web\DWSIM.UI.Web.csproj">
+      <Project>{4a48830e-c861-422a-b3e9-44311914c694}</Project>
+      <Name>DWSIM.UI.Web</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.UnitOperations\DWSIM.UnitOperations.vbproj">
       <Project>{9d7733e4-9b6f-437f-aaec-ca3106aca688}</Project>
       <Name>DWSIM.UnitOperations</Name>
