@@ -35,13 +35,12 @@ namespace DWSIM.UI.Web
             // 
             // webView
             // 
-            this.webView.CreationProperties = null;
+          //  this.webView.CreationProperties = new Microsoft.Web.WebView2.WinForms.CoreWebView2CreationProperties { UserDataFolder=UserDataFolder};
             this.webView.DefaultBackgroundColor = System.Drawing.Color.White;
             this.webView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.webView.Location = new System.Drawing.Point(0, 0);
             this.webView.Name = "webView";
-            this.webView.Size = new System.Drawing.Size(800, 450);
-            this.webView.Source = new System.Uri("https://www.google.ba", System.UriKind.Absolute);
+            this.webView.Size = new System.Drawing.Size(800, 450);          
             this.webView.TabIndex = 0;
             this.webView.ZoomFactor = 1D;
             // 
