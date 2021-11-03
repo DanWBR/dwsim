@@ -12369,6 +12369,39 @@ Final3:
 
         Public Function DisplayAdvancedEditingForm() As Object Implements IPropertyPackage.DisplayAdvancedEditingForm
 
+            Dim form = GetAdvancedEditingForm()
+
+            If GlobalSettings.Settings.OldUI Then
+                form.Topmost = True
+                form.Show()
+                Return form
+            Else
+                form.Topmost = True
+                form.Show()
+                Return form
+            End If
+
+        End Function
+
+        Public Function GetAdvancedEditingForm() As Eto.Forms.Form
+
+            Dim containers = GetAdvancedEditingContainers()
+
+            If GlobalSettings.Settings.OldUI Then
+                Dim form = sui.GetDefaultEditorForm("Advanced Property Package Settings", 700, 600, containers(1))
+                form.Topmost = True
+                Return form
+            Else
+                Dim form = sui.GetDefaultTabbedForm("Advanced Property Package Settings", 700, 600, {containers(0), containers(1)})
+                form.Topmost = True
+                Return form
+            End If
+
+
+        End Function
+
+        Public Function GetAdvancedEditingContainers() As Eto.Forms.DynamicLayout()
+
             Dim container1 = sui.GetDefaultContainer()
 
             container1.Tag = "Advanced Settings"
@@ -12446,20 +12479,10 @@ Final3:
                                                          Process.Start("https://github.com/DanWBR/dwsim6/blob/windows/DWSIM.SharedClasses/UnitsOfMeasure/SystemsOfUnits.vb#L278")
                                                      End Sub)
 
-            If GlobalSettings.Settings.OldUI Then
-                Dim form = sui.GetDefaultEditorForm("Advanced Property Package Settings", 700, 600, container2)
-                form.Topmost = True
-                form.Show()
-                Return form
-            Else
-                Dim form = sui.GetDefaultTabbedForm("Advanced Property Package Settings", 700, 600, {container1, container2})
-                form.Topmost = True
-                form.Show()
-                Return form
-            End If
-
+            Return New Eto.Forms.DynamicLayout() {container1, container2}
 
         End Function
+
 
         <JsonIgnore> <XmlIgnore> Property Flowsheet As IFlowsheet Implements IPropertyPackage.Flowsheet
             Get

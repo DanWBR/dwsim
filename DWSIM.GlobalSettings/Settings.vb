@@ -153,6 +153,8 @@ Public Class Settings
 
     Public Shared Property EditorTextBoxFixedSize As Boolean = True
 
+    Public Shared Property EditorTextBoxFixedSizeWidth As Integer = 180
+
     Public Shared Property EditOnSelect As Boolean = True
 
     Public Shared Property CallSolverOnEditorPropertyChanged As Boolean = True
