@@ -145,6 +145,7 @@ Public Class FormMain
 
             ' On user details loaded
             AddHandler UserService.GetInstance().UserDetailsLoaded, AddressOf UserService_UserDetailsLoaded
+            AddHandler UserService.GetInstance().UserLoggedOut, AddressOf UserService_UserLoggedOut
 
 
 #If Not WINE32 Then
@@ -241,9 +242,16 @@ Public Class FormMain
     End Sub
 
     Private Sub UserService_UserDetailsLoaded(sender As Object, user As UserDetailsModel)
-        Me.LoginToolStripButton.Text = user.DisplayName
+        Me.LoginButton.Visible = False
+        Me.LogoutDropdown.Text = user.DisplayName
+        Me.LogoutDropdown.Visible = True
     End Sub
 
+    Private Sub UserService_UserLoggedOut(sender As Object, e As EventArgs)
+        Me.LogoutDropdown.Text = ""
+        Me.LogoutDropdown.Visible = False
+        Me.LoginButton.Visible = True
+    End Sub
     Private Sub FormMain_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles Me.DragDrop
         If e.Data.GetDataPresent(DataFormats.FileDrop) Then
             Dim MyFiles() As String
@@ -4283,9 +4291,13 @@ Label_00CC:
         Process.Start("https://github.com/Spogis/Psychrometry")
     End Sub
 
-    Private Sub LoginToolStripButton_Click(sender As Object, e As EventArgs) Handles LoginToolStripButton.Click
+    Private Sub LoginToolStripButton_Click(sender As Object, e As EventArgs) Handles LoginButton.Click
         Dim loginForm As LoginFormFactory = New LoginFormFactory
         loginForm.ShowDialog()
+    End Sub
+
+    Private Sub LogoutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogoutToolStripMenuItem.Click
+        UserService.Logout()
     End Sub
 
     Private Sub tsbInspector_CheckedChanged(sender As Object, e As EventArgs) Handles tsbInspector.CheckedChanged

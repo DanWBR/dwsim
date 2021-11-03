@@ -99,7 +99,9 @@ Partial Class FormMain
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsbRegCO = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
-        Me.LoginToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.LoginButton = New System.Windows.Forms.ToolStripButton()
+        Me.LogoutDropdown = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.LogoutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BgLoadComp = New System.ComponentModel.BackgroundWorker()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
@@ -430,7 +432,7 @@ Partial Class FormMain
         '
         Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripButton, Me.OpenToolStripButton, Me.SaveToolStripButton, Me.ToolStripButton1, Me.SaveAllToolStripButton, Me.ToolStripSeparator3, Me.ToolStripButton2, Me.tsbInspector, Me.ToolStripSeparator4, Me.ToolStripButton3, Me.ToolStripButton5, Me.ToolStripButton4, Me.ToolStripSeparator6, Me.ToolStripButton6, Me.ToolStripButton7, Me.ToolStripButton8, Me.ToolStripSeparator7, Me.tsbRegCO, Me.ToolStripSeparator8, Me.LoginToolStripButton})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripButton, Me.OpenToolStripButton, Me.SaveToolStripButton, Me.ToolStripButton1, Me.SaveAllToolStripButton, Me.ToolStripSeparator3, Me.ToolStripButton2, Me.tsbInspector, Me.ToolStripSeparator4, Me.ToolStripButton3, Me.ToolStripButton5, Me.ToolStripButton4, Me.ToolStripSeparator6, Me.ToolStripButton6, Me.ToolStripButton7, Me.ToolStripButton8, Me.ToolStripSeparator7, Me.tsbRegCO, Me.ToolStripSeparator8, Me.LoginButton, Me.LogoutDropdown})
         resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
@@ -559,11 +561,23 @@ Partial Class FormMain
         Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
         resources.ApplyResources(Me.ToolStripSeparator8, "ToolStripSeparator8")
         '
-        'LoginToolStripButton
+        'LoginButton
         '
-        Me.LoginToolStripButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        resources.ApplyResources(Me.LoginToolStripButton, "LoginToolStripButton")
-        Me.LoginToolStripButton.Name = "LoginToolStripButton"
+        Me.LoginButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        resources.ApplyResources(Me.LoginButton, "LoginButton")
+        Me.LoginButton.Name = "LoginButton"
+        '
+        'LogoutDropdown
+        '
+        Me.LogoutDropdown.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.LogoutDropdown.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LogoutToolStripMenuItem})
+        resources.ApplyResources(Me.LogoutDropdown, "LogoutDropdown")
+        Me.LogoutDropdown.Name = "LogoutDropdown"
+        '
+        'LogoutToolStripMenuItem
+        '
+        Me.LogoutToolStripMenuItem.Name = "LogoutToolStripMenuItem"
+        resources.ApplyResources(Me.LogoutToolStripMenuItem, "LogoutToolStripMenuItem")
         '
         'BgLoadComp
         '
@@ -918,5 +932,7 @@ Partial Class FormMain
     Public WithEvents PainelDeBoasvindasToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PsycrometrySimulationTemplateToolStripMenuItem As ToolStripMenuItem
     Public WithEvents DownloadSupplementarySoftwareToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents LoginToolStripButton As ToolStripButton
+    Friend WithEvents LoginButton As ToolStripButton
+    Friend WithEvents LogoutDropdown As ToolStripDropDownButton
+    Friend WithEvents LogoutToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -35,7 +35,7 @@ namespace DWSIM.UI.Web
             // 
             // webView
             // 
-            this.webView.CreationProperties = null;
+          //  this.webView.CreationProperties = new Microsoft.Web.WebView2.WinForms.CoreWebView2CreationProperties { UserDataFolder=UserDataFolder};
             this.webView.DefaultBackgroundColor = System.Drawing.Color.White;
             this.webView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.webView.Location = new System.Drawing.Point(0, 0);
