@@ -564,6 +564,7 @@ Partial Class FormMain
         'LoginButton
         '
         Me.LoginButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.LoginButton.Image = Global.DWSIM.My.Resources.Resources.s365_logo_login
         resources.ApplyResources(Me.LoginButton, "LoginButton")
         Me.LoginButton.Name = "LoginButton"
         '
