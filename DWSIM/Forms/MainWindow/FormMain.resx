@@ -665,17 +665,31 @@
   </data>
   <data name="LoginToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIDSURBVDhPpZLrS5NhGMb3j4SWh0oRQVExD4gonkDpg4hG
-        YKxG6WBogkMZKgPNCEVJFBGdGETEvgwyO9DJE5syZw3PIlPEE9pgBCLZ5XvdMB8Ew8gXbl54nuf63dd9
-        0OGSnwCahxbPRNPAPMw9Xpg6ZmF46kZZ0xSKzJPIrhpDWsVnpBhGkKx3nAX8Pv7z1zg8OoY/cITdn4fw
-        bf/C0kYAN3Ma/w3gWfZL5kzTKBxjWyK2DftwI9tyMYCZKXbNHaD91bLYJrDXsYbrWfUKwJrPE9M2M1Oc
-        VzOOpHI7Jr376Hi9ogHqFIANO0/MmmmbmSmm9a8ze+I4MrNWAdjtoJgWcx+PSzg166yZZ8xM8XvXDix9
-        c4jIqFYAjoriBV9AhEPv1mH/sonogha0afbZMMZz+yreTGyhpusHwtNNCsA5U1zS4BLxzJIfg299qO32
-        Ir7UJtZfftyATqeT+8o2D8JSjQrAJblrncYL7ZJ2+bfaFnC/1S1NjL3diRat7qrO7wLRP3HjWsojBeCo
-        mDEo5mNjuweFGvjWg2EBhCbpkW78htSHHwRyNdmgAFzPEee2iFkzayy2OLXzT4gr6UdUnlXrullsxxQ+
-        kx0g8BTA3aZlButjSTyjODq/WcQcW/B/Je4OQhLvKQDnzN1mp0nnkvAhR8VuMzNrpm1mpjgkoVwB/v8D
-        TgDQASA1MVpwzwAAAABJRU5ErkJggg==
+        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
 </value>
   </data>
   <data name="LoginToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -794,6 +808,33 @@
   </data>
   <data name="&gt;&gt;WelcomePanel.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="ButtonClose.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="ButtonClose.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Popup</value>
+  </data>
+  <data name="ButtonClose.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6pt</value>
+  </data>
+  <data name="ButtonClose.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="ButtonClose.Location" type="System.Drawing.Point, System.Drawing">
+    <value>424, 0</value>
+  </data>
+  <data name="ButtonClose.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ButtonClose.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 16</value>
+  </data>
+  <data name="ButtonClose.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="ButtonClose.Text" xml:space="preserve">
+    <value>X</value>
   </data>
   <data name="&gt;&gt;ButtonClose.Name" xml:space="preserve">
     <value>ButtonClose</value>
@@ -2909,44 +2950,5 @@
   </data>
   <data name="SaveUnifacIPRegrDlg.Title" xml:space="preserve">
     <value>Salvar Estudo</value>
-  </data>
-  <data name="ButtonClose.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="ButtonClose.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Popup</value>
-  </data>
-  <data name="ButtonClose.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 6pt</value>
-  </data>
-  <data name="ButtonClose.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="ButtonClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>424, 0</value>
-  </data>
-  <data name="ButtonClose.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ButtonClose.Size" type="System.Drawing.Size, System.Drawing">
-    <value>16, 16</value>
-  </data>
-  <data name="ButtonClose.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="ButtonClose.Text" xml:space="preserve">
-    <value>X</value>
-  </data>
-  <data name="&gt;&gt;ButtonClose.Name" xml:space="preserve">
-    <value>ButtonClose</value>
-  </data>
-  <data name="&gt;&gt;ButtonClose.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ButtonClose.Parent" xml:space="preserve">
-    <value>SettingsPanel</value>
-  </data>
-  <data name="&gt;&gt;ButtonClose.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
 </root>

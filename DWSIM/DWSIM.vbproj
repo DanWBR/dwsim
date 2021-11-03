@@ -459,6 +459,7 @@
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Security" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.XML" />
@@ -2905,6 +2906,8 @@
     <None Include="Resources\disk1.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\s365_logo_login.png" />
+    <None Include="Resources\s365_logo_login.bmp" />
     <None Include="Resources\tshirt_mockup.jpg" />
     <None Include="Resources\stop1.png" />
     <None Include="Resources\tag.png" />
