@@ -41,7 +41,6 @@ namespace DWSIM.UI.Web
             this.webView.Location = new System.Drawing.Point(0, 0);
             this.webView.Name = "webView";
             this.webView.Size = new System.Drawing.Size(800, 450);
-            this.webView.Source = new System.Uri("https://www.google.ba", System.UriKind.Absolute);
             this.webView.TabIndex = 0;
             this.webView.ZoomFactor = 1D;
             // 
@@ -53,6 +52,7 @@ namespace DWSIM.UI.Web
             this.Controls.Add(this.webView);
             this.Name = "WebUIForm";
             this.Text = "WebUIForm";
+            this.Load += new System.EventHandler(this.WebUIForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.webView)).EndInit();
             this.ResumeLayout(false);
 
