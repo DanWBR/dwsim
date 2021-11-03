@@ -514,7 +514,7 @@
     <value>Magenta</value>
   </data>
   <data name="NewToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>24, 24</value>
   </data>
   <data name="NewToolStripButton.Text" xml:space="preserve">
     <value>&amp;Nova Simulação Estática</value>
@@ -523,7 +523,7 @@
     <value>Magenta</value>
   </data>
   <data name="OpenToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>24, 24</value>
   </data>
   <data name="OpenToolStripButton.Text" xml:space="preserve">
     <value>&amp;Abrir Simulação</value>
@@ -535,7 +535,7 @@
     <value>Magenta</value>
   </data>
   <data name="SaveToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>24, 24</value>
   </data>
   <data name="SaveToolStripButton.Text" xml:space="preserve">
     <value>&amp;Salvar Simulação Ativa</value>
@@ -547,7 +547,7 @@
     <value>Magenta</value>
   </data>
   <data name="ToolStripButton1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>24, 24</value>
   </data>
   <data name="ToolStripButton1.Text" xml:space="preserve">
     <value>Salvar Como...</value>
@@ -559,19 +559,19 @@
     <value>Magenta</value>
   </data>
   <data name="SaveAllToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>24, 24</value>
   </data>
   <data name="SaveAllToolStripButton.Text" xml:space="preserve">
     <value>Salvar Todas as Simulações Abertas</value>
   </data>
   <data name="ToolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 27</value>
   </data>
   <data name="ToolStripButton2.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="ToolStripButton2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>24, 24</value>
   </data>
   <data name="ToolStripButton2.Text" xml:space="preserve">
     <value>Configurações Gerais</value>
@@ -580,7 +580,7 @@
     <value>Magenta</value>
   </data>
   <data name="tsbInspector.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>24, 24</value>
   </data>
   <data name="tsbInspector.Text" xml:space="preserve">
     <value>ToolStripButton9</value>
@@ -589,13 +589,13 @@
     <value>Ativar/Desativar Inspetor de Soluções</value>
   </data>
   <data name="ToolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 27</value>
   </data>
   <data name="ToolStripButton3.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="ToolStripButton3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>24, 24</value>
   </data>
   <data name="ToolStripButton3.Text" xml:space="preserve">
     <value>Janelas em Cascata</value>
@@ -604,7 +604,7 @@
     <value>Magenta</value>
   </data>
   <data name="ToolStripButton5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>24, 24</value>
   </data>
   <data name="ToolStripButton5.Text" xml:space="preserve">
     <value>Agrupar Horizontalmente</value>
@@ -613,19 +613,19 @@
     <value>Magenta</value>
   </data>
   <data name="ToolStripButton4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>24, 24</value>
   </data>
   <data name="ToolStripButton4.Text" xml:space="preserve">
     <value>Agrupar Verticalmente</value>
   </data>
   <data name="ToolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 27</value>
   </data>
   <data name="ToolStripButton6.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="ToolStripButton6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>24, 24</value>
   </data>
   <data name="ToolStripButton6.Text" xml:space="preserve">
     <value>Mostrar Ajuda Sensível ao Contexto</value>
@@ -634,7 +634,7 @@
     <value>Magenta</value>
   </data>
   <data name="ToolStripButton7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>24, 24</value>
   </data>
   <data name="ToolStripButton7.Text" xml:space="preserve">
     <value>Fazer Doação</value>
@@ -643,25 +643,25 @@
     <value>Magenta</value>
   </data>
   <data name="ToolStripButton8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>24, 24</value>
   </data>
   <data name="ToolStripButton8.Text" xml:space="preserve">
     <value>Sobre o DWSIM</value>
   </data>
   <data name="ToolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 27</value>
   </data>
   <data name="tsbRegCO.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="tsbRegCO.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>24, 24</value>
   </data>
   <data name="tsbRegCO.Text" xml:space="preserve">
     <value>Registro de Componentes CAPE-OPEN</value>
   </data>
   <data name="ToolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 27</value>
   </data>
   <data name="LoginToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -682,10 +682,10 @@
     <value>Magenta</value>
   </data>
   <data name="LoginToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 22</value>
+    <value>203, 24</value>
   </data>
   <data name="LoginToolStripButton.Text" xml:space="preserve">
-    <value>Login</value>
+    <value>Login with Simulate 365 account</value>
   </data>
   <data name="ToolStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 25</value>
@@ -694,7 +694,7 @@
     <value>0, 0, 16, 0</value>
   </data>
   <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1093, 25</value>
+    <value>1093, 27</value>
   </data>
   <data name="ToolStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -769,13 +769,13 @@
     <value>Fill</value>
   </data>
   <data name="WelcomePanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>440, 50</value>
+    <value>440, 52</value>
   </data>
   <data name="WelcomePanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>48, 22, 48, 22</value>
   </data>
   <data name="WelcomePanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>653, 577</value>
+    <value>653, 575</value>
   </data>
   <data name="WelcomePanel.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
@@ -811,13 +811,13 @@
     <value>Left</value>
   </data>
   <data name="SettingsPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 50</value>
+    <value>0, 52</value>
   </data>
   <data name="SettingsPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>48, 22, 48, 22</value>
   </data>
   <data name="SettingsPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>440, 577</value>
+    <value>440, 575</value>
   </data>
   <data name="SettingsPanel.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
@@ -2799,6 +2799,12 @@
   <data name="&gt;&gt;ToolStripSeparator8.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;LoginToolStripButton.Name" xml:space="preserve">
+    <value>LoginToolStripButton</value>
+  </data>
+  <data name="&gt;&gt;LoginToolStripButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;BgLoadComp.Name" xml:space="preserve">
     <value>BgLoadComp</value>
   </data>
@@ -2870,12 +2876,6 @@
   </data>
   <data name="&gt;&gt;SaveUnifacIPRegrDlg.Type" xml:space="preserve">
     <value>System.Windows.Forms.SaveFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LoginToolStripButton.Name" xml:space="preserve">
-    <value>LoginToolStripButton</value>
-  </data>
-  <data name="&gt;&gt;LoginToolStripButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FormMain</value>

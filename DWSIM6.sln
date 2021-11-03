@@ -219,6 +219,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.Logging", "DWSIM.Logg
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.UI.Web", "DWSIM.UI.Web\DWSIM.UI.Web.csproj", "{4A48830E-C861-422A-B3E9-44311914C694}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.Simulate365", "DWSIM.Simulate365\DWSIM.Simulate365.csproj", "{1CC0851C-F6C2-477C-A725-A2E1C5E96802}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -2147,6 +2149,38 @@ Global
 		{4A48830E-C861-422A-B3E9-44311914C694}.Release|x64.Build.0 = Release|Any CPU
 		{4A48830E-C861-422A-B3E9-44311914C694}.Release|x86.ActiveCfg = Release|Any CPU
 		{4A48830E-C861-422A-B3E9-44311914C694}.Release|x86.Build.0 = Release|Any CPU
+		{1CC0851C-F6C2-477C-A725-A2E1C5E96802}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CC0851C-F6C2-477C-A725-A2E1C5E96802}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CC0851C-F6C2-477C-A725-A2E1C5E96802}.Debug|wine32.ActiveCfg = Debug|Any CPU
+		{1CC0851C-F6C2-477C-A725-A2E1C5E96802}.Debug|wine32.Build.0 = Debug|Any CPU
+		{1CC0851C-F6C2-477C-A725-A2E1C5E96802}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1CC0851C-F6C2-477C-A725-A2E1C5E96802}.Debug|x64.Build.0 = Debug|Any CPU
+		{1CC0851C-F6C2-477C-A725-A2E1C5E96802}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1CC0851C-F6C2-477C-A725-A2E1C5E96802}.Debug|x86.Build.0 = Debug|Any CPU
+		{1CC0851C-F6C2-477C-A725-A2E1C5E96802}.Release Linux|Any CPU.ActiveCfg = Release|Any CPU
+		{1CC0851C-F6C2-477C-A725-A2E1C5E96802}.Release Linux|Any CPU.Build.0 = Release|Any CPU
+		{1CC0851C-F6C2-477C-A725-A2E1C5E96802}.Release Linux|wine32.ActiveCfg = Release|Any CPU
+		{1CC0851C-F6C2-477C-A725-A2E1C5E96802}.Release Linux|wine32.Build.0 = Release|Any CPU
+		{1CC0851C-F6C2-477C-A725-A2E1C5E96802}.Release Linux|x64.ActiveCfg = Release|Any CPU
+		{1CC0851C-F6C2-477C-A725-A2E1C5E96802}.Release Linux|x64.Build.0 = Release|Any CPU
+		{1CC0851C-F6C2-477C-A725-A2E1C5E96802}.Release Linux|x86.ActiveCfg = Release|Any CPU
+		{1CC0851C-F6C2-477C-A725-A2E1C5E96802}.Release Linux|x86.Build.0 = Release|Any CPU
+		{1CC0851C-F6C2-477C-A725-A2E1C5E96802}.Release WinMac|Any CPU.ActiveCfg = Release|Any CPU
+		{1CC0851C-F6C2-477C-A725-A2E1C5E96802}.Release WinMac|Any CPU.Build.0 = Release|Any CPU
+		{1CC0851C-F6C2-477C-A725-A2E1C5E96802}.Release WinMac|wine32.ActiveCfg = Release|Any CPU
+		{1CC0851C-F6C2-477C-A725-A2E1C5E96802}.Release WinMac|wine32.Build.0 = Release|Any CPU
+		{1CC0851C-F6C2-477C-A725-A2E1C5E96802}.Release WinMac|x64.ActiveCfg = Release|Any CPU
+		{1CC0851C-F6C2-477C-A725-A2E1C5E96802}.Release WinMac|x64.Build.0 = Release|Any CPU
+		{1CC0851C-F6C2-477C-A725-A2E1C5E96802}.Release WinMac|x86.ActiveCfg = Release|Any CPU
+		{1CC0851C-F6C2-477C-A725-A2E1C5E96802}.Release WinMac|x86.Build.0 = Release|Any CPU
+		{1CC0851C-F6C2-477C-A725-A2E1C5E96802}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CC0851C-F6C2-477C-A725-A2E1C5E96802}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CC0851C-F6C2-477C-A725-A2E1C5E96802}.Release|wine32.ActiveCfg = Release|Any CPU
+		{1CC0851C-F6C2-477C-A725-A2E1C5E96802}.Release|wine32.Build.0 = Release|Any CPU
+		{1CC0851C-F6C2-477C-A725-A2E1C5E96802}.Release|x64.ActiveCfg = Release|Any CPU
+		{1CC0851C-F6C2-477C-A725-A2E1C5E96802}.Release|x64.Build.0 = Release|Any CPU
+		{1CC0851C-F6C2-477C-A725-A2E1C5E96802}.Release|x86.ActiveCfg = Release|Any CPU
+		{1CC0851C-F6C2-477C-A725-A2E1C5E96802}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

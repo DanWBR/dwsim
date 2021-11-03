@@ -40,7 +40,9 @@ Imports DWSIM.ExtensionMethods
 Imports DWSIM.Interfaces
 Imports DWSIM.Thermodynamics.AdvancedEOS
 Imports DWSIM.Thermodynamics.Databases
-Imports DWSIM.UI.Web
+Imports DWSIM.Simulate365.FormFactories
+Imports DWSIM.Simulate365.Services
+Imports DWSIM.Simulate365.Models
 
 Public Class FormMain
 
@@ -141,6 +143,10 @@ Public Class FormMain
                 My.Application.UtilityPlugins.Add(ip.UniqueID, ip)
             Next
 
+            ' On user details loaded
+            AddHandler UserService.GetInstance().UserDetailsLoaded, AddressOf UserService_UserDetailsLoaded
+
+
 #If Not WINE32 Then
 
             'load extenders
@@ -232,6 +238,10 @@ Public Class FormMain
 
         GlobalSettings.Settings.DpiScale = Me.CreateGraphics.DpiX / 96.0
 
+    End Sub
+
+    Private Sub UserService_UserDetailsLoaded(sender As Object, user As UserDetailsModel)
+        Me.LoginToolStripButton.Text = user.DisplayName
     End Sub
 
     Private Sub FormMain_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles Me.DragDrop
@@ -4274,11 +4284,8 @@ Label_00CC:
     End Sub
 
     Private Sub LoginToolStripButton_Click(sender As Object, e As EventArgs) Handles LoginToolStripButton.Click
-        Dim initialUrl As String = "https://login.microsoftonline.com/eb2542b8-5a5d-4f61-a9b5-6ce7dbc4ebfd/oauth2/authorize?client_id=d18e5f18-7709-4ef0-913e-3c8eeecd7d60&response_type=id_token"
-        Dim title As String = "Login page"
-        Dim WebUIForm As New WebUIForm(initialUrl, title)
-        WebUIForm.TopMost = True
-        webUiForm.ShowDialog()
+        Dim loginForm As LoginFormFactory = New LoginFormFactory
+        loginForm.ShowDialog()
     End Sub
 
     Private Sub tsbInspector_CheckedChanged(sender As Object, e As EventArgs) Handles tsbInspector.CheckedChanged

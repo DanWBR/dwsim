@@ -31,15 +31,28 @@ namespace DWSIM.UI.Web
             // Set initial URL
             this.webView.Source = new Uri(initialUrl);
 
+            this.webView.NavigationStarting += WebView_NavigationStarting;
+
             // Initialize WebView2
             InitializeAsync();
         }
 
-
+        private void WebView_NavigationStarting(object sender, Microsoft.Web.WebView2.Core.CoreWebView2NavigationStartingEventArgs e)
+        {
+            if (e.Uri.StartsWith("https://dwsim-login-return.simulate365.com"))
+            {
+                // OAuth callback
+            }
+        }
 
         async void InitializeAsync()
         {
             await webView.EnsureCoreWebView2Async(null);
+        }
+
+        public void SubscribeToNavigationStarting(EventHandler<Microsoft.Web.WebView2.Core.CoreWebView2NavigationStartingEventArgs> callback)
+        {
+            this.webView.NavigationStarting += callback;
         }
     }
 }

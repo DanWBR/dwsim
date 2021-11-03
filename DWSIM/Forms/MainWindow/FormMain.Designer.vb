@@ -99,6 +99,7 @@ Partial Class FormMain
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsbRegCO = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
+        Me.LoginToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.BgLoadComp = New System.ComponentModel.BackgroundWorker()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
@@ -114,7 +115,6 @@ Partial Class FormMain
         Me.SettingsPanel = New System.Windows.Forms.Panel()
         Me.ButtonClose = New System.Windows.Forms.Button()
         Me.WelcomePanel = New System.Windows.Forms.Panel()
-        Me.LoginToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.MenuStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.SettingsPanel.SuspendLayout()
@@ -123,6 +123,7 @@ Partial Class FormMain
         'MenuStrip1
         '
         Me.MenuStrip1.AllowItemReorder = True
+        Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileTSMI, Me.EditTSMI, Me.ToolsTSMI, Me.WindowsMenu, Me.ViewTSMI, Me.HelpTSMI, Me.DownloadSupplementarySoftwareToolStripMenuItem})
         resources.ApplyResources(Me.MenuStrip1, "MenuStrip1")
         Me.MenuStrip1.MdiWindowListItem = Me.WindowsMenu
@@ -428,6 +429,7 @@ Partial Class FormMain
         'ToolStrip1
         '
         Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+        Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripButton, Me.OpenToolStripButton, Me.SaveToolStripButton, Me.ToolStripButton1, Me.SaveAllToolStripButton, Me.ToolStripSeparator3, Me.ToolStripButton2, Me.tsbInspector, Me.ToolStripSeparator4, Me.ToolStripButton3, Me.ToolStripButton5, Me.ToolStripButton4, Me.ToolStripSeparator6, Me.ToolStripButton6, Me.ToolStripButton7, Me.ToolStripButton8, Me.ToolStripSeparator7, Me.tsbRegCO, Me.ToolStripSeparator8, Me.LoginToolStripButton})
         resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
         Me.ToolStrip1.Name = "ToolStrip1"
@@ -557,6 +559,12 @@ Partial Class FormMain
         Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
         resources.ApplyResources(Me.ToolStripSeparator8, "ToolStripSeparator8")
         '
+        'LoginToolStripButton
+        '
+        Me.LoginToolStripButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        resources.ApplyResources(Me.LoginToolStripButton, "LoginToolStripButton")
+        Me.LoginToolStripButton.Name = "LoginToolStripButton"
+        '
         'BgLoadComp
         '
         Me.BgLoadComp.WorkerReportsProgress = True
@@ -624,12 +632,6 @@ Partial Class FormMain
         '
         resources.ApplyResources(Me.WelcomePanel, "WelcomePanel")
         Me.WelcomePanel.Name = "WelcomePanel"
-        '
-        'LoginToolStripButton
-        '
-        Me.LoginToolStripButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        resources.ApplyResources(Me.LoginToolStripButton, "LoginToolStripButton")
-        Me.LoginToolStripButton.Name = "LoginToolStripButton"
         '
         'FormMain
         '
