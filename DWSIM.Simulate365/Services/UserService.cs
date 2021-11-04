@@ -81,7 +81,7 @@ namespace DWSIM.Simulate365.Services
 
                 try
                 {
-                    Directory.Delete(WebUIForm.UserDataFolder, true);
+                    Directory.Delete(WebUIForm.USER_DATA_FOLDER, true);
                 }
                 catch (Exception ex)
                 {                  

@@ -3646,7 +3646,9 @@ erase /S /Q "$(SolutionDir)DistPackages\Windows_32\DWSIM.vshost.*" 2&gt;nul 1&gt
 erase /S  /Q "$(SolutionDir)DistPackages\Windows_32\*.tmp" 2&gt;nul 1&gt;nul 4&gt;nul
 erase /S  /Q "$(SolutionDir)DistPackages\Windows_32\*.dylib" 2&gt;nul 1&gt;nul 4&gt;nul
 
-)</PostBuildEvent>
+)
+if exist "$(SolutionDir)DWSIM.UI.Web\ClientApp\build\" xcopy "$(SolutionDir)DWSIM.UI.Web\ClientApp\build\" "$(TargetDir)dwsim-web-ui\" /E /Y /F /D
+</PostBuildEvent>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

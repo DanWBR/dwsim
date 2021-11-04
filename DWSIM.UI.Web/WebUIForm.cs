@@ -1,11 +1,14 @@
-﻿using System;
+﻿using Microsoft.Web.WebView2.Core;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,18 +18,32 @@ namespace DWSIM.UI.Web
 {
     public partial class WebUIForm : Form
     {
-        public static string UserDataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "DWSIM", "S365BrowserData");
+        public static string USER_DATA_FOLDER = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "DWSIM", "S365BrowserData");
+
+        //public static string LOCAL_WEB_UI_URL = "https://dwsim.webui/index.html";
 
         public string InitialUrl { get; private set; }
 
         public string Title { get; private set; }
 
+        public bool UseLocalUI { get; private set; }
 
-        public WebUIForm(string initialUrl, string title = null)
+
+        public WebUIForm(string initialUrl, string title = null, bool userLocalUI = false)
         {
-            InitializeComponent();
+            // If userLocalUI == false, then real URL must be provided
+            if (!userLocalUI && (String.IsNullOrWhiteSpace(initialUrl) || !Regex.IsMatch(initialUrl, "https*://")))
+                throw new Exception("When not using local UI, real URL must be provided.");            
 
-            this.InitialUrl = initialUrl;
+            this.UseLocalUI = userLocalUI;
+
+            // If using local UI, prepand virtual domain
+            if (userLocalUI)
+                this.InitialUrl = $"https://dwsim.webui/index.html#{initialUrl}";
+            else
+                this.InitialUrl = initialUrl;         
+
+          
             this.webView.CoreWebView2InitializationCompleted += WebView_CoreWebView2InitializationCompleted;
             // Title
             if (!String.IsNullOrWhiteSpace(title))
@@ -46,8 +63,16 @@ namespace DWSIM.UI.Web
 
         async Task InitializeAsync()
         {
-            var environment = await Microsoft.Web.WebView2.Core.CoreWebView2Environment.CreateAsync(null, UserDataFolder, null);
+            var environment = await Microsoft.Web.WebView2.Core.CoreWebView2Environment.CreateAsync(null, USER_DATA_FOLDER, null);
             await webView.EnsureCoreWebView2Async(environment);
+
+            if (UseLocalUI)
+            {
+                var assemblyDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                var webUiDir = Path.Combine(assemblyDir, "dwsim-web-ui");
+
+                this.webView.CoreWebView2.SetVirtualHostNameToFolderMapping("dwsim.webui", webUiDir, CoreWebView2HostResourceAccessKind.Allow);
+            }
         }
 
         public void SubscribeToNavigationStarting(EventHandler<Microsoft.Web.WebView2.Core.CoreWebView2NavigationStartingEventArgs> callback)
