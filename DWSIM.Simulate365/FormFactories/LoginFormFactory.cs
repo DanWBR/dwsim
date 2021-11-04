@@ -28,8 +28,8 @@ namespace DWSIM.Simulate365.FormFactories
             var initialUrl = $"https://login.microsoftonline.com/{TENANT_ID}/oauth2/authorize?client_id={CLIENT_ID}&response_type=code&scope={HttpUtility.UrlEncode(SCOPE)}";
             _webUIForm = new WebUIForm(initialUrl, "Login with Simulate 365 account")
             {
-                Width = 700,
-                Height = 700
+                Width = 500,
+                Height = 600
             };
 
             _webUIForm.SubscribeToNavigationStarting(WebView_NavigationStarting);

@@ -35,7 +35,7 @@ namespace DWSIM.UI.Web
             // 
             // webView
             // 
-          //  this.webView.CreationProperties = new Microsoft.Web.WebView2.WinForms.CoreWebView2CreationProperties { UserDataFolder=UserDataFolder};
+            this.webView.CreationProperties = null;
             this.webView.DefaultBackgroundColor = System.Drawing.Color.White;
             this.webView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.webView.Location = new System.Drawing.Point(0, 0);
@@ -51,6 +51,7 @@ namespace DWSIM.UI.Web
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.webView);
             this.Name = "WebUIForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WebUIForm";
             this.Load += new System.EventHandler(this.WebUIForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.webView)).EndInit();
