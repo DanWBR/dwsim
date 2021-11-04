@@ -27,19 +27,20 @@ namespace DWSIM.UI.Web
             InitializeComponent();
 
             this.InitialUrl = initialUrl;
-
+            this.webView.CoreWebView2InitializationCompleted += WebView_CoreWebView2InitializationCompleted;
             // Title
             if (!String.IsNullOrWhiteSpace(title))
                 this.Text = title;
             else
-                this.Text = "Web UI";            
+                this.Text = "Web UI";
         }
 
-        private void WebView_NavigationStarting(object sender, Microsoft.Web.WebView2.Core.CoreWebView2NavigationStartingEventArgs e)
+        private void WebView_CoreWebView2InitializationCompleted(object sender, Microsoft.Web.WebView2.Core.CoreWebView2InitializationCompletedEventArgs e)
         {
-            if (e.Uri.StartsWith("https://dwsim-login-return.simulate365.com"))
+
+            if (webView.CoreWebView2 != null)
             {
-                // OAuth callback
+                webView.CoreWebView2.Settings.AreDefaultContextMenusEnabled = false;
             }
         }
 
@@ -53,16 +54,18 @@ namespace DWSIM.UI.Web
         {
             this.webView.NavigationStarting += callback;
         }
+        public void SubscribeToInitializationCompleted(EventHandler<Microsoft.Web.WebView2.Core.CoreWebView2InitializationCompletedEventArgs> callback)
+        {
+            this.webView.CoreWebView2InitializationCompleted += callback;
+        }
 
         private async void WebUIForm_Load(object sender, EventArgs e)
         {
             // Initialize WebView2
             await InitializeAsync();
 
-            this.webView.NavigationStarting += WebView_NavigationStarting;
-
             // Set initial URL
-            this.webView.Source = new Uri(InitialUrl);           
+            this.webView.Source = new Uri(InitialUrl);
         }
     }
 }

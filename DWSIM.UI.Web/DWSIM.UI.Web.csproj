@@ -68,7 +68,31 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClientApp\.gitignore" />
+    <None Include="ClientApp\package-lock.json" />
+    <None Include="ClientApp\package.json" />
+    <None Include="ClientApp\public\manifest.json" />
+    <None Include="ClientApp\README.md" />
+    <None Include="ClientApp\tsconfig.json" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ClientApp\public\favicon.ico" />
+    <Content Include="ClientApp\public\index.html" />
+    <Content Include="ClientApp\public\logo192.png" />
+    <Content Include="ClientApp\public\logo512.png" />
+    <Content Include="ClientApp\public\robots.txt" />
+    <Content Include="ClientApp\src\App.css" />
+    <Content Include="ClientApp\src\index.css" />
+    <Content Include="ClientApp\src\logo.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\App.test.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\App.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\index.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\react-app-env.d.ts" />
+    <TypeScriptCompile Include="ClientApp\src\reportWebVitals.ts" />
+    <TypeScriptCompile Include="ClientApp\src\setupTests.ts" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Web.WebView2.1.0.1020.30\build\Microsoft.Web.WebView2.targets" Condition="Exists('..\packages\Microsoft.Web.WebView2.1.0.1020.30\build\Microsoft.Web.WebView2.targets')" />

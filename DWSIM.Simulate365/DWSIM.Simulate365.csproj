@@ -124,6 +124,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FormFactories\LoginFormFactory.cs" />
+    <Compile Include="FormFactories\S365FilePickerForm.cs" />
     <Compile Include="GraphClientFactory.cs" />
     <Compile Include="Models\OAuthErrorResponse.cs" />
     <Compile Include="Models\OAuthTokenResponse.cs" />
