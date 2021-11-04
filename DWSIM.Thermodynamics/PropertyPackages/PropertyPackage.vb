@@ -8578,6 +8578,8 @@ Final3:
                     numexp = rterm.Replace(" ", "").Replace("ln", "log")
                 End If
 
+                numexp = numexp.Trim(New Char() {vbCrLf, vbCr, vbLf, vbTab})
+
                 If lterm.Contains("ln") Then
                     numexp = "exp(" + numexp + ")"
                 End If
@@ -8587,23 +8589,23 @@ Final3:
                 ec.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
 
                 ec.Variables.Clear()
-                ec.Variables.Add("T", cv.ConvertToSI(xunit, T))
-                ec.Variables.Add("A", A)
-                ec.Variables.Add("B", B)
-                ec.Variables.Add("C", C)
-                ec.Variables.Add("D", D)
-                ec.Variables.Add("K", E)
-                ec.Variables.Add("F", 0.0#)
-                ec.Variables.Add("G", 0.0#)
-                ec.Variables.Add("H", 0.0#)
+                ec.Variables.Add("t", cv.ConvertToSI(xunit, T))
+                ec.Variables.Add("a", A)
+                ec.Variables.Add("b", B)
+                ec.Variables.Add("c", C)
+                ec.Variables.Add("d", D)
+                ec.Variables.Add("k", E)
+                ec.Variables.Add("f", 0.0#)
+                ec.Variables.Add("g", 0.0#)
+                ec.Variables.Add("h", 0.0#)
 
-                Dim result As Double = ec.CompileGeneric(Of Double)(numexp.Replace("E", "K").Replace("kexp", "exp").Trim).Evaluate()
+                Dim result As Double = ec.CompileGeneric(Of Double)(numexp.Replace("e", "k").Replace("kxp", "exp").Trim).Evaluate()
 
                 Return cv.ConvertToSI(yunit, result)
 
             Catch ex As Exception
 
-                Throw New Exception("Error parsing String For numerical expression:             '" + expression + "'. Check temperature-dependent property expressions for the selected compounds and try again.")
+                Throw New Exception("Error parsing String For numerical expression: '" + expression + "'. Check temperature-dependent property expressions for the selected compounds and try again.")
 
             End Try
 
