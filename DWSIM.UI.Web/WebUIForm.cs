@@ -33,7 +33,7 @@ namespace DWSIM.UI.Web
         {
             // If userLocalUI == false, then real URL must be provided
             if (!userLocalUI && (String.IsNullOrWhiteSpace(initialUrl) || !Regex.IsMatch(initialUrl, "https*://")))
-                throw new Exception("When not using local UI, real URL must be provided.");            
+                throw new Exception("When not using local UI, real URL must be provided.");
 
             this.UseLocalUI = userLocalUI;
 
@@ -41,15 +41,18 @@ namespace DWSIM.UI.Web
             if (userLocalUI)
                 this.InitialUrl = $"https://dwsim.webui/index.html#{initialUrl}";
             else
-                this.InitialUrl = initialUrl;         
+                this.InitialUrl = initialUrl;
 
-          
-            this.webView.CoreWebView2InitializationCompleted += WebView_CoreWebView2InitializationCompleted;
             // Title
             if (!String.IsNullOrWhiteSpace(title))
                 this.Text = title;
             else
                 this.Text = "Web UI";
+
+            // After all variables are set, then initialize form components
+            InitializeComponent();
+
+            this.webView.CoreWebView2InitializationCompleted += WebView_CoreWebView2InitializationCompleted;
         }
 
         private void WebView_CoreWebView2InitializationCompleted(object sender, Microsoft.Web.WebView2.Core.CoreWebView2InitializationCompletedEventArgs e)

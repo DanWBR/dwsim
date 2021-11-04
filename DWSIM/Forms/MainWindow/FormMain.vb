@@ -4300,6 +4300,11 @@ Label_00CC:
         UserService.Logout()
     End Sub
 
+    Private Sub OpenFromS365DashboardBtn_Click(sender As Object, e As EventArgs) Handles OpenFromS365DashboardBtn.Click
+        Dim filePickerForm As S365FilePickerForm = New S365FilePickerForm
+        filePickerForm.ShowDialog()
+    End Sub
+
     Private Sub tsbInspector_CheckedChanged(sender As Object, e As EventArgs) Handles tsbInspector.CheckedChanged
         GlobalSettings.Settings.InspectorEnabled = tsbInspector.Checked
         FrmOptions.chkEnableInspector.Checked = tsbInspector.Checked

@@ -16,8 +16,8 @@ namespace DWSIM.Simulate365.FormFactories
 
         public void ShowDialog()
         {
-            var initialUrl = $"";
-            _webUIForm = new WebUIForm(initialUrl, "Open file from Simulate 365 Dashboard")
+            var initialUrl = $"/";
+            _webUIForm = new WebUIForm(initialUrl, "Open file from Simulate 365 Dashboard", true)
             {
                 Width = 1200,
                 Height = 800
@@ -34,14 +34,11 @@ namespace DWSIM.Simulate365.FormFactories
             {
                 var webView = sender as WebView2;
                 if (webView.CoreWebView2 != null)
-                {                 
-
-                    webView.CoreWebView2.AddHostObjectToScript("usersService", UserService.GetInstance());                 
-
+                {        
+                    webView.CoreWebView2.AddHostObjectToScript("usersService", UserService.GetInstance());   
                 }
-
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 //  throw;
