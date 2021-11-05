@@ -1,8 +1,9 @@
 
 import { IDocument, ISelectedFolder, ResponseItemType } from "../interfaces/documents/document.interfaces";
 import { MapDriveItemToDocument } from "../shared/mappers/driveitem-document.mapper";
-import {client} from "../shared/ms-graph/ms-graph-factory";
+import {msGraphClient} from "../shared/ms-graph/ms-graph-factory";
 import { _copyAndSort } from "../shared/utilities/copy-sort";
+declare const chrome: any;
 
 export async function  getFlowsheetListItemsAsync(selectedFolder:ISelectedFolder, siteId:string,flowsheetsListId:string) {
     try {   
@@ -11,13 +12,13 @@ export async function  getFlowsheetListItemsAsync(selectedFolder:ISelectedFolder
         let apidrivePath = `/sites/${siteId}/lists/${flowsheetsListId}/drive/root:/${selectedFolderPath}:/children`;
 
        
-        console.log("get drive items apiPath:", apidrivePath);
+        console.log("get drive items apiPath:", apidrivePath, msGraphClient);
         let driveItems = [];
 
-        let driveItemsResp = await client.api(apidrivePath).expand("listItem($expand=fields)").get();
+        let driveItemsResp = await msGraphClient.api(apidrivePath).expand("listItem($expand=fields)").get();
         driveItems.push(...driveItemsResp.value);
         while (driveItemsResp["@odata.nextLink"]) {
-            driveItemsResp = await client.api(driveItemsResp["@odata.nextLink"]).get();
+            driveItemsResp = await msGraphClient.api(driveItemsResp["@odata.nextLink"]).get();
             driveItems.push(...driveItemsResp.value);
         }
         console.log("Drive items:", driveItems);
@@ -42,5 +43,16 @@ export async function  getFlowsheetListItemsAsync(selectedFolder:ISelectedFolder
     } catch (error) {
         console.log("Error while getting List items:", error);        
     }
+
+}
+
+export async function OpenDwsimFile(siteId:string, driveItemId:string, driveId:string){
+         if(chrome?.webview?.hostObjects?.filePickerService){
+             
+            const filePickerService= chrome.webview.hostObjects.filePickerService;
+            await filePickerService.openFile(siteId,driveItemId,driveId);
+         }else{
+             throw "filePickerService not initialized.";
+         }
 
 }

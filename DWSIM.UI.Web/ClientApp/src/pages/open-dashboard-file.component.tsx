@@ -1,15 +1,19 @@
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { IDocument, ISelectedFolder, ResponseItemType } from "../interfaces/documents/document.interfaces";
-import { getFlowsheetListItemsAsync } from "../api/documents.api";
+import { getFlowsheetListItemsAsync, OpenDwsimFile } from "../api/documents.api";
 import { DetailsListLayoutMode, SelectionMode, ShimmeredDetailsList, mergeStyleSets, IColumn, CheckboxVisibility } from "@fluentui/react";
 import moment from "moment";
 import { FileTypeIcon, IFileTypeIconProps } from "../components/file-type-icon/file-type-icon.component";
 import { getFileTypeIconPropsCustom } from "../components/file-type-icon/file-type-icon.helpers";
+import NavigationBar from "../components/navigation-bar/navigation-bar.component";
 
 
 interface IOpenDashboardFilePageProps extends RouteComponentProps<IOpenDashboardFilePageRouteProps> {
-
+    baseFolder: ISelectedFolder;
+    siteId: string;
+    flowsheetsDriveId: string;
+    flowsheetsListId: string;
 }
 interface IOpenDashboardFilePageRouteProps {
 
@@ -18,10 +22,7 @@ interface IOpenDashboardFilePageRouteProps {
 interface IOpenDashboardFilePageState {
     files: IDocument[];
     folders: IDocument[];
-    selectedFolder: ISelectedFolder;
-    siteId: string;
-    flowsheetsDriveId: string;
-    flowsheetsListId: string;
+    selectedFolder: ISelectedFolder;      
     isDataLoaded: boolean;
 }
 
@@ -133,31 +134,23 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
         super(props);
         this.state = {
             files: [],
-            folders: [],
-            siteId: "a5cec843-dfd2-4f2a-a121-0e349c6c39b2",
-            flowsheetsDriveId: "b!Q8jOpdLfKk-hIQ40nGw5siUXS3kQCQVIt706knRzFAhsplPztq-WSpcwmKq6KD5I",
-            flowsheetsListId: "f353a66c-afb6-4a96-9730-98aaba283e48",
-            selectedFolder: {
-                // webUrl: folder.flowsheets.parentName + "/" + folder.flowsheets.folderName,
-                displayName: "Dashboard",
-                driveId: "01RM334CTN4RCO4OXLURFYT6GRMFHFJC7F",
-                id: "EE44E46D-EB3A-4BA4-89F8-D1614E548BE5",
-                webUrl: "/bc2d8a86-b1f4-4df3-8c7d-b8e49d91650f",
-            } as ISelectedFolder,
+            folders: [],            
+            selectedFolder: props.baseFolder,
             isDataLoaded: false
         };
 
         //    this._selection = new Selection({ onSelectionChanged: this.selectedRowChanged.bind(this) } as ISelectionOptions);
 
     }
-     componentDidMount() {
+    componentDidMount() {
         this.getFilesAndFolders();
 
     }
-    async getFilesAndFolders(){
-        const { selectedFolder, siteId, flowsheetsListId } = this.state;
+    async getFilesAndFolders() {
+        const { selectedFolder } = this.state;
+        const { siteId, flowsheetsListId}=this.props;
         try {
-            this.setState({isDataLoaded:false});
+            this.setState({ isDataLoaded: false });
             const filesAndFolders = await getFlowsheetListItemsAsync(selectedFolder, siteId, flowsheetsListId);
             console.log("Files and folders", filesAndFolders);
             this.setState({ files: filesAndFolders!.files ?? [], folders: filesAndFolders!.folders ?? [] });
@@ -169,30 +162,31 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
         }
     }
 
-    private _getKey(item: any, index?: number): string {
-        if (item) {
-            return item.key;
-        } else {
-            console.log("Item null", this.state);
-            return "";
-        }
-    }
+   
     private _onItemInvoked(item: IDocument): void {
         console.log("On item invoked called!", item);
         const { selectedFolder } = this.state;
         if (item.fileType == ResponseItemType.Folder) {
             let folderPath = `/${encodeURIComponent(item.name)}`;
-            if (this.props.history.location.pathname !== "/") {
-                folderPath = this.props.history.location.pathname + folderPath;
+           
+                folderPath = this.state.selectedFolder.webUrl + folderPath;
                 let newSelectedFolder = {
                     driveId: item.driveItemId,
                     displayName: item.name,
                     webUrl: folderPath,
                     parentDriveItemId: selectedFolder.driveId
                 } as ISelectedFolder;
-            }
-
-
+                console.log("Setting selected folder", newSelectedFolder);
+                this.setState({selectedFolder:newSelectedFolder},()=>{
+                    this.getFilesAndFolders();
+                });  
+        }else{
+           
+                OpenDwsimFile(this.props.siteId,item.driveItemId,this.props.flowsheetsDriveId).then(()=>{},(error)=>{alert(error);});
+            
+                
+           
+           
         }
     }
 
@@ -218,7 +212,7 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
                 maxWidth: 20,
                 onRender: (item: IDocument) => {
                     const isFolder = item.fileType == ResponseItemType.Folder;
-                      return <FileTypeIcon {...getFileTypeIconPropsCustom(
+                    return <FileTypeIcon {...getFileTypeIconPropsCustom(
                         {
                             extension: item.extension,
                             size: 20,
@@ -321,26 +315,47 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
     }
 
     render() {
-        const { folders, files, isDataLoaded } = this.state;
+        const { folders, files, isDataLoaded,selectedFolder } = this.state;
+        const { siteId, flowsheetsListId, baseFolder, }= this.props;
         const columns = [...this.getColumns()];
         const items = [...folders, ...files];
-        console.log("isDataLoaded",isDataLoaded);
-        return <>    <ShimmeredDetailsList
-            enableShimmer={!isDataLoaded}
-            items={items}
-            columns={columns}
-            //selection={this._selection}
-            selectionPreservedOnEmptyClick
-            selectionMode={SelectionMode.single}
-            checkboxVisibility={CheckboxVisibility.hidden}
-            onShouldVirtualize={() => false}
-            
-            setKey="none"
-            layoutMode={DetailsListLayoutMode.fixedColumns}
-            isHeaderVisible={true}
-            onItemInvoked={this._onItemInvoked.bind(this)}
+        console.log("isDataLoaded", isDataLoaded);
+        return <div className="ms-Grid" dir="ltr" style={{marginLeft:"30px"}}>
+            <div className="ms-Grid-row">
+                <div className="ms-Grid-col ms-sm12">  <NavigationBar
+                    siteId={siteId}
+                    flowsheetsListId={flowsheetsListId}
+                    baseFolder={baseFolder}
+                    selectedFolder={selectedFolder}
+                    onSelectedFolderChanged={(selectedFolder) => { this.setState({ selectedFolder: selectedFolder },()=>{
+                        this.getFilesAndFolders();
+                    });  }} /></div>
 
-        /></>;
+            </div>
+            <div className="ms-Grid-row">
+                <div className="ms-Grid-col ms-sm12">
+                    <ShimmeredDetailsList
+                        enableShimmer={!isDataLoaded}
+                        items={items}
+                        columns={columns}
+                        //selection={this._selection}
+                        selectionPreservedOnEmptyClick
+                        selectionMode={SelectionMode.single}
+                        checkboxVisibility={CheckboxVisibility.hidden}
+                        onShouldVirtualize={() => false}
+
+                        setKey="none"
+                        layoutMode={DetailsListLayoutMode.fixedColumns}
+                        isHeaderVisible={true}
+                        onItemInvoked={this._onItemInvoked.bind(this)}
+
+                    />
+                </div>
+            </div>
+        </div>;
+
+
+
     }
 }
 

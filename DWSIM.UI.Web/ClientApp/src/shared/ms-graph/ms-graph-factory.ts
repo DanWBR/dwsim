@@ -1,32 +1,38 @@
 import { AuthProvider, AuthProviderCallback, Client, Options } from "@microsoft/microsoft-graph-client";
-import { IUsersService } from "../../interfaces/services/users-service.interface";
 
 declare const chrome: any;
 
 // Some callback function
 const authProvider: AuthProvider = async (callback: AuthProviderCallback) => {
     // Your logic for getting and refreshing accessToken
+    console.log("GetToken called", chrome.webview);
     if (chrome.webview) {
-        const usersService = chrome.webview.hostObjects.usersService as IUsersService;
-        if (!usersService)
-            callback("User Service not Found.", null);
-        const token = await usersService.getUserToken();
-        callback(null, token);
-        try {
+        const authService = chrome.webview.hostObjects.authService;
+        if (!authService) {
+            callback("Auth Service not Found.", null); return;
+        }
 
+        try {
+            const token = await authService.getUserToken();
+            callback(null, token);
         } catch (error) {
+            console.log("An error occurred while getting token.",error);
             const errorModel = { message: "An error occurred while getting token.", error: error };
             callback(errorModel, null);
         }
 
+
+    } else {
+        console.log("Auth Service not found, using hardcoded token");
+        //for test cases using browser
+        const token = "eyJ0eXAiOiJKV1QiLCJub25jZSI6InZSakV5N1hsbzlYMllwTzFoS1NOdVVXbjJjUDAtM0FoSTJzSXVJWDMwUlUiLCJhbGciOiJSUzI1NiIsIng1dCI6Imwzc1EtNTBjQ0g0eEJWWkxIVEd3blNSNzY4MCIsImtpZCI6Imwzc1EtNTBjQ0g0eEJWWkxIVEd3blNSNzY4MCJ9.eyJhdWQiOiJodHRwczovL2dyYXBoLm1pY3Jvc29mdC5jb20iLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC9lYjI1NDJiOC01YTVkLTRmNjEtYTliNS02Y2U3ZGJjNGViZmQvIiwiaWF0IjoxNjM2MTE2NzEwLCJuYmYiOjE2MzYxMTY3MTAsImV4cCI6MTYzNjEyMTkzNywiYWNjdCI6MCwiYWNyIjoiMSIsImFpbyI6IkFTUUEyLzhUQUFBQVJGM0x3VnlyejFLaUhFeHNCZDUwM3JreEROV2NQMmNpZy95WnVVVDZ6THM9IiwiYW1yIjpbInB3ZCJdLCJhcHBfZGlzcGxheW5hbWUiOiJTaGFyZVBvaW50IE9ubGluZSBDbGllbnQgRXh0ZW5zaWJpbGl0eSBXZWIgQXBwbGljYXRpb24gUHJpbmNpcGFsIiwiYXBwaWQiOiI3Yjc4ZTg2OS1kODU3LTRjZTEtYmM3YS03MGUzZGQ4YjNlNGMiLCJhcHBpZGFjciI6IjAiLCJmYW1pbHlfbmFtZSI6Ik11bGFvc21hbm92acSHIiwiZ2l2ZW5fbmFtZSI6IlNlbmFkIiwiaGFzd2lkcyI6InRydWUiLCJpZHR5cCI6InVzZXIiLCJpcGFkZHIiOiI0Ni4yMzkuNi41MyIsIm5hbWUiOiJTZW5hZCBNdWxhb3NtYW5vdmnEhyIsIm9pZCI6ImJjMmQ4YTg2LWIxZjQtNGRmMy04YzdkLWI4ZTQ5ZDkxNjUwZiIsInBsYXRmIjoiMyIsInB1aWQiOiIxMDAzMjAwMEJDNTg4OTlDIiwicmgiOiIwLkFWMEF1RUlsNjExYVlVLXB0V3puMjhUcl9Xbm9lSHRYMk9GTXZIcHc0OTJMUGt4ZEFEOC4iLCJzY3AiOiJBcHBsaWNhdGlvbi5SZWFkV3JpdGUuQWxsIERpcmVjdG9yeS5BY2Nlc3NBc1VzZXIuQWxsIERpcmVjdG9yeS5SZWFkLkFsbCBGaWxlcy5SZWFkIEZpbGVzLlJlYWQuQWxsIEZpbGVzLlJlYWRXcml0ZSBGaWxlcy5SZWFkV3JpdGUuQWxsIEdyb3VwLlJlYWQuQWxsIEdyb3VwTWVtYmVyLlJlYWQuQWxsIFBlb3BsZS5SZWFkIFBlb3BsZS5SZWFkLkFsbCBTaXRlcy5SZWFkLkFsbCBTaXRlcy5SZWFkV3JpdGUuQWxsIFVzZXIuUmVhZC5BbGwgcHJvZmlsZSBvcGVuaWQgZW1haWwiLCJzaWduaW5fc3RhdGUiOlsia21zaSJdLCJzdWIiOiJfSFlDMGRyTnBneGFoVjFOWmhvVDI0ckdjNXJkNkNLc0tQNGJJMkJDMzlNIiwidGVuYW50X3JlZ2lvbl9zY29wZSI6IkVVIiwidGlkIjoiZWIyNTQyYjgtNWE1ZC00ZjYxLWE5YjUtNmNlN2RiYzRlYmZkIiwidW5pcXVlX25hbWUiOiJzbUBzaW11bGF0ZTM2NS5vbm1pY3Jvc29mdC5jb20iLCJ1cG4iOiJzbUBzaW11bGF0ZTM2NS5vbm1pY3Jvc29mdC5jb20iLCJ1dGkiOiJZdzNyTmxYZlUwS2FHRHUyZ0tzcUFBIiwidmVyIjoiMS4wIiwieG1zX3N0Ijp7InN1YiI6Ik9tb1Q0OWxmRHpMT2hBZFZhNmswU3g3ZFJrTEk4aFJUendoaklLMkdhUjAifSwieG1zX3RjZHQiOjE1ODg2MDY5NTV9.V7-hO9gaybtHxG39-vQ8L56Fw-HLbT0Im8p7wJoa8V4FqWF4C6Jw_LFOCW3YA8aNqWOiz3h8fzJ60fvpi37zM_nY9iJm6MrKHCPbMVS8hhrY40rDxFzvZjptKLJfdlajyLtbpKr8fnY-XC_L2tkpoUnsJ14EGx1KA3ACr-x6TCPCLVjcxGUhXXEK-saYERw0CaOQByNiZPKQaUB8diyBI18LCuBfpcExJc0nPGiPgssZ1XoO-2nwOBUduL5Fs6-Hcwaig_7USwuvnsHitjqhZX42Dc8OLoKAaDVQF2Bqv54aahdz-FnEDXjXt2syOwgWbraivHxHX0XK6YPRNsmp5Q";
+        callback(null, token);
+
     }
-    //for test cases using browser
-    const token="eyJ0eXAiOiJKV1QiLCJub25jZSI6Ikg0QmdFVmREYnIzRzl0a2VWM1VMbDVuWU50VHdJQU56VWZ0ZE1aSTBDdzQiLCJhbGciOiJSUzI1NiIsIng1dCI6Imwzc1EtNTBjQ0g0eEJWWkxIVEd3blNSNzY4MCIsImtpZCI6Imwzc1EtNTBjQ0g0eEJWWkxIVEd3blNSNzY4MCJ9.eyJhdWQiOiJodHRwczovL2dyYXBoLm1pY3Jvc29mdC5jb20iLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC9lYjI1NDJiOC01YTVkLTRmNjEtYTliNS02Y2U3ZGJjNGViZmQvIiwiaWF0IjoxNjM2MDMzMzQ0LCJuYmYiOjE2MzYwMzMzNDQsImV4cCI6MTYzNjAzNzI0NCwiYWNjdCI6MCwiYWNyIjoiMSIsImFpbyI6IkFTUUEyLzhUQUFBQVRVcGx3WkFwb29SSEZsaXhNVEpSN3V4ZG1hSHdqUmlVSThKazR0aStHUDQ9IiwiYW1yIjpbInB3ZCJdLCJhcHBfZGlzcGxheW5hbWUiOiJTaGFyZVBvaW50IE9ubGluZSBDbGllbnQgRXh0ZW5zaWJpbGl0eSBXZWIgQXBwbGljYXRpb24gUHJpbmNpcGFsIiwiYXBwaWQiOiI3Yjc4ZTg2OS1kODU3LTRjZTEtYmM3YS03MGUzZGQ4YjNlNGMiLCJhcHBpZGFjciI6IjAiLCJmYW1pbHlfbmFtZSI6Ik11bGFvc21hbm92acSHIiwiZ2l2ZW5fbmFtZSI6IlNlbmFkIiwiaGFzd2lkcyI6InRydWUiLCJpZHR5cCI6InVzZXIiLCJpcGFkZHIiOiI3Ny43Ny4yMTUuMTgiLCJuYW1lIjoiU2VuYWQgTXVsYW9zbWFub3ZpxIciLCJvaWQiOiJiYzJkOGE4Ni1iMWY0LTRkZjMtOGM3ZC1iOGU0OWQ5MTY1MGYiLCJwbGF0ZiI6IjMiLCJwdWlkIjoiMTAwMzIwMDBCQzU4ODk5QyIsInJoIjoiMC5BVjBBdUVJbDYxMWFZVS1wdFd6bjI4VHJfV25vZUh0WDJPRk12SHB3NDkyTFBreGRBRDguIiwic2NwIjoiQXBwbGljYXRpb24uUmVhZFdyaXRlLkFsbCBEaXJlY3RvcnkuQWNjZXNzQXNVc2VyLkFsbCBEaXJlY3RvcnkuUmVhZC5BbGwgRmlsZXMuUmVhZCBGaWxlcy5SZWFkLkFsbCBGaWxlcy5SZWFkV3JpdGUgRmlsZXMuUmVhZFdyaXRlLkFsbCBHcm91cC5SZWFkLkFsbCBHcm91cE1lbWJlci5SZWFkLkFsbCBQZW9wbGUuUmVhZCBQZW9wbGUuUmVhZC5BbGwgU2l0ZXMuUmVhZC5BbGwgU2l0ZXMuUmVhZFdyaXRlLkFsbCBVc2VyLlJlYWQuQWxsIHByb2ZpbGUgb3BlbmlkIGVtYWlsIiwic2lnbmluX3N0YXRlIjpbImttc2kiXSwic3ViIjoiX0hZQzBkck5wZ3hhaFYxTlpob1QyNHJHYzVyZDZDS3NLUDRiSTJCQzM5TSIsInRlbmFudF9yZWdpb25fc2NvcGUiOiJFVSIsInRpZCI6ImViMjU0MmI4LTVhNWQtNGY2MS1hOWI1LTZjZTdkYmM0ZWJmZCIsInVuaXF1ZV9uYW1lIjoic21Ac2ltdWxhdGUzNjUub25taWNyb3NvZnQuY29tIiwidXBuIjoic21Ac2ltdWxhdGUzNjUub25taWNyb3NvZnQuY29tIiwidXRpIjoiWnA1RTFoUGE2VVM0R1V2TXplWVBBQSIsInZlciI6IjEuMCIsInhtc19zdCI6eyJzdWIiOiJPbW9UNDlsZkR6TE9oQWRWYTZrMFN4N2RSa0xJOGhSVHp3aGpJSzJHYVIwIn0sInhtc190Y2R0IjoxNTg4NjA2OTU1fQ.E6DsaNAqpwjFqIAo8PBJyn5nWU4f2e9VIzKZXZ71y7bSvPH4U3X9UDi_W7OlCE7CmUU56TH5QLuXnp1RWs1M19jWFAyMa0h5Kzw-Lf6MyAD1JPPCf9wYJDtCJ1Wv14oEVBNjWxHXkIgV6vSa1tdIhUtK-CP-H_MV0nU8KP3pSi_FkEDAFtyGg32fyWxvZYK1rj8a61qMlXNbTbkd98eoR23sVpxz05VKmgVyG9HXrkBQrxOzJ3z3ufDT_Hzu8gwb1iy6oAfI80G9OU3rMmDKcLKmBtY7IcpL4LPhoFveGk9IQVMbrrpwr2lVo_NyM6Gh_Ep9oSbIwe7cpJqAtw7tuQ";
-    callback(null, token);
 
 
 };
 let options: Options = {
     authProvider,
 };
-export const client = Client.init(options);
+export const msGraphClient = Client.init(options);
