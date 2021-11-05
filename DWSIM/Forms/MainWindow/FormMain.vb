@@ -146,6 +146,7 @@ Public Class FormMain
             ' On user details loaded
             AddHandler UserService.GetInstance().UserDetailsLoaded, AddressOf UserService_UserDetailsLoaded
             AddHandler UserService.GetInstance().UserLoggedOut, AddressOf UserService_UserLoggedOut
+            AddHandler FilePickerService.S3365DashboardFileOpened, AddressOf FilePickerService_S3365DashboardFileOpened
 
 
 #If Not WINE32 Then
@@ -251,6 +252,10 @@ Public Class FormMain
         Me.LogoutDropdown.Text = ""
         Me.LogoutDropdown.Visible = False
         Me.LoginButton.Visible = True
+    End Sub
+
+    Private Sub FilePickerService_S3365DashboardFileOpened(sender As Object, filePath As String)
+        LoadFile(filePath)
     End Sub
     Private Sub FormMain_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles Me.DragDrop
         If e.Data.GetDataPresent(DataFormats.FileDrop) Then
@@ -4302,6 +4307,7 @@ Label_00CC:
 
     Private Sub OpenFromS365DashboardBtn_Click(sender As Object, e As EventArgs) Handles OpenFromS365DashboardBtn.Click
         Dim filePickerForm As S365FilePickerForm = New S365FilePickerForm
+
         filePickerForm.ShowDialog()
     End Sub
 

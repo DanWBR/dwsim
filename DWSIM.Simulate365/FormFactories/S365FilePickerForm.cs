@@ -14,12 +14,24 @@ namespace DWSIM.Simulate365.FormFactories
     {
         private WebUIForm _webUIForm;
 
+        public S365FilePickerForm()
+        {
+            FilePickerService.S3365DashboardFileOpenStarted += FilePickerService_S3365DashboardFileOpenStarted;
+        }
+
+        private void FilePickerService_S3365DashboardFileOpenStarted(object sender, EventArgs e)
+        {
+            // Close window
+            _webUIForm?.Close();
+            _webUIForm?.Dispose();
+        }
+
         public void ShowDialog()
         {
             var initialUrl = $"/";
             _webUIForm = new WebUIForm(initialUrl, "Open file from Simulate 365 Dashboard", true)
             {
-                Width = 1200,
+                Width = 1300,
                 Height = 800
             };
 
@@ -35,7 +47,8 @@ namespace DWSIM.Simulate365.FormFactories
                 var webView = sender as WebView2;
                 if (webView.CoreWebView2 != null)
                 {        
-                    webView.CoreWebView2.AddHostObjectToScript("usersService", UserService.GetInstance());   
+                    webView.CoreWebView2.AddHostObjectToScript("authService", new AuthService());
+                    webView.CoreWebView2.AddHostObjectToScript("filePickerService", new FilePickerService());
                 }
             }
             catch (Exception ex)

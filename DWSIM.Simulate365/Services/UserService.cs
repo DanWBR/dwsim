@@ -12,8 +12,7 @@ using System.Threading.Tasks;
 
 namespace DWSIM.Simulate365.Services
 {
-    [ClassInterface(ClassInterfaceType.AutoDual)]
-    [ComVisible(true)]
+ 
     public class UserService
     {
         private static UserService _singletonInstance;
@@ -96,7 +95,10 @@ namespace DWSIM.Simulate365.Services
 
         }
 
-      
+      public string GetUserToken()
+        {
+            return this._accessToken;
+        }
         public void SetAccessToken(string accessToken, string refreshToken, DateTime expiresAt)
         {
             _accessToken = accessToken;
