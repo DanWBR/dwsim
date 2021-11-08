@@ -55,6 +55,13 @@ Namespace MathEx.Optimization
 
         End Sub
 
+        Public Sub Reset()
+
+            _Iterations = 0
+            _error = 0.0
+
+        End Sub
+
         Public Shared Function FindRoots(functionbody As Func(Of Double(), Double()), vars As Double(),
                                          maxits As Integer, tol As Double) As Double()
 

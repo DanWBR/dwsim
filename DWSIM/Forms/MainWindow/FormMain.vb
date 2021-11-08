@@ -771,6 +771,12 @@ Public Class FormMain
 
         PropertyPackages.Add(LIQPP.ComponentName.ToString, LIQPP)
 
+        Dim DHPP As New DebyeHuckelPropertyPackage()
+        DHPP.ComponentName = "Debye-Hückel (Aqueous Electrolytes)"
+        DHPP.ComponentDescription = DWSIM.App.GetLocalString("DescDHPP")
+
+        PropertyPackages.Add(DHPP.ComponentName.ToString, DHPP)
+
         Dim BOPP As BlackOilPropertyPackage = New BlackOilPropertyPackage()
         BOPP.ComponentName = "Black Oil"
         BOPP.ComponentDescription = DWSIM.App.GetLocalString("DescBOPP")

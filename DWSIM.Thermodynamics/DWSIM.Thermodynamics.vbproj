@@ -202,6 +202,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EditingForms\PropertyPackages\FormConfigDH.designer.vb">
+      <DependentUpon>FormConfigDH.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EditingForms\PropertyPackages\FormConfigDH.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="EditingForms\PropertyPackages\FormConfigLIQUAC.Designer.vb">
       <DependentUpon>FormConfigLIQUAC.vb</DependentUpon>
     </Compile>
@@ -372,9 +378,11 @@
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
     <Compile Include="MaterialStream\MaterialStream.vb" />
+    <Compile Include="PropertyPackages\DebyeHuckel.vb" />
     <Compile Include="PropertyPackages\LIQUAC2PropertyPackage.vb" />
     <Compile Include="PropertyPackages\Models\ElectrolyteNRTL.vb" />
     <Compile Include="PropertyPackages\Models\PengRobinson78.vb" />
+    <Compile Include="PropertyPackages\Models\DebyeHuckel.vb" />
     <Compile Include="PropertyPackages\Models\TrueCriticalPoint.vb" />
     <Compile Include="BaseClasses\PropertyMethods.vb" />
     <Compile Include="Main\Calculator.vb" />
@@ -560,6 +568,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigENRTL.resx">
       <DependentUpon>FormConfigENRTL.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigDH.de.resx">
+      <DependentUpon>FormConfigDH.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigDH.en.resx">
+      <DependentUpon>FormConfigDH.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigDH.es.resx">
+      <DependentUpon>FormConfigDH.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigDH.resx">
+      <DependentUpon>FormConfigDH.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditingForms\PropertyPackages\FormConfigLIQUAC.en.resx">
       <DependentUpon>FormConfigLIQUAC.vb</DependentUpon>

@@ -167,7 +167,7 @@ Namespace SystemsOfUnits
 
         Public Property volume As String Implements Interfaces.IUnitsOfMeasure.volume
 
-        Public Property volumetricflow As String Implements Interfaces.IUnitsOfMeasure.volumetricFlow
+        Public Property volumetricFlow As String Implements Interfaces.IUnitsOfMeasure.volumetricFlow
 
         Public Property diffusivity As String Implements IUnitsOfMeasure.diffusivity
 
@@ -1164,10 +1164,10 @@ Namespace SystemsOfUnits
             Return newarr.ToArray
         End Function
 
-        Public Shared Function ConvertArrayfromSI(ByVal units As String, ByVal values As Double()) As Double()
+        Public Shared Function ConvertArrayFromSI(ByVal units As String, ByVal values As Double()) As Double()
             Dim newarr As New List(Of Double)
             For Each d In values
-                newarr.Add(ConvertfromSI(units, d))
+                newarr.Add(ConvertFromSI(units, d))
             Next
             Return newarr.ToArray
         End Function
@@ -1661,7 +1661,7 @@ Namespace SystemsOfUnits
 
         End Function
 
-        Public Shared Function ConvertfromSI(ByVal units As String, ByVal value As Double) As Double
+        Public Shared Function ConvertFromSI(ByVal units As String, ByVal value As Double) As Double
 
             Select Case units
 

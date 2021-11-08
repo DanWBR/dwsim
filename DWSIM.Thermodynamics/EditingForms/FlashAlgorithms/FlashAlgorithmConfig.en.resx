@@ -119,13 +119,13 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnConfigExtSolver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>356, 73</value>
+    <value>340, 73</value>
   </data>
   <data name="cbExternalSolver.Location" type="System.Drawing.Point, System.Drawing">
     <value>193, 73</value>
   </data>
   <data name="cbExternalSolver.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 21</value>
+    <value>141, 21</value>
   </data>
   <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 77</value>
@@ -167,8 +167,11 @@
   <data name="chkFastModeNL.Text" xml:space="preserve">
     <value>Enable Fast Mode for PH/PS Flash</value>
   </data>
+  <data name="gpNL.Location" type="System.Drawing.Point, System.Drawing">
+    <value>367, 12</value>
+  </data>
   <data name="gpNL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 90</value>
+    <value>226, 90</value>
   </data>
   <data name="gpNL.Text" xml:space="preserve">
     <value>Nested Loops Options</value>
@@ -180,7 +183,7 @@
     <value>193, 46</value>
   </data>
   <data name="cbFlashApproach.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 21</value>
+    <value>167, 21</value>
   </data>
   <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 50</value>
@@ -231,7 +234,7 @@
     <value>193, 19</value>
   </data>
   <data name="cbFlashType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 21</value>
+    <value>167, 21</value>
   </data>
   <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 23</value>
@@ -246,10 +249,10 @@
     <value>Top, Right</value>
   </data>
   <data name="tbPT_DampingFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>384, 325</value>
+    <value>491, 325</value>
   </data>
   <data name="tbPT_DampingFactor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 20</value>
+    <value>98, 20</value>
   </data>
   <data name="Label30.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 328</value>
@@ -264,10 +267,10 @@
     <value>Top, Right</value>
   </data>
   <data name="tbPH_MaxDT.Location" type="System.Drawing.Point, System.Drawing">
-    <value>385, 299</value>
+    <value>492, 299</value>
   </data>
   <data name="tbPH_MaxDT.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 20</value>
+    <value>97, 20</value>
   </data>
   <data name="Label29.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 302</value>
@@ -291,19 +294,19 @@
     <value>Top, Right</value>
   </data>
   <data name="tbPV_EpsilonT.Location" type="System.Drawing.Point, System.Drawing">
-    <value>385, 221</value>
+    <value>492, 221</value>
   </data>
   <data name="tbPV_EpsilonT.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 20</value>
+    <value>98, 20</value>
   </data>
   <data name="tbPV_DampingFactor.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="tbPV_DampingFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>385, 273</value>
+    <value>492, 273</value>
   </data>
   <data name="tbPV_DampingFactor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 20</value>
+    <value>98, 20</value>
   </data>
   <data name="chkValidateEqCalc.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 155</value>
@@ -327,10 +330,10 @@
     <value>Top, Right</value>
   </data>
   <data name="tbPV_MaxDT.Location" type="System.Drawing.Point, System.Drawing">
-    <value>385, 247</value>
+    <value>492, 247</value>
   </data>
   <data name="tbPV_MaxDT.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 20</value>
+    <value>98, 20</value>
   </data>
   <data name="Label24.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 276</value>
@@ -490,6 +493,9 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>629, 417</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Inherit</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
