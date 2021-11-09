@@ -147,7 +147,7 @@ Public Class FormMain
             AddHandler UserService.GetInstance().UserDetailsLoaded, AddressOf UserService_UserDetailsLoaded
             AddHandler UserService.GetInstance().UserLoggedOut, AddressOf UserService_UserLoggedOut
             AddHandler FilePickerService.S3365DashboardFileOpened, AddressOf FilePickerService_S3365DashboardFileOpened
-
+            AddHandler FilePickerService.S365DashboardSaveFileClicked, AddressOf FilePickerService_S365DashboardSaveFileClicked
 
 #If Not WINE32 Then
 
@@ -254,9 +254,15 @@ Public Class FormMain
         Me.LoginButton.Visible = True
     End Sub
 
-    Private Sub FilePickerService_S3365DashboardFileOpened(sender As Object, filePath As String)
-        LoadFile(filePath)
+    Private Sub FilePickerService_S3365DashboardFileOpened(sender As Object, e As S365OpenFileEventArgs)
+        LoadFile(e.FilePath, e.FlowsheetsDriveId, e.DriveItemId)
     End Sub
+
+    Private Sub FilePickerService_S365DashboardSaveFileClicked(sender As Object, e As S365SaveFileEventArgs)
+        SaveFile(False)
+        FileUploaderService.UploadFile(e.FlowsheetsDriveId, e.ParentDriveId, Me.filename, e.Filename)
+    End Sub
+
     Private Sub FormMain_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles Me.DragDrop
         If e.Data.GetDataPresent(DataFormats.FileDrop) Then
             Dim MyFiles() As String
@@ -855,6 +861,7 @@ Public Class FormMain
             Me.SaveToolStripButton.Enabled = True
             Me.SaveToolStripMenuItem.Enabled = True
             Me.SaveAllToolStripMenuItem.Enabled = True
+            Me.SaveToSimulate365DashboardToolStripMenuItem.Enabled = True
             Me.SaveAsToolStripMenuItem.Enabled = True
             Me.ToolStripButton1.Enabled = True
             Me.CloseAllToolstripMenuItem.Enabled = True
@@ -1728,7 +1735,7 @@ Public Class FormMain
 
     End Sub
 
-    Public Function LoadXML(ByVal path As String, ProgressFeedBack As Action(Of Integer), Optional ByVal simulationfilename As String = "", Optional ByVal forcommandline As Boolean = False) As Interfaces.IFlowsheet
+    Public Function LoadXML(ByVal path As String, ProgressFeedBack As Action(Of Integer), Optional ByVal simulationfilename As String = "", Optional ByVal forcommandline As Boolean = False, Optional ByVal s365FlowsheetsDriveId As String = Nothing, Optional ByVal s365DriveItemId As String = Nothing) As Interfaces.IFlowsheet
 
         My.Application.PushUndoRedoAction = False
 
@@ -1787,6 +1794,9 @@ Public Class FormMain
         If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(5)
 
         Dim form As FormFlowsheet = New FormFlowsheet()
+
+        form.S365FlowsheetsDriveId = s365FlowsheetsDriveId
+        form.S365DriveItemId = s365DriveItemId
 
         Settings.CAPEOPENMode = False
 
@@ -3249,7 +3259,7 @@ Public Class FormMain
         End Using
     End Function
 
-    Function LoadAndExtractXMLZIP(ByVal caminho As String, ProgressFeedBack As Action(Of Integer), Optional ByVal forcommandline As Boolean = False) As Interfaces.IFlowsheet
+    Function LoadAndExtractXMLZIP(ByVal caminho As String, ProgressFeedBack As Action(Of Integer), Optional ByVal forcommandline As Boolean = False, Optional ByVal s365FlowsheetsDriveId As String = Nothing, Optional ByVal s365DriveItemId As String = Nothing) As Interfaces.IFlowsheet
 
         Dim pathtosave As String = My.Computer.FileSystem.SpecialDirectories.Temp + Path.DirectorySeparatorChar
         Dim fullname As String = ""
@@ -3295,7 +3305,7 @@ Label_00CC:
                 Loop
             End Using
             Dim fs As Interfaces.IFlowsheet
-            fs = LoadXML(fullname, ProgressFeedBack, caminho, forcommandline)
+            fs = LoadXML(fullname, ProgressFeedBack, caminho, forcommandline, s365FlowsheetsDriveId, s365DriveItemId)
             fs.FilePath = caminho
             fs.Options.FilePath = caminho
             If File.Exists(dbfile) Then
@@ -3378,7 +3388,7 @@ Label_00CC:
 
     End Sub
 
-    Sub LoadFile(fpath As String)
+    Sub LoadFile(fpath As String, Optional ByVal s365FlowsheetsDriveId As String = Nothing, Optional ByVal s365DriveItemId As String = Nothing)
 
         Me.WelcomePanel.Visible = False
         PainelDeBoasvindasToolStripMenuItem.Checked = False
@@ -3407,7 +3417,7 @@ Label_00CC:
                                                               floading.Label2.Text = x.ToString("N0") + "%"
                                                               floading.Refresh()
                                                           End Sub)
-                                            End Sub)
+                                            End Sub, "", False, s365FlowsheetsDriveId, s365DriveItemId)
                 End If
             Case ".dwxmz"
                 Dim myStream As System.IO.FileStream
@@ -3421,7 +3431,7 @@ Label_00CC:
                     Application.DoEvents()
                     Me.LoadAndExtractXMLZIP(Me.filename, Sub(x)
                                                              Me.Invoke(Sub() floading.ProgressBar1.Value = x)
-                                                         End Sub)
+                                                         End Sub, False, s365FlowsheetsDriveId, s365DriveItemId)
                 End If
             Case ".xml"
                 Dim myStream As System.IO.FileStream
@@ -3556,6 +3566,7 @@ Label_00CC:
                                                                                                        'Me.ToolStripStatusLabel1.Text = ""
                                                                                                        If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
                                                                                                    End Sub, TaskContinuationOptions.ExecuteSynchronously)
+
                     ElseIf Path.GetExtension(Me.filename).ToLower = ".xml" Then
                         TaskHelper.Run(Sub() SaveMobileXML(Me.filename, Me.ActiveMdiChild)).ContinueWith(Sub(t)
                                                                                                              'Me.ToolStripStatusLabel1.Text = ""
@@ -3566,6 +3577,7 @@ Label_00CC:
                                                                                                           ' Me.ToolStripStatusLabel1.Text = ""
                                                                                                           If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
                                                                                                       End Sub, TaskContinuationOptions.ExecuteSynchronously)
+
                     Else
                         Me.bgSaveFile.RunWorkerAsync()
                     End If
@@ -4309,6 +4321,11 @@ Label_00CC:
         Dim filePickerForm As S365FilePickerForm = New S365FilePickerForm
 
         filePickerForm.ShowDialog()
+    End Sub
+
+    Private Sub SaveToSimulate365DashboardToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToSimulate365DashboardToolStripMenuItem.Click
+        Dim filePickerForm As S365FilePickerForm = New S365FilePickerForm
+        filePickerForm.ShowDialog(True)
     End Sub
 
     Private Sub tsbInspector_CheckedChanged(sender As Object, e As EventArgs) Handles tsbInspector.CheckedChanged

@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using DWSIM.Simulate365.Models;
 using DWSIM.Simulate365.Services;
 using DWSIM.UI.Web;
+using Microsoft.Web.WebView2.Core;
+using Microsoft.Web.WebView2.WinForms;
 using Newtonsoft.Json;
 
 namespace DWSIM.Simulate365.FormFactories
@@ -22,19 +24,46 @@ namespace DWSIM.Simulate365.FormFactories
         const string RETURN_URL = "https://dwsim-login-return.simulate365.com";
 
         private WebUIForm _webUIForm;
-
+        public LoginFormFactory()
+        {
+            AuthService.OnNavigateToLoginPage += (s, e) => RedirectToLoginPage();
+        }
         public void ShowDialog()
         {
-            var initialUrl = $"https://login.microsoftonline.com/{TENANT_ID}/oauth2/authorize?client_id={CLIENT_ID}&response_type=code&scope={HttpUtility.UrlEncode(SCOPE)}";
-            _webUIForm = new WebUIForm(initialUrl, "Login with Simulate 365 account")
+            var initialUrl = $"";
+            _webUIForm = new WebUIForm(initialUrl, "Login with Simulate 365 account",true)
             {
                 Width = 500,
                 Height = 600
             };
 
             _webUIForm.SubscribeToNavigationStarting(WebView_NavigationStarting);
+            _webUIForm.SubscribeToInitializationCompleted(Browser_CoreWebView2InitializationCompleted);
 
             _webUIForm.ShowDialog();
+        }
+
+        private void Browser_CoreWebView2InitializationCompleted(object sender, CoreWebView2InitializationCompletedEventArgs e)
+        {
+            try
+            {
+                var webView = sender as WebView2;
+                if (webView.CoreWebView2 != null)
+                {
+                    webView.CoreWebView2.AddHostObjectToScript("authService", new AuthService());                   
+                }
+            }
+            catch (Exception ex)
+            {
+
+                //  throw;
+            }
+        }
+
+        public void RedirectToLoginPage()
+        {
+            var loginUrl = $"https://login.microsoftonline.com/{TENANT_ID}/oauth2/authorize?client_id={CLIENT_ID}&response_type=code&scope={HttpUtility.UrlEncode(SCOPE)}";
+            _webUIForm?.Navigate(loginUrl);
         }
 
         private void WebView_NavigationStarting(object sender, Microsoft.Web.WebView2.Core.CoreWebView2NavigationStartingEventArgs e)

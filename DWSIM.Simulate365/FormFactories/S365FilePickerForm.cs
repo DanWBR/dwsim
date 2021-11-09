@@ -17,6 +17,15 @@ namespace DWSIM.Simulate365.FormFactories
         public S365FilePickerForm()
         {
             FilePickerService.S3365DashboardFileOpenStarted += FilePickerService_S3365DashboardFileOpenStarted;
+            FilePickerService.S365DashboardSaveFileClicked += FilePickerService_S365DashboardSaveFileClicked;           
+        }
+
+
+        private void FilePickerService_S365DashboardSaveFileClicked(object sender, S365SaveFileEventArgs e)
+        {
+            // Close window
+            _webUIForm?.Close();
+            _webUIForm?.Dispose();
         }
 
         private void FilePickerService_S3365DashboardFileOpenStarted(object sender, EventArgs e)
@@ -26,10 +35,14 @@ namespace DWSIM.Simulate365.FormFactories
             _webUIForm?.Dispose();
         }
 
-        public void ShowDialog()
+        public void ShowDialog(bool isSave = false)
         {
-            var initialUrl = $"/";
-            _webUIForm = new WebUIForm(initialUrl, "Open file from Simulate 365 Dashboard", true)
+            var saveQueryParam = isSave ? "save" : "open";
+            var initialUrl = $"{saveQueryParam}";
+            string saveFileTitle = "Save file to Simulate 365 Dashboard";
+            string openFileTitle = "Open file from Simulate 365 Dashboard";
+            string title = isSave ? saveFileTitle : openFileTitle;
+            _webUIForm = new WebUIForm(initialUrl, title, true)
             {
                 Width = 1300,
                 Height = 800
@@ -46,7 +59,7 @@ namespace DWSIM.Simulate365.FormFactories
             {
                 var webView = sender as WebView2;
                 if (webView.CoreWebView2 != null)
-                {        
+                {
                     webView.CoreWebView2.AddHostObjectToScript("authService", new AuthService());
                     webView.CoreWebView2.AddHostObjectToScript("filePickerService", new FilePickerService());
                 }

@@ -95,6 +95,7 @@
     <TypeScriptCompile Include="ClientApp\src\components\file-type-icon\file-type-icon.component.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\file-type-icon\file-type-icon.data.ts" />
     <TypeScriptCompile Include="ClientApp\src\components\file-type-icon\file-type-icon.helpers.ts" />
+    <TypeScriptCompile Include="ClientApp\src\components\navigation-bar\navigation-bar.component.tsx" />
     <TypeScriptCompile Include="ClientApp\src\index.tsx" />
     <TypeScriptCompile Include="ClientApp\src\interfaces\documents\document.interfaces.ts" />
     <TypeScriptCompile Include="ClientApp\src\interfaces\services\users-service.interface.ts" />

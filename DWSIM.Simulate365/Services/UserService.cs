@@ -1,10 +1,13 @@
 ﻿using DWSIM.Simulate365.Models;
 using DWSIM.UI.Web;
 using Microsoft.Win32;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
@@ -15,6 +18,12 @@ namespace DWSIM.Simulate365.Services
  
     public class UserService
     {
+
+        const string TENANT_ID = "eb2542b8-5a5d-4f61-a9b5-6ce7dbc4ebfd";
+        const string CLIENT_ID = "d18e5f18-7709-4ef0-913e-3c8eeecd7d60";
+        const string SCOPE = "profile openid offline_access";
+        const string RETURN_URL = "https://dwsim-login-return.simulate365.com";
+
         private static UserService _singletonInstance;
 
         private UserDetailsModel _currentUser = null;
@@ -22,6 +31,7 @@ namespace DWSIM.Simulate365.Services
         private string _accessToken = null;
         private string _refreshToken = null;
         private DateTime _accessTokenExpiresAt = DateTime.MinValue;
+        private System.Timers.Timer refreshTokenTimer;
 
         #region Public events
 
@@ -45,6 +55,21 @@ namespace DWSIM.Simulate365.Services
                 Task.Run(() => LoadUserDetails());
             }
 
+            refreshTokenTimer = new System.Timers.Timer();
+            refreshTokenTimer.Elapsed += async (sender, args) => {
+                if (this._accessTokenExpiresAt != DateTime.MinValue && this._accessTokenExpiresAt.AddMinutes(-5) < DateTime.Now)
+                {
+                    await GetInstance().RefreshToken();
+                }
+                 };
+            refreshTokenTimer.AutoReset = true;
+            refreshTokenTimer.Interval = TimeSpan.FromMinutes(1).TotalMilliseconds;
+            refreshTokenTimer.Start();
+        }
+
+        public  bool _IsLoggedIn()
+        {
+            return this._accessToken != null && this._accessTokenExpiresAt > DateTime.Now;
         }
 
         public static UserService GetInstance()
@@ -148,5 +173,51 @@ namespace DWSIM.Simulate365.Services
 
             }
         }
+   
+       public async Task RefreshToken()
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    string refreshUrl = $"https://login.microsoftonline.com/{TENANT_ID}/oauth2/v2.0/token";
+                    var formData = new Dictionary<string, string>()
+                    {
+                        ["client_id"] = CLIENT_ID,
+                        ["refresh_token"] = _refreshToken,
+                        ["scope"] = SCOPE,
+                        ["redirect_uri"] =RETURN_URL,
+                        ["grant_type"] = "refresh_token",
+                    };
+
+                    HttpResponseMessage response = await client.PostAsync(refreshUrl, new FormUrlEncodedContent(formData));
+                    var responseStr = await response.Content.ReadAsStringAsync();
+
+                    // Check for error
+                    var errorResponse = JsonConvert.DeserializeObject<OAuthErrorResponse>(responseStr);
+                    if (errorResponse != null && !String.IsNullOrWhiteSpace(errorResponse.Error))
+                    {
+                        var errorMessage = "An error occured while refreshing authorizaton token.";
+                        if (!String.IsNullOrWhiteSpace(errorResponse.ErrorDescription))
+                            errorMessage = errorResponse.ErrorDescription;
+
+                        throw new Exception(errorMessage);
+                    }
+
+                    // Deserialize
+                    var token = JsonConvert.DeserializeObject<OAuthTokenResponse>(responseStr);
+                    SetAccessToken(token.AccessToken, token.RefreshToken, DateTime.Now.AddSeconds(token.ExpiresIn - 30));
+                   
+                }
+            }
+            catch (Exception ex)
+            {
+
+              //  UserLoggedOut?.Invoke(this, new EventArgs());
+            }
+        }
+
     }
 }

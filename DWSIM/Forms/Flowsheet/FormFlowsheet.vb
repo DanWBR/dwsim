@@ -131,6 +131,9 @@ Public Class FormFlowsheet
 
     Private MessagePump As New Queue(Of Tuple(Of String, WarningType, String))
 
+    Public S365FlowsheetsDriveId As String = Nothing
+    Public S365DriveItemId As String = Nothing
+
 #End Region
 
 #Region "    Form Event Handlers "

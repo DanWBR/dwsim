@@ -1,3 +1,7 @@
-html, body , #root{
+html, body , #root, .App{
     height: 100% !important;
+}
+
+.text-danger{
+    color: #dc3545 !important;
 }

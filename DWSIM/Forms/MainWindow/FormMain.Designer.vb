@@ -37,6 +37,7 @@ Partial Class FormMain
         Me.NovoRegressaoUNIFACIPs = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenFromS365DashboardBtn = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SaveToSimulate365DashboardToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmiFOSSEE = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmiSamples = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
@@ -135,7 +136,7 @@ Partial Class FormMain
         '
         'FileTSMI
         '
-        Me.FileTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.NovoEstudoDoCriadorDeComponentesToolStripMenuItem, Me.NovoEstudoDeRegressaoDeDadosToolStripMenuItem, Me.NovoRegressaoUNIFACIPs, Me.OpenToolStripMenuItem, Me.OpenFromS365DashboardBtn, Me.tsmiFOSSEE, Me.tsmiSamples, Me.toolStripSeparator, Me.SaveToolStripMenuItem, Me.SaveAllToolStripMenuItem, Me.SaveAsToolStripMenuItem, Me.ToolStripSeparator2, Me.CloseAllToolstripMenuItem, Me.toolStripSeparator1, Me.tsFileSeparator, Me.tsFolderSeparator, Me.ExitToolStripMenuItem})
+        Me.FileTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.NovoEstudoDoCriadorDeComponentesToolStripMenuItem, Me.NovoEstudoDeRegressaoDeDadosToolStripMenuItem, Me.NovoRegressaoUNIFACIPs, Me.OpenToolStripMenuItem, Me.OpenFromS365DashboardBtn, Me.SaveToSimulate365DashboardToolStripMenuItem, Me.tsmiFOSSEE, Me.tsmiSamples, Me.toolStripSeparator, Me.SaveToolStripMenuItem, Me.SaveAllToolStripMenuItem, Me.SaveAsToolStripMenuItem, Me.ToolStripSeparator2, Me.CloseAllToolstripMenuItem, Me.toolStripSeparator1, Me.tsFileSeparator, Me.tsFolderSeparator, Me.ExitToolStripMenuItem})
         Me.FileTSMI.Name = "FileTSMI"
         Me.FileTSMI.Overflow = System.Windows.Forms.ToolStripItemOverflow.AsNeeded
         resources.ApplyResources(Me.FileTSMI, "FileTSMI")
@@ -175,6 +176,11 @@ Partial Class FormMain
         Me.OpenFromS365DashboardBtn.Image = Global.DWSIM.My.Resources.Resources.s365_logo_login
         Me.OpenFromS365DashboardBtn.Name = "OpenFromS365DashboardBtn"
         resources.ApplyResources(Me.OpenFromS365DashboardBtn, "OpenFromS365DashboardBtn")
+        '
+        'SaveToSimulate365DashboardToolStripMenuItem
+        '
+        resources.ApplyResources(Me.SaveToSimulate365DashboardToolStripMenuItem, "SaveToSimulate365DashboardToolStripMenuItem")
+        Me.SaveToSimulate365DashboardToolStripMenuItem.Name = "SaveToSimulate365DashboardToolStripMenuItem"
         '
         'tsmiFOSSEE
         '
@@ -944,4 +950,5 @@ Partial Class FormMain
     Friend WithEvents LogoutDropdown As ToolStripDropDownButton
     Friend WithEvents LogoutToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents OpenFromS365DashboardBtn As ToolStripMenuItem
+    Friend WithEvents SaveToSimulate365DashboardToolStripMenuItem As ToolStripMenuItem
 End Class

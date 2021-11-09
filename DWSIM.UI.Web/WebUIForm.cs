@@ -39,21 +39,34 @@ namespace DWSIM.UI.Web
 
             // If using local UI, prepand virtual domain
             if (userLocalUI)
-                this.InitialUrl = $"https://dwsim.webui/index.html#{initialUrl}";
+                this.InitialUrl = $"https://dwsim.webui/index.html#/{initialUrl}";
             else
                 this.InitialUrl = initialUrl;
 
+            // After all variables are set, then initialize form components
+            InitializeComponent();
+
             // Title
+            // Must be called after initialize components
             if (!String.IsNullOrWhiteSpace(title))
                 this.Text = title;
             else
                 this.Text = "Web UI";
 
-            // After all variables are set, then initialize form components
-            InitializeComponent();
+          
 
             this.webView.CoreWebView2InitializationCompleted += WebView_CoreWebView2InitializationCompleted;
         }
+
+        public void RealoadPage()
+        {
+            this.webView.CoreWebView2.Reload();
+        }
+        public void Navigate(string url)
+        {
+            this.webView.CoreWebView2.Navigate(url);
+        }
+
 
         private void WebView_CoreWebView2InitializationCompleted(object sender, Microsoft.Web.WebView2.Core.CoreWebView2InitializationCompletedEventArgs e)
         {

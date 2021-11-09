@@ -1,12 +1,13 @@
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { IDocument, ISelectedFolder, ResponseItemType } from "../interfaces/documents/document.interfaces";
-import { getFlowsheetListItemsAsync, OpenDwsimFile } from "../api/documents.api";
-import { DetailsListLayoutMode, SelectionMode, ShimmeredDetailsList, mergeStyleSets, IColumn, CheckboxVisibility } from "@fluentui/react";
+import { getFlowsheetListItemsAsync, OpenDwsimFile, SaveDwsimFile } from "../api/documents.api";
+import { DetailsListLayoutMode, SelectionMode, ShimmeredDetailsList, mergeStyleSets, IColumn, CheckboxVisibility, TextField, PrimaryButton, Dropdown, DefaultButton } from "@fluentui/react";
 import moment from "moment";
 import { FileTypeIcon, IFileTypeIconProps } from "../components/file-type-icon/file-type-icon.component";
 import { getFileTypeIconPropsCustom } from "../components/file-type-icon/file-type-icon.helpers";
 import NavigationBar from "../components/navigation-bar/navigation-bar.component";
+import CreateFolderModal from "../components/create-folder-modal/create-folder-modal.component";
 
 
 interface IOpenDashboardFilePageProps extends RouteComponentProps<IOpenDashboardFilePageRouteProps> {
@@ -14,6 +15,8 @@ interface IOpenDashboardFilePageProps extends RouteComponentProps<IOpenDashboard
     siteId: string;
     flowsheetsDriveId: string;
     flowsheetsListId: string;
+    isSaveDialog: boolean;
+
 }
 interface IOpenDashboardFilePageRouteProps {
 
@@ -22,8 +25,11 @@ interface IOpenDashboardFilePageRouteProps {
 interface IOpenDashboardFilePageState {
     files: IDocument[];
     folders: IDocument[];
-    selectedFolder: ISelectedFolder;      
+    selectedFolder: ISelectedFolder;
     isDataLoaded: boolean;
+    filename?: string;
+    filetype?: string;
+    showCreateFolderModal: boolean;
 }
 
 const classNames = mergeStyleSets({
@@ -127,6 +133,7 @@ const classNames = mergeStyleSets({
 });
 
 class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps, IOpenDashboardFilePageState>{
+    private _navigationBarRef: React.RefObject<NavigationBar> | undefined;
     // private _selection: Selection;
 
 
@@ -134,21 +141,31 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
         super(props);
         this.state = {
             files: [],
-            folders: [],            
+            folders: [],
             selectedFolder: props.baseFolder,
-            isDataLoaded: false
+            isDataLoaded: false,
+            //   isSaveDialog: false,
+            filename: '',
+            filetype: "dwxmz",
+            showCreateFolderModal: false
         };
-
+        this._navigationBarRef = React.createRef<NavigationBar>();
         //    this._selection = new Selection({ onSelectionChanged: this.selectedRowChanged.bind(this) } as ISelectionOptions);
 
     }
     componentDidMount() {
+        // const queryParams = QueryString.parse(this.props.location.search);
+        // if (queryParams && queryParams.save) {
+        //     this.setState({ isSaveDialog: true });
+        //     console.log("Save dialog");
+        // }
+
         this.getFilesAndFolders();
 
     }
     async getFilesAndFolders() {
         const { selectedFolder } = this.state;
-        const { siteId, flowsheetsListId}=this.props;
+        const { siteId, flowsheetsListId } = this.props;
         try {
             this.setState({ isDataLoaded: false });
             const filesAndFolders = await getFlowsheetListItemsAsync(selectedFolder, siteId, flowsheetsListId);
@@ -162,31 +179,37 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
         }
     }
 
-   
+
     private _onItemInvoked(item: IDocument): void {
         console.log("On item invoked called!", item);
         const { selectedFolder } = this.state;
+        const { isSaveDialog } = this.props;
         if (item.fileType == ResponseItemType.Folder) {
             let folderPath = `/${encodeURIComponent(item.name)}`;
-           
-                folderPath = this.state.selectedFolder.webUrl + folderPath;
-                let newSelectedFolder = {
-                    driveId: item.driveItemId,
-                    displayName: item.name,
-                    webUrl: folderPath,
-                    parentDriveItemId: selectedFolder.driveId
-                } as ISelectedFolder;
-                console.log("Setting selected folder", newSelectedFolder);
-                this.setState({selectedFolder:newSelectedFolder},()=>{
-                    this.getFilesAndFolders();
-                });  
-        }else{
-           
-                OpenDwsimFile(this.props.siteId,item.driveItemId,this.props.flowsheetsDriveId).then(()=>{},(error)=>{alert(error);});
-            
-                
-           
-           
+
+            folderPath = this.state.selectedFolder.webUrl + folderPath;
+            let newSelectedFolder = {
+                driveId: item.driveItemId,
+                displayName: item.name,
+                webUrl: folderPath,
+                parentDriveItemId: selectedFolder.driveId
+            } as ISelectedFolder;
+            console.log("Setting selected folder", newSelectedFolder);
+            this._navigationBarRef?.current?.addSelectedFolder(newSelectedFolder);
+
+            this.setState({ selectedFolder: newSelectedFolder }, () => {
+                this.getFilesAndFolders();
+            });
+        } else {
+            if (!isSaveDialog) {
+                OpenDwsimFile(item.driveItemId, this.props.flowsheetsDriveId).then(() => { }, (error) => { alert(error); });
+            } else {
+                let nameArray = item.name.split('.');
+                if (nameArray.length > 1)
+                    nameArray.pop();
+                const fileName = nameArray.reduce((prev, curr) => prev + curr, "");
+                this.setState({ filename: fileName });
+            }
         }
     }
 
@@ -314,22 +337,75 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
         return columns;
     }
 
+    onSaveFileClick() {
+        console.log("Save clicked", this.state);
+        const { filename, filetype, selectedFolder } = this.state;
+        const { flowsheetsDriveId } = this.props;
+        if (filename && filetype)
+            SaveDwsimFile(filename, filetype, flowsheetsDriveId, selectedFolder.driveId);
+    }
+
     render() {
-        const { folders, files, isDataLoaded,selectedFolder } = this.state;
-        const { siteId, flowsheetsListId, baseFolder, }= this.props;
+        const { folders, files, isDataLoaded, selectedFolder, filename, filetype, showCreateFolderModal } = this.state;
+        const { isSaveDialog } = this.props;
+        const { siteId, flowsheetsListId, baseFolder, } = this.props;
         const columns = [...this.getColumns()];
         const items = [...folders, ...files];
         console.log("isDataLoaded", isDataLoaded);
-        return <div className="ms-Grid" dir="ltr" style={{marginLeft:"30px"}}>
+
+
+        const dropdownControlledExampleOptions = [
+            { key: 'dwxmz', text: 'Simulation File (Compressed XML) (*.dwxmz)' }
+        ];
+
+
+        return <div style={{ marginLeft: "30px" }}>
+            {isSaveDialog && <><div style={{ display: "flex", marginBottom: "5px", marginTop: "5px" }}>
+                <div style={{ flexBasis: "80%" }} >
+                    <TextField placeholder="Enter file name here" value={filename} onChange={(ev, newValue) => this.setState({ filename: newValue })} />
+                </div>
+                <div style={{ flexBasis: "20%" }}>
+                    <DefaultButton text="New Folder" styles={{ root: { marginLeft: "10px" } }} onClick={()=>this.setState({showCreateFolderModal:true})}/>
+                    </div>
+
+            </div>
+                <div style={{ display: "flex", marginBottom: "5px", marginTop: "5px" }} >
+                    <div style={{ flexBasis: "80%" }}>
+                        <Dropdown
+                            selectedKey={filetype}
+                            placeholder="Select an option"
+                            options={dropdownControlledExampleOptions}
+
+                        />
+                    </div>
+                    <div style={{ flexBasis: "20%" }}>
+                        <PrimaryButton text="Save" styles={{ root: { marginLeft: "10px" } }} onClick={this.onSaveFileClick.bind(this)} />
+                    </div>
+                </div>
+               
+
+                {showCreateFolderModal &&    <CreateFolderModal 
+                onFolderCreated={()=>{this.setState({showCreateFolderModal:false}); this.getFilesAndFolders();}}
+                selectedFolder={selectedFolder}  
+                flowsheetsDriveId={this.props.flowsheetsDriveId}
+                onHide={()=>this.setState({showCreateFolderModal:false})} />}
+                </>
+            }
+
+
             <div className="ms-Grid-row">
-                <div className="ms-Grid-col ms-sm12">  <NavigationBar
-                    siteId={siteId}
-                    flowsheetsListId={flowsheetsListId}
-                    baseFolder={baseFolder}
-                    selectedFolder={selectedFolder}
-                    onSelectedFolderChanged={(selectedFolder) => { this.setState({ selectedFolder: selectedFolder },()=>{
-                        this.getFilesAndFolders();
-                    });  }} /></div>
+                <div className="ms-Grid-col ms-sm12">
+                    <NavigationBar
+                        ref={this._navigationBarRef}
+                        siteId={siteId}
+                        flowsheetsListId={flowsheetsListId}
+                        baseFolder={baseFolder}
+                        selectedFolder={selectedFolder}
+                        onSelectedFolderChanged={(selectedFolder) => {
+                            this.setState({ selectedFolder: selectedFolder }, () => {
+                                this.getFilesAndFolders();
+                            });
+                        }} /></div>
 
             </div>
             <div className="ms-Grid-row">
