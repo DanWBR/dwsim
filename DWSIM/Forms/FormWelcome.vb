@@ -112,6 +112,8 @@ Public Class FormWelcome
             Me.lvlatestfolders.View = View.List
         End If
 
+        ExtensionMethods.ChangeDefaultFont(Me)
+
     End Sub
 
     Private Sub KryptonButton5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)

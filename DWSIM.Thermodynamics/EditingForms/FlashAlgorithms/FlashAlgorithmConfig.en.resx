@@ -122,10 +122,10 @@
     <value>340, 73</value>
   </data>
   <data name="cbExternalSolver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>193, 73</value>
+    <value>204, 73</value>
   </data>
   <data name="cbExternalSolver.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 21</value>
+    <value>130, 21</value>
   </data>
   <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 77</value>
@@ -180,10 +180,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="cbFlashApproach.Location" type="System.Drawing.Point, System.Drawing">
-    <value>193, 46</value>
+    <value>204, 46</value>
   </data>
   <data name="cbFlashApproach.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 21</value>
+    <value>156, 21</value>
   </data>
   <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 50</value>
@@ -231,10 +231,10 @@
     <value>SVLLE</value>
   </data>
   <data name="cbFlashType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>193, 19</value>
+    <value>204, 19</value>
   </data>
   <data name="cbFlashType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 21</value>
+    <value>156, 21</value>
   </data>
   <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 23</value>
@@ -493,9 +493,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>629, 417</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Inherit</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
