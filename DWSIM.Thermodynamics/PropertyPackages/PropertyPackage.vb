@@ -6548,6 +6548,10 @@ Final3:
                         vcl(i) = ParseEquation(subst.ConstantProperties.LiquidThermalConductivityEquation, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_A, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_B, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_C, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_D, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_E, T)
                     End If
                     IObj?.Paragraphs.Add(String.Format("Value calculated from experimental curve: {0} W/[m.K]", vcl(i)))
+                    If vcl(i) <= 0.0 Then
+                        vcl(i) = Auxiliary.PROPS.condl_latini(T, subst.ConstantProperties.Normal_Boiling_Point, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Molar_Weight, "")
+                        IObj?.Paragraphs.Add(String.Format("Value estimated with Latini correlation: {0} W/[m.K]", vcl(i)))
+                    End If
                 ElseIf subst.ConstantProperties.IsIon Or subst.ConstantProperties.IsSalt Then
                     vcl(i) = 0.0#
                 Else
