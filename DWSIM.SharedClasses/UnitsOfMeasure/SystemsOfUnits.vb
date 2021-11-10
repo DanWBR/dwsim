@@ -1640,9 +1640,9 @@ Namespace SystemsOfUnits
                     Return value / (22.71 * 3600 * 24 / 1000) * 1000 * 1000
                 Case "mm3/d @ sc"
                     Return value / (23.69 * 3600 * 24 / 1000) * 1000 * 1000
-                Case "mmscfD"
+                Case "mmscfd"
                     Return value / (23.69 * 3600 * 24 / 1000) / 35.3147 * 1000 * 1000
-                Case "scfD"
+                Case "scfd"
                     Return value / (23.69 * 3600 * 24 / 1000) / 35.3147
                 Case "scfm"
                     Return value / (23.69 * 60 / 1000) / 35.3147
@@ -1663,7 +1663,7 @@ Namespace SystemsOfUnits
 
         Public Shared Function ConvertFromSI(ByVal units As String, ByVal value As Double) As Double
 
-            Select Case units
+            Select Case units.ToLower()
 
                 Case "[kg/s]/[pa^0.5]"
                     Return value
@@ -2126,9 +2126,9 @@ Namespace SystemsOfUnits
                     Return value * (22.71 * 3600 * 24 / 1000) / 1000 / 1000
                 Case "mm3/d @ sc"
                     Return value * (23.69 * 3600 * 24 / 1000) / 1000 / 1000
-                Case "mmscfD"
+                Case "mmscfd"
                     Return value * (23.69 * 3600 * 24 / 1000) * 35.3147 / 1000 / 1000
-                Case "scfD"
+                Case "scfd"
                     Return value * (23.69 * 3600 * 24 / 1000) * 35.3147
                 Case "scfm"
                     Return value * (23.69 * 60 / 1000) * 35.3147
