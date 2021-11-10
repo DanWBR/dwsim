@@ -375,9 +375,17 @@ Public Class FormFlowsheet
                     Dim newmenuitem As ToolStripMenuItem = Nothing
                     If extender.Category <> ExtenderCategory.InitializationScript Then
                         If extender.Category = ExtenderCategory.NewItem Then
-                            newmenuitem = New ToolStripMenuItem()
-                            newmenuitem.Text = extender.DisplayText
-                            newmenuitem.DisplayStyle = ToolStripItemDisplayStyle.Text
+                            For Each item As ToolStripMenuItem In MenuStrip1.Items
+                                If item.Text = extender.DisplayText Then
+                                    newmenuitem = item
+                                    Exit For
+                                End If
+                            Next
+                            If newmenuitem Is Nothing Then
+                                newmenuitem = New ToolStripMenuItem()
+                                newmenuitem.Text = extender.DisplayText
+                                newmenuitem.DisplayStyle = ToolStripItemDisplayStyle.Text
+                            End If
                         End If
                         For Each item In extender.Collection
                             Dim exttsmi As New ToolStripMenuItem
@@ -445,7 +453,7 @@ Public Class FormFlowsheet
                                     item.Run()
                             End Select
                         Next
-                        If newmenuitem IsNot Nothing Then
+                        If newmenuitem IsNot Nothing AndAlso Not MenuStrip1.Items.Contains(newmenuitem) Then
                             MenuStrip1.Items.Add(newmenuitem)
                         End If
                     Else
