@@ -68,6 +68,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClientApp\.env.development" />
+    <None Include="ClientApp\.env.production" />
+    <None Include="ClientApp\.env.production.bckp" />
     <None Include="ClientApp\.gitignore" />
     <None Include="ClientApp\package-lock.json" />
     <None Include="ClientApp\package.json" />
@@ -90,7 +93,6 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\api\documents.api.ts" />
-    <TypeScriptCompile Include="ClientApp\src\App.test.tsx" />
     <TypeScriptCompile Include="ClientApp\src\App.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\file-type-icon\file-type-icon.component.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\file-type-icon\file-type-icon.data.ts" />
@@ -117,7 +119,10 @@
     <Error Condition="!Exists('..\packages\Microsoft.Web.WebView2.1.0.1020.30\build\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Web.WebView2.1.0.1020.30\build\Microsoft.Web.WebView2.targets'))" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>cd "$(ProjectDir)ClientApp"
-npm run build</PostBuildEvent>
+    <PostBuildEvent>powershell.exe -Command "cd '$(ProjectDir)ClientApp'; npm install; npm run build"</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
 </Project>
