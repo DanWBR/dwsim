@@ -118,6 +118,7 @@
   </Target>
   <PropertyGroup>
     <PostBuildEvent>cd "$(ProjectDir)ClientApp"
+npm install
 npm run build</PostBuildEvent>
   </PropertyGroup>
 </Project>
