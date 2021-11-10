@@ -658,7 +658,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 kr = reaction.EvaluateK(T + reaction.Approach, proppack)
                 ktot *= kr
                 prodtot *= Math.Abs(prod(i))
-                f(i) = prod(i) - kr
+                f(i) = Math.Log(prod(i) / kr)
                 If Math.Abs(pval) > 0.01 Then
                     If PenaltyValueScheme = 0 Then
 
