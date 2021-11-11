@@ -86,6 +86,7 @@ namespace DWSIM.Simulate365.Services
         public static void Logout()
         {
             _singletonInstance.ClearInstance();
+            _singletonInstance.UserLoggedOut?.Invoke(_singletonInstance,new EventArgs());
         }
 
         private  void ClearInstance()
