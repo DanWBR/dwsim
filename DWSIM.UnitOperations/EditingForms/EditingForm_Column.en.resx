@@ -119,10 +119,10 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblTag.Size" type="System.Drawing.Size, System.Drawing">
-    <value>261, 20</value>
+    <value>254, 20</value>
   </data>
   <data name="chkActive.Location" type="System.Drawing.Point, System.Drawing">
-    <value>373, 43</value>
+    <value>366, 43</value>
   </data>
   <data name="chkActive.ToolTip" xml:space="preserve">
     <value>Active/Inactive</value>
@@ -140,13 +140,13 @@
     <value>Object</value>
   </data>
   <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>400, 98</value>
+    <value>393, 94</value>
   </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>General Info</value>
   </data>
   <data name="btnConfigurePP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>357, 162</value>
+    <value>350, 162</value>
   </data>
   <data name="btnConfigurePP.ToolTip" xml:space="preserve">
     <value>Configure</value>
@@ -155,10 +155,10 @@
     <value />
   </data>
   <data name="cbPropPack.Location" type="System.Drawing.Point, System.Drawing">
-    <value>142, 162</value>
+    <value>162, 162</value>
   </data>
   <data name="cbPropPack.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 21</value>
+    <value>182, 21</value>
   </data>
   <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 166</value>
@@ -408,7 +408,7 @@
     <value>199, 116</value>
   </data>
   <data name="tbConvTol.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 20</value>
+    <value>172, 20</value>
   </data>
   <data name="Label14.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 92</value>
@@ -426,16 +426,16 @@
     <value>Liquid-Liquid Extractor</value>
   </data>
   <data name="cbAbsorberMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>142, 17</value>
+    <value>162, 17</value>
   </data>
   <data name="cbAbsorberMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 21</value>
+    <value>209, 21</value>
   </data>
   <data name="tbMaxIt.Location" type="System.Drawing.Point, System.Drawing">
     <value>199, 89</value>
   </data>
   <data name="tbMaxIt.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 20</value>
+    <value>172, 20</value>
   </data>
   <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 20</value>
@@ -456,19 +456,16 @@
     <value>Number of Stages</value>
   </data>
   <data name="tbNStages.Location" type="System.Drawing.Point, System.Drawing">
-    <value>142, 44</value>
+    <value>162, 44</value>
   </data>
   <data name="tbNStages.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 20</value>
+    <value>209, 20</value>
   </data>
   <data name="InitialEstimatesPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 66</value>
   </data>
   <data name="InitialEstimatesPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>375, 327</value>
-  </data>
-  <data name="chkUseIE_C.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left</value>
   </data>
   <data name="chkUseIE_C.Location" type="System.Drawing.Point, System.Drawing">
     <value>257, 43</value>
@@ -485,9 +482,6 @@
   <data name="chkUseIE_C.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="chkUseIE_VF.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left</value>
-  </data>
   <data name="chkUseIE_VF.Location" type="System.Drawing.Point, System.Drawing">
     <value>179, 43</value>
   </data>
@@ -503,9 +497,6 @@
   <data name="chkUseIE_VF.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="chkUseIE_LF.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left</value>
-  </data>
   <data name="chkUseIE_LF.Location" type="System.Drawing.Point, System.Drawing">
     <value>106, 43</value>
   </data>
@@ -520,9 +511,6 @@
   </data>
   <data name="chkUseIE_LF.ToolTip1" xml:space="preserve">
     <value />
-  </data>
-  <data name="chkUseIE_T.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left</value>
   </data>
   <data name="chkUseIE_T.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 43</value>
@@ -540,7 +528,7 @@
     <value />
   </data>
   <data name="btnConfigExtSolver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>357, 216</value>
+    <value>350, 216</value>
   </data>
   <data name="btnResults.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 369</value>
@@ -564,10 +552,10 @@
     <value>392, 369</value>
   </data>
   <data name="cbExternalSolver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>142, 216</value>
+    <value>162, 216</value>
   </data>
   <data name="cbExternalSolver.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 21</value>
+    <value>182, 21</value>
   </data>
   <data name="LabelES.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -582,10 +570,10 @@
     <value>External Solver</value>
   </data>
   <data name="cbSolvingMethod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>142, 189</value>
+    <value>162, 189</value>
   </data>
   <data name="cbSolvingMethod.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 21</value>
+    <value>209, 21</value>
   </data>
   <data name="LabelSM.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -600,7 +588,7 @@
     <value>Solving Method</value>
   </data>
   <data name="TabPage6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>392, 399</value>
+    <value>385, 797</value>
   </data>
   <data name="TabPage6.Text" xml:space="preserve">
     <value>General</value>
@@ -645,9 +633,15 @@
     <value>6, 106</value>
   </data>
   <data name="TabContainerAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>400, 425</value>
+    <value>393, 823</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>413, 534</value>
+    <value>404, 941</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1792, 325, 1792, 325</value>
   </data>
 </root>
