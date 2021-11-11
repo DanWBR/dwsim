@@ -119,7 +119,7 @@
     <Error Condition="!Exists('..\packages\Microsoft.Web.WebView2.1.0.1020.30\build\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Web.WebView2.1.0.1020.30\build\Microsoft.Web.WebView2.targets'))" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>powershell.exe -Command "cd '$(ProjectDir)ClientApp'; npm install; npm run build"</PostBuildEvent>
+    <PostBuildEvent>powershell.exe -Command "cd '$(ProjectDir)ClientApp'; $env:CI=$false; npm install; npm run build"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
