@@ -119,6 +119,8 @@ Partial Class FormMain
         Me.SettingsPanel = New System.Windows.Forms.Panel()
         Me.ButtonClose = New System.Windows.Forms.Button()
         Me.WelcomePanel = New System.Windows.Forms.Panel()
+        Me.LoggedInDwsimProBtn = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LoggedInS365Button = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.SettingsPanel.SuspendLayout()
@@ -585,7 +587,7 @@ Partial Class FormMain
         'LogoutDropdown
         '
         Me.LogoutDropdown.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.LogoutDropdown.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LogoutToolStripMenuItem})
+        Me.LogoutDropdown.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LoggedInDwsimProBtn, Me.LoggedInS365Button, Me.LogoutToolStripMenuItem})
         resources.ApplyResources(Me.LogoutDropdown, "LogoutDropdown")
         Me.LogoutDropdown.Name = "LogoutDropdown"
         '
@@ -661,6 +663,16 @@ Partial Class FormMain
         '
         resources.ApplyResources(Me.WelcomePanel, "WelcomePanel")
         Me.WelcomePanel.Name = "WelcomePanel"
+        '
+        'LoggedInDwsimProBtn
+        '
+        Me.LoggedInDwsimProBtn.Name = "LoggedInDwsimProBtn"
+        resources.ApplyResources(Me.LoggedInDwsimProBtn, "LoggedInDwsimProBtn")
+        '
+        'LoggedInS365Button
+        '
+        Me.LoggedInS365Button.Name = "LoggedInS365Button"
+        resources.ApplyResources(Me.LoggedInS365Button, "LoggedInS365Button")
         '
         'FormMain
         '
@@ -952,4 +964,6 @@ Partial Class FormMain
     Friend WithEvents LogoutToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents OpenFromS365DashboardBtn As ToolStripMenuItem
     Friend WithEvents SaveToSimulate365DashboardToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents LoggedInDwsimProBtn As ToolStripMenuItem
+    Friend WithEvents LoggedInS365Button As ToolStripMenuItem
 End Class

@@ -10,14 +10,16 @@ namespace DWSIM.Simulate365.Services
 {
     [ClassInterface(ClassInterfaceType.AutoDual)]
     [ComVisible(true)]
-    public  class AuthService
+    public class AuthService
     {
         public static EventHandler OnNavigateToLoginPage;
+
         public string GetUserToken()
         {
             var token = UserService.GetInstance().GetUserToken();
             return token;
         }
+
         public void OpenRegisterLinkInLocalBrowser()
         {
             Process.Start($"https://simulate365.com/registration/");
