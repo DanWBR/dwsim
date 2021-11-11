@@ -173,13 +173,14 @@ Partial Class FormMain
         '
         'OpenFromS365DashboardBtn
         '
+        resources.ApplyResources(Me.OpenFromS365DashboardBtn, "OpenFromS365DashboardBtn")
         Me.OpenFromS365DashboardBtn.Image = Global.DWSIM.My.Resources.Resources.s365_logo_login
         Me.OpenFromS365DashboardBtn.Name = "OpenFromS365DashboardBtn"
-        resources.ApplyResources(Me.OpenFromS365DashboardBtn, "OpenFromS365DashboardBtn")
         '
         'SaveToSimulate365DashboardToolStripMenuItem
         '
         resources.ApplyResources(Me.SaveToSimulate365DashboardToolStripMenuItem, "SaveToSimulate365DashboardToolStripMenuItem")
+        Me.SaveToSimulate365DashboardToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.s365_logo_login
         Me.SaveToSimulate365DashboardToolStripMenuItem.Name = "SaveToSimulate365DashboardToolStripMenuItem"
         '
         'tsmiFOSSEE
