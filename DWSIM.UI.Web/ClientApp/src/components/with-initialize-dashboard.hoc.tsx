@@ -126,7 +126,7 @@ export function withInitializeDashboard(WrappedComponent: any) {
             }
             else
 
-                return <WrappedComponent {...this.state} />
+                return <WrappedComponent {...this.props} {...this.state} />
         }
     }
 

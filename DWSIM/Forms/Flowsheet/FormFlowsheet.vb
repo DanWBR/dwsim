@@ -611,6 +611,7 @@ Public Class FormFlowsheet
             My.Application.MainWindowForm.SaveToolStripMenuItem.Enabled = False
             My.Application.MainWindowForm.SaveAllToolStripMenuItem.Enabled = False
             My.Application.MainWindowForm.SaveAsToolStripMenuItem.Enabled = False
+            My.Application.MainWindowForm.SaveToSimulate365DashboardToolStripMenuItem.Enabled = False
             My.Application.MainWindowForm.ToolStripButton1.Enabled = False
 
         Else
@@ -621,6 +622,7 @@ Public Class FormFlowsheet
             My.Application.MainWindowForm.SaveToolStripMenuItem.Enabled = True
             My.Application.MainWindowForm.SaveAllToolStripMenuItem.Enabled = True
             My.Application.MainWindowForm.SaveAsToolStripMenuItem.Enabled = True
+            My.Application.MainWindowForm.SaveToSimulate365DashboardToolStripMenuItem.Enabled = True
             My.Application.MainWindowForm.ToolStripButton1.Enabled = True
 
         End If

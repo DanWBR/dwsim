@@ -253,6 +253,7 @@ Public Class FormMain
         Me.LogoutDropdown.Text = ""
         Me.LogoutDropdown.Visible = False
         Me.LoginButton.Visible = True
+        Me.OpenFromS365DashboardBtn.Enabled = False
     End Sub
 
     Private Sub FilePickerService_S3365DashboardFileOpened(sender As Object, e As S365OpenFileEventArgs)
@@ -4327,14 +4328,6 @@ Label_00CC:
     Private Sub SaveToSimulate365DashboardToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToSimulate365DashboardToolStripMenuItem.Click
         Dim filePickerForm As S365FilePickerForm = New S365FilePickerForm
         filePickerForm.ShowDialog(True)
-    End Sub
-
-    Private Sub LoggedInDwsimProBtn_Click(sender As Object, e As EventArgs) Handles LoggedInDwsimProBtn.Click
-        Process.Start("https://simulate365.com/downloads/dwsim-pro/")
-    End Sub
-
-    Private Sub LoggedInS365Button_Click(sender As Object, e As EventArgs) Handles LoggedInS365Button.Click
-        Process.Start("https://simulate365.com/shops/simulate-365-suite/")
     End Sub
 
     Private Sub tsbInspector_CheckedChanged(sender As Object, e As EventArgs) Handles tsbInspector.CheckedChanged

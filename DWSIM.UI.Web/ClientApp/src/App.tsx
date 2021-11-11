@@ -13,7 +13,7 @@ const  App =()=> {
     return <div className="App">
 
       <Route path="/open" exact component={OpenDashboardFilePage} />
-      <Route path="/save" exact component={OpenDashboardFilePage} />
+      <Route path="/save" exact render={(props)=><OpenDashboardFilePage {...{isSaveDialog:true}} {...props} />} />
 
       <Route path="/login/intro" exact component={LoginIntroPage} />
 
