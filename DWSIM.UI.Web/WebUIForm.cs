@@ -21,7 +21,8 @@ namespace DWSIM.UI.Web
     {
         public static string USER_DATA_FOLDER = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "DWSIM", "S365BrowserData");
 
-        public static string LOCAL_WEB_UI_URL = "https://dwsim.webui/index.html#";
+        public static string LOCAL_WEB_UI_DOMAIN = "https://dwsim.webui";
+        public static string LOCAL_WEB_UI_URL = $"{LOCAL_WEB_UI_DOMAIN}/index.html#";
 
         public string InitialUrl { get; private set; }
 
