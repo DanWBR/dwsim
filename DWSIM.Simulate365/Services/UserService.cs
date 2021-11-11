@@ -54,7 +54,8 @@ namespace DWSIM.Simulate365.Services
 
                 Task.Run(() => LoadUserDetails());
             }
-
+            //Intended use to refresh token on page startup
+            #pragma warning disable
             RefreshToken();
 
             refreshTokenTimer = new System.Timers.Timer();
