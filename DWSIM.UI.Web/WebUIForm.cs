@@ -1,4 +1,5 @@
-﻿using Microsoft.Web.WebView2.Core;
+﻿using DWSIM.UI.Web.Services;
+using Microsoft.Web.WebView2.Core;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -51,9 +52,7 @@ namespace DWSIM.UI.Web
             if (!String.IsNullOrWhiteSpace(title))
                 this.Text = title;
             else
-                this.Text = "Web UI";
-
-          
+                this.Text = "Web UI";          
 
             this.webView.CoreWebView2InitializationCompleted += WebView_CoreWebView2InitializationCompleted;
         }
@@ -70,10 +69,13 @@ namespace DWSIM.UI.Web
 
         private void WebView_CoreWebView2InitializationCompleted(object sender, Microsoft.Web.WebView2.Core.CoreWebView2InitializationCompletedEventArgs e)
         {
-
             if (webView.CoreWebView2 != null)
             {
+                // Disable right click menu
                 webView.CoreWebView2.Settings.AreDefaultContextMenusEnabled = false;
+
+                // Add system service
+                webView.CoreWebView2.AddHostObjectToScript("systemService", new SystemService());
             }
         }
 

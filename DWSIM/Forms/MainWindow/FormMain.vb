@@ -4328,6 +4328,14 @@ Label_00CC:
         filePickerForm.ShowDialog(True)
     End Sub
 
+    Private Sub LoggedInDwsimProBtn_Click(sender As Object, e As EventArgs) Handles LoggedInDwsimProBtn.Click
+        Process.Start("https://simulate365.com/downloads/dwsim-pro/")
+    End Sub
+
+    Private Sub LoggedInS365Button_Click(sender As Object, e As EventArgs) Handles LoggedInS365Button.Click
+        Process.Start("https://simulate365.com/shops/simulate-365-suite/")
+    End Sub
+
     Private Sub tsbInspector_CheckedChanged(sender As Object, e As EventArgs) Handles tsbInspector.CheckedChanged
         GlobalSettings.Settings.InspectorEnabled = tsbInspector.Checked
         FrmOptions.chkEnableInspector.Checked = tsbInspector.Checked
