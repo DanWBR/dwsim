@@ -30,8 +30,7 @@ namespace DWSIM.Simulate365.FormFactories
         }
         public void ShowDialog()
         {
-            var initialUrl = $"";
-            _webUIForm = new WebUIForm(initialUrl, "Login with Simulate 365 account",true)
+            _webUIForm = new WebUIForm("login/intro", "Login with Simulate 365 account",true)
             {
                 Width = 500,
                 Height = 600
@@ -72,6 +71,8 @@ namespace DWSIM.Simulate365.FormFactories
             {
                 try
                 {
+                    var webView = sender as WebView2;
+
                     // Split URL by #
                     var splitted = e.Uri.Split('?');
                     if (splitted.Count() != 2)
@@ -83,11 +84,22 @@ namespace DWSIM.Simulate365.FormFactories
                     // Check if it's error
                     if (queryParams.AllKeys.Contains("error"))
                     {
-                        var errorMessage = "Login failed. Server returned error.";
-                        if (queryParams.AllKeys.Contains("error_description") && !String.IsNullOrWhiteSpace(queryParams["error_description"]))
-                            errorMessage = HttpUtility.UrlDecode(queryParams["error_description"]);
+                        // Check if back button was clicked
+                        if (queryParams.AllKeys.Contains("error_subcode") && queryParams["error_subcode"] == "cancel")
+                        {
+                            e.Cancel = true;
 
-                        throw new Exception(errorMessage);
+                            _webUIForm?.Navigate(WebUIForm.LOCAL_WEB_UI_URL + "login/intro");
+                            return;
+                        }
+                        else
+                        {
+                            var errorMessage = "Login failed. Server returned error.";
+                            if (queryParams.AllKeys.Contains("error_description") && !String.IsNullOrWhiteSpace(queryParams["error_description"]))
+                                errorMessage = HttpUtility.UrlDecode(queryParams["error_description"]);
+
+                            throw new Exception(errorMessage);
+                        }
                     }
 
                     // Extract token

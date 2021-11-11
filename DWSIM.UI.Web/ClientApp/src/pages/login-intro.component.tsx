@@ -7,7 +7,7 @@ interface IHomePageProps {
 
 }
 
-const HomePage: React.FC<IHomePageProps> = () => {
+const LoginIntroPage: React.FC<IHomePageProps> = () => {
 
     const onRegisterClick = async () => {
         try {
@@ -91,4 +91,4 @@ const HomePage: React.FC<IHomePageProps> = () => {
 }
 
 
-export default HomePage
+export default LoginIntroPage;
