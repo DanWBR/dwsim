@@ -1,5 +1,5 @@
 import { AuthProvider, AuthProviderCallback, Client, Options } from "@microsoft/microsoft-graph-client";
-import {user_token} from "../../App"
+import {user_token} from "../../components/with-initialize-dashboard.hoc";
 declare const chrome: any;
 
 // Some callback function

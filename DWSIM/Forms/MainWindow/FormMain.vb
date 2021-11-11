@@ -246,6 +246,7 @@ Public Class FormMain
         Me.LoginButton.Visible = False
         Me.LogoutDropdown.Text = user.DisplayName
         Me.LogoutDropdown.Visible = True
+        Me.OpenFromS365DashboardBtn.Enabled = True
     End Sub
 
     Private Sub UserService_UserLoggedOut(sender As Object, e As EventArgs)

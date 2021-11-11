@@ -55,6 +55,8 @@ namespace DWSIM.Simulate365.Services
                 Task.Run(() => LoadUserDetails());
             }
 
+            RefreshToken();
+
             refreshTokenTimer = new System.Timers.Timer();
             refreshTokenTimer.Elapsed += async (sender, args) => {
                 if (this._accessTokenExpiresAt != DateTime.MinValue && this._accessTokenExpiresAt.AddMinutes(-5) < DateTime.Now)

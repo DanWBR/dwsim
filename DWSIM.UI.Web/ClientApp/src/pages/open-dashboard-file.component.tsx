@@ -8,9 +8,10 @@ import { FileTypeIcon, IFileTypeIconProps } from "../components/file-type-icon/f
 import { getFileTypeIconPropsCustom } from "../components/file-type-icon/file-type-icon.helpers";
 import NavigationBar from "../components/navigation-bar/navigation-bar.component";
 import CreateFolderModal from "../components/create-folder-modal/create-folder-modal.component";
+import { IInitializeDashboardProps, withInitializeDashboard } from "../components/with-initialize-dashboard.hoc";
 
 
-interface IOpenDashboardFilePageProps extends RouteComponentProps<IOpenDashboardFilePageRouteProps> {
+interface IOpenDashboardFilePageProps extends RouteComponentProps<IOpenDashboardFilePageRouteProps>, IInitializeDashboardProps {
     baseFolder: ISelectedFolder;
     siteId: string;
     flowsheetsDriveId: string;
@@ -43,6 +44,8 @@ const classNames = mergeStyleSets({
         fontSize: '16px',
     },
     fileIconCell: {
+        display:"flex !important",
+        alignItems:"center",
         textAlign: 'center',
         selectors: {
             '&:before': {
@@ -98,6 +101,7 @@ const classNames = mergeStyleSets({
         }
     },
     column: {
+        display:"flex !important",
         textAlign: "center",
         justifyContent: "center",
         alignItems: "center",
@@ -253,12 +257,8 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
 
                 maxWidth: 400,
                 isRowHeader: true,
-                isResizable: true,
-                // onColumnResize: new Async().debounce((width) => this._onColumnResize("tags", width), 500),               
-
-
-
-
+                isResizable: true, 
+                className:classNames.column,
                 data: 'string',
                 onRender: (item: IDocument, i) => {
 
@@ -365,8 +365,8 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
                     <TextField placeholder="Enter file name here" value={filename} onChange={(ev, newValue) => this.setState({ filename: newValue })} />
                 </div>
                 <div style={{ flexBasis: "20%" }}>
-                    <DefaultButton text="New Folder" styles={{ root: { marginLeft: "10px" } }} onClick={()=>this.setState({showCreateFolderModal:true})}/>
-                    </div>
+                    <DefaultButton text="New Folder" styles={{ root: { marginLeft: "10px" } }} onClick={() => this.setState({ showCreateFolderModal: true })} />
+                </div>
 
             </div>
                 <div style={{ display: "flex", marginBottom: "5px", marginTop: "5px" }} >
@@ -382,14 +382,14 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
                         <PrimaryButton text="Save" styles={{ root: { marginLeft: "10px" } }} onClick={this.onSaveFileClick.bind(this)} />
                     </div>
                 </div>
-               
 
-                {showCreateFolderModal &&    <CreateFolderModal 
-                onFolderCreated={()=>{this.setState({showCreateFolderModal:false}); this.getFilesAndFolders();}}
-                selectedFolder={selectedFolder}  
-                flowsheetsDriveId={this.props.flowsheetsDriveId}
-                onHide={()=>this.setState({showCreateFolderModal:false})} />}
-                </>
+
+                {showCreateFolderModal && <CreateFolderModal
+                    onFolderCreated={() => { this.setState({ showCreateFolderModal: false }); this.getFilesAndFolders(); }}
+                    selectedFolder={selectedFolder}
+                    flowsheetsDriveId={this.props.flowsheetsDriveId}
+                    onHide={() => this.setState({ showCreateFolderModal: false })} />}
+            </>
             }
 
 
@@ -436,4 +436,4 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
 }
 
 
-export default OpenDashboardFilePage;
+export default withInitializeDashboard(OpenDashboardFilePage);
