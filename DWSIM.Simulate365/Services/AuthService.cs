@@ -20,11 +20,6 @@ namespace DWSIM.Simulate365.Services
             return token;
         }
 
-        public void OpenRegisterLinkInLocalBrowser()
-        {
-            Process.Start($"https://simulate365.com/registration/");
-        }
-
         public void NavigateToLoginPage()
         {
             OnNavigateToLoginPage?.Invoke(this, new EventArgs());

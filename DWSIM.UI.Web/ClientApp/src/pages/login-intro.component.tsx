@@ -7,17 +7,14 @@ interface IHomePageProps {
 
 }
 
-const HomePage: React.FC<IHomePageProps> = () => {
+const LoginIntroPage: React.FC<IHomePageProps> = () => {
 
     const onRegisterClick = async () => {
         try {
-            if (chrome?.webview?.hostObjects?.authService) {
-                const authService = chrome.webview.hostObjects.authService;
-                await authService.openRegisterLinkInLocalBrowser();
-            } else {
-                alert("auth Service not initialized.");
-            }
-        } catch (error) {
+            const systemService = chrome?.webview?.hostObjects?.systemService;
+            systemService.openUrlInLocalBrowser("https://simulate365.com/registration-dwsim-pro/");
+        } 
+        catch (error) {
             console.log("An error occurred while navigating to register page.", error);
         }
 
@@ -69,8 +66,8 @@ const HomePage: React.FC<IHomePageProps> = () => {
             Access <b><a href="https://simulate365.com/shops/simulate-365-suite/" onClick={OpenAnchorInSystemBrowser}>Simulate 365 DASHBOARD</a></b>, the "all in one place" simulation platform for:
             <ul>
                 <li>Intelligent file management</li>
+                <li>Syncing simulation files from DASHBOARD to DWSIM</li>
                 <li>Easier team collaboration</li>
-                <li>Access to advanced engineering tools </li>
             </ul>
         </p>
         <div style={{ marginLeft: 'auto', marginRight: 'auto', marginBottom: '16px' }}>
@@ -91,4 +88,4 @@ const HomePage: React.FC<IHomePageProps> = () => {
 }
 
 
-export default HomePage
+export default LoginIntroPage;
