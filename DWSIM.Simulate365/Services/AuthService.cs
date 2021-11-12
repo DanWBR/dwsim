@@ -12,7 +12,7 @@ namespace DWSIM.Simulate365.Services
     [ComVisible(true)]
     public class AuthService
     {
-        public static EventHandler OnNavigateToLoginPage;
+        public EventHandler OnNavigateToLoginPage;
 
         public string GetUserToken()
         {

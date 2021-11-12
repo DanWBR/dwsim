@@ -24,19 +24,13 @@ namespace DWSIM.Simulate365.FormFactories
         const string RETURN_URL = "https://dwsim-login-return.simulate365.com";
 
         private WebUIForm _webUIForm;
+        private AuthService _authService;
 
         public LoginForm()
         {
-            AuthService.OnNavigateToLoginPage += (s, e) => RedirectToLoginPage();
-        }
+            _authService = new AuthService();
+            _authService.OnNavigateToLoginPage += (s, e) => RedirectToLoginPage();
 
-        public bool IsProVersion()
-        {
-            return System.AppDomain.CurrentDomain.GetAssemblies().Any(a => a.FullName.Contains("ProExtensions.AboutMenu"));
-        }
-
-        public void ShowDialog()
-        {
             var initalUrl = GetLoginPageUrl();
             var useLocalUI = false;
             if (!IsProVersion())
@@ -53,7 +47,15 @@ namespace DWSIM.Simulate365.FormFactories
 
             _webUIForm.SubscribeToNavigationStarting(WebView_NavigationStarting);
             _webUIForm.SubscribeToInitializationCompleted(Browser_CoreWebView2InitializationCompleted);
+        }
 
+        public bool IsProVersion()
+        {
+            return System.AppDomain.CurrentDomain.GetAssemblies().Any(a => a.FullName.Contains("ProExtensions.AboutMenu"));
+        }
+
+        public void ShowDialog()
+        {
             _webUIForm.ShowDialog();
         }
 
@@ -71,7 +73,7 @@ namespace DWSIM.Simulate365.FormFactories
                 var webView = sender as WebView2;
                 if (webView.CoreWebView2 != null)
                 {
-                    webView.CoreWebView2.AddHostObjectToScript("authService", new AuthService());
+                    webView.CoreWebView2.AddHostObjectToScript("authService", _authService);
                 }
             }
             catch (Exception ex)
