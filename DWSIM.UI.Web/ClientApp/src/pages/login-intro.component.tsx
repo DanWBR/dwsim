@@ -63,7 +63,7 @@ const LoginIntroPage: React.FC<IHomePageProps> = () => {
             <a href="https://simulate365.com" onClick={OpenAnchorInSystemBrowser}><img src="/s365-full-logo.png" style={{ width: '250px' }} /></a>
         </div>
         <p>
-            Access <b><a href="https://simulate365.com/shops/simulate-365-suite/" onClick={OpenAnchorInSystemBrowser}>Simulate 365 DASHBOARD</a></b>, the "all in one place" simulation platform for:
+            Access <b>Simulate 365 DASHBOARD</b>, the "all in one place" simulation platform and use it free for:
             <ul>
                 <li>Intelligent file management</li>
                 <li>Syncing simulation files from DASHBOARD to DWSIM</li>
@@ -75,7 +75,7 @@ const LoginIntroPage: React.FC<IHomePageProps> = () => {
             <DefaultButton text="Login" onClick={() => onLoginClick()} />
         </div>
         <p>
-            Discover <b><a href="https://simulate365.com/downloads/dwsim-pro/" onClick={OpenAnchorInSystemBrowser}>DWSIM Pro</a></b> and other Simulate 365 tools:
+            Discover <b>DWSIM Pro</b> and other Simulate 365 tools:
             <ul>
                 <li>PPBDesigner for Population Balance Modeling</li>
                 <li>Multivariate Senstivity Study (MSS)</li>
