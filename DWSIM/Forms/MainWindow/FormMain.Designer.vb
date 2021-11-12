@@ -103,6 +103,8 @@ Partial Class FormMain
         Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.LoginButton = New System.Windows.Forms.ToolStripButton()
         Me.LogoutDropdown = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.LoggedInDwsimProBtn = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LoggedInS365Button = New System.Windows.Forms.ToolStripMenuItem()
         Me.LogoutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BgLoadComp = New System.ComponentModel.BackgroundWorker()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
@@ -119,8 +121,6 @@ Partial Class FormMain
         Me.SettingsPanel = New System.Windows.Forms.Panel()
         Me.ButtonClose = New System.Windows.Forms.Button()
         Me.WelcomePanel = New System.Windows.Forms.Panel()
-        Me.LoggedInDwsimProBtn = New System.Windows.Forms.ToolStripMenuItem()
-        Me.LoggedInS365Button = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.SettingsPanel.SuspendLayout()
@@ -591,6 +591,16 @@ Partial Class FormMain
         resources.ApplyResources(Me.LogoutDropdown, "LogoutDropdown")
         Me.LogoutDropdown.Name = "LogoutDropdown"
         '
+        'LoggedInDwsimProBtn
+        '
+        Me.LoggedInDwsimProBtn.Name = "LoggedInDwsimProBtn"
+        resources.ApplyResources(Me.LoggedInDwsimProBtn, "LoggedInDwsimProBtn")
+        '
+        'LoggedInS365Button
+        '
+        Me.LoggedInS365Button.Name = "LoggedInS365Button"
+        resources.ApplyResources(Me.LoggedInS365Button, "LoggedInS365Button")
+        '
         'LogoutToolStripMenuItem
         '
         Me.LogoutToolStripMenuItem.Name = "LogoutToolStripMenuItem"
@@ -663,16 +673,6 @@ Partial Class FormMain
         '
         resources.ApplyResources(Me.WelcomePanel, "WelcomePanel")
         Me.WelcomePanel.Name = "WelcomePanel"
-        '
-        'LoggedInDwsimProBtn
-        '
-        Me.LoggedInDwsimProBtn.Name = "LoggedInDwsimProBtn"
-        resources.ApplyResources(Me.LoggedInDwsimProBtn, "LoggedInDwsimProBtn")
-        '
-        'LoggedInS365Button
-        '
-        Me.LoggedInS365Button.Name = "LoggedInS365Button"
-        resources.ApplyResources(Me.LoggedInS365Button, "LoggedInS365Button")
         '
         'FormMain
         '
