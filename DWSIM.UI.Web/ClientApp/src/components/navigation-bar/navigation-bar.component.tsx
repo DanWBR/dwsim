@@ -37,6 +37,15 @@ class NavigationBar extends React.Component<INavigationBarProps, INavigationBarS
         super(props);
         this.state = { folders: [props.baseFolder] };
     }
+    componentDidUpdate(prevProps: INavigationBarProps, prevState: INavigationBarState) {
+        //navigate down the folder structure
+        const { folders } = prevState;
+        const alreadyInFolders = folders.find(x => x.driveId === this.props.selectedFolder.driveId);
+        if (!alreadyInFolders) {
+            console.log("Navigating to:",this.props.selectedFolder);
+            this.setState({ folders: [...folders, this.props.selectedFolder] });
+        }
+    }
 
     async getSelectedFolder(selectedFolderPath: string) {
 
@@ -65,10 +74,10 @@ class NavigationBar extends React.Component<INavigationBarProps, INavigationBarS
     }
 
 
-    addSelectedFolder(folder: ISelectedFolder) {
-        console.log("addSelectedFolder,folder");
-        this.setState(s => ({ folders: [...s.folders, folder] }));
-    }
+    // addSelectedFolder(folder: ISelectedFolder) {
+    //     console.log("addSelectedFolder",folder);
+    //     this.setState(s => ({ folders: [...s.folders, folder] }));
+    // }
 
     getBreadcrumbItems() {
         const items: IBreadcrumbItem[] = this.state.folders.map((folder, index) => {
@@ -104,21 +113,21 @@ class NavigationBar extends React.Component<INavigationBarProps, INavigationBarS
     render() {
         const items = this.getBreadcrumbItems();
 
-    //     return  <Breadcrumb           
-    //     items={items}
-    //     maxDisplayedItems={3}
-    // />
-            const lastItem= items.findIndex(x=>x.isCurrentItem);
-            const showIcon= this.state.folders[lastItem].driveId!==this.props.baseFolder.driveId;     
+        //     return  <Breadcrumb           
+        //     items={items}
+        //     maxDisplayedItems={3}
+        // />
+        const lastItem = items.findIndex(x => x.isCurrentItem);
+        const showIcon = this.state.folders[lastItem].driveId !== this.props.baseFolder.driveId;
 
         return <div style={{ display: "flex", alignItems: "center" }}>
-          {showIcon &&  <IconButton iconProps={{ iconName: 'Up' }} styles={{ root: { margin: "11px 0px 1px" } }} onClick={this.onNavigateUpClick.bind(this)} />}
+            {showIcon && <IconButton iconProps={{ iconName: 'Up' }} styles={{ root: { margin: "11px 0px 1px" } }} onClick={this.onNavigateUpClick.bind(this)} />}
 
-           <div style={{minWidth:"100%"}}>
-            <Breadcrumb
-                items={items}
-                maxDisplayedItems={3}
-            />
+            <div style={{ minWidth: "100%" }}>
+                <Breadcrumb
+                    items={items}
+                    maxDisplayedItems={3}
+                />
             </div>
         </div>
     }
