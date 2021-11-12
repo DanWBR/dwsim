@@ -16,7 +16,7 @@ using Newtonsoft.Json;
 
 namespace DWSIM.Simulate365.FormFactories
 {
-    public class LoginFormFactory
+    public class LoginForm
     {
         const string TENANT_ID = "eb2542b8-5a5d-4f61-a9b5-6ce7dbc4ebfd";
         const string CLIENT_ID = "d18e5f18-7709-4ef0-913e-3c8eeecd7d60";
@@ -24,13 +24,28 @@ namespace DWSIM.Simulate365.FormFactories
         const string RETURN_URL = "https://dwsim-login-return.simulate365.com";
 
         private WebUIForm _webUIForm;
-        public LoginFormFactory()
+
+        public LoginForm()
         {
             AuthService.OnNavigateToLoginPage += (s, e) => RedirectToLoginPage();
         }
+
+        public bool IsProVersion()
+        {
+            return System.AppDomain.CurrentDomain.GetAssemblies().Any(a => a.FullName.Contains("ProExtensions.AboutMenu"));
+        }
+
         public void ShowDialog()
         {
-            _webUIForm = new WebUIForm("login/intro", "Login with Simulate 365 account",true)
+            var initalUrl = GetLoginPageUrl();
+            var useLocalUI = false;
+            if (!IsProVersion())
+            {
+                initalUrl = "login/intro";
+                useLocalUI = true;
+            }
+
+            _webUIForm = new WebUIForm(initalUrl, "Login with Simulate 365 account", useLocalUI)
             {
                 Width = 500,
                 Height = 600
@@ -42,6 +57,13 @@ namespace DWSIM.Simulate365.FormFactories
             _webUIForm.ShowDialog();
         }
 
+        public void Close()
+        {
+            // Close window
+            _webUIForm?.Close();
+            _webUIForm?.Dispose();
+        }
+
         private void Browser_CoreWebView2InitializationCompleted(object sender, CoreWebView2InitializationCompletedEventArgs e)
         {
             try
@@ -49,19 +71,23 @@ namespace DWSIM.Simulate365.FormFactories
                 var webView = sender as WebView2;
                 if (webView.CoreWebView2 != null)
                 {
-                    webView.CoreWebView2.AddHostObjectToScript("authService", new AuthService());                   
+                    webView.CoreWebView2.AddHostObjectToScript("authService", new AuthService());
                 }
             }
             catch (Exception ex)
             {
-
-                //  throw;
+                // throw;
             }
+        }
+
+        private string GetLoginPageUrl()
+        {
+            return $"https://login.microsoftonline.com/{TENANT_ID}/oauth2/authorize?client_id={CLIENT_ID}&response_type=code&scope={HttpUtility.UrlEncode(SCOPE)}";
         }
 
         public void RedirectToLoginPage()
         {
-            var loginUrl = $"https://login.microsoftonline.com/{TENANT_ID}/oauth2/authorize?client_id={CLIENT_ID}&response_type=code&scope={HttpUtility.UrlEncode(SCOPE)}";
+            var loginUrl = GetLoginPageUrl();
             _webUIForm?.Navigate(loginUrl);
         }
 
@@ -89,7 +115,11 @@ namespace DWSIM.Simulate365.FormFactories
                         {
                             e.Cancel = true;
 
-                            _webUIForm?.Navigate(WebUIForm.LOCAL_WEB_UI_URL + "login/intro");
+                            if (!IsProVersion())
+                                _webUIForm?.Navigate(WebUIForm.LOCAL_WEB_UI_URL + "login/intro");
+                            else
+                                Close();
+
                             return;
                         }
                         else
@@ -113,11 +143,10 @@ namespace DWSIM.Simulate365.FormFactories
 
                     // Store token
                     UserService.GetInstance()
-                                .SetAccessToken(token.AccessToken, token.RefreshToken, DateTime.Now.AddSeconds(token.ExpiresIn - 30));                  
+                                .SetAccessToken(token.AccessToken, token.RefreshToken, DateTime.Now.AddSeconds(token.ExpiresIn - 30));
 
                     // Close window
-                    _webUIForm?.Close();
-                    _webUIForm?.Dispose();
+                    Close();
                 }
                 catch (Exception ex)
                 {

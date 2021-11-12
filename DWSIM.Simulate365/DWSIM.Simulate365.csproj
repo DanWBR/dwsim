@@ -123,7 +123,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormFactories\LoginFormFactory.cs" />
+    <Compile Include="FormFactories\LoginForm.cs" />
     <Compile Include="FormFactories\S365FilePickerForm.cs" />
     <Compile Include="GraphClientFactory.cs" />
     <Compile Include="Models\OAuthErrorResponse.cs" />

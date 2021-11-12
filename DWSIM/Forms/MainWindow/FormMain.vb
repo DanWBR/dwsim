@@ -4311,7 +4311,7 @@ Label_00CC:
     End Sub
 
     Private Sub LoginToolStripButton_Click(sender As Object, e As EventArgs) Handles LoginButton.Click
-        Dim loginForm As LoginFormFactory = New LoginFormFactory
+        Dim loginForm As LoginForm = New LoginForm
         loginForm.ShowDialog()
     End Sub
 
