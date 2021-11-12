@@ -248,7 +248,7 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
                     parentDriveItemId: selectedFolder.driveId
                 } as ISelectedFolder;
                 console.log("Setting selected folder", newSelectedFolder);
-                this._navigationBarRef?.current?.addSelectedFolder(newSelectedFolder);
+             //   this._navigationBarRef?.current?.addSelectedFolder(newSelectedFolder);
 
                 this.setState({ selectedFolder: newSelectedFolder }, () => {
                     this.getFilesAndFolders();

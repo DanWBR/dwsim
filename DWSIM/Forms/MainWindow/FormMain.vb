@@ -254,6 +254,7 @@ Public Class FormMain
         Me.LogoutDropdown.Visible = False
         Me.LoginButton.Visible = True
         Me.OpenFromS365DashboardBtn.Enabled = False
+        Me.SaveToSimulate365DashboardToolStripMenuItem.Enabled = False
     End Sub
 
     Private Sub FilePickerService_S3365DashboardFileOpened(sender As Object, e As S365OpenFileEventArgs)
