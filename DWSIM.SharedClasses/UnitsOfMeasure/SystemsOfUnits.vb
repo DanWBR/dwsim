@@ -179,7 +179,7 @@ Namespace SystemsOfUnits
 
             Select Case measureID
                 Case Enums.UnitOfMeasure.temperature
-                    units.AddRange(New String() {"K", "R", "C", "f"})
+                    units.AddRange(New String() {"K", "R", "C", "F"})
                 Case Enums.UnitOfMeasure.pressure
                     units.AddRange(New String() {"Pa", "atm", "kgf/cm2", "kgf/cm2g", "lbf/ft2", "kPa", "kPag", "bar", "barg", "ftH2O", "inH2O", "inHg", "mbar", "mH2O", "mmH2O", "mmHg", "MPa", "psi", "psig"})
                 Case Enums.UnitOfMeasure.massflow
@@ -213,7 +213,7 @@ Namespace SystemsOfUnits
                 Case Enums.UnitOfMeasure.deltaP
                     units.AddRange(New String() {"Pa", "atm", "lbf/ft2", "kgf/cm2", "kgf/cm2_g", "kPa", "bar", "barg", "ftH2O", "inH2O", "inHg", "mbar", "mH2O", "mmH2O", "mmHg", "MPa", "psi", "psig"})
                 Case Enums.UnitOfMeasure.deltaT
-                    units.AddRange(New String() {"C.", "K.", "f.", "R."})
+                    units.AddRange(New String() {"C.", "K.", "F.", "R."})
                 Case Enums.UnitOfMeasure.distance
                     units.AddRange(New String() {"m", "ft", "cm"})
                 Case Enums.UnitOfMeasure.heatflow
@@ -252,7 +252,7 @@ Namespace SystemsOfUnits
                 Case Enums.UnitOfMeasure.velocity, Enums.UnitOfMeasure.speedOfSound
                     units.AddRange(New String() {"m/s", "cm/s", "mm/s", "km/h", "ft/h", "ft/min", "ft/s", "in/s"})
                 Case Enums.UnitOfMeasure.foulingfactor
-                    units.AddRange(New String() {"K.m2/W", "C.cm2.s/cal", "ft2.h.f/BTU"})
+                    units.AddRange(New String() {"K.m2/W", "C.cm2.s/cal", "ft2.h.F/BTU"})
                 Case Enums.UnitOfMeasure.cakeresistance
                     units.AddRange(New String() {"m/kg", "ft/lbm", "cm/g"})
                 Case Enums.UnitOfMeasure.mediumresistance
@@ -260,7 +260,7 @@ Namespace SystemsOfUnits
                 Case Enums.UnitOfMeasure.mass
                     units.AddRange(New String() {"kg", "g", "lb"})
                 Case Enums.UnitOfMeasure.jouleThomsonCoefficient
-                    units.AddRange(New String() {"K/Pa", "f/psi", "C/atm"})
+                    units.AddRange(New String() {"K/Pa", "F/psi", "C/atm"})
                 Case Enums.UnitOfMeasure.compressibility
                     units.AddRange(New String() {"1/Pa", "1/atm", "1/kPa", "1/bar", "1/MPa", "1/psi"})
                 Case Enums.UnitOfMeasure.reac_rate_heterog
@@ -276,7 +276,7 @@ Namespace SystemsOfUnits
         Public Function GetUnitType(unit As String) As Enums.UnitOfMeasure Implements IUnitsOfMeasure.GetUnitType
 
             Select Case unit
-                Case "K", "R", "C", "f"
+                Case "K", "R", "C", "F"
                     Return Enums.UnitOfMeasure.temperature
                 Case "Pa", "atm", "kgf/cm2", "kgf/cm2g", "lbf/ft2", "kPa", "kPag", "bar", "barg", "ftH2O", "inH2O", "inHg", "mbar", "mH2O", "mmH2O", "mmHg", "MPa", "psi", "psig", "psia"
                     Return Enums.UnitOfMeasure.pressure
@@ -346,7 +346,7 @@ Namespace SystemsOfUnits
                     Return Enums.UnitOfMeasure.molar_entropy
                 Case "m/s", "cm/s", "mm/s", "km/h", "ft/h", "ft/min", "ft/s", "in/s"
                     Return Enums.UnitOfMeasure.velocity
-                Case "K.m2/W", "C.cm2.s/cal", "ft2.h.f/BTU"
+                Case "K.m2/W", "C.cm2.s/cal", "ft2.h.F/BTU"
                     Return Enums.UnitOfMeasure.foulingfactor
                 Case "m/kg", "ft/lbm", "cm/g"
                     Return Enums.UnitOfMeasure.cakeresistance
@@ -354,7 +354,7 @@ Namespace SystemsOfUnits
                     Return Enums.UnitOfMeasure.mediumresistance
                 Case "kg", "g", "lb"
                     Return Enums.UnitOfMeasure.mass
-                Case "K/Pa", "f/psi", "C/atm"
+                Case "K/Pa", "F/psi", "C/atm"
                     Return Enums.UnitOfMeasure.jouleThomsonCoefficient
                 Case "1/Pa", "1/atm", "1/kPa", "1/bar", "1/MPa", "1/psi"
                     Return Enums.UnitOfMeasure.compressibility
@@ -991,7 +991,7 @@ Namespace SystemsOfUnits
                 .conductance = "[lbm/h]/[psi^0.5]"
                 .diffusivity = "ft2/s"
 
-                .jouleThomsonCoefficient = "f/psi"
+                .jouleThomsonCoefficient = "F/psi"
                 .gor = "ft3/bbl"
 
                 .accel = "ft/s2"
@@ -1013,7 +1013,7 @@ Namespace SystemsOfUnits
                 .molar_enthalpy = "BTU/lbmol"
                 .molar_entropy = "BTU/[lbmol.R]"
                 .velocity = "ft/s"
-                .foulingfactor = "ft2.h.f/BTU"
+                .foulingfactor = "ft2.h.F/BTU"
 
                 .cakeresistance = "ft/lbm"
                 .mediumresistance = "ft-1"
@@ -1042,7 +1042,7 @@ Namespace SystemsOfUnits
                 .molecularWeight = "lbm/lbmol"
                 .pressure = "lbf/ft2"
                 .speedOfSound = "ft/s"
-                .temperature = "f"
+                .temperature = "F"
                 .thermalConductivity = "BTU/[ft.h.R]"
                 .viscosity = "lbm/[ft.h]"
                 .idealGasHeatCapacity = "BTU/[lbm.R]"
@@ -1060,7 +1060,7 @@ Namespace SystemsOfUnits
                 .heatflow = "BTU/h"
                 .head = "ft"
                 .deltaP = "lbf/ft2"
-                .deltaT = "f."
+                .deltaT = "F."
 
             End With
 
