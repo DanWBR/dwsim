@@ -906,6 +906,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Assets\Databases\FoodProp\FoodProp.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DWSIM_ico_64.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
     <PostBuildEvent>

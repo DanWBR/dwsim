@@ -12489,6 +12489,11 @@ Final3:
 
         End Function
 
+        Public Overridable Function GetDisplayIcon() As Drawing.Bitmap
+
+            Return My.Resources.DWSIM_ico_64
+
+        End Function
 
         <JsonIgnore> <XmlIgnore> Property Flowsheet As IFlowsheet Implements IPropertyPackage.Flowsheet
             Get
