@@ -68,59 +68,14 @@ Public Class FormSimulWizard
             Next
             For Each comp In Me.CurrentFlowsheet.Options.NotSelectedComponents.Values
                 ogc1.Rows.Add(New Object() {comp.Name, False, comp.Name, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.CurrentDB, comp.IsCOOLPROPSupported})
-                'For Each c As DataGridViewCell In Me.ogc1.Rows(idx).Cells
-                '    If comp.OriginalDB <> "Electrolytes" Then
-                '        If comp.Acentric_Factor = 0.0# Or comp.Critical_Compressibility = 0.0# Then
-                '            c.Style.ForeColor = Color.Red
-                '            c.ToolTipText = DWSIM.App.GetLocalString("CompMissingData")
-                '        End If
-                '    End If
-                'Next
             Next
 
             'Me.TextBox1.AutoCompleteCustomSource = ACSC1
 
             'property packages
-            Me.ListViewPP.Items.Clear()
+            Me.DataGridViewPP.Rows.Clear()
             For Each pp2 As PropertyPackages.PropertyPackage In FormMain.PropertyPackages.Values.OrderBy(Function(x) x.ComponentName)
-                Me.ListViewPP.Items.Add(pp2.ComponentName)
-                'Select Case pp2.PackageType
-                '    Case PropertyPackages.PackageType.EOS
-                '        With Me.ListViewPP.Items.Add(pp2.ComponentName)
-                '            .Group = Me.ListViewPP.Groups("EOS")
-                '            .ToolTipText = pp2.ComponentDescription
-                '        End With
-                '    Case PropertyPackages.PackageType.ActivityCoefficient
-                '        With Me.ListViewPP.Items.Add(pp2.ComponentName)
-                '            .Group = Me.ListViewPP.Groups("ACT")
-                '            .ToolTipText = pp2.ComponentDescription
-                '        End With
-                '    Case PropertyPackages.PackageType.ChaoSeader
-                '        With Me.ListViewPP.Items.Add(pp2.ComponentName)
-                '            .Group = Me.ListViewPP.Groups("CS")
-                '            .ToolTipText = pp2.ComponentDescription
-                '        End With
-                '    Case PropertyPackages.PackageType.VaporPressure
-                '        With Me.ListViewPP.Items.Add(pp2.ComponentName)
-                '            .Group = Me.ListViewPP.Groups("VAP")
-                '            .ToolTipText = pp2.ComponentDescription
-                '        End With
-                '    Case PropertyPackages.PackageType.Miscelaneous
-                '        With Me.ListViewPP.Items.Add(pp2.ComponentName)
-                '            .Group = Me.ListViewPP.Groups("MISC")
-                '            .ToolTipText = pp2.ComponentDescription
-                '        End With
-                '    Case PropertyPackages.PackageType.CorrespondingStates
-                '        With Me.ListViewPP.Items.Add(pp2.ComponentName)
-                '            .Group = Me.ListViewPP.Groups("CST")
-                '            .ToolTipText = pp2.ComponentDescription
-                '        End With
-                '    Case PropertyPackages.PackageType.CAPEOPEN
-                '        With Me.ListViewPP.Items.Add(pp2.ComponentName)
-                '            .Group = Me.ListViewPP.Groups("CAP")
-                '            .ToolTipText = pp2.ComponentDescription
-                '        End With
-                'End Select
+                Me.DataGridViewPP.Rows.Add(New Object() {pp2.ComponentName, pp2.GetDisplayIcon(), pp2.ComponentName, pp2.ComponentDescription})
             Next
 
         Else
@@ -280,7 +235,7 @@ Public Class FormSimulWizard
     Private Sub Button8_Click(sender As System.Object, e As System.EventArgs) Handles Button8.Click
         PanelSolids.Enabled = True
         Dim pp As PropertyPackages.PropertyPackage
-        pp = FormMain.PropertyPackages(ListViewPP.SelectedItems(0)).Clone
+        pp = FormMain.PropertyPackages(Me.DataGridViewPP.SelectedRows(0).Cells(0).Value).Clone
         With pp
             pp.Tag = pp.ComponentName + " (" + (CurrentFlowsheet.PropertyPackages.Count + 1).ToString() + ")"
             pp.UniqueID = "PP-" & Guid.NewGuid.ToString
@@ -827,14 +782,14 @@ Public Class FormSimulWizard
     End Sub
 
 
-    Private Sub ListViewPP_DoubleClick(sender As Object, e As EventArgs) Handles ListViewPP.DoubleClick
-        If ListViewPP.SelectedItems.Count = 1 Then
+    Private Sub ListViewPP_DoubleClick(sender As Object, e As EventArgs) Handles DataGridViewPP.DoubleClick
+        If Me.DataGridViewPP.SelectedRows.Count = 1 Then
             Button8.PerformClick()
         End If
     End Sub
 
-    Private Sub ListViewPP_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListViewPP.SelectedIndexChanged
-        If Me.ListViewPP.SelectedItems.Count > 0 Then
+    Private Sub ListViewPP_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DataGridViewPP.SelectionChanged
+        If Me.DataGridViewPP.SelectedRows.Count > 0 Then
             Me.Button8.Enabled = True
         Else
             Me.Button8.Enabled = False

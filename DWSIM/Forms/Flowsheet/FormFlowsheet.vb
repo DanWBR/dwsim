@@ -327,16 +327,68 @@ Public Class FormFlowsheet
         'load plugins
         CreatePluginsList()
 
-        'load menu extenders
+        'load extenders
+        LoadExtenders()
+
+        'external solvers
+        For Each es In FormMain.ExternalSolvers.Values
+            ExternalSolvers.Add(es.ID, es)
+        Next
+
+        loaded = True
+
+        If My.Settings.ObjectEditor = 0 Then FormProps.Hide()
+
+        Dim fs As New FormScript
+        fs.fc = Me
+        fs.Show(Me.dckPanel)
+
+        FormSurface.Activate()
+
+        MessagePumpTimer = New Timer()
+        MessagePumpTimer.Interval = 500
+
+        AddHandler MessagePumpTimer.Tick, Sub(obj, ev)
+
+                                              SyncLock MessagePump
+
+                                                  If MessagePump.Count > 0 Then
+
+                                                      For Each item In MessagePump
+                                                          ShowMessageInternal(item.Item1, item.Item2, item.Item3)
+                                                      Next
+
+                                                      MessagePump.Clear()
+
+                                                  End If
+
+                                              End SyncLock
+
+                                          End Sub
+
+        MessagePumpTimer.Start()
+
+    End Sub
+
+    Sub LoadExtenders()
+
         For Each extender In My.Application.MainWindowForm.Extenders.Values
             Try
                 If extender.Level = ExtenderLevel.FlowsheetWindow Then
                     Dim newmenuitem As ToolStripMenuItem = Nothing
                     If extender.Category <> ExtenderCategory.InitializationScript Then
                         If extender.Category = ExtenderCategory.NewItem Then
-                            newmenuitem = New ToolStripMenuItem()
-                            newmenuitem.Text = extender.DisplayText
-                            newmenuitem.DisplayStyle = ToolStripItemDisplayStyle.Text
+                            For Each item As ToolStripMenuItem In MenuStrip1.Items
+                                If item.Text = extender.DisplayText Then
+                                    newmenuitem = item
+                                    Exit For
+                                End If
+                            Next
+                            If newmenuitem Is Nothing Then
+                                newmenuitem = New ToolStripMenuItem()
+                                newmenuitem.Text = extender.DisplayText
+                                newmenuitem.DisplayStyle = ToolStripItemDisplayStyle.Text
+                            End If
                         End If
                         For Each item In extender.Collection
                             Dim exttsmi As New ToolStripMenuItem
@@ -404,7 +456,7 @@ Public Class FormFlowsheet
                                     item.Run()
                             End Select
                         Next
-                        If newmenuitem IsNot Nothing Then
+                        If newmenuitem IsNot Nothing AndAlso Not MenuStrip1.Items.Contains(newmenuitem) Then
                             MenuStrip1.Items.Add(newmenuitem)
                         End If
                     Else
@@ -420,43 +472,6 @@ Public Class FormFlowsheet
             End Try
         Next
 
-        'external solvers
-        For Each es In FormMain.ExternalSolvers.Values
-            ExternalSolvers.Add(es.ID, es)
-        Next
-
-        loaded = True
-
-        If My.Settings.ObjectEditor = 0 Then FormProps.Hide()
-
-        Dim fs As New FormScript
-        fs.fc = Me
-        fs.Show(Me.dckPanel)
-
-        FormSurface.Activate()
-
-        MessagePumpTimer = New Timer()
-        MessagePumpTimer.Interval = 500
-
-        AddHandler MessagePumpTimer.Tick, Sub(obj, ev)
-
-                                              SyncLock MessagePump
-
-                                                  If MessagePump.Count > 0 Then
-
-                                                      For Each item In MessagePump
-                                                          ShowMessageInternal(item.Item1, item.Item2, item.Item3)
-                                                      Next
-
-                                                      MessagePump.Clear()
-
-                                                  End If
-
-                                              End SyncLock
-
-                                          End Sub
-
-        MessagePumpTimer.Start()
 
     End Sub
 

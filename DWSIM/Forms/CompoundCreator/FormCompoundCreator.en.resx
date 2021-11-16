@@ -127,6 +127,9 @@
   <data name="LinkLabel1.Text" xml:space="preserve">
     <value>CAS Number</value>
   </data>
+  <data name="LinkPubChem.Location" type="System.Drawing.Point, System.Drawing">
+    <value>629, 100</value>
+  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="TextBoxSMILES.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -329,6 +332,9 @@
   <data name="Label63.Text" xml:space="preserve">
     <value>Chao-Seader Solubility Parameter</value>
   </data>
+  <data name="Label43.Location" type="System.Drawing.Point, System.Drawing">
+    <value>252, 229</value>
+  </data>
   <data name="Label43.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 13</value>
   </data>
@@ -341,20 +347,32 @@
   <data name="rbEstimatePVAP.Text" xml:space="preserve">
     <value>Estimate (Lee Kesler)</value>
   </data>
+  <data name="rbRegressPVAP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>160, 12</value>
+  </data>
   <data name="rbRegressPVAP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 17</value>
+    <value>90, 17</value>
   </data>
   <data name="rbRegressPVAP.Text" xml:space="preserve">
-    <value>Regress Experimental Data</value>
+    <value>Regress Data</value>
+  </data>
+  <data name="Label13.Location" type="System.Drawing.Point, System.Drawing">
+    <value>252, 204</value>
   </data>
   <data name="btnRegressPVAP.Text" xml:space="preserve">
     <value>Regress Data</value>
   </data>
+  <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>252, 178</value>
+  </data>
   <data name="btnViewPVAP.Text" xml:space="preserve">
     <value>Update Chart</value>
   </data>
+  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>252, 152</value>
+  </data>
   <data name="rbCoeffPVAP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>297, 12</value>
+    <value>278, 12</value>
   </data>
   <data name="rbCoeffPVAP.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 17</value>
@@ -362,11 +380,23 @@
   <data name="rbCoeffPVAP.Text" xml:space="preserve">
     <value>Insert Equation Coefficients *</value>
   </data>
+  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>252, 126</value>
+  </data>
+  <data name="Label30.Location" type="System.Drawing.Point, System.Drawing">
+    <value>252, 45</value>
+  </data>
   <data name="Label30.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 13</value>
   </data>
   <data name="Label30.Text" xml:space="preserve">
     <value>Equation</value>
+  </data>
+  <data name="Label29.Location" type="System.Drawing.Point, System.Drawing">
+    <value>252, 100</value>
+  </data>
+  <data name="Label87.Location" type="System.Drawing.Point, System.Drawing">
+    <value>262, 234</value>
   </data>
   <data name="Label87.Size" type="System.Drawing.Size, System.Drawing">
     <value>123, 13</value>
@@ -374,11 +404,20 @@
   <data name="Label87.Text" xml:space="preserve">
     <value>* Cp in J/[kmol.K], T in K</value>
   </data>
+  <data name="Label88.Location" type="System.Drawing.Point, System.Drawing">
+    <value>259, 105</value>
+  </data>
+  <data name="Label89.Location" type="System.Drawing.Point, System.Drawing">
+    <value>257, 48</value>
+  </data>
   <data name="Label89.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 13</value>
   </data>
   <data name="Label89.Text" xml:space="preserve">
     <value>Equation</value>
+  </data>
+  <data name="Label90.Location" type="System.Drawing.Point, System.Drawing">
+    <value>259, 209</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnViewCPLiquid.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -387,8 +426,11 @@
   <data name="btnViewCPLiquid.Text" xml:space="preserve">
     <value>Update Chart</value>
   </data>
+  <data name="Label91.Location" type="System.Drawing.Point, System.Drawing">
+    <value>259, 131</value>
+  </data>
   <data name="rbCoeffCPLiquid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>172, 14</value>
+    <value>187, 14</value>
   </data>
   <data name="rbCoeffCPLiquid.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 17</value>
@@ -399,11 +441,20 @@
   <data name="btnRegressCPLiquid.Text" xml:space="preserve">
     <value>Regress Data</value>
   </data>
+  <data name="Label92.Location" type="System.Drawing.Point, System.Drawing">
+    <value>259, 183</value>
+  </data>
+  <data name="Label93.Location" type="System.Drawing.Point, System.Drawing">
+    <value>259, 157</value>
+  </data>
   <data name="rbRegressCPLiquid.Size" type="System.Drawing.Size, System.Drawing">
     <value>153, 17</value>
   </data>
   <data name="rbRegressCPLiquid.Text" xml:space="preserve">
     <value>Regress Experimental Data</value>
+  </data>
+  <data name="Label44.Location" type="System.Drawing.Point, System.Drawing">
+    <value>266, 240</value>
   </data>
   <data name="Label44.Size" type="System.Drawing.Size, System.Drawing">
     <value>123, 13</value>
@@ -417,17 +468,29 @@
   <data name="rbEstimateCPIG.Text" xml:space="preserve">
     <value>Estimate (Joback/UNIFAC)</value>
   </data>
+  <data name="Label26.Location" type="System.Drawing.Point, System.Drawing">
+    <value>266, 107</value>
+  </data>
+  <data name="Label28.Location" type="System.Drawing.Point, System.Drawing">
+    <value>264, 45</value>
+  </data>
   <data name="Label28.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 13</value>
   </data>
   <data name="Label28.Text" xml:space="preserve">
     <value>Equation</value>
   </data>
+  <data name="Label18.Location" type="System.Drawing.Point, System.Drawing">
+    <value>266, 211</value>
+  </data>
   <data name="btnViewCPIG.Text" xml:space="preserve">
     <value>Update Chart</value>
   </data>
+  <data name="Label24.Location" type="System.Drawing.Point, System.Drawing">
+    <value>266, 133</value>
+  </data>
   <data name="rbCoeffCPIG.Location" type="System.Drawing.Point, System.Drawing">
-    <value>322, 14</value>
+    <value>301, 14</value>
   </data>
   <data name="rbCoeffCPIG.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 17</value>
@@ -438,11 +501,23 @@
   <data name="btnRegressCPIG.Text" xml:space="preserve">
     <value>Regress Data</value>
   </data>
+  <data name="Label19.Location" type="System.Drawing.Point, System.Drawing">
+    <value>266, 185</value>
+  </data>
+  <data name="Label23.Location" type="System.Drawing.Point, System.Drawing">
+    <value>266, 159</value>
+  </data>
+  <data name="rbRegressCPIG.Location" type="System.Drawing.Point, System.Drawing">
+    <value>188, 14</value>
+  </data>
   <data name="rbRegressCPIG.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 17</value>
+    <value>90, 17</value>
   </data>
   <data name="rbRegressCPIG.Text" xml:space="preserve">
-    <value>Regress Experimental Data</value>
+    <value>Regress Data</value>
+  </data>
+  <data name="Label46.Location" type="System.Drawing.Point, System.Drawing">
+    <value>254, 229</value>
   </data>
   <data name="Label46.Size" type="System.Drawing.Size, System.Drawing">
     <value>103, 13</value>
@@ -456,20 +531,32 @@
   <data name="rbEstimateLIQVISC.Text" xml:space="preserve">
     <value>Estimate (Letsou-Stiel)</value>
   </data>
+  <data name="rbRegressLIQVISC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>166, 13</value>
+  </data>
   <data name="rbRegressLIQVISC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 17</value>
+    <value>90, 17</value>
   </data>
   <data name="rbRegressLIQVISC.Text" xml:space="preserve">
-    <value>Regress Experimental Data</value>
+    <value>Regress Data</value>
+  </data>
+  <data name="Label37.Location" type="System.Drawing.Point, System.Drawing">
+    <value>251, 204</value>
   </data>
   <data name="btnRegressLIQVISC.Text" xml:space="preserve">
     <value>Regress Data</value>
   </data>
+  <data name="Label38.Location" type="System.Drawing.Point, System.Drawing">
+    <value>251, 178</value>
+  </data>
   <data name="btnViewLIQVISC.Text" xml:space="preserve">
     <value>Update Chart</value>
   </data>
+  <data name="Label39.Location" type="System.Drawing.Point, System.Drawing">
+    <value>251, 152</value>
+  </data>
   <data name="rbCoeffLIQVISC.Location" type="System.Drawing.Point, System.Drawing">
-    <value>304, 13</value>
+    <value>277, 13</value>
   </data>
   <data name="rbCoeffLIQVISC.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 17</value>
@@ -477,20 +564,38 @@
   <data name="rbCoeffLIQVISC.Text" xml:space="preserve">
     <value>Insert Equation Coefficients *</value>
   </data>
+  <data name="Label40.Location" type="System.Drawing.Point, System.Drawing">
+    <value>251, 126</value>
+  </data>
+  <data name="Label42.Location" type="System.Drawing.Point, System.Drawing">
+    <value>252, 44</value>
+  </data>
   <data name="Label42.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 13</value>
   </data>
   <data name="Label42.Text" xml:space="preserve">
     <value>Equation</value>
   </data>
+  <data name="Label41.Location" type="System.Drawing.Point, System.Drawing">
+    <value>251, 100</value>
+  </data>
+  <data name="Label84.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 374</value>
+  </data>
+  <data name="tbStatusSolidCp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>60, 371</value>
+  </data>
   <data name="btnRegressSolidCp.Text" xml:space="preserve">
     <value>Regress Data</value>
+  </data>
+  <data name="btnViewSolidCp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>252, 369</value>
   </data>
   <data name="btnViewSolidCp.Text" xml:space="preserve">
     <value>Update Chart</value>
   </data>
   <data name="rbCoeffSolidCp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>174, 11</value>
+    <value>189, 11</value>
   </data>
   <data name="rbCoeffSolidCp.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 17</value>
@@ -498,8 +603,38 @@
   <data name="rbCoeffSolidCp.Text" xml:space="preserve">
     <value>Insert Equation Coefficients *</value>
   </data>
+  <data name="GridExpDataCpS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 301</value>
+  </data>
+  <data name="Label75.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label75.Location" type="System.Drawing.Point, System.Drawing">
+    <value>241, 207</value>
+  </data>
+  <data name="Label75.Size" type="System.Drawing.Size, System.Drawing">
+    <value>114, 13</value>
+  </data>
   <data name="Label75.Text" xml:space="preserve">
     <value>Cp:  [J/kmol/K] ; T: [K]</value>
+  </data>
+  <data name="Label73.Location" type="System.Drawing.Point, System.Drawing">
+    <value>241, 183</value>
+  </data>
+  <data name="Label72.Location" type="System.Drawing.Point, System.Drawing">
+    <value>241, 156</value>
+  </data>
+  <data name="Label71.Location" type="System.Drawing.Point, System.Drawing">
+    <value>241, 129</value>
+  </data>
+  <data name="Label70.Location" type="System.Drawing.Point, System.Drawing">
+    <value>241, 99</value>
+  </data>
+  <data name="Label69.Location" type="System.Drawing.Point, System.Drawing">
+    <value>241, 72</value>
+  </data>
+  <data name="Label74.Location" type="System.Drawing.Point, System.Drawing">
+    <value>241, 41</value>
   </data>
   <data name="Label74.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 13</value>
@@ -520,7 +655,7 @@
     <value>Update Chart</value>
   </data>
   <data name="rbCoeffSolidDens.Location" type="System.Drawing.Point, System.Drawing">
-    <value>291, 16</value>
+    <value>263, 16</value>
   </data>
   <data name="rbCoeffSolidDens.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 17</value>
@@ -529,16 +664,43 @@
     <value>Insert Equation Coefficients *</value>
   </data>
   <data name="rbRegressSolidDens.Location" type="System.Drawing.Point, System.Drawing">
-    <value>132, 16</value>
+    <value>147, 16</value>
   </data>
   <data name="rbRegressSolidDens.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 17</value>
+    <value>90, 17</value>
   </data>
   <data name="rbRegressSolidDens.Text" xml:space="preserve">
-    <value>Regress Experimental Data</value>
+    <value>Regress Data</value>
+  </data>
+  <data name="Label77.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label77.Location" type="System.Drawing.Point, System.Drawing">
+    <value>243, 214</value>
+  </data>
+  <data name="Label77.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 13</value>
   </data>
   <data name="Label77.Text" xml:space="preserve">
     <value>Rho*:  [kmol/m³] ; T: [K]</value>
+  </data>
+  <data name="Label78.Location" type="System.Drawing.Point, System.Drawing">
+    <value>243, 190</value>
+  </data>
+  <data name="Label79.Location" type="System.Drawing.Point, System.Drawing">
+    <value>243, 163</value>
+  </data>
+  <data name="Label80.Location" type="System.Drawing.Point, System.Drawing">
+    <value>243, 136</value>
+  </data>
+  <data name="Label81.Location" type="System.Drawing.Point, System.Drawing">
+    <value>243, 106</value>
+  </data>
+  <data name="Label82.Location" type="System.Drawing.Point, System.Drawing">
+    <value>243, 79</value>
+  </data>
+  <data name="Label76.Location" type="System.Drawing.Point, System.Drawing">
+    <value>238, 48</value>
   </data>
   <data name="Label76.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 13</value>
@@ -648,8 +810,47 @@
   <data name="TableLayoutPanel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
+  <data name="Label99.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 14</value>
+  </data>
+  <data name="Label99.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>14, 14, 14, 14</value>
+  </data>
+  <data name="Label99.Size" type="System.Drawing.Size, System.Drawing">
+    <value>965, 42</value>
+  </data>
+  <data name="graphCPIG.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>48, 22, 48, 22</value>
+  </data>
+  <data name="Label100.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 13</value>
+  </data>
+  <data name="Label100.Text" xml:space="preserve">
+    <value>Experimental Data</value>
+  </data>
+  <data name="Label101.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 13</value>
+  </data>
+  <data name="Label101.Text" xml:space="preserve">
+    <value>Experimental Data</value>
+  </data>
+  <data name="graphPVAP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>48, 22, 48, 22</value>
+  </data>
   <data name="TabPage6.Text" xml:space="preserve">
     <value>Vapor Pressure</value>
+  </data>
+  <data name="Label102.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 13</value>
+  </data>
+  <data name="Label102.Text" xml:space="preserve">
+    <value>Experimental Data</value>
+  </data>
+  <data name="tbUserDefDensLiqEq.Location" type="System.Drawing.Point, System.Drawing">
+    <value>248, 70</value>
+  </data>
+  <data name="graphLIQDENS.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>48, 22, 48, 22</value>
   </data>
   <data name="rbEstimateLIQDENS.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 17</value>
@@ -657,11 +858,20 @@
   <data name="rbEstimateLIQDENS.Text" xml:space="preserve">
     <value>Estimate (Rackett)</value>
   </data>
+  <data name="Label45.Location" type="System.Drawing.Point, System.Drawing">
+    <value>242, 229</value>
+  </data>
   <data name="Label45.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 13</value>
   </data>
   <data name="Label45.Text" xml:space="preserve">
     <value>* Dens in kg/m3, T in K</value>
+  </data>
+  <data name="Label35.Location" type="System.Drawing.Point, System.Drawing">
+    <value>239, 100</value>
+  </data>
+  <data name="Label36.Location" type="System.Drawing.Point, System.Drawing">
+    <value>238, 48</value>
   </data>
   <data name="Label36.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 13</value>
@@ -678,20 +888,35 @@
   <data name="btnViewLIQDENS.Text" xml:space="preserve">
     <value>Update Chart</value>
   </data>
+  <data name="Label33.Location" type="System.Drawing.Point, System.Drawing">
+    <value>239, 152</value>
+  </data>
+  <data name="rbRegressLIQDENS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>147, 15</value>
+  </data>
   <data name="rbRegressLIQDENS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 17</value>
+    <value>90, 17</value>
   </data>
   <data name="rbRegressLIQDENS.Text" xml:space="preserve">
-    <value>Regress Experimental Data</value>
+    <value>Regress Data</value>
+  </data>
+  <data name="Label32.Location" type="System.Drawing.Point, System.Drawing">
+    <value>239, 178</value>
   </data>
   <data name="tbStatusLIQDENS.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
+  <data name="Label31.Location" type="System.Drawing.Point, System.Drawing">
+    <value>239, 204</value>
+  </data>
   <data name="btnRegressLIQDENS.Text" xml:space="preserve">
     <value>Regress Data</value>
   </data>
+  <data name="Label34.Location" type="System.Drawing.Point, System.Drawing">
+    <value>239, 126</value>
+  </data>
   <data name="rbCoeffLIQDENS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>286, 15</value>
+    <value>268, 15</value>
   </data>
   <data name="rbCoeffLIQDENS.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 17</value>
@@ -705,11 +930,17 @@
   <data name="Label103.Text" xml:space="preserve">
     <value>Experimental Data</value>
   </data>
+  <data name="graphLIQVISC.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>48, 22, 48, 22</value>
+  </data>
   <data name="Label104.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 13</value>
   </data>
   <data name="Label104.Text" xml:space="preserve">
     <value>Experimental Data</value>
+  </data>
+  <data name="graphLIQCP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>48, 22, 48, 22</value>
   </data>
   <data name="Label105.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 13</value>
@@ -723,6 +954,9 @@
   <data name="rbEstimateLiquidTC.Text" xml:space="preserve">
     <value>Estimate (Latini)</value>
   </data>
+  <data name="graphLIQTC.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>48, 22, 48, 22</value>
+  </data>
   <data name="Label20.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 13</value>
   </data>
@@ -730,13 +964,22 @@
     <value>Status:</value>
   </data>
   <data name="rbRegressTCLiquid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>122, 13</value>
+    <value>138, 13</value>
   </data>
   <data name="rbRegressTCLiquid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 17</value>
+    <value>90, 17</value>
   </data>
   <data name="rbRegressTCLiquid.Text" xml:space="preserve">
-    <value>Regress Experimental Data</value>
+    <value>Regress Data</value>
+  </data>
+  <data name="Label25.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label25.Location" type="System.Drawing.Point, System.Drawing">
+    <value>251, 237</value>
+  </data>
+  <data name="Label25.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 13</value>
   </data>
   <data name="Label25.Text" xml:space="preserve">
     <value>* TC in W/[m.K], T in K</value>
@@ -747,8 +990,20 @@
   <data name="tbStatusTCLiquid.Text" xml:space="preserve">
     <value>OK</value>
   </data>
+  <data name="Label27.Location" type="System.Drawing.Point, System.Drawing">
+    <value>249, 103</value>
+  </data>
+  <data name="Label98.Location" type="System.Drawing.Point, System.Drawing">
+    <value>249, 155</value>
+  </data>
   <data name="tbTCLiquid_E.Text" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="Label97.Location" type="System.Drawing.Point, System.Drawing">
+    <value>249, 181</value>
+  </data>
+  <data name="Label54.Location" type="System.Drawing.Point, System.Drawing">
+    <value>248, 45</value>
   </data>
   <data name="Label54.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 13</value>
@@ -765,6 +1020,12 @@
   <data name="btnRegressTCLiquid.Text" xml:space="preserve">
     <value>Regress Data</value>
   </data>
+  <data name="Label95.Location" type="System.Drawing.Point, System.Drawing">
+    <value>249, 207</value>
+  </data>
+  <data name="rbCoeffTCLiquid.Location" type="System.Drawing.Point, System.Drawing">
+    <value>253, 13</value>
+  </data>
   <data name="rbCoeffTCLiquid.Size" type="System.Drawing.Size, System.Drawing">
     <value>161, 17</value>
   </data>
@@ -777,11 +1038,17 @@
   <data name="btnViewTCLiquid.Text" xml:space="preserve">
     <value>Update Chart</value>
   </data>
+  <data name="Label96.Location" type="System.Drawing.Point, System.Drawing">
+    <value>249, 129</value>
+  </data>
   <data name="Label106.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 13</value>
   </data>
   <data name="Label106.Text" xml:space="preserve">
     <value>Experimental Data</value>
+  </data>
+  <data name="graphSOLIDDENS.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>48, 22, 48, 22</value>
   </data>
   <data name="Label107.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 13</value>
@@ -789,11 +1056,26 @@
   <data name="Label107.Text" xml:space="preserve">
     <value>Experimental Data</value>
   </data>
+  <data name="graphSOLIDCP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>48, 22, 48, 22</value>
+  </data>
+  <data name="graphSOLIDCP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>488, 381</value>
+  </data>
   <data name="rbRegressSolidCp.Size" type="System.Drawing.Size, System.Drawing">
     <value>153, 17</value>
   </data>
   <data name="rbRegressSolidCp.Text" xml:space="preserve">
     <value>Regress Experimental Data</value>
+  </data>
+  <data name="TabPage12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>979, 401</value>
+  </data>
+  <data name="TabControl3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 73</value>
+  </data>
+  <data name="TabControl3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>987, 427</value>
   </data>
   <data name="SaveFileDialog1.Filter" xml:space="preserve">
     <value>JSON Files|*.json</value>

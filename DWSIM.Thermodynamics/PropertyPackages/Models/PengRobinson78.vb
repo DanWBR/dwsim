@@ -333,7 +333,7 @@ Namespace PropertyPackages.Auxiliary
 
             Dim tmpa As Object = Calc_SUM2(n, Vz, a)
 
-            Dim am As Double = tmpa(1)(0)
+            Dim am As Double = tmpa(1)
 
             Dim bm As Double = Vz.MultiplyY(bi).SumY
 

@@ -5513,4 +5513,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="IdealGasHeatCapacityRatio" xml:space="preserve">
     <value>Ideal Gas Heat Capacity Ratio</value>
   </data>
+  <data name="DescDHPP" xml:space="preserve">
+    <value>Includes only the Debye-Hückel term for the calculation of activity coefficients.</value>
+  </data>
 </root>
