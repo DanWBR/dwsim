@@ -143,17 +143,41 @@ Public Class FormMain
                 My.Application.UtilityPlugins.Add(ip.UniqueID, ip)
             Next
 
-            ' On user details loaded
-            AddHandler UserService.GetInstance().UserDetailsLoaded, AddressOf UserService_UserDetailsLoaded
-            AddHandler UserService.GetInstance().UserLoggedOut, AddressOf UserService_UserLoggedOut
-            AddHandler FilePickerService.S3365DashboardFileOpened, AddressOf FilePickerService_S3365DashboardFileOpened
-            AddHandler FilePickerService.S365DashboardSaveFileClicked, AddressOf FilePickerService_S365DashboardSaveFileClicked
+            LoadExtenders()
+
+            'Search and populate CAPE-OPEN Flowsheet Monitoring Object collection
+            'SearchCOMOs() 'doing this only when the user hovers the mouse over the plugins toolstrip menu item
+
+            If My.Settings.ScriptPaths Is Nothing Then My.Settings.ScriptPaths = New Collections.Specialized.StringCollection()
+
+            Me.FrmOptions = New FormOptions
+            Me.FrmOptions.Dock = DockStyle.Fill
+            Me.SettingsPanel.Controls.Add(Me.FrmOptions)
+            Me.ButtonClose.BringToFront()
+
+            tsbInspector.Checked = GlobalSettings.Settings.InspectorEnabled
+
+            SetupWelcomeScreen()
+
+        End If
+
+        GlobalSettings.Settings.DpiScale = Me.CreateGraphics.DpiX / 96.0
+
+    End Sub
+
+    Private Sub LoadExtenders()
+
+        ' On user details loaded
+        AddHandler UserService.GetInstance().UserDetailsLoaded, AddressOf UserService_UserDetailsLoaded
+        AddHandler UserService.GetInstance().UserLoggedOut, AddressOf UserService_UserLoggedOut
+        AddHandler FilePickerService.S3365DashboardFileOpened, AddressOf FilePickerService_S3365DashboardFileOpened
+        AddHandler FilePickerService.S365DashboardSaveFileClicked, AddressOf FilePickerService_S365DashboardSaveFileClicked
 
 #If Not WINE32 Then
 
-            'load extenders
+        'load extenders
 
-            Dim extlist As List(Of IExtenderCollection) = GetExtenders(LoadExtenderDLLs())
+        Dim extlist As List(Of IExtenderCollection) = GetExtenders(LoadExtenderDLLs())
 
             For Each extender In extlist
                 Extenders.Add(extender.ID, extender)
@@ -162,9 +186,17 @@ Public Class FormMain
                         If extender.Category <> ExtenderCategory.InitializationScript Then
                             Dim newmenuitem As ToolStripMenuItem = Nothing
                             If extender.Category = ExtenderCategory.NewItem Then
-                                newmenuitem = New ToolStripMenuItem()
-                                newmenuitem.Text = extender.DisplayText
-                                newmenuitem.DisplayStyle = ToolStripItemDisplayStyle.Text
+                                For Each item As ToolStripMenuItem In MenuStrip1.Items
+                                    If item.Text = extender.DisplayText Then
+                                        newmenuitem = item
+                                        Exit For
+                                    End If
+                                Next
+                                If newmenuitem Is Nothing Then
+                                    newmenuitem = New ToolStripMenuItem()
+                                    newmenuitem.Text = extender.DisplayText
+                                    newmenuitem.DisplayStyle = ToolStripItemDisplayStyle.Text
+                                End If
                             End If
                             For Each item In extender.Collection
                                 Dim exttsmi As New ToolStripMenuItem
@@ -203,7 +235,7 @@ Public Class FormMain
                                         newmenuitem?.DropDownItems.Add(exttsmi)
                                 End Select
                             Next
-                            If newmenuitem IsNot Nothing Then
+                            If newmenuitem IsNot Nothing AndAlso Not MenuStrip1.Items.Contains(newmenuitem) Then
                                 MenuStrip1.Items.Add(newmenuitem)
                             End If
                         Else
@@ -219,26 +251,6 @@ Public Class FormMain
             Next
 
 #End If
-
-            'Search and populate CAPE-OPEN Flowsheet Monitoring Object collection
-            'SearchCOMOs() 'doing this only when the user hovers the mouse over the plugins toolstrip menu item
-
-            If My.Settings.ScriptPaths Is Nothing Then My.Settings.ScriptPaths = New Collections.Specialized.StringCollection()
-
-            Me.FrmOptions = New FormOptions
-            Me.FrmOptions.Dock = DockStyle.Fill
-            Me.SettingsPanel.Controls.Add(Me.FrmOptions)
-            Me.ButtonClose.BringToFront()
-
-            tsbInspector.Checked = GlobalSettings.Settings.InspectorEnabled
-
-            SetupWelcomeScreen()
-
-        End If
-
-        Me.Text = DWSIM.App.GetLocalString("FormParent_FormText")
-
-        GlobalSettings.Settings.DpiScale = Me.CreateGraphics.DpiX / 96.0
 
     End Sub
 
@@ -803,6 +815,12 @@ Public Class FormMain
         LIQPP.ComponentDescription = DWSIM.App.GetLocalString("DescLIPP")
 
         PropertyPackages.Add(LIQPP.ComponentName.ToString, LIQPP)
+
+        Dim DHPP As New DebyeHuckelPropertyPackage()
+        DHPP.ComponentName = "Debye-Hückel (Aqueous Electrolytes)"
+        DHPP.ComponentDescription = DWSIM.App.GetLocalString("DescDHPP")
+
+        PropertyPackages.Add(DHPP.ComponentName.ToString, DHPP)
 
         Dim BOPP As BlackOilPropertyPackage = New BlackOilPropertyPackage()
         BOPP.ComponentName = "Black Oil"
@@ -4121,7 +4139,7 @@ Label_00CC:
         Me.AboutToolStripMenuItem_Click(sender, e)
     End Sub
 
-    Private Sub ContentsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ContentsToolStripMenuItem.Click
+    Private Sub ContentsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles HelpToolStripMenuItem.Click
         'call general help
 
         RaiseEvent ToolOpened("Help", New EventArgs())

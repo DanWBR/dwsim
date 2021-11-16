@@ -507,11 +507,11 @@ Namespace PropertyPackages.Auxiliary
             If TIPO = "L" Then
                 Tinf = 0
                 Tsup = 10
-                nsub = 1000
+                nsub = 10000
             Else
                 Tinf = 10000
                 Tsup = 0
-                nsub = 1000
+                nsub = 10000
             End If
 
             delta_T = (Tsup - Tinf) / nsub
@@ -524,7 +524,7 @@ Namespace PropertyPackages.Auxiliary
                 Tinf = Tinf + delta_T
                 Vr = Tinf
                 fT_inf = Pr * Vr / Tr - (1 + B / Vr + C / Vr ^ 2 + D / Vr ^ 5 + c4 / Tr ^ 3 / Vr ^ 2 * (beta + gamma / Vr ^ 2) * Math.Exp(-gamma / Vr ^ 2))
-            Loop Until fT * fT_inf < 0 Or i >= 1000
+            Loop Until fT * fT_inf < 0 Or i >= 10000
             Tsup = Tinf
             Tinf = Tinf - delta_T
 

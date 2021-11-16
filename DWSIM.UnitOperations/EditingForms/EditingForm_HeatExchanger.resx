@@ -137,6 +137,9 @@
   <data name="&gt;&gt;tbEfficiency.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Label1.ToolTip1" xml:space="preserve">
+    <value />
+  </data>
   <data name="&gt;&gt;Label16.ZOrder" xml:space="preserve">
     <value>22</value>
   </data>
@@ -189,8 +192,8 @@
   <data name="&gt;&gt;Label17.ZOrder" xml:space="preserve">
     <value>21</value>
   </data>
-  <data name="btnCreateAndConnectOutlet1.ToolTip1" xml:space="preserve">
-    <value>Create and Connect</value>
+  <data name="Label12.Text" xml:space="preserve">
+    <value>Status</value>
   </data>
   <data name="&gt;&gt;cbHeatLoss.ZOrder" xml:space="preserve">
     <value>8</value>
@@ -312,9 +315,6 @@
   <data name="cbInlet1.Size" type="System.Drawing.Size, System.Drawing">
     <value>153, 21</value>
   </data>
-  <data name="tbOverallU.ToolTip2" xml:space="preserve">
-    <value />
-  </data>
   <data name="cbCalcMode.ToolTip1" xml:space="preserve">
     <value />
   </data>
@@ -384,8 +384,8 @@
   <data name="tbOverallU.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name="&gt;&gt;tbArea.Name" xml:space="preserve">
-    <value>tbArea</value>
+  <data name="&gt;&gt;Label3.Name" xml:space="preserve">
+    <value>Label3</value>
   </data>
   <data name="btnCreateAndConnectInlet1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -459,6 +459,9 @@
   <data name="cbHotFluidOutletT.Items2" xml:space="preserve">
     <value>Máxima das Entradas</value>
   </data>
+  <data name="&gt;&gt;tbHotFluidOutletT.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="Label10.ToolTip2" xml:space="preserve">
     <value />
   </data>
@@ -483,8 +486,8 @@
   <data name="tbEfficiency.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;GroupBox1.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="cbHotFluidOutletT.Location" type="System.Drawing.Point, System.Drawing">
+    <value>260, 155</value>
   </data>
   <data name="GroupBox2.ToolTip" xml:space="preserve">
     <value />
@@ -540,6 +543,9 @@
   <data name="&gt;&gt;chkIgnoreLMTD.Parent" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
+  <data name="&gt;&gt;tbHeatLoss.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
+  </data>
   <data name="tbHotFluidOutletT.ToolTip" xml:space="preserve">
     <value />
   </data>
@@ -569,9 +575,6 @@
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Temperatura de Saída Frio</value>
-  </data>
-  <data name="btnCreateAndConnectInlet2.ToolTip" xml:space="preserve">
-    <value>Criar e Conectar</value>
   </data>
   <data name="Label16.ToolTip2" xml:space="preserve">
     <value />
@@ -621,9 +624,6 @@
   <data name="&gt;&gt;cbCalcMode.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
-  </data>
   <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
     <value>346, 146</value>
   </data>
@@ -645,6 +645,9 @@
   <data name="&gt;&gt;cbColdFluidOutletT.ZOrder" xml:space="preserve">
     <value>30</value>
   </data>
+  <data name="tbColdFluidOutletT.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="&gt;&gt;Label13.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -654,8 +657,8 @@
   <data name="cbInlet2.ToolTip2" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;Label7.ZOrder" xml:space="preserve">
-    <value>12</value>
+  <data name="cbInlet2.ToolTip1" xml:space="preserve">
+    <value />
   </data>
   <data name="btnDisconnect2.ToolTip2" xml:space="preserve">
     <value>Disconnect</value>
@@ -675,9 +678,6 @@
   <data name="cbArea.Items2" xml:space="preserve">
     <value>Máxima das Entradas</value>
   </data>
-  <data name="Label9.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="cbHotFluidPDrop.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
   </data>
@@ -690,8 +690,8 @@
   <data name="&gt;&gt;Label10.Name" xml:space="preserve">
     <value>Label10</value>
   </data>
-  <data name="cbMITA.Items2" xml:space="preserve">
-    <value>Máxima das Entradas</value>
+  <data name="&gt;&gt;chkActive.Parent" xml:space="preserve">
+    <value>GroupBox5</value>
   </data>
   <data name="&gt;&gt;lblTag.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -737,6 +737,9 @@
   </data>
   <data name="&gt;&gt;Label11.Name" xml:space="preserve">
     <value>Label11</value>
+  </data>
+  <data name="btnDisconnect2.TabIndex" type="System.Int32, mscorlib">
+    <value>51</value>
   </data>
   <data name="cbEfficiency.TabIndex" type="System.Int32, mscorlib">
     <value>67</value>
@@ -861,17 +864,14 @@
   <data name="&gt;&gt;chkForcePinchToOutlets.Parent" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
-  <data name="&gt;&gt;ToolTip1.Name" xml:space="preserve">
-    <value>ToolTip1</value>
-  </data>
   <data name="Label16.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 211</value>
   </data>
   <data name="&gt;&gt;btnViewProfile.Parent" xml:space="preserve">
     <value>GroupBox6</value>
   </data>
-  <data name="&gt;&gt;tbHotFluidOutletT.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;GroupBox2.Name" xml:space="preserve">
+    <value>GroupBox2</value>
   </data>
   <data name="&gt;&gt;cbHeat.Name" xml:space="preserve">
     <value>cbHeat</value>
@@ -899,9 +899,6 @@
   </data>
   <data name="Label18.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="btnCreateAndConnectInlet1.ToolTip" xml:space="preserve">
-    <value>Criar e Conectar</value>
   </data>
   <data name="&gt;&gt;btnDisconnect1.ZOrder" xml:space="preserve">
     <value>11</value>
@@ -981,14 +978,14 @@
   <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="cbEfficiency.Location" type="System.Drawing.Point, System.Drawing">
-    <value>260, 314</value>
+  <data name="&gt;&gt;Label7.ZOrder" xml:space="preserve">
+    <value>12</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn2.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn2</value>
   </data>
-  <data name="cbFlowDir.TabIndex" type="System.Int32, mscorlib">
-    <value>47</value>
+  <data name="tbHotFluidOutletT.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="&gt;&gt;cbHotFluidOutletT.Parent" xml:space="preserve">
     <value>GroupBox2</value>
@@ -1122,9 +1119,6 @@
   <data name="Label3.Text" xml:space="preserve">
     <value>Queda de Pressão (Frio)</value>
   </data>
-  <data name="&gt;&gt;GroupBox2.Name" xml:space="preserve">
-    <value>GroupBox2</value>
-  </data>
   <data name="cbColdFluidOutletT.ToolTip" xml:space="preserve">
     <value />
   </data>
@@ -1133,6 +1127,9 @@
   </data>
   <data name="cbInlet2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="tbHotFluidPDrop.Location" type="System.Drawing.Point, System.Drawing">
+    <value>170, 103</value>
   </data>
   <data name="cbHeat.ToolTip2" xml:space="preserve">
     <value />
@@ -1167,11 +1164,8 @@
   <data name="Label21.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;cbOutlet2.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="btnCreateAndConnectInlet1.TabIndex" type="System.Int32, mscorlib">
-    <value>45</value>
+  <data name="btnEditSTProps.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 13</value>
@@ -1251,9 +1245,6 @@
   <data name="tbHeatLoss.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name="cbInlet2.ToolTip1" xml:space="preserve">
-    <value />
-  </data>
   <data name="&gt;&gt;btnDisconnect2.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
@@ -1320,14 +1311,14 @@
   <data name="&gt;&gt;cbEfficiency.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cbMITA.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="Label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cbCalcMode.Items10" xml:space="preserve">
     <value>Especificar Fração Molar de Vapor na Saída (Corrente 2)</value>
+  </data>
+  <data name="btnCreateAndConnectOutlet2.TabIndex" type="System.Int32, mscorlib">
+    <value>54</value>
   </data>
   <data name="Label8.ToolTip" xml:space="preserve">
     <value />
@@ -1337,6 +1328,9 @@
   </data>
   <data name="lblTag.ToolTip2" xml:space="preserve">
     <value />
+  </data>
+  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 13</value>
   </data>
   <data name="&gt;&gt;Column1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1410,9 +1404,6 @@
   <data name="tbHeat.ToolTip2" xml:space="preserve">
     <value />
   </data>
-  <data name="cbCalcMode.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
   <data name="GroupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -1464,8 +1455,8 @@
   <data name="tbOVF1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="btnEditSTProps.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;tbArea.Name" xml:space="preserve">
+    <value>tbArea</value>
   </data>
   <data name="btnCreateAndConnectInlet2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1494,8 +1485,8 @@
   <data name="tbHeat.Location" type="System.Drawing.Point, System.Drawing">
     <value>170, 235</value>
   </data>
-  <data name="tbHotFluidOutletT.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="cbCalcMode.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="GroupBox1.ToolTip1" xml:space="preserve">
     <value />
@@ -1512,8 +1503,8 @@
   <data name="Label14.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="cbColdFluidOutletT.TabIndex" type="System.Int32, mscorlib">
-    <value>42</value>
+  <data name="btnCreateAndConnectInlet1.ToolTip" xml:space="preserve">
+    <value>Criar e Conectar</value>
   </data>
   <data name="&gt;&gt;tbEfficiency.ZOrder" xml:space="preserve">
     <value>6</value>
@@ -1536,13 +1527,13 @@
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Parâmetros de Cálculo</value>
   </data>
+  <data name="&gt;&gt;cbInlet2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="cbHotFluidOutletT.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="chkForcePinchToOutlets.ToolTip1" xml:space="preserve">
-    <value />
-  </data>
-  <data name="btnEditSTProps.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="&gt;&gt;Label16.Parent" xml:space="preserve">
@@ -1602,8 +1593,8 @@
   <data name="&gt;&gt;Label18.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
-  <data name="&gt;&gt;GroupBox6.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;ToolTip1.Name" xml:space="preserve">
+    <value>ToolTip1</value>
   </data>
   <data name="&gt;&gt;tbMITA.ZOrder" xml:space="preserve">
     <value>12</value>
@@ -1623,9 +1614,6 @@
   <data name="&gt;&gt;cbFlowDir.Name" xml:space="preserve">
     <value>cbFlowDir</value>
   </data>
-  <data name="cbCalcMode.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="cbHeat.Items1" xml:space="preserve">
     <value>Média das Entradas</value>
   </data>
@@ -1638,9 +1626,6 @@
   <data name="cbOutlet1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="cbOverallHTC.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="btnDisconnect1.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
   </data>
@@ -1649,6 +1634,9 @@
   </data>
   <data name="Label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="cbFlowDir.TabIndex" type="System.Int32, mscorlib">
+    <value>47</value>
   </data>
   <data name="tbColdFluidPDrop.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -1665,6 +1653,9 @@
   <data name="Label20.ToolTip1" xml:space="preserve">
     <value />
   </data>
+  <data name="btnCreateAndConnectOutlet1.ToolTip1" xml:space="preserve">
+    <value>Create and Connect</value>
+  </data>
   <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
@@ -1680,8 +1671,8 @@
   <data name="&gt;&gt;cbEfficiency.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;cbInlet2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;cbOutlet2.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="Label4.ToolTip1" xml:space="preserve">
     <value />
@@ -1734,9 +1725,6 @@
   <data name="tbHeat.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 20</value>
   </data>
-  <data name="btnDisconnectOutlet2.ToolTip2" xml:space="preserve">
-    <value>Disconnect</value>
-  </data>
   <data name="cbHeatLoss.Items" xml:space="preserve">
     <value>Mínima das Entradas</value>
   </data>
@@ -1754,6 +1742,9 @@
   </data>
   <data name="&gt;&gt;Label13.Parent" xml:space="preserve">
     <value>GroupBox5</value>
+  </data>
+  <data name="cbMITA.Items2" xml:space="preserve">
+    <value>Máxima das Entradas</value>
   </data>
   <data name="Label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1839,9 +1830,6 @@
   <data name="Label15.ToolTip1" xml:space="preserve">
     <value>Coeficiente Global de Troca Térmica</value>
   </data>
-  <data name="&gt;&gt;Label3.Name" xml:space="preserve">
-    <value>Label3</value>
-  </data>
   <data name="&gt;&gt;cbArea.Parent" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
@@ -1872,8 +1860,8 @@
   <data name="&gt;&gt;tbHeatLoss.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="btnDisconnect2.TabIndex" type="System.Int32, mscorlib">
-    <value>51</value>
+  <data name="Label9.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="Label16.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1898,6 +1886,9 @@
   </data>
   <data name="tbOVF2.ToolTip2" xml:space="preserve">
     <value />
+  </data>
+  <data name="tbOverallU.TabIndex" type="System.Int32, mscorlib">
+    <value>52</value>
   </data>
   <data name="Label2.ToolTip" xml:space="preserve">
     <value />
@@ -1932,9 +1923,6 @@
   <data name="Label10.Text" xml:space="preserve">
     <value>Fração de Vapor (Saída 2)</value>
   </data>
-  <data name="&gt;&gt;ToolTip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;btnDisconnectOutlet1.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
@@ -1965,14 +1953,14 @@
   <data name="cbCalcMode.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 13</value>
+  <data name="cbOverallHTC.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;gridResults.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="tbOverallU.TabIndex" type="System.Int32, mscorlib">
-    <value>52</value>
+  <data name="lblConnectedTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>133, 72</value>
   </data>
   <data name="tbMITA.Location" type="System.Drawing.Point, System.Drawing">
     <value>170, 261</value>
@@ -1986,8 +1974,8 @@
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>EditingForm_HeatExchanger</value>
   </data>
-  <data name="cbHeat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>260, 235</value>
+  <data name="cbCalcMode.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
   </data>
   <data name="&gt;&gt;lblConnectedTo.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2003,6 +1991,9 @@
   </data>
   <data name="&gt;&gt;Label9.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="&gt;&gt;cbHotFluidPDrop.Name" xml:space="preserve">
+    <value>cbHotFluidPDrop</value>
   </data>
   <data name="&gt;&gt;tbHeat.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2065,6 +2056,9 @@
     <value />
   </data>
   <data name="tbColdFluidPDrop.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tbColdFluidOutletT.ToolTip2" xml:space="preserve">
     <value />
   </data>
   <data name="&gt;&gt;cbHeatLoss.Name" xml:space="preserve">
@@ -2148,8 +2142,8 @@
   <data name="chkActive.Location" type="System.Drawing.Point, System.Drawing">
     <value>319, 43</value>
   </data>
-  <data name="tbColdFluidOutletT.ToolTip2" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;cbMITA.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label11.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -2241,6 +2235,9 @@
   <data name="cbHotFluidPDrop.Items2" xml:space="preserve">
     <value>Máxima das Entradas</value>
   </data>
+  <data name="cbEfficiency.Location" type="System.Drawing.Point, System.Drawing">
+    <value>260, 314</value>
+  </data>
   <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
     <value>116, 13</value>
   </data>
@@ -2268,8 +2265,8 @@
   <data name="GroupBox5.ToolTip2" xml:space="preserve">
     <value />
   </data>
-  <data name="btnCreateAndConnectOutlet2.TabIndex" type="System.Int32, mscorlib">
-    <value>54</value>
+  <data name="btnEditSTProps.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="GroupBox5.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -2281,9 +2278,6 @@
     <value>$this</value>
   </data>
   <data name="Label21.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label1.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="tbHotFluidOutletT.TabIndex" type="System.Int32, mscorlib">
@@ -2334,6 +2328,9 @@
   <data name="btnEditSTProps.Size" type="System.Drawing.Size, System.Drawing">
     <value>329, 23</value>
   </data>
+  <data name="cbColdFluidOutletT.TabIndex" type="System.Int32, mscorlib">
+    <value>42</value>
+  </data>
   <data name="&gt;&gt;Label8.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -2355,6 +2352,9 @@
   <data name="&gt;&gt;cbOutlet2.Name" xml:space="preserve">
     <value>cbOutlet2</value>
   </data>
+  <data name="&gt;&gt;Label20.Name" xml:space="preserve">
+    <value>Label20</value>
+  </data>
   <data name="&gt;&gt;cbInlet1.Name" xml:space="preserve">
     <value>cbInlet1</value>
   </data>
@@ -2373,8 +2373,8 @@
   <data name="tbOVF1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="tbColdFluidOutletT.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="&gt;&gt;GroupBox1.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="cbColdFluidPDrop.ToolTip2" xml:space="preserve">
     <value />
@@ -2397,8 +2397,11 @@
   <data name="cbCalcMode.Location" type="System.Drawing.Point, System.Drawing">
     <value>170, 23</value>
   </data>
-  <data name="cbHotFluidOutletT.Location" type="System.Drawing.Point, System.Drawing">
-    <value>260, 155</value>
+  <data name="&gt;&gt;tbOVF2.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
+  </data>
+  <data name="&gt;&gt;ToolTip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 229</value>
@@ -2448,8 +2451,8 @@
   <data name="cbEfficiency.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="tbHotFluidPDrop.Location" type="System.Drawing.Point, System.Drawing">
-    <value>170, 103</value>
+  <data name="btnDisconnectOutlet2.ToolTip2" xml:space="preserve">
+    <value>Disconnect</value>
   </data>
   <data name="btnEditSTProps.ToolTip2" xml:space="preserve">
     <value />
@@ -2459,9 +2462,6 @@
   </data>
   <data name="&gt;&gt;Label13.ZOrder" xml:space="preserve">
     <value>4</value>
-  </data>
-  <data name="&gt;&gt;cbColdFluidPDrop.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
   </data>
   <data name="Label5.ToolTip" xml:space="preserve">
     <value />
@@ -2522,9 +2522,6 @@
   </data>
   <data name="&gt;&gt;Label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Label12.Text" xml:space="preserve">
-    <value>Status</value>
   </data>
   <data name="&gt;&gt;cbInlet1.ZOrder" xml:space="preserve">
     <value>14</value>
@@ -2631,11 +2628,14 @@
   <data name="DataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
     <value>Propriedade</value>
   </data>
+  <data name="cbHeat.Location" type="System.Drawing.Point, System.Drawing">
+    <value>260, 235</value>
+  </data>
   <data name="lblStatus.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="lblConnectedTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>133, 72</value>
+  <data name="Label1.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;tbMITA.Parent" xml:space="preserve">
     <value>GroupBox2</value>
@@ -2667,8 +2667,8 @@
   <data name="cbFlowDir.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="&gt;&gt;Label15.ZOrder" xml:space="preserve">
-    <value>23</value>
+  <data name="&gt;&gt;GroupBox6.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn1.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn1</value>
@@ -2709,8 +2709,8 @@
   <data name="&gt;&gt;tbOVF1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;tbHeatLoss.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
+  <data name="cbFlowDir.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;lblConnectedTo.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -2736,8 +2736,8 @@
   <data name="&gt;&gt;btnDisconnect1.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
-  <data name="&gt;&gt;chkActive.Parent" xml:space="preserve">
-    <value>GroupBox5</value>
+  <data name="tbOverallU.ToolTip2" xml:space="preserve">
+    <value />
   </data>
   <data name="Label12.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2802,7 +2802,7 @@
   <data name="&gt;&gt;Label15.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tbOVF2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
   <data name="cbHeatLoss.ToolTip2" xml:space="preserve">
@@ -2832,8 +2832,8 @@
   <data name="Label19.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="cbFlowDir.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;cbColdFluidPDrop.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
   </data>
   <data name="btnDisconnectOutlet2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2868,20 +2868,20 @@
   <data name="&gt;&gt;Label11.Parent" xml:space="preserve">
     <value>GroupBox5</value>
   </data>
-  <data name="&gt;&gt;Label20.Name" xml:space="preserve">
-    <value>Label20</value>
+  <data name="btnCreateAndConnectInlet1.TabIndex" type="System.Int32, mscorlib">
+    <value>45</value>
   </data>
   <data name="GroupBox2.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;cbHotFluidPDrop.Name" xml:space="preserve">
-    <value>cbHotFluidPDrop</value>
+  <data name="&gt;&gt;Label15.ZOrder" xml:space="preserve">
+    <value>23</value>
   </data>
   <data name="&gt;&gt;tbOVF1.Parent" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
-  <data name="Label1.ToolTip1" xml:space="preserve">
-    <value />
+  <data name="btnCreateAndConnectInlet2.ToolTip" xml:space="preserve">
+    <value>Criar e Conectar</value>
   </data>
   <data name="cbInlet2.ToolTip" xml:space="preserve">
     <value />

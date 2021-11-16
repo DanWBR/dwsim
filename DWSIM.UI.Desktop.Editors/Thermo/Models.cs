@@ -119,7 +119,7 @@ namespace DWSIM.UI.Desktop.Editors
         {
             pp.Flowsheet = flowsheet;
             var tr = new TableRow();
-            tr = s.CreateAndAddTextBoxAndFourButtonsRow(ppcontainer, pp.Tag, "Edit", null, "Flash", null, "Advanced", null, "Remove", null,
+            tr = s.CreateAndAddTextBoxAndTwoButtonsRow(ppcontainer, pp.Tag, "Edit", null, "Remove", null,
                                                                 (arg1, arg2) =>
                                                                 {
                                                                     pp.Tag = arg1.Text;
@@ -131,24 +131,20 @@ namespace DWSIM.UI.Desktop.Editors
                                                                     {
                                                                         var cont = new PropertyPackageSettingsView(flowsheet, pp);
                                                                         var cont2 = new PropertyPackageIPView(flowsheet, pp);
+                                                                        var cont3 = new FlashSettingsEditor(flowsheet, pp);
+                                                                        var cont4 = new FlashSettingsEditor(flowsheet, pp);
                                                                         cont.Tag = "General Settings";
                                                                         cont2.Tag = "Interaction Parameters";
-                                                                        var form = s.GetDefaultTabbedForm("Edit '" + pp.Tag + "' (" + pp.ComponentName + ")", 800, 500, new DynamicLayout[] { cont2, cont });
+                                                                        cont3.Tag = "Equilibrium Calculation Settings";
+                                                                        var advcont = pp.GetAdvancedEditingContainers();
+                                                                        var form = s.GetDefaultTabbedForm("Edit '" + pp.Tag + "' (" + pp.ComponentName + ")", 800, 500, new DynamicLayout[] { cont2, cont3, cont, advcont[0], advcont[1] });
                                                                         form.Show();
                                                                     }
                                                                     else
                                                                     {
-                                                                        Application.Instance.Invoke(() => { pp.DisplayEditingForm(); });
+                                                                        //Application.Instance.Invoke(() => { pp.DisplayEditingForm(); });
                                                                     }
-                                                                },
-                                                                 (arg1, arg2) =>
-                                                                 {
-                                                                     pp.DisplayFlashConfigForm();
-                                                                 },
-                                                                (arg1, arg2) =>
-                                                                {
-                                                                    pp.DisplayAdvancedEditingForm();
-                                                                },
+                                                                },                                                                
                                                                (arg1, arg2) =>
                                                                {
                                                                    if (MessageBox.Show("Confirm removal?", "Remove Property Package", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes)

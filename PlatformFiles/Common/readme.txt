@@ -67,8 +67,8 @@ Version 6.7.1
 Author              Description
 Daniel Medeiros     Exposing Activity/Fugacity/Diffusion coefficients from compounds in Material Streams
 Daniel Medeiros     Added Ideal Gas Heat Capacity as a Phase property
-Daniel Medeiros     Fixed issue 213: Mac OS - Binary Enveloppe failed
-Daniel Medeiros     Fixed issue 214: Mac OS - Objects Alignement button get crash
+Daniel Medeiros     Fixed issue 213: Mac OS - Binary Envelope failed
+Daniel Medeiros     Fixed issue 214: Mac OS - Objects Alignment button get crash
 Daniel Medeiros     Fixed issue 216: Carbon Combustion sample cannot be calculated
 Daniel Medeiros     Fixed issue with saturation condition calculations
 Daniel Medeiros     Fixed duplicate name when adding objects to the flowsheet

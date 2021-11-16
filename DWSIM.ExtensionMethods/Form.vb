@@ -17,12 +17,7 @@ Public Module FormExtensions
         Dim controls = f.GetAllChildren()
 
         For Each control As Control In controls
-            If control.Font.Style = FontStyle.Regular Then
-                control.Font = SystemFonts.MessageBoxFont
-            End If
-            If control.Font.SizeInPoints < 12 And control.Font.Style = FontStyle.Bold Then
-                control.Font = New Font(SystemFonts.MessageBoxFont, FontStyle.Bold)
-            End If
+            control.Font = New Font(SystemFonts.MessageBoxFont.FontFamily, control.Font.Size, control.Font.Style)
             If GlobalSettings.Settings.DpiScale > 1.0 Then
                 If TypeOf control Is DataGridView Then
                     Dim dgv = DirectCast(control, DataGridView)
@@ -43,12 +38,7 @@ Public Module FormExtensions
         Dim controls = c.GetAllChildren()
 
         For Each control As Control In controls
-            If control.Font.Style = FontStyle.Regular Then
-                control.Font = SystemFonts.MessageBoxFont
-            End If
-            If control.Font.SizeInPoints < 12 And control.Font.Style = FontStyle.Bold Then
-                control.Font = New Font(SystemFonts.MessageBoxFont, FontStyle.Bold)
-            End If
+            control.Font = New Font(SystemFonts.MessageBoxFont.FontFamily, control.Font.Size, control.Font.Style)
             If GlobalSettings.Settings.DpiScale > 1.0 Then
                 If TypeOf control Is DataGridView Then
                     Dim dgv = DirectCast(control, DataGridView)

@@ -2461,6 +2461,10 @@ Label_00CC:
                                      LIQPP.ComponentName = "Modified LIQUAC (Aqueous Electrolytes)"
                                      plist.Add(LIQPP)
 
+                                     Dim DHPP As New DebyeHuckelPropertyPackage()
+                                     DHPP.ComponentName = "Debye-Hückel (Aqueous Electrolytes)"
+                                     plist.Add(DHPP)
+
                                      Dim BOPP As BlackOilPropertyPackage = New BlackOilPropertyPackage()
                                      BOPP.ComponentName = "Black Oil"
                                      plist.Add(BOPP)

@@ -225,6 +225,23 @@ Click "Next" to continue.</value>
   <data name="LinkLabelPropertyMethods.Text" xml:space="preserve">
     <value>Click here to learn which methods and correlations are being used by the packages to calculate fluid properties.</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="DataGridViewTextBoxColumn1.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="Column10.Width" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="DataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="DataGridViewPP.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="DataGridViewPP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>335, 231</value>
+  </data>
   <data name="Button8.Text" xml:space="preserve">
     <value>Add</value>
   </data>

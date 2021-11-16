@@ -318,6 +318,11 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
         Function Flash_SL(ByVal Vz As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage) As Object
 
+            etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance).ToDoubleFromInvariant
+            maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_External_Iterations)
+            itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance).ToDoubleFromInvariant
+            maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
+
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
 
             Inspector.Host.CheckAndAdd(IObj, "", "Flash_SL", Name & " (SLE Flash)", "Pressure-Temperature Solid-Liquid Flash Algorithm Routine", True)
@@ -416,6 +421,8 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
             IObj?.Paragraphs.Add(String.Format("<h2>Calculations</h2>"))
 
+            ecount = 0
+
             L = 1
             Do
 
@@ -428,6 +435,10 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
                     ActCoeff = CType(PP, ElectrolyteNRTLPropertyPackage).m_enrtl.GAMMA_MR(T, Vx, CompoundProperties)
                 ElseIf TypeOf PP Is ElectrolyteNRTLPropertyPackage Then
                     ActCoeff = CType(PP, ExUNIQUACPropertyPackage).m_uni.GAMMA_MR(T, Vx, CompoundProperties)
+                ElseIf TypeOf PP Is LIQUAC2PropertyPackage Then
+                    ActCoeff = CType(PP, LIQUAC2PropertyPackage).m_liquac.GAMMA_MR(T, Vx, CompoundProperties)
+                ElseIf TypeOf PP Is DebyeHuckelPropertyPackage Then
+                    ActCoeff = CType(PP, DebyeHuckelPropertyPackage).m_dh.GAMMA_MR(T, Vx, CompoundProperties)
                 Else
                     ActCoeff = PP.DW_CalcFugCoeff(Vx, T, P, State.Liquid).MultiplyConstY(P).DivideY(Vp)
                 End If
@@ -512,6 +523,8 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
                 IObj?.Paragraphs.Add(String.Format("Current estimates for liquid phase mole fraction: {0}", L))
                 IObj?.Paragraphs.Add(String.Format("Current estimates for solid phase mole fraction: {0}", 1 - L))
+
+                If ecount > maxit_e Then Throw New Exception("SL Flash: max iterations reached")
 
             Loop Until Abs(L - L_old) < MaxError
 

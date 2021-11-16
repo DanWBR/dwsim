@@ -5,12 +5,12 @@
 '
 '    DWSIM is free software: you can redistribute it and/or modify
 '    it under the terms of the GNU General Public License as published by
-'    the Free Software Foundation, either version 3 of the License, or
+'    the free Software foundation, either version 3 of the License, or
 '    (at your option) any later version.
 '
 '    DWSIM is distributed in the hope that it will be useful,
 '    but WITHOUT ANY WARRANTY; without even the implied warranty of
-'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    MERCHANTABILITY or fITNESS fOR A PARTICULAR PURPOSE.  See the
 '    GNU General Public License for more details.
 '
 '    You should have received a copy of the GNU General Public License
@@ -51,7 +51,7 @@ Namespace SystemsOfUnits
 
         Public Property compressibility As String Implements Interfaces.IUnitsOfMeasure.compressibility
 
-        Public Property compressibilityFactor As String Implements Interfaces.IUnitsOfMeasure.compressibilityFactor
+        Public Property compressibilityfactor As String Implements Interfaces.IUnitsOfMeasure.compressibilityFactor
 
         Public Property deltaP As String Implements Interfaces.IUnitsOfMeasure.deltaP
 
@@ -97,7 +97,7 @@ Namespace SystemsOfUnits
 
         Public Property kvalue As String Implements Interfaces.IUnitsOfMeasure.kvalue
 
-        Public Property logFugacityCoefficient As String Implements Interfaces.IUnitsOfMeasure.logFugacityCoefficient
+        Public Property logfugacityCoefficient As String Implements Interfaces.IUnitsOfMeasure.logFugacityCoefficient
 
         Public Property logKvalue As String Implements Interfaces.IUnitsOfMeasure.logKvalue
 
@@ -187,8 +187,8 @@ Namespace SystemsOfUnits
                                    "lb/s", "lb/h", "lb/d", "Mg/s", "Mg/h", "Mg/d"})
                 Case Enums.UnitOfMeasure.molarflow
                     units.AddRange(New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm",
-                                   "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm",
-                                   "MMSCFD", "SCFD", "SCFM",
+                                   "ft3/d @ 60 f, 14.7 psia", "ft3/d @ 0 C, 1 atm",
+                                   "MMSCfD", "SCfD", "SCfM",
                                    "Mm3/d @ BR", "Mm3/d @ SC", "Mm3/d @ NC"})
                 Case Enums.UnitOfMeasure.volumetricFlow
                     units.AddRange(New String() {"m3/s", "ft3/s", "cm3/s", "m3/h", "m3/d", "bbl/h", "bbl/d", "ft3/min", "ft3/d", "gal[UK]/h", "gal[UK]/s", "gal[US]/h", "gal[US]/min", "L/h", "L/min", "L/s"})
@@ -282,11 +282,11 @@ Namespace SystemsOfUnits
                     Return Enums.UnitOfMeasure.pressure
                 Case "g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s", "lb/h", "lb/d", "Mg/s", "Mg/h", "Mg/d"
                     Return Enums.UnitOfMeasure.massflow
-                Case "mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"
+                Case "mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 f, 14.7 psia", "ft3/d @ 0 C, 1 atm"
                     Return Enums.UnitOfMeasure.molarflow
                 Case "m3/s", "ft3/s", "cm3/s", "m3/h", "m3/d", "bbl/h", "bbl/d", "ft3/min", "ft3/d", "gal[UK]/h", "gal[UK]/s", "gal[US]/h", "gal[US]/min", "L/h", "L/min", "L/s",
-                     "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm",
-                    "MMSCFD", "SCFD", "SCFM",
+                     "ft3/d @ 60 f, 14.7 psia", "ft3/d @ 0 C, 1 atm",
+                    "MMSCfD", "SCfD", "SCfM",
                     "Mm3/d @ BR", "Mm3/d @ SC", "Mm3/d @ SC"
                     Return Enums.UnitOfMeasure.volumetricFlow
                 Case "kJ/kg", "cal/g", "BTU/lbm", "kcal/kg"
@@ -309,7 +309,7 @@ Namespace SystemsOfUnits
                     Return Enums.UnitOfMeasure.viscosity
                 Case "Pa", "atm", "lbf/ft2", "kgf/cm2", "kPa", "bar", "ftH2O", "inH2O", "inHg", "mbar", "mH2O", "mmH2O", "mmHg", "MPa", "psi"
                     Return Enums.UnitOfMeasure.deltaP
-                Case "C.", "K.", "F.", "R."
+                Case "C.", "K.", "f.", "R."
                     Return Enums.UnitOfMeasure.deltaT
                 Case "m", "ft", "cm"
                     Return Enums.UnitOfMeasure.distance
@@ -382,7 +382,7 @@ Namespace SystemsOfUnits
                 Case Enums.UnitOfMeasure.molarflow
                     Return molarflow
                 Case Enums.UnitOfMeasure.volumetricFlow
-                    Return volumetricFlow
+                    Return volumetricflow
                 Case Enums.UnitOfMeasure.enthalpy
                     Return enthalpy
                 Case Enums.UnitOfMeasure.entropy
@@ -504,7 +504,7 @@ Namespace SystemsOfUnits
                 .activity = "Pa"
                 .activityCoefficient = "-"
                 .compressibility = "1/Pa"
-                .compressibilityFactor = "-"
+                .compressibilityfactor = "-"
                 .density = "kg/m3"
                 .enthalpy = "kJ/kg"
                 .entropy = "kJ/[kg.K]"
@@ -515,7 +515,7 @@ Namespace SystemsOfUnits
                 .heatCapacityCp = "kJ/[kg.K]"
                 .heatCapacityCv = "kJ/[kg.K]"
                 .jouleThomsonCoefficient = "K/Pa"
-                .logFugacityCoefficient = "-"
+                .logfugacityCoefficient = "-"
                 .massflow = "kg/s"
                 .massfraction = "-"
                 .molarflow = "mol/s"
@@ -526,7 +526,7 @@ Namespace SystemsOfUnits
                 .temperature = "K"
                 .thermalConductivity = "W/[m.K]"
                 .viscosity = "Pa.s"
-                .volumetricFlow = "m3/s"
+                .volumetricflow = "m3/s"
                 .cinematic_viscosity = "m2/s"
                 .idealGasHeatCapacity = "kJ/[kg.K]"
                 .surfaceTension = "N/m"
@@ -590,7 +590,7 @@ Namespace SystemsOfUnits
                 .activity = "Pa"
                 .activityCoefficient = "-"
                 .compressibility = "1/Pa"
-                .compressibilityFactor = "-"
+                .compressibilityfactor = "-"
                 .density = "kg/m3"
                 .enthalpy = "kJ/kg"
                 .entropy = "kJ/[kg.K]"
@@ -601,7 +601,7 @@ Namespace SystemsOfUnits
                 .heatCapacityCp = "kJ/[kg.K]"
                 .heatCapacityCv = "kJ/[kg.K]"
                 .jouleThomsonCoefficient = "K/Pa"
-                .logFugacityCoefficient = "-"
+                .logfugacityCoefficient = "-"
                 .massflow = "kg/h"
                 .massfraction = "-"
                 .molarflow = "m3/d @ BR"
@@ -612,7 +612,7 @@ Namespace SystemsOfUnits
                 .temperature = "C"
                 .thermalConductivity = "W/[m.K]"
                 .viscosity = "cP"
-                .volumetricFlow = "m3/h"
+                .volumetricflow = "m3/h"
                 .cinematic_viscosity = "cSt"
                 .idealGasHeatCapacity = "kJ/[kg.K]"
                 .surfaceTension = "N/m"
@@ -676,7 +676,7 @@ Namespace SystemsOfUnits
                 .activity = "Pa"
                 .activityCoefficient = "-"
                 .compressibility = "1/Pa"
-                .compressibilityFactor = "-"
+                .compressibilityfactor = "-"
                 .density = "kg/m3"
                 .enthalpy = "kJ/kg"
                 .entropy = "kJ/[kg.K]"
@@ -687,7 +687,7 @@ Namespace SystemsOfUnits
                 .heatCapacityCp = "kJ/[kg.K]"
                 .heatCapacityCv = "kJ/[kg.K]"
                 .jouleThomsonCoefficient = "K/Pa"
-                .logFugacityCoefficient = "-"
+                .logfugacityCoefficient = "-"
                 .massflow = "kg/h"
                 .massfraction = "-"
                 .molarflow = "m3/d @ SC"
@@ -698,7 +698,7 @@ Namespace SystemsOfUnits
                 .temperature = "C"
                 .thermalConductivity = "W/[m.K]"
                 .viscosity = "cP"
-                .volumetricFlow = "m3/h"
+                .volumetricflow = "m3/h"
                 .cinematic_viscosity = "cSt"
                 .idealGasHeatCapacity = "kJ/[kg.K]"
                 .surfaceTension = "N/m"
@@ -762,7 +762,7 @@ Namespace SystemsOfUnits
                 .activity = "Pa"
                 .activityCoefficient = "-"
                 .compressibility = "1/Pa"
-                .compressibilityFactor = "-"
+                .compressibilityfactor = "-"
                 .density = "kg/m3"
                 .enthalpy = "kJ/kg"
                 .entropy = "kJ/[kg.K]"
@@ -773,7 +773,7 @@ Namespace SystemsOfUnits
                 .heatCapacityCp = "kJ/[kg.K]"
                 .heatCapacityCv = "kJ/[kg.K]"
                 .jouleThomsonCoefficient = "K/Pa"
-                .logFugacityCoefficient = "-"
+                .logfugacityCoefficient = "-"
                 .massflow = "kg/h"
                 .massfraction = "-"
                 .molarflow = "m3/d @ CNTP"
@@ -784,7 +784,7 @@ Namespace SystemsOfUnits
                 .temperature = "C"
                 .thermalConductivity = "W/[m.K]"
                 .viscosity = "cP"
-                .volumetricFlow = "m3/h"
+                .volumetricflow = "m3/h"
                 .cinematic_viscosity = "cSt"
                 .idealGasHeatCapacity = "kJ/[kg.K]"
                 .surfaceTension = "N/m"
@@ -848,7 +848,7 @@ Namespace SystemsOfUnits
                 .activity = "Pa"
                 .activityCoefficient = "-"
                 .compressibility = "1/Pa"
-                .compressibilityFactor = "-"
+                .compressibilityfactor = "-"
                 .density = "kg/m3"
                 .enthalpy = "kJ/kg"
                 .entropy = "kJ/[kg.K]"
@@ -859,7 +859,7 @@ Namespace SystemsOfUnits
                 .heatCapacityCp = "kJ/[kg.K]"
                 .heatCapacityCv = "kJ/[kg.K]"
                 .jouleThomsonCoefficient = "K/Pa"
-                .logFugacityCoefficient = "-"
+                .logfugacityCoefficient = "-"
                 .massflow = "kg/d"
                 .massfraction = "-"
                 .molarflow = "m3/d @ SC"
@@ -870,7 +870,7 @@ Namespace SystemsOfUnits
                 .temperature = "C"
                 .thermalConductivity = "W/[m.K]"
                 .viscosity = "cP"
-                .volumetricFlow = "m3/d"
+                .volumetricflow = "m3/d"
                 .cinematic_viscosity = "cSt"
                 .idealGasHeatCapacity = "kJ/[kg.K]"
                 .surfaceTension = "N/m"
@@ -934,7 +934,7 @@ Namespace SystemsOfUnits
                 .activity = "Pa"
                 .activityCoefficient = "-"
                 .compressibility = "1/Pa"
-                .compressibilityFactor = "-"
+                .compressibilityfactor = "-"
                 .density = "kg/m3"
                 .enthalpy = "kJ/kg"
                 .entropy = "kJ/[kg.K]"
@@ -945,7 +945,7 @@ Namespace SystemsOfUnits
                 .heatCapacityCp = "kJ/[kg.K]"
                 .heatCapacityCv = "kJ/[kg.K]"
                 .jouleThomsonCoefficient = "K/Pa"
-                .logFugacityCoefficient = "-"
+                .logfugacityCoefficient = "-"
                 .massflow = "kg/h"
                 .massfraction = "-"
                 .molarflow = "kmol/h"
@@ -956,7 +956,7 @@ Namespace SystemsOfUnits
                 .temperature = "C"
                 .thermalConductivity = "W/[m.K]"
                 .viscosity = "Pa.s"
-                .volumetricFlow = "m3/h"
+                .volumetricflow = "m3/h"
                 .cinematic_viscosity = "m2/s"
                 .idealGasHeatCapacity = "kJ/[kg.K]"
                 .surfaceTension = "N/m"
@@ -1018,12 +1018,12 @@ Namespace SystemsOfUnits
                 .cakeresistance = "ft/lbm"
                 .mediumresistance = "ft-1"
 
-                .pdp_boilingPointTemperature = "F"
-                .pdp_meltingTemperature = "F"
+                .pdp_boilingPointTemperature = "f"
+                .pdp_meltingTemperature = "f"
                 .activity = "lbf/ft2"
                 .activityCoefficient = "-"
                 .compressibility = "1/psi"
-                .compressibilityFactor = "-"
+                .compressibilityfactor = "-"
                 .density = "lbm/ft3"
                 .enthalpy = "BTU/lbm"
                 .entropy = "BTU/[lbm.R]"
@@ -1034,7 +1034,7 @@ Namespace SystemsOfUnits
                 .heatCapacityCp = "BTU/[lbm.R]"
                 .heatCapacityCv = "BTU/[lbm.R]"
                 .jouleThomsonCoefficient = "R/[lbf/ft2]"
-                .logFugacityCoefficient = "-"
+                .logfugacityCoefficient = "-"
                 .massflow = "lbm/h"
                 .massfraction = "-"
                 .molarflow = "lbmol/h"
@@ -1055,7 +1055,7 @@ Namespace SystemsOfUnits
                 .kvalue = "-"
                 .logKvalue = "-"
                 .surfaceTension = "lbf/in"
-                .volumetricFlow = "ft3/s"
+                .volumetricflow = "ft3/s"
                 .cinematic_viscosity = "ft2/s"
                 .heatflow = "BTU/h"
                 .head = "ft"
@@ -1109,7 +1109,7 @@ Namespace SystemsOfUnits
                 .activity = "atm"
                 .activityCoefficient = "-"
                 .compressibility = "1/atm"
-                .compressibilityFactor = "-"
+                .compressibilityfactor = "-"
                 .density = "g/cm3"
                 .enthalpy = "cal/g"
                 .entropy = "cal/[g.C]"
@@ -1120,7 +1120,7 @@ Namespace SystemsOfUnits
                 .heatCapacityCp = "cal/[g.C]"
                 .heatCapacityCv = "cal/[g.C]"
                 .jouleThomsonCoefficient = "C/atm"
-                .logFugacityCoefficient = "-"
+                .logfugacityCoefficient = "-"
                 .massflow = "g/s"
                 .massfraction = "-"
                 .molarflow = "mol/s"
@@ -1141,7 +1141,7 @@ Namespace SystemsOfUnits
                 .kvalue = "-"
                 .logKvalue = "-"
                 .surfaceTension = "dyn/cm2"
-                .volumetricFlow = "cm3/s"
+                .volumetricflow = "cm3/s"
                 .cinematic_viscosity = "cSt"
                 .heatflow = "kcal/h"
                 .head = "m"
@@ -1174,9 +1174,9 @@ Namespace SystemsOfUnits
 
         Public Shared Function ConvertToSI(ByVal units As String, ByVal value As Double) As Double
 
-            Select Case units
+            Select Case units.ToLower()
 
-                Case "[kg/s]/[Pa^0.5]"
+                Case "[kg/s]/[pa^0.5]"
                     Return value
                 Case "[lbm/h]/[psi^0.5]"
                     Return value / 7936.64 * 0.000145038 ^ 0.5
@@ -1187,16 +1187,16 @@ Namespace SystemsOfUnits
                 Case "[kg/h]/[[kgf/cm2]^0.5]"
                     Return value / 3600.0 * (1.033 / 101325) ^ 0.5
 
-                Case "K/Pa"
+                Case "k/pa"
                     Return value
-                Case "C/atm"
+                Case "c/atm"
                     Return value * 101325
-                Case "F/psi"
+                Case "f/psi"
                     Return value / 1.8 * 0.000145038
 
-                Case "1/kPa"
+                Case "1/kpa"
                     Return value * 0.001
-                Case "1/MPa"
+                Case "1/mpa"
                     Return value * 0.000001
                 Case "1/psi"
                     Return value * 0.000145038
@@ -1204,7 +1204,7 @@ Namespace SystemsOfUnits
                     Return value / 100000
                 Case "1/atm"
                     Return value / 101325
-            
+
                 Case "ft3/bbl"
                     Return value * 0.177295
                 Case "g"
@@ -1228,31 +1228,31 @@ Namespace SystemsOfUnits
                 Case "in/s"
                     Return value / 39.3701
 
-                Case "kPa"
+                Case "kpa"
                     Return value / 0.001
-                Case "ftH2O"
+                Case "fth2o"
                     Return value / 0.000334
-                Case "inH2O"
+                Case "inh2o"
                     Return value / 0.00401463
-                Case "inHg"
+                Case "inhg"
                     Return value / 0.000295301
                 Case "lbf/ft2"
                     Return value / 0.0208854
                 Case "mbar"
                     Return value / 0.01
-                Case "mH2O"
+                Case "mh2o"
                     Return value / 0.000101972
-                Case "mmH2O"
+                Case "mmh2o"
                     Return value / 0.101972
-                Case "mmHg"
+                Case "mmhg"
                     Return value / 0.00750064
-                Case "MPa"
+                Case "mpa"
                     Return value / 0.000001
                 Case "psi", "psia"
                     Return value / 0.000145038
                 Case "bar"
                     Return value * 100000
-                Case "kPag"
+                Case "kpag"
                     Return (value + 101.325) * 1000
                 Case "barg"
                     Return (value + 1.01325) * 100000
@@ -1314,71 +1314,71 @@ Namespace SystemsOfUnits
                     Return value / 35.3147 / 60 / 60 / 24
                 Case "ft3/s"
                     Return value / 35.3147
-                Case "gal[UK]/h"
+                Case "gal[uk]/h"
                     Return value / 791889
-                Case "gal[UK]/s"
+                Case "gal[uk]/s"
                     Return value / 219.969
-                Case "gal[US]/h"
+                Case "gal[us]/h"
                     Return value / 951019
-                Case "gal[US]/min"
+                Case "gal[us]/min"
                     Return value / 15850.3
-                Case "L/h"
+                Case "l/h"
                     Return value / 3600000.0
-                Case "L/min"
+                Case "l/min"
                     Return value / 60000
-                Case "L/s"
+                Case "l/s"
                     Return value / 1000
                 Case "m3/d"
                     Return value / 3600 / 24
 
-                Case "BTU/h", "BTU/hr", "btu/hr"
+                Case "btu/h", "btu/hr", "btu/hr"
                     Return value / 3412.14
-                Case "BTU/s"
+                Case "btu/s"
                     Return value / 0.947817
                 Case "cal/s"
                     Return value / 238.846
-                Case "HP", "hp"
+                Case "hp", "hp"
                     Return value / 1.35962
                 Case "kcal/h", "kcal/hr"
                     Return value / 859.845
-                Case "kJ/h"
+                Case "kj/h"
                     Return value / 3600
-                Case "kJ/d"
+                Case "kj/d"
                     Return value / 3600 / 24
-                Case "MW"
+                Case "mw"
                     Return value / 0.001
-                Case "W"
+                Case "w"
                     Return value / 1000
-                Case "MJ/h"
+                Case "mj/h"
                     Return value * 1000.0 / 3600.0
 
-                Case "BTU/lb"
+                Case "btu/lb"
                     Return value / 0.429923
                 Case "cal/g"
                     Return value / 0.238846
                 Case "kcal/kg"
                     Return value / 0.238846
 
-                Case "kJ/kmol", "J/mol"
+                Case "kj/kmol", "j/mol"
                     Return value
                 Case "cal/mol"
                     Return value * 0.0041868 * 1000
-                Case "BTU/lbmol"
+                Case "btu/lbmol"
                     Return value * 1.05506 * 1000
-                Case "kJ/[kmol.K]"
+                Case "kj/[kmol.k]"
                     Return value * 1
-                Case "cal/[mol.°C]"
+                Case "cal/[mol.°c]"
                     Return value * 0.0041868 * 1000
-                Case "cal/[mol.C]"
+                Case "cal/[mol.c]"
                     Return value * 0.0041868 * 1000
-                Case "BTU/[lbmol.R]"
+                Case "btu/[lbmol.r]"
                     Return value * 1.05506 * 1000
 
-                Case "K.m2/W"                           'fouling factor
+                Case "k.m2/w"                           'fouling factor
                     Return value
-                Case "C.cm2.s/cal"
+                Case "c.cm2.s/cal"
                     Return value * 0.000023885
-                Case "ft2.h.F/BTU"
+                Case "ft2.h.f/btu"
                     Return value * 0.17611
 
                 Case "m/kg"
@@ -1412,7 +1412,7 @@ Namespace SystemsOfUnits
                     Return value
                 Case "cm3"
                     Return value / 1000000.0
-                Case "L"
+                Case "l"
                     Return value / 1000.0
 
                 Case "cm3/mol"                          'volume molar'
@@ -1432,11 +1432,11 @@ Namespace SystemsOfUnits
 
                 Case "dyn"                              'forca
                     Return value / 100000
-                Case "N"
+                Case "n"
                     Return value
                 Case "lbf"
                     Return value / 0.224809
-                Case "mol/L"                            'conc molar
+                Case "mol/l"                            'conc molar
                     Return value * 1000
 
                 Case "mol/m3"
@@ -1445,18 +1445,18 @@ Namespace SystemsOfUnits
                     Return value * 1000.0
                 Case "mol/cm3"
                     Return value * 1000000.0 / 1000
-                Case "mol/mL"
+                Case "mol/ml"
                     Return value * 1000000.0 / 1000
                 Case "lbmol/ft3"
                     Return value * 35.3147 * 1000 / 2.20462
 
-                Case "g/L"                              'conc massica
+                Case "g/l"                              'conc massica
                     Return value
                 Case "kg/m3"
                     Return value
                 Case "g/cm3"
                     Return value * 1000000.0 / 1000
-                Case "g/mL"
+                Case "g/ml"
                     Return value * 1000000.0 / 1000
                 Case "m2/s"                              'k.visc
                     Return value
@@ -1464,13 +1464,13 @@ Namespace SystemsOfUnits
                     Return value / 3.28084
                 Case "cm2/s"
                     Return value / 10000.0
-                Case "W/[m2.K]"                              'HTC
+                Case "w/[m2.k]"                              'htc
                     Return value
-                Case "BTU/[ft2.h.R]"
+                Case "btu/[ft2.h.r]"
                     Return value / 0.17611
-                Case "cal/[cm.s.°C]"
+                Case "cal/[cm.s.°c]"
                     Return value / 0.0000238846
-                Case "cal/[cm.s.C]"
+                Case "cal/[cm.s.c]"
                     Return value / 0.0000238846
                 Case "m3/kg"                                'vol especif
                     Return value
@@ -1490,11 +1490,11 @@ Namespace SystemsOfUnits
                     Return value / 60
                 Case "mol/[m3.h]"
                     Return value / 3600
-                Case "mol/[L.s]"
+                Case "mol/[l.s]"
                     Return value * 1000
-                Case "mol/[L.min.]"
+                Case "mol/[l.min.]"
                     Return value / 60 * 1000
-                Case "mol/[L.h]"
+                Case "mol/[l.h]"
                     Return value / 3600 * 1000
                 Case "mol/[cm3.s]"
                     Return value * 1000000.0
@@ -1505,9 +1505,9 @@ Namespace SystemsOfUnits
                 Case "lbmol/[ft3.h]"
                     Return value / 3600 * 35.3147 * 1000 / 2.20462
 
-                Case "C", "°C"                                 'temperatura e demais
+                Case "c", "°c"                                 'temperatura e demais
                     Return value + 273.15
-                Case "°C.", "C."
+                Case "°c.", "c."
                     Return value
 
                 Case "atm"
@@ -1526,23 +1526,23 @@ Namespace SystemsOfUnits
                     Return value * 0.001
                 Case "dyn/cm2"
                     Return value * 0.001
-                Case "cal/[cm.s.°C]"
+                Case "cal/[cm.s.°c]"
                     Return value / 0.00238846
-                Case "cal/[cm.s.C]"
+                Case "cal/[cm.s.c]"
                     Return value / 0.00238846
                 Case "cm3/s"
                     Return value * 0.000001
-                Case "cal/[g.°C]"
+                Case "cal/[g.°c]"
                     Return value / 0.238846
-                Case "cal/[g.C]"
+                Case "cal/[g.c]"
                     Return value / 0.238846
-                Case "cSt"
+                Case "cst"
                     Return value / 1000000.0
                 Case "mm2/s"
                     Return value / 1000000.0
-                Case "Pa.s"
+                Case "pa.s"
                     Return value
-                Case "cP"
+                Case "cp"
                     Return value / 1000
                 Case "lbm /[ft.h]"
                     Return value / 0.000671968975140001 * 3600
@@ -1550,9 +1550,9 @@ Namespace SystemsOfUnits
                     Return value / 859.845
                 Case "m"
                     Return value
-                Case "R"
+                Case "r"
                     Return value / 1.8
-                Case "R."
+                Case "r."
                     Return value / 1.8
                 Case "lbf/ft2"
                     Return value / 0.0208854
@@ -1560,28 +1560,28 @@ Namespace SystemsOfUnits
                     Return value / 7936.64
                 Case "lbmol/h"
                     Return value * 453.59237 / 3600
-                Case "BTU/lbm"
+                Case "btu/lbm"
                     Return value / 0.429923
                 Case "lbm/ft3"
                     Return value / 0.062428
                 Case "lbf/in"
                     Return value / 0.00571015
-                Case "BTU/[ft.h.R]"
+                Case "btu/[ft.h.r]"
                     Return value / 0.577789
                 Case "ft3/s"
                     Return value / 35.3147
-                Case "BTU/[lbm.R]"
+                Case "btu/[lbm.r]"
                     Return value / 0.238846
                 Case "ft2/s"
                     Return value / 10.7639
                 Case "lbm/[ft.s]"
                     Return value / 0.000671968975140001
-                Case "BTU/h", "BTU/hr"
+                Case "btu/h", "btu/hr"
                     Return value / 3412.14
                 Case "ft"
                     Return value / 3.28084
 
-                    'Personalizados
+                    'personalizados
                 Case "kgf/cm2_a"
                     Return value * 101325 / 1.033
                 Case "kgf/cm2"
@@ -1596,62 +1596,62 @@ Namespace SystemsOfUnits
                     Return value / 3600
                 Case "m3/d"
                     Return value / 3600 / 24
-                Case "m3/d @ BR", "m3/d @ 20 C, 1 atm"
+                Case "m3/d @ br", "m3/d @ 20 c, 1 atm"
                     Return value / (24.055 * 3600 * 24 / 1000)
-                Case "m3/d @ CNTP"
+                Case "m3/d @ cntp"
                     Return value / (22.71 * 3600 * 24 / 1000)
-                Case "m3/d @ NC", "m3/d @ 0 C, 1 atm"
+                Case "m3/d @ nc", "m3/d @ 0 c, 1 atm"
                     Return value / (22.71 * 3600 * 24 / 1000)
-                Case "m3/d @ SC", "m3/d @ 15.56 C, 1 atm"
+                Case "m3/d @ sc", "m3/d @ 15.56 c, 1 atm"
                     Return value / (23.69 * 3600 * 24 / 1000)
-                Case "ft3/d @ 60 F, 14.7 psia"
+                Case "ft3/d @ 60 f, 14.7 psia"
                     Return value / (23.69 * 3600 * 24 / 1000) / 35.3147
-                Case "ft3/d @ 0 C, 1 atm"
+                Case "ft3/d @ 0 c, 1 atm"
                     Return value / (22.71 * 3600 * 24 / 1000) / 35.3147
-                Case "°F"
+                Case "°f"
                     Return (value - 32) * 5 / 9 + 273.15
-                Case "°F."
+                Case "°f."
                     Return value / 1.8
-                Case "F"
+                Case "f"
                     Return (value - 32) * 5 / 9 + 273.15
-                Case "F."
+                Case "f."
                     Return value / 1.8
                 Case "cm"
                     Return value / 100
-                Case "cal/[mol.°C]"
+                Case "cal/[mol.°c]"
                     Return value * 238.846 / 1000
-                Case "cal/[mol.C]"
+                Case "cal/[mol.c]"
                     Return value * 238.846 / 1000
-                Case "BTU/[lbmol.R]"
+                Case "btu/[lbmol.r]"
                     Return value * 1.8 * 0.947817
 
                 Case "lb/d"
                     Return value / 2.20462 / 60 / 60 / 24
-                Case "Mg/s"
+                Case "mg/s"
                     Return value * 1000
-                Case "Mg/h"
+                Case "mg/h"
                     Return value * 1000 / 3600
-                Case "Mg/d"
+                Case "mg/d"
                     Return value * 1000 / 3600 / 24
 
-                Case "Mm3/d @ BR"
+                Case "mm3/d @ br"
                     Return value / (24.055 * 3600 * 24 / 1000) * 1000 * 1000
-                Case "Mm3/d @ NC"
+                Case "mm3/d @ nc"
                     Return value / (22.71 * 3600 * 24 / 1000) * 1000 * 1000
-                Case "Mm3/d @ SC"
+                Case "mm3/d @ sc"
                     Return value / (23.69 * 3600 * 24 / 1000) * 1000 * 1000
-                Case "MMSCFD"
+                Case "mmscfd"
                     Return value / (23.69 * 3600 * 24 / 1000) / 35.3147 * 1000 * 1000
-                Case "SCFD"
+                Case "scfd"
                     Return value / (23.69 * 3600 * 24 / 1000) / 35.3147
-                Case "SCFM"
+                Case "scfm"
                     Return value / (23.69 * 60 / 1000) / 35.3147
 
-                Case "MMBTU/h", "MMBTU/hr", "MMBtu/h", "MMBtu/hr"
+                Case "mmbtu/h", "mmbtu/hr", "mmbtu/h", "mmbtu/hr"
                     Return value / 3412.14 * 1000 * 1000
-                Case "BTU/d"
+                Case "btu/d"
                     Return value / 3412.14 / 24
-                Case "MMBTU/d"
+                Case "mmbtu/d"
                     Return value / 3412.14 / 24 * 1000 * 1000
 
                 Case Else
@@ -1663,9 +1663,9 @@ Namespace SystemsOfUnits
 
         Public Shared Function ConvertFromSI(ByVal units As String, ByVal value As Double) As Double
 
-            Select Case units
+            Select Case units.ToLower()
 
-                Case "[kg/s]/[Pa^0.5]"
+                Case "[kg/s]/[pa^0.5]"
                     Return value
                 Case "[lbm/h]/[psi^0.5]"
                     Return value * 7936.64 / 0.000145038 ^ 0.5
@@ -1676,16 +1676,16 @@ Namespace SystemsOfUnits
                 Case "[kg/h]/[[kgf/cm2]^0.5]"
                     Return value * 3600.0 / (1.033 * 101325) ^ 0.5
 
-                Case "K/Pa"
+                Case "k/pa"
                     Return value
-                Case "C/atm"
+                Case "c/atm"
                     Return value / 101325
-                Case "F/psi"
+                Case "f/psi"
                     Return value * 1.8 / 0.000145038
 
-                Case "1/kPa"
+                Case "1/kpa"
                     Return value / 0.001
-                Case "1/MPa"
+                Case "1/mpa"
                     Return value / 0.000001
                 Case "1/psi"
                     Return value / 0.000145038
@@ -1719,31 +1719,31 @@ Namespace SystemsOfUnits
 
                 Case "atm"
                     Return value / 101325
-                Case "kPa"
+                Case "kpa"
                     Return value * 0.001
-                Case "ftH2O"
+                Case "fth2o"
                     Return value * 0.000334
-                Case "inH2O"
+                Case "inh2o"
                     Return value * 0.00401463
-                Case "inHg"
+                Case "inhg"
                     Return value * 0.000295301
                 Case "lbf/ft2"
                     Return value * 0.0208854
                 Case "mbar"
                     Return value * 0.01
-                Case "mH2O"
+                Case "mh2o"
                     Return value * 0.000101972
-                Case "mmH2O"
+                Case "mmh2o"
                     Return value * 0.101972
-                Case "mmHg"
+                Case "mmhg"
                     Return value * 0.00750064
-                Case "MPa"
+                Case "mpa"
                     Return value * 0.000001
                 Case "psi", "psia"
                     Return value * 0.000145038
                 Case "bar"
                     Return value / 100000
-                Case "kPag"
+                Case "kpag"
                     Return (value - 101325) / 1000
                 Case "barg"
                     Return (value - 101325) / 100000
@@ -1779,19 +1779,19 @@ Namespace SystemsOfUnits
                     Return value * 35.3147 * 60 * 60 * 24
                 Case "ft3/s"
                     Return value * 35.3147
-                Case "gal[UK]/h"
+                Case "gal[uk]/h"
                     Return value * 791889
-                Case "gal[UK]/s"
+                Case "gal[uk]/s"
                     Return value * 219.969
-                Case "gal[US]/h"
+                Case "gal[us]/h"
                     Return value * 951019
-                Case "gal[US]/min"
+                Case "gal[us]/min"
                     Return value * 15850.3
-                Case "L/h"
+                Case "l/h"
                     Return value * 3600000.0
-                Case "L/min"
+                Case "l/min"
                     Return value * 60000
-                Case "L/s"
+                Case "l/s"
                     Return value * 1000
                 Case "m3/d"
                     Return value * 3600 * 24
@@ -1822,54 +1822,54 @@ Namespace SystemsOfUnits
                 Case "lbmol/[lbm.h]"
                     Return value * 453.59237 * 2.20462 * 60 * 60
 
-                Case "BTU/h", "BTU/hr", "btu/hr"
+                Case "btu/h", "btu/hr", "btu/hr"
                     Return value * 3412.14
-                Case "BTU/s"
+                Case "btu/s"
                     Return value * 0.947817
                 Case "cal/s"
                     Return value * 238.846
-                Case "HP", "hp"
+                Case "hp", "hp"
                     Return value * 1.35962
                 Case "kcal/h", "kcal/hr"
                     Return value * 859.845
-                Case "kJ/h"
+                Case "kj/h"
                     Return value * 3600
-                Case "kJ/d"
+                Case "kj/d"
                     Return value * 3600 * 24
-                Case "MW"
+                Case "mw"
                     Return value * 0.001
-                Case "W"
+                Case "w"
                     Return value * 1000
-                Case "MJ/h"
+                Case "mj/h"
                     Return value / 1000.0 * 3600.0
 
-                Case "BTU/lb"
+                Case "btu/lb"
                     Return value * 0.429923
                 Case "cal/g"
                     Return value * 0.238846
                 Case "kcal/kg"
                     Return value * 0.238846
 
-                Case "kJ/kmol", "J/mol"
+                Case "kj/kmol", "j/mol"
                     Return value
                 Case "cal/mol"
                     Return value / 0.0041868 / 1000
-                Case "BTU/lbmol"
+                Case "btu/lbmol"
                     Return value / 1.05506 / 1000
-                Case "kJ/[kmol.K]"
+                Case "kj/[kmol.k]"
                     Return value
-                Case "cal/[mol.°C]"
+                Case "cal/[mol.°c]"
                     Return value / 0.0041868 / 1000
-                Case "cal/[mol.C]"
+                Case "cal/[mol.c]"
                     Return value / 0.0041868 / 1000
-                Case "BTU/[lbmol.R]"
+                Case "btu/[lbmol.r]"
                     Return value / 1.05506 / 1000
 
-                Case "K.m2/W"                           'fouling factor
+                Case "k.m2/w"                           'fouling factor
                     Return value
-                Case "C.cm2.s/cal"
+                Case "c.cm2.s/cal"
                     Return value / 0.000023885
-                Case "ft2.h.F/BTU"
+                Case "ft2.h.f/btu"
                     Return value / 0.17611
 
                 Case "m/kg"
@@ -1905,7 +1905,7 @@ Namespace SystemsOfUnits
                     Return value
                 Case "cm3"
                     Return value * 1000000.0
-                Case "L"
+                Case "l"
                     Return value * 1000.0
 
                 Case "cm3/mol"                          'volume molar'
@@ -1924,12 +1924,12 @@ Namespace SystemsOfUnits
 
                 Case "dyn"                              'forca
                     Return value * 100000
-                Case "N"
+                Case "n"
                     Return value
                 Case "lbf"
                     Return value * 0.224809
 
-                Case "mol/L"                            'conc molar
+                Case "mol/l"                            'conc molar
                     Return value / 1000.0
                 Case "mol/m3"
                     Return value
@@ -1937,18 +1937,18 @@ Namespace SystemsOfUnits
                     Return value / 1000.0
                 Case "mol/cm3"
                     Return value / 1000000.0 * 1000
-                Case "mol/mL"
+                Case "mol/ml"
                     Return value / 1000000.0 * 1000
                 Case "lbmol/ft3"
                     Return value / 35.3147 / 1000 * 2.20462
 
-                Case "g/L"                              'conc massica
+                Case "g/l"                              'conc massica
                     Return value
                 Case "kg/m3"
                     Return value
                 Case "g/cm3"
                     Return value / 1000000.0 * 1000
-                Case "g/mL"
+                Case "g/ml"
                     Return value / 1000000.0 * 1000
                 Case "lbm/ft3"
                     Return value * 0.062428
@@ -1960,13 +1960,13 @@ Namespace SystemsOfUnits
                 Case "cm2/s"
                     Return value * 10000.0
 
-                Case "W/[m2.K]"                              'HTC
+                Case "w/[m2.k]"                              'htc
                     Return value
-                Case "BTU/[ft2.h.R]"
+                Case "btu/[ft2.h.r]"
                     Return value * 0.17611
-                Case "cal/[cm.s.°C]"
+                Case "cal/[cm.s.°c]"
                     Return value * 0.0000238846
-                Case "cal/[cm.s.C]"
+                Case "cal/[cm.s.c]"
                     Return value * 0.0000238846
 
                 Case "m3/kg"                                'vol especif
@@ -1988,11 +1988,11 @@ Namespace SystemsOfUnits
                     Return value * 60
                 Case "mol/[m3.h]"
                     Return value * 3600
-                Case "mol/[L.s]"
+                Case "mol/[l.s]"
                     Return value / 1000
-                Case "mol/[L.min.]"
+                Case "mol/[l.min.]"
                     Return value * 60 / 1000
-                Case "mol/[L.h]"
+                Case "mol/[l.h]"
                     Return value * 3600 / 1000
                 Case "mol/[cm3.s]"
                     Return value / 1000000.0
@@ -2003,9 +2003,9 @@ Namespace SystemsOfUnits
                 Case "lbmol/[ft3.h]"
                     Return value * 3600 / 35.3147 / 1000 * 2.20462
 
-                Case "C", "°C"
+                Case "c", "°c"
                     Return value - 273.15
-                Case "C.", "°C."
+                Case "c.", "°c."
                     Return value
                 Case "g/s"
                     Return value * 1000
@@ -2019,31 +2019,31 @@ Namespace SystemsOfUnits
                     Return value / 0.001
                 Case "dyn/cm2"
                     Return value / 0.001
-                Case "cal/[cm.s.°C]"
+                Case "cal/[cm.s.°c]"
                     Return value * 0.00238846
-                Case "cal/[cm.s.C]"
+                Case "cal/[cm.s.c]"
                     Return value * 0.00238846
                 Case "cm3/s"
                     Return value / 0.000001
-                Case "cal/[g.°C]"
+                Case "cal/[g.°c]"
                     Return value * 0.238846
-                Case "cal/[g.C]"
+                Case "cal/[g.c]"
                     Return value * 0.238846
-                Case "cSt"
+                Case "cst"
                     Return value * 1000000.0
                 Case "mm2/s"
                     Return value * 1000000.0
-                Case "Pa.s"
+                Case "pa.s"
                     Return value
                 Case "lbm /[ft.h]"
                     Return value * 0.000671968975140001 / 3600
-                Case "cP"
+                Case "cp"
                     Return value * 1000
                 Case "kcal/h"
                     Return value * 859.845
-                Case "R"
+                Case "r"
                     Return value * 1.8
-                Case "R."
+                Case "r."
                     Return value * 1.8
                 Case "lbf/ft2"
                     Return value * 0.0208854
@@ -2051,21 +2051,21 @@ Namespace SystemsOfUnits
                     Return value * 7936.64
                 Case "lbmol/h"
                     Return value / 453.59237 * 3600
-                Case "BTU/lbm"
+                Case "btu/lbm"
                     Return value * 0.429923
                 Case "lbf/in"
                     Return value * 0.00571015
-                Case "BTU/[ft.h.R]"
+                Case "btu/[ft.h.r]"
                     Return value * 0.577789
                 Case "ft3/s"
                     Return value * 35.3147
-                Case "BTU/[lbm.R]"
+                Case "btu/[lbm.r]"
                     Return value * 0.238846
                 Case "ft2/s"
                     Return value * 10.7639
                 Case "lbm/[ft.s]"
                     Return value * 0.000671968975140001
-                Case "BTU/h"
+                Case "btu/h"
                     Return value * 3412.14
                 Case "ft"
                     Return value * 3.28084
@@ -2084,60 +2084,60 @@ Namespace SystemsOfUnits
                     Return value * 3600
                 Case "m3/d"
                     Return value * 3600 * 24
-                Case "m3/d @ BR", "m3/d @ 20 C, 1 atm"
+                Case "m3/d @ br", "m3/d @ 20 c, 1 atm"
                     Return value * (24.055 * 3600 * 24 / 1000)
-                Case "m3/d @ CNTP"
+                Case "m3/d @ cntp"
                     Return value * (22.71 * 3600 * 24 / 1000)
-                Case "m3/d @ NC", "m3/d @ 0 C, 1 atm"
+                Case "m3/d @ nc", "m3/d @ 0 c, 1 atm"
                     Return value * (22.71 * 3600 * 24 / 1000)
-                Case "m3/d @ SC", "m3/d @ 15.56 C, 1 atm"
+                Case "m3/d @ sc", "m3/d @ 15.56 c, 1 atm"
                     Return value * (23.69 * 3600 * 24 / 1000)
-                Case "ft3/d @ 60 F, 14.7 psia"
+                Case "ft3/d @ 60 f, 14.7 psia"
                     Return value * (23.69 * 3600 * 24 / 1000) * 35.3147
-                Case "ft3/d @ 0 C, 1 atm"
+                Case "ft3/d @ 0 c, 1 atm"
                     Return value * (22.71 * 3600 * 24 / 1000) * 35.3147
-                Case "°F"
+                Case "°f"
                     Return (value - 273.15) * 9 / 5 + 32
-                Case "F"
+                Case "f"
                     Return (value - 273.15) * 9 / 5 + 32
-                Case "F.", "°F."
+                Case "f.", "°f."
                     Return value * 1.8
                 Case "cm"
                     Return value * 100
-                Case "cal/[mol.°C]"
+                Case "cal/[mol.°c]"
                     Return value / 238.846 * 1000
-                Case "cal/[mol.C]"
+                Case "cal/[mol.c]"
                     Return value / 238.846 * 1000
-                Case "BTU/[lbmol.R]"
+                Case "btu/[lbmol.r]"
                     Return value / 1.8 / 0.947817
 
                 Case "lb/d"
                     Return value * 2.20462 * 60 * 60 * 24
-                Case "Mg/s"
+                Case "mg/s"
                     Return value / 1000
-                Case "Mg/h"
+                Case "mg/h"
                     Return value / 1000 * 3600
-                Case "Mg/d"
+                Case "mg/d"
                     Return value / 1000 * 3600 * 24
 
-                Case "Mm3/d @ BR"
+                Case "mm3/d @ br"
                     Return value * (24.055 * 3600 * 24 / 1000) / 1000 / 1000
-                Case "Mm3/d @ NC"
+                Case "mm3/d @ nc"
                     Return value * (22.71 * 3600 * 24 / 1000) / 1000 / 1000
-                Case "Mm3/d @ SC"
+                Case "mm3/d @ sc"
                     Return value * (23.69 * 3600 * 24 / 1000) / 1000 / 1000
-                Case "MMSCFD"
+                Case "mmscfd"
                     Return value * (23.69 * 3600 * 24 / 1000) * 35.3147 / 1000 / 1000
-                Case "SCFD"
+                Case "scfd"
                     Return value * (23.69 * 3600 * 24 / 1000) * 35.3147
-                Case "SCFM"
+                Case "scfm"
                     Return value * (23.69 * 60 / 1000) * 35.3147
 
-                Case "MMBTU/h", "MMBTU/hr", "MMBtu/h", "MMBtu/hr"
+                Case "mmbtu/h", "mmbtu/hr", "mmbtu/h", "mmbtu/hr"
                     Return value * 3412.14 / 1000 / 1000
-                Case "BTU/d"
+                Case "btu/d"
                     Return value * 3412.14 * 24
-                Case "MMBTU/d"
+                Case "mmbtu/d"
                     Return value * 3412.14 * 24 / 1000 / 1000
 
                 Case Else
@@ -2149,7 +2149,7 @@ Namespace SystemsOfUnits
         Public Shared Function Convert(fromunit As String, tounit As String, value As Double) As Double
 
             Dim sival As Double = ConvertToSI(fromunit, value)
-            Return Double.Parse(ConvertFromSI(tounit, sival))
+            Return Double.Parse(ConvertfromSI(tounit, sival))
 
         End Function
 

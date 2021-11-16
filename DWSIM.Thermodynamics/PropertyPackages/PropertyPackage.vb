@@ -6548,6 +6548,10 @@ Final3:
                         vcl(i) = ParseEquation(subst.ConstantProperties.LiquidThermalConductivityEquation, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_A, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_B, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_C, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_D, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_E, T)
                     End If
                     IObj?.Paragraphs.Add(String.Format("Value calculated from experimental curve: {0} W/[m.K]", vcl(i)))
+                    If vcl(i) <= 0.0 Then
+                        vcl(i) = Auxiliary.PROPS.condl_latini(T, subst.ConstantProperties.Normal_Boiling_Point, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Molar_Weight, "")
+                        IObj?.Paragraphs.Add(String.Format("Value estimated with Latini correlation: {0} W/[m.K]", vcl(i)))
+                    End If
                 ElseIf subst.ConstantProperties.IsIon Or subst.ConstantProperties.IsSalt Then
                     vcl(i) = 0.0#
                 Else
@@ -6618,7 +6622,12 @@ Final3:
             Dim val As Double
 
             If cprop.LiquidThermalConductivityEquation <> "" And cprop.LiquidThermalConductivityEquation <> "0" And Not cprop.IsIon And Not cprop.IsSalt Then
-                val = CalcCSTDepProp(cprop.LiquidThermalConductivityEquation, cprop.Liquid_Thermal_Conductivity_Const_A, cprop.Liquid_Thermal_Conductivity_Const_B, cprop.Liquid_Thermal_Conductivity_Const_C, cprop.Liquid_Thermal_Conductivity_Const_D, cprop.Liquid_Thermal_Conductivity_Const_E, T, cprop.Critical_Temperature)
+                If Integer.TryParse(cprop.VaporThermalConductivityEquation, New Integer) Then
+                    val = CalcCSTDepProp(cprop.LiquidThermalConductivityEquation, cprop.Liquid_Thermal_Conductivity_Const_A, cprop.Liquid_Thermal_Conductivity_Const_B, cprop.Liquid_Thermal_Conductivity_Const_C, cprop.Liquid_Thermal_Conductivity_Const_D, cprop.Liquid_Thermal_Conductivity_Const_E, T, cprop.Critical_Temperature)
+                Else
+                    val = ParseEquation(cprop.LiquidThermalConductivityEquation, cprop.Liquid_Thermal_Conductivity_Const_A, cprop.Liquid_Thermal_Conductivity_Const_B, cprop.Liquid_Thermal_Conductivity_Const_C, cprop.Liquid_Thermal_Conductivity_Const_D, cprop.Liquid_Thermal_Conductivity_Const_E, T)
+                End If
+
             ElseIf cprop.IsIon Or cprop.IsSalt Then
                 val = 0.0#
             Else
@@ -6634,7 +6643,11 @@ Final3:
             Dim val As Double
 
             If cprop.VaporThermalConductivityEquation <> "" And cprop.VaporThermalConductivityEquation <> "0" And Not cprop.IsIon And Not cprop.IsSalt Then
-                val = CalcCSTDepProp(cprop.VaporThermalConductivityEquation, cprop.Vapor_Thermal_Conductivity_Const_A, cprop.Vapor_Thermal_Conductivity_Const_B, cprop.Vapor_Thermal_Conductivity_Const_C, cprop.Vapor_Thermal_Conductivity_Const_D, cprop.Vapor_Thermal_Conductivity_Const_E, T, cprop.Critical_Temperature)
+                If Integer.TryParse(cprop.VaporThermalConductivityEquation, New Integer) Then
+                    val = CalcCSTDepProp(cprop.VaporThermalConductivityEquation, cprop.Vapor_Thermal_Conductivity_Const_A, cprop.Vapor_Thermal_Conductivity_Const_B, cprop.Vapor_Thermal_Conductivity_Const_C, cprop.Vapor_Thermal_Conductivity_Const_D, cprop.Vapor_Thermal_Conductivity_Const_E, T, cprop.Critical_Temperature)
+                Else
+                    val = ParseEquation(cprop.VaporThermalConductivityEquation, cprop.Vapor_Thermal_Conductivity_Const_A, cprop.Vapor_Thermal_Conductivity_Const_B, cprop.Vapor_Thermal_Conductivity_Const_C, cprop.Vapor_Thermal_Conductivity_Const_D, cprop.Vapor_Thermal_Conductivity_Const_E, T)
+                End If
             ElseIf cprop.IsIon Or cprop.IsSalt Then
                 val = 0.0#
             Else
@@ -8543,10 +8556,10 @@ Final3:
                 Dim rterm As String = ""
 
                 If expression.Contains("=") Then
-                    lterm = expression.Split("=")(0).Replace(" ", "")
-                    rterm = expression.Split("=")(1).TrimEnd(".")
+                    lterm = expression.Split("=")(0).Replace(" ", "").ToLower()
+                    rterm = expression.Split("=")(1).TrimEnd(".").ToLower()
                 Else
-                    rterm = expression.TrimEnd(".")
+                    rterm = expression.TrimEnd(".").ToLower()
                 End If
 
                 Dim numexp As String = ""
@@ -8556,18 +8569,20 @@ Final3:
                 If expression.Contains("where") Then
                     numexp = rterm.Split("where")(0).Replace(" ", "").Replace("ln", "log")
                     Dim unit1, unit2 As String
-                    unit1 = rterm.Split(New String() {"where"}, StringSplitOptions.RemoveEmptyEntries)(1).Split(New String() {"And", ","}, StringSplitOptions.RemoveEmptyEntries)(0).Trim
-                    unit2 = rterm.Split(New String() {"where"}, StringSplitOptions.RemoveEmptyEntries)(1).Split(New String() {"And", ","}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
+                    unit1 = rterm.Split(New String() {"where"}, StringSplitOptions.RemoveEmptyEntries)(1).Split(New String() {"and", ","}, StringSplitOptions.RemoveEmptyEntries)(0).Trim
+                    unit2 = rterm.Split(New String() {"where"}, StringSplitOptions.RemoveEmptyEntries)(1).Split(New String() {"and", ","}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
                     If unit1.Contains("T In") Then
-                        xunit = unit1.Split(New String() {"In"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
-                        yunit = unit2.Split(New String() {"In"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
+                        xunit = unit1.Split(New String() {"in"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
+                        yunit = unit2.Split(New String() {"in"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
                     Else
-                        xunit = unit2.Split(New String() {"In"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
-                        yunit = unit1.Split(New String() {"In"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
+                        xunit = unit2.Split(New String() {"in"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
+                        yunit = unit1.Split(New String() {"in"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
                     End If
                 Else
                     numexp = rterm.Replace(" ", "").Replace("ln", "log")
                 End If
+
+                numexp = numexp.Trim(New Char() {vbCrLf, vbCr, vbLf, vbTab})
 
                 If lterm.Contains("ln") Then
                     numexp = "exp(" + numexp + ")"
@@ -8578,23 +8593,23 @@ Final3:
                 ec.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
 
                 ec.Variables.Clear()
-                ec.Variables.Add("T", cv.ConvertToSI(xunit, T))
-                ec.Variables.Add("A", A)
-                ec.Variables.Add("B", B)
-                ec.Variables.Add("C", C)
-                ec.Variables.Add("D", D)
-                ec.Variables.Add("K", E)
-                ec.Variables.Add("F", 0.0#)
-                ec.Variables.Add("G", 0.0#)
-                ec.Variables.Add("H", 0.0#)
+                ec.Variables.Add("t", cv.ConvertToSI(xunit, T))
+                ec.Variables.Add("a", A)
+                ec.Variables.Add("b", B)
+                ec.Variables.Add("c", C)
+                ec.Variables.Add("d", D)
+                ec.Variables.Add("k", E)
+                ec.Variables.Add("f", 0.0#)
+                ec.Variables.Add("g", 0.0#)
+                ec.Variables.Add("h", 0.0#)
 
-                Dim result As Double = ec.CompileGeneric(Of Double)(numexp.Replace("E", "K").Replace("kexp", "exp").Trim).Evaluate()
+                Dim result As Double = ec.CompileGeneric(Of Double)(numexp.Replace("e", "k").Replace("kxp", "exp").Trim).Evaluate()
 
                 Return cv.ConvertToSI(yunit, result)
 
             Catch ex As Exception
 
-                Throw New Exception("Error parsing String For numerical expression:             '" + expression + "'. Check temperature-dependent property expressions for the selected compounds and try again.")
+                Throw New Exception("Error parsing String For numerical expression: '" + expression + "'. Check temperature-dependent property expressions for the selected compounds and try again.")
 
             End Try
 
@@ -12360,6 +12375,39 @@ Final3:
 
         Public Function DisplayAdvancedEditingForm() As Object Implements IPropertyPackage.DisplayAdvancedEditingForm
 
+            Dim form = GetAdvancedEditingForm()
+
+            If GlobalSettings.Settings.OldUI Then
+                form.Topmost = True
+                form.Show()
+                Return form
+            Else
+                form.Topmost = True
+                form.Show()
+                Return form
+            End If
+
+        End Function
+
+        Public Function GetAdvancedEditingForm() As Eto.Forms.Form
+
+            Dim containers = GetAdvancedEditingContainers()
+
+            If GlobalSettings.Settings.OldUI Then
+                Dim form = sui.GetDefaultEditorForm("Advanced Property Package Settings", 700, 600, containers(1))
+                form.Topmost = True
+                Return form
+            Else
+                Dim form = sui.GetDefaultTabbedForm("Advanced Property Package Settings", 700, 600, {containers(0), containers(1)})
+                form.Topmost = True
+                Return form
+            End If
+
+
+        End Function
+
+        Public Function GetAdvancedEditingContainers() As Eto.Forms.DynamicLayout()
+
             Dim container1 = sui.GetDefaultContainer()
 
             container1.Tag = "Advanced Settings"
@@ -12437,18 +12485,13 @@ Final3:
                                                          Process.Start("https://github.com/DanWBR/dwsim6/blob/windows/DWSIM.SharedClasses/UnitsOfMeasure/SystemsOfUnits.vb#L278")
                                                      End Sub)
 
-            If GlobalSettings.Settings.OldUI Then
-                Dim form = sui.GetDefaultEditorForm("Advanced Property Package Settings", 700, 600, container2)
-                form.Topmost = True
-                form.Show()
-                Return form
-            Else
-                Dim form = sui.GetDefaultTabbedForm("Advanced Property Package Settings", 700, 600, {container1, container2})
-                form.Topmost = True
-                form.Show()
-                Return form
-            End If
+            Return New Eto.Forms.DynamicLayout() {container1, container2}
 
+        End Function
+
+        Public Overridable Function GetDisplayIcon() As Drawing.Bitmap
+
+            Return My.Resources.DWSIM_ico_64
 
         End Function
 
