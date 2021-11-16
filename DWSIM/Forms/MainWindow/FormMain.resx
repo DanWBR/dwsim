@@ -194,6 +194,7 @@
   </data>
   <data name="NewToolStripMenuItem.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
+  </data>
   <data name="NewToolStripButton.Text" xml:space="preserve">
     <value>&amp;Nova Simulação Estática</value>
   </data>
@@ -253,6 +254,7 @@
   </data>
   <data name="tsmiFOSSEE.Size" type="System.Drawing.Size, System.Drawing">
     <value>295, 22</value>
+  </data>
   <data name="CloseAllToolstripMenuItem.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -349,6 +351,7 @@
   </data>
   <data name="&gt;&gt;NNUOToolStripMenuItem.Name" xml:space="preserve">
     <value>NNUOToolStripMenuItem</value>
+    </data>
   <data name="PreferenciasDoDWSIMToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>186, 22</value>
   </data>
@@ -387,6 +390,7 @@
   </data>
   <data name="&gt;&gt;DWSIMNaInternetToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
   <data name="CascadeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>209, 22</value>
   </data>
@@ -413,6 +417,7 @@
   </data>
   <data name="&gt;&gt;SaveRegStudyDlg.Type" xml:space="preserve">
     <value>System.Windows.Forms.SaveFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </data>
   <data name="MostrarBarraDeFerramentasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>229, 22</value>
   </data>
@@ -935,6 +940,7 @@
   </data>
   <data name="LogoutDropdown.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
+  </data>
   <data name="&gt;&gt;FileTSMI.Name" xml:space="preserve">
     <value>FileTSMI</value>
   </data>
