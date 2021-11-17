@@ -519,7 +519,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
                 Return Me.SimulationObjects(AddObjectToSurface(ObjectType.DistillationColumn, x, y, tag))
 
-            Case "Absorption Column"
+            Case "Absorption Column", "Absorption/Extraction Column"
 
                 Return Me.SimulationObjects(AddObjectToSurface(ObjectType.AbsorptionColumn, x, y, tag))
 

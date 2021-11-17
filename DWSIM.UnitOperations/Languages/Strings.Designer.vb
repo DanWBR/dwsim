@@ -101,7 +101,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Modelo para simulação rigorosa de colunas de absorção.
+        '''  Looks up a localized string similar to Modelo para simulação rigorosa de colunas de absorção e extração.
         '''</summary>
         Friend Shared ReadOnly Property CABS_Desc() As String
             Get
@@ -110,7 +110,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Coluna de Absorção.
+        '''  Looks up a localized string similar to Coluna de Absorção/Extração.
         '''</summary>
         Friend Shared ReadOnly Property CABS_Name() As String
             Get
