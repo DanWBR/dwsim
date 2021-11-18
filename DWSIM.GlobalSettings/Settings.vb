@@ -171,8 +171,6 @@ Public Class Settings
 
     Public Shared Property EnableCustomTouchBar As Boolean = True
 
-    Public Shared Property PythonPathIsSet As Boolean = False
-
     <DllImport("kernel32.dll", SetLastError:=True)> Public Shared Function AddDllDirectory(lpPathName As String) As Boolean
 
     End Function
@@ -190,9 +188,7 @@ Public Class Settings
             End If
 
             Try
-                If Not PythonPathIsSet Then
-                    SetPythonPath(pythonpath)
-                End If
+                SetPythonPath(pythonpath)
                 PythonEngine.PythonHome = pythonpath
                 PythonEngine.Initialize()
                 PythonEngine.BeginAllowThreads()
@@ -209,9 +205,11 @@ Public Class Settings
     Public Shared Sub ShutdownPythonEnvironment()
 
         If PythonInitialized Then
-            PythonEngine.Shutdown()
+            Try
+                PythonEngine.Shutdown()
+            Catch ex As Exception
+            End Try
             PythonInitialized = False
-            PythonPathIsSet = False
         End If
 
     End Sub
@@ -244,8 +242,6 @@ Public Class Settings
             Else
                 Throw New Exception("Could not find Python DLL in the defined Python path.")
             End If
-
-            GlobalSettings.Settings.PythonPathIsSet = True
 
             AddDllDirectory(ppath)
             AddDllDirectory(Path.Combine(ppath, "Library", "bin"))
