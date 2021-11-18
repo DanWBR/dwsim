@@ -87,12 +87,12 @@ namespace DWSIM.UI.Web
 
             if (UseLocalUI)
             {
-                var assemblyDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                var assemblyDir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
                 var webUiDir = Path.Combine(assemblyDir, "dwsim-web-ui");
                 //if (!Directory.Exists(webUiDir))
                 //    webUiDir = Path.Combine(assemblyDir, "../dwsim-web-ui");
-                throw new Exception($"Cant find path:{webUiDir}");
-            //    this.webView.CoreWebView2.SetVirtualHostNameToFolderMapping("dwsim.webui", webUiDir, CoreWebView2HostResourceAccessKind.Allow);
+               // throw new Exception($"Cant find path:{webUiDir}");
+                this.webView.CoreWebView2.SetVirtualHostNameToFolderMapping("dwsim.webui", webUiDir, CoreWebView2HostResourceAccessKind.Allow);
             }
         }
 

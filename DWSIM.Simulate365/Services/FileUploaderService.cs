@@ -18,15 +18,15 @@ namespace DWSIM.Simulate365.Services
 
     public class FileUploaderService
     {
-        public static async Task UploadFile(string flowsheetsDriveId, string parentDriveId, string filePath, string filename)
+        public static void UploadFile(string flowsheetsDriveId, string parentDriveId, string filePath, string filename)
         {
             try
             {
                 var token = UserService.GetInstance().GetUserToken();
-                var client = GraphClientFactory.CreateClient(token);               
+                var client = GraphClientFactory.CreateClient(token);
 
                 var driveItemRequestBuilder = client.Drives[flowsheetsDriveId].Items[parentDriveId];
-                await UploadDocumentAsync(driveItemRequestBuilder, filename, filePath, ConflictBehaviour.Replace);
+                Task.Run(async () => await UploadDocumentAsync(driveItemRequestBuilder, filename, filePath, ConflictBehaviour.Replace)).Wait();
             }
             catch (Exception ex)
             {

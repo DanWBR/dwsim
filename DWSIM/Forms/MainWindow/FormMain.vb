@@ -170,8 +170,6 @@ Public Class FormMain
         ' On user details loaded
         AddHandler UserService.GetInstance().UserDetailsLoaded, AddressOf UserService_UserDetailsLoaded
         AddHandler UserService.GetInstance().UserLoggedOut, AddressOf UserService_UserLoggedOut
-        AddHandler FilePickerService.S3365DashboardFileOpened, AddressOf FilePickerService_S3365DashboardFileOpened
-        AddHandler FilePickerService.S365DashboardSaveFileClicked, AddressOf FilePickerService_S365DashboardSaveFileClicked
 
 #If Not WINE32 Then
 
@@ -269,14 +267,8 @@ Public Class FormMain
         Me.SaveToSimulate365DashboardToolStripMenuItem.Enabled = False
     End Sub
 
-    Private Sub FilePickerService_S3365DashboardFileOpened(sender As Object, e As S365OpenFileEventArgs)
-        LoadFile(e.FilePath, e.FlowsheetsDriveId, e.DriveItemId)
-    End Sub
 
-    Private Sub FilePickerService_S365DashboardSaveFileClicked(sender As Object, e As S365SaveFileEventArgs)
-        SaveFile(False)
-        FileUploaderService.UploadFile(e.FlowsheetsDriveId, e.ParentDriveId, Me.filename, e.Filename)
-    End Sub
+
 
     Private Sub FormMain_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles Me.DragDrop
         If e.Data.GetDataPresent(DataFormats.FileDrop) Then
@@ -4341,12 +4333,22 @@ Label_00CC:
     Private Sub OpenFromS365DashboardBtn_Click(sender As Object, e As EventArgs) Handles OpenFromS365DashboardBtn.Click
         Dim filePickerForm As S365FilePickerForm = New S365FilePickerForm
 
-        filePickerForm.ShowDialog(False, Nothing)
+        Dim file = filePickerForm.ShowOpenDialog()
+        If file IsNot Nothing Then
+            LoadFile(file.FilePath, file.FlowsheetsDriveId, file.DriveItemId)
+        End If
+
     End Sub
 
     Private Sub SaveToSimulate365DashboardToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToSimulate365DashboardToolStripMenuItem.Click
         Dim filePickerForm As S365FilePickerForm = New S365FilePickerForm
-        filePickerForm.ShowDialog(True, Nothing)
+        Dim file = filePickerForm.ShowSaveDialog(Nothing)
+        If file IsNot Nothing Then
+            SaveFile(False)
+            FileUploaderService.UploadFile(file.FlowsheetsDriveId, file.ParentDriveId, Me.filename, file.Filename)
+            MessageBox.Show("File saved to Simulate 365 Dashboard.")
+
+        End If
     End Sub
 
     Private Sub LoggedInDwsimProBtn_Click(sender As Object, e As EventArgs) Handles LoggedInDwsimProBtn.Click

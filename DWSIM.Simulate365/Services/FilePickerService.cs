@@ -2,9 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DWSIM.Simulate365.Services
@@ -13,12 +11,15 @@ namespace DWSIM.Simulate365.Services
     [ComVisible(true)]
     public class FilePickerService
     {
-        public static event EventHandler S3365DashboardFileOpenStarted;
-        public static event EventHandler<S365OpenFileEventArgs> S3365DashboardFileOpened;
-        public static event EventHandler<S365SaveFileEventArgs> S365DashboardSaveFileClicked;
-        public static event EventHandler S365DashboardFolderCreated;
+        public event EventHandler S3365DashboardFileOpenStarted;
+        public event EventHandler<S365DashboardOpenFile> S3365DashboardFileOpened;
+        public event EventHandler<S365DashboardSaveFile> S365DashboardSaveFileClicked;
+        public event EventHandler S365DashboardFolderCreated;
 
-        public async void OpenFile(string driveItemId, string flowsheetsDriveId)
+        public S365DashboardSaveFile SelectedSaveFile { get; private set; }
+        public S365DashboardOpenFile SelectedOpenFile { get; private set; }
+
+        public void OpenFile(string driveItemId, string flowsheetsDriveId)
         {
             try
             {
@@ -26,40 +27,45 @@ namespace DWSIM.Simulate365.Services
                 var token = UserService.GetInstance().GetUserToken();
                 var client = GraphClientFactory.CreateClient(token);
 
-                var item = await client.Drives[flowsheetsDriveId].Items[driveItemId].Request().GetAsync();
+                var item = Task.Run(async () => await client.Drives[flowsheetsDriveId].Items[driveItemId].Request().GetAsync()).Result;
                 // Get drive item
-                var stream = await client.Drives[flowsheetsDriveId].Items[driveItemId].Content.Request().GetAsync();
+                var stream = Task.Run(async () => await client.Drives[flowsheetsDriveId].Items[driveItemId].Content.Request().GetAsync()).Result;
 
 
                 var extension = System.IO.Path.GetExtension(item.Name);
                 var filePath = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid().ToString()}{extension}");
+                Task.Run(async () =>
+                {
+                    using (var destStream = System.IO.File.OpenWrite(filePath))
+                        await stream.CopyToAsync(destStream);
+                }).Wait();
+                this.SelectedOpenFile = new S365DashboardOpenFile { FilePath = filePath, FlowsheetsDriveId = flowsheetsDriveId, DriveItemId = driveItemId };
 
-                using (var destStream = System.IO.File.OpenWrite(filePath))
-                    await stream.CopyToAsync(destStream);
-
-                S3365DashboardFileOpened?.Invoke(this, new S365OpenFileEventArgs { FilePath = filePath, FlowsheetsDriveId = flowsheetsDriveId, DriveItemId = driveItemId });
+                S3365DashboardFileOpened?.Invoke(this, this.SelectedOpenFile);
 
             }
             catch (Exception ex)
             {
-
+                this.SelectedOpenFile = null;
                 throw new Exception("An error occurred while opening file from S365 Dashboard.", ex);
             }
         }
-        public async void SaveFile(string filename, string extension, string flowsheetsDriveId, string parentDriveId)
+        public void SaveFile(string filename, string extension, string flowsheetsDriveId, string parentDriveId)
         {
             try
             {
-                S365DashboardSaveFileClicked?.Invoke(this, new S365SaveFileEventArgs
+                this.SelectedSaveFile = new S365DashboardSaveFile
                 {
                     Filename = $"{filename}.{extension}",
                     FlowsheetsDriveId = flowsheetsDriveId,
                     ParentDriveId = parentDriveId
-                });
+                };
+
+                this.S365DashboardSaveFileClicked?.Invoke(this, this.SelectedSaveFile);
             }
             catch (Exception ex)
             {
-
+                this.SelectedSaveFile = null;
                 throw new Exception("An error occurred while saving file to S365 Dashboard.", ex);
             }
         }
@@ -82,9 +88,9 @@ namespace DWSIM.Simulate365.Services
                                              }
                 };
 
-                Task.Run( async ()=> { await client.Drives[flowsheetsDriveId].Items[parentDriveId].Children.Request().AddAsync(driveItem); }).Wait();
-                
-                    S365DashboardFolderCreated?.Invoke(this, new EventArgs());
+                Task.Run(async () => { await client.Drives[flowsheetsDriveId].Items[parentDriveId].Children.Request().AddAsync(driveItem); }).Wait();
+
+                S365DashboardFolderCreated?.Invoke(this, new EventArgs());
             }
             catch (Exception ex)
             {
@@ -95,14 +101,14 @@ namespace DWSIM.Simulate365.Services
 
     }
 
-    public class S365SaveFileEventArgs
+    public class S365DashboardSaveFile
     {
         public string Filename { get; set; }
         public string FlowsheetsDriveId { get; set; }
         public string ParentDriveId { get; set; }
     }
 
-    public class S365OpenFileEventArgs
+    public class S365DashboardOpenFile
     {
         public string FilePath { get; set; }
         //drive id of Flowsheets folder in simulate 365
