@@ -71,6 +71,12 @@ namespace DWSIM.Logging
             logger.Warn(ex, message);
         }
 
+        public static void LogInfo(string message)
+        {
+            Initialize();
+            logger.Info(message);
+        }
+
         private static Platform RunningPlatform()
         {
             switch (Environment.OSVersion.Platform)

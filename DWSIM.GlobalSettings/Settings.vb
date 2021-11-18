@@ -193,6 +193,7 @@ Public Class Settings
                 PythonEngine.Initialize()
                 PythonEngine.BeginAllowThreads()
                 PythonInitialized = True
+                DWSIM.Logging.Logger.LogInfo("Python Path set to " + pythonpath)
             Catch ex As Exception
                 DWSIM.Logging.Logger.LogError("Python Initialization Error", ex)
                 Throw ex
@@ -239,6 +240,8 @@ Public Class Settings
             Dim pydll = Directory.GetFiles(ppath, "python3*.dll")
             If pydll.Count > 0 Then
                 Environment.SetEnvironmentVariable("PYTHONNET_PYDLL", pydll(1), EnvironmentVariableTarget.Process)
+                Runtime.PythonDLL = pydll(1)
+                DWSIM.Logging.Logger.LogInfo("Python Runtime DLL path set to " + pydll(1))
             Else
                 Throw New Exception("Could not find Python DLL in the defined Python path.")
             End If
