@@ -35,10 +35,16 @@ namespace DWSIM.Simulate365.FormFactories
             _webUIForm?.Dispose();
         }
 
-        public void ShowDialog(bool isSave = false)
+        public void ShowDialog(bool isSave = false, string fileFormat=null)
         {
-            var saveQueryParam = isSave ? "filepicker/save" : "filepicker/open";
-            var initialUrl = $"{saveQueryParam}";
+
+
+            var navigationPath = isSave ? "filepicker/save" : "filepicker/open";
+            if (!string.IsNullOrWhiteSpace(fileFormat))
+            {
+                navigationPath += $"/{fileFormat}";
+            }
+            var initialUrl = $"{navigationPath}";
             string saveFileTitle = "Save file to Simulate 365 Dashboard";
             string openFileTitle = "Open file from Simulate 365 Dashboard";
             string title = isSave ? saveFileTitle : openFileTitle;

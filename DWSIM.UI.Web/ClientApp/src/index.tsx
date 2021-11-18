@@ -5,8 +5,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { initializeIcons } from '@fluentui/react/lib/Icons';
+import { initializeFileTypeIcons } from '@uifabric/file-type-icons';
 initializeIcons();
-
+initializeFileTypeIcons();
 ReactDOM.render(
   <HashRouter>    
     <App />

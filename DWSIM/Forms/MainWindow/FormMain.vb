@@ -4341,12 +4341,12 @@ Label_00CC:
     Private Sub OpenFromS365DashboardBtn_Click(sender As Object, e As EventArgs) Handles OpenFromS365DashboardBtn.Click
         Dim filePickerForm As S365FilePickerForm = New S365FilePickerForm
 
-        filePickerForm.ShowDialog()
+        filePickerForm.ShowDialog(False, Nothing)
     End Sub
 
     Private Sub SaveToSimulate365DashboardToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToSimulate365DashboardToolStripMenuItem.Click
         Dim filePickerForm As S365FilePickerForm = New S365FilePickerForm
-        filePickerForm.ShowDialog(True)
+        filePickerForm.ShowDialog(True, Nothing)
     End Sub
 
     Private Sub LoggedInDwsimProBtn_Click(sender As Object, e As EventArgs) Handles LoggedInDwsimProBtn.Click

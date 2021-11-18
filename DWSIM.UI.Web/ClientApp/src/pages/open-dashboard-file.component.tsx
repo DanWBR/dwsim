@@ -9,7 +9,7 @@ import { getFileTypeIconPropsCustom } from "../components/file-type-icon/file-ty
 import NavigationBar from "../components/navigation-bar/navigation-bar.component";
 import CreateFolderModal from "../components/create-folder-modal/create-folder-modal.component";
 import { IInitializeDashboardProps, withInitializeDashboard } from "../components/with-initialize-dashboard.hoc";
-
+import * as QueryString from "query-string";
 
 interface IOpenDashboardFilePageProps extends RouteComponentProps<IOpenDashboardFilePageRouteProps>, IInitializeDashboardProps {
     baseFolder: ISelectedFolder;
@@ -20,7 +20,7 @@ interface IOpenDashboardFilePageProps extends RouteComponentProps<IOpenDashboard
 
 }
 interface IOpenDashboardFilePageRouteProps {
-
+ extension?:string;
 }
 
 interface IOpenDashboardFilePageState {
@@ -29,41 +29,13 @@ interface IOpenDashboardFilePageState {
     selectedFolder: ISelectedFolder;
     isDataLoaded: boolean;
     filename?: string;
-    filetype?: string;
+    selectedFileType?: string;
+    filterFileTypes:string[];
     showCreateFolderModal: boolean;
 }
 
-// const gridStyles: Partial<IDetailsListStyles> = {
-//     root: {
-//      overflowX: 'scroll',
-//      overflowY:"hidden",
-//       selectors: {
-//         '& [role=grid]': {
-//           display: 'flex',
-//           flexDirection: 'column',
-//         //  alignItems: 'start',
-//           height: 'calc(100vh - 50px)',
-//         },
-//         '.ms-DetailsRow':{
-//             width:"100%"
-//         } as IStyle
-
-//       },
-//     },
-//     headerWrapper: {
-//       flex: '0 0 auto',
-//     },
-//     contentWrapper: {
-//       flex: '1 1 auto',
-//       overflowY: 'auto',
-//  //     overflowX: 'hidden',
-//     },
-
-//   };
-
 const gridStyles: Partial<IDetailsListStyles> = {
     root: {
-        //  marginLeft:"30px",
         selectors: {
             '.ms-DetailsRow': {
                 minWidth: "calc(100vw - 50px) !important"
@@ -196,7 +168,8 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
             isDataLoaded: false,
             //   isSaveDialog: false,
             filename: '',
-            filetype: "dwxmz",
+            selectedFileType: "dwxmz",
+            filterFileTypes:["dwxml","dwxmz"],
             showCreateFolderModal: false
         };
         this._navigationBarRef = React.createRef<NavigationBar>();
@@ -204,21 +177,35 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
 
     }
     componentDidMount() {
-        // const queryParams = QueryString.parse(this.props.location.search);
-        // if (queryParams && queryParams.save) {
-        //     this.setState({ isSaveDialog: true });
-        //     console.log("Save dialog");
-        // }
 
-        this.getFilesAndFolders();
+        if (this.props.isSaveDialog) {
+            this.changeFileTypeFilter();
+        } else {
+            this.getFilesAndFolders();
+
+        }
+
 
     }
+
+    changeFileTypeFilter() {
+      
+        if (this.props.match?.params?.extension) {
+            
+            this.setState({selectedFileType:this.props.match?.params?.extension, filterFileTypes:[this.props.match?.params?.extension] },
+             () => { this.getFilesAndFolders() });
+            console.log("Query params", this.props.match?.params?.extension);
+        }else{
+            this.getFilesAndFolders() 
+        }
+    }
+
     async getFilesAndFolders() {
-        const { selectedFolder } = this.state;
+        const { selectedFolder, filterFileTypes } = this.state;
         const { siteId, flowsheetsListId } = this.props;
         try {
             this.setState({ isDataLoaded: false });
-            const filesAndFolders = await getFlowsheetListItemsAsync(selectedFolder, siteId, flowsheetsListId);
+            const filesAndFolders = await getFlowsheetListItemsAsync(selectedFolder, siteId, flowsheetsListId, filterFileTypes!);
             console.log("Files and folders", filesAndFolders);
             this.setState({ files: filesAndFolders!.files ?? [], folders: filesAndFolders!.folders ?? [] });
         } catch (error) {
@@ -248,7 +235,7 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
                     parentDriveItemId: selectedFolder.driveId
                 } as ISelectedFolder;
                 console.log("Setting selected folder", newSelectedFolder);
-             //   this._navigationBarRef?.current?.addSelectedFolder(newSelectedFolder);
+                //   this._navigationBarRef?.current?.addSelectedFolder(newSelectedFolder);
 
                 this.setState({ selectedFolder: newSelectedFolder }, () => {
                     this.getFilesAndFolders();
@@ -413,14 +400,14 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
 
     onSaveFileClick() {
         console.log("Save clicked", this.state);
-        const { filename, filetype, selectedFolder } = this.state;
+        const { filename, selectedFileType, selectedFolder } = this.state;
         const { flowsheetsDriveId } = this.props;
-        if (filename && filetype)
-            SaveDwsimFile(filename, filetype, flowsheetsDriveId, selectedFolder.driveId);
+        if (filename && selectedFileType)
+            SaveDwsimFile(filename, selectedFileType, flowsheetsDriveId, selectedFolder.driveId);
     }
 
     render() {
-        const { folders, files, isDataLoaded, selectedFolder, filename, filetype, showCreateFolderModal } = this.state;
+        const { folders, files, isDataLoaded, selectedFolder, filename, selectedFileType, filterFileTypes, showCreateFolderModal } = this.state;
         const { isSaveDialog } = this.props;
         const { siteId, flowsheetsListId, baseFolder, } = this.props;
         const columns = [...this.getColumns()];
@@ -428,13 +415,19 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
         console.log("isDataLoaded", isDataLoaded);
 
 
-        const dropdownControlledExampleOptions = [
-            { key: 'dwxmz', text: 'Simulation File (Compressed XML) (*.dwxmz)' }
+        let dropdownControlledExampleOptions = [
+            { key: 'dwxmz', text: 'Simulation File (Compressed XML) (*.dwxmz)' }           
         ];
+        //if its excel file
+        if(filterFileTypes.findIndex(x=>x=="xlsx")>-1){
+            dropdownControlledExampleOptions = [
+                { key: 'xlsx', text: 'Excel Workbook (*.xlsx)' }           
+            ];
+        }
 
 
         return <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }} >
-            {isSaveDialog && <div style={{marginLeft:"30px"}}>
+            {isSaveDialog && <div style={{ marginLeft: "30px" }}>
                 <div style={{ display: "flex", marginBottom: "5px", marginTop: "5px" }}>
                     <div style={{ flexBasis: "80%" }} >
                         <TextField placeholder="Enter file name here" value={filename} onChange={(ev, newValue) => this.setState({ filename: newValue })} />
@@ -447,7 +440,7 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
                 <div style={{ display: "flex", marginBottom: "5px", marginTop: "5px" }} >
                     <div style={{ flexBasis: "80%" }}>
                         <Dropdown
-                            selectedKey={filetype}
+                            selectedKey={selectedFileType}
                             placeholder="Select an option"
                             options={dropdownControlledExampleOptions}
 

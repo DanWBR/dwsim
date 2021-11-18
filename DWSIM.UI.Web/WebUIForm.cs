@@ -53,7 +53,7 @@ namespace DWSIM.UI.Web
             if (!String.IsNullOrWhiteSpace(title))
                 this.Text = title;
             else
-                this.Text = "Web UI";          
+                this.Text = "Web UI";
 
             this.webView.CoreWebView2InitializationCompleted += WebView_CoreWebView2InitializationCompleted;
         }
@@ -89,8 +89,10 @@ namespace DWSIM.UI.Web
             {
                 var assemblyDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
                 var webUiDir = Path.Combine(assemblyDir, "dwsim-web-ui");
-
-                this.webView.CoreWebView2.SetVirtualHostNameToFolderMapping("dwsim.webui", webUiDir, CoreWebView2HostResourceAccessKind.Allow);
+                //if (!Directory.Exists(webUiDir))
+                //    webUiDir = Path.Combine(assemblyDir, "../dwsim-web-ui");
+                throw new Exception($"Cant find path:{webUiDir}");
+            //    this.webView.CoreWebView2.SetVirtualHostNameToFolderMapping("dwsim.webui", webUiDir, CoreWebView2HostResourceAccessKind.Allow);
             }
         }
 

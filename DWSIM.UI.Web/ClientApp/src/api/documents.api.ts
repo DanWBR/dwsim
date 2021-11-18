@@ -5,7 +5,7 @@ import { msGraphClient } from "../shared/ms-graph/ms-graph-factory";
 import { _copyAndSort } from "../shared/utilities/copy-sort";
 declare const chrome: any;
 
-export async function getFlowsheetListItemsAsync(selectedFolder: ISelectedFolder, siteId: string, flowsheetsListId: string) {
+export async function getFlowsheetListItemsAsync(selectedFolder: ISelectedFolder, siteId: string, flowsheetsListId: string, filterFileTypes: string[]) {
     try {
         const selectedFolderPath = selectedFolder.webUrl.split('/').slice(1).reduce((prev, curr) => prev + "/" + curr, "");
 
@@ -30,7 +30,7 @@ export async function getFlowsheetListItemsAsync(selectedFolder: ISelectedFolder
         documents = documents.filter(document => document.hideFromDashboard === false);
 
         const files = documents.filter((document) => document.fileType === ResponseItemType.File && !!document.extension
-            && (document.extension == "dwxmz" || document.extension == "dwxml"));
+            && filterFileTypes.findIndex(x=>x==document.extension) > -1);
         const folders = documents.filter((document) => document.fileType === ResponseItemType.Folder);
 
         let sortedFolders = _copyAndSort<IDocument>(folders, "name", false);
