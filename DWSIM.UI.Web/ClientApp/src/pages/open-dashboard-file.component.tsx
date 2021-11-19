@@ -201,11 +201,12 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
     }
 
     async getFilesAndFolders() {
-        const { selectedFolder, filterFileTypes } = this.state;
+        const { selectedFolder, filterFileTypes, selectedFileType } = this.state;
         const { siteId, flowsheetsListId } = this.props;
         try {
             this.setState({ isDataLoaded: false });
-            const filesAndFolders = await getFlowsheetListItemsAsync(selectedFolder, siteId, flowsheetsListId, filterFileTypes!);
+            const fileTypes = (selectedFileType == "dwxml" || selectedFileType == "dwxmz") ? filterFileTypes : [selectedFileType!];
+            const filesAndFolders = await getFlowsheetListItemsAsync(selectedFolder, siteId, flowsheetsListId, fileTypes);
             console.log("Files and folders", filesAndFolders);
             this.setState({ files: filesAndFolders!.files ?? [], folders: filesAndFolders!.folders ?? [] });
         } catch (error) {
@@ -435,7 +436,7 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
                             selectedKey={selectedFileType}
                             placeholder="Select an option"
                             options={dropdownControlledExampleOptions}
-                            onChange={(e, option) => { this.setState({ selectedFileType: option?.key.toString() }); }}
+                            onChange={(e, option) => { this.setState({ selectedFileType: option?.key.toString() },()=>{this.getFilesAndFolders();}); }}
 
                         />
                     </div>
@@ -504,8 +505,7 @@ function getFileTypeDropdownOption(extension?: string): IDropdownOption | undefi
 
 
     switch (extension) {
-        case 'dwxmz': return { key: 'dwxmz', text: 'Simulation File (Compressed XML) (*.dwxmz)' };
-        case 'dwxml': return { key: 'dwxmz', text: 'Simulation File (Compressed XML) (*.dwxmz)' };
+        case 'dwxmz': return { key: 'dwxmz', text: 'Simulation File (Compressed XML) (*.dwxmz)' };    
         case 'xlsx': return { key: 'xlsx', text: 'Excel Workbook (*.xlsx)' };
         case 'odt': return { key: 'odt', text: 'OpenOffice Writer Document (*.odt)' };
         case 'pdf': return { key: 'pdf', text: 'PDF Files (*.pdf)' };
