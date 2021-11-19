@@ -42,16 +42,16 @@ namespace DWSIM.Simulate365.FormFactories
             _webUIForm?.Dispose();
         }
 
-        public S365DashboardSaveFile ShowSaveDialog(string fileFormat=null)
+        public S365DashboardSaveFile ShowSaveDialog(List<string> fileFormats = null)
         {
 
             var navigationPath = "filepicker/save";
-            if (!string.IsNullOrWhiteSpace(fileFormat))
+            if (fileFormats != null && fileFormats.Count > 0)
             {
-                navigationPath += $"/{fileFormat}";
+                navigationPath += $"/{string.Join("_", fileFormats)}";
             }
             var initialUrl = $"{navigationPath}";
-            string title = "Save file to Simulate 365 Dashboard";    
+            string title = "Save file to Simulate 365 Dashboard";
             _webUIForm = new WebUIForm(initialUrl, title, true)
             {
                 Width = 1300,
@@ -62,15 +62,15 @@ namespace DWSIM.Simulate365.FormFactories
 
             _webUIForm.ShowDialog();
 
-            return _filePickerService.SelectedSaveFile; 
+            return _filePickerService.SelectedSaveFile;
         }
 
 
         public S365DashboardOpenFile ShowOpenDialog()
         {
-            var navigationPath =  "filepicker/open";           
-            var initialUrl = $"{navigationPath}";          
-            string title = "Open file from Simulate 365 Dashboard";            
+            var navigationPath = "filepicker/open";
+            var initialUrl = $"{navigationPath}";
+            string title = "Open file from Simulate 365 Dashboard";
             _webUIForm = new WebUIForm(initialUrl, title, true)
             {
                 Width = 1300,
@@ -81,7 +81,7 @@ namespace DWSIM.Simulate365.FormFactories
 
             _webUIForm.ShowDialog();
 
-            return  _filePickerService.SelectedOpenFile;
+            return _filePickerService.SelectedOpenFile;
         }
 
 

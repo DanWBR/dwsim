@@ -2,14 +2,13 @@ import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { IDocument, ISelectedFolder, ResponseItemType } from "../interfaces/documents/document.interfaces";
 import { getFlowsheetListItemsAsync, OpenDwsimFile, SaveDwsimFile } from "../api/documents.api";
-import { DetailsListLayoutMode, SelectionMode, ShimmeredDetailsList, Selection, mergeStyleSets, IColumn, CheckboxVisibility, TextField, PrimaryButton, Dropdown, DefaultButton, ISelectionOptions, ConstrainMode, IDetailsListStyles, IRenderFunction, IDetailsHeaderProps, TooltipHost, IDetailsColumnRenderTooltipProps, IDetailsFooterProps, DetailsRow, IStyle, StickyPositionType, Sticky, ScrollablePane, IScrollablePaneStyles } from "@fluentui/react";
+import { DetailsListLayoutMode, SelectionMode, ShimmeredDetailsList, Selection, mergeStyleSets, IColumn, CheckboxVisibility, TextField, PrimaryButton, Dropdown, DefaultButton, ISelectionOptions, ConstrainMode, IDetailsListStyles, IRenderFunction, IDetailsHeaderProps, TooltipHost, IDetailsColumnRenderTooltipProps, IDetailsFooterProps, DetailsRow, IStyle, StickyPositionType, Sticky, ScrollablePane, IScrollablePaneStyles, IDropdownOption } from "@fluentui/react";
 import moment from "moment";
 import { FileTypeIcon, IFileTypeIconProps } from "../components/file-type-icon/file-type-icon.component";
 import { getFileTypeIconPropsCustom } from "../components/file-type-icon/file-type-icon.helpers";
 import NavigationBar from "../components/navigation-bar/navigation-bar.component";
 import CreateFolderModal from "../components/create-folder-modal/create-folder-modal.component";
 import { IInitializeDashboardProps, withInitializeDashboard } from "../components/with-initialize-dashboard.hoc";
-import * as QueryString from "query-string";
 
 interface IOpenDashboardFilePageProps extends RouteComponentProps<IOpenDashboardFilePageRouteProps>, IInitializeDashboardProps {
     baseFolder: ISelectedFolder;
@@ -20,7 +19,7 @@ interface IOpenDashboardFilePageProps extends RouteComponentProps<IOpenDashboard
 
 }
 interface IOpenDashboardFilePageRouteProps {
- extension?:string;
+    extension?: string;
 }
 
 interface IOpenDashboardFilePageState {
@@ -30,7 +29,7 @@ interface IOpenDashboardFilePageState {
     isDataLoaded: boolean;
     filename?: string;
     selectedFileType?: string;
-    filterFileTypes:string[];
+    filterFileTypes: string[];
     showCreateFolderModal: boolean;
 }
 
@@ -169,7 +168,7 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
             //   isSaveDialog: false,
             filename: '',
             selectedFileType: "dwxmz",
-            filterFileTypes:["dwxml","dwxmz"],
+            filterFileTypes: ["dwxml", "dwxmz"],
             showCreateFolderModal: false
         };
         this._navigationBarRef = React.createRef<NavigationBar>();
@@ -189,14 +188,15 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
     }
 
     changeFileTypeFilter() {
-      
+
         if (this.props.match?.params?.extension) {
-            
-            this.setState({selectedFileType:this.props.match?.params?.extension, filterFileTypes:[this.props.match?.params?.extension] },
-             () => { this.getFilesAndFolders() });
+            const fileTypeExtensions = this.props.match.params.extension.split('_');
+
+            this.setState({ selectedFileType: fileTypeExtensions[0], filterFileTypes: fileTypeExtensions },
+                () => { this.getFilesAndFolders() });
             console.log("Query params", this.props.match?.params?.extension);
-        }else{
-            this.getFilesAndFolders() 
+        } else {
+            this.getFilesAndFolders()
         }
     }
 
@@ -415,15 +415,7 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
         console.log("isDataLoaded", isDataLoaded);
 
 
-        let dropdownControlledExampleOptions = [
-            { key: 'dwxmz', text: 'Simulation File (Compressed XML) (*.dwxmz)' }           
-        ];
-        //if its excel file
-        if(filterFileTypes.findIndex(x=>x=="xlsx")>-1){
-            dropdownControlledExampleOptions = [
-                { key: 'xlsx', text: 'Excel Workbook (*.xlsx)' }           
-            ];
-        }
+        const dropdownControlledExampleOptions = getDropDownOptions(filterFileTypes);
 
 
         return <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }} >
@@ -443,6 +435,7 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
                             selectedKey={selectedFileType}
                             placeholder="Select an option"
                             options={dropdownControlledExampleOptions}
+                            onChange={(e, option) => { this.setState({ selectedFileType: option?.key.toString() }); }}
 
                         />
                     </div>
@@ -492,5 +485,36 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
     }
 }
 
+function getDropDownOptions(fileExtensions: string[]): IDropdownOption[] {
+
+    let options: IDropdownOption[] = [];
+
+    fileExtensions.forEach(extension => {
+        const option = getFileTypeDropdownOption(extension);
+        if (option) {
+            options.push(option);
+        }
+    });
+
+    return options;
+
+}
+
+function getFileTypeDropdownOption(extension?: string): IDropdownOption | undefined {
+
+
+    switch (extension) {
+        case 'dwxmz': return { key: 'dwxmz', text: 'Simulation File (Compressed XML) (*.dwxmz)' };
+        case 'dwxml': return { key: 'dwxmz', text: 'Simulation File (Compressed XML) (*.dwxmz)' };
+        case 'xlsx': return { key: 'xlsx', text: 'Excel Workbook (*.xlsx)' };
+        case 'odt': return { key: 'odt', text: 'OpenOffice Writer Document (*.odt)' };
+        case 'pdf': return { key: 'pdf', text: 'PDF Files (*.pdf)' };
+        case 'ods': return { key: 'ods', text: 'OpenOffice Calc SpreadSheet (*.ods)' };
+
+        default:
+            return undefined;
+    }
+
+}
 
 export default withInitializeDashboard(OpenDashboardFilePage);
