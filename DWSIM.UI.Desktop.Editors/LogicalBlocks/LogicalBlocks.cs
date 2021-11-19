@@ -403,7 +403,7 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
             {
                 if (adjust.ControlledObject == null) return;
                 if (adjust.ManipulatedObject == null) return;
-                var fcp = new UnitOperations.EditingForm_Adjust_ControlPanel();
+                var fcp = new DWSIM.UnitOperations.EditingForm_Adjust_ControlPanel();
                 fcp.myADJ = adjust;
                 fcp.Show();
             });
@@ -1268,7 +1268,7 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
             var su = simobj.GetFlowsheet().FlowsheetOptions.SelectedUnitSystem;
             var nf = simobj.GetFlowsheet().FlowsheetOptions.NumberFormat;
 
-            var spec = (UnitOperations.UnitOperations.Switch)simobj;
+            var spec = (DWSIM.UnitOperations.UnitOperations.Switch)simobj;
 
             s.CreateAndAddLabelRow(container, "Object Details");
 
@@ -1364,7 +1364,7 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
             var su = simobj.GetFlowsheet().FlowsheetOptions.SelectedUnitSystem;
             var nf = simobj.GetFlowsheet().FlowsheetOptions.NumberFormat;
 
-            var spec = (UnitOperations.UnitOperations.Input)simobj;
+            var spec = (DWSIM.UnitOperations.UnitOperations.Input)simobj;
 
             s.CreateAndAddLabelRow(container, "Object Details");
 

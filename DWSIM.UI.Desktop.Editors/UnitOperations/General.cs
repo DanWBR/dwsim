@@ -8,7 +8,7 @@ using DWSIM.Interfaces;
 using DWSIM.Interfaces.Enums.GraphicObjects;
 using DWSIM.UnitOperations.UnitOperations;
 using DWSIM.UnitOperations.Reactors;
-using DWSIM.UnitOperations.SpecialOps;
+using DWSIM.UnitOperations;
 using DWSIM.UnitOperations.Streams;
 using DWSIM.Thermodynamics.Streams;
 
@@ -23,6 +23,7 @@ using System.Diagnostics;
 using System.IO;
 
 using DWSIM.ExtensionMethods;
+using DWSIM.ExtensionMethods.Eto;
 
 namespace DWSIM.UI.Desktop.Editors
 {
@@ -230,7 +231,7 @@ namespace DWSIM.UI.Desktop.Editors
                              SimObject.GetPropertyDescription("Thermodynamic Path"));
                     s.CreateAndAddButtonRow(container, "Edit Performance Curves", null, (btn, ea) =>
                     {
-                        var f = new UnitOperations.EditingForm_CompressorExpander_Curves { simobj = ce };
+                        var f = new EditingForm_CompressorExpander_Curves { simobj = ce };
                         f.ShowDialog();
                     });
                     s.CreateAndAddTextBoxRow(container, nf, "Rotation Speed", ce.Speed,
@@ -355,23 +356,23 @@ namespace DWSIM.UI.Desktop.Editors
                              SimObject.GetPropertyDescription("Polytropic Head"));
                     break;
                 case ObjectType.Expander:
-                    var xe = (UnitOperations.UnitOperations.Expander)SimObject;
+                    var xe = (DWSIM.UnitOperations.UnitOperations.Expander)SimObject;
                     int pos1e = 0;
                     switch (xe.CalcMode)
                     {
-                        case UnitOperations.UnitOperations.Expander.CalculationMode.OutletPressure:
+                        case DWSIM.UnitOperations.UnitOperations.Expander.CalculationMode.OutletPressure:
                             pos1e = 0;
                             break;
-                        case UnitOperations.UnitOperations.Expander.CalculationMode.Delta_P:
+                        case DWSIM.UnitOperations.UnitOperations.Expander.CalculationMode.Delta_P:
                             pos1e = 1;
                             break;
-                        case UnitOperations.UnitOperations.Expander.CalculationMode.PowerGenerated:
+                        case DWSIM.UnitOperations.UnitOperations.Expander.CalculationMode.PowerGenerated:
                             pos1 = 2;
                             break;
-                        case UnitOperations.UnitOperations.Expander.CalculationMode.Head:
+                        case DWSIM.UnitOperations.UnitOperations.Expander.CalculationMode.Head:
                             pos1 = 3;
                             break;
-                        case UnitOperations.UnitOperations.Expander.CalculationMode.Curves:
+                        case DWSIM.UnitOperations.UnitOperations.Expander.CalculationMode.Curves:
                             pos1 = 4;
                             break;
                     }
@@ -380,19 +381,19 @@ namespace DWSIM.UI.Desktop.Editors
                         switch (arg3.SelectedIndex)
                         {
                             case 0:
-                                xe.CalcMode = UnitOperations.UnitOperations.Expander.CalculationMode.OutletPressure;
+                                xe.CalcMode = DWSIM.UnitOperations.UnitOperations.Expander.CalculationMode.OutletPressure;
                                 break;
                             case 1:
-                                xe.CalcMode = UnitOperations.UnitOperations.Expander.CalculationMode.Delta_P;
+                                xe.CalcMode = DWSIM.UnitOperations.UnitOperations.Expander.CalculationMode.Delta_P;
                                 break;
                             case 2:
-                                xe.CalcMode = UnitOperations.UnitOperations.Expander.CalculationMode.PowerGenerated;
+                                xe.CalcMode = DWSIM.UnitOperations.UnitOperations.Expander.CalculationMode.PowerGenerated;
                                 break;
                             case 3:
-                                xe.CalcMode = UnitOperations.UnitOperations.Expander.CalculationMode.Head;
+                                xe.CalcMode = DWSIM.UnitOperations.UnitOperations.Expander.CalculationMode.Head;
                                 break;
                             case 4:
-                                xe.CalcMode = UnitOperations.UnitOperations.Expander.CalculationMode.Curves;
+                                xe.CalcMode = DWSIM.UnitOperations.UnitOperations.Expander.CalculationMode.Curves;
                                 break;
                         }
                     }, () => CallSolverIfNeeded());
@@ -400,7 +401,7 @@ namespace DWSIM.UI.Desktop.Editors
                              SimObject.GetPropertyDescription("Calculation Mode"));
                     s.CreateAndAddButtonRow(container, "Edit Performance Curves", null, (btn, ea) =>
                     {
-                        var f = new UnitOperations.EditingForm_CompressorExpander_Curves { simobj = xe };
+                        var f = new EditingForm_CompressorExpander_Curves { simobj = xe };
                         f.ShowDialog();
                     });
                     s.CreateAndAddDropDownRow(container, "Thermodynamic Path", new List<string>(new[] { "Adiabatic", "Polytropic" }), (int)xe.ProcessPath, (DropDown arg3, EventArgs ev) =>
@@ -408,10 +409,10 @@ namespace DWSIM.UI.Desktop.Editors
                         switch (arg3.SelectedIndex)
                         {
                             case 0:
-                                xe.ProcessPath = UnitOperations.UnitOperations.Expander.ProcessPathType.Adiabatic;
+                                xe.ProcessPath = DWSIM.UnitOperations.UnitOperations.Expander.ProcessPathType.Adiabatic;
                                 break;
                             case 1:
-                                xe.ProcessPath = UnitOperations.UnitOperations.Expander.ProcessPathType.Polytropic;
+                                xe.ProcessPath = DWSIM.UnitOperations.UnitOperations.Expander.ProcessPathType.Polytropic;
                                 break;
                         }
                     }, () => CallSolverIfNeeded());
@@ -1741,12 +1742,10 @@ namespace DWSIM.UI.Desktop.Editors
                     s.CreateAndAddLabelRow(container, "Element Matrix");
                     s.CreateAndAddButtonRow(container, "Setup Element Matrix", null, (btn, e) =>
                     {
-                        var f = new System.Windows.Forms.Form { Width = 500, Height = 300, Text = "Element Matrix Editor" };
-                        var control = new UnitOperations.EditingForm_Gibbs_ElementMatrixEditor();
-                        control.gr = reactor2g;
-                        control.Dock = System.Windows.Forms.DockStyle.Fill;
-                        f.Controls.Add(control);
-                        f.ShowDialog();
+                        var editor = new Editors.UnitOperations.ElementMatrixEditor(reactor2g);
+                        var form = s.GetDefaultEditorForm("Element Matrix Editor", 600, 300, editor, false);
+                        form.Center();
+                        form.Show();
                     });
                     s.CreateAndAddLabelRow(container, "Convergence Parameters");
                     s.CreateAndAddCheckBoxRow(container, "Initialize from Previous Solution", reactor2g.InitializeFromPreviousSolution, (sender, e) => reactor2g.InitializeFromPreviousSolution = sender.Checked.GetValueOrDefault(), () => CallSolverIfNeeded());
@@ -2105,13 +2104,13 @@ namespace DWSIM.UI.Desktop.Editors
                         switch (arg3.SelectedIndex)
                         {
                             case 0:
-                                splitter.OperationMode = UnitOperations.UnitOperations.Splitter.OpMode.SplitRatios;
+                                splitter.OperationMode = DWSIM.UnitOperations.UnitOperations.Splitter.OpMode.SplitRatios;
                                 break;
                             case 1:
-                                splitter.OperationMode = UnitOperations.UnitOperations.Splitter.OpMode.StreamMassFlowSpec;
+                                splitter.OperationMode = DWSIM.UnitOperations.UnitOperations.Splitter.OpMode.StreamMassFlowSpec;
                                 break;
                             case 2:
-                                splitter.OperationMode = UnitOperations.UnitOperations.Splitter.OpMode.StreamMoleFlowSpec;
+                                splitter.OperationMode = DWSIM.UnitOperations.UnitOperations.Splitter.OpMode.StreamMoleFlowSpec;
                                 break;
                         }
                     }, () => CallSolverIfNeeded());
@@ -2623,7 +2622,7 @@ namespace DWSIM.UI.Desktop.Editors
                     var op = (OrificePlate)SimObject;
                     s.CreateAndAddDropDownRow(container, "Pressure Tappings", new List<string>() { "Corner", "Flange", "Radius" }, (int)op.OrifType, (sender, e) =>
                     {
-                        op.OrifType = (UnitOperations.UnitOperations.OrificePlate.OrificeType)sender.SelectedIndex;
+                        op.OrifType = (DWSIM.UnitOperations.UnitOperations.OrificePlate.OrificeType)sender.SelectedIndex;
                     }, () => CallSolverIfNeeded());
                     s.CreateAndAddTextBoxRow(container, nf, "Orifice Diameter (" + su.diameter + ")", op.OrificeDiameter, (sender, e) =>
                     {

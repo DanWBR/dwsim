@@ -98,6 +98,33 @@ namespace DWSIM.UI.Shared
                 //Resizable = true
             };
         }
+        
+        /// <summary>
+        /// returns a form whose contents are defined by the content argument (Pixel Layout)
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="content"></param>
+        /// <returns></returns>
+        public static Form GetDefaultEditorForm(string title, int width, int height, PixelLayout content)
+        {
+
+            content.Width = width;
+            height += 10;
+            return new Form()
+            {
+                Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico"),
+                Content = new Scrollable { Content = content, Border = BorderType.None, ExpandContentWidth = true, ExpandContentHeight = true },
+                Title = title,
+                ClientSize = new Size((int)(sf * width), (int)(sf * height))
+                //ShowInTaskbar = false,
+                //Maximizable = true,
+                //Minimizable = false,
+                //Topmost = true,
+                //Resizable = true
+            };
+        }
 
         /// <summary>
         /// returns a form whose contents are defined by the TableLayout argument

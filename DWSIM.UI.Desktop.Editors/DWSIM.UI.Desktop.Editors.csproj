@@ -121,6 +121,7 @@
     <Compile Include="FlowsheetAnalysis\SensitivityAnalysis.cs" />
     <Compile Include="General\CustomProperties.cs" />
     <Compile Include="General\FloatingTables.cs" />
+    <Compile Include="General\GridControl.cs" />
     <Compile Include="General\ObjectAppearance.cs" />
     <Compile Include="General\SimulationSetupWizard.cs" />
     <Compile Include="General\UnhandledException.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="Compounds\Compounds.cs" />
     <Compile Include="General\Connections.cs" />
     <Compile Include="UnitOperations\DistillationColumn.cs" />
+    <Compile Include="UnitOperations\ElementMatrixEditor.cs" />
     <Compile Include="UnitOperations\General.cs" />
     <Compile Include="General\InsertObject.cs" />
     <Compile Include="General\InsertObject.eto.cs">
