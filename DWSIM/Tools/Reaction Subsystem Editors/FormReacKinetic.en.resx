@@ -120,43 +120,7 @@
   <data name="KryptonButton3.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="btnScriptHelp.Text" xml:space="preserve">
-    <value>Help</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>272, 9</value>
-  </data>
-  <data name="Label2.Text" xml:space="preserve">
-    <value>Python Script</value>
-  </data>
-  <data name="cbScripts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>348, 5</value>
-  </data>
-  <data name="cbScripts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>213, 21</value>
-  </data>
-  <data name="rbAdvKin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>183, 7</value>
-  </data>
-  <data name="rbAdvKin.Text" xml:space="preserve">
-    <value>Advanced</value>
-  </data>
-  <data name="rbBasicKin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>121, 7</value>
-  </data>
-  <data name="rbBasicKin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 17</value>
-  </data>
-  <data name="rbBasicKin.Text" xml:space="preserve">
-    <value>Simple</value>
-  </data>
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 13</value>
-  </data>
-  <data name="Label1.Text" xml:space="preserve">
-    <value>Kinetics Specification</value>
-  </data>
   <data name="tbRevUE.Location" type="System.Drawing.Point, System.Drawing">
     <value>274, 95</value>
   </data>
@@ -169,20 +133,8 @@
   <data name="tbFwdUE.Size" type="System.Drawing.Size, System.Drawing">
     <value>379, 20</value>
   </data>
-  <data name="rdRevUD.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 17</value>
-  </data>
-  <data name="rdRevUD.Text" xml:space="preserve">
-    <value>User-Defined: f(T), T in K</value>
-  </data>
   <data name="FlowLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>149, 46</value>
-  </data>
-  <data name="rdFwdUD.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 17</value>
-  </data>
-  <data name="rdFwdUD.Text" xml:space="preserve">
-    <value>User-Defined: f(T), T in K</value>
   </data>
   <data name="FlowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>149, 46</value>
@@ -194,10 +146,10 @@
     <value>E '</value>
   </data>
   <data name="tbRevA.Location" type="System.Drawing.Point, System.Drawing">
-    <value>298, 70</value>
+    <value>302, 70</value>
   </data>
   <data name="tbRevA.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 20</value>
+    <value>144, 20</value>
   </data>
   <data name="KryptonLabel16.Location" type="System.Drawing.Point, System.Drawing">
     <value>277, 74</value>
@@ -209,10 +161,10 @@
     <value>A '</value>
   </data>
   <data name="tbFwdA.Location" type="System.Drawing.Point, System.Drawing">
-    <value>298, 18</value>
+    <value>302, 18</value>
   </data>
   <data name="tbFwdA.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 20</value>
+    <value>144, 20</value>
   </data>
   <data name="KryptonLabel13.Location" type="System.Drawing.Point, System.Drawing">
     <value>278, 22</value>
@@ -248,10 +200,10 @@
     <value>Amount Units</value>
   </data>
   <data name="cbVelUnit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>426, 245</value>
+    <value>434, 245</value>
   </data>
   <data name="cbVelUnit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>233, 21</value>
+    <value>225, 21</value>
   </data>
   <data name="KryptonLabel12.Location" type="System.Drawing.Point, System.Drawing">
     <value>356, 249</value>
@@ -263,10 +215,10 @@
     <value>Rate Units</value>
   </data>
   <data name="cbConcUnit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>91, 245</value>
+    <value>104, 245</value>
   </data>
   <data name="cbConcUnit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>252, 21</value>
+    <value>239, 21</value>
   </data>
   <data name="KryptonLabel4.Location" type="System.Drawing.Point, System.Drawing">
     <value>277, 20</value>
@@ -322,6 +274,57 @@
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Kinetic Reaction Parameters</value>
   </data>
+  <data name="btnScriptHelp.Text" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>281, 9</value>
+  </data>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Python Script</value>
+  </data>
+  <data name="cbScripts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>367, 5</value>
+  </data>
+  <data name="cbScripts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 21</value>
+  </data>
+  <data name="rbAdvKin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>192, 7</value>
+  </data>
+  <data name="rbAdvKin.Text" xml:space="preserve">
+    <value>Advanced</value>
+  </data>
+  <data name="rbBasicKin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>130, 7</value>
+  </data>
+  <data name="rbBasicKin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 17</value>
+  </data>
+  <data name="rbBasicKin.Text" xml:space="preserve">
+    <value>Simple</value>
+  </data>
+  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 13</value>
+  </data>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Kinetics Specification</value>
+  </data>
+  <data name="rdRevUD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 17</value>
+  </data>
+  <data name="rdRevUD.Text" xml:space="preserve">
+    <value>User-Defined: f(T), T in K</value>
+  </data>
+  <data name="rdFwdUD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 17</value>
+  </data>
+  <data name="rdFwdUD.Text" xml:space="preserve">
+    <value>User-Defined: f(T), T in K</value>
+  </data>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Components, Stoichiometry and Reaction Orders</value>
+  </data>
   <data name="KryptonLabel3.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 13</value>
   </data>
@@ -367,18 +370,17 @@
   <data name="Column8.ToolTipText" xml:space="preserve">
     <value>Reverse Order</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Column10.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="KryptonLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>70, 13</value>
   </data>
   <data name="KryptonLabel1.Text" xml:space="preserve">
     <value>Stoichiometry</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Components, Stoichiometry and Reaction Orders</value>
+  <data name="GroupBox4.Text" xml:space="preserve">
+    <value>Identification</value>
+  </data>
+  <data name="KryptonLabel19.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 13</value>
   </data>
   <data name="KryptonLabel19.Text" xml:space="preserve">
     <value>Description</value>
@@ -386,8 +388,17 @@
   <data name="KryptonLabel20.Text" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="GroupBox4.Text" xml:space="preserve">
-    <value>Identification</value>
+  <data name="tbName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>81, 17</value>
+  </data>
+  <data name="tbName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>584, 20</value>
+  </data>
+  <data name="tbDesc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>81, 44</value>
+  </data>
+  <data name="tbDesc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>584, 50</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">

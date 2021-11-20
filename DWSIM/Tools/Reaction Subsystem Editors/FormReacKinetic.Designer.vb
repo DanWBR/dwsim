@@ -114,6 +114,7 @@ Partial Class FormReacKinetic
         '
         'GroupBox2
         '
+        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
         Me.GroupBox2.Controls.Add(Me.Panel1)
         Me.GroupBox2.Controls.Add(Me.gbKinetics)
         Me.GroupBox2.Controls.Add(Me.tbCompBase)
@@ -130,12 +131,12 @@ Partial Class FormReacKinetic
         Me.GroupBox2.Controls.Add(Me.cbBase)
         Me.GroupBox2.Controls.Add(Me.KryptonLabel6)
         Me.GroupBox2.Controls.Add(Me.tbPhase)
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
         '
         'Panel1
         '
+        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.BackColor = System.Drawing.Color.White
         Me.Panel1.Controls.Add(Me.btnScriptHelp)
         Me.Panel1.Controls.Add(Me.Label2)
@@ -143,14 +144,13 @@ Partial Class FormReacKinetic
         Me.Panel1.Controls.Add(Me.rbAdvKin)
         Me.Panel1.Controls.Add(Me.rbBasicKin)
         Me.Panel1.Controls.Add(Me.Label1)
-        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.Name = "Panel1"
         '
         'btnScriptHelp
         '
+        resources.ApplyResources(Me.btnScriptHelp, "btnScriptHelp")
         Me.btnScriptHelp.BackColor = System.Drawing.SystemColors.ButtonFace
         Me.btnScriptHelp.Image = Global.DWSIM.My.Resources.Resources.help
-        resources.ApplyResources(Me.btnScriptHelp, "btnScriptHelp")
         Me.btnScriptHelp.Name = "btnScriptHelp"
         Me.btnScriptHelp.UseVisualStyleBackColor = False
         '
@@ -161,10 +161,10 @@ Partial Class FormReacKinetic
         '
         'cbScripts
         '
+        resources.ApplyResources(Me.cbScripts, "cbScripts")
         Me.cbScripts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbScripts.DropDownWidth = 121
         Me.cbScripts.Items.AddRange(New Object() {resources.GetString("cbScripts.Items"), resources.GetString("cbScripts.Items1"), resources.GetString("cbScripts.Items2")})
-        resources.ApplyResources(Me.cbScripts, "cbScripts")
         Me.cbScripts.Name = "cbScripts"
         '
         'rbAdvKin
@@ -188,6 +188,7 @@ Partial Class FormReacKinetic
         '
         'gbKinetics
         '
+        resources.ApplyResources(Me.gbKinetics, "gbKinetics")
         Me.gbKinetics.Controls.Add(Me.cbReverseEUnits)
         Me.gbKinetics.Controls.Add(Me.cbForwardEUnits)
         Me.gbKinetics.Controls.Add(Me.tbRevUE)
@@ -204,22 +205,21 @@ Partial Class FormReacKinetic
         Me.gbKinetics.Controls.Add(Me.KryptonLabel13)
         Me.gbKinetics.Controls.Add(Me.KryptonLabel10)
         Me.gbKinetics.Controls.Add(Me.KryptonLabel5)
-        resources.ApplyResources(Me.gbKinetics, "gbKinetics")
         Me.gbKinetics.Name = "gbKinetics"
         Me.gbKinetics.TabStop = False
         '
         'cbReverseEUnits
         '
+        resources.ApplyResources(Me.cbReverseEUnits, "cbReverseEUnits")
         Me.cbReverseEUnits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbReverseEUnits.DropDownWidth = 121
-        resources.ApplyResources(Me.cbReverseEUnits, "cbReverseEUnits")
         Me.cbReverseEUnits.Name = "cbReverseEUnits"
         '
         'cbForwardEUnits
         '
+        resources.ApplyResources(Me.cbForwardEUnits, "cbForwardEUnits")
         Me.cbForwardEUnits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbForwardEUnits.DropDownWidth = 121
-        resources.ApplyResources(Me.cbForwardEUnits, "cbForwardEUnits")
         Me.cbForwardEUnits.Name = "cbForwardEUnits"
         '
         'tbRevUE
@@ -352,9 +352,9 @@ Partial Class FormReacKinetic
         '
         'cbVelUnit
         '
+        resources.ApplyResources(Me.cbVelUnit, "cbVelUnit")
         Me.cbVelUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbVelUnit.DropDownWidth = 121
-        resources.ApplyResources(Me.cbVelUnit, "cbVelUnit")
         Me.cbVelUnit.Name = "cbVelUnit"
         '
         'KryptonLabel8
@@ -374,9 +374,9 @@ Partial Class FormReacKinetic
         '
         'cbConcUnit
         '
+        resources.ApplyResources(Me.cbConcUnit, "cbConcUnit")
         Me.cbConcUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbConcUnit.DropDownWidth = 121
-        resources.ApplyResources(Me.cbConcUnit, "cbConcUnit")
         Me.cbConcUnit.Name = "cbConcUnit"
         '
         'KryptonLabel4
@@ -386,9 +386,9 @@ Partial Class FormReacKinetic
         '
         'cbBase
         '
+        resources.ApplyResources(Me.cbBase, "cbBase")
         Me.cbBase.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbBase.DropDownWidth = 121
-        resources.ApplyResources(Me.cbBase, "cbBase")
         Me.cbBase.Items.AddRange(New Object() {resources.GetString("cbBase.Items"), resources.GetString("cbBase.Items1"), resources.GetString("cbBase.Items2"), resources.GetString("cbBase.Items3"), resources.GetString("cbBase.Items4"), resources.GetString("cbBase.Items5"), resources.GetString("cbBase.Items6")})
         Me.cbBase.Name = "cbBase"
         '
@@ -399,14 +399,15 @@ Partial Class FormReacKinetic
         '
         'tbPhase
         '
+        resources.ApplyResources(Me.tbPhase, "tbPhase")
         Me.tbPhase.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.tbPhase.DropDownWidth = 121
         Me.tbPhase.Items.AddRange(New Object() {resources.GetString("tbPhase.Items"), resources.GetString("tbPhase.Items1"), resources.GetString("tbPhase.Items2")})
-        resources.ApplyResources(Me.tbPhase, "tbPhase")
         Me.tbPhase.Name = "tbPhase"
         '
         'GroupBox1
         '
+        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Controls.Add(Me.tbEquation)
         Me.GroupBox1.Controls.Add(Me.KryptonLabel3)
         Me.GroupBox1.Controls.Add(Me.KryptonButton2)
@@ -415,7 +416,6 @@ Partial Class FormReacKinetic
         Me.GroupBox1.Controls.Add(Me.tbStoich)
         Me.GroupBox1.Controls.Add(Me.KryptonDataGridView1)
         Me.GroupBox1.Controls.Add(Me.KryptonLabel1)
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
         '
@@ -454,13 +454,13 @@ Partial Class FormReacKinetic
         '
         'KryptonDataGridView1
         '
+        resources.ApplyResources(Me.KryptonDataGridView1, "KryptonDataGridView1")
         Me.KryptonDataGridView1.AllowUserToAddRows = False
         Me.KryptonDataGridView1.AllowUserToDeleteRows = False
         Me.KryptonDataGridView1.AllowUserToResizeRows = False
         Me.KryptonDataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.KryptonDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.KryptonDataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column2, Me.Column3, Me.Column9, Me.Column4, Me.Column5, Me.Column6, Me.Column7, Me.Column8, Me.Column1, Me.Column10})
-        resources.ApplyResources(Me.KryptonDataGridView1, "KryptonDataGridView1")
         Me.KryptonDataGridView1.MultiSelect = False
         Me.KryptonDataGridView1.Name = "KryptonDataGridView1"
         Me.KryptonDataGridView1.RowHeadersVisible = False
@@ -535,11 +535,11 @@ Partial Class FormReacKinetic
         '
         'GroupBox4
         '
+        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
         Me.GroupBox4.Controls.Add(Me.KryptonLabel19)
         Me.GroupBox4.Controls.Add(Me.KryptonLabel20)
         Me.GroupBox4.Controls.Add(Me.tbName)
         Me.GroupBox4.Controls.Add(Me.tbDesc)
-        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.TabStop = False
         '
@@ -567,7 +567,6 @@ Partial Class FormReacKinetic
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.KryptonButton4)
         Me.Controls.Add(Me.KryptonButton3)

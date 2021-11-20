@@ -194,10 +194,10 @@
     <value>Reaction Set</value>
   </data>
   <data name="cbReacSet.Location" type="System.Drawing.Point, System.Drawing">
-    <value>153, 20</value>
+    <value>163, 20</value>
   </data>
   <data name="cbReacSet.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 21</value>
+    <value>191, 21</value>
   </data>
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 52</value>
@@ -218,10 +218,10 @@
     <value>Define Outlet Temperature</value>
   </data>
   <data name="cbCalcMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>153, 48</value>
+    <value>163, 48</value>
   </data>
   <data name="cbCalcMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 21</value>
+    <value>191, 21</value>
   </data>
   <data name="cbTemp.Location" type="System.Drawing.Point, System.Drawing">
     <value>292, 76</value>
@@ -236,10 +236,10 @@
     <value>Outlet Temperature</value>
   </data>
   <data name="tbOutletTemperature.Location" type="System.Drawing.Point, System.Drawing">
-    <value>153, 77</value>
+    <value>163, 77</value>
   </data>
   <data name="tbOutletTemperature.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 20</value>
+    <value>123, 20</value>
   </data>
   <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
     <value>373, 210</value>
@@ -319,11 +319,17 @@
   <data name="Label8.Text" xml:space="preserve">
     <value>Catalyst Loading</value>
   </data>
+  <data name="tbCatVoidFrac.Location" type="System.Drawing.Point, System.Drawing">
+    <value>163, 108</value>
+  </data>
   <data name="tbCatVoidFrac.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 20</value>
+    <value>129, 20</value>
+  </data>
+  <data name="tbCatLoad.Location" type="System.Drawing.Point, System.Drawing">
+    <value>163, 52</value>
   </data>
   <data name="tbCatLoad.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 20</value>
+    <value>129, 20</value>
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>109, 13</value>
@@ -343,8 +349,11 @@
   <data name="Label15.Text" xml:space="preserve">
     <value>Catalyst Particle Diameter</value>
   </data>
+  <data name="tbCatDiam.Location" type="System.Drawing.Point, System.Drawing">
+    <value>163, 80</value>
+  </data>
   <data name="tbCatDiam.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 20</value>
+    <value>129, 20</value>
   </data>
   <data name="TabPage7.Size" type="System.Drawing.Size, System.Drawing">
     <value>373, 210</value>
