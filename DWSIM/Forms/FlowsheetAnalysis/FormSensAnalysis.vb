@@ -926,8 +926,9 @@ Public Class FormSensAnalysis
                     cbc.Sorted = True
                 Case 2
                     If Not Me.dgDepVariables.Rows(e.RowIndex).Cells(e.ColumnIndex).Value Is Nothing Then
+                        Dim tbc0 As DataGridViewTextBoxCell = Me.dgDepVariables.Rows(e.RowIndex).Cells(3)
+                        tbc0.Value = ""
                         If Me.dgDepVariables.Rows(e.RowIndex).Cells(1).Value <> DWSIM.App.GetLocalString("SpreadsheetCell") Then
-                            Dim tbc0 As DataGridViewTextBoxCell = Me.dgDepVariables.Rows(e.RowIndex).Cells(3)
                             Dim props As String() = Me.ReturnProperties(Me.dgDepVariables.Rows(e.RowIndex).Cells(1).Value, True)
                             For Each prop As String In props
                                 If form.GetTranslatedString1(prop) = Me.dgDepVariables.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString Then
