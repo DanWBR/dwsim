@@ -710,7 +710,9 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     If cnt > 20 Then fxvals.Add(fx)
 
-                    If Abs(fx) <= tolEXT Then Exit Do
+                    If Abs(fx) <= tolEXT Then
+                        Exit Do
+                    End If
 
                     dx = fx / dfdx
 
@@ -721,18 +723,20 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     If cnt > 30 And Math.Sign(fx) <> Math.Sign(fx_ant) Then
 
-                        'oscillating around the solution.
+                        'oscillating around the solution. switch to normal mode.
 
-                        Dim bmin As New Brent
+                        Return Flash_PH_2(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
 
-                        Dim interp As New MathNet.Numerics.Interpolation.BulirschStoerRationalInterpolation(xvals.ToArray(), fxvals.ToArray())
+                        'Dim bmin As New Brent
 
-                        x1 = bmin.BrentOpt2(xvals.Min, xvals.Max, 5, 0.01, 100,
-                                            Function(tval)
-                                                Return interp.Interpolate(tval)
-                                            End Function)
+                        'Dim interp As New MathNet.Numerics.Interpolation.BulirschStoerRationalInterpolation(xvals.ToArray(), fxvals.ToArray())
 
-                        Exit Do
+                        'x1 = bmin.BrentOpt2(xvals.Min, xvals.Max, 50, 0.01, 100,
+                        '                    Function(tval)
+                        '                        Return interp.Interpolate(tval)
+                        '                    End Function)
+
+                        'Exit Do
 
                     Else
 
