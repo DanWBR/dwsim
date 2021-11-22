@@ -2906,6 +2906,7 @@
     <None Include="Resources\disk1.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\s365 logo.jpg" />
     <None Include="Resources\s365_logo_login.png" />
     <None Include="Resources\s365_logo_login.bmp" />
     <None Include="Resources\tshirt_mockup.jpg" />
@@ -3183,6 +3184,8 @@
     <None Include="Resources\icons8-export1.png" />
     <None Include="Resources\icons8-delete1.png" />
     <None Include="Resources\pythonfunctions.txt" />
+    <None Include="Resources\Icon128.png" />
+    <None Include="Resources\Icon512.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />

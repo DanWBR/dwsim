@@ -1,4 +1,4 @@
-Version 6.7.1
+Version 7.0.0
 
 - Exposing Activity/Fugacity/Diffusion coefficients from compounds in Material Streams
 - Added Ideal Gas Heat Capacity as a Phase property
