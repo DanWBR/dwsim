@@ -40,10 +40,12 @@ DWSIM.Interfaces|Interface definitions
 DWSIM.Inspector|Inspector Reports library
 DWSIM.Libraries.OctaveSharp|Octave interface 
 DWSIM.Libraries.PythonLink|Python interface 
+DWSIM.Logging|Logging library
 DWSIM.MathOps|Math library
 DWSIM.MathOps.RandomOps|Random number generator library
 DWSIM.MathOps.SwarmOps|Optimization library
 DWSIM.SharedClasses|Shared/Base class definitions
+DWSIM.Simulate365|Simulate365 Platform Integration
 DWSIM.Thermodynamics|Thermo library
 DWSIM.Thermodynamics.AdvancedEOS.GERG2008|GERG2008 Property Package
 DWSIM.Thermodynamics.AdvancedEOS.PCSAFT|PC-SAFT Property Package
@@ -54,6 +56,7 @@ DWSIM.Thermodynamics.Databases.DDBStructureLink|DDB UNIFAC/MODFAC Structure Data
 DWSIM.Thermodynamics.Databases.KDBLink|KDB Database Linker/Parser
 DWSIM.Thermodynamics.CoolPropInterface|Interface for CoolProp native library
 DWSIM.UnitOperations|Unit Operations library
+DWSIM.UI.Web|Shared Web Forms components
 DWSIM.XMLSerializer|Custom XML Serializer
 **Classic UI Projects (Windows Forms)**
 DWSIM|Main DWSIM GUI with Tools and Utilities
@@ -79,5 +82,6 @@ DWSIM.UI.Desktop.WPF|Cross-Platform UI Windows Presentation Foundation (WPF) Pla
 
 ### Compiling
 
-- DWSIM can be compiled using Visual Studio 2017 or newer on Windows.
+- Install Node.js (64-bit) before compiling DWSIM (https://nodejs.org/en/download/).
+- DWSIM can be compiled using Visual Studio 2019 or newer on Windows.
 - To compile everything and run, select 'DWSIM' or 'DWSIM.UI.Desktop' as the startup project, change the Build target to 'Debug/x64', 'ReleaseLinux/x64', 'ReleaseWinMac/x64' or 'ReleaseWinMac/x86'.
