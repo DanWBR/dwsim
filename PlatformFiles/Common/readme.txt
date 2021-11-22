@@ -65,6 +65,22 @@ The full changelog including souce code changes can be viewed at https://github.
 Version 7.0.0
 
 Author              Description
+Daniel Medeiros     Integration with Simulate 365 account + File Picker (Classic UI)
+Gregor Reichert     Output Energy Stream - Conversion Reactor 
+Daniel Medeiros     Added CPUI editor for Property Package Equilibrium settings
+Daniel Medeiros     Added CPUI Editor for Gibbs Reactor's Element Matrix
+Daniel Medeiros     Fixed negative experimental thermal conductivity in some compounds
+Daniel Medeiros     Fixed issue with LK reduced volume calculation
+Daniel Medeiros     Fixed issue with PR78 model
+Gregor Reichert     Fixed Sensitivity Analysis
+Daniel Medeiros     Fixed a NL PH Flash issue
+Daniel Medeiros     Fixed Flowsheet Optimizer layout (Classic UI)
+Daniel Medeiros     Fixed an issue with cubic equation root finding
+Daniel Medeiros     Other minor fixes and enhancements
+
+Version 6.7.1
+
+Author              Description
 Daniel Medeiros     Exposing Activity/Fugacity/Diffusion coefficients from compounds in Material Streams
 Daniel Medeiros     Added Ideal Gas Heat Capacity as a Phase property
 Daniel Medeiros     Fixed issue 213: Mac OS - Binary Envelope failed

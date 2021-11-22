@@ -1,9 +1,14 @@
 Version 7.0.0
 
-- Exposing Activity/Fugacity/Diffusion coefficients from compounds in Material Streams
-- Added Ideal Gas Heat Capacity as a Phase property
-- Fixed issue 213: Mac OS - Binary Envelope failed
-- Fixed issue 214: Mac OS - Objects Alignment button get crash
-- Fixed issue 216: Carbon Combustion sample cannot be calculated
-- Fixed issue with saturation condition calculations
-- Fixed duplicate name when adding objects to the flowsheet
+- Integration with Simulate 365 account + File Picker (Classic UI)
+- Output Energy stream - Conversion Reactor 
+- Added CPUI editor for Property Package Equilibrium settings
+- Added CPUI Editor for Gibbs Reactor's Element Matrix
+- Fixed negative experimental thermal conductivity in some compounds
+- Fixed issue with LK reduced volume calculation
+- Fixed issue with PR78 model
+- Fixed Sensitivity Analysis
+- Fixed a NL PH Flash issue
+- Fixed Flowsheet Optimizer layout (Classic UI)
+- Fixed an issue with cubic equation root finding
+- Other minor fixes and enhancements
