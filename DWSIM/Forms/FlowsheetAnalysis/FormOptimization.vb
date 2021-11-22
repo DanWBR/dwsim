@@ -188,6 +188,12 @@ Public Class FormOptimization
 
         Me.selectedindex0 = Me.lbCases.SelectedIndex
 
+        If lbCases.SelectedIndex >= 0 Then
+            Panel1.Enabled = True
+        Else
+            Panel1.Enabled = False
+        End If
+
         If Not Me.lbCases.SelectedItem Is Nothing Then
             For Each optcase As OptimizationCase In form.Collections.OPT_OptimizationCollection
                 If optcase.name = Me.lbCases.SelectedItem.ToString Then

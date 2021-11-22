@@ -31,29 +31,18 @@ Partial Class FormOptimization
         Me.btnCopyCase = New System.Windows.Forms.Button()
         Me.btnNewCase = New System.Windows.Forms.Button()
         Me.lbCases = New System.Windows.Forms.ListBox()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.tbCaseDesc = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.tbCaseName = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GBvars = New System.Windows.Forms.GroupBox()
         Me.dgVariables = New System.Windows.Forms.DataGridView()
-        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.Column3 = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.Column4 = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.tsbAddVar = New System.Windows.Forms.ToolStripButton()
         Me.tsbDelVar = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.GBconfig = New System.Windows.Forms.GroupBox()
         Me.FlowLayoutPanel2 = New System.Windows.Forms.FlowLayoutPanel()
         Me.rbVariable = New System.Windows.Forms.RadioButton()
         Me.rbExpression = New System.Windows.Forms.RadioButton()
@@ -66,7 +55,7 @@ Partial Class FormOptimization
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.GBexpression = New System.Windows.Forms.GroupBox()
         Me.btnClear = New System.Windows.Forms.Button()
         Me.btnVerify = New System.Windows.Forms.Button()
         Me.tbCurrentValue = New System.Windows.Forms.TextBox()
@@ -100,15 +89,24 @@ Partial Class FormOptimization
         Me.DockTopAutoHideToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DockBottomAutoHideToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DocumentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.Column3 = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.Column4 = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox2.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
+        Me.GBvars.SuspendLayout()
         CType(Me.dgVariables, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolStrip1.SuspendLayout()
-        Me.GroupBox4.SuspendLayout()
+        Me.GBconfig.SuspendLayout()
         Me.FlowLayoutPanel2.SuspendLayout()
         Me.FlowLayoutPanel1.SuspendLayout()
-        Me.GroupBox6.SuspendLayout()
+        Me.GBexpression.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.GroupBox8.SuspendLayout()
         Me.GroupBox7.SuspendLayout()
@@ -156,16 +154,6 @@ Partial Class FormOptimization
         Me.lbCases.FormattingEnabled = True
         Me.lbCases.Name = "lbCases"
         '
-        'GroupBox3
-        '
-        resources.ApplyResources(Me.GroupBox3, "GroupBox3")
-        Me.GroupBox3.Controls.Add(Me.tbCaseDesc)
-        Me.GroupBox3.Controls.Add(Me.Label4)
-        Me.GroupBox3.Controls.Add(Me.tbCaseName)
-        Me.GroupBox3.Controls.Add(Me.Label1)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.TabStop = False
-        '
         'tbCaseDesc
         '
         resources.ApplyResources(Me.tbCaseDesc, "tbCaseDesc")
@@ -186,13 +174,13 @@ Partial Class FormOptimization
         resources.ApplyResources(Me.Label1, "Label1")
         Me.Label1.Name = "Label1"
         '
-        'GroupBox1
+        'GBvars
         '
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.Controls.Add(Me.dgVariables)
-        Me.GroupBox1.Controls.Add(Me.ToolStrip1)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.TabStop = False
+        resources.ApplyResources(Me.GBvars, "GBvars")
+        Me.GBvars.Controls.Add(Me.dgVariables)
+        Me.GBvars.Controls.Add(Me.ToolStrip1)
+        Me.GBvars.Name = "GBvars"
+        Me.GBvars.TabStop = False
         '
         'dgVariables
         '
@@ -216,69 +204,6 @@ Partial Class FormOptimization
         Me.dgVariables.Name = "dgVariables"
         Me.dgVariables.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         '
-        'Column8
-        '
-        resources.ApplyResources(Me.Column8, "Column8")
-        Me.Column8.Name = "Column8"
-        Me.Column8.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Column1
-        '
-        resources.ApplyResources(Me.Column1, "Column1")
-        Me.Column1.Name = "Column1"
-        Me.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Column2
-        '
-        Me.Column2.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox
-        resources.ApplyResources(Me.Column2, "Column2")
-        Me.Column2.Name = "Column2"
-        '
-        'Column3
-        '
-        Me.Column3.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox
-        resources.ApplyResources(Me.Column3, "Column3")
-        Me.Column3.Name = "Column3"
-        Me.Column3.Sorted = True
-        '
-        'Column4
-        '
-        Me.Column4.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox
-        resources.ApplyResources(Me.Column4, "Column4")
-        Me.Column4.Name = "Column4"
-        '
-        'Column6
-        '
-        resources.ApplyResources(Me.Column6, "Column6")
-        Me.Column6.Name = "Column6"
-        Me.Column6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Column7
-        '
-        resources.ApplyResources(Me.Column7, "Column7")
-        Me.Column7.Name = "Column7"
-        Me.Column7.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Column10
-        '
-        resources.ApplyResources(Me.Column10, "Column10")
-        Me.Column10.Name = "Column10"
-        Me.Column10.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Column5
-        '
-        resources.ApplyResources(Me.Column5, "Column5")
-        Me.Column5.Name = "Column5"
-        Me.Column5.ReadOnly = True
-        Me.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Column9
-        '
-        resources.ApplyResources(Me.Column9, "Column9")
-        Me.Column9.Name = "Column9"
-        Me.Column9.ReadOnly = True
-        Me.Column9.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
         'ToolStrip1
         '
         resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
@@ -289,14 +214,12 @@ Partial Class FormOptimization
         'tsbAddVar
         '
         resources.ApplyResources(Me.tsbAddVar, "tsbAddVar")
-        Me.tsbAddVar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbAddVar.Image = Global.DWSIM.My.Resources.Resources.add
         Me.tsbAddVar.Name = "tsbAddVar"
         '
         'tsbDelVar
         '
         resources.ApplyResources(Me.tsbDelVar, "tsbDelVar")
-        Me.tsbDelVar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbDelVar.Image = Global.DWSIM.My.Resources.Resources.delete1
         Me.tsbDelVar.Name = "tsbDelVar"
         '
@@ -308,23 +231,22 @@ Partial Class FormOptimization
         'ToolStripButton1
         '
         resources.ApplyResources(Me.ToolStripButton1, "ToolStripButton1")
-        Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton1.Image = Global.DWSIM.My.Resources.Resources.arrow_refresh
         Me.ToolStripButton1.Name = "ToolStripButton1"
         '
-        'GroupBox4
+        'GBconfig
         '
-        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
-        Me.GroupBox4.Controls.Add(Me.FlowLayoutPanel2)
-        Me.GroupBox4.Controls.Add(Me.FlowLayoutPanel1)
-        Me.GroupBox4.Controls.Add(Me.tbToleranceValue)
-        Me.GroupBox4.Controls.Add(Me.Label6)
-        Me.GroupBox4.Controls.Add(Me.tbMaxIterations)
-        Me.GroupBox4.Controls.Add(Me.Label5)
-        Me.GroupBox4.Controls.Add(Me.Label3)
-        Me.GroupBox4.Controls.Add(Me.Label2)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.TabStop = False
+        resources.ApplyResources(Me.GBconfig, "GBconfig")
+        Me.GBconfig.Controls.Add(Me.FlowLayoutPanel2)
+        Me.GBconfig.Controls.Add(Me.FlowLayoutPanel1)
+        Me.GBconfig.Controls.Add(Me.tbToleranceValue)
+        Me.GBconfig.Controls.Add(Me.Label6)
+        Me.GBconfig.Controls.Add(Me.tbMaxIterations)
+        Me.GBconfig.Controls.Add(Me.Label5)
+        Me.GBconfig.Controls.Add(Me.Label3)
+        Me.GBconfig.Controls.Add(Me.Label2)
+        Me.GBconfig.Name = "GBconfig"
+        Me.GBconfig.TabStop = False
         '
         'FlowLayoutPanel2
         '
@@ -398,17 +320,17 @@ Partial Class FormOptimization
         resources.ApplyResources(Me.Label2, "Label2")
         Me.Label2.Name = "Label2"
         '
-        'GroupBox6
+        'GBexpression
         '
-        resources.ApplyResources(Me.GroupBox6, "GroupBox6")
-        Me.GroupBox6.Controls.Add(Me.btnClear)
-        Me.GroupBox6.Controls.Add(Me.btnVerify)
-        Me.GroupBox6.Controls.Add(Me.tbCurrentValue)
-        Me.GroupBox6.Controls.Add(Me.Label8)
-        Me.GroupBox6.Controls.Add(Me.tbExpression)
-        Me.GroupBox6.Controls.Add(Me.Label7)
-        Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.TabStop = False
+        resources.ApplyResources(Me.GBexpression, "GBexpression")
+        Me.GBexpression.Controls.Add(Me.btnClear)
+        Me.GBexpression.Controls.Add(Me.btnVerify)
+        Me.GBexpression.Controls.Add(Me.tbCurrentValue)
+        Me.GBexpression.Controls.Add(Me.Label8)
+        Me.GBexpression.Controls.Add(Me.tbExpression)
+        Me.GBexpression.Controls.Add(Me.Label7)
+        Me.GBexpression.Name = "GBexpression"
+        Me.GBexpression.TabStop = False
         '
         'btnClear
         '
@@ -448,14 +370,15 @@ Partial Class FormOptimization
         'Panel1
         '
         resources.ApplyResources(Me.Panel1, "Panel1")
-        Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel1.Controls.Add(Me.tbCaseDesc)
         Me.Panel1.Controls.Add(Me.GroupBox8)
+        Me.Panel1.Controls.Add(Me.Label4)
         Me.Panel1.Controls.Add(Me.GroupBox7)
-        Me.Panel1.Controls.Add(Me.GroupBox2)
-        Me.Panel1.Controls.Add(Me.GroupBox6)
-        Me.Panel1.Controls.Add(Me.GroupBox3)
-        Me.Panel1.Controls.Add(Me.GroupBox1)
-        Me.Panel1.Controls.Add(Me.GroupBox4)
+        Me.Panel1.Controls.Add(Me.tbCaseName)
+        Me.Panel1.Controls.Add(Me.GBexpression)
+        Me.Panel1.Controls.Add(Me.Label1)
+        Me.Panel1.Controls.Add(Me.GBvars)
+        Me.Panel1.Controls.Add(Me.GBconfig)
         Me.Panel1.Name = "Panel1"
         '
         'GroupBox8
@@ -624,11 +547,75 @@ Partial Class FormOptimization
         resources.ApplyResources(Me.DocumentToolStripMenuItem, "DocumentToolStripMenuItem")
         Me.DocumentToolStripMenuItem.Name = "DocumentToolStripMenuItem"
         '
+        'Column8
+        '
+        resources.ApplyResources(Me.Column8, "Column8")
+        Me.Column8.Name = "Column8"
+        Me.Column8.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Column1
+        '
+        resources.ApplyResources(Me.Column1, "Column1")
+        Me.Column1.Name = "Column1"
+        Me.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Column2
+        '
+        Me.Column2.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox
+        resources.ApplyResources(Me.Column2, "Column2")
+        Me.Column2.Name = "Column2"
+        '
+        'Column3
+        '
+        Me.Column3.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox
+        resources.ApplyResources(Me.Column3, "Column3")
+        Me.Column3.Name = "Column3"
+        Me.Column3.Sorted = True
+        '
+        'Column4
+        '
+        Me.Column4.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox
+        resources.ApplyResources(Me.Column4, "Column4")
+        Me.Column4.Name = "Column4"
+        '
+        'Column6
+        '
+        resources.ApplyResources(Me.Column6, "Column6")
+        Me.Column6.Name = "Column6"
+        Me.Column6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Column7
+        '
+        resources.ApplyResources(Me.Column7, "Column7")
+        Me.Column7.Name = "Column7"
+        Me.Column7.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Column10
+        '
+        resources.ApplyResources(Me.Column10, "Column10")
+        Me.Column10.Name = "Column10"
+        Me.Column10.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Column5
+        '
+        resources.ApplyResources(Me.Column5, "Column5")
+        Me.Column5.Name = "Column5"
+        Me.Column5.ReadOnly = True
+        Me.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Column9
+        '
+        resources.ApplyResources(Me.Column9, "Column9")
+        Me.Column9.Name = "Column9"
+        Me.Column9.ReadOnly = True
+        Me.Column9.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
         'FormOptimization
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.GroupBox2)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
         Me.HideOnClose = True
         Me.Name = "FormOptimization"
@@ -637,22 +624,21 @@ Partial Class FormOptimization
         Me.ShowInTaskbar = False
         Me.TabPageContextMenuStrip = Me.dckMenu
         Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.GBvars.ResumeLayout(False)
+        Me.GBvars.PerformLayout()
         CType(Me.dgVariables, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
-        Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox4.PerformLayout()
+        Me.GBconfig.ResumeLayout(False)
+        Me.GBconfig.PerformLayout()
         Me.FlowLayoutPanel2.ResumeLayout(False)
         Me.FlowLayoutPanel2.PerformLayout()
         Me.FlowLayoutPanel1.ResumeLayout(False)
         Me.FlowLayoutPanel1.PerformLayout()
-        Me.GroupBox6.ResumeLayout(False)
-        Me.GroupBox6.PerformLayout()
+        Me.GBexpression.ResumeLayout(False)
+        Me.GBexpression.PerformLayout()
         Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         Me.GroupBox8.ResumeLayout(False)
         Me.GroupBox8.PerformLayout()
         Me.GroupBox7.ResumeLayout(False)
@@ -666,13 +652,12 @@ Partial Class FormOptimization
     Public WithEvents btnCopyCase As System.Windows.Forms.Button
     Public WithEvents btnNewCase As System.Windows.Forms.Button
     Public WithEvents lbCases As System.Windows.Forms.ListBox
-    Public WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Public WithEvents tbCaseDesc As System.Windows.Forms.TextBox
     Public WithEvents Label4 As System.Windows.Forms.Label
     Public WithEvents tbCaseName As System.Windows.Forms.TextBox
     Public WithEvents Label1 As System.Windows.Forms.Label
-    Public WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Public WithEvents GroupBox4 As System.Windows.Forms.GroupBox
+    Public WithEvents GBvars As System.Windows.Forms.GroupBox
+    Public WithEvents GBconfig As System.Windows.Forms.GroupBox
     Public WithEvents rbExpression As System.Windows.Forms.RadioButton
     Public WithEvents rbVariable As System.Windows.Forms.RadioButton
     Public WithEvents Label3 As System.Windows.Forms.Label
@@ -683,7 +668,7 @@ Partial Class FormOptimization
     Public WithEvents Label6 As System.Windows.Forms.Label
     Public WithEvents tbMaxIterations As System.Windows.Forms.TextBox
     Public WithEvents Label5 As System.Windows.Forms.Label
-    Public WithEvents GroupBox6 As System.Windows.Forms.GroupBox
+    Public WithEvents GBexpression As System.Windows.Forms.GroupBox
     Public WithEvents tbCurrentValue As System.Windows.Forms.TextBox
     Public WithEvents Label8 As System.Windows.Forms.Label
     Public WithEvents tbExpression As System.Windows.Forms.TextBox
@@ -710,16 +695,6 @@ Partial Class FormOptimization
     Public WithEvents rb2PointDeriv As System.Windows.Forms.RadioButton
     Public WithEvents Label11 As System.Windows.Forms.Label
     Public WithEvents Label10 As System.Windows.Forms.Label
-    Friend WithEvents Column8 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column2 As System.Windows.Forms.DataGridViewComboBoxColumn
-    Friend WithEvents Column3 As System.Windows.Forms.DataGridViewComboBoxColumn
-    Friend WithEvents Column4 As System.Windows.Forms.DataGridViewComboBoxColumn
-    Friend WithEvents Column6 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column7 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column10 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column5 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column9 As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents Label12 As System.Windows.Forms.Label
     Public WithEvents tbH As System.Windows.Forms.TextBox
     Friend WithEvents dckMenu As System.Windows.Forms.ContextMenuStrip
@@ -735,4 +710,14 @@ Partial Class FormOptimization
     Friend WithEvents DocumentToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents ToolStripButton1 As ToolStripButton
+    Friend WithEvents Column8 As DataGridViewTextBoxColumn
+    Friend WithEvents Column1 As DataGridViewTextBoxColumn
+    Friend WithEvents Column2 As DataGridViewComboBoxColumn
+    Friend WithEvents Column3 As DataGridViewComboBoxColumn
+    Friend WithEvents Column4 As DataGridViewComboBoxColumn
+    Friend WithEvents Column6 As DataGridViewTextBoxColumn
+    Friend WithEvents Column7 As DataGridViewTextBoxColumn
+    Friend WithEvents Column10 As DataGridViewTextBoxColumn
+    Friend WithEvents Column5 As DataGridViewTextBoxColumn
+    Friend WithEvents Column9 As DataGridViewTextBoxColumn
 End Class
