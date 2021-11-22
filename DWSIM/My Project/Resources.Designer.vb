@@ -2851,7 +2851,18 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to .
+        '''  Looks up a localized string similar to import System
+        '''from System.Diagnostics import Process
+        '''
+        '''def solve():
+        '''	Flowsheet.RequestCalculation()
+        '''	return &apos;solving flowsheet...&apos;
+        '''
+        '''def save():
+        '''	return Flowsheet.SaveToFile()
+        '''
+        '''def apihelp():
+        '''	Process.Start(&apos;https://dwsim.inforside.com.br/api_help60/html/G_DWSIM.htm&apos;).
         '''</summary>
         Friend ReadOnly Property pythonfunctions() As String
             Get
@@ -3035,6 +3046,16 @@ Namespace My.Resources
         Friend ReadOnly Property rewind() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("rewind", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property s365_logo_login() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("s365_logo_login", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

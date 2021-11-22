@@ -36,6 +36,8 @@ Partial Class FormMain
         Me.NovoEstudoDeRegressaoDeDadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NovoRegressaoUNIFACIPs = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OpenFromS365DashboardBtn = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SaveToSimulate365DashboardToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmiFOSSEE = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmiSamples = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
@@ -99,6 +101,11 @@ Partial Class FormMain
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsbRegCO = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
+        Me.LoginButton = New System.Windows.Forms.ToolStripButton()
+        Me.LogoutDropdown = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.LoggedInDwsimProBtn = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LoggedInS365Button = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LogoutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BgLoadComp = New System.ComponentModel.BackgroundWorker()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
@@ -123,6 +130,7 @@ Partial Class FormMain
         '
         resources.ApplyResources(Me.MenuStrip1, "MenuStrip1")
         Me.MenuStrip1.AllowItemReorder = True
+        Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileTSMI, Me.EditTSMI, Me.ToolsTSMI, Me.WindowsMenu, Me.ViewTSMI, Me.HelpTSMI, Me.DownloadSupplementarySoftwareToolStripMenuItem})
         Me.MenuStrip1.MdiWindowListItem = Me.WindowsMenu
         Me.MenuStrip1.Name = "MenuStrip1"
@@ -131,7 +139,8 @@ Partial Class FormMain
         'FileTSMI
         '
         resources.ApplyResources(Me.FileTSMI, "FileTSMI")
-        Me.FileTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.NovoEstudoDoCriadorDeComponentesToolStripMenuItem, Me.NovoEstudoDeRegressaoDeDadosToolStripMenuItem, Me.NovoRegressaoUNIFACIPs, Me.OpenToolStripMenuItem, Me.tsmiFOSSEE, Me.tsmiSamples, Me.toolStripSeparator, Me.SaveToolStripMenuItem, Me.SaveAllToolStripMenuItem, Me.SaveAsToolStripMenuItem, Me.ToolStripSeparator2, Me.CloseAllToolstripMenuItem, Me.toolStripSeparator1, Me.tsFileSeparator, Me.tsFolderSeparator, Me.ExitToolStripMenuItem})
+
+        Me.FileTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.NovoEstudoDoCriadorDeComponentesToolStripMenuItem, Me.NovoEstudoDeRegressaoDeDadosToolStripMenuItem, Me.NovoRegressaoUNIFACIPs, Me.OpenToolStripMenuItem, Me.OpenFromS365DashboardBtn, Me.SaveToSimulate365DashboardToolStripMenuItem, Me.tsmiFOSSEE, Me.tsmiSamples, Me.toolStripSeparator, Me.SaveToolStripMenuItem, Me.SaveAllToolStripMenuItem, Me.SaveAsToolStripMenuItem, Me.ToolStripSeparator2, Me.CloseAllToolstripMenuItem, Me.toolStripSeparator1, Me.tsFileSeparator, Me.tsFolderSeparator, Me.ExitToolStripMenuItem})
         Me.FileTSMI.Name = "FileTSMI"
         Me.FileTSMI.Overflow = System.Windows.Forms.ToolStripItemOverflow.AsNeeded
         '
@@ -164,6 +173,18 @@ Partial Class FormMain
         resources.ApplyResources(Me.OpenToolStripMenuItem, "OpenToolStripMenuItem")
         Me.OpenToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.icons8_live_folder
         Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
+        '
+        'OpenFromS365DashboardBtn
+        '
+        resources.ApplyResources(Me.OpenFromS365DashboardBtn, "OpenFromS365DashboardBtn")
+        Me.OpenFromS365DashboardBtn.Image = Global.DWSIM.My.Resources.Resources.s365_logo_login
+        Me.OpenFromS365DashboardBtn.Name = "OpenFromS365DashboardBtn"
+        '
+        'SaveToSimulate365DashboardToolStripMenuItem
+        '
+        resources.ApplyResources(Me.SaveToSimulate365DashboardToolStripMenuItem, "SaveToSimulate365DashboardToolStripMenuItem")
+        Me.SaveToSimulate365DashboardToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.s365_logo_login
+        Me.SaveToSimulate365DashboardToolStripMenuItem.Name = "SaveToSimulate365DashboardToolStripMenuItem"
         '
         'tsmiFOSSEE
         '
@@ -428,7 +449,9 @@ Partial Class FormMain
         '
         resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
         Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripButton, Me.OpenToolStripButton, Me.SaveToolStripButton, Me.ToolStripButton1, Me.SaveAllToolStripButton, Me.ToolStripSeparator3, Me.ToolStripButton2, Me.tsbInspector, Me.ToolStripSeparator4, Me.ToolStripButton3, Me.ToolStripButton5, Me.ToolStripButton4, Me.ToolStripSeparator6, Me.ToolStripButton6, Me.ToolStripButton7, Me.ToolStripButton8, Me.ToolStripSeparator7, Me.tsbRegCO, Me.ToolStripSeparator8})
+        Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripButton, Me.OpenToolStripButton, Me.SaveToolStripButton, Me.ToolStripButton1, Me.SaveAllToolStripButton, Me.ToolStripSeparator3, Me.ToolStripButton2, Me.tsbInspector, Me.ToolStripSeparator4, Me.ToolStripButton3, Me.ToolStripButton5, Me.ToolStripButton4, Me.ToolStripSeparator6, Me.ToolStripButton6, Me.ToolStripButton7, Me.ToolStripButton8, Me.ToolStripSeparator7, Me.tsbRegCO, Me.ToolStripSeparator8, Me.LoginButton, Me.LogoutDropdown})
+        resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
         '
@@ -555,6 +578,35 @@ Partial Class FormMain
         '
         resources.ApplyResources(Me.ToolStripSeparator8, "ToolStripSeparator8")
         Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
+        '
+        'LoginButton
+        '
+        Me.LoginButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.LoginButton.Image = Global.DWSIM.My.Resources.Resources.s365_logo_login
+        resources.ApplyResources(Me.LoginButton, "LoginButton")
+        Me.LoginButton.Name = "LoginButton"
+        '
+        'LogoutDropdown
+        '
+        Me.LogoutDropdown.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.LogoutDropdown.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LoggedInDwsimProBtn, Me.LoggedInS365Button, Me.LogoutToolStripMenuItem})
+        resources.ApplyResources(Me.LogoutDropdown, "LogoutDropdown")
+        Me.LogoutDropdown.Name = "LogoutDropdown"
+        '
+        'LoggedInDwsimProBtn
+        '
+        Me.LoggedInDwsimProBtn.Name = "LoggedInDwsimProBtn"
+        resources.ApplyResources(Me.LoggedInDwsimProBtn, "LoggedInDwsimProBtn")
+        '
+        'LoggedInS365Button
+        '
+        Me.LoggedInS365Button.Name = "LoggedInS365Button"
+        resources.ApplyResources(Me.LoggedInS365Button, "LoggedInS365Button")
+        '
+        'LogoutToolStripMenuItem
+        '
+        Me.LogoutToolStripMenuItem.Name = "LogoutToolStripMenuItem"
+        resources.ApplyResources(Me.LogoutToolStripMenuItem, "LogoutToolStripMenuItem")
         '
         'BgLoadComp
         '
@@ -908,5 +960,12 @@ Partial Class FormMain
     Public WithEvents PainelDeBoasvindasToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents PsycrometrySimulationTemplateToolStripMenuItem As ToolStripMenuItem
     Public WithEvents DownloadSupplementarySoftwareToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents LoginButton As ToolStripButton
+    Friend WithEvents LogoutDropdown As ToolStripDropDownButton
+    Friend WithEvents LogoutToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents OpenFromS365DashboardBtn As ToolStripMenuItem
+    Friend WithEvents SaveToSimulate365DashboardToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents LoggedInDwsimProBtn As ToolStripMenuItem
+    Friend WithEvents LoggedInS365Button As ToolStripMenuItem
     Public WithEvents DocumentacaoToolStripMenuItem As ToolStripMenuItem
 End Class

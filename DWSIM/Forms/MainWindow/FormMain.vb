@@ -40,6 +40,9 @@ Imports DWSIM.ExtensionMethods
 Imports DWSIM.Interfaces
 Imports DWSIM.Thermodynamics.AdvancedEOS
 Imports DWSIM.Thermodynamics.Databases
+Imports DWSIM.Simulate365.FormFactories
+Imports DWSIM.Simulate365.Services
+Imports DWSIM.Simulate365.Models
 
 Public Class FormMain
 
@@ -164,86 +167,108 @@ Public Class FormMain
 
     Private Sub LoadExtenders()
 
+        ' On user details loaded
+        AddHandler UserService.GetInstance().UserDetailsLoaded, AddressOf UserService_UserDetailsLoaded
+        AddHandler UserService.GetInstance().UserLoggedOut, AddressOf UserService_UserLoggedOut
+
 #If Not WINE32 Then
 
         'load extenders
 
         Dim extlist As List(Of IExtenderCollection) = GetExtenders(LoadExtenderDLLs())
 
-        For Each extender In extlist
-            Extenders.Add(extender.ID, extender)
-            Try
-                If extender.Level = ExtenderLevel.MainWindow Then
-                    If extender.Category <> ExtenderCategory.InitializationScript Then
-                        Dim newmenuitem As ToolStripMenuItem = Nothing
-                        If extender.Category = ExtenderCategory.NewItem Then
-                            For Each item As ToolStripMenuItem In MenuStrip1.Items
-                                If item.Text = extender.DisplayText Then
-                                    newmenuitem = item
-                                    Exit For
+            For Each extender In extlist
+                Extenders.Add(extender.ID, extender)
+                Try
+                    If extender.Level = ExtenderLevel.MainWindow Then
+                        If extender.Category <> ExtenderCategory.InitializationScript Then
+                            Dim newmenuitem As ToolStripMenuItem = Nothing
+                            If extender.Category = ExtenderCategory.NewItem Then
+                                For Each item As ToolStripMenuItem In MenuStrip1.Items
+                                    If item.Text = extender.DisplayText Then
+                                        newmenuitem = item
+                                        Exit For
+                                    End If
+                                Next
+                                If newmenuitem Is Nothing Then
+                                    newmenuitem = New ToolStripMenuItem()
+                                    newmenuitem.Text = extender.DisplayText
+                                    newmenuitem.DisplayStyle = ToolStripItemDisplayStyle.Text
                                 End If
-                            Next
-                            If newmenuitem Is Nothing Then
-                                newmenuitem = New ToolStripMenuItem()
-                                newmenuitem.Text = extender.DisplayText
-                                newmenuitem.DisplayStyle = ToolStripItemDisplayStyle.Text
                             End If
+                            For Each item In extender.Collection
+                                Dim exttsmi As New ToolStripMenuItem
+                                exttsmi.Text = item.DisplayText
+                                exttsmi.Image = item.DisplayImage
+                                AddHandler exttsmi.Click, Sub(s2, e2)
+                                                              item.SetMainWindow(Me)
+                                                              item.Run()
+                                                          End Sub
+                                Select Case extender.Category
+                                    Case ExtenderCategory.File
+                                        If item.InsertAtPosition >= 0 Then
+                                            FileTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
+                                        Else
+                                            FileTSMI.DropDownItems.Add(exttsmi)
+                                        End If
+                                    Case ExtenderCategory.Edit
+                                        If item.InsertAtPosition >= 0 Then
+                                            EditTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
+                                        Else
+                                            EditTSMI.DropDownItems.Add(exttsmi)
+                                        End If
+                                    Case ExtenderCategory.Tools
+                                        If item.InsertAtPosition >= 0 Then
+                                            ToolsTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
+                                        Else
+                                            ToolsTSMI.DropDownItems.Add(exttsmi)
+                                        End If
+                                    Case ExtenderCategory.Help
+                                        If item.InsertAtPosition >= 0 Then
+                                            HelpTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
+                                        Else
+                                            HelpTSMI.DropDownItems.Add(exttsmi)
+                                        End If
+                                    Case ExtenderCategory.NewItem
+                                        newmenuitem?.DropDownItems.Add(exttsmi)
+                                End Select
+                            Next
+                            If newmenuitem IsNot Nothing AndAlso Not MenuStrip1.Items.Contains(newmenuitem) Then
+                                MenuStrip1.Items.Add(newmenuitem)
+                            End If
+                        Else
+                            For Each item In extender.Collection
+                                item.SetMainWindow(Me)
+                                item.Run()
+                            Next
                         End If
-                        For Each item In extender.Collection
-                            Dim exttsmi As New ToolStripMenuItem
-                            exttsmi.Text = item.DisplayText
-                            exttsmi.Image = item.DisplayImage
-                            AddHandler exttsmi.Click, Sub(s2, e2)
-                                                          item.SetMainWindow(Me)
-                                                          item.Run()
-                                                      End Sub
-                            Select Case extender.Category
-                                Case ExtenderCategory.File
-                                    If item.InsertAtPosition >= 0 Then
-                                        FileTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
-                                    Else
-                                        FileTSMI.DropDownItems.Add(exttsmi)
-                                    End If
-                                Case ExtenderCategory.Edit
-                                    If item.InsertAtPosition >= 0 Then
-                                        EditTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
-                                    Else
-                                        EditTSMI.DropDownItems.Add(exttsmi)
-                                    End If
-                                Case ExtenderCategory.Tools
-                                    If item.InsertAtPosition >= 0 Then
-                                        ToolsTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
-                                    Else
-                                        ToolsTSMI.DropDownItems.Add(exttsmi)
-                                    End If
-                                Case ExtenderCategory.Help
-                                    If item.InsertAtPosition >= 0 Then
-                                        HelpTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
-                                    Else
-                                        HelpTSMI.DropDownItems.Add(exttsmi)
-                                    End If
-                                Case ExtenderCategory.NewItem
-                                    newmenuitem?.DropDownItems.Add(exttsmi)
-                            End Select
-                        Next
-                        If newmenuitem IsNot Nothing AndAlso Not MenuStrip1.Items.Contains(newmenuitem) Then
-                            MenuStrip1.Items.Add(newmenuitem)
-                        End If
-                    Else
-                        For Each item In extender.Collection
-                            item.SetMainWindow(Me)
-                            item.Run()
-                        Next
                     End If
-                End If
-            Catch ex As Exception
-                Logging.Logger.LogError("Extender Initialization", ex)
-            End Try
-        Next
+                Catch ex As Exception
+                    Logging.Logger.LogError("Extender Initialization", ex)
+                End Try
+            Next
 
 #End If
 
     End Sub
+
+    Private Sub UserService_UserDetailsLoaded(sender As Object, user As UserDetailsModel)
+        Me.LoginButton.Visible = False
+        Me.LogoutDropdown.Text = user.DisplayName
+        Me.LogoutDropdown.Visible = True
+        Me.OpenFromS365DashboardBtn.Enabled = True
+    End Sub
+
+    Private Sub UserService_UserLoggedOut(sender As Object, e As EventArgs)
+        Me.LogoutDropdown.Text = ""
+        Me.LogoutDropdown.Visible = False
+        Me.LoginButton.Visible = True
+        Me.OpenFromS365DashboardBtn.Enabled = False
+        Me.SaveToSimulate365DashboardToolStripMenuItem.Enabled = False
+    End Sub
+
+
+
 
     Private Sub FormMain_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles Me.DragDrop
         If e.Data.GetDataPresent(DataFormats.FileDrop) Then
@@ -849,6 +874,7 @@ Public Class FormMain
             Me.SaveToolStripButton.Enabled = True
             Me.SaveToolStripMenuItem.Enabled = True
             Me.SaveAllToolStripMenuItem.Enabled = True
+            Me.SaveToSimulate365DashboardToolStripMenuItem.Enabled = True
             Me.SaveAsToolStripMenuItem.Enabled = True
             Me.ToolStripButton1.Enabled = True
             Me.CloseAllToolstripMenuItem.Enabled = True
@@ -1722,7 +1748,7 @@ Public Class FormMain
 
     End Sub
 
-    Public Function LoadXML(ByVal path As String, ProgressFeedBack As Action(Of Integer), Optional ByVal simulationfilename As String = "", Optional ByVal forcommandline As Boolean = False) As Interfaces.IFlowsheet
+    Public Function LoadXML(ByVal path As String, ProgressFeedBack As Action(Of Integer), Optional ByVal simulationfilename As String = "", Optional ByVal forcommandline As Boolean = False, Optional ByVal s365FlowsheetsDriveId As String = Nothing, Optional ByVal s365DriveItemId As String = Nothing) As Interfaces.IFlowsheet
 
         My.Application.PushUndoRedoAction = False
 
@@ -1781,6 +1807,9 @@ Public Class FormMain
         If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(5)
 
         Dim form As FormFlowsheet = New FormFlowsheet()
+
+        form.S365FlowsheetsDriveId = s365FlowsheetsDriveId
+        form.S365DriveItemId = s365DriveItemId
 
         Settings.CAPEOPENMode = False
 
@@ -3243,7 +3272,7 @@ Public Class FormMain
         End Using
     End Function
 
-    Function LoadAndExtractXMLZIP(ByVal caminho As String, ProgressFeedBack As Action(Of Integer), Optional ByVal forcommandline As Boolean = False) As Interfaces.IFlowsheet
+    Function LoadAndExtractXMLZIP(ByVal caminho As String, ProgressFeedBack As Action(Of Integer), Optional ByVal forcommandline As Boolean = False, Optional ByVal s365FlowsheetsDriveId As String = Nothing, Optional ByVal s365DriveItemId As String = Nothing) As Interfaces.IFlowsheet
 
         Dim pathtosave As String = My.Computer.FileSystem.SpecialDirectories.Temp + Path.DirectorySeparatorChar
         Dim fullname As String = ""
@@ -3289,7 +3318,7 @@ Label_00CC:
                 Loop
             End Using
             Dim fs As Interfaces.IFlowsheet
-            fs = LoadXML(fullname, ProgressFeedBack, caminho, forcommandline)
+            fs = LoadXML(fullname, ProgressFeedBack, caminho, forcommandline, s365FlowsheetsDriveId, s365DriveItemId)
             fs.FilePath = caminho
             fs.Options.FilePath = caminho
             If File.Exists(dbfile) Then
@@ -3372,7 +3401,7 @@ Label_00CC:
 
     End Sub
 
-    Sub LoadFile(fpath As String)
+    Sub LoadFile(fpath As String, Optional ByVal s365FlowsheetsDriveId As String = Nothing, Optional ByVal s365DriveItemId As String = Nothing)
 
         Me.WelcomePanel.Visible = False
         PainelDeBoasvindasToolStripMenuItem.Checked = False
@@ -3401,7 +3430,7 @@ Label_00CC:
                                                               floading.Label2.Text = x.ToString("N0") + "%"
                                                               floading.Refresh()
                                                           End Sub)
-                                            End Sub)
+                                            End Sub, "", False, s365FlowsheetsDriveId, s365DriveItemId)
                 End If
             Case ".dwxmz"
                 Dim myStream As System.IO.FileStream
@@ -3415,7 +3444,7 @@ Label_00CC:
                     Application.DoEvents()
                     Me.LoadAndExtractXMLZIP(Me.filename, Sub(x)
                                                              Me.Invoke(Sub() floading.ProgressBar1.Value = x)
-                                                         End Sub)
+                                                         End Sub, False, s365FlowsheetsDriveId, s365DriveItemId)
                 End If
             Case ".xml"
                 Dim myStream As System.IO.FileStream
@@ -3550,6 +3579,7 @@ Label_00CC:
                                                                                                        'Me.ToolStripStatusLabel1.Text = ""
                                                                                                        If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
                                                                                                    End Sub, TaskContinuationOptions.ExecuteSynchronously)
+
                     ElseIf Path.GetExtension(Me.filename).ToLower = ".xml" Then
                         TaskHelper.Run(Sub() SaveMobileXML(Me.filename, Me.ActiveMdiChild)).ContinueWith(Sub(t)
                                                                                                              'Me.ToolStripStatusLabel1.Text = ""
@@ -3560,6 +3590,7 @@ Label_00CC:
                                                                                                           ' Me.ToolStripStatusLabel1.Text = ""
                                                                                                           If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
                                                                                                       End Sub, TaskContinuationOptions.ExecuteSynchronously)
+
                     Else
                         Me.bgSaveFile.RunWorkerAsync()
                     End If
@@ -4288,6 +4319,44 @@ Label_00CC:
 
     Private Sub PsycrometrySimulationTemplateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PsycrometrySimulationTemplateToolStripMenuItem.Click
         Process.Start("https://github.com/Spogis/Psychrometry")
+    End Sub
+
+    Private Sub LoginToolStripButton_Click(sender As Object, e As EventArgs) Handles LoginButton.Click
+        Dim loginForm As LoginForm = New LoginForm
+        loginForm.ShowDialog()
+    End Sub
+
+    Private Sub LogoutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogoutToolStripMenuItem.Click
+        UserService.Logout()
+    End Sub
+
+    Private Sub OpenFromS365DashboardBtn_Click(sender As Object, e As EventArgs) Handles OpenFromS365DashboardBtn.Click
+        Dim filePickerForm As S365FilePickerForm = New S365FilePickerForm
+
+        Dim file = filePickerForm.ShowOpenDialog()
+        If file IsNot Nothing Then
+            LoadFile(file.FilePath, file.FlowsheetsDriveId, file.DriveItemId)
+        End If
+
+    End Sub
+
+    Private Sub SaveToSimulate365DashboardToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToSimulate365DashboardToolStripMenuItem.Click
+        Dim filePickerForm As S365FilePickerForm = New S365FilePickerForm
+        Dim file = filePickerForm.ShowSaveDialog(Nothing)
+        If file IsNot Nothing Then
+            SaveFile(False)
+            FileUploaderService.UploadFile(file.FlowsheetsDriveId, file.ParentDriveId, Me.filename, file.Filename)
+            MessageBox.Show("File saved to Simulate 365 Dashboard.")
+
+        End If
+    End Sub
+
+    Private Sub LoggedInDwsimProBtn_Click(sender As Object, e As EventArgs) Handles LoggedInDwsimProBtn.Click
+        Process.Start("https://simulate365.com/downloads/dwsim-pro/")
+    End Sub
+
+    Private Sub LoggedInS365Button_Click(sender As Object, e As EventArgs) Handles LoggedInS365Button.Click
+        Process.Start("https://simulate365.com/shops/simulate-365-suite/")
     End Sub
 
     Private Sub tsbInspector_CheckedChanged(sender As Object, e As EventArgs) Handles tsbInspector.CheckedChanged

@@ -1,0 +1,8 @@
+html, body , #root, .App{
+    height: 100% !important;
+    overflow: hidden;
+}
+
+.text-danger{
+    color: #dc3545 !important;
+}
