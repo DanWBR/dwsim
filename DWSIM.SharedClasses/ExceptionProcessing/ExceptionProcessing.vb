@@ -81,10 +81,12 @@ Namespace ExceptionProcessing
 
             If iex.StackTrace IsNot Nothing Then
 
-                Dim st As New StackTrace(iex, True)
-
-                pex.CodeLocation = st.GetFrame(0).GetMethod.Name + " (file '" + st.GetFrame(0).GetFileName + "', line " + st.GetFrame(0).GetFileLineNumber.ToString + ")"
-                pex.CallingMethod = st.GetFrame(1).GetMethod.Name + " (file '" + st.GetFrame(1).GetFileName + "', line " + st.GetFrame(1).GetFileLineNumber.ToString + ")"
+                Try
+                    Dim st As New StackTrace(iex, True)
+                    pex.CodeLocation = st.GetFrame(0).GetMethod.Name + " (file '" + st.GetFrame(0).GetFileName + "', line " + st.GetFrame(0).GetFileLineNumber.ToString + ")"
+                    pex.CallingMethod = st.GetFrame(1).GetMethod.Name + " (file '" + st.GetFrame(1).GetFileName + "', line " + st.GetFrame(1).GetFileLineNumber.ToString + ")"
+                Catch
+                End Try
 
             End If
 
