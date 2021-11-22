@@ -42,19 +42,41 @@ Namespace MathEx
             Dim root2 = roots0.Item2
             Dim root3 = roots0.Item3
 
-            Dim roots(2, 1) As Double
+            Dim roots(2, 1), real1, im1 As Double
 
             roots(0, 0) = root1.Real
             If Math.Abs(root1.Imaginary) > 0.0000000001 Then
                 roots(0, 1) = root1.Imaginary
+            Else
+                real1 = root1.Real
+                im1 = root1.Imaginary
             End If
             roots(1, 0) = root2.Real
             If Math.Abs(root2.Imaginary) > 0.0000000001 Then
                 roots(1, 1) = root2.Imaginary
+            Else
+                real1 = root2.Real
+                im1 = root2.Imaginary
             End If
             roots(2, 0) = root3.Real
             If Math.Abs(root3.Imaginary) > 0.0000000001 Then
                 roots(2, 1) = root3.Imaginary
+            Else
+                real1 = root3.Real
+                im1 = root3.Imaginary
+            End If
+
+            If roots(0, 0) < 0.0000000001 Then
+                roots(0, 0) = real1
+                roots(0, 1) = im1
+            End If
+            If roots(1, 0) < 0.0000000001 Then
+                roots(1, 0) = real1
+                roots(1, 1) = im1
+            End If
+            If roots(2, 0) < 0.0000000001 Then
+                roots(2, 0) = real1
+                roots(2, 1) = im1
             End If
 
             Return roots
