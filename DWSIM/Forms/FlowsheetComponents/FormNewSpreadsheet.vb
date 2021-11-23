@@ -57,6 +57,8 @@ Public Class FormNewSpreadsheet
 
 #Else
 
+        Worksheet.DefaultRows = 65536
+
         SpreadsheetControl = New unvell.ReoGrid.Editor.ReoGridEditor()
 
         AddHandler SpreadsheetControl.ImportarDadosToolStripMenuItem.Click, Sub(s2, e2)
@@ -367,10 +369,10 @@ Public Class FormNewSpreadsheet
 
         Dim c As Cell
 
-        For i = 0 To Spreadsheet.Worksheets(0).RowCount - 1
+        For i = 0 To Spreadsheet.Worksheets(0).MaxContentRow - 1
             dt1.Add(New List(Of Object))
             dt2.Add(New List(Of Object))
-            For j = 0 To Spreadsheet.Worksheets(0).ColumnCount - 1
+            For j = 0 To Spreadsheet.Worksheets(0).MaxContentCol - 1
                 c = Spreadsheet.Worksheets(0).Cells(i, j)
                 Try
                     dt1(i).Add(c.Data)

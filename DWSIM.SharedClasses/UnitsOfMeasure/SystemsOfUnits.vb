@@ -1596,25 +1596,25 @@ Namespace SystemsOfUnits
                 Case "kgf/cm2_g"
                     Return (value + 1.033) * 101325 / 1.033
                 Case "kg/h"
-                    Return value / 3600
+                    Return value / 3600.0
                 Case "kg/d"
-                    Return value / 3600 / 24
+                    Return value / 3600.0 / 24.0
                 Case "m3/h"
-                    Return value / 3600
+                    Return value / 3600.0
                 Case "m3/d"
-                    Return value / 3600 / 24
+                    Return value / 3600.0 / 24.0
                 Case "m3/d @ br", "m3/d @ 20 c, 1 atm"
-                    Return value / (24.055 * 3600 * 24 / 1000)
+                    Return value / (24.055 * 3600 * 24 / 1000.0)
                 Case "m3/d @ cntp"
-                    Return value / (22.71 * 3600 * 24 / 1000)
+                    Return value / (22.71 * 3600 * 24 / 1000.0)
                 Case "m3/d @ nc", "m3/d @ 0 c, 1 atm"
-                    Return value / (22.71 * 3600 * 24 / 1000)
+                    Return value / (22.71 * 3600 * 24 / 1000.0)
                 Case "m3/d @ sc", "m3/d @ 15.56 c, 1 atm"
-                    Return value / (23.69 * 3600 * 24 / 1000)
+                    Return value / (23.69 * 3600.0 * 24.0 / 1000.0)
                 Case "ft3/d @ 60 f, 14.7 psia"
-                    Return value / (23.69 * 3600 * 24 / 1000) / 35.3147
+                    Return value / (23.69 * 3600.0 * 24.0 / 1000.0) / 35.3147
                 Case "ft3/d @ 0 c, 1 atm"
-                    Return value / (22.71 * 3600 * 24 / 1000) / 35.3147
+                    Return value / (22.71 * 3600.0 * 24.0 / 1000.0) / 35.3147
                 Case "°f"
                     Return (value - 32) * 5 / 9 + 273.15
                 Case "°f."
@@ -1624,11 +1624,11 @@ Namespace SystemsOfUnits
                 Case "f."
                     Return value / 1.8
                 Case "cm"
-                    Return value / 100
+                    Return value / 100.0
                 Case "cal/[mol.°c]"
-                    Return value * 238.846 / 1000
+                    Return value * 238.846 / 1000.0
                 Case "cal/[mol.c]"
-                    Return value * 238.846 / 1000
+                    Return value * 238.846 / 1000.0
                 Case "btu/[lbmol.r]"
                     Return value * 1.8 * 0.947817
 
@@ -2084,11 +2084,11 @@ Namespace SystemsOfUnits
                 Case "kgf/cm2_g"
                     Return value * 1.033 / 101325 - 1.033
                 Case "kg/h"
-                    Return value * 3600
+                    Return value * 3600.0
                 Case "kg/d"
-                    Return value * 3600 * 24
+                    Return value * 3600.0 * 24.0
                 Case "m3/h"
-                    Return value * 3600
+                    Return value * 3600.0
                 Case "m3/d"
                     Return value * 3600 * 24
                 Case "m3/d @ br", "m3/d @ 20 c, 1 atm"

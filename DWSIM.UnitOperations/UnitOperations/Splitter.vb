@@ -189,9 +189,7 @@ Namespace UnitOperations
             IObj?.Paragraphs.Add("The splitter is a mass balance unit operation - divides a 
                                     material stream into two or three other streams with different overall flow rates but with the same composition.")
 
-            If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
-                Throw New Exception(FlowSheet.GetTranslatedString("Nohcorrentedematriac8"))
-            ElseIf Not Me.GraphicObject.InputConnectors(0).IsAttached Then
+            If Not Me.GraphicObject.InputConnectors(0).IsAttached Then
                 Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
             End If
 
@@ -199,6 +197,12 @@ Namespace UnitOperations
             For Each cp In GraphicObject.OutputConnectors
                 If cp.IsAttached Then OutCount += 1
             Next
+
+            If OutCount > 0 And GetOutletMaterialStream(0) Is Nothing Or
+            (OutCount > 1 And GetOutletMaterialStream(0) Is Nothing) Or
+            (OutCount > 1 And GetOutletMaterialStream(1) Is Nothing) Then
+                Throw New Exception("Outlet streams must be connected sequentially (first one to the first port, second one to the second port and so on)")
+            End If
 
             Dim ems As Thermodynamics.Streams.MaterialStream = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
             ems.Validate()
