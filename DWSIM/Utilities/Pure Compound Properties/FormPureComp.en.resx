@@ -154,7 +154,7 @@
     <value>Export to JSON File</value>
   </data>
   <data name="BtnRestaurar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>194, 437</value>
+    <value>211, 437</value>
   </data>
   <data name="BtnRestaurar.Text" xml:space="preserve">
     <value>Restore Defaults</value>
@@ -184,10 +184,10 @@
     <value>Unit</value>
   </data>
   <data name="GridProps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>837, 367</value>
+    <value>837, 362</value>
   </data>
   <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>837, 367</value>
+    <value>837, 362</value>
   </data>
   <data name="FaTabStripItem1.Title" xml:space="preserve">
     <value>Constants</value>
@@ -264,26 +264,44 @@
   <data name="FaTabStripItem6.Title" xml:space="preserve">
     <value>Molecular</value>
   </data>
+  <data name="GraphLiqCp.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>48, 22, 48, 22</value>
+  </data>
   <data name="GraphLiqCp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>828, 343</value>
+    <value>828, 338</value>
   </data>
   <data name="FaTabStripItemCPLIQ.Size" type="System.Drawing.Size, System.Drawing">
-    <value>828, 343</value>
+    <value>828, 338</value>
   </data>
   <data name="FaTabStripItemCPLIQ.Title" xml:space="preserve">
     <value>Heat Capacity</value>
   </data>
+  <data name="GraphDHVAP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>48, 22, 48, 22</value>
+  </data>
   <data name="FaTabStripItemHVAP.Title" xml:space="preserve">
     <value>Vaporization Enthalpy</value>
+  </data>
+  <data name="GraphPvap.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>48, 22, 48, 22</value>
   </data>
   <data name="FaTabStripItemPVAP.Title" xml:space="preserve">
     <value>Vapor Pressure</value>
   </data>
+  <data name="GraphSurfT.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>48, 22, 48, 22</value>
+  </data>
   <data name="FaTabStripItemSURFT.Title" xml:space="preserve">
     <value>Surface Tension</value>
   </data>
+  <data name="GraphVisc.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>48, 22, 48, 22</value>
+  </data>
   <data name="FaTabStripItemLIQVISC.Title" xml:space="preserve">
     <value>Viscosity</value>
+  </data>
+  <data name="GraphLiqDens.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>48, 22, 48, 22</value>
   </data>
   <data name="GraphLiqDens.Size" type="System.Drawing.Size, System.Drawing">
     <value>831, 367</value>
@@ -293,6 +311,9 @@
   </data>
   <data name="FaTabStripItemLIQDENS.Title" xml:space="preserve">
     <value>Density</value>
+  </data>
+  <data name="GraphLiqThermCond.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>48, 22, 48, 22</value>
   </data>
   <data name="FaTabStripItemLIQTCOND.Title" xml:space="preserve">
     <value>Thermal Conductivity</value>
@@ -309,17 +330,26 @@
   <data name="FaTabStripItem16.Title" xml:space="preserve">
     <value>Liquid Phase</value>
   </data>
+  <data name="GraphCp.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>48, 22, 48, 22</value>
+  </data>
   <data name="GraphCp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>831, 367</value>
+    <value>831, 362</value>
   </data>
   <data name="FaTabStripItemCPIG.Size" type="System.Drawing.Size, System.Drawing">
-    <value>831, 367</value>
+    <value>831, 362</value>
   </data>
   <data name="FaTabStripItemCPIG.Title" xml:space="preserve">
     <value>Ideal Gas Heat Capacity</value>
   </data>
+  <data name="GraphVapVisc.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>48, 22, 48, 22</value>
+  </data>
   <data name="FaTabStripItemVAPVISC.Title" xml:space="preserve">
     <value>Viscosity</value>
+  </data>
+  <data name="GraphVapThermCond.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>48, 22, 48, 22</value>
   </data>
   <data name="FaTabStripItemVAPTCOND.Title" xml:space="preserve">
     <value>Thermal Conductivity</value>
@@ -336,14 +366,20 @@
   <data name="FaTabStripItem17.Title" xml:space="preserve">
     <value>Vapor Phase</value>
   </data>
+  <data name="GraphCpSolid.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>48, 22, 48, 22</value>
+  </data>
   <data name="GraphCpSolid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>831, 367</value>
+    <value>831, 362</value>
   </data>
   <data name="FaTabStripItemCPSOLID.Size" type="System.Drawing.Size, System.Drawing">
-    <value>831, 367</value>
+    <value>831, 362</value>
   </data>
   <data name="FaTabStripItemCPSOLID.Title" xml:space="preserve">
     <value>Heat Capacity</value>
+  </data>
+  <data name="GraphSolidDens.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>48, 22, 48, 22</value>
   </data>
   <data name="FaTabStripItemSOLIDDENS.Title" xml:space="preserve">
     <value>Density</value>
@@ -395,9 +431,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>846, 470</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Inherit</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Pure Compound Properties</value>

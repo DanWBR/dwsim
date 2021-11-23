@@ -37,139 +37,139 @@ Namespace SystemsOfUnits
             Return XMLSerializer.XMLSerializer.Serialize(Me)
         End Function
 
-        Public Property accel As String Implements Interfaces.IUnitsOfMeasure.accel
+        Public Property accel As String = "" Implements Interfaces.IUnitsOfMeasure.accel
 
-        Public Property activity As String Implements Interfaces.IUnitsOfMeasure.activity
+        Public Property activity As String = "" Implements Interfaces.IUnitsOfMeasure.activity
 
-        Public Property activityCoefficient As String Implements Interfaces.IUnitsOfMeasure.activityCoefficient
+        Public Property activityCoefficient As String = "" Implements Interfaces.IUnitsOfMeasure.activityCoefficient
 
-        Public Property area As String Implements Interfaces.IUnitsOfMeasure.area
+        Public Property area As String = "" Implements Interfaces.IUnitsOfMeasure.area
 
-        Public Property cakeresistance As String Implements Interfaces.IUnitsOfMeasure.cakeresistance
+        Public Property cakeresistance As String = "" Implements Interfaces.IUnitsOfMeasure.cakeresistance
 
-        Public Property cinematic_viscosity As String Implements Interfaces.IUnitsOfMeasure.cinematic_viscosity
+        Public Property cinematic_viscosity As String = "" Implements Interfaces.IUnitsOfMeasure.cinematic_viscosity
 
-        Public Property compressibility As String Implements Interfaces.IUnitsOfMeasure.compressibility
+        Public Property compressibility As String = "" Implements Interfaces.IUnitsOfMeasure.compressibility
 
-        Public Property compressibilityfactor As String Implements Interfaces.IUnitsOfMeasure.compressibilityFactor
+        Public Property compressibilityfactor As String = "" Implements Interfaces.IUnitsOfMeasure.compressibilityFactor
 
-        Public Property deltaP As String Implements Interfaces.IUnitsOfMeasure.deltaP
+        Public Property deltaP As String = "" Implements Interfaces.IUnitsOfMeasure.deltaP
 
-        Public Property deltaT As String Implements Interfaces.IUnitsOfMeasure.deltaT
+        Public Property deltaT As String = "" Implements Interfaces.IUnitsOfMeasure.deltaT
 
-        Public Property density As String Implements Interfaces.IUnitsOfMeasure.density
+        Public Property density As String = "" Implements Interfaces.IUnitsOfMeasure.density
 
-        Public Property diameter As String Implements Interfaces.IUnitsOfMeasure.diameter
+        Public Property diameter As String = "" Implements Interfaces.IUnitsOfMeasure.diameter
 
-        Public Property distance As String Implements Interfaces.IUnitsOfMeasure.distance
+        Public Property distance As String = "" Implements Interfaces.IUnitsOfMeasure.distance
 
-        Public Property enthalpy As String Implements Interfaces.IUnitsOfMeasure.enthalpy
+        Public Property enthalpy As String = "" Implements Interfaces.IUnitsOfMeasure.enthalpy
 
-        Public Property entropy As String Implements Interfaces.IUnitsOfMeasure.entropy
+        Public Property entropy As String = "" Implements Interfaces.IUnitsOfMeasure.entropy
 
-        Public Property excessEnthalpy As String Implements Interfaces.IUnitsOfMeasure.excessEnthalpy
+        Public Property excessEnthalpy As String = "" Implements Interfaces.IUnitsOfMeasure.excessEnthalpy
 
-        Public Property excessEntropy As String Implements Interfaces.IUnitsOfMeasure.excessEntropy
+        Public Property excessEntropy As String = "" Implements Interfaces.IUnitsOfMeasure.excessEntropy
 
-        Public Property force As String Implements Interfaces.IUnitsOfMeasure.force
+        Public Property force As String = "" Implements Interfaces.IUnitsOfMeasure.force
 
-        Public Property foulingfactor As String Implements Interfaces.IUnitsOfMeasure.foulingfactor
+        Public Property foulingfactor As String = "" Implements Interfaces.IUnitsOfMeasure.foulingfactor
 
-        Public Property fugacity As String Implements Interfaces.IUnitsOfMeasure.fugacity
+        Public Property fugacity As String = "" Implements Interfaces.IUnitsOfMeasure.fugacity
 
-        Public Property fugacityCoefficient As String Implements Interfaces.IUnitsOfMeasure.fugacityCoefficient
+        Public Property fugacityCoefficient As String = "" Implements Interfaces.IUnitsOfMeasure.fugacityCoefficient
 
-        Public Property gor As String Implements Interfaces.IUnitsOfMeasure.gor
+        Public Property gor As String = "" Implements Interfaces.IUnitsOfMeasure.gor
 
-        Public Property head As String Implements Interfaces.IUnitsOfMeasure.head
+        Public Property head As String = "" Implements Interfaces.IUnitsOfMeasure.head
 
-        Public Property heat_transf_coeff As String Implements Interfaces.IUnitsOfMeasure.heat_transf_coeff
+        Public Property heat_transf_coeff As String = "" Implements Interfaces.IUnitsOfMeasure.heat_transf_coeff
 
-        Public Property heatCapacityCp As String Implements Interfaces.IUnitsOfMeasure.heatCapacityCp
+        Public Property heatCapacityCp As String = "" Implements Interfaces.IUnitsOfMeasure.heatCapacityCp
 
-        Public Property heatCapacityCv As String Implements Interfaces.IUnitsOfMeasure.heatCapacityCv
+        Public Property heatCapacityCv As String = "" Implements Interfaces.IUnitsOfMeasure.heatCapacityCv
 
-        Public Property heatflow As String Implements Interfaces.IUnitsOfMeasure.heatflow
+        Public Property heatflow As String = "" Implements Interfaces.IUnitsOfMeasure.heatflow
 
-        Public Property idealGasHeatCapacity As String Implements Interfaces.IUnitsOfMeasure.idealGasHeatCapacity
+        Public Property idealGasHeatCapacity As String = "" Implements Interfaces.IUnitsOfMeasure.idealGasHeatCapacity
 
-        Public Property jouleThomsonCoefficient As String Implements Interfaces.IUnitsOfMeasure.jouleThomsonCoefficient
+        Public Property jouleThomsonCoefficient As String = "" Implements Interfaces.IUnitsOfMeasure.jouleThomsonCoefficient
 
-        Public Property kvalue As String Implements Interfaces.IUnitsOfMeasure.kvalue
+        Public Property kvalue As String = "" Implements Interfaces.IUnitsOfMeasure.kvalue
 
-        Public Property logfugacityCoefficient As String Implements Interfaces.IUnitsOfMeasure.logFugacityCoefficient
+        Public Property logfugacityCoefficient As String = "" Implements Interfaces.IUnitsOfMeasure.logFugacityCoefficient
 
-        Public Property logKvalue As String Implements Interfaces.IUnitsOfMeasure.logKvalue
+        Public Property logKvalue As String = "" Implements Interfaces.IUnitsOfMeasure.logKvalue
 
-        Public Property mass As String Implements Interfaces.IUnitsOfMeasure.mass
+        Public Property mass As String = "" Implements Interfaces.IUnitsOfMeasure.mass
 
-        Public Property mass_conc As String Implements Interfaces.IUnitsOfMeasure.mass_conc
+        Public Property mass_conc As String = "" Implements Interfaces.IUnitsOfMeasure.mass_conc
 
-        Public Property massflow As String Implements Interfaces.IUnitsOfMeasure.massflow
+        Public Property massflow As String = "" Implements Interfaces.IUnitsOfMeasure.massflow
 
-        Public Property massfraction As String Implements Interfaces.IUnitsOfMeasure.massfraction
+        Public Property massfraction As String = "" Implements Interfaces.IUnitsOfMeasure.massfraction
 
-        Public Property mediumresistance As String Implements Interfaces.IUnitsOfMeasure.mediumresistance
+        Public Property mediumresistance As String = "" Implements Interfaces.IUnitsOfMeasure.mediumresistance
 
-        Public Property molar_conc As String Implements Interfaces.IUnitsOfMeasure.molar_conc
+        Public Property molar_conc As String = "" Implements Interfaces.IUnitsOfMeasure.molar_conc
 
-        Public Property molar_enthalpy As String Implements Interfaces.IUnitsOfMeasure.molar_enthalpy
+        Public Property molar_enthalpy As String = "" Implements Interfaces.IUnitsOfMeasure.molar_enthalpy
 
-        Public Property molar_entropy As String Implements Interfaces.IUnitsOfMeasure.molar_entropy
+        Public Property molar_entropy As String = "" Implements Interfaces.IUnitsOfMeasure.molar_entropy
 
-        Public Property molar_volume As String Implements Interfaces.IUnitsOfMeasure.molar_volume
+        Public Property molar_volume As String = "" Implements Interfaces.IUnitsOfMeasure.molar_volume
 
-        Public Property molarflow As String Implements Interfaces.IUnitsOfMeasure.molarflow
+        Public Property molarflow As String = "" Implements Interfaces.IUnitsOfMeasure.molarflow
 
-        Public Property molarfraction As String Implements Interfaces.IUnitsOfMeasure.molarfraction
+        Public Property molarfraction As String = "" Implements Interfaces.IUnitsOfMeasure.molarfraction
 
-        Public Property molecularWeight As String Implements Interfaces.IUnitsOfMeasure.molecularWeight
+        Public Property molecularWeight As String = "" Implements Interfaces.IUnitsOfMeasure.molecularWeight
 
         Public Property Name As String = "" Implements Interfaces.IUnitsOfMeasure.Name
 
-        Public Property pdp_boilingPointTemperature As String Implements Interfaces.IUnitsOfMeasure.pdp_boilingPointTemperature
+        Public Property pdp_boilingPointTemperature As String = "" Implements Interfaces.IUnitsOfMeasure.pdp_boilingPointTemperature
 
-        Public Property pdp_meltingTemperature As String Implements Interfaces.IUnitsOfMeasure.pdp_meltingTemperature
+        Public Property pdp_meltingTemperature As String = "" Implements Interfaces.IUnitsOfMeasure.pdp_meltingTemperature
 
-        Public Property pressure As String Implements Interfaces.IUnitsOfMeasure.pressure
+        Public Property pressure As String = "" Implements Interfaces.IUnitsOfMeasure.pressure
 
-        Public Property reac_rate As String Implements Interfaces.IUnitsOfMeasure.reac_rate
+        Public Property reac_rate As String = "" Implements Interfaces.IUnitsOfMeasure.reac_rate
 
-        Public Property reac_rate_heterog As String Implements Interfaces.IUnitsOfMeasure.reac_rate_heterog
+        Public Property reac_rate_heterog As String = "" Implements Interfaces.IUnitsOfMeasure.reac_rate_heterog
 
-        Public Property spec_vol As String Implements Interfaces.IUnitsOfMeasure.spec_vol
+        Public Property spec_vol As String = "" Implements Interfaces.IUnitsOfMeasure.spec_vol
 
-        Public Property speedOfSound As String Implements Interfaces.IUnitsOfMeasure.speedOfSound
+        Public Property speedOfSound As String = "" Implements Interfaces.IUnitsOfMeasure.speedOfSound
 
-        Public Property surfaceTension As String Implements Interfaces.IUnitsOfMeasure.surfaceTension
+        Public Property surfaceTension As String = "" Implements Interfaces.IUnitsOfMeasure.surfaceTension
 
-        Public Property temperature As String Implements Interfaces.IUnitsOfMeasure.temperature
+        Public Property temperature As String = "" Implements Interfaces.IUnitsOfMeasure.temperature
 
-        Public Property thermalConductivity As String Implements Interfaces.IUnitsOfMeasure.thermalConductivity
+        Public Property thermalConductivity As String = "" Implements Interfaces.IUnitsOfMeasure.thermalConductivity
 
-        Public Property thermalConductivityOfLiquid As String Implements Interfaces.IUnitsOfMeasure.thermalConductivityOfLiquid
+        Public Property thermalConductivityOfLiquid As String = "" Implements Interfaces.IUnitsOfMeasure.thermalConductivityOfLiquid
 
-        Public Property thermalConductivityOfVapor As String Implements Interfaces.IUnitsOfMeasure.thermalConductivityOfVapor
+        Public Property thermalConductivityOfVapor As String = "" Implements Interfaces.IUnitsOfMeasure.thermalConductivityOfVapor
 
-        Public Property thickness As String Implements Interfaces.IUnitsOfMeasure.thickness
+        Public Property thickness As String = "" Implements Interfaces.IUnitsOfMeasure.thickness
 
-        Public Property time As String Implements Interfaces.IUnitsOfMeasure.time
+        Public Property time As String = "" Implements Interfaces.IUnitsOfMeasure.time
 
-        Public Property vaporPressure As String Implements Interfaces.IUnitsOfMeasure.vaporPressure
+        Public Property vaporPressure As String = "" Implements Interfaces.IUnitsOfMeasure.vaporPressure
 
-        Public Property velocity As String Implements Interfaces.IUnitsOfMeasure.velocity
+        Public Property velocity As String = "" Implements Interfaces.IUnitsOfMeasure.velocity
 
-        Public Property viscosity As String Implements Interfaces.IUnitsOfMeasure.viscosity
+        Public Property viscosity As String = "" Implements Interfaces.IUnitsOfMeasure.viscosity
 
-        Public Property viscosityOfLiquid As String Implements Interfaces.IUnitsOfMeasure.viscosityOfLiquid
+        Public Property viscosityOfLiquid As String = "" Implements Interfaces.IUnitsOfMeasure.viscosityOfLiquid
 
-        Public Property viscosityOfVapor As String Implements Interfaces.IUnitsOfMeasure.viscosityOfVapor
+        Public Property viscosityOfVapor As String = "" Implements Interfaces.IUnitsOfMeasure.viscosityOfVapor
 
-        Public Property volume As String Implements Interfaces.IUnitsOfMeasure.volume
+        Public Property volume As String = "" Implements Interfaces.IUnitsOfMeasure.volume
 
-        Public Property volumetricFlow As String Implements Interfaces.IUnitsOfMeasure.volumetricFlow
+        Public Property volumetricFlow As String = "" Implements Interfaces.IUnitsOfMeasure.volumetricFlow
 
-        Public Property diffusivity As String Implements IUnitsOfMeasure.diffusivity
+        Public Property diffusivity As String = "" Implements IUnitsOfMeasure.diffusivity
 
         Public Property conductance As String = "[kg/s]/[Pa^0.5]" Implements IUnitsOfMeasure.conductance
 
@@ -473,6 +473,7 @@ Namespace SystemsOfUnits
 
                 .Name = "SI"
                 .jouleThomsonCoefficient = "K/Pa"
+                .gor = "m3/m3"
                 .diffusivity = "m2/s"
                 .accel = "m2/s"
                 .area = "m2"
@@ -559,6 +560,7 @@ Namespace SystemsOfUnits
 
                 .Name = "C1"
                 .jouleThomsonCoefficient = "K/Pa"
+                .gor = "m3/m3"
                 .diffusivity = "m2/s"
                 .conductance = "[kg/s]/[Pa^0.5]"
                 .accel = "m2/s"
@@ -645,6 +647,7 @@ Namespace SystemsOfUnits
 
                 .Name = "C2"
                 .jouleThomsonCoefficient = "K/Pa"
+                .gor = "m3/m3"
                 .conductance = "[kg/s]/[Pa^0.5]"
                 .diffusivity = "m2/s"
                 .accel = "m2/s"
@@ -731,6 +734,7 @@ Namespace SystemsOfUnits
 
                 .Name = "C3"
                 .jouleThomsonCoefficient = "K/Pa"
+                .gor = "m3/m3"
                 .conductance = "[kg/s]/[Pa^0.5]"
                 .diffusivity = "m2/s"
                 .accel = "m/s2"
@@ -817,6 +821,7 @@ Namespace SystemsOfUnits
 
                 .Name = "C4"
                 .jouleThomsonCoefficient = "K/Pa"
+                .gor = "m3/m3"
                 .conductance = "[kg/s]/[Pa^0.5]"
                 .diffusivity = "m2/s"
                 .accel = "m/s2"
@@ -903,6 +908,7 @@ Namespace SystemsOfUnits
 
                 .Name = "C5"
                 .conductance = "[kg/s]/[Pa^0.5]"
+                .gor = "m3/m3"
                 .diffusivity = "m2/s"
                 .jouleThomsonCoefficient = "K/Pa"
                 .accel = "m/s2"
@@ -1080,6 +1086,7 @@ Namespace SystemsOfUnits
                 .diffusivity = "cm2/s"
                 .conductance = "[kg/h]/[atm^0.5]"
                 .jouleThomsonCoefficient = "C/atm"
+                .gor = "m3/m3"
                 .accel = "cm/s2"
                 .area = "cm2"
                 .diameter = "mm"

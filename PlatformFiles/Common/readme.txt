@@ -65,7 +65,7 @@ The full changelog including souce code changes can be viewed at https://github.
 Version 7.0.0
 
 Author              Description
-Daniel Medeiros     Integration with Simulate 365 account + File Picker (Classic UI)
+CGC GmbH            Integration with Simulate 365 account + File Picker (Classic UI)
 Gregor Reichert     Output Energy Stream - Conversion Reactor 
 Daniel Medeiros     Added CPUI editor for Property Package Equilibrium settings
 Daniel Medeiros     Added CPUI Editor for Gibbs Reactor's Element Matrix
