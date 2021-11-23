@@ -650,8 +650,15 @@ Namespace UnitOperations
                                     fP_ant = fP
                                     fP = Pout - Pout_ant
 
-                                    If cntP > 3 Then
-                                        Pout = Pout - fP * (Pout - Pout_ant2) / (fP - fP_ant2)
+                                    If Qvin + Qlin = 0.0 Then
+                                        dpt = 0.0
+                                        dpf = 0.0
+                                        Pout = Pin
+                                        fP = 0.0
+                                    Else
+                                        If cntP > 3 Then
+                                            Pout = Pout - fP * (Pout - Pout_ant2) / (fP - fP_ant2)
+                                        End If
                                     End If
 
                                     IObj6?.Paragraphs.Add(String.Format("Updated outlet pressure: {0} Pa", Pout))
@@ -738,16 +745,22 @@ Namespace UnitOperations
                                 If flashresult.ResultException IsNot Nothing Then Throw flashresult.ResultException
                                 Tout = flashresult.CalculatedTemperature
 
-                                'Tout = 0.7 * Tout_ant + 0.3 * Tout
-                                If U = 0 Or DQ = 0 Then
-                                    Tout_ant = Tout
+                                If Qvin + Qlin = 0.0 Then
+                                    U = 0.0
+                                    DQ = 0.0
+                                    Tout = Tin
+                                    fT = 0.0
+                                    Hout = Hin
                                 Else
-                                    Tout = (Tout + Tout_ant) / 2
+                                    If U = 0 Or DQ = 0 Then
+                                        Tout_ant = Tout
+                                    Else
+                                        Tout = (Tout + Tout_ant) / 2
+                                    End If
+                                    fT = Tout - Tout_ant
                                 End If
 
                                 IObj5?.Paragraphs.Add(String.Format("Calculated Outlet Temperature: {0} K", Tout))
-
-                                fT = Tout - Tout_ant
 
                                 If Math.Abs(fT) < Me.TolT Then Exit Do
 

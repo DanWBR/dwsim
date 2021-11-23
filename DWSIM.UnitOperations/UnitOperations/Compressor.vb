@@ -284,6 +284,49 @@ Namespace UnitOperations
                 esin = args(2)
             End If
 
+            If msin.GetMassFlow() = 0.0 Then
+                DeltaT = 0.0
+                If CalcMode <> CalculationMode.PowerRequired Then
+                    DeltaQ = 0.0
+                End If
+                If CalcMode <> CalculationMode.EnergyStream Then
+                    esin.EnergyFlow = 0.0
+                    If args Is Nothing Then esin.GraphicObject.Calculated = True
+                End If
+                If CalcMode <> CalculationMode.Head Then
+                    AdiabaticHead = 0.0
+                    PolytropicHead = 0.0
+                End If
+                If CalcMode <> CalculationMode.Delta_P Then
+                    DeltaP = 0.0
+                    If CalcMode <> CalculationMode.OutletPressure Then POut = 0.0
+                End If
+                If CalcMode <> CalculationMode.OutletPressure Then
+                    POut = 0.0
+                    If CalcMode <> CalculationMode.Delta_P Then DeltaP = 0.0
+                End If
+                If Not DebugMode Then
+                    With msout
+                        .DefinedFlow = FlowSpec.Mass
+                        .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
+                        .Phases(0).Properties.massflow = msin.GetMassFlow()
+                        .Phases(0).Properties.temperature = msin.GetTemperature()
+                        .Phases(0).Properties.pressure = msin.GetPressure()
+                        .Phases(0).Properties.enthalpy = msin.GetMassEnthalpy()
+                        Dim comp As BaseClasses.Compound
+                        Dim i As Integer = 0
+                        For Each comp In .Phases(0).Compounds.Values
+                            comp.MoleFraction = msin.Phases(0).Compounds(comp.Name).MoleFraction
+                            comp.MassFraction = msin.Phases(0).Compounds(comp.Name).MassFraction
+                            i += 1
+                        Next
+                    End With
+                Else
+                    AppendDebugLine("Calculation finished successfully.")
+                End If
+                Exit Sub
+            End If
+
             Dim Pout0 As Double = msout.GetPressure()
 
             If DebugMode Then AppendDebugLine("Calculation mode: " & CalcMode.ToString)

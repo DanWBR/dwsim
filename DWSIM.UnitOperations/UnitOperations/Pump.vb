@@ -551,6 +551,45 @@ Namespace UnitOperations
             ei = Hi * Wi
             ein = ei
 
+            If qli = 0.0 Then
+                DeltaT = 0.0
+                If CalcMode <> CalculationMode.Power Then
+                    DeltaQ = 0.0
+                End If
+                If CalcMode <> CalculationMode.EnergyStream Then
+                    esin.EnergyFlow = 0.0
+                    If args Is Nothing Then esin.GraphicObject.Calculated = True
+                End If
+                If CalcMode <> CalculationMode.Delta_P Then
+                    DeltaP = 0.0
+                    If CalcMode <> CalculationMode.OutletPressure Then Pout = 0.0
+                End If
+                If CalcMode <> CalculationMode.OutletPressure Then
+                    Pout = 0.0
+                    If CalcMode <> CalculationMode.Delta_P Then DeltaP = 0.0
+                End If
+                If Not DebugMode Then
+                    With msout
+                        .Phases(0).Properties.temperature = Ti
+                        .Phases(0).Properties.pressure = Pi
+                        .Phases(0).Properties.enthalpy = Hi
+                        Dim comp As BaseClasses.Compound
+                        Dim i As Integer = 0
+                        For Each comp In .Phases(0).Compounds.Values
+                            comp.MoleFraction = msin.Phases(0).Compounds(comp.Name).MoleFraction
+                            comp.MassFraction = msin.Phases(0).Compounds(comp.Name).MassFraction
+                            i += 1
+                        Next
+                        .Phases(0).Properties.massflow = msin.Phases(0).Properties.massflow.GetValueOrDefault
+                        .DefinedFlow = FlowSpec.Mass
+                        .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
+                    End With
+                Else
+                    AppendDebugLine("Calculation finished successfully.")
+                End If
+                Exit Sub
+            End If
+
             If DebugMode Then AppendDebugLine(String.Format("Property Package: {0}", Me.PropertyPackage.Name))
             If DebugMode Then AppendDebugLine(String.Format("Input variables: T = {0} K, P = {1} Pa, H = {2} kJ/kg, W = {3} kg/s, Liquid Flow = {4} m3/s", Ti, Pi, Hi, Wi, qli))
 

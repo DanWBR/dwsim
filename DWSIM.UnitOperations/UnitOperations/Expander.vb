@@ -250,6 +250,47 @@ Namespace UnitOperations
 
             ims.Validate()
 
+            If ims.GetMassFlow() = 0.0 Then
+                DeltaT = 0.0
+                If CalcMode <> CalculationMode.PowerGenerated Then
+                    DeltaQ = 0.0
+                End If
+                es.EnergyFlow = 0.0
+                If args Is Nothing Then es.GraphicObject.Calculated = True
+                If CalcMode <> CalculationMode.Head Then
+                    AdiabaticHead = 0.0
+                    PolytropicHead = 0.0
+                End If
+                If CalcMode <> CalculationMode.Delta_P Then
+                    DeltaP = 0.0
+                    If CalcMode <> CalculationMode.OutletPressure Then POut = 0.0
+                End If
+                If CalcMode <> CalculationMode.OutletPressure Then
+                    POut = 0.0
+                    If CalcMode <> CalculationMode.Delta_P Then DeltaP = 0.0
+                End If
+                If Not DebugMode Then
+                    With oms
+                        .DefinedFlow = FlowSpec.Mass
+                        .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
+                        .Phases(0).Properties.massflow = ims.GetMassFlow()
+                        .Phases(0).Properties.temperature = ims.GetTemperature()
+                        .Phases(0).Properties.pressure = ims.GetPressure()
+                        .Phases(0).Properties.enthalpy = ims.GetMassEnthalpy()
+                        Dim comp As BaseClasses.Compound
+                        Dim i As Integer = 0
+                        For Each comp In .Phases(0).Compounds.Values
+                            comp.MoleFraction = ims.Phases(0).Compounds(comp.Name).MoleFraction
+                            comp.MassFraction = ims.Phases(0).Compounds(comp.Name).MassFraction
+                            i += 1
+                        Next
+                    End With
+                Else
+                    AppendDebugLine("Calculation finished successfully.")
+                End If
+                Exit Sub
+            End If
+
             Dim Ti, Pi, Hi, Si, Wi, rho_vi, qvi, qli, ei, ein, T2, T2s, P2, H2, H2s, cp, cv, mw, Qi, Qloop, P2i, fx, fx0, fx00, P2i0, P2i00 As Double
 
             Dim Pout0 As Double = oms.GetPressure()
