@@ -467,7 +467,7 @@ namespace ZedGraph
 		/// Construct a <see cref="FontSpec"/> object with default properties.
 		/// </summary>
 		public FontSpec()
-			: this( "Arial", 12, Color.Black, false, false, false )
+			: this("Segoe UI", 12, Color.Black, false, false, false )
 		{
 		}
 

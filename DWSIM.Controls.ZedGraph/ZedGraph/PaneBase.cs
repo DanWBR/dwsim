@@ -143,7 +143,7 @@ namespace ZedGraph
 			/// The default font family for the title
 			/// (<see cref="PaneBase.Title"/> property).
 			/// </summary>
-			public static string FontFamily = "Arial";
+			public static string FontFamily = "Segoe UI";
 			/// <summary>
 			/// The default font size (points) for the
 			/// <see cref="PaneBase.Title"/> (<see cref="ZedGraph.FontSpec.Size"/> property).

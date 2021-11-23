@@ -10,7 +10,7 @@ Public Class EditingForm_Adjust_ControlPanel
     Private formC As IFlowsheet
     Public status As String = ""
     Public cancelar As Boolean = False
-    Public usemaxmin As Boolean = False
+    Public usemaxmin As Boolean = True
 
     Public myADJ As SpecialOps.Adjust
     Public py1, py2, px As New List(Of Double)
@@ -75,6 +75,8 @@ Public Class EditingForm_Adjust_ControlPanel
 
         loaded = True
 
+        Me.ChangeDefaultFont()
+
     End Sub
 
     Private Sub btnIniciar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnIniciar.Click
@@ -133,7 +135,7 @@ Public Class EditingForm_Adjust_ControlPanel
             End If
             maxit = .MaximumIterations
             stepsize = .StepSize
-            tol = .Tolerance
+            tol = .Tolerance.ConvertToSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su))
             If Me.usemaxmin Then
                 min = .MinVal.GetValueOrDefault.ConvertToSI(myADJ.ManipulatedObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, su))
                 max = .MaxVal.GetValueOrDefault.ConvertToSI(myADJ.ManipulatedObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, su))
@@ -158,7 +160,7 @@ Public Class EditingForm_Adjust_ControlPanel
 
                              Me.lblStatus.Text = formC.GetTranslatedString("Ajustando")
                              Me.lblItXdeY.Text = formC.GetTranslatedString("Iterao") & " " & (c + 1) & " " & formC.GetTranslatedString("de") & " " & maxit
-                             Me.tbErro.Text = f.ToString("G")
+                             Me.tbErro.Text = f.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su)).ToString("G")
 
                              px.Add(xval.ConvertFromSI(myADJ.ManipulatedObject.GetPropertyUnit(myADJ.ManipulatedObjectData.PropertyName, su)))
                              py1.Add(adjval)
@@ -272,7 +274,7 @@ Public Class EditingForm_Adjust_ControlPanel
                                       mvVal = MathNet.Numerics.RootFinding.Secant.FindRoot(
                                         Function(xval)
                                             Return funcproc.Invoke(xval)
-                                        End Function, mvVal, mvVal * 1.01,,, tol, maxit)
+                                        End Function, mvVal, mvVal * 1.01, min, max, tol, maxit)
                                   End Sub).ContinueWith(Sub(t)
                                                             UIThread(Sub() formC.UpdateOpenEditForms())
                                                             UIThread(Sub() funcfinish.Invoke())
@@ -466,8 +468,6 @@ Public Class EditingForm_Adjust_ControlPanel
     End Sub
 
     Private Sub rbBrent_CheckedChanged(sender As Object, e As EventArgs) Handles rbBrent.CheckedChanged
-        tbMin.Enabled = rbBrent.Checked
-        tbMax.Enabled = rbBrent.Checked
         tbStep.Enabled = Not rbBrent.Checked
     End Sub
 

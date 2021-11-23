@@ -88,6 +88,8 @@ Public Class EditingForm_HeatExchanger_SHProperties
         lbuTubePitch.Text = su.thickness
         lbuTubeThermalCond.Text = su.thermalConductivity
 
+        ChangeDefaultFont()
+
     End Sub
 
 End Class

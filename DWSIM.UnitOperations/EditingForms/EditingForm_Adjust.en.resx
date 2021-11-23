@@ -117,6 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblTag.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 20</value>
+  </data>
+  <data name="chkActive.Location" type="System.Drawing.Point, System.Drawing">
+    <value>309, 18</value>
+  </data>
   <data name="chkActive.ToolTip" xml:space="preserve">
     <value>Active/Inactive</value>
   </data>
@@ -129,18 +136,26 @@
   <data name="Label11.Text" xml:space="preserve">
     <value>Object</value>
   </data>
+  <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>336, 50</value>
+  </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>General Info</value>
+  </data>
+  <data name="rtbAnnotations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>330, 180</value>
+  </data>
+  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>336, 199</value>
   </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Notes</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="tbTolerance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>195, 71</value>
+    <value>221, 71</value>
   </data>
   <data name="tbTolerance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 20</value>
+    <value>107, 20</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>133, 13</value>
@@ -149,16 +164,19 @@
     <value>Tolerance (Maximum Error)</value>
   </data>
   <data name="lblSPUnits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>341, 48</value>
+    <value>334, 48</value>
+  </data>
+  <data name="btnOpenControlPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>318, 23</value>
   </data>
   <data name="btnOpenControlPanel.Text" xml:space="preserve">
     <value>Open Control Panel</value>
   </data>
   <data name="tbSetPoint.Location" type="System.Drawing.Point, System.Drawing">
-    <value>195, 45</value>
+    <value>221, 45</value>
   </data>
   <data name="tbSetPoint.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 20</value>
+    <value>107, 20</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>181, 13</value>
@@ -174,6 +192,9 @@
   </data>
   <data name="chkSolveGlobal.Text" xml:space="preserve">
     <value>Converge/Solve with Flowsheet Solver</value>
+  </data>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>336, 142</value>
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Parameters</value>
@@ -206,16 +227,16 @@
     <value>Reference Property</value>
   </data>
   <data name="cbRefProp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>122, 227</value>
+    <value>144, 227</value>
   </data>
   <data name="cbRefProp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>215, 21</value>
+    <value>186, 21</value>
   </data>
   <data name="cbRefObj.Location" type="System.Drawing.Point, System.Drawing">
-    <value>122, 200</value>
+    <value>144, 200</value>
   </data>
   <data name="cbRefObj.Size" type="System.Drawing.Size, System.Drawing">
-    <value>215, 21</value>
+    <value>186, 21</value>
   </data>
   <data name="lblTargetVal.Location" type="System.Drawing.Point, System.Drawing">
     <value>125, 169</value>
@@ -242,16 +263,16 @@
     <value>Controlled Property</value>
   </data>
   <data name="cbTargetProp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>122, 139</value>
+    <value>144, 139</value>
   </data>
   <data name="cbTargetProp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>215, 21</value>
+    <value>186, 21</value>
   </data>
   <data name="cbTargetObj.Location" type="System.Drawing.Point, System.Drawing">
-    <value>122, 112</value>
+    <value>144, 112</value>
   </data>
   <data name="cbTargetObj.Size" type="System.Drawing.Size, System.Drawing">
-    <value>215, 21</value>
+    <value>186, 21</value>
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 13</value>
@@ -269,16 +290,16 @@
     <value>Manipulated Property</value>
   </data>
   <data name="cbSourceProp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>122, 50</value>
+    <value>144, 50</value>
   </data>
   <data name="cbSourceProp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>215, 21</value>
+    <value>186, 21</value>
   </data>
   <data name="cbSourceObj.Location" type="System.Drawing.Point, System.Drawing">
-    <value>122, 23</value>
+    <value>144, 23</value>
   </data>
   <data name="cbSourceObj.Size" type="System.Drawing.Size, System.Drawing">
-    <value>215, 21</value>
+    <value>186, 21</value>
   </data>
   <data name="Label19.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 27</value>
@@ -289,7 +310,17 @@
   <data name="Label19.Text" xml:space="preserve">
     <value>Manipulated Object</value>
   </data>
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>336, 288</value>
+  </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Linked Objects</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>354, 698</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>48, 22, 48, 22</value>
   </data>
 </root>

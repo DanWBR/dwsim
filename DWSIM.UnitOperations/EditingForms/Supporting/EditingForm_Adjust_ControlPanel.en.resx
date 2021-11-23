@@ -202,8 +202,11 @@
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Parameters</value>
   </data>
+  <data name="GraphControl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>697, 325</value>
+  </data>
   <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>697, 330</value>
+    <value>697, 325</value>
   </data>
   <data name="FaTabStripItem1.Title" xml:space="preserve">
     <value>Graph</value>
@@ -213,9 +216,6 @@
   </data>
   <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>699, 351</value>
-  </data>
-  <data name="GraphControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>697, 330</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="GroupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -256,10 +256,10 @@
     <value>True</value>
   </data>
   <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>725, 586</value>
+    <value>725, 601</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>725, 586</value>
+    <value>725, 601</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

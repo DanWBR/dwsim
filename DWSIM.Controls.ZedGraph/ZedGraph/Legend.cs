@@ -202,7 +202,7 @@ namespace ZedGraph
 			/// The default font family for the <see cref="Legend"/> entries
 			/// (<see cref="ZedGraph.FontSpec.Family"/> property).
 			/// </summary>
-			public static string FontFamily = "Arial";
+			public static string FontFamily = "Segoe UI";
 			/// <summary>
 			/// The default font size for the <see cref="Legend"/> entries
 			/// (<see cref="ZedGraph.FontSpec.Size"/> property).  Units are

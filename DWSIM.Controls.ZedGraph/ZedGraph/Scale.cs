@@ -548,7 +548,7 @@ namespace ZedGraph
 			/// font specification <see cref="FontSpec"/>
 			/// (<see cref="ZedGraph.FontSpec.Family"/> property).
 			/// </summary>
-			public static string FontFamily = "Arial";
+			public static string FontFamily = "Segoe UI";
 			/// <summary>
 			/// The default font size for the <see cref="Axis"/> scale values
 			/// font specification <see cref="FontSpec"/>
