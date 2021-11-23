@@ -139,7 +139,6 @@ Partial Class FormMain
         'FileTSMI
         '
         resources.ApplyResources(Me.FileTSMI, "FileTSMI")
-
         Me.FileTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.NovoEstudoDoCriadorDeComponentesToolStripMenuItem, Me.NovoEstudoDeRegressaoDeDadosToolStripMenuItem, Me.NovoRegressaoUNIFACIPs, Me.OpenToolStripMenuItem, Me.OpenFromS365DashboardBtn, Me.SaveToSimulate365DashboardToolStripMenuItem, Me.tsmiFOSSEE, Me.tsmiSamples, Me.toolStripSeparator, Me.SaveToolStripMenuItem, Me.SaveAllToolStripMenuItem, Me.SaveAsToolStripMenuItem, Me.ToolStripSeparator2, Me.CloseAllToolstripMenuItem, Me.toolStripSeparator1, Me.tsFileSeparator, Me.tsFolderSeparator, Me.ExitToolStripMenuItem})
         Me.FileTSMI.Name = "FileTSMI"
         Me.FileTSMI.Overflow = System.Windows.Forms.ToolStripItemOverflow.AsNeeded
@@ -451,7 +450,6 @@ Partial Class FormMain
         Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripButton, Me.OpenToolStripButton, Me.SaveToolStripButton, Me.ToolStripButton1, Me.SaveAllToolStripButton, Me.ToolStripSeparator3, Me.ToolStripButton2, Me.tsbInspector, Me.ToolStripSeparator4, Me.ToolStripButton3, Me.ToolStripButton5, Me.ToolStripButton4, Me.ToolStripSeparator6, Me.ToolStripButton6, Me.ToolStripButton7, Me.ToolStripButton8, Me.ToolStripSeparator7, Me.tsbRegCO, Me.ToolStripSeparator8, Me.LoginButton, Me.LogoutDropdown})
-        resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
         '
@@ -581,32 +579,32 @@ Partial Class FormMain
         '
         'LoginButton
         '
+        resources.ApplyResources(Me.LoginButton, "LoginButton")
         Me.LoginButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         Me.LoginButton.Image = Global.DWSIM.My.Resources.Resources.s365_logo_login
-        resources.ApplyResources(Me.LoginButton, "LoginButton")
         Me.LoginButton.Name = "LoginButton"
         '
         'LogoutDropdown
         '
+        resources.ApplyResources(Me.LogoutDropdown, "LogoutDropdown")
         Me.LogoutDropdown.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         Me.LogoutDropdown.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LoggedInDwsimProBtn, Me.LoggedInS365Button, Me.LogoutToolStripMenuItem})
-        resources.ApplyResources(Me.LogoutDropdown, "LogoutDropdown")
         Me.LogoutDropdown.Name = "LogoutDropdown"
         '
         'LoggedInDwsimProBtn
         '
-        Me.LoggedInDwsimProBtn.Name = "LoggedInDwsimProBtn"
         resources.ApplyResources(Me.LoggedInDwsimProBtn, "LoggedInDwsimProBtn")
+        Me.LoggedInDwsimProBtn.Name = "LoggedInDwsimProBtn"
         '
         'LoggedInS365Button
         '
-        Me.LoggedInS365Button.Name = "LoggedInS365Button"
         resources.ApplyResources(Me.LoggedInS365Button, "LoggedInS365Button")
+        Me.LoggedInS365Button.Name = "LoggedInS365Button"
         '
         'LogoutToolStripMenuItem
         '
-        Me.LogoutToolStripMenuItem.Name = "LogoutToolStripMenuItem"
         resources.ApplyResources(Me.LogoutToolStripMenuItem, "LogoutToolStripMenuItem")
+        Me.LogoutToolStripMenuItem.Name = "LogoutToolStripMenuItem"
         '
         'BgLoadComp
         '
