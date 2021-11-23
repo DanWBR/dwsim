@@ -293,10 +293,6 @@ Namespace UnitOperations
                     esin.EnergyFlow = 0.0
                     If args Is Nothing Then esin.GraphicObject.Calculated = True
                 End If
-                If CalcMode <> CalculationMode.Head Then
-                    AdiabaticHead = 0.0
-                    PolytropicHead = 0.0
-                End If
                 If CalcMode <> CalculationMode.Delta_P Then
                     DeltaP = 0.0
                     If CalcMode <> CalculationMode.OutletPressure Then POut = 0.0
