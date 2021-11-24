@@ -165,6 +165,7 @@ Namespace Reactors
 
             Dim DN As New Dictionary(Of String, Double)
             Dim N0 As New Dictionary(Of String, Double)
+            Dim N00 As New Dictionary(Of String, Double)
             Dim N As New Dictionary(Of String, Double)
 
             Dim X, scBC, nBC, DHr, Hid_r, Hid_p, Hr, Hp, Tin, Pin, Pout, W As Double
@@ -253,7 +254,9 @@ Namespace Reactors
                                     N0(sb.CompName) = ims.Phases(0).Compounds(sb.CompName).MoleFraction.GetValueOrDefault * ims.Phases(0).Properties.molarflow.GetValueOrDefault
                                 End If
                         End Select
-
+                        If Not N00.ContainsKey(sb.CompName) Then
+                            N00.Add(sb.CompName, ims.Phases(0).Compounds(sb.CompName).MolarFlow.GetValueOrDefault())
+                        End If
                     Next
 
                     i += 1
@@ -441,7 +444,7 @@ Namespace Reactors
                 Dim Nsum As Double = 0
                 For Each s2 As Compound In ims.Phases(0).Compounds.Values
                     If N.ContainsKey(s2.Name) Then
-                        Nsum += N(s2.Name)
+                        Nsum += N(s2.Name) + (N00(s2.Name) - N0(s2.Name))
                     Else
                         Nsum += s2.MoleFraction.GetValueOrDefault * ims.Phases(0).Properties.molarflow.GetValueOrDefault
                     End If
@@ -449,7 +452,7 @@ Namespace Reactors
 
                 For Each s3 As Compound In ims.Phases(0).Compounds.Values
                     If N.ContainsKey(s3.Name) Then
-                        s3.MoleFraction = N(s3.Name) / Nsum
+                        s3.MoleFraction = (N00(s3.Name) + DN(s3.Name)) / Nsum
                     Else
                         s3.MoleFraction = s3.MoleFraction.GetValueOrDefault * ims.Phases(0).Properties.molarflow.GetValueOrDefault / Nsum
                     End If
