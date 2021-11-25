@@ -313,7 +313,7 @@ Public Class EditingForm_Column_InitialEstimates
 
     Private Sub ToolStripButton28_Click(sender As Object, e As EventArgs) Handles ToolStripButton28.Click
 
-        Dim i, n As Integer, px, py As New ArrayList
+        Dim i, n As Integer, px, py As New List(Of Double)
 
         n = dgvv.Rows.Count - 1
 
@@ -327,14 +327,14 @@ Public Class EditingForm_Column_InitialEstimates
         Next
 
         For Each c As DataGridViewCell In Me.dgvv.SelectedCells
-            If c.Value Is Nothing And c.ColumnIndex = 1 Then c.Value = DWSIM.MathOps.MathEx.Interpolation.polinterpolation.nevilleinterpolation(px.ToArray(Type.GetType("System.Double")), py.ToArray(Type.GetType("System.Double")), px.Count, c.RowIndex)
+            If c.Value Is Nothing And c.ColumnIndex = 1 Then c.Value = MathNet.Numerics.Interpolate.Linear(px, py).Interpolate(c.RowIndex)
         Next
 
     End Sub
 
     Private Sub ToolStripButton27_Click(sender As Object, e As EventArgs) Handles ToolStripButton27.Click
 
-        Dim i, n As Integer, px, py As New ArrayList
+        Dim i, n As Integer, px, py As New List(Of Double)
 
         n = dgvv.Rows.Count - 1
 
@@ -348,7 +348,7 @@ Public Class EditingForm_Column_InitialEstimates
         Next
 
         For Each c As DataGridViewCell In Me.dgvv.SelectedCells
-            If c.Value Is Nothing And c.ColumnIndex = 2 Then c.Value = DWSIM.MathOps.MathEx.Interpolation.polinterpolation.nevilleinterpolation(px.ToArray(Type.GetType("System.Double")), py.ToArray(Type.GetType("System.Double")), px.Count, c.RowIndex)
+            If c.Value Is Nothing And c.ColumnIndex = 2 Then c.Value = MathNet.Numerics.Interpolate.Linear(px, py).Interpolate(c.RowIndex)
         Next
 
     End Sub
@@ -367,7 +367,7 @@ Public Class EditingForm_Column_InitialEstimates
 
     Private Sub ToolStripButton26_Click(sender As Object, e As EventArgs) Handles ToolStripButton26.Click
 
-        Dim i, n As Integer, px, py As New ArrayList
+        Dim i, n As Integer, px, py As New List(Of Double)
 
         n = dgvv.Rows.Count - 1
 
@@ -381,7 +381,7 @@ Public Class EditingForm_Column_InitialEstimates
         Next
 
         For Each c As DataGridViewCell In Me.dgvv.SelectedCells
-            If c.Value Is Nothing And c.ColumnIndex = 3 Then c.Value = DWSIM.MathOps.MathEx.Interpolation.polinterpolation.nevilleinterpolation(px.ToArray(Type.GetType("System.Double")), py.ToArray(Type.GetType("System.Double")), px.Count, c.RowIndex)
+            If c.Value Is Nothing And c.ColumnIndex = 3 Then c.Value = MathNet.Numerics.Interpolate.Linear(px, py).Interpolate(c.RowIndex)
         Next
 
     End Sub

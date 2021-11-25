@@ -341,18 +341,6 @@ Public Class EditingForm_Column
 
     End Sub
 
-    Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbNStages.KeyDown
-
-        If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = System.Drawing.Color.Blue Then
-
-            UpdateProps(sender)
-
-            DirectCast(sender, TextBox).SelectAll()
-
-        End If
-
-    End Sub
-
     Sub UpdateProps(sender As Object)
 
          RequestCalc()
@@ -392,19 +380,42 @@ Public Class EditingForm_Column
                 End With
             ElseIf dif > 0 Then
                 Dim i As Integer
+                Dim P0 = SimObject.Stages(SimObject.Stages.Count - 2).P
+                Dim E0 = SimObject.Stages(SimObject.Stages.Count - 2).Efficiency
+                Dim P1 = SimObject.Stages.Last.P
+                Dim E1 = SimObject.Stages.Last.Efficiency
                 For i = 1 To dif
-                    SimObject.Stages.Insert(SimObject.Stages.Count - 1, New Stage(Guid.NewGuid().ToString))
-                    SimObject.Stages(SimObject.Stages.Count - 2).Name = SimObject.FlowSheet.GetTranslatedString("DCStage") & "_" & SimObject.Stages.Count - 2
+                    Dim stage = New Stage(Guid.NewGuid().ToString)
+                    SimObject.Stages.Insert(SimObject.Stages.Count - 1, stage)
+                    stage.Name = SimObject.FlowSheet.GetTranslatedString("DCStage") & "_" & SimObject.Stages.Count - 2
+                    stage.P = P0 + Convert.ToDouble(i) / Convert.ToDouble(dif) * (P1 - P0)
+                    stage.Efficiency = E0 + Convert.ToDouble(i) / Convert.ToDouble(dif) * (E1 - E0)
                     With SimObject.InitialEstimates
-                        Dim d As New Dictionary(Of String, Parameter)
+                        Dim dl As New Dictionary(Of String, Parameter)
+                        Dim dv As New Dictionary(Of String, Parameter)
                         For Each cp In SimObject.FlowSheet.SelectedCompounds.Values
-                            d.Add(cp.Name, New Parameter)
+                            Dim pl = New Parameter()
+                            pl.LoadData(.LiqCompositions(.LiqCompositions.Count - 1)(cp.Name).SaveData())
+                            dl.Add(cp.Name, pl)
+                            Dim pv = New Parameter()
+                            pv.LoadData(.VapCompositions(.VapCompositions.Count - 1)(cp.Name).SaveData())
+                            dv.Add(cp.Name, pv)
                         Next
-                        .LiqCompositions.Insert(.LiqCompositions.Count - 1, d)
-                        .VapCompositions.Insert(.VapCompositions.Count - 1, d)
-                        .LiqMolarFlows.Insert(.LiqMolarFlows.Count - 1, New Parameter)
-                        .VapMolarFlows.Insert(.VapMolarFlows.Count - 1, New Parameter)
-                        .StageTemps.Insert(.StageTemps.Count - 1, New Parameter)
+                        .LiqCompositions.Insert(.LiqCompositions.Count - 1, dl)
+                        .VapCompositions.Insert(.VapCompositions.Count - 1, dv)
+                        Dim L0 = .LiqMolarFlows(.LiqMolarFlows.Count - 2).Value
+                        Dim V0 = .VapMolarFlows(.VapMolarFlows.Count - 2).Value
+                        Dim T0 = .StageTemps(.StageTemps.Count - 1).Value
+                        Dim T1 = .StageTemps(.StageTemps.Count - 1).Value
+                        Dim plt = New Parameter
+                        Dim pvt = New Parameter
+                        Dim pt = New Parameter
+                        plt.Value = L0
+                        pvt.Value = V0
+                        pt.Value = T0 + Convert.ToDouble(i) / Convert.ToDouble(dif) * (T1 - T0)
+                        .LiqMolarFlows.Insert(.LiqMolarFlows.Count - 1, plt)
+                        .VapMolarFlows.Insert(.VapMolarFlows.Count - 1, pvt)
+                        .StageTemps.Insert(.StageTemps.Count - 1, pt)
                     End With
                 Next
             End If
@@ -678,7 +689,7 @@ Public Class EditingForm_Column
     End Sub
 
     Private Sub tbNStages_TextChanged(sender As Object, e As EventArgs) Handles tbNStages.TextChanged, tbCondPDrop.TextChanged, tbCondPressure.TextChanged, tbCondSpec.TextChanged, tbCondVapFlow.TextChanged,
-                                                                                tbConvTol.TextChanged, tbMaxIt.TextChanged, tbNStages.TextChanged, tbRebPressure.TextChanged, tbRebSpecValue.TextChanged
+                                                                                tbConvTol.TextChanged, tbMaxIt.TextChanged, tbNStages.TextChanged, tbRebPressure.TextChanged, tbRebSpecValue.TextChanged, tbNStages.KeyDown
         Dim tbox = DirectCast(sender, TextBox)
 
         If Loaded Then

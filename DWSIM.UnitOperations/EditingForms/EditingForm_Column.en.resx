@@ -119,10 +119,10 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblTag.Size" type="System.Drawing.Size, System.Drawing">
-    <value>254, 20</value>
+    <value>290, 20</value>
   </data>
   <data name="chkActive.Location" type="System.Drawing.Point, System.Drawing">
-    <value>366, 43</value>
+    <value>402, 43</value>
   </data>
   <data name="chkActive.ToolTip" xml:space="preserve">
     <value>Active/Inactive</value>
@@ -140,13 +140,13 @@
     <value>Object</value>
   </data>
   <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>393, 94</value>
+    <value>429, 94</value>
   </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>General Info</value>
   </data>
   <data name="btnConfigurePP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>350, 162</value>
+    <value>386, 162</value>
   </data>
   <data name="btnConfigurePP.ToolTip" xml:space="preserve">
     <value>Configure</value>
@@ -155,10 +155,10 @@
     <value />
   </data>
   <data name="cbPropPack.Location" type="System.Drawing.Point, System.Drawing">
-    <value>162, 162</value>
+    <value>171, 162</value>
   </data>
   <data name="cbPropPack.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 21</value>
+    <value>209, 21</value>
   </data>
   <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 166</value>
@@ -191,8 +191,11 @@
   <data name="Label19.Text" xml:space="preserve">
     <value>Compound</value>
   </data>
+  <data name="cbCondComp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>181, 88</value>
+  </data>
   <data name="cbCondComp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>203, 21</value>
+    <value>197, 21</value>
   </data>
   <data name="cbCondType.Items1" xml:space="preserve">
     <value>Partial</value>
@@ -200,8 +203,17 @@
   <data name="cbCondType.Items2" xml:space="preserve">
     <value>Full Reflux</value>
   </data>
+  <data name="cbCondType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>182, 7</value>
+  </data>
   <data name="cbCondType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 21</value>
+    <value>196, 21</value>
+  </data>
+  <data name="tbCondPDrop.Location" type="System.Drawing.Point, System.Drawing">
+    <value>182, 35</value>
+  </data>
+  <data name="tbCondPDrop.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 20</value>
   </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 13</value>
@@ -209,17 +221,29 @@
   <data name="Label8.Text" xml:space="preserve">
     <value>Vapor Product Flow Rate</value>
   </data>
+  <data name="cbCondPDropUnits.Location" type="System.Drawing.Point, System.Drawing">
+    <value>271, 34</value>
+  </data>
   <data name="cbCondPDropUnits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 21</value>
+    <value>107, 21</value>
+  </data>
+  <data name="cbCondVapFlowUnits.Location" type="System.Drawing.Point, System.Drawing">
+    <value>271, 158</value>
   </data>
   <data name="cbCondVapFlowUnits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 21</value>
+    <value>107, 21</value>
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 13</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>Condenser Pressure Drop</value>
+  </data>
+  <data name="tbCondVapFlow.Location" type="System.Drawing.Point, System.Drawing">
+    <value>182, 159</value>
+  </data>
+  <data name="tbCondVapFlow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 20</value>
   </data>
   <data name="cbCondSpec.Items" xml:space="preserve">
     <value>Heat Load</value>
@@ -248,11 +272,17 @@
   <data name="cbCondSpec.Items8" xml:space="preserve">
     <value>Temperature</value>
   </data>
+  <data name="cbCondSpec.Location" type="System.Drawing.Point, System.Drawing">
+    <value>182, 61</value>
+  </data>
   <data name="cbCondSpec.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 21</value>
+    <value>196, 21</value>
+  </data>
+  <data name="cbCondSpecUnits.Location" type="System.Drawing.Point, System.Drawing">
+    <value>271, 117</value>
   </data>
   <data name="cbCondSpecUnits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 21</value>
+    <value>107, 21</value>
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 13</value>
@@ -260,20 +290,29 @@
   <data name="Label7.Text" xml:space="preserve">
     <value>Specification</value>
   </data>
+  <data name="tbCondSpec.Location" type="System.Drawing.Point, System.Drawing">
+    <value>182, 117</value>
+  </data>
+  <data name="tbCondSpec.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 20</value>
+  </data>
   <data name="PanelCondenser.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 64</value>
   </data>
   <data name="PanelCondenser.Size" type="System.Drawing.Size, System.Drawing">
-    <value>363, 217</value>
+    <value>392, 615</value>
   </data>
   <data name="cbCondPressureUnits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>253, 38</value>
+    <value>280, 38</value>
   </data>
   <data name="cbCondPressureUnits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 21</value>
+    <value>107, 21</value>
   </data>
   <data name="tbCondPressure.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 38</value>
+    <value>190, 38</value>
+  </data>
+  <data name="tbCondPressure.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 20</value>
   </data>
   <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 42</value>
@@ -282,7 +321,7 @@
     <value>Condenser/Top Pressure</value>
   </data>
   <data name="TabCondenser.Size" type="System.Drawing.Size, System.Drawing">
-    <value>378, 367</value>
+    <value>407, 765</value>
   </data>
   <data name="TabCondenser.Text" xml:space="preserve">
     <value>Condenser</value>
@@ -321,10 +360,10 @@
     <value>Temperature</value>
   </data>
   <data name="cbRebSpec.Location" type="System.Drawing.Point, System.Drawing">
-    <value>146, 8</value>
+    <value>186, 8</value>
   </data>
   <data name="cbRebSpec.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 21</value>
+    <value>163, 21</value>
   </data>
   <data name="Label24.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 13</value>
@@ -333,28 +372,28 @@
     <value>Compound</value>
   </data>
   <data name="tbRebSpecValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>146, 62</value>
+    <value>186, 62</value>
   </data>
   <data name="tbRebSpecValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 20</value>
+    <value>77, 20</value>
   </data>
   <data name="cbRebComp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>146, 35</value>
+    <value>186, 35</value>
   </data>
   <data name="cbRebComp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 21</value>
+    <value>163, 21</value>
   </data>
   <data name="cbRebSpecUnits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>241, 61</value>
+    <value>269, 61</value>
   </data>
   <data name="cbRebSpecUnits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 21</value>
+    <value>80, 21</value>
   </data>
   <data name="PanelReboiler.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 64</value>
   </data>
   <data name="PanelReboiler.Size" type="System.Drawing.Size, System.Drawing">
-    <value>367, 108</value>
+    <value>362, 506</value>
   </data>
   <data name="chkNoReboiler.Size" type="System.Drawing.Size, System.Drawing">
     <value>178, 17</value>
@@ -372,19 +411,19 @@
     <value>Reboiler/Bottom Pressure</value>
   </data>
   <data name="cbRebPressure.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 38</value>
+    <value>272, 38</value>
   </data>
   <data name="cbRebPressure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 21</value>
+    <value>80, 21</value>
   </data>
   <data name="tbRebPressure.Location" type="System.Drawing.Point, System.Drawing">
-    <value>149, 38</value>
+    <value>189, 38</value>
   </data>
   <data name="tbRebPressure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 20</value>
+    <value>77, 20</value>
   </data>
   <data name="TabReboiler.Size" type="System.Drawing.Size, System.Drawing">
-    <value>378, 367</value>
+    <value>373, 765</value>
   </data>
   <data name="TabReboiler.Text" xml:space="preserve">
     <value>Reboiler</value>
@@ -393,7 +432,7 @@
     <value>Fill</value>
   </data>
   <data name="TabContainerSpecification.Size" type="System.Drawing.Size, System.Drawing">
-    <value>386, 393</value>
+    <value>415, 791</value>
   </data>
   <data name="Label16.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 118</value>
@@ -405,10 +444,10 @@
     <value>Convergence Tolerance</value>
   </data>
   <data name="tbConvTol.Location" type="System.Drawing.Point, System.Drawing">
-    <value>199, 116</value>
+    <value>208, 116</value>
   </data>
   <data name="tbConvTol.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 20</value>
+    <value>199, 20</value>
   </data>
   <data name="Label14.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 92</value>
@@ -426,16 +465,16 @@
     <value>Liquid-Liquid Extractor</value>
   </data>
   <data name="cbAbsorberMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>162, 17</value>
+    <value>171, 17</value>
   </data>
   <data name="cbAbsorberMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 21</value>
+    <value>236, 21</value>
   </data>
   <data name="tbMaxIt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>199, 89</value>
+    <value>208, 89</value>
   </data>
   <data name="tbMaxIt.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 20</value>
+    <value>199, 20</value>
   </data>
   <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 20</value>
@@ -456,16 +495,16 @@
     <value>Number of Stages</value>
   </data>
   <data name="tbNStages.Location" type="System.Drawing.Point, System.Drawing">
-    <value>162, 44</value>
+    <value>171, 44</value>
   </data>
   <data name="tbNStages.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 20</value>
+    <value>236, 20</value>
   </data>
   <data name="InitialEstimatesPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 66</value>
   </data>
   <data name="InitialEstimatesPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 327</value>
+    <value>408, 725</value>
   </data>
   <data name="chkUseIE_C.Location" type="System.Drawing.Point, System.Drawing">
     <value>257, 43</value>
@@ -528,13 +567,13 @@
     <value />
   </data>
   <data name="btnConfigExtSolver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>350, 216</value>
+    <value>386, 216</value>
   </data>
   <data name="btnResults.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 369</value>
+    <value>0, 767</value>
   </data>
   <data name="btnResults.Size" type="System.Drawing.Size, System.Drawing">
-    <value>392, 30</value>
+    <value>421, 30</value>
   </data>
   <data name="btnResults.Text" xml:space="preserve">
     <value>View Temperature, Pressure and Composition Profiles</value>
@@ -549,13 +588,13 @@
     <value>Units</value>
   </data>
   <data name="gridResults.Size" type="System.Drawing.Size, System.Drawing">
-    <value>392, 369</value>
+    <value>421, 767</value>
   </data>
   <data name="cbExternalSolver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>162, 216</value>
+    <value>171, 216</value>
   </data>
   <data name="cbExternalSolver.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 21</value>
+    <value>209, 21</value>
   </data>
   <data name="LabelES.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -570,10 +609,10 @@
     <value>External Solver</value>
   </data>
   <data name="cbSolvingMethod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>162, 189</value>
+    <value>171, 189</value>
   </data>
   <data name="cbSolvingMethod.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 21</value>
+    <value>236, 21</value>
   </data>
   <data name="LabelSM.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -588,43 +627,43 @@
     <value>Solving Method</value>
   </data>
   <data name="TabPage6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>385, 797</value>
+    <value>421, 797</value>
   </data>
   <data name="TabPage6.Text" xml:space="preserve">
     <value>General</value>
   </data>
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>392, 399</value>
+    <value>421, 797</value>
   </data>
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Specifications</value>
   </data>
   <data name="TabStages.Size" type="System.Drawing.Size, System.Drawing">
-    <value>392, 399</value>
+    <value>421, 797</value>
   </data>
   <data name="TabStages.Text" xml:space="preserve">
     <value>Stages</value>
   </data>
   <data name="TabConnections.Size" type="System.Drawing.Size, System.Drawing">
-    <value>392, 399</value>
+    <value>421, 797</value>
   </data>
   <data name="TabConnections.Text" xml:space="preserve">
     <value>Connections</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>376, 29</value>
+    <value>372, 29</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Check the boxes for the data sets that you want to use as initial estimates to solve the column.</value>
   </data>
   <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>392, 399</value>
+    <value>421, 797</value>
   </data>
   <data name="TabPage5.Text" xml:space="preserve">
     <value>Estimates</value>
   </data>
   <data name="TabPage4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>392, 399</value>
+    <value>421, 797</value>
   </data>
   <data name="TabPage4.Text" xml:space="preserve">
     <value>Results</value>
@@ -633,15 +672,15 @@
     <value>6, 106</value>
   </data>
   <data name="TabContainerAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>393, 823</value>
+    <value>429, 823</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>404, 941</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+    <value>438, 941</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1792, 325, 1792, 325</value>
+    <value>7340032, 130878, 7340032, 130878</value>
   </data>
 </root>
