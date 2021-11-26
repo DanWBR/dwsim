@@ -1,14 +1,9 @@
-Version 7.0.0
+Version 7.0.1
 
-- Integration with Simulate 365 account + File Picker (Classic UI)
-- Output Energy stream - Conversion Reactor 
-- Added CPUI editor for Property Package Equilibrium settings
-- Added CPUI Editor for Gibbs Reactor's Element Matrix
-- Fixed negative experimental thermal conductivity in some compounds
-- Fixed issue with LK reduced volume calculation
-- Fixed issue with PR78 model
-- Fixed Sensitivity Analysis
-- Fixed a NL PH Flash issue
-- Fixed Flowsheet Optimizer layout (Classic UI)
-- Fixed an issue with cubic equation root finding
+- Fixed bugs in rigorous column editor
+- Fixed issue 229: Bug in conversion reactor
+- Worksheets now have 65536 rows
+- Fixed issue 234: Adjuster error between target and manipulated value
+- Fixed issue 234: zero-flow errors in some unit operations
+- Fixed issue 230: bug in compound viewer
 - Other minor fixes and enhancements

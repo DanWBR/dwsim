@@ -62,6 +62,17 @@ VERSION HISTORY / CHANGELOG
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim6/commits/windows
 
+Version 7.0.1
+
+Author              Description
+Daniel Medeiros     Fixed bugs in rigorous column editor
+Daniel Medeiros     Fixed issue 229: Bug in conversion reactor
+Daniel Medeiros     Worksheets now have 65536 rows
+Daniel Medeiros     Fixed issue 234: Adjuster error between target and manipulated value
+Daniel Medeiros     Fixed issue 234: zero-flow errors in some unit operations
+Daniel Medeiros     Fixed issue 230: bug in compound viewer
+Daniel Medeiros     Other minor fixes and enhancements
+
 Version 7.0.0
 
 Author              Description
