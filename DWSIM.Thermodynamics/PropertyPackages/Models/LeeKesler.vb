@@ -505,12 +505,12 @@ Namespace PropertyPackages.Auxiliary
             Dim fT, fT_inf, nsub, delta_T As Double
 
             If TIPO = "L" Then
-                Tinf = 0
+                Tinf = 0.0000000001
                 Tsup = 10
                 nsub = 10000
             Else
                 Tinf = 10000
-                Tsup = 0
+                Tsup = 0.0000000001
                 nsub = 10000
             End If
 
