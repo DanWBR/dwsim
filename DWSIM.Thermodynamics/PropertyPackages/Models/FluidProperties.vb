@@ -576,7 +576,7 @@ Namespace PropertyPackages.Auxiliary
 
         End Function
 
-        Shared Function Pcm(ByVal Vz, ByVal VPc) As Double
+        Shared Function Pcm(ByVal Vz As Double(), ByVal VPc As Double()) As Double
 
             Dim i, n As Integer
 
@@ -596,7 +596,7 @@ Namespace PropertyPackages.Auxiliary
 
         End Function
 
-        Shared Function Vcm(ByVal Vz, ByVal VVc) As Double
+        Shared Function Vcm(ByVal Vz As Double(), ByVal VVc As Double()) As Double
 
             Dim i, j, n As Integer
 
@@ -615,7 +615,7 @@ Namespace PropertyPackages.Auxiliary
 
         End Function
 
-        Shared Function Zcm(ByVal Vz, ByVal VZc) As Double
+        Shared Function Zcm(ByVal Vz As Double(), ByVal VZc As Double()) As Double
 
             Dim i, n As Integer
 
@@ -635,7 +635,7 @@ Namespace PropertyPackages.Auxiliary
 
         End Function
 
-        Shared Function wm(ByVal Vz, ByVal Vw) As Double
+        Shared Function wm(ByVal Vz As Double(), ByVal Vw As Double()) As Double
 
             Dim i, n As Integer
 

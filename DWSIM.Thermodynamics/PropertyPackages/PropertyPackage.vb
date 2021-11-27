@@ -45,6 +45,8 @@ Imports DWSIM.UI.Shared
 Imports DWSIM.Interfaces.Enums
 Imports DWSIM.SharedClasses
 
+Imports props = DWSIM.Thermodynamics.PropertyPackages.Auxiliary.PROPS
+
 Namespace PropertyPackages
 
 #Region "    Global Enumerations"
@@ -5102,6 +5104,18 @@ redirect2:                  IObj?.SetCurrent()
 
         End Function
 
+        Public Function AUX_PVAPM(ByVal T As Double, Vx As Double()) As Double
+
+            Dim val As Double = 0
+
+            For i As Integer = 0 To Vx.Length - 1
+                val += Vx(i) * Me.AUX_PVAPi(i, T)
+            Next
+
+            Return val
+
+        End Function
+
         Public Function AUX_PVAPM(ByVal Phase As Phase, ByVal T As Double) As Double
 
             Dim val As Double = 0
@@ -6978,12 +6992,17 @@ Final3:
 
             Dim val As Double
 
+
             If LiquidDensityCalculationMode_Subcritical = LiquidDensityCalcMode.EOS Then
                 IObj?.Paragraphs.Add("Using EOS to calculate compressibility factor -> density.")
                 IObj?.SetCurrent()
                 val = AUX_Z(Vx, T, P, PhaseName.Liquid)
                 val = (8.314 * val * T / P)
                 val = 1 / val * Me.AUX_MMM(Vx) / 1000
+            ElseIf LiquidDensityCalculationMode_Subcritical = LiquidDensityCalcMode.Rackett Then
+                val = props.liq_dens_rackett(T, props.Tcm(Vx, RET_VTC()), props.Pcm(Vx, RET_VPC()), props.wm(Vx, RET_VW()),
+                                            AUX_MMM(Vx), props.Zcm(Vx, RET_VZRa()), P, AUX_PVAPM(T))
+                IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", val))
             Else
                 If T / RET_VTC.MultiplyY(Vx).SumY > 1 Then
                     IObj?.Paragraphs.Add("Temperature is supercritical. Using EOS to calculate compressibility factor -> density.")
@@ -6998,19 +7017,14 @@ Final3:
                     For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
                         IObj?.SetCurrent()
                         IObj?.Paragraphs.Add(String.Format("Calculating value for {0}... (xi = {1}, wi = {2})", subst.Name, subst.MoleFraction.GetValueOrDefault, subst.MassFraction.GetValueOrDefault))
-                        If LiquidDensityCalculationMode_Subcritical = LiquidDensityCalcMode.Rackett_and_ExpData Then
-                            vk(i) = AUX_LIQDENSi(subst, T)
-                            IObj?.Paragraphs.Add(String.Format("Value calculated from experimental curve: {0} kg/m3", vk(i)))
-                            If LiquidDensity_CorrectExpDataForPressure Then
-                                'pressure correction
-                                Dim pcorr = Auxiliary.PROPS.liq_dens_pcorrection(T / subst.ConstantProperties.Critical_Temperature, P, subst.ConstantProperties.Critical_Pressure, AUX_PVAPi(subst.Name, T), subst.ConstantProperties.Acentric_Factor)
-                                IObj?.Paragraphs.Add(String.Format("Compressed Liquid Density Correction Factor: {0}", pcorr))
-                                vk(i) *= pcorr
-                                IObj?.Paragraphs.Add(String.Format("Corrected Liquid Density: {0} kg/m3", vk(i)))
-                            End If
-                        Else
-                            vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
-                            IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", vk(i)))
+                        vk(i) = AUX_LIQDENSi(subst, T)
+                        IObj?.Paragraphs.Add(String.Format("Value calculated from experimental curve: {0} kg/m3", vk(i)))
+                        If LiquidDensity_CorrectExpDataForPressure Then
+                            'pressure correction
+                            Dim pcorr = Auxiliary.PROPS.liq_dens_pcorrection(T / subst.ConstantProperties.Critical_Temperature, P, subst.ConstantProperties.Critical_Pressure, AUX_PVAPi(subst.Name, T), subst.ConstantProperties.Acentric_Factor)
+                            IObj?.Paragraphs.Add(String.Format("Compressed Liquid Density Correction Factor: {0}", pcorr))
+                            vk(i) *= pcorr
+                            IObj?.Paragraphs.Add(String.Format("Corrected Liquid Density: {0} kg/m3", vk(i)))
                         End If
                         If T > subst.ConstantProperties.Critical_Temperature Then
                             vk(i) = 1.0E+20
