@@ -66,7 +66,7 @@ Partial Class PropertyPackageSettingsEditingControl
         resources.ApplyResources(Me.cbLiqDens, "cbLiqDens")
         Me.cbLiqDens.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbLiqDens.FormattingEnabled = True
-        Me.cbLiqDens.Items.AddRange(New Object() {resources.GetString("cbLiqDens.Items"), resources.GetString("cbLiqDens.Items1"), resources.GetString("cbLiqDens.Items2")})
+        Me.cbLiqDens.Items.AddRange(New Object() {resources.GetString("cbLiqDens.Items"), resources.GetString("cbLiqDens.Items1"), resources.GetString("cbLiqDens.Items2"), resources.GetString("cbLiqDens.Items3")})
         Me.cbLiqDens.Name = "cbLiqDens"
         '
         'chkLiqDensPCorr

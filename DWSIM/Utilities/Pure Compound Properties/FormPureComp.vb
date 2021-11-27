@@ -749,6 +749,8 @@ Public Class FormPureComp
             .Add(New Object() {DWSIM.App.GetLocalString("RackettCompressibility"), Format(constprop.Z_Rackett, nf), ""})
             .Add(New Object() {DWSIM.App.GetLocalString("PengRobinsonVolumeTranslationCoefficient"), Format(constprop.PR_Volume_Translation_Coefficient, nf), ""})
             .Add(New Object() {DWSIM.App.GetLocalString("SRKVolumeTranslationCoefficient"), Format(constprop.SRK_Volume_Translation_Coefficient, nf), ""})
+            .Add(New Object() {"COSTALD Characteristic Volume", Format(constprop.COSTALD_Characteristic_Volume, nf), "m3/kmol"})
+            .Add(New Object() {"COSTALD SRK Acentric Factor", Format(constprop.COSTALD_SRK_Acentric_Factor, nf), ""})
             .Add(New Object() {"UNIQUAC R", Format(constprop.UNIQUAC_R, nf), ""})
             .Add(New Object() {"UNIQUAC Q", Format(constprop.UNIQUAC_Q, nf), ""})
             .Add(New Object() {DWSIM.App.GetLocalString("Charge"), Format(constprop.Charge, "#;-#"), ""})
@@ -818,17 +820,21 @@ Public Class FormPureComp
                 constprop.PR_Volume_Translation_Coefficient = GridProps.Rows(e.RowIndex).Cells(1).Value
             Case 22 '.Add(New Object() {DWSIM.App.GetLocalString("SRKVolumeTranslationCoefficient"), Format(constprop.SRK_Volume_Translation_Coefficient, nf), ""})
                 constprop.SRK_Volume_Translation_Coefficient = GridProps.Rows(e.RowIndex).Cells(1).Value
-            Case 23 '.Add(New Object() {"UNIQUAC R", Format(constprop.UNIQUAC_R, nf), ""})
+            Case 23 '.Add(New Object() {DWSIM.App.GetLocalString("SRKVolumeTranslationCoefficient"), Format(constprop.SRK_Volume_Translation_Coefficient, nf), ""})
+                constprop.COSTALD_Characteristic_Volume = GridProps.Rows(e.RowIndex).Cells(1).Value
+            Case 24 '.Add(New Object() {DWSIM.App.GetLocalString("SRKVolumeTranslationCoefficient"), Format(constprop.SRK_Volume_Translation_Coefficient, nf), ""})
+                constprop.COSTALD_SRK_Acentric_Factor = GridProps.Rows(e.RowIndex).Cells(1).Value
+            Case 25 '.Add(New Object() {"UNIQUAC R", Format(constprop.UNIQUAC_R, nf), ""})
                 constprop.UNIQUAC_R = GridProps.Rows(e.RowIndex).Cells(1).Value
-            Case 24 '.Add(New Object() {"UNIQUAC Q", Format(constprop.UNIQUAC_Q, nf), ""})
+            Case 26 '.Add(New Object() {"UNIQUAC Q", Format(constprop.UNIQUAC_Q, nf), ""})
                 constprop.UNIQUAC_Q = GridProps.Rows(e.RowIndex).Cells(1).Value
-            Case 25 '.Add(New Object() {DWSIM.App.GetLocalString("Charge"), Format(constprop.Charge, "+#;-#"), ""})
+            Case 27 '.Add(New Object() {DWSIM.App.GetLocalString("Charge"), Format(constprop.Charge, "+#;-#"), ""})
                 constprop.Charge = GridProps.Rows(e.RowIndex).Cells(1).Value
-            Case 26 '.Add(New Object() {DWSIM.App.GetLocalString("HydrationNumber"), constprop.HydrationNumber, ""})
+            Case 28 '.Add(New Object() {DWSIM.App.GetLocalString("HydrationNumber"), constprop.HydrationNumber, ""})
                 constprop.HydrationNumber = GridProps.Rows(e.RowIndex).Cells(1).Value
-            Case 27 '.Add(New Object() {DWSIM.App.GetLocalString("PositiveIon"), constprop.PositiveIon, ""})
+            Case 29 '.Add(New Object() {DWSIM.App.GetLocalString("PositiveIon"), constprop.PositiveIon, ""})
                 constprop.PositiveIon = GridProps.Rows(e.RowIndex).Cells(1).Value
-            Case 28 '.Add(New Object() {DWSIM.App.GetLocalString("NegativeIon"), constprop.NegativeIon, ""})
+            Case 30 '.Add(New Object() {DWSIM.App.GetLocalString("NegativeIon"), constprop.NegativeIon, ""})
                 constprop.NegativeIon = GridProps.Rows(e.RowIndex).Cells(1).Value
             Case 13 '.Add(New Object() {DWSIM.App.GetLocalString("TemperatureOfFusion"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, constprop.TemperatureOfFusion), nf), su.temperature})
                 constprop.TemperatureOfFusion = SystemsOfUnits.Converter.ConvertToSI(su.temperature, GridProps.Rows(e.RowIndex).Cells(1).Value)
@@ -838,35 +844,35 @@ Public Class FormPureComp
                 constprop.SolidTs = SystemsOfUnits.Converter.ConvertToSI(su.temperature, GridProps.Rows(e.RowIndex).Cells(1).Value)
             Case 16 '.Add(New Object() {DWSIM.App.GetLocalString("SolidDensityAtTs"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.density, constprop.SolidDensityAtTs), nf), su.density})
                 constprop.SolidDensityAtTs = SystemsOfUnits.Converter.ConvertToSI(su.density, GridProps.Rows(e.RowIndex).Cells(1).Value)
-            Case 29 '    .Add(New Object() {DWSIM.App.GetLocalString("Electrolyte_DelGF"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, constprop.Electrolyte_DelGF), nf), su.enthalpy})
+            Case 31 '    .Add(New Object() {DWSIM.App.GetLocalString("Electrolyte_DelGF"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, constprop.Electrolyte_DelGF), nf), su.enthalpy})
                 constprop.Electrolyte_DelGF = SystemsOfUnits.Converter.ConvertToSI(su.enthalpy, GridProps.Rows(e.RowIndex).Cells(1).Value)
-            Case 30 '    .Add(New Object() {DWSIM.App.GetLocalString("Electrolyte_DelHF"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, constprop.Electrolyte_DelGF), nf), su.enthalpy})
+            Case 32 '    .Add(New Object() {DWSIM.App.GetLocalString("Electrolyte_DelHF"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, constprop.Electrolyte_DelGF), nf), su.enthalpy})
                 constprop.Electrolyte_DelHF = SystemsOfUnits.Converter.ConvertToSI(su.enthalpy, GridProps.Rows(e.RowIndex).Cells(1).Value)
-            Case 31 '    .Add(New Object() {DWSIM.App.GetLocalString("Electrolyte_Cp0"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, constprop.Electrolyte_Cp0), nf), su.heatCapacityCp})
+            Case 33 '    .Add(New Object() {DWSIM.App.GetLocalString("Electrolyte_Cp0"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, constprop.Electrolyte_Cp0), nf), su.heatCapacityCp})
                 constprop.Electrolyte_Cp0 = GridProps.Rows(e.RowIndex).Cells(1).Value
-            Case 32 '    .Add(New Object() {DWSIM.App.GetLocalString("Electrolyte_StdStateMolVol"), Format(constprop.StandardStateMolarVolume, nf), "cm3/mol"})
+            Case 34 '    .Add(New Object() {DWSIM.App.GetLocalString("Electrolyte_StdStateMolVol"), Format(constprop.StandardStateMolarVolume, nf), "cm3/mol"})
                 constprop.StandardStateMolarVolume = GridProps.Rows(e.RowIndex).Cells(1).Value
-            Case 33 '    .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_SGG"), Format(constprop.BO_SGG, nf), ""})
+            Case 35 '    .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_SGG"), Format(constprop.BO_SGG, nf), ""})
                 constprop.BO_SGG = GridProps.Rows(e.RowIndex).Cells(1).Value
-            Case 34 '    .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_SGO"), Format(constprop.BO_SGO, nf), ""})
+            Case 36 '    .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_SGO"), Format(constprop.BO_SGO, nf), ""})
                 constprop.BO_SGO = GridProps.Rows(e.RowIndex).Cells(1).Value
-            Case 35 '    .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_GOR"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.gor, constprop.BO_GOR), nf), su.gor})
+            Case 37 '    .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_GOR"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.gor, constprop.BO_GOR), nf), su.gor})
                 constprop.BO_GOR = SystemsOfUnits.Converter.ConvertToSI(su.gor, GridProps.Rows(e.RowIndex).Cells(1).Value)
-            Case 36 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_BSW"), Format(constprop.BO_BSW, nf), ""})
+            Case 38 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_BSW"), Format(constprop.BO_BSW, nf), ""})
                 constprop.BO_BSW = GridProps.Rows(e.RowIndex).Cells(1).Value
-            Case 37 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_V1"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, constprop.Electrolyte_DelGF), nf), su.cinematic_viscosity})
+            Case 39 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_V1"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, constprop.Electrolyte_DelGF), nf), su.cinematic_viscosity})
                 constprop.BO_OilVisc1 = SystemsOfUnits.Converter.ConvertToSI(su.cinematic_viscosity, GridProps.Rows(e.RowIndex).Cells(1).Value)
-            Case 38 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_T1"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, constprop.Electrolyte_DelGF), nf), su.temperature})
+            Case 40 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_T1"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, constprop.Electrolyte_DelGF), nf), su.temperature})
                 constprop.BO_OilViscTemp1 = SystemsOfUnits.Converter.ConvertToSI(su.temperature, GridProps.Rows(e.RowIndex).Cells(1).Value)
-            Case 39 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_V2"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, constprop.Electrolyte_DelGF), nf), su.cinematic_viscosity})
+            Case 41 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_V2"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.cinematic_viscosity, constprop.Electrolyte_DelGF), nf), su.cinematic_viscosity})
                 constprop.BO_OilVisc2 = SystemsOfUnits.Converter.ConvertToSI(su.cinematic_viscosity, GridProps.Rows(e.RowIndex).Cells(1).Value)
-            Case 40 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_T2"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, constprop.Electrolyte_DelGF), nf), su.temperature})
+            Case 42 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_T2"), Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, constprop.Electrolyte_DelGF), nf), su.temperature})
                 constprop.BO_OilViscTemp2 = SystemsOfUnits.Converter.ConvertToSI(su.temperature, GridProps.Rows(e.RowIndex).Cells(1).Value)
-            Case 41 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_PNA_P"), Format(constprop.BO_PNA_P, nf), ""})
+            Case 43 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_PNA_P"), Format(constprop.BO_PNA_P, nf), ""})
                 constprop.BO_PNA_P = GridProps.Rows(e.RowIndex).Cells(1).Value
-            Case 42 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_PNA_N"), Format(constprop.BO_PNA_N, nf), ""})
+            Case 44 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_PNA_N"), Format(constprop.BO_PNA_N, nf), ""})
                 constprop.BO_PNA_N = GridProps.Rows(e.RowIndex).Cells(1).Value
-            Case 43 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_PNA_A"), Format(constprop.BO_PNA_A, nf), ""})
+            Case 45 '         .Add(New Object() {DWSIM.App.GetLocalString("BlackOil_PNA_A"), Format(constprop.BO_PNA_A, nf), ""})
                 constprop.BO_PNA_A = GridProps.Rows(e.RowIndex).Cells(1).Value
         End Select
 

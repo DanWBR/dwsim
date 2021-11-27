@@ -232,6 +232,10 @@ Namespace Databases
                             cp.Chao_Seader_Liquid_Molar_Volume = Double.Parse(node2.Attributes("value").Value, nf) * 1000
                         Case "CAS"
                             cp.CAS_Number = node2.Attributes("value").Value
+                        Case "COSTALDVolume"
+                            cp.COSTALD_Characteristic_Volume = node2.Attributes("value").Value
+                        Case "CostaldAcentricFactor"
+                            cp.COSTALD_SRK_Acentric_Factor = node2.Attributes("value").Value
                         Case "Smiles"
                             cp.SMILES = node2.Attributes("value").Value
                         Case "StructureFormula"

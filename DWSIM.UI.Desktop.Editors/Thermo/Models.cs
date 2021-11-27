@@ -132,7 +132,6 @@ namespace DWSIM.UI.Desktop.Editors
                                                                         var cont = new PropertyPackageSettingsView(flowsheet, pp);
                                                                         var cont2 = new PropertyPackageIPView(flowsheet, pp);
                                                                         var cont3 = new FlashSettingsEditor(flowsheet, pp);
-                                                                        var cont4 = new FlashSettingsEditor(flowsheet, pp);
                                                                         cont.Tag = "General Settings";
                                                                         cont2.Tag = "Interaction Parameters";
                                                                         cont3.Tag = "Equilibrium Calculation Settings";

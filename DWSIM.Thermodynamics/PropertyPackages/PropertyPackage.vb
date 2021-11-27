@@ -165,6 +165,7 @@ Namespace PropertyPackages
             Rackett = 0
             Rackett_and_ExpData = 1
             EOS = 2
+            COSTALD = 3
         End Enum
 
         Public Enum LiquidViscosityCalcMode
@@ -7003,6 +7004,14 @@ Final3:
                 val = props.liq_dens_rackett(T, props.Tcm(Vx, RET_VTC()), props.Pcm(Vx, RET_VPC()), props.wm(Vx, RET_VW()),
                                             AUX_MMM(Vx), props.Zcm(Vx, RET_VZRa()), P, AUX_PVAPM(T))
                 IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", val))
+            ElseIf LiquidDensityCalculationMode_Subcritical = LiquidDensityCalcMode.COSTALD Then
+                If P <= 101325 Then
+                    val = props.liq_dens_COSTALD(Vx, T, RET_VCSTLDCV(), RET_VTC(), RET_VCSTLDAF()) 'm3/kmol
+                Else
+                    val = props.liq_dens_COSTALD_COMPR(Vx, T, RET_VCSTLDCV(), RET_VTC(), RET_VCSTLDAF(), P) 'm3/kmol
+                End If
+                val = AUX_MMM(Vx) / val 'kg/m3
+                IObj?.Paragraphs.Add(String.Format("Value estimated with COSTALD correlation: {0} kg/m3", val))
             Else
                 If T / RET_VTC.MultiplyY(Vx).SumY > 1 Then
                     IObj?.Paragraphs.Add("Temperature is supercritical. Using EOS to calculate compressibility factor -> density.")
@@ -7767,6 +7776,38 @@ Final3:
 
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 val(i) = Me.AUX_CPi(subst.Name, T)
+                i += 1
+            Next
+
+            Return val
+
+        End Function
+
+        Public Overridable Function RET_VCSTLDCV() As Double()
+
+            Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
+            Dim subst As Interfaces.ICompound
+            Dim i As Integer = 0
+
+            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                val(i) = subst.ConstantProperties.COSTALD_Characteristic_Volume
+                If val(i) = 0.0 Then val(i) = subst.ConstantProperties.Critical_Volume
+                i += 1
+            Next
+
+            Return val
+
+        End Function
+
+        Public Overridable Function RET_VCSTLDAF() As Double()
+
+            Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
+            Dim subst As Interfaces.ICompound
+            Dim i As Integer = 0
+
+            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                val(i) = subst.ConstantProperties.COSTALD_SRK_Acentric_Factor
+                If val(i) = 0.0 Then val(i) = subst.ConstantProperties.Acentric_Factor
                 i += 1
             Next
 

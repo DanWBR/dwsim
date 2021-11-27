@@ -2577,6 +2577,10 @@ Namespace BaseClasses
             End Set
         End Property
 
+        Public Property COSTALD_SRK_Acentric_Factor As Double = 0.0 Implements ICompoundConstantProperties.COSTALD_SRK_Acentric_Factor
+
+        Public Property COSTALD_Characteristic_Volume As Double = 0.0 Implements ICompoundConstantProperties.COSTALD_Characteristic_Volume
+
         Public Sub ExportToXLSX(filepath As String) Implements ICompoundConstantProperties.ExportToXLSX
 
             Using xcl As New OfficeOpenXml.ExcelPackage()

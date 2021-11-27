@@ -26,6 +26,24 @@ Public Module SIMDExtenders
     End Function
 
     ''' <summary>
+    ''' Computes the exponent of each vector element.
+    ''' </summary>
+    ''' <param name="vector"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    <System.Runtime.CompilerServices.Extension()> Public Function PowY(vector As Double(), exponent As Double) As Double()
+
+        Dim vector2(vector.Length - 1) As Double
+
+        For i As Integer = 0 To vector.Length - 1
+            vector2(i) = Math.Pow(vector(i), exponent)
+        Next
+
+        Return vector2
+
+    End Function
+
+    ''' <summary>
     ''' Computes the natural logarithm of each vector element.
     ''' </summary>
     ''' <param name="vector"></param>

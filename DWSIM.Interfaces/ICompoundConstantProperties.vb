@@ -1272,4 +1272,16 @@
 
     Function GetLiquidSurfaceTension(T As Double, ByRef Optional message As String = "") As Double
 
+    ''' <summary>
+    ''' COSTALD SRK Acentric factor
+    ''' </summary>
+    ''' <returns></returns>
+    Property COSTALD_SRK_Acentric_Factor As Double
+
+    ''' <summary>
+    ''' COSTALD Characteristic Volume (m3/kmol)
+    ''' </summary>
+    ''' <returns></returns>
+    Property COSTALD_Characteristic_Volume As Double
+
 End Interface
