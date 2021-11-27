@@ -1,9 +1,1 @@
-Version 7.0.1
-
-- Fixed bugs in rigorous column editor
-- Fixed issue 229: Bug in conversion reactor
-- Worksheets now have 65536 rows
-- Fixed issue 234: Adjuster error between target and manipulated value
-- Fixed issue 234: zero-flow errors in some unit operations
-- Fixed issue 230: bug in compound viewer
-- Other minor fixes and enhancements
+Version 7.1.0
