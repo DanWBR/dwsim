@@ -553,25 +553,20 @@ Namespace UnitOperations
 
             If qli = 0.0 Then
                 DeltaT = 0.0
-                If CalcMode <> CalculationMode.Power Then
-                    DeltaQ = 0.0
-                End If
-                If CalcMode <> CalculationMode.EnergyStream Then
-                    esin.EnergyFlow = 0.0
-                    If args Is Nothing Then esin.GraphicObject.Calculated = True
-                End If
+                DeltaQ = 0.0
+                esin.EnergyFlow = 0.0
+                If args Is Nothing Then esin.GraphicObject.Calculated = True
+
                 If CalcMode <> CalculationMode.Delta_P Then
-                    DeltaP = 0.0
-                    If CalcMode <> CalculationMode.OutletPressure Then Pout = 0.0
+                    DeltaP = Pout - Pi
                 End If
                 If CalcMode <> CalculationMode.OutletPressure Then
-                    Pout = 0.0
-                    If CalcMode <> CalculationMode.Delta_P Then DeltaP = 0.0
+                    Pout = Pi + DeltaP
                 End If
                 If Not DebugMode Then
                     With msout
                         .Phases(0).Properties.temperature = Ti
-                        .Phases(0).Properties.pressure = Pi
+                        .Phases(0).Properties.pressure = Pout
                         .Phases(0).Properties.enthalpy = Hi
                         Dim comp As BaseClasses.Compound
                         Dim i As Integer = 0
