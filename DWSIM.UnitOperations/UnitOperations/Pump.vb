@@ -554,9 +554,10 @@ Namespace UnitOperations
             If qli = 0.0 Then
                 DeltaT = 0.0
                 DeltaQ = 0.0
-                esin.EnergyFlow = 0.0
-                If args Is Nothing Then esin.GraphicObject.Calculated = True
-
+                If CalcMode <> CalculationMode.EnergyStream Then
+                    esin.EnergyFlow = 0.0
+                    If args Is Nothing Then esin.GraphicObject.Calculated = True
+                End If
                 If CalcMode <> CalculationMode.Delta_P Then
                     DeltaP = Pout - Pi
                 End If
