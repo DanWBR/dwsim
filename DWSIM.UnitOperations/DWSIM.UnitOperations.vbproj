@@ -646,6 +646,10 @@
     <Compile Include="UnitOperations\Compressor.vb" />
     <Compile Include="UnitOperations\Cooler.vb" />
     <Compile Include="UnitOperations\RigorousColumn.vb" />
+    <Compile Include="UnitOperations\RigorousColumnSolvers\BubblePoint.vb" />
+    <Compile Include="UnitOperations\RigorousColumnSolvers\NewtonRaphson.vb" />
+    <Compile Include="UnitOperations\RigorousColumnSolvers\SumRates.vb" />
+    <Compile Include="UnitOperations\RigorousColumnSolvers\Tomich.vb" />
     <Compile Include="UnitOperations\ShortcutColumn.vb" />
     <Compile Include="UnitOperations\Spreadsheet.vb" />
     <Compile Include="UnitOperations\Filter.vb" />

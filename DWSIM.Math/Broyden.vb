@@ -2,7 +2,8 @@
 
     Public Class Broyden
 
-        Shared Sub broydn(ByVal N As Object, ByVal X As Object, ByVal F As Object, ByRef P As Object, ByRef XB As Object, ByRef FB As Object, ByRef H As Object, ByRef IFLAG As Integer)
+        Shared Sub broydn(ByVal N As Integer, ByVal X As Double(), ByVal F As Double(), ByRef P As Double(),
+                          ByRef XB As Double(), ByRef FB As Double(), ByRef H As Double(,), ByRef IFLAG As Integer)
             '
             '**********************************************************************
             '

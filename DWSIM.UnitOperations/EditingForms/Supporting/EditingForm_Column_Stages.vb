@@ -77,6 +77,11 @@ Public Class EditingForm_Column_Stages
 
         dgv1.Columns(2).HeaderText += " (" & form.FlowsheetOptions.SelectedUnitSystem.pressure & ")"
 
+        Me.dgv1.Rows(0).Cells(3).ReadOnly = False
+        Me.dgv1.Rows(Me.dgv1.Rows.Count - 1).Cells(3).ReadOnly = False
+        Me.dgv1.Rows(0).Cells(3).Style.BackColor = Me.dgv1.RowTemplate.DefaultCellStyle.BackColor
+        Me.dgv1.Rows(Me.dgv1.Rows.Count - 1).Cells(3).Style.BackColor = Me.dgv1.RowTemplate.DefaultCellStyle.BackColor
+
         loaded = True
 
     End Sub
@@ -96,10 +101,8 @@ Public Class EditingForm_Column_Stages
     End Sub
 
     Private Sub ToolStripButton5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton5.Click
-        For Each cell In dgv1.SelectedCells
-            If Not dgv1.SelectedCells(0).ReadOnly Then
-                dgv1.SelectedCells(0).Value = Nothing
-            End If
+        For Each c As DataGridViewCell In dgv1.SelectedCells
+            If c.ColumnIndex <> 0 Then c.Value = Nothing
         Next
     End Sub
 

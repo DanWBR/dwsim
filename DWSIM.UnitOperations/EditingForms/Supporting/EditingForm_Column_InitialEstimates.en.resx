@@ -200,7 +200,7 @@
     <value>Update Automatically</value>
   </data>
   <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 320</value>
+    <value>24, 315</value>
   </data>
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Stage</value>
@@ -215,10 +215,10 @@
     <value>Liquid Flow</value>
   </data>
   <data name="dgvv.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 320</value>
+    <value>534, 315</value>
   </data>
   <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>561, 320</value>
+    <value>561, 315</value>
   </data>
   <data name="FaTabStripItem1.Title" xml:space="preserve">
     <value>Variables</value>
@@ -262,7 +262,7 @@
     <value>561, 320</value>
   </data>
   <data name="FaTabStripItem2.Title" xml:space="preserve">
-    <value>Compositions (Liquid Phase)</value>
+    <value>Mole Fractions (L)</value>
   </data>
   <data name="ToolStripButton21.ToolTipText" xml:space="preserve">
     <value>Copy</value>
@@ -301,7 +301,7 @@
     <value>561, 320</value>
   </data>
   <data name="FaTabStripItem5.Title" xml:space="preserve">
-    <value>Compositions (Vapor Phase)</value>
+    <value>Mole Fractons (V)</value>
   </data>
   <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>563, 341</value>

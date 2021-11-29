@@ -631,6 +631,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             epsilon(0) = 1
             epsilon(1) = 0.1
             epsilon(2) = 0.01
+            epsilon(3) = 0.001
+            epsilon(4) = 0.0001
 
             Dim fx, fx1, fx2, fx_ant, dfdx, x1, x0, dx As Double
 
@@ -647,7 +649,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             IObj?.Paragraphs.Add(String.Format("Mole Fractions: {0}", Vz.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Initial estimate for T: {0} K", T))
 
-            For j = 0 To 2
+            For j = 0 To 4
 
                 cnt = 0
                 x1 = Tref
@@ -723,20 +725,31 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     If cnt > 30 And Math.Sign(fx) <> Math.Sign(fx_ant) Then
 
-                        'oscillating around the solution. switch to normal mode.
+                        'oscillating around the solution.
 
-                        Return Flash_PH_2(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
+                        If Math.Abs(fx * fx_ant) < 1.0 Then
 
-                        'Dim bmin As New Brent
+                            Dim bmin As New Brent
 
-                        'Dim interp As New MathNet.Numerics.Interpolation.BulirschStoerRationalInterpolation(xvals.ToArray(), fxvals.ToArray())
+                            Dim interp As New MathNet.Numerics.Interpolation.BulirschStoerRationalInterpolation(xvals.ToArray(), fxvals.ToArray())
 
-                        'x1 = bmin.BrentOpt2(xvals.Min, xvals.Max, 50, 0.01, 100,
-                        '                    Function(tval)
-                        '                        Return interp.Interpolate(tval)
-                        '                    End Function)
+                            x1 = bmin.BrentOpt2(xvals.Min, xvals.Max, 50, 0.01, 100,
+                                                Function(tval)
+                                                    Return interp.Interpolate(tval)
+                                                End Function)
 
-                        'Exit Do
+                            Exit Do
+
+                        Else
+
+                            'switch to normal mode.
+
+                            Return Flash_PH_2(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
+
+                        End If
+
+
+
 
                     Else
 

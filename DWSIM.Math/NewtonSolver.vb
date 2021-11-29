@@ -150,40 +150,45 @@ Namespace MathEx.Optimization
 
                 dfdx = gradient(epsilon, x, fx)
 
-                success = SysLin.rsolve.rmatrixsolve(dfdx, fx, x.Length, dx)
+                Dim A = MathNet.Numerics.LinearAlgebra.Matrix(Of Double).Build.DenseOfArray(dfdx)
+                Dim B = MathNet.Numerics.LinearAlgebra.Vector(Of Double).Build.DenseOfArray(fx)
 
-                If success Then
+                dx = A.Solve(B).ToArray()
 
-                    If Common.SumSqr(dx) < Tolerance And _Iterations > MaxIterations / 2 Then
-                        Exit Do
-                    End If
+                'SysLin.rsolve.rmatrixsolve(dfdx, fx, x.Length, dx)
 
-                    If EnableDamping Then
-                        If _Iterations > 5 Then
-                            df = df * ExpandFactor
-                            If df > 1.0 Then df = 1.0
-                        Else
-                            df = mindamp
-                        End If
-                    Else
-                        df = 1.0#
-                    End If
+                'If success Then
 
-                    For i = 0 To x.Length - 1
-                        If Math.Abs(dx(i) / x(i)) > MaximumDelta Then
-                            x(i) -= Math.Sign(dx(i)) * MaximumDelta * df / ExpandFactor
-                        Else
-                            x(i) -= dx(i) * df
-                        End If
-                    Next
-
-                Else
-
-                    For i = 0 To x.Length - 1
-                        x(i) *= 0.999
-                    Next
-
+                If Common.SumSqr(dx) < Tolerance And _Iterations > MaxIterations / 2 Then
+                    Exit Do
                 End If
+
+                If EnableDamping Then
+                    If _Iterations > 5 Then
+                        df = df * ExpandFactor
+                        If df > 1.0 Then df = 1.0
+                    Else
+                        df = mindamp
+                    End If
+                Else
+                    df = 1.0#
+                End If
+
+                For i = 0 To x.Length - 1
+                    If Math.Abs(dx(i) / x(i)) > MaximumDelta Then
+                        x(i) -= Math.Sign(dx(i)) * MaximumDelta * df / ExpandFactor
+                    Else
+                        x(i) -= dx(i) * df
+                    End If
+                Next
+
+                'Else
+
+                '    For i = 0 To x.Length - 1
+                '        x(i) *= 0.999
+                '    Next
+
+                'End If
 
                 _Iterations += 1
 
