@@ -130,7 +130,7 @@
     <value>Arial, 9pt</value>
   </data>
   <data name="lblVersion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>331, 111</value>
+    <value>319, 111</value>
   </data>
   <data name="lblVersion.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 15</value>
@@ -166,7 +166,7 @@
     <value>Arial, 9pt</value>
   </data>
   <data name="LabelLicense.Location" type="System.Drawing.Point, System.Drawing">
-    <value>331, 135</value>
+    <value>319, 135</value>
   </data>
   <data name="LabelLicense.Size" type="System.Drawing.Size, System.Drawing">
     <value>521, 15</value>
@@ -202,7 +202,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblCopyright.Location" type="System.Drawing.Point, System.Drawing">
-    <value>331, 428</value>
+    <value>319, 428</value>
   </data>
   <data name="lblCopyright.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 15</value>
@@ -241,7 +241,7 @@
     <value>NoControl</value>
   </data>
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>331, 159</value>
+    <value>319, 159</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>355, 15</value>
@@ -274,10 +274,10 @@
     <value>NoControl</value>
   </data>
   <data name="lblPatrons.Location" type="System.Drawing.Point, System.Drawing">
-    <value>331, 202</value>
+    <value>319, 202</value>
   </data>
   <data name="lblPatrons.Size" type="System.Drawing.Size, System.Drawing">
-    <value>647, 205</value>
+    <value>628, 205</value>
   </data>
   <data name="lblPatrons.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>

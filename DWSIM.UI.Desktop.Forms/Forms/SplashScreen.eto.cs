@@ -84,7 +84,7 @@ namespace DWSIM.UI.Forms
 
             if (Application.Instance.Platform.IsGtk)
             {
-                img = new ImageView { Image = Bitmap.FromResource(imgprefix + "DWSIM_splash_gtk.png").WithSize(w, h) };
+                img = new ImageView { Image = Bitmap.FromResource(imgprefix + "DWSIM_splash_v7_gtk.png").WithSize(w, h) };
                 layout.Add(img, 0, 0);
                 lbl1a.BackgroundColor = Colors.WhiteSmoke;
                 lbl5.BackgroundColor = Colors.WhiteSmoke;
@@ -92,13 +92,13 @@ namespace DWSIM.UI.Forms
             }
             else
             {
-                img = new ImageView { Image = Bitmap.FromResource(imgprefix + "DWSIM_splash.png").WithSize(w, h) };
+                img = new ImageView { Image = Bitmap.FromResource(imgprefix + "DWSIM_splash_v7.png").WithSize(w, h) };
                 layout.Add(img, (int)(sf * (0 - dx)), (int)(sf * (0 - dy)));
             }
 
-            layout.Add(lbl1a, (int)(sf * (334 - dx)), (int)(sf * (114 - dy)));
-            layout.Add(lbl5, (int)(sf * (334 - dx)), (int)(sf * (430 - dy)));
-            layout.Add(lbl3, (int)(sf * (334 - dx)), (int)(sf * (139 - dy)));
+            layout.Add(lbl1a, (int)(sf * (318 - dx)), (int)(sf * (114 - dy)));
+            layout.Add(lbl5, (int)(sf * (318 - dx)), (int)(sf * (430 - dy)));
+            layout.Add(lbl3, (int)(sf * (318 - dx)), (int)(sf * (139 - dy)));
 
             var lblpatrons = new Label { Style = "splashlabels1", Text = "Special thanks to the following Patrons: " + Patrons.GetList() };
 
@@ -106,7 +106,7 @@ namespace DWSIM.UI.Forms
             lblpatrons.Width = (int)(sf * 650);
             lblpatrons.Height = (int)(sf * 227);
 
-            layout.Add(lblpatrons, (int)(sf * (334 - dx)), (int)(sf * (190 - dy)));
+            layout.Add(lblpatrons, (int)(sf * (318 - dx)), (int)(sf * (190 - dy)));
 
             Content = layout;
 
