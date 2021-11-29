@@ -16,6 +16,7 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports DWSIM.MathOps.MathEx
 Imports DWSIM.MathOps.MathEx.Optimization
 Imports DWSIM.SharedClasses
 Imports DWSIM.Thermodynamics
@@ -83,11 +84,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Dim nc, ns As Integer
             Dim i, j As Integer
 
-            Dim x As Double() = xl.ExpY()
-
-            For i = 0 To x.Length - 1
-                If x(i) < 0.0 Then x(i) = 0.0
-            Next
+            Dim x As Double() = xl
 
             IObj?.Paragraphs.Add(String.Format("Input Variables: {0}", xl.ToMathArrayString))
 
@@ -826,8 +823,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             Dim n As Integer = xvar.Length - 1
 
-            xvar = xvar.LogY()
-
             il_err_ant = FunctionValue(xvar)
 
             If Abs(il_err_ant.AbsSqrSumY) > tol.MinY_NonZero() Then
@@ -842,28 +837,40 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                                                                  Return FunctionValue(xvars)
                                                                              End Function, xvar, tol.MinY_NonZero(), maxits)
                         haderror = False
+                    Catch oex As OperationCanceledException
+                        Throw oex
                     Catch ex As Exception
                     End Try
                     If haderror Then
                         Dim nsolv As New NewtonSolver()
                         nsolv.EnableDamping = True
                         nsolv.ExpandFactor = 1.6
-                        nsolv.MaximumDelta = 0.3
+                        nsolv.MaximumDelta = 0.2
                         nsolv.MaxIterations = maxits
                         nsolv.Tolerance = tol.MinY_NonZero()
                         nsolv.UseBroydenApproximation = True
                         Try
                             xvar = nsolv.Solve(Function(xvars)
-                                                   Return FunctionValue(xvars)
+                                                   Dim fval = FunctionValue(xvars)
+                                                   If Not nsolv.BuildingJacobian Then
+                                                       pp.CurrentMaterialStream.Flowsheet.ShowMessage(dc.GraphicObject.Tag + ": [NS Solver] Final objective function (error) value = " & fval.AbsSqrSumY, IFlowsheet.MessageType.Information)
+                                                   End If
+                                                   Return fval
                                                End Function, xvar)
                             haderror = False
+                        Catch oex As OperationCanceledException
+                            Throw oex
                         Catch ex As Exception
                         End Try
                         If haderror Then
                             nsolv.Reset()
                             nsolv.UseBroydenApproximation = False
                             xvar = nsolv.Solve(Function(xvars)
-                                                   Return FunctionValue(xvars)
+                                                   Dim fval = FunctionValue(xvars)
+                                                   If Not nsolv.BuildingJacobian Then
+                                                       pp.CurrentMaterialStream.Flowsheet.ShowMessage(dc.GraphicObject.Tag + ": [NS Solver] Final objective function (error) value = " & fval.AbsSqrSumY, IFlowsheet.MessageType.Information)
+                                                   End If
+                                                   Return fval
                                                End Function, xvar)
                         End If
                     End If
@@ -881,8 +888,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             If Abs(il_err_sum) > tol.MinY_NonZero() Then
                 Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCErrorStillHigh"))
             End If
-
-            xvar = xvar.ExpY()
 
             For i = 0 To ns
                 Tj(i) = xvar(i * (2 * nc + 1)) * _maxT

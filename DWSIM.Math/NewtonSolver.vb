@@ -41,7 +41,15 @@ Namespace MathEx.Optimization
 
         Private tmpx As Double(), tmpdx As Double()
 
+        Private _jacobian As Boolean
+
         Private _error As Double
+
+        Public ReadOnly Property BuildingJacobian As Boolean
+            Get
+                Return _jacobian
+            End Get
+        End Property
 
         Public ReadOnly Property Iterations As Integer
             Get
@@ -139,6 +147,8 @@ Namespace MathEx.Optimization
                     fxsum0 = MathEx.Common.SumSqr(fx)
                 End If
 
+                _jacobian = False
+
                 fx = fxb.Invoke(x)
 
                 _error = MathEx.Common.SumSqr(fx)
@@ -147,6 +157,8 @@ Namespace MathEx.Optimization
                 If fxsum < Tolerance Then
                     Exit Do
                 End If
+
+                _jacobian = True
 
                 dfdx = gradient(epsilon, x, fx)
 
@@ -175,9 +187,12 @@ Namespace MathEx.Optimization
                 End If
 
                 For i = 0 To x.Length - 1
-                    If Math.Abs(dx(i) / x(i)) > MaximumDelta Then
-                        x(i) -= Math.Sign(dx(i)) * MaximumDelta * df / ExpandFactor
+                    If Math.Abs(x(i)) < 1.0E-20 Then
+                        x(i) -= dx(i) * df
                     Else
+                        If Math.Abs(dx(i) / x(i)) > MaximumDelta Then
+                            dx(i) = Math.Sign(dx(i)) * Math.Abs(x(i)) * MaximumDelta
+                        End If
                         x(i) -= dx(i) * df
                     End If
                 Next
