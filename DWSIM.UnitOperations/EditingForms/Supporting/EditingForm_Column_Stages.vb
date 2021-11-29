@@ -82,7 +82,12 @@ Public Class EditingForm_Column_Stages
         Me.dgv1.Rows(0).Cells(3).Style.BackColor = Me.dgv1.RowTemplate.DefaultCellStyle.BackColor
         Me.dgv1.Rows(Me.dgv1.Rows.Count - 1).Cells(3).Style.BackColor = Me.dgv1.RowTemplate.DefaultCellStyle.BackColor
 
+        Dim avgeff = dc.Stages.Select(Function(s) s.Efficiency).Average
+
+        tbGlobalEff.Text = avgeff.ToString("N2")
+
         loaded = True
+
 
     End Sub
 
@@ -145,5 +150,11 @@ Public Class EditingForm_Column_Stages
         If e.KeyCode = Keys.V And e.Modifiers = Keys.Control Then
             PasteData(sender)
         End If
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        For Each r As DataGridViewRow In dgv1.Rows
+            r.Cells(3).Value = Double.Parse(tbGlobalEff.Text)
+        Next
     End Sub
 End Class

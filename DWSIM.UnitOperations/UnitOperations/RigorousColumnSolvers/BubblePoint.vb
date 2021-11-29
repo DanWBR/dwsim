@@ -1489,6 +1489,10 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     If Vj(i) < 0 Then Vj(i) = 0.0000000001
                 Next
 
+                For i = 1 To ns - 1
+                    Vj(i) = eff(i) * Vj(i) + (1 - eff(i)) * Vj(i + 1)
+                Next
+
                 'Ljs
                 For i = 0 To ns
                     If i < ns Then
