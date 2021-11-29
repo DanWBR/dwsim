@@ -109,6 +109,40 @@ Public Class EditingForm_Splitter
 
             'parameters
 
+            Dim OutCount = 0
+            For Each cp In SimObject.GraphicObject.OutputConnectors
+                If cp.IsAttached Then OutCount += 1
+            Next
+
+            If OutCount <= 1 Then
+                TrackBar1.Enabled = False
+                TrackBar2.Enabled = False
+                tbRatio1.Enabled = False
+                tbRatio2.Enabled = False
+                tbFlowSpec1.Enabled = False
+                cbFlowSpec1.Enabled = False
+                tbFlowSpec2.Enabled = False
+                cbFlowSpec2.Enabled = False
+            ElseIf OutCount = 2 Then
+                TrackBar1.Enabled = True
+                TrackBar2.Enabled = False
+                tbRatio1.Enabled = True
+                tbRatio2.Enabled = False
+                tbFlowSpec1.Enabled = True
+                cbFlowSpec1.Enabled = True
+                tbFlowSpec2.Enabled = False
+                cbFlowSpec2.Enabled = False
+            ElseIf OutCount = 3 Then
+                TrackBar1.Enabled = True
+                TrackBar2.Enabled = True
+                tbRatio1.Enabled = True
+                tbRatio2.Enabled = True
+                tbFlowSpec1.Enabled = True
+                cbFlowSpec1.Enabled = True
+                tbFlowSpec2.Enabled = True
+                cbFlowSpec2.Enabled = True
+            End If
+
             Select Case .OperationMode
                 Case UnitOperations.Splitter.OpMode.SplitRatios
                     cbCalcMode.SelectedIndex = 0
