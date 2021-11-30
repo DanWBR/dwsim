@@ -34,6 +34,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
         Inherits ColumnSolver
 
+        Private _subcoolingdeltat As Double = 0.0
+
         Public Overrides ReadOnly Property Name As String
             Get
                 Return "Wang-Henke Solver"
@@ -46,7 +48,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             End Get
         End Property
 
-        Public Shared Function Solve(ByVal rc As Column, ByVal nc As Integer, ByVal ns As Integer, ByVal maxits As Integer,
+        Public Function Solve(ByVal rc As Column, ByVal nc As Integer, ByVal ns As Integer, ByVal maxits As Integer,
                                 ByVal tol As Double(), ByVal F As Double(), ByVal V As Double(),
                                 ByVal Q As Double(), ByVal L As Double(),
                                 ByVal VSS As Double(), ByVal LSS As Double(), ByVal Kval()() As Double,
@@ -753,7 +755,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
         End Function
 
-        Public Shared Function Solve_Internal(rc As Column, nc As Integer, ns As Integer, maxits As Integer,
+        Public Function Solve_Internal(rc As Column, nc As Integer, ns As Integer, maxits As Integer,
                                  tolerance As Double, F As Double(), V As Double(),
                                  Q As Double(), L As Double(),
                                  VSS As Double(), LSS As Double(), Kval()() As Double,
@@ -1198,6 +1200,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                                                          Tj(ipar) = tmpvar(4)
                                                                          Kant(ipar) = K(ipar)
                                                                          K(ipar) = tmpvar(6)
+                                                                         If ipar = 0 And _subcoolingdeltat > 0 Then
+                                                                             K(ipar) = pp.DW_CalcKvalue(xc(0), tmpvar(3), Tj(0) - _subcoolingdeltat, P(0))
+                                                                         End If
                                                                          If Tj(ipar) < 0.0 Or Double.IsNaN(Tj(ipar)) Then
                                                                              Tj(ipar) = Tj_ant(ipar)
                                                                              K(ipar) = Kant(ipar)
@@ -1216,6 +1221,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                             Tj(i) = tmp(4)
                             Kant(i) = K(i)
                             K(i) = tmp(6)
+                            If i = 0 And _subcoolingdeltat > 0 Then
+                                K(i) = pp.DW_CalcKvalue(xc(0), tmp(3), Tj(0) - _subcoolingdeltat, P(0))
+                            End If
                             If Tj(i) < 0.0 Or Double.IsNaN(Tj(i)) Then
                                 Tj(i) = Tj_ant(i)
                                 K(i) = Kant(i)
@@ -1302,7 +1310,11 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         Dim t1 As Task = TaskHelper.Run(Sub()
                                                             Parallel.For(0, ns + 1,
                                                                      Sub(ipar)
-                                                                         K(ipar) = pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar), P(ipar))
+                                                                         If ipar = 0 Then
+                                                                             K(ipar) = pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar) - _subcoolingdeltat, P(ipar))
+                                                                         Else
+                                                                             K(ipar) = pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar), P(ipar))
+                                                                         End If
                                                                      End Sub)
                                                         End Sub,
                                                           Settings.TaskCancellationTokenSource.Token)
@@ -1312,7 +1324,11 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                         For i = 0 To ns
                             Kant(i) = K(i)
-                            K(i) = pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
+                            If i = 0 Then
+                                K(i) = pp.DW_CalcKvalue(xc(i), yc(i), Tj(i) - _subcoolingdeltat, P(i))
+                            Else
+                                K(i) = pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
+                            End If
                         Next
                     End If
 
@@ -1644,6 +1660,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     llextractor = True
                 End If
             End If
+
+            _subcoolingdeltat = input.SubcoolingDeltaT
 
             Dim result As Object() = Solve(col, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P,
                                input.CondenserType, -1, eff, input.ColumnType, col.PropertyPackage, col.Specs, False, False)

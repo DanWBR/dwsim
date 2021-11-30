@@ -43,6 +43,9 @@ Partial Class EditingForm_Column
         Me.TabCondenser = New System.Windows.Forms.TabPage()
         Me.chkNoCondenser = New System.Windows.Forms.CheckBox()
         Me.PanelCondenser = New System.Windows.Forms.Panel()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.cbSubcooling = New System.Windows.Forms.ComboBox()
+        Me.tbSubcooling = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.cbCondComp = New System.Windows.Forms.ComboBox()
@@ -258,6 +261,9 @@ Partial Class EditingForm_Column
         'PanelCondenser
         '
         resources.ApplyResources(Me.PanelCondenser, "PanelCondenser")
+        Me.PanelCondenser.Controls.Add(Me.Label10)
+        Me.PanelCondenser.Controls.Add(Me.cbSubcooling)
+        Me.PanelCondenser.Controls.Add(Me.tbSubcooling)
         Me.PanelCondenser.Controls.Add(Me.Label2)
         Me.PanelCondenser.Controls.Add(Me.Label19)
         Me.PanelCondenser.Controls.Add(Me.cbCondComp)
@@ -276,6 +282,33 @@ Partial Class EditingForm_Column
         Me.ToolTipValues.SetToolTip(Me.PanelCondenser, resources.GetString("PanelCondenser.ToolTip"))
         Me.ToolTip1.SetToolTip(Me.PanelCondenser, resources.GetString("PanelCondenser.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.PanelCondenser, resources.GetString("PanelCondenser.ToolTip2"))
+        '
+        'Label10
+        '
+        resources.ApplyResources(Me.Label10, "Label10")
+        Me.Label10.Name = "Label10"
+        Me.ToolTip1.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip2"))
+        '
+        'cbSubcooling
+        '
+        resources.ApplyResources(Me.cbSubcooling, "cbSubcooling")
+        Me.cbSubcooling.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbSubcooling.FormattingEnabled = True
+        Me.cbSubcooling.Items.AddRange(New Object() {resources.GetString("cbSubcooling.Items"), resources.GetString("cbSubcooling.Items1"), resources.GetString("cbSubcooling.Items2")})
+        Me.cbSubcooling.Name = "cbSubcooling"
+        Me.ToolTip1.SetToolTip(Me.cbSubcooling, resources.GetString("cbSubcooling.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbSubcooling, resources.GetString("cbSubcooling.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbSubcooling, resources.GetString("cbSubcooling.ToolTip2"))
+        '
+        'tbSubcooling
+        '
+        resources.ApplyResources(Me.tbSubcooling, "tbSubcooling")
+        Me.tbSubcooling.Name = "tbSubcooling"
+        Me.ToolTipValues.SetToolTip(Me.tbSubcooling, resources.GetString("tbSubcooling.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbSubcooling, resources.GetString("tbSubcooling.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbSubcooling, resources.GetString("tbSubcooling.ToolTip2"))
         '
         'Label2
         '
@@ -878,7 +911,7 @@ Partial Class EditingForm_Column
         'EditingForm_Column
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.TabContainerAll)
         Me.Controls.Add(Me.GroupBox5)
         Me.Name = "EditingForm_Column"
@@ -984,4 +1017,7 @@ Partial Class EditingForm_Column
     Public WithEvents cbSolvingMethod As ComboBox
     Public WithEvents LabelSM As Label
     Public WithEvents btnConfigExtSolver As Button
+    Public WithEvents Label10 As Label
+    Public WithEvents tbSubcooling As TextBox
+    Public WithEvents cbSubcooling As ComboBox
 End Class

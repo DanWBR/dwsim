@@ -547,6 +547,8 @@ Namespace UnitOperations.Auxiliary.SepOps
         Public Property x1trials As List(Of Double()())
         Public Property x2trials As List(Of Double()())
 
+        Public Property SubcoolingDeltaT As Double = 0.0
+
     End Class
 
     Public Class ColumnSolverOutputData
@@ -818,6 +820,8 @@ Namespace UnitOperations
     <Serializable()> Public Class DistillationColumn
 
         Inherits Column
+
+        Public Property TotalCondenserSubcoolingDeltaT As Double = 0.0
 
         Public Property ReboiledAbsorber As Boolean = False
 
@@ -2520,9 +2524,11 @@ Namespace UnitOperations
             IObj?.Paragraphs.Add("DWSIM will calculate new or use existing initial estimates and forward the values to the selected solver.")
 
             'Validate unitop status.
+
             Me.Validate()
 
             'Check connectors' positions
+
             Me.CheckConnPos()
 
             'handle special cases when no initial estimates are used
@@ -3455,6 +3461,9 @@ Namespace UnitOperations
                 .L2trials = L2trials
                 .x1trials = x1trials
                 .x2trials = x2trials
+                If TypeOf Me Is DistillationColumn Then
+                    .SubcoolingDeltaT = DirectCast(Me, DistillationColumn).TotalCondenserSubcoolingDeltaT
+                End If
             End With
 
             Return solverinput

@@ -54,6 +54,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
         Dim _Kval()() As Double
         Dim _maxtchange, _Tj_ant(), _maxT, _maxvc, _maxlc As Double
         Dim _scalef As Double
+        Dim _subcoolingDeltaT As Double
 
         Private grad As Boolean = False
 
@@ -224,7 +225,11 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                                              If llextr Then
                                                                  tmp0 = _pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar), P(ipar), "LL")
                                                              Else
-                                                                 tmp0 = _pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar), P(ipar))
+                                                                 If ipar = 0 And Math.Abs(_subcoolingDeltaT) > 0 Then
+                                                                     tmp0 = _pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar) - _subcoolingDeltaT, P(ipar))
+                                                                 Else
+                                                                     tmp0 = _pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar), P(ipar))
+                                                                 End If
                                                              End If
                                                              Dim jj As Integer
                                                              For jj = 0 To nc - 1
@@ -242,7 +247,11 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     If llextr Then
                         tmp0 = _pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i), "LL")
                     Else
-                        tmp0 = _pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
+                        If i = 0 And Math.Abs(_subcoolingDeltaT) > 0 Then
+                            tmp0 = _pp.DW_CalcKvalue(xc(i), yc(i), Tj(i) - _subcoolingDeltaT, P(i))
+                        Else
+                            tmp0 = _pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
+                        End If
                     End If
                     For j = 0 To nc - 1
                         Kval(i)(j) = tmp0(j)
@@ -853,7 +862,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                             xvar = nsolv.Solve(Function(xvars)
                                                    Dim fval = FunctionValue(xvars)
                                                    If Not nsolv.BuildingJacobian Then
-                                                       pp.CurrentMaterialStream.Flowsheet.ShowMessage(dc.GraphicObject.Tag + ": [NS Solver] Final objective function (error) value = " & fval.AbsSqrSumY, IFlowsheet.MessageType.Information)
+                                                       pp.CurrentMaterialStream.Flowsheet.ShowMessage(dc.GraphicObject.Tag + ": [NS Solver] Current objective function (error) value = " & fval.AbsSqrSumY, IFlowsheet.MessageType.Information)
                                                    End If
                                                    Return fval
                                                End Function, xvar)
@@ -868,7 +877,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                             xvar = nsolv.Solve(Function(xvars)
                                                    Dim fval = FunctionValue(xvars)
                                                    If Not nsolv.BuildingJacobian Then
-                                                       pp.CurrentMaterialStream.Flowsheet.ShowMessage(dc.GraphicObject.Tag + ": [NS Solver] Final objective function (error) value = " & fval.AbsSqrSumY, IFlowsheet.MessageType.Information)
+                                                       pp.CurrentMaterialStream.Flowsheet.ShowMessage(dc.GraphicObject.Tag + ": [NS Solver] Current objective function (error) value = " & fval.AbsSqrSumY, IFlowsheet.MessageType.Information)
                                                    End If
                                                    Return fval
                                                End Function, xvar)
@@ -1043,6 +1052,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     llextractor = True
                 End If
             End If
+
+            _subcoolingDeltaT = input.SubcoolingDeltaT
 
             Dim result As Object() = Solve(col, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P,
                                input.CondenserType, eff, input.ColumnType, col.PropertyPackage, col.Specs, input.CalculationMode,
