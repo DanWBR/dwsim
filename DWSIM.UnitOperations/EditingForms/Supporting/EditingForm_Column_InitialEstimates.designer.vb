@@ -43,6 +43,11 @@ Partial Class EditingForm_Column_InitialEstimates
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.FaTabStrip1 = New FarsiLibrary.Win.FATabStrip()
         Me.FaTabStripItem1 = New FarsiLibrary.Win.FATabStripItem()
+        Me.dgvv = New System.Windows.Forms.DataGridView()
+        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
@@ -55,29 +60,24 @@ Partial Class EditingForm_Column_InitialEstimates
         Me.ToolStripButton26 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButton29 = New System.Windows.Forms.ToolStripButton()
-        Me.dgvv = New System.Windows.Forms.DataGridView()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FaTabStripItem2 = New FarsiLibrary.Win.FATabStripItem()
+        Me.dgvcl = New System.Windows.Forms.DataGridView()
+        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ToolStrip2 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton8 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton9 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton10 = New System.Windows.Forms.ToolStripButton()
-        Me.dgvcl = New System.Windows.Forms.DataGridView()
-        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FaTabStripItem5 = New FarsiLibrary.Win.FATabStripItem()
+        Me.dgvcv = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ToolStrip5 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripButton21 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton22 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton23 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton24 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton25 = New System.Windows.Forms.ToolStripButton()
-        Me.dgvcv = New System.Windows.Forms.DataGridView()
-        Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.FaTabStrip2 = New FarsiLibrary.Win.FATabStrip()
         Me.FaTabStripItem3 = New FarsiLibrary.Win.FATabStripItem()
@@ -108,14 +108,14 @@ Partial Class EditingForm_Column_InitialEstimates
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStrip1.SuspendLayout()
         Me.FaTabStripItem1.SuspendLayout()
-        Me.ToolStrip1.SuspendLayout()
         CType(Me.dgvv, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ToolStrip1.SuspendLayout()
         Me.FaTabStripItem2.SuspendLayout()
-        Me.ToolStrip2.SuspendLayout()
         CType(Me.dgvcl, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ToolStrip2.SuspendLayout()
         Me.FaTabStripItem5.SuspendLayout()
-        Me.ToolStrip5.SuspendLayout()
         CType(Me.dgvcv, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ToolStrip5.SuspendLayout()
         CType(Me.FaTabStrip2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStripItem3.SuspendLayout()
         Me.ToolStrip3.SuspendLayout()
@@ -197,12 +197,63 @@ Partial Class EditingForm_Column_InitialEstimates
         '
         resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         Me.FaTabStripItem1.CanClose = False
-        Me.FaTabStripItem1.Controls.Add(Me.ToolStrip1)
         Me.FaTabStripItem1.Controls.Add(Me.dgvv)
+        Me.FaTabStripItem1.Controls.Add(Me.ToolStrip1)
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
         Me.FaTabStripItem1.Selected = True
         Me.ToolTip1.SetToolTip(Me.FaTabStripItem1, resources.GetString("FaTabStripItem1.ToolTip"))
+        '
+        'dgvv
+        '
+        resources.ApplyResources(Me.dgvv, "dgvv")
+        Me.dgvv.AllowUserToAddRows = False
+        Me.dgvv.AllowUserToDeleteRows = False
+        Me.dgvv.AllowUserToOrderColumns = True
+        Me.dgvv.AllowUserToResizeRows = False
+        Me.dgvv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column4, Me.Column3})
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Tahoma", 8.25!)
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.NullValue = "<empty>"
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvv.DefaultCellStyle = DataGridViewCellStyle2
+        Me.dgvv.Name = "dgvv"
+        Me.dgvv.RowHeadersVisible = False
+        Me.dgvv.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
+        Me.ToolTip1.SetToolTip(Me.dgvv, resources.GetString("dgvv.ToolTip"))
+        '
+        'Column1
+        '
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle1
+        Me.Column1.FillWeight = 30.0!
+        resources.ApplyResources(Me.Column1, "Column1")
+        Me.Column1.Name = "Column1"
+        Me.Column1.ReadOnly = True
+        '
+        'Column2
+        '
+        Me.Column2.FillWeight = 30.0!
+        resources.ApplyResources(Me.Column2, "Column2")
+        Me.Column2.Name = "Column2"
+        '
+        'Column4
+        '
+        Me.Column4.FillWeight = 40.0!
+        resources.ApplyResources(Me.Column4, "Column4")
+        Me.Column4.Name = "Column4"
+        '
+        'Column3
+        '
+        Me.Column3.FillWeight = 40.0!
+        resources.ApplyResources(Me.Column3, "Column3")
+        Me.Column3.Name = "Column3"
         '
         'ToolStrip1
         '
@@ -285,64 +336,47 @@ Partial Class EditingForm_Column_InitialEstimates
         Me.ToolStripButton29.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.lightning
         Me.ToolStripButton29.Name = "ToolStripButton29"
         '
-        'dgvv
-        '
-        resources.ApplyResources(Me.dgvv, "dgvv")
-        Me.dgvv.AllowUserToAddRows = False
-        Me.dgvv.AllowUserToDeleteRows = False
-        Me.dgvv.AllowUserToOrderColumns = True
-        Me.dgvv.AllowUserToResizeRows = False
-        Me.dgvv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.dgvv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column4, Me.Column3})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Tahoma", 8.25!)
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.NullValue = "<empty>"
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvv.DefaultCellStyle = DataGridViewCellStyle2
-        Me.dgvv.Name = "dgvv"
-        Me.ToolTip1.SetToolTip(Me.dgvv, resources.GetString("dgvv.ToolTip"))
-        '
-        'Column1
-        '
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle1
-        Me.Column1.FillWeight = 30.0!
-        resources.ApplyResources(Me.Column1, "Column1")
-        Me.Column1.Name = "Column1"
-        Me.Column1.ReadOnly = True
-        '
-        'Column2
-        '
-        Me.Column2.FillWeight = 30.0!
-        resources.ApplyResources(Me.Column2, "Column2")
-        Me.Column2.Name = "Column2"
-        '
-        'Column4
-        '
-        Me.Column4.FillWeight = 40.0!
-        resources.ApplyResources(Me.Column4, "Column4")
-        Me.Column4.Name = "Column4"
-        '
-        'Column3
-        '
-        Me.Column3.FillWeight = 40.0!
-        resources.ApplyResources(Me.Column3, "Column3")
-        Me.Column3.Name = "Column3"
-        '
         'FaTabStripItem2
         '
         resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         Me.FaTabStripItem2.CanClose = False
-        Me.FaTabStripItem2.Controls.Add(Me.ToolStrip2)
         Me.FaTabStripItem2.Controls.Add(Me.dgvcl)
+        Me.FaTabStripItem2.Controls.Add(Me.ToolStrip2)
         Me.FaTabStripItem2.IsDrawn = True
         Me.FaTabStripItem2.Name = "FaTabStripItem2"
         Me.ToolTip1.SetToolTip(Me.FaTabStripItem2, resources.GetString("FaTabStripItem2.ToolTip"))
+        '
+        'dgvcl
+        '
+        resources.ApplyResources(Me.dgvcl, "dgvcl")
+        Me.dgvcl.AllowUserToAddRows = False
+        Me.dgvcl.AllowUserToDeleteRows = False
+        Me.dgvcl.AllowUserToOrderColumns = True
+        Me.dgvcl.AllowUserToResizeRows = False
+        Me.dgvcl.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
+        Me.dgvcl.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvcl.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column5})
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Tahoma", 8.25!)
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.NullValue = "<empty>"
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvcl.DefaultCellStyle = DataGridViewCellStyle4
+        Me.dgvcl.Name = "dgvcl"
+        Me.dgvcl.RowHeadersVisible = False
+        Me.dgvcl.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
+        Me.ToolTip1.SetToolTip(Me.dgvcl, resources.GetString("dgvcl.ToolTip"))
+        '
+        'Column5
+        '
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.Column5.DefaultCellStyle = DataGridViewCellStyle3
+        resources.ApplyResources(Me.Column5, "Column5")
+        Me.Column5.Name = "Column5"
+        Me.Column5.ReadOnly = True
         '
         'ToolStrip2
         '
@@ -386,45 +420,47 @@ Partial Class EditingForm_Column_InitialEstimates
         Me.ToolStripButton10.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.lock_open
         Me.ToolStripButton10.Name = "ToolStripButton10"
         '
-        'dgvcl
-        '
-        resources.ApplyResources(Me.dgvcl, "dgvcl")
-        Me.dgvcl.AllowUserToAddRows = False
-        Me.dgvcl.AllowUserToDeleteRows = False
-        Me.dgvcl.AllowUserToOrderColumns = True
-        Me.dgvcl.AllowUserToResizeRows = False
-        Me.dgvcl.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
-        Me.dgvcl.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvcl.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column5})
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Tahoma", 8.25!)
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle4.NullValue = "<empty>"
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvcl.DefaultCellStyle = DataGridViewCellStyle4
-        Me.dgvcl.Name = "dgvcl"
-        Me.ToolTip1.SetToolTip(Me.dgvcl, resources.GetString("dgvcl.ToolTip"))
-        '
-        'Column5
-        '
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.Column5.DefaultCellStyle = DataGridViewCellStyle3
-        resources.ApplyResources(Me.Column5, "Column5")
-        Me.Column5.Name = "Column5"
-        Me.Column5.ReadOnly = True
-        '
         'FaTabStripItem5
         '
         resources.ApplyResources(Me.FaTabStripItem5, "FaTabStripItem5")
         Me.FaTabStripItem5.CanClose = False
-        Me.FaTabStripItem5.Controls.Add(Me.ToolStrip5)
         Me.FaTabStripItem5.Controls.Add(Me.dgvcv)
+        Me.FaTabStripItem5.Controls.Add(Me.ToolStrip5)
         Me.FaTabStripItem5.IsDrawn = True
         Me.FaTabStripItem5.Name = "FaTabStripItem5"
         Me.ToolTip1.SetToolTip(Me.FaTabStripItem5, resources.GetString("FaTabStripItem5.ToolTip"))
+        '
+        'dgvcv
+        '
+        resources.ApplyResources(Me.dgvcv, "dgvcv")
+        Me.dgvcv.AllowUserToAddRows = False
+        Me.dgvcv.AllowUserToDeleteRows = False
+        Me.dgvcv.AllowUserToOrderColumns = True
+        Me.dgvcv.AllowUserToResizeRows = False
+        Me.dgvcv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
+        Me.dgvcv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvcv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn6})
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Tahoma", 8.25!)
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle6.NullValue = "<empty>"
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvcv.DefaultCellStyle = DataGridViewCellStyle6
+        Me.dgvcv.Name = "dgvcv"
+        Me.dgvcv.RowHeadersVisible = False
+        Me.dgvcv.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
+        Me.ToolTip1.SetToolTip(Me.dgvcv, resources.GetString("dgvcv.ToolTip"))
+        '
+        'DataGridViewTextBoxColumn6
+        '
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.DataGridViewTextBoxColumn6.DefaultCellStyle = DataGridViewCellStyle5
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn6, "DataGridViewTextBoxColumn6")
+        Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
+        Me.DataGridViewTextBoxColumn6.ReadOnly = True
         '
         'ToolStrip5
         '
@@ -467,36 +503,6 @@ Partial Class EditingForm_Column_InitialEstimates
         Me.ToolStripButton25.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton25.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.lock_open
         Me.ToolStripButton25.Name = "ToolStripButton25"
-        '
-        'dgvcv
-        '
-        resources.ApplyResources(Me.dgvcv, "dgvcv")
-        Me.dgvcv.AllowUserToAddRows = False
-        Me.dgvcv.AllowUserToDeleteRows = False
-        Me.dgvcv.AllowUserToOrderColumns = True
-        Me.dgvcv.AllowUserToResizeRows = False
-        Me.dgvcv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
-        Me.dgvcv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvcv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn6})
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Tahoma", 8.25!)
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle6.NullValue = "<empty>"
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvcv.DefaultCellStyle = DataGridViewCellStyle6
-        Me.dgvcv.Name = "dgvcv"
-        Me.ToolTip1.SetToolTip(Me.dgvcv, resources.GetString("dgvcv.ToolTip"))
-        '
-        'DataGridViewTextBoxColumn6
-        '
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.DataGridViewTextBoxColumn6.DefaultCellStyle = DataGridViewCellStyle5
-        resources.ApplyResources(Me.DataGridViewTextBoxColumn6, "DataGridViewTextBoxColumn6")
-        Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
-        Me.DataGridViewTextBoxColumn6.ReadOnly = True
         '
         'FaTabStrip2
         '
@@ -723,19 +729,19 @@ Partial Class EditingForm_Column_InitialEstimates
         Me.FaTabStrip1.ResumeLayout(False)
         Me.FaTabStripItem1.ResumeLayout(False)
         Me.FaTabStripItem1.PerformLayout()
+        CType(Me.dgvv, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
-        CType(Me.dgvv, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FaTabStripItem2.ResumeLayout(False)
         Me.FaTabStripItem2.PerformLayout()
+        CType(Me.dgvcl, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ToolStrip2.ResumeLayout(False)
         Me.ToolStrip2.PerformLayout()
-        CType(Me.dgvcl, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FaTabStripItem5.ResumeLayout(False)
         Me.FaTabStripItem5.PerformLayout()
+        CType(Me.dgvcv, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ToolStrip5.ResumeLayout(False)
         Me.ToolStrip5.PerformLayout()
-        CType(Me.dgvcv, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.FaTabStrip2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FaTabStripItem3.ResumeLayout(False)
         Me.FaTabStripItem3.PerformLayout()

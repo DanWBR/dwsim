@@ -22,7 +22,6 @@ David Miller
 David Whitlock
 Deryck Coetzer
 Diego A. Acosta
-Don Harrold
 Donald Gongaware
 Dorivaldo Junior
 Doug Palfreyman
@@ -64,7 +63,6 @@ Martin Heiser
 Martin Skjøth-Rasmussen
 Masahiro Sakai
 Matt Hogg
-Mauricio Marquez
 Nicolas Spogis
 Nikita Petrosyan
 Petroconsulting LLC

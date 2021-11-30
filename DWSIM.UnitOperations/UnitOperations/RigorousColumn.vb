@@ -729,7 +729,10 @@ Namespace UnitOperations.Auxiliary.SepOps
 
         Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
 
-            Return XMLSerializer.XMLSerializer.Deserialize(Me, data)
+            XMLSerializer.XMLSerializer.Deserialize(Me, data)
+            If SpecUnit = "W" Then SpecUnit = "Mass"
+            If SpecUnit = "We" Then SpecUnit = "Mass"
+            Return True
 
         End Function
 
@@ -3536,10 +3539,12 @@ Namespace UnitOperations
                         SetColumnSolver(New SolvingMethods.NaphtaliSandholmMethod())
                         so = Solver.SolveColumn(inputdata)
                         solvererror = False
+                    Catch oex As OperationCanceledException
+                        Throw oex
                     Catch ex As Exception
                     End Try
                     If solvererror Then
-                        FlowSheet.ShowMessage(GraphicObject.Tag + ": Column Solver did not converge. Will reset some parameters and try again shortly...", IFlowsheet.MessageType.Warning)
+                        FlowSheet.ShowMessage(GraphicObject.Tag + ": the column did not converge. DWSIM will try again with a different solver configuration...", IFlowsheet.MessageType.Warning)
                         'try to solve with auto-generated initial estimates.
                         inputdata.CalculationMode = 0
                         SetColumnSolver(New SolvingMethods.NaphtaliSandholmMethod())

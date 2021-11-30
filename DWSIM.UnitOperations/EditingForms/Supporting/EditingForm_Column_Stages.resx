@@ -123,19 +123,13 @@
   <data name="&gt;&gt;tbGlobalEff.Parent" xml:space="preserve">
     <value>Panel1</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Button1.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ToolStripButton5.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="TableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
-  </data>
-  <data name="&gt;&gt;TableLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="&gt;&gt;Button1.Name" xml:space="preserve">
     <value>Button1</value>
@@ -159,17 +153,11 @@
   <data name="&gt;&gt;Column1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Column3.Name" xml:space="preserve">
-    <value>Column3</value>
-  </data>
   <data name="&gt;&gt;ToolStripButton2.Name" xml:space="preserve">
     <value>ToolStripButton2</value>
   </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
     <value>288, 10</value>
-  </data>
-  <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="TableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
     <value>2</value>
@@ -194,6 +182,9 @@
   </data>
   <data name="&gt;&gt;tbGlobalEff.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="tbGlobalEff.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -239,6 +230,9 @@
   </data>
   <data name="&gt;&gt;Label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ToolStripButton1.ToolTipText" xml:space="preserve">
+    <value>Copiar</value>
   </data>
   <data name="&gt;&gt;dgv1.Name" xml:space="preserve">
     <value>dgv1</value>
@@ -300,8 +294,8 @@
   <data name="&gt;&gt;Panel1.Name" xml:space="preserve">
     <value>Panel1</value>
   </data>
-  <data name="Column3.HeaderText" xml:space="preserve">
-    <value>Nome</value>
+  <data name="ToolStrip1.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="ToolStripButton5.Size" type="System.Drawing.Size, System.Drawing">
     <value>22, 20</value>
@@ -324,14 +318,17 @@
   <data name="&gt;&gt;ToolStrip1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="dgv1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>376, 307</value>
+  </data>
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Estágio</value>
   </data>
   <data name="Column2.HeaderText" xml:space="preserve">
     <value>Pressão</value>
   </data>
-  <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 363</value>
+  <data name="tbGlobalEff.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 20</value>
   </data>
   <data name="TableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -342,8 +339,8 @@
   <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>376, 44</value>
   </data>
-  <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 363</value>
   </data>
   <data name="ToolStripButton2.Size" type="System.Drawing.Size, System.Drawing">
     <value>22, 20</value>
@@ -351,8 +348,11 @@
   <data name="ToolStripButton3.Size" type="System.Drawing.Size, System.Drawing">
     <value>22, 20</value>
   </data>
-  <data name="dgv1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>376, 307</value>
+  <data name="TableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>382, 363</value>
+  </data>
+  <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>406, 363</value>
@@ -360,8 +360,8 @@
   <data name="ToolStripButton5.ToolTipText" xml:space="preserve">
     <value>Limpar</value>
   </data>
-  <data name="tbGlobalEff.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 20</value>
+  <data name="Column3.HeaderText" xml:space="preserve">
+    <value>Nome</value>
   </data>
   <data name="&gt;&gt;Column1.Name" xml:space="preserve">
     <value>Column1</value>
@@ -390,8 +390,8 @@
   <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="ToolStrip1.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="Button1.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;ToolStripButton4.Name" xml:space="preserve">
     <value>ToolStripButton4</value>
@@ -423,8 +423,8 @@
   <data name="&gt;&gt;ToolStripButton1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ToolStripButton1.ToolTipText" xml:space="preserve">
-    <value>Copiar</value>
+  <data name="&gt;&gt;TableLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;Panel1.Parent" xml:space="preserve">
     <value>TableLayoutPanel1</value>
@@ -432,8 +432,8 @@
   <data name="ToolStripButton3.ToolTipText" xml:space="preserve">
     <value>Reconfigurar eficiências</value>
   </data>
-  <data name="TableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>382, 363</value>
+  <data name="&gt;&gt;Column3.Name" xml:space="preserve">
+    <value>Column3</value>
   </data>
   <data name="&gt;&gt;ToolStrip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

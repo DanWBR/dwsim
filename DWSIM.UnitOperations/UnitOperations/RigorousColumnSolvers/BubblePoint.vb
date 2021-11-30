@@ -1200,9 +1200,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                                                          Tj(ipar) = tmpvar(4)
                                                                          Kant(ipar) = K(ipar)
                                                                          K(ipar) = tmpvar(6)
-                                                                         If ipar = 0 And _subcoolingdeltat > 0 Then
-                                                                             K(ipar) = pp.DW_CalcKvalue(xc(0), tmpvar(3), Tj(0) - _subcoolingdeltat, P(0))
-                                                                         End If
                                                                          If Tj(ipar) < 0.0 Or Double.IsNaN(Tj(ipar)) Then
                                                                              Tj(ipar) = Tj_ant(ipar)
                                                                              K(ipar) = Kant(ipar)
@@ -1221,15 +1218,14 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                             Tj(i) = tmp(4)
                             Kant(i) = K(i)
                             K(i) = tmp(6)
-                            If i = 0 And _subcoolingdeltat > 0 Then
-                                K(i) = pp.DW_CalcKvalue(xc(0), tmp(3), Tj(0) - _subcoolingdeltat, P(0))
-                            End If
                             If Tj(i) < 0.0 Or Double.IsNaN(Tj(i)) Then
                                 Tj(i) = Tj_ant(i)
                                 K(i) = Kant(i)
                             End If
                         Next
                     End If
+
+                    Tj(0) = Tj(0) - _subcoolingdeltat
 
                     dTj = Tj.SubtractY(Tj_ant)
 

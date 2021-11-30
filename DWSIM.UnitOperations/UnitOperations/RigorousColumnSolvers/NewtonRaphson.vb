@@ -456,7 +456,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     If i = 0 Then
                         If _condtype = Column.condtype.Full_Reflux Then
                             M(i, j) = lc(i)(j) * (1 + Sl(i)) + vc(i)(j) * (1 + Sv(i)) - vc(i + 1)(j) - fc(i)(j)
-                            E(i, j) = -vc(i)(j) + (1 - eff(i)) * vc(i + 1)(j) * sumvkj(i) / sumvkj(i + 1)
+                            E(i, j) = eff(i) * Kval(i)(j) * lc(i)(j) * sumvkj(i) / sumlkj(i) - vc(i)(j) + (1 - eff(i)) * vc(i + 1)(j) * sumvkj(i) / sumvkj(i + 1)
                         ElseIf _condtype = condtype.Partial_Condenser Then
                             M(i, j) = lc(i)(j) * (1 + Sl(i)) + vc(i)(j) * (1 + Sv(i)) - vc(i + 1)(j) - fc(i)(j)
                             E(i, j) = eff(i) * Kval(i)(j) * lc(i)(j) * sumvkj(i) / sumlkj(i) - vc(i)(j) + (1 - eff(i)) * vc(i + 1)(j) * sumvkj(i) / sumvkj(i + 1)
@@ -862,7 +862,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                             xvar = nsolv.Solve(Function(xvars)
                                                    Dim fval = FunctionValue(xvars)
                                                    If Not nsolv.BuildingJacobian Then
-                                                       pp.CurrentMaterialStream.Flowsheet.ShowMessage(dc.GraphicObject.Tag + ": [NS Solver] Current objective function (error) value = " & fval.AbsSqrSumY, IFlowsheet.MessageType.Information)
+                                                       pp.CurrentMaterialStream.Flowsheet.ShowMessage(dc.GraphicObject.Tag + ": [NR Solver] current objective function (error) value = " & fval.AbsSqrSumY, IFlowsheet.MessageType.Information)
                                                    End If
                                                    Return fval
                                                End Function, xvar)
@@ -877,7 +877,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                             xvar = nsolv.Solve(Function(xvars)
                                                    Dim fval = FunctionValue(xvars)
                                                    If Not nsolv.BuildingJacobian Then
-                                                       pp.CurrentMaterialStream.Flowsheet.ShowMessage(dc.GraphicObject.Tag + ": [NS Solver] Current objective function (error) value = " & fval.AbsSqrSumY, IFlowsheet.MessageType.Information)
+                                                       pp.CurrentMaterialStream.Flowsheet.ShowMessage(dc.GraphicObject.Tag + ": [NR Solver] current objective function (error) value = " & fval.AbsSqrSumY, IFlowsheet.MessageType.Information)
                                                    End If
                                                    Return fval
                                                End Function, xvar)
@@ -890,7 +890,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             il_err = FunctionValue(xvar)
 
-            pp.CurrentMaterialStream.Flowsheet.ShowMessage(dc.GraphicObject.Tag + ": [NS Solver] Final objective function (error) value = " & il_err.AbsSqrSumY, IFlowsheet.MessageType.Information)
+            pp.CurrentMaterialStream.Flowsheet.ShowMessage(dc.GraphicObject.Tag + ": [NR Solver] final objective function (error) value = " & il_err.AbsSqrSumY, IFlowsheet.MessageType.Information)
 
             Dim il_err_sum = il_err.AbsSqrSumY()
 

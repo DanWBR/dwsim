@@ -109,6 +109,7 @@ Partial Class EditingForm_Column_Stages
         Me.dgv1.DefaultCellStyle = DataGridViewCellStyle3
         Me.dgv1.Name = "dgv1"
         Me.dgv1.RowHeadersVisible = False
+        Me.dgv1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
         Me.dgv1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         '
         'Column1

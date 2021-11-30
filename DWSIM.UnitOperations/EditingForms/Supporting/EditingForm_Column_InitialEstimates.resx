@@ -121,7 +121,7 @@
     <value>FaTabStripItem5</value>
   </data>
   <data name="&gt;&gt;dgvv.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ToolStripButton3.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -190,10 +190,6 @@
   </data>
   <data name="DataGridView1.Size" type="System.Drawing.Size, System.Drawing">
     <value>591, 246</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="GroupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
   </data>
   <data name="&gt;&gt;dgvv.Parent" xml:space="preserve">
     <value>FaTabStripItem1</value>
@@ -312,6 +308,7 @@
   <data name="&gt;&gt;FaTabStripItem2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ToolStrip3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Left</value>
   </data>
@@ -438,8 +435,8 @@
   <data name="&gt;&gt;Button3.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
-  <data name="ToolStripButton15.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
+  <data name="GroupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="&gt;&gt;ToolStripButton26.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -496,7 +493,7 @@
     <value>ToolStripButton14</value>
   </data>
   <data name="&gt;&gt;dgvcv.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;ToolStrip3.Name" xml:space="preserve">
     <value>ToolStrip3</value>
@@ -904,7 +901,7 @@
     <value>0, 0</value>
   </data>
   <data name="&gt;&gt;ToolStrip1.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;ToolStripButton28.Name" xml:space="preserve">
     <value>ToolStripButton28</value>
@@ -999,6 +996,9 @@
   <data name="&gt;&gt;ToolStripButton15.Name" xml:space="preserve">
     <value>ToolStripButton15</value>
   </data>
+  <data name="&gt;&gt;ToolStripButton17.Name" xml:space="preserve">
+    <value>ToolStripButton17</value>
+  </data>
   <data name="&gt;&gt;Button3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -1078,7 +1078,7 @@
     <value>Travar</value>
   </data>
   <data name="&gt;&gt;dgvcl.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;DataGridView2.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -1125,8 +1125,8 @@
   <data name="ToolStripButton10.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="&gt;&gt;ToolStripButton17.Name" xml:space="preserve">
-    <value>ToolStripButton17</value>
+  <data name="Button3.ToolTip" xml:space="preserve">
+    <value>Atualizar estimativas com solução atual</value>
   </data>
   <data name="dgvcv.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1195,7 +1195,7 @@
     <value>498, 416</value>
   </data>
   <data name="&gt;&gt;ToolStrip5.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ToolStripButton27.Size" type="System.Drawing.Size, System.Drawing">
     <value>29, 20</value>
@@ -1216,7 +1216,7 @@
     <value>2</value>
   </data>
   <data name="&gt;&gt;ToolStrip2.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="DataGridView2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Right</value>
@@ -1374,8 +1374,8 @@
   <data name="ToolStripButton5.Size" type="System.Drawing.Size, System.Drawing">
     <value>29, 20</value>
   </data>
-  <data name="Button3.ToolTip" xml:space="preserve">
-    <value>Atualizar estimativas com solução atual</value>
+  <data name="ToolStripButton15.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
   </data>
   <data name="ToolStripButton8.ToolTipText" xml:space="preserve">
     <value>Limpar</value>

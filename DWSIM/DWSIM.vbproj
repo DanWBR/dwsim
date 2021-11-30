@@ -3071,6 +3071,7 @@
     <None Include="Resources\DWSIM_ico.png" />
     <None Include="Resources\DWSIM_ico_64.png" />
     <None Include="Resources\DWSIM_splash_v7.png" />
+    <None Include="Resources\DWSIM Icon Vector 2.png" />
     <Content Include="Resources\es.png" />
     <None Include="Resources\Excel.png" />
     <None Include="Resources\Excel_copy1.jpg" />

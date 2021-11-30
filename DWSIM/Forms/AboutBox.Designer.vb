@@ -271,7 +271,6 @@ Partial Class AboutBox
         Me.FaTabStripItem5.Controls.Add(Me.Label15)
         Me.FaTabStripItem5.IsDrawn = True
         Me.FaTabStripItem5.Name = "FaTabStripItem5"
-        Me.FaTabStripItem5.Selected = True
         resources.ApplyResources(Me.FaTabStripItem5, "FaTabStripItem5")
         '
         'Button2
@@ -526,7 +525,7 @@ Partial Class AboutBox
         '
         'PictureBox1
         '
-        Me.PictureBox1.Image = Global.DWSIM.My.Resources.Resources.DWSIM_ico
+        Me.PictureBox1.Image = Global.DWSIM.My.Resources.Resources.DWSIM_Icon_Vector_2
         resources.ApplyResources(Me.PictureBox1, "PictureBox1")
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.TabStop = False
