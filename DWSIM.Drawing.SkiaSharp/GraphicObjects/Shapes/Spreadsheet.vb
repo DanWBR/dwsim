@@ -145,43 +145,6 @@ Namespace GraphicObjects.Shapes
 
             MyBase.Draw(g)
 
-            Dim myPen2 As New SKPaint()
-            With myPen2
-                .Color = LineColor
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .IsStroke = True
-                .StrokeWidth = LineWidth
-            End With
-
-            Dim rect1 As New SKRect(X + 0.1 * Width, Y, X + 0.9 * Width, Y + Height)
-
-
-            If GradientMode Then
-
-                Dim r0 As New SKRect(X, Y, X + Width, Y + Height)
-
-                Dim radius2 = 0.8F * Math.Min(Width, Height)
-                Dim center = New SKPoint(r0.MidX, r0.MidY)
-                Dim offCenter = center - New SKPoint(radius2 / 2, radius2 / 2)
-
-                Dim gradPen As New SKPaint()
-                With gradPen
-                    .Color = LineColor
-                    .StrokeWidth = LineWidth
-                    .IsStroke = False
-                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                    .Shader = SKShader.CreateTwoPointConicalGradient(
-                                    offCenter, 1, center, radius2,
-                                    New SKColor() {SKColors.White, LineColor},
-                                    Nothing, SKShaderTileMode.Clamp)
-                End With
-
-                canvas.DrawRoundRect(rect1, 2, 2, gradPen)
-
-            End If
-
-            canvas.DrawRoundRect(rect1, 2, 2, myPen2)
-
             Dim tpaint As New SKPaint()
 
             With tpaint
@@ -194,6 +157,91 @@ Namespace GraphicObjects.Shapes
 
             Dim trect As New SKRect(0, 0, 2, 2)
             tpaint.GetTextPath("SPR", 0, 0).GetBounds(trect)
+
+
+            Dim rect1 As New SKRect(X + 0.1 * Width, Y, X + 0.9 * Width, Y + Height)
+
+
+            Select Case DrawMode
+
+                Case 0
+
+                    'default
+
+                    Dim myPen2 As New SKPaint()
+
+                    With myPen2
+                        .Color = LineColor
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                        .IsStroke = True
+                        .StrokeWidth = LineWidth
+                    End With
+
+                    If GradientMode Then
+
+                        Dim r0 As New SKRect(X, Y, X + Width, Y + Height)
+
+                        Dim radius2 = 0.8F * Math.Min(Width, Height)
+                        Dim center = New SKPoint(r0.MidX, r0.MidY)
+                        Dim offCenter = center - New SKPoint(radius2 / 2, radius2 / 2)
+
+                        Dim gradPen As New SKPaint()
+                        With gradPen
+                            .Color = LineColor
+                            .StrokeWidth = LineWidth
+                            .IsStroke = False
+                            .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                            .Shader = SKShader.CreateTwoPointConicalGradient(
+                                            offCenter, 1, center, radius2,
+                                            New SKColor() {SKColors.White, LineColor},
+                                            Nothing, SKShaderTileMode.Clamp)
+                        End With
+
+                        canvas.DrawRoundRect(rect1, 2, 2, gradPen)
+
+                    End If
+
+                    canvas.DrawRoundRect(rect1, 2, 2, myPen2)
+
+                Case 1
+
+                    'b/w
+                    Dim myPen2 As New SKPaint()
+
+                    With myPen2
+                        .Color = SKColors.Black
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                        .IsStroke = True
+                        .StrokeWidth = LineWidth
+                    End With
+
+                    canvas.DrawRect(rect1, myPen2)
+
+                    With tpaint
+                        .TextSize = 10.0
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                        .Color = SKColors.Black
+                        .IsStroke = False
+                        .Typeface = MonospaceTypeFace
+                    End With
+
+                Case 2
+
+                    'Gas/Liquid Flows
+
+                Case 3
+
+                    'Temperature Gradients
+
+                Case 4
+
+                    'Pressure Gradients
+
+                Case 5
+
+                    'Temperature/Pressure Gradients
+
+            End Select
 
             Dim ax, ay As Integer
             ax = Me.X + (Me.Width - (trect.Right - trect.Left)) / 2
@@ -224,6 +272,7 @@ Namespace GraphicObjects.Shapes
                 canvas.DrawText("SPR", ax, ay, tpaint)
 
             End If
+
 
         End Sub
 

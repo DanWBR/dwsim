@@ -67,19 +67,20 @@
 
             Dim f = Height / 50.0
 
-            Try
-
+            If Owner IsNot Nothing Then
                 Dim SimObject = DirectCast(Owner, Interfaces.IAdjust)
+                Dim SimObject2 = DirectCast(Owner, Interfaces.ISimulationObject)
 
-                SimObject.ManipulatedObject = SimObject.FlowSheet.SimulationObjects(SimObject.ManipulatedObjectData.ID)
-                ConnectedToMv = SimObject.ManipulatedObject.GraphicObject
+                If SimObject2.GetFlowsheet().SimulationObjects.ContainsKey(SimObject.ManipulatedObjectData.ID) Then
+                    SimObject.ManipulatedObject = SimObject.FlowSheet.SimulationObjects(SimObject.ManipulatedObjectData.ID)
+                    ConnectedToMv = SimObject.ManipulatedObject.GraphicObject
+                End If
+                If SimObject2.GetFlowsheet().SimulationObjects.ContainsKey(SimObject.ControlledObjectData.ID) Then
+                    SimObject.ControlledObject = SimObject.FlowSheet.SimulationObjects(SimObject.ControlledObjectData.ID)
+                    ConnectedToCv = SimObject.ControlledObject.GraphicObject
+                End If
+            End If
 
-                SimObject.ControlledObject = SimObject.FlowSheet.SimulationObjects(SimObject.ControlledObjectData.ID)
-                ConnectedToCv = SimObject.ControlledObject.GraphicObject
-
-            Catch ex As Exception
-
-            End Try
 
             Dim aPen As New SKPaint()
             With aPen

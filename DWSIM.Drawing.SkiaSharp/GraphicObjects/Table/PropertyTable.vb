@@ -100,43 +100,70 @@ Namespace GraphicObjects.Tables
             Dim canvas As SKCanvas = DirectCast(g, SKCanvas)
 
             Dim tpaint, tpaint2 As New SKPaint()
-
-            With tpaint
-                .TextSize = FontSize
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                If GlobalSettings.Settings.DarkMode Then
-                    .Color = TextColorDark
-                Else
-                    .Color = TextColor
-                End If
-                .IsStroke = False
-                .Typeface = DefaultTypeFace
-            End With
-
-            With tpaint2
-                .TextSize = FontSize
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                If GlobalSettings.Settings.DarkMode Then
-                    .Color = TextColorDark
-                Else
-                    .Color = TextColor
-                End If
-                .IsStroke = False
-                .Typeface = RegularTypeFace
-            End With
-
             Dim bpaint As New SKPaint()
 
-            With bpaint
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                If GlobalSettings.Settings.DarkMode Then
-                    .Color = BorderColorDark
-                Else
-                    .Color = BorderColor
-                End If
-                .IsStroke = True
-                .StrokeWidth = 1
-            End With
+            If DrawMode = 0 Then
+
+                With tpaint
+                    .TextSize = FontSize
+                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    If GlobalSettings.Settings.DarkMode Then
+                        .Color = TextColorDark
+                    Else
+                        .Color = TextColor
+                    End If
+                    .IsStroke = False
+                    .Typeface = DefaultTypeFace
+                End With
+
+                With tpaint2
+                    .TextSize = FontSize
+                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    If GlobalSettings.Settings.DarkMode Then
+                        .Color = TextColorDark
+                    Else
+                        .Color = TextColor
+                    End If
+                    .IsStroke = False
+                    .Typeface = RegularTypeFace
+                End With
+
+                With bpaint
+                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    If GlobalSettings.Settings.DarkMode Then
+                        .Color = BorderColorDark
+                    Else
+                        .Color = BorderColor
+                    End If
+                    .IsStroke = True
+                    .StrokeWidth = 1
+                End With
+            Else
+
+                With tpaint
+                    .TextSize = FontSize
+                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    .Color = SKColors.Black
+                    .IsStroke = False
+                    .Typeface = MonospaceTypeFace
+                End With
+
+                With tpaint2
+                    .TextSize = FontSize
+                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    .Color = SKColors.Black
+                    .IsStroke = False
+                    .Typeface = MonospaceTypeFace
+                End With
+
+                With bpaint
+                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    .Color = SKColors.Black
+                    .IsStroke = True
+                    .StrokeWidth = 1
+                End With
+            End If
+
 
             Dim maxL0, maxL1, maxL2, maxL3, count As Integer
             Dim maxH As Integer

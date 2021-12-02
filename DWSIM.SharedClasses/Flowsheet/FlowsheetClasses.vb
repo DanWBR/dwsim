@@ -237,6 +237,10 @@ Namespace DWSIM.Flowsheet
 
         Public Property DisplayUserDefinedPropertiesEditor As Boolean = False Implements IFlowsheetOptions.DisplayUserDefinedPropertiesEditor
 
+        Public Property LabelFontSize As Double = 10.0 Implements IFlowsheetOptions.LabelFontSize
+
+        Public Property FlowsheetColorTheme As Integer = 0 Implements IFlowsheetOptions.FlowsheetColorTheme
+
     End Class
 
 End Namespace

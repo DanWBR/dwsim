@@ -94,72 +94,135 @@ Namespace GraphicObjects.Shapes
 
             MyBase.Draw(g)
 
-            Dim myPen2 As New SKPaint()
-            With myPen2
-                .Color = LineColor
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .IsStroke = True
-                .StrokeWidth = LineWidth
-            End With
 
-            Dim myPen3 As New SKPaint()
-            With myPen3
-                .Color = GraphicsSurface.BackgroundColor
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .IsStroke = False
-            End With
+            Select Case DrawMode
 
-            'center
-            Dim rect1 As New SKRect(X + 0.1 * Width, Y + 0.1 * Height, X + 0.1 * Width + 0.8 * Width, Y + 0.1 * Height + 0.8 * Height)
-            'top
-            Dim rect2 As New SKRect(X + 0.1 * Width, Y, X + 0.1 * Width + 0.8 * Width, Y + 0.2 * Height)
-            'bottom
-            Dim rect3 As New SKRect(X + 0.1 * Width, Y + 0.8 * Height, X + 0.1 * Width + 0.8 * Width, Y + 0.8 * Height + 0.2 * Height)
+                Case 0
 
-            If GradientMode Then
+                    'default
+                    Dim myPen2 As New SKPaint()
+                    With myPen2
+                        .Color = LineColor
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                        .IsStroke = True
+                        .StrokeWidth = LineWidth
+                    End With
 
-                Dim r0 As New SKRect(X, Y, X + Width, Y + Height)
+                    Dim myPen3 As New SKPaint()
+                    With myPen3
+                        .Color = GraphicsSurface.BackgroundColor
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                        .IsStroke = False
+                    End With
 
-                Dim radius2 = 0.8F * Math.Min(Width, Height)
-                Dim center = New SKPoint(r0.MidX, r0.MidY)
-                Dim offCenter = center - New SKPoint(radius2 / 2, radius2 / 2)
+                    'center
+                    Dim rect1 As New SKRect(X + 0.1 * Width, Y + 0.1 * Height, X + 0.1 * Width + 0.8 * Width, Y + 0.1 * Height + 0.8 * Height)
+                    'top
+                    Dim rect2 As New SKRect(X + 0.1 * Width, Y, X + 0.1 * Width + 0.8 * Width, Y + 0.2 * Height)
+                    'bottom
+                    Dim rect3 As New SKRect(X + 0.1 * Width, Y + 0.8 * Height, X + 0.1 * Width + 0.8 * Width, Y + 0.8 * Height + 0.2 * Height)
 
-                Dim gradPen As New SKPaint()
-                With gradPen
-                    .Color = LineColor
-                    .StrokeWidth = LineWidth
-                    .IsStroke = False
-                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                    .Shader = SKShader.CreateTwoPointConicalGradient(
-                                    offCenter, 1, center, radius2,
-                                    New SKColor() {SKColors.White, LineColor},
-                                    Nothing, SKShaderTileMode.Clamp)
-                End With
+                    If GradientMode Then
 
-                canvas.DrawOval(rect3, gradPen)
-                canvas.DrawRect(rect1, gradPen)
-                canvas.DrawOval(rect2, gradPen)
+                        Dim r0 As New SKRect(X, Y, X + Width, Y + Height)
 
-                canvas.DrawOval(New SKRect(X + 0.2 * Width, Y + 0.6 * Height, X + 0.5 * Width, Y + 0.7 * Height), gradPen)
-                canvas.DrawOval(New SKRect(X + 0.5 * Width, Y + 0.6 * Height, X + 0.8 * Width, Y + 0.7 * Height), gradPen)
+                        Dim radius2 = 0.8F * Math.Min(Width, Height)
+                        Dim center = New SKPoint(r0.MidX, r0.MidY)
+                        Dim offCenter = center - New SKPoint(radius2 / 2, radius2 / 2)
 
-            End If
+                        Dim gradPen As New SKPaint()
+                        With gradPen
+                            .Color = LineColor
+                            .StrokeWidth = LineWidth
+                            .IsStroke = False
+                            .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                            .Shader = SKShader.CreateTwoPointConicalGradient(
+                                            offCenter, 1, center, radius2,
+                                            New SKColor() {SKColors.White, LineColor},
+                                            Nothing, SKShaderTileMode.Clamp)
+                        End With
 
-            canvas.DrawRect(rect1, myPen2)
-            If Not GradientMode Then canvas.DrawRect(rect1, myPen3)
+                        canvas.DrawOval(rect3, gradPen)
+                        canvas.DrawRect(rect1, gradPen)
+                        canvas.DrawOval(rect2, gradPen)
 
-            If Not GradientMode Then canvas.DrawOval(rect2, myPen3)
+                        canvas.DrawOval(New SKRect(X + 0.2 * Width, Y + 0.6 * Height, X + 0.5 * Width, Y + 0.7 * Height), gradPen)
+                        canvas.DrawOval(New SKRect(X + 0.5 * Width, Y + 0.6 * Height, X + 0.8 * Width, Y + 0.7 * Height), gradPen)
 
-            If Not GradientMode Then canvas.DrawOval(rect2, myPen3)
-            canvas.DrawOval(rect2, myPen2)
+                    End If
 
-            If Not GradientMode Then canvas.DrawOval(rect3, myPen3)
-            canvas.DrawOval(rect3, myPen2)
+                    canvas.DrawRect(rect1, myPen2)
+                    If Not GradientMode Then canvas.DrawRect(rect1, myPen3)
 
-            Dim rect4 As New SKRect(X + 0.1 * Width, Y + 0.5 * Height, X + 0.1 * Width + 0.8 * Width, Y + 0.1 * Height + 0.8 * Height)
+                    If Not GradientMode Then canvas.DrawOval(rect2, myPen3)
 
-            If Not GradientMode Then canvas.DrawRect(rect4, myPen3)
+                    If Not GradientMode Then canvas.DrawOval(rect2, myPen3)
+                    canvas.DrawOval(rect2, myPen2)
 
+                    If Not GradientMode Then canvas.DrawOval(rect3, myPen3)
+                    canvas.DrawOval(rect3, myPen2)
+
+                    Dim rect4 As New SKRect(X + 0.1 * Width, Y + 0.5 * Height, X + 0.1 * Width + 0.8 * Width, Y + 0.1 * Height + 0.8 * Height)
+
+                    If Not GradientMode Then canvas.DrawRect(rect4, myPen3)
+
+                Case 1
+
+                    'b/w
+                    Dim myPen2 As New SKPaint()
+                    With myPen2
+                        .Color = SKColors.Black
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                        .IsStroke = True
+                        .StrokeWidth = LineWidth
+                    End With
+
+                    Dim myPen3 As New SKPaint()
+                    With myPen3
+                        .Color = SKColors.White
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                        .IsStroke = False
+                    End With
+
+                    'center
+                    Dim rect1 As New SKRect(X + 0.1 * Width, Y + 0.1 * Height, X + 0.1 * Width + 0.8 * Width, Y + 0.1 * Height + 0.8 * Height)
+                    'top
+                    Dim rect2 As New SKRect(X + 0.1 * Width, Y, X + 0.1 * Width + 0.8 * Width, Y + 0.2 * Height)
+                    'bottom
+                    Dim rect3 As New SKRect(X + 0.1 * Width, Y + 0.8 * Height, X + 0.1 * Width + 0.8 * Width, Y + 0.8 * Height + 0.2 * Height)
+
+                    canvas.DrawRect(rect1, myPen2)
+                    canvas.DrawRect(rect1, myPen3)
+
+                    canvas.DrawOval(rect2, myPen3)
+
+                    canvas.DrawOval(rect2, myPen3)
+                    canvas.DrawOval(rect2, myPen2)
+
+                    canvas.DrawOval(rect3, myPen3)
+                    canvas.DrawOval(rect3, myPen2)
+
+                    Dim rect4 As New SKRect(X + 0.1 * Width, Y + 0.5 * Height, X + 0.1 * Width + 0.8 * Width, Y + 0.1 * Height + 0.8 * Height)
+
+                    canvas.DrawRect(rect4, myPen3)
+
+                Case 2
+
+                    'Gas/Liquid Flows
+
+                Case 3
+
+                    'Temperature Gradients
+
+                Case 4
+
+                    'Pressure Gradients
+
+                Case 5
+
+                    'Temperature/Pressure Gradients
+
+            End Select
         End Sub
 
     End Class

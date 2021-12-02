@@ -112,7 +112,7 @@ Namespace GraphicObjects.Shapes
 
             MyBase.Draw(g)
 
-            If GradientMode Then
+            If GradientMode And DrawMode = 0 Then
 
                 Dim r0 As New SKRect(X, Y, X + Width, Y + Height)
 
@@ -171,20 +171,17 @@ Namespace GraphicObjects.Shapes
                 canvas.DrawLine((X + 0.05 * 1.25 * Width), (Y + 0.7 * Height), (X + 0.31 * Width), (Y + 0.7 * Height), gradPen)
                 canvas.DrawLine((X + 0.05 * 1.25 * Width), (Y + 0.8 * Height), (X + 0.31 * Width), (Y + 0.8 * Height), gradPen)
 
-
             End If
 
             Dim myPen As New SKPaint()
             With myPen
-                .Color = LineColor
+                .Color = IIf(DrawMode = 0, LineColor, SKColors.Black)
                 .StrokeWidth = LineWidth
-                .IsStroke = Not Fill
+                .IsStroke = IIf(DrawMode = 0, Not Fill, True)
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
             End With
 
             canvas.DrawRoundRect(New SKRect(X + (0.05) * 1.25 * Width, Y + 0.1 * Height, X + (0.05) * 1.25 * Width + 0.2 * 1.25 * Width, Y + 0.1 * Height + 0.8 * Height), 10, 10, myPen)
-
-            'Me.DrawRoundRect(g, X + 0.05 * 1.25 * Width, Y + 0.1 * Height, X + 0.05 * 1.25 * Width + 0.2 * 1.25 * Width, Y + 0.1 * Height + 0.8 * Height, 20, myPen)
 
             canvas.DrawPoints(SKPointMode.Polygon, New SKPoint() {New SKPoint(X + 0.175 * Width, Y + 0.1 * Height), New SKPoint(X + 0.175 * Width, Y + 0.02 * Height), New SKPoint(X + 0.6 * 1.25 * Width, Y + 0.02 * Height), New SKPoint(X + 0.6 * 1.25 * Width, Y + 0.1 * Height)}, myPen)
             canvas.DrawPoints(SKPointMode.Polygon, New SKPoint() {New SKPoint(X + 0.175 * Width, Y + 0.9 * Height), New SKPoint(X + 0.175 * Width, Y + 0.98 * Height), New SKPoint(X + 0.6 * 1.25 * Width, Y + 0.98 * Height), New SKPoint(X + 0.6 * 1.25 * Width, Y + 0.9 * Height)}, myPen)
@@ -227,9 +224,9 @@ Namespace GraphicObjects.Shapes
             With tpaint
                 .TextSize = 14.0#
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Color = LineColor
+                .Color = IIf(DrawMode = 0, LineColor, SKColors.Black)
                 .IsStroke = False
-                .Typeface = DefaultTypeFace
+                .Typeface = IIf(DrawMode = 0, DefaultTypeFace, MonospaceTypeFace)
             End With
 
             If FlippedH Or FlippedV Or Rotation <> 0 Then

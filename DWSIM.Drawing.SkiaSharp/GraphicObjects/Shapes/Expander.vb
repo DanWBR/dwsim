@@ -96,13 +96,7 @@ Namespace GraphicObjects.Shapes
 
             MyBase.Draw(g)
 
-            Dim myPen, myPen2 As New SKPaint()
-            With myPen
-                .Color = LineColor
-                .StrokeWidth = LineWidth
-                .IsStroke = Not Fill
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-            End With
+            Dim myPen As New SKPaint()
 
             Dim rect As New SKRect(X, Y, X + Width, X + Height)
 
@@ -116,7 +110,47 @@ Namespace GraphicObjects.Shapes
             gp2.LineTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y))
             gp2.Close()
 
-            If GradientMode Then
+            Select Case DrawMode
+
+                Case 0
+
+                    'default
+                    With myPen
+                        .Color = LineColor
+                        .StrokeWidth = LineWidth
+                        .IsStroke = Not Fill
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    End With
+
+                Case 1
+
+                    'b/w
+                    With myPen
+                        .Color = SKColors.Black
+                        .StrokeWidth = LineWidth
+                        .IsStroke = True
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    End With
+
+                Case 2
+
+                    'Gas/Liquid Flows
+
+                Case 3
+
+                    'Temperature Gradients
+
+                Case 4
+
+                    'Pressure Gradients
+
+                Case 5
+
+                    'Temperature/Pressure Gradients
+
+            End Select
+
+            If GradientMode And DrawMode = 0 Then
 
                 Dim r0 As New SKRect(X, Y, X + Width, Y + Height)
 

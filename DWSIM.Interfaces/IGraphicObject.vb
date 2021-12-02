@@ -97,6 +97,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Property ControlPanelModeEditorDisplayDelegate As Action
 
+    Property DrawMode As Integer
+
 End Interface
 
 <InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IConnectionPoint

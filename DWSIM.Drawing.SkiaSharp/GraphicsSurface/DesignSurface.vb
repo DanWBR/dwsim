@@ -69,6 +69,8 @@ Public Class GraphicsSurface
 
     Public Property DefaultTypeFace As SKTypeface
 
+    Public Property Flowsheet As IFlowsheet
+
     Public Sub New()
         Select Case GlobalSettings.Settings.RunningPlatform
             Case GlobalSettings.Settings.Platform.Windows
@@ -197,6 +199,8 @@ Public Class GraphicsSurface
     End Sub
 
     Public Sub UpdateCanvas(DrawingCanvas As SKCanvas)
+
+        UpdateColorTheme()
 
         'draw the actual objects onto the page, on top of the grid
 
@@ -1672,5 +1676,14 @@ Public Class GraphicsSurface
 
     End Sub
 
+    Public Sub UpdateColorTheme()
+
+        If Flowsheet Is Nothing Then Exit Sub
+
+        For Each obj In DrawingObjects
+            obj.DrawMode = Flowsheet.FlowsheetOptions.FlowsheetColorTheme
+        Next
+
+    End Sub
 
 End Class

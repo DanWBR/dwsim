@@ -139,83 +139,162 @@ Namespace GraphicObjects.Shapes
             MyBase.Draw(g)
 
             Dim myPen2 As New SKPaint()
-            With myPen2
-                .Color = LineColor
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .IsStroke = True
-                .StrokeWidth = LineWidth
-            End With
 
-            Dim rect1 As New SKRect(X + 0.1 * Width, Y, X + 0.9 * Width, Y + Height)
+            Select Case DrawMode
 
-            If GradientMode Then
+                Case 0
 
-                Dim r0 As New SKRect(X, Y, X + Width, Y + Height)
+                    'default
+                    With myPen2
+                        .Color = LineColor
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                        .IsStroke = True
+                        .StrokeWidth = LineWidth
+                    End With
+                    Dim rect1 As New SKRect(X + 0.1 * Width, Y, X + 0.9 * Width, Y + Height)
 
-                Dim radius2 = 0.8F * Math.Min(Width, Height)
-                Dim center = New SKPoint(r0.MidX, r0.MidY)
-                Dim offCenter = center - New SKPoint(radius2 / 2, radius2 / 2)
+                    If GradientMode Then
 
-                Dim gradPen As New SKPaint()
-                With gradPen
-                    .Color = LineColor
-                    .StrokeWidth = LineWidth
-                    .IsStroke = False
-                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                    .Shader = SKShader.CreateTwoPointConicalGradient(
-                                    offCenter, 1, center, radius2,
-                                    New SKColor() {SKColors.White, LineColor},
-                                    Nothing, SKShaderTileMode.Clamp)
-                End With
+                        Dim r0 As New SKRect(X, Y, X + Width, Y + Height)
 
-                canvas.DrawRoundRect(rect1, 2, 2, gradPen)
+                        Dim radius2 = 0.8F * Math.Min(Width, Height)
+                        Dim center = New SKPoint(r0.MidX, r0.MidY)
+                        Dim offCenter = center - New SKPoint(radius2 / 2, radius2 / 2)
 
-            End If
+                        Dim gradPen As New SKPaint()
+                        With gradPen
+                            .Color = LineColor
+                            .StrokeWidth = LineWidth
+                            .IsStroke = False
+                            .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                            .Shader = SKShader.CreateTwoPointConicalGradient(
+                                            offCenter, 1, center, radius2,
+                                            New SKColor() {SKColors.White, LineColor},
+                                            Nothing, SKShaderTileMode.Clamp)
+                        End With
 
-            canvas.DrawRoundRect(rect1, 2, 2, myPen2)
+                        canvas.DrawRoundRect(rect1, 2, 2, gradPen)
 
-            Dim tpaint As New SKPaint()
+                    End If
 
-            With tpaint
-                .TextSize = 10.0#
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Color = LineColor
-                .IsStroke = False
-                .Typeface = DefaultTypeFace
-            End With
+                    canvas.DrawRoundRect(rect1, 2, 2, myPen2)
 
-            Dim trect As New SKRect(0, 0, 2, 2)
-            tpaint.GetTextPath("FS", 0, 0).GetBounds(trect)
+                    Dim tpaint As New SKPaint()
 
-            Dim ax, ay As Integer
-            ax = Me.X + (Me.Width - (trect.Right - trect.Left)) / 2
-            ay = Me.Y + (Me.Height - (trect.Top - trect.Bottom)) / 2
+                    With tpaint
+                        .TextSize = 10.0#
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                        .Color = LineColor
+                        .IsStroke = False
+                        .Typeface = DefaultTypeFace
+                    End With
 
-            If FlippedH Or FlippedV Or Rotation <> 0 Then
+                    Dim trect As New SKRect(0, 0, 2, 2)
+                    tpaint.GetTextPath("FS", 0, 0).GetBounds(trect)
 
-                Dim currmat = canvas.TotalMatrix
+                    Dim ax, ay As Integer
+                    ax = Me.X + (Me.Width - (trect.Right - trect.Left)) / 2
+                    ay = Me.Y + (Me.Height - (trect.Top - trect.Bottom)) / 2
 
-                canvas.Save()
+                    If FlippedH Or FlippedV Or Rotation <> 0 Then
 
-                If FlippedV And Not FlippedH Then
-                    canvas.Scale(1, -1, (X + Width / 2), (Y + Height / 2))
-                ElseIf FlippedH And Not FlippedV Then
-                    canvas.Scale(-1, 1, (X + Width / 2), (Y + Height / 2))
-                ElseIf FlippedH And FlippedV Then
-                    canvas.Scale(-1, -1, (X + Width / 2), (Y + Height / 2))
-                End If
+                        Dim currmat = canvas.TotalMatrix
 
-                If Rotation <> 0.0 Then canvas.RotateDegrees(Rotation, X + Width / 2, Y + Height / 2)
+                        canvas.Save()
 
-                canvas.DrawText("FS", ax, ay, tpaint)
+                        If FlippedV And Not FlippedH Then
+                            canvas.Scale(1, -1, (X + Width / 2), (Y + Height / 2))
+                        ElseIf FlippedH And Not FlippedV Then
+                            canvas.Scale(-1, 1, (X + Width / 2), (Y + Height / 2))
+                        ElseIf FlippedH And FlippedV Then
+                            canvas.Scale(-1, -1, (X + Width / 2), (Y + Height / 2))
+                        End If
 
-                canvas.SetMatrix(currmat)
+                        If Rotation <> 0.0 Then canvas.RotateDegrees(Rotation, X + Width / 2, Y + Height / 2)
 
-            Else
+                        canvas.DrawText("FS", ax, ay, tpaint)
 
-                canvas.DrawText("FS", ax, ay, tpaint)
+                        canvas.SetMatrix(currmat)
 
-            End If
+                    Else
+
+                        canvas.DrawText("FS", ax, ay, tpaint)
+
+                    End If
+
+                Case 1
+
+                    'b/w
+
+                    With myPen2
+                        .Color = SKColors.Black
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                        .IsStroke = True
+                        .StrokeWidth = LineWidth
+                    End With
+
+                    Dim rect1 As New SKRect(X + 0.1 * Width, Y, X + 0.9 * Width, Y + Height)
+                    canvas.DrawRoundRect(rect1, 2, 2, myPen2)
+
+                    Dim tpaint As New SKPaint()
+
+                    With tpaint
+                        .TextSize = 10.0#
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                        .Color = SKColors.Black
+                        .IsStroke = False
+                        .Typeface = MonospaceTypeFace
+                    End With
+
+                    Dim trect As New SKRect(0, 0, 2, 2)
+                    tpaint.GetTextPath("FS", 0, 0).GetBounds(trect)
+
+                    Dim ax, ay As Integer
+                    ax = Me.X + (Me.Width - (trect.Right - trect.Left)) / 2
+                    ay = Me.Y + (Me.Height - (trect.Top - trect.Bottom)) / 2
+
+                    If FlippedH Or FlippedV Or Rotation <> 0 Then
+
+                        Dim currmat = canvas.TotalMatrix
+
+                        canvas.Save()
+
+                        If FlippedV And Not FlippedH Then
+                            canvas.Scale(1, -1, (X + Width / 2), (Y + Height / 2))
+                        ElseIf FlippedH And Not FlippedV Then
+                            canvas.Scale(-1, 1, (X + Width / 2), (Y + Height / 2))
+                        ElseIf FlippedH And FlippedV Then
+                            canvas.Scale(-1, -1, (X + Width / 2), (Y + Height / 2))
+                        End If
+
+                        If Rotation <> 0.0 Then canvas.RotateDegrees(Rotation, X + Width / 2, Y + Height / 2)
+
+                        canvas.DrawText("FS", ax, ay, tpaint)
+
+                        canvas.SetMatrix(currmat)
+
+                    Else
+
+                        canvas.DrawText("FS", ax, ay, tpaint)
+
+                    End If
+                Case 2
+
+                    'Gas/Liquid Flows
+
+                Case 3
+
+                    'Temperature Gradients
+
+                Case 4
+
+                    'Pressure Gradients
+
+                Case 5
+
+                    'Temperature/Pressure Gradients
+
+            End Select
 
         End Sub
 

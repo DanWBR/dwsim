@@ -1,5 +1,5 @@
 '    Property Package Base Class
-'    Copyright 2008-2014 Daniel Wagner O. de Medeiros
+'    Copyright 2008-2021 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -476,6 +476,8 @@ Namespace PropertyPackages
         Property FlashSettings As New Dictionary(Of Interfaces.Enums.FlashSetting, String)
 
         Public Property ExceptionLog As String = ""
+
+        Public ReadOnly Property ImplementsAnalyticalDerivatives As Boolean = False
 
         'forced solids list
         Public Property ForcedSolids As New List(Of String)
@@ -1240,41 +1242,6 @@ Namespace PropertyPackages
         ''' <remarks>The basis for the calculated enthalpy/entropy in DWSIM is zero at 25 C and 1 atm.</remarks>
         Public MustOverride Function DW_CalcEnthalpy(ByVal Vx As Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
 
-        Public Function DW_CalcEnthalpyDmoles(ByVal Vx As Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double()
-
-            Dim nmols As Double() = Vx.Clone
-            Dim n As Integer = Vx.Length - 1
-            Dim i, k As Integer
-
-            Dim deltan As Double = 0.0000001
-
-            Dim deriv As Double() = Vx.Clone()
-
-            Dim H1, H2, M1, M2 As Double
-
-            M1 = AUX_MMM(Vx)
-            H1 = (DW_CalcEnthalpy(Vx, T, P, st) + AUX_HFm25(Vx)) * M1
-
-            For i = 0 To n
-                Dim newVx As Double() = Vx.Clone()
-                For k = 0 To n
-                    If i = k Then
-                        newVx(k) = nmols(k) + deltan
-                    Else
-                        newVx(k) = nmols(k)
-                    End If
-                Next
-                newVx = newVx.NormalizeY()
-                M2 = AUX_MMM(newVx)
-                H2 = (DW_CalcEnthalpy(newVx, T, P, st) + AUX_HFm25(newVx)) * M2
-                deriv(i) = (H2 * (1 + deltan) - H1) / deltan
-            Next
-
-            Return deriv
-
-        End Function
-
-
         ''' <summary>
         ''' Calculates the enthalpy departure of a mixture.
         ''' </summary>
@@ -1296,40 +1263,6 @@ Namespace PropertyPackages
         ''' <returns>The entropy of the mixture in kJ/kg.K.</returns>
         ''' <remarks>The basis for the calculated enthalpy/entropy in DWSIM is zero at 25 C and 1 atm.</remarks>
         Public MustOverride Function DW_CalcEntropy(ByVal Vx As Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
-
-        Public Function DW_CalcEntropyDmoles(ByVal Vx As Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double()
-
-            Dim nmols As Double() = Vx.Clone
-            Dim n As Integer = Vx.Length - 1
-            Dim i, k As Integer
-
-            Dim deltan As Double = 0.0000001
-
-            Dim deriv As Double() = Vx.Clone()
-
-            Dim S1, S2, M1, M2 As Double
-
-            M1 = AUX_MMM(Vx)
-            S1 = (DW_CalcEntropy(Vx, T, P, st) + AUX_SFm25(Vx)) * M1
-
-            For i = 0 To n
-                Dim newVx As Double() = Vx.Clone()
-                For k = 0 To n
-                    If i = k Then
-                        newVx(k) = nmols(k) + deltan
-                    Else
-                        newVx(k) = nmols(k)
-                    End If
-                Next
-                'newVx = newVx.NormalizeY()
-                M2 = AUX_MMM(newVx)
-                S2 = (DW_CalcEntropy(newVx, T, P, st) + AUX_SFm25(newVx)) * M2
-                deriv(i) = (S2 * (1 + deltan) - S1) / deltan
-            Next
-
-            Return deriv
-
-        End Function
 
         ''' <summary>
         ''' Calculates the entropy departure of a mixture.
@@ -9714,7 +9647,7 @@ Final3:
                                             st = State.Solid
                                     End Select
                                     Dim ms = DirectCast(Me.CurrentMaterialStream, MaterialStream)
-                                    Dim cres = DW_CalcEnthalpyDmoles(ms.GetPhaseComposition(pi.DWPhaseIndex), ms.GetTemperature, ms.GetPressure, st)
+                                    Dim cres = DW_CalcdEnthalpydmoles(ms.GetPhaseComposition(pi.DWPhaseIndex), ms.GetTemperature, ms.GetPressure, st)
                                     Me.CurrentMaterialStream.SetSinglePhaseProp(p, phaseLabel, "", cres)
                                 Case "entropyF.Dmoles"
                                     Dim st As State
@@ -9727,7 +9660,7 @@ Final3:
                                             st = State.Solid
                                     End Select
                                     Dim ms = DirectCast(Me.CurrentMaterialStream, MaterialStream)
-                                    Dim cres = DW_CalcEntropyDmoles(ms.GetPhaseComposition(pi.DWPhaseIndex), ms.GetTemperature, ms.GetPressure, st)
+                                    Dim cres = DW_CalcdEntropydmoles(ms.GetPhaseComposition(pi.DWPhaseIndex), ms.GetTemperature, ms.GetPressure, st)
                                     Me.CurrentMaterialStream.SetSinglePhaseProp(p, phaseLabel, "", cres)
                                 Case Else
                                     Me.DW_CalcProp(p, pi.DWPhaseID)
@@ -10072,7 +10005,7 @@ Final3:
                             basis = ""
                         Case "enthalpyf.dmoles"
                             Dim val = Me.CurrentMaterialStream.Phases(f).Properties.molecularWeight.GetValueOrDefault
-                            Dim cres = DW_CalcEnthalpyDmoles(Vx, T, P, st)
+                            Dim cres = DW_CalcdEnthalpydmoles(Vx, T, P, st)
                             Select Case basis
                                 Case "Molar", "molar", "mole", "Mole"
                                     res.Add(cres.MultiplyConstY(val))
@@ -10081,7 +10014,7 @@ Final3:
                             End Select
                         Case "entropyf.dmoles"
                             Dim val = Me.CurrentMaterialStream.Phases(f).Properties.molecularWeight.GetValueOrDefault
-                            Dim cres = DW_CalcEntropyDmoles(Vx, T, P, st)
+                            Dim cres = DW_CalcdEntropydmoles(Vx, T, P, st)
                             Select Case basis
                                 Case "Molar", "molar", "mole", "Mole"
                                     res.Add(cres.MultiplyConstY(val))
@@ -12594,6 +12527,138 @@ Final3:
             FlashSettings(FlashSetting.ForceEquilibriumCalculationType) = mode
 
         End Sub
+
+#End Region
+
+#Region "   Derivatives"
+
+        Public Overridable Function DW_CalcdEnthalpydmoles(ByVal Vx As Double(), ByVal T As Double, ByVal P As Double, ByVal st As State) As Double()
+
+            Dim nmols As Double() = Vx.Clone
+            Dim n As Integer = Vx.Length - 1
+            Dim i, k As Integer
+
+            Dim deltan As Double = 0.0000001
+
+            Dim deriv As Double() = Vx.Clone()
+
+            Dim H1, H2, M1, M2 As Double
+
+            M1 = AUX_MMM(Vx)
+            H1 = (DW_CalcEnthalpy(Vx, T, P, st) + AUX_HFm25(Vx)) * M1
+
+            For i = 0 To n
+                Dim newVx As Double() = Vx.Clone()
+                For k = 0 To n
+                    If i = k Then
+                        newVx(k) = nmols(k) + deltan
+                    Else
+                        newVx(k) = nmols(k)
+                    End If
+                Next
+                newVx = newVx.NormalizeY()
+                M2 = AUX_MMM(newVx)
+                H2 = (DW_CalcEnthalpy(newVx, T, P, st) + AUX_HFm25(newVx)) * M2
+                deriv(i) = (H2 * (1 + deltan) - H1) / deltan
+            Next
+
+            Return deriv
+
+        End Function
+
+        Public Overridable Function DW_CalcdEntropydmoles(ByVal Vx As Double(), ByVal T As Double, ByVal P As Double, ByVal st As State) As Double()
+
+            Dim nmols As Double() = Vx.Clone
+            Dim n As Integer = Vx.Length - 1
+            Dim i, k As Integer
+
+            Dim deltan As Double = 0.0000001
+
+            Dim deriv As Double() = Vx.Clone()
+
+            Dim S1, S2, M1, M2 As Double
+
+            M1 = AUX_MMM(Vx)
+            S1 = (DW_CalcEntropy(Vx, T, P, st) + AUX_SFm25(Vx)) * M1
+
+            For i = 0 To n
+                Dim newVx As Double() = Vx.Clone()
+                For k = 0 To n
+                    If i = k Then
+                        newVx(k) = nmols(k) + deltan
+                    Else
+                        newVx(k) = nmols(k)
+                    End If
+                Next
+                'newVx = newVx.NormalizeY()
+                M2 = AUX_MMM(newVx)
+                S2 = (DW_CalcEntropy(newVx, T, P, st) + AUX_SFm25(newVx)) * M2
+                deriv(i) = (S2 * (1 + deltan) - S1) / deltan
+            Next
+
+            Return deriv
+
+        End Function
+
+        Public Overridable Function DW_CalcdEnthalpydT(ByVal Vx As Double(), ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
+
+            Dim deriv As Double
+
+            Dim H1, H2 As Double
+
+            H1 = DW_CalcEnthalpy(Vx, T, P, st)
+            H2 = DW_CalcEnthalpy(Vx, T + 0.01, P, st)
+
+            deriv = (H2 - H1) / 0.01
+
+            Return deriv
+
+        End Function
+
+        Public Overridable Function DW_CalcdEntropydT(ByVal Vx As Double(), ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
+
+            Dim deriv As Double
+
+            Dim S1, S2 As Double
+
+            S1 = DW_CalcEntropy(Vx, T, P, st)
+            S2 = DW_CalcEntropy(Vx, T + 0.01, P, st)
+
+            deriv = (S2 - S1) / 0.01
+
+            Return deriv
+
+        End Function
+
+        Public Overridable Function DW_CalcdKdT(ByVal Vx As Double(), ByVal Vy As Double(), ByVal T As Double, ByVal P As Double, Optional ByVal type As String = "LV") As Double()
+
+            Dim deriv As Double()
+
+            Dim K1, K2 As Double()
+
+            K1 = DW_CalcKvalue(Vx, Vy, T, P, type)
+            K2 = DW_CalcKvalue(Vx, Vy, T + 0.01, P, type)
+
+            deriv = K2.SubtractY(K1).MultiplyConstY(1.0 / 0.01)
+
+            Return deriv
+
+        End Function
+
+        Public Overridable Function DW_CalcdFugCoeffdT(ByVal Vx As Double(), ByVal T As Double, ByVal P As Double, st As State) As Double()
+
+            Dim deriv As Double()
+
+            Dim F1, F2 As Double()
+
+            F1 = DW_CalcFugCoeff(Vx, T, P, st)
+            F2 = DW_CalcFugCoeff(Vx, T + 0.01, P, st)
+
+            deriv = F2.SubtractY(F1).MultiplyConstY(1.0 / 0.01)
+
+            Return deriv
+
+        End Function
 
 #End Region
 

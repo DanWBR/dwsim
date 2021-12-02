@@ -63,6 +63,8 @@ Public Class FlowsheetSurface_SkiaSharp
             Flowsheet = My.Application.ActiveSimulation
         End If
 
+        FlowsheetSurface.Flowsheet = Flowsheet
+
         If My.Settings.FlowsheetRenderer = 0 Then
             DirectCast(FControl, FlowsheetSurfaceControl).FlowsheetObject = Flowsheet
         Else
@@ -84,6 +86,10 @@ Public Class FlowsheetSurface_SkiaSharp
             SplitContainerVertical.Panel2MinSize *= GlobalSettings.Settings.DpiScale
 
         End If
+
+        ToolStripComboBox1.SelectedIndex = Flowsheet.Options.FlowsheetColorTheme
+
+        tbFontSize.Text = Flowsheet.Options.LabelFontSize.ToString("G2")
 
         AddHandler CopyFromTSMI.DropDownItemClicked, AddressOf MaterialStreamClickHandler
 
@@ -3244,6 +3250,25 @@ Public Class FlowsheetSurface_SkiaSharp
             SplitContainerVertical.Panel2Collapsed = True
             SplitContainerHorizontal.Panel2Collapsed = False
         End If
+    End Sub
+
+    Private Sub ToolStripButton5_Click(sender As Object, e As EventArgs) Handles ToolStripButton5.Click
+        Flowsheet.FlowsheetOptions.LabelFontSize = Double.Parse(tbFontSize.Text)
+        For Each obj In FlowsheetSurface.DrawingObjects
+            If TypeOf obj Is ShapeGraphic Then
+                DirectCast(obj, ShapeGraphic).FontSize = Flowsheet.FlowsheetOptions.LabelFontSize
+            End If
+        Next
+        FControl.Invalidate()
+    End Sub
+
+    Private Sub ToolStripComboBox1_Click(sender As Object, e As EventArgs) Handles ToolStripComboBox1.SelectedIndexChanged
+        Try
+            Flowsheet.Options.FlowsheetColorTheme = ToolStripComboBox1.SelectedIndex
+            FlowsheetSurface.UpdateColorTheme()
+            FControl.Invalidate()
+        Catch ex As Exception
+        End Try
     End Sub
 
     Private Sub tsbControlPanelMode_CheckedChanged(sender As Object, e As EventArgs) Handles tsbControlPanelMode.CheckedChanged

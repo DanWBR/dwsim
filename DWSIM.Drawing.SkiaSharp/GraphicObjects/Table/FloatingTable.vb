@@ -78,48 +78,87 @@ Namespace GraphicObjects.Tables
             Padding = 5 / zoom * GlobalSettings.Settings.DpiScale * sf
 
             Dim tpaint As New SKPaint()
-
-            With tpaint
-                .TextSize = FontSize / zoom
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Color = If(GlobalSettings.Settings.DarkMode, SKColors.WhiteSmoke, SKColors.SteelBlue)
-                .IsStroke = False
-                .Typeface = RegularTypeFace
-            End With
-
+            Dim bpaint, bpaint2 As New SKPaint()
+            Dim spaint As New SKPaint()
             Dim tbpaint As New SKPaint()
 
-            With tbpaint
-                .TextSize = FontSize / zoom
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Color = If(GlobalSettings.Settings.DarkMode, SKColors.WhiteSmoke, SKColors.SteelBlue)
-                .IsStroke = False
-                .Typeface = DefaultTypeFace
-            End With
+            If DrawMode = 0 Then
 
-            Dim bpaint, bpaint2 As New SKPaint()
+                With tpaint
+                    .TextSize = FontSize / zoom
+                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    .Color = If(GlobalSettings.Settings.DarkMode, SKColors.WhiteSmoke, SKColors.SteelBlue)
+                    .IsStroke = False
+                    .Typeface = RegularTypeFace
+                End With
 
-            With bpaint
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Color = If(GlobalSettings.Settings.DarkMode, SKColors.DimGray.WithAlpha(240), SKColors.White.WithAlpha(240))
-                .IsStroke = False
-                .StrokeWidth = LineWidth / zoom
-            End With
+                With tbpaint
+                    .TextSize = FontSize / zoom
+                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    .Color = If(GlobalSettings.Settings.DarkMode, SKColors.WhiteSmoke, SKColors.SteelBlue)
+                    .IsStroke = False
+                    .Typeface = DefaultTypeFace
+                End With
 
-            With bpaint2
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Color = If(GlobalSettings.Settings.DarkMode, SKColors.WhiteSmoke, SKColors.SteelBlue)
-                .IsStroke = True
-                .StrokeWidth = LineWidth / zoom
-            End With
+                With bpaint
+                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    .Color = SKColors.White.WithAlpha(240)
+                    .IsStroke = False
+                    .StrokeWidth = LineWidth / zoom
+                End With
 
-            Dim spaint As New SKPaint()
+                With bpaint2
+                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    .Color = If(GlobalSettings.Settings.DarkMode, SKColors.WhiteSmoke, SKColors.SteelBlue)
+                    .IsStroke = True
+                    .StrokeWidth = LineWidth / zoom
+                End With
 
-            With spaint
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Color = SKColors.LightGray.WithAlpha(100)
-                .IsStroke = False
-            End With
+                With spaint
+                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    .Color = SKColors.LightGray.WithAlpha(100)
+                    .IsStroke = False
+                End With
+
+            Else
+
+                With tpaint
+                    .TextSize = FontSize / zoom
+                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    .Color = SKColors.Black
+                    .IsStroke = False
+                    .Typeface = MonospaceTypeFace
+                End With
+
+                With tbpaint
+                    .TextSize = FontSize / zoom
+                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    .Color = SKColors.Black
+                    .IsStroke = False
+                    .Typeface = MonospaceTypeFace
+                End With
+
+                With bpaint
+                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    .Color = SKColors.White.WithAlpha(240)
+                    .IsStroke = False
+                    .StrokeWidth = LineWidth / zoom
+                End With
+
+                With bpaint2
+                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    .Color = SKColors.Black
+                    .IsStroke = True
+                    .StrokeWidth = LineWidth / zoom
+                End With
+
+                With spaint
+                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    .Color = SKColors.LightGray.WithAlpha(100)
+                    .IsStroke = False
+                End With
+
+            End If
 
             If Not Me.Owner Is Nothing Then
 

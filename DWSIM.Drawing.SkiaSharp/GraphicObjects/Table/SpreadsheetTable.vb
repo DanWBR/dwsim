@@ -86,32 +86,49 @@ Namespace GraphicObjects.Tables
             Dim canvas As SKCanvas = DirectCast(g, SKCanvas)
 
             Dim tpaint As New SKPaint()
-
-            With tpaint
-                .TextSize = FontSize
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                If GlobalSettings.Settings.DarkMode Then
-                    .Color = TextColorDark
-                Else
-                    .Color = TextColor
-                End If
-                .IsStroke = False
-                .Typeface = DefaultTypeFace
-            End With
-
             Dim bpaint As New SKPaint()
 
-            With bpaint
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                If GlobalSettings.Settings.DarkMode Then
-                    .Color = BorderColorDark
-                Else
-                    .Color = BorderColor
-                End If
-                .IsStroke = True
-                .StrokeWidth = LineWidth
-            End With
+            If DrawMode = 0 Then
+                With tpaint
+                    .TextSize = FontSize
+                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    If GlobalSettings.Settings.DarkMode Then
+                        .Color = TextColorDark
+                    Else
+                        .Color = TextColor
+                    End If
+                    .IsStroke = False
+                    .Typeface = DefaultTypeFace
+                End With
 
+                With bpaint
+                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    If GlobalSettings.Settings.DarkMode Then
+                        .Color = BorderColorDark
+                    Else
+                        .Color = BorderColor
+                    End If
+                    .IsStroke = True
+                    .StrokeWidth = LineWidth
+                End With
+
+            Else
+                With tpaint
+                    .TextSize = FontSize
+                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    .Color = SKColors.Black
+                    .IsStroke = False
+                    .Typeface = MonospaceTypeFace
+                End With
+
+                With bpaint
+                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    .Color = SKColors.Black
+                    .IsStroke = True
+                    .StrokeWidth = LineWidth
+                End With
+
+            End If
             Dim maxW As New List(Of Integer)
 
             'find number of rows and columns by range

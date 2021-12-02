@@ -746,55 +746,105 @@ Namespace GraphicObjects
 
             Dim canvas As SKCanvas = DirectCast(g, SKCanvas)
 
-            Dim myPen As New SKPaint
-
-            With myPen
-                .IsStroke = True
-                .StrokeWidth = LineWidth
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .PathEffect = SKPathEffect.CreateCorner(6.0F)
-                If AttachedFrom.Status = Enums.GraphicObjects.Status.Calculated And AttachedTo.Status = Enums.GraphicObjects.Status.Calculated Then
-                    If s.DarkMode Then
-                        .Color = SKColors.WhiteSmoke
-                    Else
-                        .Color = SKColors.SteelBlue
-                    End If
-                Else
-                    .Color = SKColors.Salmon
-                End If
-            End With
-
-            Dim myPen2 As New SKPaint
-
-            With myPen2
-                .IsStroke = True
-                .StrokeWidth = LineWidth + 4
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .PathEffect = SKPathEffect.CreateCorner(6.0F)
-                .Color = SKColors.White.WithAlpha(200)
-            End With
-
             SetupPositioning()
 
             Dim points() As SKPoint = PointList.Select(Function(x) New SKPoint(x.X, x.Y)).ToArray
+            Dim path As New SKPath()
 
-            If Not Straight Then
+            path.MoveTo(points(0).X, points(0).Y)
+            For i As Integer = 1 To points.Length - 1
+                path.LineTo(points(i).X, points(i).Y)
+            Next
 
-                Dim path As New SKPath()
+            Select Case DrawMode
+                Case 0
 
-                path.MoveTo(points(0).X, points(0).Y)
-                For i As Integer = 1 To points.Length - 1
-                    path.LineTo(points(i).X, points(i).Y)
-                Next
+                    'default
 
-                If Not GlobalSettings.Settings.DarkMode Then canvas.DrawPath(path, myPen2)
-                canvas.DrawPath(path, myPen)
+                    Dim myPen As New SKPaint
 
-            Else
+                    With myPen
+                        .IsStroke = True
+                        .StrokeWidth = LineWidth
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                        .PathEffect = SKPathEffect.CreateCorner(6.0F)
+                        If AttachedFrom.Status = Enums.GraphicObjects.Status.Calculated And AttachedTo.Status = Enums.GraphicObjects.Status.Calculated Then
+                            If s.DarkMode Then
+                                .Color = SKColors.WhiteSmoke
+                            Else
+                                .Color = SKColors.SteelBlue
+                            End If
+                        Else
+                            .Color = SKColors.Salmon
+                        End If
+                        If AttachedFrom.ObjectType = ObjectType.OT_Recycle Or AttachedTo.ObjectType = ObjectType.OT_EnergyRecycle Then
+                            .PathEffect = SKPathEffect.CreateDash(New Single() {2, 2}, 4)
+                        End If
+                        If AttachedTo.ObjectType = ObjectType.OT_Recycle Or AttachedTo.ObjectType = ObjectType.OT_EnergyRecycle Then
+                            .PathEffect = SKPathEffect.CreateDash(New Single() {2, 2}, 4)
+                        End If
+                    End With
 
-                canvas.DrawLine(points.First, points.Last, myPen)
+                    Dim myPen2 As New SKPaint
 
-            End If
+                    With myPen2
+                        .IsStroke = True
+                        .StrokeWidth = LineWidth + 4
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                        .PathEffect = SKPathEffect.CreateCorner(6.0F)
+                        .Color = SKColors.White.WithAlpha(200)
+                    End With
+
+                    If Not Straight Then
+
+                        If Not GlobalSettings.Settings.DarkMode Then canvas.DrawPath(path, myPen2)
+                        canvas.DrawPath(path, myPen)
+
+                    Else
+
+                        canvas.DrawLine(points.First, points.Last, myPen)
+
+                    End If
+
+                Case 1
+
+                    'b/w
+
+                    Dim myPen As New SKPaint
+
+                    With myPen
+                        .Color = SKColors.Black
+                        .StrokeWidth = LineWidth
+                        .IsStroke = True
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                        If AttachedFrom.ObjectType = ObjectType.OT_Recycle Or AttachedTo.ObjectType = ObjectType.OT_EnergyRecycle Then
+                            .PathEffect = SKPathEffect.CreateDash(New Single() {2, 2}, 4)
+                        End If
+                        If AttachedTo.ObjectType = ObjectType.OT_Recycle Or AttachedTo.ObjectType = ObjectType.OT_EnergyRecycle Then
+                            .PathEffect = SKPathEffect.CreateDash(New Single() {2, 2}, 4)
+                        End If
+                    End With
+
+                    If Not Straight Then
+
+                        canvas.DrawPath(path, myPen)
+
+                    Else
+
+                        canvas.DrawLine(points.First, points.Last, myPen)
+
+                    End If
+
+                Case 2
+                    'Gas/Liquid Flows
+                Case 3
+                    'Temperature Gradients
+                Case 4
+                    'Pressure Gradients
+                Case 5
+                    'Temperature/Pressure Gradients
+            End Select
+
 
         End Sub
 

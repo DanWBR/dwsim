@@ -93,41 +93,86 @@ Namespace GraphicObjects.Shapes
 
             MyBase.Draw(g)
 
-            Dim myPen2 As New SKPaint()
-            With myPen2
-                .Color = LineColor
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .IsStroke = True
-                .StrokeWidth = LineWidth
-            End With
+            Select Case DrawMode
 
-            Dim rect1 As New SKRect(X + 0.05 * Width, Y, X + 0.95 * Width, Y + Height)
-            Dim rect0 As New SKRect(X, Y, X + 0.1 * Width, Y + Height)
-            Dim rect2 As New SKRect(X + 0.9 * Width, Y, X + Width, Y + Height)
+                Case 0
 
-            canvas.DrawRect(rect1, myPen2)
-            canvas.DrawOval(rect0, myPen2)
-            canvas.DrawOval(rect2, myPen2)
+                    'default
 
-            If GradientMode Then
+                    Dim myPen2 As New SKPaint()
+                    With myPen2
+                        .Color = LineColor
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                        .IsStroke = True
+                        .StrokeWidth = LineWidth
+                    End With
 
-                Dim gradPen As New SKPaint()
-                With gradPen
-                    .Color = LineColor
-                    .StrokeWidth = LineWidth
-                    .IsStroke = False
-                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                    .Shader = SKShader.CreateLinearGradient(New SKPoint(X, Y), New SKPoint(X, Y + Height),
+                    Dim rect1 As New SKRect(X + 0.05 * Width, Y, X + 0.95 * Width, Y + Height)
+                    Dim rect0 As New SKRect(X, Y, X + 0.1 * Width, Y + Height)
+                    Dim rect2 As New SKRect(X + 0.9 * Width, Y, X + Width, Y + Height)
+
+                    canvas.DrawRect(rect1, myPen2)
+                    canvas.DrawOval(rect0, myPen2)
+                    canvas.DrawOval(rect2, myPen2)
+
+                    If GradientMode Then
+
+                        Dim gradPen As New SKPaint()
+                        With gradPen
+                            .Color = LineColor
+                            .StrokeWidth = LineWidth
+                            .IsStroke = False
+                            .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                            .Shader = SKShader.CreateLinearGradient(New SKPoint(X, Y), New SKPoint(X, Y + Height),
                                     New SKColor() {SKColors.White, LineColor},
                                     New Single() {0.0, 1.0}, SKShaderTileMode.Clamp)
-                End With
+                        End With
 
-                canvas.DrawRect(rect1, gradPen)
-                canvas.DrawOval(rect0, gradPen)
-                canvas.DrawOval(rect2, gradPen)
-                canvas.DrawOval(rect0, myPen2)
+                        canvas.DrawRect(rect1, gradPen)
+                        canvas.DrawOval(rect0, gradPen)
+                        canvas.DrawOval(rect2, gradPen)
+                        canvas.DrawOval(rect0, myPen2)
 
-            End If
+                    End If
+
+                Case 1
+
+                    'black and white
+
+                    Dim myPen2 As New SKPaint()
+                    With myPen2
+                        .Color = SKColors.Black
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                        .IsStroke = True
+                        .StrokeWidth = LineWidth
+                    End With
+
+                    Dim rect1 As New SKRect(X + 0.05 * Width, Y, X + 0.95 * Width, Y + Height)
+                    Dim rect0 As New SKRect(X, Y, X + 0.1 * Width, Y + Height)
+                    Dim rect2 As New SKRect(X + 0.9 * Width, Y, X + Width, Y + Height)
+
+                    canvas.DrawRect(rect1, myPen2)
+                    canvas.DrawOval(rect0, myPen2)
+                    canvas.DrawOval(rect2, myPen2)
+
+                Case 2
+
+                    'Gas/ Liquid Flows
+
+                Case 3
+
+                    'Temperature Gradients
+
+                Case 4
+
+                    'Pressure Gradients
+
+                Case 5
+
+                    'Temperature/ Pressure Gradients
+
+            End Select
+
 
         End Sub
 

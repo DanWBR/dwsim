@@ -107,20 +107,6 @@ Namespace GraphicObjects.Shapes
             MyBase.Draw(g)
 
 
-            Dim myPen As New SKPaint()
-            With myPen
-                .Color = LineColor
-                .StrokeWidth = LineWidth
-                .IsStroke = Not Fill
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-            End With
-            Dim myPen2 As New SKPaint()
-            With myPen2
-                .Color = GraphicsSurface.BackgroundColor
-                .IsStroke = False
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-            End With
-
             Dim rect1 As New SKRect(X + 0.1 * Width, Y, X + 0.8 * Width, Y + 0.8 * Height)
 
             Dim pt3 As New Point(X + 0.1 * Width, Y + Height)
@@ -165,37 +151,96 @@ Namespace GraphicObjects.Shapes
             Dim center = New SKPoint(r0.MidX, r0.MidY)
             Dim offCenter = center - New SKPoint(radius2 / 2, radius2 / 2)
 
-            Dim gradPen As New SKPaint()
-            With gradPen
-                .Color = LineColor
-                .StrokeWidth = LineWidth
-                .IsStroke = False
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Shader = SKShader.CreateTwoPointConicalGradient(
-                                    offCenter, 1, center, radius2,
-                                    New SKColor() {SKColors.White, LineColor},
-                                    Nothing, SKShaderTileMode.Clamp)
-            End With
+            Select Case DrawMode
 
-            If GradientMode Then
+                Case 0
 
-                canvas.DrawPath(gp, gradPen)
-                canvas.DrawPath(gp2, gradPen)
-                canvas.DrawOval(rect, gradPen)
+                    'default
 
-            Else
+                    Dim myPen As New SKPaint()
+                    With myPen
+                        .Color = LineColor
+                        .StrokeWidth = LineWidth
+                        .IsStroke = Not Fill
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    End With
+                    Dim myPen2 As New SKPaint()
+                    With myPen2
+                        .Color = GraphicsSurface.BackgroundColor
+                        .IsStroke = False
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    End With
 
-                canvas.DrawOval(rect, myPen2)
+                    Dim gradPen As New SKPaint()
+                    With gradPen
+                        .Color = LineColor
+                        .StrokeWidth = LineWidth
+                        .IsStroke = False
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                        .Shader = SKShader.CreateTwoPointConicalGradient(
+                                            offCenter, 1, center, radius2,
+                                            New SKColor() {SKColors.White, LineColor},
+                                            Nothing, SKShaderTileMode.Clamp)
+                    End With
 
-            End If
+                    If GradientMode Then
 
-            canvas.DrawPath(gp, myPen)
-            canvas.DrawPath(gp2, myPen)
-            If GradientMode Then
-                canvas.DrawOval(rect, gradPen)
-            End If
-            canvas.DrawOval(rect, myPen)
+                        canvas.DrawPath(gp, gradPen)
+                        canvas.DrawPath(gp2, gradPen)
+                        canvas.DrawOval(rect, gradPen)
 
+                    Else
+
+                        canvas.DrawOval(rect, myPen2)
+
+                    End If
+
+                    canvas.DrawPath(gp, myPen)
+                    canvas.DrawPath(gp2, myPen)
+                    If GradientMode Then
+                        canvas.DrawOval(rect, gradPen)
+                    End If
+                    canvas.DrawOval(rect, myPen)
+
+                Case 1
+
+                    'b/w
+                    Dim myPen As New SKPaint()
+                    With myPen
+                        .Color = SKColors.Black
+                        .StrokeWidth = LineWidth
+                        .IsStroke = True
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    End With
+                    Dim myPen2 As New SKPaint()
+                    With myPen2
+                        .Color = SKColors.White
+                        .IsStroke = False
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    End With
+
+                    canvas.DrawPath(gp, myPen)
+                    canvas.DrawPath(gp2, myPen)
+                    canvas.DrawOval(rect, myPen2)
+                    canvas.DrawOval(rect, myPen)
+
+                Case 2
+
+                    'Gas/Liquid Flows
+
+                Case 3
+
+                    'Temperature Gradients
+
+                Case 4
+
+                    'Pressure Gradients
+
+                Case 5
+
+                    'Temperature/Pressure Gradients
+
+            End Select
         End Sub
 
     End Class

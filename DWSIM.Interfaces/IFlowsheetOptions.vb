@@ -95,4 +95,8 @@
 
     Property DisplayUserDefinedPropertiesEditor As Boolean
 
+    Property LabelFontSize As Double
+
+    Property FlowsheetColorTheme As Integer
+
 End Interface

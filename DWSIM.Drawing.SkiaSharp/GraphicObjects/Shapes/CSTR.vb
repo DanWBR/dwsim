@@ -115,71 +115,127 @@ Namespace GraphicObjects.Shapes
 
             MyBase.Draw(g)
 
-            Dim myPen As New SKPaint()
-            With myPen
-                .Color = LineColor
-                .StrokeWidth = LineWidth
-                .IsStroke = Not Fill
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-            End With
-            Dim myPen2 As New SKPaint()
-            With myPen2
-                .Color = GraphicsSurface.BackgroundColor
-                .StrokeWidth = LineWidth
-                .IsStroke = False
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-            End With
+            Select Case DrawMode
 
-            Dim rect1 As New SKRect(X + 0.1 * Width, Y + 0.1 * Height, X + 0.9 * Width, Y + 0.9 * Height)
-            Dim rect2 As New SKRect(X + 0.1 * Width, Y, X + 0.9 * Width, Y + 0.2 * Height)
-            Dim rect3 As New SKRect(X + 0.1 * Width, Y + 0.8 * Height, X + 0.9 * Width, Y + Height)
+                Case 0
+
+                    'default
+                    Dim myPen As New SKPaint()
+                    With myPen
+                        .Color = LineColor
+                        .StrokeWidth = LineWidth
+                        .IsStroke = Not Fill
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    End With
+                    Dim myPen2 As New SKPaint()
+                    With myPen2
+                        .Color = GraphicsSurface.BackgroundColor
+                        .StrokeWidth = LineWidth
+                        .IsStroke = False
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    End With
+
+                    Dim rect1 As New SKRect(X + 0.1 * Width, Y + 0.1 * Height, X + 0.9 * Width, Y + 0.9 * Height)
+                    Dim rect2 As New SKRect(X + 0.1 * Width, Y, X + 0.9 * Width, Y + 0.2 * Height)
+                    Dim rect3 As New SKRect(X + 0.1 * Width, Y + 0.8 * Height, X + 0.9 * Width, Y + Height)
 
 
-            If GradientMode Then
+                    If GradientMode Then
 
-                Dim r0 As New SKRect(X, Y, X + Width, Y + Height)
+                        Dim r0 As New SKRect(X, Y, X + Width, Y + Height)
 
-                Dim radius2 = 0.8F * Math.Min(Width, Height)
-                Dim center = New SKPoint(r0.MidX, r0.MidY)
-                Dim offCenter = center - New SKPoint(radius2 / 2, radius2 / 2)
+                        Dim radius2 = 0.8F * Math.Min(Width, Height)
+                        Dim center = New SKPoint(r0.MidX, r0.MidY)
+                        Dim offCenter = center - New SKPoint(radius2 / 2, radius2 / 2)
 
-                Dim gradPen As New SKPaint()
-                With gradPen
-                    .Color = LineColor
-                    .StrokeWidth = LineWidth
-                    .IsStroke = False
-                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                    .Shader = SKShader.CreateTwoPointConicalGradient(
-                                    offCenter, 1, center, radius2,
-                                    New SKColor() {SKColors.White, LineColor},
-                                    Nothing, SKShaderTileMode.Clamp)
-                End With
+                        Dim gradPen As New SKPaint()
+                        With gradPen
+                            .Color = LineColor
+                            .StrokeWidth = LineWidth
+                            .IsStroke = False
+                            .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                            .Shader = SKShader.CreateTwoPointConicalGradient(
+                                            offCenter, 1, center, radius2,
+                                            New SKColor() {SKColors.White, LineColor},
+                                            Nothing, SKShaderTileMode.Clamp)
+                        End With
 
-                canvas.DrawOval(rect3, gradPen)
-                canvas.DrawRect(rect1, gradPen)
-                canvas.DrawOval(rect2, gradPen)
+                        canvas.DrawOval(rect3, gradPen)
+                        canvas.DrawRect(rect1, gradPen)
+                        canvas.DrawOval(rect2, gradPen)
 
-                canvas.DrawPoints(SKPointMode.Polygon, New SKPoint() {New SKPoint(X + 0.5 * Width, Y - 0.1 * Height), New SKPoint(X + 0.5 * Width, Y + 0.7 * Height)}, gradPen)
-                canvas.DrawOval(New SKRect(X + 0.2 * Width, Y + 0.6 * Height, X + 0.5 * Width, Y + 0.7 * Height), gradPen)
-                canvas.DrawOval(New SKRect(X + 0.5 * Width, Y + 0.6 * Height, X + 0.8 * Width, Y + 0.7 * Height), gradPen)
+                        canvas.DrawPoints(SKPointMode.Polygon, New SKPoint() {New SKPoint(X + 0.5 * Width, Y - 0.1 * Height), New SKPoint(X + 0.5 * Width, Y + 0.7 * Height)}, gradPen)
+                        canvas.DrawOval(New SKRect(X + 0.2 * Width, Y + 0.6 * Height, X + 0.5 * Width, Y + 0.7 * Height), gradPen)
+                        canvas.DrawOval(New SKRect(X + 0.5 * Width, Y + 0.6 * Height, X + 0.8 * Width, Y + 0.7 * Height), gradPen)
 
-            End If
+                    End If
 
-            canvas.DrawOval(rect3, myPen)
-            canvas.DrawRect(rect1, myPen)
-            If Not GradientMode Then
-                canvas.DrawRect(rect1, myPen2)
-                canvas.DrawOval(rect2, myPen2)
-            End If
-            canvas.DrawOval(rect2, myPen)
-            If Not GradientMode Then
-                canvas.DrawOval(rect3, myPen2)
-            End If
+                    canvas.DrawOval(rect3, myPen)
+                    canvas.DrawRect(rect1, myPen)
+                    If Not GradientMode Then
+                        canvas.DrawRect(rect1, myPen2)
+                        canvas.DrawOval(rect2, myPen2)
+                    End If
+                    canvas.DrawOval(rect2, myPen)
+                    If Not GradientMode Then
+                        canvas.DrawOval(rect3, myPen2)
+                    End If
 
-            canvas.DrawPoints(SKPointMode.Polygon, New SKPoint() {New SKPoint(X + 0.5 * Width, Y - 0.1 * Height), New SKPoint(X + 0.5 * Width, Y + 0.7 * Height)}, myPen)
-            canvas.DrawOval(New SKRect(X + 0.2 * Width, Y + 0.6 * Height, X + 0.5 * Width, Y + 0.7 * Height), myPen)
-            canvas.DrawOval(New SKRect(X + 0.5 * Width, Y + 0.6 * Height, X + 0.8 * Width, Y + 0.7 * Height), myPen)
+                    canvas.DrawPoints(SKPointMode.Polygon, New SKPoint() {New SKPoint(X + 0.5 * Width, Y - 0.1 * Height), New SKPoint(X + 0.5 * Width, Y + 0.7 * Height)}, myPen)
+                    canvas.DrawOval(New SKRect(X + 0.2 * Width, Y + 0.6 * Height, X + 0.5 * Width, Y + 0.7 * Height), myPen)
+                    canvas.DrawOval(New SKRect(X + 0.5 * Width, Y + 0.6 * Height, X + 0.8 * Width, Y + 0.7 * Height), myPen)
 
+                Case 1
+
+                    'b/w
+                    Dim myPen As New SKPaint()
+                    With myPen
+                        .Color = SKColors.Black
+                        .StrokeWidth = LineWidth
+                        .IsStroke = Not Fill
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    End With
+                    Dim myPen2 As New SKPaint()
+                    With myPen2
+                        .Color = SKColors.White
+                        .StrokeWidth = LineWidth
+                        .IsStroke = False
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    End With
+
+                    Dim rect1 As New SKRect(X + 0.1 * Width, Y + 0.1 * Height, X + 0.9 * Width, Y + 0.9 * Height)
+                    Dim rect2 As New SKRect(X + 0.1 * Width, Y, X + 0.9 * Width, Y + 0.2 * Height)
+                    Dim rect3 As New SKRect(X + 0.1 * Width, Y + 0.8 * Height, X + 0.9 * Width, Y + Height)
+
+                    canvas.DrawOval(rect3, myPen)
+                    canvas.DrawRect(rect1, myPen)
+
+                    canvas.DrawRect(rect1, myPen2)
+                    canvas.DrawOval(rect2, myPen2)
+                    canvas.DrawOval(rect2, myPen)
+                    canvas.DrawOval(rect3, myPen2)
+
+                    canvas.DrawPoints(SKPointMode.Polygon, New SKPoint() {New SKPoint(X + 0.5 * Width, Y - 0.1 * Height), New SKPoint(X + 0.5 * Width, Y + 0.7 * Height)}, myPen)
+                    canvas.DrawOval(New SKRect(X + 0.2 * Width, Y + 0.6 * Height, X + 0.5 * Width, Y + 0.7 * Height), myPen)
+                    canvas.DrawOval(New SKRect(X + 0.5 * Width, Y + 0.6 * Height, X + 0.8 * Width, Y + 0.7 * Height), myPen)
+
+                Case 2
+
+                    'Gas/Liquid Flows
+
+                Case 3
+
+                    'Temperature Gradients
+
+                Case 4
+
+                    'Pressure Gradients
+
+                Case 5
+
+                    'Temperature/Pressure Gradients
+
+            End Select
 
         End Sub
 

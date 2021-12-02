@@ -103,53 +103,97 @@ Namespace GraphicObjects.Shapes
 
             MyBase.Draw(g)
 
+            Select Case DrawMode
 
-            Dim myPen As New SKPaint()
-            With myPen
-                .Color = LineColor
-                .StrokeWidth = LineWidth
-                .IsStroke = Not Fill
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-            End With
+                Case 0
 
-            Dim gp As New SKPath()
+                    'default
+                    Dim myPen As New SKPaint()
+                    With myPen
+                        .Color = LineColor
+                        .StrokeWidth = LineWidth
+                        .IsStroke = Not Fill
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    End With
 
-            gp.MoveTo(Convert.ToInt32(X), Convert.ToInt32(Y + Height))
+                    Dim gp As New SKPath()
 
-            gp.LineTo(Convert.ToInt32(X + (2 / 8) * Width), Convert.ToInt32(Y + (3 / 8) * Height))
-            gp.LineTo(Convert.ToInt32(X + (6 / 8) * Width), Convert.ToInt32(Y + (5 / 8) * Height))
-            gp.LineTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y))
+                    gp.MoveTo(Convert.ToInt32(X), Convert.ToInt32(Y + Height))
 
-            Dim myrect As New SKRect(X, Y, X + Width, Y + Height)
+                    gp.LineTo(Convert.ToInt32(X + (2 / 8) * Width), Convert.ToInt32(Y + (3 / 8) * Height))
+                    gp.LineTo(Convert.ToInt32(X + (6 / 8) * Width), Convert.ToInt32(Y + (5 / 8) * Height))
+                    gp.LineTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y))
 
-            If GradientMode Then
+                    Dim myrect As New SKRect(X, Y, X + Width, Y + Height)
 
-                Dim r0 As New SKRect(X, Y, X + Width, Y + Height)
+                    If GradientMode Then
 
-                Dim radius2 = 0.8F * Math.Min(Width, Height)
-                Dim center = New SKPoint(r0.MidX, r0.MidY)
-                Dim offCenter = center - New SKPoint(radius2 / 2, radius2 / 2)
+                        Dim r0 As New SKRect(X, Y, X + Width, Y + Height)
 
-                Dim gradPen As New SKPaint()
-                With gradPen
-                    .Color = LineColor
-                    .StrokeWidth = LineWidth
-                    .IsStroke = False
-                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                    .Shader = SKShader.CreateTwoPointConicalGradient(
-                                    offCenter, 1, center, radius2,
-                                    New SKColor() {SKColors.White, LineColor},
-                                    Nothing, SKShaderTileMode.Clamp)
-                End With
+                        Dim radius2 = 0.8F * Math.Min(Width, Height)
+                        Dim center = New SKPoint(r0.MidX, r0.MidY)
+                        Dim offCenter = center - New SKPoint(radius2 / 2, radius2 / 2)
 
-                canvas.DrawOval(myrect, gradPen)
+                        Dim gradPen As New SKPaint()
+                        With gradPen
+                            .Color = LineColor
+                            .StrokeWidth = LineWidth
+                            .IsStroke = False
+                            .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                            .Shader = SKShader.CreateTwoPointConicalGradient(
+                                            offCenter, 1, center, radius2,
+                                            New SKColor() {SKColors.White, LineColor},
+                                            Nothing, SKShaderTileMode.Clamp)
+                        End With
 
-            End If
+                        canvas.DrawOval(myrect, gradPen)
 
-            canvas.DrawOval(myrect, myPen)
-            canvas.DrawPath(gp, myPen)
+                    End If
 
+                    canvas.DrawOval(myrect, myPen)
+                    canvas.DrawPath(gp, myPen)
 
+                Case 1
+
+                    'b/w
+                    Dim myPen As New SKPaint()
+                    With myPen
+                        .Color = SKColors.Black
+                        .StrokeWidth = LineWidth
+                        .IsStroke = True
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    End With
+
+                    Dim gp As New SKPath()
+
+                    gp.MoveTo(Convert.ToInt32(X), Convert.ToInt32(Y + Height))
+
+                    gp.LineTo(Convert.ToInt32(X + (2 / 8) * Width), Convert.ToInt32(Y + (3 / 8) * Height))
+                    gp.LineTo(Convert.ToInt32(X + (6 / 8) * Width), Convert.ToInt32(Y + (5 / 8) * Height))
+                    gp.LineTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y))
+
+                    Dim myrect As New SKRect(X, Y, X + Width, Y + Height)
+
+                    canvas.DrawOval(myrect, myPen)
+                    canvas.DrawPath(gp, myPen)
+
+                Case 2
+
+                    'Gas/Liquid Flows
+
+                Case 3
+
+                    'Temperature Gradients
+
+                Case 4
+
+                    'Pressure Gradients
+
+                Case 5
+
+                    'Temperature/Pressure Gradients
+
+            End Select
         End Sub
 
     End Class

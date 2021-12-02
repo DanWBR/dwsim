@@ -418,6 +418,8 @@ Namespace GraphicObjects
 
         Public Property DoubleClickAction As Action(Of Object) Implements IGraphicObject.DoubleClickAction
 
+        Public Property DrawMode As Integer = 0 Implements IGraphicObject.DrawMode
+
         Public Function GetForeColor() As SKColor
 
             Return Drawing.SkiaSharp.GraphicsSurface.ForegroundColor
