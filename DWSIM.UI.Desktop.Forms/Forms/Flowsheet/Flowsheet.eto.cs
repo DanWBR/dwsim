@@ -174,6 +174,8 @@ namespace DWSIM.UI.Forms
 
             FlowsheetObject.FlowsheetControl = FlowsheetControl;
 
+            FlowsheetControl.FlowsheetSurface.Flowsheet = FlowsheetObject;
+
             FlowsheetControl.FlowsheetSurface.InvalidateCallback = (() =>
             {
                 Application.Instance.Invoke(() =>
@@ -1136,6 +1138,28 @@ namespace DWSIM.UI.Forms
                 }
             };
 
+            var lblSetFontSize = new Label { Text = "Object Labels Font Size" };
+            var tbFontSize = new TextBox { Width = 40, Text = FlowsheetObject.Options.LabelFontSize.ToString("G2") };
+            var btnSetFont = new Button { Width = 40, Text = "Set" };
+
+            btnSetFont.Click += (s, e) => {
+                FlowsheetObject.Options.LabelFontSize = Double.Parse(tbFontSize.Text);
+                foreach (var obj in FlowsheetControl.FlowsheetSurface.DrawingObjects)
+                {
+                    if (obj is ShapeGraphic)
+                    {
+                        ((ShapeGraphic)obj).FontSize = FlowsheetObject.Options.LabelFontSize;
+                    }
+                }
+            };
+
+            var lblColorTheme = new Label { Text = "Flowsheet Color Theme" };
+            var cbColorTheme = new DropDown {Width = 140, Items = { "Default", "Black-and-White PFD" },SelectedIndex = FlowsheetObject.Options.FlowsheetColorTheme };
+            cbColorTheme.SelectedIndexChanged += (s, e) => {
+                FlowsheetObject.Options.FlowsheetColorTheme = cbColorTheme.SelectedIndex;
+                FlowsheetControl.Invalidate();
+            };
+
             if (Application.Instance.Platform.IsGtk)
             {
 
@@ -1196,7 +1220,7 @@ namespace DWSIM.UI.Forms
                 btnmZoomOut, btnmZoomIn, btnmZoomFit, btnmZoomDefault, new Label {Text =" " },
                 btnmDrawGrid, btnmSnapToGrid, btnmMultiSelect, new Label {Text =" " },
                 btnmAlignBottoms, btnmAlignCenters, btnmAlignTops, btnmAlignLefts, btnmAlignMiddles, btnmAlignRights, new Label {Text =" " },
-                btnmEqHoriz, btnmEqVert},
+                btnmEqHoriz, btnmEqVert, lblSetFontSize, tbFontSize, btnSetFont, lblColorTheme, cbColorTheme},
                 Orientation = Orientation.Horizontal,
                 Spacing = 4,
                 HorizontalContentAlignment = HorizontalAlignment.Stretch,
