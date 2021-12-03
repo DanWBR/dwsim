@@ -699,7 +699,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     End If
 
-                    IObj2?.Paragraphs.Add(String.Format("Current Enthalpy error: {0}", fx2))
+                    IObj2?.Paragraphs.Add(String.Format("Current Enthalpy error: {0}", fx))
 
                     dfdx = (fx2 - fx1) / (2 * epsilon(j))
 

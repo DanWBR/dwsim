@@ -1151,6 +1151,7 @@ namespace DWSIM.UI.Forms
                         ((ShapeGraphic)obj).FontSize = FlowsheetObject.Options.LabelFontSize;
                     }
                 }
+                FlowsheetControl.Invalidate();
             };
 
             var lblColorTheme = new Label { Text = "Flowsheet Color Theme" };
