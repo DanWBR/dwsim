@@ -43,6 +43,8 @@ Namespace MathEx.Optimization
 
         Private _jacobian As Boolean
 
+        Private dfdx As Func(Of Double(), Double(,))
+
         Private _error As Double
 
         Public ReadOnly Property BuildingJacobian As Boolean
@@ -95,6 +97,8 @@ Namespace MathEx.Optimization
             Dim leave As Boolean = False
             Dim finalx As Double() = vars
 
+            dfdx = Nothing
+
             If EnableDamping Then
                 For Each d In dfacs
                     If leave Then Exit For
@@ -125,6 +129,54 @@ Namespace MathEx.Optimization
             Return finalx
 
         End Function
+
+        ''' <summary>
+        ''' Solves a system of non-linear equations [f(x) = 0] using newton's method.
+        ''' </summary>
+        ''' <param name="functionbody">f(x) where x is a vector of double, returns the error values for each x</param>
+        ''' <param name="vars">initial values for x</param>
+        ''' <returns>vector of variables which solve the equations according to the minimum allowable error value (tolerance).</returns>
+        Function Solve(functionbody As Func(Of Double(), Double()), functiongradient As Func(Of Double(), Double(,)), vars As Double()) As Double()
+
+            Dim dfacs As Double() = New Double() {0.1, 0.2, 0.4, 0.6, 0.8, 1.0}
+            Dim epsilons As Double() = New Double() {0.000000000001, 0.00000001, 0.0001, 0.001, 0.01, 0.1}
+
+            Dim leave As Boolean = False
+            Dim finalx As Double() = vars
+
+            dfdx = functiongradient
+
+            If EnableDamping Then
+                For Each d In dfacs
+                    If leave Then Exit For
+                    For Each eps In epsilons
+                        If leave Then Exit For
+                        Try
+                            finalx = solve_internal(d, eps, functionbody, vars)
+                            leave = True
+                        Catch ex As ArgumentException
+                            'try next parameters
+                        End Try
+                    Next
+                Next
+            Else
+                For Each eps In epsilons
+                    If leave Then Exit For
+                    Try
+                        finalx = solve_internal(1.0, eps, functionbody, vars)
+                        leave = True
+                    Catch ex As ArgumentException
+                        'try next parameters
+                    End Try
+                Next
+            End If
+
+            If Not leave Then Throw New Exception("Newton Convergence Error")
+
+            Return finalx
+
+        End Function
+
 
         Private Function solve_internal(mindamp As Double, epsilon As Double, functionbody As Func(Of Double(), Double()), vars As Double()) As Double()
 
@@ -252,27 +304,35 @@ Namespace MathEx.Optimization
 
             Else
 
-                For i = 0 To x.Length - 1
-                    For j = 0 To x.Length - 1
-                        If i <> j Then
-                            x1(j) = x(j)
-                            x2(j) = x(j)
-                        Else
-                            If x(j) = 0.0# Then
-                                x1(j) = epsilon
-                                x2(j) = 2 * epsilon
+                If dfdx IsNot Nothing Then
+
+                    g = dfdx.Invoke(x)
+
+                Else
+
+                    For i = 0 To x.Length - 1
+                        For j = 0 To x.Length - 1
+                            If i <> j Then
+                                x1(j) = x(j)
+                                x2(j) = x(j)
                             Else
-                                x1(j) = x(j) * (1 - epsilon)
-                                x2(j) = x(j) * (1 + epsilon)
+                                If x(j) = 0.0# Then
+                                    x1(j) = epsilon
+                                    x2(j) = 2 * epsilon
+                                Else
+                                    x1(j) = x(j) * (1 - epsilon)
+                                    x2(j) = x(j) * (1 + epsilon)
+                                End If
                             End If
-                        End If
+                        Next
+                        f1 = fxb.Invoke(x1)
+                        f2 = fxb.Invoke(x2)
+                        For k = 0 To x.Length - 1
+                            g(k, i) = (f2(k) - f1(k)) / (x2(i) - x1(i))
+                        Next
                     Next
-                    f1 = fxb.Invoke(x1)
-                    f2 = fxb.Invoke(x2)
-                    For k = 0 To x.Length - 1
-                        g(k, i) = (f2(k) - f1(k)) / (x2(i) - x1(i))
-                    Next
-                Next
+
+                End If
 
             End If
 

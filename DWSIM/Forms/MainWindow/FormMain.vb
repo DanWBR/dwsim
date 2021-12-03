@@ -3568,6 +3568,8 @@ Label_00CC:
         If TypeOf Me.ActiveMdiChild Is FormFlowsheet Then
             Dim myStream As System.IO.FileStream
             Dim form2 As FormFlowsheet = Me.ActiveMdiChild
+            Dim filename = form2.Options.FilePath
+            If filename <> "" Then SaveFileDialog1.FileName = Path.GetFileName(filename)
             If Me.SaveFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
                 If SavingSimulation IsNot Nothing Then
                     If SavingSimulation.Invoke(form2) = False Then Exit Sub

@@ -814,6 +814,12 @@ Namespace UnitOperations.Auxiliary.SepOps
 
         Public MustOverride Function SolveColumn(input As ColumnSolverInputData) As ColumnSolverOutputData
 
+        Public Overridable Function SolveColumn(col As Column, input As ColumnSolverInputData) As ColumnSolverOutputData
+
+            Throw New NotImplementedException()
+
+        End Function
+
     End Class
 
 End Namespace
@@ -1709,7 +1715,6 @@ Namespace UnitOperations
         Private _cond As New Stage(Guid.NewGuid().ToString)
         Private _reb As New Stage(Guid.NewGuid().ToString)
 
-
         'stream collections (for the *entire* column, including side operations)
 
         Private _conn_ms As New System.Collections.Generic.Dictionary(Of String, StreamInformation)
@@ -1748,6 +1753,8 @@ Namespace UnitOperations
         'solver
 
         <Xml.Serialization.XmlIgnore> Property Solver As ColumnSolver
+
+        <Xml.Serialization.XmlIgnore> Public Shared Property ExternalSolver As ColumnSolver
 
         ''' <summary>
         ''' Set the number of stages (n > 3)
@@ -3520,7 +3527,9 @@ Namespace UnitOperations
 
             If TypeOf Me Is DistillationColumn Then
                 Dim solvererror = True
-                If SolvingMethodName.Contains("Bubble") Then
+                If ExternalSolver IsNot Nothing Then
+                    so = ExternalSolver.SolveColumn(Me, inputdata)
+                ElseIf SolvingMethodName.Contains("Bubble") Then
                     Try
                         SetColumnSolver(New SolvingMethods.WangHenkeMethod())
                         so = Solver.SolveColumn(inputdata)

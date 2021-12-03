@@ -11426,6 +11426,9 @@ Final3:
             Dim e1 = (From el As XElement In data Select el Where el.Name = "Parameters").FirstOrDefault
             If e1 IsNot Nothing Then Me.ParametersXMLString = e1.ToString()
 
+            e1 = (From el As XElement In data Select el Where el.Name = "SingleCompoundCheckThreshold").FirstOrDefault
+            If e1 IsNot Nothing Then SingleCompoundCheckThreshold = e1.Value.ToDoubleFromInvariant()
+
             e1 = (From el As XElement In data Select el Where el.Name = "OverrideKvalFugCoeff").FirstOrDefault
             If e1 IsNot Nothing Then OverrideKvalFugCoeff = e1.Value
 
@@ -11954,6 +11957,8 @@ Final3:
                     Catch ex As Exception
                     End Try
                 End If
+
+                .Add(New XElement("SingleCompoundCheckThreshold", SingleCompoundCheckThreshold.ToString(ci)))
 
                 .Add(New XElement("OverrideKvalFugCoeff", OverrideKvalFugCoeff))
                 .Add(New XElement("OverrideEnthalpyCalculation", OverrideEnthalpyCalculation))
