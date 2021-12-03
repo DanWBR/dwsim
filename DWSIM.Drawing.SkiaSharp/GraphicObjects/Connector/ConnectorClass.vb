@@ -813,7 +813,7 @@ Namespace GraphicObjects
                     Dim myPen As New SKPaint
 
                     With myPen
-                        .Color = SKColors.Black
+                        .Color = SKColors.Gray
                         .StrokeWidth = LineWidth
                         .IsStroke = True
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
@@ -823,6 +823,7 @@ Namespace GraphicObjects
                         If AttachedTo.ObjectType = ObjectType.OT_Recycle Or AttachedTo.ObjectType = ObjectType.OT_EnergyRecycle Then
                             .PathEffect = SKPathEffect.CreateDash(New Single() {2, 2}, 4)
                         End If
+                        .PathEffect = SKPathEffect.CreateCorner(2.0F)
                     End With
 
                     If Not Straight Then

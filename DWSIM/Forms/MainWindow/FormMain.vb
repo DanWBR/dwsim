@@ -98,6 +98,8 @@ Public Class FormMain
 
     Public Event ToolOpened(sender As Object, e As EventArgs)
 
+    Public SavingSimulation As Func(Of IFlowsheet, Boolean)
+
     Public Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         ExtensionMethods.ChangeDefaultFont(Me)
@@ -3567,6 +3569,9 @@ Label_00CC:
             Dim myStream As System.IO.FileStream
             Dim form2 As FormFlowsheet = Me.ActiveMdiChild
             If Me.SaveFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
+                If SavingSimulation IsNot Nothing Then
+                    If SavingSimulation.Invoke(form2) = False Then Exit Sub
+                End If
                 SaveBackup(Me.SaveFileDialog1.FileName)
                 myStream = Me.SaveFileDialog1.OpenFile()
                 Me.filename = myStream.Name
@@ -3843,6 +3848,9 @@ Label_00CC:
             If result = MsgBoxResult.Yes Then
                 For Each form0 As Form In Me.MdiChildren
                     If TypeOf form0 Is FormFlowsheet Then
+                        If SavingSimulation IsNot Nothing Then
+                            If SavingSimulation.Invoke(form0) = False Then Exit Sub
+                        End If
                         Dim form2 As FormFlowsheet = form0
                         If form2.Options.FilePath <> "" Then
                             'Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Salvandosimulao") + " (" + Me.filename + ")"
@@ -3949,8 +3957,10 @@ Label_00CC:
         If Not Me.ActiveMdiChild Is Nothing Then
             If TypeOf Me.ActiveMdiChild Is FormFlowsheet Then
                 Dim form2 As FormFlowsheet = Me.ActiveMdiChild
+                If SavingSimulation IsNot Nothing Then
+                    If SavingSimulation.Invoke(form2) = False Then Exit Sub
+                End If
                 If form2.Options.FilePath <> "" Then
-                    'Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Salvandosimulao") + " (" + Me.filename + ")"
                     Application.DoEvents()
                     Me.filename = form2.Options.FilePath
                     SaveBackup(Me.filename)
@@ -3976,7 +3986,6 @@ Label_00CC:
                         Me.filename = myStream.Name
                         myStream.Close()
                         If Not (myStream Is Nothing) Then
-                            'Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Salvandosimulao") + " (" + Me.filename + ")"
                             Application.DoEvents()
                             If Path.GetExtension(Me.filename).ToLower = ".dwxml" Then
                                 SaveXML(myStream.Name, form2)
