@@ -1,5 +1,7 @@
-Version 7.1.0
+Version 7.1.1
 
+- Fixed initialization issue
+- Flat color theme by default
 - Using mixing rule for rackett liquid density (#232)
 - Implemented COSTALD method for liquid density calculations (#231)
 - Implemented Total Condenser subcooling in Rigorous Column model

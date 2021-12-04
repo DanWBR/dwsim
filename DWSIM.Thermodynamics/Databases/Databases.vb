@@ -233,9 +233,9 @@ Namespace Databases
                         Case "CAS"
                             cp.CAS_Number = node2.Attributes("value").Value
                         Case "COSTALDVolume"
-                            cp.COSTALD_Characteristic_Volume = node2.Attributes("value").Value
+                            cp.COSTALD_Characteristic_Volume = Double.Parse(node2.Attributes("value").Value, nf)
                         Case "CostaldAcentricFactor"
-                            cp.COSTALD_SRK_Acentric_Factor = node2.Attributes("value").Value
+                            cp.COSTALD_SRK_Acentric_Factor = Double.Parse(node2.Attributes("value").Value, nf)
                         Case "Smiles"
                             cp.SMILES = node2.Attributes("value").Value
                         Case "StructureFormula"
