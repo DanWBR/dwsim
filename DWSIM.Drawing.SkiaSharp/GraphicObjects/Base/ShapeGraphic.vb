@@ -292,24 +292,14 @@ Namespace GraphicObjects
                 rect4 = New SKRect(X + (0.25 - 0.14) * Width, Y + (0.9 - 0.14) * Height, X + (0.25 - 0.14) * Width + 0.14 * Width, Y + (0.9 - 0.14) * Height + 0.14 * Height)
             End If
 
-            If GradientMode And DrawMode = 0 Then
-
-                Dim r0 As New SKRect(X, Y, X + Width, Y + Height)
-
-                Dim radius2 = 0.8F * Math.Min(Width, Height)
-                Dim center = New SKPoint(r0.MidX, r0.MidY)
-                Dim offCenter = center - New SKPoint(radius2 / 2, radius2 / 2)
+            If DrawMode = 0 Then
 
                 Dim gradPen As New SKPaint()
                 With gradPen
-                    .Color = LineColor
+                    .Color = LineColor.WithAlpha(50)
                     .StrokeWidth = LineWidth
                     .IsStroke = False
                     .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                    .Shader = SKShader.CreateTwoPointConicalGradient(
-                                    offCenter, 1, center, radius2,
-                                    New SKColor() {SKColors.White, LineColor},
-                                    Nothing, SKShaderTileMode.Clamp)
                 End With
 
                 g.DrawRoundRect(New SKRect(X + 0.25 * Width, Y, X + 0.75 * Width, Y + Height), 5, 5, gradPen)

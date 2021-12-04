@@ -117,18 +117,13 @@ Namespace GraphicObjects.Shapes
                     canvas.DrawOval(rect2, myPen2)
                     canvas.DrawRect(rect3, myPen2)
 
-                    If GradientMode Then
-
-                        Dim gradPen As New SKPaint()
+                    Dim gradPen As New SKPaint()
                         With gradPen
-                            .Color = LineColor
-                            .StrokeWidth = LineWidth
+                        .Color = LineColor.WithAlpha(50)
+                        .StrokeWidth = LineWidth
                             .IsStroke = False
-                            .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                            .Shader = SKShader.CreateLinearGradient(New SKPoint(X, Y), New SKPoint(X, Y + Height),
-                                            New SKColor() {SKColors.White, LineColor},
-                                            New Single() {0.0, 1.0}, SKShaderTileMode.Clamp)
-                        End With
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    End With
 
                         canvas.DrawOval(rect, gradPen)
                         canvas.DrawRect(rect3, gradPen)
@@ -142,8 +137,6 @@ Namespace GraphicObjects.Shapes
 
                         canvas.DrawOval(rect2, bgpen)
                         canvas.DrawOval(rect2, myPen2)
-
-                    End If
 
                 Case 1
 

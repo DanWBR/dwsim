@@ -70,7 +70,7 @@ Namespace GraphicObjects.Shapes
             With bpaint0
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                 .IsStroke = False
-                .Color = FillColor
+                .Color = FillColor.WithAlpha(50)
             End With
 
             Dim bpaint As New SKPaint()

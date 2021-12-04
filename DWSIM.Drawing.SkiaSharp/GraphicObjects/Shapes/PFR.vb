@@ -108,9 +108,6 @@ Namespace GraphicObjects.Shapes
                 Case 0
 
                     'default
-                    Dim lattice As SKMatrix
-                    lattice.ScaleX = 20.0#
-                    lattice.ScaleY = 20.0#
 
                     Dim myPen2 As New SKPaint()
                     With myPen2
@@ -124,31 +121,29 @@ Namespace GraphicObjects.Shapes
                     Dim rect0 As New SKRect(X, Y, X + 0.2 * Width, Y + Height)
                     Dim rect2 As New SKRect(X + 0.8 * Width, Y, X + Width, Y + Height)
 
-                    canvas.DrawRect(rect1, myPen2)
+                    Dim gp As New SKPath()
+                    gp.MoveTo(X + 0.1 * Width, Y)
+                    gp.LineTo(X + 0.8 * Width, Y)
+                    gp.ArcTo(rect2, -90, 180, False)
+                    gp.LineTo(X + 0.1 * Width, Y + Height)
+                    gp.ArcTo(rect0, 90, 180, False)
+
+                    gp.Close()
+
+                    Dim gradPen As New SKPaint()
+                    With gradPen
+                        .Color = LineColor.WithAlpha(50)
+                        .StrokeWidth = LineWidth
+                        .IsStroke = False
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    End With
+
+                    canvas.DrawPath(gp, gradPen)
+
                     canvas.DrawOval(rect0, myPen2)
-                    canvas.DrawOval(rect2, myPen2)
+                    canvas.DrawPath(gp, myPen2)
 
-                    If GradientMode Then
-
-                        Dim gradPen As New SKPaint()
-                        With gradPen
-                            .Color = LineColor
-                            .StrokeWidth = LineWidth
-                            .IsStroke = False
-                            .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                            .Shader = SKShader.CreateLinearGradient(New SKPoint(X, Y), New SKPoint(X, Y + Height),
-                                            New SKColor() {SKColors.White, LineColor},
-                                            New Single() {0.0, 1.0}, SKShaderTileMode.Clamp)
-                        End With
-
-                        canvas.DrawRect(rect1, gradPen)
-                        canvas.DrawOval(rect0, gradPen)
-                        canvas.DrawOval(rect2, gradPen)
-                        canvas.DrawOval(rect0, myPen2)
-
-                    End If
-
-                    For i As Integer = 2 To 14
+                    For i As Integer = 1 To 15
                         Dim p As New SKPath
                         Dim r As New SKRect(X + i / 20 * Width, Y, X + (0.2 + i / 20) * Width, Y + Height)
                         p.AddArc(r, -90, 180)
@@ -158,10 +153,6 @@ Namespace GraphicObjects.Shapes
                 Case 1
 
                     'b/w
-                    Dim lattice As SKMatrix
-                    lattice.ScaleX = 20.0#
-                    lattice.ScaleY = 20.0#
-
                     Dim myPen2 As New SKPaint()
                     With myPen2
                         .Color = SKColors.Black
@@ -174,16 +165,25 @@ Namespace GraphicObjects.Shapes
                     Dim rect0 As New SKRect(X, Y, X + 0.2 * Width, Y + Height)
                     Dim rect2 As New SKRect(X + 0.8 * Width, Y, X + Width, Y + Height)
 
-                    canvas.DrawRect(rect1, myPen2)
-                    canvas.DrawOval(rect0, myPen2)
-                    canvas.DrawOval(rect2, myPen2)
+                    Dim gp As New SKPath()
+                    gp.MoveTo(X + 0.1 * Width, Y)
+                    gp.LineTo(X + 0.8 * Width, Y)
+                    gp.ArcTo(rect2, -90, 180, False)
+                    gp.LineTo(X + 0.1 * Width, Y + Height)
+                    gp.ArcTo(rect0, 90, 180, False)
 
-                    For i As Integer = 2 To 14
+                    gp.Close()
+
+                    canvas.DrawOval(rect0, myPen2)
+                    canvas.DrawPath(gp, myPen2)
+
+                    For i As Integer = 1 To 15
                         Dim p As New SKPath
                         Dim r As New SKRect(X + i / 20 * Width, Y, X + (0.2 + i / 20) * Width, Y + Height)
                         p.AddArc(r, -90, 180)
                         canvas.DrawPath(p, myPen2)
                     Next
+
 
                 Case 2
 

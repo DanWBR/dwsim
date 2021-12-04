@@ -117,44 +117,37 @@ Namespace GraphicObjects.Shapes
                 Case 0
 
                     'default
-                    If GradientMode Then
 
-                        Dim r0 As New SKRect(X, Y, X + Width, Y + Height)
+                    Dim gradPen As New SKPaint()
+                    With gradPen
+                        .Color = LineColor.WithAlpha(50)
+                        .StrokeWidth = LineWidth
+                        .IsStroke = False
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    End With
 
-                        Dim radius2 = 0.8F * Math.Min(Width, Height)
-                        Dim center = New SKPoint(r0.MidX, r0.MidY)
-                        Dim offCenter = center - New SKPoint(radius2 / 2, radius2 / 2)
+                    canvas.DrawPath(gp, gradPen)
 
-                        Dim gradPen As New SKPaint()
-                        With gradPen
-                            .Color = LineColor
-                            .StrokeWidth = LineWidth
-                            .IsStroke = False
-                            .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                            .Shader = SKShader.CreateTwoPointConicalGradient(
-                                            offCenter, 1, center, radius2,
-                                            New SKColor() {SKColors.White, LineColor},
-                                            Nothing, SKShaderTileMode.Clamp)
-                        End With
-
-                        canvas.DrawPath(gp, gradPen)
-
-                    End If
                     With myPen
                         .Color = LineColor
                         .StrokeWidth = LineWidth
                         .IsStroke = Not Fill
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                     End With
+
                 Case 1
 
                     'b/w
+
                     With myPen
+
                         .Color = SKColors.Black
                         .StrokeWidth = LineWidth
                         .IsStroke = True
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+
                     End With
+
                 Case 2
 
                     'Gas/Liquid Flows

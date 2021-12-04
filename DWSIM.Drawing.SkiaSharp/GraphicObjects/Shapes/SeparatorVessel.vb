@@ -177,33 +177,17 @@ Namespace GraphicObjects.Shapes
                     Dim rect3 As New SKRect(X + 0.7 * Width, Y + 0.1 * Height, X + 0.827 * Width, Y + 0.227 * Height)
                     Dim rect4 As New SKRect(X + 0.7 * Width, Y + 0.773 * Height, X + 0.827 * Width, Y + (0.773 + 0.127) * Height)
 
-                    If GradientMode Then
+                    Dim gradPen As New SKPaint()
+                    With gradPen
+                        .Color = LineColor.WithAlpha(50)
+                        .StrokeWidth = LineWidth
+                        .IsStroke = False
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    End With
 
-                        Dim radius2 = 0.8F * Math.Min(Width, Height)
-                        Dim center = New SKPoint(rect.MidX, rect.MidY)
-                        Dim offCenter = center - New SKPoint(radius2 / 2, radius2 / 2)
-
-                        Dim gradPen As New SKPaint()
-                        With gradPen
-                            .Color = LineColor
-                            .StrokeWidth = LineWidth
-                            .IsStroke = False
-                            .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                            .Shader = SKShader.CreateTwoPointConicalGradient(
-                                            offCenter,
-                                            1,
-                                            center,
-                                            radius2,
-                                            New SKColor() {SKColors.White, LineColor},
-                                            Nothing,
-                                            SKShaderTileMode.Clamp)
-                        End With
-
-                        canvas.DrawRoundRect(rect, 6, 6, gradPen)
-                        canvas.DrawRoundRect(rect3, 2, 2, gradPen)
-                        canvas.DrawRoundRect(rect4, 2, 2, gradPen)
-
-                    End If
+                    canvas.DrawRoundRect(rect, 6, 6, gradPen)
+                    canvas.DrawRoundRect(rect3, 2, 2, gradPen)
+                    canvas.DrawRoundRect(rect4, 2, 2, gradPen)
 
                     canvas.DrawRoundRect(rect, 6, 6, myPen)
                     canvas.DrawRoundRect(rect3, 2, 2, myPen)

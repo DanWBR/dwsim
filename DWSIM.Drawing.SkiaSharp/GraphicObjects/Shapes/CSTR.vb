@@ -139,10 +139,7 @@ Namespace GraphicObjects.Shapes
                     Dim rect2 As New SKRect(X + 0.1 * Width, Y, X + 0.9 * Width, Y + 0.2 * Height)
                     Dim rect3 As New SKRect(X + 0.1 * Width, Y + 0.8 * Height, X + 0.9 * Width, Y + Height)
 
-
-                    If GradientMode Then
-
-                        Dim r0 As New SKRect(X, Y, X + Width, Y + Height)
+                    Dim r0 As New SKRect(X, Y, X + Width, Y + Height)
 
                         Dim radius2 = 0.8F * Math.Min(Width, Height)
                         Dim center = New SKPoint(r0.MidX, r0.MidY)
@@ -150,15 +147,11 @@ Namespace GraphicObjects.Shapes
 
                         Dim gradPen As New SKPaint()
                         With gradPen
-                            .Color = LineColor
-                            .StrokeWidth = LineWidth
+                        .Color = LineColor.WithAlpha(50)
+                        .StrokeWidth = LineWidth
                             .IsStroke = False
-                            .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                            .Shader = SKShader.CreateTwoPointConicalGradient(
-                                            offCenter, 1, center, radius2,
-                                            New SKColor() {SKColors.White, LineColor},
-                                            Nothing, SKShaderTileMode.Clamp)
-                        End With
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    End With
 
                         canvas.DrawOval(rect3, gradPen)
                         canvas.DrawRect(rect1, gradPen)
@@ -167,8 +160,6 @@ Namespace GraphicObjects.Shapes
                         canvas.DrawPoints(SKPointMode.Polygon, New SKPoint() {New SKPoint(X + 0.5 * Width, Y - 0.1 * Height), New SKPoint(X + 0.5 * Width, Y + 0.7 * Height)}, gradPen)
                         canvas.DrawOval(New SKRect(X + 0.2 * Width, Y + 0.6 * Height, X + 0.5 * Width, Y + 0.7 * Height), gradPen)
                         canvas.DrawOval(New SKRect(X + 0.5 * Width, Y + 0.6 * Height, X + 0.8 * Width, Y + 0.7 * Height), gradPen)
-
-                    End If
 
                     canvas.DrawOval(rect3, myPen)
                     canvas.DrawRect(rect1, myPen)

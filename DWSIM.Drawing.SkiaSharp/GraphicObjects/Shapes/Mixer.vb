@@ -153,29 +153,15 @@ Namespace GraphicObjects.Shapes
 
                     'default
 
-                    If GradientMode Then
-
-                        Dim r0 As New SKRect(X, Y, X + Width, Y + Height)
-
-                        Dim radius2 = 0.8F * Math.Min(Width, Height)
-                        Dim center = New SKPoint(r0.MidX, r0.MidY)
-                        Dim offCenter = center - New SKPoint(radius2 / 2, radius2 / 2)
-
-                        Dim gradPen As New SKPaint()
+                    Dim gradPen As New SKPaint()
                         With gradPen
-                            .Color = LineColor
-                            .StrokeWidth = LineWidth
+                        .Color = LineColor.WithAlpha(50)
+                        .StrokeWidth = LineWidth
                             .IsStroke = False
-                            .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                            .Shader = SKShader.CreateTwoPointConicalGradient(
-                                            offCenter, 1, center, radius2,
-                                            New SKColor() {SKColors.White, LineColor},
-                                            Nothing, SKShaderTileMode.Clamp)
-                        End With
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    End With
 
                         canvas.DrawPath(gp, gradPen)
-
-                    End If
 
                     Dim myPen As New SKPaint()
                     With myPen
