@@ -1142,7 +1142,8 @@ namespace DWSIM.UI.Forms
             var tbFontSize = new TextBox { Width = 40, Text = FlowsheetObject.Options.LabelFontSize.ToString("G2") };
             var btnSetFont = new Button { Width = 40, Text = "Set" };
 
-            btnSetFont.Click += (s, e) => {
+            btnSetFont.Click += (s, e) =>
+            {
                 FlowsheetObject.Options.LabelFontSize = Double.Parse(tbFontSize.Text);
                 foreach (var obj in FlowsheetControl.FlowsheetSurface.DrawingObjects)
                 {
@@ -1155,9 +1156,59 @@ namespace DWSIM.UI.Forms
             };
 
             var lblColorTheme = new Label { Text = "Flowsheet Color Theme" };
-            var cbColorTheme = new DropDown {Width = 140, Items = { "Default", "Black-and-White PFD" },SelectedIndex = FlowsheetObject.Options.FlowsheetColorTheme };
-            cbColorTheme.SelectedIndexChanged += (s, e) => {
+            var cbColorTheme = new DropDown { Width = 140, Items = { "Default", "Black-and-White PFD" }, SelectedIndex = FlowsheetObject.Options.FlowsheetColorTheme };
+            cbColorTheme.SelectedIndexChanged += (s, e) =>
+            {
                 FlowsheetObject.Options.FlowsheetColorTheme = cbColorTheme.SelectedIndex;
+                FlowsheetControl.Invalidate();
+            };
+
+            var lblRegularFont = new Label { Text = "Regular Font" };
+            var lblBoldFont = new Label { Text = "Bold Font" };
+            var lblItalicFont = new Label { Text = "Italic Font" };
+            var lblBoldItalicFont = new Label { Text = "Bold/Italic Font" };
+
+            var cbRegularFont = new DropDown { Width = 170 };
+            cbRegularFont.Items.AddRange(DWSIM.Drawing.SkiaSharp.GraphicsSurface.RegularFonts.Select(f => new ListItem { Text = f, Key = f }));
+            cbRegularFont.SelectedKey = FlowsheetObject.Options.RegularFontName;
+
+            var cbBoldFont = new DropDown { Width = 170 };
+            cbBoldFont.Items.AddRange(DWSIM.Drawing.SkiaSharp.GraphicsSurface.BoldFonts.Select(f => new ListItem { Text = f, Key = f }));
+            cbBoldFont.SelectedKey = FlowsheetObject.Options.BoldFontName;
+
+            var cbItalicFont = new DropDown { Width = 170 };
+            cbItalicFont.Items.AddRange(DWSIM.Drawing.SkiaSharp.GraphicsSurface.ItalicFonts.Select(f => new ListItem { Text = f, Key = f }));
+            cbItalicFont.SelectedKey = FlowsheetObject.Options.ItalicFontName;
+
+            var cbBoldItalicFont = new DropDown { Width = 170 };
+            cbBoldItalicFont.Items.AddRange(DWSIM.Drawing.SkiaSharp.GraphicsSurface.BoldItalicFonts.Select(f => new ListItem { Text = f, Key = f }));
+            cbBoldItalicFont.SelectedKey = FlowsheetObject.Options.BoldItalicFontName;
+
+            cbRegularFont.SelectedIndexChanged += (s, e) =>
+            {
+                FlowsheetObject.Options.RegularFontName = cbRegularFont.SelectedKey;
+                FlowsheetControl.FlowsheetSurface.SetRegularFont(FlowsheetObject.Options.RegularFontName);
+                FlowsheetControl.Invalidate();
+            };
+
+            cbBoldFont.SelectedIndexChanged += (s, e) =>
+            {
+                FlowsheetObject.Options.BoldFontName = cbBoldFont.SelectedKey;
+                FlowsheetControl.FlowsheetSurface.SetBoldFont(FlowsheetObject.Options.BoldFontName);
+                FlowsheetControl.Invalidate();
+            };
+
+            cbItalicFont.SelectedIndexChanged += (s, e) =>
+            {
+                FlowsheetObject.Options.ItalicFontName = cbItalicFont.SelectedKey;
+                FlowsheetControl.FlowsheetSurface.SetItalicFont(FlowsheetObject.Options.ItalicFontName);
+                FlowsheetControl.Invalidate();
+            };
+
+            cbBoldItalicFont.SelectedIndexChanged += (s, e) =>
+            {
+                FlowsheetObject.Options.BoldItalicFontName = cbBoldItalicFont.SelectedKey;
+                FlowsheetControl.FlowsheetSurface.SetBoldFont(FlowsheetObject.Options.BoldItalicFontName);
                 FlowsheetControl.Invalidate();
             };
 
@@ -1221,14 +1272,25 @@ namespace DWSIM.UI.Forms
                 btnmZoomOut, btnmZoomIn, btnmZoomFit, btnmZoomDefault, new Label {Text =" " },
                 btnmDrawGrid, btnmSnapToGrid, btnmMultiSelect, new Label {Text =" " },
                 btnmAlignBottoms, btnmAlignCenters, btnmAlignTops, btnmAlignLefts, btnmAlignMiddles, btnmAlignRights, new Label {Text =" " },
-                btnmEqHoriz, btnmEqVert, lblSetFontSize, tbFontSize, btnSetFont, lblColorTheme, cbColorTheme},
+                btnmEqHoriz, btnmEqVert },
                 Orientation = Orientation.Horizontal,
                 Spacing = 4,
                 HorizontalContentAlignment = HorizontalAlignment.Stretch,
                 VerticalContentAlignment = VerticalAlignment.Center,
                 Padding = new Padding(5)
             };
-            flowsheetcontrolcontainer.Rows.Add(new TableRow(new Scrollable { Content = menu1 }));
+            var menu2 = new StackLayout
+            {
+                Items = { lblSetFontSize, tbFontSize, btnSetFont, lblColorTheme, cbColorTheme,
+                lblRegularFont, cbRegularFont, lblBoldFont, cbBoldFont, lblItalicFont, cbItalicFont, lblBoldItalicFont, cbBoldItalicFont},
+                Orientation = Orientation.Horizontal,
+                Spacing = 4,
+                HorizontalContentAlignment = HorizontalAlignment.Stretch,
+                VerticalContentAlignment = VerticalAlignment.Center,
+                Padding = new Padding(5)
+            };
+            flowsheetcontrolcontainer.Rows.Add(new TableRow(new Scrollable { Border = BorderType.None, Content = menu1 }));
+            flowsheetcontrolcontainer.Rows.Add(new TableRow(new Scrollable { Border = BorderType.None, Content = menu2 }));
 
             Button btnUp, btnLeft, btnRight, btnDown;
 
@@ -1858,7 +1920,8 @@ namespace DWSIM.UI.Forms
             outtxt.ReadOnly = true;
             outtxt.SelectionBold = true;
 
-            FlowsheetObject.ActClearLog = () => {
+            FlowsheetObject.ActClearLog = () =>
+            {
                 Application.Instance.AsyncInvoke(() =>
                 {
                     outtxt.Text = "";

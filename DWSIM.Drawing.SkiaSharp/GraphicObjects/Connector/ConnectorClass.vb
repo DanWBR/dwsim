@@ -817,7 +817,7 @@ Namespace GraphicObjects
                         .StrokeWidth = LineWidth
                         .IsStroke = True
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                        .PathEffect = SKPathEffect.CreateCompose(.PathEffect, SKPathEffect.CreateCorner(2.0F))
+                        .PathEffect = SKPathEffect.CreateCorner(2.0F)
                         If AttachedFrom.ObjectType = ObjectType.OT_Recycle Or AttachedTo.ObjectType = ObjectType.OT_EnergyRecycle Then
                             .PathEffect = SKPathEffect.CreateCompose(SKPathEffect.CreateDash(New Single() {2, 2}, 4), .PathEffect)
                         End If
