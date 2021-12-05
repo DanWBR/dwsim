@@ -4,6 +4,7 @@ Imports System.Xml.Linq
 Imports DWSIM.Interfaces
 Imports Interfaces = DWSIM.Interfaces
 Imports DWSIM.DrawingTools.Point
+Imports DWSIM.Interfaces.Enums.GraphicObjects
 
 Namespace GraphicObjects
 

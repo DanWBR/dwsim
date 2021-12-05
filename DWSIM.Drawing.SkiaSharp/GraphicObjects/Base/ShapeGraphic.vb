@@ -47,9 +47,6 @@ Namespace GraphicObjects
 
         End Sub
 
-        Public Property DefaultTypeFace As SKTypeface
-        Public Property RegularTypeFace As SKTypeface
-        Public Property MonospaceTypeFace As SKTypeface
         Public Property SemiTransparent As Boolean = False
         Public Overridable Property LineWidth As Integer = 1
         Public Overridable Property GradientMode As Boolean = True
@@ -137,7 +134,7 @@ Namespace GraphicObjects
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                 .Color = If(DynSpec = Enums.Dynamics.DynamicsSpecType.Flow, SKColors.Brown, SKColors.Blue)
                 .IsStroke = False
-                .Typeface = DefaultTypeFace
+                .Typeface = BoldTypeFace
             End With
 
             Dim trect As New SKRect(0, 0, 2, 2)
@@ -169,7 +166,7 @@ Namespace GraphicObjects
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                 .Color = If(s.DarkMode, LineColorDark, LineColor)
                 .IsStroke = False
-                .Typeface = DefaultTypeFace
+                .Typeface = GetFont()
             End With
 
             Dim trect As New SKRect(0, 0, 2, 2)
@@ -187,7 +184,7 @@ Namespace GraphicObjects
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                         .Color = SKColors.Black
                         .IsStroke = False
-                        .Typeface = MonospaceTypeFace
+                        .Typeface = GetFont()
                     End With
 
                 Case Else
@@ -197,7 +194,7 @@ Namespace GraphicObjects
                     With bpaint
                         .TextSize = FontSize
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                        .Typeface = DefaultTypeFace
+                        .Typeface = BoldTypeFace
                         .Color = If(s.DarkMode, SKColors.Transparent, SKColors.White.WithAlpha(200))
                         .IsStroke = True
                         .StrokeWidth = 2
@@ -230,7 +227,7 @@ Namespace GraphicObjects
                     With myPen
                         .Color = If(s.DarkMode, LineColorDark, LineColor)
                         .StrokeWidth = LineWidth
-                        .IsStroke = Not Fill
+                        .IsStroke = True
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                     End With
 
@@ -240,7 +237,7 @@ Namespace GraphicObjects
                         .TextSize = FontSize
                         .TextEncoding = SKTextEncoding.Utf8
                         .Color = If(s.DarkMode, LineColorDark, LineColor)
-                        .Typeface = DefaultTypeFace
+                        .Typeface = BoldTypeFace
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                     End With
 
@@ -261,7 +258,7 @@ Namespace GraphicObjects
                         .TextSize = FontSize
                         .TextEncoding = SKTextEncoding.Utf8
                         .Color = SKColors.Black
-                        .Typeface = MonospaceTypeFace
+                        .Typeface = BoldTypeFace
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                     End With
 
@@ -366,20 +363,7 @@ Namespace GraphicObjects
 
             MyBase.New()
 
-            Select Case GlobalSettings.Settings.RunningPlatform
-                Case GlobalSettings.Settings.Platform.Windows
-                    Me.DefaultTypeFace = SKTypeface.FromFamilyName("Segoe UI", SKTypefaceStyle.Bold)
-                    Me.RegularTypeFace = SKTypeface.FromFamilyName("Segoe UI", SKTypefaceStyle.Normal)
-                    Me.MonospaceTypeFace = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Normal)
-                Case GlobalSettings.Settings.Platform.Linux
-                    Me.DefaultTypeFace = SKTypeface.FromFamilyName("Ubuntu", SKTypefaceStyle.Bold)
-                    Me.RegularTypeFace = SKTypeface.FromFamilyName("Ubuntu", SKTypefaceStyle.Normal)
-                    Me.MonospaceTypeFace = SKTypeface.FromFamilyName("Courier New", SKTypefaceStyle.Normal)
-                Case GlobalSettings.Settings.Platform.Mac
-                    Me.DefaultTypeFace = SKTypeface.FromFamilyName("Helvetica Neue", SKTypefaceStyle.Bold)
-                    Me.RegularTypeFace = SKTypeface.FromFamilyName("Helvetica Neue", SKTypefaceStyle.Normal)
-                    Me.MonospaceTypeFace = SKTypeface.FromFamilyName("Menlo", SKTypefaceStyle.Normal)
-            End Select
+            FontStyle = FontStyle.Bold
 
         End Sub
 

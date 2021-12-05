@@ -241,6 +241,14 @@ Namespace DWSIM.Flowsheet
 
         Public Property FlowsheetColorTheme As Integer = 0 Implements IFlowsheetOptions.FlowsheetColorTheme
 
+        Public Property RegularFontName As String = "Asap-Regular" Implements IFlowsheetOptions.RegularFontName
+
+        Public Property BoldFontName As String = "Asap-Bold" Implements IFlowsheetOptions.BoldFontName
+
+        Public Property ItalicFontName As String = "Asap-Italic" Implements IFlowsheetOptions.ItalicFontName
+
+        Public Property BoldItalicFontName As String = "Asap-BoldItalic" Implements IFlowsheetOptions.BoldItalicFontName
+
     End Class
 
 End Namespace

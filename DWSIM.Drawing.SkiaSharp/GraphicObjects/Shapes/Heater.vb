@@ -115,7 +115,7 @@ Namespace GraphicObjects.Shapes
                     With myPen
                         .Color = LineColor
                         .StrokeWidth = LineWidth
-                        .IsStroke = Not Fill
+                        .IsStroke = True
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                     End With
 
@@ -150,7 +150,7 @@ Namespace GraphicObjects.Shapes
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                         .Color = LineColor
                         .IsStroke = False
-                        .Typeface = DefaultTypeFace
+                        .Typeface = BoldTypeFace
                     End With
 
                     Dim trect As New SKRect(0, 0, 100, 100)
@@ -219,7 +219,7 @@ Namespace GraphicObjects.Shapes
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                         .Color = SKColors.Black
                         .IsStroke = False
-                        .Typeface = MonospaceTypeFace
+                        .Typeface = BoldTypeFace
                     End With
 
                     Dim trect As New SKRect(0, 0, 100, 100)

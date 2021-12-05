@@ -85,6 +85,7 @@ Public Class FormEditGraphicObject
 
                     .Item.Clear()
 
+                    .Item.Add("Font Style", gobj, "FontStyle", False, "", "Style of the Text (Regular, Bold, Italic or Bold/Italic", True)
                     .Item.Add(DWSIM.App.GetLocalString("Size"), gobj, "FontSize", False, "", DWSIM.App.GetLocalString("Size"), True)
                     .Item(.Item.Count - 1).Tag2 = "FontSize"
                     .Item.Add("Border Color", gobj, "BorderColor", False, "", "", True)
@@ -109,6 +110,7 @@ Public Class FormEditGraphicObject
 
                     .Item.Clear()
 
+                    .Item.Add("Font Style", gobj, "FontStyle", False, "", "Style of the Text (Regular, Bold, Italic or Bold/Italic", True)
                     .Item.Add(DWSIM.App.GetLocalString("Size"), gobj, "FontSize", False, "", DWSIM.App.GetLocalString("Size"), True)
                     .Item(.Item.Count - 1).Tag2 = "FontSize"
                     .Item.Add("Border Color", gobj, "BorderColor", False, "", "", True)
@@ -133,6 +135,7 @@ Public Class FormEditGraphicObject
 
                     .Item.Clear()
 
+                    .Item.Add("Font Style", gobj, "FontStyle", False, "", "Style of the Text (Regular, Bold, Italic or Bold/Italic", True)
                     .Item.Add(DWSIM.App.GetLocalString("Size"), gobj, "FontSize", False, "", DWSIM.App.GetLocalString("Size"), True)
                     .Item(.Item.Count - 1).Tag2 = "FontSize"
                     .Item.Add("Border Color", gobj, "BorderColor", False, "", "", True)
@@ -158,6 +161,7 @@ Public Class FormEditGraphicObject
 
                     .Item.Clear()
 
+                    .Item.Add("Font Style", gobj, "FontStyle", False, "", "Style of the Text (Regular, Bold, Italic or Bold/Italic", True)
                     .Item.Add(DWSIM.App.GetLocalString("Nome"), gobj.Tag, False, "", DWSIM.App.GetLocalString("Nomedoobjeto"), True)
                     .Item(.Item.Count - 1).Tag2 = "Tag"
                     .Item.Add(DWSIM.App.GetLocalString("Texto"), gobj, "Text", False, "", DWSIM.App.GetLocalString("Textoaserexibidonaca"), True)
@@ -180,6 +184,7 @@ Public Class FormEditGraphicObject
 
                     .Item.Clear()
 
+                    .Item.Add("Font Style", gobj, "FontStyle", False, "", "Style of the Text (Regular, Bold, Italic or Bold/Italic", True)
                     .Item.Add(DWSIM.App.GetLocalString("Autodimensionar"), gobj, "AutoSize", False, "", DWSIM.App.GetLocalString("SelecioLiquidrueparaque"), True)
                     .Item(.Item.Count - 1).Tag2 = "AutoSize"
                     .Item.Add(DWSIM.App.GetLocalString("Altura"), gobj, "Height", False, "", DWSIM.App.GetLocalString("Alturadafiguraempixe"), True)
@@ -200,6 +205,7 @@ Public Class FormEditGraphicObject
 
                     .Item.Clear()
 
+                    .Item.Add("Font Style", gobj, "FontStyle", False, "", "Style of the Text (Regular, Bold, Italic or Bold/Italic", True)
                     .Item.Add(DWSIM.App.GetLocalString("Texto"), gobj, "Text", False, "", DWSIM.App.GetLocalString("Textoaserexibidonaca"), True)
                     .Item(.Item.Count - 1).Tag2 = "Text"
                     .Item(.Item.Count - 1).CustomEditor = New System.ComponentModel.Design.MultilineStringEditor
@@ -242,6 +248,7 @@ Public Class FormEditGraphicObject
 
                     .Item.Clear()
 
+                    .Item.Add("Font Style", gobj, "FontStyle", False, "", "Style of the Text (Regular, Bold, Italic or Bold/Italic", True)
                     .Item.Add(DWSIM.App.GetLocalString("Autodimensionar"), gobj, "AutoSize", False, "", DWSIM.App.GetLocalString("SelecioLiquidrueparaque"), True)
                     .Item(.Item.Count - 1).Tag2 = "AutoSize"
                     .Item.Add(DWSIM.App.GetLocalString("Altura"), gobj, "Height", False, "", DWSIM.App.GetLocalString("Alturadafiguraempixe"), True)
@@ -264,21 +271,20 @@ Public Class FormEditGraphicObject
 
                     Dim sobj As ShapeGraphic = gobj
 
-                    .Item.Add(DWSIM.App.GetLocalString("Nome"), gobj, "Tag", False, "", DWSIM.App.GetLocalString("Nomedoobjeto"), True)
+                    .Item.Add("Object Name", sobj, "Tag", False, "", DWSIM.App.GetLocalString("Nomedoobjeto"), True)
+                    .Item.Add("Font Style", sobj, "FontStyle", False, "", "Style of the Text (Regular, Bold, Italic or Bold/Italic", True)
                     .Item(.Item.Count - 1).Tag2 = "Tag"
-                    .Item.Add(DWSIM.App.GetLocalString("Override Color"), gobj, "OverrideColors", False, "", DWSIM.App.GetLocalString("Cor1dogradienteseapl"), True)
-                    .Item(.Item.Count - 1).Tag2 = "OverrideColors"
-                    .Item.Add(DWSIM.App.GetLocalString("Cor"), gobj, "LineColor", False, "", "", True)
+                    .Item.Add(DWSIM.App.GetLocalString("Cor"), sobj, "LineColor", False, "", "", True)
                     .Item(.Item.Count - 1).CustomEditor = New DWSIM.Editors.SKColorEditor.UISKColorEditor
                     .Item(.Item.Count - 1).Tag2 = "LineColor"
                     .Item(.Item.Count - 1).CustomEditor = New DWSIM.Editors.SKColorEditor.UISKColorEditor
-                    .Item.Add(DWSIM.App.GetLocalString("EspessuradaBorda"), gobj, "LineWidth", False, "", DWSIM.App.GetLocalString("Espessuradabordadoob"), True)
+                    .Item.Add(DWSIM.App.GetLocalString("EspessuradaBorda"), sobj, "LineWidth", False, "", DWSIM.App.GetLocalString("Espessuradabordadoob"), True)
                     .Item(.Item.Count - 1).Tag2 = "LineWidth"
-                    .Item.Add(DWSIM.App.GetLocalString("Comprimento"), gobj, "Width", False, "", DWSIM.App.GetLocalString("Comprimentodoobjetoe"), True)
+                    .Item.Add(DWSIM.App.GetLocalString("Comprimento"), sobj, "Width", False, "", DWSIM.App.GetLocalString("Comprimentodoobjetoe"), True)
                     .Item(.Item.Count - 1).Tag2 = "Width"
-                    .Item.Add(DWSIM.App.GetLocalString("Altura"), gobj, "Height", False, "", DWSIM.App.GetLocalString("Alturadoobjetoempixe"), True)
+                    .Item.Add(DWSIM.App.GetLocalString("Altura"), sobj, "Height", False, "", DWSIM.App.GetLocalString("Alturadoobjetoempixe"), True)
                     .Item(.Item.Count - 1).Tag2 = "Height"
-                    .Item.Add(DWSIM.App.GetLocalString("Rotao"), gobj, "Rotation", False, "", DWSIM.App.GetLocalString("Rotaodoobjetode0a360"), True)
+                    .Item.Add(DWSIM.App.GetLocalString("Rotao"), sobj, "Rotation", False, "", DWSIM.App.GetLocalString("Rotaodoobjetode0a360"), True)
                     .Item(.Item.Count - 1).Tag2 = "Rotation"
                     .Item.Add("X", gobj, "X", False, "", DWSIM.App.GetLocalString("Coordenadahorizontal"), True)
                     .Item(.Item.Count - 1).Tag2 = "X"

@@ -161,7 +161,7 @@ Namespace GraphicObjects.Shapes
                     With myPen
                         .Color = LineColor
                         .StrokeWidth = LineWidth
-                        .IsStroke = Not Fill
+                        .IsStroke = True
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                     End With
                     Dim myPen2 As New SKPaint()

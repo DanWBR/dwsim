@@ -67,7 +67,7 @@ Namespace GraphicObjects.Tables
 
             Dim canvas As SKCanvas = DirectCast(g, SKCanvas)
 
-            FontSize = 11.0
+            FontSize = 12.0
 
             FontSize *= GlobalSettings.Settings.DpiScale * sf
 
@@ -97,7 +97,7 @@ Namespace GraphicObjects.Tables
                     .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                     .Color = If(GlobalSettings.Settings.DarkMode, SKColors.WhiteSmoke, SKColors.SteelBlue)
                     .IsStroke = False
-                    .Typeface = DefaultTypeFace
+                    .Typeface = BoldTypeFace
                 End With
 
                 With bpaint
@@ -127,7 +127,7 @@ Namespace GraphicObjects.Tables
                     .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                     .Color = SKColors.Black
                     .IsStroke = False
-                    .Typeface = MonospaceTypeFace
+                    .Typeface = RegularTypeFace
                 End With
 
                 With tbpaint
@@ -135,7 +135,7 @@ Namespace GraphicObjects.Tables
                     .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                     .Color = SKColors.Black
                     .IsStroke = False
-                    .Typeface = MonospaceTypeFace
+                    .Typeface = BoldTypeFace
                 End With
 
                 With bpaint

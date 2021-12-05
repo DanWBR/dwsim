@@ -12,18 +12,6 @@ Namespace GraphicObjects
 
         Public Sub New()
 
-            Select Case GlobalSettings.Settings.RunningPlatform
-                Case GlobalSettings.Settings.Platform.Windows
-                    Me.DefaultTypeFace = SKTypeface.FromFamilyName("Segoe UI", SKTypefaceStyle.Bold)
-                    Me.MonospaceTypeFace = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Normal)
-                Case GlobalSettings.Settings.Platform.Linux
-                    Me.DefaultTypeFace = SKTypeface.FromFamilyName("Ubuntu", SKTypefaceStyle.Bold)
-                    Me.MonospaceTypeFace = SKTypeface.FromFamilyName("Courier New", SKTypefaceStyle.Normal)
-                Case GlobalSettings.Settings.Platform.Mac
-                    Me.DefaultTypeFace = SKTypeface.FromFamilyName("Helvetica Neue", SKTypefaceStyle.Bold)
-                    Me.MonospaceTypeFace = SKTypeface.FromFamilyName("Menlo", SKTypefaceStyle.Normal)
-            End Select
-
             Me.ObjectType = Interfaces.Enums.GraphicObjects.ObjectType.GO_Text
             Me.Height = 20
             Me.Width = 50
@@ -48,9 +36,6 @@ Namespace GraphicObjects
 
         Public Property Color() As SKColor = SKColors.Black
 
-        Public Property DefaultTypeFace As SKTypeface
-        Public Property MonospaceTypeFace As SKTypeface
-
         Public Overrides Sub Draw(ByVal g As Object)
 
             Dim canvas As SKCanvas = DirectCast(g, SKCanvas)
@@ -63,7 +48,7 @@ Namespace GraphicObjects
                     .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                     .Color = If(GlobalSettings.Settings.DarkMode, SKColors.LightSteelBlue, Color)
                     .IsStroke = False
-                    .Typeface = DefaultTypeFace
+                    .Typeface = GetFont()
                 End With
             Else
                 With tpaint
@@ -71,7 +56,7 @@ Namespace GraphicObjects
                     .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                     .Color = SKColors.Black
                     .IsStroke = False
-                    .Typeface = Monospacetypeface
+                    .Typeface = GetFont()
                 End With
             End If
 

@@ -99,6 +99,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Property DrawMode As Integer
 
+    Property FontStyle As FontStyle
+
 End Interface
 
 <InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IConnectionPoint

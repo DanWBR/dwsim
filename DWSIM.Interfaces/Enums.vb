@@ -665,6 +665,13 @@ Namespace Enums.GraphicObjects
         Modified
     End Enum
 
+    Public Enum FontStyle
+        Regular = 0
+        Bold = 1
+        Italic = 2
+        BoldItalic = 3
+    End Enum
+
 End Namespace
 
 

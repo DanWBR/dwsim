@@ -767,7 +767,7 @@ Namespace GraphicObjects
                         .IsStroke = True
                         .StrokeWidth = LineWidth
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                        .PathEffect = SKPathEffect.CreateCorner(6.0F)
+                        .PathEffect = SKPathEffect.CreateCorner(2.0F)
                         If AttachedFrom.Status = Enums.GraphicObjects.Status.Calculated And AttachedTo.Status = Enums.GraphicObjects.Status.Calculated Then
                             If s.DarkMode Then
                                 .Color = SKColors.WhiteSmoke
@@ -778,10 +778,10 @@ Namespace GraphicObjects
                             .Color = SKColors.Salmon
                         End If
                         If AttachedFrom.ObjectType = ObjectType.OT_Recycle Or AttachedTo.ObjectType = ObjectType.OT_EnergyRecycle Then
-                            .PathEffect = SKPathEffect.CreateDash(New Single() {2, 2}, 4)
+                            .PathEffect = SKPathEffect.CreateCompose(SKPathEffect.CreateDash(New Single() {2, 2}, 4), .PathEffect)
                         End If
                         If AttachedTo.ObjectType = ObjectType.OT_Recycle Or AttachedTo.ObjectType = ObjectType.OT_EnergyRecycle Then
-                            .PathEffect = SKPathEffect.CreateDash(New Single() {2, 2}, 4)
+                            .PathEffect = SKPathEffect.CreateCompose(SKPathEffect.CreateDash(New Single() {2, 2}, 4), .PathEffect)
                         End If
                     End With
 
@@ -817,13 +817,13 @@ Namespace GraphicObjects
                         .StrokeWidth = LineWidth
                         .IsStroke = True
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                        .PathEffect = SKPathEffect.CreateCompose(.PathEffect, SKPathEffect.CreateCorner(2.0F))
                         If AttachedFrom.ObjectType = ObjectType.OT_Recycle Or AttachedTo.ObjectType = ObjectType.OT_EnergyRecycle Then
-                            .PathEffect = SKPathEffect.CreateDash(New Single() {2, 2}, 4)
+                            .PathEffect = SKPathEffect.CreateCompose(SKPathEffect.CreateDash(New Single() {2, 2}, 4), .PathEffect)
                         End If
                         If AttachedTo.ObjectType = ObjectType.OT_Recycle Or AttachedTo.ObjectType = ObjectType.OT_EnergyRecycle Then
-                            .PathEffect = SKPathEffect.CreateDash(New Single() {2, 2}, 4)
+                            .PathEffect = SKPathEffect.CreateCompose(SKPathEffect.CreateDash(New Single() {2, 2}, 4), .PathEffect)
                         End If
-                        .PathEffect = SKPathEffect.CreateCorner(2.0F)
                     End With
 
                     If Not Straight Then

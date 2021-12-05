@@ -107,7 +107,7 @@ Imports System.Drawing.Text
 
     Private Sub tscb1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles tscb1.SelectedIndexChanged
         Try
-            txtScript.Font = New Font(tscb1.SelectedItem.ToString, tscb2.SelectedItem, FontStyle.Regular)
+            txtScript.Font = New Font(tscb1.SelectedItem.ToString, tscb2.SelectedItem, System.Drawing.FontStyle.Regular)
             fontname = tscb1.SelectedItem.ToString
         Catch ex As Exception
         End Try
@@ -115,7 +115,7 @@ Imports System.Drawing.Text
 
     Private Sub tscb2_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles tscb2.SelectedIndexChanged
         Try
-            txtScript.Font = New Font(tscb1.SelectedItem.ToString, tscb2.SelectedItem, FontStyle.Regular)
+            txtScript.Font = New Font(tscb1.SelectedItem.ToString, tscb2.SelectedItem, System.Drawing.FontStyle.Regular)
             fontsize = tscb2.SelectedItem
         Catch ex As Exception
         End Try

@@ -3022,6 +3022,8 @@
     <None Include="Resources\become_a_patron_button.png" />
     <None Include="Resources\background_welcome.png" />
     <Content Include="Lib\site-packages\README.txt" />
+    <None Include="Resources\bold.png" />
+    <None Include="Resources\bolditalic.png" />
     <Content Include="Resources\ch.png" />
     <None Include="Resources\clock_red.png" />
     <None Include="Resources\comp_separator.png" />
@@ -3041,6 +3043,7 @@
     <None Include="Resources\chericlogo.jpg" />
     <None Include="Resources\cheric_big.jpg" />
     <None Include="Resources\chemeo.png" />
+    <None Include="Resources\color_wheel.png" />
     <Content Include="Resources\control_equalizer_blue.png" />
     <None Include="Resources\cut.png" />
     <None Include="Resources\ddbsearch.jpg" />
@@ -3077,6 +3080,7 @@
     <None Include="Resources\Excel_copy1.jpg" />
     <None Include="Resources\fast_forward.png" />
     <None Include="Resources\folder_add_48.png" />
+    <None Include="Resources\fontsize.png" />
     <Content Include="Resources\fr.png" />
     <None Include="Resources\green_down.png" />
     <None Include="Resources\orifice.png" />
@@ -3188,6 +3192,8 @@
     <None Include="Resources\pythonfunctions.txt" />
     <None Include="Resources\Icon128.png" />
     <None Include="Resources\Icon512.png" />
+    <None Include="Resources\regular.png" />
+    <None Include="Resources\italic.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />

@@ -62,7 +62,7 @@ Namespace GraphicObjects.Shapes
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                 .Color = FontColor
                 .IsStroke = False
-                .Typeface = DefaultTypeFace
+                .Typeface = BoldTypeFace
             End With
 
             Dim bpaint0 As New SKPaint()

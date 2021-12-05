@@ -98,7 +98,7 @@ Namespace GraphicObjects.Shapes
             With myPen
                 .Color = LineColor
                 .StrokeWidth = LineWidth
-                .IsStroke = Not Fill
+                .IsStroke = True
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
             End With
 
@@ -140,7 +140,7 @@ Namespace GraphicObjects.Shapes
                     With myPen
                         .Color = SKColors.Black
                         .StrokeWidth = LineWidth
-                        .IsStroke = Not Fill
+                        .IsStroke = True
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                     End With
                     canvas.DrawPath(gp, myPen)

@@ -102,7 +102,6 @@ Namespace GraphicObjects.Shapes
 
             MyBase.Draw(g)
 
-
             Select Case DrawMode
 
                 Case 0

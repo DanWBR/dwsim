@@ -124,7 +124,7 @@ Namespace GraphicObjects.Shapes
                     With myPen
                         .Color = LineColor
                         .StrokeWidth = LineWidth
-                        .IsStroke = Not Fill
+                        .IsStroke = True
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                         .PathEffect = SKPathEffect.CreateCorner(0.1F)
                     End With

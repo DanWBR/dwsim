@@ -10,6 +10,30 @@ Namespace GraphicObjects
 
         Implements IGraphicObject, ICustomXMLSerialization
 
+        Public Property RegularTypeFace As SKTypeface
+        Public Property BoldTypeFace As SKTypeface
+        Public Property ItalicTypeFace As SKTypeface
+        Public Property BoldItalicTypeFace As SKTypeface
+
+        Public Property FontStyle As Enums.GraphicObjects.FontStyle = Enums.GraphicObjects.FontStyle.Regular Implements IGraphicObject.FontStyle
+
+        Public Function GetFont() As SKTypeface
+
+            Select Case FontStyle
+                Case Enums.GraphicObjects.FontStyle.Regular
+                    Return RegularTypeFace
+                Case Enums.GraphicObjects.FontStyle.Bold
+                    Return BoldTypeFace
+                Case Enums.GraphicObjects.FontStyle.BoldItalic
+                    Return BoldItalicTypeFace
+                Case Enums.GraphicObjects.FontStyle.Italic
+                    Return ItalicTypeFace
+                Case Else
+                    Return RegularTypeFace
+            End Select
+
+        End Function
+
         Public Overrides Function ToString() As String
             If Tag <> "" Then
                 Return Tag
@@ -26,14 +50,7 @@ Namespace GraphicObjects
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                 .Color = color
                 .IsStroke = False
-                Select Case GlobalSettings.Settings.RunningPlatform
-                    Case GlobalSettings.Settings.Platform.Windows
-                        p.Typeface = SKTypeface.FromFamilyName("Segoe UI", SKTypefaceStyle.Bold)
-                    Case GlobalSettings.Settings.Platform.Linux
-                        p.Typeface = SKTypeface.FromFamilyName("Ubuntu", SKTypefaceStyle.Bold)
-                    Case GlobalSettings.Settings.Platform.Mac
-                        p.Typeface = SKTypeface.FromFamilyName("Helvetica Neue", SKTypefaceStyle.Bold)
-                End Select
+                p.Typeface = RegularTypeFace
             End With
 
             Return p
@@ -49,14 +66,7 @@ Namespace GraphicObjects
                 .Color = color
                 .IsStroke = True
                 .StrokeWidth = StrokeWidth
-                Select Case GlobalSettings.Settings.RunningPlatform
-                    Case GlobalSettings.Settings.Platform.Windows
-                        p.Typeface = SKTypeface.FromFamilyName("Segoe UI", SKTypefaceStyle.Bold)
-                    Case GlobalSettings.Settings.Platform.Linux
-                        p.Typeface = SKTypeface.FromFamilyName("Ubuntu", SKTypefaceStyle.Bold)
-                    Case GlobalSettings.Settings.Platform.Mac
-                        p.Typeface = SKTypeface.FromFamilyName("Helvetica Neue", SKTypefaceStyle.Bold)
-                End Select
+                p.Typeface = RegularTypeFace
             End With
 
             Return p

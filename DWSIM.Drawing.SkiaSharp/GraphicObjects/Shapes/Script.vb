@@ -240,7 +240,7 @@ Namespace GraphicObjects.Shapes
                             .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                             .Color = LineColor
                             .IsStroke = False
-                            .Typeface = DefaultTypeFace
+                            .Typeface = BoldTypeFace
                         End With
 
                         Dim trect As New SKRect(0, 0, 2, 2)
@@ -298,7 +298,7 @@ Namespace GraphicObjects.Shapes
                             .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                             .Color = SKColors.Black
                             .IsStroke = False
-                            .Typeface = MonospaceTypeFace
+                            .Typeface = BoldTypeFace
                         End With
 
                         Dim trect As New SKRect(0, 0, 2, 2)

@@ -167,7 +167,7 @@ Namespace GraphicObjects.Shapes
             With myPen
                 .Color = IIf(DrawMode = 0, LineColor, SKColors.Black)
                 .StrokeWidth = LineWidth
-                .IsStroke = IIf(DrawMode = 0, Not Fill, True)
+                .IsStroke = IIf(DrawMode = 0, True, True)
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
             End With
 
@@ -216,7 +216,7 @@ Namespace GraphicObjects.Shapes
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                 .Color = IIf(DrawMode = 0, LineColor, SKColors.Black)
                 .IsStroke = False
-                .Typeface = IIf(DrawMode = 0, DefaultTypeFace, MonospaceTypeFace)
+                .Typeface = BoldTypeFace
             End With
 
             If FlippedH Or FlippedV Or Rotation <> 0 Then

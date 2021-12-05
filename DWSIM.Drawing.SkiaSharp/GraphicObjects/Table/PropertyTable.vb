@@ -113,7 +113,8 @@ Namespace GraphicObjects.Tables
                         .Color = TextColor
                     End If
                     .IsStroke = False
-                    .Typeface = DefaultTypeFace
+                    .Typeface = GetFont()
+                    .FakeBoldText = True
                 End With
 
                 With tpaint2
@@ -125,7 +126,7 @@ Namespace GraphicObjects.Tables
                         .Color = TextColor
                     End If
                     .IsStroke = False
-                    .Typeface = RegularTypeFace
+                    .Typeface = GetFont()
                 End With
 
                 With bpaint
@@ -145,7 +146,8 @@ Namespace GraphicObjects.Tables
                     .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                     .Color = SKColors.Black
                     .IsStroke = False
-                    .Typeface = MonospaceTypeFace
+                    .Typeface = GetFont()
+                    .FakeBoldText = True
                 End With
 
                 With tpaint2
@@ -153,7 +155,7 @@ Namespace GraphicObjects.Tables
                     .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                     .Color = SKColors.Black
                     .IsStroke = False
-                    .Typeface = MonospaceTypeFace
+                    .Typeface = GetFont()
                 End With
 
                 With bpaint

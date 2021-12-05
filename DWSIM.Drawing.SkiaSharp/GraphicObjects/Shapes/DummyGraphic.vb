@@ -156,7 +156,7 @@ Namespace GraphicObjects.Shapes
                     .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                     .Color = LineColor
                     .IsStroke = False
-                    .Typeface = DefaultTypeFace
+                    .Typeface = BoldTypeFace
                 End With
 
                 Dim trect As New SKRect(0, 0, 2, 2)
