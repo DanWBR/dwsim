@@ -197,8 +197,8 @@ Partial Class FlowsheetSurface_SkiaSharp
         'ToolStripContainer1.TopToolStripPanel
         '
         resources.ApplyResources(Me.ToolStripContainer1.TopToolStripPanel, "ToolStripContainer1.TopToolStripPanel")
-        Me.ToolStripContainer1.TopToolStripPanel.Controls.Add(Me.ToolStripFlowsheet)
         Me.ToolStripContainer1.TopToolStripPanel.Controls.Add(Me.ToolStrip1)
+        Me.ToolStripContainer1.TopToolStripPanel.Controls.Add(Me.ToolStripFlowsheet)
         '
         'SplitContainerVertical
         '
@@ -577,6 +577,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         'tbFontSize
         '
         resources.ApplyResources(Me.tbFontSize, "tbFontSize")
+        Me.tbFontSize.Margin = New System.Windows.Forms.Padding(1, 0, 10, 0)
         Me.tbFontSize.Name = "tbFontSize"
         '
         'ToolStripLabel3

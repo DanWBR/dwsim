@@ -119,13 +119,13 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnLeft.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 251</value>
+    <value>24, 274</value>
   </data>
   <data name="btnUp.Size" type="System.Drawing.Size, System.Drawing">
     <value>1023, 24</value>
   </data>
   <data name="btnDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>33, 290</value>
+    <value>33, 313</value>
   </data>
   <data name="btnDown.Size" type="System.Drawing.Size, System.Drawing">
     <value>1023, 24</value>
@@ -134,26 +134,116 @@
     <value>1062, 33</value>
   </data>
   <data name="btnRight.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 251</value>
+    <value>24, 274</value>
   </data>
   <data name="TableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1089, 317</value>
+    <value>1089, 340</value>
   </data>
   <data name="SplitContainerHorizontal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1089, 419</value>
+    <value>1089, 442</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="SplitContainerHorizontal.SplitterDistance" type="System.Int32, mscorlib">
-    <value>317</value>
+    <value>340</value>
   </data>
   <data name="SplitContainerVertical.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1089, 419</value>
+    <value>1089, 442</value>
   </data>
   <data name="ToolStripContainer1.ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1089, 419</value>
+    <value>1089, 442</value>
   </data>
   <data name="ToolStripContainer1.Size" type="System.Drawing.Size, System.Drawing">
     <value>1089, 469</value>
+  </data>
+  <data name="ToolStripLabel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 24</value>
+  </data>
+  <data name="ToolStripLabel2.Text" xml:space="preserve">
+    <value>Object Labels Font Size</value>
+  </data>
+  <data name="tbFontSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 27</value>
+  </data>
+  <data name="ToolStripLabel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 24</value>
+  </data>
+  <data name="ToolStripLabel3.Text" xml:space="preserve">
+    <value>Color Theme</value>
+  </data>
+  <data name="tsbColorTheme.Items" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="tsbColorTheme.Items1" xml:space="preserve">
+    <value>Black-and-White</value>
+  </data>
+  <data name="tsbColorTheme.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 23</value>
+  </data>
+  <data name="ToolStripLabel4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 16</value>
+  </data>
+  <data name="ToolStripLabel4.Text" xml:space="preserve">
+    <value>Regular Font</value>
+  </data>
+  <data name="tsbRegularFont.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="tsbRegularFont.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="tsbRegularFont.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 23</value>
+  </data>
+  <data name="ToolStripLabel5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 16</value>
+  </data>
+  <data name="ToolStripLabel5.Text" xml:space="preserve">
+    <value>Bold Font</value>
+  </data>
+  <data name="tsbBoldFont.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="tsbBoldFont.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="tsbBoldFont.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 23</value>
+  </data>
+  <data name="ToolStripLabel6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 16</value>
+  </data>
+  <data name="ToolStripLabel6.Text" xml:space="preserve">
+    <value>Italic Font</value>
+  </data>
+  <data name="tsbItalicFont.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="tsbItalicFont.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="tsbItalicFont.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 23</value>
+  </data>
+  <data name="ToolStripLabel7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>16, 16</value>
+  </data>
+  <data name="ToolStripLabel7.Text" xml:space="preserve">
+    <value>Bold/Italic Font</value>
+  </data>
+  <data name="tsbBoldItalicFont.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="tsbBoldItalicFont.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="tsbBoldItalicFont.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 23</value>
+  </data>
+  <data name="ToolStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>928, 0</value>
+  </data>
+  <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>161, 27</value>
   </data>
   <data name="tsbControlPanelMode.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -290,77 +380,8 @@
   <data name="tsbAlignHorizontal.Text" xml:space="preserve">
     <value>Make horizontal spacing equal</value>
   </data>
-  <data name="ToolStripFlowsheet.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 25</value>
-  </data>
   <data name="ToolStripFlowsheet.Size" type="System.Drawing.Size, System.Drawing">
     <value>925, 25</value>
-  </data>
-  <data name="ToolStripLabel2.Text" xml:space="preserve">
-    <value>Object Labels Font Size</value>
-  </data>
-  <data name="ToolStripLabel3.Text" xml:space="preserve">
-    <value>Color Theme</value>
-  </data>
-  <data name="tsbColorTheme.Items" xml:space="preserve">
-    <value>Default</value>
-  </data>
-  <data name="tsbColorTheme.Items1" xml:space="preserve">
-    <value>Black-and-White</value>
-  </data>
-  <data name="ToolStripLabel4.Text" xml:space="preserve">
-    <value>Regular Font</value>
-  </data>
-  <data name="tsbRegularFont.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="tsbRegularFont.IntegralHeight" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="tsbRegularFont.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 23</value>
-  </data>
-  <data name="ToolStripLabel5.Text" xml:space="preserve">
-    <value>Bold Font</value>
-  </data>
-  <data name="tsbBoldFont.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="tsbBoldFont.IntegralHeight" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="tsbBoldFont.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 23</value>
-  </data>
-  <data name="ToolStripLabel6.Text" xml:space="preserve">
-    <value>Italic Font</value>
-  </data>
-  <data name="tsbItalicFont.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="tsbItalicFont.IntegralHeight" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="tsbItalicFont.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 23</value>
-  </data>
-  <data name="ToolStripLabel7.Text" xml:space="preserve">
-    <value>Bold/Italic Font</value>
-  </data>
-  <data name="tsbBoldItalicFont.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="tsbBoldItalicFont.IntegralHeight" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="tsbBoldItalicFont.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 23</value>
-  </data>
-  <data name="ToolStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
-  </data>
-  <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1020, 25</value>
   </data>
   <data name="ToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
     <value>200, 22</value>
@@ -639,7 +660,7 @@
     <value>Merge Streams</value>
   </data>
   <data name="CMS_Sel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 442</value>
+    <value>242, 420</value>
   </data>
   <data name="PreviewDialog.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
