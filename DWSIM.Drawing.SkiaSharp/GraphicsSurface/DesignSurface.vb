@@ -111,9 +111,9 @@ Public Class GraphicsSurface
             Using reader As New IO.StreamReader(filestr)
                 While Not reader.EndOfStream
                     value = reader.ReadLine.Replace(".ttf", "")
-                    If value.Contains("Bold") And value.Contains("Italic") Then
+                    If (value.Contains("Bold") Or value.Contains("Medium")) And value.Contains("Italic") Then
                         BoldItalicFonts.Add(value)
-                    ElseIf value.Contains("Bold") Then
+                    ElseIf (value.Contains("Bold") Or value.Contains("Medium")) Then
                         BoldFonts.Add(value)
                     ElseIf value.Contains("Italic") Then
                         ItalicFonts.Add(value)

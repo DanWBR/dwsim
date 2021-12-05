@@ -67,7 +67,7 @@ Namespace GraphicObjects.Tables
 
             Dim canvas As SKCanvas = DirectCast(g, SKCanvas)
 
-            FontSize = 12.0
+            FontSize = 13.0
 
             FontSize *= GlobalSettings.Settings.DpiScale * sf
 
@@ -75,7 +75,7 @@ Namespace GraphicObjects.Tables
 
             If zoom = 0.0 Then Exit Sub
 
-            Padding = 5 / zoom * GlobalSettings.Settings.DpiScale * sf
+            Padding = 6.0 / zoom * GlobalSettings.Settings.DpiScale * sf
 
             Dim tpaint As New SKPaint()
             Dim bpaint, bpaint2 As New SKPaint()
@@ -241,7 +241,7 @@ Namespace GraphicObjects.Tables
 
                     If Not Me.Owner.GraphicObject.ObjectType = Enums.GraphicObjects.ObjectType.MaterialStream Then
 
-                        If maxH = 0 Then maxH = 20 / zoom
+                        If maxH = 0 Then maxH = 22 / zoom
 
                         Me.Height = (count + 1) * (maxH + 2 * Me.Padding)
                         size = MeasureString(Me.HeaderText, tpaint)
