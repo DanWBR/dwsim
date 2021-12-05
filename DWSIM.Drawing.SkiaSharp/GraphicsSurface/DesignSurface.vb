@@ -364,7 +364,7 @@ Public Class GraphicsSurface
 
                 If TypeOf dobj Is ShapeGraphic Then
                     'DirectCast(dobj, ShapeGraphic).Fill = False
-                    'DirectCast(dobj, ShapeGraphic).LineWidth = 1
+                    DirectCast(dobj, ShapeGraphic).LineWidth = 1
                     DirectCast(dobj, ShapeGraphic).UpdateStatus()
                 End If
 
