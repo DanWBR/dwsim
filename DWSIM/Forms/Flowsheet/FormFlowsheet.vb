@@ -3047,6 +3047,13 @@ Public Class FormFlowsheet
         Return Me.SimulationObjects(id)
     End Function
 
+    Public Function AddObject(t As ObjectType, xcoord As Integer, ycoord As Integer, id As String, tag As String) As Interfaces.ISimulationObject Implements IFlowsheet.AddObject
+        Me.FormSurface.AddObjectToSurface(t, xcoord, ycoord, False, tag, id)
+        FormSurface.FControl?.Refresh()
+        FormSurface.FControl?.Refresh()
+        Return Me.SimulationObjects(id)
+    End Function
+
     Public Sub RequestCalculation(Optional sender As ISimulationObject = Nothing, Optional changecalcorder As Boolean = False) Implements IFlowsheet.RequestCalculation
 
         UIThreadInvoke(Sub()

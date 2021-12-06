@@ -99,6 +99,11 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
         Return Me.SimulationObjects(id)
     End Function
 
+    Public Function AddObject(t As Enums.GraphicObjects.ObjectType, xcoord As Integer, ycoord As Integer, id As String, tag As String) As ISimulationObject Implements IFlowsheet.AddObject
+        Me.AddObjectToSurface(t, xcoord, ycoord, tag, id)
+        Return Me.SimulationObjects(id)
+    End Function
+
     Public Sub AddPropertyPackage(obj As IPropertyPackage) Implements IFlowsheet.AddPropertyPackage
         Me.Options.PropertyPackages.Add(obj.UniqueID, obj)
     End Sub

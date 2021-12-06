@@ -9,7 +9,6 @@ Amir Mehrkesh
 Andras Nady
 Anders Andreasen
 Andrew Dickson
-Bill Byers
 Bruce Rising
 Bruce Logue
 Carlos G. C. Reetz
