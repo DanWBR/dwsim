@@ -67,7 +67,7 @@ Namespace GraphicObjects.Tables
 
             Dim canvas As SKCanvas = DirectCast(g, SKCanvas)
 
-            FontSize = 13.0
+            FontSize = 12.0
 
             FontSize *= GlobalSettings.Settings.DpiScale * sf
 
@@ -75,7 +75,7 @@ Namespace GraphicObjects.Tables
 
             If zoom = 0.0 Then Exit Sub
 
-            Padding = 6.0 / zoom * GlobalSettings.Settings.DpiScale * sf
+            Padding = 4.0 / zoom * GlobalSettings.Settings.DpiScale * sf
 
             Dim tpaint As New SKPaint()
             Dim bpaint, bpaint2 As New SKPaint()
