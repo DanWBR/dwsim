@@ -34,6 +34,13 @@ Public Class FlowsheetSurface_SkiaSharp
         ' This call is required by the designer.
         InitializeComponent()
 
+        ToolStripContainer1.TopToolStripPanel.SuspendLayout()
+        ToolStripFlowsheet.Dock = DockStyle.None
+        ToolStrip1.Dock = DockStyle.None
+        ToolStripFlowsheet.Location = New Point(0, 0)
+        ToolStrip1.Location = New Point(0, ToolStrip1.Height)
+        ToolStripContainer1.TopToolStripPanel.ResumeLayout()
+
         If My.Settings.FlowsheetRenderer = 0 Then
             Dim fscontrol As New FlowsheetSurfaceControl
             fscontrol.Dock = DockStyle.Fill

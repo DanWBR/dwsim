@@ -4142,7 +4142,7 @@ Label_00CC:
         Me.AboutToolStripMenuItem_Click(sender, e)
     End Sub
 
-    Private Sub ContentsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles HelpToolStripMenuItem.Click
+    Private Sub ContentsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         'call general help
 
         RaiseEvent ToolOpened("Help", New EventArgs())
