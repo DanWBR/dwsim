@@ -74,7 +74,7 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
             If compounds.Contains("Propane") Then vector(5) = Vz0(compounds.IndexOf("Propane"))
             If compounds.Contains("Isobutane") Then vector(6) = Vz0(compounds.IndexOf("Isobutane"))
             If compounds.Contains("N-butane") Then vector(7) = Vz0(compounds.IndexOf("N-butane"))
-            If compounds.Contains("Isobutane") Then vector(8) = Vz0(compounds.IndexOf("Isobutane"))
+            If compounds.Contains("Isopentane") Then vector(8) = Vz0(compounds.IndexOf("Isopentane"))
             If compounds.Contains("N-pentane") Then vector(9) = Vz0(compounds.IndexOf("N-pentane"))
             If compounds.Contains("N-hexane") Then vector(10) = Vz0(compounds.IndexOf("N-hexane"))
             If compounds.Contains("N-heptane") Then vector(11) = Vz0(compounds.IndexOf("N-heptane"))
