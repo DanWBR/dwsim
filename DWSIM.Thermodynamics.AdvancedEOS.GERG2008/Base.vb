@@ -3,6 +3,24 @@
 Namespace DWSIM.Thermodynamics.AdvancedEOS
 
     Public Class GERGBase
+        ' This software was developed by employees Of the National Institute Of Standards And Technology (NIST), 
+        ' an agency Of the Federal Government And Is being made available As a Public service. Pursuant To 
+        ' title 17 United States Code Section 105, works Of NIST employees are Not subject To copyright protection 
+        ' In the United States.  This software may be subject To foreign copyright.  Permission In the United States 
+        ' And In foreign countries, To the extent that NIST may hold copyright, To use, copy, modify, create derivative 
+        ' works, And distribute this software And its documentation without fee Is hereby granted On a non-exclusive basis, 
+        ' provided that this notice And disclaimer Of warranty appears In all copies. 
+
+        ' THE SOFTWARE Is PROVIDED 'AS IS' WITHOUT ANY WARRANTY OF ANY KIND, EITHER EXPRESSED, IMPLIED, OR STATUTORY, INCLUDING, 
+        ' BUT NOT LIMITED TO, ANY WARRANTY THAT THE SOFTWARE WILL CONFORM TO SPECIFICATIONS, ANY IMPLIED WARRANTIES OF MERCHANTABILITY, 
+        ' FITNESS FOR A PARTICULAR PURPOSE, AND FREEDOM FROM INFRINGEMENT, AND ANY WARRANTY THAT THE DOCUMENTATION WILL CONFORM TO THE 
+        ' SOFTWARE, OR ANY WARRANTY THAT THE SOFTWARE WILL BE ERROR FREE.  IN NO EVENT SHALL NIST BE LIABLE FOR ANY DAMAGES, INCLUDING, 
+        ' BUT NOT LIMITED TO, DIRECT, INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES, ARISING OUT OF, RESULTING FROM, OR IN ANY WAY CONNECTED 
+        ' With THIS SOFTWARE, WHETHER Or Not BASED UPON WARRANTY, CONTRACT, TORT, Or OTHERWISE, WHETHER Or Not INJURY WAS SUSTAINED BY PERSONS
+        ' Or Property Or OTHERWISE, And WHETHER Or Not LOSS WAS SUSTAINED FROM, Or AROSE OUT Of THE RESULTS Of, Or USE Of, THE SOFTWARE Or 
+        ' SERVICES PROVIDED HEREUNDER.
+
+        ' Code from https://github.com/usnistgov/AGA8
 
         'Version 2.0 of routines for the calculation of thermodynamic
         ' properties from the AGA 8 Part 2 GERG-2008 equation of state.
