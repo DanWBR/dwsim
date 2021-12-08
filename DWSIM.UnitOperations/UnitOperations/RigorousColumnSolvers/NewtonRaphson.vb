@@ -166,7 +166,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Lj(i) = sumlkj(i)
             Next
 
-            If _condtype = condtype.Total_Condenser Then
+            If _coltype <> ColType.AbsorptionColumn And _condtype = condtype.Total_Condenser Then
                 sumvkj(0) = 0.0
                 Vj(0) = 0.0
             End If
@@ -201,13 +201,17 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             For i = 1 To ns
                 sumLSS += LSSj(i)
             Next
-            If _condtype = Column.condtype.Full_Reflux Then
+            If _coltype <> ColType.AbsorptionColumn And _condtype = Column.condtype.Full_Reflux Then
                 LSSj(0) = 0.0#
-            ElseIf _condtype = condtype.Total_Condenser Then
+            ElseIf _coltype <> ColType.AbsorptionColumn And _condtype = condtype.Total_Condenser Then
                 LSSj(0) = vc(0).Sum
                 yc(0) = _pp.DW_CalcBubT(xc(0), P(0), Tj(0), Nothing, False)(3)
             Else
-                LSSj(0) = F.Sum - Lj(ns) - sumLSS - sumVSS - Vj(0)
+                If llextr Then
+                    LSSj(0) = 0.0
+                Else
+                    LSSj(0) = F.Sum - Lj(ns) - sumLSS - sumVSS - Vj(0)
+                End If
             End If
 
             For i = 0 To ns
@@ -454,24 +458,29 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     E_ant(i, j) = E(i, j)
                     H_ant(i) = H(i)
                     If i = 0 Then
-                        If _condtype = Column.condtype.Full_Reflux Then
-                            M(i, j) = lc(i)(j) * (1 + Sl(i)) + vc(i)(j) * (1 + Sv(i)) - vc(i + 1)(j) - fc(i)(j)
-                            E(i, j) = eff(i) * Kval(i)(j) * lc(i)(j) * sumvkj(i) / sumlkj(i) - vc(i)(j) + (1 - eff(i)) * vc(i + 1)(j) * sumvkj(i) / sumvkj(i + 1)
-                        ElseIf _condtype = condtype.Partial_Condenser Then
-                            M(i, j) = lc(i)(j) * (1 + Sl(i)) + vc(i)(j) * (1 + Sv(i)) - vc(i + 1)(j) - fc(i)(j)
-                            E(i, j) = eff(i) * Kval(i)(j) * lc(i)(j) * sumvkj(i) / sumlkj(i) - vc(i)(j) + (1 - eff(i)) * vc(i + 1)(j) * sumvkj(i) / sumvkj(i + 1)
-                        Else
-                            'total condenser
-                            Dim sum1 As Double = 0
-                            For k = 0 To nc - 1
-                                sum1 += Kval(i)(k) * xc(i)(k)
-                            Next
-                            If j = 0 Then
-                                E(i, j) = 1 - sum1
+                        If _coltype <> ColType.AbsorptionColumn Then
+                            If _condtype = Column.condtype.Full_Reflux Then
+                                M(i, j) = lc(i)(j) * (1 + Sl(i)) + vc(i)(j) * (1 + Sv(i)) - vc(i + 1)(j) - fc(i)(j)
+                                E(i, j) = eff(i) * Kval(i)(j) * lc(i)(j) * sumvkj(i) / sumlkj(i) - vc(i)(j) + (1 - eff(i)) * vc(i + 1)(j) * sumvkj(i) / sumvkj(i + 1)
+                            ElseIf _condtype = condtype.Partial_Condenser Then
+                                M(i, j) = lc(i)(j) * (1 + Sl(i)) + vc(i)(j) * (1 + Sv(i)) - vc(i + 1)(j) - fc(i)(j)
+                                E(i, j) = eff(i) * Kval(i)(j) * lc(i)(j) * sumvkj(i) / sumlkj(i) - vc(i)(j) + (1 - eff(i)) * vc(i + 1)(j) * sumvkj(i) / sumvkj(i + 1)
                             Else
-                                E(i, j) = lc(i)(j) - Lj(0) / LSSj(0) * vc(i)(j)
+                                'total condenser
+                                Dim sum1 As Double = 0
+                                For k = 0 To nc - 1
+                                    sum1 += Kval(i)(k) * xc(i)(k)
+                                Next
+                                If j = 0 Then
+                                    E(i, j) = 1 - sum1
+                                Else
+                                    E(i, j) = lc(i)(j) - Lj(0) / LSSj(0) * vc(i)(j)
+                                End If
+                                M(i, j) = lc(i)(j) * (1 + Sl(i)) - vc(i + 1)(j) - fc(i)(j)
                             End If
-                            M(i, j) = lc(i)(j) * (1 + Sl(i)) - vc(i + 1)(j) - fc(i)(j)
+                        Else
+                            M(i, j) = lc(i)(j) * (1 + Sl(i)) + vc(i)(j) * (1 + Sv(i)) - vc(i + 1)(j) - fc(i)(j)
+                            E(i, j) = eff(i) * Kval(i)(j) * lc(i)(j) * sumvkj(i) / sumlkj(i) - vc(i)(j) + (1 - eff(i)) * vc(i + 1)(j) * sumvkj(i) / sumvkj(i + 1)
                         End If
                     ElseIf i = ns Then
                         M(i, j) = lc(i)(j) * (1 + Sl(i)) + vc(i)(j) * (1 + Sv(i)) - lc(i - 1)(j) - fc(i)(j)
@@ -534,7 +543,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
         End Function
 
-        Public Function Solve(ByVal dc As DistillationColumn, ByVal nc As Integer, ByVal ns As Integer, ByVal maxits As Integer,
+        Public Function Solve(ByVal dc As Column, ByVal nc As Integer, ByVal ns As Integer, ByVal maxits As Integer,
                                 ByVal tol As Double(), ByVal F As Double(), ByVal V As Double(),
                                 ByVal Q As Double(), ByVal L As Double(),
                                 ByVal VSS As Double(), ByVal LSS As Double(), ByVal Kval()() As Double,
@@ -655,32 +664,35 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             llextr = LLEX 'liquid-liquid extractor
 
             Dim rebabs As Boolean = False, refabs As Boolean = False
-
-            If dc.ReboiledAbsorber Then coltype = Column.ColType.ReboiledAbsorber
-            If dc.RefluxedAbsorber Then coltype = Column.ColType.RefluxedAbsorber
+            If TypeOf dc Is DistillationColumn Then
+                If DirectCast(dc, DistillationColumn).ReboiledAbsorber Then coltype = Column.ColType.ReboiledAbsorber
+                If DirectCast(dc, DistillationColumn).RefluxedAbsorber Then coltype = Column.ColType.RefluxedAbsorber
+            End If
 
             Dim cv As New SystemsOfUnits.Converter
             Dim spval1, spval2 As Double
             Dim spci1, spci2 As Integer
 
-            Select Case specs("C").SType
-                Case ColumnSpec.SpecType.Component_Fraction,
-                      ColumnSpec.SpecType.Stream_Ratio,
-                      ColumnSpec.SpecType.Component_Recovery
-                    spval1 = specs("C").SpecValue
-                Case Else
-                    spval1 = SystemsOfUnits.Converter.ConvertToSI(specs("C").SpecUnit, specs("C").SpecValue)
-            End Select
-            spci1 = specs("C").ComponentIndex
-            Select Case specs("C").SType
-                Case ColumnSpec.SpecType.Component_Fraction,
-                      ColumnSpec.SpecType.Stream_Ratio,
-                      ColumnSpec.SpecType.Component_Recovery
-                    spval2 = specs("R").SpecValue
-                Case Else
-                    spval2 = SystemsOfUnits.Converter.ConvertToSI(specs("R").SpecUnit, specs("R").SpecValue)
-            End Select
-            spci2 = specs("R").ComponentIndex
+            If TypeOf dc Is DistillationColumn Then
+                Select Case specs("C").SType
+                    Case ColumnSpec.SpecType.Component_Fraction,
+                          ColumnSpec.SpecType.Stream_Ratio,
+                          ColumnSpec.SpecType.Component_Recovery
+                        spval1 = specs("C").SpecValue
+                    Case Else
+                        spval1 = SystemsOfUnits.Converter.ConvertToSI(specs("C").SpecUnit, specs("C").SpecValue)
+                End Select
+                spci1 = specs("C").ComponentIndex
+                Select Case specs("C").SType
+                    Case ColumnSpec.SpecType.Component_Fraction,
+                          ColumnSpec.SpecType.Stream_Ratio,
+                          ColumnSpec.SpecType.Component_Recovery
+                        spval2 = specs("R").SpecValue
+                    Case Else
+                        spval2 = SystemsOfUnits.Converter.ConvertToSI(specs("R").SpecUnit, specs("R").SpecValue)
+                End Select
+                spci2 = specs("R").ComponentIndex
+            End If
 
             Dim ic, ec As Integer
             Dim Tj(ns), Tj_ant(ns), T_(ns) As Double
@@ -782,7 +794,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 LSSj(i) = LSS(i)
             Next
 
-            If condt = condtype.Total_Condenser Then
+            If coltype = ColType.DistillationColumn And condt = condtype.Total_Condenser Then
                 vc(0) = lc(0).MultiplyConstY(LSS(0) / L(0))
             End If
 
@@ -948,11 +960,15 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             For i = 1 To ns
                 sumLSS += LSSj(i)
             Next
-            If condt = Column.condtype.Full_Reflux Then
-                Vj(0) = F.Sum - Lj(ns) - sumLSS - sumVSS
-                LSSj(0) = 0.0#
+            If coltype = ColType.DistillationColumn Then
+                If condt = Column.condtype.Full_Reflux Then
+                    Vj(0) = F.Sum - Lj(ns) - sumLSS - sumVSS
+                    LSSj(0) = 0.0#
+                Else
+                    LSSj(0) = F.Sum - Lj(ns) - sumLSS - sumVSS - Vj(0)
+                End If
             Else
-                LSSj(0) = F.Sum - Lj(ns) - sumLSS - sumVSS - Vj(0)
+                LSSj(0) = 0.0
             End If
 
             For i = 0 To ns
@@ -964,7 +980,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             For i = 0 To ns
                 Lj(i) = sumlkj(i)
-                If i = 0 Then
+                If coltype = ColType.DistillationColumn And i = 0 Then
                     If condt = condtype.Total_Condenser Then
                         LSSj(0) = Vj(0)
                         Vj(0) = 0.0
@@ -1055,7 +1071,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             _subcoolingDeltaT = input.SubcoolingDeltaT
 
-            Dim result As Object() = Solve(col, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P,
+            Dim result As Object()
+
+            result = Solve(col, nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P,
                                input.CondenserType, eff, input.ColumnType, col.PropertyPackage, col.Specs, input.CalculationMode,
                                llextractor)
 

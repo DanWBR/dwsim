@@ -88,6 +88,20 @@ Public Class EditingForm_Column
 
             'solving method
 
+            cbSolvingMethod.Enabled = True
+            LabelSM.Enabled = True
+            cbSolvingMethod.Items.Clear()
+            If TypeOf SimObject Is DistillationColumn Then
+                cbSolvingMethod.Items.Add("Wang-Henke (Bubble Point)")
+                cbSolvingMethod.Items.Add("Napthali-Sandholm (Simultaneous Correction)")
+            ElseIf TypeOf SimObject Is AbsorptionColumn Then
+                cbSolvingMethod.Items.Add("Burningham-Otto (Sum Rates)")
+                cbSolvingMethod.Items.Add("Napthali-Sandholm (Simultaneous Correction)")
+                If .SolvingMethodName = "Wang-Henke (Bubble Point)" Then
+                    .SolvingMethodName = "Burningham-Otto (Sum Rates)"
+                End If
+            End If
+
             cbSolvingMethod.SelectedItem = .SolvingMethodName
 
             'external solvers
@@ -110,8 +124,6 @@ Public Class EditingForm_Column
             If TypeOf SimObject Is DistillationColumn Then
                 chkNoCondenser.Checked = DirectCast(SimObject, DistillationColumn).ReboiledAbsorber
                 chkNoReboiler.Checked = DirectCast(SimObject, DistillationColumn).RefluxedAbsorber
-                cbSolvingMethod.Enabled = True
-                LabelSM.Enabled = True
             ElseIf TypeOf SimObject Is AbsorptionColumn Then
                 TabContainerSpecification.TabPages.Remove(TabCondenser)
                 TabContainerSpecification.TabPages.Remove(TabReboiler)
