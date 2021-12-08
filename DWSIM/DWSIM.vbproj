@@ -18,7 +18,7 @@
     </ManifestKeyFile>
     <GenerateManifests>false</GenerateManifests>
     <SignManifests>false</SignManifests>
-    <ApplicationIcon>dwsim-icon-2.ico</ApplicationIcon>
+    <ApplicationIcon>DWSIM Icon.ico</ApplicationIcon>
     <TargetZone>LocalIntranet</TargetZone>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>
@@ -3006,6 +3006,7 @@
     <None Include="Resources\button-medium-blue.png" />
     <None Include="Resources\209x48-doar-azul-assina.gif" />
     <None Include="Resources\card_export.png" />
+    <Content Include="DWSIM Icon.ico" />
     <Content Include="dwsim-icon-2.ico" />
     <Content Include="DWSIM_ico.ico" />
     <None Include="Resources\become_a_patron_button%402x.jpg" />
