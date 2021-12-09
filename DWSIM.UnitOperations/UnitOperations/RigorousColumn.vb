@@ -1754,8 +1754,6 @@ Namespace UnitOperations
 
         <Xml.Serialization.XmlIgnore> Property Solver As ColumnSolver
 
-        <Xml.Serialization.XmlIgnore> Public Shared Property ExternalSolver As ColumnSolver
-
         ''' <summary>
         ''' Set the number of stages (n > 3)
         ''' </summary>
@@ -3527,9 +3525,7 @@ Namespace UnitOperations
 
             If TypeOf Me Is DistillationColumn Then
                 Dim solvererror = True
-                If ExternalSolver IsNot Nothing Then
-                    so = ExternalSolver.SolveColumn(Me, inputdata)
-                ElseIf SolvingMethodName.Contains("Bubble") Then
+                If SolvingMethodName.Contains("Bubble") Then
                     Try
                         SetColumnSolver(New SolvingMethods.WangHenkeMethod())
                         so = Solver.SolveColumn(inputdata)
