@@ -677,6 +677,12 @@
     <Compile Include="Forms\FormCORegistration.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\FormDefineFonts.Designer.vb">
+      <DependentUpon>FormDefineFonts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormDefineFonts.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormEditGraphicObject.Designer.vb">
       <DependentUpon>FormEditGraphicObject.vb</DependentUpon>
     </Compile>
@@ -1417,6 +1423,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormDBManager.de.resx">
       <DependentUpon>FormDBManager.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormDefineFonts.en.resx">
+      <DependentUpon>FormDefineFonts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormDefineFonts.resx">
+      <DependentUpon>FormDefineFonts.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormEditGraphicObject.de.resx">
       <DependentUpon>FormEditGraphicObject.vb</DependentUpon>

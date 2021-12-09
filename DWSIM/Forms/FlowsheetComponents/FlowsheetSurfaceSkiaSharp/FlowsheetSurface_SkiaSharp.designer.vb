@@ -31,19 +31,6 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.btnUp = New System.Windows.Forms.Button()
         Me.btnDown = New System.Windows.Forms.Button()
         Me.btnRight = New System.Windows.Forms.Button()
-        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.ToolStripLabel2 = New System.Windows.Forms.ToolStripLabel()
-        Me.tbFontSize = New System.Windows.Forms.ToolStripTextBox()
-        Me.ToolStripLabel3 = New System.Windows.Forms.ToolStripLabel()
-        Me.tsbColorTheme = New System.Windows.Forms.ToolStripComboBox()
-        Me.ToolStripLabel4 = New System.Windows.Forms.ToolStripLabel()
-        Me.tsbRegularFont = New System.Windows.Forms.ToolStripComboBox()
-        Me.ToolStripLabel5 = New System.Windows.Forms.ToolStripLabel()
-        Me.tsbBoldFont = New System.Windows.Forms.ToolStripComboBox()
-        Me.ToolStripLabel6 = New System.Windows.Forms.ToolStripLabel()
-        Me.tsbItalicFont = New System.Windows.Forms.ToolStripComboBox()
-        Me.ToolStripLabel7 = New System.Windows.Forms.ToolStripLabel()
-        Me.tsbBoldItalicFont = New System.Windows.Forms.ToolStripComboBox()
         Me.ToolStripFlowsheet = New System.Windows.Forms.ToolStrip()
         Me.tsbControlPanelMode = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator17 = New System.Windows.Forms.ToolStripSeparator()
@@ -88,6 +75,13 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.ToolStripSeparator16 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsbAlignVertical = New System.Windows.Forms.ToolStripButton()
         Me.tsbAlignHorizontal = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.ToolStripLabel2 = New System.Windows.Forms.ToolStripLabel()
+        Me.tbFontSize = New System.Windows.Forms.ToolStripTextBox()
+        Me.ToolStripButton5 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator20 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripLabel3 = New System.Windows.Forms.ToolStripLabel()
+        Me.tsbColorTheme = New System.Windows.Forms.ToolStripComboBox()
         Me.CMS_NoSel = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
@@ -164,8 +158,8 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.SplitContainerHorizontal.Panel1.SuspendLayout()
         Me.SplitContainerHorizontal.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
-        Me.ToolStrip1.SuspendLayout()
         Me.ToolStripFlowsheet.SuspendLayout()
+        Me.ToolStrip1.SuspendLayout()
         Me.CMS_NoSel.SuspendLayout()
         Me.CMS_Sel.SuspendLayout()
         Me.dckMenu.SuspendLayout()
@@ -263,105 +257,6 @@ Partial Class FlowsheetSurface_SkiaSharp
         resources.ApplyResources(Me.btnRight, "btnRight")
         Me.btnRight.Name = "btnRight"
         Me.btnRight.UseVisualStyleBackColor = True
-        '
-        'ToolStrip1
-        '
-        resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel2, Me.tbFontSize, Me.ToolStripLabel3, Me.tsbColorTheme, Me.ToolStripLabel4, Me.tsbRegularFont, Me.ToolStripLabel5, Me.tsbBoldFont, Me.ToolStripLabel6, Me.tsbItalicFont, Me.ToolStripLabel7, Me.tsbBoldItalicFont})
-        Me.ToolStrip1.Name = "ToolStrip1"
-        '
-        'ToolStripLabel2
-        '
-        resources.ApplyResources(Me.ToolStripLabel2, "ToolStripLabel2")
-        Me.ToolStripLabel2.AutoToolTip = True
-        Me.ToolStripLabel2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripLabel2.Image = Global.DWSIM.My.Resources.Resources.fontsize
-        Me.ToolStripLabel2.Name = "ToolStripLabel2"
-        '
-        'tbFontSize
-        '
-        resources.ApplyResources(Me.tbFontSize, "tbFontSize")
-        Me.tbFontSize.Margin = New System.Windows.Forms.Padding(1, 0, 10, 0)
-        Me.tbFontSize.Name = "tbFontSize"
-        '
-        'ToolStripLabel3
-        '
-        resources.ApplyResources(Me.ToolStripLabel3, "ToolStripLabel3")
-        Me.ToolStripLabel3.AutoToolTip = True
-        Me.ToolStripLabel3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripLabel3.Image = Global.DWSIM.My.Resources.Resources.color_wheel
-        Me.ToolStripLabel3.Name = "ToolStripLabel3"
-        '
-        'tsbColorTheme
-        '
-        resources.ApplyResources(Me.tsbColorTheme, "tsbColorTheme")
-        Me.tsbColorTheme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.tsbColorTheme.Items.AddRange(New Object() {resources.GetString("tsbColorTheme.Items"), resources.GetString("tsbColorTheme.Items1")})
-        Me.tsbColorTheme.Name = "tsbColorTheme"
-        '
-        'ToolStripLabel4
-        '
-        resources.ApplyResources(Me.ToolStripLabel4, "ToolStripLabel4")
-        Me.ToolStripLabel4.AutoToolTip = True
-        Me.ToolStripLabel4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripLabel4.Image = Global.DWSIM.My.Resources.Resources.regular
-        Me.ToolStripLabel4.Name = "ToolStripLabel4"
-        '
-        'tsbRegularFont
-        '
-        resources.ApplyResources(Me.tsbRegularFont, "tsbRegularFont")
-        Me.tsbRegularFont.DropDownHeight = 240
-        Me.tsbRegularFont.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.tsbRegularFont.DropDownWidth = 140
-        Me.tsbRegularFont.Name = "tsbRegularFont"
-        '
-        'ToolStripLabel5
-        '
-        resources.ApplyResources(Me.ToolStripLabel5, "ToolStripLabel5")
-        Me.ToolStripLabel5.AutoToolTip = True
-        Me.ToolStripLabel5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripLabel5.Image = Global.DWSIM.My.Resources.Resources.bold
-        Me.ToolStripLabel5.Name = "ToolStripLabel5"
-        '
-        'tsbBoldFont
-        '
-        resources.ApplyResources(Me.tsbBoldFont, "tsbBoldFont")
-        Me.tsbBoldFont.DropDownHeight = 240
-        Me.tsbBoldFont.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.tsbBoldFont.DropDownWidth = 140
-        Me.tsbBoldFont.Name = "tsbBoldFont"
-        '
-        'ToolStripLabel6
-        '
-        resources.ApplyResources(Me.ToolStripLabel6, "ToolStripLabel6")
-        Me.ToolStripLabel6.AutoToolTip = True
-        Me.ToolStripLabel6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripLabel6.Image = Global.DWSIM.My.Resources.Resources.italic
-        Me.ToolStripLabel6.Name = "ToolStripLabel6"
-        '
-        'tsbItalicFont
-        '
-        resources.ApplyResources(Me.tsbItalicFont, "tsbItalicFont")
-        Me.tsbItalicFont.DropDownHeight = 240
-        Me.tsbItalicFont.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.tsbItalicFont.DropDownWidth = 140
-        Me.tsbItalicFont.Name = "tsbItalicFont"
-        '
-        'ToolStripLabel7
-        '
-        resources.ApplyResources(Me.ToolStripLabel7, "ToolStripLabel7")
-        Me.ToolStripLabel7.AutoToolTip = True
-        Me.ToolStripLabel7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripLabel7.Image = Global.DWSIM.My.Resources.Resources.bolditalic
-        Me.ToolStripLabel7.Name = "ToolStripLabel7"
-        '
-        'tsbBoldItalicFont
-        '
-        resources.ApplyResources(Me.tsbBoldItalicFont, "tsbBoldItalicFont")
-        Me.tsbBoldItalicFont.DropDownHeight = 240
-        Me.tsbBoldItalicFont.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.tsbBoldItalicFont.DropDownWidth = 140
-        Me.tsbBoldItalicFont.Name = "tsbBoldItalicFont"
         '
         'ToolStripFlowsheet
         '
@@ -658,6 +553,50 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.tsbAlignHorizontal.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbAlignHorizontal.Image = Global.DWSIM.My.Resources.Resources.shape_align_middle1
         Me.tsbAlignHorizontal.Name = "tsbAlignHorizontal"
+        '
+        'ToolStrip1
+        '
+        resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel2, Me.tbFontSize, Me.ToolStripButton5, Me.ToolStripSeparator20, Me.ToolStripLabel3, Me.tsbColorTheme})
+        Me.ToolStrip1.Name = "ToolStrip1"
+        '
+        'ToolStripLabel2
+        '
+        resources.ApplyResources(Me.ToolStripLabel2, "ToolStripLabel2")
+        Me.ToolStripLabel2.AutoToolTip = True
+        Me.ToolStripLabel2.Image = Global.DWSIM.My.Resources.Resources.fontsize
+        Me.ToolStripLabel2.Name = "ToolStripLabel2"
+        '
+        'tbFontSize
+        '
+        resources.ApplyResources(Me.tbFontSize, "tbFontSize")
+        Me.tbFontSize.Margin = New System.Windows.Forms.Padding(1, 0, 10, 0)
+        Me.tbFontSize.Name = "tbFontSize"
+        '
+        'ToolStripButton5
+        '
+        resources.ApplyResources(Me.ToolStripButton5, "ToolStripButton5")
+        Me.ToolStripButton5.Image = Global.DWSIM.My.Resources.Resources.font
+        Me.ToolStripButton5.Name = "ToolStripButton5"
+        '
+        'ToolStripSeparator20
+        '
+        resources.ApplyResources(Me.ToolStripSeparator20, "ToolStripSeparator20")
+        Me.ToolStripSeparator20.Name = "ToolStripSeparator20"
+        '
+        'ToolStripLabel3
+        '
+        resources.ApplyResources(Me.ToolStripLabel3, "ToolStripLabel3")
+        Me.ToolStripLabel3.AutoToolTip = True
+        Me.ToolStripLabel3.Image = Global.DWSIM.My.Resources.Resources.color_wheel
+        Me.ToolStripLabel3.Name = "ToolStripLabel3"
+        '
+        'tsbColorTheme
+        '
+        resources.ApplyResources(Me.tsbColorTheme, "tsbColorTheme")
+        Me.tsbColorTheme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.tsbColorTheme.Items.AddRange(New Object() {resources.GetString("tsbColorTheme.Items"), resources.GetString("tsbColorTheme.Items1")})
+        Me.tsbColorTheme.Name = "tsbColorTheme"
         '
         'CMS_NoSel
         '
@@ -1049,10 +988,10 @@ Partial Class FlowsheetSurface_SkiaSharp
         CType(Me.SplitContainerHorizontal, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainerHorizontal.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
-        Me.ToolStrip1.ResumeLayout(False)
-        Me.ToolStrip1.PerformLayout()
         Me.ToolStripFlowsheet.ResumeLayout(False)
         Me.ToolStripFlowsheet.PerformLayout()
+        Me.ToolStrip1.ResumeLayout(False)
+        Me.ToolStrip1.PerformLayout()
         Me.CMS_NoSel.ResumeLayout(False)
         Me.CMS_Sel.ResumeLayout(False)
         Me.dckMenu.ResumeLayout(False)
@@ -1183,12 +1122,6 @@ Partial Class FlowsheetSurface_SkiaSharp
     Friend WithEvents ToolStripLabel3 As ToolStripLabel
     Friend WithEvents tsbColorTheme As ToolStripComboBox
     Friend WithEvents ToolStripContainer1 As ToolStripContainer
-    Friend WithEvents ToolStripLabel4 As ToolStripLabel
-    Friend WithEvents tsbRegularFont As ToolStripComboBox
-    Friend WithEvents ToolStripLabel5 As ToolStripLabel
-    Friend WithEvents tsbBoldFont As ToolStripComboBox
-    Friend WithEvents ToolStripLabel6 As ToolStripLabel
-    Friend WithEvents tsbItalicFont As ToolStripComboBox
-    Friend WithEvents ToolStripLabel7 As ToolStripLabel
-    Friend WithEvents tsbBoldItalicFont As ToolStripComboBox
+    Friend WithEvents ToolStripButton5 As ToolStripButton
+    Friend WithEvents ToolStripSeparator20 As ToolStripSeparator
 End Class

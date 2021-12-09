@@ -644,11 +644,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Dim P = input.StagePressures.ToArray()
             Dim eff = input.StageEfficiencies.ToArray()
 
-            Dim L1trials = input.L1trials
-            Dim L2trials = input.L2trials
-            Dim x1trials = input.x1trials
-            Dim x2trials = input.x2trials
-
             Dim col = input.ColumnObject
 
             Dim llextractor As Boolean = False

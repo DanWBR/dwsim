@@ -103,20 +103,10 @@ Public Class FlowsheetSurface_SkiaSharp
 
         tbFontSize.Text = Flowsheet.Options.LabelFontSize.ToString("G2")
 
-        tsbRegularFont.Items.AddRange(GraphicsSurface.RegularFonts.ToArray())
-        tsbBoldFont.Items.AddRange(GraphicsSurface.BoldFonts.ToArray())
-        tsbBoldItalicFont.Items.AddRange(GraphicsSurface.BoldItalicFonts.ToArray())
-        tsbItalicFont.Items.AddRange(GraphicsSurface.ItalicFonts.ToArray())
-
         FlowsheetSurface.SetRegularFont(Flowsheet.FlowsheetOptions.RegularFontName)
         FlowsheetSurface.SetBoldFont(Flowsheet.FlowsheetOptions.BoldFontName)
         FlowsheetSurface.SetItalicFont(Flowsheet.FlowsheetOptions.ItalicFontName)
         FlowsheetSurface.SetBoldItalicFont(Flowsheet.FlowsheetOptions.BoldItalicFontName)
-
-        tsbRegularFont.SelectedItem = Flowsheet.FlowsheetOptions.RegularFontName
-        tsbBoldFont.SelectedItem = Flowsheet.FlowsheetOptions.BoldFontName
-        tsbBoldItalicFont.SelectedItem = Flowsheet.FlowsheetOptions.BoldItalicFontName
-        tsbItalicFont.SelectedItem = Flowsheet.FlowsheetOptions.ItalicFontName
 
         AddHandler CopyFromTSMI.DropDownItemClicked, AddressOf MaterialStreamClickHandler
 
@@ -3301,43 +3291,10 @@ Public Class FlowsheetSurface_SkiaSharp
         End If
     End Sub
 
-    Private Sub tsbRegularFont_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tsbRegularFont.SelectedIndexChanged
+    Private Sub ToolStripButton5_Click(sender As Object, e As EventArgs) Handles ToolStripButton5.Click
 
-        If Loaded Then
-            Flowsheet.FlowsheetOptions.RegularFontName = tsbRegularFont.SelectedItem
-            FlowsheetSurface.SetRegularFont(Flowsheet.FlowsheetOptions.RegularFontName)
-            FControl.Invalidate()
-        End If
-
-    End Sub
-
-    Private Sub tsbBoldFont_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tsbBoldFont.SelectedIndexChanged
-
-        If Loaded Then
-            Flowsheet.FlowsheetOptions.BoldFontName = tsbBoldFont.SelectedItem
-            FlowsheetSurface.SetBoldFont(Flowsheet.FlowsheetOptions.BoldFontName)
-            FControl.Invalidate()
-        End If
-
-    End Sub
-
-    Private Sub tsbItalicFont_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tsbItalicFont.SelectedIndexChanged
-
-        If Loaded Then
-            Flowsheet.FlowsheetOptions.ItalicFontName = tsbItalicFont.SelectedItem
-            FlowsheetSurface.SetItalicFont(Flowsheet.FlowsheetOptions.ItalicFontName)
-            FControl.Invalidate()
-        End If
-
-    End Sub
-
-    Private Sub tsbBoldItalicFont_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tsbBoldItalicFont.SelectedIndexChanged
-
-        If Loaded Then
-            Flowsheet.FlowsheetOptions.BoldItalicFontName = tsbBoldItalicFont.SelectedItem
-            FlowsheetSurface.SetBoldItalicFont(Flowsheet.FlowsheetOptions.BoldItalicFontName)
-            FControl.Invalidate()
-        End If
+        Dim fset As New FormDefineFonts With {.Flowsheet = Flowsheet, .FlowsheetSurface = FlowsheetSurface}
+        fset.ShowDialog(Me)
 
     End Sub
 

@@ -320,6 +320,9 @@ Namespace Reactors
                 'solve parallel reactions 
                 'xf = final conversion values
 
+                Dim pen_val As Double = 0.0#
+                Dim fval As Double
+
                 xf = splex.ComputeMin(Function(xi)
 
                                           Dim i2, j2, n2 As Integer, m0 As Double
@@ -368,13 +371,14 @@ Namespace Reactors
 
                                           'calculate a penalty value for the objective function due to negative mole flows
 
-                                          Dim pen_val As Double = 0.0#
-
+                                          pen_val = 0.0
                                           For Each d In nif
                                               If d < 0.0 Then pen_val += -d * 1.0E+150
                                           Next
 
-                                          Return xref.SubtractY(xi).AbsSqrSumY + pen_val
+                                          fval = xref.SubtractY(xi).AbsSqrSumY
+
+                                          Return fval + pen_val
 
                                       End Function, vars.ToArray)
 
@@ -409,29 +413,25 @@ Namespace Reactors
                         If Not DN.ContainsKey(sb.CompName) Then
                             DN.Add(sb.CompName, -xf(i) * rxn.Components(sb.CompName).StoichCoeff / scBC * nBC)
                         Else
-                            DN(sb.CompName) = -xf(i) * rxn.Components(sb.CompName).StoichCoeff / scBC * nBC
+                            DN(sb.CompName) += -xf(i) * rxn.Components(sb.CompName).StoichCoeff / scBC * nBC
                         End If
                     Next
-
-                    'final mole flows
-
-                    For Each sb As ReactionStoichBase In rxn.Components.Values
-                        N(sb.CompName) += DN(sb.CompName)
-                        If N(sb.CompName) < 0.0 Then N(sb.CompName) = 0.0
-                    Next
-
-                    'Ideal Gas Reactants Enthalpy (kJ/kg * kg/s = kW)
-                    Hid_r += 0 'ppr.RET_Hid(298.15, ims.Phases(0).Properties.temperature.GetValueOrDefault, PropertyPackages.Phase.Mixture) * ims.Phases(0).Properties.massflow.GetValueOrDefault
-
-                    'Ideal Gas Products Enthalpy (kJ/kg * kg/s = kW)
-                    Hid_p += 0 'ppr.RET_Hid(298.15, ims.Phases(0).Properties.temperature.GetValueOrDefault, PropertyPackages.Phase.Mixture) * ims.Phases(0).Properties.massflow.GetValueOrDefault
-
-                    'Heat released (or absorbed) (kJ/s = kW) (Ideal Gas)
-                    DHr += rxn.ReactionHeat * Abs(DN(rxn.BaseReactant)) / 1000
 
                     i += 1
 
                 Loop Until i = ar.Count
+
+                'final mole flows
+
+                For Each s1 As Compound In ims.Phases(0).Compounds.Values
+                    If N.ContainsKey(s1.Name) Then
+                        N(s1.Name) = N00(s1.Name) + DN(s1.Name)
+                        If N(s1.Name) < 0.0 Then N(s1.Name) = 0.0
+                    End If
+                Next
+
+                'Heat released (or absorbed) (kJ/s = kW) (Ideal Gas)
+                DHr = rxn.ReactionHeat * Abs(DN(rxn.BaseReactant)) / 1000
 
                 IObj2?.Paragraphs.Add(String.Format("Total Heat of Reaction: {0} kW", DHr))
 
@@ -440,7 +440,7 @@ Namespace Reactors
                 Dim Nsum As Double = 0
                 For Each s2 As Compound In ims.Phases(0).Compounds.Values
                     If N.ContainsKey(s2.Name) Then
-                        Nsum += N(s2.Name) + (N00(s2.Name) - N0(s2.Name))
+                        Nsum += N(s2.Name)
                     Else
                         Nsum += s2.MoleFraction.GetValueOrDefault * ims.Phases(0).Properties.molarflow.GetValueOrDefault
                     End If
