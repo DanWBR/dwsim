@@ -160,6 +160,8 @@ Namespace GraphicObjects.Shapes
                     ax = Me.X + (Me.Width - (trect.Right - trect.Left)) / 2 - 1.0
                     ay = Me.Y + (Me.Height - (trect.Top - trect.Bottom)) / 2
 
+                    canvas.DrawText("H", ax, ay, tpaint)
+
                 Case 1
 
                     'b/w
@@ -202,6 +204,8 @@ Namespace GraphicObjects.Shapes
                     Dim ax, ay As Double
                     ax = Me.X + (Me.Width - (trect.Right - trect.Left)) / 2 - 1.0
                     ay = Me.Y + (Me.Height - (trect.Top - trect.Bottom)) / 2
+
+                    canvas.DrawText("H", ax, ay, tpaint)
 
                 Case 2
 
