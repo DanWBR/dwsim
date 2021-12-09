@@ -5,6 +5,7 @@ Public Class FormDefineFonts
 
     Public FlowsheetSurface As GraphicsSurface
     Public Flowsheet As IFlowsheet
+    Private Loaded As Boolean = False
 
     Private Sub FormDefineFonts_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -25,21 +26,27 @@ Public Class FormDefineFonts
         ComboBox4.SelectedItem = Flowsheet.FlowsheetOptions.BoldItalicFontName
         ComboBox3.SelectedItem = Flowsheet.FlowsheetOptions.ItalicFontName
 
+        Loaded = True
+
     End Sub
 
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged, ComboBox2.SelectedIndexChanged, ComboBox3.SelectedIndexChanged, ComboBox4.SelectedIndexChanged
 
-        Flowsheet.FlowsheetOptions.RegularFontName = ComboBox1.SelectedItem
-        Flowsheet.FlowsheetOptions.BoldFontName = ComboBox2.SelectedItem
-        Flowsheet.FlowsheetOptions.BoldItalicFontName = ComboBox4.SelectedItem
-        Flowsheet.FlowsheetOptions.ItalicFontName = ComboBox3.SelectedItem
+        If Loaded Then
 
-        FlowsheetSurface.SetRegularFont(Flowsheet.FlowsheetOptions.RegularFontName)
-        FlowsheetSurface.SetBoldFont(Flowsheet.FlowsheetOptions.BoldFontName)
-        FlowsheetSurface.SetItalicFont(Flowsheet.FlowsheetOptions.ItalicFontName)
-        FlowsheetSurface.SetBoldItalicFont(Flowsheet.FlowsheetOptions.BoldItalicFontName)
+            Flowsheet.FlowsheetOptions.RegularFontName = ComboBox1.SelectedItem
+            Flowsheet.FlowsheetOptions.BoldFontName = ComboBox2.SelectedItem
+            Flowsheet.FlowsheetOptions.BoldItalicFontName = ComboBox4.SelectedItem
+            Flowsheet.FlowsheetOptions.ItalicFontName = ComboBox3.SelectedItem
 
-        Flowsheet.UpdateInterface()
+            FlowsheetSurface.SetRegularFont(Flowsheet.FlowsheetOptions.RegularFontName)
+            FlowsheetSurface.SetBoldFont(Flowsheet.FlowsheetOptions.BoldFontName)
+            FlowsheetSurface.SetItalicFont(Flowsheet.FlowsheetOptions.ItalicFontName)
+            FlowsheetSurface.SetBoldItalicFont(Flowsheet.FlowsheetOptions.BoldItalicFontName)
+
+            Flowsheet.UpdateInterface()
+
+        End If
 
     End Sub
 
