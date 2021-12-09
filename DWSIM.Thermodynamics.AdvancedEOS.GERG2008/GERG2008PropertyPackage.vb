@@ -51,7 +51,7 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
             If CurrentMaterialStream IsNot Nothing Then
                 Dim compounds = CurrentMaterialStream.Phases(0).Compounds.Keys
                 For Each comp As String In compounds
-                    If Not Me.GERGcompounds.Contains(comp) Then
+                    If Not Me.GERGcompounds.Contains(comp) And CurrentMaterialStream.Phases(0).Compounds(comp).MoleFraction > 0 Then
                         Flowsheet?.ShowMessage(comp + " not part of GERG 2008, compound ignored. ChemSep compounds preferred.", IFlowsheet.MessageType.Warning)
                     End If
                 Next
