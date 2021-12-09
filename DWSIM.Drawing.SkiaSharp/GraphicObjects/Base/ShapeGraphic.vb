@@ -283,11 +283,6 @@ Namespace GraphicObjects
             Dim rect2 As New SKRect(X + (0.25 - 0.14) * Width, Y + (0.5 - 0.14 / 2) * Height, X + 0.25 * Width, Y + (0.5 - 0.14 / 2) * Height + 0.14 * Height)
             Dim rect3 As New SKRect(X + 0.75 * Width, Y + 0.1 * Height, X + 0.75 * Width + 0.14 * Width, Y + 0.1 * Height + 0.14 * Height)
             Dim rect4 As New SKRect(X + 0.75 * Width, Y + (0.9 - 0.14) * Height, X + 0.75 * Width + 0.14 * Width, Y + (0.9 - 0.14) * Height + 0.14 * Height)
-            If Me.FlippedH = True Then
-                rect2 = New SKRect(X + 0.75 * Width, Y + (0.5 - 0.14 / 2) * Height, X + 0.75 * Width + 0.14 * Width, Y + (0.5 - 0.14 / 2) * Height + 0.14 * Height)
-                rect3 = New SKRect(X + (0.25 - 0.14) * Width, Y + 0.1 * Height, X + (0.25 - 0.14) * Width + 0.14 * Width, Y + 0.1 * Height + 0.14 * Height)
-                rect4 = New SKRect(X + (0.25 - 0.14) * Width, Y + (0.9 - 0.14) * Height, X + (0.25 - 0.14) * Width + 0.14 * Width, Y + (0.9 - 0.14) * Height + 0.14 * Height)
-            End If
 
             If DrawMode = 0 Then
 
@@ -324,31 +319,7 @@ Namespace GraphicObjects
                 ay = Me.Y + Me.Height * 0.8 - size.Height
             End If
 
-            If FlippedH Or FlippedV Or Rotation <> 0 Then
-
-                Dim currmat = g.TotalMatrix
-
-                g.Save()
-
-                If FlippedV And Not FlippedH Then
-                    g.Scale(1, -1, (X + Width / 2), (Y + Height / 2))
-                ElseIf FlippedH And Not FlippedV Then
-                    g.Scale(-1, 1, (X + Width / 2), (Y + Height / 2))
-                ElseIf FlippedH And FlippedV Then
-                    g.Scale(-1, -1, (X + Width / 2), (Y + Height / 2))
-                End If
-
-                If Rotation <> 0.0 Then g.RotateDegrees(Rotation, X + Width / 2, Y + Height / 2)
-
-                g.DrawText(TypeName, ax, ay, tPen)
-
-                g.SetMatrix(currmat)
-
-            Else
-
-                g.DrawText(TypeName, ax, ay, tPen)
-
-            End If
+            g.DrawText(TypeName, ax, ay, tPen)
 
             'Draw interior packing
 

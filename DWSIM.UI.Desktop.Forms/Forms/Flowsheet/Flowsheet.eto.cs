@@ -1208,7 +1208,7 @@ namespace DWSIM.UI.Forms
             cbBoldItalicFont.SelectedIndexChanged += (s, e) =>
             {
                 FlowsheetObject.Options.BoldItalicFontName = cbBoldItalicFont.SelectedKey;
-                FlowsheetControl.FlowsheetSurface.SetBoldFont(FlowsheetObject.Options.BoldItalicFontName);
+                FlowsheetControl.FlowsheetSurface.SetBoldItalicFont(FlowsheetObject.Options.BoldItalicFontName);
                 FlowsheetControl.Invalidate();
             };
 

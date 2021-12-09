@@ -177,8 +177,6 @@ Namespace GraphicObjects.Shapes
                     'Temperature/Pressure Gradients
             End Select
 
-
-
         End Sub
 
         Private Sub DrawGP(canvas As SKCanvas, myPen As SKPaint)

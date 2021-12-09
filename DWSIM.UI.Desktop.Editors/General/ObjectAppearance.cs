@@ -34,6 +34,11 @@ namespace DWSIM.UI.Desktop.Editors
 
             Padding = new Padding(10);
 
+            this.CreateAndAddLabelRow("Font");
+            this.CreateAndAddDropDownRow("Font Style", gobj.FontStyle.GetEnumNames(), (int)gobj.FontStyle,
+                (sender, e) => { gobj.FontStyle = sender.SelectedIndex.ToEnum<Interfaces.Enums.GraphicObjects.FontStyle>(); flowsheet.UpdateInterface(); });
+            this.CreateAndAddTextBoxRow("N0", "Font Size", gobj.FontSize,
+                (sender, e) => { if (sender.Text.IsValidDouble()) gobj.FontSize = (int)sender.Text.ToDoubleFromCurrent(); flowsheet.UpdateInterface(); });
             this.CreateAndAddLabelRow("Dimensions");
             this.CreateAndAddTextBoxRow("N0", "Width", gobj.Width,
                 (sender, e) => { if (sender.Text.IsValidDouble()) gobj.Width = (int)sender.Text.ToDoubleFromCurrent(); });
@@ -44,16 +49,7 @@ namespace DWSIM.UI.Desktop.Editors
                 (sender, e) => { gobj.Rotation = (int)sender.Value; });
             this.CreateAndAddCheckBoxRow("Flip Horizontally", gobj.FlippedH, (sender, e) => gobj.FlippedH = sender.Checked.GetValueOrDefault());
             this.CreateAndAddCheckBoxRow("Flip Vertically", gobj.FlippedV, (sender, e) => gobj.FlippedV = sender.Checked.GetValueOrDefault());
-            this.CreateAndAddLabelRow("Border/Fill");
-            this.CreateAndAddNumericEditorRow("Border Width", gobj.LineWidth, 1, 10, 0,
-                (sender, e) => { gobj.LineWidth = (int)sender.Value; });
-            this.CreateAndAddCheckBoxRow("Override Border/Fill Color", gobj.OverrideColors, (sender, e) => gobj.OverrideColors = sender.Checked.GetValueOrDefault());
-            this.CreateAndAddColorPickerRow("Border/Fill Color", Color.Parse(gobj.LineColor.ToString()),
-                (sender, e) => { 
-                    gobj.LineColor = SkiaSharp.SKColor.Parse(sender.Value.ToHex()); 
-                });
-            this.CreateAndAddCheckBoxRow("Enable Fill", gobj.Fill, (sender, e) => gobj.Fill = sender.Checked.GetValueOrDefault());
-
+            
         }
     }
 }

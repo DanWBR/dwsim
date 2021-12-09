@@ -113,6 +113,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.ToolStripMenuItem12 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem13 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem14 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsmiInvertVertically = New System.Windows.Forms.ToolStripMenuItem()
         Me.HorizontalmenteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ClonarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -670,7 +671,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         'CMS_Sel
         '
         resources.ApplyResources(Me.CMS_Sel, "CMS_Sel")
-        Me.CMS_Sel.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSMI_Label, Me.AtivadoToolStripMenuItem, Me.ToolStripSeparator3, Me.RecalcularToolStripMenuItem, Me.CopyFromTSMI, Me.DepurarObjetoToolStripMenuItem, Me.ToolStripSeparator6, Me.ConectarAToolStripMenuItem, Me.DesconectarDeToolStripMenuItem, Me.ToolStripSeparator4, Me.TSMI_Girar, Me.HorizontalmenteToolStripMenuItem, Me.ToolStripSeparator2, Me.ClonarToolStripMenuItem, Me.ExcluirToolStripMenuItem, Me.ToolStripSeparator5, Me.CopiarDadosParaareaDeTransferenciaToolStripMenuItem, Me.ToolStripSeparator7, Me.EditAppearanceToolStripMenuItem, Me.ToolStripSeparator8, Me.SplitToolStripMenuItem, Me.SplitAndInsertValveTSMI, Me.SplitAndInsertRecycleMenuItem, Me.MergeStreamsToolStripMenuItem})
+        Me.CMS_Sel.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSMI_Label, Me.AtivadoToolStripMenuItem, Me.ToolStripSeparator3, Me.RecalcularToolStripMenuItem, Me.CopyFromTSMI, Me.DepurarObjetoToolStripMenuItem, Me.ToolStripSeparator6, Me.ConectarAToolStripMenuItem, Me.DesconectarDeToolStripMenuItem, Me.ToolStripSeparator4, Me.TSMI_Girar, Me.tsmiInvertVertically, Me.HorizontalmenteToolStripMenuItem, Me.ToolStripSeparator2, Me.ClonarToolStripMenuItem, Me.ExcluirToolStripMenuItem, Me.ToolStripSeparator5, Me.CopiarDadosParaareaDeTransferenciaToolStripMenuItem, Me.ToolStripSeparator7, Me.EditAppearanceToolStripMenuItem, Me.ToolStripSeparator8, Me.SplitToolStripMenuItem, Me.SplitAndInsertValveTSMI, Me.SplitAndInsertRecycleMenuItem, Me.MergeStreamsToolStripMenuItem})
         Me.CMS_Sel.Name = "CMS_Sel"
         '
         'TSMI_Label
@@ -772,6 +773,13 @@ Partial Class FlowsheetSurface_SkiaSharp
         '
         resources.ApplyResources(Me.ToolStripMenuItem14, "ToolStripMenuItem14")
         Me.ToolStripMenuItem14.Name = "ToolStripMenuItem14"
+        '
+        'tsmiInvertVertically
+        '
+        resources.ApplyResources(Me.tsmiInvertVertically, "tsmiInvertVertically")
+        Me.tsmiInvertVertically.CheckOnClick = True
+        Me.tsmiInvertVertically.Image = Global.DWSIM.My.Resources.Resources.shape_flip_vertical
+        Me.tsmiInvertVertically.Name = "tsmiInvertVertically"
         '
         'HorizontalmenteToolStripMenuItem
         '
@@ -1124,4 +1132,5 @@ Partial Class FlowsheetSurface_SkiaSharp
     Friend WithEvents ToolStripContainer1 As ToolStripContainer
     Friend WithEvents ToolStripButton5 As ToolStripButton
     Friend WithEvents ToolStripSeparator20 As ToolStripSeparator
+    Public WithEvents tsmiInvertVertically As ToolStripMenuItem
 End Class

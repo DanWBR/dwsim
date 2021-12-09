@@ -317,9 +317,6 @@
   <data name="tsbColorTheme.Items1" xml:space="preserve">
     <value>Black-and-White</value>
   </data>
-  <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>573, 25</value>
-  </data>
   <data name="ToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
     <value>200, 22</value>
   </data>
@@ -527,6 +524,12 @@
   <data name="TSMI_Girar.Text" xml:space="preserve">
     <value>Rotate</value>
   </data>
+  <data name="tsmiInvertVertically.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 22</value>
+  </data>
+  <data name="tsmiInvertVertically.Text" xml:space="preserve">
+    <value>Invert Vertically</value>
+  </data>
   <data name="HorizontalmenteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>241, 22</value>
   </data>
@@ -597,7 +600,7 @@
     <value>Merge Streams</value>
   </data>
   <data name="CMS_Sel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 420</value>
+    <value>242, 464</value>
   </data>
   <data name="PreviewDialog.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

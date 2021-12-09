@@ -303,6 +303,12 @@ Public Class FlowsheetSurface_SkiaSharp
                     Me.HorizontalmenteToolStripMenuItem.Checked = False
                 End If
 
+                If obj.GraphicObject.FlippedV Then
+                    Me.tsmiInvertVertically.Checked = True
+                Else
+                    Me.tsmiInvertVertically.Checked = False
+                End If
+
                 If FlowsheetSurface.SelectedObject.ObjectType = ObjectType.MaterialStream Then
 
                     Me.SplitAndInsertValveTSMI.Visible = True
@@ -2898,7 +2904,7 @@ Public Class FlowsheetSurface_SkiaSharp
         Else
             FlowsheetSurface.SelectedObject.FlippedH = False
         End If
-        SplitContainerHorizontal.Panel1.Invalidate()
+        Flowsheet.UpdateInterface()
     End Sub
 
     Private Sub ToolStripMenuItem14_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem14.Click
@@ -3296,6 +3302,15 @@ Public Class FlowsheetSurface_SkiaSharp
         Dim fset As New FormDefineFonts With {.Flowsheet = Flowsheet, .FlowsheetSurface = FlowsheetSurface}
         fset.ShowDialog(Me)
 
+    End Sub
+
+    Private Sub tsmiInvertVertically_Click(sender As Object, e As EventArgs) Handles tsmiInvertVertically.Click
+        If Me.tsmiInvertVertically.Checked Then
+            FlowsheetSurface.SelectedObject.FlippedV = True
+        Else
+            FlowsheetSurface.SelectedObject.FlippedV = False
+        End If
+        Flowsheet.UpdateInterface()
     End Sub
 
     Private Sub tsbControlPanelMode_CheckedChanged(sender As Object, e As EventArgs) Handles tsbControlPanelMode.CheckedChanged

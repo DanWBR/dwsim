@@ -57,15 +57,15 @@ Namespace GraphicObjects.Shapes
             myIC2.Direction = ConDir.Up
 
             Dim myOC1 As New ConnectionPoint
-            myOC1.Position = New Point(X + 0.5 * Width, Y)
+            myOC1.Position = New Point(X + Width, Y)
             myOC1.Type = ConType.ConOut
 
             Dim myOC2 As New ConnectionPoint
-            myOC2.Position = New Point(X + 0.5 * Width, Y + Height)
+            myOC2.Position = New Point(X + Width, Y + Height)
             myOC2.Type = ConType.ConOut
 
             Dim myOC3 As New ConnectionPoint
-            myOC3.Position = New Point(X + 0.625 * Width, Y + 0.7 * Height)
+            myOC3.Position = New Point(X + 0.5 * Width, Y + Height)
             myOC3.Type = ConType.ConEn
             myOC3.Direction = ConDir.Down
 
@@ -89,7 +89,7 @@ Namespace GraphicObjects.Shapes
                 If .Count <> 0 Then
                     .Item(0).Position = New Point(X + (0.75 + 0.14) * Width, Y + (0.1 + 0.14 / 2) * Height)
                     .Item(1).Position = New Point(X + (0.75 + 0.14) * Width, Y + (0.9 - 0.14 / 2) * Height)
-                    .Item(2).Position = New Point(X + 0.75 * Width, Y + Height)
+                    .Item(2).Position = New Point(X + 0.5 * Width, Y + Height)
                 Else
                     .Add(myOC1)
                     .Add(myOC2)

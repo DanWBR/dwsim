@@ -62,7 +62,8 @@ namespace DWSIM.UI.Desktop.Editors
                 var ctn = new DynamicLayout();
                 ctn.BackgroundColor = Colors.LightGrey;
                 s.CreateAndAddLabelRow(ctn, "Inspector Reports");
-                s.CreateAndAddLabelAndButtonRow(ctn, "An Inspector Report is ready for viewing.", "View Report", null, (btn, e) => {
+                s.CreateAndAddLabelAndButtonRow(ctn, "An Inspector Report is ready for viewing.", "View Report", null, (btn, e) =>
+                {
                     var f = s.GetDefaultEditorForm("Inspector Report for '" + column.GraphicObject.Tag + "'", 1024, 768, Inspector.Window2_Eto.GetInspectorWindow(column), false);
                     f.Show();
                 });
@@ -79,7 +80,8 @@ namespace DWSIM.UI.Desktop.Editors
             {
                 column.GraphicObject.Tag = arg3.Text;
                 column.GetFlowsheet().UpdateInterface();
-            }, () => {
+            }, () =>
+            {
                 column.GetFlowsheet().UpdateOpenEditForms();
             });
 
@@ -101,7 +103,7 @@ namespace DWSIM.UI.Desktop.Editors
                     if (proppacks.Count > 0) column.PropertyPackage = (IPropertyPackage)column.GetFlowsheet().PropertyPackages.Values.Where((x) => x.Tag == proppacks[arg1.SelectedIndex]).FirstOrDefault();
                 }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)column.GetFlowsheet()).HighLevelSolve.Invoke(); });
             }
-            
+
             s.CreateAndAddLabelRow(container, "Object Properties");
 
             s.CreateAndAddButtonRow(container, "Define Number of Stages", null, (arg1, e) =>
@@ -171,7 +173,8 @@ namespace DWSIM.UI.Desktop.Editors
                                                        }
                                                    }));
                 }
-                s.CreateAndAddLabelAndButtonRow(sview, "Interpolate Pressures", "Interpolate", null, (sender2, e2) => {
+                s.CreateAndAddLabelAndButtonRow(sview, "Interpolate Pressures", "Interpolate", null, (sender2, e2) =>
+                {
                     var first = tlist[0].Text.ToDoubleFromCurrent();
                     var last = tlist[tlist.Count - 1].Text.ToDoubleFromCurrent();
                     var n = tlist.Count;
@@ -604,28 +607,35 @@ namespace DWSIM.UI.Desktop.Editors
                                          column.Specs["R"].SpecUnit = units[arg1.SelectedIndex];
                                      });
 
+            s.CreateAndAddLabelRow(container, "Solver Settings");
+
+            var methods = new string[] { "Wang-Henke (Bubble Point)", "Napthali-Sandholm (Simultaneous Correction)" };
+
+            s.CreateAndAddDropDownRow(container, "Solving Method", methods.ToList(), methods.ToList().IndexOf(column.SolvingMethodName), (sender, e) =>
+            {
+                column.SolvingMethodName = sender.SelectedValue.ToString();
+            });
+
             s.CreateAndAddTextBoxRow(container, "N0", "Maximum Iterations", column.MaxIterations,
             (sender, e) =>
             {
                 if (sender.Text.IsValidDouble()) column.MaxIterations = (int)sender.Text.ToDoubleFromCurrent();
             }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)column.GetFlowsheet()).HighLevelSolve.Invoke(); });
 
-            s.CreateAndAddTextBoxRow(container, nf, "Convergence Tolerance (External Loop)", column.ExternalLoopTolerance,
+            s.CreateAndAddTextBoxRow(container, nf, "Convergence Tolerance", column.ExternalLoopTolerance,
             (sender, e) =>
             {
-                if (sender.Text.IsValidDouble()) column.ExternalLoopTolerance = sender.Text.ToDoubleFromCurrent();
+                if (sender.Text.IsValidDouble())
+                {
+                    column.ExternalLoopTolerance = sender.Text.ToDoubleFromCurrent();
+                    column.InternalLoopTolerance = sender.Text.ToDoubleFromCurrent();
+                }
             }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)column.GetFlowsheet()).HighLevelSolve.Invoke(); });
 
-            s.CreateAndAddTextBoxRow(container, nf, "Convergence Tolerance (Internal Loop)", column.InternalLoopTolerance,
-            (sender, e) =>
-            {
-                if (sender.Text.IsValidDouble()) column.InternalLoopTolerance = sender.Text.ToDoubleFromCurrent();
-            }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)column.GetFlowsheet()).HighLevelSolve.Invoke(); });
+            s.CreateAndAddEmptySpace(container);
+            s.CreateAndAddEmptySpace(container);
+            s.CreateAndAddEmptySpace(container);
 
-            s.CreateAndAddEmptySpace(container);
-            s.CreateAndAddEmptySpace(container);
-            s.CreateAndAddEmptySpace(container);
-        
         }
 
 

@@ -138,32 +138,6 @@ Namespace GraphicObjects.Shapes
                     ax = Me.X + (Me.Width - (trect.Right - trect.Left)) / 2
                     ay = Me.Y + (Me.Height - (trect.Top - trect.Bottom)) / 2
 
-                    If FlippedH Or FlippedV Or Rotation <> 0 Then
-
-                        Dim currmat = canvas.TotalMatrix
-
-                        canvas.Save()
-
-                        If FlippedV And Not FlippedH Then
-                            canvas.Scale(1, -1, (X + Width / 2), (Y + Height / 2))
-                        ElseIf FlippedH And Not FlippedV Then
-                            canvas.Scale(-1, 1, (X + Width / 2), (Y + Height / 2))
-                        ElseIf FlippedH And FlippedV Then
-                            canvas.Scale(-1, -1, (X + Width / 2), (Y + Height / 2))
-                        End If
-
-                        If Rotation <> 0.0 Then canvas.RotateDegrees(Rotation, X + Width / 2, Y + Height / 2)
-
-                        canvas.DrawText("R", ax, ay, tpaint)
-
-                        canvas.SetMatrix(currmat)
-
-                    Else
-
-                        canvas.DrawText("R", ax, ay, tpaint)
-
-                    End If
-
                 Case 1
 
                     'b/w
@@ -195,32 +169,6 @@ Namespace GraphicObjects.Shapes
                     Dim ax, ay As Integer
                     ax = Me.X + (Me.Width - (trect.Right - trect.Left)) / 2
                     ay = Me.Y + (Me.Height - (trect.Top - trect.Bottom)) / 2
-
-                    If FlippedH Or FlippedV Or Rotation <> 0 Then
-
-                        Dim currmat = canvas.TotalMatrix
-
-                        canvas.Save()
-
-                        If FlippedV And Not FlippedH Then
-                            canvas.Scale(1, -1, (X + Width / 2), (Y + Height / 2))
-                        ElseIf FlippedH And Not FlippedV Then
-                            canvas.Scale(-1, 1, (X + Width / 2), (Y + Height / 2))
-                        ElseIf FlippedH And FlippedV Then
-                            canvas.Scale(-1, -1, (X + Width / 2), (Y + Height / 2))
-                        End If
-
-                        If Rotation <> 0.0 Then canvas.RotateDegrees(Rotation, X + Width / 2, Y + Height / 2)
-
-                        canvas.DrawText("R", ax, ay, tpaint)
-
-                        canvas.SetMatrix(currmat)
-
-                    Else
-
-                        canvas.DrawText("R", ax, ay, tpaint)
-
-                    End If
 
                 Case 2
 
