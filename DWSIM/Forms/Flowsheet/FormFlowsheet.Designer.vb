@@ -78,9 +78,6 @@ Partial Class FormFlowsheet
         Me.COObjTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConsoleOutputTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
-        Me.showflowsheettoolstripmenuitem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.showunitstoolstripmenuitem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator11 = New System.Windows.Forms.ToolStripSeparator()
         Me.RestoreLayoutTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmiCloseOpenedEditors = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -503,7 +500,7 @@ Partial Class FormFlowsheet
         '
         'ShowTSMI
         '
-        Me.ShowTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.varpaneltsmi, Me.COObjTSMI, Me.ConsoleOutputTSMI, Me.ToolStripSeparator10, Me.showflowsheettoolstripmenuitem, Me.showunitstoolstripmenuitem, Me.ToolStripSeparator11, Me.RestoreLayoutTSMI, Me.tsmiCloseOpenedEditors})
+        Me.ShowTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.varpaneltsmi, Me.COObjTSMI, Me.ConsoleOutputTSMI, Me.ToolStripSeparator10, Me.RestoreLayoutTSMI, Me.tsmiCloseOpenedEditors})
         Me.ShowTSMI.MergeAction = System.Windows.Forms.MergeAction.MatchOnly
         Me.ShowTSMI.MergeIndex = 9
         Me.ShowTSMI.Name = "ShowTSMI"
@@ -530,23 +527,6 @@ Partial Class FormFlowsheet
         '
         Me.ToolStripSeparator10.Name = "ToolStripSeparator10"
         resources.ApplyResources(Me.ToolStripSeparator10, "ToolStripSeparator10")
-        '
-        'showflowsheettoolstripmenuitem
-        '
-        Me.showflowsheettoolstripmenuitem.CheckOnClick = True
-        Me.showflowsheettoolstripmenuitem.Name = "showflowsheettoolstripmenuitem"
-        resources.ApplyResources(Me.showflowsheettoolstripmenuitem, "showflowsheettoolstripmenuitem")
-        '
-        'showunitstoolstripmenuitem
-        '
-        Me.showunitstoolstripmenuitem.CheckOnClick = True
-        Me.showunitstoolstripmenuitem.Name = "showunitstoolstripmenuitem"
-        resources.ApplyResources(Me.showunitstoolstripmenuitem, "showunitstoolstripmenuitem")
-        '
-        'ToolStripSeparator11
-        '
-        Me.ToolStripSeparator11.Name = "ToolStripSeparator11"
-        resources.ApplyResources(Me.ToolStripSeparator11, "ToolStripSeparator11")
         '
         'RestoreLayoutTSMI
         '
@@ -814,9 +794,6 @@ Partial Class FormFlowsheet
     Friend WithEvents TimerScripts30 As System.Windows.Forms.Timer
     Friend WithEvents TimerScripts60 As System.Windows.Forms.Timer
     Friend WithEvents ToolStripSeparator10 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents showflowsheettoolstripmenuitem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents showunitstoolstripmenuitem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator11 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents RestoreLayoutTSMI As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents EditTSMI As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents tsmiUndo As System.Windows.Forms.ToolStripMenuItem

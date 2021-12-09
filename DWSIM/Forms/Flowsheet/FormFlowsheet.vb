@@ -206,11 +206,6 @@ Public Class FormFlowsheet
             Me.WindowState = FormWindowState.Normal
         End If
 
-        If GlobalSettings.Settings.OldUI Then
-            showflowsheettoolstripmenuitem.Checked = My.Settings.ShowFlowsheetToolStrip
-            showunitstoolstripmenuitem.Checked = My.Settings.ShowUnitsToolStrip
-        End If
-
         Me.COObjTSMI.Checked = Me.Options.FlowsheetShowCOReportsWindow
         Me.varpaneltsmi.Checked = Me.Options.FlowsheetShowWatchWindow
 
