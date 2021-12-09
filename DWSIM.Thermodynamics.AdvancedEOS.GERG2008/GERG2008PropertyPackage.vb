@@ -11,13 +11,51 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
 
         Dim pr As New PropertyPackages.Auxiliary.PengRobinson
 
+        Private _gerg_compounds As New List(Of String)({"Methane",
+                                                      "Nitrogen",
+                                                      "Carbon dioxide",
+                                                      "Ethane",
+                                                      "Propane",
+                                                      "Isobutane",
+                                                      "N-butane",
+                                                      "Isopentane",
+                                                      "N-pentane",
+                                                      "N-hexane",
+                                                      "N-heptane",
+                                                      "N-octane",
+                                                      "N-nonane",
+                                                      "N-decane",
+                                                      "Hydrogen",
+                                                      "Oxygen",
+                                                      "Carbon monoxide",
+                                                      "Water",
+                                                      "Hydrogen sulfide",
+                                                      "Helium",
+                                                      "Argon"
+                                                    })
+        Public ReadOnly Property GERGcompounds()
+            Get
+                Return _gerg_compounds
+            End Get
+        End Property
+
         Public Sub New()
 
             ComponentName = "GERG-2008"
             ComponentDescription = "The Groupe Européen de Recherches Gazières (GERG) 2008 multi-parameter equation of state (EOS) is considered the reference model for the prediction of natural gas mixture properties."
 
             IsConfigurable = True
+        End Sub
 
+        Public Overrides Sub RunPostMaterialStreamSetRoutine()
+            If CurrentMaterialStream IsNot Nothing Then
+                Dim compounds = CurrentMaterialStream.Phases(0).Compounds.Keys
+                For Each comp As String In compounds
+                    If Not Me.GERGcompounds.Contains(comp) Then
+                        Flowsheet?.ShowMessage(comp + " not part of GERG 2008, compound ignored. ChemSep compounds preferred.", IFlowsheet.MessageType.Warning)
+                    End If
+                Next
+            End If
         End Sub
 
         Public Overrides Function ReturnInstance(typename As String) As Object
@@ -62,32 +100,13 @@ Namespace DWSIM.Thermodynamics.AdvancedEOS
             '   19 - Hydrogen sulfide
             '   20 - Helium
             '   21 - Argon
-
             Dim vector(22) As Double
-
             Dim compounds = RET_VNAMES().ToList
+            Dim i As Integer
 
-            If compounds.Contains("Methane") Then vector(1) = Vz0(compounds.IndexOf("Methane"))
-            If compounds.Contains("Nitrogen") Then vector(2) = Vz0(compounds.IndexOf("Nitrogen"))
-            If compounds.Contains("Carbon dioxide") Then vector(3) = Vz0(compounds.IndexOf("Carbon dioxide"))
-            If compounds.Contains("Ethane") Then vector(4) = Vz0(compounds.IndexOf("Ethane"))
-            If compounds.Contains("Propane") Then vector(5) = Vz0(compounds.IndexOf("Propane"))
-            If compounds.Contains("Isobutane") Then vector(6) = Vz0(compounds.IndexOf("Isobutane"))
-            If compounds.Contains("N-butane") Then vector(7) = Vz0(compounds.IndexOf("N-butane"))
-            If compounds.Contains("Isopentane") Then vector(8) = Vz0(compounds.IndexOf("Isopentane"))
-            If compounds.Contains("N-pentane") Then vector(9) = Vz0(compounds.IndexOf("N-pentane"))
-            If compounds.Contains("N-hexane") Then vector(10) = Vz0(compounds.IndexOf("N-hexane"))
-            If compounds.Contains("N-heptane") Then vector(11) = Vz0(compounds.IndexOf("N-heptane"))
-            If compounds.Contains("N-octane") Then vector(12) = Vz0(compounds.IndexOf("N-octane"))
-            If compounds.Contains("N-nonane") Then vector(13) = Vz0(compounds.IndexOf("N-nonane"))
-            If compounds.Contains("N-decane") Then vector(14) = Vz0(compounds.IndexOf("N-decane"))
-            If compounds.Contains("Hydrogen") Then vector(15) = Vz0(compounds.IndexOf("Hydrogen"))
-            If compounds.Contains("Oxygen") Then vector(16) = Vz0(compounds.IndexOf("Oxygen"))
-            If compounds.Contains("Carbon monoxide") Then vector(17) = Vz0(compounds.IndexOf("Carbon monoxide"))
-            If compounds.Contains("Water") Then vector(18) = Vz0(compounds.IndexOf("Water"))
-            If compounds.Contains("Hydrogen sulfide") Then vector(19) = Vz0(compounds.IndexOf("Hydrogen sulfide"))
-            If compounds.Contains("Helium") Then vector(20) = Vz0(compounds.IndexOf("Helium"))
-            If compounds.Contains("Argon") Then vector(21) = Vz0(compounds.IndexOf("Argon"))
+            For i = 0 To Me.GERGcompounds.Count - 1
+                If compounds.Contains(Me.GERGcompounds(i)) Then vector(i + 1) = Vz0(compounds.IndexOf(Me.GERGcompounds(i)))
+            Next
 
             Return vector.NormalizeY
 
