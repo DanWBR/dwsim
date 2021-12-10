@@ -179,76 +179,76 @@ Public Class FormMain
 
         Dim extlist As List(Of IExtenderCollection) = GetExtenders(LoadExtenderDLLs())
 
-            For Each extender In extlist
-                Extenders.Add(extender.ID, extender)
-                Try
-                    If extender.Level = ExtenderLevel.MainWindow Then
-                        If extender.Category <> ExtenderCategory.InitializationScript Then
-                            Dim newmenuitem As ToolStripMenuItem = Nothing
-                            If extender.Category = ExtenderCategory.NewItem Then
-                                For Each item As ToolStripMenuItem In MenuStrip1.Items
-                                    If item.Text = extender.DisplayText Then
-                                        newmenuitem = item
-                                        Exit For
-                                    End If
-                                Next
-                                If newmenuitem Is Nothing Then
-                                    newmenuitem = New ToolStripMenuItem()
-                                    newmenuitem.Text = extender.DisplayText
-                                    newmenuitem.DisplayStyle = ToolStripItemDisplayStyle.Text
+        For Each extender In extlist
+            Extenders.Add(extender.ID, extender)
+            Try
+                If extender.Level = ExtenderLevel.MainWindow Then
+                    If extender.Category <> ExtenderCategory.InitializationScript Then
+                        Dim newmenuitem As ToolStripMenuItem = Nothing
+                        If extender.Category = ExtenderCategory.NewItem Then
+                            For Each item As ToolStripMenuItem In MenuStrip1.Items
+                                If item.Text = extender.DisplayText Then
+                                    newmenuitem = item
+                                    Exit For
                                 End If
-                            End If
-                            For Each item In extender.Collection
-                                Dim exttsmi As New ToolStripMenuItem
-                                exttsmi.Text = item.DisplayText
-                                exttsmi.Image = item.DisplayImage
-                                AddHandler exttsmi.Click, Sub(s2, e2)
-                                                              item.SetMainWindow(Me)
-                                                              item.Run()
-                                                          End Sub
-                                Select Case extender.Category
-                                    Case ExtenderCategory.File
-                                        If item.InsertAtPosition >= 0 Then
-                                            FileTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
-                                        Else
-                                            FileTSMI.DropDownItems.Add(exttsmi)
-                                        End If
-                                    Case ExtenderCategory.Edit
-                                        If item.InsertAtPosition >= 0 Then
-                                            EditTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
-                                        Else
-                                            EditTSMI.DropDownItems.Add(exttsmi)
-                                        End If
-                                    Case ExtenderCategory.Tools
-                                        If item.InsertAtPosition >= 0 Then
-                                            ToolsTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
-                                        Else
-                                            ToolsTSMI.DropDownItems.Add(exttsmi)
-                                        End If
-                                    Case ExtenderCategory.Help
-                                        If item.InsertAtPosition >= 0 Then
-                                            HelpTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
-                                        Else
-                                            HelpTSMI.DropDownItems.Add(exttsmi)
-                                        End If
-                                    Case ExtenderCategory.NewItem
-                                        newmenuitem?.DropDownItems.Add(exttsmi)
-                                End Select
                             Next
-                            If newmenuitem IsNot Nothing AndAlso Not MenuStrip1.Items.Contains(newmenuitem) Then
-                                MenuStrip1.Items.Add(newmenuitem)
+                            If newmenuitem Is Nothing Then
+                                newmenuitem = New ToolStripMenuItem()
+                                newmenuitem.Text = extender.DisplayText
+                                newmenuitem.DisplayStyle = ToolStripItemDisplayStyle.Text
                             End If
-                        Else
-                            For Each item In extender.Collection
-                                item.SetMainWindow(Me)
-                                item.Run()
-                            Next
                         End If
+                        For Each item In extender.Collection
+                            Dim exttsmi As New ToolStripMenuItem
+                            exttsmi.Text = item.DisplayText
+                            exttsmi.Image = item.DisplayImage
+                            AddHandler exttsmi.Click, Sub(s2, e2)
+                                                          item.SetMainWindow(Me)
+                                                          item.Run()
+                                                      End Sub
+                            Select Case extender.Category
+                                Case ExtenderCategory.File
+                                    If item.InsertAtPosition >= 0 Then
+                                        FileTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
+                                    Else
+                                        FileTSMI.DropDownItems.Add(exttsmi)
+                                    End If
+                                Case ExtenderCategory.Edit
+                                    If item.InsertAtPosition >= 0 Then
+                                        EditTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
+                                    Else
+                                        EditTSMI.DropDownItems.Add(exttsmi)
+                                    End If
+                                Case ExtenderCategory.Tools
+                                    If item.InsertAtPosition >= 0 Then
+                                        ToolsTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
+                                    Else
+                                        ToolsTSMI.DropDownItems.Add(exttsmi)
+                                    End If
+                                Case ExtenderCategory.Help
+                                    If item.InsertAtPosition >= 0 Then
+                                        HelpTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
+                                    Else
+                                        HelpTSMI.DropDownItems.Add(exttsmi)
+                                    End If
+                                Case ExtenderCategory.NewItem
+                                    newmenuitem?.DropDownItems.Add(exttsmi)
+                            End Select
+                        Next
+                        If newmenuitem IsNot Nothing AndAlso Not MenuStrip1.Items.Contains(newmenuitem) Then
+                            MenuStrip1.Items.Add(newmenuitem)
+                        End If
+                    Else
+                        For Each item In extender.Collection
+                            item.SetMainWindow(Me)
+                            item.Run()
+                        Next
                     End If
-                Catch ex As Exception
-                    Logging.Logger.LogError("Extender Initialization", ex)
-                End Try
-            Next
+                End If
+            Catch ex As Exception
+                Logging.Logger.LogError("Extender Initialization", ex)
+            End Try
+        Next
 
 #End If
 
@@ -4352,10 +4352,14 @@ Label_00CC:
     End Sub
 
     Private Sub SaveToSimulate365DashboardToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToSimulate365DashboardToolStripMenuItem.Click
+        SaveFile(False)
         Dim filePickerForm As S365FilePickerForm = New S365FilePickerForm
-        Dim file = filePickerForm.ShowSaveDialog(Nothing)
+        Dim fileExtension = Path.GetExtension(Me.filename).ToLower()
+        If fileExtension.StartsWith(".") Then
+            fileExtension = fileExtension.Remove(0, 1)
+        End If
+        Dim file = filePickerForm.ShowSaveDialog(New List(Of String)(New String() {fileExtension}))
         If file IsNot Nothing Then
-            SaveFile(False)
             FileUploaderService.UploadFile(file.FlowsheetsDriveId, file.ParentDriveId, Me.filename, file.Filename)
             MessageBox.Show("File saved to Simulate 365 Dashboard.")
 
