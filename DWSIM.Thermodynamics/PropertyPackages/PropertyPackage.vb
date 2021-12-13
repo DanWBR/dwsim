@@ -6927,15 +6927,17 @@ Final3:
             Dim val As Double
 
 
-            If LiquidDensityCalculationMode_Subcritical = LiquidDensityCalcMode.EOS Then
+            If LiquidDensityCalculationMode_Subcritical = LiquidDensityCalcMode.EOS Or T / RET_VTC.MultiplyY(Vx).SumY > 1 Then
+                If T / RET_VTC.MultiplyY(Vx).SumY > 1 Then
+                    IObj?.Paragraphs.Add("Temperature is supercritical.")
+                End If
                 IObj?.Paragraphs.Add("Using EOS to calculate compressibility factor -> density.")
                 IObj?.SetCurrent()
                 val = AUX_Z(Vx, T, P, PhaseName.Liquid)
                 val = (8.314 * val * T / P)
                 val = 1 / val * Me.AUX_MMM(Vx) / 1000
             ElseIf LiquidDensityCalculationMode_Subcritical = LiquidDensityCalcMode.Rackett Then
-                val = props.liq_dens_rackett(T, props.Tcm(Vx, RET_VTC()), props.Pcm(Vx, RET_VPC()), props.wm(Vx, RET_VW()),
-                                            AUX_MMM(Vx), props.Zcm(Vx, RET_VZRa()), P, AUX_PVAPM(T))
+                val = props.liq_dens_rackett(T, props.Tcm(Vx, RET_VTC()), props.Pcm(Vx, RET_VPC()), props.wm(Vx, RET_VW()), AUX_MMM(Vx), props.Zcm(Vx, RET_VZRa()), P, AUX_PVAPM(T))
                 IObj?.Paragraphs.Add(String.Format("Value estimated with Rackett correlation: {0} kg/m3", val))
             ElseIf LiquidDensityCalculationMode_Subcritical = LiquidDensityCalcMode.COSTALD Then
                 If P <= 101325 Then
@@ -6946,36 +6948,28 @@ Final3:
                 val = AUX_MMM(Vx) / val 'kg/m3
                 IObj?.Paragraphs.Add(String.Format("Value estimated with COSTALD correlation: {0} kg/m3", val))
             Else
-                If T / RET_VTC.MultiplyY(Vx).SumY > 1 Then
-                    IObj?.Paragraphs.Add("Temperature is supercritical. Using EOS to calculate compressibility factor -> density.")
+                Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
+                Dim i As Integer
+                i = 0
+                For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
                     IObj?.SetCurrent()
-                    Dim Z = AUX_Z(Vx, T, P, PhaseName.Liquid)
-                    val = 1 / (8.314 * Z * T / P)
-                    val = val * Me.AUX_MMM(Vx) / 1000
-                Else
-                    Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-                    Dim i As Integer
-                    i = 0
-                    For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
-                        IObj?.SetCurrent()
-                        IObj?.Paragraphs.Add(String.Format("Calculating value for {0}... (xi = {1}, wi = {2})", subst.Name, subst.MoleFraction.GetValueOrDefault, subst.MassFraction.GetValueOrDefault))
-                        vk(i) = AUX_LIQDENSi(subst, T)
-                        IObj?.Paragraphs.Add(String.Format("Value calculated from experimental curve: {0} kg/m3", vk(i)))
-                        If LiquidDensity_CorrectExpDataForPressure Then
-                            'pressure correction
-                            Dim pcorr = Auxiliary.PROPS.liq_dens_pcorrection(T / subst.ConstantProperties.Critical_Temperature, P, subst.ConstantProperties.Critical_Pressure, AUX_PVAPi(subst.Name, T), subst.ConstantProperties.Acentric_Factor)
-                            IObj?.Paragraphs.Add(String.Format("Compressed Liquid Density Correction Factor: {0}", pcorr))
-                            vk(i) *= pcorr
-                            IObj?.Paragraphs.Add(String.Format("Corrected Liquid Density: {0} kg/m3", vk(i)))
-                        End If
-                        If T > subst.ConstantProperties.Critical_Temperature Then
-                            vk(i) = 1.0E+20
-                        End If
-                        If Not Double.IsNaN(vk(i)) Then vk(i) = Vx(i) / vk(i) Else vk(i) = 0.0#
-                        i = i + 1
-                    Next
-                    val = 1 / MathEx.Common.Sum(vk)
-                End If
+                    IObj?.Paragraphs.Add(String.Format("Calculating value for {0}... (xi = {1}, wi = {2})", subst.Name, subst.MoleFraction.GetValueOrDefault, subst.MassFraction.GetValueOrDefault))
+                    vk(i) = AUX_LIQDENSi(subst, T)
+                    IObj?.Paragraphs.Add(String.Format("Value calculated from experimental curve: {0} kg/m3", vk(i)))
+                    If LiquidDensity_CorrectExpDataForPressure Then
+                        'pressure correction
+                        Dim pcorr = Auxiliary.PROPS.liq_dens_pcorrection(T / subst.ConstantProperties.Critical_Temperature, P, subst.ConstantProperties.Critical_Pressure, AUX_PVAPi(subst.Name, T), subst.ConstantProperties.Acentric_Factor)
+                        IObj?.Paragraphs.Add(String.Format("Compressed Liquid Density Correction Factor: {0}", pcorr))
+                        vk(i) *= pcorr
+                        IObj?.Paragraphs.Add(String.Format("Corrected Liquid Density: {0} kg/m3", vk(i)))
+                    End If
+                    If T > subst.ConstantProperties.Critical_Temperature Then
+                        vk(i) = 1.0E+20
+                    End If
+                    If Not Double.IsNaN(vk(i)) Then vk(i) = Vx(i) / vk(i) Else vk(i) = 0.0#
+                    i = i + 1
+                Next
+                val = 1 / MathEx.Common.Sum(vk)
             End If
 
             IObj?.Paragraphs.Add("<h2>Results</h2>")

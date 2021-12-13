@@ -1140,15 +1140,15 @@ Namespace PropertyPackages.Auxiliary
             'Saturated liquid
 
             Dim Tr = T / Tc_mix
-            If Tr < 1 Then
-                Dim VR_0 = 1 - 1.52816 * (1 - Tr) ^ 0.3333 + 1.43907 * (1 - Tr) ^ (2.0 / 3.0) - 0.81446 * (1 - Tr) + 0.190454 * (1 - Tr) ^ (4.0 / 3.0)
-                Dim VR_d = (-0.296123 + 0.386914 * Tr - 0.0427258 * Tr ^ 2 - 0.0480645 * Tr ^ 3) / (Tr - 1.00001)
-                Dim V_sat = V_char_mix * VR_0 * (1 - omega_SRK_mix * VR_d)
-                Return V_sat
-            Else
-                Throw New Exception("Tr > 1 (supercritical)")
+            If Tr > 0.99 Then
+                Tr = 0.99
             End If
 
+            Dim VR_0 = 1 - 1.52816 * (1 - Tr) ^ 0.3333 + 1.43907 * (1 - Tr) ^ (2.0 / 3.0) - 0.81446 * (1 - Tr) + 0.190454 * (1 - Tr) ^ (4.0 / 3.0)
+            Dim VR_d = (-0.296123 + 0.386914 * Tr - 0.0427258 * Tr ^ 2 - 0.0480645 * Tr ^ 3) / (Tr - 1.00001)
+            Dim V_sat = V_char_mix * VR_0 * (1 - omega_SRK_mix * VR_d)
+
+            Return V_sat
         End Function
 
         Shared Function liq_dens_COSTALD_COMPR(x() As Double, T As Double, V_char() As Double, Tc() As Double, omega_SRK() As Double, P As Double) As Double
@@ -1161,7 +1161,6 @@ Namespace PropertyPackages.Auxiliary
 
             Dim V_char_mix = 0.25 * (x.MultiplyY(V_char).Sum + 3 * x.MultiplyY(V_char.PowY(2.0 / 3.0)).Sum * x.MultiplyY(V_char.PowY(1.0 / 3.0)).Sum)
             Dim Tc_mix = 0
-
             Dim i, j As Integer
 
             For i = 0 To x.Length - 1
@@ -1176,27 +1175,27 @@ Namespace PropertyPackages.Auxiliary
             'Compressed liquid
 
             Dim Tr = T / Tc_mix
-            If Tr <= 1 Then
-                Dim VR_0 = 1 - 1.52816 * (1 - Tr) ^ (1.0 / 3.0) + 1.43907 * (1 - Tr) ^ (2.0 / 3.0) - 0.81446 * (1 - Tr) + 0.190454 * (1 - Tr) ^ (4.0 / 3.0)
-                Dim VR_d = (-0.296123 + 0.386914 * Tr - 0.0427258 * Tr ^ 2 - 0.0480645 * Tr ^ 3) / (Tr - 1.00001)
-                Dim V_sat = V_char_mix * VR_0 * (1 - omega_SRK_mix * VR_d)
-
-                Dim Pc_mix = (0.291 - 0.08 * omega_SRK_mix) * Tc_mix * 83.14 / (V_char_mix * 1000) * 100000.0 ' Eq. 4-9.11
-                Dim alfa = 35.0 - 36.0 / (Tr) - 96.736 * Math.Log(Tr) + (Tr) ^ 6                           ' Eq. 4-9.16
-                Dim Prm0 = 5.8031817 * Math.Log(Tr) + 0.07608141 * alfa                               ' Eq. 4-9.14
-                Dim Prm1 = 4.86601 * Math.Log(Tr) + 0.03721754 * alfa                                 ' Eq. 4-9.15
-                Dim Pr_mix = 10 ^ (Prm0 + omega_SRK_mix * Prm1)                                     ' Eq. 4-9.13
-                Dim P_VAP_mix = Pc_mix * Pr_mix                                                     ' Eq. 4-9.12
-                Dim E = Math.Exp(4.79594 + 0.250047 * omega_SRK_mix + 1.14188 * omega_SRK_mix ^ 2)     ' Eq. 3-11.7
-                Dim BETA = Pc_mix * (-1 - 9.070217 * (1 - Tr) ^ (1.0 / 3.0) + 62.45326 * (1 - Tr) ^ (2.0 / 3.0) - 135.1102 * (1 - Tr) + E * (1 - Tr) ^ (4.0 / 3.0))
-                ' Eq. 3-11.6
-                Dim C = 0.0861488 + 0.0344483 * omega_SRK_mix                       ' Eq. 3-11.8
-                Dim V_s_compr = V_sat * (1 - C * Math.Log((BETA + P) / (BETA + P_VAP_mix)))           ' Eq. 3-11.5
-                Return V_s_compr
-            Else
-                Throw New Exception("Tr > 1 (supercritical)")
+            If Tr > 0.99 Then
+                Tr = 0.99
             End If
 
+            Dim VR_0 = 1 - 1.52816 * (1 - Tr) ^ (1.0 / 3.0) + 1.43907 * (1 - Tr) ^ (2.0 / 3.0) - 0.81446 * (1 - Tr) + 0.190454 * (1 - Tr) ^ (4.0 / 3.0)
+            Dim VR_d = (-0.296123 + 0.386914 * Tr - 0.0427258 * Tr ^ 2 - 0.0480645 * Tr ^ 3) / (Tr - 1.00001)
+            Dim V_sat = V_char_mix * VR_0 * (1 - omega_SRK_mix * VR_d)
+
+            Dim Pc_mix = (0.291 - 0.08 * omega_SRK_mix) * Tc_mix * 83.14 / (V_char_mix * 1000) * 100000.0 ' Eq. 4-9.11
+            Dim alfa = 35.0 - 36.0 / (Tr) - 96.736 * Math.Log(Tr) + (Tr) ^ 6                           ' Eq. 4-9.16
+            Dim Prm0 = 5.8031817 * Math.Log(Tr) + 0.07608141 * alfa                               ' Eq. 4-9.14
+            Dim Prm1 = 4.86601 * Math.Log(Tr) + 0.03721754 * alfa                                 ' Eq. 4-9.15
+            Dim Pr_mix = 10 ^ (Prm0 + omega_SRK_mix * Prm1)                                     ' Eq. 4-9.13
+            Dim P_VAP_mix = Pc_mix * Pr_mix                                                     ' Eq. 4-9.12
+            Dim E = Math.Exp(4.79594 + 0.250047 * omega_SRK_mix + 1.14188 * omega_SRK_mix ^ 2)     ' Eq. 3-11.7
+            Dim BETA = Pc_mix * (-1 - 9.070217 * (1 - Tr) ^ (1.0 / 3.0) + 62.45326 * (1 - Tr) ^ (2.0 / 3.0) - 135.1102 * (1 - Tr) + E * (1 - Tr) ^ (4.0 / 3.0))
+            ' Eq. 3-11.6
+            Dim C = 0.0861488 + 0.0344483 * omega_SRK_mix                       ' Eq. 3-11.8
+            Dim V_s_compr = V_sat * (1 - C * Math.Log((BETA + P) / (BETA + P_VAP_mix)))           ' Eq. 3-11.5
+
+            Return V_s_compr
         End Function
 
     End Class

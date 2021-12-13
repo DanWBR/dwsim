@@ -383,6 +383,9 @@ Public Class FormFlowsheet
                                 newmenuitem = New ToolStripMenuItem()
                                 newmenuitem.Text = extender.DisplayText
                                 newmenuitem.DisplayStyle = ToolStripItemDisplayStyle.Text
+                                If TypeOf extender Is IExtenderCollection2 Then
+                                    DirectCast(extender, IExtenderCollection2).SetMenuItem(extender)
+                                End If
                             End If
                         End If
                         For Each item In extender.Collection
@@ -394,15 +397,20 @@ Public Class FormFlowsheet
                                                           item.SetFlowsheet(Me)
                                                           item.Run()
                                                       End Sub
+                            If TypeOf item Is IExtender2 Then
+                                DirectCast(item, IExtender2).SetMenuItem(exttsmi)
+                            End If
                             Select Case extender.Category
                                 Case ExtenderCategory.File
                                     If item.InsertAtPosition >= 0 Then
+                                        exttsmi.MergeAction = MergeAction.Insert
                                         FileTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                     Else
                                         FileTSMI.DropDownItems.Add(exttsmi)
                                     End If
                                 Case ExtenderCategory.Edit
                                     If item.InsertAtPosition >= 0 Then
+                                        exttsmi.MergeAction = MergeAction.Insert
                                         EditTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                     Else
                                         EditTSMI.DropDownItems.Add(exttsmi)
@@ -415,18 +423,21 @@ Public Class FormFlowsheet
                                     End If
                                 Case ExtenderCategory.Dynamics
                                     If item.InsertAtPosition >= 0 Then
+                                        exttsmi.MergeAction = MergeAction.Insert
                                         DynamicsTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                     Else
                                         DynamicsTSMI.DropDownItems.Add(exttsmi)
                                     End If
                                 Case ExtenderCategory.Optimization
                                     If item.InsertAtPosition >= 0 Then
+                                        exttsmi.MergeAction = MergeAction.Insert
                                         OptimizationTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                     Else
                                         OptimizationTSMI.DropDownItems.Add(exttsmi)
                                     End If
                                 Case ExtenderCategory.Results
                                     If item.InsertAtPosition >= 0 Then
+                                        exttsmi.MergeAction = MergeAction.Insert
                                         ResultsTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                     Else
                                         ResultsTSMI.DropDownItems.Add(exttsmi)
@@ -441,6 +452,7 @@ Public Class FormFlowsheet
                                     newmenuitem?.DropDownItems.Add(exttsmi)
                                 Case ExtenderCategory.ToolStrip
                                     If item.InsertAtPosition >= 0 Then
+                                        exttsmi.MergeAction = MergeAction.Insert
                                         ToolStrip1.Items.Insert(item.InsertAtPosition, exttsmi)
                                     Else
                                         ToolStrip1.Items.Add(exttsmi)
@@ -452,6 +464,11 @@ Public Class FormFlowsheet
                             End Select
                         Next
                         If newmenuitem IsNot Nothing AndAlso Not MenuStrip1.Items.Contains(newmenuitem) Then
+                            If TypeOf extender Is IExtenderCollection2 Then
+                                Dim insertidx = DirectCast(extender, IExtenderCollection2).InsertAtPosition
+                                newmenuitem.MergeAction = MergeAction.Insert
+                                newmenuitem.MergeIndex = insertidx
+                            End If
                             MenuStrip1.Items.Add(newmenuitem)
                         End If
                     Else
@@ -466,7 +483,6 @@ Public Class FormFlowsheet
                 Logging.Logger.LogError("Extender Loading (Flowsheet)", ex)
             End Try
         Next
-
 
     End Sub
 

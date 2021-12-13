@@ -1593,7 +1593,7 @@ out:
                 End If
             Next
 
-            VL.NormalizeY()
+            VL = VL.NormalizeY()
 
             Do
                 L1ant = L1
