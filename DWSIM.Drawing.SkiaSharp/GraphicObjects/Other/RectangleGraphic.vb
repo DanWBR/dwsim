@@ -62,7 +62,7 @@ Namespace GraphicObjects.Shapes
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                 .Color = FontColor
                 .IsStroke = False
-                .Typeface = DefaultTypeFace
+                .Typeface = BoldTypeFace
             End With
 
             Dim bpaint0 As New SKPaint()
@@ -70,7 +70,7 @@ Namespace GraphicObjects.Shapes
             With bpaint0
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                 .IsStroke = False
-                .Color = FillColor
+                .Color = FillColor.WithAlpha(50)
             End With
 
             Dim bpaint As New SKPaint()

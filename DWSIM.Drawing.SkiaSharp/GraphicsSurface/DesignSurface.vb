@@ -67,17 +67,87 @@ Public Class GraphicsSurface
 
     Private PrevPositions As New Dictionary(Of String, Tuple(Of Point, Boolean))
 
-    Public Property DefaultTypeFace As SKTypeface
+    Public Property Flowsheet As IFlowsheet
+
+    Public Property RegularTypeFace As SKTypeface
+    Public Property BoldTypeFace As SKTypeface
+    Public Property ItalicTypeFace As SKTypeface
+    Public Property BoldItalicTypeFace As SKTypeface
+
+    Public Shared Property RegularFonts As List(Of String)
+    Public Shared Property BoldFonts As List(Of String)
+    Public Shared Property ItalicFonts As List(Of String)
+    Public Shared Property BoldItalicFonts As List(Of String)
 
     Public Sub New()
-        Select Case GlobalSettings.Settings.RunningPlatform
-            Case GlobalSettings.Settings.Platform.Windows
-                Me.DefaultTypeFace = SKTypeface.FromFamilyName("Segoe UI", SKFontStyleWeight.Bold, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright)
-            Case GlobalSettings.Settings.Platform.Linux
-                Me.DefaultTypeFace = SKTypeface.FromFamilyName("Ubuntu", SKFontStyleWeight.Bold, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright)
-            Case GlobalSettings.Settings.Platform.Mac
-                Me.DefaultTypeFace = SKTypeface.FromFamilyName("Helvetica Neue", SKFontStyleWeight.Bold, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright)
-        End Select
+
+        Dim assm = Me.GetType.Assembly
+        If RegularTypeFace Is Nothing Then
+            Using filestr As IO.Stream = assm.GetManifestResourceStream("DWSIM.Drawing.SkiaSharp.Asap-Regular.ttf")
+                RegularTypeFace = SKTypeface.FromStream(filestr)
+            End Using
+        End If
+        If BoldTypeFace Is Nothing Then
+            Using filestr As IO.Stream = assm.GetManifestResourceStream("DWSIM.Drawing.SkiaSharp.Asap-SemiBold.ttf")
+                BoldTypeFace = SKTypeface.FromStream(filestr)
+            End Using
+        End If
+        If ItalicTypeFace Is Nothing Then
+            Using filestr As IO.Stream = assm.GetManifestResourceStream("DWSIM.Drawing.SkiaSharp.Asap-Italic.ttf")
+                ItalicTypeFace = SKTypeface.FromStream(filestr)
+            End Using
+        End If
+        If BoldItalicTypeFace Is Nothing Then
+            Using filestr As IO.Stream = assm.GetManifestResourceStream("DWSIM.Drawing.SkiaSharp.Asap-SemiBoldItalic.ttf")
+                BoldItalicTypeFace = SKTypeface.FromStream(filestr)
+            End Using
+        End If
+        RegularFonts = New List(Of String)
+        BoldFonts = New List(Of String)
+        ItalicFonts = New List(Of String)
+        BoldItalicFonts = New List(Of String)
+        Dim value As String = ""
+        Using filestr As IO.Stream = assm.GetManifestResourceStream("DWSIM.Drawing.SkiaSharp.Fonts.txt")
+            Using reader As New IO.StreamReader(filestr)
+                While Not reader.EndOfStream
+                    value = reader.ReadLine.Replace(".ttf", "")
+                    If (value.Contains("Bold") Or value.Contains("Medium")) And value.Contains("Italic") Then
+                        BoldItalicFonts.Add(value)
+                    ElseIf (value.Contains("Bold") Or value.Contains("Medium")) Then
+                        BoldFonts.Add(value)
+                    ElseIf value.Contains("Italic") Then
+                        ItalicFonts.Add(value)
+                    Else
+                        RegularFonts.Add(value)
+                    End If
+                End While
+            End Using
+        End Using
+
+    End Sub
+
+    Public Sub SetRegularFont(fontname As String)
+        Using filestr As IO.Stream = Me.GetType().Assembly.GetManifestResourceStream("DWSIM.Drawing.SkiaSharp." + fontname + ".ttf")
+            RegularTypeFace = SKTypeface.FromStream(filestr)
+        End Using
+    End Sub
+
+    Public Sub SetBoldFont(fontname As String)
+        Using filestr As IO.Stream = Me.GetType().Assembly.GetManifestResourceStream("DWSIM.Drawing.SkiaSharp." + fontname + ".ttf")
+            BoldTypeFace = SKTypeface.FromStream(filestr)
+        End Using
+    End Sub
+
+    Public Sub SetItalicFont(fontname As String)
+        Using filestr As IO.Stream = Me.GetType().Assembly.GetManifestResourceStream("DWSIM.Drawing.SkiaSharp." + fontname + ".ttf")
+            ItalicTypeFace = SKTypeface.FromStream(filestr)
+        End Using
+    End Sub
+
+    Public Sub SetBoldItalicFont(fontname As String)
+        Using filestr As IO.Stream = Me.GetType().Assembly.GetManifestResourceStream("DWSIM.Drawing.SkiaSharp." + fontname + ".ttf")
+            BoldItalicTypeFace = SKTypeface.FromStream(filestr)
+        End Using
     End Sub
 
     Public Enum AlignDirection
@@ -198,6 +268,8 @@ Public Class GraphicsSurface
 
     Public Sub UpdateCanvas(DrawingCanvas As SKCanvas)
 
+        UpdateColorTheme()
+
         'draw the actual objects onto the page, on top of the grid
 
         If Me.SelectedObject Is Nothing Then Me.SelectedObjects.Clear()
@@ -282,11 +354,16 @@ Public Class GraphicsSurface
 
         For Each dobj In objects
 
+            DirectCast(dobj, GraphicObject).RegularTypeFace = RegularTypeFace
+            DirectCast(dobj, GraphicObject).BoldTypeFace = BoldTypeFace
+            DirectCast(dobj, GraphicObject).ItalicTypeFace = ItalicTypeFace
+            DirectCast(dobj, GraphicObject).BoldItalicTypeFace = BoldItalicTypeFace
+
             If Not TypeOf dobj Is ConnectorGraphic And Not TypeOf dobj Is Shapes.RectangleGraphic And
                Not TypeOf dobj Is Tables.FloatingTableGraphic Then
 
                 If TypeOf dobj Is ShapeGraphic Then
-                    DirectCast(dobj, ShapeGraphic).Fill = False
+                    'DirectCast(dobj, ShapeGraphic).Fill = False
                     DirectCast(dobj, ShapeGraphic).LineWidth = 1
                     DirectCast(dobj, ShapeGraphic).UpdateStatus()
                 End If
@@ -424,7 +501,7 @@ Public Class GraphicsSurface
             .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
             .Color = SKColors.LightSlateGray
             .IsStroke = False
-            .Typeface = DefaultTypeFace
+            .Typeface = RegularTypeFace
         End With
 
         Dim lines = text.ToString().Split(vbLf)
@@ -1672,5 +1749,14 @@ Public Class GraphicsSurface
 
     End Sub
 
+    Public Sub UpdateColorTheme()
+
+        If Flowsheet Is Nothing Then Exit Sub
+
+        For Each obj In DrawingObjects
+            obj.DrawMode = Flowsheet.FlowsheetOptions.FlowsheetColorTheme
+        Next
+
+    End Sub
 
 End Class

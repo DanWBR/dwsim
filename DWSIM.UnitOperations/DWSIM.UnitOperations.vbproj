@@ -1247,7 +1247,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DWSIM.Drawing.SkiaSharp\DWSIM.DrawingTools.SkiaSharp.vbproj">
-      <Project>{77040ECC-07B9-4B21-8B1F-7E45764E35F0}</Project>
+      <Project>{77040ecc-07b9-4b21-8b1f-7e45764e35f0}</Project>
       <Name>DWSIM.DrawingTools.SkiaSharp</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.DrawingTools.Point\DWSIM.DrawingTools.Point.vbproj">

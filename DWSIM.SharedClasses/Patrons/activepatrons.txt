@@ -9,7 +9,6 @@ Amir Mehrkesh
 Andras Nady
 Anders Andreasen
 Andrew Dickson
-Bill Byers
 Bruce Rising
 Bruce Logue
 Carlos G. C. Reetz
@@ -70,7 +69,6 @@ Philippe Wesel
 Protherm Systems
 Rafael Melo-González
 Rajesh S Kempegowda
-Ricardo Santos
 Richard Huntington
 Roland Berger
 Rupert Easter

@@ -699,7 +699,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     End If
 
-                    IObj2?.Paragraphs.Add(String.Format("Current Enthalpy error: {0}", fx2))
+                    IObj2?.Paragraphs.Add(String.Format("Current Enthalpy error: {0}", fx))
 
                     dfdx = (fx2 - fx1) / (2 * epsilon(j))
 
@@ -2346,22 +2346,25 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     IObj2?.Paragraphs.Add(String.Format("Updated x: {0}", Vx.ToMathArrayString))
                     IObj2?.Paragraphs.Add(String.Format("Updated y: {0}", Vy.ToMathArrayString))
 
-                    If Settings.EnableParallelProcessing Then
-                        Dim task1 = TaskHelper.Run(Sub()
-                                                       K1 = PP.DW_CalcKvalue(Vx, Vy, T - epsilon, P)
-                                                   End Sub, Settings.TaskCancellationTokenSource.Token)
-                        Dim task2 = TaskHelper.Run(Sub()
-                                                       K2 = PP.DW_CalcKvalue(Vx, Vy, T + epsilon, P)
-                                                   End Sub, Settings.TaskCancellationTokenSource.Token)
-                        Task.WaitAll(task1, task2)
+                    If PP.ImplementsAnalyticalDerivatives Then
+                        dKdT = PP.DW_CalcdKdT(Vx, Vy, T, P)
                     Else
-                        IObj?.SetCurrent
-                        K1 = PP.DW_CalcKvalue(Vx, Vy, T - epsilon, P)
-                        IObj?.SetCurrent
-                        K2 = PP.DW_CalcKvalue(Vx, Vy, T + epsilon, P)
+                        If Settings.EnableParallelProcessing Then
+                            Dim task1 = TaskHelper.Run(Sub()
+                                                           K1 = PP.DW_CalcKvalue(Vx, Vy, T - epsilon, P)
+                                                       End Sub, Settings.TaskCancellationTokenSource.Token)
+                            Dim task2 = TaskHelper.Run(Sub()
+                                                           K2 = PP.DW_CalcKvalue(Vx, Vy, T + epsilon, P)
+                                                       End Sub, Settings.TaskCancellationTokenSource.Token)
+                            Task.WaitAll(task1, task2)
+                        Else
+                            IObj?.SetCurrent
+                            K1 = PP.DW_CalcKvalue(Vx, Vy, T - epsilon, P)
+                            IObj?.SetCurrent
+                            K2 = PP.DW_CalcKvalue(Vx, Vy, T + epsilon, P)
+                        End If
+                        dKdT = K2.SubtractY(K1).MultiplyConstY(1 / (2 * epsilon))
                     End If
-
-                    dKdT = K2.SubtractY(K1).MultiplyConstY(1 / (2 * epsilon))
 
                     IObj2?.Paragraphs.Add(String.Format("K: {0}", Ki.ToMathArrayString))
 

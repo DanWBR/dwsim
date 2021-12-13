@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 7.1.0
+Version 7.1.2
 Copyright (c) 2017-2021 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -60,7 +60,33 @@ Disk space:
 VERSION HISTORY / CHANGELOG
 ==================================================
 
-The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim6/commits/windows
+The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
+
+Version 7.1.2
+
+- Simultaneous Correction solver for Absorption/Extraction Column
+- Set Flowsheet Fonts for each Style
+- Fixed issue with GERG-2008 Property Package
+- Fixed an issue with Conversion Reactor
+- Fixed an error in density/compressibility calculation (EOS)
+- Fixed custom ordering of Master Property Table objects
+
+Version 7.1.1
+
+- Fixed initialization issue
+- Flat color theme by default
+
+Version 7.1.0
+
+- Using mixing rule for rackett liquid density (#232)
+- Implemented COSTALD method for liquid density calculations (#231)
+- Implemented Total Condenser subcooling in Rigorous Column model
+- Fixed Newton-Raphson Rigorous Column solver
+- Define global stage efficiency in Rigorous Column model
+- Black-and-white flowsheet color theme
+- New splash screen
+- Globally set size of flowsheet object labels
+- Splitter editor fixes (#233)
 
 Version 7.0.1
 

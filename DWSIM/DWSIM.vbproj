@@ -18,7 +18,7 @@
     </ManifestKeyFile>
     <GenerateManifests>false</GenerateManifests>
     <SignManifests>false</SignManifests>
-    <ApplicationIcon>DWSIM_ico.ico</ApplicationIcon>
+    <ApplicationIcon>DWSIM Icon.ico</ApplicationIcon>
     <TargetZone>LocalIntranet</TargetZone>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>
@@ -675,6 +675,12 @@
       <DependentUpon>FormCORegistration.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormCORegistration.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormDefineFonts.Designer.vb">
+      <DependentUpon>FormDefineFonts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormDefineFonts.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormEditGraphicObject.Designer.vb">
@@ -1417,6 +1423,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormDBManager.de.resx">
       <DependentUpon>FormDBManager.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormDefineFonts.en.resx">
+      <DependentUpon>FormDefineFonts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormDefineFonts.resx">
+      <DependentUpon>FormDefineFonts.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormEditGraphicObject.de.resx">
       <DependentUpon>FormEditGraphicObject.vb</DependentUpon>
@@ -3006,6 +3018,8 @@
     <None Include="Resources\button-medium-blue.png" />
     <None Include="Resources\209x48-doar-azul-assina.gif" />
     <None Include="Resources\card_export.png" />
+    <Content Include="DWSIM Icon.ico" />
+    <Content Include="dwsim-icon-2.ico" />
     <Content Include="DWSIM_ico.ico" />
     <None Include="Resources\become_a_patron_button%402x.jpg" />
     <None Include="Resources\bullet_black.png" />
@@ -3022,6 +3036,8 @@
     <None Include="Resources\become_a_patron_button.png" />
     <None Include="Resources\background_welcome.png" />
     <Content Include="Lib\site-packages\README.txt" />
+    <None Include="Resources\bold.png" />
+    <None Include="Resources\bolditalic.png" />
     <Content Include="Resources\ch.png" />
     <None Include="Resources\clock_red.png" />
     <None Include="Resources\comp_separator.png" />
@@ -3041,6 +3057,7 @@
     <None Include="Resources\chericlogo.jpg" />
     <None Include="Resources\cheric_big.jpg" />
     <None Include="Resources\chemeo.png" />
+    <None Include="Resources\color_wheel.png" />
     <Content Include="Resources\control_equalizer_blue.png" />
     <None Include="Resources\cut.png" />
     <None Include="Resources\ddbsearch.jpg" />
@@ -3077,6 +3094,7 @@
     <None Include="Resources\Excel_copy1.jpg" />
     <None Include="Resources\fast_forward.png" />
     <None Include="Resources\folder_add_48.png" />
+    <None Include="Resources\fontsize.png" />
     <Content Include="Resources\fr.png" />
     <None Include="Resources\green_down.png" />
     <None Include="Resources\orifice.png" />
@@ -3188,6 +3206,8 @@
     <None Include="Resources\pythonfunctions.txt" />
     <None Include="Resources\Icon128.png" />
     <None Include="Resources\Icon512.png" />
+    <None Include="Resources\regular.png" />
+    <None Include="Resources\italic.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />

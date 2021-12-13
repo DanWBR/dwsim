@@ -91,6 +91,7 @@ Public Class AboutBox
 
         With Me.DataGridView1.Rows
             .Clear()
+            .Add(New Object() {"GERG 2008", "2.0", "2017", "E. W. Lemmon, V. Heinemann, J. Lu, I. Bell", "https://github.com/usnistgov/AGA8", "NIST/17 U.S.C. 105", "https://github.com/usnistgov/AGA8/blob/master/LICENSE"})
             .Add(New Object() {"pyeq2", "10.1", "2013", "James R. Phillips", "https://code.google.com/p/pyeq2/", "BSD 3", "http://opensource.org/licenses/BSD-3-Clause"})
             .Add(New Object() {"IPOPT", "3.9.2", "2011", "COIN-OR", "https://projects.coin-or.org/Ipopt", "Eclipse Public License", "http://www.eclipse.org/legal/epl-v10.html"})
             .Add(New Object() {"lp_solve", "5.5", "2009", "Michel Berkelaar, Kjell Eikland, Peter Notebaert", "http://lpsolve.sourceforge.net", "LGPLv2", "http://www.gnu.org/licenses/lgpl.html"})

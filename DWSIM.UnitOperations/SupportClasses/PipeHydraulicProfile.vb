@@ -66,6 +66,7 @@ Namespace UnitOperations.Auxiliary.Pipe
                 Me.Status = PipeEditorStatus.OK
             End Try
 
+            m_collection.Clear()
             For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "Sections").Elements.ToList
                 Dim pr As New PipeSection()
                 pr.LoadData(xel.Elements.ToList)

@@ -107,27 +107,17 @@ Namespace GraphicObjects.Shapes
             MyBase.Draw(g)
 
 
-            Dim myPen As New SKPaint()
-            With myPen
-                .Color = LineColor
-                .StrokeWidth = LineWidth
-                .IsStroke = Not Fill
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-            End With
-            Dim myPen2 As New SKPaint()
-            With myPen2
-                .Color = GraphicsSurface.BackgroundColor
-                .IsStroke = False
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-            End With
-
             Dim rect1 As New SKRect(X + 0.1 * Width, Y, X + 0.8 * Width, Y + 0.8 * Height)
 
+            Dim pt0 As New Point(X + 0.5 * Width, Y + Height)
+            Dim pt0b As New Point(X + 0.7 * Width, Y + 0.98 * Height)
+            Dim pt0a As New Point(X + 0.3 * Width, Y + 0.98 * Height)
+
             Dim pt3 As New Point(X + 0.1 * Width, Y + Height)
-            Dim pt4 As New Point(X + 0.2 * Width, Y + 0.65 * Height)
+            Dim pt4 As New Point(X + 0.2 * Width, Y + 0.9 * Height)
 
             Dim pt5 As New Point(X + 0.9 * Width, Y + Height)
-            Dim pt6 As New Point(X + 0.8 * Width, Y + 0.65 * Height)
+            Dim pt6 As New Point(X + 0.8 * Width, Y + 0.9 * Height)
 
             Dim pt7 As New Point(X + 0.1 * Width, Y + Height)
             Dim pt8 As New Point(X + 0.9 * Width, Y + Height)
@@ -135,15 +125,17 @@ Namespace GraphicObjects.Shapes
             Dim pt9 As New Point(X + 0.5 * Width, Y)
             Dim pt10 As New Point(X + Width, Y)
             Dim pt11 As New Point(X + Width, Y + 0.25 * Height)
-            Dim pt12 As New Point(X + 0.88 * Width, Y + 0.25 * Height)
+            Dim pt12 As New Point(X + 0.93 * Width, Y + 0.25 * Height)
 
             Dim gp As New SKPath()
 
-            gp.MoveTo(pt3.X, pt3.Y)
-
-            gp.LineTo(pt4.X, pt4.Y)
+            gp.MoveTo(pt0.X, pt0.Y)
+            gp.LineTo(pt0b.X, pt0b.Y)
             gp.LineTo(pt6.X, pt6.Y)
             gp.LineTo(pt5.X, pt5.Y)
+            gp.LineTo(pt3.X, pt3.Y)
+            gp.LineTo(pt4.X, pt4.Y)
+            gp.LineTo(pt0a.X, pt0a.Y)
 
             gp.Close()
 
@@ -159,43 +151,81 @@ Namespace GraphicObjects.Shapes
 
             Dim rect As New SKRect(X, Y, X + Width, Y + Height)
 
-            Dim r0 As New SKRect(X, Y, X + Width, Y + Height)
+            Select Case DrawMode
 
-            Dim radius2 = 0.8F * Math.Min(Width, Height)
-            Dim center = New SKPoint(r0.MidX, r0.MidY)
-            Dim offCenter = center - New SKPoint(radius2 / 2, radius2 / 2)
+                Case 0
 
-            Dim gradPen As New SKPaint()
-            With gradPen
-                .Color = LineColor
-                .StrokeWidth = LineWidth
-                .IsStroke = False
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Shader = SKShader.CreateTwoPointConicalGradient(
-                                    offCenter, 1, center, radius2,
-                                    New SKColor() {SKColors.White, LineColor},
-                                    Nothing, SKShaderTileMode.Clamp)
-            End With
+                    'default
 
-            If GradientMode Then
+                    Dim myPen As New SKPaint()
+                    With myPen
+                        .Color = LineColor
+                        .StrokeWidth = LineWidth
+                        .IsStroke = True
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    End With
+                    Dim myPen2 As New SKPaint()
+                    With myPen2
+                        .Color = GraphicsSurface.BackgroundColor
+                        .IsStroke = False
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    End With
 
-                canvas.DrawPath(gp, gradPen)
-                canvas.DrawPath(gp2, gradPen)
-                canvas.DrawOval(rect, gradPen)
+                    Dim gradPen As New SKPaint()
+                    With gradPen
+                        .Color = LineColor.WithAlpha(50)
+                        .StrokeWidth = LineWidth
+                        .IsStroke = False
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    End With
 
-            Else
+                    canvas.DrawPath(gp, gradPen)
+                    canvas.DrawPath(gp2, gradPen)
+                    canvas.DrawOval(rect, gradPen)
 
-                canvas.DrawOval(rect, myPen2)
+                    canvas.DrawOval(rect, myPen)
+                    canvas.DrawPath(gp, myPen)
+                    canvas.DrawPath(gp2, myPen)
 
-            End If
+                Case 1
 
-            canvas.DrawPath(gp, myPen)
-            canvas.DrawPath(gp2, myPen)
-            If GradientMode Then
-                canvas.DrawOval(rect, gradPen)
-            End If
-            canvas.DrawOval(rect, myPen)
+                    'b/w
+                    Dim myPen As New SKPaint()
+                    With myPen
+                        .Color = SKColors.Black
+                        .StrokeWidth = LineWidth
+                        .IsStroke = True
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    End With
+                    Dim myPen2 As New SKPaint()
+                    With myPen2
+                        .Color = SKColors.White
+                        .IsStroke = False
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    End With
 
+                    canvas.DrawPath(gp, myPen)
+                    canvas.DrawPath(gp2, myPen)
+                    canvas.DrawOval(rect, myPen2)
+                    canvas.DrawOval(rect, myPen)
+
+                Case 2
+
+                    'Gas/Liquid Flows
+
+                Case 3
+
+                    'Temperature Gradients
+
+                Case 4
+
+                    'Pressure Gradients
+
+                Case 5
+
+                    'Temperature/Pressure Gradients
+
+            End Select
         End Sub
 
     End Class

@@ -237,6 +237,18 @@ Namespace DWSIM.Flowsheet
 
         Public Property DisplayUserDefinedPropertiesEditor As Boolean = False Implements IFlowsheetOptions.DisplayUserDefinedPropertiesEditor
 
+        Public Property LabelFontSize As Double = 10.0 Implements IFlowsheetOptions.LabelFontSize
+
+        Public Property FlowsheetColorTheme As Integer = 0 Implements IFlowsheetOptions.FlowsheetColorTheme
+
+        Public Property RegularFontName As String = "OpenSans_SemiCondensed-Regular" Implements IFlowsheetOptions.RegularFontName
+
+        Public Property BoldFontName As String = "OpenSans_SemiCondensed-SemiBold" Implements IFlowsheetOptions.BoldFontName
+
+        Public Property ItalicFontName As String = "OpenSans_SemiCondensed-Italic" Implements IFlowsheetOptions.ItalicFontName
+
+        Public Property BoldItalicFontName As String = "OpenSans_SemiCondensed-MediumItalic" Implements IFlowsheetOptions.BoldItalicFontName
+
     End Class
 
 End Namespace

@@ -56,9 +56,6 @@ Public Class FormConfigureMasterTable
 
         Populate()
 
-        lvObjects.Sorting = SortOrder.Ascending
-        lvObjects.Sort()
-
         Loaded = True
 
     End Sub

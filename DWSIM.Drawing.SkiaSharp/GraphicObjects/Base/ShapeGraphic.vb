@@ -13,6 +13,7 @@ Namespace GraphicObjects
         Private CalculatingImage As SKImage
 
         Public Sub UpdateStatus()
+
             Dim alpha As Integer = 255
 
             If SemiTransparent Then alpha = 50
@@ -46,8 +47,6 @@ Namespace GraphicObjects
 
         End Sub
 
-        Public Property DefaultTypeFace As SKTypeface
-        Public Property RegularTypeFace As SKTypeface
         Public Property SemiTransparent As Boolean = False
         Public Overridable Property LineWidth As Integer = 1
         Public Overridable Property GradientMode As Boolean = True
@@ -135,7 +134,7 @@ Namespace GraphicObjects
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                 .Color = If(DynSpec = Enums.Dynamics.DynamicsSpecType.Flow, SKColors.Brown, SKColors.Blue)
                 .IsStroke = False
-                .Typeface = DefaultTypeFace
+                .Typeface = BoldTypeFace
             End With
 
             Dim trect As New SKRect(0, 0, 2, 2)
@@ -159,6 +158,7 @@ Namespace GraphicObjects
 
 
         Public Overridable Sub DrawTag(ByVal g As SKCanvas)
+
             Dim tpaint As New SKPaint()
 
             With tpaint
@@ -166,7 +166,7 @@ Namespace GraphicObjects
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                 .Color = If(s.DarkMode, LineColorDark, LineColor)
                 .IsStroke = False
-                .Typeface = DefaultTypeFace
+                .Typeface = GetFont()
             End With
 
             Dim trect As New SKRect(0, 0, 2, 2)
@@ -175,65 +175,123 @@ Namespace GraphicObjects
 
             Dim strx As Single = (Me.Width - tpaint.MeasureText(Me.Tag)) / 2
 
-            Dim bpaint As New SKPaint()
+            Select Case DrawMode
 
-            With bpaint
-                .TextSize = FontSize
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Typeface = DefaultTypeFace
-                .Color = If(s.DarkMode, SKColors.Transparent, SKColors.White.WithAlpha(200))
-                .IsStroke = True
-                .StrokeWidth = 2
-                .BlendMode = SKBlendMode.Overlay
-            End With
+                Case 1
 
-            'g.DrawRect(New SKRect(X + strx - 2, Y + Height + 20 - trect.Height - 2, X + strx + trect.Width + 2, Y + Height + 20 + 2), bpaint)
+                    With tpaint
+                        .TextSize = FontSize
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                        .Color = SKColors.Black
+                        .IsStroke = False
+                        .Typeface = GetFont()
+                    End With
 
-            g.DrawText(Me.Tag, X + strx, Y + Height + 20, bpaint)
+                Case Else
+
+                    Dim bpaint As New SKPaint()
+
+                    With bpaint
+                        .TextSize = FontSize
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                        .Typeface = BoldTypeFace
+                        .Color = If(s.DarkMode, SKColors.Transparent, SKColors.White.WithAlpha(200))
+                        .IsStroke = True
+                        .StrokeWidth = 2
+                        .BlendMode = SKBlendMode.Overlay
+                    End With
+
+                    g.DrawText(Me.Tag, X + strx, Y + Height + 20, bpaint)
+
+            End Select
+
             g.DrawText(Me.Tag, X + strx, Y + Height + 20, tpaint)
 
         End Sub
 
         Public Sub DrawReactor(ByVal g As SKCanvas, ByVal TypeName As String)
+
             MyBase.Draw(g)
+
+            Dim rect As New SKRect(X, Y, Width, Height)
+
+            Dim tPen As New SKPaint()
+
+            Dim myPen As New SKPaint()
+            Select Case DrawMode
+
+                Case 0
+
+                    'default
+
+                    With myPen
+                        .Color = If(s.DarkMode, LineColorDark, LineColor)
+                        .StrokeWidth = LineWidth
+                        .IsStroke = True
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    End With
+
+                    'Draw signature of object type
+
+                    With tPen
+                        .TextSize = FontSize
+                        .TextEncoding = SKTextEncoding.Utf8
+                        .Color = If(s.DarkMode, LineColorDark, LineColor)
+                        .Typeface = BoldTypeFace
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    End With
+
+                Case 1
+
+                    'b/w
+
+                    With myPen
+                        .Color = SKColors.Black
+                        .StrokeWidth = LineWidth
+                        .IsStroke = True
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    End With
+
+                    'Draw signature of object type
+
+                    With tPen
+                        .TextSize = FontSize
+                        .TextEncoding = SKTextEncoding.Utf8
+                        .Color = SKColors.Black
+                        .Typeface = BoldTypeFace
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    End With
+
+                Case 2
+
+                    'Gas/Liquid Flows
+
+                Case 3
+
+                    'Temperature Gradients
+
+                Case 4
+
+                    'Pressure Gradients
+
+                Case 5
+
+                    'Temperature/Pressure Gradients
+
+            End Select
 
             Dim rect2 As New SKRect(X + (0.25 - 0.14) * Width, Y + (0.5 - 0.14 / 2) * Height, X + 0.25 * Width, Y + (0.5 - 0.14 / 2) * Height + 0.14 * Height)
             Dim rect3 As New SKRect(X + 0.75 * Width, Y + 0.1 * Height, X + 0.75 * Width + 0.14 * Width, Y + 0.1 * Height + 0.14 * Height)
             Dim rect4 As New SKRect(X + 0.75 * Width, Y + (0.9 - 0.14) * Height, X + 0.75 * Width + 0.14 * Width, Y + (0.9 - 0.14) * Height + 0.14 * Height)
-            If Me.FlippedH = True Then
-                rect2 = New SKRect(X + 0.75 * Width, Y + (0.5 - 0.14 / 2) * Height, X + 0.75 * Width + 0.14 * Width, Y + (0.5 - 0.14 / 2) * Height + 0.14 * Height)
-                rect3 = New SKRect(X + (0.25 - 0.14) * Width, Y + 0.1 * Height, X + (0.25 - 0.14) * Width + 0.14 * Width, Y + 0.1 * Height + 0.14 * Height)
-                rect4 = New SKRect(X + (0.25 - 0.14) * Width, Y + (0.9 - 0.14) * Height, X + (0.25 - 0.14) * Width + 0.14 * Width, Y + (0.9 - 0.14) * Height + 0.14 * Height)
-            End If
 
-            Dim myPen As New SKPaint()
-            With myPen
-                .Color = If(s.DarkMode, LineColorDark, LineColor)
-                .StrokeWidth = LineWidth
-                .IsStroke = Not Fill
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-            End With
-
-            Dim rect As New SKRect(X, Y, Width, Height)
-
-            If GradientMode Then
-
-                Dim r0 As New SKRect(X, Y, X + Width, Y + Height)
-
-                Dim radius2 = 0.8F * Math.Min(Width, Height)
-                Dim center = New SKPoint(r0.MidX, r0.MidY)
-                Dim offCenter = center - New SKPoint(radius2 / 2, radius2 / 2)
+            If DrawMode = 0 Then
 
                 Dim gradPen As New SKPaint()
                 With gradPen
-                    .Color = LineColor
+                    .Color = LineColor.WithAlpha(50)
                     .StrokeWidth = LineWidth
                     .IsStroke = False
                     .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                    .Shader = SKShader.CreateTwoPointConicalGradient(
-                                    offCenter, 1, center, radius2,
-                                    New SKColor() {SKColors.White, LineColor},
-                                    Nothing, SKShaderTileMode.Clamp)
                 End With
 
                 g.DrawRoundRect(New SKRect(X + 0.25 * Width, Y, X + 0.75 * Width, Y + Height), 5, 5, gradPen)
@@ -248,17 +306,6 @@ Namespace GraphicObjects
             g.DrawRect(rect3, myPen)
             g.DrawRect(rect4, myPen)
 
-            'Draw signature of object type
-
-            Dim tPen As New SKPaint()
-            With tPen
-                .TextSize = FontSize
-                .TextEncoding = SKTextEncoding.Utf8
-                .Color = If(s.DarkMode, LineColorDark, LineColor)
-                .Typeface = DefaultTypeFace
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-            End With
-
             Dim trect As New SKRect(0, 0, 2, 2)
             tPen.GetTextPath(TypeName, 0, 0).GetBounds(trect)
             Dim size As New SKSize(trect.Right - trect.Left, trect.Top - trect.Bottom)
@@ -272,31 +319,7 @@ Namespace GraphicObjects
                 ay = Me.Y + Me.Height * 0.8 - size.Height
             End If
 
-            If FlippedH Or FlippedV Or Rotation <> 0 Then
-
-                Dim currmat = g.TotalMatrix
-
-                g.Save()
-
-                If FlippedV And Not FlippedH Then
-                    g.Scale(1, -1, (X + Width / 2), (Y + Height / 2))
-                ElseIf FlippedH And Not FlippedV Then
-                    g.Scale(-1, 1, (X + Width / 2), (Y + Height / 2))
-                ElseIf FlippedH And FlippedV Then
-                    g.Scale(-1, -1, (X + Width / 2), (Y + Height / 2))
-                End If
-
-                If Rotation <> 0.0 Then g.RotateDegrees(Rotation, X + Width / 2, Y + Height / 2)
-
-                g.DrawText(TypeName, ax, ay, tPen)
-
-                g.SetMatrix(currmat)
-
-            Else
-
-                g.DrawText(TypeName, ax, ay, tPen)
-
-            End If
+            g.DrawText(TypeName, ax, ay, tPen)
 
             'Draw interior packing
 
@@ -305,25 +328,13 @@ Namespace GraphicObjects
             g.DrawPoints(SKPointMode.Polygon, New SKPoint() {New SKPoint(X + 0.25 * Width, Y + 0.3 * Height), New SKPoint(X + 0.75 * Width, Me.Y + 0.7 * Height)}, myPen)
             g.DrawPoints(SKPointMode.Polygon, New SKPoint() {New SKPoint(X + 0.25 * Width, Y + 0.7 * Height), New SKPoint(X + 0.75 * Width, Me.Y + 0.3 * Height)}, myPen)
 
-            'DrawTag(g)
-
         End Sub
 
         Public Sub New()
 
             MyBase.New()
 
-            Select Case GlobalSettings.Settings.RunningPlatform
-                Case GlobalSettings.Settings.Platform.Windows
-                    Me.DefaultTypeFace = SKTypeface.FromFamilyName("Segoe UI", SKTypefaceStyle.Bold)
-                    Me.RegularTypeFace = SKTypeface.FromFamilyName("Segoe UI", SKTypefaceStyle.Normal)
-                Case GlobalSettings.Settings.Platform.Linux
-                    Me.DefaultTypeFace = SKTypeface.FromFamilyName("Ubuntu", SKTypefaceStyle.Bold)
-                    Me.RegularTypeFace = SKTypeface.FromFamilyName("Ubuntu", SKTypefaceStyle.Normal)
-                Case GlobalSettings.Settings.Platform.Mac
-                    Me.DefaultTypeFace = SKTypeface.FromFamilyName("Helvetica Neue", SKTypefaceStyle.Bold)
-                    Me.RegularTypeFace = SKTypeface.FromFamilyName("Helvetica Neue", SKTypefaceStyle.Normal)
-            End Select
+            FontStyle = FontStyle.Bold
 
         End Sub
 

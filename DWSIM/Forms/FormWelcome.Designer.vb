@@ -74,12 +74,12 @@ Partial Class FormWelcome
         Me.PictureBox6 = New System.Windows.Forms.PictureBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.LinkLabel13 = New System.Windows.Forms.LinkLabel()
+        Me.LinkLabel12 = New System.Windows.Forms.LinkLabel()
         Me.LinkLabel10 = New System.Windows.Forms.LinkLabel()
         Me.LinkLabel8 = New System.Windows.Forms.LinkLabel()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.PictureBox5 = New System.Windows.Forms.PictureBox()
-        Me.LinkLabel12 = New System.Windows.Forms.LinkLabel()
-        Me.LinkLabel13 = New System.Windows.Forms.LinkLabel()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -524,6 +524,22 @@ Partial Class FormWelcome
         Me.Panel5.Controls.Add(Me.PictureBox5)
         Me.Panel5.Name = "Panel5"
         '
+        'LinkLabel13
+        '
+        resources.ApplyResources(Me.LinkLabel13, "LinkLabel13")
+        Me.LinkLabel13.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
+        Me.LinkLabel13.LinkColor = System.Drawing.Color.DodgerBlue
+        Me.LinkLabel13.Name = "LinkLabel13"
+        Me.LinkLabel13.TabStop = True
+        '
+        'LinkLabel12
+        '
+        resources.ApplyResources(Me.LinkLabel12, "LinkLabel12")
+        Me.LinkLabel12.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
+        Me.LinkLabel12.LinkColor = System.Drawing.Color.DodgerBlue
+        Me.LinkLabel12.Name = "LinkLabel12"
+        Me.LinkLabel12.TabStop = True
+        '
         'LinkLabel10
         '
         resources.ApplyResources(Me.LinkLabel10, "LinkLabel10")
@@ -553,22 +569,6 @@ Partial Class FormWelcome
         Me.PictureBox5.BackgroundImage = Global.DWSIM.My.Resources.Resources.icons8_books
         Me.PictureBox5.Name = "PictureBox5"
         Me.PictureBox5.TabStop = False
-        '
-        'LinkLabel12
-        '
-        resources.ApplyResources(Me.LinkLabel12, "LinkLabel12")
-        Me.LinkLabel12.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
-        Me.LinkLabel12.LinkColor = System.Drawing.Color.DodgerBlue
-        Me.LinkLabel12.Name = "LinkLabel12"
-        Me.LinkLabel12.TabStop = True
-        '
-        'LinkLabel13
-        '
-        resources.ApplyResources(Me.LinkLabel13, "LinkLabel13")
-        Me.LinkLabel13.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
-        Me.LinkLabel13.LinkColor = System.Drawing.Color.DodgerBlue
-        Me.LinkLabel13.Name = "LinkLabel13"
-        Me.LinkLabel13.TabStop = True
         '
         'FormWelcome
         '

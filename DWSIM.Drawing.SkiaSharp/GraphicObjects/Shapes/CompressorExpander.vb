@@ -101,13 +101,13 @@ Namespace GraphicObjects.Shapes
             With myPen
                 .Color = LineColor
                 .StrokeWidth = LineWidth
-                .IsStroke = Not Fill
+                .IsStroke = True
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
             End With
             With myPen2
                 .Color = LineColor
                 .StrokeWidth = LineWidth
-                .IsStroke = Not Fill
+                .IsStroke = True
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                 .PathEffect = SKPathEffect.CreateDash(New Single() {5.0F, 5.0F, 5.0F, 5.0F}, 2.0F)
             End With

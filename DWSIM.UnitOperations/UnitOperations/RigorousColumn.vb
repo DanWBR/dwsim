@@ -814,6 +814,12 @@ Namespace UnitOperations.Auxiliary.SepOps
 
         Public MustOverride Function SolveColumn(input As ColumnSolverInputData) As ColumnSolverOutputData
 
+        Public Overridable Function SolveColumn(col As Column, input As ColumnSolverInputData) As ColumnSolverOutputData
+
+            Throw New NotImplementedException()
+
+        End Function
+
     End Class
 
 End Namespace
@@ -1708,7 +1714,6 @@ Namespace UnitOperations
 
         Private _cond As New Stage(Guid.NewGuid().ToString)
         Private _reb As New Stage(Guid.NewGuid().ToString)
-
 
         'stream collections (for the *entire* column, including side operations)
 
@@ -3552,7 +3557,11 @@ Namespace UnitOperations
                     End If
                 End If
             ElseIf TypeOf Me Is AbsorptionColumn Then
-                SetColumnSolver(New SolvingMethods.BurninghamOttoMethod())
+                If SolvingMethodName.Contains("Rates") Then
+                    SetColumnSolver(New SolvingMethods.BurninghamOttoMethod())
+                Else
+                    SetColumnSolver(New SolvingMethods.NaphtaliSandholmMethod())
+                End If
                 If llextractor Then
                     If L1trials.Count = 0 Then
                         Throw New Exception("Unable to find a initial LLE estimate to solve the column.")

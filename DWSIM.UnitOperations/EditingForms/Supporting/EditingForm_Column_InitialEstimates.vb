@@ -69,7 +69,9 @@ Public Class EditingForm_Column_InitialEstimates
             j = j + 1
         Next
 
-        If dc.InitialEstimates.LiqCompositions.Count = 0 Then
+        If dc.InitialEstimates.LiqCompositions(0).Keys.Except(form.SelectedCompounds.Keys).Count > 0 Then
+            dc.InitialEstimates = dc.RebuildEstimates()
+        ElseIf dc.InitialEstimates.LiqCompositions.Count = 0 Then
             dc.InitialEstimates = dc.RebuildEstimates()
         Else
             If form.SelectedCompounds.Count <> dc.InitialEstimates.LiqCompositions(0).Count Then

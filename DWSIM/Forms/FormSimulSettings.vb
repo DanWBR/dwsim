@@ -1514,7 +1514,7 @@ Public Class FormSimulSettings
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
 
-        FontDialog1.Font = New Font(CurrentFlowsheet.Options.DisplayCornerPropertyListFontName, CurrentFlowsheet.Options.DisplayCornerPropertyListFontSize, FontStyle.Bold)
+        FontDialog1.Font = New Font(CurrentFlowsheet.Options.DisplayCornerPropertyListFontName, CurrentFlowsheet.Options.DisplayCornerPropertyListFontSize, System.Drawing.FontStyle.Bold)
 
         Dim colortype = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("System.Drawing,")).FirstOrDefault().GetType("System.Drawing.KnownColor")
         Dim mycolor = [Enum].Parse(colortype, CurrentFlowsheet.Options.DisplayCornerPropertyListFontColor, True)

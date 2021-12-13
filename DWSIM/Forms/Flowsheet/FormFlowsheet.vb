@@ -206,11 +206,6 @@ Public Class FormFlowsheet
             Me.WindowState = FormWindowState.Normal
         End If
 
-        If GlobalSettings.Settings.OldUI Then
-            showflowsheettoolstripmenuitem.Checked = My.Settings.ShowFlowsheetToolStrip
-            showunitstoolstripmenuitem.Checked = My.Settings.ShowUnitsToolStrip
-        End If
-
         Me.COObjTSMI.Checked = Me.Options.FlowsheetShowCOReportsWindow
         Me.varpaneltsmi.Checked = Me.Options.FlowsheetShowWatchWindow
 
@@ -3042,6 +3037,13 @@ Public Class FormFlowsheet
 
     Public Function AddObject(t As ObjectType, xcoord As Integer, ycoord As Integer, tag As String) As Interfaces.ISimulationObject Implements IFlowsheet.AddObject
         Dim id = Me.FormSurface.AddObjectToSurface(t, xcoord, ycoord, False, tag)
+        FormSurface.FControl?.Refresh()
+        FormSurface.FControl?.Refresh()
+        Return Me.SimulationObjects(id)
+    End Function
+
+    Public Function AddObject(t As ObjectType, xcoord As Integer, ycoord As Integer, id As String, tag As String) As Interfaces.ISimulationObject Implements IFlowsheet.AddObject
+        Me.FormSurface.AddObjectToSurface(t, xcoord, ycoord, False, tag, id)
         FormSurface.FControl?.Refresh()
         FormSurface.FControl?.Refresh()
         Return Me.SimulationObjects(id)

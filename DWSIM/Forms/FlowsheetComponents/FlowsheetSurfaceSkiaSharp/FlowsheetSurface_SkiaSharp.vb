@@ -5,6 +5,7 @@ Imports System.Threading.Tasks
 Imports DWSIM.UnitOperations
 Imports DWSIM.SharedClasses.DWSIM.Flowsheet
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes
+Imports DWSIM.Drawing.SkiaSharp
 Imports SkiaSharp
 Imports DWSIM.Thermodynamics.BaseClasses
 
@@ -26,10 +27,19 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Public FControl As Control
 
+    Public Loaded As Boolean = False
+
     Public Sub New()
 
         ' This call is required by the designer.
         InitializeComponent()
+
+        ToolStripContainer1.TopToolStripPanel.SuspendLayout()
+        ToolStripFlowsheet.Dock = DockStyle.None
+        ToolStrip1.Dock = DockStyle.None
+        ToolStripFlowsheet.Location = New Point(0, 0)
+        ToolStrip1.Location = New Point(0, ToolStrip1.Height)
+        ToolStripContainer1.TopToolStripPanel.ResumeLayout()
 
         If My.Settings.FlowsheetRenderer = 0 Then
             Dim fscontrol As New FlowsheetSurfaceControl
@@ -49,6 +59,8 @@ Public Class FlowsheetSurface_SkiaSharp
 
     Private Sub frmSurface_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        Loaded = False
+
         ExtensionMethods.ChangeDefaultFont(Me)
 
         If TypeOf Me.ParentForm Is FormFlowsheet Then
@@ -62,6 +74,8 @@ Public Class FlowsheetSurface_SkiaSharp
         ElseIf Flowsheet Is Nothing Then
             Flowsheet = My.Application.ActiveSimulation
         End If
+
+        FlowsheetSurface.Flowsheet = Flowsheet
 
         If My.Settings.FlowsheetRenderer = 0 Then
             DirectCast(FControl, FlowsheetSurfaceControl).FlowsheetObject = Flowsheet
@@ -84,6 +98,15 @@ Public Class FlowsheetSurface_SkiaSharp
             SplitContainerVertical.Panel2MinSize *= GlobalSettings.Settings.DpiScale
 
         End If
+
+        tsbColorTheme.SelectedIndex = Flowsheet.Options.FlowsheetColorTheme
+
+        tbFontSize.Text = Flowsheet.Options.LabelFontSize.ToString("G2")
+
+        FlowsheetSurface.SetRegularFont(Flowsheet.FlowsheetOptions.RegularFontName)
+        FlowsheetSurface.SetBoldFont(Flowsheet.FlowsheetOptions.BoldFontName)
+        FlowsheetSurface.SetItalicFont(Flowsheet.FlowsheetOptions.ItalicFontName)
+        FlowsheetSurface.SetBoldItalicFont(Flowsheet.FlowsheetOptions.BoldItalicFontName)
 
         AddHandler CopyFromTSMI.DropDownItemClicked, AddressOf MaterialStreamClickHandler
 
@@ -120,6 +143,7 @@ Public Class FlowsheetSurface_SkiaSharp
             End Try
         Next
 
+        Loaded = True
 
     End Sub
 
@@ -277,6 +301,12 @@ Public Class FlowsheetSurface_SkiaSharp
                     Me.HorizontalmenteToolStripMenuItem.Checked = True
                 Else
                     Me.HorizontalmenteToolStripMenuItem.Checked = False
+                End If
+
+                If obj.GraphicObject.FlippedV Then
+                    Me.tsmiInvertVertically.Checked = True
+                Else
+                    Me.tsmiInvertVertically.Checked = False
                 End If
 
                 If FlowsheetSurface.SelectedObject.ObjectType = ObjectType.MaterialStream Then
@@ -2874,7 +2904,7 @@ Public Class FlowsheetSurface_SkiaSharp
         Else
             FlowsheetSurface.SelectedObject.FlippedH = False
         End If
-        SplitContainerHorizontal.Panel1.Invalidate()
+        Flowsheet.UpdateInterface()
     End Sub
 
     Private Sub ToolStripMenuItem14_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem14.Click
@@ -3244,6 +3274,43 @@ Public Class FlowsheetSurface_SkiaSharp
             SplitContainerVertical.Panel2Collapsed = True
             SplitContainerHorizontal.Panel2Collapsed = False
         End If
+    End Sub
+
+    Private Sub ToolStripComboBox1_Click(sender As Object, e As EventArgs) Handles tsbColorTheme.SelectedIndexChanged
+        Try
+            Flowsheet.Options.FlowsheetColorTheme = tsbColorTheme.SelectedIndex
+            FlowsheetSurface.UpdateColorTheme()
+            FControl.Invalidate()
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Private Sub tbFontSize_TextChanged(sender As Object, e As EventArgs) Handles tbFontSize.TextChanged
+        If tbFontSize.Text.IsValidDouble() And Loaded Then
+            Flowsheet.FlowsheetOptions.LabelFontSize = Double.Parse(tbFontSize.Text)
+            For Each obj In FlowsheetSurface.DrawingObjects
+                If TypeOf obj Is ShapeGraphic Then
+                    DirectCast(obj, ShapeGraphic).FontSize = Flowsheet.FlowsheetOptions.LabelFontSize
+                End If
+            Next
+            FControl.Invalidate()
+        End If
+    End Sub
+
+    Private Sub ToolStripButton5_Click(sender As Object, e As EventArgs) Handles ToolStripButton5.Click
+
+        Dim fset As New FormDefineFonts With {.Flowsheet = Flowsheet, .FlowsheetSurface = FlowsheetSurface}
+        fset.ShowDialog(Me)
+
+    End Sub
+
+    Private Sub tsmiInvertVertically_Click(sender As Object, e As EventArgs) Handles tsmiInvertVertically.Click
+        If Me.tsmiInvertVertically.Checked Then
+            FlowsheetSurface.SelectedObject.FlippedV = True
+        Else
+            FlowsheetSurface.SelectedObject.FlippedV = False
+        End If
+        Flowsheet.UpdateInterface()
     End Sub
 
     Private Sub tsbControlPanelMode_CheckedChanged(sender As Object, e As EventArgs) Handles tsbControlPanelMode.CheckedChanged

@@ -1,1 +1,8 @@
-Version 7.1.0
+Version 7.1.2
+
+- Simultaneous Correction solver for Absorption/Extraction Column
+- Set Flowsheet Fonts for each Style
+- Fixed issue with GERG-2008 Property Package
+- Fixed an issue with Conversion Reactor
+- Fixed an error in density/compressibility calculation (EOS)
+- Fixed custom ordering of Master Property Table objects

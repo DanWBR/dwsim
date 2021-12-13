@@ -118,6 +118,8 @@
 
     Function AddObject(t As Enums.GraphicObjects.ObjectType, xcoord As Integer, ycoord As Integer, tag As String) As ISimulationObject
 
+    Function AddObject(t As Enums.GraphicObjects.ObjectType, xcoord As Integer, ycoord As Integer, id As String, tag As String) As ISimulationObject
+
     Sub AddGraphicObject(obj As IGraphicObject)
 
     Sub AddSimulationObject(obj As ISimulationObject)

@@ -95,4 +95,14 @@
 
     Property DisplayUserDefinedPropertiesEditor As Boolean
 
+    Property LabelFontSize As Double
+
+    Property RegularFontName As String
+
+    Property BoldFontName As String
+
+    Property ItalicFontName As String
+
+    Property FlowsheetColorTheme As Integer
+    Property BoldItalicFontName As String
 End Interface

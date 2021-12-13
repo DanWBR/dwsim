@@ -102,53 +102,105 @@ Namespace GraphicObjects.Shapes
 
             MyBase.Draw(g)
 
-            Dim lattice As SKMatrix
-            lattice.ScaleX = 20.0#
-            lattice.ScaleY = 20.0#
+            Select Case DrawMode
 
-            Dim myPen2 As New SKPaint()
-            With myPen2
-                .Color = LineColor
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .IsStroke = True
-                .StrokeWidth = LineWidth
-            End With
+                Case 0
 
-            Dim rect1 As New SKRect(X + 0.1 * Width, Y, X + 0.9 * Width, Y + Height)
-            Dim rect0 As New SKRect(X, Y, X + 0.2 * Width, Y + Height)
-            Dim rect2 As New SKRect(X + 0.8 * Width, Y, X + Width, Y + Height)
+                    'default
 
-            canvas.DrawRect(rect1, myPen2)
-            canvas.DrawOval(rect0, myPen2)
-            canvas.DrawOval(rect2, myPen2)
+                    Dim myPen2 As New SKPaint()
+                    With myPen2
+                        .Color = LineColor
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                        .IsStroke = True
+                        .StrokeWidth = LineWidth
+                    End With
 
-            If GradientMode Then
+                    Dim rect1 As New SKRect(X + 0.1 * Width, Y, X + 0.9 * Width, Y + Height)
+                    Dim rect0 As New SKRect(X, Y, X + 0.2 * Width, Y + Height)
+                    Dim rect2 As New SKRect(X + 0.8 * Width, Y, X + Width, Y + Height)
 
-                Dim gradPen As New SKPaint()
-                With gradPen
-                    .Color = LineColor
-                    .StrokeWidth = LineWidth
-                    .IsStroke = False
-                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                    .Shader = SKShader.CreateLinearGradient(New SKPoint(X, Y), New SKPoint(X, Y + Height),
-                                    New SKColor() {SKColors.White, LineColor},
-                                    New Single() {0.0, 1.0}, SKShaderTileMode.Clamp)
-                End With
+                    Dim gp As New SKPath()
+                    gp.MoveTo(X + 0.1 * Width, Y)
+                    gp.LineTo(X + 0.8 * Width, Y)
+                    gp.ArcTo(rect2, -90, 180, False)
+                    gp.LineTo(X + 0.1 * Width, Y + Height)
+                    gp.ArcTo(rect0, 90, 180, False)
 
-                canvas.DrawRect(rect1, gradPen)
-                canvas.DrawOval(rect0, gradPen)
-                canvas.DrawOval(rect2, gradPen)
-                canvas.DrawOval(rect0, myPen2)
+                    gp.Close()
 
-            End If
+                    Dim gradPen As New SKPaint()
+                    With gradPen
+                        .Color = LineColor.WithAlpha(50)
+                        .StrokeWidth = LineWidth
+                        .IsStroke = False
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                    End With
 
-            For i As Integer = 2 To 14
-                Dim p As New SKPath
-                Dim r As New SKRect(X + i / 20 * Width, Y, X + (0.2 + i / 20) * Width, Y + Height)
-                p.AddArc(r, -90, 180)
-                canvas.DrawPath(p, myPen2)
-            Next
+                    canvas.DrawPath(gp, gradPen)
 
+                    canvas.DrawOval(rect0, myPen2)
+                    canvas.DrawPath(gp, myPen2)
+
+                    For i As Integer = 1 To 15
+                        Dim p As New SKPath
+                        Dim r As New SKRect(X + i / 20 * Width, Y, X + (0.2 + i / 20) * Width, Y + Height)
+                        p.AddArc(r, -90, 180)
+                        canvas.DrawPath(p, myPen2)
+                    Next
+
+                Case 1
+
+                    'b/w
+                    Dim myPen2 As New SKPaint()
+                    With myPen2
+                        .Color = SKColors.Black
+                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                        .IsStroke = True
+                        .StrokeWidth = LineWidth
+                    End With
+
+                    Dim rect1 As New SKRect(X + 0.1 * Width, Y, X + 0.9 * Width, Y + Height)
+                    Dim rect0 As New SKRect(X, Y, X + 0.2 * Width, Y + Height)
+                    Dim rect2 As New SKRect(X + 0.8 * Width, Y, X + Width, Y + Height)
+
+                    Dim gp As New SKPath()
+                    gp.MoveTo(X + 0.1 * Width, Y)
+                    gp.LineTo(X + 0.8 * Width, Y)
+                    gp.ArcTo(rect2, -90, 180, False)
+                    gp.LineTo(X + 0.1 * Width, Y + Height)
+                    gp.ArcTo(rect0, 90, 180, False)
+
+                    gp.Close()
+
+                    canvas.DrawOval(rect0, myPen2)
+                    canvas.DrawPath(gp, myPen2)
+
+                    For i As Integer = 1 To 15
+                        Dim p As New SKPath
+                        Dim r As New SKRect(X + i / 20 * Width, Y, X + (0.2 + i / 20) * Width, Y + Height)
+                        p.AddArc(r, -90, 180)
+                        canvas.DrawPath(p, myPen2)
+                    Next
+
+
+                Case 2
+
+                    'Gas/Liquid Flows
+
+                Case 3
+
+                    'Temperature Gradients
+
+                Case 4
+
+                    'Pressure Gradients
+
+                Case 5
+
+                    'Temperature/Pressure Gradients
+
+            End Select
         End Sub
 
     End Class

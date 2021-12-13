@@ -354,24 +354,33 @@ namespace DWSIM.UI.Desktop.Editors
                 }
             }
 
+            s.CreateAndAddLabelRow(container, "Solver Settings");
+
+            var methods = new string[] { "Burningham-Otto (Sum Rates)", "Napthali-Sandholm (Simultaneous Correction)" };
+
+            if (column.SolvingMethodName.Contains("Wang")) column.SolvingMethodName = "Burningham-Otto (Sum Rates)";
+
+            s.CreateAndAddDropDownRow(container, "Solving Method", methods.ToList(), methods.ToList().IndexOf(column.SolvingMethodName), (sender, e) =>
+            {
+                column.SolvingMethodName = sender.SelectedValue.ToString();
+            });
+
             s.CreateAndAddTextBoxRow(container, "N0", "Maximum Iterations", column.MaxIterations,
             (sender, e) =>
             {
                 if (sender.Text.IsValidDouble()) column.MaxIterations = (int)sender.Text.ToDoubleFromCurrent();
             }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)column.GetFlowsheet()).HighLevelSolve.Invoke(); });
 
-            s.CreateAndAddTextBoxRow(container, nf, "Convergence Tolerance (External Loop)", column.ExternalLoopTolerance,
+            s.CreateAndAddTextBoxRow(container, nf, "Convergence Tolerance", column.ExternalLoopTolerance,
             (sender, e) =>
             {
-                if (sender.Text.IsValidDouble()) column.ExternalLoopTolerance = sender.Text.ToDoubleFromCurrent();
+                if (sender.Text.IsValidDouble())
+                {
+                    column.ExternalLoopTolerance = sender.Text.ToDoubleFromCurrent();
+                    column.InternalLoopTolerance = sender.Text.ToDoubleFromCurrent();
+                }
             }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)column.GetFlowsheet()).HighLevelSolve.Invoke(); });
 
-            s.CreateAndAddTextBoxRow(container, nf, "Convergence Tolerance (Internal Loop)", column.InternalLoopTolerance,
-            (sender, e) =>
-            {
-            if (sender.Text.IsValidDouble()) column.InternalLoopTolerance = sender.Text.ToDoubleFromCurrent();
-            }, () => { if (GlobalSettings.Settings.CallSolverOnEditorPropertyChanged) ((Shared.Flowsheet)column.GetFlowsheet()).HighLevelSolve.Invoke(); });
-                        
             s.CreateAndAddEmptySpace(container);
             s.CreateAndAddEmptySpace(container);
             s.CreateAndAddEmptySpace(container);

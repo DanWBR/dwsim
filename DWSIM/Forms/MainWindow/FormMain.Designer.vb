@@ -55,24 +55,6 @@ Partial Class FormMain
         Me.ToolsTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.DatabaseManagerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RegistroCAPEOPENToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.WindowsMenu = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CascadeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TileVerticalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TileHorizontalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ViewTSMI = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MostrarBarraDeFerramentasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PainelDeBoasvindasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.HelpTSMI = New System.Windows.Forms.ToolStripMenuItem()
-        Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DocumentacaoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GuiaDoUsuarioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
-        Me.DWSIMNaInternetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.WikiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ForumToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RastreamentoDeBugsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PatronToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DownloadSupplementarySoftwareToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReaktoroToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NNUOToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -81,6 +63,22 @@ Partial Class FormMain
         Me.OPCPluginToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DTLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PsycrometrySimulationTemplateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.WindowsMenu = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CascadeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TileVerticalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TileHorizontalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ViewTSMI = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MostrarBarraDeFerramentasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PainelDeBoasvindasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HelpTSMI = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DocumentacaoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GuiaDoUsuarioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DWSIMNaInternetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.WikiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ForumToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RastreamentoDeBugsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PatronToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.NewToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.OpenToolStripButton = New System.Windows.Forms.ToolStripButton()
@@ -131,7 +129,7 @@ Partial Class FormMain
         resources.ApplyResources(Me.MenuStrip1, "MenuStrip1")
         Me.MenuStrip1.AllowItemReorder = True
         Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileTSMI, Me.EditTSMI, Me.ToolsTSMI, Me.WindowsMenu, Me.ViewTSMI, Me.HelpTSMI, Me.DownloadSupplementarySoftwareToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileTSMI, Me.EditTSMI, Me.ToolsTSMI, Me.WindowsMenu, Me.ViewTSMI, Me.HelpTSMI})
         Me.MenuStrip1.MdiWindowListItem = Me.WindowsMenu
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.ShowItemToolTips = True
@@ -268,7 +266,7 @@ Partial Class FormMain
         'ToolsTSMI
         '
         resources.ApplyResources(Me.ToolsTSMI, "ToolsTSMI")
-        Me.ToolsTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DatabaseManagerToolStripMenuItem, Me.RegistroCAPEOPENToolStripMenuItem})
+        Me.ToolsTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DatabaseManagerToolStripMenuItem, Me.RegistroCAPEOPENToolStripMenuItem, Me.DownloadSupplementarySoftwareToolStripMenuItem})
         Me.ToolsTSMI.Name = "ToolsTSMI"
         '
         'DatabaseManagerToolStripMenuItem
@@ -282,6 +280,48 @@ Partial Class FormMain
         resources.ApplyResources(Me.RegistroCAPEOPENToolStripMenuItem, "RegistroCAPEOPENToolStripMenuItem")
         Me.RegistroCAPEOPENToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.colan2
         Me.RegistroCAPEOPENToolStripMenuItem.Name = "RegistroCAPEOPENToolStripMenuItem"
+        '
+        'DownloadSupplementarySoftwareToolStripMenuItem
+        '
+        resources.ApplyResources(Me.DownloadSupplementarySoftwareToolStripMenuItem, "DownloadSupplementarySoftwareToolStripMenuItem")
+        Me.DownloadSupplementarySoftwareToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.DownloadSupplementarySoftwareToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReaktoroToolStripMenuItem, Me.NNUOToolStripMenuItem, Me.PNUOToolStripMenuItem, Me.CapitalCostToolStripMenuItem, Me.OPCPluginToolStripMenuItem, Me.DTLToolStripMenuItem, Me.PsycrometrySimulationTemplateToolStripMenuItem})
+        Me.DownloadSupplementarySoftwareToolStripMenuItem.Name = "DownloadSupplementarySoftwareToolStripMenuItem"
+        '
+        'ReaktoroToolStripMenuItem
+        '
+        resources.ApplyResources(Me.ReaktoroToolStripMenuItem, "ReaktoroToolStripMenuItem")
+        Me.ReaktoroToolStripMenuItem.Name = "ReaktoroToolStripMenuItem"
+        '
+        'NNUOToolStripMenuItem
+        '
+        resources.ApplyResources(Me.NNUOToolStripMenuItem, "NNUOToolStripMenuItem")
+        Me.NNUOToolStripMenuItem.Name = "NNUOToolStripMenuItem"
+        '
+        'PNUOToolStripMenuItem
+        '
+        resources.ApplyResources(Me.PNUOToolStripMenuItem, "PNUOToolStripMenuItem")
+        Me.PNUOToolStripMenuItem.Name = "PNUOToolStripMenuItem"
+        '
+        'CapitalCostToolStripMenuItem
+        '
+        resources.ApplyResources(Me.CapitalCostToolStripMenuItem, "CapitalCostToolStripMenuItem")
+        Me.CapitalCostToolStripMenuItem.Name = "CapitalCostToolStripMenuItem"
+        '
+        'OPCPluginToolStripMenuItem
+        '
+        resources.ApplyResources(Me.OPCPluginToolStripMenuItem, "OPCPluginToolStripMenuItem")
+        Me.OPCPluginToolStripMenuItem.Name = "OPCPluginToolStripMenuItem"
+        '
+        'DTLToolStripMenuItem
+        '
+        resources.ApplyResources(Me.DTLToolStripMenuItem, "DTLToolStripMenuItem")
+        Me.DTLToolStripMenuItem.Name = "DTLToolStripMenuItem"
+        '
+        'PsycrometrySimulationTemplateToolStripMenuItem
+        '
+        resources.ApplyResources(Me.PsycrometrySimulationTemplateToolStripMenuItem, "PsycrometrySimulationTemplateToolStripMenuItem")
+        Me.PsycrometrySimulationTemplateToolStripMenuItem.Name = "PsycrometrySimulationTemplateToolStripMenuItem"
         '
         'WindowsMenu
         '
@@ -340,21 +380,16 @@ Partial Class FormMain
         'HelpTSMI
         '
         resources.ApplyResources(Me.HelpTSMI, "HelpTSMI")
-        Me.HelpTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HelpToolStripMenuItem, Me.DocumentacaoToolStripMenuItem, Me.toolStripSeparator5, Me.DWSIMNaInternetToolStripMenuItem, Me.PatronToolStripMenuItem, Me.AboutToolStripMenuItem})
+        Me.HelpTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DocumentacaoToolStripMenuItem, Me.DWSIMNaInternetToolStripMenuItem, Me.PatronToolStripMenuItem, Me.AboutToolStripMenuItem})
         Me.HelpTSMI.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.HelpTSMI.MergeIndex = 102
         Me.HelpTSMI.Name = "HelpTSMI"
-        '
-        'HelpToolStripMenuItem
-        '
-        resources.ApplyResources(Me.HelpToolStripMenuItem, "HelpToolStripMenuItem")
-        Me.HelpToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.help
-        Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
         '
         'DocumentacaoToolStripMenuItem
         '
         resources.ApplyResources(Me.DocumentacaoToolStripMenuItem, "DocumentacaoToolStripMenuItem")
         Me.DocumentacaoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GuiaDoUsuarioToolStripMenuItem})
+        Me.DocumentacaoToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.book_open
         Me.DocumentacaoToolStripMenuItem.Name = "DocumentacaoToolStripMenuItem"
         '
         'GuiaDoUsuarioToolStripMenuItem
@@ -363,15 +398,11 @@ Partial Class FormMain
         Me.GuiaDoUsuarioToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.page_white_acrobat
         Me.GuiaDoUsuarioToolStripMenuItem.Name = "GuiaDoUsuarioToolStripMenuItem"
         '
-        'toolStripSeparator5
-        '
-        resources.ApplyResources(Me.toolStripSeparator5, "toolStripSeparator5")
-        Me.toolStripSeparator5.Name = "toolStripSeparator5"
-        '
         'DWSIMNaInternetToolStripMenuItem
         '
         resources.ApplyResources(Me.DWSIMNaInternetToolStripMenuItem, "DWSIMNaInternetToolStripMenuItem")
         Me.DWSIMNaInternetToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.WikiToolStripMenuItem, Me.ForumToolStripMenuItem, Me.RastreamentoDeBugsToolStripMenuItem})
+        Me.DWSIMNaInternetToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.help
         Me.DWSIMNaInternetToolStripMenuItem.Name = "DWSIMNaInternetToolStripMenuItem"
         '
         'WikiToolStripMenuItem
@@ -399,50 +430,8 @@ Partial Class FormMain
         'AboutToolStripMenuItem
         '
         resources.ApplyResources(Me.AboutToolStripMenuItem, "AboutToolStripMenuItem")
-        Me.AboutToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.information
+        Me.AboutToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.DWSIM_ico_64
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        '
-        'DownloadSupplementarySoftwareToolStripMenuItem
-        '
-        resources.ApplyResources(Me.DownloadSupplementarySoftwareToolStripMenuItem, "DownloadSupplementarySoftwareToolStripMenuItem")
-        Me.DownloadSupplementarySoftwareToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.DownloadSupplementarySoftwareToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReaktoroToolStripMenuItem, Me.NNUOToolStripMenuItem, Me.PNUOToolStripMenuItem, Me.CapitalCostToolStripMenuItem, Me.OPCPluginToolStripMenuItem, Me.DTLToolStripMenuItem, Me.PsycrometrySimulationTemplateToolStripMenuItem})
-        Me.DownloadSupplementarySoftwareToolStripMenuItem.Name = "DownloadSupplementarySoftwareToolStripMenuItem"
-        '
-        'ReaktoroToolStripMenuItem
-        '
-        resources.ApplyResources(Me.ReaktoroToolStripMenuItem, "ReaktoroToolStripMenuItem")
-        Me.ReaktoroToolStripMenuItem.Name = "ReaktoroToolStripMenuItem"
-        '
-        'NNUOToolStripMenuItem
-        '
-        resources.ApplyResources(Me.NNUOToolStripMenuItem, "NNUOToolStripMenuItem")
-        Me.NNUOToolStripMenuItem.Name = "NNUOToolStripMenuItem"
-        '
-        'PNUOToolStripMenuItem
-        '
-        resources.ApplyResources(Me.PNUOToolStripMenuItem, "PNUOToolStripMenuItem")
-        Me.PNUOToolStripMenuItem.Name = "PNUOToolStripMenuItem"
-        '
-        'CapitalCostToolStripMenuItem
-        '
-        resources.ApplyResources(Me.CapitalCostToolStripMenuItem, "CapitalCostToolStripMenuItem")
-        Me.CapitalCostToolStripMenuItem.Name = "CapitalCostToolStripMenuItem"
-        '
-        'OPCPluginToolStripMenuItem
-        '
-        resources.ApplyResources(Me.OPCPluginToolStripMenuItem, "OPCPluginToolStripMenuItem")
-        Me.OPCPluginToolStripMenuItem.Name = "OPCPluginToolStripMenuItem"
-        '
-        'DTLToolStripMenuItem
-        '
-        resources.ApplyResources(Me.DTLToolStripMenuItem, "DTLToolStripMenuItem")
-        Me.DTLToolStripMenuItem.Name = "DTLToolStripMenuItem"
-        '
-        'PsycrometrySimulationTemplateToolStripMenuItem
-        '
-        resources.ApplyResources(Me.PsycrometrySimulationTemplateToolStripMenuItem, "PsycrometrySimulationTemplateToolStripMenuItem")
-        Me.PsycrometrySimulationTemplateToolStripMenuItem.Name = "PsycrometrySimulationTemplateToolStripMenuItem"
         '
         'ToolStrip1
         '
@@ -707,8 +696,6 @@ Partial Class FormMain
     Public WithEvents toolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
     Public WithEvents ExitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents HelpTSMI As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents HelpToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents toolStripSeparator5 As System.Windows.Forms.ToolStripSeparator
     Public WithEvents AboutToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
     Public WithEvents NewToolStripButton As System.Windows.Forms.ToolStripButton

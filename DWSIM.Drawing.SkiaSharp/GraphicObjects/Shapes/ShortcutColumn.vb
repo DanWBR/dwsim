@@ -112,24 +112,14 @@ Namespace GraphicObjects.Shapes
 
             MyBase.Draw(g)
 
-            If GradientMode Then
-
-                Dim r0 As New SKRect(X, Y, X + Width, Y + Height)
-
-                Dim radius2 = 0.9F * Math.Min(Width, Height)
-                Dim center = New SKPoint(r0.MidX, r0.MidY)
-                Dim offCenter = center - New SKPoint(radius2 / 2, radius2 / 2)
+            If DrawMode = 0 Then
 
                 Dim gradPen As New SKPaint()
                 With gradPen
-                    .Color = LineColor
+                    .Color = LineColor.WithAlpha(50)
                     .StrokeWidth = LineWidth
                     .IsStroke = False
                     .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                    .Shader = SKShader.CreateTwoPointConicalGradient(
-                                    offCenter, 1, center, radius2,
-                                    New SKColor() {SKColors.White, LineColor},
-                                    Nothing, SKShaderTileMode.Clamp)
                 End With
 
                 canvas.DrawRoundRect(New SKRect(X + (0.05) * 1.25 * Width, Y + 0.1 * Height, X + (0.05) * 1.25 * Width + 0.2 * 1.25 * Width, Y + 0.1 * Height + 0.8 * Height), 10, 10, gradPen)
@@ -171,20 +161,17 @@ Namespace GraphicObjects.Shapes
                 canvas.DrawLine((X + 0.05 * 1.25 * Width), (Y + 0.7 * Height), (X + 0.31 * Width), (Y + 0.7 * Height), gradPen)
                 canvas.DrawLine((X + 0.05 * 1.25 * Width), (Y + 0.8 * Height), (X + 0.31 * Width), (Y + 0.8 * Height), gradPen)
 
-
             End If
 
             Dim myPen As New SKPaint()
             With myPen
-                .Color = LineColor
+                .Color = IIf(DrawMode = 0, LineColor, SKColors.Black)
                 .StrokeWidth = LineWidth
-                .IsStroke = Not Fill
+                .IsStroke = IIf(DrawMode = 0, True, True)
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
             End With
 
             canvas.DrawRoundRect(New SKRect(X + (0.05) * 1.25 * Width, Y + 0.1 * Height, X + (0.05) * 1.25 * Width + 0.2 * 1.25 * Width, Y + 0.1 * Height + 0.8 * Height), 10, 10, myPen)
-
-            'Me.DrawRoundRect(g, X + 0.05 * 1.25 * Width, Y + 0.1 * Height, X + 0.05 * 1.25 * Width + 0.2 * 1.25 * Width, Y + 0.1 * Height + 0.8 * Height, 20, myPen)
 
             canvas.DrawPoints(SKPointMode.Polygon, New SKPoint() {New SKPoint(X + 0.175 * Width, Y + 0.1 * Height), New SKPoint(X + 0.175 * Width, Y + 0.02 * Height), New SKPoint(X + 0.6 * 1.25 * Width, Y + 0.02 * Height), New SKPoint(X + 0.6 * 1.25 * Width, Y + 0.1 * Height)}, myPen)
             canvas.DrawPoints(SKPointMode.Polygon, New SKPoint() {New SKPoint(X + 0.175 * Width, Y + 0.9 * Height), New SKPoint(X + 0.175 * Width, Y + 0.98 * Height), New SKPoint(X + 0.6 * 1.25 * Width, Y + 0.98 * Height), New SKPoint(X + 0.6 * 1.25 * Width, Y + 0.9 * Height)}, myPen)
@@ -227,36 +214,10 @@ Namespace GraphicObjects.Shapes
             With tpaint
                 .TextSize = 14.0#
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Color = LineColor
+                .Color = IIf(DrawMode = 0, LineColor, SKColors.Black)
                 .IsStroke = False
-                .Typeface = DefaultTypeFace
+                .Typeface = BoldTypeFace
             End With
-
-            If FlippedH Or FlippedV Or Rotation <> 0 Then
-
-                Dim currmat = canvas.TotalMatrix
-
-                canvas.Save()
-
-                If FlippedV And Not FlippedH Then
-                    canvas.Scale(1, -1, (X + Width / 2), (Y + Height / 2))
-                ElseIf FlippedH And Not FlippedV Then
-                    canvas.Scale(-1, 1, (X + Width / 2), (Y + Height / 2))
-                ElseIf FlippedH And FlippedV Then
-                    canvas.Scale(-1, -1, (X + Width / 2), (Y + Height / 2))
-                End If
-
-                If Rotation <> 0.0 Then canvas.RotateDegrees(Rotation, X + Width / 2, Y + Height / 2)
-
-                canvas.DrawText("SC", X + 0.5 * Width, Y + 0.5 * Height, tpaint)
-
-                canvas.SetMatrix(currmat)
-
-            Else
-
-                canvas.DrawText("SC", X + 0.5 * Width, Y + 0.5 * Height, tpaint)
-
-            End If
 
         End Sub
 
