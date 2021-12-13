@@ -179,94 +179,113 @@ Public Class FormMain
 
         Dim extlist As List(Of IExtenderCollection) = GetExtenders(LoadExtenderDLLs())
 
-            For Each extender In extlist
-                Extenders.Add(extender.ID, extender)
-                Try
-                    If extender.Level = ExtenderLevel.MainWindow Then
-                        If extender.Category <> ExtenderCategory.InitializationScript Then
-                            Dim newmenuitem As ToolStripMenuItem = Nothing
-                            If extender.Category = ExtenderCategory.NewItem Then
-                                For Each item As ToolStripMenuItem In MenuStrip1.Items
-                                    If item.Text = extender.DisplayText Then
-                                        newmenuitem = item
-                                        Exit For
-                                    End If
-                                Next
-                                If newmenuitem Is Nothing Then
-                                    newmenuitem = New ToolStripMenuItem()
-                                    newmenuitem.Text = extender.DisplayText
-                                    newmenuitem.DisplayStyle = ToolStripItemDisplayStyle.Text
+        For Each extender In extlist
+            Extenders.Add(extender.ID, extender)
+            Try
+                If extender.Level = ExtenderLevel.MainWindow Then
+                    If extender.Category <> ExtenderCategory.InitializationScript Then
+                        Dim newmenuitem As ToolStripMenuItem = Nothing
+                        If extender.Category = ExtenderCategory.NewItem Then
+                            For Each item As ToolStripMenuItem In MenuStrip1.Items
+                                If item.Text = extender.DisplayText Then
+                                    newmenuitem = item
+                                    Exit For
+                                End If
+                            Next
+                            If newmenuitem Is Nothing Then
+                                newmenuitem = New ToolStripMenuItem()
+                                newmenuitem.Text = extender.DisplayText
+                                newmenuitem.DisplayStyle = ToolStripItemDisplayStyle.Text
+                                If TypeOf extender Is IExtenderCollection2 Then
+                                    DirectCast(extender, IExtenderCollection2).SetMenuItem(extender)
                                 End If
                             End If
-                            For Each item In extender.Collection
-                                Dim exttsmi As New ToolStripMenuItem
-                                exttsmi.Text = item.DisplayText
-                                exttsmi.Image = item.DisplayImage
-                                AddHandler exttsmi.Click, Sub(s2, e2)
-                                                              item.SetMainWindow(Me)
-                                                              item.Run()
-                                                          End Sub
-                                Select Case extender.Category
-                                    Case ExtenderCategory.File
-                                        If item.InsertAtPosition >= 0 Then
-                                            FileTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
-                                        Else
-                                            FileTSMI.DropDownItems.Add(exttsmi)
-                                        End If
-                                    Case ExtenderCategory.Edit
-                                        If item.InsertAtPosition >= 0 Then
-                                            EditTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
-                                        Else
-                                            EditTSMI.DropDownItems.Add(exttsmi)
-                                        End If
-                                    Case ExtenderCategory.Tools
-                                        If item.InsertAtPosition >= 0 Then
-                                            ToolsTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
-                                        Else
-                                            ToolsTSMI.DropDownItems.Add(exttsmi)
-                                        End If
-                                    Case ExtenderCategory.Help
-                                        If item.InsertAtPosition >= 0 Then
-                                            HelpTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
-                                        Else
-                                            HelpTSMI.DropDownItems.Add(exttsmi)
-                                        End If
-                                    Case ExtenderCategory.NewItem
-                                        newmenuitem?.DropDownItems.Add(exttsmi)
-                                End Select
-                            Next
-                            If newmenuitem IsNot Nothing AndAlso Not MenuStrip1.Items.Contains(newmenuitem) Then
-                                MenuStrip1.Items.Add(newmenuitem)
-                            End If
-                        Else
-                            For Each item In extender.Collection
-                                item.SetMainWindow(Me)
-                                item.Run()
-                            Next
                         End If
+                        For Each item In extender.Collection
+                            Dim exttsmi As New ToolStripMenuItem
+                            exttsmi.Text = item.DisplayText
+                            exttsmi.Image = item.DisplayImage
+                            AddHandler exttsmi.Click, Sub(s2, e2)
+                                                          item.SetMainWindow(Me)
+                                                          item.Run()
+                                                      End Sub
+                            If TypeOf item Is IExtender2 Then
+                                DirectCast(item, IExtender2).SetMenuItem(exttsmi)
+                            End If
+                            Select Case extender.Category
+                                Case ExtenderCategory.File
+                                    If item.InsertAtPosition >= 0 Then
+                                        exttsmi.MergeAction = MergeAction.Insert
+                                        FileTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
+                                    Else
+                                        FileTSMI.DropDownItems.Add(exttsmi)
+                                    End If
+                                Case ExtenderCategory.Edit
+                                    If item.InsertAtPosition >= 0 Then
+                                        exttsmi.MergeAction = MergeAction.Insert
+                                        EditTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
+                                    Else
+                                        EditTSMI.DropDownItems.Add(exttsmi)
+                                    End If
+                                Case ExtenderCategory.Tools
+                                    If item.InsertAtPosition >= 0 Then
+                                        exttsmi.MergeAction = MergeAction.Insert
+                                        ToolsTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
+                                    Else
+                                        ToolsTSMI.DropDownItems.Add(exttsmi)
+                                    End If
+                                Case ExtenderCategory.Help
+                                    If item.InsertAtPosition >= 0 Then
+                                        exttsmi.MergeAction = MergeAction.Insert
+                                        HelpTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
+                                    Else
+                                        HelpTSMI.DropDownItems.Add(exttsmi)
+                                    End If
+                                Case ExtenderCategory.NewItem
+                                    newmenuitem?.DropDownItems.Add(exttsmi)
+                            End Select
+                        Next
+                        If newmenuitem IsNot Nothing AndAlso Not MenuStrip1.Items.Contains(newmenuitem) Then
+                            If TypeOf extender Is IExtenderCollection2 Then
+                                Dim insertidx = DirectCast(extender, IExtenderCollection2).InsertAtPosition
+                                newmenuitem.MergeAction = MergeAction.Insert
+                                newmenuitem.MergeIndex = insertidx
+                            End If
+                            MenuStrip1.Items.Add(newmenuitem)
+                        End If
+                    Else
+                        For Each item In extender.Collection
+                            item.SetMainWindow(Me)
+                            item.Run()
+                        Next
                     End If
-                Catch ex As Exception
-                    Logging.Logger.LogError("Extender Initialization", ex)
-                End Try
-            Next
+                End If
+            Catch ex As Exception
+                Logging.Logger.LogError("Extender Initialization", ex)
+            End Try
+        Next
 
 #End If
 
     End Sub
 
     Private Sub UserService_UserDetailsLoaded(sender As Object, user As UserDetailsModel)
-        Me.LoginButton.Visible = False
-        Me.LogoutDropdown.Text = user.DisplayName
-        Me.LogoutDropdown.Visible = True
-        Me.OpenFromS365DashboardBtn.Enabled = True
+        Me.UIThread(Sub()
+                        Me.LoginButton.Visible = False
+                        Me.LogoutDropdown.Text = user.DisplayName
+                        Me.LogoutDropdown.Visible = True
+                        Me.OpenFromS365DashboardBtn.Enabled = True
+                    End Sub)
     End Sub
 
     Private Sub UserService_UserLoggedOut(sender As Object, e As EventArgs)
-        Me.LogoutDropdown.Text = ""
-        Me.LogoutDropdown.Visible = False
-        Me.LoginButton.Visible = True
-        Me.OpenFromS365DashboardBtn.Enabled = False
-        Me.SaveToSimulate365DashboardToolStripMenuItem.Enabled = False
+        Me.UIThread(Sub()
+                        Me.LogoutDropdown.Text = ""
+                        Me.LogoutDropdown.Visible = False
+                        Me.LoginButton.Visible = True
+                        Me.OpenFromS365DashboardBtn.Enabled = False
+                        Me.SaveToSimulate365DashboardToolStripMenuItem.Enabled = False
+                    End Sub)
     End Sub
 
 
