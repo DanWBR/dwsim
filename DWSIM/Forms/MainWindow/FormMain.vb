@@ -196,6 +196,9 @@ Public Class FormMain
                                 newmenuitem = New ToolStripMenuItem()
                                 newmenuitem.Text = extender.DisplayText
                                 newmenuitem.DisplayStyle = ToolStripItemDisplayStyle.Text
+                                If TypeOf extender Is IExtenderCollection2 Then
+                                    DirectCast(extender, IExtenderCollection2).SetMenuItem(extender)
+                                End If
                             End If
                         End If
                         For Each item In extender.Collection
@@ -206,27 +209,34 @@ Public Class FormMain
                                                           item.SetMainWindow(Me)
                                                           item.Run()
                                                       End Sub
+                            If TypeOf item Is IExtender2 Then
+                                DirectCast(item, IExtender2).SetMenuItem(exttsmi)
+                            End If
                             Select Case extender.Category
                                 Case ExtenderCategory.File
                                     If item.InsertAtPosition >= 0 Then
+                                        exttsmi.MergeAction = MergeAction.Insert
                                         FileTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                     Else
                                         FileTSMI.DropDownItems.Add(exttsmi)
                                     End If
                                 Case ExtenderCategory.Edit
                                     If item.InsertAtPosition >= 0 Then
+                                        exttsmi.MergeAction = MergeAction.Insert
                                         EditTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                     Else
                                         EditTSMI.DropDownItems.Add(exttsmi)
                                     End If
                                 Case ExtenderCategory.Tools
                                     If item.InsertAtPosition >= 0 Then
+                                        exttsmi.MergeAction = MergeAction.Insert
                                         ToolsTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                     Else
                                         ToolsTSMI.DropDownItems.Add(exttsmi)
                                     End If
                                 Case ExtenderCategory.Help
                                     If item.InsertAtPosition >= 0 Then
+                                        exttsmi.MergeAction = MergeAction.Insert
                                         HelpTSMI.DropDownItems.Insert(item.InsertAtPosition, exttsmi)
                                     Else
                                         HelpTSMI.DropDownItems.Add(exttsmi)
@@ -236,6 +246,26 @@ Public Class FormMain
                             End Select
                         Next
                         If newmenuitem IsNot Nothing AndAlso Not MenuStrip1.Items.Contains(newmenuitem) Then
+                            If TypeOf extender Is IExtenderCollection2 Then
+                                Dim insertidx = DirectCast(extender, IExtenderCollection2).InsertAtPosition
+                                newmenuitem.MergeAction = MergeAction.Insert
+                                newmenuitem.MergeIndex = insertidx
+                            End If
+                            MenuStrip1.Items.Add(newmenuitem)
+                        End If
+                    Else
+                        For Each item In extender.Collection
+                            item.SetMainWindow(Me)
+                            item.Run()
+                        Next
+                    End If
+                End If
+            Catch ex As Exception
+                Logging.Logger.LogError("Extender Initialization", ex)
+            End Try
+        Next
+        newmenuitem.MergeIndex = insertidx
+        End If
                             MenuStrip1.Items.Add(newmenuitem)
                         End If
                     Else
@@ -255,18 +285,22 @@ Public Class FormMain
     End Sub
 
     Private Sub UserService_UserDetailsLoaded(sender As Object, user As UserDetailsModel)
-        Me.LoginButton.Visible = False
-        Me.LogoutDropdown.Text = user.DisplayName
-        Me.LogoutDropdown.Visible = True
-        Me.OpenFromS365DashboardBtn.Enabled = True
+        Me.UIThread(Sub()
+                        Me.LoginButton.Visible = False
+                        Me.LogoutDropdown.Text = user.DisplayName
+                        Me.LogoutDropdown.Visible = True
+                        Me.OpenFromS365DashboardBtn.Enabled = True
+                    End Sub)
     End Sub
 
     Private Sub UserService_UserLoggedOut(sender As Object, e As EventArgs)
-        Me.LogoutDropdown.Text = ""
-        Me.LogoutDropdown.Visible = False
-        Me.LoginButton.Visible = True
-        Me.OpenFromS365DashboardBtn.Enabled = False
-        Me.SaveToSimulate365DashboardToolStripMenuItem.Enabled = False
+        Me.UIThread(Sub()
+                        Me.LogoutDropdown.Text = ""
+                        Me.LogoutDropdown.Visible = False
+                        Me.LoginButton.Visible = True
+                        Me.OpenFromS365DashboardBtn.Enabled = False
+                        Me.SaveToSimulate365DashboardToolStripMenuItem.Enabled = False
+                    End Sub)
     End Sub
 
 
