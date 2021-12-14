@@ -35,6 +35,14 @@ Public Interface IExtenderCollection
 
 End Interface
 
+Public Interface IExtenderCollection2
+
+    ReadOnly Property InsertAtPosition As Integer
+
+    Sub SetMenuItem(menuitem As Object)
+
+End Interface
+
 Public Interface IExtender
 
     ReadOnly Property ID As String
@@ -50,5 +58,11 @@ Public Interface IExtender
     ReadOnly Property InsertAtPosition As Integer
 
     Sub Run()
+
+End Interface
+
+Public Interface IExtender2
+
+    Sub SetMenuItem(menuitem As Object)
 
 End Interface
