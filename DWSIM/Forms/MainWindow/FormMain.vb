@@ -1511,7 +1511,7 @@ Public Class FormMain
 
     End Function
 
-    Sub LoadMobileXML(ByVal path As String)
+    Sub LoadMobileXML(ByVal path As String, Optional ByVal simulate365File As S365File = Nothing)
 
         My.Application.PushUndoRedoAction = False
 
@@ -1530,6 +1530,8 @@ Public Class FormMain
                                            End Sub)
 
         Dim form As FormFlowsheet = New FormFlowsheet() With {.MobileCompatibilityMode = True}
+        form.simulate365File = simulate365File
+
         form.FormSpreadsheet = New FormNewSpreadsheet() With {.Flowsheet = form}
         form.FormSpreadsheet.Initialize()
 
@@ -1750,7 +1752,7 @@ Public Class FormMain
 
     End Sub
 
-    Public Function LoadXML(ByVal path As String, ProgressFeedBack As Action(Of Integer), Optional ByVal simulationfilename As String = "", Optional ByVal forcommandline As Boolean = False, Optional ByVal s365FlowsheetsDriveId As String = Nothing, Optional ByVal s365DriveItemId As String = Nothing) As Interfaces.IFlowsheet
+    Public Function LoadXML(ByVal path As String, ProgressFeedBack As Action(Of Integer), Optional ByVal simulationfilename As String = "", Optional ByVal forcommandline As Boolean = False, Optional ByVal simulate365File As S365File = Nothing) As Interfaces.IFlowsheet
 
         My.Application.PushUndoRedoAction = False
 
@@ -1810,8 +1812,7 @@ Public Class FormMain
 
         Dim form As FormFlowsheet = New FormFlowsheet()
 
-        form.S365FlowsheetsDriveId = s365FlowsheetsDriveId
-        form.S365DriveItemId = s365DriveItemId
+        form.simulate365File = simulate365File
 
         Settings.CAPEOPENMode = False
 
@@ -3274,7 +3275,7 @@ Public Class FormMain
         End Using
     End Function
 
-    Function LoadAndExtractXMLZIP(ByVal caminho As String, ProgressFeedBack As Action(Of Integer), Optional ByVal forcommandline As Boolean = False, Optional ByVal s365FlowsheetsDriveId As String = Nothing, Optional ByVal s365DriveItemId As String = Nothing) As Interfaces.IFlowsheet
+    Function LoadAndExtractXMLZIP(ByVal caminho As String, ProgressFeedBack As Action(Of Integer), Optional ByVal forcommandline As Boolean = False, Optional ByVal simulate365File As S365File = Nothing) As Interfaces.IFlowsheet
 
         Dim pathtosave As String = My.Computer.FileSystem.SpecialDirectories.Temp + Path.DirectorySeparatorChar
         Dim fullname As String = ""
@@ -3320,7 +3321,7 @@ Label_00CC:
                 Loop
             End Using
             Dim fs As Interfaces.IFlowsheet
-            fs = LoadXML(fullname, ProgressFeedBack, caminho, forcommandline, s365FlowsheetsDriveId, s365DriveItemId)
+            fs = LoadXML(fullname, ProgressFeedBack, caminho, forcommandline, simulate365File)
             fs.FilePath = caminho
             fs.Options.FilePath = caminho
             If File.Exists(dbfile) Then
@@ -3403,7 +3404,7 @@ Label_00CC:
 
     End Sub
 
-    Sub LoadFile(fpath As String, Optional ByVal s365FlowsheetsDriveId As String = Nothing, Optional ByVal s365DriveItemId As String = Nothing)
+    Sub LoadFile(fpath As String, Optional ByVal simulate365File As S365File = Nothing)
 
         Me.WelcomePanel.Visible = False
         PainelDeBoasvindasToolStripMenuItem.Checked = False
@@ -3432,7 +3433,7 @@ Label_00CC:
                                                               floading.Label2.Text = x.ToString("N0") + "%"
                                                               floading.Refresh()
                                                           End Sub)
-                                            End Sub, "", False, s365FlowsheetsDriveId, s365DriveItemId)
+                                            End Sub, "", False, simulate365File)
                 End If
             Case ".dwxmz"
                 Dim myStream As System.IO.FileStream
@@ -3446,7 +3447,7 @@ Label_00CC:
                     Application.DoEvents()
                     Me.LoadAndExtractXMLZIP(Me.filename, Sub(x)
                                                              Me.Invoke(Sub() floading.ProgressBar1.Value = x)
-                                                         End Sub, False, s365FlowsheetsDriveId, s365DriveItemId)
+                                                         End Sub, False, simulate365File)
                 End If
             Case ".xml"
                 Dim myStream As System.IO.FileStream
@@ -3458,11 +3459,12 @@ Label_00CC:
                     'Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + nome + "..."
                     Application.DoEvents()
                     Application.DoEvents()
-                    Me.LoadMobileXML(Me.filename)
+                    Me.LoadMobileXML(Me.filename, simulate365File)
                 End If
             Case ".dwcsd"
                 Application.DoEvents()
                 Dim NewMDIChild As New FormCompoundCreator()
+                NewMDIChild.simulate365File = simulate365File
                 NewMDIChild.MdiParent = Me
                 NewMDIChild.Show()
                 Dim objStreamReader As New FileStream(fpath, FileMode.Open, FileAccess.Read)
@@ -3482,6 +3484,7 @@ Label_00CC:
             Case ".dwcsd2"
                 Application.DoEvents()
                 Dim NewMDIChild As New FormCompoundCreator()
+                NewMDIChild.simulate365File = simulate365File
                 NewMDIChild.MdiParent = Me
                 NewMDIChild.Show()
                 NewMDIChild.mycase = Newtonsoft.Json.JsonConvert.DeserializeObject(Of CompoundGeneratorCase)(File.ReadAllText(fpath))
@@ -3497,6 +3500,7 @@ Label_00CC:
             Case ".dwrsd"
                 Application.DoEvents()
                 Dim NewMDIChild As New FormDataRegression()
+                NewMDIChild.simulate365File = simulate365File
                 NewMDIChild.MdiParent = Me
                 NewMDIChild.Show()
                 Dim objStreamReader As New FileStream(fpath, FileMode.Open, FileAccess.Read)
@@ -3516,6 +3520,7 @@ Label_00CC:
             Case ".dwrsd2"
                 Application.DoEvents()
                 Dim NewMDIChild As New FormDataRegression()
+                NewMDIChild.simulate365File = simulate365File
                 NewMDIChild.MdiParent = Me
                 NewMDIChild.Show()
                 NewMDIChild.currcase = Newtonsoft.Json.JsonConvert.DeserializeObject(Of DWSIM.Optimization.DatRegression.RegressionCase)(File.ReadAllText(fpath))
@@ -4344,9 +4349,9 @@ Label_00CC:
     Private Sub OpenFromS365DashboardBtn_Click(sender As Object, e As EventArgs) Handles OpenFromS365DashboardBtn.Click
         Dim filePickerForm As S365FilePickerForm = New S365FilePickerForm
 
-        Dim file = filePickerForm.ShowOpenDialog()
+        Dim file As S365File = filePickerForm.ShowOpenDialog()
         If file IsNot Nothing Then
-            LoadFile(file.FilePath, file.FlowsheetsDriveId, file.DriveItemId)
+            LoadFile(file.FilePath, file)
         End If
 
     End Sub
@@ -4360,9 +4365,29 @@ Label_00CC:
         End If
         Dim file = filePickerForm.ShowSaveDialog(New List(Of String)(New String() {fileExtension}))
         If file IsNot Nothing Then
-            FileUploaderService.UploadFile(file.FlowsheetsDriveId, file.ParentDriveId, Me.filename, file.Filename)
+            Dim s365File As S365File = FileUploaderService.UploadFile(file.FlowsheetsDriveId, file.ParentDriveId, Me.filename, file.Filename)
+            UpdateS365File(s365File)
             MessageBox.Show("File saved to Simulate 365 Dashboard.")
 
+        End If
+    End Sub
+
+    Private Sub UpdateS365File(simulate365File As S365File)
+        If Path.GetExtension(Me.filename).ToLower = ".dwxml" Or
+           Path.GetExtension(Me.filename).ToLower = ".dwxmz" Or
+           Path.GetExtension(Me.filename).ToLower = ".xml" Then
+            Dim form2 As FormFlowsheet = Me.ActiveMdiChild
+            form2.simulate365File = simulate365File
+
+        ElseIf Path.GetExtension(Me.filename).ToLower = ".dwcsd" Or
+                Path.GetExtension(Me.filename).ToLower = ".dwcsd2" Then
+            Dim activeChild As FormCompoundCreator = Me.ActiveMdiChild
+            activeChild.simulate365File = simulate365File
+
+        ElseIf Path.GetExtension(Me.filename).ToLower = ".dwrsd" Or
+                Path.GetExtension(Me.filename).ToLower = ".dwrsd2" Then
+            Dim activeChild As FormDataRegression = Me.ActiveMdiChild
+            activeChild.simulate365File = simulate365File
         End If
     End Sub
 

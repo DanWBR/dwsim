@@ -29,6 +29,7 @@ Imports System.Threading.Tasks
 Imports System.Linq
 Imports System.IO
 Imports DWSIM.Thermodynamics.Databases.KDBLink
+Imports DWSIM.Simulate365.Models
 
 Public Class FormDataRegression
 
@@ -46,6 +47,7 @@ Public Class FormDataRegression
 
     Public currcase As RegressionCase
     Public IP As InteractionParameter
+    Public simulate365File As S365File = Nothing
 
     Public proppack As PropertyPackage
     Public ppname As String = ""
@@ -1364,7 +1366,7 @@ Public Class FormDataRegression
         Return True
     End Function
 
-    Public Function eval_jac_g(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal m As Integer, ByVal nele_jac As Integer, ByRef iRow As Integer(), _
+    Public Function eval_jac_g(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal m As Integer, ByVal nele_jac As Integer, ByRef iRow As Integer(),
 ByRef jCol As Integer(), ByRef values As Double()) As Boolean
         If values Is Nothing Then
             ' set the structure of the jacobian 
@@ -1401,7 +1403,7 @@ ByRef jCol As Integer(), ByRef values As Double()) As Boolean
         Return False
     End Function
 
-    Public Function eval_h(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal obj_factor As Double, ByVal m As Integer, ByVal lambda As Double(), _
+    Public Function eval_h(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal obj_factor As Double, ByVal m As Integer, ByVal lambda As Double(),
 ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer(), ByRef jCol As Integer(), ByRef values As Double()) As Boolean
         Return False
     End Function
@@ -1829,11 +1831,11 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
             For Each b As Boolean In .checkp
                 If b Then
                     Try
-                        Me.gridstats.Rows.Add(New Object() {.x1p(i), .calcx1l1(j), .x2p(i), .calcx1l2(j), .yp(i), .calcy(j), .tp(i), SystemsOfUnits.Converter.ConvertFromSI(.tunit, .calct(j)), .pp(i), SystemsOfUnits.Converter.ConvertFromSI(.punit, .calcp(j)), _
-                                                            .calcy(j) - .yp(i), (.calcy(j) - .yp(i)) / .yp(i), (.calcy(j) - .yp(i)) / .yp(i) * 100, _
-                                                           SystemsOfUnits.Converter.ConvertFromSI(.punit, .calcp(j)) - .pp(i), (SystemsOfUnits.Converter.ConvertFromSI(.punit, .calcp(j)) - .pp(i)) / .pp(i), (SystemsOfUnits.Converter.ConvertFromSI(.punit, .calcp(j)) - .pp(i)) / .pp(i) * 100, _
-                                                            SystemsOfUnits.Converter.ConvertFromSI(.tunit, .calct(j)) - .tp(i), (SystemsOfUnits.Converter.ConvertFromSI(.tunit, .calct(j)) - .tp(i)) / .tp(i), (SystemsOfUnits.Converter.ConvertFromSI(.tunit, .calct(j)) - .tp(i)) / .tp(i) * 100, _
-                                                            .calcx1l1(j) - .x1p(i), (.calcx1l1(j) - .x1p(i)) / .x1p(i), (.calcx1l1(j) - .x1p(i)) / .x1p(i) * 100, _
+                        Me.gridstats.Rows.Add(New Object() { .x1p(i), .calcx1l1(j), .x2p(i), .calcx1l2(j), .yp(i), .calcy(j), .tp(i), SystemsOfUnits.Converter.ConvertFromSI(.tunit, .calct(j)), .pp(i), SystemsOfUnits.Converter.ConvertFromSI(.punit, .calcp(j)),
+                                                            .calcy(j) - .yp(i), (.calcy(j) - .yp(i)) / .yp(i), (.calcy(j) - .yp(i)) / .yp(i) * 100,
+                                                           SystemsOfUnits.Converter.ConvertFromSI(.punit, .calcp(j)) - .pp(i), (SystemsOfUnits.Converter.ConvertFromSI(.punit, .calcp(j)) - .pp(i)) / .pp(i), (SystemsOfUnits.Converter.ConvertFromSI(.punit, .calcp(j)) - .pp(i)) / .pp(i) * 100,
+                                                            SystemsOfUnits.Converter.ConvertFromSI(.tunit, .calct(j)) - .tp(i), (SystemsOfUnits.Converter.ConvertFromSI(.tunit, .calct(j)) - .tp(i)) / .tp(i), (SystemsOfUnits.Converter.ConvertFromSI(.tunit, .calct(j)) - .tp(i)) / .tp(i) * 100,
+                                                            .calcx1l1(j) - .x1p(i), (.calcx1l1(j) - .x1p(i)) / .x1p(i), (.calcx1l1(j) - .x1p(i)) / .x1p(i) * 100,
                                                             .calcx1l2(j) - .x2p(i), (.calcx1l2(j) - .x2p(i)) / .x2p(i), (.calcx1l2(j) - .x2p(i)) / .x2p(i) * 100, (.calctl(j) - .tl(i)) / .tl(i) * 100, (.calcts(j) - .ts(i)) / .ts(i) * 100})
                     Catch ex As Exception
 
@@ -3970,7 +3972,7 @@ Namespace DWSIM.Optimization.DatRegression
         Public filename As String = ""
         Public databasepath As String = ""
         Public model As String = "Peng-Robinson"
-        Public datatype As DataType = datatype.Pxy
+        Public datatype As DataType = DataType.Pxy
         Public tp, x1p, x2p, yp, pp, calct, calcp, calcy, calcx1l1, calcx1l2, checkp, ts, tl, calcts, calctl As New ArrayList
         Public method As String = "IPOPT"
         Public objfunction As String = "Least Squares (min T/P)"

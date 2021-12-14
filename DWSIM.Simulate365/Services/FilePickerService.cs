@@ -1,4 +1,5 @@
-﻿using Microsoft.Graph;
+﻿using DWSIM.Simulate365.Models;
+using Microsoft.Graph;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,12 +13,12 @@ namespace DWSIM.Simulate365.Services
     public class FilePickerService
     {
         public event EventHandler S3365DashboardFileOpenStarted;
-        public event EventHandler<S365DashboardOpenFile> S3365DashboardFileOpened;
+        public event EventHandler<S365File> S3365DashboardFileOpened;
         public event EventHandler<S365DashboardSaveFile> S365DashboardSaveFileClicked;
         public event EventHandler S365DashboardFolderCreated;
 
         public S365DashboardSaveFile SelectedSaveFile { get; private set; }
-        public S365DashboardOpenFile SelectedOpenFile { get; private set; }
+        public S365File SelectedOpenFile { get; private set; }
 
         public void OpenFile(string driveItemId, string flowsheetsDriveId)
         {
@@ -39,7 +40,7 @@ namespace DWSIM.Simulate365.Services
                     using (var destStream = System.IO.File.OpenWrite(filePath))
                         await stream.CopyToAsync(destStream);
                 }).Wait();
-                this.SelectedOpenFile = new S365DashboardOpenFile { FilePath = filePath, FlowsheetsDriveId = flowsheetsDriveId, DriveItemId = driveItemId };
+                this.SelectedOpenFile = new S365File { FilePath = filePath, Filename = item.Name, DriveId = flowsheetsDriveId, FileId = driveItemId };
 
                 S3365DashboardFileOpened?.Invoke(this, this.SelectedOpenFile);
 
@@ -106,13 +107,5 @@ namespace DWSIM.Simulate365.Services
         public string Filename { get; set; }
         public string FlowsheetsDriveId { get; set; }
         public string ParentDriveId { get; set; }
-    }
-
-    public class S365DashboardOpenFile
-    {
-        public string FilePath { get; set; }
-        //drive id of Flowsheets folder in simulate 365
-        public string FlowsheetsDriveId { get; set; }
-        public string DriveItemId { get; set; }
     }
 }

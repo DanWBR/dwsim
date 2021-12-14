@@ -1,4 +1,5 @@
-﻿using Microsoft.Graph;
+﻿using DWSIM.Simulate365.Models;
+using Microsoft.Graph;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,7 +19,7 @@ namespace DWSIM.Simulate365.Services
 
     public class FileUploaderService
     {
-        public static void UploadFile(string flowsheetsDriveId, string parentDriveId, string filePath, string filename)
+        public static S365File UploadFile(string flowsheetsDriveId, string parentDriveId, string filePath, string filename)
         {
             try
             {
@@ -26,7 +27,10 @@ namespace DWSIM.Simulate365.Services
                 var client = GraphClientFactory.CreateClient(token);
 
                 var driveItemRequestBuilder = client.Drives[flowsheetsDriveId].Items[parentDriveId];
-                Task.Run(async () => await UploadDocumentAsync(driveItemRequestBuilder, filename, filePath, ConflictBehaviour.Replace)).Wait();
+                var item = Task.Run(async () => await UploadDocumentAsync(driveItemRequestBuilder, filename, filePath, ConflictBehaviour.Replace)).Result;
+
+                return new S365File { FileId = item.Id, DriveId = parentDriveId, Filename = item.Name, FilePath = filePath };
+
             }
             catch (Exception ex)
             {

@@ -128,6 +128,7 @@
     <Compile Include="GraphClientFactory.cs" />
     <Compile Include="Models\OAuthErrorResponse.cs" />
     <Compile Include="Models\OAuthTokenResponse.cs" />
+    <Compile Include="Models\S365File.cs" />
     <Compile Include="Models\UserDetailsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AuthService.cs" />
