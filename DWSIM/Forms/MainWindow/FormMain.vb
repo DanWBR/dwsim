@@ -264,22 +264,6 @@ Public Class FormMain
                 Logging.Logger.LogError("Extender Initialization", ex)
             End Try
         Next
-        newmenuitem.MergeIndex = insertidx
-        End If
-                            MenuStrip1.Items.Add(newmenuitem)
-                        End If
-                    Else
-                        For Each item In extender.Collection
-                            item.SetMainWindow(Me)
-                            item.Run()
-                        Next
-                    End If
-                End If
-            Catch ex As Exception
-                Logging.Logger.LogError("Extender Initialization", ex)
-            End Try
-        Next
-
 #End If
 
     End Sub
