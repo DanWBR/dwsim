@@ -20,7 +20,7 @@ namespace DWSIM.Simulate365.Services
         public S365DashboardSaveFile SelectedSaveFile { get; private set; }
         public S365File SelectedOpenFile { get; private set; }
 
-        public void OpenFile(string driveItemId, string flowsheetsDriveId)
+        public void OpenFile(string driveItemId, string flowsheetsDriveId, string fullPath)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace DWSIM.Simulate365.Services
                     using (var destStream = System.IO.File.OpenWrite(filePath))
                         await stream.CopyToAsync(destStream);
                 }).Wait();
-                this.SelectedOpenFile = new S365File { FilePath = filePath, Filename = item.Name, DriveId = flowsheetsDriveId, FileId = driveItemId };
+                this.SelectedOpenFile = new S365File { FilePath = filePath, Filename = item.Name, DriveId = flowsheetsDriveId, FileId = driveItemId, SimulatePath = fullPath };
 
                 S3365DashboardFileOpened?.Invoke(this, this.SelectedOpenFile);
 
@@ -51,7 +51,7 @@ namespace DWSIM.Simulate365.Services
                 throw new Exception("An error occurred while opening file from S365 Dashboard.", ex);
             }
         }
-        public void SaveFile(string filename, string extension, string flowsheetsDriveId, string parentDriveId)
+        public void SaveFile(string filename, string extension, string flowsheetsDriveId, string parentDriveId, string fullPath)
         {
             try
             {
@@ -59,7 +59,9 @@ namespace DWSIM.Simulate365.Services
                 {
                     Filename = $"{filename}.{extension}",
                     FlowsheetsDriveId = flowsheetsDriveId,
-                    ParentDriveId = parentDriveId
+                    ParentDriveId = parentDriveId,
+                    SimulatePath= fullPath
+
                 };
 
                 this.S365DashboardSaveFileClicked?.Invoke(this, this.SelectedSaveFile);
@@ -107,5 +109,6 @@ namespace DWSIM.Simulate365.Services
         public string Filename { get; set; }
         public string FlowsheetsDriveId { get; set; }
         public string ParentDriveId { get; set; }
+        public string SimulatePath { get; set; }
     }
 }

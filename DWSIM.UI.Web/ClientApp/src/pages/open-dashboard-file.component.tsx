@@ -243,7 +243,11 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
                 });
             } else {
                 if (!isSaveDialog) {
-                    OpenDwsimFile(item.driveItemId, this.props.flowsheetsDriveId).then(() => { }, (error) => { alert(error); });
+                    const url = selectedFolder.webUrl.split('/').slice(2).reduce((prev, curr) => prev + "/" + decodeURIComponent(curr), "");
+                    const filePath = url && url.length > 0 ? `Simulate 365 Dashboard${url}/${item.name}`
+                        : `Simulate 365 Dashboard/${item.name}`;
+
+                    OpenDwsimFile(item.driveItemId, this.props.flowsheetsDriveId, filePath).then(() => { }, (error) => { alert(error); });
                 } else {
                     let nameArray = item.name.split('.');
                     if (nameArray.length > 1)
@@ -403,8 +407,12 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
         console.log("Save clicked", this.state);
         const { filename, selectedFileType, selectedFolder } = this.state;
         const { flowsheetsDriveId } = this.props;
-        if (filename && selectedFileType)
-            SaveDwsimFile(filename, selectedFileType, flowsheetsDriveId, selectedFolder.driveId);
+        if (filename && selectedFileType) {
+            const url = selectedFolder.webUrl.split('/').slice(2).reduce((prev, curr) => prev + "/" + decodeURIComponent(curr), "");
+            const filePath = url && url.length > 0 ? `Simulate 365 Dashboard${url}/${filename}.${selectedFileType}`
+                : `Simulate 365 Dashboard/${filename}${filename}.${selectedFileType}`;
+            SaveDwsimFile(filename, selectedFileType, flowsheetsDriveId, selectedFolder.driveId, filePath);
+        }
     }
 
     render() {

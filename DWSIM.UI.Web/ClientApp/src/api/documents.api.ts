@@ -30,7 +30,7 @@ export async function getFlowsheetListItemsAsync(selectedFolder: ISelectedFolder
         documents = documents.filter(document => document.hideFromDashboard === false);
 
         const files = documents.filter((document) => document.fileType === ResponseItemType.File && !!document.extension
-            && filterFileTypes.findIndex(x=>x==document.extension) > -1);
+            && filterFileTypes.findIndex(x => x == document.extension) > -1);
         const folders = documents.filter((document) => document.fileType === ResponseItemType.Folder);
 
         let sortedFolders = _copyAndSort<IDocument>(folders, "name", false);
@@ -46,22 +46,24 @@ export async function getFlowsheetListItemsAsync(selectedFolder: ISelectedFolder
 
 }
 
-export async function OpenDwsimFile(driveItemId: string, driveId: string) {
+export async function OpenDwsimFile(driveItemId: string, driveId: string, filePath: string) {
+    console.log("filePath", filePath);
     if (chrome?.webview?.hostObjects?.filePickerService) {
 
         const filePickerService = chrome.webview.hostObjects.filePickerService;
-        await filePickerService.openFile(driveItemId, driveId);
+        await filePickerService.openFile(driveItemId, driveId, filePath);
     } else {
         throw "filePickerService not initialized.";
     }
 
 }
 
-export async function SaveDwsimFile(filename: string, extension: string, flowsheetsDriveId: string, parentDriveId: string) {
+export async function SaveDwsimFile(filename: string, extension: string, flowsheetsDriveId: string, parentDriveId: string, filePath: string) {
+    console.log("filePath", filePath);
     if (chrome?.webview?.hostObjects?.filePickerService) {
 
         const filePickerService = chrome.webview.hostObjects.filePickerService;
-        await filePickerService.SaveFile(filename, extension, flowsheetsDriveId, parentDriveId);
+        await filePickerService.SaveFile(filename, extension, flowsheetsDriveId, parentDriveId, filePath);
     } else {
         throw "filePickerService not initialized.";
     }

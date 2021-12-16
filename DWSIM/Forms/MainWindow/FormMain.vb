@@ -4383,7 +4383,7 @@ Label_00CC:
         End If
         Dim file = filePickerForm.ShowSaveDialog(New List(Of String)(New String() {fileExtension}))
         If file IsNot Nothing Then
-            Dim s365File As S365File = FileUploaderService.UploadFile(file.FlowsheetsDriveId, file.ParentDriveId, Me.filename, file.Filename)
+            Dim s365File As S365File = FileUploaderService.UploadFile(file.FlowsheetsDriveId, file.ParentDriveId, Me.filename, file.Filename, file.SimulatePath)
             UpdateS365File(s365File)
             MessageBox.Show("File saved to Simulate 365 Dashboard.")
 
@@ -4396,6 +4396,7 @@ Label_00CC:
            Path.GetExtension(Me.filename).ToLower = ".xml" Then
             Dim form2 As FormFlowsheet = Me.ActiveMdiChild
             form2.simulate365File = simulate365File
+            form2.UpdateFormText()
 
         ElseIf Path.GetExtension(Me.filename).ToLower = ".dwcsd" Or
                 Path.GetExtension(Me.filename).ToLower = ".dwcsd2" Then

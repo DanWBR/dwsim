@@ -19,7 +19,7 @@ namespace DWSIM.Simulate365.Services
 
     public class FileUploaderService
     {
-        public static S365File UploadFile(string flowsheetsDriveId, string parentDriveId, string filePath, string filename)
+        public static S365File UploadFile(string flowsheetsDriveId, string parentDriveId, string filePath, string filename, string simulatePath)
         {
             try
             {
@@ -29,7 +29,7 @@ namespace DWSIM.Simulate365.Services
                 var driveItemRequestBuilder = client.Drives[flowsheetsDriveId].Items[parentDriveId];
                 var item = Task.Run(async () => await UploadDocumentAsync(driveItemRequestBuilder, filename, filePath, ConflictBehaviour.Replace)).Result;
 
-                return new S365File { FileId = item.Id, DriveId = parentDriveId, Filename = item.Name, FilePath = filePath };
+                return new S365File { FileId = item.Id, DriveId = parentDriveId, Filename = item.Name, FilePath = filePath, SimulatePath = simulatePath };
 
             }
             catch (Exception ex)
