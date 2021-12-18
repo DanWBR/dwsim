@@ -354,6 +354,15 @@ Namespace PropertyPackages.Auxiliary
                                 End If
                             End If
                         End If
+                    ElseIf Me.InteractionParameters.ContainsKey(Vids(j)) Then
+                        If Me.InteractionParameters(Vids(j)).ContainsKey(Vids(i)) Then
+                            a12(i)(j) = Me.InteractionParameters(Vids(j))(Vids(i)).A21
+                            a21(i)(j) = Me.InteractionParameters(Vids(j))(Vids(i)).A12
+                            b12(i)(j) = Me.InteractionParameters(Vids(j))(Vids(i)).B21
+                            b21(i)(j) = Me.InteractionParameters(Vids(j))(Vids(i)).B12
+                            c12(i)(j) = Me.InteractionParameters(Vids(j))(Vids(i)).C21
+                            c21(i)(j) = Me.InteractionParameters(Vids(j))(Vids(i)).C12
+                        End If
                     End If
                     j = j + 1
                 Loop Until j = n + 1
