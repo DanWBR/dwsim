@@ -194,6 +194,7 @@ Partial Class FormLLEDiagram
         'PanelMenu
         '
         resources.ApplyResources(Me.PanelMenu, "PanelMenu")
+        Me.PanelMenu.BackColor = System.Drawing.SystemColors.Control
         Me.PanelMenu.Controls.Add(Me.Label8)
         Me.PanelMenu.Controls.Add(Me.Label7)
         Me.PanelMenu.Controls.Add(Me.Label6)
@@ -396,7 +397,6 @@ Partial Class FormLLEDiagram
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "FormLLEDiagram"
