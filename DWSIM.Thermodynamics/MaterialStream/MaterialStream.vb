@@ -1729,6 +1729,8 @@ Namespace Streams
                                 value = "L1+L2"
                             ElseIf xv = 0.0 And xl1 > 0.0 And xl2 > 0.0 And xs > 0.0 Then
                                 value = "L1+L2+S"
+                            ElseIf xv = 0.0 And xl1 > 0.0 And xl2 = 0.0 And xs > 0.0 Then
+                                value = "L+S"
                             End If
                         Case 153
                             value = Me.Phases(3).Properties.pH.GetValueOrDefault
