@@ -25,6 +25,7 @@ Donald Gongaware
 Dorivaldo Junior
 Doug Palfreyman
 Emanuel Santos
+Frank Mittricker
 Filippo Borroni
 Gokhan Candan
 Gerry Agnew
@@ -54,7 +55,6 @@ Leonard Seed
 Les Waymont
 Lewis Estall
 Luca Finardi
-Luiza Martins
 Marcelo Miranda
 Marcos Silva
 Marko Likon
