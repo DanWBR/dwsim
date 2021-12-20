@@ -160,7 +160,7 @@ Namespace PropertyPackages
                 p3 = CoolProp.PropsSI("L", "T", x3, "P", P, SolventCompound)
                 p4 = CoolProp.PropsSI("L", "T", x4, "P", P, SolventCompound)
                 p5 = CoolProp.PropsSI("L", "T", x5, "P", P, SolventCompound)
-                Return Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                Return MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
             End If
 
         End Function
@@ -195,7 +195,7 @@ Namespace PropertyPackages
                                           p3 = CoolProp.PropsSI("P", "T", t, "Q", 0, GetCoolPropName(x3))
                                           p4 = CoolProp.PropsSI("P", "T", t, "Q", 0, GetCoolPropName(x4))
                                           p5 = CoolProp.PropsSI("P", "T", t, "Q", 0, GetCoolPropName(x5))
-                                          psat = Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, x)
+                                          psat = MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(x)
                                       End If
                                       Return (P - psat) ^ 2
                                   End Function)
@@ -267,7 +267,7 @@ Namespace PropertyPackages
                 p3 = CoolProp.PropsSI("V", "T", x3, "P", P, SolventCompound)
                 p4 = CoolProp.PropsSI("V", "T", x4, "P", P, SolventCompound)
                 p5 = CoolProp.PropsSI("V", "T", x5, "P", P, SolventCompound)
-                Return Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                Return MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
             End If
 
         End Function
@@ -307,7 +307,7 @@ Namespace PropertyPackages
                 p3 = CoolProp.PropsSI("D", "T", x3, "P", P, SolventCompound)
                 p4 = CoolProp.PropsSI("D", "T", x4, "P", P, SolventCompound)
                 p5 = CoolProp.PropsSI("D", "T", x5, "P", P, SolventCompound)
-                Return Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                Return MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
             End If
 
         End Function
@@ -375,7 +375,7 @@ Namespace PropertyPackages
                         p3 = CoolProp.PropsSI("H", "T", x3, "P", P, GetCoolPropName(x)) / 1000
                         p4 = CoolProp.PropsSI("H", "T", x4, "P", P, GetCoolPropName(x)) / 1000
                         p5 = CoolProp.PropsSI("H", "T", x5, "P", P, GetCoolPropName(x)) / 1000
-                        Return Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                        Return MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
                     End Try
                 Else
                     Try
@@ -390,7 +390,7 @@ Namespace PropertyPackages
                         p3 = CoolProp.PropsSI("H", "T", T, "P", P, GetCoolPropName(x3)) / 1000
                         p4 = CoolProp.PropsSI("H", "T", T, "P", P, GetCoolPropName(x4)) / 1000
                         p5 = CoolProp.PropsSI("H", "T", T, "P", P, GetCoolPropName(x5)) / 1000
-                        Return Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, x)
+                        Return MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(x)
                     Catch ex As Exception
                         Dim Tsat = AUX_TSAT(P, x)
                         Dim x1, x2, x3, x4, x5, p1, p2, p3, p4, p5 As Double
@@ -404,7 +404,7 @@ Namespace PropertyPackages
                         p3 = CoolProp.PropsSI("H", "T", x3, "P", P, GetCoolPropName(xmax)) / 1000
                         p4 = CoolProp.PropsSI("H", "T", x4, "P", P, GetCoolPropName(xmax)) / 1000
                         p5 = CoolProp.PropsSI("H", "T", x5, "P", P, GetCoolPropName(xmax)) / 1000
-                        Return Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                        Return MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
                     End Try
                 End If
             Else
@@ -446,7 +446,7 @@ Namespace PropertyPackages
                     p3 = CoolProp.PropsSI("S", "T", x3, "P", P, GetCoolPropName(x)) / 1000
                     p4 = CoolProp.PropsSI("S", "T", x4, "P", P, GetCoolPropName(x)) / 1000
                     p5 = CoolProp.PropsSI("S", "T", x5, "P", P, GetCoolPropName(x)) / 1000
-                    Return Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                    Return MathNet.Numerics.Interpolate.Linear(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}).Interpolate(T)
                 End Try
             Else
                 Dim Tsat = CoolProp.PropsSI("T", "P", P, "Q", 1.0, SolventCompound)
