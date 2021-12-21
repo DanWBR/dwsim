@@ -134,7 +134,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 S = 0.0
                 T = RootFinding.Brent.FindRootExpand(Function(Tx)
                                                          Return OBJ_FUNC_PH_FLASH(H, "PT", Tx, P, Vz, PP, False, Nothing)(0)
-                                                     End Function, Tsat * 0.5, Tsat, 0.00001, 100)
+                                                     End Function, 10, Tsat, 0.00001, 1000, 1.2)
 
             End If
 

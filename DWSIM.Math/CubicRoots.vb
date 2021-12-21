@@ -93,22 +93,22 @@ Namespace MathEx
             Dim roots(2) As Double
             Dim real1 As Double
 
-            If root1.Imaginary < 0.000001 Then
+            If Math.Abs(root1.Imaginary) < 0.00000001 Then
                 roots(0) = root1.Real
                 real1 = roots(0)
             End If
-            If root2.Imaginary < 0.000001 Then
+            If Math.Abs(root2.Imaginary) < 0.00000001 Then
                 roots(1) = root2.Real
                 real1 = roots(1)
             End If
-            If root3.Imaginary < 0.000001 Then
+            If Math.Abs(root3.Imaginary) < 0.00000001 Then
                 roots(2) = root3.Real
                 real1 = roots(2)
             End If
 
-            If roots(0) < 0.0000000001 Then roots(0) = real1
-            If roots(1) < 0.0000000001 Then roots(1) = real1
-            If roots(2) < 0.0000000001 Then roots(2) = real1
+            If Math.Abs(roots(0)) < 0.0000000001 Then roots(0) = real1
+            If Math.Abs(roots(1)) < 0.0000000001 Then roots(1) = real1
+            If Math.Abs(roots(2)) < 0.0000000001 Then roots(2) = real1
 
             Array.Sort(roots)
 

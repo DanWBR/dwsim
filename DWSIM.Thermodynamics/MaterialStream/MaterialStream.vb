@@ -1707,12 +1707,30 @@ Namespace Streams
                         Case 129
                             value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.Phases(0).Properties.dewTemperature.GetValueOrDefault)
                         Case 130
-                            If Me.Phases(1).Properties.molarfraction.GetValueOrDefault = 1.0# Then
-                                value = "Liquid Only"
-                            ElseIf Me.Phases(2).Properties.molarfraction.GetValueOrDefault = 1.0# Then
-                                value = "Vapor Only"
-                            Else
-                                value = "Mixed"
+                            Dim xv = Phases(2).Properties.molarfraction.GetValueOrDefault()
+                            Dim xl1 = Phases(3).Properties.molarfraction.GetValueOrDefault()
+                            Dim xl2 = Phases(4).Properties.molarfraction.GetValueOrDefault()
+                            Dim xs = Phases(7).Properties.molarfraction.GetValueOrDefault()
+                            If xv = 1.0 Then
+                                value = "V"
+                            ElseIf xl1 = 1.0 Then
+                                value = "L"
+                            ElseIf xs = 1.0 Then
+                                value = "S"
+                            ElseIf xv > 0.0 And xl1 > 0.0 And xl2 = 0.0 And xs = 0.0 Then
+                                value = "V+L"
+                            ElseIf xv > 0.0 And xl1 > 0.0 And xl2 > 0.0 And xs = 0.0 Then
+                                value = "V+L1+L2"
+                            ElseIf xv > 0.0 And xl1 > 0.0 And xl2 > 0.0 And xs > 0.0 Then
+                                value = "V+L1+L2+S"
+                            ElseIf xv > 0.0 And xl1 = 0.0 And xl2 = 0.0 And xs > 0.0 Then
+                                value = "V+S"
+                            ElseIf xv = 0.0 And xl1 > 0.0 And xl2 > 0.0 And xs = 0.0 Then
+                                value = "L1+L2"
+                            ElseIf xv = 0.0 And xl1 > 0.0 And xl2 > 0.0 And xs > 0.0 Then
+                                value = "L1+L2+S"
+                            ElseIf xv = 0.0 And xl1 > 0.0 And xl2 = 0.0 And xs > 0.0 Then
+                                value = "L+S"
                             End If
                         Case 153
                             value = Me.Phases(3).Properties.pH.GetValueOrDefault

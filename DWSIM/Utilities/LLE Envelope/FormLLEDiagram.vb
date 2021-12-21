@@ -64,8 +64,8 @@ Public Class FormLLEDiagram
         Dim MyPen As Pen
         Dim MyBrush As Brush
         Dim S1, S2 As String
-        Dim TitleFont As Font = New Font("Arial", 16)
-        Dim SubTitleFont As Font = New Font("Arial", 10)
+        Dim TitleFont As Font = New Font(SystemFonts.DialogFont, 16)
+        Dim SubTitleFont As Font = New Font(SystemFonts.DialogFont, 10)
         Dim stringSize As SizeF = New SizeF()
         Dim k As Integer
         Dim Ko1, KO2 As Konode
@@ -304,7 +304,9 @@ Public Class FormLLEDiagram
         End If
 
         Return Ko
+
     End Function
+
     Private Sub btnCalcDiagram_Click(sender As System.Object, e As System.EventArgs) Handles TSB_CalcDiagr.Click, btnCalcDiagram.Click
 
         Dim Ko, LastKo As New Konode

@@ -55,7 +55,7 @@ Public Class XMLSerializer
                             If TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is ICustomXMLSerialization Then
                                 Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                                 If Not xel Is Nothing Then
-                                    Dim val As List(Of XElement) = xel.Descendants.ToList()
+                                    Dim val As List(Of XElement) = xel.Elements.ToList()
                                     DirectCast(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing), ICustomXMLSerialization).LoadData(val)
                                 End If
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Single Then
@@ -251,7 +251,7 @@ Public Class XMLSerializer
                         If TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is ICustomXMLSerialization Then
                             Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                             If Not xel Is Nothing Then
-                                Dim val As List(Of XElement) = xel.Descendants.ToList()
+                                Dim val As List(Of XElement) = xel.Elements.ToList()
                                 DirectCast(obj.GetType.GetField(prop.Name).GetValue(obj), ICustomXMLSerialization).LoadData(val)
                             End If
                         ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is Single Then
