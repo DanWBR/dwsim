@@ -1111,6 +1111,8 @@ Namespace PropertyPackages
 
                 xi = subst.MoleFraction.GetValueOrDefault
 
+                If xi = 0.0 Then xi = 1.0E-20
+
                 Mi = subst.ConstantProperties.Molar_Weight
                 LNEi = subst.ConstantProperties.LennardJonesEnergy
                 LNDi = subst.ConstantProperties.LennardJonesDiameter
@@ -1122,10 +1124,10 @@ Namespace PropertyPackages
                 FVni = 0.0#
                 For Each subst2 In p.Compounds.Values
                     If subst.Name <> subst2.Name Then
-                        Mni += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.Molar_Weight
-                        LNEni += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.LennardJonesEnergy
-                        LNDni += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.LennardJonesDiameter
-                        FVni += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.FullerDiffusionVolume
+                        Mni += xi * subst.ConstantProperties.Molar_Weight
+                        LNEni += xi * subst.ConstantProperties.LennardJonesEnergy
+                        LNDni += xi * subst.ConstantProperties.LennardJonesDiameter
+                        FVni += xi * subst.ConstantProperties.FullerDiffusionVolume
                     End If
                 Next
                 Mni /= xi
