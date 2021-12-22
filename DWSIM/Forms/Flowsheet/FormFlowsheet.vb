@@ -2988,6 +2988,8 @@ Public Class FormFlowsheet
                 dckPanel.DockLeftPortion = 450 * Settings.DpiScale
             ElseIf cnt.ShowHint = DockState.DockRight Or cnt.ShowHint = DockState.DockRightAutoHide Then
                 dckPanel.DockRightPortion = 450 * Settings.DpiScale
+            ElseIf cnt.ShowHint = DockState.DockTop Or cnt.ShowHint = DockState.DockTopAutoHide Then
+                dckPanel.DockTopPortion = 160 * Settings.DpiScale
             ElseIf cnt.ShowHint = DockState.Float Then
                 dckPanel.DefaultFloatWindowSize = New Size(500 * Settings.DpiScale, 500 * Settings.DpiScale)
             End If
@@ -3439,7 +3441,7 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub ControlesDoIntegradorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ControlesDoIntegradorToolStripMenuItem.Click
-        FormIntegratorControls.Show(GetDockPanel)
+        DisplayForm(Me.FormIntegratorControls)
     End Sub
 
     Private Sub ModoDinamicoAtivoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ModoDinamicoAtivoToolStripMenuItem.Click
@@ -3479,7 +3481,7 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub tsbDynIntegrator_Click(sender As Object, e As EventArgs) Handles tsbDynIntegrator.Click
-        FormIntegratorControls.Show(GetDockPanel)
+        DisplayForm(Me.FormIntegratorControls)
     End Sub
 
     Private Sub FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem.Click
