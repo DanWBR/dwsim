@@ -193,6 +193,10 @@ Namespace SpecialOps
 
         End Sub
 
+        Public Overrides Sub RunDynamicModel()
+
+        End Sub
+
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
             If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then

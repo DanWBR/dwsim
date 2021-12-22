@@ -238,6 +238,24 @@ Namespace SpecialOps
 
         End Sub
 
+        Public Overrides Sub RunDynamicModel()
+
+            Dim msfrom, msto As MaterialStream
+            msfrom = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
+
+            If Not msfrom.Calculated And Not msfrom.AtEquilibrium Then
+                Throw New Exception(FlowSheet.GetTranslatedString("RecycleStreamNotCalculated"))
+            End If
+
+            msto = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+            Dim prevspec = msto.SpecType
+            msto.Assign(msfrom)
+            msto.AssignProps(msfrom)
+            msto.SpecType = prevspec
+            msto.AtEquilibrium = False
+
+        End Sub
+
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
             Dim IObj As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
