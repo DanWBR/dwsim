@@ -168,7 +168,7 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
             //   isSaveDialog: false,
             filename: '',
             selectedFileType: "dwxmz",
-            filterFileTypes: ["dwxml", "dwxmz"],
+            filterFileTypes: ["dwxml", "dwxmz", "xml", "dwcsd", "dwcsd2", "dwrsd", "dwrsd2", "dwruf"],
             showCreateFolderModal: false
         };
         this._navigationBarRef = React.createRef<NavigationBar>();
@@ -202,10 +202,10 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
 
     async getFilesAndFolders() {
         const { selectedFolder, filterFileTypes, selectedFileType } = this.state;
-        const { siteId, flowsheetsListId } = this.props;
+        const { siteId, flowsheetsListId, isSaveDialog } = this.props;
         try {
             this.setState({ isDataLoaded: false });
-            const fileTypes = (selectedFileType == "dwxml" || selectedFileType == "dwxmz") ? filterFileTypes : [selectedFileType!];
+            const fileTypes = !isSaveDialog && (selectedFileType == "dwxml" || selectedFileType == "dwxmz") ? filterFileTypes : [selectedFileType!];
             const filesAndFolders = await getFlowsheetListItemsAsync(selectedFolder, siteId, flowsheetsListId, fileTypes);
             console.log("Files and folders", filesAndFolders);
             this.setState({ files: filesAndFolders!.files ?? [], folders: filesAndFolders!.folders ?? [] });
@@ -243,7 +243,11 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
                 });
             } else {
                 if (!isSaveDialog) {
-                    OpenDwsimFile(item.driveItemId, this.props.flowsheetsDriveId).then(() => { }, (error) => { alert(error); });
+                    const url = selectedFolder.webUrl.split('/').slice(2).reduce((prev, curr) => prev + "/" + decodeURIComponent(curr), "");
+                    const filePath = url && url.length > 0 ? `Simulate 365 Dashboard${url}/${item.name}`
+                        : `Simulate 365 Dashboard/${item.name}`;
+
+                    OpenDwsimFile(item.driveItemId, this.props.flowsheetsDriveId, filePath).then(() => { }, (error) => { alert(error); });
                 } else {
                     let nameArray = item.name.split('.');
                     if (nameArray.length > 1)
@@ -403,8 +407,12 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
         console.log("Save clicked", this.state);
         const { filename, selectedFileType, selectedFolder } = this.state;
         const { flowsheetsDriveId } = this.props;
-        if (filename && selectedFileType)
-            SaveDwsimFile(filename, selectedFileType, flowsheetsDriveId, selectedFolder.driveId);
+        if (filename && selectedFileType) {
+            const url = selectedFolder.webUrl.split('/').slice(2).reduce((prev, curr) => prev + "/" + decodeURIComponent(curr), "");
+            const filePath = url && url.length > 0 ? `Simulate 365 Dashboard${url}/${filename}.${selectedFileType}`
+                : `Simulate 365 Dashboard/${filename}${filename}.${selectedFileType}`;
+            SaveDwsimFile(filename, selectedFileType, flowsheetsDriveId, selectedFolder.driveId, filePath);
+        }
     }
 
     render() {
@@ -436,7 +444,7 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
                             selectedKey={selectedFileType}
                             placeholder="Select an option"
                             options={dropdownControlledExampleOptions}
-                            onChange={(e, option) => { this.setState({ selectedFileType: option?.key.toString() },()=>{this.getFilesAndFolders();}); }}
+                            onChange={(e, option) => { this.setState({ selectedFileType: option?.key.toString() }, () => { this.getFilesAndFolders(); }); }}
 
                         />
                     </div>
@@ -505,7 +513,16 @@ function getFileTypeDropdownOption(extension?: string): IDropdownOption | undefi
 
 
     switch (extension) {
-        case 'dwxmz': return { key: 'dwxmz', text: 'Simulation File (Compressed XML) (*.dwxmz)' };    
+        //dwsim default
+        case 'dwxmz': return { key: 'dwxmz', text: 'Simulation File (Compressed XML) (*.dwxmz)' };
+        case 'dwxml': return { key: 'dwxml', text: 'Simulation File (XML) (*.dwxml)' };
+        case 'xml': return { key: 'xml', text: 'Simulation File (Android/iOS) (*.xml)' };
+        case 'dwcsd': return { key: 'dwcsd', text: 'Compound Creator Study (*.dwcsd)' };
+        case 'dwcsd2': return { key: 'dwcsd2', text: 'Compound Creator Study (*.dwcsd2)' };
+        case 'dwrsd': return { key: 'dwrsd', text: 'Data Regression Study (*.dwrsd)' };
+        case 'dwrsd2': return { key: 'dwrsd2', text: 'Data Regression Study (*.dwrsd2)' };
+        case 'dwruf': return { key: 'dwruf', text: 'UNIFAC IPs Regression Study (*.dwruf)' };
+        //end of dwsim default
         case 'xlsx': return { key: 'xlsx', text: 'Excel Workbook (*.xlsx)' };
         case 'odt': return { key: 'odt', text: 'OpenOffice Writer Document (*.odt)' };
         case 'pdf': return { key: 'pdf', text: 'PDF Files (*.pdf)' };

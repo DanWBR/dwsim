@@ -32,6 +32,7 @@ Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
 Imports DWSIM.DWSIM.Editors.PropertyPackages
 Imports System.Threading.Tasks
+Imports DWSIM.Simulate365.Models
 
 <ComSourceInterfaces(GetType(Interfaces.IFlowsheetNewMessageSentEvent)), ClassInterface(ClassInterfaceType.AutoDual)>
 <System.Serializable()>
@@ -131,8 +132,7 @@ Public Class FormFlowsheet
 
     Private MessagePump As New Queue(Of Tuple(Of String, WarningType, String))
 
-    Public S365FlowsheetsDriveId As String = Nothing
-    Public S365DriveItemId As String = Nothing
+    Public simulate365File As S365File = Nothing
 
 #End Region
 
@@ -700,7 +700,9 @@ Public Class FormFlowsheet
     End Sub
 
     Sub UpdateFormText()
-        If File.Exists(Me.Options.FilePath) Then
+        If (Me.simulate365File IsNot Nothing) Then
+            Me.Text = Me.simulate365File.Filename & " (" & Me.simulate365File.SimulatePath & ")"
+        ElseIf File.Exists(Me.Options.FilePath) Then
             Me.Text = IO.Path.GetFileNameWithoutExtension(Me.Options.FilePath) & " (" & Me.Options.FilePath & ")"
         Else
             Me.Text = Me.Options.SimulationName

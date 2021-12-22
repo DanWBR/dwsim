@@ -1,4 +1,5 @@
-﻿using DWSIM.Simulate365.Services;
+﻿using DWSIM.Simulate365.Models;
+using DWSIM.Simulate365.Services;
 using DWSIM.UI.Web;
 using Microsoft.Web.WebView2.Core;
 using Microsoft.Web.WebView2.WinForms;
@@ -66,7 +67,7 @@ namespace DWSIM.Simulate365.FormFactories
         }
 
 
-        public S365DashboardOpenFile ShowOpenDialog()
+        public S365File ShowOpenDialog()
         {
             var navigationPath = "filepicker/open";
             var initialUrl = $"{navigationPath}";
