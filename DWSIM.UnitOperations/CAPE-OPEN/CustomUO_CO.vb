@@ -269,7 +269,7 @@ Namespace UnitOperations.CAPEOPENWrappers
 
                         Dim locals As New PyDict()
 
-                        Dim sys As Object = PythonEngine.ImportModule("sys")
+                        Dim sys As Object = Py.Import("sys")
 
                         Dim codeToRedirectOutput As String = "import sys" & vbCrLf + "from io import BytesIO as StringIO" & vbCrLf + "sys.stdout = mystdout = StringIO()" & vbCrLf + "sys.stdout.flush()" & vbCrLf + "sys.stderr = mystderr = StringIO()" & vbCrLf + "sys.stderr.flush()"
                         PythonEngine.RunSimpleString(codeToRedirectOutput)
@@ -296,7 +296,7 @@ Namespace UnitOperations.CAPEOPENWrappers
 
                         Dim txtcode As String = ""
                         txtcode += DirectCast(Me.Parameters(0), OptionParameter).Value
-                        PythonEngine.Exec(txtcode, Nothing, locals.Handle)
+                        PythonEngine.Exec(txtcode, Nothing, locals)
 
                     Catch ex As Exception
 

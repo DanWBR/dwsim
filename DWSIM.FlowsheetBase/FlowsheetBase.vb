@@ -2710,7 +2710,7 @@ Label_00CC:
 
                 Try
 
-                    Dim sys As Object = PythonEngine.ImportModule("sys")
+                    Dim sys As Object = Py.Import("sys")
 
                     Dim codeToRedirectOutput As String = "import sys" & vbCrLf + "from io import BytesIO as StringIO" & vbCrLf + "sys.stdout = mystdout = StringIO()" & vbCrLf + "sys.stdout.flush()" & vbCrLf + "sys.stderr = mystderr = StringIO()" & vbCrLf + "sys.stderr.flush()"
                     PythonEngine.RunSimpleString(codeToRedirectOutput)
@@ -2730,7 +2730,7 @@ Label_00CC:
                         locals.SetItem("Application", GetApplicationObject.ToPython)
                     End If
 
-                    PythonEngine.Exec(scripttext, Nothing, locals.Handle)
+                    PythonEngine.Exec(scripttext, Nothing, locals)
 
                     ShowMessage(sys.stdout.getvalue().ToString, IFlowsheet.MessageType.Information)
 
@@ -2752,7 +2752,7 @@ Label_00CC:
 
                 Try
 
-                    Dim sys As Object = PythonEngine.ImportModule("sys")
+                    Dim sys As Object = Py.Import("sys")
 
                     'If Not GlobalSettings.Settings.IsRunningOnMono() Then
                     Dim codeToRedirectOutput As String = "import sys" & vbCrLf + "from io import BytesIO as StringIO" & vbCrLf + "sys.stdout = mystdout = StringIO()" & vbCrLf + "sys.stdout.flush()" & vbCrLf + "sys.stderr = mystderr = StringIO()" & vbCrLf + "sys.stderr.flush()"
@@ -2774,7 +2774,7 @@ Label_00CC:
                         locals.SetItem("Application", GetApplicationObject.ToPython)
                     End If
 
-                    PythonEngine.Exec(scripttext, Nothing, locals.Handle)
+                    PythonEngine.Exec(scripttext, Nothing, locals)
 
                     'If Not GlobalSettings.Settings.IsRunningOnMono() Then
                     ShowMessage(sys.stdout.getvalue().ToString, IFlowsheet.MessageType.Information)

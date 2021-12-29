@@ -265,7 +265,7 @@ Imports IronPython.Hosting
 
             Try
 
-                Dim sys As Object = PythonEngine.ImportModule("sys")
+                Dim sys As Object = Py.Import("sys")
 
                 If Not GlobalSettings.Settings.IsRunningOnMono() Then
                     Dim codeToRedirectOutput As String = "import sys" & vbCrLf + "from io import BytesIO as StringIO" & vbCrLf + "sys.stdout = mystdout = StringIO()" & vbCrLf + "sys.stdout.flush()" & vbCrLf + "sys.stderr = mystderr = StringIO()" & vbCrLf + "sys.stderr.flush()"
@@ -280,7 +280,7 @@ Imports IronPython.Hosting
                 Dim Solver As New FlowsheetSolver.FlowsheetSolver
                 locals.SetItem("Solver", Solver.ToPython)
 
-                PythonEngine.Exec(scripttext, Nothing, locals.Handle)
+                PythonEngine.Exec(scripttext, Nothing, locals)
 
                 If Not GlobalSettings.Settings.IsRunningOnMono() Then
                     fsheet.WriteToLog(sys.stdout.getvalue().ToString, Color.Blue, MessageType.Information)
