@@ -192,6 +192,8 @@ Namespace Reactors
 
             For Each ar In Me.ReactionsSequence
 
+                DN.Clear()
+
                 IObj?.SetCurrent
 
                 Dim IObj2 As Inspector.InspectorItem = Inspector.Host.GetNewInspectorItem()
@@ -250,9 +252,11 @@ Namespace Reactors
                                     N0(sb.CompName) = ims.Phases(0).Compounds(sb.CompName).MoleFraction.GetValueOrDefault * ims.Phases(0).Properties.molarflow.GetValueOrDefault
                                 End If
                         End Select
+
                         If Not N00.ContainsKey(sb.CompName) Then
                             N00.Add(sb.CompName, ims.Phases(0).Compounds(sb.CompName).MolarFlow.GetValueOrDefault())
                         End If
+
                     Next
 
                     i += 1
@@ -413,7 +417,7 @@ Namespace Reactors
                         If Not DN.ContainsKey(sb.CompName) Then
                             DN.Add(sb.CompName, -xf(i) * rxn.Components(sb.CompName).StoichCoeff / scBC * nBC)
                         Else
-                            DN(sb.CompName) += -xf(i) * rxn.Components(sb.CompName).StoichCoeff / scBC * nBC
+                            DN(sb.CompName) = -xf(i) * rxn.Components(sb.CompName).StoichCoeff / scBC * nBC
                         End If
                     Next
 
@@ -424,8 +428,8 @@ Namespace Reactors
                 'final mole flows
 
                 For Each s1 As Compound In ims.Phases(0).Compounds.Values
-                    If N.ContainsKey(s1.Name) Then
-                        N(s1.Name) = N00(s1.Name) + DN(s1.Name)
+                    If DN.ContainsKey(s1.Name) Then
+                        N(s1.Name) += DN(s1.Name)
                         If N(s1.Name) < 0.0 Then N(s1.Name) = 0.0
                     End If
                 Next
@@ -448,7 +452,7 @@ Namespace Reactors
 
                 For Each s3 As Compound In ims.Phases(0).Compounds.Values
                     If N.ContainsKey(s3.Name) Then
-                        s3.MoleFraction = (N00(s3.Name) + DN(s3.Name)) / Nsum
+                        s3.MoleFraction = N(s3.Name) / Nsum
                     Else
                         s3.MoleFraction = s3.MoleFraction.GetValueOrDefault * ims.Phases(0).Properties.molarflow.GetValueOrDefault / Nsum
                     End If
@@ -477,7 +481,7 @@ Namespace Reactors
                         Me.DeltaQ = 0.0#
 
                         'Products Enthalpy (kJ/kg * kg/s = kW)
-                        Hp = Hr + Hid_p - Hid_r - DHr
+                        Hp = Hr - DHr
                         Hp = Hp / W
 
                         IObj2?.Paragraphs.Add(String.Format("Products Enthalpy: {0} kJ/kg", Hp))
