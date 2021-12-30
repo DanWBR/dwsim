@@ -159,11 +159,11 @@ Namespace Reactors
                             Case PhaseName.Liquid
                                 val1 = ims.Phases(3).Properties.molecularWeight.GetValueOrDefault
                                 val2 = ims.Phases(3).Properties.density.GetValueOrDefault
-                                amounts(sb.CompName) = val1 / val2
+                                amounts(sb.CompName) = val1 / val2 / 1000.0
                             Case PhaseName.Mixture
                                 val1 = ims.Phases(0).Properties.molecularWeight.GetValueOrDefault
                                 val2 = ims.Phases(0).Properties.density.GetValueOrDefault
-                                amounts(sb.CompName) = val1 / val2
+                                amounts(sb.CompName) = val1 / val2 / 1000.0
                         End Select
                     Case ReactionBasis.PartialPress
                         Z = ims.Phases(2).Properties.compressibilityFactor.GetValueOrDefault
