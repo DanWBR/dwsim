@@ -306,7 +306,6 @@ Namespace UnitOperations
                     Try
 
                         Dim sys As Object = Py.Import("sys")
-
                         Dim codeToRedirectOutput As String = "import sys" & vbCrLf + "from io import BytesIO as StringIO" & vbCrLf + "sys.stdout = mystdout = StringIO()" & vbCrLf + "sys.stdout.flush()" & vbCrLf + "sys.stderr = mystderr = StringIO()" & vbCrLf + "sys.stderr.flush()"
                         PythonEngine.RunSimpleString(codeToRedirectOutput)
 
@@ -344,7 +343,9 @@ Namespace UnitOperations
 
                         PythonEngine.Exec(txtcode, Nothing, locals)
 
-                        FlowSheet.ShowMessage(sys.stdout.getvalue().ToString(), IFlowsheet.MessageType.Information)
+                        If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                            FlowSheet.ShowMessage(sys.stdout.getvalue().ToString(), IFlowsheet.MessageType.Information)
+                        End If
 
                         OutputVariables.Clear()
                         Dim i As Integer = 0

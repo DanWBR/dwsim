@@ -2732,7 +2732,9 @@ Label_00CC:
 
                     PythonEngine.Exec(scripttext, Nothing, locals)
 
-                    ShowMessage(sys.stdout.getvalue().ToString, IFlowsheet.MessageType.Information)
+                    If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                        ShowMessage(sys.stdout.getvalue().ToString, IFlowsheet.MessageType.Information)
+                    End If
 
                 Catch ex As Exception
 
@@ -2776,9 +2778,9 @@ Label_00CC:
 
                     PythonEngine.Exec(scripttext, Nothing, locals)
 
-                    'If Not GlobalSettings.Settings.IsRunningOnMono() Then
-                    ShowMessage(sys.stdout.getvalue().ToString, IFlowsheet.MessageType.Information)
-                    'End If
+                    If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                        ShowMessage(sys.stdout.getvalue().ToString, IFlowsheet.MessageType.Information)
+                    End If
 
                 Catch ex As Exception
 
