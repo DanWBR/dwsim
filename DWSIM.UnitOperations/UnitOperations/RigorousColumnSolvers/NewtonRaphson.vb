@@ -683,7 +683,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         spval1 = SystemsOfUnits.Converter.ConvertToSI(specs("C").SpecUnit, specs("C").SpecValue)
                 End Select
                 spci1 = specs("C").ComponentIndex
-                Select Case specs("C").SType
+                Select Case specs("R").SType
                     Case ColumnSpec.SpecType.Component_Fraction,
                           ColumnSpec.SpecType.Stream_Ratio,
                           ColumnSpec.SpecType.Component_Recovery
