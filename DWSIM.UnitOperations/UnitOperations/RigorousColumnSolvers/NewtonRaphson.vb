@@ -92,7 +92,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Dim doparallel As Boolean = Settings.EnableParallelProcessing
 
             Dim VSS, LSS, F, Q, P, HF, eff As Double()
-            Dim fc()() As Double
             Dim spval1, spval2, spfval1, spfval2 As Double
             Dim spci1, spci2 As Integer
             Dim coltype As Column.ColType = _coltype
@@ -102,7 +101,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             P = _P
             HF = _HF
             eff = _eff
-            fc = _fc
 
             spval1 = _spval1
             spval2 = _spval2
@@ -119,7 +117,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Dim sumF As Double = 0
             Dim sumLSS As Double = 0
             Dim sumVSS As Double = 0
-            Dim Tj(ns), Tj_ant(ns), vc(ns)(), lc(ns)(), zc(ns)(), Vj(ns), Lj(ns), xc(ns)(), yc(ns)(), Kval(ns)() As Double
+            Dim Tj(ns), Tj_ant(ns), vc(ns)(), lc(ns)(), zc(ns)(), Vj(ns), Lj(ns), xc(ns)(), yc(ns)(), Kval(ns)(), fc(ns)() As Double
 
             For i = 0 To ns
                 Array.Resize(lc(i), nc)
@@ -127,6 +125,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Array.Resize(zc(i), nc)
                 Array.Resize(xc(i), nc)
                 Array.Resize(yc(i), nc)
+                Array.Resize(fc(i), nc)
                 Array.Resize(Kval(i), nc)
             Next
 
@@ -190,6 +189,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             For i = 0 To ns
                 zc(i) = _fc(i).NormalizeY()
+                fc(i) = _fc(i).MultiplyConstY(F(i))
             Next
 
             sumF = 0
@@ -730,8 +730,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     lc(i)(j) = x(i)(j) * L(i)
                     xc(i)(j) = x(i)(j)
                     yc(i)(j) = y(i)(j)
-                    zc(i)(j) = z(i)(j)
-                    fc(i)(j) = zc(i)(j) * F(i)
                     Tj(i) = T(i)
                     If vc(i)(j) > maxvc(i) Then maxvc(i) = vc(i)(j)
                     If lc(i)(j) > maxlc(i) Then maxlc(i) = lc(i)(j)
