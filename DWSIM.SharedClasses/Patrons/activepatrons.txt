@@ -25,6 +25,7 @@ Donald Gongaware
 Dorivaldo Junior
 Doug Palfreyman
 Emanuel Santos
+Евгений Иванчиков
 Frank Mittricker
 Filippo Borroni
 Gokhan Candan
@@ -73,7 +74,6 @@ Richard Huntington
 Roland Berger
 Rupert Easter
 Ryszard Sadowski
-Shami Al Gawzi
 Steven Sandoval
 Tibor Lányi
 Tony Diocee
