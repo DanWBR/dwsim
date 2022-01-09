@@ -626,6 +626,8 @@ Namespace Enums.GraphicObjects
 
         Input
 
+        GO_HTMLText
+
     End Enum
 
     Public Enum ShapeIcon

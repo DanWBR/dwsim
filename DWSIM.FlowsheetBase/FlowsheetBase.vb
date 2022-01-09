@@ -154,6 +154,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                         gobj.ObjectType = ObjectType.GO_MasterTable Or
                         gobj.ObjectType = ObjectType.GO_SpreadsheetTable Or
                         gobj.ObjectType = ObjectType.GO_Text Or
+                        gobj.ObjectType = ObjectType.GO_HTMLText Or
                         gobj.ObjectType = ObjectType.GO_Chart Then
 
                         Me.FlowsheetSurface.DeleteSelectedObject(gobj)

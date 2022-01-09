@@ -178,6 +178,22 @@ Public Class FormEditGraphicObject
 
                 End With
 
+            ElseIf gobj.ObjectType = ObjectType.GO_HTMLText Then
+
+                With Me.PGEx2
+
+                    .Item.Clear()
+
+                    .Item.Add(DWSIM.App.GetLocalString("Width"), gobj, "Width", False, "", DWSIM.App.GetLocalString("Width"), True)
+                    .Item(.Item.Count - 1).Tag2 = "Width"
+                    .Item.Add(DWSIM.App.GetLocalString("Height"), gobj, "Height", False, "", DWSIM.App.GetLocalString("Height"), True)
+                    .Item(.Item.Count - 1).Tag2 = "Height"
+
+                    .PropertySort = PropertySort.Categorized
+                    .ShowCustomProperties = True
+
+                End With
+
             ElseIf gobj.ObjectType = ObjectType.GO_Image Then
 
                 With Me.PGEx2

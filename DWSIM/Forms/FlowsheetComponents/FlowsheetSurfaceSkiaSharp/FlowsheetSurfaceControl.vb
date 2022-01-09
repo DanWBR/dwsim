@@ -80,6 +80,12 @@ Public Class FlowsheetSurfaceControl
         Else
 
             Select Case Me.FlowsheetSurface.SelectedObject.ObjectType
+                Case ObjectType.GO_HTMLText
+                    Dim rtg = DirectCast(FlowsheetSurface.SelectedObject, Drawing.SkiaSharp.GraphicObjects.HTMLTextGraphic)
+                    Dim f As New FormHTMLEditor()
+                    f.Editor1.Html = rtg.Text
+                    f.ShowDialog(Me)
+                    rtg.Text = f.Editor1.Html
                 Case ObjectType.GO_Table
                     Dim f As New FormConfigurePropertyTable() With {.Table = FlowsheetSurface.SelectedObject}
                     f.ShowDialog(Me)

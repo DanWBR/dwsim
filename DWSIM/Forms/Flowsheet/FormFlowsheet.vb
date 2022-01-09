@@ -1204,7 +1204,7 @@ Public Class FormFlowsheet
                     DWSIM.App.HelpRequested("SO_Adjust.htm")
                 Case ObjectType.OT_Spec
                     DWSIM.App.HelpRequested("SO_Specification.htm")
-                Case ObjectType.GO_Text
+                Case ObjectType.GO_Text, ObjectType.GO_HTMLText
                     DWSIM.App.HelpRequested("GO_Textbox.htm")
                 Case ObjectType.GO_Image
                     DWSIM.App.HelpRequested("GO_Picture.htm")
@@ -1556,6 +1556,8 @@ Public Class FormFlowsheet
                         msgresult = MessageBox.Show(DWSIM.App.GetLocalString("Deleterectangle"), DWSIM.App.GetLocalString("Excluirobjeto"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                     ElseIf SelectedObj.ObjectType = ObjectType.GO_Text Then
                         msgresult = MessageBox.Show(DWSIM.App.GetLocalString("Excluiracaixadetexto"), DWSIM.App.GetLocalString("Excluirobjeto"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                    ElseIf SelectedObj.ObjectType = ObjectType.GO_HTMLText Then
+                        msgresult = MessageBox.Show(DWSIM.App.GetLocalString("Excluiracaixadetexto"), DWSIM.App.GetLocalString("Excluirobjeto"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                     ElseIf SelectedObj.ObjectType = ObjectType.GO_MasterTable Then
                         msgresult = MessageBox.Show(DWSIM.App.GetLocalString("Excluir") & DirectCast(gobj, MasterTableGraphic).HeaderText & "?", DWSIM.App.GetLocalString("Excluirobjeto"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                     ElseIf SelectedObj.ObjectType = ObjectType.GO_Table Then
@@ -1609,6 +1611,8 @@ Public Class FormFlowsheet
                         ElseIf SelectedObj.ObjectType = ObjectType.GO_MasterTable Then
                             Me.FormSurface.FlowsheetSurface.DeleteSelectedObject(gobj)
                         ElseIf SelectedObj.ObjectType = ObjectType.GO_Text Then
+                            Me.FormSurface.FlowsheetSurface.DeleteSelectedObject(gobj)
+                        ElseIf SelectedObj.ObjectType = ObjectType.GO_HTMLText Then
                             Me.FormSurface.FlowsheetSurface.DeleteSelectedObject(gobj)
                         ElseIf SelectedObj.ObjectType = ObjectType.GO_FloatingTable Then
                             Me.FormSurface.FlowsheetSurface.DeleteSelectedObject(gobj)
@@ -3559,6 +3563,19 @@ Public Class FormFlowsheet
         Return Path.GetDirectoryName(FlowsheetOptions.FilePath)
 
     End Function
+
+    Private Sub tsmiRichText_Click(sender As Object, e As EventArgs) Handles tsmiRichText.Click
+
+        Dim myTextObject As New HTMLTextGraphic(30, 30)
+        Dim gObj As GraphicObject = Nothing
+        gObj = myTextObject
+        gObj.Name = "RICHTEXT-" & Guid.NewGuid.ToString
+        gObj.Tag = "RICHTEXT" & ((From t As GraphicObject In Me.FormSurface.FlowsheetSurface.DrawingObjects Select t Where t.ObjectType = ObjectType.GO_HTMLText).Count + 1).ToString
+        gObj.AutoSize = True
+        Me.FormSurface.FlowsheetSurface.DrawingObjects.Add(gObj)
+        Me.FormSurface.Invalidate()
+
+    End Sub
 
     Public Sub ClearLog() Implements IFlowsheet.ClearLog
 

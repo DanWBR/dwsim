@@ -1523,6 +1523,7 @@ namespace DWSIM.UI.Forms
                                 selctxmenu.Items.Add(delitem);
                                 break;
                             case Interfaces.Enums.GraphicObjects.ObjectType.GO_Text:
+                            case Interfaces.Enums.GraphicObjects.ObjectType.GO_HTMLText:
                             case Interfaces.Enums.GraphicObjects.ObjectType.GO_Image:
                             case Interfaces.Enums.GraphicObjects.ObjectType.GO_Chart:
                                 selctxmenu.Items.Clear();
@@ -2357,6 +2358,25 @@ namespace DWSIM.UI.Forms
                 else if (selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_Chart)
                 {
                     var editor = new DWSIM.UI.Desktop.Editors.Charts.ChartObjectEditor((OxyPlotGraphic)selobj);
+                    editor.ShowInTaskbar = true;
+                    editor.Topmost = true;
+                    editor.Show();
+                }
+                else if (selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_HTMLText)
+                {
+                    var txtobj = (TextGraphic)selobj;
+                    var dyn1 = new DynamicLayout();
+                    var fontsizes = new List<string>() { "6", "7", "8", "9", "10", "11", "12", "13", "14", "16", "18", "20", "22", "24" };
+                    dyn1.CreateAndAddDropDownRow("Font size", fontsizes, fontsizes.IndexOf(txtobj.Size.ToString("N0")), (sender, e) => txtobj.Size = double.Parse(fontsizes[sender.SelectedIndex]));
+                    var container = new TableLayout { Padding = new Padding(10), Spacing = new Size(5, 5) };
+                    container.Rows.Add(new TableRow(dyn1));
+                    var txt = new TextArea { Text = txtobj.Text };
+                    txt.TextChanged += (sender2, e2) =>
+                    {
+                        txtobj.Text = txt.Text;
+                    };
+                    container.Rows.Add(new TableRow(txt));
+                    var editor = UI.Shared.Common.GetDefaultEditorForm("Edit Text Object", 500, 500, container, false);
                     editor.ShowInTaskbar = true;
                     editor.Topmost = true;
                     editor.Show();

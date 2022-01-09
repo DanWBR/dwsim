@@ -222,6 +222,7 @@ Public Class FlowsheetSurface_SkiaSharp
             FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.RefluxedAbsorber And
             FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.GO_Rectangle And
             FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.GO_Chart And
+            FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.GO_HTMLText And
             FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.GO_Text Then
 
             Me.RecalcularToolStripMenuItem.Visible = True
@@ -1508,6 +1509,7 @@ Public Class FlowsheetSurface_SkiaSharp
         For Each obj In Me.Flowsheet.Collections.FlowsheetObjectCollection.Values
             If obj.GraphicObject.Tag <> refobj.Tag Then
                 If obj.GraphicObject.ObjectType <> ObjectType.GO_Text And
+                    obj.GraphicObject.ObjectType <> ObjectType.GO_HTMLText And
                     obj.GraphicObject.ObjectType <> ObjectType.GO_FloatingTable And
                     obj.GraphicObject.ObjectType <> ObjectType.GO_MasterTable And
                     obj.GraphicObject.ObjectType <> ObjectType.GO_SpreadsheetTable And
