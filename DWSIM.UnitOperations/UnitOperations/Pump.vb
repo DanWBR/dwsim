@@ -441,17 +441,7 @@ Namespace UnitOperations
 
         Public Overrides Sub RunDynamicModel()
 
-            Select Case CalcMode
-
-                Case CalculationMode.Curves, CalculationMode.Delta_P, CalculationMode.OutletPressure
-
-                    Throw New Exception("This calculation mode is not supported while in Dynamic Mode.")
-
-                Case Else
-
-                    Calculate()
-
-            End Select
+            Calculate()
 
         End Sub
 

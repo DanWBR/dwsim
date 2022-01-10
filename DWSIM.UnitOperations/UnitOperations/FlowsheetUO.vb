@@ -181,7 +181,10 @@ Label_00CC:
                             Do While True
                                 count = stream.Read(buffer, 0, buffer.Length)
                                 If (count <= 0) Then
-                                    fullname = pathtosave + Path.GetFileName(entry.Name)
+                                    Dim extension = Path.GetExtension(entry.Name).ToLower()
+                                    If extension = ".xml" Then
+                                        fullname = pathtosave + Path.GetFileName(entry.Name)
+                                    End If
                                     GoTo Label_00CC
                                 End If
                                 stream2.Write(buffer, 0, count)

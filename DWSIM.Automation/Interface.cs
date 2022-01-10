@@ -10,6 +10,7 @@ using DWSIM.UI.Desktop.Shared;
 using System.Xml.Linq;
 using DWSIM.UnitOperations.UnitOperations.Auxiliary;
 using System.IO;
+using System.Reflection;
 
 namespace DWSIM.Automation
 {
@@ -144,11 +145,27 @@ namespace DWSIM.Automation
         public Automation2()
         {
             GlobalSettings.Settings.AutomationMode = true;
+            AppDomain currentDomain = AppDomain.CurrentDomain;
+            currentDomain.AssemblyResolve += new ResolveEventHandler(LoadAssembly);
             Console.WriteLine("Initializing DWSIM Automation Interface...");
             app = UI.Desktop.Program.MainApp(null);
             app.Attach(this);
             FlowsheetBase.FlowsheetBase.AddPropPacks();
             Console.WriteLine("DWSIM Automation Interface initialized successfully.");
+        }
+
+        static Assembly LoadAssembly(object sender, ResolveEventArgs args)
+        {
+            string assemblyPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), new AssemblyName(args.Name).Name + ".dll");
+            if (!File.Exists(assemblyPath))
+            {
+                return null;
+            }
+            else
+            {
+                Assembly assembly = Assembly.LoadFrom(assemblyPath);
+                return assembly;
+            }
         }
 
         public Interfaces.IFlowsheet LoadFlowsheet(string filepath)

@@ -975,7 +975,6 @@ Namespace Reactors
                         esolv = FlowSheet.ExternalSolvers(ExternalSolverID)
                     End If
 
-
                     Do
 
                         deltaV = deltaV0
