@@ -250,7 +250,10 @@ Namespace GraphicObjects.Shapes
                         ax = Me.X + (Me.Width - (trect.Right - trect.Left)) / 2
                         ay = Me.Y + (Me.Height - (trect.Top - trect.Bottom)) / 2
 
-                        canvas.DrawText("PS", ax, ay, tpaint)
+                        Using New SKAutoCanvasRestore(canvas)
+                            StraightCanvas(canvas)
+                            canvas.DrawText("PS", ax, ay, tpaint)
+                        End Using
 
                     Case 1
 
@@ -284,7 +287,10 @@ Namespace GraphicObjects.Shapes
                         ax = Me.X + (Me.Width - (trect.Right - trect.Left)) / 2
                         ay = Me.Y + (Me.Height - (trect.Top - trect.Bottom)) / 2
 
-                        canvas.DrawText("PS", ax, ay, tpaint)
+                        Using New SKAutoCanvasRestore(canvas)
+                            StraightCanvas(canvas)
+                            canvas.DrawText("PS", ax, ay, tpaint)
+                        End Using
 
                     Case 2
 

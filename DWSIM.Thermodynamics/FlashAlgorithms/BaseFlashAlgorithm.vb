@@ -1,5 +1,5 @@
 '    Flash Algorithm Abstract Base Class
-'    Copyright 2010-2021 Daniel Wagner O. de Medeiros
+'    Copyright 2010-2022 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '

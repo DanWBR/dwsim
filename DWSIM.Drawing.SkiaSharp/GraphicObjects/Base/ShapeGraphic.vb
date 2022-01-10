@@ -174,6 +174,8 @@ Namespace GraphicObjects
 
             Dim strx As Single = (Me.Width - tpaint.MeasureText(Me.Tag)) / 2
 
+            Dim bpaint As SKPaint = Nothing
+
             Select Case DrawMode
 
                 Case 1
@@ -188,8 +190,7 @@ Namespace GraphicObjects
 
                 Case Else
 
-                    Dim bpaint As New SKPaint()
-
+                    bpaint = New SKPaint()
                     With bpaint
                         .TextSize = FontSize
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
@@ -200,21 +201,11 @@ Namespace GraphicObjects
                         .BlendMode = SKBlendMode.Overlay
                     End With
 
-                    If ObjectType = ObjectType.EnergyStream Or
-                    ObjectType = ObjectType.MaterialStream Then
-                        g.DrawText(Me.Tag, X + strx, Y + Height + 10, bpaint)
-                    Else
-                        g.DrawText(Me.Tag, X + strx, Y + Height + 20, bpaint)
-                    End If
+                    g.DrawText(Me.Tag, X + strx, Y + Height + 14, bpaint)
 
             End Select
 
-            If ObjectType = ObjectType.EnergyStream Or
-                    ObjectType = ObjectType.MaterialStream Then
-                g.DrawText(Me.Tag, X + strx, Y + Height + 10, tpaint)
-            Else
-                g.DrawText(Me.Tag, X + strx, Y + Height + 20, tpaint)
-            End If
+            g.DrawText(Me.Tag, X + strx, Y + Height + 14, tpaint)
 
             If ObjectType = ObjectType.EnergyStream Then
                 If Flowsheet IsNot Nothing Then
@@ -225,7 +216,10 @@ Namespace GraphicObjects
                         Dim eformat = Flowsheet.FlowsheetOptions.NumberFormat
                         Dim estring = "[" + SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(eunit, eval).ToString(eformat) + " " + eunit + "]"
                         strx = (Me.Width - tpaint.MeasureText(estring)) / 2
-                        g.DrawText(estring, X + strx, Y + Height + 10 - tsize.Height + 3, tpaint)
+                        If bpaint IsNot Nothing Then
+                            g.DrawText(estring, X + strx, Y + Height + 14 - tsize.Height + 4, bpaint)
+                        End If
+                        g.DrawText(estring, X + strx, Y + Height + 14 - tsize.Height + 4, tpaint)
                     End If
                 End If
             End If
@@ -342,7 +336,10 @@ Namespace GraphicObjects
                 ay = Me.Y + Me.Height * 0.8 - size.Height
             End If
 
-            g.DrawText(TypeName, ax, ay, tPen)
+            Using New SKAutoCanvasRestore(g)
+                StraightCanvas(g)
+                g.DrawText(TypeName, ax, ay, tPen)
+            End Using
 
             'Draw interior packing
 

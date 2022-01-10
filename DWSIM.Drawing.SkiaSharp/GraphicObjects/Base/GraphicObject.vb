@@ -94,6 +94,19 @@ Namespace GraphicObjects
 
         End Function
 
+        Public Sub StraightCanvas(canvas As SKCanvas)
+
+            If FlippedV And Not FlippedH Then
+                canvas.Scale(1, -1, (X + Width / 2), (Y + Height / 2))
+            ElseIf FlippedH And Not FlippedV Then
+                canvas.Scale(-1, 1, (X + Width / 2), (Y + Height / 2))
+            ElseIf FlippedH And FlippedV Then
+                canvas.Scale(-1, -1, (X + Width / 2), (Y + Height / 2))
+            End If
+            canvas.RotateDegrees(Rotation, X + Width / 2, Y + Height / 2)
+
+        End Sub
+
         Public Overridable Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements ICustomXMLSerialization.LoadData
 
             XMLSerializer.XMLSerializer.Deserialize(Me, data)

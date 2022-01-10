@@ -777,7 +777,7 @@ Namespace GraphicObjects
                         Else
                             .Color = SKColors.Salmon
                         End If
-                        If AttachedFrom.ObjectType = ObjectType.OT_Recycle Or AttachedTo.ObjectType = ObjectType.OT_EnergyRecycle Then
+                        If AttachedFrom.ObjectType = ObjectType.OT_Recycle Or AttachedFrom.ObjectType = ObjectType.OT_EnergyRecycle Then
                             .PathEffect = SKPathEffect.CreateCompose(SKPathEffect.CreateDash(New Single() {2, 2}, 4), .PathEffect)
                         End If
                         If AttachedTo.ObjectType = ObjectType.OT_Recycle Or AttachedTo.ObjectType = ObjectType.OT_EnergyRecycle Then
