@@ -63,6 +63,12 @@ Namespace GraphicObjects
                 End With
             End If
 
+            If Flowsheet IsNot Nothing Then
+                If Text.Contains("{") And Text.Contains("}") Then
+
+                End If
+            End If
+
             Dim p As New SKPaint
             With p
                 p.IsAntialias = GlobalSettings.Settings.DrawingAntiAlias

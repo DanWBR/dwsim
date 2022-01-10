@@ -30,11 +30,13 @@ Namespace GraphicObjects
 
 #End Region
 
-        Public Property Text() As String = "TEXT (double-click to edit)"
+        Public Property Flowsheet As IFlowsheet
 
-        Public Property Size() As Double = 14.0#
+        Public Property Text As String = "TEXT (double-click to edit)"
 
-        Public Property Color() As SKColor = SKColors.Black
+        Public Property Size As Double = 14.0#
+
+        Public Property Color As SKColor = SKColors.Black
 
         Public Overrides Sub Draw(ByVal g As Object)
 

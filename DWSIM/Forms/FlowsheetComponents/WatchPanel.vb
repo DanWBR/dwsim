@@ -1,18 +1,18 @@
-﻿Imports DWSIM.SharedClasses.Extras
+﻿Imports DWSIM.Interfaces
+Imports DWSIM.SharedClasses.Extras
 
 <System.Serializable()> Public Class WatchPanel
 
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
-    Public items As New Dictionary(Of Integer, Extras.WatchItem)
     Private updating As Boolean = False
     Private loaded As Boolean = False
+
+    Public Property Flowsheet As IFlowsheet
 
     Private Sub frmWatch_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         ExtensionMethods.ChangeDefaultFont(Me)
-
-        If items Is Nothing Then items = New Dictionary(Of Integer, Extras.WatchItem)
 
     End Sub
 
@@ -28,19 +28,20 @@
 
         Me.dgv.Rows.Clear()
 
-        For Each kvp As KeyValuePair(Of Integer, WatchItem) In items
-            Dim newitem As WatchItem = kvp.Value
+        Dim i As Integer = 0
+        For Each newitem As IWatchItem In Flowsheet.WatchItems
             If My.Application.ActiveSimulation.Collections.FlowsheetObjectCollection.ContainsKey(newitem.ObjID) Then
                 Dim myobjname As String = My.Application.ActiveSimulation.Collections.FlowsheetObjectCollection(newitem.ObjID).GraphicObject.Tag
                 Dim propname As String = DWSIM.App.GetPropertyName(newitem.PropID)
                 Dim propvalue As Object = My.Application.ActiveSimulation.Collections.FlowsheetObjectCollection(newitem.ObjID).GetPropertyValue(newitem.PropID, My.Application.ActiveSimulation.Options.SelectedUnitSystem)
                 Dim propunit As String = My.Application.ActiveSimulation.Collections.FlowsheetObjectCollection(newitem.ObjID).GetPropertyUnit(newitem.PropID, My.Application.ActiveSimulation.Options.SelectedUnitSystem)
-                Me.dgv.Rows.Add(New Object() {kvp.Key, newitem.ObjID, newitem.PropID, newitem.ROnly, myobjname, propname & " (" & propunit & ")", propvalue})
-                If kvp.Value.ROnly Then
+                Me.dgv.Rows.Add(New Object() {i, newitem.ObjID, newitem.PropID, newitem.IsReadOnly, myobjname, propname & " (" & propunit & ")", propvalue})
+                If newitem.IsReadOnly Then
                     Me.dgv.Rows(Me.dgv.Rows.Count - 1).ReadOnly = True
                     Me.dgv.Rows(Me.dgv.Rows.Count - 1).Cells(6).Style.BackColor = Color.LightGray
                 End If
             End If
+            i += 1
         Next
 
         updating = False
@@ -54,7 +55,7 @@
         Dim toremove As New ArrayList
 
         For Each r As DataGridViewRow In dgv.Rows
-            Dim wi As WatchItem = items(r.Cells(0).Value)
+            Dim wi As WatchItem = Flowsheet.WatchItems(r.Cells(0).Value)
             If My.Application.ActiveSimulation.Collections.FlowsheetObjectCollection.ContainsKey(wi.ObjID) Then
                 Dim myobjname As String = My.Application.ActiveSimulation.Collections.FlowsheetObjectCollection(wi.ObjID).GraphicObject.Tag
                 Dim propname As String = DWSIM.App.GetPropertyName(wi.PropID)
@@ -67,7 +68,7 @@
                 End With
             Else
                 toremove.Add(Me.dgv.Rows.IndexOf(r))
-                items.Remove(r.Cells(0).Value)
+                Flowsheet.WatchItems.RemoveAt(r.Cells(0).Value)
             End If
         Next
         For Each r As Integer In toremove
@@ -89,7 +90,7 @@
 
         If Not newitem Is Nothing Then
             Dim id As Integer = New Random().Next
-            Me.items.Add(id, newitem)
+            Flowsheet.WatchItems.Add(newitem)
             Me.PopulateList()
         End If
 
@@ -101,7 +102,7 @@
 
             If e.ColumnIndex = 6 Then
 
-                Dim wi As WatchItem = items(Me.dgv.Rows(e.RowIndex).Cells(0).Value)
+                Dim wi As WatchItem = Flowsheet.WatchItems(Me.dgv.Rows(e.RowIndex).Cells(0).Value)
                 If My.Application.ActiveSimulation.Collections.FlowsheetObjectCollection.ContainsKey(wi.ObjID) Then
                     Dim myobjname As String = My.Application.ActiveSimulation.Collections.FlowsheetObjectCollection(wi.ObjID).GraphicObject.Tag
                     Dim propname As String = DWSIM.App.GetPropertyName(wi.PropID)
@@ -120,7 +121,7 @@
     Private Sub btnRemove_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRemove.Click
 
         For i As Integer = 0 To Me.dgv.SelectedRows.Count - 1
-            items.Remove(Me.dgv.SelectedRows(i).Cells(0).Value)
+            Flowsheet.WatchItems.Remove(Me.dgv.SelectedRows(i).Cells(0).Value)
             Me.dgv.Rows.Remove(Me.dgv.SelectedRows(i))
         Next
 

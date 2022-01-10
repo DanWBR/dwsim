@@ -70,6 +70,8 @@ Public Class FormFlowsheet
 
     Public Property LoaderExceptions As New List(Of Exception)
 
+    Public Property WatchItems As List(Of IWatchItem) = New List(Of IWatchItem) Implements IFlowsheet.WatchItems
+
     Public FrmStSim1 As New FormSimulSettings
     Public FrmPCBulk As New FormPCBulk
     Public FrmReport As New FormReportConfig
@@ -191,6 +193,7 @@ Public Class FormFlowsheet
         FormIntegratorControls.Flowsheet = Me
         FormFilesExplorer.Flowsheet = Me
         FormIPyConsole.Flowsheet = Me
+        FormWatch.Flowsheet = Me
 
         Me.MdiParent = My.Application.MainWindowForm
 

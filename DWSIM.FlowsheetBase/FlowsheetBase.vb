@@ -1243,6 +1243,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
         End Select
 
         If Not gObj Is Nothing Then
+            gObj.Flowsheet = Me
             gObj.PositionConnectors()
             gObj.Owner = SimulationObjects(gObj.Name)
             SimulationObjects(gObj.Name).SetFlowsheet(Me)
@@ -1877,6 +1878,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                         If obj.Name = "" Then obj.Name = obj.Tag
                         obj.CreateConnectors(0, 0)
                     End If
+                    obj.Flowsheet = Me
                     If Not TypeOf obj Is TableGraphic Then
                         FlowsheetSurface.DrawingObjects.Add(obj)
                         GraphicObjects.Add(obj.Name, obj)
@@ -2641,6 +2643,8 @@ Label_00CC:
     Public Property ExternalSolvers As Dictionary(Of String, IExternalSolverIdentification) = New Dictionary(Of String, IExternalSolverIdentification) Implements IFlowsheet.ExternalSolvers
 
     Public Property FileDatabaseProvider As IFileDatabaseProvider = New FileStorage.FileDatabaseProvider Implements IFlowsheet.FileDatabaseProvider
+
+    Public Property WatchItems As List(Of IWatchItem) = New List(Of IWatchItem) Implements IFlowsheet.WatchItems
 
     Public Sub RunScript(ScriptID As String)
         Dim script = Scripts(ScriptID)

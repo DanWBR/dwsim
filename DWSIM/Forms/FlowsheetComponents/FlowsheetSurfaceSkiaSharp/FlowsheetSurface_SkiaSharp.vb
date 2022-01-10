@@ -1445,6 +1445,8 @@ Public Class FlowsheetSurface_SkiaSharp
 
         newobj.SetFlowsheet(Flowsheet)
 
+        newobj.GraphicObject.Flowsheet = Flowsheet
+
         Return newobj.GraphicObject
 
     End Function
@@ -2403,6 +2405,7 @@ Public Class FlowsheetSurface_SkiaSharp
         End Select
 
         If Not gObj Is Nothing Then
+            gObj.Flowsheet = Flowsheet
             gObj.Owner = Me.Flowsheet.SimulationObjects(gObj.Name)
             Me.Flowsheet.SimulationObjects(gObj.Name).SetFlowsheet(Flowsheet)
             FlowsheetSurface.DrawingObjects.Add(gObj)
@@ -2424,7 +2427,6 @@ Public Class FlowsheetSurface_SkiaSharp
         End If
 
         SplitContainerHorizontal.Panel1.Cursor = Cursors.Arrow
-
 
         Return gObj.Name
 

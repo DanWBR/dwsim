@@ -165,6 +165,9 @@ Namespace GraphicObjects.Shapes
                     'Temperature/Pressure Gradients
             End Select
 
+            If Flowsheet IsNot Nothing Then
+
+            End If
 
 
         End Sub

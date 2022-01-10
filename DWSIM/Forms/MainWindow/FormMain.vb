@@ -1374,6 +1374,7 @@ Public Class FormMain
                         If obj.Name = "" Then obj.Name = obj.Tag
                         obj.CreateConnectors(0, 0)
                     End If
+                    obj.Flowsheet = form
                     form.FormSurface.FlowsheetSurface.DrawingObjects.Add(obj)
                     form.Collections.GraphicObjectCollection.Add(obj.Name, obj)
                 End If
@@ -2115,13 +2116,14 @@ Public Class FormMain
                 Try
                     Dim obj As New WatchItem
                     obj.LoadData(xel.Elements.ToList)
-                    form.FormWatch.items.Add(i, obj)
+                    form.WatchItems.Add(obj)
                 Catch ex As Exception
                     excs.Add(New Exception("Error Loading Watch Item Information", ex))
                 End Try
                 i += 1
             Next
 
+            form.FormWatch.Flowsheet = form
             form.FormWatch.PopulateList()
 
         End If
@@ -2666,13 +2668,14 @@ Public Class FormMain
                 Try
                     Dim obj As New WatchItem
                     obj.LoadData(xel.Elements.ToList)
-                    form.FormWatch.items.Add(i, obj)
+                    form.WatchItems.Add(obj)
                 Catch ex As Exception
                     excs.Add(New Exception("Error Loading Watch Item Information", ex))
                 End Try
                 i += 1
             Next
 
+            form.FormWatch.Flowsheet = form
             form.FormWatch.PopulateList()
 
         End If
@@ -3214,7 +3217,7 @@ Public Class FormMain
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("WatchItems"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("WatchItems")
 
-        For Each wi As WatchItem In form.FormWatch.items.Values
+        For Each wi As WatchItem In form.WatchItems
             xel.Add(New XElement("WatchItem", wi.SaveData().ToArray()))
         Next
 

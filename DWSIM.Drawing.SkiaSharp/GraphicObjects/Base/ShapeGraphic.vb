@@ -156,7 +156,6 @@ Namespace GraphicObjects
 
         End Sub
 
-
         Public Overridable Sub DrawTag(ByVal g As SKCanvas)
 
             Dim tpaint As New SKPaint()
@@ -201,11 +200,35 @@ Namespace GraphicObjects
                         .BlendMode = SKBlendMode.Overlay
                     End With
 
-                    g.DrawText(Me.Tag, X + strx, Y + Height + 20, bpaint)
+                    If ObjectType = ObjectType.EnergyStream Or
+                    ObjectType = ObjectType.MaterialStream Then
+                        g.DrawText(Me.Tag, X + strx, Y + Height + 10, bpaint)
+                    Else
+                        g.DrawText(Me.Tag, X + strx, Y + Height + 20, bpaint)
+                    End If
 
             End Select
 
-            g.DrawText(Me.Tag, X + strx, Y + Height + 20, tpaint)
+            If ObjectType = ObjectType.EnergyStream Or
+                    ObjectType = ObjectType.MaterialStream Then
+                g.DrawText(Me.Tag, X + strx, Y + Height + 10, tpaint)
+            Else
+                g.DrawText(Me.Tag, X + strx, Y + Height + 20, tpaint)
+            End If
+
+            If ObjectType = ObjectType.EnergyStream Then
+                If Flowsheet IsNot Nothing Then
+                    If Flowsheet.SimulationObjects.ContainsKey(Name) Then
+                        Dim estr = Flowsheet.SimulationObjects(Name)
+                        Dim eval = Convert.ToDouble(estr.GetPropertyValue("PROP_ES_0"))
+                        Dim eunit = Flowsheet.FlowsheetOptions.SelectedUnitSystem.heatflow
+                        Dim eformat = Flowsheet.FlowsheetOptions.NumberFormat
+                        Dim estring = "[" + SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(eunit, eval).ToString(eformat) + " " + eunit + "]"
+                        strx = (Me.Width - tpaint.MeasureText(estring)) / 2
+                        g.DrawText(estring, X + strx, Y + Height + 10 - tsize.Height + 3, tpaint)
+                    End If
+                End If
+            End If
 
         End Sub
 

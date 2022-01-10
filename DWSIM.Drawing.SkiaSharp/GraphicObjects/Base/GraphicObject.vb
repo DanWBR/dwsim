@@ -430,6 +430,9 @@ Namespace GraphicObjects
 
         Public Property DrawMode As Integer = 0 Implements IGraphicObject.DrawMode
 
+        <Xml.Serialization.XmlIgnore>
+        Public Property Flowsheet As IFlowsheet Implements IGraphicObject.Flowsheet
+
         Public Function GetForeColor() As SKColor
 
             Return Drawing.SkiaSharp.GraphicsSurface.ForegroundColor
