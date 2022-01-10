@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Spinner } from "@fluentui/react";
 import { ISelectedFolder } from "../interfaces/documents/document.interfaces";
+import { toast } from "react-toastify";
 declare const chrome: any;
 
 
@@ -11,6 +12,7 @@ export interface IInitializeDashboardProps {
     siteId: string;
     flowsheetsListId: string;
     flowsheetsDriveId: string;
+    isError: boolean;
 }
 
 export const user_token = window.localStorage.getItem("s365_local_user_token");
@@ -28,6 +30,7 @@ export function withInitializeDashboard(WrappedComponent: any) {
             super(props);
             this.state = {
                 isLoaded: false,
+                isError: false,
                 siteId: "",
                 flowsheetsDriveId: "",
                 flowsheetsListId: ""
@@ -76,6 +79,9 @@ export function withInitializeDashboard(WrappedComponent: any) {
                     });
                     const folder = await resp.json();
                     console.log("Initialize resp", folder);
+                    if(!folder || !folder.flowsheets.folderDriveId){
+                        throw "An error occurred while initializing Simulate 365 Dashboard.";
+                    }
                     const baseFolder = {
                         // webUrl: folder.flowsheets.parentName + "/" + folder.flowsheets.folderName,
                         webUrl: "/" + folder.flowsheets.folderName,
@@ -95,7 +101,10 @@ export function withInitializeDashboard(WrappedComponent: any) {
                 }
             }
             catch (error) {
+                this.setState({ isError: true });
                 console.log("An error occurred while initializing dashboard.", error);
+
+              //  toast.error("An error occurred while initializing dashboard.");
             } finally {
                 this.setState({ isLoaded: true });
             }
@@ -104,7 +113,22 @@ export function withInitializeDashboard(WrappedComponent: any) {
 
 
         render() {
-            const { isLoaded } = this.state;
+            const { isLoaded, isError } = this.state;
+
+
+            if(isError){
+             return   (<div style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    height: "100%"
+                }}>
+
+                  <span className="text-danger">An error occurred while initializing Simulate 365 Dashboard.</span>
+
+                </div>)
+            }
 
             if (!isLoaded) {
                 return (<div style={{
