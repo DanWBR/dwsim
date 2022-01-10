@@ -1354,7 +1354,7 @@ Public Class FormFlowsheet
         gObj.Name = "TEXT-" & Guid.NewGuid.ToString
         gObj.Tag = "TEXT" & ((From t As GraphicObject In Me.FormSurface.FlowsheetSurface.DrawingObjects Select t Where t.ObjectType = ObjectType.GO_Text).Count + 1).ToString
         gObj.AutoSize = True
-        gObj.Flowsheet = FormSurface
+        gObj.Flowsheet = Me
         gObj.ObjectType = ObjectType.GO_Text
         Me.FormSurface.FlowsheetSurface.DrawingObjects.Add(gObj)
         Me.FormSurface.Invalidate()
@@ -3576,7 +3576,7 @@ Public Class FormFlowsheet
         gObj.Name = "HTMLTEXT-" & Guid.NewGuid.ToString
         gObj.Tag = "HTMLTEXT" & ((From t As GraphicObject In Me.FormSurface.FlowsheetSurface.DrawingObjects Select t Where t.ObjectType = ObjectType.GO_HTMLText).Count + 1).ToString
         gObj.AutoSize = True
-        gObj.Flowsheet = FormSurface
+        gObj.Flowsheet = Me
         Me.FormSurface.FlowsheetSurface.DrawingObjects.Add(gObj)
         Me.FormSurface.Invalidate()
 

@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 7.1.2
+Version 7.2.0
 Copyright (c) 2017-2021 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,26 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
+
+Version 7.2.0
+
+- HTML Text Flowsheet Object (Classic UI)
+- Display Energy Stream values in Flowsheet
+- Display variables in plain/html text blocks in the flowsheet
+- Fixed issue #265 - subflowsheet initialization
+- Fixed kinetic/hetcat reaction conversion factors
+- Fixed Python issue on Linux
+- Added support for Python 3.10 (#246)
+- Fixed issue with Conversion Reactor
+- Fixed issue with automation and loading of System.Buffers
+- Fixed issue with diffusion coefficients
+- Fixed issue #263 - PR interaction parameters
+- Fixed issues with Dynamic mode
+- Fixed issues with CoolProp Property Packages
+- Fixed XML serialization issue
+- Fixed issue with UNIQUAC model
+- Fixed issue with Single Compound Flash
+- Other fixes and enhancements
 
 Version 7.1.2
 

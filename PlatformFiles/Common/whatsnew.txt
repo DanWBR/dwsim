@@ -1,8 +1,19 @@
-Version 7.1.2
+Version 7.2.0
 
-- Simultaneous Correction solver for Absorption/Extraction Column
-- Set Flowsheet Fonts for each Style
-- Fixed issue with GERG-2008 Property Package
-- Fixed an issue with Conversion Reactor
-- Fixed an error in density/compressibility calculation (EOS)
-- Fixed custom ordering of Master Property Table objects
+- HTML Text Flowsheet Object (Classic UI)
+- Display Energy Stream values in Flowsheet
+- Display variables in plain/html text blocks in the flowsheet
+- Fixed issue #265 - subflowsheet initialization
+- Fixed kinetic/hetcat reaction conversion factors
+- Fixed Python issue on Linux
+- Added support for Python 3.10 (#246)
+- Fixed issue with Conversion Reactor
+- Fixed issue with automation and loading of System.Buffers
+- Fixed issue with diffusion coefficients
+- Fixed issue #263 - PR interaction parameters
+- Fixed issues with Dynamic mode
+- Fixed issues with CoolProp Property Packages
+- Fixed XML serialization issue
+- Fixed issue with UNIQUAC model
+- Fixed issue with Single Compound Flash
+- Other fixes and enhancements
