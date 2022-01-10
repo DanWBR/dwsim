@@ -16,8 +16,8 @@ Namespace GraphicObjects
 
             Me.ObjectType = Interfaces.Enums.GraphicObjects.ObjectType.GO_HTMLText
 
-            Me.Height = 100
-            Me.Width = 200
+            Me.Height = 300
+            Me.Width = 400
 
         End Sub
 
