@@ -1354,6 +1354,7 @@ Public Class FormFlowsheet
         gObj.Name = "TEXT-" & Guid.NewGuid.ToString
         gObj.Tag = "TEXT" & ((From t As GraphicObject In Me.FormSurface.FlowsheetSurface.DrawingObjects Select t Where t.ObjectType = ObjectType.GO_Text).Count + 1).ToString
         gObj.AutoSize = True
+        gObj.Flowsheet = FormSurface
         gObj.ObjectType = ObjectType.GO_Text
         Me.FormSurface.FlowsheetSurface.DrawingObjects.Add(gObj)
         Me.FormSurface.Invalidate()
@@ -3572,9 +3573,10 @@ Public Class FormFlowsheet
         Dim myTextObject As New HTMLTextGraphic(30, 30)
         Dim gObj As GraphicObject = Nothing
         gObj = myTextObject
-        gObj.Name = "RICHTEXT-" & Guid.NewGuid.ToString
-        gObj.Tag = "RICHTEXT" & ((From t As GraphicObject In Me.FormSurface.FlowsheetSurface.DrawingObjects Select t Where t.ObjectType = ObjectType.GO_HTMLText).Count + 1).ToString
+        gObj.Name = "HTMLTEXT-" & Guid.NewGuid.ToString
+        gObj.Tag = "HTMLTEXT" & ((From t As GraphicObject In Me.FormSurface.FlowsheetSurface.DrawingObjects Select t Where t.ObjectType = ObjectType.GO_HTMLText).Count + 1).ToString
         gObj.AutoSize = True
+        gObj.Flowsheet = FormSurface
         Me.FormSurface.FlowsheetSurface.DrawingObjects.Add(gObj)
         Me.FormSurface.Invalidate()
 

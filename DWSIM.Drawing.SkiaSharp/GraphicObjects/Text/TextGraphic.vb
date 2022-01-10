@@ -30,8 +30,6 @@ Namespace GraphicObjects
 
 #End Region
 
-        Public Property Flowsheet As IFlowsheet
-
         Public Property Text As String = "TEXT (double-click to edit)"
 
         Public Property Size As Double = 14.0#
@@ -62,7 +60,9 @@ Namespace GraphicObjects
                 End With
             End If
 
-            Dim lines = Text.Split(vbLf)
+            Dim newtext = ReplaceVars(Text)
+
+            Dim lines = newtext.Split(vbLf)
 
             Dim newy As Integer = Y
 
@@ -82,10 +82,41 @@ Namespace GraphicObjects
                 tpaint.GetTextPath(Text.Replace("\n", vbCrLf), 0, 0).GetBounds(trect)
                 Height = trect.Height
                 Width = trect.Width
-                canvas.DrawText(Text, X, Y + MeasureString(Text, tpaint).Height, tpaint)
+                canvas.DrawText(Text, X, Y + MeasureString(newtext, tpaint).Height, tpaint)
             End Try
 
         End Sub
+
+        Private Function ReplaceVars(oldtext As String) As String
+
+            Dim newtext As String = oldtext
+            Dim i As Integer = 0
+
+            If Flowsheet IsNot Nothing Then
+                If Text.Contains("{") And Text.Contains("}") Then
+                    For i = 1 To Flowsheet.WatchItems.Count
+                        Dim objID = Flowsheet.WatchItems(i - 1).ObjID
+                        Dim propID = Flowsheet.WatchItems(i - 1).PropID
+                        If Flowsheet.SimulationObjects.ContainsKey(objID) Then
+                            Dim units = Flowsheet.SimulationObjects(objID).GetPropertyUnit(propID)
+                            Dim name = Flowsheet.GetTranslatedString(propID)
+                            newtext = newtext.Replace("{" + i.ToString() + ":N}", name)
+                            newtext = newtext.Replace("{" + i.ToString() + ":U}", units)
+                            Dim value = Flowsheet.SimulationObjects(objID).GetPropertyValue(propID).ToString()
+                            If Double.TryParse(value, New Double) Then
+                                Dim dval = Double.Parse(value).ToString(Flowsheet.FlowsheetOptions.NumberFormat)
+                                newtext = newtext.Replace("{" + i.ToString() + ":V}", dval)
+                            Else
+                                newtext = newtext.Replace("{" + i.ToString() + ":V}", value)
+                            End If
+                        End If
+                    Next
+                End If
+            End If
+
+            Return newtext
+
+        End Function
 
     End Class
 
