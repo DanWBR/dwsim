@@ -990,7 +990,30 @@ Public Class FormPCBulk
         'salvar ensaio
 
         Try
-            Dim myassay As SharedClasses.Utilities.PetroleumCharacterization.Assay.Assay = New SharedClasses.Utilities.PetroleumCharacterization.Assay.Assay(tb_mw.Text, tb_sg.Text, tb_wk.Text, SystemsOfUnits.Converter.ConvertToSI(su.temperature, tb_t1.Text), SystemsOfUnits.Converter.ConvertToSI(su.temperature, tb_t2.Text), SystemsOfUnits.Converter.ConvertToSI(su.cinematic_viscosity, tb_v1.Text), SystemsOfUnits.Converter.ConvertToSI(su.cinematic_viscosity, tb_v2.Text))
+            Dim myassay As SharedClasses.Utilities.PetroleumCharacterization.Assay.Assay
+            If tb_v1.Text = "" And tb_v2.Text = "" Then
+                myassay = New SharedClasses.Utilities.PetroleumCharacterization.Assay.Assay(tb_mw.Text, tb_sg.Text, tb_wk.Text,
+                        SystemsOfUnits.Converter.ConvertToSI(su.temperature, tb_t1.Text),
+                        SystemsOfUnits.Converter.ConvertToSI(su.temperature, tb_t2.Text), 0.0, 0.0)
+            ElseIf tb_v1.Text <> "" And tb_v2.Text = "" Then
+                myassay = New SharedClasses.Utilities.PetroleumCharacterization.Assay.Assay(tb_mw.Text, tb_sg.Text, tb_wk.Text,
+                        SystemsOfUnits.Converter.ConvertToSI(su.temperature, tb_t1.Text),
+                        SystemsOfUnits.Converter.ConvertToSI(su.temperature, tb_t2.Text),
+                        SystemsOfUnits.Converter.ConvertToSI(su.cinematic_viscosity, tb_v1.Text),
+                        SystemsOfUnits.Converter.ConvertToSI(su.cinematic_viscosity, 0.0))
+            ElseIf tb_v1.Text = "" And tb_v2.Text <> "" Then
+                myassay = New SharedClasses.Utilities.PetroleumCharacterization.Assay.Assay(tb_mw.Text, tb_sg.Text, tb_wk.Text,
+                        SystemsOfUnits.Converter.ConvertToSI(su.temperature, tb_t1.Text),
+                        SystemsOfUnits.Converter.ConvertToSI(su.temperature, tb_t2.Text),
+                        SystemsOfUnits.Converter.ConvertToSI(su.cinematic_viscosity, 0.0),
+                        SystemsOfUnits.Converter.ConvertToSI(su.cinematic_viscosity, tb_v2.Text))
+            Else
+                myassay = New SharedClasses.Utilities.PetroleumCharacterization.Assay.Assay(tb_mw.Text, tb_sg.Text, tb_wk.Text,
+                        SystemsOfUnits.Converter.ConvertToSI(su.temperature, tb_t1.Text),
+                        SystemsOfUnits.Converter.ConvertToSI(su.temperature, tb_t2.Text),
+                        SystemsOfUnits.Converter.ConvertToSI(su.cinematic_viscosity, tb_v1.Text),
+                        SystemsOfUnits.Converter.ConvertToSI(su.cinematic_viscosity, tb_v2.Text))
+            End If
             myassay.Name = Me.TextBox1.Text
             frm.Options.PetroleumAssays.Add(Guid.NewGuid().ToString, myassay)
             MessageBox.Show("Assay data was saved succesfully.", "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)

@@ -1411,7 +1411,8 @@ Public Class FormFlowsheet
 
     Private Sub CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem.Click
         RaiseEvent ToolOpened("Bulk C7+ Characterization", New EventArgs())
-        Me.FrmPCBulk.ShowDialog(Me)
+        FrmPCBulk = New FormPCBulk()
+        FrmPCBulk.ShowDialog(Me)
     End Sub
 
     Private Sub CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem.Click

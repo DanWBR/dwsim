@@ -121,7 +121,7 @@ Imports DWSIM.SharedClasses.Extras
     Private Sub btnRemove_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRemove.Click
 
         For i As Integer = 0 To Me.dgv.SelectedRows.Count - 1
-            Flowsheet.WatchItems.Remove(Me.dgv.SelectedRows(i).Cells(0).Value)
+            Flowsheet.WatchItems.RemoveAt(Me.dgv.SelectedRows(i).Cells(0).Value)
             Me.dgv.Rows.Remove(Me.dgv.SelectedRows(i))
         Next
 
