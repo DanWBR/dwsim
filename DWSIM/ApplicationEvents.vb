@@ -46,6 +46,8 @@ Namespace My
 
         Private Sub MyApplication_Startup(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.StartupEventArgs) Handles Me.Startup
 
+            AddHandler AppDomain.CurrentDomain.AssemblyResolve, New ResolveEventHandler(AddressOf LoadFromExtensionsFolder)
+
             If Environment.OSVersion.Version >= New Version(6, 3, 0) Then
                 'win 8.1 added support for per monitor dpi
                 If (Environment.OSVersion.Version >= New Version(10, 0, 15063)) Then
@@ -124,6 +126,25 @@ Namespace My
             End If
 
         End Sub
+
+        Private Shared Function LoadFromExtensionsFolder(ByVal sender As Object, ByVal args As ResolveEventArgs) As Assembly
+
+            Dim assemblyPath1 As String = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location), New AssemblyName(args.Name).Name + ".dll")
+            Dim assemblyPath2 As String = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location), "extenders", New AssemblyName(args.Name).Name + ".dll")
+
+            If Not File.Exists(assemblyPath1) Then
+                If Not File.Exists(assemblyPath2) Then
+                    Return Nothing
+                Else
+                    Dim assembly As Assembly = Assembly.LoadFrom(assemblyPath2)
+                    Return assembly
+                End If
+            Else
+                Dim assembly As Assembly = Assembly.LoadFrom(assemblyPath1)
+                Return assembly
+            End If
+
+        End Function
 
         Private Sub MyApplication_Shutdown(sender As Object, e As EventArgs) Handles Me.Shutdown
 
