@@ -269,12 +269,19 @@ Public Class FormSimulSettings
                 cbForcePhase.SelectedIndex = 3
         End Select
 
+        chkShowMSTemp.Checked = CurrentFlowsheet.Options.DisplayMaterialStreamTemperatureValue
+        chkShowMSPressure.Checked = CurrentFlowsheet.Options.DisplayMaterialStreamPressureValue
+        chkMSShowW.Checked = CurrentFlowsheet.Options.DisplayMaterialStreamMassFlowValue
+        chkMSSHowM.Checked = CurrentFlowsheet.Options.DisplayMaterialStreamMolarFlowValue
+        chkMSShowV.Checked = CurrentFlowsheet.Options.DisplayMaterialStreamVolFlowValue
+        chkMSShowE.Checked = CurrentFlowsheet.Options.DisplayMaterialStreamEnergyFlowValue
+        chkESShowE.Checked = CurrentFlowsheet.Options.DisplayEnergyStreamPowerValue
+
         Me.loaded = True
 
         ExtensionMethods.ChangeDefaultFont(Me)
 
         AddHandler DataGridView1.EditingControlShowing, AddressOf Me.myDataGridView_EditingControlShowing
-
 
     End Sub
 
@@ -1658,6 +1665,34 @@ Public Class FormSimulSettings
 
     Private Sub chkShowExtraPropertiesEditor_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowExtraPropertiesEditor.CheckedChanged
         CurrentFlowsheet.Options.DisplayUserDefinedPropertiesEditor = chkShowExtraPropertiesEditor.Checked
+    End Sub
+
+    Private Sub chkShowMSTemp_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowMSTemp.CheckedChanged
+        CurrentFlowsheet.Options.DisplayMaterialStreamTemperatureValue = chkShowMSTemp.Checked
+    End Sub
+
+    Private Sub chkShowMSPressure_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowMSPressure.CheckedChanged
+        CurrentFlowsheet.Options.DisplayMaterialStreamPressureValue = chkShowMSPressure.Checked
+    End Sub
+
+    Private Sub chkMSShowW_CheckedChanged(sender As Object, e As EventArgs) Handles chkMSShowW.CheckedChanged
+        CurrentFlowsheet.Options.DisplayMaterialStreamMassFlowValue = chkMSShowW.Checked
+    End Sub
+
+    Private Sub chkMSSHowM_CheckedChanged(sender As Object, e As EventArgs) Handles chkMSSHowM.CheckedChanged
+        CurrentFlowsheet.Options.DisplayMaterialStreamMolarFlowValue = chkMSSHowM.Checked
+    End Sub
+
+    Private Sub chkMSShowV_CheckedChanged(sender As Object, e As EventArgs) Handles chkMSShowV.CheckedChanged
+        CurrentFlowsheet.Options.DisplayMaterialStreamVolFlowValue = chkMSShowV.Checked
+    End Sub
+
+    Private Sub chkMSShowE_CheckedChanged(sender As Object, e As EventArgs) Handles chkMSShowE.CheckedChanged
+        CurrentFlowsheet.Options.DisplayMaterialStreamEnergyFlowValue = chkMSShowE.Checked
+    End Sub
+
+    Private Sub chkESShowE_CheckedChanged(sender As Object, e As EventArgs) Handles chkESShowE.CheckedChanged
+        CurrentFlowsheet.Options.DisplayEnergyStreamPowerValue = chkESShowE.Checked
     End Sub
 
     Private Sub FormSimulSettings_Shown(sender As Object, e As EventArgs) Handles Me.Shown

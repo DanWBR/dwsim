@@ -106,6 +106,10 @@ Partial Class FormSimulSettings
         Me.Column17 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.DataGridViewPP = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column10 = New System.Windows.Forms.DataGridViewImageColumn()
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Button8 = New System.Windows.Forms.Button()
         Me.PanelUnits = New System.Windows.Forms.Panel()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
@@ -134,6 +138,16 @@ Partial Class FormSimulSettings
         Me.Label2 = New System.Windows.Forms.Label()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.TabPage6 = New System.Windows.Forms.TabPage()
+        Me.GroupBox11 = New System.Windows.Forms.GroupBox()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.chkESShowE = New System.Windows.Forms.CheckBox()
+        Me.chkMSShowE = New System.Windows.Forms.CheckBox()
+        Me.chkMSShowV = New System.Windows.Forms.CheckBox()
+        Me.chkMSSHowM = New System.Windows.Forms.CheckBox()
+        Me.chkMSShowW = New System.Windows.Forms.CheckBox()
+        Me.chkShowMSPressure = New System.Windows.Forms.CheckBox()
+        Me.chkShowMSTemp = New System.Windows.Forms.CheckBox()
         Me.GroupBox14 = New System.Windows.Forms.GroupBox()
         Me.lblsla = New System.Windows.Forms.Label()
         Me.cbDefaultFloatingTableCompoundAmountBasis = New System.Windows.Forms.ComboBox()
@@ -152,10 +166,6 @@ Partial Class FormSimulSettings
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.OpenFileDialog3 = New System.Windows.Forms.OpenFileDialog()
         Me.FontDialog1 = New System.Windows.Forms.FontDialog()
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column10 = New System.Windows.Forms.DataGridViewImageColumn()
-        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox18.SuspendLayout()
@@ -181,6 +191,7 @@ Partial Class FormSimulSettings
         Me.GroupBox15.SuspendLayout()
         Me.TabPage4.SuspendLayout()
         Me.TabPage6.SuspendLayout()
+        Me.GroupBox11.SuspendLayout()
         Me.GroupBox14.SuspendLayout()
         Me.TabPage5.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -799,6 +810,40 @@ Partial Class FormSimulSettings
         Me.DataGridViewPP.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.ToolTip1.SetToolTip(Me.DataGridViewPP, resources.GetString("DataGridViewPP.ToolTip"))
         '
+        'DataGridViewTextBoxColumn1
+        '
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn1, "DataGridViewTextBoxColumn1")
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        Me.DataGridViewTextBoxColumn1.ReadOnly = True
+        '
+        'Column10
+        '
+        resources.ApplyResources(Me.Column10, "Column10")
+        Me.Column10.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom
+        Me.Column10.Name = "Column10"
+        Me.Column10.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn2
+        '
+        Me.DataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle4
+        Me.DataGridViewTextBoxColumn2.FillWeight = 40.0!
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
+        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        Me.DataGridViewTextBoxColumn2.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn3
+        '
+        Me.DataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewTextBoxColumn3.DefaultCellStyle = DataGridViewCellStyle5
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn3, "DataGridViewTextBoxColumn3")
+        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+        Me.DataGridViewTextBoxColumn3.ReadOnly = True
+        '
         'Button8
         '
         resources.ApplyResources(Me.Button8, "Button8")
@@ -1010,10 +1055,88 @@ Partial Class FormSimulSettings
         'TabPage6
         '
         resources.ApplyResources(Me.TabPage6, "TabPage6")
+        Me.TabPage6.Controls.Add(Me.GroupBox11)
         Me.TabPage6.Controls.Add(Me.GroupBox14)
         Me.TabPage6.Name = "TabPage6"
         Me.ToolTip1.SetToolTip(Me.TabPage6, resources.GetString("TabPage6.ToolTip"))
         Me.TabPage6.UseVisualStyleBackColor = True
+        '
+        'GroupBox11
+        '
+        resources.ApplyResources(Me.GroupBox11, "GroupBox11")
+        Me.GroupBox11.Controls.Add(Me.Label17)
+        Me.GroupBox11.Controls.Add(Me.Label16)
+        Me.GroupBox11.Controls.Add(Me.chkESShowE)
+        Me.GroupBox11.Controls.Add(Me.chkMSShowE)
+        Me.GroupBox11.Controls.Add(Me.chkMSShowV)
+        Me.GroupBox11.Controls.Add(Me.chkMSSHowM)
+        Me.GroupBox11.Controls.Add(Me.chkMSShowW)
+        Me.GroupBox11.Controls.Add(Me.chkShowMSPressure)
+        Me.GroupBox11.Controls.Add(Me.chkShowMSTemp)
+        Me.GroupBox11.Name = "GroupBox11"
+        Me.GroupBox11.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox11, resources.GetString("GroupBox11.ToolTip"))
+        '
+        'Label17
+        '
+        resources.ApplyResources(Me.Label17, "Label17")
+        Me.Label17.Name = "Label17"
+        Me.ToolTip1.SetToolTip(Me.Label17, resources.GetString("Label17.ToolTip"))
+        '
+        'Label16
+        '
+        resources.ApplyResources(Me.Label16, "Label16")
+        Me.Label16.Name = "Label16"
+        Me.ToolTip1.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip"))
+        '
+        'chkESShowE
+        '
+        resources.ApplyResources(Me.chkESShowE, "chkESShowE")
+        Me.chkESShowE.Name = "chkESShowE"
+        Me.ToolTip1.SetToolTip(Me.chkESShowE, resources.GetString("chkESShowE.ToolTip"))
+        Me.chkESShowE.UseVisualStyleBackColor = True
+        '
+        'chkMSShowE
+        '
+        resources.ApplyResources(Me.chkMSShowE, "chkMSShowE")
+        Me.chkMSShowE.Name = "chkMSShowE"
+        Me.ToolTip1.SetToolTip(Me.chkMSShowE, resources.GetString("chkMSShowE.ToolTip"))
+        Me.chkMSShowE.UseVisualStyleBackColor = True
+        '
+        'chkMSShowV
+        '
+        resources.ApplyResources(Me.chkMSShowV, "chkMSShowV")
+        Me.chkMSShowV.Name = "chkMSShowV"
+        Me.ToolTip1.SetToolTip(Me.chkMSShowV, resources.GetString("chkMSShowV.ToolTip"))
+        Me.chkMSShowV.UseVisualStyleBackColor = True
+        '
+        'chkMSSHowM
+        '
+        resources.ApplyResources(Me.chkMSSHowM, "chkMSSHowM")
+        Me.chkMSSHowM.Name = "chkMSSHowM"
+        Me.ToolTip1.SetToolTip(Me.chkMSSHowM, resources.GetString("chkMSSHowM.ToolTip"))
+        Me.chkMSSHowM.UseVisualStyleBackColor = True
+        '
+        'chkMSShowW
+        '
+        resources.ApplyResources(Me.chkMSShowW, "chkMSShowW")
+        Me.chkMSShowW.Name = "chkMSShowW"
+        Me.ToolTip1.SetToolTip(Me.chkMSShowW, resources.GetString("chkMSShowW.ToolTip"))
+        Me.chkMSShowW.UseVisualStyleBackColor = True
+        '
+        'chkShowMSPressure
+        '
+        resources.ApplyResources(Me.chkShowMSPressure, "chkShowMSPressure")
+        Me.chkShowMSPressure.Name = "chkShowMSPressure"
+        Me.ToolTip1.SetToolTip(Me.chkShowMSPressure, resources.GetString("chkShowMSPressure.ToolTip"))
+        Me.chkShowMSPressure.UseVisualStyleBackColor = True
+        '
+        'chkShowMSTemp
+        '
+        resources.ApplyResources(Me.chkShowMSTemp, "chkShowMSTemp")
+        Me.chkShowMSTemp.Name = "chkShowMSTemp"
+        Me.ToolTip1.SetToolTip(Me.chkShowMSTemp, resources.GetString("chkShowMSTemp.ToolTip"))
+        Me.chkShowMSTemp.UseVisualStyleBackColor = True
         '
         'GroupBox14
         '
@@ -1161,40 +1284,6 @@ Partial Class FormSimulSettings
         '
         Me.FontDialog1.ShowColor = True
         '
-        'DataGridViewTextBoxColumn1
-        '
-        resources.ApplyResources(Me.DataGridViewTextBoxColumn1, "DataGridViewTextBoxColumn1")
-        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-        Me.DataGridViewTextBoxColumn1.ReadOnly = True
-        '
-        'Column10
-        '
-        resources.ApplyResources(Me.Column10, "Column10")
-        Me.Column10.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom
-        Me.Column10.Name = "Column10"
-        Me.Column10.ReadOnly = True
-        '
-        'DataGridViewTextBoxColumn2
-        '
-        Me.DataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle4
-        Me.DataGridViewTextBoxColumn2.FillWeight = 40.0!
-        resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
-        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
-        Me.DataGridViewTextBoxColumn2.ReadOnly = True
-        '
-        'DataGridViewTextBoxColumn3
-        '
-        Me.DataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewTextBoxColumn3.DefaultCellStyle = DataGridViewCellStyle5
-        resources.ApplyResources(Me.DataGridViewTextBoxColumn3, "DataGridViewTextBoxColumn3")
-        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
-        Me.DataGridViewTextBoxColumn3.ReadOnly = True
-        '
         'FormSimulSettings
         '
         resources.ApplyResources(Me, "$this")
@@ -1238,6 +1327,8 @@ Partial Class FormSimulSettings
         Me.GroupBox15.PerformLayout()
         Me.TabPage4.ResumeLayout(False)
         Me.TabPage6.ResumeLayout(False)
+        Me.GroupBox11.ResumeLayout(False)
+        Me.GroupBox11.PerformLayout()
         Me.GroupBox14.ResumeLayout(False)
         Me.GroupBox14.PerformLayout()
         Me.TabPage5.ResumeLayout(False)
@@ -1373,4 +1464,14 @@ Partial Class FormSimulSettings
     Friend WithEvents Column10 As DataGridViewImageColumn
     Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
+    Friend WithEvents GroupBox11 As GroupBox
+    Friend WithEvents chkMSShowE As CheckBox
+    Friend WithEvents chkMSShowV As CheckBox
+    Friend WithEvents chkMSSHowM As CheckBox
+    Friend WithEvents chkMSShowW As CheckBox
+    Friend WithEvents chkShowMSPressure As CheckBox
+    Friend WithEvents chkShowMSTemp As CheckBox
+    Public WithEvents Label17 As Label
+    Public WithEvents Label16 As Label
+    Friend WithEvents chkESShowE As CheckBox
 End Class

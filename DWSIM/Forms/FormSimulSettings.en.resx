@@ -282,7 +282,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABo
-        MQAAAk1TRnQBSQFMAgEBCgEAAQQBDQEEAQ0BEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        MQAAAk1TRnQBSQFMAgEBCgEAARwBDQEcAQ0BEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABMAMAAQEBAAEgBgABMDEAAQEDOwFkAWUCUgH0AbICgQH/Aa8CgQH/AWICSAH2AUICQQFzIAADLQFG
         AVkCVgG+AVsCWQHEATECMAFNAWACWQHrAQABgQEAAf8DAwEEpAADKAE9AWQCXAHnAbICgQH/AcsBqwGJ
         Af8B0QG0AZUB/wG7AY4BgQH/AbUBhwGBAf8BqwKBAf8BYAJZAesDLQFGEAADHgErAVECTwGlA38B/gGP
@@ -935,14 +935,71 @@
   <data name="TabPage4.Text" xml:space="preserve">
     <value>System of Units</value>
   </data>
-  <data name="GroupBox14.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left</value>
+  <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
+    <value>81, 13</value>
   </data>
-  <data name="lblsla.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
+  <data name="Label17.Text" xml:space="preserve">
+    <value>Energy Streams</value>
+  </data>
+  <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 13</value>
+  </data>
+  <data name="Label16.Text" xml:space="preserve">
+    <value>Material Streams</value>
+  </data>
+  <data name="chkESShowE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 17</value>
+  </data>
+  <data name="chkESShowE.Text" xml:space="preserve">
+    <value>Display Power / Energy Flow</value>
+  </data>
+  <data name="chkMSShowE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 17</value>
+  </data>
+  <data name="chkMSShowE.Text" xml:space="preserve">
+    <value>Display Energy Flow</value>
+  </data>
+  <data name="chkMSShowV.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 17</value>
+  </data>
+  <data name="chkMSShowV.Text" xml:space="preserve">
+    <value>Display Volumetric Flow</value>
+  </data>
+  <data name="chkMSSHowM.Size" type="System.Drawing.Size, System.Drawing">
+    <value>114, 17</value>
+  </data>
+  <data name="chkMSSHowM.Text" xml:space="preserve">
+    <value>Display Molar Flow</value>
+  </data>
+  <data name="chkMSShowW.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 17</value>
+  </data>
+  <data name="chkMSShowW.Text" xml:space="preserve">
+    <value>Display Mass Flow</value>
+  </data>
+  <data name="chkShowMSPressure.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 17</value>
+  </data>
+  <data name="chkShowMSPressure.Text" xml:space="preserve">
+    <value>Display Pressure</value>
+  </data>
+  <data name="chkShowMSTemp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 17</value>
+  </data>
+  <data name="chkShowMSTemp.Text" xml:space="preserve">
+    <value>Display Temperature</value>
+  </data>
+  <data name="GroupBox11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>606, 6</value>
+  </data>
+  <data name="GroupBox11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>234, 435</value>
+  </data>
+  <data name="GroupBox11.Text" xml:space="preserve">
+    <value>Stream Properties</value>
   </data>
   <data name="lblsla.Location" type="System.Drawing.Point, System.Drawing">
-    <value>448, 407</value>
+    <value>8, 400</value>
   </data>
   <data name="lblsla.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 13</value>
@@ -952,9 +1009,6 @@
   </data>
   <data name="lblsla.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
-  </data>
-  <data name="cbDefaultFloatingTableCompoundAmountBasis.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
   </data>
   <data name="cbDefaultFloatingTableCompoundAmountBasis.Items" xml:space="preserve">
     <value>Molar Fractions</value>
@@ -975,13 +1029,13 @@
     <value>Volumetric Flows</value>
   </data>
   <data name="cbDefaultFloatingTableCompoundAmountBasis.Location" type="System.Drawing.Point, System.Drawing">
-    <value>620, 404</value>
+    <value>179, 397</value>
   </data>
   <data name="cbDefaultFloatingTableCompoundAmountBasis.Size" type="System.Drawing.Size, System.Drawing">
     <value>214, 21</value>
   </data>
   <data name="chkDisplayFloatingTableCompoundAmounts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 407</value>
+    <value>11, 368</value>
   </data>
   <data name="chkDisplayFloatingTableCompoundAmounts.Size" type="System.Drawing.Size, System.Drawing">
     <value>396, 17</value>
@@ -1011,7 +1065,7 @@
     <value>Select All</value>
   </data>
   <data name="PropertyListView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>830, 252</value>
+    <value>583, 214</value>
   </data>
   <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 13</value>
@@ -1025,14 +1079,11 @@
   <data name="Label14.Text" xml:space="preserve">
     <value>Select the properties to show on Floating Property Tables according to object type.</value>
   </data>
-  <data name="GroupBox14.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
   <data name="GroupBox14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+    <value>3, 8</value>
   </data>
   <data name="GroupBox14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>842, 438</value>
+    <value>595, 433</value>
   </data>
   <data name="GroupBox14.Text" xml:space="preserve">
     <value>Floating Property Tables and Property Lists</value>
@@ -1041,7 +1092,7 @@
     <value>848, 444</value>
   </data>
   <data name="TabPage6.Text" xml:space="preserve">
-    <value>Floating Tables and Property Lists</value>
+    <value>Object Properties</value>
   </data>
   <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
     <value>832, 303</value>
