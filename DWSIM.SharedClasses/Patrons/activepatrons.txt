@@ -13,7 +13,6 @@ Bruce Rising
 Bruce Logue
 Carlos G. C. Reetz
 Casey Houston
-Celso Félix
 Christian Hornhofer
 Christian Jordan
 Csaba Darok
@@ -52,6 +51,7 @@ Joseph Attia
 Karen Elrington
 Laércio Piva
 Lauterbach Verfahrenstechnik GmbH
+Leandro Favaretto
 Leonard Seed
 Les Waymont
 Lewis Estall
