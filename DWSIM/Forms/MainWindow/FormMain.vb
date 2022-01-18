@@ -848,7 +848,7 @@ Public Class FormMain
 
         PropertyPackages.Add(PCSAFTPP.ComponentName.ToString, PCSAFTPP)
 
-        Dim PR78PP As PengRobinsonPropertyPackage = New PengRobinsonPropertyPackage()
+        Dim PR78PP As PengRobinson1978PropertyPackage = New PengRobinson1978PropertyPackage()
         PR78PP.ComponentName = "Peng-Robinson 1978 (PR78)"
         PR78PP.ComponentDescription = DWSIM.App.GetLocalString("DescPengRobinson78PP")
 

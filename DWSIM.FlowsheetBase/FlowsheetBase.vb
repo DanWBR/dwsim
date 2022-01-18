@@ -2487,7 +2487,7 @@ Label_00CC:
 
         Dim t12 = TaskHelper.Run(Sub()
 
-                                     Dim PR78PP As PengRobinsonPropertyPackage = New PengRobinsonPropertyPackage()
+                                     Dim PR78PP As PengRobinson1978PropertyPackage = New PengRobinson1978PropertyPackage()
                                      PR78PP.ComponentName = "Peng-Robinson 1978 (PR78)"
                                      plist.Add(PR78PP)
 
