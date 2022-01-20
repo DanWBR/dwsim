@@ -1482,23 +1482,25 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                             While iex.InnerException IsNot Nothing
                                 baseexception = iex.InnerException
                             End While
-                            fgui.ShowMessage(baseexception.Message.ToString, IFlowsheet.MessageType.GeneralError, euid)
-                            'Console.WriteLine(baseexception.ToString)
-                            IObj?.Paragraphs.Add(baseexception.Message)
                         Next
                     Else
                         baseexception = ex
-                        If baseexception.InnerException IsNot Nothing Then
-                            While baseexception.InnerException.InnerException IsNot Nothing
-                                baseexception = baseexception.InnerException
-                                If baseexception Is Nothing Then Exit While
-                                If baseexception.InnerException Is Nothing Then Exit While
-                            End While
-                        End If
-                        fgui.ShowMessage(baseexception.Message.ToString, IFlowsheet.MessageType.GeneralError, euid)
-                        'Console.WriteLine(baseexception.ToString)
-                        IObj?.Paragraphs.Add(baseexception.Message)
+                        While baseexception.InnerException IsNot Nothing
+                            baseexception = baseexception.InnerException
+                        End While
                     End If
+                    Dim message = baseexception.Message
+                    Try
+                        Dim st As New StackTrace(baseexception, True)
+                        Dim frame As StackFrame = st.GetFrame(0)
+                        Dim line = frame.GetFileLineNumber().ToString()
+                        Dim dirName = New DirectoryInfo(frame.GetFileName).Name
+                        message += " (" + dirName + ", " + line + ")"
+                    Catch exs As Exception
+                    End Try
+                    fgui.ShowMessage(message, IFlowsheet.MessageType.GeneralError, euid)
+                    'Console.WriteLine(baseexception.ToString)
+                    IObj?.Paragraphs.Add(baseexception.Message)
                 Next
 
                 fs.Solved = False
