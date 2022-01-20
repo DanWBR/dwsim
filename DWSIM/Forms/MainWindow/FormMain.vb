@@ -3298,7 +3298,10 @@ Public Class FormMain
 
     Function LoadAndExtractXMLZIP(ByVal caminho As String, ProgressFeedBack As Action(Of Integer), Optional ByVal forcommandline As Boolean = False, Optional ByVal simulate365File As S365File = Nothing) As Interfaces.IFlowsheet
 
-        Dim pathtosave As String = My.Computer.FileSystem.SpecialDirectories.Temp + Path.DirectorySeparatorChar
+        Dim pathtosave As String = Path.Combine(My.Computer.FileSystem.SpecialDirectories.Temp, Guid.NewGuid().ToString())
+
+        Directory.CreateDirectory(pathtosave)
+
         Dim fullname As String = ""
 
         Dim pwd As String = Nothing
@@ -3320,7 +3323,7 @@ Label_00CC:
                 Do While (Not entry Is Nothing)
                     Dim fileName As String = Path.GetFileName(entry.Name)
                     If (fileName <> String.Empty) Then
-                        Using stream2 As FileStream = File.Create(pathtosave + Path.GetFileName(entry.Name))
+                        Using stream2 As FileStream = File.Create(Path.Combine(pathtosave, Path.GetFileName(entry.Name)))
                             Dim count As Integer = 2048
                             Dim buffer As Byte() = New Byte(2048) {}
                             Do While True
@@ -3328,9 +3331,9 @@ Label_00CC:
                                 If (count <= 0) Then
                                     Dim extension = Path.GetExtension(entry.Name).ToLower()
                                     If extension = ".xml" Then
-                                        fullname = pathtosave + Path.GetFileName(entry.Name)
+                                        fullname = Path.Combine(pathtosave, Path.GetFileName(entry.Name))
                                     ElseIf extension = ".db" Then
-                                        dbfile = pathtosave + Path.GetFileName(entry.Name)
+                                        dbfile = Path.Combine(pathtosave, Path.GetFileName(entry.Name))
                                     End If
                                     GoTo Label_00CC
                                 End If
@@ -3358,6 +3361,11 @@ Label_00CC:
         Catch ex As Exception
             MessageBox.Show(ex.ToString, DWSIM.App.GetLocalString("Erroaoabrirarquivo"), MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return Nothing
+        End Try
+
+        Try
+            Directory.Delete(pathtosave, True)
+        Catch ex As Exception
         End Try
 
     End Function
