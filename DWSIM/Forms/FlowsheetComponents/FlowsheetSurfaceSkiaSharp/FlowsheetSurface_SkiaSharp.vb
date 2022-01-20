@@ -223,6 +223,7 @@ Public Class FlowsheetSurface_SkiaSharp
             FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.GO_Rectangle And
             FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.GO_Chart And
             FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.GO_HTMLText And
+            FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.GO_Button And
             FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.GO_Text Then
 
             Me.RecalcularToolStripMenuItem.Visible = True
@@ -1512,6 +1513,7 @@ Public Class FlowsheetSurface_SkiaSharp
             If obj.GraphicObject.Tag <> refobj.Tag Then
                 If obj.GraphicObject.ObjectType <> ObjectType.GO_Text And
                     obj.GraphicObject.ObjectType <> ObjectType.GO_HTMLText And
+                    obj.GraphicObject.ObjectType <> ObjectType.GO_Button And
                     obj.GraphicObject.ObjectType <> ObjectType.GO_FloatingTable And
                     obj.GraphicObject.ObjectType <> ObjectType.GO_MasterTable And
                     obj.GraphicObject.ObjectType <> ObjectType.GO_SpreadsheetTable And
@@ -3329,9 +3331,6 @@ Public Class FlowsheetSurface_SkiaSharp
             btnRight.Height = 24
             btnLeft.Height = 24
             FlowsheetSurface.ControlPanelMode = True
-            GlobalSettings.Settings.DarkMode = True
-            Drawing.SkiaSharp.GraphicsSurface.BackgroundColor = SKColors.DimGray
-            Drawing.SkiaSharp.GraphicsSurface.ForegroundColor = SKColors.WhiteSmoke
             SplitContainerHorizontal.Panel2Collapsed = True
         Else
             btnDown.Visible = False
@@ -3343,9 +3342,6 @@ Public Class FlowsheetSurface_SkiaSharp
             btnRight.Height = 1
             btnLeft.Height = 1
             FlowsheetSurface.ControlPanelMode = False
-            GlobalSettings.Settings.DarkMode = False
-            Drawing.SkiaSharp.GraphicsSurface.BackgroundColor = SKColors.White
-            Drawing.SkiaSharp.GraphicsSurface.ForegroundColor = SKColors.Black
             SplitContainerHorizontal.Panel2Collapsed = False
         End If
         FControl.Invalidate()

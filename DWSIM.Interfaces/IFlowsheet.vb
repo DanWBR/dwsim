@@ -194,6 +194,8 @@
 
     Function GetScriptText(name As String) As String
 
+    Sub RunScript(name As String)
+
     Function GetSimulationFilePath() As String
 
     Function GetSimulationFileDirectory() As String

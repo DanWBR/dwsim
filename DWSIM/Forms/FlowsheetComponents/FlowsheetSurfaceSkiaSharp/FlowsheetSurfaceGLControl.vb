@@ -244,6 +244,10 @@ Public Class FlowsheetSurfaceGLControl
         Else
 
             Select Case Me.FlowsheetSurface.SelectedObject.ObjectType
+                Case ObjectType.GO_Button
+                    Dim btn = DirectCast(FlowsheetSurface.SelectedObject, Drawing.SkiaSharp.GraphicObjects.Shapes.ButtonGraphic)
+                    Dim f As New FormEditFlowsheetButton() With {.Flowsheet = FlowsheetObject, .ButtonObject = btn}
+                    f.ShowDialog(Me)
                 Case ObjectType.GO_HTMLText
                     Dim rtg = DirectCast(FlowsheetSurface.SelectedObject, Drawing.SkiaSharp.GraphicObjects.HTMLTextGraphic)
                     Dim f As New FormHTMLEditor()

@@ -13168,6 +13168,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Remover Botão?.
+        '''</summary>
+        Friend Shared ReadOnly Property RemoveButton() As String
+            Get
+                Return ResourceManager.GetString("RemoveButton", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Tem certeza de que deseja remover o conjunto de reações selecionado?.
         '''</summary>
         Friend Shared ReadOnly Property RemoverConjuntodeReacoesPergunta() As String

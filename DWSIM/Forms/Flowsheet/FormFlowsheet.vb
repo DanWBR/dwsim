@@ -1563,6 +1563,8 @@ Public Class FormFlowsheet
                         msgresult = MessageBox.Show(DWSIM.App.GetLocalString("Excluiracaixadetexto"), DWSIM.App.GetLocalString("Excluirobjeto"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                     ElseIf SelectedObj.ObjectType = ObjectType.GO_HTMLText Then
                         msgresult = MessageBox.Show(DWSIM.App.GetLocalString("Excluiracaixadetexto"), DWSIM.App.GetLocalString("Excluirobjeto"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                    ElseIf SelectedObj.ObjectType = ObjectType.GO_Button Then
+                        msgresult = MessageBox.Show(DWSIM.App.GetLocalString("RemoveButton"), DWSIM.App.GetLocalString("Excluirobjeto"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                     ElseIf SelectedObj.ObjectType = ObjectType.GO_MasterTable Then
                         msgresult = MessageBox.Show(DWSIM.App.GetLocalString("Excluir") & DirectCast(gobj, MasterTableGraphic).HeaderText & "?", DWSIM.App.GetLocalString("Excluirobjeto"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                     ElseIf SelectedObj.ObjectType = ObjectType.GO_Table Then
@@ -1618,6 +1620,8 @@ Public Class FormFlowsheet
                         ElseIf SelectedObj.ObjectType = ObjectType.GO_Text Then
                             Me.FormSurface.FlowsheetSurface.DeleteSelectedObject(gobj)
                         ElseIf SelectedObj.ObjectType = ObjectType.GO_HTMLText Then
+                            Me.FormSurface.FlowsheetSurface.DeleteSelectedObject(gobj)
+                        ElseIf SelectedObj.ObjectType = ObjectType.GO_Button Then
                             Me.FormSurface.FlowsheetSurface.DeleteSelectedObject(gobj)
                         ElseIf SelectedObj.ObjectType = ObjectType.GO_FloatingTable Then
                             Me.FormSurface.FlowsheetSurface.DeleteSelectedObject(gobj)
@@ -3583,9 +3587,33 @@ Public Class FormFlowsheet
 
     End Sub
 
+    Private Sub BotãoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BotãoToolStripMenuItem.Click
+        Dim myTextObject As New Shapes.ButtonGraphic()
+        Dim gObj As GraphicObject = Nothing
+        gObj = myTextObject
+        gObj.Name = "BTN-" & Guid.NewGuid.ToString
+        gObj.Tag = "BTN" & ((From t As GraphicObject In Me.FormSurface.FlowsheetSurface.DrawingObjects Select t Where t.ObjectType = ObjectType.GO_HTMLText).Count + 1).ToString
+        gObj.AutoSize = True
+        gObj.Flowsheet = Me
+        Me.FormSurface.FlowsheetSurface.DrawingObjects.Add(gObj)
+        Me.FormSurface.Invalidate()
+    End Sub
+
     Public Sub ClearLog() Implements IFlowsheet.ClearLog
 
-        FormLog.Grid1.Rows.Clear()
+        UIThread(Sub()
+                     FormLog.Grid1.Rows.Clear()
+                 End Sub)
+
+    End Sub
+
+    Private Sub IFlowsheet_RunScript(name As String) Implements IFlowsheet.RunScript
+        Dim script = Scripts.Where(Function(s) s.Value.Title = name).FirstOrDefault()
+        If script.Value.PythonInterpreter = Enums.Scripts.Interpreter.IronPython Then
+            FormScript.RunScript_IronPython(script.Value.Title, script.Value.ScriptText, Me, Nothing)
+        Else
+            FormScript.RunScript_PythonNET(script.Value.Title, script.Value.ScriptText, Me)
+        End If
 
     End Sub
 

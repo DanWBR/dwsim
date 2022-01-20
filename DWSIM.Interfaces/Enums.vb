@@ -627,6 +627,7 @@ Namespace Enums.GraphicObjects
         Input
 
         GO_HTMLText
+        GO_Button
 
     End Enum
 

@@ -178,6 +178,7 @@
     <Compile Include="GraphicObjects\Indicators\DigitalGauge.vb" />
     <Compile Include="GraphicObjects\Indicators\LevelGauge.vb" />
     <Compile Include="GraphicObjects\Inputs\Input.vb" />
+    <Compile Include="GraphicObjects\Other\ButtonGraphic.vb" />
     <Compile Include="GraphicObjects\Other\ImageGraphic.vb" />
     <Compile Include="GraphicObjects\Other\RectangleGraphic.vb" />
     <Compile Include="GraphicObjects\Shapes\AbsorptionColumn.vb" />

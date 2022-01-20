@@ -155,6 +155,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                         gobj.ObjectType = ObjectType.GO_SpreadsheetTable Or
                         gobj.ObjectType = ObjectType.GO_Text Or
                         gobj.ObjectType = ObjectType.GO_HTMLText Or
+                        gobj.ObjectType = ObjectType.GO_Button Or
                         gobj.ObjectType = ObjectType.GO_Chart Then
 
                         Me.FlowsheetSurface.DeleteSelectedObject(gobj)
@@ -2904,6 +2905,11 @@ Label_00CC:
     Public Overridable Sub ClearLog() Implements IFlowsheet.ClearLog
 
 
+    End Sub
+
+    Private Sub IFlowsheet_RunScript(name As String) Implements IFlowsheet.RunScript
+        Dim script = Scripts.Where(Function(s) s.Value.Title = name).FirstOrDefault()
+        RunScript(script.Key)
     End Sub
 
 End Class

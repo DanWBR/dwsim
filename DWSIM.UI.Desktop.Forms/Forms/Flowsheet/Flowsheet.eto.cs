@@ -1524,6 +1524,7 @@ namespace DWSIM.UI.Forms
                                 break;
                             case Interfaces.Enums.GraphicObjects.ObjectType.GO_Text:
                             case Interfaces.Enums.GraphicObjects.ObjectType.GO_HTMLText:
+                            case Interfaces.Enums.GraphicObjects.ObjectType.GO_Button:
                             case Interfaces.Enums.GraphicObjects.ObjectType.GO_Image:
                             case Interfaces.Enums.GraphicObjects.ObjectType.GO_Chart:
                                 selctxmenu.Items.Clear();

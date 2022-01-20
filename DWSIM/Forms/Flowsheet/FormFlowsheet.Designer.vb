@@ -52,6 +52,7 @@ Partial Class FormFlowsheet
         Me.TextoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RectangleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GraficoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BotãoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolsTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.CompoundCreatorWizardTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.PropriedadesDasSubstanciasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -291,7 +292,7 @@ Partial Class FormFlowsheet
         'InsertTSMI
         '
         resources.ApplyResources(Me.InsertTSMI, "InsertTSMI")
-        Me.InsertTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BlocoDeSimulacaoToolStripMenuItem, Me.TabelaDePropriedadesToolStripMenuItem, Me.TabelaDePropriedatesMestraToolStripMenuItem, Me.TabelaDePropriedadesPlanilhaToolStripMenuItem, Me.FiguraToolStripMenuItem, Me.tsmiRichText, Me.TextoToolStripMenuItem, Me.RectangleToolStripMenuItem, Me.GraficoToolStripMenuItem})
+        Me.InsertTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BlocoDeSimulacaoToolStripMenuItem, Me.TabelaDePropriedadesToolStripMenuItem, Me.TabelaDePropriedatesMestraToolStripMenuItem, Me.TabelaDePropriedadesPlanilhaToolStripMenuItem, Me.FiguraToolStripMenuItem, Me.tsmiRichText, Me.TextoToolStripMenuItem, Me.RectangleToolStripMenuItem, Me.GraficoToolStripMenuItem, Me.BotãoToolStripMenuItem})
         Me.InsertTSMI.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.InsertTSMI.MergeIndex = 2
         Me.InsertTSMI.Name = "InsertTSMI"
@@ -349,6 +350,12 @@ Partial Class FormFlowsheet
         resources.ApplyResources(Me.GraficoToolStripMenuItem, "GraficoToolStripMenuItem")
         Me.GraficoToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.chart_curve
         Me.GraficoToolStripMenuItem.Name = "GraficoToolStripMenuItem"
+        '
+        'BotãoToolStripMenuItem
+        '
+        resources.ApplyResources(Me.BotãoToolStripMenuItem, "BotãoToolStripMenuItem")
+        Me.BotãoToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.icons8_button
+        Me.BotãoToolStripMenuItem.Name = "BotãoToolStripMenuItem"
         '
         'ToolsTSMI
         '
@@ -864,4 +871,5 @@ Partial Class FormFlowsheet
     Friend WithEvents FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem As ToolStripMenuItem
     Public WithEvents ToolStrip1 As ToolStrip
     Friend WithEvents tsmiRichText As ToolStripMenuItem
+    Friend WithEvents BotãoToolStripMenuItem As ToolStripMenuItem
 End Class

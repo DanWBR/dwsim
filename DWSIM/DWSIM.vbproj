@@ -687,6 +687,12 @@
     <Compile Include="Forms\FormDefineFonts.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\FormEditFlowsheetButton.Designer.vb">
+      <DependentUpon>FormEditFlowsheetButton.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormEditFlowsheetButton.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormEditGraphicObject.Designer.vb">
       <DependentUpon>FormEditGraphicObject.vb</DependentUpon>
     </Compile>
@@ -1439,6 +1445,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormDefineFonts.resx">
       <DependentUpon>FormDefineFonts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormEditFlowsheetButton.resx">
+      <DependentUpon>FormEditFlowsheetButton.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormEditGraphicObject.de.resx">
       <DependentUpon>FormEditGraphicObject.vb</DependentUpon>
@@ -3221,6 +3230,7 @@
     <None Include="Resources\Icon512.png" />
     <None Include="Resources\regular.png" />
     <None Include="Resources\italic.png" />
+    <None Include="Resources\icons8-button.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />
