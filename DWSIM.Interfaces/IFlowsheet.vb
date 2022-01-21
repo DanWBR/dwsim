@@ -1,5 +1,5 @@
 ﻿'    DWSIM Interface definitions
-'    Copyright 2010-2017 Daniel Wagner O. de Medeiros
+'    Copyright 2010-2021 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -201,6 +201,8 @@
     Function GetSimulationFileDirectory() As String
 
     Sub ClearLog()
+
+    Property PythonPreprocessor() As Action(Of String)
 
 End Interface
 

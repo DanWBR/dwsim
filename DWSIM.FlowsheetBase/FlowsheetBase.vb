@@ -2649,6 +2649,7 @@ Label_00CC:
 
     Public Sub RunScript(ScriptID As String)
         Dim script = Scripts(ScriptID)
+        PythonPreprocessor?.Invoke(script.ScriptText)
         If script.PythonInterpreter = Enums.Scripts.Interpreter.IronPython Then
             RunScript_IronPython(script.ScriptText)
         Else
@@ -2911,6 +2912,8 @@ Label_00CC:
         Dim script = Scripts.Where(Function(s) s.Value.Title = name).FirstOrDefault()
         RunScript(script.Key)
     End Sub
+
+    Public Property PythonPreprocessor() As Action(Of String) Implements IFlowsheet.PythonPreprocessor
 
 End Class
 

@@ -106,23 +106,19 @@ Namespace My
 
             DWSIM.App.InitializeSettings()
 
-            'If My.Settings.PythonPath <> "" Then
-            '    AddDllDirectory(My.Settings.PythonPath)
-            'Else
-            '    My.Settings.PythonPath = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "python\python-3.6.8.amd64\")
-            '    If Directory.Exists(My.Settings.PythonPath) Then
-            '        GlobalSettings.Settings.PythonPath = My.Settings.PythonPath
-            '        AddDllDirectory(My.Settings.PythonPath)
-            '    End If
-            'End If
-
             If e.Cancel Then
+
                 'command line processor
+
                 AttachConsole(ATTACH_PARENT_PROCESS)
+
                 Dim standardOutput As New StreamWriter(Console.OpenStandardOutput())
                 standardOutput.AutoFlush = True
+
                 Console.SetOut(standardOutput)
+
                 Dim f1 As New FormMain
+
             End If
 
         End Sub

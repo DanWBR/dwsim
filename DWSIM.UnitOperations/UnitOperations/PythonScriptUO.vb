@@ -239,6 +239,8 @@ Namespace UnitOperations
             End If
             txtcode += Me.ScriptText
 
+            FlowSheet.PythonPreprocessor?.Invoke(txtcode)
+
             If ExecutionEngine = PythonExecutionEngine.IronPython Then
 
                 engine = IronPython.Hosting.Python.CreateEngine()

@@ -3354,6 +3354,8 @@ Public Class FormFlowsheet
 
     Public Property ExternalSolvers As Dictionary(Of String, IExternalSolverIdentification) = New Dictionary(Of String, IExternalSolverIdentification) Implements IFlowsheet.ExternalSolvers
 
+    Public Property PythonPreprocessor As Action(Of String) Implements IFlowsheet.PythonPreprocessor
+
     Public Sub DeleteSelectedObject1(sender As Object, e As EventArgs, gobj As IGraphicObject, Optional confirmation As Boolean = True, Optional triggercalc As Boolean = False) Implements IFlowsheet.DeleteSelectedObject
         DeleteSelectedObject(sender, e, gobj, confirmation, triggercalc)
     End Sub
