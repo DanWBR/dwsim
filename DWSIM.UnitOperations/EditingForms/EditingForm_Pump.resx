@@ -543,9 +543,6 @@
   <data name="cbPressure.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="cbPressure.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="cbPressure.Items" xml:space="preserve">
     <value>Mínima das Entradas</value>
   </data>
@@ -789,9 +786,6 @@
   <data name="cbDeltaTemp.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="cbDeltaTemp.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="cbDeltaTemp.Items" xml:space="preserve">
     <value>Mínima das Entradas</value>
   </data>
@@ -884,9 +878,6 @@
   </data>
   <data name="cbTemp.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
-  </data>
-  <data name="cbTemp.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="cbTemp.Items" xml:space="preserve">
     <value>Mínima das Entradas</value>
@@ -1347,6 +1338,9 @@
   <data name="btnDisconnectEnergy.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
+  <data name="btnDisconnectEnergy.ToolTip1" xml:space="preserve">
+    <value>Disconnect</value>
+  </data>
   <data name="&gt;&gt;btnDisconnectEnergy.Name" xml:space="preserve">
     <value>btnDisconnectEnergy</value>
   </data>
@@ -1431,6 +1425,9 @@
   <data name="btnDisconnectOutlet1.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
   </data>
+  <data name="btnDisconnectOutlet1.ToolTip1" xml:space="preserve">
+    <value>Disconnect</value>
+  </data>
   <data name="&gt;&gt;btnDisconnectOutlet1.Name" xml:space="preserve">
     <value>btnDisconnectOutlet1</value>
   </data>
@@ -1459,6 +1456,9 @@
     <value>14</value>
   </data>
   <data name="btnDisconnect1.ToolTip" xml:space="preserve">
+    <value>Disconnect</value>
+  </data>
+  <data name="btnDisconnect1.ToolTip1" xml:space="preserve">
     <value>Disconnect</value>
   </data>
   <data name="&gt;&gt;btnDisconnect1.Name" xml:space="preserve">
@@ -1651,6 +1651,6 @@
     <value>EditingForm_Pump</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=7.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>DWSIM.SharedClasses.ObjectEditorForm, DWSIM.SharedClasses, Version=7.2.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
