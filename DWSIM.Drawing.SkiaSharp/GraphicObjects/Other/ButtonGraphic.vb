@@ -106,11 +106,13 @@ Namespace GraphicObjects.Shapes
 
         Public Sub Run()
 
-            Try
-                Flowsheet?.RunScript(SelectedScript)
-            Catch ex As Exception
-                Flowsheet.ShowMessage(String.Format("Error running script '{0}': {1}", SelectedScript, ex.Message), Interfaces.IFlowsheet.MessageType.GeneralError)
-            End Try
+            If SelectedScript <> "" Then
+                Try
+                    Flowsheet?.RunScript(SelectedScript)
+                Catch ex As Exception
+                    Flowsheet.ShowMessage(String.Format("Error running script '{0}': {1}", SelectedScript, ex.Message), Interfaces.IFlowsheet.MessageType.GeneralError)
+                End Try
+            End If
 
         End Sub
 
