@@ -1911,4 +1911,7 @@
   <data name="ToolTipValues.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>17, 17</value>
   </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
 </root>
