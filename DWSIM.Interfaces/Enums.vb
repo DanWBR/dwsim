@@ -450,6 +450,7 @@ Namespace Enums
         Controllers = 13
         Switches = 14
         Inputs = 15
+        None = 16
 
     End Enum
 

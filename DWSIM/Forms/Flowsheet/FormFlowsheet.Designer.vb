@@ -20,10 +20,10 @@ Partial Class FormFlowsheet
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormFlowsheet))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.TSTable = New FarsiLibrary.Win.FATabStripItem()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
@@ -61,6 +61,9 @@ Partial Class FormFlowsheet
         Me.GerenciadorDeAmostrasDePetroleoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InspectorTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator15 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ProToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CapitalCostEstimatorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExcelReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DynamicsTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.ModoDinamicoAtivoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GerenciadorDoModoDinamicoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -82,6 +85,10 @@ Partial Class FormFlowsheet
         Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
         Me.RestoreLayoutTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmiCloseOpenedEditors = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DashboardToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MultivariateSensitivityStudyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DesignOfExperimentsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OptimumTesterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
@@ -125,74 +132,74 @@ Partial Class FormFlowsheet
         '
         'DataGridView1
         '
-        resources.ApplyResources(Me.DataGridView1, "DataGridView1")
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle13
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle14
+        resources.ApplyResources(Me.DataGridView1, "DataGridView1")
         Me.DataGridView1.Name = "DataGridView1"
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle15
         '
         'TSTable
         '
-        resources.ApplyResources(Me.TSTable, "TSTable")
         Me.TSTable.CanClose = False
         Me.TSTable.Controls.Add(Me.DataGridView1)
         Me.TSTable.IsDrawn = True
         Me.TSTable.Name = "TSTable"
+        resources.ApplyResources(Me.TSTable, "TSTable")
         '
         'MenuStrip1
         '
-        resources.ApplyResources(Me.MenuStrip1, "MenuStrip1")
         Me.MenuStrip1.AllowItemReorder = True
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileTSMI, Me.EditTSMI, Me.InsertTSMI, Me.ToolsTSMI, Me.DynamicsTSMI, Me.UtilitiesTSMI, Me.OptimizationTSMI, Me.ResultsTSMI, Me.PluginsTSMI, Me.ShowTSMI})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileTSMI, Me.EditTSMI, Me.InsertTSMI, Me.ToolsTSMI, Me.ProToolsToolStripMenuItem, Me.DynamicsTSMI, Me.UtilitiesTSMI, Me.DashboardToolStripMenuItem, Me.OptimizationTSMI, Me.ResultsTSMI, Me.PluginsTSMI, Me.ShowTSMI})
+        resources.ApplyResources(Me.MenuStrip1, "MenuStrip1")
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.ShowItemToolTips = True
         '
         'FileTSMI
         '
-        resources.ApplyResources(Me.FileTSMI, "FileTSMI")
         Me.FileTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CloseToolStripMenuItem})
         Me.FileTSMI.MergeAction = System.Windows.Forms.MergeAction.MatchOnly
         Me.FileTSMI.MergeIndex = 0
         Me.FileTSMI.Name = "FileTSMI"
+        resources.ApplyResources(Me.FileTSMI, "FileTSMI")
         '
         'CloseToolStripMenuItem
         '
-        resources.ApplyResources(Me.CloseToolStripMenuItem, "CloseToolStripMenuItem")
         Me.CloseToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.cross
         Me.CloseToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.CloseToolStripMenuItem.MergeIndex = 11
         Me.CloseToolStripMenuItem.Name = "CloseToolStripMenuItem"
         Me.CloseToolStripMenuItem.Overflow = System.Windows.Forms.ToolStripItemOverflow.AsNeeded
+        resources.ApplyResources(Me.CloseToolStripMenuItem, "CloseToolStripMenuItem")
         '
         'EditTSMI
         '
-        resources.ApplyResources(Me.EditTSMI, "EditTSMI")
         Me.EditTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmiUndo, Me.tsmiRedo, Me.ToolStripSeparator14, Me.tsmiCut, Me.tsmiCopy, Me.tsmiPaste, Me.tsmiRemoveSelected, Me.tsmiCloneSelected, Me.tsmiRecalc, Me.tsmiExportData, Me.ToolStripSeparator18, Me.tsmiConfigSimulation})
         Me.EditTSMI.MergeAction = System.Windows.Forms.MergeAction.MatchOnly
         Me.EditTSMI.MergeIndex = 1
         Me.EditTSMI.Name = "EditTSMI"
+        resources.ApplyResources(Me.EditTSMI, "EditTSMI")
         '
         'tsmiUndo
         '
@@ -212,227 +219,247 @@ Partial Class FormFlowsheet
         '
         'ToolStripSeparator14
         '
-        resources.ApplyResources(Me.ToolStripSeparator14, "ToolStripSeparator14")
         Me.ToolStripSeparator14.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.ToolStripSeparator14.MergeIndex = 2
         Me.ToolStripSeparator14.Name = "ToolStripSeparator14"
         Me.ToolStripSeparator14.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never
+        resources.ApplyResources(Me.ToolStripSeparator14, "ToolStripSeparator14")
         '
         'tsmiCut
         '
-        resources.ApplyResources(Me.tsmiCut, "tsmiCut")
         Me.tsmiCut.Image = Global.DWSIM.My.Resources.Resources.cut
         Me.tsmiCut.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.tsmiCut.MergeIndex = 3
         Me.tsmiCut.Name = "tsmiCut"
+        resources.ApplyResources(Me.tsmiCut, "tsmiCut")
         '
         'tsmiCopy
         '
-        resources.ApplyResources(Me.tsmiCopy, "tsmiCopy")
         Me.tsmiCopy.Image = Global.DWSIM.My.Resources.Resources.page_copy
         Me.tsmiCopy.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.tsmiCopy.MergeIndex = 4
         Me.tsmiCopy.Name = "tsmiCopy"
+        resources.ApplyResources(Me.tsmiCopy, "tsmiCopy")
         '
         'tsmiPaste
         '
-        resources.ApplyResources(Me.tsmiPaste, "tsmiPaste")
         Me.tsmiPaste.Image = Global.DWSIM.My.Resources.Resources.paste_plain
         Me.tsmiPaste.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.tsmiPaste.MergeIndex = 5
         Me.tsmiPaste.Name = "tsmiPaste"
+        resources.ApplyResources(Me.tsmiPaste, "tsmiPaste")
         '
         'tsmiRemoveSelected
         '
-        resources.ApplyResources(Me.tsmiRemoveSelected, "tsmiRemoveSelected")
         Me.tsmiRemoveSelected.Image = Global.DWSIM.My.Resources.Resources.cross
         Me.tsmiRemoveSelected.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.tsmiRemoveSelected.MergeIndex = 6
         Me.tsmiRemoveSelected.Name = "tsmiRemoveSelected"
+        resources.ApplyResources(Me.tsmiRemoveSelected, "tsmiRemoveSelected")
         '
         'tsmiCloneSelected
         '
-        resources.ApplyResources(Me.tsmiCloneSelected, "tsmiCloneSelected")
         Me.tsmiCloneSelected.Image = Global.DWSIM.My.Resources.Resources.sheep
         Me.tsmiCloneSelected.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.tsmiCloneSelected.MergeIndex = 7
         Me.tsmiCloneSelected.Name = "tsmiCloneSelected"
+        resources.ApplyResources(Me.tsmiCloneSelected, "tsmiCloneSelected")
         '
         'tsmiRecalc
         '
-        resources.ApplyResources(Me.tsmiRecalc, "tsmiRecalc")
         Me.tsmiRecalc.Image = Global.DWSIM.My.Resources.Resources.arrow_refresh
         Me.tsmiRecalc.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.tsmiRecalc.MergeIndex = 8
         Me.tsmiRecalc.Name = "tsmiRecalc"
+        resources.ApplyResources(Me.tsmiRecalc, "tsmiRecalc")
         '
         'tsmiExportData
         '
-        resources.ApplyResources(Me.tsmiExportData, "tsmiExportData")
         Me.tsmiExportData.Image = Global.DWSIM.My.Resources.Resources.clipboard_sign
         Me.tsmiExportData.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.tsmiExportData.MergeIndex = 9
         Me.tsmiExportData.Name = "tsmiExportData"
+        resources.ApplyResources(Me.tsmiExportData, "tsmiExportData")
         '
         'ToolStripSeparator18
         '
-        resources.ApplyResources(Me.ToolStripSeparator18, "ToolStripSeparator18")
         Me.ToolStripSeparator18.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.ToolStripSeparator18.MergeIndex = 10
         Me.ToolStripSeparator18.Name = "ToolStripSeparator18"
+        resources.ApplyResources(Me.ToolStripSeparator18, "ToolStripSeparator18")
         '
         'tsmiConfigSimulation
         '
-        resources.ApplyResources(Me.tsmiConfigSimulation, "tsmiConfigSimulation")
         Me.tsmiConfigSimulation.Image = Global.DWSIM.My.Resources.Resources.brick
         Me.tsmiConfigSimulation.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.tsmiConfigSimulation.MergeIndex = 11
         Me.tsmiConfigSimulation.Name = "tsmiConfigSimulation"
+        resources.ApplyResources(Me.tsmiConfigSimulation, "tsmiConfigSimulation")
         '
         'InsertTSMI
         '
-        resources.ApplyResources(Me.InsertTSMI, "InsertTSMI")
         Me.InsertTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BlocoDeSimulacaoToolStripMenuItem, Me.TabelaDePropriedadesToolStripMenuItem, Me.TabelaDePropriedatesMestraToolStripMenuItem, Me.TabelaDePropriedadesPlanilhaToolStripMenuItem, Me.FiguraToolStripMenuItem, Me.tsmiRichText, Me.TextoToolStripMenuItem, Me.RectangleToolStripMenuItem, Me.GraficoToolStripMenuItem, Me.BotãoToolStripMenuItem})
         Me.InsertTSMI.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.InsertTSMI.MergeIndex = 2
         Me.InsertTSMI.Name = "InsertTSMI"
+        resources.ApplyResources(Me.InsertTSMI, "InsertTSMI")
         '
         'BlocoDeSimulacaoToolStripMenuItem
         '
-        resources.ApplyResources(Me.BlocoDeSimulacaoToolStripMenuItem, "BlocoDeSimulacaoToolStripMenuItem")
         Me.BlocoDeSimulacaoToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.uo_custom_16
         Me.BlocoDeSimulacaoToolStripMenuItem.Name = "BlocoDeSimulacaoToolStripMenuItem"
+        resources.ApplyResources(Me.BlocoDeSimulacaoToolStripMenuItem, "BlocoDeSimulacaoToolStripMenuItem")
         '
         'TabelaDePropriedadesToolStripMenuItem
         '
-        resources.ApplyResources(Me.TabelaDePropriedadesToolStripMenuItem, "TabelaDePropriedadesToolStripMenuItem")
         Me.TabelaDePropriedadesToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.table_lightning
         Me.TabelaDePropriedadesToolStripMenuItem.Name = "TabelaDePropriedadesToolStripMenuItem"
+        resources.ApplyResources(Me.TabelaDePropriedadesToolStripMenuItem, "TabelaDePropriedadesToolStripMenuItem")
         '
         'TabelaDePropriedatesMestraToolStripMenuItem
         '
-        resources.ApplyResources(Me.TabelaDePropriedatesMestraToolStripMenuItem, "TabelaDePropriedatesMestraToolStripMenuItem")
         Me.TabelaDePropriedatesMestraToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.table
         Me.TabelaDePropriedatesMestraToolStripMenuItem.Name = "TabelaDePropriedatesMestraToolStripMenuItem"
+        resources.ApplyResources(Me.TabelaDePropriedatesMestraToolStripMenuItem, "TabelaDePropriedatesMestraToolStripMenuItem")
         '
         'TabelaDePropriedadesPlanilhaToolStripMenuItem
         '
-        resources.ApplyResources(Me.TabelaDePropriedadesPlanilhaToolStripMenuItem, "TabelaDePropriedadesPlanilhaToolStripMenuItem")
         Me.TabelaDePropriedadesPlanilhaToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.table_relationship
         Me.TabelaDePropriedadesPlanilhaToolStripMenuItem.Name = "TabelaDePropriedadesPlanilhaToolStripMenuItem"
+        resources.ApplyResources(Me.TabelaDePropriedadesPlanilhaToolStripMenuItem, "TabelaDePropriedadesPlanilhaToolStripMenuItem")
         '
         'FiguraToolStripMenuItem
         '
-        resources.ApplyResources(Me.FiguraToolStripMenuItem, "FiguraToolStripMenuItem")
         Me.FiguraToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.picture
         Me.FiguraToolStripMenuItem.Name = "FiguraToolStripMenuItem"
+        resources.ApplyResources(Me.FiguraToolStripMenuItem, "FiguraToolStripMenuItem")
         '
         'tsmiRichText
         '
-        resources.ApplyResources(Me.tsmiRichText, "tsmiRichText")
         Me.tsmiRichText.Image = Global.DWSIM.My.Resources.Resources.font
         Me.tsmiRichText.Name = "tsmiRichText"
+        resources.ApplyResources(Me.tsmiRichText, "tsmiRichText")
         '
         'TextoToolStripMenuItem
         '
-        resources.ApplyResources(Me.TextoToolStripMenuItem, "TextoToolStripMenuItem")
         Me.TextoToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.font
         Me.TextoToolStripMenuItem.Name = "TextoToolStripMenuItem"
+        resources.ApplyResources(Me.TextoToolStripMenuItem, "TextoToolStripMenuItem")
         '
         'RectangleToolStripMenuItem
         '
-        resources.ApplyResources(Me.RectangleToolStripMenuItem, "RectangleToolStripMenuItem")
         Me.RectangleToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.shape_square
         Me.RectangleToolStripMenuItem.Name = "RectangleToolStripMenuItem"
+        resources.ApplyResources(Me.RectangleToolStripMenuItem, "RectangleToolStripMenuItem")
         '
         'GraficoToolStripMenuItem
         '
-        resources.ApplyResources(Me.GraficoToolStripMenuItem, "GraficoToolStripMenuItem")
         Me.GraficoToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.chart_curve
         Me.GraficoToolStripMenuItem.Name = "GraficoToolStripMenuItem"
+        resources.ApplyResources(Me.GraficoToolStripMenuItem, "GraficoToolStripMenuItem")
         '
         'BotãoToolStripMenuItem
         '
-        resources.ApplyResources(Me.BotãoToolStripMenuItem, "BotãoToolStripMenuItem")
         Me.BotãoToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.icons8_button
         Me.BotãoToolStripMenuItem.Name = "BotãoToolStripMenuItem"
+        resources.ApplyResources(Me.BotãoToolStripMenuItem, "BotãoToolStripMenuItem")
         '
         'ToolsTSMI
         '
-        resources.ApplyResources(Me.ToolsTSMI, "ToolsTSMI")
         Me.ToolsTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CompoundCreatorWizardTSMI, Me.PropriedadesDasSubstanciasToolStripMenuItem, Me.CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem, Me.CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem, Me.GerenciadorDeAmostrasDePetroleoToolStripMenuItem, Me.InspectorTSMI, Me.ToolStripSeparator15})
         Me.ToolsTSMI.MergeAction = System.Windows.Forms.MergeAction.MatchOnly
         Me.ToolsTSMI.MergeIndex = 3
         Me.ToolsTSMI.Name = "ToolsTSMI"
+        resources.ApplyResources(Me.ToolsTSMI, "ToolsTSMI")
         '
         'CompoundCreatorWizardTSMI
         '
-        resources.ApplyResources(Me.CompoundCreatorWizardTSMI, "CompoundCreatorWizardTSMI")
         Me.CompoundCreatorWizardTSMI.Image = Global.DWSIM.My.Resources.Resources.wand
         Me.CompoundCreatorWizardTSMI.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.CompoundCreatorWizardTSMI.MergeIndex = 6
         Me.CompoundCreatorWizardTSMI.Name = "CompoundCreatorWizardTSMI"
+        resources.ApplyResources(Me.CompoundCreatorWizardTSMI, "CompoundCreatorWizardTSMI")
         '
         'PropriedadesDasSubstanciasToolStripMenuItem
         '
-        resources.ApplyResources(Me.PropriedadesDasSubstanciasToolStripMenuItem, "PropriedadesDasSubstanciasToolStripMenuItem")
         Me.PropriedadesDasSubstanciasToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.wi0124_16
         Me.PropriedadesDasSubstanciasToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.PropriedadesDasSubstanciasToolStripMenuItem.MergeIndex = 5
         Me.PropriedadesDasSubstanciasToolStripMenuItem.Name = "PropriedadesDasSubstanciasToolStripMenuItem"
+        resources.ApplyResources(Me.PropriedadesDasSubstanciasToolStripMenuItem, "PropriedadesDasSubstanciasToolStripMenuItem")
         '
         'CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem
         '
-        resources.ApplyResources(Me.CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem, "CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem")
         Me.CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.Experiments_Badge
         Me.CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem.MergeIndex = 1
         Me.CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem.Name = "CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem"
+        resources.ApplyResources(Me.CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem, "CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem")
         '
         'CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem
         '
-        resources.ApplyResources(Me.CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem, "CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem")
         Me.CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.Experiments_Badge
         Me.CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem.MergeIndex = 2
         Me.CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem.Name = "CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem"
+        resources.ApplyResources(Me.CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem, "CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem")
         '
         'GerenciadorDeAmostrasDePetroleoToolStripMenuItem
         '
-        resources.ApplyResources(Me.GerenciadorDeAmostrasDePetroleoToolStripMenuItem, "GerenciadorDeAmostrasDePetroleoToolStripMenuItem")
         Me.GerenciadorDeAmostrasDePetroleoToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.Experiments_Badge
         Me.GerenciadorDeAmostrasDePetroleoToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.GerenciadorDeAmostrasDePetroleoToolStripMenuItem.MergeIndex = 3
         Me.GerenciadorDeAmostrasDePetroleoToolStripMenuItem.Name = "GerenciadorDeAmostrasDePetroleoToolStripMenuItem"
+        resources.ApplyResources(Me.GerenciadorDeAmostrasDePetroleoToolStripMenuItem, "GerenciadorDeAmostrasDePetroleoToolStripMenuItem")
         '
         'InspectorTSMI
         '
-        resources.ApplyResources(Me.InspectorTSMI, "InspectorTSMI")
         Me.InspectorTSMI.Image = Global.DWSIM.My.Resources.Resources.icons8_spy_filled
         Me.InspectorTSMI.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.InspectorTSMI.MergeIndex = 0
         Me.InspectorTSMI.Name = "InspectorTSMI"
+        resources.ApplyResources(Me.InspectorTSMI, "InspectorTSMI")
         '
         'ToolStripSeparator15
         '
-        resources.ApplyResources(Me.ToolStripSeparator15, "ToolStripSeparator15")
         Me.ToolStripSeparator15.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.ToolStripSeparator15.MergeIndex = 7
         Me.ToolStripSeparator15.Name = "ToolStripSeparator15"
+        resources.ApplyResources(Me.ToolStripSeparator15, "ToolStripSeparator15")
+        '
+        'ProToolsToolStripMenuItem
+        '
+        Me.ProToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CapitalCostEstimatorToolStripMenuItem, Me.ExcelReportsToolStripMenuItem})
+        Me.ProToolsToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
+        Me.ProToolsToolStripMenuItem.MergeIndex = 4
+        Me.ProToolsToolStripMenuItem.Name = "ProToolsToolStripMenuItem"
+        resources.ApplyResources(Me.ProToolsToolStripMenuItem, "ProToolsToolStripMenuItem")
+        '
+        'CapitalCostEstimatorToolStripMenuItem
+        '
+        Me.CapitalCostEstimatorToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.icons8_coins
+        Me.CapitalCostEstimatorToolStripMenuItem.Name = "CapitalCostEstimatorToolStripMenuItem"
+        resources.ApplyResources(Me.CapitalCostEstimatorToolStripMenuItem, "CapitalCostEstimatorToolStripMenuItem")
+        '
+        'ExcelReportsToolStripMenuItem
+        '
+        Me.ExcelReportsToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.Excel
+        Me.ExcelReportsToolStripMenuItem.Name = "ExcelReportsToolStripMenuItem"
+        resources.ApplyResources(Me.ExcelReportsToolStripMenuItem, "ExcelReportsToolStripMenuItem")
         '
         'DynamicsTSMI
         '
-        resources.ApplyResources(Me.DynamicsTSMI, "DynamicsTSMI")
         Me.DynamicsTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ModoDinamicoAtivoToolStripMenuItem, Me.GerenciadorDoModoDinamicoToolStripMenuItem, Me.ControlesDoIntegradorToolStripMenuItem, Me.FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem})
         Me.DynamicsTSMI.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.DynamicsTSMI.MergeIndex = 4
         Me.DynamicsTSMI.Name = "DynamicsTSMI"
+        resources.ApplyResources(Me.DynamicsTSMI, "DynamicsTSMI")
         '
         'ModoDinamicoAtivoToolStripMenuItem
         '
-        resources.ApplyResources(Me.ModoDinamicoAtivoToolStripMenuItem, "ModoDinamicoAtivoToolStripMenuItem")
         Me.ModoDinamicoAtivoToolStripMenuItem.CheckOnClick = True
         Me.ModoDinamicoAtivoToolStripMenuItem.Name = "ModoDinamicoAtivoToolStripMenuItem"
+        resources.ApplyResources(Me.ModoDinamicoAtivoToolStripMenuItem, "ModoDinamicoAtivoToolStripMenuItem")
         '
         'GerenciadorDoModoDinamicoToolStripMenuItem
         '
@@ -446,126 +473,152 @@ Partial Class FormFlowsheet
         '
         'FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem
         '
-        resources.ApplyResources(Me.FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem, "FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem")
         Me.FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.icons8_slider
         Me.FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem.Name = "FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem"
+        resources.ApplyResources(Me.FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem, "FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem")
         '
         'UtilitiesTSMI
         '
-        resources.ApplyResources(Me.UtilitiesTSMI, "UtilitiesTSMI")
         Me.UtilitiesTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSMIAddUtility})
         Me.UtilitiesTSMI.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.UtilitiesTSMI.MergeIndex = 5
         Me.UtilitiesTSMI.Name = "UtilitiesTSMI"
+        resources.ApplyResources(Me.UtilitiesTSMI, "UtilitiesTSMI")
         '
         'TSMIAddUtility
         '
-        resources.ApplyResources(Me.TSMIAddUtility, "TSMIAddUtility")
         Me.TSMIAddUtility.Image = Global.DWSIM.My.Resources.Resources.add
         Me.TSMIAddUtility.Name = "TSMIAddUtility"
+        resources.ApplyResources(Me.TSMIAddUtility, "TSMIAddUtility")
         '
         'OptimizationTSMI
         '
-        resources.ApplyResources(Me.OptimizationTSMI, "OptimizationTSMI")
         Me.OptimizationTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AnaliseDeSensibilidadeToolStripMenuItem, Me.MultivariateOptimizerToolStripMenuItem})
         Me.OptimizationTSMI.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.OptimizationTSMI.MergeIndex = 6
         Me.OptimizationTSMI.Name = "OptimizationTSMI"
+        resources.ApplyResources(Me.OptimizationTSMI, "OptimizationTSMI")
         '
         'AnaliseDeSensibilidadeToolStripMenuItem
         '
-        resources.ApplyResources(Me.AnaliseDeSensibilidadeToolStripMenuItem, "AnaliseDeSensibilidadeToolStripMenuItem")
         Me.AnaliseDeSensibilidadeToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.chart_curve
         Me.AnaliseDeSensibilidadeToolStripMenuItem.Name = "AnaliseDeSensibilidadeToolStripMenuItem"
+        resources.ApplyResources(Me.AnaliseDeSensibilidadeToolStripMenuItem, "AnaliseDeSensibilidadeToolStripMenuItem")
         '
         'MultivariateOptimizerToolStripMenuItem
         '
-        resources.ApplyResources(Me.MultivariateOptimizerToolStripMenuItem, "MultivariateOptimizerToolStripMenuItem")
         Me.MultivariateOptimizerToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.arrow_switch
         Me.MultivariateOptimizerToolStripMenuItem.Name = "MultivariateOptimizerToolStripMenuItem"
+        resources.ApplyResources(Me.MultivariateOptimizerToolStripMenuItem, "MultivariateOptimizerToolStripMenuItem")
         '
         'ResultsTSMI
         '
-        resources.ApplyResources(Me.ResultsTSMI, "ResultsTSMI")
         Me.ResultsTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GerarRelatorioToolStripMenuItem})
         Me.ResultsTSMI.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.ResultsTSMI.MergeIndex = 7
         Me.ResultsTSMI.Name = "ResultsTSMI"
+        resources.ApplyResources(Me.ResultsTSMI, "ResultsTSMI")
         '
         'GerarRelatorioToolStripMenuItem
         '
-        resources.ApplyResources(Me.GerarRelatorioToolStripMenuItem, "GerarRelatorioToolStripMenuItem")
         Me.GerarRelatorioToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.report
         Me.GerarRelatorioToolStripMenuItem.Name = "GerarRelatorioToolStripMenuItem"
+        resources.ApplyResources(Me.GerarRelatorioToolStripMenuItem, "GerarRelatorioToolStripMenuItem")
         '
         'PluginsTSMI
         '
-        resources.ApplyResources(Me.PluginsTSMI, "PluginsTSMI")
         Me.PluginsTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem})
         Me.PluginsTSMI.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.PluginsTSMI.MergeIndex = 8
         Me.PluginsTSMI.Name = "PluginsTSMI"
+        resources.ApplyResources(Me.PluginsTSMI, "PluginsTSMI")
         '
         'CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem
         '
-        resources.ApplyResources(Me.CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem, "CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem")
         Me.CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.colan2
         Me.CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.Name = "CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem"
+        resources.ApplyResources(Me.CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem, "CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem")
         '
         'ShowTSMI
         '
-        resources.ApplyResources(Me.ShowTSMI, "ShowTSMI")
         Me.ShowTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.varpaneltsmi, Me.COObjTSMI, Me.ConsoleOutputTSMI, Me.ToolStripSeparator10, Me.RestoreLayoutTSMI, Me.tsmiCloseOpenedEditors})
         Me.ShowTSMI.MergeAction = System.Windows.Forms.MergeAction.MatchOnly
         Me.ShowTSMI.MergeIndex = 9
         Me.ShowTSMI.Name = "ShowTSMI"
+        resources.ApplyResources(Me.ShowTSMI, "ShowTSMI")
         '
         'varpaneltsmi
         '
-        resources.ApplyResources(Me.varpaneltsmi, "varpaneltsmi")
         Me.varpaneltsmi.CheckOnClick = True
         Me.varpaneltsmi.Name = "varpaneltsmi"
+        resources.ApplyResources(Me.varpaneltsmi, "varpaneltsmi")
         '
         'COObjTSMI
         '
-        resources.ApplyResources(Me.COObjTSMI, "COObjTSMI")
         Me.COObjTSMI.CheckOnClick = True
         Me.COObjTSMI.Name = "COObjTSMI"
+        resources.ApplyResources(Me.COObjTSMI, "COObjTSMI")
         '
         'ConsoleOutputTSMI
         '
-        resources.ApplyResources(Me.ConsoleOutputTSMI, "ConsoleOutputTSMI")
         Me.ConsoleOutputTSMI.Name = "ConsoleOutputTSMI"
+        resources.ApplyResources(Me.ConsoleOutputTSMI, "ConsoleOutputTSMI")
         '
         'ToolStripSeparator10
         '
-        resources.ApplyResources(Me.ToolStripSeparator10, "ToolStripSeparator10")
         Me.ToolStripSeparator10.Name = "ToolStripSeparator10"
+        resources.ApplyResources(Me.ToolStripSeparator10, "ToolStripSeparator10")
         '
         'RestoreLayoutTSMI
         '
-        resources.ApplyResources(Me.RestoreLayoutTSMI, "RestoreLayoutTSMI")
         Me.RestoreLayoutTSMI.Name = "RestoreLayoutTSMI"
+        resources.ApplyResources(Me.RestoreLayoutTSMI, "RestoreLayoutTSMI")
         '
         'tsmiCloseOpenedEditors
         '
-        resources.ApplyResources(Me.tsmiCloseOpenedEditors, "tsmiCloseOpenedEditors")
         Me.tsmiCloseOpenedEditors.Name = "tsmiCloseOpenedEditors"
+        resources.ApplyResources(Me.tsmiCloseOpenedEditors, "tsmiCloseOpenedEditors")
+        '
+        'DashboardToolStripMenuItem
+        '
+        Me.DashboardToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MultivariateSensitivityStudyToolStripMenuItem, Me.DesignOfExperimentsToolStripMenuItem, Me.OptimumTesterToolStripMenuItem})
+        Me.DashboardToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
+        Me.DashboardToolStripMenuItem.MergeIndex = 6
+        Me.DashboardToolStripMenuItem.Name = "DashboardToolStripMenuItem"
+        resources.ApplyResources(Me.DashboardToolStripMenuItem, "DashboardToolStripMenuItem")
+        '
+        'MultivariateSensitivityStudyToolStripMenuItem
+        '
+        Me.MultivariateSensitivityStudyToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.icons8_scatter_plot
+        Me.MultivariateSensitivityStudyToolStripMenuItem.Name = "MultivariateSensitivityStudyToolStripMenuItem"
+        resources.ApplyResources(Me.MultivariateSensitivityStudyToolStripMenuItem, "MultivariateSensitivityStudyToolStripMenuItem")
+        '
+        'DesignOfExperimentsToolStripMenuItem
+        '
+        Me.DesignOfExperimentsToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.icons8_scatter_plot
+        Me.DesignOfExperimentsToolStripMenuItem.Name = "DesignOfExperimentsToolStripMenuItem"
+        resources.ApplyResources(Me.DesignOfExperimentsToolStripMenuItem, "DesignOfExperimentsToolStripMenuItem")
+        '
+        'OptimumTesterToolStripMenuItem
+        '
+        Me.OptimumTesterToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.icons8_scatter_plot
+        Me.OptimumTesterToolStripMenuItem.Name = "OptimumTesterToolStripMenuItem"
+        resources.ApplyResources(Me.OptimumTesterToolStripMenuItem, "OptimumTesterToolStripMenuItem")
         '
         'ToolStripMenuItem1
         '
-        resources.ApplyResources(Me.ToolStripMenuItem1, "ToolStripMenuItem1")
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        resources.ApplyResources(Me.ToolStripMenuItem1, "ToolStripMenuItem1")
         '
         'ToolStripMenuItem2
         '
-        resources.ApplyResources(Me.ToolStripMenuItem2, "ToolStripMenuItem2")
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+        resources.ApplyResources(Me.ToolStripMenuItem2, "ToolStripMenuItem2")
         '
         'ToolStripMenuItem3
         '
-        resources.ApplyResources(Me.ToolStripMenuItem3, "ToolStripMenuItem3")
         Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
+        resources.ApplyResources(Me.ToolStripMenuItem3, "ToolStripMenuItem3")
         '
         'BGLoadComp
         '
@@ -578,8 +631,8 @@ Partial Class FormFlowsheet
         '
         'dckPanel
         '
-        resources.ApplyResources(Me.dckPanel, "dckPanel")
         Me.dckPanel.DefaultFloatWindowSize = New System.Drawing.Size(900, 600)
+        resources.ApplyResources(Me.dckPanel, "dckPanel")
         Me.dckPanel.DockBackColor = System.Drawing.SystemColors.Control
         Me.dckPanel.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingWindow
         Me.dckPanel.Name = "dckPanel"
@@ -588,10 +641,6 @@ Partial Class FormFlowsheet
         '
         Me.SaveFileDialog1.DefaultExt = "png"
         resources.ApplyResources(Me.SaveFileDialog1, "SaveFileDialog1")
-        '
-        'OpenFileName
-        '
-        resources.ApplyResources(Me.OpenFileName, "OpenFileName")
         '
         'TimerScripts1
         '
@@ -620,142 +669,142 @@ Partial Class FormFlowsheet
         '
         'ToolStrip1
         '
-        resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
         Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripSeparator1, Me.tsbAtivar, Me.tsbCalcF, Me.tsbCalc, Me.tsbAbortCalc, Me.tsbSimultAdjustSolver, Me.ToolStripSeparator2, Me.tsbUndo, Me.tsbRedo, Me.ToolStripSeparator3, Me.ToolStripLabel2, Me.tsbDynamics, Me.tsbDynManager, Me.tsbDynIntegrator, Me.ToolStripSeparator4, Me.ToolStripLabel1, Me.tscbStoredSolutions, Me.tsbStoreSolution, Me.tsbLoadSolution, Me.tsbDeleteSolution})
+        resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
         Me.ToolStrip1.Name = "ToolStrip1"
         '
         'ToolStripButton1
         '
-        resources.ApplyResources(Me.ToolStripButton1, "ToolStripButton1")
         Me.ToolStripButton1.Image = Global.DWSIM.My.Resources.Resources.cog
+        resources.ApplyResources(Me.ToolStripButton1, "ToolStripButton1")
         Me.ToolStripButton1.Name = "ToolStripButton1"
         '
         'ToolStripSeparator1
         '
-        resources.ApplyResources(Me.ToolStripSeparator1, "ToolStripSeparator1")
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        resources.ApplyResources(Me.ToolStripSeparator1, "ToolStripSeparator1")
         '
         'tsbAtivar
         '
-        resources.ApplyResources(Me.tsbAtivar, "tsbAtivar")
         Me.tsbAtivar.CheckOnClick = True
         Me.tsbAtivar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbAtivar.Image = Global.DWSIM.My.Resources.Resources.control_power_blue
+        resources.ApplyResources(Me.tsbAtivar, "tsbAtivar")
         Me.tsbAtivar.Name = "tsbAtivar"
         '
         'tsbCalcF
         '
-        resources.ApplyResources(Me.tsbCalcF, "tsbCalcF")
         Me.tsbCalcF.BackColor = System.Drawing.Color.LightSteelBlue
         Me.tsbCalcF.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbCalcF.Image = Global.DWSIM.My.Resources.Resources.control_play
+        resources.ApplyResources(Me.tsbCalcF, "tsbCalcF")
         Me.tsbCalcF.Name = "tsbCalcF"
         '
         'tsbCalc
         '
-        resources.ApplyResources(Me.tsbCalc, "tsbCalc")
         Me.tsbCalc.Image = Global.DWSIM.My.Resources.Resources.control_play_blue
+        resources.ApplyResources(Me.tsbCalc, "tsbCalc")
         Me.tsbCalc.Name = "tsbCalc"
         '
         'tsbAbortCalc
         '
-        resources.ApplyResources(Me.tsbAbortCalc, "tsbAbortCalc")
         Me.tsbAbortCalc.Image = Global.DWSIM.My.Resources.Resources.control_stop_blue
+        resources.ApplyResources(Me.tsbAbortCalc, "tsbAbortCalc")
         Me.tsbAbortCalc.Name = "tsbAbortCalc"
         '
         'tsbSimultAdjustSolver
         '
-        resources.ApplyResources(Me.tsbSimultAdjustSolver, "tsbSimultAdjustSolver")
         Me.tsbSimultAdjustSolver.CheckOnClick = True
         Me.tsbSimultAdjustSolver.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbSimultAdjustSolver.Image = Global.DWSIM.My.Resources.Resources.control_power
+        resources.ApplyResources(Me.tsbSimultAdjustSolver, "tsbSimultAdjustSolver")
         Me.tsbSimultAdjustSolver.Name = "tsbSimultAdjustSolver"
         '
         'ToolStripSeparator2
         '
-        resources.ApplyResources(Me.ToolStripSeparator2, "ToolStripSeparator2")
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        resources.ApplyResources(Me.ToolStripSeparator2, "ToolStripSeparator2")
         '
         'tsbUndo
         '
-        resources.ApplyResources(Me.tsbUndo, "tsbUndo")
         Me.tsbUndo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbUndo.Image = Global.DWSIM.My.Resources.Resources.undo_161
+        resources.ApplyResources(Me.tsbUndo, "tsbUndo")
         Me.tsbUndo.Name = "tsbUndo"
         '
         'tsbRedo
         '
-        resources.ApplyResources(Me.tsbRedo, "tsbRedo")
         Me.tsbRedo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbRedo.Image = Global.DWSIM.My.Resources.Resources.redo_16
+        resources.ApplyResources(Me.tsbRedo, "tsbRedo")
         Me.tsbRedo.Name = "tsbRedo"
         '
         'ToolStripSeparator3
         '
-        resources.ApplyResources(Me.ToolStripSeparator3, "ToolStripSeparator3")
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        resources.ApplyResources(Me.ToolStripSeparator3, "ToolStripSeparator3")
         '
         'ToolStripLabel2
         '
-        resources.ApplyResources(Me.ToolStripLabel2, "ToolStripLabel2")
         Me.ToolStripLabel2.Name = "ToolStripLabel2"
+        resources.ApplyResources(Me.ToolStripLabel2, "ToolStripLabel2")
         '
         'tsbDynamics
         '
-        resources.ApplyResources(Me.tsbDynamics, "tsbDynamics")
         Me.tsbDynamics.CheckOnClick = True
         Me.tsbDynamics.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbDynamics.Image = Global.DWSIM.My.Resources.Resources.icons8_exercise
+        resources.ApplyResources(Me.tsbDynamics, "tsbDynamics")
         Me.tsbDynamics.Name = "tsbDynamics"
         '
         'tsbDynManager
         '
-        resources.ApplyResources(Me.tsbDynManager, "tsbDynManager")
         Me.tsbDynManager.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        resources.ApplyResources(Me.tsbDynManager, "tsbDynManager")
         Me.tsbDynManager.Name = "tsbDynManager"
         '
         'tsbDynIntegrator
         '
-        resources.ApplyResources(Me.tsbDynIntegrator, "tsbDynIntegrator")
         Me.tsbDynIntegrator.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        resources.ApplyResources(Me.tsbDynIntegrator, "tsbDynIntegrator")
         Me.tsbDynIntegrator.Name = "tsbDynIntegrator"
         '
         'ToolStripSeparator4
         '
-        resources.ApplyResources(Me.ToolStripSeparator4, "ToolStripSeparator4")
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
+        resources.ApplyResources(Me.ToolStripSeparator4, "ToolStripSeparator4")
         '
         'ToolStripLabel1
         '
-        resources.ApplyResources(Me.ToolStripLabel1, "ToolStripLabel1")
         Me.ToolStripLabel1.Name = "ToolStripLabel1"
+        resources.ApplyResources(Me.ToolStripLabel1, "ToolStripLabel1")
         '
         'tscbStoredSolutions
         '
-        resources.ApplyResources(Me.tscbStoredSolutions, "tscbStoredSolutions")
         Me.tscbStoredSolutions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.tscbStoredSolutions.Name = "tscbStoredSolutions"
+        resources.ApplyResources(Me.tscbStoredSolutions, "tscbStoredSolutions")
         '
         'tsbStoreSolution
         '
-        resources.ApplyResources(Me.tsbStoreSolution, "tsbStoreSolution")
         Me.tsbStoreSolution.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbStoreSolution.Image = Global.DWSIM.My.Resources.Resources.arrow_up1
+        resources.ApplyResources(Me.tsbStoreSolution, "tsbStoreSolution")
         Me.tsbStoreSolution.Name = "tsbStoreSolution"
         '
         'tsbLoadSolution
         '
-        resources.ApplyResources(Me.tsbLoadSolution, "tsbLoadSolution")
         Me.tsbLoadSolution.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbLoadSolution.Image = Global.DWSIM.My.Resources.Resources.arrow_down
+        resources.ApplyResources(Me.tsbLoadSolution, "tsbLoadSolution")
         Me.tsbLoadSolution.Name = "tsbLoadSolution"
         '
         'tsbDeleteSolution
         '
-        resources.ApplyResources(Me.tsbDeleteSolution, "tsbDeleteSolution")
         Me.tsbDeleteSolution.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbDeleteSolution.Image = Global.DWSIM.My.Resources.Resources.cross
+        resources.ApplyResources(Me.tsbDeleteSolution, "tsbDeleteSolution")
         Me.tsbDeleteSolution.Name = "tsbDeleteSolution"
         '
         'FormFlowsheet
@@ -872,4 +921,11 @@ Partial Class FormFlowsheet
     Public WithEvents ToolStrip1 As ToolStrip
     Friend WithEvents tsmiRichText As ToolStripMenuItem
     Friend WithEvents BotãoToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ProToolsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CapitalCostEstimatorToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ExcelReportsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DashboardToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MultivariateSensitivityStudyToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DesignOfExperimentsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents OptimumTesterToolStripMenuItem As ToolStripMenuItem
 End Class

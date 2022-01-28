@@ -258,6 +258,8 @@ Public Class FlowsheetSurfaceControl
             t = obj(0)
             c = obj(1)
 
+            If c = SimulationObjectClass.None Then Exit Sub
+
             Console.WriteLine(t.Name)
 
             Dim pt = PointToClient(New Point(e.X, e.Y))

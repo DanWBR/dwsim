@@ -519,6 +519,11 @@ Public Class FormFlowsheet
 
     Public Sub FormChild_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
 
+        If FormMain.IsPro Then
+            DashboardToolStripMenuItem.Visible = False
+            ProToolsToolStripMenuItem.Visible = False
+        End If
+
         FrmStSim1.CurrentFlowsheet = Me
 
         Me.WindowState = FormWindowState.Maximized

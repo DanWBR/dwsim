@@ -143,6 +143,11 @@ Public Class FlowsheetSurface_SkiaSharp
             End Try
         Next
 
+        If FormMain.IsPro Then
+            FindTearStreamsAutomaticallyToolStripMenuItem.Visible = False
+            UpgradeDistillationColumnToProToolStripMenuItem.Visible = False
+        End If
+
         Loaded = True
 
     End Sub

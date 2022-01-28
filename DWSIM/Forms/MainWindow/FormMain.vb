@@ -70,6 +70,8 @@ Public Class FormMain
     Public SampleList As New List(Of String)
     Public FOSSEEList As New List(Of FOSSEEFlowsheet)
 
+    Public Shared Property IsPro As Boolean = False
+
     'Collections
 
     Public AvailableComponents As New Dictionary(Of String, Interfaces.ICompoundConstantProperties)
@@ -917,6 +919,8 @@ Public Class FormMain
     End Sub
 
     Private Sub FormParent_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
+
+        tsmiFreeProTrial.Visible = Not IsPro
 
         Dim cmdLine() As String = System.Environment.GetCommandLineArgs()
 
@@ -4427,6 +4431,10 @@ Label_00CC:
 
     Private Sub LoggedInS365Button_Click(sender As Object, e As EventArgs) Handles LoggedInS365Button.Click
         Process.Start("https://simulate365.com/shops/simulate-365-suite/")
+    End Sub
+
+    Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles tsmiFreeProTrial.Click
+        Process.Start("https://simulate365.com/registration-dwsim-pro/")
     End Sub
 
     Private Sub tsbInspector_CheckedChanged(sender As Object, e As EventArgs) Handles tsbInspector.CheckedChanged
