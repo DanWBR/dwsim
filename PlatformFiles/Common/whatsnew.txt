@@ -1,19 +1,10 @@
-Version 7.2.0
+Version 7.3.0
 
-- HTML Text Flowsheet Object (Classic UI)
-- Display Energy Stream values in Flowsheet
-- Display variables in plain/html text blocks in the flowsheet
-- Fixed issue #265 - subflowsheet initialization
-- Fixed kinetic/hetcat reaction conversion factors
-- Fixed Python issue on Linux
-- Added support for Python 3.10 (#246)
-- Fixed issue with Conversion Reactor
-- Fixed issue with automation and loading of System.Buffers
-- Fixed issue with diffusion coefficients
-- Fixed issue #263 - PR interaction parameters
-- Fixed issues with Dynamic mode
-- Fixed issues with CoolProp Property Packages
-- Fixed XML serialization issue
-- Fixed issue with UNIQUAC model
-- Fixed issue with Single Compound Flash
-- Other fixes and enhancements
+- New Button Flowsheet Object (Classic UI)
+- Disable/Enable Inline Display of Stream Properties
+- Fixed Rigorous Column drawing
+- Fixed CPUI's Welcome Screen in Dark Mode
+- Display filename and line number in error messages
+- Fixed PR78 Property Package
+- Fixed issue #272: Input changes not passed to Subflowsheet
+- Fixed issue #273: Change in temperature not a property in cooler

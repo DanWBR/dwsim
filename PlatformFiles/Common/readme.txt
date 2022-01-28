@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 7.2.0
+Version 7.3.0
 Copyright (c) 2017-2022 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,17 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
+
+Version 7.3.0
+
+- New Button Flowsheet Object (Classic UI)
+- Disable/Enable Inline Display of Stream Properties
+- Fixed Rigorous Column drawing
+- Fixed CPUI's Welcome Screen in Dark Mode
+- Display filename and line number in error messages
+- Fixed PR78 Property Package
+- Fixed issue #272: Input changes not passed to Subflowsheet
+- Fixed issue #273: Change in temperature not a property in cooler
 
 Version 7.2.0
 
