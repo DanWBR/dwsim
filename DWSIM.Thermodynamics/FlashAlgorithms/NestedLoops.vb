@@ -305,6 +305,26 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Vy = Vz
                 Vx = Vy.DivideY(Ki).NormalizeY
             End If
+            If PP.AUX_CheckTrivial(Ki, 0.1) And L > 0.0 And V > 0.0 Then
+                Dim gl = PP.DW_CalcGibbsEnergy(Vx, T, P, "L")
+                Dim gv = PP.DW_CalcGibbsEnergy(Vy, T, P, "V")
+                If Math.Abs(gl / gv - 1.0) < 0.01 Then
+                    Dim zl = PP.AUX_Z(Vx, T, P, Interfaces.Enums.PhaseName.Liquid)
+                    Dim zv = PP.AUX_Z(Vy, T, P, Interfaces.Enums.PhaseName.Vapor)
+                    Dim zc = PP.RET_VZC().MultiplyY(Vz).Sum
+                    If zl > zc And zv > zc Then
+                        V = 1.0#
+                        L = 0.0#
+                        Vy = Vz
+                        Vx = Vy.DivideY(Ki).NormalizeY
+                    Else
+                        V = 0.0#
+                        L = 1.0#
+                        Vx = Vz
+                        Vy = Ki.MultiplyY(Vx).NormalizeY
+                    End If
+                End If
+            End If
 
             d2 = Date.Now
 
