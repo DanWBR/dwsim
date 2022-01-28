@@ -498,4 +498,8 @@ Public Class FormWelcome
     Private Sub LinkLabel13_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel13.LinkClicked
         Process.Start("https://dwsim.inforside.com.br/api_help60/html/R_Project_DWSIM_Class_Library_Documentation.htm")
     End Sub
+
+    Private Sub LinkLabel14_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel14.LinkClicked
+        Process.Start("https://dwsim.inforside.com.br/new/index.php/dwsim-pro/")
+    End Sub
 End Class
