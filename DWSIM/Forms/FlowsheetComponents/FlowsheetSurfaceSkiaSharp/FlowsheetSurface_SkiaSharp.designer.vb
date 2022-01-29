@@ -94,6 +94,8 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.ToolStripSeparator18 = New System.Windows.Forms.ToolStripSeparator()
         Me.LayoutAutomaticoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RestaurarLayoutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tssepPro2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.FindTearStreamsAutomaticallyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CMS_Sel = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.TSMI_Label = New System.Windows.Forms.ToolStripMenuItem()
         Me.AtivadoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -127,6 +129,8 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.SplitAndInsertValveTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.SplitAndInsertRecycleMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MergeStreamsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tssepPro = New System.Windows.Forms.ToolStripSeparator()
+        Me.UpgradeDistillationColumnToProToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PreviewDialog = New System.Windows.Forms.PrintPreviewDialog()
         Me.designSurfacePrintDocument = New System.Drawing.Printing.PrintDocument()
         Me.CMS_ItemsToConnect = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -149,10 +153,6 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.ToolStripSeparator11 = New System.Windows.Forms.ToolStripSeparator()
         Me.CMS_Palette = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.tssepPro = New System.Windows.Forms.ToolStripSeparator()
-        Me.UpgradeDistillationColumnToProToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.tssepPro2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.FindTearStreamsAutomaticallyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripContainer1.ContentPanel.SuspendLayout()
         Me.ToolStripContainer1.TopToolStripPanel.SuspendLayout()
         Me.ToolStripContainer1.SuspendLayout()
@@ -672,6 +672,17 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.RestaurarLayoutToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.arrows_4_way
         Me.RestaurarLayoutToolStripMenuItem.Name = "RestaurarLayoutToolStripMenuItem"
         '
+        'tssepPro2
+        '
+        resources.ApplyResources(Me.tssepPro2, "tssepPro2")
+        Me.tssepPro2.Name = "tssepPro2"
+        '
+        'FindTearStreamsAutomaticallyToolStripMenuItem
+        '
+        resources.ApplyResources(Me.FindTearStreamsAutomaticallyToolStripMenuItem, "FindTearStreamsAutomaticallyToolStripMenuItem")
+        Me.FindTearStreamsAutomaticallyToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.lightning
+        Me.FindTearStreamsAutomaticallyToolStripMenuItem.Name = "FindTearStreamsAutomaticallyToolStripMenuItem"
+        '
         'CMS_Sel
         '
         resources.ApplyResources(Me.CMS_Sel, "CMS_Sel")
@@ -860,6 +871,17 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.MergeStreamsToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.arrow_join
         Me.MergeStreamsToolStripMenuItem.Name = "MergeStreamsToolStripMenuItem"
         '
+        'tssepPro
+        '
+        resources.ApplyResources(Me.tssepPro, "tssepPro")
+        Me.tssepPro.Name = "tssepPro"
+        '
+        'UpgradeDistillationColumnToProToolStripMenuItem
+        '
+        resources.ApplyResources(Me.UpgradeDistillationColumnToProToolStripMenuItem, "UpgradeDistillationColumnToProToolStripMenuItem")
+        Me.UpgradeDistillationColumnToProToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.lightning
+        Me.UpgradeDistillationColumnToProToolStripMenuItem.Name = "UpgradeDistillationColumnToProToolStripMenuItem"
+        '
         'PreviewDialog
         '
         resources.ApplyResources(Me.PreviewDialog, "PreviewDialog")
@@ -974,28 +996,6 @@ Partial Class FlowsheetSurface_SkiaSharp
         resources.ApplyResources(Me.ToolStripMenuItem1, "ToolStripMenuItem1")
         Me.ToolStripMenuItem1.Image = Global.DWSIM.My.Resources.Resources.icons8_compress
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        '
-        'tssepPro
-        '
-        resources.ApplyResources(Me.tssepPro, "tssepPro")
-        Me.tssepPro.Name = "tssepPro"
-        '
-        'UpgradeDistillationColumnToProToolStripMenuItem
-        '
-        resources.ApplyResources(Me.UpgradeDistillationColumnToProToolStripMenuItem, "UpgradeDistillationColumnToProToolStripMenuItem")
-        Me.UpgradeDistillationColumnToProToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.lightning
-        Me.UpgradeDistillationColumnToProToolStripMenuItem.Name = "UpgradeDistillationColumnToProToolStripMenuItem"
-        '
-        'tssepPro2
-        '
-        resources.ApplyResources(Me.tssepPro2, "tssepPro2")
-        Me.tssepPro2.Name = "tssepPro2"
-        '
-        'FindTearStreamsAutomaticallyToolStripMenuItem
-        '
-        resources.ApplyResources(Me.FindTearStreamsAutomaticallyToolStripMenuItem, "FindTearStreamsAutomaticallyToolStripMenuItem")
-        Me.FindTearStreamsAutomaticallyToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.lightning
-        Me.FindTearStreamsAutomaticallyToolStripMenuItem.Name = "FindTearStreamsAutomaticallyToolStripMenuItem"
         '
         'FlowsheetSurface_SkiaSharp
         '

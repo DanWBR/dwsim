@@ -106,6 +106,22 @@ Public Class FormMain
 
         ExtensionMethods.ChangeDefaultFont(Me)
 
+        Using g1 = Me.CreateGraphics()
+
+            Settings.DpiScale = g1.DpiX / 96.0
+
+            Me.ToolStrip1.AutoSize = False
+            Me.ToolStrip1.Size = New Size(ToolStrip1.Width, 24 * Settings.DpiScale)
+            Me.ToolStrip1.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
+            For Each item In Me.ToolStrip1.Items
+                If TryCast(item, ToolStripButton) IsNot Nothing Then
+                    DirectCast(item, ToolStripButton).Size = New Size(ToolStrip1.ImageScalingSize.Width, ToolStrip1.ImageScalingSize.Height)
+                End If
+            Next
+            Me.ToolStrip1.Invalidate()
+
+        End Using
+
         MostRecentFiles = My.Settings.MostRecentFiles
 
         If GlobalSettings.Settings.OldUI Then
@@ -164,8 +180,6 @@ Public Class FormMain
             SetupWelcomeScreen()
 
         End If
-
-        GlobalSettings.Settings.DpiScale = Me.CreateGraphics.DpiX / 96.0
 
     End Sub
 
