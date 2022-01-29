@@ -111,7 +111,7 @@ Public Class FormMain
             Settings.DpiScale = g1.DpiX / 96.0
 
             Me.ToolStrip1.AutoSize = False
-            Me.ToolStrip1.Size = New Size(ToolStrip1.Width, 24 * Settings.DpiScale)
+            Me.ToolStrip1.Size = New Size(ToolStrip1.Width, 28 * Settings.DpiScale)
             Me.ToolStrip1.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
             For Each item In Me.ToolStrip1.Items
                 If TryCast(item, ToolStripButton) IsNot Nothing Then
