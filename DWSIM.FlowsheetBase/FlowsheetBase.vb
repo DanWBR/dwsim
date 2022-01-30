@@ -1402,13 +1402,16 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                     If ppkey = "" Then
                         obj = CType(New RaoultPropertyPackage().ReturnInstance(xel.Element("Type").Value), PropertyPackage)
                     Else
+                        Dim ptype = xel.Element("Type").Value
+                        If ppkey.Contains("1978") And ptype.Contains("PengRobinsonPropertyPackage") Then
+                            ptype = ptype.Replace("PengRobinson", "PengRobinson1978")
+                        End If
                         If AvailablePropertyPackages.ContainsKey(ppkey) Then
-                            obj = AvailablePropertyPackages(ppkey).ReturnInstance(xel.Element("Type").Value)
+                            obj = AvailablePropertyPackages(ppkey).ReturnInstance(ptype)
                         Else
-                            Throw New Exception("The " & ppkey & " library was not found. Please download and install it in order to run this simulation.")
+                            Throw New Exception("The " & ppkey & " Property Package library was not found. Please download and install it in order to run this simulation.")
                         End If
                     End If
-
                 End If
                 obj.LoadData(xel.Elements.ToList)
                 Dim newID As String = Guid.NewGuid.ToString

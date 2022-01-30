@@ -1950,8 +1950,12 @@ Public Class FormMain
                     If ppkey = "" Then
                         obj = CType(New RaoultPropertyPackage().ReturnInstance(xel.Element("Type").Value), PropertyPackage)
                     Else
+                        Dim ptype = xel.Element("Type").Value
+                        If ppkey.Contains("1978") And ptype.Contains("PengRobinsonPropertyPackage") Then
+                            ptype = ptype.Replace("PengRobinson","PengRobinson1978")
+                        End If
                         If PropertyPackages.ContainsKey(ppkey) Then
-                            obj = PropertyPackages(ppkey).ReturnInstance(xel.Element("Type").Value)
+                            obj = PropertyPackages(ppkey).ReturnInstance(ptype)
                         Else
                             form.LoaderExceptions.Add(PrepareExceptionInfo(xel))
                             Throw New Exception("The " & ppkey & " Property Package library was not found. Please download and install it in order to run this simulation.")
@@ -2502,11 +2506,15 @@ Public Class FormMain
                     If ppkey = "" Then
                         obj = CType(New RaoultPropertyPackage().ReturnInstance(xel.Element("Type").Value), PropertyPackage)
                     Else
+                        Dim ptype = xel.Element("Type").Value
+                        If ppkey.Contains("1978") And ptype.Contains("PengRobinsonPropertyPackage") Then
+                            ptype = ptype.Replace("PengRobinson", "PengRobinson1978")
+                        End If
                         If PropertyPackages.ContainsKey(ppkey) Then
-                            obj = PropertyPackages(ppkey).ReturnInstance(xel.Element("Type").Value)
+                            obj = PropertyPackages(ppkey).ReturnInstance(ptype)
                         Else
                             form.LoaderExceptions.Add(PrepareExceptionInfo(xel))
-                            Throw New Exception("The " & ppkey & " library was not found. Please download and install it in order to run this simulation.")
+                            Throw New Exception("The " & ppkey & " Property Package library was not found. Please download and install it in order to run this simulation.")
                         End If
                     End If
                 End If
