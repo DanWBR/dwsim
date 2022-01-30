@@ -425,23 +425,27 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                             For Each iex4 In DirectCast(iex3, AggregateException).InnerExceptions
                                                 myobj.ErrorMessage += iex4.Message.ToString & vbCrLf
                                                 CheckExceptionForAdditionalInfo(iex4)
+                                                iex4.Source = myinfo.Tag
                                                 loopex.Add(New Exception(myinfo.Tag & ": " & iex4.Message, iex4))
                                             Next
                                         Else
                                             myobj.ErrorMessage += iex3.Message.ToString & vbCrLf
                                             CheckExceptionForAdditionalInfo(iex3)
+                                            iex3.Source = myinfo.Tag
                                             loopex.Add(New Exception(myinfo.Tag & ": " & iex3.Message, iex3))
                                         End If
                                     Next
                                 Else
                                     myobj.ErrorMessage += iex2.Message.ToString & vbCrLf
                                     CheckExceptionForAdditionalInfo(iex2)
+                                    iex2.Source = myinfo.Tag
                                     loopex.Add(New Exception(myinfo.Tag & ": " & iex2.Message, iex2))
                                 End If
                             Next
                         Else
                             myobj.ErrorMessage += iex.Message.ToString & vbCrLf
                             CheckExceptionForAdditionalInfo(iex)
+                            iex.Source = myinfo.Tag
                             loopex.Add(New Exception(myinfo.Tag & ": " & iex.Message, iex))
                         End If
                     Next
@@ -451,6 +455,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                     RaiseEvent CalculationError(myinfo, New EventArgs(), ex)
                     myobj.ErrorMessage = ex.Message.ToString & vbCrLf
                     CheckExceptionForAdditionalInfo(ex)
+                    ex.Source = myinfo.Tag
                     loopex.Add(New Exception(myinfo.Tag & ": " & ex.Message))
                     If GlobalSettings.Settings.SolverBreakOnException Then Exit While
                 Finally
@@ -537,23 +542,27 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                         For Each iex4 In DirectCast(iex3, AggregateException).InnerExceptions
                                             myobj.ErrorMessage += iex4.Message.ToString & vbCrLf
                                             CheckExceptionForAdditionalInfo(iex4)
+                                            iex4.Source = myinfo.Tag
                                             loopex.Add(New Exception(myinfo.Tag & ": " & iex4.Message, iex4))
                                         Next
                                     Else
                                         myobj.ErrorMessage += iex3.Message.ToString & vbCrLf
                                         CheckExceptionForAdditionalInfo(iex3)
+                                        iex3.Source = myinfo.Tag
                                         loopex.Add(New Exception(myinfo.Tag & ": " & iex3.Message, iex3))
                                     End If
                                 Next
                             Else
                                 myobj.ErrorMessage += iex2.Message.ToString & vbCrLf
                                 CheckExceptionForAdditionalInfo(iex2)
+                                iex2.Source = myinfo.Tag
                                 loopex.Add(New Exception(myinfo.Tag & ": " & iex2.Message, iex2))
                             End If
                         Next
                     Else
                         myobj.ErrorMessage += iex.Message.ToString & vbCrLf
                         CheckExceptionForAdditionalInfo(iex)
+                        iex.Source = myinfo.Tag
                         loopex.Add(New Exception(myinfo.Tag & ": " & iex.Message, iex))
                     End If
                 Next
@@ -564,6 +573,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                 fgui.ProcessScripts(Scripts.EventType.ObjectCalculationError, Scripts.ObjectType.FlowsheetObject, myobj.Name)
                 myobj.ErrorMessage = ex.Message.ToString
                 CheckExceptionForAdditionalInfo(ex)
+                ex.Source = myinfo.Tag
                 loopex.Add(New Exception(myinfo.Tag & ": " & ex.Message, ex))
                 If GlobalSettings.Settings.SolverBreakOnException Then Exit While
             Finally
@@ -647,23 +657,27 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                                                        For Each iex4 In DirectCast(iex3, AggregateException).InnerExceptions
                                                                            myobj.ErrorMessage += iex4.Message.ToString & vbCrLf
                                                                            CheckExceptionForAdditionalInfo(iex4)
+                                                                           iex4.Source = myinfo.Tag
                                                                            loopex.Add(New Exception(myinfo.Tag & ": " & iex4.Message, iex4))
                                                                        Next
                                                                    Else
                                                                        myobj.ErrorMessage += iex3.Message.ToString & vbCrLf
                                                                        CheckExceptionForAdditionalInfo(iex3)
+                                                                       iex3.Source = myinfo.Tag
                                                                        loopex.Add(New Exception(myinfo.Tag & ": " & iex3.Message, iex3))
                                                                    End If
                                                                Next
                                                            Else
                                                                myobj.ErrorMessage += iex2.Message.ToString & vbCrLf
                                                                CheckExceptionForAdditionalInfo(iex2)
+                                                               iex2.Source = myinfo.Tag
                                                                loopex.Add(New Exception(myinfo.Tag & ": " & iex2.Message, iex2))
                                                            End If
                                                        Next
                                                    Else
                                                        myobj.ErrorMessage += iex.Message.ToString & vbCrLf
                                                        CheckExceptionForAdditionalInfo(iex)
+                                                       iex.Source = myinfo.Tag
                                                        loopex.Add(New Exception(myinfo.Tag & ": " & iex.Message, iex))
                                                    End If
                                                Next
@@ -675,6 +689,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                                myobj.ErrorMessage = ex.Message.ToString
                                                CheckExceptionForAdditionalInfo(ex)
                                                loopex.Add(New Exception(myinfo.Tag & ": " & ex.Message, ex))
+                                               ex.Source = myinfo.Tag
                                                If GlobalSettings.Settings.SolverBreakOnException Then state.Break()
                                            Finally
                                                fgui.UpdateInterface()
@@ -1490,6 +1505,9 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                         End While
                     End If
                     Dim message = baseexception.Message
+                    If baseexception.Source <> "" Then
+                        message = String.Format("Error in '{0}': {1}", baseexception.Source, baseexception.Message)
+                    End If
                     Try
                         Dim st As New StackTrace(baseexception, True)
                         Dim frame As StackFrame = st.GetFrame(0)
