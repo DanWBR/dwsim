@@ -1,4 +1,4 @@
-Version 7.3.0
+Version 7.3.1
 
 - New Button Flowsheet Object (Classic UI)
 - Disable/Enable Inline Display of Stream Properties
