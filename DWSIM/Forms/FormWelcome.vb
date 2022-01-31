@@ -488,7 +488,7 @@ Public Class FormWelcome
     End Sub
 
     Private Sub LinkLabel7_LinkClicked_1(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel7.LinkClicked
-        Process.Start("https://dwsim.inforside.com.br/new/index.php/dwsim-pro/")
+        Process.Start("https://simulate365.com/dwsim-pro/")
     End Sub
 
     Private Sub LinkLabel12_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel12.LinkClicked
