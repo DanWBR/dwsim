@@ -417,7 +417,7 @@ Namespace Reactors
                         If Not DN.ContainsKey(sb.CompName) Then
                             DN.Add(sb.CompName, -xf(i) * rxn.Components(sb.CompName).StoichCoeff / scBC * nBC)
                         Else
-                            DN(sb.CompName) = -xf(i) * rxn.Components(sb.CompName).StoichCoeff / scBC * nBC
+                            DN(sb.CompName) += -xf(i) * rxn.Components(sb.CompName).StoichCoeff / scBC * nBC
                         End If
                     Next
 
