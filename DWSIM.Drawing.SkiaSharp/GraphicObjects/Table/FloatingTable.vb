@@ -290,7 +290,7 @@ Namespace GraphicObjects.Tables
 
                         'desenhar textos e retangulos
                         canvas.DrawText(Me.Owner.GraphicObject.Tag.ToUpper, X + Padding + 3 / zoom, Y + Padding + size.Height, tbpaint)
-                        canvas.DrawText(Owner.GetFlowsheet.GetTranslatedString(Me.Owner.GraphicObject.Description), X + Padding + 3 / zoom, Y + maxH + size.Height, tpaint)
+                        canvas.DrawText(Owner.GetDisplayName(), X + Padding + 3 / zoom, Y + maxH + size.Height, tpaint)
                         Dim n As Integer = 1
                         For Each prop In props
                             propstring = Owner.GetFlowsheet.GetTranslatedString(prop)
