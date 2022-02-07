@@ -173,8 +173,8 @@ Namespace PropertyPackages
 
         Public Function AUX_TSAT(P As Double, x As Double) As Double
 
-            Dim Tmin = CoolProp.Props1SI(GetCoolPropName(0.0), "TMIN")
-            Dim Tmax = CoolProp.Props1SI(GetCoolPropName(0.0), "TMAX")
+            Dim Tmin = CoolProp.Props1SI(GetCoolPropName(x), "T_FREEZE")
+            Dim Tmax = CoolProp.Props1SI(GetCoolPropName(x), "TMAX")
             Dim xmax = SolutionDataList(SoluteName).xmax
             Dim xmin = SolutionDataList(SoluteName).xmin
 
@@ -183,6 +183,9 @@ Namespace PropertyPackages
                                       Dim psat As Double
                                       If x < xmax Then
                                           psat = CoolProp.PropsSI("P", "T", t, "Q", 0, GetCoolPropName(x))
+                                          If psat = 0.0 Then
+                                              Throw New Exception(String.Format("Error calculation saturation pressure at {0} K - CoolProp returned Psat = 0 Pa", t))
+                                          End If
                                       Else
                                           Dim x1, x2, x3, x4, x5, p1, p2, p3, p4, p5 As Double
                                           x1 = xmin + (xmax - xmin) * 0.2
@@ -353,8 +356,8 @@ Namespace PropertyPackages
             Dim Vxw = AUX_CONVERT_MOL_TO_MASS(Vx)
             Dim x = Vxw(Array.IndexOf(RET_VNAMES(), SoluteCompound))
 
-            Dim Tmin = CoolProp.Props1SI(GetCoolPropName(0.0), "TMIN")
-            Dim Tmax = CoolProp.Props1SI(GetCoolPropName(0.0), "TMAX")
+            Dim Tmin = CoolProp.Props1SI(GetCoolPropName(x), "T_FREEZE")
+            Dim Tmax = CoolProp.Props1SI(GetCoolPropName(x), "TMAX")
             Dim xmax = SolutionDataList(SoluteName).xmax
             Dim xmin = SolutionDataList(SoluteName).xmin
 
@@ -427,8 +430,8 @@ Namespace PropertyPackages
             Dim Vxw = AUX_CONVERT_MOL_TO_MASS(Vx)
             Dim x = Vxw(Array.IndexOf(RET_VNAMES(), SoluteCompound))
 
-            Dim Tmin = CoolProp.Props1SI(GetCoolPropName(0.0), "TMIN")
-            Dim Tmax = CoolProp.Props1SI(GetCoolPropName(0.0), "TMAX")
+            Dim Tmin = CoolProp.Props1SI(GetCoolPropName(x), "T_FREEZE")
+            Dim Tmax = CoolProp.Props1SI(GetCoolPropName(x), "TMAX")
 
             If st = State.Liquid Then
                 Try
