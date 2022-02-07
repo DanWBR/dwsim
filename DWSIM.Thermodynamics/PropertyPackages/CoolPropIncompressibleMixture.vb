@@ -184,7 +184,7 @@ Namespace PropertyPackages
                                       If x < xmax Then
                                           psat = CoolProp.PropsSI("P", "T", t, "Q", 0, GetCoolPropName(x))
                                           If psat = 0.0 Then
-                                              Throw New Exception(String.Format("Error calculation saturation pressure at {0} K - CoolProp returned Psat = 0 Pa", t))
+                                              Throw New Exception(String.Format("Error calculating saturation pressure at {0} K for {1} - CoolProp returned Psat = 0 Pa", t, GetCoolPropName(x)))
                                           End If
                                       Else
                                           Dim x1, x2, x3, x4, x5, p1, p2, p3, p4, p5 As Double
