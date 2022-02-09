@@ -8146,6 +8146,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Fator de Correção da MLDT (Casco e Tubo) .
+        '''</summary>
+        Friend Shared ReadOnly Property HXLMTDF() As String
+            Get
+                Return ResourceManager.GetString("HXLMTDF", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Número de Reynolds de casco.
         '''</summary>
         Friend Shared ReadOnly Property HXReShell() As String
