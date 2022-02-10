@@ -976,7 +976,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
     End Function
 
     ''' <summary>
-    ''' Calculate all objects in the Flowsheet using a ordering method.
+    ''' Calculate all objects in the Flowsheet using an ordering method.
     ''' </summary>
     ''' <param name="fobj">Flowsheet to be calculated (FormFlowsheet object).</param>
     ''' <param name="Adjusting">True if the routine is called from the Simultaneous Adjust Solver.</param>
