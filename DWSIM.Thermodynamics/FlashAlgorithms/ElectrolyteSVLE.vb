@@ -425,11 +425,37 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                                   Else
 
-                                      newx = ExternalSolver.Solve(Function(x1)
-                                                                      fval = FunctionValue2N(x1, False)
-                                                                      Return fval
-                                                                  End Function, Nothing, Nothing,
+                                      Try
+
+                                          newx = ExternalSolver.Solve(Function(x1)
+                                                                          fval = FunctionValue2N(x1, True)
+                                                                          Return fval
+                                                                      End Function, Nothing, Nothing,
+                                                                                newx2, MaximumIterations, Tolerance)
+
+                                          errval = FunctionValue2N(newx, True).AbsSqrSumY()
+
+                                          newx = ExternalSolver.Solve(Function(x1)
+                                                                          fval = FunctionValue2N(x1, False)
+                                                                          Return fval
+                                                                      End Function, Nothing, Nothing,
                                                                                 newx, MaximumIterations, Tolerance)
+
+                                      Catch ex As Exception
+
+                                          newx = solver3.Solve(Function(x1)
+                                                                   fval = FunctionValue2N(x1, True)
+                                                                   Return fval
+                                                               End Function, newx2)
+
+                                          errval = FunctionValue2N(newx, True).AbsSqrSumY()
+
+                                          newx = solver3.Solve(Function(x1)
+                                                                   fval = FunctionValue2N(x1, False)
+                                                                   Return fval
+                                                               End Function, newx)
+
+                                      End Try
 
                                   End If
 
