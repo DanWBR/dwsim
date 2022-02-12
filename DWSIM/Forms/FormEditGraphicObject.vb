@@ -290,6 +290,8 @@ Public Class FormEditGraphicObject
                     .Item.Add("Object Name", sobj, "Tag", False, "", DWSIM.App.GetLocalString("Nomedoobjeto"), True)
                     .Item.Add("Font Style", sobj, "FontStyle", False, "", "Style of the Text (Regular, Bold, Italic or Bold/Italic", True)
                     .Item(.Item.Count - 1).Tag2 = "Tag"
+                    .Item.Add("Override Color", sobj, "OverrideColors", False, "", "", True)
+                    .Item(.Item.Count - 1).Tag2 = "OverrideColors"
                     .Item.Add(DWSIM.App.GetLocalString("Cor"), sobj, "LineColor", False, "", "", True)
                     .Item(.Item.Count - 1).CustomEditor = New DWSIM.Editors.SKColorEditor.UISKColorEditor
                     .Item(.Item.Count - 1).Tag2 = "LineColor"
