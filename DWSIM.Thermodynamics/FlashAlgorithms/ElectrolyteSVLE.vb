@@ -30,6 +30,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Inherits FlashAlgorithm
 
+        Public Shared ExternalSolver As IExternalNonLinearSystemSolver
+
         Public Overrides ReadOnly Property InternalUseOnly As Boolean
             Get
                 Return True
@@ -377,9 +379,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     Dim x(r), newx(r) As Double
 
-                    Dim niter As Integer
-
-                    Dim errval, sumerr, penval As Double
+                    Dim errval, sumerr As Double
 
                     x = REx
 
@@ -409,17 +409,30 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                                   Dim fval As Double()
 
-                                  newx = solver3.Solve(Function(x1)
-                                                           fval = FunctionValue2N(x1, True)
-                                                           Return fval
-                                                       End Function, newx2)
+                                  If ExternalSolver Is Nothing Then
 
-                                  errval = FunctionValue2N(newx, True).AbsSqrSumY()
+                                      newx = solver3.Solve(Function(x1)
+                                                               fval = FunctionValue2N(x1, True)
+                                                               Return fval
+                                                           End Function, newx2)
 
-                                  newx = solver3.Solve(Function(x1)
-                                                           fval = FunctionValue2N(x1, False)
-                                                           Return fval
-                                                       End Function, newx)
+                                      errval = FunctionValue2N(newx, True).AbsSqrSumY()
+
+                                      newx = solver3.Solve(Function(x1)
+                                                               fval = FunctionValue2N(x1, False)
+                                                               Return fval
+                                                           End Function, newx)
+
+                                  Else
+
+                                      newx = ExternalSolver.Solve(Function(x1)
+                                                                      fval = FunctionValue2N(x1, False)
+                                                                      Return fval
+                                                                  End Function, Nothing, Nothing,
+                                                                                newx, MaximumIterations, Tolerance)
+
+                                  End If
+
 
                                   errval = FunctionValue2N(newx, False).AbsSqrSumY()
 
