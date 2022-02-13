@@ -290,6 +290,8 @@ Namespace Enums
 
         GibbsMinimizationExternalSolverConfigData = 30
 
+        PHFlash_Use_Interpolated_Result_In_Oscillating_Temperature_Cases = 31
+
     End Enum
 
     Public Enum FlashCalculationType

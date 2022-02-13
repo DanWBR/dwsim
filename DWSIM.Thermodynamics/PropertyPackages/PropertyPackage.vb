@@ -11964,6 +11964,9 @@ Final3:
                 If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.GibbsMinimizationExternalSolverConfigData) Then
                     FlashSettings.Add(Interfaces.Enums.FlashSetting.GibbsMinimizationExternalSolverConfigData, "")
                 End If
+                If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.PHFlash_Use_Interpolated_Result_In_Oscillating_Temperature_Cases) Then
+                    FlashSettings.Add(Interfaces.Enums.FlashSetting.PHFlash_Use_Interpolated_Result_In_Oscillating_Temperature_Cases, True)
+                End If
             End If
 
         End Function

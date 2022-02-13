@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 7.3.1
+Version 7.3.2
 Copyright (c) 2017-2022 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,14 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
+
+Version 7.3.2
+
+- Fixed Conversion Reactor mass balance
+- Reverted regression with overriding object color
+- Fixed displaying of some Heat Exchanger properties
+- CoolProp Incompressible Mixtures - throw error when Psat = 0
+- Fixed object description in floating tables
 
 Version 7.3.1
 

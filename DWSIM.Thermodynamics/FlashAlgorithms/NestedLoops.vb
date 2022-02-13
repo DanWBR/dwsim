@@ -642,6 +642,8 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             Dim tolINT As Double = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Internal_Loop_Tolerance).ToDoubleFromInvariant
             Dim tolEXT As Double = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_External_Loop_Tolerance).ToDoubleFromInvariant
 
+            Dim interpolate As Boolean = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Use_Interpolated_Result_In_Oscillating_Temperature_Cases)
+
             Dim Tmin, Tmax, epsilon(4), maxDT As Double
 
             Tmax = 10000.0#
@@ -742,34 +744,28 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     x0 = x1
 
-
                     If cnt > 30 And Math.Sign(fx) <> Math.Sign(fx_ant) Then
 
                         'oscillating around the solution.
 
-                        If Math.Abs(fx * fx_ant) < 1.0 Then
+                        Dim bmin As New Brent
 
-                            Dim bmin As New Brent
+                        Dim interp As New MathNet.Numerics.Interpolation.BulirschStoerRationalInterpolation(xvals.ToArray(), fxvals.ToArray())
 
-                            Dim interp As New MathNet.Numerics.Interpolation.BulirschStoerRationalInterpolation(xvals.ToArray(), fxvals.ToArray())
+                        x1 = bmin.BrentOpt2(xvals.Min, xvals.Max, 50, 0.01, 100,
+                                            Function(tval)
+                                                Return interp.Interpolate(tval)
+                                            End Function)
 
-                            x1 = bmin.BrentOpt2(xvals.Min, xvals.Max, 50, 0.01, 100,
-                                                Function(tval)
-                                                    Return interp.Interpolate(tval)
-                                                End Function)
+                        If interpolate Then
 
                             Exit Do
 
                         Else
 
-                            'switch to normal mode.
-
-                            Return Flash_PH_2(Vz, P, H, Tref, PP, ReuseKI, PrevKi)
+                            Return Flash_PH_2(Vz, P, H, x1, PP, ReuseKI, PrevKi)
 
                         End If
-
-
-
 
                     Else
 

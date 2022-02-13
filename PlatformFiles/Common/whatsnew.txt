@@ -1,10 +1,7 @@
-Version 7.3.1
+Version 7.3.2
 
-- New Button Flowsheet Object (Classic UI)
-- Disable/Enable Inline Display of Stream Properties
-- Fixed Rigorous Column drawing
-- Fixed CPUI's Welcome Screen in Dark Mode
-- Display filename and line number in error messages
-- Fixed PR78 Property Package
-- Fixed issue #272: Input changes not passed to Subflowsheet
-- Fixed issue #273: Change in temperature not a property in cooler
+- Fixed Conversion Reactor mass balance
+- Reverted regression with overriding object color
+- Fixed displaying of some Heat Exchanger properties
+- CoolProp Incompressible Mixtures - throw error when Psat = 0
+- Fixed object description in floating tables
