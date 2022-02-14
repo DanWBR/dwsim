@@ -1275,6 +1275,8 @@ Public Class FormSimulSettings
         Dim pp As PropertyPackages.PropertyPackage
         pp = FormMain.PropertyPackages(Me.DataGridViewPP.SelectedRows(0).Cells(0).Value).Clone
 
+        If pp Is Nothing Then Exit Sub
+
         With pp
             pp.Tag = pp.ComponentName + " (" + (CurrentFlowsheet.PropertyPackages.Count + 1).ToString() + ")"
             pp.UniqueID = "PP-" & Guid.NewGuid.ToString
