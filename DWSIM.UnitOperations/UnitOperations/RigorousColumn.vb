@@ -873,7 +873,10 @@ Namespace UnitOperations
                         proplist.Add("Stage_Temperature_" + CStr(i))
                     Next
                 Case PropertyType.RW, PropertyType.ALL
-                    For i = 0 To 7
+                    For i = 0 To 2
+                        proplist.Add("PROP_DC_" + CStr(i))
+                    Next
+                    For i = 5 To 7
                         proplist.Add("PROP_DC_" + CStr(i))
                     Next
                     For i = 1 To Me.Stages.Count
@@ -907,7 +910,7 @@ Namespace UnitOperations
                         End If
                     Next
                 Case PropertyType.WR
-                    For i = 0 To 4
+                    For i = 0 To 2
                         proplist.Add("PROP_DC_" + CStr(i))
                     Next
                     For i = 1 To Me.Stages.Count
@@ -919,8 +922,6 @@ Namespace UnitOperations
                     proplist.Add("Condenser_Specification_Value")
                     proplist.Add("Reboiler_Specification_Value")
                     proplist.Add("Global_Stage_Efficiency")
-                    proplist.Add("Condenser_Calculated_Value")
-                    proplist.Add("Reboiler_Calculated_Value")
                     For Each si In MaterialStreams.Values
                         Try
                             Dim streamtag = FlowSheet.SimulationObjects(si.StreamID).GraphicObject.Tag
@@ -975,16 +976,6 @@ Namespace UnitOperations
                     Case 2
                         'PROP_DC_2	Condenser Pressure Drop
                         value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.CondenserDeltaP)
-                    Case 3
-                        'reflux ratio
-                        value = Me.RefluxRatio
-                    Case 4
-                        'distillate molar flow
-                        If LSSf IsNot Nothing AndAlso LSSf.Length > 0 Then
-                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, LSSf(0))
-                        Else
-                            value = 0.0
-                        End If
                     Case 5
                         'PROP_DC_5	Condenser Duty
                         value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.CondenserDuty)
