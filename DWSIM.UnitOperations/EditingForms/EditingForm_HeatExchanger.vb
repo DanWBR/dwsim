@@ -254,6 +254,8 @@ Public Class EditingForm_HeatExchanger
                 tbColdFluidPDrop.Enabled = True
                 tbHotFluidPDrop.Enabled = True
                 tbEfficiency.Enabled = False
+                tbOverallU.Enabled = False
+                cbOverallHTC.Enabled = False
             Case 1
                 'Temperatura de Saída do Fluido Frio
                 tbColdFluidOutletT.Enabled = False
@@ -263,6 +265,8 @@ Public Class EditingForm_HeatExchanger
                 tbColdFluidPDrop.Enabled = True
                 tbHotFluidPDrop.Enabled = True
                 tbEfficiency.Enabled = False
+                tbOverallU.Enabled = False
+                cbOverallHTC.Enabled = False
             Case 2
                 'Temperaturas de Saída
                 tbHotFluidOutletT.Enabled = False
