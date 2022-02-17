@@ -70,6 +70,8 @@ Public Class FormFlowsheet
 
     Public Property LoaderExceptions As New List(Of Exception)
 
+    Public Property WatchItems As List(Of IWatchItem) = New List(Of IWatchItem) Implements IFlowsheet.WatchItems
+
     Public FrmStSim1 As New FormSimulSettings
     Public FrmPCBulk As New FormPCBulk
     Public FrmReport As New FormReportConfig
@@ -191,6 +193,7 @@ Public Class FormFlowsheet
         FormIntegratorControls.Flowsheet = Me
         FormFilesExplorer.Flowsheet = Me
         FormIPyConsole.Flowsheet = Me
+        FormWatch.Flowsheet = Me
 
         Me.MdiParent = My.Application.MainWindowForm
 
@@ -515,6 +518,11 @@ Public Class FormFlowsheet
     End Function
 
     Public Sub FormChild_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
+
+        If FormMain.IsPro Then
+            DashboardToolStripMenuItem.Visible = False
+            ProToolsToolStripMenuItem.Visible = False
+        End If
 
         FrmStSim1.CurrentFlowsheet = Me
 
@@ -1204,7 +1212,7 @@ Public Class FormFlowsheet
                     DWSIM.App.HelpRequested("SO_Adjust.htm")
                 Case ObjectType.OT_Spec
                     DWSIM.App.HelpRequested("SO_Specification.htm")
-                Case ObjectType.GO_Text
+                Case ObjectType.GO_Text, ObjectType.GO_HTMLText
                     DWSIM.App.HelpRequested("GO_Textbox.htm")
                 Case ObjectType.GO_Image
                     DWSIM.App.HelpRequested("GO_Picture.htm")
@@ -1351,6 +1359,7 @@ Public Class FormFlowsheet
         gObj.Name = "TEXT-" & Guid.NewGuid.ToString
         gObj.Tag = "TEXT" & ((From t As GraphicObject In Me.FormSurface.FlowsheetSurface.DrawingObjects Select t Where t.ObjectType = ObjectType.GO_Text).Count + 1).ToString
         gObj.AutoSize = True
+        gObj.Flowsheet = Me
         gObj.ObjectType = ObjectType.GO_Text
         Me.FormSurface.FlowsheetSurface.DrawingObjects.Add(gObj)
         Me.FormSurface.Invalidate()
@@ -1407,7 +1416,8 @@ Public Class FormFlowsheet
 
     Private Sub CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem.Click
         RaiseEvent ToolOpened("Bulk C7+ Characterization", New EventArgs())
-        Me.FrmPCBulk.ShowDialog(Me)
+        FrmPCBulk = New FormPCBulk()
+        FrmPCBulk.ShowDialog(Me)
     End Sub
 
     Private Sub CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem.Click
@@ -1556,6 +1566,10 @@ Public Class FormFlowsheet
                         msgresult = MessageBox.Show(DWSIM.App.GetLocalString("Deleterectangle"), DWSIM.App.GetLocalString("Excluirobjeto"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                     ElseIf SelectedObj.ObjectType = ObjectType.GO_Text Then
                         msgresult = MessageBox.Show(DWSIM.App.GetLocalString("Excluiracaixadetexto"), DWSIM.App.GetLocalString("Excluirobjeto"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                    ElseIf SelectedObj.ObjectType = ObjectType.GO_HTMLText Then
+                        msgresult = MessageBox.Show(DWSIM.App.GetLocalString("Excluiracaixadetexto"), DWSIM.App.GetLocalString("Excluirobjeto"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+                    ElseIf SelectedObj.ObjectType = ObjectType.GO_Button Then
+                        msgresult = MessageBox.Show(DWSIM.App.GetLocalString("RemoveButton"), DWSIM.App.GetLocalString("Excluirobjeto"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                     ElseIf SelectedObj.ObjectType = ObjectType.GO_MasterTable Then
                         msgresult = MessageBox.Show(DWSIM.App.GetLocalString("Excluir") & DirectCast(gobj, MasterTableGraphic).HeaderText & "?", DWSIM.App.GetLocalString("Excluirobjeto"), MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                     ElseIf SelectedObj.ObjectType = ObjectType.GO_Table Then
@@ -1609,6 +1623,10 @@ Public Class FormFlowsheet
                         ElseIf SelectedObj.ObjectType = ObjectType.GO_MasterTable Then
                             Me.FormSurface.FlowsheetSurface.DeleteSelectedObject(gobj)
                         ElseIf SelectedObj.ObjectType = ObjectType.GO_Text Then
+                            Me.FormSurface.FlowsheetSurface.DeleteSelectedObject(gobj)
+                        ElseIf SelectedObj.ObjectType = ObjectType.GO_HTMLText Then
+                            Me.FormSurface.FlowsheetSurface.DeleteSelectedObject(gobj)
+                        ElseIf SelectedObj.ObjectType = ObjectType.GO_Button Then
                             Me.FormSurface.FlowsheetSurface.DeleteSelectedObject(gobj)
                         ElseIf SelectedObj.ObjectType = ObjectType.GO_FloatingTable Then
                             Me.FormSurface.FlowsheetSurface.DeleteSelectedObject(gobj)
@@ -3341,6 +3359,8 @@ Public Class FormFlowsheet
 
     Public Property ExternalSolvers As Dictionary(Of String, IExternalSolverIdentification) = New Dictionary(Of String, IExternalSolverIdentification) Implements IFlowsheet.ExternalSolvers
 
+    Public Property PythonPreprocessor As Action(Of String) Implements IFlowsheet.PythonPreprocessor
+
     Public Sub DeleteSelectedObject1(sender As Object, e As EventArgs, gobj As IGraphicObject, Optional confirmation As Boolean = True, Optional triggercalc As Boolean = False) Implements IFlowsheet.DeleteSelectedObject
         DeleteSelectedObject(sender, e, gobj, confirmation, triggercalc)
     End Sub
@@ -3560,9 +3580,47 @@ Public Class FormFlowsheet
 
     End Function
 
+    Private Sub tsmiRichText_Click(sender As Object, e As EventArgs) Handles tsmiRichText.Click
+
+        Dim myTextObject As New HTMLTextGraphic(30, 30)
+        Dim gObj As GraphicObject = Nothing
+        gObj = myTextObject
+        gObj.Name = "HTMLTEXT-" & Guid.NewGuid.ToString
+        gObj.Tag = "HTMLTEXT" & ((From t As GraphicObject In Me.FormSurface.FlowsheetSurface.DrawingObjects Select t Where t.ObjectType = ObjectType.GO_HTMLText).Count + 1).ToString
+        gObj.AutoSize = True
+        gObj.Flowsheet = Me
+        Me.FormSurface.FlowsheetSurface.DrawingObjects.Add(gObj)
+        Me.FormSurface.Invalidate()
+
+    End Sub
+
+    Private Sub BotãoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BotãoToolStripMenuItem.Click
+        Dim myTextObject As New Shapes.ButtonGraphic()
+        Dim gObj As GraphicObject = Nothing
+        gObj = myTextObject
+        gObj.Name = "BTN-" & Guid.NewGuid.ToString
+        gObj.Tag = "BTN" & ((From t As GraphicObject In Me.FormSurface.FlowsheetSurface.DrawingObjects Select t Where t.ObjectType = ObjectType.GO_HTMLText).Count + 1).ToString
+        gObj.AutoSize = True
+        gObj.Flowsheet = Me
+        Me.FormSurface.FlowsheetSurface.DrawingObjects.Add(gObj)
+        Me.FormSurface.Invalidate()
+    End Sub
+
     Public Sub ClearLog() Implements IFlowsheet.ClearLog
 
-        FormLog.Grid1.Rows.Clear()
+        UIThread(Sub()
+                     FormLog.Grid1.Rows.Clear()
+                 End Sub)
+
+    End Sub
+
+    Private Sub IFlowsheet_RunScript(name As String) Implements IFlowsheet.RunScript
+        Dim script = Scripts.Where(Function(s) s.Value.Title = name).FirstOrDefault()
+        If script.Value.PythonInterpreter = Enums.Scripts.Interpreter.IronPython Then
+            FormScript.RunScript_IronPython(script.Value.Title, script.Value.ScriptText, Me, Nothing)
+        Else
+            FormScript.RunScript_PythonNET(script.Value.Title, script.Value.ScriptText, Me)
+        End If
 
     End Sub
 

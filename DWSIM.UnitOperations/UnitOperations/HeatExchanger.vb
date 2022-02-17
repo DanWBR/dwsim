@@ -1530,8 +1530,8 @@ Namespace UnitOperations
                     U = OverallCoefficient
                     Qi = MaxHeatExchange * 0.7
                     Q_old = 10000000000.0
-                    Tc2 = Tc1 + (Tc1 + Th1) / 2 * 0.7
-                    Th2 = Th1 - (Tc1 + Th1) / 2 * 0.7
+                    Tc2 = Tc1 + (Th1 - Tc1) / 2 * 0.7
+                    Th2 = Th1 - (Th1 - Tc1) / 2 * 0.7
 
                     If DebugMode Then AppendDebugLine(String.Format("Start with Max Heat Exchange Q = {0} KW", Qi))
 
@@ -1684,13 +1684,13 @@ Namespace UnitOperations
                     Dim tmp = StInHot.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureTemperature, Ph2, Th2, 0.0#)
                     Hh2 = tmp.CalculatedEnthalpy
                     Q = -Wh * (Hh2 - Hh1)
-
+                    If Q > MaxHeatExchange Then Q = MaxHeatExchange
                     DeltaHc = (Q - HeatLoss) / Wc
                     Hc2 = Hc1 + DeltaHc
                     StInCold.PropertyPackage.CurrentMaterialStream = StInCold
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate cold stream outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", Pc2, Hc2))
                     IObj?.SetCurrent()
-                    tmp = StInCold.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Pc2, Hc2, Tc1)
+                    tmp = StInCold.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Pc2, Hc2, Th2)
                     Tc2 = tmp.CalculatedTemperature
                     If DebugMode Then AppendDebugLine(String.Format("Calculated cold stream outlet temperature T2 = {0} K", Tc2))
                     Select Case Me.FlowDir
@@ -1714,6 +1714,7 @@ Namespace UnitOperations
                     Dim tmp = StInCold.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureTemperature, Pc2, Tc2, 0)
                     Hc2 = tmp.CalculatedEnthalpy
                     Q = Wc * (Hc2 - Hc1)
+                    If Q > MaxHeatExchange Then Q = MaxHeatExchange
                     DeltaHh = -(Q + HeatLoss) / Wh
                     Hh2 = Hh1 + DeltaHh
                     StInHot.PropertyPackage.CurrentMaterialStream = StInHot

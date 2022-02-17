@@ -188,7 +188,7 @@ Namespace SystemsOfUnits
                 Case Enums.UnitOfMeasure.molarflow
                     units.AddRange(New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm",
                                    "ft3/d @ 60 f, 14.7 psia", "ft3/d @ 0 C, 1 atm",
-                                   "MMSCfD", "SCfD", "SCfM",
+                                   "MMSCFD", "SCFD", "SCFM",
                                    "Mm3/d @ BR", "Mm3/d @ SC", "Mm3/d @ NC"})
                 Case Enums.UnitOfMeasure.volumetricFlow
                     units.AddRange(New String() {"m3/s", "ft3/s", "cm3/s", "m3/h", "m3/d", "bbl/h", "bbl/d", "ft3/min", "ft3/d", "gal[UK]/h", "gal[UK]/s", "gal[US]/h", "gal[US]/min", "L/h", "L/min", "L/s"})
@@ -286,7 +286,7 @@ Namespace SystemsOfUnits
                     Return Enums.UnitOfMeasure.molarflow
                 Case "m3/s", "ft3/s", "cm3/s", "m3/h", "m3/d", "bbl/h", "bbl/d", "ft3/min", "ft3/d", "gal[UK]/h", "gal[UK]/s", "gal[US]/h", "gal[US]/min", "L/h", "L/min", "L/s",
                      "ft3/d @ 60 f, 14.7 psia", "ft3/d @ 0 C, 1 atm",
-                    "MMSCfD", "SCfD", "SCfM",
+                    "MMSCFD", "SCFD", "SCFM",
                     "Mm3/d @ BR", "Mm3/d @ SC", "Mm3/d @ SC"
                     Return Enums.UnitOfMeasure.volumetricFlow
                 Case "kJ/kg", "cal/g", "BTU/lbm", "kcal/kg"

@@ -1,5 +1,5 @@
 '    Flash Algorithm Abstract Base Class
-'    Copyright 2010-2021 Daniel Wagner O. de Medeiros
+'    Copyright 2010-2022 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -135,6 +135,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             settings(Interfaces.Enums.FlashSetting.GibbsMinimizationExternalSolver) = ""
 
             settings(Interfaces.Enums.FlashSetting.GibbsMinimizationExternalSolverConfigData) = ""
+
+            settings(Interfaces.Enums.FlashSetting.PHFlash_Use_Interpolated_Result_In_Oscillating_Temperature_Cases) = True
 
             Return settings
 

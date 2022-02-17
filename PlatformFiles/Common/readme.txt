@@ -1,7 +1,7 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 7.1.2
-Copyright (c) 2017-2021 Daniel Medeiros and contributors
+Version 7.3.2
+Copyright (c) 2017-2022 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
 
@@ -61,6 +61,50 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
+
+Version 7.3.2
+
+- Fixed Conversion Reactor mass balance
+- Reverted regression with overriding object color
+- Fixed displaying of some Heat Exchanger properties
+- CoolProp Incompressible Mixtures - throw error when Psat = 0
+- Fixed object description in floating tables
+
+Version 7.3.1
+
+- Fixed a regression with displaying of error messages (issue 281)
+- Fixed a regression with saving of simulations with PR78 Property Package
+
+Version 7.3.0
+
+- New Button Flowsheet Object (Classic UI)
+- Disable/Enable Inline Display of Stream Properties
+- Fixed Rigorous Column drawing
+- Fixed CPUI's Welcome Screen in Dark Mode
+- Display filename and line number in error messages
+- Fixed PR78 Property Package
+- Fixed issue #272: Input changes not passed to Subflowsheet
+- Fixed issue #273: Change in temperature not a property in cooler
+
+Version 7.2.0
+
+- HTML Text Flowsheet Object (Classic UI)
+- Display Energy Stream values in Flowsheet
+- Display variables in plain/html text blocks in the flowsheet
+- Fixed issue #265 - subflowsheet initialization
+- Fixed kinetic/hetcat reaction conversion factors
+- Fixed Python issue on Linux
+- Added support for Python 3.10 (#246)
+- Fixed issue with Conversion Reactor
+- Fixed issue with automation and loading of System.Buffers
+- Fixed issue with diffusion coefficients
+- Fixed issue #263 - PR interaction parameters
+- Fixed issues with Dynamic mode
+- Fixed issues with CoolProp Property Packages
+- Fixed XML serialization issue
+- Fixed issue with UNIQUAC model
+- Fixed issue with Single Compound Flash
+- Other fixes and enhancements
 
 Version 7.1.2
 

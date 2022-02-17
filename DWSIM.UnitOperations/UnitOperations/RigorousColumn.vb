@@ -1,5 +1,5 @@
 '    Rigorous Columns (Distillation and Absorption) Unit Operations
-'    Copyright 2008-2021 Daniel Wagner O. de Medeiros
+'    Copyright 2008-2022 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -873,7 +873,10 @@ Namespace UnitOperations
                         proplist.Add("Stage_Temperature_" + CStr(i))
                     Next
                 Case PropertyType.RW, PropertyType.ALL
-                    For i = 0 To 7
+                    For i = 0 To 2
+                        proplist.Add("PROP_DC_" + CStr(i))
+                    Next
+                    For i = 5 To 7
                         proplist.Add("PROP_DC_" + CStr(i))
                     Next
                     For i = 1 To Me.Stages.Count
@@ -890,8 +893,24 @@ Namespace UnitOperations
                     proplist.Add("Global_Stage_Efficiency")
                     proplist.Add("Condenser_Calculated_Value")
                     proplist.Add("Reboiler_Calculated_Value")
+                    For Each si In MaterialStreams.Values
+                        Try
+                            Dim streamtag = FlowSheet.SimulationObjects(si.StreamID).GraphicObject.Tag
+                            proplist.Add(String.Format("Stream '{0}' Stage Index", streamtag))
+                        Catch ex As Exception
+                        End Try
+                    Next
+                    For Each si In MaterialStreams.Values
+                        If si.StreamBehavior = StreamInformation.Behavior.Sidedraw Then
+                            Try
+                                Dim streamtag = FlowSheet.SimulationObjects(si.StreamID).GraphicObject.Tag
+                                proplist.Add(String.Format("Stream '{0}' Side Draw Molar Flow", streamtag))
+                            Catch ex As Exception
+                            End Try
+                        End If
+                    Next
                 Case PropertyType.WR
-                    For i = 0 To 4
+                    For i = 0 To 2
                         proplist.Add("PROP_DC_" + CStr(i))
                     Next
                     For i = 1 To Me.Stages.Count
@@ -903,24 +922,48 @@ Namespace UnitOperations
                     proplist.Add("Condenser_Specification_Value")
                     proplist.Add("Reboiler_Specification_Value")
                     proplist.Add("Global_Stage_Efficiency")
-                    proplist.Add("Condenser_Calculated_Value")
-                    proplist.Add("Reboiler_Calculated_Value")
+                    For Each si In MaterialStreams.Values
+                        Try
+                            Dim streamtag = FlowSheet.SimulationObjects(si.StreamID).GraphicObject.Tag
+                            proplist.Add(String.Format("Stream '{0}' Stage Index", streamtag))
+                        Catch ex As Exception
+                        End Try
+                    Next
+                    For Each si In MaterialStreams.Values
+                        If si.StreamBehavior = StreamInformation.Behavior.Sidedraw Then
+                            Try
+                                Dim streamtag = FlowSheet.SimulationObjects(si.StreamID).GraphicObject.Tag
+                                proplist.Add(String.Format("Stream '{0}' Side Draw Molar Flow", streamtag))
+                            Catch ex As Exception
+                            End Try
+                        End If
+                    Next
             End Select
             Return proplist.ToArray(GetType(System.String))
             proplist = Nothing
         End Function
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
+
             Dim val0 As Object = MyBase.GetPropertyValue(prop, su)
 
             If Not val0 Is Nothing Then
+
                 Return val0
+
             Else
+
                 If su Is Nothing Then su = New SystemsOfUnits.SI
+
                 Dim cv As New SystemsOfUnits.Converter
                 Dim value As Object = Nothing
                 Dim propidx As Integer = -1
-                Integer.TryParse(prop.Split("_")(2), propidx)
+
+                Try
+                    Integer.TryParse(prop.Split("_")(2), propidx)
+                Catch ex As Exception
+
+                End Try
 
                 Select Case propidx
 
@@ -933,16 +976,6 @@ Namespace UnitOperations
                     Case 2
                         'PROP_DC_2	Condenser Pressure Drop
                         value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.CondenserDeltaP)
-                    Case 3
-                        'reflux ratio
-                        value = Me.RefluxRatio
-                    Case 4
-                        'distillate molar flow
-                        If LSSf IsNot Nothing AndAlso LSSf.Length > 0 Then
-                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, LSSf(0))
-                        Else
-                            value = 0.0
-                        End If
                     Case 5
                         'PROP_DC_5	Condenser Duty
                         value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.CondenserDuty)
@@ -982,6 +1015,32 @@ Namespace UnitOperations
 
                 If prop.Contains("Global_Stage_Efficiency") Then value = "N/D"
 
+                If prop.Contains("Stage Index") Then
+                    For Each si In MaterialStreams.Values
+                        Try
+                            Dim streamtag = FlowSheet.SimulationObjects(si.StreamID).GraphicObject.Tag
+                            If prop = String.Format("Stream '{0}' Stage Index", streamtag) Then
+                                value = StageIndex(si.AssociatedStage)
+                                Return value
+                            End If
+                        Catch ex As Exception
+                        End Try
+                    Next
+                End If
+
+                If prop.Contains("Side Draw Molar Flow") Then
+                    For Each si In MaterialStreams.Values
+                        Try
+                            Dim streamtag = FlowSheet.SimulationObjects(si.StreamID).GraphicObject.Tag
+                            If prop = String.Format("Stream '{0}' Side Draw Molar Flow", streamtag) Then
+                                value = si.FlowRate.Value.ConvertFromSI(su.molarflow)
+                                Return value
+                            End If
+                        Catch ex As Exception
+                        End Try
+                    Next
+                End If
+
                 Return value
             End If
 
@@ -991,13 +1050,21 @@ Namespace UnitOperations
             Dim u0 As String = MyBase.GetPropertyUnit(prop, su)
 
             If u0 <> "NF" Then
+
                 Return u0
+
             Else
+
                 If su Is Nothing Then su = New SystemsOfUnits.SI
+
                 Dim cv As New SystemsOfUnits.Converter
                 Dim value As String = ""
                 Dim propidx As Integer = -1
-                Integer.TryParse(prop.Split("_")(2), propidx)
+
+                Try
+                    Integer.TryParse(prop.Split("_")(2), propidx)
+                Catch ex As Exception
+                End Try
 
                 Select Case propidx
 
@@ -1033,6 +1100,7 @@ Namespace UnitOperations
                 If prop.Contains("Stage_Pressure") Then value = su.pressure
                 If prop.Contains("Stage_Temperature") Then value = su.temperature
                 If prop.Contains("Stage_Efficiency") Then value = ""
+                If prop.Contains("Molar Flow") Then value = su.molarflow
 
                 Return value
             End If
@@ -1086,6 +1154,32 @@ Namespace UnitOperations
             If prop = "Global_Stage_Efficiency" Then
                 For Each st As Stage In Me.Stages
                     st.Efficiency = propval
+                Next
+            End If
+
+            If prop.Contains("Stage Index") Then
+                For Each si In MaterialStreams.Values
+                    Try
+                        Dim streamtag = FlowSheet.SimulationObjects(si.StreamID).GraphicObject.Tag
+                        If prop = String.Format("Stream '{0}' Stage Index", streamtag) Then
+                            si.AssociatedStage = Stages(Convert.ToInt32(propval)).Name
+                            Exit For
+                        End If
+                    Catch ex As Exception
+                    End Try
+                Next
+            End If
+
+            If prop.Contains("Side Draw Molar Flow") Then
+                For Each si In MaterialStreams.Values
+                    Try
+                        Dim streamtag = FlowSheet.SimulationObjects(si.StreamID).GraphicObject.Tag
+                        If prop = String.Format("Stream '{0}' Side Draw Molar Flow", streamtag) Then
+                            si.FlowRate.Value = Convert.ToDouble(propval).ConvertToSI(su.molarflow)
+                            Exit For
+                        End If
+                    Catch ex As Exception
+                    End Try
                 Next
             End If
 

@@ -160,9 +160,7 @@ Namespace Reactors
             ims.PropertyPackage = pp
 
             Dim DN As New Dictionary(Of String, Double)
-            Dim N0 As New Dictionary(Of String, Double)
             Dim N00 As New Dictionary(Of String, Double)
-            Dim N As New Dictionary(Of String, Double)
 
             Dim X, scBC, nBC, DHr, Hid_r, Hid_p, Hr, Hp, Tin, Pin, Pout, W As Double
             Dim i As Integer
@@ -176,7 +174,7 @@ Namespace Reactors
             Pout = ims.Phases(0).Properties.pressure.GetValueOrDefault - Me.DeltaP.GetValueOrDefault
             ims.Phases(0).Properties.pressure = Pout
 
-            Dim ni0(N.Count - 1), nif(N.Count - 1) As Double
+            Dim ni0(N00.Count - 1), nif(N00.Count - 1) As Double
 
             Dim cnames = ims.PropertyPackage.RET_VNAMES().ToList()
 
@@ -229,30 +227,6 @@ Namespace Reactors
                     'initial mole flows
                     For Each sb As ReactionStoichBase In rxn.Components.Values
 
-                        Select Case rxn.ReactionPhase
-                            Case PhaseName.Liquid
-                                If Not N0.ContainsKey(sb.CompName) Then
-                                    N0.Add(sb.CompName, ims.Phases(1).Compounds(sb.CompName).MoleFraction.GetValueOrDefault * ims.Phases(1).Properties.molarflow.GetValueOrDefault)
-                                    N.Add(sb.CompName, N0(sb.CompName))
-                                Else
-                                    N0(sb.CompName) = ims.Phases(1).Compounds(sb.CompName).MoleFraction.GetValueOrDefault * ims.Phases(1).Properties.molarflow.GetValueOrDefault
-                                End If
-                            Case PhaseName.Vapor
-                                If Not N0.ContainsKey(sb.CompName) Then
-                                    N0.Add(sb.CompName, ims.Phases(2).Compounds(sb.CompName).MoleFraction.GetValueOrDefault * ims.Phases(2).Properties.molarflow.GetValueOrDefault)
-                                    N.Add(sb.CompName, N0(sb.CompName))
-                                Else
-                                    N0(sb.CompName) = ims.Phases(2).Compounds(sb.CompName).MoleFraction.GetValueOrDefault * ims.Phases(2).Properties.molarflow.GetValueOrDefault
-                                End If
-                            Case PhaseName.Mixture
-                                If Not N0.ContainsKey(sb.CompName) Then
-                                    N0.Add(sb.CompName, ims.Phases(0).Compounds(sb.CompName).MoleFraction.GetValueOrDefault * ims.Phases(0).Properties.molarflow.GetValueOrDefault)
-                                    N.Add(sb.CompName, N0(sb.CompName))
-                                Else
-                                    N0(sb.CompName) = ims.Phases(0).Compounds(sb.CompName).MoleFraction.GetValueOrDefault * ims.Phases(0).Properties.molarflow.GetValueOrDefault
-                                End If
-                        End Select
-
                         If Not N00.ContainsKey(sb.CompName) Then
                             N00.Add(sb.CompName, ims.Phases(0).Compounds(sb.CompName).MolarFlow.GetValueOrDefault())
                         End If
@@ -263,8 +237,8 @@ Namespace Reactors
 
                 Loop Until i = ar.Count
 
-                IObj2?.Paragraphs.Add(String.Format("Compounds: {0}", N0.Keys.ToArray.ToMathArrayString))
-                IObj2?.Paragraphs.Add(String.Format("Initial Mole Flows: {0} mol/s", N0.Values.ToArray.ToMathArrayString))
+                IObj2?.Paragraphs.Add(String.Format("Compounds: {0}", N00.Keys.ToArray.ToMathArrayString))
+                IObj2?.Paragraphs.Add(String.Format("Initial Mole Flows: {0} mol/s", N00.Values.ToArray.ToMathArrayString))
 
                 IObj2?.Paragraphs.Add("Solving Parallel Reactions with Simplex solver...")
 
@@ -279,7 +253,7 @@ Namespace Reactors
                 ' this solution scheme for parallel reactions guarantees that the mass balance is preserved, even if the final
                 ' conversion values aren't reached due to limited reactant amounts.
 
-                Dim xref(ar.Count - 1), xf(ar.Count - 1), dni(N.Count - 1) As Double
+                Dim xref(ar.Count - 1), xf(ar.Count - 1), dni(N00.Count - 1) As Double
 
                 Dim splex As New Simplex()
                 Dim vars As New List(Of OptSimplexBoundVariable)
@@ -337,12 +311,15 @@ Namespace Reactors
                                               Case PhaseName.Liquid
                                                   m0 = ims.Phases(1).Properties.molarflow.GetValueOrDefault
                                                   nif = ims.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Liquid).MultiplyConstY(m0)
+                                                  nBC = ims.Phases(1).Compounds(rxn.BaseReactant).MolarFlow.GetValueOrDefault()
                                               Case PhaseName.Vapor
                                                   m0 = ims.Phases(2).Properties.molarflow.GetValueOrDefault
                                                   nif = ims.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Vapor).MultiplyConstY(m0)
+                                                  nBC = ims.Phases(2).Compounds(rxn.BaseReactant).MolarFlow.GetValueOrDefault()
                                               Case PhaseName.Mixture
                                                   m0 = ims.Phases(0).Properties.molarflow.GetValueOrDefault
                                                   nif = ims.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Mixture).MultiplyConstY(m0)
+                                                  nBC = ims.Phases(0).Compounds(rxn.BaseReactant).MolarFlow.GetValueOrDefault()
                                           End Select
 
                                           For i2 = 0 To n2
@@ -354,8 +331,6 @@ Namespace Reactors
                                               rxn = FlowSheet.Reactions(ar(i2))
                                               BC = rxn.BaseReactant
                                               scBC = rxn.Components(BC).StoichCoeff
-
-                                              nBC = N0(rxn.BaseReactant)
 
                                               'delta mole flows
 
@@ -403,7 +378,14 @@ Namespace Reactors
                     BC = rxn.BaseReactant
                     scBC = rxn.Components(BC).StoichCoeff
 
-                    nBC = N0(rxn.BaseReactant)
+                    Select Case rxn.ReactionPhase
+                        Case PhaseName.Liquid
+                            nBC = ims.Phases(1).Compounds(rxn.BaseReactant).MolarFlow.GetValueOrDefault()
+                        Case PhaseName.Vapor
+                            nBC = ims.Phases(2).Compounds(rxn.BaseReactant).MolarFlow.GetValueOrDefault()
+                        Case PhaseName.Mixture
+                            nBC = ims.Phases(0).Compounds(rxn.BaseReactant).MolarFlow.GetValueOrDefault()
+                    End Select
 
                     If Not Me.Conversions.ContainsKey(rxn.ID) Then
                         Me.Conversions.Add(rxn.ID, xf(i))
@@ -417,7 +399,7 @@ Namespace Reactors
                         If Not DN.ContainsKey(sb.CompName) Then
                             DN.Add(sb.CompName, -xf(i) * rxn.Components(sb.CompName).StoichCoeff / scBC * nBC)
                         Else
-                            DN(sb.CompName) = -xf(i) * rxn.Components(sb.CompName).StoichCoeff / scBC * nBC
+                            DN(sb.CompName) += -xf(i) * rxn.Components(sb.CompName).StoichCoeff / scBC * nBC
                         End If
                     Next
 
@@ -429,8 +411,8 @@ Namespace Reactors
 
                 For Each s1 As Compound In ims.Phases(0).Compounds.Values
                     If DN.ContainsKey(s1.Name) Then
-                        N(s1.Name) += DN(s1.Name)
-                        If N(s1.Name) < 0.0 Then N(s1.Name) = 0.0
+                        N00(s1.Name) += DN(s1.Name)
+                        If N00(s1.Name) < 0.0 Then N00(s1.Name) = 0.0
                     End If
                 Next
 
@@ -443,16 +425,16 @@ Namespace Reactors
 
                 Dim Nsum As Double = 0
                 For Each s2 As Compound In ims.Phases(0).Compounds.Values
-                    If N.ContainsKey(s2.Name) Then
-                        Nsum += N(s2.Name)
+                    If N00.ContainsKey(s2.Name) Then
+                        Nsum += N00(s2.Name)
                     Else
                         Nsum += s2.MoleFraction.GetValueOrDefault * ims.Phases(0).Properties.molarflow.GetValueOrDefault
                     End If
                 Next
 
                 For Each s3 As Compound In ims.Phases(0).Compounds.Values
-                    If N.ContainsKey(s3.Name) Then
-                        s3.MoleFraction = N(s3.Name) / Nsum
+                    If N00.ContainsKey(s3.Name) Then
+                        s3.MoleFraction = N00(s3.Name) / Nsum
                     Else
                         s3.MoleFraction = s3.MoleFraction.GetValueOrDefault * ims.Phases(0).Properties.molarflow.GetValueOrDefault / Nsum
                     End If
@@ -568,7 +550,7 @@ Namespace Reactors
                 Me.ComponentConversions(cnames(i)) = (ni0(i) - nif(i)) / ni0(i)
             Next
 
-            IObj?.Paragraphs.Add(String.Format("Compounds: {0}", N0.Keys.ToArray.ToMathArrayString))
+            IObj?.Paragraphs.Add(String.Format("Compounds: {0}", N00.Keys.ToArray.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Initial Mole Flows: {0} mol/s", ni0.ToArray.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Final Mole Flows: {0} mol/s", nif.ToArray.ToMathArrayString))
             IObj?.Paragraphs.Add(String.Format("Conversions: {0}", ComponentConversions.Values.Select(Of Double)(Function(d) If(Not Double.IsNaN(d) And Not Double.IsInfinity(d), d, 0.0)).ToArray.ToMathArrayString))

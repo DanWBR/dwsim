@@ -249,6 +249,11 @@ Namespace GraphicObjects.Shapes
                             ax = Me.X + (Me.Width - (trect.Right - trect.Left)) / 2
                             ay = Me.Y + (Me.Height - (trect.Top - trect.Bottom)) / 2
 
+                            Using New SKAutoCanvasRestore(canvas)
+                                StraightCanvas(canvas)
+                                canvas.DrawText("CO", ax, ay, tpaint)
+                            End Using
+
                         End If
 
                     Case 1
@@ -326,6 +331,11 @@ Namespace GraphicObjects.Shapes
                             Dim ax, ay As Integer
                             ax = Me.X + (Me.Width - (trect.Right - trect.Left)) / 2
                             ay = Me.Y + (Me.Height - (trect.Top - trect.Bottom)) / 2
+
+                            Using New SKAutoCanvasRestore(canvas)
+                                StraightCanvas(canvas)
+                                canvas.DrawText("CO", ax, ay, tpaint)
+                            End Using
 
                         End If
 

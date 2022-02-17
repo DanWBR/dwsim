@@ -307,8 +307,8 @@
     <Reference Include="ICSharpCode.AvalonEdit, Version=6.1.2.30, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
       <HintPath>..\packages\AvalonEdit.6.1.2.30\lib\net45\ICSharpCode.AvalonEdit.dll</HintPath>
     </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib, Version=1.3.1.9, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpZipLib.1.3.1\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.3.3.11, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.1.3.3\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="indigo-dotnet">
       <HintPath>References\indigo-dotnet.dll</HintPath>
@@ -346,6 +346,9 @@
     <Reference Include="LabelWithDivider, Version=1.1.0.1, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\LabelWithDivider.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveSwitch.TextControl">
+      <HintPath>References\LiveSwitch.TextControl.exe</HintPath>
     </Reference>
     <Reference Include="Microsoft.Dynamic, Version=1.3.0.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
       <HintPath>..\packages\DynamicLanguageRuntime.1.3.0\lib\net45\Microsoft.Dynamic.dll</HintPath>
@@ -403,7 +406,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Python.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="RichTextBoxExtended">
+    <Reference Include="RichTextBoxExtended, Version=2.0.2954.894, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>References\RichTextBoxExtended.dll</HintPath>
     </Reference>
     <Reference Include="Scintilla.Eto.Shared, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -683,6 +687,12 @@
     <Compile Include="Forms\FormDefineFonts.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\FormEditFlowsheetButton.Designer.vb">
+      <DependentUpon>FormEditFlowsheetButton.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormEditFlowsheetButton.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormEditGraphicObject.Designer.vb">
       <DependentUpon>FormEditGraphicObject.vb</DependentUpon>
     </Compile>
@@ -699,6 +709,12 @@
       <DependentUpon>FormEventDescription.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormEventDescription.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormHTMLEditor.Designer.vb">
+      <DependentUpon>FormHTMLEditor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormHTMLEditor.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormImportCompoundOnline.Designer.vb">
@@ -1430,6 +1446,9 @@
     <EmbeddedResource Include="Forms\FormDefineFonts.resx">
       <DependentUpon>FormDefineFonts.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormEditFlowsheetButton.resx">
+      <DependentUpon>FormEditFlowsheetButton.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormEditGraphicObject.de.resx">
       <DependentUpon>FormEditGraphicObject.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -1453,6 +1472,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormEventDescription.resx">
       <DependentUpon>FormEventDescription.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormHTMLEditor.resx">
+      <DependentUpon>FormHTMLEditor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormImportCompoundOnline.en.resx">
       <DependentUpon>FormImportCompoundOnline.vb</DependentUpon>
@@ -2334,6 +2356,10 @@
       <Project>{b176a143-2822-4e7c-9280-cf4a615e1c35}</Project>
       <Name>DWSIM.Logging</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.ProFeatures\DWSIM.ProFeatures.vbproj">
+      <Project>{da47adde-25cb-413b-baf2-0fe0437641b9}</Project>
+      <Name>DWSIM.ProFeatures</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Serializers.XML\DWSIM.XMLSerializer.vbproj">
       <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
       <Name>DWSIM.XMLSerializer</Name>
@@ -3208,6 +3234,10 @@
     <None Include="Resources\Icon512.png" />
     <None Include="Resources\regular.png" />
     <None Include="Resources\italic.png" />
+    <None Include="Resources\icons8-button.png" />
+    <None Include="Resources\Icon1281.png" />
+    <None Include="Resources\icons8-coins.png" />
+    <None Include="Resources\icons8-scatter_plot.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />

@@ -171,17 +171,18 @@ Public Class EditingForm_HeatExchanger
 
             If .Calculated Then
 
-                gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("MaximumHeatExchange"), .MaxHeatExchange.ToString(nf), units.heatflow})
+                gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("MaximumHeatExchange"), .MaxHeatExchange.ConvertFromSI(units.heatflow).ToString(nf), units.heatflow})
                 gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("ThermalEfficiency"), .ThermalEfficiency.ToString(nf), "%"})
-                gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("HXLMTD"), .LMTD.ToString(nf), units.deltaT})
+                gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("HXLMTD"), .LMTD.ConvertFromSI(units.deltaT).ToString(nf), units.deltaT})
+                gridResults.Rows.Add(New Object() { .FlowSheet.GetTranslatedString("HXLMTDF"), .LMTD_F.ToString(nf), ""})
 
                 If .CalculationMode = UnitOperations.HeatExchangerCalcMode.ShellandTube_CalcFoulingFactor Or .CalculationMode = UnitOperations.HeatExchangerCalcMode.ShellandTube_Rating Then
-                    gridResults.Rows.Add(New Object() {"Re Shell", .STProperties.ReS.ToString(nf), ""})
-                    gridResults.Rows.Add(New Object() {"Re Tube", .STProperties.ReT.ToString(nf), ""})
-                    gridResults.Rows.Add(New Object() {"F Shell", .STProperties.Fs.ToString("E6"), units.foulingfactor})
-                    gridResults.Rows.Add(New Object() {"F Tube", .STProperties.Ft.ToString("E6"), units.foulingfactor})
-                    gridResults.Rows.Add(New Object() {"F Pipe", .STProperties.Fc.ToString("E6"), units.foulingfactor})
-                    gridResults.Rows.Add(New Object() {"F Fouling", .STProperties.Ff.ToString("E6"), units.foulingfactor})
+                    gridResults.Rows.Add(New Object() {"Shell-side Reynolds Number", .STProperties.ReS.ToString(nf), ""})
+                    gridResults.Rows.Add(New Object() {"Tube-side Reynolds Number", .STProperties.ReT.ToString(nf), ""})
+                    gridResults.Rows.Add(New Object() {"Shell-side Resistance", .STProperties.Fs.ToString("E6"), units.foulingfactor})
+                    gridResults.Rows.Add(New Object() {"Tube-side Resistance", .STProperties.Ft.ToString("E6"), units.foulingfactor})
+                    gridResults.Rows.Add(New Object() {"Pipe Wall Resistance", .STProperties.Fc.ToString("E6"), units.foulingfactor})
+                    gridResults.Rows.Add(New Object() {"Fouling Resistance", .STProperties.Ff.ToString("E6"), units.foulingfactor})
                 End If
 
                 If .CalculationMode = UnitOperations.HeatExchangerCalcMode.PinchPoint Then
@@ -253,6 +254,8 @@ Public Class EditingForm_HeatExchanger
                 tbColdFluidPDrop.Enabled = True
                 tbHotFluidPDrop.Enabled = True
                 tbEfficiency.Enabled = False
+                tbOverallU.Enabled = False
+                cbOverallHTC.Enabled = False
             Case 1
                 'Temperatura de Saída do Fluido Frio
                 tbColdFluidOutletT.Enabled = False
@@ -262,6 +265,8 @@ Public Class EditingForm_HeatExchanger
                 tbColdFluidPDrop.Enabled = True
                 tbHotFluidPDrop.Enabled = True
                 tbEfficiency.Enabled = False
+                tbOverallU.Enabled = False
+                cbOverallHTC.Enabled = False
             Case 2
                 'Temperaturas de Saída
                 tbHotFluidOutletT.Enabled = False

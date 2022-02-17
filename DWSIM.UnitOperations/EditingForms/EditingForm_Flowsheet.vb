@@ -458,10 +458,10 @@ Public Class EditingForm_FlowsheetUO
         If Loaded Then
 
             Dim par = SimObject.InputParams(dgvinputvars.Rows(e.RowIndex).Cells(0).Value)
-            Dim value = dgvinputvars.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
+            Dim value = dgvinputvars.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString()
 
             Try
-                SimObject.FlowSheet.SimulationObjects(par.ObjectID).SetPropertyValue(par.ObjectProperty, value, SimObject.FlowSheet.FlowsheetOptions.SelectedUnitSystem)
+                SimObject.Fsheet.SimulationObjects(par.ObjectID).SetPropertyValue(par.ObjectProperty, value.ToDoubleFromCurrent(), SimObject.FlowSheet.FlowsheetOptions.SelectedUnitSystem)
                 RequestCalc()
                 UpdateInfo()
             Catch ex As Exception

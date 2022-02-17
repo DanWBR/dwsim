@@ -640,7 +640,7 @@ Namespace PropertyPackages
                 Else
                     Dim prn As New PropertyPackages.ThermoPlugs.PR
                     IObj?.SetCurrent()
-                    lnfug = prn.CalcLnFug(T, P, Vx, Me.RET_VKij, Me.RET_VTC, Me.RET_VPC, Me.RET_VW, Nothing, "V")
+                    lnfug = prn.CalcLnFug(T, P, Vx, Me.RET_VKij, Me.RET_VTC, Me.RET_VPC, Me.RET_VW, Nothing, 1)
                 End If
 
             End If

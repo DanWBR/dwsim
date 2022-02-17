@@ -76,7 +76,7 @@ Namespace GraphicObjects.Shapes
 
             With InputConnectors
                 For i As Integer = 0 To InputConnectors.Count - 2
-                    .Item(i).Position = New Point(X, Y + (i + 1) / InCount * Height)
+                    .Item(i).Position = New Point(X + 0.05 * 1.25 * Width, Y + Height * 0.2 + (i + 1) / InCount * Height * 0.6)
                     .Item(i).ConnectorName = "Column Feed Port #" & (i + 1)
                     .Item(i).Direction = ConDir.Right
                 Next
@@ -96,7 +96,7 @@ Namespace GraphicObjects.Shapes
                 .Item(0).ConnectorName = "Distillate"
                 .Item(1).ConnectorName = "Bottoms"
                 For i As Integer = 2 To OutputConnectors.Count - 3
-                    .Item(i).Position = New Point(X + Width, Y + (i + 1) / OutCount * Height)
+                    .Item(i).Position = New Point(X + 0.05 * 1.25 * Width + 0.2 * 1.25 * Width, Y + Height * 0.2 + (i + 1) / OutCount * Height * 0.6)
                     .Item(i).ConnectorName = "Side Draw #" & (i - 1)
                 Next
                 .Item(9).Position = New Point(X + Width, Y + 0.02 * Height)
@@ -217,7 +217,7 @@ Namespace GraphicObjects.Shapes
                 canvas.DrawPoints(SKPointMode.Polygon, New SKPoint() {New SKPoint(X + 0.5 * 1.25 * Width, Y + 0.825 * Height), New SKPoint(X + 0.55 * 1.25 * Width, Y + 0.825 * Height), New SKPoint(X + 0.575 * 1.25 * Width, Y + 0.875 * Height), New SKPoint(X + 0.625 * 1.25 * Width, Y + 0.775 * Height), New SKPoint(X + 0.65 * 1.25 * Width, Y + 0.825 * Height), New SKPoint(X + Width, Y + 0.825 * Height)}, myPen)
                 canvas.DrawLine((X + 0.5 * 1.25 * Width), (Y + 0.825 * Height), (X + 0.4 * 1.25 * Width), (Y + 0.825 * Height), myPen)
 
-                canvas.DrawLine((X), (Y + 0.5 * Height), (X + 0.05 * 1.25 * Width), (Y + 0.5 * Height), myPen)
+                'canvas.DrawLine((X), (Y + 0.5 * Height), (X + 0.05 * 1.25 * Width), (Y + 0.5 * Height), myPen)
 
                 canvas.DrawLine((X + 0.05 * 1.25 * Width), (Y + 0.2 * Height), (X + 0.31 * Width), (Y + 0.2 * Height), myPen)
                 canvas.DrawLine((X + 0.05 * 1.25 * Width), (Y + 0.3 * Height), (X + 0.31 * Width), (Y + 0.3 * Height), myPen)

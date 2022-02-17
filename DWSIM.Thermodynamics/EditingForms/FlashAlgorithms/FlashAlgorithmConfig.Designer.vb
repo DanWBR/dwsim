@@ -30,6 +30,7 @@ Partial Class FlashAlgorithmConfig
         Me.cbExternalSolver = New System.Windows.Forms.ComboBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.gpNL = New System.Windows.Forms.GroupBox()
+        Me.CheckBoxInterpTempPHFlash = New System.Windows.Forms.CheckBox()
         Me.chkHandleSolids = New System.Windows.Forms.CheckBox()
         Me.chkImmiscible = New System.Windows.Forms.CheckBox()
         Me.chkFastModeNL = New System.Windows.Forms.CheckBox()
@@ -140,11 +141,18 @@ Partial Class FlashAlgorithmConfig
         'gpNL
         '
         resources.ApplyResources(Me.gpNL, "gpNL")
+        Me.gpNL.Controls.Add(Me.CheckBoxInterpTempPHFlash)
         Me.gpNL.Controls.Add(Me.chkHandleSolids)
         Me.gpNL.Controls.Add(Me.chkImmiscible)
         Me.gpNL.Controls.Add(Me.chkFastModeNL)
         Me.gpNL.Name = "gpNL"
         Me.gpNL.TabStop = False
+        '
+        'CheckBoxInterpTempPHFlash
+        '
+        resources.ApplyResources(Me.CheckBoxInterpTempPHFlash, "CheckBoxInterpTempPHFlash")
+        Me.CheckBoxInterpTempPHFlash.Name = "CheckBoxInterpTempPHFlash"
+        Me.CheckBoxInterpTempPHFlash.UseVisualStyleBackColor = True
         '
         'chkHandleSolids
         '
@@ -427,4 +435,5 @@ Partial Class FlashAlgorithmConfig
     Friend WithEvents cbExternalSolver As ComboBox
     Friend WithEvents Label11 As Label
     Public WithEvents btnConfigExtSolver As Button
+    Friend WithEvents CheckBoxInterpTempPHFlash As CheckBox
 End Class

@@ -139,6 +139,7 @@
     <Compile Include="IUndoRedoAction.vb" />
     <Compile Include="IUnitsOfMeasure.vb" />
     <Compile Include="IUtilityPlugin.vb" />
+    <Compile Include="IWatchItem.vb" />
     <Compile Include="IWelcomeScreen.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

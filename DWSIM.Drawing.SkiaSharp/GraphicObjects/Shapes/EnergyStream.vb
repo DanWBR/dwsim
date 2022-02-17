@@ -165,8 +165,6 @@ Namespace GraphicObjects.Shapes
                     'Temperature/Pressure Gradients
             End Select
 
-
-
         End Sub
 
     End Class

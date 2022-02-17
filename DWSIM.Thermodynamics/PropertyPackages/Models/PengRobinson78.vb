@@ -1106,12 +1106,10 @@ Namespace PropertyPackages.ThermoPlugs
                 ex.Data.Add("UserAction", "Check if the parameters are valid (T, P, composition). If this error keeps occuring, try another Property Package or check the Material Stream / Unit Operation properties.")
                 Throw ex
             End If
-            If forcephase <> "" Then
-                If forcephase = "L" Then
-                    Z = _zarray.Min
-                ElseIf forcephase = "V" Then
-                    Z = _zarray.Max
-                End If
+            If forcephase = 0 Then
+                Z = _zarray.Min
+            ElseIf forcephase = 1 Then
+                Z = _zarray.Max
             Else
                 IObj?.SetCurrent()
                 _mingz = ZtoMinG(_zarray.ToArray(), T, P, Vx, VKij, Tc, Pc, w)

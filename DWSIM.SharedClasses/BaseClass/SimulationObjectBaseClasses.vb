@@ -59,6 +59,8 @@ Namespace UnitOperations
 
         Public Property DetailedDebugReport As String
 
+        Public ReadOnly Property IsFunctional As Boolean = True Implements ISimulationObject.IsFunctional
+
         Public Overridable Property ComponentDescription() As String = ""
 
         Public Overridable Property ComponentName() As String = ""

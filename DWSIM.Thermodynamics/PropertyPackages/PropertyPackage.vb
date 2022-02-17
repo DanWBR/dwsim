@@ -1,5 +1,5 @@
 '    Property Package Base Class
-'    Copyright 2008-2021 Daniel Wagner O. de Medeiros
+'    Copyright 2008-2022 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -478,6 +478,8 @@ Namespace PropertyPackages
         Public Property ExceptionLog As String = ""
 
         Public ReadOnly Property ImplementsAnalyticalDerivatives As Boolean = False
+
+        Public ReadOnly Property IsFunctional As Boolean = True Implements IPropertyPackage.IsFunctional
 
         'forced solids list
         Public Property ForcedSolids As New List(Of String)
@@ -11537,6 +11539,37 @@ Final3:
                     Catch ex As Exception
                     End Try
 
+                Case "Peng-Robinson 1978 (PR78)"
+
+                    Try
+                        Dim pp As PengRobinson1978PropertyPackage = Me
+                        'pp.m_pr.InteractionParameters.Clear()
+                        For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "InteractionParameters").FirstOrDefault.Elements.ToList
+                            Dim ip As New Auxiliary.PR_IPData() With {.Owner = Me.GetModel(), .kij = Double.Parse(xel.@Value, ci)}
+                            Dim dic As New Dictionary(Of String, Auxiliary.PR_IPData)
+                            dic.Add(xel.@Compound2, ip)
+                            If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
+                                If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound2) Then
+                                    pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
+                                Else
+                                    If Not pp.m_pr.InteractionParameters(xel.@Compound2).ContainsKey(xel.@Compound1) Then
+                                        pp.m_pr.InteractionParameters(xel.@Compound2).Add(xel.@Compound1, ip)
+                                    Else
+                                        pp.m_pr.InteractionParameters(xel.@Compound2)(xel.@Compound1) = ip
+                                    End If
+                                End If
+                            Else
+                                If Not pp.m_pr.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
+                                    pp.m_pr.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
+                                Else
+                                    pp.m_pr.InteractionParameters(xel.@Compound1)(xel.@Compound2) = ip
+                                End If
+                            End If
+                        Next
+
+                    Catch ex As Exception
+                    End Try
+
                 Case "Peng-Robinson-Stryjek-Vera 2 (PRSV2-M)", "Peng-Robinson-Stryjek-Vera 2 (PRSV2)"
 
                     Dim pp As PRSV2PropertyPackage = Me
@@ -11931,6 +11964,9 @@ Final3:
                 If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.GibbsMinimizationExternalSolverConfigData) Then
                     FlashSettings.Add(Interfaces.Enums.FlashSetting.GibbsMinimizationExternalSolverConfigData, "")
                 End If
+                If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.PHFlash_Use_Interpolated_Result_In_Oscillating_Temperature_Cases) Then
+                    FlashSettings.Add(Interfaces.Enums.FlashSetting.PHFlash_Use_Interpolated_Result_In_Oscillating_Temperature_Cases, True)
+                End If
             End If
 
         End Function
@@ -11996,6 +12032,23 @@ Final3:
                     Case "Peng-Robinson (PR)"
 
                         Dim pp As PengRobinsonPropertyPackage = Me
+
+                        .Add(New XElement("InteractionParameters"))
+                        For Each kvp As KeyValuePair(Of String, Dictionary(Of String, Auxiliary.PR_IPData)) In pp.m_pr.InteractionParameters
+                            For Each kvp2 As KeyValuePair(Of String, Auxiliary.PR_IPData) In kvp.Value
+                                If Not Me.CurrentMaterialStream Is Nothing Then
+                                    If Me.CurrentMaterialStream.Phases(0).Compounds.ContainsKey(kvp.Key) And Me.CurrentMaterialStream.Phases(0).Compounds.ContainsKey(kvp2.Key) Then
+                                        .Item(.Count - 1).Add(New XElement("InteractionParameter", New XAttribute("Compound1", kvp.Key),
+                                                                        New XAttribute("Compound2", kvp2.Key),
+                                                                        New XAttribute("Value", kvp2.Value.kij.ToString(ci))))
+                                    End If
+                                End If
+                            Next
+                        Next
+
+                    Case "Peng-Robinson 1978 (PR78)"
+
+                        Dim pp As PengRobinson1978PropertyPackage = Me
 
                         .Add(New XElement("InteractionParameters"))
                         For Each kvp As KeyValuePair(Of String, Dictionary(Of String, Auxiliary.PR_IPData)) In pp.m_pr.InteractionParameters

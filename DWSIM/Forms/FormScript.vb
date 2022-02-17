@@ -164,6 +164,8 @@ Imports IronPython.Hosting
 
     Public Shared Sub RunScript_IronPython(scripttitle As String, scripttext As String, fsheet As FormFlowsheet, debuggingstep As Action(Of IronPython.Runtime.Exceptions.TraceBackFrame))
 
+        fsheet.PythonPreprocessor?.Invoke(scripttext)
+
         Dim scope As Microsoft.Scripting.Hosting.ScriptScope
         Dim engine As Microsoft.Scripting.Hosting.ScriptEngine
 
@@ -258,6 +260,8 @@ Imports IronPython.Hosting
     End Sub
 
     Public Shared Sub RunScript_PythonNET(scripttitle As String, scripttext As String, fsheet As FormFlowsheet)
+
+        fsheet.PythonPreprocessor?.Invoke(scripttext)
 
         GlobalSettings.Settings.InitializePythonEnvironment()
 

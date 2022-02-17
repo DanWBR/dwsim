@@ -158,6 +158,8 @@ Public Class FlowsheetSurfaceGLControl
             t = obj(0)
             c = obj(1)
 
+            If c = SimulationObjectClass.None Then Exit Sub
+
             Console.WriteLine(t.Name)
 
             Dim pt = PointToClient(New Point(e.X, e.Y))
@@ -244,6 +246,16 @@ Public Class FlowsheetSurfaceGLControl
         Else
 
             Select Case Me.FlowsheetSurface.SelectedObject.ObjectType
+                Case ObjectType.GO_Button
+                    Dim btn = DirectCast(FlowsheetSurface.SelectedObject, Drawing.SkiaSharp.GraphicObjects.Shapes.ButtonGraphic)
+                    Dim f As New FormEditFlowsheetButton() With {.Flowsheet = FlowsheetObject, .ButtonObject = btn}
+                    f.ShowDialog(Me)
+                Case ObjectType.GO_HTMLText
+                    Dim rtg = DirectCast(FlowsheetSurface.SelectedObject, Drawing.SkiaSharp.GraphicObjects.HTMLTextGraphic)
+                    Dim f As New FormHTMLEditor()
+                    f.Editor1.Html = rtg.Text
+                    f.ShowDialog(Me)
+                    rtg.Text = f.Editor1.Html
                 Case ObjectType.GO_Table
                     Dim f As New FormConfigurePropertyTable() With {.Table = FlowsheetSurface.SelectedObject}
                     f.ShowDialog(Me)

@@ -63,6 +63,27 @@ Public Class FlowsheetSurface_SkiaSharp
 
         ExtensionMethods.ChangeDefaultFont(Me)
 
+        Me.ToolStrip1.AutoSize = False
+        Me.ToolStrip1.Size = New Size(ToolStrip1.Width, 28 * Settings.DpiScale)
+        Me.ToolStrip1.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
+        For Each item In Me.ToolStrip1.Items
+            If TryCast(item, ToolStripButton) IsNot Nothing Then
+                DirectCast(item, ToolStripButton).Size = New Size(ToolStrip1.ImageScalingSize.Width, ToolStrip1.ImageScalingSize.Height)
+            End If
+        Next
+        Me.tstbSearch.Size = New Size(Me.tstbSearch.Width * Settings.DpiScale, tstbSearch.Height)
+        Me.ToolStrip1.Invalidate()
+
+        Me.ToolStripFlowsheet.AutoSize = False
+        Me.ToolStripFlowsheet.Size = New Size(ToolStripFlowsheet.Width, 28 * Settings.DpiScale)
+        Me.ToolStripFlowsheet.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
+        For Each item In Me.ToolStripFlowsheet.Items
+            If TryCast(item, ToolStripButton) IsNot Nothing Then
+                DirectCast(item, ToolStripButton).Size = New Size(ToolStrip1.ImageScalingSize.Width, ToolStrip1.ImageScalingSize.Height)
+            End If
+        Next
+        Me.ToolStripFlowsheet.Invalidate()
+
         If TypeOf Me.ParentForm Is FormFlowsheet Then
             Flowsheet = Me.ParentForm
         ElseIf Flowsheet Is Nothing Then
@@ -143,6 +164,11 @@ Public Class FlowsheetSurface_SkiaSharp
             End Try
         Next
 
+        If FormMain.IsPro Then
+            FindTearStreamsAutomaticallyToolStripMenuItem.Visible = False
+            UpgradeDistillationColumnToProToolStripMenuItem.Visible = False
+        End If
+
         Loaded = True
 
     End Sub
@@ -222,6 +248,8 @@ Public Class FlowsheetSurface_SkiaSharp
             FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.RefluxedAbsorber And
             FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.GO_Rectangle And
             FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.GO_Chart And
+            FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.GO_HTMLText And
+            FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.GO_Button And
             FlowsheetSurface.SelectedObject.ObjectType <> ObjectType.GO_Text Then
 
             Me.RecalcularToolStripMenuItem.Visible = True
@@ -1444,6 +1472,8 @@ Public Class FlowsheetSurface_SkiaSharp
 
         newobj.SetFlowsheet(Flowsheet)
 
+        newobj.GraphicObject.Flowsheet = Flowsheet
+
         Return newobj.GraphicObject
 
     End Function
@@ -1508,6 +1538,8 @@ Public Class FlowsheetSurface_SkiaSharp
         For Each obj In Me.Flowsheet.Collections.FlowsheetObjectCollection.Values
             If obj.GraphicObject.Tag <> refobj.Tag Then
                 If obj.GraphicObject.ObjectType <> ObjectType.GO_Text And
+                    obj.GraphicObject.ObjectType <> ObjectType.GO_HTMLText And
+                    obj.GraphicObject.ObjectType <> ObjectType.GO_Button And
                     obj.GraphicObject.ObjectType <> ObjectType.GO_FloatingTable And
                     obj.GraphicObject.ObjectType <> ObjectType.GO_MasterTable And
                     obj.GraphicObject.ObjectType <> ObjectType.GO_SpreadsheetTable And
@@ -2401,6 +2433,7 @@ Public Class FlowsheetSurface_SkiaSharp
         End Select
 
         If Not gObj Is Nothing Then
+            gObj.Flowsheet = Flowsheet
             gObj.Owner = Me.Flowsheet.SimulationObjects(gObj.Name)
             Me.Flowsheet.SimulationObjects(gObj.Name).SetFlowsheet(Flowsheet)
             FlowsheetSurface.DrawingObjects.Add(gObj)
@@ -2422,7 +2455,6 @@ Public Class FlowsheetSurface_SkiaSharp
         End If
 
         SplitContainerHorizontal.Panel1.Cursor = Cursors.Arrow
-
 
         Return gObj.Name
 
@@ -2987,8 +3019,7 @@ Public Class FlowsheetSurface_SkiaSharp
 
         FlowsheetSurface.AlignSelectedObjects(direction)
 
-        SplitContainerHorizontal.Panel1.Invalidate()
-        SplitContainerHorizontal.Panel1.Invalidate()
+        Me.Refresh()
 
     End Sub
 
@@ -3325,9 +3356,6 @@ Public Class FlowsheetSurface_SkiaSharp
             btnRight.Height = 24
             btnLeft.Height = 24
             FlowsheetSurface.ControlPanelMode = True
-            GlobalSettings.Settings.DarkMode = True
-            Drawing.SkiaSharp.GraphicsSurface.BackgroundColor = SKColors.DimGray
-            Drawing.SkiaSharp.GraphicsSurface.ForegroundColor = SKColors.WhiteSmoke
             SplitContainerHorizontal.Panel2Collapsed = True
         Else
             btnDown.Visible = False
@@ -3339,9 +3367,6 @@ Public Class FlowsheetSurface_SkiaSharp
             btnRight.Height = 1
             btnLeft.Height = 1
             FlowsheetSurface.ControlPanelMode = False
-            GlobalSettings.Settings.DarkMode = False
-            Drawing.SkiaSharp.GraphicsSurface.BackgroundColor = SKColors.White
-            Drawing.SkiaSharp.GraphicsSurface.ForegroundColor = SKColors.Black
             SplitContainerHorizontal.Panel2Collapsed = False
         End If
         FControl.Invalidate()

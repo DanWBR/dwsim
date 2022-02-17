@@ -22,13 +22,14 @@ public class Test3
 
         var interf = new DWSIM.Automation.Automation2();
 
-        var sim = interf.LoadFlowsheet(@"");
+        var sim = interf.LoadFlowsheet(@"C:\Users\Daniel\Downloads\230_FOSSEE_AirBenzeneSeparation.dwxmz");
 
         sim.SetMessageListener((s, mt) => Console.WriteLine(s));
 
         var errors = interf.CalculateFlowsheet3(sim, 3600);
 
-        interf.SaveFlowsheet2(sim, @"");
+        var obj = sim.GetSelectedFlowsheetSimulationObject("compressed gas");
+        var temperature = obj.GetPropertyValue("PROP_MS_0");
 
         Console.WriteLine("Solved.");
 

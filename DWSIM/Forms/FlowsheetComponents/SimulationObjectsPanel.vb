@@ -118,6 +118,10 @@ Public Class SimulationObjectsPanel
             End Select
         Next
 
+        If Not FormMain.IsPro Then
+            ProFeatures.Functions.AddProUnitOps(New FlowLayoutPanel() {PanelMixers, PanelColumns, PanelExchangers, PanelLogical, PanelPressure, PanelUser})
+        End If
+
     End Sub
 
 End Class

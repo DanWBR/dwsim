@@ -1,5 +1,5 @@
 ﻿'    DWSIM Interface definitions
-'    Copyright 2010-2017 Daniel Wagner O. de Medeiros
+'    Copyright 2010-2021 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -73,6 +73,8 @@
     Property StoredSolutions As Dictionary(Of String, List(Of XElement))
 
     Property Charts As Dictionary(Of String, IChart)
+
+    Property WatchItems As List(Of IWatchItem)
 
     Sub ShowMessage(ByVal text As String, ByVal mtype As MessageType, Optional ByVal exceptionID As String = "")
 
@@ -192,11 +194,15 @@
 
     Function GetScriptText(name As String) As String
 
+    Sub RunScript(name As String)
+
     Function GetSimulationFilePath() As String
 
     Function GetSimulationFileDirectory() As String
 
     Sub ClearLog()
+
+    Property PythonPreprocessor() As Action(Of String)
 
 End Interface
 

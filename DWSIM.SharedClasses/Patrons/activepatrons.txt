@@ -13,7 +13,6 @@ Bruce Rising
 Bruce Logue
 Carlos G. C. Reetz
 Casey Houston
-Celso Félix
 Christian Hornhofer
 Christian Jordan
 Csaba Darok
@@ -25,9 +24,12 @@ Donald Gongaware
 Dorivaldo Junior
 Doug Palfreyman
 Emanuel Santos
+Евгений Иванчиков
+Fábio Shiotsuki
 Frank Mittricker
 Filippo Borroni
 Gokhan Candan
+George C Brindle
 Gerry Agnew
 Guenther Holzer
 H-Tec Systems GmbH
@@ -46,11 +48,13 @@ John Gorke
 John Herring
 John Kossik
 Jonathan Reichelt
+Joon Song
 Joseph Mendoza
 Joseph Attia
 Karen Elrington
 Laércio Piva
 Lauterbach Verfahrenstechnik GmbH
+Leandro Favaretto
 Leonard Seed
 Les Waymont
 Lewis Estall
@@ -64,6 +68,7 @@ Masahiro Sakai
 Matt Hogg
 Nicolas Spogis
 Nikita Petrosyan
+Pedro Sabóia
 Petroconsulting LLC
 Philippe Wesel
 Protherm Systems
@@ -73,7 +78,6 @@ Richard Huntington
 Roland Berger
 Rupert Easter
 Ryszard Sadowski
-Shami Al Gawzi
 Steven Sandoval
 Tibor Lányi
 Tony Diocee

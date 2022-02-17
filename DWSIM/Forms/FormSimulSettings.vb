@@ -69,7 +69,6 @@ Public Class FormSimulSettings
 
     Private Sub FormStSim_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Me.Load
 
-
         Me.TabText = Me.Text
 
         initialized = True
@@ -154,6 +153,12 @@ Public Class FormSimulSettings
                 End If
                 If addobj Then Me.DataGridViewPP.Rows.Add(New Object() {pp2.ComponentName, pp2.GetDisplayIcon(), pp2.ComponentName, pp2.ComponentDescription})
             Next
+
+            If Not FormMain.IsPro Then
+                ProFeatures.Functions.AddProPPs(DataGridViewPP)
+            End If
+
+            DataGridViewPP.Sort(DataGridViewPP.Columns(2), System.ComponentModel.ListSortDirection.Ascending)
 
             Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
             Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations")).FirstOrDefault
@@ -269,12 +274,19 @@ Public Class FormSimulSettings
                 cbForcePhase.SelectedIndex = 3
         End Select
 
+        chkShowMSTemp.Checked = CurrentFlowsheet.Options.DisplayMaterialStreamTemperatureValue
+        chkShowMSPressure.Checked = CurrentFlowsheet.Options.DisplayMaterialStreamPressureValue
+        chkMSShowW.Checked = CurrentFlowsheet.Options.DisplayMaterialStreamMassFlowValue
+        chkMSSHowM.Checked = CurrentFlowsheet.Options.DisplayMaterialStreamMolarFlowValue
+        chkMSShowV.Checked = CurrentFlowsheet.Options.DisplayMaterialStreamVolFlowValue
+        chkMSShowE.Checked = CurrentFlowsheet.Options.DisplayMaterialStreamEnergyFlowValue
+        chkESShowE.Checked = CurrentFlowsheet.Options.DisplayEnergyStreamPowerValue
+
         Me.loaded = True
 
         ExtensionMethods.ChangeDefaultFont(Me)
 
         AddHandler DataGridView1.EditingControlShowing, AddressOf Me.myDataGridView_EditingControlShowing
-
 
     End Sub
 
@@ -1255,8 +1267,15 @@ Public Class FormSimulSettings
 
     Private Sub Button8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button8.Click
 
+        If DataGridViewPP.SelectedRows(0).Cells(0).Value = "" Then
+            MessageBox.Show("This Property Package is available on DWSIM Pro.", "DWSIM Pro", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
         Dim pp As PropertyPackages.PropertyPackage
         pp = FormMain.PropertyPackages(Me.DataGridViewPP.SelectedRows(0).Cells(0).Value).Clone
+
+        If pp Is Nothing Then Exit Sub
 
         With pp
             pp.Tag = pp.ComponentName + " (" + (CurrentFlowsheet.PropertyPackages.Count + 1).ToString() + ")"
@@ -1658,6 +1677,34 @@ Public Class FormSimulSettings
 
     Private Sub chkShowExtraPropertiesEditor_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowExtraPropertiesEditor.CheckedChanged
         CurrentFlowsheet.Options.DisplayUserDefinedPropertiesEditor = chkShowExtraPropertiesEditor.Checked
+    End Sub
+
+    Private Sub chkShowMSTemp_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowMSTemp.CheckedChanged
+        CurrentFlowsheet.Options.DisplayMaterialStreamTemperatureValue = chkShowMSTemp.Checked
+    End Sub
+
+    Private Sub chkShowMSPressure_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowMSPressure.CheckedChanged
+        CurrentFlowsheet.Options.DisplayMaterialStreamPressureValue = chkShowMSPressure.Checked
+    End Sub
+
+    Private Sub chkMSShowW_CheckedChanged(sender As Object, e As EventArgs) Handles chkMSShowW.CheckedChanged
+        CurrentFlowsheet.Options.DisplayMaterialStreamMassFlowValue = chkMSShowW.Checked
+    End Sub
+
+    Private Sub chkMSSHowM_CheckedChanged(sender As Object, e As EventArgs) Handles chkMSSHowM.CheckedChanged
+        CurrentFlowsheet.Options.DisplayMaterialStreamMolarFlowValue = chkMSSHowM.Checked
+    End Sub
+
+    Private Sub chkMSShowV_CheckedChanged(sender As Object, e As EventArgs) Handles chkMSShowV.CheckedChanged
+        CurrentFlowsheet.Options.DisplayMaterialStreamVolFlowValue = chkMSShowV.Checked
+    End Sub
+
+    Private Sub chkMSShowE_CheckedChanged(sender As Object, e As EventArgs) Handles chkMSShowE.CheckedChanged
+        CurrentFlowsheet.Options.DisplayMaterialStreamEnergyFlowValue = chkMSShowE.Checked
+    End Sub
+
+    Private Sub chkESShowE_CheckedChanged(sender As Object, e As EventArgs) Handles chkESShowE.CheckedChanged
+        CurrentFlowsheet.Options.DisplayEnergyStreamPowerValue = chkESShowE.Checked
     End Sub
 
     Private Sub FormSimulSettings_Shown(sender As Object, e As EventArgs) Handles Me.Shown

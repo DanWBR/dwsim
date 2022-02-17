@@ -5248,13 +5248,13 @@ FPROPS is Copyright (C) 2011 - Carnegie Mellon University</value>
     <value>compound not found on any of the loaded databases.</value>
   </data>
   <data name="MaximumHeatExchange" xml:space="preserve">
-    <value>Maximum heat exchange</value>
+    <value>Maximum Heat Exchange</value>
   </data>
   <data name="MaximumHeatExchangeDesc" xml:space="preserve">
     <value>Theoretical limit for the heat exchange considering counter-current flow.</value>
   </data>
   <data name="ThermalEfficiency" xml:space="preserve">
-    <value>Thermal efficiency</value>
+    <value>Thermal Efficiency</value>
   </data>
   <data name="ThermalEfficiencyDesc" xml:space="preserve">
     <value>Heat exchanged divided by the maximum theoretical possible value.</value>
@@ -5932,5 +5932,11 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   </data>
   <data name="DescDHPP" xml:space="preserve">
     <value>Includes only the Debye-Hückel term for the calculation of activity coefficients.</value>
+  </data>
+  <data name="RemoveButton" xml:space="preserve">
+    <value>Remove Button?</value>
+  </data>
+  <data name="HXLMTDF" xml:space="preserve">
+    <value>LMTD Correction Factor (Shell and Tube)</value>
   </data>
 </root>

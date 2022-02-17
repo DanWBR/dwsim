@@ -1,5 +1,5 @@
 ﻿'    LIQUAC2 Property Package 
-'    Copyright 2013-2021 Daniel Wagner O. de Medeiros
+'    Copyright 2013-2022 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '

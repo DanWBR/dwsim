@@ -1490,7 +1490,7 @@ out:
             IObj?.SetCurrent
             Dim lps As Object = GetPhaseSplitEstimates(T, P, result(0), result(2), PP)
 
-            If lps(2) > 0.05 Then
+            If lps(2) / (lps(0) + lps(2)) > 0.00001 Then
 
                 If Not prevres Is Nothing Then
 
@@ -1498,12 +1498,12 @@ out:
 
                 Else
 
-                    L1 = lps(0)
-                    L2 = lps(2)
+                    L1 = lps(0) / (lps(0) + lps(2))
+                    L2 = lps(2) / (lps(0) + lps(2))
                     Vx1 = lps(1)
                     Vx2 = lps(3)
                     IObj?.SetCurrent
-                    result = Flash_PV_3P(Vz, result(1), L1, L2, result(3), Vx1, Vx2, P, V, T, PP)
+                    result = Flash_PV_3P(Vz, V, L1 * (1 - V), L2 * (1 - V), result(3), Vx1, Vx2, P, V, T, PP)
 
                 End If
 

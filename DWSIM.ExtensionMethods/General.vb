@@ -606,7 +606,7 @@ Public Module General
         Dim i, ii As Integer
         Dim c, cc, r As Integer
 
-        tArr = data.Split(New Char() {vbLf, vbCr, vbCrLf})
+        tArr = Clipboard.GetText().Split(Environment.NewLine)
 
         If dgv.SelectedCells.Count > 0 Then
             r = dgv.SelectedCells(0).RowIndex
@@ -617,10 +617,11 @@ Public Module General
         End If
         For i = 0 To tArr.Length - 1
             If tArr(i) <> "" Then
-                arT = tArr(i).Split(Char.ConvertFromUtf32(9))
+                arT = tArr(i).Split(vbTab)
                 For ii = 0 To arT.Length - 1
                     If r > dgv.Rows.Count - 1 Then
                         dgv.Rows.Add()
+                        dgv.Rows(0).Cells(0).Selected = True
                     End If
                 Next
                 r = r + 1
@@ -635,16 +636,14 @@ Public Module General
         End If
         For i = 0 To tArr.Length - 1
             If tArr(i) <> "" Then
-                arT = tArr(i).Split(Char.ConvertFromUtf32(9))
+                arT = tArr(i).Split(vbTab)
                 cc = c
-                If r <= dgv.Rows.Count - 1 Then
-                    For ii = 0 To arT.Length - 1
-                        cc = GetNextVisibleCol(dgv, cc)
-                        If cc > dgv.ColumnCount - 1 Then Exit For
-                        dgv.Item(cc, r).Value = arT(ii).TrimStart
-                        cc = cc + 1
-                    Next
-                End If
+                For ii = 0 To arT.Length - 1
+                    cc = GetNextVisibleCol(dgv, cc)
+                    If cc > dgv.ColumnCount - 1 Then Exit For
+                    dgv.Item(cc, r).Value = arT(ii).TrimStart
+                    cc = cc + 1
+                Next
                 r = r + 1
             End If
         Next
