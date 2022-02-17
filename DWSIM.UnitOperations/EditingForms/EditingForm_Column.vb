@@ -139,10 +139,6 @@ Public Class EditingForm_Column
             cbCondPressureUnits.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.pressure).ToArray)
             cbCondPressureUnits.SelectedItem = units.pressure
 
-            cbRebPressure.Items.Clear()
-            cbRebPressure.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.pressure).ToArray)
-            cbRebPressure.SelectedItem = units.pressure
-
             cbCondPDropUnits.Items.Clear()
             cbCondPDropUnits.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.deltaP).ToArray)
             cbCondPDropUnits.SelectedItem = units.deltaP
@@ -214,7 +210,6 @@ Public Class EditingForm_Column
                 tbSubcooling.Text = "0"
             End If
 
-            tbRebPressure.Text = su.Converter.ConvertFromSI(units.pressure, .ReboilerPressure).ToString(nf)
             cbRebSpec.SelectedIndex = .Specs("R").SType
             Dim runits As String() = {}
             Select Case .Specs("R").SType
@@ -645,19 +640,6 @@ Public Class EditingForm_Column
         If Loaded Then
 
             SimObject.VaporFlowRateUnit = cbCondVapFlowUnits.SelectedItem.ToString
-
-            RequestCalc()
-
-        End If
-
-    End Sub
-
-    Private Sub tbRebPressure_TextChanged(sender As Object, e As KeyEventArgs)
-
-        If Loaded And e.KeyCode = Keys.Enter Then
-
-            SimObject.ReboilerPressure = su.Converter.ConvertToSI(units.pressure, tbRebPressure.Text.ParseExpressionToDouble)
-            SimObject.Stages(SimObject.Stages.Count - 1).P = SimObject.ReboilerPressure
 
             RequestCalc()
 
