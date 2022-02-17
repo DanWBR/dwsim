@@ -67,9 +67,13 @@ namespace DWSIM.Simulate365.FormFactories
         }
 
 
-        public S365File ShowOpenDialog()
+        public S365File ShowOpenDialog(List<string> fileFormats = null)
         {
             var navigationPath = "filepicker/open";
+            if (fileFormats != null && fileFormats.Count > 0)
+            {
+                navigationPath += $"/{string.Join("_", fileFormats)}";
+            }
             var initialUrl = $"{navigationPath}";
             string title = "Open file from Simulate 365 Dashboard";
             _webUIForm = new WebUIForm(initialUrl, title, true)

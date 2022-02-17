@@ -175,16 +175,8 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
         this._selection = new Selection({ onSelectionChanged: this.selectedRowChanged.bind(this) } as ISelectionOptions);
 
     }
-    componentDidMount() {
-
-        if (this.props.isSaveDialog) {
-            this.changeFileTypeFilter();
-        } else {
-            this.getFilesAndFolders();
-
-        }
-
-
+    componentDidMount() {        
+            this.changeFileTypeFilter();  
     }
 
     changeFileTypeFilter() {
