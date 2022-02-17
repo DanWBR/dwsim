@@ -165,7 +165,15 @@ Namespace PropertyPackages
 
         Public Overrides Function AUX_CONDTL(T As Double, Optional phaseid As Integer = 3) As Double
 
-            Return CoolProp.PropsSI("L", "T", T, "P", 101325, GetCoolPropName())
+            Dim value As Double
+
+            Try
+                value = CoolProp.PropsSI("L", "T", T, "P", 101325, GetCoolPropName())
+            Catch ex As Exception
+                Dim psat = CoolProp.PropsSI("P", "T", T, "Q", 0, GetCoolPropName())
+                value = CoolProp.PropsSI("L", "T", T, "P", psat * 1.1, GetCoolPropName())
+            End Try
+            Return value
 
         End Function
 

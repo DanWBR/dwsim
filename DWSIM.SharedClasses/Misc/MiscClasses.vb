@@ -115,11 +115,11 @@ Namespace Extras
 
     <System.Serializable()> Public Class WatchItem
 
-        Implements Interfaces.ICustomXMLSerialization
+        Implements Interfaces.ICustomXMLSerialization, IWatchItem
 
-        Public ObjID As String = ""
-        Public PropID As String = ""
-        Public ROnly As Boolean = False
+        Public Property ObjID As String = "" Implements IWatchItem.ObjID
+        Public Property PropID As String = "" Implements IWatchItem.PropID
+        Public Property ROnly As Boolean = False Implements IWatchItem.IsReadOnly
 
         Sub New()
 
@@ -132,12 +132,12 @@ Namespace Extras
         End Sub
 
         Public Function LoadData(data As List(Of XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
-            XMLSerializer.XMLSerializer.Deserialize(Me, data, True)
+            XMLSerializer.XMLSerializer.Deserialize(Me, data)
             Return True
         End Function
 
         Public Function SaveData() As List(Of XElement) Implements Interfaces.ICustomXMLSerialization.SaveData
-            Return XMLSerializer.XMLSerializer.Serialize(Me, True)
+            Return XMLSerializer.XMLSerializer.Serialize(Me)
         End Function
 
     End Class

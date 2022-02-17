@@ -1,8 +1,7 @@
-Version 7.1.2
+Version 7.3.2
 
-- Simultaneous Correction solver for Absorption/Extraction Column
-- Set Flowsheet Fonts for each Style
-- Fixed issue with GERG-2008 Property Package
-- Fixed an issue with Conversion Reactor
-- Fixed an error in density/compressibility calculation (EOS)
-- Fixed custom ordering of Master Property Table objects
+- Fixed Conversion Reactor mass balance
+- Reverted regression with overriding object color
+- Fixed displaying of some Heat Exchanger properties
+- CoolProp Incompressible Mixtures - throw error when Psat = 0
+- Fixed object description in floating tables

@@ -154,6 +154,8 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                         gobj.ObjectType = ObjectType.GO_MasterTable Or
                         gobj.ObjectType = ObjectType.GO_SpreadsheetTable Or
                         gobj.ObjectType = ObjectType.GO_Text Or
+                        gobj.ObjectType = ObjectType.GO_HTMLText Or
+                        gobj.ObjectType = ObjectType.GO_Button Or
                         gobj.ObjectType = ObjectType.GO_Chart Then
 
                         Me.FlowsheetSurface.DeleteSelectedObject(gobj)
@@ -1242,6 +1244,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
         End Select
 
         If Not gObj Is Nothing Then
+            gObj.Flowsheet = Me
             gObj.PositionConnectors()
             gObj.Owner = SimulationObjects(gObj.Name)
             SimulationObjects(gObj.Name).SetFlowsheet(Me)
@@ -1399,13 +1402,16 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                     If ppkey = "" Then
                         obj = CType(New RaoultPropertyPackage().ReturnInstance(xel.Element("Type").Value), PropertyPackage)
                     Else
+                        Dim ptype = xel.Element("Type").Value
+                        If ppkey.Contains("1978") And ptype.Contains("PengRobinsonPropertyPackage") Then
+                            ptype = ptype.Replace("PengRobinson", "PengRobinson1978")
+                        End If
                         If AvailablePropertyPackages.ContainsKey(ppkey) Then
-                            obj = AvailablePropertyPackages(ppkey).ReturnInstance(xel.Element("Type").Value)
+                            obj = AvailablePropertyPackages(ppkey).ReturnInstance(ptype)
                         Else
-                            Throw New Exception("The " & ppkey & " library was not found. Please download and install it in order to run this simulation.")
+                            Throw New Exception("The " & ppkey & " Property Package library was not found. Please download and install it in order to run this simulation.")
                         End If
                     End If
-
                 End If
                 obj.LoadData(xel.Elements.ToList)
                 Dim newID As String = Guid.NewGuid.ToString
@@ -1876,6 +1882,7 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
                         If obj.Name = "" Then obj.Name = obj.Tag
                         obj.CreateConnectors(0, 0)
                     End If
+                    obj.Flowsheet = Me
                     If Not TypeOf obj Is TableGraphic Then
                         FlowsheetSurface.DrawingObjects.Add(obj)
                         GraphicObjects.Add(obj.Name, obj)
@@ -2209,17 +2216,12 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
     Public Function LoadZippedXML(pathtofile As String) As XDocument
 
-        Dim pathtosave As String = My.Computer.FileSystem.SpecialDirectories.Temp + Path.DirectorySeparatorChar
+        Dim pathtosave As String = Path.Combine(My.Computer.FileSystem.SpecialDirectories.Temp, Guid.NewGuid().ToString())
+
+        Directory.CreateDirectory(pathtosave)
+
         Dim fullname As String = ""
         Dim dbfile As String = ""
-
-        'Dim pwd As String = Nothing
-        'If IsZipFilePasswordProtected(caminho) Then
-        '    Dim fp As New FormPassword
-        '    If fp.ShowDialog() = Windows.Forms.DialogResult.OK Then
-        '        pwd = fp.tbPassword.Text
-        '    End If
-        'End If
 
         Using stream As ZipInputStream = New ZipInputStream(File.OpenRead(pathtofile))
             stream.Password = Nothing
@@ -2229,7 +2231,7 @@ Label_00CC:
             Do While (Not entry Is Nothing)
                 Dim fileName As String = Path.GetFileName(entry.Name)
                 If (fileName <> String.Empty) Then
-                    Using stream2 As FileStream = File.Create(pathtosave + Path.GetFileName(entry.Name))
+                    Using stream2 As FileStream = File.Create(Path.Combine(pathtosave, Path.GetFileName(entry.Name)))
                         Dim count As Integer = 2048
                         Dim buffer As Byte() = New Byte(2048) {}
                         Do While True
@@ -2237,9 +2239,9 @@ Label_00CC:
                             If (count <= 0) Then
                                 Dim extension = Path.GetExtension(entry.Name).ToLower()
                                 If extension = ".xml" Then
-                                    fullname = pathtosave + Path.GetFileName(entry.Name)
+                                    fullname = Path.Combine(pathtosave, Path.GetFileName(entry.Name))
                                 ElseIf extension = ".db" Then
-                                    dbfile = pathtosave + Path.GetFileName(entry.Name)
+                                    dbfile = Path.Combine(pathtosave, Path.GetFileName(entry.Name))
                                 End If
                                 GoTo Label_00CC
                             End If
@@ -2265,13 +2267,21 @@ Label_00CC:
         End If
         File.Delete(fullname)
 
+        Try
+            Directory.Delete(pathtosave, True)
+        Catch ex As Exception
+        End Try
+
         Return xdoc
 
     End Function
 
     Public Shared Function LoadZippedXMLDoc(pathtofile As String) As XDocument
 
-        Dim pathtosave As String = My.Computer.FileSystem.SpecialDirectories.Temp + Path.DirectorySeparatorChar
+        Dim pathtosave As String = Path.Combine(My.Computer.FileSystem.SpecialDirectories.Temp, Guid.NewGuid().ToString())
+
+        Directory.CreateDirectory(pathtosave)
+
         Dim fullname As String = ""
 
         Using stream As ZipInputStream = New ZipInputStream(File.OpenRead(pathtofile))
@@ -2282,7 +2292,7 @@ Label_00CC:
             Do While (Not entry Is Nothing)
                 Dim fileName As String = Path.GetFileName(entry.Name)
                 If (fileName <> String.Empty) Then
-                    Using stream2 As FileStream = File.Create(pathtosave + Path.GetFileName(entry.Name))
+                    Using stream2 As FileStream = File.Create(Path.Combine(pathtosave, Path.GetFileName(entry.Name)))
                         Dim count As Integer = 2048
                         Dim buffer As Byte() = New Byte(2048) {}
                         Do While True
@@ -2290,7 +2300,7 @@ Label_00CC:
                             If (count <= 0) Then
                                 Dim extension = Path.GetExtension(entry.Name).ToLower()
                                 If extension = ".xml" Then
-                                    fullname = pathtosave + Path.GetFileName(entry.Name)
+                                    fullname = Path.Combine(pathtosave, Path.GetFileName(entry.Name))
                                 End If
                                 GoTo Label_00CC
                             End If
@@ -2304,6 +2314,11 @@ Label_00CC:
 
         Dim xdoc = XDocument.Load(fullname)
         File.Delete(fullname)
+
+        Try
+            Directory.Delete(pathtosave, True)
+        Catch ex As Exception
+        End Try
 
         Return xdoc
 
@@ -2484,7 +2499,7 @@ Label_00CC:
 
         Dim t12 = TaskHelper.Run(Sub()
 
-                                     Dim PR78PP As PengRobinsonPropertyPackage = New PengRobinsonPropertyPackage()
+                                     Dim PR78PP As PengRobinson1978PropertyPackage = New PengRobinson1978PropertyPackage()
                                      PR78PP.ComponentName = "Peng-Robinson 1978 (PR78)"
                                      plist.Add(PR78PP)
 
@@ -2641,8 +2656,11 @@ Label_00CC:
 
     Public Property FileDatabaseProvider As IFileDatabaseProvider = New FileStorage.FileDatabaseProvider Implements IFlowsheet.FileDatabaseProvider
 
+    Public Property WatchItems As List(Of IWatchItem) = New List(Of IWatchItem) Implements IFlowsheet.WatchItems
+
     Public Sub RunScript(ScriptID As String)
         Dim script = Scripts(ScriptID)
+        PythonPreprocessor?.Invoke(script.ScriptText)
         If script.PythonInterpreter = Enums.Scripts.Interpreter.IronPython Then
             RunScript_IronPython(script.ScriptText)
         Else
@@ -2900,6 +2918,13 @@ Label_00CC:
 
 
     End Sub
+
+    Private Sub IFlowsheet_RunScript(name As String) Implements IFlowsheet.RunScript
+        Dim script = Scripts.Where(Function(s) s.Value.Title = name).FirstOrDefault()
+        RunScript(script.Key)
+    End Sub
+
+    Public Property PythonPreprocessor() As Action(Of String) Implements IFlowsheet.PythonPreprocessor
 
 End Class
 

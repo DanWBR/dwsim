@@ -78,6 +78,12 @@ Public Class FormSimulWizard
                 Me.DataGridViewPP.Rows.Add(New Object() {pp2.ComponentName, pp2.GetDisplayIcon(), pp2.ComponentName, pp2.ComponentDescription})
             Next
 
+            If Not FormMain.IsPro Then
+                ProFeatures.Functions.AddProPPs(DataGridViewPP)
+            End If
+
+            DataGridViewPP.Sort(DataGridViewPP.Columns(2), System.ComponentModel.ListSortDirection.Ascending)
+
         Else
 
             For Each r As DataGridViewRow In ogc1.Rows
@@ -233,6 +239,10 @@ Public Class FormSimulWizard
     End Sub
 
     Private Sub Button8_Click(sender As System.Object, e As System.EventArgs) Handles Button8.Click
+        If DataGridViewPP.SelectedRows(0).Cells(0).Value = "" Then
+            MessageBox.Show("This Property Package is available on DWSIM Pro.", "DWSIM Pro", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
         PanelSolids.Enabled = True
         Dim pp As PropertyPackages.PropertyPackage
         pp = FormMain.PropertyPackages(Me.DataGridViewPP.SelectedRows(0).Cells(0).Value).Clone

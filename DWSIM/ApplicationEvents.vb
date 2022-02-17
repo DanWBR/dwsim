@@ -46,6 +46,8 @@ Namespace My
 
         Private Sub MyApplication_Startup(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.StartupEventArgs) Handles Me.Startup
 
+            AddHandler AppDomain.CurrentDomain.AssemblyResolve, New ResolveEventHandler(AddressOf LoadFromExtensionsFolder)
+
             If Environment.OSVersion.Version >= New Version(6, 3, 0) Then
                 'win 8.1 added support for per monitor dpi
                 If (Environment.OSVersion.Version >= New Version(10, 0, 15063)) Then
@@ -104,26 +106,41 @@ Namespace My
 
             DWSIM.App.InitializeSettings()
 
-            'If My.Settings.PythonPath <> "" Then
-            '    AddDllDirectory(My.Settings.PythonPath)
-            'Else
-            '    My.Settings.PythonPath = Path.Combine(Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly().Location), "python\python-3.6.8.amd64\")
-            '    If Directory.Exists(My.Settings.PythonPath) Then
-            '        GlobalSettings.Settings.PythonPath = My.Settings.PythonPath
-            '        AddDllDirectory(My.Settings.PythonPath)
-            '    End If
-            'End If
-
             If e.Cancel Then
+
                 'command line processor
+
                 AttachConsole(ATTACH_PARENT_PROCESS)
+
                 Dim standardOutput As New StreamWriter(Console.OpenStandardOutput())
                 standardOutput.AutoFlush = True
+
                 Console.SetOut(standardOutput)
+
                 Dim f1 As New FormMain
+
             End If
 
         End Sub
+
+        Private Shared Function LoadFromExtensionsFolder(ByVal sender As Object, ByVal args As ResolveEventArgs) As Assembly
+
+            Dim assemblyPath1 As String = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location), New AssemblyName(args.Name).Name + ".dll")
+            Dim assemblyPath2 As String = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location), "extenders", New AssemblyName(args.Name).Name + ".dll")
+
+            If Not File.Exists(assemblyPath1) Then
+                If Not File.Exists(assemblyPath2) Then
+                    Return Nothing
+                Else
+                    Dim assembly As Assembly = Assembly.LoadFrom(assemblyPath2)
+                    Return assembly
+                End If
+            Else
+                Dim assembly As Assembly = Assembly.LoadFrom(assemblyPath1)
+                Return assembly
+            End If
+
+        End Function
 
         Private Sub MyApplication_Shutdown(sender As Object, e As EventArgs) Handles Me.Shutdown
 

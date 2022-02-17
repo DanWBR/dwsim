@@ -49,7 +49,14 @@ namespace DWSIM.UI.Desktop.Editors
                 (sender, e) => { gobj.Rotation = (int)sender.Value; });
             this.CreateAndAddCheckBoxRow("Flip Horizontally", gobj.FlippedH, (sender, e) => gobj.FlippedH = sender.Checked.GetValueOrDefault());
             this.CreateAndAddCheckBoxRow("Flip Vertically", gobj.FlippedV, (sender, e) => gobj.FlippedV = sender.Checked.GetValueOrDefault());
-            
+            this.CreateAndAddLabelRow("Border/Fill");
+            this.CreateAndAddNumericEditorRow("Border Width", gobj.LineWidth, 1, 10, 0,
+                (sender, e) => { gobj.LineWidth = (int)sender.Value; });
+            this.CreateAndAddCheckBoxRow("Override Color", gobj.OverrideColors, (sender, e) => gobj.OverrideColors = sender.Checked.GetValueOrDefault());
+            this.CreateAndAddColorPickerRow("Color", Color.Parse(gobj.LineColor.ToString()),
+                (sender, e) => {
+                    gobj.LineColor = SkiaSharp.SKColor.Parse(sender.Value.ToHex());
+                });
         }
     }
 }

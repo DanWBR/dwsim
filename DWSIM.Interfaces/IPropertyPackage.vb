@@ -61,7 +61,7 @@
     Sub CalcAdditionalPhaseProperties()
 
     ReadOnly Property MobileCompatible As Boolean
-
+    ReadOnly Property IsFunctional As Boolean
     Function ReturnInstance(typename As String) As Object
     Sub DisplayGroupedEditingForm()
 End Interface

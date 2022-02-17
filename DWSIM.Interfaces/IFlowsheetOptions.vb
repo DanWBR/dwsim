@@ -104,5 +104,21 @@
     Property ItalicFontName As String
 
     Property FlowsheetColorTheme As Integer
+
     Property BoldItalicFontName As String
+
+    Property DisplayEnergyStreamPowerValue As Boolean
+
+    Property DisplayMaterialStreamMassFlowValue As Boolean
+
+    Property DisplayMaterialStreamMolarFlowValue As Boolean
+
+    Property DisplayMaterialStreamVolFlowValue As Boolean
+
+    Property DisplayMaterialStreamTemperatureValue As Boolean
+
+    Property DisplayMaterialStreamPressureValue As Boolean
+
+    Property DisplayMaterialStreamEnergyFlowValue As Boolean
+
 End Interface

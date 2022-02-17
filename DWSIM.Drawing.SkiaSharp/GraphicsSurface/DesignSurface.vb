@@ -424,6 +424,7 @@ Public Class GraphicsSurface
                         dobj.ObjectType <> ObjectType.GO_Rectangle And
                         dobj.ObjectType <> ObjectType.GO_Image And
                         dobj.ObjectType <> ObjectType.GO_Text And
+                        dobj.ObjectType <> ObjectType.GO_Button And
                         dobj.ObjectType <> ObjectType.GO_FloatingTable Then
 
                         DirectCast(dobj, ShapeGraphic).DrawTag(DrawingCanvas)
@@ -885,7 +886,18 @@ Public Class GraphicsSurface
 
     Public Sub InputRelease()
 
-        If ControlPanelMode Then Exit Sub
+        If ControlPanelMode Then
+
+            If TypeOf SelectedObject Is Shapes.ButtonGraphic Then
+                With DirectCast(SelectedObject, Shapes.ButtonGraphic)
+                    .Pressed = False
+                    .Run()
+                End With
+            End If
+
+            Exit Sub
+
+        End If
 
         If Not ResizingMode Then
 
@@ -953,6 +965,12 @@ Public Class GraphicsSurface
                 Dim switchobj = DirectCast(SelectedObject.Owner, ISwitch)
                 switchobj.IsOn = Not switchobj.IsOn
                 DirectCast(switchobj, ISimulationObject).Calculate()
+            End If
+
+            If TypeOf SelectedObject Is Shapes.ButtonGraphic Then
+                With DirectCast(SelectedObject, Shapes.ButtonGraphic)
+                    .Pressed = True
+                End With
             End If
 
         Else

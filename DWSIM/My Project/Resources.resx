@@ -160,9 +160,6 @@
   <data name="icon_info" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_info.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="r_gibbs" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\r_gibbs.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="icons8-combo_chart1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8-combo_chart1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -364,6 +361,9 @@
   <data name="wi0124-16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\wi0124-16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="col_sc_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\col_sc_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="document_export" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\document_export.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -375,6 +375,9 @@
   </data>
   <data name="icons8_test_tube" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8-test_tube.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="chemeo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\chemeo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="lightning" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\lightning.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -460,6 +463,9 @@
   <data name="bullet_arrow_top" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bullet_arrow_top.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icons8-coins" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-coins.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="book_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\book_edit.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -520,8 +526,8 @@
   <data name="uo_custom_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\uo_custom_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="col_sc_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\col_sc_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="greyscale_12" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\greyscale_12.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="text_indent_remove" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\text_indent_remove.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -592,6 +598,9 @@
   <data name="stop1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\stop1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Icon1281" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icon1281.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="DWSIM_ico" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DWSIM_ico.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -660,9 +669,6 @@
   </data>
   <data name="beer_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\beer_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="control_equalizer" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\control_equalizer.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="page_copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\page_copy.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -769,14 +775,14 @@
   <data name="zoom_refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\zoom_refresh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="italic" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\italic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="black_down" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\black_down.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="style_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\style_edit.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="shape_move_front" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\shape_move_front.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="bullet_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bullet_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -970,8 +976,8 @@
   <data name="icons8-realtime" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8-realtime.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Excel_copy1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Excel_copy1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="control_equalizer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\control_equalizer.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="application_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\application_edit.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -979,8 +985,8 @@
   <data name="card_export" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\card_export.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="chemeo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\chemeo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icons8-button" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="bullet_orange" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bullet_orange.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1008,6 +1014,9 @@
   </data>
   <data name="book_open" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\book_open.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bolditalic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bolditalic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="uo_solidsep_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\uo_solidsep_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1045,14 +1054,14 @@
   <data name="font" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\font.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="greyscale_12" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\greyscale_12.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Excel_copy1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Excel_copy1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="uo_excel_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\uo_excel_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="re_equi_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\re_equi_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="italic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\italic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SAO copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SAO copy.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1113,6 +1122,9 @@
   </data>
   <data name="become_a_patron_button" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\become_a_patron_button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="re_equi_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\re_equi_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="greyscale_18" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\greyscale_18.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1363,8 +1375,8 @@
   <data name="zoom_extend" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\zoom_extend.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="shape_move_front" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\shape_move_front.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="r_gibbs" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\r_gibbs.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="lo_spec_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\lo_spec_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1387,7 +1399,7 @@
   <data name="page_white_star" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\page_white_star.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="bolditalic" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\bolditalic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icons8-scatter_plot" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-scatter_plot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

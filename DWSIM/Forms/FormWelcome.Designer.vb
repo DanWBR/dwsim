@@ -63,11 +63,9 @@ Partial Class FormWelcome
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.LinkLabel7 = New System.Windows.Forms.LinkLabel()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.PictureBox8 = New System.Windows.Forms.PictureBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.LinkLabel9 = New System.Windows.Forms.LinkLabel()
@@ -80,6 +78,11 @@ Partial Class FormWelcome
         Me.LinkLabel8 = New System.Windows.Forms.LinkLabel()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.PictureBox5 = New System.Windows.Forms.PictureBox()
+        Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.LinkLabel14 = New System.Windows.Forms.LinkLabel()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -91,13 +94,13 @@ Partial Class FormWelcome
         CType(Me.PictureBox7, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel3.SuspendLayout()
-        CType(Me.PictureBox8, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel4.SuspendLayout()
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
         CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel6.SuspendLayout()
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lvlatest
@@ -416,7 +419,6 @@ Partial Class FormWelcome
         resources.ApplyResources(Me.Panel3, "Panel3")
         Me.Panel3.Controls.Add(Me.LinkLabel7)
         Me.Panel3.Controls.Add(Me.Label6)
-        Me.Panel3.Controls.Add(Me.PictureBox8)
         Me.Panel3.Controls.Add(Me.Label10)
         Me.Panel3.Controls.Add(Me.PictureBox3)
         Me.Panel3.Name = "Panel3"
@@ -438,13 +440,6 @@ Partial Class FormWelcome
         Me.Label6.ForeColor = System.Drawing.Color.Black
         Me.Label6.Name = "Label6"
         '
-        'PictureBox8
-        '
-        resources.ApplyResources(Me.PictureBox8, "PictureBox8")
-        Me.PictureBox8.Image = Global.DWSIM.My.Resources.Resources.s365_logo
-        Me.PictureBox8.Name = "PictureBox8"
-        Me.PictureBox8.TabStop = False
-        '
         'Label10
         '
         resources.ApplyResources(Me.Label10, "Label10")
@@ -462,19 +457,11 @@ Partial Class FormWelcome
         'Panel4
         '
         resources.ApplyResources(Me.Panel4, "Panel4")
-        Me.Panel4.Controls.Add(Me.PictureBox4)
         Me.Panel4.Controls.Add(Me.Label2)
         Me.Panel4.Controls.Add(Me.Label11)
         Me.Panel4.Controls.Add(Me.LinkLabel9)
         Me.Panel4.Controls.Add(Me.PictureBox6)
         Me.Panel4.Name = "Panel4"
-        '
-        'PictureBox4
-        '
-        resources.ApplyResources(Me.PictureBox4, "PictureBox4")
-        Me.PictureBox4.BackgroundImage = Global.DWSIM.My.Resources.Resources.tshirt_mockup
-        Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.TabStop = False
         '
         'Label2
         '
@@ -570,12 +557,53 @@ Partial Class FormWelcome
         Me.PictureBox5.Name = "PictureBox5"
         Me.PictureBox5.TabStop = False
         '
+        'Panel6
+        '
+        resources.ApplyResources(Me.Panel6, "Panel6")
+        Me.Panel6.Controls.Add(Me.LinkLabel14)
+        Me.Panel6.Controls.Add(Me.Label9)
+        Me.Panel6.Controls.Add(Me.Label14)
+        Me.Panel6.Controls.Add(Me.PictureBox4)
+        Me.Panel6.Name = "Panel6"
+        '
+        'LinkLabel14
+        '
+        resources.ApplyResources(Me.LinkLabel14, "LinkLabel14")
+        Me.LinkLabel14.ActiveLinkColor = System.Drawing.Color.White
+        Me.LinkLabel14.BackColor = System.Drawing.Color.FromArgb(CType(CType(4, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(143, Byte), Integer))
+        Me.LinkLabel14.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
+        Me.LinkLabel14.LinkColor = System.Drawing.Color.White
+        Me.LinkLabel14.Name = "LinkLabel14"
+        Me.LinkLabel14.TabStop = True
+        '
+        'Label9
+        '
+        resources.ApplyResources(Me.Label9, "Label9")
+        Me.Label9.BackColor = System.Drawing.Color.Transparent
+        Me.Label9.ForeColor = System.Drawing.Color.Black
+        Me.Label9.Name = "Label9"
+        '
+        'Label14
+        '
+        resources.ApplyResources(Me.Label14, "Label14")
+        Me.Label14.BackColor = System.Drawing.Color.Transparent
+        Me.Label14.ForeColor = System.Drawing.Color.Black
+        Me.Label14.Name = "Label14"
+        '
+        'PictureBox4
+        '
+        resources.ApplyResources(Me.PictureBox4, "PictureBox4")
+        Me.PictureBox4.BackgroundImage = Global.DWSIM.My.Resources.Resources.s365_logo
+        Me.PictureBox4.Name = "PictureBox4"
+        Me.PictureBox4.TabStop = False
+        '
         'FormWelcome
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BackColor = System.Drawing.Color.White
         Me.BackgroundImage = Global.DWSIM.My.Resources.Resources.background_welcome
+        Me.Controls.Add(Me.Panel6)
         Me.Controls.Add(Me.Panel5)
         Me.Controls.Add(Me.Label12)
         Me.Controls.Add(Me.Panel4)
@@ -601,15 +629,16 @@ Partial Class FormWelcome
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
-        CType(Me.PictureBox8, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel5.ResumeLayout(False)
         Me.Panel5.PerformLayout()
         CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel6.ResumeLayout(False)
+        Me.Panel6.PerformLayout()
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -661,12 +690,15 @@ Partial Class FormWelcome
     Friend WithEvents Label15 As Label
     Friend WithEvents PictureBox5 As PictureBox
     Friend WithEvents PictureBox6 As PictureBox
-    Friend WithEvents PictureBox4 As PictureBox
     Friend WithEvents LinkLabel11 As LinkLabel
     Friend WithEvents PictureBox7 As PictureBox
-    Friend WithEvents PictureBox8 As PictureBox
     Friend WithEvents LinkLabel7 As LinkLabel
     Friend WithEvents Label6 As Label
     Friend WithEvents LinkLabel12 As LinkLabel
     Friend WithEvents LinkLabel13 As LinkLabel
+    Friend WithEvents Panel6 As Panel
+    Friend WithEvents LinkLabel14 As LinkLabel
+    Friend WithEvents Label9 As Label
+    Friend WithEvents Label14 As Label
+    Friend WithEvents PictureBox4 As PictureBox
 End Class

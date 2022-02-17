@@ -191,7 +191,7 @@ Imports DWSIM.Interfaces.Enums
     Sub PerformPostCalcValidation()
 
     Property PropertyPackage As IPropertyPackage
-
+    ReadOnly Property IsFunctional As Boolean
     Function GetDynamicPropertyUnitType(id As String) As UnitOfMeasure
 
     Sub SetFlowsheet(fobj As Object)

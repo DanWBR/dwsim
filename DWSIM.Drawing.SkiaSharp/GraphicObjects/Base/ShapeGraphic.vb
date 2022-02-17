@@ -156,7 +156,6 @@ Namespace GraphicObjects
 
         End Sub
 
-
         Public Overridable Sub DrawTag(ByVal g As SKCanvas)
 
             Dim tpaint As New SKPaint()
@@ -175,6 +174,8 @@ Namespace GraphicObjects
 
             Dim strx As Single = (Me.Width - tpaint.MeasureText(Me.Tag)) / 2
 
+            Dim bpaint As SKPaint = Nothing
+
             Select Case DrawMode
 
                 Case 1
@@ -189,8 +190,7 @@ Namespace GraphicObjects
 
                 Case Else
 
-                    Dim bpaint As New SKPaint()
-
+                    bpaint = New SKPaint()
                     With bpaint
                         .TextSize = FontSize
                         .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
@@ -201,11 +201,100 @@ Namespace GraphicObjects
                         .BlendMode = SKBlendMode.Overlay
                     End With
 
-                    g.DrawText(Me.Tag, X + strx, Y + Height + 20, bpaint)
+                    g.DrawText(Me.Tag, X + strx, Y + Height + 14, bpaint)
 
             End Select
 
-            g.DrawText(Me.Tag, X + strx, Y + Height + 20, tpaint)
+            g.DrawText(Me.Tag, X + strx, Y + Height + 14, tpaint)
+
+            If Flowsheet IsNot Nothing Then
+                Dim fo = Flowsheet.FlowsheetOptions
+                If Flowsheet.SimulationObjects.ContainsKey(Name) Then
+                    Dim eformat = "N2"
+                    If ObjectType = ObjectType.MaterialStream Then
+                        Dim deltay = tsize.Height
+                        Dim mstr = Flowsheet.SimulationObjects(Name)
+                        If fo.DisplayMaterialStreamTemperatureValue Then
+                            Dim eval = Convert.ToDouble(mstr.GetPropertyValue("PROP_MS_0"))
+                            Dim eunit = Flowsheet.FlowsheetOptions.SelectedUnitSystem.temperature
+                            Dim estring = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(eunit, eval).ToString(eformat) + " " + eunit
+                            strx = (Me.Width - tpaint.MeasureText(estring)) / 2
+                            If bpaint IsNot Nothing Then
+                                g.DrawText(estring, X + strx, Y + Height + 14 - deltay + 4, bpaint)
+                            End If
+                            g.DrawText(estring, X + strx, Y + Height + 14 - deltay + 4, tpaint)
+                            deltay += tsize.Height - 4
+                        End If
+                        If fo.DisplayMaterialStreamPressureValue Then
+                            Dim eval = Convert.ToDouble(mstr.GetPropertyValue("PROP_MS_1"))
+                            Dim eunit = Flowsheet.FlowsheetOptions.SelectedUnitSystem.pressure
+                            Dim estring = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(eunit, eval).ToString(eformat) + " " + eunit
+                            strx = (Me.Width - tpaint.MeasureText(estring)) / 2
+                            If bpaint IsNot Nothing Then
+                                g.DrawText(estring, X + strx, Y + Height + 14 - deltay + 4, bpaint)
+                            End If
+                            g.DrawText(estring, X + strx, Y + Height + 14 - deltay + 4, tpaint)
+                            deltay += tsize.Height - 4
+                        End If
+                        If fo.DisplayMaterialStreamMassFlowValue Then
+                            Dim eval = Convert.ToDouble(mstr.GetPropertyValue("PROP_MS_2"))
+                            Dim eunit = Flowsheet.FlowsheetOptions.SelectedUnitSystem.massflow
+                            Dim estring = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(eunit, eval).ToString(eformat) + " " + eunit
+                            strx = (Me.Width - tpaint.MeasureText(estring)) / 2
+                            If bpaint IsNot Nothing Then
+                                g.DrawText(estring, X + strx, Y + Height + 14 - deltay + 4, bpaint)
+                            End If
+                            g.DrawText(estring, X + strx, Y + Height + 14 - deltay + 4, tpaint)
+                            deltay += tsize.Height - 4
+                        End If
+                        If fo.DisplayMaterialStreamMolarFlowValue Then
+                            Dim eval = Convert.ToDouble(mstr.GetPropertyValue("PROP_MS_3"))
+                            Dim eunit = Flowsheet.FlowsheetOptions.SelectedUnitSystem.molarflow
+                            Dim estring = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(eunit, eval).ToString(eformat) + " " + eunit
+                            strx = (Me.Width - tpaint.MeasureText(estring)) / 2
+                            If bpaint IsNot Nothing Then
+                                g.DrawText(estring, X + strx, Y + Height + 14 - deltay + 4, bpaint)
+                            End If
+                            g.DrawText(estring, X + strx, Y + Height + 14 - deltay + 4, tpaint)
+                            deltay += tsize.Height - 4
+                        End If
+                        If fo.DisplayMaterialStreamVolFlowValue Then
+                            Dim eval = Convert.ToDouble(mstr.GetPropertyValue("PROP_MS_4"))
+                            Dim eunit = Flowsheet.FlowsheetOptions.SelectedUnitSystem.volumetricFlow
+                            Dim estring = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(eunit, eval).ToString(eformat) + " " + eunit
+                            strx = (Me.Width - tpaint.MeasureText(estring)) / 2
+                            If bpaint IsNot Nothing Then
+                                g.DrawText(estring, X + strx, Y + Height + 14 - deltay + 4, bpaint)
+                            End If
+                            g.DrawText(estring, X + strx, Y + Height + 14 - deltay + 4, tpaint)
+                            deltay += tsize.Height - 4
+                        End If
+                        If fo.DisplayMaterialStreamEnergyFlowValue Then
+                            Dim eval = Convert.ToDouble(mstr.GetPropertyValue("PROP_MS_154"))
+                            Dim eunit = Flowsheet.FlowsheetOptions.SelectedUnitSystem.heatflow
+                            Dim estring = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(eunit, eval).ToString(eformat) + " " + eunit
+                            strx = (Me.Width - tpaint.MeasureText(estring)) / 2
+                            If bpaint IsNot Nothing Then
+                                g.DrawText(estring, X + strx, Y + Height + 14 - deltay + 4, bpaint)
+                            End If
+                            g.DrawText(estring, X + strx, Y + Height + 14 - deltay + 4, tpaint)
+                            deltay += tsize.Height - 4
+                        End If
+                    ElseIf ObjectType = ObjectType.EnergyStream Then
+                        If fo.DisplayEnergyStreamPowerValue Then
+                            Dim estr = Flowsheet.SimulationObjects(Name)
+                            Dim eval = Convert.ToDouble(estr.GetPropertyValue("PROP_ES_0"))
+                            Dim eunit = Flowsheet.FlowsheetOptions.SelectedUnitSystem.heatflow
+                            Dim estring = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(eunit, eval).ToString(eformat) + " " + eunit
+                            strx = (Me.Width - tpaint.MeasureText(estring)) / 2
+                            If bpaint IsNot Nothing Then
+                                g.DrawText(estring, X + strx, Y + Height + 14 - tsize.Height + 4, bpaint)
+                            End If
+                            g.DrawText(estring, X + strx, Y + Height + 14 - tsize.Height + 4, tpaint)
+                        End If
+                    End If
+                End If
+            End If
 
         End Sub
 
@@ -319,7 +408,10 @@ Namespace GraphicObjects
                 ay = Me.Y + Me.Height * 0.8 - size.Height
             End If
 
-            g.DrawText(TypeName, ax, ay, tPen)
+            Using New SKAutoCanvasRestore(g)
+                StraightCanvas(g)
+                g.DrawText(TypeName, ax, ay, tPen)
+            End Using
 
             'Draw interior packing
 

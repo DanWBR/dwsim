@@ -70,6 +70,8 @@ Public Class FormMain
     Public SampleList As New List(Of String)
     Public FOSSEEList As New List(Of FOSSEEFlowsheet)
 
+    Public Shared Property IsPro As Boolean = False
+
     'Collections
 
     Public AvailableComponents As New Dictionary(Of String, Interfaces.ICompoundConstantProperties)
@@ -103,6 +105,22 @@ Public Class FormMain
     Public Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         ExtensionMethods.ChangeDefaultFont(Me)
+
+        Using g1 = Me.CreateGraphics()
+
+            Settings.DpiScale = g1.DpiX / 96.0
+
+            Me.ToolStrip1.AutoSize = False
+            Me.ToolStrip1.Size = New Size(ToolStrip1.Width, 28 * Settings.DpiScale)
+            Me.ToolStrip1.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
+            For Each item In Me.ToolStrip1.Items
+                If TryCast(item, ToolStripButton) IsNot Nothing Then
+                    DirectCast(item, ToolStripButton).Size = New Size(ToolStrip1.ImageScalingSize.Width, ToolStrip1.ImageScalingSize.Height)
+                End If
+            Next
+            Me.ToolStrip1.Invalidate()
+
+        End Using
 
         MostRecentFiles = My.Settings.MostRecentFiles
 
@@ -162,8 +180,6 @@ Public Class FormMain
             SetupWelcomeScreen()
 
         End If
-
-        GlobalSettings.Settings.DpiScale = Me.CreateGraphics.DpiX / 96.0
 
     End Sub
 
@@ -848,7 +864,7 @@ Public Class FormMain
 
         PropertyPackages.Add(PCSAFTPP.ComponentName.ToString, PCSAFTPP)
 
-        Dim PR78PP As PengRobinsonPropertyPackage = New PengRobinsonPropertyPackage()
+        Dim PR78PP As PengRobinson1978PropertyPackage = New PengRobinson1978PropertyPackage()
         PR78PP.ComponentName = "Peng-Robinson 1978 (PR78)"
         PR78PP.ComponentDescription = DWSIM.App.GetLocalString("DescPengRobinson78PP")
 
@@ -917,6 +933,8 @@ Public Class FormMain
     End Sub
 
     Private Sub FormParent_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
+
+        tsmiFreeProTrial.Visible = Not IsPro
 
         Dim cmdLine() As String = System.Environment.GetCommandLineArgs()
 
@@ -1374,6 +1392,7 @@ Public Class FormMain
                         If obj.Name = "" Then obj.Name = obj.Tag
                         obj.CreateConnectors(0, 0)
                     End If
+                    obj.Flowsheet = form
                     form.FormSurface.FlowsheetSurface.DrawingObjects.Add(obj)
                     form.Collections.GraphicObjectCollection.Add(obj.Name, obj)
                 End If
@@ -1931,8 +1950,12 @@ Public Class FormMain
                     If ppkey = "" Then
                         obj = CType(New RaoultPropertyPackage().ReturnInstance(xel.Element("Type").Value), PropertyPackage)
                     Else
+                        Dim ptype = xel.Element("Type").Value
+                        If ppkey.Contains("1978") And ptype.Contains("PengRobinsonPropertyPackage") Then
+                            ptype = ptype.Replace("PengRobinson","PengRobinson1978")
+                        End If
                         If PropertyPackages.ContainsKey(ppkey) Then
-                            obj = PropertyPackages(ppkey).ReturnInstance(xel.Element("Type").Value)
+                            obj = PropertyPackages(ppkey).ReturnInstance(ptype)
                         Else
                             form.LoaderExceptions.Add(PrepareExceptionInfo(xel))
                             Throw New Exception("The " & ppkey & " Property Package library was not found. Please download and install it in order to run this simulation.")
@@ -2115,13 +2138,14 @@ Public Class FormMain
                 Try
                     Dim obj As New WatchItem
                     obj.LoadData(xel.Elements.ToList)
-                    form.FormWatch.items.Add(i, obj)
+                    form.WatchItems.Add(obj)
                 Catch ex As Exception
                     excs.Add(New Exception("Error Loading Watch Item Information", ex))
                 End Try
                 i += 1
             Next
 
+            form.FormWatch.Flowsheet = form
             form.FormWatch.PopulateList()
 
         End If
@@ -2482,11 +2506,15 @@ Public Class FormMain
                     If ppkey = "" Then
                         obj = CType(New RaoultPropertyPackage().ReturnInstance(xel.Element("Type").Value), PropertyPackage)
                     Else
+                        Dim ptype = xel.Element("Type").Value
+                        If ppkey.Contains("1978") And ptype.Contains("PengRobinsonPropertyPackage") Then
+                            ptype = ptype.Replace("PengRobinson", "PengRobinson1978")
+                        End If
                         If PropertyPackages.ContainsKey(ppkey) Then
-                            obj = PropertyPackages(ppkey).ReturnInstance(xel.Element("Type").Value)
+                            obj = PropertyPackages(ppkey).ReturnInstance(ptype)
                         Else
                             form.LoaderExceptions.Add(PrepareExceptionInfo(xel))
-                            Throw New Exception("The " & ppkey & " library was not found. Please download and install it in order to run this simulation.")
+                            Throw New Exception("The " & ppkey & " Property Package library was not found. Please download and install it in order to run this simulation.")
                         End If
                     End If
                 End If
@@ -2666,13 +2694,14 @@ Public Class FormMain
                 Try
                     Dim obj As New WatchItem
                     obj.LoadData(xel.Elements.ToList)
-                    form.FormWatch.items.Add(i, obj)
+                    form.WatchItems.Add(obj)
                 Catch ex As Exception
                     excs.Add(New Exception("Error Loading Watch Item Information", ex))
                 End Try
                 i += 1
             Next
 
+            form.FormWatch.Flowsheet = form
             form.FormWatch.PopulateList()
 
         End If
@@ -3214,7 +3243,7 @@ Public Class FormMain
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("WatchItems"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("WatchItems")
 
-        For Each wi As WatchItem In form.FormWatch.items.Values
+        For Each wi As WatchItem In form.WatchItems
             xel.Add(New XElement("WatchItem", wi.SaveData().ToArray()))
         Next
 
@@ -3295,7 +3324,10 @@ Public Class FormMain
 
     Function LoadAndExtractXMLZIP(ByVal caminho As String, ProgressFeedBack As Action(Of Integer), Optional ByVal forcommandline As Boolean = False, Optional ByVal simulate365File As S365File = Nothing) As Interfaces.IFlowsheet
 
-        Dim pathtosave As String = My.Computer.FileSystem.SpecialDirectories.Temp + Path.DirectorySeparatorChar
+        Dim pathtosave As String = Path.Combine(My.Computer.FileSystem.SpecialDirectories.Temp, Guid.NewGuid().ToString())
+
+        Directory.CreateDirectory(pathtosave)
+
         Dim fullname As String = ""
 
         Dim pwd As String = Nothing
@@ -3317,7 +3349,7 @@ Label_00CC:
                 Do While (Not entry Is Nothing)
                     Dim fileName As String = Path.GetFileName(entry.Name)
                     If (fileName <> String.Empty) Then
-                        Using stream2 As FileStream = File.Create(pathtosave + Path.GetFileName(entry.Name))
+                        Using stream2 As FileStream = File.Create(Path.Combine(pathtosave, Path.GetFileName(entry.Name)))
                             Dim count As Integer = 2048
                             Dim buffer As Byte() = New Byte(2048) {}
                             Do While True
@@ -3325,9 +3357,9 @@ Label_00CC:
                                 If (count <= 0) Then
                                     Dim extension = Path.GetExtension(entry.Name).ToLower()
                                     If extension = ".xml" Then
-                                        fullname = pathtosave + Path.GetFileName(entry.Name)
+                                        fullname = Path.Combine(pathtosave, Path.GetFileName(entry.Name))
                                     ElseIf extension = ".db" Then
-                                        dbfile = pathtosave + Path.GetFileName(entry.Name)
+                                        dbfile = Path.Combine(pathtosave, Path.GetFileName(entry.Name))
                                     End If
                                     GoTo Label_00CC
                                 End If
@@ -3355,6 +3387,11 @@ Label_00CC:
         Catch ex As Exception
             MessageBox.Show(ex.ToString, DWSIM.App.GetLocalString("Erroaoabrirarquivo"), MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return Nothing
+        End Try
+
+        Try
+            Directory.Delete(pathtosave, True)
+        Catch ex As Exception
         End Try
 
     End Function
@@ -4416,6 +4453,10 @@ Label_00CC:
 
     Private Sub LoggedInS365Button_Click(sender As Object, e As EventArgs) Handles LoggedInS365Button.Click
         Process.Start("https://simulate365.com/shops/simulate-365-suite/")
+    End Sub
+
+    Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles tsmiFreeProTrial.Click
+        Process.Start("https://simulate365.com/registration-dwsim-pro/")
     End Sub
 
     Private Sub tsbInspector_CheckedChanged(sender As Object, e As EventArgs) Handles tsbInspector.CheckedChanged

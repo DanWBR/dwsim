@@ -20,10 +20,10 @@ Partial Class FormFlowsheet
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormFlowsheet))
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.TSTable = New FarsiLibrary.Win.FATabStripItem()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
@@ -48,9 +48,11 @@ Partial Class FormFlowsheet
         Me.TabelaDePropriedatesMestraToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TabelaDePropriedadesPlanilhaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FiguraToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsmiRichText = New System.Windows.Forms.ToolStripMenuItem()
         Me.TextoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RectangleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GraficoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BotãoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolsTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.CompoundCreatorWizardTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.PropriedadesDasSubstanciasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -59,6 +61,9 @@ Partial Class FormFlowsheet
         Me.GerenciadorDeAmostrasDePetroleoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InspectorTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator15 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ProToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CapitalCostEstimatorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExcelReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DynamicsTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.ModoDinamicoAtivoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GerenciadorDoModoDinamicoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -80,6 +85,10 @@ Partial Class FormFlowsheet
         Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
         Me.RestoreLayoutTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmiCloseOpenedEditors = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DashboardToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MultivariateSensitivityStudyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DesignOfExperimentsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OptimumTesterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
@@ -123,33 +132,33 @@ Partial Class FormFlowsheet
         '
         'DataGridView1
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle13
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle14
         resources.ApplyResources(Me.DataGridView1, "DataGridView1")
         Me.DataGridView1.Name = "DataGridView1"
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle15
         '
         'TSTable
         '
@@ -162,7 +171,7 @@ Partial Class FormFlowsheet
         'MenuStrip1
         '
         Me.MenuStrip1.AllowItemReorder = True
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileTSMI, Me.EditTSMI, Me.InsertTSMI, Me.ToolsTSMI, Me.DynamicsTSMI, Me.UtilitiesTSMI, Me.OptimizationTSMI, Me.ResultsTSMI, Me.PluginsTSMI, Me.ShowTSMI})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileTSMI, Me.EditTSMI, Me.InsertTSMI, Me.ToolsTSMI, Me.ProToolsToolStripMenuItem, Me.DynamicsTSMI, Me.UtilitiesTSMI, Me.DashboardToolStripMenuItem, Me.OptimizationTSMI, Me.ResultsTSMI, Me.PluginsTSMI, Me.ShowTSMI})
         resources.ApplyResources(Me.MenuStrip1, "MenuStrip1")
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.ShowItemToolTips = True
@@ -289,7 +298,7 @@ Partial Class FormFlowsheet
         '
         'InsertTSMI
         '
-        Me.InsertTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BlocoDeSimulacaoToolStripMenuItem, Me.TabelaDePropriedadesToolStripMenuItem, Me.TabelaDePropriedatesMestraToolStripMenuItem, Me.TabelaDePropriedadesPlanilhaToolStripMenuItem, Me.FiguraToolStripMenuItem, Me.TextoToolStripMenuItem, Me.RectangleToolStripMenuItem, Me.GraficoToolStripMenuItem})
+        Me.InsertTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BlocoDeSimulacaoToolStripMenuItem, Me.TabelaDePropriedadesToolStripMenuItem, Me.TabelaDePropriedatesMestraToolStripMenuItem, Me.TabelaDePropriedadesPlanilhaToolStripMenuItem, Me.FiguraToolStripMenuItem, Me.tsmiRichText, Me.TextoToolStripMenuItem, Me.RectangleToolStripMenuItem, Me.GraficoToolStripMenuItem, Me.BotãoToolStripMenuItem})
         Me.InsertTSMI.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.InsertTSMI.MergeIndex = 2
         Me.InsertTSMI.Name = "InsertTSMI"
@@ -325,6 +334,12 @@ Partial Class FormFlowsheet
         Me.FiguraToolStripMenuItem.Name = "FiguraToolStripMenuItem"
         resources.ApplyResources(Me.FiguraToolStripMenuItem, "FiguraToolStripMenuItem")
         '
+        'tsmiRichText
+        '
+        Me.tsmiRichText.Image = Global.DWSIM.My.Resources.Resources.font
+        Me.tsmiRichText.Name = "tsmiRichText"
+        resources.ApplyResources(Me.tsmiRichText, "tsmiRichText")
+        '
         'TextoToolStripMenuItem
         '
         Me.TextoToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.font
@@ -342,6 +357,12 @@ Partial Class FormFlowsheet
         Me.GraficoToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.chart_curve
         Me.GraficoToolStripMenuItem.Name = "GraficoToolStripMenuItem"
         resources.ApplyResources(Me.GraficoToolStripMenuItem, "GraficoToolStripMenuItem")
+        '
+        'BotãoToolStripMenuItem
+        '
+        Me.BotãoToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.icons8_button
+        Me.BotãoToolStripMenuItem.Name = "BotãoToolStripMenuItem"
+        resources.ApplyResources(Me.BotãoToolStripMenuItem, "BotãoToolStripMenuItem")
         '
         'ToolsTSMI
         '
@@ -405,6 +426,26 @@ Partial Class FormFlowsheet
         Me.ToolStripSeparator15.MergeIndex = 7
         Me.ToolStripSeparator15.Name = "ToolStripSeparator15"
         resources.ApplyResources(Me.ToolStripSeparator15, "ToolStripSeparator15")
+        '
+        'ProToolsToolStripMenuItem
+        '
+        Me.ProToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CapitalCostEstimatorToolStripMenuItem, Me.ExcelReportsToolStripMenuItem})
+        Me.ProToolsToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
+        Me.ProToolsToolStripMenuItem.MergeIndex = 4
+        Me.ProToolsToolStripMenuItem.Name = "ProToolsToolStripMenuItem"
+        resources.ApplyResources(Me.ProToolsToolStripMenuItem, "ProToolsToolStripMenuItem")
+        '
+        'CapitalCostEstimatorToolStripMenuItem
+        '
+        Me.CapitalCostEstimatorToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.icons8_coins
+        Me.CapitalCostEstimatorToolStripMenuItem.Name = "CapitalCostEstimatorToolStripMenuItem"
+        resources.ApplyResources(Me.CapitalCostEstimatorToolStripMenuItem, "CapitalCostEstimatorToolStripMenuItem")
+        '
+        'ExcelReportsToolStripMenuItem
+        '
+        Me.ExcelReportsToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.Excel
+        Me.ExcelReportsToolStripMenuItem.Name = "ExcelReportsToolStripMenuItem"
+        resources.ApplyResources(Me.ExcelReportsToolStripMenuItem, "ExcelReportsToolStripMenuItem")
         '
         'DynamicsTSMI
         '
@@ -537,6 +578,32 @@ Partial Class FormFlowsheet
         '
         Me.tsmiCloseOpenedEditors.Name = "tsmiCloseOpenedEditors"
         resources.ApplyResources(Me.tsmiCloseOpenedEditors, "tsmiCloseOpenedEditors")
+        '
+        'DashboardToolStripMenuItem
+        '
+        Me.DashboardToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MultivariateSensitivityStudyToolStripMenuItem, Me.DesignOfExperimentsToolStripMenuItem, Me.OptimumTesterToolStripMenuItem})
+        Me.DashboardToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
+        Me.DashboardToolStripMenuItem.MergeIndex = 6
+        Me.DashboardToolStripMenuItem.Name = "DashboardToolStripMenuItem"
+        resources.ApplyResources(Me.DashboardToolStripMenuItem, "DashboardToolStripMenuItem")
+        '
+        'MultivariateSensitivityStudyToolStripMenuItem
+        '
+        Me.MultivariateSensitivityStudyToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.icons8_scatter_plot
+        Me.MultivariateSensitivityStudyToolStripMenuItem.Name = "MultivariateSensitivityStudyToolStripMenuItem"
+        resources.ApplyResources(Me.MultivariateSensitivityStudyToolStripMenuItem, "MultivariateSensitivityStudyToolStripMenuItem")
+        '
+        'DesignOfExperimentsToolStripMenuItem
+        '
+        Me.DesignOfExperimentsToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.icons8_scatter_plot
+        Me.DesignOfExperimentsToolStripMenuItem.Name = "DesignOfExperimentsToolStripMenuItem"
+        resources.ApplyResources(Me.DesignOfExperimentsToolStripMenuItem, "DesignOfExperimentsToolStripMenuItem")
+        '
+        'OptimumTesterToolStripMenuItem
+        '
+        Me.OptimumTesterToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.icons8_scatter_plot
+        Me.OptimumTesterToolStripMenuItem.Name = "OptimumTesterToolStripMenuItem"
+        resources.ApplyResources(Me.OptimumTesterToolStripMenuItem, "OptimumTesterToolStripMenuItem")
         '
         'ToolStripMenuItem1
         '
@@ -852,4 +919,13 @@ Partial Class FormFlowsheet
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
     Friend WithEvents FerramentaParaSintoniaDeControladoresPIDToolStripMenuItem As ToolStripMenuItem
     Public WithEvents ToolStrip1 As ToolStrip
+    Friend WithEvents tsmiRichText As ToolStripMenuItem
+    Friend WithEvents BotãoToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ProToolsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CapitalCostEstimatorToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ExcelReportsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DashboardToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MultivariateSensitivityStudyToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DesignOfExperimentsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents OptimumTesterToolStripMenuItem As ToolStripMenuItem
 End Class

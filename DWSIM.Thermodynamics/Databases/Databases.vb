@@ -1788,6 +1788,7 @@ Namespace Databases
                 cp = New Thermodynamics.BaseClasses.ConstantProperties
                 With cp
                     .OriginalDB = "Electrolytes"
+                    .CurrentDB = "Electrolytes"
                     For Each node2 As XmlNode In node.ChildNodes
                         Select Case node2.Name
                             Case "Name"

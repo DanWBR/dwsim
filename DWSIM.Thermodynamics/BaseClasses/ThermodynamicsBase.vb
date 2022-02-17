@@ -1,5 +1,5 @@
 '    Basic Thermodynamic Classes for DWSIM
-'    Copyright 2008-2021 Daniel Wagner O. de Medeiros
+'    Copyright 2008-2022 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '

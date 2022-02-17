@@ -125,6 +125,52 @@ namespace DWSIM.UI.Desktop.Editors
 
             s.CreateAndAddDescriptionRow(container, "Select the formatting scheme for compound amounts in Material Stream reports.");
 
+            s.CreateAndAddLabelRow(container, "Display Stream Properties");
+
+            s.CreateAndAddLabelRow2(container, "Material Streams");
+
+            s.CreateAndAddCheckBoxRow(container, "Temperature", flowsheet.FlowsheetOptions.DisplayMaterialStreamTemperatureValue, (sender, e) =>
+            {
+                flowsheet.FlowsheetOptions.DisplayMaterialStreamTemperatureValue = sender.Checked.GetValueOrDefault();
+            });
+
+            s.CreateAndAddCheckBoxRow(container, "Pressure", flowsheet.FlowsheetOptions.DisplayMaterialStreamPressureValue, (sender, e) =>
+            {
+                flowsheet.FlowsheetOptions.DisplayMaterialStreamPressureValue = sender.Checked.GetValueOrDefault();
+            });
+
+            s.CreateAndAddCheckBoxRow(container, "Mass Flow", flowsheet.FlowsheetOptions.DisplayMaterialStreamMassFlowValue, (sender, e) =>
+            {
+                flowsheet.FlowsheetOptions.DisplayMaterialStreamMassFlowValue = sender.Checked.GetValueOrDefault();
+            });
+
+            s.CreateAndAddCheckBoxRow(container, "Molar Flow", flowsheet.FlowsheetOptions.DisplayMaterialStreamMolarFlowValue, (sender, e) =>
+            {
+                flowsheet.FlowsheetOptions.DisplayMaterialStreamMolarFlowValue = sender.Checked.GetValueOrDefault();
+            });
+
+            s.CreateAndAddCheckBoxRow(container, "Volumetric Flow", flowsheet.FlowsheetOptions.DisplayMaterialStreamVolFlowValue, (sender, e) =>
+            {
+                flowsheet.FlowsheetOptions.DisplayMaterialStreamVolFlowValue = sender.Checked.GetValueOrDefault();
+            });
+
+            s.CreateAndAddCheckBoxRow(container, "Energy Flow", flowsheet.FlowsheetOptions.DisplayMaterialStreamEnergyFlowValue, (sender, e) =>
+            {
+                flowsheet.FlowsheetOptions.DisplayMaterialStreamEnergyFlowValue = sender.Checked.GetValueOrDefault();
+            });
+
+            s.CreateAndAddCheckBoxRow(container, "Energy Flow", flowsheet.FlowsheetOptions.DisplayMaterialStreamEnergyFlowValue, (sender, e) =>
+            {
+                flowsheet.FlowsheetOptions.DisplayMaterialStreamEnergyFlowValue = sender.Checked.GetValueOrDefault();
+            });
+
+            s.CreateAndAddLabelRow2(container, "Energy Streams");
+
+            s.CreateAndAddCheckBoxRow(container, "Power/Heat/Energy Flow", flowsheet.FlowsheetOptions.DisplayEnergyStreamPowerValue, (sender, e) =>
+            {
+                flowsheet.FlowsheetOptions.DisplayEnergyStreamPowerValue = sender.Checked.GetValueOrDefault();
+            });
+
             s.CreateAndAddLabelRow(container, "Floating Tables and Anchored Property Lists");
 
             s.CreateAndAddCheckBoxRow(container, "Display Floating Tables", flowsheet.FlowsheetOptions.DisplayFloatingPropertyTables, (sender, e) =>

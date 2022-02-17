@@ -101,6 +101,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Property FontStyle As FontStyle
 
+    Property Flowsheet As IFlowsheet
+
 End Interface
 
 <InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IConnectionPoint

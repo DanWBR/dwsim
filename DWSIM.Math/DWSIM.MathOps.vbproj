@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AP.vb" />
+    <Compile Include="BFGSBMinimizer.vb" />
     <Compile Include="Brent.vb" />
     <Compile Include="BrentMinimize.vb" />
     <Compile Include="Broyden.vb" />

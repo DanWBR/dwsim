@@ -249,6 +249,20 @@ Namespace DWSIM.Flowsheet
 
         Public Property BoldItalicFontName As String = "OpenSans_SemiCondensed-MediumItalic" Implements IFlowsheetOptions.BoldItalicFontName
 
+        Public Property DisplayEnergyStreamPowerValue As Boolean = True Implements IFlowsheetOptions.DisplayEnergyStreamPowerValue
+
+        Public Property DisplayMaterialStreamMassFlowValue As Boolean = False Implements IFlowsheetOptions.DisplayMaterialStreamMassFlowValue
+
+        Public Property DisplayMaterialStreamMolarFlowValue As Boolean = False Implements IFlowsheetOptions.DisplayMaterialStreamMolarFlowValue
+
+        Public Property DisplayMaterialStreamVolFlowValue As Boolean = False Implements IFlowsheetOptions.DisplayMaterialStreamVolFlowValue
+
+        Public Property DisplayMaterialStreamTemperatureValue As Boolean = False Implements IFlowsheetOptions.DisplayMaterialStreamTemperatureValue
+
+        Public Property DisplayMaterialStreamPressureValue As Boolean = False Implements IFlowsheetOptions.DisplayMaterialStreamPressureValue
+
+        Public Property DisplayMaterialStreamEnergyFlowValue As Boolean = False Implements IFlowsheetOptions.DisplayMaterialStreamEnergyFlowValue
+
     End Class
 
 End Namespace

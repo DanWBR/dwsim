@@ -726,7 +726,7 @@ Namespace UnitOperations
                         proplist.Add("PROP_CL_" + CStr(i))
                     Next
                 Case PropertyType.WR
-                    For i = 0 To 4
+                    For i = 0 To 5
                         proplist.Add("PROP_CL_" + CStr(i))
                     Next
                 Case PropertyType.ALL
@@ -763,7 +763,8 @@ Namespace UnitOperations
                 Case 4
                     'PROP_HT_4	Outlet Vapour fraction
                     Me.OutletVaporFraction = propval
-
+                Case 5
+                    Me.DeltaT = SystemsOfUnits.Converter.ConvertToSI(su.deltaT, propval)
             End Select
             Return 1
         End Function
