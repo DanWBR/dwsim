@@ -2697,7 +2697,7 @@ Namespace UnitOperations
                 Array.Resize(Pvap(i), nc)
             Next
 
-            If ColumnPressureDrop <> Double.NaN Then
+            If Not Double.IsNaN(ColumnPressureDrop) Then
                 For i = 1 To ns
                     Stages(i).P = Stages(0).P + Convert.ToDouble(i) / Convert.ToDouble(ns) * ColumnPressureDrop
                 Next
