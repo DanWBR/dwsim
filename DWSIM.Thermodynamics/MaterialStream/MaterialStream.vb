@@ -2340,11 +2340,11 @@ Namespace Streams
                             Next
                             Dim mtotal As Double = 0
                             For Each comp As Compound In Me.Phases(0).Compounds.Values
-                                mtotal += comp.MoleFraction.GetValueOrDefault * comp.ConstantProperties.Molar_Weight
+                                mtotal += comp.Massflow
                             Next
-                            Me.Phases(0).Properties.massflow = mtotal * summ / 1000
+                            Me.Phases(0).Properties.massflow = mtotal
                             For Each comp As Compound In Me.Phases(0).Compounds.Values
-                                comp.MassFraction = comp.MolarFlow.GetValueOrDefault * Me.Phases(0).Properties.massflow.GetValueOrDefault
+                                comp.MassFraction = comp.MassFlow.GetValueOrDefault / Me.Phases(0).Properties.massflow.GetValueOrDefault
                             Next
                         End If
                     Case 105
@@ -2361,11 +2361,11 @@ Namespace Streams
                             Next
                             Dim summ As Double = 0
                             For Each comp As Compound In Me.Phases(0).Compounds.Values
-                                summ += comp.MassFraction.GetValueOrDefault / comp.ConstantProperties.Molar_Weight / 1000
+                                summ += comp.MolarFlow
                             Next
-                            Me.Phases(0).Properties.molarflow = mtotal / summ
+                            Me.Phases(0).Properties.molarflow = summ
                             For Each comp As Compound In Me.Phases(0).Compounds.Values
-                                comp.MoleFraction = comp.MolarFlow.GetValueOrDefault * Me.Phases(0).Properties.molarflow.GetValueOrDefault
+                                comp.MoleFraction = comp.MolarFlow.GetValueOrDefault / Me.Phases(0).Properties.molarflow.GetValueOrDefault
                             Next
                         End If
                 End Select

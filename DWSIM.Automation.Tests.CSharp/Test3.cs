@@ -22,9 +22,15 @@ public class Test3
 
         var interf = new DWSIM.Automation.Automation2();
 
-        var sim = interf.LoadFlowsheet(@"C:\Users\Daniel\Downloads\230_FOSSEE_AirBenzeneSeparation.dwxmz");
+        var sim = interf.LoadFlowsheet(@"C:\Users\Daniel\Downloads\150747-205762.dwxml");
 
         sim.SetMessageListener((s, mt) => Console.WriteLine(s));
+
+        var msobj = sim.GetFlowsheetSimulationObject("PRODUCED GAS");
+
+        msobj.SetPropertyValue("PROP_MS_104/Metano", 10);
+
+        interf.SaveFlowsheet(sim, @"C:\Users\Daniel\Downloads\150747-205762.dwxml", false);
 
         var errors = interf.CalculateFlowsheet3(sim, 3600);
 
