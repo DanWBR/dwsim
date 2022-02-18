@@ -213,9 +213,6 @@
   <data name="cb1.Items12" xml:space="preserve">
     <value>L/h</value>
   </data>
-  <data name="temp.HeaderText" xml:space="preserve">
-    <value>Head</value>
-  </data>
   <data name="cb1.Items11" xml:space="preserve">
     <value>gal[US]/min</value>
   </data>
@@ -543,9 +540,6 @@
   <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 13</value>
   </data>
-  <data name="&gt;&gt;FaTabStripItem1.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.7325.24679, Culture=neutral, PublicKeyToken=null</value>
-  </data>
   <data name="Label22.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -573,8 +567,8 @@
   <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
     <value>184, 347</value>
   </data>
-  <data name="Label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="CBDiameterUnit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>226, 6</value>
   </data>
   <data name="&gt;&gt;TBImpellerSpeed.Parent" xml:space="preserve">
     <value>Panel1</value>
@@ -588,8 +582,8 @@
   <data name="dgv5.RowHeadersWidth" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
-  <data name="&gt;&gt;Label22.Parent" xml:space="preserve">
-    <value>Panel1</value>
+  <data name="Label17.Location" type="System.Drawing.Point, System.Drawing">
+    <value>145, 21</value>
   </data>
   <data name="ch4.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 20</value>
@@ -605,6 +599,9 @@
   </data>
   <data name="TBImpellerDiam.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
+  </data>
+  <data name="cbflowunit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 21</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 13</value>
@@ -670,7 +667,7 @@
     <value>True</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem2.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.7325.24679, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="Label14.ToolTip" xml:space="preserve">
     <value />
@@ -714,8 +711,8 @@
   <data name="cb5.Items3" xml:space="preserve">
     <value>m3/h</value>
   </data>
-  <data name="cbheadunit.Items1" xml:space="preserve">
-    <value>mm</value>
+  <data name="&gt;&gt;Label22.Parent" xml:space="preserve">
+    <value>Panel1</value>
   </data>
   <data name="cbheadunit.Items3" xml:space="preserve">
     <value>in.</value>
@@ -798,8 +795,8 @@
   <data name="cb1.Items14" xml:space="preserve">
     <value>L/s</value>
   </data>
-  <data name="Label17.Location" type="System.Drawing.Point, System.Drawing">
-    <value>145, 21</value>
+  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 71</value>
   </data>
   <data name="dgv4.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1011,6 +1008,9 @@
   <data name="&gt;&gt;Label18.Name" xml:space="preserve">
     <value>Label18</value>
   </data>
+  <data name="Label16.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
   <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 3</value>
   </data>
@@ -1155,8 +1155,8 @@
   <data name="&gt;&gt;ToolStrip1.Name" xml:space="preserve">
     <value>ToolStrip1</value>
   </data>
-  <data name="&gt;&gt;Label14.Parent" xml:space="preserve">
-    <value>GroupBox4</value>
+  <data name="cbflowunit.Items14" xml:space="preserve">
+    <value>L/s</value>
   </data>
   <data name="&gt;&gt;ch5.ZOrder" xml:space="preserve">
     <value>6</value>
@@ -1377,6 +1377,9 @@
   <data name="FaTabStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
+  <data name="GroupBox5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
   <data name="cbpowerunit.Items2" xml:space="preserve">
     <value>MW</value>
   </data>
@@ -1386,8 +1389,8 @@
   <data name="&gt;&gt;Label5.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label16.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+  <data name="&gt;&gt;FaTabStripItem2.Name" xml:space="preserve">
+    <value>FaTabStripItem2</value>
   </data>
   <data name="ch2.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 20</value>
@@ -1515,8 +1518,8 @@
   <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="GroupBox5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+  <data name="dgv3.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
   <data name="&gt;&gt;TBImpellerDiam.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1539,17 +1542,17 @@
   <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 13</value>
   </data>
+  <data name="&gt;&gt;Label14.Parent" xml:space="preserve">
+    <value>GroupBox4</value>
+  </data>
   <data name="cbpowerunit.Items5" xml:space="preserve">
     <value>BTU/s</value>
-  </data>
-  <data name="cbflowunit.Items14" xml:space="preserve">
-    <value>L/s</value>
   </data>
   <data name="Label21.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 13</value>
   </data>
-  <data name="cb4.Items3" xml:space="preserve">
-    <value>m3/h</value>
+  <data name="temp.HeaderText" xml:space="preserve">
+    <value>Head</value>
   </data>
   <data name="ch3.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -1622,6 +1625,9 @@
   </data>
   <data name="&gt;&gt;Label12.Parent" xml:space="preserve">
     <value>GroupBox2</value>
+  </data>
+  <data name="cbheadunit.Items1" xml:space="preserve">
+    <value>mm</value>
   </data>
   <data name="cbflowunit.Items9" xml:space="preserve">
     <value>gal[UK]/s</value>
@@ -1806,8 +1812,8 @@
   <data name="&gt;&gt;TSBtnDeletePump.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="CBDiameterUnit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>226, 6</value>
+  <data name="cb3.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
   </data>
   <data name="CBDiameterUnit.Items1" xml:space="preserve">
     <value>mm</value>
@@ -1863,6 +1869,9 @@
   <data name="Label10.Text" xml:space="preserve">
     <value>Head Sist.</value>
   </data>
+  <data name="cb4.Items3" xml:space="preserve">
+    <value>m3/h</value>
+  </data>
   <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 98</value>
   </data>
@@ -1905,8 +1914,8 @@
   <data name="dgv2.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 218</value>
   </data>
-  <data name="cb3.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
+  <data name="cb10.Items2" xml:space="preserve">
+    <value>cm</value>
   </data>
   <data name="TBImpellerDiam.ToolTip" xml:space="preserve">
     <value />
@@ -1945,7 +1954,7 @@
     <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;FaTabStrip1.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.7325.24679, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="Label19.ToolTip" xml:space="preserve">
     <value />
@@ -2022,9 +2031,6 @@
   <data name="&gt;&gt;cb7.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="dgv3.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
   <data name="cb7.Items1" xml:space="preserve">
     <value>kW</value>
   </data>
@@ -2081,9 +2087,6 @@
   </data>
   <data name="&gt;&gt;cb2.Parent" xml:space="preserve">
     <value>GroupBox2</value>
-  </data>
-  <data name="&gt;&gt;FaTabStripItem2.Name" xml:space="preserve">
-    <value>FaTabStripItem2</value>
   </data>
   <data name="cb3.Items12" xml:space="preserve">
     <value>L/h</value>
@@ -2314,7 +2317,7 @@
     <value>76, 21</value>
   </data>
   <data name="&gt;&gt;chart1.Type" xml:space="preserve">
-    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.24681, Culture=neutral, PublicKeyToken=null</value>
+    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="cb9.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 21</value>
@@ -2367,14 +2370,14 @@
   <data name="chart1.Size" type="System.Drawing.Size, System.Drawing">
     <value>746, 307</value>
   </data>
-  <data name="cbflowunit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 21</value>
+  <data name="Panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 25</value>
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 13</value>
   </data>
-  <data name="cb10.Items2" xml:space="preserve">
-    <value>cm</value>
+  <data name="Label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
@@ -2519,9 +2522,6 @@
   </data>
   <data name="ch4.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
-  </data>
-  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 71</value>
   </data>
   <data name="&gt;&gt;Label15.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -2712,8 +2712,8 @@
   <data name="GroupBox4.Location" type="System.Drawing.Point, System.Drawing">
     <value>458, 3</value>
   </data>
-  <data name="Panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 25</value>
+  <data name="&gt;&gt;FaTabStripItem1.Type" xml:space="preserve">
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="cb7.Items4" xml:space="preserve">
     <value>BTU/h</value>
@@ -2772,11 +2772,11 @@
   <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>266, 17</value>
   </metadata>
-  <metadata name="DataGridViewTextBoxColumn3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="DataGridViewTextBoxColumn5.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="OpenFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>124, 17</value>
+  <metadata name="DataGridViewTextBoxColumn3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </metadata>
   <metadata name="DataGridViewTextBoxColumn2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -2790,8 +2790,8 @@
   <metadata name="DataGridViewTextBoxColumn6.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="DataGridViewTextBoxColumn5.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
+  <metadata name="OpenFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>124, 17</value>
   </metadata>
   <metadata name="ToolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
