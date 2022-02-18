@@ -242,6 +242,9 @@
     <value>Number of Stages</value>
     <comment>0</comment>
   </data>
+  <data name="PROP_DC_8" xml:space="preserve">
+    <value>Column Pressure Drop</value>
+  </data>
   <data name="PROP_EQ_0" xml:space="preserve">
     <value>Pressure Drop</value>
     <comment>1</comment>

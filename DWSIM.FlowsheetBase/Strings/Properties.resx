@@ -211,11 +211,11 @@
     <value>Vapor residence time</value>
   </data>
   <data name="PROP_DC_0" xml:space="preserve">
-    <value>Condenser Pressure</value>
+    <value>Condenser/Top Pressure</value>
     <comment>1</comment>
   </data>
   <data name="PROP_DC_1" xml:space="preserve">
-    <value>Reboiler Pressure</value>
+    <value>Reboiler/Bottoms Pressure</value>
     <comment>1</comment>
   </data>
   <data name="PROP_DC_2" xml:space="preserve">
@@ -241,6 +241,9 @@
   <data name="PROP_DC_7" xml:space="preserve">
     <value>Number of Stages</value>
     <comment>0</comment>
+  </data>
+  <data name="PROP_DC_8" xml:space="preserve">
+    <value>Column Pressure Drop</value>
   </data>
   <data name="PROP_EQ_0" xml:space="preserve">
     <value>Pressure Drop</value>

@@ -25,9 +25,9 @@ Partial Class EditingForm_Column
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_Column))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.lblTag = New System.Windows.Forms.TextBox()
         Me.chkActive = New System.Windows.Forms.CheckBox()
@@ -72,9 +72,6 @@ Partial Class EditingForm_Column
         Me.cbRebComp = New System.Windows.Forms.ComboBox()
         Me.cbRebSpecUnits = New System.Windows.Forms.ComboBox()
         Me.chkNoReboiler = New System.Windows.Forms.CheckBox()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.cbRebPressure = New System.Windows.Forms.ComboBox()
-        Me.tbRebPressure = New System.Windows.Forms.TextBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.tbConvTol = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -97,6 +94,9 @@ Partial Class EditingForm_Column
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabContainerAll = New System.Windows.Forms.TabControl()
         Me.TabPage6 = New System.Windows.Forms.TabPage()
+        Me.tbColPDrop = New System.Windows.Forms.TextBox()
+        Me.cbColPDrop = New System.Windows.Forms.ComboBox()
+        Me.Label18 = New System.Windows.Forms.Label()
         Me.cbExternalSolver = New System.Windows.Forms.ComboBox()
         Me.LabelES = New System.Windows.Forms.Label()
         Me.cbSolvingMethod = New System.Windows.Forms.ComboBox()
@@ -474,9 +474,6 @@ Partial Class EditingForm_Column
         resources.ApplyResources(Me.TabReboiler, "TabReboiler")
         Me.TabReboiler.Controls.Add(Me.PanelReboiler)
         Me.TabReboiler.Controls.Add(Me.chkNoReboiler)
-        Me.TabReboiler.Controls.Add(Me.Label17)
-        Me.TabReboiler.Controls.Add(Me.cbRebPressure)
-        Me.TabReboiler.Controls.Add(Me.tbRebPressure)
         Me.TabReboiler.Name = "TabReboiler"
         Me.ToolTip1.SetToolTip(Me.TabReboiler, resources.GetString("TabReboiler.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.TabReboiler, resources.GetString("TabReboiler.ToolTip1"))
@@ -564,33 +561,6 @@ Partial Class EditingForm_Column
         Me.ToolTipChangeTag.SetToolTip(Me.chkNoReboiler, resources.GetString("chkNoReboiler.ToolTip1"))
         Me.ToolTipValues.SetToolTip(Me.chkNoReboiler, resources.GetString("chkNoReboiler.ToolTip2"))
         Me.chkNoReboiler.UseVisualStyleBackColor = True
-        '
-        'Label17
-        '
-        resources.ApplyResources(Me.Label17, "Label17")
-        Me.Label17.Name = "Label17"
-        Me.ToolTip1.SetToolTip(Me.Label17, resources.GetString("Label17.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label17, resources.GetString("Label17.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label17, resources.GetString("Label17.ToolTip2"))
-        '
-        'cbRebPressure
-        '
-        resources.ApplyResources(Me.cbRebPressure, "cbRebPressure")
-        Me.cbRebPressure.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbRebPressure.FormattingEnabled = True
-        Me.cbRebPressure.Items.AddRange(New Object() {resources.GetString("cbRebPressure.Items"), resources.GetString("cbRebPressure.Items1"), resources.GetString("cbRebPressure.Items2")})
-        Me.cbRebPressure.Name = "cbRebPressure"
-        Me.ToolTip1.SetToolTip(Me.cbRebPressure, resources.GetString("cbRebPressure.ToolTip"))
-        Me.ToolTipValues.SetToolTip(Me.cbRebPressure, resources.GetString("cbRebPressure.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.cbRebPressure, resources.GetString("cbRebPressure.ToolTip2"))
-        '
-        'tbRebPressure
-        '
-        resources.ApplyResources(Me.tbRebPressure, "tbRebPressure")
-        Me.tbRebPressure.Name = "tbRebPressure"
-        Me.ToolTipValues.SetToolTip(Me.tbRebPressure, resources.GetString("tbRebPressure.ToolTip"))
-        Me.ToolTip1.SetToolTip(Me.tbRebPressure, resources.GetString("tbRebPressure.ToolTip1"))
-        Me.ToolTipChangeTag.SetToolTip(Me.tbRebPressure, resources.GetString("tbRebPressure.ToolTip2"))
         '
         'Label16
         '
@@ -739,8 +709,8 @@ Partial Class EditingForm_Column
         '
         'DataGridViewTextBoxColumn1
         '
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle4
         Me.DataGridViewTextBoxColumn1.FillWeight = 60.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn1, "DataGridViewTextBoxColumn1")
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
@@ -748,8 +718,8 @@ Partial Class EditingForm_Column
         '
         'DataGridViewTextBoxColumn2
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle5
         Me.DataGridViewTextBoxColumn2.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
@@ -757,8 +727,8 @@ Partial Class EditingForm_Column
         '
         'Column1
         '
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle6
         Me.Column1.FillWeight = 30.0!
         resources.ApplyResources(Me.Column1, "Column1")
         Me.Column1.Name = "Column1"
@@ -782,6 +752,9 @@ Partial Class EditingForm_Column
         'TabPage6
         '
         resources.ApplyResources(Me.TabPage6, "TabPage6")
+        Me.TabPage6.Controls.Add(Me.tbColPDrop)
+        Me.TabPage6.Controls.Add(Me.cbColPDrop)
+        Me.TabPage6.Controls.Add(Me.Label18)
         Me.TabPage6.Controls.Add(Me.btnConfigExtSolver)
         Me.TabPage6.Controls.Add(Me.cbExternalSolver)
         Me.TabPage6.Controls.Add(Me.LabelES)
@@ -803,6 +776,33 @@ Partial Class EditingForm_Column
         Me.ToolTipValues.SetToolTip(Me.TabPage6, resources.GetString("TabPage6.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.TabPage6, resources.GetString("TabPage6.ToolTip2"))
         Me.TabPage6.UseVisualStyleBackColor = True
+        '
+        'tbColPDrop
+        '
+        resources.ApplyResources(Me.tbColPDrop, "tbColPDrop")
+        Me.tbColPDrop.Name = "tbColPDrop"
+        Me.ToolTipValues.SetToolTip(Me.tbColPDrop, resources.GetString("tbColPDrop.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbColPDrop, resources.GetString("tbColPDrop.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.tbColPDrop, resources.GetString("tbColPDrop.ToolTip2"))
+        '
+        'cbColPDrop
+        '
+        resources.ApplyResources(Me.cbColPDrop, "cbColPDrop")
+        Me.cbColPDrop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbColPDrop.FormattingEnabled = True
+        Me.cbColPDrop.Items.AddRange(New Object() {resources.GetString("cbColPDrop.Items"), resources.GetString("cbColPDrop.Items1"), resources.GetString("cbColPDrop.Items2")})
+        Me.cbColPDrop.Name = "cbColPDrop"
+        Me.ToolTip1.SetToolTip(Me.cbColPDrop, resources.GetString("cbColPDrop.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbColPDrop, resources.GetString("cbColPDrop.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbColPDrop, resources.GetString("cbColPDrop.ToolTip2"))
+        '
+        'Label18
+        '
+        resources.ApplyResources(Me.Label18, "Label18")
+        Me.Label18.Name = "Label18"
+        Me.ToolTip1.SetToolTip(Me.Label18, resources.GetString("Label18.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.Label18, resources.GetString("Label18.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.Label18, resources.GetString("Label18.ToolTip2"))
         '
         'cbExternalSolver
         '
@@ -979,9 +979,6 @@ Partial Class EditingForm_Column
     Public WithEvents tbRebSpecValue As System.Windows.Forms.TextBox
     Public WithEvents Label15 As System.Windows.Forms.Label
     Public WithEvents cbRebSpec As System.Windows.Forms.ComboBox
-    Public WithEvents Label17 As System.Windows.Forms.Label
-    Public WithEvents cbRebPressure As System.Windows.Forms.ComboBox
-    Public WithEvents tbRebPressure As System.Windows.Forms.TextBox
     Public WithEvents Label16 As System.Windows.Forms.Label
     Public WithEvents tbConvTol As System.Windows.Forms.TextBox
     Public WithEvents Label14 As System.Windows.Forms.Label
@@ -1020,4 +1017,7 @@ Partial Class EditingForm_Column
     Public WithEvents Label10 As Label
     Public WithEvents tbSubcooling As TextBox
     Public WithEvents cbSubcooling As ComboBox
+    Public WithEvents tbColPDrop As TextBox
+    Public WithEvents cbColPDrop As ComboBox
+    Public WithEvents Label18 As Label
 End Class

@@ -876,7 +876,7 @@ Namespace UnitOperations
                     For i = 0 To 2
                         proplist.Add("PROP_DC_" + CStr(i))
                     Next
-                    For i = 5 To 7
+                    For i = 5 To 8
                         proplist.Add("PROP_DC_" + CStr(i))
                     Next
                     For i = 1 To Me.Stages.Count
@@ -913,6 +913,7 @@ Namespace UnitOperations
                     For i = 0 To 2
                         proplist.Add("PROP_DC_" + CStr(i))
                     Next
+                    proplist.Add("PROP_DC_8")
                     For i = 1 To Me.Stages.Count
                         proplist.Add("Stage_Pressure_" + CStr(i))
                     Next
@@ -985,6 +986,8 @@ Namespace UnitOperations
                     Case 7
                         'PROP_DC_7	Number of Stages
                         value = Me.NumberOfStages
+                    Case 8
+                        value = ColumnPressureDrop.ConvertFromSI(su.deltaP)
                 End Select
 
                 Select Case prop
@@ -1088,6 +1091,8 @@ Namespace UnitOperations
                     Case 7
                         'PROP_DC_7	Number of Stages
                         value = ""
+                    Case 8
+                        value = su.deltaP
                 End Select
 
                 Select Case prop
@@ -1103,7 +1108,9 @@ Namespace UnitOperations
                 If prop.Contains("Molar Flow") Then value = su.molarflow
 
                 Return value
+
             End If
+
         End Function
 
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
@@ -1119,13 +1126,15 @@ Namespace UnitOperations
                 Select Case propidx
                     Case 0
                         'PROP_DC_0	Condenser Pressure
-                        Me.CondenserPressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
+                        CondenserPressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
                     Case 1
                         'PROP_DC_1	Reboiler Pressure
-                        Me.ReboilerPressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
+                        ReboilerPressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
                     Case 2
                         'PROP_DC_2	Condenser Pressure Drop
-                        Me.CondenserDeltaP = SystemsOfUnits.Converter.ConvertToSI(su.deltaP, propval)
+                        CondenserDeltaP = SystemsOfUnits.Converter.ConvertToSI(su.deltaP, propval)
+                    Case 8
+                        ColumnPressureDrop = SystemsOfUnits.Converter.ConvertToSI(su.deltaP, propval)
                 End Select
             End If
 
@@ -1779,6 +1788,7 @@ Namespace UnitOperations
     <System.Serializable()> Public MustInherit Class Column
 
         Inherits UnitOperations.UnitOpBaseClass
+
         Public Overrides Property ObjectClass As SimulationObjectClass = SimulationObjectClass.Columns
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_Column
@@ -1796,6 +1806,8 @@ Namespace UnitOperations
             Ideal_K_and_Enthalpy_Init = 2
             Direct = 3
         End Enum
+
+        Public Property ColumnPressureDrop As Double = Double.NaN
 
         Public Property SolvingMethodName As String = "Wang-Henke (Bubble Point)"
 
@@ -2684,6 +2696,12 @@ Namespace UnitOperations
                 Array.Resize(Kval(i), nc)
                 Array.Resize(Pvap(i), nc)
             Next
+
+            If Not Double.IsNaN(ColumnPressureDrop) Then
+                For i = 1 To ns
+                    Stages(i).P = Stages(0).P + Convert.ToDouble(i) / Convert.ToDouble(ns) * ColumnPressureDrop
+                Next
+            End If
 
             Dim sumcf(nc - 1), sumF, zm(nc - 1), alpha(nc - 1), distVx(nc - 1), rebVx(nc - 1), distVy(nc - 1), rebVy(nc - 1) As Double
 

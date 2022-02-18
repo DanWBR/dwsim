@@ -1650,4 +1650,7 @@
   <data name="PROP_MS_259" xml:space="preserve">
     <value>Ideal Gas Heat Capacity Ratio (Solid)</value>
   </data>
+  <data name="PROP_DC_8" xml:space="preserve">
+    <value>Perda de Carga na Coluna</value>
+  </data>
 </root>

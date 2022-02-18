@@ -139,10 +139,6 @@ Public Class EditingForm_Column
             cbCondPressureUnits.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.pressure).ToArray)
             cbCondPressureUnits.SelectedItem = units.pressure
 
-            cbRebPressure.Items.Clear()
-            cbRebPressure.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.pressure).ToArray)
-            cbRebPressure.SelectedItem = units.pressure
-
             cbCondPDropUnits.Items.Clear()
             cbCondPDropUnits.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.deltaP).ToArray)
             cbCondPDropUnits.SelectedItem = units.deltaP
@@ -150,6 +146,12 @@ Public Class EditingForm_Column
             cbSubcooling.Items.Clear()
             cbSubcooling.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.deltaT).ToArray)
             cbSubcooling.SelectedItem = units.deltaT
+
+            cbColPDrop.Items.Clear()
+            cbColPDrop.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.deltaP).ToArray)
+            cbColPDrop.SelectedItem = units.deltaP
+
+            tbColPDrop.Text = su.Converter.ConvertFromSI(units.deltaP, .ColumnPressureDrop).ToString(nf)
 
             tbNStages.Text = .NumberOfStages
 
@@ -208,7 +210,6 @@ Public Class EditingForm_Column
                 tbSubcooling.Text = "0"
             End If
 
-            tbRebPressure.Text = su.Converter.ConvertFromSI(units.pressure, .ReboilerPressure).ToString(nf)
             cbRebSpec.SelectedIndex = .Specs("R").SType
             Dim runits As String() = {}
             Select Case .Specs("R").SType
@@ -568,7 +569,7 @@ Public Class EditingForm_Column
         End Select
         cbCondSpecUnits.Items.Clear()
         cbCondSpecUnits.Items.AddRange(cunits)
-        cbCondSpecUnits.SelectedItem = Nothing
+        cbCondSpecUnits.SelectedIndex = 0
 
     End Sub
 
@@ -646,19 +647,6 @@ Public Class EditingForm_Column
 
     End Sub
 
-    Private Sub tbRebPressure_TextChanged(sender As Object, e As KeyEventArgs) Handles tbRebPressure.KeyDown
-
-        If Loaded And e.KeyCode = Keys.Enter Then
-
-            SimObject.ReboilerPressure = su.Converter.ConvertToSI(units.pressure, tbRebPressure.Text.ParseExpressionToDouble)
-            SimObject.Stages(SimObject.Stages.Count - 1).P = SimObject.ReboilerPressure
-
-            RequestCalc()
-
-        End If
-
-    End Sub
-
     Private Sub cbRebSpec_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbRebSpec.SelectedIndexChanged
 
         SimObject.Specs("R").SType = cbRebSpec.SelectedIndex
@@ -694,7 +682,7 @@ Public Class EditingForm_Column
         End Select
         cbRebSpecUnits.Items.Clear()
         cbRebSpecUnits.Items.AddRange(cunits)
-        cbRebSpecUnits.SelectedItem = Nothing
+        cbRebSpecUnits.SelectedIndex = 0
 
     End Sub
 
@@ -751,8 +739,8 @@ Public Class EditingForm_Column
     End Sub
 
     Private Sub tbNStages_TextChanged(sender As Object, e As EventArgs) Handles tbNStages.TextChanged, tbCondPDrop.TextChanged, tbCondPressure.TextChanged, tbCondSpec.TextChanged, tbCondVapFlow.TextChanged,
-                                                                                tbConvTol.TextChanged, tbMaxIt.TextChanged, tbNStages.TextChanged, tbRebPressure.TextChanged, tbRebSpecValue.TextChanged, tbNStages.KeyDown,
-                                                                                tbSubcooling.TextChanged
+                                                                                tbConvTol.TextChanged, tbMaxIt.TextChanged, tbNStages.TextChanged, tbRebSpecValue.TextChanged, tbNStages.KeyDown,
+                                                                                tbSubcooling.TextChanged, tbColPDrop.TextChanged
         Dim tbox = DirectCast(sender, TextBox)
 
         If Loaded Then
@@ -834,6 +822,19 @@ Public Class EditingForm_Column
 
             DirectCast(SimObject, DistillationColumn).TotalCondenserSubcoolingDeltaT =
                 su.Converter.ConvertToSI(units.deltaT, tbSubcooling.Text.ParseExpressionToDouble)
+
+        End If
+
+    End Sub
+
+    Private Sub tbColPDrop_KeyDown(sender As Object, e As KeyEventArgs) Handles tbColPDrop.KeyDown
+
+        If Loaded And e.KeyCode = Keys.Enter Then
+
+            SimObject.ColumnPressureDrop = su.Converter.ConvertToSI(units.deltaP, tbColPDrop.Text)
+
+            UpdateInfo()
+            RequestCalc()
 
         End If
 
