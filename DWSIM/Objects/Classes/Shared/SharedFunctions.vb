@@ -161,7 +161,7 @@ Namespace DWSIM
             End If
         End Function
 
-        Public Shared Function GetLocalString(ByVal id As String) As String
+        Public Shared Function GetLocalString(ByVal id As String, Optional ByVal locale As String = "") As String
 
             If My.Application._ResourceManager Is Nothing Then
 
@@ -186,7 +186,11 @@ Namespace DWSIM
 
             If id <> "" Then
                 Dim retstr As String
-                retstr = My.Application._ResourceManager.GetString(id, My.Application._CultureInfo)
+                If locale <> "" Then
+                    retstr = My.Application._ResourceManager.GetString(id, New Globalization.CultureInfo(locale))
+                Else
+                    retstr = My.Application._ResourceManager.GetString(id, My.Application._CultureInfo)
+                End If
                 If retstr Is Nothing Then
                     Return id
                 Else
@@ -204,7 +208,6 @@ Namespace DWSIM
         End Function
 
         Public Shared Function GetPropertyName(ByVal PropID As String, Optional ByRef fp As FormMain = Nothing) As String
-
 
             If My.Application._ResourceManager Is Nothing Then
 
@@ -246,6 +249,75 @@ Namespace DWSIM
                     End If
                 Else
                     retstr = My.Application._PropertyNameManager.GetString(prop, My.Application._CultureInfo)
+                    If retstr Is Nothing Then
+                        Return PropID
+                    Else
+                        If My.Application.ActiveSimulation IsNot Nothing Then
+                            If My.Application.ActiveSimulation._translatefunction IsNot Nothing Then
+                                Return My.Application.ActiveSimulation._translatefunction.Invoke(retstr)
+                            End If
+                        End If
+                        Return retstr
+                    End If
+                End If
+            Else
+                retstr = ""
+            End If
+
+            Return Nothing
+
+        End Function
+
+        Public Shared Function GetPropertyName(PropID As String, locale As String) As String
+
+            If My.Application._ResourceManager Is Nothing Then
+
+                'loads the current language
+                My.Application._CultureInfo = New Globalization.CultureInfo(My.Settings.CultureInfo)
+                My.Application.ChangeUICulture(My.Settings.CultureInfo)
+
+                'loads the resource manager
+                My.Application._ResourceManager = New System.Resources.ResourceManager("DWSIM.DWSIM", System.Reflection.Assembly.GetExecutingAssembly())
+
+            End If
+
+            'loads the property name manager
+            If My.Application._PropertyNameManager Is Nothing Then
+
+                My.Application._PropertyNameManager = New System.Resources.ResourceManager("DWSIM.Properties", System.Reflection.Assembly.GetExecutingAssembly())
+
+            End If
+
+            Dim retstr As String
+            If Not PropID Is Nothing Then
+                Dim prop As String = PropID.Split("/")(0)
+                Dim sname As String = ""
+                Dim pname As String = ""
+                If PropID.Split("/").Length = 2 Then
+                    sname = PropID.Split("/")(1)
+                    If locale <> "" Then
+                        pname = My.Application._PropertyNameManager.GetString(prop, New Globalization.CultureInfo(locale))
+                    Else
+                        pname = My.Application._PropertyNameManager.GetString(prop, My.Application._CultureInfo)
+                    End If
+                    If pname = "" Then pname = prop
+                    retstr = pname + " / " + sname
+                    If retstr Is Nothing Then
+                        Return PropID
+                    Else
+                        If My.Application.ActiveSimulation IsNot Nothing Then
+                            If My.Application.ActiveSimulation._translatefunction IsNot Nothing Then
+                                Return My.Application.ActiveSimulation._translatefunction.Invoke(retstr)
+                            End If
+                        End If
+                        Return retstr
+                    End If
+                Else
+                    If locale <> "" Then
+                        retstr = My.Application._PropertyNameManager.GetString(prop, New Globalization.CultureInfo(locale))
+                    Else
+                        retstr = My.Application._PropertyNameManager.GetString(prop, My.Application._CultureInfo)
+                    End If
                     If retstr Is Nothing Then
                         Return PropID
                     Else

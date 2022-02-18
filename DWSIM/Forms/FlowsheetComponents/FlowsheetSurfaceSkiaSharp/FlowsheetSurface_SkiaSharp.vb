@@ -1658,12 +1658,20 @@ Public Class FlowsheetSurface_SkiaSharp
         Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("FLSH004"), Color.Black, MessageType.Tip)
         Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("FLSH006"), Color.Black, MessageType.Tip)
 
+        Dim objname = (Flowsheet.SimulationObjects.Count + 1).ToString()
+        Dim exists = True
+        While exists
+            exists = Flowsheet.SimulationObjects.Values.Where(Function(o) o.GraphicObject.Tag = objname).Count > 0
+            If Not exists Then Exit While
+            objname = Convert.ToInt32(objname) + 1
+        End While
+
         Select Case type
 
             Case ObjectType.External
 
                 Dim myNode As New ExternalUnitOperationGraphic(mpx, mpy, 40, 40)
-                myNode.Tag = uoobj.Prefix & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myNode.Tag = objname
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
                 CheckTag(gObj)
@@ -1678,7 +1686,7 @@ Public Class FlowsheetSurface_SkiaSharp
             Case ObjectType.Switch
 
                 Dim myGobj As New SwitchGraphic(mpx, mpy, 50, 40)
-                myGobj.Tag = "SW-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myGobj.Tag = objname
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
                 CheckTag(gObj)
@@ -1692,7 +1700,7 @@ Public Class FlowsheetSurface_SkiaSharp
             Case ObjectType.Input
 
                 Dim myGobj As New InputGraphic(mpx, mpy, 50, 25)
-                myGobj.Tag = "IN-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myGobj.Tag = objname
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
                 CheckTag(gObj)
@@ -1708,7 +1716,7 @@ Public Class FlowsheetSurface_SkiaSharp
             Case ObjectType.Controller_PID
 
                 Dim myGobj As New PIDControllerGraphic(mpx, mpy, 50, 50)
-                myGobj.Tag = "PID-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myGobj.Tag = objname
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
                 CheckTag(gObj)
@@ -1724,7 +1732,7 @@ Public Class FlowsheetSurface_SkiaSharp
             Case ObjectType.LevelGauge
 
                 Dim myGobj As New LevelGaugeGraphic(mpx, mpy, 40, 70)
-                myGobj.Tag = "LG-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myGobj.Tag = objname
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
                 gObj.Name = "LG-" & Guid.NewGuid.ToString
@@ -1737,7 +1745,7 @@ Public Class FlowsheetSurface_SkiaSharp
             Case ObjectType.DigitalGauge
 
                 Dim myGobj As New DigitalGaugeGraphic(mpx, mpy, 40, 20)
-                myGobj.Tag = "DG-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myGobj.Tag = objname
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
                 CheckTag(gObj)
@@ -1751,7 +1759,7 @@ Public Class FlowsheetSurface_SkiaSharp
             Case ObjectType.AnalogGauge
 
                 Dim myGobj As New AnalogGaugeGraphic(mpx, mpy, 50, 50)
-                myGobj.Tag = "AG-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myGobj.Tag = objname
                 If tag <> "" Then myGobj.Tag = tag
                 gObj = myGobj
                 CheckTag(gObj)
@@ -1769,7 +1777,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myNode.Fill = True
                 myNode.FillColor = fillclr
                 myNode.LineColor = lineclr
-                myNode.Tag = "CTRL-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myNode.Tag = objname
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
                 CheckTag(gObj)
@@ -1788,7 +1796,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myNode.Fill = True
                 myNode.FillColor = fillclr
                 myNode.LineColor = lineclr
-                myNode.Tag = "SPEC-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myNode.Tag = objname
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
                 CheckTag(gObj)
@@ -1806,7 +1814,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myNode.Fill = True
                 myNode.FillColor = fillclr
                 myNode.LineColor = lineclr
-                myNode.Tag = "REC-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myNode.Tag = objname
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
                 CheckTag(gObj)
@@ -1826,7 +1834,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myNode.Fill = True
                 myNode.FillColor = fillclr
                 myNode.LineColor = lineclr
-                myNode.Tag = "EREC-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myNode.Tag = objname
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
                 CheckTag(gObj)
@@ -1844,7 +1852,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myNode.Fill = True
                 myNode.FillColor = fillclr
                 myNode.LineColor = lineclr
-                myNode.Tag = "MIX-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myNode.Tag = objname
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
                 CheckTag(gObj)
@@ -1862,7 +1870,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myNodeo.Fill = True
                 myNodeo.FillColor = fillclr
                 myNodeo.LineColor = lineclr
-                myNodeo.Tag = "SPLT-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myNodeo.Tag = objname
                 If tag <> "" Then myNodeo.Tag = tag
                 gObj = myNodeo
                 CheckTag(gObj)
@@ -1881,7 +1889,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myPump.Fill = True
                 myPump.FillColor = fillclr
                 myPump.LineColor = lineclr
-                myPump.Tag = "PUMP-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myPump.Tag = objname
                 If tag <> "" Then myPump.Tag = tag
                 gObj = myPump
                 CheckTag(gObj)
@@ -1900,7 +1908,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myTank.Fill = True
                 myTank.FillColor = fillclr
                 myTank.LineColor = lineclr
-                myTank.Tag = "TANK-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myTank.Tag = objname
                 If tag <> "" Then myTank.Tag = tag
                 gObj = myTank
                 CheckTag(gObj)
@@ -1919,7 +1927,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myVessel.Fill = True
                 myVessel.FillColor = fillclr
                 myVessel.LineColor = lineclr
-                myVessel.Tag = "SEP-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myVessel.Tag = objname
                 If tag <> "" Then myVessel.Tag = tag
                 gObj = myVessel
                 CheckTag(gObj)
@@ -1938,7 +1946,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myMStr.Fill = True
                 myMStr.FillColor = fillclr
                 myMStr.LineColor = lineclr
-                myMStr.Tag = "MSTR-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myMStr.Tag = objname
                 If tag <> "" Then myMStr.Tag = tag
                 gObj = myMStr
                 CheckTag(gObj)
@@ -1959,7 +1967,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 Dim myMStr As New EnergyStreamGraphic(mpx, mpy, 20, 20)
                 myMStr.LineWidth = 2
                 myMStr.Fill = True
-                myMStr.Tag = "ESTR-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myMStr.Tag = objname
                 If tag <> "" Then myMStr.Tag = tag
                 gObj = myMStr
                 CheckTag(gObj)
@@ -1978,7 +1986,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myComp.Fill = True
                 myComp.FillColor = fillclr
                 myComp.LineColor = lineclr
-                myComp.Tag = "COMP-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myComp.Tag = objname
                 If tag <> "" Then myComp.Tag = tag
                 gObj = myComp
                 CheckTag(gObj)
@@ -1997,7 +2005,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myComp.Fill = True
                 myComp.FillColor = fillclr
                 myComp.LineColor = lineclr
-                myComp.Tag = "EXP-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myComp.Tag = objname
                 If tag <> "" Then myComp.Tag = tag
                 gObj = myComp
                 gObj.Name = "TURB-" & Guid.NewGuid.ToString
@@ -2015,7 +2023,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myCool.Fill = True
                 myCool.FillColor = fillclr
                 myCool.LineColor = lineclr
-                myCool.Tag = "COOL-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myCool.Tag = objname
                 If tag <> "" Then myCool.Tag = tag
                 gObj = myCool
                 CheckTag(gObj)
@@ -2034,7 +2042,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myHeat.Fill = True
                 myHeat.FillColor = fillclr
                 myHeat.LineColor = lineclr
-                myHeat.Tag = "HEAT-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myHeat.Tag = objname
                 If tag <> "" Then myHeat.Tag = tag
                 gObj = myHeat
                 CheckTag(gObj)
@@ -2053,7 +2061,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myPipe.Fill = True
                 myPipe.FillColor = fillclr
                 myPipe.LineColor = lineclr
-                myPipe.Tag = "PIPE-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myPipe.Tag = objname
                 If tag <> "" Then myPipe.Tag = tag
                 gObj = myPipe
                 CheckTag(gObj)
@@ -2072,7 +2080,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myValve.Fill = True
                 myValve.FillColor = fillclr
                 myValve.LineColor = lineclr
-                myValve.Tag = "VALV-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myValve.Tag = objname
                 If tag <> "" Then myValve.Tag = tag
                 gObj = myValve
                 CheckTag(gObj)
@@ -2091,7 +2099,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myRconv.Fill = True
                 myRconv.FillColor = fillclr
                 myRconv.LineColor = lineclr
-                myRconv.Tag = "RC-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myRconv.Tag = objname
                 If tag <> "" Then myRconv.Tag = tag
                 gObj = myRconv
                 gObj.Name = "RC-" & Guid.NewGuid.ToString
@@ -2111,7 +2119,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myReq.Fill = True
                 myReq.FillColor = fillclr
                 myReq.LineColor = lineclr
-                myReq.Tag = "RE-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myReq.Tag = objname
                 If tag <> "" Then myReq.Tag = tag
                 gObj = myReq
                 CheckTag(gObj)
@@ -2132,7 +2140,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myRgibbs.Fill = True
                 myRgibbs.FillColor = fillclr
                 myRgibbs.LineColor = lineclr
-                myRgibbs.Tag = "RG-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myRgibbs.Tag = objname
                 If tag <> "" Then myRgibbs.Tag = tag
                 gObj = myRgibbs
                 gObj.Name = "RG-" & Guid.NewGuid.ToString
@@ -2152,7 +2160,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myRcstr.Fill = True
                 myRcstr.FillColor = fillclr
                 myRcstr.LineColor = lineclr
-                myRcstr.Tag = "CSTR-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myRcstr.Tag = objname
                 If tag <> "" Then myRcstr.Tag = tag
                 gObj = myRcstr
                 CheckTag(gObj)
@@ -2173,7 +2181,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myRpfr.Fill = True
                 myRpfr.FillColor = fillclr
                 myRpfr.LineColor = lineclr
-                myRpfr.Tag = "PFR-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myRpfr.Tag = objname
                 If tag <> "" Then myRpfr.Tag = tag
                 gObj = myRpfr
                 CheckTag(gObj)
@@ -2194,7 +2202,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myHeatExchanger.Fill = True
                 myHeatExchanger.FillColor = fillclr
                 myHeatExchanger.LineColor = lineclr
-                myHeatExchanger.Tag = "HE-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myHeatExchanger.Tag = objname
                 If tag <> "" Then myHeatExchanger.Tag = tag
                 gObj = myHeatExchanger
                 CheckTag(gObj)
@@ -2213,7 +2221,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 mySC.Fill = True
                 mySC.FillColor = fillclr
                 mySC.LineColor = lineclr
-                mySC.Tag = "SC-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                mySC.Tag = objname
                 If tag <> "" Then mySC.Tag = tag
                 gObj = mySC
                 gObj.Name = "SC-" & Guid.NewGuid.ToString
@@ -2231,7 +2239,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 mySC.Fill = True
                 mySC.FillColor = fillclr
                 mySC.LineColor = lineclr
-                mySC.Tag = "DC-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                mySC.Tag = objname
                 If tag <> "" Then mySC.Tag = tag
                 gObj = mySC
                 CheckTag(gObj)
@@ -2254,7 +2262,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 mySC.Fill = True
                 mySC.FillColor = fillclr
                 mySC.LineColor = lineclr
-                mySC.Tag = "ABS-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                mySC.Tag = objname
                 If tag <> "" Then mySC.Tag = tag
                 gObj = mySC
                 gObj.Name = "ABS-" & Guid.NewGuid.ToString
@@ -2276,7 +2284,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myCSep.Fill = True
                 myCSep.FillColor = fillclr
                 myCSep.LineColor = lineclr
-                myCSep.Tag = "CS-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myCSep.Tag = objname
                 If tag <> "" Then myCSep.Tag = tag
                 gObj = myCSep
                 CheckTag(gObj)
@@ -2295,7 +2303,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myCSep.Fill = True
                 myCSep.FillColor = fillclr
                 myCSep.LineColor = lineclr
-                myCSep.Tag = "SS-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myCSep.Tag = objname
                 If tag <> "" Then myCSep.Tag = tag
                 gObj = myCSep
                 gObj.Name = "SS-" & Guid.NewGuid.ToString
@@ -2313,7 +2321,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myCSep.Fill = True
                 myCSep.FillColor = fillclr
                 myCSep.LineColor = lineclr
-                myCSep.Tag = "FT-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myCSep.Tag = objname
                 If tag <> "" Then myCSep.Tag = tag
                 gObj = myCSep
                 CheckTag(gObj)
@@ -2332,7 +2340,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myOPL.Fill = True
                 myOPL.FillColor = fillclr
                 myOPL.LineColor = lineclr
-                myOPL.Tag = "OP-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myOPL.Tag = objname
                 If tag <> "" Then myOPL.Tag = tag
                 gObj = myOPL
                 CheckTag(gObj)
@@ -2351,7 +2359,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myCUO.Fill = True
                 myCUO.FillColor = fillclr
                 myCUO.LineColor = lineclr
-                myCUO.Tag = "UO-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myCUO.Tag = objname
                 If tag <> "" Then myCUO.Tag = tag
                 gObj = myCUO
                 CheckTag(gObj)
@@ -2372,7 +2380,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myEUO.Fill = True
                 myEUO.FillColor = fillclr
                 myEUO.LineColor = lineclr
-                myEUO.Tag = "EXL-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myEUO.Tag = objname
                 If tag <> "" Then myEUO.Tag = tag
                 gObj = myEUO
                 CheckTag(gObj)
@@ -2391,7 +2399,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myEUO.Fill = True
                 myEUO.FillColor = fillclr
                 myEUO.LineColor = lineclr
-                myEUO.Tag = "FS-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myEUO.Tag = objname
                 If tag <> "" Then myEUO.Tag = tag
                 gObj = myEUO
                 CheckTag(gObj)
@@ -2410,7 +2418,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 myCUO.Fill = True
                 myCUO.FillColor = fillclr
                 myCUO.LineColor = lineclr
-                myCUO.Tag = "COUO-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                myCUO.Tag = objname
                 If tag <> "" Then myCUO.Tag = tag
                 gObj = myCUO
                 CheckTag(gObj)
@@ -2419,7 +2427,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 Flowsheet.Collections.GraphicObjectCollection.Add(gObj.Name, myCUO)
                 'OBJETO DWSIM
                 If chemsep Then
-                    gObj.Tag = "CSCOL-" & (Flowsheet.SimulationObjects.Where(Function(x0) x0.Value.GraphicObject.ObjectType = type).Count + 1).ToString("0#")
+                    gObj.Tag = objname
                     DirectCast(gObj, CAPEOPENGraphic).ChemSep = True
                     gObj.Width = 144
                     gObj.Height = 180
