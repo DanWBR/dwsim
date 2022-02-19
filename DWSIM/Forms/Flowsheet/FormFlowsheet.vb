@@ -136,6 +136,8 @@ Public Class FormFlowsheet
 
     Public simulate365File As S365File = Nothing
 
+    Public Shared DoNotOpenSimulationWizard As Boolean = False
+
 #End Region
 
 #Region "    Form Event Handlers "
@@ -537,28 +539,31 @@ Public Class FormFlowsheet
             Me.Invalidate()
             Application.DoEvents()
 
-            If Not DWSIM.App.IsRunningOnMono Then
-                Dim fw As New FormSimulWizard
-                With fw
-                    .CurrentFlowsheet = Me
-                    .StartPosition = FormStartPosition.CenterScreen
-                    .WindowState = FormWindowState.Normal
-                    .ShowDialog(Me)
-                    If .switch Then
-                        With Me.FrmStSim1
-                            .WindowState = FormWindowState.Normal
-                            .StartPosition = FormStartPosition.CenterScreen
-                            .ShowDialog(Me)
-                        End With
-                    End If
-                End With
-            Else
-                With Me.FrmStSim1
-                    .WindowState = FormWindowState.Normal
-                    .StartPosition = FormStartPosition.CenterScreen
-                    .ShowDialog(Me)
-                End With
+            If Not DoNotOpenSimulationWizard Then
+                If Not DWSIM.App.IsRunningOnMono Then
+                    Dim fw As New FormSimulWizard
+                    With fw
+                        .CurrentFlowsheet = Me
+                        .StartPosition = FormStartPosition.CenterScreen
+                        .WindowState = FormWindowState.Normal
+                        .ShowDialog(Me)
+                        If .switch Then
+                            With Me.FrmStSim1
+                                .WindowState = FormWindowState.Normal
+                                .StartPosition = FormStartPosition.CenterScreen
+                                .ShowDialog(Me)
+                            End With
+                        End If
+                    End With
+                Else
+                    With Me.FrmStSim1
+                        .WindowState = FormWindowState.Normal
+                        .StartPosition = FormStartPosition.CenterScreen
+                        .ShowDialog(Me)
+                    End With
+                End If
             End If
+
 
         Else
 
