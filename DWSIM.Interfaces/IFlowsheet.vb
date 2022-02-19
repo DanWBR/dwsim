@@ -204,6 +204,12 @@
 
     Property PythonPreprocessor() As Action(Of String)
 
+    Sub RequestSave()
+
+    Sub RequestSaveWithDirectory(directory As String)
+
+    Sub RequestSaveWithPath(filepath As String)
+
 End Interface
 
 ''' <summary>

@@ -1802,6 +1802,24 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
     End Function
 
+    Public Sub RequestSave() Implements IFlowsheet.RequestSave
+
+        Throw New NotImplementedException()
+
+    End Sub
+
+    Public Sub RequestSaveWithDirectory(directory As String) Implements IFlowsheet.RequestSaveWithDirectory
+
+        Throw New NotImplementedException()
+
+    End Sub
+
+    Public Sub RequestSaveWithPath(filepath As String) Implements IFlowsheet.RequestSaveWithPath
+
+        Throw New NotImplementedException()
+
+    End Sub
+
     Public Function GetProcessData() As List(Of XElement) Implements IFlowsheet.GetProcessData
 
         Dim dlist As New List(Of XElement)

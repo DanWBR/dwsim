@@ -3632,6 +3632,26 @@ Public Class FormFlowsheet
 
     End Sub
 
+    Public Sub RequestSave() Implements IFlowsheet.RequestSave
+
+        FormMain.SaveFile(True)
+
+    End Sub
+
+    Public Sub RequestSaveWithDirectory(directory As String) Implements IFlowsheet.RequestSaveWithDirectory
+
+        Options.FilePath = Path.Combine(directory, Options.SimulationName + ".dwxmz")
+        FormMain.SaveFile(True)
+
+    End Sub
+
+    Public Sub RequestSaveWithPath(filepath As String) Implements IFlowsheet.RequestSaveWithPath
+
+        Options.FilePath = filepath
+        FormMain.SaveFile(True)
+
+    End Sub
+
 #End Region
 
 End Class
