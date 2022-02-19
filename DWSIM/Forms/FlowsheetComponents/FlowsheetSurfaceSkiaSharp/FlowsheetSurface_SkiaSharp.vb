@@ -64,7 +64,7 @@ Public Class FlowsheetSurface_SkiaSharp
         ExtensionMethods.ChangeDefaultFont(Me)
 
         Me.ToolStrip1.AutoSize = False
-        Me.ToolStrip1.Size = New Size(ToolStrip1.Width, 28 * Settings.DpiScale)
+        Me.ToolStrip1.Size = New Size(ToolStrip1.Width + 40, 28 * Settings.DpiScale)
         Me.ToolStrip1.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
         For Each item In Me.ToolStrip1.Items
             If TryCast(item, ToolStripButton) IsNot Nothing Then
@@ -75,7 +75,7 @@ Public Class FlowsheetSurface_SkiaSharp
         Me.ToolStrip1.Invalidate()
 
         Me.ToolStripFlowsheet.AutoSize = False
-        Me.ToolStripFlowsheet.Size = New Size(ToolStripFlowsheet.Width, 28 * Settings.DpiScale)
+        Me.ToolStripFlowsheet.Size = New Size(ToolStripFlowsheet.Width + 30, 28 * Settings.DpiScale)
         Me.ToolStripFlowsheet.ImageScalingSize = New Size(20 * Settings.DpiScale, 20 * Settings.DpiScale)
         For Each item In Me.ToolStripFlowsheet.Items
             If TryCast(item, ToolStripButton) IsNot Nothing Then
