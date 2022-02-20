@@ -134,6 +134,7 @@ Public Class FormSimulSettings
             colAdd.TrueValue = True
             colAdd.IndeterminateValue = False
 
+            ogc1.Rows.Clear()
             For Each comp In Me.CurrentFlowsheet.Options.SelectedComponents.Values
                 ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.Tag, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.CurrentDB, comp.IsCOOLPROPSupported})
             Next
