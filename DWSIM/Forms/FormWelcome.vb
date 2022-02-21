@@ -132,7 +132,7 @@ Public Class FormWelcome
         Call My.Application.MainWindowForm.LoadFileDialog()
     End Sub
 
-    Private Sub lvlatest_ItemActivate(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvlatest.ItemActivate, lvsamples.ItemActivate
+    Public Sub lvlatest_ItemActivate(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvlatest.ItemActivate, lvsamples.ItemActivate
 
         Me.Parent.Visible = False
         My.Application.MainWindowForm.PainelDeBoasvindasToolStripMenuItem.Checked = False

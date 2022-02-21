@@ -117,13 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="FaTabStripItem1.Title" xml:space="preserve">
+    <value>Configure Curves</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>801, 352</value>
+  </data>
+  <data name="FaTabStripItem2.Title" xml:space="preserve">
+    <value>Graph</value>
+  </data>
+  <data name="GroupBox5.Text" xml:space="preserve">
+    <value>System Head</value>
+  </data>
   <data name="DataGridViewTextBoxColumn7.HeaderText" xml:space="preserve">
     <value>Flow Rate</value>
   </data>
   <data name="Label10.Text" xml:space="preserve">
     <value>System H.</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ch5.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 17</value>
   </data>
@@ -136,8 +148,8 @@
   <data name="Label5.Text" xml:space="preserve">
     <value>Flow Rate</value>
   </data>
-  <data name="GroupBox5.Text" xml:space="preserve">
-    <value>System Head</value>
+  <data name="GroupBox4.Text" xml:space="preserve">
+    <value>Required NPSH</value>
   </data>
   <data name="ch4.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 17</value>
@@ -154,8 +166,8 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Flow Rate</value>
   </data>
-  <data name="GroupBox4.Text" xml:space="preserve">
-    <value>Required NPSH</value>
+  <data name="GroupBox3.Text" xml:space="preserve">
+    <value>Efficiency</value>
   </data>
   <data name="ch3.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 17</value>
@@ -178,8 +190,8 @@
   <data name="Label4.Text" xml:space="preserve">
     <value>Flow Rate</value>
   </data>
-  <data name="GroupBox3.Text" xml:space="preserve">
-    <value>Efficiency</value>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Power</value>
   </data>
   <data name="ch2.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 17</value>
@@ -205,9 +217,6 @@
   <data name="Label7.Text" xml:space="preserve">
     <value>Power</value>
   </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Power</value>
-  </data>
   <data name="vap.HeaderText" xml:space="preserve">
     <value>Flow Rate</value>
   </data>
@@ -223,8 +232,11 @@
   <data name="Label3.Text" xml:space="preserve">
     <value>Flow Rate</value>
   </data>
-  <data name="FaTabStripItem1.Title" xml:space="preserve">
-    <value>Configure Curves</value>
+  <data name="GroupBox7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>801, 352</value>
+  </data>
+  <data name="GroupBox7.Text" xml:space="preserve">
+    <value>Graph</value>
   </data>
   <data name="Label18.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 13</value>
@@ -244,20 +256,12 @@
   <data name="Label16.Text" xml:space="preserve">
     <value>Flow Rate</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="chart1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>48, 22, 48, 22</value>
+  </data>
   <data name="chart1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>795, 307</value>
-  </data>
-  <data name="GroupBox7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>801, 357</value>
-  </data>
-  <data name="GroupBox7.Text" xml:space="preserve">
-    <value>Graph</value>
-  </data>
-  <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>801, 357</value>
-  </data>
-  <data name="FaTabStripItem2.Title" xml:space="preserve">
-    <value>Graph</value>
+    <value>795, 302</value>
   </data>
   <data name="ToolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 22</value>
@@ -277,9 +281,6 @@
   <data name="ToolStripLabel2.Text" xml:space="preserve">
     <value>Database:</value>
   </data>
-  <data name="TsTBDatabase.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
   <data name="TSBtnConnectDB.ToolTipText" xml:space="preserve">
     <value>Connect database</value>
   </data>
@@ -288,9 +289,6 @@
   </data>
   <data name="TSBtnNewDB.ToolTipText" xml:space="preserve">
     <value>Create new pump database</value>
-  </data>
-  <data name="TSTBStatus.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
   </data>
   <data name="TSTBStatus.Text" xml:space="preserve">
     <value>Saved</value>
@@ -325,7 +323,6 @@
   <data name="Label20.Text" xml:space="preserve">
     <value>Impeller diameter</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>

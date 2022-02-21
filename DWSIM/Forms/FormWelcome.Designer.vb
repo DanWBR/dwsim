@@ -643,7 +643,6 @@ Partial Class FormWelcome
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents lvlatest As System.Windows.Forms.ListView
     Friend WithEvents lvlatestfolders As System.Windows.Forms.ListView
     Friend WithEvents ImageList1 As System.Windows.Forms.ImageList
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
@@ -651,7 +650,6 @@ Partial Class FormWelcome
     Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
-    Friend WithEvents lvsamples As System.Windows.Forms.ListView
     Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
     Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage5 As TabPage
@@ -701,4 +699,6 @@ Partial Class FormWelcome
     Friend WithEvents Label9 As Label
     Friend WithEvents Label14 As Label
     Friend WithEvents PictureBox4 As PictureBox
+    Public WithEvents lvlatest As ListView
+    Public WithEvents lvsamples As ListView
 End Class
