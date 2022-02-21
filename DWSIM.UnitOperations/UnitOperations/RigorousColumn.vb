@@ -970,10 +970,10 @@ Namespace UnitOperations
 
                     Case 0
                         'PROP_DC_0	Condenser Pressure
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.CondenserPressure)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.Stages.First.P)
                     Case 1
                         'PROP_DC_1	Reboiler Pressure
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.ReboilerPressure)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.Stages.Last.P)
                     Case 2
                         'PROP_DC_2	Condenser Pressure Drop
                         value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.CondenserDeltaP)
@@ -1126,10 +1126,10 @@ Namespace UnitOperations
                 Select Case propidx
                     Case 0
                         'PROP_DC_0	Condenser Pressure
-                        CondenserPressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
+                        Stages.First.P = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
                     Case 1
                         'PROP_DC_1	Reboiler Pressure
-                        ReboilerPressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
+                        Stages.Last.P = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
                     Case 2
                         'PROP_DC_2	Condenser Pressure Drop
                         CondenserDeltaP = SystemsOfUnits.Converter.ConvertToSI(su.deltaP, propval)
