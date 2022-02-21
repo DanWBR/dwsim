@@ -562,11 +562,11 @@ namespace DWSIM.UI.Desktop.Editors
                     {
                         if (cprops.NBP.GetValueOrDefault() < 1080)
                         {
-                            cprops.PF_MM = Math.Pow((1 / 0.01964 * (6.97996 - Math.Log(1080 - cprops.NBP.GetValueOrDefault()))), (3 / 2));
+                            cprops.PF_MM = Math.Pow((1.0 / 0.01964 * (6.97996 - Math.Log(1080.0 - cprops.NBP.GetValueOrDefault()))), 1.5);
                         }
                         else
                         {
-                            cprops.PF_MM = Math.Pow((1 / 0.01964 * (6.97996 + Math.Log(-1080 + cprops.NBP.GetValueOrDefault()))), (3 / 2));
+                            cprops.PF_MM = Math.Pow((1.0 / 0.01964 * (6.97996 + Math.Log(-1080.0 + cprops.NBP.GetValueOrDefault()))), 1.5);
                         }
                     }
                     cprops.PF_SG = PropertyMethods.d15_Riazi(cprops.PF_MM.GetValueOrDefault());
@@ -733,7 +733,7 @@ namespace DWSIM.UI.Desktop.Editors
                 cprops.Normal_Boiling_Point = cprops.NBP.GetValueOrDefault();
 
                 cprops.IsPF = 1;
-                cprops.PF_Watson_K = Math.Pow((1.8 * cprops.NBP.GetValueOrDefault()), (1 / 3)) / cprops.PF_SG.GetValueOrDefault();
+                cprops.PF_Watson_K = Math.Pow((1.8 * cprops.NBP.GetValueOrDefault()), 0.33333) / cprops.PF_SG.GetValueOrDefault();
 
                 var tmp = (double[])methods2.calculate_Hf_Sf(cprops.PF_SG.GetValueOrDefault(), cprops.Molar_Weight, cprops.NBP.GetValueOrDefault());
 
