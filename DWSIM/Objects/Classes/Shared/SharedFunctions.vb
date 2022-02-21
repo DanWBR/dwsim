@@ -274,14 +274,18 @@ Namespace DWSIM
 
         Public Shared Function GetPropertyName(PropID As String, locale As String) As String
 
-            If My.Application._ResourceManager Is Nothing Then
+            If locale = "" Then
 
-                'loads the current language
-                My.Application._CultureInfo = New Globalization.CultureInfo(My.Settings.CultureInfo)
-                My.Application.ChangeUICulture(My.Settings.CultureInfo)
+                If My.Application._ResourceManager Is Nothing Then
 
-                'loads the resource manager
-                My.Application._ResourceManager = New System.Resources.ResourceManager("DWSIM.DWSIM", System.Reflection.Assembly.GetExecutingAssembly())
+                    'loads the current language
+                    My.Application._CultureInfo = New Globalization.CultureInfo(My.Settings.CultureInfo)
+                    My.Application.ChangeUICulture(My.Settings.CultureInfo)
+
+                    'loads the resource manager
+                    My.Application._ResourceManager = New System.Resources.ResourceManager("DWSIM.DWSIM", System.Reflection.Assembly.GetExecutingAssembly())
+
+                End If
 
             End If
 
