@@ -122,7 +122,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAD0
-        DwAAAk1TRnQBSQFMAgEBBQEAAegBBQHoAQUBEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        DwAAAk1TRnQBSQFMAgEBBQEAARABBgEQAQYBEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABIAMAAQEBAAEQBgABEP8AFQABeQF3ARMBcwFJAW4BJwFuAScBbgEnAW4BJwFuAScBbgEnAW4BJwFu
         AScBbgEnAW4BSAFuATUBc2QAAWoBbgG7AXsBdQF7AXMBewFyAXsBcQF7AVABewFPAXsBTwF7AU4BewFN
         AXsBLQF7AbgBfwFoAW5kAAFoAW4B/QF/AbQBfwGSAX8BkAF7AW4BewFsAXsBSgF7AUgBewFHAXsBJQF7
@@ -259,13 +259,13 @@
     <value>Welcome to DWSIM!</value>
   </data>
   <data name="PictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>676, 0</value>
+    <value>708, 0</value>
   </data>
   <data name="PictureBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 118</value>
+    <value>112, 94</value>
   </data>
   <data name="LinkLabel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 76</value>
+    <value>203, 65</value>
   </data>
   <data name="LinkLabel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>94, 16</value>
@@ -274,7 +274,7 @@
     <value>Load Existing</value>
   </data>
   <data name="LinkLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 76</value>
+    <value>13, 65</value>
   </data>
   <data name="LinkLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>170, 16</value>
@@ -282,8 +282,11 @@
   <data name="LinkLabel1.Text" xml:space="preserve">
     <value>Create New (with Wizard)</value>
   </data>
+  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 38</value>
+  </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>637, 39</value>
+    <value>389, 16</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Create or load chemical steady-state or dynamic process models.</value>
@@ -295,13 +298,13 @@
     <value>Process Modeling</value>
   </data>
   <data name="Panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 298</value>
+    <value>23, 50</value>
   </data>
   <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>820, 118</value>
+    <value>820, 94</value>
   </data>
   <data name="LinkLabel5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>271, 95</value>
+    <value>271, 67</value>
   </data>
   <data name="LinkLabel5.Size" type="System.Drawing.Size, System.Drawing">
     <value>134, 16</value>
@@ -309,20 +312,17 @@
   <data name="LinkLabel5.Text" xml:space="preserve">
     <value>Load Existing Study</value>
   </data>
-  <data name="PictureBox7.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Zoom</value>
-  </data>
-  <data name="PictureBox7.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Right</value>
-  </data>
   <data name="PictureBox7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="PictureBox7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>708, 0</value>
+  </data>
   <data name="PictureBox7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 131</value>
+    <value>112, 100</value>
   </data>
   <data name="LinkLabel6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 95</value>
+    <value>13, 67</value>
   </data>
   <data name="LinkLabel6.Size" type="System.Drawing.Size, System.Drawing">
     <value>229, 16</value>
@@ -331,7 +331,7 @@
     <value>Create New Data Regression Study</value>
   </data>
   <data name="LinkLabel11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>196, 62</value>
+    <value>271, 41</value>
   </data>
   <data name="LinkLabel11.Size" type="System.Drawing.Size, System.Drawing">
     <value>170, 16</value>
@@ -339,17 +339,8 @@
   <data name="LinkLabel11.Text" xml:space="preserve">
     <value>Create New (with Wizard)</value>
   </data>
-  <data name="LinkLabel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>392, 62</value>
-  </data>
-  <data name="LinkLabel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 16</value>
-  </data>
-  <data name="LinkLabel3.Text" xml:space="preserve">
-    <value>Load Existing</value>
-  </data>
   <data name="LinkLabel4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 62</value>
+    <value>13, 41</value>
   </data>
   <data name="LinkLabel4.Size" type="System.Drawing.Size, System.Drawing">
     <value>155, 16</value>
@@ -363,20 +354,14 @@
   <data name="Label7.Text" xml:space="preserve">
     <value>User Compound Creation / Data Regression</value>
   </data>
-  <data name="PictureBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>558, 11</value>
-  </data>
-  <data name="PictureBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 106</value>
-  </data>
   <data name="Panel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 422</value>
+    <value>23, 391</value>
   </data>
   <data name="Panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>820, 131</value>
+    <value>820, 100</value>
   </data>
   <data name="LinkLabel7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 82</value>
+    <value>13, 82</value>
   </data>
   <data name="LinkLabel7.Size" type="System.Drawing.Size, System.Drawing">
     <value>115, 24</value>
@@ -388,14 +373,20 @@
   <data name="LinkLabel7.Text" xml:space="preserve">
     <value>Get a Free Trial</value>
   </data>
+  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 37</value>
+  </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>637, 40</value>
+    <value>689, 40</value>
   </data>
   <data name="Label6.TabIndex" type="System.Int32, mscorlib">
     <value>99</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
     <value>Find out how the commercial sibling of the open-source process simulator DWSIM opens up new opportunities for you and your projects.</value>
+  </data>
+  <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 9</value>
   </data>
   <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>167, 19</value>
@@ -404,22 +395,22 @@
     <value>Discover DWSIM Pro</value>
   </data>
   <data name="PictureBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>676, 0</value>
+    <value>708, 0</value>
   </data>
   <data name="PictureBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 118</value>
+    <value>112, 118</value>
   </data>
   <data name="Panel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 50</value>
+    <value>23, 150</value>
   </data>
   <data name="Panel3.Size" type="System.Drawing.Size, System.Drawing">
     <value>820, 118</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>637, 40</value>
+    <value>374, 16</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
-    <value>Become a Patron to support open-source DWSIM development and win some goodies like T-Shirts and Mugs!</value>
+    <value>Become a Patron to support open-source DWSIM development!</value>
   </data>
   <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 19</value>
@@ -428,7 +419,7 @@
     <value>Become a Patron</value>
   </data>
   <data name="LinkLabel9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 81</value>
+    <value>14, 63</value>
   </data>
   <data name="LinkLabel9.Size" type="System.Drawing.Size, System.Drawing">
     <value>285, 24</value>
@@ -440,16 +431,16 @@
     <value>NoControl</value>
   </data>
   <data name="PictureBox6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>676, 0</value>
+    <value>708, 0</value>
   </data>
   <data name="PictureBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 118</value>
+    <value>112, 96</value>
   </data>
   <data name="Panel4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 559</value>
+    <value>23, 617</value>
   </data>
   <data name="Panel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>820, 118</value>
+    <value>820, 96</value>
   </data>
   <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
     <value>845, 15</value>
@@ -463,17 +454,11 @@
   <data name="LinkLabel13.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
-  <data name="LinkLabel13.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="LinkLabel13.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 9.75pt, style=Bold</value>
-  </data>
   <data name="LinkLabel13.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="LinkLabel13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>428, 89</value>
+    <value>416, 53</value>
   </data>
   <data name="LinkLabel13.Size" type="System.Drawing.Size, System.Drawing">
     <value>130, 16</value>
@@ -484,17 +469,11 @@
   <data name="LinkLabel12.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
-  <data name="LinkLabel12.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="LinkLabel12.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 9.75pt, style=Bold</value>
-  </data>
   <data name="LinkLabel12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="LinkLabel12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>283, 89</value>
+    <value>271, 53</value>
   </data>
   <data name="LinkLabel12.Size" type="System.Drawing.Size, System.Drawing">
     <value>122, 16</value>
@@ -506,7 +485,7 @@
     <value>Bottom, Left</value>
   </data>
   <data name="LinkLabel10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>128, 89</value>
+    <value>116, 53</value>
   </data>
   <data name="LinkLabel10.Size" type="System.Drawing.Size, System.Drawing">
     <value>134, 16</value>
@@ -518,7 +497,7 @@
     <value>Bottom, Left</value>
   </data>
   <data name="LinkLabel8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>26, 89</value>
+    <value>14, 53</value>
   </data>
   <data name="LinkLabel8.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 16</value>
@@ -533,16 +512,16 @@
     <value>Documentation</value>
   </data>
   <data name="PictureBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>676, 0</value>
+    <value>708, 0</value>
   </data>
   <data name="PictureBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 121</value>
+    <value>112, 85</value>
   </data>
   <data name="Panel5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 684</value>
+    <value>23, 720</value>
   </data>
   <data name="Panel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>820, 121</value>
+    <value>820, 85</value>
   </data>
   <data name="Panel6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -550,11 +529,11 @@
   <data name="LinkLabel14.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="LinkLabel14.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 9.75pt, style=Bold</value>
-  </data>
   <data name="LinkLabel14.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="LinkLabel14.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 77</value>
   </data>
   <data name="LinkLabel14.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 24</value>
@@ -563,10 +542,10 @@
     <value>Get Started</value>
   </data>
   <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 37</value>
+    <value>13, 34</value>
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>619, 40</value>
+    <value>689, 40</value>
   </data>
   <data name="Label9.TabIndex" type="System.Int32, mscorlib">
     <value>99</value>
@@ -578,14 +557,8 @@
   <data name="Label14.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left</value>
   </data>
-  <data name="Label14.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label14.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 12pt, style=Bold</value>
-  </data>
   <data name="Label14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 12</value>
+    <value>13, 10</value>
   </data>
   <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
     <value>333, 19</value>
@@ -599,22 +572,94 @@
   <data name="PictureBox4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Right</value>
   </data>
-  <data name="PictureBox4.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Zoom</value>
-  </data>
   <data name="PictureBox4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>None</value>
   </data>
   <data name="PictureBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>659, 6</value>
+    <value>708, 6</value>
   </data>
   <data name="PictureBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>154, 106</value>
+    <value>105, 98</value>
   </data>
   <data name="PictureBox4.TabIndex" type="System.Int32, mscorlib">
     <value>96</value>
   </data>
+  <data name="Panel6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 275</value>
+  </data>
   <data name="Panel6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>820, 118</value>
+    <value>820, 110</value>
+  </data>
+  <data name="Panel7.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="Label16.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="Label16.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="Label16.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 9.75pt</value>
+  </data>
+  <data name="Label16.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Label16.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 36</value>
+  </data>
+  <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
+    <value>657, 38</value>
+  </data>
+  <data name="Label16.Text" xml:space="preserve">
+    <value>Learn more on how to help with the development of e-accessibility technologies around DWSIM while also helping people in need.</value>
+  </data>
+  <data name="Label17.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label17.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 12pt, style=Bold</value>
+  </data>
+  <data name="Label17.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Label17.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 11</value>
+  </data>
+  <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
+    <value>298, 19</value>
+  </data>
+  <data name="Label17.Text" xml:space="preserve">
+    <value>DWSIM Social Responsibility Program</value>
+  </data>
+  <data name="LinkLabel15.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LinkLabel15.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LinkLabel15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 24</value>
+  </data>
+  <data name="LinkLabel15.Text" xml:space="preserve">
+    <value>Learn More</value>
+  </data>
+  <data name="PictureBox8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="PictureBox8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>708, 0</value>
+  </data>
+  <data name="PictureBox8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 112</value>
+  </data>
+  <data name="PictureBox8.TabIndex" type="System.Int32, mscorlib">
+    <value>100</value>
+  </data>
+  <data name="Panel7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 498</value>
+  </data>
+  <data name="Panel7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>820, 112</value>
   </data>
 </root>
