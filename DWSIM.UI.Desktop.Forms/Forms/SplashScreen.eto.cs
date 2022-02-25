@@ -105,6 +105,7 @@ namespace DWSIM.UI.Forms
             lblpatrons.TextColor = new Color(0.051f, 0.447f, 0.651f);
             lblpatrons.Width = (int)(sf * 650);
             lblpatrons.Height = (int)(sf * 227);
+            lblpatrons.Font = SystemFonts.Label(10.0f);
 
             layout.Add(lblpatrons, (int)(sf * (318 - dx)), (int)(sf * (190 - dy)));
 
