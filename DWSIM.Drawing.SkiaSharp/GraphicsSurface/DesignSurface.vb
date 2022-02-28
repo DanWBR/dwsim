@@ -1418,6 +1418,26 @@ Public Class GraphicsSurface
 
     End Function
 
+    Public Function FindObjectsAtBounds(x As Double, y As Double, w As Double, h As Double) As List(Of GraphicObject)
+
+        Dim objlist As New List(Of GraphicObject)
+
+        Dim drawObj As GraphicObject
+        Dim i As Integer
+        If Me.DrawingObjects.Count > 0 Then
+            For i = Me.DrawingObjects.Count - 1 To 0 Step -1
+                drawObj = CType(Me.DrawingObjects(i), GraphicObject)
+                If Not drawObj.IsConnector AndAlso drawObj.HitTest(New SKPoint(x / Zoom, y / Zoom)) Then objlist.Add(drawObj)
+                If Not drawObj.IsConnector AndAlso drawObj.HitTest(New SKPoint((x + w) / Zoom, y / Zoom)) Then objlist.Add(drawObj)
+                If Not drawObj.IsConnector AndAlso drawObj.HitTest(New SKPoint(x / Zoom, (y + h) / Zoom)) Then objlist.Add(drawObj)
+                If Not drawObj.IsConnector AndAlso drawObj.HitTest(New SKPoint((x + w) / Zoom, (y + h) / Zoom)) Then objlist.Add(drawObj)
+            Next
+        End If
+
+        Return objlist
+
+    End Function
+
     Protected Function ZoomRectangle(ByVal originalRect As SKRect) As SKRect
         Dim myNewRect As New SKRect(originalRect.Left * Me.Zoom, originalRect.Top * Me.Zoom, (originalRect.Left + originalRect.Right) * Me.Zoom, (originalRect.Top + originalRect.Bottom) * Me.Zoom)
         Return myNewRect

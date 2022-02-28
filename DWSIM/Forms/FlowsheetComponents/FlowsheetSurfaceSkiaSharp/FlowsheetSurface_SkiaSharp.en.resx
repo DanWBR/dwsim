@@ -136,6 +136,9 @@
   <data name="btnRight.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 251</value>
   </data>
+  <data name="PanelFlowsheetControl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1029, 257</value>
+  </data>
   <data name="TableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>1089, 317</value>
   </data>
@@ -317,6 +320,24 @@
   <data name="tsbColorTheme.Items1" xml:space="preserve">
     <value>Black-and-White</value>
   </data>
+  <data name="ToolStripLabel4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 22</value>
+  </data>
+  <data name="ToolStripLabel4.Text" xml:space="preserve">
+    <value>Add Objects with Streams</value>
+  </data>
+  <data name="tscbAddObjectsWithStreams.AutoCompleteCustomSource" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="tscbAddObjectsWithStreams.AutoCompleteCustomSource1" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="tscbAddObjectsWithStreams.AutoCompleteCustomSource2" xml:space="preserve">
+    <value>Automatic</value>
+  </data>
+  <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>843, 25</value>
+  </data>
   <data name="ToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
     <value>243, 22</value>
   </data>
@@ -376,6 +397,12 @@
   </data>
   <data name="RestaurarLayoutToolStripMenuItem.Text" xml:space="preserve">
     <value>Restore Previous Layout</value>
+  </data>
+  <data name="tssepPro2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>240, 6</value>
+  </data>
+  <data name="FindTearStreamsAutomaticallyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 22</value>
   </data>
   <data name="FindTearStreamsAutomaticallyToolStripMenuItem.Text" xml:space="preserve">
     <value>Automatically Find Tear Streams</value>
@@ -604,6 +631,12 @@
   </data>
   <data name="MergeStreamsToolStripMenuItem.Text" xml:space="preserve">
     <value>Merge Streams</value>
+  </data>
+  <data name="tssepPro.Size" type="System.Drawing.Size, System.Drawing">
+    <value>256, 6</value>
+  </data>
+  <data name="UpgradeDistillationColumnToProToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>259, 22</value>
   </data>
   <data name="UpgradeDistillationColumnToProToolStripMenuItem.Text" xml:space="preserve">
     <value>Upgrade Distillation Column to Pro</value>

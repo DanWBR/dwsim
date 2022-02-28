@@ -121,4 +121,6 @@
 
     Property DisplayMaterialStreamEnergyFlowValue As Boolean
 
+    Property AddObjectsWithStreams As Integer
+
 End Interface

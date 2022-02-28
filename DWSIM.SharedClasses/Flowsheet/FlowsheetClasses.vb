@@ -263,6 +263,8 @@ Namespace DWSIM.Flowsheet
 
         Public Property DisplayMaterialStreamEnergyFlowValue As Boolean = False Implements IFlowsheetOptions.DisplayMaterialStreamEnergyFlowValue
 
+        Public Property AddObjectsWithStreams As Integer = 2 Implements IFlowsheetOptions.AddObjectsWithStreams
+
     End Class
 
 End Namespace
