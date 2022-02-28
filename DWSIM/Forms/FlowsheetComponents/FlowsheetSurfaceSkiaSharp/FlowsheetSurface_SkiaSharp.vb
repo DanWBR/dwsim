@@ -104,7 +104,7 @@ Public Class FlowsheetSurface_SkiaSharp
             DirectCast(FControl, FlowsheetSurfaceGLControl).FlowsheetObject = Flowsheet
         End If
 
-        TableLayoutPanel1.Controls.Add(FControl, 1, 1)
+        PanelFlowsheetControl.Controls.Add(FControl)
 
         SimObjPanel = New SimulationObjectsPanel() With {.Dock = DockStyle.Fill, .Flowsheet = Flowsheet}
 
