@@ -572,20 +572,31 @@ Public Class Utility
             End Try
         End If
 
-        ppath = Path.Combine(Path.GetDirectoryName(Assembly.GetAssembly(New SystemsOfUnits.SI().GetType()).Location), "extenders")
-        If Directory.Exists(ppath) Then
-            Try
-                Dim otherpps As String() = Directory.GetFiles(ppath, "*.dll", SearchOption.TopDirectoryOnly)
-                For Each fpath In otherpps
-                    Dim pplist As List(Of Interfaces.IPropertyPackage) = GetPropertyPackages(Assembly.LoadFile(fpath))
-                    For Each pp In pplist
-                        ppacks.Add(pp)
+        Dim directories = New List(Of String)
+
+        Dim d1 = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "extenders")
+        Dim d2 = Path.Combine(Directory.GetParent(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)).FullName, "extenders")
+        Dim d3 = Path.Combine(Directory.GetCurrentDirectory(), "extenders")
+
+        directories.Add(d1)
+        If Not directories.Contains(d2) Then directories.Add(d2)
+        If Not directories.Contains(d3) Then directories.Add(d3)
+
+        For Each ppath In directories
+            If Directory.Exists(ppath) Then
+                Try
+                    Dim otherpps As String() = Directory.GetFiles(ppath, "*.dll", SearchOption.TopDirectoryOnly)
+                    For Each fpath In otherpps
+                        Dim pplist As List(Of Interfaces.IPropertyPackage) = GetPropertyPackages(Assembly.LoadFile(fpath))
+                        For Each pp In pplist
+                            ppacks.Add(pp)
+                        Next
                     Next
-                Next
-            Catch ex As Exception
-                Logging.Logger.LogError("Loading Additional Property Packages (Extenders)", ex)
-            End Try
-        End If
+                Catch ex As Exception
+                    Logging.Logger.LogError("Loading Additional Property Packages (Extenders)", ex)
+                End Try
+            End If
+        Next
 
         Return ppacks
 
