@@ -223,6 +223,10 @@ Namespace GraphicObjects
             Return pt.X >= X And pt.Y >= Y And pt.X <= X + Width And pt.Y <= Y + Height
         End Function
 
+        Public Overridable Function IsInRect(ByVal rect As SKRect) As Boolean
+            Return rect.Contains(New SKRect(X, Y, X + Width, Y + Height))
+        End Function
+
 #Region "Constructors"
         Public Sub New()
         End Sub
