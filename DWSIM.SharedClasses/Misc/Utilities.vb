@@ -548,7 +548,7 @@ Public Class Utility
 
         Dim ppacks As New List(Of IPropertyPackage)
 
-        Dim thermoceos As String = Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location) + Path.DirectorySeparatorChar + "DWSIM.Thermodynamics.ThermoC.dll"
+        Dim thermoceos As String = Path.GetDirectoryName(Assembly.GetAssembly(New SystemsOfUnits.SI().GetType()).Location) + Path.DirectorySeparatorChar + "DWSIM.Thermodynamics.ThermoC.dll"
         If File.Exists(thermoceos) Then
             Dim tca = Assembly.LoadFile(thermoceos)
             Dim pplist As List(Of Interfaces.IPropertyPackage) = GetPropertyPackages(tca)
@@ -557,7 +557,7 @@ Public Class Utility
             Next
         End If
 
-        Dim ppath As String = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location), "ppacks")
+        Dim ppath As String = Path.Combine(Path.GetDirectoryName(Assembly.GetAssembly(New SystemsOfUnits.SI().GetType()).Location), "ppacks")
         If Directory.Exists(ppath) Then
             Try
                 Dim otherpps As String() = Directory.GetFiles(ppath, "*.dll", SearchOption.TopDirectoryOnly)
@@ -572,7 +572,7 @@ Public Class Utility
             End Try
         End If
 
-        ppath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location), "extenders")
+        ppath = Path.Combine(Path.GetDirectoryName(Assembly.GetAssembly(New SystemsOfUnits.SI().GetType()).Location), "extenders")
         If Directory.Exists(ppath) Then
             Try
                 Dim otherpps As String() = Directory.GetFiles(ppath, "*.dll", SearchOption.TopDirectoryOnly)
