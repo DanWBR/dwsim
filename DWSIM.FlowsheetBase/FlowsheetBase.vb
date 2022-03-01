@@ -2083,6 +2083,8 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
     Public Sub Initialize() Implements IFlowsheet.Initialize
 
+        AddHandler AppDomain.CurrentDomain.AssemblyResolve, New ResolveEventHandler(AddressOf LoadFromExtensionsFolder)
+
         FileDatabaseProvider.CreateDatabase()
 
         FlowsheetSurface.DrawPropertyList = Options.DisplayCornerPropertyList
@@ -2951,6 +2953,25 @@ Label_00CC:
     End Sub
 
     Public Property PythonPreprocessor() As Action(Of String) Implements IFlowsheet.PythonPreprocessor
+
+    Private Shared Function LoadFromExtensionsFolder(ByVal sender As Object, ByVal args As ResolveEventArgs) As Assembly
+
+        Dim assemblyPath1 As String = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location), New AssemblyName(args.Name).Name + ".dll")
+        Dim assemblyPath2 As String = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location), "extenders", New AssemblyName(args.Name).Name + ".dll")
+
+        If Not File.Exists(assemblyPath1) Then
+            If Not File.Exists(assemblyPath2) Then
+                Return Nothing
+            Else
+                Dim assembly As Assembly = Assembly.LoadFrom(assemblyPath2)
+                Return assembly
+            End If
+        Else
+            Dim assembly As Assembly = Assembly.LoadFrom(assemblyPath1)
+            Return assembly
+        End If
+
+    End Function
 
 End Class
 

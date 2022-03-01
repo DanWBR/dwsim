@@ -2490,12 +2490,12 @@ Public Class FlowsheetSurface_SkiaSharp
 
         Dim gobj = obj.GraphicObject
 
-        Dim mstrs = FlowsheetSurface.FindObjectsAtBounds(x - 100, y - 100, x + w + 100, y + h + 100).Where(Function(o) o.ObjectType = ObjectType.MaterialStream).ToList()
-        Dim mstrsI = FlowsheetSurface.FindObjectsAtBounds(x - 100, y - 100, x + w + 100, y + h + 100).Where(Function(o) o.ObjectType = ObjectType.MaterialStream And Not o.OutputConnectors(0).IsAttached).ToList()
-        Dim mstrsO = FlowsheetSurface.FindObjectsAtBounds(x - 100, y - 100, x + w + 100, y + h + 100).Where(Function(o) o.ObjectType = ObjectType.MaterialStream And Not o.InputConnectors(0).IsAttached).ToList()
-        Dim estrs = FlowsheetSurface.FindObjectsAtBounds(x - 100, y - 100, x + w + 100, y + h + 100).Where(Function(o) o.ObjectType = ObjectType.EnergyStream).ToList()
-        Dim estrsI = FlowsheetSurface.FindObjectsAtBounds(x - 100, y - 100, x + w + 100, y + h + 100).Where(Function(o) o.ObjectType = ObjectType.EnergyStream And Not o.OutputConnectors(0).IsAttached).ToList()
-        Dim estrsO = FlowsheetSurface.FindObjectsAtBounds(x - 100, y - 100, x + w + 100, y + h + 100).Where(Function(o) o.ObjectType = ObjectType.EnergyStream And Not o.InputConnectors(0).IsAttached).ToList()
+        Dim mstrs = FlowsheetSurface.FindObjectsAtBounds(x - 250, y - 250, x + w + 250, y + h + 250).Where(Function(o) o.ObjectType = ObjectType.MaterialStream).ToList()
+        Dim mstrsI = FlowsheetSurface.FindObjectsAtBounds(x - 250, y - 250, x + w + 250, y + h + 250).Where(Function(o) o.ObjectType = ObjectType.MaterialStream And Not o.OutputConnectors(0).IsAttached).ToList()
+        Dim mstrsO = FlowsheetSurface.FindObjectsAtBounds(x - 250, y - 250, x + w + 250, y + h + 250).Where(Function(o) o.ObjectType = ObjectType.MaterialStream And Not o.InputConnectors(0).IsAttached).ToList()
+        Dim estrs = FlowsheetSurface.FindObjectsAtBounds(x - 250, y - 250, x + w + 250, y + h + 250).Where(Function(o) o.ObjectType = ObjectType.EnergyStream).ToList()
+        Dim estrsI = FlowsheetSurface.FindObjectsAtBounds(x - 250, y - 250, x + w + 250, y + h + 250).Where(Function(o) o.ObjectType = ObjectType.EnergyStream And Not o.OutputConnectors(0).IsAttached).ToList()
+        Dim estrsO = FlowsheetSurface.FindObjectsAtBounds(x - 250, y - 250, x + w + 250, y + h + 250).Where(Function(o) o.ObjectType = ObjectType.EnergyStream And Not o.InputConnectors(0).IsAttached).ToList()
 
         Select Case obj.GraphicObject.ObjectType
             Case ObjectType.AbsorptionColumn
