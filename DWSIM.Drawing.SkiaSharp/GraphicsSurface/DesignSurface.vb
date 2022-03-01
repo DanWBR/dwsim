@@ -1427,10 +1427,9 @@ Public Class GraphicsSurface
         If Me.DrawingObjects.Count > 0 Then
             For i = Me.DrawingObjects.Count - 1 To 0 Step -1
                 drawObj = CType(Me.DrawingObjects(i), GraphicObject)
-                If Not drawObj.IsConnector AndAlso drawObj.HitTest(New SKPoint(x, y)) Then objlist.Add(drawObj)
-                If Not drawObj.IsConnector AndAlso drawObj.HitTest(New SKPoint((x + w), y)) Then objlist.Add(drawObj)
-                If Not drawObj.IsConnector AndAlso drawObj.HitTest(New SKPoint(x, (y + h))) Then objlist.Add(drawObj)
-                If Not drawObj.IsConnector AndAlso drawObj.HitTest(New SKPoint((x + w), (y + h))) Then objlist.Add(drawObj)
+                If Not drawObj.IsConnector AndAlso drawObj.IsInRect(New SKRect(x, y, x + w, y + h)) Then
+                    objlist.Add(drawObj)
+                End If
             Next
         End If
 

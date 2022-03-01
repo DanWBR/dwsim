@@ -905,13 +905,16 @@ Namespace Databases
         Public Shared Function LoadAdditionalCompounds() As List(Of ICompoundConstantProperties)
 
             Dim comps As New List(Of ICompoundConstantProperties)
-            Dim cfiles = Directory.GetFiles(Path.Combine(Path.GetDirectoryName(Assembly.GetCallingAssembly().Location), "addcomps"))
-            For Each cpath In cfiles
-                Dim comp = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BaseClasses.ConstantProperties)(File.ReadAllText(cpath))
-                comp.CurrentDB = "User"
-                comp.OriginalDB = "User"
-                comps.Add(comp)
-            Next
+            Try
+                Dim cfiles = Directory.GetFiles(Path.Combine(Path.GetDirectoryName(Assembly.GetCallingAssembly().Location), "addcomps"))
+                For Each cpath In cfiles
+                    Dim comp = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BaseClasses.ConstantProperties)(File.ReadAllText(cpath))
+                    comp.CurrentDB = "User"
+                    comp.OriginalDB = "User"
+                    comps.Add(comp)
+                Next
+            Catch ex As Exception
+            End Try
             Return comps
 
         End Function
