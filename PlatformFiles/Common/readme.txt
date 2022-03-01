@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 7.3.2
+Version 7.3.3
 Copyright (c) 2017-2022 Daniel Medeiros and contributors
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -61,6 +61,15 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog including souce code changes can be viewed at https://github.com/DanWBR/dwsim/commits/windows
+
+Version 7.3.3
+
+- Fixed issue with Distillation Curves characterization (Cross-Platform UI)
+- Set Rigorous Distillation Column pressure profile with top pressure and overall pressure drop
+- Fixed issue with setting of compound flows in material streams
+- Updated flowsheet object numbering
+- Fixed Heat Exchanger calc outlet temperature mode
+- Fixed Pipe Segment not being added in Cross-Platform UI
 
 Version 7.3.2
 

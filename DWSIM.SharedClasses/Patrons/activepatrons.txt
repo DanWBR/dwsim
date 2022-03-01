@@ -15,6 +15,7 @@ Carlos G. C. Reetz
 Casey Houston
 Christian Hornhofer
 Christian Jordan
+Christian Pedersen
 Csaba Darok
 David Miller
 David Whitlock

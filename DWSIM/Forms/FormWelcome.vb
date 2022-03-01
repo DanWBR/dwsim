@@ -433,7 +433,7 @@ Public Class FormWelcome
         NewMDIChild.MdiParent = Me.Owner
     End Sub
 
-    Private Sub LinkLabel3_LinkClicked_1(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel3.LinkClicked
+    Private Sub LinkLabel3_LinkClicked_1(sender As Object, e As LinkLabelLinkClickedEventArgs)
         Application.DoEvents()
         Application.DoEvents()
         Me.Parent.Visible = False
@@ -501,5 +501,9 @@ Public Class FormWelcome
 
     Private Sub LinkLabel14_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel14.LinkClicked
         Process.Start("https://dwsim.inforside.com.br/new/index.php/dwsim-pro/")
+    End Sub
+
+    Private Sub LinkLabel15_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel15.LinkClicked
+        Process.Start("https://dwsim.inforside.com.br/new/index.php/dwsim-social-responsibility-program/")
     End Sub
 End Class

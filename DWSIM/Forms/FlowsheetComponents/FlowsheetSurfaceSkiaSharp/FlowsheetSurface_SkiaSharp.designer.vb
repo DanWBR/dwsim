@@ -31,6 +31,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.btnUp = New System.Windows.Forms.Button()
         Me.btnDown = New System.Windows.Forms.Button()
         Me.btnRight = New System.Windows.Forms.Button()
+        Me.PanelFlowsheetControl = New System.Windows.Forms.Panel()
         Me.ToolStripFlowsheet = New System.Windows.Forms.ToolStrip()
         Me.tsbControlPanelMode = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator17 = New System.Windows.Forms.ToolStripSeparator()
@@ -82,6 +83,9 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.ToolStripSeparator20 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripLabel3 = New System.Windows.Forms.ToolStripLabel()
         Me.tsbColorTheme = New System.Windows.Forms.ToolStripComboBox()
+        Me.ToolStripSeparator21 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripLabel4 = New System.Windows.Forms.ToolStripLabel()
+        Me.tscbAddObjectsWithStreams = New System.Windows.Forms.ToolStripComboBox()
         Me.CMS_NoSel = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
@@ -237,6 +241,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.TableLayoutPanel1.Controls.Add(Me.btnUp, 1, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.btnDown, 1, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.btnRight, 2, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.PanelFlowsheetControl, 1, 1)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         '
         'btnLeft
@@ -262,6 +267,11 @@ Partial Class FlowsheetSurface_SkiaSharp
         resources.ApplyResources(Me.btnRight, "btnRight")
         Me.btnRight.Name = "btnRight"
         Me.btnRight.UseVisualStyleBackColor = True
+        '
+        'PanelFlowsheetControl
+        '
+        resources.ApplyResources(Me.PanelFlowsheetControl, "PanelFlowsheetControl")
+        Me.PanelFlowsheetControl.Name = "PanelFlowsheetControl"
         '
         'ToolStripFlowsheet
         '
@@ -562,7 +572,7 @@ Partial Class FlowsheetSurface_SkiaSharp
         'ToolStrip1
         '
         resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel2, Me.tbFontSize, Me.ToolStripButton5, Me.ToolStripSeparator20, Me.ToolStripLabel3, Me.tsbColorTheme})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel2, Me.tbFontSize, Me.ToolStripButton5, Me.ToolStripSeparator20, Me.ToolStripLabel3, Me.tsbColorTheme, Me.ToolStripSeparator21, Me.ToolStripLabel4, Me.tscbAddObjectsWithStreams})
         Me.ToolStrip1.Name = "ToolStrip1"
         '
         'ToolStripLabel2
@@ -602,6 +612,24 @@ Partial Class FlowsheetSurface_SkiaSharp
         Me.tsbColorTheme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.tsbColorTheme.Items.AddRange(New Object() {resources.GetString("tsbColorTheme.Items"), resources.GetString("tsbColorTheme.Items1")})
         Me.tsbColorTheme.Name = "tsbColorTheme"
+        '
+        'ToolStripSeparator21
+        '
+        resources.ApplyResources(Me.ToolStripSeparator21, "ToolStripSeparator21")
+        Me.ToolStripSeparator21.Name = "ToolStripSeparator21"
+        '
+        'ToolStripLabel4
+        '
+        resources.ApplyResources(Me.ToolStripLabel4, "ToolStripLabel4")
+        Me.ToolStripLabel4.Name = "ToolStripLabel4"
+        '
+        'tscbAddObjectsWithStreams
+        '
+        resources.ApplyResources(Me.tscbAddObjectsWithStreams, "tscbAddObjectsWithStreams")
+        Me.tscbAddObjectsWithStreams.AutoCompleteCustomSource.AddRange(New String() {resources.GetString("tscbAddObjectsWithStreams.AutoCompleteCustomSource"), resources.GetString("tscbAddObjectsWithStreams.AutoCompleteCustomSource1"), resources.GetString("tscbAddObjectsWithStreams.AutoCompleteCustomSource2")})
+        Me.tscbAddObjectsWithStreams.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.tscbAddObjectsWithStreams.Items.AddRange(New Object() {resources.GetString("tscbAddObjectsWithStreams.Items"), resources.GetString("tscbAddObjectsWithStreams.Items1"), resources.GetString("tscbAddObjectsWithStreams.Items2")})
+        Me.tscbAddObjectsWithStreams.Name = "tscbAddObjectsWithStreams"
         '
         'CMS_NoSel
         '
@@ -1136,7 +1164,6 @@ Partial Class FlowsheetSurface_SkiaSharp
     Friend WithEvents tstbSearch As ToolStripTextBox
     Friend WithEvents ToolStripSeparator15 As ToolStripSeparator
     Friend WithEvents SplitAndInsertValveTSMI As ToolStripMenuItem
-    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents btnLeft As Button
     Friend WithEvents btnUp As Button
     Friend WithEvents btnDown As Button
@@ -1163,4 +1190,9 @@ Partial Class FlowsheetSurface_SkiaSharp
     Friend WithEvents FindTearStreamsAutomaticallyToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents tssepPro As ToolStripSeparator
     Friend WithEvents UpgradeDistillationColumnToProToolStripMenuItem As ToolStripMenuItem
+    Public WithEvents TableLayoutPanel1 As TableLayoutPanel
+    Public WithEvents PanelFlowsheetControl As Panel
+    Friend WithEvents ToolStripSeparator21 As ToolStripSeparator
+    Friend WithEvents ToolStripLabel4 As ToolStripLabel
+    Friend WithEvents tscbAddObjectsWithStreams As ToolStripComboBox
 End Class

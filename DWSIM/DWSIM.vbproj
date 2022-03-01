@@ -3238,6 +3238,7 @@
     <None Include="Resources\Icon1281.png" />
     <None Include="Resources\icons8-coins.png" />
     <None Include="Resources\icons8-scatter_plot.png" />
+    <None Include="Resources\icons8-volunteering.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />
