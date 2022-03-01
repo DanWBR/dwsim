@@ -1647,7 +1647,11 @@ Public Class FlowsheetSurface_SkiaSharp
         Call Me.Flowsheet.DeleteSelectedObject(sender, e, FlowsheetSurface.SelectedObject)
     End Sub
 
-    Public Function AddObjectToSurface(ByVal type As ObjectType, ByVal x As Integer, ByVal y As Integer, chemsep As Boolean, Optional ByVal tag As String = "", Optional ByVal id As String = "", Optional ByVal uoobj As Interfaces.IExternalUnitOperation = Nothing) As String
+    Public Function AddObjectToSurface(type As ObjectType, x As Integer, y As Integer,
+                                       chemsep As Boolean, Optional tag As String = "",
+                                       Optional id As String = "",
+                                       Optional uoobj As Interfaces.IExternalUnitOperation = Nothing,
+                                       Optional CreateConnected As Boolean = False) As String
 
         If Flowsheet Is Nothing Then Flowsheet = My.Application.ActiveSimulation
 
@@ -2466,6 +2470,13 @@ Public Class FlowsheetSurface_SkiaSharp
 
         SplitContainerHorizontal.Panel1.Cursor = Cursors.Arrow
 
+        If CreateConnected Then
+            If Flowsheet.Options.AddObjectsWithStreams > 0 Then
+                AddConnectedObjects(Flowsheet.SimulationObjects(gObj.Name))
+                Flowsheet.UpdateInterface()
+            End If
+        End If
+
         Return gObj.Name
 
     End Function
@@ -2498,14 +2509,14 @@ Public Class FlowsheetSurface_SkiaSharp
                         End If
                     Next
                 Else
-                    Dim m0 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x - 30, y, False)).GraphicObject
-                    Dim m1 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x - 30, y + h - 20, False)).GraphicObject
-                    Dim m2 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x + w + 30, y, False)).GraphicObject
-                    Dim m3 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x + w + 30, y + h - 20, False)).GraphicObject
-                    Flowsheet.ConnectObjects(m0, gobj, 0, 0)
-                    Flowsheet.ConnectObjects(m1, gobj, 0, 1)
-                    Flowsheet.ConnectObjects(gobj, m2, 0, 0)
-                    Flowsheet.ConnectObjects(gobj, m3, 1, 0)
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, False,,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y + h - 40, False,,,, False)
+                    Dim m2 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y, False,,,, False)
+                    Dim m3 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y + h - 40, False,,,, False)
+                    Flowsheet.ConnectObjects(Flowsheet.SimulationObjects(m0).GraphicObject, gobj, 0, 0)
+                    Flowsheet.ConnectObjects(Flowsheet.SimulationObjects(m1).GraphicObject, gobj, 0, 1)
+                    Flowsheet.ConnectObjects(gobj, Flowsheet.SimulationObjects(m2).GraphicObject, 0, 0)
+                    Flowsheet.ConnectObjects(gobj, Flowsheet.SimulationObjects(m3).GraphicObject, 1, 0)
                 End If
             Case ObjectType.Compressor
                 If Flowsheet.Options.AddObjectsWithStreams = 2 And mstrs.Count > 0 Then
@@ -2516,18 +2527,18 @@ Public Class FlowsheetSurface_SkiaSharp
                         Flowsheet.ConnectObjects(gobj, mstrsO(0), 0, 0)
                     End If
                 Else
-                    Dim m0 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x - 30, y, False)).GraphicObject
-                    Dim m1 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x + w + 30, y, False)).GraphicObject
-                    Flowsheet.ConnectObjects(m0, gobj, 0, 0)
-                    Flowsheet.ConnectObjects(gobj, m1, 0, 0)
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, False,,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y, False,,,, False)
+                    Flowsheet.ConnectObjects(Flowsheet.SimulationObjects(m0).GraphicObject, gobj, 0, 0)
+                    Flowsheet.ConnectObjects(gobj, Flowsheet.SimulationObjects(m1).GraphicObject, 0, 0)
                 End If
                 If Flowsheet.Options.AddObjectsWithStreams = 2 And estrsI.Count > 0 Then
                     If estrsI.Count > 0 Then
                         Flowsheet.ConnectObjects(estrsI(0), gobj, 0, 0)
                     End If
                 Else
-                    Dim e1 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x - 30, y + h + 30, False)).GraphicObject
-                    Flowsheet.ConnectObjects(e1, gobj, 1, 0)
+                    Dim e1 = AddObjectToSurface(ObjectType.EnergyStream, x - 60, y + h + 60, False,,,, False)
+                    Flowsheet.ConnectObjects(Flowsheet.SimulationObjects(e1).GraphicObject, gobj, 0, 1)
                 End If
             Case ObjectType.DistillationColumn
                 If Flowsheet.Options.AddObjectsWithStreams = 2 And mstrs.Count > 0 Then
@@ -2537,53 +2548,53 @@ Public Class FlowsheetSurface_SkiaSharp
                         Flowsheet.ConnectObjects(gobj, mstrsO(1), 1, 0)
                     End If
                 Else
-                    Dim m0 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x - 30, y, False)).GraphicObject
-                    Dim m1 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x + w + 30, y - 20, False)).GraphicObject
-                    Dim m2 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x + w + 30, y + h + 20, False)).GraphicObject
-                    Flowsheet.ConnectObjects(m0, gobj, 0, 0)
-                    Flowsheet.ConnectObjects(gobj, m1, 0, 0)
-                    Flowsheet.ConnectObjects(gobj, m2, 1, 0)
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, False,,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y - 40, False,,,, False)
+                    Dim m2 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y + h + 40, False,,,, False)
+                    Flowsheet.ConnectObjects(Flowsheet.SimulationObjects(m0).GraphicObject, gobj, 0, 0)
+                    Flowsheet.ConnectObjects(gobj, Flowsheet.SimulationObjects(m1).GraphicObject, 0, 0)
+                    Flowsheet.ConnectObjects(gobj, Flowsheet.SimulationObjects(m2).GraphicObject, 1, 0)
                 End If
                 If Flowsheet.Options.AddObjectsWithStreams = 2 And estrs.Count > 0 Then
                     If estrsI.Count > 0 Then Flowsheet.ConnectObjects(estrsI(0), gobj, 0, 10)
                     If estrsO.Count > 0 Then Flowsheet.ConnectObjects(gobj, estrsO(0), 10, 0)
                 Else
-                    Dim e1 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x + w + 30, y + 20, False)).GraphicObject
-                    Dim e2 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x + w + 30, y + h - 20, False)).GraphicObject
-                    Flowsheet.ConnectObjects(e2, gobj, 0, 10)
-                    Flowsheet.ConnectObjects(gobj, e1, 10, 0)
+                    Dim e1 = AddObjectToSurface(ObjectType.EnergyStream, x + w + 60, y + 40, False,,,, False)
+                    Dim e2 = AddObjectToSurface(ObjectType.EnergyStream, x + w + 60, y + h - 40, False,,,, False)
+                    Flowsheet.ConnectObjects(Flowsheet.SimulationObjects(e2).GraphicObject, gobj, 0, 10)
+                    Flowsheet.ConnectObjects(gobj, Flowsheet.SimulationObjects(e1).GraphicObject, 10, 0)
                 End If
             Case ObjectType.Expander, ObjectType.Cooler
                 If Flowsheet.Options.AddObjectsWithStreams = 2 And mstrs.Count > 0 Then
                     If mstrsI.Count > 0 Then Flowsheet.ConnectObjects(mstrsI(0), gobj, 0, 0)
                     If mstrsO.Count > 0 Then Flowsheet.ConnectObjects(gobj, mstrsO(0), 0, 0)
                 Else
-                    Dim m0 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x - 30, y, False)).GraphicObject
-                    Dim m1 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x + w + 30, y, False)).GraphicObject
-                    Flowsheet.ConnectObjects(m0, gobj, 0, 0)
-                    Flowsheet.ConnectObjects(gobj, m1, 0, 0)
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, False,,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y, False,,,, False)
+                    Flowsheet.ConnectObjects(Flowsheet.SimulationObjects(m0).GraphicObject, gobj, 0, 0)
+                    Flowsheet.ConnectObjects(gobj, Flowsheet.SimulationObjects(m1).GraphicObject, 0, 0)
                 End If
                 If Flowsheet.Options.AddObjectsWithStreams = 2 And estrs.Count > 0 Then
                     If estrsO.Count > 0 Then Flowsheet.ConnectObjects(gobj, estrsO(0), 0, 0)
                 Else
-                    Dim e1 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x + w + 30, y + h + 30, False)).GraphicObject
-                    Flowsheet.ConnectObjects(gobj, e1, 0, 0)
+                    Dim e1 = AddObjectToSurface(ObjectType.EnergyStream, x + w + 60, y + h + 60, False,,,, False)
+                    Flowsheet.ConnectObjects(gobj, Flowsheet.SimulationObjects(e1).GraphicObject, 0, 0)
                 End If
             Case ObjectType.Heater
                 If Flowsheet.Options.AddObjectsWithStreams = 2 And mstrs.Count > 0 Then
                     If mstrsI.Count > 0 Then Flowsheet.ConnectObjects(mstrsI(0), gobj, 0, 0)
                     If mstrsO.Count > 0 Then Flowsheet.ConnectObjects(gobj, mstrsO(0), 0, 0)
                 Else
-                    Dim m0 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x - 30, y, False)).GraphicObject
-                    Dim m1 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x + w + 30, y, False)).GraphicObject
-                    Flowsheet.ConnectObjects(m0, gobj, 0, 0)
-                    Flowsheet.ConnectObjects(gobj, m1, 0, 0)
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, False,,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y, False,,,, False)
+                    Flowsheet.ConnectObjects(Flowsheet.SimulationObjects(m0).GraphicObject, gobj, 0, 0)
+                    Flowsheet.ConnectObjects(gobj, Flowsheet.SimulationObjects(m1).GraphicObject, 0, 0)
                 End If
                 If Flowsheet.Options.AddObjectsWithStreams = 2 And estrs.Count > 0 Then
-                    If estrsI.Count > 0 Then Flowsheet.ConnectObjects(estrsI(0), gobj, 0, 0)
+                    If estrsI.Count > 0 Then Flowsheet.ConnectObjects(estrsI(0), gobj, 0, 1)
                 Else
-                    Dim e1 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x - 30, y + h + 30, False)).GraphicObject
-                    Flowsheet.ConnectObjects(e1, gobj, 1, 0)
+                    Dim e1 = AddObjectToSurface(ObjectType.EnergyStream, x - 60, y + h + 60, False,,,, False)
+                    Flowsheet.ConnectObjects(Flowsheet.SimulationObjects(e1).GraphicObject, gobj, 0, 1)
                 End If
             Case ObjectType.HeatExchanger
                 If Flowsheet.Options.AddObjectsWithStreams = 2 And mstrs.Count > 0 Then
@@ -2596,14 +2607,14 @@ Public Class FlowsheetSurface_SkiaSharp
                         Flowsheet.ConnectObjects(gobj, mstrsO(1), 1, 0)
                     End If
                 Else
-                    Dim m0 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x - 30, y - 20, False)).GraphicObject
-                    Dim m1 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x - 30, y + 20, False)).GraphicObject
-                    Dim m2 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x + w + 30, y - 20, False)).GraphicObject
-                    Dim m3 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x + w + 30, y + 20, False)).GraphicObject
-                    Flowsheet.ConnectObjects(m0, gobj, 0, 0)
-                    Flowsheet.ConnectObjects(m1, gobj, 0, 1)
-                    Flowsheet.ConnectObjects(gobj, m2, 0, 0)
-                    Flowsheet.ConnectObjects(gobj, m3, 1, 0)
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y - 40, False,,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y + 40, False,,,, False)
+                    Dim m2 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y - 40, False,,,, False)
+                    Dim m3 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y + 40, False,,,, False)
+                    Flowsheet.ConnectObjects(Flowsheet.SimulationObjects(m0).GraphicObject, gobj, 0, 0)
+                    Flowsheet.ConnectObjects(Flowsheet.SimulationObjects(m1).GraphicObject, gobj, 0, 1)
+                    Flowsheet.ConnectObjects(gobj, Flowsheet.SimulationObjects(m2).GraphicObject, 0, 0)
+                    Flowsheet.ConnectObjects(gobj, Flowsheet.SimulationObjects(m3).GraphicObject, 1, 0)
                 End If
             Case ObjectType.NodeIn
                 If Flowsheet.Options.AddObjectsWithStreams = 2 And mstrs.Count > 0 Then
@@ -2616,12 +2627,12 @@ Public Class FlowsheetSurface_SkiaSharp
                         Flowsheet.ConnectObjects(gobj, mstrsO(0), 0, 0)
                     End If
                 Else
-                    Dim m0 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x - 30, y, False)).GraphicObject
-                    Dim m1 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x - 30, y + 20, False)).GraphicObject
-                    Dim m2 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x + w + 30, y + 20, False)).GraphicObject
-                    Flowsheet.ConnectObjects(m0, gobj, 0, 0)
-                    Flowsheet.ConnectObjects(m1, gobj, 0, 1)
-                    Flowsheet.ConnectObjects(gobj, m2, 0, 0)
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, False,,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y + 40, False,,,, False)
+                    Dim m2 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y + 40, False,,,, False)
+                    Flowsheet.ConnectObjects(Flowsheet.SimulationObjects(m0).GraphicObject, gobj, 0, 0)
+                    Flowsheet.ConnectObjects(Flowsheet.SimulationObjects(m1).GraphicObject, gobj, 0, 1)
+                    Flowsheet.ConnectObjects(gobj, Flowsheet.SimulationObjects(m2).GraphicObject, 0, 0)
                 End If
             Case ObjectType.NodeOut
                 If Flowsheet.Options.AddObjectsWithStreams = 2 And mstrs.Count > 0 Then
@@ -2634,108 +2645,163 @@ Public Class FlowsheetSurface_SkiaSharp
                         Flowsheet.ConnectObjects(gobj, mstrsO(2), 2, 0)
                     End If
                 Else
-                    Dim m0 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x - 30, y, False)).GraphicObject
-                    Dim m1 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x + w + 30, y, False)).GraphicObject
-                    Dim m2 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x + w + 30, y + 20, False)).GraphicObject
-                    Flowsheet.ConnectObjects(m0, gobj, 0, 0)
-                    Flowsheet.ConnectObjects(gobj, m1, 0, 0)
-                    Flowsheet.ConnectObjects(gobj, m2, 1, 0)
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, False,,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y, False,,,, False)
+                    Dim m2 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y + 40, False,,,, False)
+                    Flowsheet.ConnectObjects(Flowsheet.SimulationObjects(m0).GraphicObject, gobj, 0, 0)
+                    Flowsheet.ConnectObjects(gobj, Flowsheet.SimulationObjects(m1).GraphicObject, 0, 0)
+                    Flowsheet.ConnectObjects(gobj, Flowsheet.SimulationObjects(m2).GraphicObject, 1, 0)
                 End If
             Case ObjectType.Pipe
                 If Flowsheet.Options.AddObjectsWithStreams = 2 And mstrs.Count > 0 Then
                     If mstrsI.Count > 0 Then Flowsheet.ConnectObjects(mstrsI(0), gobj, 0, 0)
                     If mstrsO.Count > 0 Then Flowsheet.ConnectObjects(gobj, mstrsO(0), 0, 0)
                 Else
-                    Dim m0 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x - 30, y, False)).GraphicObject
-                    Dim m1 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x + w + 30, y, False)).GraphicObject
-                    Flowsheet.ConnectObjects(m0, gobj, 0, 0)
-                    Flowsheet.ConnectObjects(gobj, m1, 0, 0)
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, False,,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y, False,,,, False)
+                    Flowsheet.ConnectObjects(Flowsheet.SimulationObjects(m0).GraphicObject, gobj, 0, 0)
+                    Flowsheet.ConnectObjects(gobj, Flowsheet.SimulationObjects(m1).GraphicObject, 0, 0)
                 End If
                 If Flowsheet.Options.AddObjectsWithStreams = 2 And estrs.Count > 0 Then
                     If estrsO.Count > 0 Then Flowsheet.ConnectObjects(gobj, estrsO(0), 0, 0)
                 Else
-                    Dim e1 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x + w + 30, y + h + 30, False)).GraphicObject
-                    Flowsheet.ConnectObjects(gobj, e1, 0, 0)
+                    Dim e1 = AddObjectToSurface(ObjectType.EnergyStream, x + w + 60, y + h + 60, False,,,, False)
+                    Flowsheet.ConnectObjects(gobj, Flowsheet.SimulationObjects(e1).GraphicObject, 0, 0)
                 End If
             Case ObjectType.Pump
                 If Flowsheet.Options.AddObjectsWithStreams = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then Flowsheet.ConnectObjects(mstrsI(0), gobj, 0, 0)
+                    If mstrsO.Count > 0 Then Flowsheet.ConnectObjects(gobj, mstrsO(0), 0, 0)
                 Else
-                    Dim m0 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x - 30, y, False)).GraphicObject
-                    Dim m1 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x + w + 30, y, False)).GraphicObject
-                    Flowsheet.ConnectObjects(m0, gobj, 0, 0)
-                    Flowsheet.ConnectObjects(gobj, m1, 0, 0)
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, False,,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y, False,,,, False)
+                    Flowsheet.ConnectObjects(Flowsheet.SimulationObjects(m0).GraphicObject, gobj, 0, 0)
+                    Flowsheet.ConnectObjects(gobj, Flowsheet.SimulationObjects(m1).GraphicObject, 0, 0)
                 End If
                 If Flowsheet.Options.AddObjectsWithStreams = 2 And estrs.Count > 0 Then
-                    If estrsI.Count > 0 Then Flowsheet.ConnectObjects(estrsI(0), gobj, 0, 0)
+                    If estrsI.Count > 0 Then Flowsheet.ConnectObjects(estrsI(0), gobj, 0, 1)
                 Else
-                    Dim e1 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x - 30, y + h + 30, False)).GraphicObject
-                    Flowsheet.ConnectObjects(e1, gobj, 1, 0)
+                    Dim e1 = AddObjectToSurface(ObjectType.EnergyStream, x - 60, y + h + 60, False,,,, False)
+                    Flowsheet.ConnectObjects(Flowsheet.SimulationObjects(e1).GraphicObject, gobj, 0, 1)
                 End If
             Case ObjectType.RCT_Conversion
                 If Flowsheet.Options.AddObjectsWithStreams = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then Flowsheet.ConnectObjects(mstrsI(0), gobj, 0, 0)
+                    If mstrsO.Count > 0 Then Flowsheet.ConnectObjects(gobj, mstrsO(0), 0, 0)
                 Else
-                    Dim m0 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x - 30, y, False)).GraphicObject
-                    Dim m1 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x + w + 30, y - 20, False)).GraphicObject
-                    Dim m2 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x + w + 30, y + h + 20, False)).GraphicObject
-                    Dim e1 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x + w + 30, y + h + 50, False)).GraphicObject
-                    Flowsheet.ConnectObjects(m0, gobj, 0, 0)
-                    Flowsheet.ConnectObjects(gobj, m1, 0, 0)
-                    Flowsheet.ConnectObjects(gobj, m2, 0, 0)
-                    Flowsheet.ConnectObjects(gobj, e1, 2, 0)
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, False,,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y - 40, False,,,, False)
+                    Dim m2 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y + h + 40, False,,,, False)
+                    Flowsheet.ConnectObjects(Flowsheet.SimulationObjects(m0).GraphicObject, gobj, 0, 0)
+                    Flowsheet.ConnectObjects(gobj, Flowsheet.SimulationObjects(m1).GraphicObject, 0, 0)
+                    Flowsheet.ConnectObjects(gobj, Flowsheet.SimulationObjects(m2).GraphicObject, 1, 0)
+                End If
+                If Flowsheet.Options.AddObjectsWithStreams = 2 And estrs.Count > 0 Then
+                    If estrsO.Count > 0 Then Flowsheet.ConnectObjects(gobj, estrsO(0), 2, 0)
+                Else
+                    Dim e1 = AddObjectToSurface(ObjectType.EnergyStream, x + w + 60, y + h + 60, False,,,, False)
+                    Flowsheet.ConnectObjects(gobj, Flowsheet.SimulationObjects(e1).GraphicObject, 2, 0)
                 End If
             Case ObjectType.RCT_CSTR, ObjectType.RCT_PFR
                 If Flowsheet.Options.AddObjectsWithStreams = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then Flowsheet.ConnectObjects(mstrsI(0), gobj, 0, 0)
+                    If mstrsO.Count > 0 Then Flowsheet.ConnectObjects(gobj, mstrsO(0), 0, 0)
                 Else
-                    Dim m0 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x - 30, y, False)).GraphicObject
-                    Dim m1 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x + w + 30, y, False)).GraphicObject
-                    Dim e1 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x - 30, y + h + 30, False)).GraphicObject
-                    Flowsheet.ConnectObjects(m0, gobj, 0, 0)
-                    Flowsheet.ConnectObjects(gobj, m1, 0, 0)
-                    Flowsheet.ConnectObjects(e1, gobj, 1, 0)
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, False,,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y, False,,,, False)
+                    Flowsheet.ConnectObjects(Flowsheet.SimulationObjects(m0).GraphicObject, gobj, 0, 0)
+                    Flowsheet.ConnectObjects(gobj, Flowsheet.SimulationObjects(m1).GraphicObject, 0, 0)
                 End If
-            Case ObjectType.RCT_Equilibrium, ObjectType.RCT_Gibbs, ObjectType.ComponentSeparator
-                If Flowsheet.Options.AddObjectsWithStreams = 2 And mstrs.Count > 0 Then
+                If Flowsheet.Options.AddObjectsWithStreams = 2 And estrs.Count > 0 Then
+                    If estrsI.Count > 0 Then Flowsheet.ConnectObjects(estrsI(0), gobj, 0, 1)
                 Else
-                    Dim m0 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x - 30, y, False)).GraphicObject
-                    Dim m1 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x + w + 30, y - 20, False)).GraphicObject
-                    Dim m2 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x + w + 30, y + h + 20, False)).GraphicObject
-                    Dim e1 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x - 30, y + h + 30, False)).GraphicObject
-                    Flowsheet.ConnectObjects(m0, gobj, 0, 0)
-                    Flowsheet.ConnectObjects(gobj, m1, 0, 0)
-                    Flowsheet.ConnectObjects(gobj, m2, 0, 0)
-                    Flowsheet.ConnectObjects(e1, gobj, 1, 0)
+                    Dim e1 = AddObjectToSurface(ObjectType.EnergyStream, x - 60, y + h + 60, False,,,, False)
+                    Flowsheet.ConnectObjects(Flowsheet.SimulationObjects(e1).GraphicObject, gobj, 0, 1)
+                End If
+            Case ObjectType.RCT_Equilibrium, ObjectType.RCT_Gibbs
+                If Flowsheet.Options.AddObjectsWithStreams = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then Flowsheet.ConnectObjects(mstrsI(0), gobj, 0, 0)
+                    If mstrsO.Count > 0 Then Flowsheet.ConnectObjects(gobj, mstrsO(0), 0, 0)
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, False,,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y - 40, False,,,, False)
+                    Dim m2 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y + h + 40, False,,,, False)
+                    Flowsheet.ConnectObjects(Flowsheet.SimulationObjects(m0).GraphicObject, gobj, 0, 0)
+                    Flowsheet.ConnectObjects(gobj, Flowsheet.SimulationObjects(m1).GraphicObject, 0, 0)
+                    Flowsheet.ConnectObjects(gobj, Flowsheet.SimulationObjects(m2).GraphicObject, 1, 0)
+                End If
+                If Flowsheet.Options.AddObjectsWithStreams = 2 And estrs.Count > 0 Then
+                    If estrsI.Count > 0 Then Flowsheet.ConnectObjects(estrsI(0), gobj, 0, 1)
+                Else
+                    Dim e1 = AddObjectToSurface(ObjectType.EnergyStream, x - 60, y + h + 60, False,,,, False)
+                    Flowsheet.ConnectObjects(Flowsheet.SimulationObjects(e1).GraphicObject, gobj, 0, 1)
+                End If
+            Case ObjectType.ComponentSeparator
+                If Flowsheet.Options.AddObjectsWithStreams = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then Flowsheet.ConnectObjects(mstrsI(0), gobj, 0, 0)
+                    If mstrsO.Count > 0 Then Flowsheet.ConnectObjects(gobj, mstrsO(0), 0, 0)
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, False,,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y - 40, False,,,, False)
+                    Dim m2 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y + h + 40, False,,,, False)
+                    Flowsheet.ConnectObjects(Flowsheet.SimulationObjects(m0).GraphicObject, gobj, 0, 0)
+                    Flowsheet.ConnectObjects(gobj, Flowsheet.SimulationObjects(m1).GraphicObject, 0, 0)
+                    Flowsheet.ConnectObjects(gobj, Flowsheet.SimulationObjects(m2).GraphicObject, 1, 0)
+                End If
+                If Flowsheet.Options.AddObjectsWithStreams = 2 And estrs.Count > 0 Then
+                    If estrsO.Count > 0 Then Flowsheet.ConnectObjects(gobj, estrsO(0), 0, 0)
+                Else
+                    Dim e1 = AddObjectToSurface(ObjectType.EnergyStream, x + 60, y + h + 60, False,,,, False)
+                    Flowsheet.ConnectObjects(gobj, Flowsheet.SimulationObjects(e1).GraphicObject, 0, 0)
                 End If
             Case ObjectType.ShortcutColumn
                 If Flowsheet.Options.AddObjectsWithStreams = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then Flowsheet.ConnectObjects(mstrsI(0), gobj, 0, 0)
+                    If mstrsO.Count > 0 Then
+                        Flowsheet.ConnectObjects(gobj, mstrsO(0), 0, 0)
+                        Flowsheet.ConnectObjects(gobj, mstrsO(1), 1, 0)
+                    End If
                 Else
-                    Dim m0 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x - 30, y, False)).GraphicObject
-                    Dim m1 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x + w + 30, y - 20, False)).GraphicObject
-                    Dim m2 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x + w + 30, y + h + 20, False)).GraphicObject
-                    Flowsheet.ConnectObjects(m0, gobj, 0, 0)
-                    Flowsheet.ConnectObjects(gobj, m1, 0, 0)
-                    Flowsheet.ConnectObjects(gobj, m2, 1, 0)
-                    Dim e1 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x + w + 30, y + 20, False)).GraphicObject
-                    Dim e2 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x + w + 30, y + h - 20, False)).GraphicObject
-                    Flowsheet.ConnectObjects(e2, gobj, 0, 1)
-                    Flowsheet.ConnectObjects(gobj, e1, 0, 0)
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, False,,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y - 40, False,,,, False)
+                    Dim m2 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y + h + 40, False,,,, False)
+                    Flowsheet.ConnectObjects(Flowsheet.SimulationObjects(m0).GraphicObject, gobj, 0, 0)
+                    Flowsheet.ConnectObjects(gobj, Flowsheet.SimulationObjects(m1).GraphicObject, 0, 0)
+                    Flowsheet.ConnectObjects(gobj, Flowsheet.SimulationObjects(m2).GraphicObject, 1, 0)
+                End If
+                If Flowsheet.Options.AddObjectsWithStreams = 2 And estrs.Count > 0 Then
+                    If estrsI.Count > 0 Then Flowsheet.ConnectObjects(estrsI(0), gobj, 0, 1)
+                    If estrsO.Count > 0 Then Flowsheet.ConnectObjects(gobj, estrsO(0), 0, 0)
+                Else
+                    Dim e1 = AddObjectToSurface(ObjectType.EnergyStream, x + w + 60, y + 40, False,,,, False)
+                    Dim e2 = AddObjectToSurface(ObjectType.EnergyStream, x + w + 60, y + h - 40, False,,,, False)
+                    Flowsheet.ConnectObjects(Flowsheet.SimulationObjects(e2).GraphicObject, gobj, 0, 1)
+                    Flowsheet.ConnectObjects(gobj, Flowsheet.SimulationObjects(e1).GraphicObject, 0, 0)
                 End If
             Case ObjectType.Tank, ObjectType.Valve, ObjectType.OrificePlate, ObjectType.OT_Recycle
                 If Flowsheet.Options.AddObjectsWithStreams = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then Flowsheet.ConnectObjects(mstrsI(0), gobj, 0, 0)
+                    If mstrsO.Count > 0 Then Flowsheet.ConnectObjects(gobj, mstrsO(0), 0, 0)
                 Else
-                    Dim m0 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x - 30, y, False)).GraphicObject
-                    Dim m1 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x + w + 30, y, False)).GraphicObject
-                    Flowsheet.ConnectObjects(m0, gobj, 0, 0)
-                    Flowsheet.ConnectObjects(gobj, m1, 0, 0)
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, False,,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y, False,,,, False)
+                    Flowsheet.ConnectObjects(Flowsheet.SimulationObjects(m0).GraphicObject, gobj, 0, 0)
+                    Flowsheet.ConnectObjects(gobj, Flowsheet.SimulationObjects(m1).GraphicObject, 0, 0)
                 End If
             Case ObjectType.Vessel, ObjectType.SolidSeparator, ObjectType.Filter
                 If Flowsheet.Options.AddObjectsWithStreams = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then Flowsheet.ConnectObjects(mstrsI(0), gobj, 0, 0)
+                    If mstrsO.Count > 0 Then
+                        Flowsheet.ConnectObjects(gobj, mstrsO(0), 0, 0)
+                        Flowsheet.ConnectObjects(gobj, mstrsO(1), 1, 0)
+                    End If
                 Else
-                    Dim m0 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x - 30, y, False)).GraphicObject
-                    Dim m1 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x + w + 30, y - 20, False)).GraphicObject
-                    Dim m2 = Flowsheet.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x + w + 30, y + h + 20, False)).GraphicObject
-                    Flowsheet.ConnectObjects(m0, gobj, 0, 0)
-                    Flowsheet.ConnectObjects(gobj, m1, 0, 0)
-                    Flowsheet.ConnectObjects(gobj, m2, 1, 0)
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, False,,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y - 40, False,,,, False)
+                    Dim m2 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y + h + 40, False,,,, False)
+                    Flowsheet.ConnectObjects(Flowsheet.SimulationObjects(m0).GraphicObject, gobj, 0, 0)
+                    Flowsheet.ConnectObjects(gobj, Flowsheet.SimulationObjects(m1).GraphicObject, 0, 0)
+                    Flowsheet.ConnectObjects(gobj, Flowsheet.SimulationObjects(m2).GraphicObject, 1, 0)
                 End If
         End Select
 
@@ -2749,7 +2815,9 @@ Public Class FlowsheetSurface_SkiaSharp
 
     End Sub
 
-    Sub AddObject(objname As String, x As Integer, y As Integer, Optional ByVal cl As Interfaces.Enums.SimulationObjectClass = SimulationObjectClass.Other)
+    Sub AddObject(objname As String, x As Integer, y As Integer,
+                  Optional ByVal cl As Interfaces.Enums.SimulationObjectClass = SimulationObjectClass.Other,
+                  Optional CreateConnected As Boolean = False)
 
         Dim tobj As ObjectType = ObjectType.Nenhum
 
@@ -2844,7 +2912,7 @@ Public Class FlowsheetSurface_SkiaSharp
                 tobj = ObjectType.Switch
         End Select
 
-        AddObjectToSurface(tobj, x, y, chemsep)
+        AddObjectToSurface(tobj, x, y, chemsep,,,, CreateConnected)
 
     End Sub
 

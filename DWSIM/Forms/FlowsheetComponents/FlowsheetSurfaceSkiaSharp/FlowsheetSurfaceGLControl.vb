@@ -166,7 +166,7 @@ Public Class FlowsheetSurfaceGLControl
 
             If t.GetInterface("DWSIM.Interfaces.IExternalUnitOperation", True) Is Nothing Then
 
-                FlowsheetObject.FormSurface.AddObject(t.Name, pt.X / FlowsheetSurface.Zoom, pt.Y / FlowsheetSurface.Zoom, c)
+                FlowsheetObject.FormSurface.AddObject(t.Name, pt.X / FlowsheetSurface.Zoom, pt.Y / FlowsheetSurface.Zoom, c, True)
 
             Else
 

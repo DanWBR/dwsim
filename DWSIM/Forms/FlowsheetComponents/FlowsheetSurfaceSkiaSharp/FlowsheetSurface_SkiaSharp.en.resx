@@ -326,17 +326,17 @@
   <data name="ToolStripLabel4.Text" xml:space="preserve">
     <value>Add Objects with Streams</value>
   </data>
-  <data name="tscbAddObjectsWithStreams.AutoCompleteCustomSource" xml:space="preserve">
+  <data name="tscbAddObjectsWithStreams.Items" xml:space="preserve">
     <value>No</value>
   </data>
-  <data name="tscbAddObjectsWithStreams.AutoCompleteCustomSource1" xml:space="preserve">
+  <data name="tscbAddObjectsWithStreams.Items1" xml:space="preserve">
     <value>Yes</value>
   </data>
-  <data name="tscbAddObjectsWithStreams.AutoCompleteCustomSource2" xml:space="preserve">
+  <data name="tscbAddObjectsWithStreams.Items2" xml:space="preserve">
     <value>Automatic</value>
   </data>
   <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>843, 25</value>
+    <value>845, 25</value>
   </data>
   <data name="ToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
     <value>243, 22</value>
