@@ -425,9 +425,9 @@ gtmun:          If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                 End If
             Next
 
-        ElseIf TypeOf _pp Is PengRobinsonPropertyPackage Then
+        ElseIf TypeOf _pp Is PengRobinson1978PropertyPackage Then
 
-            Dim ppu As PengRobinsonPropertyPackage = _pp
+            Dim ppu As PengRobinson1978PropertyPackage = _pp
 
             For Each cp As ConstantProperties In _comps.Values
 gt2:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
@@ -459,6 +459,43 @@ gt2:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
                 Else
                     ppu.m_pr.InteractionParameters.Add(cp.Name, New Dictionary(Of String, PropertyPackages.Auxiliary.PR_IPData))
                     GoTo gt2
+                End If
+            Next
+
+        ElseIf TypeOf _pp Is PengRobinsonPropertyPackage Then
+
+            Dim ppu As PengRobinsonPropertyPackage = _pp
+
+            For Each cp As ConstantProperties In _comps.Values
+gt3:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
+                    For Each cp2 As ConstantProperties In _comps.Values
+                        If cp.Name <> cp2.Name Then
+                            If Not ppu.m_pr.InteractionParameters(cp.Name).ContainsKey(cp2.Name) Then
+                                'check if collection has id2 as primary id
+                                If ppu.m_pr.InteractionParameters.ContainsKey(cp2.Name) Then
+                                    If Not ppu.m_pr.InteractionParameters(cp2.Name).ContainsKey(cp.Name) Then
+                                        ppu.m_pr.InteractionParameters(cp.Name).Add(cp2.Name, New PropertyPackages.Auxiliary.PR_IPData)
+                                        Dim a12 As Double = ppu.m_pr.InteractionParameters(cp.Name)(cp2.Name).kij
+                                        KryptonDataGridView2.Rows.Add(New Object() {cp.Name, cp2.Name, Format(a12, nf)})
+                                        With KryptonDataGridView2.Rows(KryptonDataGridView2.Rows.Count - 1)
+                                            .Cells(0).Tag = cp.Name
+                                            .Cells(1).Tag = cp2.Name
+                                        End With
+                                    End If
+                                End If
+                            Else
+                                Dim a12 As Double = ppu.m_pr.InteractionParameters(cp.Name)(cp2.Name).kij
+                                KryptonDataGridView2.Rows.Add(New Object() {cp.Name, cp2.Name, Format(a12, nf)})
+                                With KryptonDataGridView2.Rows(KryptonDataGridView2.Rows.Count - 1)
+                                    .Cells(0).Tag = cp.Name
+                                    .Cells(1).Tag = cp2.Name
+                                End With
+                            End If
+                        End If
+                    Next
+                Else
+                    ppu.m_pr.InteractionParameters.Add(cp.Name, New Dictionary(Of String, PropertyPackages.Auxiliary.PR_IPData))
+                    GoTo gt3
                 End If
             Next
 
@@ -496,6 +533,17 @@ gt2:            If ppu.m_pr.InteractionParameters.ContainsKey(cp.Name) Then
             Dim id2 As String = ""
             If TypeOf _pp Is SRKPropertyPackage Then
                 Dim ppu As PropertyPackages.SRKPropertyPackage = _pp
+                Dim value As Object = KryptonDataGridView2.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
+                id1 = KryptonDataGridView2.Rows(e.RowIndex).Cells(0).Tag.ToString
+                id2 = KryptonDataGridView2.Rows(e.RowIndex).Cells(1).Tag.ToString
+                Select Case e.ColumnIndex
+                    Case 2
+                        oldvalue = ppu.m_pr.InteractionParameters(id1)(id2).kij
+                        newvalue = Convert.ToDouble(value)
+                        ppu.m_pr.InteractionParameters(id1)(id2).kij = newvalue
+                End Select
+            ElseIf TypeOf _pp Is PengRobinson1978PropertyPackage Then
+                Dim ppu As PropertyPackages.PengRobinson1978PropertyPackage = _pp
                 Dim value As Object = KryptonDataGridView2.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
                 id1 = KryptonDataGridView2.Rows(e.RowIndex).Cells(0).Tag.ToString
                 id2 = KryptonDataGridView2.Rows(e.RowIndex).Cells(1).Tag.ToString

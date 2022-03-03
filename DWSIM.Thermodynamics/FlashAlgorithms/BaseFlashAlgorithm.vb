@@ -138,6 +138,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             settings(Interfaces.Enums.FlashSetting.PHFlash_Use_Interpolated_Result_In_Oscillating_Temperature_Cases) = True
 
+            settings(Interfaces.Enums.FlashSetting.PVFlash_TryIdealCalcOnFailure) = True
+
             Return settings
 
         End Function

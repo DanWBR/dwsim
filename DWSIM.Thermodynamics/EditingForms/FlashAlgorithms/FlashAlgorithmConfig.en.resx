@@ -143,14 +143,20 @@
   <data name="gpNL.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
+  <data name="chkIdealPVFlash.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 133</value>
+  </data>
+  <data name="chkIdealPVFlash.Text" xml:space="preserve">
+    <value>PV Flash - Try Ideal Calculation on Failure</value>
+  </data>
   <data name="CheckBoxInterpTempPHFlash.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 90</value>
+    <value>12, 91</value>
   </data>
   <data name="CheckBoxInterpTempPHFlash.Size" type="System.Drawing.Size, System.Drawing">
-    <value>198, 41</value>
+    <value>208, 35</value>
   </data>
   <data name="CheckBoxInterpTempPHFlash.Text" xml:space="preserve">
-    <value>Interpolate Temperature in Oscillating Cases (PH Flash)</value>
+    <value>PH Flash - Interpolate Temperature in Oscillating Cases</value>
   </data>
   <data name="chkHandleSolids.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 20</value>
@@ -183,7 +189,7 @@
     <value>371, 12</value>
   </data>
   <data name="gpNL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 160</value>
+    <value>226, 180</value>
   </data>
   <data name="gpNL.Text" xml:space="preserve">
     <value>Nested Loops Options</value>

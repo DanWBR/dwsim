@@ -63,6 +63,8 @@ Public Class FlashAlgorithmConfig
 
         CheckBoxInterpTempPHFlash.Checked = Settings(Interfaces.Enums.FlashSetting.PHFlash_Use_Interpolated_Result_In_Oscillating_Temperature_Cases)
 
+        chkIdealPVFlash.Checked = Settings(Interfaces.Enums.FlashSetting.PVFlash_TryIdealCalcOnFailure)
+
         Select Case Settings(Interfaces.Enums.FlashSetting.ForceEquilibriumCalculationType)
             Case "Default"
                 cbFlashType.SelectedIndex = 0
@@ -176,6 +178,8 @@ Public Class FlashAlgorithmConfig
             Settings(Interfaces.Enums.FlashSetting.CalculateBubbleAndDewPoints) = chkCalcBubbleDew.Checked
 
             Settings(Interfaces.Enums.FlashSetting.PHFlash_Use_Interpolated_Result_In_Oscillating_Temperature_Cases) = CheckBoxInterpTempPHFlash.Checked
+
+            Settings(Interfaces.Enums.FlashSetting.PVFlash_TryIdealCalcOnFailure) = chkIdealPVFlash.Checked
 
             PropPack.FlashCalculationApproach = cbFlashApproach.SelectedIndex
 

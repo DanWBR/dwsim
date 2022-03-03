@@ -398,6 +398,23 @@ Public Module General
     End Function
 
     <System.Runtime.CompilerServices.Extension()>
+    Public Function ToArrayString(vector As Double(), ids As String(), nf As String) As String
+
+        Dim retstr As String = ""
+        If vector IsNot Nothing Then
+            Dim i As Integer = 0
+            For Each d In vector
+                retstr += ids(i) + ": " + d.ToString(nf) + ", "
+                i += 1
+            Next
+        End If
+        retstr.TrimEnd(",")
+
+        Return retstr
+
+    End Function
+
+    <System.Runtime.CompilerServices.Extension()>
     Public Function ToMathArrayString(vector As Double()) As String
 
         Dim retstr As String = "<math_inline>\left[{\begin{array}{}"

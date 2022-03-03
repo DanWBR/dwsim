@@ -93,6 +93,11 @@ namespace DWSIM.UI.Desktop.Editors
                     s[f.PHFlash_Use_Interpolated_Result_In_Oscillating_Temperature_Cases] = cb.Checked.GetValueOrDefault().ToString();
                 });
 
+            c.CreateAndAddCheckBoxRow("PV Flash - Try Ideal Calculation on Failure", bool.Parse(s[f.PVFlash_TryIdealCalcOnFailure]),
+                (cb, e) => {
+                    s[f.PVFlash_TryIdealCalcOnFailure] = cb.Checked.GetValueOrDefault().ToString();
+                });
+
             c.CreateAndAddLabelRow("Convergence Parameters");
 
             c.CreateAndAddTextBoxRow(nf, "PV Flash - Temperature Delta for K-value Numerical Derivative Calculation",
