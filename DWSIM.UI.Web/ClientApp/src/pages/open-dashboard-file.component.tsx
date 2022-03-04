@@ -8,9 +8,9 @@ import { FileTypeIcon, IFileTypeIconProps } from "../components/file-type-icon/f
 import { getFileTypeIconPropsCustom } from "../components/file-type-icon/file-type-icon.helpers";
 import NavigationBar from "../components/navigation-bar/navigation-bar.component";
 import CreateFolderModal from "../components/create-folder-modal/create-folder-modal.component";
-import { IInitializeDashboardProps, withInitializeDashboard } from "../components/with-initialize-dashboard.hoc";
+import {  withInitializeDashboard } from "../components/with-initialize-dashboard.hoc";
 
-interface IOpenDashboardFilePageProps extends RouteComponentProps<IOpenDashboardFilePageRouteProps>, IInitializeDashboardProps {
+interface IOpenDashboardFilePageProps extends RouteComponentProps<IOpenDashboardFilePageRouteProps> {
     baseFolder: ISelectedFolder;
     siteId: string;
     flowsheetsDriveId: string;
@@ -175,8 +175,8 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
         this._selection = new Selection({ onSelectionChanged: this.selectedRowChanged.bind(this) } as ISelectionOptions);
 
     }
-    componentDidMount() {        
-            this.changeFileTypeFilter();  
+    componentDidMount() {
+        this.changeFileTypeFilter();
     }
 
     changeFileTypeFilter() {

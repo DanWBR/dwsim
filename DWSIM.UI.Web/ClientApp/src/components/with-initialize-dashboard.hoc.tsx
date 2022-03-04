@@ -2,13 +2,18 @@ import * as React from "react";
 import { Spinner } from "@fluentui/react";
 import { ISelectedFolder } from "../interfaces/documents/document.interfaces";
 import { toast } from "react-toastify";
+import { RouteComponentProps, useHistory } from "react-router-dom";
 declare const chrome: any;
 
 
+export interface IInitializeDashboardProps extends RouteComponentProps<any> {
 
-export interface IInitializeDashboardProps {
+}
+export interface IInitializeDashboardState {
     baseFolder?: ISelectedFolder;
     isLoaded: boolean;
+    isLoggedIn: boolean;
+    isDashboardInitialized: boolean;
     siteId: string;
     flowsheetsListId: string;
     flowsheetsDriveId: string;
@@ -21,7 +26,8 @@ const DashboardServiceUrl = process.env.REACT_APP_DASHBOARD_SERVICE_URL;
 
 export function withInitializeDashboard(WrappedComponent: any) {
 
-    return class extends React.Component<{}, IInitializeDashboardProps>{
+
+    return class extends React.Component<IInitializeDashboardProps, IInitializeDashboardState>{
 
         /**
          *
@@ -30,6 +36,8 @@ export function withInitializeDashboard(WrappedComponent: any) {
             super(props);
             this.state = {
                 isLoaded: false,
+                isDashboardInitialized: false,
+                isLoggedIn: true,
                 isError: false,
                 siteId: "",
                 flowsheetsDriveId: "",
@@ -38,9 +46,17 @@ export function withInitializeDashboard(WrappedComponent: any) {
         }
 
         async componentDidMount() {
-            await this.getBaseFolder();
+            const token = await this.getUserToken();
+            if (token) {
+                this.setState({ isLoggedIn: true, isLoaded: true });
+                await this.getBaseFolder(token);
+            } else {
+                this.setState({ isLoggedIn: false, isLoaded: true });
+            }
+
         }
-        async getBaseFolder() {
+
+        async getUserToken() {
             console.log("chrome.webview?.hostObjects?.authService", chrome.webview?.hostObjects?.authService);
             let token = !chrome.webview?.hostObjects?.authService ? user_token : undefined;
             if (chrome.webview?.hostObjects?.authService) {
@@ -55,8 +71,14 @@ export function withInitializeDashboard(WrappedComponent: any) {
                 }
             }
             console.log("App.tsx token", token, !!token);
+            return token;
+        }
+        async getBaseFolder(token: string) {
+
+
             try {
                 if (!!token && token.length > 0) {
+                    this.setState({ isLoaded: false });
                     const data = {
                         userAccessToken: token,
                         siteId: "not required",
@@ -79,7 +101,7 @@ export function withInitializeDashboard(WrappedComponent: any) {
                     });
                     const folder = await resp.json();
                     console.log("Initialize resp", folder);
-                    if(!folder || !folder.flowsheets.folderDriveId){
+                    if (!folder || !folder.flowsheets.folderDriveId) {
                         throw "An error occurred while initializing Simulate 365 Dashboard.";
                     }
                     const baseFolder = {
@@ -91,6 +113,7 @@ export function withInitializeDashboard(WrappedComponent: any) {
                     } as ISelectedFolder;
 
                     this.setState({
+                        isDashboardInitialized: true,
                         baseFolder: baseFolder,
                         siteId: folder.siteId,
                         flowsheetsDriveId: folder.flowsheetsDriveId,
@@ -104,7 +127,7 @@ export function withInitializeDashboard(WrappedComponent: any) {
                 this.setState({ isError: true });
                 console.log("An error occurred while initializing dashboard.", error);
 
-              //  toast.error("An error occurred while initializing dashboard.");
+                //  toast.error("An error occurred while initializing dashboard.");
             } finally {
                 this.setState({ isLoaded: true });
             }
@@ -113,11 +136,11 @@ export function withInitializeDashboard(WrappedComponent: any) {
 
 
         render() {
-            const { isLoaded, isError } = this.state;
+            const { isLoaded, isError, isLoggedIn, isDashboardInitialized } = this.state;
 
 
-            if(isError){
-             return   (<div style={{
+            if (isError) {
+                return (<div style={{
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
@@ -125,7 +148,21 @@ export function withInitializeDashboard(WrappedComponent: any) {
                     height: "100%"
                 }}>
 
-                  <span className="text-danger">An error occurred while initializing Simulate 365 Dashboard.</span>
+                    <span className="text-danger">An error occurred while initializing Simulate 365 Dashboard.</span>
+
+                </div>)
+            }
+
+            if (!isLoggedIn) {
+                return (<div style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    height: "100%"
+                }}>
+
+                    <span className="text-danger">To use Simulate 365 features, you must login to DWSIM.</span>
 
                 </div>)
             }
@@ -148,9 +185,10 @@ export function withInitializeDashboard(WrappedComponent: any) {
                 </div>);
 
             }
-            else
-
-                return <WrappedComponent {...this.props} {...this.state} />
+            else if (isDashboardInitialized) {
+                return <WrappedComponent {...this.props} {...this.state} />;
+            }
+            return null;
         }
     }
 

@@ -33,6 +33,7 @@ Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
 Imports DWSIM.DWSIM.Editors.PropertyPackages
 Imports System.Threading.Tasks
 Imports DWSIM.Simulate365.Models
+Imports DWSIM.Simulate365.Services
 
 <ComSourceInterfaces(GetType(Interfaces.IFlowsheetNewMessageSentEvent)), ClassInterface(ClassInterfaceType.AutoDual)>
 <System.Serializable()>
@@ -664,13 +665,13 @@ Public Class FormFlowsheet
             My.Application.MainWindowForm.SaveToSimulate365DashboardToolStripMenuItem.Enabled = True
             My.Application.MainWindowForm.ToolStripButton1.Enabled = True
 
-        End If
+            End If
 
-        'garbage collection (frees unused memory)
-        System.GC.Collect()
-        System.GC.WaitForPendingFinalizers()
-        System.GC.Collect()
-        System.GC.WaitForPendingFinalizers()
+            'garbage collection (frees unused memory)
+            System.GC.Collect()
+            System.GC.WaitForPendingFinalizers()
+            System.GC.Collect()
+            System.GC.WaitForPendingFinalizers()
 
     End Sub
 

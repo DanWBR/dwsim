@@ -1952,7 +1952,7 @@ Public Class FormMain
                     Else
                         Dim ptype = xel.Element("Type").Value
                         If ppkey.Contains("1978") And ptype.Contains("PengRobinsonPropertyPackage") Then
-                            ptype = ptype.Replace("PengRobinson","PengRobinson1978")
+                            ptype = ptype.Replace("PengRobinson", "PengRobinson1978")
                         End If
                         If PropertyPackages.ContainsKey(ppkey) Then
                             obj = PropertyPackages(ppkey).ReturnInstance(ptype)
@@ -4396,6 +4396,9 @@ Label_00CC:
         Dim loginForm As LoginForm = New LoginForm
         loginForm.ShowDialog()
     End Sub
+
+
+
 
     Private Sub LogoutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogoutToolStripMenuItem.Click
         UserService.Logout()
