@@ -197,6 +197,8 @@ Public Class EditingForm_ReactorConvEqGibbs
                     cbExternalSolver.SelectedIndex = 0
                 End If
 
+                chkGibbsUseIPOPT.Checked = DirectCast(SimObject, Reactors.Reactor_Gibbs).UseIPOPTSolver
+
             ElseIf TypeOf SimObject Is Reactors.Reactor_Equilibrium Then
 
                 TabControlParameters.TabPages.Remove(TabPageCompounds)
@@ -732,6 +734,12 @@ Public Class EditingForm_ReactorConvEqGibbs
                 Function(s) s.DisplayText = cbExternalSolver.SelectedItem.ToString()).FirstOrDefault()
         If TryCast(selectedsolver, IExternalSolverConfiguration) IsNot Nothing Then
             SimObject.ExternalSolverConfigData = DirectCast(selectedsolver, IExternalSolverConfiguration).Edit(SimObject.ExternalSolverConfigData)
+        End If
+    End Sub
+
+    Private Sub chkGibbsUseIPOPT_CheckedChanged(sender As Object, e As EventArgs) Handles chkGibbsUseIPOPT.CheckedChanged
+        If TypeOf SimObject Is Reactors.Reactor_Gibbs And Loaded Then
+            DirectCast(SimObject, Reactors.Reactor_Gibbs).UseIPOPTSolver = chkGibbsUseIPOPT.Checked
         End If
     End Sub
 End Class

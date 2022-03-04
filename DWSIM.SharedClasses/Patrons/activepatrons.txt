@@ -17,6 +17,7 @@ Christian Hornhofer
 Christian Jordan
 Christian Pedersen
 Csaba Darok
+Daniel Athayde
 David Miller
 David Whitlock
 Deryck Coetzer

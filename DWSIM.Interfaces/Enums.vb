@@ -292,6 +292,8 @@ Namespace Enums
 
         PHFlash_Use_Interpolated_Result_In_Oscillating_Temperature_Cases = 31
 
+        PVFlash_TryIdealCalcOnFailure = 32
+
     End Enum
 
     Public Enum FlashCalculationType

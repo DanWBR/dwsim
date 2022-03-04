@@ -2994,7 +2994,8 @@ redirect2:                  IObj?.SetCurrent()
                             Dim Vx, Vx2, Vy, Vs As Double()
 
                             IObj?.SetCurrent()
-                            result = Me.FlashBase.Flash_PV(RET_VMOL(Phase.Mixture), P, xv, T, Me)
+
+                            result = Me.FlashBase.Flash_PV(RET_VMOL(Phase.Mixture), P, xv, 0.0, Me)
 
                             T = result(4)
 
@@ -11966,6 +11967,9 @@ Final3:
                 End If
                 If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.PHFlash_Use_Interpolated_Result_In_Oscillating_Temperature_Cases) Then
                     FlashSettings.Add(Interfaces.Enums.FlashSetting.PHFlash_Use_Interpolated_Result_In_Oscillating_Temperature_Cases, True)
+                End If
+                If Not FlashSettings.ContainsKey(Interfaces.Enums.FlashSetting.PVFlash_TryIdealCalcOnFailure) Then
+                    FlashSettings.Add(Interfaces.Enums.FlashSetting.PVFlash_TryIdealCalcOnFailure, True)
                 End If
             End If
 

@@ -744,7 +744,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     x0 = x1
 
-                    If cnt > 30 And Math.Sign(fx) <> Math.Sign(fx_ant) Then
+                    If cnt > 30 And Math.Sign(fx) <> Math.Sign(fx_ant) And Math.Abs(fx - fx_ant) < 5.0 Then
 
                         'oscillating around the solution.
 
@@ -752,7 +752,7 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                         Dim interp As New MathNet.Numerics.Interpolation.BulirschStoerRationalInterpolation(xvals.ToArray(), fxvals.ToArray())
 
-                        x1 = bmin.BrentOpt2(xvals.Min, xvals.Max, 50, 0.01, 100,
+                        x1 = bmin.BrentOpt2(xvals.Min, xvals.Max, 500, 0.01, 100,
                                             Function(tval)
                                                 Return interp.Interpolate(tval)
                                             End Function)
@@ -2136,14 +2136,21 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
             If result.Count = 1 Then
                 result = Flash_PV_1(Vz, P, V, 0.0, PP, False, Nothing)
             End If
-            If result.Count = 1 Then
-                result = Flash_PV_2(Vz, P, V, 0.0, PP, False, Nothing)
+            Dim idealcalc As Boolean = Me.FlashSettings(Interfaces.Enums.FlashSetting.PVFlash_TryIdealCalcOnFailure)
+            If result.Count = 1 And idealcalc Then
+                Using IPP As New RaoultPropertyPackage()
+                    IPP.CurrentMaterialStream = PP.CurrentMaterialStream
+                    PP.Flowsheet?.ShowMessage(String.Format("{0}: Unable to calculate PV Flash with P = {1} and VF = {2}, molar fractions = {3}. Trying to calculate using ideal K-values...",
+                                    PP.ComponentName, P, V, Vz.ToArrayString(PP.RET_VNAMES(), "G3")), Interfaces.IFlowsheet.MessageType.Warning)
+                    result = Flash_PV_1(Vz, P, V, 0.0, IPP, ReuseKI, PrevKi)
+                End Using
             End If
             If result.Count = 1 Then
-                result = Flash_PV_3(Vz, P, V, 0.0, PP, False, Nothing)
+                Throw New Exception(String.Format("{0}: Unable to calculate PV Flash with P = {1} and VF = {2}, molar fractions = {3}",
+                                    PP.ComponentName, P, V, Vz.ToArrayString(PP.RET_VNAMES(), "G3")))
+            Else
+                Return result
             End If
-
-            Return result
 
         End Function
 
@@ -2408,9 +2415,9 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
                     deltaT_ant = deltaT
                     deltaT = -df * fval / dFdT
 
-                    'If Math.Abs(deltaT) > T * 0.1 Then
-                    '    deltaT = Math.Sign(deltaT) * 10.0
-                    'End If
+                    If Math.Abs(deltaT) > maxdT Then
+                        deltaT = Math.Sign(deltaT) * maxdT
+                    End If
 
                     IObj2?.Paragraphs.Add(String.Format("Temperature error: {0} K", deltaT))
 

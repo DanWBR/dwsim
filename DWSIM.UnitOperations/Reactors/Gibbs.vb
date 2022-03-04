@@ -41,6 +41,7 @@ Namespace Reactors
 
         Public Overrides ReadOnly Property HasPropertiesForDynamicMode As Boolean = False
 
+        Public Property UseIPOPTSolver As Boolean = True
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Public f As EditingForm_ReactorConvEqGibbs
 
@@ -670,7 +671,7 @@ Namespace Reactors
                 If comp.ConstantProperties.IG_Enthalpy_of_Formation_25C = 0.0 And comp.ConstantProperties.OriginalDB <> "ChemSep" Then
                     If Me.ComponentIDs.Contains(comp.Name) Then
                         FlowSheet.ShowMessage(String.Format("Enthalpy of Formation data for compound '{0}' is missing or equal to 0. It will be removed from the reactive compounds list.", comp.Name), IFlowsheet.MessageType.Warning)
-            Me.ComponentIDs.Remove(comp.Name)
+                        Me.ComponentIDs.Remove(comp.Name)
                         compremoved = True
                     End If
                 End If
@@ -868,25 +869,57 @@ Namespace Reactors
 
                             Else
 
-                                NFv = ipo.Solve(Function(xn)
-                                                    Dim gval = FunctionValue2G2(xn, T)
-                                                    Dim ebal_i As Double
-                                                    ebal = 0.0
-                                                    For i = 0 To els
-                                                        ebal_i = 0
-                                                        For j = 0 To c
-                                                            ebal_i += xn(j) * Me.ElementMatrix(i, j)
+                                If UseIPOPTSolver Then
+
+                                    NFv = ipo.Solve(Function(xn)
+                                                        Dim gval = FunctionValue2G2(xn, T)
+                                                        Dim ebal_i As Double
+                                                        ebal = 0.0
+                                                        For i = 0 To els
+                                                            ebal_i = 0
+                                                            For j = 0 To c
+                                                                ebal_i += xn(j) * Me.ElementMatrix(i, j)
+                                                            Next
+                                                            ebal += ((TotalElements(i) - ebal_i) / TotalElements(i)) ^ 2
                                                         Next
-                                                        ebal += ((TotalElements(i) - ebal_i) / TotalElements(i)) ^ 2
-                                                    Next
-                                                    icount += 1
-                                                    wbal = ((tms.GetMassFlow() - W0tot) / W0tot) ^ 2
-                                                    errval = Exp(gval) + wbal * 100 + ebal * 100
-                                                    IObj?.SetCurrent()
-                                                    IObj?.Paragraphs.Add(String.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td></tr>",
+                                                        icount += 1
+                                                        wbal = ((tms.GetMassFlow() - W0tot) / W0tot) ^ 2
+                                                        errval = Exp(gval) + wbal * 100 + ebal * 100
+                                                        IObj?.SetCurrent()
+                                                        IObj?.Paragraphs.Add(String.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td></tr>",
                                                                             icount, errval, ebal, wbal))
-                                                    Return errval
-                                                End Function, Nothing, ival, lbo, ubo)
+                                                        Return errval
+                                                    End Function, Nothing, ival, lbo, ubo)
+
+                                Else
+
+                                    Dim slv As New BFGSBMinimizer
+                                    slv.MaxIterations = MaximumInternalIterations
+                                    slv.Tolerance = InternalTolerance
+
+                                    NFv = slv.Solve(Function(xn)
+                                                        Dim gval = FunctionValue2G2(xn, T)
+                                                        Dim ebal_i As Double
+                                                        ebal = 0.0
+                                                        For i = 0 To els
+                                                            ebal_i = 0
+                                                            For j = 0 To c
+                                                                ebal_i += xn(j) * Me.ElementMatrix(i, j)
+                                                            Next
+                                                            ebal += ((TotalElements(i) - ebal_i) / TotalElements(i)) ^ 2
+                                                        Next
+                                                        icount += 1
+                                                        wbal = ((tms.GetMassFlow() - W0tot) / W0tot) ^ 2
+                                                        errval = Exp(gval) + wbal * 100 + ebal * 100
+                                                        IObj?.SetCurrent()
+                                                        IObj?.Paragraphs.Add(String.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td></tr>",
+                                                                            icount, errval, ebal, wbal))
+                                                        Return errval
+                                                    End Function, Nothing, ival, lbo, ubo)
+
+
+                                End If
+
 
                             End If
 
