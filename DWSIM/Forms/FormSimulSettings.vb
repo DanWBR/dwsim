@@ -25,8 +25,8 @@ Imports System.Linq
 Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.Simulate365.FormFactories
 Imports DWSIM.Simulate365.Models
-
-
+Imports DWSIM.Interfaces
+Imports DWSIM.SharedClassesCSharp.FilePicker
 
 Public Class FormSimulSettings
 
@@ -929,7 +929,7 @@ Public Class FormSimulSettings
 
             Dim myStream As System.IO.FileStream
 
-            If Me.SaveFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
+            If Me.SaveFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
                 myStream = Me.SaveFileDialog1.OpenFile()
                 If Not (myStream Is Nothing) Then
                     Dim su As SystemsOfUnits.Units = CurrentFlowsheet.Options.SelectedUnitSystem
@@ -954,7 +954,7 @@ Public Class FormSimulSettings
 
         Dim myStream As System.IO.FileStream
 
-        If Me.OpenFileDialog2.ShowDialog() = Windows.Forms.DialogResult.OK Then
+        If Me.OpenFileDialog2.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
             myStream = Me.OpenFileDialog2.OpenFile()
             If Not (myStream Is Nothing) Then
                 Dim su As New SystemsOfUnits.Units
@@ -1441,13 +1441,13 @@ Public Class FormSimulSettings
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
         FormMain.AnalyticsProvider?.RegisterEvent("Importing Compounds from JSON Files", "", Nothing)
 
-#Region "Load Json from Simulate365"
-        Dim filePickerForm As S365FilePickerForm = New S365FilePickerForm
+#Region "Load Json from FilePickerService"
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
 
-        Dim openedFile As S365File = filePickerForm.ShowOpenDialog(New List(Of String)(New String() {"json"}))
+        Dim openedFile As IFile = filePickerForm.ShowOpenDialog(New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("JSON file", "*.json")})
         If openedFile IsNot Nothing Then
             Try
-                Dim comp = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BaseClasses.ConstantProperties)(File.ReadAllText(openedFile.FilePath))
+                Dim comp = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BaseClasses.ConstantProperties)(openedFile.ReadAllText())
                 If Not Me.CurrentFlowsheet.Options.SelectedComponents.ContainsKey(comp.Name) Then
                     If Not Me.CurrentFlowsheet.AvailableCompounds.ContainsKey(comp.Name) Then
                         Me.CurrentFlowsheet.AvailableCompounds.Add(comp.Name, comp)
@@ -1483,6 +1483,49 @@ Public Class FormSimulSettings
             End Try
         End If
 #End Region
+
+        '#Region "Load Json from Simulate365"
+        '        Dim filePickerForm As S365FilePickerForm = New S365FilePickerForm
+
+        '        Dim openedFile As S365File = filePickerForm.ShowOpenDialog(New List(Of String)(New String() {"json"}))
+        '        If openedFile IsNot Nothing Then
+        '            Try
+        '                Dim comp = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BaseClasses.ConstantProperties)(File.ReadAllText(openedFile.FilePath))
+        '                If Not Me.CurrentFlowsheet.Options.SelectedComponents.ContainsKey(comp.Name) Then
+        '                    If Not Me.CurrentFlowsheet.AvailableCompounds.ContainsKey(comp.Name) Then
+        '                        Me.CurrentFlowsheet.AvailableCompounds.Add(comp.Name, comp)
+        '                    End If
+        '                    Me.CurrentFlowsheet.Options.SelectedComponents.Add(comp.Name, comp)
+        '                    Dim ms As Streams.MaterialStream
+        '                    Dim proplist As New ArrayList
+        '                    For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream)
+        '                        For Each phase As BaseClasses.Phase In ms.Phases.Values
+        '                            phase.Compounds.Add(comp.Name, New BaseClasses.Compound(comp.Name, ""))
+        '                            phase.Compounds(comp.Name).ConstantProperties = comp
+        '                        Next
+        '                    Next
+        '                    ogc1.Rows.Add(New Object() {comp.Name, True, comp.Name, comp.Tag, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
+        '                    ogc1.ClearSelection()
+        '                    ogc1.Sort(colAdd, System.ComponentModel.ListSortDirection.Descending)
+        '                Else
+        '                    'compound exists.
+        '                    If MessageBox.Show(DWSIM.App.GetLocalString("UpdateFromJSON"), "DWSIM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+        '                        Me.CurrentFlowsheet.Options.SelectedComponents(comp.Name) = comp
+        '                        Dim ms As Streams.MaterialStream
+        '                        Dim proplist As New ArrayList
+        '                        For Each ms In CurrentFlowsheet.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream)
+        '                            For Each phase As BaseClasses.Phase In ms.Phases.Values
+        '                                phase.Compounds(comp.Name).ConstantProperties = comp
+        '                            Next
+        '                        Next
+        '                        MessageBox.Show(DWSIM.App.GetLocalString("CompoundUpdated"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        '                    End If
+        '                End If
+        '            Catch ex As Exception
+        '                MessageBox.Show(DWSIM.App.GetLocalString("Erro") + ": " + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        '            End Try
+        '        End If
+        '#End Region
 
         'Open file From local storage, code will be returned afterwards
 
@@ -1531,7 +1574,7 @@ Public Class FormSimulSettings
     Private Sub Button13_Click(sender As Object, e As EventArgs) Handles Button13.Click
         FormMain.AnalyticsProvider?.RegisterEvent("Importing Compounds from Online Sources", "", Nothing)
         Dim f As New FormImportCompoundOnline
-        If f.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+        If f.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK Then
             Try
                 Dim comp = f.BaseCompound
                 If Not Me.CurrentFlowsheet.Options.SelectedComponents.ContainsKey(comp.Name) Then
