@@ -3696,7 +3696,7 @@ Public Class FlowsheetSurface_SkiaSharp
         Flowsheet.UpdateInterface()
     End Sub
 
-    Private Sub tscbAddObjectsWithStreams_Click(sender As Object, e As EventArgs) Handles tscbAddObjectsWithStreams.Click
+    Private Sub tscbAddObjectsWithStreams_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tscbAddObjectsWithStreams.SelectedIndexChanged
         Flowsheet.FlowsheetOptions.AddObjectsWithStreams = tscbAddObjectsWithStreams.SelectedIndex
     End Sub
 
