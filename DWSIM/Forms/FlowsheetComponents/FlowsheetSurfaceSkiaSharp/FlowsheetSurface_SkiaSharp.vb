@@ -1661,8 +1661,8 @@ Public Class FlowsheetSurface_SkiaSharp
         Dim mpx = x '- SplitContainer1.SplitterDistance
         Dim mpy = y '- ToolStripContainer1.TopToolStripPanel.Height
 
-        Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("FLSH004"), Color.Black, MessageType.Tip)
-        Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("FLSH006"), Color.Black, MessageType.Tip)
+        'Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("FLSH004"), Color.Black, MessageType.Tip)
+        'Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("FLSH006"), Color.Black, MessageType.Tip)
 
         Dim objname = (Flowsheet.SimulationObjects.Count + 1).ToString()
         Dim exists = True
@@ -1965,8 +1965,8 @@ Public Class FlowsheetSurface_SkiaSharp
                 Flowsheet.AddComponentsRows(myCOMS)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myCOMS.Name, myCOMS)
 
-                Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("MSTR001"), Color.Black, MessageType.Tip)
-                Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("MSTR002"), Color.Black, MessageType.Tip)
+                'Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("MSTR001"), Color.Black, MessageType.Tip)
+                'Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("MSTR002"), Color.Black, MessageType.Tip)
 
             Case ObjectType.EnergyStream
 
@@ -2471,15 +2471,18 @@ Public Class FlowsheetSurface_SkiaSharp
         SplitContainerHorizontal.Panel1.Cursor = Cursors.Arrow
 
         If CreateConnected Then
-            If Flowsheet.Options.AddObjectsWithStreams = 1 Then
-                AddConnectedObjects(Flowsheet.SimulationObjects(gObj.Name), 1)
-                Flowsheet.UpdateInterface()
-            End If
-            If Flowsheet.Options.AddObjectsWithStreams = 2 Then
-                AddConnectedObjects(Flowsheet.SimulationObjects(gObj.Name), 2)
-                AddConnectedObjects(Flowsheet.SimulationObjects(gObj.Name), 1)
-                Flowsheet.UpdateInterface()
-            End If
+            Try
+                If Flowsheet.Options.AddObjectsWithStreams = 1 Then
+                    AddConnectedObjects(Flowsheet.SimulationObjects(gObj.Name), 1)
+                    Flowsheet.UpdateInterface()
+                End If
+                If Flowsheet.Options.AddObjectsWithStreams = 2 Then
+                    AddConnectedObjects(Flowsheet.SimulationObjects(gObj.Name), 2)
+                    AddConnectedObjects(Flowsheet.SimulationObjects(gObj.Name), 1)
+                    Flowsheet.UpdateInterface()
+                End If
+            Catch ex As Exception
+            End Try
         End If
 
         Return gObj.Name

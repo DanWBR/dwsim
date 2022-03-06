@@ -1264,15 +1264,18 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
         End If
 
         If CreateConnected Then
-            If FlowsheetOptions.AddObjectsWithStreams = 1 Then
-                AddConnectedObjects(SimulationObjects(gObj.Name), 1)
-                UpdateInterface()
-            End If
-            If FlowsheetOptions.AddObjectsWithStreams = 2 Then
-                AddConnectedObjects(SimulationObjects(gObj.Name), 2)
-                AddConnectedObjects(SimulationObjects(gObj.Name), 1)
-                UpdateInterface()
-            End If
+            Try
+                If FlowsheetOptions.AddObjectsWithStreams = 1 Then
+                    AddConnectedObjects(SimulationObjects(gObj.Name), 1)
+                    UpdateInterface()
+                End If
+                If FlowsheetOptions.AddObjectsWithStreams = 2 Then
+                    AddConnectedObjects(SimulationObjects(gObj.Name), 2)
+                    AddConnectedObjects(SimulationObjects(gObj.Name), 1)
+                    UpdateInterface()
+                End If
+            Catch ex As Exception
+            End Try
         End If
 
         Return gObj.Name
