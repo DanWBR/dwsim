@@ -422,169 +422,170 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
     Public Property CalculationQueue As New Queue(Of ICalculationArgs) Implements IFlowsheetCalculationQueue.CalculationQueue
 
-    Public Function AddObject(ByVal typename As String, ByVal x As Integer, ByVal y As Integer, Optional ByVal tag As String = "", Optional ByVal id As String = "") As ISimulationObject
+    Public Function AddObject(ByVal typename As String, ByVal x As Integer, ByVal y As Integer, Optional ByVal tag As String = "",
+                              Optional ByVal id As String = "", Optional CreateConnected As Boolean = False) As ISimulationObject
 
         Select Case typename
 
             Case "Controller Block"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.OT_Adjust, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.OT_Adjust, x, y, tag,,, CreateConnected))
 
             Case "Specification Block"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.OT_Spec, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.OT_Spec, x, y, tag,,, CreateConnected))
 
             Case "Recycle Block"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.OT_Recycle, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.OT_Recycle, x, y, tag,,, CreateConnected))
 
             Case "Energy Recycle Block"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.OT_EnergyRecycle, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.OT_EnergyRecycle, x, y, tag,,, CreateConnected))
 
             Case "Stream Mixer"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.NodeIn, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.NodeIn, x, y, tag,,, CreateConnected))
 
             Case "Stream Splitter"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.NodeOut, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.NodeOut, x, y, tag,,, CreateConnected))
 
             Case "Pump"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Pump, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Pump, x, y, tag,,, CreateConnected))
 
             Case "Tank"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Tank, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Tank, x, y, tag,,, CreateConnected))
 
             Case "Gas-Liquid Separator"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Vessel, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Vessel, x, y, tag,,, CreateConnected))
 
             Case "Material Stream"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x, y, tag,,, CreateConnected))
 
             Case "Energy Stream"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.EnergyStream, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.EnergyStream, x, y, tag,,, CreateConnected))
 
             Case "Compressor"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Compressor, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Compressor, x, y, tag,,, CreateConnected))
 
             Case "Expander (Turbine)"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Expander, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Expander, x, y, tag,,, CreateConnected))
 
             Case "Heater"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Heater, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Heater, x, y, tag,,, CreateConnected))
 
             Case "Cooler"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Cooler, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Cooler, x, y, tag,,, CreateConnected))
 
             Case "Pipe Segment"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Pipe, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Pipe, x, y, tag,,, CreateConnected))
 
             Case "Valve"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Valve, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Valve, x, y, tag,,, CreateConnected))
 
             Case "Conversion Reactor"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.RCT_Conversion, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.RCT_Conversion, x, y, tag,,, CreateConnected))
 
             Case "Equilibrium Reactor"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.RCT_Equilibrium, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.RCT_Equilibrium, x, y, tag,,, CreateConnected))
 
             Case "Gibbs Reactor"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.RCT_Gibbs, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.RCT_Gibbs, x, y, tag,,, CreateConnected))
 
             Case "Plug-Flow Reactor (PFR)"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.RCT_PFR, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.RCT_PFR, x, y, tag,,, CreateConnected))
 
             Case "Continuous Stirred Tank Reactor (CSTR)"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.RCT_CSTR, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.RCT_CSTR, x, y, tag,,, CreateConnected))
 
             Case "Heat Exchanger"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.HeatExchanger, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.HeatExchanger, x, y, tag,,, CreateConnected))
 
             Case "Shortcut Column"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.ShortcutColumn, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.ShortcutColumn, x, y, tag,,, CreateConnected))
 
             Case "Distillation Column"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.DistillationColumn, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.DistillationColumn, x, y, tag,,, CreateConnected))
 
             Case "Absorption Column", "Absorption/Extraction Column"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.AbsorptionColumn, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.AbsorptionColumn, x, y, tag,,, CreateConnected))
 
             Case "Compound Separator"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.ComponentSeparator, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.ComponentSeparator, x, y, tag,,, CreateConnected))
 
             Case "Solids Separator"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.SolidSeparator, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.SolidSeparator, x, y, tag,,, CreateConnected))
 
             Case "Filter"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Filter, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Filter, x, y, tag,,, CreateConnected))
 
             Case "Orifice Plate"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.OrificePlate, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.OrificePlate, x, y, tag,,, CreateConnected))
 
             Case "Python Script"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.CustomUO, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.CustomUO, x, y, tag,,, CreateConnected))
 
             Case "Spreadsheet"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.ExcelUO, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.ExcelUO, x, y, tag,,, CreateConnected))
 
             Case "Flowsheet"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.FlowsheetUO, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.FlowsheetUO, x, y, tag,,, CreateConnected))
 
             Case "CAPE-OPEN Unit Operation"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.CapeOpenUO, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.CapeOpenUO, x, y, tag,,, CreateConnected))
 
             Case "Digital Gauge"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.DigitalGauge, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.DigitalGauge, x, y, tag,,, CreateConnected))
 
             Case "Analog Gauge"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.AnalogGauge, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.AnalogGauge, x, y, tag,,, CreateConnected))
 
             Case "Level Gauge"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.LevelGauge, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.LevelGauge, x, y, tag,,, CreateConnected))
 
             Case "PID Controller"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Controller_PID, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Controller_PID, x, y, tag,,, CreateConnected))
 
             Case "Input Box"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Input, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Input, x, y, tag,,, CreateConnected))
 
             Case "Switch"
 
-                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Switch, x, y, tag))
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Switch, x, y, tag,,, CreateConnected))
 
             Case Else
 
@@ -594,7 +595,10 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
 
     End Function
 
-    Public Function AddObjectToSurface(ByVal type As ObjectType, ByVal x As Integer, ByVal y As Integer, Optional ByVal tag As String = "", Optional ByVal id As String = "", Optional ByVal uoobj As IExternalUnitOperation = Nothing) As String
+    Public Function AddObjectToSurface(ByVal type As ObjectType, ByVal x As Integer, ByVal y As Integer,
+                                       Optional ByVal tag As String = "", Optional ByVal id As String = "",
+                                       Optional ByVal uoobj As IExternalUnitOperation = Nothing,
+                                       Optional CreateConnected As Boolean = False) As String
 
         Dim gObj As IGraphicObject = Nothing
         Dim mpx = x '- SplitContainer1.SplitterDistance
@@ -1259,9 +1263,396 @@ Imports DWSIM.Thermodynamics.AdvancedEOS
             FlowsheetSurface.AddObject(gObj)
         End If
 
+        If CreateConnected Then
+            If FlowsheetOptions.AddObjectsWithStreams = 1 Then
+                AddConnectedObjects(SimulationObjects(gObj.Name), 1)
+                UpdateInterface()
+            End If
+            If FlowsheetOptions.AddObjectsWithStreams = 2 Then
+                AddConnectedObjects(SimulationObjects(gObj.Name), 2)
+                AddConnectedObjects(SimulationObjects(gObj.Name), 1)
+                UpdateInterface()
+            End If
+        End If
+
         Return gObj.Name
 
     End Function
+
+    Public Sub AddConnectedObjects(obj As Interfaces.ISimulationObject, scheme As Integer)
+
+        Dim x = obj.GraphicObject.X
+        Dim y = obj.GraphicObject.Y
+        Dim w = obj.GraphicObject.Width
+        Dim h = obj.GraphicObject.Height
+
+        Dim gobj = obj.GraphicObject
+
+        Dim mstrs = FlowsheetSurface.FindObjectsAtBounds(x - 250, y - 250, 500, 500).Where(Function(o) o.ObjectType = ObjectType.MaterialStream).ToList()
+        Dim mstrsI = FlowsheetSurface.FindObjectsAtBounds(x - 250, y - 250, 250, 500).Where(Function(o) o.ObjectType = ObjectType.MaterialStream And Not o.OutputConnectors(0).IsAttached).ToList()
+        Dim mstrsO = FlowsheetSurface.FindObjectsAtBounds(x + w, y - 250, 250, 500).Where(Function(o) o.ObjectType = ObjectType.MaterialStream And Not o.InputConnectors(0).IsAttached).ToList()
+        Dim estrs = FlowsheetSurface.FindObjectsAtBounds(x - 250, y - 250, 500, 500).Where(Function(o) o.ObjectType = ObjectType.EnergyStream).ToList()
+        Dim estrsI = FlowsheetSurface.FindObjectsAtBounds(x - 250, y - 250, 250, 500).Where(Function(o) o.ObjectType = ObjectType.EnergyStream And Not o.OutputConnectors(0).IsAttached).ToList()
+        Dim estrsO = FlowsheetSurface.FindObjectsAtBounds(x + w, y - 250, 250, 500).Where(Function(o) o.ObjectType = ObjectType.EnergyStream And Not o.InputConnectors(0).IsAttached).ToList()
+
+        Dim uosI = FlowsheetSurface.FindObjectsAtBounds(x - 250, y - 250, 250, 500).Where(Function(o) o.ObjectType <> ObjectType.MaterialStream And
+                                                                                             o.ObjectType <> ObjectType.EnergyStream).ToList()
+        Dim uosO = FlowsheetSurface.FindObjectsAtBounds(x + w, y - 250, 250, 500).Where(Function(o) o.ObjectType <> ObjectType.MaterialStream And
+                                                                                             o.ObjectType <> ObjectType.EnergyStream).ToList()
+
+        mstrs = mstrs.OrderBy(Function(o) Math.Abs(gobj.X - o.X) + Math.Abs(gobj.Y - o.Y)).ToList()
+        mstrsI = mstrsI.OrderBy(Function(o) Math.Abs(gobj.X - o.X) + Math.Abs(gobj.Y - o.Y)).ToList()
+        mstrsO = mstrsO.OrderBy(Function(o) Math.Abs(gobj.X - o.X) + Math.Abs(gobj.Y - o.Y)).ToList()
+        estrs = estrs.OrderBy(Function(o) Math.Abs(gobj.X - o.X) + Math.Abs(gobj.Y - o.Y)).ToList()
+        estrsI = estrsI.OrderBy(Function(o) Math.Abs(gobj.X - o.X) + Math.Abs(gobj.Y - o.Y)).ToList()
+        estrsO = estrsO.OrderBy(Function(o) Math.Abs(gobj.X - o.X) + Math.Abs(gobj.Y - o.Y)).ToList()
+        uosI = uosI.OrderBy(Function(o) Math.Abs(gobj.X - o.X) + Math.Abs(gobj.Y - o.Y)).ToList()
+        uosO = uosO.OrderBy(Function(o) Math.Abs(gobj.X - o.X) + Math.Abs(gobj.Y - o.Y)).ToList()
+
+        Select Case obj.GraphicObject.ObjectType
+            Case ObjectType.MaterialStream
+                If scheme = 2 And uosI.Count > 0 Then
+                    Try : ConnectObject(uosI(0), gobj) : Catch : End Try
+                End If
+                If scheme = 2 And uosO.Count > 0 Then
+                    Try : ConnectObject(gobj, uosO(0)) : Catch : End Try
+                End If
+            Case ObjectType.EnergyStream
+                If scheme = 2 And uosI.Count > 0 Then
+                    Try : ConnectObject(uosI(0), gobj) : Catch : End Try
+                End If
+                If scheme = 2 And uosO.Count > 0 Then
+                    Try : ConnectObject(gobj, uosO(0)) : Catch : End Try
+                End If
+            Case ObjectType.AbsorptionColumn
+                If scheme = 2 And mstrs.Count > 0 Then
+                    For i = 0 To mstrs.Count
+                        If i > 3 Then Exit For
+                        If i < 2 Then
+                            Try : ConnectObjects(mstrs(i), gobj, 0, i) : Catch : End Try
+                        Else
+                            Try : ConnectObjects(gobj, mstrs(i - 2), i - 2, 0) : Catch : End Try
+                        End If
+                    Next
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, ,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y + h - 40, ,,, False)
+                    Dim m2 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y, ,,, False)
+                    Dim m3 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y + h - 40, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(m0).GraphicObject, gobj, 0, 0) : Catch : DeleteObject(m0, False) : End Try
+                    Try : ConnectObjects(SimulationObjects(m1).GraphicObject, gobj, 0, 1) : Catch : DeleteObject(m1, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m2).GraphicObject, 0, 0) : Catch : DeleteObject(m2, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m3).GraphicObject, 1, 0) : Catch : DeleteObject(m3, False) : End Try
+                End If
+            Case ObjectType.Compressor
+                If scheme = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then
+                        Try : ConnectObjects(mstrsI(0), gobj, 0, 0) : Catch : End Try
+                    End If
+                    If mstrsO.Count > 0 Then
+                        Try : ConnectObjects(gobj, mstrsO(0), 0, 0) : Catch : End Try
+                    End If
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y,,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(m0).GraphicObject, gobj, 0, 0) : Catch : DeleteObject(m0, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m1).GraphicObject, 0, 0) : Catch : DeleteObject(m1, False) : End Try
+                End If
+                If scheme = 2 And estrsI.Count > 0 Then
+                    If estrsI.Count > 0 Then
+                        Try : ConnectObjects(estrsI(0), gobj, 0, 0) : Catch : End Try
+                    End If
+                Else
+                    Dim e1 = AddObjectToSurface(ObjectType.EnergyStream, x - 60, y + h + 60, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(e1).GraphicObject, gobj, 0, 1) : Catch : DeleteObject(e1, False) : End Try
+                End If
+            Case ObjectType.DistillationColumn
+                If scheme = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then Try : ConnectObjects(mstrsI(0), gobj, 0, 0) : Catch : End Try
+                    If mstrsO.Count > 0 Then
+                        Try : ConnectObjects(gobj, mstrsO(0), 0, 0) : Catch : End Try
+                        Try : ConnectObjects(gobj, mstrsO(1), 1, 0) : Catch : End Try
+                    End If
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, ,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y - 40, ,,, False)
+                    Dim m2 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y + h + 40, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(m0).GraphicObject, gobj, 0, 0) : Catch : DeleteObject(m0, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m1).GraphicObject, 0, 0) : Catch : DeleteObject(m1, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m2).GraphicObject, 1, 0) : Catch : DeleteObject(m2, False) : End Try
+                End If
+                If scheme = 2 And estrs.Count > 0 Then
+                    If estrsI.Count > 0 Then Try : ConnectObjects(estrsI(0), gobj, 0, 10) : Catch : End Try
+                    If estrsO.Count > 0 Then Try : ConnectObjects(gobj, estrsO(0), 10, 0) : Catch : End Try
+                Else
+                    Dim e1 = AddObjectToSurface(ObjectType.EnergyStream, x + w + 60, y + 40, ,,, False)
+                    Dim e2 = AddObjectToSurface(ObjectType.EnergyStream, x + w + 60, y + h - 40, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(e2).GraphicObject, gobj, 0, 10) : Catch : DeleteObject(e1, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(e1).GraphicObject, 10, 0) : Catch : DeleteObject(e2, False) : End Try
+                End If
+            Case ObjectType.Expander, ObjectType.Cooler
+                If scheme = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then Try : ConnectObjects(mstrsI(0), gobj, 0, 0) : Catch : End Try
+                    If mstrsO.Count > 0 Then Try : ConnectObjects(gobj, mstrsO(0), 0, 0) : Catch : End Try
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, ,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(m0).GraphicObject, gobj, 0, 0) : Catch : DeleteObject(m0, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m1).GraphicObject, 0, 0) : Catch : DeleteObject(m1, False) : End Try
+                End If
+                If scheme = 2 And estrs.Count > 0 Then
+                    If estrsO.Count > 0 Then ConnectObjects(gobj, estrsO(0), 0, 0)
+                Else
+                    Dim e1 = AddObjectToSurface(ObjectType.EnergyStream, x + w + 60, y + h + 60, ,,, False)
+                    Try : ConnectObjects(gobj, SimulationObjects(e1).GraphicObject, 0, 0) : Catch : DeleteObject(e1, False) : End Try
+                End If
+            Case ObjectType.Heater
+                If scheme = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then Try : ConnectObjects(mstrsI(0), gobj, 0, 0) : Catch : End Try
+                    If mstrsO.Count > 0 Then Try : ConnectObjects(gobj, mstrsO(0), 0, 0) : Catch : End Try
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, ,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(m0).GraphicObject, gobj, 0, 0) : Catch : DeleteObject(m0, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m1).GraphicObject, 0, 0) : Catch : DeleteObject(m1, False) : End Try
+                End If
+                If scheme = 2 And estrs.Count > 0 Then
+                    If estrsI.Count > 0 Then Try : ConnectObjects(estrsI(0), gobj, 0, 1) : Catch : End Try
+                Else
+                    Dim e1 = AddObjectToSurface(ObjectType.EnergyStream, x - 60, y + h + 60, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(e1).GraphicObject, gobj, 0, 1) : Catch : DeleteObject(e1, False) : End Try
+                End If
+            Case ObjectType.HeatExchanger
+                If scheme = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then
+                        Try : ConnectObjects(mstrsI(0), gobj, 0, 0) : Catch : End Try
+                        Try : ConnectObjects(mstrsI(1), gobj, 0, 1) : Catch : End Try
+                    End If
+                    If mstrsO.Count > 0 Then
+                        Try : ConnectObjects(gobj, mstrsO(0), 0, 0) : Catch : End Try
+                        Try : ConnectObjects(gobj, mstrsO(1), 1, 0) : Catch : End Try
+                    End If
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y - 40, ,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y + 40, ,,, False)
+                    Dim m2 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y - 40, ,,, False)
+                    Dim m3 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y + 40, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(m0).GraphicObject, gobj, 0, 0) : Catch : DeleteObject(m0, False) : End Try
+                    Try : ConnectObjects(SimulationObjects(m1).GraphicObject, gobj, 0, 1) : Catch : DeleteObject(m1, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m2).GraphicObject, 0, 0) : Catch : DeleteObject(m2, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m3).GraphicObject, 1, 0) : Catch : DeleteObject(m3, False) : End Try
+                End If
+            Case ObjectType.NodeIn
+                If scheme = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then
+                        Try : ConnectObjects(mstrsI(0), gobj, 0, 0) : Catch : End Try
+                        Try : ConnectObjects(mstrsI(1), gobj, 0, 1) : Catch : End Try
+                        Try : ConnectObjects(mstrsI(2), gobj, 0, 2) : Catch : End Try
+                    End If
+                    If mstrsO.Count > 0 Then
+                        Try : ConnectObjects(gobj, mstrsO(0), 0, 0) : Catch : End Try
+                    End If
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, ,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y + 40, ,,, False)
+                    Dim m2 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y + 40, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(m0).GraphicObject, gobj, 0, 0) : Catch : DeleteObject(m0, False) : End Try
+                    Try : ConnectObjects(SimulationObjects(m1).GraphicObject, gobj, 0, 1) : Catch : DeleteObject(m1, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m2).GraphicObject, 0, 0) : Catch : DeleteObject(m2, False) : End Try
+                End If
+            Case ObjectType.NodeOut
+                If scheme = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then
+                        Try : ConnectObjects(mstrsI(0), gobj, 0, 0) : Catch : End Try
+                    End If
+                    If mstrsO.Count > 0 Then
+                        Try : ConnectObjects(gobj, mstrsO(0), 0, 0) : Catch : End Try
+                        Try : ConnectObjects(gobj, mstrsO(1), 1, 0) : Catch : End Try
+                        Try : ConnectObjects(gobj, mstrsO(2), 2, 0) : Catch : End Try
+                    End If
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, ,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y, ,,, False)
+                    Dim m2 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y + 40, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(m0).GraphicObject, gobj, 0, 0) : Catch : DeleteObject(m0, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m1).GraphicObject, 0, 0) : Catch : DeleteObject(m1, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m2).GraphicObject, 1, 0) : Catch : DeleteObject(m2, False) : End Try
+                End If
+            Case ObjectType.Pipe
+                If scheme = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then Try : ConnectObjects(mstrsI(0), gobj, 0, 0) : Catch : End Try
+                    If mstrsO.Count > 0 Then Try : ConnectObjects(gobj, mstrsO(0), 0, 0) : Catch : End Try
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, ,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(m0).GraphicObject, gobj, 0, 0) : Catch : DeleteObject(m0, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m1).GraphicObject, 0, 0) : Catch : DeleteObject(m1, False) : End Try
+                End If
+                If scheme = 2 And estrs.Count > 0 Then
+                    If estrsO.Count > 0 Then Try : ConnectObjects(gobj, estrsO(0), 0, 0) : Catch : End Try
+                Else
+                    Dim e1 = AddObjectToSurface(ObjectType.EnergyStream, x + w + 60, y + h + 60, ,,, False)
+                    Try : ConnectObjects(gobj, SimulationObjects(e1).GraphicObject, 0, 0) : Catch : DeleteObject(e1, False) : End Try
+                End If
+            Case ObjectType.Pump
+                If scheme = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then Try : ConnectObjects(mstrsI(0), gobj, 0, 0) : Catch : End Try
+                    If mstrsO.Count > 0 Then Try : ConnectObjects(gobj, mstrsO(0), 0, 0) : Catch : End Try
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, ,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(m0).GraphicObject, gobj, 0, 0) : Catch : DeleteObject(m0, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m1).GraphicObject, 0, 0) : Catch : DeleteObject(m1, False) : End Try
+                End If
+                If scheme = 2 And estrs.Count > 0 Then
+                    If estrsI.Count > 0 Then Try : ConnectObjects(estrsI(0), gobj, 0, 1) : Catch : End Try
+                Else
+                    Dim e1 = AddObjectToSurface(ObjectType.EnergyStream, x - 60, y + h + 60, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(e1).GraphicObject, gobj, 0, 1) : Catch : DeleteObject(e1, False) : End Try
+                End If
+            Case ObjectType.RCT_Conversion
+                If scheme = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then Try : ConnectObjects(mstrsI(0), gobj, 0, 0) : Catch : End Try
+                    If mstrsO.Count > 0 Then Try : ConnectObjects(gobj, mstrsO(0), 0, 0) : Catch : End Try
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, ,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y - 40, ,,, False)
+                    Dim m2 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y + h + 40, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(m0).GraphicObject, gobj, 0, 0) : Catch : DeleteObject(m0, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m1).GraphicObject, 0, 0) : Catch : DeleteObject(m1, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m2).GraphicObject, 1, 0) : Catch : DeleteObject(m2, False) : End Try
+                End If
+                If scheme = 2 And estrs.Count > 0 Then
+                    If estrsO.Count > 0 Then ConnectObjects(gobj, estrsO(0), 2, 0)
+                Else
+                    Dim e1 = AddObjectToSurface(ObjectType.EnergyStream, x + w + 60, y + h + 60, ,,, False)
+                    Try : ConnectObjects(gobj, SimulationObjects(e1).GraphicObject, 2, 0) : Catch : DeleteObject(e1, False) : End Try
+                End If
+            Case ObjectType.RCT_CSTR, ObjectType.RCT_PFR
+                If scheme = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then Try : ConnectObjects(mstrsI(0), gobj, 0, 0) : Catch : End Try
+                    If mstrsO.Count > 0 Then Try : ConnectObjects(gobj, mstrsO(0), 0, 0) : Catch : End Try
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, ,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(m0).GraphicObject, gobj, 0, 0) : Catch : DeleteObject(m0, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m1).GraphicObject, 0, 0) : Catch : DeleteObject(m1, False) : End Try
+                End If
+                If scheme = 2 And estrs.Count > 0 Then
+                    If estrsI.Count > 0 Then Try : ConnectObjects(estrsI(0), gobj, 0, 1) : Catch : End Try
+                Else
+                    Dim e1 = AddObjectToSurface(ObjectType.EnergyStream, x - 60, y + h + 60, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(e1).GraphicObject, gobj, 0, 1) : Catch : DeleteObject(e1, False) : End Try
+                End If
+            Case ObjectType.RCT_Equilibrium, ObjectType.RCT_Gibbs
+                If scheme = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then Try : ConnectObjects(mstrsI(0), gobj, 0, 0) : Catch : End Try
+                    If mstrsO.Count > 0 Then Try : ConnectObjects(gobj, mstrsO(0), 0, 0) : Catch : End Try
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, ,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y - 40, ,,, False)
+                    Dim m2 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y + h + 40, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(m0).GraphicObject, gobj, 0, 0) : Catch : DeleteObject(m0, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m1).GraphicObject, 0, 0) : Catch : DeleteObject(m1, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m2).GraphicObject, 1, 0) : Catch : DeleteObject(m2, False) : End Try
+                End If
+                If scheme = 2 And estrs.Count > 0 Then
+                    If estrsI.Count > 0 Then Try : ConnectObjects(estrsI(0), gobj, 0, 1) : Catch : End Try
+                Else
+                    Dim e1 = AddObjectToSurface(ObjectType.EnergyStream, x - 60, y + h + 60, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(e1).GraphicObject, gobj, 0, 1) : Catch : DeleteObject(e1, False) : End Try
+                End If
+            Case ObjectType.ComponentSeparator
+                If scheme = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then Try : ConnectObjects(mstrsI(0), gobj, 0, 0) : Catch : End Try
+                    If mstrsO.Count > 0 Then Try : ConnectObjects(gobj, mstrsO(0), 0, 0) : Catch : End Try
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, ,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y - 40, ,,, False)
+                    Dim m2 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y + h + 40, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(m0).GraphicObject, gobj, 0, 0) : Catch : DeleteObject(m0, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m1).GraphicObject, 0, 0) : Catch : DeleteObject(m1, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m2).GraphicObject, 1, 0) : Catch : DeleteObject(m2, False) : End Try
+                End If
+                If scheme = 2 And estrs.Count > 0 Then
+                    If estrsO.Count > 0 Then Try : ConnectObjects(gobj, estrsO(0), 0, 0) : Catch : End Try
+                Else
+                    Dim e1 = AddObjectToSurface(ObjectType.EnergyStream, x + 60, y + h + 60, ,,, False)
+                    Try : ConnectObjects(gobj, SimulationObjects(e1).GraphicObject, 0, 0) : Catch : DeleteObject(e1, False) : End Try
+                End If
+            Case ObjectType.ShortcutColumn
+                If scheme = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then Try : ConnectObjects(mstrsI(0), gobj, 0, 0) : Catch : End Try
+                    If mstrsO.Count > 0 Then
+                        Try : ConnectObjects(gobj, mstrsO(0), 0, 0) : Catch : End Try
+                        Try : ConnectObjects(gobj, mstrsO(1), 1, 0) : Catch : End Try
+                    End If
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, ,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y - 40, ,,, False)
+                    Dim m2 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y + h + 40, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(m0).GraphicObject, gobj, 0, 0) : Catch : DeleteObject(m0, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m1).GraphicObject, 0, 0) : Catch : DeleteObject(m1, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m2).GraphicObject, 1, 0) : Catch : DeleteObject(m2, False) : End Try
+                End If
+                If scheme = 2 And estrs.Count > 0 Then
+                    If estrsI.Count > 0 Then Try : ConnectObjects(estrsI(0), gobj, 0, 1) : Catch : End Try
+                    If estrsO.Count > 0 Then Try : ConnectObjects(gobj, estrsO(0), 0, 0) : Catch : End Try
+                Else
+                    Dim e1 = AddObjectToSurface(ObjectType.EnergyStream, x + w + 60, y + 40, ,,, False)
+                    Dim e2 = AddObjectToSurface(ObjectType.EnergyStream, x + w + 60, y + h - 40, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(e2).GraphicObject, gobj, 0, 1) : Catch : DeleteObject(e1, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(e1).GraphicObject, 0, 0) : Catch : DeleteObject(e2, False) : End Try
+                End If
+            Case ObjectType.Tank, ObjectType.Valve, ObjectType.OrificePlate, ObjectType.OT_Recycle
+                If scheme = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then Try : ConnectObjects(mstrsI(0), gobj, 0, 0) : Catch : End Try
+                    If mstrsO.Count > 0 Then Try : ConnectObjects(gobj, mstrsO(0), 0, 0) : Catch : End Try
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, ,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(m0).GraphicObject, gobj, 0, 0) : Catch : DeleteObject(m0, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m1).GraphicObject, 0, 0) : Catch : DeleteObject(m1, False) : End Try
+                End If
+            Case ObjectType.Vessel, ObjectType.SolidSeparator, ObjectType.Filter
+                If scheme = 2 And mstrs.Count > 0 Then
+                    If mstrsI.Count > 0 Then Try : ConnectObjects(mstrsI(0), gobj, 0, 0) : Catch : End Try
+                    If mstrsO.Count > 0 Then
+                        Try : ConnectObjects(gobj, mstrsO(0), 0, 0) : Catch : End Try
+                        Try : ConnectObjects(gobj, mstrsO(1), 1, 0) : Catch : End Try
+                    End If
+                Else
+                    Dim m0 = AddObjectToSurface(ObjectType.MaterialStream, x - 60, y, ,,, False)
+                    Dim m1 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y - 40, ,,, False)
+                    Dim m2 = AddObjectToSurface(ObjectType.MaterialStream, x + w + 60, y + h + 40, ,,, False)
+                    Try : ConnectObjects(SimulationObjects(m0).GraphicObject, gobj, 0, 0) : Catch : DeleteObject(m0, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m1).GraphicObject, 0, 0) : Catch : DeleteObject(m1, False) : End Try
+                    Try : ConnectObjects(gobj, SimulationObjects(m2).GraphicObject, 1, 0) : Catch : DeleteObject(m2, False) : End Try
+                End If
+        End Select
+
+    End Sub
+
+    Public Sub ConnectObject(ByRef gObjFrom As GraphicObject, ByRef gObjTo As GraphicObject, Optional ByVal fidx As Integer = -1, Optional ByVal tidx As Integer = -1)
+
+        ConnectObjects(gObjFrom, gObjTo, fidx, tidx)
+
+    End Sub
+
+    Public Sub DeleteObject(ByVal tag As String, Optional ByVal confirmation As Boolean = True)
+
+        Dim gobj As GraphicObject = GetFlowsheetGraphicObject(tag)
+
+        If Not gobj Is Nothing Then
+            FlowsheetSurface.SelectedObject = gobj
+            DeleteSelectedObject(Me, New EventArgs(), gobj, confirmation)
+        ElseIf GraphicObjects.ContainsKey(tag) Then
+            gobj = GraphicObjects(tag)
+            FlowsheetSurface.SelectedObject = gobj
+            DeleteSelectedObject(Me, New EventArgs(), gobj, confirmation)
+        End If
+
+    End Sub
 
     Public Sub CheckTag(obj As IGraphicObject)
 
