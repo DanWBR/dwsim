@@ -1746,6 +1746,10 @@ Public Class FormFlowsheet
         If Not gobj Is Nothing Then
             Me.FormSurface.FlowsheetSurface.SelectedObject = gobj
             Me.DeleteSelectedObject(Me, New EventArgs(), gobj, confirmation)
+        ElseIf GraphicObjects.ContainsKey(tag) Then
+            gobj = GraphicObjects(tag)
+            Me.FormSurface.FlowsheetSurface.SelectedObject = gobj
+            Me.DeleteSelectedObject(Me, New EventArgs(), gobj, confirmation)
         End If
 
     End Sub
