@@ -66,6 +66,7 @@ Version 7.4.0
 
 - Auto-Connect Added Objects
 - Fixed issue with Gibbs Reactor
+- Fixed Conversion Reactor heat balance
 - Fixed issue with temperature calculation in PH Flash
 - Other fixes and enhancements
 
