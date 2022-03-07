@@ -913,6 +913,7 @@ Namespace UnitOperations
                     For i = 0 To 2
                         proplist.Add("PROP_DC_" + CStr(i))
                     Next
+                    proplist.Add("PROP_DC_7")
                     proplist.Add("PROP_DC_8")
                     For i = 1 To Me.Stages.Count
                         proplist.Add("Stage_Pressure_" + CStr(i))
@@ -1133,6 +1134,8 @@ Namespace UnitOperations
                     Case 2
                         'PROP_DC_2	Condenser Pressure Drop
                         CondenserDeltaP = SystemsOfUnits.Converter.ConvertToSI(su.deltaP, propval)
+                    Case 7
+                        SetNumberOfStages(propval)
                     Case 8
                         ColumnPressureDrop = SystemsOfUnits.Converter.ConvertToSI(su.deltaP, propval)
                 End Select
