@@ -502,10 +502,7 @@ Namespace UnitOperations
             IObj?.Paragraphs.Add("• Outlet temperature: PH Flash.")
 
             If args Is Nothing Then
-                If Not Me.GraphicObject.InputConnectors(1).IsAttached Then
-                    'Call function to calculate flowsheet
-                    Throw New Exception(FlowSheet.GetTranslatedString("NohcorrentedeEnergyFlow4"))
-                ElseIf Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
+                If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
                     'Call function to calculate flowsheet
                     Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
                 ElseIf Not Me.GraphicObject.InputConnectors(0).IsAttached Then
@@ -519,7 +516,7 @@ Namespace UnitOperations
             If args Is Nothing Then
                 msin = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
                 msout = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
-                esin = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
+                esin = GetInletEnergyStream(1)
             Else
                 msin = args(0)
                 msout = args(1)
@@ -544,7 +541,7 @@ Namespace UnitOperations
             If qli = 0.0 Then
                 DeltaT = 0.0
                 DeltaQ = 0.0
-                If CalcMode <> CalculationMode.EnergyStream Then
+                If CalcMode <> CalculationMode.EnergyStream And esin IsNot Nothing Then
                     esin.EnergyFlow = 0.0
                     If args Is Nothing Then esin.GraphicObject.Calculated = True
                 End If
@@ -757,20 +754,24 @@ Namespace UnitOperations
 
                     Me.CurveFlow = qli
 
-                    'energy stream - update energy flow value (kW)
-                    With esin
-                        .EnergyFlow = Me.DeltaQ.GetValueOrDefault
-                        If args Is Nothing Then .GraphicObject.Calculated = True
-                    End With
+                    If esin IsNot Nothing Then
+                        'energy stream - update energy flow value (kW)
+                        With esin
+                            .EnergyFlow = Me.DeltaQ.GetValueOrDefault
+                            .GraphicObject.Calculated = True
+                        End With
+                    End If
 
                 Case CalculationMode.EnergyStream
 
                     Dim tmp As IFlashCalculationResult
 
                     'Corrente de EnergyFlow - pegar valor do DH
-                    With esin
-                        Me.DeltaQ = .EnergyFlow.GetValueOrDefault 'Wi * (H2 - Hi) / (Me.Eficiencia.GetValueOrDefault / 100)
-                    End With
+                    If esin IsNot Nothing Then
+                        With esin
+                            Me.DeltaQ = .EnergyFlow.GetValueOrDefault 'Wi * (H2 - Hi) / (Me.Eficiencia.GetValueOrDefault / 100)
+                        End With
+                    End If
 
                     H2 = Hi + Me.DeltaQ.GetValueOrDefault * (Me.Eficiencia.GetValueOrDefault / 100) / Wi
                     CheckSpec(H2, False, "outlet enthalpy")
@@ -808,10 +809,12 @@ Namespace UnitOperations
 
                     Dim tmp As IFlashCalculationResult
 
-                    'Corrente de EnergyFlow - pegar valor do DH
-                    With esin
-                        .EnergyFlow = Me.DeltaQ
-                    End With
+                    If esin IsNot Nothing Then
+                        'Corrente de EnergyFlow - pegar valor do DH
+                        With esin
+                            .EnergyFlow = Me.DeltaQ
+                        End With
+                    End If
 
                     H2 = Hi + Me.DeltaQ.GetValueOrDefault * (Me.Eficiencia.GetValueOrDefault / 100) / Wi
                     CheckSpec(H2, False, "outlet enthalpy")
@@ -877,11 +880,13 @@ Namespace UnitOperations
                         Me.NPSH = Double.PositiveInfinity
                     End Try
 
-                    'energy stream - update energy flow value (kW)
-                    With esin
-                        .EnergyFlow = Me.DeltaQ.GetValueOrDefault
-                        If args Is Nothing Then .GraphicObject.Calculated = True
-                    End With
+                    If esin IsNot Nothing Then
+                        'energy stream - update energy flow value (kW)
+                        With esin
+                            .EnergyFlow = Me.DeltaQ.GetValueOrDefault
+                            If args Is Nothing Then .GraphicObject.Calculated = True
+                        End With
+                    End If
 
                 Case CalculationMode.OutletPressure
 
@@ -919,11 +924,13 @@ Namespace UnitOperations
                         Me.NPSH = Double.PositiveInfinity
                     End Try
 
-                    'energy stream - update energy flow value (kW)
-                    With esin
-                        .EnergyFlow = Me.DeltaQ.GetValueOrDefault
-                        If args Is Nothing Then .GraphicObject.Calculated = True
-                    End With
+                    If esin IsNot Nothing Then
+                        'energy stream - update energy flow value (kW)
+                        With esin
+                            .EnergyFlow = Me.DeltaQ.GetValueOrDefault
+                            If args Is Nothing Then .GraphicObject.Calculated = True
+                        End With
+                    End If
 
             End Select
 

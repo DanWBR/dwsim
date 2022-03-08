@@ -3939,18 +3939,22 @@ Namespace UnitOperations
             For Each sinf In Me.EnergyStreams.Values
                 If sinf.StreamBehavior = StreamInformation.Behavior.Distillate Then
                     'condenser
-                    esm = FlowSheet.SimulationObjects(sinf.StreamID)
-                    esm.EnergyFlow = Q(0)
-                    esm.GraphicObject.Calculated = True
+                    If sinf.StreamID <> "" Then
+                        esm = FlowSheet.SimulationObjects(sinf.StreamID)
+                        esm.EnergyFlow = Q(0)
+                        esm.GraphicObject.Calculated = True
+                    End If
                 ElseIf sinf.StreamBehavior = StreamInformation.Behavior.BottomsLiquid Then
                     'reboiler
-                    esm = FlowSheet.SimulationObjects(sinf.StreamID)
-                    If esm.GraphicObject.InputConnectors(0).IsAttached Then
-                        esm.EnergyFlow = Q(Me.NumberOfStages - 1)
-                    Else
-                        esm.EnergyFlow = -Q(Me.NumberOfStages - 1)
+                    If sinf.StreamID <> "" Then
+                        esm = FlowSheet.SimulationObjects(sinf.StreamID)
+                        If esm.GraphicObject.InputConnectors(0).IsAttached Then
+                            esm.EnergyFlow = Q(Me.NumberOfStages - 1)
+                        Else
+                            esm.EnergyFlow = -Q(Me.NumberOfStages - 1)
+                        End If
+                        esm.GraphicObject.Calculated = True
                     End If
-                    esm.GraphicObject.Calculated = True
                 End If
             Next
 
@@ -4122,20 +4126,20 @@ Namespace UnitOperations
                 End If
             Next
 
-            For Each sinf In Me.EnergyStreams.Values
-                If Not FlowSheet.SimulationObjects.ContainsKey(sinf.StreamID) Then
-                    Throw New Exception(FlowSheet.GetTranslatedString("DCStreamMissingException"))
-                Else
-                    Select Case sinf.StreamBehavior
-                        Case StreamInformation.Behavior.InterExchanger
+            'For Each sinf In Me.EnergyStreams.Values
+            '    If Not FlowSheet.SimulationObjects.ContainsKey(sinf.StreamID) Then
+            '        Throw New Exception(FlowSheet.GetTranslatedString("DCStreamMissingException"))
+            '    Else
+            '        Select Case sinf.StreamBehavior
+            '            Case StreamInformation.Behavior.InterExchanger
 
-                        Case StreamInformation.Behavior.Distillate
-                            ceok = True
-                        Case StreamInformation.Behavior.BottomsLiquid
-                            reok = True
-                    End Select
-                End If
-            Next
+            '            Case StreamInformation.Behavior.Distillate
+            '                ceok = True
+            '            Case StreamInformation.Behavior.BottomsLiquid
+            '                reok = True
+            '        End Select
+            '    End If
+            'Next
 
             'check if all connections were done correctly
 
@@ -4143,19 +4147,19 @@ Namespace UnitOperations
                 Case ColType.DistillationColumn
                     Select Case Me.CondenserType
                         Case condtype.Total_Condenser
-                            If Not feedok Or Not cmok Or Not rmok Or Not ceok Or Not reok Then
+                            If Not feedok Or Not cmok Or Not rmok Then
                                 Throw New Exception(FlowSheet.GetTranslatedString("DCConnectionMissingException"))
                             ElseIf Not cmvok And Me.CondenserType = condtype.Partial_Condenser Then
                                 Throw New Exception(FlowSheet.GetTranslatedString("DCConnectionMissingException"))
                             End If
                         Case condtype.Partial_Condenser
-                            If Not feedok Or Not cmok Or Not cmvok Or Not rmok Or Not ceok Or Not reok Then
+                            If Not feedok Or Not cmok Or Not cmvok Or Not rmok Then
                                 Throw New Exception(FlowSheet.GetTranslatedString("DCConnectionMissingException"))
                             ElseIf Not cmvok And Me.CondenserType = condtype.Partial_Condenser Then
                                 Throw New Exception(FlowSheet.GetTranslatedString("DCConnectionMissingException"))
                             End If
                         Case condtype.Full_Reflux
-                            If Not feedok Or Not cmvok Or Not rmok Or Not ceok Or Not reok Then
+                            If Not feedok Or Not cmvok Or Not rmok Then
                                 Throw New Exception(FlowSheet.GetTranslatedString("DCConnectionMissingException"))
                             End If
                     End Select
@@ -4163,33 +4167,6 @@ Namespace UnitOperations
                     If Not feedok Or Not rmok Or Not (cmvok Or cmok) Then
                         Throw New Exception(FlowSheet.GetTranslatedString("DCConnectionMissingException"))
                     End If
-                Case ColType.ReboiledAbsorber
-                    If Not feedok Or Not cmvok Or Not rmok Or Not reok Then
-                        Throw New Exception(FlowSheet.GetTranslatedString("DCConnectionMissingException"))
-                    ElseIf Not cmvok And Me.CondenserType = condtype.Partial_Condenser Then
-                        Throw New Exception(FlowSheet.GetTranslatedString("DCConnectionMissingException"))
-                    End If
-                Case ColType.RefluxedAbsorber
-                    Select Case Me.CondenserType
-                        Case condtype.Total_Condenser
-                            If Not feedok Or Not cmok Or Not rmok Or Not ceok Then
-                                Throw New Exception(FlowSheet.GetTranslatedString("DCConnectionMissingException"))
-                            ElseIf Not cmvok And Me.CondenserType = condtype.Partial_Condenser Then
-                                Throw New Exception(FlowSheet.GetTranslatedString("DCConnectionMissingException"))
-                            End If
-                        Case condtype.Partial_Condenser
-                            If Not feedok Or Not cmok Or Not cmvok Or Not rmok Or Not ceok Then
-                                Throw New Exception(FlowSheet.GetTranslatedString("DCConnectionMissingException"))
-                            ElseIf Not cmvok And Me.CondenserType = condtype.Partial_Condenser Then
-                                Throw New Exception(FlowSheet.GetTranslatedString("DCConnectionMissingException"))
-                            End If
-                        Case condtype.Full_Reflux
-                            If Not feedok Or Not cmvok Or Not rmok Or Not ceok Then
-                                Throw New Exception(FlowSheet.GetTranslatedString("DCConnectionMissingException"))
-                            ElseIf Not cmvok And Me.CondenserType = condtype.Partial_Condenser Then
-                                Throw New Exception(FlowSheet.GetTranslatedString("DCConnectionMissingException"))
-                            End If
-                    End Select
             End Select
 
             'all ok, proceed to calculations...

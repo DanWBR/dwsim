@@ -334,9 +334,7 @@ Namespace UnitOperations
                                 were the outlet stream enthalpy is calculated by an energy balance 
                                 through the cooler.")
 
-            If Not Me.GraphicObject.EnergyConnector.IsAttached And CalcMode <> CalculationMode.EnergyStream Then
-                Throw New Exception(FlowSheet.GetTranslatedString("PrimaryEnergyStreamRequired"))
-            ElseIf Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
+            If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
                 Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
             ElseIf Not Me.GraphicObject.InputConnectors(0).IsAttached Then
                 Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
@@ -358,7 +356,7 @@ Namespace UnitOperations
             ein = ei
 
             If CalcMode <> CalculationMode.EnergyStream Then
-                esout = FlowSheet.SimulationObjects(Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
+                esout = GetEnergyStream()
             End If
 
             P2 = Pi - Me.DeltaP.GetValueOrDefault
@@ -454,11 +452,13 @@ Namespace UnitOperations
 
                     If DebugMode Then AppendDebugLine(String.Format("Calculated outlet temperature T2 = {0} K", T2))
 
-                    'energy stream - update energy flow value (kW)
-                    With esout
-                        .EnergyFlow = Me.DeltaQ.GetValueOrDefault
-                        .GraphicObject.Calculated = True
-                    End With
+                    If esout IsNot Nothing Then
+                        'energy stream - update energy flow value (kW)
+                        With esout
+                            .EnergyFlow = Me.DeltaQ.GetValueOrDefault
+                            .GraphicObject.Calculated = True
+                        End With
+                    End If
 
                 Case CalculationMode.OutletTemperature
 
@@ -495,11 +495,14 @@ Namespace UnitOperations
 
                     IObj?.Paragraphs.Add(String.Format("<mi>Q</mi>: {0} kW", DeltaQ.GetValueOrDefault))
 
-                    'energy stream - update energy flow value (kW)
-                    With esout
-                        .EnergyFlow = Me.DeltaQ.GetValueOrDefault
-                        .GraphicObject.Calculated = True
-                    End With
+                    If esout IsNot Nothing Then
+                        'energy stream - update energy flow value (kW)
+                        With esout
+                            .EnergyFlow = Me.DeltaQ.GetValueOrDefault
+                            .GraphicObject.Calculated = True
+                        End With
+                    End If
+
 
                 Case CalculationMode.TemperatureChange
 
@@ -539,11 +542,13 @@ Namespace UnitOperations
 
                     IObj?.Paragraphs.Add(String.Format("<mi>Q</mi>: {0} kW", DeltaQ.GetValueOrDefault))
 
-                    'energy stream - update energy flow value (kW)
-                    With esout
-                        .EnergyFlow = Me.DeltaQ.GetValueOrDefault
-                        .GraphicObject.Calculated = True
-                    End With
+                    If esout IsNot Nothing Then
+                        'energy stream - update energy flow value (kW)
+                        With esout
+                            .EnergyFlow = Me.DeltaQ.GetValueOrDefault
+                            .GraphicObject.Calculated = True
+                        End With
+                    End If
 
                 Case CalculationMode.OutletVaporFraction
 
@@ -592,11 +597,13 @@ Namespace UnitOperations
 
                     If DebugMode Then AppendDebugLine(String.Format("Calculated outlet temperature T2 = {0} K", T2))
 
-                    'energy stream - update energy flow value (kW)
-                    With esout
-                        .EnergyFlow = Me.DeltaQ.GetValueOrDefault
-                        .GraphicObject.Calculated = True
-                    End With
+                    If esout IsNot Nothing Then
+                        'energy stream - update energy flow value (kW)
+                        With esout
+                            .EnergyFlow = Me.DeltaQ.GetValueOrDefault
+                            .GraphicObject.Calculated = True
+                        End With
+                    End If
 
             End Select
 

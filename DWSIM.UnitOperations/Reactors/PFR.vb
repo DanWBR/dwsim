@@ -1394,10 +1394,12 @@ Namespace Reactors
 
                 'energy stream - update energy flow value (kW)
                 Dim estr As Streams.EnergyStream = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
-                With estr
-                    .EnergyFlow = Me.DeltaQ.GetValueOrDefault
-                    .GraphicObject.Calculated = True
-                End With
+                If estr IsNot Nothing Then
+                    With estr
+                        .EnergyFlow = DeltaQ.GetValueOrDefault
+                        .GraphicObject.Calculated = True
+                    End With
+                End If
 
             End If
 

@@ -255,8 +255,10 @@ Namespace UnitOperations
                 If CalcMode <> CalculationMode.PowerGenerated Then
                     DeltaQ = 0.0
                 End If
-                es.EnergyFlow = 0.0
-                If args Is Nothing Then es.GraphicObject.Calculated = True
+                If es IsNot Nothing Then
+                    es.EnergyFlow = 0.0
+                    If args Is Nothing Then es.GraphicObject.Calculated = True
+                End If
                 If CalcMode <> CalculationMode.Delta_P Then
                     DeltaP = 0.0
                     If CalcMode <> CalculationMode.OutletPressure Then POut = 0.0
@@ -294,9 +296,7 @@ Namespace UnitOperations
 
             qli = ims.Phases(1).Properties.volumetric_flow.ToString
 
-            If Not Me.GraphicObject.EnergyConnector.IsAttached Then
-                Throw New Exception(FlowSheet.GetTranslatedString("NohcorrentedeEnergyFlow5"))
-            ElseIf Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
+            If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
                 Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
             ElseIf Not Me.GraphicObject.InputConnectors(0).IsAttached Then
                 Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
@@ -856,11 +856,13 @@ Namespace UnitOperations
                     .DefinedFlow = FlowSpec.Mass
                 End With
 
-                'energy stream - update energy flow value (kW)
-                With es
-                    .EnergyFlow = Me.DeltaQ
-                    .GraphicObject.Calculated = True
-                End With
+                If es IsNot Nothing Then
+                    'energy stream - update energy flow value (kW)
+                    With es
+                        .EnergyFlow = Me.DeltaQ
+                        .GraphicObject.Calculated = True
+                    End With
+                End If
 
             Else
 

@@ -271,7 +271,7 @@ Public Class EditingForm_ComprExpndr
     End Sub
 
     Private Sub btnDisconnectEnergy_Click(sender As Object, e As EventArgs) Handles btnDisconnectEnergy.Click
-        If TypeOf SimObject Is UnitOperations.Heater Then
+        If TypeOf SimObject Is UnitOperations.Compressor Then
             If cbEnergy.SelectedItem IsNot Nothing Then
                 SimObject.FlowSheet.DisconnectObjects(SimObject.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom, SimObject.GraphicObject)
                 cbEnergy.SelectedItem = Nothing
