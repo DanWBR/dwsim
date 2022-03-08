@@ -32,21 +32,7 @@ namespace DWSIM.SharedClassesCSharp.FilePicker.Windows
                 return null;
         }
 
-        //public IEnumerable<IFile> ShowOpenDialog()
-        //{
-        //    var openFileDialog = new OpenFileDialog();
-        //    DialogResult result = openFileDialog.ShowDialog(); // Show the dialog.
-
-        //    if (result == DialogResult.OK) // Test result.
-        //    {
-        //        var files = openFileDialog.FileNames.Select(f => new WindowsFile(f));
-        //        return files;
-        //    }
-        //    else
-        //        return null;
-        //}
-
-        public void ShowSaveDialog()
+        public IFile ShowSaveDialog(IEnumerable<IFilePickerAllowedType> allowedTypes)
         {
             throw new NotImplementedException();
         }

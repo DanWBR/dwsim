@@ -125,7 +125,7 @@ Public Class FormMain
         MostRecentFiles = My.Settings.MostRecentFiles
 
         ' Set default file picker
-        SharedClassesCSharp.FilePicker.FilePickerService.GetInstance().SetFilePickerFactory(Function() New Simulate365.FormFactories.S365FilePickerForm())
+        ' SharedClassesCSharp.FilePicker.FilePickerService.GetInstance().SetFilePickerFactory(Function() New Simulate365.FormFactories.S365FilePickerForm())
 
         If GlobalSettings.Settings.OldUI Then
 
@@ -4428,7 +4428,7 @@ Label_00CC:
         End If
         Dim file = filePickerForm.ShowSaveDialog(New List(Of String)(New String() {fileExtension}))
         If file IsNot Nothing Then
-            Dim s365File As S365File = FileUploaderService.UploadFile(file.FlowsheetsDriveId, file.ParentDriveId, Me.filename, file.Filename, file.SimulatePath)
+            Dim s365File As S365File = FileUploaderService.UploadFile(file.DriveId, file.ParentDriveId, Me.filename, file.Filename, file.SimulatePath)
             UpdateS365File(s365File)
             MessageBox.Show("File saved to Simulate 365 Dashboard.")
 

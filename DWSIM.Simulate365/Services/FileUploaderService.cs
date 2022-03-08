@@ -21,15 +21,23 @@ namespace DWSIM.Simulate365.Services
     {
         public static S365File UploadFile(string flowsheetsDriveId, string parentDriveId, string filePath, string filename, string simulatePath)
         {
+            using (var fileStream = System.IO.File.OpenRead(filePath))
+                return UploadFile(flowsheetsDriveId, parentDriveId, fileStream, filename, simulatePath);
+        }
+
+        public static S365File UploadFile(string flowsheetsDriveId, string parentDriveId, Stream fileStream, string filename, string simulatePath)
+        {
             try
             {
+                fileStream.Seek(0, SeekOrigin.Begin);
+
                 var token = UserService.GetInstance().GetUserToken();
                 var client = GraphClientFactory.CreateClient(token);
 
                 var driveItemRequestBuilder = client.Drives[flowsheetsDriveId].Items[parentDriveId];
-                var item = Task.Run(async () => await UploadDocumentAsync(driveItemRequestBuilder, filename, filePath, ConflictBehaviour.Replace)).Result;
+                var item = Task.Run(async () => await UploadDocumentAsync(driveItemRequestBuilder, filename, fileStream, ConflictBehaviour.Replace)).Result;
 
-                return new S365File { FileId = item.Id, DriveId = parentDriveId, Filename = item.Name, FilePath = filePath, SimulatePath = simulatePath };
+                return new S365File { FileId = item.Id, DriveId = parentDriveId, Filename = item.Name, FilePath = null, SimulatePath = simulatePath };
 
             }
             catch (Exception ex)
@@ -39,10 +47,8 @@ namespace DWSIM.Simulate365.Services
             }
         }
 
-        public static async Task<DriveItem> UploadDocumentAsync(IDriveItemRequestBuilder driveItemRequestBuilder, string filename, string filePath, string conflictBehaviour = ConflictBehaviour.Rename)
+        public static async Task<DriveItem> UploadDocumentAsync(IDriveItemRequestBuilder driveItemRequestBuilder, string filename, Stream fileStream, string conflictBehaviour = ConflictBehaviour.Rename)
         {
-            FileInfo info = new FileInfo(filePath);
-
             UploadSession uploadSession = null;
 
             try
@@ -72,21 +78,18 @@ namespace DWSIM.Simulate365.Services
 
             try
             {
-                using (var fileStream = System.IO.File.OpenRead(filePath))
-                {
-                    // Performs upload, slice by slice
-                    int maxSliceSize = 5 * 1024 * 1024; //5MB
-                    var fileUploadTask = new LargeFileUploadTask<DriveItem>(uploadSession, fileStream, maxSliceSize);
-                    var uploadResult = await fileUploadTask.UploadAsync();
+                // Performs upload, slice by slice
+                int maxSliceSize = 5 * 1024 * 1024; //5MB
+                var fileUploadTask = new LargeFileUploadTask<DriveItem>(uploadSession, fileStream, maxSliceSize);
+                var uploadResult = await fileUploadTask.UploadAsync();
 
-                    if (!uploadResult.UploadSucceeded)
-                    {
-                        throw new Exception("File upload failed!");
-                    }
-                    else
-                    {
-                        return uploadResult.ItemResponse;
-                    }
+                if (!uploadResult.UploadSucceeded)
+                {
+                    throw new Exception("File upload failed!");
+                }
+                else
+                {
+                    return uploadResult.ItemResponse;
                 }
             }
             catch (Exception ex)

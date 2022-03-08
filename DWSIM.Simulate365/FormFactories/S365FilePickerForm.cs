@@ -19,6 +19,7 @@ namespace DWSIM.Simulate365.FormFactories
 
         public S365FilePickerForm()
         {
+
             _filePickerService = new FilePickerService();
             _filePickerService.S3365DashboardFileOpenStarted += FilePickerService_S3365DashboardFileOpenStarted;
             _filePickerService.S365DashboardSaveFileClicked += FilePickerService_S365DashboardSaveFileClicked;
@@ -44,7 +45,7 @@ namespace DWSIM.Simulate365.FormFactories
             _webUIForm?.Dispose();
         }
 
-        public S365DashboardSaveFile ShowSaveDialog(List<string> fileFormats = null)
+        public S365File ShowSaveDialog(List<string> fileFormats = null)
         {
 
             var navigationPath = "filepicker/save";
@@ -64,7 +65,15 @@ namespace DWSIM.Simulate365.FormFactories
 
             _webUIForm.ShowDialog();
 
-            return _filePickerService.SelectedSaveFile;
+            return new S365File
+            {
+                DriveId = _filePickerService.SelectedSaveFile.FlowsheetsDriveId,
+                FileId = null,
+                Filename = _filePickerService.SelectedSaveFile.Filename,
+                FilePath = null,
+                ParentDriveId = _filePickerService.SelectedSaveFile.ParentDriveId,
+                SimulatePath = _filePickerService.SelectedSaveFile.SimulatePath
+            };
         }
 
 
@@ -123,9 +132,16 @@ namespace DWSIM.Simulate365.FormFactories
             return file;
         }
 
-        public void ShowSaveDialog()
+        public IFile ShowSaveDialog(IEnumerable<IFilePickerAllowedType> allowedTypes)
         {
-            throw new NotImplementedException();
+            List<string> fileFormats = null;
+            if (allowedTypes != null && allowedTypes.Count() > 0)
+            {
+                fileFormats = allowedTypes.SelectMany(t => t.AllowedExtensions.Select(e => e.Replace("*.", ""))).ToList();
+            }
+
+            var file = ShowSaveDialog(fileFormats);
+            return file;
         }
 
         #endregion
