@@ -1005,7 +1005,7 @@ Public Class FormMain
                                                                  Dim whatsnew = SharedClasses.UpdateCheck.GetWhatsNew()
                                                                  Me.UIThreadInvoke(Sub()
                                                                                        If MessageBox.Show(DWSIM.App.GetLocalString("UpdatedVersionAvailable") & vbCrLf & vbCrLf & whatsnew, DWSIM.App.GetLocalString("UpdateAvailable"), MessageBoxButtons.OKCancel, MessageBoxIcon.Information) = DialogResult.OK Then
-                                                                                           Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Downloads#DWSIM_for_Desktop_Systems")
+                                                                                           Process.Start("https://dwsim.org/downloads")
                                                                                        End If
                                                                                    End Sub)
                                                              End If
@@ -4155,7 +4155,7 @@ Label_00CC:
     End Sub
 
     Private Sub WikiToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WikiToolStripMenuItem.Click
-        System.Diagnostics.Process.Start("http://dwsim.inforside.com.br")
+        System.Diagnostics.Process.Start("http://dwsim.org")
     End Sub
 
     Private Sub ForumToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ForumToolStripMenuItem.Click

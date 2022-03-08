@@ -298,7 +298,7 @@ Public Class FormWelcome
     End Sub
 
     Private Sub LinkLabel4_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
-        Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Main_Page")
+        Process.Start("https://dwsim.org")
     End Sub
 
     Private Sub LinkLabel5_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
@@ -500,10 +500,10 @@ Public Class FormWelcome
     End Sub
 
     Private Sub LinkLabel14_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel14.LinkClicked
-        Process.Start("https://dwsim.inforside.com.br/new/index.php/dwsim-pro/")
+        Process.Start("https://dwsim.org/index.php/dwsim-pro/")
     End Sub
 
     Private Sub LinkLabel15_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel15.LinkClicked
-        Process.Start("https://dwsim.inforside.com.br/new/index.php/dwsim-social-responsibility-program/")
+        Process.Start("https://dwsim.org/index.php/dwsim-social-responsibility-program/")
     End Sub
 End Class
