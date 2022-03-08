@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DWSIM.Simulate365.Models
 {
-   public class S365File : IFile
+   public class S365File : IVirtualFile
     {
         public string ParentDriveId { get; set; }
 

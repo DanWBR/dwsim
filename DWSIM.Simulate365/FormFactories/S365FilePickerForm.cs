@@ -120,7 +120,7 @@ namespace DWSIM.Simulate365.FormFactories
 
         #region FilePickerService
 
-        public IFile ShowOpenDialog(IEnumerable<IFilePickerAllowedType> allowedTypes)
+        public IVirtualFile ShowOpenDialog(IEnumerable<IFilePickerAllowedType> allowedTypes)
         {
             List<string> fileFormats = null;
             if (allowedTypes != null && allowedTypes.Count() > 0)
@@ -132,7 +132,7 @@ namespace DWSIM.Simulate365.FormFactories
             return file;
         }
 
-        public IFile ShowSaveDialog(IEnumerable<IFilePickerAllowedType> allowedTypes)
+        public IVirtualFile ShowSaveDialog(IEnumerable<IFilePickerAllowedType> allowedTypes)
         {
             List<string> fileFormats = null;
             if (allowedTypes != null && allowedTypes.Count() > 0)

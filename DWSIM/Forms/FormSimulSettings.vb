@@ -1444,7 +1444,7 @@ Public Class FormSimulSettings
 #Region "Load Json from FilePickerService"
         Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
 
-        Dim openedFile As IFile = filePickerForm.ShowOpenDialog(New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("JSON file", "*.json")})
+        Dim openedFile As IVirtualFile = filePickerForm.ShowOpenDialog(New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("JSON file", "*.json")})
         If openedFile IsNot Nothing Then
             Try
                 Dim comp = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BaseClasses.ConstantProperties)(openedFile.ReadAllText())

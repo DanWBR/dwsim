@@ -95,7 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums.vb" />
-    <Compile Include="FilePicker\IFile.vb" />
+    <Compile Include="FilePicker\IVirtualFile.vb" />
     <Compile Include="FilePicker\IFilePickerAllowedType.vb" />
     <Compile Include="IAnalyticsProvider.vb" />
     <Compile Include="IAttachedUtility.vb" />

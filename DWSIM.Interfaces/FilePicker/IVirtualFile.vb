@@ -1,4 +1,4 @@
-﻿Public Interface IFile
+﻿Public Interface IVirtualFile
     ReadOnly Property Filename As String
 
     Function ReadAllText() As String

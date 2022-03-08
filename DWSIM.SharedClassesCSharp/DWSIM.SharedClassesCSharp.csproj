@@ -44,8 +44,6 @@
   <ItemGroup>
     <Compile Include="FilePicker\FilePickerAllowedType.cs" />
     <Compile Include="FilePicker\FilePickerService.cs" />
-    <Compile Include="FilePicker\Simulate365\Simulate365File.cs" />
-    <Compile Include="FilePicker\Simulate365\Simulate365FilePicker.cs" />
     <Compile Include="FilePicker\Windows\WindowsFile.cs" />
     <Compile Include="FilePicker\Windows\WindowsFilePicker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -10,7 +10,7 @@ namespace DWSIM.SharedClassesCSharp.FilePicker.Windows
 {
     public class WindowsFilePicker : IFilePicker
     {
-        public IFile ShowOpenDialog(IEnumerable<IFilePickerAllowedType> allowedTypes)
+        public IVirtualFile ShowOpenDialog(IEnumerable<IFilePickerAllowedType> allowedTypes)
         {
             var openFileDialog = new OpenFileDialog();
 
@@ -32,11 +32,9 @@ namespace DWSIM.SharedClassesCSharp.FilePicker.Windows
                 return null;
         }
 
-        public IFile ShowSaveDialog(IEnumerable<IFilePickerAllowedType> allowedTypes)
+        public IVirtualFile ShowSaveDialog(IEnumerable<IFilePickerAllowedType> allowedTypes)
         {
             throw new NotImplementedException();
         }
-    }
-
-    
+    }    
 }

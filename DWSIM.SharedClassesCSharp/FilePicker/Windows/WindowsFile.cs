@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DWSIM.SharedClassesCSharp.FilePicker.Windows
 {
-    public class WindowsFile : IFile
+    public class WindowsFile : IVirtualFile
     {
         private string _filePath;
 
