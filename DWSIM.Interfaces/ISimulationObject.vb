@@ -84,7 +84,7 @@ Imports DWSIM.Interfaces.Enums
     ''' </summary>
     ''' <param name="proptype">Type of the property.</param>
     ''' <returns>A list of property identifiers.</returns>
-    ''' <remarks>More details at http://dwsim.inforside.com.br/wiki/index.php?title=Object_Property_Codes </remarks>
+    ''' <remarks>More details at https://dwsim.org/wiki/index.php?title=Object_Property_Codes </remarks>
     Function GetProperties(ByVal proptype As Enums.PropertyType) As String()
     Sub AddExtraProperty(pname As String, pvalue As Object)
 
@@ -94,7 +94,7 @@ Imports DWSIM.Interfaces.Enums
     ''' <param name="prop">Property identifier.</param>
     ''' <param name="su">Units system to use. Null to use the default (SI) system.</param>
     ''' <returns>Property value.</returns>
-    ''' <remarks>More details at http://dwsim.inforside.com.br/wiki/index.php?title=Object_Property_Codes </remarks>
+    ''' <remarks>More details at https://dwsim.org/wiki/index.php?title=Object_Property_Codes </remarks>
     Function GetPropertyValue(ByVal prop As String, Optional ByVal su As IUnitsOfMeasure = Nothing) As Object
     Sub RemoveExtraProperty(pname As String)
     Sub ClearExtraProperties()
@@ -106,7 +106,7 @@ Imports DWSIM.Interfaces.Enums
     ''' <param name="prop">Property identifier.</param>
     ''' <param name="su">Units system to use. Null to use the default (SI) system.</param>
     ''' <returns>Property units.</returns>
-    ''' <remarks>More details at http://dwsim.inforside.com.br/wiki/index.php?title=Object_Property_Codes </remarks>
+    ''' <remarks>More details at https://dwsim.org/wiki/index.php?title=Object_Property_Codes </remarks>
     Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As IUnitsOfMeasure = Nothing) As String
     Sub SetExtraPropertyValue(pname As String, pvalue As Object)
     Sub RemoveDynamicProperty(pname As String)
@@ -119,7 +119,7 @@ Imports DWSIM.Interfaces.Enums
     ''' <param name="propval">Property value to set at the specified units.</param>
     ''' <param name="su">Units system to use. Null to use the default (SI) system.</param>
     ''' <returns></returns>
-    ''' <remarks>More details at http://dwsim.inforside.com.br/wiki/index.php?title=Object_Property_Codes </remarks>
+    ''' <remarks>More details at https://dwsim.org/wiki/index.php?title=Object_Property_Codes </remarks>
     Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As IUnitsOfMeasure = Nothing) As Boolean
 
     Function GetDefaultProperties() As String()

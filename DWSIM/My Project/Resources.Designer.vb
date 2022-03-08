@@ -3002,7 +3002,7 @@ Namespace My.Resources
         '''	return Flowsheet.SaveToFile()
         '''
         '''def apihelp():
-        '''	Process.Start(&apos;https://dwsim.inforside.com.br/api_help60/html/G_DWSIM.htm&apos;).
+        '''	Process.Start(&apos;https://dwsim.org/api_help/html/G_DWSIM.htm&apos;).
         '''</summary>
         Friend ReadOnly Property pythonfunctions() As String
             Get

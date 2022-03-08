@@ -1344,7 +1344,7 @@ Public Class FormSimulSettings
     End Sub
 
     Private Sub LinkLabelPropertyMethods_LinkClicked(sender As System.Object, e As System.Windows.Forms.LinkLabelLinkClickedEventArgs)
-        Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Property_Methods_and_Correlation_Profiles")
+        Process.Start("https://dwsim.org/wiki/index.php?title=Property_Methods_and_Correlation_Profiles")
     End Sub
 
     Private Sub ogc1_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles ogc1.CellDoubleClick

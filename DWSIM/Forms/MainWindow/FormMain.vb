@@ -4159,7 +4159,7 @@ Label_00CC:
     End Sub
 
     Private Sub ForumToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ForumToolStripMenuItem.Click
-        System.Diagnostics.Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Support")
+        System.Diagnostics.Process.Start("https://dwsim.org/wiki/index.php?title=Support")
     End Sub
 
     Private Sub RastreamentoDeBugsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RastreamentoDeBugsToolStripMenuItem.Click
@@ -4365,27 +4365,27 @@ Label_00CC:
     End Sub
 
     Private Sub ReaktoroToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReaktoroToolStripMenuItem.Click
-        Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Aqueous_Electrolytes_Property_Package")
+        Process.Start("https://dwsim.org/wiki/index.php?title=Aqueous_Electrolytes_Property_Package")
     End Sub
 
     Private Sub NNUOToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NNUOToolStripMenuItem.Click
-        Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Neural_Network_Unit_Operation")
+        Process.Start("https://dwsim.org/wiki/index.php?title=Neural_Network_Unit_Operation")
     End Sub
 
     Private Sub PNUOToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PNUOToolStripMenuItem.Click
-        Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Pipe_Network_Unit_Operation")
+        Process.Start("https://dwsim.org/wiki/index.php?title=Pipe_Network_Unit_Operation")
     End Sub
 
     Private Sub CapitalCostToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CapitalCostToolStripMenuItem.Click
-        Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Capital_Cost_Estimator")
+        Process.Start("https://dwsim.org/wiki/index.php?title=Capital_Cost_Estimator")
     End Sub
 
     Private Sub OPCPluginToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OPCPluginToolStripMenuItem.Click
-        Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=OPC_Client_Plugin")
+        Process.Start("https://dwsim.org/wiki/index.php?title=OPC_Client_Plugin")
     End Sub
 
     Private Sub DTLToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DTLToolStripMenuItem.Click
-        Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=DTL")
+        Process.Start("https://dwsim.org/wiki/index.php?title=DTL")
     End Sub
 
     Private Sub PsycrometrySimulationTemplateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PsycrometrySimulationTemplateToolStripMenuItem.Click
