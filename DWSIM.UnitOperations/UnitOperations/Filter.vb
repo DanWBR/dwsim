@@ -239,10 +239,12 @@ Namespace UnitOperations
 
             'update energy stream power value
 
-            With Me.GetEnergyStream
-                .EnergyFlow = Me.EnergyImb
-                .GraphicObject.Calculated = True
-            End With
+            If GetEnergyStream() IsNot Nothing Then
+                With Me.GetEnergyStream
+                    .EnergyFlow = Me.EnergyImb
+                    .GraphicObject.Calculated = True
+                End With
+            End If
 
             IObj?.Close()
 

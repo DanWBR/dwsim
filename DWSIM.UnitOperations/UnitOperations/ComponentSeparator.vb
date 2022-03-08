@@ -356,10 +356,12 @@ Namespace UnitOperations
 
             'update energy stream power value
 
-            With DirectCast(FlowSheet.SimulationObjects(Me.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name), Streams.EnergyStream)
-                .EnergyFlow = EnergyImb
-                .GraphicObject.Calculated = True
-            End With
+            If GetEnergyStream() IsNot Nothing Then
+                With GetEnergyStream()
+                    .EnergyFlow = EnergyImb
+                    .GraphicObject.Calculated = True
+                End With
+            End If
 
             IObj?.Close()
 

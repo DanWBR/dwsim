@@ -1,8 +1,7 @@
-Version 7.3.3
+Version 7.4.0
 
-- Fixed issue with Distillation Curves characterization (Cross-Platform UI)
-- Set Rigorous Distillation Column pressure profile with top pressure and overall pressure drop
-- Fixed issue with setting of compound flows in material streams
-- Updated flowsheet object numbering
-- Fixed Heat Exchanger calc outlet temperature mode
-- Fixed Pipe Segment not being added in Cross-Platform UI
+- Auto-Connect Added Objects
+- Fixed issue with Gibbs Reactor
+- Fixed Conversion Reactor heat balance
+- Fixed issue with temperature calculation in PH Flash
+- Other fixes and enhancements

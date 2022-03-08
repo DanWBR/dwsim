@@ -340,9 +340,7 @@ Namespace UnitOperations
 
 
             If args Is Nothing Then
-                If Not Me.GraphicObject.EnergyConnector.IsAttached Then
-                    Throw New Exception(FlowSheet.GetTranslatedString("NohcorrentedeEnergyFlow3"))
-                ElseIf Not Me.Profile.Status = PipeEditorStatus.OK Then
+                If Not Me.Profile.Status = PipeEditorStatus.OK Then
                     Throw New Exception(FlowSheet.GetTranslatedString("Operfilhidrulicodatu"))
                 ElseIf Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
                     Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
@@ -978,10 +976,12 @@ Namespace UnitOperations
             End With
 
             'energy stream - update energy flow value (kW)
-            With es
-                .EnergyFlow = -Me.DeltaQ.Value
-                If args Is Nothing Then .GraphicObject.Calculated = True
-            End With
+            If es IsNot Nothing Then
+                With es
+                    .EnergyFlow = -Me.DeltaQ.Value
+                    If args Is Nothing Then .GraphicObject.Calculated = True
+                End With
+            End If
 
             segmento = Nothing
             results = Nothing

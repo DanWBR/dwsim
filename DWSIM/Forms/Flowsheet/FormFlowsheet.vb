@@ -1747,6 +1747,10 @@ Public Class FormFlowsheet
         If Not gobj Is Nothing Then
             Me.FormSurface.FlowsheetSurface.SelectedObject = gobj
             Me.DeleteSelectedObject(Me, New EventArgs(), gobj, confirmation)
+        ElseIf GraphicObjects.ContainsKey(tag) Then
+            gobj = GraphicObjects(tag)
+            Me.FormSurface.FlowsheetSurface.SelectedObject = gobj
+            Me.DeleteSelectedObject(Me, New EventArgs(), gobj, confirmation)
         End If
 
     End Sub
@@ -1824,7 +1828,7 @@ Public Class FormFlowsheet
 
     Public Sub ConnectObject(ByRef gObjFrom As GraphicObject, ByRef gObjTo As GraphicObject, Optional ByVal fidx As Integer = -1, Optional ByVal tidx As Integer = -1)
 
-        Me.WriteToLog(DWSIM.App.GetLocalTipString("FLSH007"), Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)
+        'Me.WriteToLog(DWSIM.App.GetLocalTipString("FLSH007"), Color.Black, SharedClasses.DWSIM.Flowsheet.MessageType.Tip)
 
         Me.FormSurface.FlowsheetSurface.ConnectObject(gObjFrom, gObjTo, fidx, tidx)
 

@@ -368,9 +368,6 @@ Namespace Reactors
                 ' by the simplex solver, and the energy balance can be calculated (again). 
 
                 i = 0
-                DHr = 0
-                Hid_r = 0
-                Hid_p = 0
                 Do
 
                     'process reaction i
@@ -403,6 +400,11 @@ Namespace Reactors
                         End If
                     Next
 
+                    Dim DNbr = -xf(i) * nBC
+
+                    'Heat released (or absorbed) (kJ/s = kW) (Ideal Gas)
+                    DHr += rxn.ReactionHeat * Abs(DNbr) / 1000
+
                     i += 1
 
                 Loop Until i = ar.Count
@@ -415,9 +417,6 @@ Namespace Reactors
                         If N00(s1.Name) < 0.0 Then N00(s1.Name) = 0.0
                     End If
                 Next
-
-                'Heat released (or absorbed) (kJ/s = kW) (Ideal Gas)
-                DHr = rxn.ReactionHeat * Abs(DN(rxn.BaseReactant)) / 1000
 
                 IObj2?.Paragraphs.Add(String.Format("Total Heat of Reaction: {0} kW", DHr))
 
@@ -515,7 +514,7 @@ Namespace Reactors
                         IObj2?.Paragraphs.Add(String.Format("Products Enthalpy: {0} kJ/kg", Hp))
 
                         'Heat (kW)
-                        Me.DeltaQ = Me.DeltaQ + DHr + Hid_r - Hr - Hid_p
+                        Me.DeltaQ += DHr + Hid_r - Hr - Hid_p
 
                         IObj2?.Paragraphs.Add(String.Format("Heat Balance: {0} kW", DeltaQ))
 

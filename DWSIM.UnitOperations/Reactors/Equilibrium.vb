@@ -403,12 +403,6 @@ Namespace Reactors
                 Throw New Exception(FlowSheet.GetTranslatedString("Nohcorrentedematriac11"))
             ElseIf Not Me.GraphicObject.OutputConnectors(1).IsAttached Then
                 Throw New Exception(FlowSheet.GetTranslatedString("Nohcorrentedematriac11"))
-            ElseIf Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
-                Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
-            ElseIf Not Me.GraphicObject.OutputConnectors(1).IsAttached Then
-                Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
-            ElseIf Not Me.GraphicObject.InputConnectors(0).IsAttached Then
-                Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
             End If
 
         End Sub
@@ -1194,15 +1188,15 @@ Namespace Reactors
             End If
 
             'energy stream - update energy flow value (kW)
-            With GetInletEnergyStream(1)
-                .EnergyFlow = Me.DeltaQ.GetValueOrDefault
-                .GraphicObject.Calculated = True
-
-                DRW?.AppendLine()
-                DRW?.AppendLine(String.Format("Energy Stream: {0} kW", .EnergyFlow))
-                DRW?.AppendLine()
-
-            End With
+            If GetInletEnergyStream(1) IsNot Nothing Then
+                With GetInletEnergyStream(1)
+                    .EnergyFlow = Me.DeltaQ.GetValueOrDefault
+                    .GraphicObject.Calculated = True
+                    DRW?.AppendLine()
+                    DRW?.AppendLine(String.Format("Energy Stream: {0} kW", .EnergyFlow))
+                    DRW?.AppendLine()
+                End With
+            End If
 
             StoreDebugReport(DRW)
 
