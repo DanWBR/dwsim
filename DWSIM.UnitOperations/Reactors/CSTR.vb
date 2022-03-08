@@ -1066,10 +1066,12 @@ out:        Dim ms1, ms2 As MaterialStream
                 End If
 
                 Dim estr As Streams.EnergyStream = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Name)
-                With estr
-                    .EnergyFlow = DeltaQ.GetValueOrDefault
-                    .GraphicObject.Calculated = True
-                End With
+                If estr IsNot Nothing Then
+                    With estr
+                        .EnergyFlow = DeltaQ.GetValueOrDefault
+                        .GraphicObject.Calculated = True
+                    End With
+                End If
 
             End If
 

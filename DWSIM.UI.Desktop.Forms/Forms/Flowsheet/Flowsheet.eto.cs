@@ -994,7 +994,9 @@ namespace DWSIM.UI.Forms
                     }
                     else
                     {
-                        FlowsheetObject.AddObject(e.Data.GetString("ObjectName"), (int)(e.Location.X * GlobalSettings.Settings.DpiScale / FlowsheetControl.FlowsheetSurface.Zoom), (int)(e.Location.Y * GlobalSettings.Settings.DpiScale / FlowsheetControl.FlowsheetSurface.Zoom));
+                        FlowsheetObject.AddObject(e.Data.GetString("ObjectName"),
+                            (int)(e.Location.X * GlobalSettings.Settings.DpiScale / FlowsheetControl.FlowsheetSurface.Zoom),
+                            (int)(e.Location.Y * GlobalSettings.Settings.DpiScale / FlowsheetControl.FlowsheetSurface.Zoom), "", "", true);
                     }
                     UpdateEditorConnectionsPanel();
                     FlowsheetObject.UpdateInterface();
@@ -1265,9 +1267,17 @@ namespace DWSIM.UI.Forms
 
             };
 
+            var lblAutoConnect = new Label { Text = "Auto-Connect Added Objects" };
+            var cbAutoConnect = new DropDown { Width = 100, Items = { "No", "Yes", "Smart" }, SelectedIndex = FlowsheetObject.Options.AddObjectsWithStreams };
+            cbAutoConnect.SelectedIndexChanged += (s, e) =>
+            {
+                FlowsheetObject.Options.AddObjectsWithStreams = cbAutoConnect.SelectedIndex;
+                FlowsheetControl.Invalidate();
+            };
+
             var menu1 = new StackLayout
             {
-                Items = { lbl1, tbSearch,  new Label {Text =" " }, chkControlPanelMode,  new Label {Text =" " },
+                Items = { lbl1, tbSearch, new Label {Text =" " }, lblAutoConnect, cbAutoConnect, new Label {Text =" " }, chkControlPanelMode,  new Label {Text =" " },
                 new Label{Text = "States"}, ddstates, btnSaveState, btnLoadState, btnDeleteState,new Label {Text =" " },
                 btnmZoomOut, btnmZoomIn, btnmZoomFit, btnmZoomDefault, new Label {Text =" " },
                 btnmDrawGrid, btnmSnapToGrid, btnmMultiSelect, new Label {Text =" " },
@@ -2229,7 +2239,7 @@ namespace DWSIM.UI.Forms
                     }
                     else
                     {
-                        FlowsheetObject.AddObject(item.GetDisplayName(), (int)(currposx / z), (int)(currposy / z), "");
+                        FlowsheetObject.AddObject(item.GetDisplayName(), (int)(currposx / z), (int)(currposy / z), "", "", true);
                     }
                     FlowsheetControl.Invalidate();
                     UpdateEditorConnectionsPanel();

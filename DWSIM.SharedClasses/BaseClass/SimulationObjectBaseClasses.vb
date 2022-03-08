@@ -401,6 +401,10 @@ Namespace UnitOperations
                     End If
                 End If
 
+                If iesc.Count + oesc.Count = 0 And Not GraphicObject.EnergyConnector.IsAttached Then
+                    eb = 0
+                End If
+
                 mbe = Math.Abs(mb / mbt)
 
                 ebe = Math.Abs(eb / ebt)

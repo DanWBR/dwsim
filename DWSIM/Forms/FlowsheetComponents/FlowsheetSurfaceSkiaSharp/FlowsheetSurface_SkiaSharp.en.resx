@@ -321,10 +321,10 @@
     <value>Black-and-White</value>
   </data>
   <data name="ToolStripLabel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 22</value>
+    <value>164, 22</value>
   </data>
   <data name="ToolStripLabel4.Text" xml:space="preserve">
-    <value>Add Objects with Streams</value>
+    <value>Auto-Connect Added Objects</value>
   </data>
   <data name="tscbAddObjectsWithStreams.Items" xml:space="preserve">
     <value>No</value>
@@ -333,10 +333,10 @@
     <value>Yes</value>
   </data>
   <data name="tscbAddObjectsWithStreams.Items2" xml:space="preserve">
-    <value>Automatic</value>
+    <value>Smart</value>
   </data>
   <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>845, 25</value>
+    <value>866, 25</value>
   </data>
   <data name="ToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
     <value>243, 22</value>
