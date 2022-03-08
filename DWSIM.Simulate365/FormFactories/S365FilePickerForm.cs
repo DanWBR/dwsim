@@ -1,4 +1,5 @@
-﻿using DWSIM.Simulate365.Models;
+﻿using DWSIM.Interfaces;
+using DWSIM.Simulate365.Models;
 using DWSIM.Simulate365.Services;
 using DWSIM.UI.Web;
 using Microsoft.Web.WebView2.Core;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace DWSIM.Simulate365.FormFactories
 {
-    public class S365FilePickerForm
+    public class S365FilePickerForm : IFilePicker
     {
         private WebUIForm _webUIForm;
         private readonly FilePickerService _filePickerService;
@@ -107,5 +108,26 @@ namespace DWSIM.Simulate365.FormFactories
                 //  throw;
             }
         }
+
+        #region FilePickerService
+
+        public IFile ShowOpenDialog(IEnumerable<IFilePickerAllowedType> allowedTypes)
+        {
+            List<string> fileFormats = null;
+            if (allowedTypes != null && allowedTypes.Count() > 0)
+            {
+                fileFormats = allowedTypes.SelectMany(t => t.AllowedExtensions.Select(e => e.Replace("*.", ""))).ToList();
+            }
+
+            var file = ShowOpenDialog(fileFormats);
+            return file;
+        }
+
+        public void ShowSaveDialog()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

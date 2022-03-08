@@ -19,6 +19,13 @@ namespace DWSIM.SharedClassesCSharp.FilePicker
             return _instance;
         }
 
+
+        private Func<IFilePicker> _filePickerFactory = () => new WindowsFilePicker();
+        public void SetFilePickerFactory(Func<IFilePicker> filePickerFactory)
+        {
+            _filePickerFactory = filePickerFactory;
+        }
+
         private FilePickerService()
         {
 
@@ -26,7 +33,9 @@ namespace DWSIM.SharedClassesCSharp.FilePicker
 
         public IFilePicker GetFilePicker()
         {
-            return new WindowsFilePicker();
+            //return new WindowsFilePicker();
+            //return new Simulate365FilePicker();
+            return _filePickerFactory();
         }
     }
 }

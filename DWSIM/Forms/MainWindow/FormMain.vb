@@ -124,6 +124,9 @@ Public Class FormMain
 
         MostRecentFiles = My.Settings.MostRecentFiles
 
+        ' Set default file picker
+        SharedClassesCSharp.FilePicker.FilePickerService.GetInstance().SetFilePickerFactory(Function() New Simulate365.FormFactories.S365FilePickerForm())
+
         If GlobalSettings.Settings.OldUI Then
 
             calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
@@ -4019,10 +4022,12 @@ Label_00CC:
         If Not Me.ActiveMdiChild Is Nothing Then
             If TypeOf Me.ActiveMdiChild Is FormFlowsheet Then
                 Dim form2 As FormFlowsheet = Me.ActiveMdiChild
+                ' SavingSimulation event
                 If SavingSimulation IsNot Nothing Then
                     If SavingSimulation.Invoke(form2) = False Then Exit Sub
                 End If
-                If form2.Options.FilePath <> "" Then
+
+                If form2.Options.FilePath <> "" Then ' If file exists, save to same location
                     Application.DoEvents()
                     Me.filename = form2.Options.FilePath
                     SaveBackup(Me.filename)
@@ -4040,7 +4045,7 @@ Label_00CC:
                     ElseIf Path.GetExtension(Me.filename).ToLower = ".dwxmz" Then
                         SaveXMLZIP(form2.Options.FilePath, form2)
                     End If
-                Else
+                Else ' If file doesn't exist, open file picker
                     Dim myStream As System.IO.FileStream
                     If Me.SaveFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
                         SaveBackup(Me.SaveFileDialog1.FileName)

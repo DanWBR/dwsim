@@ -25,7 +25,6 @@ namespace DWSIM.Simulate365.FormFactories
 
         private WebUIForm _webUIForm;
         private AuthService _authService;
-        public event EventHandler LoginFormClosed;
 
         public LoginForm()
         {
@@ -45,16 +44,10 @@ namespace DWSIM.Simulate365.FormFactories
                 Width = 500,
                 Height = 600
             };
-            _webUIForm.FormClosed += _webUIForm_FormClosed;
 
 
             _webUIForm.SubscribeToNavigationStarting(WebView_NavigationStarting);
             _webUIForm.SubscribeToInitializationCompleted(Browser_CoreWebView2InitializationCompleted);
-        }
-
-        private void _webUIForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            this.LoginFormClosed.Invoke(this,new EventArgs());
         }
 
         public bool IsProVersion()
