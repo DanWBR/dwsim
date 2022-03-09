@@ -148,7 +148,7 @@ Public Class FormWelcome
 
             Application.DoEvents()
 
-            My.Application.MainWindowForm.filename = lview.SelectedItems(0).Tag
+            'My.Application.MainWindowForm.filename = lview.SelectedItems(0).Tag
             Select Case Path.GetExtension(lview.SelectedItems(0).Tag).ToLower
                 Case ".dwxml"
                     'My.Application.MainWindowForm.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + lview.SelectedItems(0).Tag + "..."
@@ -298,7 +298,7 @@ Public Class FormWelcome
     End Sub
 
     Private Sub LinkLabel4_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
-        Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Main_Page")
+        Process.Start("https://dwsim.org")
     End Sub
 
     Private Sub LinkLabel5_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
@@ -310,7 +310,7 @@ Public Class FormWelcome
     End Sub
 
     Private Sub LinkLabel2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
-        Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Category:Tutorials")
+        Process.Start("https://dwsim.org/wiki/index.php?title=Category:Tutorials")
     End Sub
 
     Private Sub LinkLabel3_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
@@ -466,7 +466,7 @@ Public Class FormWelcome
     End Sub
 
     Private Sub LinkLabel10_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel10.LinkClicked
-        Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Tutorials")
+        Process.Start("https://dwsim.org/wiki/index.php?title=Tutorials")
     End Sub
 
     Private Sub FormWelcome_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
@@ -492,18 +492,18 @@ Public Class FormWelcome
     End Sub
 
     Private Sub LinkLabel12_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel12.LinkClicked
-        Process.Start("https://dwsim.inforside.com.br/wiki/index.php?title=Literature")
+        Process.Start("https://dwsim.org/wiki/index.php?title=Literature")
     End Sub
 
     Private Sub LinkLabel13_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel13.LinkClicked
-        Process.Start("https://dwsim.inforside.com.br/api_help60/html/R_Project_DWSIM_Class_Library_Documentation.htm")
+        Process.Start("https://dwsim.org/api_help/html/R_Project_DWSIM_Class_Library_Documentation.htm")
     End Sub
 
     Private Sub LinkLabel14_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel14.LinkClicked
-        Process.Start("https://dwsim.inforside.com.br/new/index.php/dwsim-pro/")
+        Process.Start("https://dwsim.org/index.php/dwsim-pro/")
     End Sub
 
     Private Sub LinkLabel15_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel15.LinkClicked
-        Process.Start("https://dwsim.inforside.com.br/new/index.php/dwsim-social-responsibility-program/")
+        Process.Start("https://dwsim.org/index.php/dwsim-social-responsibility-program/")
     End Sub
 End Class

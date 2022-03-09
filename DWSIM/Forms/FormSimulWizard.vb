@@ -119,7 +119,7 @@ Public Class FormSimulWizard
     End Sub
 
     Private Sub LinkLabelPropertyMethods_LinkClicked(sender As System.Object, e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabelPropertyMethods.LinkClicked
-        Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Property_Methods_and_Correlation_Profiles")
+        Process.Start("https://dwsim.org/wiki/index.php?title=Property_Methods_and_Correlation_Profiles")
     End Sub
 
     Private Sub TextBox1_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles TextBox1.KeyDown
@@ -853,7 +853,7 @@ Public Class FormSimulWizard
     End Sub
 
     Private Sub LinkLabel2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel2.LinkClicked
-        Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Property_Package_Selection")
+        Process.Start("https://dwsim.org/wiki/index.php?title=Property_Package_Selection")
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs)

@@ -1118,7 +1118,7 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs)
-        Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Mobile_Compatibility_Mode")
+        Process.Start("https://dwsim.org/wiki/index.php?title=Mobile_Compatibility_Mode")
     End Sub
 
     Private Sub UtilitiesTSMI_Click(sender As Object, e As EventArgs) Handles UtilitiesTSMI.DropDownOpening

@@ -192,7 +192,7 @@ namespace DWSIM.UI
             var link6 = new LinkButton { Text = "Learning Resources", Width = (int)(140 * sf), Font = boldfont2 };
             pdocs.Add(link6, dx2 + (int)(150 * sf), (int)(100 * sf - rfh - dy));
 
-            link6.Click += (sender, e) => "http://dwsim.inforside.com.br/wiki/index.php?title=Tutorials".OpenURL();
+            link6.Click += (sender, e) => "https://dwsim.org/wiki/index.php?title=Tutorials".OpenURL();
 
             link5.Click += (sender, e) =>
             {
@@ -505,7 +505,7 @@ namespace DWSIM.UI
             var hitem2 = new ButtonMenuItem { Text = "Support".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png")) };
             hitem2.Click += (sender, e) =>
             {
-                "http://dwsim.inforside.com.br/wiki/index.php?title=Support".OpenURL();
+                "https://dwsim.org/wiki/index.php?title=Support".OpenURL();
             };
 
             var hitem3 = new ButtonMenuItem { Text = "Report a Bug".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png")) };

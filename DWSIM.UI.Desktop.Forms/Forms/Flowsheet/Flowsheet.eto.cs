@@ -821,7 +821,7 @@ namespace DWSIM.UI.Forms
             var hitem2 = new ButtonMenuItem { Text = "Support".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png", this.GetType().Assembly)) };
             hitem2.Click += (sender, e) =>
             {
-                "http://dwsim.inforside.com.br/wiki/index.php?title=Support".OpenURL();
+                "https://dwsim.org/wiki/index.php?title=Support".OpenURL();
             };
 
             var hitem3 = new ButtonMenuItem { Text = "Report a Bug".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png", this.GetType().Assembly)) };
