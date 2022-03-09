@@ -34,7 +34,24 @@ namespace DWSIM.SharedClassesCSharp.FilePicker.Windows
 
         public IVirtualFile ShowSaveDialog(IEnumerable<IFilePickerAllowedType> allowedTypes)
         {
-            throw new NotImplementedException();
+            var saveFileDialog = new SaveFileDialog();
+
+            if (allowedTypes != null && allowedTypes.Count() > 0)
+            {
+                var list = allowedTypes.Select(t => t.Name + "|" + String.Join(";", t.AllowedExtensions));
+                saveFileDialog.Filter = String.Join("|", list);
+            }
+
+            // Show the dialog
+            DialogResult result = saveFileDialog.ShowDialog();
+
+            if (result == DialogResult.OK) // Test result.
+            {
+                var file = new WindowsFile(saveFileDialog.FileName);
+                return file;
+            }
+            else
+                return null;
         }
     }    
 }
