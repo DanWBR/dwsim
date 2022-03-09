@@ -116,7 +116,7 @@ namespace DWSIM.UI.Desktop.Editors
             var dyn5 = new DynamicLayout { Padding = new Padding(0) };
             dyn5.CreateAndAddLabelAndButtonRow("Search DWSIM's Website for information about the current error.", "Search Website", null, (sender, e) =>
             {
-                var baseaddress = "http://dwsim.inforside.com.br/wiki/index.php?title=Special:Search&fulltext=Search&profile=all&redirs=1&search=";
+                var baseaddress = "https://dwsim.org/wiki/index.php?title=Special:Search&fulltext=Search&profile=all&redirs=1&search=";
                 var searchtext = exc.Message.ToString().Replace(" ", "+");
                 Process.Start(baseaddress + searchtext);
             });

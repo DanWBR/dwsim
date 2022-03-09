@@ -169,7 +169,7 @@
     <value>2</value>
   </data>
   <data name="LinkLabel1.Text" xml:space="preserve">
-    <value>http://dwsim.inforside.com.br</value>
+    <value>https://dwsim.org</value>
   </data>
   <data name="&gt;&gt;LinkLabel1.Name" xml:space="preserve">
     <value>LinkLabel1</value>

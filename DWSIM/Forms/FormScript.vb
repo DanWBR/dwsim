@@ -813,7 +813,7 @@ Imports IronPython.Hosting
     End Sub
 
     Private Sub APIHelptsbutton_Click(sender As Object, e As EventArgs) Handles APIHelptsbutton.Click
-        Process.Start("https://dwsim.inforside.com.br/api_help60/html/G_DWSIM.htm")
+        Process.Start("https://dwsim.org/api_help/html/G_DWSIM.htm")
     End Sub
 
     Private Sub btnUndo_Click(sender As Object, e As EventArgs) Handles btnUndo.Click

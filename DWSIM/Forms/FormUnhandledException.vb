@@ -102,7 +102,7 @@ Public Class FormUnhandledException
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
 
-        Dim baseaddress As String = "http://dwsim.inforside.com.br/wiki/index.php?title=Special:Search&fulltext=Search&profile=all&redirs=1&search="
+        Dim baseaddress As String = "https://dwsim.org/wiki/index.php?title=Special:Search&fulltext=Search&profile=all&redirs=1&search="
 
         Dim searchtext As String = ex.Message.ToString.Replace(" ", "+")
 
