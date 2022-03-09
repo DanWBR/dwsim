@@ -49,7 +49,6 @@ Public Class FormMain
     Inherits Form
 
     Public Shared m_childcount As Integer = 1
-    Public filename As String
     Public loadedCSDB As Boolean = False
     Public pathsep As Char
 
@@ -936,27 +935,29 @@ Public Class FormMain
 
         tsmiFreeProTrial.Visible = Not IsPro
 
+
         Dim cmdLine() As String = System.Environment.GetCommandLineArgs()
 
         If UBound(cmdLine) = 1 Then
             If Not cmdLine(0).StartsWith("-") And Not cmdLine(1).Contains("DWSIM.exe") Then
                 Try
-                    Me.filename = cmdLine(1)
+                    Dim filename As String
+                    filename = cmdLine(1)
                     Try
                         'Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " (" + Me.filename + ")"
                         Application.DoEvents()
-                        Select Case Path.GetExtension(Me.filename).ToLower()
+                        Select Case Path.GetExtension(filename).ToLower()
                             Case ".dwsim"
                                 'Me.LoadF(Me.filename)
                             Case ".dwxml"
-                                Me.LoadXML(Me.filename, Nothing)
+                                Me.LoadXML(filename, Nothing)
                             Case ".dwxmz"
-                                Me.LoadAndExtractXMLZIP(Me.filename, Nothing)
+                                Me.LoadAndExtractXMLZIP(filename, Nothing)
                             Case ".dwcsd"
                                 Dim NewMDIChild As New FormCompoundCreator()
                                 NewMDIChild.MdiParent = Me
                                 NewMDIChild.Show()
-                                Dim objStreamReader As New FileStream(Me.filename, FileMode.Open)
+                                Dim objStreamReader As New FileStream(filename, FileMode.Open)
                                 Dim x As New BinaryFormatter()
                                 NewMDIChild.mycase = x.Deserialize(objStreamReader)
                                 objStreamReader.Close()
@@ -965,7 +966,7 @@ Public Class FormMain
                                 Dim NewMDIChild As New FormDataRegression()
                                 NewMDIChild.MdiParent = Me
                                 NewMDIChild.Show()
-                                Dim objStreamReader As New FileStream(Me.filename, FileMode.Open)
+                                Dim objStreamReader As New FileStream(filename, FileMode.Open)
                                 Dim x As New BinaryFormatter()
                                 NewMDIChild.currcase = x.Deserialize(objStreamReader)
                                 objStreamReader.Close()
@@ -1585,9 +1586,7 @@ Public Class FormMain
             excs.Add(New Exception("Error Loading Flowsheet Settings", ex))
         End Try
 
-        Me.filename = path
-
-        form.Options.FilePath = Me.filename
+        form.Options.FilePath = path
 
         data = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects").Elements.ToList
 
@@ -1776,7 +1775,7 @@ Public Class FormMain
                 form.WriteToLog(ex.Message.ToString & ": " & ex.InnerException.ToString, Color.Red, MessageType.GeneralError)
             Next
         Else
-            form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & Me.filename & DWSIM.App.GetLocalString("carregadocomsucesso"), Color.Blue, MessageType.Information)
+            form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & path & DWSIM.App.GetLocalString("carregadocomsucesso"), Color.Blue, MessageType.Information)
         End If
 
         form.UpdateFormText()
@@ -1870,10 +1869,12 @@ Public Class FormMain
 
         If Not ProgressFeedBack Is Nothing Then ProgressFeedBack.Invoke(15)
 
-        If simulationfilename <> "" Then Me.filename = simulationfilename Else Me.filename = path
+        Dim filename As String
 
-        form.FilePath = Me.filename
-        form.Options.FilePath = Me.filename
+        If simulationfilename <> "" Then filename = simulationfilename Else filename = path
+
+        form.FilePath = filename
+        form.Options.FilePath = filename
 
         data = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects").Elements.ToList
 
@@ -2350,7 +2351,7 @@ Public Class FormMain
                 form.WriteToLog(ex.Message.ToString & ": " & ex.InnerException.ToString, Color.Red, MessageType.GeneralError)
             Next
         Else
-            form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & Me.filename & DWSIM.App.GetLocalString("carregadocomsucesso"), Color.Blue, MessageType.Information)
+            form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & filename & DWSIM.App.GetLocalString("carregadocomsucesso"), Color.Blue, MessageType.Information)
         End If
 
         form.UpdateFormText()
@@ -2429,8 +2430,8 @@ Public Class FormMain
 
         'If simulationfilename <> "" Then Me.filename = simulationfilename Else Me.filename = Path
 
-        form.FilePath = Me.filename
-        form.Options.FilePath = Me.filename
+        'form.FilePath = filename
+        'form.Options.FilePath = filename
 
         data = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects").Elements.ToList
 
@@ -2897,7 +2898,7 @@ Public Class FormMain
                 form.WriteToLog(ex.Message.ToString & ": " & ex.InnerException.ToString, Color.Red, MessageType.GeneralError)
             Next
         Else
-            form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & Me.filename & DWSIM.App.GetLocalString("carregadocomsucesso"), Color.Blue, MessageType.Information)
+            form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & DWSIM.App.GetLocalString("carregadocomsucesso"), Color.Blue, MessageType.Information)
         End If
 
         form.UpdateFormText()
@@ -3091,9 +3092,9 @@ Public Class FormMain
                                        My.Settings.MostRecentFiles.Add(mypath)
                                        If Not My.Application.CommandLineArgs.Count > 1 Then Me.UpdateMRUList()
                                    End If
-                                   form.Options.FilePath = Me.filename
+                                   form.Options.FilePath = mypath
                                    form.UpdateFormText()
-                                   form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & Me.filename & DWSIM.App.GetLocalString("salvocomsucesso"), Color.Blue, MessageType.Information)
+                                   form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & mypath & DWSIM.App.GetLocalString("salvocomsucesso"), Color.Blue, MessageType.Information)
                                    'Me.ToolStripStatusLabel1.Text = ""
                                End Sub))
 
@@ -3298,10 +3299,10 @@ Public Class FormMain
                                       My.Settings.MostRecentFiles.Add(mypath)
                                       If Not My.Application.CommandLineArgs.Count > 1 Then Me.UpdateMRUList()
                                   End If
-                                  form.Options.FilePath = Me.filename
+                                  form.Options.FilePath = mypath
                                   form.UpdateFormText()
                               End Sub)
-                form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & Me.filename & DWSIM.App.GetLocalString("salvocomsucesso"), Color.Blue, MessageType.Information)
+                form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & mypath & DWSIM.App.GetLocalString("salvocomsucesso"), Color.Blue, MessageType.Information)
             End If
         End If
 
@@ -3478,17 +3479,16 @@ Label_00CC:
                 If Not (myStream Is Nothing) Then
                     Dim nome = myStream.Name
                     myStream.Close()
-                    Me.filename = nome
                     'Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + nome + "..."
                     Application.DoEvents()
                     Application.DoEvents()
-                    Me.LoadXML(Me.filename, Sub(x)
-                                                Me.Invoke(Sub()
-                                                              floading.ProgressBar1.Value = x
-                                                              floading.Label2.Text = x.ToString("N0") + "%"
-                                                              floading.Refresh()
-                                                          End Sub)
-                                            End Sub, "", False, simulate365File)
+                    Me.LoadXML(nome, Sub(x)
+                                         Me.Invoke(Sub()
+                                                       floading.ProgressBar1.Value = x
+                                                       floading.Label2.Text = x.ToString("N0") + "%"
+                                                       floading.Refresh()
+                                                   End Sub)
+                                     End Sub, "", False, simulate365File)
                 End If
             Case ".dwxmz"
                 Dim myStream As System.IO.FileStream
@@ -3496,13 +3496,12 @@ Label_00CC:
                 If Not (myStream Is Nothing) Then
                     Dim nome = myStream.Name
                     myStream.Close()
-                    Me.filename = nome
                     'Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + nome + "..."
                     Application.DoEvents()
                     Application.DoEvents()
-                    Me.LoadAndExtractXMLZIP(Me.filename, Sub(x)
-                                                             Me.Invoke(Sub() floading.ProgressBar1.Value = x)
-                                                         End Sub, False, simulate365File)
+                    Me.LoadAndExtractXMLZIP(nome, Sub(x)
+                                                      Me.Invoke(Sub() floading.ProgressBar1.Value = x)
+                                                  End Sub, False, simulate365File)
                 End If
             Case ".xml"
                 Dim myStream As System.IO.FileStream
@@ -3510,11 +3509,10 @@ Label_00CC:
                 If Not (myStream Is Nothing) Then
                     Dim nome = myStream.Name
                     myStream.Close()
-                    Me.filename = nome
                     'Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + nome + "..."
                     Application.DoEvents()
                     Application.DoEvents()
-                    Me.LoadMobileXML(Me.filename, simulate365File)
+                    Me.LoadMobileXML(nome, simulate365File)
                 End If
             Case ".dwcsd"
                 Application.DoEvents()
@@ -3636,24 +3634,23 @@ Label_00CC:
                 End If
                 SaveBackup(Me.SaveFileDialog1.FileName)
                 myStream = Me.SaveFileDialog1.OpenFile()
-                Me.filename = myStream.Name
                 myStream.Close()
                 If Not (myStream Is Nothing) Then
                     'Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Salvandosimulao") + " (" + Me.filename + ")"
                     Application.DoEvents()
-                    If Path.GetExtension(Me.filename).ToLower = ".dwxml" Then
-                        TaskHelper.Run(Sub() SaveXML(Me.filename, Me.ActiveMdiChild)).ContinueWith(Sub(t)
-                                                                                                       'Me.ToolStripStatusLabel1.Text = ""
-                                                                                                       If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
-                                                                                                   End Sub, TaskContinuationOptions.ExecuteSynchronously)
+                    If Path.GetExtension(myStream.Name).ToLower = ".dwxml" Then
+                        TaskHelper.Run(Sub() SaveXML(myStream.Name, Me.ActiveMdiChild)).ContinueWith(Sub(t)
+                                                                                                         'Me.ToolStripStatusLabel1.Text = ""
+                                                                                                         If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
+                                                                                                     End Sub, TaskContinuationOptions.ExecuteSynchronously)
 
-                    ElseIf Path.GetExtension(Me.filename).ToLower = ".xml" Then
-                        TaskHelper.Run(Sub() SaveMobileXML(Me.filename, Me.ActiveMdiChild)).ContinueWith(Sub(t)
-                                                                                                             'Me.ToolStripStatusLabel1.Text = ""
-                                                                                                             If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
-                                                                                                         End Sub, TaskContinuationOptions.ExecuteSynchronously)
-                    ElseIf Path.GetExtension(Me.filename).ToLower = ".dwxmz" Then
-                        TaskHelper.Run(Sub() SaveXMLZIP(Me.filename, Me.ActiveMdiChild)).ContinueWith(Sub(t)
+                    ElseIf Path.GetExtension(myStream.Name).ToLower = ".xml" Then
+                        TaskHelper.Run(Sub() SaveMobileXML(myStream.Name, Me.ActiveMdiChild)).ContinueWith(Sub(t)
+                                                                                                               'Me.ToolStripStatusLabel1.Text = ""
+                                                                                                               If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
+                                                                                                           End Sub, TaskContinuationOptions.ExecuteSynchronously)
+                    ElseIf Path.GetExtension(myStream.Name).ToLower = ".dwxmz" Then
+                        TaskHelper.Run(Sub() SaveXMLZIP(myStream.Name, Me.ActiveMdiChild)).ContinueWith(Sub(t)
                                                                                                           ' Me.ToolStripStatusLabel1.Text = ""
                                                                                                           If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
                                                                                                       End Sub, TaskContinuationOptions.ExecuteSynchronously)
@@ -3704,18 +3701,17 @@ Label_00CC:
 
         If myLink.Text <> DWSIM.App.GetLocalString("vazio") Then
             Dim nome = myLink.Tag.ToString
-            Me.filename = Name
             'Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " (" + nome + ")"
             Application.DoEvents()
             Try
-                Select Case Path.GetExtension(Me.filename).ToLower
+                Select Case Path.GetExtension(nome).ToLower
                     Case ".dwsim"
                         'Me.LoadF(Me.filename)
                     Case ".dwcsd"
                         Dim NewMDIChild As New FormCompoundCreator()
                         NewMDIChild.MdiParent = Me
                         NewMDIChild.Show()
-                        Dim objStreamReader As New FileStream(Me.filename, FileMode.Open)
+                        Dim objStreamReader As New FileStream(nome, FileMode.Open)
                         Dim x As New BinaryFormatter()
                         NewMDIChild.mycase = x.Deserialize(objStreamReader)
                         objStreamReader.Close()
@@ -3725,7 +3721,7 @@ Label_00CC:
                         Dim NewMDIChild As New FormDataRegression()
                         NewMDIChild.MdiParent = Me
                         NewMDIChild.Show()
-                        Dim objStreamReader As New FileStream(Me.filename, FileMode.Open)
+                        Dim objStreamReader As New FileStream(nome, FileMode.Open)
                         Dim x As New BinaryFormatter()
                         NewMDIChild.currcase = x.Deserialize(objStreamReader)
                         objStreamReader.Close()
@@ -3830,7 +3826,6 @@ Label_00CC:
                 Application.DoEvents()
 
                 Dim nome = myLink.Tag.ToString
-                Me.filename = nome
                 Application.DoEvents()
                 Dim objStreamReader As FileStream = Nothing
                 Try
@@ -4012,23 +4007,23 @@ Label_00CC:
 
     End Sub
 
-    Public Sub SaveFile(ByVal saveasync As Boolean)
+    Public Function SaveFile(ByVal saveasync As Boolean) As String
 
         If My.Computer.Keyboard.ShiftKeyDown Then saveasync = False
-
+        Dim filename As String
         If Not Me.ActiveMdiChild Is Nothing Then
             If TypeOf Me.ActiveMdiChild Is FormFlowsheet Then
                 Dim form2 As FormFlowsheet = Me.ActiveMdiChild
                 If SavingSimulation IsNot Nothing Then
-                    If SavingSimulation.Invoke(form2) = False Then Exit Sub
+                    If SavingSimulation.Invoke(form2) = False Then Return ""
                 End If
                 If form2.Options.FilePath <> "" Then
                     Application.DoEvents()
-                    Me.filename = form2.Options.FilePath
-                    SaveBackup(Me.filename)
-                    If Path.GetExtension(Me.filename).ToLower = ".dwxml" Then
+                    filename = form2.Options.FilePath
+                    SaveBackup(filename)
+                    If Path.GetExtension(filename).ToLower = ".dwxml" Then
                         SaveXML(form2.Options.FilePath, form2)
-                    ElseIf Path.GetExtension(Me.filename).ToLower = ".xml" Then
+                    ElseIf Path.GetExtension(filename).ToLower = ".xml" Then
                         If saveasync Then
                             TaskHelper.Run(Sub() SaveMobileXML(form2.Options.FilePath, form2)).ContinueWith(Sub(t)
                                                                                                                 'Me.ToolStripStatusLabel1.Text = ""
@@ -4037,7 +4032,7 @@ Label_00CC:
                         Else
                             SaveMobileXML(form2.Options.FilePath, form2)
                         End If
-                    ElseIf Path.GetExtension(Me.filename).ToLower = ".dwxmz" Then
+                    ElseIf Path.GetExtension(filename).ToLower = ".dwxmz" Then
                         SaveXMLZIP(form2.Options.FilePath, form2)
                     End If
                 Else
@@ -4045,20 +4040,20 @@ Label_00CC:
                     If Me.SaveFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
                         SaveBackup(Me.SaveFileDialog1.FileName)
                         myStream = Me.SaveFileDialog1.OpenFile()
-                        Me.filename = myStream.Name
+                        filename = myStream.Name
                         myStream.Close()
                         If Not (myStream Is Nothing) Then
                             Application.DoEvents()
-                            If Path.GetExtension(Me.filename).ToLower = ".dwxml" Then
+                            If Path.GetExtension(filename).ToLower = ".dwxml" Then
                                 SaveXML(myStream.Name, form2)
-                            ElseIf Path.GetExtension(Me.filename).ToLower = ".dwxmz" Then
+                            ElseIf Path.GetExtension(filename).ToLower = ".dwxmz" Then
                                 SaveXMLZIP(myStream.Name, form2)
                             End If
                         End If
                     End If
                 End If
             ElseIf TypeOf Me.ActiveMdiChild Is FormCompoundCreator Then
-                Dim filename As String = CType(Me.ActiveMdiChild, FormCompoundCreator).mycase.Filename
+                filename = CType(Me.ActiveMdiChild, FormCompoundCreator).mycase.Filename
                 If filename = "" Then
                     Me.SaveStudyDlg.FileName = CType(Me.ActiveMdiChild, FormCompoundCreator).TextBoxName.Text
                     If Me.SaveStudyDlg.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
@@ -4066,23 +4061,22 @@ Label_00CC:
                         CType(Me.ActiveMdiChild, FormCompoundCreator).mycase.Filename = Me.SaveStudyDlg.FileName
                         CType(Me.ActiveMdiChild, FormCompoundCreator).StoreData()
                         File.WriteAllText(Me.SaveStudyDlg.FileName, Newtonsoft.Json.JsonConvert.SerializeObject(CType(Me.ActiveMdiChild, FormCompoundCreator).mycase, Newtonsoft.Json.Formatting.Indented))
-                        Me.filename = Me.SaveStudyDlg.FileName
-                        Me.ActiveMdiChild.Text = Me.filename
+                        filename = Me.SaveStudyDlg.FileName
+                        Me.ActiveMdiChild.Text = filename
                     End If
                 Else
                     filename = Path.ChangeExtension(filename, "dwcsd2")
                     SaveBackup(filename)
                     CType(Me.ActiveMdiChild, FormCompoundCreator).StoreData()
                     File.WriteAllText(filename, Newtonsoft.Json.JsonConvert.SerializeObject(CType(Me.ActiveMdiChild, FormCompoundCreator).mycase, Newtonsoft.Json.Formatting.Indented))
-                    Me.filename = filename
                     Me.ActiveMdiChild.Text = filename
                 End If
             ElseIf TypeOf Me.ActiveMdiChild Is FormDataRegression Then
                 If Me.SaveRegStudyDlg.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
                     SaveBackup(Me.SaveRegStudyDlg.FileName)
                     File.WriteAllText(Me.SaveRegStudyDlg.FileName, Newtonsoft.Json.JsonConvert.SerializeObject(CType(Me.ActiveMdiChild, FormDataRegression).StoreCase(), Newtonsoft.Json.Formatting.Indented))
-                    Me.filename = Me.SaveRegStudyDlg.FileName
-                    Me.ActiveMdiChild.Text = Me.filename
+                    filename = Me.SaveRegStudyDlg.FileName
+                    Me.ActiveMdiChild.Text = filename
                 End If
             ElseIf TypeOf Me.ActiveMdiChild Is FormUNIFACRegression Then
                 If Me.SaveUnifacIPRegrDlg.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
@@ -4092,15 +4086,16 @@ Label_00CC:
                     Dim x As New BinaryFormatter
                     x.Serialize(objStreamWriter, CType(Me.ActiveMdiChild, FormUNIFACRegression).mycase)
                     objStreamWriter.Close()
-                    Me.filename = Me.SaveUnifacIPRegrDlg.FileName
-                    Me.ActiveMdiChild.Text = Me.filename
+                    filename = Me.SaveUnifacIPRegrDlg.FileName
+                    Me.ActiveMdiChild.Text = filename
                 End If
             End If
         Else
             MessageBox.Show(DWSIM.App.GetLocalString("Noexistemsimulaesati"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
+        Return filename
 
-    End Sub
+    End Function
 
     Private Sub ToolStripButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton1.Click, SaveAsToolStripMenuItem.Click
         Call Me.SaveFileDialog()
@@ -4412,36 +4407,36 @@ Label_00CC:
     End Sub
 
     Private Sub SaveToSimulate365DashboardToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToSimulate365DashboardToolStripMenuItem.Click
-        SaveFile(False)
+        Dim filename = SaveFile(False)
         Dim filePickerForm As S365FilePickerForm = New S365FilePickerForm
-        Dim fileExtension = Path.GetExtension(Me.filename).ToLower()
+        Dim fileExtension = Path.GetExtension(filename).ToLower()
         If fileExtension.StartsWith(".") Then
             fileExtension = fileExtension.Remove(0, 1)
         End If
         Dim file = filePickerForm.ShowSaveDialog(New List(Of String)(New String() {fileExtension}))
         If file IsNot Nothing Then
-            Dim s365File As S365File = FileUploaderService.UploadFile(file.FlowsheetsDriveId, file.ParentDriveId, Me.filename, file.Filename, file.SimulatePath)
-            UpdateS365File(s365File)
+            Dim s365File As S365File = FileUploaderService.UploadFile(file.FlowsheetsDriveId, file.ParentDriveId, filename, file.Filename, file.SimulatePath)
+            UpdateS365File(filename, s365File)
             MessageBox.Show("File saved to Simulate 365 Dashboard.")
 
         End If
     End Sub
 
-    Private Sub UpdateS365File(simulate365File As S365File)
-        If Path.GetExtension(Me.filename).ToLower = ".dwxml" Or
-           Path.GetExtension(Me.filename).ToLower = ".dwxmz" Or
-           Path.GetExtension(Me.filename).ToLower = ".xml" Then
+    Private Sub UpdateS365File(filename As String, simulate365File As S365File)
+        If Path.GetExtension(filename).ToLower = ".dwxml" Or
+           Path.GetExtension(filename).ToLower = ".dwxmz" Or
+           Path.GetExtension(filename).ToLower = ".xml" Then
             Dim form2 As FormFlowsheet = Me.ActiveMdiChild
             form2.simulate365File = simulate365File
             form2.UpdateFormText()
 
-        ElseIf Path.GetExtension(Me.filename).ToLower = ".dwcsd" Or
-                Path.GetExtension(Me.filename).ToLower = ".dwcsd2" Then
+        ElseIf Path.GetExtension(filename).ToLower = ".dwcsd" Or
+                Path.GetExtension(filename).ToLower = ".dwcsd2" Then
             Dim activeChild As FormCompoundCreator = Me.ActiveMdiChild
             activeChild.simulate365File = simulate365File
 
-        ElseIf Path.GetExtension(Me.filename).ToLower = ".dwrsd" Or
-                Path.GetExtension(Me.filename).ToLower = ".dwrsd2" Then
+        ElseIf Path.GetExtension(filename).ToLower = ".dwrsd" Or
+                Path.GetExtension(filename).ToLower = ".dwrsd2" Then
             Dim activeChild As FormDataRegression = Me.ActiveMdiChild
             activeChild.simulate365File = simulate365File
         End If

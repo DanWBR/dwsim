@@ -148,7 +148,7 @@ Public Class FormWelcome
 
             Application.DoEvents()
 
-            My.Application.MainWindowForm.filename = lview.SelectedItems(0).Tag
+            'My.Application.MainWindowForm.filename = lview.SelectedItems(0).Tag
             Select Case Path.GetExtension(lview.SelectedItems(0).Tag).ToLower
                 Case ".dwxml"
                     'My.Application.MainWindowForm.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + lview.SelectedItems(0).Tag + "..."
