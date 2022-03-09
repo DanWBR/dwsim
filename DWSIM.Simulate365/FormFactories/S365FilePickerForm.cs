@@ -65,15 +65,19 @@ namespace DWSIM.Simulate365.FormFactories
 
             _webUIForm.ShowDialog();
 
-            return new S365File
-            {
-                DriveId = _filePickerService.SelectedSaveFile.FlowsheetsDriveId,
-                FileId = null,
-                Filename = _filePickerService.SelectedSaveFile.Filename,
-                FilePath = null,
-                ParentDriveId = _filePickerService.SelectedSaveFile.ParentDriveId,
-                SimulatePath = _filePickerService.SelectedSaveFile.SimulatePath
-            };
+            return _filePickerService.SelectedSaveFile != null ?
+                new S365File
+                {
+                    DriveId = _filePickerService.SelectedSaveFile.FlowsheetsDriveId,
+                    FileId = null,
+                    Filename = _filePickerService.SelectedSaveFile.Filename,
+                    FilePath = null,
+                    ParentDriveId = _filePickerService.SelectedSaveFile.ParentDriveId,
+                    SimulatePath = _filePickerService.SelectedSaveFile.SimulatePath
+                } : null;
+
+
+
         }
 
 

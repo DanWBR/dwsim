@@ -17,8 +17,8 @@ namespace DWSIM.Simulate365.Services
         public event EventHandler<S365DashboardSaveFile> S365DashboardSaveFileClicked;
         public event EventHandler S365DashboardFolderCreated;
 
-        public S365DashboardSaveFile SelectedSaveFile { get; private set; }
-        public S365File SelectedOpenFile { get; private set; }
+        public S365DashboardSaveFile SelectedSaveFile { get; private set; } = null;
+        public S365File SelectedOpenFile { get; private set; } = null;
 
         public void OpenFile(string driveItemId, string flowsheetsDriveId, string fullPath)
         {
@@ -51,13 +51,13 @@ namespace DWSIM.Simulate365.Services
                 throw new Exception("An error occurred while opening file from S365 Dashboard.", ex);
             }
         }
-        public void SaveFile(string filename, string extension, string flowsheetsDriveId, string parentDriveId, string fullPath)
+        public void SaveFile(string filename, string flowsheetsDriveId, string parentDriveId, string fullPath)
         {
             try
             {
                 this.SelectedSaveFile = new S365DashboardSaveFile
                 {
-                    Filename = $"{filename}.{extension}",
+                    Filename = filename,
                     FlowsheetsDriveId = flowsheetsDriveId,
                     ParentDriveId = parentDriveId,
                     SimulatePath= fullPath
