@@ -4423,8 +4423,8 @@ Label_00CC:
         End If
         Dim file = filePickerForm.ShowSaveDialog(New List(Of String)(New String() {fileExtension}))
         If file IsNot Nothing Then
-            Dim s365File As S365File = FileUploaderService.UploadFile(file.DriveId, file.ParentDriveId, Me.filename, file.Filename, file.SimulatePath)
-            UpdateS365File(s365File)
+            Dim s365File As S365File = FileUploaderService.UploadFile(file.DriveId, file.ParentDriveId, filename, file.Filename, file.SimulatePath)
+            UpdateS365File(filename, s365File)
             MessageBox.Show("File saved to Simulate 365 Dashboard.")
 
         End If
