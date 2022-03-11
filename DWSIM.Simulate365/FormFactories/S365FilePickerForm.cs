@@ -1,4 +1,5 @@
-﻿using DWSIM.Simulate365.Models;
+﻿using DWSIM.Interfaces;
+using DWSIM.Simulate365.Models;
 using DWSIM.Simulate365.Services;
 using DWSIM.UI.Web;
 using Microsoft.Web.WebView2.Core;
@@ -11,13 +12,14 @@ using System.Threading.Tasks;
 
 namespace DWSIM.Simulate365.FormFactories
 {
-    public class S365FilePickerForm
+    public class S365FilePickerForm : IFilePicker
     {
         private WebUIForm _webUIForm;
         private readonly FilePickerService _filePickerService;
 
         public S365FilePickerForm()
         {
+
             _filePickerService = new FilePickerService();
             _filePickerService.S3365DashboardFileOpenStarted += FilePickerService_S3365DashboardFileOpenStarted;
             _filePickerService.S365DashboardSaveFileClicked += FilePickerService_S365DashboardSaveFileClicked;
@@ -43,7 +45,7 @@ namespace DWSIM.Simulate365.FormFactories
             _webUIForm?.Dispose();
         }
 
-        public S365DashboardSaveFile ShowSaveDialog(List<string> fileFormats = null)
+        public S365File ShowSaveDialog(List<string> fileFormats = null)
         {
 
             var navigationPath = "filepicker/save";
@@ -63,13 +65,29 @@ namespace DWSIM.Simulate365.FormFactories
 
             _webUIForm.ShowDialog();
 
-            return _filePickerService.SelectedSaveFile;
+            return _filePickerService.SelectedSaveFile != null ?
+                new S365File
+                {
+                    DriveId = _filePickerService.SelectedSaveFile.FlowsheetsDriveId,
+                    FileId = null,
+                    Filename = _filePickerService.SelectedSaveFile.Filename,
+                    FilePath = null,
+                    ParentDriveId = _filePickerService.SelectedSaveFile.ParentDriveId,
+                    SimulatePath = _filePickerService.SelectedSaveFile.SimulatePath
+                } : null;
+
+
+
         }
 
 
-        public S365File ShowOpenDialog()
+        public S365File ShowOpenDialog(List<string> fileFormats = null)
         {
             var navigationPath = "filepicker/open";
+            if (fileFormats != null && fileFormats.Count > 0)
+            {
+                navigationPath += $"/{string.Join("_", fileFormats)}";
+            }
             var initialUrl = $"{navigationPath}";
             string title = "Open file from Simulate 365 Dashboard";
             _webUIForm = new WebUIForm(initialUrl, title, true)
@@ -103,5 +121,33 @@ namespace DWSIM.Simulate365.FormFactories
                 //  throw;
             }
         }
+
+        #region FilePickerService
+
+        public IVirtualFile ShowOpenDialog(IEnumerable<IFilePickerAllowedType> allowedTypes)
+        {
+            List<string> fileFormats = null;
+            if (allowedTypes != null && allowedTypes.Count() > 0)
+            {
+                fileFormats = allowedTypes.SelectMany(t => t.AllowedExtensions.Select(e => e.Replace("*.", ""))).ToList();
+            }
+
+            var file = ShowOpenDialog(fileFormats);
+            return file;
+        }
+
+        public IVirtualFile ShowSaveDialog(IEnumerable<IFilePickerAllowedType> allowedTypes)
+        {
+            List<string> fileFormats = null;
+            if (allowedTypes != null && allowedTypes.Count() > 0)
+            {
+                fileFormats = allowedTypes.SelectMany(t => t.AllowedExtensions.Select(e => e.Replace("*.", ""))).ToList();
+            }
+
+            var file = ShowSaveDialog(fileFormats);
+            return file;
+        }
+
+        #endregion
     }
 }

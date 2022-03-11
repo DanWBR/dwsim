@@ -137,6 +137,10 @@
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
+      <Project>{50BFD69A-487E-4B38-86EA-48ACD85A0EB1}</Project>
+      <Name>DWSIM.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.UI.Web\DWSIM.UI.Web.csproj">
       <Project>{4a48830e-c861-422a-b3e9-44311914c694}</Project>
       <Name>DWSIM.UI.Web</Name>

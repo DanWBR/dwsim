@@ -58,12 +58,12 @@ export async function OpenDwsimFile(driveItemId: string, driveId: string, filePa
 
 }
 
-export async function SaveDwsimFile(filename: string, extension: string, flowsheetsDriveId: string, parentDriveId: string, filePath: string) {
+export async function SaveDwsimFile(filename: string, flowsheetsDriveId: string, parentDriveId: string, filePath: string) {
     console.log("filePath", filePath);
     if (chrome?.webview?.hostObjects?.filePickerService) {
 
         const filePickerService = chrome.webview.hostObjects.filePickerService;
-        await filePickerService.SaveFile(filename, extension, flowsheetsDriveId, parentDriveId, filePath);
+        await filePickerService.SaveFile(filename, flowsheetsDriveId, parentDriveId, filePath);
     } else {
         throw "filePickerService not initialized.";
     }

@@ -8,9 +8,9 @@ import { FileTypeIcon, IFileTypeIconProps } from "../components/file-type-icon/f
 import { getFileTypeIconPropsCustom } from "../components/file-type-icon/file-type-icon.helpers";
 import NavigationBar from "../components/navigation-bar/navigation-bar.component";
 import CreateFolderModal from "../components/create-folder-modal/create-folder-modal.component";
-import { IInitializeDashboardProps, withInitializeDashboard } from "../components/with-initialize-dashboard.hoc";
+import {  withInitializeDashboard } from "../components/with-initialize-dashboard.hoc";
 
-interface IOpenDashboardFilePageProps extends RouteComponentProps<IOpenDashboardFilePageRouteProps>, IInitializeDashboardProps {
+interface IOpenDashboardFilePageProps extends RouteComponentProps<IOpenDashboardFilePageRouteProps> {
     baseFolder: ISelectedFolder;
     siteId: string;
     flowsheetsDriveId: string;
@@ -176,15 +176,7 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
 
     }
     componentDidMount() {
-
-        if (this.props.isSaveDialog) {
-            this.changeFileTypeFilter();
-        } else {
-            this.getFilesAndFolders();
-
-        }
-
-
+        this.changeFileTypeFilter();
     }
 
     changeFileTypeFilter() {
@@ -407,11 +399,20 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
         console.log("Save clicked", this.state);
         const { filename, selectedFileType, selectedFolder } = this.state;
         const { flowsheetsDriveId } = this.props;
+
+        
+
         if (filename && selectedFileType) {
+
+            let fileNameWithExtension=filename;
+            if(fileNameWithExtension.toUpperCase().indexOf(selectedFileType.toUpperCase())==-1){
+                fileNameWithExtension=`${filename}.${selectedFileType}`
+            }
+
             const url = selectedFolder.webUrl.split('/').slice(2).reduce((prev, curr) => prev + "/" + decodeURIComponent(curr), "");
-            const filePath = url && url.length > 0 ? `Simulate 365 Dashboard${url}/${filename}.${selectedFileType}`
-                : `Simulate 365 Dashboard/${filename}${filename}.${selectedFileType}`;
-            SaveDwsimFile(filename, selectedFileType, flowsheetsDriveId, selectedFolder.driveId, filePath);
+            const filePath = url && url.length > 0 ? `Simulate 365 Dashboard${url}/${fileNameWithExtension}`
+                : `Simulate 365 Dashboard/${fileNameWithExtension}`;
+            SaveDwsimFile(fileNameWithExtension,flowsheetsDriveId, selectedFolder.driveId, filePath);
         }
     }
 

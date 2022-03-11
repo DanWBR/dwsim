@@ -123,6 +123,9 @@ Public Class FormMain
 
         MostRecentFiles = My.Settings.MostRecentFiles
 
+        ' Set default file picker
+        ' SharedClassesCSharp.FilePicker.FilePickerService.GetInstance().SetFilePickerFactory(Function() New Simulate365.FormFactories.S365FilePickerForm())
+
         If GlobalSettings.Settings.OldUI Then
 
             calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
@@ -1953,7 +1956,7 @@ Public Class FormMain
                     Else
                         Dim ptype = xel.Element("Type").Value
                         If ppkey.Contains("1978") And ptype.Contains("PengRobinsonPropertyPackage") Then
-                            ptype = ptype.Replace("PengRobinson","PengRobinson1978")
+                            ptype = ptype.Replace("PengRobinson", "PengRobinson1978")
                         End If
                         If PropertyPackages.ContainsKey(ppkey) Then
                             obj = PropertyPackages(ppkey).ReturnInstance(ptype)
@@ -3651,9 +3654,9 @@ Label_00CC:
                                                                                                            End Sub, TaskContinuationOptions.ExecuteSynchronously)
                     ElseIf Path.GetExtension(myStream.Name).ToLower = ".dwxmz" Then
                         TaskHelper.Run(Sub() SaveXMLZIP(myStream.Name, Me.ActiveMdiChild)).ContinueWith(Sub(t)
-                                                                                                          ' Me.ToolStripStatusLabel1.Text = ""
-                                                                                                          If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
-                                                                                                      End Sub, TaskContinuationOptions.ExecuteSynchronously)
+                                                                                                            ' Me.ToolStripStatusLabel1.Text = ""
+                                                                                                            If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
+                                                                                                        End Sub, TaskContinuationOptions.ExecuteSynchronously)
 
                     Else
                         Me.bgSaveFile.RunWorkerAsync()
@@ -4014,10 +4017,12 @@ Label_00CC:
         If Not Me.ActiveMdiChild Is Nothing Then
             If TypeOf Me.ActiveMdiChild Is FormFlowsheet Then
                 Dim form2 As FormFlowsheet = Me.ActiveMdiChild
+                ' SavingSimulation event
                 If SavingSimulation IsNot Nothing Then
                     If SavingSimulation.Invoke(form2) = False Then Return ""
                 End If
-                If form2.Options.FilePath <> "" Then
+
+                If form2.Options.FilePath <> "" Then ' If file exists, save to same location
                     Application.DoEvents()
                     filename = form2.Options.FilePath
                     SaveBackup(filename)
@@ -4035,7 +4040,7 @@ Label_00CC:
                     ElseIf Path.GetExtension(filename).ToLower = ".dwxmz" Then
                         SaveXMLZIP(form2.Options.FilePath, form2)
                     End If
-                Else
+                Else ' If file doesn't exist, open file picker
                     Dim myStream As System.IO.FileStream
                     If Me.SaveFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
                         SaveBackup(Me.SaveFileDialog1.FileName)
@@ -4392,6 +4397,9 @@ Label_00CC:
         loginForm.ShowDialog()
     End Sub
 
+
+
+
     Private Sub LogoutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogoutToolStripMenuItem.Click
         UserService.Logout()
     End Sub
@@ -4415,7 +4423,7 @@ Label_00CC:
         End If
         Dim file = filePickerForm.ShowSaveDialog(New List(Of String)(New String() {fileExtension}))
         If file IsNot Nothing Then
-            Dim s365File As S365File = FileUploaderService.UploadFile(file.FlowsheetsDriveId, file.ParentDriveId, filename, file.Filename, file.SimulatePath)
+            Dim s365File As S365File = FileUploaderService.UploadFile(file.DriveId, file.ParentDriveId, filename, file.Filename, file.SimulatePath)
             UpdateS365File(filename, s365File)
             MessageBox.Show("File saved to Simulate 365 Dashboard.")
 
