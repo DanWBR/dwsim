@@ -14,6 +14,8 @@ namespace DWSIM.SharedClassesCSharp.FilePicker.Windows
 
         public string Filename { get => Path.GetFileName(_filePath); }
 
+        public string FullPath => _filePath;
+
         public WindowsFile(string filePath)
         {
             _filePath = filePath;
@@ -22,6 +24,11 @@ namespace DWSIM.SharedClassesCSharp.FilePicker.Windows
         public string ReadAllText()
         {
             return File.ReadAllText(_filePath);
+        }
+
+        public Stream OpenRead()
+        {
+            return File.OpenRead(_filePath);
         }
 
         public void Write(Stream stream)
@@ -37,6 +44,21 @@ namespace DWSIM.SharedClassesCSharp.FilePicker.Windows
         public void Write(string localFile)
         {
             File.Copy(localFile, _filePath);
+        }
+
+        public string GetExtension()
+        {
+            return Path.GetExtension(_filePath);
+        }        
+
+        public void Delete()
+        {
+            File.Delete(_filePath);
+        }
+
+        public bool Exists()
+        {
+            return File.Exists(_filePath);
         }
     }
 }

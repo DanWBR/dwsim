@@ -25,25 +25,33 @@ namespace DWSIM.Simulate365.Services
             try
             {
                 S3365DashboardFileOpenStarted?.Invoke(this, new EventArgs());
+
                 var token = UserService.GetInstance().GetUserToken();
                 var client = GraphClientFactory.CreateClient(token);
 
                 var item = Task.Run(async () => await client.Drives[flowsheetsDriveId].Items[driveItemId].Request().GetAsync()).Result;
+
                 // Get drive item
                 var stream = Task.Run(async () => await client.Drives[flowsheetsDriveId].Items[driveItemId].Content.Request().GetAsync()).Result;
 
-
                 var extension = System.IO.Path.GetExtension(item.Name);
-                var filePath = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid().ToString()}{extension}");
+                var tmpFilePath = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid().ToString()}{extension}");
+
                 Task.Run(async () =>
                 {
-                    using (var destStream = System.IO.File.OpenWrite(filePath))
+                    using (var destStream = System.IO.File.OpenWrite(tmpFilePath))
                         await stream.CopyToAsync(destStream);
                 }).Wait();
-                this.SelectedOpenFile = new S365File { FilePath = filePath, Filename = item.Name, DriveId = flowsheetsDriveId, FileId = driveItemId, SimulatePath = fullPath };
+
+                this.SelectedOpenFile = new S365File(tmpFilePath) 
+                { 
+                    Filename = item.Name, 
+                    DriveId = flowsheetsDriveId, 
+                    FileId = driveItemId, 
+                    FullPath = fullPath 
+                };
 
                 S3365DashboardFileOpened?.Invoke(this, this.SelectedOpenFile);
-
             }
             catch (Exception ex)
             {
@@ -61,7 +69,6 @@ namespace DWSIM.Simulate365.Services
                     FlowsheetsDriveId = flowsheetsDriveId,
                     ParentDriveId = parentDriveId,
                     SimulatePath= fullPath
-
                 };
 
                 this.S365DashboardSaveFileClicked?.Invoke(this, this.SelectedSaveFile);

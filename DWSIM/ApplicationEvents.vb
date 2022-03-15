@@ -48,6 +48,9 @@ Namespace My
 
             AddHandler AppDomain.CurrentDomain.AssemblyResolve, New ResolveEventHandler(AddressOf LoadFromExtensionsFolder)
 
+            ' Set default file picker
+            SharedClassesCSharp.FilePicker.FilePickerService.GetInstance().SetFilePickerFactory(Function() New Simulate365.FormFactories.S365FilePickerForm())
+
             If Environment.OSVersion.Version >= New Version(6, 3, 0) Then
                 'win 8.1 added support for per monitor dpi
                 If (Environment.OSVersion.Version >= New Version(10, 0, 15063)) Then

@@ -37,7 +37,7 @@ namespace DWSIM.Simulate365.Services
                 var driveItemRequestBuilder = client.Drives[flowsheetsDriveId].Items[parentDriveId];
                 var item = Task.Run(async () => await UploadDocumentAsync(driveItemRequestBuilder, filename, fileStream, ConflictBehaviour.Replace)).Result;
 
-                return new S365File { FileId = item.Id, DriveId = parentDriveId, Filename = item.Name, FilePath = null, SimulatePath = simulatePath };
+                return new S365File(filename) { FileId = item.Id, DriveId = parentDriveId, Filename = item.Name, FullPath = simulatePath };
 
             }
             catch (Exception ex)
