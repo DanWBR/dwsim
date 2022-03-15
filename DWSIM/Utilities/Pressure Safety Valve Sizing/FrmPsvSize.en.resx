@@ -193,11 +193,17 @@
   <data name="KryptonButton1.Text" xml:space="preserve">
     <value>Calculate Orifice Area</value>
   </data>
+  <data name="Label24.Location" type="System.Drawing.Point, System.Drawing">
+    <value>317, 74</value>
+  </data>
   <data name="Label24.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 13</value>
   </data>
   <data name="Label24.Text" xml:space="preserve">
     <value>in. ²</value>
+  </data>
+  <data name="TextBox12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>247, 69</value>
   </data>
   <data name="Label20.Size" type="System.Drawing.Size, System.Drawing">
     <value>177, 13</value>
@@ -205,11 +211,17 @@
   <data name="Label20.Text" xml:space="preserve">
     <value>API Standard Orifice / Nominal Area</value>
   </data>
+  <data name="Label16.Location" type="System.Drawing.Point, System.Drawing">
+    <value>317, 49</value>
+  </data>
   <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 13</value>
   </data>
   <data name="Label16.Text" xml:space="preserve">
     <value>in. ²</value>
+  </data>
+  <data name="TextBox11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>247, 45</value>
   </data>
   <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 13</value>
