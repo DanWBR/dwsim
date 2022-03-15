@@ -52,8 +52,6 @@ Partial Class FormReacManager
         Me.ToolStripButton8 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton9 = New System.Windows.Forms.ToolStripButton()
-        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.dckMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.FloatToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DockLeftToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -280,20 +278,6 @@ Partial Class FormReacManager
         resources.ApplyResources(Me.ToolStripButton9, "ToolStripButton9")
         Me.ToolStripButton9.Name = "ToolStripButton9"
         '
-        'OpenFileDialog1
-        '
-        Me.OpenFileDialog1.DefaultExt = "xml"
-        resources.ApplyResources(Me.OpenFileDialog1, "OpenFileDialog1")
-        Me.OpenFileDialog1.SupportMultiDottedExtensions = True
-        '
-        'SaveFileDialog1
-        '
-        Me.SaveFileDialog1.DefaultExt = "xml"
-        resources.ApplyResources(Me.SaveFileDialog1, "SaveFileDialog1")
-        Me.SaveFileDialog1.FilterIndex = 2
-        Me.SaveFileDialog1.RestoreDirectory = True
-        Me.SaveFileDialog1.SupportMultiDottedExtensions = True
-        '
         'dckMenu
         '
         Me.dckMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FloatToolStripMenuItem, Me.DockLeftToolStripMenuItem, Me.DockRightToolStripMenuItem, Me.DockTopToolStripMenuItem, Me.DockBottomToolStripMenuItem, Me.DockLeftAutoHideToolStripMenuItem, Me.DockRightAutoHideToolStripMenuItem, Me.DockTopAutoHideToolStripMenuItem, Me.DockBottomAutoHideToolStripMenuItem, Me.DocumentToolStripMenuItem})
@@ -367,9 +351,9 @@ Partial Class FormReacManager
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
         Me.Controls.Add(Me.SplitContainer1)
         Me.DoubleBuffered = True
+        Me.Name = "FormReacManager"
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         CType(Me.GridRSets, System.ComponentModel.ISupportInitialize).EndInit()
@@ -390,8 +374,6 @@ Me.AutoScaleDimensions = New System.Drawing.SizeF(96, 96)
     End Sub
     Public WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Public WithEvents GroupBox4 As System.Windows.Forms.GroupBox
-    Public WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
-    Public WithEvents SaveFileDialog1 As System.Windows.Forms.SaveFileDialog
     Public WithEvents GridRSets As System.Windows.Forms.DataGridView
     Public WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
