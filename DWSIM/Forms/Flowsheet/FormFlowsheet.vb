@@ -715,7 +715,7 @@ Public Class FormFlowsheet
 
     Sub UpdateFormText()
         If (Me.simulate365File IsNot Nothing) Then
-            Me.Text = Me.simulate365File.Filename & " (" & Me.simulate365File.SimulatePath & ")"
+            Me.Text = Me.simulate365File.Filename & " (" & Me.simulate365File.FullPath & ")"
         ElseIf File.Exists(Me.Options.FilePath) Then
             Me.Text = IO.Path.GetFileNameWithoutExtension(Me.Options.FilePath) & " (" & Me.Options.FilePath & ")"
         Else
