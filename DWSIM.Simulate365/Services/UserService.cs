@@ -158,7 +158,7 @@ namespace DWSIM.Simulate365.Services
 
                 _currentUser = new UserDetailsModel
                 {
-                    DisplayName = user.DisplayName,
+                    DisplayName = $"{user.GivenName} {user.Surname}",
                     FirstName = user.GivenName,
                     LastName = user.Surname,
                     Id = user.Id,
