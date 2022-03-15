@@ -473,7 +473,7 @@ Public Class FormReportConfig
         paragraph = Content.Text.ParagraphBuilder.CreateParagraphWithCustomStyle(document, "p1")
         paragraph.ParagraphStyle.TextProperties.FontName = fname
         paragraph.ParagraphStyle.TextProperties.FontSize = fsize
-        paragraph.TextContent.Add(New Content.Text.SimpleText(document, "Simulation File: " & frm.FilePath))
+        paragraph.TextContent.Add(New Content.Text.SimpleText(document, "Simulation File: " & frm.Options.FilePath))
         table.Rows(1).Cells(0).Content.Add(paragraph)
 
         paragraph = Content.Text.ParagraphBuilder.CreateParagraphWithCustomStyle(document, "p2")
