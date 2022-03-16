@@ -500,4 +500,11 @@ Public Class FormWelcome
     Private Sub LinkLabel15_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel15.LinkClicked
         Process.Start("https://dwsim.org/index.php/dwsim-social-responsibility-program/")
     End Sub
+
+    Private Sub LinkLabel3_LinkClicked_2(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel3.LinkClicked
+        Application.DoEvents()
+        Application.DoEvents()
+        Me.Parent.Visible = False
+        Call My.Application.MainWindowForm.LoadFileDialog(True)
+    End Sub
 End Class
