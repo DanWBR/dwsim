@@ -3513,12 +3513,12 @@ Label_00CC:
                 Dim x As New BinaryFormatter()
                 x.Binder = New VersionDeserializationBinder
                 NewMDIChild.mycase = x.Deserialize(objStreamReader)
-                NewMDIChild.mycase.Filename = fpath
+                NewMDIChild.mycase.Filename = handler.FullPath
                 objStreamReader.Close()
                 NewMDIChild.WriteData()
                 If GlobalSettings.Settings.OldUI Then
-                    If Not My.Settings.MostRecentFiles.Contains(fpath) Then
-                        My.Settings.MostRecentFiles.Add(fpath)
+                    If Not My.Settings.MostRecentFiles.Contains(handler.FullPath) Then
+                        My.Settings.MostRecentFiles.Add(handler.FullPath)
                         Me.UpdateMRUList()
                     End If
                 End If
@@ -3528,12 +3528,12 @@ Label_00CC:
                 Dim NewMDIChild As New FormCompoundCreator()
                 NewMDIChild.MdiParent = Me
                 NewMDIChild.Show()
-                NewMDIChild.mycase = Newtonsoft.Json.JsonConvert.DeserializeObject(Of CompoundGeneratorCase)(File.ReadAllText(fpath))
-                NewMDIChild.mycase.Filename = fpath
+                NewMDIChild.mycase = Newtonsoft.Json.JsonConvert.DeserializeObject(Of CompoundGeneratorCase)(handler.ReadAllText())
+                NewMDIChild.mycase.Filename = handler.FullPath
                 NewMDIChild.WriteData()
                 If GlobalSettings.Settings.OldUI Then
-                    If Not My.Settings.MostRecentFiles.Contains(fpath) Then
-                        My.Settings.MostRecentFiles.Add(fpath)
+                    If Not My.Settings.MostRecentFiles.Contains(handler.FullPath) Then
+                        My.Settings.MostRecentFiles.Add(handler.FullPath)
                         Me.UpdateMRUList()
                     End If
                 End If
@@ -3543,16 +3543,16 @@ Label_00CC:
                 Dim NewMDIChild As New FormDataRegression()
                 NewMDIChild.MdiParent = Me
                 NewMDIChild.Show()
-                Dim objStreamReader As New FileStream(fpath, FileMode.Open, FileAccess.Read)
-                Dim x As New BinaryFormatter()
-                x.Binder = New VersionDeserializationBinder
-                NewMDIChild.currcase = x.Deserialize(objStreamReader)
-                NewMDIChild.currcase.filename = fpath
-                objStreamReader.Close()
+                Using objStreamReader = handler.OpenRead()
+                    Dim x As New BinaryFormatter()
+                    x.Binder = New VersionDeserializationBinder
+                    NewMDIChild.currcase = x.Deserialize(objStreamReader)
+                End Using
+                NewMDIChild.currcase.filename = handler.FullPath
                 NewMDIChild.LoadCase(NewMDIChild.currcase, False)
                 If GlobalSettings.Settings.OldUI Then
-                    If Not My.Settings.MostRecentFiles.Contains(fpath) Then
-                        My.Settings.MostRecentFiles.Add(fpath)
+                    If Not My.Settings.MostRecentFiles.Contains(handler.FullPath) Then
+                        My.Settings.MostRecentFiles.Add(handler.FullPath)
                         Me.UpdateMRUList()
                     End If
                 End If
@@ -3562,12 +3562,12 @@ Label_00CC:
                 Dim NewMDIChild As New FormDataRegression()
                 NewMDIChild.MdiParent = Me
                 NewMDIChild.Show()
-                NewMDIChild.currcase = Newtonsoft.Json.JsonConvert.DeserializeObject(Of DWSIM.Optimization.DatRegression.RegressionCase)(File.ReadAllText(fpath))
+                NewMDIChild.currcase = Newtonsoft.Json.JsonConvert.DeserializeObject(Of DWSIM.Optimization.DatRegression.RegressionCase)(handler.ReadAllText())
                 NewMDIChild.currcase.filename = fpath
                 NewMDIChild.LoadCase(NewMDIChild.currcase, False)
                 If GlobalSettings.Settings.OldUI Then
-                    If Not My.Settings.MostRecentFiles.Contains(fpath) Then
-                        My.Settings.MostRecentFiles.Add(fpath)
+                    If Not My.Settings.MostRecentFiles.Contains(handler.FullPath) Then
+                        My.Settings.MostRecentFiles.Add(handler.FullPath)
                         Me.UpdateMRUList()
                     End If
                 End If
@@ -3577,15 +3577,16 @@ Label_00CC:
                 Dim NewMDIChild As New FormUNIFACRegression()
                 NewMDIChild.MdiParent = Me
                 NewMDIChild.Show()
-                Dim objStreamReader As New FileStream(fpath, FileMode.Open, FileAccess.Read)
-                Dim x As New BinaryFormatter()
-                NewMDIChild.mycase = x.Deserialize(objStreamReader)
-                NewMDIChild.mycase.Filename = fpath
-                objStreamReader.Close()
+                Using objStreamReader = handler.OpenRead()
+                    Dim x As New BinaryFormatter()
+                    x.Binder = New VersionDeserializationBinder
+                    NewMDIChild.mycase = x.Deserialize(objStreamReader)
+                    NewMDIChild.mycase.Filename = handler.FullPath
+                End Using
                 NewMDIChild.LoadCase(NewMDIChild.mycase, False)
                 If GlobalSettings.Settings.OldUI Then
-                    If Not My.Settings.MostRecentFiles.Contains(fpath) Then
-                        My.Settings.MostRecentFiles.Add(fpath)
+                    If Not My.Settings.MostRecentFiles.Contains(handler.FullPath) Then
+                        My.Settings.MostRecentFiles.Add(handler.FullPath)
                         Me.UpdateMRUList()
                     End If
                 End If
