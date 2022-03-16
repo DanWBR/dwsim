@@ -18,7 +18,7 @@ export interface INavigationBarProps {
     onSelectedFolderChanged(selectedFolder: ISelectedFolder): void;
 }
 export interface INavigationBarState {
-    folders: ISelectedFolder[];
+
 }
 
 
@@ -35,16 +35,91 @@ class NavigationBar extends React.Component<INavigationBarProps, INavigationBarS
      */
     constructor(props: INavigationBarProps) {
         super(props);
-        this.state = { folders: [props.baseFolder] };
+        this.state = {};
     }
     componentDidUpdate(prevProps: INavigationBarProps, prevState: INavigationBarState) {
         //navigate down the folder structure
-        const { folders } = prevState;
-        const alreadyInFolders = folders.find(x => x.driveId === this.props.selectedFolder.driveId);
-        if (!alreadyInFolders) {
-            console.log("Navigating to:",this.props.selectedFolder);
-            this.setState({ folders: [...folders, this.props.selectedFolder] });
+
+    }
+
+
+
+
+    // addSelectedFolder(folder: ISelectedFolder) {
+    //     console.log("addSelectedFolder",folder);
+    //     this.setState(s => ({ folders: [...s.folders, folder] }));
+    // }
+
+    getBreadcrumbItems() {
+        console.log("getBreadcrumbItems", this.props);
+        const items: IBreadcrumbItem[] = [
+        ];
+        let dashboardItem = {
+            text: "Dashboard", key: "0", onClick: async () => await this._onBreadcrumbItemClicked.call(this, 0), isCurrentItem: false
+        };
+
+        const baseUrl = this.props.baseFolder.webUrl;
+        const splited = this.props.selectedFolder.webUrl.split(baseUrl).filter(x => x);
+        const subdirectoryUrl = splited?.[0];
+        if (subdirectoryUrl) {
+            items.push(dashboardItem);
+            const directories = subdirectoryUrl.split("/").filter(x => x);
+            console.log("directories", directories);
+            directories.forEach((directory, index) => {
+                const dirItem = {
+                    text: decodeURIComponent(directory),
+                    key: (index + 1).toString(),
+                    onClick: async () => await this._onBreadcrumbItemClicked.call(this, index + 1),
+                    isCurrentItem: (index + 1) == directories.length
+                } as IBreadcrumbItem;
+                items.push(dirItem);
+            });
+
+        } else {
+            dashboardItem.isCurrentItem = true;
+            items.push(dashboardItem);
         }
+
+
+
+        return items;
+    }
+
+    async _onBreadcrumbItemClicked(index: number) {
+        console.log("_onBreadcrumbItemClicked index", index);
+        const { selectedFolder, baseFolder } = this.props;
+        if (index == 0) {
+            this.props.onSelectedFolderChanged(baseFolder);
+        } else {
+            const baseUrl = this.props.baseFolder.webUrl;
+            const splited = this.props.selectedFolder.webUrl.split(baseUrl).filter(x => x);
+            const subdirectoryUrl = splited?.[0];
+            let directories = subdirectoryUrl.split('/').filter(x => x);
+            directories = directories.slice(0, index);
+            console.log("_onBreadcrumbItemClicked directories sliced", directories);
+            const selectedFolderPath = this.props.baseFolder.webUrl + "/" + directories.join("/");
+            console.log("_onBreadcrumbItemClicked selectedFolderPath", selectedFolderPath);
+            const selectedFolder = await this.getSelectedFolder(selectedFolderPath);
+            this.props.onSelectedFolderChanged(selectedFolder);
+        }
+
+    }
+
+    async onNavigateUpClick() {
+        const { selectedFolder, baseFolder } = this.props;
+        const baseUrl = baseFolder.webUrl;
+        const splited = selectedFolder.webUrl.split(baseUrl).filter(x => x);
+        const subdirectoryUrl = splited?.[0];
+        let directories = subdirectoryUrl.split('/').filter(x => x);
+        directories = directories.slice(0, -1);
+        if (directories && directories.length != 0) {
+            const selectedFolderPath = this.props.baseFolder.webUrl + "/" + directories.join("/");
+            const selectedFolder = await this.getSelectedFolder(selectedFolderPath);
+            this.props.onSelectedFolderChanged(selectedFolder);
+        } else {
+            this.props.onSelectedFolderChanged(baseFolder);
+        }
+
     }
 
     async getSelectedFolder(selectedFolderPath: string) {
@@ -63,50 +138,18 @@ class NavigationBar extends React.Component<INavigationBarProps, INavigationBarS
         }
 
 
-        var folderInfo = await msGraphClient.api(apiPath).get();
-        let selectedFolder = {
-            driveId: folderInfo.id,
-            displayName: folderInfo.name,
-            webUrl: selectedFolderPath
-        } as ISelectedFolder;
-        return selectedFolder;
-
-    }
-
-
-    // addSelectedFolder(folder: ISelectedFolder) {
-    //     console.log("addSelectedFolder",folder);
-    //     this.setState(s => ({ folders: [...s.folders, folder] }));
-    // }
-
-    getBreadcrumbItems() {
-        const items: IBreadcrumbItem[] = this.state.folders.map((folder, index) => {
-            let isCurrent = (this.state.folders.length - 1) == index;
-
-            return { text: folder.displayName, key: index.toString(), onClick: () => this._onBreadcrumbItemClicked.call(this, index), isCurrentItem: isCurrent };
-
-        });
-
-        return items;
-    }
-
-    _onBreadcrumbItemClicked(index: number) {
-        let { folders } = this.state;
-        folders.splice(index + 1);
-        this.setState({ folders: folders });
-        this.props.onSelectedFolderChanged(folders[folders.length - 1]);
-    }
-
-    onNavigateUpClick() {
-        let { folders } = this.state;
-        if (folders.length > 1) {
-            folders.pop();
-
-            this.setState({ folders: folders });
-            this.props.onSelectedFolderChanged(folders[folders.length - 1]);
+        try {
+            var folderInfo = await msGraphClient.api(apiPath).get();
+            let selectedFolder = {
+                driveId: folderInfo.id,
+                displayName: folderInfo.name,
+                webUrl: selectedFolderPath
+            } as ISelectedFolder;
+            return selectedFolder;
+        } catch (error) {
+            console.log("An error occurred while loading selected Folder with path", selectedFolderPath);
+            return this.props.baseFolder;
         }
-
-
 
     }
 
@@ -118,7 +161,7 @@ class NavigationBar extends React.Component<INavigationBarProps, INavigationBarS
         //     maxDisplayedItems={3}
         // />
         const lastItem = items.findIndex(x => x.isCurrentItem);
-        const showIcon = this.state.folders[lastItem].driveId !== this.props.baseFolder.driveId;
+        const showIcon = lastItem !== 0;
 
         return <div style={{ display: "flex", alignItems: "center" }}>
             {showIcon && <IconButton iconProps={{ iconName: 'Up' }} styles={{ root: { margin: "11px 0px 1px" } }} onClick={this.onNavigateUpClick.bind(this)} />}

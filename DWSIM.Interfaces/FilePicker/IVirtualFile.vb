@@ -8,7 +8,6 @@
     ''' <summary>
     ''' Returns path to a file. This isn't windows file path in all cases. For Simulate 365 it's just path from Dashboard root.
     ''' </summary>
-    ''' <returns></returns>
     ReadOnly Property FullPath As String
 
     Function GetExtension() As String
