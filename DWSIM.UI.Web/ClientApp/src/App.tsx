@@ -23,8 +23,8 @@ const  App =()=> {
     pauseOnHover
   /> <div className="App">
 
-      <Route path="/filepicker/open/:extension?" exact component={OpenDashboardFilePage} />
-      <Route path="/filepicker/save/:extension?" exact render={(props)=><OpenDashboardFilePage {...{isSaveDialog:true}} {...props} />} />
+      <Route path="/filepicker/open" exact component={OpenDashboardFilePage} />
+      <Route path="/filepicker/save" exact render={(props)=><OpenDashboardFilePage {...{isSaveDialog:true}} {...props} />} />
 
       <Route path="/login/intro" exact component={LoginIntroPage} />
 

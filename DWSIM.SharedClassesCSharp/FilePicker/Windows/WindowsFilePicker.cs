@@ -1,6 +1,7 @@
 ﻿using DWSIM.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,9 +11,17 @@ namespace DWSIM.SharedClassesCSharp.FilePicker.Windows
 {
     public class WindowsFilePicker : IFilePicker
     {
+        public string SuggestedDirectory { get; set; }
+        public string SuggestedFilename { get; set; }
+
         public IVirtualFile ShowOpenDialog(IEnumerable<IFilePickerAllowedType> allowedTypes)
         {
             var openFileDialog = new OpenFileDialog();
+
+            if (!string.IsNullOrWhiteSpace(SuggestedDirectory) && Directory.Exists(SuggestedDirectory))
+            {
+                openFileDialog.InitialDirectory = SuggestedDirectory;
+            }
 
             if (allowedTypes != null && allowedTypes.Count() > 0)
             {
@@ -36,6 +45,16 @@ namespace DWSIM.SharedClassesCSharp.FilePicker.Windows
         {
             var saveFileDialog = new SaveFileDialog();
 
+            if (!string.IsNullOrWhiteSpace(SuggestedDirectory) && Directory.Exists(SuggestedDirectory))
+            {
+                saveFileDialog.InitialDirectory = SuggestedDirectory;
+            }
+            if (!string.IsNullOrWhiteSpace(SuggestedFilename))
+            {
+                saveFileDialog.FileName = SuggestedFilename;
+            }
+
+
             if (allowedTypes != null && allowedTypes.Count() > 0)
             {
                 var list = allowedTypes.Select(t => t.Name + "|" + String.Join(";", t.AllowedExtensions));
@@ -53,5 +72,5 @@ namespace DWSIM.SharedClassesCSharp.FilePicker.Windows
             else
                 return null;
         }
-    }    
+    }
 }
