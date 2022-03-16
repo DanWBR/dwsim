@@ -2315,11 +2315,13 @@ Public Class FormMain
             Me.Invalidate()
             Application.DoEvents()
 
-            Dim mypath As String = simulationfilename
-            If mypath = "" Then mypath = handler.FullPath
-            If Not My.Settings.MostRecentFiles.Contains(mypath) And IO.Path.GetExtension(mypath).ToLower <> ".dwbcs" Then
-                My.Settings.MostRecentFiles.Add(mypath)
-                Me.UpdateMRUList()
+            If TypeOf handler Is SharedClassesCSharp.FilePicker.Windows.WindowsFile Then
+                Dim mypath As String = simulationfilename
+                If mypath = "" Then mypath = handler.FullPath
+                If Not My.Settings.MostRecentFiles.Contains(mypath) And IO.Path.GetExtension(mypath).ToLower <> ".dwbcs" Then
+                    My.Settings.MostRecentFiles.Add(mypath)
+                    Me.UpdateMRUList()
+                End If
             End If
 
             My.Application.ActiveSimulation = form
@@ -3516,7 +3518,7 @@ Label_00CC:
                 NewMDIChild.mycase.Filename = handler.FullPath
                 objStreamReader.Close()
                 NewMDIChild.WriteData()
-                If GlobalSettings.Settings.OldUI Then
+                If GlobalSettings.Settings.OldUI And TypeOf handler Is SharedClassesCSharp.FilePicker.Windows.WindowsFile Then
                     If Not My.Settings.MostRecentFiles.Contains(handler.FullPath) Then
                         My.Settings.MostRecentFiles.Add(handler.FullPath)
                         Me.UpdateMRUList()
@@ -3531,7 +3533,7 @@ Label_00CC:
                 NewMDIChild.mycase = Newtonsoft.Json.JsonConvert.DeserializeObject(Of CompoundGeneratorCase)(handler.ReadAllText())
                 NewMDIChild.mycase.Filename = handler.FullPath
                 NewMDIChild.WriteData()
-                If GlobalSettings.Settings.OldUI Then
+                If GlobalSettings.Settings.OldUI And TypeOf handler Is SharedClassesCSharp.FilePicker.Windows.WindowsFile Then
                     If Not My.Settings.MostRecentFiles.Contains(handler.FullPath) Then
                         My.Settings.MostRecentFiles.Add(handler.FullPath)
                         Me.UpdateMRUList()
@@ -3550,7 +3552,7 @@ Label_00CC:
                 End Using
                 NewMDIChild.currcase.filename = handler.FullPath
                 NewMDIChild.LoadCase(NewMDIChild.currcase, False)
-                If GlobalSettings.Settings.OldUI Then
+                If GlobalSettings.Settings.OldUI And TypeOf handler Is SharedClassesCSharp.FilePicker.Windows.WindowsFile Then
                     If Not My.Settings.MostRecentFiles.Contains(handler.FullPath) Then
                         My.Settings.MostRecentFiles.Add(handler.FullPath)
                         Me.UpdateMRUList()
@@ -3565,7 +3567,7 @@ Label_00CC:
                 NewMDIChild.currcase = Newtonsoft.Json.JsonConvert.DeserializeObject(Of DWSIM.Optimization.DatRegression.RegressionCase)(handler.ReadAllText())
                 NewMDIChild.currcase.filename = fpath
                 NewMDIChild.LoadCase(NewMDIChild.currcase, False)
-                If GlobalSettings.Settings.OldUI Then
+                If GlobalSettings.Settings.OldUI And TypeOf handler Is SharedClassesCSharp.FilePicker.Windows.WindowsFile Then
                     If Not My.Settings.MostRecentFiles.Contains(handler.FullPath) Then
                         My.Settings.MostRecentFiles.Add(handler.FullPath)
                         Me.UpdateMRUList()
@@ -3584,7 +3586,7 @@ Label_00CC:
                     NewMDIChild.mycase.Filename = handler.FullPath
                 End Using
                 NewMDIChild.LoadCase(NewMDIChild.mycase, False)
-                If GlobalSettings.Settings.OldUI Then
+                If GlobalSettings.Settings.OldUI And TypeOf handler Is SharedClassesCSharp.FilePicker.Windows.WindowsFile Then
                     If Not My.Settings.MostRecentFiles.Contains(handler.FullPath) Then
                         My.Settings.MostRecentFiles.Add(handler.FullPath)
                         Me.UpdateMRUList()
@@ -3762,7 +3764,9 @@ Label_00CC:
     Private Sub OpenRecent_click(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
         Dim myLink As ToolStripMenuItem = CType(sender, ToolStripMenuItem)
+
         If myLink.Text <> DWSIM.App.GetLocalString("vazio") Then
+
             If File.Exists(myLink.Tag.ToString) Then
 
                 Dim handler = New SharedClassesCSharp.FilePicker.Windows.WindowsFile(myLink.Tag.ToString)
@@ -3839,8 +3843,11 @@ Label_00CC:
                     If objStreamReader IsNot Nothing Then objStreamReader.Close()
                     floading.Close()
                 End Try
+
             End If
+
         End If
+
     End Sub
 
     Private Sub OpenRecentFolder_click(ByVal sender As System.Object, ByVal e As System.EventArgs)
