@@ -284,12 +284,6 @@
   <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>850, 25</value>
   </data>
-  <data name="sfd1.Filter" xml:space="preserve">
-    <value>Python Script Files|*.py</value>
-  </data>
-  <data name="sfd1.Title" xml:space="preserve">
-    <value>Export Script</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="TabStripScripts.Font" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
@@ -302,7 +296,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABs
-        CQAAAk1TRnQBSQFMAgEBBQEAAdwBAgHcAQIBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBBQEAAeQBAgHkAQIBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAASADAAEBAQABCAYAAQgYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -344,12 +338,6 @@
         AUEBkwIAAQEB5wHPAYABAAH/AQEB+AEBAecBzwEBAfEB/wGDAfwBAQHnAc8BgAH7Af8BxwH+AQkB8wGf
         AcEC/wHvBP8B4wf/AfcF/ws=
 </value>
-  </data>
-  <data name="ofd2.Filter" xml:space="preserve">
-    <value>Python Script Files|*.py</value>
-  </data>
-  <data name="ofd2.Title" xml:space="preserve">
-    <value>Import Script</value>
   </data>
   <data name="FaTabStripItem4.Title" xml:space="preserve">
     <value>Includes</value>
