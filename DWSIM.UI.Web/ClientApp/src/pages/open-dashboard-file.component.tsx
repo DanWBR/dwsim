@@ -199,7 +199,7 @@ class OpenDashboardFilePage extends React.Component<IOpenDashboardFilePageProps,
         if (params.directory) {
             if (this.state.selectedFolder?.webUrl !== params.directory) {
                 const path = decodeURIComponent(params.directory);
-                console.log("Decoded path",params.directory, path);
+                console.log("Decoded path", params.directory, path);
                 selectedFolder = await this.getSelectedFolder(path);
             }
         }
@@ -568,20 +568,33 @@ function getFileTypeDropdownOption(extension?: string): IDropdownOption | undefi
 
     switch (extension) {
         //dwsim default
-        case 'dwxmz': return { key: 'dwxmz', text: 'Simulation File (Compressed XML) (*.dwxmz)' };
-        case 'dwxml': return { key: 'dwxml', text: 'Simulation File (XML) (*.dwxml)' };
-        case 'xml': return { key: 'xml', text: 'Simulation File (Android/iOS) (*.xml)' };
+        case 'dwxmz': return { key: 'dwxmz', text: 'Compressed XML Simulation File (*.dwxmz)' };
+        case 'dwxml': return { key: 'dwxml', text: 'XML Simulation File (*.dwxml)' };
+        case 'xml': return { key: 'xml', text: 'Mobile XML Simulation File (*.xml)' };
         case 'dwcsd': return { key: 'dwcsd', text: 'Compound Creator Study (*.dwcsd)' };
         case 'dwcsd2': return { key: 'dwcsd2', text: 'Compound Creator Study (*.dwcsd2)' };
         case 'dwrsd': return { key: 'dwrsd', text: 'Data Regression Study (*.dwrsd)' };
         case 'dwrsd2': return { key: 'dwrsd2', text: 'Data Regression Study (*.dwrsd2)' };
-        case 'dwruf': return { key: 'dwruf', text: 'UNIFAC IPs Regression Study (*.dwruf)' };
+        case 'dwruf': return { key: 'dwruf', text: 'UNIFAC Regression Study File (*.dwruf)' };
+        case 'dwund': return { key: 'dwund', text: '"DWSIM System of Units File (*.dwund)' };
+        case 'dwrxm': return { key: 'dwrxm', text: '"DWSIM Reactions File (*.dwrxm)' };
+        case 'dwrxs': return { key: 'dwrxs', text: '"DWSIM Reactions File (*.dwrxs)' };
         //end of dwsim default
         case 'xlsx': return { key: 'xlsx', text: 'Excel Workbook (*.xlsx)' };
         case 'odt': return { key: 'odt', text: 'OpenOffice Writer Document (*.odt)' };
         case 'pdf': return { key: 'pdf', text: 'PDF Files (*.pdf)' };
         case 'ods': return { key: 'ods', text: 'OpenOffice Calc SpreadSheet (*.ods)' };
-
+        case 'json': return { key: 'json', text: 'JSON file (*.json)' };
+        case 'bmp': return { key: 'bmp', text: 'BMP file (*.bmp)' };
+        case 'jpg': return { key: 'jpg', text: 'JPG file (*.jpg)' };
+        case 'png': return { key: 'json', text: 'PNG file (*.png)' };
+        case 'gif': return { key: 'gif', text: 'GIF file (*.gif)' };
+        case 'mov': return { key: 'mov', text: 'MOV file (*.mov)' };
+        case 'mp4': return { key: 'mp4', text: 'MP4 file (*.mp4)' };
+        case 'mp3': return { key: 'mp3', text: 'MP3 file (*.mp3)' };
+        case 'txt': return { key: 'txt', text: 'Text file (*.txt)' };
+        case 'py': return { key: 'py', text: 'Python file (*.py)' };
+        case 'html': return { key: 'html', text: 'HTML file (*.html)' };
         default:
             return undefined;
     }

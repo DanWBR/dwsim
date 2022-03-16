@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -17,7 +18,7 @@ namespace DWSIM.Simulate365.FormFactories
     {
         private WebUIForm _webUIForm;
         private readonly FilePickerService _filePickerService;
-        
+
         public string SuggestedDirectory { get; set; }
         public string SuggestedFilename { get; set; }
 
@@ -115,7 +116,7 @@ namespace DWSIM.Simulate365.FormFactories
             if (!string.IsNullOrWhiteSpace(SuggestedDirectory))
             {
                 queryParams.Add("directory", HttpUtility.UrlEncode(SuggestedDirectory));
-            }           
+            }
 
             var initialUrl = $"{navigationPath}";
             if (queryParams.Any())
@@ -167,7 +168,7 @@ namespace DWSIM.Simulate365.FormFactories
             List<string> fileFormats = null;
             if (allowedTypes != null && allowedTypes.Count() > 0)
             {
-                fileFormats = allowedTypes.SelectMany(t => t.AllowedExtensions.Select(e => e.Replace("*.", ""))).ToList();
+                fileFormats = allowedTypes.SelectMany(t => t.AllowedExtensions.Select(e => ReplateLeadingStarDot(e))).Distinct().ToList();
             }
 
             var file = ShowOpenDialog(fileFormats);
@@ -179,11 +180,16 @@ namespace DWSIM.Simulate365.FormFactories
             List<string> fileFormats = null;
             if (allowedTypes != null && allowedTypes.Count() > 0)
             {
-                fileFormats = allowedTypes.SelectMany(t => t.AllowedExtensions.Select(e => e.Replace("*.", ""))).ToList();
+                fileFormats = allowedTypes.SelectMany(t => t.AllowedExtensions.Select(e => ReplateLeadingStarDot(e))).Distinct().ToList();
             }
 
             var file = ShowSaveDialog(fileFormats);
             return file;
+        }
+
+        private string ReplateLeadingStarDot(string input)
+        {
+            return Regex.Replace(input, @"^\*{0,1}\.", "");
         }
 
         #endregion
