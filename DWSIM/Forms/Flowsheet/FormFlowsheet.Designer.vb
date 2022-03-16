@@ -148,7 +148,7 @@ Partial Class FormFlowsheet
         '
         Me.CloseToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.cross
         Me.CloseToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
-        Me.CloseToolStripMenuItem.MergeIndex = 11
+        Me.CloseToolStripMenuItem.MergeIndex = 12
         Me.CloseToolStripMenuItem.Name = "CloseToolStripMenuItem"
         Me.CloseToolStripMenuItem.Overflow = System.Windows.Forms.ToolStripItemOverflow.AsNeeded
         resources.ApplyResources(Me.CloseToolStripMenuItem, "CloseToolStripMenuItem")

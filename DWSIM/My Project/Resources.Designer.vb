@@ -2263,6 +2263,16 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property icons8_opened_folder3() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("icons8-opened_folder3", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property icons8_pause() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("icons8-pause", resourceCulture)
@@ -2656,6 +2666,16 @@ Namespace My.Resources
         Friend ReadOnly Property node_en_copy1() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("node_en copy1", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property open_file_s365() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("open file s365", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -3236,6 +3256,16 @@ Namespace My.Resources
         Friend ReadOnly Property save_16() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("save_16", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property save_file_s365() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("save file s365", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

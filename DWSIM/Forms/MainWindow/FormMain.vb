@@ -906,7 +906,9 @@ Public Class FormMain
         If Me.MdiChildren.Length >= 1 Then
 
             Me.ToolStripButton1.Enabled = True
+            Me.SaveToDashboardTSMI.Enabled = True
             Me.SaveToolStripButton.Enabled = True
+            Me.SaveFileS365.Enabled = True
             Me.SaveToolStripMenuItem.Enabled = True
             Me.SaveAsToolStripMenuItem.Enabled = True
             Me.ToolStripButton1.Enabled = True
@@ -3450,9 +3452,15 @@ Label_00CC:
 
     End Sub
 
-    Sub LoadFileDialog()
+    Sub LoadFileDialog(Optional dashboardpicker As Boolean = False)
 
-        Dim filePickerForm As IFilePicker = SharedClassesCSharp.FilePicker.FilePickerService.GetInstance().GetFilePicker()
+        Dim filePickerForm As IFilePicker
+
+        If dashboardpicker Then
+            filePickerForm = New Simulate365.FormFactories.S365FilePickerForm()
+        Else
+            filePickerForm = SharedClassesCSharp.FilePicker.FilePickerService.GetInstance().GetFilePicker()
+        End If
 
         Dim openedFile As IVirtualFile = filePickerForm.ShowOpenDialog(
             New List(Of SharedClassesCSharp.FilePicker.FilePickerAllowedType) From
@@ -3605,7 +3613,7 @@ Label_00CC:
 
     End Sub
 
-    Sub SaveFileDialog()
+    Sub SaveFileDialog(Optional dashboardpicker As Boolean = False)
 
         If TypeOf Me.ActiveMdiChild Is FormFlowsheet Then
 
@@ -3613,7 +3621,14 @@ Label_00CC:
 
             Dim filename = form2.Options.FilePath
 
-            Dim filePickerForm As IFilePicker = SharedClassesCSharp.FilePicker.FilePickerService.GetInstance().GetFilePicker()
+            Dim filePickerForm As IFilePicker
+
+            If dashboardpicker Then
+                filePickerForm = New Simulate365.FormFactories.S365FilePickerForm()
+            Else
+                filePickerForm = SharedClassesCSharp.FilePicker.FilePickerService.GetInstance().GetFilePicker()
+            End If
+
             Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
             New List(Of SharedClassesCSharp.FilePicker.FilePickerAllowedType) From
             {New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Compressed XML Simulation File", ".dwxmz"),
@@ -3856,7 +3871,7 @@ Label_00CC:
 
     End Sub
 
-    Public Function SaveFile(ByVal saveasync As Boolean) As String
+    Public Function SaveFile(ByVal saveasync As Boolean, Optional dashboardpicker As Boolean = False) As String
 
         If My.Computer.Keyboard.ShiftKeyDown Then saveasync = False
 
@@ -3891,7 +3906,12 @@ Label_00CC:
                         SaveXMLZIP(handler, form2)
                     End If
                 Else ' If file doesn't exist, open file picker
-                    Dim filePickerForm As IFilePicker = SharedClassesCSharp.FilePicker.FilePickerService.GetInstance().GetFilePicker()
+                    Dim filePickerForm As IFilePicker
+                    If dashboardpicker Then
+                        filePickerForm = New Simulate365.FormFactories.S365FilePickerForm()
+                    Else
+                        filePickerForm = SharedClassesCSharp.FilePicker.FilePickerService.GetInstance().GetFilePicker()
+                    End If
                     Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
             New List(Of SharedClassesCSharp.FilePicker.FilePickerAllowedType) From
             {New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Simulation File", New String() {"*.dwxmz", "*.dwxml", "*.xml"})})
@@ -3906,7 +3926,12 @@ Label_00CC:
                     End If
                 End If
             ElseIf TypeOf Me.ActiveMdiChild Is FormCompoundCreator Then
-                Dim filePickerForm As IFilePicker = SharedClassesCSharp.FilePicker.FilePickerService.GetInstance().GetFilePicker()
+                Dim filePickerForm As IFilePicker
+                If dashboardpicker Then
+                    filePickerForm = New Simulate365.FormFactories.S365FilePickerForm()
+                Else
+                    filePickerForm = SharedClassesCSharp.FilePicker.FilePickerService.GetInstance().GetFilePicker()
+                End If
                 Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
                         New List(Of SharedClassesCSharp.FilePicker.FilePickerAllowedType) From
                         {New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Compound Creator Study File", "*.dwcsd2")})
@@ -3925,7 +3950,12 @@ Label_00CC:
                     Return handler.FullPath
                 End If
             ElseIf TypeOf Me.ActiveMdiChild Is FormDataRegression Then
-                Dim filePickerForm As IFilePicker = SharedClassesCSharp.FilePicker.FilePickerService.GetInstance().GetFilePicker()
+                Dim filePickerForm As IFilePicker
+                If dashboardpicker Then
+                    filePickerForm = New Simulate365.FormFactories.S365FilePickerForm()
+                Else
+                    filePickerForm = SharedClassesCSharp.FilePicker.FilePickerService.GetInstance().GetFilePicker()
+                End If
                 Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
                         New List(Of SharedClassesCSharp.FilePicker.FilePickerAllowedType) From
                         {New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Regression Study File", "*.dwrsd2")})
@@ -3942,7 +3972,12 @@ Label_00CC:
                     Return handler.FullPath
                 End If
             ElseIf TypeOf Me.ActiveMdiChild Is FormUNIFACRegression Then
-                Dim filePickerForm As IFilePicker = SharedClassesCSharp.FilePicker.FilePickerService.GetInstance().GetFilePicker()
+                Dim filePickerForm As IFilePicker
+                If dashboardpicker Then
+                    filePickerForm = New Simulate365.FormFactories.S365FilePickerForm()
+                Else
+                    filePickerForm = SharedClassesCSharp.FilePicker.FilePickerService.GetInstance().GetFilePicker()
+                End If
                 Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
                         New List(Of SharedClassesCSharp.FilePicker.FilePickerAllowedType) From
                         {New SharedClassesCSharp.FilePicker.FilePickerAllowedType("UNIFAC Regression Study File", "*.dwruf")})
@@ -4250,6 +4285,22 @@ Label_00CC:
 
     Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles tsmiFreeProTrial.Click
         Process.Start("https://simulate365.com/registration-dwsim-pro/")
+    End Sub
+
+    Private Sub AbrirDoDashboardToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AbrirDoDashboardToolStripMenuItem.Click
+        LoadFileDialog(True)
+    End Sub
+
+    Private Sub SaveToDashboardTSMI_Click(sender As Object, e As EventArgs) Handles SaveToDashboardTSMI.Click
+        SaveFileDialog(True)
+    End Sub
+
+    Private Sub OpenFileS365_Click(sender As Object, e As EventArgs) Handles OpenFileS365.Click
+        LoadFileDialog(True)
+    End Sub
+
+    Private Sub SaveFileS365_Click(sender As Object, e As EventArgs) Handles SaveFileS365.Click
+        SaveFileDialog(True)
     End Sub
 
     Private Sub tsbInspector_CheckedChanged(sender As Object, e As EventArgs) Handles tsbInspector.CheckedChanged

@@ -578,6 +578,8 @@ Public Class FormFlowsheet
         If DWSIM.App.IsRunningOnMono Then
             My.Application.MainWindowForm.ToolStripButton1.Enabled = True
             My.Application.MainWindowForm.SaveToolStripButton.Enabled = True
+            My.Application.MainWindowForm.SaveFileS365.Enabled = True
+            My.Application.MainWindowForm.SaveToDashboardTSMI.Enabled = True
             My.Application.MainWindowForm.SaveToolStripMenuItem.Enabled = True
             My.Application.MainWindowForm.SaveAsToolStripMenuItem.Enabled = True
             My.Application.MainWindowForm.ToolStripButton1.Enabled = True
@@ -642,7 +644,9 @@ Public Class FormFlowsheet
         If cnt = 0 Then
 
             My.Application.MainWindowForm.ToolStripButton1.Enabled = False
+            My.Application.MainWindowForm.SaveFileS365.Enabled = False
             My.Application.MainWindowForm.SaveToolStripButton.Enabled = False
+            My.Application.MainWindowForm.SaveToDashboardTSMI.Enabled = False
             My.Application.MainWindowForm.SaveToolStripMenuItem.Enabled = False
             My.Application.MainWindowForm.SaveAsToolStripMenuItem.Enabled = False
             My.Application.MainWindowForm.ToolStripButton1.Enabled = False
@@ -650,7 +654,9 @@ Public Class FormFlowsheet
         Else
 
             My.Application.MainWindowForm.ToolStripButton1.Enabled = True
+            My.Application.MainWindowForm.SaveFileS365.Enabled = True
             My.Application.MainWindowForm.SaveToolStripButton.Enabled = True
+            My.Application.MainWindowForm.SaveToDashboardTSMI.Enabled = True
             My.Application.MainWindowForm.SaveToolStripMenuItem.Enabled = True
             My.Application.MainWindowForm.SaveAsToolStripMenuItem.Enabled = True
             My.Application.MainWindowForm.ToolStripButton1.Enabled = True
