@@ -121,8 +121,12 @@ Public Class FormFileExplorer
 
             Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
 
+            filePickerForm.SuggestedFilename = filename
+
+            Dim extension = Path.GetExtension(filename)
+
             Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
-                New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("All Files", "*.*")})
+                New List(Of FilePickerAllowedType) From {New FilePickerAllowedType(String.Format("{0} File", extension), String.Format("*{0}", extension))})
 
             If handler IsNot Nothing Then
                 Dim provider = Flowsheet.FileDatabaseProvider
