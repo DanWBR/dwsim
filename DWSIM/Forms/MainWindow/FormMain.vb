@@ -2861,13 +2861,6 @@ Public Class FormMain
             Me.Invalidate()
             Application.DoEvents()
 
-            Dim mypath As String = simulationfilename
-            'If mypath = "" Then mypath = [Path]
-            If Not My.Settings.MostRecentFiles.Contains(mypath) And IO.Path.GetExtension(mypath).ToLower <> ".dwbcs" Then
-                My.Settings.MostRecentFiles.Add(mypath)
-                Me.UpdateMRUList()
-            End If
-
             My.Application.ActiveSimulation = form
 
             form.MdiParent = Me

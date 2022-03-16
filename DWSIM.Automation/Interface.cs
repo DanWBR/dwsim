@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DWSIM.Interfaces;
-using DWSIM.FlowsheetSolver;
 using System.Runtime.InteropServices;
 using DWSIM.UI.Desktop.Shared;
 using System.Xml.Linq;
-using DWSIM.UnitOperations.UnitOperations.Auxiliary;
 using System.IO;
 using System.Reflection;
 using DWSIM.SharedClassesCSharp.FilePicker.Windows;
