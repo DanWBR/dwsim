@@ -4173,7 +4173,7 @@ Label_00CC:
             For Each form0 As Form In Me.MdiChildren
                 If TypeOf form0 Is FormFlowsheet Then
                     path = folder + IO.Path.DirectorySeparatorChar + CType(form0, FormFlowsheet).Options.BackupFileName
-                    Me.SaveXMLZIP(path, form0)
+                    Me.SaveXMLZIP(New SharedClassesCSharp.FilePicker.Windows.WindowsFile(path), form0)
                     If Not My.Settings.BackupFiles.Contains(path) Then
                         My.Settings.BackupFiles.Add(path)
                         If Not DWSIM.App.IsRunningOnMono Then My.Settings.Save()
