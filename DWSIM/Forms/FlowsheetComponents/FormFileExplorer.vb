@@ -1,5 +1,8 @@
 ﻿Imports System.ComponentModel
 Imports System.IO
+Imports DWSIM.Interfaces
+Imports DWSIM.SharedClassesCSharp.FilePicker
+Imports DWSIM.SharedClassesCSharp.FilePicker.Windows
 Imports Eto.WinForms
 
 Public Class FormFileExplorer
@@ -79,15 +82,31 @@ Public Class FormFileExplorer
 
     Private Sub btnImport_Click(sender As Object, e As EventArgs) Handles btnImport.Click
 
-        If Me.ofd1.ShowDialog() = Windows.Forms.DialogResult.OK Then
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        'All Supported Files|*.pdf;*.jpg;*.png;*.mov;*.mp4;*.mp3;*.txt;*.py;*.html;*.dwxmz;*.dwxml;*.xml;*.json;*.dwcsd2;*.dwrsd2
+
+        Dim openedFile As IVirtualFile = filePickerForm.ShowOpenDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("All Supported Files",
+                                                                               New String() {"*.pdf", "*.jpg", "*.png", "*.mov", "*.mp4", "*.mp3", "*.txt", "*.py", "*.html", "*.dwxmz", "*.dwxml", "*.xml", "*.json", "*.dwcsd2", "*.dwrsd2"})})
+
+        If openedFile IsNot Nothing Then
             Dim provider = Flowsheet.FileDatabaseProvider
-            For Each file In ofd1.FileNames
+            If TypeOf openedFile Is WindowsFile Then
                 Try
-                    provider.PutFile(file)
+                    provider.PutFile(openedFile.FullPath)
                 Catch ex As Exception
-                    MessageBox.Show(file + ":" + ex.Message, Flowsheet.GetTranslatedString1("Erro"))
+                    MessageBox.Show(openedFile.Filename + ":" + ex.Message, Flowsheet.GetTranslatedString1("Erro"))
                 End Try
-            Next
+            Else
+                Using str = openedFile.OpenRead()
+                    Try
+                        provider.PutFile(str, openedFile.Filename)
+                    Catch ex As Exception
+                        MessageBox.Show(openedFile.Filename + ":" + ex.Message, Flowsheet.GetTranslatedString1("Erro"))
+                    End Try
+                End Using
+            End If
             ListFiles()
             UpdateSize()
         End If
@@ -95,15 +114,34 @@ Public Class FormFileExplorer
     End Sub
 
     Private Sub btnExport_Click(sender As Object, e As EventArgs) Handles btnExport.Click
+
         If ListView1.SelectedItems.Count > 0 Then
-            sfd1.FileName = ListView1.SelectedItems(0).Text
-            If Me.sfd1.ShowDialog() = Windows.Forms.DialogResult.OK Then
+
+            Dim filename = ListView1.SelectedItems(0).Text
+
+            Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+            Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
+                New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("All Files", "*.*")})
+
+            If handler IsNot Nothing Then
                 Dim provider = Flowsheet.FileDatabaseProvider
-                Try
-                    provider.ExportFile(ListView1.SelectedItems(0).Text, sfd1.FileName)
-                Catch ex As Exception
-                    MessageBox.Show(ListView1.SelectedItems(0).Text + ":" + ex.Message, Flowsheet.GetTranslatedString1("Erro"))
-                End Try
+                If TypeOf handler Is WindowsFile Then
+                    Try
+                        provider.ExportFile(filename, handler.FullPath)
+                    Catch ex As Exception
+                        MessageBox.Show(filename + ":" + ex.Message, Flowsheet.GetTranslatedString1("Erro"))
+                    End Try
+                Else
+                    Using stream As New MemoryStream()
+                        Try
+                            provider.ExportFile(filename, stream)
+                            handler.Write(stream)
+                        Catch ex As Exception
+                            MessageBox.Show(ListView1.SelectedItems(0).Text + ":" + ex.Message, Flowsheet.GetTranslatedString1("Erro"))
+                        End Try
+                    End Using
+                End If
             End If
         End If
     End Sub

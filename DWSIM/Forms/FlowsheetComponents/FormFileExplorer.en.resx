@@ -168,18 +168,6 @@
   <data name="btnDelete.Text" xml:space="preserve">
     <value>Remove Selected File</value>
   </data>
-  <data name="sfd1.Filter" xml:space="preserve">
-    <value>All Files|*.*</value>
-  </data>
-  <data name="sfd1.Title" xml:space="preserve">
-    <value>Export File</value>
-  </data>
-  <data name="ofd1.Filter" xml:space="preserve">
-    <value>All Supported Files|*.pdf;*.jpg;*.png;*.mov;*.mp4;*.mp3;*.txt;*.py;*.html;*.dwxmz;*.dwxml;*.xml;*.json;*.dwcsd2;*.dwrsd2</value>
-  </data>
-  <data name="ofd1.Title" xml:space="preserve">
-    <value>Import File</value>
-  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAGBgAAAEAGABIBwAAFgAAACgAAAAYAAAAMAAAAAEAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA

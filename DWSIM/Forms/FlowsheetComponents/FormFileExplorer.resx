@@ -150,8 +150,8 @@
   <data name="StatusStrip1.Text" xml:space="preserve">
     <value>StatusStrip1</value>
   </data>
-  <data name="Label1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
+  <data name="&gt;&gt;SplitContainer1.Panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;SplitContainer1.Panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -167,9 +167,6 @@
   </data>
   <data name="&gt;&gt;SplitContainer1.Panel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="btnExport.Text" xml:space="preserve">
-    <value>Exportar Arquivo Selecionado</value>
   </data>
   <data name="&gt;&gt;btnExport.Name" xml:space="preserve">
     <value>btnExport</value>
@@ -192,17 +189,14 @@
   <data name="Label1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;Viewer.Type" xml:space="preserve">
-    <value>Microsoft.Web.WebView2.WinForms.WebView2, Microsoft.Web.WebView2.WinForms, Version=1.0.902.49, Culture=neutral, PublicKeyToken=2a8ab48044d2601e</value>
-  </data>
   <data name="ToolStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
   <data name="SplitContainer1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="$this.TabText" xml:space="preserve">
-    <value>Arquivos</value>
+  <data name="&gt;&gt;StatusStrip1.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="ofd1.Filter" xml:space="preserve">
     <value>Todos os Arquivos|*.*</value>
@@ -231,9 +225,6 @@
   <data name="&gt;&gt;Label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;SplitContainer1.Panel1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="&gt;&gt;Viewer.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
@@ -257,6 +248,9 @@
   </data>
   <data name="&gt;&gt;ToolStrip1.Name" xml:space="preserve">
     <value>ToolStrip1</value>
+  </data>
+  <data name="Label1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
   </data>
   <data name="&gt;&gt;StatusStrip1.Parent" xml:space="preserve">
     <value>SplitContainer1.Panel1</value>
@@ -291,23 +285,26 @@
   <data name="&gt;&gt;lblSize.Name" xml:space="preserve">
     <value>lblSize</value>
   </data>
-  <data name="SplitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>800, 450</value>
+  <data name="lblSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>251, 17</value>
   </data>
-  <data name="Viewer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 24</value>
+  <data name="btnExport.Text" xml:space="preserve">
+    <value>Exportar Arquivo Selecionado</value>
   </data>
   <data name="btnImport.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
-  <data name="lblSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>251, 17</value>
+  <data name="&gt;&gt;Viewer.Type" xml:space="preserve">
+    <value>Microsoft.Web.WebView2.WinForms.WebView2, Microsoft.Web.WebView2.WinForms, Version=1.0.1020.30, Culture=neutral, PublicKeyToken=2a8ab48044d2601e</value>
   </data>
   <data name="lblSize.Text" xml:space="preserve">
     <value>Tamanho do Banco de Dados: XX MB</value>
   </data>
   <data name="&gt;&gt;StatusStrip1.Name" xml:space="preserve">
     <value>StatusStrip1</value>
+  </data>
+  <data name="$this.TabText" xml:space="preserve">
+    <value>Arquivos</value>
   </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -1183,6 +1180,9 @@
         /////////////////////////////w==
 </value>
   </data>
+  <data name="SplitContainer1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>800, 450</value>
+  </data>
   <data name="Label1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
@@ -1207,8 +1207,8 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Arquivos</value>
   </data>
-  <data name="&gt;&gt;StatusStrip1.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="Viewer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 24</value>
   </data>
   <data name="ListView1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
