@@ -744,13 +744,13 @@ out:        WriteDebugInfo("PT Flash [NL]: Converged in " & ecount & " iteration
 
                     x0 = x1
 
-                    If cnt > 30 And Math.Sign(fx) <> Math.Sign(fx_ant) And Math.Abs(fx - fx_ant) < 5.0 Then
+                    If cnt > 30 And Math.Sign(fx) <> Math.Sign(fx_ant) Then
 
                         'oscillating around the solution.
 
                         Dim bmin As New Brent
 
-                        Dim interp As New MathNet.Numerics.Interpolation.BulirschStoerRationalInterpolation(xvals.ToArray(), fxvals.ToArray())
+                        Dim interp = MathNet.Numerics.Interpolate.Linear(xvals.ToArray(), fxvals.ToArray())
 
                         x1 = bmin.BrentOpt2(xvals.Min, xvals.Max, 500, 0.01, 100,
                                             Function(tval)
