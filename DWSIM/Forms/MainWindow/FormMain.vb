@@ -1078,7 +1078,6 @@ Public Class FormMain
                                                                                                                                                     Me.UIThread(Sub()
                                                                                                                                                                     fdlding.Label1.Text = "Downloading file... (" & px & "%)" & vbCrLf & "(" & item.Title & ")"
                                                                                                                                                                     fdlding.ProgressBar1.Value = px
-                                                                                                                                                                    fdlding.Label2.Text = px.ToString("N0") + "%"
                                                                                                                                                                     fdlding.Refresh()
                                                                                                                                                                 End Sub)
                                                                                                                                                 End Sub)
@@ -1096,7 +1095,6 @@ Public Class FormMain
                                                                                                                         LoadXML2(xdoc, Sub(x)
                                                                                                                                            Me.Invoke(Sub()
                                                                                                                                                          floading.ProgressBar1.Value = x
-                                                                                                                                                         floading.Label2.Text = x.ToString("N0") + "%"
                                                                                                                                                          floading.Refresh()
                                                                                                                                                      End Sub)
                                                                                                                                        End Sub)
@@ -2324,6 +2322,10 @@ Public Class FormMain
                     My.Settings.MostRecentFiles.Add(mypath)
                     Me.UpdateMRUList()
                 End If
+            ElseIf TypeOf handler Is Simulate365.Models.S365File Then
+                's365 file
+                Dim fileid = DirectCast(handler, Simulate365.Models.S365File).FileId
+                form.Options.Simulate365FileID = fileid
             End If
 
             My.Application.ActiveSimulation = form
@@ -3369,6 +3371,11 @@ Label_00CC:
             fs = LoadXML(New SharedClassesCSharp.FilePicker.Windows.WindowsFile(fullname), ProgressFeedBack, handler.FullPath, forcommandline)
             fs.FilePath = handler.FullPath
             fs.Options.FilePath = handler.FullPath
+            If TypeOf handler Is Simulate365.Models.S365File Then
+                's365 file
+                Dim fileid = DirectCast(handler, Simulate365.Models.S365File).FileId
+                fs.Options.Simulate365FileID = fileid
+            End If
             If File.Exists(dbfile) Then
                 Try
                     fs.FileDatabaseProvider.LoadDatabase(dbfile)
@@ -3497,7 +3504,6 @@ Label_00CC:
                 Me.LoadXML(handler, Sub(x)
                                         Me.Invoke(Sub()
                                                       floading.ProgressBar1.Value = x
-                                                      floading.Label2.Text = x.ToString("N0") + "%"
                                                       floading.Refresh()
                                                   End Sub)
                                     End Sub, "", False)
@@ -3798,7 +3804,6 @@ Label_00CC:
                             LoadXML(handler, Sub(x)
                                                  Me.Invoke(Sub()
                                                                floading.ProgressBar1.Value = x
-                                                               floading.Label2.Text = x.ToString("N0") + "%"
                                                                floading.Refresh()
                                                            End Sub)
                                              End Sub)
@@ -3806,7 +3811,6 @@ Label_00CC:
                             LoadAndExtractXMLZIP(handler, Sub(x)
                                                               Me.Invoke(Sub()
                                                                             floading.ProgressBar1.Value = x
-                                                                            floading.Label2.Text = x.ToString("N0") + "%"
                                                                             floading.Refresh()
                                                                         End Sub)
                                                           End Sub)

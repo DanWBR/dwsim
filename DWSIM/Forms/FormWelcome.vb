@@ -159,7 +159,6 @@ Public Class FormWelcome
                     My.Application.MainWindowForm.LoadXML(handler, Sub(x)
                                                                        Me.Invoke(Sub()
                                                                                      floading.ProgressBar1.Value = x
-                                                                                     floading.Label2.Text = x.ToString("N0") + "%"
                                                                                      floading.Refresh()
                                                                                  End Sub)
                                                                    End Sub)
@@ -169,7 +168,6 @@ Public Class FormWelcome
                     My.Application.MainWindowForm.LoadAndExtractXMLZIP(handler, Sub(x)
                                                                                     Me.Invoke(Sub()
                                                                                                   floading.ProgressBar1.Value = x
-                                                                                                  floading.Label2.Text = x.ToString("N0") + "%"
                                                                                                   floading.Refresh()
                                                                                               End Sub)
                                                                                 End Sub)
@@ -333,7 +331,6 @@ Public Class FormWelcome
                                                                                                                              Me.UIThread(Sub()
                                                                                                                                              fdlding.Label1.Text = "Downloading file... (" & px & "%)" & vbCrLf & "(" & item.Title & ")"
                                                                                                                                              fdlding.ProgressBar1.Value = px
-                                                                                                                                             fdlding.Label2.Text = px.ToString("N0") + "%"
                                                                                                                                              fdlding.Refresh()
                                                                                                                                          End Sub)
                                                                                                                          End Sub)
@@ -353,7 +350,6 @@ Public Class FormWelcome
                                                                                                  My.Application.MainWindowForm.LoadXML2(xdoc, Sub(x)
                                                                                                                                                   Me.Invoke(Sub()
                                                                                                                                                                 floading.ProgressBar1.Value = x
-                                                                                                                                                                fdlding.Label2.Text = x.ToString("N0") + "%"
                                                                                                                                                                 fdlding.Refresh()
                                                                                                                                                             End Sub)
                                                                                                                                               End Sub)
