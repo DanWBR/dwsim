@@ -59,12 +59,14 @@ namespace DWSIM.Simulate365.Models
 
         public void Write(string localFilePath)
         {
-            FileUploaderService.UploadFile(DriveId, ParentDriveId, localFilePath, Filename, FullPath);
+            var file = FileUploaderService.UploadFile(DriveId, ParentDriveId, localFilePath, Filename, FullPath);
+            FileId = file.FileId;
         }
 
         public void Write(System.IO.Stream stream)
         {
-            FileUploaderService.UploadFile(DriveId, ParentDriveId, stream, Filename, FullPath);
+            var file = FileUploaderService.UploadFile(DriveId, ParentDriveId, stream, Filename, FullPath);
+            FileId = file.FileId;
         }
     }
 }
