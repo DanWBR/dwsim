@@ -2940,12 +2940,6 @@ Public Class FormMain
 
     Sub SaveMobileXML(handler As IVirtualFile, ByVal form As FormFlowsheet, Optional ByVal simulationfilename As String = "")
 
-        If TypeOf handler Is Simulate365.Models.S365File Then
-            's365 file
-            Dim fileid = DirectCast(handler, Simulate365.Models.S365File).FileId
-            form.Options.Simulate365FileID = fileid
-        End If
-
         Dim compatmessage As String = SharedClasses.Utility.CheckSimulationForMobileCompatibility(form)
 
         If compatmessage <> "" Then
@@ -3086,6 +3080,12 @@ Public Class FormMain
             handler.Write(stream)
         End Using
 
+        If TypeOf handler Is Simulate365.Models.S365File Then
+            's365 file
+            Dim fileid = DirectCast(handler, Simulate365.Models.S365File).FileId
+            form.Options.Simulate365FileID = fileid
+        End If
+
         Me.UIThread(New Action(Sub()
                                    Dim mypath As String = simulationfilename
                                    If mypath = "" Then mypath = handler.FullPath
@@ -3105,12 +3105,6 @@ Public Class FormMain
     End Sub
 
     Sub SaveXML(handler As IVirtualFile, ByVal form As FormFlowsheet, Optional ByVal simulationfilename As String = "")
-
-        If TypeOf handler Is Simulate365.Models.S365File Then
-            's365 file
-            Dim fileid = DirectCast(handler, Simulate365.Models.S365File).FileId
-            form.Options.Simulate365FileID = fileid
-        End If
 
         If simulationfilename = "" Then simulationfilename = handler.FullPath
 
@@ -3295,6 +3289,12 @@ Public Class FormMain
             handler.Write(stream)
         End Using
 
+        If TypeOf handler Is Simulate365.Models.S365File Then
+            's365 file
+            Dim fileid = DirectCast(handler, Simulate365.Models.S365File).FileId
+            form.Options.Simulate365FileID = fileid
+        End If
+
         If IO.Path.GetExtension(simulationfilename).ToLower.Contains("dwxml") Or IO.Path.GetExtension(simulationfilename).ToLower.Contains("dwxmz") Then
             If Visible Then
                 Dim mypath As String = simulationfilename
@@ -3412,12 +3412,6 @@ Label_00CC:
 
     Sub SaveXMLZIP(handler As IVirtualFile, ByVal form As FormFlowsheet)
 
-        If TypeOf handler Is Simulate365.Models.S365File Then
-            's365 file
-            Dim fileid = DirectCast(handler, Simulate365.Models.S365File).FileId
-            form.Options.Simulate365FileID = fileid
-        End If
-
         Dim xmlfile As String = Path.ChangeExtension(SharedClasses.Utility.GetTempFileName(), "xml")
 
         Me.SaveXML(New SharedClassesCSharp.FilePicker.Windows.WindowsFile(xmlfile), form, handler.Filename)
@@ -3471,6 +3465,12 @@ Label_00CC:
             End Using
 
         End Using
+
+        If TypeOf handler Is Simulate365.Models.S365File Then
+            's365 file
+            Dim fileid = DirectCast(handler, Simulate365.Models.S365File).FileId
+            form.Options.Simulate365FileID = fileid
+        End If
 
         File.Delete(xmlfile)
         File.Delete(dbfile)
