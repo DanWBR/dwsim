@@ -2940,6 +2940,12 @@ Public Class FormMain
 
     Sub SaveMobileXML(handler As IVirtualFile, ByVal form As FormFlowsheet, Optional ByVal simulationfilename As String = "")
 
+        If TypeOf handler Is Simulate365.Models.S365File Then
+            's365 file
+            Dim fileid = DirectCast(handler, Simulate365.Models.S365File).FileId
+            form.Options.Simulate365FileID = fileid
+        End If
+
         Dim compatmessage As String = SharedClasses.Utility.CheckSimulationForMobileCompatibility(form)
 
         If compatmessage <> "" Then
@@ -3099,6 +3105,12 @@ Public Class FormMain
     End Sub
 
     Sub SaveXML(handler As IVirtualFile, ByVal form As FormFlowsheet, Optional ByVal simulationfilename As String = "")
+
+        If TypeOf handler Is Simulate365.Models.S365File Then
+            's365 file
+            Dim fileid = DirectCast(handler, Simulate365.Models.S365File).FileId
+            form.Options.Simulate365FileID = fileid
+        End If
 
         If simulationfilename = "" Then simulationfilename = handler.FullPath
 
@@ -3400,6 +3412,12 @@ Label_00CC:
 
     Sub SaveXMLZIP(handler As IVirtualFile, ByVal form As FormFlowsheet)
 
+        If TypeOf handler Is Simulate365.Models.S365File Then
+            's365 file
+            Dim fileid = DirectCast(handler, Simulate365.Models.S365File).FileId
+            form.Options.Simulate365FileID = fileid
+        End If
+
         Dim xmlfile As String = Path.ChangeExtension(SharedClasses.Utility.GetTempFileName(), "xml")
 
         Me.SaveXML(New SharedClassesCSharp.FilePicker.Windows.WindowsFile(xmlfile), form, handler.Filename)
@@ -3631,8 +3649,20 @@ Label_00CC:
 
             If dashboardpicker Then
                 filePickerForm = New Simulate365.FormFactories.S365FilePickerForm()
+                Try
+                    Dim fname = Path.GetFileNameWithoutExtension(form2.Options.FilePath)
+                    filePickerForm.SuggestedFilename = fname
+                Catch ex As Exception
+                End Try
             Else
                 filePickerForm = SharedClassesCSharp.FilePicker.FilePickerService.GetInstance().GetFilePicker()
+                Try
+                    Dim fname = Path.GetFileNameWithoutExtension(form2.Options.FilePath)
+                    Dim fpath = Path.GetDirectoryName(form2.Options.FilePath)
+                    filePickerForm.SuggestedFilename = fname
+                    filePickerForm.SuggestedDirectory = fpath
+                Catch ex As Exception
+                End Try
             End If
 
             Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
@@ -3916,6 +3946,13 @@ Label_00CC:
                     Else
                         filePickerForm = SharedClassesCSharp.FilePicker.FilePickerService.GetInstance().GetFilePicker()
                     End If
+                    Try
+                        Dim fname = Path.GetFileNameWithoutExtension(form2.Options.FilePath)
+                        Dim fpath = Path.GetDirectoryName(form2.Options.FilePath)
+                        filePickerForm.SuggestedFilename = fname
+                        filePickerForm.SuggestedDirectory = fpath
+                    Catch ex As Exception
+                    End Try
                     Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
             New List(Of SharedClassesCSharp.FilePicker.FilePickerAllowedType) From
             {New SharedClassesCSharp.FilePicker.FilePickerAllowedType("Simulation File", New String() {"*.dwxmz", "*.dwxml", "*.xml"})})
