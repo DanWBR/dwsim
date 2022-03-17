@@ -464,12 +464,6 @@ Click "Finish" to exit the wizard and start designing the simulation model.</val
     <value>Create From UNIFAC Molecular Structure</value>
   </data>
   <data name="cmsAddComps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 114</value>
-  </data>
-  <data name="OpenFileDialog1.Filter" xml:space="preserve">
-    <value>JSON Files|*.json</value>
-  </data>
-  <data name="OpenFileDialog1.Title" xml:space="preserve">
-    <value>Import Compound from JSON File</value>
+    <value>331, 136</value>
   </data>
 </root>

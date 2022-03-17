@@ -179,6 +179,9 @@
   <data name="&gt;&gt;dgvIPDB.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>276, 25</value>
+  </data>
   <data name="Column14.Width" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
@@ -234,8 +237,8 @@
   <data name="FaTabStripItem2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="GroupBox13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>371, 86</value>
+  <data name="tbGPUCaps.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Vertical</value>
   </data>
   <data name="chkAA.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopLeft</value>
@@ -269,6 +272,9 @@
         hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
 </value>
   </data>
+  <data name="cbDefaultLocation.Items1" xml:space="preserve">
+    <value>Copiar e associar</value>
+  </data>
   <data name="Label7.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
@@ -287,8 +293,8 @@
   <data name="&gt;&gt;Label12.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="GroupBox13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 97</value>
+  <data name="&gt;&gt;FaTabStripItem2.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;cbSolverMode.Parent" xml:space="preserve">
     <value>GroupBox2</value>
@@ -496,8 +502,8 @@
   <data name="&gt;&gt;tbPythonPath.Name" xml:space="preserve">
     <value>tbPythonPath</value>
   </data>
-  <data name="&gt;&gt;cbDebugLevel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;chkEnableSIMD.Parent" xml:space="preserve">
+    <value>GroupBox7</value>
   </data>
   <data name="chkEnableParallelCalcs.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -537,9 +543,6 @@
   </data>
   <data name="&gt;&gt;tbServiceBusNamespace.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="cbRenderer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 21</value>
   </data>
   <data name="&gt;&gt;btnClearDir.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -589,9 +592,6 @@
   <data name="KryptonLabel3.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 13</value>
   </data>
-  <data name="tbGPUCaps.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
-    <value>Vertical</value>
-  </data>
   <data name="FaTabStrip1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8.25pt</value>
   </data>
@@ -628,8 +628,8 @@
   <data name="&gt;&gt;CheckBoxUndoRedoRecalc.Parent" xml:space="preserve">
     <value>GroupBox11</value>
   </data>
-  <data name="Label4.Text" xml:space="preserve">
-    <value>Dispositivo</value>
+  <data name="cbRenderer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>218, 21</value>
   </data>
   <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
     <value>371, 86</value>
@@ -640,8 +640,11 @@
   <data name="chkEnableGPUProcessing.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="GroupBoxNetworkComputerConfig.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+  <data name="&gt;&gt;CheckBoxUndoRedoRecalc.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="chkIgnoreCompConstData.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="&gt;&gt;Label22.Parent" xml:space="preserve">
     <value>GroupBox9</value>
@@ -766,9 +769,6 @@
   <data name="&gt;&gt;GroupBoxAzureConfig.Name" xml:space="preserve">
     <value>GroupBoxAzureConfig</value>
   </data>
-  <data name="dgvdb.Size" type="System.Drawing.Size, System.Drawing">
-    <value>362, 326</value>
-  </data>
   <data name="chkEnableGPUProcessing.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 73</value>
   </data>
@@ -838,6 +838,9 @@
   <data name="chkEnableMultipleEditors.Text" xml:space="preserve">
     <value>Ativar múltiplos editores</value>
   </data>
+  <data name="&gt;&gt;chkIgnoreCompConstData.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="Label21.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
@@ -882,9 +885,6 @@
   </data>
   <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 52</value>
-  </data>
-  <data name="&gt;&gt;GroupBox12.Parent" xml:space="preserve">
-    <value>TabPage1</value>
   </data>
   <data name="KryptonLabel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>221, 16</value>
@@ -960,6 +960,9 @@
   <data name="&gt;&gt;Label4.Name" xml:space="preserve">
     <value>Label4</value>
   </data>
+  <data name="cbGPU.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
   <data name="&gt;&gt;tbServerPort.Name" xml:space="preserve">
     <value>tbServerPort</value>
   </data>
@@ -971,6 +974,9 @@
   </data>
   <data name="OpenFileDialog1.Filter" xml:space="preserve">
     <value>Arquivo XML|*.xml|Todos os arquivos|*.*</value>
+  </data>
+  <data name="GroupBox13.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 97</value>
   </data>
   <data name="GroupBox3.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 9</value>
@@ -1011,9 +1017,6 @@
   <data name="Label15.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="Column12.Width" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
   <data name="ComboBoxPropPackCopyMode.Items1" xml:space="preserve">
     <value>Copiar e associar</value>
   </data>
@@ -1044,8 +1047,8 @@
   <data name="GroupBox12.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 246</value>
   </data>
-  <data name="cbudb.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="&gt;&gt;chkSaveBackupFile.Name" xml:space="preserve">
+    <value>chkSaveBackupFile</value>
   </data>
   <data name="ComboBoxPropPackCopyMode.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1059,7 +1062,7 @@
   <data name="&gt;&gt;KryptonLabel3.Parent" xml:space="preserve">
     <value>GroupBox3</value>
   </data>
-  <data name="cbGPU.TabIndex" type="System.Int32, mscorlib">
+  <data name="Column12.Width" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="Label23.Location" type="System.Drawing.Point, System.Drawing">
@@ -1073,6 +1076,12 @@
   </data>
   <data name="&gt;&gt;GroupBox17.Name" xml:space="preserve">
     <value>GroupBox17</value>
+  </data>
+  <data name="Label4.Text" xml:space="preserve">
+    <value>Dispositivo</value>
+  </data>
+  <data name="cbudb.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;chkEditorDoubleClick.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1146,8 +1155,11 @@
   <data name="GroupBox7.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="Label15.Text" xml:space="preserve">
-    <value>Porta TCP</value>
+  <data name="&gt;&gt;cbDebugLevel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ComboBoxUILanguage.Items1" xml:space="preserve">
+    <value>English (USA)</value>
   </data>
   <data name="cbSolverMode.Items1" xml:space="preserve">
     <value>Threads Paralelas em Segundo Plano</value>
@@ -1169,12 +1181,6 @@
   </data>
   <data name="GroupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
-  </data>
-  <data name="KryptonCheckBox6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 24</value>
-  </data>
-  <data name="dgvIPDB.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 17</value>
   </data>
   <data name="&gt;&gt;Label11.Parent" xml:space="preserve">
     <value>GroupBox2</value>
@@ -1374,9 +1380,6 @@
   <data name="chkSolverBreak.Size" type="System.Drawing.Size, System.Drawing">
     <value>262, 17</value>
   </data>
-  <data name="&gt;&gt;chkSaveBackupFile.Name" xml:space="preserve">
-    <value>chkSaveBackupFile</value>
-  </data>
   <data name="&gt;&gt;ComboBoxUILanguage.Name" xml:space="preserve">
     <value>ComboBoxUILanguage</value>
   </data>
@@ -1385,6 +1388,9 @@
   </data>
   <data name="&gt;&gt;tbPythonTimeout.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="&gt;&gt;Label15.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="tbPythonTimeout.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -1437,6 +1443,9 @@
   <data name="GroupBox13.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
+  <data name="Label15.Text" xml:space="preserve">
+    <value>Porta TCP</value>
+  </data>
   <data name="CheckBoxUndoRedoRecalc.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1482,8 +1491,8 @@
   <data name="&gt;&gt;ComboBoxUILanguage.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="chkEnableInspector.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+  <data name="KryptonCheckBox6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 24</value>
   </data>
   <data name="&gt;&gt;chkEnableMultipleEditors.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1641,8 +1650,8 @@
   <data name="&gt;&gt;GroupBox15.Name" xml:space="preserve">
     <value>GroupBox15</value>
   </data>
-  <data name="&gt;&gt;GroupBox6.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="GroupBox13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>371, 86</value>
   </data>
   <data name="chkSolverBreak.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1795,6 +1804,9 @@
   <data name="chkEnableMultipleEditors.CheckAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopLeft</value>
   </data>
+  <data name="GroupBoxNetworkComputerConfig.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
   <data name="&gt;&gt;Column15.Name" xml:space="preserve">
     <value>Column15</value>
   </data>
@@ -1881,9 +1893,6 @@
   </data>
   <data name="&gt;&gt;chkEnableSIMD.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;GroupBox2.Parent" xml:space="preserve">
-    <value>FaTabStripItem1</value>
   </data>
   <data name="Button4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2017,8 +2026,8 @@
   <data name="FaTabStripItem3.Text" xml:space="preserve">
     <value>Bancos de Dados</value>
   </data>
-  <data name="&gt;&gt;GroupBox15.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;GroupBox12.Parent" xml:space="preserve">
+    <value>TabPage1</value>
   </data>
   <data name="cbDebugLevel.Size" type="System.Drawing.Size, System.Drawing">
     <value>94, 21</value>
@@ -2092,9 +2101,6 @@
   <data name="FaTabStripItem2.Text" xml:space="preserve">
     <value>Backup/Segurança</value>
   </data>
-  <data name="&gt;&gt;chkEnableSIMD.Parent" xml:space="preserve">
-    <value>GroupBox7</value>
-  </data>
   <data name="GroupBox11.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 186</value>
   </data>
@@ -2152,8 +2158,8 @@
   <data name="GroupBox5.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name="ComboBoxUILanguage.Items1" xml:space="preserve">
-    <value>English (USA)</value>
+  <data name="dgvdb.Size" type="System.Drawing.Size, System.Drawing">
+    <value>362, 326</value>
   </data>
   <data name="Button4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -2161,8 +2167,8 @@
   <data name="Label23.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;CheckBoxUndoRedoRecalc.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;GroupBox1.Parent" xml:space="preserve">
+    <value>FaTabStripItem2</value>
   </data>
   <data name="cbDebugLevel.Items3" xml:space="preserve">
     <value>Alto</value>
@@ -2268,9 +2274,6 @@
   <data name="TrackBar1.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;GroupBox1.Parent" xml:space="preserve">
-    <value>FaTabStripItem2</value>
-  </data>
   <data name="&gt;&gt;chkSolverBreak.Parent" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
@@ -2307,8 +2310,8 @@
   <data name="&gt;&gt;tbGPUCaps.Name" xml:space="preserve">
     <value>tbGPUCaps</value>
   </data>
-  <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>276, 25</value>
+  <data name="&gt;&gt;GroupBox2.Parent" xml:space="preserve">
+    <value>FaTabStripItem1</value>
   </data>
   <data name="KryptonLabel1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2331,8 +2334,8 @@
   <data name="GroupBox12.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
-  <data name="&gt;&gt;chkIgnoreCompConstData.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="dgvIPDB.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 17</value>
   </data>
   <data name="FaTabStrip1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -2396,7 +2399,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABo
-        KgAAAk1TRnQBSQFMAgEBCgEAAZgBCgGgAQoBEAEAARABAAT/ARkBEAj/AUIBTQE2BwABNgMAASgDAAFA
+        KgAAAk1TRnQBSQFMAgEBCgEAAZgBCgGwAQoBEAEAARABAAT/ARkBEAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABMAMAAQEBAAEYBgABJBIAAekCpwHpAqcB5wKlAeUCowHlAqMB5QKjAeQCogHiAqAB4QKfAd4CnAHe
         ApwB3AKaAdoCmAHaApgB2gKYAdoCmAHkAqIB4gKgAeECnwHeApwB3AGcAZoB2gKYAdoCmAHZApcB1wKV
         AdYClAHTApEB0wKRAdECjwHPAo0BzwKNAc8CjWAABvYD9APzAfIB8wHyA/ED8APuA+0D6wPpA+gB5wLm
@@ -2685,9 +2688,6 @@
   <data name="&gt;&gt;CheckBoxUndoRedoRecalc.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="chkIgnoreCompConstData.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
   <data name="&gt;&gt;chkSaveBackupFile.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -2766,8 +2766,8 @@
   <data name="chkAA.Text" xml:space="preserve">
     <value>Suavizar Objetos (Anti-Aliasing)</value>
   </data>
-  <data name="&gt;&gt;chkEditorDoubleClick.Parent" xml:space="preserve">
-    <value>GroupBox12</value>
+  <data name="&gt;&gt;GroupBox15.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;KryptonCheckBox1.Parent" xml:space="preserve">
     <value>GroupBox9</value>
@@ -2841,9 +2841,6 @@
   <data name="&gt;&gt;TabPage1.Name" xml:space="preserve">
     <value>TabPage1</value>
   </data>
-  <data name="&gt;&gt;FaTabStripItem2.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <data name="&gt;&gt;GroupBox9.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
@@ -2856,20 +2853,17 @@
   <data name="chkIgnoreCompConstData.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;Label15.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;GroupBox6.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn1.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn1</value>
   </data>
-  <data name="&gt;&gt;KryptonLabel3.Name" xml:space="preserve">
-    <value>KryptonLabel3</value>
-  </data>
   <data name="&gt;&gt;GroupBox13.Name" xml:space="preserve">
     <value>GroupBox13</value>
   </data>
-  <data name="chkEnableSIMD.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+  <data name="&gt;&gt;chkEditorDoubleClick.Parent" xml:space="preserve">
+    <value>GroupBox12</value>
   </data>
   <data name="chkEditorDoubleClick.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -2931,6 +2925,9 @@
   <data name="&gt;&gt;KryptonTextBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="chkEnableSIMD.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
   <data name="KryptonTextBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>365, 21</value>
   </data>
@@ -2991,8 +2988,8 @@
   <data name="chkAA.Size" type="System.Drawing.Size, System.Drawing">
     <value>178, 17</value>
   </data>
-  <data name="cbDefaultLocation.Items1" xml:space="preserve">
-    <value>Copiar e associar</value>
+  <data name="&gt;&gt;KryptonLabel3.Name" xml:space="preserve">
+    <value>KryptonLabel3</value>
   </data>
   <data name="&gt;&gt;Label13.Name" xml:space="preserve">
     <value>Label13</value>
@@ -3017,6 +3014,9 @@
   </data>
   <data name="GroupBox17.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="chkEnableInspector.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
   </data>
   <data name="&gt;&gt;Column14.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

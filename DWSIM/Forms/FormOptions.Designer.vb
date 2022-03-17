@@ -126,7 +126,6 @@ Partial Class FormOptions
         Me.Label13 = New System.Windows.Forms.Label()
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
-        Me.ofdcs = New System.Windows.Forms.OpenFileDialog()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.FaTabStrip1.SuspendLayout()
         Me.FaTabStripItem1.SuspendLayout()
@@ -895,13 +894,6 @@ Partial Class FormOptions
         '
         resources.ApplyResources(Me.FolderBrowserDialog1, "FolderBrowserDialog1")
         '
-        'ofdcs
-        '
-        Me.ofdcs.AddExtension = False
-        resources.ApplyResources(Me.ofdcs, "ofdcs")
-        Me.ofdcs.RestoreDirectory = True
-        Me.ofdcs.SupportMultiDottedExtensions = True
-        '
         'OpenFileDialog1
         '
         resources.ApplyResources(Me.OpenFileDialog1, "OpenFileDialog1")
@@ -979,8 +971,6 @@ Partial Class FormOptions
     Public WithEvents Button7 As System.Windows.Forms.Button
     Public WithEvents GroupBox4 As System.Windows.Forms.GroupBox
     Public WithEvents dgvdb As System.Windows.Forms.DataGridView
-    Public WithEvents ofdcs As System.Windows.Forms.OpenFileDialog
-    Public WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
     Public WithEvents ImageList1 As System.Windows.Forms.ImageList
     Public WithEvents Button2 As System.Windows.Forms.Button
     Public WithEvents GroupBox7 As System.Windows.Forms.GroupBox
@@ -1062,4 +1052,5 @@ Partial Class FormOptions
     Friend WithEvents GroupBox1 As GroupBox
     Public WithEvents btnClearDir As Button
     Public WithEvents tbConfigDir As TextBox
+    Public WithEvents OpenFileDialog1 As OpenFileDialog
 End Class

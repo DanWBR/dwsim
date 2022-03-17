@@ -23,6 +23,8 @@ Imports System.IO
 Imports System.Xml.Xsl
 Imports AODL.Document
 Imports System.Linq
+Imports DWSIM.Interfaces
+Imports DWSIM.SharedClassesCSharp.FilePicker
 
 Public Class FormReportConfig
 
@@ -31,7 +33,6 @@ Public Class FormReportConfig
     Protected frm As FormFlowsheet
 
     Dim DT As New DataTable
-    Dim filename As String
     Dim Conversor As New SystemsOfUnits.Converter
     Dim su As New SystemsOfUnits.Units
     Dim nf As String
@@ -387,11 +388,20 @@ Public Class FormReportConfig
 
     Private Sub Button7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KButton7.Click
 
-        Me.SaveFileDialog1.DefaultExt = True
-        If Me.SaveFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
-            If Me.SaveFileDialog1.FilterIndex = 1 Then
-                Me.filename = Me.SaveFileDialog1.FileName
-                If Not (Me.filename Is Nothing) Then
+
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        'XML File (.xml)|*.xml|Text File (.txt)|*.txt|Microsoft Excel Spreadsheet (.xlsx)|*.xlsx|Open Document Spreadsheet (.ods)|*.ods|Open Document Text (.odt)|*.odt
+        Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("XML File", "*.xml"),
+            New FilePickerAllowedType("Text File", "*.txt"),
+            New FilePickerAllowedType("Excel File", "*.xlsx"),
+            New FilePickerAllowedType("ODS File", "*.ods"),
+            New FilePickerAllowedType("ODT File", "*.odt")})
+
+        If handler IsNot Nothing Then
+            Using stream As New MemoryStream()
+                If handler.GetExtension().ToLower() = ".xml" Then
                     Me.FillDataTable()
                     Me.DT.TableName = DWSIM.App.GetLocalString("Resultados")
                     Dim output As String = ""
@@ -415,42 +425,28 @@ Public Class FormReportConfig
                             End Using
                         End Using
                     End Using
-                    File.WriteAllText(Me.filename, output)
-                End If
-            ElseIf Me.SaveFileDialog1.FilterIndex = 2 Then
-                Me.filename = Me.SaveFileDialog1.FileName
-                If Not (Me.filename Is Nothing) Then
+                    Using writer As New StreamWriter(stream)
+                        writer.Write(output)
+                        handler.Write(stream)
+                    End Using
+                ElseIf handler.GetExtension().ToLower() = ".txt" Then
                     Me.FillDataTable()
-                    Me.CreateAndSaveCSVFile()
-                End If
-            ElseIf Me.SaveFileDialog1.FilterIndex = 3 Then
-                If DWSIM.App.IsRunningOnMono Then
-                    MessageBox.Show(DWSIM.App.GetLocalString("Unsupported_Feature"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                Else
-                    Me.filename = Me.SaveFileDialog1.FileName
-                    If Not (Me.filename Is Nothing) Then
-                        Me.FillDataTable()
-                        Me.CreateAndSaveExcelFile()
-                    End If
-                End If
-            ElseIf Me.SaveFileDialog1.FilterIndex = 4 Then
-                Me.filename = Me.SaveFileDialog1.FileName
-                If Not (Me.filename Is Nothing) Then
+                    Me.CreateAndSaveCSVFile(stream, handler)
+                ElseIf handler.GetExtension().ToLower() = ".xlsx" Then
                     Me.FillDataTable()
-                    Me.CreateAndSaveODSFile()
-                End If
-            ElseIf Me.SaveFileDialog1.FilterIndex = 5 Then
-                Me.filename = Me.SaveFileDialog1.FileName
-                If Not (Me.filename Is Nothing) Then
+                    Me.CreateAndSaveExcelFile(stream, handler)
+                ElseIf handler.GetExtension().ToLower() = ".ods" Then
                     Me.FillDataTable()
-                    Me.CreateAndSaveODTFile()
+                    Me.CreateAndSaveODSFile(stream, handler)
+                ElseIf handler.GetExtension().ToLower() = ".odt" Then
+                    Me.FillDataTable()
+                    Me.CreateAndSaveODTFile(stream, handler)
                 End If
-            End If
+            End Using
         End If
-
     End Sub
 
-    Sub CreateAndSaveODTFile()
+    Sub CreateAndSaveODTFile(stream As MemoryStream, handler As IVirtualFile)
 
 
         Dim fname = AODL.Document.Styles.FontFamilies.Arial
@@ -552,8 +548,9 @@ Public Class FormReportConfig
             document.Content.Add(table)
 
             'Save the document
-            Using writer = New AODL.IO.OnDiskPackageWriter()
-                document.Save(Me.filename, New Export.OpenDocument.OpenDocumentTextExporter(writer))
+            Using writer = New AODL.IO.InMemoryPackageWriter(stream)
+                document.Save("", New Export.OpenDocument.OpenDocumentTextExporter(writer))
+                handler.Write(New MemoryStream(stream.ToArray()))
             End Using
 
             MsgBox(DWSIM.App.GetLocalString("FileSaved"), MsgBoxStyle.Information, "DWSIM")
@@ -568,7 +565,7 @@ Public Class FormReportConfig
 
     End Sub
 
-    Sub CreateAndSaveODSFile()
+    Sub CreateAndSaveODSFile(stream As MemoryStream, handler As IVirtualFile)
 
         Dim sheetdoc As New SpreadsheetDocuments.SpreadsheetDocument()
         sheetdoc.[New]()
@@ -635,8 +632,9 @@ Public Class FormReportConfig
 
             sheetdoc.TableCollection.Add(mysheet)
 
-            Using writer As New AODL.IO.OnDiskPackageWriter
-                sheetdoc.Save(Me.filename, New Export.OpenDocument.OpenDocumentTextExporter(writer))
+            Using writer As New AODL.IO.InMemoryPackageWriter(stream)
+                sheetdoc.Save(handler.Filename, New Export.OpenDocument.OpenDocumentTextExporter(writer))
+                handler.Write(New MemoryStream(stream.ToArray()))
             End Using
 
             MsgBox(DWSIM.App.GetLocalString("FileSaved"), MsgBoxStyle.Information, "DWSIM")
@@ -652,8 +650,7 @@ Public Class FormReportConfig
 
     End Sub
 
-
-    Sub CreateAndSaveExcelFile()
+    Sub CreateAndSaveExcelFile(stream As MemoryStream, handler As IVirtualFile)
 
 
         Dim xcl As New OfficeOpenXml.ExcelPackage()
@@ -683,7 +680,8 @@ Public Class FormReportConfig
                     j = j + 2
                 Loop Until i >= DT.Rows.Count
             End With
-            xcl.SaveAs(New FileInfo(filename))
+            xcl.SaveAs(stream)
+            handler.Write(stream)
             MsgBox(DWSIM.App.GetLocalString("XLFileSaved"), MsgBoxStyle.Information, "DWSIM")
         Catch ex As Exception
             MsgBox(ex.ToString, MsgBoxStyle.Exclamation, DWSIM.App.GetLocalString("Erro"))
@@ -693,7 +691,7 @@ Public Class FormReportConfig
 
     End Sub
 
-    Sub CreateAndSaveCSVFile()
+    Sub CreateAndSaveCSVFile(stream As MemoryStream, handler As IVirtualFile)
 
         Dim csvtext As New StringBuilder
 
@@ -710,9 +708,10 @@ Public Class FormReportConfig
             Loop Until actualmat <> prevmat Or i >= DT.Rows.Count
             csvtext.AppendLine()
         Loop Until i >= DT.Rows.Count
-
-        File.WriteAllText(Me.filename, csvtext.ToString)
-
+        Using writer As New StreamWriter(stream)
+            writer.Write(csvtext.ToString())
+            handler.Write(stream)
+        End Using
     End Sub
 
     Private Sub TreeViewObj_AfterCheck(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TreeViewEventArgs) Handles TreeViewObj.AfterCheck
