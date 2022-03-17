@@ -1597,8 +1597,8 @@ Imports DWSIM.SharedClassesCSharp.FilePicker
             Using stream As New IO.MemoryStream()
                 Using writer As New StreamWriter(stream)
                     writer.Write(text)
+                    handler.Write(stream)
                 End Using
-                handler.Write(stream)
             End Using
         End If
 
@@ -1614,12 +1614,11 @@ Imports DWSIM.SharedClassesCSharp.FilePicker
         If handler IsNot Nothing Then
             Dim scripttext = handler.ReadAllText()
             Dim scr As New Script() With
-                                                    {.ID = Guid.NewGuid().ToString,
-                                                     .Title = Path.GetFileNameWithoutExtension(handler.Filename),
-                                                     .Linked = False,
-                                                     .ScriptText = scripttext,
-                                                     .PythonInterpreter = Scripts.Interpreter.IronPython}
-
+                {.ID = Guid.NewGuid().ToString,
+                .Title = Path.GetFileNameWithoutExtension(handler.Filename),
+                .Linked = False,
+                .ScriptText = scripttext,
+                .PythonInterpreter = Scripts.Interpreter.IronPython}
             InsertScriptTab(scr)
         End If
 
