@@ -31,6 +31,8 @@ Imports System.Linq
 Imports System.IO
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
 Imports DWSIM.Thermodynamics.Streams
+Imports DWSIM.Interfaces
+Imports DWSIM.SharedClassesCSharp.FilePicker
 
 Public Class FormUNIFACRegression
 
@@ -48,6 +50,8 @@ Public Class FormUNIFACRegression
     Dim mat As Streams.MaterialStream
     Dim GI1, GI2 As Integer
     Dim GN1, GN2, Comp1, Comp2 As String
+
+    Dim FileHandler As IVirtualFile
 
     Private Sub FormUNIFACRegression_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -955,21 +959,41 @@ Public Class FormUNIFACRegression
     End Sub
 
     Private Sub BtnSelectIPDB_Click(sender As Object, e As EventArgs) Handles BtnSelectIPDB.Click
+
         'Select Interaction user database
-        If Me.DBOpenDlg.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-            Me.tbIPDBName.Text = Me.DBOpenDlg.FileName
+
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowOpenDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("XML File", "*.xml")})
+
+        If handler IsNot Nothing Then
+            FileHandler = handler
+            tbIPDBName.Text = handler.FullPath
         End If
+
     End Sub
 
     Private Sub BtnNewIPDB_Click(sender As Object, e As EventArgs) Handles BtnNewIPDB.Click
         'Create new Interaction Parameter User Database
-        If Me.DBOpenDlg.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-            If Not File.Exists(Me.DBOpenDlg.FileName) Then File.Create(Me.DBOpenDlg.FileName)
-            Me.tbIPDBName.Text = Me.DBOpenDlg.FileName
+
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("XML File", "*.xml")})
+
+        If handler IsNot Nothing Then
+            FileHandler = handler
+            tbIPDBName.Text = handler.FullPath
+            Using stream As New IO.MemoryStream()
+                handler.Write(stream)
+            End Using
         End If
+
     End Sub
 
     Private Sub BtnSaveIPDB_Click(sender As Object, e As EventArgs) Handles BtnSaveIPDB.Click
+
         StoreData()
 
         IP.Comp1 = mycase.MainGr_i
@@ -992,7 +1016,16 @@ Public Class FormUNIFACRegression
 
         If Me.tbIPDBName.Text <> "" Then
             Try
-                Databases.UserIPDB.AddInteractionParameters(New BaseClasses.InteractionParameter() {IP}, tbIPDBName.Text, True)
+                Using stream As New MemoryStream
+                    If FileHandler.Exists() Then
+                        Using str = FileHandler.OpenRead()
+                            str.CopyTo(stream)
+                            stream.Position = 0
+                        End Using
+                    End If
+                    Databases.UserIPDB.AddInteractionParameters(New BaseClasses.InteractionParameter() {IP}, stream, True)
+                    FileHandler.Write(stream)
+                End Using
                 MessageBox.Show(DWSIM.App.GetLocalString("ParametrosAdicionadosComSucesso"))
             Catch ex As Exception
                 MessageBox.Show(DWSIM.App.GetLocalString("Erroaosalvararquivo") & ex.Message.ToString, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)

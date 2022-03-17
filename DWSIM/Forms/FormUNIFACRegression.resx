@@ -415,7 +415,7 @@
     <value>4</value>
   </data>
   <data name="TSInformation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>932, 395</value>
+    <value>932, 390</value>
   </data>
   <data name="TSInformation.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -427,7 +427,7 @@
     <value>TSInformation</value>
   </data>
   <data name="&gt;&gt;TSInformation.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.2773.39305, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;TSInformation.Parent" xml:space="preserve">
     <value>FaTabStrip1</value>
@@ -1129,7 +1129,7 @@
     <value>TSModel</value>
   </data>
   <data name="&gt;&gt;TSModel.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.2773.39305, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;TSModel.Parent" xml:space="preserve">
     <value>FaTabStrip1</value>
@@ -1393,7 +1393,7 @@
     <value>TSData</value>
   </data>
   <data name="&gt;&gt;TSData.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.2773.39305, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;TSData.Parent" xml:space="preserve">
     <value>FaTabStrip1</value>
@@ -1407,6 +1407,9 @@
   <data name="graph.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="graph.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>48, 22, 48, 22</value>
+  </data>
   <data name="graph.Size" type="System.Drawing.Size, System.Drawing">
     <value>932, 395</value>
   </data>
@@ -1417,7 +1420,7 @@
     <value>graph</value>
   </data>
   <data name="&gt;&gt;graph.Type" xml:space="preserve">
-    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.0.32336, Culture=neutral, PublicKeyToken=02a83cbd123fcd60</value>
+    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;graph.Parent" xml:space="preserve">
     <value>TSChart</value>
@@ -1438,7 +1441,7 @@
     <value>TSChart</value>
   </data>
   <data name="&gt;&gt;TSChart.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.2773.39305, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;TSChart.Parent" xml:space="preserve">
     <value>FaTabStrip1</value>
@@ -1462,22 +1465,13 @@
     <value>FaTabStrip1</value>
   </data>
   <data name="&gt;&gt;FaTabStrip1.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.2773.39305, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStrip1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;FaTabStrip1.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <metadata name="DBOpenDlg.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>20, 10</value>
-  </metadata>
-  <data name="DBOpenDlg.Filter" xml:space="preserve">
-    <value>Banco de Dados XML|*.xml</value>
-  </data>
-  <data name="DBOpenDlg.Title" xml:space="preserve">
-    <value>Abrir/Criar Banco de Parâmetros</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1551,16 +1545,10 @@
   <data name="&gt;&gt;Column9.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;DBOpenDlg.Name" xml:space="preserve">
-    <value>DBOpenDlg</value>
-  </data>
-  <data name="&gt;&gt;DBOpenDlg.Type" xml:space="preserve">
-    <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FormUNIFACRegression</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>WeifenLuo.WinFormsUI.Docking.DockContent, WeifenLuo.WinFormsUI.Docking, Version=2.7.0.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481</value>
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

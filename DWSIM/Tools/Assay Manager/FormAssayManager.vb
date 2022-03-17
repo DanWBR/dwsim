@@ -20,7 +20,8 @@ Imports System.Math
 Imports DWSIM.DWSIM
 Imports System.Runtime.Serialization.Formatters
 Imports DWSIM.SharedClasses.Utilities.PetroleumCharacterization
-
+Imports DWSIM.Interfaces
+Imports DWSIM.SharedClassesCSharp.FilePicker
 
 Public Class FormAssayManager
 
@@ -288,7 +289,7 @@ Public Class FormAssayManager
 
         currentassay = pfd.Options.PetroleumAssays(gridassays.SelectedRows(0).Cells(0).Value)
 
-        Me.DialogResult = Windows.Forms.DialogResult.OK
+        Me.DialogResult = DialogResult.OK
 
         Me.Hide()
 
@@ -315,45 +316,49 @@ Public Class FormAssayManager
     End Sub
 
     Private Sub ToolStripButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton1.Click
-        Dim myStream As System.IO.FileStream
-        If Me.OpenFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
-            myStream = Me.OpenFileDialog1.OpenFile()
-            If Not (myStream Is Nothing) Then
-                Dim myassay As New Assay.Assay
-                Dim mySerializer As Binary.BinaryFormatter = New Binary.BinaryFormatter(Nothing, New System.Runtime.Serialization.StreamingContext())
-                Try
-                    myassay = DirectCast(mySerializer.Deserialize(myStream), Assay.Assay)
-                    Dim id As String = Guid.NewGuid().ToString
-                    pfd.Options.PetroleumAssays.Add(id, myassay)
-                    If myassay.IsBulk Then
-                        gridassays.Rows.Add(New Object() {id, myassay.Name, "Bulk"})
-                    Else
-                        gridassays.Rows.Add(New Object() {id, myassay.Name, "Curves"})
-                    End If
-                Catch ex As System.Runtime.Serialization.SerializationException
-                    MessageBox.Show(ex.Message, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Finally
-                    myStream.Close()
-                End Try
-            End If
+
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowOpenDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("Assay File", "*.dwasf")})
+
+        If handler IsNot Nothing Then
+            Dim myassay As New Assay.Assay
+            Dim mySerializer As Binary.BinaryFormatter = New Binary.BinaryFormatter(Nothing, New System.Runtime.Serialization.StreamingContext())
+            Try
+                myassay = DirectCast(mySerializer.Deserialize(handler), Assay.Assay)
+                Dim id As String = Guid.NewGuid().ToString
+                pfd.Options.PetroleumAssays.Add(id, myassay)
+                If myassay.IsBulk Then
+                    gridassays.Rows.Add(New Object() {id, myassay.Name, "Bulk"})
+                Else
+                    gridassays.Rows.Add(New Object() {id, myassay.Name, "Curves"})
+                End If
+            Catch ex As System.Runtime.Serialization.SerializationException
+                MessageBox.Show(ex.Message, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
         End If
+
     End Sub
 
     Private Sub ToolStripButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton2.Click
-        Dim myStream As System.IO.FileStream
-        If Me.SaveFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
-            myStream = Me.SaveFileDialog1.OpenFile()
-            If Not (myStream Is Nothing) Then
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
+
+        Dim handler As IVirtualFile = filePickerForm.ShowSaveDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("Assay File", "*.dwasf")})
+
+        If handler IsNot Nothing Then
+            Using stream As New IO.MemoryStream()
                 Dim mySerializer As Binary.BinaryFormatter = New Binary.BinaryFormatter(Nothing, New System.Runtime.Serialization.StreamingContext())
                 Try
-                    mySerializer.Serialize(myStream, currentassay)
+                    mySerializer.Serialize(stream, currentassay)
                 Catch ex As System.Runtime.Serialization.SerializationException
                     MessageBox.Show(ex.Message, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Finally
-                    myStream.Close()
                 End Try
-            End If
+                handler.Write(stream)
+            End Using
         End If
+
     End Sub
 
 End Class

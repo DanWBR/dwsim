@@ -1557,95 +1557,92 @@ Namespace Databases
     ''' <remarks></remarks>
     <System.Serializable()> Public Class UserIPDB
 
-        Public Shared Sub CreateNew(ByVal path As String, ByVal TopNode As String)
+        Public Shared Sub AddInteractionParameters(ByVal IPDS() As Thermodynamics.BaseClasses.InteractionParameter, xmlstream As MemoryStream, ByVal replace As Boolean)
 
-            Dim writer As New XmlTextWriter(path, Nothing)
+            Using reader = XmlReader.Create(xmlstream)
+                If xmlstream.Length = 0 Then
+                    Dim stream2 As New MemoryStream
+                    Using writer As New XmlTextWriter(stream2, Text.Encoding.UTF8)
+                        With writer
+                            .Formatting = Formatting.Indented
+                            .WriteStartDocument()
+                            .WriteStartElement("Interactions")
+                            .WriteEndElement()
+                            .WriteEndDocument()
+                            .Flush()
+                        End With
+                        stream2.Position = 0
+                        stream2.CopyTo(xmlstream)
+                    End Using
+                End If
+            End Using
 
-            With writer
-                .Formatting = Formatting.Indented
-                .WriteStartDocument()
-                .WriteStartElement(TopNode)
-                .WriteEndElement()
-                .WriteEndDocument()
-                .Flush()
-                .Close()
-            End With
+            xmlstream.Position = 0
 
-        End Sub
-
-        Public Shared Sub AddInteractionParameters(ByVal IPDS() As Thermodynamics.BaseClasses.InteractionParameter, ByVal xmlpath As String, ByVal replace As Boolean)
             Dim xmldoc As XmlDocument
-            Dim reader As XmlReader = XmlReader.Create(xmlpath)
-            Try
-                reader.Read()
-            Catch ex As Exception
-                reader.Close()
-                CreateNew(xmlpath, "Interactions")
-                reader = XmlReader.Create(xmlpath)
-                reader.Read()
-            End Try
 
-            Dim cult As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
-            Dim p As Double
+            Using reader = XmlReader.Create(xmlstream)
 
-            xmldoc = New XmlDocument
-            xmldoc.Load(reader)
+                Dim cult As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
+                Dim p As Double
 
-            For Each IP As Thermodynamics.BaseClasses.InteractionParameter In IPDS
-                Dim index As Integer = -1
-                Dim i As Integer = 0
-                Dim C1, C2, M, S1, S2 As String
+                xmldoc = New XmlDocument()
+                xmldoc.Load(reader)
 
-                If xmldoc.ChildNodes.Count > 0 Then
-                    For Each node As XmlNode In xmldoc.ChildNodes(1)
-                        C1 = ""
-                        C2 = ""
-                        M = ""
-                        For Each node2 As XmlNode In node.ChildNodes
-                            If node2.Name = "Comp1" Then C1 = node2.InnerText
-                            If node2.Name = "Comp2" Then C2 = node2.InnerText
-                            If node2.Name = "Model" Then M = node2.InnerText
-                            S1 = C1 & C2 & M
-                            S2 = C2 & C1 & M
-                            If (S1 = IP.Comp1 & IP.Comp2 & IP.Model) Or (S2 = IP.Comp1 & IP.Comp2 & IP.Model) Then
-                                index = i
-                                Exit For
-                            End If
+                For Each IP As Thermodynamics.BaseClasses.InteractionParameter In IPDS
+                    Dim index As Integer = -1
+                    Dim i As Integer = 0
+                    Dim C1, C2, M, S1, S2 As String
+
+                    If xmldoc.ChildNodes.Count > 0 Then
+                        For Each node As XmlNode In xmldoc.ChildNodes(1)
+                            C1 = ""
+                            C2 = ""
+                            M = ""
+                            For Each node2 As XmlNode In node.ChildNodes
+                                If node2.Name = "Comp1" Then C1 = node2.InnerText
+                                If node2.Name = "Comp2" Then C2 = node2.InnerText
+                                If node2.Name = "Model" Then M = node2.InnerText
+                                S1 = C1 & C2 & M
+                                S2 = C2 & C1 & M
+                                If (S1 = IP.Comp1 & IP.Comp2 & IP.Model) Or (S2 = IP.Comp1 & IP.Comp2 & IP.Model) Then
+                                    index = i
+                                    Exit For
+                                End If
+                            Next
+                            If index <> -1 Then Exit For
+                            i += 1
                         Next
-                        If index <> -1 Then Exit For
-                        i += 1
-                    Next
-                End If
-                If replace Then
-                    If index <> -1 Then xmldoc.ChildNodes(1).RemoveChild(xmldoc.ChildNodes(1).ChildNodes(index))
-                End If
+                    End If
+                    If replace Then
+                        If index <> -1 Then xmldoc.ChildNodes(1).RemoveChild(xmldoc.ChildNodes(1).ChildNodes(index))
+                    End If
 
-                Dim newnode As XmlNode = xmldoc.CreateNode("element", "Interaction", "")
-                With newnode
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Comp1", "")).InnerText = IP.Comp1
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Comp2", "")).InnerText = IP.Comp2
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Model", "")).InnerText = IP.Model
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "DataType", "")).InnerText = IP.DataType
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Description", "")).InnerText = IP.Description
-                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "RegressionFile", "")).InnerText = IP.RegressionFile
-                    With .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Parameters", ""))
-                        For Each par As KeyValuePair(Of String, Object) In IP.Parameters
-                            p = par.Value
-                            .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "", "Parameter", "")).InnerText = p.ToString(cult)
-                            .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("name"))
-                            .ChildNodes(.ChildNodes.Count - 1).Attributes("name").Value = par.Key
-                        Next
+                    Dim newnode As XmlNode = xmldoc.CreateNode("element", "Interaction", "")
+                    With newnode
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Comp1", "")).InnerText = IP.Comp1
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Comp2", "")).InnerText = IP.Comp2
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Model", "")).InnerText = IP.Model
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "DataType", "")).InnerText = IP.DataType
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Description", "")).InnerText = IP.Description
+                        .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "RegressionFile", "")).InnerText = IP.RegressionFile
+                        With .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Parameters", ""))
+                            For Each par As KeyValuePair(Of String, Object) In IP.Parameters
+                                p = par.Value
+                                .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "", "Parameter", "")).InnerText = p.ToString(cult)
+                                .ChildNodes(.ChildNodes.Count - 1).Attributes.Append(xmldoc.CreateAttribute("name"))
+                                .ChildNodes(.ChildNodes.Count - 1).Attributes("name").Value = par.Key
+                            Next
+                        End With
+
                     End With
+                    xmldoc.ChildNodes(1).AppendChild(newnode)
+                Next
 
-                End With
-                xmldoc.ChildNodes(1).AppendChild(newnode)
-            Next
+                xmldoc.Save(xmlstream)
 
-            reader.Close()
-            reader = Nothing
+            End Using
 
-            xmldoc.Save(xmlpath)
-            xmldoc = Nothing
         End Sub
 
         Public Shared Function ReadInteractions(ByVal xmlpath As String, ByVal Model As String) As Thermodynamics.BaseClasses.InteractionParameter()
