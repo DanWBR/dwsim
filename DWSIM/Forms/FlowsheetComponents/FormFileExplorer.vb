@@ -88,7 +88,7 @@ Public Class FormFileExplorer
 
         Dim openedFile As IVirtualFile = filePickerForm.ShowOpenDialog(
             New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("All Supported Files",
-                                                                               New String() {"*.pdf", "*.jpg", "*.png", "*.mov", "*.mp4", "*.mp3", "*.txt", "*.py", "*.html", "*.dwxmz", "*.dwxml", "*.xml", "*.json", "*.dwcsd2", "*.dwrsd2"})})
+                                                                               New String() {"*.pdf", "*.jpg", "*.png", "*.mov", "*.mp4", "*.mp3", "*.txt", "*.py", "*.html", "*.dwxmz", "*.dwxml", "*.xml", "*.json", "*.dwcsd2", "*.dwrsd2", ".xlsx", ".xls", ".pxml", ".dwcdi"})})
 
         If openedFile IsNot Nothing Then
             Dim provider = Flowsheet.FileDatabaseProvider

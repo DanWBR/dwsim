@@ -221,13 +221,25 @@ Public Class EditingForm_CompressorExpander_Curves
 
         If handler IsNot Nothing Then
             Try
-                Dim jsondata = Newtonsoft.Json.JsonConvert.SerializeObject(Pump.Curves, Newtonsoft.Json.Formatting.Indented)
-                Using stream As New IO.MemoryStream()
-                    Using writer As New StreamWriter(stream)
-                        writer.Write(jsondata)
-                        handler.Write(stream)
+                If TypeOf simobj Is Compressor Then
+                    Dim uo = DirectCast(simobj, Compressor)
+                    Dim jsondata = Newtonsoft.Json.JsonConvert.SerializeObject(simobj.Curves, Newtonsoft.Json.Formatting.Indented)
+                    Using stream As New IO.MemoryStream()
+                        Using writer As New StreamWriter(stream)
+                            writer.Write(jsondata)
+                            handler.Write(stream)
+                        End Using
                     End Using
-                End Using
+                Else
+                    Dim uo = DirectCast(simobj, Expander)
+                    Dim jsondata = Newtonsoft.Json.JsonConvert.SerializeObject(simobj.Curves, Newtonsoft.Json.Formatting.Indented)
+                    Using stream As New IO.MemoryStream()
+                        Using writer As New StreamWriter(stream)
+                            writer.Write(jsondata)
+                            handler.Write(stream)
+                        End Using
+                    End Using
+                End If
             Catch ex As Exception
                 MessageBox.Show(simobj.GetFlowsheet.GetTranslatedString("Erroaosalvararquivo") & " " & ex.Message,
                                 simobj.GetFlowsheet.GetTranslatedString("Erro"),

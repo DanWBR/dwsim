@@ -1867,8 +1867,8 @@ Public Class FormMain
 
         If simulationfilename <> "" Then filename = simulationfilename Else filename = handler.FullPath
 
-        form.FilePath = filename
-        form.Options.FilePath = filename
+        form.FilePath = handler.FullPath
+        form.Options.FilePath = handler.FullPath
 
         data = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects").Elements.ToList
 
@@ -3383,6 +3383,7 @@ Label_00CC:
             fs = LoadXML(New SharedClassesCSharp.FilePicker.Windows.WindowsFile(fullname), ProgressFeedBack, handler.FullPath, forcommandline)
             fs.FilePath = handler.FullPath
             fs.Options.FilePath = handler.FullPath
+            DirectCast(fs, FormFlowsheet).UpdateFormText()
             If TypeOf handler Is Simulate365.Models.S365File Then
                 's365 file
                 Dim fileid = DirectCast(handler, Simulate365.Models.S365File).FileId

@@ -58,6 +58,9 @@ Namespace UnitOperations
         Protected m_OutputParams As New Dictionary(Of String, ExcelParameter)
         Public ParamsLoaded As Boolean = False
 
+        Public Property FileIsEmbedded As Boolean = False
+        Public Property EmbeddedFileName As String = ""
+
         Public Property InputParams() As Dictionary(Of String, ExcelParameter)
             Get
                 Return m_InputParams
@@ -143,17 +146,27 @@ Namespace UnitOperations
 
             Dim excelType As Type = Nothing
 
-            If Not File.Exists(Filename) Then
-                'try to find the file in the current directory.
-                Dim fname = Path.GetFileName(Filename)
-                Dim newpath = Path.Combine(Path.GetDirectoryName(FlowSheet.FilePath), fname)
-                If File.Exists(newpath) Then
-                    Filename = Path.GetFullPath(newpath)
-                End If
-            End If
+            If Not FileIsEmbedded Then
 
-            If Not File.Exists(Filename) Then
-                Throw New Exception("Definition file '" & Filename & "' :" & FlowSheet.GetTranslatedString("Oarquivonoexisteoufo"))
+                If Not File.Exists(Filename) Then
+                    'try to find the file in the current directory.
+                    Dim fname = Path.GetFileName(Filename)
+                    Dim newpath = Path.Combine(Path.GetDirectoryName(FlowSheet.FilePath), fname)
+                    If File.Exists(newpath) Then
+                        Filename = Path.GetFullPath(newpath)
+                    End If
+                End If
+
+                If Not File.Exists(Filename) Then
+                    Throw New Exception("Definition file '" & Filename & "' :" & FlowSheet.GetTranslatedString("Oarquivonoexisteoufo"))
+                End If
+
+            Else
+
+                If Not FlowSheet.FileDatabaseProvider.CheckIfExists(EmbeddedFileName) Then
+                    Throw New Exception("Definition file '" & EmbeddedFileName & "' :" & FlowSheet.GetTranslatedString("Oarquivonoexisteoufo"))
+                End If
+
             End If
 
             If Not Calculator.IsRunningOnMono Then excelType = Type.GetTypeFromProgID("Excel.Application")
@@ -174,8 +187,17 @@ Namespace UnitOperations
                     Dim mybook As Excel.Workbook
                     Dim AppPath = Application.StartupPath
 
-                    'Load Excel definition file
-                    mybook = xcl.Workbooks.Open(Filename)
+                    Dim tmpfile As String = ""
+
+                    If FileIsEmbedded Then
+                        tmpfile = Path.ChangeExtension(SharedClasses.Utility.GetTempFileName(), Path.GetExtension(EmbeddedFileName))
+                        FlowSheet.FileDatabaseProvider.ExportFile(EmbeddedFileName, tmpfile)
+                        'Load Excel definition file
+                        mybook = xcl.Workbooks.Open(tmpfile)
+                    Else
+                        'Load Excel definition file
+                        mybook = xcl.Workbooks.Open(Filename)
+                    End If
 
                     'xcl.Visible = True 'uncomment for debugging
                     xcl.Calculation = XlCalculation.xlCalculationManual
@@ -413,6 +435,13 @@ Namespace UnitOperations
                         FlowSheet.ShowMessage(Me.GraphicObject.Tag & ": " & "Mass balance error: " & MassBal & "%", IFlowsheet.MessageType.GeneralError)
                     End If
 
+                    If File.Exists(tmpfile) Then
+                        Try
+                            File.Delete(tmpfile)
+                        Catch ex As Exception
+                        End Try
+                    End If
+
                 End Using
 
             Else
@@ -425,11 +454,20 @@ Namespace UnitOperations
 
                 Dim AppPath = Application.StartupPath
 
-                'Load Excel definition file
-                If My.Computer.FileSystem.FileExists(Filename) Then
-                    xcl = GS.ExcelFile.Load(Filename)
+                Dim tmpfile As String = ""
+
+                If FileIsEmbedded Then
+                    tmpfile = Path.ChangeExtension(SharedClasses.Utility.GetTempFileName(), Path.GetExtension(EmbeddedFileName))
+                    FlowSheet.FileDatabaseProvider.ExportFile(EmbeddedFileName, tmpfile)
+                    'Load Excel definition file
+                    xcl = GS.ExcelFile.Load(tmpfile)
                 Else
-                    Throw New Exception("Definition file '" & Filename & "' :" & FlowSheet.GetTranslatedString("Oarquivonoexisteoufo"))
+                    'Load Excel definition file
+                    If My.Computer.FileSystem.FileExists(Filename) Then
+                        xcl = GS.ExcelFile.Load(Filename)
+                    Else
+                        Throw New Exception("Definition file '" & Filename & "' :" & FlowSheet.GetTranslatedString("Oarquivonoexisteoufo"))
+                    End If
                 End If
 
                 Dim mysheetIn As GS.ExcelWorksheet = xcl.Worksheets("Input")
@@ -521,7 +559,11 @@ Namespace UnitOperations
 
                 'open spreadsheet to be calculated manually by the user.
 
-                xcl.Save(Filename)
+                If FileIsEmbedded Then
+                    xcl.Save(tmpfile)
+                Else
+                    xcl.Save(Filename)
+                End If
 
                 If Calculator.IsRunningOnMono Then
                     If GlobalSettings.Settings.RunningPlatform = Settings.Platform.Linux Then
@@ -548,8 +590,13 @@ Namespace UnitOperations
                     MessageBox.Show("Click 'OK' once the spreadsheet formula updating process is finished.")
                 End If
 
-                'Load Excel definition file
-                xcl = GS.ExcelFile.Load(Filename)
+                If FileIsEmbedded Then
+                    'Load Excel definition file
+                    xcl = GS.ExcelFile.Load(tmpfile)
+                Else
+                    'Load Excel definition file
+                    xcl = GS.ExcelFile.Load(Filename)
+                End If
 
                 mysheetIn = xcl.Worksheets("Input")
                 mysheetOut = xcl.Worksheets("Output")
@@ -641,6 +688,13 @@ Namespace UnitOperations
                     FlowSheet.ShowMessage(Me.GraphicObject.Tag & ": " & "Mass balance error: " & MassBal & "%", IFlowsheet.MessageType.GeneralError)
                 End If
 
+                If File.Exists(tmpfile) Then
+                    Try
+                        File.Delete(tmpfile)
+                    Catch ex As Exception
+                    End Try
+                End If
+
             End If
 
             IObj?.Close()
@@ -688,7 +742,7 @@ Namespace UnitOperations
         Public Sub ReadExcelParams()
 
             'read input and output parameters from associated Excel table 
-            If IO.File.Exists(Filename) And Not ParamsLoaded Then
+            If Not ParamsLoaded Then
 
                 Dim excelType As Type = Nothing
                 If Not Calculator.IsRunningOnMono Then excelType = Type.GetTypeFromProgID("Excel.Application")
@@ -710,66 +764,82 @@ Namespace UnitOperations
                         Dim ParName As String
                         Dim i As Integer
 
-                        'Load Excel definition file
-                        If My.Computer.FileSystem.FileExists(Filename) Then
+                        Dim tmpfile As String = ""
+
+                        If FileIsEmbedded Then
+                            If Not FlowSheet.FileDatabaseProvider.CheckIfExists(EmbeddedFileName) Then Exit Sub
+                            tmpfile = Path.ChangeExtension(SharedClasses.Utility.GetTempFileName(), Path.GetExtension(EmbeddedFileName))
+                            FlowSheet.FileDatabaseProvider.ExportFile(EmbeddedFileName, tmpfile)
+                            'Load Excel definition file
+                            mybook = xcl.Workbooks.Open(tmpfile, True, True)
+                        Else
+                            If Not File.Exists(Filename) Then Exit Sub
+                            'Load Excel definition file
                             mybook = xcl.Workbooks.Open(Filename, True, True)
-                            Dim mysheetIn As Excel.Worksheet = mybook.Sheets("Input")
-                            Dim mysheetOut As Excel.Worksheet = mybook.Sheets("Output")
-
-                            'xcl.Visible = True 'uncomment for debugging
-
-                            InputParams.Clear()
-                            i = 0
-                            Do
-                                Dim ExlPar As New ExcelParameter
-
-                                ParName = mysheetIn.Cells(5 + i, 7).Value
-                                If ParName <> "" Then
-                                    ExlPar.Name = ParName
-                                    Try
-                                        ExlPar.Value = mysheetIn.Cells(5 + i, 8).Value
-                                    Catch ex As Exception
-                                        ExlPar.Value = Nothing
-                                    End Try
-
-                                    ExlPar.Unit = mysheetIn.Cells(5 + i, 9).Value
-                                    ExlPar.Annotation = mysheetIn.Cells(5 + i, 10).Value
-                                    InputParams.Add(ExlPar.Name, ExlPar)
-
-                                    i += 1
-                                End If
-                            Loop While ParName <> ""
-
-                            OutputParams.Clear()
-                            i = 0
-                            Do
-                                Dim ExlPar As New ExcelParameter
-
-                                ParName = mysheetOut.Cells(5 + i, 7).Value
-                                If ParName <> "" Then
-                                    ExlPar.Name = ParName
-                                    Try
-                                        ExlPar.Value = mysheetOut.Cells(5 + i, 8).Value
-                                    Catch ex As Exception
-                                        ExlPar.Value = Nothing
-                                    End Try
-
-                                    ExlPar.Unit = mysheetOut.Cells(5 + i, 9).Value
-                                    ExlPar.Annotation = mysheetOut.Cells(5 + i, 10).Value
-                                    OutputParams.Add(ExlPar.Name, ExlPar)
-
-                                    i += 1
-                                End If
-                            Loop While ParName <> ""
-
-                            mybook.Close(False)
-
                         End If
+
+                        Dim mysheetIn As Excel.Worksheet = mybook.Sheets("Input")
+                        Dim mysheetOut As Excel.Worksheet = mybook.Sheets("Output")
+
+                        'xcl.Visible = True 'uncomment for debugging
+
+                        InputParams.Clear()
+                        i = 0
+                        Do
+                            Dim ExlPar As New ExcelParameter
+
+                            ParName = mysheetIn.Cells(5 + i, 7).Value
+                            If ParName <> "" Then
+                                ExlPar.Name = ParName
+                                Try
+                                    ExlPar.Value = mysheetIn.Cells(5 + i, 8).Value
+                                Catch ex As Exception
+                                    ExlPar.Value = Nothing
+                                End Try
+
+                                ExlPar.Unit = mysheetIn.Cells(5 + i, 9).Value
+                                ExlPar.Annotation = mysheetIn.Cells(5 + i, 10).Value
+                                InputParams.Add(ExlPar.Name, ExlPar)
+
+                                i += 1
+                            End If
+                        Loop While ParName <> ""
+
+                        OutputParams.Clear()
+                        i = 0
+                        Do
+                            Dim ExlPar As New ExcelParameter
+
+                            ParName = mysheetOut.Cells(5 + i, 7).Value
+                            If ParName <> "" Then
+                                ExlPar.Name = ParName
+                                Try
+                                    ExlPar.Value = mysheetOut.Cells(5 + i, 8).Value
+                                Catch ex As Exception
+                                    ExlPar.Value = Nothing
+                                End Try
+
+                                ExlPar.Unit = mysheetOut.Cells(5 + i, 9).Value
+                                ExlPar.Annotation = mysheetOut.Cells(5 + i, 10).Value
+                                OutputParams.Add(ExlPar.Name, ExlPar)
+
+                                i += 1
+                            End If
+                        Loop While ParName <> ""
+
+                        mybook.Close(False)
 
                         xcl.Quit()
                         xcl.Dispose()
 
                         ParamsLoaded = True
+
+                        If File.Exists(tmpfile) Then
+                            Try
+                                File.Delete(tmpfile)
+                            Catch ex As Exception
+                            End Try
+                        End If
 
                     End Using
 
@@ -785,49 +855,62 @@ Namespace UnitOperations
                     Dim ParName As String
                     Dim i As Integer
 
-                    'Load Excel definition file
-                    If My.Computer.FileSystem.FileExists(Filename) Then
+                    Dim tmpfile As String = ""
 
+                    If FileIsEmbedded Then
+                        tmpfile = Path.ChangeExtension(SharedClasses.Utility.GetTempFileName(), Path.GetExtension(EmbeddedFileName))
+                        FlowSheet.FileDatabaseProvider.ExportFile(EmbeddedFileName, tmpfile)
+                        'Load Excel definition file
+                        xcl = GS.ExcelFile.Load(tmpfile)
+                    Else
+                        'Load Excel definition file
                         xcl = GS.ExcelFile.Load(Filename)
-                        Dim mysheetIn As GS.ExcelWorksheet = xcl.Worksheets("Input")
-                        Dim mysheetOut As GS.ExcelWorksheet = xcl.Worksheets("Output")
+                    End If
 
-                        InputParams.Clear()
-                        i = 0
-                        Do
-                            Dim ExlPar As New ExcelParameter
+                    Dim mysheetIn As GS.ExcelWorksheet = xcl.Worksheets("Input")
+                    Dim mysheetOut As GS.ExcelWorksheet = xcl.Worksheets("Output")
 
-                            ParName = mysheetIn.Cells(4 + i, 6).Value
-                            If ParName <> "" Then
-                                ExlPar.Name = ParName
-                                ExlPar.Value = mysheetIn.Cells(4 + i, 7).Value
-                                ExlPar.Unit = mysheetIn.Cells(4 + i, 8).Value
-                                ExlPar.Annotation = mysheetIn.Cells(4 + i, 9).Value
-                                InputParams.Add(ExlPar.Name, ExlPar)
+                    InputParams.Clear()
+                    i = 0
+                    Do
+                        Dim ExlPar As New ExcelParameter
 
-                                i += 1
-                            End If
-                        Loop While ParName <> ""
+                        ParName = mysheetIn.Cells(4 + i, 6).Value
+                        If ParName <> "" Then
+                            ExlPar.Name = ParName
+                            ExlPar.Value = mysheetIn.Cells(4 + i, 7).Value
+                            ExlPar.Unit = mysheetIn.Cells(4 + i, 8).Value
+                            ExlPar.Annotation = mysheetIn.Cells(4 + i, 9).Value
+                            InputParams.Add(ExlPar.Name, ExlPar)
 
-                        OutputParams.Clear()
-                        i = 0
-                        Do
-                            Dim ExlPar As New ExcelParameter
+                            i += 1
+                        End If
+                    Loop While ParName <> ""
 
-                            ParName = mysheetOut.Cells(5 + i, 7).Value
-                            If ParName <> "" Then
-                                ExlPar.Name = ParName
-                                ExlPar.Value = mysheetIn.Cells(4 + i, 7).Value
-                                ExlPar.Unit = mysheetIn.Cells(4 + i, 8).Value
-                                ExlPar.Annotation = mysheetIn.Cells(4 + i, 9).Value
-                                OutputParams.Add(ExlPar.Name, ExlPar)
+                    OutputParams.Clear()
+                    i = 0
+                    Do
+                        Dim ExlPar As New ExcelParameter
 
-                                i += 1
-                            End If
-                        Loop While ParName <> ""
+                        ParName = mysheetOut.Cells(5 + i, 7).Value
+                        If ParName <> "" Then
+                            ExlPar.Name = ParName
+                            ExlPar.Value = mysheetIn.Cells(4 + i, 7).Value
+                            ExlPar.Unit = mysheetIn.Cells(4 + i, 8).Value
+                            ExlPar.Annotation = mysheetIn.Cells(4 + i, 9).Value
+                            OutputParams.Add(ExlPar.Name, ExlPar)
 
-                        ParamsLoaded = True
+                            i += 1
+                        End If
+                    Loop While ParName <> ""
 
+                    ParamsLoaded = True
+
+                    If File.Exists(tmpfile) Then
+                        Try
+                            File.Delete(tmpfile)
+                        Catch ex As Exception
+                        End Try
                     End If
 
                 End If

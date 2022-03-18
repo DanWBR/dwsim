@@ -3,6 +3,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.SharedClasses.UnitOperations
 Imports su = DWSIM.SharedClasses.SystemsOfUnits
 Imports DWSIM.UnitOperations.UnitOperations
+Imports DWSIM.SharedClassesCSharp.FilePicker
 
 Public Class EditingForm_FlowsheetUO
 
@@ -129,6 +130,20 @@ Public Class EditingForm_FlowsheetUO
             If .GraphicObject.OutputConnectors(7).IsAttached Then cbOutlet8.SelectedItem = .GraphicObject.OutputConnectors(7).AttachedConnector.AttachedTo.Tag
             If .GraphicObject.OutputConnectors(8).IsAttached Then cbOutlet9.SelectedItem = .GraphicObject.OutputConnectors(8).AttachedConnector.AttachedTo.Tag
             If .GraphicObject.OutputConnectors(9).IsAttached Then cbOutlet10.SelectedItem = .GraphicObject.OutputConnectors(9).AttachedConnector.AttachedTo.Tag
+
+            If .FileIsEmbedded Then
+                rbFileEmbedded.Checked = True
+            Else
+                rbFileExternal.Checked = True
+            End If
+
+            Dim files = .FlowSheet.FileDatabaseProvider.GetFiles()
+            cbEmbeddedFiles.Items.Clear()
+            cbEmbeddedFiles.Items.AddRange(files.ToArray())
+            Try
+                cbEmbeddedFiles.SelectedItem = .EmbeddedFileName
+            Catch ex As Exception
+            End Try
 
             'parameters
 
@@ -480,20 +495,24 @@ Public Class EditingForm_FlowsheetUO
     End Sub
 
     Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
-        OpenFileDialog1.FileName = TbFileName.Text
-        OpenFileDialog1.Filter = "DWSIM Simulation files|*.dwxml; *.dwxmz"
 
-        OpenFileDialog1.ValidateNames = True
-        OpenFileDialog1.CheckFileExists = True
-        OpenFileDialog1.CheckPathExists = True
+        Dim filePickerForm As IFilePicker = FilePickerService.GetInstance().GetFilePicker()
 
-        If OpenFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
-            TbFileName.Text = OpenFileDialog1.FileName
-            If SimObject.SimulationFile = OpenFileDialog1.FileName Then
-                SimObject.Initialized = False
+        If TypeOf filePickerForm Is DWSIM.SharedClassesCSharp.FilePicker.Windows.WindowsFilePicker Then
+            Dim handler As IVirtualFile = filePickerForm.ShowOpenDialog(
+            New List(Of FilePickerAllowedType) From {New FilePickerAllowedType("Simulation Files", New String() {"*.dwxml", "*.dwxmz"})})
+
+            If handler IsNot Nothing Then
+                TbFileName.Text = handler.FullPath
+                If SimObject.SimulationFile <> handler.FullPath Then
+                    SimObject.Initialized = False
+                End If
+                SimObject.SimulationFile = handler.FullPath
             End If
-            SimObject.SimulationFile = OpenFileDialog1.FileName
+        Else
+            MessageBox.Show("Sorry, this feature is not available. Try using an embedded flowsheet instead.")
         End If
+
     End Sub
 
     Private Sub btnViewFlowsheet_Click(sender As Object, e As EventArgs) Handles btnViewFlowsheet.Click
@@ -532,4 +551,24 @@ Public Class EditingForm_FlowsheetUO
 
     End Sub
 
+    Private Sub rbFileEmbedded_CheckedChanged(sender As Object, e As EventArgs) Handles rbFileEmbedded.CheckedChanged
+        If rbFileEmbedded.Checked Then
+            TbFileName.Enabled = False
+            BtnSearch.Enabled = False
+            cbEmbeddedFiles.Enabled = True
+            SimObject.FileIsEmbedded = True
+        End If
+        If rbFileExternal.Checked Then
+            TbFileName.Enabled = True
+            BtnSearch.Enabled = True
+            cbEmbeddedFiles.Enabled = False
+            SimObject.FileIsEmbedded = False
+        End If
+    End Sub
+
+    Private Sub cbEmbeddedFiles_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbEmbeddedFiles.SelectedIndexChanged
+        If Loaded Then
+            SimObject.EmbeddedFileName = cbEmbeddedFiles.SelectedItem.ToString()
+        End If
+    End Sub
 End Class

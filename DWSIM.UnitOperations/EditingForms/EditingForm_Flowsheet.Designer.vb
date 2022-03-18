@@ -25,14 +25,14 @@ Partial Class EditingForm_FlowsheetUO
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_FlowsheetUO))
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.lblTag = New System.Windows.Forms.TextBox()
         Me.chkActive = New System.Windows.Forms.CheckBox()
@@ -138,14 +138,15 @@ Partial Class EditingForm_FlowsheetUO
         Me.cbInlet1 = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.cbEmbeddedFiles = New System.Windows.Forms.ComboBox()
+        Me.rbFileExternal = New System.Windows.Forms.RadioButton()
+        Me.rbFileEmbedded = New System.Windows.Forms.RadioButton()
         Me.chkUpdateProcessData = New System.Windows.Forms.CheckBox()
         Me.chkRedirect = New System.Windows.Forms.CheckBox()
         Me.chkInitialize = New System.Windows.Forms.CheckBox()
         Me.TbFileName = New System.Windows.Forms.TextBox()
-        Me.Label24 = New System.Windows.Forms.Label()
         Me.btnViewFlowsheet = New System.Windows.Forms.Button()
         Me.btnOpenControlPanel = New System.Windows.Forms.Button()
-        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.ToolTipChangeTag = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
@@ -682,15 +683,15 @@ Partial Class EditingForm_FlowsheetUO
         Me.dgvinputvars.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvinputvars.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvinputvars.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column4, Me.Column3, Me.Column5, Me.Column2})
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle12.NullValue = "<empty>"
-        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvinputvars.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.NullValue = "<empty>"
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvinputvars.DefaultCellStyle = DataGridViewCellStyle4
         Me.dgvinputvars.MultiSelect = False
         Me.dgvinputvars.Name = "dgvinputvars"
         Me.dgvinputvars.RowHeadersVisible = False
@@ -706,8 +707,8 @@ Partial Class EditingForm_FlowsheetUO
         '
         'Column3
         '
-        DataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle1
         Me.Column3.FillWeight = 25.0!
         resources.ApplyResources(Me.Column3, "Column3")
         Me.Column3.Name = "Column3"
@@ -717,8 +718,8 @@ Partial Class EditingForm_FlowsheetUO
         '
         'Column5
         '
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column5.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column5.DefaultCellStyle = DataGridViewCellStyle2
         Me.Column5.FillWeight = 20.0!
         resources.ApplyResources(Me.Column5, "Column5")
         Me.Column5.Name = "Column5"
@@ -727,8 +728,8 @@ Partial Class EditingForm_FlowsheetUO
         '
         'Column2
         '
-        DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control
-        Me.Column2.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        Me.Column2.DefaultCellStyle = DataGridViewCellStyle3
         Me.Column2.FillWeight = 20.0!
         resources.ApplyResources(Me.Column2, "Column2")
         Me.Column2.Name = "Column2"
@@ -754,15 +755,15 @@ Partial Class EditingForm_FlowsheetUO
         Me.dgvoutputvars.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvoutputvars.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvoutputvars.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.Column1})
-        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle16.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        DataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle16.NullValue = "<empty>"
-        DataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvoutputvars.DefaultCellStyle = DataGridViewCellStyle16
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle8.NullValue = "<empty>"
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvoutputvars.DefaultCellStyle = DataGridViewCellStyle8
         Me.dgvoutputvars.MultiSelect = False
         Me.dgvoutputvars.Name = "dgvoutputvars"
         Me.dgvoutputvars.ReadOnly = True
@@ -774,8 +775,8 @@ Partial Class EditingForm_FlowsheetUO
         '
         'DataGridViewTextBoxColumn1
         '
-        DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle5
         Me.DataGridViewTextBoxColumn1.FillWeight = 25.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn1, "DataGridViewTextBoxColumn1")
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
@@ -785,8 +786,8 @@ Partial Class EditingForm_FlowsheetUO
         '
         'DataGridViewTextBoxColumn2
         '
-        DataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle6
         Me.DataGridViewTextBoxColumn2.FillWeight = 20.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
@@ -796,8 +797,8 @@ Partial Class EditingForm_FlowsheetUO
         '
         'Column1
         '
-        DataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle7
         Me.Column1.FillWeight = 20.0!
         resources.ApplyResources(Me.Column1, "Column1")
         Me.Column1.Name = "Column1"
@@ -1255,12 +1256,14 @@ Partial Class EditingForm_FlowsheetUO
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.cbEmbeddedFiles)
+        Me.GroupBox2.Controls.Add(Me.rbFileExternal)
+        Me.GroupBox2.Controls.Add(Me.rbFileEmbedded)
         Me.GroupBox2.Controls.Add(Me.chkUpdateProcessData)
         Me.GroupBox2.Controls.Add(Me.chkRedirect)
         Me.GroupBox2.Controls.Add(Me.chkInitialize)
         Me.GroupBox2.Controls.Add(Me.BtnSearch)
         Me.GroupBox2.Controls.Add(Me.TbFileName)
-        Me.GroupBox2.Controls.Add(Me.Label24)
         Me.GroupBox2.Controls.Add(Me.btnViewFlowsheet)
         Me.GroupBox2.Controls.Add(Me.btnOpenControlPanel)
         Me.GroupBox2.Name = "GroupBox2"
@@ -1268,6 +1271,36 @@ Partial Class EditingForm_FlowsheetUO
         Me.ToolTipChangeTag.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
         Me.ToolTipValues.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip1"))
         Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip2"))
+        '
+        'cbEmbeddedFiles
+        '
+        resources.ApplyResources(Me.cbEmbeddedFiles, "cbEmbeddedFiles")
+        Me.cbEmbeddedFiles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbEmbeddedFiles.FormattingEnabled = True
+        Me.cbEmbeddedFiles.Name = "cbEmbeddedFiles"
+        Me.ToolTip1.SetToolTip(Me.cbEmbeddedFiles, resources.GetString("cbEmbeddedFiles.ToolTip"))
+        Me.ToolTipValues.SetToolTip(Me.cbEmbeddedFiles, resources.GetString("cbEmbeddedFiles.ToolTip1"))
+        Me.ToolTipChangeTag.SetToolTip(Me.cbEmbeddedFiles, resources.GetString("cbEmbeddedFiles.ToolTip2"))
+        '
+        'rbFileExternal
+        '
+        resources.ApplyResources(Me.rbFileExternal, "rbFileExternal")
+        Me.rbFileExternal.Name = "rbFileExternal"
+        Me.rbFileExternal.TabStop = True
+        Me.ToolTip1.SetToolTip(Me.rbFileExternal, resources.GetString("rbFileExternal.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.rbFileExternal, resources.GetString("rbFileExternal.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.rbFileExternal, resources.GetString("rbFileExternal.ToolTip2"))
+        Me.rbFileExternal.UseVisualStyleBackColor = True
+        '
+        'rbFileEmbedded
+        '
+        resources.ApplyResources(Me.rbFileEmbedded, "rbFileEmbedded")
+        Me.rbFileEmbedded.Name = "rbFileEmbedded"
+        Me.rbFileEmbedded.TabStop = True
+        Me.ToolTip1.SetToolTip(Me.rbFileEmbedded, resources.GetString("rbFileEmbedded.ToolTip"))
+        Me.ToolTipChangeTag.SetToolTip(Me.rbFileEmbedded, resources.GetString("rbFileEmbedded.ToolTip1"))
+        Me.ToolTipValues.SetToolTip(Me.rbFileEmbedded, resources.GetString("rbFileEmbedded.ToolTip2"))
+        Me.rbFileEmbedded.UseVisualStyleBackColor = True
         '
         'chkUpdateProcessData
         '
@@ -1305,14 +1338,6 @@ Partial Class EditingForm_FlowsheetUO
         Me.ToolTip1.SetToolTip(Me.TbFileName, resources.GetString("TbFileName.ToolTip1"))
         Me.ToolTipChangeTag.SetToolTip(Me.TbFileName, resources.GetString("TbFileName.ToolTip2"))
         '
-        'Label24
-        '
-        resources.ApplyResources(Me.Label24, "Label24")
-        Me.Label24.Name = "Label24"
-        Me.ToolTip1.SetToolTip(Me.Label24, resources.GetString("Label24.ToolTip"))
-        Me.ToolTipChangeTag.SetToolTip(Me.Label24, resources.GetString("Label24.ToolTip1"))
-        Me.ToolTipValues.SetToolTip(Me.Label24, resources.GetString("Label24.ToolTip2"))
-        '
         'btnViewFlowsheet
         '
         resources.ApplyResources(Me.btnViewFlowsheet, "btnViewFlowsheet")
@@ -1331,13 +1356,6 @@ Partial Class EditingForm_FlowsheetUO
         Me.ToolTipValues.SetToolTip(Me.btnOpenControlPanel, resources.GetString("btnOpenControlPanel.ToolTip2"))
         Me.btnOpenControlPanel.UseVisualStyleBackColor = True
         '
-        'OpenFileDialog1
-        '
-        Me.OpenFileDialog1.CheckFileExists = False
-        Me.OpenFileDialog1.CheckPathExists = False
-        resources.ApplyResources(Me.OpenFileDialog1, "OpenFileDialog1")
-        Me.OpenFileDialog1.RestoreDirectory = True
-        '
         'ToolTipChangeTag
         '
         Me.ToolTipChangeTag.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
@@ -1346,7 +1364,7 @@ Partial Class EditingForm_FlowsheetUO
         'EditingForm_FlowsheetUO
         '
         resources.ApplyResources(Me, "$this")
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox1)
@@ -1471,8 +1489,6 @@ Partial Class EditingForm_FlowsheetUO
     Public WithEvents btnViewFlowsheet As System.Windows.Forms.Button
     Public WithEvents BtnSearch As System.Windows.Forms.Button
     Public WithEvents TbFileName As System.Windows.Forms.TextBox
-    Public WithEvents Label24 As System.Windows.Forms.Label
-    Public WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
     Public WithEvents chkUpdateProcessData As System.Windows.Forms.CheckBox
     Public WithEvents chkRedirect As System.Windows.Forms.CheckBox
     Public WithEvents chkInitialize As System.Windows.Forms.CheckBox
@@ -1484,4 +1500,7 @@ Partial Class EditingForm_FlowsheetUO
     Public WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ToolTipChangeTag As ToolTip
+    Friend WithEvents cbEmbeddedFiles As ComboBox
+    Friend WithEvents rbFileExternal As RadioButton
+    Friend WithEvents rbFileEmbedded As RadioButton
 End Class
